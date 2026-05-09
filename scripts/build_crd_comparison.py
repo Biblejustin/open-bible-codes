@@ -304,6 +304,7 @@ def write_markdown(
     manifest_path: Path,
 ) -> None:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
+    zero_secular_rows = sum(1 for row in bible_control if float_value(str(row.get("secular_max_density", ""))) == 0)
     lines = [
         "# CRD Report",
         "",
@@ -322,6 +323,7 @@ def write_markdown(
         f"- term/control comparison rows: {len(bible_control)}",
         f"- edition summary rows: {len(edition_meta)}",
         f"- classifier agreement rows: {len(agreement)}",
+        f"- rows with secular max density = 0: {zero_secular_rows}",
         f"- manifest status: {manifest.get('status', '')}",
         "",
         "## Bible vs Secular Controls",
@@ -351,6 +353,7 @@ def write_markdown(
             "",
             "- CRD is a density screen, not a claim promotion engine.",
             "- Deterministic mode only reports locked exact dictionary matches.",
+            "- Secular-control zeroes can reflect dictionary vocabulary and context coverage, not only signal strength.",
             "- LLM and parallel modes require audit-log review before interpretation.",
             "- Interpret results only against the dictionary and preregistration hashes recorded in the manifest.",
         ]

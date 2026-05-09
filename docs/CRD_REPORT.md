@@ -15,6 +15,7 @@ python3 -m scripts.build_crd_comparison
 - term/control comparison rows: 10
 - edition summary rows: 8
 - classifier agreement rows: 0
+- rows with secular max density = 0: 10
 - manifest status: completed
 
 ## Bible vs Secular Controls
@@ -36,5 +37,6 @@ python3 -m scripts.build_crd_comparison
 
 - CRD is a density screen, not a claim promotion engine.
 - Deterministic mode only reports locked exact dictionary matches.
+- Secular-control zeroes can reflect dictionary vocabulary and context coverage, not only signal strength.
 - LLM and parallel modes require audit-log review before interpretation.
 - Interpret results only against the dictionary and preregistration hashes recorded in the manifest.
