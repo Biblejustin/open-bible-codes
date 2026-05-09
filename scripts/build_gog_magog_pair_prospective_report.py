@@ -55,6 +55,8 @@ def report_markdown(
         "",
         "Status: prospective controlled review output, not a claim.",
         "",
+        *outcome_lines(target_rows, synthetic_rows),
+        "",
         "Locked rule: Hebrew `גוג` / `מגוג`, MT_WLC and UHB only, skip `2..100`, direction `both`, same chapter, same signed skip, max gap `500`.",
         "",
         "## Target Pair Controls",
@@ -142,6 +144,27 @@ def report_markdown(
         ]
     )
     return "\n".join(lines).rstrip() + "\n"
+
+
+def outcome_lines(
+    target_rows: list[dict[str, str]],
+    synthetic_rows: list[dict[str, str]],
+) -> list[str]:
+    control_failure = any(row.get("pair_band") == "not_unusual" for row in target_rows)
+    synthetic_failure = any(
+        "can match or exceed" in row.get("read", "") for row in synthetic_rows
+    )
+    if control_failure or synthetic_failure:
+        return [
+            "## Outcome",
+            "",
+            "No `prospective_controlled_review_candidate` is produced. The target pair occurs, including strict overlap examples, but it does not beat the locked paired and synthetic controls.",
+        ]
+    return [
+        "## Outcome",
+        "",
+        "The registered thresholds require manual review because the target pair was not rejected by the locked paired and synthetic controls.",
+    ]
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:
