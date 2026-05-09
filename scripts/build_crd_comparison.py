@@ -1,0 +1,397 @@
+#!/usr/bin/env python3
+"""Build comparison summaries from a CRD density matrix."""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+from collections import defaultdict
+from pathlib import Path
+from typing import Any
+
+
+DEFAULT_OUT_DIR = Path("reports/crd")
+DEFAULT_DENSITY = DEFAULT_OUT_DIR / "density_matrix.csv"
+DEFAULT_CLASSIFIED = DEFAULT_OUT_DIR / "classified_hits.csv"
+DEFAULT_MANIFEST = DEFAULT_OUT_DIR / "manifest.json"
+DEFAULT_REPORT = Path("docs/CRD_REPORT.md")
+
+PER_TERM_FIELDNAMES = [
+    "classifier_mode",
+    "term_id",
+    "term",
+    "language",
+    "corpus",
+    "corpus_class",
+    "density_rank",
+    "density_per_million",
+    "relevance_rate",
+    "total_centered_hits",
+    "relevant_centered_hits",
+]
+
+BIBLE_CONTROL_FIELDNAMES = [
+    "classifier_mode",
+    "term_id",
+    "term",
+    "language",
+    "bible_max_density",
+    "bible_max_corpus",
+    "secular_max_density",
+    "secular_max_corpus",
+    "ratio",
+    "exceeds_secular_max",
+]
+
+EDITION_META_FIELDNAMES = [
+    "classifier_mode",
+    "corpus",
+    "corpus_class",
+    "ranked_terms",
+    "best_rank_count",
+    "mean_rank",
+    "median_rank",
+]
+
+AGREEMENT_FIELDNAMES = [
+    "scope",
+    "term_id",
+    "term",
+    "language",
+    "corpus",
+    "agreement_rate",
+    "agreement_kappa",
+    "deterministic_only_relevant_count",
+    "llm_only_relevant_count",
+    "disagreement_count",
+]
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = build_parser().parse_args(argv)
+    outputs = build_crd_comparison(
+        density_matrix=args.density_matrix,
+        classified_hits=args.classified_hits,
+        manifest=args.manifest,
+        out_dir=args.out_dir,
+        markdown_out=args.markdown_out,
+    )
+    for value in outputs.values():
+        print(value)
+    return 0
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--density-matrix", type=Path, default=DEFAULT_DENSITY)
+    parser.add_argument("--classified-hits", type=Path, default=DEFAULT_CLASSIFIED)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
+    parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR)
+    parser.add_argument("--markdown-out", type=Path, default=DEFAULT_REPORT)
+    return parser
+
+
+def build_crd_comparison(
+    *,
+    density_matrix: Path,
+    classified_hits: Path,
+    manifest: Path,
+    out_dir: Path,
+    markdown_out: Path,
+) -> dict[str, str]:
+    rows = read_rows(density_matrix)
+    hit_rows = read_rows(classified_hits) if classified_hits.exists() else []
+    out_dir.mkdir(parents=True, exist_ok=True)
+    per_term = per_term_rankings(rows)
+    bible_control = bible_vs_control_summary(rows)
+    edition_meta = edition_meta_summary(rows)
+    agreement = classifier_agreement_summary(rows, hit_rows)
+
+    per_term_out = out_dir / "per_term_rankings.csv"
+    bible_control_out = out_dir / "bible_vs_control_summary.csv"
+    edition_meta_out = out_dir / "edition_meta_summary.csv"
+    agreement_out = out_dir / "classifier_agreement_summary.csv"
+    write_rows(per_term_out, PER_TERM_FIELDNAMES, per_term)
+    write_rows(bible_control_out, BIBLE_CONTROL_FIELDNAMES, bible_control)
+    write_rows(edition_meta_out, EDITION_META_FIELDNAMES, edition_meta)
+    write_rows(agreement_out, AGREEMENT_FIELDNAMES, agreement)
+    write_markdown(markdown_out, rows, bible_control, edition_meta, agreement, manifest)
+    return {
+        "per_term_rankings": str(per_term_out),
+        "bible_vs_control_summary": str(bible_control_out),
+        "edition_meta_summary": str(edition_meta_out),
+        "classifier_agreement_summary": str(agreement_out),
+        "markdown": str(markdown_out),
+    }
+
+
+def read_rows(path: Path) -> list[dict[str, str]]:
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        return list(csv.DictReader(handle))
+
+
+def per_term_rankings(rows: list[dict[str, str]]) -> list[dict[str, Any]]:
+    grouped: dict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
+    for row in rows:
+        grouped[(row["classifier_mode"], row["term_id"])].append(row)
+    out: list[dict[str, Any]] = []
+    for values in grouped.values():
+        ranked = sorted(values, key=lambda row: float_value(row.get("density_per_million")), reverse=True)
+        for rank, row in enumerate(ranked, start=1):
+            out.append(
+                {
+                    "classifier_mode": row["classifier_mode"],
+                    "term_id": row["term_id"],
+                    "term": row["term"],
+                    "language": row["language"],
+                    "corpus": row["corpus"],
+                    "corpus_class": row["corpus_class"],
+                    "density_rank": rank,
+                    "density_per_million": row["density_per_million"],
+                    "relevance_rate": row["relevance_rate"],
+                    "total_centered_hits": row["total_centered_hits"],
+                    "relevant_centered_hits": row["relevant_centered_hits"],
+                }
+            )
+    return out
+
+
+def bible_vs_control_summary(rows: list[dict[str, str]]) -> list[dict[str, Any]]:
+    grouped: dict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
+    for row in rows:
+        grouped[(row["classifier_mode"], row["term_id"])].append(row)
+    out: list[dict[str, Any]] = []
+    for values in grouped.values():
+        bible_rows = [row for row in values if row.get("corpus_class") == "bible"]
+        secular_rows = [row for row in values if row.get("corpus_class") == "secular_control"]
+        best_bible = max_density_row(bible_rows)
+        best_secular = max_density_row(secular_rows)
+        first = values[0]
+        bible_density = float_value(best_bible.get("density_per_million") if best_bible else "")
+        secular_density = float_value(best_secular.get("density_per_million") if best_secular else "")
+        out.append(
+            {
+                "classifier_mode": first["classifier_mode"],
+                "term_id": first["term_id"],
+                "term": first["term"],
+                "language": first["language"],
+                "bible_max_density": format_float(bible_density),
+                "bible_max_corpus": best_bible.get("corpus", "") if best_bible else "",
+                "secular_max_density": format_float(secular_density),
+                "secular_max_corpus": best_secular.get("corpus", "") if best_secular else "",
+                "ratio": format_float(bible_density / secular_density) if secular_density else "",
+                "exceeds_secular_max": str(bool(bible_rows and bible_density > secular_density)).lower(),
+            }
+        )
+    return sorted(out, key=lambda row: (row["classifier_mode"], row["term_id"]))
+
+
+def max_density_row(rows: list[dict[str, str]]) -> dict[str, str] | None:
+    if not rows:
+        return None
+    return max(rows, key=lambda row: float_value(row.get("density_per_million")))
+
+
+def edition_meta_summary(rows: list[dict[str, str]]) -> list[dict[str, Any]]:
+    ranks = per_term_rankings(rows)
+    by_edition: dict[tuple[str, str], list[int]] = defaultdict(list)
+    edition_class: dict[tuple[str, str], str] = {}
+    for row in ranks:
+        key = (str(row["classifier_mode"]), str(row["corpus"]))
+        by_edition[key].append(int(row["density_rank"]))
+        edition_class[key] = str(row["corpus_class"])
+    out: list[dict[str, Any]] = []
+    for (mode, corpus), values in sorted(by_edition.items()):
+        sorted_values = sorted(values)
+        out.append(
+            {
+                "classifier_mode": mode,
+                "corpus": corpus,
+                "corpus_class": edition_class[(mode, corpus)],
+                "ranked_terms": len(values),
+                "best_rank_count": sum(1 for value in values if value == 1),
+                "mean_rank": format_float(sum(values) / len(values)),
+                "median_rank": format_float(median(sorted_values)),
+            }
+        )
+    return out
+
+
+def classifier_agreement_summary(
+    density_rows: list[dict[str, str]],
+    hit_rows: list[dict[str, str]],
+) -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    seen: set[tuple[str, str]] = set()
+    for row in density_rows:
+        if not row.get("agreement_rate"):
+            continue
+        key = (row["term_id"], row["corpus"])
+        if key in seen:
+            continue
+        seen.add(key)
+        disagreement = int_value(row.get("deterministic_only_relevant_count")) + int_value(
+            row.get("llm_only_relevant_count")
+        )
+        out.append(
+            {
+                "scope": "term_corpus",
+                "term_id": row["term_id"],
+                "term": row["term"],
+                "language": row["language"],
+                "corpus": row["corpus"],
+                "agreement_rate": row["agreement_rate"],
+                "agreement_kappa": row["agreement_kappa"],
+                "deterministic_only_relevant_count": row["deterministic_only_relevant_count"],
+                "llm_only_relevant_count": row["llm_only_relevant_count"],
+                "disagreement_count": disagreement,
+            }
+        )
+    if out:
+        overall = overall_agreement(hit_rows)
+        out.insert(0, overall)
+    return sorted(out, key=lambda row: (row["scope"] != "overall", -int_value(row["disagreement_count"])))
+
+
+def overall_agreement(hit_rows: list[dict[str, str]]) -> dict[str, Any]:
+    by_hit: dict[str, dict[str, bool]] = defaultdict(dict)
+    for row in hit_rows:
+        if row.get("classifier_mode") in {"deterministic", "llm"}:
+            by_hit[row["hit_id"]][row["classifier_mode"]] = row.get("is_relevant") == "true"
+    pairs = [values for values in by_hit.values() if "deterministic" in values and "llm" in values]
+    total = len(pairs)
+    if not total:
+        return empty_agreement_row("overall")
+    agree = sum(1 for values in pairs if values["deterministic"] == values["llm"])
+    det_only = sum(1 for values in pairs if values["deterministic"] and not values["llm"])
+    llm_only = sum(1 for values in pairs if values["llm"] and not values["deterministic"])
+    return {
+        "scope": "overall",
+        "term_id": "",
+        "term": "",
+        "language": "",
+        "corpus": "",
+        "agreement_rate": format_float(agree / total),
+        "agreement_kappa": "",
+        "deterministic_only_relevant_count": det_only,
+        "llm_only_relevant_count": llm_only,
+        "disagreement_count": det_only + llm_only,
+    }
+
+
+def empty_agreement_row(scope: str) -> dict[str, Any]:
+    return {
+        "scope": scope,
+        "term_id": "",
+        "term": "",
+        "language": "",
+        "corpus": "",
+        "agreement_rate": "",
+        "agreement_kappa": "",
+        "deterministic_only_relevant_count": "",
+        "llm_only_relevant_count": "",
+        "disagreement_count": "",
+    }
+
+
+def write_markdown(
+    path: Path,
+    density_rows: list[dict[str, str]],
+    bible_control: list[dict[str, Any]],
+    edition_meta: list[dict[str, Any]],
+    agreement: list[dict[str, Any]],
+    manifest_path: Path,
+) -> None:
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
+    lines = [
+        "# CRD Report",
+        "",
+        "Status: generated from the Centered-Relevance Density matrix.",
+        "",
+        "## Reproduce",
+        "",
+        "```bash",
+        "python3 -m scripts.run_crd_density protocols/centered_relevance_density.toml --resume",
+        "python3 -m scripts.build_crd_comparison",
+        "```",
+        "",
+        "## Summary",
+        "",
+        f"- density rows: {len(density_rows)}",
+        f"- term/control comparison rows: {len(bible_control)}",
+        f"- edition summary rows: {len(edition_meta)}",
+        f"- classifier agreement rows: {len(agreement)}",
+        f"- manifest status: {manifest.get('status', '')}",
+        "",
+        "## Bible vs Secular Controls",
+        "",
+        "| Classifier | Term | Bible max | Secular max | Ratio | Exceeds secular max |",
+        "| --- | --- | ---: | ---: | ---: | --- |",
+    ]
+    for row in bible_control[:25]:
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    str(row["classifier_mode"]),
+                    f"`{row['term_id']}`",
+                    str(row["bible_max_density"]),
+                    str(row["secular_max_density"]),
+                    str(row["ratio"]),
+                    str(row["exceeds_secular_max"]),
+                ]
+            )
+            + " |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Read",
+            "",
+            "- CRD is a density screen, not a claim promotion engine.",
+            "- Deterministic mode only reports locked exact dictionary matches.",
+            "- LLM and parallel modes require audit-log review before interpretation.",
+            "- A populated production dictionary should be locked in a new preregistration before substantive runs.",
+        ]
+    )
+    path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+
+def write_rows(path: Path, fieldnames: list[str], rows: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def float_value(value: str | None) -> float:
+    try:
+        return float(value or 0)
+    except ValueError:
+        return 0.0
+
+
+def int_value(value: str | None) -> int:
+    try:
+        return int(value or 0)
+    except ValueError:
+        return 0
+
+
+def format_float(value: float) -> str:
+    return f"{value:.9g}"
+
+
+def median(values: list[int]) -> float:
+    if not values:
+        return 0.0
+    middle = len(values) // 2
+    if len(values) % 2:
+        return float(values[middle])
+    return (values[middle - 1] + values[middle]) / 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

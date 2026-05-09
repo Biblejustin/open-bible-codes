@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 230
+Documents indexed: 233
 
 ## Controls
 
@@ -91,6 +91,7 @@ Documents indexed: 230
 | --- | --- |
 | All-Codes Compound Extension Confirmatory Preregistration | `ALL_CODES_COMPOUND_EXTENSION_CONFIRMATORY_PREREGISTRATION.md` |
 | BYZ_NT Source-Only Exact-Center Preregistration | `BYZ_SOURCE_ONLY_EXACT_CENTER_PREREGISTRATION.md` |
+| CRD Preregistration | `CRD_PREREGISTRATION.md` |
 | Doxa Follow-Up Preregistration | `DOXA_FOLLOWUP_PREREGISTRATION.md` |
 | Doxa Four-Source Claim Follow-Up Preregistration | `DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_PREREGISTRATION.md` |
 | Doxa Four-Source Confirmatory Follow-Up Preregistration | `DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_PREREGISTRATION.md` |
@@ -118,6 +119,7 @@ Documents indexed: 230
 | Title | Path |
 | --- | --- |
 | BYZ_NT Source-Only Exact-Center Report | `BYZ_SOURCE_ONLY_EXACT_CENTER_REPORT.md` |
+| CRD Report | `CRD_REPORT.md` |
 | Doxa Follow-Up Report | `DOXA_FOLLOWUP_REPORT.md` |
 | Doxa Four-Source Claim Follow-Up Report | `DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md` |
 | Doxa Four-Source Confirmatory Follow-Up Report | `DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md` |
@@ -158,6 +160,7 @@ Documents indexed: 230
 | Claim Catalog | `CLAIM_CATALOG.md` |
 | Common Bible Codes / ELS Test | `COMMON_EDLS_TEST.md` |
 | Cosmic Codes Source Audit | `COSMIC_CODES_AUDIT.md` |
+| Centered-Relevance Density Framework | `CRD_FRAMEWORK.md` |
 | Critical Omission Breaks | `CRITICAL_OMISSION_BREAKS.md` |
 | Critical Surface Variants | `CRITICAL_SURFACE_VARIANTS.md` |
 | CRI ELS Critique Audit | `CRI_ELS_CRITIQUE_AUDIT.md` |

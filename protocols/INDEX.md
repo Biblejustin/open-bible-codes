@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 77
+Protocols indexed: 78
 
 ## Analysis
 
@@ -47,6 +47,7 @@ Protocols indexed: 77
 | apocrypha_bridge_shuffled_controls_50 | Run 50-sample shuffled apocrypha/deuterocanon bridge controls for LXX and KJVA bridge c... | 2 | terms/english_search_terms.csv, terms/greek_nt_claim_terms.csv, terms/prophetic_terms.c... | reports/apocrypha_bridge_shuffled_controls_50, reports/kjv_apocrypha_bridge_shuffled_co... | `apocrypha_bridge_shuffled_controls_50.toml` |
 | apocrypha_bridge_study | Run the apocrypha/deuterocanon coverage audit, bounded bridge scan, surface-context rev... | 13 | terms/english_search_terms.csv, terms/greek_nt_claim_terms.csv, terms/prophetic_terms.c... | reports/apocrypha_bridge_candidates, reports/apocrypha_bridge_context, reports/apocryph... | `apocrypha_bridge_study.toml` |
 | byz_source_only_exact_center | Post-discovery 1000/1000 controls for BYZ_NT source-only exact-center extension row. | 2 |  | reports/byz_source_only_exact_center | `byz_source_only_exact_center.toml` |
+| centered_relevance_density | Locked Centered-Relevance Density scaffold over centered ELS hits and Bible/control cor... | 2 | terms/crd_placeholder_terms.csv | reports/crd | `centered_relevance_density.toml` |
 | extension_deep_controls | Slow 1000/1000 paired-control follow-up for the exact-center cross-text Greek NT extens... | 1 |  | reports | `extension_deep_controls.toml` |
 | greek_control_version_presence | Capped exact ELS hit-pattern presence for Greek null and frequency controls across Gree... | 1 | terms/frequency_anchors.csv, terms/null_controls.csv | reports/greek_control_version_presence | `greek_control_version_presence.toml` |
 | greek_exact_center_final_gate | Consolidate Greek exact-center version presence, controls, context, and synthetic basel... | 1 |  | reports/greek_exact_center_final_gate | `greek_exact_center_final_gate.toml` |

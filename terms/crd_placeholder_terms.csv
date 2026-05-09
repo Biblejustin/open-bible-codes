@@ -1,0 +1,2 @@
+term_id,concept,category,language,term,notes
+EXAMPLE_TERM,Example,placeholder,english,example,Placeholder row for CRD pipeline smoke tests only.

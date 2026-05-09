@@ -1,0 +1,19 @@
+[metadata]
+schema_version = "1"
+locked_by = "TEMPLATE"
+locked_at = "1970-01-01"
+sha256 = "TEMPLATE_REPLACE_WITH_FILE_SHA256_AFTER_LOCK"
+drafted_with = "human"
+
+[[entries]]
+term_id = "EXAMPLE_TERM"
+surface_keywords = ["example"]
+concept_codes = ["example"]
+verse_refs = ["Gen 1:1"]
+book_scope = ["Gen"]
+
+[entries.provenance]
+author = "TEMPLATE"
+lock_date = "1970-01-01"
+reviewer = "TEMPLATE"
+notes = "Placeholder schema row only. Do not treat as a theological assignment."
