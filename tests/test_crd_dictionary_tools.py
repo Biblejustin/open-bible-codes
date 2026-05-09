@@ -32,6 +32,36 @@ class CRDDictionaryToolTests(unittest.TestCase):
         self.assertIn("surface_keywords = []", dictionary_text)
         self.assertIn("surface_keywords_reviewed", queue_text)
 
+    def test_scaffold_can_seed_surface_terms(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            terms = root / "terms.csv"
+            terms.write_text(
+                "term_id,concept,category,language,term,notes\n"
+                "peter_h,Peter,names,hebrew,כיפא / פטרוס,test\n",
+                encoding="utf-8",
+            )
+            out = root / "dictionary.toml"
+            queue = root / "queue.csv"
+
+            exit_code = scaffold_main(
+                [
+                    "--term-file",
+                    str(terms),
+                    "--out",
+                    str(out),
+                    "--queue-out",
+                    str(queue),
+                    "--seed-surface-term",
+                ]
+            )
+            dictionary_text = out.read_text(encoding="utf-8")
+            queue_text = queue.read_text(encoding="utf-8")
+
+        self.assertEqual(exit_code, 0)
+        self.assertIn('surface_keywords = ["כיפא", "פטרוס"]', dictionary_text)
+        self.assertIn("כיפא;פטרוס", queue_text)
+
     def test_check_dictionary_reports_missing_entries_without_review_requirement(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

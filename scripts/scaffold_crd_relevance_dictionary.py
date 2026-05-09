@@ -18,8 +18,9 @@ def main(argv: list[str] | None = None) -> int:
         locked_by=args.locked_by,
         reviewer=args.reviewer,
         drafted_with=args.drafted_with,
+        seed_surface_term=args.seed_surface_term,
     )
-    write_queue(args.queue_out, rows)
+    write_queue(args.queue_out, rows, seed_surface_term=args.seed_surface_term)
     print(args.out)
     print(args.queue_out)
     return 0
@@ -33,6 +34,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--locked-by", default="TEMPLATE")
     parser.add_argument("--reviewer", default="TEMPLATE")
     parser.add_argument("--drafted-with", default="human")
+    parser.add_argument(
+        "--seed-surface-term",
+        action="store_true",
+        help="Seed each entry's surface keyword review field with the term's own surface form.",
+    )
     return parser
 
 
@@ -67,6 +73,7 @@ def write_dictionary(
     locked_by: str,
     reviewer: str,
     drafted_with: str,
+    seed_surface_term: bool = False,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     today = datetime.now(UTC).date().isoformat()
@@ -80,11 +87,12 @@ def write_dictionary(
         "",
     ]
     for row in rows:
+        surface_keywords = seed_surface_keywords(row) if seed_surface_term else []
         lines.extend(
             [
                 "[[entries]]",
                 f'term_id = "{toml_escape(row["term_id"])}"',
-                "surface_keywords = []",
+                f"surface_keywords = {toml_list(surface_keywords)}",
                 "concept_codes = []",
                 "verse_refs = []",
                 "book_scope = []",
@@ -103,7 +111,7 @@ def write_dictionary(
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
 
 
-def write_queue(path: Path, rows: list[dict[str, str]]) -> None:
+def write_queue(path: Path, rows: list[dict[str, str]], *, seed_surface_term: bool = False) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = [
         "review_rank",
@@ -125,11 +133,12 @@ def write_queue(path: Path, rows: list[dict[str, str]]) -> None:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
         for index, row in enumerate(rows, start=1):
+            surface_keywords = seed_surface_keywords(row) if seed_surface_term else []
             writer.writerow(
                 {
                     **row,
                     "review_rank": index,
-                    "surface_keywords_reviewed": "",
+                    "surface_keywords_reviewed": ";".join(surface_keywords),
                     "concept_codes_reviewed": "",
                     "verse_refs_reviewed": "",
                     "book_scope_reviewed": "",
@@ -137,6 +146,22 @@ def write_queue(path: Path, rows: list[dict[str, str]]) -> None:
                     "review_notes": "",
                 }
             )
+
+
+def seed_surface_keywords(row: dict[str, str]) -> list[str]:
+    term = row.get("term", "").strip()
+    if not term:
+        return []
+    values: list[str] = []
+    for part in term.replace("|", "/").replace(";", "/").split("/"):
+        value = part.strip()
+        if value and value not in values:
+            values.append(value)
+    return values
+
+
+def toml_list(values: list[str]) -> str:
+    return "[" + ", ".join(f'"{toml_escape(value)}"' for value in values) + "]"
 
 
 def toml_escape(value: str) -> str:

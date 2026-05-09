@@ -8,6 +8,13 @@ Status: workflow notes for preparing a locked Centered-Relevance Density diction
 make crd-review-scaffold
 ```
 
+For a non-interpretive starting point that checks only whether a hidden term is
+centered on its own visible surface form, use:
+
+```bash
+make crd-review-scaffold-self
+```
+
 This writes ignored local files:
 
 - `reports/crd/relevance_review_queue.csv`
@@ -25,6 +32,9 @@ Fill these fields:
 
 Leaving all relevance fields empty means the term has no deterministic relevance
 criteria and will fail locked review.
+
+The `crd-review-scaffold-self` target pre-fills `surface_keywords_reviewed`
+from the term's own surface spelling. It does not add broader related terms.
 
 LLM-assisted drafting is allowed for lexical/context related-term proposals when
 the provenance names that assistance. The key rule is not "human-only"; the key
