@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import heapq
 import json
 from collections import defaultdict
 from pathlib import Path
@@ -101,12 +102,12 @@ def build_crd_comparison(
     markdown_out: Path,
 ) -> dict[str, str]:
     rows = read_rows(density_matrix)
-    hit_rows = read_rows(classified_hits) if classified_hits.exists() else []
+    hit_examples = relevant_examples_from_file(classified_hits) if classified_hits.exists() else []
     out_dir.mkdir(parents=True, exist_ok=True)
     per_term = per_term_rankings(rows)
     bible_control = bible_vs_control_summary(rows)
     edition_meta = edition_meta_summary(rows)
-    agreement = classifier_agreement_summary(rows, hit_rows)
+    agreement = classifier_agreement_summary(rows, classified_hits if classified_hits.exists() else None)
 
     per_term_out = out_dir / "per_term_rankings.csv"
     bible_control_out = out_dir / "bible_vs_control_summary.csv"
@@ -116,7 +117,7 @@ def build_crd_comparison(
     write_rows(bible_control_out, BIBLE_CONTROL_FIELDNAMES, bible_control)
     write_rows(edition_meta_out, EDITION_META_FIELDNAMES, edition_meta)
     write_rows(agreement_out, AGREEMENT_FIELDNAMES, agreement)
-    write_markdown(markdown_out, rows, hit_rows, bible_control, edition_meta, agreement, manifest)
+    write_markdown(markdown_out, rows, hit_examples, bible_control, edition_meta, agreement, manifest)
     return {
         "per_term_rankings": str(per_term_out),
         "bible_vs_control_summary": str(bible_control_out),
@@ -220,7 +221,7 @@ def edition_meta_summary(rows: list[dict[str, str]]) -> list[dict[str, Any]]:
 
 def classifier_agreement_summary(
     density_rows: list[dict[str, str]],
-    hit_rows: list[dict[str, str]],
+    classified_hits: Path | None,
 ) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
     seen: set[tuple[str, str]] = set()
@@ -249,16 +250,19 @@ def classifier_agreement_summary(
             }
         )
     if out:
-        overall = overall_agreement(hit_rows)
+        overall = overall_agreement_from_file(classified_hits)
         out.insert(0, overall)
     return sorted(out, key=lambda row: (row["scope"] != "overall", -int_value(row["disagreement_count"])))
 
 
-def overall_agreement(hit_rows: list[dict[str, str]]) -> dict[str, Any]:
+def overall_agreement_from_file(classified_hits: Path | None) -> dict[str, Any]:
+    if classified_hits is None or not classified_hits.exists():
+        return empty_agreement_row("overall")
     by_hit: dict[str, dict[str, bool]] = defaultdict(dict)
-    for row in hit_rows:
-        if row.get("classifier_mode") in {"deterministic", "llm"}:
-            by_hit[row["hit_id"]][row["classifier_mode"]] = row.get("is_relevant") == "true"
+    with classified_hits.open("r", encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            if row.get("classifier_mode") in {"deterministic", "llm"}:
+                by_hit[row["hit_id"]][row["classifier_mode"]] = row.get("is_relevant") == "true"
     pairs = [values for values in by_hit.values() if "deterministic" in values and "llm" in values]
     total = len(pairs)
     if not total:
@@ -298,7 +302,7 @@ def empty_agreement_row(scope: str) -> dict[str, Any]:
 def write_markdown(
     path: Path,
     density_rows: list[dict[str, str]],
-    hit_rows: list[dict[str, str]],
+    hit_examples: list[dict[str, str]],
     bible_control: list[dict[str, Any]],
     edition_meta: list[dict[str, Any]],
     agreement: list[dict[str, Any]],
@@ -347,7 +351,6 @@ def write_markdown(
             )
             + " |"
         )
-    examples = relevant_examples(hit_rows)
     lines.extend(
         [
             "",
@@ -357,7 +360,7 @@ def write_markdown(
             "| --- | --- | --- | --- | --- | ---: |",
         ]
     )
-    for row in examples[:25]:
+    for row in hit_examples[:25]:
         lines.append(
             "| "
             + " | ".join(
@@ -388,16 +391,18 @@ def write_markdown(
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
 
 
-def relevant_examples(hit_rows: list[dict[str, str]]) -> list[dict[str, str]]:
-    rows = [row for row in hit_rows if row.get("is_relevant") == "true"]
-    return sorted(
-        rows,
-        key=lambda row: (
-            row.get("term_id", ""),
-            row.get("corpus", ""),
-            row.get("center_ref", ""),
-            abs(int_value(row.get("skip"))),
-        ),
+def relevant_examples_from_file(path: Path, *, limit: int = 25) -> list[dict[str, str]]:
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        rows = (row for row in csv.DictReader(handle) if row.get("is_relevant") == "true")
+        return heapq.nsmallest(limit, rows, key=relevant_example_key)
+
+
+def relevant_example_key(row: dict[str, str]) -> tuple[str, str, str, int]:
+    return (
+        row.get("term_id", ""),
+        row.get("corpus", ""),
+        row.get("center_ref", ""),
+        abs(int_value(row.get("skip"))),
     )
 
 
