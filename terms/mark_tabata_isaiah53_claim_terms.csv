@@ -1,0 +1,42 @@
+term_id,concept,category,language,term,notes
+mt_passover_h,Passover,mt_isaiah53_cluster,hebrew,פסח,article list term
+mt_man_herod_h,The Man Herod,mt_isaiah53_cluster,hebrew,איש הורד,article list term spelling provisional
+mt_wicked_caesar_h,Wicked Caesar Perish,mt_isaiah53_cluster,hebrew,קיסר עמל אבד,article list term
+mt_evil_roman_city_h,Evil Roman City,mt_isaiah53_cluster,hebrew,רע עיר רומי,article list term
+mt_let_him_be_crucified_h,Let Him Be Crucified,mt_isaiah53_cluster,hebrew,יצלב,article list term
+mt_moriah_h,Moriah,mt_isaiah53_cluster,hebrew,מריה,article list term spelling provisional
+mt_cross_h,Cross,mt_isaiah53_cluster,hebrew,צלב,article list term
+mt_pierce_h,Pierce,mt_isaiah53_cluster,hebrew,דקר,article list term
+mt_atonement_lamb_h,Atonement Lamb,mt_isaiah53_cluster,hebrew,טלא מכפר,article list term
+mt_bread_h,Bread,mt_isaiah53_cluster,hebrew,לחם,article list term
+mt_wine_h,Wine,mt_isaiah53_cluster,hebrew,יין,article list term
+mt_obed_h,Obed,mt_isaiah53_cluster,hebrew,עבד,article list term
+mt_jesse_h,Jesse,mt_isaiah53_cluster,hebrew,ישי,article list term
+mt_seed_h,Seed,mt_isaiah53_cluster,hebrew,זרע,article list term
+mt_water_h,Water,mt_isaiah53_cluster,hebrew,מים,article list term
+mt_jonah_h,Jonah,mt_isaiah53_cluster,hebrew,יונה,article list term
+mt_disciples_mourn_h,The Disciples Mourn,mt_isaiah53_cluster,hebrew,תלמידים אבלים,article list term Hebrew provisional
+mt_peter_h,Peter,mt_isaiah53_cluster,hebrew,כפה,article list term
+mt_matthew_h,Matthew,mt_isaiah53_cluster,hebrew,מתתי,article list term
+mt_john_h,John,mt_isaiah53_cluster,hebrew,יוחנן,article list term
+mt_andrew_h,Andrew,mt_isaiah53_cluster,hebrew,אנדרי,article list term
+mt_philip_h,Philip,mt_isaiah53_cluster,hebrew,פילף,article list term from related Missler table
+mt_thomas_h,Thomas,mt_isaiah53_cluster,hebrew,תומא,article list term
+mt_james_h,James,mt_isaiah53_cluster,hebrew,יעקב,article list term appears twice
+mt_simon_h,Simon,mt_isaiah53_cluster,hebrew,שמעון,article list term
+mt_thaddaeus_h,Thaddaeus,mt_isaiah53_cluster,hebrew,תדי,article list term
+mt_matthias_h,Matthias,mt_isaiah53_cluster,hebrew,מתיה,article list term
+mt_mary_h,Mary,mt_isaiah53_cluster,hebrew,מרים,article list term appears three times
+mt_salome_h,Salome,mt_isaiah53_cluster,hebrew,שלומית,article list term
+mt_joseph_h,Joseph,mt_isaiah53_cluster,hebrew,יוסף,article list term
+mt_yeshua_shmi_h,Yeshua Is My Name,mt_isaiah53_cluster,hebrew,ישוע שמי,article list term
+mt_his_signature_h,His Signature,mt_isaiah53_cluster,hebrew,מחתמו,article list term spelling provisional
+mt_messiah_h,Messiah,mt_isaiah53_cluster,hebrew,משיח,article list term
+mt_nazarene_h,Nazarene,mt_isaiah53_cluster,hebrew,נזיר,article list term spelling provisional
+mt_galilee_h,Galilee,mt_isaiah53_cluster,hebrew,גליל,article list term
+mt_shiloh_h,Shiloh,mt_isaiah53_cluster,hebrew,שילה,article list term
+mt_pharisee_h,Pharisee,mt_isaiah53_cluster,hebrew,פרוש,article list term
+mt_levites_h,Levites,mt_isaiah53_cluster,hebrew,לוים,article list term
+mt_caiaphas_h,Caiaphas,mt_isaiah53_cluster,hebrew,כיפה,article spells Caiphas
+mt_annas_h,Annas,mt_isaiah53_cluster,hebrew,ענן,article list term
+mt_judas_absence_h,Judas Absence,mt_isaiah53_cluster,hebrew,יהודה,related absence claim noted in source family

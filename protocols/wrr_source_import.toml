@@ -1,0 +1,73 @@
+name = "wrr_source_import"
+description = "Download external WRR audit files and convert WRR2 into repo term rows."
+manifest_out = "reports/wrr_1994/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "download_wrr_sources"
+description = "Download WRR secondary-source plain text and Michigan-Claremont key into ignored reports output."
+argv = [
+  "-m", "scripts.download_wrr_sources",
+  "--out-dir", "reports/wrr_1994",
+  "--manifest-out", "reports/wrr_1994/sources.manifest.json",
+]
+inputs = [
+  "scripts/download_wrr_sources.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr_1994_paper.pdf",
+  "reports/wrr_1994/WRR1.txt",
+  "reports/wrr_1994/WRR2.txt",
+  "reports/wrr_1994/SE2a.txt",
+  "reports/wrr_1994/SE2b.txt",
+  "reports/wrr_1994/SE3.txt",
+  "reports/wrr_1994/mc_key.html",
+  "reports/wrr_1994/wrr_nations_main_mc.html",
+  "reports/wrr_1994/wrr_nations_main_gir.html",
+  "reports/wrr_1994/wnp_mc.html",
+  "reports/wrr_1994/wnp_en.html",
+  "reports/wrr_1994/sources.manifest.json",
+]
+
+[[steps]]
+id = "audit_wrr_source_shapes"
+description = "Summarize raw ANU famous-rabbis source-list record shapes."
+argv = [
+  "-m", "scripts.analyze_wrr_source_shapes",
+  "--out", "reports/wrr_1994/wrr_source_shapes.csv",
+  "--summary-out", "reports/wrr_1994/wrr_source_shapes_summary.csv",
+  "--markdown-out", "reports/wrr_1994/wrr_source_shapes.md",
+  "--manifest-out", "reports/wrr_1994/wrr_source_shapes.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_source_shapes.py",
+  "scripts/import_wrr_terms.py",
+  "reports/wrr_1994/WRR1.txt",
+  "reports/wrr_1994/WRR2.txt",
+  "reports/wrr_1994/SE2a.txt",
+  "reports/wrr_1994/SE2b.txt",
+  "reports/wrr_1994/SE3.txt",
+]
+outputs = [
+  "reports/wrr_1994/wrr_source_shapes.csv",
+  "reports/wrr_1994/wrr_source_shapes_summary.csv",
+  "reports/wrr_1994/wrr_source_shapes.md",
+  "reports/wrr_1994/wrr_source_shapes.manifest.json",
+]
+
+[[steps]]
+id = "import_wrr2_terms"
+description = "Convert external WRR2 plain-text data into ignored term CSV rows for audit."
+argv = [
+  "-m", "scripts.import_wrr_terms",
+  "--source", "reports/wrr_1994/WRR2.txt",
+  "--out", "reports/wrr_1994/wrr2_terms.csv",
+]
+inputs = [
+  "scripts/import_wrr_terms.py",
+  "reports/wrr_1994/WRR2.txt",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_terms.csv",
+]

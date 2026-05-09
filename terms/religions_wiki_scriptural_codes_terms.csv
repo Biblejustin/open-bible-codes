@@ -1,0 +1,36 @@
+term_id,concept,category,language,term,notes
+rw_torah_code_e,Torah Code,rw_els_claims,english,Torah code,wiki category label
+rw_bible_code_e,Bible Code,rw_els_claims,english,Bible code,wiki category label
+rw_wrr_e,WRR,rw_els_claims,english,Witztum Rips Rosenberg,WRR 1994 reference label
+rw_war_and_peace_e,War And Peace,rw_non_bible_controls,english,War and Peace,non-Bible control named by source
+rw_moby_dick_e,Moby Dick,rw_non_bible_controls,english,Moby Dick,non-Bible control named by source
+rw_quran_e,Quran,rw_quran_codes,english,Quran,Quran code category
+rw_quran_code_e,Quran Code,rw_quran_codes,english,Quran code,Quran ELS category
+rw_miracle_nineteen_e,Miracle Of Nineteen,rw_quran_codes,english,miracle of nineteen,Quran numeric claim label
+rw_rashad_khalifa_e,Rashad Khalifa,rw_quran_codes,english,Rashad Khalifa,Quran 19 claim source label
+rw_submitters_e,Submitters,rw_quran_codes,english,Submitters,religious sect label from source
+rw_sevenfold_pattern_e,Sevenfold Pattern,rw_bible_numerics,english,sevenfold pattern,Bible numerics claim label
+rw_supernatural_engineering_e,Supernatural Engineering,rw_bible_numerics,english,supernatural engineering,quoted claim phrase label
+rw_gematria_e,Gematria,rw_gematria_theomatics,english,gematria,method label
+rw_theomatics_e,Theomatics,rw_gematria_theomatics,english,theomatics,method label
+rw_del_washburn_e,Del Washburn,rw_gematria_theomatics,english,Del Washburn,theomatics source label
+rw_john_3_19_e,John 3 19,rw_gematria_theomatics,english,John three nineteen,theomatics example label
+rw_chinese_characters_e,Chinese Characters,rw_chinese_characters,english,Chinese characters,Chinese characters argument label
+rw_genesis_e,Genesis,rw_chinese_characters,english,Genesis,Genesis themes linked to Chinese-character argument
+rw_creation_e,Creation,rw_chinese_characters,english,creation,Chinese-character argument theme
+rw_flood_e,Flood,rw_chinese_characters,english,flood,Chinese-character argument theme
+rw_tower_babel_e,Tower Of Babel,rw_chinese_characters,english,Tower of Babel,Chinese-character argument theme
+rw_multiple_comparisons_e,Multiple Comparisons,rw_methodology_guardrails,english,multiple comparisons,statistical guardrail
+rw_texas_sharpshooter_e,Texas Sharpshooter Fallacy,rw_methodology_guardrails,english,Texas sharpshooter fallacy,fallacy guardrail
+rw_apophenia_e,Apophenia,rw_methodology_guardrails,english,apophenia,cognitive-bias guardrail
+rw_cognitive_bias_e,Cognitive Bias,rw_methodology_guardrails,english,cognitive bias,cognitive-bias guardrail
+rw_confirmation_bias_e,Confirmation Bias,rw_methodology_guardrails,english,confirmation bias,text-modification guardrail
+rw_uncorrupted_scripture_e,Uncorrupted Scripture,rw_source_variation,english,uncorrupted scripture,source-variation guardrail
+rw_secular_texts_e,Secular Texts,rw_non_bible_controls,english,secular texts,control-category label
+rw_secretive_god_e,Secretive God,rw_interpretive_guardrails,english,secretive God,interpretive objection label
+rw_expert_rejection_e,Expert Rejection,rw_methodology_guardrails,english,expert rejection,expert-rejection guardrail
+rw_barry_simon_e,Barry Simon,rw_methodology_guardrails,english,Barry Simon,cited critique source label
+rw_brendan_mckay_e,Brendan McKay,rw_methodology_guardrails,english,Brendan McKay,cited critique source label
+rw_dror_bar_natan_e,Dror Bar Natan,rw_methodology_guardrails,english,Dror Bar Natan,cited critique source label
+rw_maya_bar_hillel_e,Maya Bar Hillel,rw_methodology_guardrails,english,Maya Bar Hillel,cited critique source label
+rw_gil_kalai_e,Gil Kalai,rw_methodology_guardrails,english,Gil Kalai,cited critique source label

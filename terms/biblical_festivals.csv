@@ -1,0 +1,20 @@
+term_id,concept,category,language,term,notes
+pesach_h,Passover,festivals,hebrew,פסח,
+pesach_g,Passover,festivals,greek,πασχα,
+shavuot_h,Shavuot,festivals,hebrew,שבועות,Pentecost
+pentecost_g,Pentecost,festivals,greek,πεντηκοστη,
+sukkot_h,Sukkot,festivals,hebrew,סוכות,Tabernacles
+tabernacles_g,Tabernacles,festivals,greek,σκηνοπηγια,
+rosh_hashanah_h,Rosh Hashanah,festivals,hebrew,ראש השנה,
+yom_kippur_h,Yom Kippur,festivals,hebrew,יום הכפורים,Day of Atonement
+yom_kippur_short_h,Yom Kippur,festivals,hebrew,יום כיפור,modern colloquial
+purim_h,Purim,festivals,hebrew,פורים,
+shabbat_h,Shabbat,festivals,hebrew,שבת,Sabbath
+sabbath_g,Sabbath,festivals,greek,σαββατον,
+tisha_bav_h,Tisha B'Av,festivals,hebrew,תשעה באב,
+firstfruits_h,Firstfruits,festivals,hebrew,בכורים,
+firstfruits_g,Firstfruits,festivals,greek,απαρχη,
+unleavened_h,Unleavened Bread,festivals,hebrew,מצות,
+unleavened_g,Unleavened Bread,festivals,greek,αζυμα,
+new_moon_h,New Moon,festivals,hebrew,ראש חודש,Rosh Chodesh
+jubilee_h,Jubilee,festivals,hebrew,יובל,Leviticus 25

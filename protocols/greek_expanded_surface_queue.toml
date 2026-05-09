@@ -1,0 +1,27 @@
+name = "greek_expanded_surface_queue"
+description = "Post-screen exact-center surface queue from the expanded Greek prospective run."
+manifest_out = "reports/greek_expanded_surface_queue/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "surface_queue"
+description = "Summarize exact-center surface patterns by Greek NT source distribution."
+argv = [
+  "-m", "scripts.analyze_greek_expanded_surface_queue",
+  "--surface-hits", "reports/greek_expanded_prospective_exact_center/surface_context_hits.csv",
+  "--patterns-out", "reports/greek_expanded_surface_queue/surface_patterns.csv",
+  "--summary-out", "reports/greek_expanded_surface_queue/term_summary.csv",
+  "--markdown-out", "docs/GREEK_EXPANDED_SURFACE_QUEUE.md",
+  "--manifest-out", "reports/greek_expanded_surface_queue/manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_expanded_surface_queue.py",
+  "reports/greek_expanded_prospective_exact_center/surface_context_hits.csv",
+]
+outputs = [
+  "reports/greek_expanded_surface_queue/surface_patterns.csv",
+  "reports/greek_expanded_surface_queue/term_summary.csv",
+  "docs/GREEK_EXPANDED_SURFACE_QUEUE.md",
+  "reports/greek_expanded_surface_queue/manifest.json",
+]

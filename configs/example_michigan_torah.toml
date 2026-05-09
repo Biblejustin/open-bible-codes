@@ -1,0 +1,37 @@
+name = "Michigan-Claremont Hebrew Torah"
+language = "michigan"
+
+[[sources]]
+name = "Genesis"
+format = "michigan_claremont"
+path = "../data/raw/koren/genesis.koren.gz"
+book = "Genesis"
+book_number = 1
+
+[[sources]]
+name = "Exodus"
+format = "michigan_claremont"
+path = "../data/raw/koren/exodus.koren.gz"
+book = "Exodus"
+book_number = 2
+
+[[sources]]
+name = "Leviticus"
+format = "michigan_claremont"
+path = "../data/raw/koren/leviticus.koren.gz"
+book = "Leviticus"
+book_number = 3
+
+[[sources]]
+name = "Numbers"
+format = "michigan_claremont"
+path = "../data/raw/koren/numbers.koren.gz"
+book = "Numbers"
+book_number = 4
+
+[[sources]]
+name = "Deuteronomy"
+format = "michigan_claremont"
+path = "../data/raw/koren/deuteronomy.koren.gz"
+book = "Deuteronomy"
+book_number = 5

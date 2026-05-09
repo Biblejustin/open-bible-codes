@@ -1,0 +1,32 @@
+name = "greek_expanded_surface_triage"
+description = "Post-screen triage for expanded Greek exact-center surface rows."
+manifest_out = "reports/greek_expanded_surface_triage/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "surface_triage"
+description = "Filter all-source exact-center surface rows to a tighter length-aware review queue."
+argv = [
+  "-m", "scripts.analyze_greek_expanded_surface_triage",
+  "--terms", "terms/greek_expanded_prospective_terms.csv",
+  "--patterns", "reports/greek_expanded_surface_queue/surface_patterns.csv",
+  "--term-summary", "reports/greek_expanded_surface_queue/term_summary.csv",
+  "--min-length", "5",
+  "--selected-out", "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "--cohort-out", "reports/greek_expanded_surface_triage/term_cohort.csv",
+  "--markdown-out", "docs/GREEK_EXPANDED_SURFACE_TRIAGE.md",
+  "--manifest-out", "reports/greek_expanded_surface_triage/manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_expanded_surface_triage.py",
+  "terms/greek_expanded_prospective_terms.csv",
+  "reports/greek_expanded_surface_queue/surface_patterns.csv",
+  "reports/greek_expanded_surface_queue/term_summary.csv",
+]
+outputs = [
+  "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "reports/greek_expanded_surface_triage/term_cohort.csv",
+  "docs/GREEK_EXPANDED_SURFACE_TRIAGE.md",
+  "reports/greek_expanded_surface_triage/manifest.json",
+]

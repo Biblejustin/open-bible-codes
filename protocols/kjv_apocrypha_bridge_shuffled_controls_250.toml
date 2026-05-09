@@ -1,0 +1,38 @@
+name = "kjv_apocrypha_bridge_shuffled_controls_250"
+description = "Run 250-sample shuffled apocrypha/deuterocanon bridge controls for KJVA bridge candidates."
+manifest_out = "reports/kjv_apocrypha_bridge_shuffled_controls_250/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 30
+
+[[steps]]
+id = "kjv_shuffled_controls_250"
+description = "Compare KJVA bridge candidates with 250 shuffled apocrypha-block controls."
+argv = [
+  "-m", "scripts.analyze_apocrypha_bridge_shuffled_controls",
+  "--canonical-label", "KJVA",
+  "--canonical-config", "configs/example_ebible_engkjv_apocrypha.toml",
+  "--terms", "terms/english_search_terms.csv",
+  "--observed", "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+  "--samples", "250",
+  "--jobs", "0",
+  "--resume-samples",
+  "--out", "reports/kjv_apocrypha_bridge_shuffled_controls_250/sample_summary.csv",
+  "--summary-out", "reports/kjv_apocrypha_bridge_shuffled_controls_250/summary.csv",
+  "--markdown-out", "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_250.md",
+  "--manifest-out", "reports/kjv_apocrypha_bridge_shuffled_controls_250/manifest.json",
+]
+inputs = [
+  "scripts/analyze_apocrypha_bridge_shuffled_controls.py",
+  "scripts/analyze_apocrypha_bridge_candidates.py",
+  "scripts/analyze_apocrypha_bridge_controls.py",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "data/processed/ebible/eng-kjv.csv",
+  "terms/english_search_terms.csv",
+  "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+]
+outputs = [
+  "reports/kjv_apocrypha_bridge_shuffled_controls_250/sample_summary.csv",
+  "reports/kjv_apocrypha_bridge_shuffled_controls_250/summary.csv",
+  "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_250.md",
+  "reports/kjv_apocrypha_bridge_shuffled_controls_250/manifest.json",
+]

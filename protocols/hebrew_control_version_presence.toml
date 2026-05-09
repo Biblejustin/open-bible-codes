@@ -1,0 +1,49 @@
+name = "hebrew_control_version_presence"
+description = "Capped exact ELS hit-pattern presence for Hebrew null and frequency controls across MT-family corpora."
+manifest_out = "reports/hebrew_control_version_presence/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 0
+
+[[steps]]
+id = "hebrew_control_version_presence"
+description = "Compare exact Hebrew control-term hit ref-key patterns across MT_WLC, UXLC, EBIBLE_WLC, MAM, and UHB."
+argv = [
+  "-m",
+  "scripts.analyze_hebrew_hit_version_presence",
+  "--terms",
+  "terms/null_controls.csv",
+  "--terms",
+  "terms/frequency_anchors.csv",
+  "--all-concepts",
+  "--max-hits-per-term",
+  "100",
+  "--corpus-jobs",
+  "0",
+  "--patterns-out",
+  "reports/hebrew_control_version_presence/hit_patterns.csv",
+  "--summary-out",
+  "reports/hebrew_control_version_presence/term_summary.csv",
+  "--markdown-out",
+  "reports/hebrew_control_version_presence/hebrew_control_version_presence.md",
+  "--manifest-out",
+  "reports/hebrew_control_version_presence/manifest.json",
+]
+inputs = [
+  "scripts/analyze_hebrew_hit_version_presence.py",
+  "terms/null_controls.csv",
+  "terms/frequency_anchors.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "els/corpus.py",
+  "els/search.py",
+  "scripts/analyze_mt_version_differences.py",
+]
+outputs = [
+  "reports/hebrew_control_version_presence/hit_patterns.csv",
+  "reports/hebrew_control_version_presence/term_summary.csv",
+  "reports/hebrew_control_version_presence/hebrew_control_version_presence.md",
+  "reports/hebrew_control_version_presence/manifest.json",
+]

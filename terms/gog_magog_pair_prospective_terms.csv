@@ -1,0 +1,11 @@
+term_id,concept,category,language,term,notes
+gog_h,Gog,target_pair,hebrew,גוג,prospective target left term
+magog_h,Magog,target_pair,hebrew,מגוג,prospective target right term
+cyrus_h,Cyrus,ruler_baseline,hebrew,כורש,declared ruler pair baseline
+darius_h,Darius,ruler_baseline,hebrew,דריוש,declared ruler pair baseline
+beast_h,Beast,apocalyptic_symbol_baseline,hebrew,חיה,declared apocalyptic-symbol pair baseline
+dragon_h,Dragon,apocalyptic_symbol_baseline,hebrew,תנין,declared apocalyptic-symbol pair baseline
+horn_h,Horn,apocalyptic_symbol_baseline,hebrew,קרן,declared apocalyptic-symbol pair baseline
+seal_h,Seal,apocalyptic_symbol_baseline,hebrew,חותם,declared apocalyptic-symbol pair baseline
+vision_h,Vision,prophetic_baseline,hebrew,חזון,declared prophetic pair baseline
+prophet_h,Prophet,prophetic_baseline,hebrew,נביא,declared prophetic pair baseline

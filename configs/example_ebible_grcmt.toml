@@ -1,0 +1,12 @@
+name = "eBible Greek Majority Text NT"
+language = "greek"
+
+[[sources]]
+name = "eBible GRCMT"
+format = "csv"
+path = "../data/processed/ebible/grcmt.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

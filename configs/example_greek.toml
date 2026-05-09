@@ -1,0 +1,12 @@
+name = "Greek Bible"
+language = "greek"
+
+[[sources]]
+name = "Greek Bible"
+format = "csv"
+path = "../data/raw/greek.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

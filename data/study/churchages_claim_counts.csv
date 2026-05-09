@@ -1,0 +1,4 @@
+term_id,term,corpus,config,direction,observed_hits,min_skip,max_skip_mode,max_skip,claimed_corpus_letters,source_url,notes
+churchages_branham_forward,branham,KJV,configs/example_ebible_engkjv.toml,forward,655,2,letters-per-term,,3227544,https://churchages.net/en/study/bible-codes-made-simple/,ChurchAges reports Branham found 655 times in forward KJV search.
+churchages_branham_backward,branham,KJV,configs/example_ebible_engkjv.toml,backward,612,2,letters-per-term,,3227544,https://churchages.net/en/study/bible-codes-made-simple/,ChurchAges reports Branham found 612 times in backward KJV search.
+churchages_statist_forward,statist,KJV,configs/example_ebible_engkjv.toml,forward,11947,2,letters-per-term,,3227544,https://churchages.net/en/study/bible-codes-made-simple/,ChurchAges reports statist found 11947 times in forward KJV search.

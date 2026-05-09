@@ -1,0 +1,65 @@
+term_id,concept,category,language,term,notes
+bco_bible_code_e,Bible Code,bco_intro_method,english,Bible code,source category label
+bco_torah_code_e,Torah Code,bco_intro_method,english,Torah code,source category label
+bco_els_e,Equidistant Letter Sequence,bco_intro_method,english,equidistant letter sequence,method label
+bco_matrix_slide_e,ELS Matrix Slide,bco_intro_method,english,ELS matrix slide,display method label
+bco_picture_bible_code_e,Picture Bible Code,bco_intro_method,english,picture Bible code,pictogram method label
+bco_pictogram_e,Pictogram,bco_intro_method,english,pictogram,pictogram method label
+bco_john_3_16_e,John 3 16,bco_demo_terms,english,John three sixteen,KJV demo matrix label
+bco_gate_e,Gate,bco_demo_terms,english,gate,John 3 16 demo word
+bco_lane_e,Lane,bco_demo_terms,english,lane,John 3 16 demo word
+bco_thin_e,Thin,bco_demo_terms,english,thin,John 3 16 demo word
+bco_hits_e,Hits,bco_demo_terms,english,hits,John 3 16 demo word
+bco_rent_e,Rent,bco_demo_terms,english,rent,John 3 16 demo word
+bco_soot_e,Soot,bco_demo_terms,english,soot,John 3 16 demo word
+bco_jacob_e,Jacob,bco_demo_terms,english,Jacob,introductory chance word example
+bco_seven_warnings_e,Seven Warnings,bco_warnings,english,seven warnings,warning page label
+bco_horoscope_e,Horoscope,bco_warnings,english,horoscope,misuse warning label
+bco_doctrine_proof_e,Doctrine Proof,bco_warnings,english,doctrine proof,misuse warning label
+bco_personal_name_search_e,Personal Name Search,bco_warnings,english,personal name search,misuse warning label
+bco_burning_bush_e,Burning Bush Bible Code,bco_pictogram_clusters,english,Burning Bush Bible Code,site cluster label
+bco_moses_rod_e,Moses Rod,bco_pictogram_clusters,english,Moses rod,pictogram theme
+bco_moses_burning_bush_e,Moses Burning Bush,bco_pictogram_clusters,english,Moses burning bush,pictogram theme
+bco_i_am_yeshua_e,I AM Yeshua,bco_pictogram_key_phrases,english,I AM Yeshua,key phrase label
+bco_scroll_e,Scroll,bco_pictogram_images,english,scroll,pictogram image label
+bco_dna_e,DNA,bco_pictogram_images,english,DNA,pictogram image label
+bco_mountain_e,Mountain,bco_pictogram_images,english,mountain,pictogram image label
+bco_lamp_e,Lamp,bco_pictogram_images,english,lamp,pictogram image label
+bco_fiery_sacrifice_e,Fiery Sacrifice,bco_pictogram_images,english,fiery sacrifice,pictogram image label
+bco_creation_code_e,Creation Code,bco_pictogram_clusters,english,Creation Code,site cluster label
+bco_triune_god_created_e,Triune God Created,bco_pictogram_key_phrases,english,Triune God created,key phrase label
+bco_serpent_dragon_e,Serpent Dragon,bco_pictogram_images,english,serpent dragon,pictogram image label
+bco_eden_sword_e,Eden Sword,bco_pictogram_images,english,Eden sword,pictogram image label
+bco_crucified_e,Crucified,bco_pictogram_images,english,crucified,pictogram image label
+bco_mene_tekel_e,Mene Tekel Bible Code,bco_pictogram_clusters,english,Mene Tekel Bible Code,site cluster label
+bco_mene_tekel_uparsin_e,Mene Tekel Uparsin,bco_pictogram_key_phrases,english,Mene Tekel Uparsin,Daniel phrase label
+bco_handwriting_wall_e,Handwriting On Wall,bco_pictogram_images,english,handwriting on wall,Daniel theme label
+bco_balance_code_e,Balance Code,bco_pictogram_clusters,english,Balance Code,site cluster label
+bco_moth_code_e,Moth Code,bco_pictogram_clusters,english,Moth Code,site cluster label
+bco_cherub_code_e,Cherub Bible Code,bco_pictogram_clusters,english,Cherub Bible Code,site cluster label
+bco_tree_of_life_e,Tree Of Life,bco_pictogram_images,english,tree of life,pictogram image label
+bco_open_book_e,Open Book,bco_pictogram_images,english,open book,pictogram image label
+bco_comet_e,Comet,bco_pictogram_images,english,comet,pictogram image label
+bco_chariot_e,Chariot,bco_pictogram_images,english,chariot,pictogram image label
+bco_throne_e,Throne,bco_pictogram_images,english,throne,pictogram image label
+bco_baal_e,Baal,bco_pictogram_images,english,Baal,pictogram image label
+bco_israel_acrostic_e,Israel Acrostic Bible Code,bco_pictogram_clusters,english,Israel Acrostic Bible Code,site cluster label
+bco_lion_judah_e,Lion Of Judah,bco_pictogram_images,english,lion of Judah,pictogram image label
+bco_yeshua_you_shall_fly_e,Yeshua You Shall Fly,bco_pictogram_key_phrases,english,Yeshua you shall fly,key phrase label
+bco_names_code_e,Names Code,bco_names_code,english,Names Code,genealogical code label
+bco_seventy_names_e,Seventy Names,bco_names_code,english,seventy names,genealogical code label
+bco_adam_to_jesus_e,Adam To Jesus,bco_names_code,english,Adam to Jesus,genealogical sequence label
+bco_i_will_forgive_enemies_e,I Will Forgive My Enemies,bco_names_code,english,I will forgive my enemies,key phrase label
+bco_kjv_bible_code_e,KJV Bible Code,bco_kjv_claims,english,KJV Bible Code,site cluster label
+bco_swine_flu_e,Swine Flu,bco_prediction_claims,english,Swine Flu,prediction claim label
+bco_obama_plane_e,Obama Plane,bco_prediction_claims,english,Obama plane,prediction example label
+bco_economic_crunch_e,Economic Crunch,bco_prediction_claims,english,economic crunch,prediction claim label
+bco_september_eleven_e,September Eleven,bco_prediction_claims,english,September eleven,prediction context label
+bco_daniel_twelve_e,Daniel Twelve,bco_prediction_claims,english,Daniel twelve,prophecy framing label
+bco_twelve_comets_e,Twelve Comets,bco_prediction_claims,english,twelve comets,prediction claim label
+bco_blood_moon_tetrads_e,Blood Moon Tetrads,bco_prediction_claims,english,blood moon tetrads,prophecy claim label
+bco_2012_e,Twenty Twelve,bco_prediction_claims,english,twenty twelve,year claim label
+bco_true_false_prophecy_e,True And False Prophecy,bco_prediction_claims,english,true and false prophecy,prophecy framing label
+bco_textual_variants_e,Textual Variants,bco_authenticity_criteria,english,textual variants,authenticity criterion label
+bco_mother_vowels_e,Mother Vowels,bco_authenticity_criteria,english,mother vowels,variant criterion label
+bco_aleph_vav_he_yod_e,Aleph Vav He Yod,bco_authenticity_criteria,english,Aleph Vav He Yod,mother vowel label

@@ -1,0 +1,48 @@
+name = "all_codes_followup_context"
+description = "Center/span text excerpts for selected Hebrew, Greek, and English all-codes rows."
+manifest_out = "reports/all_codes_followup_context/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "context"
+description = "Export center-verse and span text for selected all-codes follow-up rows."
+argv = [
+  "-m", "scripts.build_all_codes_context_excerpts",
+  "--selected", "reports/all_codes_followup_selection/selected_rows.csv",
+  "--corpus", "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus", "UXLC=configs/example_uxlc.toml",
+  "--corpus", "EBIBLE_WLC=configs/example_ebible_hebwlc.toml",
+  "--corpus", "MAM=configs/example_mam.toml",
+  "--corpus", "UHB=configs/example_uhb.toml",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "BYZ_NT=configs/example_ebible_grcmt.toml",
+  "--corpus", "TCG_NT=configs/example_ebible_grctcgnt.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--corpus", "KJV=configs/example_ebible_engkjv.toml",
+  "--excerpts-out", "reports/all_codes_followup_context/context_excerpts.csv",
+  "--markdown-out", "docs/ALL_CODES_FOLLOWUP_CONTEXT.md",
+  "--manifest-out", "reports/all_codes_followup_context/manifest.json",
+]
+inputs = [
+  "scripts/build_all_codes_context_excerpts.py",
+  "scripts/analyze_all_codes_letter_paths.py",
+  "reports/all_codes_followup_selection/selected_rows.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "configs/example_ebible_engkjv.toml",
+  "els/corpus.py",
+  "els/normalization.py",
+]
+outputs = [
+  "reports/all_codes_followup_context/context_excerpts.csv",
+  "docs/ALL_CODES_FOLLOWUP_CONTEXT.md",
+  "reports/all_codes_followup_context/manifest.json",
+]

@@ -1,0 +1,47 @@
+name = "wide_focus_paired_controls"
+description = "Representative paired controls for nonzero wide-focus count rows."
+manifest_out = "reports/wide_focus_paired_controls_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "wide_focus_paired_controls"
+description = "Run paired shuffled-term and same-length random controls for representative wide-focus rows."
+argv = [
+  "-m", "scripts.analyze_targeted_paired_controls",
+  "--target-summary", "reports/wide_focus_search/wide_focus_focus.csv",
+  "--target-corpus", "MT_WLC",
+  "--target-corpus", "UHB",
+  "--target-corpus", "LXX",
+  "--target-corpus", "TR_NT",
+  "--target-corpus", "SBLGNT",
+  "--min-observed-hits", "1",
+  "--min-skip", "2",
+  "--max-skip", "250",
+  "--term-shuffle-samples", "100",
+  "--random-samples", "100",
+  "--jobs", "0",
+  "--summary-out", "reports/wide_focus_paired_controls_summary.csv",
+  "--examples-out", "reports/wide_focus_paired_controls_examples.csv",
+  "--markdown-out", "reports/wide_focus_paired_controls.md",
+  "--manifest-out", "reports/wide_focus_paired_controls.manifest.json",
+]
+inputs = [
+  "scripts/analyze_targeted_paired_controls.py",
+  "reports/wide_focus_search/wide_focus_focus.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uhb.toml",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/search.py",
+  "els/stats.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/wide_focus_paired_controls_summary.csv",
+  "reports/wide_focus_paired_controls_examples.csv",
+  "reports/wide_focus_paired_controls.md",
+  "reports/wide_focus_paired_controls.manifest.json",
+]

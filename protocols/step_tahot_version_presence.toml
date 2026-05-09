@@ -1,0 +1,56 @@
+name = "step_tahot_version_presence"
+description = "Run focused modern/local exact-hit version presence with STEP_TAHOT included as a separate source family."
+manifest_out = "reports/step_tahot_version_presence/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 0
+
+[[steps]]
+id = "download_step_tahot"
+description = "Refresh STEP Bible TAHOT selected Hebrew OT CSV."
+argv = ["-m", "scripts.download_step_tahot", "--refresh"]
+inputs = [
+  "scripts/download_step_tahot.py",
+]
+outputs = [
+  "data/processed/step/tahot.csv",
+  "data/processed/step/tahot.manifest.json",
+]
+
+[[steps]]
+id = "focused_step_tahot_presence"
+description = "Compare exact modern/local Hebrew hit patterns across MT-family corpora plus STEP_TAHOT."
+argv = [
+  "-m", "scripts.analyze_hebrew_hit_version_presence",
+  "--corpus", "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus", "UXLC=configs/example_uxlc.toml",
+  "--corpus", "MAM=configs/example_mam.toml",
+  "--corpus", "EBIBLE_WLC=configs/example_ebible_hebwlc.toml",
+  "--corpus", "UHB=configs/example_uhb.toml",
+  "--corpus", "STEP_TAHOT=configs/example_step_tahot.toml",
+  "--corpus-jobs", "0",
+  "--report-title", "Hebrew Hit Version Presence With STEP TAHOT",
+  "--patterns-out", "reports/step_tahot_version_presence/hit_patterns.csv",
+  "--summary-out", "reports/step_tahot_version_presence/term_summary.csv",
+  "--markdown-out", "reports/step_tahot_version_presence/step_tahot_version_presence.md",
+  "--manifest-out", "reports/step_tahot_version_presence/manifest.json",
+]
+inputs = [
+  "scripts/analyze_hebrew_hit_version_presence.py",
+  "terms/modern_names_dates.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_uhb.toml",
+  "configs/example_step_tahot.toml",
+  "data/processed/step/tahot.csv",
+  "els/corpus.py",
+  "els/search.py",
+  "els/normalization.py",
+]
+outputs = [
+  "reports/step_tahot_version_presence/hit_patterns.csv",
+  "reports/step_tahot_version_presence/term_summary.csv",
+  "reports/step_tahot_version_presence/step_tahot_version_presence.md",
+  "reports/step_tahot_version_presence/manifest.json",
+]

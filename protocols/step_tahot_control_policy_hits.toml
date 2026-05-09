@@ -1,0 +1,77 @@
+name = "step_tahot_control_policy_hits"
+description = "Audit STEP_TAHOT-only control rows against TAHOT source-type policy."
+manifest_out = "reports/step_tahot_control_policy_hits/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 0
+
+[[steps]]
+id = "control_step_tahot_presence"
+description = "Refresh STEP_TAHOT Hebrew null/frequency control version-presence rows."
+argv = [
+  "-m", "scripts.analyze_hit_version_presence",
+  "--language", "hebrew",
+  "--terms", "terms/null_controls.csv",
+  "--terms", "terms/frequency_anchors.csv",
+  "--all-concepts",
+  "--duplicate-term-id", "first",
+  "--report-title", "Hebrew Control Version Presence With STEP TAHOT",
+  "--max-hits-per-term", "100",
+  "--corpus-jobs", "0",
+  "--corpus", "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus", "UXLC=configs/example_uxlc.toml",
+  "--corpus", "EBIBLE_WLC=configs/example_ebible_hebwlc.toml",
+  "--corpus", "MAM=configs/example_mam.toml",
+  "--corpus", "UHB=configs/example_uhb.toml",
+  "--corpus", "STEP_TAHOT=configs/example_step_tahot.toml",
+  "--patterns-out", "reports/step_tahot_control_version_presence/hit_patterns.csv",
+  "--summary-out", "reports/step_tahot_control_version_presence/term_summary.csv",
+  "--markdown-out", "reports/step_tahot_control_version_presence/step_tahot_control_version_presence.md",
+  "--manifest-out", "reports/step_tahot_control_version_presence/manifest.json",
+]
+inputs = [
+  "scripts/analyze_hit_version_presence.py",
+  "scripts/analyze_hebrew_hit_version_presence.py",
+  "terms/null_controls.csv",
+  "terms/frequency_anchors.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "configs/example_step_tahot.toml",
+  "data/processed/step/tahot.csv",
+  "els/corpus.py",
+  "els/search.py",
+  "scripts/analyze_mt_version_differences.py",
+]
+outputs = [
+  "reports/step_tahot_control_version_presence/hit_patterns.csv",
+  "reports/step_tahot_control_version_presence/term_summary.csv",
+  "reports/step_tahot_control_version_presence/step_tahot_control_version_presence.md",
+  "reports/step_tahot_control_version_presence/manifest.json",
+]
+
+[[steps]]
+id = "audit_control_step_tahot_policy_hits"
+description = "Classify STEP_TAHOT-only control rows by TAHOT source-type path."
+argv = [
+  "-m", "scripts.analyze_step_tahot_policy_hits",
+  "--patterns", "reports/step_tahot_control_version_presence/hit_patterns.csv",
+  "--rows-out", "reports/step_tahot_control_policy_hits/step_tahot_only_policy_hits.csv",
+  "--summary-out", "reports/step_tahot_control_policy_hits/summary.csv",
+  "--markdown-out", "reports/step_tahot_control_policy_hits/step_tahot_control_policy_hits.md",
+  "--manifest-out", "reports/step_tahot_control_policy_hits/manifest.json",
+]
+inputs = [
+  "scripts/analyze_step_tahot_policy_hits.py",
+  "reports/step_tahot_control_version_presence/hit_patterns.csv",
+  "data/processed/step/tahot.csv",
+  "configs/example_step_tahot.toml",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/step_tahot_control_policy_hits/step_tahot_only_policy_hits.csv",
+  "reports/step_tahot_control_policy_hits/summary.csv",
+  "reports/step_tahot_control_policy_hits/step_tahot_control_policy_hits.md",
+  "reports/step_tahot_control_policy_hits/manifest.json",
+]

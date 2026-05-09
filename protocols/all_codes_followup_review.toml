@@ -1,0 +1,37 @@
+name = "all_codes_followup_review"
+description = "Compact manual-review packet for selected Hebrew and Greek all-codes rows."
+manifest_out = "reports/all_codes_followup_review/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "review"
+description = "Join selection and reconstructed letter paths into one review report."
+argv = [
+  "-m", "scripts.build_all_codes_followup_report",
+  "--selected", "reports/all_codes_followup_selection/selected_rows.csv",
+  "--path-summary", "reports/all_codes_followup_letter_paths/path_summary.csv",
+  "--letter-paths", "reports/all_codes_followup_letter_paths/letter_paths.csv",
+  "--extensions-summary", "reports/all_codes_followup_extensions/summary.csv",
+  "--selection-manifest", "reports/all_codes_followup_selection/manifest.json",
+  "--path-manifest", "reports/all_codes_followup_letter_paths/manifest.json",
+  "--extensions-manifest", "reports/all_codes_followup_extensions/manifest.json",
+  "--summary-out", "reports/all_codes_followup_review/review_summary.csv",
+  "--report-out", "docs/ALL_CODES_FOLLOWUP_REVIEW.md",
+  "--manifest-out", "reports/all_codes_followup_review/manifest.json",
+]
+inputs = [
+  "scripts/build_all_codes_followup_report.py",
+  "reports/all_codes_followup_selection/selected_rows.csv",
+  "reports/all_codes_followup_selection/manifest.json",
+  "reports/all_codes_followup_letter_paths/path_summary.csv",
+  "reports/all_codes_followup_letter_paths/letter_paths.csv",
+  "reports/all_codes_followup_letter_paths/manifest.json",
+  "reports/all_codes_followup_extensions/summary.csv",
+  "reports/all_codes_followup_extensions/manifest.json",
+]
+outputs = [
+  "reports/all_codes_followup_review/review_summary.csv",
+  "docs/ALL_CODES_FOLLOWUP_REVIEW.md",
+  "reports/all_codes_followup_review/manifest.json",
+]

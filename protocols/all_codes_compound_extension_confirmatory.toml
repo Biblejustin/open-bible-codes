@@ -1,0 +1,51 @@
+name = "all_codes_compound_extension_confirmatory"
+description = "Locked 5000/5000 post-discovery confirmatory controls for the selected all-codes יום יהוה compound extension key."
+manifest_out = "reports/all_codes_compound_extension_confirmatory/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "compound_extension_confirmatory_controls"
+description = "Rerun larger controls for the registered all-codes יום יהוה compound extension key."
+argv = [
+  "-m", "scripts.analyze_extension_paired_controls",
+  "--top-file", "reports/all_codes_followup_extensions/compound_extensions.csv",
+  "--include-overlap-key", "יומיהוה|4|forward|before_plus_term|היומיהוה|היומיהוה",
+  "--term-control-samples", "5000",
+  "--random-control-samples", "5000",
+  "--seed", "314159",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--min-extension-length", "1",
+  "--match-kind-prefix", "",
+  "--dedupe-targets",
+  "--summary-out", "reports/all_codes_compound_extension_confirmatory/summary.csv",
+  "--examples-out", "reports/all_codes_compound_extension_confirmatory/examples.csv",
+  "--markdown-out", "docs/ALL_CODES_COMPOUND_EXTENSION_CONFIRMATORY_CONTROLS.md",
+  "--manifest-out", "reports/all_codes_compound_extension_confirmatory/manifest.json",
+  "--title", "All-Codes Compound Extension Confirmatory Controls",
+  "--lead", "Locked 5000/5000 post-discovery controls for the selected all-codes יום יהוה compound same-skip extension key.",
+  "--caution", "Controls are row-local and locked for this selected post-discovery key. Low scores identify rows worth manual review, not statistical claims.",
+]
+inputs = [
+  "docs/ALL_CODES_COMPOUND_EXTENSION_CONFIRMATORY_PREREGISTRATION.md",
+  "scripts/analyze_extension_paired_controls.py",
+  "reports/all_codes_followup_extensions/compound_extensions.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "els/extensions.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/all_codes_compound_extension_confirmatory/summary.csv",
+  "reports/all_codes_compound_extension_confirmatory/examples.csv",
+  "docs/ALL_CODES_COMPOUND_EXTENSION_CONFIRMATORY_CONTROLS.md",
+  "reports/all_codes_compound_extension_confirmatory/manifest.json",
+]

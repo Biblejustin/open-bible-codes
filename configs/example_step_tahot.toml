@@ -1,0 +1,12 @@
+name = "STEP Bible TAHOT selected Hebrew OT"
+language = "hebrew"
+
+[[sources]]
+name = "STEP_TAHOT"
+format = "csv"
+path = "../data/processed/step/tahot.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

@@ -1,0 +1,81 @@
+name = "greek_screening_version_presence"
+description = "Capped exact ELS hit-pattern presence for broader Greek screening terms across Greek NT corpora."
+manifest_out = "reports/greek_screening_version_presence/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "greek_screening_version_presence"
+description = "Compare exact broader Greek screening hit ref-key patterns across TR_NT, BYZ_NT, TCG_NT, and SBLGNT."
+argv = [
+  "-m",
+  "scripts.analyze_hit_version_presence",
+  "--language",
+  "greek",
+  "--terms",
+  "terms/theological_terms.csv",
+  "--terms",
+  "terms/modern_names_dates.csv",
+  "--terms",
+  "terms/table_of_nations.csv",
+  "--terms",
+  "terms/prophetic_terms.csv",
+  "--terms",
+  "terms/greek_nt_claim_terms.csv",
+  "--terms",
+  "terms/biblical_tribes.csv",
+  "--terms",
+  "terms/biblical_festivals.csv",
+  "--all-concepts",
+  "--duplicate-term-id",
+  "first",
+  "--no-stable-family",
+  "--stable-family-name",
+  "configured-family",
+  "--report-title",
+  "Greek Screening Version Presence",
+  "--max-hits-per-term",
+  "50",
+  "--corpus-jobs",
+  "0",
+  "--corpus",
+  "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus",
+  "BYZ_NT=configs/example_ebible_grcmt.toml",
+  "--corpus",
+  "TCG_NT=configs/example_ebible_grctcgnt.toml",
+  "--corpus",
+  "SBLGNT=configs/example_sblgnt.toml",
+  "--patterns-out",
+  "reports/greek_screening_version_presence/hit_patterns.csv",
+  "--summary-out",
+  "reports/greek_screening_version_presence/term_summary.csv",
+  "--markdown-out",
+  "reports/greek_screening_version_presence/greek_screening_version_presence.md",
+  "--manifest-out",
+  "reports/greek_screening_version_presence/manifest.json",
+]
+inputs = [
+  "scripts/analyze_hit_version_presence.py",
+  "scripts/analyze_hebrew_hit_version_presence.py",
+  "terms/theological_terms.csv",
+  "terms/modern_names_dates.csv",
+  "terms/table_of_nations.csv",
+  "terms/prophetic_terms.csv",
+  "terms/greek_nt_claim_terms.csv",
+  "terms/biblical_tribes.csv",
+  "terms/biblical_festivals.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/search.py",
+  "scripts/analyze_mt_version_differences.py",
+]
+outputs = [
+  "reports/greek_screening_version_presence/hit_patterns.csv",
+  "reports/greek_screening_version_presence/term_summary.csv",
+  "reports/greek_screening_version_presence/greek_screening_version_presence.md",
+  "reports/greek_screening_version_presence/manifest.json",
+]

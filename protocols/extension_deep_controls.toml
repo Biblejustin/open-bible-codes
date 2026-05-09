@@ -1,0 +1,38 @@
+name = "extension_deep_controls"
+description = "Slow 1000/1000 paired-control follow-up for the exact-center cross-text Greek NT extension row."
+manifest_out = "reports/extension_exact_center_deep_controls/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "extension_exact_center_deep_controls"
+description = "Run 1000 shuffled-term and 1000 same-length random controls for the exact-center δοξα extension overlap."
+argv = [
+  "-m", "scripts.analyze_extension_paired_controls",
+  "--require-cross-corpus-overlap",
+  "--dedupe-targets",
+  "--include-overlap-key", "δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ",
+  "--term-control-samples", "1000",
+  "--random-control-samples", "1000",
+  "--summary-out", "reports/extension_exact_center_deep_controls_summary.csv",
+  "--examples-out", "reports/extension_exact_center_deep_controls_examples.csv",
+  "--markdown-out", "reports/extension_exact_center_deep_controls.md",
+  "--manifest-out", "reports/extension_exact_center_deep_controls.manifest.json",
+]
+inputs = [
+  "scripts/analyze_extension_paired_controls.py",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt_top.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt_top.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/extension_exact_center_deep_controls_summary.csv",
+  "reports/extension_exact_center_deep_controls_examples.csv",
+  "reports/extension_exact_center_deep_controls.md",
+  "reports/extension_exact_center_deep_controls.manifest.json",
+]

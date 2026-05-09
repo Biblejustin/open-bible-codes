@@ -1,0 +1,13 @@
+# Copy command shape for theological batch runs.
+#
+# python3 -m els batch \
+#   --terms terms/theological_terms.csv \
+#   --corpus MT_WLC=configs/example_oshb_wlc.toml \
+#   --corpus LXX=configs/example_ebible_grclxx.toml \
+#   --corpus TR_NT=configs/example_ebible_grctr.toml \
+#   --corpus BYZ_NT=configs/example_ebible_grcmt.toml \
+#   --corpus TCG_NT=configs/example_ebible_grctcgnt.toml \
+#   --corpus SBLGNT=configs/example_sblgnt.toml \
+#   --min-skip 2 --max-skip 50 \
+#   --out reports/theological_terms_counts.csv \
+#   --manifest-out reports/theological_terms_counts.manifest.json

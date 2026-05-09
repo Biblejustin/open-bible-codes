@@ -1,0 +1,9 @@
+name = "Non-Bible Greek Control: Perseus Iliad"
+language = "greek"
+
+[[sources]]
+name = "Perseus Iliad"
+format = "text"
+path = "../data/processed/nonbible_controls/greek_perseus_iliad.txt"
+ref = "Perseus Iliad"
+book = "Perseus Iliad"

@@ -1,0 +1,140 @@
+name = "targeted_version_presence"
+description = "Join requested modern/geopolitical/local exact version-presence rows with available controls and extension summaries."
+manifest_out = "reports/targeted_version_presence_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "targeted_version_presence"
+description = "Build targeted version-presence review tables from the broader Hebrew and Greek screening runs."
+argv = [
+  "-m",
+  "scripts.analyze_targeted_version_presence",
+  "--summary-out",
+  "reports/targeted_version_presence_summary.csv",
+  "--examples-out",
+  "reports/targeted_version_presence_examples.csv",
+  "--control-targets-out",
+  "reports/targeted_version_presence_control_targets.csv",
+  "--markdown-out",
+  "reports/targeted_version_presence.md",
+  "--manifest-out",
+  "reports/targeted_version_presence.manifest.json",
+]
+inputs = [
+  "scripts/analyze_targeted_version_presence.py",
+  "terms/modern_names_dates.csv",
+  "terms/prophetic_terms.csv",
+  "reports/hebrew_screening_version_presence/term_summary.csv",
+  "reports/greek_screening_version_presence/term_summary.csv",
+  "reports/hebrew_screening_version_presence/hit_patterns.csv",
+  "reports/greek_screening_version_presence/hit_patterns.csv",
+  "reports/targeted_paired_controls_summary.csv",
+  "reports/version_presence_extensions/extensions_hebrew_mt_wlc_summary.csv",
+  "reports/version_presence_extensions/extensions_hebrew_uhb_summary.csv",
+  "reports/version_presence_extensions/extensions_greek_tr_nt_summary.csv",
+  "reports/version_presence_extensions/extensions_greek_sblgnt_summary.csv",
+  "reports/version_presence_extensions/extensions_hebrew_mt_wlc_top.csv",
+  "reports/version_presence_extensions/extensions_hebrew_uhb_top.csv",
+  "reports/version_presence_extensions/extensions_greek_tr_nt_top.csv",
+  "reports/version_presence_extensions/extensions_greek_sblgnt_top.csv",
+]
+outputs = [
+  "reports/targeted_version_presence_summary.csv",
+  "reports/targeted_version_presence_examples.csv",
+  "reports/targeted_version_presence_control_targets.csv",
+  "reports/targeted_version_presence.md",
+  "reports/targeted_version_presence.manifest.json",
+]
+
+[[steps]]
+id = "targeted_version_presence_paired_controls"
+description = "Run paired controls for nonzero targeted version-presence rows in representative corpora."
+argv = [
+  "-m",
+  "scripts.analyze_targeted_paired_controls",
+  "--target-summary",
+  "reports/targeted_version_presence_control_targets.csv",
+  "--min-skip",
+  "2",
+  "--max-skip",
+  "100",
+  "--term-shuffle-samples",
+  "100",
+  "--random-samples",
+  "100",
+  "--jobs",
+  "0",
+  "--summary-out",
+  "reports/targeted_version_presence_paired_controls_summary.csv",
+  "--examples-out",
+  "reports/targeted_version_presence_paired_controls_examples.csv",
+  "--markdown-out",
+  "reports/targeted_version_presence_paired_controls.md",
+  "--manifest-out",
+  "reports/targeted_version_presence_paired_controls.manifest.json",
+]
+inputs = [
+  "reports/targeted_version_presence_control_targets.csv",
+  "scripts/analyze_targeted_paired_controls.py",
+  "els/statistics.py",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uhb.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/search.py",
+  "els/stats.py",
+]
+outputs = [
+  "reports/targeted_version_presence_paired_controls_summary.csv",
+  "reports/targeted_version_presence_paired_controls_examples.csv",
+  "reports/targeted_version_presence_paired_controls.md",
+  "reports/targeted_version_presence_paired_controls.manifest.json",
+]
+
+[[steps]]
+id = "targeted_version_presence_controlled_review"
+description = "Regenerate the targeted review with representative paired controls joined back in."
+argv = [
+  "-m",
+  "scripts.analyze_targeted_version_presence",
+  "--representative-controls",
+  "reports/targeted_version_presence_paired_controls_summary.csv",
+  "--summary-out",
+  "reports/targeted_version_presence_controlled_summary.csv",
+  "--examples-out",
+  "reports/targeted_version_presence_controlled_examples.csv",
+  "--control-targets-out",
+  "reports/targeted_version_presence_controlled_control_targets.csv",
+  "--markdown-out",
+  "reports/targeted_version_presence_controlled.md",
+  "--manifest-out",
+  "reports/targeted_version_presence_controlled.manifest.json",
+]
+inputs = [
+  "scripts/analyze_targeted_version_presence.py",
+  "terms/modern_names_dates.csv",
+  "terms/prophetic_terms.csv",
+  "reports/hebrew_screening_version_presence/term_summary.csv",
+  "reports/greek_screening_version_presence/term_summary.csv",
+  "reports/hebrew_screening_version_presence/hit_patterns.csv",
+  "reports/greek_screening_version_presence/hit_patterns.csv",
+  "reports/targeted_paired_controls_summary.csv",
+  "reports/targeted_version_presence_paired_controls_summary.csv",
+  "reports/version_presence_extensions/extensions_hebrew_mt_wlc_summary.csv",
+  "reports/version_presence_extensions/extensions_hebrew_uhb_summary.csv",
+  "reports/version_presence_extensions/extensions_greek_tr_nt_summary.csv",
+  "reports/version_presence_extensions/extensions_greek_sblgnt_summary.csv",
+  "reports/version_presence_extensions/extensions_hebrew_mt_wlc_top.csv",
+  "reports/version_presence_extensions/extensions_hebrew_uhb_top.csv",
+  "reports/version_presence_extensions/extensions_greek_tr_nt_top.csv",
+  "reports/version_presence_extensions/extensions_greek_sblgnt_top.csv",
+]
+outputs = [
+  "reports/targeted_version_presence_controlled_summary.csv",
+  "reports/targeted_version_presence_controlled_examples.csv",
+  "reports/targeted_version_presence_controlled_control_targets.csv",
+  "reports/targeted_version_presence_controlled.md",
+  "reports/targeted_version_presence_controlled.manifest.json",
+]

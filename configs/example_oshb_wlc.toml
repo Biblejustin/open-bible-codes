@@ -1,0 +1,7 @@
+name = "OSHB Westminster Leningrad Codex"
+language = "hebrew"
+
+[[sources]]
+name = "OSHB WLC"
+format = "oshb_wlc_dir"
+path = "../data/raw/oshb/wlc"

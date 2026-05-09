@@ -1,0 +1,17 @@
+term_id,concept,category,language,term,notes
+nisan_h,Nisan,months,hebrew,ניסן,1st month
+iyyar_h,Iyyar,months,hebrew,אייר,2nd month
+sivan_h,Sivan,months,hebrew,סיון,3rd month
+tammuz_h,Tammuz,months,hebrew,תמוז,4th month
+av_h,Av,months,hebrew,אב,5th month; short - may be skipped
+elul_h,Elul,months,hebrew,אלול,6th month
+tishri_h,Tishri,months,hebrew,תשרי,7th month
+heshvan_h,Heshvan,months,hebrew,חשון,8th month
+kislev_h,Kislev,months,hebrew,כסלו,9th month
+tevet_h,Tevet,months,hebrew,טבת,10th month
+shevat_h,Shevat,months,hebrew,שבט,11th month
+adar_h,Adar,months,hebrew,אדר,12th month
+ziv_h,Ziv,months,hebrew,זו,pre-exilic; very short
+bul_h,Bul,months,hebrew,בול,pre-exilic
+ethanim_h,Ethanim,months,hebrew,אתנים,pre-exilic
+abib_h,Abib,months,hebrew,אביב,pre-exilic name for Nisan

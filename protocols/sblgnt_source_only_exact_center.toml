@@ -1,0 +1,74 @@
+name = "sblgnt_source_only_exact_center"
+description = "Post-discovery 1000/1000 controls for SBLGNT source-only exact-center extension rows."
+manifest_out = "reports/sblgnt_source_only_exact_center/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "paired_controls"
+description = "Run 1000/1000 controls for SBLGNT source-only exact-center αιμα and υιος rows."
+argv = [
+  "-m", "scripts.analyze_extension_paired_controls",
+  "--top-file", "reports/greek_exact_center_cohort/extensions_sblgnt_top.csv",
+  "--surface-context-hits", "reports/greek_exact_center_cohort/surface_context_hits.csv",
+  "--require-center-exact",
+  "--dedupe-targets",
+  "--include-overlap-key", "αιμα|14|forward|before_plus_term_plus_after|ναιμανο|ναιμανο",
+  "--include-overlap-key", "υιοσ|25|forward|before_plus_term|ουουιοσ|ουουιοσ",
+  "--term-control-samples", "1000",
+  "--random-control-samples", "1000",
+  "--summary-out", "reports/sblgnt_source_only_exact_center/paired_controls_summary.csv",
+  "--examples-out", "reports/sblgnt_source_only_exact_center/paired_controls_examples.csv",
+  "--markdown-out", "reports/sblgnt_source_only_exact_center/paired_controls.md",
+  "--manifest-out", "reports/sblgnt_source_only_exact_center/paired_controls.manifest.json",
+]
+inputs = [
+  "scripts/analyze_extension_paired_controls.py",
+  "reports/greek_exact_center_cohort/surface_context_hits.csv",
+  "reports/greek_exact_center_cohort/extensions_sblgnt_top.csv",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/sblgnt_source_only_exact_center/paired_controls_summary.csv",
+  "reports/sblgnt_source_only_exact_center/paired_controls_examples.csv",
+  "reports/sblgnt_source_only_exact_center/paired_controls.md",
+  "reports/sblgnt_source_only_exact_center/paired_controls.manifest.json",
+]
+
+[[steps]]
+id = "context_review"
+description = "Build control-row-only context and letter-path review for SBLGNT source-only rows."
+argv = [
+  "-m", "scripts.analyze_extension_context_review",
+  "--top-file", "reports/greek_exact_center_cohort/extensions_sblgnt_top.csv",
+  "--controls", "reports/sblgnt_source_only_exact_center/paired_controls_summary.csv",
+  "--surface-context-hits", "reports/greek_exact_center_cohort/surface_context_hits.csv",
+  "--require-center-exact",
+  "--require-control-row",
+  "--dedupe-targets",
+  "--title", "SBLGNT Source-Only Exact-Center Review",
+  "--description", "Manual context and letter-path review for post-discovery SBLGNT source-only exact-center extension rows.",
+  "--summary-out", "reports/sblgnt_source_only_exact_center/context_review_summary.csv",
+  "--markdown-out", "reports/sblgnt_source_only_exact_center/context_review.md",
+  "--letter-paths-out", "reports/sblgnt_source_only_exact_center/letter_paths.md",
+  "--manifest-out", "reports/sblgnt_source_only_exact_center/context_review.manifest.json",
+]
+inputs = [
+  "scripts/analyze_extension_context_review.py",
+  "reports/greek_exact_center_cohort/surface_context_hits.csv",
+  "reports/greek_exact_center_cohort/extensions_sblgnt_top.csv",
+  "reports/sblgnt_source_only_exact_center/paired_controls_summary.csv",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/normalization.py",
+]
+outputs = [
+  "reports/sblgnt_source_only_exact_center/context_review_summary.csv",
+  "reports/sblgnt_source_only_exact_center/context_review.md",
+  "reports/sblgnt_source_only_exact_center/letter_paths.md",
+  "reports/sblgnt_source_only_exact_center/context_review.manifest.json",
+]

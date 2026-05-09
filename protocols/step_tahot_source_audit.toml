@@ -1,0 +1,52 @@
+name = "step_tahot_source_audit"
+description = "Download STEP TAHOT and compare it against current Hebrew MT-family corpora."
+manifest_out = "reports/step_tahot_source_audit/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 0
+
+[[steps]]
+id = "download_step_tahot"
+description = "Download STEP Bible TAHOT selected Hebrew OT files and convert selected rows to CSV."
+argv = ["-m", "scripts.download_step_tahot", "--refresh"]
+inputs = [
+  "scripts/download_step_tahot.py",
+]
+outputs = [
+  "data/processed/step/tahot.csv",
+  "data/processed/step/tahot.manifest.json",
+]
+
+[[steps]]
+id = "compare_step_tahot"
+description = "Align STEP_TAHOT against the existing Hebrew MT-family corpora and report normalized verse differences."
+argv = [
+  "-m", "scripts.analyze_mt_version_differences",
+  "--corpus", "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus", "UXLC=configs/example_uxlc.toml",
+  "--corpus", "MAM=configs/example_mam.toml",
+  "--corpus", "EBIBLE_WLC=configs/example_ebible_hebwlc.toml",
+  "--corpus", "UHB=configs/example_uhb.toml",
+  "--corpus", "STEP_TAHOT=configs/example_step_tahot.toml",
+  "--summary-out", "reports/mt_version_comparison_step_tahot/summary.csv",
+  "--diffs-out", "reports/mt_version_comparison_step_tahot/verse_differences.csv",
+  "--markdown-out", "reports/mt_version_comparison_step_tahot/mt_version_comparison_step_tahot.md",
+  "--manifest-out", "reports/mt_version_comparison_step_tahot/manifest.json",
+]
+inputs = [
+  "scripts/analyze_mt_version_differences.py",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_uhb.toml",
+  "configs/example_step_tahot.toml",
+  "data/processed/step/tahot.csv",
+  "els/corpus.py",
+  "els/normalization.py",
+]
+outputs = [
+  "reports/mt_version_comparison_step_tahot/summary.csv",
+  "reports/mt_version_comparison_step_tahot/verse_differences.csv",
+  "reports/mt_version_comparison_step_tahot/mt_version_comparison_step_tahot.md",
+  "reports/mt_version_comparison_step_tahot/manifest.json",
+]

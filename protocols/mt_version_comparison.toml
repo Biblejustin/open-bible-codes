@@ -1,0 +1,26 @@
+name = "mt_version_comparison"
+description = "Compare normalized Hebrew MT-family verse text across MT_WLC, UXLC, MAM, eBible WLC, and UHB."
+manifest_out = "reports/mt_version_comparison/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 0
+
+[[steps]]
+id = "compare_mt_versions"
+description = "Align Hebrew MT-family corpora by canonical book/chapter/verse and report normalized verse differences."
+argv = ["-m", "scripts.analyze_mt_version_differences"]
+inputs = [
+  "scripts/analyze_mt_version_differences.py",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_uhb.toml",
+  "els/corpus.py",
+  "els/normalization.py",
+]
+outputs = [
+  "reports/mt_version_comparison/summary.csv",
+  "reports/mt_version_comparison/verse_differences.csv",
+  "reports/mt_version_comparison/mt_version_comparison.md",
+  "reports/mt_version_comparison/manifest.json",
+]

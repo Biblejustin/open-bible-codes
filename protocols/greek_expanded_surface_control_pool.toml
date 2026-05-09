@@ -1,0 +1,34 @@
+name = "greek_expanded_surface_control_pool"
+description = "Real-word surface-frequency control pool for tightened expanded Greek surface rows."
+manifest_out = "reports/greek_expanded_surface_control_pool/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "surface_control_pool"
+description = "Build same-length real-word control candidates matched by Greek NT surface frequency."
+argv = [
+  "-m", "scripts.analyze_greek_surface_control_pool",
+  "--terms", "terms/greek_expanded_prospective_terms.csv",
+  "--selected", "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "--top-controls", "10",
+  "--frequencies-out", "reports/greek_expanded_surface_control_pool/term_surface_frequencies.csv",
+  "--matched-out", "reports/greek_expanded_surface_control_pool/matched_controls.csv",
+  "--markdown-out", "docs/GREEK_EXPANDED_SURFACE_CONTROL_POOL.md",
+  "--manifest-out", "reports/greek_expanded_surface_control_pool/manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_surface_control_pool.py",
+  "terms/greek_expanded_prospective_terms.csv",
+  "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+]
+outputs = [
+  "reports/greek_expanded_surface_control_pool/term_surface_frequencies.csv",
+  "reports/greek_expanded_surface_control_pool/matched_controls.csv",
+  "docs/GREEK_EXPANDED_SURFACE_CONTROL_POOL.md",
+  "reports/greek_expanded_surface_control_pool/manifest.json",
+]

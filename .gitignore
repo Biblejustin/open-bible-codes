@@ -1,0 +1,30 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+configs/*.local.toml
+
+# Raw/processed source texts can have separate licenses.
+data/raw/
+data/processed/
+data/cache/
+
+# Local exploratory output.
+*.log
+reports/*.csv
+reports/*.csv.gz
+reports/*.json
+reports/*.md
+reports/*.zip
+reports/**/*.csv
+reports/**/*.csv.gz
+reports/**/*.json
+reports/**/*.md
+reports/**/*.zip
+reports/wrr_1994/*.txt
+reports/wrr_1994/*.html
+reports/wrr_1994/*.pdf

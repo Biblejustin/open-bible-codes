@@ -1,0 +1,53 @@
+name = "all_codes_compound_extension_controls"
+description = "Post-screen paired controls for selected all-codes compound same-skip extensions."
+manifest_out = "reports/all_codes_compound_extension_controls/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "compound_extension_controls"
+description = "Compare compound extension rows against shuffled-term and random same-length controls."
+argv = [
+  "-m", "scripts.analyze_extension_paired_controls",
+  "--top-file", "reports/all_codes_followup_extensions/compound_extensions.csv",
+  "--term-control-samples", "250",
+  "--random-control-samples", "250",
+  "--seed", "2718",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--min-extension-length", "1",
+  "--match-kind-prefix", "",
+  "--dedupe-targets",
+  "--summary-out", "reports/all_codes_compound_extension_controls/summary.csv",
+  "--examples-out", "reports/all_codes_compound_extension_controls/examples.csv",
+  "--markdown-out", "docs/ALL_CODES_COMPOUND_EXTENSION_CONTROLS.md",
+  "--manifest-out", "reports/all_codes_compound_extension_controls/manifest.json",
+  "--title", "All-Codes Compound Extension Controls",
+  "--lead", "Post-screen paired controls for selected all-codes compound same-skip extension rows.",
+]
+inputs = [
+  "scripts/analyze_extension_paired_controls.py",
+  "reports/all_codes_followup_extensions/compound_extensions.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "configs/example_ebible_engkjv.toml",
+  "els/extensions.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/all_codes_compound_extension_controls/summary.csv",
+  "reports/all_codes_compound_extension_controls/examples.csv",
+  "docs/ALL_CODES_COMPOUND_EXTENSION_CONTROLS.md",
+  "reports/all_codes_compound_extension_controls/manifest.json",
+]

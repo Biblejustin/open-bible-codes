@@ -1,0 +1,984 @@
+name = "real_report_run"
+description = "Formal report assembly run over locked STEP_TAHOT, Greek exact-center, doxa follow-ups, expanded Greek surface, length-4 Greek surface, generated vocabulary-control outputs, and all-codes follow-up controls."
+manifest_out = "reports/real_report_run/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "preflight"
+description = "Verify clean tree, source paths, and forbidden account guard before report assembly."
+argv = ["-m", "scripts.preflight_real_report_run"]
+inputs = [
+  "scripts/preflight_real_report_run.py",
+  "protocols/real_report_run.toml",
+  "protocols/step_tahot_final_gate.toml",
+  "protocols/greek_pattern_versions.toml",
+  "protocols/greek_exact_center_final_gate.toml",
+  "protocols/doxa_four_source_claim_followup.toml",
+  "protocols/doxa_four_source_confirmatory_followup.toml",
+  "protocols/greek_expanded_surface_queue.toml",
+  "protocols/greek_expanded_surface_triage.toml",
+  "protocols/greek_expanded_surface_letter_paths.toml",
+  "protocols/greek_expanded_surface_control_pool.toml",
+  "protocols/greek_expanded_surface_control_evaluation.toml",
+  "protocols/greek_expanded_surface_available_control_evaluation.toml",
+  "protocols/greek_expanded_surface_followup.toml",
+  "protocols/greek_surface_length4_followup.toml",
+  "protocols/greek_surface_length4_vocabulary_controls.toml",
+  "protocols/hebrew_modern_geopolitical_version_presence.toml",
+  "protocols/hebrew_modern_geopolitical_controlled_review.toml",
+  "protocols/hebrew_screening_controlled_review.toml",
+  "protocols/hebrew_theology_prospective.toml",
+  "protocols/hebrew_theology_all_codes_collection.toml",
+  "protocols/hebrew_screening_all_codes_collection.toml",
+  "protocols/greek_screening_all_codes_collection.toml",
+  "protocols/all_codes_followup_selection.toml",
+  "protocols/all_codes_followup_letter_paths.toml",
+  "protocols/all_codes_followup_context.toml",
+  "protocols/all_codes_followup_extensions.toml",
+  "protocols/all_codes_compound_extension_controls.toml",
+  "protocols/all_codes_compound_extension_confirmatory.toml",
+  "protocols/all_codes_followup_review.toml",
+  "protocols/wrr_audit_counts.toml",
+  "docs/STEP_TAHOT_FINAL_GATE.md",
+  "docs/CLAIM_CATALOG.md",
+  "docs/BIBLE_CODE_DIGEST_AUDIT.md",
+  "docs/CRI_ELS_CRITIQUE_AUDIT.md",
+  "docs/THEWORDNOTES_ELS_AUDIT.md",
+  "docs/COSMIC_CODES_AUDIT.md",
+  "docs/MARK_TABATA_ISAIAH53_AUDIT.md",
+  "docs/FELCJO_RINGO_ALGORITHM_AUDIT.md",
+  "docs/AMANDASAURUS_BIBLECODE_PRIOR_ART_AUDIT.md",
+  "docs/BIBLE_CODES_ORG_AUDIT.md",
+  "docs/BIBLE_AND_SCIENCE_CODES_AUDIT.md",
+  "docs/RELIGIONS_WIKI_SCRIPTURAL_CODES_AUDIT.md",
+  "terms/bible_codes_org_claim_terms.csv",
+  "docs/GREEK_PATTERN_VERSION_SUMMARY.md",
+  "docs/GREEK_EXACT_CENTER_FINAL_GATE.md",
+  "docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_PREREGISTRATION.md",
+  "docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md",
+  "docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_PREREGISTRATION.md",
+  "docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md",
+  "docs/GREEK_EXPANDED_SURFACE_QUEUE.md",
+  "docs/GREEK_EXPANDED_SURFACE_TRIAGE.md",
+  "docs/GREEK_EXPANDED_SURFACE_LETTER_PATHS.md",
+  "docs/GREEK_EXPANDED_SURFACE_CONTROL_POOL.md",
+  "docs/GREEK_EXPANDED_SURFACE_CONTROL_EVALUATION.md",
+  "docs/GREEK_EXPANDED_SURFACE_AVAILABLE_CONTROL_POOL.md",
+  "docs/GREEK_EXPANDED_SURFACE_AVAILABLE_CONTROL_EVALUATION.md",
+  "docs/GREEK_EXPANDED_SURFACE_FOLLOWUP_REPORT.md",
+  "docs/GREEK_SURFACE_PROSPECTIVE_PREREGISTRATION.md",
+  "docs/GREEK_SURFACE_PROSPECTIVE_REPORT.md",
+  "docs/GREEK_SURFACE_PROSPECTIVE_QUEUE.md",
+  "docs/GREEK_SURFACE_PROSPECTIVE_TRIAGE.md",
+  "docs/GREEK_SURFACE_PROSPECTIVE_CONTROL_EVALUATION.md",
+  "docs/GREEK_SURFACE_PROSPECTIVE_LETTER_PATHS.md",
+  "docs/GREEK_SURFACE_LENGTH4_FOLLOWUP_TRIAGE.md",
+  "docs/GREEK_SURFACE_LENGTH4_CONTROL_POOL.md",
+  "docs/GREEK_SURFACE_LENGTH4_CONTROL_EVALUATION.md",
+  "docs/GREEK_SURFACE_LENGTH4_LETTER_PATHS.md",
+  "docs/GREEK_SURFACE_LENGTH4_VOCABULARY_CONTROLS.md",
+  "docs/GREEK_SURFACE_LENGTH4_VOCABULARY_CONTROL_POOL.md",
+  "docs/GREEK_SURFACE_LENGTH4_VOCABULARY_CONTROL_EVALUATION.md",
+  "docs/WRR_SOURCE_AUDIT.md",
+  "docs/WRR_REPLICATION_PLAN.md",
+  "docs/WRR_METHODOLOGY_GAPS.md",
+  "docs/WRR_CORRECTED_DISTANCE_NOTES.md",
+  "docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md",
+  "docs/STUDY_LOCK_MANIFESTS.md",
+  "docs/PROSPECTIVE_STUDY_PREREGISTRATION_TEMPLATE.md",
+  "docs/PROSPECTIVE_TERM_AUDITS.md",
+  "docs/BROADER_SEARCH_FINDINGS.md",
+  "docs/HEBREW_MODERN_GEOPOLITICAL_VERSION_PRESENCE.md",
+  "docs/HEBREW_MODERN_GEOPOLITICAL_CONTROLLED_REVIEW.md",
+  "docs/HEBREW_MODERN_GEOPOLITICAL_CONTROLLED_FINDINGS.md",
+  "docs/HEBREW_SCREENING_CONTROLLED_REVIEW.md",
+  "docs/HEBREW_SCREENING_CONTROLLED_FINDINGS.md",
+  "docs/HEBREW_THEOLOGY_PROSPECTIVE_PREREGISTRATION.md",
+  "docs/HEBREW_THEOLOGY_PROSPECTIVE_REPORT.md",
+  "docs/HEBREW_THEOLOGY_PROSPECTIVE_FINDINGS.md",
+  "docs/HEBREW_THEOLOGY_ALL_CODES_COLLECTION.md",
+  "docs/HEBREW_THEOLOGY_ALL_CODES_TRIAGE.md",
+  "docs/HEBREW_SCREENING_ALL_CODES_COLLECTION.md",
+  "docs/HEBREW_SCREENING_ALL_CODES_TRIAGE.md",
+  "docs/GREEK_SCREENING_ALL_CODES_COLLECTION.md",
+  "docs/GREEK_SCREENING_ALL_CODES_TRIAGE.md",
+  "docs/ALL_CODES_FOLLOWUP_SELECTION.md",
+  "docs/ALL_CODES_FOLLOWUP_LETTER_PATHS.md",
+  "docs/ALL_CODES_FOLLOWUP_CONTEXT.md",
+  "docs/ALL_CODES_FOLLOWUP_EXTENSIONS.md",
+  "docs/ALL_CODES_COMPOUND_EXTENSION_CONTROLS.md",
+  "docs/ALL_CODES_COMPOUND_EXTENSION_CONFIRMATORY_PREREGISTRATION.md",
+  "docs/ALL_CODES_COMPOUND_EXTENSION_CONFIRMATORY_CONTROLS.md",
+  "docs/ALL_CODES_FOLLOWUP_REVIEW.md",
+  "docs/CENTERED_OCCURRENCE_INDEX.md",
+  "docs/FINAL_REPORT_HIGHLIGHTS.md",
+  "docs/PROSPECTIVE_STUDY_READINESS.md",
+  "docs/PROSPECTIVE_STUDY_NEXT_LOCK.md",
+  "docs/CONSOLIDATED_FINDINGS.md",
+  "docs/FINAL_REPORT_OUTLINE.md",
+  "docs/FINAL_REPORT_DRAFT.md",
+  "docs/APOCRYPHA_BRIDGE_STUDY.md",
+  "docs/APOCRYPHA_SOURCE_COVERAGE.md",
+  "docs/APOCRYPHA_BRIDGE_CANDIDATES.md",
+  "docs/APOCRYPHA_BRIDGE_CONTEXT.md",
+  "docs/APOCRYPHA_BRIDGE_CONTROLS.md",
+  "docs/APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md",
+  "docs/APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md",
+  "docs/APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md",
+  "docs/APOCRYPHA_ONLY_COUNTS.md",
+  "docs/KJV_APOCRYPHA_ONLY_COUNTS.md",
+  "docs/KJV_APOCRYPHA_BRIDGE_CANDIDATES.md",
+  "docs/KJV_APOCRYPHA_BRIDGE_CONTEXT.md",
+  "docs/KJV_APOCRYPHA_BRIDGE_CONTROLS.md",
+  "docs/KJV_APOCRYPHA_BRIDGE_TERM_REVIEW.md",
+  "docs/KJV_APOCRYPHA_BRIDGE_TERM_SHUFFLED_CONTROLS_1000.md",
+  "docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_PREREGISTRATION.md",
+  "docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md",
+  "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md",
+  "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md",
+  "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md",
+  "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_250.md",
+  "docs/VERSION_DISTRIBUTION_INDEX.md",
+  "claims/claim_catalog.csv",
+  "terms/bible_code_digest_claim_terms.csv",
+  "terms/cri_els_critique_terms.csv",
+  "terms/thewordnotes_els_claim_terms.csv",
+  "terms/cosmic_codes_claim_terms.csv",
+  "terms/mark_tabata_isaiah53_claim_terms.csv",
+  "terms/bible_and_science_codes_terms.csv",
+  "terms/religions_wiki_scriptural_codes_terms.csv",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "configs/prospective_study_lanes.json",
+  "protocols/apocrypha_bridge_study.toml",
+  "protocols/kjv_apocrypha_bridge_shuffled_controls_250.toml",
+  "protocols/kjv_apocrypha_bridge_term_review.toml",
+  "protocols/kjv_apocrypha_bridge_term_shuffled_controls_1000.toml",
+  "protocols/kjv_apocrypha_bridge_confirmatory_controls_5000.toml",
+  "scripts/audit_apocrypha_coverage.py",
+  "scripts/analyze_apocrypha_bridge_shuffled_controls.py",
+  "scripts/analyze_apocrypha_bridge_term_shuffled_controls.py",
+  "scripts/summarize_kjv_apocrypha_bridge_terms.py",
+  "scripts/download_ebible_engkjv_apocrypha.py",
+  "scripts/build_study_lock_manifest.py",
+  "scripts/check_study_lock_manifest.py",
+  "scripts/check_preregistration_placeholders.py",
+  "scripts/audit_prospective_terms.py",
+  "scripts/filter_prospective_terms.py",
+  "scripts/preflight_prospective_study.py",
+  "scripts/scaffold_prospective_study.py",
+  "scripts/check_prospective_study_lanes.py",
+  "scripts/build_greek_surface_prospective_report.py",
+  "scripts/build_greek_surface_vocabulary_controls.py",
+  "scripts/summarize_surface_all_codes.py",
+  "scripts/triage_surface_all_codes.py",
+  "scripts/select_all_codes_followup.py",
+  "scripts/analyze_all_codes_letter_paths.py",
+  "scripts/build_all_codes_context_excerpts.py",
+  "scripts/analyze_all_codes_extensions.py",
+  "scripts/analyze_extension_paired_controls.py",
+  "scripts/build_all_codes_followup_report.py",
+  "scripts/build_centered_occurrence_index.py",
+  "scripts/build_final_report_highlights.py",
+  "scripts/download_wrr_sources.py",
+  "scripts/import_wrr_terms.py",
+  "scripts/analyze_wrr_source_shapes.py",
+  "scripts/analyze_wrr_audit_counts.py",
+  "scripts/analyze_wrr_text_source.py",
+  "scripts/analyze_wrr_pair_audit.py",
+  "scripts/analyze_wrr_pair_controls.py",
+  "scripts/analyze_wrr_skip_caps.py",
+  "scripts/analyze_wrr_pair_table_reconciliation.py",
+  "scripts/analyze_wrr_perturbation_diagnostics.py",
+  "protocols/greek_surface_prospective.toml",
+  "protocols/greek_surface_length4_followup.toml",
+  "protocols/greek_surface_length4_vocabulary_controls.toml",
+  "protocols/hebrew_theology_all_codes_collection.toml",
+  "protocols/hebrew_screening_all_codes_collection.toml",
+  "protocols/greek_screening_all_codes_collection.toml",
+  "protocols/wrr_audit_counts.toml",
+  "terms/theological_terms.csv",
+  "terms/modern_names_dates.csv",
+  "terms/greek_nt_claim_terms.csv",
+  "terms/greek_expanded_prospective_terms.csv",
+  "terms/greek_surface_prospective_terms.csv",
+  "terms/null_controls.csv",
+  "terms/frequency_anchors.csv",
+]
+outputs = ["reports/real_report_run/preflight.json"]
+
+[[steps]]
+id = "step_tahot_final_gate"
+description = "Refresh STEP_TAHOT source-family final gate from locked generated inputs."
+argv = ["-m", "scripts.run_protocol", "protocols/step_tahot_final_gate.toml", "--resume"]
+inputs = [
+  "protocols/step_tahot_final_gate.toml",
+  "scripts/analyze_step_tahot_final_gate.py",
+  "reports/step_tahot_screening_version_presence/hit_patterns.csv",
+  "reports/step_tahot_policy_hits/step_tahot_only_policy_hits.csv",
+  "reports/step_tahot_control_version_presence/hit_patterns.csv",
+  "reports/step_tahot_control_policy_hits/step_tahot_only_policy_hits.csv",
+]
+outputs = ["reports/step_tahot_final_gate/protocol_run.manifest.json"]
+
+[[steps]]
+id = "greek_pattern_versions"
+description = "Refresh consolidated Greek exact-center source-version pattern matrix."
+argv = ["-m", "scripts.run_protocol", "protocols/greek_pattern_versions.toml", "--resume"]
+inputs = [
+  "protocols/greek_pattern_versions.toml",
+  "scripts/analyze_greek_pattern_versions.py",
+  "reports/greek_exact_center_cohort/pattern_presence.csv",
+  "reports/greek_exact_center_three_source/pattern_presence.csv",
+  "reports/greek_exact_center_four_source/pattern_presence.csv",
+  "reports/greek_exact_center_four_source/paired_controls_summary.csv",
+  "reports/greek_exact_center_three_source/paired_controls_summary.csv",
+  "reports/sblgnt_source_only_exact_center/paired_controls_summary.csv",
+  "reports/byz_source_only_exact_center/paired_controls_summary.csv",
+]
+outputs = ["reports/greek_pattern_versions/protocol_run.manifest.json"]
+
+[[steps]]
+id = "greek_exact_center_final_gate"
+description = "Refresh Greek exact-center candidate-type final gate."
+argv = ["-m", "scripts.run_protocol", "protocols/greek_exact_center_final_gate.toml", "--resume"]
+inputs = [
+  "protocols/greek_exact_center_final_gate.toml",
+  "scripts/analyze_greek_exact_center_final_gate.py",
+  "reports/greek_pattern_versions/summary.csv",
+  "reports/greek_exact_center_four_source/context_review_summary.csv",
+  "reports/greek_exact_center_three_source/context_review_summary.csv",
+  "reports/sblgnt_source_only_exact_center/context_review_summary.csv",
+  "reports/byz_source_only_exact_center/context_review_summary.csv",
+  "reports/greek_exact_center_three_source/synthetic_extension_baselines_summary.csv",
+]
+outputs = ["reports/greek_exact_center_final_gate/protocol_run.manifest.json"]
+
+[[steps]]
+id = "doxa_four_source_claim_followup"
+description = "Refresh the locked four-source doxa claim follow-up through resume-aware protocol stamps."
+argv = ["-m", "scripts.run_protocol", "protocols/doxa_four_source_claim_followup.toml", "--resume"]
+inputs = [
+  "protocols/doxa_four_source_claim_followup.toml",
+  "scripts/analyze_extension_paired_controls.py",
+  "scripts/analyze_extension_context_review.py",
+  "reports/greek_exact_center_four_source/surface_context_hits.csv",
+  "reports/greek_exact_center_four_source/extensions_tr_nt_top.csv",
+  "reports/greek_exact_center_four_source/extensions_byz_nt_top.csv",
+  "reports/greek_exact_center_four_source/extensions_tcg_nt_top.csv",
+  "reports/greek_exact_center_four_source/extensions_sblgnt_top.csv",
+]
+outputs = ["reports/doxa_four_source_claim_followup/protocol_run.manifest.json"]
+
+[[steps]]
+id = "doxa_four_source_claim_followup_report"
+description = "Refresh the tracked doxa follow-up report from locked outputs."
+argv = [
+  "-m", "scripts.build_doxa_four_source_claim_followup_report",
+  "--paired-summary", "reports/doxa_four_source_claim_followup/paired_controls_summary.csv",
+  "--context-summary", "reports/doxa_four_source_claim_followup/context_review_summary.csv",
+  "--protocol-manifest", "reports/doxa_four_source_claim_followup/protocol_run.manifest.json",
+  "--report-out", "docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md",
+  "--manifest-out", "reports/doxa_four_source_claim_followup/report.manifest.json",
+  "--preregistration-commit", "c91925b",
+]
+inputs = [
+  "scripts/build_doxa_four_source_claim_followup_report.py",
+  "reports/doxa_four_source_claim_followup/paired_controls_summary.csv",
+  "reports/doxa_four_source_claim_followup/context_review_summary.csv",
+  "reports/doxa_four_source_claim_followup/protocol_run.manifest.json",
+]
+outputs = [
+  "docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md",
+  "reports/doxa_four_source_claim_followup/report.manifest.json",
+]
+
+[[steps]]
+id = "doxa_four_source_confirmatory_followup"
+description = "Refresh the locked 20000/20000 four-source doxa confirmatory follow-up."
+argv = ["-m", "scripts.run_protocol", "protocols/doxa_four_source_confirmatory_followup.toml", "--resume"]
+inputs = [
+  "protocols/doxa_four_source_confirmatory_followup.toml",
+  "docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_PREREGISTRATION.md",
+  "scripts/analyze_extension_paired_controls.py",
+  "scripts/analyze_extension_context_review.py",
+  "reports/greek_exact_center_four_source/surface_context_hits.csv",
+  "reports/greek_exact_center_four_source/extensions_tr_nt_top.csv",
+  "reports/greek_exact_center_four_source/extensions_byz_nt_top.csv",
+  "reports/greek_exact_center_four_source/extensions_tcg_nt_top.csv",
+  "reports/greek_exact_center_four_source/extensions_sblgnt_top.csv",
+]
+outputs = ["reports/doxa_four_source_confirmatory_followup/protocol_run.manifest.json"]
+
+[[steps]]
+id = "doxa_four_source_confirmatory_followup_report"
+description = "Refresh the tracked doxa confirmatory follow-up report from locked outputs."
+argv = [
+  "-m", "scripts.build_doxa_four_source_claim_followup_report",
+  "--paired-summary", "reports/doxa_four_source_confirmatory_followup/paired_controls_summary.csv",
+  "--context-summary", "reports/doxa_four_source_confirmatory_followup/context_review_summary.csv",
+  "--protocol-manifest", "reports/doxa_four_source_confirmatory_followup/protocol_run.manifest.json",
+  "--report-out", "docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md",
+  "--manifest-out", "reports/doxa_four_source_confirmatory_followup/report.manifest.json",
+  "--report-title", "Doxa Four-Source Confirmatory Follow-Up Report",
+  "--preregistration-doc", "docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_PREREGISTRATION.md",
+  "--protocol-path", "protocols/doxa_four_source_confirmatory_followup.toml",
+  "--term-control-samples", "20000",
+  "--random-control-samples", "20000",
+  "--preregistration-commit", "79f3c73",
+]
+inputs = [
+  "scripts/build_doxa_four_source_claim_followup_report.py",
+  "reports/doxa_four_source_confirmatory_followup/paired_controls_summary.csv",
+  "reports/doxa_four_source_confirmatory_followup/context_review_summary.csv",
+  "reports/doxa_four_source_confirmatory_followup/protocol_run.manifest.json",
+]
+outputs = [
+  "docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md",
+  "reports/doxa_four_source_confirmatory_followup/report.manifest.json",
+]
+
+[[steps]]
+id = "greek_expanded_surface_queue"
+description = "Refresh the post-screen expanded Greek exact-center surface queue."
+argv = ["-m", "scripts.run_protocol", "protocols/greek_expanded_surface_queue.toml", "--resume"]
+inputs = [
+  "protocols/greek_expanded_surface_queue.toml",
+  "scripts/analyze_greek_expanded_surface_queue.py",
+  "reports/greek_expanded_prospective_exact_center/surface_context_hits.csv",
+]
+outputs = ["reports/greek_expanded_surface_queue/protocol_run.manifest.json"]
+
+[[steps]]
+id = "greek_expanded_surface_triage"
+description = "Refresh the tighter post-screen expanded Greek surface triage."
+argv = ["-m", "scripts.run_protocol", "protocols/greek_expanded_surface_triage.toml", "--resume"]
+inputs = [
+  "protocols/greek_expanded_surface_triage.toml",
+  "scripts/analyze_greek_expanded_surface_triage.py",
+  "terms/greek_expanded_prospective_terms.csv",
+  "reports/greek_expanded_surface_queue/surface_patterns.csv",
+  "reports/greek_expanded_surface_queue/term_summary.csv",
+]
+outputs = ["reports/greek_expanded_surface_triage/protocol_run.manifest.json"]
+
+[[steps]]
+id = "greek_expanded_surface_letter_paths"
+description = "Refresh letter-path audit sheet for selected Greek surface rows."
+argv = ["-m", "scripts.run_protocol", "protocols/greek_expanded_surface_letter_paths.toml", "--resume"]
+inputs = [
+  "protocols/greek_expanded_surface_letter_paths.toml",
+  "scripts/analyze_greek_surface_letter_paths.py",
+  "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+]
+outputs = ["reports/greek_expanded_surface_letter_paths/protocol_run.manifest.json"]
+
+[[steps]]
+id = "greek_expanded_surface_control_pool"
+description = "Refresh the real-word surface-frequency control pool."
+argv = ["-m", "scripts.run_protocol", "protocols/greek_expanded_surface_control_pool.toml", "--resume"]
+inputs = [
+  "protocols/greek_expanded_surface_control_pool.toml",
+  "scripts/analyze_greek_surface_control_pool.py",
+  "terms/greek_expanded_prospective_terms.csv",
+  "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+]
+outputs = ["reports/greek_expanded_surface_control_pool/protocol_run.manifest.json"]
+
+[[steps]]
+id = "greek_expanded_surface_control_evaluation"
+description = "Refresh the exploratory matched-control evaluation for surface triage rows."
+argv = ["-m", "scripts.run_protocol", "protocols/greek_expanded_surface_control_evaluation.toml", "--resume"]
+inputs = [
+  "protocols/greek_expanded_surface_control_evaluation.toml",
+  "scripts/analyze_greek_surface_control_evaluation.py",
+  "reports/greek_expanded_surface_triage/term_cohort.csv",
+  "reports/greek_expanded_surface_control_pool/matched_controls.csv",
+]
+outputs = ["reports/greek_expanded_surface_control_evaluation/protocol_run.manifest.json"]
+
+[[steps]]
+id = "greek_expanded_surface_available_control_evaluation"
+description = "Refresh the all-available matched-control surface evaluation."
+argv = ["-m", "scripts.run_protocol", "protocols/greek_expanded_surface_available_control_evaluation.toml", "--resume"]
+inputs = [
+  "protocols/greek_expanded_surface_available_control_evaluation.toml",
+  "scripts/analyze_greek_surface_control_pool.py",
+  "scripts/analyze_greek_surface_control_evaluation.py",
+  "terms/greek_expanded_prospective_terms.csv",
+  "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "reports/greek_expanded_surface_triage/term_cohort.csv",
+]
+outputs = ["reports/greek_expanded_surface_available_control_evaluation/protocol_run.manifest.json"]
+
+[[steps]]
+id = "greek_expanded_surface_followup"
+description = "Refresh compact selected-row Greek surface follow-up report."
+argv = ["-m", "scripts.run_protocol", "protocols/greek_expanded_surface_followup.toml", "--resume"]
+inputs = [
+  "protocols/greek_expanded_surface_followup.toml",
+  "scripts/build_greek_surface_followup_report.py",
+  "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "reports/greek_expanded_surface_letter_paths/path_summary.csv",
+  "reports/greek_expanded_surface_letter_paths/protocol_run.manifest.json",
+  "reports/greek_expanded_surface_available_control_evaluation/summary.csv",
+  "reports/greek_expanded_surface_available_control_evaluation/protocol_run.manifest.json",
+]
+outputs = ["reports/greek_expanded_surface_followup/protocol_run.manifest.json"]
+
+[[steps]]
+id = "greek_surface_length4_followup"
+description = "Refresh post-discovery length-4 Greek surface follow-up controls and letter paths."
+argv = ["-m", "scripts.run_protocol", "protocols/greek_surface_length4_followup.toml", "--resume"]
+inputs = [
+  "protocols/greek_surface_length4_followup.toml",
+  "scripts/analyze_greek_expanded_surface_triage.py",
+  "scripts/analyze_greek_surface_control_pool.py",
+  "scripts/analyze_greek_surface_control_evaluation.py",
+  "scripts/analyze_greek_surface_letter_paths.py",
+  "terms/greek_surface_prospective_terms.csv",
+  "reports/greek_surface_prospective/surface_patterns.csv",
+  "reports/greek_surface_prospective/term_summary.csv",
+]
+outputs = ["reports/greek_surface_length4_followup/protocol_run.manifest.json"]
+
+[[steps]]
+id = "greek_surface_length4_vocabulary_controls"
+description = "Refresh post-discovery length-4 generated Greek vocabulary controls."
+argv = ["-m", "scripts.run_protocol", "protocols/greek_surface_length4_vocabulary_controls.toml", "--resume"]
+inputs = [
+  "protocols/greek_surface_length4_vocabulary_controls.toml",
+  "scripts/build_greek_surface_vocabulary_controls.py",
+  "scripts/analyze_greek_expanded_surface_queue.py",
+  "scripts/analyze_greek_expanded_surface_triage.py",
+  "scripts/analyze_greek_surface_control_pool.py",
+  "scripts/analyze_greek_surface_control_evaluation.py",
+  "reports/greek_surface_length4_followup/selected_patterns.csv",
+  "terms/greek_surface_prospective_terms.csv",
+]
+outputs = ["reports/greek_surface_length4_vocab_controls/protocol_run.manifest.json"]
+
+[[steps]]
+id = "wrr_audit_counts"
+description = "Refresh WRR2 source/import/count smoke audit; not the WRR statistic."
+argv = ["-m", "scripts.run_protocol", "protocols/wrr_audit_counts.toml", "--resume"]
+inputs = [
+  "protocols/wrr_audit_counts.toml",
+  "scripts/download_wrr_sources.py",
+  "scripts/import_wrr_terms.py",
+  "scripts/analyze_wrr_audit_counts.py",
+  "scripts/analyze_wrr_text_source.py",
+  "scripts/analyze_wrr_pair_audit.py",
+  "scripts/analyze_wrr_pair_controls.py",
+  "scripts/analyze_wrr_skip_caps.py",
+  "scripts/analyze_wrr_pair_table_reconciliation.py",
+  "scripts/analyze_wrr_perturbation_diagnostics.py",
+  "scripts/analyze_gog_magog_pairs.py",
+  "configs/example_koren_genesis.toml",
+  "els/wrr.py",
+  "els/corpus.py",
+  "els/normalization.py",
+  "els/search.py",
+]
+outputs = ["reports/wrr_1994/audit_counts_protocol.manifest.json"]
+
+[[steps]]
+id = "hebrew_modern_geopolitical_controlled_review"
+description = "Refresh broad Hebrew modern/geopolitical representative-control review."
+argv = ["-m", "scripts.run_protocol", "protocols/hebrew_modern_geopolitical_controlled_review.toml", "--resume"]
+inputs = [
+  "protocols/hebrew_modern_geopolitical_controlled_review.toml",
+  "scripts/analyze_targeted_version_presence.py",
+  "scripts/analyze_targeted_paired_controls.py",
+  "reports/hebrew_modern_geopolitical_version_presence/term_summary.csv",
+  "reports/hebrew_modern_geopolitical_version_presence/hit_patterns.csv",
+]
+outputs = ["reports/hebrew_modern_geopolitical_controlled_review/protocol.manifest.json"]
+
+[[steps]]
+id = "hebrew_screening_controlled_review"
+description = "Refresh broader Hebrew screening representative-control review."
+argv = ["-m", "scripts.run_protocol", "protocols/hebrew_screening_controlled_review.toml", "--resume"]
+inputs = [
+  "protocols/hebrew_screening_controlled_review.toml",
+  "scripts/analyze_targeted_version_presence.py",
+  "scripts/analyze_targeted_paired_controls.py",
+  "reports/hebrew_screening_version_presence/term_summary.csv",
+  "reports/hebrew_screening_version_presence/hit_patterns.csv",
+]
+outputs = ["reports/hebrew_screening_controlled_review/protocol.manifest.json"]
+
+[[steps]]
+id = "hebrew_theology_all_codes_collection"
+description = "Refresh relaxed all-codes collection for the locked Hebrew theology cohort."
+argv = ["-m", "scripts.run_protocol", "protocols/hebrew_theology_all_codes_collection.toml", "--resume"]
+inputs = [
+  "protocols/hebrew_theology_all_codes_collection.toml",
+  "scripts/summarize_surface_all_codes.py",
+  "scripts/triage_surface_all_codes.py",
+  "terms/hebrew_theology_prospective_terms.csv",
+]
+outputs = ["reports/hebrew_theology_all_codes/protocol_run.manifest.json"]
+
+[[steps]]
+id = "hebrew_screening_all_codes_collection"
+description = "Refresh relaxed all-codes collection for the broader Hebrew screening cohort."
+argv = ["-m", "scripts.run_protocol", "protocols/hebrew_screening_all_codes_collection.toml", "--resume"]
+inputs = [
+  "protocols/hebrew_screening_all_codes_collection.toml",
+  "scripts/summarize_surface_all_codes.py",
+  "scripts/triage_surface_all_codes.py",
+  "terms/theological_terms.csv",
+  "terms/modern_names_dates.csv",
+  "terms/table_of_nations.csv",
+  "terms/prophetic_terms.csv",
+  "terms/hebrew_claim_terms.csv",
+  "terms/biblical_tribes.csv",
+  "terms/biblical_festivals.csv",
+  "terms/biblical_calendar.csv",
+]
+outputs = ["reports/hebrew_screening_all_codes/protocol_run.manifest.json"]
+
+[[steps]]
+id = "greek_screening_all_codes_collection"
+description = "Refresh relaxed all-codes collection for the broader Greek screening cohort."
+argv = ["-m", "scripts.run_protocol", "protocols/greek_screening_all_codes_collection.toml", "--resume"]
+inputs = [
+  "protocols/greek_screening_all_codes_collection.toml",
+  "scripts/summarize_surface_all_codes.py",
+  "scripts/triage_surface_all_codes.py",
+  "terms/theological_terms.csv",
+  "terms/modern_names_dates.csv",
+  "terms/table_of_nations.csv",
+  "terms/prophetic_terms.csv",
+  "terms/greek_nt_claim_terms.csv",
+  "terms/biblical_tribes.csv",
+  "terms/biblical_festivals.csv",
+]
+outputs = ["reports/greek_screening_all_codes/protocol_run.manifest.json"]
+
+[[steps]]
+id = "all_codes_followup_selection"
+description = "Refresh compact manual-review selection from the relaxed all-codes triage queues."
+argv = ["-m", "scripts.run_protocol", "protocols/all_codes_followup_selection.toml", "--resume"]
+inputs = [
+  "protocols/all_codes_followup_selection.toml",
+  "scripts/select_all_codes_followup.py",
+  "scripts/triage_surface_all_codes.py",
+  "reports/hebrew_theology_all_codes/triage_queue.csv",
+  "reports/hebrew_screening_all_codes/triage_queue.csv",
+  "reports/greek_screening_all_codes/triage_queue.csv",
+]
+outputs = ["reports/all_codes_followup_selection/protocol_run.manifest.json"]
+
+[[steps]]
+id = "all_codes_followup_letter_paths"
+description = "Refresh letter-path audit for selected all-codes follow-up rows."
+argv = ["-m", "scripts.run_protocol", "protocols/all_codes_followup_letter_paths.toml", "--resume"]
+inputs = [
+  "protocols/all_codes_followup_letter_paths.toml",
+  "scripts/analyze_all_codes_letter_paths.py",
+  "scripts/select_all_codes_followup.py",
+  "reports/all_codes_followup_selection/selected_rows.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+]
+outputs = ["reports/all_codes_followup_letter_paths/protocol_run.manifest.json"]
+
+[[steps]]
+id = "all_codes_followup_context"
+description = "Refresh center/span text excerpts for selected all-codes rows."
+argv = ["-m", "scripts.run_protocol", "protocols/all_codes_followup_context.toml", "--resume"]
+inputs = [
+  "protocols/all_codes_followup_context.toml",
+  "scripts/build_all_codes_context_excerpts.py",
+  "scripts/analyze_all_codes_letter_paths.py",
+  "reports/all_codes_followup_selection/selected_rows.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+]
+outputs = ["reports/all_codes_followup_context/protocol_run.manifest.json"]
+
+[[steps]]
+id = "all_codes_followup_extensions"
+description = "Refresh same-skip before/after extension audit for selected all-codes rows."
+argv = ["-m", "scripts.run_protocol", "protocols/all_codes_followup_extensions.toml", "--resume"]
+inputs = [
+  "protocols/all_codes_followup_extensions.toml",
+  "scripts/analyze_all_codes_extensions.py",
+  "reports/all_codes_followup_letter_paths/path_summary.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+]
+outputs = ["reports/all_codes_followup_extensions/protocol_run.manifest.json"]
+
+[[steps]]
+id = "all_codes_compound_extension_controls"
+description = "Refresh row-local paired controls for all-codes compound same-skip extensions."
+argv = ["-m", "scripts.run_protocol", "protocols/all_codes_compound_extension_controls.toml", "--resume"]
+inputs = [
+  "protocols/all_codes_compound_extension_controls.toml",
+  "scripts/analyze_extension_paired_controls.py",
+  "reports/all_codes_followup_extensions/compound_extensions.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "els/extensions.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = ["reports/all_codes_compound_extension_controls/protocol_run.manifest.json"]
+
+[[steps]]
+id = "all_codes_compound_extension_confirmatory"
+description = "Refresh locked 5000/5000 controls for the selected all-codes יום יהוה compound extension key."
+argv = ["-m", "scripts.run_protocol", "protocols/all_codes_compound_extension_confirmatory.toml", "--resume"]
+inputs = [
+  "protocols/all_codes_compound_extension_confirmatory.toml",
+  "docs/ALL_CODES_COMPOUND_EXTENSION_CONFIRMATORY_PREREGISTRATION.md",
+  "scripts/analyze_extension_paired_controls.py",
+  "reports/all_codes_followup_extensions/compound_extensions.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "els/extensions.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = ["reports/all_codes_compound_extension_confirmatory/protocol_run.manifest.json"]
+
+[[steps]]
+id = "all_codes_followup_review"
+description = "Refresh compact manual-review packet for selected all-codes rows."
+argv = ["-m", "scripts.run_protocol", "protocols/all_codes_followup_review.toml", "--resume"]
+inputs = [
+  "protocols/all_codes_followup_review.toml",
+  "scripts/build_all_codes_followup_report.py",
+  "reports/all_codes_followup_selection/selected_rows.csv",
+  "reports/all_codes_followup_selection/manifest.json",
+  "reports/all_codes_followup_letter_paths/path_summary.csv",
+  "reports/all_codes_followup_letter_paths/letter_paths.csv",
+  "reports/all_codes_followup_letter_paths/manifest.json",
+  "reports/all_codes_followup_extensions/summary.csv",
+  "reports/all_codes_followup_extensions/manifest.json",
+  "reports/all_codes_compound_extension_controls/summary.csv",
+  "reports/all_codes_compound_extension_controls/manifest.json",
+  "reports/all_codes_compound_extension_confirmatory/summary.csv",
+  "reports/all_codes_compound_extension_confirmatory/manifest.json",
+]
+outputs = ["reports/all_codes_followup_review/protocol_run.manifest.json"]
+
+[[steps]]
+id = "centered_occurrence_index"
+description = "Refresh occurrence-first index for centered-self and relevant-center rows."
+argv = ["-m", "scripts.build_centered_occurrence_index"]
+inputs = [
+  "scripts/build_centered_occurrence_index.py",
+  "reports/all_codes_followup_review/review_summary.csv",
+  "reports/all_codes_followup_context/context_excerpts.csv",
+  "reports/dynamic_skip_focus/strong_full_span_exact_center_review_queue.csv",
+  "reports/dynamic_skip_focus/strong_full_span_exact_center_review_bundle.csv",
+  "reports/dynamic_skip_focus/strong_full_span_exact_center_original_language_findings.csv",
+  "reports/dynamic_skip_focus/gog_promoted_exact_center_source_review.csv",
+  "reports/dynamic_skip_focus/gog_length3_surface_control_review.csv",
+  "reports/apocrypha_bridge_context/context.csv",
+  "reports/kjv_apocrypha_bridge_context/context.csv",
+]
+outputs = [
+  "reports/centered_occurrence_index/centered_occurrences.csv",
+  "reports/centered_occurrence_index/presence_summary.csv",
+  "reports/centered_occurrence_index/manifest.json",
+]
+
+[[steps]]
+id = "kjv_apocrypha_bridge_term_shuffled_controls"
+description = "Run KJVA bridge term-level shuffled controls."
+argv = ["-m", "scripts.run_protocol", "protocols/kjv_apocrypha_bridge_term_shuffled_controls_1000.toml", "--resume"]
+inputs = [
+  "protocols/kjv_apocrypha_bridge_term_shuffled_controls_1000.toml",
+  "scripts/analyze_apocrypha_bridge_term_shuffled_controls.py",
+  "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+]
+outputs = ["reports/kjv_apocrypha_bridge_term_shuffled_controls_1000/protocol_run.manifest.json"]
+
+[[steps]]
+id = "kjv_apocrypha_bridge_term_review"
+description = "Build KJVA bridge term-level review from candidate, context, and control outputs."
+argv = [
+  "-m", "scripts.summarize_kjv_apocrypha_bridge_terms",
+  "--term-shuffled-summary", "reports/kjv_apocrypha_bridge_term_shuffled_controls_1000/term_summary.csv",
+]
+inputs = [
+  "scripts/summarize_kjv_apocrypha_bridge_terms.py",
+  "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+  "reports/kjv_apocrypha_bridge_context/context.csv",
+  "reports/kjv_apocrypha_bridge_controls/term_summary.csv",
+  "reports/kjv_apocrypha_bridge_shuffled_controls_250/summary.csv",
+  "reports/kjv_apocrypha_bridge_term_shuffled_controls_1000/term_summary.csv",
+]
+outputs = [
+  "reports/kjv_apocrypha_bridge_term_review/term_review.csv",
+  "docs/KJV_APOCRYPHA_BRIDGE_TERM_REVIEW.md",
+  "reports/kjv_apocrypha_bridge_term_review/manifest.json",
+]
+
+[[steps]]
+id = "kjv_apocrypha_bridge_confirmatory_controls"
+description = "Run locked 5000-sample KJVA bridge confirmatory controls."
+argv = ["-m", "scripts.run_protocol", "protocols/kjv_apocrypha_bridge_confirmatory_controls_5000.toml", "--resume"]
+inputs = [
+  "docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_PREREGISTRATION.md",
+  "protocols/kjv_apocrypha_bridge_confirmatory_controls_5000.toml",
+  "terms/kjv_apocrypha_bridge_confirmatory_terms.csv",
+  "scripts/analyze_apocrypha_bridge_term_shuffled_controls.py",
+  "scripts/analyze_apocrypha_bridge_shuffled_controls.py",
+  "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+]
+outputs = ["reports/kjv_apocrypha_bridge_confirmatory_controls_5000/protocol_run.manifest.json"]
+
+[[steps]]
+id = "final_report_highlights"
+description = "Build compact final-report highlight table from locked occurrence and catalog artifacts."
+argv = ["-m", "scripts.build_final_report_highlights"]
+inputs = [
+  "scripts/build_final_report_highlights.py",
+  "reports/centered_occurrence_index/presence_summary.csv",
+  "claims/claim_catalog.csv",
+]
+outputs = [
+  "reports/final_report_highlights/highlights.csv",
+  "reports/final_report_highlights/manifest.json",
+  "docs/FINAL_REPORT_HIGHLIGHTS.md",
+]
+
+[[steps]]
+id = "report_index"
+description = "Build generated report index for local CSV/JSON/Markdown outputs."
+argv = ["-m", "scripts.build_report_index", "--out", "reports/INDEX.md", "--json-out", "reports/index.json"]
+inputs = [
+  "scripts/build_report_index.py",
+  "els/report_index.py",
+  "reports/step_tahot_final_gate/manifest.json",
+  "reports/greek_pattern_versions/manifest.json",
+  "reports/greek_exact_center_final_gate/manifest.json",
+  "reports/doxa_four_source_claim_followup/paired_controls.manifest.json",
+  "reports/doxa_four_source_claim_followup/report.manifest.json",
+  "reports/doxa_four_source_confirmatory_followup/paired_controls.manifest.json",
+  "reports/doxa_four_source_confirmatory_followup/report.manifest.json",
+  "reports/greek_expanded_surface_queue/manifest.json",
+  "reports/greek_expanded_surface_triage/manifest.json",
+  "reports/greek_expanded_surface_letter_paths/manifest.json",
+  "reports/greek_expanded_surface_control_pool/manifest.json",
+  "reports/greek_expanded_surface_control_evaluation/manifest.json",
+  "reports/greek_expanded_surface_available_control_pool/manifest.json",
+  "reports/greek_expanded_surface_available_control_evaluation/manifest.json",
+  "reports/greek_expanded_surface_followup/report.manifest.json",
+  "reports/greek_surface_length4_followup/triage.manifest.json",
+  "reports/greek_surface_length4_followup/control_pool.manifest.json",
+  "reports/greek_surface_length4_followup/control_evaluation.manifest.json",
+  "reports/greek_surface_length4_followup/letter_paths.manifest.json",
+  "reports/greek_surface_length4_vocab_controls/terms.manifest.json",
+  "reports/greek_surface_length4_vocab_controls/control_pool.manifest.json",
+  "reports/greek_surface_length4_vocab_controls/control_evaluation.manifest.json",
+  "reports/wrr_1994/sources.manifest.json",
+  "reports/wrr_1994/koren_genesis_text_source.manifest.json",
+  "reports/wrr_1994/wrr_source_shapes.manifest.json",
+  "reports/wrr_1994/wrr2_genesis_count_summary.manifest.json",
+  "reports/wrr_1994/wrr2_genesis_pair_audit_len_5_8.manifest.json",
+  "reports/wrr_1994/wrr2_genesis_pair_controls_len_5_8.manifest.json",
+  "reports/wrr_1994/wrr2_skip_caps.manifest.json",
+  "reports/wrr_1994/wrr2_pair_table_reconciliation.manifest.json",
+  "reports/wrr_1994/wrr2_perturbation_diagnostics.manifest.json",
+  "reports/hebrew_modern_geopolitical_controlled_review/controlled.manifest.json",
+  "reports/hebrew_screening_controlled_review/controlled.manifest.json",
+  "reports/hebrew_theology_all_codes/summary.manifest.json",
+  "reports/hebrew_theology_all_codes/triage.manifest.json",
+  "reports/hebrew_screening_all_codes/summary.manifest.json",
+  "reports/hebrew_screening_all_codes/triage.manifest.json",
+  "reports/greek_screening_all_codes/summary.manifest.json",
+  "reports/greek_screening_all_codes/triage.manifest.json",
+  "reports/all_codes_followup_selection/manifest.json",
+  "reports/all_codes_followup_letter_paths/manifest.json",
+  "reports/all_codes_followup_context/manifest.json",
+  "reports/all_codes_followup_extensions/manifest.json",
+  "reports/all_codes_compound_extension_controls/manifest.json",
+  "reports/all_codes_compound_extension_confirmatory/protocol_run.manifest.json",
+  "reports/all_codes_compound_extension_confirmatory/manifest.json",
+  "reports/all_codes_followup_review/manifest.json",
+  "reports/centered_occurrence_index/manifest.json",
+  "reports/kjv_apocrypha_bridge_term_shuffled_controls_1000/manifest.json",
+  "reports/kjv_apocrypha_bridge_term_review/manifest.json",
+  "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/manifest.json",
+  "reports/final_report_highlights/manifest.json",
+]
+outputs = [
+  "reports/INDEX.md",
+  "reports/index.json",
+]
+
+[[steps]]
+id = "real_report_summary"
+description = "Build one compact formal report-run summary from locked outputs."
+argv = ["-m", "scripts.build_real_report_run_summary"]
+always_run = true
+inputs = [
+  "scripts/build_real_report_run_summary.py",
+  "reports/step_tahot_final_gate/manifest.json",
+  "reports/greek_exact_center_final_gate/summary.csv",
+  "reports/greek_pattern_versions/summary.csv",
+  "reports/doxa_four_source_claim_followup/paired_controls_summary.csv",
+  "reports/doxa_four_source_claim_followup/protocol_run.manifest.json",
+  "reports/doxa_four_source_claim_followup/report.manifest.json",
+  "reports/doxa_four_source_confirmatory_followup/paired_controls_summary.csv",
+  "reports/doxa_four_source_confirmatory_followup/protocol_run.manifest.json",
+  "reports/doxa_four_source_confirmatory_followup/report.manifest.json",
+  "reports/greek_expanded_surface_queue/term_summary.csv",
+  "reports/greek_expanded_surface_queue/surface_patterns.csv",
+  "reports/greek_expanded_surface_queue/protocol_run.manifest.json",
+  "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "reports/greek_expanded_surface_triage/term_cohort.csv",
+  "reports/greek_expanded_surface_triage/protocol_run.manifest.json",
+  "reports/greek_expanded_surface_letter_paths/path_summary.csv",
+  "reports/greek_expanded_surface_letter_paths/protocol_run.manifest.json",
+  "reports/greek_expanded_surface_control_pool/term_surface_frequencies.csv",
+  "reports/greek_expanded_surface_control_pool/matched_controls.csv",
+  "reports/greek_expanded_surface_control_pool/protocol_run.manifest.json",
+  "reports/greek_expanded_surface_control_evaluation/summary.csv",
+  "reports/greek_expanded_surface_control_evaluation/protocol_run.manifest.json",
+  "reports/greek_expanded_surface_available_control_evaluation/summary.csv",
+  "reports/greek_expanded_surface_available_control_evaluation/protocol_run.manifest.json",
+  "reports/greek_expanded_surface_followup/report.manifest.json",
+  "reports/greek_expanded_surface_followup/protocol_run.manifest.json",
+  "reports/greek_surface_length4_followup/selected_patterns.csv",
+  "reports/greek_surface_length4_followup/term_cohort.csv",
+  "reports/greek_surface_length4_followup/control_summary.csv",
+  "reports/greek_surface_length4_followup/path_summary.csv",
+  "reports/greek_surface_length4_followup/protocol_run.manifest.json",
+  "reports/greek_surface_length4_vocab_controls/terms.manifest.json",
+  "reports/greek_surface_length4_vocab_controls/control_summary.csv",
+  "reports/greek_surface_length4_vocab_controls/protocol_run.manifest.json",
+  "reports/wrr_1994/audit_counts_protocol.manifest.json",
+  "reports/wrr_1994/sources.manifest.json",
+  "reports/wrr_1994/koren_genesis_text_source.csv",
+  "reports/wrr_1994/wrr_source_shapes_summary.csv",
+  "reports/wrr_1994/wrr2_genesis_count_summary.csv",
+  "reports/wrr_1994/wrr2_genesis_pair_audit_len_5_8_concepts.csv",
+  "reports/wrr_1994/wrr2_genesis_pair_controls_len_5_8.csv",
+  "reports/wrr_1994/wrr2_skip_caps_summary.csv",
+  "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "reports/wrr_1994/wrr2_perturbation_diagnostics_summary.csv",
+  "reports/hebrew_modern_geopolitical_controlled_review/controlled.manifest.json",
+  "reports/hebrew_screening_controlled_review/controlled.manifest.json",
+  "reports/hebrew_theology_all_codes/protocol_run.manifest.json",
+  "reports/hebrew_theology_all_codes/triage.manifest.json",
+  "reports/hebrew_screening_all_codes/protocol_run.manifest.json",
+  "reports/hebrew_screening_all_codes/triage.manifest.json",
+  "reports/greek_screening_all_codes/protocol_run.manifest.json",
+  "reports/greek_screening_all_codes/triage.manifest.json",
+  "reports/all_codes_followup_selection/protocol_run.manifest.json",
+  "reports/all_codes_followup_selection/manifest.json",
+  "reports/all_codes_followup_letter_paths/protocol_run.manifest.json",
+  "reports/all_codes_followup_letter_paths/manifest.json",
+  "reports/all_codes_followup_letter_paths/path_summary.csv",
+  "reports/all_codes_followup_context/protocol_run.manifest.json",
+  "reports/all_codes_followup_context/manifest.json",
+  "reports/all_codes_followup_context/context_excerpts.csv",
+  "reports/all_codes_followup_extensions/protocol_run.manifest.json",
+  "reports/all_codes_followup_extensions/manifest.json",
+  "reports/all_codes_followup_extensions/compound_extensions.csv",
+  "reports/all_codes_followup_extensions/summary.csv",
+  "reports/all_codes_compound_extension_controls/protocol_run.manifest.json",
+  "reports/all_codes_compound_extension_controls/manifest.json",
+  "reports/all_codes_compound_extension_controls/summary.csv",
+  "reports/all_codes_compound_extension_confirmatory/protocol_run.manifest.json",
+  "reports/all_codes_compound_extension_confirmatory/manifest.json",
+  "reports/all_codes_compound_extension_confirmatory/summary.csv",
+  "docs/ALL_CODES_COMPOUND_EXTENSION_CONFIRMATORY_CONTROLS.md",
+  "reports/all_codes_followup_review/protocol_run.manifest.json",
+  "reports/all_codes_followup_review/manifest.json",
+  "reports/all_codes_followup_review/review_summary.csv",
+  "reports/centered_occurrence_index/presence_summary.csv",
+  "reports/centered_occurrence_index/manifest.json",
+  "reports/kjv_apocrypha_bridge_term_shuffled_controls_1000/term_summary.csv",
+  "reports/kjv_apocrypha_bridge_term_shuffled_controls_1000/manifest.json",
+  "docs/KJV_APOCRYPHA_BRIDGE_TERM_SHUFFLED_CONTROLS_1000.md",
+  "reports/kjv_apocrypha_bridge_term_review/term_review.csv",
+  "reports/kjv_apocrypha_bridge_term_review/manifest.json",
+  "docs/KJV_APOCRYPHA_BRIDGE_TERM_REVIEW.md",
+  "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/term_summary.csv",
+  "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/manifest.json",
+  "docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_PREREGISTRATION.md",
+  "docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md",
+  "docs/BIBLE_CODE_DIGEST_AUDIT.md",
+  "docs/CRI_ELS_CRITIQUE_AUDIT.md",
+  "docs/THEWORDNOTES_ELS_AUDIT.md",
+  "docs/COSMIC_CODES_AUDIT.md",
+  "docs/MARK_TABATA_ISAIAH53_AUDIT.md",
+  "docs/FELCJO_RINGO_ALGORITHM_AUDIT.md",
+  "docs/AMANDASAURUS_BIBLECODE_PRIOR_ART_AUDIT.md",
+  "docs/BIBLE_CODES_ORG_AUDIT.md",
+  "docs/BIBLE_AND_SCIENCE_CODES_AUDIT.md",
+  "docs/RELIGIONS_WIKI_SCRIPTURAL_CODES_AUDIT.md",
+  "terms/bible_code_digest_claim_terms.csv",
+  "terms/cri_els_critique_terms.csv",
+  "terms/thewordnotes_els_claim_terms.csv",
+  "terms/cosmic_codes_claim_terms.csv",
+  "terms/mark_tabata_isaiah53_claim_terms.csv",
+  "terms/bible_and_science_codes_terms.csv",
+  "terms/religions_wiki_scriptural_codes_terms.csv",
+  "claims/claim_catalog.csv",
+  "reports/final_report_highlights/highlights.csv",
+  "reports/final_report_highlights/manifest.json",
+  "docs/HEBREW_THEOLOGY_ALL_CODES_COLLECTION.md",
+  "docs/HEBREW_THEOLOGY_ALL_CODES_TRIAGE.md",
+  "docs/HEBREW_SCREENING_ALL_CODES_COLLECTION.md",
+  "docs/HEBREW_SCREENING_ALL_CODES_TRIAGE.md",
+  "docs/GREEK_SCREENING_ALL_CODES_COLLECTION.md",
+  "docs/GREEK_SCREENING_ALL_CODES_TRIAGE.md",
+  "docs/ALL_CODES_FOLLOWUP_SELECTION.md",
+  "docs/ALL_CODES_FOLLOWUP_LETTER_PATHS.md",
+  "docs/ALL_CODES_FOLLOWUP_CONTEXT.md",
+  "docs/ALL_CODES_FOLLOWUP_EXTENSIONS.md",
+  "docs/ALL_CODES_COMPOUND_EXTENSION_CONTROLS.md",
+  "docs/ALL_CODES_COMPOUND_EXTENSION_CONFIRMATORY_CONTROLS.md",
+  "docs/ALL_CODES_FOLLOWUP_REVIEW.md",
+  "docs/FINAL_REPORT_HIGHLIGHTS.md",
+  "reports/INDEX.md",
+]
+outputs = [
+  "reports/real_report_run/summary.md",
+  "reports/real_report_run/manifest.json",
+]

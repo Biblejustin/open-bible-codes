@@ -1,0 +1,20 @@
+term_id,concept,category,language,term,notes
+yom_h,Day,frequency,hebrew,יום,common content word anchor
+eretz_h,Earth,frequency,hebrew,ארץ,common content word anchor
+shamayim_h,Heavens,frequency,hebrew,שמים,common content word anchor
+bayit_h,House,frequency,hebrew,בית,common content word anchor
+ir_h,City,frequency,hebrew,עיר,short anchor; may be skipped
+am_h,People,frequency,hebrew,עם,short anchor; may be skipped
+yad_h,Hand,frequency,hebrew,יד,short anchor; may be skipped
+panim_h,Face,frequency,hebrew,פנים,common content word anchor
+lev_h,Heart,frequency,hebrew,לב,short anchor; may be skipped
+nefesh_h,Soul,frequency,hebrew,נפש,common content word anchor
+hemera_g,Day,frequency,greek,ημερα,common content word anchor
+ge_g,Earth,frequency,greek,γη,short anchor; may be skipped
+ouranos_g,Heavens,frequency,greek,ουρανος,common content word anchor
+oikos_g,House,frequency,greek,οικος,common content word anchor
+laos_g,People,frequency,greek,λαος,common content word anchor
+cheir_g,Hand,frequency,greek,χειρ,common content word anchor
+prosopon_g,Face,frequency,greek,προσωπον,common content word anchor
+kardia_g,Heart,frequency,greek,καρδια,common content word anchor
+psyche_g,Soul,frequency,greek,ψυχη,common content word anchor

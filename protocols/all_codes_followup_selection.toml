@@ -1,0 +1,46 @@
+name = "all_codes_followup_selection"
+description = "Compact manual-review follow-up selection from relaxed all-codes triage queues."
+manifest_out = "reports/all_codes_followup_selection/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "select"
+description = "Select a small, deduplicated review set while retaining hidden-path-only eligibility."
+argv = [
+  "-m",
+  "scripts.select_all_codes_followup",
+  "--queue",
+  "hebrew_theology=reports/hebrew_theology_all_codes/triage_queue.csv",
+  "--queue",
+  "hebrew_screening=reports/hebrew_screening_all_codes/triage_queue.csv",
+  "--queue",
+  "greek_screening=reports/greek_screening_all_codes/triage_queue.csv",
+  "--queue",
+  "english_screening=reports/english_screening_all_codes/triage_queue.csv",
+  "--max-rows-per-queue",
+  "30",
+  "--max-rows-per-bucket",
+  "3",
+  "--max-rows-per-term",
+  "2",
+  "--selected-out",
+  "reports/all_codes_followup_selection/selected_rows.csv",
+  "--markdown-out",
+  "docs/ALL_CODES_FOLLOWUP_SELECTION.md",
+  "--manifest-out",
+  "reports/all_codes_followup_selection/manifest.json",
+]
+inputs = [
+  "scripts/select_all_codes_followup.py",
+  "scripts/triage_surface_all_codes.py",
+  "reports/hebrew_theology_all_codes/triage_queue.csv",
+  "reports/hebrew_screening_all_codes/triage_queue.csv",
+  "reports/greek_screening_all_codes/triage_queue.csv",
+  "reports/english_screening_all_codes/triage_queue.csv",
+]
+outputs = [
+  "reports/all_codes_followup_selection/selected_rows.csv",
+  "docs/ALL_CODES_FOLLOWUP_SELECTION.md",
+  "reports/all_codes_followup_selection/manifest.json",
+]

@@ -1,0 +1,319 @@
+name = "modern_focus_extensions"
+description = "Capped same-skip extension screen for modern names, places, and local terms."
+manifest_out = "reports/modern_extension_screen/protocol_run.manifest.json"
+max_parallel = 3
+progress_interval_seconds = 15
+
+[[steps]]
+id = "modern_surface_hits"
+description = "Collect capped modern-term ELS hits across selected Hebrew and Greek corpora."
+argv = [
+  "-m", "els", "surface-context",
+  "--terms", "terms/modern_names_dates.csv",
+  "--corpus", "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus", "UHB=configs/example_uhb.toml",
+  "--corpus", "LXX=configs/example_ebible_grclxx.toml",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--min-skip", "2",
+  "--max-skip", "100",
+  "--min-term-length", "4",
+  "--max-hits-per-term", "25",
+  "--include-all",
+  "--jobs", "0",
+  "--out", "reports/modern_extension_screen/surface_context_hits.csv",
+  "--summary-out", "reports/modern_extension_screen/surface_context_summary.csv",
+  "--manifest-out", "reports/modern_extension_screen/surface_context.manifest.json",
+]
+inputs = [
+  "terms/modern_names_dates.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uhb.toml",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+  "els/surface.py",
+]
+outputs = [
+  "reports/modern_extension_screen/surface_context_hits.csv",
+  "reports/modern_extension_screen/surface_context_summary.csv",
+  "reports/modern_extension_screen/surface_context.manifest.json",
+]
+
+[[steps]]
+id = "extensions_mt_wlc"
+description = "Check same-skip surface-word and phrase extensions for MT_WLC modern hits."
+parallel_group = "extensions"
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_oshb_wlc.toml",
+  "--hits", "reports/modern_extension_screen/surface_context_hits.csv",
+  "--corpus-label", "MT_WLC",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/modern_extension_screen/extensions_mt_wlc.csv",
+  "--manifest-out", "reports/modern_extension_screen/extensions_mt_wlc.manifest.json",
+]
+inputs = [
+  "reports/modern_extension_screen/surface_context_hits.csv",
+  "configs/example_oshb_wlc.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/modern_extension_screen/extensions_mt_wlc.csv",
+  "reports/modern_extension_screen/extensions_mt_wlc.manifest.json",
+]
+
+[[steps]]
+id = "extensions_uhb"
+description = "Check same-skip surface-word and phrase extensions for UHB modern hits."
+parallel_group = "extensions"
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_uhb.toml",
+  "--hits", "reports/modern_extension_screen/surface_context_hits.csv",
+  "--corpus-label", "UHB",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/modern_extension_screen/extensions_uhb.csv",
+  "--manifest-out", "reports/modern_extension_screen/extensions_uhb.manifest.json",
+]
+inputs = [
+  "reports/modern_extension_screen/surface_context_hits.csv",
+  "configs/example_uhb.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/modern_extension_screen/extensions_uhb.csv",
+  "reports/modern_extension_screen/extensions_uhb.manifest.json",
+]
+
+[[steps]]
+id = "extensions_lxx"
+description = "Check same-skip surface-word and phrase extensions for LXX modern hits."
+parallel_group = "extensions"
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_ebible_grclxx.toml",
+  "--hits", "reports/modern_extension_screen/surface_context_hits.csv",
+  "--corpus-label", "LXX",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/modern_extension_screen/extensions_lxx.csv",
+  "--manifest-out", "reports/modern_extension_screen/extensions_lxx.manifest.json",
+]
+inputs = [
+  "reports/modern_extension_screen/surface_context_hits.csv",
+  "configs/example_ebible_grclxx.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/modern_extension_screen/extensions_lxx.csv",
+  "reports/modern_extension_screen/extensions_lxx.manifest.json",
+]
+
+[[steps]]
+id = "extensions_tr_nt"
+description = "Check same-skip surface-word and phrase extensions for TR_NT modern hits."
+parallel_group = "extensions"
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_ebible_grctr.toml",
+  "--hits", "reports/modern_extension_screen/surface_context_hits.csv",
+  "--corpus-label", "TR_NT",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/modern_extension_screen/extensions_tr_nt.csv",
+  "--manifest-out", "reports/modern_extension_screen/extensions_tr_nt.manifest.json",
+]
+inputs = [
+  "reports/modern_extension_screen/surface_context_hits.csv",
+  "configs/example_ebible_grctr.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/modern_extension_screen/extensions_tr_nt.csv",
+  "reports/modern_extension_screen/extensions_tr_nt.manifest.json",
+]
+
+[[steps]]
+id = "extensions_sblgnt"
+description = "Check same-skip surface-word and phrase extensions for SBLGNT modern hits."
+parallel_group = "extensions"
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_sblgnt.toml",
+  "--hits", "reports/modern_extension_screen/surface_context_hits.csv",
+  "--corpus-label", "SBLGNT",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/modern_extension_screen/extensions_sblgnt.csv",
+  "--manifest-out", "reports/modern_extension_screen/extensions_sblgnt.manifest.json",
+]
+inputs = [
+  "reports/modern_extension_screen/surface_context_hits.csv",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/modern_extension_screen/extensions_sblgnt.csv",
+  "reports/modern_extension_screen/extensions_sblgnt.manifest.json",
+]
+
+[[steps]]
+id = "summary_mt_wlc"
+description = "Summarize MT_WLC same-skip phrase extensions."
+parallel_group = "summaries"
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/modern_extension_screen/extensions_mt_wlc.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "4",
+  "--match-kind-prefix", "phrase_",
+  "--top", "50",
+  "--out", "reports/modern_extension_screen/extensions_mt_wlc_summary.csv",
+  "--top-out", "reports/modern_extension_screen/extensions_mt_wlc_top.csv",
+  "--manifest-out", "reports/modern_extension_screen/extensions_mt_wlc_summary.manifest.json",
+]
+inputs = [
+  "reports/modern_extension_screen/extensions_mt_wlc.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/modern_extension_screen/extensions_mt_wlc_summary.csv",
+  "reports/modern_extension_screen/extensions_mt_wlc_top.csv",
+  "reports/modern_extension_screen/extensions_mt_wlc_summary.manifest.json",
+]
+
+[[steps]]
+id = "summary_uhb"
+description = "Summarize UHB same-skip phrase extensions."
+parallel_group = "summaries"
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/modern_extension_screen/extensions_uhb.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "4",
+  "--match-kind-prefix", "phrase_",
+  "--top", "50",
+  "--out", "reports/modern_extension_screen/extensions_uhb_summary.csv",
+  "--top-out", "reports/modern_extension_screen/extensions_uhb_top.csv",
+  "--manifest-out", "reports/modern_extension_screen/extensions_uhb_summary.manifest.json",
+]
+inputs = [
+  "reports/modern_extension_screen/extensions_uhb.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/modern_extension_screen/extensions_uhb_summary.csv",
+  "reports/modern_extension_screen/extensions_uhb_top.csv",
+  "reports/modern_extension_screen/extensions_uhb_summary.manifest.json",
+]
+
+[[steps]]
+id = "summary_lxx"
+description = "Summarize LXX same-skip phrase extensions."
+parallel_group = "summaries"
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/modern_extension_screen/extensions_lxx.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "4",
+  "--match-kind-prefix", "phrase_",
+  "--top", "50",
+  "--out", "reports/modern_extension_screen/extensions_lxx_summary.csv",
+  "--top-out", "reports/modern_extension_screen/extensions_lxx_top.csv",
+  "--manifest-out", "reports/modern_extension_screen/extensions_lxx_summary.manifest.json",
+]
+inputs = [
+  "reports/modern_extension_screen/extensions_lxx.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/modern_extension_screen/extensions_lxx_summary.csv",
+  "reports/modern_extension_screen/extensions_lxx_top.csv",
+  "reports/modern_extension_screen/extensions_lxx_summary.manifest.json",
+]
+
+[[steps]]
+id = "summary_tr_nt"
+description = "Summarize TR_NT same-skip phrase extensions."
+parallel_group = "summaries"
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/modern_extension_screen/extensions_tr_nt.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "4",
+  "--match-kind-prefix", "phrase_",
+  "--top", "50",
+  "--out", "reports/modern_extension_screen/extensions_tr_nt_summary.csv",
+  "--top-out", "reports/modern_extension_screen/extensions_tr_nt_top.csv",
+  "--manifest-out", "reports/modern_extension_screen/extensions_tr_nt_summary.manifest.json",
+]
+inputs = [
+  "reports/modern_extension_screen/extensions_tr_nt.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/modern_extension_screen/extensions_tr_nt_summary.csv",
+  "reports/modern_extension_screen/extensions_tr_nt_top.csv",
+  "reports/modern_extension_screen/extensions_tr_nt_summary.manifest.json",
+]
+
+[[steps]]
+id = "summary_sblgnt"
+description = "Summarize SBLGNT same-skip phrase extensions."
+parallel_group = "summaries"
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/modern_extension_screen/extensions_sblgnt.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "4",
+  "--match-kind-prefix", "phrase_",
+  "--top", "50",
+  "--out", "reports/modern_extension_screen/extensions_sblgnt_summary.csv",
+  "--top-out", "reports/modern_extension_screen/extensions_sblgnt_top.csv",
+  "--manifest-out", "reports/modern_extension_screen/extensions_sblgnt_summary.manifest.json",
+]
+inputs = [
+  "reports/modern_extension_screen/extensions_sblgnt.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/modern_extension_screen/extensions_sblgnt_summary.csv",
+  "reports/modern_extension_screen/extensions_sblgnt_top.csv",
+  "reports/modern_extension_screen/extensions_sblgnt_summary.manifest.json",
+]

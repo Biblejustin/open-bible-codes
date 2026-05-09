@@ -1,0 +1,120 @@
+name = "hebrew_theology_all_codes_collection"
+description = "Relaxed all-codes collection for the Hebrew theology cohort with center-word surface flags."
+manifest_out = "reports/hebrew_theology_all_codes/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "surface_all_codes"
+description = "Retain every hidden-path row and annotate same/related center-word surface context."
+argv = [
+  "-m",
+  "els",
+  "surface-context",
+  "--terms",
+  "terms/hebrew_theology_prospective_terms.csv",
+  "--corpus",
+  "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus",
+  "UXLC=configs/example_uxlc.toml",
+  "--corpus",
+  "EBIBLE_WLC=configs/example_ebible_hebwlc.toml",
+  "--corpus",
+  "MAM=configs/example_mam.toml",
+  "--corpus",
+  "UHB=configs/example_uhb.toml",
+  "--min-skip",
+  "2",
+  "--max-skip",
+  "100",
+  "--direction",
+  "both",
+  "--min-term-length",
+  "4",
+  "--jobs",
+  "0",
+  "--include-all",
+  "--out",
+  "reports/hebrew_theology_all_codes/surface_all_codes.csv",
+  "--summary-out",
+  "reports/hebrew_theology_all_codes/surface_all_codes_summary.csv",
+  "--manifest-out",
+  "reports/hebrew_theology_all_codes/surface_all_codes.manifest.json",
+]
+inputs = [
+  "terms/hebrew_theology_prospective_terms.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+  "els/surface.py",
+]
+outputs = [
+  "reports/hebrew_theology_all_codes/surface_all_codes.csv",
+  "reports/hebrew_theology_all_codes/surface_all_codes_summary.csv",
+  "reports/hebrew_theology_all_codes/surface_all_codes.manifest.json",
+]
+
+[[steps]]
+id = "summary"
+description = "Summarize the relaxed all-codes collection."
+argv = [
+  "-m",
+  "scripts.summarize_surface_all_codes",
+  "--hits",
+  "reports/hebrew_theology_all_codes/surface_all_codes.csv",
+  "--summary",
+  "reports/hebrew_theology_all_codes/surface_all_codes_summary.csv",
+  "--title",
+  "Hebrew Theology All-Codes Collection",
+  "--markdown-out",
+  "docs/HEBREW_THEOLOGY_ALL_CODES_COLLECTION.md",
+  "--manifest-out",
+  "reports/hebrew_theology_all_codes/summary.manifest.json",
+]
+inputs = [
+  "scripts/summarize_surface_all_codes.py",
+  "reports/hebrew_theology_all_codes/surface_all_codes.csv",
+  "reports/hebrew_theology_all_codes/surface_all_codes_summary.csv",
+]
+outputs = [
+  "docs/HEBREW_THEOLOGY_ALL_CODES_COLLECTION.md",
+  "reports/hebrew_theology_all_codes/summary.manifest.json",
+]
+
+[[steps]]
+id = "triage"
+description = "Build a compact ranked triage queue from relaxed all-codes rows."
+argv = [
+  "-m",
+  "scripts.triage_surface_all_codes",
+  "--hits",
+  "reports/hebrew_theology_all_codes/surface_all_codes.csv",
+  "--summary",
+  "reports/hebrew_theology_all_codes/surface_all_codes_summary.csv",
+  "--controlled-summary",
+  "reports/hebrew_theology_prospective/controlled_summary.csv",
+  "--title",
+  "Hebrew Theology All-Codes Triage",
+  "--queue-out",
+  "reports/hebrew_theology_all_codes/triage_queue.csv",
+  "--markdown-out",
+  "docs/HEBREW_THEOLOGY_ALL_CODES_TRIAGE.md",
+  "--manifest-out",
+  "reports/hebrew_theology_all_codes/triage.manifest.json",
+]
+inputs = [
+  "scripts/triage_surface_all_codes.py",
+  "reports/hebrew_theology_all_codes/surface_all_codes.csv",
+  "reports/hebrew_theology_all_codes/surface_all_codes_summary.csv",
+  "reports/hebrew_theology_prospective/controlled_summary.csv",
+]
+outputs = [
+  "reports/hebrew_theology_all_codes/triage_queue.csv",
+  "docs/HEBREW_THEOLOGY_ALL_CODES_TRIAGE.md",
+  "reports/hebrew_theology_all_codes/triage.manifest.json",
+]

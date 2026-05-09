@@ -1,0 +1,373 @@
+name = "dynamic_skip_focus_counts"
+description = "Full-distance dynamic-skip counts for selected Hebrew, Greek, and English focus terms."
+manifest_out = "reports/dynamic_skip_focus/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 30
+
+[[steps]]
+id = "hebrew_dynamic_letters_per_term_counts"
+description = "Count Hebrew focus terms across MT-family corpora with max skip = floor(corpus letters / term letters)."
+argv = [
+  "scripts/run_dynamic_span_counter.py",
+  "--terms", "terms/dynamic_skip_focus_terms.csv",
+  "--corpus", "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus", "UXLC=configs/example_uxlc.toml",
+  "--corpus", "MAM=configs/example_mam.toml",
+  "--corpus", "EBIBLE_WLC=configs/example_ebible_hebwlc.toml",
+  "--corpus", "UHB=configs/example_uhb.toml",
+  "--min-skip", "2",
+  "--mode", "letters-per-term",
+  "--direction", "both",
+  "--out", "reports/dynamic_skip_focus/hebrew_pair_counts.csv",
+  "--manifest-out", "reports/dynamic_skip_focus/hebrew_pair_counts.manifest.json",
+]
+inputs = [
+  "terms/dynamic_skip_focus_terms.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_uhb.toml",
+  "scripts/run_dynamic_span_counter.py",
+  "scripts/cpp/dynamic_span_counter.cpp",
+  "els/search.py",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/dynamic_skip_focus/hebrew_pair_counts.csv",
+  "reports/dynamic_skip_focus/hebrew_pair_counts.manifest.json",
+]
+
+[[steps]]
+id = "hebrew_dynamic_full_span_counts"
+description = "Count Hebrew focus terms across MT-family corpora with the largest skip where each term still fits in the corpus."
+argv = [
+  "scripts/run_dynamic_span_counter.py",
+  "--terms", "terms/dynamic_skip_focus_terms.csv",
+  "--corpus", "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus", "UXLC=configs/example_uxlc.toml",
+  "--corpus", "MAM=configs/example_mam.toml",
+  "--corpus", "EBIBLE_WLC=configs/example_ebible_hebwlc.toml",
+  "--corpus", "UHB=configs/example_uhb.toml",
+  "--min-skip", "2",
+  "--mode", "full-span",
+  "--direction", "both",
+  "--out", "reports/dynamic_skip_focus/hebrew_full_span_pair_counts.csv",
+  "--manifest-out", "reports/dynamic_skip_focus/hebrew_full_span_pair_counts.manifest.json",
+]
+inputs = [
+  "terms/dynamic_skip_focus_terms.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_uhb.toml",
+  "scripts/run_dynamic_span_counter.py",
+  "scripts/cpp/dynamic_span_counter.cpp",
+  "els/search.py",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/dynamic_skip_focus/hebrew_full_span_pair_counts.csv",
+  "reports/dynamic_skip_focus/hebrew_full_span_pair_counts.manifest.json",
+]
+
+[[steps]]
+id = "greek_dynamic_letters_per_term_counts"
+description = "Count Greek focus terms across LXX and NT corpora with max skip = floor(corpus letters / term letters)."
+argv = [
+  "scripts/run_dynamic_span_counter.py",
+  "--terms", "terms/dynamic_skip_focus_terms.csv",
+  "--corpus", "LXX=configs/example_ebible_grclxx.toml",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "BYZ_NT=configs/example_ebible_grcmt.toml",
+  "--corpus", "TCG_NT=configs/example_ebible_grctcgnt.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--min-skip", "2",
+  "--mode", "letters-per-term",
+  "--direction", "both",
+  "--out", "reports/dynamic_skip_focus/greek_pair_counts.csv",
+  "--manifest-out", "reports/dynamic_skip_focus/greek_pair_counts.manifest.json",
+]
+inputs = [
+  "terms/dynamic_skip_focus_terms.csv",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "scripts/run_dynamic_span_counter.py",
+  "scripts/cpp/dynamic_span_counter.cpp",
+  "els/search.py",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/dynamic_skip_focus/greek_pair_counts.csv",
+  "reports/dynamic_skip_focus/greek_pair_counts.manifest.json",
+]
+
+[[steps]]
+id = "greek_dynamic_full_span_counts"
+description = "Count Greek focus terms across LXX and NT corpora with the largest skip where each term still fits in the corpus."
+argv = [
+  "scripts/run_dynamic_span_counter.py",
+  "--terms", "terms/dynamic_skip_focus_terms.csv",
+  "--corpus", "LXX=configs/example_ebible_grclxx.toml",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "BYZ_NT=configs/example_ebible_grcmt.toml",
+  "--corpus", "TCG_NT=configs/example_ebible_grctcgnt.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--min-skip", "2",
+  "--mode", "full-span",
+  "--direction", "both",
+  "--out", "reports/dynamic_skip_focus/greek_full_span_pair_counts.csv",
+  "--manifest-out", "reports/dynamic_skip_focus/greek_full_span_pair_counts.manifest.json",
+]
+inputs = [
+  "terms/dynamic_skip_focus_terms.csv",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "scripts/run_dynamic_span_counter.py",
+  "scripts/cpp/dynamic_span_counter.cpp",
+  "els/search.py",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/dynamic_skip_focus/greek_full_span_pair_counts.csv",
+  "reports/dynamic_skip_focus/greek_full_span_pair_counts.manifest.json",
+]
+
+[[steps]]
+id = "english_dynamic_letters_per_term_counts"
+description = "Count English focus terms across KJV with max skip = floor(corpus letters / term letters)."
+argv = [
+  "scripts/run_dynamic_span_counter.py",
+  "--terms", "terms/dynamic_skip_focus_terms.csv",
+  "--corpus", "KJV=configs/example_ebible_engkjv.toml",
+  "--min-skip", "2",
+  "--mode", "letters-per-term",
+  "--direction", "both",
+  "--out", "reports/dynamic_skip_focus/english_pair_counts.csv",
+  "--manifest-out", "reports/dynamic_skip_focus/english_pair_counts.manifest.json",
+]
+inputs = [
+  "terms/dynamic_skip_focus_terms.csv",
+  "configs/example_ebible_engkjv.toml",
+  "scripts/run_dynamic_span_counter.py",
+  "scripts/cpp/dynamic_span_counter.cpp",
+  "els/search.py",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/dynamic_skip_focus/english_pair_counts.csv",
+  "reports/dynamic_skip_focus/english_pair_counts.manifest.json",
+]
+
+[[steps]]
+id = "english_dynamic_full_span_counts"
+description = "Count English focus terms across KJV with the largest skip where each term still fits in the corpus."
+argv = [
+  "scripts/run_dynamic_span_counter.py",
+  "--terms", "terms/dynamic_skip_focus_terms.csv",
+  "--corpus", "KJV=configs/example_ebible_engkjv.toml",
+  "--min-skip", "2",
+  "--mode", "full-span",
+  "--direction", "both",
+  "--out", "reports/dynamic_skip_focus/english_full_span_pair_counts.csv",
+  "--manifest-out", "reports/dynamic_skip_focus/english_full_span_pair_counts.manifest.json",
+]
+inputs = [
+  "terms/dynamic_skip_focus_terms.csv",
+  "configs/example_ebible_engkjv.toml",
+  "scripts/run_dynamic_span_counter.py",
+  "scripts/cpp/dynamic_span_counter.cpp",
+  "els/search.py",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/dynamic_skip_focus/english_full_span_pair_counts.csv",
+  "reports/dynamic_skip_focus/english_full_span_pair_counts.manifest.json",
+]
+
+[[steps]]
+id = "nonbible_hebrew_dynamic_letters_per_term_counts"
+description = "Count Hebrew focus terms against Hebrew non-Bible controls with max skip = floor(corpus letters / term letters)."
+argv = [
+  "scripts/run_dynamic_span_counter.py",
+  "--terms", "terms/dynamic_skip_focus_terms.csv",
+  "--corpus", "HEB_PBY_BIALIK=configs/nonbible_hebrew_pby_bialik.toml",
+  "--corpus", "HEB_PBY_BRENNER=configs/nonbible_hebrew_pby_brenner.toml",
+  "--corpus", "HEB_PBY_AHAD_HAAM=configs/nonbible_hebrew_pby_ahad_haam.toml",
+  "--min-skip", "2",
+  "--mode", "letters-per-term",
+  "--direction", "both",
+  "--out", "reports/dynamic_skip_focus/nonbible_hebrew_pair_counts.csv",
+  "--manifest-out", "reports/dynamic_skip_focus/nonbible_hebrew_pair_counts.manifest.json",
+]
+inputs = [
+  "terms/dynamic_skip_focus_terms.csv",
+  "configs/nonbible_hebrew_pby_bialik.toml",
+  "configs/nonbible_hebrew_pby_brenner.toml",
+  "configs/nonbible_hebrew_pby_ahad_haam.toml",
+  "scripts/run_dynamic_span_counter.py",
+  "scripts/cpp/dynamic_span_counter.cpp",
+  "els/search.py",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/dynamic_skip_focus/nonbible_hebrew_pair_counts.csv",
+  "reports/dynamic_skip_focus/nonbible_hebrew_pair_counts.manifest.json",
+]
+
+[[steps]]
+id = "nonbible_hebrew_dynamic_full_span_counts"
+description = "Count Hebrew focus terms against Hebrew non-Bible controls with the largest skip where each term still fits."
+argv = [
+  "scripts/run_dynamic_span_counter.py",
+  "--terms", "terms/dynamic_skip_focus_terms.csv",
+  "--corpus", "HEB_PBY_BIALIK=configs/nonbible_hebrew_pby_bialik.toml",
+  "--corpus", "HEB_PBY_BRENNER=configs/nonbible_hebrew_pby_brenner.toml",
+  "--corpus", "HEB_PBY_AHAD_HAAM=configs/nonbible_hebrew_pby_ahad_haam.toml",
+  "--min-skip", "2",
+  "--mode", "full-span",
+  "--direction", "both",
+  "--out", "reports/dynamic_skip_focus/nonbible_hebrew_full_span_pair_counts.csv",
+  "--manifest-out", "reports/dynamic_skip_focus/nonbible_hebrew_full_span_pair_counts.manifest.json",
+]
+inputs = [
+  "terms/dynamic_skip_focus_terms.csv",
+  "configs/nonbible_hebrew_pby_bialik.toml",
+  "configs/nonbible_hebrew_pby_brenner.toml",
+  "configs/nonbible_hebrew_pby_ahad_haam.toml",
+  "scripts/run_dynamic_span_counter.py",
+  "scripts/cpp/dynamic_span_counter.cpp",
+  "els/search.py",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/dynamic_skip_focus/nonbible_hebrew_full_span_pair_counts.csv",
+  "reports/dynamic_skip_focus/nonbible_hebrew_full_span_pair_counts.manifest.json",
+]
+
+[[steps]]
+id = "nonbible_greek_dynamic_letters_per_term_counts"
+description = "Count Greek focus terms against Greek non-Bible controls with max skip = floor(corpus letters / term letters)."
+argv = [
+  "scripts/run_dynamic_span_counter.py",
+  "--terms", "terms/dynamic_skip_focus_terms.csv",
+  "--corpus", "GRC_PERSEUS_ILIAD=configs/nonbible_greek_perseus_iliad.toml",
+  "--corpus", "GRC_PERSEUS_ODYSSEY=configs/nonbible_greek_perseus_odyssey.toml",
+  "--corpus", "GRC_PERSEUS_HERODOTUS=configs/nonbible_greek_perseus_herodotus.toml",
+  "--min-skip", "2",
+  "--mode", "letters-per-term",
+  "--direction", "both",
+  "--out", "reports/dynamic_skip_focus/nonbible_greek_pair_counts.csv",
+  "--manifest-out", "reports/dynamic_skip_focus/nonbible_greek_pair_counts.manifest.json",
+]
+inputs = [
+  "terms/dynamic_skip_focus_terms.csv",
+  "configs/nonbible_greek_perseus_iliad.toml",
+  "configs/nonbible_greek_perseus_odyssey.toml",
+  "configs/nonbible_greek_perseus_herodotus.toml",
+  "scripts/run_dynamic_span_counter.py",
+  "scripts/cpp/dynamic_span_counter.cpp",
+  "els/search.py",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/dynamic_skip_focus/nonbible_greek_pair_counts.csv",
+  "reports/dynamic_skip_focus/nonbible_greek_pair_counts.manifest.json",
+]
+
+[[steps]]
+id = "nonbible_greek_dynamic_full_span_counts"
+description = "Count Greek focus terms against Greek non-Bible controls with the largest skip where each term still fits."
+argv = [
+  "scripts/run_dynamic_span_counter.py",
+  "--terms", "terms/dynamic_skip_focus_terms.csv",
+  "--corpus", "GRC_PERSEUS_ILIAD=configs/nonbible_greek_perseus_iliad.toml",
+  "--corpus", "GRC_PERSEUS_ODYSSEY=configs/nonbible_greek_perseus_odyssey.toml",
+  "--corpus", "GRC_PERSEUS_HERODOTUS=configs/nonbible_greek_perseus_herodotus.toml",
+  "--min-skip", "2",
+  "--mode", "full-span",
+  "--direction", "both",
+  "--out", "reports/dynamic_skip_focus/nonbible_greek_full_span_pair_counts.csv",
+  "--manifest-out", "reports/dynamic_skip_focus/nonbible_greek_full_span_pair_counts.manifest.json",
+]
+inputs = [
+  "terms/dynamic_skip_focus_terms.csv",
+  "configs/nonbible_greek_perseus_iliad.toml",
+  "configs/nonbible_greek_perseus_odyssey.toml",
+  "configs/nonbible_greek_perseus_herodotus.toml",
+  "scripts/run_dynamic_span_counter.py",
+  "scripts/cpp/dynamic_span_counter.cpp",
+  "els/search.py",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/dynamic_skip_focus/nonbible_greek_full_span_pair_counts.csv",
+  "reports/dynamic_skip_focus/nonbible_greek_full_span_pair_counts.manifest.json",
+]
+
+[[steps]]
+id = "nonbible_english_dynamic_letters_per_term_counts"
+description = "Count English focus terms against English non-Bible controls with max skip = floor(corpus letters / term letters)."
+argv = [
+  "scripts/run_dynamic_span_counter.py",
+  "--terms", "terms/dynamic_skip_focus_terms.csv",
+  "--corpus", "ENG_PG_SHAKESPEARE=configs/nonbible_english_pg_shakespeare.toml",
+  "--corpus", "ENG_PG_WAR_PEACE=configs/nonbible_english_pg_war_and_peace.toml",
+  "--corpus", "ENG_PG_MOBY_DICK=configs/nonbible_english_pg_moby_dick.toml",
+  "--min-skip", "2",
+  "--mode", "letters-per-term",
+  "--direction", "both",
+  "--out", "reports/dynamic_skip_focus/nonbible_english_pair_counts.csv",
+  "--manifest-out", "reports/dynamic_skip_focus/nonbible_english_pair_counts.manifest.json",
+]
+inputs = [
+  "terms/dynamic_skip_focus_terms.csv",
+  "configs/nonbible_english_pg_shakespeare.toml",
+  "configs/nonbible_english_pg_war_and_peace.toml",
+  "configs/nonbible_english_pg_moby_dick.toml",
+  "scripts/run_dynamic_span_counter.py",
+  "scripts/cpp/dynamic_span_counter.cpp",
+  "els/search.py",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/dynamic_skip_focus/nonbible_english_pair_counts.csv",
+  "reports/dynamic_skip_focus/nonbible_english_pair_counts.manifest.json",
+]
+
+[[steps]]
+id = "nonbible_english_dynamic_full_span_counts"
+description = "Count English focus terms against English non-Bible controls with the largest skip where each term still fits."
+argv = [
+  "scripts/run_dynamic_span_counter.py",
+  "--terms", "terms/dynamic_skip_focus_terms.csv",
+  "--corpus", "ENG_PG_SHAKESPEARE=configs/nonbible_english_pg_shakespeare.toml",
+  "--corpus", "ENG_PG_WAR_PEACE=configs/nonbible_english_pg_war_and_peace.toml",
+  "--corpus", "ENG_PG_MOBY_DICK=configs/nonbible_english_pg_moby_dick.toml",
+  "--min-skip", "2",
+  "--mode", "full-span",
+  "--direction", "both",
+  "--out", "reports/dynamic_skip_focus/nonbible_english_full_span_pair_counts.csv",
+  "--manifest-out", "reports/dynamic_skip_focus/nonbible_english_full_span_pair_counts.manifest.json",
+]
+inputs = [
+  "terms/dynamic_skip_focus_terms.csv",
+  "configs/nonbible_english_pg_shakespeare.toml",
+  "configs/nonbible_english_pg_war_and_peace.toml",
+  "configs/nonbible_english_pg_moby_dick.toml",
+  "scripts/run_dynamic_span_counter.py",
+  "scripts/cpp/dynamic_span_counter.cpp",
+  "els/search.py",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/dynamic_skip_focus/nonbible_english_full_span_pair_counts.csv",
+  "reports/dynamic_skip_focus/nonbible_english_full_span_pair_counts.manifest.json",
+]

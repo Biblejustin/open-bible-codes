@@ -1,0 +1,42 @@
+name = "kjv_apocrypha_bridge_confirmatory_controls_5000"
+description = "Locked 5000-sample post-screen confirmatory shuffled controls for 15 KJVA apocrypha bridge terms."
+manifest_out = "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 30
+
+[[steps]]
+id = "kjv_bridge_confirmatory_controls_5000"
+description = "Compare the 15 registered KJVA bridge terms with 5000 shuffled apocrypha-block controls."
+argv = [
+  "-m", "scripts.analyze_apocrypha_bridge_term_shuffled_controls",
+  "--canonical-label", "KJVA Confirmatory",
+  "--canonical-config", "configs/example_ebible_engkjv_apocrypha.toml",
+  "--terms", "terms/kjv_apocrypha_bridge_confirmatory_terms.csv",
+  "--observed", "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+  "--samples", "5000",
+  "--jobs", "0",
+  "--resume-samples",
+  "--sample-out", "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/sample_summary.csv",
+  "--term-sample-out", "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/term_samples.csv",
+  "--term-summary-out", "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/term_summary.csv",
+  "--markdown-out", "docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md",
+  "--manifest-out", "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/manifest.json",
+]
+inputs = [
+  "docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_PREREGISTRATION.md",
+  "scripts/analyze_apocrypha_bridge_term_shuffled_controls.py",
+  "scripts/analyze_apocrypha_bridge_shuffled_controls.py",
+  "scripts/analyze_apocrypha_bridge_candidates.py",
+  "scripts/analyze_apocrypha_bridge_controls.py",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "data/processed/ebible/eng-kjv.csv",
+  "terms/kjv_apocrypha_bridge_confirmatory_terms.csv",
+  "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+]
+outputs = [
+  "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/sample_summary.csv",
+  "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/term_samples.csv",
+  "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/term_summary.csv",
+  "docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md",
+  "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/manifest.json",
+]

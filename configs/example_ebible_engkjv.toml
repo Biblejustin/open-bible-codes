@@ -1,0 +1,12 @@
+name = "eBible English KJV"
+language = "english"
+
+[[sources]]
+name = "eBible ENGKJV"
+format = "csv"
+path = "../data/processed/ebible/eng-kjv2006.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

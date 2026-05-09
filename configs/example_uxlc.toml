@@ -1,0 +1,8 @@
+name = "Unicode/XML Leningrad Codex"
+language = "hebrew"
+
+[[sources]]
+name = "UXLC"
+format = "uxlc_dir"
+path = "../data/raw/uxlc/books"
+qere_mode = "ketiv"

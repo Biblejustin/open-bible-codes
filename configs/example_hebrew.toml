@@ -1,0 +1,15 @@
+name = "Hebrew Bible"
+language = "hebrew"
+
+# WRR-style matching normally folds final forms to standard forms.
+keep_hebrew_final_forms = false
+
+[[sources]]
+name = "Hebrew Bible"
+format = "csv"
+path = "../data/raw/hebrew.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

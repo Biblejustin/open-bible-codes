@@ -1,0 +1,9 @@
+name = "Non-Bible Hebrew Control: Project Ben-Yehuda Bialik"
+language = "hebrew"
+
+[[sources]]
+name = "Project Ben-Yehuda Bialik"
+format = "text"
+path = "../data/processed/nonbible_controls/hebrew_pby_bialik.txt"
+ref = "PBY Bialik"
+book = "PBY Bialik"

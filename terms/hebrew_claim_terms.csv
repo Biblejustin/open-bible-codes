@@ -1,0 +1,144 @@
+term_id,concept,category,language,term,notes
+torah_h,Torah,core_foundational,hebrew,תורה,core term
+israel_h,Israel,core_foundational,hebrew,ישראל,core term
+yhwh_h,YHWH,core_foundational,hebrew,יהוה,divine name
+messiah_h,Messiah,core_foundational,hebrew,משיח,core term
+yeshua_h,Yeshua,core_foundational,hebrew,ישוע,Jesus related spelling
+rambam_h,Rambam,rabbinic_names,hebrew,רמב״ם,Maimonides abbreviation
+vilna_gaon_h,Vilna Gaon,rabbinic_names,hebrew,גאון וילנא,
+maharal_h,Maharal,rabbinic_names,hebrew,מהר״ל,Prague rabbi abbreviation
+ramban_h,Ramban,rabbinic_names,hebrew,רמב״ן,Nachmanides abbreviation
+rokeach_h,Rokeach,rabbinic_names,hebrew,רוקח,
+rabin_h,Yitzhak Rabin,historical_modern,hebrew,רבין,
+yitzhak_rabin_h,Yitzhak Rabin,historical_modern,hebrew,יצחק רבין,
+rabin_assassinated_h,Rabin Assassinated,historical_modern,hebrew,רבין נרצח,
+hitler_h,Hitler,historical_modern,hebrew,היטלר,
+hitler_wicked_h,Hitler Wicked,historical_modern,hebrew,היטלר רשע,
+shoah_h,Shoah,historical_modern,hebrew,שואה,
+bin_laden_h,Bin Laden,historical_modern,hebrew,בן לאדן,
+cursed_bin_laden_h,Cursed Bin Laden,historical_modern,hebrew,קללה לבן לאדן,
+atomic_holocaust_h,Atomic Holocaust,historical_modern,hebrew,הולוקוסט אטומי,
+armageddon_h,Armageddon,historical_modern,hebrew,ארמגדון,
+world_war_h,World War,historical_modern,hebrew,מלחמת עולם,
+obama_h,Obama,historical_modern,hebrew,אובמה,
+trump_h,Trump,historical_modern,hebrew,טראמפ,
+bush_h,Bush,historical_modern,hebrew,בוש,
+kennedy_h,Kennedy,historical_modern,hebrew,קנדי,
+churchill_h,Churchill,historical_modern,hebrew,צ׳רצ׳יל,
+einstein_h,Einstein,historical_modern,hebrew,איינשטיין,
+newton_h,Newton,historical_modern,hebrew,ניוטון,
+sadat_h,Sadat,historical_modern,hebrew,סדאת,
+aids_h,AIDS,historical_modern,hebrew,איידס,
+airplane_h,Airplane,historical_modern,hebrew,מטוס,
+twin_towers_single_h,Twin Towers,historical_modern,hebrew,תאומים,
+twin_towers_h,Twin Towers,historical_modern,hebrew,מגדלים תאומים,
+twin_towers_alt_h,Twin Towers,historical_modern,hebrew,מגדלי תאומים,
+world_trade_center_h,World Trade Center,historical_modern,hebrew,מרכז הסחר העולמי,
+war_h,War,historical_modern,hebrew,מלחמה,
+destruction_h,Destruction,historical_modern,hebrew,הרס,
+destruction_call_you_h,Destruction I Will Call You,historical_modern,hebrew,הרס אקרא לך,
+all_his_people_to_war_h,All His People To War,historical_modern,hebrew,כל עמו למלחמה,
+near_past_h,Recent Past,historical_modern,hebrew,העבר הקרוב,
+netanyahu_h,Netanyahu,modern_leaders_events,hebrew,נתניהו,
+netanyahu_won_h,Netanyahu Won,modern_leaders_events,hebrew,נתניהו ניצח,
+sharon_h,Sharon,modern_leaders_events,hebrew,שרון,
+peres_h,Peres,modern_leaders_events,hebrew,פרס,
+reagan_h,Reagan,modern_leaders_events,hebrew,רייגן,
+clinton_h,Clinton,modern_leaders_events,hebrew,קלינטון,
+biden_h,Biden,modern_leaders_events,hebrew,ביידן,
+hamas_h,Hamas,modern_leaders_events,hebrew,חמאס,
+hezbollah_h,Hezbollah,modern_leaders_events,hebrew,חיזבאללה,
+barak_h,Barak,modern_leaders_events,hebrew,ברק,
+olmert_h,Olmert,modern_leaders_events,hebrew,אולמרט,
+lieberman_h,Lieberman,modern_leaders_events,hebrew,ליברמן,
+gantz_h,Gantz,modern_leaders_events,hebrew,גנץ,
+ani_yeshua_h,I Am Jesus,jesus_messianic_phrases,hebrew,אני ישוע,
+yeshua_hanged_h,Jesus Will Be Hanged,jesus_messianic_phrases,hebrew,ישוע יתלה,
+yeshu_declared_perfect_h,Jesus Declared Perfect,jesus_messianic_phrases,hebrew,הצהר ישו מושלם,preserved from supplied wording
+yeshua_crucified_h,Jesus Crucified,jesus_messianic_phrases,hebrew,ישוע נצלב,
+yeshua_perfect_h,Jesus Perfect,jesus_messianic_phrases,hebrew,ישוע מושלם,
+yeshua_worthy_h,Jesus Worthy,jesus_messianic_phrases,hebrew,ישוע ראוי,
+yeshua_return_h,Jesus Will Return,jesus_messianic_phrases,hebrew,ישוע יחזור,
+blood_yeshua_h,Blood Of Jesus,jesus_messianic_phrases,hebrew,דם ישוע,
+yeshua_messiah_h,Yeshua Messiah,jesus_messianic_phrases,hebrew,ישוע המשיח,
+son_of_god_h,Son Of God,jesus_messianic_phrases,hebrew,בן האלוהים,
+lamb_of_god_h,Lamb Of God,jesus_messianic_phrases,hebrew,כבש האלוהים,
+revenge_to_messiah_h,Revenge To Messiah,jesus_messianic_phrases,hebrew,נקמה למשיח,
+yeshua_savior_h,Jesus Savior,jesus_messianic_phrases,hebrew,ישוע מושיע,
+nails_h,Nails,jesus_messianic_terms,hebrew,מסמרים,
+crucifixion_h,Crucifixion,jesus_messianic_terms,hebrew,צליבה,
+cross_h,Cross,jesus_messianic_terms,hebrew,צלב,
+thorns_h,Thorns,jesus_messianic_terms,hebrew,קוצים,
+tomb_h,Tomb,jesus_messianic_terms,hebrew,קבר,
+empty_tomb_h,Empty Tomb,jesus_messianic_terms,hebrew,קבר ריק,
+rose_h,Rose Resurrected,jesus_messianic_terms,hebrew,קם,
+pierced_h,Pierced,jesus_messianic_terms,hebrew,נוקב,
+beaten_h,Beaten,jesus_messianic_terms,hebrew,הוכה,
+worthy_h,Worthy,jesus_messianic_terms,hebrew,ראוי,
+redemption_h,Redemption,prophetic_theological,hebrew,גאולה,
+salvation_h,Salvation,prophetic_theological,hebrew,ישועה,
+resurrection_dead_h,Resurrection Of Dead,prophetic_theological,hebrew,תחיית המתים,
+coming_messiah_h,Coming Of Messiah,prophetic_theological,hebrew,ביאת המשיח,
+judgment_day_h,Judgment Day,prophetic_theological,hebrew,יום הדין,
+savior_h,Savior,prophetic_theological,hebrew,מושיע,
+final_days_h,Final Days,prophetic_theological,hebrew,ימים אחרונים,
+end_of_days_h,End Of Days,prophetic_theological,hebrew,סוף הימים,
+sealed_book_h,Sealed Book,prophetic_theological,hebrew,ספר חתום,
+sealed_book_with_article_h,Sealed Book,prophetic_theological,hebrew,הספר החתום,
+nuclear_war_h,Nuclear War,prophetic_theological,hebrew,מלחמה גרעינית,
+light_darkness_h,Light And Darkness,prophetic_theological,hebrew,אור וחושך,
+truth_faith_h,Truth And Faith,prophetic_theological,hebrew,אמת ואמונה,
+chanukah_h,Chanukah,bonus_related,hebrew,חנוכה,
+hasmonean_h,Hasmonean,bonus_related,hebrew,חשמונאי,
+trees_h,Trees,bonus_related,hebrew,עצים,
+oak_h,Oak,tree_names,hebrew,אלון,
+cedar_h,Cedar,tree_names,hebrew,ארז,
+palm_h,Palm,tree_names,hebrew,תמר,
+olive_h,Olive,tree_names,hebrew,זית,
+fig_h,Fig,tree_names,hebrew,תאנה,
+pomegranate_h,Pomegranate,tree_names,hebrew,רמון,
+acacia_h,Acacia,tree_names,hebrew,שיטה,
+cypress_h,Cypress,tree_names,hebrew,ברוש,
+president_h,President,bonus_related,hebrew,נשיא,
+king_h,King,bonus_related,hebrew,מלך,
+prophet_h,Prophet,bonus_related,hebrew,נביא,
+david_h,David,bonus_related,hebrew,דוד,
+moses_h,Moses,bonus_related,hebrew,משה,
+nuclear_h,Nuclear,bonus_related,hebrew,גרעיני,
+revenge_h,Revenge,bonus_related,hebrew,נקמה,
+love_h,Love,bonus_related,hebrew,אהבה,
+peace_h,Peace,bonus_related,hebrew,שלום,
+light_h,Light,bonus_related,hebrew,אור,
+truth_h,Truth,bonus_related,hebrew,אמת,
+wisdom_h,Wisdom,bonus_related,hebrew,חוכמה,
+prophecy_h,Prophecy,bonus_related,hebrew,נבואה,
+genius_h,Genius,bonus_related,hebrew,גאון,
+sept_11_text_h,September 11,date_text,hebrew,י״א בספטמבר,textual Hebrew date form
+sept_11_text_rev_h,September 11,date_text,hebrew,ספטמבר י״א,textual Hebrew date form reversed
+sept_11_numeric_raw_h,September 11,date_text,hebrew,11 בספטמבר,digits are removed by normalization
+sept_11_numeric_rev_raw_h,September 11,date_text,hebrew,ספטמבר 11,digits are removed by normalization
+sept_11_short_raw_h,September 11,date_text,hebrew,11.9,digits are removed by normalization and this will likely skip
+year_1939_compact_h,Gregorian 1939,date_encodings,hebrew,אתתקלט,compact thousands notation
+year_1939_additive_h,Gregorian 1939,date_encodings,hebrew,תתתתשלט,pure additive gematria value
+year_1940_compact_h,Gregorian 1940,date_encodings,hebrew,אתתקמ,compact thousands notation
+year_1940_additive_h,Gregorian 1940,date_encodings,hebrew,תתתתשמ,pure additive gematria value
+year_1941_compact_h,Gregorian 1941,date_encodings,hebrew,אתתקמא,compact thousands notation
+year_1941_additive_h,Gregorian 1941,date_encodings,hebrew,תתתתשמא,pure additive gematria value
+year_1942_compact_h,Gregorian 1942,date_encodings,hebrew,אתתקמב,compact thousands notation
+year_1942_additive_h,Gregorian 1942,date_encodings,hebrew,תתתתשמב,pure additive gematria value
+year_1943_compact_h,Gregorian 1943,date_encodings,hebrew,אתתקמג,compact thousands notation
+year_1943_additive_h,Gregorian 1943,date_encodings,hebrew,תתתתשמג,pure additive gematria value
+year_1944_compact_h,Gregorian 1944,date_encodings,hebrew,אתתקמד,compact thousands notation
+year_1944_additive_h,Gregorian 1944,date_encodings,hebrew,תתתתשמד,pure additive gematria value
+year_1945_compact_h,Gregorian 1945,date_encodings,hebrew,אתתקמה,compact thousands notation
+year_1945_additive_h,Gregorian 1945,date_encodings,hebrew,תתתתשמה,pure additive gematria value
+year_1948_compact_h,Gregorian 1948,date_encodings,hebrew,אתתקמח,compact thousands notation
+year_1948_additive_h,Gregorian 1948,date_encodings,hebrew,תתתתשמח,pure additive gematria value
+year_1967_compact_h,Gregorian 1967,date_encodings,hebrew,אתתקסז,compact thousands notation
+year_1967_additive_h,Gregorian 1967,date_encodings,hebrew,תתתתשסז,pure additive gematria value
+year_1973_compact_h,Gregorian 1973,date_encodings,hebrew,אתתקעג,compact thousands notation
+year_1973_additive_h,Gregorian 1973,date_encodings,hebrew,תתתתשעג,pure additive gematria value
+year_1982_compact_h,Gregorian 1982,date_encodings,hebrew,אתתקפב,compact thousands notation
+year_1982_additive_h,Gregorian 1982,date_encodings,hebrew,תתתתשפב,pure additive gematria value
+year_2001_compact_h,Gregorian 2001,date_encodings,hebrew,בא,compact thousands notation and likely skipped by default length
+year_2001_additive_h,Gregorian 2001,date_encodings,hebrew,תתתתתא,pure additive gematria value

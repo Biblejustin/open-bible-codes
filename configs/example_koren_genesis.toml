@@ -1,0 +1,9 @@
+name = "Koren Genesis Michigan-Claremont"
+language = "michigan"
+
+[[sources]]
+name = "Genesis"
+format = "michigan_claremont"
+path = "../data/raw/koren/genesis.koren.gz"
+book = "Genesis"
+book_number = 1

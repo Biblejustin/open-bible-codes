@@ -1,0 +1,46 @@
+name = "hebrew_modern_geopolitical_version_presence"
+description = "Broad Hebrew modern/geopolitical/local/date exact ELS hit-pattern presence across MT-family corpora."
+manifest_out = "reports/hebrew_modern_geopolitical_version_presence/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 0
+
+[[steps]]
+id = "hebrew_modern_geopolitical_version_presence"
+description = "Compare every Hebrew row in modern_names_dates.csv across MT_WLC, UXLC, EBIBLE_WLC, MAM, and UHB."
+argv = [
+  "-m",
+  "scripts.analyze_hebrew_hit_version_presence",
+  "--terms",
+  "terms/modern_names_dates.csv",
+  "--all-concepts",
+  "--corpus-jobs",
+  "0",
+  "--report-title",
+  "Hebrew Modern Geopolitical Version Presence",
+  "--patterns-out",
+  "reports/hebrew_modern_geopolitical_version_presence/hit_patterns.csv",
+  "--summary-out",
+  "reports/hebrew_modern_geopolitical_version_presence/term_summary.csv",
+  "--markdown-out",
+  "docs/HEBREW_MODERN_GEOPOLITICAL_VERSION_PRESENCE.md",
+  "--manifest-out",
+  "reports/hebrew_modern_geopolitical_version_presence/manifest.json",
+]
+inputs = [
+  "scripts/analyze_hebrew_hit_version_presence.py",
+  "terms/modern_names_dates.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "els/corpus.py",
+  "els/search.py",
+  "scripts/analyze_mt_version_differences.py",
+]
+outputs = [
+  "reports/hebrew_modern_geopolitical_version_presence/hit_patterns.csv",
+  "reports/hebrew_modern_geopolitical_version_presence/term_summary.csv",
+  "docs/HEBREW_MODERN_GEOPOLITICAL_VERSION_PRESENCE.md",
+  "reports/hebrew_modern_geopolitical_version_presence/manifest.json",
+]

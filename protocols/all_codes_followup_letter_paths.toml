@@ -1,0 +1,49 @@
+name = "all_codes_followup_letter_paths"
+description = "Letter-path audit sheet for selected Hebrew, Greek, and English all-codes follow-up rows."
+manifest_out = "reports/all_codes_followup_letter_paths/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "letter_paths"
+description = "Reconstruct every selected all-codes ELS letter path across source corpora."
+argv = [
+  "-m", "scripts.analyze_all_codes_letter_paths",
+  "--selected", "reports/all_codes_followup_selection/selected_rows.csv",
+  "--corpus", "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus", "UXLC=configs/example_uxlc.toml",
+  "--corpus", "EBIBLE_WLC=configs/example_ebible_hebwlc.toml",
+  "--corpus", "MAM=configs/example_mam.toml",
+  "--corpus", "UHB=configs/example_uhb.toml",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "BYZ_NT=configs/example_ebible_grcmt.toml",
+  "--corpus", "TCG_NT=configs/example_ebible_grctcgnt.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--corpus", "KJV=configs/example_ebible_engkjv.toml",
+  "--summary-out", "reports/all_codes_followup_letter_paths/path_summary.csv",
+  "--letters-out", "reports/all_codes_followup_letter_paths/letter_paths.csv",
+  "--markdown-out", "docs/ALL_CODES_FOLLOWUP_LETTER_PATHS.md",
+  "--manifest-out", "reports/all_codes_followup_letter_paths/manifest.json",
+]
+inputs = [
+  "scripts/analyze_all_codes_letter_paths.py",
+  "scripts/select_all_codes_followup.py",
+  "reports/all_codes_followup_selection/selected_rows.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "configs/example_ebible_engkjv.toml",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/all_codes_followup_letter_paths/path_summary.csv",
+  "reports/all_codes_followup_letter_paths/letter_paths.csv",
+  "docs/ALL_CODES_FOLLOWUP_LETTER_PATHS.md",
+  "reports/all_codes_followup_letter_paths/manifest.json",
+]

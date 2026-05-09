@@ -1,0 +1,931 @@
+name = "public_baseline"
+description = "Public-source baseline for MT WLC, LXX GRCLXX, TR GRCTR, and SBLGNT."
+manifest_out = "reports/protocols/public_baseline/protocol_run.manifest.json"
+max_parallel = 3
+progress_interval_seconds = 15
+
+[[steps]]
+id = "bootstrap_public_sources"
+description = "Download public source texts into ignored local data paths."
+argv = ["-m", "scripts.bootstrap_public_sources"]
+inputs = [
+  "scripts/bootstrap_public_sources.py",
+  "scripts/download_oshb_wlc.py",
+  "scripts/download_uxlc.py",
+  "scripts/download_mam.py",
+  "scripts/download_ebible_hebwlc.py",
+  "scripts/download_uhb.py",
+  "scripts/download_sblgnt.py",
+  "scripts/download_ebible_grclxx.py",
+  "scripts/download_ebible_grctr.py",
+  "scripts/download_ebible_grcmt.py",
+  "scripts/download_ebible_grctcgnt.py",
+]
+outputs = [
+  "data/raw/oshb/wlc",
+  "data/raw/uxlc/books",
+  "data/raw/mam/html",
+  "data/processed/ebible/hebwlc.csv",
+  "data/processed/unfoldingword/hbo_uhb.csv",
+  "data/raw/sblgnt/text",
+  "data/processed/ebible/grclxx.csv",
+  "data/processed/ebible/grctr.csv",
+  "data/processed/ebible/grcmt.csv",
+  "data/processed/ebible/grctcgnt.csv",
+]
+
+[[steps]]
+id = "batch_term_sets"
+description = "Count all tracked term-set ELS hits across public corpora with one scan per corpus."
+parallel_group = "analysis"
+argv = [
+  "-m", "els", "batch-many",
+  "--term-set", "theological_terms=terms/theological_terms.csv",
+  "--term-set", "modern_names_dates=terms/modern_names_dates.csv",
+  "--term-set", "table_of_nations=terms/table_of_nations.csv",
+  "--term-set", "prophetic_terms=terms/prophetic_terms.csv",
+  "--corpus", "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus", "LXX=configs/example_ebible_grclxx.toml",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--min-skip", "2",
+  "--max-skip", "50",
+  "--jobs", "0",
+  "--out-dir", "reports/protocols/public_baseline",
+  "--manifest-out", "reports/protocols/public_baseline/batch_term_sets.manifest.json",
+]
+inputs = [
+  "terms/theological_terms.csv",
+  "terms/modern_names_dates.csv",
+  "terms/table_of_nations.csv",
+  "terms/prophetic_terms.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/protocols/public_baseline/theological_terms_counts.csv",
+  "reports/protocols/public_baseline/theological_terms_counts.manifest.json",
+  "reports/protocols/public_baseline/modern_names_dates_counts.csv",
+  "reports/protocols/public_baseline/modern_names_dates_counts.manifest.json",
+  "reports/protocols/public_baseline/table_of_nations_counts.csv",
+  "reports/protocols/public_baseline/table_of_nations_counts.manifest.json",
+  "reports/protocols/public_baseline/prophetic_terms_counts.csv",
+  "reports/protocols/public_baseline/prophetic_terms_counts.manifest.json",
+  "reports/protocols/public_baseline/batch_term_sets.manifest.json",
+]
+
+[[steps]]
+id = "surface_context_nt"
+description = "Find NT ELS hits whose center/span surface text discusses terms."
+parallel_group = "analysis"
+argv = [
+  "-m", "els", "surface-context",
+  "--terms", "terms/theological_terms.csv",
+  "--terms", "terms/modern_names_dates.csv",
+  "--terms", "terms/table_of_nations.csv",
+  "--terms", "terms/prophetic_terms.csv",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--min-skip", "2",
+  "--max-skip", "50",
+  "--jobs", "0",
+  "--out", "reports/protocols/public_baseline/surface_context_hits.csv",
+  "--summary-out", "reports/protocols/public_baseline/surface_context_summary.csv",
+  "--manifest-out", "reports/protocols/public_baseline/surface_context.manifest.json",
+]
+inputs = [
+  "terms/theological_terms.csv",
+  "terms/modern_names_dates.csv",
+  "terms/table_of_nations.csv",
+  "terms/prophetic_terms.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+  "els/surface.py",
+]
+outputs = [
+  "reports/protocols/public_baseline/surface_context_hits.csv",
+  "reports/protocols/public_baseline/surface_context_summary.csv",
+  "reports/protocols/public_baseline/surface_context.manifest.json",
+]
+
+[[steps]]
+id = "word_counts"
+description = "Count content words and multiple patterns across public corpora."
+parallel_group = "analysis"
+argv = ["-m", "scripts.analyze_word_counts"]
+inputs = [
+  "scripts/analyze_word_counts.py",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/critical.py",
+  "els/word_counts.py",
+]
+outputs = [
+  "reports/word_counts_by_word.csv",
+  "reports/word_counts_by_book.csv",
+  "reports/word_counts_by_chapter.csv",
+  "reports/word_counts_by_verse.csv",
+  "reports/word_count_multiples.csv",
+  "reports/critical_word_multiples_breaks.csv",
+  "reports/word_counts.manifest.json",
+]
+
+[[steps]]
+id = "els_controls"
+description = "Compare observed ELS counts with shuffled-letter and shuffled-term controls."
+parallel_group = "analysis"
+argv = [
+  "-m", "scripts.analyze_els_controls",
+  "--letter-shuffles", "3",
+  "--term-shuffles", "25",
+  "--jobs", "0",
+  "--progress",
+]
+inputs = [
+  "scripts/analyze_els_controls.py",
+  "els/statistics.py",
+  "terms/theological_terms.csv",
+  "terms/modern_names_dates.csv",
+  "terms/table_of_nations.csv",
+  "terms/prophetic_terms.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+  "els/stats.py",
+]
+outputs = [
+  "reports/els_controls_summary.csv",
+  "reports/els_controls_examples.csv",
+  "reports/els_controls.manifest.json",
+]
+
+[[steps]]
+id = "critical_surface_variants"
+description = "Compare TR and SBLGNT content-word surface variants."
+parallel_group = "analysis"
+argv = ["-m", "scripts.analyze_critical_surface_variants"]
+inputs = [
+  "scripts/analyze_critical_surface_variants.py",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/critical.py",
+  "els/word_counts.py",
+]
+outputs = [
+  "reports/critical_surface_tr_vs_sbl_counts.csv",
+  "reports/critical_surface_variant_verses.csv",
+  "reports/critical_surface_variants.manifest.json",
+]
+
+[[steps]]
+id = "critical_omission_breaks"
+description = "Find TR ELS hits broken by verses absent from SBLGNT."
+parallel_group = "analysis"
+argv = ["-m", "scripts.analyze_critical_omission_breaks"]
+inputs = [
+  "scripts/analyze_critical_omission_breaks.py",
+  "terms/theological_terms.csv",
+  "terms/modern_names_dates.csv",
+  "terms/table_of_nations.csv",
+  "terms/prophetic_terms.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/critical.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/critical_omission_breaks_summary.csv",
+  "reports/critical_omission_breaks_examples.csv",
+  "reports/critical_omission_breaks_by_verse.csv",
+  "reports/critical_omission_missing_verses.csv",
+  "reports/critical_omission_breaks.manifest.json",
+]
+
+[[steps]]
+id = "related_name_pairs"
+description = "Score related modern-name pairs by overlap, chapter, and proximity."
+parallel_group = "analysis"
+argv = ["-m", "scripts.analyze_related_name_pairs"]
+inputs = [
+  "scripts/analyze_related_name_pairs.py",
+  "terms/modern_names_dates.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/related_name_pairs_summary.csv",
+  "reports/related_name_pairs_examples.csv",
+]
+
+[[steps]]
+id = "surface_extensions_tr_nt"
+description = "Check same-skip surface-word/phrase extensions for TR NT surface-context hits."
+parallel_group = "extensions"
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_ebible_grctr.toml",
+  "--hits", "reports/protocols/public_baseline/surface_context_hits.csv",
+  "--corpus-label", "TR_NT",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/protocols/public_baseline/surface_context_extensions_tr_nt.csv",
+  "--manifest-out", "reports/protocols/public_baseline/surface_context_extensions_tr_nt.manifest.json",
+]
+inputs = [
+  "reports/protocols/public_baseline/surface_context_hits.csv",
+  "configs/example_ebible_grctr.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt.manifest.json",
+]
+
+[[steps]]
+id = "surface_extensions_sblgnt"
+description = "Check same-skip surface-word/phrase extensions for SBLGNT surface-context hits."
+parallel_group = "extensions"
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_sblgnt.toml",
+  "--hits", "reports/protocols/public_baseline/surface_context_hits.csv",
+  "--corpus-label", "SBLGNT",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/protocols/public_baseline/surface_context_extensions_sblgnt.csv",
+  "--manifest-out", "reports/protocols/public_baseline/surface_context_extensions_sblgnt.manifest.json",
+]
+inputs = [
+  "reports/protocols/public_baseline/surface_context_hits.csv",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt.manifest.json",
+]
+
+[[steps]]
+id = "surface_extension_summary_tr_nt"
+description = "Summarize strongest TR NT same-skip extension rows."
+parallel_group = "extension_summaries"
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/protocols/public_baseline/surface_context_extensions_tr_nt.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "4",
+  "--match-kind-prefix", "phrase_",
+  "--exclude-term", "ουλ",
+  "--top", "200",
+  "--out", "reports/protocols/public_baseline/surface_context_extensions_tr_nt_summary.csv",
+  "--top-out", "reports/protocols/public_baseline/surface_context_extensions_tr_nt_top.csv",
+  "--manifest-out", "reports/protocols/public_baseline/surface_context_extensions_tr_nt_summary.manifest.json",
+]
+inputs = [
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt_summary.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt_top.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt_summary.manifest.json",
+]
+
+[[steps]]
+id = "surface_extension_summary_sblgnt"
+description = "Summarize strongest SBLGNT same-skip extension rows."
+parallel_group = "extension_summaries"
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/protocols/public_baseline/surface_context_extensions_sblgnt.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "4",
+  "--match-kind-prefix", "phrase_",
+  "--exclude-term", "ουλ",
+  "--top", "200",
+  "--out", "reports/protocols/public_baseline/surface_context_extensions_sblgnt_summary.csv",
+  "--top-out", "reports/protocols/public_baseline/surface_context_extensions_sblgnt_top.csv",
+  "--manifest-out", "reports/protocols/public_baseline/surface_context_extensions_sblgnt_summary.manifest.json",
+]
+inputs = [
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt_summary.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt_top.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt_summary.manifest.json",
+]
+
+[[steps]]
+id = "targeted_terms_report"
+description = "Build compact joined tables for selected modern/geopolitical target terms."
+argv = ["-m", "scripts.analyze_targeted_terms"]
+inputs = [
+  "scripts/analyze_targeted_terms.py",
+  "reports/protocols/public_baseline/modern_names_dates_counts.csv",
+  "reports/protocols/public_baseline/prophetic_terms_counts.csv",
+  "reports/els_controls_summary.csv",
+  "reports/protocols/public_baseline/surface_context_summary.csv",
+  "reports/protocols/public_baseline/surface_context_hits.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt_top.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt_top.csv",
+]
+outputs = [
+  "reports/targeted_terms_summary.csv",
+  "reports/targeted_terms_examples.csv",
+  "reports/targeted_terms.md",
+  "reports/targeted_terms.manifest.json",
+]
+
+[[steps]]
+id = "targeted_paired_controls"
+description = "Run length-matched paired controls for focused target terms."
+argv = [
+  "-m", "scripts.analyze_targeted_paired_controls",
+  "--term-shuffle-samples", "200",
+  "--random-samples", "200",
+  "--jobs", "0",
+]
+inputs = [
+  "scripts/analyze_targeted_paired_controls.py",
+  "reports/targeted_terms_summary.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/search.py",
+  "els/stats.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/targeted_paired_controls_summary.csv",
+  "reports/targeted_paired_controls_examples.csv",
+  "reports/targeted_paired_controls.md",
+  "reports/targeted_paired_controls.manifest.json",
+]
+
+[[steps]]
+id = "gog_magog_pairs"
+description = "Analyze Gog/Magog ELS proximity against paired controls."
+argv = [
+  "-m", "scripts.analyze_gog_magog_pairs",
+  "--term-control-samples", "100",
+  "--random-control-samples", "5",
+  "--jobs", "1",
+  "--hit-jobs", "0",
+]
+inputs = [
+  "scripts/analyze_gog_magog_pairs.py",
+  "terms/prophetic_terms.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/gog_magog_pairs_summary.csv",
+  "reports/gog_magog_pairs_examples.csv",
+  "reports/gog_magog_pairs.md",
+  "reports/gog_magog_pairs.manifest.json",
+]
+
+[[steps]]
+id = "gog_magog_strict_pairs"
+description = "Analyze Gog/Magog ELS proximity requiring same chapter and same signed skip."
+argv = [
+  "-m", "scripts.analyze_gog_magog_pairs",
+  "--require-same-chapter",
+  "--require-same-skip",
+  "--term-control-samples", "100",
+  "--random-control-samples", "5",
+  "--jobs", "1",
+  "--hit-jobs", "0",
+  "--summary-out", "reports/gog_magog_strict_pairs_summary.csv",
+  "--examples-out", "reports/gog_magog_strict_pairs_examples.csv",
+  "--markdown-out", "reports/gog_magog_strict_pairs.md",
+  "--manifest-out", "reports/gog_magog_strict_pairs.manifest.json",
+]
+inputs = [
+  "scripts/analyze_gog_magog_pairs.py",
+  "terms/prophetic_terms.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/gog_magog_strict_pairs_summary.csv",
+  "reports/gog_magog_strict_pairs_examples.csv",
+  "reports/gog_magog_strict_pairs.md",
+  "reports/gog_magog_strict_pairs.manifest.json",
+]
+
+[[steps]]
+id = "pair_baselines"
+description = "Compare strict observed pair counts against unrelated prophetic baseline pairs."
+argv = ["-m", "scripts.analyze_pair_baselines", "--jobs", "1", "--hit-jobs", "0"]
+inputs = [
+  "scripts/analyze_pair_baselines.py",
+  "scripts/analyze_gog_magog_pairs.py",
+  "terms/prophetic_terms.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/pair_baselines_summary.csv",
+  "reports/pair_baselines_examples.csv",
+  "reports/pair_baselines.md",
+  "reports/pair_baselines.manifest.json",
+]
+
+[[steps]]
+id = "beast_dragon_strict_controls"
+description = "Run full strict paired controls for Hebrew Beast/Dragon baseline."
+argv = [
+  "-m", "scripts.analyze_gog_magog_pairs",
+  "--pair-label", "Beast/Dragon",
+  "--left-hebrew-term-id", "beast_h",
+  "--right-hebrew-term-id", "dragon_h",
+  "--left-greek-term-id", "beast_g",
+  "--right-greek-term-id", "dragon_g",
+  "--corpus-label", "MT_WLC",
+  "--require-same-chapter",
+  "--require-same-skip",
+  "--term-control-samples", "50",
+  "--random-control-samples", "5",
+  "--jobs", "1",
+  "--hit-jobs", "0",
+  "--summary-out", "reports/beast_dragon_strict_controls_summary.csv",
+  "--examples-out", "reports/beast_dragon_strict_controls_examples.csv",
+  "--markdown-out", "reports/beast_dragon_strict_controls.md",
+  "--manifest-out", "reports/beast_dragon_strict_controls.manifest.json",
+]
+inputs = [
+  "scripts/analyze_gog_magog_pairs.py",
+  "terms/prophetic_terms.csv",
+  "configs/example_oshb_wlc.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/beast_dragon_strict_controls_summary.csv",
+  "reports/beast_dragon_strict_controls_examples.csv",
+  "reports/beast_dragon_strict_controls.md",
+  "reports/beast_dragon_strict_controls.manifest.json",
+]
+
+[[steps]]
+id = "synthetic_pair_baselines"
+description = "Run length-matched synthetic Hebrew pair baselines for short pair density."
+argv = ["-m", "scripts.analyze_synthetic_pair_baselines", "--hit-jobs", "0"]
+inputs = [
+  "scripts/analyze_synthetic_pair_baselines.py",
+  "scripts/analyze_gog_magog_pairs.py",
+  "reports/pair_baselines_summary.csv",
+  "configs/example_oshb_wlc.toml",
+  "els/corpus.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/synthetic_pair_baselines_summary.csv",
+  "reports/synthetic_pair_baselines_comparison.csv",
+  "reports/synthetic_pair_baselines.md",
+  "reports/synthetic_pair_baselines.manifest.json",
+]
+
+[[steps]]
+id = "extension_paired_controls"
+description = "Run paired controls for filtered NT extension top rows."
+argv = [
+  "-m", "scripts.analyze_extension_paired_controls",
+  "--term-control-samples", "10",
+  "--random-control-samples", "10",
+]
+inputs = [
+  "scripts/analyze_extension_paired_controls.py",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt_top.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt_top.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/extension_paired_controls_summary.csv",
+  "reports/extension_paired_controls_examples.csv",
+  "reports/extension_paired_controls.md",
+  "reports/extension_paired_controls.manifest.json",
+]
+
+[[steps]]
+id = "extension_overlap_controls"
+description = "Run stronger paired controls for NT extension rows that overlap in TR and SBLGNT."
+argv = [
+  "-m", "scripts.analyze_extension_paired_controls",
+  "--require-cross-corpus-overlap",
+  "--dedupe-targets",
+  "--term-control-samples", "50",
+  "--random-control-samples", "50",
+  "--summary-out", "reports/extension_overlap_controls_summary.csv",
+  "--examples-out", "reports/extension_overlap_controls_examples.csv",
+  "--markdown-out", "reports/extension_overlap_controls.md",
+  "--manifest-out", "reports/extension_overlap_controls.manifest.json",
+]
+inputs = [
+  "scripts/analyze_extension_paired_controls.py",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt_top.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt_top.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/extension_overlap_controls_summary.csv",
+  "reports/extension_overlap_controls_examples.csv",
+  "reports/extension_overlap_controls.md",
+  "reports/extension_overlap_controls.manifest.json",
+]
+
+[[steps]]
+id = "extension_context_review"
+description = "Join strict NT extension overlaps to center/span verse context."
+argv = ["-m", "scripts.analyze_extension_context_review"]
+inputs = [
+  "scripts/analyze_extension_context_review.py",
+  "reports/protocols/public_baseline/surface_context_hits.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt_top.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt_top.csv",
+  "reports/extension_overlap_controls_summary.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/normalization.py",
+]
+outputs = [
+  "reports/extension_context_review_summary.csv",
+  "reports/extension_context_review.md",
+  "reports/extension_letter_paths.md",
+  "reports/extension_context_review.manifest.json",
+]
+
+[[steps]]
+id = "extension_exact_center_controls"
+description = "Run deeper paired controls for exact-center NT extension overlap rows."
+argv = [
+  "-m", "scripts.analyze_extension_paired_controls",
+  "--require-cross-corpus-overlap",
+  "--dedupe-targets",
+  "--include-overlap-key", "δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ",
+  "--term-control-samples", "200",
+  "--random-control-samples", "200",
+  "--summary-out", "reports/extension_exact_center_controls_summary.csv",
+  "--examples-out", "reports/extension_exact_center_controls_examples.csv",
+  "--markdown-out", "reports/extension_exact_center_controls.md",
+  "--manifest-out", "reports/extension_exact_center_controls.manifest.json",
+]
+inputs = [
+  "scripts/analyze_extension_paired_controls.py",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt_top.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt_top.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/extension_exact_center_controls_summary.csv",
+  "reports/extension_exact_center_controls_examples.csv",
+  "reports/extension_exact_center_controls.md",
+  "reports/extension_exact_center_controls.manifest.json",
+]
+
+[[steps]]
+id = "extension_exact_center_cohort_controls"
+description = "Run paired controls for all exact-center NT extension top rows."
+argv = [
+  "-m", "scripts.analyze_extension_paired_controls",
+  "--surface-context-hits", "reports/protocols/public_baseline/surface_context_hits.csv",
+  "--require-center-exact",
+  "--dedupe-targets",
+  "--term-control-samples", "50",
+  "--random-control-samples", "50",
+  "--summary-out", "reports/extension_exact_center_cohort_controls_summary.csv",
+  "--examples-out", "reports/extension_exact_center_cohort_controls_examples.csv",
+  "--markdown-out", "reports/extension_exact_center_cohort_controls.md",
+  "--manifest-out", "reports/extension_exact_center_cohort_controls.manifest.json",
+]
+inputs = [
+  "scripts/analyze_extension_paired_controls.py",
+  "reports/protocols/public_baseline/surface_context_hits.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt_top.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt_top.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/extension_exact_center_cohort_controls_summary.csv",
+  "reports/extension_exact_center_cohort_controls_examples.csv",
+  "reports/extension_exact_center_cohort_controls.md",
+  "reports/extension_exact_center_cohort_controls.manifest.json",
+]
+
+[[steps]]
+id = "extension_exact_center_cohort_review"
+description = "Build context and letter-path review for exact-center NT extension top rows."
+argv = [
+  "-m", "scripts.analyze_extension_context_review",
+  "--controls", "reports/extension_exact_center_cohort_controls_summary.csv",
+  "--require-center-exact",
+  "--dedupe-targets",
+  "--title", "Extension Exact-Center Cohort Review",
+  "--description", "Manual context and letter-path review for NT extension top rows whose center verse has exact surface context.",
+  "--summary-out", "reports/extension_exact_center_cohort_review_summary.csv",
+  "--markdown-out", "reports/extension_exact_center_cohort_review.md",
+  "--letter-paths-out", "reports/extension_exact_center_cohort_letter_paths.md",
+  "--manifest-out", "reports/extension_exact_center_cohort_review.manifest.json",
+]
+inputs = [
+  "scripts/analyze_extension_context_review.py",
+  "reports/protocols/public_baseline/surface_context_hits.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt_top.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt_top.csv",
+  "reports/extension_exact_center_cohort_controls_summary.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/normalization.py",
+]
+outputs = [
+  "reports/extension_exact_center_cohort_review_summary.csv",
+  "reports/extension_exact_center_cohort_review.md",
+  "reports/extension_exact_center_cohort_letter_paths.md",
+  "reports/extension_exact_center_cohort_review.manifest.json",
+]
+
+[[steps]]
+id = "extension_exact_center_cross_text"
+description = "Check exact-center extension cohort rows against the opposite Greek NT text."
+argv = ["-m", "scripts.analyze_extension_cross_text_review"]
+inputs = [
+  "scripts/analyze_extension_cross_text_review.py",
+  "scripts/analyze_extension_context_review.py",
+  "reports/extension_exact_center_cohort_review_summary.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt.csv",
+]
+outputs = [
+  "reports/extension_exact_center_cross_text_summary.csv",
+  "reports/extension_exact_center_cross_text.md",
+  "reports/extension_exact_center_cross_text.manifest.json",
+]
+
+[[steps]]
+id = "extension_exact_center_final_gate"
+description = "Combine exact-center context, controls, and cross-text support into final gates."
+argv = ["-m", "scripts.analyze_extension_final_gate"]
+inputs = [
+  "scripts/analyze_extension_final_gate.py",
+  "reports/extension_exact_center_cohort_review_summary.csv",
+  "reports/extension_exact_center_cohort_controls_summary.csv",
+  "reports/extension_exact_center_controls_summary.csv",
+  "reports/extension_exact_center_cross_text_summary.csv",
+]
+outputs = [
+  "reports/extension_exact_center_final_gate_summary.csv",
+  "reports/extension_exact_center_final_gate.md",
+  "reports/extension_exact_center_final_gate.manifest.json",
+]
+
+[[steps]]
+id = "synthetic_extension_baselines"
+description = "Run same-length synthetic Greek baselines for exact-center extension rows."
+argv = ["-m", "scripts.analyze_synthetic_extension_baselines"]
+inputs = [
+  "scripts/analyze_synthetic_extension_baselines.py",
+  "scripts/analyze_extension_paired_controls.py",
+  "reports/protocols/public_baseline/surface_context_hits.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt_top.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt_top.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/synthetic_extension_baselines_summary.csv",
+  "reports/synthetic_extension_baselines_examples.csv",
+  "reports/synthetic_extension_baselines_matches.csv",
+  "reports/synthetic_extension_baselines.md",
+  "reports/synthetic_extension_baselines.manifest.json",
+]
+
+[[steps]]
+id = "synthetic_extension_match_review"
+description = "Review surface context for synthetic extension match rows."
+argv = ["-m", "scripts.analyze_synthetic_extension_match_review"]
+inputs = [
+  "scripts/analyze_synthetic_extension_match_review.py",
+  "reports/synthetic_extension_baselines_matches.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/normalization.py",
+]
+outputs = [
+  "reports/synthetic_extension_match_review_summary.csv",
+  "reports/synthetic_extension_match_review.md",
+  "reports/synthetic_extension_match_review.manifest.json",
+]
+
+[[steps]]
+id = "report_index"
+description = "Build human-readable and machine-readable report indexes."
+argv = [
+  "-m", "scripts.build_report_index",
+  "--reports-dir", "reports",
+  "--out", "reports/INDEX.md",
+  "--json-out", "reports/index.json",
+]
+inputs = [
+  "scripts/build_report_index.py",
+  "els/report_index.py",
+  "reports/protocols/public_baseline/theological_terms_counts.csv",
+  "reports/protocols/public_baseline/theological_terms_counts.manifest.json",
+  "reports/protocols/public_baseline/modern_names_dates_counts.csv",
+  "reports/protocols/public_baseline/modern_names_dates_counts.manifest.json",
+  "reports/protocols/public_baseline/table_of_nations_counts.csv",
+  "reports/protocols/public_baseline/table_of_nations_counts.manifest.json",
+  "reports/protocols/public_baseline/prophetic_terms_counts.csv",
+  "reports/protocols/public_baseline/prophetic_terms_counts.manifest.json",
+  "reports/protocols/public_baseline/batch_term_sets.manifest.json",
+  "reports/protocols/public_baseline/surface_context_hits.csv",
+  "reports/protocols/public_baseline/surface_context_summary.csv",
+  "reports/protocols/public_baseline/surface_context.manifest.json",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt.manifest.json",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt_summary.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt_top.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_tr_nt_summary.manifest.json",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt.manifest.json",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt_summary.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt_top.csv",
+  "reports/protocols/public_baseline/surface_context_extensions_sblgnt_summary.manifest.json",
+  "reports/targeted_terms_summary.csv",
+  "reports/targeted_terms_examples.csv",
+  "reports/targeted_terms.md",
+  "reports/targeted_terms.manifest.json",
+  "reports/targeted_paired_controls_summary.csv",
+  "reports/targeted_paired_controls_examples.csv",
+  "reports/targeted_paired_controls.md",
+  "reports/targeted_paired_controls.manifest.json",
+  "reports/gog_magog_pairs_summary.csv",
+  "reports/gog_magog_pairs_examples.csv",
+  "reports/gog_magog_pairs.md",
+  "reports/gog_magog_pairs.manifest.json",
+  "reports/gog_magog_strict_pairs_summary.csv",
+  "reports/gog_magog_strict_pairs_examples.csv",
+  "reports/gog_magog_strict_pairs.md",
+  "reports/gog_magog_strict_pairs.manifest.json",
+  "reports/pair_baselines_summary.csv",
+  "reports/pair_baselines_examples.csv",
+  "reports/pair_baselines.md",
+  "reports/pair_baselines.manifest.json",
+  "reports/beast_dragon_strict_controls_summary.csv",
+  "reports/beast_dragon_strict_controls_examples.csv",
+  "reports/beast_dragon_strict_controls.md",
+  "reports/beast_dragon_strict_controls.manifest.json",
+  "reports/synthetic_pair_baselines_summary.csv",
+  "reports/synthetic_pair_baselines_comparison.csv",
+  "reports/synthetic_pair_baselines.md",
+  "reports/synthetic_pair_baselines.manifest.json",
+  "reports/extension_paired_controls_summary.csv",
+  "reports/extension_paired_controls_examples.csv",
+  "reports/extension_paired_controls.md",
+  "reports/extension_paired_controls.manifest.json",
+  "reports/extension_overlap_controls_summary.csv",
+  "reports/extension_overlap_controls_examples.csv",
+  "reports/extension_overlap_controls.md",
+  "reports/extension_overlap_controls.manifest.json",
+  "reports/extension_context_review_summary.csv",
+  "reports/extension_context_review.md",
+  "reports/extension_letter_paths.md",
+  "reports/extension_context_review.manifest.json",
+  "reports/extension_exact_center_controls_summary.csv",
+  "reports/extension_exact_center_controls_examples.csv",
+  "reports/extension_exact_center_controls.md",
+  "reports/extension_exact_center_controls.manifest.json",
+  "reports/extension_exact_center_cohort_controls_summary.csv",
+  "reports/extension_exact_center_cohort_controls_examples.csv",
+  "reports/extension_exact_center_cohort_controls.md",
+  "reports/extension_exact_center_cohort_controls.manifest.json",
+  "reports/extension_exact_center_cohort_review_summary.csv",
+  "reports/extension_exact_center_cohort_review.md",
+  "reports/extension_exact_center_cohort_letter_paths.md",
+  "reports/extension_exact_center_cohort_review.manifest.json",
+  "reports/extension_exact_center_cross_text_summary.csv",
+  "reports/extension_exact_center_cross_text.md",
+  "reports/extension_exact_center_cross_text.manifest.json",
+  "reports/extension_exact_center_final_gate_summary.csv",
+  "reports/extension_exact_center_final_gate.md",
+  "reports/extension_exact_center_final_gate.manifest.json",
+  "reports/synthetic_extension_baselines_summary.csv",
+  "reports/synthetic_extension_baselines_examples.csv",
+  "reports/synthetic_extension_baselines_matches.csv",
+  "reports/synthetic_extension_baselines.md",
+  "reports/synthetic_extension_baselines.manifest.json",
+  "reports/synthetic_extension_match_review_summary.csv",
+  "reports/synthetic_extension_match_review.md",
+  "reports/synthetic_extension_match_review.manifest.json",
+  "reports/word_counts_by_word.csv",
+  "reports/word_counts_by_book.csv",
+  "reports/word_counts_by_chapter.csv",
+  "reports/word_counts_by_verse.csv",
+  "reports/word_count_multiples.csv",
+  "reports/critical_word_multiples_breaks.csv",
+  "reports/word_counts.manifest.json",
+  "reports/els_controls_summary.csv",
+  "reports/els_controls_examples.csv",
+  "reports/els_controls.manifest.json",
+  "reports/critical_surface_tr_vs_sbl_counts.csv",
+  "reports/critical_surface_variant_verses.csv",
+  "reports/critical_surface_variants.manifest.json",
+  "reports/critical_omission_breaks_summary.csv",
+  "reports/critical_omission_breaks_examples.csv",
+  "reports/critical_omission_breaks_by_verse.csv",
+  "reports/critical_omission_missing_verses.csv",
+  "reports/critical_omission_breaks.manifest.json",
+  "reports/related_name_pairs_summary.csv",
+  "reports/related_name_pairs_examples.csv",
+]
+outputs = [
+  "reports/INDEX.md",
+  "reports/index.json",
+]

@@ -1,0 +1,28 @@
+name = "hebrew_hit_version_presence"
+description = "Capped exact ELS hit-pattern presence across Hebrew MT-family corpora."
+manifest_out = "reports/hebrew_hit_version_presence/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 0
+
+[[steps]]
+id = "hebrew_hit_version_presence"
+description = "Compare exact modern/local Hebrew hit ref-key patterns across MT_WLC, UXLC, EBIBLE_WLC, MAM, and UHB."
+argv = ["-m", "scripts.analyze_hebrew_hit_version_presence", "--corpus-jobs", "0"]
+inputs = [
+  "scripts/analyze_hebrew_hit_version_presence.py",
+  "terms/modern_names_dates.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "els/corpus.py",
+  "els/search.py",
+  "scripts/analyze_mt_version_differences.py",
+]
+outputs = [
+  "reports/hebrew_hit_version_presence/hit_patterns.csv",
+  "reports/hebrew_hit_version_presence/term_summary.csv",
+  "reports/hebrew_hit_version_presence/hebrew_hit_version_presence.md",
+  "reports/hebrew_hit_version_presence/manifest.json",
+]

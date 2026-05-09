@@ -1,0 +1,9 @@
+name = "Non-Bible Greek Control: Perseus Odyssey"
+language = "greek"
+
+[[sources]]
+name = "Perseus Odyssey"
+format = "text"
+path = "../data/processed/nonbible_controls/greek_perseus_odyssey.txt"
+ref = "Perseus Odyssey"
+book = "Perseus Odyssey"

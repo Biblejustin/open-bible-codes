@@ -1,0 +1,352 @@
+name = "apocrypha_bridge_study"
+description = "Run the apocrypha/deuterocanon coverage audit, bounded bridge scan, surface-context review, same-length controls, and ordinary apocrypha-only count comparison."
+manifest_out = "reports/apocrypha_bridge_study/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "coverage"
+description = "Audit current LXX and KJV apocrypha/deuterocanon source coverage."
+argv = ["-m", "scripts.audit_apocrypha_coverage"]
+inputs = [
+  "scripts/audit_apocrypha_coverage.py",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_engkjv.toml",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "data/processed/ebible/grclxx.csv",
+  "data/processed/ebible/eng-kjv2006.csv",
+  "data/processed/ebible/eng-kjv.csv",
+]
+outputs = [
+  "reports/apocrypha_coverage/coverage.csv",
+  "docs/APOCRYPHA_SOURCE_COVERAGE.md",
+  "reports/apocrypha_coverage/manifest.json",
+]
+
+[[steps]]
+id = "bridge_candidates"
+description = "Find bounded LXX ELS paths that cross the canonical/apocrypha boundary."
+argv = ["-m", "scripts.analyze_apocrypha_bridge_candidates", "--jobs", "0"]
+inputs = [
+  "scripts/analyze_apocrypha_bridge_candidates.py",
+  "configs/example_ebible_grclxx.toml",
+  "data/processed/ebible/grclxx.csv",
+  "terms/theological_terms.csv",
+  "terms/prophetic_terms.csv",
+  "terms/greek_nt_claim_terms.csv",
+  "els/search.py",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/apocrypha_bridge_candidates/bridge_candidates.csv",
+  "reports/apocrypha_bridge_candidates/summary.csv",
+  "docs/APOCRYPHA_BRIDGE_CANDIDATES.md",
+  "reports/apocrypha_bridge_candidates/manifest.json",
+]
+
+[[steps]]
+id = "bridge_context"
+description = "Add surface-context buckets to LXX bridge candidates."
+argv = ["-m", "scripts.analyze_apocrypha_bridge_context"]
+inputs = [
+  "scripts/analyze_apocrypha_bridge_context.py",
+  "configs/example_ebible_grclxx.toml",
+  "data/processed/ebible/grclxx.csv",
+  "reports/apocrypha_bridge_candidates/bridge_candidates.csv",
+  "terms/theological_terms.csv",
+  "terms/prophetic_terms.csv",
+  "terms/greek_nt_claim_terms.csv",
+  "els/search.py",
+  "els/corpus.py",
+  "els/surface.py",
+  "els/normalization.py",
+]
+outputs = [
+  "reports/apocrypha_bridge_context/context.csv",
+  "reports/apocrypha_bridge_context/summary.csv",
+  "docs/APOCRYPHA_BRIDGE_CONTEXT.md",
+  "reports/apocrypha_bridge_context/manifest.json",
+]
+
+[[steps]]
+id = "bridge_controls"
+description = "Compare bridge candidates with same-length non-Bible Greek replacement blocks."
+argv = ["-m", "scripts.analyze_apocrypha_bridge_controls", "--jobs", "0"]
+inputs = [
+  "scripts/analyze_apocrypha_bridge_controls.py",
+  "scripts/analyze_apocrypha_bridge_candidates.py",
+  "configs/example_ebible_grclxx.toml",
+  "configs/nonbible_greek_perseus_iliad.toml",
+  "configs/nonbible_greek_perseus_odyssey.toml",
+  "configs/nonbible_greek_perseus_herodotus.toml",
+  "data/processed/ebible/grclxx.csv",
+  "data/processed/nonbible_controls/greek_perseus_iliad.txt",
+  "data/processed/nonbible_controls/greek_perseus_odyssey.txt",
+  "data/processed/nonbible_controls/greek_perseus_herodotus.txt",
+  "terms/theological_terms.csv",
+  "terms/prophetic_terms.csv",
+  "terms/greek_nt_claim_terms.csv",
+  "reports/apocrypha_bridge_candidates/bridge_candidates.csv",
+]
+outputs = [
+  "reports/apocrypha_bridge_controls/control_summary.csv",
+  "reports/apocrypha_bridge_controls/term_summary.csv",
+  "docs/APOCRYPHA_BRIDGE_CONTROLS.md",
+  "reports/apocrypha_bridge_controls/manifest.json",
+]
+
+[[steps]]
+id = "bridge_shuffled_controls"
+description = "Compare LXX bridge candidates with shuffled apocrypha-block controls."
+argv = [
+  "-m", "scripts.analyze_apocrypha_bridge_shuffled_controls",
+  "--samples", "5",
+  "--jobs", "0",
+]
+inputs = [
+  "scripts/analyze_apocrypha_bridge_shuffled_controls.py",
+  "scripts/analyze_apocrypha_bridge_candidates.py",
+  "scripts/analyze_apocrypha_bridge_controls.py",
+  "configs/example_ebible_grclxx.toml",
+  "data/processed/ebible/grclxx.csv",
+  "terms/theological_terms.csv",
+  "terms/prophetic_terms.csv",
+  "terms/greek_nt_claim_terms.csv",
+  "reports/apocrypha_bridge_candidates/bridge_candidates.csv",
+]
+outputs = [
+  "reports/apocrypha_bridge_shuffled_controls/sample_summary.csv",
+  "reports/apocrypha_bridge_shuffled_controls/summary.csv",
+  "docs/APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md",
+  "reports/apocrypha_bridge_shuffled_controls/manifest.json",
+]
+
+[[steps]]
+id = "apocrypha_only_counts"
+description = "Compare ordinary LXX apocrypha-only ELS counts with canonical LXX and non-Bible Greek blocks."
+argv = ["-m", "scripts.analyze_apocrypha_only_counts", "--jobs", "0"]
+inputs = [
+  "scripts/analyze_apocrypha_only_counts.py",
+  "scripts/analyze_apocrypha_bridge_candidates.py",
+  "scripts/analyze_apocrypha_bridge_controls.py",
+  "configs/example_ebible_grclxx.toml",
+  "configs/nonbible_greek_perseus_iliad.toml",
+  "configs/nonbible_greek_perseus_odyssey.toml",
+  "configs/nonbible_greek_perseus_herodotus.toml",
+  "data/processed/ebible/grclxx.csv",
+  "data/processed/nonbible_controls/greek_perseus_iliad.txt",
+  "data/processed/nonbible_controls/greek_perseus_odyssey.txt",
+  "data/processed/nonbible_controls/greek_perseus_herodotus.txt",
+  "terms/theological_terms.csv",
+  "terms/prophetic_terms.csv",
+  "terms/greek_nt_claim_terms.csv",
+]
+outputs = [
+  "reports/apocrypha_only_counts/counts.csv",
+  "reports/apocrypha_only_counts/summary.csv",
+  "docs/APOCRYPHA_ONLY_COUNTS.md",
+  "reports/apocrypha_only_counts/manifest.json",
+]
+
+[[steps]]
+id = "kjv_apocrypha_only_counts"
+description = "Compare ordinary KJVA apocrypha-only ELS counts with canonical KJVA and non-Bible English blocks."
+argv = [
+  "-m", "scripts.analyze_apocrypha_only_counts",
+  "--corpus-label", "KJVA",
+  "--config", "configs/example_ebible_engkjv_apocrypha.toml",
+  "--terms", "terms/english_search_terms.csv",
+  "--control", "SHAKESPEARE=configs/nonbible_english_pg_shakespeare.toml",
+  "--control", "WAR_PEACE=configs/nonbible_english_pg_war_and_peace.toml",
+  "--control", "MOBY_DICK=configs/nonbible_english_pg_moby_dick.toml",
+  "--jobs", "0",
+  "--out", "reports/kjv_apocrypha_only_counts/counts.csv",
+  "--summary-out", "reports/kjv_apocrypha_only_counts/summary.csv",
+  "--markdown-out", "docs/KJV_APOCRYPHA_ONLY_COUNTS.md",
+  "--manifest-out", "reports/kjv_apocrypha_only_counts/manifest.json",
+]
+inputs = [
+  "scripts/analyze_apocrypha_only_counts.py",
+  "scripts/analyze_apocrypha_bridge_candidates.py",
+  "scripts/analyze_apocrypha_bridge_controls.py",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "configs/nonbible_english_pg_shakespeare.toml",
+  "configs/nonbible_english_pg_war_and_peace.toml",
+  "configs/nonbible_english_pg_moby_dick.toml",
+  "data/processed/ebible/eng-kjv.csv",
+  "data/processed/nonbible_controls/english_pg_shakespeare.txt",
+  "data/processed/nonbible_controls/english_pg_war_and_peace.txt",
+  "data/processed/nonbible_controls/english_pg_moby_dick.txt",
+  "terms/english_search_terms.csv",
+]
+outputs = [
+  "reports/kjv_apocrypha_only_counts/counts.csv",
+  "reports/kjv_apocrypha_only_counts/summary.csv",
+  "docs/KJV_APOCRYPHA_ONLY_COUNTS.md",
+  "reports/kjv_apocrypha_only_counts/manifest.json",
+]
+
+[[steps]]
+id = "kjv_bridge_candidates"
+description = "Find bounded KJVA ELS paths that cross the canonical/apocrypha boundary."
+argv = [
+  "-m", "scripts.analyze_apocrypha_bridge_candidates",
+  "--corpus-label", "KJVA",
+  "--config", "configs/example_ebible_engkjv_apocrypha.toml",
+  "--terms", "terms/english_search_terms.csv",
+  "--jobs", "0",
+  "--out", "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+  "--summary-out", "reports/kjv_apocrypha_bridge_candidates/summary.csv",
+  "--markdown-out", "docs/KJV_APOCRYPHA_BRIDGE_CANDIDATES.md",
+  "--manifest-out", "reports/kjv_apocrypha_bridge_candidates/manifest.json",
+]
+inputs = [
+  "scripts/analyze_apocrypha_bridge_candidates.py",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "data/processed/ebible/eng-kjv.csv",
+  "terms/english_search_terms.csv",
+  "els/search.py",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+  "reports/kjv_apocrypha_bridge_candidates/summary.csv",
+  "docs/KJV_APOCRYPHA_BRIDGE_CANDIDATES.md",
+  "reports/kjv_apocrypha_bridge_candidates/manifest.json",
+]
+
+[[steps]]
+id = "kjv_bridge_context"
+description = "Add surface-context buckets to KJVA bridge candidates."
+argv = [
+  "-m", "scripts.analyze_apocrypha_bridge_context",
+  "--corpus-label", "KJVA",
+  "--config", "configs/example_ebible_engkjv_apocrypha.toml",
+  "--candidates", "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+  "--terms", "terms/english_search_terms.csv",
+  "--out", "reports/kjv_apocrypha_bridge_context/context.csv",
+  "--summary-out", "reports/kjv_apocrypha_bridge_context/summary.csv",
+  "--markdown-out", "docs/KJV_APOCRYPHA_BRIDGE_CONTEXT.md",
+  "--manifest-out", "reports/kjv_apocrypha_bridge_context/manifest.json",
+]
+inputs = [
+  "scripts/analyze_apocrypha_bridge_context.py",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "data/processed/ebible/eng-kjv.csv",
+  "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+  "terms/english_search_terms.csv",
+  "els/search.py",
+  "els/corpus.py",
+  "els/surface.py",
+  "els/normalization.py",
+]
+outputs = [
+  "reports/kjv_apocrypha_bridge_context/context.csv",
+  "reports/kjv_apocrypha_bridge_context/summary.csv",
+  "docs/KJV_APOCRYPHA_BRIDGE_CONTEXT.md",
+  "reports/kjv_apocrypha_bridge_context/manifest.json",
+]
+
+[[steps]]
+id = "kjv_bridge_controls"
+description = "Compare KJVA bridge candidates with same-length non-Bible English replacement blocks."
+argv = [
+  "-m", "scripts.analyze_apocrypha_bridge_controls",
+  "--canonical-label", "KJVA",
+  "--canonical-config", "configs/example_ebible_engkjv_apocrypha.toml",
+  "--terms", "terms/english_search_terms.csv",
+  "--control", "SHAKESPEARE=configs/nonbible_english_pg_shakespeare.toml",
+  "--control", "WAR_PEACE=configs/nonbible_english_pg_war_and_peace.toml",
+  "--control", "MOBY_DICK=configs/nonbible_english_pg_moby_dick.toml",
+  "--observed", "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+  "--jobs", "0",
+  "--out", "reports/kjv_apocrypha_bridge_controls/control_summary.csv",
+  "--term-out", "reports/kjv_apocrypha_bridge_controls/term_summary.csv",
+  "--markdown-out", "docs/KJV_APOCRYPHA_BRIDGE_CONTROLS.md",
+  "--manifest-out", "reports/kjv_apocrypha_bridge_controls/manifest.json",
+]
+inputs = [
+  "scripts/analyze_apocrypha_bridge_controls.py",
+  "scripts/analyze_apocrypha_bridge_candidates.py",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "configs/nonbible_english_pg_shakespeare.toml",
+  "configs/nonbible_english_pg_war_and_peace.toml",
+  "configs/nonbible_english_pg_moby_dick.toml",
+  "data/processed/ebible/eng-kjv.csv",
+  "data/processed/nonbible_controls/english_pg_shakespeare.txt",
+  "data/processed/nonbible_controls/english_pg_war_and_peace.txt",
+  "data/processed/nonbible_controls/english_pg_moby_dick.txt",
+  "terms/english_search_terms.csv",
+  "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+]
+outputs = [
+  "reports/kjv_apocrypha_bridge_controls/control_summary.csv",
+  "reports/kjv_apocrypha_bridge_controls/term_summary.csv",
+  "docs/KJV_APOCRYPHA_BRIDGE_CONTROLS.md",
+  "reports/kjv_apocrypha_bridge_controls/manifest.json",
+]
+
+[[steps]]
+id = "kjv_bridge_shuffled_controls"
+description = "Compare KJVA bridge candidates with shuffled apocrypha-block controls."
+argv = [
+  "-m", "scripts.analyze_apocrypha_bridge_shuffled_controls",
+  "--canonical-label", "KJVA",
+  "--canonical-config", "configs/example_ebible_engkjv_apocrypha.toml",
+  "--terms", "terms/english_search_terms.csv",
+  "--observed", "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+  "--samples", "5",
+  "--jobs", "0",
+  "--out", "reports/kjv_apocrypha_bridge_shuffled_controls/sample_summary.csv",
+  "--summary-out", "reports/kjv_apocrypha_bridge_shuffled_controls/summary.csv",
+  "--markdown-out", "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md",
+  "--manifest-out", "reports/kjv_apocrypha_bridge_shuffled_controls/manifest.json",
+]
+inputs = [
+  "scripts/analyze_apocrypha_bridge_shuffled_controls.py",
+  "scripts/analyze_apocrypha_bridge_candidates.py",
+  "scripts/analyze_apocrypha_bridge_controls.py",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "data/processed/ebible/eng-kjv.csv",
+  "terms/english_search_terms.csv",
+  "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+]
+outputs = [
+  "reports/kjv_apocrypha_bridge_shuffled_controls/sample_summary.csv",
+  "reports/kjv_apocrypha_bridge_shuffled_controls/summary.csv",
+  "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md",
+  "reports/kjv_apocrypha_bridge_shuffled_controls/manifest.json",
+]
+
+[[steps]]
+id = "docs_index"
+description = "Refresh documentation index after apocrypha study outputs."
+argv = ["-m", "scripts.build_docs_index", "--docs-dir", "docs", "--out", "docs/INDEX.md"]
+inputs = [
+  "scripts/build_docs_index.py",
+  "els/project_index.py",
+  "docs/APOCRYPHA_BRIDGE_STUDY.md",
+  "docs/APOCRYPHA_SOURCE_COVERAGE.md",
+  "docs/APOCRYPHA_BRIDGE_CANDIDATES.md",
+  "docs/APOCRYPHA_BRIDGE_CONTEXT.md",
+  "docs/APOCRYPHA_BRIDGE_CONTROLS.md",
+  "docs/APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md",
+  "docs/APOCRYPHA_ONLY_COUNTS.md",
+  "docs/KJV_APOCRYPHA_ONLY_COUNTS.md",
+  "docs/KJV_APOCRYPHA_BRIDGE_CANDIDATES.md",
+  "docs/KJV_APOCRYPHA_BRIDGE_CONTEXT.md",
+  "docs/KJV_APOCRYPHA_BRIDGE_CONTROLS.md",
+  "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md",
+]
+outputs = ["docs/INDEX.md"]
+
+[[steps]]
+id = "protocol_index"
+description = "Refresh protocol index after adding the apocrypha study protocol."
+argv = ["-m", "scripts.build_protocol_index", "--protocols-dir", "protocols", "--out", "protocols/INDEX.md"]
+inputs = [
+  "scripts/build_protocol_index.py",
+  "els/project_index.py",
+  "protocols/apocrypha_bridge_study.toml",
+]
+outputs = ["protocols/INDEX.md"]

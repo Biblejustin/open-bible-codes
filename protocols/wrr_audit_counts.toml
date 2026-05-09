@@ -1,0 +1,391 @@
+name = "wrr_audit_counts"
+description = "WRR2 imported-term count and same-record pair smoke on Koren Genesis; not the WRR statistic."
+manifest_out = "reports/wrr_1994/audit_counts_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "download_wrr_sources"
+description = "Download WRR secondary-source plain text and Michigan-Claremont key into ignored reports output."
+argv = [
+  "-m", "scripts.download_wrr_sources",
+  "--out-dir", "reports/wrr_1994",
+  "--manifest-out", "reports/wrr_1994/sources.manifest.json",
+]
+inputs = [
+  "scripts/download_wrr_sources.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr_1994_paper.pdf",
+  "reports/wrr_1994/WRR1.txt",
+  "reports/wrr_1994/WRR2.txt",
+  "reports/wrr_1994/SE2a.txt",
+  "reports/wrr_1994/SE2b.txt",
+  "reports/wrr_1994/SE3.txt",
+  "reports/wrr_1994/mc_key.html",
+  "reports/wrr_1994/wrr_nations_main_mc.html",
+  "reports/wrr_1994/wrr_nations_main_gir.html",
+  "reports/wrr_1994/wnp_mc.html",
+  "reports/wrr_1994/wnp_en.html",
+  "reports/wrr_1994/sources.manifest.json",
+]
+
+[[steps]]
+id = "audit_wrr_source_shapes"
+description = "Summarize raw ANU famous-rabbis source-list record shapes."
+argv = [
+  "-m", "scripts.analyze_wrr_source_shapes",
+  "--out", "reports/wrr_1994/wrr_source_shapes.csv",
+  "--summary-out", "reports/wrr_1994/wrr_source_shapes_summary.csv",
+  "--markdown-out", "reports/wrr_1994/wrr_source_shapes.md",
+  "--manifest-out", "reports/wrr_1994/wrr_source_shapes.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_source_shapes.py",
+  "scripts/import_wrr_terms.py",
+  "reports/wrr_1994/WRR1.txt",
+  "reports/wrr_1994/WRR2.txt",
+  "reports/wrr_1994/SE2a.txt",
+  "reports/wrr_1994/SE2b.txt",
+  "reports/wrr_1994/SE3.txt",
+]
+outputs = [
+  "reports/wrr_1994/wrr_source_shapes.csv",
+  "reports/wrr_1994/wrr_source_shapes_summary.csv",
+  "reports/wrr_1994/wrr_source_shapes.md",
+  "reports/wrr_1994/wrr_source_shapes.manifest.json",
+]
+
+[[steps]]
+id = "import_wrr2_terms"
+description = "Convert external WRR2 plain-text data into ignored term CSV rows for audit."
+argv = [
+  "-m", "scripts.import_wrr_terms",
+  "--source", "reports/wrr_1994/WRR2.txt",
+  "--out", "reports/wrr_1994/wrr2_terms.csv",
+]
+inputs = [
+  "scripts/import_wrr_terms.py",
+  "reports/wrr_1994/WRR2.txt",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_terms.csv",
+]
+
+[[steps]]
+id = "audit_koren_genesis_text_source"
+description = "Fingerprint the Koren Genesis source text used by the WRR smoke audit."
+argv = [
+  "-m", "scripts.analyze_wrr_text_source",
+  "--config", "configs/example_koren_genesis.toml",
+  "--out", "reports/wrr_1994/koren_genesis_text_source.csv",
+  "--markdown-out", "reports/wrr_1994/koren_genesis_text_source.md",
+  "--manifest-out", "reports/wrr_1994/koren_genesis_text_source.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_text_source.py",
+  "configs/example_koren_genesis.toml",
+  "data/raw/koren/genesis.koren.gz",
+]
+outputs = [
+  "reports/wrr_1994/koren_genesis_text_source.csv",
+  "reports/wrr_1994/koren_genesis_text_source.md",
+  "reports/wrr_1994/koren_genesis_text_source.manifest.json",
+]
+
+[[steps]]
+id = "count_wrr2_genesis_terms"
+description = "Count imported WRR2 appellation/date terms in Koren Genesis."
+argv = [
+  "-m", "els", "batch",
+  "--terms", "reports/wrr_1994/wrr2_terms.csv",
+  "--corpus", "KOREN_GENESIS=configs/example_koren_genesis.toml",
+  "--min-skip", "2",
+  "--max-skip", "250",
+  "--direction", "both",
+  "--min-term-length", "3",
+  "--jobs", "0",
+  "--out", "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "--manifest-out", "reports/wrr_1994/wrr2_genesis_counts.manifest.json",
+]
+inputs = [
+  "reports/wrr_1994/wrr2_terms.csv",
+  "configs/example_koren_genesis.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/normalization.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "reports/wrr_1994/wrr2_genesis_counts.manifest.json",
+]
+
+[[steps]]
+id = "summarize_wrr2_genesis_counts"
+description = "Summarize imported WRR2 Genesis count smoke output."
+argv = [
+  "-m", "scripts.analyze_wrr_audit_counts",
+  "--counts", "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "--summary-out", "reports/wrr_1994/wrr2_genesis_count_summary.csv",
+  "--top-out", "reports/wrr_1994/wrr2_genesis_top_counts.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_genesis_count_summary.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_genesis_count_summary.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_audit_counts.py",
+  "reports/wrr_1994/wrr2_genesis_counts.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_genesis_count_summary.csv",
+  "reports/wrr_1994/wrr2_genesis_top_counts.csv",
+  "reports/wrr_1994/wrr2_genesis_count_summary.md",
+  "reports/wrr_1994/wrr2_genesis_count_summary.manifest.json",
+]
+
+[[steps]]
+id = "audit_wrr2_skip_caps"
+description = "Estimate WRR expected-count skip caps for imported 5..8-letter rows."
+argv = [
+  "-m", "scripts.analyze_wrr_skip_caps",
+  "--terms", "reports/wrr_1994/wrr2_terms.csv",
+  "--counts", "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--min-term-length", "5",
+  "--max-term-length", "8",
+  "--observed-max-skip", "250",
+  "--target-expected-hits", "10",
+  "--out", "reports/wrr_1994/wrr2_skip_caps.csv",
+  "--summary-out", "reports/wrr_1994/wrr2_skip_caps_summary.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_skip_caps.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_skip_caps.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_skip_caps.py",
+  "reports/wrr_1994/wrr2_terms.csv",
+  "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "configs/example_koren_genesis.toml",
+  "els/wrr.py",
+  "els/corpus.py",
+  "els/normalization.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_skip_caps.csv",
+  "reports/wrr_1994/wrr2_skip_caps_summary.csv",
+  "reports/wrr_1994/wrr2_skip_caps.md",
+  "reports/wrr_1994/wrr2_skip_caps.manifest.json",
+]
+
+[[steps]]
+id = "reconcile_wrr2_pair_table"
+description = "Reconcile imported WRR2 source pair counts against current length-filtered pair rows."
+argv = [
+  "-m", "scripts.analyze_wrr_pair_table_reconciliation",
+  "--source", "reports/wrr_1994/WRR2.txt",
+  "--terms", "reports/wrr_1994/wrr2_terms.csv",
+  "--counts", "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "--min-term-length", "5",
+  "--max-term-length", "8",
+  "--appellation-min-term-length", "5",
+  "--expected-published-pairs", "163",
+  "--out", "reports/wrr_1994/wrr2_pair_table_reconciliation.csv",
+  "--summary-out", "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_pair_table_reconciliation.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_pair_table_reconciliation.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_pair_table_reconciliation.py",
+  "scripts/import_wrr_terms.py",
+  "reports/wrr_1994/WRR2.txt",
+  "reports/wrr_1994/wrr2_terms.csv",
+  "reports/wrr_1994/wrr2_genesis_counts.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_pair_table_reconciliation.csv",
+  "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "reports/wrr_1994/wrr2_pair_table_reconciliation.md",
+  "reports/wrr_1994/wrr2_pair_table_reconciliation.manifest.json",
+]
+
+[[steps]]
+id = "audit_wrr2_genesis_pairs"
+description = "Audit same-record appellation/date ELS proximity for imported WRR2 rows."
+argv = [
+  "-m", "scripts.analyze_wrr_pair_audit",
+  "--terms", "reports/wrr_1994/wrr2_terms.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--corpus-label", "KOREN_GENESIS",
+  "--min-skip", "2",
+  "--max-skip", "250",
+  "--direction", "both",
+  "--min-term-length", "3",
+  "--max-gap", "500",
+  "--jobs", "0",
+  "--summary-out", "reports/wrr_1994/wrr2_genesis_pair_audit_summary.csv",
+  "--concept-out", "reports/wrr_1994/wrr2_genesis_pair_audit_concepts.csv",
+  "--examples-out", "reports/wrr_1994/wrr2_genesis_pair_audit_examples.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_genesis_pair_audit.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_genesis_pair_audit.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_pair_audit.py",
+  "scripts/analyze_gog_magog_pairs.py",
+  "reports/wrr_1994/wrr2_terms.csv",
+  "configs/example_koren_genesis.toml",
+  "els/corpus.py",
+  "els/normalization.py",
+  "els/search.py",
+  "els/wrr.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_genesis_pair_audit_summary.csv",
+  "reports/wrr_1994/wrr2_genesis_pair_audit_concepts.csv",
+  "reports/wrr_1994/wrr2_genesis_pair_audit_examples.csv",
+  "reports/wrr_1994/wrr2_genesis_pair_audit.md",
+  "reports/wrr_1994/wrr2_genesis_pair_audit.manifest.json",
+]
+
+[[steps]]
+id = "diagnose_wrr2_perturbations"
+description = "Sample WRR-style perturbation boundary validity for imported 5..8-letter rows."
+argv = [
+  "-m", "scripts.analyze_wrr_perturbation_diagnostics",
+  "--terms", "reports/wrr_1994/wrr2_terms.csv",
+  "--counts", "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--min-term-length", "5",
+  "--max-term-length", "8",
+  "--min-skip", "2",
+  "--search-max-skip", "250",
+  "--direction", "both",
+  "--target-expected-hits", "10",
+  "--sample-hits-per-query", "20",
+  "--out", "reports/wrr_1994/wrr2_perturbation_diagnostics.csv",
+  "--summary-out", "reports/wrr_1994/wrr2_perturbation_diagnostics_summary.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_perturbation_diagnostics.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_perturbation_diagnostics.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_perturbation_diagnostics.py",
+  "reports/wrr_1994/wrr2_terms.csv",
+  "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "configs/example_koren_genesis.toml",
+  "els/wrr.py",
+  "els/corpus.py",
+  "els/normalization.py",
+  "els/search.py",
+  "els/wrr.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_perturbation_diagnostics.csv",
+  "reports/wrr_1994/wrr2_perturbation_diagnostics_summary.csv",
+  "reports/wrr_1994/wrr2_perturbation_diagnostics.md",
+  "reports/wrr_1994/wrr2_perturbation_diagnostics.manifest.json",
+]
+
+[[steps]]
+id = "control_wrr2_genesis_top_pairs"
+description = "Control-screen the top raw WRR2 same-record pair rows."
+argv = [
+  "-m", "scripts.analyze_wrr_pair_controls",
+  "--pair-summary", "reports/wrr_1994/wrr2_genesis_pair_audit_summary.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--top", "20",
+  "--min-skip", "2",
+  "--max-skip", "250",
+  "--direction", "both",
+  "--max-gap", "500",
+  "--term-control-samples", "100",
+  "--random-control-samples", "20",
+  "--jobs", "0",
+  "--out", "reports/wrr_1994/wrr2_genesis_pair_controls.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_genesis_pair_controls.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_genesis_pair_controls.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_pair_controls.py",
+  "scripts/analyze_gog_magog_pairs.py",
+  "reports/wrr_1994/wrr2_genesis_pair_audit_summary.csv",
+  "configs/example_koren_genesis.toml",
+  "els/corpus.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_genesis_pair_controls.csv",
+  "reports/wrr_1994/wrr2_genesis_pair_controls.md",
+  "reports/wrr_1994/wrr2_genesis_pair_controls.manifest.json",
+]
+
+[[steps]]
+id = "audit_wrr2_genesis_pairs_len_5_8"
+description = "Audit WRR appendix-compatible 5..8-letter same-record pair rows."
+argv = [
+  "-m", "scripts.analyze_wrr_pair_audit",
+  "--terms", "reports/wrr_1994/wrr2_terms.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--corpus-label", "KOREN_GENESIS",
+  "--min-skip", "2",
+  "--max-skip", "250",
+  "--direction", "both",
+  "--min-term-length", "5",
+  "--max-term-length", "8",
+  "--max-gap", "500",
+  "--jobs", "0",
+  "--summary-out", "reports/wrr_1994/wrr2_genesis_pair_audit_len_5_8_summary.csv",
+  "--concept-out", "reports/wrr_1994/wrr2_genesis_pair_audit_len_5_8_concepts.csv",
+  "--examples-out", "reports/wrr_1994/wrr2_genesis_pair_audit_len_5_8_examples.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_genesis_pair_audit_len_5_8.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_genesis_pair_audit_len_5_8.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_pair_audit.py",
+  "scripts/analyze_gog_magog_pairs.py",
+  "reports/wrr_1994/wrr2_terms.csv",
+  "configs/example_koren_genesis.toml",
+  "els/corpus.py",
+  "els/normalization.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_genesis_pair_audit_len_5_8_summary.csv",
+  "reports/wrr_1994/wrr2_genesis_pair_audit_len_5_8_concepts.csv",
+  "reports/wrr_1994/wrr2_genesis_pair_audit_len_5_8_examples.csv",
+  "reports/wrr_1994/wrr2_genesis_pair_audit_len_5_8.md",
+  "reports/wrr_1994/wrr2_genesis_pair_audit_len_5_8.manifest.json",
+]
+
+[[steps]]
+id = "control_wrr2_genesis_top_pairs_len_5_8"
+description = "Control-screen top 5..8-letter WRR pair-audit rows."
+argv = [
+  "-m", "scripts.analyze_wrr_pair_controls",
+  "--pair-summary", "reports/wrr_1994/wrr2_genesis_pair_audit_len_5_8_summary.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--top", "20",
+  "--min-skip", "2",
+  "--max-skip", "250",
+  "--direction", "both",
+  "--max-gap", "500",
+  "--term-control-samples", "100",
+  "--random-control-samples", "20",
+  "--jobs", "0",
+  "--out", "reports/wrr_1994/wrr2_genesis_pair_controls_len_5_8.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_genesis_pair_controls_len_5_8.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_genesis_pair_controls_len_5_8.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_pair_controls.py",
+  "scripts/analyze_gog_magog_pairs.py",
+  "reports/wrr_1994/wrr2_genesis_pair_audit_len_5_8_summary.csv",
+  "configs/example_koren_genesis.toml",
+  "els/corpus.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_genesis_pair_controls_len_5_8.csv",
+  "reports/wrr_1994/wrr2_genesis_pair_controls_len_5_8.md",
+  "reports/wrr_1994/wrr2_genesis_pair_controls_len_5_8.manifest.json",
+]

@@ -1,0 +1,184 @@
+name = "greek_surface_length4_vocabulary_controls"
+description = "Post-discovery length-4 Greek surface follow-up against generated real surface-vocabulary controls."
+manifest_out = "reports/greek_surface_length4_vocab_controls/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "vocabulary_terms"
+description = "Generate a combined selected-target plus Greek surface-vocabulary control term list."
+argv = [
+  "-m", "scripts.build_greek_surface_vocabulary_controls",
+  "--source-terms", "terms/greek_surface_prospective_terms.csv",
+  "--selected", "reports/greek_surface_length4_followup/selected_patterns.csv",
+  "--min-length", "4",
+  "--max-length", "4",
+  "--min-sources", "4",
+  "--out", "reports/greek_surface_length4_vocab_controls/terms.csv",
+  "--markdown-out", "docs/GREEK_SURFACE_LENGTH4_VOCABULARY_CONTROLS.md",
+  "--manifest-out", "reports/greek_surface_length4_vocab_controls/terms.manifest.json",
+]
+inputs = [
+  "scripts/build_greek_surface_vocabulary_controls.py",
+  "terms/greek_surface_prospective_terms.csv",
+  "reports/greek_surface_length4_followup/selected_patterns.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/normalization.py",
+]
+outputs = [
+  "reports/greek_surface_length4_vocab_controls/terms.csv",
+  "docs/GREEK_SURFACE_LENGTH4_VOCABULARY_CONTROLS.md",
+  "reports/greek_surface_length4_vocab_controls/terms.manifest.json",
+]
+
+[[steps]]
+id = "surface_context"
+description = "Run exact-center surface ELS search for selected length-4 targets plus generated vocabulary controls."
+argv = [
+  "-m", "els", "surface-context",
+  "--terms", "reports/greek_surface_length4_vocab_controls/terms.csv",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "BYZ_NT=configs/example_ebible_grcmt.toml",
+  "--corpus", "TCG_NT=configs/example_ebible_grctcgnt.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--min-skip", "2",
+  "--max-skip", "50",
+  "--direction", "both",
+  "--min-term-length", "4",
+  "--jobs", "0",
+  "--out", "reports/greek_surface_length4_vocab_controls/surface_context_hits.csv",
+  "--summary-out", "reports/greek_surface_length4_vocab_controls/surface_context_summary.csv",
+  "--manifest-out", "reports/greek_surface_length4_vocab_controls/surface_context.manifest.json",
+]
+inputs = [
+  "reports/greek_surface_length4_vocab_controls/terms.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+  "els/surface.py",
+]
+outputs = [
+  "reports/greek_surface_length4_vocab_controls/surface_context_hits.csv",
+  "reports/greek_surface_length4_vocab_controls/surface_context_summary.csv",
+  "reports/greek_surface_length4_vocab_controls/surface_context.manifest.json",
+]
+
+[[steps]]
+id = "surface_queue"
+description = "Summarize exact-center surface patterns for the vocabulary-control cohort."
+argv = [
+  "-m", "scripts.analyze_greek_expanded_surface_queue",
+  "--surface-hits", "reports/greek_surface_length4_vocab_controls/surface_context_hits.csv",
+  "--patterns-out", "reports/greek_surface_length4_vocab_controls/surface_patterns.csv",
+  "--summary-out", "reports/greek_surface_length4_vocab_controls/term_summary.csv",
+  "--title", "Greek Surface Length-4 Vocabulary Control Queue",
+  "--status", "post-discovery vocabulary-control queue; no claim.",
+  "--term-scope", "reports/greek_surface_length4_vocab_controls/terms.csv",
+  "--description", "This report summarizes exact-center surface hits for the generated length-4 Greek surface-vocabulary control cohort.",
+  "--markdown-out", "reports/greek_surface_length4_vocab_controls/surface_queue.md",
+  "--manifest-out", "reports/greek_surface_length4_vocab_controls/surface_queue.manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_expanded_surface_queue.py",
+  "reports/greek_surface_length4_vocab_controls/surface_context_hits.csv",
+]
+outputs = [
+  "reports/greek_surface_length4_vocab_controls/surface_patterns.csv",
+  "reports/greek_surface_length4_vocab_controls/term_summary.csv",
+  "reports/greek_surface_length4_vocab_controls/surface_queue.md",
+  "reports/greek_surface_length4_vocab_controls/surface_queue.manifest.json",
+]
+
+[[steps]]
+id = "surface_cohort"
+description = "Build the combined target/control cohort metrics for evaluation."
+argv = [
+  "-m", "scripts.analyze_greek_expanded_surface_triage",
+  "--terms", "reports/greek_surface_length4_vocab_controls/terms.csv",
+  "--patterns", "reports/greek_surface_length4_vocab_controls/surface_patterns.csv",
+  "--term-summary", "reports/greek_surface_length4_vocab_controls/term_summary.csv",
+  "--min-length", "4",
+  "--title", "Greek Surface Length-4 Vocabulary Control Cohort",
+  "--status", "post-discovery vocabulary-control cohort; no claim.",
+  "--description", "This report builds cohort metrics for selected targets and generated vocabulary controls.",
+  "--selected-out", "reports/greek_surface_length4_vocab_controls/selected_patterns.csv",
+  "--cohort-out", "reports/greek_surface_length4_vocab_controls/term_cohort.csv",
+  "--markdown-out", "reports/greek_surface_length4_vocab_controls/surface_cohort.md",
+  "--manifest-out", "reports/greek_surface_length4_vocab_controls/surface_cohort.manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_expanded_surface_triage.py",
+  "reports/greek_surface_length4_vocab_controls/terms.csv",
+  "reports/greek_surface_length4_vocab_controls/surface_patterns.csv",
+  "reports/greek_surface_length4_vocab_controls/term_summary.csv",
+]
+outputs = [
+  "reports/greek_surface_length4_vocab_controls/selected_patterns.csv",
+  "reports/greek_surface_length4_vocab_controls/term_cohort.csv",
+  "reports/greek_surface_length4_vocab_controls/surface_cohort.md",
+  "reports/greek_surface_length4_vocab_controls/surface_cohort.manifest.json",
+]
+
+[[steps]]
+id = "vocabulary_control_pool"
+description = "Match selected length-4 targets against generated vocabulary controls by surface-frequency vector."
+argv = [
+  "-m", "scripts.analyze_greek_surface_control_pool",
+  "--terms", "reports/greek_surface_length4_vocab_controls/terms.csv",
+  "--selected", "reports/greek_surface_length4_followup/selected_patterns.csv",
+  "--top-controls", "200",
+  "--max-markdown-controls", "100",
+  "--title", "Greek Surface Length-4 Vocabulary Control Pool",
+  "--frequencies-out", "reports/greek_surface_length4_vocab_controls/term_surface_frequencies.csv",
+  "--matched-out", "reports/greek_surface_length4_vocab_controls/matched_controls.csv",
+  "--markdown-out", "docs/GREEK_SURFACE_LENGTH4_VOCABULARY_CONTROL_POOL.md",
+  "--manifest-out", "reports/greek_surface_length4_vocab_controls/control_pool.manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_surface_control_pool.py",
+  "reports/greek_surface_length4_vocab_controls/terms.csv",
+  "reports/greek_surface_length4_followup/selected_patterns.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+]
+outputs = [
+  "reports/greek_surface_length4_vocab_controls/term_surface_frequencies.csv",
+  "reports/greek_surface_length4_vocab_controls/matched_controls.csv",
+  "docs/GREEK_SURFACE_LENGTH4_VOCABULARY_CONTROL_POOL.md",
+  "reports/greek_surface_length4_vocab_controls/control_pool.manifest.json",
+]
+
+[[steps]]
+id = "vocabulary_control_evaluation"
+description = "Evaluate selected length-4 targets against generated vocabulary controls."
+argv = [
+  "-m", "scripts.analyze_greek_surface_control_evaluation",
+  "--cohort", "reports/greek_surface_length4_vocab_controls/term_cohort.csv",
+  "--matched-controls", "reports/greek_surface_length4_vocab_controls/matched_controls.csv",
+  "--title", "Greek Surface Length-4 Vocabulary Control Evaluation",
+  "--summary-out", "reports/greek_surface_length4_vocab_controls/control_summary.csv",
+  "--details-out", "reports/greek_surface_length4_vocab_controls/control_details.csv",
+  "--markdown-out", "docs/GREEK_SURFACE_LENGTH4_VOCABULARY_CONTROL_EVALUATION.md",
+  "--manifest-out", "reports/greek_surface_length4_vocab_controls/control_evaluation.manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_surface_control_evaluation.py",
+  "reports/greek_surface_length4_vocab_controls/term_cohort.csv",
+  "reports/greek_surface_length4_vocab_controls/matched_controls.csv",
+]
+outputs = [
+  "reports/greek_surface_length4_vocab_controls/control_summary.csv",
+  "reports/greek_surface_length4_vocab_controls/control_details.csv",
+  "docs/GREEK_SURFACE_LENGTH4_VOCABULARY_CONTROL_EVALUATION.md",
+  "reports/greek_surface_length4_vocab_controls/control_evaluation.manifest.json",
+]

@@ -1,0 +1,36 @@
+name = "greek_expanded_surface_letter_paths"
+description = "Letter-path audit sheet for tightened Greek exact-center surface rows."
+manifest_out = "reports/greek_expanded_surface_letter_paths/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "letter_paths"
+description = "Reconstruct every selected ELS letter path across the compared Greek NT sources."
+argv = [
+  "-m", "scripts.analyze_greek_surface_letter_paths",
+  "--selected", "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "BYZ_NT=configs/example_ebible_grcmt.toml",
+  "--corpus", "TCG_NT=configs/example_ebible_grctcgnt.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--summary-out", "reports/greek_expanded_surface_letter_paths/path_summary.csv",
+  "--letters-out", "reports/greek_expanded_surface_letter_paths/letter_paths.csv",
+  "--markdown-out", "docs/GREEK_EXPANDED_SURFACE_LETTER_PATHS.md",
+  "--manifest-out", "reports/greek_expanded_surface_letter_paths/manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_surface_letter_paths.py",
+  "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/greek_expanded_surface_letter_paths/path_summary.csv",
+  "reports/greek_expanded_surface_letter_paths/letter_paths.csv",
+  "docs/GREEK_EXPANDED_SURFACE_LETTER_PATHS.md",
+  "reports/greek_expanded_surface_letter_paths/manifest.json",
+]

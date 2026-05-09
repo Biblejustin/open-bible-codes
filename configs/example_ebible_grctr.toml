@@ -1,0 +1,12 @@
+name = "eBible Greek Textus Receptus NT"
+language = "greek"
+
+[[sources]]
+name = "eBible GRCTR"
+format = "csv"
+path = "../data/processed/ebible/grctr.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

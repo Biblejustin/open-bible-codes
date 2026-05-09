@@ -1,0 +1,31 @@
+name = "greek_expanded_surface_followup"
+description = "Compact post-screen follow-up report for selected Greek exact-center surface rows."
+manifest_out = "reports/greek_expanded_surface_followup/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "surface_followup_report"
+description = "Build the selected-row report from letter paths and all-available real-word controls."
+argv = [
+  "-m", "scripts.build_greek_surface_followup_report",
+  "--selected", "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "--path-summary", "reports/greek_expanded_surface_letter_paths/path_summary.csv",
+  "--control-summary", "reports/greek_expanded_surface_available_control_evaluation/summary.csv",
+  "--letter-paths-manifest", "reports/greek_expanded_surface_letter_paths/protocol_run.manifest.json",
+  "--controls-manifest", "reports/greek_expanded_surface_available_control_evaluation/protocol_run.manifest.json",
+  "--report-out", "docs/GREEK_EXPANDED_SURFACE_FOLLOWUP_REPORT.md",
+  "--manifest-out", "reports/greek_expanded_surface_followup/report.manifest.json",
+]
+inputs = [
+  "scripts/build_greek_surface_followup_report.py",
+  "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "reports/greek_expanded_surface_letter_paths/path_summary.csv",
+  "reports/greek_expanded_surface_letter_paths/protocol_run.manifest.json",
+  "reports/greek_expanded_surface_available_control_evaluation/summary.csv",
+  "reports/greek_expanded_surface_available_control_evaluation/protocol_run.manifest.json",
+]
+outputs = [
+  "docs/GREEK_EXPANDED_SURFACE_FOLLOWUP_REPORT.md",
+  "reports/greek_expanded_surface_followup/report.manifest.json",
+]

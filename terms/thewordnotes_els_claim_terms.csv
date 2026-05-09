@@ -1,0 +1,81 @@
+term_id,concept,category,language,term,notes
+twn_torah_h,Torah,twn_common_examples,hebrew,תורה,book-opening Torah skip examples
+twn_yhwh_h,YHWH,twn_common_examples,hebrew,יהוה,Leviticus opening YHWH skip example
+twn_israel_h,Israel,twn_common_examples,hebrew,ישראל,Genesis opening Israel skip examples
+twn_eden_h,Eden,twn_common_examples,hebrew,עדן,Genesis 2 Eden repeated code claim
+twn_tree_h,Tree,twn_common_examples,hebrew,עץ,Genesis 2 tree-name cluster theme
+twn_pharez_h,Pharez,twn_judah_david,hebrew,פרץ,Genesis 38 Judah-to-David cluster theme
+twn_hezron_h,Hezron,twn_judah_david,hebrew,חצרון,Genesis 38 Judah-to-David cluster theme
+twn_ram_h,Ram,twn_judah_david,hebrew,רם,Genesis 38 Judah-to-David cluster theme
+twn_amminadab_h,Amminadab,twn_judah_david,hebrew,עמינדב,Genesis 38 Judah-to-David cluster theme
+twn_nahshon_h,Nahshon,twn_judah_david,hebrew,נחשון,Genesis 38 Judah-to-David cluster theme
+twn_salmon_h,Salmon,twn_judah_david,hebrew,שלמון,Genesis 38 Judah-to-David cluster theme
+twn_boaz_h,Boaz,twn_judah_david,hebrew,בעז,Genesis 38 Judah-to-David cluster theme
+twn_obed_h,Obed,twn_judah_david,hebrew,עובד,Genesis 38 Judah-to-David cluster theme
+twn_jesse_h,Jesse,twn_judah_david,hebrew,ישי,Genesis 38 Judah-to-David cluster theme
+twn_david_h,David,twn_judah_david,hebrew,דוד,Genesis 38 Judah-to-David cluster theme
+twn_zedekiah_h,Zedekiah,twn_historical_clusters,hebrew,צדקיהו,Genesis Zedekiah claim
+twn_matanya_h,Matanya,twn_historical_clusters,hebrew,מתניה,Zedekiah original name claim
+twn_hanukkah_h,Hanukkah,twn_historical_clusters,hebrew,חנוכה,Genesis Hanukkah claim
+twn_hasmoneans_h,Hasmoneans,twn_historical_clusters,hebrew,חשמונאים,Genesis Hasmonean claim
+twn_antiochus_h,Antiochus Epiphanes,twn_historical_clusters,hebrew,אנטיוכוס,Hanukkah context term
+twn_sadat_h,Anwar Sadat,twn_historical_clusters,hebrew,אנואר סאדאת,Sadat assassination claim
+twn_chaled_islambouli_h,Chaled Islambouli,twn_historical_clusters,hebrew,חאלד אסלאמבולי,Sadat assassin claim spelling provisional
+twn_moslem_brotherhood_h,Muslim Brotherhood,twn_historical_clusters,hebrew,האחים המוסלמים,Sadat claim context
+twn_president_h,President,twn_historical_clusters,hebrew,נשיא,Sadat claim term
+twn_gunfire_h,Gunfire,twn_historical_clusters,hebrew,ירי,Sadat claim term
+twn_shot_h,Shot,twn_historical_clusters,hebrew,נורה,Sadat claim term
+twn_murder_h,Murder,twn_historical_clusters,hebrew,רצח,Sadat claim term
+twn_parade_h,Parade,twn_historical_clusters,hebrew,מצעד,Sadat claim term
+twn_year_1981_compact_h,Gregorian 1981,twn_date_encodings,hebrew,אתתקפא,compact thousands notation for 1981
+twn_hitler_h,Hitler,twn_holocaust_claims,hebrew,היטלר,Deuteronomy Hitler claim
+twn_auschwitz_h,Auschwitz,twn_holocaust_claims,hebrew,אושויץ,Deuteronomy Auschwitz cluster claim
+twn_belsen_h,Belsen,twn_holocaust_claims,hebrew,בלזן,Deuteronomy Belsen cluster claim
+twn_berlin_h,Berlin,twn_holocaust_claims,hebrew,ברלין,Deuteronomy Berlin cluster claim
+twn_king_nazis_h,King Of Nazis,twn_holocaust_claims,hebrew,מלך נאצים,Deuteronomy 33 King of Nazis claim
+twn_french_revolution_h,French Revolution,twn_french_revolution,hebrew,מהפכה הצרפתית,Genesis 39-41 French Revolution claim
+twn_louis_h,Louis,twn_french_revolution,hebrew,לואי,French king claim
+twn_bourbon_h,Bourbon,twn_french_revolution,hebrew,בורבון,French Revolution claim
+twn_marseillaise_h,Marseillaise,twn_french_revolution,hebrew,מרסייז,French anthem claim spelling provisional
+twn_bastille_h,Bastille,twn_french_revolution,hebrew,בסטיליה,French prison claim
+twn_aaron_h,Aaron,twn_leviticus_aaron,hebrew,אהרן,Leviticus 1 Aaron repeated code claim
+twn_yeshua_yakhol_h,Yeshua Is Able,twn_rambsel_yeshua,hebrew,ישוע יכול,Genesis 1 Rambsel claim
+twn_yeshua_shmi_h,Yeshua My Name,twn_rambsel_yeshua,hebrew,ישוע שמי,Isaiah 53 10 Rambsel claim
+twn_yoshiah_h,He Will Save,twn_rambsel_yeshua,hebrew,יושיעה,Genesis 3 20-21 Rambsel claim spelling provisional
+twn_yeshua_h,Yeshua,twn_rambsel_yeshua,hebrew,ישוע,Rambsel Yeshua examples
+twn_messiah_h,Messiah,twn_rambsel_yeshua,hebrew,משיח,Zechariah 12 and Isaiah 53 examples
+twn_behold_blood_yeshua_h,Behold The Blood Of Jesus,twn_rambsel_yeshua,hebrew,הן דם ישוע,Leviticus 21 Rambsel claim
+twn_oshiya_h,I Will Save,twn_rambsel_yeshua,hebrew,אושיעה,Isaiah 61 Rambsel claim spelling provisional
+twn_nazarene_h,Nazarene,twn_isaiah53_table,hebrew,נזיר,Isaiah 53 table term
+twn_passover_h,Passover,twn_isaiah53_table,hebrew,פסח,Isaiah 53 table term
+twn_galilee_h,Galilee,twn_isaiah53_table,hebrew,גליל,Isaiah 53 table term
+twn_wicked_caesar_h,Wicked Caesar,twn_isaiah53_table,hebrew,קיסר עמל אבד,Isaiah 53 table phrase
+twn_evil_roman_city_h,Evil Roman City,twn_isaiah53_table,hebrew,רע עיר רומי,Isaiah 53 table phrase
+twn_caiaphas_h,Caiaphas,twn_isaiah53_table,hebrew,כיפה,Isaiah 53 table term
+twn_annas_h,Annas,twn_isaiah53_table,hebrew,ענן,Isaiah 53 table term
+twn_mary_h,Mary,twn_isaiah53_table,hebrew,מרים,Isaiah 53 table term
+twn_disciples_h,The Disciples,twn_isaiah53_table,hebrew,תלמידים,Isaiah 53 table term
+twn_peter_h,Peter,twn_isaiah53_table,hebrew,כפה,Isaiah 53 table term with source transcription issue note
+twn_matthew_h,Matthew,twn_isaiah53_table,hebrew,מתתי,Isaiah 53 table term
+twn_john_h,John,twn_isaiah53_table,hebrew,יוחנן,Isaiah 53 table term
+twn_andrew_h,Andrew,twn_isaiah53_table,hebrew,אנדרי,Isaiah 53 table term
+twn_philip_h,Philip,twn_isaiah53_table,hebrew,פילף,Isaiah 53 table term spelling from PDF
+twn_thomas_h,Thomas,twn_isaiah53_table,hebrew,תומא,Isaiah 53 table term
+twn_james_h,James,twn_isaiah53_table,hebrew,יעקב,Isaiah 53 table term
+twn_simon_h,Simon,twn_isaiah53_table,hebrew,שמעון,Isaiah 53 table term
+twn_thaddaeus_h,Thaddaeus,twn_isaiah53_table,hebrew,תדי,Isaiah 53 table term
+twn_matthias_h,Matthias,twn_isaiah53_table,hebrew,מתיה,Isaiah 53 table term with source transcription issue note
+twn_let_him_be_crucified_h,Let Him Be Crucified,twn_isaiah53_table,hebrew,יצלב,Isaiah 53 table phrase
+twn_his_cross_h,His Cross,twn_isaiah53_table,hebrew,צלב,Isaiah 53 table term
+twn_lamp_of_lord_h,Lamp Of The Lord,twn_isaiah53_table,hebrew,נר יהוה,Isaiah 53 table phrase
+twn_bread_h,Bread,twn_isaiah53_table,hebrew,לחם,Isaiah 53 table term
+twn_wine_h,Wine,twn_isaiah53_table,hebrew,יין,Isaiah 53 table term with source transcription issue note
+twn_from_zion_h,From Zion,twn_isaiah53_table,hebrew,מציון,Isaiah 53 table term
+twn_moriah_h,Moriah,twn_isaiah53_table,hebrew,מריה,Isaiah 53 table term
+twn_servant_h,Servant,twn_isaiah53_table,hebrew,עבד,Isaiah 53 table term
+twn_seed_h,Seed,twn_isaiah53_table,hebrew,זרע,Isaiah 53 table term
+twn_water_h,Water,twn_isaiah53_table,hebrew,מים,Isaiah 53 table term
+twn_levites_h,Levites,twn_isaiah53_table,hebrew,לוים,Isaiah 53 table term
+twn_atonement_lamb_h,Atonement Lamb,twn_isaiah53_table,hebrew,טלא מכפר,Isaiah 53 table phrase
+twn_masoretic_hebrew_h,Masoretic Hebrew Text,twn_source_sensitivity,hebrew,מסורה,source-sensitivity claim
+twn_received_text_g,Received Text,twn_source_sensitivity,greek,κειμενον παραδεδομενον,Greek Received Text source-sensitivity claim

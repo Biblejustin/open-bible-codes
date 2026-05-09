@@ -1,0 +1,33 @@
+term_id,concept,category,language,term,notes
+iesous_gnt,Jesus,core_names_titles,greek,Ἰησοῦς,Jesus name
+christos_gnt,Christ,core_names_titles,greek,Χριστός,Christ title
+messias_gnt,Messiah,core_names_titles,greek,Μεσσίας,Messiah title
+soter_gnt,Savior,core_names_titles,greek,Σωτήρ,Savior title
+kyrios_gnt,Lord,core_names_titles,greek,Κύριος,Lord title
+huios_tou_theou_gnt,Son Of God,core_names_titles,greek,Υἱός τοῦ Θεοῦ,title phrase
+amnos_tou_theou_gnt,Lamb Of God,core_names_titles,greek,Ἀμνὸς τοῦ Θεοῦ,title phrase
+stauros_gnt,Cross,key_concepts_events,greek,Σταυρός,cross term
+anastasis_gnt,Resurrection,key_concepts_events,greek,Ἀνάστασις,resurrection term
+thanatos_gnt,Death,key_concepts_events,greek,Θάνατος,death term
+haima_gnt,Blood,key_concepts_events,greek,Αἷμα,blood term
+taphos_gnt,Tomb,key_concepts_events,greek,Τάφος,tomb term
+analepsis_gnt,Ascension,key_concepts_events,greek,Ἀνάληψις,ascension term
+deutera_parousia_gnt,Second Coming,key_concepts_events,greek,Δευτέρα Παρουσία,second coming phrase
+krisis_gnt,Judgment,key_concepts_events,greek,Κρίσις,judgment term
+petros_gnt,Peter,people,greek,Πέτρος,person name
+paulos_gnt,Paul,people,greek,Παῦλος,person name
+ioannes_gnt,John,people,greek,Ἰωάννης,person name
+maria_gnt,Mary,people,greek,Μαρία,person name
+ioudas_gnt,Judas,people,greek,Ἰούδας,person name
+pilatos_gnt,Pilate,people,greek,Πιλᾶτος,person name
+iesous_christos_gnt,Jesus Christ,search_phrases,greek,Ἰησοῦς Χριστός,phrase
+iesous_kyrios_gnt,Jesus Lord,search_phrases,greek,Ἰησοῦς Κύριος,phrase
+huios_theou_gnt,Son Of God,search_phrases,greek,Υἱὸς Θεοῦ,shorter title phrase
+amnos_theou_gnt,Lamb Of God,search_phrases,greek,Ἀμνὸς Θεοῦ,shorter title phrase
+aneste_gnt,He Is Risen,search_phrases,greek,Ἀνέστη,claimed phrase
+erchetai_gnt,He Is Coming,search_phrases,greek,Ἔρχεται,claimed phrase
+apokalypsis_gnt,Revelation,revelation_focused,greek,Ἀποκάλυψις,Revelation or apocalypse term
+therion_gnt,Beast,revelation_focused,greek,Θηρίον,Revelation term
+drakon_gnt,Dragon,revelation_focused,greek,Δράκων,Revelation term
+sphragis_gnt,Seal,revelation_focused,greek,Σφραγίς,Revelation term
+hierousalem_gnt,Jerusalem,revelation_focused,greek,Ἱερουσαλήμ,place name

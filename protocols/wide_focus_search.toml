@@ -1,0 +1,105 @@
+name = "wide_focus_search"
+description = "Focused skip 2..250 screening run for modern/geopolitical/local and prophetic terms."
+manifest_out = "reports/wide_focus_search/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "wide_focus_counts"
+description = "Count focused declared term lists across public corpora with skip 2..250."
+argv = [
+  "-m", "els", "batch-many",
+  "--term-set", "modern_names_dates=terms/modern_names_dates.csv",
+  "--term-set", "prophetic_terms=terms/prophetic_terms.csv",
+  "--corpus", "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus", "UXLC=configs/example_uxlc.toml",
+  "--corpus", "MAM=configs/example_mam.toml",
+  "--corpus", "EBIBLE_WLC=configs/example_ebible_hebwlc.toml",
+  "--corpus", "UHB=configs/example_uhb.toml",
+  "--corpus", "LXX=configs/example_ebible_grclxx.toml",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "BYZ_NT=configs/example_ebible_grcmt.toml",
+  "--corpus", "TCG_NT=configs/example_ebible_grctcgnt.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--min-skip", "2",
+  "--max-skip", "250",
+  "--jobs", "0",
+  "--out-dir", "reports/wide_focus_search",
+  "--manifest-out", "reports/wide_focus_search/broad_search.manifest.json",
+]
+inputs = [
+  "terms/modern_names_dates.csv",
+  "terms/prophetic_terms.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_uhb.toml",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wide_focus_search/modern_names_dates_counts.csv",
+  "reports/wide_focus_search/modern_names_dates_counts.manifest.json",
+  "reports/wide_focus_search/prophetic_terms_counts.csv",
+  "reports/wide_focus_search/prophetic_terms_counts.manifest.json",
+  "reports/wide_focus_search/broad_search.manifest.json",
+]
+
+[[steps]]
+id = "wide_focus_report"
+description = "Summarize focused skip 2..250 count outputs."
+argv = [
+  "-m", "scripts.analyze_broad_search",
+  "--counts-dir", "reports/wide_focus_search",
+  "--baseline-dir", "reports/protocols/public_baseline",
+  "--summary-out", "reports/wide_focus_search/wide_focus_summary.csv",
+  "--top-out", "reports/wide_focus_search/wide_focus_top_counts.csv",
+  "--focus-out", "reports/wide_focus_search/wide_focus_focus.csv",
+  "--delta-out", "reports/wide_focus_search/wide_focus_delta_vs_baseline.csv",
+  "--markdown-out", "reports/wide_focus_search/wide_focus.md",
+  "--manifest-out", "reports/wide_focus_search/wide_focus_summary.manifest.json",
+]
+inputs = [
+  "scripts/analyze_broad_search.py",
+  "reports/wide_focus_search/modern_names_dates_counts.csv",
+  "reports/wide_focus_search/prophetic_terms_counts.csv",
+  "reports/wide_focus_search/broad_search.manifest.json",
+  "reports/protocols/public_baseline/modern_names_dates_counts.csv",
+  "reports/protocols/public_baseline/prophetic_terms_counts.csv",
+]
+outputs = [
+  "reports/wide_focus_search/wide_focus_summary.csv",
+  "reports/wide_focus_search/wide_focus_top_counts.csv",
+  "reports/wide_focus_search/wide_focus_focus.csv",
+  "reports/wide_focus_search/wide_focus_delta_vs_baseline.csv",
+  "reports/wide_focus_search/wide_focus.md",
+  "reports/wide_focus_search/wide_focus_summary.manifest.json",
+]
+
+[[steps]]
+id = "wide_focus_version_presence"
+description = "Summarize which focused wide-search terms appear in which observed corpora."
+argv = [
+  "-m", "scripts.analyze_broad_version_presence",
+  "--counts-dir", "reports/wide_focus_search",
+  "--summary-out", "reports/wide_focus_search/wide_focus_version_presence.csv",
+  "--markdown-out", "reports/wide_focus_search/wide_focus_version_presence.md",
+  "--manifest-out", "reports/wide_focus_search/wide_focus_version_presence.manifest.json",
+]
+inputs = [
+  "scripts/analyze_broad_version_presence.py",
+  "reports/wide_focus_search/modern_names_dates_counts.csv",
+  "reports/wide_focus_search/prophetic_terms_counts.csv",
+]
+outputs = [
+  "reports/wide_focus_search/wide_focus_version_presence.csv",
+  "reports/wide_focus_search/wide_focus_version_presence.md",
+  "reports/wide_focus_search/wide_focus_version_presence.manifest.json",
+]

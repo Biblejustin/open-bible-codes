@@ -1,0 +1,46 @@
+name = "hebrew_claim_version_presence"
+description = "Capped exact ELS hit-pattern presence for declared Hebrew claim terms across MT-family corpora."
+manifest_out = "reports/hebrew_claim_version_presence/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 0
+
+[[steps]]
+id = "hebrew_claim_version_presence"
+description = "Compare exact Hebrew claim-term hit ref-key patterns across MT_WLC, UXLC, EBIBLE_WLC, MAM, and UHB."
+argv = [
+  "-m",
+  "scripts.analyze_hebrew_hit_version_presence",
+  "--terms",
+  "terms/hebrew_claim_terms.csv",
+  "--all-concepts",
+  "--max-hits-per-term",
+  "100",
+  "--corpus-jobs",
+  "0",
+  "--patterns-out",
+  "reports/hebrew_claim_version_presence/hit_patterns.csv",
+  "--summary-out",
+  "reports/hebrew_claim_version_presence/term_summary.csv",
+  "--markdown-out",
+  "reports/hebrew_claim_version_presence/hebrew_claim_version_presence.md",
+  "--manifest-out",
+  "reports/hebrew_claim_version_presence/manifest.json",
+]
+inputs = [
+  "scripts/analyze_hebrew_hit_version_presence.py",
+  "terms/hebrew_claim_terms.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "els/corpus.py",
+  "els/search.py",
+  "scripts/analyze_mt_version_differences.py",
+]
+outputs = [
+  "reports/hebrew_claim_version_presence/hit_patterns.csv",
+  "reports/hebrew_claim_version_presence/term_summary.csv",
+  "reports/hebrew_claim_version_presence/hebrew_claim_version_presence.md",
+  "reports/hebrew_claim_version_presence/manifest.json",
+]

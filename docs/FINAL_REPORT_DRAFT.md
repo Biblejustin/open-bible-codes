@@ -1,0 +1,421 @@
+# Final Report Draft
+
+Status: reader-facing draft assembled from the current locked report set.
+This is not a new analysis run and it does not promote any row to a public
+claim.
+
+Current assembly source: `reports/real_report_run/summary.md` at commit
+`e9f522f`.
+
+## Executive Summary
+
+This project tests whether equidistant letter sequences can be found and
+measured in biblical texts across Hebrew, Greek, and English corpora. The
+current run searches continuous normalized letter streams with forward and
+backward signed skips, including full-span skip caps for selected rows. It also
+records center words, span context, source/version presence, same-skip
+before/after extensions, and several kinds of controls.
+
+The current result is cautious. Hidden paths exist. Centered-self and
+relevant-center occurrences exist. Some rows are worth manual review. The most
+interesting rows are not random-looking in context, especially when a hidden
+term centers on the same open surface word. But no current row is claim-level.
+Short words are dense, wider skip ranges predictably raise counts, and matched
+Bible and non-Bible controls often explain rows that initially look strong.
+
+The strongest review candidates are:
+
+- Greek `δοξα` / `δοξανωσ`, a cross-version controlled surface-anchored hidden
+  candidate across TR_NT, BYZ_NT, TCG_NT, and SBLGNT.
+- Hebrew `יום יהוה` / `היומיהוה`, a locked post-discovery
+  compound-extension review candidate across five MT-family sources.
+- Greek `γωγ` centered on open `Gog` at Rev 20:8 across four Greek NT source
+  labels, a source-stable centered-self occurrence in a direct Gog/Magog verse.
+- LXX `ιησουσ` centered-self rows, which require referent discipline because
+  many surface occurrences refer to Joshua rather than Jesus of Nazareth.
+- Hebrew `ישוע` and `משיח` centered-self rows, which should be listed but kept
+  under control-background caution.
+
+## Hypothesis And Scope
+
+The working hypothesis is that original-language biblical texts may contain
+letter-level patterns detectable by ELS search. The primary target is Hebrew
+and Greek biblical text. English translations, including KJV, are secondary
+screens: they may contain patterns, but absence or presence in a translation
+does not by itself validate or invalidate the original-language hypothesis.
+
+The useful source question is not whether every pattern appears in every
+witness. The useful question is which exact pattern appears in which source,
+under which spelling, skip, direction, center, and control background.
+
+This draft therefore keeps three readings separate:
+
+- occurrence/context: whether a hidden term appears and where it is centered;
+- source distribution: which textual witnesses contain the same pattern;
+- statistical background: whether matched controls make the row unusual.
+
+## Method Summary
+
+The current toolkit normalizes texts by language, removes spacing and
+punctuation, and searches continuous letter streams. It supports signed skip
+search in both directions, full-span dynamic skip caps, source/version
+comparison, exact center-word extraction, center-verse and span-context checks,
+same-skip before/after extension scans, and row-local controls.
+
+The report run includes:
+
+- Bible corpora and non-Bible language controls;
+- Hebrew MT-family streams, including MT_WLC, UXLC, EBIBLE_WLC, MAM, UHB, and
+  STEP_TAHOT tracks where applicable;
+- Greek LXX and NT streams, including TR_NT, BYZ_NT, TCG_NT, and SBLGNT for
+  NT comparisons;
+- KJV and English control streams for English screens;
+- matched real-word controls, random controls, shuffled controls, Bible-vs-
+  non-Bible controls, and q-value correction where the analysis supports it.
+
+Every highlighted row should retain its searched term, normalized term, source,
+direction, skip, start/center/end references, center word, context excerpt,
+source/version presence, control read, and final status label.
+
+## Findings At A Glance
+
+### What We Found
+
+The strongest current reportable material is occurrence and review-candidate
+material, not claim-level proof.
+
+- Hidden terms centered on the same surface word do occur. These rows matter as
+  occurrences even when frequency controls caution against promotion.
+- The clearest centered-self row is Greek `γωγ`, centered on open `Gog` at
+  Rev 20:8 across BYZ_NT, SBLGNT, TCG_NT, and TR_NT.
+- Additional centered-self occurrence rows include Hebrew `ישוע`, Hebrew
+  `משיח`, Greek `ιησουσ`, and English KJV `jesus`. These are listed because
+  they occur, while their referent and control cautions stay attached.
+- The Greek `δοξα` / `δοξανωσ` same-skip extension remains the strongest
+  cross-version controlled review candidate.
+- The Hebrew `יום יהוה` -> `היומיהוה` compound-extension row remains a strong
+  post-discovery review candidate across five MT-family sources.
+- The KJVA apocrypha/deuterocanon bridge study produced a stronger
+  post-screen follow-up set than the LXX bridge pass, including locked
+  5000-sample shuffled controls over 15 selected terms.
+
+### What We Did Not Find
+
+No current row should be written as a public claim.
+
+- We did not find a prospective, claim-level result that survives all planned
+  controls and source-distribution cautions.
+- We did not find support for promoting modern/geopolitical/local terms beyond
+  ordinary screening status.
+- Longer modern phrases such as United States, United States of America,
+  United Nations, European Union, Cowboy Catering, Catering, and Simscorner
+  remain absent or effectively absent in the observed Hebrew and Greek screens.
+- The LXX apocrypha bridge boundary did not stand out from shuffled insertion
+  controls.
+- WRR 1994 has not been reproduced; the project has source/import/count smoke
+  work, but not the full corrected-distance and permutation statistic.
+- Source-audit additions are not findings. They are queued source families,
+  term lists, and methodology constraints.
+
+### What Remains Under-Specified
+
+Several public source families have been cataloged, but still need
+claim-by-claim locking before any reproduction attempt can be interpreted.
+
+- Bible Code Digest families need exact Hebrew spellings, row widths, skip
+  rules, extension rules, and controls.
+- TheWordNotes, Cosmic Codes, and Mark Tabata Isaiah 53 families need exact
+  source editions, letter coordinates, table geometry, and cluster metrics.
+- Bible-codes.org pictogram families need a separate preregistered geometry
+  and image-scoring method; ordinary ELS counts are not enough to test picture
+  claims.
+- Religions Wiki, Bible and Science, and CRI pages are mostly critique and
+  control-design sources, not positive claim sources.
+- Amandasaurus/Rory `biblecode` is implementation prior art only; its AGPL
+  license status means no code is reused in this MIT project.
+
+## Occurrence-First Highlights
+
+For the final public writeup, occurrence-first rows should be separated from
+frequency-promoted rows. The reader-facing rule is:
+
+> If a hidden word or phrase is centered on the same surface word, or on a
+> clearly related surface context, list it as an occurrence. Then attach the
+> frequency/control caution beside it.
+
+Current highlight rows from `docs/FINAL_REPORT_HIGHLIGHTS.md`:
+
+| Status | Hidden term | Center | Corpora | Read |
+| --- | --- | --- | --- | --- |
+| contextual occurrence, frequency-cautioned | `γωγ` | REV 20:8 `Gog` | BYZ_NT; SBLGNT; TCG_NT; TR_NT | Real centered-self occurrence in the Gog/Magog passage; length-3 controls caution against frequency promotion. |
+| occurrence background pressure | `ישוע` | EZR 10:18 `יֵשׁ֤וּעַ` | UHB | List occurrence; strong background caution and referent discipline required. |
+| occurrence background pressure | `משיח` | 2SA 1:21 `מָשִׁ֥יחַ` | EBIBLE_WLC | List occurrence; background pressure prevents claim promotion. |
+| occurrence hold for referent/controls | `ιησουσ` | JOS 8:3 `Ἰησοῦς` | LXX | List occurrence; many LXX `Jesus` forms refer to Joshua. |
+| occurrence review candidate, not claim | `jesus` | MAT 4:10 `Jesus` | KJV | List occurrence; English translation screen is secondary to the original-language hypothesis. |
+
+## Current Main Findings
+
+### STEP_TAHOT Hebrew Source-Family Gate
+
+STEP_TAHOT-only rows occur at nearly the same rate in real screening rows and
+null/frequency controls. The report measured 15,478 real pattern rows and 1,005
+control rows. STEP_TAHOT-only rates were 2.449% for real rows and 2.388% for
+controls. This keeps STEP_TAHOT-only behavior in source-family review status,
+not claim status.
+
+### Greek `δοξα` Follow-Ups
+
+The strongest Greek review candidate remains `δοξα|21|forward|term_plus_after|
+δοξανωσ|δοξανωσ`. It appears across TR_NT, BYZ_NT, TCG_NT, and SBLGNT.
+
+The 5000/5000 and 20000/20000 follow-ups both passed their registered q <= 0.01
+review gates. The conservative all-control q values remain around 0.043. The
+row is therefore a controlled review candidate, not a public claim. It was
+selected after earlier screening, so it is not a prospective discovery.
+
+### Greek Exact-Center Surface Rows
+
+The expanded Greek exact-center surface track found all-source rows including
+`ισαακ`, `τερασ`, and `ανομια`. These pass letter-path audit and all-available
+real-word control review, but they remain post-screen review rows.
+
+The length-4 Greek surface bucket looked stronger under a small declared-term
+control pool, but generated vocabulary controls weakened it. With 572 generated
+length-4 vocabulary controls and 200 matched controls per target, no length-4
+target survived study-level q <= 0.05.
+
+### Full-Span Dynamic Skip Results
+
+The full-span dense export completed for selected dynamic-focus rows. It
+summarized 13,556,483,793 exported full-span hit rows from 147 dense
+corpus/term rows. This confirms that full-span search can collect large
+quantities of hits, but it also confirms the statistical problem: raw hit
+volume scales massively with skip cap and term density.
+
+The stronger exact-center follow-up scanned 36,280,786 dense hit rows from the
+selected strong subset and found 1,582 dense exact center-word hits. Exact
+center-word hits occurred in UHB `Yeshua`, KJV `Jesus`, EBIBLE_WLC `Messiah`,
+LXX `Jesus`, and TCG_NT `Gog`; some other strong rows had zero exact center
+hits.
+
+### Centered Occurrence Index
+
+The occurrence-first index currently contains:
+
+- 737 unique term-center presence rows;
+- 734 Bible presence rows;
+- 3 control presence rows;
+- 839 raw occurrence rows before presence grouping;
+- 526 `centered_self_exact_word` presence rows.
+
+The top row is Greek `γωγ` centered on open `Gog` at Rev 20:8 across BYZ_NT,
+SBLGNT, TCG_NT, and TR_NT. This is a real source-stable centered-self
+occurrence in the direct Gog/Magog passage. It should appear in the final
+findings list. It should not be frequency-promoted, because all 24 matched
+length-3 non-target controls had more exact-center paths than `γωγ`.
+The index now also carries bridge-context rows from the LXX and KJVA
+apocrypha/deuterocanon bridge passes: 28 LXX bridge-context presence rows and
+120 KJVA bridge-context presence rows.
+
+The compact presentation table for this layer is
+`docs/FINAL_REPORT_HIGHLIGHTS.md`. The larger source table remains
+`docs/CENTERED_OCCURRENCE_INDEX.md`.
+
+### All-Codes Follow-Up And Extensions
+
+The relaxed all-codes follow-up deliberately keeps hidden-path-only rows
+visible while prioritizing rows with same-center-word, related center context,
+span context, and same-skip before/after extensions.
+
+The compound-extension confirmatory run selected five locked `יום יהוה` ->
+`היומיהוה` rows across EBIBLE_WLC, MAM, MT_WLC, UHB, and UXLC. Each row used
+5000 term controls and 5000 random controls. The conservative all-control q
+range was 0.005199 in the formal report summary. This remains a strong
+post-discovery review candidate, not claim evidence.
+
+### Modern, Geopolitical, And Local Terms
+
+Modern and local rows remain weak overall.
+
+Short forms such as Trump, Vance, Iran, USA, and abbreviated institutional
+forms can appear often because short forms are dense. Longer phrases such as
+United States, United States of America, United Nations, European Union, Cowboy
+Catering, Catering, and Simscorner remain absent or effectively absent in the
+observed Hebrew and Greek screens. Simsberry produced one MAM-only Hebrew
+broad-count hit and no broader support.
+
+Representative paired controls do not currently support promotion of modern,
+geopolitical, or local terms.
+
+### ChurchAges-Style Statistics Audit
+
+The ChurchAges statistics audit compared published-style raw count claims with
+independent-letter density expectations. The observed counts were close to
+those expectations:
+
+- `branham` forward: observed 655 vs expected 639.705853;
+- `branham` backward: observed 612 vs expected 639.705853;
+- `statist` forward: observed 11,947 vs expected 12,298.959594.
+
+This addresses raw count-density claims. It does not address theological
+meaning or post-hoc cluster selection.
+
+### WRR 1994 Status
+
+The WRR work is not yet a claim-grade reproduction. The current work imports
+source files, audits source shape, counts terms in Koren Genesis, and records
+methodology gaps. It does not yet implement the full corrected distance
+`c(w,w')`, locked pair eligibility path, term-specific skip caps, or
+permutation-rank procedure needed for a full WRR reproduction.
+
+Current status: `under_specified`.
+
+## Negative And Weak Results
+
+The most important weak-result pattern is that many rows become less
+interesting once controls are attached. Raw ELS hits are easy to generate,
+especially for short terms. Full-span skip caps expand the search space enough
+that large raw counts become expected rather than surprising.
+
+This run should therefore be read as a queue-building and review-status report,
+not as a claim report.
+
+Visible weak results:
+
+- modern/geopolitical/local terms mostly do not survive representative
+  controls;
+- long modern phrases are absent or effectively absent in observed Hebrew and
+  Greek screens;
+- source-specific rows should not be collapsed into all-source claims;
+- short abbreviations and short names require stronger controls than long
+  phrases;
+- non-Bible controls often match or exceed Bible raw-rate backgrounds.
+
+## Status Labels Used In This Draft
+
+Use these labels:
+
+- `detected`;
+- `hidden_path_candidate`;
+- `surface_anchored_hidden_candidate`;
+- `surface_echo_candidate`;
+- `cross_version_controlled_candidate`;
+- `review_candidate_not_claim`;
+- `controlled_review_candidate`;
+- `under_specified`.
+
+Avoid stronger language such as proved, statistically impossible, prophecy
+confirmed, validation of inspiration, or claim-level unless a later locked
+prospective study actually earns that status.
+
+## Future Work
+
+The next formal step is not broader exploration. It is a narrower prospective
+study with fixed term list, fixed corpus set, fixed skip range, fixed center
+and extension rules, fixed controls, and study-level correction across all
+tested rows.
+
+After the current report baseline is frozen, the apocrypha/deuterocanon study
+can be run as a separate source-family analysis. That study should distinguish
+ordinary apocrypha-only hits from bridge-completion rows where a partial
+canonical ELS path becomes complete only when declared apocrypha/deuterocanon
+material is inserted. Comparable non-Bible insertion controls are required
+before interpreting bridge rows. The current source-coverage audit shows that
+the existing eBible GRCLXX stream already contains a substantial Greek
+deuterocanon/apocrypha block, while the current eBible KJV stream is 66-book
+only. A separate eBible KJV + Apocrypha corpus path is now available for
+English apocrypha/deuterocanon follow-up work, with 14 present books, 5,720
+verses, and 593,090 normalized English letters. The first Malachi/Tobit
+boundary scan found 62 bridge rows, but
+same-length non-Bible Greek replacement blocks produced 59, 39, and 61 rows, so
+that boundary result is not stronger than the current control background.
+Ordinary apocrypha-only counts are also in the same broad range as the
+same-length Greek control blocks: 78,606 apocrypha hits across 292 queries,
+versus 73,856, 75,664, and 69,541 hits in the Iliad, Odyssey, and Herodotus
+comparison blocks.
+The LXX bridge-context review found no center-word exact rows, one
+center-verse exact row, and four span-exact rows.
+The expanded LXX shuffled-insertion control produced 36 to 73 bridge rows
+across 100 samples, with 16 samples at or above the 62 observed rows
+(`p_ge=0.168317`). Under this control, the LXX bridge-row total does not stand
+out.
+The separate KJVA ordinary-count pass found 254,475 English apocrypha hits
+across 575 English queries; same-length Shakespeare, War and Peace, and
+Moby-Dick control blocks produced 234,606, 227,967, and 232,226 hits.
+The KJVA bridge pass found 350 boundary-spanning rows, above the first
+same-length English control counts of 182, 140, and 168. Treat this as a
+follow-up candidate set, not a claim-level result. The KJVA bridge-context
+review found no center-word exact rows, four center-verse exact rows, and
+seventeen span-exact rows. The expanded KJVA shuffled-insertion control
+produced 149 to 236 bridge rows across 250 samples, with no shuffled sample at
+or above the observed 350 rows (`p_ge=0.003984`).
+The KJVA term-level bridge review found 48 of 81 bridge terms above all three
+same-length non-Bible term controls and 53 terms with a center/span context
+bucket beyond hidden-path-only. The 1000-sample term-level shuffled control
+found 8 of 81 terms above every shuffled sample, 25 terms with unadjusted
+`p_ge <= 0.05`, and 15 terms with Benjamini-Hochberg `q_ge <= 0.05`.
+The locked 5000-sample post-screen confirmatory follow-up over those 15 terms
+found all 15 with Benjamini-Hochberg `q_ge <= 0.01`, and 3 terms stood above
+every shuffled sample.
+That raises follow-up priority, but remains post-screen rather than
+claim-level evidence.
+
+## Source Trail
+
+Primary sources for this draft:
+
+- `reports/real_report_run/summary.md`
+- `docs/CONSOLIDATED_FINDINGS.md`
+- `docs/CENTERED_OCCURRENCE_INDEX.md`
+- `docs/FINAL_REPORT_HIGHLIGHTS.md`
+- `docs/PROSPECTIVE_STUDY_NEXT_LOCK.md`
+- `docs/CLAIM_CATALOG.md`
+- `docs/BIBLE_CODE_DIGEST_AUDIT.md`
+- `docs/CRI_ELS_CRITIQUE_AUDIT.md`
+- `docs/THEWORDNOTES_ELS_AUDIT.md`
+- `docs/COSMIC_CODES_AUDIT.md`
+- `docs/MARK_TABATA_ISAIAH53_AUDIT.md`
+- `docs/FELCJO_RINGO_ALGORITHM_AUDIT.md`
+- `docs/AMANDASAURUS_BIBLECODE_PRIOR_ART_AUDIT.md`
+- `docs/BIBLE_CODES_ORG_AUDIT.md`
+- `docs/BIBLE_AND_SCIENCE_CODES_AUDIT.md`
+- `docs/RELIGIONS_WIKI_SCRIPTURAL_CODES_AUDIT.md`
+- `docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_250.md`
+- `docs/FINAL_REPORT_OUTLINE.md`
+- `docs/APOCRYPHA_BRIDGE_STUDY.md`
+- `docs/APOCRYPHA_SOURCE_COVERAGE.md`
+- `docs/APOCRYPHA_BRIDGE_CANDIDATES.md`
+- `docs/APOCRYPHA_BRIDGE_CONTEXT.md`
+- `docs/APOCRYPHA_BRIDGE_CONTROLS.md`
+- `docs/APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md`
+- `docs/APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md`
+- `docs/APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md`
+- `docs/APOCRYPHA_ONLY_COUNTS.md`
+- `docs/KJV_APOCRYPHA_ONLY_COUNTS.md`
+- `docs/KJV_APOCRYPHA_BRIDGE_CANDIDATES.md`
+- `docs/KJV_APOCRYPHA_BRIDGE_CONTEXT.md`
+- `docs/KJV_APOCRYPHA_BRIDGE_CONTROLS.md`
+- `docs/KJV_APOCRYPHA_BRIDGE_TERM_REVIEW.md`
+- `docs/KJV_APOCRYPHA_BRIDGE_TERM_SHUFFLED_CONTROLS_1000.md`
+- `docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_PREREGISTRATION.md`
+- `docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md`
+- `docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md`
+- `docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md`
+- `docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md`
+- `docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_250.md`
+
+## Draft Boundary
+
+This draft is intended to be readable before the full technical appendix. It
+should not absorb every source-audit page into prose. The source-audit pages
+belong in a separate appendix or "claim-source queue" section because they
+mostly define what should be tested later, not what the current run already
+found.
+
+The final reader-facing report should keep these sections visually separate:
+
+1. occurrence-first findings;
+2. controlled review candidates;
+3. weak or negative findings;
+4. source-audit queue;
+5. future prospective-study plan.

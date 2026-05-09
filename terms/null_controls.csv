@@ -1,0 +1,25 @@
+term_id,concept,category,language,term,notes
+scrambled_yhwh_h,Scrambled YHWH,scrambled,hebrew,וההי,letters of יהוה reordered
+scrambled_elohim_h,Scrambled Elohim,scrambled,hebrew,מהיאלם,letters of אלהים reordered with added letter
+scrambled_messiah_h,Scrambled Messiah,scrambled,hebrew,חישמ,letters of משיח reordered
+scrambled_torah_h,Scrambled Torah,scrambled,hebrew,הרות,letters of תורה reordered
+scrambled_israel_h,Scrambled Israel,scrambled,hebrew,לרשאי,letters of ישראל reordered
+scrambled_david_h,Scrambled David,scrambled,hebrew,ודד,letters of דוד reordered
+scrambled_moses_h,Scrambled Moses,scrambled,hebrew,השמ,letters of משה reordered
+scrambled_iesous_g,Scrambled Jesus,scrambled,greek,σιυοσηε,letters of ιησους plus one vowel reordered
+scrambled_christos_g,Scrambled Christ,scrambled,greek,τοριχσοσ,letters of χριστος reordered
+scrambled_theos_g,Scrambled God,scrambled,greek,σθεο,letters of θεος reordered
+scrambled_kyrios_g,Scrambled Lord,scrambled,greek,συρικο,letters of κυριος reordered
+scrambled_pneuma_g,Scrambled Spirit,scrambled,greek,απνευμ,letters of πνευμα reordered
+nonsense_5_a_h,Nonsense 5a,random_letters,hebrew,בגדהו,5 sequential alphabet letters
+nonsense_5_b_h,Nonsense 5b,random_letters,hebrew,חטיכל,5 sequential alphabet letters
+nonsense_5_c_h,Nonsense 5c,random_letters,hebrew,מנסעפ,5 sequential alphabet letters
+nonsense_6_a_h,Nonsense 6a,random_letters,hebrew,אבגדהו,6 sequential alphabet letters
+nonsense_6_b_h,Nonsense 6b,random_letters,hebrew,זחטיכל,6 sequential alphabet letters
+nonsense_6_c_h,Nonsense 6c,random_letters,hebrew,מנסעפצ,6 sequential alphabet letters
+nonsense_5_a_g,Nonsense 5a,random_letters,greek,βγδεζ,5 sequential alphabet letters
+nonsense_5_b_g,Nonsense 5b,random_letters,greek,ηθικλ,5 sequential alphabet letters
+nonsense_5_c_g,Nonsense 5c,random_letters,greek,μνξοπ,5 sequential alphabet letters
+nonsense_6_a_g,Nonsense 6a,random_letters,greek,αβγδεζ,6 sequential alphabet letters
+nonsense_6_b_g,Nonsense 6b,random_letters,greek,ηθικλμ,6 sequential alphabet letters
+nonsense_6_c_g,Nonsense 6c,random_letters,greek,νξοπρσ,6 sequential alphabet letters

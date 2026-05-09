@@ -1,0 +1,29 @@
+term_id,concept,category,language,term,notes
+reuben_h,Reuben,tribes,hebrew,ראובן,
+reuben_g,Reuben,tribes,greek,ρουβην,
+simeon_h,Simeon,tribes,hebrew,שמעון,
+simeon_g,Simeon,tribes,greek,συμεων,
+levi_h,Levi,tribes,hebrew,לוי,
+levi_g,Levi,tribes,greek,λευι,
+judah_h,Judah,tribes,hebrew,יהודה,
+judah_g,Judah,tribes,greek,ιουδα,
+dan_h,Dan,tribes,hebrew,דן,short; may be skipped
+dan_g,Dan,tribes,greek,δαν,short; may be skipped
+naphtali_h,Naphtali,tribes,hebrew,נפתלי,
+naphtali_g,Naphtali,tribes,greek,νεφθαλιμ,
+gad_h,Gad,tribes,hebrew,גד,short; may be skipped
+gad_g,Gad,tribes,greek,γαδ,short; may be skipped
+asher_h,Asher,tribes,hebrew,אשר,
+asher_g,Asher,tribes,greek,ασηρ,
+issachar_h,Issachar,tribes,hebrew,יששכר,
+issachar_g,Issachar,tribes,greek,ισσαχαρ,
+zebulun_h,Zebulun,tribes,hebrew,זבולון,
+zebulun_g,Zebulun,tribes,greek,ζαβουλων,
+joseph_tribe_h,Joseph Tribe,tribes,hebrew,יוסף,
+joseph_tribe_g,Joseph Tribe,tribes,greek,ιωσηφ,
+benjamin_h,Benjamin,tribes,hebrew,בנימין,
+benjamin_g,Benjamin,tribes,greek,βενιαμιν,
+ephraim_h,Ephraim,tribes,hebrew,אפרים,
+ephraim_g,Ephraim,tribes,greek,εφραιμ,
+manasseh_tribe_h,Manasseh Tribe,tribes,hebrew,מנשה,collides with king Manasseh in prophetic_terms
+manasseh_tribe_g,Manasseh Tribe,tribes,greek,μανασσης,collides with king Manasseh in prophetic_terms

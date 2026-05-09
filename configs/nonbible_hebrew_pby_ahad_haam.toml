@@ -1,0 +1,9 @@
+name = "Non-Bible Hebrew Control: Project Ben-Yehuda Ahad Ha'am"
+language = "hebrew"
+
+[[sources]]
+name = "Project Ben-Yehuda Ahad Ha'am"
+format = "text"
+path = "../data/processed/nonbible_controls/hebrew_pby_ahad_haam.txt"
+ref = "PBY Ahad Ha'am"
+book = "PBY Ahad Ha'am"

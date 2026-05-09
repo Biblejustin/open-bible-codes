@@ -1,0 +1,12 @@
+name = "eBible Hebrew WLC"
+language = "hebrew"
+
+[[sources]]
+name = "eBible HEBWLC"
+format = "csv"
+path = "../data/processed/ebible/hebwlc.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

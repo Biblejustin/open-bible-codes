@@ -1,0 +1,25 @@
+name = "kjv_apocrypha_bridge_term_review"
+description = "Summarize KJVA apocrypha/deuterocanon bridge terms against term-level controls."
+manifest_out = "reports/kjv_apocrypha_bridge_term_review/protocol_run.manifest.json"
+max_parallel = 1
+
+[[steps]]
+id = "kjv_bridge_term_review"
+description = "Build KJVA bridge term-level review report."
+argv = [
+  "-m", "scripts.summarize_kjv_apocrypha_bridge_terms",
+  "--term-shuffled-summary", "reports/kjv_apocrypha_bridge_term_shuffled_controls_1000/term_summary.csv",
+]
+inputs = [
+  "scripts/summarize_kjv_apocrypha_bridge_terms.py",
+  "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+  "reports/kjv_apocrypha_bridge_context/context.csv",
+  "reports/kjv_apocrypha_bridge_controls/term_summary.csv",
+  "reports/kjv_apocrypha_bridge_shuffled_controls_250/summary.csv",
+  "reports/kjv_apocrypha_bridge_term_shuffled_controls_1000/term_summary.csv",
+]
+outputs = [
+  "reports/kjv_apocrypha_bridge_term_review/term_review.csv",
+  "docs/KJV_APOCRYPHA_BRIDGE_TERM_REVIEW.md",
+  "reports/kjv_apocrypha_bridge_term_review/manifest.json",
+]

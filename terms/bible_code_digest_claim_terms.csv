@@ -1,0 +1,96 @@
+term_id,concept,category,language,term,notes
+bcd_yeshua_messiah_h,Yeshua the Messiah,bcd_christology,hebrew,ישוע המשיח,BCD Yeshua Messiah extension claim family
+bcd_messiah_yeshua_h,The Messiah Yeshua,bcd_christology,hebrew,המשיח ישוע,BCD reverse-title extension claim family
+bcd_true_messiah_question_h,Who Is The True Messiah,bcd_christology,hebrew,מי המשיח האמיתי,provisional Hebrew rendering for BCD claim audit
+bcd_messiah_king_h,Messiah King,bcd_christology,hebrew,מלך המשיח,Messiah king related BCD theme
+bcd_king_yeshua_h,King Yeshua,bcd_christology,hebrew,המלך ישוע,King Yeshua related BCD theme
+bcd_son_of_man_h,Son Of Man,bcd_christology,hebrew,בן האדם,Jesus title in BCD interpretation trail
+bcd_gift_of_god_h,Gift Of God,bcd_christology,hebrew,מתת אלהים,Yeshua Messiah extension theme
+bcd_light_world_h,Light Of The World,bcd_christology,hebrew,אור העולם,Yeshua light and darkness theme
+bcd_living_water_h,Living Water,bcd_christology,hebrew,מים חיים,Yeshua Messiah extension theme
+bcd_resurrection_jesus_h,Resurrection Of Jesus,bcd_christology,hebrew,תחיית ישוע,BCD Jesus resurrection theme
+bcd_transfiguration_h,Transfiguration,bcd_christology,hebrew,השתנות,BCD Isaiah 53 transfiguration claim family
+bcd_guilt_offering_h,Guilt Offering,bcd_christology,hebrew,אשם,Isaiah 53 servant term
+bcd_suffering_servant_h,Suffering Servant,bcd_christology,hebrew,עבד סובל,Isaiah 53 claim context
+bcd_sin_bearing_servant_h,Sin Bearing Servant,bcd_christology,hebrew,עבד נושא חטא,Isaiah 53 claim context
+bcd_forgive_poor_h,Forgive The Poor,bcd_christology,hebrew,סלח לעניים,Yeshua Isaiah 53 code theme
+bcd_burial_preparation_h,Burial Preparation,bcd_christology,hebrew,הכנה לקבורה,Yeshua Isaiah 53 code theme
+bcd_root_of_david_h,Root Of David,bcd_christology,hebrew,שורש דוד,Yeshua Psalm 22 code theme
+bcd_offspring_david_h,Offspring Of David,bcd_christology,hebrew,זרע דוד,Yeshua Psalm 22 code theme
+bcd_who_like_god_h,Who Is Like God,bcd_who_like_god,hebrew,מי כמכה באלם יהוה,Exodus 15 question-style BCD search theme
+bcd_no_one_like_god_h,There Is No One Like God,bcd_who_like_god,hebrew,אין כמוך באלהים,Isaiah 40-46 question-style BCD search theme
+bcd_god_and_jesus_h,God And Jesus,bcd_who_like_god,hebrew,אלהים וישוע,Proverbs 30:4 BCD search theme
+bcd_proverbs_30_4_h,Proverbs 30 4 Question,bcd_who_like_god,hebrew,מי עלה שמים וירד,Proverbs 30:4 surface-question anchor
+bcd_david_king_h,David The King,bcd_king_david,hebrew,דוד המלך,BCD King David underscoring claim family
+bcd_king_david_h,King David,bcd_king_david,hebrew,מלך דוד,BCD King David underscoring claim family
+bcd_house_david_h,House Of David,bcd_king_david,hebrew,בית דוד,David-context classifier theme
+bcd_saul_h,Saul,bcd_king_david,hebrew,שאול,David-context related surface term
+bcd_jesse_h,Jesse,bcd_king_david,hebrew,ישי,David-context related surface term
+bcd_anoint_h,Anoint,bcd_king_david,hebrew,משח,David-context related surface term
+bcd_spirit_yhwh_h,Spirit Of YHWH,bcd_king_david,hebrew,רוח יהוה,David-context related surface term
+bcd_war_h,War,bcd_ezekiel_war,hebrew,מלחמה,Ezekiel 40 BCD war extension claim
+bcd_the_war_h,The War,bcd_ezekiel_war,hebrew,המלחמה,Ezekiel 40 BCD war extension claim
+bcd_spoils_h,Spoils,bcd_ezekiel_war,hebrew,שלל,Ezekiel 38-39 war theme
+bcd_sword_h,Sword,bcd_ezekiel_war,hebrew,חרב,Ezekiel 38-39 war theme
+bcd_hooks_jaws_h,Hooks In Jaws,bcd_ezekiel_war,hebrew,חחים בלחייך,Ezekiel 38:4 surface theme
+bcd_volcano_h,Volcano,bcd_ezekiel_war,hebrew,הר געש,BCD interpretation theme for Ezekiel 38 shaking and fire
+bcd_earthquake_h,Earthquake,bcd_ezekiel_war,hebrew,רעש,Ezekiel 38 shaking theme
+bcd_third_temple_h,Third Temple,bcd_ezekiel_war,hebrew,בית שלישי,Ezekiel 40 surface-context theme
+bcd_temple_h,Temple,bcd_ezekiel_war,hebrew,מקדש,Ezekiel 40 surface-context theme
+bcd_gog_magog_war_h,Gog And Magog War,bcd_ezekiel_war,hebrew,מלחמת גוג ומגוג,Ezekiel 38-39 BCD context
+bcd_shimon_peres_h,Shimon Peres,bcd_israeli_politics,hebrew,שמעון פרס,BCD Peres claim family
+bcd_peres_h,Peres,bcd_israeli_politics,hebrew,פרס,BCD Peres claim family
+bcd_not_elected_h,Will Not Be Elected,bcd_israeli_politics,hebrew,לא יבחר,BCD Peres 296-letter claim seed phrase
+bcd_will_be_elected_h,Will Be Elected,bcd_israeli_politics,hebrew,יבחר,BCD Peres wins follow-up theme
+bcd_strength_in_you_h,Strength In You,bcd_israeli_politics,hebrew,יש בך כח,BCD Peres wins theme
+bcd_kadima_h,Kadima,bcd_israeli_politics,hebrew,קדימה,Israeli politics BCD matrix term
+bcd_olmert_h,Ehud Olmert,bcd_israeli_politics,hebrew,אהוד אולמרט,Israeli politics BCD matrix term
+bcd_ariel_sharon_h,Ariel Sharon,bcd_israeli_politics,hebrew,אריאל שרון,Israeli politics BCD matrix term
+bcd_likud_h,Likud,bcd_israeli_politics,hebrew,ליכוד,Israeli politics BCD matrix term
+bcd_labor_party_h,Labor Party,bcd_israeli_politics,hebrew,מפלגת העבודה,Israeli politics BCD matrix term
+bcd_barack_obama_h,Barack Obama,bcd_us_politics,hebrew,ברק אובמה,BCD Obama and election claim family
+bcd_obama_h,Obama,bcd_us_politics,hebrew,אובמה,BCD Obama and election claim family
+bcd_john_mccain_h,John McCain,bcd_us_politics,hebrew,ג׳ון מקיין,BCD 2008 election claim family
+bcd_hillary_clinton_h,Hillary Clinton,bcd_us_politics,hebrew,הילרי קלינטון,BCD 2008 election claim family
+bcd_sarah_palin_h,Sarah Palin,bcd_us_politics,hebrew,שרה פיילין,BCD 2008 election claim family
+bcd_joe_biden_h,Joe Biden,bcd_us_politics,hebrew,ג׳ו ביידן,BCD 2008 election claim family
+bcd_white_house_h,White House,bcd_us_politics,hebrew,הבית הלבן,BCD America terms claim family
+bcd_congress_h,Congress,bcd_us_politics,hebrew,קונגרס,BCD America terms claim family
+bcd_us_government_h,US Government,bcd_us_politics,hebrew,ממשלת ארצות הברית,BCD America terms claim family
+bcd_treasury_department_h,Treasury Department,bcd_us_politics,hebrew,משרד האוצר,BCD America terms claim family
+bcd_new_york_h,New York,bcd_terror_events,hebrew,ניו יורק,BCD 9/11 claim family
+bcd_world_trade_center_h,World Trade Center,bcd_terror_events,hebrew,מרכז הסחר העולמי,BCD 9/11 claim family
+bcd_anthrax_h,Anthrax,bcd_terror_events,hebrew,אנתרקס,BCD 9/11 aftermath claim family
+bcd_saddam_h,Saddam Hussein,bcd_terror_events,hebrew,סדאם חוסיין,BCD terrorism claim family
+bcd_bin_laden_h,Osama Bin Laden,bcd_terror_events,hebrew,אוסאמה בן לאדן,BCD terrorism claim family
+bcd_north_korea_h,North Korea,bcd_terror_events,hebrew,צפון קוריאה,BCD terrorism claim family
+bcd_denuclearization_h,Denuclearization,bcd_terror_events,hebrew,פירוז גרעיני,BCD North Korea claim theme
+bcd_proliferation_h,Proliferation,bcd_terror_events,hebrew,הפצה,BCD North Korea claim theme
+bcd_center_rabbi_h,Center Of The Rabbi,bcd_terror_events,hebrew,מרכז הרב,BCD Jerusalem terrorist attack claim family
+bcd_gaza_operation_h,Gaza Operation,bcd_middle_east,hebrew,מבצע עזה,BCD Gaza Operation claim family
+bcd_hamas_h,Hamas,bcd_middle_east,hebrew,חמאס,BCD Gaza Operation claim family
+bcd_global_economic_crisis_h,Global Economic Crisis,bcd_economy_climate,hebrew,משבר כלכלי עולמי,BCD economic crisis claim family
+bcd_financial_market_h,Financial Market,bcd_economy_climate,hebrew,שוק פיננסי,BCD economic crisis claim family
+bcd_credit_crisis_h,Credit Crisis,bcd_economy_climate,hebrew,משבר אשראי,BCD economic crisis claim family
+bcd_interest_rate_h,Interest Rate,bcd_economy_climate,hebrew,ריבית,BCD economic crisis claim family
+bcd_global_crisis_h,Global Crisis,bcd_economy_climate,hebrew,משבר עולמי,BCD crisis cluster claim family
+bcd_great_famine_h,Great Famine,bcd_economy_climate,hebrew,רעב גדול,BCD crisis cluster claim family
+bcd_swine_flu_h,Swine Flu,bcd_economy_climate,hebrew,שפעת החזירים,BCD swine flu cluster claim family
+bcd_world_plague_h,World Plague,bcd_economy_climate,hebrew,מגפת עולם,BCD plague cluster claim family
+bcd_haiti_h,Haiti,bcd_disasters,hebrew,האיטי,BCD earthquake claim family
+bcd_chile_h,Chile,bcd_disasters,hebrew,צ׳ילה,BCD earthquake claim family
+bcd_quake_survivors_h,Quake Survivors,bcd_disasters,hebrew,ניצולי רעש,BCD earthquake claim family
+bcd_quake_orphans_h,Quake Orphans,bcd_disasters,hebrew,יתומי רעש,BCD earthquake claim family
+bcd_tsunami_h,Tsunami,bcd_disasters,hebrew,צונאמי,BCD tsunami claim family
+bcd_hurricane_katrina_h,Hurricane Katrina,bcd_disasters,hebrew,הוריקן קתרינה,BCD hurricane claim family
+bcd_wilma_h,Wilma,bcd_disasters,hebrew,וילמה,BCD hurricane claim family
+bcd_climate_change_h,Climate Change,bcd_economy_climate,hebrew,שינוי אקלים,BCD climate change claim family
+bcd_global_warming_h,Global Warming,bcd_economy_climate,hebrew,התחממות גלובלית,BCD climate change claim family
+bcd_mel_gibson_h,Mel Gibson,bcd_media,hebrew,מל גיבסון,BCD long-code claim family
+bcd_buddha_h,Buddha,bcd_religions,hebrew,בודהה,BCD viewpoint and Isaiah 40-46 claim family
+bcd_buddhism_h,Buddhism,bcd_religions,hebrew,בודהיזם,BCD viewpoint and Isaiah 40-46 claim family
+bcd_siddhartha_h,Siddhartha,bcd_religions,hebrew,סידהרתא,BCD Buddhist claim family
+bcd_dalai_lama_h,Dalai Lama,bcd_religions,hebrew,דלאי לאמה,BCD Buddhist claim family
+bcd_muhammad_h,Muhammad,bcd_religions,hebrew,מוחמד,BCD Isaiah 40-46 comparison search
+bcd_aaron_priest_h,Aaron The Priest,bcd_biblical_figures,hebrew,אהרן הכהן,BCD Aharon the priest claim family
+bcd_moses_h,Moses,bcd_biblical_figures,hebrew,משה,BCD Isaiah 40-46 comparison search

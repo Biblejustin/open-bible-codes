@@ -1,0 +1,29 @@
+name = "greek_expanded_surface_control_evaluation"
+description = "Exploratory matched-control evaluation for tightened Greek surface rows."
+manifest_out = "reports/greek_expanded_surface_control_evaluation/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "surface_control_evaluation"
+description = "Compare selected targets against frozen same-length real-word controls."
+argv = [
+  "-m", "scripts.analyze_greek_surface_control_evaluation",
+  "--cohort", "reports/greek_expanded_surface_triage/term_cohort.csv",
+  "--matched-controls", "reports/greek_expanded_surface_control_pool/matched_controls.csv",
+  "--summary-out", "reports/greek_expanded_surface_control_evaluation/summary.csv",
+  "--details-out", "reports/greek_expanded_surface_control_evaluation/control_details.csv",
+  "--markdown-out", "docs/GREEK_EXPANDED_SURFACE_CONTROL_EVALUATION.md",
+  "--manifest-out", "reports/greek_expanded_surface_control_evaluation/manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_surface_control_evaluation.py",
+  "reports/greek_expanded_surface_triage/term_cohort.csv",
+  "reports/greek_expanded_surface_control_pool/matched_controls.csv",
+]
+outputs = [
+  "reports/greek_expanded_surface_control_evaluation/summary.csv",
+  "reports/greek_expanded_surface_control_evaluation/control_details.csv",
+  "docs/GREEK_EXPANDED_SURFACE_CONTROL_EVALUATION.md",
+  "reports/greek_expanded_surface_control_evaluation/manifest.json",
+]

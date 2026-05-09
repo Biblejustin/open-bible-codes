@@ -1,0 +1,60 @@
+name = "greek_expanded_surface_available_control_evaluation"
+description = "Exploratory all-available real-word matched-control evaluation for tightened Greek surface rows."
+manifest_out = "reports/greek_expanded_surface_available_control_evaluation/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "available_control_pool"
+description = "Build all available same-length all-source real-word controls from the frozen expanded Greek term list."
+argv = [
+  "-m", "scripts.analyze_greek_surface_control_pool",
+  "--terms", "terms/greek_expanded_prospective_terms.csv",
+  "--selected", "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "--top-controls", "999",
+  "--title", "Greek Expanded Surface Available Control Pool",
+  "--frequencies-out", "reports/greek_expanded_surface_available_control_pool/term_surface_frequencies.csv",
+  "--matched-out", "reports/greek_expanded_surface_available_control_pool/matched_controls.csv",
+  "--markdown-out", "docs/GREEK_EXPANDED_SURFACE_AVAILABLE_CONTROL_POOL.md",
+  "--manifest-out", "reports/greek_expanded_surface_available_control_pool/manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_surface_control_pool.py",
+  "terms/greek_expanded_prospective_terms.csv",
+  "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+]
+outputs = [
+  "reports/greek_expanded_surface_available_control_pool/term_surface_frequencies.csv",
+  "reports/greek_expanded_surface_available_control_pool/matched_controls.csv",
+  "docs/GREEK_EXPANDED_SURFACE_AVAILABLE_CONTROL_POOL.md",
+  "reports/greek_expanded_surface_available_control_pool/manifest.json",
+]
+
+[[steps]]
+id = "available_control_evaluation"
+description = "Evaluate selected surface rows against all available same-length all-source real-word controls."
+argv = [
+  "-m", "scripts.analyze_greek_surface_control_evaluation",
+  "--cohort", "reports/greek_expanded_surface_triage/term_cohort.csv",
+  "--matched-controls", "reports/greek_expanded_surface_available_control_pool/matched_controls.csv",
+  "--title", "Greek Expanded Surface Available Control Evaluation",
+  "--summary-out", "reports/greek_expanded_surface_available_control_evaluation/summary.csv",
+  "--details-out", "reports/greek_expanded_surface_available_control_evaluation/control_details.csv",
+  "--markdown-out", "docs/GREEK_EXPANDED_SURFACE_AVAILABLE_CONTROL_EVALUATION.md",
+  "--manifest-out", "reports/greek_expanded_surface_available_control_evaluation/manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_surface_control_evaluation.py",
+  "reports/greek_expanded_surface_triage/term_cohort.csv",
+  "reports/greek_expanded_surface_available_control_pool/matched_controls.csv",
+]
+outputs = [
+  "reports/greek_expanded_surface_available_control_evaluation/summary.csv",
+  "reports/greek_expanded_surface_available_control_evaluation/control_details.csv",
+  "docs/GREEK_EXPANDED_SURFACE_AVAILABLE_CONTROL_EVALUATION.md",
+  "reports/greek_expanded_surface_available_control_evaluation/manifest.json",
+]

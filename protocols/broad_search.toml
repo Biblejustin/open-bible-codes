@@ -1,0 +1,153 @@
+name = "broad_search"
+description = "Broader skip 2..100 screening run across every declared term list."
+manifest_out = "reports/broad_search/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "broad_batch_counts"
+description = "Count all declared term lists across public corpora with skip 2..100."
+argv = [
+  "-m", "els", "batch-many",
+  "--term-set", "theological_terms=terms/theological_terms.csv",
+  "--term-set", "modern_names_dates=terms/modern_names_dates.csv",
+  "--term-set", "table_of_nations=terms/table_of_nations.csv",
+  "--term-set", "prophetic_terms=terms/prophetic_terms.csv",
+  "--term-set", "hebrew_claim_terms=terms/hebrew_claim_terms.csv",
+  "--term-set", "greek_nt_claim_terms=terms/greek_nt_claim_terms.csv",
+  "--term-set", "biblical_tribes=terms/biblical_tribes.csv",
+  "--term-set", "biblical_festivals=terms/biblical_festivals.csv",
+  "--term-set", "biblical_calendar=terms/biblical_calendar.csv",
+  "--term-set", "frequency_anchors=terms/frequency_anchors.csv",
+  "--term-set", "null_controls=terms/null_controls.csv",
+  "--term-set", "english_search_terms=terms/english_search_terms.csv",
+  "--corpus", "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus", "UXLC=configs/example_uxlc.toml",
+  "--corpus", "MAM=configs/example_mam.toml",
+  "--corpus", "EBIBLE_WLC=configs/example_ebible_hebwlc.toml",
+  "--corpus", "UHB=configs/example_uhb.toml",
+  "--corpus", "LXX=configs/example_ebible_grclxx.toml",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "BYZ_NT=configs/example_ebible_grcmt.toml",
+  "--corpus", "TCG_NT=configs/example_ebible_grctcgnt.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--corpus", "KJV=configs/example_ebible_engkjv.toml",
+  "--min-skip", "2",
+  "--max-skip", "100",
+  "--jobs", "0",
+  "--out-dir", "reports/broad_search",
+  "--manifest-out", "reports/broad_search/broad_search.manifest.json",
+]
+inputs = [
+  "terms/theological_terms.csv",
+  "terms/modern_names_dates.csv",
+  "terms/table_of_nations.csv",
+  "terms/prophetic_terms.csv",
+  "terms/hebrew_claim_terms.csv",
+  "terms/greek_nt_claim_terms.csv",
+  "terms/biblical_tribes.csv",
+  "terms/biblical_festivals.csv",
+  "terms/biblical_calendar.csv",
+  "terms/frequency_anchors.csv",
+  "terms/null_controls.csv",
+  "terms/english_search_terms.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_uhb.toml",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "configs/example_ebible_engkjv.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/broad_search/theological_terms_counts.csv",
+  "reports/broad_search/theological_terms_counts.manifest.json",
+  "reports/broad_search/modern_names_dates_counts.csv",
+  "reports/broad_search/modern_names_dates_counts.manifest.json",
+  "reports/broad_search/table_of_nations_counts.csv",
+  "reports/broad_search/table_of_nations_counts.manifest.json",
+  "reports/broad_search/prophetic_terms_counts.csv",
+  "reports/broad_search/prophetic_terms_counts.manifest.json",
+  "reports/broad_search/hebrew_claim_terms_counts.csv",
+  "reports/broad_search/hebrew_claim_terms_counts.manifest.json",
+  "reports/broad_search/greek_nt_claim_terms_counts.csv",
+  "reports/broad_search/greek_nt_claim_terms_counts.manifest.json",
+  "reports/broad_search/biblical_tribes_counts.csv",
+  "reports/broad_search/biblical_tribes_counts.manifest.json",
+  "reports/broad_search/biblical_festivals_counts.csv",
+  "reports/broad_search/biblical_festivals_counts.manifest.json",
+  "reports/broad_search/biblical_calendar_counts.csv",
+  "reports/broad_search/biblical_calendar_counts.manifest.json",
+  "reports/broad_search/frequency_anchors_counts.csv",
+  "reports/broad_search/frequency_anchors_counts.manifest.json",
+  "reports/broad_search/null_controls_counts.csv",
+  "reports/broad_search/null_controls_counts.manifest.json",
+  "reports/broad_search/english_search_terms_counts.csv",
+  "reports/broad_search/english_search_terms_counts.manifest.json",
+  "reports/broad_search/broad_search.manifest.json",
+]
+
+[[steps]]
+id = "broad_search_report"
+description = "Summarize broad skip 2..100 count outputs."
+argv = ["-m", "scripts.analyze_broad_search"]
+inputs = [
+  "scripts/analyze_broad_search.py",
+  "reports/broad_search/theological_terms_counts.csv",
+  "reports/broad_search/modern_names_dates_counts.csv",
+  "reports/broad_search/table_of_nations_counts.csv",
+  "reports/broad_search/prophetic_terms_counts.csv",
+  "reports/broad_search/hebrew_claim_terms_counts.csv",
+  "reports/broad_search/greek_nt_claim_terms_counts.csv",
+  "reports/broad_search/biblical_tribes_counts.csv",
+  "reports/broad_search/biblical_festivals_counts.csv",
+  "reports/broad_search/biblical_calendar_counts.csv",
+  "reports/broad_search/frequency_anchors_counts.csv",
+  "reports/broad_search/null_controls_counts.csv",
+  "reports/broad_search/english_search_terms_counts.csv",
+  "reports/broad_search/broad_search.manifest.json",
+  "reports/protocols/public_baseline/theological_terms_counts.csv",
+  "reports/protocols/public_baseline/modern_names_dates_counts.csv",
+  "reports/protocols/public_baseline/table_of_nations_counts.csv",
+  "reports/protocols/public_baseline/prophetic_terms_counts.csv",
+]
+outputs = [
+  "reports/broad_search/broad_search_summary.csv",
+  "reports/broad_search/broad_search_top_counts.csv",
+  "reports/broad_search/broad_search_focus.csv",
+  "reports/broad_search/broad_search_delta_vs_baseline.csv",
+  "reports/broad_search/broad_search.md",
+  "reports/broad_search/broad_search_summary.manifest.json",
+]
+
+[[steps]]
+id = "broad_version_presence"
+description = "Summarize which broad-search terms appear in which observed corpora."
+argv = ["-m", "scripts.analyze_broad_version_presence"]
+inputs = [
+  "scripts/analyze_broad_version_presence.py",
+  "reports/broad_search/theological_terms_counts.csv",
+  "reports/broad_search/modern_names_dates_counts.csv",
+  "reports/broad_search/table_of_nations_counts.csv",
+  "reports/broad_search/prophetic_terms_counts.csv",
+  "reports/broad_search/hebrew_claim_terms_counts.csv",
+  "reports/broad_search/greek_nt_claim_terms_counts.csv",
+  "reports/broad_search/biblical_tribes_counts.csv",
+  "reports/broad_search/biblical_festivals_counts.csv",
+  "reports/broad_search/biblical_calendar_counts.csv",
+  "reports/broad_search/frequency_anchors_counts.csv",
+  "reports/broad_search/null_controls_counts.csv",
+  "reports/broad_search/english_search_terms_counts.csv",
+]
+outputs = [
+  "reports/broad_search/broad_version_presence.csv",
+  "reports/broad_search/broad_version_presence.md",
+  "reports/broad_search/broad_version_presence.manifest.json",
+]

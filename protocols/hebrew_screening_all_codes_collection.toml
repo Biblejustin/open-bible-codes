@@ -1,0 +1,141 @@
+name = "hebrew_screening_all_codes_collection"
+description = "Relaxed all-codes collection for the broad Hebrew screening cohort with center-word surface flags."
+manifest_out = "reports/hebrew_screening_all_codes/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 30
+
+[[steps]]
+id = "surface_all_codes"
+description = "Retain every hidden-path row and annotate same/related center-word surface context for broad Hebrew terms."
+argv = [
+  "-m",
+  "els",
+  "surface-context",
+  "--terms",
+  "terms/theological_terms.csv",
+  "--terms",
+  "terms/modern_names_dates.csv",
+  "--terms",
+  "terms/table_of_nations.csv",
+  "--terms",
+  "terms/prophetic_terms.csv",
+  "--terms",
+  "terms/hebrew_claim_terms.csv",
+  "--terms",
+  "terms/biblical_tribes.csv",
+  "--terms",
+  "terms/biblical_festivals.csv",
+  "--terms",
+  "terms/biblical_calendar.csv",
+  "--corpus",
+  "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus",
+  "UXLC=configs/example_uxlc.toml",
+  "--corpus",
+  "EBIBLE_WLC=configs/example_ebible_hebwlc.toml",
+  "--corpus",
+  "MAM=configs/example_mam.toml",
+  "--corpus",
+  "UHB=configs/example_uhb.toml",
+  "--min-skip",
+  "2",
+  "--max-skip",
+  "100",
+  "--direction",
+  "both",
+  "--min-term-length",
+  "4",
+  "--jobs",
+  "0",
+  "--include-all",
+  "--out",
+  "reports/hebrew_screening_all_codes/surface_all_codes.csv",
+  "--summary-out",
+  "reports/hebrew_screening_all_codes/surface_all_codes_summary.csv",
+  "--manifest-out",
+  "reports/hebrew_screening_all_codes/surface_all_codes.manifest.json",
+]
+inputs = [
+  "terms/theological_terms.csv",
+  "terms/modern_names_dates.csv",
+  "terms/table_of_nations.csv",
+  "terms/prophetic_terms.csv",
+  "terms/hebrew_claim_terms.csv",
+  "terms/biblical_tribes.csv",
+  "terms/biblical_festivals.csv",
+  "terms/biblical_calendar.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+  "els/surface.py",
+]
+outputs = [
+  "reports/hebrew_screening_all_codes/surface_all_codes.csv",
+  "reports/hebrew_screening_all_codes/surface_all_codes_summary.csv",
+  "reports/hebrew_screening_all_codes/surface_all_codes.manifest.json",
+]
+
+[[steps]]
+id = "summary"
+description = "Summarize the broad Hebrew relaxed all-codes collection."
+argv = [
+  "-m",
+  "scripts.summarize_surface_all_codes",
+  "--hits",
+  "reports/hebrew_screening_all_codes/surface_all_codes.csv",
+  "--summary",
+  "reports/hebrew_screening_all_codes/surface_all_codes_summary.csv",
+  "--title",
+  "Hebrew Screening All-Codes Collection",
+  "--markdown-out",
+  "docs/HEBREW_SCREENING_ALL_CODES_COLLECTION.md",
+  "--manifest-out",
+  "reports/hebrew_screening_all_codes/summary.manifest.json",
+]
+inputs = [
+  "scripts/summarize_surface_all_codes.py",
+  "reports/hebrew_screening_all_codes/surface_all_codes.csv",
+  "reports/hebrew_screening_all_codes/surface_all_codes_summary.csv",
+]
+outputs = [
+  "docs/HEBREW_SCREENING_ALL_CODES_COLLECTION.md",
+  "reports/hebrew_screening_all_codes/summary.manifest.json",
+]
+
+[[steps]]
+id = "triage"
+description = "Build a compact ranked triage queue from broad Hebrew relaxed all-codes rows."
+argv = [
+  "-m",
+  "scripts.triage_surface_all_codes",
+  "--hits",
+  "reports/hebrew_screening_all_codes/surface_all_codes.csv",
+  "--summary",
+  "reports/hebrew_screening_all_codes/surface_all_codes_summary.csv",
+  "--controlled-summary",
+  "reports/hebrew_screening_controlled_review/controlled_summary.csv",
+  "--title",
+  "Hebrew Screening All-Codes Triage",
+  "--queue-out",
+  "reports/hebrew_screening_all_codes/triage_queue.csv",
+  "--markdown-out",
+  "docs/HEBREW_SCREENING_ALL_CODES_TRIAGE.md",
+  "--manifest-out",
+  "reports/hebrew_screening_all_codes/triage.manifest.json",
+]
+inputs = [
+  "scripts/triage_surface_all_codes.py",
+  "reports/hebrew_screening_all_codes/surface_all_codes.csv",
+  "reports/hebrew_screening_all_codes/surface_all_codes_summary.csv",
+  "reports/hebrew_screening_controlled_review/controlled_summary.csv",
+]
+outputs = [
+  "reports/hebrew_screening_all_codes/triage_queue.csv",
+  "docs/HEBREW_SCREENING_ALL_CODES_TRIAGE.md",
+  "reports/hebrew_screening_all_codes/triage.manifest.json",
+]

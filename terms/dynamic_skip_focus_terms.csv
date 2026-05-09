@@ -1,0 +1,39 @@
+term_id,concept,category,language,term,notes
+dyn_yhwh_h,YHWH,theology,hebrew,יהוה,divine name anchor
+dyn_messiah_h,Messiah,theology,hebrew,משיח,messianic anchor
+dyn_yeshua_h,Yeshua,theology,hebrew,ישוע,Jesus/Yeshua anchor
+dyn_trump_h,Trump,modern,hebrew,טראמפ,modern leader focus
+dyn_vance_h,Vance,modern,hebrew,ואנס,modern leader focus
+dyn_netanyahu_h,Netanyahu,modern,hebrew,נתניהו,Israeli leader focus
+dyn_iran_h,Iran,modern_place,hebrew,איראן,modern geopolitical focus
+dyn_russia_h,Russia,modern_place,hebrew,רוסיה,modern geopolitical focus
+dyn_gog_h,Gog,prophetic,hebrew,גוג,Ezekiel/Revelation motif
+dyn_magog_h,Magog,prophetic,hebrew,מגוג,Ezekiel/Revelation motif
+dyn_beast_h,Beast,apocalyptic,hebrew,חיה,Daniel/Revelation motif
+dyn_dragon_h,Dragon,apocalyptic,hebrew,תנין,dragon motif
+dyn_jesus_g,Jesus,theology,greek,ιησους,Greek Jesus anchor
+dyn_christ_g,Christ,theology,greek,χριστος,Greek Christ anchor
+dyn_trump_g,Trump,modern,greek,τραμπ,modern leader focus
+dyn_vance_g,Vance,modern,greek,βανς,modern leader focus
+dyn_netanyahu_g,Netanyahu,modern,greek,νετανιαχου,Israeli leader focus
+dyn_iran_g,Iran,modern_place,greek,ιραν,modern geopolitical focus
+dyn_russia_g,Russia,modern_place,greek,ρωσια,modern geopolitical focus
+dyn_gog_g,Gog,prophetic,greek,γωγ,Ezekiel/Revelation motif
+dyn_magog_g,Magog,prophetic,greek,μαγωγ,Ezekiel/Revelation motif
+dyn_beast_g,Beast,apocalyptic,greek,θηριον,Revelation beast
+dyn_dragon_g,Dragon,apocalyptic,greek,δρακων,Revelation dragon
+dyn_jesus_e,Jesus,theology,english,Jesus,English Jesus anchor
+dyn_christ_e,Christ,theology,english,Christ,English Christ anchor
+dyn_trump_e,Trump,modern,english,Trump,modern leader focus
+dyn_vance_e,Vance,modern,english,Vance,modern leader focus
+dyn_netanyahu_e,Netanyahu,modern,english,Netanyahu,Israeli leader focus
+dyn_iran_e,Iran,modern_place,english,Iran,modern geopolitical focus
+dyn_russia_e,Russia,modern_place,english,Russia,modern geopolitical focus
+dyn_gog_e,Gog,prophetic,english,Gog,Ezekiel/Revelation motif
+dyn_magog_e,Magog,prophetic,english,Magog,Ezekiel/Revelation motif
+dyn_beast_e,Beast,apocalyptic,english,Beast,Revelation beast
+dyn_dragon_e,Dragon,apocalyptic,english,Dragon,Revelation dragon
+dyn_cowboy_e,Cowboy,local,english,Cowboy,local focus
+dyn_catering_e,Catering,local,english,Catering,local focus
+dyn_simsberry_e,Simsberry,local,english,Simsberry,local focus
+dyn_simscorner_e,Simscorner,local,english,Simscorner,local focus

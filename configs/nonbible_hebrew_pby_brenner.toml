@@ -1,0 +1,9 @@
+name = "Non-Bible Hebrew Control: Project Ben-Yehuda Brenner"
+language = "hebrew"
+
+[[sources]]
+name = "Project Ben-Yehuda Brenner"
+format = "text"
+path = "../data/processed/nonbible_controls/hebrew_pby_brenner.txt"
+ref = "PBY Brenner"
+book = "PBY Brenner"

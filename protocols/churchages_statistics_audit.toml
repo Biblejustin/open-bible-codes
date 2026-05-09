@@ -1,0 +1,35 @@
+name = "churchages_statistics_audit"
+description = "Compare published ChurchAges observed KJV ELS counts against letter-frequency expected counts."
+manifest_out = "reports/churchages_statistics/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "churchages_statistics_audit"
+description = "Build ChurchAges-style expected-vs-observed statistics table."
+argv = [
+  "-m",
+  "scripts.analyze_churchages_statistics",
+  "--claims",
+  "data/study/churchages_claim_counts.csv",
+  "--out",
+  "reports/churchages_statistics/audit.csv",
+  "--markdown-out",
+  "reports/churchages_statistics/audit.md",
+  "--manifest-out",
+  "reports/churchages_statistics/audit.manifest.json",
+]
+inputs = [
+  "data/study/churchages_claim_counts.csv",
+  "configs/example_ebible_engkjv.toml",
+  "scripts/analyze_churchages_statistics.py",
+  "els/corpus.py",
+  "els/search.py",
+  "els/skip_plan.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/churchages_statistics/audit.csv",
+  "reports/churchages_statistics/audit.md",
+  "reports/churchages_statistics/audit.manifest.json",
+]

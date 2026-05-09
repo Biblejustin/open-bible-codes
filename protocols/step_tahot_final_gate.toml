@@ -1,0 +1,24 @@
+name = "step_tahot_final_gate"
+description = "Consolidate STEP_TAHOT source-only real-term rows, source-policy audits, and control comparisons."
+manifest_out = "reports/step_tahot_final_gate/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 0
+
+[[steps]]
+id = "step_tahot_final_gate"
+description = "Build final gate report from STEP_TAHOT screening, policy, and control audit outputs."
+argv = ["-m", "scripts.analyze_step_tahot_final_gate"]
+inputs = [
+  "scripts/analyze_step_tahot_final_gate.py",
+  "reports/step_tahot_screening_version_presence/hit_patterns.csv",
+  "reports/step_tahot_policy_hits/step_tahot_only_policy_hits.csv",
+  "reports/step_tahot_control_version_presence/hit_patterns.csv",
+  "reports/step_tahot_control_policy_hits/step_tahot_only_policy_hits.csv",
+]
+outputs = [
+  "reports/step_tahot_final_gate/summary.csv",
+  "reports/step_tahot_final_gate/term_summary.csv",
+  "reports/step_tahot_final_gate/row_gate.csv",
+  "reports/step_tahot_final_gate/step_tahot_final_gate.md",
+  "reports/step_tahot_final_gate/manifest.json",
+]

@@ -1,0 +1,24 @@
+name = "greek_exact_center_final_gate"
+description = "Consolidate Greek exact-center version presence, controls, context, and synthetic baselines."
+manifest_out = "reports/greek_exact_center_final_gate/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 0
+
+[[steps]]
+id = "greek_exact_center_final_gate"
+description = "Build final gate report for current Greek exact-center review queue."
+argv = ["-m", "scripts.analyze_greek_exact_center_final_gate"]
+inputs = [
+  "scripts/analyze_greek_exact_center_final_gate.py",
+  "reports/greek_pattern_versions/summary.csv",
+  "reports/greek_exact_center_four_source/context_review_summary.csv",
+  "reports/greek_exact_center_three_source/context_review_summary.csv",
+  "reports/sblgnt_source_only_exact_center/context_review_summary.csv",
+  "reports/byz_source_only_exact_center/context_review_summary.csv",
+  "reports/greek_exact_center_three_source/synthetic_extension_baselines_summary.csv",
+]
+outputs = [
+  "reports/greek_exact_center_final_gate/summary.csv",
+  "reports/greek_exact_center_final_gate/greek_exact_center_final_gate.md",
+  "reports/greek_exact_center_final_gate/manifest.json",
+]

@@ -1,0 +1,7 @@
+name = "SBL Greek New Testament"
+language = "greek"
+
+[[sources]]
+name = "SBLGNT"
+format = "sblgnt_text_dir"
+path = "../data/raw/sblgnt/text"

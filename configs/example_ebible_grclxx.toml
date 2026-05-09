@@ -1,0 +1,12 @@
+name = "eBible GRCLXX LXX"
+language = "greek"
+
+[[sources]]
+name = "eBible GRCLXX"
+format = "csv"
+path = "../data/processed/ebible/grclxx.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

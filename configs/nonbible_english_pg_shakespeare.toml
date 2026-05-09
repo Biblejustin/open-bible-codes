@@ -1,0 +1,9 @@
+name = "Non-Bible English Control: Project Gutenberg Shakespeare"
+language = "english"
+
+[[sources]]
+name = "Project Gutenberg Shakespeare"
+format = "text"
+path = "../data/processed/nonbible_controls/english_pg_shakespeare.txt"
+ref = "PG Shakespeare"
+book = "PG Shakespeare"

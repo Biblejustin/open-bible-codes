@@ -1,0 +1,123 @@
+name = "greek_surface_length4_followup"
+description = "Post-discovery follow-up for length-4 all-source Greek surface rows exposed by the locked prospective run."
+manifest_out = "reports/greek_surface_length4_followup/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "length4_triage"
+description = "Select all-source exact-center surface rows using a length-4 threshold."
+argv = [
+  "-m", "scripts.analyze_greek_expanded_surface_triage",
+  "--terms", "terms/greek_surface_prospective_terms.csv",
+  "--patterns", "reports/greek_surface_prospective/surface_patterns.csv",
+  "--term-summary", "reports/greek_surface_prospective/term_summary.csv",
+  "--min-length", "4",
+  "--title", "Greek Surface Length-4 Follow-Up Triage",
+  "--status", "post-discovery length-4 follow-up; no claim.",
+  "--description", "This report follows up the all-source length-4 bucket exposed by the locked Greek surface prospective run. It is not prospective discovery.",
+  "--selected-out", "reports/greek_surface_length4_followup/selected_patterns.csv",
+  "--cohort-out", "reports/greek_surface_length4_followup/term_cohort.csv",
+  "--markdown-out", "docs/GREEK_SURFACE_LENGTH4_FOLLOWUP_TRIAGE.md",
+  "--manifest-out", "reports/greek_surface_length4_followup/triage.manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_expanded_surface_triage.py",
+  "terms/greek_surface_prospective_terms.csv",
+  "reports/greek_surface_prospective/surface_patterns.csv",
+  "reports/greek_surface_prospective/term_summary.csv",
+]
+outputs = [
+  "reports/greek_surface_length4_followup/selected_patterns.csv",
+  "reports/greek_surface_length4_followup/term_cohort.csv",
+  "docs/GREEK_SURFACE_LENGTH4_FOLLOWUP_TRIAGE.md",
+  "reports/greek_surface_length4_followup/triage.manifest.json",
+]
+
+[[steps]]
+id = "available_control_pool"
+description = "Build all available same-length controls for selected length-4 surface rows."
+argv = [
+  "-m", "scripts.analyze_greek_surface_control_pool",
+  "--terms", "terms/greek_surface_prospective_terms.csv",
+  "--selected", "reports/greek_surface_length4_followup/selected_patterns.csv",
+  "--top-controls", "999",
+  "--title", "Greek Surface Length-4 Control Pool",
+  "--frequencies-out", "reports/greek_surface_length4_followup/term_surface_frequencies.csv",
+  "--matched-out", "reports/greek_surface_length4_followup/matched_controls.csv",
+  "--markdown-out", "docs/GREEK_SURFACE_LENGTH4_CONTROL_POOL.md",
+  "--manifest-out", "reports/greek_surface_length4_followup/control_pool.manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_surface_control_pool.py",
+  "terms/greek_surface_prospective_terms.csv",
+  "reports/greek_surface_length4_followup/selected_patterns.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+]
+outputs = [
+  "reports/greek_surface_length4_followup/term_surface_frequencies.csv",
+  "reports/greek_surface_length4_followup/matched_controls.csv",
+  "docs/GREEK_SURFACE_LENGTH4_CONTROL_POOL.md",
+  "reports/greek_surface_length4_followup/control_pool.manifest.json",
+]
+
+[[steps]]
+id = "available_control_evaluation"
+description = "Evaluate length-4 surface rows against all available same-length controls."
+argv = [
+  "-m", "scripts.analyze_greek_surface_control_evaluation",
+  "--cohort", "reports/greek_surface_length4_followup/term_cohort.csv",
+  "--matched-controls", "reports/greek_surface_length4_followup/matched_controls.csv",
+  "--title", "Greek Surface Length-4 Control Evaluation",
+  "--summary-out", "reports/greek_surface_length4_followup/control_summary.csv",
+  "--details-out", "reports/greek_surface_length4_followup/control_details.csv",
+  "--markdown-out", "docs/GREEK_SURFACE_LENGTH4_CONTROL_EVALUATION.md",
+  "--manifest-out", "reports/greek_surface_length4_followup/control_evaluation.manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_surface_control_evaluation.py",
+  "reports/greek_surface_length4_followup/term_cohort.csv",
+  "reports/greek_surface_length4_followup/matched_controls.csv",
+]
+outputs = [
+  "reports/greek_surface_length4_followup/control_summary.csv",
+  "reports/greek_surface_length4_followup/control_details.csv",
+  "docs/GREEK_SURFACE_LENGTH4_CONTROL_EVALUATION.md",
+  "reports/greek_surface_length4_followup/control_evaluation.manifest.json",
+]
+
+[[steps]]
+id = "letter_paths"
+description = "Reconstruct selected length-4 ELS letter paths across compared Greek NT sources."
+argv = [
+  "-m", "scripts.analyze_greek_surface_letter_paths",
+  "--selected", "reports/greek_surface_length4_followup/selected_patterns.csv",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "BYZ_NT=configs/example_ebible_grcmt.toml",
+  "--corpus", "TCG_NT=configs/example_ebible_grctcgnt.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--title", "Greek Surface Length-4 Letter Paths",
+  "--status", "audit sheet for post-discovery length-4 surface rows; no claim.",
+  "--summary-out", "reports/greek_surface_length4_followup/path_summary.csv",
+  "--letters-out", "reports/greek_surface_length4_followup/letter_paths.csv",
+  "--markdown-out", "docs/GREEK_SURFACE_LENGTH4_LETTER_PATHS.md",
+  "--manifest-out", "reports/greek_surface_length4_followup/letter_paths.manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_surface_letter_paths.py",
+  "reports/greek_surface_length4_followup/selected_patterns.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/greek_surface_length4_followup/path_summary.csv",
+  "reports/greek_surface_length4_followup/letter_paths.csv",
+  "docs/GREEK_SURFACE_LENGTH4_LETTER_PATHS.md",
+  "reports/greek_surface_length4_followup/letter_paths.manifest.json",
+]

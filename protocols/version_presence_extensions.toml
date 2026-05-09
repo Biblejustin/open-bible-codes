@@ -1,0 +1,279 @@
+name = "version_presence_extensions"
+description = "Same-skip extension screen for bounded all-source version-presence hit queues."
+manifest_out = "reports/version_presence_extensions/protocol_run.manifest.json"
+max_parallel = 4
+progress_interval_seconds = 15
+
+[[steps]]
+id = "export_hebrew_hits"
+description = "Export bounded Hebrew all-source version-presence patterns as hit rows."
+argv = [
+  "-m", "scripts.export_version_presence_hits",
+  "--patterns", "reports/hebrew_screening_version_presence/hit_patterns.csv",
+  "--corpus", "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus", "UHB=configs/example_uhb.toml",
+  "--presence-scope", "present_all_observed_sources",
+  "--max-patterns-per-term", "2",
+  "--max-patterns", "120",
+  "--out", "reports/version_presence_extensions/hebrew_hits.csv",
+  "--manifest-out", "reports/version_presence_extensions/hebrew_hits.manifest.json",
+]
+inputs = [
+  "reports/hebrew_screening_version_presence/hit_patterns.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uhb.toml",
+  "scripts/export_version_presence_hits.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/version_presence_extensions/hebrew_hits.csv",
+  "reports/version_presence_extensions/hebrew_hits.manifest.json",
+]
+
+[[steps]]
+id = "export_greek_hits"
+description = "Export bounded Greek all-source version-presence patterns as hit rows."
+argv = [
+  "-m", "scripts.export_version_presence_hits",
+  "--patterns", "reports/greek_screening_version_presence/hit_patterns.csv",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--presence-scope", "present_all_observed_sources",
+  "--max-patterns-per-term", "2",
+  "--max-patterns", "120",
+  "--out", "reports/version_presence_extensions/greek_hits.csv",
+  "--manifest-out", "reports/version_presence_extensions/greek_hits.manifest.json",
+]
+inputs = [
+  "reports/greek_screening_version_presence/hit_patterns.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "scripts/export_version_presence_hits.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/version_presence_extensions/greek_hits.csv",
+  "reports/version_presence_extensions/greek_hits.manifest.json",
+]
+
+[[steps]]
+id = "extensions_hebrew_mt_wlc"
+description = "Check same-skip phrase extensions for exported MT_WLC Hebrew hits."
+parallel_group = "extensions"
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_oshb_wlc.toml",
+  "--hits", "reports/version_presence_extensions/hebrew_hits.csv",
+  "--corpus-label", "MT_WLC",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/version_presence_extensions/extensions_hebrew_mt_wlc.csv",
+  "--manifest-out", "reports/version_presence_extensions/extensions_hebrew_mt_wlc.manifest.json",
+]
+inputs = [
+  "reports/version_presence_extensions/hebrew_hits.csv",
+  "configs/example_oshb_wlc.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/version_presence_extensions/extensions_hebrew_mt_wlc.csv",
+  "reports/version_presence_extensions/extensions_hebrew_mt_wlc.manifest.json",
+]
+
+[[steps]]
+id = "extensions_hebrew_uhb"
+description = "Check same-skip phrase extensions for exported UHB Hebrew hits."
+parallel_group = "extensions"
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_uhb.toml",
+  "--hits", "reports/version_presence_extensions/hebrew_hits.csv",
+  "--corpus-label", "UHB",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/version_presence_extensions/extensions_hebrew_uhb.csv",
+  "--manifest-out", "reports/version_presence_extensions/extensions_hebrew_uhb.manifest.json",
+]
+inputs = [
+  "reports/version_presence_extensions/hebrew_hits.csv",
+  "configs/example_uhb.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/version_presence_extensions/extensions_hebrew_uhb.csv",
+  "reports/version_presence_extensions/extensions_hebrew_uhb.manifest.json",
+]
+
+[[steps]]
+id = "extensions_greek_tr_nt"
+description = "Check same-skip phrase extensions for exported TR_NT Greek hits."
+parallel_group = "extensions"
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_ebible_grctr.toml",
+  "--hits", "reports/version_presence_extensions/greek_hits.csv",
+  "--corpus-label", "TR_NT",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/version_presence_extensions/extensions_greek_tr_nt.csv",
+  "--manifest-out", "reports/version_presence_extensions/extensions_greek_tr_nt.manifest.json",
+]
+inputs = [
+  "reports/version_presence_extensions/greek_hits.csv",
+  "configs/example_ebible_grctr.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/version_presence_extensions/extensions_greek_tr_nt.csv",
+  "reports/version_presence_extensions/extensions_greek_tr_nt.manifest.json",
+]
+
+[[steps]]
+id = "extensions_greek_sblgnt"
+description = "Check same-skip phrase extensions for exported SBLGNT Greek hits."
+parallel_group = "extensions"
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_sblgnt.toml",
+  "--hits", "reports/version_presence_extensions/greek_hits.csv",
+  "--corpus-label", "SBLGNT",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/version_presence_extensions/extensions_greek_sblgnt.csv",
+  "--manifest-out", "reports/version_presence_extensions/extensions_greek_sblgnt.manifest.json",
+]
+inputs = [
+  "reports/version_presence_extensions/greek_hits.csv",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/version_presence_extensions/extensions_greek_sblgnt.csv",
+  "reports/version_presence_extensions/extensions_greek_sblgnt.manifest.json",
+]
+
+[[steps]]
+id = "summary_hebrew_mt_wlc"
+description = "Summarize MT_WLC version-presence phrase extensions."
+parallel_group = "summaries"
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/version_presence_extensions/extensions_hebrew_mt_wlc.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "4",
+  "--match-kind-prefix", "phrase_",
+  "--top", "30",
+  "--out", "reports/version_presence_extensions/extensions_hebrew_mt_wlc_summary.csv",
+  "--top-out", "reports/version_presence_extensions/extensions_hebrew_mt_wlc_top.csv",
+  "--manifest-out", "reports/version_presence_extensions/extensions_hebrew_mt_wlc_summary.manifest.json",
+]
+inputs = [
+  "reports/version_presence_extensions/extensions_hebrew_mt_wlc.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/version_presence_extensions/extensions_hebrew_mt_wlc_summary.csv",
+  "reports/version_presence_extensions/extensions_hebrew_mt_wlc_top.csv",
+  "reports/version_presence_extensions/extensions_hebrew_mt_wlc_summary.manifest.json",
+]
+
+[[steps]]
+id = "summary_hebrew_uhb"
+description = "Summarize UHB version-presence phrase extensions."
+parallel_group = "summaries"
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/version_presence_extensions/extensions_hebrew_uhb.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "4",
+  "--match-kind-prefix", "phrase_",
+  "--top", "30",
+  "--out", "reports/version_presence_extensions/extensions_hebrew_uhb_summary.csv",
+  "--top-out", "reports/version_presence_extensions/extensions_hebrew_uhb_top.csv",
+  "--manifest-out", "reports/version_presence_extensions/extensions_hebrew_uhb_summary.manifest.json",
+]
+inputs = [
+  "reports/version_presence_extensions/extensions_hebrew_uhb.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/version_presence_extensions/extensions_hebrew_uhb_summary.csv",
+  "reports/version_presence_extensions/extensions_hebrew_uhb_top.csv",
+  "reports/version_presence_extensions/extensions_hebrew_uhb_summary.manifest.json",
+]
+
+[[steps]]
+id = "summary_greek_tr_nt"
+description = "Summarize TR_NT version-presence phrase extensions."
+parallel_group = "summaries"
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/version_presence_extensions/extensions_greek_tr_nt.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "4",
+  "--match-kind-prefix", "phrase_",
+  "--top", "30",
+  "--out", "reports/version_presence_extensions/extensions_greek_tr_nt_summary.csv",
+  "--top-out", "reports/version_presence_extensions/extensions_greek_tr_nt_top.csv",
+  "--manifest-out", "reports/version_presence_extensions/extensions_greek_tr_nt_summary.manifest.json",
+]
+inputs = [
+  "reports/version_presence_extensions/extensions_greek_tr_nt.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/version_presence_extensions/extensions_greek_tr_nt_summary.csv",
+  "reports/version_presence_extensions/extensions_greek_tr_nt_top.csv",
+  "reports/version_presence_extensions/extensions_greek_tr_nt_summary.manifest.json",
+]
+
+[[steps]]
+id = "summary_greek_sblgnt"
+description = "Summarize SBLGNT version-presence phrase extensions."
+parallel_group = "summaries"
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/version_presence_extensions/extensions_greek_sblgnt.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "4",
+  "--match-kind-prefix", "phrase_",
+  "--top", "30",
+  "--out", "reports/version_presence_extensions/extensions_greek_sblgnt_summary.csv",
+  "--top-out", "reports/version_presence_extensions/extensions_greek_sblgnt_top.csv",
+  "--manifest-out", "reports/version_presence_extensions/extensions_greek_sblgnt_summary.manifest.json",
+]
+inputs = [
+  "reports/version_presence_extensions/extensions_greek_sblgnt.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/version_presence_extensions/extensions_greek_sblgnt_summary.csv",
+  "reports/version_presence_extensions/extensions_greek_sblgnt_top.csv",
+  "reports/version_presence_extensions/extensions_greek_sblgnt_summary.manifest.json",
+]

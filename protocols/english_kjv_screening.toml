@@ -1,0 +1,31 @@
+name = "english_kjv_screening"
+description = "English KJV skip 2..100 screening run over generated English search terms."
+manifest_out = "reports/english_kjv_screening/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "english_kjv_batch_counts"
+description = "Count generated English terms against the eBible KJV corpus."
+argv = [
+  "-m", "els", "batch-many",
+  "--term-set", "english_search_terms=terms/english_search_terms.csv",
+  "--corpus", "KJV=configs/example_ebible_engkjv.toml",
+  "--min-skip", "2",
+  "--max-skip", "100",
+  "--jobs", "0",
+  "--out-dir", "reports/english_kjv_screening",
+  "--manifest-out", "reports/english_kjv_screening/english_kjv_screening.manifest.json",
+]
+inputs = [
+  "terms/english_search_terms.csv",
+  "configs/example_ebible_engkjv.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/english_kjv_screening/english_search_terms_counts.csv",
+  "reports/english_kjv_screening/english_search_terms_counts.manifest.json",
+  "reports/english_kjv_screening/english_kjv_screening.manifest.json",
+]

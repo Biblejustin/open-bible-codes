@@ -1,0 +1,145 @@
+term_id,concept,category,language,term,notes
+cc_torah_h,Torah,cc_common_examples,hebrew,תורה,common Torah skip examples
+cc_yhwh_h,YHWH,cc_common_examples,hebrew,יהוה,Leviticus YHWH skip example
+cc_israel_h,Israel,cc_common_examples,hebrew,ישראל,Genesis Israel Sabbath cluster
+cc_abraham_h,Abraham,cc_common_examples,hebrew,אברהם,Genesis 1 interwoven Abraham and Elohim example
+cc_elohim_h,Elohim,cc_common_examples,hebrew,אלהים,Genesis 1 interwoven Abraham and Elohim example
+cc_mishnah_torah_h,Mishneh Torah,cc_common_examples,hebrew,משנה תורה,Weissmandl Rambam example
+cc_rambam_h,Rambam,cc_common_examples,hebrew,רמבם,Vilna Gaon and Weissmandl example
+cc_genesis_tree_h,Tree,cc_genesis_tree_cluster,hebrew,עץ,Genesis 1 to 2 tree cluster theme
+cc_tamarisk_h,Tamarisk,cc_genesis_tree_cluster,hebrew,אשל,Genesis 1 to 2 tree list
+cc_terebinth_h,Terebinth,cc_genesis_tree_cluster,hebrew,אלה,Genesis 1 to 2 tree list
+cc_thicket_h,Thicket,cc_genesis_tree_cluster,hebrew,עבת,Genesis 1 to 2 tree list spelling provisional
+cc_citron_h,Citron,cc_genesis_tree_cluster,hebrew,הדר,Genesis 1 to 2 tree list
+cc_acacia_h,Acacia,cc_genesis_tree_cluster,hebrew,שטה,Genesis 1 to 2 tree list
+cc_almond_h,Almond,cc_genesis_tree_cluster,hebrew,שקד,Genesis 1 to 2 tree list
+cc_wheat_h,Wheat,cc_genesis_tree_cluster,hebrew,חטה,Genesis 1 to 2 plant list
+cc_date_palm_h,Date Palm,cc_genesis_tree_cluster,hebrew,תמר,Genesis 1 to 2 tree list
+cc_cedar_h,Cedar,cc_genesis_tree_cluster,hebrew,ארז,Genesis 1 to 2 tree list
+cc_aloes_h,Aloes,cc_genesis_tree_cluster,hebrew,אהלים,Genesis 1 to 2 tree list spelling provisional
+cc_grape_h,Grape,cc_genesis_tree_cluster,hebrew,ענב,Genesis 1 to 2 fruit list
+cc_bramble_h,Bramble,cc_genesis_tree_cluster,hebrew,אטד,Genesis 1 to 2 tree list
+cc_cassia_h,Cassia,cc_genesis_tree_cluster,hebrew,קדה,Genesis 1 to 2 tree list
+cc_pomegranate_h,Pomegranate,cc_genesis_tree_cluster,hebrew,רמון,Genesis 1 to 2 fruit list
+cc_gopherwood_h,Gopherwood,cc_genesis_tree_cluster,hebrew,גפר,Genesis 1 to 2 tree list
+cc_thornbush_h,Thornbush,cc_genesis_tree_cluster,hebrew,סנה,Genesis 1 to 2 tree list
+cc_olive_h,Olive,cc_genesis_tree_cluster,hebrew,זית,Genesis 1 to 2 fruit list
+cc_pistachio_h,Pistachio,cc_genesis_tree_cluster,hebrew,בטנים,Genesis 1 to 2 tree list spelling provisional
+cc_hazel_h,Hazel,cc_genesis_tree_cluster,hebrew,לוז,Genesis 1 to 2 tree list
+cc_fig_h,Fig,cc_genesis_tree_cluster,hebrew,תאנה,Genesis 1 to 2 fruit list
+cc_willow_h,Willow,cc_genesis_tree_cluster,hebrew,ערבה,Genesis 1 to 2 tree list
+cc_oak_h,Oak,cc_genesis_tree_cluster,hebrew,אלון,Genesis 1 to 2 tree list
+cc_vine_h,Vine,cc_genesis_tree_cluster,hebrew,גפן,Genesis 1 to 2 fruit list
+cc_barley_h,Barley,cc_genesis_tree_cluster,hebrew,שעורה,Genesis 1 to 2 plant list
+cc_chestnut_h,Chestnut,cc_genesis_tree_cluster,hebrew,ערמון,Genesis 1 to 2 tree list
+cc_poplar_h,Poplar,cc_genesis_tree_cluster,hebrew,לבנה,Genesis 1 to 2 tree list
+cc_hitler_h,Hitler,cc_holocaust_claims,hebrew,היטלר,Holocaust table term
+cc_auschwitz_h,Auschwitz,cc_holocaust_claims,hebrew,אושויץ,Holocaust table term
+cc_shoah_h,Holocaust,cc_holocaust_claims,hebrew,שואה,Holocaust table term
+cc_the_shoah_h,The Holocaust,cc_holocaust_claims,hebrew,השואה,Holocaust table term
+cc_crematorium_h,Crematorium,cc_holocaust_claims,hebrew,כבשן,Holocaust table term
+cc_for_my_sons_h,For My Sons,cc_holocaust_claims,hebrew,לבני,Holocaust table phrase
+cc_in_poland_h,In Poland,cc_holocaust_claims,hebrew,בפולין,Holocaust table phrase
+cc_plagues_h,Plagues,cc_holocaust_claims,hebrew,מגפות,Holocaust table term
+cc_fuhrer_h,Fuehrer,cc_holocaust_claims,hebrew,פיהרר,Holocaust table term
+cc_eichmann_h,Eichmann,cc_holocaust_claims,hebrew,אייכמן,Holocaust table term
+cc_king_nazis_h,King Of Nazis,cc_holocaust_claims,hebrew,מלך נאצים,Holocaust table phrase
+cc_genocide_h,Genocide,cc_holocaust_claims,hebrew,רצח עם,Holocaust table phrase
+cc_germany_h,Germany,cc_holocaust_claims,hebrew,גרמניה,Holocaust table term
+cc_mein_kampf_h,Mein Kampf,cc_holocaust_claims,hebrew,מיין קאמפף,Holocaust table phrase spelling provisional
+cc_ss_h,SS,cc_holocaust_claims,hebrew,אס אס,Holocaust matrix term
+cc_zyklon_b_h,Zyklon B,cc_holocaust_claims,hebrew,ציקלון ב,Holocaust matrix term
+cc_gas_h,Gas,cc_holocaust_claims,hebrew,גז,Holocaust matrix term
+cc_one_third_my_people_h,One Third Of My People,cc_holocaust_claims,hebrew,שליש עמי,Holocaust matrix phrase
+cc_diabetes_h,Diabetes,cc_historical_claims,hebrew,סוכרת,reported historical code example
+cc_aids_h,AIDS,cc_historical_claims,hebrew,איידס,reported historical code example
+cc_anwar_sadat_h,Anwar Sadat,cc_historical_claims,hebrew,אנואר סאדאת,reported historical code example
+cc_persian_gulf_war_h,Persian Gulf War,cc_historical_claims,hebrew,מלחמת המפרץ הפרסי,reported historical code example
+cc_scud_h,Scud Missile,cc_historical_claims,hebrew,סקאד,reported historical code example
+cc_yasser_arafat_h,Yasser Arafat,cc_historical_claims,hebrew,יאסר ערפאת,reported historical code example
+cc_plo_h,PLO,cc_historical_claims,hebrew,אשף,reported historical code example
+cc_oklahoma_city_h,Oklahoma City,cc_historical_claims,hebrew,אוקלהומה סיטי,reported historical code example
+cc_great_depression_h,Great Depression,cc_historical_claims,hebrew,השפל הגדול,reported historical code example
+cc_moon_landing_h,Moon Landing,cc_historical_claims,hebrew,נחיתה על הירח,reported historical code example
+cc_neil_armstrong_h,Neil Armstrong,cc_historical_claims,hebrew,ניל ארמסטרונג,reported historical code example
+cc_shoemaker_levy_h,Shoemaker Levy,cc_historical_claims,hebrew,שומייקר לוי,reported historical code example
+cc_jupiter_h,Jupiter,cc_historical_claims,hebrew,צדק,reported historical code example
+cc_american_revolution_h,American Revolution,cc_historical_claims,hebrew,המהפכה האמריקאית,reported historical code example
+cc_french_revolution_h,French Revolution,cc_historical_claims,hebrew,המהפכה הצרפתית,reported historical code example
+cc_shakespeare_h,Shakespeare,cc_historical_claims,hebrew,שייקספיר,reported historical code example
+cc_pearl_harbor_h,Pearl Harbor,cc_historical_claims,hebrew,פרל הארבור,reported historical code example
+cc_rabin_h,Rabin,cc_rabin_microcode,hebrew,רבין,scripta continua Rabin example
+cc_evil_fire_h,Evil Fire,cc_rabin_microcode,hebrew,אש רע,scripta continua Rabin example
+cc_yeshua_h,Yeshua,cc_yeshua_codes,hebrew,ישוע,Rambsel Yeshua examples
+cc_yeshua_yakhol_h,Yeshua Is Able,cc_yeshua_codes,hebrew,ישוע יכול,Genesis 1 Rambsel example
+cc_yoshiah_h,He Will Save,cc_yeshua_codes,hebrew,יושיעה,Genesis 3 Rambsel example spelling provisional
+cc_yeshua_shmi_h,Yeshua My Name,cc_yeshua_codes,hebrew,ישוע שמי,Isaiah 53 Rambsel example
+cc_yeshua_strong_name_h,Yeshua My Strong Name,cc_yeshua_codes,hebrew,מעל ישוע שמי עז,Isaiah 53 Rambsel phrase
+cc_messiah_h,Messiah,cc_isaiah53_table,hebrew,משיח,Isaiah 53 table term
+cc_nazarene_h,Nazarene,cc_isaiah53_table,hebrew,נזיר,Isaiah 53 table term spelling provisional
+cc_galilee_h,Galilee,cc_isaiah53_table,hebrew,גליל,Isaiah 53 table term
+cc_shiloh_h,Shiloh,cc_isaiah53_table,hebrew,שילה,Isaiah 53 table term
+cc_pharisee_h,Pharisee,cc_isaiah53_table,hebrew,פרוש,Isaiah 53 table term
+cc_levites_h,Levites,cc_isaiah53_table,hebrew,לוים,Isaiah 53 table term
+cc_caiaphas_h,Caiaphas,cc_isaiah53_table,hebrew,כיפה,Isaiah 53 table term
+cc_annas_h,Annas,cc_isaiah53_table,hebrew,ענן,Isaiah 53 table term
+cc_passover_h,Passover,cc_isaiah53_table,hebrew,פסח,Isaiah 53 table term
+cc_man_herod_h,The Man Herod,cc_isaiah53_table,hebrew,איש הורד,Isaiah 53 table phrase spelling provisional
+cc_wicked_caesar_h,Wicked Caesar Perish,cc_isaiah53_table,hebrew,קיסר עמל אבד,Isaiah 53 table phrase
+cc_evil_roman_city_h,Evil Roman City,cc_isaiah53_table,hebrew,רע עיר רומי,Isaiah 53 table phrase
+cc_let_him_be_crucified_h,Let Him Be Crucified,cc_isaiah53_table,hebrew,יצלב,Isaiah 53 table phrase
+cc_moriah_h,Moriah,cc_isaiah53_table,hebrew,מריה,Isaiah 53 table term
+cc_cross_h,Cross,cc_isaiah53_table,hebrew,צלב,Isaiah 53 table term
+cc_pierce_h,Pierce,cc_isaiah53_table,hebrew,דקר,Isaiah 53 table term
+cc_atonement_lamb_h,Atonement Lamb,cc_isaiah53_table,hebrew,טלא מכפר,Isaiah 53 table phrase
+cc_disciples_mourn_h,The Disciples Mourn,cc_isaiah53_table,hebrew,תלמידים נא,Isaiah 53 table phrase spelling provisional
+cc_peter_h,Peter,cc_isaiah53_table,hebrew,כפה,Isaiah 53 table term
+cc_matthew_h,Matthew,cc_isaiah53_table,hebrew,מתתי,Isaiah 53 table term
+cc_john_h,John,cc_isaiah53_table,hebrew,יוחנן,Isaiah 53 table term
+cc_andrew_h,Andrew,cc_isaiah53_table,hebrew,אנדרי,Isaiah 53 table term
+cc_philip_h,Philip,cc_isaiah53_table,hebrew,פילף,Isaiah 53 table term from PDF
+cc_thomas_h,Thomas,cc_isaiah53_table,hebrew,תומא,Isaiah 53 table term
+cc_james_h,James,cc_isaiah53_table,hebrew,יעקב,Isaiah 53 table term
+cc_simon_h,Simon,cc_isaiah53_table,hebrew,שמעון,Isaiah 53 table term
+cc_thaddaeus_h,Thaddaeus,cc_isaiah53_table,hebrew,תדי,Isaiah 53 table term
+cc_matthias_h,Matthias,cc_isaiah53_table,hebrew,מתיה,Isaiah 53 table term
+cc_mary_h,Mary,cc_isaiah53_table,hebrew,מרים,Isaiah 53 table term
+cc_salome_h,Salome,cc_isaiah53_table,hebrew,שלומית,Isaiah 53 table term
+cc_joseph_h,Joseph,cc_isaiah53_table,hebrew,יוסף,Isaiah 53 table term
+cc_bread_h,Bread,cc_isaiah53_table,hebrew,לחם,Isaiah 53 table term
+cc_wine_h,Wine,cc_isaiah53_table,hebrew,יין,Isaiah 53 table term
+cc_obed_h,Obed,cc_isaiah53_table,hebrew,עבד,Isaiah 53 table term
+cc_jesse_h,Jesse,cc_isaiah53_table,hebrew,ישי,Isaiah 53 table term
+cc_seed_h,Seed,cc_isaiah53_table,hebrew,זרע,Isaiah 53 table term
+cc_water_h,Water,cc_isaiah53_table,hebrew,מים,Isaiah 53 table term
+cc_jonah_h,Jonah,cc_isaiah53_table,hebrew,יונה,Isaiah 53 table term
+cc_hallelujah_h,Hallelujah,cc_numerics_macrocodes,hebrew,הללויה,sevenfold count table
+cc_hallelujah_g,Hallelujah,cc_numerics_macrocodes,greek,αλληλουια,sevenfold count table
+cc_hallelujah_e,Hallelujah,cc_numerics_macrocodes,english,hallelujah,sevenfold count table
+cc_hosanna_h,Hosanna,cc_numerics_macrocodes,hebrew,הושענא,sevenfold count table
+cc_hosanna_g,Hosanna,cc_numerics_macrocodes,greek,ωσαννα,sevenfold count table
+cc_hosanna_e,Hosanna,cc_numerics_macrocodes,english,hosanna,sevenfold count table
+cc_shepherd_h,Shepherd,cc_numerics_macrocodes,hebrew,רעה,sevenfold count table
+cc_shepherd_g,Shepherd,cc_numerics_macrocodes,greek,ποιμην,sevenfold count table
+cc_shepherd_e,Shepherd,cc_numerics_macrocodes,english,shepherd,sevenfold count table
+cc_jehovah_sabaoth_h,Jehovah Sabaoth,cc_numerics_macrocodes,hebrew,יהוה צבאות,sevenfold count table
+cc_jehovah_sabaoth_g,Jehovah Sabaoth,cc_numerics_macrocodes,greek,κυριος σαβαωθ,sevenfold count table
+cc_jehovah_sabaoth_e,Jehovah Sabaoth,cc_numerics_macrocodes,english,jehovah sabaoth,sevenfold count table
+cc_corban_h,Corban,cc_numerics_macrocodes,hebrew,קרבן,sevenfold count table
+cc_corban_g,Corban,cc_numerics_macrocodes,greek,κορβαν,sevenfold count table
+cc_corban_e,Corban,cc_numerics_macrocodes,english,corban,sevenfold count table
+cc_milk_h,Milk,cc_numerics_macrocodes,hebrew,חלב,sevenfold count table
+cc_milk_g,Milk,cc_numerics_macrocodes,greek,γαλα,sevenfold count table
+cc_milk_e,Milk,cc_numerics_macrocodes,english,milk,sevenfold count table
+cc_isaac_h,Isaac,cc_numerics_macrocodes,hebrew,יצחק,sevenfold count table
+cc_isaac_g,Isaac,cc_numerics_macrocodes,greek,ισαακ,sevenfold count table
+cc_isaac_e,Isaac,cc_numerics_macrocodes,english,isaac,sevenfold count table
+cc_aaron_h,Aaron,cc_numerics_macrocodes,hebrew,אהרן,sevenfold count table
+cc_aaron_g,Aaron,cc_numerics_macrocodes,greek,ααρων,sevenfold count table
+cc_aaron_e,Aaron,cc_numerics_macrocodes,english,aaron,sevenfold count table
+cc_abaddon_h,Abaddon,cc_numerics_macrocodes,hebrew,אבדון,sevenfold count table
+cc_abaddon_g,Abaddon,cc_numerics_macrocodes,greek,αβαδδων,sevenfold count table
+cc_abaddon_e,Abaddon,cc_numerics_macrocodes,english,abaddon,sevenfold count table
+cc_melchizedek_h,Melchizedek,cc_numerics_macrocodes,hebrew,מלכי צדק,sevenfold count table
+cc_melchizedek_g,Melchizedek,cc_numerics_macrocodes,greek,μελχισεδεκ,sevenfold count table
+cc_melchizedek_e,Melchizedek,cc_numerics_macrocodes,english,melchizedek,sevenfold count table

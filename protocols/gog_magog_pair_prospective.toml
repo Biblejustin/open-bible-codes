@@ -1,0 +1,178 @@
+name = "gog_magog_pair_prospective"
+description = "Locked prospective Hebrew Gog/Magog same-chapter same-signed-skip pair-control study over MT_WLC and UHB."
+manifest_out = "reports/gog_magog_pair_prospective/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "target_pair_controls"
+description = "Run target Gog/Magog pair controls over MT_WLC and UHB."
+argv = [
+  "-m", "scripts.analyze_gog_magog_pairs",
+  "--terms", "terms/gog_magog_pair_prospective_terms.csv",
+  "--corpus", "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus", "UHB=configs/example_uhb.toml",
+  "--min-skip", "2",
+  "--max-skip", "100",
+  "--direction", "both",
+  "--max-gap", "500",
+  "--require-same-chapter",
+  "--require-same-skip",
+  "--term-control-samples", "500",
+  "--random-control-samples", "50",
+  "--seed", "20260509",
+  "--jobs", "2",
+  "--hit-jobs", "0",
+  "--summary-out", "reports/gog_magog_pair_prospective/target_summary.csv",
+  "--examples-out", "reports/gog_magog_pair_prospective/target_examples.csv",
+  "--markdown-out", "reports/gog_magog_pair_prospective/target.md",
+  "--manifest-out", "reports/gog_magog_pair_prospective/target.manifest.json",
+]
+inputs = [
+  "terms/gog_magog_pair_prospective_terms.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uhb.toml",
+  "scripts/analyze_gog_magog_pairs.py",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/gog_magog_pair_prospective/target_summary.csv",
+  "reports/gog_magog_pair_prospective/target_examples.csv",
+  "reports/gog_magog_pair_prospective/target.md",
+  "reports/gog_magog_pair_prospective/target.manifest.json",
+]
+
+[[steps]]
+id = "declared_pair_baselines"
+description = "Run declared non-target pair baselines under the same strict rule."
+argv = [
+  "-m", "scripts.analyze_pair_baselines",
+  "--terms", "terms/gog_magog_pair_prospective_terms.csv",
+  "--corpus", "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus", "UHB=configs/example_uhb.toml",
+  "--min-skip", "2",
+  "--max-skip", "100",
+  "--direction", "both",
+  "--max-gap", "500",
+  "--jobs", "2",
+  "--hit-jobs", "0",
+  "--summary-out", "reports/gog_magog_pair_prospective/pair_baselines_summary.csv",
+  "--examples-out", "reports/gog_magog_pair_prospective/pair_baselines_examples.csv",
+  "--markdown-out", "reports/gog_magog_pair_prospective/pair_baselines.md",
+  "--manifest-out", "reports/gog_magog_pair_prospective/pair_baselines.manifest.json",
+]
+inputs = [
+  "terms/gog_magog_pair_prospective_terms.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uhb.toml",
+  "scripts/analyze_pair_baselines.py",
+  "scripts/analyze_gog_magog_pairs.py",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/gog_magog_pair_prospective/pair_baselines_summary.csv",
+  "reports/gog_magog_pair_prospective/pair_baselines_examples.csv",
+  "reports/gog_magog_pair_prospective/pair_baselines.md",
+  "reports/gog_magog_pair_prospective/pair_baselines.manifest.json",
+]
+
+[[steps]]
+id = "synthetic_mt_wlc"
+description = "Run MT_WLC synthetic length-matched pair baselines."
+argv = [
+  "-m", "scripts.analyze_synthetic_pair_baselines",
+  "--corpus-label", "MT_WLC",
+  "--config", "configs/example_oshb_wlc.toml",
+  "--pair-baselines", "reports/gog_magog_pair_prospective/pair_baselines_summary.csv",
+  "--samples", "100",
+  "--left-length", "3",
+  "--right-length", "4",
+  "--seed", "20260509",
+  "--min-skip", "2",
+  "--max-skip", "100",
+  "--direction", "both",
+  "--max-gap", "500",
+  "--hit-jobs", "0",
+  "--summary-out", "reports/gog_magog_pair_prospective/synthetic_mt_wlc_summary.csv",
+  "--comparison-out", "reports/gog_magog_pair_prospective/synthetic_mt_wlc_comparison.csv",
+  "--markdown-out", "reports/gog_magog_pair_prospective/synthetic_mt_wlc.md",
+  "--manifest-out", "reports/gog_magog_pair_prospective/synthetic_mt_wlc.manifest.json",
+]
+inputs = [
+  "reports/gog_magog_pair_prospective/pair_baselines_summary.csv",
+  "configs/example_oshb_wlc.toml",
+  "scripts/analyze_synthetic_pair_baselines.py",
+  "scripts/analyze_gog_magog_pairs.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/gog_magog_pair_prospective/synthetic_mt_wlc_summary.csv",
+  "reports/gog_magog_pair_prospective/synthetic_mt_wlc_comparison.csv",
+  "reports/gog_magog_pair_prospective/synthetic_mt_wlc.md",
+  "reports/gog_magog_pair_prospective/synthetic_mt_wlc.manifest.json",
+]
+
+[[steps]]
+id = "synthetic_uhb"
+description = "Run UHB synthetic length-matched pair baselines."
+argv = [
+  "-m", "scripts.analyze_synthetic_pair_baselines",
+  "--corpus-label", "UHB",
+  "--config", "configs/example_uhb.toml",
+  "--pair-baselines", "reports/gog_magog_pair_prospective/pair_baselines_summary.csv",
+  "--samples", "100",
+  "--left-length", "3",
+  "--right-length", "4",
+  "--seed", "20260509",
+  "--min-skip", "2",
+  "--max-skip", "100",
+  "--direction", "both",
+  "--max-gap", "500",
+  "--hit-jobs", "0",
+  "--summary-out", "reports/gog_magog_pair_prospective/synthetic_uhb_summary.csv",
+  "--comparison-out", "reports/gog_magog_pair_prospective/synthetic_uhb_comparison.csv",
+  "--markdown-out", "reports/gog_magog_pair_prospective/synthetic_uhb.md",
+  "--manifest-out", "reports/gog_magog_pair_prospective/synthetic_uhb.manifest.json",
+]
+inputs = [
+  "reports/gog_magog_pair_prospective/pair_baselines_summary.csv",
+  "configs/example_uhb.toml",
+  "scripts/analyze_synthetic_pair_baselines.py",
+  "scripts/analyze_gog_magog_pairs.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/gog_magog_pair_prospective/synthetic_uhb_summary.csv",
+  "reports/gog_magog_pair_prospective/synthetic_uhb_comparison.csv",
+  "reports/gog_magog_pair_prospective/synthetic_uhb.md",
+  "reports/gog_magog_pair_prospective/synthetic_uhb.manifest.json",
+]
+
+[[steps]]
+id = "prospective_report"
+description = "Assemble the prospective Gog/Magog report."
+argv = [
+  "-m", "scripts.build_gog_magog_pair_prospective_report",
+  "--target-summary", "reports/gog_magog_pair_prospective/target_summary.csv",
+  "--baseline-summary", "reports/gog_magog_pair_prospective/pair_baselines_summary.csv",
+  "--synthetic-mt-wlc", "reports/gog_magog_pair_prospective/synthetic_mt_wlc_comparison.csv",
+  "--synthetic-uhb", "reports/gog_magog_pair_prospective/synthetic_uhb_comparison.csv",
+  "--out", "docs/GOG_MAGOG_PAIR_PROSPECTIVE_REPORT.md",
+]
+inputs = [
+  "reports/gog_magog_pair_prospective/target_summary.csv",
+  "reports/gog_magog_pair_prospective/pair_baselines_summary.csv",
+  "reports/gog_magog_pair_prospective/synthetic_mt_wlc_comparison.csv",
+  "reports/gog_magog_pair_prospective/synthetic_uhb_comparison.csv",
+  "scripts/build_gog_magog_pair_prospective_report.py",
+]
+outputs = [
+  "docs/GOG_MAGOG_PAIR_PROSPECTIVE_REPORT.md",
+]

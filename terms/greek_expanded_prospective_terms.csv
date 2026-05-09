@@ -1,0 +1,292 @@
+term_id,concept,category,language,term,notes
+gpx_son_of_man_g,Son of Man,christology,greek,υιοςανθρωπου,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=son_of_man_g
+gpx_law_g,Law,revelation,greek,νομος,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=law_g
+gpx_covenant_g,Covenant,revelation,greek,διαθηκη,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=covenant_g
+gpx_righteousness_g,Righteousness,ethics,greek,δικαιοσυνη,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=righteousness_g
+gpx_darkness_g,Darkness,symbols,greek,σκοτος,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=darkness_g
+gpx_apostle_g,Apostle,revelation,greek,αποστολος,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=apostle_g
+gpx_moses_g,Moses,names,greek,μωυσης,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=moses_g
+gpx_david_g,David,names,greek,δαυιδ,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=david_g
+gpx_abraham_g,Abraham,names,greek,αβρααμ,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=abraham_g
+gpx_israel_g,Israel,names,greek,ισραηλ,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=israel_g
+gpx_jerusalem_g,Jerusalem,names,greek,ιερουσαλημ,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=jerusalem_g
+gpx_zion_g,Zion,names,greek,σιων,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=zion_g
+gpx_mary_g,Mary,names,greek,μαρια,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=mary_g
+gpx_peter_g,Peter,names,greek,πετρος,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=peter_g
+gpx_paul_g,Paul,names,greek,παυλος,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=paul_g
+gpx_john_g,John,names,greek,ιωαννης,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=john_g
+gpx_serpent_g,Serpent,evil,greek,οφις,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=serpent_g
+gpx_soul_g,Soul,anthropology,greek,ψυχη,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=soul_g
+gpx_heart_g,Heart,anthropology,greek,καρδια,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=heart_g
+gpx_flesh_g,Flesh,anthropology,greek,σαρξ,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=flesh_g
+gpx_sign_g,Sign,revelation,greek,σημειον,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=sign_g
+gpx_wonder_g,Wonder,revelation,greek,τερας,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=wonder_g
+gpx_day_of_lord_g,Day Of The Lord,prophetic,greek,ημερα κυριου,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=day_of_lord_g
+gpx_heal_g,Heal,ministry,greek,θεραπευω,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=heal_g
+gpx_demon_g,Demon,evil,greek,δαιμονιον,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=demon_g
+gpx_disciple_g,Disciple,community,greek,μαθητης,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=disciple_g
+gpx_church_g,Church,community,greek,εκκλησια,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=church_g
+gpx_joseph_g,Joseph,names,greek,ιωσηφ,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=joseph_g
+gpx_isaac_g,Isaac,names,greek,ισαακ,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=isaac_g
+gpx_jacob_g,Jacob,names,greek,ιακωβ,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=jacob_g
+gpx_sarah_g,Sarah,names,greek,σαρρα,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=sarah_g
+gpx_adam_g,Adam,names,greek,αδαμ,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=adam_g
+gpx_elijah_g,Elijah,names,greek,ηλιας,prospective expanded Greek exact-center cohort; source=theological_terms.csv; original_id=elijah_g
+gpx_huios_tou_theou_gnt,Son Of God,core_names_titles,greek,Υἱός τοῦ Θεοῦ,prospective expanded Greek exact-center cohort; source=greek_nt_claim_terms.csv; original_id=huios_tou_theou_gnt; title phrase
+gpx_amnos_tou_theou_gnt,Lamb Of God,core_names_titles,greek,Ἀμνὸς τοῦ Θεοῦ,prospective expanded Greek exact-center cohort; source=greek_nt_claim_terms.csv; original_id=amnos_tou_theou_gnt; title phrase
+gpx_taphos_gnt,Tomb,key_concepts_events,greek,Τάφος,prospective expanded Greek exact-center cohort; source=greek_nt_claim_terms.csv; original_id=taphos_gnt; tomb term
+gpx_analepsis_gnt,Ascension,key_concepts_events,greek,Ἀνάληψις,prospective expanded Greek exact-center cohort; source=greek_nt_claim_terms.csv; original_id=analepsis_gnt; ascension term
+gpx_deutera_parousia_gnt,Second Coming,key_concepts_events,greek,Δευτέρα Παρουσία,prospective expanded Greek exact-center cohort; source=greek_nt_claim_terms.csv; original_id=deutera_parousia_gnt; second coming phrase
+gpx_ioudas_gnt,Judas,people,greek,Ἰούδας,prospective expanded Greek exact-center cohort; source=greek_nt_claim_terms.csv; original_id=ioudas_gnt; person name
+gpx_pilatos_gnt,Pilate,people,greek,Πιλᾶτος,prospective expanded Greek exact-center cohort; source=greek_nt_claim_terms.csv; original_id=pilatos_gnt; person name
+gpx_iesous_christos_gnt,Jesus Christ,search_phrases,greek,Ἰησοῦς Χριστός,prospective expanded Greek exact-center cohort; source=greek_nt_claim_terms.csv; original_id=iesous_christos_gnt; phrase
+gpx_iesous_kyrios_gnt,Jesus Lord,search_phrases,greek,Ἰησοῦς Κύριος,prospective expanded Greek exact-center cohort; source=greek_nt_claim_terms.csv; original_id=iesous_kyrios_gnt; phrase
+gpx_amnos_theou_gnt,Lamb Of God,search_phrases,greek,Ἀμνὸς Θεοῦ,prospective expanded Greek exact-center cohort; source=greek_nt_claim_terms.csv; original_id=amnos_theou_gnt; shorter title phrase
+gpx_aneste_gnt,He Is Risen,search_phrases,greek,Ἀνέστη,prospective expanded Greek exact-center cohort; source=greek_nt_claim_terms.csv; original_id=aneste_gnt; claimed phrase
+gpx_erchetai_gnt,He Is Coming,search_phrases,greek,Ἔρχεται,prospective expanded Greek exact-center cohort; source=greek_nt_claim_terms.csv; original_id=erchetai_gnt; claimed phrase
+gpx_babylon_g,Babylon,empires_places,greek,βαβυλων,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=babylon_g; biblical place and empire
+gpx_persia_g,Persia,empires_places,greek,περσις,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=persia_g; biblical/historical name
+gpx_persia_alt_g,Persia,empires_places,greek,περσια,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=persia_alt_g; common historical form
+gpx_media_g,Media,empires_places,greek,μηδια,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=media_g; historical form
+gpx_elam_g,Elam,empires_places,greek,ελαμ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=elam_g; biblical name
+gpx_assyria_g,Assyria,empires_places,greek,ασσυρια,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=assyria_g; historical form
+gpx_egypt_g,Egypt,empires_places,greek,αιγυπτος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=egypt_g; biblical name
+gpx_rome_g,Rome,empires_places,greek,ρωμη,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=rome_g; biblical NT form
+gpx_greece_g,Greece,empires_places,greek,ελλας,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=greece_g; biblical Greek form
+gpx_edom_g,Edom,empires_places,greek,εδωμ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=edom_g; biblical name
+gpx_moab_g,Moab,empires_places,greek,μωαβ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=moab_g; biblical name
+gpx_ammon_g,Ammon,empires_places,greek,αμμων,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=ammon_g; biblical name
+gpx_damascus_g,Damascus,empires_places,greek,δαμασκος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=damascus_g; biblical name
+gpx_tyre_g,Tyre,empires_places,greek,τυρος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=tyre_g; biblical name
+gpx_sidon_g,Sidon,empires_places,greek,σιδων,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=sidon_g; biblical name
+gpx_cyrus_g,Cyrus,rulers_figures,greek,κυρος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=cyrus_g; biblical ruler
+gpx_darius_g,Darius,rulers_figures,greek,δαρειος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=darius_g; biblical ruler
+gpx_nebuchadnezzar_g,Nebuchadnezzar,rulers_figures,greek,ναβουχοδονοσορ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=nebuchadnezzar_g; biblical ruler
+gpx_magog_g,Magog,rulers_figures,greek,μαγωγ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=magog_g; Ezekiel and Revelation motif
+gpx_horn_g,Horn,apocalyptic_symbols,greek,κερας,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=horn_g; Daniel/Revelation motif
+gpx_image_g,Image,apocalyptic_symbols,greek,εικων,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=image_g; Daniel/Revelation motif
+gpx_mark_g,Mark,apocalyptic_symbols,greek,χαραγμα,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=mark_g; Revelation mark term
+gpx_number_g,Number,apocalyptic_symbols,greek,αριθμος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=number_g; declared numeric motif term
+gpx_trumpet_g,Trumpet,apocalyptic_symbols,greek,σαλπιγξ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=trumpet_g; trumpet motif
+gpx_witness_g,Witness,apocalyptic_symbols,greek,μαρτυς,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=witness_g; witness motif
+gpx_antichrist_g,Antichrist,apocalyptic_figures,greek,αντιχριστος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=antichrist_g; NT term
+gpx_false_prophet_g,False Prophet,apocalyptic_figures,greek,ψευδοπροφητης,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=false_prophet_g; NT term
+gpx_lawlessness_g,Lawlessness,judgment_terms,greek,ανομια,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=lawlessness_g; NT term
+gpx_abomination_g,Abomination,judgment_terms,greek,βδελυγμα,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=abomination_g; Daniel/NT motif
+gpx_desolation_g,Desolation,judgment_terms,greek,ερημωσις,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=desolation_g; Daniel/NT motif
+gpx_wrath_g,Wrath,judgment_terms,greek,οργη,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=wrath_g; wrath motif
+gpx_tribulation_g,Tribulation,judgment_terms,greek,θλιψις,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=tribulation_g; tribulation/distress motif
+gpx_famine_g,Famine,judgment_terms,greek,λιμος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=famine_g; judgment motif
+gpx_war_g,War,judgment_terms,greek,πολεμος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=war_g; war motif
+gpx_sword_g,Sword,judgment_terms,greek,ρομφαια,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=sword_g; judgment motif
+gpx_vision_g,Vision,revelation_terms,greek,ορασις,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=vision_g; revelation/prophecy term
+gpx_nineveh_g,Nineveh,empires_places,greek,νινευη,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=nineveh_g; biblical capital
+gpx_carthage_g,Carthage,empires_places,greek,καρχηδων,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=carthage_g; historical
+gpx_macedonia_g,Macedonia,empires_places,greek,μακεδονια,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=macedonia_g; biblical/historical
+gpx_antioch_g,Antioch,empires_places,greek,αντιοχεια,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=antioch_g; NT city
+gpx_corinth_g,Corinth,empires_places,greek,κορινθος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=corinth_g; NT city
+gpx_ephesus_g,Ephesus,empires_places,greek,εφεσος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=ephesus_g; NT city
+gpx_canaan_g,Canaan,empires_places,greek,χανααν,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=canaan_g; biblical land
+gpx_solomon_g,Solomon,rulers_figures,greek,σολομων,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=solomon_g; biblical king
+gpx_ahab_g,Ahab,rulers_figures,greek,αχααβ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=ahab_g; biblical king
+gpx_jezebel_g,Jezebel,rulers_figures,greek,ιεζαβελ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=jezebel_g; biblical queen
+gpx_alexander_g,Alexander The Great,rulers_figures,greek,αλεξανδρος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=alexander_g; historical
+gpx_antiochus_g,Antiochus Epiphanes,rulers_figures,greek,αντιοχος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=antiochus_g; Daniel antagonist
+gpx_nero_g,Nero,rulers_figures,greek,νερων,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=nero_g; NT era emperor
+gpx_herod_g,Herod,rulers_figures,greek,ηρωδης,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=herod_g; NT king
+gpx_lion_g,Lion,apocalyptic_symbols,greek,λεων,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=lion_g; Daniel beast
+gpx_bear_g,Bear,apocalyptic_symbols,greek,αρκτος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=bear_g; Daniel beast
+gpx_leopard_g,Leopard,apocalyptic_symbols,greek,παρδαλις,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=leopard_g; Daniel beast
+gpx_scroll_g,Scroll,apocalyptic_symbols,greek,βιβλιον,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=scroll_g; Revelation scroll
+gpx_throne_g,Throne,apocalyptic_symbols,greek,θρονος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=throne_g; Revelation throne
+gpx_beast_number_words_g,666,apocalyptic_symbols,greek,εξακοσιοι εξηκοντα εξ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=beast_number_words_g; number of the beast
+gpx_sealed_servants_words_g,144000,apocalyptic_symbols,greek,εκατον τεσσαρακοντα τεσσαρες χιλιαδες,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=sealed_servants_words_g; sealed servants
+gpx_plague_g,Plague,judgment_terms,greek,πληγη,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=plague_g; judgment motif
+gpx_earthquake_g,Earthquake,judgment_terms,greek,σεισμος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=earthquake_g; judgment motif
+gpx_hail_g,Hail,judgment_terms,greek,χαλαζα,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=hail_g; judgment motif
+gpx_angel_g,Angel,revelation_terms,greek,αγγελος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=angel_g; angel motif
+gpx_mystery_g,Mystery,revelation_terms,greek,μυστηριον,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=mystery_g; mystery motif
+gpx_testimony_g,Testimony,revelation_terms,greek,μαρτυρια,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=testimony_g; testimony motif
+gpx_overcome_g,Overcome,revelation_terms,greek,νικαω,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=overcome_g; overcome motif
+gpx_thessalonica_g,Thessalonica,empires_places,greek,θεσσαλονικη,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=thessalonica_g; NT city
+gpx_philippi_g,Philippi,empires_places,greek,φιλιπποι,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=philippi_g; NT city
+gpx_colossae_g,Colossae,empires_places,greek,κολοσσαι,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=colossae_g; NT city
+gpx_galatia_g,Galatia,empires_places,greek,γαλατια,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=galatia_g; NT region
+gpx_gilead_g,Gilead,empires_places,greek,γαλααδ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=gilead_g; biblical region
+gpx_bashan_g,Bashan,empires_places,greek,βασαν,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=bashan_g; biblical region
+gpx_hezekiah_g,Hezekiah,rulers_figures,greek,εζεκιας,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=hezekiah_g; Judah king
+gpx_josiah_g,Josiah,rulers_figures,greek,ιωσιας,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=josiah_g; Judah king
+gpx_belshazzar_g,Belshazzar,rulers_figures,greek,βαλτασαρ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=belshazzar_g; Babylon king
+gpx_artaxerxes_g,Artaxerxes,rulers_figures,greek,αρταξερξης,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=artaxerxes_g; Persian king
+gpx_elisha_g,Elisha,rulers_figures,greek,ελισσαιος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=elisha_g; prophet
+gpx_isaiah_g,Isaiah,rulers_figures,greek,ησαιας,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=isaiah_g; prophet
+gpx_jeremiah_g,Jeremiah,rulers_figures,greek,ιερεμιας,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=jeremiah_g; prophet
+gpx_ezekiel_g,Ezekiel,rulers_figures,greek,ιεζεκιηλ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=ezekiel_g; prophet
+gpx_daniel_g,Daniel,rulers_figures,greek,δανιηλ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=daniel_g; prophet
+gpx_john_baptist_g,John The Baptist,rulers_figures,greek,ιωαννης ο βαπτιστης,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=john_baptist_g; NT figure
+gpx_lampstand_g,Lampstand,apocalyptic_symbols,greek,λυχνια,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=lampstand_g; Revelation motif
+gpx_star_g,Star,apocalyptic_symbols,greek,αστηρ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=star_g; Revelation motif
+gpx_key_g,Key,apocalyptic_symbols,greek,κλεις,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=key_g; Revelation motif
+gpx_pit_g,Pit,apocalyptic_symbols,greek,φρεαρ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=pit_g; Revelation motif
+gpx_abyss_g,Abyss,apocalyptic_symbols,greek,αβυσσος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=abyss_g; Revelation motif
+gpx_locust_g,Locust,apocalyptic_symbols,greek,ακρις,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=locust_g; Revelation plague
+gpx_scorpion_g,Scorpion,apocalyptic_symbols,greek,σκορπιος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=scorpion_g; Revelation plague
+gpx_heads_g,Heads,apocalyptic_symbols,greek,κεφαλαι,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=heads_g; beast heads
+gpx_locusts_plague_g,Locusts,judgment_terms,greek,ακριδες,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=locusts_plague_g; judgment motif
+gpx_smoke_g,Smoke,judgment_terms,greek,καπνος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=smoke_g; judgment motif
+gpx_torment_g,Torment,judgment_terms,greek,βασανισμος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=torment_g; judgment motif
+gpx_mystery_babylon_g,Mystery Babylon,revelation_terms,greek,μυστηριον βαβυλων,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=mystery_babylon_g; Revelation city
+gpx_bride_g,Bride,revelation_terms,greek,νυμφη,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=bride_g; Revelation bride
+gpx_harvest_g,Harvest,revelation_terms,greek,θερισμος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=harvest_g; Revelation harvest
+gpx_winepress_g,Winepress,revelation_terms,greek,ληνος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=winepress_g; Revelation winepress
+gpx_armageddon_g,Armageddon,revelation_terms,greek,αρμαγεδων,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=armageddon_g; final battle
+gpx_haran_g,Haran,empires_places,greek,χαραν,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=haran_g; biblical city
+gpx_sodom_g,Sodom,empires_places,greek,σοδομα,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=sodom_g; biblical city
+gpx_gomorrah_g,Gomorrah,empires_places,greek,γομορρα,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=gomorrah_g; biblical city
+gpx_athens_g,Athens,empires_places,greek,αθηναι,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=athens_g; NT city
+gpx_berea_g,Berea,empires_places,greek,βεροια,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=berea_g; NT city
+gpx_alexandria_g,Alexandria,empires_places,greek,αλεξανδρεια,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=alexandria_g; historical
+gpx_manasseh_g,Manasseh,rulers_figures,greek,μανασσης,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=manasseh_g; Judah king
+gpx_zedekiah_g,Zedekiah,rulers_figures,greek,σεδεκιας,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=zedekiah_g; last Judah king
+gpx_jehoiakim_g,Jehoiakim,rulers_figures,greek,ιωακιμ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=jehoiakim_g; Judah king
+gpx_barnabas_g,Barnabas,rulers_figures,greek,βαρναβας,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=barnabas_g; apostle companion
+gpx_timothy_g,Timothy,rulers_figures,greek,τιμοθεος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=timothy_g; NT leader
+gpx_titus_g,Titus,rulers_figures,greek,τιτος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=titus_g; NT leader
+gpx_philemon_g,Philemon,rulers_figures,greek,φιλημων,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=philemon_g; NT figure
+gpx_wings_g,Wings,apocalyptic_symbols,greek,πτερυγες,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=wings_g; beast/dragon wings
+gpx_eyes_g,Eyes,apocalyptic_symbols,greek,οφθαλμοι,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=eyes_g; many eyes motif
+gpx_teeth_g,Teeth,apocalyptic_symbols,greek,οδοντες,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=teeth_g; iron teeth
+gpx_iron_teeth_g,Iron Teeth,apocalyptic_symbols,greek,οδοντες σιδηροι,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=iron_teeth_g; Daniel beast
+gpx_seven_churches_g,Seven Churches,apocalyptic_symbols,greek,επτα εκκλησιαι,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=seven_churches_g; Revelation
+gpx_seven_spirits_g,Seven Spirits,apocalyptic_symbols,greek,επτα πνευματα,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=seven_spirits_g; Revelation
+gpx_seven_seals_g,Seven Seals,apocalyptic_symbols,greek,επτα σφραγιδες,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=seven_seals_g; Revelation
+gpx_seven_trumpets_g,Seven Trumpets,apocalyptic_symbols,greek,επτα σαλπιγγες,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=seven_trumpets_g; Revelation
+gpx_seven_bowls_g,Seven Bowls,apocalyptic_symbols,greek,επτα φιαλαι,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=seven_bowls_g; Revelation
+gpx_mark_of_beast_g,Mark Of The Beast,apocalyptic_symbols,greek,χαραγμα του θηριου,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=mark_of_beast_g; Revelation
+gpx_boils_g,Boils,judgment_terms,greek,ελκη,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=boils_g; plague
+gpx_rivers_blood_g,Rivers To Blood,judgment_terms,greek,ποταμοι αιματος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=rivers_blood_g; plague
+gpx_hail_fire_g,Hail And Fire,judgment_terms,greek,χαλαζα και πυρ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=hail_fire_g; plague
+gpx_scorpion_plague_g,Scorpion Plague,judgment_terms,greek,σκορπιοι,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=scorpion_plague_g; plague
+gpx_bridegroom_g,Bridegroom,revelation_terms,greek,νυμφιος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=bridegroom_g; Revelation
+gpx_lamp_g,Lamp,revelation_terms,greek,λυχνος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=lamp_g; Revelation
+gpx_oil_g,Oil,revelation_terms,greek,ελαιον,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=oil_g; Revelation
+gpx_harvest_earth_g,Harvest Of The Earth,revelation_terms,greek,θερισμος της γης,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=harvest_earth_g; Revelation
+gpx_wine_of_wrath_g,Wine Of Wrath,revelation_terms,greek,οινος του θυμου,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=wine_of_wrath_g; Revelation
+gpx_lake_of_fire_g,Lake Of Fire,revelation_terms,greek,λιμνη του πυρος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=lake_of_fire_g; Revelation
+gpx_second_death_g,Second Death,revelation_terms,greek,δευτερος θανατος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=second_death_g; Revelation
+gpx_new_jerusalem_g,New Jerusalem,revelation_terms,greek,καινη ιερουσαλημ,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=new_jerusalem_g; Revelation
+gpx_tree_of_life_g,Tree Of Life,revelation_terms,greek,ξυλον της ζωης,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=tree_of_life_g; Revelation
+gpx_alpha_omega_g,Alpha And Omega,revelation_terms,greek,αλφα και ωμεγα,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=alpha_omega_g; Jesus title
+gpx_i_am_g,I Am,revelation_terms,greek,εγω ειμι,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=i_am_g; Jesus claim
+gpx_frogs_plague_g,Frogs Plague,judgment_terms,greek,βατραχος,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=frogs_plague_g; Exodus 8
+gpx_lice_plague_g,Lice Plague,judgment_terms,greek,σκνιφες,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=lice_plague_g; Exodus 8 LXX
+gpx_flies_plague_g,Flies Plague,judgment_terms,greek,κυνομυια,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=flies_plague_g; Exodus 8 LXX
+gpx_firstborn_plague_g,Plague Of Firstborn,judgment_terms,greek,πληγη πρωτοτοκων,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=firstborn_plague_g; Exodus 12
+gpx_millennium_g,Thousand Years,apocalyptic_symbols,greek,χιλια ετη,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=millennium_g; Revelation 20
+gpx_two_witnesses_g,Two Witnesses,apocalyptic_figures,greek,δυο μαρτυρες,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=two_witnesses_g; Revelation 11
+gpx_whore_babylon_g,Whore Of Babylon,apocalyptic_figures,greek,πορνη βαβυλων,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=whore_babylon_g; Revelation 17
+gpx_rapture_g,Rapture,apocalyptic_terms,greek,αρπαζω,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=rapture_g; 1 Thessalonians 4:17 verb harpazo
+gpx_maranatha_g,Maranatha,apocalyptic_terms,greek,μαραναθα,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=maranatha_g; 1 Corinthians 16:22
+gpx_hosanna_g,Hosanna,liturgical,greek,ωσαννα,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=hosanna_g
+gpx_hallelujah_g,Hallelujah,liturgical,greek,αλληλουια,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=hallelujah_g
+gpx_amen_g,Amen,liturgical,greek,αμην,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=amen_g
+gpx_seven_thunders_g,Seven Thunders,apocalyptic_symbols,greek,επτα βρονται,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=seven_thunders_g; Revelation 10
+gpx_twenty_four_elders_g,Twenty Four Elders,apocalyptic_figures,greek,εικοσι τεσσαρες πρεσβυτεροι,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=twenty_four_elders_g; Revelation 4
+gpx_four_living_creatures_g,Four Living Creatures,apocalyptic_figures,greek,τεσσαρα ζωα,prospective expanded Greek exact-center cohort; source=prophetic_terms.csv; original_id=four_living_creatures_g; Revelation 4
+gpx_pesach_g,Passover,festivals,greek,πασχα,prospective expanded Greek exact-center cohort; source=biblical_festivals.csv; original_id=pesach_g
+gpx_pentecost_g,Pentecost,festivals,greek,πεντηκοστη,prospective expanded Greek exact-center cohort; source=biblical_festivals.csv; original_id=pentecost_g
+gpx_tabernacles_g,Tabernacles,festivals,greek,σκηνοπηγια,prospective expanded Greek exact-center cohort; source=biblical_festivals.csv; original_id=tabernacles_g
+gpx_sabbath_g,Sabbath,festivals,greek,σαββατον,prospective expanded Greek exact-center cohort; source=biblical_festivals.csv; original_id=sabbath_g
+gpx_firstfruits_g,Firstfruits,festivals,greek,απαρχη,prospective expanded Greek exact-center cohort; source=biblical_festivals.csv; original_id=firstfruits_g
+gpx_unleavened_g,Unleavened Bread,festivals,greek,αζυμα,prospective expanded Greek exact-center cohort; source=biblical_festivals.csv; original_id=unleavened_g
+gpx_reuben_g,Reuben,tribes,greek,ρουβην,prospective expanded Greek exact-center cohort; source=biblical_tribes.csv; original_id=reuben_g
+gpx_simeon_g,Simeon,tribes,greek,συμεων,prospective expanded Greek exact-center cohort; source=biblical_tribes.csv; original_id=simeon_g
+gpx_levi_g,Levi,tribes,greek,λευι,prospective expanded Greek exact-center cohort; source=biblical_tribes.csv; original_id=levi_g
+gpx_judah_g,Judah,tribes,greek,ιουδα,prospective expanded Greek exact-center cohort; source=biblical_tribes.csv; original_id=judah_g
+gpx_naphtali_g,Naphtali,tribes,greek,νεφθαλιμ,prospective expanded Greek exact-center cohort; source=biblical_tribes.csv; original_id=naphtali_g
+gpx_asher_g,Asher,tribes,greek,ασηρ,prospective expanded Greek exact-center cohort; source=biblical_tribes.csv; original_id=asher_g
+gpx_issachar_g,Issachar,tribes,greek,ισσαχαρ,prospective expanded Greek exact-center cohort; source=biblical_tribes.csv; original_id=issachar_g
+gpx_zebulun_g,Zebulun,tribes,greek,ζαβουλων,prospective expanded Greek exact-center cohort; source=biblical_tribes.csv; original_id=zebulun_g
+gpx_benjamin_g,Benjamin,tribes,greek,βενιαμιν,prospective expanded Greek exact-center cohort; source=biblical_tribes.csv; original_id=benjamin_g
+gpx_ephraim_g,Ephraim,tribes,greek,εφραιμ,prospective expanded Greek exact-center cohort; source=biblical_tribes.csv; original_id=ephraim_g
+gpx_japheth_g,Japheth,table_nations,greek,ιαφεθ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=japheth_g
+gpx_gomer_g,Gomer,table_nations,greek,γαμερ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=gomer_g
+gpx_madai_g,Madai,table_nations,greek,μαδοι,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=madai_g
+gpx_javan_g,Javan,table_nations,greek,ιωυαν,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=javan_g
+gpx_tubal_g,Tubal,table_nations,greek,θοβελ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=tubal_g
+gpx_meshech_g,Meshech,table_nations,greek,μοσοχ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=meshech_g
+gpx_tiras_g,Tiras,table_nations,greek,θειρας,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=tiras_g
+gpx_ashkenaz_g,Ashkenaz,table_nations,greek,ασχαναζ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=ashkenaz_g
+gpx_riphath_g,Riphath,table_nations,greek,ριφαθ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=riphath_g
+gpx_togarmah_g,Togarmah,table_nations,greek,θοργαμα,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=togarmah_g
+gpx_elishah_g,Elishah,table_nations,greek,ελισα,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=elishah_g
+gpx_tarshish_g,Tarshish,table_nations,greek,θαρσεις,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=tarshish_g
+gpx_kittim_g,Kittim,table_nations,greek,κιτιοι,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=kittim_g
+gpx_dodanim_g,Rodians,table_nations,greek,ροδιοι,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=dodanim_g; LXX spelling
+gpx_cush_g,Cush,table_nations,greek,χους,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=cush_g
+gpx_mizraim_g,Mizraim,table_nations,greek,μερσαϊν,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=mizraim_g
+gpx_put_g,Put,table_nations,greek,φουδ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=put_g
+gpx_seba_g,Seba,table_nations,greek,σαβα,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=seba_g
+gpx_havilah_g,Havilah,table_nations,greek,ευιλα,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=havilah_g
+gpx_sabtah_g,Sabtah,table_nations,greek,σαβαθα,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=sabtah_g
+gpx_raamah_g,Raamah,table_nations,greek,ρεγμα,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=raamah_g
+gpx_sabteca_g,Sabteca,table_nations,greek,σαβαθακα,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=sabteca_g
+gpx_dedan_g,Dedan,table_nations,greek,δαδαν,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=dedan_g
+gpx_nimrod_g,Nimrod,table_nations,greek,νεβρωδ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=nimrod_g
+gpx_erech_g,Erech,table_nations,greek,ορεχ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=erech_g
+gpx_akkad_g,Akkad,table_nations,greek,αρχαδ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=akkad_g
+gpx_calneh_g,Calneh,table_nations,greek,χαλαννη,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=calneh_g
+gpx_shinar_g,Shinar,table_nations,greek,σενααρ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=shinar_g
+gpx_asshur_g,Asshur,table_nations,greek,ασσουρ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=asshur_g
+gpx_nineveh_g_2,Nineveh,table_nations,greek,νινευι,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=nineveh_g
+gpx_rehoboth_ir_g,Rehoboth-ir,table_nations,greek,ροωβωθ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=rehoboth_ir_g
+gpx_calah_g,Calah,table_nations,greek,χαλαχ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=calah_g
+gpx_resen_g,Resen,table_nations,greek,δαση,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=resen_g; LXX has Dase
+gpx_ludim_g,Ludim,table_nations,greek,λουδιειμ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=ludim_g
+gpx_anamim_g,Anamim,table_nations,greek,ενεμετιειμ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=anamim_g
+gpx_lehabim_g,Lehabim,table_nations,greek,λαβιειμ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=lehabim_g
+gpx_naphtuhim_g,Naphtuhim,table_nations,greek,νεφθαλιειμ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=naphtuhim_g
+gpx_pathrusim_g,Pathrusim,table_nations,greek,πατροσωνιειμ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=pathrusim_g
+gpx_casluhim_g,Casluhim,table_nations,greek,χασλωνιειμ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=casluhim_g
+gpx_philistines_g,Philistines,table_nations,greek,φυλιστιειμ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=philistines_g
+gpx_caphtorim_g,Caphtorim,table_nations,greek,καφθοριειμ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=caphtorim_g
+gpx_heth_g,Heth,table_nations,greek,χετταιον,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=heth_g
+gpx_jebusite_g,Jebusite,table_nations,greek,ιεβουσαιον,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=jebusite_g
+gpx_amorite_g,Amorite,table_nations,greek,αμορραιον,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=amorite_g
+gpx_girgashite_g,Girgashite,table_nations,greek,γεργεσαιον,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=girgashite_g
+gpx_hivite_g,Hivite,table_nations,greek,ευαιον,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=hivite_g
+gpx_arkite_g,Arkite,table_nations,greek,αρουκαιον,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=arkite_g
+gpx_sinite_g,Sinite,table_nations,greek,ασενναιον,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=sinite_g
+gpx_arvadite_g,Arvadite,table_nations,greek,αραδιον,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=arvadite_g
+gpx_zemarite_g,Zemarite,table_nations,greek,σαμαραιον,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=zemarite_g
+gpx_hamathite_g,Hamathite,table_nations,greek,αμαθι,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=hamathite_g
+gpx_gerar_g,Gerar,table_nations,greek,γεραρα,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=gerar_g
+gpx_gaza_g,Gaza,table_nations,greek,γαζαν,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=gaza_g
+gpx_sodom_g_2,Sodom,table_nations,greek,σοδομων,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=sodom_g
+gpx_gomorrah_g_2,Gomorrah,table_nations,greek,γομορρας,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=gomorrah_g
+gpx_admah_g,Admah,table_nations,greek,αδαμα,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=admah_g
+gpx_zeboiim_g,Zeboiim,table_nations,greek,σεβωιμ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=zeboiim_g
+gpx_lasha_g,Lasha,table_nations,greek,δασα,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=lasha_g
+gpx_arphaxad_g,Arphaxad,table_nations,greek,αρφαξαδ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=arphaxad_g
+gpx_lud_g,Lud,table_nations,greek,λουδ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=lud_g
+gpx_aram_g,Aram,table_nations,greek,αραμ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=aram_g
+gpx_cainan_g,Cainan,table_nations,greek,καιναν,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=cainan_g; LXX plus
+gpx_gether_g,Gether,table_nations,greek,γατερ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=gether_g
+gpx_shelah_g,Shelah,table_nations,greek,σαλα,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=shelah_g
+gpx_eber_g,Eber,table_nations,greek,εβερ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=eber_g
+gpx_peleg_g,Peleg,table_nations,greek,φαλεγ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=peleg_g
+gpx_joktan_g,Joktan,table_nations,greek,ιεκταν,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=joktan_g
+gpx_almodad_g,Almodad,table_nations,greek,ελμωδαδ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=almodad_g
+gpx_sheleph_g,Sheleph,table_nations,greek,σαλεθ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=sheleph_g
+gpx_hazarmaveth_g,Hazarmaveth,table_nations,greek,σαρμωθ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=hazarmaveth_g
+gpx_jerah_g,Jerah,table_nations,greek,ιαραχ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=jerah_g
+gpx_hadoram_g,Hadoram,table_nations,greek,οδορρα,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=hadoram_g
+gpx_uzal_g,Uzal,table_nations,greek,αιβηλ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=uzal_g; LXX differs from MT Uzal
+gpx_diklah_g,Diklah,table_nations,greek,δεκλα,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=diklah_g
+gpx_obal_g,Obal,table_nations,greek,ευαλ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=obal_g
+gpx_abimael_g,Abimael,table_nations,greek,αβιμαελ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=abimael_g
+gpx_ophir_g,Ophir,table_nations,greek,ουφειρ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=ophir_g
+gpx_havilah_joktan_g,Havilah,table_nations,greek,ευειλα,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=havilah_joktan_g
+gpx_jobab_g,Jobab,table_nations,greek,ιωβαβ,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=jobab_g
+gpx_mesha_g,Mesha,table_nations,greek,μασση,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=mesha_g
+gpx_sephar_g,Sephar,table_nations,greek,σαφηρα,prospective expanded Greek exact-center cohort; source=table_of_nations.csv; original_id=sephar_g

@@ -1,0 +1,12 @@
+name = "eBible Text-Critical Greek NT"
+language = "greek"
+
+[[sources]]
+name = "eBible GRCTCGNT"
+format = "csv"
+path = "../data/processed/ebible/grctcgnt.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

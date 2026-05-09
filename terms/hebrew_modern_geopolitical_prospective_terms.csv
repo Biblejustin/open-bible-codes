@@ -1,0 +1,78 @@
+term_id,concept,category,language,term,notes
+trump_h,Trump,modern_names,hebrew,טראמפ,common Israeli Hebrew transliteration
+donald_h,Donald,modern_names,hebrew,דונלד,
+donald_trump_h,Donald Trump,modern_names,hebrew,דונלדטראמפ,space removed by normalization
+vance_h,Vance,modern_names,hebrew,ואנס,Hebrew press spelling; variant ווענס also exists
+vance_alt_h,Vance alt,modern_names,hebrew,ווענס,alternate spelling to avoid Yiddish homograph
+jd_h,JD,modern_names,hebrew,גיידי,phonetic initials spelling
+netanyahu_h,Netanyahu,modern_names,hebrew,נתניהו,biblical Hebrew surname form
+benjamin_h,Benjamin,modern_names,hebrew,בנימין,
+bibi_h,Bibi,modern_names,hebrew,ביבי,
+biden_h,Biden,modern_names,hebrew,ביידן,
+harris_h,Harris,modern_names,hebrew,האריס,
+obama_h,Obama,modern_names,hebrew,אובמה,
+putin_h,Putin,modern_names,hebrew,פוטין,
+zelensky_h,Zelensky,modern_names,hebrew,זלנסקי,
+ukraine_h,Ukraine,modern_places,hebrew,אוקראינה,
+america_h,America,modern_places,hebrew,אמריקה,
+united_states_h,United States,modern_places,hebrew,ארצות הברית,
+united_states_america_h,United States Of America,modern_places,hebrew,ארצות הברית של אמריקה,
+usa_abbrev_h,USA,modern_places,hebrew,ארה״ב,Hebrew acronym; punctuation removed
+united_nations_h,United Nations,modern_places,hebrew,האומות המאוחדות,
+united_nations_acronym_h,United Nations,modern_places,hebrew,או״ם,Hebrew acronym; punctuation removed
+europe_h,Europe,modern_places,hebrew,אירופה,
+european_union_h,European Union,modern_places,hebrew,האיחוד האירופי,
+france_h,France,modern_places,hebrew,צרפת,
+germany_h,Germany,modern_places,hebrew,גרמניה,
+turkey_h,Turkey,modern_places,hebrew,טורקיה,modern Hebrew spelling
+turkey_alt_h,Turkey,modern_places,hebrew,תורכיה,older Hebrew spelling
+russia_h,Russia,modern_places,hebrew,רוסיה,
+moscow_h,Moscow,modern_places,hebrew,מוסקבה,
+nato_h,NATO,modern_places,hebrew,נאטו,transliterated acronym
+washington_h,Washington,modern_places,hebrew,וושינגטון,
+confederacy_h,Confederacy,modern_places,hebrew,קונפדרציה,modern Hebrew form
+alliance_h,Alliance,modern_places,hebrew,ברית,broad alliance/covenant term
+coalition_h,Coalition,modern_places,hebrew,קואליציה,modern Hebrew form
+syria_h,Syria,modern_places,hebrew,סוריה,
+lebanon_h,Lebanon,modern_places,hebrew,לבנון,collides with biblical Lebanon
+jordan_country_h,Jordan,modern_places,hebrew,ירדן,collides with biblical river
+iraq_h,Iraq,modern_places,hebrew,עיראק,modern Hebrew spelling
+yemen_h,Yemen,modern_places,hebrew,תימן,biblical Teman link
+saudi_arabia_h,Saudi Arabia,modern_places,hebrew,ערב הסעודית,modern phrase
+palestine_h,Palestine,modern_places,hebrew,פלסטין,modern political entity
+egypt_modern_h,Egypt Modern,modern_places,hebrew,מצרים,collides with biblical Egypt
+china_h,China,modern_places,hebrew,סין,modern Hebrew name
+korea_h,Korea,modern_places,hebrew,קוריאה,
+japan_h,Japan,modern_places,hebrew,יפן,
+india_h,India,modern_places,hebrew,הודו,biblical attestation in Esther
+iran_h,Iran,modern_places,hebrew,איראן,modern Hebrew spelling
+persia_h,Persia,modern_places,hebrew,פרס,biblical/historical name
+gaza_h,Gaza,modern_places,hebrew,עזה,biblical place name too
+hamas_h,Hamas,modern_names,hebrew,חמאס,modern acronym transliteration
+isis_h,ISIS,modern_names,hebrew,דאעש,Arabic acronym in Hebrew
+covid_h,COVID,modern_events,hebrew,קוביד,transliterated
+pandemic_h,Pandemic,modern_events,hebrew,מגפה,collides with biblical plague
+vaccine_h,Vaccine,modern_events,hebrew,חיסון,
+oct_7_text_h,October 7,modern_events,hebrew,שבעה באוקטובר,2023 attack date as Hebrew text
+pope_h,Pope,modern_names,hebrew,אפיפיור,
+vatican_h,Vatican,modern_places,hebrew,ותיקן,
+tel_aviv_h,Tel Aviv,modern_places,hebrew,תל אביב,
+haifa_h,Haifa,modern_places,hebrew,חיפה,
+knesset_h,Knesset,modern_places,hebrew,כנסת,
+mossad_h,Mossad,modern_names,hebrew,מוסד,collides with general institution
+likud_h,Likud,modern_names,hebrew,ליכוד,
+israel_h,Israel,modern_places,hebrew,ישראל,biblical people/place name too
+david_ben_gurion_h,David Ben-Gurion,israeli_prime_ministers,hebrew,דוד בן גוריון,Israeli Prime Minister screening term
+moshe_sharett_h,Moshe Sharett,israeli_prime_ministers,hebrew,משה שרת,Israeli Prime Minister screening term
+levi_eshkol_h,Levi Eshkol,israeli_prime_ministers,hebrew,לוי אשכול,Israeli Prime Minister screening term
+golda_meir_h,Golda Meir,israeli_prime_ministers,hebrew,גולדה מאיר,Israeli Prime Minister screening term
+yitzhak_rabin_pm_h,Yitzhak Rabin,israeli_prime_ministers,hebrew,יצחק רבין,Israeli Prime Minister screening term
+menachem_begin_h,Menachem Begin,israeli_prime_ministers,hebrew,מנחם בגין,Israeli Prime Minister screening term
+yitzhak_shamir_h,Yitzhak Shamir,israeli_prime_ministers,hebrew,יצחק שמיר,Israeli Prime Minister screening term
+shimon_peres_pm_h,Shimon Peres,israeli_prime_ministers,hebrew,שמעון פרס,Israeli Prime Minister screening term
+benjamin_netanyahu_pm_h,Benjamin Netanyahu,israeli_prime_ministers,hebrew,בנימין נתניהו,Israeli Prime Minister screening term
+ehud_barak_pm_h,Ehud Barak,israeli_prime_ministers,hebrew,אהוד ברק,Israeli Prime Minister screening term
+ariel_sharon_pm_h,Ariel Sharon,israeli_prime_ministers,hebrew,אריאל שרון,Israeli Prime Minister screening term
+ehud_olmert_pm_h,Ehud Olmert,israeli_prime_ministers,hebrew,אהוד אולמרט,Israeli Prime Minister screening term
+naftali_bennett_h,Naftali Bennett,israeli_prime_ministers,hebrew,נפתלי בנט,Israeli Prime Minister screening term
+yair_lapid_h,Yair Lapid,israeli_prime_ministers,hebrew,יאיר לפיד,Israeli Prime Minister screening term

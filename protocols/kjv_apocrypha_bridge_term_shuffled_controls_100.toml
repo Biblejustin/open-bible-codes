@@ -1,0 +1,41 @@
+name = "kjv_apocrypha_bridge_term_shuffled_controls_100"
+description = "Run 100-sample term-level shuffled apocrypha/deuterocanon bridge controls for KJVA bridge terms."
+manifest_out = "reports/kjv_apocrypha_bridge_term_shuffled_controls_100/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 30
+
+[[steps]]
+id = "kjv_term_shuffled_controls_100"
+description = "Compare KJVA bridge terms with 100 shuffled apocrypha-block controls."
+argv = [
+  "-m", "scripts.analyze_apocrypha_bridge_term_shuffled_controls",
+  "--canonical-label", "KJVA",
+  "--canonical-config", "configs/example_ebible_engkjv_apocrypha.toml",
+  "--terms", "terms/english_search_terms.csv",
+  "--observed", "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+  "--samples", "100",
+  "--jobs", "0",
+  "--resume-samples",
+  "--sample-out", "reports/kjv_apocrypha_bridge_term_shuffled_controls_100/sample_summary.csv",
+  "--term-sample-out", "reports/kjv_apocrypha_bridge_term_shuffled_controls_100/term_samples.csv",
+  "--term-summary-out", "reports/kjv_apocrypha_bridge_term_shuffled_controls_100/term_summary.csv",
+  "--markdown-out", "docs/KJV_APOCRYPHA_BRIDGE_TERM_SHUFFLED_CONTROLS_100.md",
+  "--manifest-out", "reports/kjv_apocrypha_bridge_term_shuffled_controls_100/manifest.json",
+]
+inputs = [
+  "scripts/analyze_apocrypha_bridge_term_shuffled_controls.py",
+  "scripts/analyze_apocrypha_bridge_shuffled_controls.py",
+  "scripts/analyze_apocrypha_bridge_candidates.py",
+  "scripts/analyze_apocrypha_bridge_controls.py",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "data/processed/ebible/eng-kjv.csv",
+  "terms/english_search_terms.csv",
+  "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+]
+outputs = [
+  "reports/kjv_apocrypha_bridge_term_shuffled_controls_100/sample_summary.csv",
+  "reports/kjv_apocrypha_bridge_term_shuffled_controls_100/term_samples.csv",
+  "reports/kjv_apocrypha_bridge_term_shuffled_controls_100/term_summary.csv",
+  "docs/KJV_APOCRYPHA_BRIDGE_TERM_SHUFFLED_CONTROLS_100.md",
+  "reports/kjv_apocrypha_bridge_term_shuffled_controls_100/manifest.json",
+]

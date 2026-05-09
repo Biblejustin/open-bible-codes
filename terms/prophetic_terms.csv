@@ -1,0 +1,460 @@
+term_id,concept,category,language,term,notes
+babylon_h,Babylon,empires_places,hebrew,בבל,biblical place and empire
+babylon_g,Babylon,empires_places,greek,βαβυλων,biblical place and empire
+persia_h,Persia,empires_places,hebrew,פרס,biblical/historical name
+persia_g,Persia,empires_places,greek,περσις,biblical/historical name
+persia_alt_g,Persia,empires_places,greek,περσια,common historical form
+media_h,Media,empires_places,hebrew,מדי,biblical Madai/Media spelling
+media_g,Media,empires_places,greek,μηδια,historical form
+elam_h,Elam,empires_places,hebrew,עילם,biblical name
+elam_g,Elam,empires_places,greek,ελαμ,biblical name
+assyria_h,Assyria,empires_places,hebrew,אשור,biblical name
+assyria_g,Assyria,empires_places,greek,ασσυρια,historical form
+egypt_h,Egypt,empires_places,hebrew,מצרים,biblical name
+egypt_g,Egypt,empires_places,greek,αιγυπτος,biblical name
+rome_h,Rome,empires_places,hebrew,רומי,transliteration for Rome
+rome_g,Rome,empires_places,greek,ρωμη,biblical NT form
+greece_h,Greece,empires_places,hebrew,יון,biblical Javan/Greece link
+greece_g,Greece,empires_places,greek,ελλας,biblical Greek form
+edom_h,Edom,empires_places,hebrew,אדום,biblical name
+edom_g,Edom,empires_places,greek,εδωμ,biblical name
+moab_h,Moab,empires_places,hebrew,מואב,biblical name
+moab_g,Moab,empires_places,greek,μωαβ,biblical name
+ammon_h,Ammon,empires_places,hebrew,עמון,biblical name
+ammon_g,Ammon,empires_places,greek,αμμων,biblical name
+damascus_h,Damascus,empires_places,hebrew,דמשק,biblical name
+damascus_g,Damascus,empires_places,greek,δαμασκος,biblical name
+tyre_h,Tyre,empires_places,hebrew,צר,biblical name
+tyre_g,Tyre,empires_places,greek,τυρος,biblical name
+sidon_h,Sidon,empires_places,hebrew,צידון,biblical name
+sidon_g,Sidon,empires_places,greek,σιδων,biblical name
+jerusalem_h,Jerusalem,empires_places,hebrew,ירושלים,biblical center
+jerusalem_g,Jerusalem,empires_places,greek,ιερουσαλημ,biblical center
+zion_h,Zion,empires_places,hebrew,ציון,biblical center
+zion_g,Zion,empires_places,greek,σιων,biblical center
+cyrus_h,Cyrus,rulers_figures,hebrew,כורש,biblical ruler
+cyrus_g,Cyrus,rulers_figures,greek,κυρος,biblical ruler
+darius_h,Darius,rulers_figures,hebrew,דריוש,biblical ruler
+darius_g,Darius,rulers_figures,greek,δαρειος,biblical ruler
+nebuchadnezzar_h,Nebuchadnezzar,rulers_figures,hebrew,נבוכדנצר,biblical ruler
+nebuchadnezzar_g,Nebuchadnezzar,rulers_figures,greek,ναβουχοδονοσορ,biblical ruler
+gog_h,Gog,rulers_figures,hebrew,גוג,Ezekiel and Revelation motif
+gog_g,Gog,rulers_figures,greek,γωγ,Ezekiel and Revelation motif
+magog_h,Magog,rulers_figures,hebrew,מגוג,Ezekiel and Revelation motif
+magog_g,Magog,rulers_figures,greek,μαγωγ,Ezekiel and Revelation motif
+beast_h,Beast,apocalyptic_symbols,hebrew,חיה,Daniel/Revelation motif
+beast_g,Beast,apocalyptic_symbols,greek,θηριον,Daniel/Revelation motif
+dragon_h,Dragon,apocalyptic_symbols,hebrew,תנין,Hebrew sea monster/dragon term
+dragon_g,Dragon,apocalyptic_symbols,greek,δρακων,Revelation motif
+horn_h,Horn,apocalyptic_symbols,hebrew,קרן,Daniel motif
+horn_g,Horn,apocalyptic_symbols,greek,κερας,Daniel/Revelation motif
+image_h,Image,apocalyptic_symbols,hebrew,צלם,Daniel/Revelation motif
+image_g,Image,apocalyptic_symbols,greek,εικων,Daniel/Revelation motif
+mark_h,Mark,apocalyptic_symbols,hebrew,תו,Ezekiel mark term
+mark_g,Mark,apocalyptic_symbols,greek,χαραγμα,Revelation mark term
+number_h,Number,apocalyptic_symbols,hebrew,מספר,declared numeric motif term
+number_g,Number,apocalyptic_symbols,greek,αριθμος,declared numeric motif term
+seal_h,Seal,apocalyptic_symbols,hebrew,חותם,seal motif
+seal_g,Seal,apocalyptic_symbols,greek,σφραγις,seal motif
+trumpet_h,Trumpet,apocalyptic_symbols,hebrew,שופר,trumpet motif
+trumpet_g,Trumpet,apocalyptic_symbols,greek,σαλπιγξ,trumpet motif
+witness_h,Witness,apocalyptic_symbols,hebrew,עד,witness motif
+witness_g,Witness,apocalyptic_symbols,greek,μαρτυς,witness motif
+antichrist_g,Antichrist,apocalyptic_figures,greek,αντιχριστος,NT term
+false_prophet_h,False Prophet,apocalyptic_figures,hebrew,נביאשקר,compound normalized
+false_prophet_g,False Prophet,apocalyptic_figures,greek,ψευδοπροφητης,NT term
+lawlessness_h,Lawlessness,judgment_terms,hebrew,און,broad Hebrew iniquity term
+lawlessness_g,Lawlessness,judgment_terms,greek,ανομια,NT term
+abomination_h,Abomination,judgment_terms,hebrew,שקוץ,Daniel motif
+abomination_g,Abomination,judgment_terms,greek,βδελυγμα,Daniel/NT motif
+desolation_h,Desolation,judgment_terms,hebrew,שממה,Daniel motif
+desolation_g,Desolation,judgment_terms,greek,ερημωσις,Daniel/NT motif
+wrath_h,Wrath,judgment_terms,hebrew,אף,wrath motif
+wrath_g,Wrath,judgment_terms,greek,οργη,wrath motif
+judgment_h,Judgment,judgment_terms,hebrew,משפט,judgment motif
+judgment_g,Judgment,judgment_terms,greek,κρισις,judgment motif
+tribulation_h,Tribulation,judgment_terms,hebrew,צרה,tribulation/distress motif
+tribulation_g,Tribulation,judgment_terms,greek,θλιψις,tribulation/distress motif
+famine_h,Famine,judgment_terms,hebrew,רעב,judgment motif
+famine_g,Famine,judgment_terms,greek,λιμος,judgment motif
+war_h,War,judgment_terms,hebrew,מלחמה,war motif
+war_g,War,judgment_terms,greek,πολεμος,war motif
+sword_h,Sword,judgment_terms,hebrew,חרב,judgment motif
+sword_g,Sword,judgment_terms,greek,ρομφαια,judgment motif
+vision_h,Vision,revelation_terms,hebrew,חזון,revelation/prophecy term
+vision_g,Vision,revelation_terms,greek,ορασις,revelation/prophecy term
+revelation_h,Revelation,revelation_terms,hebrew,גלה,reveal root
+revelation_g,Revelation,revelation_terms,greek,αποκαλυψις,NT term
+babylon_alt_h,Babylon,empires_places,hebrew,בבל,variant label supplied
+nineveh_h,Nineveh,empires_places,hebrew,נינוה,biblical capital
+nineveh_g,Nineveh,empires_places,greek,νινευη,biblical capital
+carthage_h,Carthage,empires_places,hebrew,קרת חדשה,historical
+carthage_g,Carthage,empires_places,greek,καρχηδων,historical
+macedonia_h,Macedonia,empires_places,hebrew,מקדון,biblical/historical
+macedonia_g,Macedonia,empires_places,greek,μακεδονια,biblical/historical
+antioch_h,Antioch,empires_places,hebrew,אנטיוכיה,NT city
+antioch_g,Antioch,empires_places,greek,αντιοχεια,NT city
+corinth_h,Corinth,empires_places,hebrew,קורינתוס,NT city
+corinth_g,Corinth,empires_places,greek,κορινθος,NT city
+ephesus_h,Ephesus,empires_places,hebrew,אפסוס,NT city
+ephesus_g,Ephesus,empires_places,greek,εφεσος,NT city
+canaan_h,Canaan,empires_places,hebrew,כנען,biblical land
+canaan_g,Canaan,empires_places,greek,χανααν,biblical land
+solomon_h,Solomon,rulers_figures,hebrew,שלמה,biblical king
+solomon_g,Solomon,rulers_figures,greek,σολομων,biblical king
+david_h,David,rulers_figures,hebrew,דוד,biblical king
+david_g,David,rulers_figures,greek,δαυιδ,biblical king
+ahab_h,Ahab,rulers_figures,hebrew,אחאב,biblical king
+ahab_g,Ahab,rulers_figures,greek,αχααβ,biblical king
+jezebel_h,Jezebel,rulers_figures,hebrew,איזבל,biblical queen
+jezebel_g,Jezebel,rulers_figures,greek,ιεζαβελ,biblical queen
+alexander_h,Alexander The Great,rulers_figures,hebrew,אלכסנדר,historical
+alexander_g,Alexander The Great,rulers_figures,greek,αλεξανδρος,historical
+antiochus_h,Antiochus Epiphanes,rulers_figures,hebrew,אנטיוכוס,Daniel antagonist
+antiochus_g,Antiochus Epiphanes,rulers_figures,greek,αντιοχος,Daniel antagonist
+nero_h,Nero,rulers_figures,hebrew,נרון,NT era emperor
+nero_g,Nero,rulers_figures,greek,νερων,NT era emperor
+herod_h,Herod,rulers_figures,hebrew,הורדוס,NT king
+herod_g,Herod,rulers_figures,greek,ηρωδης,NT king
+lion_h,Lion,apocalyptic_symbols,hebrew,אריה,Daniel beast
+lion_g,Lion,apocalyptic_symbols,greek,λεων,Daniel beast
+bear_h,Bear,apocalyptic_symbols,hebrew,דב,Daniel beast
+bear_g,Bear,apocalyptic_symbols,greek,αρκτος,Daniel beast
+leopard_h,Leopard,apocalyptic_symbols,hebrew,נמר,Daniel beast
+leopard_g,Leopard,apocalyptic_symbols,greek,παρδαλις,Daniel beast
+scroll_h,Scroll,apocalyptic_symbols,hebrew,מגילה,Revelation scroll
+scroll_g,Scroll,apocalyptic_symbols,greek,βιβλιον,Revelation scroll
+throne_h,Throne,apocalyptic_symbols,hebrew,כסא,Revelation throne
+throne_g,Throne,apocalyptic_symbols,greek,θρονος,Revelation throne
+beast_number_words_h,666,apocalyptic_symbols,hebrew,שש מאות ששים ושש,number of the beast
+beast_number_words_g,666,apocalyptic_symbols,greek,εξακοσιοι εξηκοντα εξ,number of the beast
+sealed_servants_words_h,144000,apocalyptic_symbols,hebrew,מאה ארבעים וארבעה אלף,sealed servants
+sealed_servants_words_g,144000,apocalyptic_symbols,greek,εκατον τεσσαρακοντα τεσσαρες χιλιαδες,sealed servants
+plague_h,Plague,judgment_terms,hebrew,מגפה,judgment motif
+plague_g,Plague,judgment_terms,greek,πληγη,judgment motif
+earthquake_h,Earthquake,judgment_terms,hebrew,רעש,judgment motif
+earthquake_g,Earthquake,judgment_terms,greek,σεισμος,judgment motif
+hail_h,Hail,judgment_terms,hebrew,ברד,judgment motif
+hail_g,Hail,judgment_terms,greek,χαλαζα,judgment motif
+fire_h,Fire,judgment_terms,hebrew,אש,judgment motif
+fire_g,Fire,judgment_terms,greek,πυρ,judgment motif
+blood_h,Blood,judgment_terms,hebrew,דם,judgment motif
+blood_g,Blood,judgment_terms,greek,αιμα,judgment motif
+angel_h,Angel,revelation_terms,hebrew,מלאך,angel motif
+angel_g,Angel,revelation_terms,greek,αγγελος,angel motif
+prophet_h,Prophet,revelation_terms,hebrew,נביא,prophet motif
+prophet_g,Prophet,revelation_terms,greek,προφητης,prophet motif
+mystery_h,Mystery,revelation_terms,hebrew,סוד,mystery motif
+mystery_g,Mystery,revelation_terms,greek,μυστηριον,mystery motif
+testimony_h,Testimony,revelation_terms,hebrew,עדות,testimony motif
+testimony_g,Testimony,revelation_terms,greek,μαρτυρια,testimony motif
+overcome_h,Overcome,revelation_terms,hebrew,נצח,overcome motif
+overcome_g,Overcome,revelation_terms,greek,νικαω,overcome motif
+thessalonica_h,Thessalonica,empires_places,hebrew,תסלוניקי,NT city
+thessalonica_g,Thessalonica,empires_places,greek,θεσσαλονικη,NT city
+philippi_h,Philippi,empires_places,hebrew,פיליפי,NT city
+philippi_g,Philippi,empires_places,greek,φιλιπποι,NT city
+colossae_h,Colossae,empires_places,hebrew,קולוסאי,NT city
+colossae_g,Colossae,empires_places,greek,κολοσσαι,NT city
+galatia_h,Galatia,empires_places,hebrew,גלטיה,NT region
+galatia_g,Galatia,empires_places,greek,γαλατια,NT region
+gilead_h,Gilead,empires_places,hebrew,גלעד,biblical region
+gilead_g,Gilead,empires_places,greek,γαλααδ,biblical region
+bashan_h,Bashan,empires_places,hebrew,בשן,biblical region
+bashan_g,Bashan,empires_places,greek,βασαν,biblical region
+nineveh_alt_h,Nineveh,empires_places,hebrew,נינוה,variant label supplied
+tyre_alt_h,Tyre,empires_places,hebrew,צור,variant spelling
+hezekiah_h,Hezekiah,rulers_figures,hebrew,חזקיהו,Judah king
+hezekiah_g,Hezekiah,rulers_figures,greek,εζεκιας,Judah king
+josiah_h,Josiah,rulers_figures,hebrew,יאשיהו,Judah king
+josiah_g,Josiah,rulers_figures,greek,ιωσιας,Judah king
+belshazzar_h,Belshazzar,rulers_figures,hebrew,בלשאצר,Babylon king
+belshazzar_g,Belshazzar,rulers_figures,greek,βαλτασαρ,Babylon king
+artaxerxes_h,Artaxerxes,rulers_figures,hebrew,ארתחששתא,Persian king
+artaxerxes_g,Artaxerxes,rulers_figures,greek,αρταξερξης,Persian king
+elijah_h,Elijah,rulers_figures,hebrew,אליהו,prophet
+elijah_g,Elijah,rulers_figures,greek,ηλιας,prophet
+elisha_h,Elisha,rulers_figures,hebrew,אלישע,prophet
+elisha_g,Elisha,rulers_figures,greek,ελισσαιος,prophet
+isaiah_h,Isaiah,rulers_figures,hebrew,ישעיהו,prophet
+isaiah_g,Isaiah,rulers_figures,greek,ησαιας,prophet
+jeremiah_h,Jeremiah,rulers_figures,hebrew,ירמיהו,prophet
+jeremiah_g,Jeremiah,rulers_figures,greek,ιερεμιας,prophet
+ezekiel_h,Ezekiel,rulers_figures,hebrew,יחזקאל,prophet
+ezekiel_g,Ezekiel,rulers_figures,greek,ιεζεκιηλ,prophet
+daniel_h,Daniel,rulers_figures,hebrew,דניאל,prophet
+daniel_g,Daniel,rulers_figures,greek,δανιηλ,prophet
+john_baptist_h,John The Baptist,rulers_figures,hebrew,יוחנן המטביל,NT figure
+john_baptist_g,John The Baptist,rulers_figures,greek,ιωαννης ο βαπτιστης,NT figure
+lampstand_h,Lampstand,apocalyptic_symbols,hebrew,מנורה,Revelation motif
+lampstand_g,Lampstand,apocalyptic_symbols,greek,λυχνια,Revelation motif
+star_h,Star,apocalyptic_symbols,hebrew,כוכב,Revelation motif
+star_g,Star,apocalyptic_symbols,greek,αστηρ,Revelation motif
+key_h,Key,apocalyptic_symbols,hebrew,מפתח,Revelation motif
+key_g,Key,apocalyptic_symbols,greek,κλεις,Revelation motif
+pit_h,Pit,apocalyptic_symbols,hebrew,בור,Revelation motif
+pit_g,Pit,apocalyptic_symbols,greek,φρεαρ,Revelation motif
+abyss_h,Abyss,apocalyptic_symbols,hebrew,תהום,Revelation motif
+abyss_g,Abyss,apocalyptic_symbols,greek,αβυσσος,Revelation motif
+locust_h,Locust,apocalyptic_symbols,hebrew,ארבה,Revelation plague
+locust_g,Locust,apocalyptic_symbols,greek,ακρις,Revelation plague
+scorpion_h,Scorpion,apocalyptic_symbols,hebrew,עקרב,Revelation plague
+scorpion_g,Scorpion,apocalyptic_symbols,greek,σκορπιος,Revelation plague
+heads_h,Heads,apocalyptic_symbols,hebrew,ראשים,beast heads
+heads_g,Heads,apocalyptic_symbols,greek,κεφαλαι,beast heads
+darkness_h,Darkness,judgment_terms,hebrew,חושך,judgment motif
+darkness_g,Darkness,judgment_terms,greek,σκοτος,judgment motif
+locusts_plague_h,Locusts,judgment_terms,hebrew,ארבה,judgment motif
+locusts_plague_g,Locusts,judgment_terms,greek,ακριδες,judgment motif
+smoke_h,Smoke,judgment_terms,hebrew,עשן,judgment motif
+smoke_g,Smoke,judgment_terms,greek,καπνος,judgment motif
+torment_h,Torment,judgment_terms,hebrew,ענוי,judgment motif
+torment_g,Torment,judgment_terms,greek,βασανισμος,judgment motif
+mystery_babylon_h,Mystery Babylon,revelation_terms,hebrew,בבל הסוד,Revelation city
+mystery_babylon_g,Mystery Babylon,revelation_terms,greek,μυστηριον βαβυλων,Revelation city
+bride_h,Bride,revelation_terms,hebrew,כלה,Revelation bride
+bride_g,Bride,revelation_terms,greek,νυμφη,Revelation bride
+harvest_h,Harvest,revelation_terms,hebrew,קציר,Revelation harvest
+harvest_g,Harvest,revelation_terms,greek,θερισμος,Revelation harvest
+winepress_h,Winepress,revelation_terms,hebrew,יקב,Revelation winepress
+winepress_g,Winepress,revelation_terms,greek,ληνος,Revelation winepress
+armageddon_h,Armageddon,revelation_terms,hebrew,הר מגדון,final battle
+armageddon_g,Armageddon,revelation_terms,greek,αρμαγεδων,final battle
+ur_h,Ur,empires_places,hebrew,אור,biblical city of Abraham
+ur_g,Ur,empires_places,greek,ουρ,biblical city of Abraham
+haran_h,Haran,empires_places,hebrew,חרן,biblical city
+haran_g,Haran,empires_places,greek,χαραν,biblical city
+sodom_h,Sodom,empires_places,hebrew,סדום,biblical city
+sodom_g,Sodom,empires_places,greek,σοδομα,biblical city
+gomorrah_h,Gomorrah,empires_places,hebrew,עמורה,biblical city
+gomorrah_g,Gomorrah,empires_places,greek,γομορρα,biblical city
+athens_h,Athens,empires_places,hebrew,אתונה,NT city
+athens_g,Athens,empires_places,greek,αθηναι,NT city
+berea_h,Berea,empires_places,hebrew,בריא,NT city
+berea_g,Berea,empires_places,greek,βεροια,NT city
+rome_alt_h,Rome,empires_places,hebrew,רומא,variant spelling
+alexandria_h,Alexandria,empires_places,hebrew,אלכסנדריה,historical
+alexandria_g,Alexandria,empires_places,greek,αλεξανδρεια,historical
+babylon_new_h,Babylon,empires_places,hebrew,בבל חדשה,variant phrase
+persia_new_h,Persia,empires_places,hebrew,פרס חדשה,variant phrase
+manasseh_h,Manasseh,rulers_figures,hebrew,מנשה,Judah king
+manasseh_g,Manasseh,rulers_figures,greek,μανασσης,Judah king
+zedekiah_h,Zedekiah,rulers_figures,hebrew,צדקיהו,last Judah king
+zedekiah_g,Zedekiah,rulers_figures,greek,σεδεκιας,last Judah king
+jehoiakim_h,Jehoiakim,rulers_figures,hebrew,יהויקים,Judah king
+jehoiakim_g,Jehoiakim,rulers_figures,greek,ιωακιμ,Judah king
+peter_h,Peter,rulers_figures,hebrew,כיפא,apostle Hebrew/Aramaic form
+peter_petros_h,Peter,rulers_figures,hebrew,פטרוס,apostle transliterated form
+peter_g,Peter,rulers_figures,greek,πετρος,apostle
+paul_h,Paul,rulers_figures,hebrew,שאול,apostle Hebrew name
+paul_paulos_h,Paul,rulers_figures,hebrew,פאולוס,apostle transliterated form
+paul_g,Paul,rulers_figures,greek,παυλος,apostle
+mary_h,Mary,rulers_figures,hebrew,מרים,mother of Jesus
+mary_g,Mary,rulers_figures,greek,μαρια,mother of Jesus
+joseph_h,Joseph,rulers_figures,hebrew,יוסף,father of Jesus
+joseph_g,Joseph,rulers_figures,greek,ιωσηφ,father of Jesus
+barnabas_h,Barnabas,rulers_figures,hebrew,ברנבא,apostle companion
+barnabas_g,Barnabas,rulers_figures,greek,βαρναβας,apostle companion
+timothy_h,Timothy,rulers_figures,hebrew,טימותי,NT leader
+timothy_g,Timothy,rulers_figures,greek,τιμοθεος,NT leader
+titus_h,Titus,rulers_figures,hebrew,טיטוס,NT leader
+titus_g,Titus,rulers_figures,greek,τιτος,NT leader
+philemon_h,Philemon,rulers_figures,hebrew,פילימון,NT figure
+philemon_g,Philemon,rulers_figures,greek,φιλημων,NT figure
+wings_h,Wings,apocalyptic_symbols,hebrew,כנפים,beast/dragon wings
+wings_g,Wings,apocalyptic_symbols,greek,πτερυγες,beast/dragon wings
+eyes_h,Eyes,apocalyptic_symbols,hebrew,עינים,many eyes motif
+eyes_g,Eyes,apocalyptic_symbols,greek,οφθαλμοι,many eyes motif
+teeth_h,Teeth,apocalyptic_symbols,hebrew,שנים,iron teeth
+teeth_g,Teeth,apocalyptic_symbols,greek,οδοντες,iron teeth
+iron_teeth_h,Iron Teeth,apocalyptic_symbols,hebrew,שני ברזל,Daniel beast
+iron_teeth_g,Iron Teeth,apocalyptic_symbols,greek,οδοντες σιδηροι,Daniel beast
+seven_churches_h,Seven Churches,apocalyptic_symbols,hebrew,שבע קהילות,Revelation
+seven_churches_g,Seven Churches,apocalyptic_symbols,greek,επτα εκκλησιαι,Revelation
+seven_spirits_h,Seven Spirits,apocalyptic_symbols,hebrew,שבע רוחות,Revelation
+seven_spirits_g,Seven Spirits,apocalyptic_symbols,greek,επτα πνευματα,Revelation
+seven_seals_h,Seven Seals,apocalyptic_symbols,hebrew,שבע חותמות,Revelation
+seven_seals_g,Seven Seals,apocalyptic_symbols,greek,επτα σφραγιδες,Revelation
+seven_trumpets_h,Seven Trumpets,apocalyptic_symbols,hebrew,שבע שופרות,Revelation
+seven_trumpets_g,Seven Trumpets,apocalyptic_symbols,greek,επτα σαλπιγγες,Revelation
+seven_bowls_h,Seven Bowls,apocalyptic_symbols,hebrew,שבע קערות,Revelation
+seven_bowls_g,Seven Bowls,apocalyptic_symbols,greek,επτα φιαλαι,Revelation
+beast_number_digits_h,666,apocalyptic_symbols,hebrew,666,digits are removed; number of the beast variant
+mark_of_beast_h,Mark Of The Beast,apocalyptic_symbols,hebrew,חותם החיה,Revelation
+mark_of_beast_g,Mark Of The Beast,apocalyptic_symbols,greek,χαραγμα του θηριου,Revelation
+boils_h,Boils,judgment_terms,hebrew,שחין,plague
+boils_g,Boils,judgment_terms,greek,ελκη,plague
+sores_h,Sores,judgment_terms,hebrew,מכות,plague
+sores_g,Sores,judgment_terms,greek,ελκη,plague
+rivers_blood_h,Rivers To Blood,judgment_terms,hebrew,נהרות לדם,plague
+rivers_blood_g,Rivers To Blood,judgment_terms,greek,ποταμοι αιματος,plague
+darkness_plague_h,Darkness Plague,judgment_terms,hebrew,חושך,plague
+darkness_plague_g,Darkness Plague,judgment_terms,greek,σκοτος,plague
+hail_fire_h,Hail And Fire,judgment_terms,hebrew,ברד ואש,plague
+hail_fire_g,Hail And Fire,judgment_terms,greek,χαλαζα και πυρ,plague
+locust_plague_h,Locust Plague,judgment_terms,hebrew,ארבה,plague
+locust_plague_g,Locust Plague,judgment_terms,greek,ακριδες,plague
+scorpion_plague_h,Scorpion Plague,judgment_terms,hebrew,עקרבים,plague
+scorpion_plague_g,Scorpion Plague,judgment_terms,greek,σκορπιοι,plague
+bridegroom_h,Bridegroom,revelation_terms,hebrew,חתן,Revelation
+bridegroom_g,Bridegroom,revelation_terms,greek,νυμφιος,Revelation
+lamp_h,Lamp,revelation_terms,hebrew,נר,Revelation
+lamp_g,Lamp,revelation_terms,greek,λυχνος,Revelation
+oil_h,Oil,revelation_terms,hebrew,שמן,Revelation
+oil_g,Oil,revelation_terms,greek,ελαιον,Revelation
+harvest_earth_h,Harvest Of The Earth,revelation_terms,hebrew,קציר הארץ,Revelation
+harvest_earth_g,Harvest Of The Earth,revelation_terms,greek,θερισμος της γης,Revelation
+wine_of_wrath_h,Wine Of Wrath,revelation_terms,hebrew,יין חרון,Revelation
+wine_of_wrath_g,Wine Of Wrath,revelation_terms,greek,οινος του θυμου,Revelation
+lake_of_fire_h,Lake Of Fire,revelation_terms,hebrew,אגם אש,Revelation
+lake_of_fire_g,Lake Of Fire,revelation_terms,greek,λιμνη του πυρος,Revelation
+second_death_h,Second Death,revelation_terms,hebrew,מות שני,Revelation
+second_death_g,Second Death,revelation_terms,greek,δευτερος θανατος,Revelation
+new_jerusalem_h,New Jerusalem,revelation_terms,hebrew,ירושלים החדשה,Revelation
+new_jerusalem_g,New Jerusalem,revelation_terms,greek,καινη ιερουσαλημ,Revelation
+tree_of_life_h,Tree Of Life,revelation_terms,hebrew,עץ החיים,Revelation
+tree_of_life_g,Tree Of Life,revelation_terms,greek,ξυλον της ζωης,Revelation
+alpha_omega_h,Alpha And Omega,revelation_terms,hebrew,אלף ותו,Jesus title
+alpha_omega_g,Alpha And Omega,revelation_terms,greek,αλφα και ωμεγα,Jesus title
+i_am_h,I Am,revelation_terms,hebrew,אני הוא,Jesus claim
+i_am_g,I Am,revelation_terms,greek,εγω ειμι,Jesus claim
+frogs_plague_h,Frogs Plague,judgment_terms,hebrew,צפרדע,Exodus 8
+frogs_plague_g,Frogs Plague,judgment_terms,greek,βατραχος,Exodus 8
+lice_plague_h,Lice Plague,judgment_terms,hebrew,כנים,Exodus 8
+lice_plague_g,Lice Plague,judgment_terms,greek,σκνιφες,Exodus 8 LXX
+flies_plague_h,Flies Plague,judgment_terms,hebrew,ערב,Exodus 8 mixed insect plague
+flies_plague_g,Flies Plague,judgment_terms,greek,κυνομυια,Exodus 8 LXX
+murrain_plague_h,Livestock Plague,judgment_terms,hebrew,דבר,collides with word/pestilence root
+murrain_plague_g,Livestock Plague,judgment_terms,greek,θανατος,Exodus 9 LXX
+firstborn_plague_h,Plague Of Firstborn,judgment_terms,hebrew,מכת בכורות,Exodus 12
+firstborn_plague_g,Plague Of Firstborn,judgment_terms,greek,πληγη πρωτοτοκων,Exodus 12
+millennium_h,Thousand Years,apocalyptic_symbols,hebrew,אלף שנים,
+millennium_g,Thousand Years,apocalyptic_symbols,greek,χιλια ετη,Revelation 20
+two_witnesses_h,Two Witnesses,apocalyptic_figures,hebrew,שני עדים,
+two_witnesses_g,Two Witnesses,apocalyptic_figures,greek,δυο μαρτυρες,Revelation 11
+whore_babylon_g,Whore Of Babylon,apocalyptic_figures,greek,πορνη βαβυλων,Revelation 17
+rapture_g,Rapture,apocalyptic_terms,greek,αρπαζω,1 Thessalonians 4:17 verb harpazo
+maranatha_g,Maranatha,apocalyptic_terms,greek,μαραναθα,1 Corinthians 16:22
+hosanna_g,Hosanna,liturgical,greek,ωσαννα,
+hallelujah_h,Hallelujah,liturgical,hebrew,הללויה,
+hallelujah_g,Hallelujah,liturgical,greek,αλληλουια,
+amen_h,Amen,liturgical,hebrew,אמן,
+amen_g,Amen,liturgical,greek,αμην,
+selah_h,Selah,liturgical,hebrew,סלה,Psalms term
+seven_thunders_g,Seven Thunders,apocalyptic_symbols,greek,επτα βρονται,Revelation 10
+twenty_four_elders_g,Twenty Four Elders,apocalyptic_figures,greek,εικοσι τεσσαρες πρεσβυτεροι,Revelation 4
+four_living_creatures_g,Four Living Creatures,apocalyptic_figures,greek,τεσσαρα ζωα,Revelation 4
+augustus_h,Augustus,roman_emperors,hebrew,אוגוסטוס,Roman emperor screening term through Constantine I
+augustus_g,Augustus,roman_emperors,greek,αυγουστος,Roman emperor screening term through Constantine I
+tiberius_h,Tiberius,roman_emperors,hebrew,טיבריוס,Roman emperor screening term through Constantine I
+tiberius_g,Tiberius,roman_emperors,greek,τιβεριος,Roman emperor screening term through Constantine I
+caligula_h,Caligula,roman_emperors,hebrew,קליגולה,Roman emperor screening term through Constantine I
+caligula_g,Caligula,roman_emperors,greek,καλιγουλας,Roman emperor screening term through Constantine I
+claudius_emperor_h,Claudius,roman_emperors,hebrew,קלאודיוס,Roman emperor screening term through Constantine I
+claudius_emperor_g,Claudius,roman_emperors,greek,κλαυδιος,Roman emperor screening term through Constantine I
+nero_emperor_h,Nero,roman_emperors,hebrew,נרון,Roman emperor screening term; duplicates existing NT-era emperor row under a roman-emperors category
+nero_emperor_g,Nero,roman_emperors,greek,νερων,Roman emperor screening term; duplicates existing NT-era emperor row under a roman-emperors category
+galba_h,Galba,roman_emperors,hebrew,גלבה,Roman emperor screening term through Constantine I
+galba_g,Galba,roman_emperors,greek,γαλβας,Roman emperor screening term through Constantine I
+otho_h,Otho,roman_emperors,hebrew,אותו,Roman emperor screening term; collides with common Hebrew word
+otho_g,Otho,roman_emperors,greek,οθων,Roman emperor screening term through Constantine I
+vitellius_h,Vitellius,roman_emperors,hebrew,ויטליוס,Roman emperor screening term through Constantine I
+vitellius_g,Vitellius,roman_emperors,greek,βιτελλιος,Roman emperor screening term through Constantine I
+vespasian_h,Vespasian,roman_emperors,hebrew,אספסיאנוס,Roman emperor screening term through Constantine I
+vespasian_g,Vespasian,roman_emperors,greek,βεσπασιανος,Roman emperor screening term through Constantine I
+titus_emperor_h,Titus,roman_emperors,hebrew,טיטוס,Roman emperor screening term; separate from NT figure row
+titus_emperor_g,Titus,roman_emperors,greek,τιτος,Roman emperor screening term; separate from NT figure row
+domitian_h,Domitian,roman_emperors,hebrew,דומיטיאנוס,Roman emperor screening term through Constantine I
+domitian_g,Domitian,roman_emperors,greek,δομιτιανος,Roman emperor screening term through Constantine I
+nerva_h,Nerva,roman_emperors,hebrew,נרווה,Roman emperor screening term through Constantine I
+nerva_g,Nerva,roman_emperors,greek,νερβας,Roman emperor screening term through Constantine I
+trajan_h,Trajan,roman_emperors,hebrew,טראיאנוס,Roman emperor screening term through Constantine I
+trajan_g,Trajan,roman_emperors,greek,τραιανος,Roman emperor screening term through Constantine I
+hadrian_h,Hadrian,roman_emperors,hebrew,אדריאנוס,Roman emperor screening term through Constantine I
+hadrian_g,Hadrian,roman_emperors,greek,αδριανος,Roman emperor screening term through Constantine I
+antoninus_pius_h,Antoninus Pius,roman_emperors,hebrew,אנטונינוס פיוס,Roman emperor screening term through Constantine I
+antoninus_pius_g,Antoninus Pius,roman_emperors,greek,αντωνινος πιος,Roman emperor screening term through Constantine I
+marcus_aurelius_h,Marcus Aurelius,roman_emperors,hebrew,מרקוס אורליוס,Roman emperor screening term through Constantine I
+marcus_aurelius_g,Marcus Aurelius,roman_emperors,greek,μαρκος αυρηλιος,Roman emperor screening term through Constantine I
+lucius_verus_h,Lucius Verus,roman_emperors,hebrew,לוקיוס ורוס,Roman emperor screening term through Constantine I
+lucius_verus_g,Lucius Verus,roman_emperors,greek,λουκιος βηρος,Roman emperor screening term through Constantine I
+commodus_h,Commodus,roman_emperors,hebrew,קומודוס,Roman emperor screening term through Constantine I
+commodus_g,Commodus,roman_emperors,greek,κομμοδος,Roman emperor screening term through Constantine I
+pertinax_h,Pertinax,roman_emperors,hebrew,פרטינקס,Roman emperor screening term through Constantine I
+pertinax_g,Pertinax,roman_emperors,greek,περτιναξ,Roman emperor screening term through Constantine I
+didius_julianus_h,Didius Julianus,roman_emperors,hebrew,דידיוס יוליאנוס,Roman emperor screening term through Constantine I
+didius_julianus_g,Didius Julianus,roman_emperors,greek,διδιος ιουλιανος,Roman emperor screening term through Constantine I
+septimius_severus_h,Septimius Severus,roman_emperors,hebrew,ספטימיוס סוורוס,Roman emperor screening term through Constantine I
+septimius_severus_g,Septimius Severus,roman_emperors,greek,σεπτιμιος σεβηρος,Roman emperor screening term through Constantine I
+caracalla_h,Caracalla,roman_emperors,hebrew,קרקלה,Roman emperor screening term through Constantine I
+caracalla_g,Caracalla,roman_emperors,greek,καρακαλλας,Roman emperor screening term through Constantine I
+geta_h,Geta,roman_emperors,hebrew,גטה,Roman emperor screening term through Constantine I
+geta_g,Geta,roman_emperors,greek,γετας,Roman emperor screening term through Constantine I
+macrinus_h,Macrinus,roman_emperors,hebrew,מקרינוס,Roman emperor screening term through Constantine I
+macrinus_g,Macrinus,roman_emperors,greek,μακρινος,Roman emperor screening term through Constantine I
+elagabalus_h,Elagabalus,roman_emperors,hebrew,אלאגבאלוס,Roman emperor screening term through Constantine I
+elagabalus_g,Elagabalus,roman_emperors,greek,ελαγαβαλος,Roman emperor screening term through Constantine I
+severus_alexander_h,Severus Alexander,roman_emperors,hebrew,סוורוס אלכסנדר,Roman emperor screening term through Constantine I
+severus_alexander_g,Severus Alexander,roman_emperors,greek,σεβηρος αλεξανδρος,Roman emperor screening term through Constantine I
+maximinus_h,Maximinus,roman_emperors,hebrew,מקסימינוס,Roman emperor screening term through Constantine I
+maximinus_g,Maximinus,roman_emperors,greek,μαξιμινος,Roman emperor screening term through Constantine I
+gordian_i_h,Gordian I,roman_emperors,hebrew,גורדיאנוס א,Roman emperor screening term through Constantine I
+gordian_i_g,Gordian I,roman_emperors,greek,γορδιανος α,Roman emperor screening term through Constantine I
+gordian_ii_h,Gordian II,roman_emperors,hebrew,גורדיאנוס ב,Roman emperor screening term through Constantine I
+gordian_ii_g,Gordian II,roman_emperors,greek,γορδιανος β,Roman emperor screening term through Constantine I
+pupienus_h,Pupienus,roman_emperors,hebrew,פופיאנוס,Roman emperor screening term through Constantine I
+pupienus_g,Pupienus,roman_emperors,greek,πουπιηνος,Roman emperor screening term through Constantine I
+balbinus_h,Balbinus,roman_emperors,hebrew,בלבינוס,Roman emperor screening term through Constantine I
+balbinus_g,Balbinus,roman_emperors,greek,βαλβινος,Roman emperor screening term through Constantine I
+gordian_iii_h,Gordian III,roman_emperors,hebrew,גורדיאנוס ג,Roman emperor screening term through Constantine I
+gordian_iii_g,Gordian III,roman_emperors,greek,γορδιανος γ,Roman emperor screening term through Constantine I
+philip_arab_h,Philip The Arab,roman_emperors,hebrew,פיליפוס הערבי,Roman emperor screening term through Constantine I
+philip_arab_g,Philip The Arab,roman_emperors,greek,φιλιππος ο αραβας,Roman emperor screening term through Constantine I
+decius_h,Decius,roman_emperors,hebrew,דקיוס,Roman emperor screening term through Constantine I
+decius_g,Decius,roman_emperors,greek,δεκιος,Roman emperor screening term through Constantine I
+hostilian_h,Hostilian,roman_emperors,hebrew,הוסטיליאנוס,Roman emperor screening term through Constantine I
+hostilian_g,Hostilian,roman_emperors,greek,οστιλιανος,Roman emperor screening term through Constantine I
+gallus_h,Gallus,roman_emperors,hebrew,גאלוס,Roman emperor screening term through Constantine I
+gallus_g,Gallus,roman_emperors,greek,γαλλος,Roman emperor screening term through Constantine I
+aemilian_h,Aemilian,roman_emperors,hebrew,אמיליאנוס,Roman emperor screening term through Constantine I
+aemilian_g,Aemilian,roman_emperors,greek,αιμιλιανος,Roman emperor screening term through Constantine I
+valerian_h,Valerian,roman_emperors,hebrew,ולריאנוס,Roman emperor screening term through Constantine I
+valerian_g,Valerian,roman_emperors,greek,βαλεριανος,Roman emperor screening term through Constantine I
+gallienus_h,Gallienus,roman_emperors,hebrew,גליאנוס,Roman emperor screening term through Constantine I
+gallienus_g,Gallienus,roman_emperors,greek,γαλλιηνος,Roman emperor screening term through Constantine I
+claudius_gothicus_h,Claudius Gothicus,roman_emperors,hebrew,קלאודיוס גותיקוס,Roman emperor screening term through Constantine I
+claudius_gothicus_g,Claudius Gothicus,roman_emperors,greek,κλαυδιος γοτθικος,Roman emperor screening term through Constantine I
+quintillus_h,Quintillus,roman_emperors,hebrew,קווינטילוס,Roman emperor screening term through Constantine I
+quintillus_g,Quintillus,roman_emperors,greek,κυιντιλλος,Roman emperor screening term through Constantine I
+aurelian_h,Aurelian,roman_emperors,hebrew,אורליאנוס,Roman emperor screening term through Constantine I
+aurelian_g,Aurelian,roman_emperors,greek,αυρηλιανος,Roman emperor screening term through Constantine I
+tacitus_h,Tacitus,roman_emperors,hebrew,טקיטוס,Roman emperor screening term through Constantine I
+tacitus_g,Tacitus,roman_emperors,greek,τακιτος,Roman emperor screening term through Constantine I
+florian_h,Florian,roman_emperors,hebrew,פלוריאנוס,Roman emperor screening term through Constantine I
+florian_g,Florian,roman_emperors,greek,φλωριανος,Roman emperor screening term through Constantine I
+probus_h,Probus,roman_emperors,hebrew,פרובוס,Roman emperor screening term through Constantine I
+probus_g,Probus,roman_emperors,greek,προβος,Roman emperor screening term through Constantine I
+carus_h,Carus,roman_emperors,hebrew,קרוס,Roman emperor screening term through Constantine I
+carus_g,Carus,roman_emperors,greek,καρος,Roman emperor screening term through Constantine I
+numerian_h,Numerian,roman_emperors,hebrew,נומריאנוס,Roman emperor screening term through Constantine I
+numerian_g,Numerian,roman_emperors,greek,νουμεριανος,Roman emperor screening term through Constantine I
+carinus_h,Carinus,roman_emperors,hebrew,קרינוס,Roman emperor screening term through Constantine I
+carinus_g,Carinus,roman_emperors,greek,καρινος,Roman emperor screening term through Constantine I
+diocletian_h,Diocletian,roman_emperors,hebrew,דיוקלטיאנוס,Roman emperor screening term through Constantine I
+diocletian_g,Diocletian,roman_emperors,greek,διοκλητιανος,Roman emperor screening term through Constantine I
+maximian_h,Maximian,roman_emperors,hebrew,מקסימיאנוס,Roman emperor screening term through Constantine I
+maximian_g,Maximian,roman_emperors,greek,μαξιμιανος,Roman emperor screening term through Constantine I
+constantius_i_h,Constantius I,roman_emperors,hebrew,קונסטנטיוס,Roman emperor screening term through Constantine I
+constantius_i_g,Constantius I,roman_emperors,greek,κωνσταντιος,Roman emperor screening term through Constantine I
+galerius_h,Galerius,roman_emperors,hebrew,גלריוס,Roman emperor screening term through Constantine I
+galerius_g,Galerius,roman_emperors,greek,γαλεριος,Roman emperor screening term through Constantine I
+severus_ii_h,Severus II,roman_emperors,hebrew,סוורוס,Roman emperor screening term through Constantine I
+severus_ii_g,Severus II,roman_emperors,greek,σεβηρος,Roman emperor screening term through Constantine I
+maxentius_h,Maxentius,roman_emperors,hebrew,מקסנטיוס,Roman emperor screening term through Constantine I
+maxentius_g,Maxentius,roman_emperors,greek,μαξεντιος,Roman emperor screening term through Constantine I
+constantine_i_h,Constantine I,roman_emperors,hebrew,קונסטנטינוס,Roman emperor screening term through Constantine I
+constantine_i_g,Constantine I,roman_emperors,greek,κωνσταντινος,Roman emperor screening term through Constantine I
+maximinus_daza_h,Maximinus Daza,roman_emperors,hebrew,מקסימינוס דאיה,contemporary tetrarchy emperor before Constantine sole rule
+maximinus_daza_g,Maximinus Daza,roman_emperors,greek,μαξιμινος δαζα,contemporary tetrarchy emperor before Constantine sole rule
+licinius_h,Licinius,roman_emperors,hebrew,ליקיניוס,contemporary tetrarchy emperor before Constantine sole rule
+licinius_g,Licinius,roman_emperors,greek,λικινιος,contemporary tetrarchy emperor before Constantine sole rule

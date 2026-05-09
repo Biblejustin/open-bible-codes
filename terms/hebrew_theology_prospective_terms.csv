@@ -1,0 +1,21 @@
+term_id,concept,category,language,term,notes
+htp_torah_h,Torah,core_foundational,hebrew,תורה,locked Hebrew theology prospective cohort
+htp_israel_h,Israel,core_foundational,hebrew,ישראל,locked Hebrew theology prospective cohort
+htp_yhwh_h,YHWH,divine_names,hebrew,יהוה,locked Hebrew theology prospective cohort
+htp_messiah_h,Messiah,christology,hebrew,משיח,locked Hebrew theology prospective cohort
+htp_yeshua_h,Yeshua,christology,hebrew,ישוע,locked Hebrew theology prospective cohort
+htp_yeshua_messiah_h,Yeshua Messiah,christology,hebrew,ישוע המשיח,locked Hebrew theology prospective cohort
+htp_son_of_god_h,Son Of God,christology,hebrew,בן האלוהים,locked Hebrew theology prospective cohort
+htp_lamb_of_god_h,Lamb Of God,christology,hebrew,כבש האלוהים,locked Hebrew theology prospective cohort
+htp_covenant_h,Covenant,revelation,hebrew,ברית,locked Hebrew theology prospective cohort
+htp_kingdom_h,Kingdom,kingdom,hebrew,מלכות,locked Hebrew theology prospective cohort
+htp_salvation_h,Salvation,soteriology,hebrew,ישועה,locked Hebrew theology prospective cohort
+htp_savior_h,Savior,soteriology,hebrew,מושיע,locked Hebrew theology prospective cohort
+htp_redemption_h,Redemption,soteriology,hebrew,גאולה,locked Hebrew theology prospective cohort
+htp_faith_h,Faith,soteriology,hebrew,אמונה,locked Hebrew theology prospective cohort
+htp_truth_h,Truth,attributes,hebrew,אמת,locked Hebrew theology prospective cohort
+htp_mercy_h,Mercy,attributes,hebrew,חסד,locked Hebrew theology prospective cohort
+htp_glory_h,Glory,attributes,hebrew,כבוד,locked Hebrew theology prospective cohort
+htp_wisdom_h,Wisdom,revelation,hebrew,חכמה,locked Hebrew theology prospective cohort
+htp_peace_h,Peace,ethics,hebrew,שלום,locked Hebrew theology prospective cohort
+htp_love_h,Love,ethics,hebrew,אהבה,locked Hebrew theology prospective cohort

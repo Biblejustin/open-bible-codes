@@ -1,0 +1,7 @@
+name = "Miqra according to the Masorah"
+language = "hebrew"
+
+[[sources]]
+name = "MAM"
+format = "mam_html_dir"
+path = "../data/raw/mam/html"

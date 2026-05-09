@@ -1,0 +1,176 @@
+name = "hebrew_modern_geopolitical_controlled_review"
+description = "Join the broad Hebrew modern/geopolitical MT-family version-presence run with representative paired controls."
+manifest_out = "reports/hebrew_modern_geopolitical_controlled_review/protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "hebrew_modern_geopolitical_control_targets"
+description = "Build review tables and representative control targets from the broad Hebrew modern/geopolitical exact-version run."
+argv = [
+  "-m",
+  "scripts.analyze_targeted_version_presence",
+  "--all-exact-term-ids",
+  "--terms",
+  "terms/modern_names_dates.csv",
+  "--hebrew-summary",
+  "reports/hebrew_modern_geopolitical_version_presence/term_summary.csv",
+  "--hebrew-patterns",
+  "reports/hebrew_modern_geopolitical_version_presence/hit_patterns.csv",
+  "--greek-summary",
+  "reports/hebrew_modern_geopolitical_controlled_review/no_greek_summary.csv",
+  "--greek-patterns",
+  "reports/hebrew_modern_geopolitical_controlled_review/no_greek_patterns.csv",
+  "--paired-controls",
+  "reports/hebrew_modern_geopolitical_controlled_review/no_paired_controls.csv",
+  "--extension-summary",
+  "MT_WLC=reports/version_presence_extensions/extensions_hebrew_mt_wlc_summary.csv",
+  "--extension-summary",
+  "UHB=reports/version_presence_extensions/extensions_hebrew_uhb_summary.csv",
+  "--extension-top",
+  "MT_WLC=reports/version_presence_extensions/extensions_hebrew_mt_wlc_top.csv",
+  "--extension-top",
+  "UHB=reports/version_presence_extensions/extensions_hebrew_uhb_top.csv",
+  "--summary-out",
+  "reports/hebrew_modern_geopolitical_controlled_review/initial_summary.csv",
+  "--examples-out",
+  "reports/hebrew_modern_geopolitical_controlled_review/initial_examples.csv",
+  "--control-targets-out",
+  "reports/hebrew_modern_geopolitical_controlled_review/control_targets.csv",
+  "--markdown-out",
+  "reports/hebrew_modern_geopolitical_controlled_review/initial.md",
+  "--markdown-title",
+  "Hebrew Modern Geopolitical Controlled Review",
+  "--markdown-description",
+  "This generated report joins exact version-presence summaries, available paired controls, and bounded version-presence extension rows for the broad Hebrew modern/geopolitical/local/date term set.",
+  "--manifest-out",
+  "reports/hebrew_modern_geopolitical_controlled_review/initial.manifest.json",
+]
+inputs = [
+  "scripts/analyze_targeted_version_presence.py",
+  "terms/modern_names_dates.csv",
+  "reports/hebrew_modern_geopolitical_version_presence/term_summary.csv",
+  "reports/hebrew_modern_geopolitical_version_presence/hit_patterns.csv",
+  "reports/version_presence_extensions/extensions_hebrew_mt_wlc_summary.csv",
+  "reports/version_presence_extensions/extensions_hebrew_uhb_summary.csv",
+  "reports/version_presence_extensions/extensions_hebrew_mt_wlc_top.csv",
+  "reports/version_presence_extensions/extensions_hebrew_uhb_top.csv",
+]
+outputs = [
+  "reports/hebrew_modern_geopolitical_controlled_review/initial_summary.csv",
+  "reports/hebrew_modern_geopolitical_controlled_review/initial_examples.csv",
+  "reports/hebrew_modern_geopolitical_controlled_review/control_targets.csv",
+  "reports/hebrew_modern_geopolitical_controlled_review/initial.md",
+  "reports/hebrew_modern_geopolitical_controlled_review/initial.manifest.json",
+]
+
+[[steps]]
+id = "hebrew_modern_geopolitical_paired_controls"
+description = "Run representative paired controls for nonzero broad Hebrew modern/geopolitical rows in MT_WLC and UHB."
+argv = [
+  "-m",
+  "scripts.analyze_targeted_paired_controls",
+  "--target-summary",
+  "reports/hebrew_modern_geopolitical_controlled_review/control_targets.csv",
+  "--target-corpus",
+  "MT_WLC",
+  "--target-corpus",
+  "UHB",
+  "--min-skip",
+  "2",
+  "--max-skip",
+  "100",
+  "--term-shuffle-samples",
+  "100",
+  "--random-samples",
+  "100",
+  "--jobs",
+  "0",
+  "--summary-out",
+  "reports/hebrew_modern_geopolitical_controlled_review/paired_controls_summary.csv",
+  "--examples-out",
+  "reports/hebrew_modern_geopolitical_controlled_review/paired_controls_examples.csv",
+  "--markdown-out",
+  "reports/hebrew_modern_geopolitical_controlled_review/paired_controls.md",
+  "--manifest-out",
+  "reports/hebrew_modern_geopolitical_controlled_review/paired_controls.manifest.json",
+]
+inputs = [
+  "reports/hebrew_modern_geopolitical_controlled_review/control_targets.csv",
+  "scripts/analyze_targeted_paired_controls.py",
+  "els/statistics.py",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uhb.toml",
+  "els/corpus.py",
+  "els/search.py",
+  "els/stats.py",
+]
+outputs = [
+  "reports/hebrew_modern_geopolitical_controlled_review/paired_controls_summary.csv",
+  "reports/hebrew_modern_geopolitical_controlled_review/paired_controls_examples.csv",
+  "reports/hebrew_modern_geopolitical_controlled_review/paired_controls.md",
+  "reports/hebrew_modern_geopolitical_controlled_review/paired_controls.manifest.json",
+]
+
+[[steps]]
+id = "hebrew_modern_geopolitical_controlled_review"
+description = "Regenerate the broad Hebrew modern/geopolitical review with representative paired controls joined back in."
+argv = [
+  "-m",
+  "scripts.analyze_targeted_version_presence",
+  "--all-exact-term-ids",
+  "--terms",
+  "terms/modern_names_dates.csv",
+  "--hebrew-summary",
+  "reports/hebrew_modern_geopolitical_version_presence/term_summary.csv",
+  "--hebrew-patterns",
+  "reports/hebrew_modern_geopolitical_version_presence/hit_patterns.csv",
+  "--greek-summary",
+  "reports/hebrew_modern_geopolitical_controlled_review/no_greek_summary.csv",
+  "--greek-patterns",
+  "reports/hebrew_modern_geopolitical_controlled_review/no_greek_patterns.csv",
+  "--paired-controls",
+  "reports/hebrew_modern_geopolitical_controlled_review/no_paired_controls.csv",
+  "--representative-controls",
+  "reports/hebrew_modern_geopolitical_controlled_review/paired_controls_summary.csv",
+  "--extension-summary",
+  "MT_WLC=reports/version_presence_extensions/extensions_hebrew_mt_wlc_summary.csv",
+  "--extension-summary",
+  "UHB=reports/version_presence_extensions/extensions_hebrew_uhb_summary.csv",
+  "--extension-top",
+  "MT_WLC=reports/version_presence_extensions/extensions_hebrew_mt_wlc_top.csv",
+  "--extension-top",
+  "UHB=reports/version_presence_extensions/extensions_hebrew_uhb_top.csv",
+  "--summary-out",
+  "reports/hebrew_modern_geopolitical_controlled_review/controlled_summary.csv",
+  "--examples-out",
+  "reports/hebrew_modern_geopolitical_controlled_review/controlled_examples.csv",
+  "--control-targets-out",
+  "reports/hebrew_modern_geopolitical_controlled_review/controlled_control_targets.csv",
+  "--markdown-out",
+  "docs/HEBREW_MODERN_GEOPOLITICAL_CONTROLLED_REVIEW.md",
+  "--markdown-title",
+  "Hebrew Modern Geopolitical Controlled Review",
+  "--markdown-description",
+  "This generated report joins exact version-presence summaries, available paired controls, and bounded version-presence extension rows for the broad Hebrew modern/geopolitical/local/date term set.",
+  "--manifest-out",
+  "reports/hebrew_modern_geopolitical_controlled_review/controlled.manifest.json",
+]
+inputs = [
+  "scripts/analyze_targeted_version_presence.py",
+  "terms/modern_names_dates.csv",
+  "reports/hebrew_modern_geopolitical_version_presence/term_summary.csv",
+  "reports/hebrew_modern_geopolitical_version_presence/hit_patterns.csv",
+  "reports/hebrew_modern_geopolitical_controlled_review/paired_controls_summary.csv",
+  "reports/version_presence_extensions/extensions_hebrew_mt_wlc_summary.csv",
+  "reports/version_presence_extensions/extensions_hebrew_uhb_summary.csv",
+  "reports/version_presence_extensions/extensions_hebrew_mt_wlc_top.csv",
+  "reports/version_presence_extensions/extensions_hebrew_uhb_top.csv",
+]
+outputs = [
+  "reports/hebrew_modern_geopolitical_controlled_review/controlled_summary.csv",
+  "reports/hebrew_modern_geopolitical_controlled_review/controlled_examples.csv",
+  "reports/hebrew_modern_geopolitical_controlled_review/controlled_control_targets.csv",
+  "docs/HEBREW_MODERN_GEOPOLITICAL_CONTROLLED_REVIEW.md",
+  "reports/hebrew_modern_geopolitical_controlled_review/controlled.manifest.json",
+]

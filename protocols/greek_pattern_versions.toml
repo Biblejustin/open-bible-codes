@@ -1,0 +1,31 @@
+name = "greek_pattern_versions"
+description = "Consolidate Greek exact-center pattern presence and source-specific control status."
+manifest_out = "reports/greek_pattern_versions/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "pattern_version_summary"
+description = "Merge two-, three-, and four-source presence matrices with row-local controls."
+argv = [
+  "-m", "scripts.analyze_greek_pattern_versions",
+  "--summary-out", "reports/greek_pattern_versions/summary.csv",
+  "--markdown-out", "reports/greek_pattern_versions/summary.md",
+  "--manifest-out", "reports/greek_pattern_versions/manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_pattern_versions.py",
+  "els/statistics.py",
+  "reports/greek_exact_center_cohort/pattern_presence.csv",
+  "reports/greek_exact_center_three_source/pattern_presence.csv",
+  "reports/greek_exact_center_four_source/pattern_presence.csv",
+  "reports/greek_exact_center_four_source/paired_controls_summary.csv",
+  "reports/greek_exact_center_three_source/paired_controls_summary.csv",
+  "reports/sblgnt_source_only_exact_center/paired_controls_summary.csv",
+  "reports/byz_source_only_exact_center/paired_controls_summary.csv",
+]
+outputs = [
+  "reports/greek_pattern_versions/summary.csv",
+  "reports/greek_pattern_versions/summary.md",
+  "reports/greek_pattern_versions/manifest.json",
+]

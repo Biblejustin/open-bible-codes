@@ -1,0 +1,105 @@
+name = "english_screening_all_codes_collection"
+description = "Relaxed all-codes collection for the broad English KJV screening cohort with center-word surface flags."
+manifest_out = "reports/english_screening_all_codes/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 30
+
+[[steps]]
+id = "surface_all_codes"
+description = "Retain every hidden-path row and annotate same/related center-word surface context for generated English terms."
+argv = [
+  "-m",
+  "els",
+  "surface-context",
+  "--terms",
+  "terms/english_search_terms.csv",
+  "--corpus",
+  "KJV=configs/example_ebible_engkjv.toml",
+  "--min-skip",
+  "2",
+  "--max-skip",
+  "100",
+  "--direction",
+  "both",
+  "--min-term-length",
+  "4",
+  "--jobs",
+  "0",
+  "--include-all",
+  "--out",
+  "reports/english_screening_all_codes/surface_all_codes.csv",
+  "--summary-out",
+  "reports/english_screening_all_codes/surface_all_codes_summary.csv",
+  "--manifest-out",
+  "reports/english_screening_all_codes/surface_all_codes.manifest.json",
+]
+inputs = [
+  "terms/english_search_terms.csv",
+  "configs/example_ebible_engkjv.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+  "els/surface.py",
+]
+outputs = [
+  "reports/english_screening_all_codes/surface_all_codes.csv",
+  "reports/english_screening_all_codes/surface_all_codes_summary.csv",
+  "reports/english_screening_all_codes/surface_all_codes.manifest.json",
+]
+
+[[steps]]
+id = "summary"
+description = "Summarize the broad English relaxed all-codes collection."
+argv = [
+  "-m",
+  "scripts.summarize_surface_all_codes",
+  "--hits",
+  "reports/english_screening_all_codes/surface_all_codes.csv",
+  "--summary",
+  "reports/english_screening_all_codes/surface_all_codes_summary.csv",
+  "--title",
+  "English KJV Screening All-Codes Collection",
+  "--markdown-out",
+  "docs/ENGLISH_SCREENING_ALL_CODES_COLLECTION.md",
+  "--manifest-out",
+  "reports/english_screening_all_codes/summary.manifest.json",
+]
+inputs = [
+  "scripts/summarize_surface_all_codes.py",
+  "reports/english_screening_all_codes/surface_all_codes.csv",
+  "reports/english_screening_all_codes/surface_all_codes_summary.csv",
+]
+outputs = [
+  "docs/ENGLISH_SCREENING_ALL_CODES_COLLECTION.md",
+  "reports/english_screening_all_codes/summary.manifest.json",
+]
+
+[[steps]]
+id = "triage"
+description = "Build a compact ranked triage queue from broad English relaxed all-codes rows."
+argv = [
+  "-m",
+  "scripts.triage_surface_all_codes",
+  "--hits",
+  "reports/english_screening_all_codes/surface_all_codes.csv",
+  "--summary",
+  "reports/english_screening_all_codes/surface_all_codes_summary.csv",
+  "--title",
+  "English KJV Screening All-Codes Triage",
+  "--queue-out",
+  "reports/english_screening_all_codes/triage_queue.csv",
+  "--markdown-out",
+  "docs/ENGLISH_SCREENING_ALL_CODES_TRIAGE.md",
+  "--manifest-out",
+  "reports/english_screening_all_codes/triage.manifest.json",
+]
+inputs = [
+  "scripts/triage_surface_all_codes.py",
+  "reports/english_screening_all_codes/surface_all_codes.csv",
+  "reports/english_screening_all_codes/surface_all_codes_summary.csv",
+]
+outputs = [
+  "reports/english_screening_all_codes/triage_queue.csv",
+  "docs/ENGLISH_SCREENING_ALL_CODES_TRIAGE.md",
+  "reports/english_screening_all_codes/triage.manifest.json",
+]

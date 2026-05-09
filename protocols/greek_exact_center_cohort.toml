@@ -1,0 +1,246 @@
+name = "greek_exact_center_cohort"
+description = "Locked Greek theological exact-center cross-text extension cohort."
+manifest_out = "reports/greek_exact_center_cohort/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "surface_context"
+description = "Find Greek NT ELS hits whose center/span surface text discusses locked cohort terms."
+argv = [
+  "-m", "els", "surface-context",
+  "--terms", "terms/greek_exact_center_cohort_terms.csv",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--min-skip", "2",
+  "--max-skip", "50",
+  "--direction", "both",
+  "--min-term-length", "4",
+  "--jobs", "0",
+  "--out", "reports/greek_exact_center_cohort/surface_context_hits.csv",
+  "--summary-out", "reports/greek_exact_center_cohort/surface_context_summary.csv",
+  "--manifest-out", "reports/greek_exact_center_cohort/surface_context.manifest.json",
+]
+inputs = [
+  "terms/greek_exact_center_cohort_terms.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+  "els/surface.py",
+]
+outputs = [
+  "reports/greek_exact_center_cohort/surface_context_hits.csv",
+  "reports/greek_exact_center_cohort/surface_context_summary.csv",
+  "reports/greek_exact_center_cohort/surface_context.manifest.json",
+]
+
+[[steps]]
+id = "extensions_tr_nt"
+description = "Check same-skip phrase extensions for TR NT cohort surface-context hits."
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_ebible_grctr.toml",
+  "--hits", "reports/greek_exact_center_cohort/surface_context_hits.csv",
+  "--corpus-label", "TR_NT",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/greek_exact_center_cohort/extensions_tr_nt.csv",
+  "--manifest-out", "reports/greek_exact_center_cohort/extensions_tr_nt.manifest.json",
+]
+inputs = [
+  "reports/greek_exact_center_cohort/surface_context_hits.csv",
+  "configs/example_ebible_grctr.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/greek_exact_center_cohort/extensions_tr_nt.csv",
+  "reports/greek_exact_center_cohort/extensions_tr_nt.manifest.json",
+]
+
+[[steps]]
+id = "extensions_sblgnt"
+description = "Check same-skip phrase extensions for SBLGNT cohort surface-context hits."
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_sblgnt.toml",
+  "--hits", "reports/greek_exact_center_cohort/surface_context_hits.csv",
+  "--corpus-label", "SBLGNT",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/greek_exact_center_cohort/extensions_sblgnt.csv",
+  "--manifest-out", "reports/greek_exact_center_cohort/extensions_sblgnt.manifest.json",
+]
+inputs = [
+  "reports/greek_exact_center_cohort/surface_context_hits.csv",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/greek_exact_center_cohort/extensions_sblgnt.csv",
+  "reports/greek_exact_center_cohort/extensions_sblgnt.manifest.json",
+]
+
+[[steps]]
+id = "extension_summary_tr_nt"
+description = "Summarize strongest TR NT phrase extension rows for the locked cohort."
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/greek_exact_center_cohort/extensions_tr_nt.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "4",
+  "--match-kind-prefix", "phrase_",
+  "--top", "1000",
+  "--out", "reports/greek_exact_center_cohort/extensions_tr_nt_summary.csv",
+  "--top-out", "reports/greek_exact_center_cohort/extensions_tr_nt_top.csv",
+  "--manifest-out", "reports/greek_exact_center_cohort/extensions_tr_nt_summary.manifest.json",
+]
+inputs = [
+  "reports/greek_exact_center_cohort/extensions_tr_nt.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/greek_exact_center_cohort/extensions_tr_nt_summary.csv",
+  "reports/greek_exact_center_cohort/extensions_tr_nt_top.csv",
+  "reports/greek_exact_center_cohort/extensions_tr_nt_summary.manifest.json",
+]
+
+[[steps]]
+id = "extension_summary_sblgnt"
+description = "Summarize strongest SBLGNT phrase extension rows for the locked cohort."
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/greek_exact_center_cohort/extensions_sblgnt.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "4",
+  "--match-kind-prefix", "phrase_",
+  "--top", "1000",
+  "--out", "reports/greek_exact_center_cohort/extensions_sblgnt_summary.csv",
+  "--top-out", "reports/greek_exact_center_cohort/extensions_sblgnt_top.csv",
+  "--manifest-out", "reports/greek_exact_center_cohort/extensions_sblgnt_summary.manifest.json",
+]
+inputs = [
+  "reports/greek_exact_center_cohort/extensions_sblgnt.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/greek_exact_center_cohort/extensions_sblgnt_summary.csv",
+  "reports/greek_exact_center_cohort/extensions_sblgnt_top.csv",
+  "reports/greek_exact_center_cohort/extensions_sblgnt_summary.manifest.json",
+]
+
+[[steps]]
+id = "pattern_presence"
+description = "Summarize exact extension-key presence by Greek NT source."
+argv = [
+  "-m", "scripts.analyze_extension_presence",
+  "--top-file", "reports/greek_exact_center_cohort/extensions_tr_nt_top.csv",
+  "--top-file", "reports/greek_exact_center_cohort/extensions_sblgnt_top.csv",
+  "--surface-context-hits", "reports/greek_exact_center_cohort/surface_context_hits.csv",
+  "--require-center-exact",
+  "--dedupe-rows",
+  "--corpus", "TR_NT",
+  "--corpus", "SBLGNT",
+  "--title", "Greek Exact-Center Cohort Pattern Presence",
+  "--description", "Exact extension-key presence by Greek NT source for locked exact-center top rows.",
+  "--summary-out", "reports/greek_exact_center_cohort/pattern_presence.csv",
+  "--markdown-out", "reports/greek_exact_center_cohort/pattern_presence.md",
+  "--manifest-out", "reports/greek_exact_center_cohort/pattern_presence.manifest.json",
+]
+inputs = [
+  "scripts/analyze_extension_presence.py",
+  "reports/greek_exact_center_cohort/surface_context_hits.csv",
+  "reports/greek_exact_center_cohort/extensions_tr_nt_top.csv",
+  "reports/greek_exact_center_cohort/extensions_sblgnt_top.csv",
+]
+outputs = [
+  "reports/greek_exact_center_cohort/pattern_presence.csv",
+  "reports/greek_exact_center_cohort/pattern_presence.md",
+  "reports/greek_exact_center_cohort/pattern_presence.manifest.json",
+]
+
+[[steps]]
+id = "paired_controls"
+description = "Run 1000/1000 controls for exact-center cross-text cohort rows."
+argv = [
+  "-m", "scripts.analyze_extension_paired_controls",
+  "--top-file", "reports/greek_exact_center_cohort/extensions_tr_nt_top.csv",
+  "--top-file", "reports/greek_exact_center_cohort/extensions_sblgnt_top.csv",
+  "--surface-context-hits", "reports/greek_exact_center_cohort/surface_context_hits.csv",
+  "--require-center-exact",
+  "--require-cross-corpus-overlap",
+  "--dedupe-targets",
+  "--term-control-samples", "1000",
+  "--random-control-samples", "1000",
+  "--summary-out", "reports/greek_exact_center_cohort/paired_controls_summary.csv",
+  "--examples-out", "reports/greek_exact_center_cohort/paired_controls_examples.csv",
+  "--markdown-out", "reports/greek_exact_center_cohort/paired_controls.md",
+  "--manifest-out", "reports/greek_exact_center_cohort/paired_controls.manifest.json",
+]
+inputs = [
+  "scripts/analyze_extension_paired_controls.py",
+  "reports/greek_exact_center_cohort/surface_context_hits.csv",
+  "reports/greek_exact_center_cohort/extensions_tr_nt_top.csv",
+  "reports/greek_exact_center_cohort/extensions_sblgnt_top.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/greek_exact_center_cohort/paired_controls_summary.csv",
+  "reports/greek_exact_center_cohort/paired_controls_examples.csv",
+  "reports/greek_exact_center_cohort/paired_controls.md",
+  "reports/greek_exact_center_cohort/paired_controls.manifest.json",
+]
+
+[[steps]]
+id = "context_review"
+description = "Build context and letter-path review for exact-center cross-text cohort rows."
+argv = [
+  "-m", "scripts.analyze_extension_context_review",
+  "--top-file", "reports/greek_exact_center_cohort/extensions_tr_nt_top.csv",
+  "--top-file", "reports/greek_exact_center_cohort/extensions_sblgnt_top.csv",
+  "--controls", "reports/greek_exact_center_cohort/paired_controls_summary.csv",
+  "--surface-context-hits", "reports/greek_exact_center_cohort/surface_context_hits.csv",
+  "--require-center-exact",
+  "--dedupe-targets",
+  "--title", "Greek Exact-Center Cohort Review",
+  "--description", "Manual context and letter-path review for locked Greek theological exact-center cross-text extension rows.",
+  "--summary-out", "reports/greek_exact_center_cohort/context_review_summary.csv",
+  "--markdown-out", "reports/greek_exact_center_cohort/context_review.md",
+  "--letter-paths-out", "reports/greek_exact_center_cohort/letter_paths.md",
+  "--manifest-out", "reports/greek_exact_center_cohort/context_review.manifest.json",
+]
+inputs = [
+  "scripts/analyze_extension_context_review.py",
+  "reports/greek_exact_center_cohort/surface_context_hits.csv",
+  "reports/greek_exact_center_cohort/extensions_tr_nt_top.csv",
+  "reports/greek_exact_center_cohort/extensions_sblgnt_top.csv",
+  "reports/greek_exact_center_cohort/paired_controls_summary.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/normalization.py",
+]
+outputs = [
+  "reports/greek_exact_center_cohort/context_review_summary.csv",
+  "reports/greek_exact_center_cohort/context_review.md",
+  "reports/greek_exact_center_cohort/letter_paths.md",
+  "reports/greek_exact_center_cohort/context_review.manifest.json",
+]

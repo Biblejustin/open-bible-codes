@@ -1,0 +1,16 @@
+term_id,concept,category,language,term,notes
+kjva_bridge_nato,NATO,kjva_bridge_confirmatory,english,NATO,selected from KJVA bridge 1000-sample term-level shuffled controls with BH q_ge <= 0.05; post-screen confirmatory follow-up
+kjva_bridge_seba,Seba,kjva_bridge_confirmatory,english,Seba,selected from KJVA bridge 1000-sample term-level shuffled controls with BH q_ge <= 0.05; post-screen confirmatory follow-up
+kjva_bridge_sign,Sign,kjva_bridge_confirmatory,english,Sign,selected from KJVA bridge 1000-sample term-level shuffled controls with BH q_ge <= 0.05; post-screen confirmatory follow-up
+kjva_bridge_eber,Eber,kjva_bridge_confirmatory,english,Eber,selected from KJVA bridge 1000-sample term-level shuffled controls with BH q_ge <= 0.05; post-screen confirmatory follow-up
+kjva_bridge_satan,Satan,kjva_bridge_confirmatory,english,Satan,selected from KJVA bridge 1000-sample term-level shuffled controls with BH q_ge <= 0.05; post-screen confirmatory follow-up
+kjva_bridge_moab,Moab,kjva_bridge_confirmatory,english,Moab,selected from KJVA bridge 1000-sample term-level shuffled controls with BH q_ge <= 0.05; post-screen confirmatory follow-up
+kjva_bridge_sidon,Sidon,kjva_bridge_confirmatory,english,Sidon,selected from KJVA bridge 1000-sample term-level shuffled controls with BH q_ge <= 0.05; post-screen confirmatory follow-up
+kjva_bridge_sivan,Sivan,kjva_bridge_confirmatory,english,Sivan,selected from KJVA bridge 1000-sample term-level shuffled controls with BH q_ge <= 0.05; post-screen confirmatory follow-up
+kjva_bridge_gallus,Gallus,kjva_bridge_confirmatory,english,Gallus,selected from KJVA bridge 1000-sample term-level shuffled controls with BH q_ge <= 0.05; post-screen confirmatory follow-up
+kjva_bridge_otho,Otho,kjva_bridge_confirmatory,english,Otho,selected from KJVA bridge 1000-sample term-level shuffled controls with BH q_ge <= 0.05; post-screen confirmatory follow-up
+kjva_bridge_seal,Seal,kjva_bridge_confirmatory,english,Seal,selected from KJVA bridge 1000-sample term-level shuffled controls with BH q_ge <= 0.05; post-screen confirmatory follow-up
+kjva_bridge_house,House,kjva_bridge_confirmatory,english,House,selected from KJVA bridge 1000-sample term-level shuffled controls with BH q_ge <= 0.05; post-screen confirmatory follow-up
+kjva_bridge_tomb,Tomb,kjva_bridge_confirmatory,english,Tomb,selected from KJVA bridge 1000-sample term-level shuffled controls with BH q_ge <= 0.05; post-screen confirmatory follow-up
+kjva_bridge_noah,Noah,kjva_bridge_confirmatory,english,Noah,selected from KJVA bridge 1000-sample term-level shuffled controls with BH q_ge <= 0.05; post-screen confirmatory follow-up
+kjva_bridge_abib,Abib,kjva_bridge_confirmatory,english,Abib,selected from KJVA bridge 1000-sample term-level shuffled controls with BH q_ge <= 0.05; post-screen confirmatory follow-up

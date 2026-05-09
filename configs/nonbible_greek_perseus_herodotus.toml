@@ -1,0 +1,9 @@
+name = "Non-Bible Greek Control: Perseus Herodotus Histories"
+language = "greek"
+
+[[sources]]
+name = "Perseus Herodotus"
+format = "text"
+path = "../data/processed/nonbible_controls/greek_perseus_herodotus.txt"
+ref = "Perseus Herodotus"
+book = "Perseus Herodotus"

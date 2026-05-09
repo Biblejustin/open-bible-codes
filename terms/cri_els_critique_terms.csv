@@ -1,0 +1,19 @@
+term_id,concept,category,language,term,notes
+cri_paul_crouch_h,Paul Crouch,cri_public_advocacy,hebrew,פול קראוץ,CRI article public ELS advocacy context
+cri_grant_jeffrey_h,Grant Jeffrey,cri_public_advocacy,hebrew,גרנט גפרי,CRI article public ELS advocacy context
+cri_hal_lindsey_h,Hal Lindsey,cri_public_advocacy,hebrew,הל לינדזי,CRI article public ELS advocacy context
+cri_aish_hatorah_h,Aish HaTorah,cri_public_advocacy,hebrew,אש התורה,CRI article Discovery Seminar context
+cri_rabin_h,Rabin,cri_ambiguity_probe,hebrew,רבין,CRI article Rabin assassination ambiguity example
+cri_robin_h,Robin,cri_ambiguity_probe,hebrew,רבין,CRI article says Rabin/Robin can collapse in nonvoweled Hebrew
+cri_robino_h,Robino,cri_ambiguity_probe,hebrew,רבינו,CRI article ambiguity example; spelling provisional
+cri_bang_bang_h,Bang Bang,cri_ambiguity_probe,hebrew,בנג בנג,CRI article Rabin bang bang ambiguity example; transliteration provisional
+cri_hitler_h,Hitler,cri_public_claims,hebrew,היטלר,CRI article Hitler/Holocaust claim family
+cri_adolf_hitler_h,Adolf Hitler,cri_public_claims,hebrew,אדולף היטלר,CRI article Hitler/Holocaust claim family
+cri_holocaust_h,Holocaust,cri_public_claims,hebrew,שואה,CRI article Holocaust claim family
+cri_aids_h,AIDS,cri_public_claims,hebrew,איידס,CRI article AIDS claim family
+cri_allah_h,Allah,cri_religion_apologetics,hebrew,אללה,CRI article Muslim numerics/ELS apologetic context
+cri_muhammad_h,Muhammad,cri_religion_apologetics,hebrew,מוחמד,CRI article Muslim numerics/ELS apologetic context
+cri_false_messiah_h,False Messiah,cri_religion_apologetics,hebrew,משיח שקר,CRI article Jesus false Messiah counterclaim context
+cri_signature_of_god_h,Signature Of God,cri_public_advocacy,hebrew,חתימת אלהים,Grant Jeffrey theme cited by CRI
+cri_signature_author_h,Signature Of Divine Author,cri_public_advocacy,hebrew,חתימת המחבר האלהי,Hal Lindsey theme cited by CRI
+cri_cri_yes_e,CRI Yes,cri_ambiguity_probe,english,CRI yes,CRI article toy example in English text

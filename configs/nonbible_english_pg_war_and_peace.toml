@@ -1,0 +1,9 @@
+name = "Non-Bible English Control: Project Gutenberg War and Peace"
+language = "english"
+
+[[sources]]
+name = "Project Gutenberg War and Peace"
+format = "text"
+path = "../data/processed/nonbible_controls/english_pg_war_and_peace.txt"
+ref = "PG War and Peace"
+book = "PG War and Peace"

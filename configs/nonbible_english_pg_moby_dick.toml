@@ -1,0 +1,9 @@
+name = "Non-Bible English Control: Project Gutenberg Moby Dick"
+language = "english"
+
+[[sources]]
+name = "Project Gutenberg Moby Dick"
+format = "text"
+path = "../data/processed/nonbible_controls/english_pg_moby_dick.txt"
+ref = "PG Moby Dick"
+book = "PG Moby Dick"

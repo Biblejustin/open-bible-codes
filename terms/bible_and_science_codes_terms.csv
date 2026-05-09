@@ -1,0 +1,37 @@
+term_id,concept,category,language,term,notes
+bns_koran_e,Koran,bns_non_bible_controls,english,Koran,non-Bible control text named by source
+bns_moby_dick_e,Moby Dick,bns_non_bible_controls,english,Moby Dick,non-Bible control text named by source
+bns_no_god_e,There Is No God,bns_negative_phrase_controls,english,there is no God,negative phrase control named by source
+bns_god_dead_e,God Is Dead,bns_negative_phrase_controls,english,God is dead,negative phrase control named by source
+bns_rabin_h,Rabin,bns_drosnin_style_examples,hebrew,רבין,Drosnin-style assassination example
+bns_sadat_h,Sadat,bns_drosnin_style_examples,hebrew,סאדאת,Drosnin-style assassination example
+bns_kennedy_h,Kennedy,bns_drosnin_style_examples,hebrew,קנדי,Drosnin-style assassination example
+bns_textus_receptus_e,Textus Receptus,bns_source_variation,english,Textus Receptus,source variation guardrail
+bns_jacob_ben_hayyim_e,Jacob Ben Hayyim,bns_source_variation,english,Jacob Ben Hayyim,source variation guardrail
+bns_aleppo_codex_e,Aleppo Codex,bns_source_variation,english,Aleppo Codex,source variation guardrail
+bns_leningrad_codex_e,Leningrad Codex,bns_source_variation,english,Leningrad Codex,source variation guardrail
+bns_cairo_pentateuch_e,Cairo Pentateuch,bns_source_variation,english,Cairo Pentateuch,source variation guardrail
+bns_damascus_pentateuch_e,Damascus Pentateuch,bns_source_variation,english,Damascus Pentateuch,source variation guardrail
+bns_dead_sea_scrolls_e,Dead Sea Scrolls,bns_source_variation,english,Dead Sea Scrolls,source variation guardrail
+bns_4q_samuel_e,4Q Samuel,bns_source_variation,english,4Q Samuel,source variation guardrail
+bns_psalm_119_e,Psalm 119,bns_acrostics,english,Psalm 119,alphabetic acrostic example
+bns_psalm_25_e,Psalm 25,bns_acrostics,english,Psalm 25,alphabetic acrostic example
+bns_psalm_34_e,Psalm 34,bns_acrostics,english,Psalm 34,alphabetic acrostic example
+bns_psalm_145_e,Psalm 145,bns_acrostics,english,Psalm 145,alphabetic acrostic example
+bns_psalm_37_e,Psalm 37,bns_acrostics,english,Psalm 37,alphabetic acrostic example
+bns_psalm_111_e,Psalm 111,bns_acrostics,english,Psalm 111,alphabetic acrostic example
+bns_psalm_112_e,Psalm 112,bns_acrostics,english,Psalm 112,alphabetic acrostic example
+bns_psalms_9_10_e,Psalms 9 And 10,bns_acrostics,english,Psalms 9 and 10,possible linked acrostic example
+bns_lamentations_e,Lamentations,bns_acrostics,english,Lamentations,alphabetic acrostic book example
+bns_esther_yhwh_h,YHWH Esther Acrostic,bns_acrostics,hebrew,יהוה,Esther acrostic example; not ELS
+bns_sheshach_h,Sheshach,bns_cryptograms,hebrew,ששך,Atbash cryptogram in Jeremiah
+bns_babylon_h,Babylon,bns_cryptograms,hebrew,בבל,decoded Sheshach target
+bns_leb_kamai_h,Leb Kamai,bns_cryptograms,hebrew,לב קמי,Atbash cryptogram in Jeremiah
+bns_chaldea_h,Chaldea,bns_cryptograms,hebrew,כשדים,decoded Leb Kamai target
+bns_nero_caesar_666_h,Nero Caesar 666,bns_gematria,hebrew,נרון קסר,Hebrew transliteration yielding 666 in source discussion
+bns_nero_caesar_616_h,Nero Caesar 616,bns_gematria,hebrew,נרו קסר,Latin-form transliteration connected to 616 variant
+bns_beast_h,Beast,bns_gematria,hebrew,חיה,beast gematria discussion
+bns_beast_g,Beast,bns_gematria,greek,θηριον,beast gematria discussion
+bns_eliezer_h,Eliezer,bns_gematria,hebrew,אליעזר,Genesis 14 318 gematria tradition
+bns_jesus_g,Jesus,bns_gematria,greek,ιησους,Greek Jesus 888 gematria discussion
+bns_jesus_e,Jesus,bns_gematria,english,Jesus,English label for Greek Jesus gematria discussion

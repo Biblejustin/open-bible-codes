@@ -1,0 +1,157 @@
+term_id,concept,category,language,term,notes
+trump_h,Trump,modern_names,hebrew,טראמפ,common Israeli Hebrew transliteration
+donald_h,Donald,modern_names,hebrew,דונלד,
+donald_trump_h,Donald Trump,modern_names,hebrew,דונלדטראמפ,space removed by normalization
+vance_h,Vance,modern_names,hebrew,ואנס,Hebrew press spelling; variant ווענס also exists
+vance_alt_h,Vance alt,modern_names,hebrew,ווענס,alternate spelling to avoid Yiddish homograph
+jd_h,JD,modern_names,hebrew,גיידי,phonetic initials spelling
+netanyahu_h,Netanyahu,modern_names,hebrew,נתניהו,biblical Hebrew surname form
+benjamin_h,Benjamin,modern_names,hebrew,בנימין,
+bibi_h,Bibi,modern_names,hebrew,ביבי,
+biden_h,Biden,modern_names,hebrew,ביידן,
+harris_h,Harris,modern_names,hebrew,האריס,
+obama_h,Obama,modern_names,hebrew,אובמה,
+putin_h,Putin,modern_names,hebrew,פוטין,
+zelensky_h,Zelensky,modern_names,hebrew,זלנסקי,
+cowboy_h,Cowboy,local_terms,hebrew,קאובוי,pastor business term transliteration
+catering_h,Catering,local_terms,hebrew,קייטרינג,pastor business term transliteration
+cowboy_catering_h,Cowboy Catering,local_terms,hebrew,קאובוי קייטרינג,pastor business phrase
+simsberry_h,Simsberry,local_terms,hebrew,סימסברי,church-location term transliteration
+simscorner_h,Simscorner,local_terms,hebrew,סימסקורנר,church-location term transliteration
+ukraine_h,Ukraine,modern_places,hebrew,אוקראינה,
+america_h,America,modern_places,hebrew,אמריקה,
+united_states_h,United States,modern_places,hebrew,ארצות הברית,
+united_states_america_h,United States Of America,modern_places,hebrew,ארצות הברית של אמריקה,
+usa_abbrev_h,USA,modern_places,hebrew,ארה״ב,Hebrew acronym; punctuation removed
+united_nations_h,United Nations,modern_places,hebrew,האומות המאוחדות,
+united_nations_acronym_h,United Nations,modern_places,hebrew,או״ם,Hebrew acronym; punctuation removed
+europe_h,Europe,modern_places,hebrew,אירופה,
+european_union_h,European Union,modern_places,hebrew,האיחוד האירופי,
+france_h,France,modern_places,hebrew,צרפת,
+germany_h,Germany,modern_places,hebrew,גרמניה,
+turkey_h,Turkey,modern_places,hebrew,טורקיה,modern Hebrew spelling
+turkey_alt_h,Turkey,modern_places,hebrew,תורכיה,older Hebrew spelling
+russia_h,Russia,modern_places,hebrew,רוסיה,
+moscow_h,Moscow,modern_places,hebrew,מוסקבה,
+nato_h,NATO,modern_places,hebrew,נאטו,transliterated acronym
+washington_h,Washington,modern_places,hebrew,וושינגטון,
+confederacy_h,Confederacy,modern_places,hebrew,קונפדרציה,modern Hebrew form
+alliance_h,Alliance,modern_places,hebrew,ברית,broad alliance/covenant term
+coalition_h,Coalition,modern_places,hebrew,קואליציה,modern Hebrew form
+syria_h,Syria,modern_places,hebrew,סוריה,
+lebanon_h,Lebanon,modern_places,hebrew,לבנון,collides with biblical Lebanon
+jordan_country_h,Jordan,modern_places,hebrew,ירדן,collides with biblical river
+iraq_h,Iraq,modern_places,hebrew,עיראק,modern Hebrew spelling
+yemen_h,Yemen,modern_places,hebrew,תימן,biblical Teman link
+saudi_arabia_h,Saudi Arabia,modern_places,hebrew,ערב הסעודית,modern phrase
+palestine_h,Palestine,modern_places,hebrew,פלסטין,modern political entity
+egypt_modern_h,Egypt Modern,modern_places,hebrew,מצרים,collides with biblical Egypt
+china_h,China,modern_places,hebrew,סין,modern Hebrew name
+korea_h,Korea,modern_places,hebrew,קוריאה,
+japan_h,Japan,modern_places,hebrew,יפן,
+india_h,India,modern_places,hebrew,הודו,biblical attestation in Esther
+iran_h,Iran,modern_places,hebrew,איראן,modern Hebrew spelling
+persia_h,Persia,modern_places,hebrew,פרס,biblical/historical name
+gaza_h,Gaza,modern_places,hebrew,עזה,biblical place name too
+hamas_h,Hamas,modern_names,hebrew,חמאס,modern acronym transliteration
+isis_h,ISIS,modern_names,hebrew,דאעש,Arabic acronym in Hebrew
+covid_h,COVID,modern_events,hebrew,קוביד,transliterated
+pandemic_h,Pandemic,modern_events,hebrew,מגפה,collides with biblical plague
+vaccine_h,Vaccine,modern_events,hebrew,חיסון,
+oct_7_text_h,October 7,modern_events,hebrew,שבעה באוקטובר,2023 attack date as Hebrew text
+pope_h,Pope,modern_names,hebrew,אפיפיור,
+vatican_h,Vatican,modern_places,hebrew,ותיקן,
+tel_aviv_h,Tel Aviv,modern_places,hebrew,תל אביב,
+haifa_h,Haifa,modern_places,hebrew,חיפה,
+knesset_h,Knesset,modern_places,hebrew,כנסת,
+mossad_h,Mossad,modern_names,hebrew,מוסד,collides with general institution
+likud_h,Likud,modern_names,hebrew,ליכוד,
+israel_h,Israel,modern_places,hebrew,ישראל,biblical people/place name too
+trump_g,Trump,modern_names,greek,τραμπ,Greek transliteration
+donald_g,Donald,modern_names,greek,ντοναλντ,
+vance_g,Vance,modern_names,greek,βανς,
+netanyahu_g,Netanyahu,modern_names,greek,νετανιαχου,
+benjamin_g,Benjamin,modern_names,greek,βενιαμιν,
+biden_g,Biden,modern_names,greek,μπαιντεν,
+harris_g,Harris,modern_names,greek,χαρις,ambiguous with Greek word grace if accents ignored
+obama_g,Obama,modern_names,greek,ομπαμα,
+putin_g,Putin,modern_names,greek,πουτιν,
+zelensky_g,Zelensky,modern_names,greek,ζελενσκι,
+cowboy_g,Cowboy,local_terms,greek,καουμποϊ,pastor business term transliteration
+catering_g,Catering,local_terms,greek,κετερινγκ,pastor business term transliteration
+cowboy_catering_g,Cowboy Catering,local_terms,greek,καουμποϊ κετερινγκ,pastor business phrase
+simsberry_g,Simsberry,local_terms,greek,σιμσμπερι,church-location term transliteration
+simscorner_g,Simscorner,local_terms,greek,σιμσκορνερ,church-location term transliteration
+ukraine_g,Ukraine,modern_places,greek,ουκρανια,
+america_g,America,modern_places,greek,αμερικη,
+united_states_g,United States,modern_places,greek,Ηνωμένες Πολιτείες,modern Greek phrase
+united_states_america_g,United States Of America,modern_places,greek,Ηνωμένες Πολιτείες Αμερικής,modern Greek phrase
+usa_abbrev_g,USA,modern_places,greek,ΗΠΑ,Greek acronym
+united_nations_g,United Nations,modern_places,greek,Ηνωμένα Έθνη,modern Greek phrase
+united_nations_acronym_g,United Nations,modern_places,greek,ΟΗΕ,Greek acronym
+europe_g,Europe,modern_places,greek,Ευρώπη,modern Greek form
+european_union_g,European Union,modern_places,greek,Ευρωπαϊκή Ένωση,modern Greek phrase
+france_g,France,modern_places,greek,Γαλλία,modern Greek form
+germany_g,Germany,modern_places,greek,Γερμανία,modern Greek form
+turkey_g,Turkey,modern_places,greek,Τουρκία,modern Greek form
+russia_g,Russia,modern_places,greek,Ρωσία,modern Greek form
+moscow_g,Moscow,modern_places,greek,Μόσχα,modern Greek form
+nato_g,NATO,modern_places,greek,ΝΑΤΟ,Greek transliterated acronym
+washington_g,Washington,modern_places,greek,Ουάσινγκτον,modern Greek form
+confederacy_g,Confederacy,modern_places,greek,Συνομοσπονδία,modern Greek form
+alliance_g,Alliance,modern_places,greek,Συμμαχία,broad alliance term
+coalition_g,Coalition,modern_places,greek,Συνασπισμός,modern Greek form
+syria_g,Syria,modern_places,greek,συρια,
+lebanon_g,Lebanon,modern_places,greek,λιβανος,collides with frankincense in LXX
+palestine_g,Palestine,modern_places,greek,παλαιστινη,
+china_g,China,modern_places,greek,κινα,
+hezbollah_g,Hezbollah,modern_names,greek,χεζμπολα,
+pope_g,Pope,modern_names,greek,παπας,
+vatican_g,Vatican,modern_places,greek,βατικανο,
+iran_g,Iran,modern_places,greek,ιραν,modern Greek spelling
+persia_g,Persia,modern_places,greek,περσια,historical name
+gaza_g,Gaza,modern_places,greek,γαζα,
+hamas_g,Hamas,modern_names,greek,χαμας,
+israel_g,Israel,modern_places,greek,ισραηλ,biblical people/place name too
+david_ben_gurion_h,David Ben-Gurion,israeli_prime_ministers,hebrew,דוד בן גוריון,Israeli Prime Minister screening term
+moshe_sharett_h,Moshe Sharett,israeli_prime_ministers,hebrew,משה שרת,Israeli Prime Minister screening term
+levi_eshkol_h,Levi Eshkol,israeli_prime_ministers,hebrew,לוי אשכול,Israeli Prime Minister screening term
+golda_meir_h,Golda Meir,israeli_prime_ministers,hebrew,גולדה מאיר,Israeli Prime Minister screening term
+yitzhak_rabin_pm_h,Yitzhak Rabin,israeli_prime_ministers,hebrew,יצחק רבין,Israeli Prime Minister screening term
+menachem_begin_h,Menachem Begin,israeli_prime_ministers,hebrew,מנחם בגין,Israeli Prime Minister screening term
+yitzhak_shamir_h,Yitzhak Shamir,israeli_prime_ministers,hebrew,יצחק שמיר,Israeli Prime Minister screening term
+shimon_peres_pm_h,Shimon Peres,israeli_prime_ministers,hebrew,שמעון פרס,Israeli Prime Minister screening term
+benjamin_netanyahu_pm_h,Benjamin Netanyahu,israeli_prime_ministers,hebrew,בנימין נתניהו,Israeli Prime Minister screening term
+ehud_barak_pm_h,Ehud Barak,israeli_prime_ministers,hebrew,אהוד ברק,Israeli Prime Minister screening term
+ariel_sharon_pm_h,Ariel Sharon,israeli_prime_ministers,hebrew,אריאל שרון,Israeli Prime Minister screening term
+ehud_olmert_pm_h,Ehud Olmert,israeli_prime_ministers,hebrew,אהוד אולמרט,Israeli Prime Minister screening term
+naftali_bennett_h,Naftali Bennett,israeli_prime_ministers,hebrew,נפתלי בנט,Israeli Prime Minister screening term
+yair_lapid_h,Yair Lapid,israeli_prime_ministers,hebrew,יאיר לפיד,Israeli Prime Minister screening term
+david_ben_gurion_g,David Ben-Gurion,israeli_prime_ministers,greek,νταβιντ μπεν γκουριον,Greek transliteration for Israeli Prime Minister screening term
+moshe_sharett_g,Moshe Sharett,israeli_prime_ministers,greek,μοσε σαρετ,Greek transliteration for Israeli Prime Minister screening term
+levi_eshkol_g,Levi Eshkol,israeli_prime_ministers,greek,λεβι εσκολ,Greek transliteration for Israeli Prime Minister screening term
+golda_meir_g,Golda Meir,israeli_prime_ministers,greek,γκολντα μειρ,Greek transliteration for Israeli Prime Minister screening term
+yitzhak_rabin_pm_g,Yitzhak Rabin,israeli_prime_ministers,greek,γιτζακ ραμπιν,Greek transliteration for Israeli Prime Minister screening term
+menachem_begin_g,Menachem Begin,israeli_prime_ministers,greek,μεναχεμ μπεγκιν,Greek transliteration for Israeli Prime Minister screening term
+yitzhak_shamir_g,Yitzhak Shamir,israeli_prime_ministers,greek,γιτζακ σαμιρ,Greek transliteration for Israeli Prime Minister screening term
+shimon_peres_pm_g,Shimon Peres,israeli_prime_ministers,greek,σιμον περες,Greek transliteration for Israeli Prime Minister screening term
+benjamin_netanyahu_pm_g,Benjamin Netanyahu,israeli_prime_ministers,greek,βενιαμιν νετανιαχου,Greek transliteration for Israeli Prime Minister screening term
+ehud_barak_pm_g,Ehud Barak,israeli_prime_ministers,greek,εχουντ μπαρακ,Greek transliteration for Israeli Prime Minister screening term
+ariel_sharon_pm_g,Ariel Sharon,israeli_prime_ministers,greek,αριελ σαρον,Greek transliteration for Israeli Prime Minister screening term
+ehud_olmert_pm_g,Ehud Olmert,israeli_prime_ministers,greek,εχουντ ολμερτ,Greek transliteration for Israeli Prime Minister screening term
+naftali_bennett_g,Naftali Bennett,israeli_prime_ministers,greek,ναφταλι μπενετ,Greek transliteration for Israeli Prime Minister screening term
+yair_lapid_g,Yair Lapid,israeli_prime_ministers,greek,γιαϊρ λαπιντ,Greek transliteration for Israeli Prime Minister screening term
+5784_jewish_h,Hebrew year 5784,dates,hebrew,תשפד,Jewish-year shorthand; 5000 omitted by convention
+5785_jewish_h,Hebrew year 5785,dates,hebrew,תשפה,Jewish-year shorthand; 5000 omitted by convention
+5786_jewish_h,Hebrew year 5786,dates,hebrew,תשפו,Jewish-year shorthand; 5000 omitted by convention
+5787_jewish_h,Hebrew year 5787,dates,hebrew,תשפז,Jewish-year shorthand; 5000 omitted by convention
+2024_compact_h,Gregorian 2024 compact,dates,hebrew,בכד,compact thousands notation; punctuation removed
+2025_compact_h,Gregorian 2025 compact,dates,hebrew,בכה,compact thousands notation; punctuation removed
+2026_compact_h,Gregorian 2026 compact,dates,hebrew,בכו,compact thousands notation; punctuation removed
+2027_compact_h,Gregorian 2027 compact,dates,hebrew,בכז,compact thousands notation; punctuation removed
+2024_additive_h,Gregorian 2024 additive,dates,hebrew,תתתתתכד,pure additive gematria value
+2025_additive_h,Gregorian 2025 additive,dates,hebrew,תתתתתכה,pure additive gematria value
+2026_additive_h,Gregorian 2026 additive,dates,hebrew,תתתתתכו,pure additive gematria value
+2027_additive_h,Gregorian 2027 additive,dates,hebrew,תתתתתכז,pure additive gematria value
+year_5784_jewish_h,Hebrew year 5784,dates,hebrew,התשפד,with full thousands prefix
+year_5786_jewish_h,Hebrew year 5786,dates,hebrew,התשפו,with full thousands prefix
