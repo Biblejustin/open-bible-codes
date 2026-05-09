@@ -7,7 +7,13 @@ from pathlib import Path
 from els.corpus import Corpus, VerseSpan
 from scripts.classify_centered_relevance import sha256_file
 from scripts.build_crd_comparison import build_crd_comparison
-from scripts.run_crd_density import MAX_CONTEXT_TEXT_CHARS, run_crd_density, span_text
+from scripts.run_crd_density import (
+    CLASSIFIED_HIT_FIELDNAMES,
+    DENSITY_FIELDNAMES,
+    MAX_CONTEXT_TEXT_CHARS,
+    run_crd_density,
+    span_text,
+)
 from tests.test_classify_centered_relevance import MockLLMClient
 
 
@@ -83,6 +89,53 @@ class CRDDensityRunnerTests(unittest.TestCase):
         text = span_text(corpus, hit)
 
         self.assertLessEqual(len(text), 421)
+
+    def test_resume_skips_completed_density_pairs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = build_synthetic_run(Path(tmp), "deterministic")
+            output_dir = root / "reports" / "crd"
+            write_csv(
+                output_dir / "density_matrix.csv",
+                DENSITY_FIELDNAMES,
+                [
+                    {
+                        "term_id": "term",
+                        "term": "ace",
+                        "concept": "Example",
+                        "category": "example",
+                        "language": "english",
+                        "corpus": "SYN",
+                        "corpus_class": "bible",
+                        "classifier_mode": "deterministic",
+                        "total_centered_hits": "1",
+                        "relevant_centered_hits": "1",
+                        "corpus_normalized_letters": "5",
+                        "density_per_million": "200000",
+                        "relevance_rate": "1",
+                    }
+                ],
+            )
+            write_csv(
+                output_dir / "classified_hits.csv",
+                CLASSIFIED_HIT_FIELDNAMES,
+                [
+                    {
+                        "hit_id": "existing",
+                        "term_id": "term",
+                        "corpus": "SYN",
+                        "classifier_mode": "deterministic",
+                        "is_relevant": "true",
+                    }
+                ],
+            )
+
+            run_crd_density(root / "protocol.toml", resume=True)
+            density_rows = read_csv(output_dir / "density_matrix.csv")
+            hit_rows = read_csv(output_dir / "classified_hits.csv")
+
+        self.assertEqual(len(density_rows), 1)
+        self.assertEqual(len(hit_rows), 1)
+        self.assertEqual(hit_rows[0]["hit_id"], "existing")
 
 
 def build_synthetic_run(root: Path, mode: str) -> Path:
@@ -214,6 +267,13 @@ def prereg_text() -> str:
 def read_csv(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8", newline="") as handle:
         return list(csv.DictReader(handle))
+
+
+def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, str]]) -> None:
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(rows)
 
 
 if __name__ == "__main__":

@@ -162,13 +162,21 @@ def run_crd_density(
     terms = read_terms(resolve_term_files(protocol))
     corpora = parse_corpus_list(protocol.get("corpus_list", []))
     classifiers = build_classifiers(protocol, mode, outputs, api_client=api_client)
+    completed_pairs = (
+        completed_density_pairs(outputs.density_matrix, set(classifiers))
+        if resume and not force_reset
+        else set()
+    )
 
-    density_rows: list[dict[str, Any]] = []
     corpus_letters: dict[str, int] = {}
     status = "completed"
     budget_error = ""
     try:
-        with open_rows_writer(outputs.classified_hits, CLASSIFIED_HIT_FIELDNAMES) as hit_writer:
+        append_outputs = bool(completed_pairs and resume and not force_reset)
+        with (
+            open_rows_writer(outputs.classified_hits, CLASSIFIED_HIT_FIELDNAMES, append=append_outputs) as hit_writer,
+            open_rows_writer(outputs.density_matrix, DENSITY_FIELDNAMES, append=append_outputs) as density_writer,
+        ):
             term_languages = {term.language for term in terms}
             for corpus_spec in corpora:
                 if corpus_spec.language and corpus_spec.language not in term_languages:
@@ -180,6 +188,8 @@ def run_crd_density(
                 if not active_terms:
                     continue
                 for term in active_terms:
+                    if (term.term_id, corpus_spec.label) in completed_pairs:
+                        continue
                     grouped_results = classify_term_hits(
                         corpus_spec,
                         corpus,
@@ -188,7 +198,7 @@ def run_crd_density(
                         protocol,
                     )
                     hit_writer.writerows(grouped_results["hit_rows"])
-                    density_rows.extend(
+                    density_writer.writerows(
                         density_rows_for_term(
                             term,
                             corpus_spec,
@@ -202,7 +212,6 @@ def run_crd_density(
         status = "partial_budget_exceeded"
         budget_error = str(exc)
 
-    write_rows(outputs.density_matrix, DENSITY_FIELDNAMES, density_rows)
     manifest = build_manifest(
         protocol_path,
         protocol,
@@ -359,6 +368,19 @@ def parse_corpus_list(raw: Any) -> list[CorpusSpec]:
                 )
             )
     return corpora
+
+
+def completed_density_pairs(path: Path, classifier_modes: set[str]) -> set[tuple[str, str]]:
+    if not path.exists() or not classifier_modes:
+        return set()
+    seen_modes: dict[tuple[str, str], set[str]] = defaultdict(set)
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            key = (row.get("term_id", ""), row.get("corpus", ""))
+            if not all(key):
+                continue
+            seen_modes[key].add(row.get("classifier_mode", ""))
+    return {key for key, modes in seen_modes.items() if classifier_modes <= modes}
 
 
 def build_classifiers(
@@ -683,11 +705,14 @@ class StreamingRowsWriter:
 
 
 @contextmanager
-def open_rows_writer(path: Path, fieldnames: list[str]) -> Any:
+def open_rows_writer(path: Path, fieldnames: list[str], *, append: bool = False) -> Any:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="") as handle:
+    mode = "a" if append and path.exists() else "w"
+    write_header = mode == "w" or path.stat().st_size == 0
+    with path.open(mode, encoding="utf-8", newline="") as handle:
         writer = StreamingRowsWriter(handle, fieldnames)
-        writer.writeheader()
+        if write_header:
+            writer.writeheader()
         yield writer
 
 
