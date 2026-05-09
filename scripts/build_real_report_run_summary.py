@@ -1026,6 +1026,7 @@ def write_summary(
             "- `docs/CONSOLIDATED_FINDINGS.md`",
             "- `docs/FINAL_REPORT_OUTLINE.md`",
             "- `docs/FINAL_REPORT_DRAFT.md`",
+            "- `docs/FINAL_REPORT.md`",
             "- `docs/APOCRYPHA_BRIDGE_STUDY.md`",
             "- `docs/APOCRYPHA_SOURCE_COVERAGE.md`",
             "- `docs/APOCRYPHA_BRIDGE_CANDIDATES.md`",

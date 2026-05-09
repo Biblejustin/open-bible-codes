@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 229
+Documents indexed: 230
 
 ## Controls
 
@@ -121,6 +121,7 @@ Documents indexed: 229
 | Doxa Follow-Up Report | `DOXA_FOLLOWUP_REPORT.md` |
 | Doxa Four-Source Claim Follow-Up Report | `DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md` |
 | Doxa Four-Source Confirmatory Follow-Up Report | `DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md` |
+| Open Bible Codes Final Report | `FINAL_REPORT.md` |
 | Gog/Magog Pair Prospective Report | `GOG_MAGOG_PAIR_PROSPECTIVE_REPORT.md` |
 | Greek Exact-Center Cohort Report | `GREEK_EXACT_CENTER_COHORT_REPORT.md` |
 | Greek Exact-Center Four-Source Report | `GREEK_EXACT_CENTER_FOUR_SOURCE_REPORT.md` |

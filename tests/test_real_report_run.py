@@ -38,6 +38,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/check_prospective_study_lanes.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/FINAL_REPORT_OUTLINE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/FINAL_REPORT_DRAFT.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn("docs/FINAL_REPORT.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/PROSPECTIVE_STUDY_NEXT_LOCK.md", steps_by_id["preflight"]["inputs"])
         self.assertIn(
             "docs/GOG_MAGOG_PAIR_PROSPECTIVE_REPORT.md",
@@ -99,6 +100,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/check_prospective_study_lanes.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/FINAL_REPORT_OUTLINE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/FINAL_REPORT_DRAFT.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/FINAL_REPORT.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/PROSPECTIVE_STUDY_NEXT_LOCK.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/GOG_MAGOG_PAIR_PROSPECTIVE_REPORT.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("protocols/gog_magog_pair_prospective.toml", preflight.DEFAULT_REQUIRED_PATHS)

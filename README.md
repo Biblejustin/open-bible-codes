@@ -457,6 +457,7 @@ Religions Wiki scriptural-codes critique/source audit:
 `docs/RELIGIONS_WIKI_SCRIPTURAL_CODES_AUDIT.md`.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
+Reader-facing final report: `docs/FINAL_REPORT.md`.
 Compact final-report highlight table: `docs/FINAL_REPORT_HIGHLIGHTS.md`.
 Completed Gog/Magog prospective pair-control report:
 `docs/GOG_MAGOG_PAIR_PROSPECTIVE_REPORT.md`. Result: target rows occurred in

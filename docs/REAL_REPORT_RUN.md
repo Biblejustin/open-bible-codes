@@ -92,6 +92,8 @@ This assembly run includes:
   `reports/INDEX.md`
 - reader-facing final report scaffold:
   `docs/FINAL_REPORT_OUTLINE.md`
+- reader-facing final report:
+  `docs/FINAL_REPORT.md`
 
 ## Preflight Rules
 
