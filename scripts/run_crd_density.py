@@ -8,6 +8,7 @@ import csv
 import hashlib
 import json
 import subprocess
+import sys
 import time
 import tomllib
 from collections import defaultdict
@@ -171,6 +172,9 @@ def run_crd_density(
     corpus_letters: dict[str, int] = {}
     status = "completed"
     budget_error = ""
+    progress_interval = float(protocol.get("progress_interval_seconds", 0) or 0)
+    progress = {"processed": 0, "skipped": 0, "hit_rows": 0}
+    next_progress_at = time.perf_counter() + progress_interval if progress_interval > 0 else 0
     try:
         append_outputs = bool(completed_pairs and resume and not force_reset)
         with (
@@ -189,6 +193,7 @@ def run_crd_density(
                     continue
                 for term in active_terms:
                     if (term.term_id, corpus_spec.label) in completed_pairs:
+                        progress["skipped"] += 1
                         continue
                     grouped_results = classify_term_hits(
                         corpus_spec,
@@ -198,6 +203,8 @@ def run_crd_density(
                         protocol,
                     )
                     hit_writer.writerows(grouped_results["hit_rows"])
+                    progress["processed"] += 1
+                    progress["hit_rows"] += len(grouped_results["hit_rows"])
                     density_writer.writerows(
                         density_rows_for_term(
                             term,
@@ -208,6 +215,9 @@ def run_crd_density(
                             grouped_results["agreements"],
                         )
                     )
+                    if progress_interval > 0 and time.perf_counter() >= next_progress_at:
+                        report_progress(corpus_spec.label, term.term_id, progress, started)
+                        next_progress_at = time.perf_counter() + progress_interval
     except CRDBudgetExceeded as exc:
         status = "partial_budget_exceeded"
         budget_error = str(exc)
@@ -381,6 +391,25 @@ def completed_density_pairs(path: Path, classifier_modes: set[str]) -> set[tuple
                 continue
             seen_modes[key].add(row.get("classifier_mode", ""))
     return {key for key, modes in seen_modes.items() if classifier_modes <= modes}
+
+
+def report_progress(
+    corpus_label: str,
+    term_id: str,
+    progress: dict[str, int],
+    started: float,
+) -> None:
+    elapsed = round(time.perf_counter() - started, 1)
+    print(
+        "crd progress: "
+        f"elapsed={elapsed}s "
+        f"processed={progress['processed']} "
+        f"skipped={progress['skipped']} "
+        f"hit_rows={progress['hit_rows']} "
+        f"current={corpus_label}/{term_id}",
+        file=sys.stderr,
+        flush=True,
+    )
 
 
 def build_classifiers(

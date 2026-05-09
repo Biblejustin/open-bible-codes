@@ -12,6 +12,11 @@ Centered-Relevance Density (CRD) measures how often centered ELS hits land on co
 
 The run is invalid unless the preregistration document, relevance dictionary, and prompt files match the hashes declared by the protocol. If any prompt or dictionary changes after density output has been seen, the study needs a new preregistration. `run_crd_density.py` stores the preregistration hash in the manifest and refuses to overwrite completed runs unless `--force-reset` is supplied.
 
+Long deterministic runs can be resumed. With `--resume`, completed `(term, corpus)`
+pairs already present in the density matrix are skipped and new rows are appended.
+Protocols may set `progress_interval_seconds` to print periodic stderr progress
+without changing report artifacts.
+
 ## LLM Cost
 
 LLM mode caches classifications under `reports/crd/llm_cache/`, keyed by prompt-template hash, model version, and normalized input hash. Re-runs against the same cache do not make new calls. Each protocol must declare `max_api_calls` and `max_estimated_cost_usd`; the runner aborts cleanly with partial outputs if either cap is reached.
