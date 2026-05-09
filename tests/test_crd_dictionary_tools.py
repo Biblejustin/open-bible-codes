@@ -4,6 +4,7 @@ from pathlib import Path
 
 from scripts.check_crd_relevance_dictionary import check_dictionary
 from scripts.classify_centered_relevance import CRDConfigurationError, sha256_file
+from scripts.apply_crd_relevance_review import main as apply_main
 from scripts.scaffold_crd_relevance_dictionary import main as scaffold_main
 
 
@@ -66,6 +67,59 @@ class CRDDictionaryToolTests(unittest.TestCase):
 
         self.assertEqual(report["entries"], 1)
         self.assertEqual(report["missing_entries"], 0)
+
+    def test_apply_review_queue_writes_reviewed_dictionary(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            queue = root / "queue.csv"
+            queue.write_text(
+                "review_rank,source_file,term_id,concept,category,language,term,notes,"
+                "surface_keywords_reviewed,concept_codes_reviewed,verse_refs_reviewed,"
+                "book_scope_reviewed,reviewer,review_notes\n"
+                "1,terms/demo.csv,gog_h,Gog,target_pair,hebrew,גוג,test,"
+                "גוג;מגוג,gog;magog,Ezek 38:2;Ezek 39:1,Ezek,Justin,reviewed\n",
+                encoding="utf-8",
+            )
+            out = root / "reviewed.toml"
+
+            exit_code = apply_main(
+                [
+                    "--queue",
+                    str(queue),
+                    "--out",
+                    str(out),
+                    "--locked-by",
+                    "Justin",
+                    "--reviewer",
+                    "Justin",
+                    "--require-reviewer",
+                ]
+            )
+            text = out.read_text(encoding="utf-8")
+
+        self.assertEqual(exit_code, 0)
+        self.assertIn('term_id = "gog_h"', text)
+        self.assertIn('surface_keywords = ["גוג", "מגוג"]', text)
+        self.assertIn('concept_codes = ["gog", "magog"]', text)
+        self.assertIn('verse_refs = ["Ezek 38:2", "Ezek 39:1"]', text)
+        self.assertIn('reviewer = "Justin"', text)
+
+    def test_apply_review_queue_requires_reviewer_when_requested(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            queue = root / "queue.csv"
+            queue.write_text(
+                "review_rank,source_file,term_id,concept,category,language,term,notes,"
+                "surface_keywords_reviewed,concept_codes_reviewed,verse_refs_reviewed,"
+                "book_scope_reviewed,reviewer,review_notes\n"
+                "1,terms/demo.csv,gog_h,Gog,target_pair,hebrew,גוג,test,גוג,gog,,, ,reviewed\n",
+                encoding="utf-8",
+            )
+            out = root / "reviewed.toml"
+
+            exit_code = apply_main(["--queue", str(queue), "--out", str(out), "--require-reviewer"])
+
+        self.assertEqual(exit_code, 1)
 
 
 def write_terms(root: Path) -> Path:

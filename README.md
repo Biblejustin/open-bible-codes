@@ -333,6 +333,8 @@ Centered-Relevance Density scaffold:
 
 ```bash
 make crd-review-scaffold
+make crd-review-apply
+make crd-review-check
 make crd-check
 shasum -a 256 terms/relevance_dictionary.toml \
   prompts/crd_classifier_v1/system.md \

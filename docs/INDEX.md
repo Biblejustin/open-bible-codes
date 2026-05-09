@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 233
+Documents indexed: 234
 
 ## Controls
 
@@ -161,6 +161,7 @@ Documents indexed: 233
 | Common Bible Codes / ELS Test | `COMMON_EDLS_TEST.md` |
 | Cosmic Codes Source Audit | `COSMIC_CODES_AUDIT.md` |
 | Centered-Relevance Density Framework | `CRD_FRAMEWORK.md` |
+| CRD Review Workflow | `CRD_REVIEW_WORKFLOW.md` |
 | Critical Omission Breaks | `CRITICAL_OMISSION_BREAKS.md` |
 | Critical Surface Variants | `CRITICAL_SURFACE_VARIANTS.md` |
 | CRI ELS Critique Audit | `CRI_ELS_CRITIQUE_AUDIT.md` |
