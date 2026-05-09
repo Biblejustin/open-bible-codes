@@ -174,6 +174,7 @@ Hebrew exact-hit MT-family version-presence screen:
 python3 -m scripts.run_protocol protocols/hebrew_hit_version_presence.toml --resume
 python3 -m scripts.run_protocol protocols/hebrew_modern_geopolitical_version_presence.toml --resume
 python3 -m scripts.run_protocol protocols/hebrew_modern_geopolitical_controlled_review.toml --resume
+python3 -m scripts.run_protocol protocols/hebrew_modern_geopolitical_prospective.toml --resume
 python3 -m scripts.run_protocol protocols/hebrew_screening_version_presence.toml --resume
 python3 -m scripts.run_protocol protocols/hebrew_screening_controlled_review.toml --resume
 ```
@@ -184,6 +185,9 @@ Broad all-Hebrew-row modern/geopolitical/local/date summary:
 Representative paired-control review for that broad modern/geopolitical run:
 `docs/HEBREW_MODERN_GEOPOLITICAL_CONTROLLED_REVIEW.md` and
 `docs/HEBREW_MODERN_GEOPOLITICAL_CONTROLLED_FINDINGS.md`.
+Locked prospective source-distribution follow-up:
+`docs/HEBREW_MODERN_GEOPOLITICAL_PROSPECTIVE_REPORT.md` and
+`docs/HEBREW_MODERN_GEOPOLITICAL_PROSPECTIVE_FINDINGS.md`.
 Broader Hebrew screening summary:
 `docs/HEBREW_SCREENING_VERSION_PRESENCE.md`. Broader Hebrew screening
 representative-control follow-up:

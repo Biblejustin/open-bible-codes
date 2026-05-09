@@ -69,6 +69,9 @@ This assembly run includes:
   `docs/HEBREW_MODERN_GEOPOLITICAL_VERSION_PRESENCE.md`
 - broad Hebrew modern/geopolitical representative-control review:
   `docs/HEBREW_MODERN_GEOPOLITICAL_CONTROLLED_REVIEW.md`
+- locked Hebrew modern/geopolitical prospective source-distribution report:
+  `docs/HEBREW_MODERN_GEOPOLITICAL_PROSPECTIVE_REPORT.md` and
+  `docs/HEBREW_MODERN_GEOPOLITICAL_PROSPECTIVE_FINDINGS.md`
 - broader Hebrew screening representative-control review:
   `docs/HEBREW_SCREENING_CONTROLLED_REVIEW.md`
 - relaxed all-codes follow-up:
