@@ -17,6 +17,14 @@ The input term set combines all committed term CSVs except `terms/crd_placeholde
 - classified hits: `reports/crd_self_surface/classified_hits.csv`
 - comparison report: `reports/crd_self_surface/CRD_SELF_SURFACE_REPORT.md`
 
+## Reproduce
+
+```bash
+make crd-self-surface-prepare
+make crd-self-surface-run
+make crd-self-surface-report
+```
+
 ## Run Size
 
 - density rows: 18,444

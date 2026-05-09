@@ -2,7 +2,7 @@ CRD_REVIEWER ?= gpt-5-assisted-draft
 CRD_LOCKED_BY ?= gpt-5-assisted-draft
 CRD_DRAFTED_WITH ?= gpt-5
 
-.PHONY: demo indexes test lint crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel
+.PHONY: demo indexes test lint crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-self-surface-prepare crd-self-surface-run crd-self-surface-report
 
 demo:
 	python3 -m els.demo
@@ -43,3 +43,12 @@ crd-llm:
 crd-parallel:
 	python3 -m scripts.run_crd_density protocols/centered_relevance_density.toml --classifier-mode parallel --resume
 	python3 -m scripts.build_crd_comparison
+
+crd-self-surface-prepare:
+	python3 -m scripts.prepare_crd_self_surface_run
+
+crd-self-surface-run:
+	python3 -m scripts.run_crd_density reports/crd_self_surface/protocol.toml --classifier-mode deterministic --resume
+
+crd-self-surface-report:
+	python3 -m scripts.build_crd_comparison --density-matrix reports/crd_self_surface/density_matrix.csv --classified-hits reports/crd_self_surface/classified_hits.csv --manifest reports/crd_self_surface/manifest.json --out-dir reports/crd_self_surface --markdown-out reports/crd_self_surface/CRD_SELF_SURFACE_REPORT.md

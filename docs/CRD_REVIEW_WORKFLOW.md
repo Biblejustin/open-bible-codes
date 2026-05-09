@@ -36,6 +36,16 @@ criteria and will fail locked review.
 The `crd-review-scaffold-self` target pre-fills `surface_keywords_reviewed`
 from the term's own surface spelling. It does not add broader related terms.
 
+For a broad self-surface screening run across all committed term CSVs, use:
+
+```bash
+make crd-self-surface-prepare
+make crd-self-surface-run
+make crd-self-surface-report
+```
+
+This writes ignored local artifacts under `reports/crd_self_surface/`.
+
 LLM-assisted drafting is allowed for lexical/context related-term proposals when
 the provenance names that assistance. The key rule is not "human-only"; the key
 rule is that the dictionary is locked before density output is interpreted.
