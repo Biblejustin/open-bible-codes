@@ -47,7 +47,6 @@ Protocols indexed: 78
 | apocrypha_bridge_shuffled_controls_50 | Run 50-sample shuffled apocrypha/deuterocanon bridge controls for LXX and KJVA bridge c... | 2 | terms/english_search_terms.csv, terms/greek_nt_claim_terms.csv, terms/prophetic_terms.c... | reports/apocrypha_bridge_shuffled_controls_50, reports/kjv_apocrypha_bridge_shuffled_co... | `apocrypha_bridge_shuffled_controls_50.toml` |
 | apocrypha_bridge_study | Run the apocrypha/deuterocanon coverage audit, bounded bridge scan, surface-context rev... | 13 | terms/english_search_terms.csv, terms/greek_nt_claim_terms.csv, terms/prophetic_terms.c... | reports/apocrypha_bridge_candidates, reports/apocrypha_bridge_context, reports/apocryph... | `apocrypha_bridge_study.toml` |
 | byz_source_only_exact_center | Post-discovery 1000/1000 controls for BYZ_NT source-only exact-center extension row. | 2 |  | reports/byz_source_only_exact_center | `byz_source_only_exact_center.toml` |
-| centered_relevance_density | Locked Centered-Relevance Density scaffold over centered ELS hits and Bible/control cor... | 2 | terms/crd_placeholder_terms.csv | reports/crd | `centered_relevance_density.toml` |
 | extension_deep_controls | Slow 1000/1000 paired-control follow-up for the exact-center cross-text Greek NT extens... | 1 |  | reports | `extension_deep_controls.toml` |
 | greek_control_version_presence | Capped exact ELS hit-pattern presence for Greek null and frequency controls across Gree... | 1 | terms/frequency_anchors.csv, terms/null_controls.csv | reports/greek_control_version_presence | `greek_control_version_presence.toml` |
 | greek_exact_center_final_gate | Consolidate Greek exact-center version presence, controls, context, and synthetic basel... | 1 |  | reports/greek_exact_center_final_gate | `greek_exact_center_final_gate.toml` |
@@ -97,6 +96,7 @@ Protocols indexed: 78
 
 | Name | Description | Steps | Terms | Output Roots | Path |
 | --- | --- | ---: | --- | --- | --- |
+| centered_relevance_density | Locked deterministic Centered-Relevance Density run for the Gog/Magog prospective Hebre... | 2 | terms/gog_magog_pair_prospective_terms.csv | reports/crd | `centered_relevance_density.toml` |
 | gog_magog_pair_prospective | Locked prospective Hebrew Gog/Magog same-chapter same-signed-skip pair-control study ov... | 5 | terms/gog_magog_pair_prospective_terms.csv | reports/gog_magog_pair_prospective | `gog_magog_pair_prospective.toml` |
 | greek_expanded_prospective_exact_center | Prospective expanded Greek exact-center extension screen over new declared terms. | 10 | terms/greek_expanded_prospective_terms.csv | reports/greek_expanded_prospective_exact_center | `greek_expanded_prospective_exact_center.toml` |
 | greek_expanded_surface_queue | Post-screen exact-center surface queue from the expanded Greek prospective run. | 1 |  | reports/greek_expanded_surface_queue | `greek_expanded_surface_queue.toml` |

@@ -1,3 +1,7 @@
+CRD_REVIEWER ?= gpt-5-assisted-draft
+CRD_LOCKED_BY ?= gpt-5-assisted-draft
+CRD_DRAFTED_WITH ?= gpt-5
+
 .PHONY: demo indexes test lint crd-review-scaffold crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel
 
 demo:
@@ -14,16 +18,16 @@ lint:
 	python3 -m compileall -q els scripts tests
 
 crd-review-scaffold:
-	python3 -m scripts.scaffold_crd_relevance_dictionary --term-file terms/gog_magog_pair_prospective_terms.csv --out reports/crd/relevance_dictionary_draft.toml --queue-out reports/crd/relevance_review_queue.csv
+	python3 -m scripts.scaffold_crd_relevance_dictionary --term-file terms/gog_magog_pair_prospective_terms.csv --out reports/crd/relevance_dictionary_draft.toml --queue-out reports/crd/relevance_review_queue.csv --locked-by "$(CRD_LOCKED_BY)" --reviewer "$(CRD_REVIEWER)" --drafted-with "$(CRD_DRAFTED_WITH)"
 
 crd-review-apply:
-	python3 -m scripts.apply_crd_relevance_review --queue reports/crd/relevance_review_queue.csv --out reports/crd/relevance_dictionary_reviewed.toml
+	python3 -m scripts.apply_crd_relevance_review --queue reports/crd/relevance_review_queue.csv --out reports/crd/relevance_dictionary_reviewed.toml --locked-by "$(CRD_LOCKED_BY)" --reviewer "$(CRD_REVIEWER)" --drafted-with "$(CRD_DRAFTED_WITH)"
 
 crd-review-check:
 	python3 -m scripts.check_crd_relevance_dictionary --dictionary reports/crd/relevance_dictionary_reviewed.toml --term-file terms/gog_magog_pair_prospective_terms.csv --require-reviewed
 
 crd-check:
-	python3 -m scripts.check_crd_relevance_dictionary --dictionary terms/relevance_dictionary.toml --term-file terms/crd_placeholder_terms.csv
+	python3 -m scripts.check_crd_relevance_dictionary --dictionary terms/relevance_dictionary.toml --term-file terms/gog_magog_pair_prospective_terms.csv --expected-sha256 "a6406048b9953ca50715d99100994b9065394d9db31b35867666d365a3bd0f99" --require-reviewed
 
 crd-deterministic:
 	python3 -m scripts.run_crd_density protocols/centered_relevance_density.toml --classifier-mode deterministic --resume

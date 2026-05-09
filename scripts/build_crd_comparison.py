@@ -352,7 +352,7 @@ def write_markdown(
             "- CRD is a density screen, not a claim promotion engine.",
             "- Deterministic mode only reports locked exact dictionary matches.",
             "- LLM and parallel modes require audit-log review before interpretation.",
-            "- A populated production dictionary should be locked in a new preregistration before substantive runs.",
+            "- Interpret results only against the dictionary and preregistration hashes recorded in the manifest.",
         ]
     )
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")

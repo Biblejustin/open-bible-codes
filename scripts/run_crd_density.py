@@ -75,6 +75,9 @@ CLASSIFIED_HIT_FIELDNAMES = [
     "span_text",
 ]
 
+MAX_CONTEXT_TEXT_CHARS = 4000
+SPAN_CONTEXT_RADIUS = 200
+
 
 @dataclass(frozen=True)
 class TermRow:
@@ -165,11 +168,16 @@ def run_crd_density(
     status = "completed"
     budget_error = ""
     try:
+        term_languages = {term.language for term in terms}
         for corpus_spec in corpora:
+            if corpus_spec.language and corpus_spec.language not in term_languages:
+                continue
             corpus = load_corpus(corpus_spec.config)
             corpus_letters[corpus_spec.label] = len(corpus.text)
             language = corpus_spec.language or corpus.language
             active_terms = language_matched_terms(terms, language, corpus, protocol)
+            if not active_terms:
+                continue
             for term in active_terms:
                 grouped_results = classify_term_hits(
                     corpus_spec,
@@ -470,7 +478,10 @@ def center_verse_text(corpus: Corpus, hit: ELSHit) -> str:
     if not corpus.verses:
         return ""
     verse_index = corpus.position_to_verse[hit.center_offset]
-    return corpus.verses[verse_index].raw_text
+    raw_text = corpus.verses[verse_index].raw_text
+    if len(raw_text) <= MAX_CONTEXT_TEXT_CHARS:
+        return raw_text
+    return normalized_window(corpus.text, hit.center_offset, MAX_CONTEXT_TEXT_CHARS // 2)
 
 
 def span_text(corpus: Corpus, hit: ELSHit) -> str:
@@ -480,7 +491,18 @@ def span_text(corpus: Corpus, hit: ELSHit) -> str:
     high = max(hit.start_offset, hit.end_offset)
     start_verse = corpus.position_to_verse[low]
     end_verse = corpus.position_to_verse[high]
-    return " ".join(verse.raw_text for verse in corpus.verses[start_verse : end_verse + 1])
+    raw_text = " ".join(verse.raw_text for verse in corpus.verses[start_verse : end_verse + 1])
+    if len(raw_text) <= MAX_CONTEXT_TEXT_CHARS:
+        return raw_text
+    start = max(0, low - SPAN_CONTEXT_RADIUS)
+    end = min(len(corpus.text), high + SPAN_CONTEXT_RADIUS + 1)
+    return corpus.text[start:end]
+
+
+def normalized_window(text: str, center: int, radius: int) -> str:
+    start = max(0, center - radius)
+    end = min(len(text), center + radius + 1)
+    return text[start:end]
 
 
 def stable_hit_id(row: dict[str, Any]) -> str:

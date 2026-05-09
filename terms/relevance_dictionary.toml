@@ -1,19 +1,136 @@
 [metadata]
 schema_version = "1"
-locked_by = "TEMPLATE"
-locked_at = "1970-01-01"
-sha256 = "TEMPLATE_REPLACE_WITH_FILE_SHA256_AFTER_LOCK"
-drafted_with = "human"
+locked_by = "gpt-5-assisted-draft"
+locked_at = "2026-05-09"
+sha256 = "computed-after-generation"
+drafted_with = "gpt-5"
 
 [[entries]]
-term_id = "EXAMPLE_TERM"
-surface_keywords = ["example"]
-concept_codes = ["example"]
-verse_refs = ["Gen 1:1"]
-book_scope = ["Gen"]
+term_id = "gog_h"
+surface_keywords = ["גוג", "מגוג", "ארץ מגוג", "ראש", "נשיא", "משך", "תבל", "גוים", "מלחמה"]
+concept_codes = ["gog", "magog", "ezekiel_38_39", "eschatological_enemy", "chief_prince"]
+verse_refs = ["Ezek 38:2", "Ezek 38:3", "Ezek 38:14", "Ezek 38:16", "Ezek 38:18", "Ezek 39:1", "Ezek 39:6", "Ezek 39:11"]
+book_scope = ["Ezek"]
 
 [entries.provenance]
-author = "TEMPLATE"
-lock_date = "1970-01-01"
-reviewer = "TEMPLATE"
-notes = "Placeholder schema row only. Do not treat as a theological assignment."
+author = "gpt-5-assisted-draft"
+lock_date = "2026-05-09"
+reviewer = "gpt-5-assisted-draft"
+notes = "source=terms/gog_magog_pair_prospective_terms.csv; concept=Gog; category=target_pair; language=hebrew; term=גוג; review_notes=LLM-assisted lexical/context draft for Gog passages and direct Gog/Magog setting"
+
+[[entries]]
+term_id = "magog_h"
+surface_keywords = ["מגוג", "גוג", "ארץ מגוג", "ראש", "נשיא", "משך", "תבל", "גוים", "מלחמה"]
+concept_codes = ["magog", "gog", "ezekiel_38_39", "eschatological_enemy", "chief_prince"]
+verse_refs = ["Ezek 38:2", "Ezek 38:3", "Ezek 39:1", "Ezek 39:6"]
+book_scope = ["Ezek"]
+
+[entries.provenance]
+author = "gpt-5-assisted-draft"
+lock_date = "2026-05-09"
+reviewer = "gpt-5-assisted-draft"
+notes = "source=terms/gog_magog_pair_prospective_terms.csv; concept=Magog; category=target_pair; language=hebrew; term=מגוג; review_notes=LLM-assisted lexical/context draft for Magog passages and direct Gog/Magog setting"
+
+[[entries]]
+term_id = "cyrus_h"
+surface_keywords = ["כורש", "פרס", "מלך", "משיח", "בית יהוה", "ירושלם", "פקד", "cyrus"]
+concept_codes = ["persia", "ruler", "king", "temple_decree", "return_from_exile"]
+verse_refs = ["Isa 44:28", "Isa 45:1", "Ezra 1:1", "Ezra 1:2", "Ezra 1:7", "Ezra 3:7", "Ezra 4:3", "Ezra 5:13", "Ezra 5:14", "Ezra 5:17", "Ezra 6:3", "Ezra 6:14", "Dan 1:21", "Dan 6:28", "Dan 10:1"]
+book_scope = ["Isa", "Ezra", "Dan"]
+
+[entries.provenance]
+author = "gpt-5-assisted-draft"
+lock_date = "2026-05-09"
+reviewer = "gpt-5-assisted-draft"
+notes = "source=terms/gog_magog_pair_prospective_terms.csv; concept=Cyrus; category=ruler_baseline; language=hebrew; term=כורש; review_notes=LLM-assisted lexical/context draft for Cyrus as named Persian ruler and temple return decree"
+
+[[entries]]
+term_id = "darius_h"
+surface_keywords = ["דריוש", "פרס", "מדי", "מלך", "בבל", "בית יהוה", "ירושלם"]
+concept_codes = ["darius", "persia", "media", "ruler", "king", "temple_decree"]
+verse_refs = ["Ezra 4:5", "Ezra 4:24", "Ezra 5:5", "Ezra 5:6", "Ezra 6:1", "Ezra 6:12", "Ezra 6:13", "Ezra 6:14", "Dan 5:31", "Dan 6:1", "Dan 6:6", "Dan 6:9", "Dan 6:25", "Dan 9:1", "Dan 11:1", "Hag 1:1", "Hag 1:15", "Hag 2:10", "Zech 1:1", "Zech 1:7", "Zech 7:1"]
+book_scope = ["Ezra", "Dan", "Hag", "Zech"]
+
+[entries.provenance]
+author = "gpt-5-assisted-draft"
+lock_date = "2026-05-09"
+reviewer = "gpt-5-assisted-draft"
+notes = "source=terms/gog_magog_pair_prospective_terms.csv; concept=Darius; category=ruler_baseline; language=hebrew; term=דריוש; review_notes=LLM-assisted lexical/context draft for Darius as named Persian or Median ruler"
+
+[[entries]]
+term_id = "beast_h"
+surface_keywords = ["חיה", "חיות", "בהמה", "אריה", "דב", "נמר", "קרן", "חזון", "מראה"]
+concept_codes = ["beast", "animal", "daniel_vision", "apocalyptic_symbol", "kingdom_symbol"]
+verse_refs = ["Dan 7:3", "Dan 7:4", "Dan 7:5", "Dan 7:6", "Dan 7:7", "Dan 7:11", "Dan 7:12", "Dan 7:17", "Dan 7:19", "Dan 7:23", "Ezek 1:5", "Ezek 1:13", "Ezek 10:15"]
+book_scope = ["Dan", "Ezek"]
+
+[entries.provenance]
+author = "gpt-5-assisted-draft"
+lock_date = "2026-05-09"
+reviewer = "gpt-5-assisted-draft"
+notes = "source=terms/gog_magog_pair_prospective_terms.csv; concept=Beast; category=apocalyptic_symbol_baseline; language=hebrew; term=חיה; review_notes=LLM-assisted lexical/context draft for beast or living-creature imagery"
+
+[[entries]]
+term_id = "dragon_h"
+surface_keywords = ["תנין", "תנינים", "נחש", "לויתן", "ים", "תהום", "רהב"]
+concept_codes = ["dragon", "serpent", "sea_monster", "leviathan", "chaos_monster"]
+verse_refs = ["Gen 1:21", "Exod 7:9", "Exod 7:10", "Exod 7:12", "Deut 32:33", "Job 7:12", "Ps 74:13", "Ps 91:13", "Ps 148:7", "Isa 27:1", "Isa 51:9", "Ezek 29:3", "Ezek 32:2"]
+book_scope = ["Gen", "Exod", "Deut", "Job", "Ps", "Isa", "Ezek"]
+
+[entries.provenance]
+author = "gpt-5-assisted-draft"
+lock_date = "2026-05-09"
+reviewer = "gpt-5-assisted-draft"
+notes = "source=terms/gog_magog_pair_prospective_terms.csv; concept=Dragon; category=apocalyptic_symbol_baseline; language=hebrew; term=תנין; review_notes=LLM-assisted lexical/context draft for dragon serpent and sea-monster language"
+
+[[entries]]
+term_id = "horn_h"
+surface_keywords = ["קרן", "קרנים", "מלך", "מלכות", "משח", "איל", "צפיר", "חזון"]
+concept_codes = ["horn", "power", "kingdom", "king", "anointing", "daniel_vision"]
+verse_refs = ["Dan 7:7", "Dan 7:8", "Dan 7:11", "Dan 7:20", "Dan 7:21", "Dan 7:24", "Dan 8:3", "Dan 8:5", "Dan 8:8", "Dan 8:9", "Dan 8:20", "Dan 8:21", "Dan 8:22", "Dan 8:23", "Zech 1:18", "Zech 1:19", "Zech 1:21"]
+book_scope = ["Dan", "Zech"]
+
+[entries.provenance]
+author = "gpt-5-assisted-draft"
+lock_date = "2026-05-09"
+reviewer = "gpt-5-assisted-draft"
+notes = "source=terms/gog_magog_pair_prospective_terms.csv; concept=Horn; category=apocalyptic_symbol_baseline; language=hebrew; term=קרן; review_notes=LLM-assisted lexical/context draft for horn as king or kingdom symbol"
+
+[[entries]]
+term_id = "seal_h"
+surface_keywords = ["חותם", "חתם", "חתום", "טבעת", "ספר", "מגלה", "עדות", "אות"]
+concept_codes = ["seal", "sealed_book", "signet", "document", "mark"]
+verse_refs = ["1Kgs 21:8", "Esth 3:12", "Esth 8:8", "Job 14:17", "Isa 8:16", "Isa 29:11", "Dan 9:24", "Dan 12:4", "Dan 12:9"]
+book_scope = ["Neh", "Esth", "Job", "Isa", "Dan"]
+
+[entries.provenance]
+author = "gpt-5-assisted-draft"
+lock_date = "2026-05-09"
+reviewer = "gpt-5-assisted-draft"
+notes = "source=terms/gog_magog_pair_prospective_terms.csv; concept=Seal; category=apocalyptic_symbol_baseline; language=hebrew; term=חותם; review_notes=LLM-assisted lexical/context draft for seal signet and sealed document language"
+
+[[entries]]
+term_id = "vision_h"
+surface_keywords = ["חזון", "מראה", "חלום", "ראה", "נבואה", "דבר יהוה", "בן אדם"]
+concept_codes = ["vision", "prophecy", "revelation", "dream", "seer"]
+verse_refs = ["Isa 1:1", "Ezek 7:13", "Ezek 12:22", "Ezek 12:23", "Dan 1:17", "Dan 2:19", "Dan 7:1", "Dan 8:1", "Dan 8:2", "Dan 8:15", "Dan 9:21", "Dan 10:14", "Obad 1:1", "Nah 1:1", "Hab 2:2"]
+book_scope = ["Isa", "Ezek", "Dan", "Obad", "Nah", "Hab"]
+
+[entries.provenance]
+author = "gpt-5-assisted-draft"
+lock_date = "2026-05-09"
+reviewer = "gpt-5-assisted-draft"
+notes = "source=terms/gog_magog_pair_prospective_terms.csv; concept=Vision; category=prophetic_baseline; language=hebrew; term=חזון; review_notes=LLM-assisted lexical/context draft for vision dream and prophetic revelation language"
+
+[[entries]]
+term_id = "prophet_h"
+surface_keywords = ["נביא", "נביאה", "נבואה", "התנבא", "חזון", "דבר יהוה", "איש אלהים", "בן אדם"]
+concept_codes = ["prophet", "prophecy", "vision", "oracle", "man_of_god"]
+verse_refs = ["Deut 18:15", "Deut 18:18", "Deut 18:20", "1Sam 3:20", "1Kgs 13:1", "Jer 1:5", "Jer 1:9", "Ezek 2:5", "Ezek 2:7", "Ezek 33:33", "Amos 3:7", "Hos 12:10"]
+book_scope = ["Zech", "Jer", "Ezek", "Amos", "Hos", "Deut", "1Sam", "1Kgs"]
+
+[entries.provenance]
+author = "gpt-5-assisted-draft"
+lock_date = "2026-05-09"
+reviewer = "gpt-5-assisted-draft"
+notes = "source=terms/gog_magog_pair_prospective_terms.csv; concept=Prophet; category=prophetic_baseline; language=hebrew; term=נביא; review_notes=LLM-assisted lexical/context draft for prophet and prophecy office language"

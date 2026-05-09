@@ -26,6 +26,10 @@ Fill these fields:
 Leaving all relevance fields empty means the term has no deterministic relevance
 criteria and will fail locked review.
 
+LLM-assisted drafting is allowed for lexical/context related-term proposals when
+the provenance names that assistance. The key rule is not "no LLM"; the key rule
+is that the dictionary is locked before density output is interpreted.
+
 ## Convert Queue To TOML
 
 ```bash

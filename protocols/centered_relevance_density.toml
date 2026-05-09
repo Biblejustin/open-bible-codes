@@ -1,12 +1,12 @@
 name = "centered_relevance_density"
-description = "Locked Centered-Relevance Density scaffold over centered ELS hits and Bible/control corpora."
+description = "Locked deterministic Centered-Relevance Density run for the Gog/Magog prospective Hebrew cohort."
 manifest_out = "reports/crd/protocol_run.manifest.json"
 max_parallel = 1
 progress_interval_seconds = 15
 
-term_file = "terms/crd_placeholder_terms.csv"
+term_file = "terms/gog_magog_pair_prospective_terms.csv"
 relevance_dictionary = "terms/relevance_dictionary.toml"
-relevance_dictionary_sha256 = "504f96b212e4db05126660a87d68fbfc1207ca4bb06bedf0a0f00695b23db1a3"
+relevance_dictionary_sha256 = "a6406048b9953ca50715d99100994b9065394d9db31b35867666d365a3bd0f99"
 skip_range = "2..100"
 direction = "both"
 min_term_length = 3
@@ -26,7 +26,7 @@ max_estimated_cost_usd = 0
 estimated_cost_per_call_usd = 0
 output_dir = "reports/crd"
 preregistration_doc = "docs/CRD_PREREGISTRATION.md"
-preregistration_sha256 = "9ad7c77fa4d35017bb6cc464683f44f91a63ae14f05d0e8251f7298ffa9da5be"
+preregistration_sha256 = "71388e327d6f9598b44a86f7a353c87864df7ef7693b61c1109373ee38670d3e"
 
 [[corpus_list]]
 label = "MT_WLC"
@@ -150,10 +150,10 @@ language = "english"
 
 [[steps]]
 id = "crd_density"
-description = "Run deterministic CRD density over the locked placeholder dictionary."
+description = "Run deterministic CRD density over the locked Gog/Magog relevance dictionary."
 argv = ["-m", "scripts.run_crd_density", "protocols/centered_relevance_density.toml", "--resume"]
 inputs = [
-  "terms/crd_placeholder_terms.csv",
+  "terms/gog_magog_pair_prospective_terms.csv",
   "terms/relevance_dictionary.toml",
   "docs/CRD_PREREGISTRATION.md",
   "scripts/run_crd_density.py",

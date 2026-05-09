@@ -97,7 +97,7 @@ def write_dictionary(
         'schema_version = "1"',
         f'locked_by = "{toml_escape(locked_by)}"',
         f'locked_at = "{today}"',
-        'sha256 = "TEMPLATE_REPLACE_WITH_FILE_SHA256_AFTER_LOCK"',
+        'sha256 = "computed-after-generation"',
         f'drafted_with = "{toml_escape(drafted_with)}"',
         "",
     ]

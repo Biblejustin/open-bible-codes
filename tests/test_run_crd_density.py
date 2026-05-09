@@ -4,9 +4,10 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from els.corpus import Corpus, VerseSpan
 from scripts.classify_centered_relevance import sha256_file
 from scripts.build_crd_comparison import build_crd_comparison
-from scripts.run_crd_density import run_crd_density
+from scripts.run_crd_density import MAX_CONTEXT_TEXT_CHARS, run_crd_density, span_text
 from tests.test_classify_centered_relevance import MockLLMClient
 
 
@@ -54,6 +55,34 @@ class CRDDensityRunnerTests(unittest.TestCase):
         self.assertTrue(all(row["agreement_rate"] for row in rows))
         self.assertEqual(rows[0]["agreement_rate"], "1")
         self.assertGreater(len(agreement_rows), 0)
+
+    def test_large_single_verse_span_text_is_bounded(self) -> None:
+        raw_text = "a" * (MAX_CONTEXT_TEXT_CHARS * 2)
+        corpus = Corpus(
+            name="large",
+            language="english",
+            keep_hebrew_final_forms=False,
+            text=raw_text,
+            verses=(
+                VerseSpan(
+                    source="test",
+                    ref="Test 1:1",
+                    book="Test",
+                    chapter="1",
+                    verse="1",
+                    raw_text=raw_text,
+                    norm_start=0,
+                    norm_end=len(raw_text) - 1,
+                    norm_length=len(raw_text),
+                ),
+            ),
+            position_to_verse=tuple(0 for _ in raw_text),
+        )
+        hit = type("Hit", (), {"start_offset": 10, "end_offset": 20})()
+
+        text = span_text(corpus, hit)
+
+        self.assertLessEqual(len(text), 421)
 
 
 def build_synthetic_run(root: Path, mode: str) -> Path:

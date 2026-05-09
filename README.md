@@ -347,8 +347,9 @@ make crd-llm
 
 CRD compares centered ELS-hit density against locked relevance criteria across
 Bible editions and language-matched secular controls. The committed dictionary
-is a placeholder schema only; production entries require human review,
-hash-locking in `protocols/centered_relevance_density.toml`, and a locked
+currently locks the Gog/Magog prospective cohort with `gpt-5-assisted-draft`
+provenance. New cohorts require review, hash-locking in
+`protocols/centered_relevance_density.toml`, and a locked
 `docs/CRD_PREREGISTRATION.md` before interpretation. Method notes:
 `docs/CRD_FRAMEWORK.md`. Generated report: `docs/CRD_REPORT.md`.
 
