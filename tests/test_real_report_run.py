@@ -39,6 +39,14 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/FINAL_REPORT_OUTLINE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/FINAL_REPORT_DRAFT.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/PROSPECTIVE_STUDY_NEXT_LOCK.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn(
+            "docs/GOG_MAGOG_PAIR_PROSPECTIVE_REPORT.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "protocols/gog_magog_pair_prospective.toml",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("docs/APOCRYPHA_ONLY_COUNTS.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/APOCRYPHA_BRIDGE_CONTEXT.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/KJV_APOCRYPHA_BRIDGE_CONTEXT.md", steps_by_id["preflight"]["inputs"])
@@ -83,6 +91,9 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/FINAL_REPORT_OUTLINE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/FINAL_REPORT_DRAFT.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/PROSPECTIVE_STUDY_NEXT_LOCK.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/GOG_MAGOG_PAIR_PROSPECTIVE_REPORT.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("protocols/gog_magog_pair_prospective.toml", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("terms/gog_magog_pair_prospective_terms.csv", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/APOCRYPHA_BRIDGE_STUDY.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/APOCRYPHA_SOURCE_COVERAGE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/APOCRYPHA_BRIDGE_CANDIDATES.md", preflight.DEFAULT_REQUIRED_PATHS)

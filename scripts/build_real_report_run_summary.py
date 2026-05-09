@@ -1006,6 +1006,8 @@ def write_summary(
             "- `docs/ALL_CODES_COMPOUND_EXTENSION_CONTROLS.md`",
             "- `docs/ALL_CODES_COMPOUND_EXTENSION_CONFIRMATORY_CONTROLS.md`",
             "- `docs/ALL_CODES_FOLLOWUP_REVIEW.md`",
+            "- `docs/GOG_MAGOG_PAIR_PROSPECTIVE_PREREGISTRATION.md`",
+            "- `docs/GOG_MAGOG_PAIR_PROSPECTIVE_REPORT.md`",
             "- `docs/CENTERED_OCCURRENCE_INDEX.md`",
             "- `docs/FINAL_REPORT_HIGHLIGHTS.md`",
             "- `docs/PROSPECTIVE_STUDY_READINESS.md`",
