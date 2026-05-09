@@ -2,7 +2,7 @@ CRD_REVIEWER ?= gpt-5-assisted-draft
 CRD_LOCKED_BY ?= gpt-5-assisted-draft
 CRD_DRAFTED_WITH ?= gpt-5
 
-.PHONY: demo indexes test lint crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-self-surface-prepare crd-self-surface-run crd-self-surface-report
+.PHONY: demo indexes test lint crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report
 
 demo:
 	python3 -m els.demo
@@ -52,3 +52,12 @@ crd-self-surface-run:
 
 crd-self-surface-report:
 	python3 -m scripts.build_crd_comparison --density-matrix reports/crd_self_surface/density_matrix.csv --classified-hits reports/crd_self_surface/classified_hits.csv --manifest reports/crd_self_surface/manifest.json --out-dir reports/crd_self_surface --markdown-out reports/crd_self_surface/CRD_SELF_SURFACE_REPORT.md
+
+crd-concept-surface-prepare:
+	python3 -m scripts.prepare_crd_self_surface_run --seed-mode concept --out-dir reports/crd_concept_surface
+
+crd-concept-surface-run:
+	python3 -m scripts.run_crd_density reports/crd_concept_surface/protocol.toml --classifier-mode deterministic --resume
+
+crd-concept-surface-report:
+	python3 -m scripts.build_crd_comparison --density-matrix reports/crd_concept_surface/density_matrix.csv --classified-hits reports/crd_concept_surface/classified_hits.csv --manifest reports/crd_concept_surface/manifest.json --out-dir reports/crd_concept_surface --markdown-out reports/crd_concept_surface/CRD_CONCEPT_SURFACE_REPORT.md

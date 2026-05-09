@@ -49,6 +49,16 @@ make crd-self-surface-report
 
 This writes ignored local artifacts under `reports/crd_self_surface/`.
 
+For the same broad run with same-concept surface variants, use:
+
+```bash
+make crd-concept-surface-prepare
+make crd-concept-surface-run
+make crd-concept-surface-report
+```
+
+This writes ignored local artifacts under `reports/crd_concept_surface/`.
+
 LLM-assisted drafting is allowed for lexical/context related-term proposals when
 the provenance names that assistance. The key rule is not "human-only"; the key
 rule is that the dictionary is locked before density output is interpreted.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare an ignored broad CRD self-surface run directory."""
+"""Prepare an ignored broad CRD surface-match run directory."""
 
 from __future__ import annotations
 
@@ -12,7 +12,12 @@ from pathlib import Path
 from scripts.apply_crd_relevance_review import read_review_rows, write_dictionary as write_reviewed_dictionary
 from scripts.check_crd_relevance_dictionary import check_dictionary
 from scripts.classify_centered_relevance import sha256_file
-from scripts.scaffold_crd_relevance_dictionary import read_terms, write_dictionary as write_draft_dictionary, write_queue
+from scripts.scaffold_crd_relevance_dictionary import (
+    read_terms,
+    surface_keywords_by_concept,
+    write_dictionary as write_draft_dictionary,
+    write_queue,
+)
 
 
 TERM_FIELDNAMES = ["term_id", "concept", "category", "language", "term", "notes"]
@@ -24,12 +29,13 @@ def main(argv: list[str] | None = None) -> int:
     term_files = resolve_term_files(args)
     rows = read_terms(term_files)
     args.out_dir.mkdir(parents=True, exist_ok=True)
+    concept_surface_keywords = surface_keywords_by_concept(rows) if args.seed_mode == "concept" else {}
 
     combined_terms = args.out_dir / "terms_combined.csv"
     draft_dictionary = args.out_dir / "relevance_dictionary_draft.toml"
     queue = args.out_dir / "relevance_review_queue.csv"
-    dictionary = args.out_dir / "relevance_dictionary_self_surface.toml"
-    preregistration = args.out_dir / "CRD_SELF_SURFACE_PREREGISTRATION.md"
+    dictionary = args.out_dir / f"relevance_dictionary_{args.seed_mode}_surface.toml"
+    preregistration = args.out_dir / f"CRD_{args.seed_mode.upper()}_SURFACE_PREREGISTRATION.md"
     protocol = args.out_dir / "protocol.toml"
 
     write_combined_terms(combined_terms, rows)
@@ -39,9 +45,15 @@ def main(argv: list[str] | None = None) -> int:
         locked_by=args.locked_by,
         reviewer=args.reviewer,
         drafted_with=args.drafted_with,
-        seed_surface_term=True,
+        seed_surface_term=args.seed_mode == "self",
+        concept_surface_keywords=concept_surface_keywords,
     )
-    write_queue(queue, rows, seed_surface_term=True)
+    write_queue(
+        queue,
+        rows,
+        seed_surface_term=args.seed_mode == "self",
+        concept_surface_keywords=concept_surface_keywords,
+    )
     write_reviewed_dictionary(
         dictionary,
         read_review_rows(queue),
@@ -50,7 +62,7 @@ def main(argv: list[str] | None = None) -> int:
         drafted_with=args.drafted_with,
     )
     dictionary_sha = sha256_file(dictionary)
-    write_preregistration(preregistration, dictionary, dictionary_sha, args.locked_by)
+    write_preregistration(preregistration, dictionary, dictionary_sha, args.locked_by, seed_mode=args.seed_mode)
     preregistration_sha = sha256_file(preregistration)
     write_protocol(
         protocol,
@@ -62,6 +74,7 @@ def main(argv: list[str] | None = None) -> int:
         preregistration_sha=preregistration_sha,
         out_dir=args.out_dir,
         progress_interval_seconds=args.progress_interval_seconds,
+        seed_mode=args.seed_mode,
     )
     check_dictionary(
         dictionary=dictionary,
@@ -86,6 +99,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--exclude-term-file", action="append", default=sorted(DEFAULT_EXCLUDED_TERM_FILES))
     parser.add_argument("--base-protocol", type=Path, default=Path("protocols/centered_relevance_density.toml"))
     parser.add_argument("--out-dir", type=Path, default=Path("reports/crd_self_surface"))
+    parser.add_argument("--seed-mode", choices=["self", "concept"], default="self")
     parser.add_argument("--locked-by", default="gpt-5-assisted-draft")
     parser.add_argument("--reviewer", default="gpt-5-assisted-draft")
     parser.add_argument("--drafted-with", default="gpt-5")
@@ -111,15 +125,23 @@ def write_combined_terms(path: Path, rows: list[dict[str, str]]) -> None:
         writer.writerows(rows)
 
 
-def write_preregistration(path: Path, dictionary: Path, dictionary_sha: str, locked_by: str) -> None:
+def write_preregistration(
+    path: Path,
+    dictionary: Path,
+    dictionary_sha: str,
+    locked_by: str,
+    *,
+    seed_mode: str,
+) -> None:
+    scope = relevance_scope(seed_mode)
     path.write_text(
-        f"""# CRD Self-Surface Preregistration
+        f"""# CRD {seed_mode.title()}-Surface Preregistration
 
-Status: locked local broad self-surface deterministic CRD screening run.
+Status: locked local broad {seed_mode}-surface deterministic CRD screening run.
 
 ## Hypothesis
 
-Hidden ELS hits whose centered surface text contains the same visible term can be compared across Bible editions and language-matched secular controls. This is a screening run for self-surface coincidence only, not a broader related-term interpretation.
+Hidden ELS hits whose centered surface text contains {scope} can be compared across Bible editions and language-matched secular controls. This is a screening run for exact surface coincidence only, not a broader free-form related-term interpretation.
 
 ## Term List Path
 
@@ -155,7 +177,7 @@ Same corpus list as `protocols/centered_relevance_density.toml`.
 
 ## Decision Rule
 
-For each `(term, corpus)`, count centered ELS hits whose context contains the term's own locked surface spelling. Compare Bible maximum density against language-matched secular-control maximum density per term. Treat `exceeds_secular_max = true` as a review-priority flag only.
+For each `(term, corpus)`, count centered ELS hits whose context contains {scope}. Compare Bible maximum density against language-matched secular-control maximum density per term. Treat `exceeds_secular_max = true` as a review-priority flag only.
 
 ## Multiple Comparisons Correction
 
@@ -175,11 +197,11 @@ Benjamini-Hochberg q <= 0.05 if downstream p-values are computed. This screening
 
 ## Locked Hash
 
-Recorded in `reports/crd_self_surface/protocol.toml` after this document is locked.
+Recorded in the generated local protocol after this document is locked.
 
 ## Sample Audit Log Review
 
-Deterministic self-surface mode only. No LLM classification API calls are made and no LLM audit-log sample is required for execution.
+Deterministic {seed_mode}-surface mode only. No LLM classification API calls are made and no LLM audit-log sample is required for execution.
 """,
         encoding="utf-8",
     )
@@ -196,13 +218,14 @@ def write_protocol(
     preregistration_sha: str,
     out_dir: Path,
     progress_interval_seconds: float,
+    seed_mode: str,
 ) -> None:
     base_text = base_protocol.read_text(encoding="utf-8")
     base = tomllib.loads(base_text)
     corpus_blocks = extract_corpus_blocks(base_text)
     path.write_text(
-        f"""name = "centered_relevance_density_self_surface"
-description = "Local broad deterministic CRD run for hidden terms centered on their own visible surface form."
+        f"""name = "centered_relevance_density_{seed_mode}_surface"
+description = "Local broad deterministic CRD run for hidden terms centered on {relevance_scope(seed_mode)}."
 progress_interval_seconds = {progress_interval_seconds:g}
 
 term_file = "{combined_terms.as_posix()}"
@@ -240,6 +263,12 @@ def extract_corpus_blocks(text: str) -> str:
     match = re.search(r"\n\[\[steps\]\]", text[start:])
     end = start + match.start() if match else len(text)
     return text[start:end].strip()
+
+
+def relevance_scope(seed_mode: str) -> str:
+    if seed_mode == "concept":
+        return "a visible spelling from a committed term row sharing the same language and concept"
+    return "the term's own visible surface spelling"
 
 
 if __name__ == "__main__":
