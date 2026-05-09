@@ -22,16 +22,31 @@ python3 -m scripts.build_crd_comparison
 
 | Classifier | Term | Bible max | Secular max | Ratio | Exceeds secular max |
 | --- | --- | ---: | ---: | ---: | --- |
-| deterministic | `beast_h` | 5.01235546 | 0 |  | true |
-| deterministic | `cyrus_h` | 3.3415703 | 0 |  | true |
-| deterministic | `darius_h` | 9.15160465 | 0 |  | true |
 | deterministic | `dragon_h` | 40.9342362 | 0 |  | true |
-| deterministic | `gog_h` | 1.67078515 | 0 |  | true |
-| deterministic | `horn_h` | 5.01235546 | 0 |  | true |
 | deterministic | `magog_h` | 11.6954961 | 0 |  | true |
+| deterministic | `darius_h` | 9.15160465 | 0 |  | true |
+| deterministic | `vision_h` | 6.68314061 | 0 |  | true |
+| deterministic | `beast_h` | 5.01235546 | 0 |  | true |
+| deterministic | `horn_h` | 5.01235546 | 0 |  | true |
+| deterministic | `cyrus_h` | 3.3415703 | 0 |  | true |
 | deterministic | `prophet_h` | 2.50617773 | 0 |  | true |
 | deterministic | `seal_h` | 2.50617773 | 0 |  | true |
-| deterministic | `vision_h` | 6.68314061 | 0 |  | true |
+| deterministic | `gog_h` | 1.67078515 | 0 |  | true |
+
+## Top Bible Hits With Secular Max Zero
+
+| Classifier | Term | Bible max | Bible corpus |
+| --- | --- | ---: | --- |
+| deterministic | `dragon_h` | 40.9342362 | MT_WLC |
+| deterministic | `magog_h` | 11.6954961 | MT_WLC |
+| deterministic | `darius_h` | 9.15160465 | MAM |
+| deterministic | `vision_h` | 6.68314061 | MT_WLC |
+| deterministic | `beast_h` | 5.01235546 | MT_WLC |
+| deterministic | `horn_h` | 5.01235546 | MT_WLC |
+| deterministic | `cyrus_h` | 3.3415703 | MT_WLC |
+| deterministic | `prophet_h` | 2.50617773 | MT_WLC |
+| deterministic | `seal_h` | 2.50617773 | MT_WLC |
+| deterministic | `gog_h` | 1.67078515 | MT_WLC |
 
 ## Representative Relevant Centers
 

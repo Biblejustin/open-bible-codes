@@ -336,7 +336,7 @@ def write_markdown(
         "| Classifier | Term | Bible max | Secular max | Ratio | Exceeds secular max |",
         "| --- | --- | ---: | ---: | ---: | --- |",
     ]
-    for row in bible_control[:25]:
+    for row in ranked_bible_control_rows(bible_control)[:25]:
         lines.append(
             "| "
             + " | ".join(
@@ -351,6 +351,43 @@ def write_markdown(
             )
             + " |"
         )
+    finite_rows = finite_ratio_rows(bible_control)
+    if finite_rows:
+        lines.extend(
+            [
+                "",
+                "## Top Finite Bible-Vs-Control Ratios",
+                "",
+                "| Classifier | Term | Bible max | Bible corpus | Secular max | Secular corpus | Ratio |",
+                "| --- | --- | ---: | --- | ---: | --- | ---: |",
+            ]
+        )
+        for row in finite_rows[:25]:
+            lines.append(bible_control_detail_row(row))
+    zero_rows = zero_secular_bible_rows(bible_control)
+    if zero_rows:
+        lines.extend(
+            [
+                "",
+                "## Top Bible Hits With Secular Max Zero",
+                "",
+                "| Classifier | Term | Bible max | Bible corpus |",
+                "| --- | --- | ---: | --- |",
+            ]
+        )
+        for row in zero_rows[:25]:
+            lines.append(
+                "| "
+                + " | ".join(
+                    [
+                        str(row["classifier_mode"]),
+                        f"`{row['term_id']}`",
+                        str(row["bible_max_density"]),
+                        str(row["bible_max_corpus"]),
+                    ]
+                )
+                + " |"
+            )
     lines.extend(
         [
             "",
@@ -389,6 +426,57 @@ def write_markdown(
         ]
     )
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+
+def ranked_bible_control_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return sorted(
+        rows,
+        key=lambda row: (
+            row.get("exceeds_secular_max") != "true",
+            row.get("ratio") == "",
+            -float_value(str(row.get("ratio", ""))),
+            -float_value(str(row.get("bible_max_density", ""))),
+            str(row.get("term_id", "")),
+        ),
+    )
+
+
+def finite_ratio_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return sorted(
+        [row for row in rows if row.get("exceeds_secular_max") == "true" and row.get("ratio")],
+        key=lambda row: (-float_value(str(row.get("ratio", ""))), str(row.get("term_id", ""))),
+    )
+
+
+def zero_secular_bible_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return sorted(
+        [
+            row
+            for row in rows
+            if row.get("exceeds_secular_max") == "true"
+            and not row.get("ratio")
+            and float_value(str(row.get("bible_max_density", ""))) > 0
+        ],
+        key=lambda row: (-float_value(str(row.get("bible_max_density", ""))), str(row.get("term_id", ""))),
+    )
+
+
+def bible_control_detail_row(row: dict[str, Any]) -> str:
+    return (
+        "| "
+        + " | ".join(
+            [
+                str(row["classifier_mode"]),
+                f"`{row['term_id']}`",
+                str(row["bible_max_density"]),
+                str(row["bible_max_corpus"]),
+                str(row["secular_max_density"]),
+                str(row["secular_max_corpus"]),
+                str(row["ratio"]),
+            ]
+        )
+        + " |"
+    )
 
 
 def relevant_examples_from_file(path: Path, *, limit: int = 25) -> list[dict[str, str]]:
