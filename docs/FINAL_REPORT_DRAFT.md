@@ -107,6 +107,8 @@ No current row should be written as a public claim.
   controls and source-distribution cautions.
 - We did not find support for promoting modern/geopolitical/local terms beyond
   ordinary screening status.
+- The locked prospective Hebrew Gog/Magog pair-control study completed over
+  MT_WLC and UHB and did not produce a `prospective_controlled_review_candidate`.
 - Longer modern phrases such as United States, United States of America,
   United Nations, European Union, Cowboy Catering, Catering, and Simscorner
   remain absent or effectively absent in the observed Hebrew and Greek screens.
@@ -213,6 +215,14 @@ SBLGNT, TCG_NT, and TR_NT. This is a real source-stable centered-self
 occurrence in the direct Gog/Magog passage. It should appear in the final
 findings list. It should not be frequency-promoted, because all 24 matched
 length-3 non-target controls had more exact-center paths than `γωγ`.
+
+The locked Hebrew Gog/Magog pair-control prospective run over MT_WLC and UHB
+also completed. It found strict same-chapter same-signed-skip overlap examples
+in both sources, but both target rows were `not_unusual` under pair controls,
+and synthetic length-matched 3+4 Hebrew pairs often matched or exceeded the
+target close-pair density. Therefore the Hebrew Gog/Magog pair lane produced no
+`prospective_controlled_review_candidate`.
+
 The index now also carries bridge-context rows from the LXX and KJVA
 apocrypha/deuterocanon bridge passes: 28 LXX bridge-context presence rows and
 120 KJVA bridge-context presence rows.

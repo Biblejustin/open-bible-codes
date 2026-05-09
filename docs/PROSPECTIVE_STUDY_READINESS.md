@@ -66,7 +66,7 @@ python3 -m scripts.scaffold_prospective_study --profile PROFILE_ID --print-comma
 | Greek surface rows `ανομια`, `ισαακ`, `τερασ` | post-screen surface rows with all-available matched controls q = `0.032258`; first locked surface prospective run was negative at length >= 5; second-cohort audit found 0 clean length >= 5 rows left in the existing expanded Greek pool | only a genuinely new source term file with clean prior-evidence audit; see `docs/GREEK_SURFACE_SECOND_COHORT_READINESS.md` | current rows and all previously tested cohort rows are prior evidence; reusing the same pool would be selection leakage |
 | Greek length-4 surface rows | locked prospective run exposed `αμην`, `αραμ`, `ασηρ`, `δασα`, `σαβα`, `σιων`, and `χουσ`, but generated vocabulary controls overlap every target with q range `0.278607..0.905473` | no claim-oriented study recommended unless there is a separately justified short-term hypothesis | short-form density and control-pool selection dominate |
 | Hebrew/modern/geopolitical exact-version study | broad and wide screens show source distribution; controls weaken representative rows | a fixed list of modern/geopolitical terms with exact-version presence and paired controls | many rows are short-form density; full phrases are mostly absent |
-| Gog/Magog focused study | theologically interesting, but current controls read weak or not unusual | a locked Gog/Magog + matched prophetic-symbol cohort with same-chapter/same-skip pair controls | short forms and pair-density baselines are strong confounders |
+| Gog/Magog focused study | completed locked prospective run: target rows occurred in MT_WLC and UHB, but both were `not_unusual`; synthetic 3+4 Hebrew pairs often matched or exceeded target density | no further claim-oriented Gog/Magog rerun is recommended without a materially new hypothesis | short forms and pair-density baselines are strong confounders |
 | All-codes compound-extension follow-up | relaxed all-codes screen found 8 selected rows with compound same-skip extensions containing the hidden term; 250/250 row-local controls leave 14 rows at min-q <= 0.05, 7 at min-q <= 0.10, and 22 not unusual, while conservative all-control q leaves only 2 rows at q <= 0.10 and none at q <= 0.05; a locked 5000/5000 confirmatory pass for the selected `יום יהוה` -> `היומיהוה` key keeps all five MT-family rows at conservative all-control q = 0.003599 | a fixed compound-extension study with predeclared term list, extension rule, and larger matched same-length/same-skip controls | current rows are post-screen discoveries from a broad queue; the 5000/5000 pass is confirmatory review, not prospective discovery |
 | Local-term negative/curiosity study | Cowboy appears in Hebrew; Catering, Simsberry, Simscorner mostly absent | a fixed local-term negative screen documenting where rows are absent, source-specific, or not unusual | mainly curiosity value; low theological relevance |
 
@@ -77,7 +77,8 @@ python3 -m scripts.scaffold_prospective_study --profile PROFILE_ID --print-comma
    `docs/GREEK_SURFACE_SECOND_COHORT_READINESS.md`.
 2. Hebrew/modern/geopolitical exact-version study if the goal is source
    distribution, not claim promotion.
-3. Gog/Magog only after the pair-control design is locked.
+3. Gog/Magog should stay in negative/weak findings unless a materially new,
+   separately locked hypothesis is supplied.
 4. All-codes compound-extension follow-up only after a larger matched-control
    design is locked.
 5. Local-term study only as a transparent negative/curiosity appendix.

@@ -146,19 +146,20 @@ Disallowed status:
 - `proof`
 - `original prospective discovery`
 
-## Track 3: Next Eligible Fresh Prospective Lane
+## Track 3: Completed Fresh Prospective Lane
 
-The next fresh result-producing lane should be a Gog/Magog pair-control study,
-but it is not allowed to run until its term file, protocol, preregistration,
-clean prior-evidence audit, and lock manifest exist.
+The next fresh result-producing lane was the Gog/Magog pair-control study. It
+has now run under the locked design. It did not produce a
+`prospective_controlled_review_candidate`.
 
 Lane profile:
 
 - `gog_magog_pair_controls` in `configs/prospective_study_lanes.json`
 
-Required future artifacts:
+Registered artifacts:
 
 - `docs/GOG_MAGOG_PAIR_PROSPECTIVE_PREREGISTRATION.md`
+- `docs/GOG_MAGOG_PAIR_PROSPECTIVE_REPORT.md`
 - `terms/gog_magog_pair_prospective_terms.csv`
 - `protocols/gog_magog_pair_prospective.toml`
 - `reports/study_locks/gog_magog_pair_prospective.manifest.json`
@@ -183,14 +184,22 @@ Required control shape:
 - synthetic null pairs;
 - no unregistered extra terms after seeing output.
 
-Required candidate rule:
+Candidate rule:
 
 - Gog/Magog pair compactness must beat matched prophetic-symbol and synthetic
   pair baselines under the locked rule.
 
-Allowed status if successful:
+Observed outcome:
 
-- `prospective_controlled_review_candidate`
+- target rows occurred in MT_WLC and UHB;
+- both target rows were `not_unusual` under pair controls;
+- synthetic length-matched 3+4 Hebrew pairs often matched or exceeded target
+  close-pair density;
+- no `prospective_controlled_review_candidate` was produced.
+
+Allowed status if future rerun reproduces this result:
+
+- negative/weak controlled prospective result
 
 Disallowed status:
 
@@ -215,7 +224,7 @@ python3 -m scripts.run_protocol protocols/all_codes_compound_extension_confirmat
 python3 -m scripts.run_protocol protocols/kjv_apocrypha_bridge_confirmatory_controls_5000.toml --resume
 ```
 
-Blocked until future lock artifacts exist:
+Completed run command:
 
 ```bash
 python3 -m scripts.run_protocol protocols/gog_magog_pair_prospective.toml --resume
@@ -229,7 +238,7 @@ The final report should separate these layers:
 2. controlled post-discovery review candidates;
 3. weak/negative findings;
 4. under-specified public source queue;
-5. future prospective Gog/Magog pair study.
+5. completed negative Gog/Magog prospective pair-control study.
 
 This separation is required so the report does not confuse "observed
 occurrence", "controlled review candidate", "source-audit term", and "claim".

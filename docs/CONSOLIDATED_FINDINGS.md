@@ -80,19 +80,27 @@ Most modern terms do not produce meaningful-looking results under current contro
 
 ### Gog / Magog
 
-Gog/Magog remains theologically interesting, but the current Hebrew result is not strong.
+Gog/Magog remains theologically interesting, but the locked Hebrew prospective
+pair-control result is negative.
 
 - Raw `Gog` is dense because it is short.
 - `Magog` is less dense but still present.
 - Same-chapter and same-signed-skip filters reduce the review queue.
-- MT_WLC Gog/Magog is not unusual under stricter controls.
+- MT_WLC Gog/Magog produced 193 strict close pairs and 189 strict overlaps, but
+  its adjusted pair-control read was `not_unusual`.
+- UHB Gog/Magog produced 198 strict close pairs and 194 strict overlaps, but
+  its adjusted pair-control read was also `not_unusual`.
 - Hebrew Beast/Dragon exceeds Gog/Magog in strict observed close-pair counts.
-- Synthetic 3+4 Hebrew pairs often match or exceed Gog/Magog close-pair density.
+- Synthetic 3+4 Hebrew pairs often match or exceed Gog/Magog close-pair
+  density: 73 of 100 synthetic samples met or exceeded the Gog/Magog close-pair
+  count in both MT_WLC and UHB.
 
-Current read: keep Gog/Magog as exploratory only, not evidential. The Greek
-Rev 20:8 `γωγ` row is still a real source-stable centered-self occurrence in a
-direct Gog/Magog verse, so it belongs in the final occurrence list. It is not
-frequency-promoted because of the length-3 control result.
+Current read: the Hebrew prospective pair lane produced no
+`prospective_controlled_review_candidate`. Keep Gog/Magog as exploratory only,
+not evidential. The Greek Rev 20:8 `γωγ` row is still a real source-stable
+centered-self occurrence in a direct Gog/Magog verse, so it belongs in the final
+occurrence list. It is not frequency-promoted because of the length-3 control
+result.
 
 ### Broad Skip `2..100` Search
 
