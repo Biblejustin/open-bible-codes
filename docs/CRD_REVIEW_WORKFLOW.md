@@ -35,6 +35,9 @@ criteria and will fail locked review.
 
 The `crd-review-scaffold-self` target pre-fills `surface_keywords_reviewed`
 from the term's own surface spelling. It does not add broader related terms.
+For a conservative related-variant scaffold, pass `--seed-concept-terms` to
+`scripts.scaffold_crd_relevance_dictionary`; that pre-fills all surface forms
+sharing the same normalized `(language, concept)` in the committed term lists.
 
 For a broad self-surface screening run across all committed term CSVs, use:
 

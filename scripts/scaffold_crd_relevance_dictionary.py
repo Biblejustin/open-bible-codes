@@ -12,6 +12,7 @@ from pathlib import Path
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     rows = read_terms(args.term_file)
+    concept_surface_keywords = surface_keywords_by_concept(rows) if args.seed_concept_terms else {}
     write_dictionary(
         args.out,
         rows,
@@ -19,8 +20,14 @@ def main(argv: list[str] | None = None) -> int:
         reviewer=args.reviewer,
         drafted_with=args.drafted_with,
         seed_surface_term=args.seed_surface_term,
+        concept_surface_keywords=concept_surface_keywords,
     )
-    write_queue(args.queue_out, rows, seed_surface_term=args.seed_surface_term)
+    write_queue(
+        args.queue_out,
+        rows,
+        seed_surface_term=args.seed_surface_term,
+        concept_surface_keywords=concept_surface_keywords,
+    )
     print(args.out)
     print(args.queue_out)
     return 0
@@ -38,6 +45,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--seed-surface-term",
         action="store_true",
         help="Seed each entry's surface keyword review field with the term's own surface form.",
+    )
+    parser.add_argument(
+        "--seed-concept-terms",
+        action="store_true",
+        help="Seed each entry with all surface forms sharing the same normalized language+concept.",
     )
     return parser
 
@@ -74,6 +86,7 @@ def write_dictionary(
     reviewer: str,
     drafted_with: str,
     seed_surface_term: bool = False,
+    concept_surface_keywords: dict[tuple[str, str], list[str]] | None = None,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     today = datetime.now(UTC).date().isoformat()
@@ -87,7 +100,7 @@ def write_dictionary(
         "",
     ]
     for row in rows:
-        surface_keywords = seed_surface_keywords(row) if seed_surface_term else []
+        surface_keywords = seeded_keywords(row, seed_surface_term, concept_surface_keywords)
         lines.extend(
             [
                 "[[entries]]",
@@ -111,7 +124,13 @@ def write_dictionary(
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
 
 
-def write_queue(path: Path, rows: list[dict[str, str]], *, seed_surface_term: bool = False) -> None:
+def write_queue(
+    path: Path,
+    rows: list[dict[str, str]],
+    *,
+    seed_surface_term: bool = False,
+    concept_surface_keywords: dict[tuple[str, str], list[str]] | None = None,
+) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = [
         "review_rank",
@@ -133,7 +152,7 @@ def write_queue(path: Path, rows: list[dict[str, str]], *, seed_surface_term: bo
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
         for index, row in enumerate(rows, start=1):
-            surface_keywords = seed_surface_keywords(row) if seed_surface_term else []
+            surface_keywords = seeded_keywords(row, seed_surface_term, concept_surface_keywords)
             writer.writerow(
                 {
                     **row,
@@ -148,6 +167,19 @@ def write_queue(path: Path, rows: list[dict[str, str]], *, seed_surface_term: bo
             )
 
 
+def seeded_keywords(
+    row: dict[str, str],
+    seed_surface_term: bool,
+    concept_surface_keywords: dict[tuple[str, str], list[str]] | None,
+) -> list[str]:
+    values: list[str] = []
+    if seed_surface_term:
+        values.extend(seed_surface_keywords(row))
+    if concept_surface_keywords:
+        values.extend(concept_surface_keywords.get(concept_key(row), []))
+    return unique_values(values)
+
+
 def seed_surface_keywords(row: dict[str, str]) -> list[str]:
     term = row.get("term", "").strip()
     if not term:
@@ -155,9 +187,30 @@ def seed_surface_keywords(row: dict[str, str]) -> list[str]:
     values: list[str] = []
     for part in term.replace("|", "/").replace(";", "/").split("/"):
         value = part.strip()
-        if value and value not in values:
-            values.append(value)
-    return values
+        values.append(value)
+    return unique_values(values)
+
+
+def surface_keywords_by_concept(rows: list[dict[str, str]]) -> dict[tuple[str, str], list[str]]:
+    grouped: dict[tuple[str, str], list[str]] = {}
+    for row in rows:
+        key = concept_key(row)
+        if not all(key):
+            continue
+        grouped.setdefault(key, []).extend(seed_surface_keywords(row))
+    return {key: unique_values(values) for key, values in grouped.items()}
+
+
+def concept_key(row: dict[str, str]) -> tuple[str, str]:
+    return (row.get("language", "").strip().lower(), row.get("concept", "").strip().casefold())
+
+
+def unique_values(values: list[str]) -> list[str]:
+    out: list[str] = []
+    for value in values:
+        if value and value not in out:
+            out.append(value)
+    return out
 
 
 def toml_list(values: list[str]) -> str:

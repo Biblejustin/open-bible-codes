@@ -62,6 +62,39 @@ class CRDDictionaryToolTests(unittest.TestCase):
         self.assertIn('surface_keywords = ["כיפא", "פטרוס"]', dictionary_text)
         self.assertIn("כיפא;פטרוס", queue_text)
 
+    def test_scaffold_can_seed_concept_terms(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            terms = root / "terms.csv"
+            terms.write_text(
+                "term_id,concept,category,language,term,notes\n"
+                "jesus_g,Jesus,names,greek,ιησους,test\n"
+                "iesous_gnt,Jesus,names,greek,ιησου,test\n"
+                "jesus_e,Jesus,names,english,Jesus,test\n",
+                encoding="utf-8",
+            )
+            out = root / "dictionary.toml"
+            queue = root / "queue.csv"
+
+            exit_code = scaffold_main(
+                [
+                    "--term-file",
+                    str(terms),
+                    "--out",
+                    str(out),
+                    "--queue-out",
+                    str(queue),
+                    "--seed-concept-terms",
+                ]
+            )
+            dictionary_text = out.read_text(encoding="utf-8")
+
+        self.assertEqual(exit_code, 0)
+        self.assertIn('term_id = "jesus_g"', dictionary_text)
+        self.assertIn('surface_keywords = ["ιησους", "ιησου"]', dictionary_text)
+        self.assertIn('term_id = "jesus_e"', dictionary_text)
+        self.assertIn('surface_keywords = ["Jesus"]', dictionary_text)
+
     def test_check_dictionary_reports_missing_entries_without_review_requirement(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
