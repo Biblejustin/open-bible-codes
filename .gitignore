@@ -24,6 +24,7 @@ reports/**/*.csv
 reports/**/*.csv.gz
 reports/**/*.json
 reports/**/*.md
+reports/**/*.toml
 reports/**/*.zip
 reports/wrr_1994/*.txt
 reports/wrr_1994/*.html

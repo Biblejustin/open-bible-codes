@@ -332,6 +332,8 @@ length >= 5 prospective cohort; see
 Centered-Relevance Density scaffold:
 
 ```bash
+make crd-review-scaffold
+make crd-check
 shasum -a 256 terms/relevance_dictionary.toml \
   prompts/crd_classifier_v1/system.md \
   prompts/crd_classifier_v1/user_template.md \

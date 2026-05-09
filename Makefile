@@ -1,4 +1,4 @@
-.PHONY: demo indexes test lint crd-deterministic crd-llm crd-parallel
+.PHONY: demo indexes test lint crd-review-scaffold crd-check crd-deterministic crd-llm crd-parallel
 
 demo:
 	python3 -m els.demo
@@ -12,6 +12,12 @@ test:
 
 lint:
 	python3 -m compileall -q els scripts tests
+
+crd-review-scaffold:
+	python3 -m scripts.scaffold_crd_relevance_dictionary --term-file terms/gog_magog_pair_prospective_terms.csv --out reports/crd/relevance_dictionary_draft.toml --queue-out reports/crd/relevance_review_queue.csv
+
+crd-check:
+	python3 -m scripts.check_crd_relevance_dictionary --dictionary terms/relevance_dictionary.toml --term-file terms/crd_placeholder_terms.csv
 
 crd-deterministic:
 	python3 -m scripts.run_crd_density protocols/centered_relevance_density.toml --classifier-mode deterministic --resume
