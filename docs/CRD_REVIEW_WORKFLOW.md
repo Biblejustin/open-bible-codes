@@ -1,6 +1,6 @@
 # CRD Review Workflow
 
-Status: workflow notes for preparing a human-reviewed Centered-Relevance Density dictionary.
+Status: workflow notes for preparing a locked Centered-Relevance Density dictionary.
 
 ## Draft Queue
 
@@ -13,22 +13,22 @@ This writes ignored local files:
 - `reports/crd/relevance_review_queue.csv`
 - `reports/crd/relevance_dictionary_draft.toml`
 
-The CSV is the intended human-review surface. Each row maps to one `term_id`.
+The CSV is the intended review surface. Each row maps to one `term_id`.
 Fill these fields:
 
 - `surface_keywords_reviewed`: semicolon-separated normalized surface words or phrases.
 - `concept_codes_reviewed`: semicolon-separated short tags.
 - `verse_refs_reviewed`: semicolon-separated exact canonical refs.
 - `book_scope_reviewed`: optional semicolon-separated book codes.
-- `reviewer`: required for locked review.
+- `reviewer`: required for locked provenance. This may be a person, an LLM-assisted drafting label, or a combined workflow label.
 - `review_notes`: short rationale or boundary note.
 
 Leaving all relevance fields empty means the term has no deterministic relevance
 criteria and will fail locked review.
 
 LLM-assisted drafting is allowed for lexical/context related-term proposals when
-the provenance names that assistance. The key rule is not "no LLM"; the key rule
-is that the dictionary is locked before density output is interpreted.
+the provenance names that assistance. The key rule is not "human-only"; the key
+rule is that the dictionary is locked before density output is interpreted.
 
 ## Convert Queue To TOML
 
@@ -48,12 +48,12 @@ This is still ignored output. It can be regenerated while review is in progress.
 make crd-review-check
 ```
 
-This fails until every reviewed term has:
+This fails until every reviewed or drafted term has:
 
 - a dictionary entry,
 - at least one relevance criterion,
 - locked metadata,
-- reviewer provenance.
+- reviewer or drafting provenance.
 
 When the check passes, copy the reviewed TOML into `terms/relevance_dictionary.toml`,
 replace template metadata, update hashes in `protocols/centered_relevance_density.toml`

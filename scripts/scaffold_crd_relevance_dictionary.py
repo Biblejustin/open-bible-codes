@@ -95,7 +95,7 @@ def write_dictionary(
                 f'reviewer = "{toml_escape(reviewer)}"',
                 (
                     'notes = "Blank scaffold from '
-                    f'{toml_escape(row["source_file"])}; human reviewer must populate or explicitly leave empty."'
+                    f'{toml_escape(row["source_file"])}; reviewer or locked drafting process must populate or explicitly leave empty."'
                 ),
                 "",
             ]

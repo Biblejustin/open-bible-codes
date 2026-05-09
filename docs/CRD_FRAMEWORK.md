@@ -18,7 +18,7 @@ LLM mode caches classifications under `reports/crd/llm_cache/`, keyed by prompt-
 
 ## Recommended Workflow
 
-1. Draft `terms/relevance_dictionary.toml` with human review. LLM assistance is allowed only before lock.
+1. Draft `terms/relevance_dictionary.toml` with locked provenance. LLM-assisted lexical/context drafting is allowed before lock.
 2. Record reviewer, lock date, dictionary hash, prompt hashes, and decision rule in `docs/CRD_PREREGISTRATION.md`.
 3. Run deterministic mode first.
 4. Optionally run parallel mode to compare deterministic precision against LLM recall.
