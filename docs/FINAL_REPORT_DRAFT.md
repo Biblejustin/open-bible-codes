@@ -428,4 +428,4 @@ The final reader-facing report should keep these sections visually separate:
 2. controlled review candidates;
 3. weak or negative findings;
 4. source-audit queue;
-5. future prospective-study plan.
+5. completed prospective-study outcomes and the next locked-study queue.

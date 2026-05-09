@@ -454,7 +454,10 @@ Religions Wiki scriptural-codes critique/source audit:
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Compact final-report highlight table: `docs/FINAL_REPORT_HIGHLIGHTS.md`.
-Next prospective-study lock: `docs/PROSPECTIVE_STUDY_NEXT_LOCK.md`.
+Completed Gog/Magog prospective pair-control report:
+`docs/GOG_MAGOG_PAIR_PROSPECTIVE_REPORT.md`. Result: target rows occurred in
+MT_WLC and UHB, but no `prospective_controlled_review_candidate` was produced.
+Prospective-study lock/readiness notes: `docs/PROSPECTIVE_STUDY_NEXT_LOCK.md`.
 Apocrypha/deuterocanon source coverage audit: `docs/APOCRYPHA_SOURCE_COVERAGE.md`.
 Initial apocrypha bridge-candidate scan: `docs/APOCRYPHA_BRIDGE_CANDIDATES.md`.
 Initial apocrypha bridge context review: `docs/APOCRYPHA_BRIDGE_CONTEXT.md`.
