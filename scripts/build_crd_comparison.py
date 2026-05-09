@@ -116,7 +116,7 @@ def build_crd_comparison(
     write_rows(bible_control_out, BIBLE_CONTROL_FIELDNAMES, bible_control)
     write_rows(edition_meta_out, EDITION_META_FIELDNAMES, edition_meta)
     write_rows(agreement_out, AGREEMENT_FIELDNAMES, agreement)
-    write_markdown(markdown_out, rows, bible_control, edition_meta, agreement, manifest)
+    write_markdown(markdown_out, rows, hit_rows, bible_control, edition_meta, agreement, manifest)
     return {
         "per_term_rankings": str(per_term_out),
         "bible_vs_control_summary": str(bible_control_out),
@@ -298,6 +298,7 @@ def empty_agreement_row(scope: str) -> dict[str, Any]:
 def write_markdown(
     path: Path,
     density_rows: list[dict[str, str]],
+    hit_rows: list[dict[str, str]],
     bible_control: list[dict[str, Any]],
     edition_meta: list[dict[str, Any]],
     agreement: list[dict[str, Any]],
@@ -346,6 +347,31 @@ def write_markdown(
             )
             + " |"
         )
+    examples = relevant_examples(hit_rows)
+    lines.extend(
+        [
+            "",
+            "## Representative Relevant Centers",
+            "",
+            "| Term | Corpus | Center ref | Center word | Type | Skip |",
+            "| --- | --- | --- | --- | --- | ---: |",
+        ]
+    )
+    for row in examples[:25]:
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    f"`{row.get('term_id', '')}`",
+                    row.get("corpus", ""),
+                    row.get("center_ref", ""),
+                    row.get("center_word", ""),
+                    row.get("relevance_type", ""),
+                    row.get("skip", ""),
+                ]
+            )
+            + " |"
+        )
     lines.extend(
         [
             "",
@@ -353,12 +379,26 @@ def write_markdown(
             "",
             "- CRD is a density screen, not a claim promotion engine.",
             "- Deterministic mode only reports locked exact dictionary matches.",
+            "- Concept-code matches require explicit surface/context concept fields; hidden-term metadata alone is not counted.",
             "- Secular-control zeroes can reflect dictionary vocabulary and context coverage, not only signal strength.",
             "- LLM and parallel modes require audit-log review before interpretation.",
             "- Interpret results only against the dictionary and preregistration hashes recorded in the manifest.",
         ]
     )
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+
+def relevant_examples(hit_rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    rows = [row for row in hit_rows if row.get("is_relevant") == "true"]
+    return sorted(
+        rows,
+        key=lambda row: (
+            row.get("term_id", ""),
+            row.get("corpus", ""),
+            row.get("center_ref", ""),
+            abs(int_value(row.get("skip"))),
+        ),
+    )
 
 
 def write_rows(path: Path, fieldnames: list[str], rows: list[dict[str, Any]]) -> None:

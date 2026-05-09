@@ -88,6 +88,22 @@ class DeterministicClassifierTests(unittest.TestCase):
 
         self.assertFalse(result.is_relevant)
 
+    def test_concept_match_uses_explicit_surface_codes_only(self) -> None:
+        classifier = DeterministicClassifier(entries={"term": entry(concept_codes=["gog"])})
+
+        hidden_term_only = classifier.classify(
+            {"term_id": "term", "language": "hebrew"},
+            {"term_id": "term", "concept": "Gog", "category": "target_pair"},
+        )
+        explicit_surface_code = classifier.classify(
+            {"term_id": "term", "language": "hebrew", "surface_concept_codes": "gog;magog"},
+            {"term_id": "term", "concept": "Gog", "category": "target_pair"},
+        )
+
+        self.assertFalse(hidden_term_only.is_relevant)
+        self.assertTrue(explicit_surface_code.is_relevant)
+        self.assertEqual(explicit_surface_code.relevance_type, "concept_match")
+
     def test_normalization_edge_cases(self) -> None:
         classifier = DeterministicClassifier(
             entries={

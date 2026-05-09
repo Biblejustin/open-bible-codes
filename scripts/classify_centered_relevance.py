@@ -155,15 +155,21 @@ class DeterministicClassifier(Classifier):
             return ClassificationResult(True, "surface_keyword_match", audit_payload={"language": language})
 
         concept_values = {
-            normalize_code(hit_row.get("concept", "")),
-            normalize_code(hit_row.get("category", "")),
             normalize_code(hit_row.get("concept_code", "")),
-            normalize_code(term_metadata.get("concept", "")),
-            normalize_code(term_metadata.get("category", "")),
+            normalize_code(hit_row.get("center_concept_code", "")),
+            normalize_code(hit_row.get("surface_concept_code", "")),
         }
         concept_values.update(
             normalize_code(value)
             for value in split_codes(str(hit_row.get("concept_codes", "")))
+        )
+        concept_values.update(
+            normalize_code(value)
+            for value in split_codes(str(hit_row.get("center_concept_codes", "")))
+        )
+        concept_values.update(
+            normalize_code(value)
+            for value in split_codes(str(hit_row.get("surface_concept_codes", "")))
         )
         wanted_codes = {normalize_code(value) for value in entry.concept_codes}
         if "" not in wanted_codes and wanted_codes & concept_values:
