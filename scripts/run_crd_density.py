@@ -11,6 +11,7 @@ import subprocess
 import time
 import tomllib
 from collections import defaultdict
+from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -163,46 +164,45 @@ def run_crd_density(
     classifiers = build_classifiers(protocol, mode, outputs, api_client=api_client)
 
     density_rows: list[dict[str, Any]] = []
-    hit_rows: list[dict[str, Any]] = []
     corpus_letters: dict[str, int] = {}
     status = "completed"
     budget_error = ""
     try:
-        term_languages = {term.language for term in terms}
-        for corpus_spec in corpora:
-            if corpus_spec.language and corpus_spec.language not in term_languages:
-                continue
-            corpus = load_corpus(corpus_spec.config)
-            corpus_letters[corpus_spec.label] = len(corpus.text)
-            language = corpus_spec.language or corpus.language
-            active_terms = language_matched_terms(terms, language, corpus, protocol)
-            if not active_terms:
-                continue
-            for term in active_terms:
-                grouped_results = classify_term_hits(
-                    corpus_spec,
-                    corpus,
-                    term,
-                    classifiers,
-                    protocol,
-                )
-                hit_rows.extend(grouped_results["hit_rows"])
-                density_rows.extend(
-                    density_rows_for_term(
-                        term,
+        with open_rows_writer(outputs.classified_hits, CLASSIFIED_HIT_FIELDNAMES) as hit_writer:
+            term_languages = {term.language for term in terms}
+            for corpus_spec in corpora:
+                if corpus_spec.language and corpus_spec.language not in term_languages:
+                    continue
+                corpus = load_corpus(corpus_spec.config)
+                corpus_letters[corpus_spec.label] = len(corpus.text)
+                language = corpus_spec.language or corpus.language
+                active_terms = language_matched_terms(terms, language, corpus, protocol)
+                if not active_terms:
+                    continue
+                for term in active_terms:
+                    grouped_results = classify_term_hits(
                         corpus_spec,
                         corpus,
+                        term,
                         classifiers,
-                        grouped_results["by_mode"],
-                        grouped_results["agreements"],
+                        protocol,
                     )
-                )
+                    hit_writer.writerows(grouped_results["hit_rows"])
+                    density_rows.extend(
+                        density_rows_for_term(
+                            term,
+                            corpus_spec,
+                            corpus,
+                            classifiers,
+                            grouped_results["by_mode"],
+                            grouped_results["agreements"],
+                        )
+                    )
     except CRDBudgetExceeded as exc:
         status = "partial_budget_exceeded"
         budget_error = str(exc)
 
     write_rows(outputs.density_matrix, DENSITY_FIELDNAMES, density_rows)
-    write_rows(outputs.classified_hits, CLASSIFIED_HIT_FIELDNAMES, hit_rows)
     manifest = build_manifest(
         protocol_path,
         protocol,
@@ -666,6 +666,29 @@ def write_rows(path: Path, fieldnames: list[str], rows: list[dict[str, Any]]) ->
         writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
+
+
+class StreamingRowsWriter:
+    def __init__(self, handle: Any, fieldnames: list[str]) -> None:
+        self.handle = handle
+        self.writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
+
+    def writeheader(self) -> None:
+        self.writer.writeheader()
+        self.handle.flush()
+
+    def writerows(self, rows: list[dict[str, Any]]) -> None:
+        self.writer.writerows(rows)
+        self.handle.flush()
+
+
+@contextmanager
+def open_rows_writer(path: Path, fieldnames: list[str]) -> Any:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = StreamingRowsWriter(handle, fieldnames)
+        writer.writeheader()
+        yield writer
 
 
 if __name__ == "__main__":

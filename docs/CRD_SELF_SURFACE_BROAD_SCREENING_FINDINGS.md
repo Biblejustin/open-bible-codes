@@ -71,4 +71,5 @@ Large numbers of secular-zero rows mean many terms have no self-surface match in
 - It does not answer whether hidden `X` is centered on a broader related concept unless a separate relevance dictionary locks that relationship.
 - Duplicate term IDs from different claim lists were deduped by first-seen ID for this local run, but duplicate concepts with different IDs remain visible in the results.
 - The large 5.3 GB classified-hit file exposed a real scaling issue. `scripts/build_crd_comparison.py` now streams representative examples and agreement inputs instead of loading the whole file.
-- The next production improvement should be streaming/checkpointed CRD density output so broad runs do not buffer millions of classified-hit rows in memory.
+- `scripts/run_crd_density.py` now streams classified-hit rows during generation so future broad runs do not buffer millions of hit rows in memory.
+- The next production improvement should be resumable per-corpus or per-term checkpointing for interrupted broad CRD runs.
