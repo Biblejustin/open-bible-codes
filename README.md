@@ -329,6 +329,25 @@ The existing expanded Greek surface pool cannot support a second clean
 length >= 5 prospective cohort; see
 `docs/GREEK_SURFACE_SECOND_COHORT_READINESS.md`.
 
+Centered-Relevance Density scaffold:
+
+```bash
+shasum -a 256 terms/relevance_dictionary.toml \
+  prompts/crd_classifier_v1/system.md \
+  prompts/crd_classifier_v1/user_template.md \
+  docs/CRD_PREREGISTRATION.md
+make crd-deterministic
+make crd-parallel
+make crd-llm
+```
+
+CRD compares centered ELS-hit density against locked relevance criteria across
+Bible editions and language-matched secular controls. The committed dictionary
+is a placeholder schema only; production entries require human review,
+hash-locking in `protocols/centered_relevance_density.toml`, and a locked
+`docs/CRD_PREREGISTRATION.md` before interpretation. Method notes:
+`docs/CRD_FRAMEWORK.md`. Generated report: `docs/CRD_REPORT.md`.
+
 Locked Greek surface prospective cohort:
 
 ```bash
