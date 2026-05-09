@@ -86,7 +86,9 @@ Use the categories already present in `reports/real_report_run/summary.md`:
 - Greek exact-center source/version gates;
 - four-source `δοξα` follow-ups;
 - Greek surface prospective and post-discovery rows;
-- Hebrew modern/geopolitical and screening controls;
+- Hebrew modern/geopolitical controlled and prospective source-distribution
+  rows;
+- broader Hebrew screening controls;
 - all-codes follow-up and compound-extension controls;
 - centered occurrence index;
 - WRR source/import/count smoke audit.
@@ -193,4 +195,3 @@ Every highlighted row should include:
 - source/version presence;
 - control read;
 - final status label.
-
