@@ -84,7 +84,7 @@ Practical interpretation:
 - High counts mostly track short normalized strings, common letter patterns, and search-space size.
 - Abbreviations such as United Nations acronym forms produce very large counts.
 - Longer phrases mostly produce zero hits at the current skip range.
-- Filtered extension tops are manageable and readable; the `δοξα` exact-center overlap remains one strong review row, and the broader exact-center cohort adds `αιμα` and `υιος` screens.
+- Filtered extension tops are manageable and readable; the `δοξα` (doxa; English: glory) exact-center overlap remains one strong review row, and the broader exact-center cohort adds `αιμα` (haima; English: blood) and `υιος` (huios; English: son) screens.
 - No current result should be promoted as a claim without a stronger null test.
 
 ## Modern And Geopolitical Terms
@@ -93,21 +93,21 @@ Selected counts from `reports/protocols/public_baseline/modern_names_dates_count
 
 | Concept | Term | MT_WLC | LXX | TR_NT | SBLGNT | Read |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
-| Trump | `טראמפ` / `τραμπ` | 4 | 71 | 18 | 12 | present, low to modest |
-| Donald Trump | `דונלדטראמפ` | 0 | - | - | - | absent in Hebrew combined form |
-| Vance | `ואנס` / `βανς` | 331 | 1,532 | 241 | 259 | high because short form |
-| Vance alt | `ווענס` | 12 | - | - | - | present, low |
-| Netanyahu | `נתניהו` / `νετανιαχου` | 8 | 0 | 0 | 0 | Hebrew only, low |
-| Iran | `איראן` / `ιραν` | 210 | 8,375 | 1,876 | 1,983 | high in Greek because short form |
-| Russia | `רוסיה` / `Ρωσία` | 50 | 268 | 52 | 57 | present |
-| Europe | `אירופה` / `Ευρώπη` | 17 | 1 | 0 | 1 | low |
-| Germany | `גרמניה` / `Γερμανία` | 2 | 0 | 0 | 0 | near absent |
-| Turkey | `טורקיה` / `Τουρκία` | 1 | 0 | 1 | 0 | near absent |
-| Turkey alt | `תורכיה` | 14 | - | - | - | present, low |
+| Trump | `טראמפ` (Tramp; English: Trump) / `τραμπ` (tramp; English: Trump) | 4 | 71 | 18 | 12 | present, low to modest |
+| Donald Trump | `דונלדטראמפ` (Donald Tramp; English: Donald Trump) | 0 | - | - | - | absent in Hebrew combined form |
+| Vance | `ואנס` (Vance; English: Vance) / `βανς` (vans; English: Vance) | 331 | 1,532 | 241 | 259 | high because short form |
+| Vance alt | `ווענס` (Vance; English: Vance) | 12 | - | - | - | present, low |
+| Netanyahu | `נתניהו` (Netanyahu; English: Netanyahu) / `νετανιαχου` (netaniachou; English: Netanyahu) | 8 | 0 | 0 | 0 | Hebrew only, low |
+| Iran | `איראן` (Iran; English: Iran) / `ιραν` (iran; English: Iran) | 210 | 8,375 | 1,876 | 1,983 | high in Greek because short form |
+| Russia | `רוסיה` (Russia; English: Russia) / `Ρωσία` (rosia; English: Russia) | 50 | 268 | 52 | 57 | present |
+| Europe | `אירופה` (Europe; English: Europe) / `Ευρώπη` (Europe; English: Europe) | 17 | 1 | 0 | 1 | low |
+| Germany | `גרמניה` (Germanyah; English: Germany) / `Γερμανία` (Germania; English: Germany) | 2 | 0 | 0 | 0 | near absent |
+| Turkey | `טורקיה` (Turkiyah; English: Turkey) / `Τουρκία` (Tourkia; English: Turkey) | 1 | 0 | 1 | 0 | near absent |
+| Turkey alt | `תורכיה` (Turkiyah; English: Turkey) | 14 | - | - | - | present, low |
 | United States | phrase forms | 0 | 0 | 0 | 0 | absent as full phrase |
-| USA abbreviation | `ארה״ב` / `ΗΠΑ` | 2,410 | 42,727 | 9,567 | 9,201 | high abbreviation effect |
+| USA abbreviation | `ארה״ב` (ARHB; English: USA abbreviation) / `ΗΠΑ` (HPA; English: USA abbreviation) | 2,410 | 42,727 | 9,567 | 9,201 | high abbreviation effect |
 | United Nations | full phrase | 0 | 0 | 0 | 0 | absent as full phrase |
-| United Nations acronym | `או״ם` / `ΟΗΕ` | 81,373 | 95,280 | 25,587 | 24,918 | very high abbreviation effect |
+| United Nations acronym | `או״ם` (UM; English: United Nations abbreviation) / `ΟΗΕ` (OHE; English: United Nations abbreviation) | 81,373 | 95,280 | 25,587 | 24,918 | very high abbreviation effect |
 | European Union | full phrase | 0 | 0 | 0 | 0 | absent |
 
 Read:
@@ -122,8 +122,8 @@ From `reports/protocols/public_baseline/prophetic_terms_counts.csv`.
 
 | Concept | Term | MT_WLC | LXX | TR_NT | SBLGNT |
 | --- | --- | ---: | ---: | ---: | ---: |
-| Gog | `גוג` / `γωγ` | 1,364 | 1,800 | 594 | 572 |
-| Magog | `מגוג` / `μαγωγ` | 104 | 9 | 3 | 3 |
+| Gog | `גוג` (Gog; English: Gog) / `γωγ` (Gog; English: Gog) | 1,364 | 1,800 | 594 | 572 |
+| Magog | `מגוג` (Magog; English: Magog) / `μαγωγ` (Magog; English: Magog) | 104 | 9 | 3 | 3 |
 
 Read:
 
@@ -141,11 +141,11 @@ From `modern_names_dates_counts.csv`.
 
 | Concept | Hebrew | Greek | Counts |
 | --- | --- | --- | --- |
-| Cowboy | `קאובוי` | `καουμποϊ` | MT_WLC 7; Greek corpora 0 |
-| Catering | `קייטרינג` | `κετερινγκ` | all 0 |
-| Cowboy Catering | `קאובוי קייטרינג` | `καουμποϊ κετερινγκ` | all 0 |
-| Simsberry | `סימסברי` | `σιμσμπερι` | all 0 |
-| Simscorner | `סימסקורנר` | `σιμσκορνερ` | all 0 |
+| Cowboy | `קאובוי` (kauboy; English: Cowboy) | `καουμποϊ` (kaoumpoi; English: Cowboy) | MT_WLC 7; Greek corpora 0 |
+| Catering | `קייטרינג` (keytering; English: Catering) | `κετερινγκ` (keteringk; English: Catering) | all 0 |
+| Cowboy Catering | `קאובוי קייטרינג` (kauboy keytering; English: Cowboy Catering) | `καουμποϊ κετερινγκ` (kaoumpoi keteringk; English: Cowboy Catering) | all 0 |
+| Simsberry | `סימסברי` (Simsberry; English: Simsberry) | `σιμσμπερι` (simsberi; English: Simsberry) | all 0 |
+| Simscorner | `סימסקורנר` (Simscorner; English: Simscorner) | `σιμσκορνερ` (simskorner; English: Simscorner) | all 0 |
 
 Read:
 
@@ -195,7 +195,7 @@ Current protocol uses stricter extension filters:
 - `--min-extension-length 3`
 - `--min-term-length 4`
 - `--match-kind-prefix phrase_`
-- `--exclude-term ουλ`
+- `--exclude-term ουλ` (Oul; English: Hul)
 
 Filtered top counts:
 
@@ -208,15 +208,15 @@ Strict TR_NT/SBLGNT top overlap:
 
 | Term | Skip | Direction | Extension | Phrase | TR_NT span | SBLGNT span |
 | --- | ---: | --- | --- | --- | --- | --- |
-| `αδαμ` | 11 | forward | `αδαμεισ` | Ἀδὰμ εἰς | HEB 13:15-HEB 13:16 | Heb 13:15-Heb 13:16 |
-| `δοξα` | 21 | forward | `δοξανωσ` | δόξαν ὡς | 2TH 3:1 | 2Thess 3:1 |
-| `υιος` | -4 | backward | `υιοστησ` | υἱὸς τῆς | JHN 5:13 | John 5:13 |
+| `αδαμ` (Adam; English: Adam) | 11 | forward | `αδαμεισ` (adameis; English: hidden extension form from Adam) | `Ἀδὰμ εἰς` (Adam eis; English: Adam into) | HEB 13:15-HEB 13:16 | Heb 13:15-Heb 13:16 |
+| `δοξα` (doxa; English: glory) | 21 | forward | `δοξανωσ` (doxanos; English: hidden extension form from doxa) | `δόξαν ὡς` (doxan hos; English: glory as) | 2TH 3:1 | 2Thess 3:1 |
+| `υιος` (huios; English: son) | -4 | backward | `υιοστησ` (huiostes; English: hidden extension form from huios) | `υἱὸς τῆς` (huios tes; English: son of the) | JHN 5:13 | John 5:13 |
 
 Read:
 
 - The stricter filter produces a reviewable list.
 - These overlaps survive TR/SBLGNT comparison because those passages are textually similar.
-- Extension analysis now has a coarse all-row control screen, a stricter overlap-only screen, and a context review. Four overlap rows are ELS-only at the hit span; two `δοξα` rows have the base normalized string in the center verse surface text.
+- Extension analysis now has a coarse all-row control screen, a stricter overlap-only screen, and a context review. Four overlap rows are ELS-only at the hit span; two `δοξα` (doxa; English: glory) rows have the base normalized string in the center verse surface text.
 
 ## Controls Verdict
 
@@ -281,12 +281,12 @@ Targeted next round:
 5. Filtered NT extension overlaps
    - Only 3 strict overlaps after filtering.
    - Overlap-only controls now put all 6 corpus rows at q = 0.019608.
-   - Context review: `δοξα` passes the exact-center gate; `υιος` and `αδαμ` are same-category only and ELS-only at the hit span.
-   - Deeper `δοξα` controls: q = 0.004975 in both TR_NT and SBLGNT, still exploratory.
-   - Broader exact-center cohort: 4 rows at q = 0.019608 with 50/50 controls; this prevents treating `δοξα` as the only exact-center example.
+   - Context review: `δοξα` (doxa; English: glory) passes the exact-center gate; `υιος` (huios; English: son) and `αδαμ` (Adam; English: Adam) are same-category only and ELS-only at the hit span.
+   - Deeper `δοξα` (doxa; English: glory) controls: q = 0.004975 in both TR_NT and SBLGNT, still exploratory.
+   - Broader exact-center cohort: 4 rows at q = 0.019608 with 50/50 controls; this prevents treating `δοξα` (doxa; English: glory) as the only exact-center example.
    - Cohort context review: all 4 rows have base-term surface context, but none has the full extension phrase as surface text.
-   - Cross-text check: only `δοξα` appears in both Greek NT texts by exact extension key; SBLGNT `αιμα` and `υιος` are source-only.
-   - Final gate: only `δοξα` remains a review row, and it is still explicitly `review_only_not_claim`.
+   - Cross-text check: only `δοξα` (doxa; English: glory) appears in both Greek NT texts by exact extension key; SBLGNT `αιμα` (haima; English: blood) and `υιος` (huios; English: son) are source-only.
+   - Final gate: only `δοξα` (doxa; English: glory) remains a review row, and it is still explicitly `review_only_not_claim`.
    - Synthetic extension baselines: same-type synthetic controls do not match target scores, but any-type synthetic controls can match/exceed 2 of 4 rows with 3 detailed synthetic match rows.
    - Synthetic match review: all 3 synthetic match rows are ELS-only at the hit span; matched phrases appear elsewhere.
 

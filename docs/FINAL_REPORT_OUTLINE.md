@@ -84,7 +84,7 @@ Use the categories already present in `reports/real_report_run/summary.md`:
 
 - STEP_TAHOT Hebrew source-family final gate;
 - Greek exact-center source/version gates;
-- four-source `δοξα` follow-ups;
+- four-source `δοξα` (doxa; English: glory) follow-ups;
 - Greek surface prospective and post-discovery rows;
 - Hebrew modern/geopolitical controlled and prospective source-distribution
   rows;
@@ -107,26 +107,26 @@ Current snapshot:
 
 Report `Gog` at Rev 20:8 carefully:
 
-- Greek `γωγ` is centered on open `Gog` at Rev 20:8 across BYZ_NT, SBLGNT,
+- Greek `γωγ` (Gog; English: Gog) is centered on open `Gog` at Rev 20:8 across BYZ_NT, SBLGNT,
   TCG_NT, and TR_NT.
 - This is a real source-stable centered-self occurrence in a direct
   Gog/Magog verse.
 - It is not frequency-promoted because all 24 matched length-3 non-target
-  controls had more exact-center paths than `γωγ`.
+  controls had more exact-center paths than `γωγ` (Gog; English: Gog).
 
 ### 6. Strongest Review Candidates
 
 Treat these as review candidates, not claims:
 
-- `δοξα` / `δοξανωσ`: strongest Greek cross-version controlled
+- `δοξα` (doxa; English: glory) / `δοξανωσ` (doxanos; English: hidden extension form from doxa): strongest Greek cross-version controlled
   surface-anchored hidden candidate.
-- `יום יהוה` / `היומיהוה`: strongest locked post-discovery
+- `יום יהוה` (yom YHWH; English: day of YHWH) / `היומיהוה` (hayom YHWH; English: the day of YHWH): strongest locked post-discovery
   compound-extension review candidate.
-- Greek `γωγ` at Rev 20:8: strongest occurrence-first centered-self row by
+- Greek `γωγ` (Gog; English: Gog) at Rev 20:8: strongest occurrence-first centered-self row by
   contextual relevance, with short-form frequency caution.
-- LXX `ιησουσ` rows: real centered-self rows, but referent discipline is
+- LXX `ιησουσ` (Iesous; English: Jesus/Joshua) rows: real centered-self rows, but referent discipline is
   required because the surface referent is Joshua/Jesus depending on context.
-- Hebrew `ישוע` and `משיח` rows: list occurrences, but carry control-background
+- Hebrew `ישוע` (Yeshua; English: Yeshua/Jeshua) and `משיח` (Mashiach; English: Messiah/anointed one) rows: list occurrences, but carry control-background
   warnings because language-matched controls also produce centered rows.
 
 ### 7. Negative And Weak Results

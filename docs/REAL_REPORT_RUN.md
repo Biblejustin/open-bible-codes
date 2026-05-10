@@ -153,12 +153,12 @@ The report-run summary should currently say:
 
 - STEP_TAHOT-only behavior is not meaningful by itself because the real-term and
   null/frequency-control source-only rates are nearly identical.
-- `δοξα` is the strongest Greek row: a cross-version controlled
+- `δοξα` (doxa; English: glory) is the strongest Greek row: a cross-version controlled
   surface-anchored hidden candidate.
 - A later locked four-source 5000/5000 follow-up is tracked in
   `docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md`, and a stricter
   20000/20000 confirmatory follow-up is tracked in
-  `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`; both keep `δοξα`
+  `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`; both keep `δοξα` (doxa; English: glory)
   at review candidate status, not claim status.
 - The expanded Greek surface queue is tracked as post-screen review material:
   exact-center surface means center verse surface context, not necessarily a
@@ -194,7 +194,7 @@ The report-run summary should currently say:
   lock, count smoke outputs, and an ANU source-shape check, but not the locked
   pair table, corrected-distance, and permutation statistic required for a
   reproduction claim.
-- `υιοσ` and `αιμα` remain weaker hidden-path candidates because their exact
+- `υιοσ` (huios; English: son) and `αιμα` (haima; English: blood) remain weaker hidden-path candidates because their exact
   patterns are missing from one or more compared Greek NT sources.
 - no row is claim-level yet.
 - The broad Hebrew modern/geopolitical controlled review adds representative
@@ -206,7 +206,7 @@ The report-run summary should currently say:
   support.
 - The relaxed all-codes follow-up keeps hidden-path-only rows and separately
   ranks surface-near rows. The locked 5000/5000 compound-extension
-  confirmatory controls keep the selected `יום יהוה` -> `היומיהוה` key across
+  confirmatory controls keep the selected `יום יהוה` (yom YHWH; English: day of YHWH) -> `היומיהוה` (hayom YHWH; English: the day of YHWH) key across
   all five MT-family sources at conservative all-control q = 0.003599. It is a
   post-discovery review candidate, not a claim.
 

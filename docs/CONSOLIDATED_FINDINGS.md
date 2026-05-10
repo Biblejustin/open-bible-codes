@@ -41,10 +41,10 @@ Current centered-occurrence snapshot:
 - 526 `centered_self_exact_word` presence rows.
 - Bridge-context additions contribute 28 LXX and 120 KJVA apocrypha/deuterocanon
   bridge presence rows.
-- The top presence row is Greek `γωγ` centered on open `Gog` at Rev 20:8
-  across BYZ_NT, SBLGNT, TCG_NT, and TR_NT. It remains frequency-cautioned:
+- The top presence row is Greek `γωγ` (Gog; English: Gog) centered on open
+  `Gog` at Rev 20:8 across BYZ_NT, SBLGNT, TCG_NT, and TR_NT. It remains frequency-cautioned:
   all 24 matched length-3 non-target controls had more exact-center paths than
-  `γωγ`.
+  `γωγ` (Gog; English: Gog).
 
 Apocrypha/deuterocanon bridge-completion now has an expanded shuffled-control
 read. LXX bridge rows are reproducible but do not stand out under 100 shuffled
@@ -71,7 +71,8 @@ Most modern terms do not produce meaningful-looking results under current contro
 - `Trump`: present but low/modest; not unusual under controls.
 - `Vance`: higher because the form is short; not unusual under controls.
 - `Netanyahu`: Hebrew MT-family only and low; Greek form absent.
-- `Iran`: high in Greek because `ιραν` is a 4-letter form; paired controls read not unusual.
+- `Iran`: high in Greek because `ιραν` (iran; English: Iran) is a 4-letter
+  form; paired controls read not unusual.
 - `Russia`, `Europe`, `Turkey`, `Germany`: present at low to moderate levels, with no robust control-backed signal.
 - Full phrases such as United States, United Nations, European Union, Cowboy Catering, Simsberry, and Simscorner are absent or effectively absent.
 - Abbreviations such as USA and United Nations are extremely high, but they are short-form density effects.
@@ -97,7 +98,7 @@ pair-control result is negative.
 
 Current read: the Hebrew prospective pair lane produced no
 `prospective_controlled_review_candidate`. Keep Gog/Magog as exploratory only,
-not evidential. The Greek Rev 20:8 `γωγ` row is still a real source-stable
+not evidential. The Greek Rev 20:8 `γωγ` (Gog; English: Gog) row is still a real source-stable
 centered-self occurrence in a direct Gog/Magog verse, so it belongs in the final
 occurrence list. It is not frequency-promoted because of the length-3 control
 result.
@@ -113,7 +114,10 @@ The broader run did not change the conclusion.
   UXLC ketiv, MAM, eBible WLC as a packaging check, and UHB as a derived
   MT-family comparison stream.
 - Count increases versus skip `2..50` are mostly about 2x, which is expected.
-- Top length 4+ rows are still dense short forms like `ναοσ`, `νατο`, `υιοσ`, `αιμα`, `יהוה`, and `ιραν`.
+- Top length 4+ rows are still dense short forms like `ναοσ` (naos; English:
+  temple), `νατο` (nato; English: NATO), `υιοσ` (huios; English: son),
+  `αιμα` (haima; English: blood), `יהוה` (YHWH; English: YHWH), and
+  `ιραν` (iran; English: Iran).
 - Null controls also produce high counts, including scrambled YHWH at 22,293
   MAM hits, 22,277 MT_WLC hits, 22,271 EBIBLE_WLC hits, 22,269 UXLC hits, and
   22,204 UHB hits.
@@ -130,8 +134,10 @@ The focused wide run also did not change the conclusion.
 - Count-step runtime observed: 40.327s through
   `protocols/wide_focus_search.toml`.
 - Count increases versus skip `2..50` are mostly about 5x, which is expected.
-- Top length 4+ rows remain dense short forms such as Greek `νατο`, `αιμα`,
-  `κινα`, `ιραν`, and Hebrew `רומי`.
+- Top length 4+ rows remain dense short forms such as Greek `νατο` (nato;
+  English: NATO), `αιμα` (haima; English: blood), `κινα` (kina; English:
+  China), `ιραν` (iran; English: Iran), and Hebrew `רומי` (Romi; English:
+  Rome/Roman).
 - Full phrases such as United States, United States of America, United
   Nations, European Union, Cowboy Catering, Catering, and Simscorner remain
   absent in observed Hebrew and Greek corpora.
@@ -242,16 +248,17 @@ is tracked in
   Bialik controls also produce exact-center rows.
 - Gog source follow-up:
   `docs/DYNAMIC_SKIP_GOG_PROMOTED_EXACT_CENTER_SOURCE_REVIEW.md` checks Greek
-  `γωγ` directly across TR_NT, BYZ_NT, TCG_NT, and SBLGNT. All four sources
+  `γωγ` (Gog; English: Gog) directly across TR_NT, BYZ_NT, TCG_NT, and SBLGNT. All four sources
   have open `Gog` at Rev 20:8 and exact-center hidden paths. That makes it a
   source-stable centered-self occurrence in the Gog/Magog verse. It is still
   not a claim by itself because the term is only three letters, and the open
   surface word supplies the center anchor.
 - Gog matched length-3 controls:
-  `docs/DYNAMIC_SKIP_GOG_LENGTH3_SURFACE_CONTROL_REVIEW.md` compares `γωγ`
+  `docs/DYNAMIC_SKIP_GOG_LENGTH3_SURFACE_CONTROL_REVIEW.md` compares `γωγ` (Gog; English: Gog)
   against normalized Greek length-3 surface words that occur exactly once in
   every compared Greek NT source. The matched universe has 25 terms including
-  `γωγ`; all 24 non-target controls have more exact-center paths than `γωγ`.
+  `γωγ` (Gog; English: Gog); all 24 non-target controls have more exact-center
+  paths than `γωγ` (Gog; English: Gog).
   This does not remove the Rev 20:8 Gog row from the final findings list; it
   says the row is contextually meaningful but not frequency-promoted.
 
@@ -327,9 +334,11 @@ It checked whether same-interval letters before/after modern-name hits formed
 any surface word or short phrase in the same corpus. The top phrase rows were
 not modern-message evidence:
 
-- `ישראל` / `ισραηλ` extended into ordinary biblical Israel phrases;
-- `מצרימ` matched an unrelated normalized Hebrew phrase, not Egypt;
-- Greek `Harris` collided with `χαρις` / grace;
+- `ישראל` (Yisrael; English: Israel) / `ισραηλ` (Israel; English: Israel)
+  extended into ordinary biblical Israel phrases;
+- `מצרימ` (Mitzrayim; English: Egypt/Egyptians) matched an unrelated normalized
+  Hebrew phrase, not Egypt;
+- Greek `Harris` collided with `χαρις` (charis; English: grace);
 - Cowboy Catering, Simsberry, and Simscorner did not produce meaningful
   phrase-extension rows.
 
@@ -373,15 +382,18 @@ extensions:
   by min-q screen, 14 rows are q <= 0.05, 7 additional rows are q <= 0.10,
   and 22 are not unusual; by conservative all-control q, 0 rows are q <= 0.05
   and 2 rows are q <= 0.10.
-- 5 locked confirmatory rows for the selected `יום יהוה` -> `היומיהוה`
+- 5 locked confirmatory rows for the selected `יום יהוה` (yom YHWH; English:
+  day of YHWH) -> `היומיהוה` (hayom YHWH; English: the day of YHWH)
   same-skip extension key across EBIBLE_WLC, MAM, MT_WLC, UHB, and UXLC with
   5000 term controls and 5000 random controls per row; all five have
   conservative all-control q = 0.003599.
 
 Current all-codes read: the extension and context exports are useful review
-filters, especially for compound rows such as `עדיהוה`, `אדניאמר`, and
-`היומיהוה`. The confirmatory control run makes the selected `יום יהוה`
-compound-extension row stronger as a review candidate, but it remains
+filters, especially for compound rows such as `עדיהוה` (ad YHWH; English:
+compound hidden sequence involving YHWH), `אדניאמר` (Adonai amar; English:
+the Lord said), and `היומיהוה` (hayom YHWH; English: the day of YHWH). The
+confirmatory control run makes the selected `יום יהוה` (yom YHWH; English:
+day of YHWH) compound-extension row stronger as a review candidate, but it remains
 post-discovery review material, not claim evidence, because the candidate came
 from a broad prior queue.
 
@@ -539,8 +551,11 @@ The compiled Hebrew claim-term matrix gives the same read at larger scale:
 - 956 source-specific patterns;
 - 50 summarized terms with no hits.
 
-Current claim-term read: short forms such as `משיח`, `ישוע`, `רמבמ`, `יהוה`,
-`תורה`, and `נביא` are stable and dense. Longer phrases are often sparse or
+Current claim-term read: short forms such as `משיח` (Mashiach; English:
+Messiah/anointed one), `ישוע` (Yeshua; English: Yeshua/Jeshua), `רמבמ` (Rambam;
+English: Maimonides), `יהוה` (YHWH; English: YHWH),
+`תורה` (Torah; English: Torah), and `נביא` (navi; English: prophet) are
+stable and dense. Longer phrases are often sparse or
 absent. That supports version-distribution review, not significance.
 
 Tracked summary: `docs/HEBREW_CLAIM_VERSION_PRESENCE.md`.
@@ -604,10 +619,14 @@ Tracked distribution: `docs/HEBREW_VERSION_SPECIFIC_DISTRIBUTION.md`.
 
 The four-source Greek exact-center matrix now keeps that distinction visible:
 
-- `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ`: TR_NT, BYZ_NT, TCG_NT, SBLGNT;
-- `υιοσ|25|forward|before_plus_term|ουουιοσ|ουουιοσ`: BYZ_NT, SBLGNT;
-- `αιμα|14|forward|before_plus_term_plus_after|ναιμανο|ναιμανο`: SBLGNT only;
-- `υιοσ|-46|backward|before_plus_term|ειουιοσ|ειουιοσ`: BYZ_NT only.
+- `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` (doxa; English: glory;
+  doxanos = hidden extension form): TR_NT, BYZ_NT, TCG_NT, SBLGNT;
+- `υιοσ|25|forward|before_plus_term|ουουιοσ|ουουιοσ` (huios; English: son;
+  ouhuios = hidden extension form): BYZ_NT, SBLGNT;
+- `αιμα|14|forward|before_plus_term_plus_after|ναιμανο|ναιμανο` (haima;
+  English: blood; naimano = hidden extension form): SBLGNT only;
+- `υιοσ|-46|backward|before_plus_term|ειουιοσ|ειουιοσ` (huios; English: son;
+  eiouios = hidden extension form): BYZ_NT only.
 
 Current read: source-specific rows should not be promoted, but they also should
 not be discarded. They become version-specific review queues.
@@ -646,8 +665,11 @@ and festival term files:
 - 3,416 multi-source rows;
 - 5,495 source-specific rows, with SBLGNT-only rows largest.
 
-Current broader Greek read: short forms such as `αραμ`, `κινα`, `λευι`, `θεοσ`,
-`αμην`, `ναοσ`, `ιραν`, `νατο`, and `αιμα` dominate all-source stability. Long
+Current broader Greek read: short forms such as `αραμ` (Aram; English: Aram),
+`κινα` (kina; English: China), `λευι` (Leui; English: Levi), `θεοσ` (theos;
+English: God), `αμην` (amen; English: amen), `ναοσ` (naos; English: temple),
+`ιραν` (iran; English: Iran), `νατο` (nato; English: NATO), and `αιμα` (haima;
+English: blood) dominate all-source stability. Long
 modern/local phrases such as United States, United Nations, European Union,
 Cowboy Catering, Simsberry, and Simscorner remain absent.
 
@@ -661,9 +683,10 @@ much larger than the NT.
 
 Tracked read: `docs/GREEK_LXX_NT_CORPUS_PRESENCE.md`.
 
-### Greek Exact-Center Extension Row: `δοξα`
+### Greek Exact-Center Extension Row: `δοξα` (doxa; English: glory)
 
-The `δοξα` / `δοξανωσ` extension is the strongest review row so far, but still not a claim.
+The `δοξα` (doxa; English: glory) / `δοξανωσ` (doxanos; hidden extension form)
+extension is the strongest review row so far, but still not a claim.
 
 Why it remains interesting:
 
@@ -690,22 +713,25 @@ Why it remains review-level rather than claim-level:
 - it has related surface context, but not the rarer same-span surface echo;
 - same-length synthetic controls show broad any-type extension scoring can produce comparable-looking hidden phrases;
 - synthetic match review showed those synthetic phrases also appear elsewhere, not in the hit span.
-- the matched phrase `δόξαν ὡς` appears at John 1:14 / JHN 1:14, not as surface text in the 2 Thessalonians 3:1 hit passage.
+- the matched phrase `δόξαν ὡς` (doxan hos; English: glory as) appears at
+  John 1:14 / JHN 1:14, not as surface text in the 2 Thessalonians 3:1 hit
+  passage.
 
-Current read: `δοξα` is a four-source claim-follow-up review candidate, not a
+Current read: `δοξα` (doxa; English: glory) is a four-source claim-follow-up review candidate, not a
 claim.
 
 ### Other Exact-Center Rows
 
-The exact-center cohort also surfaced SBLGNT-only `αιμα` and `υιος` rows.
-After adding BYZ_NT, `υιος` is no longer source-only under the locked
+The exact-center cohort also surfaced SBLGNT-only `αιμα` (haima; English:
+blood) and `υιος` (huios; English: son) rows.
+After adding BYZ_NT, `υιος` (huios; English: son) is no longer source-only under the locked
 three-source protocol: it appears in BYZ_NT and SBLGNT with q <= 0.001998.
 
 Current read:
 
-- `υιος`: multi-source hidden-path candidate across BYZ_NT and SBLGNT, but
+- `υιος` (huios; English: son): multi-source hidden-path candidate across BYZ_NT and SBLGNT, but
   not TR_NT or TCG_NT;
-- `αιμα`: source-specific hidden-path candidate;
+- `αιμα` (haima; English: blood): source-specific hidden-path candidate;
 - both remain review candidates, not claims.
 
 ## Controls Matter Most
@@ -786,21 +812,24 @@ before inspecting any new cohort results.
 
 The locked cohort run is summarized in
 `docs/GREEK_EXACT_CENTER_COHORT_REPORT.md`: it found no new controlled
-cross-text candidate beyond `δοξα`.
+cross-text candidate beyond `δοξα` (doxa; English: glory).
 
-The weaker source-only SBLGNT follow-up for `αιμα` and `υιος` is locked in
+The weaker source-only SBLGNT follow-up for `αιμα` (haima; English: blood) and
+`υιος` (huios; English: son) is locked in
 `docs/SBLGNT_SOURCE_ONLY_EXACT_CENTER_PREREGISTRATION.md` and summarized in
 `docs/SBLGNT_SOURCE_ONLY_EXACT_CENTER_REPORT.md`.
 
-The BYZ_NT source-only follow-up for `υιοσ|-46|backward|before_plus_term` is
-locked in `docs/BYZ_SOURCE_ONLY_EXACT_CENTER_PREREGISTRATION.md` and summarized
+The BYZ_NT source-only follow-up for `υιοσ|-46|backward|before_plus_term` (huios;
+English: son) is locked in
+`docs/BYZ_SOURCE_ONLY_EXACT_CENTER_PREREGISTRATION.md` and summarized
 in `docs/BYZ_SOURCE_ONLY_EXACT_CENTER_REPORT.md`. It stayed at q = `0.000999`
 inside BYZ_NT, but remains source-specific and hidden-path only.
 
 The independent-source Greek follow-up is locked in
 `docs/GREEK_EXACT_CENTER_THREE_SOURCE_PREREGISTRATION.md` and summarized in
-`docs/GREEK_EXACT_CENTER_THREE_SOURCE_REPORT.md`. It moves `δοξα` to all-three
-source support and moves `υιος` to BYZ_NT + SBLGNT support, both still as
+`docs/GREEK_EXACT_CENTER_THREE_SOURCE_REPORT.md`. It moves `δοξα` (doxa;
+English: glory) to all-three source support and moves `υιος` (huios; English:
+son) to BYZ_NT + SBLGNT support, both still as
 controlled review candidates only.
 
 The three-source synthetic follow-up in
@@ -812,18 +841,19 @@ claim, not a rejection of hidden-path candidates as such.
 
 The added-source Greek follow-up is locked in
 `docs/GREEK_EXACT_CENTER_FOUR_SOURCE_PREREGISTRATION.md` and summarized in
-`docs/GREEK_EXACT_CENTER_FOUR_SOURCE_REPORT.md`. It keeps `δοξα` as a
+`docs/GREEK_EXACT_CENTER_FOUR_SOURCE_REPORT.md`. It keeps `δοξα` (doxa;
+English: glory) as a
 four-source controlled surface-anchored hidden candidate and does not move
-`υιος` into the locked TCG-overlap set.
+`υιος` (huios; English: son) into the locked TCG-overlap set.
 
-The stronger single-row `δοξα` four-source claim follow-up is locked in
+The stronger single-row `δοξα` (doxa; English: glory) four-source claim follow-up is locked in
 `docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_PREREGISTRATION.md` and summarized in
 `docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md`. It ran 5000 shuffled-term and
 5000 same-length random controls per row. All four Greek NT rows passed the
 registered q <= 0.01 criterion, with q values from 0.0008 to 0.0016. The status
 remains `claim_followup_review_candidate`, not a claim.
 
-The stricter single-row `δοξα` confirmatory follow-up is locked in
+The stricter single-row `δοξα` (doxa; English: glory) confirmatory follow-up is locked in
 `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_PREREGISTRATION.md` and summarized
 in `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`. It ran 20000
 shuffled-term and 20000 same-length random controls per row. All four Greek NT
@@ -852,9 +882,10 @@ row to claim status.
 The tighter post-screen surface triage is tracked in
 `docs/GREEK_EXPANDED_SURFACE_TRIAGE.md`. Its mechanical filter keeps only
 all-source patterns with normalized term length >= 5. That leaves three review
-rows: `ανομια` at Matthew 7:23, `ισαακ` at Hebrews 11:9, and `τερασ` at
-Hebrews 9:11. It deliberately excludes the dense length-4 bucket, including
-`αμην`, without making a term-specific judgment. The next fair control design
+rows: `ανομια` (anomia; English: lawlessness) at Matthew 7:23, `ισαακ` (Isaak;
+English: Isaac) at Hebrews 11:9, and `τερασ` (teras; English: wonder)
+at Hebrews 9:11. It deliberately excludes the dense length-4 bucket, including
+`αμην` (amen; English: amen), without making a term-specific judgment. The next fair control design
 must compare against real Greek terms matched by length and surface frequency,
 not random strings that cannot satisfy surface context.
 
@@ -869,7 +900,8 @@ The first real-word surface control pool is tracked in
 surface-substring verse frequency for all 291 expanded Greek terms across
 TR_NT, BYZ_NT, TCG_NT, and SBLGNT. It found 165 terms present by that rule in
 all four sources and selected 10 same-length, closest-surface-frequency control
-candidates for each of `ανομια`, `ισαακ`, and `τερασ`. This is still not a
+candidates for each of `ανομια` (anomia; English: lawlessness), `ισαακ` (Isaak;
+English: Isaac), and `τερασ` (teras; English: wonder). This is still not a
 significance test; it is the fair control pool needed before running one.
 
 The first matched-control evaluation is tracked in
@@ -883,7 +915,8 @@ The all-available matched-control follow-up is tracked in
 `docs/GREEK_EXPANDED_SURFACE_AVAILABLE_CONTROL_EVALUATION.md`. It used every
 same-length all-source surface-present control available from the frozen
 expanded Greek term list, excluding the selected target rows from the control
-pool: 32 controls for `ισαακ`, 32 for `τερασ`, and 30 for `ανομια`. All three
+pool: 32 controls for `ισαακ` (Isaak; English: Isaac), 32 for `τερασ` (teras;
+English: wonder), and 30 for `ανομια` (anomia; English: lawlessness). All three
 selected rows exceed their available matched controls on all-source
 surface-pattern count, with q = 0.032258. Current read: stronger triage
 evidence, but still post-screen and not claim-level support.
@@ -896,7 +929,9 @@ control results into one review sheet. Current status:
 
 The prospective Greek surface claim standard is tracked in
 `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`. It states that the existing
-`δοξα`, `υιος`, `αιμα`, `ανομια`, `ισαακ`, and `τερασ` rows are prior evidence,
+`δοξα` (doxa; English: glory), `υιος` (huios; English: son), `αιμα` (haima;
+English: blood), `ανομια` (anomia; English: lawlessness), `ισαακ` (Isaak;
+English: Isaac), and `τερασ` (teras; English: wonder) rows are prior evidence,
 not new prospective discoveries. A future surface study must commit the term
 file, protocol, source configs, control design, and correction rule before any
 new result-producing run.
@@ -910,8 +945,10 @@ normalized length >= 5. No row met that primary rule, so the prospective result
 is negative.
 
 That same run exposed a post-discovery length-4 bucket, tracked in
-`docs/GREEK_SURFACE_LENGTH4_FOLLOWUP_TRIAGE.md`: `αμην`, `αραμ`, `ασηρ`,
-`δασα`, `σαβα`, `σιων`, and `χουσ`. Against the declared screening-term control
+`docs/GREEK_SURFACE_LENGTH4_FOLLOWUP_TRIAGE.md`: `αμην` (amen; English: amen),
+`αραμ` (Aram; English: Aram), `ασηρ` (Aser; English: Asher), `δασα` (dasa;
+English: generated control-like form), `σαβα` (Saba; English: Sheba/Seba),
+`σιων` (Sion; English: Zion), and `χουσ` (Chous; English: Cush). Against the declared screening-term control
 pool, those rows exceeded the available same-length controls, but only 14
 controls were available per target and the add-one floor was q = `0.066667`.
 The generated vocabulary-control follow-up in
@@ -926,6 +963,6 @@ The Greek exact-center final gate is tracked in
 `docs/GREEK_EXACT_CENTER_FINAL_GATE.md`. It labels hidden-path findings as
 candidate types rather than disqualifying them:
 
-- `δοξα`: `cross_version_controlled_surface_anchored_hidden_candidate`;
-- `υιος`: `multi_source_hidden_path_candidate`;
-- `αιμα`: `source_specific_hidden_path_candidate`.
+- `δοξα` (doxa; English: glory): `cross_version_controlled_surface_anchored_hidden_candidate`;
+- `υιος` (huios; English: son): `multi_source_hidden_path_candidate`;
+- `αιμα` (haima; English: blood): `source_specific_hidden_path_candidate`.

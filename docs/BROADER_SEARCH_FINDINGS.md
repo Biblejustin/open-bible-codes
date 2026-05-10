@@ -19,7 +19,7 @@ raw counts, and which rows remain worth review.
 
 Recent local runtimes were about 21 seconds for the broad run, 40 seconds for
 the wide-focus run, 32 seconds for wide-focus paired controls, and 7 seconds for
-the deep `δοξα` extension control follow-up.
+the deep `δοξα` (doxa; English: glory) extension control follow-up.
 
 ## Main Read
 
@@ -31,8 +31,8 @@ the deep `δοξα` extension control follow-up.
 - Version presence matters. Several terms appear in every compatible Hebrew or
   Greek source family, while longer modern phrases often remain absent even when
   abbreviations are dense.
-- The strongest controlled row remains Greek `δοξα` with same-skip extension
-  `δοξανωσ`, supported across Greek NT sources and surviving deeper row-local
+- The strongest controlled row remains Greek `δοξα` (doxa; English: glory) with same-skip extension
+  `δοξανωσ` (doxanos; English: hidden extension form from doxa), supported across Greek NT sources and surviving deeper row-local
   controls. Its status remains review material, not a claim.
 
 ## Broad Search, Skip 2..100
@@ -48,7 +48,7 @@ presence grouped terms into:
 Important observations:
 
 - United Nations and USA abbreviations are extremely dense, but only as short
-  acronym forms such as Hebrew `אומ` and Greek `οηε` / `ηπα`.
+  acronym forms such as Hebrew `אומ` (UM; English: United Nations abbreviation) and Greek `οηε` (OHE; English: United Nations abbreviation) / `ηπα` (HPA; English: USA abbreviation).
 - Longer phrases such as United Nations, United States, United States of
   America, European Union, and Cowboy Catering are absent at this range.
 - `Trump`, `Netanyahu`, `Russia`, `Europe`, `Germany`, `Turkey`, `Gog`, and
@@ -108,9 +108,9 @@ Current read:
 - The stricter version-presence extension top files are empty at the current
   phrase-top threshold, though lower-level summaries contain ordinary phrase
   matches.
-- The strong controlled extension row remains Greek `δοξα`, skip `21`,
-  forward, `term_plus_after`, hidden extension `δοξανωσ`, matching surface
-  phrase `δόξαν ὡς` at John 1:14. Deep controls give q = `0.000999` in both
+- The strong controlled extension row remains Greek `δοξα` (doxa; English: glory), skip `21`,
+  forward, `term_plus_after`, hidden extension `δοξανωσ` (doxanos; English: hidden extension form from doxa), matching surface
+  phrase `δόξαν ὡς` (doxan hos; English: glory as) at John 1:14. Deep controls give q = `0.000999` in both
   SBLGNT and TR_NT for the locked two-row follow-up.
 
 ## Current Claim Boundary
@@ -118,8 +118,8 @@ Current read:
 No broader-search modern, geopolitical, local, Gog/Magog, or prophetic row is
 claim-level material. The current strongest rows are review candidates only:
 
-- `δοξα` / `δοξανωσ`: strongest controlled Greek extension review candidate;
-- `ανομια`, `ισαακ`, `τερασ`: post-screen Greek surface review candidates;
+- `δοξα` (doxa; English: glory) / `δοξανωσ` (doxanos; English: hidden extension form from doxa): strongest controlled Greek extension review candidate;
+- `ανομια` (anomia; English: lawlessness), `ισαακ` (Isaak; English: Isaac), `τερασ` (teras; English: wonder): post-screen Greek surface review candidates;
 - broad and wide modern/geopolitical rows: raw screens or control-weakened
   screens.
 
