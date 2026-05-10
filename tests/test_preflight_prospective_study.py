@@ -142,6 +142,9 @@ def test_main_passes_with_clean_preregistration_and_manifest(tmp_path) -> None:
     payload = json.loads(out.read_text(encoding="utf-8"))
     assert payload["status"] == "passed"
     assert payload["output_path"] == str(out)
+    assert "remote_failures" in payload
+    assert "risky_tracked_paths" in payload
+    assert "secret_pattern_hits" in payload
 
 
 def test_main_uses_manifest_based_default_out_path(tmp_path) -> None:

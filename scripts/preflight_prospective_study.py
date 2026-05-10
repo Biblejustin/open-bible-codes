@@ -16,6 +16,14 @@ from els import __version__
 from scripts import check_preregistration_placeholders as prereg_check
 from scripts import check_study_lock_manifest as lock_check
 from scripts import preflight_real_report_run as report_preflight
+from scripts.release_hygiene import (
+    format_finding,
+    git_tracked_paths,
+    remote_owner_failures,
+    risky_tracked_paths,
+    scan_tracked_for_forbidden_account,
+    scan_tracked_for_secret_patterns,
+)
 
 
 DEFAULT_REQUIRED_SETTINGS = [
@@ -38,15 +46,34 @@ def main(argv: list[str] | None = None) -> int:
     if git_status and not args.allow_dirty:
         failures.append("git working tree is not clean")
 
-    forbidden_remote_hits = sorted(report_preflight.forbidden_hits("\n".join(report_preflight.git_remotes(root))))
-    if forbidden_remote_hits:
-        failures.append("forbidden account text found in git remotes: " + ", ".join(forbidden_remote_hits))
+    remotes = report_preflight.git_remotes(root)
+    remote_failures = remote_owner_failures(remotes)
+    failures.extend(remote_failures)
 
     forbidden_repo_hits = report_preflight.scan_forbidden_terms(root)
     if forbidden_repo_hits:
         failures.append(
             "forbidden account text found in repository files: "
             + ", ".join(forbidden_repo_hits[:5])
+        )
+
+    tracked_paths = git_tracked_paths(root)
+    risky_paths = risky_tracked_paths(tracked_paths)
+    if risky_paths:
+        failures.append("risky tracked paths: " + ", ".join(risky_paths[:10]))
+
+    forbidden_tracked_hits = scan_tracked_for_forbidden_account(root, tracked_paths)
+    if forbidden_tracked_hits:
+        failures.append(
+            "forbidden account text in tracked files: "
+            + ", ".join(forbidden_tracked_hits[:10])
+        )
+
+    secret_hits = scan_tracked_for_secret_patterns(root, tracked_paths)
+    if secret_hits:
+        failures.append(
+            "high-confidence secret patterns in tracked files: "
+            + ", ".join(format_finding(hit) for hit in secret_hits[:10])
         )
 
     placeholder_rows = placeholder_failures(args.preregistration)
@@ -91,8 +118,13 @@ def main(argv: list[str] | None = None) -> int:
         "protocol": str(args.protocol) if args.protocol else "",
         "required_settings": required_settings,
         "git_status_lines": git_status,
-        "forbidden_remote_hits": forbidden_remote_hits,
+        "git_remotes": remotes,
+        "remote_failures": remote_failures,
         "forbidden_repo_hits": forbidden_repo_hits,
+        "tracked_path_count": len(tracked_paths),
+        "risky_tracked_paths": risky_paths,
+        "forbidden_tracked_hits": forbidden_tracked_hits,
+        "secret_pattern_hits": [hit.as_dict() for hit in secret_hits],
         "placeholder_hits": placeholder_rows,
         "manifest_name": manifest_payload.get("name") if manifest_payload else "",
         "manifest_status": manifest_payload.get("status") if manifest_payload else "",

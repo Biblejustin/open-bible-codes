@@ -38,7 +38,10 @@ python3 -m scripts.preflight_prospective_study \
 This checks:
 
 - git working tree cleanliness;
-- forbidden account text in remotes and repository files;
+- Git remotes pointing at `Biblejustin/open-bible-codes`;
+- forbidden account text in remotes and tracked/repository files;
+- tracked report/database/raw-source artifact hazards;
+- high-confidence secret-token patterns in tracked files;
 - unresolved preregistration placeholders;
 - lock-manifest status, required settings, dirty-state, and path fingerprints;
 - optional clean prospective-term audit summary;
