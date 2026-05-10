@@ -53,6 +53,27 @@ make crd-concept-surface-queue
 
 Compared with the self-surface run, the concept-surface run is only slightly broader at the headline level: `exceeds_secular_max` moved from 221 to 223, and nonzero density rows moved from 5,323 to 5,370. That means many current concepts still have only one effective surface spelling, or their same-concept variants do not materially change the centered-hit density screen.
 
+## Delta Versus Self-Surface Run
+
+The concept-surface dictionary changed 113 `(term, corpus)` density rows compared with the earlier self-surface run. It created 47 newly nonzero rows. The largest increases are not Bible-only; many occur in Hebrew secular controls, which is a useful guard against over-reading same-concept expansion.
+
+Largest increases by added relevant centered hits:
+
+| Term | Corpus | Concept | Self hits | Concept hits | Added hits |
+| --- | --- | --- | ---: | ---: | ---: |
+| `tyre_alt_h` | HEB_PBY_BIALIK | Tyre | 88 | 199 | 111 |
+| `twn_obed_h` | HEB_PBY_BIALIK | Obed | 34 | 118 | 84 |
+| `cc_acacia_h` | HEB_PBY_AHAD_HAAM | Acacia | 13 | 96 | 83 |
+| `tyre_alt_h` | HEB_PBY_BRENNER | Tyre | 126 | 196 | 70 |
+| `cc_obed_h`, `mt_obed_h` | HEB_PBY_BRENNER | Obed | 50 | 113 | 63 |
+| `rome_alt_h` | HEB_PBY_BIALIK | Rome | 14 | 73 | 59 |
+| `year_2001_additive_h` | HEB_PBY_BIALIK | Gregorian 2001 | 0 | 59 | 59 |
+| `wisdom_h` | HEB_PBY_BIALIK | Wisdom | 1 | 55 | 54 |
+| `tyre_alt_h` | UHB | Tyre | 0 | 53 | 53 |
+| `tyre_alt_h` | MT_WLC / EBIBLE_WLC / UXLC | Tyre | 0 | 53 | 53 |
+
+The main read is that same-concept expansion should remain separate from self-surface coincidence. It broadens recall, but it also broadens control hits. Treat concept-surface rows as a review queue, not as stronger evidence by default.
+
 ## Strongest Finite Bible-Vs-Control Ratios
 
 | Term | Language | Bible max | Bible corpus | Secular max | Secular corpus | Ratio |
