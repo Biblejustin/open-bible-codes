@@ -1,6 +1,6 @@
 # CRD Center-Word Self Vs Concept Findings
 
-Status: local comparison completed on 2026-05-09 from ignored outputs under `reports/crd_self_surface/` and `reports/crd_concept_surface/`.
+Status: local comparison generated from ignored outputs under `reports/crd_self_surface/` and `reports/crd_concept_surface/`.
 
 ## Scope
 
@@ -30,19 +30,19 @@ The center-word density summaries are also effectively stable:
 - rows with changed `exceeds_secular_max`: 0
 - rows with changed secular max density or corpus: 2
 
-The two changed rows are secular-control changes only:
+The changed rows are secular-control changes only:
 
 | Term | Language | Self secular max | Self secular corpus | Concept secular max | Concept secular corpus |
 | --- | --- | ---: | --- | ---: | --- |
-| `cc_acacia_h` | hebrew | 0 | HEB_PBY_BIALIK | 1.45022905 | HEB_PBY_AHAD_HAAM |
-| `wisdom_h` | hebrew | 0 | HEB_PBY_BIALIK | 0.362557261 | HEB_PBY_AHAD_HAAM |
+| `שטה` (shth; English: Acacia)<br>`cc_acacia_h` | hebrew | 0 | HEB_PBY_BIALIK | 1.45022905 | HEB_PBY_AHAD_HAAM |
+| `חוכמה` (chwkmh; English: Wisdom)<br>`wisdom_h` | hebrew | 0 | HEB_PBY_BIALIK | 0.362557261 | HEB_PBY_AHAD_HAAM |
 
 The exact center-word version-presence view contains:
 
 - exact center-word term rows: 131
 - exact center-word hit rows: 1,044
 - language distribution: Hebrew 71, Greek 37, English 23
-- corpus-count distribution: 57 terms in 5 corpus labels, 1 term in 4, 5 terms in 3, 24 terms in 2, and 44 terms in 1
+- corpus-count distribution: 57 terms in 5 corpus labels, 1 term in 4 corpus labels, 5 terms in 3 corpus labels, 24 terms in 2 corpus labels, 44 terms in 1 corpus label
 
 ## Interpretation
 
