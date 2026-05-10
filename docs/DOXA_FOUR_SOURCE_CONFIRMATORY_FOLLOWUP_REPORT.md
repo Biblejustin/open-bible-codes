@@ -92,10 +92,10 @@ Context reads:
 
 | Corpus | Center | Hit refs | Context read |
 | --- | --- | --- | --- |
-| BYZ_NT | 2TH 3:1 `κυριου` (kuriou) | 2TH 3:1 | base normalized string appears in center verse surface text |
-| SBLGNT | 2Thess 3:1 `κυρίου` (kuriou) | 2Thess 3:1 | base normalized string appears in center verse surface text |
-| TCG_NT | 2TH 3:1 `Κυρίου` (kuriou) | 2TH 3:1 | base normalized string appears in center verse surface text |
-| TR_NT | 2TH 3:1 `Κυρίου` (kuriou) | 2TH 3:1 | base normalized string appears in center verse surface text |
+| BYZ_NT | 2TH 3:1 `κυριου` (kyriou; English: Lord) | 2TH 3:1 | base normalized string appears in center verse surface text |
+| SBLGNT | 2Thess 3:1 `κυρίου` (kyriou; English: Lord) | 2Thess 3:1 | base normalized string appears in center verse surface text |
+| TCG_NT | 2TH 3:1 `Κυρίου` (kyriou; English: Lord) | 2TH 3:1 | base normalized string appears in center verse surface text |
+| TR_NT | 2TH 3:1 `Κυρίου` (kyriou; English: Lord) | 2TH 3:1 | base normalized string appears in center verse surface text |
 
 Audit paths are saved in:
 

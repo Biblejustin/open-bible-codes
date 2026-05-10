@@ -9,6 +9,7 @@ from els.report_db import import_csv_table
 from scripts.summarize_dynamic_span_hits import (
     build_version_presence_rows,
     display_center_word,
+    display_term_cell,
     display_top_center_words,
     summarize_hit_file,
     summarize_hit_table,
@@ -134,6 +135,12 @@ class DynamicSpanHitSummaryTests(unittest.TestCase):
             display_top_center_words("λογος=2; and=1"),
             "`λογος` (logos; English: Word)=2; and=1",
         )
+
+    def test_display_term_cell_keeps_script_term_with_id(self) -> None:
+        row = count_row("TR_NT", "dyn_sample_g", 1)
+        row["concept"] = "Word"
+
+        self.assertEqual(display_term_cell(row), "`λογος` (logos; English: Word)<br>`dyn_sample_g`")
 
 
 def hit_row(

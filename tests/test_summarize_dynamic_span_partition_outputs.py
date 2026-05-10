@@ -8,8 +8,14 @@ from pathlib import Path
 from scripts.compress_dynamic_span_partition_outputs import compress_rows
 from scripts.summarize_dynamic_span_partition_outputs import (
     build_term_summary,
+    cached_plan_rows,
     completed_plan_rows,
+    display_center_word,
+    display_term_cell,
     load_summary_cache,
+    report_intro_lines,
+    report_title,
+    summarize_cached_partitions,
     summarize_partition_output,
     summarize_partitions,
     write_summary_cache,
@@ -156,6 +162,31 @@ class DynamicSpanPartitionOutputSummaryTests(unittest.TestCase):
         self.assertEqual(by_key[("TR_NT", "dyn_a")]["coverage_status"], "partial")
         self.assertEqual(by_key[("KJV", "dyn_b")]["coverage_status"], "complete")
         self.assertEqual(by_key[("TR_NT", "dyn_a")]["exact_center_word_hits"], "3")
+        self.assertEqual(by_key[("TR_NT", "dyn_a")]["term"], "λογος")
+        self.assertEqual(by_key[("TR_NT", "dyn_a")]["concept"], "Word")
+
+    def test_display_helpers_annotate_partition_terms_and_center_words(self) -> None:
+        row = {
+            "term_id": "dyn_sample_g",
+            "concept": "Word",
+            "term": "λογος",
+            "normalized_term": "λογος",
+            "center_word": "λόγος",
+            "center_normalized_word": "λογος",
+        }
+
+        self.assertEqual(display_term_cell(row), "`λογος` (logos; English: Word)<br>`dyn_sample_g`")
+        self.assertEqual(display_center_word(row), "`λόγος` (logos; English: Word)")
+
+    def test_report_title_uses_specific_strong_names(self) -> None:
+        self.assertEqual(
+            report_title(Path("docs/DYNAMIC_SKIP_STRONG_FULL_SPAN_EXACT_CENTER_FINDINGS.md")),
+            "Strong Full-Span Exact-Center Findings",
+        )
+        self.assertIn(
+            "This targeted follow-up scans archived dense hit payloads for the",
+            report_intro_lines(Path("docs/DYNAMIC_SKIP_STRONG_FULL_SPAN_EXACT_CENTER_FINDINGS.md")),
+        )
 
     def test_summarize_partitions_reuses_matching_cache_entries(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -185,6 +216,34 @@ class DynamicSpanPartitionOutputSummaryTests(unittest.TestCase):
         self.assertEqual(first_rows, second_rows)
         self.assertEqual(first_examples, second_examples)
 
+    def test_cache_only_summary_uses_existing_cache_without_payload(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            out = tmp_path / "partition.csv"
+            manifest = tmp_path / "partition.manifest.json"
+            manifest.write_text("{}\n", encoding="utf-8")
+            row = plan_row(out, manifest)
+            cache = {
+                "p1": {
+                    "summary": {
+                        "partition_id": "p1",
+                        "corpus": "TR_NT",
+                        "term_id": "dyn_a",
+                        "mode": "full-span",
+                        "partition_index": "1",
+                    },
+                    "examples": [{"example_type": "exact_center_word", "corpus": "TR_NT", "term_id": "dyn_a", "partition_id": "p1"}],
+                }
+            }
+
+            completed = cached_plan_rows([row], cache)
+            summaries, examples, stats = summarize_cached_partitions(completed, cache)
+
+        self.assertEqual([item["partition_id"] for item in completed], ["p1"])
+        self.assertEqual(summaries[0]["partition_id"], "p1")
+        self.assertEqual(examples[0]["example_type"], "exact_center_word")
+        self.assertEqual(stats["hits"], 1)
+
     def test_summary_cache_round_trips_json_payload(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             cache_path = Path(tmp) / "cache.json"
@@ -210,6 +269,9 @@ def plan_template(corpus: str, term_id: str, index: str, count: str) -> dict[str
         "partition_id": f"{corpus}_{term_id}_{index}",
         "corpus": corpus,
         "term_id": term_id,
+        "concept": "Word",
+        "term": "λογος",
+        "normalized_term": "λογος",
         "mode": "full-span",
         "total_hit_count": "10",
         "partition_index": index,

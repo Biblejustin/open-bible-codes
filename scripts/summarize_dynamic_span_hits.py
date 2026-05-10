@@ -542,6 +542,7 @@ def write_report(
     path.parent.mkdir(parents=True, exist_ok=True)
     exported_hits = sum(int(row["exported_hits"]) for row in hit_summary)
     exact_center_total = sum(int(row["exact_center_word_hits"]) for row in hit_summary)
+    term_lookup = term_metadata_by_id(version_rows, hit_summary)
     bible_over_control = [
         row
         for row in comparison_rows
@@ -592,7 +593,7 @@ def write_report(
     ]
     for row in sorted(version_rows, key=version_sort_key):
         lines.append(
-            f"| `{row['term_id']}` | {row['term_language']} | "
+            f"| {cell(display_term_cell(row))} | {row['term_language']} | "
             f"{cell(row['bible_present_corpora'])} | {cell(row['control_present_corpora'])} | "
             f"{max_cell(row['bible_max_corpus'], row['bible_max_hit_count'])} | "
             f"{max_cell(row['control_max_corpus'], row['control_max_hit_count'])} |"
@@ -607,8 +608,9 @@ def write_report(
         ]
     )
     for row in sorted(bible_over_control, key=lambda item: float(item["bible_over_control_max_rate_ratio"].replace("inf", "1e999")), reverse=True)[:15]:
+        display_row = row_with_term_metadata(row, term_lookup)
         lines.append(
-            f"| `{row['term_id']}` | {row['term_language']} | {row['bible_max_corpus']} | "
+            f"| {cell(display_term_cell(display_row))} | {row['term_language']} | {row['bible_max_corpus']} | "
             f"{row['bible_max_rate_per_million']} | {row['control_max_rate_per_million']} | "
             f"{row['bible_over_control_max_rate_ratio']} |"
         )
@@ -627,7 +629,7 @@ def write_report(
     )
     for row in sorted(low_count, key=lambda item: (int(item["count_row_hit_count"]), item["corpus"], item["term_id"]))[:25]:
         lines.append(
-            f"| {row['corpus']} | `{row['term_id']}` | {row['count_row_hit_count']} | "
+            f"| {row['corpus']} | {cell(display_term_cell(row))} | {row['count_row_hit_count']} | "
             f"{row['min_abs_skip']} | {cell(str(row['top_center_refs']))} | "
             f"{cell(display_top_center_words(str(row['top_center_words'])))} |"
         )
@@ -642,7 +644,7 @@ def write_report(
     )
     for row in examples[:30]:
         lines.append(
-            f"| `{row['example_type']}` | {row['corpus']} | `{row['term_id']}` | {row['skip']} | "
+            f"| `{row['example_type']}` | {row['corpus']} | {cell(display_term_cell(row))} | {row['skip']} | "
             f"{row['start_ref']} | {row['center_ref']} | {row['end_ref']} | {cell(display_center_word(row))} |"
         )
     lines.extend(
@@ -708,6 +710,33 @@ def version_sort_key(row: dict[str, str]) -> tuple[int, int, str]:
 
 def cell(value: str) -> str:
     return value.replace("|", "\\|") if value else ""
+
+
+def term_metadata_by_id(*row_groups: Iterable[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    lookup: dict[str, dict[str, Any]] = {}
+    for rows in row_groups:
+        for row in rows:
+            term_id = str(row.get("term_id", ""))
+            if term_id and term_id not in lookup and (row.get("term") or row.get("normalized_term")):
+                lookup[term_id] = dict(row)
+    return lookup
+
+
+def row_with_term_metadata(row: dict[str, str], lookup: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    merged = dict(lookup.get(row.get("term_id", ""), {}))
+    for key, value in row.items():
+        if value or key not in merged:
+            merged[key] = value
+    return merged
+
+
+def display_term_cell(row: dict[str, Any]) -> str:
+    term_id = str(row.get("term_id", ""))
+    term = str(row.get("term") or row.get("normalized_term") or "")
+    if not term:
+        return f"`{term_id}`" if term_id else ""
+    label = display_term(term, english=str(row.get("concept") or "") or None)
+    return f"{label}<br>`{term_id}`" if term_id else label
 
 
 def display_center_word(row: dict[str, str]) -> str:

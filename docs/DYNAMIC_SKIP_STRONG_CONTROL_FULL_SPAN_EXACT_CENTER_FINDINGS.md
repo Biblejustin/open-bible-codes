@@ -11,7 +11,7 @@ complete when all planned partition outputs exist and summarize.
 ## Reproduce
 
 ```bash
-python3 -m scripts.summarize_dynamic_span_partition_outputs --plan reports/dynamic_skip_focus/strong_control_exact_center_full_span_plan.csv --examples-per-partition 5
+python3 -m scripts.summarize_dynamic_span_partition_outputs --plan reports/dynamic_skip_focus/strong_control_exact_center_full_span_plan.csv --cache-only --examples-per-partition 5
 ```
 
 ## Scope
@@ -30,10 +30,10 @@ python3 -m scripts.summarize_dynamic_span_partition_outputs --plan reports/dynam
 
 | Corpus | Term | Hits | Exact center-word hits |
 | --- | --- | ---: | ---: |
-| ENG_PG_SHAKESPEARE | `dyn_jesus_e` | 87,353 | 2 |
-| GRC_PERSEUS_HERODOTUS | `dyn_gog_g` | 3,079,794 | 0 |
-| HEB_PBY_BIALIK | `dyn_messiah_h` | 110,129,394 | 7,059 |
-| HEB_PBY_BIALIK | `dyn_yeshua_h` | 206,897,417 | 1,151 |
+| ENG_PG_SHAKESPEARE | `Jesus`<br>`dyn_jesus_e` | 87,353 | 2 |
+| GRC_PERSEUS_HERODOTUS | `γωγ` (Gog; English: Gog)<br>`dyn_gog_g` | 3,079,794 | 0 |
+| HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah)<br>`dyn_messiah_h` | 110,129,394 | 7,059 |
+| HEB_PBY_BIALIK | `ישוע` (Yeshua; English: Yeshua)<br>`dyn_yeshua_h` | 206,897,417 | 1,151 |
 
 ## Partial Dense Rows
 
@@ -99,36 +99,36 @@ python3 -m scripts.summarize_dynamic_span_partition_outputs --plan reports/dynam
 
 | Type | Corpus | Term | Skip | Center | Center word |
 | --- | --- | --- | ---: | --- | --- |
-| `exact_center_word` | ENG_PG_SHAKESPEARE | `dyn_jesus_e` | 212862 | PG Shakespeare | Jesus |
-| `exact_center_word` | ENG_PG_SHAKESPEARE | `dyn_jesus_e` | 680396 | PG Shakespeare | Jesus |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -16278 | PBY Bialik | משיח, |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -15926 | PBY Bialik | משיח. |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -15613 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -15319 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -15264 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -34264 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -33849 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -33511 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -33113 | PBY Bialik | משיח1755 |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -32122 | PBY Bialik | משיח? |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -51468 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -51466 | PBY Bialik | משיח, |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -50948 | PBY Bialik | משיח, |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -50535 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -50284 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -68264 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -68087 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -68014 | PBY Bialik | משיח. |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -67260 | PBY Bialik | משיח&nbsp;— |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -67216 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -85184 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -84666 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -84657 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -84537 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -84340 | PBY Bialik | משיח? |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -102907 | PBY Bialik | משיח? |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -102320 | PBY Bialik | משיח |
-| `exact_center_word` | HEB_PBY_BIALIK | `dyn_messiah_h` | -102011 | PBY Bialik | משיח |
+| `exact_center_word` | ENG_PG_SHAKESPEARE | `Jesus`<br>`dyn_jesus_e` | 212862 | PG Shakespeare | Jesus |
+| `exact_center_word` | ENG_PG_SHAKESPEARE | `Jesus`<br>`dyn_jesus_e` | 680396 | PG Shakespeare | Jesus |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -16278 | PBY Bialik | `משיח,` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -15926 | PBY Bialik | `משיח.` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -15613 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -15319 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -15264 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -34264 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -33849 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -33511 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -33113 | PBY Bialik | `משיח1755` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -32122 | PBY Bialik | `משיח?` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -51468 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -51466 | PBY Bialik | `משיח,` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -50948 | PBY Bialik | `משיח,` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -50535 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -50284 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -68264 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -68087 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -68014 | PBY Bialik | `משיח.` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -67260 | PBY Bialik | `משיח&nbsp;—` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -67216 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -85184 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -84666 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -84657 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -84537 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -84340 | PBY Bialik | `משיח?` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -102907 | PBY Bialik | `משיח?` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -102320 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | HEB_PBY_BIALIK | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -102011 | PBY Bialik | `משיח` (Mashiach; English: Messiah/anointed one) |
 
 ## Read
 

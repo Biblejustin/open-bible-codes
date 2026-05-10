@@ -28,6 +28,7 @@ KNOWN_TERMS: dict[str, tuple[str, str]] = {
     "κρισισ": ("krisis", "judgment"),
     "ιουδασ": ("Ioudas", "Judas"),
     "κυριοσ": ("kyrios", "Lord"),
+    "κυριου": ("kyriou", "Lord"),
     "πετροσ": ("Petros", "Peter"),
     "θηριον": ("therion", "beast"),
     "δρακων": ("drakon", "dragon"),

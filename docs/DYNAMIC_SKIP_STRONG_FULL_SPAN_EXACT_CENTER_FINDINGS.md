@@ -12,7 +12,7 @@ complete when all planned partition outputs exist and summarize.
 ## Reproduce
 
 ```bash
-python3 -m scripts.summarize_dynamic_span_partition_outputs --plan reports/dynamic_skip_focus/strong_bible_over_control_full_span_plan.csv --examples-per-partition 5
+python3 -m scripts.summarize_dynamic_span_partition_outputs --plan reports/dynamic_skip_focus/strong_bible_over_control_full_span_plan.csv --cache-only --examples-per-partition 5
 ```
 
 ## Scope
@@ -31,14 +31,14 @@ python3 -m scripts.summarize_dynamic_span_partition_outputs --plan reports/dynam
 
 | Corpus | Term | Hits | Exact center-word hits |
 | --- | --- | ---: | ---: |
-| EBIBLE_WLC | `dyn_messiah_h` | 5,252,863 | 75 |
-| KJV | `dyn_jesus_e` | 79,657 | 492 |
-| LXX | `dyn_jesus_g` | 243,700 | 70 |
-| LXX | `dyn_russia_g` | 2,218,044 | 0 |
-| LXX | `dyn_vance_g` | 14,641,657 | 0 |
-| TCG_NT | `dyn_gog_g` | 2,000,884 | 4 |
-| UHB | `dyn_yeshua_h` | 11,151,829 | 941 |
-| UXLC | `dyn_iran_h` | 692,152 | 0 |
+| EBIBLE_WLC | `משיח` (Mashiach; English: Messiah)<br>`dyn_messiah_h` | 5,252,863 | 75 |
+| KJV | `Jesus`<br>`dyn_jesus_e` | 79,657 | 492 |
+| LXX | `ιησους` (Iesous; English: Jesus)<br>`dyn_jesus_g` | 243,700 | 70 |
+| LXX | `ρωσια` (rosia; English: Russia)<br>`dyn_russia_g` | 2,218,044 | 0 |
+| LXX | `βανς` (bans; English: Vance)<br>`dyn_vance_g` | 14,641,657 | 0 |
+| TCG_NT | `γωγ` (Gog; English: Gog)<br>`dyn_gog_g` | 2,000,884 | 4 |
+| UHB | `ישוע` (Yeshua; English: Yeshua)<br>`dyn_yeshua_h` | 11,151,829 | 941 |
+| UXLC | `איראן` (yrn; English: Iran)<br>`dyn_iran_h` | 692,152 | 0 |
 
 ## Partial Dense Rows
 
@@ -96,36 +96,36 @@ python3 -m scripts.summarize_dynamic_span_partition_outputs --plan reports/dynam
 
 | Type | Corpus | Term | Skip | Center | Center word |
 | --- | --- | --- | ---: | --- | --- |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -64168 | LAM 4:20 | מְשִׁ֣יחַ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -21294 | 2SA 23:1 | מְשִׁ֨יחַ֙ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -10396 | LAM 4:20 | מְשִׁ֣יחַ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -8885 | 2SA 23:1 | מְשִׁ֨יחַ֙ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -1356 | LAM 4:20 | מְשִׁ֣יחַ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -127736 | 2SA 23:1 | מְשִׁ֨יחַ֙ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -112064 | 2SA 23:1 | מְשִׁ֨יחַ֙ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -107024 | 2SA 1:21 | מָשִׁ֥יחַ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -88647 | LAM 4:20 | מְשִׁ֣יחַ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -83549 | 2SA 23:1 | מְשִׁ֨יחַ֙ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -192856 | 2SA 23:1 | מְשִׁ֨יחַ֙ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -191946 | 2SA 23:1 | מְשִׁ֨יחַ֙ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -188689 | 2SA 1:21 | מָשִׁ֥יחַ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -185417 | 2SA 23:1 | מְשִׁ֨יחַ֙ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -174401 | 2SA 1:21 | מָשִׁ֥יחַ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -261062 | 2SA 1:21 | מָשִׁ֥יחַ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -257625 | 2SA 1:21 | מָשִׁ֥יחַ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -244516 | 2SA 1:21 | מָשִׁ֥יחַ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -227309 | 2SA 23:1 | מְשִׁ֨יחַ֙ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -221294 | 2SA 1:21 | מָשִׁ֥יחַ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | -290705 | 2SA 1:21 | מָשִׁ֥יחַ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | 270253 | 2SA 1:21 | מָשִׁ֥יחַ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | 281875 | 2SA 23:1 | מְשִׁ֨יחַ֙ |
-| `exact_center_word` | EBIBLE_WLC | `dyn_messiah_h` | 310656 | 2SA 23:1 | מְשִׁ֨יחַ֙ |
-| `exact_center_word` | KJV | `dyn_jesus_e` | -342678 | MAT 4:7 | Jesus |
-| `exact_center_word` | KJV | `dyn_jesus_e` | -333151 | MAT 8:34 | Jesus: |
-| `exact_center_word` | KJV | `dyn_jesus_e` | -317646 | MAT 9:10 | Jesus |
-| `exact_center_word` | KJV | `dyn_jesus_e` | -317136 | MAT 9:4 | Jesus |
-| `exact_center_word` | KJV | `dyn_jesus_e` | -316997 | MAT 3:15 | Jesus |
-| `exact_center_word` | LXX | `dyn_jesus_g` | -292090 | NEH 9:4 | Ἰησοῦς |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -64168 | LAM 4:20 | `מְשִׁ֣יחַ` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -21294 | 2SA 23:1 | `מְשִׁ֨יחַ֙` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -10396 | LAM 4:20 | `מְשִׁ֣יחַ` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -8885 | 2SA 23:1 | `מְשִׁ֨יחַ֙` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -1356 | LAM 4:20 | `מְשִׁ֣יחַ` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -127736 | 2SA 23:1 | `מְשִׁ֨יחַ֙` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -112064 | 2SA 23:1 | `מְשִׁ֨יחַ֙` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -107024 | 2SA 1:21 | `מָשִׁ֥יחַ` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -88647 | LAM 4:20 | `מְשִׁ֣יחַ` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -83549 | 2SA 23:1 | `מְשִׁ֨יחַ֙` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -192856 | 2SA 23:1 | `מְשִׁ֨יחַ֙` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -191946 | 2SA 23:1 | `מְשִׁ֨יחַ֙` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -188689 | 2SA 1:21 | `מָשִׁ֥יחַ` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -185417 | 2SA 23:1 | `מְשִׁ֨יחַ֙` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -174401 | 2SA 1:21 | `מָשִׁ֥יחַ` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -261062 | 2SA 1:21 | `מָשִׁ֥יחַ` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -257625 | 2SA 1:21 | `מָשִׁ֥יחַ` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -244516 | 2SA 1:21 | `מָשִׁ֥יחַ` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -227309 | 2SA 23:1 | `מְשִׁ֨יחַ֙` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -221294 | 2SA 1:21 | `מָשִׁ֥יחַ` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | -290705 | 2SA 1:21 | `מָשִׁ֥יחַ` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | 270253 | 2SA 1:21 | `מָשִׁ֥יחַ` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | 281875 | 2SA 23:1 | `מְשִׁ֨יחַ֙` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one)<br>`dyn_messiah_h` | 310656 | 2SA 23:1 | `מְשִׁ֨יחַ֙` (Mashiach; English: Messiah/anointed one) |
+| `exact_center_word` | KJV | `Jesus`<br>`dyn_jesus_e` | -342678 | MAT 4:7 | Jesus |
+| `exact_center_word` | KJV | `Jesus`<br>`dyn_jesus_e` | -333151 | MAT 8:34 | Jesus: |
+| `exact_center_word` | KJV | `Jesus`<br>`dyn_jesus_e` | -317646 | MAT 9:10 | Jesus |
+| `exact_center_word` | KJV | `Jesus`<br>`dyn_jesus_e` | -317136 | MAT 9:4 | Jesus |
+| `exact_center_word` | KJV | `Jesus`<br>`dyn_jesus_e` | -316997 | MAT 3:15 | Jesus |
+| `exact_center_word` | LXX | `ιησους` (Iesous; English: Jesus/Joshua)<br>`dyn_jesus_g` | -292090 | NEH 9:4 | `Ἰησοῦς` (Iesous; English: Jesus/Joshua) |
 
 ## Read
 

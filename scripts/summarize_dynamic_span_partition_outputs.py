@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from els import __version__
+from els.term_display import contains_greek, contains_hebrew, display_term
 from scripts.export_dynamic_span_hits import ROOT
 from scripts.plan_dynamic_span_partitions import DEFAULT_OUT as DEFAULT_PLAN
 
@@ -49,6 +50,9 @@ PARTITION_FIELDNAMES = [
 TERM_FIELDNAMES = [
     "corpus",
     "term_id",
+    "concept",
+    "term",
+    "normalized_term",
     "mode",
     "total_hit_count",
     "planned_partitions",
@@ -64,6 +68,7 @@ EXAMPLE_FIELDNAMES = [
     "partition_id",
     "corpus",
     "term_id",
+    "concept",
     "term",
     "normalized_term",
     "skip",
@@ -81,15 +86,19 @@ def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(argv)
     plan_rows = read_rows(args.plan)
-    completed = completed_plan_rows(plan_rows)
     cache = {} if args.no_cache else load_summary_cache(args.summary_cache)
-    partition_rows, examples, cache_stats = summarize_partitions(
-        completed,
-        examples_per_partition=args.examples_per_partition,
-        cache=cache,
-        manifest_only=args.manifest_only,
-    )
-    if not args.no_cache:
+    if args.cache_only:
+        completed = cached_plan_rows(plan_rows, cache)
+        partition_rows, examples, cache_stats = summarize_cached_partitions(completed, cache)
+    else:
+        completed = completed_plan_rows(plan_rows)
+        partition_rows, examples, cache_stats = summarize_partitions(
+            completed,
+            examples_per_partition=args.examples_per_partition,
+            cache=cache,
+            manifest_only=args.manifest_only,
+        )
+    if not args.no_cache and not args.cache_only:
         write_summary_cache(args.summary_cache, cache)
     term_rows = build_term_summary(plan_rows, partition_rows)
     write_csv(args.partition_summary, PARTITION_FIELDNAMES, partition_rows)
@@ -115,6 +124,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--summary-cache", type=Path, default=DEFAULT_SUMMARY_CACHE)
     parser.add_argument("--no-cache", action="store_true")
+    parser.add_argument(
+        "--cache-only",
+        action="store_true",
+        help="Refresh summaries from the existing summary cache when dense partition payloads are offline.",
+    )
     parser.add_argument("--examples-per-partition", type=int, default=3)
     parser.add_argument(
         "--manifest-only",
@@ -132,6 +146,29 @@ def completed_plan_rows(plan_rows: list[dict[str, str]]) -> list[dict[str, str]]
         if out.exists() and manifest.exists():
             completed.append(row)
     return completed
+
+
+def cached_plan_rows(plan_rows: list[dict[str, str]], cache: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
+    completed = []
+    for row in plan_rows:
+        if row["partition_id"] in cache and partition_manifest_path(row).exists():
+            completed.append(row)
+    return completed
+
+
+def summarize_cached_partitions(
+    rows: list[dict[str, str]],
+    cache: dict[str, dict[str, Any]],
+) -> tuple[list[dict[str, str]], list[dict[str, str]], dict[str, int]]:
+    summaries = []
+    examples = []
+    for row in rows:
+        cached = cache[row["partition_id"]]
+        summaries.append(dict(cached["summary"]))
+        examples.extend(dict(example) for example in cached.get("examples", []))
+    summaries.sort(key=lambda item: (item["corpus"], item["term_id"], int(item["partition_index"])))
+    examples.sort(key=lambda item: (item["example_type"], item["corpus"], item["term_id"], item["partition_id"]))
+    return summaries, examples, {"hits": len(rows), "misses": 0, "entries": len(cache)}
 
 
 def summarize_partitions(
@@ -302,6 +339,9 @@ def build_term_summary(
             {
                 "corpus": template["corpus"],
                 "term_id": template["term_id"],
+                "concept": template.get("concept", ""),
+                "term": template.get("term", ""),
+                "normalized_term": template.get("normalized_term", ""),
                 "mode": template["mode"],
                 "total_hit_count": template["total_hit_count"],
                 "planned_partitions": str(planned_count),
@@ -323,6 +363,7 @@ def compact_example(plan_row: dict[str, str], hit: dict[str, str], example_type:
         "partition_id": plan_row["partition_id"],
         "corpus": plan_row["corpus"],
         "term_id": plan_row["term_id"],
+        "concept": plan_row.get("concept", ""),
         "term": hit.get("term", ""),
         "normalized_term": hit.get("normalized_term", ""),
         "skip": hit.get("skip", ""),
@@ -351,8 +392,9 @@ def write_report(
     completed_terms = [row for row in term_rows if row["coverage_status"] == "complete"]
     partial_terms = [row for row in term_rows if row["coverage_status"] == "partial"]
     lines = [
-        "# Dynamic Full-Span Partition Findings",
+        f"# {report_title(args.report)}",
         "",
+        *report_intro_lines(args.report),
         "This report summarizes completed dense full-span partition outputs.",
         "It is additive to the manageable-row export: a dense row becomes",
         "complete when all planned partition outputs exist and summarize.",
@@ -382,7 +424,7 @@ def write_report(
     ]
     for row in completed_terms:
         lines.append(
-            f"| {row['corpus']} | `{row['term_id']}` | "
+            f"| {row['corpus']} | {cell(display_term_cell(row))} | "
             f"{int(row['completed_exported_hits']):,} | {format_count_cell(row['exact_center_word_hits'])} |"
         )
     lines.extend(
@@ -396,7 +438,7 @@ def write_report(
     )
     for row in partial_terms[:25]:
         lines.append(
-            f"| {row['corpus']} | `{row['term_id']}` | "
+            f"| {row['corpus']} | {cell(display_term_cell(row))} | "
             f"{row['completed_partitions']}/{row['planned_partitions']} | "
             f"{int(row['completed_exported_hits']):,} | {row['completed_skip_ranges']} |"
         )
@@ -426,8 +468,8 @@ def write_report(
     )
     for row in examples[:30]:
         lines.append(
-            f"| `{row['example_type']}` | {row['corpus']} | `{row['term_id']}` | "
-            f"{row['skip']} | {row['center_ref']} | {cell(row['center_word'])} |"
+            f"| `{row['example_type']}` | {row['corpus']} | {cell(display_term_cell(row))} | "
+            f"{row['skip']} | {row['center_ref']} | {cell(display_center_word(row))} |"
         )
     lines.extend(
         [
@@ -472,6 +514,7 @@ def write_manifest(
         "report": display_path(args.report),
         "summary_cache": display_path(args.summary_cache),
         "cache_enabled": not args.no_cache,
+        "cache_only": args.cache_only,
         "manifest_only": args.manifest_only,
         "cache_hits": cache_stats["hits"],
         "cache_misses": cache_stats["misses"],
@@ -484,6 +527,8 @@ def reproduce_command(args: argparse.Namespace) -> str:
     command = ["python3 -m scripts.summarize_dynamic_span_partition_outputs"]
     if args.plan != DEFAULT_PLAN:
         command.append(f"--plan {display_path(args.plan)}")
+    if args.cache_only:
+        command.append("--cache-only")
     if args.manifest_only:
         command.append("--manifest-only")
     if args.no_cache:
@@ -491,6 +536,35 @@ def reproduce_command(args: argparse.Namespace) -> str:
     if args.examples_per_partition != 3:
         command.append(f"--examples-per-partition {args.examples_per_partition}")
     return " ".join(command)
+
+
+def report_title(path: Path) -> str:
+    titles = {
+        "DYNAMIC_SKIP_STRONG_FULL_SPAN_EXACT_CENTER_FINDINGS.md": "Strong Full-Span Exact-Center Findings",
+        "DYNAMIC_SKIP_STRONG_CONTROL_FULL_SPAN_EXACT_CENTER_FINDINGS.md": (
+            "Strong Control Full-Span Exact-Center Findings"
+        ),
+    }
+    return titles.get(path.name, "Dynamic Full-Span Partition Findings")
+
+
+def report_intro_lines(path: Path) -> list[str]:
+    intros = {
+        "DYNAMIC_SKIP_STRONG_FULL_SPAN_EXACT_CENTER_FINDINGS.md": [
+            "This targeted follow-up scans archived dense hit payloads for the",
+            "full-span rows whose Bible max normalized rate exceeded all observed",
+            "language-matched controls. It is not a new search; it summarizes hit-level",
+            "metadata from already-completed partition exports.",
+            "",
+        ],
+        "DYNAMIC_SKIP_STRONG_CONTROL_FULL_SPAN_EXACT_CENTER_FINDINGS.md": [
+            "This targeted control follow-up scans archived dense hit payloads for the",
+            "language-matched control-max rows corresponding to strong Bible full-span rows",
+            "with exact center-word hits.",
+            "",
+        ],
+    }
+    return intros.get(path.name, [])
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:
@@ -504,6 +578,27 @@ def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, str]]) -> 
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(rows)
+
+
+def display_term_cell(row: dict[str, str]) -> str:
+    term_id = row.get("term_id", "")
+    term = row.get("term") or row.get("normalized_term") or ""
+    if not term:
+        return f"`{term_id}`" if term_id else ""
+    label = display_term(term, english=row.get("concept") or None)
+    return f"{label}<br>`{term_id}`" if term_id else label
+
+
+def display_center_word(row: dict[str, str]) -> str:
+    word = row.get("center_word", "")
+    if not (contains_hebrew(word) or contains_greek(word)):
+        return word
+    english = row.get("concept", "") if row.get("center_normalized_word") == row.get("normalized_term") else ""
+    return display_term(word, english=english or None)
+
+
+def cell(value: str) -> str:
+    return value.replace("|", "\\|") if value else ""
 
 
 def load_summary_cache(path: Path) -> dict[str, dict[str, Any]]:
