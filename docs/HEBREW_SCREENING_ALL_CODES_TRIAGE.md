@@ -86,7 +86,7 @@ It is a triage aid, not a claim-grade filter.
 | 14 | all_source | `locust_h` `ארבה` (rbh; English: Locust) | Locust | 2 | 7 | 2Chr 10:12 | `דבר` (davar; English: word/matter) | not_unusual |
 | 15 | all_source | `locust_plague_h` `ארבה` (rbh; English: Locust Plague) | Locust Plague | 2 | 7 | 2Chr 10:12 | `דבר` (davar; English: word/matter) | not_unusual |
 | 16 | all_source | `locusts_plague_h` `ארבה` (rbh; English: Locusts) | Locusts | 2 | 7 | 2Chr 10:12 | `דבר` (davar; English: word/matter) | not_unusual |
-| 17 | all_source | `prophet_h` `נביא` (nby; English: Prophet) | Prophet | 2 | 7 | 2Chr 21:7 | `הברית` (hbryt) | not_unusual |
+| 17 | all_source | `prophet_h` `נביא` (navi; English: Prophet) | Prophet | 2 | 7 | 2Chr 21:7 | `הברית` (hbryt) | not_unusual |
 | 18 | all_source | `locust_h` `ארבה` (rbh; English: Locust) | Locust | -2 | 7 | 2Chr 26:23 | `הקבורה` (hqbwrh) | not_unusual |
 | 19 | all_source | `desolation_h` `שממה` (shemamah; English: Desolation) | Desolation | 2 | 7 | 2Chr 32:30 | `למטהמערבה` (lmthmrbh) | not_unusual |
 | 20 | all_source | `elam_h` `עילמ` (ylm; English: Elam) | Elam | -2 | 7 | 2Chr 32:31 | `המשלחימ` (hmshlchym) | not_unusual |

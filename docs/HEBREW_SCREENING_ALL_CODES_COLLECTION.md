@@ -42,7 +42,7 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | `יהוה` (YHWH; English: YHWH) | YHWH | 216,640 | 6,658 | 2,401 | 83,838 | 25,087 | 205,559 |
 | `מרימ` (mrym; English: Mary) | Mary | 108,806 | 102 | 2,257 | 1,414 | 24,667 | 52,512 |
-| `נביא` (nby; English: Prophet) | Prophet | 83,913 | 153 | 1,624 | 1,662 | 17,441 | 43,302 |
+| `נביא` (navi; English: Prophet) | Prophet | 83,913 | 153 | 1,624 | 1,662 | 17,441 | 43,302 |
 | `אהבה` (hbh; English: Love) | Love | 79,150 | 20 | 1,123 | 314 | 11,890 | 24,029 |
 | `שלומ` (shlwm; English: Peace) | Peace | 75,338 | 180 | 985 | 1,462 | 11,138 | 25,125 |
 | `אייר` (yyr; English: Iyyar) | Iyyar | 72,657 | 0 | 1,471 | 35 | 17,865 | 39,974 |

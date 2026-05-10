@@ -44,7 +44,7 @@ It is a triage aid, not a claim-grade filter.
 | 5 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | 13 | 40 | 1Pet 1:19 | `αιματι` (aimati) |  |
 | 6 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | 13 | 40 | 1Pet 1:19 | `αιματι` (aimati) |  |
 | 7 | all_source | `god_g` `θεοσ` (theos; English: God) | God | -21 | 64 | 2Cor 6:16 | `θεοσ` (theos; English: God) |  |
-| 8 | all_source | `wisdom_g` `σοφια` (sophia; English: Wisdom) | Wisdom | -24 | 97 | Acts 6:10 | `σοφια` (sophia; English: Wisdom) |  |
+| 8 | all_source | `wisdom_g` `σοφια` (sophia; English: Wisdom) | Wisdom | -24 | 97 | Acts 6:10 | `σοφια` (sophia; English: wisdom) |  |
 | 9 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -50 | 151 | Rom 8:6 | `θανατοσ` (thanatos) |  |
 | 10 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -54 | 163 | Heb 5:7 | `θανατου` (thanatou) |  |
 | 11 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 54 | 163 | Rev 20:13 | `θανατοσ` (thanatos) |  |
