@@ -14,7 +14,14 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
-from els.report_db import default_table_name, fetch_dicts, quote_identifier, sanitize_table_name, sql_literal
+from els.report_db import (
+    default_table_name,
+    fetch_dicts,
+    quote_identifier,
+    sanitize_table_name,
+    sql_literal,
+    verify_table_current,
+)
 from scripts.analyze_hebrew_hit_version_presence import canonical_ref
 
 
@@ -89,6 +96,11 @@ def main(argv: list[str] | None = None) -> int:
     summary_by_term, all_corpora = read_summary(args.summary)
     candidate_limit = max(args.max_rows_per_bucket * args.candidate_multiplier, args.max_rows_per_bucket)
     if args.db is not None:
+        verify_table_current(
+            db_path=args.db,
+            table_name=args.hits_table or default_table_name(args.hits),
+            source_path=args.hits,
+        )
         candidates_by_bucket, all_corpora_from_hits, scanned_rows = collect_candidates_db(
             db=args.db,
             table=args.hits_table or default_table_name(args.hits),

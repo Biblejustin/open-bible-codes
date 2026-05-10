@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
-from els.report_db import default_table_name, fetch_dicts, quote_identifier, sanitize_table_name
+from els.report_db import default_table_name, fetch_dicts, quote_identifier, sanitize_table_name, verify_table_current
 
 
 DEFAULT_HITS = Path("reports/hebrew_theology_all_codes/surface_all_codes.csv")
@@ -27,6 +27,16 @@ def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(argv)
     if args.db is not None:
+        verify_table_current(
+            db_path=args.db,
+            table_name=args.hits_table or default_table_name(args.hits),
+            source_path=args.hits,
+        )
+        verify_table_current(
+            db_path=args.db,
+            table_name=args.summary_table or default_table_name(args.summary),
+            source_path=args.summary,
+        )
         aggregates = aggregate_db(
             db=args.db,
             hits_table=args.hits_table or default_table_name(args.hits),

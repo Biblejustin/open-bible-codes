@@ -7,7 +7,14 @@ import argparse
 import csv
 from pathlib import Path
 
-from els.report_db import default_table_name, export_query_to_csv, quote_identifier, sanitize_table_name, where_clause
+from els.report_db import (
+    default_table_name,
+    export_query_to_csv,
+    quote_identifier,
+    sanitize_table_name,
+    verify_table_current,
+    where_clause,
+)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -49,6 +56,11 @@ def filter_rows(
     table: str = "",
 ) -> int:
     if db is not None:
+        verify_table_current(
+            db_path=db,
+            table_name=table or default_table_name(classified_hits),
+            source_path=classified_hits,
+        )
         return filter_rows_db(
             db=db,
             table=table or default_table_name(classified_hits),

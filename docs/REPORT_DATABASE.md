@@ -37,6 +37,8 @@ reports/db/open_bible_codes.duckdb
 ```
 
 The database is ignored by git. It can be rebuilt from ignored report CSVs.
+DB-backed report commands verify the imported source size and mtime before
+querying. If a source CSV changed after import, rebuild with `make report-db`.
 
 ## Default Imported Tables
 

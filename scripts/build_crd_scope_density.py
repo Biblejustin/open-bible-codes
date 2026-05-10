@@ -8,7 +8,7 @@ import csv
 from collections import Counter
 from pathlib import Path
 
-from els.report_db import default_table_name, fetch_dicts, quote_identifier, sanitize_table_name
+from els.report_db import default_table_name, fetch_dicts, quote_identifier, sanitize_table_name, verify_table_current
 
 
 MATRIX_FIELDNAMES = [
@@ -46,6 +46,11 @@ SUMMARY_FIELDNAMES = [
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.db is not None:
+        verify_table_current(
+            db_path=args.db,
+            table_name=args.table or default_table_name(args.classified_hits),
+            source_path=args.classified_hits,
+        )
         counts = count_scope_hits_db(
             db=args.db,
             table=args.table or default_table_name(args.classified_hits),

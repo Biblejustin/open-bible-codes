@@ -9,7 +9,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 
-from els.report_db import default_table_name, fetch_dicts, quote_identifier, sanitize_table_name
+from els.report_db import default_table_name, fetch_dicts, quote_identifier, sanitize_table_name, verify_table_current
 
 
 OUTPUT_FIELDNAMES = [
@@ -146,6 +146,11 @@ def build_review_queue(
     table: str = "",
 ) -> int:
     if db is not None:
+        verify_table_current(
+            db_path=db,
+            table_name=table or default_table_name(classified_hits),
+            source_path=classified_hits,
+        )
         return build_review_queue_db(
             db=db,
             table=table or default_table_name(classified_hits),

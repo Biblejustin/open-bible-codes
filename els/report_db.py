@@ -13,6 +13,10 @@ class DuckDBUnavailable(RuntimeError):
     """Raised when a DuckDB-backed path is requested without duckdb installed."""
 
 
+class ReportDBStale(RuntimeError):
+    """Raised when a report DB table is missing or stale relative to its source CSV."""
+
+
 @dataclass(frozen=True)
 class TableImportResult:
     table_name: str
@@ -143,6 +147,29 @@ def table_exists(db_path: Path, table_name: str) -> bool:
             [table],
         ).fetchone()
     return bool(rows and rows[0])
+
+
+def verify_table_current(*, db_path: Path, table_name: str, source_path: Path) -> None:
+    table = sanitize_table_name(table_name)
+    if not source_path.exists():
+        raise FileNotFoundError(source_path)
+    with connect(db_path, read_only=True) as con:
+        rows = con.execute(
+            """
+            SELECT source_size_bytes, source_mtime_ns
+            FROM report_table_imports
+            WHERE table_name = ?
+            """,
+            [table],
+        ).fetchall()
+    if not rows:
+        raise ReportDBStale(f"DuckDB table {table!r} has no import metadata; rebuild with `make report-db`")
+    source_size, source_mtime_ns = rows[0]
+    stat = source_path.stat()
+    if int(source_size) != stat.st_size or int(source_mtime_ns) != stat.st_mtime_ns:
+        raise ReportDBStale(
+            f"DuckDB table {table!r} is stale for {source_path}; rebuild with `make report-db`"
+        )
 
 
 def export_query_to_csv(*, db_path: Path, query: str, output: Path) -> int:

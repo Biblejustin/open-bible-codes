@@ -11,7 +11,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
-from els.report_db import default_table_name, fetch_dicts, quote_identifier, sanitize_table_name
+from els.report_db import default_table_name, fetch_dicts, quote_identifier, sanitize_table_name, verify_table_current
 
 
 DEFAULT_OUT_DIR = Path("reports/crd")
@@ -114,6 +114,8 @@ def build_crd_comparison(
 ) -> dict[str, str]:
     rows = read_rows(density_matrix)
     table = classified_table or default_table_name(classified_hits)
+    if db is not None:
+        verify_table_current(db_path=db, table_name=table, source_path=classified_hits)
     hit_examples = (
         relevant_examples_from_db(db, table)
         if db is not None
