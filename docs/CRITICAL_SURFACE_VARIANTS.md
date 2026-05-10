@@ -29,11 +29,11 @@ Results:
 
 Largest Count/Multiple Examples:
 
-- `ευθεωσ`: TR 80, SBLGNT 35; breaks 40, creates 7.
-- `ευθυσ`: TR 8, SBLGNT 51; creates 3.
-- `μωυσησ`: TR 2, SBLGNT 42; creates 3 and 7.
-- `ειπεν`: TR 643, SBLGNT 612; creates 3 and 12.
-- `χριστου`: TR 270, SBLGNT 248; breaks 3.
+- `ευθεωσ` (eutheos; English: immediately): TR 80, SBLGNT 35; breaks 40, creates 7.
+- `ευθυσ` (euthys; English: immediately/straight): TR 8, SBLGNT 51; creates 3.
+- `μωυσησ` (Mouses; English: Moses): TR 2, SBLGNT 42; creates 3 and 7.
+- `ειπεν` (eipen; English: he said): TR 643, SBLGNT 612; creates 3 and 12.
+- `χριστου` (Christou; English: of Christ): TR 270, SBLGNT 248; breaks 3.
 
 Cautions:
 

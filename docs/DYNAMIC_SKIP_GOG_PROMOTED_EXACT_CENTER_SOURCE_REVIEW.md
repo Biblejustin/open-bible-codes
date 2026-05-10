@@ -1,7 +1,7 @@
 # Gog Promoted Exact-Center Source Review
 
 This report follows up the promoted original-language exact-center finding:
-Greek `γωγ` centered on open `Γὼγ` at `REV 20:8` in `TCG_NT`.
+Greek `γωγ` (Gog; English: Gog) centered on open `Γὼγ` (Gog; English: Gog) at `REV 20:8` in `TCG_NT`.
 It checks the same exact-center condition directly against Greek NT sources
 without exporting every full-span hit.
 
@@ -13,11 +13,11 @@ python3 -m scripts.build_gog_promoted_exact_center_source_review --term γωγ -
 
 ## Bottom Line
 
-- sources with exact-center `γωγ` paths: TR_NT, BYZ_NT, TCG_NT, SBLGNT
-- sources with open `γωγ` but no exact-center path: none
-- sources where normalized open `γωγ` was absent: none
+- sources with exact-center `γωγ` (Gog; English: Gog) paths: TR_NT, BYZ_NT, TCG_NT, SBLGNT
+- sources with open `γωγ` (Gog; English: Gog) but no exact-center path: none
+- sources where normalized open `γωγ` (Gog; English: Gog) was absent: none
 - `TCG_NT` has four exact-center paths: skip `±17` inside `REV 20:8`, and skip `±4568` spanning `REV 18:16` / `REV 20:8` / `REV 22:8`.
-- This is a contextually meaningful centered-self occurrence: hidden `γωγ` centers on open `Gog` in the Gog/Magog verse across all compared sources.
+- This is a contextually meaningful centered-self occurrence: hidden `γωγ` (Gog; English: Gog) centers on open `Gog` in the Gog/Magog verse across all compared sources.
 - Frequency strength must be reported separately because the term is only three letters and the surface word supplies the center anchor.
 
 ## Source Comparison
@@ -50,8 +50,7 @@ python3 -m scripts.build_gog_promoted_exact_center_source_review --term γωγ -
 
 ## Read
 
-- This direct scan asks whether the hidden `γωγ` path centers on an open surface `γωγ` word.
+- This direct scan asks whether the hidden `γωγ` (Gog; English: Gog) path centers on an open surface `γωγ` (Gog; English: Gog) word.
 - The existence of that centered-self occurrence is the finding to preserve in the final report.
 - It does not claim frequency significance by itself; that question belongs to matched controls and source-version comparison.
-- Because `γωγ` is length 3, the report should show both axes: contextual relevance and frequency/control strength.
-
+- Because `γωγ` (Gog; English: Gog) is length 3, the report should show both axes: contextual relevance and frequency/control strength.

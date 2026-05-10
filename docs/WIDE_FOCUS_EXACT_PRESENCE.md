@@ -59,12 +59,12 @@ Selected Hebrew examples:
 
 | Term | Example skip | Example refs | Present | Read |
 | --- | ---: | --- | --- | --- |
-| `trump_h` `טראמפ` | 73 | Exod 23:30 / Exod 23:33 / Exod 24:3 | EBIBLE_WLC, MAM, MT_WLC, UHB, UXLC | all observed Hebrew sources |
-| `netanyahu_h` `נתניהו` | 126 | 1Sam 13:22 / 1Sam 14:4 / 1Sam 14:10 | EBIBLE_WLC, MAM, MT_WLC, UHB, UXLC | all observed Hebrew sources |
-| `germany_h` `גרמניה` | -25 | 1Kgs 7:12 / 1Kgs 7:10 / 1Kgs 7:9 | EBIBLE_WLC, MAM, MT_WLC, UHB, UXLC | all observed Hebrew sources |
-| `turkey_h` `טורקיה` | 3 | Jer 42:6 / Jer 42:6 / Jer 42:6 | EBIBLE_WLC, MAM, MT_WLC, UHB, UXLC | all observed Hebrew sources |
-| `cowboy_h` `קאובוי` | 40 | 2Chr 24:16 / 2Chr 24:18 / 2Chr 24:19 | EBIBLE_WLC, MAM, MT_WLC, UHB, UXLC | all observed Hebrew sources |
-| `simsberry_h` `סימסברי` | -109 | Jer 4:13 / Jer 4:7 / Jer 4:2 | MAM | source-specific only |
+| `trump_h` `טראמפ` (Tramp; English: Trump) | 73 | Exod 23:30 / Exod 23:33 / Exod 24:3 | EBIBLE_WLC, MAM, MT_WLC, UHB, UXLC | all observed Hebrew sources |
+| `netanyahu_h` `נתניהו` (Netanyahu; English: Netanyahu) | 126 | 1Sam 13:22 / 1Sam 14:4 / 1Sam 14:10 | EBIBLE_WLC, MAM, MT_WLC, UHB, UXLC | all observed Hebrew sources |
+| `germany_h` `גרמניה` (Germanyah; English: Germany) | -25 | 1Kgs 7:12 / 1Kgs 7:10 / 1Kgs 7:9 | EBIBLE_WLC, MAM, MT_WLC, UHB, UXLC | all observed Hebrew sources |
+| `turkey_h` `טורקיה` (Turkiyah; English: Turkey) | 3 | Jer 42:6 / Jer 42:6 / Jer 42:6 | EBIBLE_WLC, MAM, MT_WLC, UHB, UXLC | all observed Hebrew sources |
+| `cowboy_h` `קאובוי` (kauboy; English: Cowboy) | 40 | 2Chr 24:16 / 2Chr 24:18 / 2Chr 24:19 | EBIBLE_WLC, MAM, MT_WLC, UHB, UXLC | all observed Hebrew sources |
+| `simsberry_h` `סימסברי` (Simsberry; English: Simsberry) | -109 | Jer 4:13 / Jer 4:7 / Jer 4:2 | MAM | source-specific only |
 
 ## Greek Read
 
@@ -95,12 +95,12 @@ Selected Greek examples:
 
 | Term | Example skip | Example refs | Present | Read |
 | --- | ---: | --- | --- | --- |
-| `trump_g` `τραμπ` | 10 | 2Cor 1:9 / 2Cor 1:9 / 2Cor 1:9 | BYZ_NT, SBLGNT, TCG_NT, TR_NT | NT-family multi-source |
-| `iran_g` `ιραν` | -4 | Luke 1:80 / Luke 1:80 / Luke 1:80 | BYZ_NT, SBLGNT, TCG_NT, TR_NT | NT-family multi-source |
-| `russia_g` `ρωσια` | -3 | 1Cor 15:18 / 1Cor 15:17 / 1Cor 15:17 | BYZ_NT, SBLGNT, TCG_NT, TR_NT | NT-family multi-source |
-| `beast_g` `θηριον` | -31 | Rom 12:21 / Rom 12:20 / Rom 12:19 | BYZ_NT, TCG_NT, TR_NT | NT-family multi-source |
-| `dragon_g` `δρακων` | -196 | 2Cor 11:16 / 2Cor 11:9 / 2Cor 11:4 | TCG_NT, TR_NT | NT-family multi-source |
-| `turkey_g` `τουρκια` | 77 | Acts 6:1 / Acts 6:3 / Acts 6:5 | BYZ_NT, TCG_NT | NT-family multi-source |
+| `trump_g` `τραμπ` (tramp; English: Trump) | 10 | 2Cor 1:9 / 2Cor 1:9 / 2Cor 1:9 | BYZ_NT, SBLGNT, TCG_NT, TR_NT | NT-family multi-source |
+| `iran_g` `ιραν` (iran; English: Iran) | -4 | Luke 1:80 / Luke 1:80 / Luke 1:80 | BYZ_NT, SBLGNT, TCG_NT, TR_NT | NT-family multi-source |
+| `russia_g` `ρωσια` (rosia; English: Russia) | -3 | 1Cor 15:18 / 1Cor 15:17 / 1Cor 15:17 | BYZ_NT, SBLGNT, TCG_NT, TR_NT | NT-family multi-source |
+| `beast_g` `θηριον` (therion; English: beast) | -31 | Rom 12:21 / Rom 12:20 / Rom 12:19 | BYZ_NT, TCG_NT, TR_NT | NT-family multi-source |
+| `dragon_g` `δρακων` (drakon; English: dragon) | -196 | 2Cor 11:16 / 2Cor 11:9 / 2Cor 11:4 | TCG_NT, TR_NT | NT-family multi-source |
+| `turkey_g` `τουρκια` (tourkia; English: Turkey) | 77 | Acts 6:1 / Acts 6:3 / Acts 6:5 | BYZ_NT, TCG_NT | NT-family multi-source |
 
 ## Caution
 

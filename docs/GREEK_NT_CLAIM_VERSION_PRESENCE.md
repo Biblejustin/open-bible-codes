@@ -67,11 +67,11 @@ The top recurring pattern is not all-source stability, but either:
 
 Top all-source claim rows:
 
-- `αιμα` / blood: 73 all-source exact patterns.
-- `μαρια` / Mary: 19 all-source exact patterns.
-- `ταφοσ` / tomb: 6 all-source exact patterns.
-- `σωτηρ` / savior: 5 all-source exact patterns.
-- `ανεστη` / he is risen: 2 all-source exact patterns.
+- `αιμα` (haima; English: blood): 73 all-source exact patterns.
+- `μαρια` (Maria; English: Mary): 19 all-source exact patterns.
+- `ταφοσ` (taphos; English: tomb): 6 all-source exact patterns.
+- `σωτηρ` (soter; English: savior): 5 all-source exact patterns.
+- `ανεστη` (aneste; English: he is risen): 2 all-source exact patterns.
 
 Zero-hit rows: `14` of `32`, mostly longer phrases and nominal forms:
 

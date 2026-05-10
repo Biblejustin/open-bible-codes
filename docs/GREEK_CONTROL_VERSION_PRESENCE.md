@@ -54,11 +54,11 @@ Source-specific rows:
 
 Greek controls also produce many exact all-source rows:
 
-- `λαοσ` / people: 72 all-source exact patterns.
-- scrambled Theos / `σθεο`: 72 all-source exact patterns.
-- `χειρ` / hand: 53 all-source exact patterns.
-- `οικοσ` / house: 52 all-source exact patterns.
-- `ημερα` / day: 16 all-source exact patterns.
+- `λαοσ` (laos; English: people): 72 all-source exact patterns.
+- scrambled Theos / `σθεο` (stheo; English: scrambled Theos control): 72 all-source exact patterns.
+- `χειρ` (cheir; English: hand): 53 all-source exact patterns.
+- `οικοσ` (oikos; English: house): 52 all-source exact patterns.
+- `ημερα` (hemera; English: day): 16 all-source exact patterns.
 
 This matters because the control all-source rate is higher than the claim-term
 all-source rate in this capped run.

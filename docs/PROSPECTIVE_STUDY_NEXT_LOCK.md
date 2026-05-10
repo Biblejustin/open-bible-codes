@@ -42,10 +42,10 @@ Rows to carry forward:
 
 | Term | Center | Corpora | Required read |
 | --- | --- | --- | --- |
-| `γωγ` | Rev 20:8 `Gog` | BYZ_NT; SBLGNT; TCG_NT; TR_NT | occurrence-first highlight; frequency-cautioned; not claim |
-| `ישוע` | Ezra 10:18 `יֵשׁ֤וּעַ` | UHB | occurrence listed; background-pressure caution |
-| `משיח` | 2 Sam 1:21 `מָשִׁ֥יחַ` | EBIBLE_WLC | occurrence listed; background-pressure caution |
-| `ιησουσ` | Joshua 8:3 `Ἰησοῦς` | LXX | occurrence listed; referent caution because this is Joshua-context in LXX |
+| `γωγ` (Gog; English: Gog) | Rev 20:8 `Gog` | BYZ_NT; SBLGNT; TCG_NT; TR_NT | occurrence-first highlight; frequency-cautioned; not claim |
+| `ישוע` (Yeshua; English: Yeshua/Jeshua) | Ezra 10:18 `יֵשׁ֤וּעַ` (Yeshua; English: Yeshua/Jeshua) | UHB | occurrence listed; background-pressure caution |
+| `משיח` (Mashiach; English: Messiah/anointed one) | 2 Sam 1:21 `מָשִׁ֥יחַ` (Mashiach; English: Messiah/anointed one) | EBIBLE_WLC | occurrence listed; background-pressure caution |
+| `ιησουσ` (Iesous; English: Jesus/Joshua) | Joshua 8:3 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | LXX | occurrence listed; referent caution because this is Joshua-context in LXX |
 | `jesus` | Matthew 4:10 `Jesus` | KJV | occurrence listed; English translation screen is secondary |
 
 Success criterion:
@@ -62,11 +62,11 @@ Failure criterion:
 This track may rerun or summarize existing locked follow-ups. It cannot create
 original prospective discovery language.
 
-### Greek `δοξα` / `δοξανωσ`
+### Greek `δοξα` (doxa; English: glory) / `δοξανωσ` (doxanos; English: hidden extension form from doxa)
 
 Registered row:
 
-- `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ`
+- `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` (doxa / doxanos; English: glory / hidden extension form from doxa)
 
 Sources:
 
@@ -89,11 +89,11 @@ Disallowed status:
 - `proof`
 - `original prospective discovery`
 
-### Hebrew `יום יהוה` / `היומיהוה`
+### Hebrew `יום יהוה` (yom YHWH; English: day of YHWH) / `היומיהוה` (hayom YHWH; English: the day of YHWH)
 
 Registered row family:
 
-- selected `יום יהוה` -> `היומיהוה` compound-extension key
+- selected `יום יהוה` (yom YHWH; English: day of YHWH) -> `היומיהוה` (hayom YHWH; English: the day of YHWH) compound-extension key
 
 Sources:
 

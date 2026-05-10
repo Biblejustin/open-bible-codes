@@ -28,10 +28,10 @@ Purpose:
 | --- | --- | ---: | --- |
 | Common Torah skip-50 examples | `reproducible` | 5 | Engine sanity checks pass on Koren Torah files. |
 | WRR 1994 rabbis | `under_specified` | 1 | Source audit exists; needs locked 298-to-163 pair path, corrected distance, skip caps, and permutation rule. |
-| Greek `δοξα` extension follow-up | `controlled_review_candidate` | 1 | Four-source 5000/5000 and 20000/20000 follow-ups passed their registered review gates; still post-discovery and not a claim. |
-| Greek `γωγ` centered occurrence | `controlled_review_candidate` | 1 | Hidden `γωγ` centers on open `Gog` at Rev 20:8 across four Greek NT source labels; length-3 controls make it contextual rather than frequency-promoted. |
-| Greek expanded surface follow-up | `controlled_review_candidate` | 1 | `ανομια`, `ισαακ`, and `τερασ` pass letter-path and all-available real-word control review; still post-screen and not a claim. |
-| All-codes `יום יהוה` compound-extension follow-up | `controlled_review_candidate` | 1 | The selected `יום יהוה` -> `היומיהוה` key passes locked 5000/5000 controls in five MT-family sources with conservative all-control q = 0.003599; still post-discovery and not a claim. |
+| Greek `δοξα` (doxa; English: glory) extension follow-up | `controlled_review_candidate` | 1 | Four-source 5000/5000 and 20000/20000 follow-ups passed their registered review gates; still post-discovery and not a claim. |
+| Greek `γωγ` (Gog; English: Gog) centered occurrence | `controlled_review_candidate` | 1 | Hidden `γωγ` (Gog; English: Gog) centers on open `Gog` at Rev 20:8 across four Greek NT source labels; length-3 controls make it contextual rather than frequency-promoted. |
+| Greek expanded surface follow-up | `controlled_review_candidate` | 1 | `ανομια` (anomia; English: lawlessness), `ισαακ` (Isaak; English: Isaac), and `τερασ` (teras; English: wonder) pass letter-path and all-available real-word control review; still post-screen and not a claim. |
+| All-codes `יום יהוה` (yom YHWH; English: day of YHWH) compound-extension follow-up | `controlled_review_candidate` | 1 | The selected `יום יהוה` (yom YHWH; English: day of YHWH) -> `היומיהוה` (hayom YHWH; English: the day of YHWH) key passes locked 5000/5000 controls in five MT-family sources with conservative all-control q = 0.003599; still post-discovery and not a claim. |
 | Greek length-4 surface follow-up | `partially_reproducible` | 1 | Length-4 rows reproduce, but generated vocabulary controls overlap every target and no target survives study-level q <= 0.05. |
 | Modern/geopolitical short forms | `partially_reproducible` | 1 | Presence remains reproducible through the wide skip run; controls do not support significance. |
 | Full modern country phrases | `not_reproducible` | 1 | Long country and institution phrases remain absent through the wide exact follow-up. |

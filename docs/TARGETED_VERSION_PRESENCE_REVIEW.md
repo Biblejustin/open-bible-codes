@@ -100,16 +100,16 @@ full corpus counts.
 
 | Term | Normalized | Total capped hits | All-source | Leningrad-family | Source-specific | Control read |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
-| `france_h` | `צרפת` | 250 | 46 | 3 | 4 | no paired control in this run |
-| `nato_h` | `נאטו` | 250 | 43 | 7 | 5 | no paired control in this run |
-| `iran_h` | `איראנ` | 250 | 44 | 5 | 6 | `not_unusual` |
-| `vance_h` | `ואנס` | 250 | 43 | 6 | 9 | `not_unusual` |
-| `alliance_h` | `ברית` | 250 | 36 | 13 | 15 | no paired control in this run |
-| `usa_abbrev_h` | `ארהב` | 250 | 37 | 8 | 8 | no paired control in this run |
-| `magog_h` | `מגוג` | 250 | 39 | 11 | 11 | `not_unusual` |
-| `iran_g` | `ιραν` | 200 | 38 | 0 | 12 | `not_unusual` |
-| `nato_g` | `νατο` | 200 | 38 | 0 | 22 | no paired control in this run |
-| `hamas_h` | `חמאס` | 250 | 37 | 13 | 13 | no paired control in this run |
+| `france_h` | `צרפת` (Tzarfat; English: France) | 250 | 46 | 3 | 4 | no paired control in this run |
+| `nato_h` | `נאטו` (NATO; English: NATO) | 250 | 43 | 7 | 5 | no paired control in this run |
+| `iran_h` | `איראנ` (Iran; English: Iran) | 250 | 44 | 5 | 6 | `not_unusual` |
+| `vance_h` | `ואנס` (Vance; English: Vance) | 250 | 43 | 6 | 9 | `not_unusual` |
+| `alliance_h` | `ברית` (berit; English: alliance/covenant) | 250 | 36 | 13 | 15 | no paired control in this run |
+| `usa_abbrev_h` | `ארהב` (ARHB; English: USA abbreviation) | 250 | 37 | 8 | 8 | no paired control in this run |
+| `magog_h` | `מגוג` (Magog; English: Magog) | 250 | 39 | 11 | 11 | `not_unusual` |
+| `iran_g` | `ιραν` (iran; English: Iran) | 200 | 38 | 0 | 12 | `not_unusual` |
+| `nato_g` | `νατο` (nato; English: NATO) | 200 | 38 | 0 | 22 | no paired control in this run |
+| `hamas_h` | `חמאס` (Hamas; English: Hamas) | 250 | 37 | 13 | 13 | no paired control in this run |
 
 ## Requested Phrase And Local Rows
 
@@ -131,8 +131,8 @@ Only two target rows appeared in the bounded strict phrase-extension summaries:
 
 | Term | Extension summary rows | Best extension summary row |
 | --- | ---: | --- |
-| `cowboy_h` | 1 | `MT_WLC after_match skip=40 match=phrase_2 max_len=4` |
-| `hamas_g` | 2 | `TR_NT after_match skip=16 match=phrase_2 max_len=4` |
+| `cowboy_h` (Hebrew `קאובוי` [kauboy; English: Cowboy]) | 1 | `MT_WLC after_match skip=40 match=phrase_2 max_len=4` |
+| `hamas_g` (Greek `χαμασ` [chamas; English: Hamas]) | 2 | `TR_NT after_match skip=16 match=phrase_2 max_len=4` |
 
 Neither produced a strong `before_plus_term`, `term_plus_after`, or
 `before_plus_term_plus_after` top row.

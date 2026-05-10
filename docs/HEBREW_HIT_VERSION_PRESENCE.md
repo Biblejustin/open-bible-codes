@@ -57,11 +57,11 @@ not make modern-name claims stronger by itself.
 
 The most stable high-count rows are short or abbreviation-like forms:
 
-- `ארהב` / USA abbreviation
-- `ואנס` / Vance
-- `איראנ` / Iran
-- `צרפת` / France
-- `רוסיה` / Russia
+- `ארהב` (ARHB; English: USA abbreviation)
+- `ואנס` (Vance; English: Vance)
+- `איראנ` (Iran; English: Iran)
+- `צרפת` (Tzarfat; English: France)
+- `רוסיה` (Russia; English: Russia)
 
 Longer phrase/local rows remain absent in this capped scan:
 

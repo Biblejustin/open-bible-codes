@@ -47,11 +47,11 @@ Pattern scope counts:
 Controls also create stable exact ref-key patterns across all five Hebrew
 streams:
 
-- Scrambled YHWH / `וההי`: 27 all-source exact patterns.
-- Scrambled Messiah / `חישמ`: 91 all-source exact patterns.
-- Scrambled Torah / `הרות`: 86 all-source exact patterns.
-- Scrambled Israel / `לרשאי`: 81 all-source exact patterns.
-- Nonsense 5a / `בגדהו`: 23 all-source exact patterns.
+- Scrambled YHWH / `וההי` (w-h-h-y; English: scrambled YHWH control): 27 all-source exact patterns.
+- Scrambled Messiah / `חישמ` (ch-y-sh-m; English: scrambled Messiah control): 91 all-source exact patterns.
+- Scrambled Torah / `הרות` (h-r-w-t; English: scrambled Torah control): 86 all-source exact patterns.
+- Scrambled Israel / `לרשאי` (l-r-sh-a-y; English: scrambled Israel control): 81 all-source exact patterns.
+- Nonsense 5a / `בגדהו` (b-g-d-h-w; English: nonsense control): 23 all-source exact patterns.
 
 That means exact version stability is mainly a reproducibility filter. It does
 not distinguish meaningful terms from controls.
