@@ -56,12 +56,15 @@ make crd-concept-surface-prepare
 make crd-concept-surface-run
 make crd-concept-surface-report
 make crd-concept-surface-queue
+make crd-concept-surface-center-word
 ```
 
 This writes ignored local artifacts under `reports/crd_concept_surface/`.
 The queue target extracts a compact Bible-only review CSV from the strongest
 finite-ratio and Bible-positive/secular-zero rows so the 5 GB classified-hit
 artifact does not need to be opened directly.
+The center-word target extracts all Bible rows where the deterministic surface
+keyword matched the exact centered visible word.
 
 LLM-assisted drafting is allowed for lexical/context related-term proposals when
 the provenance names that assistance. The key rule is not "human-only"; the key

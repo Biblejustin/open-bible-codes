@@ -2,7 +2,7 @@ CRD_REVIEWER ?= gpt-5-assisted-draft
 CRD_LOCKED_BY ?= gpt-5-assisted-draft
 CRD_DRAFTED_WITH ?= gpt-5
 
-.PHONY: demo indexes test lint crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue
+.PHONY: demo indexes test lint crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word
 
 demo:
 	python3 -m els.demo
@@ -64,3 +64,6 @@ crd-concept-surface-report:
 
 crd-concept-surface-queue:
 	python3 -m scripts.build_crd_review_queue --summary reports/crd_concept_surface/bible_vs_control_summary.csv --classified-hits reports/crd_concept_surface/classified_hits.csv --output reports/crd_concept_surface/review_queue.csv
+
+crd-concept-surface-center-word:
+	python3 -m scripts.filter_crd_classified_hits --classified-hits reports/crd_concept_surface/classified_hits.csv --output reports/crd_concept_surface/center_word_hits.csv --corpus-class bible --is-relevant true --surface-match-scope center_word
