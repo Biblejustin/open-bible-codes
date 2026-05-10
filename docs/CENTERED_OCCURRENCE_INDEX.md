@@ -26,8 +26,8 @@ python3 -m scripts.build_centered_occurrence_index --all-codes-review reports/al
 
 | Type | Presence rows | Occurrence rows |
 | --- | ---: | ---: |
-| `centered_self_exact_word` | 525 | 621 |
-| `centered_self_surface_form` | 6 | 7 |
+| `centered_self_exact_word` | 526 | 623 |
+| `centered_self_surface_form` | 5 | 5 |
 | `relevant_center_same_concept` | 2 | 2 |
 | `relevant_center_same_category` | 14 | 14 |
 | `center_verse_relevant` | 58 | 59 |

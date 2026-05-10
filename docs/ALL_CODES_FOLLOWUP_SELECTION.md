@@ -92,7 +92,7 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 42 | greek_screening | `hidden_path_only` | all_source | `son_g` | Son | 2 | 1Cor 5:12 | `τουσ` |
 | 43 | hebrew_screening | `center_word_exact` | all_source | `desolation_h` | Desolation | 2 | Mic 1:7 | `שממה` |
 | 44 | hebrew_screening | `center_word_exact` | all_source | `yhwh_h` | YHWH | 3 | 1Chr 26:27 | `יהוה` |
-| 45 | hebrew_screening | `center_word_exact` | all_source | `yhwh_h` | YHWH | 3 | 1Chr 28:20 | `ביתיהוה` |
+| 45 | hebrew_screening | `center_word_exact` | all_source | `yhwh_h` | YHWH | 3 | 1Chr 28:20 | `יהוה` |
 | 46 | hebrew_screening | `center_word_same_concept` | all_source | `rome_alt_h` | Rome | 5 | Job 5:12 | `ערומימ` |
 | 47 | hebrew_screening | `center_word_same_concept` | all_source | `rome_alt_h` | Rome | -42 | Eccl 10:6 | `במרומימ` |
 | 48 | hebrew_screening | `center_word_same_category` | all_source | `germany_h` | Germany | -18 | Jer 42:15 | `מצרימ` |
@@ -118,11 +118,11 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 68 | hebrew_screening | `hidden_path_only` | all_source | `empty_tomb_h` | Empty Tomb | 8 | Ezek 5:2 | `בתוכ` |
 | 69 | hebrew_screening | `hidden_path_only` | all_source | `yeshu_declared_perfect_h` | Jesus Declared Perfect | 9 | Gen 22:8 | `לעלה` |
 | 70 | hebrew_theology | `center_word_exact` | all_source | `htp_yhwh_h` | YHWH | 3 | 1Chr 26:27 | `יהוה` |
-| 71 | hebrew_theology | `center_word_exact` | all_source | `htp_yhwh_h` | YHWH | 3 | 1Chr 28:20 | `ביתיהוה` |
+| 71 | hebrew_theology | `center_word_exact` | all_source | `htp_yhwh_h` | YHWH | 3 | 1Chr 28:20 | `יהוה` |
 | 72 | hebrew_theology | `center_word_same_category` | all_source | `htp_torah_h` | Torah | 7 | 1Chr 5:1 | `בנישראל` |
 | 73 | hebrew_theology | `center_word_same_category` | all_source | `htp_torah_h` | Torah | -7 | 2Kgs 17:20 | `ישראל` |
 | 74 | hebrew_theology | `center_word_same_category` | all_source | `htp_covenant_h` | Covenant | 8 | Deut 34:9 | `חכמה` |
-| 75 | hebrew_theology | `center_verse_same_category` | all_source | `htp_love_h` | Love | 2 | 2Sam 14:21 | `אתהדבר` |
+| 75 | hebrew_theology | `center_verse_same_category` | all_source | `htp_love_h` | Love | 2 | 2Sam 14:21 | `הדבר` |
 | 76 | hebrew_theology | `center_verse_same_category` | all_source | `htp_love_h` | Love | 2 | 2Sam 15:27 | `שבה` |
 | 77 | hebrew_theology | `center_verse_same_category` | all_source | `htp_wisdom_h` | Wisdom | 3 | Isa 49:8 | `כה` |
 | 78 | hebrew_theology | `span_same_category` | all_source | `htp_messiah_h` | Messiah | 6 | Ezra 2:5 | `ושבעימ` |
