@@ -58,6 +58,63 @@ def test_build_crd_comparison_can_read_classified_hits_from_duckdb(tmp_path: Pat
     assert "Representative Relevant Centers" in report
 
 
+def test_build_crd_comparison_displays_script_terms_with_glosses(tmp_path: Path) -> None:
+    density = tmp_path / "density_matrix.csv"
+    hits = tmp_path / "classified_hits.csv"
+    manifest = tmp_path / "manifest.json"
+    out_dir = tmp_path / "out"
+    write_rows(
+        density,
+        DENSITY_FIELDNAMES,
+        [
+            density_row("deterministic", "cyrus_h", "BIBLE", "bible", "10", "2", term="כורש", concept="Cyrus"),
+            density_row(
+                "deterministic",
+                "cyrus_h",
+                "CTRL",
+                "secular_control",
+                "10",
+                "0",
+                term="כורש",
+                concept="Cyrus",
+            ),
+        ],
+    )
+    write_rows(
+        hits,
+        CLASSIFIED_HIT_FIELDNAMES,
+        [
+            hit_row(
+                "h1",
+                "deterministic",
+                "cyrus_h",
+                "BIBLE",
+                "true",
+                term="כורש",
+                concept="Cyrus",
+                center_word="מלך",
+                matched_surface_keyword="כורש",
+            ),
+        ],
+    )
+    manifest.write_text(json.dumps({"status": "completed"}), encoding="utf-8")
+
+    build_crd_comparison(
+        density_matrix=density,
+        classified_hits=hits,
+        manifest=manifest,
+        out_dir=out_dir,
+        markdown_out=out_dir / "CRD_REPORT.md",
+    )
+
+    report = (out_dir / "CRD_REPORT.md").read_text(encoding="utf-8")
+    assert "`כורש`" in report
+    assert "English: Cyrus" in report
+    assert "<br>`cyrus_h`" in report
+    assert "`מלך`" in report
+    assert "English: king" in report
+
+
 def density_row(
     classifier_mode: str,
     term_id: str,
@@ -65,13 +122,17 @@ def density_row(
     corpus_class: str,
     total_hits: str,
     relevant_hits: str,
+    *,
+    term: str = "term",
+    concept: str = "Term",
+    language: str = "english",
 ) -> dict[str, str]:
     return {
         "term_id": term_id,
-        "term": "term",
-        "concept": "Term",
+        "term": term,
+        "concept": concept,
         "category": "category",
-        "language": "english",
+        "language": language,
         "corpus": corpus,
         "corpus_class": corpus_class,
         "classifier_mode": classifier_mode,
@@ -87,30 +148,42 @@ def density_row(
     }
 
 
-def hit_row(hit_id: str, classifier_mode: str, term_id: str, corpus: str, is_relevant: str) -> dict[str, str]:
+def hit_row(
+    hit_id: str,
+    classifier_mode: str,
+    term_id: str,
+    corpus: str,
+    is_relevant: str,
+    *,
+    term: str = "term",
+    concept: str = "Term",
+    language: str = "english",
+    center_word: str = "term",
+    matched_surface_keyword: str = "term",
+) -> dict[str, str]:
     return {
         "hit_id": hit_id,
         "term_id": term_id,
-        "term": "term",
-        "concept": "Term",
+        "term": term,
+        "concept": concept,
         "category": "category",
-        "language": "english",
+        "language": language,
         "corpus": corpus,
         "corpus_class": "bible",
         "classifier_mode": classifier_mode,
         "is_relevant": is_relevant,
         "relevance_type": "surface_keyword_match" if is_relevant == "true" else "none",
         "surface_match_scope": "center_word" if is_relevant == "true" else "",
-        "matched_surface_keyword": "term" if is_relevant == "true" else "",
-        "matched_normalized_surface_keyword": "term" if is_relevant == "true" else "",
+        "matched_surface_keyword": matched_surface_keyword if is_relevant == "true" else "",
+        "matched_normalized_surface_keyword": matched_surface_keyword if is_relevant == "true" else "",
         "confidence": "",
         "skip": "2",
         "direction": "forward",
         "start_ref": "A 1:1",
         "center_ref": "A 1:1",
         "end_ref": "A 1:1",
-        "center_word": "term",
-        "center_normalized_word": "term",
+        "center_word": center_word,
+        "center_normalized_word": center_word,
         "center_verse_text": "term appears",
         "span_text": "term appears",
     }

@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from els.report_db import default_table_name, fetch_dicts, quote_identifier, sanitize_table_name, verify_table_current
+from els.term_display import KNOWN_TERMS, contains_greek, contains_hebrew, display_term, normalized_script_key
 
 
 DEFAULT_OUT_DIR = Path("reports/crd")
@@ -219,6 +220,7 @@ def bible_vs_control_summary(rows: list[dict[str, str]]) -> list[dict[str, Any]]
                 "classifier_mode": first["classifier_mode"],
                 "term_id": first["term_id"],
                 "term": first["term"],
+                "concept": first.get("concept", ""),
                 "language": first["language"],
                 "bible_max_density": format_float(bible_density),
                 "bible_max_corpus": best_bible.get("corpus", "") if best_bible else "",
@@ -286,6 +288,7 @@ def classifier_agreement_summary(
                 "scope": "term_corpus",
                 "term_id": row["term_id"],
                 "term": row["term"],
+                "concept": row.get("concept", ""),
                 "language": row["language"],
                 "corpus": row["corpus"],
                 "agreement_rate": row["agreement_rate"],
@@ -481,6 +484,7 @@ def empty_agreement_row(scope: str) -> dict[str, Any]:
         "scope": scope,
         "term_id": "",
         "term": "",
+        "concept": "",
         "language": "",
         "corpus": "",
         "agreement_rate": "",
@@ -534,12 +538,12 @@ def write_markdown(
             "| "
             + " | ".join(
                 [
-                    str(row["classifier_mode"]),
-                    f"`{row['term_id']}`",
-                    str(row["bible_max_density"]),
-                    str(row["secular_max_density"]),
-                    str(row["ratio"]),
-                    str(row["exceeds_secular_max"]),
+                    md_cell(str(row["classifier_mode"])),
+                    term_cell(row),
+                    md_cell(str(row["bible_max_density"])),
+                    md_cell(str(row["secular_max_density"])),
+                    md_cell(str(row["ratio"])),
+                    md_cell(str(row["exceeds_secular_max"])),
                 ]
             )
             + " |"
@@ -573,10 +577,10 @@ def write_markdown(
                 "| "
                 + " | ".join(
                     [
-                        str(row["classifier_mode"]),
-                        f"`{row['term_id']}`",
-                        str(row["bible_max_density"]),
-                        str(row["bible_max_corpus"]),
+                        md_cell(str(row["classifier_mode"])),
+                        term_cell(row),
+                        md_cell(str(row["bible_max_density"])),
+                        md_cell(str(row["bible_max_corpus"])),
                     ]
                 )
                 + " |"
@@ -596,11 +600,11 @@ def write_markdown(
                 "| "
                 + " | ".join(
                     [
-                        str(row["classifier_mode"]),
-                        str(row["corpus_class"]),
-                        f"`{row['term_id']}`",
-                        str(row["match_scope"]),
-                        str(row["relevant_hit_count"]),
+                        md_cell(str(row["classifier_mode"])),
+                        md_cell(str(row["corpus_class"])),
+                        term_cell(row),
+                        md_cell(str(row["match_scope"])),
+                        md_cell(str(row["relevant_hit_count"])),
                     ]
                 )
                 + " |"
@@ -619,14 +623,14 @@ def write_markdown(
             "| "
             + " | ".join(
                 [
-                    f"`{row.get('term_id', '')}`",
-                    row.get("corpus", ""),
-                    row.get("center_ref", ""),
-                    row.get("center_word", ""),
-                    row.get("relevance_type", ""),
-                    row.get("surface_match_scope", ""),
-                    row.get("matched_surface_keyword", ""),
-                    row.get("skip", ""),
+                    term_cell(row),
+                    md_cell(row.get("corpus", "")),
+                    md_cell(row.get("center_ref", "")),
+                    script_cell(row.get("center_word", "")),
+                    md_cell(row.get("relevance_type", "")),
+                    md_cell(row.get("surface_match_scope", "")),
+                    script_cell(row.get("matched_surface_keyword", "")),
+                    md_cell(row.get("skip", "")),
                 ]
             )
             + " |"
@@ -685,13 +689,13 @@ def bible_control_detail_row(row: dict[str, Any]) -> str:
         "| "
         + " | ".join(
             [
-                str(row["classifier_mode"]),
-                f"`{row['term_id']}`",
-                str(row["bible_max_density"]),
-                str(row["bible_max_corpus"]),
-                str(row["secular_max_density"]),
-                str(row["secular_max_corpus"]),
-                str(row["ratio"]),
+                md_cell(str(row["classifier_mode"])),
+                term_cell(row),
+                md_cell(str(row["bible_max_density"])),
+                md_cell(str(row["bible_max_corpus"])),
+                md_cell(str(row["secular_max_density"])),
+                md_cell(str(row["secular_max_corpus"])),
+                md_cell(str(row["ratio"])),
             ]
         )
         + " |"
@@ -760,6 +764,26 @@ def median(values: list[int]) -> float:
     if len(values) % 2:
         return float(values[middle])
     return (values[middle - 1] + values[middle]) / 2
+
+
+def term_cell(row: dict[str, Any]) -> str:
+    term = str(row.get("term", "") or "")
+    term_id = str(row.get("term_id", "") or "")
+    concept = str(row.get("concept", "") or "")
+    if term:
+        english = None if normalized_script_key(term) in KNOWN_TERMS else concept or None
+        return md_cell(f"{display_term(term, english=english)}<br>`{term_id}`")
+    return f"`{md_cell(term_id)}`"
+
+
+def script_cell(value: str) -> str:
+    if contains_hebrew(value) or contains_greek(value):
+        return md_cell(display_term(value))
+    return md_cell(value)
+
+
+def md_cell(value: str) -> str:
+    return str(value).replace("|", "\\|").replace("\n", " ")
 
 
 if __name__ == "__main__":
