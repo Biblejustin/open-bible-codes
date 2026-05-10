@@ -94,4 +94,6 @@ def test_markdown_uses_configured_title(tmp_path) -> None:
         type("Args", (), {"title": "Custom Pool", "terms": "terms.csv", "selected": "selected.csv", "top_controls": 999})(),
     )
 
-    assert path.read_text(encoding="utf-8").startswith("# Custom Pool")
+    text = path.read_text(encoding="utf-8")
+    assert text.startswith("# Custom Pool")
+    assert "`ισαακ` (Isaak; English: Concept)" in text

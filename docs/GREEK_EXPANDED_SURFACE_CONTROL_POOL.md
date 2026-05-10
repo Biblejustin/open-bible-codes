@@ -25,44 +25,44 @@ Selected target terms are excluded from the control candidate pool.
 
 | Term | Concept | Length | Surface verse vector | Sum | Controls found |
 | --- | --- | ---: | --- | ---: | ---: |
-| `τερασ` | Wonder | 5 | 46/43/43/42 | 174 | 10 |
-| `ισαακ` | Isaac | 5 | 18/18/18/18 | 72 | 10 |
-| `ανομια` | Lawlessness | 6 | 12/12/12/13 | 49 | 10 |
+| `τερασ` (teras; English: Wonder) | Wonder | 5 | 46/43/43/42 | 174 | 10 |
+| `ισαακ` (Isaak; English: Isaac) | Isaac | 5 | 18/18/18/18 | 72 | 10 |
+| `ανομια` (anomia; English: Lawlessness) | Lawlessness | 6 | 12/12/12/13 | 49 | 10 |
 
 ## Closest Controls
 
 | Target | Control | Control concept | Surface vector | Sum delta | Vector delta |
 | --- | --- | --- | --- | ---: | ---: |
-| `ισαακ` | `ηλιασ` | Elijah | 17/17/17/16 | 5 | 5 |
-| `ισαακ` | `χαραν` | Haran | 14/13/13/14 | 18 | 18 |
-| `ισαακ` | `γατερ` | Gether | 13/13/13/10 | 23 | 23 |
-| `ισαακ` | `σιδων` | Sidon | 25/25/25/21 | 24 | 24 |
-| `ισαακ` | `βασαν` | Bashan | 25/25/25/24 | 27 | 27 |
-| `ισαακ` | `κλεισ` | Key | 25/26/25/24 | 28 | 28 |
-| `ισαακ` | `τιτοσ` | Titus | 14/8/14/8 | 28 | 28 |
-| `ισαακ` | `ακρισ` | Locust | 11/11/11/10 | 29 | 29 |
-| `ισαακ` | `μηδια` | Media | 9/9/9/9 | 36 | 36 |
-| `ισαακ` | `πασχα` | Passover | 27/27/27/27 | 36 | 36 |
-| `ανομια` | `σκοτοσ` | Darkness | 13/13/13/13 | 3 | 3 |
-| `ανομια` | `μαρτυσ` | Witness | 11/11/11/11 | 5 | 5 |
-| `ανομια` | `ησαιασ` | Isaiah | 10/10/10/10 | 9 | 9 |
-| `ανομια` | `αθηναι` | Athens | 15/16/16/15 | 13 | 13 |
-| `ανομια` | `λυχνια` | Lampstand | 9/9/9/9 | 13 | 13 |
-| `ανομια` | `ελαιον` | Oil | 7/7/7/7 | 21 | 21 |
-| `ανομια` | `συμεων` | Simeon | 7/7/7/7 | 21 | 21 |
-| `ανομια` | `θλιψισ` | Tribulation | 7/7/7/7 | 21 | 21 |
-| `ανομια` | `λυχνοσ` | Lamp | 6/6/6/6 | 25 | 25 |
-| `ανομια` | `θρονοσ` | Throne | 6/6/6/6 | 25 | 25 |
-| `τερασ` | `νομοσ` | Law | 45/45/45/45 | 6 | 8 |
-| `τερασ` | `μαρια` | Mary | 46/46/46/46 | 10 | 10 |
-| `τερασ` | `ιωσηφ` | Joseph | 34/34/34/34 | 38 | 38 |
-| `τερασ` | `αστηρ` | Star | 30/30/30/30 | 54 | 54 |
-| `τερασ` | `ελισα` | Elishah | 27/28/28/28 | 63 | 63 |
-| `τερασ` | `πασχα` | Passover | 27/27/27/27 | 66 | 66 |
-| `τερασ` | `κλεισ` | Key | 25/26/25/24 | 74 | 74 |
-| `τερασ` | `βασαν` | Bashan | 25/25/25/24 | 75 | 75 |
-| `τερασ` | `ιακωβ` | Jacob | 63/63/63/63 | 78 | 78 |
-| `τερασ` | `σιδων` | Sidon | 25/25/25/21 | 78 | 78 |
+| `ισαακ` (Isaak; English: Isaac) | `ηλιασ` (elias; English: Elijah) | Elijah | 17/17/17/16 | 5 | 5 |
+| `ισαακ` (Isaak; English: Isaac) | `χαραν` (charan; English: Haran) | Haran | 14/13/13/14 | 18 | 18 |
+| `ισαακ` (Isaak; English: Isaac) | `γατερ` (gater; English: Gether) | Gether | 13/13/13/10 | 23 | 23 |
+| `ισαακ` (Isaak; English: Isaac) | `σιδων` (sidon; English: Sidon) | Sidon | 25/25/25/21 | 24 | 24 |
+| `ισαακ` (Isaak; English: Isaac) | `βασαν` (basan; English: Bashan) | Bashan | 25/25/25/24 | 27 | 27 |
+| `ισαακ` (Isaak; English: Isaac) | `κλεισ` (kleis; English: Key) | Key | 25/26/25/24 | 28 | 28 |
+| `ισαακ` (Isaak; English: Isaac) | `τιτοσ` (titos; English: Titus) | Titus | 14/8/14/8 | 28 | 28 |
+| `ισαακ` (Isaak; English: Isaac) | `ακρισ` (akris; English: Locust) | Locust | 11/11/11/10 | 29 | 29 |
+| `ισαακ` (Isaak; English: Isaac) | `μηδια` (media; English: Media) | Media | 9/9/9/9 | 36 | 36 |
+| `ισαακ` (Isaak; English: Isaac) | `πασχα` (pascha; English: Passover) | Passover | 27/27/27/27 | 36 | 36 |
+| `ανομια` (anomia; English: Lawlessness) | `σκοτοσ` (skotos; English: Darkness) | Darkness | 13/13/13/13 | 3 | 3 |
+| `ανομια` (anomia; English: Lawlessness) | `μαρτυσ` (martus; English: Witness) | Witness | 11/11/11/11 | 5 | 5 |
+| `ανομια` (anomia; English: Lawlessness) | `ησαιασ` (esaias; English: Isaiah) | Isaiah | 10/10/10/10 | 9 | 9 |
+| `ανομια` (anomia; English: Lawlessness) | `αθηναι` (athenai; English: Athens) | Athens | 15/16/16/15 | 13 | 13 |
+| `ανομια` (anomia; English: Lawlessness) | `λυχνια` (luchnia; English: Lampstand) | Lampstand | 9/9/9/9 | 13 | 13 |
+| `ανομια` (anomia; English: Lawlessness) | `ελαιον` (elaion; English: Oil) | Oil | 7/7/7/7 | 21 | 21 |
+| `ανομια` (anomia; English: Lawlessness) | `συμεων` (sumeon; English: Simeon) | Simeon | 7/7/7/7 | 21 | 21 |
+| `ανομια` (anomia; English: Lawlessness) | `θλιψισ` (thlipsis; English: Tribulation) | Tribulation | 7/7/7/7 | 21 | 21 |
+| `ανομια` (anomia; English: Lawlessness) | `λυχνοσ` (luchnos; English: Lamp) | Lamp | 6/6/6/6 | 25 | 25 |
+| `ανομια` (anomia; English: Lawlessness) | `θρονοσ` (thronos; English: Throne) | Throne | 6/6/6/6 | 25 | 25 |
+| `τερασ` (teras; English: Wonder) | `νομοσ` (nomos; English: Law) | Law | 45/45/45/45 | 6 | 8 |
+| `τερασ` (teras; English: Wonder) | `μαρια` (maria; English: Mary) | Mary | 46/46/46/46 | 10 | 10 |
+| `τερασ` (teras; English: Wonder) | `ιωσηφ` (ioseph; English: Joseph) | Joseph | 34/34/34/34 | 38 | 38 |
+| `τερασ` (teras; English: Wonder) | `αστηρ` (aster; English: Star) | Star | 30/30/30/30 | 54 | 54 |
+| `τερασ` (teras; English: Wonder) | `ελισα` (elisa; English: Elishah) | Elishah | 27/28/28/28 | 63 | 63 |
+| `τερασ` (teras; English: Wonder) | `πασχα` (pascha; English: Passover) | Passover | 27/27/27/27 | 66 | 66 |
+| `τερασ` (teras; English: Wonder) | `κλεισ` (kleis; English: Key) | Key | 25/26/25/24 | 74 | 74 |
+| `τερασ` (teras; English: Wonder) | `βασαν` (basan; English: Bashan) | Bashan | 25/25/25/24 | 75 | 75 |
+| `τερασ` (teras; English: Wonder) | `ιακωβ` (iakob; English: Jacob) | Jacob | 63/63/63/63 | 78 | 78 |
+| `τερασ` (teras; English: Wonder) | `σιδων` (sidon; English: Sidon) | Sidon | 25/25/25/21 | 78 | 78 |
 
 ## Read
 

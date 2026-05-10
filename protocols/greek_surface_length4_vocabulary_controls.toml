@@ -20,6 +20,7 @@ argv = [
 ]
 inputs = [
   "scripts/build_greek_surface_vocabulary_controls.py",
+  "els/term_display.py",
   "terms/greek_surface_prospective_terms.csv",
   "reports/greek_surface_length4_followup/selected_patterns.csv",
   "configs/example_ebible_grctr.toml",
@@ -144,6 +145,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_greek_surface_control_pool.py",
+  "els/term_display.py",
   "reports/greek_surface_length4_vocab_controls/terms.csv",
   "reports/greek_surface_length4_followup/selected_patterns.csv",
   "configs/example_ebible_grctr.toml",

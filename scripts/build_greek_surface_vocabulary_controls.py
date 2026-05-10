@@ -15,6 +15,7 @@ from pathlib import Path
 from els import __version__
 from els.corpus import Corpus, load_corpus
 from els.normalization import normalize_greek
+from els.term_display import display_term
 
 
 SOURCE_TERMS = Path("terms/greek_surface_prospective_terms.csv")
@@ -241,7 +242,11 @@ def write_markdown(
         "| --- | --- | --- |",
     ]
     for row in target_rows:
-        lines.append(f"| `{row['term_id']}` | `{normalize_greek(row['term'])}` | {row['concept']} |")
+        lines.append(
+            f"| `{row['term_id']}` | "
+            f"{display_term(normalize_greek(row['term']), english=row['concept'])} | "
+            f"{row['concept']} |"
+        )
     lines.extend(
         [
             "",
@@ -252,7 +257,11 @@ def write_markdown(
         ]
     )
     for row in preview:
-        lines.append(f"| `{row['term_id']}` | `{row['term']}` | {row['notes']} |")
+        lines.append(
+            f"| `{row['term_id']}` | "
+            f"{display_term(row['term'], english=row['concept'])} | "
+            f"{row['notes']} |"
+        )
     if len(control_rows) > len(preview):
         lines.extend(
             [

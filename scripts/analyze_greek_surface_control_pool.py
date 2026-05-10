@@ -15,6 +15,7 @@ from els import __version__
 from els.corpus import Corpus, load_corpus
 from els.normalization import normalize_greek, normalize_text
 from els.search import AhoAutomaton
+from els.term_display import display_term
 
 
 TERMS_IN = Path("terms/greek_expanded_prospective_terms.csv")
@@ -332,7 +333,7 @@ def write_markdown(
             "| "
             + " | ".join(
                 [
-                    f"`{row['normalized_term']}`",
+                    display_term(row["normalized_term"], english=row["concept"]),
                     row["concept"],
                     row["normalized_length"],
                     vector_text(row),
@@ -358,8 +359,14 @@ def write_markdown(
             "| "
             + " | ".join(
                 [
-                    f"`{row['target_normalized_term']}`",
-                    f"`{row['control_normalized_term']}`",
+                    display_term(
+                        row["target_normalized_term"],
+                        english=row["target_concept"],
+                    ),
+                    display_term(
+                        row["control_normalized_term"],
+                        english=row["control_concept"],
+                    ),
                     row["control_concept"],
                     row["control_surface_vector"],
                     row["surface_sum_delta"],

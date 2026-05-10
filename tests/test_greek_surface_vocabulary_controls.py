@@ -61,6 +61,46 @@ def test_vocabulary_control_rows_require_source_presence_and_exclude_targets() -
     assert summary["control_terms"] == 1
 
 
+def test_write_markdown_displays_original_language_terms(tmp_path) -> None:
+    path = tmp_path / "vocab.md"
+    vocab.write_markdown(
+        path,
+        [
+            {
+                "term_id": "amen_g",
+                "concept": "Amen",
+                "category": "liturgical",
+                "language": "greek",
+                "term": "ἀμήν",
+                "notes": "",
+            }
+        ],
+        [
+            {
+                "term_id": "control_g",
+                "concept": "Soul",
+                "category": "surface_vocabulary_control",
+                "language": "greek",
+                "term": "ψυχη",
+                "notes": "generated",
+            }
+        ],
+        {"unique_normalized_words": 1},
+        SimpleNamespace(
+            source_terms="terms.csv",
+            selected="selected.csv",
+            out="out.csv",
+            min_length=4,
+            max_length=4,
+            min_sources=4,
+        ),
+    )
+
+    text = path.read_text(encoding="utf-8")
+    assert "`αμην` (amen; English: Amen)" in text
+    assert "`ψυχη` (psuche; English: Soul)" in text
+
+
 def corpus_with_words(*words: str):
     return SimpleNamespace(
         words=tuple(
