@@ -2,7 +2,7 @@ CRD_REVIEWER ?= gpt-5-assisted-draft
 CRD_LOCKED_BY ?= gpt-5-assisted-draft
 CRD_DRAFTED_WITH ?= gpt-5
 
-.PHONY: demo indexes test lint crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report
+.PHONY: demo indexes test lint crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue
 
 demo:
 	python3 -m els.demo
@@ -61,3 +61,6 @@ crd-concept-surface-run:
 
 crd-concept-surface-report:
 	python3 -m scripts.build_crd_comparison --density-matrix reports/crd_concept_surface/density_matrix.csv --classified-hits reports/crd_concept_surface/classified_hits.csv --manifest reports/crd_concept_surface/manifest.json --out-dir reports/crd_concept_surface --markdown-out reports/crd_concept_surface/CRD_CONCEPT_SURFACE_REPORT.md
+
+crd-concept-surface-queue:
+	python3 -m scripts.build_crd_review_queue --summary reports/crd_concept_surface/bible_vs_control_summary.csv --classified-hits reports/crd_concept_surface/classified_hits.csv --output reports/crd_concept_surface/review_queue.csv

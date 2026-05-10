@@ -18,6 +18,7 @@ The input term set combines all committed term CSVs except `terms/crd_placeholde
 - density matrix: `reports/crd_concept_surface/density_matrix.csv`
 - classified hits: `reports/crd_concept_surface/classified_hits.csv`
 - comparison report: `reports/crd_concept_surface/CRD_CONCEPT_SURFACE_REPORT.md`
+- compact review queue: `reports/crd_concept_surface/review_queue.csv`
 
 ## Reproduce
 
@@ -25,6 +26,7 @@ The input term set combines all committed term CSVs except `terms/crd_placeholde
 make crd-concept-surface-prepare
 make crd-concept-surface-run
 make crd-concept-surface-report
+make crd-concept-surface-queue
 ```
 
 ## Run Size
@@ -32,6 +34,8 @@ make crd-concept-surface-report
 - density rows: 18,444
 - term/control comparison rows: 2,731
 - classified hit rows: 1,404,450
+- compact review queue rows: 309
+- compact review queue selected terms: 50
 - corpora with output: 20
 - nonzero `(term, corpus)` density rows: 5,370
 - runtime: 7,096.908 seconds
