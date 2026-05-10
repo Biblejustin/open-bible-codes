@@ -9,6 +9,11 @@ reader-facing summaries remain CSV and Markdown, but dense/intermediate tables
 can be imported into DuckDB for faster filtering, grouping, and review-queue
 generation.
 
+The default import also includes word-count and morphology-count outputs. These
+are not huge individually, but together they currently add about 1.9 million
+rows and are much easier to compare, filter by multiple, and join from DuckDB
+than by repeatedly scanning CSVs.
+
 ## Install
 
 DuckDB is optional. The command-line DuckDB installed by Homebrew is useful, but
@@ -65,6 +70,16 @@ python3 -m scripts.build_report_db --skip-missing --force
 - `hebrew_theology_surface_all_codes`
 - `hebrew_theology_surface_all_codes_summary`
 - `dynamic_skip_focus_full_span_exported_hits`
+- `word_counts_by_word`
+- `word_counts_by_book`
+- `word_counts_by_chapter`
+- `word_counts_by_verse`
+- `word_count_multiples`
+- `morph_counts_by_lemma`
+- `morph_counts_by_book`
+- `morph_counts_by_chapter`
+- `morph_counts_by_verse`
+- `morph_count_multiples`
 
 ## DB-Backed Commands
 

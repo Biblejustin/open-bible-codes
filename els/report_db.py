@@ -67,6 +67,16 @@ DEFAULT_REPORT_TABLE_NAMES = {
     "reports/hebrew_theology_all_codes/surface_all_codes.csv": "hebrew_theology_surface_all_codes",
     "reports/hebrew_theology_all_codes/surface_all_codes_summary.csv": "hebrew_theology_surface_all_codes_summary",
     "reports/dynamic_skip_focus/full_span_exported_hits.csv": "dynamic_skip_focus_full_span_exported_hits",
+    "reports/word_counts_by_word.csv": "word_counts_by_word",
+    "reports/word_counts_by_book.csv": "word_counts_by_book",
+    "reports/word_counts_by_chapter.csv": "word_counts_by_chapter",
+    "reports/word_counts_by_verse.csv": "word_counts_by_verse",
+    "reports/word_count_multiples.csv": "word_count_multiples",
+    "reports/morph_counts_by_lemma.csv": "morph_counts_by_lemma",
+    "reports/morph_counts_by_book.csv": "morph_counts_by_book",
+    "reports/morph_counts_by_chapter.csv": "morph_counts_by_chapter",
+    "reports/morph_counts_by_verse.csv": "morph_counts_by_verse",
+    "reports/morph_count_multiples.csv": "morph_count_multiples",
 }
 
 

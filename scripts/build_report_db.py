@@ -50,6 +50,16 @@ DEFAULT_REPORT_TABLES = [
         Path("reports/dynamic_skip_focus/full_span_exported_hits.csv"),
         "dynamic_skip_focus_full_span_exported_hits",
     ),
+    DefaultReportTable(Path("reports/word_counts_by_word.csv"), "word_counts_by_word"),
+    DefaultReportTable(Path("reports/word_counts_by_book.csv"), "word_counts_by_book"),
+    DefaultReportTable(Path("reports/word_counts_by_chapter.csv"), "word_counts_by_chapter"),
+    DefaultReportTable(Path("reports/word_counts_by_verse.csv"), "word_counts_by_verse"),
+    DefaultReportTable(Path("reports/word_count_multiples.csv"), "word_count_multiples"),
+    DefaultReportTable(Path("reports/morph_counts_by_lemma.csv"), "morph_counts_by_lemma"),
+    DefaultReportTable(Path("reports/morph_counts_by_book.csv"), "morph_counts_by_book"),
+    DefaultReportTable(Path("reports/morph_counts_by_chapter.csv"), "morph_counts_by_chapter"),
+    DefaultReportTable(Path("reports/morph_counts_by_verse.csv"), "morph_counts_by_verse"),
+    DefaultReportTable(Path("reports/morph_count_multiples.csv"), "morph_count_multiples"),
 ]
 
 

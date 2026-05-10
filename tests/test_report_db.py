@@ -10,6 +10,7 @@ from els.report_db import (
     default_table_name,
     fetch_dicts,
     import_csv_table,
+    report_table_name_for_path,
     sanitize_table_name,
     verify_table_current,
 )
@@ -51,6 +52,11 @@ def test_verify_table_current_rejects_stale_source(tmp_path: Path) -> None:
 
 def test_default_table_name_uses_report_path() -> None:
     assert default_table_name(Path("reports/crd_self_surface/classified_hits.csv")) == "crd_self_surface_classified_hits"
+
+
+def test_report_table_name_for_count_paths() -> None:
+    assert report_table_name_for_path(Path("reports/word_counts_by_verse.csv")) == "word_counts_by_verse"
+    assert report_table_name_for_path(Path("reports/morph_counts_by_lemma.csv")) == "morph_counts_by_lemma"
 
 
 def test_sanitize_table_name_prefixes_digit() -> None:
