@@ -27,10 +27,10 @@ Generated local outputs:
 
 | Pattern | Present | Missing | Best q | Surface phrase in span | Synthetic >= target | Gate |
 | --- | --- | --- | ---: | --- | ---: | --- |
-| `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` | TR_NT, BYZ_NT, TCG_NT, SBLGNT | none | 0.001332 | none | 10 | `cross_version_controlled_surface_anchored_hidden_candidate` |
-| `υιοσ|25|forward|before_plus_term|ουουιοσ|ουουιοσ` | BYZ_NT, SBLGNT | TR_NT, TCG_NT | 0.001249 | none | 7 | `multi_source_hidden_path_candidate` |
-| `αιμα|14|forward|before_plus_term_plus_after|ναιμανο|ναιμανο` | SBLGNT | TR_NT, BYZ_NT, TCG_NT | 0.000999 | none | 0 | `source_specific_hidden_path_candidate` |
-| `υιοσ|-46|backward|before_plus_term|ειουιοσ|ειουιοσ` | BYZ_NT | TR_NT, TCG_NT, SBLGNT | 0.000999 | none | 0 | `source_specific_hidden_path_candidate` |
+| `δοξα` (doxa; English: glory); skip=21; direction=forward; type=term_plus_after; extended=`δοξανωσ` (doxanos; English: hidden extension form from doxa) | TR_NT, BYZ_NT, TCG_NT, SBLGNT | none | 0.001332 | none | 10 | `cross_version_controlled_surface_anchored_hidden_candidate` |
+| `υιοσ` (huios; English: son); skip=25; direction=forward; type=before_plus_term; extended=`ουουιοσ` (ouhuios; English: hidden extension form from huios) | BYZ_NT, SBLGNT | TR_NT, TCG_NT | 0.001249 | none | 7 | `multi_source_hidden_path_candidate` |
+| `αιμα` (haima; English: blood); skip=14; direction=forward; type=before_plus_term_plus_after; extended=`ναιμανο` (naimano; English: hidden extension form from haima) | SBLGNT | TR_NT, BYZ_NT, TCG_NT | 0.000999 | none | 0 | `source_specific_hidden_path_candidate` |
+| `υιοσ` (huios; English: son); skip=-46; direction=backward; type=before_plus_term; extended=`ειουιοσ` (eiouios; English: hidden extension form from huios) | BYZ_NT | TR_NT, TCG_NT, SBLGNT | 0.000999 | none | 0 | `source_specific_hidden_path_candidate` |
 
 ## Gate Counts
 
@@ -46,12 +46,12 @@ This gate separates candidate type from claim status. Hidden-path-only phrases
 are normal ELS candidates, not failures. A same-span surface echo would be a
 rarer and stronger subtype.
 
-`δοξα` is still the strongest row because the same exact extension key appears
+`δοξα` (doxa; English: glory) is still the strongest row because the same exact extension key appears
 in all four compared Greek NT sources, passes q <= 0.01 row-local controls, and
 has related surface context around glory/glorified. Its current type is a
 cross-version controlled surface-anchored hidden candidate.
 
-`υιοσ` and `αιμα` stay weaker because their exact patterns are missing from one
+`υιοσ` (huios; English: son) and `αιμα` (haima; English: blood) stay weaker because their exact patterns are missing from one
 or more compared Greek NT sources. They remain source-distribution review rows,
 not cross-text evidence.
 

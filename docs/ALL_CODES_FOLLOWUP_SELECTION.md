@@ -71,13 +71,13 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 21 | english_screening | `hidden_path_only` | all_source | `bear` | Bear | 2 | 1Chr 11:8 | `repaired` |
 | 22 | greek_screening | `center_word_exact` | all_source | `νατο` (nato; English: NATO) | NATO | 8 | Rom 5:10 | `θανατου` (thanatou) |
 | 23 | greek_screening | `center_word_exact` | all_source | `ναοσ` (naos; English: Temple) | Temple | -9 | Matt 23:17 | `ναοσ` (naos) |
-| 24 | greek_screening | `center_word_exact` | all_source | `αιμα` (aima; English: Blood) | Blood | -10 | Rev 19:13 | `αιματι` (aimati) |
+| 24 | greek_screening | `center_word_exact` | all_source | `αιμα` (haima; English: Blood) | Blood | -10 | Rev 19:13 | `αιματι` (aimati) |
 | 25 | greek_screening | `center_word_same_category` | all_source | `λουδ` (loud; English: Lud) | Lud | -2 | Phil 2:7 | `δουλου` (doulou) |
 | 26 | greek_screening | `center_word_same_category` | all_source | `ιωυαν` (iouan; English: Javan) | Javan | -2 | 1Pet 5:13 | `βαβυλωνι` (babuloni) |
 | 27 | greek_screening | `center_word_same_category` | all_source | `ευαλ` (eual; English: Obal) | Obal | -3 | 1Tim 5:14 | `βουλομαι` (boulomai) |
 | 28 | greek_screening | `center_verse_exact` | all_source | `δασα` (dasa; English: Lasha) | Lasha | -2 | Acts 9:11 | `ταρσεα` (tarsea) |
-| 29 | greek_screening | `center_verse_exact` | all_source | `αιμα` (aima; English: Blood) | Blood | 2 | Matt 13:55 | `μαριαμ` (mariam) |
-| 30 | greek_screening | `center_verse_exact` | all_source | `αιμα` (aima; English: Blood) | Blood | 2 | Matt 13:55 | `μαριαμ` (mariam) |
+| 29 | greek_screening | `center_verse_exact` | all_source | `αιμα` (haima; English: Blood) | Blood | 2 | Matt 13:55 | `μαριαμ` (mariam) |
+| 30 | greek_screening | `center_verse_exact` | all_source | `αιμα` (haima; English: Blood) | Blood | 2 | Matt 13:55 | `μαριαμ` (mariam) |
 | 31 | greek_screening | `center_verse_same_category` | all_source | `ναοσ` (naos; English: Temple) | Temple | 2 | 1Cor 10:16 | `του` (tou) |
 | 32 | greek_screening | `center_verse_same_category` | all_source | `κινα` (kina; English: China) | China | 2 | 1John 2:1 | `δικαιον` (dikaion) |
 | 33 | greek_screening | `center_verse_same_category` | all_source | `ελκη` (elke; English: Boils) | Boils | 2 | 1Pet 5:13 | `συνεκλεκτη` (suneklekte) |
@@ -89,7 +89,7 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 39 | greek_screening | `span_same_category` | all_source | `γαμερ` (gamer; English: Gomer) | Gomer | -3 | 2Cor 10:3 | `στρατευομεθα` (strateuometha) |
 | 40 | greek_screening | `hidden_path_only` | all_source | `σαλα` (sala; English: Shelah) | Shelah | 2 | 1Cor 10:18 | `ισραηλ` (israel) |
 | 41 | greek_screening | `hidden_path_only` | all_source | `αμην` (amen; English: Amen) | Amen | 2 | 1Cor 1:10 | `μη` (me) |
-| 42 | greek_screening | `hidden_path_only` | all_source | `υιοσ` (uios; English: Son) | Son | 2 | 1Cor 5:12 | `τουσ` (tous) |
+| 42 | greek_screening | `hidden_path_only` | all_source | `υιοσ` (huios; English: Son) | Son | 2 | 1Cor 5:12 | `τουσ` (tous) |
 | 43 | hebrew_screening | `center_word_exact` | all_source | `שממה` (shmmh; English: Desolation) | Desolation | 2 | Mic 1:7 | `שממה` (shmmh) |
 | 44 | hebrew_screening | `center_word_exact` | all_source | `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 1Chr 26:27 | `יהוה` (yhwh) |
 | 45 | hebrew_screening | `center_word_exact` | all_source | `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 1Chr 28:20 | `יהוה` (yhwh) |

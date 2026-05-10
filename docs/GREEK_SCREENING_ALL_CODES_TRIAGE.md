@@ -39,10 +39,10 @@ It is a triage aid, not a claim-grade filter.
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
 | 1 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 8 | 25 | Rom 5:10 | `θανατου` (thanatou) |  |
 | 2 | all_source | `temple_g` `ναοσ` (naos; English: Temple) | Temple | -9 | 28 | Matt 23:17 | `ναοσ` (naos) |  |
-| 3 | all_source | `blood_g` `αιμα` (aima; English: Blood) | Blood | -10 | 31 | Rev 19:13 | `αιματι` (aimati) |  |
-| 4 | all_source | `haima_gnt` `αιμα` (aima; English: Blood) | Blood | -10 | 31 | Rev 19:13 | `αιματι` (aimati) |  |
-| 5 | all_source | `blood_g` `αιμα` (aima; English: Blood) | Blood | 13 | 40 | 1Pet 1:19 | `αιματι` (aimati) |  |
-| 6 | all_source | `haima_gnt` `αιμα` (aima; English: Blood) | Blood | 13 | 40 | 1Pet 1:19 | `αιματι` (aimati) |  |
+| 3 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | -10 | 31 | Rev 19:13 | `αιματι` (aimati) |  |
+| 4 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | -10 | 31 | Rev 19:13 | `αιματι` (aimati) |  |
+| 5 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | 13 | 40 | 1Pet 1:19 | `αιματι` (aimati) |  |
+| 6 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | 13 | 40 | 1Pet 1:19 | `αιματι` (aimati) |  |
 | 7 | all_source | `god_g` `θεοσ` (theos; English: God) | God | -21 | 64 | 2Cor 6:16 | `θεοσ` (theos) |  |
 | 8 | all_source | `wisdom_g` `σοφια` (sophia; English: Wisdom) | Wisdom | -24 | 97 | Acts 6:10 | `σοφια` (sophia) |  |
 | 9 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -50 | 151 | Rom 8:6 | `θανατοσ` (thanatos) |  |
@@ -52,10 +52,10 @@ It is a triage aid, not a claim-grade filter.
 | 13 | all_source | `god_g` `θεοσ` (theos; English: God) | God | -66 | 199 | Acts 10:38 | `θεοσ` (theos) |  |
 | 14 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 72 | 217 | Heb 9:15 | `θανατου` (thanatou) |  |
 | 15 | multi_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 3 | 10 | Rev 21:8 | `θανατοσ` (thanatos) |  |
-| 16 | multi_source | `son_g` `υιοσ` (uios; English: Son) | Son | -5 | 16 | John 1:42 | `υιοσ` (uios) |  |
-| 17 | multi_source | `son_g` `υιοσ` (uios; English: Son) | Son | 5 | 16 | Luke 14:5 | `υιοσ` (uios) |  |
+| 16 | multi_source | `son_g` `υιοσ` (huios; English: Son) | Son | -5 | 16 | John 1:42 | `υιοσ` (huios; English: son) |  |
+| 17 | multi_source | `son_g` `υιοσ` (huios; English: Son) | Son | 5 | 16 | Luke 14:5 | `υιοσ` (huios; English: son) |  |
 | 18 | multi_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 14 | 43 | Heb 2:14 | `θανατου` (thanatou) |  |
-| 19 | multi_source | `son_g` `υιοσ` (uios; English: Son) | Son | 14 | 43 | Luke 11:11 | `υιοσ` (uios) |  |
+| 19 | multi_source | `son_g` `υιοσ` (huios; English: Son) | Son | 14 | 43 | Luke 11:11 | `υιοσ` (huios; English: son) |  |
 | 20 | multi_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -17 | 52 | 2Cor 3:7 | `θανατου` (thanatou) |  |
 
 ### center_word_same_category
@@ -71,16 +71,16 @@ It is a triage aid, not a claim-grade filter.
 | 7 | all_source | `china_g` `κινα` (kina; English: China) | China | -4 | 13 | Mark 12:3 | `εδειραν` (edeiran) |  |
 | 8 | all_source | `shelah_g` `σαλα` (sala; English: Shelah) | Shelah | 4 | 13 | Matt 4:15 | `ζαβουλων` (zaboulon) |  |
 | 9 | all_source | `seba_g` `σαβα` (saba; English: Seba) | Seba | 5 | 16 | 2Pet 1:10 | `σπουδασατε` (spoudasate) |  |
-| 10 | all_source | `son_g` `υιοσ` (uios; English: Son) | Son | 6 | 19 | John 7:6 | `ιησουσ` (Iesous; English: Jesus/Joshua) |  |
+| 10 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | 6 | 19 | John 7:6 | `ιησουσ` (Iesous; English: Jesus/Joshua) |  |
 | 11 | all_source | `seba_g` `σαβα` (saba; English: Seba) | Seba | -6 | 19 | Luke 10:22 | `βουληται` (bouletai) |  |
 | 12 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -6 | 19 | Luke 1:80 | `ισραηλ` (israel) |  |
 | 13 | all_source | `seba_g` `σαβα` (saba; English: Seba) | Seba | -6 | 19 | Matt 11:27 | `βουληται` (bouletai) |  |
 | 14 | all_source | `seba_g` `σαβα` (saba; English: Seba) | Seba | 6 | 19 | Rom 16:10 | `αριστοβουλου` (aristoboulou) |  |
 | 15 | all_source | `seba_g` `σαβα` (saba; English: Seba) | Seba | -6 | 19 | Rom 16:10 | `αριστοβουλου` (aristoboulou) |  |
-| 16 | all_source | `blood_g` `αιμα` (aima; English: Blood) | Blood | 7 | 22 | Acts 7:11 | `θλιψισ` (thlipsis) |  |
+| 16 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | 7 | 22 | Acts 7:11 | `θλιψισ` (thlipsis) |  |
 | 17 | all_source | `eber_g` `εβερ` (eber; English: Eber) | Eber | 7 | 22 | Matt 1:17 | `βαβυλωνοσ` (babulonos) |  |
 | 18 | all_source | `china_g` `κινα` (kina; English: China) | China | -7 | 22 | Rev 6:8 | `θανατοσ` (thanatos) |  |
-| 19 | all_source | `son_g` `υιοσ` (uios; English: Son) | Son | 8 | 25 | 1John 2:22 | `χριστοσ` (christos) |  |
+| 19 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | 8 | 25 | 1John 2:22 | `χριστοσ` (christos) |  |
 | 20 | all_source | `shelah_g` `σαλα` (sala; English: Shelah) | Shelah | 9 | 28 | Rev 18:10 | `βαβυλων` (babulon) |  |
 
 ### center_verse_exact
@@ -88,25 +88,25 @@ It is a triage aid, not a claim-grade filter.
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
 | 1 | all_source | `lasha_g` `δασα` (dasa; English: Lasha) | Lasha | -2 | 7 | Acts 9:11 | `ταρσεα` (tarsea) |  |
-| 2 | all_source | `blood_g` `αιμα` (aima; English: Blood) | Blood | 2 | 7 | Matt 13:55 | `μαριαμ` (mariam) |  |
-| 3 | all_source | `haima_gnt` `αιμα` (aima; English: Blood) | Blood | 2 | 7 | Matt 13:55 | `μαριαμ` (mariam) |  |
-| 4 | all_source | `son_g` `υιοσ` (uios; English: Son) | Son | -3 | 10 | Acts 23:6 | `φαρισαιοσ` (pharisaios) |  |
-| 5 | all_source | `blood_g` `αιμα` (aima; English: Blood) | Blood | 3 | 10 | Eph 4:17 | `εν` (en) |  |
-| 6 | all_source | `haima_gnt` `αιμα` (aima; English: Blood) | Blood | 3 | 10 | Eph 4:17 | `εν` (en) |  |
+| 2 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | 2 | 7 | Matt 13:55 | `μαριαμ` (mariam) |  |
+| 3 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | 2 | 7 | Matt 13:55 | `μαριαμ` (mariam) |  |
+| 4 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | -3 | 10 | Acts 23:6 | `φαρισαιοσ` (pharisaios) |  |
+| 5 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | 3 | 10 | Eph 4:17 | `εν` (en) |  |
+| 6 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | 3 | 10 | Eph 4:17 | `εν` (en) |  |
 | 7 | all_source | `amen_g` `αμην` (amen; English: Amen) | Amen | -3 | 10 | John 5:24 | `ζωην` (zoen) |  |
 | 8 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -3 | 10 | Rev 2:10 | `στεφανον` (stephanon) |  |
 | 9 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -4 | 13 | 1Cor 9:22 | `τοισ` (tois) |  |
 | 10 | all_source | `god_g` `θεοσ` (theos; English: God) | God | 4 | 13 | 1John 4:9 | `εισ` (eis) |  |
 | 11 | all_source | `zion_g` `σιων` (sion; English: Zion) | Zion | -4 | 13 | Acts 19:34 | `επι` (epi) |  |
-| 12 | all_source | `blood_g` `αιμα` (aima; English: Blood) | Blood | -4 | 13 | Col 1:11 | `δυναμουμενοι` (dunamoumenoi) |  |
-| 13 | all_source | `haima_gnt` `αιμα` (aima; English: Blood) | Blood | -4 | 13 | Col 1:11 | `δυναμουμενοι` (dunamoumenoi) |  |
-| 14 | all_source | `son_g` `υιοσ` (uios; English: Son) | Son | 4 | 13 | Gal 4:7 | `ει` (ei) |  |
-| 15 | all_source | `son_g` `υιοσ` (uios; English: Son) | Son | 4 | 13 | John 1:42 | `σιμων` (simon) |  |
+| 12 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | -4 | 13 | Col 1:11 | `δυναμουμενοι` (dunamoumenoi) |  |
+| 13 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | -4 | 13 | Col 1:11 | `δυναμουμενοι` (dunamoumenoi) |  |
+| 14 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | 4 | 13 | Gal 4:7 | `ει` (ei) |  |
+| 15 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | 4 | 13 | John 1:42 | `σιμων` (simon) |  |
 | 16 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -4 | 13 | Luke 3:31 | `ματταθα` (mattatha) |  |
 | 17 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -4 | 13 | Matt 4:18 | `αυτου` (autou) |  |
 | 18 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -4 | 13 | Rom 1:32 | `πρασσοντεσ` (prassontes) |  |
-| 19 | all_source | `blood_g` `αιμα` (aima; English: Blood) | Blood | 5 | 16 | 1Cor 15:17 | `αμαρτιαισ` (amartiais) |  |
-| 20 | all_source | `haima_gnt` `αιμα` (aima; English: Blood) | Blood | 5 | 16 | 1Cor 15:17 | `αμαρτιαισ` (amartiais) |  |
+| 19 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | 5 | 16 | 1Cor 15:17 | `αμαρτιαισ` (amartiais) |  |
+| 20 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | 5 | 16 | 1Cor 15:17 | `αμαρτιαισ` (amartiais) |  |
 
 ### center_verse_same_category
 
@@ -144,18 +144,18 @@ It is a triage aid, not a claim-grade filter.
 | 5 | all_source | `amen_g` `αμην` (amen; English: Amen) | Amen | -9 | 28 | 1John 1:1 | `ακηκοαμεν` (akekoamen) |  |
 | 6 | all_source | `god_g` `θεοσ` (theos; English: God) | God | 9 | 28 | Acts 17:29 | `ειναι` (einai) |  |
 | 7 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 10 | 31 | Acts 11:14 | `λαλησει` (lalesei) |  |
-| 8 | all_source | `blood_g` `αιμα` (aima; English: Blood) | Blood | -10 | 31 | Luke 11:52 | `τοισ` (tois) |  |
-| 9 | all_source | `haima_gnt` `αιμα` (aima; English: Blood) | Blood | -10 | 31 | Luke 11:52 | `τοισ` (tois) |  |
+| 8 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | -10 | 31 | Luke 11:52 | `τοισ` (tois) |  |
+| 9 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | -10 | 31 | Luke 11:52 | `τοισ` (tois) |  |
 | 10 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -10 | 31 | Matt 4:15 | `εθνων` (ethnon) |  |
-| 11 | all_source | `blood_g` `αιμα` (aima; English: Blood) | Blood | 11 | 34 | Luke 11:52 | `τοισ` (tois) |  |
-| 12 | all_source | `haima_gnt` `αιμα` (aima; English: Blood) | Blood | 11 | 34 | Luke 11:52 | `τοισ` (tois) |  |
+| 11 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | 11 | 34 | Luke 11:52 | `τοισ` (tois) |  |
+| 12 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | 11 | 34 | Luke 11:52 | `τοισ` (tois) |  |
 | 13 | all_source | `asher_g` `ασηρ` (aser; English: Asher) | Asher | -11 | 34 | Luke 23:8 | `ιδων` (idon) |  |
-| 14 | all_source | `blood_g` `αιμα` (aima; English: Blood) | Blood | -13 | 40 | Rom 3:16 | `ταλαιπωρια` (talaiporia) |  |
-| 15 | all_source | `haima_gnt` `αιμα` (aima; English: Blood) | Blood | -13 | 40 | Rom 3:16 | `ταλαιπωρια` (talaiporia) |  |
+| 14 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | -13 | 40 | Rom 3:16 | `ταλαιπωρια` (talaiporia) |  |
+| 15 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | -13 | 40 | Rom 3:16 | `ταλαιπωρια` (talaiporia) |  |
 | 16 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 13 | 40 | Rom 8:5 | `οντεσ` (ontes) |  |
 | 17 | all_source | `cush_g` `χουσ` (chous; English: Cush) | Cush | 14 | 43 | John 12:9 | `εκ` (ek) |  |
 | 18 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 15 | 46 | 1Cor 15:53 | `αθανασιαν` (athanasian) |  |
-| 19 | all_source | `son_g` `υιοσ` (uios; English: Son) | Son | -16 | 49 | Acts 16:2 | `λυστροισ` (lustrois) |  |
+| 19 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | -16 | 49 | Acts 16:2 | `λυστροισ` (lustrois) |  |
 | 20 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -17 | 52 | 2Cor 13:10 | `τουτο` (touto) |  |
 
 ### span_same_category
@@ -173,7 +173,7 @@ It is a triage aid, not a claim-grade filter.
 | 9 | all_source | `shelah_g` `σαλα` (sala; English: Shelah) | Shelah | 4 | 13 | Acts 15:11 | `αλλα` (alla) |  |
 | 10 | all_source | `china_g` `κινα` (kina; English: China) | China | -4 | 13 | Gal 6:15 | `κτισισ` (ktisis) |  |
 | 11 | all_source | `obal_g` `ευαλ` (eual; English: Obal) | Obal | -4 | 13 | Heb 10:30 | `αυτου` (autou) |  |
-| 12 | all_source | `son_g` `υιοσ` (uios; English: Son) | Son | 4 | 13 | John 6:25 | `ευροντεσ` (eurontes) |  |
+| 12 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | 4 | 13 | John 6:25 | `ευροντεσ` (eurontes) |  |
 | 13 | all_source | `obal_g` `ευαλ` (eual; English: Obal) | Obal | -4 | 13 | Matt 12:26 | `αυτου` (autou) |  |
 | 14 | all_source | `shelah_g` `σαλα` (sala; English: Shelah) | Shelah | 4 | 13 | Rev 21:17 | `αγγελου` (aggelou) |  |
 | 15 | all_source | `aram_g` `αραμ` (aram; English: Aram) | Aram | 5 | 16 | 1Cor 15:3 | `παρεδωκα` (paredoka) |  |
@@ -189,17 +189,17 @@ It is a triage aid, not a claim-grade filter.
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
 | 1 | all_source | `shelah_g` `σαλα` (sala; English: Shelah) | Shelah | 2 | 7 | 1Cor 10:18 | `ισραηλ` (israel) |  |
 | 2 | all_source | `amen_g` `αμην` (amen; English: Amen) | Amen | 2 | 7 | 1Cor 1:10 | `μη` (me) |  |
-| 3 | all_source | `son_g` `υιοσ` (uios; English: Son) | Son | 2 | 7 | 1Cor 5:12 | `τουσ` (tous) |  |
+| 3 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | 2 | 7 | 1Cor 5:12 | `τουσ` (tous) |  |
 | 4 | all_source | `levi_g` `λευι` (leui; English: Levi) | Levi | -2 | 7 | 1Cor 6:10 | `ουτε` (oute) |  |
 | 5 | all_source | `levi_g` `λευι` (leui; English: Levi) | Levi | -2 | 7 | 1Cor 6:10 | `ουτε` (oute) |  |
-| 6 | all_source | `blood_g` `αιμα` (aima; English: Blood) | Blood | -2 | 7 | 1Cor 6:8 | `υμεισ` (umeis) |  |
+| 6 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | -2 | 7 | 1Cor 6:8 | `υμεισ` (umeis) |  |
 | 7 | all_source | `elam_g` `ελαμ` (elam; English: Elam) | Elam | 2 | 7 | 1Cor 6:8 | `αλλα` (alla) |  |
-| 8 | all_source | `haima_gnt` `αιμα` (aima; English: Blood) | Blood | -2 | 7 | 1Cor 6:8 | `υμεισ` (umeis) |  |
-| 9 | all_source | `blood_g` `αιμα` (aima; English: Blood) | Blood | -2 | 7 | 1Cor 9:15 | `μοι` (moi) |  |
-| 10 | all_source | `haima_gnt` `αιμα` (aima; English: Blood) | Blood | -2 | 7 | 1Cor 9:15 | `μοι` (moi) |  |
+| 8 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | -2 | 7 | 1Cor 6:8 | `υμεισ` (umeis) |  |
+| 9 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | -2 | 7 | 1Cor 9:15 | `μοι` (moi) |  |
+| 10 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | -2 | 7 | 1Cor 9:15 | `μοι` (moi) |  |
 | 11 | all_source | `lasha_g` `δασα` (dasa; English: Lasha) | Lasha | -2 | 7 | 1John 2:10 | `σκανδαλον` (skandalon) |  |
 | 12 | all_source | `lasha_g` `δασα` (dasa; English: Lasha) | Lasha | 2 | 7 | 1John 2:18 | `εσχατη` (eschate) |  |
-| 13 | all_source | `son_g` `υιοσ` (uios; English: Son) | Son | 2 | 7 | 1John 2:8 | `υμιν` (umin) |  |
+| 13 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | 2 | 7 | 1John 2:8 | `υμιν` (umin) |  |
 | 14 | all_source | `hell_hades_g` `αδησ` (ades; English: Hades) | Hades | -2 | 7 | 1Pet 1:13 | `τησ` (tes) |  |
 | 15 | all_source | `zion_g` `σιων` (sion; English: Zion) | Zion | -2 | 7 | 1Pet 2:7 | `γωνιασ` (gonias) |  |
 | 16 | all_source | `lasha_g` `δασα` (dasa; English: Lasha) | Lasha | -2 | 7 | 1Pet 3:15 | `καρδιαισ` (kardiais) |  |

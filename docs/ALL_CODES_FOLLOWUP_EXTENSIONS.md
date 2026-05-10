@@ -75,10 +75,10 @@ same-skip extension is an added review feature, not a requirement.
 | 66 | hebrew_screening | `span_same_category` | `תתתתתכז` (tttttkz; English: Gregorian 2027 additive) | UXLC | `after_match` | `שה` (shh) | `word` | 24 | שֶׂ֣ה; שֶׂה־; שֶׂ֥ה; שֶׂ֔ה; שֶׂ֖ה |
 | 47 | hebrew_screening | `center_word_same_concept` | `רומא` (rwm; English: Rome) | UXLC | `after_match` | `לי` (ly) | `word` | 749 | לִּ֥י; לִ֤י; לִ֣י; לִּ֑י; לִּ֔י |
 | 59 | hebrew_screening | `center_verse_same_category` | `טימותי` (tymwty; English: Timothy) | UXLC | `after_match` | `או` (w) | `word` | 321 | א֥וֹ; אוֹ־; א֣וֹ; א֚וֹ; א֖וֹ |
-| 42 | greek_screening | `hidden_path_only` | `υιοσ` (uios; English: Son) | TR_NT | `before_match` | `εν` (en) | `word` | 2870 | ἐν; Ἐν; ἓν; ἕν; Ἕν |
+| 42 | greek_screening | `hidden_path_only` | `υιοσ` (huios; English: Son) | TR_NT | `before_match` | `εν` (en) | `word` | 2870 | ἐν; Ἐν; ἓν; ἕν; Ἕν |
 | 27 | greek_screening | `center_word_same_category` | `ευαλ` (eual; English: Obal) | TR_NT | `before_match` | `σε` (se) | `word` | 197 | σε; σὲ; σέ |
-| 29 | greek_screening | `center_verse_exact` | `αιμα` (aima; English: Blood) | TR_NT | `before_match` | `τι` (ti) | `word` | 453 | τι; τί; Τί |
-| 30 | greek_screening | `center_verse_exact` | `αιμα` (aima; English: Blood) | TR_NT | `before_match` | `τι` (ti) | `word` | 453 | τι; τί; Τί |
+| 29 | greek_screening | `center_verse_exact` | `αιμα` (haima; English: Blood) | TR_NT | `before_match` | `τι` (ti) | `word` | 453 | τι; τί; Τί |
+| 30 | greek_screening | `center_verse_exact` | `αιμα` (haima; English: Blood) | TR_NT | `before_match` | `τι` (ti) | `word` | 453 | τι; τί; Τί |
 | 17 | english_screening | `span_same_category` | `mash` | KJV | `before_match` | `or` | `word` | 1122 | or; Or; or,; Or, |
 | 80 | hebrew_theology | `span_same_category` | `ברית` (bryt; English: Covenant) | UXLC | `after_match` | `דא` (d) | `word` | 5 | דָא־; דָּ֥א; דָּֽא׃; דָ֔א |
 | 20 | english_screening | `hidden_path_only` | `cush` | KJV | `before_match` | `ur` | `word` | 5 | Ur; Ur, |

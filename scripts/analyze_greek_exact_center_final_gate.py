@@ -13,6 +13,7 @@ from pathlib import Path
 
 from els import __version__
 from els.statistics import numeric_value
+from els.term_display import display_term
 
 
 PATTERN_SUMMARY = Path("reports/greek_pattern_versions/summary.csv")
@@ -240,6 +241,9 @@ def gate_read(gate: str) -> str:
 
 def write_markdown(path: Path, rows: list[dict[str, str]]) -> None:
     gate_counts = Counter(row["final_gate"] for row in rows)
+    doxa_display = display_term("δοξα")
+    huios_display = display_term("υιοσ")
+    haima_display = display_term("αιμα")
     lines = [
         "# Greek Exact-Center Final Gate",
         "",
@@ -256,7 +260,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]]) -> None:
             "| "
             + " | ".join(
                 [
-                    f"`{row['overlap_key']}`",
+                    display_pattern(row),
                     row["current_present_corpora"],
                     row["current_absent_corpora"] or "none",
                     row["best_q"],
@@ -280,13 +284,13 @@ def write_markdown(path: Path, rows: list[dict[str, str]]) -> None:
             "phrases are normal ELS candidates, not failures. A same-span surface echo",
             "would be a rarer and stronger subtype.",
             "",
-            "`δοξα` is the strongest current row because it has four-source presence,",
+            f"{doxa_display} is the strongest current row because it has four-source presence,",
             "q <= 0.01 controls, and related surface context around glory/glorified.",
             "Its current type is a cross-version controlled surface-anchored hidden",
             "candidate. It is still not a claim because study-level controls and",
             "predeclared interpretation standards have not promoted it that far.",
             "",
-            "`υιος` and `αιμα` remain weaker review candidates because their exact",
+            f"{huios_display} and {haima_display} remain weaker review candidates because their exact",
             "patterns are missing from one or more compared Greek NT sources.",
         ]
     )
@@ -335,6 +339,14 @@ def sort_key(row: dict[str, str]) -> tuple[int, str]:
         "all_source_presence_needs_controls": 5,
     }
     return (order.get(row["final_gate"], 99), row["overlap_key"])
+
+
+def display_pattern(row: dict[str, str]) -> str:
+    return (
+        f"{display_term(row['normalized_term'])}; skip={row['skip']}; "
+        f"direction={row['direction']}; type={row['extension_type']}; "
+        f"extended={display_term(row['extended_sequence'])}"
+    )
 
 
 def int_or_zero(value: str) -> int:

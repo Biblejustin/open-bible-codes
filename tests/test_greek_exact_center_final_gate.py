@@ -53,6 +53,20 @@ class GreekExactCenterFinalGateTests(unittest.TestCase):
         key = "δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ"
         self.assertIn(key, grouped)
 
+    def test_display_pattern_adds_transliteration_and_glosses(self) -> None:
+        text = final_gate.display_pattern(
+            {
+                "normalized_term": "αιμα",
+                "skip": "14",
+                "direction": "forward",
+                "extension_type": "before_plus_term_plus_after",
+                "extended_sequence": "ναιμανο",
+            }
+        )
+
+        self.assertIn("`αιμα` (haima; English: blood)", text)
+        self.assertIn("`ναιμανο` (naimano; English: hidden extension form from haima)", text)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -38,12 +38,12 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 
 | Term | Concept | Hidden hits | Center word same | Center word related | Center verse same | Center verse related | Span context |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| `αιμα` (aima; English: Blood) | Blood | 36,750 | 38 | 118 | 1,398 | 2,338 | 7,967 |
+| `αιμα` (haima; English: Blood) | Blood | 36,750 | 38 | 118 | 1,398 | 2,338 | 7,967 |
 | `νατο` (nato; English: NATO) | NATO | 36,345 | 79 | 48 | 1,606 | 1,357 | 6,663 |
 | `ναοσ` (naos; English: Temple) | Temple | 35,617 | 4 | 74 | 97 | 1,521 | 3,563 |
-| `υιοσ` (uios; English: Son) | Son | 22,294 | 29 | 134 | 645 | 2,022 | 6,038 |
+| `υιοσ` (huios; English: Son) | Son | 22,294 | 29 | 134 | 645 | 2,022 | 6,038 |
 | `σιων` (sion; English: Zion) | Zion | 19,934 | 2 | 171 | 134 | 1,966 | 4,407 |
-| `αιμα` (aima; English: Blood) | Blood | 18,375 | 19 | 30 | 699 | 809 | 3,227 |
+| `αιμα` (haima; English: Blood) | Blood | 18,375 | 19 | 30 | 699 | 809 | 3,227 |
 | `κινα` (kina; English: China) | China | 16,489 | 0 | 74 | 33 | 1,156 | 2,644 |
 | `ιραν` (iran; English: Iran) | Iran | 15,745 | 4 | 39 | 93 | 1,109 | 2,703 |
 | `σαλα` (sala; English: Shelah) | Shelah | 13,936 | 0 | 117 | 12 | 2,712 | 5,363 |
