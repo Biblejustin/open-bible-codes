@@ -31,7 +31,7 @@
     {
       "id": "hebrew_modern_geopolitical_presence",
       "title": "Hebrew Modern Geopolitical Version Presence",
-      "status": "ready_for_version_presence_only",
+      "status": "completed_negative_controlled_result",
       "language": "hebrew",
       "term_file": "terms/hebrew_modern_geopolitical_prospective_terms.csv",
       "protocol": "protocols/hebrew_modern_geopolitical_prospective.toml",
@@ -115,7 +115,7 @@
     {
       "id": "local_terms_negative_appendix",
       "title": "Local Terms Negative Appendix",
-      "status": "ready_as_curiosity_appendix",
+      "status": "completed_negative_curiosity_appendix",
       "language": "hebrew/greek",
       "term_file": "terms/local_terms_appendix.csv",
       "protocol": "protocols/local_terms_appendix.toml",
