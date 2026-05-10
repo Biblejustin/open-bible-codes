@@ -278,7 +278,10 @@ forms can appear often because short forms are dense. Longer phrases such as
 United States, United States of America, United Nations, European Union, Cowboy
 Catering, Catering, and Simscorner remain absent or effectively absent in the
 observed Hebrew and Greek screens. Simsberry produced one MAM-only Hebrew
-broad-count hit and no broader support.
+broad-count hit and no broader support. The dedicated local negative appendix
+found only Hebrew Cowboy, and that row is not unusual under representative
+controls; the other Hebrew local forms and all Greek local forms are absent in
+the capped exact-version matrix.
 
 Representative paired controls do not currently support promotion of modern,
 geopolitical, or local terms.

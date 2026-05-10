@@ -1,0 +1,11 @@
+term_id,concept,category,language,term,notes
+cowboy_h,Cowboy,local_terms,hebrew,קאובוי,pastor business term transliteration; local negative appendix
+catering_h,Catering,local_terms,hebrew,קייטרינג,pastor business term transliteration; local negative appendix
+cowboy_catering_h,Cowboy Catering,local_terms,hebrew,קאובוי קייטרינג,pastor business phrase; local negative appendix
+simsberry_h,Simsberry,local_terms,hebrew,סימסברי,church-location term transliteration; local negative appendix
+simscorner_h,Simscorner,local_terms,hebrew,סימסקורנר,church-location term transliteration; local negative appendix
+cowboy_g,Cowboy,local_terms,greek,καουμποϊ,pastor business term transliteration; local negative appendix
+catering_g,Catering,local_terms,greek,κετερινγκ,pastor business term transliteration; local negative appendix
+cowboy_catering_g,Cowboy Catering,local_terms,greek,καουμποϊ κετερινγκ,pastor business phrase; local negative appendix
+simsberry_g,Simsberry,local_terms,greek,σιμσμπερι,church-location term transliteration; local negative appendix
+simscorner_g,Simscorner,local_terms,greek,σιμσκορνερ,church-location term transliteration; local negative appendix

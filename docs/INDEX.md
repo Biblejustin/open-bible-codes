@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 239
+Documents indexed: 241
 
 ## Controls
 
@@ -61,7 +61,7 @@ Documents indexed: 239
 | Title | Path |
 | --- | --- |
 | Broader Search Findings | `BROADER_SEARCH_FINDINGS.md` |
-| Broad Search Findings | `BROAD_SEARCH_FINDINGS.md` |
+| Broad Search Summary | `BROAD_SEARCH_FINDINGS.md` |
 | Consolidated Findings | `CONSOLIDATED_FINDINGS.md` |
 | CRD Center-Word Self Vs Concept Findings | `CRD_CENTER_WORD_SELF_VS_CONCEPT_FINDINGS.md` |
 | CRD Center-Word Version Presence Findings | `CRD_CENTER_WORD_VERSION_PRESENCE_FINDINGS.md` |
@@ -77,7 +77,7 @@ Documents indexed: 239
 | Hebrew Screening Controlled Findings | `HEBREW_SCREENING_CONTROLLED_FINDINGS.md` |
 | Hebrew Theology Prospective Findings | `HEBREW_THEOLOGY_PROSPECTIVE_FINDINGS.md` |
 | Public Baseline Findings | `PUBLIC_BASELINE_FINDINGS.md` |
-| Targeted Terms Findings | `TARGETED_TERMS_FINDINGS.md` |
+| Targeted Terms Report | `TARGETED_TERMS_FINDINGS.md` |
 
 ## Methodology
 
@@ -108,6 +108,7 @@ Documents indexed: 239
 | Hebrew Modern Geopolitical Presence Preregistration | `HEBREW_MODERN_GEOPOLITICAL_PRESENCE_PREREGISTRATION.md` |
 | Hebrew Theology Prospective Preregistration | `HEBREW_THEOLOGY_PROSPECTIVE_PREREGISTRATION.md` |
 | KJVA Apocrypha Bridge Confirmatory Follow-Up Preregistration | `KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_PREREGISTRATION.md` |
+| Local Terms Negative Appendix Preregistration | `LOCAL_TERMS_NEGATIVE_APPENDIX_PREREGISTRATION.md` |
 | SBLGNT Source-Only Exact-Center Preregistration | `SBLGNT_SOURCE_ONLY_EXACT_CENTER_PREREGISTRATION.md` |
 
 ## Project
@@ -137,6 +138,7 @@ Documents indexed: 239
 | Greek Surface Prospective Report | `GREEK_SURFACE_PROSPECTIVE_REPORT.md` |
 | Hebrew Modern Geopolitical Prospective Report | `HEBREW_MODERN_GEOPOLITICAL_PROSPECTIVE_REPORT.md` |
 | Hebrew Theology Prospective Report | `HEBREW_THEOLOGY_PROSPECTIVE_REPORT.md` |
+| Local Terms Negative Appendix Report | `LOCAL_TERMS_APPENDIX_REPORT.md` |
 | SBLGNT Source-Only Exact-Center Report | `SBLGNT_SOURCE_ONLY_EXACT_CENTER_REPORT.md` |
 
 ## Studies
@@ -256,7 +258,7 @@ Documents indexed: 239
 | Theological Terms Study | `THEOLOGICAL_TERMS_STUDY.md` |
 | TheWordNotes ELS Source Audit | `THEWORDNOTES_ELS_AUDIT.md` |
 | Wide Focus Exact-Hit Presence | `WIDE_FOCUS_EXACT_PRESENCE.md` |
-| Wide Focus Search | `WIDE_FOCUS_SEARCH.md` |
+| Broad Search Summary | `WIDE_FOCUS_SEARCH.md` |
 | Word Counts Study | `WORD_COUNTS_STUDY.md` |
 
 ## Version Studies

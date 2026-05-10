@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 78
+Protocols indexed: 79
 
 ## Analysis
 
@@ -16,6 +16,7 @@ Protocols indexed: 78
 | hebrew_hit_version_presence | Capped exact ELS hit-pattern presence across Hebrew MT-family corpora. | 1 | terms/modern_names_dates.csv | reports/hebrew_hit_version_presence | `hebrew_hit_version_presence.toml` |
 | hebrew_modern_geopolitical_version_presence | Broad Hebrew modern/geopolitical/local/date exact ELS hit-pattern presence across MT-fa... | 1 | terms/modern_names_dates.csv | reports/hebrew_modern_geopolitical_version_presence | `hebrew_modern_geopolitical_version_presence.toml` |
 | hebrew_theology_all_codes_collection | Relaxed all-codes collection for the Hebrew theology cohort with center-word surface fl... | 3 | terms/hebrew_theology_prospective_terms.csv | reports/hebrew_theology_all_codes | `hebrew_theology_all_codes_collection.toml` |
+| local_terms_appendix | Negative/curiosity appendix for fixed local pastor-business and church-location terms. | 5 | terms/local_terms_appendix.csv | reports/local_terms_appendix | `local_terms_appendix.toml` |
 | modern_focus_extensions | Capped same-skip extension screen for modern names, places, and local terms. | 11 | terms/modern_names_dates.csv | reports/modern_extension_screen | `modern_focus_extensions.toml` |
 | mt_version_comparison | Compare normalized Hebrew MT-family verse text across MT_WLC, UXLC, MAM, eBible WLC, an... | 1 |  | reports/mt_version_comparison | `mt_version_comparison.toml` |
 | step_tahot_version_presence | Run focused modern/local exact-hit version presence with STEP_TAHOT included as a separ... | 2 | terms/modern_names_dates.csv | reports/step_tahot_version_presence | `step_tahot_version_presence.toml` |

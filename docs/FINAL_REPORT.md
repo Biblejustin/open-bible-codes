@@ -141,7 +141,10 @@ Modern and local terms remain weak overall. Short forms such as Trump, Vance,
 Iran, USA, and similar abbreviations can appear because short forms are dense.
 Longer phrases such as United States, United States of America, United Nations,
 European Union, Cowboy Catering, Catering, and Simscorner remain absent or
-effectively absent in the observed Hebrew and Greek screens.
+effectively absent in the observed Hebrew and Greek screens. The dedicated local
+negative appendix found only Hebrew Cowboy, and that row is not unusual under
+representative controls; the other Hebrew local forms and all Greek local forms
+were absent in the capped exact-version matrix.
 
 The locked Hebrew modern/geopolitical prospective follow-up had:
 
@@ -151,12 +154,14 @@ The locked Hebrew modern/geopolitical prospective follow-up had:
 - 2 rows as uncorrected-only prompts;
 - 0 rows surviving BH-adjusted representative controls.
 
-Result: source-distribution review material only.
+Result: source-distribution review material only. Local-term result: negative
+curiosity appendix only.
 
 Source artifacts:
 
 - `docs/HEBREW_MODERN_GEOPOLITICAL_PROSPECTIVE_REPORT.md`
 - `docs/HEBREW_MODERN_GEOPOLITICAL_PROSPECTIVE_FINDINGS.md`
+- `docs/LOCAL_TERMS_APPENDIX_REPORT.md`
 
 ### Full-Span Skip Expansion
 
