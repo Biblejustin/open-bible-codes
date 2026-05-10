@@ -7,7 +7,7 @@ import argparse
 from dataclasses import dataclass
 from pathlib import Path
 
-from els.report_db import default_table_name, import_csv_table, sanitize_table_name
+from els.report_db import ReportDBStale, default_table_name, import_csv_table, sanitize_table_name, verify_table_current
 
 
 DEFAULT_DB = Path("reports/db/open_bible_codes.duckdb")
@@ -54,6 +54,7 @@ def main(argv: list[str] | None = None) -> int:
     specs = list(DEFAULT_REPORT_TABLES) if not args.no_defaults else []
     specs.extend(parse_table_specs(args.table))
     imported = 0
+    current = 0
     skipped = 0
     for spec in specs:
         if not spec.path.exists():
@@ -62,6 +63,15 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"skip missing {spec.path}")
                 continue
             raise FileNotFoundError(spec.path)
+        if not args.force:
+            try:
+                verify_table_current(db_path=args.db, table_name=spec.table_name, source_path=spec.path)
+            except ReportDBStale:
+                pass
+            else:
+                current += 1
+                print(f"current {spec.table_name}\tsource={spec.path}")
+                continue
         result = import_csv_table(
             db_path=args.db,
             csv_path=spec.path,
@@ -72,6 +82,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"{result.table_name}\trows={result.row_count}\tsize={result.source_size_bytes}\tsource={result.source_path}")
     print(f"db={args.db}")
     print(f"imported={imported}")
+    print(f"current={current}")
     print(f"skipped={skipped}")
     return 0
 
@@ -89,6 +100,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--no-defaults", action="store_true", help="Only import explicitly provided --table entries.")
     parser.add_argument("--no-replace", action="store_true", help="Fail if a target table already exists.")
     parser.add_argument("--skip-missing", action="store_true")
+    parser.add_argument("--force", action="store_true", help="Re-import tables even when source metadata is current.")
     return parser
 
 

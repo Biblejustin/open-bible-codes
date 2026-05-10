@@ -153,7 +153,14 @@ def verify_table_current(*, db_path: Path, table_name: str, source_path: Path) -
     table = sanitize_table_name(table_name)
     if not source_path.exists():
         raise FileNotFoundError(source_path)
+    if not db_path.exists():
+        raise ReportDBStale(f"DuckDB database {db_path} does not exist; rebuild with `make report-db`")
     with connect(db_path, read_only=True) as con:
+        metadata_table = con.execute(
+            "SELECT count(*) FROM information_schema.tables WHERE table_name = 'report_table_imports'"
+        ).fetchone()
+        if not metadata_table or not metadata_table[0]:
+            raise ReportDBStale("DuckDB import metadata table is missing; rebuild with `make report-db`")
         rows = con.execute(
             """
             SELECT source_size_bytes, source_mtime_ns
