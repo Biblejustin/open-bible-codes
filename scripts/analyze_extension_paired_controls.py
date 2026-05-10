@@ -20,9 +20,8 @@ from els.extensions import (
     ExtensionMatch,
     build_extension_lexicon,
     extension_score as score_extension,
-    extensions_for_hit,
 )
-from els.search import build_hit, iter_els_query_matches_by_lanes
+from els.search import iter_els_query_matches_by_lanes
 from els.statistics import (
     benjamini_hochberg_q_values,
     numeric_value,
@@ -175,6 +174,13 @@ class ExtensionControlRow:
     row: dict[str, object]
     term_controls: ControlScores
     random_controls: ControlScores
+
+
+@dataclass(frozen=True)
+class TargetControlQueries:
+    target: ExtensionTarget
+    term_queries: tuple[str, ...]
+    random_queries: tuple[str, ...]
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -421,7 +427,47 @@ def analyze_corpus(
     targets: list[ExtensionTarget],
     args: argparse.Namespace,
 ) -> list[ExtensionControlRow]:
-    return [analyze_target(corpus, lexicon, target, args) for target in targets]
+    alphabet, weights = weighted_alphabet(corpus.text)
+    target_queries = [
+        TargetControlQueries(
+            target=target,
+            term_queries=sample_term_controls(
+                target.normalized_term,
+                samples=args.term_control_samples,
+                rng=random.Random(stable_seed(args.seed, target.target_id, "term")),
+            ),
+            random_queries=sample_random_controls(
+                length=len(target.normalized_term),
+                samples=args.random_control_samples,
+                rng=random.Random(stable_seed(args.seed, target.target_id, "random")),
+                alphabet=alphabet,
+                weights=weights,
+            ),
+        )
+        for target in targets
+    ]
+    grouped_scores = score_control_query_groups(corpus, lexicon, target_queries, args)
+    rows = []
+    for item in target_queries:
+        target_scores = grouped_scores.get(score_group_key(item.target), {})
+        term_controls = control_scores_for_target_queries(
+            target_scores,
+            item.target,
+            item.term_queries,
+        )
+        random_controls = control_scores_for_target_queries(
+            target_scores,
+            item.target,
+            item.random_queries,
+        )
+        rows.append(
+            ExtensionControlRow(
+                row=summary_row(item.target, term_controls, random_controls),
+                term_controls=term_controls,
+                random_controls=random_controls,
+            )
+        )
+    return rows
 
 
 def analyze_target(
@@ -479,6 +525,59 @@ def score_controls(
     return score_control_sets(corpus, lexicon, target, queries, (), args)[0]
 
 
+def score_control_query_groups(
+    corpus: Corpus,
+    lexicon: ExtensionLexicon,
+    target_queries: list[TargetControlQueries],
+    args: argparse.Namespace,
+) -> dict[tuple[int, str, bool], dict[str, tuple[int, dict[str, int]]]]:
+    queries_by_group: dict[tuple[int, str, bool], set[str]] = {}
+    extension_types_by_group: dict[tuple[int, str, bool], set[str]] = {}
+    for item in target_queries:
+        group_key = score_group_key(item.target)
+        queries_by_group.setdefault(group_key, set()).update(
+            query for query in (*item.term_queries, *item.random_queries) if query
+        )
+        extension_types_by_group.setdefault(group_key, set()).add(item.target.extension_type)
+
+    return {
+        group_key: score_queries_for_extension_types(
+            corpus,
+            lexicon,
+            tuple(sorted(queries)),
+            skip=group_key[0],
+            direction=group_key[1],
+            high_priority_scale=group_key[2],
+            extension_types=tuple(sorted(extension_types_by_group[group_key])),
+            args=args,
+        )
+        for group_key, queries in queries_by_group.items()
+    }
+
+
+def score_group_key(target: ExtensionTarget) -> tuple[int, str, bool]:
+    return (
+        abs(target.skip),
+        "forward" if target.skip > 0 else "backward",
+        target.observed_score >= 100000,
+    )
+
+
+def control_scores_for_target_queries(
+    scores_by_query: dict[str, tuple[int, dict[str, int]]],
+    target: ExtensionTarget,
+    queries: tuple[str, ...],
+) -> ControlScores:
+    return ControlScores(
+        same_type_scores=tuple(
+            scores_by_query.get(query, (0, {}))[1].get(target.extension_type, 0)
+            for query in queries
+        ),
+        any_scores=tuple(scores_by_query.get(query, (0, {}))[0] for query in queries),
+        queries=queries,
+    )
+
+
 def score_queries(
     corpus: Corpus,
     lexicon: ExtensionLexicon,
@@ -486,9 +585,42 @@ def score_queries(
     queries: tuple[str, ...],
     args: argparse.Namespace,
 ) -> dict[str, tuple[int, int]]:
-    scores_by_query = {query: (0, 0) for query in queries if query}
-    direction = "forward" if target.skip > 0 else "backward"
-    skip = abs(target.skip)
+    grouped_scores = score_queries_for_extension_types(
+        corpus,
+        lexicon,
+        queries,
+        skip=abs(target.skip),
+        direction="forward" if target.skip > 0 else "backward",
+        high_priority_scale=target.observed_score >= 100000,
+        extension_types=(target.extension_type,),
+        args=args,
+    )
+    return {
+        query: (
+            query_scores[1].get(target.extension_type, 0),
+            query_scores[0],
+        )
+        for query, query_scores in grouped_scores.items()
+    }
+
+
+def score_queries_for_extension_types(
+    corpus: Corpus,
+    lexicon: ExtensionLexicon,
+    queries: tuple[str, ...],
+    *,
+    skip: int,
+    direction: str,
+    high_priority_scale: bool,
+    extension_types: tuple[str, ...],
+    args: argparse.Namespace,
+) -> dict[str, tuple[int, dict[str, int]]]:
+    extension_type_set = set(extension_types)
+    scores_by_query = {
+        query: (0, {extension_type: 0 for extension_type in extension_type_set})
+        for query in queries
+        if query
+    }
     for query, signed_skip, start, end in iter_els_query_matches_by_lanes(
         corpus.text,
         scores_by_query,
@@ -496,31 +628,150 @@ def score_queries(
         max_skip=skip,
         direction=direction,
     ):
-        same_type_score, any_score = scores_by_query[query]
-        hit = build_hit(corpus, query, query, signed_skip, start, end)
-        for extension in extensions_for_hit(
+        any_score, same_type_scores = scores_by_query[query]
+        hit_any_score, hit_same_type_scores = score_hit_extensions(
             corpus,
-            hit,
             lexicon,
-            max_before=args.max_before,
-            max_after=args.max_after,
-            include_both_sided=args.include_both_sided,
-            max_extensions=args.max_extensions_per_hit,
+            query=query,
+            signed_skip=signed_skip,
+            start=start,
+            end=end,
+            extension_types=extension_type_set,
+            high_priority_scale=high_priority_scale,
+            args=args,
+        )
+        any_score = max(any_score, hit_any_score)
+        for extension_type, score in hit_same_type_scores.items():
+            same_type_scores[extension_type] = max(
+                same_type_scores[extension_type],
+                score,
+            )
+        scores_by_query[query] = (any_score, same_type_scores)
+    return scores_by_query
+
+
+def score_hit_extensions(
+    corpus: Corpus,
+    lexicon: ExtensionLexicon,
+    *,
+    query: str,
+    signed_skip: int,
+    start: int,
+    end: int,
+    extension_types: set[str],
+    high_priority_scale: bool,
+    args: argparse.Namespace,
+) -> tuple[int, dict[str, int]]:
+    any_score = 0
+    same_type_scores = {extension_type: 0 for extension_type in extension_types}
+    appended_matches = 0
+    entries_get = lexicon.entries.get
+    before_sequences = extension_sequences_before_text(
+        corpus.text,
+        start,
+        signed_skip,
+        args.max_before,
+    )
+    after_sequences = extension_sequences_after_text(
+        corpus.text,
+        end,
+        signed_skip,
+        args.max_after,
+    )
+
+    def visit(
+        extension_type: str,
+        extension_length: int,
+        extended_sequence: str,
+    ) -> bool:
+        nonlocal any_score, appended_matches
+        entry = entries_get(extended_sequence)
+        if entry is None:
+            return False
+        appended_matches += 1
+        if extension_fields_pass_filter(
+            extension_type,
+            extension_length,
+            entry.match_kind,
+            args,
         ):
-            if not extension_passes_filter(extension, args):
-                continue
             score = extension_score(
-                extension.extension_type,
-                extension.extension_length,
-                extension.match_kind,
-                extension.match_count,
-                high_priority_scale=target.observed_score >= 100000,
+                extension_type,
+                extension_length,
+                entry.match_kind,
+                entry.count,
+                high_priority_scale=high_priority_scale,
             )
             any_score = max(any_score, score)
-            if extension.extension_type == target.extension_type:
-                same_type_score = max(same_type_score, score)
-        scores_by_query[query] = (same_type_score, any_score)
-    return scores_by_query
+            if extension_type in extension_types:
+                same_type_scores[extension_type] = max(
+                    same_type_scores[extension_type],
+                    score,
+                )
+        return (
+            args.max_extensions_per_hit is not None
+            and appended_matches >= args.max_extensions_per_hit
+        )
+
+    for letters in before_sequences:
+        if visit("before_match", len(letters), letters):
+            return any_score, same_type_scores
+        if visit("before_plus_term", len(letters), letters + query):
+            return any_score, same_type_scores
+
+    for letters in after_sequences:
+        if visit("after_match", len(letters), letters):
+            return any_score, same_type_scores
+        if visit("term_plus_after", len(letters), query + letters):
+            return any_score, same_type_scores
+
+    if args.include_both_sided:
+        for before_letters in before_sequences:
+            for after_letters in after_sequences:
+                if visit(
+                    "before_plus_term_plus_after",
+                    len(before_letters) + len(after_letters),
+                    before_letters + query + after_letters,
+                ):
+                    return any_score, same_type_scores
+
+    return any_score, same_type_scores
+
+
+def extension_sequences_before_text(
+    text: str,
+    start: int,
+    signed_skip: int,
+    max_before: int,
+) -> list[str]:
+    sequences: list[str] = []
+    text_length = len(text)
+    sequence = ""
+    for length in range(1, max_before + 1):
+        offset = start - signed_skip * length
+        if offset < 0 or offset >= text_length:
+            break
+        sequence = text[offset] + sequence
+        sequences.append(sequence)
+    return sequences
+
+
+def extension_sequences_after_text(
+    text: str,
+    end: int,
+    signed_skip: int,
+    max_after: int,
+) -> list[str]:
+    sequences: list[str] = []
+    text_length = len(text)
+    sequence = ""
+    for length in range(1, max_after + 1):
+        offset = end + signed_skip * length
+        if offset < 0 or offset >= text_length:
+            break
+        sequence += text[offset]
+        sequences.append(sequence)
+    return sequences
 
 
 def control_scores_for_queries(
@@ -535,12 +786,25 @@ def control_scores_for_queries(
 
 
 def extension_passes_filter(extension: ExtensionMatch, args: argparse.Namespace) -> bool:
-    extension_type = extension.extension_type
+    return extension_fields_pass_filter(
+        extension.extension_type,
+        extension.extension_length,
+        extension.match_kind,
+        args,
+    )
+
+
+def extension_fields_pass_filter(
+    extension_type: str,
+    extension_length: int,
+    match_kind: str,
+    args: argparse.Namespace,
+) -> bool:
     if extension_type not in STRONG_EXTENSION_TYPES:
         return False
-    if extension.extension_length < args.min_extension_length:
+    if extension_length < args.min_extension_length:
         return False
-    return not args.match_kind_prefix or extension.match_kind.startswith(args.match_kind_prefix)
+    return not args.match_kind_prefix or match_kind.startswith(args.match_kind_prefix)
 
 
 def summary_row(
@@ -725,17 +989,26 @@ def sample_term_controls(query: str, *, samples: int, rng: random.Random) -> tup
 def sample_random_controls(
     *,
     length: int,
-    corpus_text: str,
+    corpus_text: str | None = None,
     samples: int,
     rng: random.Random,
+    alphabet: tuple[str, ...] | None = None,
+    weights: tuple[int, ...] | None = None,
 ) -> tuple[str, ...]:
-    counts = Counter(corpus_text)
-    alphabet = sorted(counts)
-    weights = [counts[char] for char in alphabet]
+    if alphabet is None or weights is None:
+        if corpus_text is None:
+            raise ValueError("corpus_text is required when alphabet and weights are absent")
+        alphabet, weights = weighted_alphabet(corpus_text)
     return tuple(
         "".join(rng.choices(alphabet, weights=weights, k=length))
         for _index in range(samples)
     )
+
+
+def weighted_alphabet(corpus_text: str) -> tuple[tuple[str, ...], tuple[int, ...]]:
+    counts = Counter(corpus_text)
+    alphabet = tuple(sorted(counts))
+    return alphabet, tuple(counts[char] for char in alphabet)
 
 
 def example_rows(

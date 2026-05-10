@@ -5,7 +5,8 @@ from pathlib import Path
 from types import SimpleNamespace
 
 from els.corpus import Corpus, VerseSpan, WordSpan
-from els.extensions import build_extension_lexicon
+from els.extensions import build_extension_lexicon, extensions_for_hit
+from els.search import build_hit
 from scripts.analyze_extension_paired_controls import (
     ControlScores,
     ExtensionTarget,
@@ -19,6 +20,7 @@ from scripts.analyze_extension_paired_controls import (
     sample_term_controls,
     score_control_sets,
     score_controls,
+    score_hit_extensions,
     stable_seed,
     summary_row,
     write_markdown,
@@ -309,6 +311,54 @@ class ExtensionPairedControlsTests(unittest.TestCase):
             combined_random,
             score_controls(corpus, lexicon, row_target, random_queries, args),
         )
+
+    def test_score_hit_extensions_matches_full_extension_path(self) -> None:
+        corpus = extension_corpus()
+        lexicon = build_extension_lexicon(corpus, max_phrase_words=2)
+        args = SimpleNamespace(
+            max_before=2,
+            max_after=2,
+            include_both_sided=True,
+            max_extensions_per_hit=20,
+            min_extension_length=1,
+            match_kind_prefix="phrase_",
+        )
+        hit = build_hit(corpus, "αβ", "αβ", 1, 0, 1)
+        expected_scores = [
+            extension_score(
+                extension.extension_type,
+                extension.extension_length,
+                extension.match_kind,
+                extension.match_count,
+            )
+            for extension in extensions_for_hit(
+                corpus,
+                hit,
+                lexicon,
+                max_before=args.max_before,
+                max_after=args.max_after,
+                include_both_sided=args.include_both_sided,
+                max_extensions=args.max_extensions_per_hit,
+            )
+            if extension.extension_type == "term_plus_after"
+            and extension.extension_length >= args.min_extension_length
+            and extension.match_kind.startswith(args.match_kind_prefix)
+        ]
+
+        any_score, same_type_scores = score_hit_extensions(
+            corpus,
+            lexicon,
+            query="αβ",
+            signed_skip=1,
+            start=0,
+            end=1,
+            extension_types={"term_plus_after"},
+            high_priority_scale=False,
+            args=args,
+        )
+
+        self.assertEqual(any_score, max(expected_scores))
+        self.assertEqual(same_type_scores["term_plus_after"], max(expected_scores))
 
 
 def extension_corpus() -> Corpus:
