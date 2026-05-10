@@ -147,7 +147,7 @@ Controls remain weak for claim-making: rows with low uncorrected p-values still 
 | Russia | TR_NT | `ρωσια` (rosia; English: Russia) | -15 | 2CO 4:11-2CO 4:10 | 2CO 4:10 `Ἰησοῦ` (iesou) | same_category_span |
 | Russia | SBLGNT | `ρωσια` (rosia; English: Russia) | 30 | Heb 4:12-Heb 4:13 | Heb 4:12 `ἐνθυμήσεων` (enthumeseon) | same_category_center |
 | Russia | SBLGNT | `ρωσια` (rosia; English: Russia) | 35 | Rev 14:3-Rev 14:4 | Rev 14:3 `τέσσαρες` (tessares) | same_category_center |
-| Russia | SBLGNT | `ρωσια` (rosia; English: Russia) | 36 | Mark 12:28-Mark 12:30 | Mark 12:29 `Ἰσραήλ,` (israel) | same_category_center |
+| Russia | SBLGNT | `ρωσια` (rosia; English: Russia) | 36 | Mark 12:28-Mark 12:30 | Mark 12:29 `Ἰσραήλ,` (israel; English: Israel) | same_category_center |
 
 ### extension_top
 

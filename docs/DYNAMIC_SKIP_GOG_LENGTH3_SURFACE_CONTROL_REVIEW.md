@@ -34,7 +34,7 @@ comparable length-3 surface words.
 | 2 | 24 | `σοσ` (sos) | False | 14,028 | `BYZ_NT:3524;SBLGNT:3418;TCG_NT:3418;TR_NT:3668` | matched control exceeds target |
 | 3 | 23 | `ουα` (oua) | False | 12,929 | `BYZ_NT:3189;SBLGNT:3163;TCG_NT:3243;TR_NT:3334` | matched control exceeds target |
 | 4 | 22 | `σην` (sen) | False | 12,600 | `BYZ_NT:3262;SBLGNT:3159;TCG_NT:3127;TR_NT:3052` | matched control exceeds target |
-| 5 | 21 | `ευα` (eua) | False | 10,864 | `BYZ_NT:2732;SBLGNT:2727;TCG_NT:2707;TR_NT:2698` | matched control exceeds target |
+| 5 | 21 | `ευα` (eua; English: Eve) | False | 10,864 | `BYZ_NT:2732;SBLGNT:2727;TCG_NT:2707;TR_NT:2698` | matched control exceeds target |
 | 6 | 20 | `αρω` (aro) | False | 8,747 | `BYZ_NT:2303;SBLGNT:2064;TCG_NT:2191;TR_NT:2189` | matched control exceeds target |
 | 7 | 19 | `αγω` (ago) | False | 8,579 | `BYZ_NT:2174;SBLGNT:2140;TCG_NT:2116;TR_NT:2149` | matched control exceeds target |
 | 8 | 18 | `κισ` (kis) | False | 7,082 | `BYZ_NT:1761;SBLGNT:1740;TCG_NT:1794;TR_NT:1787` | matched control exceeds target |
@@ -45,7 +45,7 @@ comparable length-3 surface words.
 | 13 | 13 | `ωον` (oon) | False | 3,960 | `BYZ_NT:986;SBLGNT:991;TCG_NT:979;TR_NT:1004` | matched control exceeds target |
 | 14 | 12 | `ιου` (iou) | False | 3,466 | `BYZ_NT:844;SBLGNT:892;TCG_NT:861;TR_NT:869` | matched control exceeds target |
 | 15 | 11 | `ηθη` (ethe) | False | 2,668 | `BYZ_NT:614;SBLGNT:700;TCG_NT:690;TR_NT:664` | matched control exceeds target |
-| 16 | 10 | `σημ` (sem) | False | 2,466 | `BYZ_NT:643;SBLGNT:575;TCG_NT:615;TR_NT:633` | matched control exceeds target |
+| 16 | 10 | `σημ` (Sem; English: Shem) | False | 2,466 | `BYZ_NT:643;SBLGNT:575;TCG_NT:615;TR_NT:633` | matched control exceeds target |
 | 17 | 9 | `σηθ` (seth) | False | 1,574 | `BYZ_NT:353;SBLGNT:422;TCG_NT:389;TR_NT:410` | matched control exceeds target |
 | 18 | 8 | `δωσ` (dos) | False | 1,300 | `BYZ_NT:341;SBLGNT:336;TCG_NT:313;TR_NT:310` | matched control exceeds target |
 | 19 | 7 | `ηχω` (echo) | False | 942 | `BYZ_NT:256;SBLGNT:226;TCG_NT:230;TR_NT:230` | matched control exceeds target |
@@ -53,7 +53,7 @@ comparable length-3 surface words.
 | 21 | 5 | `χρω` (chro) | False | 293 | `BYZ_NT:71;SBLGNT:68;TCG_NT:85;TR_NT:69` | matched control exceeds target |
 | 22 | 4 | `ιωβ` (iob) | False | 287 | `BYZ_NT:63;SBLGNT:61;TCG_NT:86;TR_NT:77` | matched control exceeds target |
 | 23 | 3 | `χρη` (chre) | False | 221 | `BYZ_NT:58;SBLGNT:57;TCG_NT:57;TR_NT:49` | matched control exceeds target |
-| 24 | 2 | `γαδ` (gad) | False | 76 | `BYZ_NT:14;SBLGNT:25;TCG_NT:19;TR_NT:18` | matched control exceeds target |
+| 24 | 2 | `γαδ` (gad; English: Gad) | False | 76 | `BYZ_NT:14;SBLGNT:25;TCG_NT:19;TR_NT:18` | matched control exceeds target |
 | 25 | 1 | `γωγ` (Gog; English: Gog) | True | 14 | `BYZ_NT:4;SBLGNT:4;TCG_NT:4;TR_NT:2` | target term |
 
 ## Target By Source

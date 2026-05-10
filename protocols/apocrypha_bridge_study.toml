@@ -36,6 +36,7 @@ inputs = [
   "terms/greek_nt_claim_terms.csv",
   "els/search.py",
   "els/corpus.py",
+  "els/term_display.py",
 ]
 outputs = [
   "reports/apocrypha_bridge_candidates/bridge_candidates.csv",
@@ -60,6 +61,7 @@ inputs = [
   "els/corpus.py",
   "els/surface.py",
   "els/normalization.py",
+  "els/term_display.py",
 ]
 outputs = [
   "reports/apocrypha_bridge_context/context.csv",
@@ -87,6 +89,7 @@ inputs = [
   "terms/prophetic_terms.csv",
   "terms/greek_nt_claim_terms.csv",
   "reports/apocrypha_bridge_candidates/bridge_candidates.csv",
+  "els/term_display.py",
 ]
 outputs = [
   "reports/apocrypha_bridge_controls/control_summary.csv",
@@ -140,6 +143,7 @@ inputs = [
   "terms/theological_terms.csv",
   "terms/prophetic_terms.csv",
   "terms/greek_nt_claim_terms.csv",
+  "els/term_display.py",
 ]
 outputs = [
   "reports/apocrypha_only_counts/counts.csv",
