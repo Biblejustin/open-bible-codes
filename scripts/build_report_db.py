@@ -27,9 +27,25 @@ DEFAULT_REPORT_TABLES = [
     DefaultReportTable(Path("reports/crd/classified_hits.csv"), "crd_classified_hits"),
     DefaultReportTable(Path("reports/crd/density_matrix.csv"), "crd_density_matrix"),
     DefaultReportTable(Path("reports/hebrew_screening_all_codes/surface_all_codes.csv"), "hebrew_screening_surface_all_codes"),
+    DefaultReportTable(
+        Path("reports/hebrew_screening_all_codes/surface_all_codes_summary.csv"),
+        "hebrew_screening_surface_all_codes_summary",
+    ),
     DefaultReportTable(Path("reports/english_screening_all_codes/surface_all_codes.csv"), "english_screening_surface_all_codes"),
+    DefaultReportTable(
+        Path("reports/english_screening_all_codes/surface_all_codes_summary.csv"),
+        "english_screening_surface_all_codes_summary",
+    ),
     DefaultReportTable(Path("reports/greek_screening_all_codes/surface_all_codes.csv"), "greek_screening_surface_all_codes"),
+    DefaultReportTable(
+        Path("reports/greek_screening_all_codes/surface_all_codes_summary.csv"),
+        "greek_screening_surface_all_codes_summary",
+    ),
     DefaultReportTable(Path("reports/hebrew_theology_all_codes/surface_all_codes.csv"), "hebrew_theology_surface_all_codes"),
+    DefaultReportTable(
+        Path("reports/hebrew_theology_all_codes/surface_all_codes_summary.csv"),
+        "hebrew_theology_surface_all_codes_summary",
+    ),
 ]
 
 

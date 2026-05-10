@@ -47,9 +47,13 @@ The database is ignored by git. It can be rebuilt from ignored report CSVs.
 - `crd_classified_hits`
 - `crd_density_matrix`
 - `hebrew_screening_surface_all_codes`
+- `hebrew_screening_surface_all_codes_summary`
 - `english_screening_surface_all_codes`
+- `english_screening_surface_all_codes_summary`
 - `greek_screening_surface_all_codes`
+- `greek_screening_surface_all_codes_summary`
 - `hebrew_theology_surface_all_codes`
+- `hebrew_theology_surface_all_codes_summary`
 
 ## DB-Backed Commands
 
@@ -74,6 +78,17 @@ For ad hoc import:
 
 ```bash
 python3 -m scripts.build_report_db --table reports/example/hits.csv:example_hits
+```
+
+For DB-backed all-codes collection summaries:
+
+```bash
+python3 -m scripts.summarize_surface_all_codes \
+  --hits reports/hebrew_screening_all_codes/surface_all_codes.csv \
+  --summary reports/hebrew_screening_all_codes/surface_all_codes_summary.csv \
+  --db reports/db/open_bible_codes.duckdb \
+  --hits-table hebrew_screening_surface_all_codes \
+  --summary-table hebrew_screening_surface_all_codes_summary
 ```
 
 For ad hoc SQL:
