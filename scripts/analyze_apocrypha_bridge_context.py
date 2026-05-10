@@ -25,6 +25,7 @@ from els.surface import (
     normalize_verses,
     surface_context_for_hit_indexed,
 )
+from els.term_display import display_term
 
 
 DEFAULT_CANDIDATES = Path("reports/apocrypha_bridge_candidates/bridge_candidates.csv")
@@ -447,11 +448,11 @@ def write_markdown(
                 [
                     row["context_rank"],
                     f"`{row['context_bucket']}`",
-                    f"`{row['normalized_term']}`",
+                    display_term(row["normalized_term"]),
                     row["skip"],
                     f"`{row['bridge_type']}`",
                     row["center_ref"],
-                    md_cell(row["center_normalized_word"]),
+                    display_term(row["center_normalized_word"]),
                     md_cell(truncate(row["span_refs"], 80)),
                 ]
             )

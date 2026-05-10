@@ -29,46 +29,46 @@ python3 -m scripts.analyze_apocrypha_bridge_controls --canonical-label LXX --can
 
 | Control | Term | Bridge rows | C→A | A→C | Multi |
 | --- | --- | ---: | ---: | ---: | ---: |
-| `ODYSSEY` | `ναοσ` | 13 | 5 | 8 | 0 |
-| `ILIAD` | `αιμα` | 12 | 4 | 8 | 0 |
-| `HERODOTUS` | `αιμα` | 11 | 4 | 7 | 0 |
-| `ILIAD` | `ναοσ` | 9 | 6 | 3 | 0 |
-| `HERODOTUS` | `ναοσ` | 8 | 4 | 4 | 0 |
-| `HERODOTUS` | `αμην` | 6 | 3 | 3 | 0 |
-| `ILIAD` | `αμην` | 5 | 2 | 3 | 0 |
-| `ILIAD` | `υιοσ` | 4 | 2 | 2 | 0 |
-| `ODYSSEY` | `αιμα` | 4 | 2 | 2 | 0 |
-| `ODYSSEY` | `υιοσ` | 4 | 4 | 0 | 0 |
-| `HERODOTUS` | `αδησ` | 3 | 3 | 0 | 0 |
-| `HERODOTUS` | `θεοσ` | 3 | 2 | 1 | 0 |
-| `HERODOTUS` | `λεων` | 3 | 0 | 3 | 0 |
-| `ILIAD` | `αδαμ` | 3 | 3 | 0 | 0 |
-| `ILIAD` | `αδησ` | 3 | 2 | 1 | 0 |
-| `ILIAD` | `ρωμη` | 3 | 1 | 2 | 0 |
-| `ILIAD` | `σιων` | 3 | 2 | 1 | 0 |
-| `ODYSSEY` | `ελαμ` | 3 | 1 | 2 | 0 |
-| `HERODOTUS` | `δοξα` | 2 | 0 | 2 | 0 |
-| `HERODOTUS` | `ελαμ` | 2 | 0 | 2 | 0 |
-| `HERODOTUS` | `ισαακ` | 2 | 1 | 1 | 0 |
-| `HERODOTUS` | `οργη` | 2 | 1 | 1 | 0 |
-| `HERODOTUS` | `σαρρα` | 2 | 1 | 1 | 0 |
-| `HERODOTUS` | `τυροσ` | 2 | 1 | 1 | 0 |
-| `ILIAD` | `χαραν` | 2 | 1 | 1 | 0 |
-| `ODYSSEY` | `αδαμ` | 2 | 0 | 2 | 0 |
-| `ODYSSEY` | `αμην` | 2 | 1 | 1 | 0 |
-| `ODYSSEY` | `αμνοσ` | 2 | 1 | 1 | 0 |
-| `ODYSSEY` | `θεοσ` | 2 | 1 | 1 | 0 |
-| `HERODOTUS` | `αδαμ` | 1 | 1 | 0 | 0 |
-| `HERODOTUS` | `βασαν` | 1 | 1 | 0 | 0 |
-| `HERODOTUS` | `δαυιδ` | 1 | 0 | 1 | 0 |
-| `HERODOTUS` | `ελκη` | 1 | 0 | 1 | 0 |
-| `HERODOTUS` | `ηλιασ` | 1 | 1 | 0 | 0 |
-| `HERODOTUS` | `καροσ` | 1 | 0 | 1 | 0 |
-| `HERODOTUS` | `κερασ` | 1 | 0 | 1 | 0 |
-| `HERODOTUS` | `μαρια` | 1 | 0 | 1 | 0 |
-| `HERODOTUS` | `νικαω` | 1 | 0 | 1 | 0 |
-| `HERODOTUS` | `νομοσ` | 1 | 1 | 0 | 0 |
-| `HERODOTUS` | `ρωμη` | 1 | 0 | 1 | 0 |
+| `ODYSSEY` | `ναοσ` (naos) | 13 | 5 | 8 | 0 |
+| `ILIAD` | `αιμα` (aima) | 12 | 4 | 8 | 0 |
+| `HERODOTUS` | `αιμα` (aima) | 11 | 4 | 7 | 0 |
+| `ILIAD` | `ναοσ` (naos) | 9 | 6 | 3 | 0 |
+| `HERODOTUS` | `ναοσ` (naos) | 8 | 4 | 4 | 0 |
+| `HERODOTUS` | `αμην` (amen) | 6 | 3 | 3 | 0 |
+| `ILIAD` | `αμην` (amen) | 5 | 2 | 3 | 0 |
+| `ILIAD` | `υιοσ` (uios) | 4 | 2 | 2 | 0 |
+| `ODYSSEY` | `αιμα` (aima) | 4 | 2 | 2 | 0 |
+| `ODYSSEY` | `υιοσ` (uios) | 4 | 4 | 0 | 0 |
+| `HERODOTUS` | `αδησ` (ades) | 3 | 3 | 0 | 0 |
+| `HERODOTUS` | `θεοσ` (theos) | 3 | 2 | 1 | 0 |
+| `HERODOTUS` | `λεων` (leon) | 3 | 0 | 3 | 0 |
+| `ILIAD` | `αδαμ` (adam) | 3 | 3 | 0 | 0 |
+| `ILIAD` | `αδησ` (ades) | 3 | 2 | 1 | 0 |
+| `ILIAD` | `ρωμη` (rome) | 3 | 1 | 2 | 0 |
+| `ILIAD` | `σιων` (sion) | 3 | 2 | 1 | 0 |
+| `ODYSSEY` | `ελαμ` (elam) | 3 | 1 | 2 | 0 |
+| `HERODOTUS` | `δοξα` (doxa; English: glory) | 2 | 0 | 2 | 0 |
+| `HERODOTUS` | `ελαμ` (elam) | 2 | 0 | 2 | 0 |
+| `HERODOTUS` | `ισαακ` (Isaak; English: Isaac) | 2 | 1 | 1 | 0 |
+| `HERODOTUS` | `οργη` (orge) | 2 | 1 | 1 | 0 |
+| `HERODOTUS` | `σαρρα` (sarra) | 2 | 1 | 1 | 0 |
+| `HERODOTUS` | `τυροσ` (turos) | 2 | 1 | 1 | 0 |
+| `ILIAD` | `χαραν` (charan) | 2 | 1 | 1 | 0 |
+| `ODYSSEY` | `αδαμ` (adam) | 2 | 0 | 2 | 0 |
+| `ODYSSEY` | `αμην` (amen) | 2 | 1 | 1 | 0 |
+| `ODYSSEY` | `αμνοσ` (amnos) | 2 | 1 | 1 | 0 |
+| `ODYSSEY` | `θεοσ` (theos) | 2 | 1 | 1 | 0 |
+| `HERODOTUS` | `αδαμ` (adam) | 1 | 1 | 0 | 0 |
+| `HERODOTUS` | `βασαν` (basan) | 1 | 1 | 0 | 0 |
+| `HERODOTUS` | `δαυιδ` (dauid) | 1 | 0 | 1 | 0 |
+| `HERODOTUS` | `ελκη` (elke) | 1 | 0 | 1 | 0 |
+| `HERODOTUS` | `ηλιασ` (elias) | 1 | 1 | 0 | 0 |
+| `HERODOTUS` | `καροσ` (karos) | 1 | 0 | 1 | 0 |
+| `HERODOTUS` | `κερασ` (keras) | 1 | 0 | 1 | 0 |
+| `HERODOTUS` | `μαρια` (maria) | 1 | 0 | 1 | 0 |
+| `HERODOTUS` | `νικαω` (nikao) | 1 | 0 | 1 | 0 |
+| `HERODOTUS` | `νομοσ` (nomos) | 1 | 1 | 0 | 0 |
+| `HERODOTUS` | `ρωμη` (rome) | 1 | 0 | 1 | 0 |
 
 ## Read
 

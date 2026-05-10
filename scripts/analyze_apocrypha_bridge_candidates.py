@@ -16,6 +16,7 @@ from typing import Any
 from els import __version__
 from els.corpus import Corpus, load_corpus
 from els.search import build_hit, iter_els_query_matches_by_lanes, normalize_for_corpus
+from els.term_display import display_term
 
 
 DEFAULT_TERMS = [
@@ -356,7 +357,7 @@ def write_markdown(
                 [
                     str(row["rank"]),
                     f"`{escape_md(str(row['bridge_type']))}`",
-                    f"`{escape_md(str(row['normalized_term']))}`",
+                    display_term(str(row["normalized_term"])),
                     str(row["skip"]),
                     escape_md(str(row["start_ref"])),
                     escape_md(str(row["center_ref"])),

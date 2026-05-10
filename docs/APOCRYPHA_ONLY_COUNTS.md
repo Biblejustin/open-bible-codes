@@ -36,46 +36,46 @@ python3 -m scripts.analyze_apocrypha_only_counts --corpus-label LXX --config con
 
 | Term | Concepts | Hits | Hits/M | Canonical hits/M | Max control hits/M | Read |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
-| `ναοσ` | Temple | 19898 | 71.285782 | 63.342196 | 61.899474 | `above_controls` |
-| `υιοσ` | Son | 12054 | 43.18418 | 47.646856 | 32.035253 | `above_controls` |
-| `αιμα` | Blood | 10991 | 39.375919 | 39.850049 | 36.026225 | `above_controls` |
-| `σιων` | Zion | 5460 | 19.560778 | 17.981899 | 18.102676 | `above_controls` |
-| `αμην` | Amen | 2972 | 10.647369 | 9.413603 | 12.542543 | `control_background` |
-| `θεοσ` | God | 2569 | 9.203597 | 9.56664 | 14.602515 | `control_background` |
-| `ελαμ` | Elam | 1996 | 7.15079 | 7.390808 | 14.362484 | `control_background` |
-| `αδησ` | Hades | 1988 | 7.12213 | 6.392464 | 10.403755 | `control_background` |
-| `αδαμ` | Adam | 1908 | 6.835525 | 6.462681 | 12.413571 | `control_background` |
-| `λεων` | Lion | 1558 | 5.581629 | 5.270789 | 8.834593 | `control_background` |
-| `ισαακ` | Isaac | 1412 | 5.059712 | 5.524964 | 2.472522 | `above_controls` |
-| `οφισ` | Serpent | 1283 | 4.596425 | 4.447988 | 6.753126 | `control_background` |
-| `ελκη` | Boils;Sores | 1097 | 3.930068 | 4.354365 | 4.689571 | `control_background` |
-| `τιτοσ` | Titus | 972 | 3.483031 | 3.628092 | 4.393206 | `control_background` |
-| `οθων` | Otho | 883 | 3.163401 | 3.050846 | 3.661376 | `control_background` |
-| `τερασ` | Wonder | 645 | 2.311271 | 2.180457 | 2.605107 | `control_background` |
-| `οργη` | Wrath | 523 | 1.873679 | 1.819345 | 2.185362 | `control_background` |
-| `αμνοσ` | Lamb | 512 | 1.834683 | 1.657399 | 2.124936 | `control_background` |
-| `σαρρα` | Sarah | 474 | 1.698515 | 1.618687 | 1.723599 | `control_background` |
-| `ακρισ` | Locust | 442 | 1.583848 | 1.577275 | 1.014092 | `above_controls` |
-| `ελεοσ` | Mercy | 412 | 1.476347 | 1.506154 | 3.088861 | `control_background` |
-| `νομοσ` | Law | 395 | 1.415429 | 1.298191 | 1.709265 | `control_background` |
-| `μαρια` | Mary | 371 | 1.329429 | 1.432331 | 1.49068 | `control_background` |
-| `σαρξ` | Flesh | 365 | 1.307634 | 1.353031 | 1.221653 | `above_controls` |
-| `εδωμ` | Edom | 356 | 1.275391 | 1.282814 | 3.733028 | `control_background` |
-| `καροσ` | Carus | 349 | 1.250595 | 1.516957 | 0.931675 | `above_controls` |
-| `κερασ` | Horn | 343 | 1.229094 | 1.402622 | 1.279262 | `control_background` |
-| `αγιοσ` | Holy;Saint | 330 | 1.182511 | 1.159549 | 1.049926 | `above_controls` |
-| `νικαω` | Overcome | 325 | 1.164594 | 1.292789 | 0.802674 | `above_controls` |
-| `αστηρ` | Star | 311 | 1.114427 | 1.048816 | 0.874341 | `above_controls` |
-| `ρωμη` | Rome | 306 | 1.096263 | 1.229701 | 1.536918 | `control_background` |
-| `τυροσ` | Tyre | 287 | 1.028426 | 1.182056 | 1.078593 | `control_background` |
-| `ηλιασ` | Elijah | 276 | 0.989009 | 0.959689 | 1.032009 | `control_background` |
-| `γετασ` | Geta | 244 | 0.874341 | 0.844454 | 1.078593 | `control_background` |
-| `εικων` | Image | 239 | 0.856424 | 0.882266 | 0.77759 | `above_controls` |
-| `βασαν` | Bashan | 225 | 0.806257 | 0.683306 | 0.458671 | `above_controls` |
-| `θυσια` | Sacrifice | 225 | 0.806257 | 0.925479 | 0.648589 | `above_controls` |
-| `κλεισ` | Key | 222 | 0.795507 | 0.83095 | 0.895841 | `control_background` |
-| `μωαβ` | Moab | 210 | 0.752338 | 0.842606 | 0.537384 | `above_controls` |
-| `δοξα` | Glory | 199 | 0.712929 | 0.683267 | 1.210905 | `control_background` |
+| `ναοσ` (naos) | Temple | 19898 | 71.285782 | 63.342196 | 61.899474 | `above_controls` |
+| `υιοσ` (uios) | Son | 12054 | 43.18418 | 47.646856 | 32.035253 | `above_controls` |
+| `αιμα` (aima) | Blood | 10991 | 39.375919 | 39.850049 | 36.026225 | `above_controls` |
+| `σιων` (sion) | Zion | 5460 | 19.560778 | 17.981899 | 18.102676 | `above_controls` |
+| `αμην` (amen) | Amen | 2972 | 10.647369 | 9.413603 | 12.542543 | `control_background` |
+| `θεοσ` (theos) | God | 2569 | 9.203597 | 9.56664 | 14.602515 | `control_background` |
+| `ελαμ` (elam) | Elam | 1996 | 7.15079 | 7.390808 | 14.362484 | `control_background` |
+| `αδησ` (ades) | Hades | 1988 | 7.12213 | 6.392464 | 10.403755 | `control_background` |
+| `αδαμ` (adam) | Adam | 1908 | 6.835525 | 6.462681 | 12.413571 | `control_background` |
+| `λεων` (leon) | Lion | 1558 | 5.581629 | 5.270789 | 8.834593 | `control_background` |
+| `ισαακ` (Isaak; English: Isaac) | Isaac | 1412 | 5.059712 | 5.524964 | 2.472522 | `above_controls` |
+| `οφισ` (ophis) | Serpent | 1283 | 4.596425 | 4.447988 | 6.753126 | `control_background` |
+| `ελκη` (elke) | Boils;Sores | 1097 | 3.930068 | 4.354365 | 4.689571 | `control_background` |
+| `τιτοσ` (titos) | Titus | 972 | 3.483031 | 3.628092 | 4.393206 | `control_background` |
+| `οθων` (othon) | Otho | 883 | 3.163401 | 3.050846 | 3.661376 | `control_background` |
+| `τερασ` (teras) | Wonder | 645 | 2.311271 | 2.180457 | 2.605107 | `control_background` |
+| `οργη` (orge) | Wrath | 523 | 1.873679 | 1.819345 | 2.185362 | `control_background` |
+| `αμνοσ` (amnos) | Lamb | 512 | 1.834683 | 1.657399 | 2.124936 | `control_background` |
+| `σαρρα` (sarra) | Sarah | 474 | 1.698515 | 1.618687 | 1.723599 | `control_background` |
+| `ακρισ` (akris) | Locust | 442 | 1.583848 | 1.577275 | 1.014092 | `above_controls` |
+| `ελεοσ` (eleos) | Mercy | 412 | 1.476347 | 1.506154 | 3.088861 | `control_background` |
+| `νομοσ` (nomos) | Law | 395 | 1.415429 | 1.298191 | 1.709265 | `control_background` |
+| `μαρια` (maria) | Mary | 371 | 1.329429 | 1.432331 | 1.49068 | `control_background` |
+| `σαρξ` (sarx) | Flesh | 365 | 1.307634 | 1.353031 | 1.221653 | `above_controls` |
+| `εδωμ` (edom) | Edom | 356 | 1.275391 | 1.282814 | 3.733028 | `control_background` |
+| `καροσ` (karos) | Carus | 349 | 1.250595 | 1.516957 | 0.931675 | `above_controls` |
+| `κερασ` (keras) | Horn | 343 | 1.229094 | 1.402622 | 1.279262 | `control_background` |
+| `αγιοσ` (agios) | Holy;Saint | 330 | 1.182511 | 1.159549 | 1.049926 | `above_controls` |
+| `νικαω` (nikao) | Overcome | 325 | 1.164594 | 1.292789 | 0.802674 | `above_controls` |
+| `αστηρ` (aster) | Star | 311 | 1.114427 | 1.048816 | 0.874341 | `above_controls` |
+| `ρωμη` (rome) | Rome | 306 | 1.096263 | 1.229701 | 1.536918 | `control_background` |
+| `τυροσ` (turos) | Tyre | 287 | 1.028426 | 1.182056 | 1.078593 | `control_background` |
+| `ηλιασ` (elias) | Elijah | 276 | 0.989009 | 0.959689 | 1.032009 | `control_background` |
+| `γετασ` (getas) | Geta | 244 | 0.874341 | 0.844454 | 1.078593 | `control_background` |
+| `εικων` (eikon) | Image | 239 | 0.856424 | 0.882266 | 0.77759 | `above_controls` |
+| `βασαν` (basan) | Bashan | 225 | 0.806257 | 0.683306 | 0.458671 | `above_controls` |
+| `θυσια` (thusia) | Sacrifice | 225 | 0.806257 | 0.925479 | 0.648589 | `above_controls` |
+| `κλεισ` (kleis) | Key | 222 | 0.795507 | 0.83095 | 0.895841 | `control_background` |
+| `μωαβ` (moab) | Moab | 210 | 0.752338 | 0.842606 | 0.537384 | `above_controls` |
+| `δοξα` (doxa; English: glory) | Glory | 199 | 0.712929 | 0.683267 | 1.210905 | `control_background` |
 
 ## Read
 

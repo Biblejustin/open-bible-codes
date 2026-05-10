@@ -1,6 +1,7 @@
 import argparse
 import unittest
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from els.surface import SurfaceContext, SurfaceTerm
 from scripts.analyze_apocrypha_bridge_context import (
@@ -9,6 +10,7 @@ from scripts.analyze_apocrypha_bridge_context import (
     choose_surface_term,
     letter_positions,
     manifest_args,
+    write_markdown,
 )
 
 
@@ -73,6 +75,45 @@ class ApocryphaBridgeContextTests(unittest.TestCase):
                 "jobs": 0,
             },
         )
+
+    def test_write_markdown_displays_original_language_terms(self) -> None:
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            out = root / "context.md"
+            args = argparse.Namespace(
+                corpus_label="LXX",
+                config=Path("configs/example.toml"),
+                candidates=Path("reports/candidates.csv"),
+                terms=[Path("terms/example.csv")],
+                min_term_length=4,
+                out=root / "context.csv",
+                summary_out=root / "summary.csv",
+                markdown_out=out,
+                manifest_out=root / "manifest.json",
+                markdown_row_limit=80,
+            )
+
+            write_markdown(
+                out,
+                [
+                    {
+                        "context_rank": "1",
+                        "context_bucket": "center_word_same_category",
+                        "normalized_term": "μαρια",
+                        "skip": "29",
+                        "bridge_type": "canonical_to_apocrypha",
+                        "center_ref": "MAL 4:6",
+                        "center_normalized_word": "ισραηλ",
+                        "span_refs": "MAL 4:6;TOB 1:1",
+                    }
+                ],
+                [{"metric": "context_rows", "value": 1}],
+                args,
+            )
+            text = out.read_text(encoding="utf-8")
+
+        self.assertIn("`μαρια` (maria)", text)
+        self.assertIn("`ισραηλ` (israel)", text)
 
 
 def surface_context(**overrides: bool) -> SurfaceContext:

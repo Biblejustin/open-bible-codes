@@ -10,7 +10,7 @@ Documents indexed: 239
 | All-Codes Compound Extension Confirmatory Controls | `ALL_CODES_COMPOUND_EXTENSION_CONFIRMATORY_CONTROLS.md` |
 | All-Codes Compound Extension Controls | `ALL_CODES_COMPOUND_EXTENSION_CONTROLS.md` |
 | LXX Apocrypha Bridge Controls | `APOCRYPHA_BRIDGE_CONTROLS.md` |
-| LXX Apocrypha Bridge Shuffled Controls | `APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md` |
+| LXX Apocrypha Bridge Shuffled Controls (5 Samples) | `APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md` |
 | LXX Apocrypha Bridge Shuffled Controls | `APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md` |
 | LXX Apocrypha Bridge Shuffled Controls | `APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md` |
 | Beast/Dragon Strict Controls | `BEAST_DRAGON_STRICT_CONTROLS.md` |
@@ -43,7 +43,7 @@ Documents indexed: 239
 | Hebrew Screening Controlled Review | `HEBREW_SCREENING_CONTROLLED_REVIEW.md` |
 | KJVA Confirmatory Apocrypha Bridge Term Shuffled Controls (5000 Samples) | `KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md` |
 | KJVA Apocrypha Bridge Controls | `KJV_APOCRYPHA_BRIDGE_CONTROLS.md` |
-| KJVA Apocrypha Bridge Shuffled Controls | `KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md` |
+| KJVA Apocrypha Bridge Shuffled Controls (5 Samples) | `KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md` |
 | KJVA Apocrypha Bridge Shuffled Controls | `KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md` |
 | KJVA Apocrypha Bridge Shuffled Controls (250 Samples) | `KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_250.md` |
 | KJVA Apocrypha Bridge Shuffled Controls | `KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md` |

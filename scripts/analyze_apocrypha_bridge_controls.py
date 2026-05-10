@@ -16,6 +16,7 @@ from typing import Any
 from els import __version__
 from els.corpus import Corpus, load_corpus
 from els.search import iter_els_query_matches_by_lanes
+from els.term_display import display_term
 
 from scripts.analyze_apocrypha_bridge_candidates import (
     APOCRYPHA_BOOKS,
@@ -288,7 +289,7 @@ def write_markdown(
             + " | ".join(
                 [
                     f"`{escape_md(str(row['control_label']))}`",
-                    f"`{escape_md(str(row['normalized_term']))}`",
+                    display_term(str(row["normalized_term"])),
                     str(row["bridge_rows"]),
                     str(row["canonical_to_apocrypha"]),
                     str(row["apocrypha_to_canonical"]),

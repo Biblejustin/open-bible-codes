@@ -16,6 +16,7 @@ from els import __version__
 from els.corpus import Corpus, VerseSpan, load_corpus
 from els.search import count_els_terms_by_lanes
 from els.statistics import estimated_search_space, hits_per_million
+from els.term_display import display_term
 
 from scripts.analyze_apocrypha_bridge_candidates import (
     APOCRYPHA_BOOKS,
@@ -247,7 +248,7 @@ def write_markdown(
             "| "
             + " | ".join(
                 [
-                    f"`{escape_md(query)}`",
+                    display_term(query),
                     escape_md(str(row["concepts"])),
                     str(row["hit_count"]),
                     str(row["hits_per_million"]),

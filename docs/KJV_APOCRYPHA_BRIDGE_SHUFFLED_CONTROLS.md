@@ -1,6 +1,6 @@
-# KJVA Apocrypha Bridge Shuffled Controls
+# KJVA Apocrypha Bridge Shuffled Controls (5 Samples)
 
-Status: pilot shuffled-insertion controls. This is not a claim report.
+Status: shuffled-insertion controls. This is not a claim report.
 
 The control keeps the canonical prefix and apocrypha/deuterocanon block
 length fixed, but shuffles the block letters before counting bridge rows.
@@ -31,6 +31,6 @@ python3 -m scripts.analyze_apocrypha_bridge_shuffled_controls --canonical-label 
 
 ## Read
 
-This is a pilot control. With few samples, the best possible add-one
-empirical p-value is floor-limited. Treat the result as a calibration
-of bridge-row background, not claim evidence.
+This is a calibration control. With finite samples, the add-one
+empirical p-value remains resolution-limited. Treat the result as
+background calibration, not claim evidence.
