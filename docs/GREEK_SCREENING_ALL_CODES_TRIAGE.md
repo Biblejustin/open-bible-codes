@@ -10,6 +10,7 @@ It is a triage aid, not a claim-grade filter.
 
 - Hits: `reports/greek_screening_all_codes/surface_all_codes.csv`
 - Summary: `reports/greek_screening_all_codes/surface_all_codes_summary.csv`
+- Report DB: `reports/db/open_bible_codes.duckdb`
 - Queue CSV: `reports/greek_screening_all_codes/triage_queue.csv`
 - Corpora: `BYZ_NT, SBLGNT, TCG_NT, TR_NT`
 

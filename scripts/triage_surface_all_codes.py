@@ -167,10 +167,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--db", type=Path, help="Read hit rows from a DuckDB report database.")
     parser.add_argument("--hits-table", help="DuckDB hits table name. Defaults to a name derived from --hits.")
+    parser.add_argument("--no-db", action="store_true", help="Disable automatic DuckDB use even when a current DB exists.")
     return parser
 
 
 def resolve_db(args: argparse.Namespace) -> Path | None:
+    if args.no_db:
+        return None
     db = args.db
     explicit = db is not None
     if db is None:
@@ -267,6 +270,7 @@ def collect_candidates_db(
             WITH labeled AS (
                 SELECT
                     *,
+                    rowid AS _source_rowid,
                     {bucket_sql()} AS _bucket,
                     {control_rank_sql(control_by_term)} AS _control_rank
                 FROM {qtable}
@@ -282,7 +286,8 @@ def collect_candidates_db(
                             coalesce(try_cast(span_letters AS BIGINT), 999999999),
                             -length(coalesce(normalized_term, '')),
                             center_ref,
-                            term_id
+                            term_id,
+                            _source_rowid
                     ) AS _rank
                 FROM labeled
             )
@@ -297,6 +302,7 @@ def collect_candidates_db(
         bucket = row.pop("_bucket", bucket_for_row(row))
         row.pop("_control_rank", None)
         row.pop("_rank", None)
+        row.pop("_source_rowid", None)
         candidates_by_bucket[bucket].append(
             {
                 "score": first_pass_score(row, control_by_term.get(row.get("term_id", ""), {})),
@@ -376,6 +382,7 @@ def collect_presence_db(
                  AND h.normalized_term = k.normalized_term
                  AND h.skip = k.skip
                  AND h.direction = k.direction
+                ORDER BY h.rowid
             """,
         )
         for row in rows:

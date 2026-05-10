@@ -10,6 +10,7 @@ It is a triage aid, not a claim-grade filter.
 
 - Hits: `reports/hebrew_theology_all_codes/surface_all_codes.csv`
 - Summary: `reports/hebrew_theology_all_codes/surface_all_codes_summary.csv`
+- Report DB: `reports/db/open_bible_codes.duckdb`
 - Queue CSV: `reports/hebrew_theology_all_codes/triage_queue.csv`
 - Corpora: `EBIBLE_WLC, MAM, MT_WLC, UHB, UXLC`
 
@@ -47,14 +48,14 @@ It is a triage aid, not a claim-grade filter.
 | 9 | all_source | `htp_yhwh_h` | YHWH | 3 | 10 | 2Chr 33:15 | `יהוה` | paired_uncorrected_p_le_0.05 |
 | 10 | all_source | `htp_yhwh_h` | YHWH | 3 | 10 | 2Chr 9:4 | `יהוה` | paired_uncorrected_p_le_0.05 |
 | 11 | all_source | `htp_yhwh_h` | YHWH | 3 | 10 | 2Kgs 23:24 | `יהוה` | paired_uncorrected_p_le_0.05 |
-| 12 | all_source | `htp_yhwh_h` | YHWH | 3 | 10 | 2Kgs 25:13 | `יהוה` | paired_uncorrected_p_le_0.05 |
+| 12 | all_source | `htp_yhwh_h` | YHWH | 3 | 10 | 2Kgs 25:13 | `ביתיהוה` | paired_uncorrected_p_le_0.05 |
 | 13 | all_source | `htp_yhwh_h` | YHWH | -3 | 10 | 2Kgs 8:19 | `יהוה` | paired_uncorrected_p_le_0.05 |
 | 14 | all_source | `htp_yhwh_h` | YHWH | -3 | 10 | 2Sam 10:12 | `ויהוה` | paired_uncorrected_p_le_0.05 |
 | 15 | all_source | `htp_yhwh_h` | YHWH | -3 | 10 | Isa 48:14 | `יהוה` | paired_uncorrected_p_le_0.05 |
 | 16 | all_source | `htp_yhwh_h` | YHWH | 3 | 10 | Isa 51:22 | `יהוה` | paired_uncorrected_p_le_0.05 |
-| 17 | all_source | `htp_yhwh_h` | YHWH | 3 | 10 | Jer 28:6 | `יהוה` | paired_uncorrected_p_le_0.05 |
-| 18 | all_source | `htp_yhwh_h` | YHWH | 3 | 10 | Jer 52:17 | `יהוה` | paired_uncorrected_p_le_0.05 |
-| 19 | all_source | `htp_yhwh_h` | YHWH | 3 | 10 | Num 14:44 | `יהוה` | paired_uncorrected_p_le_0.05 |
+| 17 | all_source | `htp_yhwh_h` | YHWH | 3 | 10 | Jer 28:6 | `ביתיהוה` | paired_uncorrected_p_le_0.05 |
+| 18 | all_source | `htp_yhwh_h` | YHWH | 3 | 10 | Jer 52:17 | `לביתיהוה` | paired_uncorrected_p_le_0.05 |
+| 19 | all_source | `htp_yhwh_h` | YHWH | 3 | 10 | Num 14:44 | `בריתיהוה` | paired_uncorrected_p_le_0.05 |
 | 20 | all_source | `htp_yhwh_h` | YHWH | 3 | 10 | Ps 32:5 | `ליהוה` | paired_uncorrected_p_le_0.05 |
 
 ### center_word_same_category
@@ -71,11 +72,11 @@ It is a triage aid, not a claim-grade filter.
 | 8 | all_source | `htp_torah_h` | Torah | 14 | 43 | Exod 7:5 | `אתבניישראל` | not_unusual |
 | 9 | all_source | `htp_love_h` | Love | -15 | 46 | 2Sam 14:30 | `אבשלומ` | not_unusual |
 | 10 | all_source | `htp_torah_h` | Torah | -15 | 46 | Isa 45:17 | `ישראל` | not_unusual |
-| 11 | all_source | `htp_peace_h` | Peace | -15 | 46 | Song 8:7 | `האהבה` | not_unusual |
+| 11 | all_source | `htp_peace_h` | Peace | -15 | 46 | Song 8:7 | `אתהאהבה` | not_unusual |
 | 12 | all_source | `htp_torah_h` | Torah | 16 | 49 | Deut 27:14 | `ישראל` | not_unusual |
 | 13 | all_source | `htp_torah_h` | Torah | 16 | 49 | Lev 7:38 | `ישראל` | not_unusual |
 | 14 | all_source | `htp_torah_h` | Torah | -16 | 49 | Num 3:40 | `ישראל` | not_unusual |
-| 15 | all_source | `htp_torah_h` | Torah | 17 | 52 | 1Kgs 12:20 | `ישראל` | not_unusual |
+| 15 | all_source | `htp_torah_h` | Torah | 17 | 52 | 1Kgs 12:20 | `עלכלישראל` | not_unusual |
 | 16 | all_source | `htp_torah_h` | Torah | 18 | 55 | Jer 7:3 | `ישראל` | not_unusual |
 | 17 | all_source | `htp_glory_h` | Glory | -18 | 55 | Lev 13:57 | `ואמתראה` | not_unusual |
 | 18 | all_source | `htp_torah_h` | Torah | 20 | 61 | 1Chr 7:29 | `ישראל` | not_unusual |
@@ -114,7 +115,7 @@ It is a triage aid, not a claim-grade filter.
 | 1 | all_source | `htp_torah_h` | Torah | -2 | 7 | 1Sam 6:5 | `הארצ` | not_unusual |
 | 2 | all_source | `htp_love_h` | Love | 2 | 7 | 2Sam 14:21 | `הדבר` | not_unusual |
 | 3 | all_source | `htp_love_h` | Love | 2 | 7 | 2Sam 15:27 | `שבה` | not_unusual |
-| 4 | all_source | `htp_love_h` | Love | 2 | 7 | Exod 18:23 | `הדבר` | not_unusual |
+| 4 | all_source | `htp_love_h` | Love | 2 | 7 | Exod 18:23 | `אתהדבר` | not_unusual |
 | 5 | all_source | `htp_torah_h` | Torah | -2 | 7 | Ezek 36:10 | `והחרבות` | not_unusual |
 | 6 | all_source | `htp_torah_h` | Torah | -2 | 7 | Ezra 10:2 | `הארצ` | not_unusual |
 | 7 | all_source | `htp_torah_h` | Torah | -2 | 7 | Jer 7:12 | `וראו` | not_unusual |
@@ -154,14 +155,14 @@ It is a triage aid, not a claim-grade filter.
 | 16 | all_source | `htp_yhwh_h` | YHWH | 3 | 10 | Isa 58:6 | `הלוא` | paired_uncorrected_p_le_0.05 |
 | 17 | all_source | `htp_yhwh_h` | YHWH | 3 | 10 | Jer 44:6 | `הזה` | paired_uncorrected_p_le_0.05 |
 | 18 | all_source | `htp_yhwh_h` | YHWH | 3 | 10 | Josh 4:9 | `הזה` | paired_uncorrected_p_le_0.05 |
-| 19 | all_source | `htp_yhwh_h` | YHWH | -4 | 13 | Deut 15:3 | `את` | paired_uncorrected_p_le_0.05 |
+| 19 | all_source | `htp_yhwh_h` | YHWH | -4 | 13 | Deut 15:3 | `אתהנכרי` | paired_uncorrected_p_le_0.05 |
 | 20 | all_source | `htp_yhwh_h` | YHWH | -4 | 13 | Deut 1:44 | `ויצא` | paired_uncorrected_p_le_0.05 |
 
 ### span_same_category
 
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | all_source | `htp_torah_h` | Torah | -2 | 7 | Exod 19:5 | `הארצ` | not_unusual |
+| 1 | all_source | `htp_torah_h` | Torah | -2 | 7 | Exod 19:5 | `כלהארצ` | not_unusual |
 | 2 | all_source | `htp_torah_h` | Torah | -2 | 7 | Ezek 39:16 | `הארצ` | not_unusual |
 | 3 | all_source | `htp_torah_h` | Torah | -2 | 7 | Josh 13:21 | `הארצ` | not_unusual |
 | 4 | all_source | `htp_torah_h` | Torah | 2 | 7 | Lev 17:6 | `וזרק` | not_unusual |

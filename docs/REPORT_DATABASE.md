@@ -74,6 +74,10 @@ still write the existing CSV outputs. The Make targets below use DuckDB when
 scan when it does not. Run `make report-db` first, then run the follow-up target
 in a separate `make` invocation to use the fast path.
 
+The all-codes summary and triage scripts also auto-detect a current default DB
+for standard report paths. Use `--no-db` on those scripts when comparing against
+the original CSV-only path.
+
 ```bash
 make crd-self-surface-report
 make crd-self-surface-queue
@@ -131,6 +135,11 @@ For ad hoc SQL:
 ```bash
 duckdb reports/db/open_bible_codes.duckdb
 ```
+
+The report index uses current DB import metadata for large CSV row counts and a
+local `reports/.report_index_cache.json` size/mtime cache for medium CSVs. It
+also excludes operational partition, worker-batch, worker-import, and DB folders
+from the reader-facing report index.
 
 ## Policy
 

@@ -6,6 +6,7 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 
 - Hits: `reports/hebrew_theology_all_codes/surface_all_codes.csv`
 - Summary: `reports/hebrew_theology_all_codes/surface_all_codes_summary.csv`
+- Report DB: `reports/db/open_bible_codes.duckdb`
 - Corpora: `EBIBLE_WLC, MAM, MT_WLC, UHB, UXLC`
 
 ## Collection Counts

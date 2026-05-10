@@ -73,10 +73,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--db", type=Path, help="Read hits and summary rows from a DuckDB report database.")
     parser.add_argument("--hits-table", help="DuckDB hits table name. Defaults to a name derived from --hits.")
     parser.add_argument("--summary-table", help="DuckDB summary table name. Defaults to a name derived from --summary.")
+    parser.add_argument("--no-db", action="store_true", help="Disable automatic DuckDB use even when a current DB exists.")
     return parser
 
 
 def resolve_db(args: argparse.Namespace) -> Path | None:
+    if args.no_db:
+        return None
     db = args.db
     explicit = db is not None
     if db is None:
