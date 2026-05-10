@@ -15,6 +15,8 @@ class TermDisplayTests(unittest.TestCase):
 
     def test_displays_common_hebrew_report_term_with_gloss(self) -> None:
         self.assertEqual(display_term("בבל"), "`בבל` (Bavel; English: Babylon)")
+        self.assertEqual(display_term("יעקב"), "`יעקב` (Yaakov; English: Jacob)")
+        self.assertEqual(display_term("דבר"), "`דבר` (davar; English: word/matter)")
 
     def test_displays_core_hebrew_report_terms_with_glosses(self) -> None:
         self.assertEqual(display_term("יהוה"), "`יהוה` (YHWH; English: YHWH)")

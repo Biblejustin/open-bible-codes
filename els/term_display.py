@@ -99,6 +99,19 @@ KNOWN_TERMS: dict[str, tuple[str, str]] = {
     "תו": ("tav", "mark/sign"),
     "עד": ("ed", "witness"),
     "צר": ("tsar", "foe/adversary"),
+    "ענן": ("anan", "cloud"),
+    "יין": ("yayin", "wine"),
+    "יהודה": ("Yehudah", "Judah"),
+    "חסד": ("chesed", "mercy/steadfast love"),
+    "יעקב": ("Yaakov", "Jacob"),
+    "צדק": ("tzedek", "righteousness/Jupiter"),
+    "שלמה": ("Shlomo", "Solomon"),
+    "שלל": ("shalal", "spoil/plunder"),
+    "ספר": ("sefer", "book/Sephar"),
+    "שממה": ("shemamah", "desolation"),
+    "קדש": ("qodesh", "holiness/sacred"),
+    "נפש": ("nefesh", "soul/life"),
+    "דבר": ("davar", "word/matter"),
 }
 
 TERM_FILES_DIR = Path(__file__).resolve().parents[1] / "terms"

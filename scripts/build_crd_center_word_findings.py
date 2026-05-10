@@ -7,6 +7,7 @@ import argparse
 import csv
 from collections import Counter
 from pathlib import Path
+from typing import Any, cast
 
 from els.term_display import KNOWN_TERMS, display_term, normalized_script_key
 from scripts.build_crd_center_word_presence import build_presence_rows
@@ -161,6 +162,7 @@ def version_presence_markdown(rows: list[dict[str, str]]) -> str:
     language_counts = Counter(row["language"] for row in rows)
     corpus_counts = Counter(row["corpus_count"] for row in rows)
     exceeding = [row for row in rows if row.get("exceeds_secular_max") == "true"]
+    distinct_rows = distinct_surface_rows(rows)
     lines = [
         "# CRD Center-Word Version Presence Findings",
         "",
@@ -190,16 +192,46 @@ def version_presence_markdown(rows: list[dict[str, str]]) -> str:
         "## Summary",
         "",
         f"- exact center-word term rows: {len(rows):,}",
+        f"- distinct normalized surface forms: {len(distinct_rows):,}",
         f"- exact center-word hit rows: {sum(int(row['center_word_rows']) for row in rows):,}",
         f"- terms exceeding secular max in the center-word-only summary: {len(exceeding):,}",
         f"- language distribution: {format_named_counts(language_counts)}",
         f"- corpus-count distribution: {format_corpus_count_distribution(corpus_counts)}",
         "",
-        "## Strongest Multi-Version Rows",
+        "## Strongest Distinct Surface Forms",
         "",
-        "| Term | Language | Rows | Corpus count | Corpora | Exceeds secular max | Bible max | Secular max |",
-        "| --- | --- | ---: | ---: | --- | --- | ---: | ---: |",
+        "This table collapses duplicate term IDs that use the same normalized hidden spelling. The raw term-row table remains below.",
+        "",
+        "| Term | Language | Term rows | Rows | Corpus count | Corpora | Exceeds secular max | Bible max | Secular max |",
+        "| --- | --- | ---: | ---: | ---: | --- | --- | ---: | ---: |",
     ]
+    for row in distinct_rows[:20]:
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    term_cell(row),
+                    md(row["language"]),
+                    row["term_row_count"],
+                    row["center_word_rows"],
+                    row["corpus_count"],
+                    md(row["corpora"].replace(";", "; ")),
+                    row["exceeds_secular_max"],
+                    row["bible_max_density"],
+                    row["secular_max_density"],
+                ]
+            )
+            + " |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Strongest Multi-Version Rows",
+            "",
+            "| Term | Language | Rows | Corpus count | Corpora | Exceeds secular max | Bible max | Secular max |",
+            "| --- | --- | ---: | ---: | --- | --- | ---: | ---: |",
+        ]
+    )
     for row in rows[:20]:
         lines.append(
             "| "
@@ -291,6 +323,93 @@ def term_language_counts_from_hits(rows: list[dict[str, str]]) -> Counter[str]:
     for row in rows:
         languages_by_term.setdefault(row["term_id"], row.get("language", ""))
     return Counter(language for language in languages_by_term.values() if language)
+
+
+def distinct_surface_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    groups: dict[tuple[str, str], dict[str, Any]] = {}
+    for row in rows:
+        key = normalized_surface_group_key(row)
+        if not key[1]:
+            continue
+        group = groups.setdefault(
+            key,
+            {
+                "term": row.get("term", ""),
+                "term_id": "",
+                "concept": row.get("concept", ""),
+                "language": row.get("language", ""),
+                "term_ids": set(),
+                "center_word_rows": 0,
+                "corpora": set(),
+                "exceeds_secular_max": False,
+                "bible_max_density": 0.0,
+                "secular_max_density": 0.0,
+            },
+        )
+        term_ids = cast(set[str], group["term_ids"])
+        corpora = cast(set[str], group["corpora"])
+        if row.get("term_id"):
+            term_ids.add(row["term_id"])
+        corpora.update(part for part in row.get("corpora", "").split(";") if part)
+        group["center_word_rows"] = int(group["center_word_rows"]) + int(row.get("center_word_rows") or 0)
+        group["exceeds_secular_max"] = bool(group["exceeds_secular_max"]) or row.get("exceeds_secular_max") == "true"
+        group["bible_max_density"] = max(float(group["bible_max_density"]), parse_number(row.get("bible_max_density", "")))
+        group["secular_max_density"] = max(
+            float(group["secular_max_density"]),
+            parse_number(row.get("secular_max_density", "")),
+        )
+
+    collapsed: list[dict[str, str]] = []
+    for group in groups.values():
+        term_ids = sorted(cast(set[str], group["term_ids"]))
+        corpora = sorted(cast(set[str], group["corpora"]))
+        collapsed.append(
+            {
+                "term": str(group["term"]),
+                "term_id": ", ".join(term_ids[:3]) + (", ..." if len(term_ids) > 3 else ""),
+                "concept": str(group["concept"]),
+                "language": str(group["language"]),
+                "term_row_count": str(len(term_ids)),
+                "center_word_rows": str(group["center_word_rows"]),
+                "corpus_count": str(len(corpora)),
+                "corpora": ";".join(corpora),
+                "exceeds_secular_max": str(bool(group["exceeds_secular_max"])).lower(),
+                "bible_max_density": format_number(float(group["bible_max_density"])),
+                "secular_max_density": format_number(float(group["secular_max_density"])),
+            }
+        )
+    return sorted(
+        collapsed,
+        key=lambda row: (
+            int(row["corpus_count"]),
+            int(row["center_word_rows"]),
+            parse_number(row["bible_max_density"]),
+            row["term"],
+        ),
+        reverse=True,
+    )
+
+
+def normalized_surface_group_key(row: dict[str, str]) -> tuple[str, str]:
+    language = row.get("language", "")
+    term = row.get("term", "")
+    script_key = normalized_script_key(term)
+    if script_key:
+        return language, script_key
+    return language, "".join(char.lower() for char in term if char.isalnum())
+
+
+def parse_number(value: str) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def format_number(value: float) -> str:
+    if value == 0:
+        return "0"
+    return f"{value:.9g}"
 
 
 def term_cell(row: dict[str, str]) -> str:

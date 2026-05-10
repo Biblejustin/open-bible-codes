@@ -64,7 +64,7 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 | `שאול` (shwl; English: Sheol) | Sheol | 37,020 | 137 | 62 | 1,420 | 728 | 4,997 |
 | `שאול` (shwl; English: Paul) | Paul | 37,020 | 137 | 416 | 1,420 | 5,470 | 13,951 |
 | `הוכה` (hwkh; English: Beaten) | Beaten | 36,228 | 0 | 91 | 65 | 1,681 | 5,203 |
-| `שממה` (shmmh; English: Desolation) | Desolation | 34,908 | 22 | 2,038 | 140 | 20,638 | 31,545 |
+| `שממה` (shemamah; English: Desolation) | Desolation | 34,908 | 22 | 2,038 | 140 | 20,638 | 31,545 |
 | `מהרל` (mhrl; English: Maharal) | Maharal | 34,750 | 0 | 0 | 0 | 130 | 344 |
 | `אלונ` (lwn; English: Oak) | Oak | 33,896 | 1 | 60 | 84 | 703 | 2,439 |
 | `בריא` (bry; English: Berea) | Berea | 33,467 | 11 | 712 | 255 | 7,827 | 17,756 |

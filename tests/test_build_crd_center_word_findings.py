@@ -53,6 +53,7 @@ class BuildCrdCenterWordFindingsTests(unittest.TestCase):
                     [
                         "term_id,term,concept,category,language,center_word_rows,corpus_count,corpora,center_refs_sample,bible_max_corpus,bible_max_density,secular_max_corpus,secular_max_density,ratio,exceeds_secular_max",
                         "yhwh_h,יהוה,YHWH,divine,hebrew,1,1,MT_WLC,MT_WLC:Gen 1:1,MT_WLC,2,CTRL,0,,true",
+                        "yhwh_alt_h,יהוה,YHWH Alt,divine,hebrew,2,1,MT_WLC,MT_WLC:Exod 3:1,MT_WLC,4,CTRL,0,,true",
                         "wisdom_g,σοφια,Wisdom,wisdom,greek,1,1,SBLGNT,SBLGNT:Rev 1:1,SBLGNT,3,CTRL,1,3,true",
                     ]
                 )
@@ -85,6 +86,9 @@ class BuildCrdCenterWordFindingsTests(unittest.TestCase):
             self.assertIn("`σοφια` (sophia; English: Wisdom)<br>`wisdom_g`", comparison_text)
             presence_text = version_presence.read_text(encoding="utf-8")
             self.assertIn("`יהוה` (YHWH; English: YHWH)<br>`yhwh_h`", presence_text)
+            self.assertIn("- distinct normalized surface forms: 2", presence_text)
+            self.assertIn("## Strongest Distinct Surface Forms", presence_text)
+            self.assertIn("`יהוה` (YHWH; English: YHWH)<br>`yhwh_alt_h, yhwh_h`", presence_text)
             self.assertIn("`σοφια` (sophia; English: Wisdom)<br>`wisdom_g`", presence_text)
 
 

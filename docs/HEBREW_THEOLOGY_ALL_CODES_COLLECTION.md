@@ -54,7 +54,7 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 | `מלכות` (mlkwt; English: Kingdom) | Kingdom | 1,515 | 14 | 0 | 34 | 0 | 75 |
 | `גאולה` (gwlh; English: Redemption) | Redemption | 513 | 0 | 0 | 0 | 4 | 4 |
 | `כבשהאלוהימ` (kbshhlwhym; English: Lamb Of God) | Lamb Of God | 0 | 0 | 0 | 0 | 0 | 0 |
-| `חסד` (chsd; English: Mercy) | Mercy | 0 | 0 | 0 | 0 | 0 | 0 |
+| `חסד` (chesed; English: Mercy) | Mercy | 0 | 0 | 0 | 0 | 0 | 0 |
 | `בנהאלוהימ` (bnhlwhym; English: Son Of God) | Son Of God | 0 | 0 | 0 | 0 | 0 | 0 |
 | `אמת` (emet; English: Truth) | Truth | 0 | 0 | 0 | 0 | 0 | 0 |
 | `ישועהמשיח` (yshwhmshych; English: Yeshua Messiah) | Yeshua Messiah | 0 | 0 | 0 | 0 | 0 | 0 |

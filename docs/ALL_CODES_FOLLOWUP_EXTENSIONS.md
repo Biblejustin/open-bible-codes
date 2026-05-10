@@ -66,7 +66,7 @@ same-skip extension is an added review feature, not a requirement.
 | 48 | hebrew_screening | `center_word_same_category` | `גרמניה` (grmnyh; English: Germany) | UXLC | `after_match` | `ערש` (rsh) | `word` | 4 | עֶ֣רֶשׂ; עָֽרֶשׂ׃; עֶ֥רֶשׂ |
 | 56 | hebrew_screening | `center_verse_same_concept` | `תתתתתא` (ttttt; English: Gregorian 2001) | UXLC | `after_match` | `עבה` (bh) | `word` | 2 | עָבָ֖ה |
 | 73 | hebrew_theology | `center_word_same_category` | `תורה` (twrh; English: Torah) | UXLC | `after_match` | `ואח` (wch) | `word` | 2 | וְאָ֥ח; וָאָ֣ח |
-| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | UXLC | `before_match` | `עבה` (bh) | `word` | 2 | עָבָ֖ה |
+| 43 | hebrew_screening | `center_word_exact` | `שממה` (shemamah; English: Desolation) | UXLC | `before_match` | `עבה` (bh) | `word` | 2 | עָבָ֖ה |
 | 61 | hebrew_screening | `span_exact` | `שמימ` (shmym; English: Heaven) | UXLC | `before_match` | `ובר` (wbr) | `word` | 2 | וּֽבַר־; וּ֝בַ֗ר |
 | 76 | hebrew_theology | `center_verse_same_category` | `אהבה` (hbh; English: Love) | UXLC | `after_match` | `יבל` (ybl) | `word` | 1 | יָבָ֑ל |
 | 39 | greek_screening | `span_same_category` | `γαμερ` (gamer; English: Gomer) | TR_NT | `before_match` | `αο` (ao) | `phrase_2` | 3 | Ἃ ὁ; ἃ ὁ |

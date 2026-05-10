@@ -130,11 +130,11 @@ audit sheet, not an added statistical test.
 | 42 | greek_screening | `hidden_path_only` | `υιοσ` (huios; English: Son) | SBLGNT | `υιοσ` (huios; English: Son) | 2 | 1Cor 5:12 | `τοὺς` (tous) | 1Cor 5:12 |
 | 42 | greek_screening | `hidden_path_only` | `υιοσ` (huios; English: Son) | TCG_NT | `υιοσ` (huios; English: Son) | 2 | 1CO 5:12 | `τοὺς` (tous) | 1CO 5:12 |
 | 42 | greek_screening | `hidden_path_only` | `υιοσ` (huios; English: Son) | TR_NT | `υιοσ` (huios; English: Son) | 2 | 1CO 5:12 | `τοὺς` (tous) | 1CO 5:12 |
-| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | EBIBLE_WLC | `שממה` (shmmh; English: Desolation) | 2 | MIC 1:7 | `שְׁמָמָ֑ה` (shmmh; English: Desolation) | MIC 1:7 |
-| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | MAM | `שממה` (shmmh; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shmmh; English: Desolation) | Mic 1:7 |
-| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | MT_WLC | `שממה` (shmmh; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shmmh; English: Desolation) | Mic 1:7 |
-| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | UHB | `שממה` (shmmh; English: Desolation) | 2 | MIC 1:7 | `שְׁמָמָ֑ה` (shmmh; English: Desolation) | MIC 1:7 |
-| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | UXLC | `שממה` (shmmh; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shmmh; English: Desolation) | Mic 1:7 |
+| 43 | hebrew_screening | `center_word_exact` | `שממה` (shemamah; English: Desolation) | EBIBLE_WLC | `שממה` (shemamah; English: Desolation) | 2 | MIC 1:7 | `שְׁמָמָ֑ה` (shemamah; English: desolation) | MIC 1:7 |
+| 43 | hebrew_screening | `center_word_exact` | `שממה` (shemamah; English: Desolation) | MAM | `שממה` (shemamah; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shemamah; English: desolation) | Mic 1:7 |
+| 43 | hebrew_screening | `center_word_exact` | `שממה` (shemamah; English: Desolation) | MT_WLC | `שממה` (shemamah; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shemamah; English: desolation) | Mic 1:7 |
+| 43 | hebrew_screening | `center_word_exact` | `שממה` (shemamah; English: Desolation) | UHB | `שממה` (shemamah; English: Desolation) | 2 | MIC 1:7 | `שְׁמָמָ֑ה` (shemamah; English: desolation) | MIC 1:7 |
+| 43 | hebrew_screening | `center_word_exact` | `שממה` (shemamah; English: Desolation) | UXLC | `שממה` (shemamah; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shemamah; English: desolation) | Mic 1:7 |
 | 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | EBIBLE_WLC | `יהוה` (YHWH; English: YHWH) | 3 | 1CH 26:27 | `יְהוָֽה׃` (YHWH; English: YHWH) | 1CH 26:27; 1CH 26:28 |
 | 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | MAM | `יהוה` (YHWH; English: YHWH) | 3 | 1 Chr 26:27 | `יְהֹוָֽה׃` (YHWH; English: YHWH) | 1 Chr 26:27; 1 Chr 26:28 |
 | 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | MT_WLC | `יהוה` (YHWH; English: YHWH) | 3 | 1Chr 26:27 | `יְהוָֽה` (YHWH; English: YHWH) | 1Chr 26:27; 1Chr 26:28 |

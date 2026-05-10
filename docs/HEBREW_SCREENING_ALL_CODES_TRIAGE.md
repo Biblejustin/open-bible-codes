@@ -37,11 +37,11 @@ It is a triage aid, not a claim-grade filter.
 
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | all_source | `desolation_h` `שממה` (shmmh; English: Desolation) | Desolation | 2 | 7 | Mic 1:7 | `שממה` (shmmh; English: Desolation) | not_unusual |
+| 1 | all_source | `desolation_h` `שממה` (shemamah; English: Desolation) | Desolation | 2 | 7 | Mic 1:7 | `שממה` (shemamah; English: desolation) | not_unusual |
 | 2 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Chr 26:27 | `יהוה` (YHWH; English: YHWH) | not_unusual |
 | 3 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Chr 28:20 | `יהוה` (YHWH; English: YHWH) | not_unusual |
 | 4 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Kgs 10:5 | `יהוה` (YHWH; English: YHWH) | not_unusual |
-| 5 | all_source | `solomon_h` `שלמה` (shlmh; English: Solomon) | Solomon | -3 | 10 | 1Kgs 7:1 | `שלמה` (shlmh; English: Solomon) | not_unusual |
+| 5 | all_source | `solomon_h` `שלמה` (Shlomo; English: Solomon) | Solomon | -3 | 10 | 1Kgs 7:1 | `שלמה` (Shlomo; English: Solomon) | not_unusual |
 | 6 | all_source | `lord_h` `אדני` (Adonai; English: Lord) | Lord | 3 | 10 | 1Sam 25:14 | `אדנינו` (dnynw) | not_unusual |
 | 7 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Sam 26:11 | `יהוה` (YHWH; English: YHWH) | not_unusual |
 | 8 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Sam 26:16 | `יהוה` (YHWH; English: YHWH) | not_unusual |
@@ -52,9 +52,9 @@ It is a triage aid, not a claim-grade filter.
 | 13 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Chr 33:15 | `יהוה` (YHWH; English: YHWH) | not_unusual |
 | 14 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Chr 9:4 | `יהוה` (YHWH; English: YHWH) | not_unusual |
 | 15 | all_source | `lord_h` `אדני` (Adonai; English: Lord) | Lord | -3 | 10 | 2Kgs 18:27 | `אדני` (Adonai; English: Lord) | not_unusual |
-| 16 | all_source | `solomon_h` `שלמה` (shlmh; English: Solomon) | Solomon | -3 | 10 | 2Kgs 23:13 | `שלמה` (shlmh; English: Solomon) | not_unusual |
+| 16 | all_source | `solomon_h` `שלמה` (Shlomo; English: Solomon) | Solomon | -3 | 10 | 2Kgs 23:13 | `שלמה` (Shlomo; English: Solomon) | not_unusual |
 | 17 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Kgs 23:24 | `יהוה` (YHWH; English: YHWH) | not_unusual |
-| 18 | all_source | `solomon_h` `שלמה` (shlmh; English: Solomon) | Solomon | -3 | 10 | 2Kgs 24:13 | `שלמה` (shlmh; English: Solomon) | not_unusual |
+| 18 | all_source | `solomon_h` `שלמה` (Shlomo; English: Solomon) | Solomon | -3 | 10 | 2Kgs 24:13 | `שלמה` (Shlomo; English: Solomon) | not_unusual |
 | 19 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Kgs 25:13 | `ביתיהוה` (beit YHWH; English: house of YHWH) | not_unusual |
 | 20 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -3 | 10 | 2Kgs 8:19 | `יהוה` (YHWH; English: YHWH) | not_unusual |
 
@@ -75,20 +75,20 @@ It is a triage aid, not a claim-grade filter.
 | 3 | all_source | `amorite_h` `אמרי` (mry; English: Amorite) | Amorite | 2 | 7 | 1Chr 15:27 | `המשררימ` (hmshrrym) | not_unusual |
 | 4 | all_source | `asshur_h` `אשור` (shwr; English: Asshur) | Asshur | 2 | 7 | 1Chr 7:23 | `שמו` (shmw) | not_unusual |
 | 5 | all_source | `shinar_h` `שנער` (shnr; English: Shinar) | Shinar | 2 | 7 | 1Chr 8:22 | `ועבר` (wbr) | not_unusual |
-| 6 | all_source | `locust_h` `ארבה` (rbh; English: Locust) | Locust | 2 | 7 | 1Kgs 12:12 | `דבר` (dbr) | not_unusual |
-| 7 | all_source | `locust_plague_h` `ארבה` (rbh; English: Locust Plague) | Locust Plague | 2 | 7 | 1Kgs 12:12 | `דבר` (dbr) | not_unusual |
-| 8 | all_source | `locusts_plague_h` `ארבה` (rbh; English: Locusts) | Locusts | 2 | 7 | 1Kgs 12:12 | `דבר` (dbr) | not_unusual |
+| 6 | all_source | `locust_h` `ארבה` (rbh; English: Locust) | Locust | 2 | 7 | 1Kgs 12:12 | `דבר` (davar; English: word/matter) | not_unusual |
+| 7 | all_source | `locust_plague_h` `ארבה` (rbh; English: Locust Plague) | Locust Plague | 2 | 7 | 1Kgs 12:12 | `דבר` (davar; English: word/matter) | not_unusual |
+| 8 | all_source | `locusts_plague_h` `ארבה` (rbh; English: Locusts) | Locusts | 2 | 7 | 1Kgs 12:12 | `דבר` (davar; English: word/matter) | not_unusual |
 | 9 | all_source | `shinar_h` `שנער` (shnr; English: Shinar) | Shinar | 2 | 7 | 1Kgs 15:1 | `שמנה` (shmnh) | not_unusual |
 | 10 | all_source | `asshur_h` `אשור` (shwr; English: Asshur) | Asshur | -2 | 7 | 1Kgs 18:25 | `בשמ` (bshm) | not_unusual |
 | 11 | all_source | `shinar_h` `שנער` (shnr; English: Shinar) | Shinar | 2 | 7 | 1Kgs 7:15 | `שמנה` (shmnh) | not_unusual |
 | 12 | all_source | `peace_h` `שלומ` (shlwm; English: Peace) | Peace | 2 | 7 | 1Sam 18:30 | `דוד` (dwd; English: David) | not_unusual |
 | 13 | all_source | `peace_h` `שלומ` (shlwm; English: Peace) | Peace | 2 | 7 | 1Sam 20:28 | `דוד` (dwd; English: David) | not_unusual |
-| 14 | all_source | `locust_h` `ארבה` (rbh; English: Locust) | Locust | 2 | 7 | 2Chr 10:12 | `דבר` (dbr) | not_unusual |
-| 15 | all_source | `locust_plague_h` `ארבה` (rbh; English: Locust Plague) | Locust Plague | 2 | 7 | 2Chr 10:12 | `דבר` (dbr) | not_unusual |
-| 16 | all_source | `locusts_plague_h` `ארבה` (rbh; English: Locusts) | Locusts | 2 | 7 | 2Chr 10:12 | `דבר` (dbr) | not_unusual |
+| 14 | all_source | `locust_h` `ארבה` (rbh; English: Locust) | Locust | 2 | 7 | 2Chr 10:12 | `דבר` (davar; English: word/matter) | not_unusual |
+| 15 | all_source | `locust_plague_h` `ארבה` (rbh; English: Locust Plague) | Locust Plague | 2 | 7 | 2Chr 10:12 | `דבר` (davar; English: word/matter) | not_unusual |
+| 16 | all_source | `locusts_plague_h` `ארבה` (rbh; English: Locusts) | Locusts | 2 | 7 | 2Chr 10:12 | `דבר` (davar; English: word/matter) | not_unusual |
 | 17 | all_source | `prophet_h` `נביא` (nby; English: Prophet) | Prophet | 2 | 7 | 2Chr 21:7 | `הברית` (hbryt) | not_unusual |
 | 18 | all_source | `locust_h` `ארבה` (rbh; English: Locust) | Locust | -2 | 7 | 2Chr 26:23 | `הקבורה` (hqbwrh) | not_unusual |
-| 19 | all_source | `desolation_h` `שממה` (shmmh; English: Desolation) | Desolation | 2 | 7 | 2Chr 32:30 | `למטהמערבה` (lmthmrbh) | not_unusual |
+| 19 | all_source | `desolation_h` `שממה` (shemamah; English: Desolation) | Desolation | 2 | 7 | 2Chr 32:30 | `למטהמערבה` (lmthmrbh) | not_unusual |
 | 20 | all_source | `elam_h` `עילמ` (ylm; English: Elam) | Elam | -2 | 7 | 2Chr 32:31 | `המשלחימ` (hmshlchym) | not_unusual |
 
 ### center_verse_exact
@@ -214,7 +214,7 @@ It is a triage aid, not a claim-grade filter.
 | 17 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 43 | 130 | Job 22:9 | `אלמנות` (lmnwt) | not_unusual |
 | 18 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 44 | 133 | Isa 2:16 | `כלשכיות` (klshkywt) | not_unusual |
 | 19 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | -47 | 142 | Gen 7:18 | `ויגברו` (wygbrw) | not_unusual |
-| 20 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 48 | 145 | Jer 19:13 | `יהודה` (yhwdh) | not_unusual |
+| 20 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 48 | 145 | Jer 19:13 | `יהודה` (Yehudah; English: Judah) | not_unusual |
 
 ### span_same_category
 
@@ -225,7 +225,7 @@ It is a triage aid, not a claim-grade filter.
 | 3 | all_source | `pathrusim_h` `פתרסימ` (ptrsym; English: Pathrusim) | Pathrusim | -52 | 261 | Isa 26:17 | `תזעק` (tzq) | paired_uncorrected_p_le_0.05 |
 | 4 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -57 | 286 | Job 31:35 | `ריבי` (ryby) | paired_uncorrected_p_le_0.05 |
 | 5 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 62 | 311 | Prov 24:29 | `כאשר` (kshr) | paired_uncorrected_p_le_0.05 |
-| 6 | all_source | `timothy_h` `טימותי` (tymwty; English: Timothy) | Timothy | -66 | 331 | Jer 46:28 | `יעקב` (yqb) | paired_uncorrected_p_le_0.05 |
+| 6 | all_source | `timothy_h` `טימותי` (tymwty; English: Timothy) | Timothy | -66 | 331 | Jer 46:28 | `יעקב` (Yaakov; English: Jacob) | paired_uncorrected_p_le_0.05 |
 | 7 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -69 | 346 | Ps 99:6 | `אליהוה` (lyhwh) | paired_uncorrected_p_le_0.05 |
 | 8 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -73 | 366 | Num 11:16 | `מועד` (mwd) | paired_uncorrected_p_le_0.05 |
 | 9 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 78 | 391 | 2Kgs 17:39 | `אמאתיהוה` (mtyhwh) | paired_uncorrected_p_le_0.05 |

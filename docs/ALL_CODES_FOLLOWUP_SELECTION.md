@@ -90,7 +90,7 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 40 | greek_screening | `hidden_path_only` | all_source | `σαλα` (Sala; English: Shelah) | Shelah | 2 | 1Cor 10:18 | `ισραηλ` (israel; English: Israel) |
 | 41 | greek_screening | `hidden_path_only` | all_source | `αμην` (amen; English: Amen) | Amen | 2 | 1Cor 1:10 | `μη` (me) |
 | 42 | greek_screening | `hidden_path_only` | all_source | `υιοσ` (huios; English: Son) | Son | 2 | 1Cor 5:12 | `τουσ` (tous) |
-| 43 | hebrew_screening | `center_word_exact` | all_source | `שממה` (shmmh; English: Desolation) | Desolation | 2 | Mic 1:7 | `שממה` (shmmh; English: Desolation) |
+| 43 | hebrew_screening | `center_word_exact` | all_source | `שממה` (shemamah; English: Desolation) | Desolation | 2 | Mic 1:7 | `שממה` (shemamah; English: desolation) |
 | 44 | hebrew_screening | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 26:27 | `יהוה` (YHWH; English: YHWH) |
 | 45 | hebrew_screening | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 28:20 | `יהוה` (YHWH; English: YHWH) |
 | 46 | hebrew_screening | `center_word_same_concept` | all_source | `רומא` (rwm; English: Rome) | Rome | 5 | Job 5:12 | `ערומימ` (rwmym) |
@@ -112,7 +112,7 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 62 | hebrew_screening | `span_exact` | all_source | `מרימ` (mrym; English: Mary) | Mary | -3 | Mic 6:5 | `זכרנא` (zkrn) |
 | 63 | hebrew_screening | `span_same_concept` | all_source | `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 35 | Eccl 3:10 | `לענות` (lnwt) |
 | 64 | hebrew_screening | `span_same_category` | all_source | `פתרסימ` (ptrsym; English: Pathrusim) | Pathrusim | -52 | Isa 26:17 | `תזעק` (tzq) |
-| 65 | hebrew_screening | `span_same_category` | all_source | `טימותי` (tymwty; English: Timothy) | Timothy | -66 | Jer 46:28 | `יעקב` (yqb) |
+| 65 | hebrew_screening | `span_same_category` | all_source | `טימותי` (tymwty; English: Timothy) | Timothy | -66 | Jer 46:28 | `יעקב` (Yaakov; English: Jacob) |
 | 66 | hebrew_screening | `span_same_category` | all_source | `תתתתתכז` (tttttkz; English: Gregorian 2027 additive) | Gregorian 2027 additive | 86 | Deut 11:16 | `יפתה` (ypth) |
 | 67 | hebrew_screening | `hidden_path_only` | all_source | `יומיהוה` (yom YHWH; English: Day Of The Lord) | Day Of The Lord | 4 | Song 4:6 | `שיפוח` (shypwch) |
 | 68 | hebrew_screening | `hidden_path_only` | all_source | `קברריק` (qbrryq; English: Empty Tomb) | Empty Tomb | 8 | Ezek 5:2 | `בתוכ` (btwk) |
