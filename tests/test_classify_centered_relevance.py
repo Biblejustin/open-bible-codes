@@ -49,6 +49,26 @@ class DeterministicClassifierTests(unittest.TestCase):
 
         self.assertTrue(result.is_relevant)
         self.assertEqual(result.relevance_type, "surface_keyword_match")
+        self.assertEqual(result.audit_payload["surface_match_scope"], "center_word")
+        self.assertEqual(result.audit_payload["matched_normalized_surface_keyword"], "מלכ")
+
+    def test_surface_keyword_match_reports_center_verse_scope(self) -> None:
+        classifier = DeterministicClassifier(entries={"term": entry(surface_keywords=["king"])})
+
+        result = classifier.classify(
+            {
+                "term_id": "term",
+                "language": "english",
+                "center_word": "servant",
+                "center_verse_text": "the king spoke",
+                "span_text": "",
+            },
+            {"term_id": "term"},
+        )
+
+        self.assertTrue(result.is_relevant)
+        self.assertEqual(result.audit_payload["surface_match_scope"], "center_verse")
+        self.assertEqual(result.audit_payload["matched_surface_keyword"], "king")
 
     def test_surface_keyword_absent(self) -> None:
         classifier = DeterministicClassifier(entries={"term": entry(surface_keywords=["מלך"])})

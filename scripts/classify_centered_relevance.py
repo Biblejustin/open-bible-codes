@@ -70,6 +70,13 @@ class RelevanceEntry:
     provenance: dict[str, Any]
 
 
+@dataclass(frozen=True)
+class SurfaceKeywordMatch:
+    scope: str
+    keyword: str
+    normalized_keyword: str
+
+
 def sha256_file(path: str | Path) -> str:
     digest = hashlib.sha256()
     with Path(path).open("rb") as handle:
@@ -151,8 +158,18 @@ class DeterministicClassifier(Classifier):
             )
 
         language = str(hit_row.get("language") or term_metadata.get("language") or "")
-        if surface_keyword_match(entry, hit_row, language):
-            return ClassificationResult(True, "surface_keyword_match", audit_payload={"language": language})
+        surface_match = surface_keyword_match(entry, hit_row, language)
+        if surface_match is not None:
+            return ClassificationResult(
+                True,
+                "surface_keyword_match",
+                audit_payload={
+                    "language": language,
+                    "surface_match_scope": surface_match.scope,
+                    "matched_surface_keyword": surface_match.keyword,
+                    "matched_normalized_surface_keyword": surface_match.normalized_keyword,
+                },
+            )
 
         concept_values = {
             normalize_code(hit_row.get("concept_code", "")),
@@ -203,7 +220,7 @@ def normalize_surface(value: str, language: str) -> str:
     return normalize_text(value, language)
 
 
-def surface_keyword_match(entry: RelevanceEntry, hit_row: dict[str, Any], language: str) -> bool:
+def surface_keyword_match(entry: RelevanceEntry, hit_row: dict[str, Any], language: str) -> SurfaceKeywordMatch | None:
     center_word = normalize_surface(str(hit_row.get("center_word", "")), language)
     center_normalized_word = str(hit_row.get("center_normalized_word", "")).strip()
     center_verse_text = normalize_surface(str(hit_row.get("center_verse_text", "")), language)
@@ -213,10 +230,11 @@ def surface_keyword_match(entry: RelevanceEntry, hit_row: dict[str, Any], langua
         if not normalized_keyword:
             continue
         if normalized_keyword == center_word or normalized_keyword == center_normalized_word:
-            return True
+            return SurfaceKeywordMatch("center_word", keyword, normalized_keyword)
         if normalized_keyword in center_verse_text or normalized_keyword in span_text:
-            return True
-    return False
+            scope = "center_verse" if normalized_keyword in center_verse_text else "span"
+            return SurfaceKeywordMatch(scope, keyword, normalized_keyword)
+    return None
 
 
 class LLMClient(Protocol):

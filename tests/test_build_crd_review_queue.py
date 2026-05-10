@@ -91,6 +91,7 @@ def test_build_review_queue_filters_relevant_bible_rows(tmp_path: Path) -> None:
     assert rows[0]["hit_id"] == "1"
     assert rows[0]["selection_reason"] == "top_finite_ratio"
     assert rows[0]["bible_max_corpus"] == "BIBLE"
+    assert rows[0]["surface_match_scope"] == "center_word"
 
 
 def hit_row(term_id: str, corpus: str, corpus_class: str, is_relevant: str, hit_id: str) -> dict[str, str]:
@@ -106,6 +107,9 @@ def hit_row(term_id: str, corpus: str, corpus_class: str, is_relevant: str, hit_
         "classifier_mode": "deterministic",
         "is_relevant": is_relevant,
         "relevance_type": "surface_keyword_match" if is_relevant == "true" else "none",
+        "surface_match_scope": "center_word" if is_relevant == "true" else "",
+        "matched_surface_keyword": "term" if is_relevant == "true" else "",
+        "matched_normalized_surface_keyword": "term" if is_relevant == "true" else "",
         "confidence": "",
         "skip": "2",
         "direction": "forward",

@@ -65,6 +65,9 @@ CLASSIFIED_HIT_FIELDNAMES = [
     "classifier_mode",
     "is_relevant",
     "relevance_type",
+    "surface_match_scope",
+    "matched_surface_keyword",
+    "matched_normalized_surface_keyword",
     "confidence",
     "skip",
     "direction",
@@ -575,11 +578,15 @@ def json_hash(payload: dict[str, Any]) -> str:
 
 def classified_hit_row(base_row: dict[str, Any], mode: str, result: ClassificationResult) -> dict[str, Any]:
     row = {field: base_row.get(field, "") for field in CLASSIFIED_HIT_FIELDNAMES}
+    audit_payload = result.audit_payload or {}
     row.update(
         {
             "classifier_mode": mode,
             "is_relevant": str(result.is_relevant).lower(),
             "relevance_type": result.relevance_type,
+            "surface_match_scope": audit_payload.get("surface_match_scope", ""),
+            "matched_surface_keyword": audit_payload.get("matched_surface_keyword", ""),
+            "matched_normalized_surface_keyword": audit_payload.get("matched_normalized_surface_keyword", ""),
             "confidence": "" if result.confidence is None else result.confidence,
         }
     )

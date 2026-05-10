@@ -8,6 +8,13 @@ Centered-Relevance Density (CRD) measures how often centered ELS hits land on co
 - `llm`: locked-prompt classification with temperature `0`, hash-verified prompts, per-hit audit logs, cache keys, and budget caps.
 - `parallel`: runs deterministic and LLM classifiers on the same centered hits and reports agreement, disagreement counts, and Cohen's kappa.
 
+For deterministic `surface_keywords`, classified-hit output records
+`surface_match_scope` so future reports can distinguish the strongest exact
+case (`center_word`) from broader contextual cases (`center_verse` or `span`).
+It also records the matched keyword and normalized matched keyword. This keeps
+"hidden term centered on the same visible word" separate from "hidden term
+centered in a verse or span that discusses the term."
+
 ## Lock Discipline
 
 The run is invalid unless the preregistration document, relevance dictionary, and prompt files match the hashes declared by the protocol. If any prompt or dictionary changes after density output has been seen, the study needs a new preregistration. `run_crd_density.py` stores the preregistration hash in the manifest and refuses to overwrite completed runs unless `--force-reset` is supplied.
