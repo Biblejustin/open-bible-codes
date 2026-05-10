@@ -170,7 +170,10 @@ class ExtensionPairedControlsTests(unittest.TestCase):
         self.assertIn("All-control q", text)
         self.assertNotIn("filtered NT", text)
         self.assertIn("`יהוה` (YHWH; English: YHWH)", text)
-        self.assertIn("`יהוהאלהים` (yhwhlhym)", text)
+        self.assertIn(
+            "`יהוהאלהים` (yhwhlhym; English: hidden extension form involving YHWH)",
+            text,
+        )
 
     def test_prepare_targets_keeps_cross_corpus_overlaps(self) -> None:
         targets = [

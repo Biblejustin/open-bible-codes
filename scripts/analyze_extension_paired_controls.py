@@ -1200,11 +1200,24 @@ def write_markdown(
 
 def markdown_target_cell(row: dict[str, object]) -> str:
     term = display_term(str(row["term"]), english=str(row.get("concept", "")))
-    extended = display_term(str(row["extended_sequence"]))
+    extended_sequence = str(row["extended_sequence"])
+    extended = display_term(extended_sequence)
+    if "English:" not in extended:
+        extended = display_term(
+            extended_sequence,
+            english=extension_english_gloss(row),
+        )
     return (
         f"{term} {row['skip']} "
         f"{row['extension_type']} {extended}"
     )
+
+
+def extension_english_gloss(row: dict[str, object]) -> str:
+    concept = str(row.get("concept", "")).strip()
+    if concept:
+        return f"hidden extension form involving {concept}"
+    return "hidden extension sequence"
 
 
 def write_manifest(
