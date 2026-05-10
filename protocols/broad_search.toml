@@ -100,6 +100,7 @@ description = "Summarize broad skip 2..100 count outputs."
 argv = ["-m", "scripts.analyze_broad_search"]
 inputs = [
   "scripts/analyze_broad_search.py",
+  "els/term_display.py",
   "reports/broad_search/theological_terms_counts.csv",
   "reports/broad_search/modern_names_dates_counts.csv",
   "reports/broad_search/table_of_nations_counts.csv",

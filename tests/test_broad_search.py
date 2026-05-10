@@ -2,7 +2,13 @@ import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from scripts.analyze_broad_search import focus_counts, read_count_rows, read_label, ratio_cell
+from scripts.analyze_broad_search import (
+    focus_counts,
+    read_count_rows,
+    read_label,
+    ratio_cell,
+    write_markdown,
+)
 
 
 class BroadSearchTests(unittest.TestCase):
@@ -52,6 +58,59 @@ class BroadSearchTests(unittest.TestCase):
 
         self.assertEqual(rows[0]["term_language"], "hebrew")
         self.assertEqual(rows[0]["term"], "טראמפ")
+
+    def test_write_markdown_displays_original_language_terms(self) -> None:
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            counts_dir = root / "counts"
+            counts_dir.mkdir()
+            (counts_dir / "broad_search.manifest.json").write_text(
+                '{"min_skip":2,"max_skip":100,"direction":"both","term_sets":["set"]}',
+                encoding="utf-8",
+            )
+            out = root / "broad.md"
+
+            write_markdown(
+                out,
+                [
+                    {
+                        "term_set": "set",
+                        "corpus": "LXX",
+                        "counted_rows": 1,
+                        "zero_rows": 0,
+                        "total_hits": 7,
+                        "max_term_id": "isaac_g",
+                        "max_concept": "Isaac",
+                        "max_normalized_term": "ισαακ",
+                        "max_hit_count": 7,
+                    }
+                ],
+                [
+                    {
+                        "rank": 1,
+                        "term_set": "set",
+                        "corpus": "LXX",
+                        "term_id": "isaac_g",
+                        "concept": "Isaac",
+                        "normalized_term": "ισαακ",
+                        "normalized_length": 5,
+                        "hit_count": 7,
+                        "read": "screen only",
+                    }
+                ],
+                [],
+                [],
+                type(
+                    "Args",
+                    (),
+                    {
+                        "counts_dir": counts_dir,
+                        "min_top_length": 4,
+                    },
+                )(),
+            )
+
+            self.assertIn("`ισαακ` (Isaak; English: Isaac)", out.read_text(encoding="utf-8"))
 
 
 def write_count_csv(path: Path, term_id: str) -> None:

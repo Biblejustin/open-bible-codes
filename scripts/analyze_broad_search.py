@@ -11,6 +11,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from els import __version__
+from els.term_display import display_term
 
 
 COUNTS_DIR = Path("reports/broad_search")
@@ -280,6 +281,18 @@ def focus_row(row: dict[str, str]) -> dict[str, object]:
     }
 
 
+def display_count_term(row: dict[str, object]) -> str:
+    term_id = str(row.get("term_id") or row.get("max_term_id") or "")
+    normalized = str(row.get("normalized_term") or row.get("max_normalized_term") or "")
+    concept = str(row.get("concept") or row.get("max_concept") or "")
+    displayed = display_term(normalized, english=concept)
+    if term_id and displayed:
+        return f"`{term_id}` {displayed}"
+    if term_id:
+        return f"`{term_id}`"
+    return displayed
+
+
 def write_markdown(
     path: Path,
     summary_rows: list[dict[str, object]],
@@ -316,10 +329,7 @@ def write_markdown(
         "| --- | --- | ---: | ---: | ---: | --- |",
     ]
     for row in summary_rows:
-        max_cell = (
-            f"`{row['max_term_id']}` `{row['max_normalized_term']}` "
-            f"({row['max_hit_count']})"
-        )
+        max_cell = f"{display_count_term(row)} ({row['max_hit_count']})"
         lines.append(
             "| "
             + " | ".join(
@@ -351,7 +361,7 @@ def write_markdown(
                     str(row["rank"]),
                     str(row["term_set"]),
                     str(row["corpus"]),
-                    f"`{row['term_id']}` `{row['normalized_term']}`",
+                    display_count_term(row),
                     str(row["normalized_length"]),
                     str(row["hit_count"]),
                     str(row["read"]),
@@ -375,7 +385,7 @@ def write_markdown(
                 [
                     str(row["concept"]),
                     str(row["corpus"]),
-                    f"`{row['term_id']}` `{row['normalized_term']}`",
+                    display_count_term(row),
                     str(row["normalized_length"]),
                     str(row["hit_count"]),
                     str(row["read"]),
@@ -399,7 +409,7 @@ def write_markdown(
                 [
                     str(row["term_set"]),
                     str(row["corpus"]),
-                    f"`{row['term_id']}` `{row['normalized_term']}`",
+                    display_count_term(row),
                     str(row["baseline_hits_2_50"]),
                     str(row["run_hits"]),
                     str(row["delta_hits"]),
