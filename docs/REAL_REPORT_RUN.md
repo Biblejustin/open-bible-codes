@@ -113,9 +113,10 @@ It requires:
 The protocol is meant to be run from a committed state. During development, run
 the preflight directly with `--allow-dirty` only for local debugging.
 
-The final `real_report_summary` step is marked `always_run = true` so cached
-upstream reports can be reused while the generated summary still refreshes its
-current commit and timestamp metadata.
+The `preflight` and final `real_report_summary` steps are marked
+`always_run = true`. Cached upstream reports can still be reused, but every
+formal resume rechecks release hygiene and refreshes current commit/timestamp
+metadata.
 
 ## Candidate Taxonomy
 

@@ -7,6 +7,7 @@ progress_interval_seconds = 15
 [[steps]]
 id = "preflight"
 description = "Verify clean tree, source paths, and forbidden account guard before report assembly."
+always_run = true
 argv = ["-m", "scripts.preflight_real_report_run"]
 inputs = [
   "scripts/preflight_real_report_run.py",

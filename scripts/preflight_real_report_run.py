@@ -288,6 +288,7 @@ def main(argv: list[str] | None = None) -> int:
         "status": "failed" if failures else "passed",
         "output_path": str(args.out),
         "allow_dirty": args.allow_dirty,
+        "git_commit": git_commit(root),
         "git_status_lines": git_status,
         "git_remotes": remotes,
         "tracked_path_count": len(tracked_paths),
@@ -327,6 +328,11 @@ def required_paths(args: argparse.Namespace) -> list[str]:
 
 def git_status_short(root: Path) -> list[str]:
     return run_git(root, "status", "--short")
+
+
+def git_commit(root: Path) -> str:
+    rows = run_git(root, "rev-parse", "--short", "HEAD")
+    return rows[0] if rows else ""
 
 
 def git_remotes(root: Path) -> list[str]:

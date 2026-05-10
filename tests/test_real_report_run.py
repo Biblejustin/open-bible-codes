@@ -25,10 +25,11 @@ class RealReportRunTests(unittest.TestCase):
             (root / "ok.md").write_text("Biblejustin only", encoding="utf-8")
             self.assertEqual(preflight.scan_forbidden_terms(root), [])
 
-    def test_real_report_summary_is_not_resume_cached(self) -> None:
+    def test_real_report_preflight_and_summary_are_not_resume_cached(self) -> None:
         protocol = load_protocol("protocols/real_report_run.toml")
         steps_by_id = {step["id"]: step for step in protocol["steps"]}
 
+        self.assertTrue(steps_by_id["preflight"]["always_run"])
         self.assertTrue(steps_by_id["real_report_summary"]["always_run"])
         self.assertIn("wrr_audit_counts", steps_by_id)
         self.assertIn("scripts/release_hygiene.py", steps_by_id["preflight"]["inputs"])
@@ -176,6 +177,7 @@ class RealReportRunTests(unittest.TestCase):
             self.assertEqual(code, 0)
             payload = json.loads(out.read_text(encoding="utf-8"))
             self.assertEqual(payload["output_path"], str(out))
+            self.assertIn("git_commit", payload)
             self.assertIn("risky_tracked_paths", payload)
             self.assertIn("secret_pattern_hits", payload)
 
