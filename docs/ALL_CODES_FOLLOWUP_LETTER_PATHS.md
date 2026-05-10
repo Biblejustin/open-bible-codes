@@ -46,105 +46,105 @@ audit sheet, not an added statistical test.
 | 19 | english_screening | `hidden_path_only` | `heal` | KJV | `heal` | -2 | 1CH 10:11 | `Jabesh-gilead` | 1CH 10:11 |
 | 20 | english_screening | `hidden_path_only` | `cush` | KJV | `cush` | -2 | 1CH 10:4 | `these` | 1CH 10:4 |
 | 21 | english_screening | `hidden_path_only` | `bear` | KJV | `bear` | 2 | 1CH 11:8 | `repaired` | 1CH 11:8 |
-| 22 | greek_screening | `center_word_exact` | `νατο` | BYZ_NT | `νατο` | 8 | ROM 5:10 | `θανατου` | ROM 5:10 |
-| 22 | greek_screening | `center_word_exact` | `νατο` | SBLGNT | `νατο` | 8 | Rom 5:10 | `θανάτου` | Rom 5:10 |
-| 22 | greek_screening | `center_word_exact` | `νατο` | TCG_NT | `νατο` | 8 | ROM 5:10 | `θανάτου` | ROM 5:10 |
-| 22 | greek_screening | `center_word_exact` | `νατο` | TR_NT | `νατο` | 8 | ROM 5:10 | `θανάτου` | ROM 5:10 |
-| 23 | greek_screening | `center_word_exact` | `ναοσ` | BYZ_NT | `ναοσ` | -9 | MAT 23:17 | `ναοσ` | MAT 23:17 |
-| 23 | greek_screening | `center_word_exact` | `ναοσ` | SBLGNT | `ναοσ` | -9 | Matt 23:17 | `ναὸς` | Matt 23:17 |
-| 23 | greek_screening | `center_word_exact` | `ναοσ` | TCG_NT | `ναοσ` | -9 | MAT 23:17 | `ναὸς` | MAT 23:17 |
-| 23 | greek_screening | `center_word_exact` | `ναοσ` | TR_NT | `ναοσ` | -9 | MAT 23:17 | `ναὸς` | MAT 23:17 |
-| 24 | greek_screening | `center_word_exact` | `αιμα` | BYZ_NT | `αιμα` | -10 | REV 19:13 | `αιματι` | REV 19:13 |
-| 24 | greek_screening | `center_word_exact` | `αιμα` | SBLGNT | `αιμα` | -10 | Rev 19:13 | `αἵματι,` | Rev 19:13 |
-| 24 | greek_screening | `center_word_exact` | `αιμα` | TCG_NT | `αιμα` | -10 | REV 19:13 | `αἵματι,` | REV 19:13 |
-| 24 | greek_screening | `center_word_exact` | `αιμα` | TR_NT | `αιμα` | -10 | REV 19:13 | `αἵματι` | REV 19:13 |
-| 25 | greek_screening | `center_word_same_category` | `λουδ` | BYZ_NT | `λουδ` | -2 | PHP 2:7 | `δουλου` | PHP 2:7 |
-| 25 | greek_screening | `center_word_same_category` | `λουδ` | SBLGNT | `λουδ` | -2 | Phil 2:7 | `δούλου` | Phil 2:7 |
-| 25 | greek_screening | `center_word_same_category` | `λουδ` | TCG_NT | `λουδ` | -2 | PHP 2:7 | `δούλου` | PHP 2:7 |
-| 25 | greek_screening | `center_word_same_category` | `λουδ` | TR_NT | `λουδ` | -2 | PHP 2:7 | `δούλου` | PHP 2:7 |
-| 26 | greek_screening | `center_word_same_category` | `ιωυαν` | BYZ_NT | `ιωυαν` | -2 | 1PE 5:13 | `βαβυλωνι` | 1PE 5:13 |
-| 26 | greek_screening | `center_word_same_category` | `ιωυαν` | SBLGNT | `ιωυαν` | -2 | 1Pet 5:13 | `Βαβυλῶνι` | 1Pet 5:13 |
-| 26 | greek_screening | `center_word_same_category` | `ιωυαν` | TCG_NT | `ιωυαν` | -2 | 1PE 5:13 | `Βαβυλῶνι` | 1PE 5:13 |
-| 26 | greek_screening | `center_word_same_category` | `ιωυαν` | TR_NT | `ιωυαν` | -2 | 1PE 5:13 | `Βαβυλῶνι` | 1PE 5:13 |
-| 27 | greek_screening | `center_word_same_category` | `ευαλ` | BYZ_NT | `ευαλ` | -3 | 1TI 5:14 | `βουλομαι` | 1TI 5:14 |
-| 27 | greek_screening | `center_word_same_category` | `ευαλ` | SBLGNT | `ευαλ` | -3 | 1Tim 5:14 | `βούλομαι` | 1Tim 5:14 |
-| 27 | greek_screening | `center_word_same_category` | `ευαλ` | TCG_NT | `ευαλ` | -3 | 1TI 5:14 | `Βούλομαι` | 1TI 5:14 |
-| 27 | greek_screening | `center_word_same_category` | `ευαλ` | TR_NT | `ευαλ` | -3 | 1TI 5:14 | `Βούλομαι` | 1TI 5:14 |
-| 28 | greek_screening | `center_verse_exact` | `δασα` | BYZ_NT | `δασα` | -2 | ACT 9:11 | `ταρσεα` | ACT 9:11 |
-| 28 | greek_screening | `center_verse_exact` | `δασα` | SBLGNT | `δασα` | -2 | Acts 9:11 | `Ταρσέα,` | Acts 9:11 |
-| 28 | greek_screening | `center_verse_exact` | `δασα` | TCG_NT | `δασα` | -2 | ACT 9:11 | `Ταρσέα` | ACT 9:11 |
-| 28 | greek_screening | `center_verse_exact` | `δασα` | TR_NT | `δασα` | -2 | ACT 9:11 | `Ταρσέα` | ACT 9:11 |
-| 29 | greek_screening | `center_verse_exact` | `αιμα` | BYZ_NT | `αιμα` | 2 | MAT 13:55 | `μαριαμ` | MAT 13:55 |
-| 29 | greek_screening | `center_verse_exact` | `αιμα` | SBLGNT | `αιμα` | 2 | Matt 13:55 | `Μαριὰμ` | Matt 13:55 |
-| 29 | greek_screening | `center_verse_exact` | `αιμα` | TCG_NT | `αιμα` | 2 | MAT 13:55 | `Μαριάμ,` | MAT 13:55 |
-| 29 | greek_screening | `center_verse_exact` | `αιμα` | TR_NT | `αιμα` | 2 | MAT 13:55 | `Μαριάμ` | MAT 13:55 |
-| 30 | greek_screening | `center_verse_exact` | `αιμα` | BYZ_NT | `αιμα` | 2 | MAT 13:55 | `μαριαμ` | MAT 13:55 |
-| 30 | greek_screening | `center_verse_exact` | `αιμα` | SBLGNT | `αιμα` | 2 | Matt 13:55 | `Μαριὰμ` | Matt 13:55 |
-| 30 | greek_screening | `center_verse_exact` | `αιμα` | TCG_NT | `αιμα` | 2 | MAT 13:55 | `Μαριάμ,` | MAT 13:55 |
-| 30 | greek_screening | `center_verse_exact` | `αιμα` | TR_NT | `αιμα` | 2 | MAT 13:55 | `Μαριάμ` | MAT 13:55 |
-| 31 | greek_screening | `center_verse_same_category` | `ναοσ` | BYZ_NT | `ναοσ` | 2 | 1CO 10:16 | `του` | 1CO 10:16 |
-| 31 | greek_screening | `center_verse_same_category` | `ναοσ` | SBLGNT | `ναοσ` | 2 | 1Cor 10:16 | `τοῦ` | 1Cor 10:16 |
-| 31 | greek_screening | `center_verse_same_category` | `ναοσ` | TCG_NT | `ναοσ` | 2 | 1CO 10:16 | `τοῦ` | 1CO 10:16 |
-| 31 | greek_screening | `center_verse_same_category` | `ναοσ` | TR_NT | `ναοσ` | 2 | 1CO 10:16 | `τοῦ` | 1CO 10:16 |
-| 32 | greek_screening | `center_verse_same_category` | `κινα` | BYZ_NT | `κινα` | 2 | 1JN 2:1 | `δικαιον` | 1JN 2:1; 1JN 2:2 |
-| 32 | greek_screening | `center_verse_same_category` | `κινα` | SBLGNT | `κινα` | 2 | 1John 2:1 | `δίκαιον,` | 1John 2:1; 1John 2:2 |
-| 32 | greek_screening | `center_verse_same_category` | `κινα` | TCG_NT | `κινα` | 2 | 1JN 2:1 | `δίκαιον.` | 1JN 2:1; 1JN 2:2 |
-| 32 | greek_screening | `center_verse_same_category` | `κινα` | TR_NT | `κινα` | 2 | 1JN 2:1 | `δίκαιον` | 1JN 2:1; 1JN 2:2 |
-| 33 | greek_screening | `center_verse_same_category` | `ελκη` | BYZ_NT | `ελκη` | 2 | 1PE 5:13 | `συνεκλεκτη` | 1PE 5:13 |
-| 33 | greek_screening | `center_verse_same_category` | `ελκη` | SBLGNT | `ελκη` | 2 | 1Pet 5:13 | `συνεκλεκτὴ` | 1Pet 5:13 |
-| 33 | greek_screening | `center_verse_same_category` | `ελκη` | TCG_NT | `ελκη` | 2 | 1PE 5:13 | `συνεκλεκτὴ` | 1PE 5:13 |
-| 33 | greek_screening | `center_verse_same_category` | `ελκη` | TR_NT | `ελκη` | 2 | 1PE 5:13 | `συνεκλεκτή` | 1PE 5:13 |
-| 34 | greek_screening | `span_exact` | `θεοσ` | BYZ_NT | `θεοσ` | 2 | ROM 14:2 | `εσθιει` | ROM 14:2; ROM 14:3 |
-| 34 | greek_screening | `span_exact` | `θεοσ` | SBLGNT | `θεοσ` | 2 | Rom 14:2 | `ἐσθίει.` | Rom 14:2; Rom 14:3 |
-| 34 | greek_screening | `span_exact` | `θεοσ` | TCG_NT | `θεοσ` | 2 | ROM 14:2 | `ἐσθίει.` | ROM 14:2; ROM 14:3 |
-| 34 | greek_screening | `span_exact` | `θεοσ` | TR_NT | `θεοσ` | 2 | ROM 14:2 | `ἐσθίει` | ROM 14:2; ROM 14:3 |
-| 35 | greek_screening | `span_exact` | `ιραν` | BYZ_NT | `ιραν` | -4 | MRK 14:48 | `αποκριθεισ` | MRK 14:48; MRK 14:47 |
-| 35 | greek_screening | `span_exact` | `ιραν` | SBLGNT | `ιραν` | -4 | Mark 14:48 | `ἀποκριθεὶς` | Mark 14:48; Mark 14:47 |
-| 35 | greek_screening | `span_exact` | `ιραν` | TCG_NT | `ιραν` | -4 | MRK 14:48 | `ἀποκριθεὶς` | MRK 14:48; MRK 14:47 |
-| 35 | greek_screening | `span_exact` | `ιραν` | TR_NT | `ιραν` | -4 | MRK 14:48 | `ἀποκριθεὶς` | MRK 14:48; MRK 14:47 |
-| 36 | greek_screening | `span_exact` | `νατο` | BYZ_NT | `νατο` | 7 | 1CO 1:27 | `μωρα` | 1CO 1:26; 1CO 1:27 |
-| 36 | greek_screening | `span_exact` | `νατο` | SBLGNT | `νατο` | 7 | 1Cor 1:27 | `μωρὰ` | 1Cor 1:26; 1Cor 1:27 |
-| 36 | greek_screening | `span_exact` | `νατο` | TCG_NT | `νατο` | 7 | 1CO 1:27 | `μωρὰ` | 1CO 1:26; 1CO 1:27 |
-| 36 | greek_screening | `span_exact` | `νατο` | TR_NT | `νατο` | 7 | 1CO 1:27 | `μωρὰ` | 1CO 1:26; 1CO 1:27 |
-| 37 | greek_screening | `span_same_category` | `σαλα` | BYZ_NT | `σαλα` | 2 | ACT 7:42 | `ισραηλ` | ACT 7:42; ACT 7:43 |
-| 37 | greek_screening | `span_same_category` | `σαλα` | SBLGNT | `σαλα` | 2 | Acts 7:42 | `Ἰσραήλ;` | Acts 7:42; Acts 7:43 |
-| 37 | greek_screening | `span_same_category` | `σαλα` | TCG_NT | `σαλα` | 2 | ACT 7:42 | `Ἰσραήλ;` | ACT 7:42; ACT 7:43 |
-| 37 | greek_screening | `span_same_category` | `σαλα` | TR_NT | `σαλα` | 2 | ACT 7:42 | `Ἰσραήλ` | ACT 7:42; ACT 7:43 |
-| 38 | greek_screening | `span_same_category` | `αδαμ` | BYZ_NT | `αδαμ` | 2 | GAL 4:27 | `ανδρα` | GAL 4:27; GAL 4:28 |
-| 38 | greek_screening | `span_same_category` | `αδαμ` | SBLGNT | `αδαμ` | 2 | Gal 4:27 | `ἄνδρα.` | Gal 4:27; Gal 4:28 |
-| 38 | greek_screening | `span_same_category` | `αδαμ` | TCG_NT | `αδαμ` | 2 | GAL 4:27 | `ἄνδρα.` | GAL 4:27; GAL 4:28 |
-| 38 | greek_screening | `span_same_category` | `αδαμ` | TR_NT | `αδαμ` | 2 | GAL 4:27 | `ἄνδρα` | GAL 4:27; GAL 4:28 |
-| 39 | greek_screening | `span_same_category` | `γαμερ` | BYZ_NT | `γαμερ` | -3 | 2CO 10:3 | `στρατευομεθα` | 2CO 10:4; 2CO 10:3 |
-| 39 | greek_screening | `span_same_category` | `γαμερ` | SBLGNT | `γαμερ` | -3 | 2Cor 10:3 | `στρατευόμεθα—` | 2Cor 10:4; 2Cor 10:3 |
-| 39 | greek_screening | `span_same_category` | `γαμερ` | TCG_NT | `γαμερ` | -3 | 2CO 10:3 | `στρατευόμεθα—` | 2CO 10:4; 2CO 10:3 |
-| 39 | greek_screening | `span_same_category` | `γαμερ` | TR_NT | `γαμερ` | -3 | 2CO 10:3 | `στρατευόμεθα` | 2CO 10:4; 2CO 10:3 |
-| 40 | greek_screening | `hidden_path_only` | `σαλα` | BYZ_NT | `σαλα` | 2 | 1CO 10:18 | `ισραηλ` | 1CO 10:18 |
-| 40 | greek_screening | `hidden_path_only` | `σαλα` | SBLGNT | `σαλα` | 2 | 1Cor 10:18 | `Ἰσραὴλ` | 1Cor 10:18 |
-| 40 | greek_screening | `hidden_path_only` | `σαλα` | TCG_NT | `σαλα` | 2 | 1CO 10:18 | `Ἰσραὴλ` | 1CO 10:18 |
-| 40 | greek_screening | `hidden_path_only` | `σαλα` | TR_NT | `σαλα` | 2 | 1CO 10:18 | `Ἰσραὴλ` | 1CO 10:18 |
-| 41 | greek_screening | `hidden_path_only` | `αμην` | BYZ_NT | `αμην` | 2 | 1CO 1:10 | `μη` | 1CO 1:10 |
-| 41 | greek_screening | `hidden_path_only` | `αμην` | SBLGNT | `αμην` | 2 | 1Cor 1:10 | `μὴ` | 1Cor 1:10 |
-| 41 | greek_screening | `hidden_path_only` | `αμην` | TCG_NT | `αμην` | 2 | 1CO 1:10 | `μὴ` | 1CO 1:10 |
-| 41 | greek_screening | `hidden_path_only` | `αμην` | TR_NT | `αμην` | 2 | 1CO 1:10 | `μὴ` | 1CO 1:10 |
-| 42 | greek_screening | `hidden_path_only` | `υιοσ` | BYZ_NT | `υιοσ` | 2 | 1CO 5:12 | `τουσ` | 1CO 5:12 |
-| 42 | greek_screening | `hidden_path_only` | `υιοσ` | SBLGNT | `υιοσ` | 2 | 1Cor 5:12 | `τοὺς` | 1Cor 5:12 |
-| 42 | greek_screening | `hidden_path_only` | `υιοσ` | TCG_NT | `υιοσ` | 2 | 1CO 5:12 | `τοὺς` | 1CO 5:12 |
-| 42 | greek_screening | `hidden_path_only` | `υιοσ` | TR_NT | `υιοσ` | 2 | 1CO 5:12 | `τοὺς` | 1CO 5:12 |
-| 43 | hebrew_screening | `center_word_exact` | `שממה` | EBIBLE_WLC | `שממה` | 2 | MIC 1:7 | `שְׁמָמָ֑ה` | MIC 1:7 |
-| 43 | hebrew_screening | `center_word_exact` | `שממה` | MAM | `שממה` | 2 | Mic 1:7 | `שְׁמָמָ֑ה` | Mic 1:7 |
-| 43 | hebrew_screening | `center_word_exact` | `שממה` | MT_WLC | `שממה` | 2 | Mic 1:7 | `שְׁמָמָ֑ה` | Mic 1:7 |
-| 43 | hebrew_screening | `center_word_exact` | `שממה` | UHB | `שממה` | 2 | MIC 1:7 | `שְׁמָמָ֑ה` | MIC 1:7 |
-| 43 | hebrew_screening | `center_word_exact` | `שממה` | UXLC | `שממה` | 2 | Mic 1:7 | `שְׁמָמָ֑ה` | Mic 1:7 |
-| 44 | hebrew_screening | `center_word_exact` | `יהוה` | EBIBLE_WLC | `יהוה` | 3 | 1CH 26:27 | `יְהוָֽה׃` | 1CH 26:27; 1CH 26:28 |
-| 44 | hebrew_screening | `center_word_exact` | `יהוה` | MAM | `יהוה` | 3 | 1 Chr 26:27 | `יְהֹוָֽה׃` | 1 Chr 26:27; 1 Chr 26:28 |
-| 44 | hebrew_screening | `center_word_exact` | `יהוה` | MT_WLC | `יהוה` | 3 | 1Chr 26:27 | `יְהוָֽה` | 1Chr 26:27; 1Chr 26:28 |
-| 44 | hebrew_screening | `center_word_exact` | `יהוה` | UHB | `יהוה` | 3 | 1CH 26:27 | `יְהוָֽה׃` | 1CH 26:27; 1CH 26:28 |
-| 44 | hebrew_screening | `center_word_exact` | `יהוה` | UXLC | `יהוה` | 3 | 1 Chr 26:27 | `יְהוָֽה׃` | 1 Chr 26:27; 1 Chr 26:28 |
-| 45 | hebrew_screening | `center_word_exact` | `יהוה` | EBIBLE_WLC | `יהוה` | 3 | 1CH 28:20 | `בֵּית־יְהוָֽה׃` | 1CH 28:20; 1CH 28:21 |
-| 45 | hebrew_screening | `center_word_exact` | `יהוה` | MAM | `יהוה` | 3 | 1 Chr 28:20 | `בֵּית־יְהֹוָֽה׃` | 1 Chr 28:20; 1 Chr 28:21 |
-| 45 | hebrew_screening | `center_word_exact` | `יהוה` | MT_WLC | `יהוה` | 3 | 1Chr 28:20 | `יְהוָֽה` | 1Chr 28:20; 1Chr 28:21 |
-| 45 | hebrew_screening | `center_word_exact` | `יהוה` | UHB | `יהוה` | 3 | 1CH 28:20 | `בֵּית־יְהוָֽה׃` | 1CH 28:20; 1CH 28:21 |
-| 45 | hebrew_screening | `center_word_exact` | `יהוה` | UXLC | `יהוה` | 3 | 1 Chr 28:20 | `יְהוָֽה׃` | 1 Chr 28:20; 1 Chr 28:21 |
+| 22 | greek_screening | `center_word_exact` | `νατο` (nato; English: NATO) | BYZ_NT | `νατο` (nato; English: NATO) | 8 | ROM 5:10 | `θανατου` (thanatou) | ROM 5:10 |
+| 22 | greek_screening | `center_word_exact` | `νατο` (nato; English: NATO) | SBLGNT | `νατο` (nato; English: NATO) | 8 | Rom 5:10 | `θανάτου` (thanatou) | Rom 5:10 |
+| 22 | greek_screening | `center_word_exact` | `νατο` (nato; English: NATO) | TCG_NT | `νατο` (nato; English: NATO) | 8 | ROM 5:10 | `θανάτου` (thanatou) | ROM 5:10 |
+| 22 | greek_screening | `center_word_exact` | `νατο` (nato; English: NATO) | TR_NT | `νατο` (nato; English: NATO) | 8 | ROM 5:10 | `θανάτου` (thanatou) | ROM 5:10 |
+| 23 | greek_screening | `center_word_exact` | `ναοσ` (naos; English: Temple) | BYZ_NT | `ναοσ` (naos; English: Temple) | -9 | MAT 23:17 | `ναοσ` (naos) | MAT 23:17 |
+| 23 | greek_screening | `center_word_exact` | `ναοσ` (naos; English: Temple) | SBLGNT | `ναοσ` (naos; English: Temple) | -9 | Matt 23:17 | `ναὸς` (naos) | Matt 23:17 |
+| 23 | greek_screening | `center_word_exact` | `ναοσ` (naos; English: Temple) | TCG_NT | `ναοσ` (naos; English: Temple) | -9 | MAT 23:17 | `ναὸς` (naos) | MAT 23:17 |
+| 23 | greek_screening | `center_word_exact` | `ναοσ` (naos; English: Temple) | TR_NT | `ναοσ` (naos; English: Temple) | -9 | MAT 23:17 | `ναὸς` (naos) | MAT 23:17 |
+| 24 | greek_screening | `center_word_exact` | `αιμα` (aima; English: Blood) | BYZ_NT | `αιμα` (aima; English: Blood) | -10 | REV 19:13 | `αιματι` (aimati) | REV 19:13 |
+| 24 | greek_screening | `center_word_exact` | `αιμα` (aima; English: Blood) | SBLGNT | `αιμα` (aima; English: Blood) | -10 | Rev 19:13 | `αἵματι,` (aimati) | Rev 19:13 |
+| 24 | greek_screening | `center_word_exact` | `αιμα` (aima; English: Blood) | TCG_NT | `αιμα` (aima; English: Blood) | -10 | REV 19:13 | `αἵματι,` (aimati) | REV 19:13 |
+| 24 | greek_screening | `center_word_exact` | `αιμα` (aima; English: Blood) | TR_NT | `αιμα` (aima; English: Blood) | -10 | REV 19:13 | `αἵματι` (aimati) | REV 19:13 |
+| 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | BYZ_NT | `λουδ` (loud; English: Lud) | -2 | PHP 2:7 | `δουλου` (doulou) | PHP 2:7 |
+| 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | SBLGNT | `λουδ` (loud; English: Lud) | -2 | Phil 2:7 | `δούλου` (doulou) | Phil 2:7 |
+| 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | TCG_NT | `λουδ` (loud; English: Lud) | -2 | PHP 2:7 | `δούλου` (doulou) | PHP 2:7 |
+| 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | TR_NT | `λουδ` (loud; English: Lud) | -2 | PHP 2:7 | `δούλου` (doulou) | PHP 2:7 |
+| 26 | greek_screening | `center_word_same_category` | `ιωυαν` (iouan; English: Javan) | BYZ_NT | `ιωυαν` (iouan; English: Javan) | -2 | 1PE 5:13 | `βαβυλωνι` (babuloni) | 1PE 5:13 |
+| 26 | greek_screening | `center_word_same_category` | `ιωυαν` (iouan; English: Javan) | SBLGNT | `ιωυαν` (iouan; English: Javan) | -2 | 1Pet 5:13 | `Βαβυλῶνι` (babuloni) | 1Pet 5:13 |
+| 26 | greek_screening | `center_word_same_category` | `ιωυαν` (iouan; English: Javan) | TCG_NT | `ιωυαν` (iouan; English: Javan) | -2 | 1PE 5:13 | `Βαβυλῶνι` (babuloni) | 1PE 5:13 |
+| 26 | greek_screening | `center_word_same_category` | `ιωυαν` (iouan; English: Javan) | TR_NT | `ιωυαν` (iouan; English: Javan) | -2 | 1PE 5:13 | `Βαβυλῶνι` (babuloni) | 1PE 5:13 |
+| 27 | greek_screening | `center_word_same_category` | `ευαλ` (eual; English: Obal) | BYZ_NT | `ευαλ` (eual; English: Obal) | -3 | 1TI 5:14 | `βουλομαι` (boulomai) | 1TI 5:14 |
+| 27 | greek_screening | `center_word_same_category` | `ευαλ` (eual; English: Obal) | SBLGNT | `ευαλ` (eual; English: Obal) | -3 | 1Tim 5:14 | `βούλομαι` (boulomai) | 1Tim 5:14 |
+| 27 | greek_screening | `center_word_same_category` | `ευαλ` (eual; English: Obal) | TCG_NT | `ευαλ` (eual; English: Obal) | -3 | 1TI 5:14 | `Βούλομαι` (boulomai) | 1TI 5:14 |
+| 27 | greek_screening | `center_word_same_category` | `ευαλ` (eual; English: Obal) | TR_NT | `ευαλ` (eual; English: Obal) | -3 | 1TI 5:14 | `Βούλομαι` (boulomai) | 1TI 5:14 |
+| 28 | greek_screening | `center_verse_exact` | `δασα` (dasa; English: Lasha) | BYZ_NT | `δασα` (dasa; English: Lasha) | -2 | ACT 9:11 | `ταρσεα` (tarsea) | ACT 9:11 |
+| 28 | greek_screening | `center_verse_exact` | `δασα` (dasa; English: Lasha) | SBLGNT | `δασα` (dasa; English: Lasha) | -2 | Acts 9:11 | `Ταρσέα,` (tarsea) | Acts 9:11 |
+| 28 | greek_screening | `center_verse_exact` | `δασα` (dasa; English: Lasha) | TCG_NT | `δασα` (dasa; English: Lasha) | -2 | ACT 9:11 | `Ταρσέα` (tarsea) | ACT 9:11 |
+| 28 | greek_screening | `center_verse_exact` | `δασα` (dasa; English: Lasha) | TR_NT | `δασα` (dasa; English: Lasha) | -2 | ACT 9:11 | `Ταρσέα` (tarsea) | ACT 9:11 |
+| 29 | greek_screening | `center_verse_exact` | `αιμα` (aima; English: Blood) | BYZ_NT | `αιμα` (aima; English: Blood) | 2 | MAT 13:55 | `μαριαμ` (mariam) | MAT 13:55 |
+| 29 | greek_screening | `center_verse_exact` | `αιμα` (aima; English: Blood) | SBLGNT | `αιμα` (aima; English: Blood) | 2 | Matt 13:55 | `Μαριὰμ` (mariam) | Matt 13:55 |
+| 29 | greek_screening | `center_verse_exact` | `αιμα` (aima; English: Blood) | TCG_NT | `αιμα` (aima; English: Blood) | 2 | MAT 13:55 | `Μαριάμ,` (mariam) | MAT 13:55 |
+| 29 | greek_screening | `center_verse_exact` | `αιμα` (aima; English: Blood) | TR_NT | `αιμα` (aima; English: Blood) | 2 | MAT 13:55 | `Μαριάμ` (mariam) | MAT 13:55 |
+| 30 | greek_screening | `center_verse_exact` | `αιμα` (aima; English: Blood) | BYZ_NT | `αιμα` (aima; English: Blood) | 2 | MAT 13:55 | `μαριαμ` (mariam) | MAT 13:55 |
+| 30 | greek_screening | `center_verse_exact` | `αιμα` (aima; English: Blood) | SBLGNT | `αιμα` (aima; English: Blood) | 2 | Matt 13:55 | `Μαριὰμ` (mariam) | Matt 13:55 |
+| 30 | greek_screening | `center_verse_exact` | `αιμα` (aima; English: Blood) | TCG_NT | `αιμα` (aima; English: Blood) | 2 | MAT 13:55 | `Μαριάμ,` (mariam) | MAT 13:55 |
+| 30 | greek_screening | `center_verse_exact` | `αιμα` (aima; English: Blood) | TR_NT | `αιμα` (aima; English: Blood) | 2 | MAT 13:55 | `Μαριάμ` (mariam) | MAT 13:55 |
+| 31 | greek_screening | `center_verse_same_category` | `ναοσ` (naos; English: Temple) | BYZ_NT | `ναοσ` (naos; English: Temple) | 2 | 1CO 10:16 | `του` (tou) | 1CO 10:16 |
+| 31 | greek_screening | `center_verse_same_category` | `ναοσ` (naos; English: Temple) | SBLGNT | `ναοσ` (naos; English: Temple) | 2 | 1Cor 10:16 | `τοῦ` (tou) | 1Cor 10:16 |
+| 31 | greek_screening | `center_verse_same_category` | `ναοσ` (naos; English: Temple) | TCG_NT | `ναοσ` (naos; English: Temple) | 2 | 1CO 10:16 | `τοῦ` (tou) | 1CO 10:16 |
+| 31 | greek_screening | `center_verse_same_category` | `ναοσ` (naos; English: Temple) | TR_NT | `ναοσ` (naos; English: Temple) | 2 | 1CO 10:16 | `τοῦ` (tou) | 1CO 10:16 |
+| 32 | greek_screening | `center_verse_same_category` | `κινα` (kina; English: China) | BYZ_NT | `κινα` (kina; English: China) | 2 | 1JN 2:1 | `δικαιον` (dikaion) | 1JN 2:1; 1JN 2:2 |
+| 32 | greek_screening | `center_verse_same_category` | `κινα` (kina; English: China) | SBLGNT | `κινα` (kina; English: China) | 2 | 1John 2:1 | `δίκαιον,` (dikaion) | 1John 2:1; 1John 2:2 |
+| 32 | greek_screening | `center_verse_same_category` | `κινα` (kina; English: China) | TCG_NT | `κινα` (kina; English: China) | 2 | 1JN 2:1 | `δίκαιον.` (dikaion) | 1JN 2:1; 1JN 2:2 |
+| 32 | greek_screening | `center_verse_same_category` | `κινα` (kina; English: China) | TR_NT | `κινα` (kina; English: China) | 2 | 1JN 2:1 | `δίκαιον` (dikaion) | 1JN 2:1; 1JN 2:2 |
+| 33 | greek_screening | `center_verse_same_category` | `ελκη` (elke; English: Boils) | BYZ_NT | `ελκη` (elke; English: Boils) | 2 | 1PE 5:13 | `συνεκλεκτη` (suneklekte) | 1PE 5:13 |
+| 33 | greek_screening | `center_verse_same_category` | `ελκη` (elke; English: Boils) | SBLGNT | `ελκη` (elke; English: Boils) | 2 | 1Pet 5:13 | `συνεκλεκτὴ` (suneklekte) | 1Pet 5:13 |
+| 33 | greek_screening | `center_verse_same_category` | `ελκη` (elke; English: Boils) | TCG_NT | `ελκη` (elke; English: Boils) | 2 | 1PE 5:13 | `συνεκλεκτὴ` (suneklekte) | 1PE 5:13 |
+| 33 | greek_screening | `center_verse_same_category` | `ελκη` (elke; English: Boils) | TR_NT | `ελκη` (elke; English: Boils) | 2 | 1PE 5:13 | `συνεκλεκτή` (suneklekte) | 1PE 5:13 |
+| 34 | greek_screening | `span_exact` | `θεοσ` (theos; English: God) | BYZ_NT | `θεοσ` (theos; English: God) | 2 | ROM 14:2 | `εσθιει` (esthiei) | ROM 14:2; ROM 14:3 |
+| 34 | greek_screening | `span_exact` | `θεοσ` (theos; English: God) | SBLGNT | `θεοσ` (theos; English: God) | 2 | Rom 14:2 | `ἐσθίει.` (esthiei) | Rom 14:2; Rom 14:3 |
+| 34 | greek_screening | `span_exact` | `θεοσ` (theos; English: God) | TCG_NT | `θεοσ` (theos; English: God) | 2 | ROM 14:2 | `ἐσθίει.` (esthiei) | ROM 14:2; ROM 14:3 |
+| 34 | greek_screening | `span_exact` | `θεοσ` (theos; English: God) | TR_NT | `θεοσ` (theos; English: God) | 2 | ROM 14:2 | `ἐσθίει` (esthiei) | ROM 14:2; ROM 14:3 |
+| 35 | greek_screening | `span_exact` | `ιραν` (iran; English: Iran) | BYZ_NT | `ιραν` (iran; English: Iran) | -4 | MRK 14:48 | `αποκριθεισ` (apokritheis) | MRK 14:48; MRK 14:47 |
+| 35 | greek_screening | `span_exact` | `ιραν` (iran; English: Iran) | SBLGNT | `ιραν` (iran; English: Iran) | -4 | Mark 14:48 | `ἀποκριθεὶς` (apokritheis) | Mark 14:48; Mark 14:47 |
+| 35 | greek_screening | `span_exact` | `ιραν` (iran; English: Iran) | TCG_NT | `ιραν` (iran; English: Iran) | -4 | MRK 14:48 | `ἀποκριθεὶς` (apokritheis) | MRK 14:48; MRK 14:47 |
+| 35 | greek_screening | `span_exact` | `ιραν` (iran; English: Iran) | TR_NT | `ιραν` (iran; English: Iran) | -4 | MRK 14:48 | `ἀποκριθεὶς` (apokritheis) | MRK 14:48; MRK 14:47 |
+| 36 | greek_screening | `span_exact` | `νατο` (nato; English: NATO) | BYZ_NT | `νατο` (nato; English: NATO) | 7 | 1CO 1:27 | `μωρα` (mora) | 1CO 1:26; 1CO 1:27 |
+| 36 | greek_screening | `span_exact` | `νατο` (nato; English: NATO) | SBLGNT | `νατο` (nato; English: NATO) | 7 | 1Cor 1:27 | `μωρὰ` (mora) | 1Cor 1:26; 1Cor 1:27 |
+| 36 | greek_screening | `span_exact` | `νατο` (nato; English: NATO) | TCG_NT | `νατο` (nato; English: NATO) | 7 | 1CO 1:27 | `μωρὰ` (mora) | 1CO 1:26; 1CO 1:27 |
+| 36 | greek_screening | `span_exact` | `νατο` (nato; English: NATO) | TR_NT | `νατο` (nato; English: NATO) | 7 | 1CO 1:27 | `μωρὰ` (mora) | 1CO 1:26; 1CO 1:27 |
+| 37 | greek_screening | `span_same_category` | `σαλα` (sala; English: Shelah) | BYZ_NT | `σαλα` (sala; English: Shelah) | 2 | ACT 7:42 | `ισραηλ` (israel) | ACT 7:42; ACT 7:43 |
+| 37 | greek_screening | `span_same_category` | `σαλα` (sala; English: Shelah) | SBLGNT | `σαλα` (sala; English: Shelah) | 2 | Acts 7:42 | `Ἰσραήλ;` (israel) | Acts 7:42; Acts 7:43 |
+| 37 | greek_screening | `span_same_category` | `σαλα` (sala; English: Shelah) | TCG_NT | `σαλα` (sala; English: Shelah) | 2 | ACT 7:42 | `Ἰσραήλ;` (israel) | ACT 7:42; ACT 7:43 |
+| 37 | greek_screening | `span_same_category` | `σαλα` (sala; English: Shelah) | TR_NT | `σαλα` (sala; English: Shelah) | 2 | ACT 7:42 | `Ἰσραήλ` (israel) | ACT 7:42; ACT 7:43 |
+| 38 | greek_screening | `span_same_category` | `αδαμ` (adam; English: Adam) | BYZ_NT | `αδαμ` (adam; English: Adam) | 2 | GAL 4:27 | `ανδρα` (andra) | GAL 4:27; GAL 4:28 |
+| 38 | greek_screening | `span_same_category` | `αδαμ` (adam; English: Adam) | SBLGNT | `αδαμ` (adam; English: Adam) | 2 | Gal 4:27 | `ἄνδρα.` (andra) | Gal 4:27; Gal 4:28 |
+| 38 | greek_screening | `span_same_category` | `αδαμ` (adam; English: Adam) | TCG_NT | `αδαμ` (adam; English: Adam) | 2 | GAL 4:27 | `ἄνδρα.` (andra) | GAL 4:27; GAL 4:28 |
+| 38 | greek_screening | `span_same_category` | `αδαμ` (adam; English: Adam) | TR_NT | `αδαμ` (adam; English: Adam) | 2 | GAL 4:27 | `ἄνδρα` (andra) | GAL 4:27; GAL 4:28 |
+| 39 | greek_screening | `span_same_category` | `γαμερ` (gamer; English: Gomer) | BYZ_NT | `γαμερ` (gamer; English: Gomer) | -3 | 2CO 10:3 | `στρατευομεθα` (strateuometha) | 2CO 10:4; 2CO 10:3 |
+| 39 | greek_screening | `span_same_category` | `γαμερ` (gamer; English: Gomer) | SBLGNT | `γαμερ` (gamer; English: Gomer) | -3 | 2Cor 10:3 | `στρατευόμεθα—` (strateuometha) | 2Cor 10:4; 2Cor 10:3 |
+| 39 | greek_screening | `span_same_category` | `γαμερ` (gamer; English: Gomer) | TCG_NT | `γαμερ` (gamer; English: Gomer) | -3 | 2CO 10:3 | `στρατευόμεθα—` (strateuometha) | 2CO 10:4; 2CO 10:3 |
+| 39 | greek_screening | `span_same_category` | `γαμερ` (gamer; English: Gomer) | TR_NT | `γαμερ` (gamer; English: Gomer) | -3 | 2CO 10:3 | `στρατευόμεθα` (strateuometha) | 2CO 10:4; 2CO 10:3 |
+| 40 | greek_screening | `hidden_path_only` | `σαλα` (sala; English: Shelah) | BYZ_NT | `σαλα` (sala; English: Shelah) | 2 | 1CO 10:18 | `ισραηλ` (israel) | 1CO 10:18 |
+| 40 | greek_screening | `hidden_path_only` | `σαλα` (sala; English: Shelah) | SBLGNT | `σαλα` (sala; English: Shelah) | 2 | 1Cor 10:18 | `Ἰσραὴλ` (israel) | 1Cor 10:18 |
+| 40 | greek_screening | `hidden_path_only` | `σαλα` (sala; English: Shelah) | TCG_NT | `σαλα` (sala; English: Shelah) | 2 | 1CO 10:18 | `Ἰσραὴλ` (israel) | 1CO 10:18 |
+| 40 | greek_screening | `hidden_path_only` | `σαλα` (sala; English: Shelah) | TR_NT | `σαλα` (sala; English: Shelah) | 2 | 1CO 10:18 | `Ἰσραὴλ` (israel) | 1CO 10:18 |
+| 41 | greek_screening | `hidden_path_only` | `αμην` (amen; English: Amen) | BYZ_NT | `αμην` (amen; English: Amen) | 2 | 1CO 1:10 | `μη` (me) | 1CO 1:10 |
+| 41 | greek_screening | `hidden_path_only` | `αμην` (amen; English: Amen) | SBLGNT | `αμην` (amen; English: Amen) | 2 | 1Cor 1:10 | `μὴ` (me) | 1Cor 1:10 |
+| 41 | greek_screening | `hidden_path_only` | `αμην` (amen; English: Amen) | TCG_NT | `αμην` (amen; English: Amen) | 2 | 1CO 1:10 | `μὴ` (me) | 1CO 1:10 |
+| 41 | greek_screening | `hidden_path_only` | `αμην` (amen; English: Amen) | TR_NT | `αμην` (amen; English: Amen) | 2 | 1CO 1:10 | `μὴ` (me) | 1CO 1:10 |
+| 42 | greek_screening | `hidden_path_only` | `υιοσ` (uios; English: Son) | BYZ_NT | `υιοσ` (uios; English: Son) | 2 | 1CO 5:12 | `τουσ` (tous) | 1CO 5:12 |
+| 42 | greek_screening | `hidden_path_only` | `υιοσ` (uios; English: Son) | SBLGNT | `υιοσ` (uios; English: Son) | 2 | 1Cor 5:12 | `τοὺς` (tous) | 1Cor 5:12 |
+| 42 | greek_screening | `hidden_path_only` | `υιοσ` (uios; English: Son) | TCG_NT | `υιοσ` (uios; English: Son) | 2 | 1CO 5:12 | `τοὺς` (tous) | 1CO 5:12 |
+| 42 | greek_screening | `hidden_path_only` | `υιοσ` (uios; English: Son) | TR_NT | `υιοσ` (uios; English: Son) | 2 | 1CO 5:12 | `τοὺς` (tous) | 1CO 5:12 |
+| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | EBIBLE_WLC | `שממה` (shmmh; English: Desolation) | 2 | MIC 1:7 | `שְׁמָמָ֑ה` (shmmh) | MIC 1:7 |
+| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | MAM | `שממה` (shmmh; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shmmh) | Mic 1:7 |
+| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | MT_WLC | `שממה` (shmmh; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shmmh) | Mic 1:7 |
+| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | UHB | `שממה` (shmmh; English: Desolation) | 2 | MIC 1:7 | `שְׁמָמָ֑ה` (shmmh) | MIC 1:7 |
+| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | UXLC | `שממה` (shmmh; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shmmh) | Mic 1:7 |
+| 44 | hebrew_screening | `center_word_exact` | `יהוה` (yhwh; English: YHWH) | EBIBLE_WLC | `יהוה` (yhwh; English: YHWH) | 3 | 1CH 26:27 | `יְהוָֽה׃` (yhwh) | 1CH 26:27; 1CH 26:28 |
+| 44 | hebrew_screening | `center_word_exact` | `יהוה` (yhwh; English: YHWH) | MAM | `יהוה` (yhwh; English: YHWH) | 3 | 1 Chr 26:27 | `יְהֹוָֽה׃` (yhwh) | 1 Chr 26:27; 1 Chr 26:28 |
+| 44 | hebrew_screening | `center_word_exact` | `יהוה` (yhwh; English: YHWH) | MT_WLC | `יהוה` (yhwh; English: YHWH) | 3 | 1Chr 26:27 | `יְהוָֽה` (yhwh) | 1Chr 26:27; 1Chr 26:28 |
+| 44 | hebrew_screening | `center_word_exact` | `יהוה` (yhwh; English: YHWH) | UHB | `יהוה` (yhwh; English: YHWH) | 3 | 1CH 26:27 | `יְהוָֽה׃` (yhwh) | 1CH 26:27; 1CH 26:28 |
+| 44 | hebrew_screening | `center_word_exact` | `יהוה` (yhwh; English: YHWH) | UXLC | `יהוה` (yhwh; English: YHWH) | 3 | 1 Chr 26:27 | `יְהוָֽה׃` (yhwh) | 1 Chr 26:27; 1 Chr 26:28 |
+| 45 | hebrew_screening | `center_word_exact` | `יהוה` (yhwh; English: YHWH) | EBIBLE_WLC | `יהוה` (yhwh; English: YHWH) | 3 | 1CH 28:20 | `בֵּית־יְהוָֽה׃` (bytyhwh) | 1CH 28:20; 1CH 28:21 |
+| 45 | hebrew_screening | `center_word_exact` | `יהוה` (yhwh; English: YHWH) | MAM | `יהוה` (yhwh; English: YHWH) | 3 | 1 Chr 28:20 | `בֵּית־יְהֹוָֽה׃` (bytyhwh) | 1 Chr 28:20; 1 Chr 28:21 |
+| 45 | hebrew_screening | `center_word_exact` | `יהוה` (yhwh; English: YHWH) | MT_WLC | `יהוה` (yhwh; English: YHWH) | 3 | 1Chr 28:20 | `יְהוָֽה` (yhwh) | 1Chr 28:20; 1Chr 28:21 |
+| 45 | hebrew_screening | `center_word_exact` | `יהוה` (yhwh; English: YHWH) | UHB | `יהוה` (yhwh; English: YHWH) | 3 | 1CH 28:20 | `בֵּית־יְהוָֽה׃` (bytyhwh) | 1CH 28:20; 1CH 28:21 |
+| 45 | hebrew_screening | `center_word_exact` | `יהוה` (yhwh; English: YHWH) | UXLC | `יהוה` (yhwh; English: YHWH) | 3 | 1 Chr 28:20 | `יְהוָֽה׃` (yhwh) | 1 Chr 28:20; 1 Chr 28:21 |
 | ... | ... | ... | ... | ... | ... | ... | ... | ... | 175 more rows in CSV |
 
 ## Read

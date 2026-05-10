@@ -28,6 +28,7 @@ argv = [
 inputs = [
   "scripts/analyze_all_codes_letter_paths.py",
   "scripts/select_all_codes_followup.py",
+  "els/term_display.py",
   "reports/all_codes_followup_selection/selected_rows.csv",
   "configs/example_oshb_wlc.toml",
   "configs/example_uxlc.toml",

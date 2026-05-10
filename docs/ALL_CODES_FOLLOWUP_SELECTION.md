@@ -48,86 +48,86 @@ center-word, related center-word, center-verse, and span-context buckets first.
 
 | Rank | Queue | Bucket | Scope | Term | Concept | Skip | Center | Center word |
 | ---: | --- | --- | --- | --- | --- | ---: | --- | --- |
-| 1 | english_screening | `center_word_exact` | all_source | `eng_heth` | Heth | -2 | Acts 25:20 | `whether` |
-| 2 | english_screening | `center_word_exact` | all_source | `eng_heth` | Heth | -2 | Deut 24:14 | `whether` |
-| 3 | english_screening | `center_word_exact` | all_source | `eng_aids` | AIDS | -3 | Isa 47:7 | `saidst` |
-| 4 | english_screening | `center_word_same_category` | all_source | `eng_edom` | Edom | -2 | 1Chr 19:1 | `ammon` |
-| 5 | english_screening | `center_word_same_category` | all_source | `eng_shem` | Shem | -2 | 1Chr 4:26 | `hamuel` |
-| 6 | english_screening | `center_word_same_category` | all_source | `eng_seba` | Seba | -2 | 1Chr 4:28 | `beersheba` |
-| 7 | english_screening | `center_verse_exact` | all_source | `eng_hand` | Hand | -2 | 1Chr 2:2 | `and` |
-| 8 | english_screening | `center_verse_exact` | all_source | `eng_heal` | Heal | -2 | 1Kgs 1:6 | `displeased` |
-| 9 | english_screening | `center_verse_exact` | all_source | `eng_hand` | Hand | -2 | 1Kgs 3:6 | `according` |
-| 10 | english_screening | `center_verse_same_category` | all_source | `eng_sign` | Sign | -2 | 1Chr 10:13 | `against` |
-| 11 | english_screening | `center_verse_same_category` | all_source | `eng_adar` | Adar | -2 | 1Chr 11:19 | `and` |
-| 12 | english_screening | `center_verse_same_category` | all_source | `eng_adam` | Adam | -2 | 1Chr 12:31 | `and` |
-| 13 | english_screening | `span_exact` | all_source | `eng_lord` | Lord | -3 | 1Sam 30:24 | `who` |
-| 14 | english_screening | `span_exact` | all_source | `eng_lord_2` | Lord | -3 | 1Sam 30:24 | `who` |
-| 15 | english_screening | `span_exact` | all_source | `eng_isis` | ISIS | -3 | Josh 15:19 | `springs` |
-| 16 | english_screening | `span_same_category` | all_source | `eng_adar` | Adar | -2 | 1Sam 15:14 | `and` |
-| 17 | english_screening | `span_same_category` | all_source | `eng_mash` | Mash | -2 | 1Sam 28:18 | `day` |
-| 18 | english_screening | `span_same_category` | all_source | `eng_adam` | Adam | -2 | 1Sam 9:22 | `and` |
-| 19 | english_screening | `hidden_path_only` | all_source | `eng_heal` | Heal | -2 | 1Chr 10:11 | `jabeshgilead` |
-| 20 | english_screening | `hidden_path_only` | all_source | `eng_cush` | Cush | -2 | 1Chr 10:4 | `these` |
-| 21 | english_screening | `hidden_path_only` | all_source | `eng_bear` | Bear | 2 | 1Chr 11:8 | `repaired` |
-| 22 | greek_screening | `center_word_exact` | all_source | `nato_g` | NATO | 8 | Rom 5:10 | `θανατου` |
-| 23 | greek_screening | `center_word_exact` | all_source | `temple_g` | Temple | -9 | Matt 23:17 | `ναοσ` |
-| 24 | greek_screening | `center_word_exact` | all_source | `blood_g` | Blood | -10 | Rev 19:13 | `αιματι` |
-| 25 | greek_screening | `center_word_same_category` | all_source | `lud_g` | Lud | -2 | Phil 2:7 | `δουλου` |
-| 26 | greek_screening | `center_word_same_category` | all_source | `javan_g` | Javan | -2 | 1Pet 5:13 | `βαβυλωνι` |
-| 27 | greek_screening | `center_word_same_category` | all_source | `obal_g` | Obal | -3 | 1Tim 5:14 | `βουλομαι` |
-| 28 | greek_screening | `center_verse_exact` | all_source | `lasha_g` | Lasha | -2 | Acts 9:11 | `ταρσεα` |
-| 29 | greek_screening | `center_verse_exact` | all_source | `blood_g` | Blood | 2 | Matt 13:55 | `μαριαμ` |
-| 30 | greek_screening | `center_verse_exact` | all_source | `haima_gnt` | Blood | 2 | Matt 13:55 | `μαριαμ` |
-| 31 | greek_screening | `center_verse_same_category` | all_source | `temple_g` | Temple | 2 | 1Cor 10:16 | `του` |
-| 32 | greek_screening | `center_verse_same_category` | all_source | `china_g` | China | 2 | 1John 2:1 | `δικαιον` |
-| 33 | greek_screening | `center_verse_same_category` | all_source | `boils_g` | Boils | 2 | 1Pet 5:13 | `συνεκλεκτη` |
-| 34 | greek_screening | `span_exact` | all_source | `god_g` | God | 2 | Rom 14:2 | `εσθιει` |
-| 35 | greek_screening | `span_exact` | all_source | `iran_g` | Iran | -4 | Mark 14:48 | `αποκριθεισ` |
-| 36 | greek_screening | `span_exact` | all_source | `nato_g` | NATO | 7 | 1Cor 1:27 | `μωρα` |
-| 37 | greek_screening | `span_same_category` | all_source | `shelah_g` | Shelah | 2 | Acts 7:42 | `ισραηλ` |
-| 38 | greek_screening | `span_same_category` | all_source | `adam_g` | Adam | 2 | Gal 4:27 | `ανδρα` |
-| 39 | greek_screening | `span_same_category` | all_source | `gomer_g` | Gomer | -3 | 2Cor 10:3 | `στρατευομεθα` |
-| 40 | greek_screening | `hidden_path_only` | all_source | `shelah_g` | Shelah | 2 | 1Cor 10:18 | `ισραηλ` |
-| 41 | greek_screening | `hidden_path_only` | all_source | `amen_g` | Amen | 2 | 1Cor 1:10 | `μη` |
-| 42 | greek_screening | `hidden_path_only` | all_source | `son_g` | Son | 2 | 1Cor 5:12 | `τουσ` |
-| 43 | hebrew_screening | `center_word_exact` | all_source | `desolation_h` | Desolation | 2 | Mic 1:7 | `שממה` |
-| 44 | hebrew_screening | `center_word_exact` | all_source | `yhwh_h` | YHWH | 3 | 1Chr 26:27 | `יהוה` |
-| 45 | hebrew_screening | `center_word_exact` | all_source | `yhwh_h` | YHWH | 3 | 1Chr 28:20 | `יהוה` |
-| 46 | hebrew_screening | `center_word_same_concept` | all_source | `rome_alt_h` | Rome | 5 | Job 5:12 | `ערומימ` |
-| 47 | hebrew_screening | `center_word_same_concept` | all_source | `rome_alt_h` | Rome | -42 | Eccl 10:6 | `במרומימ` |
-| 48 | hebrew_screening | `center_word_same_category` | all_source | `germany_h` | Germany | -18 | Jer 42:15 | `מצרימ` |
-| 49 | hebrew_screening | `center_word_same_category` | all_source | `amorite_h` | Amorite | -2 | 1Chr 15:22 | `במשא` |
-| 50 | hebrew_screening | `center_word_same_category` | all_source | `amorite_h` | Amorite | 2 | 1Chr 15:27 | `המשררימ` |
-| 51 | hebrew_screening | `center_verse_exact` | all_source | `bibi_h` | Bibi | -2 | 1Chr 2:55 | `ישבו` |
-| 52 | hebrew_screening | `center_verse_exact` | all_source | `lion_h` | Lion | 2 | 1Kgs 13:26 | `איש` |
-| 53 | hebrew_screening | `center_verse_exact` | all_source | `lord_h` | Lord | -2 | 1Kgs 20:9 | `בנהדד` |
-| 54 | hebrew_screening | `center_verse_same_concept` | all_source | `rome_h` | Rome | -6 | 1Kgs 7:40 | `ואתהמזרקות` |
-| 55 | hebrew_screening | `center_verse_same_concept` | all_source | `rome_h` | Rome | 6 | Josh 22:5 | `אתכמ` |
-| 56 | hebrew_screening | `center_verse_same_concept` | all_source | `year_2001_additive_h` | Gregorian 2001 | 11 | Ezek 7:8 | `עליכ` |
-| 57 | hebrew_screening | `center_verse_same_category` | all_source | `second_death_h` | Second Death | 9 | Jer 43:3 | `בבל` |
-| 58 | hebrew_screening | `center_verse_same_category` | all_source | `second_death_h` | Second Death | -11 | Num 29:29 | `ארבעה` |
-| 59 | hebrew_screening | `center_verse_same_category` | all_source | `timothy_h` | Timothy | 16 | Gen 30:20 | `אתשמו` |
-| 60 | hebrew_screening | `span_exact` | all_source | `heaven_h` | Heaven | 2 | Judg 19:3 | `ויקמ` |
-| 61 | hebrew_screening | `span_exact` | all_source | `heaven_h` | Heaven | 2 | Neh 3:1 | `ויקמ` |
-| 62 | hebrew_screening | `span_exact` | all_source | `mary_h` | Mary | -3 | Mic 6:5 | `זכרנא` |
-| 63 | hebrew_screening | `span_same_concept` | all_source | `year_2001_additive_h` | Gregorian 2001 | 35 | Eccl 3:10 | `לענות` |
-| 64 | hebrew_screening | `span_same_category` | all_source | `pathrusim_h` | Pathrusim | -52 | Isa 26:17 | `תזעק` |
-| 65 | hebrew_screening | `span_same_category` | all_source | `timothy_h` | Timothy | -66 | Jer 46:28 | `יעקב` |
-| 66 | hebrew_screening | `span_same_category` | all_source | `2027_additive_h` | Gregorian 2027 additive | 86 | Deut 11:16 | `יפתה` |
-| 67 | hebrew_screening | `hidden_path_only` | all_source | `day_of_lord_h` | Day Of The Lord | 4 | Song 4:6 | `שיפוח` |
-| 68 | hebrew_screening | `hidden_path_only` | all_source | `empty_tomb_h` | Empty Tomb | 8 | Ezek 5:2 | `בתוכ` |
-| 69 | hebrew_screening | `hidden_path_only` | all_source | `yeshu_declared_perfect_h` | Jesus Declared Perfect | 9 | Gen 22:8 | `לעלה` |
-| 70 | hebrew_theology | `center_word_exact` | all_source | `htp_yhwh_h` | YHWH | 3 | 1Chr 26:27 | `יהוה` |
-| 71 | hebrew_theology | `center_word_exact` | all_source | `htp_yhwh_h` | YHWH | 3 | 1Chr 28:20 | `יהוה` |
-| 72 | hebrew_theology | `center_word_same_category` | all_source | `htp_torah_h` | Torah | 7 | 1Chr 5:1 | `בנישראל` |
-| 73 | hebrew_theology | `center_word_same_category` | all_source | `htp_torah_h` | Torah | -7 | 2Kgs 17:20 | `ישראל` |
-| 74 | hebrew_theology | `center_word_same_category` | all_source | `htp_covenant_h` | Covenant | 8 | Deut 34:9 | `חכמה` |
-| 75 | hebrew_theology | `center_verse_same_category` | all_source | `htp_love_h` | Love | 2 | 2Sam 14:21 | `הדבר` |
-| 76 | hebrew_theology | `center_verse_same_category` | all_source | `htp_love_h` | Love | 2 | 2Sam 15:27 | `שבה` |
-| 77 | hebrew_theology | `center_verse_same_category` | all_source | `htp_wisdom_h` | Wisdom | 3 | Isa 49:8 | `כה` |
-| 78 | hebrew_theology | `span_same_category` | all_source | `htp_messiah_h` | Messiah | 6 | Ezra 2:5 | `ושבעימ` |
-| 79 | hebrew_theology | `span_same_category` | all_source | `htp_messiah_h` | Messiah | 6 | Neh 7:10 | `ושנימ` |
-| 80 | hebrew_theology | `span_same_category` | all_source | `htp_covenant_h` | Covenant | -10 | Prov 30:4 | `עלהשמימ` |
+| 1 | english_screening | `center_word_exact` | all_source | `heth` | Heth | -2 | Acts 25:20 | `whether` |
+| 2 | english_screening | `center_word_exact` | all_source | `heth` | Heth | -2 | Deut 24:14 | `whether` |
+| 3 | english_screening | `center_word_exact` | all_source | `aids` | AIDS | -3 | Isa 47:7 | `saidst` |
+| 4 | english_screening | `center_word_same_category` | all_source | `edom` | Edom | -2 | 1Chr 19:1 | `ammon` |
+| 5 | english_screening | `center_word_same_category` | all_source | `shem` | Shem | -2 | 1Chr 4:26 | `hamuel` |
+| 6 | english_screening | `center_word_same_category` | all_source | `seba` | Seba | -2 | 1Chr 4:28 | `beersheba` |
+| 7 | english_screening | `center_verse_exact` | all_source | `hand` | Hand | -2 | 1Chr 2:2 | `and` |
+| 8 | english_screening | `center_verse_exact` | all_source | `heal` | Heal | -2 | 1Kgs 1:6 | `displeased` |
+| 9 | english_screening | `center_verse_exact` | all_source | `hand` | Hand | -2 | 1Kgs 3:6 | `according` |
+| 10 | english_screening | `center_verse_same_category` | all_source | `sign` | Sign | -2 | 1Chr 10:13 | `against` |
+| 11 | english_screening | `center_verse_same_category` | all_source | `adar` | Adar | -2 | 1Chr 11:19 | `and` |
+| 12 | english_screening | `center_verse_same_category` | all_source | `adam` | Adam | -2 | 1Chr 12:31 | `and` |
+| 13 | english_screening | `span_exact` | all_source | `lord` | Lord | -3 | 1Sam 30:24 | `who` |
+| 14 | english_screening | `span_exact` | all_source | `lord` | Lord | -3 | 1Sam 30:24 | `who` |
+| 15 | english_screening | `span_exact` | all_source | `isis` | ISIS | -3 | Josh 15:19 | `springs` |
+| 16 | english_screening | `span_same_category` | all_source | `adar` | Adar | -2 | 1Sam 15:14 | `and` |
+| 17 | english_screening | `span_same_category` | all_source | `mash` | Mash | -2 | 1Sam 28:18 | `day` |
+| 18 | english_screening | `span_same_category` | all_source | `adam` | Adam | -2 | 1Sam 9:22 | `and` |
+| 19 | english_screening | `hidden_path_only` | all_source | `heal` | Heal | -2 | 1Chr 10:11 | `jabeshgilead` |
+| 20 | english_screening | `hidden_path_only` | all_source | `cush` | Cush | -2 | 1Chr 10:4 | `these` |
+| 21 | english_screening | `hidden_path_only` | all_source | `bear` | Bear | 2 | 1Chr 11:8 | `repaired` |
+| 22 | greek_screening | `center_word_exact` | all_source | `νατο` (nato; English: NATO) | NATO | 8 | Rom 5:10 | `θανατου` (thanatou) |
+| 23 | greek_screening | `center_word_exact` | all_source | `ναοσ` (naos; English: Temple) | Temple | -9 | Matt 23:17 | `ναοσ` (naos) |
+| 24 | greek_screening | `center_word_exact` | all_source | `αιμα` (aima; English: Blood) | Blood | -10 | Rev 19:13 | `αιματι` (aimati) |
+| 25 | greek_screening | `center_word_same_category` | all_source | `λουδ` (loud; English: Lud) | Lud | -2 | Phil 2:7 | `δουλου` (doulou) |
+| 26 | greek_screening | `center_word_same_category` | all_source | `ιωυαν` (iouan; English: Javan) | Javan | -2 | 1Pet 5:13 | `βαβυλωνι` (babuloni) |
+| 27 | greek_screening | `center_word_same_category` | all_source | `ευαλ` (eual; English: Obal) | Obal | -3 | 1Tim 5:14 | `βουλομαι` (boulomai) |
+| 28 | greek_screening | `center_verse_exact` | all_source | `δασα` (dasa; English: Lasha) | Lasha | -2 | Acts 9:11 | `ταρσεα` (tarsea) |
+| 29 | greek_screening | `center_verse_exact` | all_source | `αιμα` (aima; English: Blood) | Blood | 2 | Matt 13:55 | `μαριαμ` (mariam) |
+| 30 | greek_screening | `center_verse_exact` | all_source | `αιμα` (aima; English: Blood) | Blood | 2 | Matt 13:55 | `μαριαμ` (mariam) |
+| 31 | greek_screening | `center_verse_same_category` | all_source | `ναοσ` (naos; English: Temple) | Temple | 2 | 1Cor 10:16 | `του` (tou) |
+| 32 | greek_screening | `center_verse_same_category` | all_source | `κινα` (kina; English: China) | China | 2 | 1John 2:1 | `δικαιον` (dikaion) |
+| 33 | greek_screening | `center_verse_same_category` | all_source | `ελκη` (elke; English: Boils) | Boils | 2 | 1Pet 5:13 | `συνεκλεκτη` (suneklekte) |
+| 34 | greek_screening | `span_exact` | all_source | `θεοσ` (theos; English: God) | God | 2 | Rom 14:2 | `εσθιει` (esthiei) |
+| 35 | greek_screening | `span_exact` | all_source | `ιραν` (iran; English: Iran) | Iran | -4 | Mark 14:48 | `αποκριθεισ` (apokritheis) |
+| 36 | greek_screening | `span_exact` | all_source | `νατο` (nato; English: NATO) | NATO | 7 | 1Cor 1:27 | `μωρα` (mora) |
+| 37 | greek_screening | `span_same_category` | all_source | `σαλα` (sala; English: Shelah) | Shelah | 2 | Acts 7:42 | `ισραηλ` (israel) |
+| 38 | greek_screening | `span_same_category` | all_source | `αδαμ` (adam; English: Adam) | Adam | 2 | Gal 4:27 | `ανδρα` (andra) |
+| 39 | greek_screening | `span_same_category` | all_source | `γαμερ` (gamer; English: Gomer) | Gomer | -3 | 2Cor 10:3 | `στρατευομεθα` (strateuometha) |
+| 40 | greek_screening | `hidden_path_only` | all_source | `σαλα` (sala; English: Shelah) | Shelah | 2 | 1Cor 10:18 | `ισραηλ` (israel) |
+| 41 | greek_screening | `hidden_path_only` | all_source | `αμην` (amen; English: Amen) | Amen | 2 | 1Cor 1:10 | `μη` (me) |
+| 42 | greek_screening | `hidden_path_only` | all_source | `υιοσ` (uios; English: Son) | Son | 2 | 1Cor 5:12 | `τουσ` (tous) |
+| 43 | hebrew_screening | `center_word_exact` | all_source | `שממה` (shmmh; English: Desolation) | Desolation | 2 | Mic 1:7 | `שממה` (shmmh) |
+| 44 | hebrew_screening | `center_word_exact` | all_source | `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 1Chr 26:27 | `יהוה` (yhwh) |
+| 45 | hebrew_screening | `center_word_exact` | all_source | `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 1Chr 28:20 | `יהוה` (yhwh) |
+| 46 | hebrew_screening | `center_word_same_concept` | all_source | `רומא` (rwm; English: Rome) | Rome | 5 | Job 5:12 | `ערומימ` (rwmym) |
+| 47 | hebrew_screening | `center_word_same_concept` | all_source | `רומא` (rwm; English: Rome) | Rome | -42 | Eccl 10:6 | `במרומימ` (bmrwmym) |
+| 48 | hebrew_screening | `center_word_same_category` | all_source | `גרמניה` (grmnyh; English: Germany) | Germany | -18 | Jer 42:15 | `מצרימ` (mtsrym) |
+| 49 | hebrew_screening | `center_word_same_category` | all_source | `אמרי` (mry; English: Amorite) | Amorite | -2 | 1Chr 15:22 | `במשא` (bmsh) |
+| 50 | hebrew_screening | `center_word_same_category` | all_source | `אמרי` (mry; English: Amorite) | Amorite | 2 | 1Chr 15:27 | `המשררימ` (hmshrrym) |
+| 51 | hebrew_screening | `center_verse_exact` | all_source | `ביבי` (byby; English: Bibi) | Bibi | -2 | 1Chr 2:55 | `ישבו` (yshbw) |
+| 52 | hebrew_screening | `center_verse_exact` | all_source | `אריה` (ryh; English: Lion) | Lion | 2 | 1Kgs 13:26 | `איש` (ysh) |
+| 53 | hebrew_screening | `center_verse_exact` | all_source | `אדני` (dny; English: Lord) | Lord | -2 | 1Kgs 20:9 | `בנהדד` (bnhdd) |
+| 54 | hebrew_screening | `center_verse_same_concept` | all_source | `רומי` (rwmy; English: Rome) | Rome | -6 | 1Kgs 7:40 | `ואתהמזרקות` (wthmzrqwt) |
+| 55 | hebrew_screening | `center_verse_same_concept` | all_source | `רומי` (rwmy; English: Rome) | Rome | 6 | Josh 22:5 | `אתכמ` (tkm) |
+| 56 | hebrew_screening | `center_verse_same_concept` | all_source | `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 11 | Ezek 7:8 | `עליכ` (lyk) |
+| 57 | hebrew_screening | `center_verse_same_category` | all_source | `מותשני` (mwtshny; English: Second Death) | Second Death | 9 | Jer 43:3 | `בבל` (bbl) |
+| 58 | hebrew_screening | `center_verse_same_category` | all_source | `מותשני` (mwtshny; English: Second Death) | Second Death | -11 | Num 29:29 | `ארבעה` (rbh) |
+| 59 | hebrew_screening | `center_verse_same_category` | all_source | `טימותי` (tymwty; English: Timothy) | Timothy | 16 | Gen 30:20 | `אתשמו` (tshmw) |
+| 60 | hebrew_screening | `span_exact` | all_source | `שמימ` (shmym; English: Heaven) | Heaven | 2 | Judg 19:3 | `ויקמ` (wyqm) |
+| 61 | hebrew_screening | `span_exact` | all_source | `שמימ` (shmym; English: Heaven) | Heaven | 2 | Neh 3:1 | `ויקמ` (wyqm) |
+| 62 | hebrew_screening | `span_exact` | all_source | `מרימ` (mrym; English: Mary) | Mary | -3 | Mic 6:5 | `זכרנא` (zkrn) |
+| 63 | hebrew_screening | `span_same_concept` | all_source | `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 35 | Eccl 3:10 | `לענות` (lnwt) |
+| 64 | hebrew_screening | `span_same_category` | all_source | `פתרסימ` (ptrsym; English: Pathrusim) | Pathrusim | -52 | Isa 26:17 | `תזעק` (tzq) |
+| 65 | hebrew_screening | `span_same_category` | all_source | `טימותי` (tymwty; English: Timothy) | Timothy | -66 | Jer 46:28 | `יעקב` (yqb) |
+| 66 | hebrew_screening | `span_same_category` | all_source | `תתתתתכז` (tttttkz; English: Gregorian 2027 additive) | Gregorian 2027 additive | 86 | Deut 11:16 | `יפתה` (ypth) |
+| 67 | hebrew_screening | `hidden_path_only` | all_source | `יומיהוה` (yom YHWH; English: Day Of The Lord) | Day Of The Lord | 4 | Song 4:6 | `שיפוח` (shypwch) |
+| 68 | hebrew_screening | `hidden_path_only` | all_source | `קברריק` (qbrryq; English: Empty Tomb) | Empty Tomb | 8 | Ezek 5:2 | `בתוכ` (btwk) |
+| 69 | hebrew_screening | `hidden_path_only` | all_source | `הצהרישומושלמ` (htshryshwmwshlm; English: Jesus Declared Perfect) | Jesus Declared Perfect | 9 | Gen 22:8 | `לעלה` (llh) |
+| 70 | hebrew_theology | `center_word_exact` | all_source | `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 1Chr 26:27 | `יהוה` (yhwh) |
+| 71 | hebrew_theology | `center_word_exact` | all_source | `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 1Chr 28:20 | `יהוה` (yhwh) |
+| 72 | hebrew_theology | `center_word_same_category` | all_source | `תורה` (twrh; English: Torah) | Torah | 7 | 1Chr 5:1 | `בנישראל` (bnyshrl) |
+| 73 | hebrew_theology | `center_word_same_category` | all_source | `תורה` (twrh; English: Torah) | Torah | -7 | 2Kgs 17:20 | `ישראל` (yshrl) |
+| 74 | hebrew_theology | `center_word_same_category` | all_source | `ברית` (bryt; English: Covenant) | Covenant | 8 | Deut 34:9 | `חכמה` (chkmh) |
+| 75 | hebrew_theology | `center_verse_same_category` | all_source | `אהבה` (hbh; English: Love) | Love | 2 | 2Sam 14:21 | `הדבר` (hdbr) |
+| 76 | hebrew_theology | `center_verse_same_category` | all_source | `אהבה` (hbh; English: Love) | Love | 2 | 2Sam 15:27 | `שבה` (shbh) |
+| 77 | hebrew_theology | `center_verse_same_category` | all_source | `חכמה` (chkmh; English: Wisdom) | Wisdom | 3 | Isa 49:8 | `כה` (kh) |
+| 78 | hebrew_theology | `span_same_category` | all_source | `משיח` (Mashiach; English: Messiah) | Messiah | 6 | Ezra 2:5 | `ושבעימ` (wshbym) |
+| 79 | hebrew_theology | `span_same_category` | all_source | `משיח` (Mashiach; English: Messiah) | Messiah | 6 | Neh 7:10 | `ושנימ` (wshnym) |
+| 80 | hebrew_theology | `span_same_category` | all_source | `ברית` (bryt; English: Covenant) | Covenant | -10 | Prov 30:4 | `עלהשמימ` (lhshmym) |
 
 ## Read
 

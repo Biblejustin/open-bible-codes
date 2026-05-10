@@ -6,6 +6,7 @@ from scripts.build_centered_occurrence_index import (
     build_presence_summary,
     classify_occurrence,
     gog_source_occurrences,
+    summary_markdown_row,
 )
 
 
@@ -198,6 +199,7 @@ def test_presence_summary_collapses_same_term_center_across_corpora() -> None:
     assert summary[0]["occurrence_rows"] == 2
     assert summary[0]["total_paths"] == 8
     assert summary[0]["center_ref"] == "REV 20:8"
+    assert "English: Gog" in summary_markdown_row(summary[0])
 
 
 def test_module_default_paths_are_relative() -> None:

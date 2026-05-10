@@ -93,6 +93,7 @@ argv = [
 ]
 inputs = [
   "scripts/summarize_surface_all_codes.py",
+  "els/term_display.py",
   "reports/greek_screening_all_codes/surface_all_codes.csv",
   "reports/greek_screening_all_codes/surface_all_codes_summary.csv",
 ]

@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
+from els.term_display import display_term
 from scripts.triage_surface_all_codes import BUCKET_ORDER, QUEUE_FIELDNAMES, int_or_zero
 
 
@@ -274,11 +275,11 @@ def write_markdown(
                     row["source_queue"],
                     f"`{row['bucket']}`",
                     row["presence_scope"],
-                    f"`{row['term_id']}`",
+                    display_term(row["normalized_term"], english=row["concept"]),
                     row["concept"],
                     row["skip"],
                     row["center_ref"],
-                    f"`{row['center_normalized_word']}`",
+                    display_term(row["center_normalized_word"]),
                 ]
             )
             + " |"

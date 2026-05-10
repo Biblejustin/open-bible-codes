@@ -38,26 +38,26 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 
 | Term | Concept | Hidden hits | Center word same | Center word related | Center verse same | Center verse related | Span context |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| `htp_yhwh_h` | YHWH | 108,320 | 3,329 | 0 | 41,919 | 0 | 71,851 |
-| `htp_love_h` | Love | 39,575 | 10 | 83 | 157 | 669 | 2,082 |
-| `htp_peace_h` | Peace | 37,669 | 90 | 6 | 731 | 108 | 2,191 |
-| `htp_torah_h` | Torah | 32,524 | 20 | 354 | 204 | 3,846 | 9,395 |
-| `htp_yeshua_h` | Yeshua | 27,142 | 11 | 0 | 189 | 71 | 955 |
-| `htp_covenant_h` | Covenant | 21,429 | 66 | 11 | 517 | 90 | 1,520 |
-| `htp_messiah_h` | Messiah | 12,864 | 1 | 4 | 43 | 81 | 454 |
-| `htp_wisdom_h` | Wisdom | 7,218 | 5 | 0 | 52 | 57 | 431 |
-| `htp_glory_h` | Glory | 6,979 | 5 | 14 | 161 | 237 | 1,086 |
-| `htp_faith_h` | Faith | 3,171 | 0 | 1 | 5 | 1 | 48 |
-| `htp_salvation_h` | Salvation | 2,180 | 0 | 0 | 5 | 0 | 40 |
-| `htp_savior_h` | Savior | 2,150 | 0 | 0 | 0 | 9 | 49 |
-| `htp_israel_h` | Israel | 2,104 | 83 | 0 | 403 | 10 | 879 |
-| `htp_kingdom_h` | Kingdom | 1,515 | 14 | 0 | 34 | 0 | 75 |
-| `htp_redemption_h` | Redemption | 513 | 0 | 0 | 0 | 4 | 4 |
-| `htp_lamb_of_god_h` | Lamb Of God | 0 | 0 | 0 | 0 | 0 | 0 |
-| `htp_mercy_h` | Mercy | 0 | 0 | 0 | 0 | 0 | 0 |
-| `htp_son_of_god_h` | Son Of God | 0 | 0 | 0 | 0 | 0 | 0 |
-| `htp_truth_h` | Truth | 0 | 0 | 0 | 0 | 0 | 0 |
-| `htp_yeshua_messiah_h` | Yeshua Messiah | 0 | 0 | 0 | 0 | 0 | 0 |
+| `יהוה` (yhwh; English: YHWH) | YHWH | 108,320 | 3,329 | 0 | 41,919 | 0 | 71,851 |
+| `אהבה` (hbh; English: Love) | Love | 39,575 | 10 | 83 | 157 | 669 | 2,082 |
+| `שלומ` (shlwm; English: Peace) | Peace | 37,669 | 90 | 6 | 731 | 108 | 2,191 |
+| `תורה` (twrh; English: Torah) | Torah | 32,524 | 20 | 354 | 204 | 3,846 | 9,395 |
+| `ישוע` (Yeshua; English: Yeshua) | Yeshua | 27,142 | 11 | 0 | 189 | 71 | 955 |
+| `ברית` (bryt; English: Covenant) | Covenant | 21,429 | 66 | 11 | 517 | 90 | 1,520 |
+| `משיח` (Mashiach; English: Messiah) | Messiah | 12,864 | 1 | 4 | 43 | 81 | 454 |
+| `חכמה` (chkmh; English: Wisdom) | Wisdom | 7,218 | 5 | 0 | 52 | 57 | 431 |
+| `כבוד` (kbwd; English: Glory) | Glory | 6,979 | 5 | 14 | 161 | 237 | 1,086 |
+| `אמונה` (mwnh; English: Faith) | Faith | 3,171 | 0 | 1 | 5 | 1 | 48 |
+| `ישועה` (yshwh; English: Salvation) | Salvation | 2,180 | 0 | 0 | 5 | 0 | 40 |
+| `מושיע` (mwshy; English: Savior) | Savior | 2,150 | 0 | 0 | 0 | 9 | 49 |
+| `ישראל` (yshrl; English: Israel) | Israel | 2,104 | 83 | 0 | 403 | 10 | 879 |
+| `מלכות` (mlkwt; English: Kingdom) | Kingdom | 1,515 | 14 | 0 | 34 | 0 | 75 |
+| `גאולה` (gwlh; English: Redemption) | Redemption | 513 | 0 | 0 | 0 | 4 | 4 |
+| `כבשהאלוהימ` (kbshhlwhym; English: Lamb Of God) | Lamb Of God | 0 | 0 | 0 | 0 | 0 | 0 |
+| `חסד` (chsd; English: Mercy) | Mercy | 0 | 0 | 0 | 0 | 0 | 0 |
+| `בנהאלוהימ` (bnhlwhym; English: Son Of God) | Son Of God | 0 | 0 | 0 | 0 | 0 | 0 |
+| `אמת` (mt; English: Truth) | Truth | 0 | 0 | 0 | 0 | 0 | 0 |
+| `ישועהמשיח` (yshwhmshych; English: Yeshua Messiah) | Yeshua Messiah | 0 | 0 | 0 | 0 | 0 | 0 |
 
 ## Read
 

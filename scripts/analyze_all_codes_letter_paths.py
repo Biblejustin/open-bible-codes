@@ -15,6 +15,7 @@ from typing import Any
 
 from els import __version__
 from els.corpus import Corpus, load_corpus
+from els.term_display import display_term
 from scripts.select_all_codes_followup import SELECTED_FIELDNAMES
 
 
@@ -297,12 +298,12 @@ def write_markdown(
                     row["selection_rank"],
                     row["source_queue"],
                     f"`{row['bucket']}`",
-                    f"`{row['normalized_term']}`",
+                    display_term(row["normalized_term"], english=row["concept"]),
                     row["audit_corpus"],
-                    f"`{row['sequence']}`",
+                    display_term(row["sequence"], english=row["concept"]),
                     row["skip"],
                     row["audit_center_ref"],
-                    f"`{row['audit_center_word']}`",
+                    display_term(row["audit_center_word"]),
                     row["path_refs"],
                 ]
             )

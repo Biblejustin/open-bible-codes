@@ -105,7 +105,9 @@ def test_main_writes_markdown_and_manifest(tmp_path: Path) -> None:
     )
 
     assert code == 0
-    assert "Center word contains same term" in md.read_text(encoding="utf-8")
+    markdown_text = md.read_text(encoding="utf-8")
+    assert "Center word contains same term" in markdown_text
+    assert "`אבגד` (bgd; English: Term)" in markdown_text
     payload = json.loads(manifest.read_text(encoding="utf-8"))
     assert payload["aggregates"]["center_word_exact_hits"] == 1
 

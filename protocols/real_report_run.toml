@@ -189,6 +189,7 @@ inputs = [
   "scripts/analyze_extension_paired_controls.py",
   "scripts/build_all_codes_followup_report.py",
   "scripts/build_centered_occurrence_index.py",
+  "els/term_display.py",
   "scripts/build_final_report_highlights.py",
   "scripts/build_gog_magog_pair_prospective_report.py",
   "scripts/download_wrr_sources.py",
@@ -555,6 +556,7 @@ inputs = [
   "protocols/hebrew_theology_all_codes_collection.toml",
   "scripts/summarize_surface_all_codes.py",
   "scripts/triage_surface_all_codes.py",
+  "els/term_display.py",
   "terms/hebrew_theology_prospective_terms.csv",
 ]
 outputs = ["reports/hebrew_theology_all_codes/protocol_run.manifest.json"]
@@ -567,6 +569,7 @@ inputs = [
   "protocols/hebrew_screening_all_codes_collection.toml",
   "scripts/summarize_surface_all_codes.py",
   "scripts/triage_surface_all_codes.py",
+  "els/term_display.py",
   "terms/theological_terms.csv",
   "terms/modern_names_dates.csv",
   "terms/table_of_nations.csv",
@@ -586,6 +589,7 @@ inputs = [
   "protocols/greek_screening_all_codes_collection.toml",
   "scripts/summarize_surface_all_codes.py",
   "scripts/triage_surface_all_codes.py",
+  "els/term_display.py",
   "terms/theological_terms.csv",
   "terms/modern_names_dates.csv",
   "terms/table_of_nations.csv",
@@ -604,6 +608,7 @@ inputs = [
   "protocols/all_codes_followup_selection.toml",
   "scripts/select_all_codes_followup.py",
   "scripts/triage_surface_all_codes.py",
+  "els/term_display.py",
   "reports/hebrew_theology_all_codes/triage_queue.csv",
   "reports/hebrew_screening_all_codes/triage_queue.csv",
   "reports/greek_screening_all_codes/triage_queue.csv",
@@ -618,6 +623,7 @@ inputs = [
   "protocols/all_codes_followup_letter_paths.toml",
   "scripts/analyze_all_codes_letter_paths.py",
   "scripts/select_all_codes_followup.py",
+  "els/term_display.py",
   "reports/all_codes_followup_selection/selected_rows.csv",
   "configs/example_oshb_wlc.toml",
   "configs/example_uxlc.toml",
@@ -718,6 +724,7 @@ argv = ["-m", "scripts.run_protocol", "protocols/all_codes_followup_review.toml"
 inputs = [
   "protocols/all_codes_followup_review.toml",
   "scripts/build_all_codes_followup_report.py",
+  "els/term_display.py",
   "reports/all_codes_followup_selection/selected_rows.csv",
   "reports/all_codes_followup_selection/manifest.json",
   "reports/all_codes_followup_letter_paths/path_summary.csv",
@@ -738,6 +745,7 @@ description = "Refresh occurrence-first index for centered-self and relevant-cen
 argv = ["-m", "scripts.build_centered_occurrence_index"]
 inputs = [
   "scripts/build_centered_occurrence_index.py",
+  "els/term_display.py",
   "reports/all_codes_followup_review/review_summary.csv",
   "reports/all_codes_followup_context/context_excerpts.csv",
   "reports/dynamic_skip_focus/strong_full_span_exact_center_review_queue.csv",
@@ -889,6 +897,7 @@ argv = ["-m", "scripts.build_real_report_run_summary"]
 always_run = true
 inputs = [
   "scripts/build_real_report_run_summary.py",
+  "els/term_display.py",
   "reports/step_tahot_final_gate/manifest.json",
   "reports/greek_exact_center_final_gate/summary.csv",
   "reports/greek_pattern_versions/summary.csv",

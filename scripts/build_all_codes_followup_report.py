@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
+from els.term_display import display_term
 
 
 SELECTED_IN = Path("reports/all_codes_followup_selection/selected_rows.csv")
@@ -237,8 +238,8 @@ def extension_note(extension: dict[str, str]) -> str:
     best_sequence = extension.get("best_extended_sequence", "")
     best_corpus = extension.get("best_audit_corpus", "")
     if is_compound_extension(extension):
-        return f"; compound same-skip extension `{best_sequence}` in {best_corpus}"
-    return f"; adjacent same-skip extension `{best_sequence}` in {best_corpus} ({best_type})"
+        return f"; compound same-skip extension {display_term(best_sequence)} in {best_corpus}"
+    return f"; adjacent same-skip extension {display_term(best_sequence)} in {best_corpus} ({best_type})"
 
 
 def build_report(
@@ -318,11 +319,11 @@ def build_report(
                     row["selection_rank"],
                     row["source_queue"],
                     f"`{row['review_status']}`",
-                    f"`{row['normalized_term']}`",
+                    display_term(row["normalized_term"], english=row["concept"]),
                     row["concept"],
                     row["skip"],
                     row["center_ref"],
-                    f"`{row['center_word']}`",
+                    display_term(row["center_word"]),
                     row["path_corpora"],
                     extension_cell(row),
                     row["review_note"],
@@ -376,7 +377,7 @@ def is_compound_extension(extension: dict[str, str]) -> bool:
 def extension_cell(row: dict[str, str]) -> str:
     if row.get("best_extended_sequence", ""):
         return (
-            f"`{row['best_extended_sequence']}` "
+            f"{display_term(row['best_extended_sequence'])} "
             f"({row['best_extension_type']}; {row['best_extension_corpus']})"
         )
     return ""

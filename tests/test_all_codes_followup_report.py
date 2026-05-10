@@ -134,4 +134,6 @@ def test_build_report_states_no_claim_and_hidden_rows_retained() -> None:
     assert "`strongest_manual_review`" in text
     assert "`hidden_path_review`" in text
     assert "Rows with compound same-skip extensions" in text
-    assert "`αμηνη`" in text
+    assert "`αμην` (amen; English: Amen)" in text
+    assert "`משיח` (Mashiach; English: Messiah)" in text
+    assert "`αμηνη` (amene)" in text

@@ -23,6 +23,7 @@ from els.report_db import (
     sanitize_table_name,
     verify_table_current,
 )
+from els.term_display import display_term
 
 
 DEFAULT_HITS = Path("reports/hebrew_theology_all_codes/surface_all_codes.csv")
@@ -374,7 +375,10 @@ def write_markdown(path: Path, args: argparse.Namespace, aggregates: dict[str, A
             "| "
             + " | ".join(
                 [
-                    f"`{row.get('term_id', '')}`",
+                    display_term(
+                        str(row.get("normalized_term", "")),
+                        english=str(row.get("concept", "")),
+                    ),
                     str(row.get("concept", "")),
                     f"{int(row.get('hit_count', 0)):,}",
                     f"{int(row.get('exact_center_word_hits', 0)):,}",

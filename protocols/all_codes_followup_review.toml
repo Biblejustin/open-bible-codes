@@ -22,6 +22,7 @@ argv = [
 ]
 inputs = [
   "scripts/build_all_codes_followup_report.py",
+  "els/term_display.py",
   "reports/all_codes_followup_selection/selected_rows.csv",
   "reports/all_codes_followup_selection/manifest.json",
   "reports/all_codes_followup_letter_paths/path_summary.csv",

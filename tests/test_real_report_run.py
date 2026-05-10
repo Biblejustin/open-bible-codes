@@ -274,7 +274,7 @@ class RealReportRunTests(unittest.TestCase):
         )
         text = "\n".join(lines)
         self.assertIn("Terms measured: 2", text)
-        self.assertIn("`σκοτοσ` (3)", text)
+        self.assertIn("`σκοτοσ` (skotos) (3)", text)
 
     def test_surface_control_evaluation_section_lists_p_values(self) -> None:
         lines = summary.surface_control_evaluation_section(

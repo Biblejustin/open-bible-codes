@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
+from els.term_display import display_term
 from scripts.download_wrr_sources import REQUIRED_MANIFEST_LABELS as WRR_REQUIRED_SOURCE_LABELS
 
 
@@ -748,7 +749,7 @@ def write_summary(
         "The centered occurrence index is the dedicated occurrence-first artifact",
         "for that final-report layer.",
         "",
-        "The current `δοξα` four-source follow-ups remain review candidates,",
+        f"The current {display_term('δοξα', english='glory')} four-source follow-ups remain review candidates,",
         "not claims, even though the 5000/5000 and 20000/20000 locked runs",
         "passed their registered q <= 0.01 gates.",
         "",
@@ -782,7 +783,7 @@ def write_summary(
             "| "
             + " | ".join(
                 [
-                    f"`{row['overlap_key']}`",
+                    display_overlap_key(row["overlap_key"]),
                     f"`{row['final_gate']}`",
                     f"`{row['claim_status']}`",
                     row["current_present_corpora"],
@@ -797,7 +798,7 @@ def write_summary(
                 "",
                 "Strongest current Greek row:",
                 "",
-                f"- `{strongest['overlap_key']}`",
+                f"- {display_overlap_key(strongest['overlap_key'])}",
                 f"- gate: `{strongest['final_gate']}`",
                 f"- claim status: `{strongest['claim_status']}`",
             ]
@@ -1058,7 +1059,7 @@ def write_summary(
             "",
             "Before moving from review candidates to claims, freeze a narrower",
             "prospective study with a fixed term list, fixed skip range, fixed controls,",
-            "and study-level correction across all tested rows. The `δοξα` run is a",
+            f"and study-level correction across all tested rows. The {display_term('δοξα', english='glory')} run is a",
             "post-discovery follow-up, so it does not satisfy that stronger standard.",
         ]
     )
@@ -1562,6 +1563,25 @@ def review_status_count(manifest: dict[str, Any], status: str) -> int:
         return 0
 
 
+def display_overlap_key(value: str) -> str:
+    parts = value.split("|")
+    if len(parts) < 6:
+        return md_cell(display_term(value))
+    term, skip, direction, extension_type, extended, sequence = parts[:6]
+    return md_cell(
+        "; ".join(
+            [
+                f"term {display_term(term)}",
+                f"skip `{skip}`",
+                f"direction `{direction}`",
+                f"extension `{extension_type}`",
+                f"extended {display_term(extended)}",
+                f"sequence {display_term(sequence)}",
+            ]
+        )
+    )
+
+
 def centered_occurrence_section(
     presence_rows: list[dict[str, str]],
     manifest: dict[str, Any],
@@ -1620,8 +1640,14 @@ def centered_occurrence_section(
                     f"`{row.get('occurrence_type', '')}`",
                     f"`{row.get('source_family', '')}`",
                     md_cell(row.get("corpora", "")),
-                    f"`{row.get('normalized_term', '')}`",
-                    md_cell(f"{row.get('center_ref', '')} `{row.get('center_word', '')}`"),
+                    display_term(
+                        row.get("normalized_term", ""),
+                        english=row.get("concept", ""),
+                    ),
+                    md_cell(
+                        f"{row.get('center_ref', '')} "
+                        f"{display_term(row.get('center_word', ''))}"
+                    ),
                     f"{int_value(row, 'occurrence_rows'):,}",
                     f"{int_value(row, 'total_paths'):,}",
                     md_cell(row.get("frequency_reads", "")),
@@ -1683,7 +1709,7 @@ def kjva_apocrypha_bridge_confirmatory_section(
             + " | ".join(
                 [
                     str(index),
-                    f"`{row.get('normalized_term', '')}`",
+                    display_term(row.get("normalized_term", "")),
                     f"{int_value(row, 'observed_bridge_rows'):,}",
                     f"{int_value(row, 'sample_max'):,}",
                     row.get("p_ge", ""),
@@ -1791,7 +1817,7 @@ def surface_queue_section(
             "| "
             + " | ".join(
                 [
-                    f"`{row['normalized_term']}`",
+                    display_term(row["normalized_term"], english=row["concept"]),
                     row["concept"],
                     row["total_exact_center_hits"],
                     row["unique_patterns"],
@@ -1844,7 +1870,7 @@ def surface_triage_section(
             "| "
             + " | ".join(
                 [
-                    f"`{row['normalized_term']}`",
+                    display_term(row["normalized_term"], english=row["concept"]),
                     row["concept"],
                     row["center_ref"],
                     row["skip"],
@@ -1886,12 +1912,12 @@ def surface_letter_paths_section(
             "| "
             + " | ".join(
                 [
-                    f"`{row['normalized_term']}`",
+                    display_term(row["normalized_term"]),
                     row["corpus"],
-                    f"`{row['sequence']}`",
+                    display_term(row["sequence"]),
                     row["skip"],
                     row["center_ref"],
-                    f"`{row['center_word']}`",
+                    display_term(row["center_word"]),
                 ]
             )
             + " |"
@@ -1938,14 +1964,14 @@ def surface_control_pool_section(
             if control["target_term_id"] == row["term_id"]
         ][:3]
         control_text = ", ".join(
-            f"`{control['control_normalized_term']}` ({control['surface_vector_l1_delta']})"
+            f"{display_term(control['control_normalized_term'])} ({control['surface_vector_l1_delta']})"
             for control in controls
         )
         lines.append(
             "| "
             + " | ".join(
                 [
-                    f"`{row['normalized_term']}`",
+                    display_term(row["normalized_term"]),
                     "/".join(
                         [
                             row["surface_verses_tr_nt"],
@@ -2003,7 +2029,7 @@ def surface_control_evaluation_section(
             "| "
             + " | ".join(
                 [
-                    f"`{row['target_normalized_term']}`",
+                    display_term(row["target_normalized_term"]),
                     row["observed_all_source_patterns"],
                     row["controls_ge_observed_all_source"],
                     row["all_source_p_ge"],
@@ -2080,7 +2106,7 @@ def surface_length4_followup_section(
         f"| Control-evaluation rows | {len(control_rows):,} |",
         f"| Letter-path audit rows | {len(path_rows):,} |",
         "",
-        f"Selected terms: {', '.join(f'`{term}`' for term in selected_terms)}.",
+        f"Selected terms: {', '.join(display_term(term) for term in selected_terms)}.",
         f"Matched-control q range: {q_range_text}.",
         "",
         "| Term | Observed all-source | Controls >= observed | q |",
@@ -2091,7 +2117,7 @@ def surface_length4_followup_section(
             "| "
             + " | ".join(
                 [
-                    f"`{row['target_normalized_term']}`",
+                    display_term(row["target_normalized_term"]),
                     row["observed_all_source_patterns"],
                     row["controls_ge_observed_all_source"],
                     row["all_source_q_value"],
@@ -2150,7 +2176,7 @@ def surface_length4_vocabulary_controls_section(
             "| "
             + " | ".join(
                 [
-                    f"`{row['target_normalized_term']}`",
+                    display_term(row["target_normalized_term"]),
                     row["observed_all_source_patterns"],
                     row["controls_ge_observed_all_source"],
                     row["all_source_p_ge"],

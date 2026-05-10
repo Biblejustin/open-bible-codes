@@ -15,6 +15,7 @@ from typing import Any
 
 from els import __version__
 from els.normalization import normalize_english, normalize_greek, normalize_hebrew
+from els.term_display import display_term
 
 
 DEFAULT_ALL_CODES_REVIEW = Path("reports/all_codes_followup_review/review_summary.csv")
@@ -66,6 +67,7 @@ SUMMARY_FIELDNAMES = [
     "occurrence_type",
     "source_family",
     "corpus_class",
+    "concept",
     "normalized_term",
     "center_ref",
     "center_word",
@@ -204,6 +206,7 @@ def presence_summary_row(rows: list[dict[str, object]]) -> dict[str, object]:
         "occurrence_type": first.get("occurrence_type", ""),
         "source_family": first.get("source_family", ""),
         "corpus_class": first.get("corpus_class", ""),
+        "concept": first.get("concept", ""),
         "normalized_term": first.get("normalized_term", ""),
         "center_ref": center_ref_base(first.get("center_ref", "")),
         "center_word": first.get("center_word", ""),
@@ -604,10 +607,12 @@ def write_markdown(
 
 
 def summary_markdown_row(row: dict[str, object]) -> str:
-    center = f"{row.get('center_ref', '')} `{row.get('center_word', '')}`"
+    center = f"{row.get('center_ref', '')} {display_term(str(row.get('center_word', '')))}"
     return (
         f"| {row['summary_rank']} | `{row['occurrence_type']}` | `{row['source_family']}` | "
-        f"{row.get('corpora', '')} | `{row.get('normalized_term', '')}` | {md_cell(center)} | "
+        f"{row.get('corpora', '')} | "
+        f"{display_term(str(row.get('normalized_term', '')), english=str(row.get('concept', '')))} | "
+        f"{md_cell(center)} | "
         f"{int_or_zero(row.get('occurrence_rows')):,} | {int_or_zero(row.get('total_paths')):,} | "
         f"{md_cell(truncate(str(row.get('frequency_reads', '')), 70))} | "
         f"{md_cell(truncate(str(row.get('context_excerpt', '')), 100))} |"

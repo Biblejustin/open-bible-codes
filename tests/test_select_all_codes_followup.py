@@ -44,7 +44,19 @@ class SelectAllCodesFollowupTests(unittest.TestCase):
             selected = root / "selected.csv"
             markdown = root / "selection.md"
             manifest = root / "manifest.json"
-            write_queue(queue, [queue_row("", "center_word_exact", "alpha_h", "1")])
+            write_queue(
+                queue,
+                [
+                    {
+                        **queue_row("", "center_word_exact", "amen_g", "1"),
+                        "concept": "Amen",
+                        "term": "αμην",
+                        "normalized_term": "αμην",
+                        "center_word": "αμην",
+                        "center_normalized_word": "αμην",
+                    }
+                ],
+            )
 
             exit_code = select.main(
                 [
@@ -63,7 +75,9 @@ class SelectAllCodesFollowupTests(unittest.TestCase):
             rows = read_rows(selected)
             self.assertEqual(rows[0]["source_queue"], "sample")
             self.assertEqual(rows[0]["bucket"], "center_word_exact")
-            self.assertIn("hidden-path-only rows remain eligible", markdown.read_text(encoding="utf-8"))
+            markdown_text = markdown.read_text(encoding="utf-8")
+            self.assertIn("hidden-path-only rows remain eligible", markdown_text)
+            self.assertIn("`αμην` (amen; English: Amen)", markdown_text)
             data = json.loads(manifest.read_text(encoding="utf-8"))
             self.assertEqual(data["selected_rows"], 1)
             self.assertEqual(data["selected_by_queue"], {"sample": 1})

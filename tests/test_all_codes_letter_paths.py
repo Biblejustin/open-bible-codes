@@ -90,3 +90,32 @@ def test_letter_path_read_lines_distinguishes_center_word_from_requirement() -> 
     text = "\n".join(lines)
     assert "not a requirement" in text
     assert "hidden-path-only" in text
+
+
+def test_markdown_displays_original_language_terms_with_gloss(tmp_path) -> None:
+    markdown = tmp_path / "paths.md"
+    args = type(
+        "Args",
+        (),
+        {
+            "title": "Letter Paths",
+            "status": "test",
+            "selected": "selected.csv",
+            "markdown_row_limit": 10,
+        },
+    )()
+    summary = {
+        **selected_row(),
+        "audit_corpus": "TEST",
+        "sequence": "αγε",
+        "matches_term": "True",
+        "audit_center_ref": "Test 1:1",
+        "audit_center_word": "γδ",
+        "path_refs": "Test 1:1",
+    }
+
+    paths.write_markdown(markdown, [selected_row()], [summary], [], args)
+
+    text = markdown.read_text(encoding="utf-8")
+    assert "`αγε` (age; English: Term)" in text
+    assert "`γδ` (gd)" in text
