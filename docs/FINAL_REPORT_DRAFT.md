@@ -219,6 +219,27 @@ occurrence in the direct Gog/Magog passage. It should appear in the final
 findings list. It should not be frequency-promoted, because all 24 matched
 length-3 non-target controls had more exact-center paths than `γωγ`.
 
+### Centered-Relevance Density
+
+The deterministic CRD broad screens add a fixed-skip centered-relevance layer.
+The self-surface mode asks the narrow question: hidden `X` centered near visible
+`X`. The concept-surface mode allows visible spellings from the same committed
+`(language, concept)` group.
+
+The self-surface rerun produced 1,404,450 classified hit rows and 122,793
+relevant rows. The strict exact center-word subset contains 1,044 Bible rows
+across 131 term IDs. In the center-word-only Bible-vs-control summary, 120
+terms exceed the secular maximum and 94 are Bible-positive with secular max
+zero.
+
+The concept-surface exact center-word Bible hit set is identical to the
+self-surface set: 1,044 rows, with zero self-only or concept-only Bible rows.
+Concept expansion changed only two secular-control center-word maximums and
+changed zero exact center-word exceedance decisions. That means exact
+center-word findings should be reviewed from the self-surface packet, while
+concept-surface remains useful for broader center-verse and span-context
+review.
+
 The locked Hebrew Gog/Magog pair-control prospective run over MT_WLC and UHB
 also completed. It found strict same-chapter same-signed-skip overlap examples
 in both sources, but both target rows were `not_unusual` under pair controls,

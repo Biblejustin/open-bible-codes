@@ -261,6 +261,19 @@ surface text. This is meaningful as a review flag, but it is not a standalone
 claim test because the candidate set was selected after a broad screen and
 because exact-center hits can be driven by ordinary surface vocabulary.
 
+The CRD self-surface and concept-surface broad screens add a separate
+centered-relevance view over the fixed `skip_range = 2..100` corpus set. The
+self-surface rerun found 1,404,450 classified hit rows and 122,793 relevant
+rows. The strict exact `center_word` subset contains 1,044 Bible rows across
+131 term IDs. Its center-word-only Bible-vs-control summary has 120 terms
+exceeding the secular maximum, including 94 Bible-positive/secular-zero terms.
+The concept-surface run has the same 1,044 Bible exact center-word row keys;
+concept expansion changed only two secular-control center-word max rows and
+changed zero exact center-word exceedance decisions. Therefore exact
+center-word review can use the self-surface packet without losing
+concept-surface Bible rows, while broader center-verse/span relevance should
+remain reported separately.
+
 The ChurchAges statistics audit is tracked in
 `reports/churchages_statistics/audit.md`.
 
