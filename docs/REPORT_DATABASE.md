@@ -98,10 +98,17 @@ make crd-self-surface-report
 make crd-self-surface-queue
 make crd-self-surface-center-word
 make crd-self-surface-center-word-density
+make crd-self-surface-center-word-queue
+make crd-self-surface-center-word-packet
+make crd-self-surface-center-word-presence
 make crd-concept-surface-report
 make crd-concept-surface-queue
 make crd-concept-surface-center-word
 make crd-concept-surface-center-word-density
+make crd-concept-surface-center-word-queue
+make crd-concept-surface-center-word-packet
+make crd-concept-surface-center-word-presence
+make crd-center-word-findings
 ```
 
 For ad hoc import:
