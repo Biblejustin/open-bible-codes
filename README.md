@@ -49,6 +49,16 @@ Repository navigation:
 - regenerate both: `make indexes`
 - multi-machine dense partition workflow: `docs/PARTITION_WORKER_WORKFLOW.md`
 
+Public-release hygiene check before publishing or pushing:
+
+```bash
+make public-release-check
+```
+
+This verifies the Git remote points at `Biblejustin/open-bible-codes`, rejects
+tracked report/database/raw-source artifacts, scans tracked files for the
+forbidden GitHub account text, and checks high-confidence secret-token patterns.
+
 Full public source bootstrap:
 
 ```bash
