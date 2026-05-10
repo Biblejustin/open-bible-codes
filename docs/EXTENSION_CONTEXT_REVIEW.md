@@ -48,16 +48,16 @@ Promotion gates:
 
 | Overlap | Rows | Context read |
 | --- | ---: | --- |
-| `υιοσ` / `υιοστησ` | 2 | ELS-only in John 5:13; matched phrase occurs elsewhere |
-| `αδαμ` / `αδαμεισ` | 2 | ELS-only in Hebrews 13:15-16; matched phrase occurs elsewhere |
-| `δοξα` / `δοξανωσ` | 2 | base normalized string appears in 2 Thessalonians 3:1; full matched phrase does not |
+| `υιοσ` (huios; English: son) / `υιοστησ` (huiostes; English: hidden extension form from huios) | 2 | ELS-only in John 5:13; matched phrase occurs elsewhere |
+| `αδαμ` (Adam; English: Adam) / `αδαμεισ` (adameis; English: hidden extension form from Adam) | 2 | ELS-only in Hebrews 13:15-16; matched phrase occurs elsewhere |
+| `δοξα` (doxa; English: glory) / `δοξανωσ` (doxanos; English: hidden extension form from doxa) | 2 | base normalized string appears in 2 Thessalonians 3:1; full matched phrase does not |
 
 ## Interpretation
 
 - The overlap controls still identify these rows as worth review.
 - Context review does not support saying the hit passages plainly discuss the full extension phrases.
-- The `δοξα` overlap is the only promotion-gate pass because the original surface-context row is exact-center.
-- The `υιος` and `αδαμ` overlaps are weaker because their matched phrases are ELS-only at the hit span and their surface context is same-category only.
+- The `δοξα` (doxa; English: glory) overlap is the only promotion-gate pass because the original surface-context row is exact-center.
+- The `υιος` (huios; English: son) and `αδαμ` (Adam; English: Adam) overlaps are weaker because their matched phrases are ELS-only at the hit span and their surface context is same-category only.
 
 ## Letter Paths
 
@@ -75,7 +75,7 @@ This is the human review sheet for the 3 strict overlaps.
 ## Next Stronger Review
 
 - use `docs/EXTENSION_EXACT_CENTER_CONTROLS.md` as the deeper exact-center follow-up
-- use `docs/EXTENSION_EXACT_CENTER_COHORT_CONTROLS.md` to compare `δοξα` with the broader exact-center top-row cohort
+- use `docs/EXTENSION_EXACT_CENTER_COHORT_CONTROLS.md` to compare `δοξα` (doxa; English: glory) with the broader exact-center top-row cohort
 
 ## Reproduce
 

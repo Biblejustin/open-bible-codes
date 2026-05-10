@@ -29,9 +29,9 @@ Overlap key:
 
 Expected overlap pairs:
 
-- `υιος`, skip `-4`, backward, `term_plus_after`, `υιοστησ`
-- `αδαμ`, skip `11`, forward, `term_plus_after`, `αδαμεισ`
-- `δοξα`, skip `21`, forward, `term_plus_after`, `δοξανωσ`
+- `υιος` (huios; English: son), skip `-4`, backward, `term_plus_after`, `υιοστησ` (huiostes; English: hidden extension form from huios)
+- `αδαμ` (Adam; English: Adam), skip `11`, forward, `term_plus_after`, `αδαμεισ` (adameis; English: hidden extension form from Adam)
+- `δοξα` (doxa; English: glory), skip `21`, forward, `term_plus_after`, `δοξανωσ` (doxanos; English: hidden extension form from doxa)
 
 The run keeps one row per corpus per overlap key, so the report should contain 6 rows.
 
@@ -59,17 +59,17 @@ This is a stronger review queue than the 10/10 all-extension screen, but still n
 
 | Corpus | Term | Skip | Extension | Combined p | Combined q | Band | Notes |
 | --- | --- | ---: | --- | ---: | ---: | --- | --- |
-| SBLGNT | `υιος` | -4 | `υιοστησ` | 0.019608 | 0.019608 | `extension_q_le_0.05` | John 5:13 overlap |
-| TR_NT | `υιος` | -4 | `υιοστησ` | 0.019608 | 0.019608 | `extension_q_le_0.05` | JHN 5:13 overlap |
-| SBLGNT | `αδαμ` | 11 | `αδαμεισ` | 0.019608 | 0.019608 | `extension_q_le_0.05` | Heb 13:16 overlap |
-| TR_NT | `αδαμ` | 11 | `αδαμεισ` | 0.019608 | 0.019608 | `extension_q_le_0.05` | HEB 13:16 overlap |
-| SBLGNT | `δοξα` | 21 | `δοξανωσ` | 0.019608 | 0.019608 | `extension_q_le_0.05` | 2Thess 3:1 overlap |
-| TR_NT | `δοξα` | 21 | `δοξανωσ` | 0.019608 | 0.019608 | `extension_q_le_0.05` | 2TH 3:1 overlap |
+| SBLGNT | `υιος` (huios; English: son) | -4 | `υιοστησ` (huiostes; English: hidden extension form from huios) | 0.019608 | 0.019608 | `extension_q_le_0.05` | John 5:13 overlap |
+| TR_NT | `υιος` (huios; English: son) | -4 | `υιοστησ` (huiostes; English: hidden extension form from huios) | 0.019608 | 0.019608 | `extension_q_le_0.05` | JHN 5:13 overlap |
+| SBLGNT | `αδαμ` (Adam; English: Adam) | 11 | `αδαμεισ` (adameis; English: hidden extension form from Adam) | 0.019608 | 0.019608 | `extension_q_le_0.05` | Heb 13:16 overlap |
+| TR_NT | `αδαμ` (Adam; English: Adam) | 11 | `αδαμεισ` (adameis; English: hidden extension form from Adam) | 0.019608 | 0.019608 | `extension_q_le_0.05` | HEB 13:16 overlap |
+| SBLGNT | `δοξα` (doxa; English: glory) | 21 | `δοξανωσ` (doxanos; English: hidden extension form from doxa) | 0.019608 | 0.019608 | `extension_q_le_0.05` | 2Thess 3:1 overlap |
+| TR_NT | `δοξα` (doxa; English: glory) | 21 | `δοξανωσ` (doxanos; English: hidden extension form from doxa) | 0.019608 | 0.019608 | `extension_q_le_0.05` | 2TH 3:1 overlap |
 
 ## Read
 
 - These rows survive a stricter text-form overlap filter.
-- The extension strings are ordinary Greek phrase completions: `υἱὸς τῆς`, `Ἀδὰμ εἰς`, and `δόξαν ὡς`.
+- The extension strings are ordinary Greek phrase completions: `υἱὸς τῆς` (huios tes; English: son of the), `Ἀδὰμ εἰς` (Adam eis; English: Adam into), and `δόξαν ὡς` (doxan hos; English: glory as).
 - The rows are now worth manual review in context.
 - The result still mainly says "these overlap rows beat sampled local controls", not "these are encoded messages."
 - Manual context review is tracked in `docs/EXTENSION_CONTEXT_REVIEW.md`.

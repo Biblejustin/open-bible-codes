@@ -33,14 +33,14 @@ records the result needed for review.
 
 | Field | Value |
 | --- | --- |
-| Base term | `δοξα` |
-| Extension key | `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` |
+| Base term | `δοξα` (doxa; English: glory) |
+| Extension key | `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` (doxa / doxanos; English: glory / hidden extension form from doxa) |
 | Skip | `21` |
 | Direction | `forward` |
 | Extension type | `term_plus_after` |
 | Extension side | `after` |
-| Extended normalized sequence | `δοξανωσ` |
-| Matched phrase | `δόξαν ὡς` |
+| Extended normalized sequence | `δοξανωσ` (doxanos; English: hidden extension form from doxa) |
+| Matched phrase | `δόξαν ὡς` (doxan hos; English: glory as) |
 | Matched phrase reference | John 1:14 / JHN 1:14 |
 
 No alternate spelling, skip, direction, extension length, or nearby row was used.
@@ -81,10 +81,11 @@ Both rows remained at the 1000/1000 control floor.
 ## Context And Audit
 
 The base term has exact-center surface context in both texts through
-`δοξάζηται` in 2 Thessalonians 3:1.
+`δοξάζηται` (doxazetai; English: may be glorified) in 2 Thessalonians 3:1.
 
-The full hidden extension sequence `δοξανωσ` maps to the phrase `δόξαν ὡς`, but
-that phrase is not surface text in the 2 Thessalonians 3:1-2 hit/extension
+The full hidden extension sequence `δοξανωσ` (doxanos; English: hidden extension
+form from doxa) maps to the phrase `δόξαν ὡς` (doxan hos; English: glory as),
+but that phrase is not surface text in the 2 Thessalonians 3:1-2 hit/extension
 passage. The matched phrase is surface text elsewhere, at John 1:14 / JHN 1:14.
 
 Audit paths are saved in the existing exact-center cohort review output:
@@ -96,15 +97,15 @@ Those paths show the same 7-letter hidden sequence in both Greek NT texts:
 
 | Corpus | Letter path |
 | --- | --- |
-| SBLGNT | `δ@2Thess 3:1:547432;ο@2Thess 3:1:547453;ξ@2Thess 3:1:547474;α@2Thess 3:1:547495;ν@2Thess 3:2:547516;ω@2Thess 3:2:547537;σ@2Thess 3:2:547558` |
-| TR_NT | `δ@2TH 3:1:556748;ο@2TH 3:1:556769;ξ@2TH 3:1:556790;α@2TH 3:1:556811;ν@2TH 3:2:556832;ω@2TH 3:2:556853;σ@2TH 3:2:556874` |
+| SBLGNT | `δ@2Thess 3:1:547432;ο@2Thess 3:1:547453;ξ@2Thess 3:1:547474;α@2Thess 3:1:547495;ν@2Thess 3:2:547516;ω@2Thess 3:2:547537;σ@2Thess 3:2:547558` (letters spell `δοξανωσ` [doxanos; English: hidden extension form from doxa]) |
+| TR_NT | `δ@2TH 3:1:556748;ο@2TH 3:1:556769;ξ@2TH 3:1:556790;α@2TH 3:1:556811;ν@2TH 3:2:556832;ω@2TH 3:2:556853;σ@2TH 3:2:556874` (letters spell `δοξανωσ` [doxanos; English: hidden extension form from doxa]) |
 
 ## Preregistration Check
 
 | Criterion | Result | Note |
 | --- | --- | --- |
 | Exact extension key appears in both TR_NT and SBLGNT | pass | Same key present in both rows |
-| Both rows retain exact-center base-term surface context | pass | `δοξάζηται` in 2 Thessalonians 3:1 |
+| Both rows retain exact-center base-term surface context | pass | `δοξάζηται` (doxazetai; English: may be glorified) in 2 Thessalonians 3:1 |
 | Both rows have `combined_min_q <= 0.01` | pass | Both are `0.000999` |
 | Saved examples and letter paths exist | pass with dependency | Deep-control examples are saved; letter paths are from exact-center cohort review outputs |
 | Full phrase location reported as hidden-path only when not surface text in hit passage | pass | Reported above |

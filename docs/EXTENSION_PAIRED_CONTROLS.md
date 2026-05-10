@@ -55,9 +55,9 @@ The generated summary should be read alongside `docs/EXTENSION_TOP_HITS_REVIEW.m
 
 Rows to inspect first:
 
-- strict TR_NT/SBLGNT overlaps: `υιος` skip `-4`, `αδαμ` skip `11`, `δοξα` skip `21`
-- SBLGNT rows with exact center/span context, especially `υιος`, `αιμα`, and `ΝΑΤΟ`
-- TR_NT rows with same-category center/span context, especially `θεος`, `ναος`, `υιος`, and `αιμα`
+- strict TR_NT/SBLGNT overlaps: `υιος` (huios; English: son) skip `-4`, `αδαμ` (Adam; English: Adam) skip `11`, `δοξα` (doxa; English: glory) skip `21`
+- SBLGNT rows with exact center/span context, especially `υιος` (huios; English: son), `αιμα` (haima; English: blood), and `ΝΑΤΟ` (NATO; English: NATO)
+- TR_NT rows with same-category center/span context, especially `θεος` (theos; English: God), `ναος` (naos; English: temple), `υιος` (huios; English: son), and `αιμα` (haima; English: blood)
 
 ## Cautions
 

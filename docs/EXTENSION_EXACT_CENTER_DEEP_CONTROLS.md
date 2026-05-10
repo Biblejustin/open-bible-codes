@@ -19,7 +19,7 @@ cross-text NT extension row that survived the final gate.
 
 Included overlap key:
 
-- `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ`
+- `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` (doxa / doxanos; English: glory / hidden extension form from doxa)
 
 Rows:
 
@@ -36,7 +36,7 @@ The p-value floor for this run is 1 / 1001 = 0.000999.
 
 ## Main Read
 
-Both exact-center `δοξα` rows stayed at the control floor after increasing from
+Both exact-center `δοξα` (doxa; English: glory) rows stayed at the control floor after increasing from
 200/200 to 1000/1000 controls.
 
 | Corpus | Center | Matched phrase ref | Score | Term-any p | Random-any p | Combined p | Combined q |
@@ -58,8 +58,8 @@ still should not be promoted as a claim.
 
 Reasons it remains review-only:
 
-- the base term `δοξα` has exact-center surface context through `δοξάζηται`;
-- the full extension sequence `δοξανωσ` maps to the phrase `δόξαν ὡς`, but that
+- the base term `δοξα` (doxa; English: glory) has exact-center surface context through `δοξάζηται` (doxazetai; English: may be glorified);
+- the full extension sequence `δοξανωσ` (doxanos; English: hidden extension form from doxa) maps to the phrase `δόξαν ὡς` (doxan hos; English: glory as), but that
   phrase is not surface text in the hit passage;
 - the same phrase is attested elsewhere, at John 1:14 / JHN 1:14;
 - the base term is short;
@@ -68,7 +68,7 @@ Reasons it remains review-only:
 - synthetic extension baselines already show that hidden same-skip phrase
   scoring can create convincing-looking control rows.
 
-Current read: keep `δοξα` as the top review row. Do not present it externally as
+Current read: keep `δοξα` (doxa; English: glory) as the top review row. Do not present it externally as
 evidence unless a predeclared study design and broader matched-control cohort
 support the same result.
 

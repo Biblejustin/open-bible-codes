@@ -22,28 +22,28 @@ This checks each exact-center extension cohort row against the opposite Greek NT
 
 ## Main Read
 
-Only `δοξα` survives the cross-text requirement.
+Only `δοξα` (doxa; English: glory) survives the cross-text requirement.
 
 | Source | Term | Extension | Opposite text | Matches | Status |
 | --- | --- | --- | --- | ---: | --- |
-| SBLGNT | `αιμα` | `ναιμανο` | TR_NT | 0 | `source_only` |
-| SBLGNT | `δοξα` | `δοξανωσ` | TR_NT | 1 | `cross_text_match` |
-| TR_NT | `δοξα` | `δοξανωσ` | SBLGNT | 1 | `cross_text_match` |
-| SBLGNT | `υιος` | `ουουιοσ` | TR_NT | 0 | `source_only` |
+| SBLGNT | `αιμα` (haima; English: blood) | `ναιμανο` (naimano; English: hidden extension form from haima) | TR_NT | 0 | `source_only` |
+| SBLGNT | `δοξα` (doxa; English: glory) | `δοξανωσ` (doxanos; English: hidden extension form from doxa) | TR_NT | 1 | `cross_text_match` |
+| TR_NT | `δοξα` (doxa; English: glory) | `δοξανωσ` (doxanos; English: hidden extension form from doxa) | SBLGNT | 1 | `cross_text_match` |
+| SBLGNT | `υιος` (huios; English: son) | `ουουιοσ` (ouhuios; English: hidden extension form from huios) | TR_NT | 0 | `source_only` |
 
 Read:
 
-- `δοξα` remains the only exact-center cohort key with TR_NT/SBLGNT support.
-- SBLGNT `αιμα` and `υιος` should be demoted unless a looser cross-text rule is intentionally declared.
+- `δοξα` (doxa; English: glory) remains the only exact-center cohort key with TR_NT/SBLGNT support.
+- SBLGNT `αιμα` (haima; English: blood) and `υιος` (huios; English: son) should be demoted unless a looser cross-text rule is intentionally declared.
 - Exact key matching is strict; it does not count related terms or nearby but non-identical extension phrases.
 
 ## Caution
 
-Cross-text support is a filter, not proof. `δοξα` still has a hidden full extension phrase, not a surface phrase in the passage.
+Cross-text support is a filter, not proof. `δοξα` (doxa; English: glory) still has a hidden full extension phrase, not a surface phrase in the passage.
 
 ## Next Check
 
-- keep `δοξα` as the only exact-center cross-text extension review row
+- keep `δοξα` (doxa; English: glory) as the only exact-center cross-text extension review row
 - apply 200/200 controls only to cross-text rows
 - if testing SBLGNT-only rows, mark them as source-specific screens
 

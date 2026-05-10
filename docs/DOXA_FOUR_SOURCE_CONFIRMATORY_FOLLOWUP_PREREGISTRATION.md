@@ -2,7 +2,7 @@
 
 Status: post-discovery confirmatory follow-up, not an original discovery.
 
-This freezes a stricter rerun for the already discovered Greek `δοξα` row. It
+This freezes a stricter rerun for the already discovered Greek `δοξα` (doxa; English: glory) row. It
 does not widen the search, add variants, or inspect nearby rows. The only goal
 is to test whether the same exact row remains unusual under a larger locked
 control budget.
@@ -13,13 +13,13 @@ Only one candidate is registered:
 
 | Field | Value |
 | --- | --- |
-| Base term | `δοξα` |
-| Extension key | `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` |
+| Base term | `δοξα` (doxa; English: glory) |
+| Extension key | `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` (doxa / doxanos; English: glory / hidden extension form from doxa) |
 | Skip | `21` |
 | Direction | `forward` |
 | Extension type | `term_plus_after` |
-| Extended normalized sequence | `δοξανωσ` |
-| Matched phrase | `δόξαν ὡς` |
+| Extended normalized sequence | `δοξανωσ` (doxanos; English: hidden extension form from doxa) |
+| Matched phrase | `δόξαν ὡς` (doxan hos; English: glory as) |
 | Center passage | 2 Thessalonians 3:1 |
 | Matched phrase reference | John 1:14 / JHN 1:14 |
 

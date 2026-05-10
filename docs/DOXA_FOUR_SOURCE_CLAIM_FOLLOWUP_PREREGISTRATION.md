@@ -2,7 +2,7 @@
 
 Status: post-discovery locked follow-up, not a claim.
 
-This document freezes the next `δοξα` study before the stronger control run is
+This document freezes the next `δοξα` (doxa; English: glory) study before the stronger control run is
 started. The candidate was already discovered in earlier exact-center Greek
 extension screens, so this is not a prospective discovery. It is a locked
 follow-up designed to test whether the currently strongest row remains unusual
@@ -14,13 +14,13 @@ Only one candidate is registered for this follow-up:
 
 | Field | Value |
 | --- | --- |
-| Base term | `δοξα` |
-| Extension key | `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` |
+| Base term | `δοξα` (doxa; English: glory) |
+| Extension key | `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` (doxa / doxanos; English: glory / hidden extension form from doxa) |
 | Skip | `21` |
 | Direction | `forward` |
 | Extension type | `term_plus_after` |
-| Extended normalized sequence | `δοξανωσ` |
-| Matched phrase | `δόξαν ὡς` |
+| Extended normalized sequence | `δοξανωσ` (doxanos; English: hidden extension form from doxa) |
+| Matched phrase | `δόξαν ὡς` (doxan hos; English: glory as) |
 | Center passage | 2 Thessalonians 3:1 |
 | Matched phrase reference | John 1:14 / JHN 1:14 |
 
@@ -156,7 +156,7 @@ The follow-up report must include:
 
 ## Interpretation Boundary
 
-This study can show whether the already-discovered four-source `δοξα` row
+This study can show whether the already-discovered four-source `δοξα` (doxa; English: glory) row
 survives a stricter locked control run. It cannot prove theological meaning by
 itself. A stronger claim would require an additional prospective study with the
 candidate list and claim standard fixed before discovery.

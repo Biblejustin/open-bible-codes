@@ -2,9 +2,9 @@
 
 Status: post-discovery follow-up preregistration.
 
-This document freezes the next `δοξα` extension study before additional
+This document freezes the next `δοξα` (doxa; English: glory) extension study before additional
 interpretive work is done. It does not make the original discovery
-prospective. The `δοξα` / `δοξανωσ` row was already found by prior exploratory
+prospective. The `δοξα` (doxa; English: glory) / `δοξανωσ` (doxanos; English: hidden extension form from doxa) row was already found by prior exploratory
 screening, so all results from that discovery path remain review-level unless
 the criteria below are met by a locked follow-up.
 
@@ -14,14 +14,14 @@ Only one candidate is registered for this follow-up:
 
 | Field | Value |
 | --- | --- |
-| Base term | `δοξα` |
-| Extension key | `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` |
+| Base term | `δοξα` (doxa; English: glory) |
+| Extension key | `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` (doxa / doxanos; English: glory / hidden extension form from doxa) |
 | Skip | `21` |
 | Direction | `forward` |
 | Extension type | `term_plus_after` |
 | Extension side | `after` |
-| Extended normalized sequence | `δοξανωσ` |
-| Matched phrase | `δόξαν ὡς` |
+| Extended normalized sequence | `δοξανωσ` (doxanos; English: hidden extension form from doxa) |
+| Matched phrase | `δόξαν ὡς` (doxan hos; English: glory as) |
 | Center passage | 2 Thessalonians 3:1 |
 | Matched phrase reference | John 1:14 / JHN 1:14 |
 
@@ -144,7 +144,7 @@ Every follow-up report must include:
 - exact `combined_min_p` and `combined_min_q`;
 - warning flags;
 - explicit statement that this is post-discovery;
-- explicit statement that `δόξαν ὡς` is not surface text in the 2 Thessalonians
+- explicit statement that `δόξαν ὡς` (doxan hos; English: glory as) is not surface text in the 2 Thessalonians
   hit passage unless a future audit proves otherwise.
 
 The first locked follow-up report is tracked in
@@ -152,7 +152,7 @@ The first locked follow-up report is tracked in
 
 ## Interpretation Boundary
 
-This study can show whether the already-discovered `δοξα` row remains stable
+This study can show whether the already-discovered `δοξα` (doxa; English: glory) row remains stable
 under locked, deeper controls. It cannot prove theological meaning by itself.
 
 Any stronger claim requires a new prospective study with either:

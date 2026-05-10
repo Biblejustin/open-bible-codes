@@ -15,7 +15,7 @@ This combines exact-center context, controls, and cross-text support into one fi
 
 ## Main Read
 
-`δοξα` is the only row that passes all three filters:
+`δοξα` (doxa; English: glory) is the only row that passes all three filters:
 
 - exact-center surface context
 - exact extension-key support in both TR_NT and SBLGNT
@@ -26,23 +26,23 @@ Rows:
 
 | Corpus | Term | Extension | Control q | Cross-text | Final gate | Claim status |
 | --- | --- | --- | ---: | --- | --- | --- |
-| SBLGNT | `αιμα` | `ναιμανο` | 0.019608 | source-only | `hold_source_only` | `hold` |
-| SBLGNT | `δοξα` | `δοξανωσ` | 0.004975 | cross-text | `review_cross_text_exact_center_hidden_phrase` | `review_only_not_claim` |
-| TR_NT | `δοξα` | `δοξανωσ` | 0.004975 | cross-text | `review_cross_text_exact_center_hidden_phrase` | `review_only_not_claim` |
-| SBLGNT | `υιος` | `ουουιοσ` | 0.019608 | source-only | `hold_source_only` | `hold` |
+| SBLGNT | `αιμα` (haima; English: blood) | `ναιμανο` (naimano; English: hidden extension form from haima) | 0.019608 | source-only | `hold_source_only` | `hold` |
+| SBLGNT | `δοξα` (doxa; English: glory) | `δοξανωσ` (doxanos; English: hidden extension form from doxa) | 0.004975 | cross-text | `review_cross_text_exact_center_hidden_phrase` | `review_only_not_claim` |
+| TR_NT | `δοξα` (doxa; English: glory) | `δοξανωσ` (doxanos; English: hidden extension form from doxa) | 0.004975 | cross-text | `review_cross_text_exact_center_hidden_phrase` | `review_only_not_claim` |
+| SBLGNT | `υιος` (huios; English: son) | `ουουιοσ` (ouhuios; English: hidden extension form from huios) | 0.019608 | source-only | `hold_source_only` | `hold` |
 
 ## Verdict
 
-The final gate keeps only `δοξα` as a review row. It is still not a claim because the full extension phrase is hidden-path only, not surface text in the passage.
+The final gate keeps only `δοξα` (doxa; English: glory) as a review row. It is still not a claim because the full extension phrase is hidden-path only, not surface text in the passage.
 
 Focused 1000/1000 follow-up controls are tracked in
 `docs/EXTENSION_EXACT_CENTER_DEEP_CONTROLS.md`.
 
 ## Next Check
 
-- if continuing extension work, review only `δοξα` unless looser source-specific rules are declared
+- if continuing extension work, review only `δοξα` (doxa; English: glory) unless looser source-specific rules are declared
 - compare against `docs/SYNTHETIC_EXTENSION_BASELINES.md` before promoting any short-term ELS pattern
-- keep `αιμα` and `υιος` as source-only screens
+- keep `αιμα` (haima; English: blood) and `υιος` (huios; English: son) as source-only screens
 
 ## Reproduce
 

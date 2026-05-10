@@ -18,7 +18,7 @@ This is the deeper 200/200 control run for the only strict extension overlap tha
 
 Included overlap key:
 
-- `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ`
+- `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` (doxa / doxanos; English: glory / hidden extension form from doxa)
 
 Rows:
 
@@ -33,7 +33,7 @@ Controls:
 
 ## Main Read
 
-Both exact-center `δοξα` rows crossed the deeper q <= 0.01 screen.
+Both exact-center `δοξα` (doxa; English: glory) rows crossed the deeper q <= 0.01 screen.
 
 Band counts:
 
@@ -52,18 +52,18 @@ Read:
 
 - This is the strongest current extension row after controls and context gates.
 - It survives TR_NT/SBLGNT overlap.
-- It passes exact-center context because `δοξα` appears in the center verse surface text as part of `δοξάζηται`.
-- The full matched phrase `δόξαν ὡς` still does not appear as surface text in the hit/extension passage.
+- It passes exact-center context because `δοξα` (doxa; English: glory) appears in the center verse surface text as part of `δοξάζηται` (doxazetai; English: may be glorified).
+- The full matched phrase `δόξαν ὡς` (doxan hos; English: glory as) still does not appear as surface text in the hit/extension passage.
 - This remains an internal review item, not an external claim.
 
 ## Caution
 
-The exact-center gate is stronger than same-category context, but the full matched phrase `δόξαν ὡς` does not appear as surface text in the hit/extension span. The term is also short (`δοξα`), and both rows still carry low random-variance warnings.
+The exact-center gate is stronger than same-category context, but the full matched phrase `δόξαν ὡς` (doxan hos; English: glory as) does not appear as surface text in the hit/extension span. The term is also short (`δοξα` [doxa; English: glory]), and both rows still carry low random-variance warnings.
 
 ## Next Check
 
 - manually review 2 Thessalonians 3:1-2 and the letter path table
-- compare this exact-center `δοξα` row against other exact-center theological rows, not only this hand-picked overlap
+- compare this exact-center `δοξα` (doxa; English: glory) row against other exact-center theological rows, not only this hand-picked overlap
 - avoid promotion unless it remains unusual after a broader exact-center extension cohort is tested
 - broader cohort check is tracked in `docs/EXTENSION_EXACT_CENTER_COHORT_CONTROLS.md`
 - 1000/1000 follow-up controls are tracked in `docs/EXTENSION_EXACT_CENTER_DEEP_CONTROLS.md`

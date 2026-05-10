@@ -20,16 +20,16 @@ All 4 rows pass the exact-center gate because the base normalized term appears i
 
 | Row | Center | Surface read | Full extension phrase |
 | --- | --- | --- | --- |
-| SBLGNT `αιμα` / `ναιμανο` | Rev 17:6 | `αἵματος` appears twice in the center verse | not surface text |
-| SBLGNT `υιος` / `ουουιοσ` | Luke 19:9 | `υἱὸς` appears in the center/hit span | not surface text |
-| SBLGNT `δοξα` / `δοξανωσ` | 2Thess 3:1 | `δοξάζηται` appears in the center verse | not surface text |
-| TR_NT `δοξα` / `δοξανωσ` | 2TH 3:1 | `δοξάζηται` appears in the center verse | not surface text |
+| SBLGNT `αιμα` (haima; English: blood) / `ναιμανο` (naimano; English: hidden extension form from haima) | Rev 17:6 | `αἵματος` (haimatos; English: of blood) appears twice in the center verse | not surface text |
+| SBLGNT `υιος` (huios; English: son) / `ουουιοσ` (ouhuios; English: hidden extension form from huios) | Luke 19:9 | `υἱὸς` (huios; English: son) appears in the center/hit span | not surface text |
+| SBLGNT `δοξα` (doxa; English: glory) / `δοξανωσ` (doxanos; English: hidden extension form from doxa) | 2Thess 3:1 | `δοξάζηται` (doxazetai; English: may be glorified) appears in the center verse | not surface text |
+| TR_NT `δοξα` (doxa; English: glory) / `δοξανωσ` (doxanos; English: hidden extension form from doxa) | 2TH 3:1 | `δοξάζηται` (doxazetai; English: may be glorified) appears in the center verse | not surface text |
 
 ## Letter Path Notes
 
-- `αιμα` path crosses Rev 17:5-6; surface context is already blood-heavy, but the extension `ναιμανο` is not a surface phrase.
-- `υιος` path crosses Luke 19:8-10; the center/hit passage discusses sonship, but `ουουιοσ` is not a surface phrase.
-- `δοξα` path crosses 2 Thessalonians 3:1-2 in both Greek NT texts; the base term is surface-related through `δοξάζηται`, but `δόξαν ὡς` remains hidden-path only.
+- `αιμα` (haima; English: blood) path crosses Rev 17:5-6; surface context is already blood-heavy, but the extension `ναιμανο` (naimano; English: hidden extension form from haima) is not a surface phrase.
+- `υιος` (huios; English: son) path crosses Luke 19:8-10; the center/hit passage discusses sonship, but `ουουιοσ` (ouhuios; English: hidden extension form from huios) is not a surface phrase.
+- `δοξα` (doxa; English: glory) path crosses 2 Thessalonians 3:1-2 in both Greek NT texts; the base term is surface-related through `δοξάζηται` (doxazetai; English: may be glorified), but `δόξαν ὡς` (doxan hos; English: glory as) remains hidden-path only.
 
 ## Caution
 
