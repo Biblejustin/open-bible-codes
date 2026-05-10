@@ -26,6 +26,8 @@ reports/**/*.json
 reports/**/*.md
 reports/**/*.toml
 reports/**/*.zip
+reports/**/*.duckdb
+reports/**/*.duckdb.wal
 reports/wrr_1994/*.txt
 reports/wrr_1994/*.html
 reports/wrr_1994/*.pdf

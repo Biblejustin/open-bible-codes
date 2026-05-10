@@ -3,7 +3,10 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 
-from scripts.build_crd_scope_density import build_matrix_rows, build_summary_rows, count_scope_hits
+import pytest
+
+from els.report_db import import_csv_table
+from scripts.build_crd_scope_density import build_matrix_rows, build_summary_rows, count_scope_hits, count_scope_hits_db
 
 
 def test_scope_density_counts_and_compares_bible_controls(tmp_path: Path) -> None:
@@ -41,6 +44,26 @@ def test_scope_density_counts_and_compares_bible_controls(tmp_path: Path) -> Non
     assert summary_rows[0]["secular_max_density"] == "5000"
     assert summary_rows[0]["ratio"] == "4"
     assert summary_rows[0]["exceeds_secular_max"] == "true"
+
+
+def test_count_scope_hits_can_read_from_duckdb(tmp_path: Path) -> None:
+    pytest.importorskip("duckdb")
+    classified_hits = tmp_path / "classified_hits.csv"
+    db = tmp_path / "reports" / "db.duckdb"
+    write_rows(
+        classified_hits,
+        [
+            hit("term", "BIBLE", "bible", "center_word"),
+            hit("term", "BIBLE", "bible", "center_word"),
+            hit("term", "CTRL", "secular_control", "center_word"),
+        ],
+    )
+    import_csv_table(db_path=db, csv_path=classified_hits, table_name="classified_hits")
+
+    counts = count_scope_hits_db(db=db, table="classified_hits", surface_match_scope="center_word")
+
+    assert counts[("deterministic", "term", "BIBLE")] == 2
+    assert counts[("deterministic", "term", "CTRL")] == 1
 
 
 def hit(term_id: str, corpus: str, corpus_class: str, scope: str) -> dict[str, str]:

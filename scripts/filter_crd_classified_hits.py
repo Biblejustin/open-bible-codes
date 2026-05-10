@@ -7,6 +7,8 @@ import argparse
 import csv
 from pathlib import Path
 
+from els.report_db import default_table_name, export_query_to_csv, quote_identifier, sanitize_table_name, where_clause
+
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
@@ -16,6 +18,8 @@ def main(argv: list[str] | None = None) -> int:
         corpus_class=args.corpus_class,
         is_relevant=args.is_relevant,
         surface_match_scope=args.surface_match_scope,
+        db=args.db,
+        table=args.table,
     )
     print(args.output)
     print(f"rows={count}")
@@ -29,6 +33,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--corpus-class", default="")
     parser.add_argument("--is-relevant", choices=["true", "false", ""], default="")
     parser.add_argument("--surface-match-scope", default="")
+    parser.add_argument("--db", type=Path, help="Read classified hits from a DuckDB report database.")
+    parser.add_argument("--table", help="DuckDB table name. Defaults to a name derived from --classified-hits.")
     return parser
 
 
@@ -39,7 +45,18 @@ def filter_rows(
     corpus_class: str = "",
     is_relevant: str = "",
     surface_match_scope: str = "",
+    db: Path | None = None,
+    table: str = "",
 ) -> int:
+    if db is not None:
+        return filter_rows_db(
+            db=db,
+            table=table or default_table_name(classified_hits),
+            output=output,
+            corpus_class=corpus_class,
+            is_relevant=is_relevant,
+            surface_match_scope=surface_match_scope,
+        )
     output.parent.mkdir(parents=True, exist_ok=True)
     count = 0
     with classified_hits.open(newline="", encoding="utf-8") as input_file, output.open(
@@ -60,6 +77,29 @@ def filter_rows(
             writer.writerow(row)
             count += 1
     return count
+
+
+def filter_rows_db(
+    *,
+    db: Path,
+    table: str,
+    output: Path,
+    corpus_class: str = "",
+    is_relevant: str = "",
+    surface_match_scope: str = "",
+) -> int:
+    qtable = quote_identifier(sanitize_table_name(table))
+    query = (
+        f"SELECT * FROM {qtable}"
+        + where_clause(
+            [
+                ("corpus_class", corpus_class),
+                ("is_relevant", is_relevant),
+                ("surface_match_scope", surface_match_scope),
+            ]
+        )
+    )
+    return export_query_to_csv(db_path=db, query=query, output=output)
 
 
 if __name__ == "__main__":

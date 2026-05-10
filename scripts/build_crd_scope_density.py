@@ -8,6 +8,8 @@ import csv
 from collections import Counter
 from pathlib import Path
 
+from els.report_db import default_table_name, fetch_dicts, quote_identifier, sanitize_table_name
+
 
 MATRIX_FIELDNAMES = [
     "classifier_mode",
@@ -43,7 +45,14 @@ SUMMARY_FIELDNAMES = [
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    counts = count_scope_hits(args.classified_hits, args.surface_match_scope)
+    if args.db is not None:
+        counts = count_scope_hits_db(
+            db=args.db,
+            table=args.table or default_table_name(args.classified_hits),
+            surface_match_scope=args.surface_match_scope,
+        )
+    else:
+        counts = count_scope_hits(args.classified_hits, args.surface_match_scope)
     matrix_rows = build_matrix_rows(
         base_density_matrix=args.base_density_matrix,
         counts=counts,
@@ -67,6 +76,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--surface-match-scope", required=True)
     parser.add_argument("--matrix-out", type=Path, required=True)
     parser.add_argument("--summary-out", type=Path, required=True)
+    parser.add_argument("--db", type=Path, help="Read classified-hit counts from a DuckDB report database.")
+    parser.add_argument("--table", help="DuckDB classified-hit table name. Defaults to a name derived from --classified-hits.")
     return parser
 
 
@@ -80,6 +91,30 @@ def count_scope_hits(classified_hits: Path, surface_match_scope: str) -> Counter
                 continue
             key = (row["classifier_mode"], row["term_id"], row["corpus"])
             counts[key] += 1
+    return counts
+
+
+def count_scope_hits_db(
+    *,
+    db: Path,
+    table: str,
+    surface_match_scope: str,
+) -> Counter[tuple[str, str, str]]:
+    qtable = quote_identifier(sanitize_table_name(table))
+    qscope = surface_match_scope.replace("'", "''")
+    rows = fetch_dicts(
+        db_path=db,
+        query=f"""
+            SELECT classifier_mode, term_id, corpus, count(*) AS scope_hits
+            FROM {qtable}
+            WHERE is_relevant = 'true'
+              AND surface_match_scope = '{qscope}'
+            GROUP BY classifier_mode, term_id, corpus
+        """,
+    )
+    counts: Counter[tuple[str, str, str]] = Counter()
+    for row in rows:
+        counts[(row["classifier_mode"], row["term_id"], row["corpus"])] = int(row["scope_hits"])
     return counts
 
 

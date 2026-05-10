@@ -11,6 +11,8 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from els.report_db import default_table_name, fetch_dicts, quote_identifier, sanitize_table_name
+
 
 DEFAULT_OUT_DIR = Path("reports/crd")
 DEFAULT_DENSITY = DEFAULT_OUT_DIR / "density_matrix.csv"
@@ -77,6 +79,8 @@ def main(argv: list[str] | None = None) -> int:
         manifest=args.manifest,
         out_dir=args.out_dir,
         markdown_out=args.markdown_out,
+        db=args.db,
+        classified_table=args.classified_table,
     )
     for value in outputs.values():
         print(value)
@@ -90,6 +94,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_REPORT)
+    parser.add_argument("--db", type=Path, help="Read large classified-hit examples/agreement from DuckDB.")
+    parser.add_argument(
+        "--classified-table",
+        help="DuckDB classified-hit table name. Defaults to a name derived from --classified-hits.",
+    )
     return parser
 
 
@@ -100,14 +109,28 @@ def build_crd_comparison(
     manifest: Path,
     out_dir: Path,
     markdown_out: Path,
+    db: Path | None = None,
+    classified_table: str = "",
 ) -> dict[str, str]:
     rows = read_rows(density_matrix)
-    hit_examples = relevant_examples_from_file(classified_hits) if classified_hits.exists() else []
+    table = classified_table or default_table_name(classified_hits)
+    hit_examples = (
+        relevant_examples_from_db(db, table)
+        if db is not None
+        else relevant_examples_from_file(classified_hits)
+        if classified_hits.exists()
+        else []
+    )
     out_dir.mkdir(parents=True, exist_ok=True)
     per_term = per_term_rankings(rows)
     bible_control = bible_vs_control_summary(rows)
     edition_meta = edition_meta_summary(rows)
-    agreement = classifier_agreement_summary(rows, classified_hits if classified_hits.exists() else None)
+    agreement = classifier_agreement_summary(
+        rows,
+        classified_hits if classified_hits.exists() else None,
+        db=db,
+        classified_table=table,
+    )
 
     per_term_out = out_dir / "per_term_rankings.csv"
     bible_control_out = out_dir / "bible_vs_control_summary.csv"
@@ -222,6 +245,9 @@ def edition_meta_summary(rows: list[dict[str, str]]) -> list[dict[str, Any]]:
 def classifier_agreement_summary(
     density_rows: list[dict[str, str]],
     classified_hits: Path | None,
+    *,
+    db: Path | None = None,
+    classified_table: str = "",
 ) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
     seen: set[tuple[str, str]] = set()
@@ -250,7 +276,9 @@ def classifier_agreement_summary(
             }
         )
     if out:
-        overall = overall_agreement_from_file(classified_hits)
+        overall = (
+            overall_agreement_from_db(db, classified_table) if db is not None else overall_agreement_from_file(classified_hits)
+        )
         out.insert(0, overall)
     return sorted(out, key=lambda row: (row["scope"] != "overall", -int_value(row["disagreement_count"])))
 
@@ -270,6 +298,51 @@ def overall_agreement_from_file(classified_hits: Path | None) -> dict[str, Any]:
     agree = sum(1 for values in pairs if values["deterministic"] == values["llm"])
     det_only = sum(1 for values in pairs if values["deterministic"] and not values["llm"])
     llm_only = sum(1 for values in pairs if values["llm"] and not values["deterministic"])
+    return {
+        "scope": "overall",
+        "term_id": "",
+        "term": "",
+        "language": "",
+        "corpus": "",
+        "agreement_rate": format_float(agree / total),
+        "agreement_kappa": "",
+        "deterministic_only_relevant_count": det_only,
+        "llm_only_relevant_count": llm_only,
+        "disagreement_count": det_only + llm_only,
+    }
+
+
+def overall_agreement_from_db(db: Path | None, table: str) -> dict[str, Any]:
+    if db is None:
+        return empty_agreement_row("overall")
+    qtable = quote_identifier(sanitize_table_name(table))
+    rows = fetch_dicts(
+        db_path=db,
+        query=f"""
+            WITH paired AS (
+                SELECT
+                    hit_id,
+                    max(CASE WHEN classifier_mode = 'deterministic' THEN is_relevant END) AS deterministic_relevant,
+                    max(CASE WHEN classifier_mode = 'llm' THEN is_relevant END) AS llm_relevant
+                FROM {qtable}
+                WHERE classifier_mode IN ('deterministic', 'llm')
+                GROUP BY hit_id
+                HAVING deterministic_relevant IS NOT NULL AND llm_relevant IS NOT NULL
+            )
+            SELECT
+                count(*) AS total,
+                sum(CASE WHEN deterministic_relevant = llm_relevant THEN 1 ELSE 0 END) AS agree,
+                sum(CASE WHEN deterministic_relevant = 'true' AND llm_relevant != 'true' THEN 1 ELSE 0 END) AS det_only,
+                sum(CASE WHEN llm_relevant = 'true' AND deterministic_relevant != 'true' THEN 1 ELSE 0 END) AS llm_only
+            FROM paired
+        """,
+    )
+    if not rows or int_value(rows[0].get("total")) == 0:
+        return empty_agreement_row("overall")
+    total = int_value(rows[0]["total"])
+    agree = int_value(rows[0]["agree"])
+    det_only = int_value(rows[0]["det_only"])
+    llm_only = int_value(rows[0]["llm_only"])
     return {
         "scope": "overall",
         "term_id": "",
@@ -483,6 +556,20 @@ def relevant_examples_from_file(path: Path, *, limit: int = 25) -> list[dict[str
     with path.open("r", encoding="utf-8", newline="") as handle:
         rows = (row for row in csv.DictReader(handle) if row.get("is_relevant") == "true")
         return heapq.nsmallest(limit, rows, key=relevant_example_key)
+
+
+def relevant_examples_from_db(db: Path, table: str, *, limit: int = 25) -> list[dict[str, str]]:
+    qtable = quote_identifier(sanitize_table_name(table))
+    return fetch_dicts(
+        db_path=db,
+        query=f"""
+            SELECT *
+            FROM {qtable}
+            WHERE is_relevant = 'true'
+            ORDER BY term_id, corpus, center_ref, abs(try_cast(skip AS INTEGER)), hit_id
+            LIMIT {int(limit)}
+        """,
+    )
 
 
 def relevant_example_key(row: dict[str, str]) -> tuple[str, str, str, int]:

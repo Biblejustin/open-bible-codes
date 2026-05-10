@@ -1,0 +1,90 @@
+# Report Database
+
+Status: optional analytics backend for large ignored report artifacts.
+
+Some dense hit-level CSVs are now large enough that repeated CSV scans are the
+wrong working format. The broad CRD classified-hit outputs are currently about
+5.3 GB each, and the Hebrew all-codes surface table is about 946 MB. Final
+reader-facing summaries remain CSV and Markdown, but dense/intermediate tables
+can be imported into DuckDB for faster filtering, grouping, and review-queue
+generation.
+
+## Install
+
+DuckDB is optional. The command-line DuckDB installed by Homebrew is useful, but
+the Python scripts use the Python package:
+
+```bash
+python3 -m pip install --user --break-system-packages duckdb
+```
+
+In a virtual environment, use:
+
+```bash
+python3 -m pip install '.[analytics]'
+```
+
+## Build
+
+```bash
+make report-db
+```
+
+Default database:
+
+```text
+reports/db/open_bible_codes.duckdb
+```
+
+The database is ignored by git. It can be rebuilt from ignored report CSVs.
+
+## Default Imported Tables
+
+- `crd_self_surface_classified_hits`
+- `crd_self_surface_density_matrix`
+- `crd_concept_surface_classified_hits`
+- `crd_concept_surface_density_matrix`
+- `crd_classified_hits`
+- `crd_density_matrix`
+- `hebrew_screening_surface_all_codes`
+- `english_screening_surface_all_codes`
+- `greek_screening_surface_all_codes`
+- `hebrew_theology_surface_all_codes`
+
+## DB-Backed Commands
+
+The CRD follow-up commands can read dense classified-hit rows from DuckDB and
+still write the existing CSV outputs. The Make targets below use DuckDB when
+`reports/db/open_bible_codes.duckdb` exists and fall back to the original CSV
+scan when it does not. Run `make report-db` first, then run the follow-up target
+in a separate `make` invocation to use the fast path.
+
+```bash
+make crd-self-surface-report
+make crd-self-surface-queue
+make crd-self-surface-center-word
+make crd-self-surface-center-word-density
+make crd-concept-surface-report
+make crd-concept-surface-queue
+make crd-concept-surface-center-word
+make crd-concept-surface-center-word-density
+```
+
+For ad hoc import:
+
+```bash
+python3 -m scripts.build_report_db --table reports/example/hits.csv:example_hits
+```
+
+For ad hoc SQL:
+
+```bash
+duckdb reports/db/open_bible_codes.duckdb
+```
+
+## Policy
+
+- Keep report summaries in CSV/Markdown for portability.
+- Use DuckDB for dense hit tables, repeated joins, filters, and group-bys.
+- Keep DB files under `reports/db/`; do not commit them.
+- Rebuild DB files from CSV when switching machines or restoring artifacts.

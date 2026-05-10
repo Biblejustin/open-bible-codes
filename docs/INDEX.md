@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 238
+Documents indexed: 239
 
 ## Controls
 
@@ -242,6 +242,7 @@ Documents indexed: 238
 | Prospective Term Audits | `PROSPECTIVE_TERM_AUDITS.md` |
 | Real Report Run | `REAL_REPORT_RUN.md` |
 | Religions Wiki Scriptural Codes Source Audit | `RELIGIONS_WIKI_SCRIPTURAL_CODES_AUDIT.md` |
+| Report Database | `REPORT_DATABASE.md` |
 | Skip Planning | `SKIP_PLANNING.md` |
 | STEP TAHOT Final Gate | `STEP_TAHOT_FINAL_GATE.md` |
 | STEP TAHOT Policy Hit Audit | `STEP_TAHOT_POLICY_HIT_AUDIT.md` |

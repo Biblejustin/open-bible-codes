@@ -30,6 +30,7 @@ Observed on the local development machine on 2026-05-04. Times are wall-clock un
 | Wide focus Hebrew exact-version presence, 30 terms, 5 MT-family corpora, skips 2-250 | 266.70s | 56.24s with `--corpus-jobs 0` | 4.7x |
 | Wide focus Greek exact-version presence, 27 terms, LXX + 4 NT corpora, skips 2-250 | 244.86s | 127.19s with `--corpus-jobs 0` | 1.9x |
 | Full-span partition findings, 106 completed partition CSVs, about 15 GB | 325.36s cold scan | 0.35s warm summary cache | 929.6x |
+| CRD self-surface center-word aggregation, 5.3 GB classified-hit CSV | 32.08s Python CSV scan | 0.10s DuckDB query | 320.8x |
 | Apocrypha bridge study heavy steps | 649.21s serial defaults | 101.43s with `--jobs 0` | 6.4x |
 | Full public baseline protocol, core analyses before ELS controls | 68.34s | 25.00s with protocol step parallelism and integrity stamps | 2.7x |
 | Full public baseline protocol with ELS controls and original term sets | 25.00s core baseline | 46.17s including controls | new control coverage |
@@ -69,6 +70,8 @@ Observed on the local development machine on 2026-05-04. Times are wall-clock un
 - Added corpus pickle cache for repeated corpus loads.
 - Added a per-partition summary cache for full-span dense report regeneration,
   keyed by partition CSV and manifest metadata.
+- Added an optional DuckDB report database for dense ignored report artifacts,
+  so repeated CRD filters/group-bys do not rescan 5 GB CSVs in Python.
 - Added `--jobs` to apocrypha bridge-candidate and bridge-control scripts,
   then ran the apocrypha protocol with all available skip workers.
 

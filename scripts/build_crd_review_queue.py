@@ -9,6 +9,8 @@ from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 
+from els.report_db import default_table_name, fetch_dicts, quote_identifier, sanitize_table_name
+
 
 OUTPUT_FIELDNAMES = [
     "selection_reason",
@@ -66,6 +68,8 @@ def main(argv: list[str] | None = None) -> int:
         selected_terms=selected_terms,
         examples_per_term=args.examples_per_term,
         all_bible_corpora=args.all_bible_corpora,
+        db=args.db,
+        table=args.table,
     )
     print(args.output)
     print(f"selected_terms={len(selected_terms)}")
@@ -86,6 +90,8 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Keep examples from all Bible corpora instead of only the term's max-density Bible corpus.",
     )
+    parser.add_argument("--db", type=Path, help="Read classified hits from a DuckDB report database.")
+    parser.add_argument("--table", help="DuckDB table name. Defaults to a name derived from --classified-hits.")
     return parser
 
 
@@ -136,7 +142,18 @@ def build_review_queue(
     selected_terms: dict[str, SelectedTerm],
     examples_per_term: int,
     all_bible_corpora: bool,
+    db: Path | None = None,
+    table: str = "",
 ) -> int:
+    if db is not None:
+        return build_review_queue_db(
+            db=db,
+            table=table or default_table_name(classified_hits),
+            output=output,
+            selected_terms=selected_terms,
+            examples_per_term=examples_per_term,
+            all_bible_corpora=all_bible_corpora,
+        )
     output.parent.mkdir(parents=True, exist_ok=True)
     written_by_term: dict[str, int] = defaultdict(int)
     written = 0
@@ -160,6 +177,39 @@ def build_review_queue(
             written_by_term[selected.term_id] += 1
             written += 1
     return written
+
+
+def build_review_queue_db(
+    *,
+    db: Path,
+    table: str,
+    output: Path,
+    selected_terms: dict[str, SelectedTerm],
+    examples_per_term: int,
+    all_bible_corpora: bool,
+) -> int:
+    output.parent.mkdir(parents=True, exist_ok=True)
+    rows: list[dict[str, str]] = []
+    qtable = quote_identifier(sanitize_table_name(table))
+    for selected in selected_terms.values():
+        corpus_filter = "" if all_bible_corpora else f"AND corpus = '{sql_escape(selected.bible_max_corpus)}'"
+        query = f"""
+            SELECT *
+            FROM {qtable}
+            WHERE term_id = '{sql_escape(selected.term_id)}'
+              AND is_relevant = 'true'
+              AND corpus_class = 'bible'
+              {corpus_filter}
+            ORDER BY corpus, center_ref, abs(try_cast(skip AS INTEGER)), hit_id
+            LIMIT {int(examples_per_term)}
+        """
+        for row in fetch_dicts(db_path=db, query=query):
+            rows.append(output_row(row, selected))
+    with output.open("w", newline="", encoding="utf-8") as output_file:
+        writer = csv.DictWriter(output_file, fieldnames=OUTPUT_FIELDNAMES)
+        writer.writeheader()
+        writer.writerows(rows)
+    return len(rows)
 
 
 def output_row(row: dict[str, str], selected: SelectedTerm) -> dict[str, str]:
@@ -206,6 +256,10 @@ def parse_float(value: str | None) -> float | None:
         return float(value)
     except ValueError:
         return None
+
+
+def sql_escape(value: str) -> str:
+    return value.replace("'", "''")
 
 
 if __name__ == "__main__":

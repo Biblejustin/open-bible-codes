@@ -3,6 +3,9 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 
+import pytest
+
+from els.report_db import import_csv_table
 from scripts.build_crd_review_queue import build_review_queue, select_terms
 
 
@@ -92,6 +95,52 @@ def test_build_review_queue_filters_relevant_bible_rows(tmp_path: Path) -> None:
     assert rows[0]["selection_reason"] == "top_finite_ratio"
     assert rows[0]["bible_max_corpus"] == "BIBLE"
     assert rows[0]["surface_match_scope"] == "center_word"
+
+
+def test_build_review_queue_can_read_from_duckdb(tmp_path: Path) -> None:
+    pytest.importorskip("duckdb")
+    summary = tmp_path / "summary.csv"
+    hits = tmp_path / "hits.csv"
+    output = tmp_path / "queue.csv"
+    db = tmp_path / "reports" / "db.duckdb"
+    write_rows(
+        summary,
+        [
+            {
+                "term_id": "high",
+                "bible_max_corpus": "BIBLE",
+                "bible_max_density": "10",
+                "secular_max_corpus": "CTRL",
+                "secular_max_density": "2",
+                "ratio": "5",
+                "exceeds_secular_max": "true",
+            }
+        ],
+    )
+    write_rows(
+        hits,
+        [
+            hit_row("high", "BIBLE", "bible", "true", "1"),
+            hit_row("high", "OTHER_BIBLE", "bible", "true", "2"),
+            hit_row("high", "CTRL", "secular_control", "true", "3"),
+        ],
+    )
+    import_csv_table(db_path=db, csv_path=hits, table_name="classified_hits")
+
+    selected = select_terms(summary, top_finite=1, top_zero=0)
+    written = build_review_queue(
+        classified_hits=hits,
+        output=output,
+        selected_terms=selected,
+        examples_per_term=1,
+        all_bible_corpora=False,
+        db=db,
+        table="classified_hits",
+    )
+
+    rows = read_rows(output)
+    assert written == 1
+    assert rows[0]["hit_id"] == "1"
 
 
 def hit_row(term_id: str, corpus: str, corpus_class: str, is_relevant: str, hit_id: str) -> dict[str, str]:
