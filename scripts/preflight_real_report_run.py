@@ -11,13 +11,23 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from els import __version__
+from scripts.release_hygiene import (
+    FORBIDDEN_ACCOUNT_TERMS,
+    forbidden_hits,
+    format_finding,
+    git_tracked_paths,
+    remote_owner_failures,
+    risky_tracked_paths,
+    scan_tracked_for_forbidden_account,
+    scan_tracked_for_secret_patterns,
+)
 
 
 OUT = Path("reports/real_report_run/preflight.json")
-FORBIDDEN_ACCOUNT_PART = "sp" + "lunk"
-FORBIDDEN_ACCOUNT_TERMS = ("justin-" + FORBIDDEN_ACCOUNT_PART, FORBIDDEN_ACCOUNT_PART)
 DEFAULT_REQUIRED_PATHS = [
     "scripts/preflight_real_report_run.py",
+    "scripts/release_hygiene.py",
+    "scripts/check_public_release_hygiene.py",
     "protocols/real_report_run.toml",
     "protocols/step_tahot_final_gate.toml",
     "protocols/greek_pattern_versions.toml",
@@ -238,18 +248,32 @@ def main(argv: list[str] | None = None) -> int:
         failures.append("git working tree is not clean")
 
     remotes = git_remotes(root)
-    forbidden_remote_hits = forbidden_hits("\n".join(remotes))
-    if forbidden_remote_hits:
-        failures.append(
-            "forbidden account text found in git remotes: "
-            + ", ".join(sorted(forbidden_remote_hits))
-        )
+    failures.extend(remote_owner_failures(remotes))
 
     forbidden_repo_hits = scan_forbidden_terms(root)
     if forbidden_repo_hits:
         failures.append(
             "forbidden account text found in repository files: "
             + ", ".join(forbidden_repo_hits[:5])
+        )
+
+    tracked_paths = git_tracked_paths(root)
+    risky_paths = risky_tracked_paths(tracked_paths)
+    if risky_paths:
+        failures.append("risky tracked paths: " + ", ".join(risky_paths[:10]))
+
+    forbidden_tracked_hits = scan_tracked_for_forbidden_account(root, tracked_paths)
+    if forbidden_tracked_hits:
+        failures.append(
+            "forbidden account text in tracked files: "
+            + ", ".join(forbidden_tracked_hits[:10])
+        )
+
+    secret_hits = scan_tracked_for_secret_patterns(root, tracked_paths)
+    if secret_hits:
+        failures.append(
+            "high-confidence secret patterns in tracked files: "
+            + ", ".join(format_finding(hit) for hit in secret_hits[:10])
         )
 
     missing_paths = [path for path in required_paths(args) if not (root / path).exists()]
@@ -266,10 +290,14 @@ def main(argv: list[str] | None = None) -> int:
         "allow_dirty": args.allow_dirty,
         "git_status_lines": git_status,
         "git_remotes": remotes,
+        "tracked_path_count": len(tracked_paths),
+        "risky_tracked_paths": risky_paths,
         "required_paths": required_paths(args),
         "missing_paths": missing_paths,
         "forbidden_account_terms": FORBIDDEN_ACCOUNT_TERMS,
         "forbidden_repo_hits": forbidden_repo_hits,
+        "forbidden_tracked_hits": forbidden_tracked_hits,
+        "secret_pattern_hits": [hit.as_dict() for hit in secret_hits],
         "failures": failures,
     }
     args.out.parent.mkdir(parents=True, exist_ok=True)
@@ -317,11 +345,6 @@ def run_git(root: Path, *args: str) -> list[str]:
     if not output:
         return []
     return output.splitlines()
-
-
-def forbidden_hits(text: str) -> set[str]:
-    lowered = text.lower()
-    return {term for term in FORBIDDEN_ACCOUNT_TERMS if term in lowered}
 
 
 def scan_forbidden_terms(root: Path) -> list[str]:

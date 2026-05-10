@@ -31,6 +31,8 @@ class RealReportRunTests(unittest.TestCase):
 
         self.assertTrue(steps_by_id["real_report_summary"]["always_run"])
         self.assertIn("wrr_audit_counts", steps_by_id)
+        self.assertIn("scripts/release_hygiene.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn("scripts/check_public_release_hygiene.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_REPLICATION_PLAN.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("claims/claim_catalog.csv", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/CLAIM_CATALOG.md", steps_by_id["preflight"]["inputs"])
@@ -105,6 +107,8 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn("docs/WRR_REPLICATION_PLAN.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/release_hygiene.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/check_public_release_hygiene.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("claims/claim_catalog.csv", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/CLAIM_CATALOG.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("configs/prospective_study_lanes.json", preflight.DEFAULT_REQUIRED_PATHS)
@@ -172,6 +176,8 @@ class RealReportRunTests(unittest.TestCase):
             self.assertEqual(code, 0)
             payload = json.loads(out.read_text(encoding="utf-8"))
             self.assertEqual(payload["output_path"], str(out))
+            self.assertIn("risky_tracked_paths", payload)
+            self.assertIn("secret_pattern_hits", payload)
 
     def test_summary_percent_formats_rates(self) -> None:
         self.assertEqual(summary.percent(0.0244863), "2.449%")

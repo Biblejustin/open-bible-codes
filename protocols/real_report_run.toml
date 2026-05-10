@@ -10,6 +10,8 @@ description = "Verify clean tree, source paths, and forbidden account guard befo
 argv = ["-m", "scripts.preflight_real_report_run"]
 inputs = [
   "scripts/preflight_real_report_run.py",
+  "scripts/release_hygiene.py",
+  "scripts/check_public_release_hygiene.py",
   "protocols/real_report_run.toml",
   "protocols/step_tahot_final_gate.toml",
   "protocols/greek_pattern_versions.toml",
