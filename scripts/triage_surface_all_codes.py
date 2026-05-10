@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
+from els.report_db import default_table_name, fetch_dicts, quote_identifier, sanitize_table_name, sql_literal
 from scripts.analyze_hebrew_hit_version_presence import canonical_ref
 
 
@@ -86,18 +87,31 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     control_by_term = read_control_summaries(args.controlled_summary)
     summary_by_term, all_corpora = read_summary(args.summary)
-    candidates_by_bucket, all_corpora_from_hits, scanned_rows = collect_candidates(
-        args.hits,
-        control_by_term,
-        limit=max(args.max_rows_per_bucket * args.candidate_multiplier, args.max_rows_per_bucket),
-    )
+    candidate_limit = max(args.max_rows_per_bucket * args.candidate_multiplier, args.max_rows_per_bucket)
+    if args.db is not None:
+        candidates_by_bucket, all_corpora_from_hits, scanned_rows = collect_candidates_db(
+            db=args.db,
+            table=args.hits_table or default_table_name(args.hits),
+            control_by_term=control_by_term,
+            limit=candidate_limit,
+        )
+    else:
+        candidates_by_bucket, all_corpora_from_hits, scanned_rows = collect_candidates(
+            args.hits,
+            control_by_term,
+            limit=candidate_limit,
+        )
     all_corpora.update(all_corpora_from_hits)
     selected_keys = {
         candidate["pattern_key"]
         for candidates in candidates_by_bucket.values()
         for candidate in candidates
     }
-    presence_by_key = collect_presence(args.hits, selected_keys)
+    presence_by_key = (
+        collect_presence_db(args.db, args.hits_table or default_table_name(args.hits), selected_keys)
+        if args.db is not None
+        else collect_presence(args.hits, selected_keys)
+    )
     queue_rows = build_queue_rows(
         candidates_by_bucket,
         presence_by_key,
@@ -139,6 +153,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--queue-out", type=Path, default=DEFAULT_QUEUE)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
     parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST)
+    parser.add_argument("--db", type=Path, help="Read hit rows from a DuckDB report database.")
+    parser.add_argument("--hits-table", help="DuckDB hits table name. Defaults to a name derived from --hits.")
     return parser
 
 
@@ -205,6 +221,72 @@ def collect_candidates(
     return candidates_by_bucket, corpora, scanned
 
 
+def collect_candidates_db(
+    *,
+    db: Path,
+    table: str,
+    control_by_term: dict[str, dict[str, str]],
+    limit: int,
+) -> tuple[dict[str, list[dict[str, Any]]], set[str], int]:
+    qtable = quote_identifier(sanitize_table_name(table))
+    rows = fetch_dicts(
+        db_path=db,
+        query=f"""
+            WITH labeled AS (
+                SELECT
+                    *,
+                    {bucket_sql()} AS _bucket,
+                    {control_rank_sql(control_by_term)} AS _control_rank
+                FROM {qtable}
+            ),
+            ranked AS (
+                SELECT
+                    *,
+                    row_number() OVER (
+                        PARTITION BY _bucket
+                        ORDER BY
+                            _control_rank,
+                            abs(coalesce(try_cast(skip AS BIGINT), 0)),
+                            coalesce(try_cast(span_letters AS BIGINT), 999999999),
+                            -length(coalesce(normalized_term, '')),
+                            center_ref,
+                            term_id
+                    ) AS _rank
+                FROM labeled
+            )
+            SELECT *
+            FROM ranked
+            WHERE _rank <= {int(limit)}
+            ORDER BY _bucket, _rank
+        """,
+    )
+    candidates_by_bucket: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in rows:
+        bucket = row.pop("_bucket", bucket_for_row(row))
+        row.pop("_control_rank", None)
+        row.pop("_rank", None)
+        candidates_by_bucket[bucket].append(
+            {
+                "score": first_pass_score(row, control_by_term.get(row.get("term_id", ""), {})),
+                "row": row,
+                "bucket": bucket,
+                "pattern_key": pattern_key(row),
+            }
+        )
+    for candidates in candidates_by_bucket.values():
+        candidates.sort(key=lambda candidate: candidate["score"])
+        del candidates[limit:]
+    corpora = {
+        row["corpus"]
+        for row in fetch_dicts(
+            db_path=db,
+            query=f"SELECT DISTINCT corpus FROM {qtable} WHERE corpus IS NOT NULL AND corpus != ''",
+        )
+    }
+    scanned = int_or_zero(fetch_dicts(db_path=db, query=f"SELECT count(*) AS row_count FROM {qtable}")[0]["row_count"])
+    return candidates_by_bucket, corpora, scanned
+
+
 def collect_presence(path: Path, selected_keys: set[tuple[str, ...]]) -> dict[tuple[str, ...], dict[str, Any]]:
     presence: dict[tuple[str, ...], dict[str, Any]] = {
         key: {"corpora": set(), "row_count": 0, "center_words": {}} for key in selected_keys
@@ -213,6 +295,58 @@ def collect_presence(path: Path, selected_keys: set[tuple[str, ...]]) -> dict[tu
         return presence
     with path.open("r", encoding="utf-8", newline="") as handle:
         for row in csv.DictReader(handle):
+            key = pattern_key(row)
+            if key not in presence:
+                continue
+            item = presence[key]
+            corpus = row.get("corpus", "")
+            if corpus:
+                item["corpora"].add(corpus)
+                item["center_words"].setdefault(corpus, row.get("center_normalized_word", ""))
+                item.setdefault("offsets", {}).setdefault(
+                    corpus,
+                    "/".join(
+                        [
+                            row.get("start_offset", ""),
+                            row.get("center_offset", ""),
+                            row.get("end_offset", ""),
+                        ]
+                    ),
+                )
+            item["row_count"] += 1
+    return presence
+
+
+def collect_presence_db(
+    db: Path,
+    table: str,
+    selected_keys: set[tuple[str, ...]],
+) -> dict[tuple[str, ...], dict[str, Any]]:
+    presence: dict[tuple[str, ...], dict[str, Any]] = {
+        key: {"corpora": set(), "row_count": 0, "center_words": {}} for key in selected_keys
+    }
+    if not selected_keys:
+        return presence
+    qtable = quote_identifier(sanitize_table_name(table))
+    combos = sorted({key[:4] for key in selected_keys})
+    for chunk in chunks(combos, 500):
+        values = ",\n".join("(" + ",".join(sql_literal(part) for part in key) + ")" for key in chunk)
+        rows = fetch_dicts(
+            db_path=db,
+            query=f"""
+                WITH keys(term_id, normalized_term, skip, direction) AS (
+                    VALUES {values}
+                )
+                SELECT h.*
+                FROM {qtable} AS h
+                JOIN keys AS k
+                  ON h.term_id = k.term_id
+                 AND h.normalized_term = k.normalized_term
+                 AND h.skip = k.skip
+                 AND h.direction = k.direction
+            """,
+        )
+        for row in rows:
             key = pattern_key(row)
             if key not in presence:
                 continue
@@ -394,6 +528,33 @@ def bucket_for_row(row: dict[str, str]) -> str:
     if truthy(row.get("span_same_category", "")):
         return "span_same_category"
     return "hidden_path_only"
+
+
+def bucket_sql() -> str:
+    return """
+        CASE
+            WHEN lower(coalesce(center_word_exact, '')) IN ('true', '1', 'yes') THEN 'center_word_exact'
+            WHEN lower(coalesce(center_word_same_concept, '')) IN ('true', '1', 'yes') THEN 'center_word_same_concept'
+            WHEN lower(coalesce(center_word_same_category, '')) IN ('true', '1', 'yes') THEN 'center_word_same_category'
+            WHEN lower(coalesce(center_exact, '')) IN ('true', '1', 'yes') THEN 'center_verse_exact'
+            WHEN lower(coalesce(center_same_concept, '')) IN ('true', '1', 'yes') THEN 'center_verse_same_concept'
+            WHEN lower(coalesce(center_same_category, '')) IN ('true', '1', 'yes') THEN 'center_verse_same_category'
+            WHEN lower(coalesce(span_exact, '')) IN ('true', '1', 'yes') THEN 'span_exact'
+            WHEN lower(coalesce(span_same_concept, '')) IN ('true', '1', 'yes') THEN 'span_same_concept'
+            WHEN lower(coalesce(span_same_category, '')) IN ('true', '1', 'yes') THEN 'span_same_category'
+            ELSE 'hidden_path_only'
+        END
+    """
+
+
+def control_rank_sql(control_by_term: dict[str, dict[str, str]]) -> str:
+    if not control_by_term:
+        return "3"
+    cases = [
+        f"WHEN {sql_literal(term_id)} THEN {control_rank(control)}"
+        for term_id, control in sorted(control_by_term.items())
+    ]
+    return "CASE term_id " + " ".join(cases) + " ELSE 3 END"
 
 
 def first_pass_score(row: dict[str, str], control: dict[str, str]) -> tuple[Any, ...]:
@@ -636,6 +797,11 @@ def float_or_one(value: str) -> float:
 def run_git(*args: str) -> str:
     completed = subprocess.run(["git", *args], check=False, capture_output=True, text=True)
     return completed.stdout.strip()
+
+
+def chunks(values: list[tuple[str, ...]], size: int) -> Any:
+    for index in range(0, len(values), size):
+        yield values[index : index + size]
 
 
 if __name__ == "__main__":

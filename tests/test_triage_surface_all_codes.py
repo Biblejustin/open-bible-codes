@@ -4,6 +4,9 @@ import tempfile
 import unittest
 from pathlib import Path
 
+import pytest
+
+from els.report_db import import_csv_table
 from scripts.triage_surface_all_codes import bucket_for_row, main
 
 
@@ -148,6 +151,67 @@ class TriageSurfaceAllCodesTests(unittest.TestCase):
             self.assertEqual(data["scanned_rows"], 3)
             self.assertEqual(data["queue_rows"], 2)
             self.assertEqual(data["bucket_counts"]["center_word_exact"], 1)
+
+    def test_main_can_read_hits_from_duckdb(self) -> None:
+        pytest.importorskip("duckdb")
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            hits = root / "hits.csv"
+            summary = root / "summary.csv"
+            queue = root / "queue.csv"
+            markdown = root / "triage.md"
+            manifest = root / "manifest.json"
+            db = root / "reports" / "db.duckdb"
+
+            write_csv(
+                hits,
+                HIT_FIELDNAMES,
+                [
+                    hit_row("A", "alpha_h", "alpha", "center_word_exact", "true"),
+                    hit_row("B", "alpha_h", "alpha", "center_word_exact", "true"),
+                    hit_row("A", "beta_h", "beta", "hidden_path_only", ""),
+                ],
+            )
+            write_csv(
+                summary,
+                ["corpus", "term_id", "normalized_length"],
+                [
+                    {"corpus": "A", "term_id": "alpha_h", "normalized_length": "5"},
+                    {"corpus": "B", "term_id": "beta_h", "normalized_length": "4"},
+                ],
+            )
+            import_csv_table(db_path=db, csv_path=hits, table_name="hits")
+
+            exit_code = main(
+                [
+                    "--hits",
+                    str(hits),
+                    "--summary",
+                    str(summary),
+                    "--db",
+                    str(db),
+                    "--hits-table",
+                    "hits",
+                    "--max-rows-per-bucket",
+                    "2",
+                    "--candidate-multiplier",
+                    "2",
+                    "--queue-out",
+                    str(queue),
+                    "--markdown-out",
+                    str(markdown),
+                    "--manifest-out",
+                    str(manifest),
+                ]
+            )
+
+            self.assertEqual(exit_code, 0)
+            rows = read_csv(queue)
+            self.assertEqual(rows[0]["bucket"], "center_word_exact")
+            self.assertEqual(rows[0]["presence_scope"], "all_source")
+            self.assertEqual(rows[0]["present_corpora"], "A,B")
+            data = json.loads(manifest.read_text(encoding="utf-8"))
+            self.assertEqual(data["scanned_rows"], 3)
 
 
 def hit_row(

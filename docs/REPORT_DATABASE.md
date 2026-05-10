@@ -91,6 +91,16 @@ python3 -m scripts.summarize_surface_all_codes \
   --summary-table hebrew_screening_surface_all_codes_summary
 ```
 
+For DB-backed all-codes triage:
+
+```bash
+python3 -m scripts.triage_surface_all_codes \
+  --hits reports/hebrew_screening_all_codes/surface_all_codes.csv \
+  --summary reports/hebrew_screening_all_codes/surface_all_codes_summary.csv \
+  --db reports/db/open_bible_codes.duckdb \
+  --hits-table hebrew_screening_surface_all_codes
+```
+
 For ad hoc SQL:
 
 ```bash

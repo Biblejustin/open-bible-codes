@@ -32,6 +32,7 @@ Observed on the local development machine on 2026-05-04. Times are wall-clock un
 | Full-span partition findings, 106 completed partition CSVs, about 15 GB | 325.36s cold scan | 0.35s warm summary cache | 929.6x |
 | CRD self-surface center-word aggregation, 5.3 GB classified-hit CSV | 32.08s Python CSV scan | 0.10s DuckDB query | 320.8x |
 | Hebrew screening all-codes collection summary, 946 MB hit CSV | 26.05s Python CSV scan | 0.19s DuckDB summary query | 137.1x |
+| Hebrew screening all-codes triage queue, 946 MB hit CSV | 83.25s Python CSV scan | 7.08s DuckDB candidate/presence queries | 11.8x |
 | Apocrypha bridge study heavy steps | 649.21s serial defaults | 101.43s with `--jobs 0` | 6.4x |
 | Full public baseline protocol, core analyses before ELS controls | 68.34s | 25.00s with protocol step parallelism and integrity stamps | 2.7x |
 | Full public baseline protocol with ELS controls and original term sets | 25.00s core baseline | 46.17s including controls | new control coverage |
