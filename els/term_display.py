@@ -13,7 +13,7 @@ KNOWN_TERMS: dict[str, tuple[str, str]] = {
     "δοξα": ("doxa", "glory"),
     "δοξανωσ": ("doxanos", "hidden extension form from doxa"),
     "ισαακ": ("Isaak", "Isaac"),
-    "τερας": ("teras", "wonder"),
+    "τερασ": ("teras", "wonder"),
     "ανομια": ("anomia", "lawlessness"),
     "υιοσ": ("huios", "son"),
     "ουουιοσ": ("ouhuios", "hidden extension form from huios"),

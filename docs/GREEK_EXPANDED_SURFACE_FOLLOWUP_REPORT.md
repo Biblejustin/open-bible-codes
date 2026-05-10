@@ -36,10 +36,10 @@ commit is recorded in the local manifest; the top-level
 | `ισαακ` (Isaak; English: Isaac) | BYZ_NT | `ισαακ` (Isaak; English: Isaac) | `κατοικησασ` (katoikesas) | HEB 11:9 |
 | `ισαακ` (Isaak; English: Isaac) | TCG_NT | `ισαακ` (Isaak; English: Isaac) | `κατοικήσας` (katoikesas) | HEB 11:9 |
 | `ισαακ` (Isaak; English: Isaac) | SBLGNT | `ισαακ` (Isaak; English: Isaac) | `κατοικήσας` (katoikesas) | Heb 11:9 |
-| `τερασ` (teras; English: Wonder) | TR_NT | `τερασ` (teras) | `χειροποιήτου` (cheiropoietou) | HEB 9:11 |
-| `τερασ` (teras; English: Wonder) | BYZ_NT | `τερασ` (teras) | `χειροποιητου` (cheiropoietou) | HEB 9:11 |
-| `τερασ` (teras; English: Wonder) | TCG_NT | `τερασ` (teras) | `χειροποιήτου,` (cheiropoietou) | HEB 9:11 |
-| `τερασ` (teras; English: Wonder) | SBLGNT | `τερασ` (teras) | `χειροποιήτου,` (cheiropoietou) | Heb 9:11 |
+| `τερασ` (teras; English: Wonder) | TR_NT | `τερασ` (teras; English: wonder) | `χειροποιήτου` (cheiropoietou) | HEB 9:11 |
+| `τερασ` (teras; English: Wonder) | BYZ_NT | `τερασ` (teras; English: wonder) | `χειροποιητου` (cheiropoietou) | HEB 9:11 |
+| `τερασ` (teras; English: Wonder) | TCG_NT | `τερασ` (teras; English: wonder) | `χειροποιήτου,` (cheiropoietou) | HEB 9:11 |
+| `τερασ` (teras; English: Wonder) | SBLGNT | `τερασ` (teras; English: wonder) | `χειροποιήτου,` (cheiropoietou) | Heb 9:11 |
 | `ανομια` (anomia; English: Lawlessness) | TR_NT | `ανομια` (anomia; English: lawlessness) | `Οὐδέποτε` (oudepote) | MAT 7:22; MAT 7:23 |
 | `ανομια` (anomia; English: Lawlessness) | BYZ_NT | `ανομια` (anomia; English: lawlessness) | `ουδεποτε` (oudepote) | MAT 7:22; MAT 7:23 |
 | `ανομια` (anomia; English: Lawlessness) | TCG_NT | `ανομια` (anomia; English: lawlessness) | `Οὐδέποτε` (oudepote) | MAT 7:22; MAT 7:23 |

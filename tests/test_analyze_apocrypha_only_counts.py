@@ -53,7 +53,7 @@ class ApocryphaOnlyCountsTests(unittest.TestCase):
             write_markdown(out, rows, [{"metric": "queries_tested", "value": 1}], args)
             text = out.read_text(encoding="utf-8")
 
-        self.assertIn("`ναοσ` (naos; English: temple)", text)
+        self.assertIn("`ναοσ` (naos; English: Temple)", text)
 
 
 def row(

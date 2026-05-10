@@ -248,7 +248,7 @@ def write_markdown(
             "| "
             + " | ".join(
                 [
-                    display_term(query),
+                    display_term(query, english=str(row["concepts"])),
                     escape_md(str(row["concepts"])),
                     str(row["hit_count"]),
                     str(row["hits_per_million"]),
