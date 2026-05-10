@@ -140,17 +140,17 @@ Broader ELS count sweep across every declared term list.
 | 16 | greek_nt_claim_terms | LXX | `haima_gnt` `αιμα` (haima; English: Blood) | 4 | 22054 | dense short form |
 | 17 | prophetic_terms | LXX | `blood_g` `αιμα` (haima; English: Blood) | 4 | 22054 | dense short form |
 | 18 | theological_terms | LXX | `blood_g` `αιμα` (haima; English: Blood) | 4 | 22054 | dense short form |
-| 19 | hebrew_claim_terms | MAM | `yhwh_h` `יהוה` (yhwh; English: YHWH) | 4 | 21812 | dense short form |
-| 20 | theological_terms | MAM | `yhwh_h` `יהוה` (yhwh; English: YHWH) | 4 | 21812 | dense short form |
+| 19 | hebrew_claim_terms | MAM | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21812 | dense short form |
+| 20 | theological_terms | MAM | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21812 | dense short form |
 | 21 | modern_names_dates | LXX | `china_g` `κινα` (kina; English: China) | 4 | 21772 | dense short form |
-| 22 | hebrew_claim_terms | UHB | `yhwh_h` `יהוה` (yhwh; English: YHWH) | 4 | 21640 | dense short form |
-| 23 | theological_terms | UHB | `yhwh_h` `יהוה` (yhwh; English: YHWH) | 4 | 21640 | dense short form |
-| 24 | hebrew_claim_terms | MT_WLC | `yhwh_h` `יהוה` (yhwh; English: YHWH) | 4 | 21626 | dense short form |
-| 25 | theological_terms | MT_WLC | `yhwh_h` `יהוה` (yhwh; English: YHWH) | 4 | 21626 | dense short form |
-| 26 | hebrew_claim_terms | UXLC | `yhwh_h` `יהוה` (yhwh; English: YHWH) | 4 | 21622 | dense short form |
-| 27 | theological_terms | UXLC | `yhwh_h` `יהוה` (yhwh; English: YHWH) | 4 | 21622 | dense short form |
-| 28 | hebrew_claim_terms | EBIBLE_WLC | `yhwh_h` `יהוה` (yhwh; English: YHWH) | 4 | 21620 | dense short form |
-| 29 | theological_terms | EBIBLE_WLC | `yhwh_h` `יהוה` (yhwh; English: YHWH) | 4 | 21620 | dense short form |
+| 22 | hebrew_claim_terms | UHB | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21640 | dense short form |
+| 23 | theological_terms | UHB | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21640 | dense short form |
+| 24 | hebrew_claim_terms | MT_WLC | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21626 | dense short form |
+| 25 | theological_terms | MT_WLC | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21626 | dense short form |
+| 26 | hebrew_claim_terms | UXLC | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21622 | dense short form |
+| 27 | theological_terms | UXLC | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21622 | dense short form |
+| 28 | hebrew_claim_terms | EBIBLE_WLC | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21620 | dense short form |
+| 29 | theological_terms | EBIBLE_WLC | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21620 | dense short form |
 | 30 | table_of_nations | LXX | `shelah_g` `σαλα` (Sala; English: Shelah) | 4 | 18310 | dense short form |
 
 ## Focus Terms
