@@ -12,6 +12,7 @@ argv = [
   "--top-file", "reports/all_codes_followup_extensions/compound_extensions.csv",
   "--term-control-samples", "250",
   "--random-control-samples", "250",
+  "--jobs", "0",
   "--seed", "2718",
   "--max-before", "12",
   "--max-after", "12",

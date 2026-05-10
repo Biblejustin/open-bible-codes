@@ -9,6 +9,7 @@ import json
 import random
 import time
 from collections import Counter
+from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -21,7 +22,7 @@ from els.extensions import (
     build_extension_lexicon,
     extension_score as score_extension,
 )
-from els.search import iter_els_query_matches_by_lanes
+from els.search import iter_els_query_matches_by_lanes, process_context, resolve_count_jobs
 from els.statistics import (
     benjamini_hochberg_q_values,
     numeric_value,
@@ -195,26 +196,7 @@ def main(argv: list[str] | None = None) -> int:
         else {}
     )
     targets = prepare_targets(targets, args, surface_context=surface_context)
-    rows: list[ExtensionControlRow] = []
-    corpus_manifests = []
-    for corpus_label in sorted({target.corpus for target in targets}):
-        config = CORPUS_CONFIGS.get(corpus_label)
-        if config is None:
-            raise SystemExit(f"no config for corpus {corpus_label}")
-        corpus_started = time.perf_counter()
-        corpus = load_corpus(config)
-        lexicon = build_extension_lexicon(corpus, max_phrase_words=args.phrase_words)
-        corpus_targets = [target for target in targets if target.corpus == corpus_label]
-        rows.extend(analyze_corpus(corpus, lexicon, corpus_targets, args))
-        corpus_manifests.append(
-            {
-                "label": corpus_label,
-                "config": str(config),
-                "summary": corpus.summary(),
-                "targets": len(corpus_targets),
-                "seconds": round(time.perf_counter() - corpus_started, 3),
-            }
-        )
+    rows, corpus_manifests = analyze_target_corpora(targets, args)
 
     annotate_rows(rows)
     sorted_rows = sorted(rows, key=control_row_sort_key)
@@ -266,6 +248,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--surface-context-hits", type=Path)
     parser.add_argument("--require-center-exact", action="store_true")
     parser.add_argument("--max-examples", type=int, default=80)
+    parser.add_argument(
+        "--jobs",
+        type=int,
+        default=1,
+        help="Corpus workers for paired controls. Use 0 for all available CPUs.",
+    )
     parser.add_argument("--summary-out", type=Path, default=SUMMARY_OUT)
     parser.add_argument("--examples-out", type=Path, default=EXAMPLES_OUT)
     parser.add_argument("--markdown-out", type=Path, default=MD_OUT)
@@ -419,6 +407,61 @@ def targets_by_overlap_key(
     for target in targets:
         groups.setdefault(target.overlap_key, []).append(target)
     return groups
+
+
+def analyze_target_corpora(
+    targets: list[ExtensionTarget],
+    args: argparse.Namespace,
+) -> tuple[list[ExtensionControlRow], list[dict[str, object]]]:
+    tasks = []
+    for corpus_label in sorted({target.corpus for target in targets}):
+        config = CORPUS_CONFIGS.get(corpus_label)
+        if config is None:
+            raise SystemExit(f"no config for corpus {corpus_label}")
+        tasks.append(
+            (
+                corpus_label,
+                config,
+                [target for target in targets if target.corpus == corpus_label],
+                args,
+            )
+        )
+
+    effective_jobs = resolve_count_jobs(args.jobs, len(tasks))
+    if effective_jobs <= 1:
+        results = [analyze_corpus_task(task) for task in tasks]
+    else:
+        with ProcessPoolExecutor(
+            max_workers=effective_jobs,
+            mp_context=process_context(),
+        ) as executor:
+            results = list(executor.map(analyze_corpus_task, tasks))
+
+    rows: list[ExtensionControlRow] = []
+    corpus_manifests = []
+    for corpus_rows, corpus_manifest in results:
+        rows.extend(corpus_rows)
+        corpus_manifests.append(corpus_manifest)
+    return rows, corpus_manifests
+
+
+def analyze_corpus_task(
+    task: tuple[str, Path, list[ExtensionTarget], argparse.Namespace],
+) -> tuple[list[ExtensionControlRow], dict[str, object]]:
+    corpus_label, config, corpus_targets, args = task
+    corpus_started = time.perf_counter()
+    corpus = load_corpus(config)
+    lexicon = build_extension_lexicon(corpus, max_phrase_words=args.phrase_words)
+    return (
+        analyze_corpus(corpus, lexicon, corpus_targets, args),
+        {
+            "label": corpus_label,
+            "config": str(config),
+            "summary": corpus.summary(),
+            "targets": len(corpus_targets),
+            "seconds": round(time.perf_counter() - corpus_started, 3),
+        },
+    )
 
 
 def analyze_corpus(

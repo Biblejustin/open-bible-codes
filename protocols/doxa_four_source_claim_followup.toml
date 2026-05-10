@@ -19,6 +19,7 @@ argv = [
   "--dedupe-targets",
   "--term-control-samples", "5000",
   "--random-control-samples", "5000",
+  "--jobs", "0",
   "--max-examples", "200",
   "--summary-out", "reports/doxa_four_source_claim_followup/paired_controls_summary.csv",
   "--examples-out", "reports/doxa_four_source_claim_followup/paired_controls_examples.csv",

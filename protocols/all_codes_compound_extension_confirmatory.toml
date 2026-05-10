@@ -13,6 +13,7 @@ argv = [
   "--include-overlap-key", "יומיהוה|4|forward|before_plus_term|היומיהוה|היומיהוה",
   "--term-control-samples", "5000",
   "--random-control-samples", "5000",
+  "--jobs", "0",
   "--seed", "314159",
   "--max-before", "12",
   "--max-after", "12",
