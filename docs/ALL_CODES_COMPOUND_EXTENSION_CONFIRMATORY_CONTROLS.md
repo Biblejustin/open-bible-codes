@@ -18,21 +18,21 @@ Locked 5000/5000 post-discovery controls for the selected all-codes יום יה�
 
 | Corpus | Target | Score | Best control | Control ge | Min q | All-control q | Screen band | All-control band | Read |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
-| EBIBLE_WLC | `יום יהוה` 4 before_plus_term `היומיהוה` | 301013 | 301013 | 14 | 0.0002 | 0.005199 | `extension_q_le_0.01` | `all_controls_q_le_0.01` | all-control screen; inspect manually |
-| MAM | `יום יהוה` 4 before_plus_term `היומיהוה` | 301013 | 301013 | 16 | 0.0002 | 0.005199 | `extension_q_le_0.01` | `all_controls_q_le_0.01` | all-control screen; inspect manually |
-| MT_WLC | `יום יהוה` 4 before_plus_term `היומיהוה` | 301013 | 301013 | 23 | 0.0002 | 0.005199 | `extension_q_le_0.01` | `all_controls_q_le_0.01` | all-control screen; inspect manually |
-| UHB | `יום יהוה` 4 before_plus_term `היומיהוה` | 301013 | 301013 | 25 | 0.0002 | 0.005199 | `extension_q_le_0.01` | `all_controls_q_le_0.01` | all-control screen; inspect manually |
-| UXLC | `יום יהוה` 4 before_plus_term `היומיהוה` | 301013 | 301013 | 20 | 0.0002 | 0.005199 | `extension_q_le_0.01` | `all_controls_q_le_0.01` | all-control screen; inspect manually |
+| EBIBLE_WLC | `יום יהוה` (yom YHWH; English: Day Of The Lord) 4 before_plus_term `היומיהוה` (hayom YHWH; English: the day of YHWH) | 301013 | 301013 | 14 | 0.0002 | 0.005199 | `extension_q_le_0.01` | `all_controls_q_le_0.01` | all-control screen; inspect manually |
+| MAM | `יום יהוה` (yom YHWH; English: Day Of The Lord) 4 before_plus_term `היומיהוה` (hayom YHWH; English: the day of YHWH) | 301013 | 301013 | 16 | 0.0002 | 0.005199 | `extension_q_le_0.01` | `all_controls_q_le_0.01` | all-control screen; inspect manually |
+| MT_WLC | `יום יהוה` (yom YHWH; English: Day Of The Lord) 4 before_plus_term `היומיהוה` (hayom YHWH; English: the day of YHWH) | 301013 | 301013 | 23 | 0.0002 | 0.005199 | `extension_q_le_0.01` | `all_controls_q_le_0.01` | all-control screen; inspect manually |
+| UHB | `יום יהוה` (yom YHWH; English: Day Of The Lord) 4 before_plus_term `היומיהוה` (hayom YHWH; English: the day of YHWH) | 301013 | 301013 | 25 | 0.0002 | 0.005199 | `extension_q_le_0.01` | `all_controls_q_le_0.01` | all-control screen; inspect manually |
+| UXLC | `יום יהוה` (yom YHWH; English: Day Of The Lord) 4 before_plus_term `היומיהוה` (hayom YHWH; English: the day of YHWH) | 301013 | 301013 | 20 | 0.0002 | 0.005199 | `extension_q_le_0.01` | `all_controls_q_le_0.01` | all-control screen; inspect manually |
 
 ## Conservative All-Control Screens
 
 | Corpus | Target | Min q | All-control q | All-control band | Read |
 | --- | --- | ---: | ---: | --- | --- |
-| EBIBLE_WLC | `יום יהוה` 4 before_plus_term `היומיהוה` | 0.0002 | 0.005199 | `all_controls_q_le_0.01` | all-control screen; inspect manually |
-| MAM | `יום יהוה` 4 before_plus_term `היומיהוה` | 0.0002 | 0.005199 | `all_controls_q_le_0.01` | all-control screen; inspect manually |
-| UXLC | `יום יהוה` 4 before_plus_term `היומיהוה` | 0.0002 | 0.005199 | `all_controls_q_le_0.01` | all-control screen; inspect manually |
-| MT_WLC | `יום יהוה` 4 before_plus_term `היומיהוה` | 0.0002 | 0.005199 | `all_controls_q_le_0.01` | all-control screen; inspect manually |
-| UHB | `יום יהוה` 4 before_plus_term `היומיהוה` | 0.0002 | 0.005199 | `all_controls_q_le_0.01` | all-control screen; inspect manually |
+| EBIBLE_WLC | `יום יהוה` (yom YHWH; English: Day Of The Lord) 4 before_plus_term `היומיהוה` (hayom YHWH; English: the day of YHWH) | 0.0002 | 0.005199 | `all_controls_q_le_0.01` | all-control screen; inspect manually |
+| MAM | `יום יהוה` (yom YHWH; English: Day Of The Lord) 4 before_plus_term `היומיהוה` (hayom YHWH; English: the day of YHWH) | 0.0002 | 0.005199 | `all_controls_q_le_0.01` | all-control screen; inspect manually |
+| UXLC | `יום יהוה` (yom YHWH; English: Day Of The Lord) 4 before_plus_term `היומיהוה` (hayom YHWH; English: the day of YHWH) | 0.0002 | 0.005199 | `all_controls_q_le_0.01` | all-control screen; inspect manually |
+| MT_WLC | `יום יהוה` (yom YHWH; English: Day Of The Lord) 4 before_plus_term `היומיהוה` (hayom YHWH; English: the day of YHWH) | 0.0002 | 0.005199 | `all_controls_q_le_0.01` | all-control screen; inspect manually |
+| UHB | `יום יהוה` (yom YHWH; English: Day Of The Lord) 4 before_plus_term `היומיהוה` (hayom YHWH; English: the day of YHWH) | 0.0002 | 0.005199 | `all_controls_q_le_0.01` | all-control screen; inspect manually |
 
 ## Caution
 

@@ -124,3 +124,36 @@ def test_is_compound_extension_distinguishes_adjacent_only_rows() -> None:
 
 def test_markdown_cell_escapes_pipes() -> None:
     assert ext.md_cell("a|b\nc") == "a\\|b c"
+
+
+def test_write_markdown_displays_original_language_terms(tmp_path) -> None:
+    corpus = sample_corpus()
+    path_rows = [path_row()]
+    extension_rows = ext.build_extension_rows(
+        path_rows,
+        {"TEST": corpus},
+        {"TEST": build_extension_lexicon(corpus, max_phrase_words=2)},
+        args(),
+    )
+    summary_rows = ext.build_summary_rows(path_rows, extension_rows)
+    out = tmp_path / "extensions.md"
+
+    ext.write_markdown(
+        out,
+        path_rows,
+        extension_rows,
+        summary_rows,
+        argparse.Namespace(
+            path_summary="path_summary.csv",
+            compound_out="compound.csv",
+            max_before=1,
+            max_after=2,
+            phrase_words=2,
+            include_both_sided=True,
+            markdown_row_limit=10,
+        ),
+    )
+
+    text = out.read_text(encoding="utf-8")
+    assert "`γε` (ge; English: Term)" in text
+    assert "`αγεζη` (ageze)" in text

@@ -46,6 +46,7 @@ inputs = [
   "configs/example_ebible_engkjv.toml",
   "els/extensions.py",
   "els/corpus.py",
+  "els/term_display.py",
 ]
 outputs = [
   "reports/all_codes_followup_extensions/extensions.csv",

@@ -22,6 +22,7 @@ from els.extensions import (
     extensions_for_hit,
 )
 from els.search import ELSHit
+from els.term_display import display_term
 from scripts.analyze_all_codes_letter_paths import DEFAULT_CORPORA, parse_corpus_args
 
 
@@ -364,10 +365,10 @@ def write_markdown(
                     row["selection_rank"],
                     row["source_queue"],
                     f"`{row['bucket']}`",
-                    f"`{row['normalized_term']}`",
+                    display_term(row["normalized_term"], english=row.get("concept", "")),
                     row["best_audit_corpus"],
                     f"`{row['best_extension_type']}`",
-                    f"`{row['best_extended_sequence']}`",
+                    display_term(row["best_extended_sequence"]),
                     f"`{row['best_match_kind']}`",
                     row["best_match_count"],
                     md_cell(truncate(row["best_matched_examples"], 80)),
@@ -398,9 +399,9 @@ def write_markdown(
                 [
                     row["selection_rank"],
                     row["audit_corpus"],
-                    f"`{row['normalized_term']}`",
+                    display_term(row["normalized_term"], english=row.get("concept", "")),
                     f"`{row['extension_type']}`",
-                    f"`{row['extended_sequence']}`",
+                    display_term(row["extended_sequence"]),
                     f"`{row['match_kind']}`",
                     row["match_count"],
                     md_cell(truncate(row["matched_refs"], 80)),

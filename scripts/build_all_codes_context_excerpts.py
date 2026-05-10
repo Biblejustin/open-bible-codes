@@ -14,6 +14,7 @@ from pathlib import Path
 from els import __version__
 from els.corpus import Corpus, VerseSpan, load_corpus
 from els.normalization import normalize_text
+from els.term_display import display_term
 from scripts.analyze_all_codes_letter_paths import parse_offsets_by_corpus, split_corpora
 
 
@@ -198,7 +199,7 @@ def write_markdown(
                 [
                     row["selection_rank"],
                     row["audit_corpus"],
-                    f"`{row['normalized_term']}`",
+                    display_term(row["normalized_term"], english=row.get("concept", "")),
                     row["center_ref"],
                     row["center_verse_contains_normalized_term"],
                     row["span_contains_normalized_term"],

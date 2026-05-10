@@ -45,6 +45,7 @@ inputs = [
   "els/extensions.py",
   "els/search.py",
   "els/statistics.py",
+  "els/term_display.py",
 ]
 outputs = [
   "reports/all_codes_compound_extension_controls/summary.csv",

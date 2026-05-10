@@ -29,6 +29,7 @@ from els.statistics import (
     round_float,
     tail_p_value_ge,
 )
+from els.term_display import display_term
 
 
 BASE = Path("reports/protocols/public_baseline")
@@ -68,6 +69,8 @@ SUMMARY_FIELDNAMES = [
     "overlap_group_size",
     "term",
     "normalized_term",
+    "concept",
+    "category",
     "skip",
     "direction",
     "extension_type",
@@ -872,6 +875,8 @@ def summary_row(
         "overlap_group_size": target.row.get("overlap_group_size", "1"),
         "term": target.row["term"],
         "normalized_term": target.row["normalized_term"],
+        "concept": target.row.get("concept", ""),
+        "category": target.row.get("category", ""),
         "skip": target.row["skip"],
         "direction": target.row["direction"],
         "extension_type": target.row["extension_type"],
@@ -1135,7 +1140,7 @@ def write_markdown(
             + " | ".join(
                 [
                     str(row["corpus"]),
-                    f"`{row['term']}` {row['skip']} {row['extension_type']} `{row['extended_sequence']}`",
+                    markdown_target_cell(row),
                     str(row["observed_score"]),
                     str(best_control),
                     str(controls_ge),
@@ -1166,7 +1171,7 @@ def write_markdown(
             + " | ".join(
                 [
                     str(row["corpus"]),
-                    f"`{row['term']}` {row['skip']} {row['extension_type']} `{row['extended_sequence']}`",
+                    markdown_target_cell(row),
                     str(row["combined_min_q"]),
                     str(row["all_controls_max_q"]),
                     f"`{row['all_controls_band']}`",
@@ -1191,6 +1196,15 @@ def write_markdown(
     )
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+
+def markdown_target_cell(row: dict[str, object]) -> str:
+    term = display_term(str(row["term"]), english=str(row.get("concept", "")))
+    extended = display_term(str(row["extended_sequence"]))
+    return (
+        f"{term} {row['skip']} "
+        f"{row['extension_type']} {extended}"
+    )
 
 
 def write_manifest(

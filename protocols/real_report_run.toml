@@ -645,6 +645,7 @@ inputs = [
   "protocols/all_codes_followup_context.toml",
   "scripts/build_all_codes_context_excerpts.py",
   "scripts/analyze_all_codes_letter_paths.py",
+  "els/term_display.py",
   "reports/all_codes_followup_selection/selected_rows.csv",
   "configs/example_oshb_wlc.toml",
   "configs/example_uxlc.toml",
@@ -665,6 +666,7 @@ argv = ["-m", "scripts.run_protocol", "protocols/all_codes_followup_extensions.t
 inputs = [
   "protocols/all_codes_followup_extensions.toml",
   "scripts/analyze_all_codes_extensions.py",
+  "els/term_display.py",
   "reports/all_codes_followup_letter_paths/path_summary.csv",
   "configs/example_oshb_wlc.toml",
   "configs/example_uxlc.toml",
@@ -685,6 +687,7 @@ argv = ["-m", "scripts.run_protocol", "protocols/all_codes_compound_extension_co
 inputs = [
   "protocols/all_codes_compound_extension_controls.toml",
   "scripts/analyze_extension_paired_controls.py",
+  "els/term_display.py",
   "reports/all_codes_followup_extensions/compound_extensions.csv",
   "configs/example_oshb_wlc.toml",
   "configs/example_uxlc.toml",
@@ -705,6 +708,7 @@ inputs = [
   "protocols/all_codes_compound_extension_confirmatory.toml",
   "docs/ALL_CODES_COMPOUND_EXTENSION_CONFIRMATORY_PREREGISTRATION.md",
   "scripts/analyze_extension_paired_controls.py",
+  "els/term_display.py",
   "reports/all_codes_followup_extensions/compound_extensions.csv",
   "configs/example_oshb_wlc.toml",
   "configs/example_uxlc.toml",

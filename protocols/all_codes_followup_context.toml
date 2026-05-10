@@ -40,6 +40,7 @@ inputs = [
   "configs/example_ebible_engkjv.toml",
   "els/corpus.py",
   "els/normalization.py",
+  "els/term_display.py",
 ]
 outputs = [
   "reports/all_codes_followup_context/context_excerpts.csv",

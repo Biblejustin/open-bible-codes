@@ -14,12 +14,12 @@ follow-up after
 | Local report build commit | recorded in local manifest only |
 | Command | `python3 -m scripts.run_protocol protocols/doxa_four_source_confirmatory_followup.toml --resume` |
 | Protocol | `protocols/doxa_four_source_confirmatory_followup.toml` |
-| Paired controls completed UTC | `2026-05-10T13:10:47.762949+00:00` |
-| Context review completed UTC | `2026-05-10T13:10:48.668741+00:00` |
-| Analysis runtime | 14.766s |
+| Paired controls completed UTC | `2026-05-10T13:42:01.169738+00:00` |
+| Context review completed UTC | `2026-05-10T13:42:02.082948+00:00` |
+| Analysis runtime | 14.678s |
 | Protocol status | success |
-| Paired-control runtime | 13.951s |
-| Context-review runtime | 0.815s |
+| Paired-control runtime | 13.854s |
+| Context-review runtime | 0.824s |
 
 For resumed protocol runs, this subreport uses the paired-control and
 context-review output manifests for stable analysis timing. The build

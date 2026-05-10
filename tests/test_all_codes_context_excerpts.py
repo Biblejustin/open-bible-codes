@@ -65,3 +65,17 @@ def test_build_excerpt_rows_uses_present_corpora() -> None:
 
 def test_markdown_cell_escapes_pipes() -> None:
     assert context.md_cell("a|b\nc") == "a\\|b c"
+
+
+def test_write_markdown_displays_original_language_term(tmp_path) -> None:
+    row = context.excerpt_row(selected_row(), "TEST", sample_corpus(), 0, 2, 4)
+    out = tmp_path / "context.md"
+
+    context.write_markdown(
+        out,
+        [row],
+        args=type("Args", (), {"markdown_row_limit": 10})(),
+    )
+
+    text = out.read_text(encoding="utf-8")
+    assert "`εζ` (ez; English: Term)" in text
