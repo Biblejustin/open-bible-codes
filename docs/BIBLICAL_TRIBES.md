@@ -10,9 +10,16 @@ Purpose:
 - Keep Hebrew and Greek rows separate.
 - Include Joseph, Ephraim, and Manasseh alongside the twelve-name set.
 
-Not run yet:
+Current runs:
 
-- This file is intentionally not wired into `protocols/public_baseline.toml`.
+- `protocols/broad_search.toml`,
+  `protocols/hebrew_screening_version_presence.toml`,
+  `protocols/greek_screening_version_presence.toml`,
+  `protocols/hebrew_screening_all_codes_collection.toml`,
+  `protocols/greek_screening_all_codes_collection.toml`,
+  `protocols/nonbible_control_counts.toml`, and
+  `protocols/real_report_run.toml` include this file in broader screening and
+  control runs.
 
 Cautions:
 

@@ -18,10 +18,16 @@ Included categories:
 - common search phrases
 - Revelation-focused terms
 
-Not run yet:
+Current runs:
 
-- This file is intentionally not wired into `protocols/public_baseline.toml`.
-- Run after the next search/report optimization pass.
+- `protocols/greek_nt_claim_version_presence.toml` compares exact hit-pattern
+  presence for this file across Greek NT corpora.
+- `protocols/broad_search.toml`,
+  `protocols/greek_screening_version_presence.toml`,
+  `protocols/greek_screening_all_codes_collection.toml`,
+  `protocols/nonbible_control_counts.toml`, and
+  `protocols/apocrypha_bridge_study.toml` include this list in broader
+  screening, control, and bridge runs.
 
 Suggested later command:
 

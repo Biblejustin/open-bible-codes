@@ -10,9 +10,15 @@ Purpose:
 - Calibrate ELS hit counts against common words before interpreting claim terms.
 - Help catch obvious pipeline or normalization mistakes.
 
-Not run yet:
+Current runs:
 
-- This file is intentionally not wired into `protocols/public_baseline.toml`.
+- `protocols/hebrew_control_version_presence.toml`,
+  `protocols/greek_control_version_presence.toml`, and
+  `protocols/step_tahot_control_version_presence.toml` use this file for
+  exact hit-pattern control comparisons.
+- `protocols/broad_search.toml`, `protocols/nonbible_control_counts.toml`, and
+  `protocols/real_report_run.toml` include this file in broader calibration and
+  control runs.
 
 Cautions:
 

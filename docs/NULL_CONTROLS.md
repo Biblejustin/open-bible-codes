@@ -10,9 +10,15 @@ Purpose:
 - Compare claim-term counts against meaning-poor strings of similar length.
 - Support false-positive and multiple-testing discipline.
 
-Not run yet:
+Current runs:
 
-- This file is intentionally not wired into `protocols/public_baseline.toml`.
+- `protocols/hebrew_control_version_presence.toml`,
+  `protocols/greek_control_version_presence.toml`, and
+  `protocols/step_tahot_control_version_presence.toml` use this file for
+  exact hit-pattern control comparisons.
+- `protocols/broad_search.toml`, `protocols/nonbible_control_counts.toml`, and
+  `protocols/real_report_run.toml` include this file in broader null-control
+  runs.
 
 Suggested later command:
 

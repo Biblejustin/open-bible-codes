@@ -692,14 +692,29 @@ Compiled Hebrew claim terms:
 - `terms/hebrew_claim_terms.csv`
 - `docs/HEBREW_CLAIM_TERMS.md`
 
-This list is not part of the public baseline yet; run it after the next search/report optimization pass.
+Current wiring:
+
+- `protocols/hebrew_claim_version_presence.toml` compares exact hit-pattern
+  presence across the MT-family Hebrew corpora.
+- `protocols/broad_search.toml`, `protocols/hebrew_screening_version_presence.toml`,
+  `protocols/hebrew_screening_all_codes_collection.toml`, and
+  `protocols/nonbible_control_counts.toml` include this list in broader
+  screening and control runs.
 
 Compiled Greek NT claim terms:
 
 - `terms/greek_nt_claim_terms.csv`
 - `docs/GREEK_NT_CLAIM_TERMS.md`
 
-This list is not part of the public baseline yet; run it after the next search/report optimization pass.
+Current wiring:
+
+- `protocols/greek_nt_claim_version_presence.toml` compares exact hit-pattern
+  presence across Greek NT corpora.
+- `protocols/broad_search.toml`, `protocols/greek_screening_version_presence.toml`,
+  `protocols/greek_screening_all_codes_collection.toml`,
+  `protocols/nonbible_control_counts.toml`, and
+  `protocols/apocrypha_bridge_study.toml` include this list in broader
+  screening, control, and bridge runs.
 
 Additional declared screening/control lists:
 
@@ -710,7 +725,16 @@ Additional declared screening/control lists:
 - `terms/biblical_calendar.csv` and `docs/BIBLICAL_CALENDAR.md`
 - `terms/greek_exact_center_cohort_terms.csv` and `docs/GREEK_EXACT_CENTER_COHORT_PREREGISTRATION.md`
 
-These lists are not part of the public baseline yet.
+Current wiring:
+
+- `terms/null_controls.csv` and `terms/frequency_anchors.csv` are used by
+  Hebrew, Greek, STEP_TAHOT, broad-search, non-Bible-control, and real-report
+  control protocols.
+- `terms/biblical_tribes.csv`, `terms/biblical_festivals.csv`, and
+  `terms/biblical_calendar.csv` are included in broader screening, all-codes,
+  non-Bible-control, and real-report protocols where language-appropriate.
+- `terms/greek_exact_center_cohort_terms.csv` is a locked follow-up cohort for
+  the Greek exact-center protocol family, not a general baseline term list.
 
 Greek:
 

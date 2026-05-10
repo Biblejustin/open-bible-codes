@@ -9,9 +9,14 @@ Purpose:
 - Declare Hebrew month names and pre-exilic month names for screening.
 - Keep these distinct from date gematria encodings.
 
-Not run yet:
+Current runs:
 
-- This file is intentionally not wired into `protocols/public_baseline.toml`.
+- `protocols/broad_search.toml`,
+  `protocols/hebrew_screening_version_presence.toml`,
+  `protocols/hebrew_screening_all_codes_collection.toml`,
+  `protocols/nonbible_control_counts.toml`, and
+  `protocols/real_report_run.toml` include this file in broader Hebrew
+  screening and control runs.
 
 Cautions:
 
