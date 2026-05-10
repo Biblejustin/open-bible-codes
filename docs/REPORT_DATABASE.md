@@ -64,6 +64,7 @@ python3 -m scripts.build_report_db --skip-missing --force
 - `greek_screening_surface_all_codes_summary`
 - `hebrew_theology_surface_all_codes`
 - `hebrew_theology_surface_all_codes_summary`
+- `dynamic_skip_focus_full_span_exported_hits`
 
 ## DB-Backed Commands
 
@@ -109,6 +110,20 @@ python3 -m scripts.triage_surface_all_codes \
   --summary reports/hebrew_screening_all_codes/surface_all_codes_summary.csv \
   --db reports/db/open_bible_codes.duckdb \
   --hits-table hebrew_screening_surface_all_codes
+```
+
+For DB-backed dynamic full-span hit findings:
+
+```bash
+make dynamic-full-span-hit-findings
+```
+
+Equivalent direct command:
+
+```bash
+python3 -m scripts.summarize_dynamic_span_hits \
+  --db reports/db/open_bible_codes.duckdb \
+  --hits-table dynamic_skip_focus_full_span_exported_hits
 ```
 
 For ad hoc SQL:

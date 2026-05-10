@@ -3,7 +3,10 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.summarize_dynamic_span_hits import build_version_presence_rows, summarize_hit_file
+import pytest
+
+from els.report_db import import_csv_table
+from scripts.summarize_dynamic_span_hits import build_version_presence_rows, summarize_hit_file, summarize_hit_table
 
 
 class DynamicSpanHitSummaryTests(unittest.TestCase):
@@ -48,6 +51,52 @@ class DynamicSpanHitSummaryTests(unittest.TestCase):
         self.assertEqual(summary[0]["distinct_center_refs"], 2)
         self.assertIn("λογος=1", summary[0]["top_center_words"])
         self.assertEqual({row["example_type"] for row in examples}, {"exact_center_word", "low_count"})
+
+    def test_summarize_hit_table_matches_csv_summary(self) -> None:
+        pytest.importorskip("duckdb")
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "hits.csv"
+            db = Path(tmp) / "reports" / "db.duckdb"
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(
+                    handle,
+                    fieldnames=[
+                        "corpus",
+                        "corpus_language",
+                        "term_id",
+                        "concept",
+                        "category",
+                        "term_language",
+                        "term",
+                        "normalized_term",
+                        "mode",
+                        "count_row_hit_count",
+                        "skip",
+                        "direction",
+                        "span_letters",
+                        "start_ref",
+                        "center_ref",
+                        "end_ref",
+                        "center_word",
+                        "center_normalized_word",
+                    ],
+                )
+                writer.writeheader()
+                writer.writerow(hit_row("TR_NT", "dyn_sample_g", "λογος", "λογος", "forward", 2, "MAT 1:1"))
+                writer.writerow(hit_row("TR_NT", "dyn_sample_g", "λογος", "και", "backward", -3, "MAT 1:2"))
+            import_csv_table(db_path=db, csv_path=path, table_name="hits")
+
+            csv_summary, csv_examples = summarize_hit_file(path, low_count_threshold=5, examples_per_group=5)
+            db_summary, db_examples = summarize_hit_table(
+                db_path=db,
+                table_name="hits",
+                source_path=path,
+                low_count_threshold=5,
+                examples_per_group=5,
+            )
+
+        self.assertEqual(db_summary, csv_summary)
+        self.assertEqual(db_examples, csv_examples)
 
     def test_build_version_presence_rows_separates_bible_and_controls(self) -> None:
         rows = [

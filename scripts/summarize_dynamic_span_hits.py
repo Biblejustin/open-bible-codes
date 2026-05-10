@@ -14,10 +14,12 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from els import __version__
+from els.report_db import ReportDBStale, connect, quote_identifier, verify_table_current
 from scripts.export_dynamic_span_hits import DEFAULT_COUNTS, DEFAULT_OUT, ROOT
 
 
 DEFAULT_COMPARISON = ROOT / "reports/dynamic_skip_focus/bible_control_comparison.csv"
+DEFAULT_HITS_TABLE = "dynamic_skip_focus_full_span_exported_hits"
 DEFAULT_SUMMARY_CSV = ROOT / "reports/dynamic_skip_focus/full_span_hit_summary.csv"
 DEFAULT_EXAMPLES_CSV = ROOT / "reports/dynamic_skip_focus/full_span_hit_examples.csv"
 DEFAULT_VERSION_CSV = ROOT / "reports/dynamic_skip_focus/full_span_version_presence.csv"
@@ -177,11 +179,20 @@ class HitAccumulator:
 def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(argv)
-    hit_summary, examples = summarize_hit_file(
-        args.hits,
-        low_count_threshold=args.low_count_threshold,
-        examples_per_group=args.examples_per_group,
-    )
+    if args.db:
+        hit_summary, examples = summarize_hit_table(
+            db_path=args.db,
+            table_name=args.hits_table,
+            source_path=args.hits,
+            low_count_threshold=args.low_count_threshold,
+            examples_per_group=args.examples_per_group,
+        )
+    else:
+        hit_summary, examples = summarize_hit_file(
+            args.hits,
+            low_count_threshold=args.low_count_threshold,
+            examples_per_group=args.examples_per_group,
+        )
     count_rows = read_many(args.counts or DEFAULT_COUNTS)
     version_rows = build_version_presence_rows(count_rows, mode="full-span")
     comparison_rows = read_rows(args.comparison) if args.comparison.exists() else []
@@ -212,6 +223,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--low-count-threshold", type=int, default=100)
     parser.add_argument("--examples-per-group", type=int, default=5)
+    parser.add_argument("--db", type=Path, default=None, help="DuckDB report database with imported hit table.")
+    parser.add_argument("--hits-table", default=DEFAULT_HITS_TABLE, help="DuckDB table for --hits.")
     return parser
 
 
@@ -251,6 +264,189 @@ def summarize_hit_file(
     examples = exact_center_examples + low_count_examples
     examples.sort(key=lambda row: (row["example_type"], int(row["count_row_hit_count"] or 0), row["corpus"], row["term_id"]))
     return summary_rows, examples
+
+
+def summarize_hit_table(
+    *,
+    db_path: Path,
+    table_name: str,
+    source_path: Path,
+    low_count_threshold: int,
+    examples_per_group: int,
+) -> tuple[list[dict[str, str | int]], list[dict[str, str]]]:
+    try:
+        verify_table_current(db_path=db_path, table_name=table_name, source_path=source_path)
+    except ReportDBStale as exc:
+        raise SystemExit(str(exc)) from exc
+
+    table = quote_identifier(table_name)
+    with connect(db_path, read_only=True) as con:
+        summary_rows = fetch_summary_rows(con, table)
+        ref_counts = fetch_top_counts(con, table, "center_ref")
+        word_counts = fetch_top_center_word_counts(con, table)
+        exact_examples = fetch_examples(
+            con,
+            table,
+            example_type="exact_center_word",
+            examples_per_group=examples_per_group,
+            where_sql="center_normalized_word = normalized_term",
+            order_sql="rowid",
+        )
+        low_count_examples = fetch_examples(
+            con,
+            table,
+            example_type="low_count",
+            examples_per_group=examples_per_group,
+            where_sql=f"CAST(count_row_hit_count AS BIGINT) <= {low_count_threshold}",
+            order_sql="ABS(CAST(skip AS BIGINT)), CAST(span_letters AS BIGINT), center_ref",
+        )
+
+    for row in summary_rows:
+        key = (str(row["corpus"]), str(row["term_id"]), str(row["mode"]))
+        row["top_center_refs"] = format_top_pairs(ref_counts.get(key, []))
+        row["top_center_words"] = format_top_pairs(word_counts.get(key, []))
+    examples = exact_examples + low_count_examples
+    examples.sort(key=lambda row: (row["example_type"], int(row["count_row_hit_count"] or 0), row["corpus"], row["term_id"]))
+    return summary_rows, examples
+
+
+def fetch_summary_rows(con: Any, table: str) -> list[dict[str, str | int]]:
+    cursor = con.execute(
+        f"""
+        SELECT
+            corpus,
+            ANY_VALUE(corpus_language) AS corpus_language,
+            term_id,
+            ANY_VALUE(concept) AS concept,
+            ANY_VALUE(category) AS category,
+            ANY_VALUE(term_language) AS term_language,
+            ANY_VALUE(term) AS term,
+            ANY_VALUE(normalized_term) AS normalized_term,
+            mode,
+            MAX(CAST(count_row_hit_count AS BIGINT)) AS count_row_hit_count,
+            COUNT(*) AS exported_hits,
+            SUM(CASE WHEN direction = 'forward' THEN 1 ELSE 0 END) AS forward_hits,
+            SUM(CASE WHEN direction = 'backward' THEN 1 ELSE 0 END) AS backward_hits,
+            SUM(CASE WHEN center_normalized_word = normalized_term THEN 1 ELSE 0 END) AS exact_center_word_hits,
+            MIN(ABS(CAST(skip AS BIGINT))) AS min_abs_skip,
+            MAX(ABS(CAST(skip AS BIGINT))) AS max_abs_skip,
+            MIN(CAST(span_letters AS BIGINT)) AS min_span_letters,
+            MAX(CAST(span_letters AS BIGINT)) AS max_span_letters,
+            COUNT(DISTINCT NULLIF(center_ref, '')) AS distinct_center_refs,
+            COUNT(DISTINCT NULLIF(COALESCE(NULLIF(center_normalized_word, ''), center_word), '')) AS distinct_center_words
+        FROM {table}
+        GROUP BY corpus, term_id, mode
+        ORDER BY corpus, term_id
+        """
+    )
+    rows = cursor.fetchall()
+    columns = [description[0] for description in cursor.description]
+    numeric_columns = {
+        "count_row_hit_count",
+        "exported_hits",
+        "forward_hits",
+        "backward_hits",
+        "exact_center_word_hits",
+        "min_abs_skip",
+        "max_abs_skip",
+        "min_span_letters",
+        "max_span_letters",
+        "distinct_center_refs",
+        "distinct_center_words",
+    }
+    output: list[dict[str, str | int]] = []
+    for db_row in rows:
+        item: dict[str, str | int] = {}
+        for column, value in zip(columns, db_row, strict=True):
+            item[column] = int(value) if column in numeric_columns else str(value or "")
+        item["top_center_refs"] = ""
+        item["top_center_words"] = ""
+        output.append(item)
+    return output
+
+
+def fetch_top_counts(con: Any, table: str, column: str) -> dict[tuple[str, str, str], list[tuple[str, int]]]:
+    rows = con.execute(
+        f"""
+        SELECT corpus, term_id, mode, {column} AS value, COUNT(*) AS count, MIN(rowid) AS first_seen
+        FROM {table}
+        WHERE {column} <> ''
+        GROUP BY corpus, term_id, mode, {column}
+        ORDER BY corpus, term_id, mode, count DESC, first_seen
+        """
+    ).fetchall()
+    return group_top_count_rows(rows)
+
+
+def fetch_top_center_word_counts(con: Any, table: str) -> dict[tuple[str, str, str], list[tuple[str, int]]]:
+    rows = con.execute(
+        f"""
+        WITH words AS (
+            SELECT
+                corpus,
+                term_id,
+                mode,
+                rowid,
+                COALESCE(NULLIF(center_normalized_word, ''), center_word) AS value
+            FROM {table}
+        )
+        SELECT corpus, term_id, mode, value, COUNT(*) AS count, MIN(rowid) AS first_seen
+        FROM words
+        WHERE value <> ''
+        GROUP BY corpus, term_id, mode, value
+        ORDER BY corpus, term_id, mode, count DESC, first_seen
+        """
+    ).fetchall()
+    return group_top_count_rows(rows)
+
+
+def group_top_count_rows(rows: list[tuple[Any, ...]]) -> dict[tuple[str, str, str], list[tuple[str, int]]]:
+    grouped: dict[tuple[str, str, str], list[tuple[str, int]]] = defaultdict(list)
+    for corpus, term_id, mode, value, count, _first_seen in rows:
+        key = (str(corpus), str(term_id), str(mode))
+        if len(grouped[key]) < 5:
+            grouped[key].append((str(value), int(count)))
+    return grouped
+
+
+def fetch_examples(
+    con: Any,
+    table: str,
+    *,
+    example_type: str,
+    examples_per_group: int,
+    where_sql: str,
+    order_sql: str,
+) -> list[dict[str, str]]:
+    cursor = con.execute(
+        f"""
+        SELECT *
+        FROM (
+            SELECT
+                *,
+                ROW_NUMBER() OVER (
+                    PARTITION BY corpus, term_id, mode
+                    ORDER BY {order_sql}
+                ) AS rn
+            FROM {table}
+            WHERE {where_sql}
+        )
+        WHERE rn <= ?
+        ORDER BY corpus, term_id, mode, rn
+        """,
+        [examples_per_group],
+    )
+    rows = cursor.fetchall()
+    columns = [description[0] for description in cursor.description]
+    examples = []
+    for db_row in rows:
+        row = {column: "" if value is None else str(value) for column, value in zip(columns, db_row, strict=True)}
+        examples.append(compact_example(row, example_type))
+    return examples
+
+
+def format_top_pairs(values: list[tuple[str, int]]) -> str:
+    return "; ".join(f"{value}={count}" for value, count in values if value)
 
 
 def build_version_presence_rows(rows: list[dict[str, str]], *, mode: str) -> list[dict[str, str]]:
@@ -351,6 +547,14 @@ def write_report(
         if row.get("mode") == "full-span" and row.get("read") == "bible max rate exceeds all observed controls"
     ]
     low_count = [row for row in hit_summary if int(row["count_row_hit_count"]) <= args.low_count_threshold]
+    command_lines = ["python3 -m scripts.summarize_dynamic_span_hits"]
+    if args.db:
+        command_lines.extend(
+            [
+                f"  --db {display_path(args.db)}",
+                f"  --hits-table {args.hits_table}",
+            ]
+        )
     lines = [
         "# Dynamic Full-Span Hit Findings",
         "",
@@ -362,7 +566,7 @@ def write_report(
         "## Reproduce",
         "",
         "```bash",
-        "python3 -m scripts.summarize_dynamic_span_hits",
+        " \\\n".join(command_lines),
         "```",
         "",
         "## Scope",
@@ -374,6 +578,7 @@ def write_report(
         f"- summary CSV: `{display_path(args.summary_csv)}`",
         f"- example CSV: `{display_path(args.examples_csv)}`",
         f"- version CSV: `{display_path(args.version_csv)}`",
+        f"- report database: `{display_path(args.db)}`" if args.db else "- report database: not used",
         "",
         "## Version Presence Read",
         "",
@@ -475,6 +680,8 @@ def write_manifest(
         "examples_csv": display_path(args.examples_csv),
         "version_csv": display_path(args.version_csv),
         "report": display_path(args.report),
+        "db": display_path(args.db) if args.db else "",
+        "hits_table": args.hits_table if args.db else "",
     }
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 

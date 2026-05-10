@@ -8,7 +8,9 @@ flag, not as the admission rule.
 ## Reproduce
 
 ```bash
-python3 -m scripts.summarize_dynamic_span_hits
+python3 -m scripts.summarize_dynamic_span_hits \
+  --db reports/db/open_bible_codes.duckdb \
+  --hits-table dynamic_skip_focus_full_span_exported_hits
 ```
 
 ## Scope
@@ -20,6 +22,7 @@ python3 -m scripts.summarize_dynamic_span_hits
 - summary CSV: `reports/dynamic_skip_focus/full_span_hit_summary.csv`
 - example CSV: `reports/dynamic_skip_focus/full_span_hit_examples.csv`
 - version CSV: `reports/dynamic_skip_focus/full_span_version_presence.csv`
+- report database: `reports/db/open_bible_codes.duckdb`
 
 ## Version Presence Read
 
