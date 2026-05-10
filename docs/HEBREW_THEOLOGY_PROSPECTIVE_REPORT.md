@@ -26,7 +26,7 @@ No exact patterns were found in the capped exact-version matrix for: `htp_lamb_o
 
 | Language | Concept | Term ID | Normalized | Exact total | All-source | Source-specific | Control | Rep control | Extensions | Read |
 | --- | --- | --- | --- | ---: | ---: | ---: | --- | --- | ---: | --- |
-| hebrew | YHWH | `htp_yhwh_h` | `יהוה` (yhwh; English: YHWH) | 108320 | 16312 | 6059 | not run in targeted paired controls | paired_uncorrected_p_le_0.05 | 0 | uncorrected representative-control screen only; no adjusted support |
+| hebrew | YHWH | `htp_yhwh_h` | `יהוה` (YHWH; English: YHWH) | 108320 | 16312 | 6059 | not run in targeted paired controls | paired_uncorrected_p_le_0.05 | 0 | uncorrected representative-control screen only; no adjusted support |
 | hebrew | Love | `htp_love_h` | `אהבה` (hbh; English: Love) | 39575 | 6127 | 2021 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
 | hebrew | Peace | `htp_peace_h` | `שלומ` (shlwm; English: Peace) | 37669 | 5638 | 2254 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
 | hebrew | Torah | `htp_torah_h` | `תורה` (twrh; English: Torah) | 32524 | 4897 | 1760 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
@@ -37,7 +37,7 @@ No exact patterns were found in the capped exact-version matrix for: `htp_lamb_o
 | hebrew | Glory | `htp_glory_h` | `כבוד` (kbwd; English: Glory) | 6979 | 976 | 465 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
 | hebrew | Faith | `htp_faith_h` | `אמונה` (mwnh; English: Faith) | 3171 | 466 | 218 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
 | hebrew | Salvation | `htp_salvation_h` | `ישועה` (yshwh; English: Salvation) | 2180 | 282 | 170 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
-| hebrew | Israel | `htp_israel_h` | `ישראל` (yshrl; English: Israel) | 2104 | 286 | 134 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
+| hebrew | Israel | `htp_israel_h` | `ישראל` (Yisrael; English: Israel) | 2104 | 286 | 134 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
 | hebrew | Savior | `htp_savior_h` | `מושיע` (mwshy; English: Savior) | 2150 | 290 | 168 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
 | hebrew | Kingdom | `htp_kingdom_h` | `מלכות` (mlkwt; English: Kingdom) | 1515 | 205 | 94 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
 | hebrew | Redemption | `htp_redemption_h` | `גאולה` (gwlh; English: Redemption) | 513 | 71 | 30 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
