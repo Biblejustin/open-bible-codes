@@ -17,6 +17,7 @@ from els import __version__
 from els.corpus import Corpus, load_corpus
 from els.search import ELSHit
 from els.skip_plan import max_skip_for_mode
+from els.term_display import display_term
 from scripts.build_gog_promoted_exact_center_source_review import (
     exact_center_hits_for_surface_words,
     hit_sort_key,
@@ -340,7 +341,7 @@ def write_markdown(
     lines = [
         "# Gog Length-3 Surface Control Review",
         "",
-        "This report builds matched Greek controls for the promoted `γωγ` exact-center",
+        f"This report builds matched Greek controls for the promoted {display_gog_term(args.target)} exact-center",
         "row. The control universe is normalized Greek surface words of length 3",
         "that occur exactly once in every compared Greek NT source.",
         "",
@@ -352,7 +353,7 @@ def write_markdown(
         "",
         "## Bottom Line",
         "",
-        f"- matched term universe: {len(summary_rows):,} terms, including target `γωγ`",
+        f"- matched term universe: {len(summary_rows):,} terms, including target {display_gog_term(args.target)}",
         f"- non-target controls: {control_count:,}",
         f"- target total exact-center paths: {int(target['total_exact_center_paths']):,}",
         f"- controls above target: {int(target['controls_gt_target']):,} of {control_count:,}",
@@ -360,7 +361,7 @@ def write_markdown(
         f"- target rank by descending exact-center paths: {target['rank_desc']} of {len(summary_rows):,}",
         f"- target rank by ascending exact-center paths: {target['rank_asc']} of {len(summary_rows):,}",
         "",
-        "Current read: `γωγ` remains a contextually meaningful centered-self",
+        f"Current read: {display_gog_term(args.target)} remains a contextually meaningful centered-self",
         "occurrence, not a frequency-promoted row. The hidden word centers on the",
         "open Gog word in the Gog/Magog verse across all compared Greek NT streams.",
         "The matched controls only say its path count is not unusually high among",
@@ -384,7 +385,7 @@ def summary_table(rows: list[dict[str, object]]) -> list[str]:
     ]
     for row in rows:
         lines.append(
-            f"| {row['rank_desc']} | {row['rank_asc']} | `{row['term']}` | "
+            f"| {row['rank_desc']} | {row['rank_asc']} | {display_gog_term(str(row['term']))} | "
             f"{row['is_target']} | {int(row['total_exact_center_paths']):,} | "
             f"`{row['source_counts']}` | {row['read']} |"
         )
@@ -433,11 +434,16 @@ def read_lines() -> list[str]:
         "",
         "- This is a post-discovery matched control, not a preregistered claim test.",
         "- The control is still valuable because it matches the key mechanics: Greek, length 3, full-span skip, exact-center surface word, one surface occurrence per source.",
-        "- `γωγ` being source-stable and centered on the Gog/Magog verse is the contextual finding to preserve.",
+        f"- {display_gog_term('γωγ')} being source-stable and centered on the Gog/Magog verse is the contextual finding to preserve.",
         "- The matched-control count is a frequency caution, not a reason to remove the centered-self occurrence from the final report.",
         "- A stronger future test would preregister a length-3 surface-control universe before selecting a target.",
         "",
     ]
+
+
+def display_gog_term(term: str) -> str:
+    english = "Gog" if term == "γωγ" else None
+    return display_term(term, english=english)
 
 
 def command_line(args: argparse.Namespace) -> str:

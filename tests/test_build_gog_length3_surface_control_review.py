@@ -4,6 +4,7 @@ from scripts.build_gog_length3_surface_control_review import (
     TermResult,
     matched_surface_terms,
     read_lines,
+    summary_table,
     summary_rows_for_results,
 )
 
@@ -102,3 +103,21 @@ def test_read_lines_preserve_contextual_occurrence_despite_frequency_caution() -
 
     assert "contextual finding to preserve" in text
     assert "frequency caution" in text
+
+
+def test_summary_table_displays_original_language_terms() -> None:
+    lines = summary_table(
+        [
+            {
+                "rank_desc": 1,
+                "rank_asc": 1,
+                "term": "γωγ",
+                "is_target": True,
+                "total_exact_center_paths": 14,
+                "source_counts": "TR_NT:2",
+                "read": "target term",
+            }
+        ]
+    )
+
+    assert "`γωγ` (Gog; English: Gog)" in "\n".join(lines)
