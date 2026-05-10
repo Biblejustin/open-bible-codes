@@ -11,10 +11,8 @@ from typing import Any
 
 from els.report_db import (
     DuckDBUnavailable,
-    ReportDBStale,
     connect,
     report_table_name_for_path,
-    verify_table_current,
 )
 
 
@@ -47,6 +45,7 @@ def scan_reports(
     report_db = Path(db_path) if db_path is not None else root_path / "db" / "open_bible_codes.duckdb"
     row_count_cache_path = Path(cache_path) if cache_path is not None else root_path / ".report_index_cache.json"
     row_count_cache = _read_row_count_cache(row_count_cache_path)
+    db_row_counts = _db_row_counts(report_db)
     entries: list[ReportEntry] = []
     for path in sorted(root_path.rglob("*")):
         if should_skip_report_path(root_path, path):
@@ -57,7 +56,7 @@ def scan_reports(
                     root_path,
                     path,
                     sample_limit=sample_limit,
-                    db_path=report_db,
+                    db_row_counts=db_row_counts,
                     row_count_cache=row_count_cache,
                 )
             )
@@ -157,7 +156,7 @@ def _summarize_csv(
     path: Path,
     *,
     sample_limit: int,
-    db_path: Path | None,
+    db_row_counts: dict[str, tuple[int, int, int]],
     row_count_cache: dict[str, dict[str, int]],
 ) -> ReportEntry:
     sample: list[dict[str, str]] = []
@@ -172,7 +171,7 @@ def _summarize_csv(
                     sample.append({key: row.get(key, "") for key in columns})
                 if len(sample) >= sample_limit:
                     break
-        db_row_count = _db_csv_row_count(db_path, path)
+        db_row_count = _db_csv_row_count(db_row_counts, path)
         if db_row_count is not None:
             row_count = db_row_count
             _cache_row_count(root, path, row_count_cache, row_count)
@@ -255,20 +254,45 @@ def _write_row_count_cache(path: Path, cache: dict[str, dict[str, int]]) -> None
     path.write_text(json.dumps(cache, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def _db_csv_row_count(db_path: Path | None, source_path: Path) -> int | None:
+def _db_row_counts(db_path: Path | None) -> dict[str, tuple[int, int, int]]:
     if db_path is None or not db_path.exists():
+        return {}
+    try:
+        with connect(db_path, read_only=True) as con:
+            metadata_table = con.execute(
+                "SELECT count(*) FROM information_schema.tables WHERE table_name = 'report_table_imports'"
+            ).fetchone()
+            if not metadata_table or not metadata_table[0]:
+                return {}
+            rows = con.execute(
+                """
+                SELECT table_name, source_size_bytes, source_mtime_ns, row_count
+                FROM report_table_imports
+                """
+            ).fetchall()
+    except DuckDBUnavailable:
+        return {}
+    return {
+        str(table_name): (int(source_size), int(source_mtime), int(row_count))
+        for table_name, source_size, source_mtime, row_count in rows
+    }
+
+
+def _db_csv_row_count(
+    db_row_counts: dict[str, tuple[int, int, int]],
+    source_path: Path,
+) -> int | None:
+    if not db_row_counts:
         return None
     table_name = report_table_name_for_path(source_path)
-    try:
-        verify_table_current(db_path=db_path, table_name=table_name, source_path=source_path)
-    except (DuckDBUnavailable, FileNotFoundError, ReportDBStale):
+    row = db_row_counts.get(table_name)
+    if row is None:
         return None
-    with connect(db_path, read_only=True) as con:
-        row = con.execute(
-            "SELECT row_count FROM report_table_imports WHERE table_name = ?",
-            [table_name],
-        ).fetchone()
-    return int(row[0]) if row else None
+    source_size, source_mtime_ns, row_count = row
+    stat = source_path.stat()
+    if source_size != stat.st_size or source_mtime_ns != stat.st_mtime_ns:
+        return None
+    return row_count
 
 
 def _summarize_json(root: Path, path: Path) -> ReportEntry:
