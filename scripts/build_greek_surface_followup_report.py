@@ -14,6 +14,7 @@ from typing import Any
 
 from els import __version__
 from els.statistics import numeric_value
+from els.term_display import display_term
 
 
 SELECTED_IN = Path("reports/greek_expanded_surface_triage/selected_patterns.csv")
@@ -120,8 +121,8 @@ def build_report(
             "| "
             + " | ".join(
                 [
-                    f"`{selected['normalized_term']}`",
-                    selected["concept"],
+                    display_selected_term(selected),
+                    md_cell(selected["concept"]),
                     selected["center_ref"],
                     selected["skip"],
                     selected["direction"],
@@ -146,10 +147,10 @@ def build_report(
             "| "
             + " | ".join(
                 [
-                    f"`{row['normalized_term']}`",
+                    display_path_term(row, selected_by_id),
                     row["corpus"],
-                    f"`{row['sequence']}`",
-                    f"`{row['center_word']}`",
+                    display_term(row["sequence"]),
+                    display_term(row["center_word"]),
                     row["path_refs"],
                 ]
             )
@@ -255,6 +256,22 @@ def q_range_read(rows: list[dict[str, str]]) -> str:
     if not values:
         return "no q values"
     return f"min {min(values):.6g}; max {max(values):.6g}"
+
+
+def display_selected_term(row: dict[str, str]) -> str:
+    return md_cell(display_term(row["normalized_term"], english=row.get("concept", "")))
+
+
+def display_path_term(
+    row: dict[str, str],
+    selected_by_id: dict[str, dict[str, str]],
+) -> str:
+    selected = selected_by_id.get(row["term_id"], {})
+    return md_cell(display_term(row["normalized_term"], english=selected.get("concept", "")))
+
+
+def md_cell(value: str) -> str:
+    return value.replace("|", "\\|")
 
 
 def pass_fail(condition: bool) -> str:

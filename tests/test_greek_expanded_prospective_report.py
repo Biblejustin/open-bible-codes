@@ -61,3 +61,14 @@ def test_top_exact_center_rows_limits_per_corpus() -> None:
     top = report.top_exact_center_rows(rows, limit_per_corpus=1)
 
     assert [row["term_id"] for row in top] == ["a"]
+
+
+def test_display_report_term_adds_transliteration_and_english() -> None:
+    text = report.display_report_term(
+        {
+            "normalized_term": "αμην",
+            "concept": "Amen",
+        }
+    )
+
+    assert text == "`αμην` (amen; English: Amen)"

@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
+from els.term_display import display_term
 
 
 TERMS_IN = Path("terms/greek_surface_prospective_terms.csv")
@@ -145,8 +146,8 @@ def build_report(
             "| "
             + " | ".join(
                 [
-                    f"`{row['normalized_term']}`",
-                    row["concept"],
+                    display_report_term(row),
+                    md_cell(row["concept"]),
                     row["total_exact_center_hits"],
                     row["all_source_patterns"],
                     row["multi_source_patterns"],
@@ -222,6 +223,14 @@ def sum_int(rows: list[dict[str, str]], field: str) -> int:
         except ValueError:
             continue
     return total
+
+
+def display_report_term(row: dict[str, str]) -> str:
+    return md_cell(display_term(row["normalized_term"], english=row.get("concept", "")))
+
+
+def md_cell(value: str) -> str:
+    return value.replace("|", "\\|")
 
 
 def write_manifest(

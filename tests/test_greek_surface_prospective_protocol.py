@@ -3,6 +3,7 @@ from pathlib import Path
 
 from scripts.build_greek_surface_prospective_report import (
     PREFLIGHT_IN,
+    display_report_term,
     preflight_artifact,
     registered_outcome,
     report_status,
@@ -116,3 +117,10 @@ def test_preflight_artifact_uses_payload_path_with_default_fallback() -> None:
         {"output_path": "reports/custom.preflight.json"}
     ) == "reports/custom.preflight.json"
     assert preflight_artifact({}) == str(PREFLIGHT_IN)
+
+
+def test_surface_report_term_display_adds_transliteration_and_english() -> None:
+    assert (
+        display_report_term({"normalized_term": "σιων", "concept": "Zion"})
+        == "`σιων` (sion; English: Zion)"
+    )

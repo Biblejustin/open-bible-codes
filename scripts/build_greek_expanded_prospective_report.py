@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
+from els.term_display import display_term
 
 
 OUT_DIR = Path("reports/greek_expanded_prospective_exact_center")
@@ -70,6 +71,7 @@ def build_report(
 ) -> str:
     surface = surface_counts(surface_rows)
     pattern = pattern_counts(pattern_rows)
+    doxa_display = display_term("δοξα", english="glory")
     lines = [
         "# Greek Expanded Prospective Report",
         "",
@@ -131,7 +133,7 @@ def build_report(
     )
     for row in top_exact_center_rows(surface_rows, limit_per_corpus=5):
         lines.append(
-            f"| {row['corpus']} | `{row['normalized_term']}` | {row['concept']} | "
+            f"| {row['corpus']} | {display_report_term(row)} | {md_cell(row['concept'])} | "
             f"{int(row['exact_center_hits']):,} |"
         )
     lines.extend(
@@ -162,7 +164,7 @@ def build_report(
             "",
             "This is a useful negative result. It means the stricter phrase-extension",
             "gate is selective when applied to 291 new Greek terms, and the previous",
-            "`δοξα` row was not trivially reproduced by a larger nearby term list.",
+            f"{doxa_display} row was not trivially reproduced by a larger nearby term list.",
             "",
             "## Next Step",
             "",
@@ -223,6 +225,14 @@ def top_exact_center_rows(
 
 def term_count(rows: list[dict[str, str]]) -> int:
     return len({row["term_id"] for row in rows})
+
+
+def display_report_term(row: dict[str, str]) -> str:
+    return md_cell(display_term(row["normalized_term"], english=row.get("concept", "")))
+
+
+def md_cell(value: str) -> str:
+    return value.replace("|", "\\|")
 
 
 def write_manifest(

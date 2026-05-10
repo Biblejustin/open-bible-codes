@@ -24,26 +24,26 @@ commit is recorded in the local manifest; the top-level
 
 | Term | Concept | Center | Skip | Direction | p_ge | q | Matched controls |
 | --- | --- | --- | ---: | --- | ---: | ---: | ---: |
-| `ισαακ` | Isaac | Heb 11:9 | -7 | backward | 0.030303 | 0.032258 | 32 |
-| `ανομια` | Lawlessness | Matt 7:23 | 20 | forward | 0.032258 | 0.032258 | 30 |
-| `τερασ` | Wonder | Heb 9:11 | -13 | backward | 0.030303 | 0.032258 | 32 |
+| `ισαακ` (Isaak; English: Isaac) | Isaac | Heb 11:9 | -7 | backward | 0.030303 | 0.032258 | 32 |
+| `ανομια` (anomia; English: Lawlessness) | Lawlessness | Matt 7:23 | 20 | forward | 0.032258 | 0.032258 | 30 |
+| `τερασ` (teras; English: Wonder) | Wonder | Heb 9:11 | -13 | backward | 0.030303 | 0.032258 | 32 |
 
 ## Letter-Path Audit
 
 | Term | Corpus | Sequence | Center word | Path refs |
 | --- | --- | --- | --- | --- |
-| `ισαακ` | TR_NT | `ισαακ` | `κατοικήσας` | HEB 11:9 |
-| `ισαακ` | BYZ_NT | `ισαακ` | `κατοικησασ` | HEB 11:9 |
-| `ισαακ` | TCG_NT | `ισαακ` | `κατοικήσας` | HEB 11:9 |
-| `ισαακ` | SBLGNT | `ισαακ` | `κατοικήσας` | Heb 11:9 |
-| `τερασ` | TR_NT | `τερασ` | `χειροποιήτου` | HEB 9:11 |
-| `τερασ` | BYZ_NT | `τερασ` | `χειροποιητου` | HEB 9:11 |
-| `τερασ` | TCG_NT | `τερασ` | `χειροποιήτου,` | HEB 9:11 |
-| `τερασ` | SBLGNT | `τερασ` | `χειροποιήτου,` | Heb 9:11 |
-| `ανομια` | TR_NT | `ανομια` | `Οὐδέποτε` | MAT 7:22; MAT 7:23 |
-| `ανομια` | BYZ_NT | `ανομια` | `ουδεποτε` | MAT 7:22; MAT 7:23 |
-| `ανομια` | TCG_NT | `ανομια` | `Οὐδέποτε` | MAT 7:22; MAT 7:23 |
-| `ανομια` | SBLGNT | `ανομια` | `Οὐδέποτε` | Matt 7:22; Matt 7:23 |
+| `ισαακ` (Isaak; English: Isaac) | TR_NT | `ισαακ` (Isaak; English: Isaac) | `κατοικήσας` (katoikesas) | HEB 11:9 |
+| `ισαακ` (Isaak; English: Isaac) | BYZ_NT | `ισαακ` (Isaak; English: Isaac) | `κατοικησασ` (katoikesas) | HEB 11:9 |
+| `ισαακ` (Isaak; English: Isaac) | TCG_NT | `ισαακ` (Isaak; English: Isaac) | `κατοικήσας` (katoikesas) | HEB 11:9 |
+| `ισαακ` (Isaak; English: Isaac) | SBLGNT | `ισαακ` (Isaak; English: Isaac) | `κατοικήσας` (katoikesas) | Heb 11:9 |
+| `τερασ` (teras; English: Wonder) | TR_NT | `τερασ` (teras) | `χειροποιήτου` (cheiropoietou) | HEB 9:11 |
+| `τερασ` (teras; English: Wonder) | BYZ_NT | `τερασ` (teras) | `χειροποιητου` (cheiropoietou) | HEB 9:11 |
+| `τερασ` (teras; English: Wonder) | TCG_NT | `τερασ` (teras) | `χειροποιήτου,` (cheiropoietou) | HEB 9:11 |
+| `τερασ` (teras; English: Wonder) | SBLGNT | `τερασ` (teras) | `χειροποιήτου,` (cheiropoietou) | Heb 9:11 |
+| `ανομια` (anomia; English: Lawlessness) | TR_NT | `ανομια` (anomia; English: lawlessness) | `Οὐδέποτε` (oudepote) | MAT 7:22; MAT 7:23 |
+| `ανομια` (anomia; English: Lawlessness) | BYZ_NT | `ανομια` (anomia; English: lawlessness) | `ουδεποτε` (oudepote) | MAT 7:22; MAT 7:23 |
+| `ανομια` (anomia; English: Lawlessness) | TCG_NT | `ανομια` (anomia; English: lawlessness) | `Οὐδέποτε` (oudepote) | MAT 7:22; MAT 7:23 |
+| `ανομια` (anomia; English: Lawlessness) | SBLGNT | `ανομια` (anomia; English: lawlessness) | `Οὐδέποτε` (oudepote) | Matt 7:22; Matt 7:23 |
 
 ## Follow-Up Checks
 

@@ -49,26 +49,26 @@ Top exact-center surface terms:
 
 | Corpus | Term | Concept | Exact-center hits |
 | --- | --- | --- | ---: |
-| BYZ_NT | `αμην` | Amen | 26 |
-| BYZ_NT | `δασα` | Lasha | 10 |
-| BYZ_NT | `σιων` | Zion | 9 |
-| BYZ_NT | `χουσ` | Cush | 6 |
-| BYZ_NT | `ασηρ` | Asher | 4 |
-| SBLGNT | `αμην` | Amen | 21 |
-| SBLGNT | `σιων` | Zion | 10 |
-| SBLGNT | `δασα` | Lasha | 8 |
-| SBLGNT | `αραμ` | Aram | 4 |
-| SBLGNT | `χουσ` | Cush | 4 |
-| TCG_NT | `αμην` | Amen | 26 |
-| TCG_NT | `δασα` | Lasha | 10 |
-| TCG_NT | `σιων` | Zion | 10 |
-| TCG_NT | `χουσ` | Cush | 9 |
-| TCG_NT | `αραμ` | Aram | 4 |
-| TR_NT | `αμην` | Amen | 28 |
-| TR_NT | `χουσ` | Cush | 9 |
-| TR_NT | `δασα` | Lasha | 8 |
-| TR_NT | `σιων` | Zion | 8 |
-| TR_NT | `ιουδα` | Judah | 6 |
+| BYZ_NT | `αμην` (amen; English: Amen) | Amen | 26 |
+| BYZ_NT | `δασα` (dasa; English: Lasha) | Lasha | 10 |
+| BYZ_NT | `σιων` (sion; English: Zion) | Zion | 9 |
+| BYZ_NT | `χουσ` (chous; English: Cush) | Cush | 6 |
+| BYZ_NT | `ασηρ` (aser; English: Asher) | Asher | 4 |
+| SBLGNT | `αμην` (amen; English: Amen) | Amen | 21 |
+| SBLGNT | `σιων` (sion; English: Zion) | Zion | 10 |
+| SBLGNT | `δασα` (dasa; English: Lasha) | Lasha | 8 |
+| SBLGNT | `αραμ` (aram; English: Aram) | Aram | 4 |
+| SBLGNT | `χουσ` (chous; English: Cush) | Cush | 4 |
+| TCG_NT | `αμην` (amen; English: Amen) | Amen | 26 |
+| TCG_NT | `δασα` (dasa; English: Lasha) | Lasha | 10 |
+| TCG_NT | `σιων` (sion; English: Zion) | Zion | 10 |
+| TCG_NT | `χουσ` (chous; English: Cush) | Cush | 9 |
+| TCG_NT | `αραμ` (aram; English: Aram) | Aram | 4 |
+| TR_NT | `αμην` (amen; English: Amen) | Amen | 28 |
+| TR_NT | `χουσ` (chous; English: Cush) | Cush | 9 |
+| TR_NT | `δασα` (dasa; English: Lasha) | Lasha | 8 |
+| TR_NT | `σιων` (sion; English: Zion) | Zion | 8 |
+| TR_NT | `ιουδα` (iouda; English: Judah) | Judah | 6 |
 
 ## Phrase-Extension Pattern Matrix
 
@@ -87,7 +87,7 @@ control queue from this run.
 
 This is a useful negative result. It means the stricter phrase-extension
 gate is selective when applied to 291 new Greek terms, and the previous
-`δοξα` row was not trivially reproduced by a larger nearby term list.
+`δοξα` (doxa; English: glory) row was not trivially reproduced by a larger nearby term list.
 
 ## Next Step
 

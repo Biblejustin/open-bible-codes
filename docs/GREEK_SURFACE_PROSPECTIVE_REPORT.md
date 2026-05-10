@@ -44,16 +44,16 @@ the prior selected surface rows from the expanded Greek term list.
 
 | Term | Concept | Exact-center hits | All-source | Multi-source | Source-only |
 | --- | --- | ---: | ---: | ---: | ---: |
-| `αμην` | Amen | 101 | 11 | 14 | 19 |
-| `σιων` | Zion | 37 | 4 | 5 | 8 |
-| `αραμ` | Aram | 14 | 3 | 0 | 2 |
-| `δασα` | Lasha | 36 | 2 | 7 | 12 |
-| `ασηρ` | Asher | 14 | 2 | 2 | 1 |
-| `χουσ` | Cush | 28 | 1 | 6 | 10 |
-| `σαβα` | Seba | 9 | 1 | 2 | 0 |
-| `ιουδα` | Judah | 14 | 0 | 4 | 3 |
-| `λεων` | Lion | 9 | 0 | 3 | 2 |
-| `αδαμ` | Adam | 7 | 0 | 2 | 2 |
+| `αμην` (amen; English: Amen) | Amen | 101 | 11 | 14 | 19 |
+| `σιων` (sion; English: Zion) | Zion | 37 | 4 | 5 | 8 |
+| `αραμ` (aram; English: Aram) | Aram | 14 | 3 | 0 | 2 |
+| `δασα` (dasa; English: Lasha) | Lasha | 36 | 2 | 7 | 12 |
+| `ασηρ` (aser; English: Asher) | Asher | 14 | 2 | 2 | 1 |
+| `χουσ` (chous; English: Cush) | Cush | 28 | 1 | 6 | 10 |
+| `σαβα` (saba; English: Seba) | Seba | 9 | 1 | 2 | 0 |
+| `ιουδα` (iouda; English: Judah) | Judah | 14 | 0 | 4 | 3 |
+| `λεων` (leon; English: Lion) | Lion | 9 | 0 | 3 | 2 |
+| `αδαμ` (adam; English: Adam) | Adam | 7 | 0 | 2 | 2 |
 
 ## Registered Outcome
 

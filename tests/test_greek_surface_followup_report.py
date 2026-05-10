@@ -80,6 +80,8 @@ def test_build_report_states_post_screen_boundary() -> None:
     assert "post_screen_surface_followup_review_candidate" in text
     assert "not a claim" in text
     assert "not prospective discovery" in text
+    assert "`ανομια` (anomia; English: Lawlessness)" in text
+    assert "`Οὐδέποτε` (oudepote)" in text
 
 
 def test_write_manifest_includes_followup_status(tmp_path) -> None:
