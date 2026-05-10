@@ -1,4 +1,4 @@
-# LXX Apocrypha Bridge Shuffled Controls
+# LXX Apocrypha Bridge Shuffled Controls (100 Samples)
 
 Status: shuffled-insertion controls. This is not a claim report.
 
