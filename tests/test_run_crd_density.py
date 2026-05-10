@@ -125,6 +125,13 @@ class CRDDensityRunnerTests(unittest.TestCase):
                         "corpus": "SYN",
                         "classifier_mode": "deterministic",
                         "is_relevant": "true",
+                    },
+                    {
+                        "hit_id": "orphan",
+                        "term_id": "orphan",
+                        "corpus": "SYN",
+                        "classifier_mode": "deterministic",
+                        "is_relevant": "true",
                     }
                 ],
             )

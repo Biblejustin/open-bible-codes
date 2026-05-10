@@ -171,6 +171,8 @@ def run_crd_density(
         if resume and not force_reset
         else set()
     )
+    if completed_pairs:
+        prune_outputs_to_completed_pairs(outputs, completed_pairs)
 
     corpus_letters: dict[str, int] = {}
     status = "completed"
@@ -394,6 +396,29 @@ def completed_density_pairs(path: Path, classifier_modes: set[str]) -> set[tuple
                 continue
             seen_modes[key].add(row.get("classifier_mode", ""))
     return {key for key, modes in seen_modes.items() if classifier_modes <= modes}
+
+
+def prune_outputs_to_completed_pairs(outputs: CRDOutputs, completed_pairs: set[tuple[str, str]]) -> None:
+    prune_csv_to_pairs(outputs.density_matrix, DENSITY_FIELDNAMES, completed_pairs)
+    prune_csv_to_pairs(outputs.classified_hits, CLASSIFIED_HIT_FIELDNAMES, completed_pairs)
+
+
+def prune_csv_to_pairs(path: Path, fieldnames: list[str], completed_pairs: set[tuple[str, str]]) -> None:
+    if not path.exists():
+        return
+    tmp_path = path.with_name(path.name + ".tmp")
+    with (
+        path.open("r", encoding="utf-8", newline="") as input_handle,
+        tmp_path.open("w", encoding="utf-8", newline="") as output_handle,
+    ):
+        reader = csv.DictReader(input_handle)
+        writer = csv.DictWriter(output_handle, fieldnames=fieldnames, extrasaction="ignore")
+        writer.writeheader()
+        for row in reader:
+            key = (row.get("term_id", ""), row.get("corpus", ""))
+            if key in completed_pairs:
+                writer.writerow(row)
+    tmp_path.replace(path)
 
 
 def report_progress(
