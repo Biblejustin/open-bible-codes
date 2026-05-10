@@ -12,7 +12,7 @@ python3 -m scripts.build_final_report_highlights --centered-summary reports/cent
 ## Summary
 
 - highlight rows: 5
-- controlled or partial catalog rows: 11
+- controlled or partial catalog rows: 12
 - contextual_occurrence_frequency_cautioned: 1
 - occurrence_background_pressure: 2
 - occurrence_hold_for_referent_or_controls: 1
@@ -36,6 +36,7 @@ python3 -m scripts.build_final_report_highlights --centered-summary reports/cent
 | `gog_rev_20_8_centered_occurrence` | `controlled_review_candidate` | Hidden Greek Gog centers on open Gog at Rev 20:8 across all four compared Greek NT source labels; matched length-3 controls caution against frequency promotion | `docs/CENTERED_OCCURRENCE_INDEX.md` |
 | `greek_expanded_surface_followup` | `controlled_review_candidate` | Selected rows pass letter-path audit and all-available same-length controls with q 0.032258 | `docs/GREEK_EXPANDED_SURFACE_FOLLOWUP_REPORT.md` |
 | `all_codes_yom_yhwh_compound_extension` | `controlled_review_candidate` | Selected key passed locked 5000/5000 confirmatory controls in all five MT-family sources with conservative all-control q = 0.003599 | `docs/ALL_CODES_COMPOUND_EXTENSION_CONFIRMATORY_CONTROLS.md` |
+| `crd_exact_center_word_broad_screen` | `partially_reproducible` | Self-surface and concept-surface CRD produce identical 1044 Bible exact center-word rows across 131 term IDs; center-word-only summary has 120 terms above secular max and 94 Bible-positive secular-zero terms; concept expansion changes zero exact center-word exceedance decisions | `docs/CRD_CENTER_WORD_SELF_VS_CONCEPT_FINDINGS.md` |
 | `greek_surface_length4_vocab_controls` | `partially_reproducible` | Length-4 rows reproduce but generated vocabulary controls overlap every target and no target survives study-level q <= 0.05 | `docs/GREEK_SURFACE_LENGTH4_VOCABULARY_CONTROL_EVALUATION.md` |
 | `modern_geopolitical_short_forms` | `partially_reproducible` | Short forms are often present and version-stable where present but representative paired controls do not support a claim | `docs/WIDE_FOCUS_PAIRED_CONTROLS.md` |
 | `local_business_place_terms` | `partially_reproducible` | Cowboy alone has ordinary controlled hits; Cowboy Catering/Catering/Simscorner remain absent; Simsberry has one MAM-only exact row | `docs/WIDE_FOCUS_EXACT_PRESENCE.md` |

@@ -27,7 +27,7 @@ ALLOWED_STATUSES = {
     "under_specified",
     "license_blocked",
 }
-ALLOWED_LANGUAGES = {"hebrew", "greek", "english", "michigan", "hebrew/greek"}
+ALLOWED_LANGUAGES = {"hebrew", "greek", "english", "michigan", "hebrew/greek", "hebrew/greek/english"}
 
 
 class ClaimCatalogTests(unittest.TestCase):
