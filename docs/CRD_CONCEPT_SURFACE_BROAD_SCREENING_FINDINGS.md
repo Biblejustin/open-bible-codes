@@ -137,6 +137,10 @@ Selected Bible-positive/secular-zero terms:
 
 `cc_aaron_g`, `david_g`, `elishah_g`, `eng_david`, `eng_david_2`, `eng_david_3`, `eng_zion`, `eng_zion_2`, `gpx_david_g`, `gpx_elishah_g`, `gpx_jacob_g`, `gpx_lawlessness_g`, `jacob_g`, `josiah_h`, `kyrios_gnt`, `lawlessness_g`, `lord_g`, `lord_gxc`, `peace_g`, `peace_gxc`, `spirit_g`, `spirit_gxc`, `spirit_pneuma_g`, `wisdom_g`, `wisdom_gxc`.
 
+## Local Custom Term Check
+
+The local-interest terms `cowboy`, `catering`, `cowboy catering`, `simsberry`, and `simscorner` were present in Hebrew, Greek, and English variants where available. In this deterministic concept-surface run, all of those rows had `bible_max_density = 0` and `secular_max_density = 0`.
+
 ## Interpretation Notes
 
 - This run is deterministic concept-surface screening: hidden `X` centered near a visible spelling from the same committed concept.
