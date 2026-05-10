@@ -113,7 +113,7 @@ class ApocryphaBridgeContextTests(unittest.TestCase):
             text = out.read_text(encoding="utf-8")
 
         self.assertIn("`μαρια` (Maria; English: Mary)", text)
-        self.assertIn("`ισραηλ` (israel)", text)
+        self.assertIn("`ισραηλ` (israel; English: Israel)", text)
 
 
 def surface_context(**overrides: bool) -> SurfaceContext:

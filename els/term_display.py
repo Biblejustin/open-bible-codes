@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import csv
+from functools import lru_cache
+from pathlib import Path
 import unicodedata
 
 
@@ -88,6 +91,8 @@ KNOWN_TERMS: dict[str, tuple[str, str]] = {
     "צר": ("tsar", "foe/adversary"),
 }
 
+TERM_FILES_DIR = Path(__file__).resolve().parents[1] / "terms"
+
 GREEK_MAP = {
     "α": "a",
     "β": "b",
@@ -156,12 +161,50 @@ def display_term(value: str, *, english: str | None = None, transliteration: str
         return f"`{text}`"
 
     key = normalized_script_key(text)
-    known_transliteration, fallback_english = KNOWN_TERMS.get(key, ("", ""))
+    known_transliteration, fallback_english = known_term_display(key)
     transliteration = transliteration or known_transliteration or transliterate(text)
     gloss = english or fallback_english
     if gloss:
         return f"`{text}` ({transliteration}; English: {gloss})"
     return f"`{text}` ({transliteration})"
+
+
+def known_term_display(key: str) -> tuple[str, str]:
+    """Return display metadata for a normalized script key."""
+    if key in KNOWN_TERMS:
+        return KNOWN_TERMS[key]
+    return csv_known_terms().get(key, ("", ""))
+
+
+@lru_cache(maxsize=1)
+def csv_known_terms() -> dict[str, tuple[str, str]]:
+    """Load unambiguous Hebrew/Greek term concepts from committed term CSVs.
+
+    Report builders often only have a normalized term value by the time they
+    render Markdown. This fallback keeps those searched terms reader-facing
+    without guessing for ambiguous duplicate entries.
+    """
+    if not TERM_FILES_DIR.exists():
+        return {}
+
+    concepts_by_key: dict[str, set[str]] = {}
+    for path in sorted(TERM_FILES_DIR.glob("*.csv")):
+        try:
+            with path.open(newline="", encoding="utf-8") as handle:
+                for row in csv.DictReader(handle):
+                    term = row.get("term", "").strip()
+                    concept = row.get("concept", "").strip()
+                    if not term or not concept:
+                        continue
+                    if not (contains_hebrew(term) or contains_greek(term)):
+                        continue
+                    key = normalized_script_key(term)
+                    if key:
+                        concepts_by_key.setdefault(key, set()).add(concept)
+        except (OSError, csv.Error, UnicodeDecodeError):
+            continue
+
+    return {key: ("", sorted(concepts)[0]) for key, concepts in concepts_by_key.items() if len(concepts) == 1}
 
 
 def display_center(ref: str, center_word: str) -> str:

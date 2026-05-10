@@ -130,7 +130,10 @@ class DynamicSpanHitSummaryTests(unittest.TestCase):
         self.assertEqual(display_center_word(row), "`λόγος` (logos; English: Word)")
 
     def test_display_top_center_words_annotates_script_values_only(self) -> None:
-        self.assertEqual(display_top_center_words("λογος=2; and=1"), "`λογος` (logos)=2; and=1")
+        self.assertEqual(
+            display_top_center_words("λογος=2; and=1"),
+            "`λογος` (logos; English: Word)=2; and=1",
+        )
 
 
 def hit_row(

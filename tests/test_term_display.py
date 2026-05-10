@@ -22,6 +22,10 @@ class TermDisplayTests(unittest.TestCase):
     def test_displays_known_hebrew_term_with_diacritics(self) -> None:
         self.assertEqual(display_term("יֵשׁ֤וּעַ"), "`יֵשׁ֤וּעַ` (Yeshua; English: Yeshua/Jeshua)")
 
+    def test_displays_unambiguous_term_csv_concept_as_fallback_gloss(self) -> None:
+        self.assertEqual(display_term("קאובוי"), "`קאובוי` (qwbwy; English: Cowboy)")
+        self.assertEqual(display_term("καρχηδων"), "`καρχηδων` (karchedon; English: Carthage)")
+
     def test_displays_known_greek_term_with_breathing_and_final_sigma(self) -> None:
         self.assertEqual(display_term("Ἰησοῦς"), "`Ἰησοῦς` (Iesous; English: Jesus/Joshua)")
 

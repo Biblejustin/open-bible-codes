@@ -201,7 +201,6 @@ class TriageSurfaceAllCodesTests(unittest.TestCase):
             self.assertEqual(exit_code, 0)
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("`טראמפ` (trmp; English: Trump)", text)
-            self.assertIn("`טראמפ` (trmp)", text)
 
     def test_main_can_read_hits_from_duckdb(self) -> None:
         pytest.importorskip("duckdb")
