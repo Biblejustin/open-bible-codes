@@ -9,6 +9,8 @@ from collections import defaultdict
 from datetime import UTC, datetime
 from pathlib import Path
 
+from els.term_display import display_center, display_term
+
 
 TARGET_CONCEPTS = (
     "Iran",
@@ -45,6 +47,7 @@ EXTENSION_TOPS = [
 SUMMARY_OUT = Path("reports/targeted_terms_summary.csv")
 EXAMPLES_OUT = Path("reports/targeted_terms_examples.csv")
 MD_OUT = Path("reports/targeted_terms.md")
+DOCS_OUT = Path("docs/TARGETED_TERMS_FINDINGS.md")
 MANIFEST_OUT = Path("reports/targeted_terms.manifest.json")
 
 SUMMARY_FIELDNAMES = [
@@ -136,6 +139,7 @@ def main() -> int:
     write_rows(SUMMARY_OUT, SUMMARY_FIELDNAMES, summary_rows)
     write_rows(EXAMPLES_OUT, EXAMPLE_FIELDNAMES, example_rows)
     write_markdown(MD_OUT, summary_rows, example_rows)
+    write_markdown(DOCS_OUT, summary_rows, example_rows)
     write_manifest(summary_rows, example_rows)
 
     print(SUMMARY_OUT)
@@ -330,7 +334,10 @@ def write_markdown(
             + " | ".join(
                 [
                     concept,
-                    f"{best_count['corpus']} `{best_count['term_id']}` {best_count['hit_count']}",
+                    (
+                        f"{best_count['corpus']} `{best_count['term_id']}` "
+                        f"{display_target_term(best_count)} {best_count['hit_count']}"
+                    ),
                     ", ".join(bands) or "",
                     str(surface_total),
                     str(extension_total),
@@ -360,7 +367,7 @@ def write_markdown(
                     [
                         str(row["corpus"]),
                         f"`{row['term_id']}`",
-                        f"`{row['term']}`",
+                        display_target_term(row),
                         str(row["hit_count"]),
                         str(row["control_significance_band"] or ""),
                         str(row["surface_context_hit_count"] or 0),
@@ -391,10 +398,10 @@ def write_markdown(
                     [
                         str(row["concept"]),
                         str(row["corpus"]),
-                        f"`{row['term']}`",
+                        display_target_term(row),
                         str(row["skip"]),
                         f"{row['start_ref']}-{row['end_ref']}",
-                        f"{row['center_ref']} `{row['center_word']}`",
+                        display_center(str(row["center_ref"]), str(row["center_word"])),
                         str(detail),
                     ]
                 )
@@ -404,6 +411,12 @@ def write_markdown(
 
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+
+def display_target_term(row: dict[str, object]) -> str:
+    term = str(row.get("normalized_term") or row.get("term") or "")
+    concept = str(row.get("concept") or "")
+    return display_term(term, english=concept)
 
 
 def read_label(
@@ -479,6 +492,7 @@ def write_manifest(
                     str(SUMMARY_OUT),
                     str(EXAMPLES_OUT),
                     str(MD_OUT),
+                    str(DOCS_OUT),
                     str(MANIFEST_OUT),
                 ],
             },

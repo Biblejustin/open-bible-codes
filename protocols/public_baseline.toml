@@ -358,6 +358,7 @@ description = "Build compact joined tables for selected modern/geopolitical targ
 argv = ["-m", "scripts.analyze_targeted_terms"]
 inputs = [
   "scripts/analyze_targeted_terms.py",
+  "els/term_display.py",
   "reports/protocols/public_baseline/modern_names_dates_counts.csv",
   "reports/protocols/public_baseline/prophetic_terms_counts.csv",
   "reports/els_controls_summary.csv",
@@ -370,6 +371,7 @@ outputs = [
   "reports/targeted_terms_summary.csv",
   "reports/targeted_terms_examples.csv",
   "reports/targeted_terms.md",
+  "docs/TARGETED_TERMS_FINDINGS.md",
   "reports/targeted_terms.manifest.json",
 ]
 

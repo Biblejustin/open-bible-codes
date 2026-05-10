@@ -1,158 +1,155 @@
-# Targeted Terms Findings
+# Targeted Terms Report
 
-Source run:
+Targets: Iran, Trump, Vance, Netanyahu, Gog, Magog, Russia, Europe, Turkey, Germany.
 
-- Protocol: `protocols/public_baseline.toml`
-- Step: `targeted_terms_report`
-- Command: `python3 -m scripts.run_protocol protocols/public_baseline.toml --resume --only targeted_terms_report`
-- Generated summary: `reports/targeted_terms_summary.csv`
-- Generated examples: `reports/targeted_terms_examples.csv`
-- Generated markdown: `reports/targeted_terms.md`
-- Generated manifest: `reports/targeted_terms.manifest.json`
-- Output size: 41 summary rows; 26 example rows
+This report joins raw counts, controls, NT surface context, and filtered NT extension-top rows. It is a screening artifact, not a significance claim.
 
-This tracked document summarizes the generated report so the current read is visible in git. The generated `reports/` files remain local run artifacts.
+## Controls Read
 
-## Scope
-
-Focused targets:
-
-- Iran
-- Trump
-- Vance
-- Netanyahu
-- Gog
-- Magog
-- Russia
-- Europe
-- Turkey
-- Germany
-
-The report joins raw ELS counts, shuffled-letter and shuffled-term controls, NT surface-context rows, and filtered NT extension-top rows. It is a screening artifact, not a significance claim.
-
-## Main Read
-
-No targeted concept currently has a robust control-backed signal.
-
-Practical read:
-
-- Short Greek forms dominate raw counts.
-- Surface-context rows exist for some NT Greek hits, but mostly track short-form density.
-- No focused target produced a filtered NT extension-top row.
-- Europe Hebrew is the only focused row with a low uncorrected p-value, but it remains an uncorrected screening result with weak-control flags.
-- Gog and Magog should be reviewed as a pair/proximity question, not by raw counts.
+Controls remain weak for claim-making: rows with low uncorrected p-values still carry flags such as `few_letter_controls`, `few_term_controls`, `huge_search_space`, and `uncorrected_only`.
 
 ## Concept Summary
 
 | Concept | Best raw count | Best control band | Surface context rows | Extension top rows | Read |
 | --- | ---: | --- | ---: | ---: | --- |
-| Iran | LXX `iran_g` 8,375 | `not_unusual` | 508 | 0 | Greek form is short; high count is expected noise candidate |
-| Trump | LXX `trump_g` 71 | `not_unusual` | 2 | 0 | present, low/modest; controls first |
-| Vance | LXX `vance_g` 1,532 | `not_unusual` | 13 | 0 | high because short Greek form |
-| Netanyahu | MT_WLC `netanyahu_h` 8 | `not_unusual` | 0 | 0 | Hebrew only, low |
-| Gog | LXX `gog_g` 1,800 | `not_unusual` | 124 | 0 | very short form; use pair/proximity review |
-| Magog | MT_WLC `magog_h` 104 | `not_unusual` | 0 | 0 | present; better reviewed with Gog proximity |
-| Russia | LXX `russia_g` 268 | `not_unusual` | 16 | 0 | present, no robust signal |
-| Europe | MT_WLC `europe_h` 17 | `not_unusual`, `uncorrected_p_le_0.05` | 0 | 0 | uncorrected screen only |
-| Turkey | MT_WLC `turkey_alt_h` 14 | `not_unusual` | 0 | 0 | low |
-| Germany | MT_WLC `germany_h` 2 | `not_unusual` | 0 | 0 | near absent |
+| Iran | LXX `iran_g` `ιραν` (iran; English: Iran) 8375 | not_unusual | 508 | 0 | good target, but Greek term is short |
+| Trump | LXX `trump_g` `τραμπ` (tramp; English: Trump) 71 | not_unusual | 2 | 0 | modern-name screen; controls first |
+| Vance | LXX `vance_g` `βανσ` (bans; English: Vance) 1532 | not_unusual | 13 | 0 | modern-name screen; controls first |
+| Netanyahu | MT_WLC `netanyahu_h` `נתניהו` (ntnyhw; English: Netanyahu) 11 | not_unusual | 0 | 0 | modern-name screen; controls first |
+| Gog | LXX `gog_g` `γωγ` (Gog; English: Gog) 1800 | not_unusual | 124 | 0 | review as pair/proximity, not raw counts |
+| Magog | MT_WLC `magog_h` `מגוג` (mgwg; English: Magog) 93 | not_unusual | 0 | 0 | review as pair/proximity, not raw counts |
+| Russia | LXX `russia_g` `ρωσια` (rosia; English: Russia) 268 | not_unusual | 16 | 0 | no robust signal |
+| Europe | MT_WLC `europe_h` `אירופה` (yrwph; English: Europe) 15 | not_unusual, uncorrected_p_le_0.05 | 0 | 0 | uncorrected screen only |
+| Turkey | MT_WLC `turkey_alt_h` `תורכיה` (twrkyh; English: Turkey) 17 | not_unusual | 0 | 0 | no robust signal |
+| Germany | MT_WLC `germany_h` `גרמניה` (grmnyh; English: Germany) 2 | not_unusual | 0 | 0 | no robust signal |
 
-## Term Details
+## Term Rows
 
 ### Iran
 
-| Corpus | Term ID | Term | Hits | Control | Surface | Read |
-| --- | --- | --- | ---: | --- | ---: | --- |
-| LXX | `iran_g` | `ιραν` | 8,375 | `not_unusual` | 0 | high count, likely short-form density |
-| TR_NT | `iran_g` | `ιραν` | 1,876 | `not_unusual` | 250 | high count, likely short-form density |
-| SBLGNT | `iran_g` | `ιραν` | 1,983 | `not_unusual` | 258 | high count, likely short-form density |
-| MT_WLC | `iran_h` | `איראן` | 210 | `not_unusual` | 0 | counted, not unusual |
+| Corpus | Term ID | Term | Hits | Control | Surface | Extension | Read |
+| --- | --- | --- | ---: | --- | ---: | ---: | --- |
+| LXX | `iran_g` | `ιραν` (iran; English: Iran) | 8375 | not_unusual | 0 | 0 | high count, likely short-form density |
+| TR_NT | `iran_g` | `ιραν` (iran; English: Iran) | 1876 | not_unusual | 250 | 0 | high count, likely short-form density |
+| SBLGNT | `iran_g` | `ιραν` (iran; English: Iran) | 1983 | not_unusual | 258 | 0 | high count, likely short-form density |
+| MT_WLC | `iran_h` | `איראנ` (yrn; English: Iran) | 229 | not_unusual | 0 | 0 | counted, not unusual |
 
-### Trump, Vance, Netanyahu
+### Trump
 
-| Concept | Corpus | Term ID | Term | Hits | Control | Surface | Read |
-| --- | --- | --- | --- | ---: | --- | ---: | --- |
-| Trump | MT_WLC | `trump_h` | `טראמפ` | 4 | `not_unusual` | 0 | low |
-| Trump | LXX | `trump_g` | `τραμπ` | 71 | `not_unusual` | 0 | modest |
-| Trump | TR_NT | `trump_g` | `τραμπ` | 18 | `not_unusual` | 1 | has NT surface context |
-| Trump | SBLGNT | `trump_g` | `τραμπ` | 12 | `not_unusual` | 1 | has NT surface context |
-| Vance | MT_WLC | `vance_h` | `ואנס` | 331 | `not_unusual` | 0 | counted, not unusual |
-| Vance | LXX | `vance_g` | `βανς` | 1,532 | `not_unusual` | 0 | high, likely short-form density |
-| Vance | TR_NT | `vance_g` | `βανς` | 241 | `not_unusual` | 5 | has NT surface context |
-| Vance | SBLGNT | `vance_g` | `βανς` | 259 | `not_unusual` | 8 | has NT surface context |
-| Netanyahu | MT_WLC | `netanyahu_h` | `נתניהו` | 8 | `not_unusual` | 0 | counted, not unusual |
-| Netanyahu | LXX/TR_NT/SBLGNT | `netanyahu_g` | `νετανιαχου` | 0 | `not_unusual` | 0 | absent |
+| Corpus | Term ID | Term | Hits | Control | Surface | Extension | Read |
+| --- | --- | --- | ---: | --- | ---: | ---: | --- |
+| LXX | `trump_g` | `τραμπ` (tramp; English: Trump) | 71 | not_unusual | 0 | 0 | counted, not unusual |
+| TR_NT | `trump_g` | `τραμπ` (tramp; English: Trump) | 18 | not_unusual | 1 | 0 | has NT surface context |
+| SBLGNT | `trump_g` | `τραμπ` (tramp; English: Trump) | 12 | not_unusual | 1 | 0 | has NT surface context |
+| MT_WLC | `trump_h` | `טראמפ` (trmp; English: Trump) | 5 | not_unusual | 0 | 0 | counted, not unusual |
 
-### Gog And Magog
+### Vance
 
-| Concept | Corpus | Term ID | Term | Hits | Control | Surface | Read |
-| --- | --- | --- | --- | ---: | --- | ---: | --- |
-| Gog | MT_WLC | `gog_h` | `גוג` | 1,364 | `not_unusual` | 0 | very short form |
-| Gog | LXX | `gog_g` | `γωγ` | 1,800 | `not_unusual` | 0 | very short form |
-| Gog | TR_NT | `gog_g` | `γωγ` | 594 | `not_unusual` | 62 | has NT surface context |
-| Gog | SBLGNT | `gog_g` | `γωγ` | 572 | `not_unusual` | 62 | has NT surface context |
-| Magog | MT_WLC | `magog_h` | `מגוג` | 104 | `not_unusual` | 0 | counted, not unusual |
-| Magog | LXX | `magog_g` | `μαγωγ` | 9 | `not_unusual` | 0 | counted, not unusual |
-| Magog | TR_NT | `magog_g` | `μαγωγ` | 3 | `not_unusual` | 0 | counted, not unusual |
-| Magog | SBLGNT | `magog_g` | `μαγωγ` | 3 | `not_unusual` | 0 | counted, not unusual |
+| Corpus | Term ID | Term | Hits | Control | Surface | Extension | Read |
+| --- | --- | --- | ---: | --- | ---: | ---: | --- |
+| LXX | `vance_g` | `βανσ` (bans; English: Vance) | 1532 | not_unusual | 0 | 0 | high count, likely short-form density |
+| TR_NT | `vance_g` | `βανσ` (bans; English: Vance) | 241 | not_unusual | 5 | 0 | has NT surface context |
+| SBLGNT | `vance_g` | `βανσ` (bans; English: Vance) | 259 | not_unusual | 8 | 0 | has NT surface context |
+| MT_WLC | `vance_h` | `ואנס` (wns; English: Vance) | 285 | not_unusual | 0 | 0 | counted, not unusual |
 
-Read: `Gog` is too short for raw count claims. `Magog` is less dense. The next useful test is same-passage, same-span, or same-skip proximity between the pair with paired controls.
+### Netanyahu
 
-### Russia, Europe, Turkey, Germany
+| Corpus | Term ID | Term | Hits | Control | Surface | Extension | Read |
+| --- | --- | --- | ---: | --- | ---: | ---: | --- |
+| LXX | `netanyahu_g` | `νετανιαχου` (netaniachou; English: Netanyahu) | 0 | not_unusual | 0 | 0 | absent |
+| TR_NT | `netanyahu_g` | `νετανιαχου` (netaniachou; English: Netanyahu) | 0 | not_unusual | 0 | 0 | absent |
+| SBLGNT | `netanyahu_g` | `νετανιαχου` (netaniachou; English: Netanyahu) | 0 | not_unusual | 0 | 0 | absent |
+| MT_WLC | `netanyahu_h` | `נתניהו` (ntnyhw; English: Netanyahu) | 11 | not_unusual | 0 | 0 | counted, not unusual |
 
-| Concept | Corpus | Term ID | Term | Hits | Control | Surface | Read |
-| --- | --- | --- | --- | ---: | --- | ---: | --- |
-| Russia | MT_WLC | `russia_h` | `רוסיה` | 50 | `not_unusual` | 0 | present |
-| Russia | LXX | `russia_g` | `Ρωσία` | 268 | `not_unusual` | 0 | present |
-| Russia | TR_NT | `russia_g` | `Ρωσία` | 52 | `not_unusual` | 7 | has NT surface context |
-| Russia | SBLGNT | `russia_g` | `Ρωσία` | 57 | `not_unusual` | 9 | has NT surface context |
-| Europe | MT_WLC | `europe_h` | `אירופה` | 17 | `uncorrected_p_le_0.05` | 0 | uncorrected only |
-| Europe | LXX | `europe_g` | `Ευρώπη` | 1 | `not_unusual` | 0 | low |
-| Europe | TR_NT | `europe_g` | `Ευρώπη` | 0 | `not_unusual` | 0 | absent |
-| Europe | SBLGNT | `europe_g` | `Ευρώπη` | 1 | `not_unusual` | 0 | low |
-| Turkey | MT_WLC | `turkey_alt_h` | `תורכיה` | 14 | `not_unusual` | 0 | low |
-| Turkey | MT_WLC | `turkey_h` | `טורקיה` | 1 | `not_unusual` | 0 | near absent |
-| Turkey | LXX/TR_NT/SBLGNT | `turkey_g` | `Τουρκία` | 0/1/0 | `not_unusual` | 0 | near absent |
-| Germany | MT_WLC | `germany_h` | `גרמניה` | 2 | `not_unusual` | 0 | near absent |
-| Germany | LXX/TR_NT/SBLGNT | `germany_g` | `Γερμανία` | 0 | `not_unusual` | 0 | absent |
+### Gog
 
-## Example Rows
+| Corpus | Term ID | Term | Hits | Control | Surface | Extension | Read |
+| --- | --- | --- | ---: | --- | ---: | ---: | --- |
+| LXX | `gog_g` | `γωγ` (Gog; English: Gog) | 1800 | not_unusual | 0 | 0 | high count, likely short-form density |
+| TR_NT | `gog_g` | `γωγ` (Gog; English: Gog) | 594 | not_unusual | 62 | 0 | has NT surface context |
+| SBLGNT | `gog_g` | `γωγ` (Gog; English: Gog) | 572 | not_unusual | 62 | 0 | has NT surface context |
+| MT_WLC | `gog_h` | `גוג` (gwg; English: Gog) | 1322 | not_unusual | 0 | 0 | high count, likely short-form density |
 
-The generated examples file has 26 rows:
+### Magog
 
-- Iran: exact-center NT Greek examples exist, but the term is short.
-- Trump: two same-category center examples.
-- Vance: several same-category examples.
-- Gog: exact-center examples in TR_NT and SBLGNT.
-- Russia: same-category examples.
-- Magog, Netanyahu, Europe, Turkey, Germany: no focused example rows in the generated targeted report.
+| Corpus | Term ID | Term | Hits | Control | Surface | Extension | Read |
+| --- | --- | --- | ---: | --- | ---: | ---: | --- |
+| LXX | `magog_g` | `μαγωγ` (magog; English: Magog) | 9 | not_unusual | 0 | 0 | counted, not unusual |
+| TR_NT | `magog_g` | `μαγωγ` (magog; English: Magog) | 3 | not_unusual | 0 | 0 | counted, not unusual |
+| SBLGNT | `magog_g` | `μαγωγ` (magog; English: Magog) | 3 | not_unusual | 0 | 0 | counted, not unusual |
+| MT_WLC | `magog_h` | `מגוג` (mgwg; English: Magog) | 93 | not_unusual | 0 | 0 | counted, not unusual |
 
-No focused target had a filtered extension-top row.
+### Russia
 
-## Controls Verdict
+| Corpus | Term ID | Term | Hits | Control | Surface | Extension | Read |
+| --- | --- | --- | ---: | --- | ---: | ---: | --- |
+| LXX | `russia_g` | `ρωσια` (rosia; English: Russia) | 268 | not_unusual | 0 | 0 | counted, not unusual |
+| TR_NT | `russia_g` | `ρωσια` (rosia; English: Russia) | 52 | not_unusual | 7 | 0 | has NT surface context |
+| SBLGNT | `russia_g` | `ρωσια` (rosia; English: Russia) | 57 | not_unusual | 9 | 0 | has NT surface context |
+| MT_WLC | `russia_h` | `רוסיה` (rwsyh; English: Russia) | 45 | not_unusual | 0 | 0 | counted, not unusual |
 
-Current controls do not support an external claim:
+### Europe
 
-- `not_unusual` dominates focused rows.
-- Europe Hebrew has `uncorrected_p_le_0.05`, but this is not adjusted enough to matter by itself.
-- Existing low-p rows in the broader baseline carry flags such as `few_letter_controls`, `few_term_controls`, `huge_search_space`, and `uncorrected_only`.
+| Corpus | Term ID | Term | Hits | Control | Surface | Extension | Read |
+| --- | --- | --- | ---: | --- | ---: | ---: | --- |
+| LXX | `europe_g` | `ευρωπη` (europe; English: Europe) | 1 | not_unusual | 0 | 0 | counted, not unusual |
+| TR_NT | `europe_g` | `ευρωπη` (europe; English: Europe) | 0 | not_unusual | 0 | 0 | absent |
+| SBLGNT | `europe_g` | `ευρωπη` (europe; English: Europe) | 1 | not_unusual | 0 | 0 | counted, not unusual |
+| MT_WLC | `europe_h` | `אירופה` (yrwph; English: Europe) | 15 | uncorrected_p_le_0.05 | 0 | 0 | uncorrected only; needs stronger controls |
 
-The follow-up paired-control run is tracked in `docs/TARGETED_PAIRED_CONTROLS.md`.
-It found 40 of 41 focused rows `not_unusual`; only `MT_WLC europe_h` crossed
-the uncorrected screen, and its adjusted focused-row q-value is `1.0`.
+### Turkey
 
-The Gog/Magog pair/proximity follow-up is tracked in
-`docs/GOG_MAGOG_PAIR_CONTROLS.md`. It produced an exploratory q <= 0.10 screen,
-not a claim.
+| Corpus | Term ID | Term | Hits | Control | Surface | Extension | Read |
+| --- | --- | --- | ---: | --- | ---: | ---: | --- |
+| MT_WLC | `turkey_alt_h` | `תורכיה` (twrkyh; English: Turkey) | 17 | not_unusual | 0 | 0 | counted, not unusual |
+| LXX | `turkey_g` | `τουρκια` (tourkia; English: Turkey) | 0 | not_unusual | 0 | 0 | absent |
+| TR_NT | `turkey_g` | `τουρκια` (tourkia; English: Turkey) | 1 | not_unusual | 0 | 0 | counted, not unusual |
+| SBLGNT | `turkey_g` | `τουρκια` (tourkia; English: Turkey) | 0 | not_unusual | 0 | 0 | absent |
+| MT_WLC | `turkey_h` | `טורקיה` (twrqyh; English: Turkey) | 1 | not_unusual | 0 | 0 | counted, not unusual |
 
-Next meaningful move:
+### Germany
 
-- strengthen Gog/Magog with same-chapter and same-skip controls
-- Europe Hebrew rerun with more controls and adjusted reporting
+| Corpus | Term ID | Term | Hits | Control | Surface | Extension | Read |
+| --- | --- | --- | ---: | --- | ---: | ---: | --- |
+| LXX | `germany_g` | `γερμανια` (germania; English: Germany) | 0 | not_unusual | 0 | 0 | absent |
+| TR_NT | `germany_g` | `γερμανια` (germania; English: Germany) | 0 | not_unusual | 0 | 0 | absent |
+| SBLGNT | `germany_g` | `γερμανια` (germania; English: Germany) | 0 | not_unusual | 0 | 0 | absent |
+| MT_WLC | `germany_h` | `גרמניה` (grmnyh; English: Germany) | 2 | not_unusual | 0 | 0 | counted, not unusual |
 
-## Reproduce
+## Best Examples
 
-```bash
-python3 -m scripts.run_protocol protocols/public_baseline.toml --resume --only targeted_terms_report
-python3 -m scripts.run_protocol protocols/public_baseline.toml --resume --only report_index
-```
+### surface_context
+
+| Concept | Corpus | Term | Skip | Span | Center | Detail |
+| --- | --- | --- | ---: | --- | --- | --- |
+| Iran | TR_NT | `ιραν` (iran; English: Iran) | 3 | JHN 18:3-JHN 18:3 | JHN 18:3 `Φαρισαίων` (pharisaion) | exact_center |
+| Iran | TR_NT | `ιραν` (iran; English: Iran) | -9 | EPH 6:18-EPH 6:17 | EPH 6:17 `ὅ` (o) | exact_center |
+| Iran | TR_NT | `ιραν` (iran; English: Iran) | -13 | 1PE 1:2-1PE 1:2 | 1PE 1:2 `αἵματος` (aimatos) | exact_center |
+| Iran | SBLGNT | `ιραν` (iran; English: Iran) | -13 | 1Pet 1:2-1Pet 1:2 | 1Pet 1:2 `αἵματος` (aimatos) | exact_center |
+| Iran | SBLGNT | `ιραν` (iran; English: Iran) | -14 | John 18:3-John 18:2 | John 18:3 `τὴν` (ten) | exact_center |
+| Iran | SBLGNT | `ιραν` (iran; English: Iran) | -19 | Gal 1:1-2Cor 13:13 | Gal 1:1 `ἀνθρώπων` (anthropon) | exact_center |
+| Trump | TR_NT | `τραμπ` (tramp; English: Trump) | -13 | ACT 4:33-ACT 4:32 | ACT 4:33 `ἀπεδίδουν` (apedidoun) | same_category_center |
+| Trump | SBLGNT | `τραμπ` (tramp; English: Trump) | 44 | Acts 25:11-Acts 25:12 | Acts 25:11 `Καίσαρα` (kaisara) | same_category_center |
+| Vance | TR_NT | `βανσ` (bans; English: Vance) | -8 | ACT 13:21-ACT 13:21 | ACT 13:21 `ἄνδρα` (andra) | same_category_center |
+| Vance | TR_NT | `βανσ` (bans; English: Vance) | -35 | LUK 7:44-LUK 7:43 | LUK 7:43 `εἶπεν` (eipen) | same_category_center |
+| Vance | TR_NT | `βανσ` (bans; English: Vance) | -4 | 1TH 5:19-1TH 5:18 | 1TH 5:19 `πνεῦμα` (pneuma) | same_category_span |
+| Vance | SBLGNT | `βανσ` (bans; English: Vance) | -8 | Acts 13:21-Acts 13:21 | Acts 13:21 `ἄνδρα` (andra) | same_category_center |
+| Vance | SBLGNT | `βανσ` (bans; English: Vance) | -38 | Acts 28:15-Acts 28:14 | Acts 28:15 `ἀκούσαντες` (akousantes) | same_category_center |
+| Vance | SBLGNT | `βανσ` (bans; English: Vance) | -41 | Rom 5:21-Rom 5:20 | Rom 5:20 `ὑπερεπερίσσευσεν` (upereperisseusen) | same_category_center |
+| Gog | TR_NT | `γωγ` (Gog; English: Gog) | 6 | JHN 12:42-JHN 12:43 | JHN 12:42 `γένωνται` (genontai) | exact_center |
+| Gog | TR_NT | `γωγ` (Gog; English: Gog) | -6 | JHN 12:43-JHN 12:42 | JHN 12:42 `γένωνται` (genontai) | exact_center |
+| Gog | TR_NT | `γωγ` (Gog; English: Gog) | 7 | MAT 10:17-MAT 10:17 | MAT 10:17 `αὐτῶν` (auton) | exact_center |
+| Gog | SBLGNT | `γωγ` (Gog; English: Gog) | 6 | John 12:42-John 12:43 | John 12:42 `γένωνται,` (genontai) | exact_center |
+| Gog | SBLGNT | `γωγ` (Gog; English: Gog) | -6 | John 12:43-John 12:42 | John 12:42 `γένωνται,` (genontai) | exact_center |
+| Gog | SBLGNT | `γωγ` (Gog; English: Gog) | 7 | Matt 10:17-Matt 10:17 | Matt 10:17 `αὐτῶν` (auton) | exact_center |
+| Russia | TR_NT | `ρωσια` (rosia; English: Russia) | -18 | MAT 24:37-MAT 24:36 | MAT 24:37 `Ὥσπερ` (osper) | same_category_center |
+| Russia | TR_NT | `ρωσια` (rosia; English: Russia) | 35 | REV 14:3-REV 14:4 | REV 14:3 `τέσσαρες` (tessares) | same_category_center |
+| Russia | TR_NT | `ρωσια` (rosia; English: Russia) | -15 | 2CO 4:11-2CO 4:10 | 2CO 4:10 `Ἰησοῦ` (iesou) | same_category_span |
+| Russia | SBLGNT | `ρωσια` (rosia; English: Russia) | 30 | Heb 4:12-Heb 4:13 | Heb 4:12 `ἐνθυμήσεων` (enthumeseon) | same_category_center |
+| Russia | SBLGNT | `ρωσια` (rosia; English: Russia) | 35 | Rev 14:3-Rev 14:4 | Rev 14:3 `τέσσαρες` (tessares) | same_category_center |
+| Russia | SBLGNT | `ρωσια` (rosia; English: Russia) | 36 | Mark 12:28-Mark 12:30 | Mark 12:29 `Ἰσραήλ,` (israel) | same_category_center |
+
+### extension_top
+
+| Concept | Corpus | Term | Skip | Span | Center | Detail |
+| --- | --- | --- | ---: | --- | --- | --- |

@@ -64,6 +64,7 @@ argv = [
   "--focus-out", "reports/wide_focus_search/wide_focus_focus.csv",
   "--delta-out", "reports/wide_focus_search/wide_focus_delta_vs_baseline.csv",
   "--markdown-out", "reports/wide_focus_search/wide_focus.md",
+  "--docs-out", "docs/WIDE_FOCUS_SEARCH.md",
   "--manifest-out", "reports/wide_focus_search/wide_focus_summary.manifest.json",
 ]
 inputs = [
@@ -81,6 +82,7 @@ outputs = [
   "reports/wide_focus_search/wide_focus_focus.csv",
   "reports/wide_focus_search/wide_focus_delta_vs_baseline.csv",
   "reports/wide_focus_search/wide_focus.md",
+  "docs/WIDE_FOCUS_SEARCH.md",
   "reports/wide_focus_search/wide_focus_summary.manifest.json",
 ]
 
