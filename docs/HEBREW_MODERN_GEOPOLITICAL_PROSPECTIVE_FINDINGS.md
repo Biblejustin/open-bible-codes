@@ -48,8 +48,8 @@ not survive row-family correction.
 
 | Term | Normalized | Exact total | All-source patterns | Read |
 | --- | --- | ---: | ---: | --- |
-| `iraq_h` | `עיראק` | 385 | 53 | uncorrected prompt only |
-| `germany_h` | `גרמניה` | 38 | 3 | uncorrected prompt only |
+| `iraq_h` | `עיראק` (Iraq; English: Iraq) | 385 | 53 | uncorrected prompt only |
+| `germany_h` | `גרמניה` (Germanyah; English: Germany) | 38 | 3 | uncorrected prompt only |
 
 ## Selected Requested Terms
 

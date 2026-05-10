@@ -106,7 +106,7 @@ Current read:
 - Hidden-path-only rows are normal ELS candidate types, not failures. A
   same-span surface echo is a rarer stronger subtype.
 - Greek exact-center final gate: `docs/GREEK_EXACT_CENTER_FINAL_GATE.md`.
-- Strongest current Greek row: `δοξα` four-source confirmatory follow-up in
+- Strongest current Greek row: `δοξα` (doxa; English: glory) four-source confirmatory follow-up in
   `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`; status remains
   review candidate, not claim.
 - Expanded prospective exact-center screen:
@@ -118,7 +118,7 @@ Current read:
   review queue, not a claim set.
 - Tighter expanded Greek surface triage:
   `docs/GREEK_EXPANDED_SURFACE_TRIAGE.md`; all-source plus normalized length
-  >= 5 leaves `ανομια`, `ισαακ`, and `τερασ` as review rows needing real-word,
+  >= 5 leaves `ανομια` (anomia; English: lawlessness), `ισαακ` (Isaak; English: Isaac), and `τερασ` (teras; English: wonder) as review rows needing real-word,
   surface-frequency-matched controls.
 - Expanded Greek surface letter-path audit:
   `docs/GREEK_EXPANDED_SURFACE_LETTER_PATHS.md`; reconstructs each selected
@@ -133,7 +133,7 @@ Current read:
   because the control pool is small.
 - Expanded Greek all-available surface control evaluation:
   `docs/GREEK_EXPANDED_SURFACE_AVAILABLE_CONTROL_EVALUATION.md`; selected
-  targets are excluded from the controls, and `ισαακ`, `τερασ`, and `ανομια`
+  targets are excluded from the controls, and `ισαακ` (Isaak; English: Isaac), `τερασ` (teras; English: wonder), and `ανομια` (anomia; English: lawlessness)
   all exceed their available same-length controls with q = 0.032258.
 - Expanded Greek surface compact follow-up:
   `docs/GREEK_EXPANDED_SURFACE_FOLLOWUP_REPORT.md`; joins the selected rows,

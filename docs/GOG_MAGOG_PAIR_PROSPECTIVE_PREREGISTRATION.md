@@ -5,7 +5,7 @@ study unless the lock manifest and preflight both pass before the run.
 
 ## Hypothesis
 
-The Hebrew `גוג` / `מגוג` ELS pair may show compact same-chapter,
+The Hebrew `גוג` (Gog; English: Gog) / `מגוג` (Magog; English: Magog) ELS pair may show compact same-chapter,
 same-signed-skip proximity in MT-family Hebrew Bible sources beyond matched
 pair controls.
 
@@ -31,8 +31,8 @@ Registered term file:
 
 Target pair:
 
-- left: `gog_h` = `גוג`
-- right: `magog_h` = `מגוג`
+- left: `gog_h` = `גוג` (Gog; English: Gog)
+- right: `magog_h` = `מגוג` (Magog; English: Magog)
 
 Declared pair baselines:
 

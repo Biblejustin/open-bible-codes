@@ -64,13 +64,13 @@ minimum length of 4, so they do not enter the exact/control endpoint.
 
 The three long phrase rows with no exact hits were:
 
-- `htp_lamb_of_god_h` / `כבשהאלוהימ`;
-- `htp_son_of_god_h` / `בנהאלוהימ`;
-- `htp_yeshua_messiah_h` / `ישועהמשיח`.
+- `htp_lamb_of_god_h` / `כבשהאלוהימ` (kevesh haElohim; English: lamb of God);
+- `htp_son_of_god_h` / `בנהאלוהימ` (ben haElohim; English: son of God);
+- `htp_yeshua_messiah_h` / `ישועהמשיח` (Yeshua haMashiach; English: Yeshua Messiah).
 
 ## Control Read
 
-Only `htp_yhwh_h` (`יהוה`) cleared an uncorrected representative-control screen:
+Only `htp_yhwh_h` (`יהוה` [YHWH; English: YHWH]) cleared an uncorrected representative-control screen:
 
 | Term | Exact hits | All-source patterns | Best p | Best q | Read |
 | --- | ---: | ---: | ---: | ---: | --- |

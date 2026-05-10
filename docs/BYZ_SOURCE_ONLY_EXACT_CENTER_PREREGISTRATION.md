@@ -17,9 +17,9 @@ shuffled-term and 1000 same-length random controls within BYZ_NT?
 | Field | Value |
 | --- | --- |
 | Corpus | BYZ_NT |
-| Pattern key | `υιοσ|-46|backward|before_plus_term|ειουιοσ|ειουιοσ` |
-| Base term | `υιοσ` |
-| Extension sequence | `ειουιοσ` |
+| Pattern key | `υιοσ|-46|backward|before_plus_term|ειουιοσ|ειουιοσ` (huios / eiouios; English: son / hidden extension form from huios) |
+| Base term | `υιοσ` (huios; English: son) |
+| Extension sequence | `ειουιοσ` (eiouios; English: hidden extension form from huios) |
 | Source of row | `reports/greek_exact_center_four_source/extensions_byz_nt_top.csv` |
 | Surface context source | `reports/greek_exact_center_four_source/surface_context_hits.csv` |
 

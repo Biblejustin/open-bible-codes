@@ -10,9 +10,9 @@ than the current post-screen Greek surface follow-up.
 
 The current rows are not prospective discoveries:
 
-- `δοξα` exact-center phrase-extension follow-ups;
-- `υιος` and `αιμα` source-specific exact-center rows;
-- `ανομια`, `ισαακ`, and `τερασ` expanded surface follow-up rows.
+- `δοξα` (doxa; English: glory) exact-center phrase-extension follow-ups;
+- `υιος` (huios; English: son) and `αιμα` (haima; English: blood) source-specific exact-center rows;
+- `ανομια` (anomia; English: lawlessness), `ισαακ` (Isaak; English: Isaac), and `τερασ` (teras; English: wonder) expanded surface follow-up rows.
 
 They may be used as calibration examples or prior evidence, but not as new
 prospective discoveries under this standard.

@@ -10,13 +10,13 @@ letters immediately before or after a hidden term form a longer surface-matching
 phrase. The exploratory 250/250 control run left one overlap key with
 conservative all-control q <= 0.10:
 
-- base term: `יום יהוה`
-- normalized base: `יומיהוה`
+- base term: `יום יהוה` (yom YHWH; English: day of YHWH)
+- normalized base: `יומיהוה` (yom YHWH; English: day of YHWH)
 - skip: `4`
 - direction: `forward`
 - extension type: `before_plus_term`
-- extended sequence: `היומיהוה`
-- overlap key: `יומיהוה|4|forward|before_plus_term|היומיהוה|היומיהוה`
+- extended sequence: `היומיהוה` (hayom YHWH; English: the day of YHWH)
+- overlap key: `יומיהוה|4|forward|before_plus_term|היומיהוה|היומיהוה` (yom YHWH / hayom YHWH; English: day of YHWH / the day of YHWH)
 
 This follow-up reruns only that overlap key with a larger control budget.
 
@@ -34,7 +34,7 @@ This follow-up reruns only that overlap key with a larger control budget.
 ## Locked Settings
 
 - include only overlap key:
-  `יומיהוה|4|forward|before_plus_term|היומיהוה|היומיהוה`
+  `יומיהוה|4|forward|before_plus_term|היומיהוה|היומיהוה` (yom YHWH / hayom YHWH; English: day of YHWH / the day of YHWH)
 - dedupe target rows
 - term controls: 5000
 - random same-length controls: 5000
