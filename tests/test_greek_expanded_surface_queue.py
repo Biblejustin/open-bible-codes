@@ -56,5 +56,5 @@ def test_display_queue_term_adds_transliteration_and_english() -> None:
 def test_display_center_words_by_corpus_adds_transliteration() -> None:
     value = queue.display_center_words_by_corpus("TR_NT:οὖν; BYZ_NT:ουν")
 
-    assert "`οὖν` (oun)" in value
-    assert "`ουν` (oun)" in value
+    assert "`οὖν` (oun; English: therefore)" in value
+    assert "`ουν` (oun; English: therefore)" in value

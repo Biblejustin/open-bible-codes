@@ -130,5 +130,5 @@ def test_display_triage_term_adds_transliteration_and_english() -> None:
 def test_display_center_words_by_corpus_adds_transliteration() -> None:
     value = triage.display_center_words_by_corpus("TR_NT:οὖν; BYZ_NT:ουν")
 
-    assert "TR_NT:`οὖν` (oun)" in value
-    assert "BYZ_NT:`ουν` (oun)" in value
+    assert "TR_NT:`οὖν` (oun; English: therefore)" in value
+    assert "BYZ_NT:`ουν` (oun; English: therefore)" in value
