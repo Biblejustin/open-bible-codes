@@ -78,6 +78,8 @@ def self_vs_concept_markdown(
     presence_counts = presence_counts_from_hits(self_hits)
     language_counts = term_language_counts_from_hits(self_hits)
     corpus_count_distribution = Counter(str(len(corpora)) for corpora in presence_counts.values())
+    distinct_form_count = len(distinct_surface_form_keys(self_hits))
+    distinct_hit_path_count = len(distinct_surface_hit_paths(self_hits))
     lines = [
         "# CRD Center-Word Self Vs Concept Findings",
         "",
@@ -144,7 +146,9 @@ def self_vs_concept_markdown(
             "The exact center-word version-presence view contains:",
             "",
             f"- exact center-word term rows: {len(presence_counts):,}",
+            f"- distinct normalized surface forms: {distinct_form_count:,}",
             f"- exact center-word hit rows: {len(self_hits):,}",
+            f"- distinct normalized surface hit paths: {distinct_hit_path_count:,}",
             f"- language distribution: {format_named_counts(language_counts)}",
             f"- corpus-count distribution: {format_corpus_count_distribution(corpus_count_distribution)}",
             "",
@@ -414,6 +418,16 @@ def distinct_surface_hit_paths(rows: list[dict[str, str]]) -> set[tuple[str, ...
         distinct_surface_hit_path_key(row)
         for row in rows
         if row.get("corpus_class", "bible") == "bible"
+    }
+
+
+def distinct_surface_form_keys(rows: list[dict[str, str]]) -> set[tuple[str, str]]:
+    return {
+        key
+        for row in rows
+        if row.get("corpus_class", "bible") == "bible"
+        for key in [normalized_surface_group_key(row)]
+        if key[1]
     }
 
 

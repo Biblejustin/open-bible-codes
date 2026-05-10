@@ -106,6 +106,8 @@ The exact center-word extraction contains:
 
 - Bible center-word rows: 1,044
 - distinct term IDs with Bible center-word rows: 131
+- distinct normalized surface forms: 76
+- distinct normalized surface hit paths: 425
 - rows whose term exceeds the secular maximum in the center-word-only summary: 1,023
 - rows whose term does not exceed the secular maximum in the center-word-only summary: 21
 
@@ -120,7 +122,9 @@ The center-word-only density summary contains 2,731 term rows:
 The version-presence summary keeps source-specific results visible:
 
 - exact center-word term rows: 131
+- distinct normalized surface forms: 76
 - exact center-word hit rows: 1,044
+- distinct normalized surface hit paths: 425
 - language distribution: Hebrew 71, Greek 37, English 23
 - corpus-count distribution: 57 terms in 5 corpus labels, 1 term in 4, 5 terms in 3, 24 terms in 2, and 44 terms in 1
 

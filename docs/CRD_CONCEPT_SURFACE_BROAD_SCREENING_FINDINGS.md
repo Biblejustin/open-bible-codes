@@ -147,6 +147,8 @@ The rerun also produced an ignored local subset at `reports/crd_concept_surface/
 
 - Bible `center_word` rows: 1,044
 - distinct term IDs: 131
+- distinct normalized surface forms: 76
+- distinct normalized surface hit paths: 425
 - rows from terms that exceed secular max in the center-word-only summary: 1,023
 - rows from terms that do not exceed secular max in the center-word-only summary: 21
 - distinct exceeding terms: 120
@@ -185,6 +187,8 @@ The exact center-word subset also has its own ignored density outputs:
 - exceeding English terms: 15
 - exact center-word review queue rows: 202
 - exact center-word term rows in presence summary: 131
+- distinct normalized surface forms in presence summary: 76
+- distinct normalized surface hit paths in presence summary: 425
 - corpus-count distribution in presence summary: 57 terms in 5 corpus labels, 1 term in 4, 5 terms in 3, 24 terms in 2, and 44 terms in 1
 
 Top finite center-word-only ratios:
