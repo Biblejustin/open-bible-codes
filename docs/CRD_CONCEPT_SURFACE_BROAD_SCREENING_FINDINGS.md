@@ -156,6 +156,41 @@ Top exact center-word terms by Bible row count:
 
 The exact center-word subset contains both strong-looking rows and obvious base-rate warnings. For example, exact centered `Israel` rows do not exceed the Hebrew secular maximum. This reinforces the need to compare center-word findings against controls, not just count them.
 
+### Center-Word-Only Bible-Vs-Control Density
+
+The exact center-word subset also has its own ignored density outputs:
+
+- matrix: `reports/crd_concept_surface/center_word_density_matrix.csv`
+- summary: `reports/crd_concept_surface/center_word_bible_vs_control_summary.csv`
+- summary rows: 2,731
+- terms exceeding secular max: 120
+- Bible-positive/secular-zero terms: 94
+- exceeding Hebrew terms: 70
+- exceeding Greek terms: 35
+- exceeding English terms: 15
+
+Top finite center-word-only ratios:
+
+| Term | Language | Bible max | Bible corpus | Secular max | Secular corpus | Ratio |
+| --- | --- | ---: | --- | ---: | --- | ---: |
+| `desolation_h` | hebrew | 1.67276669 | UHB | 0.174947546 | HEB_PBY_BIALIK | 9.56153275 |
+| `cc_wine_h`, `mt_wine_h`, `twn_wine_h` | hebrew | 1.67276669 | UHB | 0.179491289 | HEB_PBY_BRENNER | 9.31948675 |
+| `cc_israel_h`, `htp_israel_h`, `israel_h`, `twn_israel_h` | hebrew | 5.84774803 | MT_WLC | 0.725114523 | HEB_PBY_AHAD_HAAM | 8.06458545 |
+| `bcd_spoils_h` | hebrew | 2.50915003 | UHB | 0.349895093 | HEB_PBY_BIALIK | 7.17114953 |
+| `solomon_h` | hebrew | 2.50915003 | UHB | 0.362557261 | HEB_PBY_AHAD_HAAM | 6.92069998 |
+| `sephar_h` | hebrew | 2.50617773 | MT_WLC | 0.362557261 | HEB_PBY_AHAD_HAAM | 6.91250183 |
+
+Top Bible-positive/secular-zero center-word terms:
+
+| Term | Language | Bible max | Bible corpus |
+| --- | --- | ---: | --- |
+| `bns_esther_yhwh_h` and YHWH duplicates | hebrew | 10.0247109 | MT_WLC |
+| `babel_h`, `babylon_alt_h`, `babylon_h`, `bns_babylon_h` | hebrew | 6.68314061 | MT_WLC |
+| `dyn_gog_g`, `gog_g`, `noah_g` | greek | 2.94169992 | SBLGNT |
+| `wisdom_g`, `wisdom_gxc` | greek | 2.89633859 | BYZ_NT |
+| `cc_elohim_h`, `god_h`, `lord_h` | hebrew | 2.50915003 | UHB |
+| `eng_david`, `eng_david_2`, `eng_david_3` | english | 1.86148966 | KJV |
+
 Top queue corpora by row count:
 
 | Corpus | Rows |

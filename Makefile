@@ -2,7 +2,7 @@ CRD_REVIEWER ?= gpt-5-assisted-draft
 CRD_LOCKED_BY ?= gpt-5-assisted-draft
 CRD_DRAFTED_WITH ?= gpt-5
 
-.PHONY: demo indexes test lint crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word
+.PHONY: demo indexes test lint crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density
 
 demo:
 	python3 -m els.demo
@@ -67,3 +67,6 @@ crd-concept-surface-queue:
 
 crd-concept-surface-center-word:
 	python3 -m scripts.filter_crd_classified_hits --classified-hits reports/crd_concept_surface/classified_hits.csv --output reports/crd_concept_surface/center_word_hits.csv --corpus-class bible --is-relevant true --surface-match-scope center_word
+
+crd-concept-surface-center-word-density:
+	python3 -m scripts.build_crd_scope_density --base-density-matrix reports/crd_concept_surface/density_matrix.csv --classified-hits reports/crd_concept_surface/classified_hits.csv --surface-match-scope center_word --matrix-out reports/crd_concept_surface/center_word_density_matrix.csv --summary-out reports/crd_concept_surface/center_word_bible_vs_control_summary.csv
