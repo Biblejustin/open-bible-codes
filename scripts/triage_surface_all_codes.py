@@ -24,6 +24,7 @@ from els.report_db import (
     sql_literal,
     verify_table_current,
 )
+from els.term_display import display_term
 from scripts.analyze_hebrew_hit_version_presence import canonical_ref
 
 
@@ -733,12 +734,22 @@ def write_markdown(
                     [
                         str(row["bucket_rank"]),
                         str(row["presence_scope"]),
-                        f"`{row['term_id']}`",
+                        " ".join(
+                            part
+                            for part in [
+                                f"`{row['term_id']}`",
+                                display_term(
+                                    str(row["normalized_term"]),
+                                    english=str(row["concept"]),
+                                ),
+                            ]
+                            if part
+                        ),
                         str(row["concept"]),
                         str(row["skip"]),
                         str(row["span_letters"]),
                         str(row["center_ref"]),
-                        f"`{row['center_normalized_word']}`",
+                        display_term(str(row["center_normalized_word"])),
                         str(row["control_band"] or row["control_read"]),
                     ]
                 )

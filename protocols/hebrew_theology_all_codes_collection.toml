@@ -110,6 +110,7 @@ argv = [
 ]
 inputs = [
   "scripts/triage_surface_all_codes.py",
+  "els/term_display.py",
   "reports/hebrew_theology_all_codes/surface_all_codes.csv",
   "reports/hebrew_theology_all_codes/surface_all_codes_summary.csv",
   "reports/hebrew_theology_prospective/controlled_summary.csv",

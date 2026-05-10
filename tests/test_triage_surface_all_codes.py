@@ -154,6 +154,55 @@ class TriageSurfaceAllCodesTests(unittest.TestCase):
             self.assertEqual(data["queue_rows"], 2)
             self.assertEqual(data["bucket_counts"]["center_word_exact"], 1)
 
+    def test_markdown_displays_original_language_terms(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            hits = root / "hits.csv"
+            summary = root / "summary.csv"
+            queue = root / "queue.csv"
+            markdown = root / "triage.md"
+            manifest = root / "manifest.json"
+
+            write_csv(
+                hits,
+                HIT_FIELDNAMES,
+                [
+                    {
+                        **hit_row("A", "trump_h", "טראמפ", "center_word_exact", "true"),
+                        "concept": "Trump",
+                    }
+                ],
+            )
+            write_csv(
+                summary,
+                ["corpus", "term_id", "normalized_length"],
+                [{"corpus": "A", "term_id": "trump_h", "normalized_length": "5"}],
+            )
+
+            exit_code = main(
+                [
+                    "--hits",
+                    str(hits),
+                    "--summary",
+                    str(summary),
+                    "--max-rows-per-bucket",
+                    "1",
+                    "--candidate-multiplier",
+                    "1",
+                    "--queue-out",
+                    str(queue),
+                    "--markdown-out",
+                    str(markdown),
+                    "--manifest-out",
+                    str(manifest),
+                ]
+            )
+
+            self.assertEqual(exit_code, 0)
+            text = markdown.read_text(encoding="utf-8")
+            self.assertIn("`טראמפ` (trmp; English: Trump)", text)
+            self.assertIn("`טראמפ` (trmp)", text)
+
     def test_main_can_read_hits_from_duckdb(self) -> None:
         pytest.importorskip("duckdb")
         with tempfile.TemporaryDirectory() as tmp:
