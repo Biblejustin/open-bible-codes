@@ -33,10 +33,11 @@ Method:
 
 Limits:
 
-- This is not full lemmatization yet.
-- Greek inflected forms remain separate, e.g. `θεος` (theos; English: God), `θεου` (theou; English: of God), `κυριος` (kyrios; English: Lord), and `κυριου` (kyriou; English: of Lord).
-- Hebrew roots/lemmas are not resolved yet.
-- POS filtering is approximate stopword filtering, not true noun/verb/adjective tagging.
+- This surface-word report is still intentionally separate from lemma/POS reporting.
+- Greek inflected forms remain separate here, e.g. `θεος` (theos; English: God), `θεου` (theou; English: of God), `κυριος` (kyrios; English: Lord), and `κυριου` (kyriou; English: of Lord).
+- Hebrew OSHB slash-segment reduction is a surface normalization, not a root/lemma analysis.
+- POS filtering here is approximate stopword filtering, not true noun/verb/adjective tagging.
+- Full lemma/POS counts now live in `MORPHOLOGY_COUNTS_STUDY.md` for OSHB MT and MorphGNT SBLGNT.
 
 Corpus Summary:
 
@@ -80,8 +81,9 @@ Examples:
 | `χριστου` (Christou; English: of Christ) | 270 | 268 | 2 | 3 | |
 | `αγγελοσ` (angelos; English: angel/messenger) | 57 | 56 | 1 | 3 | 7 |
 
-Next Improvements:
+Related Lemma/POS Reports:
 
-- Add Greek lemma/POS data, likely MorphGNT or another open morphology source.
-- Add Hebrew lemma/POS from OSHB morphology instead of only slash-segment normalization.
-- Add per-lemma count reports beside surface-form reports.
+- Run `python3 -m scripts.analyze_morphology_counts` for morphology counts.
+- Outputs include `reports/morph_counts_by_lemma.csv`, `reports/morph_counts_by_book.csv`, `reports/morph_counts_by_chapter.csv`, `reports/morph_counts_by_verse.csv`, and `reports/morph_count_multiples.csv`.
+- Current morphology coverage is OSHB MT and MorphGNT SBLGNT; TR NT morphology is not available in this repo yet.
+- MT lemma labels are OSHB/Strong-style IDs rather than Hebrew dictionary headwords.
