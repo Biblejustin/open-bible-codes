@@ -41,24 +41,24 @@ Top count summary:
 
 | Corpus | Counted | Skipped | Zero-count terms | Top counted terms |
 |---|---:|---:|---:|---|
-| `MT_WLC` | 42 | 4 | 0 | `אור` 57,298; `מות` 54,322; `אמת` 40,182; `משה` 40,121; `מלך` 28,567 |
-| `LXX` | 52 | 0 | 15 | `ναος` 14,330; `υιος` 10,590; `αιμα` 9,171; `σιων` 4,312; `φως` 3,422 |
-| `TR_NT` | 52 | 0 | 16 | `ναος` 4,448; `υιος` 2,784; `αιμα` 2,234; `σιων` 1,268; `φως` 945 |
-| `SBLGNT` | 52 | 0 | 18 | `ναος` 4,402; `υιος` 2,670; `αιμα` 2,212; `σιων` 1,292; `φως` 916 |
+| `MT_WLC` | 42 | 4 | 0 | `אור` (or; English: light) 57,298; `מות` (mavet; English: death) 54,322; `אמת` (emet; English: truth) 40,182; `משה` (Moshe; English: Moses) 40,121; `מלך` (melekh; English: king) 28,567 |
+| `LXX` | 52 | 0 | 15 | `ναος` (naos; English: temple) 14,330; `υιος` (huios; English: son) 10,590; `αιμα` (haima; English: blood) 9,171; `σιων` (Sion; English: Zion) 4,312; `φως` (phos; English: light) 3,422 |
+| `TR_NT` | 52 | 0 | 16 | `ναος` (naos; English: temple) 4,448; `υιος` (huios; English: son) 2,784; `αιμα` (haima; English: blood) 2,234; `σιων` (Sion; English: Zion) 1,268; `φως` (phos; English: light) 945 |
+| `SBLGNT` | 52 | 0 | 18 | `ναος` (naos; English: temple) 4,402; `υιος` (huios; English: son) 2,670; `αιμα` (haima; English: blood) 2,212; `σιων` (Sion; English: Zion) 1,292; `φως` (phos; English: light) 916 |
 
 Largest TR vs SBLGNT count deltas:
 
 | Concept | Term | TR | SBLGNT | Delta |
 |---|---|---:|---:|---:|
-| Son | `υιος` | 2,784 | 2,670 | +114 |
-| God | `θεος` | 777 | 725 | +52 |
-| Temple | `ναος` | 4,448 | 4,402 | +46 |
-| Light | `φως` | 945 | 916 | +29 |
-| Zion | `σιων` | 1,268 | 1,292 | -24 |
-| Blood | `αιμα` | 2,234 | 2,212 | +22 |
-| Law | `νομος` | 133 | 114 | +19 |
-| Lamb | `αμνος` | 137 | 156 | -19 |
-| Jesus | `ιησους` | 5 | 10 | -5 |
+| Son | `υιος` (huios; English: son) | 2,784 | 2,670 | +114 |
+| God | `θεος` (theos; English: God) | 777 | 725 | +52 |
+| Temple | `ναος` (naos; English: temple) | 4,448 | 4,402 | +46 |
+| Light | `φως` (phos; English: light) | 945 | 916 | +29 |
+| Zion | `σιων` (Sion; English: Zion) | 1,268 | 1,292 | -24 |
+| Blood | `αιμα` (haima; English: blood) | 2,234 | 2,212 | +22 |
+| Law | `νομος` (nomos; English: law) | 133 | 114 | +19 |
+| Lamb | `αμνος` (amnos; English: lamb) | 137 | 156 | -19 |
+| Jesus | `ιησους` (Iesous; English: Jesus/Joshua) | 5 | 10 | -5 |
 
 Notes:
 

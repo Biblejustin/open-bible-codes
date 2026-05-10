@@ -42,14 +42,14 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 | `νατο` (nato; English: NATO) | NATO | 36,345 | 79 | 48 | 1,606 | 1,357 | 6,663 |
 | `ναοσ` (naos; English: Temple) | Temple | 35,617 | 4 | 74 | 97 | 1,521 | 3,563 |
 | `υιοσ` (huios; English: Son) | Son | 22,294 | 29 | 134 | 645 | 2,022 | 6,038 |
-| `σιων` (sion; English: Zion) | Zion | 19,934 | 2 | 171 | 134 | 1,966 | 4,407 |
+| `σιων` (Sion; English: Zion) | Zion | 19,934 | 2 | 171 | 134 | 1,966 | 4,407 |
 | `αιμα` (haima; English: Blood) | Blood | 18,375 | 19 | 30 | 699 | 809 | 3,227 |
 | `κινα` (kina; English: China) | China | 16,489 | 0 | 74 | 33 | 1,156 | 2,644 |
 | `ιραν` (iran; English: Iran) | Iran | 15,745 | 4 | 39 | 93 | 1,109 | 2,703 |
-| `σαλα` (sala; English: Shelah) | Shelah | 13,936 | 0 | 117 | 12 | 2,712 | 5,363 |
+| `σαλα` (Sala; English: Shelah) | Shelah | 13,936 | 0 | 117 | 12 | 2,712 | 5,363 |
 | `δασα` (dasa; English: Lasha) | Lasha | 9,878 | 1 | 64 | 57 | 1,682 | 3,601 |
 | `ευαλ` (eual; English: Obal) | Obal | 9,229 | 0 | 92 | 0 | 1,778 | 3,558 |
-| `ελαμ` (elam; English: Elam) | Elam | 9,158 | 0 | 55 | 14 | 1,213 | 2,587 |
+| `ελαμ` (Elam; English: Elam) | Elam | 9,158 | 0 | 55 | 14 | 1,213 | 2,587 |
 | `λευι` (leui; English: Levi) | Levi | 8,271 | 1 | 40 | 9 | 444 | 986 |
 | `αραμ` (aram; English: Aram) | Aram | 6,876 | 1 | 76 | 30 | 1,238 | 2,602 |
 | `ασηρ` (aser; English: Asher) | Asher | 6,282 | 0 | 20 | 18 | 358 | 763 |

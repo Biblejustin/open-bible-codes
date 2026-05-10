@@ -47,20 +47,20 @@ Prior public baseline result before expanded additions:
 
 Top MT WLC hits:
 
-- Greece (`יון`): 68,556.
-- Lawlessness (`און`): 45,249.
-- Media (`מדי`): 30,544.
-- Babylon (`בבל`): 26,849.
-- Beast (`חיה`): 25,639.
+- Greece: `יון` (Yavan; English: Javan/Greece), 68,556.
+- Lawlessness: `און` (aven; English: lawlessness/iniquity), 45,249.
+- Media: `מדי` (Madai; English: Media), 30,544.
+- Babylon: `בבל` (Bavel; English: Babylon), 26,849.
+- Beast: `חיה` (chayah; English: beast/living creature), 25,639.
 
 Top Greek hits:
 
-- LXX: Zion (`σιων`) 5,083; Elam (`ελαμ`) 1,946; Gog (`γωγ`) 1,800.
-- TR NT: Zion (`σιων`) 1,289; Gog (`γωγ`) 594; Elam (`ελαμ`) 555.
-- SBLGNT: Zion (`σιων`) 1,292; Elam (`ελαμ`) 603; Gog (`γωγ`) 572.
+- LXX: Zion `σιων` (Sion; English: Zion) 5,083; Elam `ελαμ` (Elam; English: Elam) 1,946; Gog `γωγ` (Gog; English: Gog) 1,800.
+- TR NT: Zion `σιων` (Sion; English: Zion) 1,289; Gog `γωγ` (Gog; English: Gog) 594; Elam `ελαμ` (Elam; English: Elam) 555.
+- SBLGNT: Zion `σιων` (Sion; English: Zion) 1,292; Elam `ελαμ` (Elam; English: Elam) 603; Gog `γωγ` (Gog; English: Gog) 572.
 
 Cautions:
 
 - This list is a declared screening list, not an interpretation.
-- Short terms such as `תו`, `עד`, and `צר` are intentionally present for audit but skipped by default count settings.
+- Short terms such as `תו` (tav; English: mark/sign), `עד` (ed; English: witness), and `צר` (tsar; English: foe/adversary) are intentionally present for audit but skipped by default count settings.
 - Some terms overlap with the theological and Table-of-Nations lists; overlap is useful for sensitivity checks but raw counts should not be double-read as independent evidence.

@@ -50,10 +50,10 @@ audit sheet, not an added statistical test.
 | 22 | greek_screening | `center_word_exact` | `νατο` (nato; English: NATO) | SBLGNT | `νατο` (nato; English: NATO) | 8 | Rom 5:10 | `θανάτου` (thanatou) | Rom 5:10 |
 | 22 | greek_screening | `center_word_exact` | `νατο` (nato; English: NATO) | TCG_NT | `νατο` (nato; English: NATO) | 8 | ROM 5:10 | `θανάτου` (thanatou) | ROM 5:10 |
 | 22 | greek_screening | `center_word_exact` | `νατο` (nato; English: NATO) | TR_NT | `νατο` (nato; English: NATO) | 8 | ROM 5:10 | `θανάτου` (thanatou) | ROM 5:10 |
-| 23 | greek_screening | `center_word_exact` | `ναοσ` (naos; English: Temple) | BYZ_NT | `ναοσ` (naos; English: Temple) | -9 | MAT 23:17 | `ναοσ` (naos) | MAT 23:17 |
-| 23 | greek_screening | `center_word_exact` | `ναοσ` (naos; English: Temple) | SBLGNT | `ναοσ` (naos; English: Temple) | -9 | Matt 23:17 | `ναὸς` (naos) | Matt 23:17 |
-| 23 | greek_screening | `center_word_exact` | `ναοσ` (naos; English: Temple) | TCG_NT | `ναοσ` (naos; English: Temple) | -9 | MAT 23:17 | `ναὸς` (naos) | MAT 23:17 |
-| 23 | greek_screening | `center_word_exact` | `ναοσ` (naos; English: Temple) | TR_NT | `ναοσ` (naos; English: Temple) | -9 | MAT 23:17 | `ναὸς` (naos) | MAT 23:17 |
+| 23 | greek_screening | `center_word_exact` | `ναοσ` (naos; English: Temple) | BYZ_NT | `ναοσ` (naos; English: Temple) | -9 | MAT 23:17 | `ναοσ` (naos; English: temple) | MAT 23:17 |
+| 23 | greek_screening | `center_word_exact` | `ναοσ` (naos; English: Temple) | SBLGNT | `ναοσ` (naos; English: Temple) | -9 | Matt 23:17 | `ναὸς` (naos; English: temple) | Matt 23:17 |
+| 23 | greek_screening | `center_word_exact` | `ναοσ` (naos; English: Temple) | TCG_NT | `ναοσ` (naos; English: Temple) | -9 | MAT 23:17 | `ναὸς` (naos; English: temple) | MAT 23:17 |
+| 23 | greek_screening | `center_word_exact` | `ναοσ` (naos; English: Temple) | TR_NT | `ναοσ` (naos; English: Temple) | -9 | MAT 23:17 | `ναὸς` (naos; English: temple) | MAT 23:17 |
 | 24 | greek_screening | `center_word_exact` | `αιμα` (haima; English: Blood) | BYZ_NT | `αιμα` (haima; English: Blood) | -10 | REV 19:13 | `αιματι` (aimati) | REV 19:13 |
 | 24 | greek_screening | `center_word_exact` | `αιμα` (haima; English: Blood) | SBLGNT | `αιμα` (haima; English: Blood) | -10 | Rev 19:13 | `αἵματι,` (aimati) | Rev 19:13 |
 | 24 | greek_screening | `center_word_exact` | `αιμα` (haima; English: Blood) | TCG_NT | `αιμα` (haima; English: Blood) | -10 | REV 19:13 | `αἵματι,` (aimati) | REV 19:13 |
@@ -62,10 +62,10 @@ audit sheet, not an added statistical test.
 | 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | SBLGNT | `λουδ` (loud; English: Lud) | -2 | Phil 2:7 | `δούλου` (doulou) | Phil 2:7 |
 | 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | TCG_NT | `λουδ` (loud; English: Lud) | -2 | PHP 2:7 | `δούλου` (doulou) | PHP 2:7 |
 | 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | TR_NT | `λουδ` (loud; English: Lud) | -2 | PHP 2:7 | `δούλου` (doulou) | PHP 2:7 |
-| 26 | greek_screening | `center_word_same_category` | `ιωυαν` (iouan; English: Javan) | BYZ_NT | `ιωυαν` (iouan; English: Javan) | -2 | 1PE 5:13 | `βαβυλωνι` (babuloni) | 1PE 5:13 |
-| 26 | greek_screening | `center_word_same_category` | `ιωυαν` (iouan; English: Javan) | SBLGNT | `ιωυαν` (iouan; English: Javan) | -2 | 1Pet 5:13 | `Βαβυλῶνι` (babuloni) | 1Pet 5:13 |
-| 26 | greek_screening | `center_word_same_category` | `ιωυαν` (iouan; English: Javan) | TCG_NT | `ιωυαν` (iouan; English: Javan) | -2 | 1PE 5:13 | `Βαβυλῶνι` (babuloni) | 1PE 5:13 |
-| 26 | greek_screening | `center_word_same_category` | `ιωυαν` (iouan; English: Javan) | TR_NT | `ιωυαν` (iouan; English: Javan) | -2 | 1PE 5:13 | `Βαβυλῶνι` (babuloni) | 1PE 5:13 |
+| 26 | greek_screening | `center_word_same_category` | `ιωυαν` (Iouan; English: Javan) | BYZ_NT | `ιωυαν` (Iouan; English: Javan) | -2 | 1PE 5:13 | `βαβυλωνι` (babuloni) | 1PE 5:13 |
+| 26 | greek_screening | `center_word_same_category` | `ιωυαν` (Iouan; English: Javan) | SBLGNT | `ιωυαν` (Iouan; English: Javan) | -2 | 1Pet 5:13 | `Βαβυλῶνι` (babuloni) | 1Pet 5:13 |
+| 26 | greek_screening | `center_word_same_category` | `ιωυαν` (Iouan; English: Javan) | TCG_NT | `ιωυαν` (Iouan; English: Javan) | -2 | 1PE 5:13 | `Βαβυλῶνι` (babuloni) | 1PE 5:13 |
+| 26 | greek_screening | `center_word_same_category` | `ιωυαν` (Iouan; English: Javan) | TR_NT | `ιωυαν` (Iouan; English: Javan) | -2 | 1PE 5:13 | `Βαβυλῶνι` (babuloni) | 1PE 5:13 |
 | 27 | greek_screening | `center_word_same_category` | `ευαλ` (eual; English: Obal) | BYZ_NT | `ευαλ` (eual; English: Obal) | -3 | 1TI 5:14 | `βουλομαι` (boulomai) | 1TI 5:14 |
 | 27 | greek_screening | `center_word_same_category` | `ευαλ` (eual; English: Obal) | SBLGNT | `ευαλ` (eual; English: Obal) | -3 | 1Tim 5:14 | `βούλομαι` (boulomai) | 1Tim 5:14 |
 | 27 | greek_screening | `center_word_same_category` | `ευαλ` (eual; English: Obal) | TCG_NT | `ευαλ` (eual; English: Obal) | -3 | 1TI 5:14 | `Βούλομαι` (boulomai) | 1TI 5:14 |
@@ -106,10 +106,10 @@ audit sheet, not an added statistical test.
 | 36 | greek_screening | `span_exact` | `νατο` (nato; English: NATO) | SBLGNT | `νατο` (nato; English: NATO) | 7 | 1Cor 1:27 | `μωρὰ` (mora) | 1Cor 1:26; 1Cor 1:27 |
 | 36 | greek_screening | `span_exact` | `νατο` (nato; English: NATO) | TCG_NT | `νατο` (nato; English: NATO) | 7 | 1CO 1:27 | `μωρὰ` (mora) | 1CO 1:26; 1CO 1:27 |
 | 36 | greek_screening | `span_exact` | `νατο` (nato; English: NATO) | TR_NT | `νατο` (nato; English: NATO) | 7 | 1CO 1:27 | `μωρὰ` (mora) | 1CO 1:26; 1CO 1:27 |
-| 37 | greek_screening | `span_same_category` | `σαλα` (sala; English: Shelah) | BYZ_NT | `σαλα` (sala; English: Shelah) | 2 | ACT 7:42 | `ισραηλ` (israel) | ACT 7:42; ACT 7:43 |
-| 37 | greek_screening | `span_same_category` | `σαλα` (sala; English: Shelah) | SBLGNT | `σαλα` (sala; English: Shelah) | 2 | Acts 7:42 | `Ἰσραήλ;` (israel) | Acts 7:42; Acts 7:43 |
-| 37 | greek_screening | `span_same_category` | `σαλα` (sala; English: Shelah) | TCG_NT | `σαλα` (sala; English: Shelah) | 2 | ACT 7:42 | `Ἰσραήλ;` (israel) | ACT 7:42; ACT 7:43 |
-| 37 | greek_screening | `span_same_category` | `σαλα` (sala; English: Shelah) | TR_NT | `σαλα` (sala; English: Shelah) | 2 | ACT 7:42 | `Ἰσραήλ` (israel) | ACT 7:42; ACT 7:43 |
+| 37 | greek_screening | `span_same_category` | `σαλα` (Sala; English: Shelah) | BYZ_NT | `σαλα` (Sala; English: Shelah) | 2 | ACT 7:42 | `ισραηλ` (israel) | ACT 7:42; ACT 7:43 |
+| 37 | greek_screening | `span_same_category` | `σαλα` (Sala; English: Shelah) | SBLGNT | `σαλα` (Sala; English: Shelah) | 2 | Acts 7:42 | `Ἰσραήλ;` (israel) | Acts 7:42; Acts 7:43 |
+| 37 | greek_screening | `span_same_category` | `σαλα` (Sala; English: Shelah) | TCG_NT | `σαλα` (Sala; English: Shelah) | 2 | ACT 7:42 | `Ἰσραήλ;` (israel) | ACT 7:42; ACT 7:43 |
+| 37 | greek_screening | `span_same_category` | `σαλα` (Sala; English: Shelah) | TR_NT | `σαλα` (Sala; English: Shelah) | 2 | ACT 7:42 | `Ἰσραήλ` (israel) | ACT 7:42; ACT 7:43 |
 | 38 | greek_screening | `span_same_category` | `αδαμ` (adam; English: Adam) | BYZ_NT | `αδαμ` (adam; English: Adam) | 2 | GAL 4:27 | `ανδρα` (andra) | GAL 4:27; GAL 4:28 |
 | 38 | greek_screening | `span_same_category` | `αδαμ` (adam; English: Adam) | SBLGNT | `αδαμ` (adam; English: Adam) | 2 | Gal 4:27 | `ἄνδρα.` (andra) | Gal 4:27; Gal 4:28 |
 | 38 | greek_screening | `span_same_category` | `αδαμ` (adam; English: Adam) | TCG_NT | `αδαμ` (adam; English: Adam) | 2 | GAL 4:27 | `ἄνδρα.` (andra) | GAL 4:27; GAL 4:28 |
@@ -118,10 +118,10 @@ audit sheet, not an added statistical test.
 | 39 | greek_screening | `span_same_category` | `γαμερ` (gamer; English: Gomer) | SBLGNT | `γαμερ` (gamer; English: Gomer) | -3 | 2Cor 10:3 | `στρατευόμεθα—` (strateuometha) | 2Cor 10:4; 2Cor 10:3 |
 | 39 | greek_screening | `span_same_category` | `γαμερ` (gamer; English: Gomer) | TCG_NT | `γαμερ` (gamer; English: Gomer) | -3 | 2CO 10:3 | `στρατευόμεθα—` (strateuometha) | 2CO 10:4; 2CO 10:3 |
 | 39 | greek_screening | `span_same_category` | `γαμερ` (gamer; English: Gomer) | TR_NT | `γαμερ` (gamer; English: Gomer) | -3 | 2CO 10:3 | `στρατευόμεθα` (strateuometha) | 2CO 10:4; 2CO 10:3 |
-| 40 | greek_screening | `hidden_path_only` | `σαλα` (sala; English: Shelah) | BYZ_NT | `σαλα` (sala; English: Shelah) | 2 | 1CO 10:18 | `ισραηλ` (israel) | 1CO 10:18 |
-| 40 | greek_screening | `hidden_path_only` | `σαλα` (sala; English: Shelah) | SBLGNT | `σαλα` (sala; English: Shelah) | 2 | 1Cor 10:18 | `Ἰσραὴλ` (israel) | 1Cor 10:18 |
-| 40 | greek_screening | `hidden_path_only` | `σαλα` (sala; English: Shelah) | TCG_NT | `σαλα` (sala; English: Shelah) | 2 | 1CO 10:18 | `Ἰσραὴλ` (israel) | 1CO 10:18 |
-| 40 | greek_screening | `hidden_path_only` | `σαλα` (sala; English: Shelah) | TR_NT | `σαλα` (sala; English: Shelah) | 2 | 1CO 10:18 | `Ἰσραὴλ` (israel) | 1CO 10:18 |
+| 40 | greek_screening | `hidden_path_only` | `σαλα` (Sala; English: Shelah) | BYZ_NT | `σαλα` (Sala; English: Shelah) | 2 | 1CO 10:18 | `ισραηλ` (israel) | 1CO 10:18 |
+| 40 | greek_screening | `hidden_path_only` | `σαλα` (Sala; English: Shelah) | SBLGNT | `σαλα` (Sala; English: Shelah) | 2 | 1Cor 10:18 | `Ἰσραὴλ` (israel) | 1Cor 10:18 |
+| 40 | greek_screening | `hidden_path_only` | `σαλα` (Sala; English: Shelah) | TCG_NT | `σαλα` (Sala; English: Shelah) | 2 | 1CO 10:18 | `Ἰσραὴλ` (israel) | 1CO 10:18 |
+| 40 | greek_screening | `hidden_path_only` | `σαλα` (Sala; English: Shelah) | TR_NT | `σαλα` (Sala; English: Shelah) | 2 | 1CO 10:18 | `Ἰσραὴλ` (israel) | 1CO 10:18 |
 | 41 | greek_screening | `hidden_path_only` | `αμην` (amen; English: Amen) | BYZ_NT | `αμην` (amen; English: Amen) | 2 | 1CO 1:10 | `μη` (me) | 1CO 1:10 |
 | 41 | greek_screening | `hidden_path_only` | `αμην` (amen; English: Amen) | SBLGNT | `αμην` (amen; English: Amen) | 2 | 1Cor 1:10 | `μὴ` (me) | 1Cor 1:10 |
 | 41 | greek_screening | `hidden_path_only` | `αμην` (amen; English: Amen) | TCG_NT | `αμην` (amen; English: Amen) | 2 | 1CO 1:10 | `μὴ` (me) | 1CO 1:10 |

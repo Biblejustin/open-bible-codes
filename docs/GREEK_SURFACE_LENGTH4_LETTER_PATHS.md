@@ -58,22 +58,22 @@ test.
 | `αμην` (amen; English: Amen) | BYZ_NT | `αμην` (amen; English: Amen) | 19 | MAT 18:18 | `δησητε` (desete) | MAT 18:17; MAT 18:18 |
 | `αμην` (amen; English: Amen) | TCG_NT | `αμην` (amen; English: Amen) | 19 | MAT 18:18 | `δήσητε` (desete) | MAT 18:17; MAT 18:18 |
 | `αμην` (amen; English: Amen) | SBLGNT | `αμην` (amen; English: Amen) | 19 | Matt 18:18 | `δήσητε` (desete) | Matt 18:17; Matt 18:18 |
-| `σιων` (sion; English: Zion) | TR_NT | `σιων` (sion; English: Zion) | -25 | 1PE 2:6 | `καταισχυνθῇ` (kataischunthe) | 1PE 2:7; 1PE 2:6 |
-| `σιων` (sion; English: Zion) | BYZ_NT | `σιων` (sion; English: Zion) | -25 | 1PE 2:6 | `καταισχυνθη` (kataischunthe) | 1PE 2:7; 1PE 2:6 |
-| `σιων` (sion; English: Zion) | TCG_NT | `σιων` (sion; English: Zion) | -25 | 1PE 2:6 | `καταισχυνθῇ.` (kataischunthe) | 1PE 2:7; 1PE 2:6 |
-| `σιων` (sion; English: Zion) | SBLGNT | `σιων` (sion; English: Zion) | -25 | 1Pet 2:6 | `καταισχυνθῇ.` (kataischunthe) | 1Pet 2:7; 1Pet 2:6 |
-| `σιων` (sion; English: Zion) | TR_NT | `σιων` (sion; English: Zion) | -4 | ACT 19:34 | `ἐπὶ` (epi) | ACT 19:34 |
-| `σιων` (sion; English: Zion) | BYZ_NT | `σιων` (sion; English: Zion) | -4 | ACT 19:34 | `επι` (epi) | ACT 19:34 |
-| `σιων` (sion; English: Zion) | TCG_NT | `σιων` (sion; English: Zion) | -4 | ACT 19:34 | `ἐπὶ` (epi) | ACT 19:34 |
-| `σιων` (sion; English: Zion) | SBLGNT | `σιων` (sion; English: Zion) | -4 | Acts 19:34 | `ἐπὶ` (epi) | Acts 19:34 |
-| `σιων` (sion; English: Zion) | TR_NT | `σιων` (sion; English: Zion) | 6 | MAT 21:5 | `ἐπιβεβηκὼς` (epibebekos) | MAT 21:5 |
-| `σιων` (sion; English: Zion) | BYZ_NT | `σιων` (sion; English: Zion) | 6 | MAT 21:5 | `επιβεβηκωσ` (epibebekos) | MAT 21:5 |
-| `σιων` (sion; English: Zion) | TCG_NT | `σιων` (sion; English: Zion) | 6 | MAT 21:5 | `ἐπιβεβηκὼς` (epibebekos) | MAT 21:5 |
-| `σιων` (sion; English: Zion) | SBLGNT | `σιων` (sion; English: Zion) | 6 | Matt 21:5 | `ἐπιβεβηκὼς` (epibebekos) | Matt 21:5 |
-| `σιων` (sion; English: Zion) | TR_NT | `σιων` (sion; English: Zion) | 9 | REV 14:20 | `χαλινῶν` (chalinon) | REV 14:20 |
-| `σιων` (sion; English: Zion) | BYZ_NT | `σιων` (sion; English: Zion) | 9 | REV 14:20 | `χαλινων` (chalinon) | REV 14:20 |
-| `σιων` (sion; English: Zion) | TCG_NT | `σιων` (sion; English: Zion) | 9 | REV 14:20 | `χαλινῶν` (chalinon) | REV 14:20 |
-| `σιων` (sion; English: Zion) | SBLGNT | `σιων` (sion; English: Zion) | 9 | Rev 14:20 | `χαλινῶν` (chalinon) | Rev 14:20 |
+| `σιων` (Sion; English: Zion) | TR_NT | `σιων` (Sion; English: Zion) | -25 | 1PE 2:6 | `καταισχυνθῇ` (kataischunthe) | 1PE 2:7; 1PE 2:6 |
+| `σιων` (Sion; English: Zion) | BYZ_NT | `σιων` (Sion; English: Zion) | -25 | 1PE 2:6 | `καταισχυνθη` (kataischunthe) | 1PE 2:7; 1PE 2:6 |
+| `σιων` (Sion; English: Zion) | TCG_NT | `σιων` (Sion; English: Zion) | -25 | 1PE 2:6 | `καταισχυνθῇ.` (kataischunthe) | 1PE 2:7; 1PE 2:6 |
+| `σιων` (Sion; English: Zion) | SBLGNT | `σιων` (Sion; English: Zion) | -25 | 1Pet 2:6 | `καταισχυνθῇ.` (kataischunthe) | 1Pet 2:7; 1Pet 2:6 |
+| `σιων` (Sion; English: Zion) | TR_NT | `σιων` (Sion; English: Zion) | -4 | ACT 19:34 | `ἐπὶ` (epi) | ACT 19:34 |
+| `σιων` (Sion; English: Zion) | BYZ_NT | `σιων` (Sion; English: Zion) | -4 | ACT 19:34 | `επι` (epi) | ACT 19:34 |
+| `σιων` (Sion; English: Zion) | TCG_NT | `σιων` (Sion; English: Zion) | -4 | ACT 19:34 | `ἐπὶ` (epi) | ACT 19:34 |
+| `σιων` (Sion; English: Zion) | SBLGNT | `σιων` (Sion; English: Zion) | -4 | Acts 19:34 | `ἐπὶ` (epi) | Acts 19:34 |
+| `σιων` (Sion; English: Zion) | TR_NT | `σιων` (Sion; English: Zion) | 6 | MAT 21:5 | `ἐπιβεβηκὼς` (epibebekos) | MAT 21:5 |
+| `σιων` (Sion; English: Zion) | BYZ_NT | `σιων` (Sion; English: Zion) | 6 | MAT 21:5 | `επιβεβηκωσ` (epibebekos) | MAT 21:5 |
+| `σιων` (Sion; English: Zion) | TCG_NT | `σιων` (Sion; English: Zion) | 6 | MAT 21:5 | `ἐπιβεβηκὼς` (epibebekos) | MAT 21:5 |
+| `σιων` (Sion; English: Zion) | SBLGNT | `σιων` (Sion; English: Zion) | 6 | Matt 21:5 | `ἐπιβεβηκὼς` (epibebekos) | Matt 21:5 |
+| `σιων` (Sion; English: Zion) | TR_NT | `σιων` (Sion; English: Zion) | 9 | REV 14:20 | `χαλινῶν` (chalinon) | REV 14:20 |
+| `σιων` (Sion; English: Zion) | BYZ_NT | `σιων` (Sion; English: Zion) | 9 | REV 14:20 | `χαλινων` (chalinon) | REV 14:20 |
+| `σιων` (Sion; English: Zion) | TCG_NT | `σιων` (Sion; English: Zion) | 9 | REV 14:20 | `χαλινῶν` (chalinon) | REV 14:20 |
+| `σιων` (Sion; English: Zion) | SBLGNT | `σιων` (Sion; English: Zion) | 9 | Rev 14:20 | `χαλινῶν` (chalinon) | Rev 14:20 |
 | `αραμ` (aram; English: Aram) | TR_NT | `αραμ` (aram; English: Aram) | -12 | PHP 2:1 | `παράκλησις` (paraklesis) | PHP 2:1; PHP 1:30 |
 | `αραμ` (aram; English: Aram) | BYZ_NT | `αραμ` (aram; English: Aram) | -12 | PHP 2:1 | `παρακλησισ` (paraklesis) | PHP 2:1; PHP 1:30 |
 | `αραμ` (aram; English: Aram) | TCG_NT | `αραμ` (aram; English: Aram) | -12 | PHP 2:1 | `παράκλησις` (paraklesis) | PHP 2:1; PHP 1:30 |
@@ -2269,7 +2269,7 @@ test.
 | 3 | 51943 | `η` (e) | Matt 18:18 | `τῆς` (tes) |
 | 4 | 51962 | `ν` (n) | Matt 18:18 | `⸀ἐν` (en) |
 
-### `σιων` (sion; English: Zion) / TR_NT
+### `σιων` (Sion; English: Zion) / TR_NT
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
@@ -2290,7 +2290,7 @@ test.
 | 3 | 673157 | `ω` (o) | REV 14:20 | `χαλινῶν` (chalinon) |
 | 4 | 673166 | `ν` (n) | REV 14:20 | `ἵππων` (ippon) |
 
-### `σιων` (sion; English: Zion) / BYZ_NT
+### `σιων` (Sion; English: Zion) / BYZ_NT
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
@@ -2311,7 +2311,7 @@ test.
 | 3 | 672835 | `ω` (o) | REV 14:20 | `χαλινων` (chalinon) |
 | 4 | 672844 | `ν` (n) | REV 14:20 | `ιππων` (ippon) |
 
-### `σιων` (sion; English: Zion) / TCG_NT
+### `σιων` (Sion; English: Zion) / TCG_NT
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
@@ -2332,7 +2332,7 @@ test.
 | 3 | 670343 | `ω` (o) | REV 14:20 | `χαλινῶν` (chalinon) |
 | 4 | 670352 | `ν` (n) | REV 14:20 | `ἵππων` (ippon) |
 
-### `σιων` (sion; English: Zion) / SBLGNT
+### `σιων` (Sion; English: Zion) / SBLGNT
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
@@ -2353,7 +2353,7 @@ test.
 | 3 | 662359 | `ω` (o) | Rev 14:20 | `χαλινῶν` (chalinon) |
 | 4 | 662368 | `ν` (n) | Rev 14:20 | `ἵππων` (ippon) |
 
-### `σιων` (sion; English: Zion) / TR_NT
+### `σιων` (Sion; English: Zion) / TR_NT
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
@@ -2374,7 +2374,7 @@ test.
 | 3 | 673157 | `ω` (o) | REV 14:20 | `χαλινῶν` (chalinon) |
 | 4 | 673166 | `ν` (n) | REV 14:20 | `ἵππων` (ippon) |
 
-### `σιων` (sion; English: Zion) / BYZ_NT
+### `σιων` (Sion; English: Zion) / BYZ_NT
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
@@ -2395,7 +2395,7 @@ test.
 | 3 | 672835 | `ω` (o) | REV 14:20 | `χαλινων` (chalinon) |
 | 4 | 672844 | `ν` (n) | REV 14:20 | `ιππων` (ippon) |
 
-### `σιων` (sion; English: Zion) / TCG_NT
+### `σιων` (Sion; English: Zion) / TCG_NT
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
@@ -2416,7 +2416,7 @@ test.
 | 3 | 670343 | `ω` (o) | REV 14:20 | `χαλινῶν` (chalinon) |
 | 4 | 670352 | `ν` (n) | REV 14:20 | `ἵππων` (ippon) |
 
-### `σιων` (sion; English: Zion) / SBLGNT
+### `σιων` (Sion; English: Zion) / SBLGNT
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
@@ -2437,7 +2437,7 @@ test.
 | 3 | 662359 | `ω` (o) | Rev 14:20 | `χαλινῶν` (chalinon) |
 | 4 | 662368 | `ν` (n) | Rev 14:20 | `ἵππων` (ippon) |
 
-### `σιων` (sion; English: Zion) / TR_NT
+### `σιων` (Sion; English: Zion) / TR_NT
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
@@ -2458,7 +2458,7 @@ test.
 | 3 | 673157 | `ω` (o) | REV 14:20 | `χαλινῶν` (chalinon) |
 | 4 | 673166 | `ν` (n) | REV 14:20 | `ἵππων` (ippon) |
 
-### `σιων` (sion; English: Zion) / BYZ_NT
+### `σιων` (Sion; English: Zion) / BYZ_NT
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
@@ -2479,7 +2479,7 @@ test.
 | 3 | 672835 | `ω` (o) | REV 14:20 | `χαλινων` (chalinon) |
 | 4 | 672844 | `ν` (n) | REV 14:20 | `ιππων` (ippon) |
 
-### `σιων` (sion; English: Zion) / TCG_NT
+### `σιων` (Sion; English: Zion) / TCG_NT
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
@@ -2500,7 +2500,7 @@ test.
 | 3 | 670343 | `ω` (o) | REV 14:20 | `χαλινῶν` (chalinon) |
 | 4 | 670352 | `ν` (n) | REV 14:20 | `ἵππων` (ippon) |
 
-### `σιων` (sion; English: Zion) / SBLGNT
+### `σιων` (Sion; English: Zion) / SBLGNT
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
@@ -2521,7 +2521,7 @@ test.
 | 3 | 662359 | `ω` (o) | Rev 14:20 | `χαλινῶν` (chalinon) |
 | 4 | 662368 | `ν` (n) | Rev 14:20 | `ἵππων` (ippon) |
 
-### `σιων` (sion; English: Zion) / TR_NT
+### `σιων` (Sion; English: Zion) / TR_NT
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
@@ -2542,7 +2542,7 @@ test.
 | 3 | 673157 | `ω` (o) | REV 14:20 | `χαλινῶν` (chalinon) |
 | 4 | 673166 | `ν` (n) | REV 14:20 | `ἵππων` (ippon) |
 
-### `σιων` (sion; English: Zion) / BYZ_NT
+### `σιων` (Sion; English: Zion) / BYZ_NT
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
@@ -2563,7 +2563,7 @@ test.
 | 3 | 672835 | `ω` (o) | REV 14:20 | `χαλινων` (chalinon) |
 | 4 | 672844 | `ν` (n) | REV 14:20 | `ιππων` (ippon) |
 
-### `σιων` (sion; English: Zion) / TCG_NT
+### `σιων` (Sion; English: Zion) / TCG_NT
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
@@ -2584,7 +2584,7 @@ test.
 | 3 | 670343 | `ω` (o) | REV 14:20 | `χαλινῶν` (chalinon) |
 | 4 | 670352 | `ν` (n) | REV 14:20 | `ἵππων` (ippon) |
 
-### `σιων` (sion; English: Zion) / SBLGNT
+### `σιων` (Sion; English: Zion) / SBLGNT
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |

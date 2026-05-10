@@ -70,10 +70,10 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 20 | english_screening | `hidden_path_only` | all_source | `cush` | Cush | -2 | 1Chr 10:4 | `these` |
 | 21 | english_screening | `hidden_path_only` | all_source | `bear` | Bear | 2 | 1Chr 11:8 | `repaired` |
 | 22 | greek_screening | `center_word_exact` | all_source | `νατο` (nato; English: NATO) | NATO | 8 | Rom 5:10 | `θανατου` (thanatou) |
-| 23 | greek_screening | `center_word_exact` | all_source | `ναοσ` (naos; English: Temple) | Temple | -9 | Matt 23:17 | `ναοσ` (naos) |
+| 23 | greek_screening | `center_word_exact` | all_source | `ναοσ` (naos; English: Temple) | Temple | -9 | Matt 23:17 | `ναοσ` (naos; English: temple) |
 | 24 | greek_screening | `center_word_exact` | all_source | `αιμα` (haima; English: Blood) | Blood | -10 | Rev 19:13 | `αιματι` (aimati) |
 | 25 | greek_screening | `center_word_same_category` | all_source | `λουδ` (loud; English: Lud) | Lud | -2 | Phil 2:7 | `δουλου` (doulou) |
-| 26 | greek_screening | `center_word_same_category` | all_source | `ιωυαν` (iouan; English: Javan) | Javan | -2 | 1Pet 5:13 | `βαβυλωνι` (babuloni) |
+| 26 | greek_screening | `center_word_same_category` | all_source | `ιωυαν` (Iouan; English: Javan) | Javan | -2 | 1Pet 5:13 | `βαβυλωνι` (babuloni) |
 | 27 | greek_screening | `center_word_same_category` | all_source | `ευαλ` (eual; English: Obal) | Obal | -3 | 1Tim 5:14 | `βουλομαι` (boulomai) |
 | 28 | greek_screening | `center_verse_exact` | all_source | `δασα` (dasa; English: Lasha) | Lasha | -2 | Acts 9:11 | `ταρσεα` (tarsea) |
 | 29 | greek_screening | `center_verse_exact` | all_source | `αιμα` (haima; English: Blood) | Blood | 2 | Matt 13:55 | `μαριαμ` (mariam) |
@@ -84,10 +84,10 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 34 | greek_screening | `span_exact` | all_source | `θεοσ` (theos; English: God) | God | 2 | Rom 14:2 | `εσθιει` (esthiei) |
 | 35 | greek_screening | `span_exact` | all_source | `ιραν` (iran; English: Iran) | Iran | -4 | Mark 14:48 | `αποκριθεισ` (apokritheis) |
 | 36 | greek_screening | `span_exact` | all_source | `νατο` (nato; English: NATO) | NATO | 7 | 1Cor 1:27 | `μωρα` (mora) |
-| 37 | greek_screening | `span_same_category` | all_source | `σαλα` (sala; English: Shelah) | Shelah | 2 | Acts 7:42 | `ισραηλ` (israel) |
+| 37 | greek_screening | `span_same_category` | all_source | `σαλα` (Sala; English: Shelah) | Shelah | 2 | Acts 7:42 | `ισραηλ` (israel) |
 | 38 | greek_screening | `span_same_category` | all_source | `αδαμ` (adam; English: Adam) | Adam | 2 | Gal 4:27 | `ανδρα` (andra) |
 | 39 | greek_screening | `span_same_category` | all_source | `γαμερ` (gamer; English: Gomer) | Gomer | -3 | 2Cor 10:3 | `στρατευομεθα` (strateuometha) |
-| 40 | greek_screening | `hidden_path_only` | all_source | `σαλα` (sala; English: Shelah) | Shelah | 2 | 1Cor 10:18 | `ισραηλ` (israel) |
+| 40 | greek_screening | `hidden_path_only` | all_source | `σαλα` (Sala; English: Shelah) | Shelah | 2 | 1Cor 10:18 | `ισραηλ` (israel) |
 | 41 | greek_screening | `hidden_path_only` | all_source | `αμην` (amen; English: Amen) | Amen | 2 | 1Cor 1:10 | `μη` (me) |
 | 42 | greek_screening | `hidden_path_only` | all_source | `υιοσ` (huios; English: Son) | Son | 2 | 1Cor 5:12 | `τουσ` (tous) |
 | 43 | hebrew_screening | `center_word_exact` | all_source | `שממה` (shmmh; English: Desolation) | Desolation | 2 | Mic 1:7 | `שממה` (shmmh) |
@@ -104,7 +104,7 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 54 | hebrew_screening | `center_verse_same_concept` | all_source | `רומי` (rwmy; English: Rome) | Rome | -6 | 1Kgs 7:40 | `ואתהמזרקות` (wthmzrqwt) |
 | 55 | hebrew_screening | `center_verse_same_concept` | all_source | `רומי` (rwmy; English: Rome) | Rome | 6 | Josh 22:5 | `אתכמ` (tkm) |
 | 56 | hebrew_screening | `center_verse_same_concept` | all_source | `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 11 | Ezek 7:8 | `עליכ` (lyk) |
-| 57 | hebrew_screening | `center_verse_same_category` | all_source | `מותשני` (mwtshny; English: Second Death) | Second Death | 9 | Jer 43:3 | `בבל` (bbl) |
+| 57 | hebrew_screening | `center_verse_same_category` | all_source | `מותשני` (mwtshny; English: Second Death) | Second Death | 9 | Jer 43:3 | `בבל` (Bavel; English: Babylon) |
 | 58 | hebrew_screening | `center_verse_same_category` | all_source | `מותשני` (mwtshny; English: Second Death) | Second Death | -11 | Num 29:29 | `ארבעה` (rbh) |
 | 59 | hebrew_screening | `center_verse_same_category` | all_source | `טימותי` (tymwty; English: Timothy) | Timothy | 16 | Gen 30:20 | `אתשמו` (tshmw) |
 | 60 | hebrew_screening | `span_exact` | all_source | `שמימ` (shmym; English: Heaven) | Heaven | 2 | Judg 19:3 | `ויקמ` (wyqm) |

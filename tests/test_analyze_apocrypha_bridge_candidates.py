@@ -101,4 +101,4 @@ class ApocryphaBridgeCandidateTests(unittest.TestCase):
             )
             text = out.read_text(encoding="utf-8")
 
-        self.assertIn("`μαρια` (maria)", text)
+        self.assertIn("`μαρια` (Maria; English: Mary)", text)

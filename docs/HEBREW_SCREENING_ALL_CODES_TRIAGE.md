@@ -145,7 +145,7 @@ It is a triage aid, not a claim-grade filter.
 
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 9 | 46 | Jer 43:3 | `בבל` (bbl) | paired_uncorrected_p_le_0.05 |
+| 1 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 9 | 46 | Jer 43:3 | `בבל` (Bavel; English: Babylon) | paired_uncorrected_p_le_0.05 |
 | 2 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -11 | 56 | Num 29:29 | `ארבעה` (rbh) | paired_uncorrected_p_le_0.05 |
 | 3 | all_source | `timothy_h` `טימותי` (tymwty; English: Timothy) | Timothy | 16 | 81 | Gen 30:20 | `אתשמו` (tshmw) | paired_uncorrected_p_le_0.05 |
 | 4 | all_source | `pathrusim_h` `פתרסימ` (ptrsym; English: Pathrusim) | Pathrusim | 28 | 141 | 2Kgs 15:31 | `עשה` (shh) | paired_uncorrected_p_le_0.05 |

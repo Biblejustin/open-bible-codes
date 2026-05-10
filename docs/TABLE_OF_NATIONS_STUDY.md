@@ -35,7 +35,7 @@ Results:
 
 - Rows: 364 result rows.
 - Counted terms: 359.
-- Skipped terms: 5 short Hebrew names under length 3 (`נח`, `שם`, `חם`, `חת`, `מש`).
+- Skipped terms: 5 short Hebrew names under length 3: `נח` (Noach; English: Noah), `שם` (Shem; English: Shem), `חם` (Cham; English: Ham), `חת` (Chet; English: Heth), and `מש` (Mash; English: Mash).
 - MT WLC total hits: 567,491.
 - LXX total hits: 140,438.
 - TR NT total hits: 44,307.
@@ -43,35 +43,35 @@ Results:
 
 Top MT WLC hits:
 
-- Javan (`יון`): 68,556.
-- Aram (`ארם`): 44,295.
-- Mesha (`משא`): 37,409.
-- Hivite (`חוי`): 34,677.
-- Madai (`מדי`): 30,544.
+- Javan: `יון` (Yavan; English: Javan/Greece), 68,556.
+- Aram: `ארם` (Aram; English: Aram), 44,295.
+- Mesha: `משא` (Mesha; English: Mesha), 37,409.
+- Hivite: `חוי` (Chivvi; English: Hivite), 34,677.
+- Madai: `מדי` (Madai; English: Media), 30,544.
 
 Top LXX hits:
 
-- Noah (`νωε`): 49,559.
-- Hul (`ουλ`): 33,797.
-- Shem (`σημ`): 19,590.
-- Shelah (`σαλα`): 8,046.
-- Ham (`χαμ`): 4,680.
+- Noah: `νωε` (Noe; English: Noah), 49,559.
+- Hul: `ουλ` (Oul; English: Hul), 33,797.
+- Shem: `σημ` (Sem; English: Shem), 19,590.
+- Shelah: `σαλα` (Sala; English: Shelah), 8,046.
+- Ham: `χαμ` (Cham; English: Ham), 4,680.
 
 Longer-name MT WLC leaders:
 
-- Lehabim (`להבים`): 373.
-- Nineveh (`נינוה`): 281.
-- Elishah (`אלישה`): 276.
-- Ludim (`לודים`): 270.
-- Havilah (`חוילה`): 200.
+- Lehabim: `להבים` (Lehabim; English: Lehabim), 373.
+- Nineveh: `נינוה` (Nineveh; English: Nineveh), 281.
+- Elishah: `אלישה` (Elishah; English: Elishah), 276.
+- Ludim: `לודים` (Ludim; English: Ludim), 270.
+- Havilah: `חוילה` (Havilah; English: Havilah), 200.
 
 Longer-name LXX leaders:
 
-- Elishah (`ελισα`): 489.
-- Javan (`ιωυαν`): 431.
-- Havilah (`ευιλα`): 408.
-- Admah (`αδαμα`): 204.
-- Mesha (`μασση`): 184.
+- Elishah: `ελισα` (Elisa; English: Elishah), 489.
+- Javan: `ιωυαν` (Iouan; English: Javan), 431.
+- Havilah: `ευιλα` (Euila; English: Havilah), 408.
+- Admah: `αδαμα` (Adama; English: Admah), 204.
+- Mesha: `μασση` (Masse; English: Mesha), 184.
 
 Cautions:
 

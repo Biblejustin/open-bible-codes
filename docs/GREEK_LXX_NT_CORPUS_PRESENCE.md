@@ -34,27 +34,27 @@ term has at least one ELS hit in each corpus.
 
 | Term | Normalized | Total hits | Hits by corpus |
 | --- | --- | ---: | --- |
-| Blood | `αιμα` | 40,429 | BYZ_NT:4,621; LXX:22,054; SBLGNT:4,527; TCG_NT:4,575; TR_NT:4,652 |
-| Mary | `μαρια` | 1,403 | BYZ_NT:156; LXX:780; SBLGNT:153; TCG_NT:152; TR_NT:162 |
-| Tomb | `ταφοσ` | 394 | BYZ_NT:46; LXX:205; SBLGNT:52; TCG_NT:42; TR_NT:49 |
-| Savior | `σωτηρ` | 281 | BYZ_NT:27; LXX:154; SBLGNT:29; TCG_NT:35; TR_NT:36 |
-| He Is Risen | `ανεστη` | 192 | BYZ_NT:28; LXX:92; SBLGNT:22; TCG_NT:26; TR_NT:24 |
-| Jesus | `ιησουσ` | 140 | BYZ_NT:12; LXX:78; SBLGNT:23; TCG_NT:12; TR_NT:15 |
-| Judgment | `κρισισ` | 99 | BYZ_NT:11; LXX:61; SBLGNT:13; TCG_NT:8; TR_NT:6 |
-| Judas | `ιουδασ` | 76 | BYZ_NT:11; LXX:44; SBLGNT:8; TCG_NT:7; TR_NT:6 |
-| Lord | `κυριοσ` | 63 | BYZ_NT:10; LXX:35; SBLGNT:3; TCG_NT:7; TR_NT:8 |
-| Peter | `πετροσ` | 60 | BYZ_NT:10; LXX:24; SBLGNT:11; TCG_NT:8; TR_NT:7 |
+| Blood | `αιμα` (haima; English: blood) | 40,429 | BYZ_NT:4,621; LXX:22,054; SBLGNT:4,527; TCG_NT:4,575; TR_NT:4,652 |
+| Mary | `μαρια` (Maria; English: Mary) | 1,403 | BYZ_NT:156; LXX:780; SBLGNT:153; TCG_NT:152; TR_NT:162 |
+| Tomb | `ταφοσ` (taphos; English: tomb) | 394 | BYZ_NT:46; LXX:205; SBLGNT:52; TCG_NT:42; TR_NT:49 |
+| Savior | `σωτηρ` (soter; English: savior) | 281 | BYZ_NT:27; LXX:154; SBLGNT:29; TCG_NT:35; TR_NT:36 |
+| He Is Risen | `ανεστη` (aneste; English: he is risen) | 192 | BYZ_NT:28; LXX:92; SBLGNT:22; TCG_NT:26; TR_NT:24 |
+| Jesus | `ιησουσ` (Iesous; English: Jesus/Joshua) | 140 | BYZ_NT:12; LXX:78; SBLGNT:23; TCG_NT:12; TR_NT:15 |
+| Judgment | `κρισισ` (krisis; English: judgment) | 99 | BYZ_NT:11; LXX:61; SBLGNT:13; TCG_NT:8; TR_NT:6 |
+| Judas | `ιουδασ` (Ioudas; English: Judas) | 76 | BYZ_NT:11; LXX:44; SBLGNT:8; TCG_NT:7; TR_NT:6 |
+| Lord | `κυριοσ` (kyrios; English: Lord) | 63 | BYZ_NT:10; LXX:35; SBLGNT:3; TCG_NT:7; TR_NT:8 |
+| Peter | `πετροσ` (Petros; English: Peter) | 60 | BYZ_NT:10; LXX:24; SBLGNT:11; TCG_NT:8; TR_NT:7 |
 
 ## Partial Presence
 
 | Term | Normalized | Present | Absent | Total hits |
 | --- | --- | --- | --- | ---: |
-| Beast | `θηριον` | BYZ_NT, LXX, TCG_NT, TR_NT | SBLGNT | 14 |
-| Dragon | `δρακων` | LXX, TCG_NT, TR_NT | BYZ_NT, SBLGNT | 7 |
-| John | `ιωαννησ` | LXX, TCG_NT | BYZ_NT, SBLGNT, TR_NT | 4 |
-| Pilate | `πιλατοσ` | LXX, SBLGNT | BYZ_NT, TCG_NT, TR_NT | 2 |
-| Christ | `χριστοσ` | LXX only | BYZ_NT, SBLGNT, TCG_NT, TR_NT | 1 |
-| He Is Coming | `ερχεται` | LXX only | BYZ_NT, SBLGNT, TCG_NT, TR_NT | 1 |
+| Beast | `θηριον` (therion; English: beast) | BYZ_NT, LXX, TCG_NT, TR_NT | SBLGNT | 14 |
+| Dragon | `δρακων` (drakon; English: dragon) | LXX, TCG_NT, TR_NT | BYZ_NT, SBLGNT | 7 |
+| John | `ιωαννησ` (Ioannes; English: John) | LXX, TCG_NT | BYZ_NT, SBLGNT, TR_NT | 4 |
+| Pilate | `πιλατοσ` (Pilatos; English: Pilate) | LXX, SBLGNT | BYZ_NT, TCG_NT, TR_NT | 2 |
+| Christ | `χριστοσ` (Christos; English: Christ) | LXX only | BYZ_NT, SBLGNT, TCG_NT, TR_NT | 1 |
+| He Is Coming | `ερχεται` (erchetai; English: he is coming) | LXX only | BYZ_NT, SBLGNT, TCG_NT, TR_NT | 1 |
 
 ## Absent In This Broad Scan
 

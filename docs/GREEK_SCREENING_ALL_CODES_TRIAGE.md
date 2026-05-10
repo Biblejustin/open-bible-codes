@@ -38,18 +38,18 @@ It is a triage aid, not a claim-grade filter.
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
 | 1 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 8 | 25 | Rom 5:10 | `θανατου` (thanatou) |  |
-| 2 | all_source | `temple_g` `ναοσ` (naos; English: Temple) | Temple | -9 | 28 | Matt 23:17 | `ναοσ` (naos) |  |
+| 2 | all_source | `temple_g` `ναοσ` (naos; English: Temple) | Temple | -9 | 28 | Matt 23:17 | `ναοσ` (naos; English: temple) |  |
 | 3 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | -10 | 31 | Rev 19:13 | `αιματι` (aimati) |  |
 | 4 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | -10 | 31 | Rev 19:13 | `αιματι` (aimati) |  |
 | 5 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | 13 | 40 | 1Pet 1:19 | `αιματι` (aimati) |  |
 | 6 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | 13 | 40 | 1Pet 1:19 | `αιματι` (aimati) |  |
-| 7 | all_source | `god_g` `θεοσ` (theos; English: God) | God | -21 | 64 | 2Cor 6:16 | `θεοσ` (theos) |  |
+| 7 | all_source | `god_g` `θεοσ` (theos; English: God) | God | -21 | 64 | 2Cor 6:16 | `θεοσ` (theos; English: God) |  |
 | 8 | all_source | `wisdom_g` `σοφια` (sophia; English: Wisdom) | Wisdom | -24 | 97 | Acts 6:10 | `σοφια` (sophia) |  |
 | 9 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -50 | 151 | Rom 8:6 | `θανατοσ` (thanatos) |  |
 | 10 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -54 | 163 | Heb 5:7 | `θανατου` (thanatou) |  |
 | 11 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 54 | 163 | Rev 20:13 | `θανατοσ` (thanatos) |  |
 | 12 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 64 | 193 | Heb 9:15 | `θανατου` (thanatou) |  |
-| 13 | all_source | `god_g` `θεοσ` (theos; English: God) | God | -66 | 199 | Acts 10:38 | `θεοσ` (theos) |  |
+| 13 | all_source | `god_g` `θεοσ` (theos; English: God) | God | -66 | 199 | Acts 10:38 | `θεοσ` (theos; English: God) |  |
 | 14 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 72 | 217 | Heb 9:15 | `θανατου` (thanatou) |  |
 | 15 | multi_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 3 | 10 | Rev 21:8 | `θανατοσ` (thanatos) |  |
 | 16 | multi_source | `son_g` `υιοσ` (huios; English: Son) | Son | -5 | 16 | John 1:42 | `υιοσ` (huios; English: son) |  |
@@ -63,13 +63,13 @@ It is a triage aid, not a claim-grade filter.
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
 | 1 | all_source | `lud_g` `λουδ` (loud; English: Lud) | Lud | -2 | 7 | Phil 2:7 | `δουλου` (doulou) |  |
-| 2 | all_source | `javan_g` `ιωυαν` (iouan; English: Javan) | Javan | -2 | 9 | 1Pet 5:13 | `βαβυλωνι` (babuloni) |  |
+| 2 | all_source | `javan_g` `ιωυαν` (Iouan; English: Javan) | Javan | -2 | 9 | 1Pet 5:13 | `βαβυλωνι` (babuloni) |  |
 | 3 | all_source | `obal_g` `ευαλ` (eual; English: Obal) | Obal | -3 | 10 | 1Tim 5:14 | `βουλομαι` (boulomai) |  |
-| 4 | all_source | `zion_g` `σιων` (sion; English: Zion) | Zion | 3 | 10 | Acts 7:12 | `ιακωβ` (iakob) |  |
+| 4 | all_source | `zion_g` `σιων` (Sion; English: Zion) | Zion | 3 | 10 | Acts 7:12 | `ιακωβ` (iakob) |  |
 | 5 | all_source | `eber_g` `εβερ` (eber; English: Eber) | Eber | 4 | 13 | Luke 22:42 | `βουλει` (boulei) |  |
 | 6 | all_source | `obal_g` `ευαλ` (eual; English: Obal) | Obal | 4 | 13 | Luke 3:27 | `σαλαθιηλ` (salathiel) |  |
 | 7 | all_source | `china_g` `κινα` (kina; English: China) | China | -4 | 13 | Mark 12:3 | `εδειραν` (edeiran) |  |
-| 8 | all_source | `shelah_g` `σαλα` (sala; English: Shelah) | Shelah | 4 | 13 | Matt 4:15 | `ζαβουλων` (zaboulon) |  |
+| 8 | all_source | `shelah_g` `σαλα` (Sala; English: Shelah) | Shelah | 4 | 13 | Matt 4:15 | `ζαβουλων` (zaboulon) |  |
 | 9 | all_source | `seba_g` `σαβα` (saba; English: Seba) | Seba | 5 | 16 | 2Pet 1:10 | `σπουδασατε` (spoudasate) |  |
 | 10 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | 6 | 19 | John 7:6 | `ιησουσ` (Iesous; English: Jesus/Joshua) |  |
 | 11 | all_source | `seba_g` `σαβα` (saba; English: Seba) | Seba | -6 | 19 | Luke 10:22 | `βουληται` (bouletai) |  |
@@ -80,8 +80,8 @@ It is a triage aid, not a claim-grade filter.
 | 16 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | 7 | 22 | Acts 7:11 | `θλιψισ` (thlipsis) |  |
 | 17 | all_source | `eber_g` `εβερ` (eber; English: Eber) | Eber | 7 | 22 | Matt 1:17 | `βαβυλωνοσ` (babulonos) |  |
 | 18 | all_source | `china_g` `κινα` (kina; English: China) | China | -7 | 22 | Rev 6:8 | `θανατοσ` (thanatos) |  |
-| 19 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | 8 | 25 | 1John 2:22 | `χριστοσ` (christos) |  |
-| 20 | all_source | `shelah_g` `σαλα` (sala; English: Shelah) | Shelah | 9 | 28 | Rev 18:10 | `βαβυλων` (babulon) |  |
+| 19 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | 8 | 25 | 1John 2:22 | `χριστοσ` (Christos; English: Christ) |  |
+| 20 | all_source | `shelah_g` `σαλα` (Sala; English: Shelah) | Shelah | 9 | 28 | Rev 18:10 | `βαβυλων` (babulon) |  |
 
 ### center_verse_exact
 
@@ -97,7 +97,7 @@ It is a triage aid, not a claim-grade filter.
 | 8 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -3 | 10 | Rev 2:10 | `στεφανον` (stephanon) |  |
 | 9 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -4 | 13 | 1Cor 9:22 | `τοισ` (tois) |  |
 | 10 | all_source | `god_g` `θεοσ` (theos; English: God) | God | 4 | 13 | 1John 4:9 | `εισ` (eis) |  |
-| 11 | all_source | `zion_g` `σιων` (sion; English: Zion) | Zion | -4 | 13 | Acts 19:34 | `επι` (epi) |  |
+| 11 | all_source | `zion_g` `σιων` (Sion; English: Zion) | Zion | -4 | 13 | Acts 19:34 | `επι` (epi) |  |
 | 12 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | -4 | 13 | Col 1:11 | `δυναμουμενοι` (dunamoumenoi) |  |
 | 13 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | -4 | 13 | Col 1:11 | `δυναμουμενοι` (dunamoumenoi) |  |
 | 14 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | 4 | 13 | Gal 4:7 | `ει` (ei) |  |
@@ -162,23 +162,23 @@ It is a triage aid, not a claim-grade filter.
 
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | all_source | `shelah_g` `σαλα` (sala; English: Shelah) | Shelah | 2 | 7 | Acts 7:42 | `ισραηλ` (israel) |  |
+| 1 | all_source | `shelah_g` `σαλα` (Sala; English: Shelah) | Shelah | 2 | 7 | Acts 7:42 | `ισραηλ` (israel) |  |
 | 2 | all_source | `adam_g` `αδαμ` (adam; English: Adam) | Adam | 2 | 7 | Gal 4:27 | `ανδρα` (andra) |  |
 | 3 | all_source | `temple_g` `ναοσ` (naos; English: Temple) | Temple | -3 | 10 | Heb 10:30 | `οιδαμεν` (oidamen) |  |
 | 4 | all_source | `temple_g` `ναοσ` (naos; English: Temple) | Temple | -3 | 10 | Heb 7:16 | `ου` (ou) |  |
 | 5 | all_source | `gomer_g` `γαμερ` (gamer; English: Gomer) | Gomer | -3 | 13 | 2Cor 10:3 | `στρατευομεθα` (strateuometha) |  |
 | 6 | all_source | `vance_g` `βανσ` (bans; English: Vance) | Vance | -4 | 13 | 1Thess 5:19 | `πνευμα` (pneuma) |  |
-| 7 | all_source | `shelah_g` `σαλα` (sala; English: Shelah) | Shelah | 4 | 13 | 2Cor 1:13 | `αλλα` (alla) |  |
+| 7 | all_source | `shelah_g` `σαλα` (Sala; English: Shelah) | Shelah | 4 | 13 | 2Cor 1:13 | `αλλα` (alla) |  |
 | 8 | all_source | `aram_g` `αραμ` (aram; English: Aram) | Aram | 4 | 13 | Acts 13:35 | `διαφθοραν` (diaphthoran) |  |
-| 9 | all_source | `shelah_g` `σαλα` (sala; English: Shelah) | Shelah | 4 | 13 | Acts 15:11 | `αλλα` (alla) |  |
+| 9 | all_source | `shelah_g` `σαλα` (Sala; English: Shelah) | Shelah | 4 | 13 | Acts 15:11 | `αλλα` (alla) |  |
 | 10 | all_source | `china_g` `κινα` (kina; English: China) | China | -4 | 13 | Gal 6:15 | `κτισισ` (ktisis) |  |
 | 11 | all_source | `obal_g` `ευαλ` (eual; English: Obal) | Obal | -4 | 13 | Heb 10:30 | `αυτου` (autou) |  |
 | 12 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | 4 | 13 | John 6:25 | `ευροντεσ` (eurontes) |  |
 | 13 | all_source | `obal_g` `ευαλ` (eual; English: Obal) | Obal | -4 | 13 | Matt 12:26 | `αυτου` (autou) |  |
-| 14 | all_source | `shelah_g` `σαλα` (sala; English: Shelah) | Shelah | 4 | 13 | Rev 21:17 | `αγγελου` (aggelou) |  |
+| 14 | all_source | `shelah_g` `σαλα` (Sala; English: Shelah) | Shelah | 4 | 13 | Rev 21:17 | `αγγελου` (aggelou) |  |
 | 15 | all_source | `aram_g` `αραμ` (aram; English: Aram) | Aram | 5 | 16 | 1Cor 15:3 | `παρεδωκα` (paredoka) |  |
 | 16 | all_source | `aram_g` `αραμ` (aram; English: Aram) | Aram | -5 | 16 | 2Cor 4:16 | `ημερα` (emera) |  |
-| 17 | all_source | `elam_g` `ελαμ` (elam; English: Elam) | Elam | 5 | 16 | Acts 24:25 | `μετακαλεσομαι` (metakalesomai) |  |
+| 17 | all_source | `elam_g` `ελαμ` (Elam; English: Elam) | Elam | 5 | 16 | Acts 24:25 | `μετακαλεσομαι` (metakalesomai) |  |
 | 18 | all_source | `lasha_g` `δασα` (dasa; English: Lasha) | Lasha | -5 | 16 | Col 2:20 | `δογματιζεσθε` (dogmatizesthe) |  |
 | 19 | all_source | `seba_g` `σαβα` (saba; English: Seba) | Seba | -5 | 16 | Gal 4:6 | `αββα` (abba) |  |
 | 20 | all_source | `china_g` `κινα` (kina; English: China) | China | 5 | 16 | Heb 10:3 | `ενιαυτον` (eniauton) |  |
@@ -187,13 +187,13 @@ It is a triage aid, not a claim-grade filter.
 
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | all_source | `shelah_g` `σαλα` (sala; English: Shelah) | Shelah | 2 | 7 | 1Cor 10:18 | `ισραηλ` (israel) |  |
+| 1 | all_source | `shelah_g` `σαλα` (Sala; English: Shelah) | Shelah | 2 | 7 | 1Cor 10:18 | `ισραηλ` (israel) |  |
 | 2 | all_source | `amen_g` `αμην` (amen; English: Amen) | Amen | 2 | 7 | 1Cor 1:10 | `μη` (me) |  |
 | 3 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | 2 | 7 | 1Cor 5:12 | `τουσ` (tous) |  |
 | 4 | all_source | `levi_g` `λευι` (leui; English: Levi) | Levi | -2 | 7 | 1Cor 6:10 | `ουτε` (oute) |  |
 | 5 | all_source | `levi_g` `λευι` (leui; English: Levi) | Levi | -2 | 7 | 1Cor 6:10 | `ουτε` (oute) |  |
 | 6 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | -2 | 7 | 1Cor 6:8 | `υμεισ` (umeis) |  |
-| 7 | all_source | `elam_g` `ελαμ` (elam; English: Elam) | Elam | 2 | 7 | 1Cor 6:8 | `αλλα` (alla) |  |
+| 7 | all_source | `elam_g` `ελαμ` (Elam; English: Elam) | Elam | 2 | 7 | 1Cor 6:8 | `αλλα` (alla) |  |
 | 8 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | -2 | 7 | 1Cor 6:8 | `υμεισ` (umeis) |  |
 | 9 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | -2 | 7 | 1Cor 9:15 | `μοι` (moi) |  |
 | 10 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | -2 | 7 | 1Cor 9:15 | `μοι` (moi) |  |
@@ -201,7 +201,7 @@ It is a triage aid, not a claim-grade filter.
 | 12 | all_source | `lasha_g` `δασα` (dasa; English: Lasha) | Lasha | 2 | 7 | 1John 2:18 | `εσχατη` (eschate) |  |
 | 13 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | 2 | 7 | 1John 2:8 | `υμιν` (umin) |  |
 | 14 | all_source | `hell_hades_g` `αδησ` (ades; English: Hades) | Hades | -2 | 7 | 1Pet 1:13 | `τησ` (tes) |  |
-| 15 | all_source | `zion_g` `σιων` (sion; English: Zion) | Zion | -2 | 7 | 1Pet 2:7 | `γωνιασ` (gonias) |  |
+| 15 | all_source | `zion_g` `σιων` (Sion; English: Zion) | Zion | -2 | 7 | 1Pet 2:7 | `γωνιασ` (gonias) |  |
 | 16 | all_source | `lasha_g` `δασα` (dasa; English: Lasha) | Lasha | -2 | 7 | 1Pet 3:15 | `καρδιαισ` (kardiais) |  |
 | 17 | all_source | `obal_g` `ευαλ` (eual; English: Obal) | Obal | -2 | 7 | 1Pet 3:21 | `συνειδησεωσ` (suneideseos) |  |
 | 18 | all_source | `temple_g` `ναοσ` (naos; English: Temple) | Temple | 2 | 7 | 1Pet 3:6 | `καλουσα` (kalousa) |  |

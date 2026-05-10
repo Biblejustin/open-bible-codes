@@ -47,4 +47,4 @@ class ApocryphaBridgeControlsTests(unittest.TestCase):
             )
             text = out.read_text(encoding="utf-8")
 
-        self.assertIn("`ναοσ` (naos)", text)
+        self.assertIn("`ναοσ` (naos; English: temple)", text)

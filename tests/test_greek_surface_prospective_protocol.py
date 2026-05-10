@@ -122,5 +122,5 @@ def test_preflight_artifact_uses_payload_path_with_default_fallback() -> None:
 def test_surface_report_term_display_adds_transliteration_and_english() -> None:
     assert (
         display_report_term({"normalized_term": "σιων", "concept": "Zion"})
-        == "`σιων` (sion; English: Zion)"
+        == "`σιων` (Sion; English: Zion)"
     )

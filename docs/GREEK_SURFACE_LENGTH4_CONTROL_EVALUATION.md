@@ -16,7 +16,7 @@ Matched controls per target range from 14 to 14. The best possible add-one empir
 | `χουσ` (chous; English: Cush) | Cush | 1 | 0 | 0.066667 | 0.066667 | target exceeds matched controls, but small control pool is not significant |
 | `δασα` (dasa; English: Lasha) | Lasha | 2 | 0 | 0.066667 | 0.066667 | target exceeds matched controls, but small control pool is not significant |
 | `σαβα` (saba; English: Seba) | Seba | 1 | 0 | 0.066667 | 0.066667 | target exceeds matched controls, but small control pool is not significant |
-| `σιων` (sion; English: Zion) | Zion | 4 | 0 | 0.066667 | 0.066667 | target exceeds matched controls, but small control pool is not significant |
+| `σιων` (Sion; English: Zion) | Zion | 4 | 0 | 0.066667 | 0.066667 | target exceeds matched controls, but small control pool is not significant |
 
 ## Read
 

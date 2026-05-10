@@ -71,7 +71,7 @@ same-skip extension is an added review feature, not a requirement.
 | 76 | hebrew_theology | `center_verse_same_category` | `אהבה` (hbh; English: Love) | UXLC | `after_match` | `יבל` (ybl) | `word` | 1 | יָבָ֑ל |
 | 39 | greek_screening | `span_same_category` | `γαμερ` (gamer; English: Gomer) | TR_NT | `before_match` | `αο` (ao) | `phrase_2` | 3 | Ἃ ὁ; ἃ ὁ |
 | 22 | greek_screening | `center_word_exact` | `νατο` (nato; English: NATO) | TR_NT | `after_match` | `οο` (oo) | `phrase_2` | 2 | ὃ ὁ |
-| 26 | greek_screening | `center_word_same_category` | `ιωυαν` (iouan; English: Javan) | TR_NT | `after_match` | `ηα` (ea) | `phrase_2` | 2 | ἢ ἃ; Ἢ ἃ |
+| 26 | greek_screening | `center_word_same_category` | `ιωυαν` (Iouan; English: Javan) | TR_NT | `after_match` | `ηα` (ea) | `phrase_2` | 2 | ἢ ἃ; Ἢ ἃ |
 | 66 | hebrew_screening | `span_same_category` | `תתתתתכז` (tttttkz; English: Gregorian 2027 additive) | UXLC | `after_match` | `שה` (shh) | `word` | 24 | שֶׂ֣ה; שֶׂה־; שֶׂ֥ה; שֶׂ֔ה; שֶׂ֖ה |
 | 47 | hebrew_screening | `center_word_same_concept` | `רומא` (rwm; English: Rome) | UXLC | `after_match` | `לי` (ly) | `word` | 749 | לִּ֥י; לִ֤י; לִ֣י; לִּ֑י; לִּ֔י |
 | 59 | hebrew_screening | `center_verse_same_category` | `טימותי` (tymwty; English: Timothy) | UXLC | `after_match` | `או` (w) | `word` | 321 | א֥וֹ; אוֹ־; א֣וֹ; א֚וֹ; א֖וֹ |
@@ -84,10 +84,10 @@ same-skip extension is an added review feature, not a requirement.
 | 20 | english_screening | `hidden_path_only` | `cush` | KJV | `before_match` | `ur` | `word` | 5 | Ur; Ur, |
 | 13 | english_screening | `span_exact` | `lord` | KJV | `after_match` | `ho` | `word` | 4 | Ho,; ho, |
 | 14 | english_screening | `span_exact` | `lord` | KJV | `after_match` | `ho` | `word` | 4 | Ho,; ho, |
-| 55 | hebrew_screening | `center_verse_same_concept` | `רומי` (rwmy; English: Rome) | UXLC | `before_match` | `תו` (tw) | `word` | 1 | תָּ֜ו |
+| 55 | hebrew_screening | `center_verse_same_concept` | `רומי` (rwmy; English: Rome) | UXLC | `before_match` | `תו` (tav; English: mark/sign) | `word` | 1 | תָּ֜ו |
 | 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | TR_NT | `after_match` | `ηρ` (er) | `word` | 1 | Ἤρ |
-| 37 | greek_screening | `span_same_category` | `σαλα` (sala; English: Shelah) | SBLGNT | `after_match` | `α` (a) | `word` | 117 | ἃ; ⸂ἃ; ⸀ἃ; Ἃ; ἅ |
-| 40 | greek_screening | `hidden_path_only` | `σαλα` (sala; English: Shelah) | SBLGNT | `after_match` | `α` (a) | `word` | 117 | ἃ; ⸂ἃ; ⸀ἃ; Ἃ; ἅ |
+| 37 | greek_screening | `span_same_category` | `σαλα` (Sala; English: Shelah) | SBLGNT | `after_match` | `α` (a) | `word` | 117 | ἃ; ⸂ἃ; ⸀ἃ; Ἃ; ἅ |
+| 40 | greek_screening | `hidden_path_only` | `σαλα` (Sala; English: Shelah) | SBLGNT | `after_match` | `α` (a) | `word` | 117 | ἃ; ⸂ἃ; ⸀ἃ; Ἃ; ἅ |
 | 23 | greek_screening | `center_word_exact` | `ναοσ` (naos; English: Temple) | SBLGNT | `after_match` | `α` (a) | `word` | 117 | ἃ; ⸂ἃ; ⸀ἃ; Ἃ; ἅ |
 | 32 | greek_screening | `center_verse_same_category` | `κινα` (kina; English: China) | SBLGNT | `after_match` | `α` (a) | `word` | 117 | ἃ; ⸂ἃ; ⸀ἃ; Ἃ; ἅ |
 | 33 | greek_screening | `center_verse_same_category` | `ελκη` (elke; English: Boils) | SBLGNT | `after_match` | `α` (a) | `word` | 117 | ἃ; ⸂ἃ; ⸀ἃ; Ἃ; ἅ |

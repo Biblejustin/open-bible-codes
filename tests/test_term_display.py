@@ -7,6 +7,12 @@ class TermDisplayTests(unittest.TestCase):
     def test_displays_known_greek_term_with_gloss(self) -> None:
         self.assertEqual(display_term("γωγ"), "`γωγ` (Gog; English: Gog)")
 
+    def test_displays_common_greek_report_term_with_gloss(self) -> None:
+        self.assertEqual(display_term("αιμα"), "`αιμα` (haima; English: blood)")
+
+    def test_displays_common_hebrew_report_term_with_gloss(self) -> None:
+        self.assertEqual(display_term("בבל"), "`בבל` (Bavel; English: Babylon)")
+
     def test_displays_known_hebrew_term_with_diacritics(self) -> None:
         self.assertEqual(display_term("יֵשׁ֤וּעַ"), "`יֵשׁ֤וּעַ` (Yeshua; English: Yeshua/Jeshua)")
 
