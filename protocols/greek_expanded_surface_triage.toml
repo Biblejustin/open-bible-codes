@@ -20,6 +20,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_greek_expanded_surface_triage.py",
+  "els/term_display.py",
   "terms/greek_expanded_prospective_terms.csv",
   "reports/greek_expanded_surface_queue/surface_patterns.csv",
   "reports/greek_expanded_surface_queue/term_summary.csv",

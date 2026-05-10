@@ -43,10 +43,10 @@ separate prospective study registers them in advance.
 | `αμην` (amen; English: Amen) | Amen | 4 | Acts 22:28 | 14 | forward | 1 | TR_NT:`Παῦλος` (paulos); BYZ_NT:`παυλοσ` (paulos); TCG_NT:`Παῦλος` (paulos); SBLGNT:`Παῦλος` (paulos) |
 | `αμην` (amen; English: Amen) | Amen | 4 | Luke 21:32 | 17 | forward | 1 | TR_NT:`μὴ` (me); BYZ_NT:`μη` (me); TCG_NT:`μὴ` (me); SBLGNT:`μὴ` (me) |
 | `αμην` (amen; English: Amen) | Amen | 4 | Matt 18:18 | 19 | forward | 1 | TR_NT:`δήσητε` (desete); BYZ_NT:`δησητε` (desete); TCG_NT:`δήσητε` (desete); SBLGNT:`δήσητε` (desete) |
-| `σιων` (sion; English: Zion) | Zion | 4 | 1Pet 2:6 | -25 | backward | 2 | TR_NT:`καταισχυνθῇ` (kataischunthe); BYZ_NT:`καταισχυνθη` (kataischunthe); TCG_NT:`καταισχυνθῇ.` (kataischunthe); SBLGNT:`καταισχυνθῇ.` (kataischunthe) |
-| `σιων` (sion; English: Zion) | Zion | 4 | Acts 19:34 | -4 | backward | 2 | TR_NT:`ἐπὶ` (epi); BYZ_NT:`επι` (epi); TCG_NT:`ἐπὶ` (epi); SBLGNT:`ἐπὶ` (epi) |
-| `σιων` (sion; English: Zion) | Zion | 4 | Matt 21:5 | 6 | forward | 2 | TR_NT:`ἐπιβεβηκὼς` (epibebekos); BYZ_NT:`επιβεβηκωσ` (epibebekos); TCG_NT:`ἐπιβεβηκὼς` (epibebekos); SBLGNT:`ἐπιβεβηκὼς` (epibebekos) |
-| `σιων` (sion; English: Zion) | Zion | 4 | Rev 14:20 | 9 | forward | 2 | TR_NT:`χαλινῶν` (chalinon); BYZ_NT:`χαλινων` (chalinon); TCG_NT:`χαλινῶν` (chalinon); SBLGNT:`χαλινῶν` (chalinon) |
+| `σιων` (Sion; English: Zion) | Zion | 4 | 1Pet 2:6 | -25 | backward | 2 | TR_NT:`καταισχυνθῇ` (kataischunthe); BYZ_NT:`καταισχυνθη` (kataischunthe); TCG_NT:`καταισχυνθῇ.` (kataischunthe); SBLGNT:`καταισχυνθῇ.` (kataischunthe) |
+| `σιων` (Sion; English: Zion) | Zion | 4 | Acts 19:34 | -4 | backward | 2 | TR_NT:`ἐπὶ` (epi); BYZ_NT:`επι` (epi); TCG_NT:`ἐπὶ` (epi); SBLGNT:`ἐπὶ` (epi) |
+| `σιων` (Sion; English: Zion) | Zion | 4 | Matt 21:5 | 6 | forward | 2 | TR_NT:`ἐπιβεβηκὼς` (epibebekos); BYZ_NT:`επιβεβηκωσ` (epibebekos); TCG_NT:`ἐπιβεβηκὼς` (epibebekos); SBLGNT:`ἐπιβεβηκὼς` (epibebekos) |
+| `σιων` (Sion; English: Zion) | Zion | 4 | Rev 14:20 | 9 | forward | 2 | TR_NT:`χαλινῶν` (chalinon); BYZ_NT:`χαλινων` (chalinon); TCG_NT:`χαλινῶν` (chalinon); SBLGNT:`χαλινῶν` (chalinon) |
 | `αραμ` (aram; English: Aram) | Aram | 4 | Phil 2:1 | -12 | backward | 3 | TR_NT:`παράκλησις` (paraklesis); BYZ_NT:`παρακλησισ` (paraklesis); TCG_NT:`παράκλησις` (paraklesis); SBLGNT:`παράκλησις` (paraklesis) |
 | `αραμ` (aram; English: Aram) | Aram | 4 | John 11:19 | -10 | backward | 3 | TR_NT:`ἵνα` (ina); BYZ_NT:`ινα` (ina); TCG_NT:`ἵνα` (ina); SBLGNT:`ἵνα` (ina) |
 | `αραμ` (aram; English: Aram) | Aram | 4 | 1Cor 16:6 | 24 | forward | 3 | TR_NT:`ὑμᾶς` (umas); BYZ_NT:`υμασ` (umas); TCG_NT:`ὑμᾶς` (umas); SBLGNT:`ὑμᾶς` (umas) |
@@ -68,7 +68,7 @@ separate prospective study registers them in advance.
 
 ## Read
 
-This creates a smaller review queue: `αμην` (amen; English: Amen), `αραμ` (aram; English: Aram), `ασηρ` (aser; English: Asher), `δασα` (dasa; English: Lasha), `σαβα` (saba; English: Seba), `σιων` (sion; English: Zion), `χουσ` (chous; English: Cush).
+This creates a smaller review queue: `αμην` (amen; English: Amen), `αραμ` (aram; English: Aram), `ασηρ` (aser; English: Asher), `δασα` (dasa; English: Lasha), `σαβα` (saba; English: Seba), `σιων` (Sion; English: Zion), `χουσ` (chous; English: Cush).
 It is not a claim-grade result. The next statistically honest control
 compares these rows against real Greek terms matched by length and
 surface frequency, not against random strings that cannot satisfy the

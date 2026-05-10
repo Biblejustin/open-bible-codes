@@ -65,6 +65,17 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("all_codes_followup_extensions", steps_by_id)
         self.assertIn("all_codes_compound_extension_controls", steps_by_id)
         self.assertIn("all_codes_followup_review", steps_by_id)
+        for step_id in [
+            "greek_expanded_surface_queue",
+            "greek_expanded_surface_triage",
+            "greek_expanded_surface_control_pool",
+            "greek_expanded_surface_control_evaluation",
+            "greek_expanded_surface_available_control_evaluation",
+            "greek_expanded_surface_followup",
+            "greek_surface_length4_followup",
+            "greek_surface_length4_vocabulary_controls",
+        ]:
+            self.assertIn("els/term_display.py", steps_by_id[step_id]["inputs"])
         self.assertIn(
             "reports/centered_occurrence_index/presence_summary.csv",
             steps_by_id["real_report_summary"]["inputs"],

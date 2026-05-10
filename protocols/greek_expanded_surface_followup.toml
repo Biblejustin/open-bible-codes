@@ -19,6 +19,7 @@ argv = [
 ]
 inputs = [
   "scripts/build_greek_surface_followup_report.py",
+  "els/term_display.py",
   "reports/greek_expanded_surface_triage/selected_patterns.csv",
   "reports/greek_expanded_surface_letter_paths/path_summary.csv",
   "reports/greek_expanded_surface_letter_paths/protocol_run.manifest.json",

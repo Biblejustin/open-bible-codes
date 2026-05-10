@@ -357,6 +357,7 @@ argv = ["-m", "scripts.run_protocol", "protocols/greek_expanded_surface_queue.to
 inputs = [
   "protocols/greek_expanded_surface_queue.toml",
   "scripts/analyze_greek_expanded_surface_queue.py",
+  "els/term_display.py",
   "reports/greek_expanded_prospective_exact_center/surface_context_hits.csv",
 ]
 outputs = ["reports/greek_expanded_surface_queue/protocol_run.manifest.json"]
@@ -368,6 +369,7 @@ argv = ["-m", "scripts.run_protocol", "protocols/greek_expanded_surface_triage.t
 inputs = [
   "protocols/greek_expanded_surface_triage.toml",
   "scripts/analyze_greek_expanded_surface_triage.py",
+  "els/term_display.py",
   "terms/greek_expanded_prospective_terms.csv",
   "reports/greek_expanded_surface_queue/surface_patterns.csv",
   "reports/greek_expanded_surface_queue/term_summary.csv",
@@ -397,6 +399,7 @@ argv = ["-m", "scripts.run_protocol", "protocols/greek_expanded_surface_control_
 inputs = [
   "protocols/greek_expanded_surface_control_pool.toml",
   "scripts/analyze_greek_surface_control_pool.py",
+  "els/term_display.py",
   "terms/greek_expanded_prospective_terms.csv",
   "reports/greek_expanded_surface_triage/selected_patterns.csv",
   "configs/example_ebible_grctr.toml",
@@ -413,6 +416,7 @@ argv = ["-m", "scripts.run_protocol", "protocols/greek_expanded_surface_control_
 inputs = [
   "protocols/greek_expanded_surface_control_evaluation.toml",
   "scripts/analyze_greek_surface_control_evaluation.py",
+  "els/term_display.py",
   "reports/greek_expanded_surface_triage/term_cohort.csv",
   "reports/greek_expanded_surface_control_pool/matched_controls.csv",
 ]
@@ -426,6 +430,7 @@ inputs = [
   "protocols/greek_expanded_surface_available_control_evaluation.toml",
   "scripts/analyze_greek_surface_control_pool.py",
   "scripts/analyze_greek_surface_control_evaluation.py",
+  "els/term_display.py",
   "terms/greek_expanded_prospective_terms.csv",
   "reports/greek_expanded_surface_triage/selected_patterns.csv",
   "reports/greek_expanded_surface_triage/term_cohort.csv",
@@ -439,6 +444,7 @@ argv = ["-m", "scripts.run_protocol", "protocols/greek_expanded_surface_followup
 inputs = [
   "protocols/greek_expanded_surface_followup.toml",
   "scripts/build_greek_surface_followup_report.py",
+  "els/term_display.py",
   "reports/greek_expanded_surface_triage/selected_patterns.csv",
   "reports/greek_expanded_surface_letter_paths/path_summary.csv",
   "reports/greek_expanded_surface_letter_paths/protocol_run.manifest.json",
@@ -475,6 +481,7 @@ inputs = [
   "scripts/analyze_greek_expanded_surface_triage.py",
   "scripts/analyze_greek_surface_control_pool.py",
   "scripts/analyze_greek_surface_control_evaluation.py",
+  "els/term_display.py",
   "reports/greek_surface_length4_followup/selected_patterns.csv",
   "terms/greek_surface_prospective_terms.csv",
 ]

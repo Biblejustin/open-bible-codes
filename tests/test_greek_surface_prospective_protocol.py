@@ -124,3 +124,27 @@ def test_surface_report_term_display_adds_transliteration_and_english() -> None:
         display_report_term({"normalized_term": "σιων", "concept": "Zion"})
         == "`σιων` (Sion; English: Zion)"
     )
+
+
+def test_report_steps_track_term_display_dependency() -> None:
+    protocol = load_protocol(PROTOCOL)
+    length4 = load_protocol(LENGTH4_PROTOCOL)
+    vocab = load_protocol(LENGTH4_VOCAB_PROTOCOL)
+
+    checked_steps = [
+        (protocol, "surface_queue"),
+        (protocol, "surface_triage"),
+        (protocol, "available_control_pool"),
+        (protocol, "available_control_evaluation"),
+        (protocol, "letter_paths"),
+        (protocol, "prospective_report"),
+        (length4, "length4_triage"),
+        (length4, "available_control_evaluation"),
+        (vocab, "surface_queue"),
+        (vocab, "surface_cohort"),
+        (vocab, "vocabulary_control_evaluation"),
+    ]
+
+    for current_protocol, step_id in checked_steps:
+        step = next(step for step in current_protocol["steps"] if step["id"] == step_id)
+        assert "els/term_display.py" in step["inputs"], step_id

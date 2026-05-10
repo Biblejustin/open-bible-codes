@@ -72,3 +72,22 @@ def test_display_report_term_adds_transliteration_and_english() -> None:
     )
 
     assert text == "`αμην` (amen; English: Amen)"
+
+
+def test_report_keeps_volatile_protocol_timing_out_of_tracked_markdown() -> None:
+    text = report.build_report(
+        surface_rows=[],
+        pattern_rows=[],
+        protocol_manifest={
+            "started_utc": "2026-05-10T18:54:18+00:00",
+            "ended_utc": "2026-05-10T18:54:19+00:00",
+            "duration_seconds": "1.234",
+            "status": "success",
+        },
+        commit="abc123",
+    )
+
+    assert "2026-05-10T18:54:18+00:00" not in text
+    assert "1.234s" not in text
+    assert "| Runtime | recorded in local manifest only |" in text
+    assert "| Status | success |" in text

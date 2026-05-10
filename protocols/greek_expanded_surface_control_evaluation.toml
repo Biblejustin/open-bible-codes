@@ -18,6 +18,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_greek_surface_control_evaluation.py",
+  "els/term_display.py",
   "reports/greek_expanded_surface_triage/term_cohort.csv",
   "reports/greek_expanded_surface_control_pool/matched_controls.csv",
 ]

@@ -89,6 +89,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_greek_expanded_surface_queue.py",
+  "els/term_display.py",
   "reports/greek_surface_length4_vocab_controls/surface_context_hits.csv",
 ]
 outputs = [
@@ -117,6 +118,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_greek_expanded_surface_triage.py",
+  "els/term_display.py",
   "reports/greek_surface_length4_vocab_controls/terms.csv",
   "reports/greek_surface_length4_vocab_controls/surface_patterns.csv",
   "reports/greek_surface_length4_vocab_controls/term_summary.csv",
@@ -175,6 +177,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_greek_surface_control_evaluation.py",
+  "els/term_display.py",
   "reports/greek_surface_length4_vocab_controls/term_cohort.csv",
   "reports/greek_surface_length4_vocab_controls/matched_controls.csv",
 ]

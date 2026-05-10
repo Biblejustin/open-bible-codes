@@ -13,10 +13,13 @@ This report records the first run after
 | Local report build commit | recorded in local manifest only |
 | Command | `python3 -m scripts.run_protocol protocols/greek_expanded_prospective_exact_center.toml --resume` |
 | Protocol | `protocols/greek_expanded_prospective_exact_center.toml` |
-| Started UTC | `2026-05-05T23:59:36.462848+00:00` |
-| Ended UTC | `2026-05-06T00:00:01.087331+00:00` |
-| Runtime | 24.624s |
+| Started UTC | recorded in local manifest only |
+| Ended UTC | recorded in local manifest only |
+| Runtime | recorded in local manifest only |
 | Status | success |
+
+Volatile completion timestamps and runtimes are recorded in the local
+ignored manifests, not in tracked Markdown.
 
 For resumed protocol runs, this subreport can remain cached. The build
 commit is recorded in the local manifest; top-level
@@ -51,23 +54,23 @@ Top exact-center surface terms:
 | --- | --- | --- | ---: |
 | BYZ_NT | `αμην` (amen; English: Amen) | Amen | 26 |
 | BYZ_NT | `δασα` (dasa; English: Lasha) | Lasha | 10 |
-| BYZ_NT | `σιων` (sion; English: Zion) | Zion | 9 |
+| BYZ_NT | `σιων` (Sion; English: Zion) | Zion | 9 |
 | BYZ_NT | `χουσ` (chous; English: Cush) | Cush | 6 |
 | BYZ_NT | `ασηρ` (aser; English: Asher) | Asher | 4 |
 | SBLGNT | `αμην` (amen; English: Amen) | Amen | 21 |
-| SBLGNT | `σιων` (sion; English: Zion) | Zion | 10 |
+| SBLGNT | `σιων` (Sion; English: Zion) | Zion | 10 |
 | SBLGNT | `δασα` (dasa; English: Lasha) | Lasha | 8 |
 | SBLGNT | `αραμ` (aram; English: Aram) | Aram | 4 |
 | SBLGNT | `χουσ` (chous; English: Cush) | Cush | 4 |
 | TCG_NT | `αμην` (amen; English: Amen) | Amen | 26 |
 | TCG_NT | `δασα` (dasa; English: Lasha) | Lasha | 10 |
-| TCG_NT | `σιων` (sion; English: Zion) | Zion | 10 |
+| TCG_NT | `σιων` (Sion; English: Zion) | Zion | 10 |
 | TCG_NT | `χουσ` (chous; English: Cush) | Cush | 9 |
 | TCG_NT | `αραμ` (aram; English: Aram) | Aram | 4 |
 | TR_NT | `αμην` (amen; English: Amen) | Amen | 28 |
 | TR_NT | `χουσ` (chous; English: Cush) | Cush | 9 |
 | TR_NT | `δασα` (dasa; English: Lasha) | Lasha | 8 |
-| TR_NT | `σιων` (sion; English: Zion) | Zion | 8 |
+| TR_NT | `σιων` (Sion; English: Zion) | Zion | 8 |
 | TR_NT | `ιουδα` (iouda; English: Judah) | Judah | 6 |
 
 ## Phrase-Extension Pattern Matrix

@@ -17,6 +17,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_greek_expanded_surface_queue.py",
+  "els/term_display.py",
   "reports/greek_expanded_prospective_exact_center/surface_context_hits.csv",
 ]
 outputs = [
