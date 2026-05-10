@@ -34,7 +34,7 @@ Total exact-center surface patterns: 161.
 | Term | Concept | Exact-center hits | Unique patterns | All-source | Multi-source | Source-specific | Read |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
 | `αμην` (amen; English: Amen) | Amen | 101 | 44 | 11 | 14 | 19 | all-source surface queue; needs controls before interpretation |
-| `σιων` (sion; English: Zion) | Zion | 37 | 17 | 4 | 5 | 8 | all-source surface queue; needs controls before interpretation |
+| `σιων` (Sion; English: Zion) | Zion | 37 | 17 | 4 | 5 | 8 | all-source surface queue; needs controls before interpretation |
 | `αραμ` (aram; English: Aram) | Aram | 14 | 5 | 3 | 0 | 2 | all-source surface queue; needs controls before interpretation |
 | `δασα` (dasa; English: Lasha) | Lasha | 36 | 21 | 2 | 7 | 12 | all-source surface queue; needs controls before interpretation |
 | `ασηρ` (aser; English: Asher) | Asher | 14 | 5 | 2 | 2 | 1 | all-source surface queue; needs controls before interpretation |
@@ -46,14 +46,14 @@ Total exact-center surface patterns: 161.
 | `ιουδα` (iouda; English: Judah) | Judah | 14 | 7 | 0 | 4 | 3 | multi-source surface queue; inspect source distribution |
 | `λεων` (leon; English: Lion) | Lion | 9 | 5 | 0 | 3 | 2 | multi-source surface queue; inspect source distribution |
 | `αδαμ` (adam; English: Adam) | Adam | 7 | 4 | 0 | 2 | 2 | multi-source surface queue; inspect source distribution |
-| `ελαμ` (elam; English: Elam) | Elam | 6 | 3 | 0 | 2 | 1 | multi-source surface queue; inspect source distribution |
+| `ελαμ` (Elam; English: Elam) | Elam | 6 | 3 | 0 | 2 | 1 | multi-source surface queue; inspect source distribution |
 | `λευι` (leui; English: Levi) | Levi | 6 | 5 | 0 | 1 | 4 | multi-source surface queue; inspect source distribution |
-| `μαρια` (maria; English: Mary) | Mary | 4 | 3 | 0 | 1 | 2 | multi-source surface queue; inspect source distribution |
-| `ελισα` (elisa; English: Elishah) | Elishah | 3 | 2 | 0 | 1 | 1 | multi-source surface queue; inspect source distribution |
+| `μαρια` (Maria; English: Mary) | Mary | 4 | 3 | 0 | 1 | 2 | multi-source surface queue; inspect source distribution |
+| `ελισα` (Elisa; English: Elishah) | Elishah | 3 | 2 | 0 | 1 | 1 | multi-source surface queue; inspect source distribution |
 | `νομοσ` (nomos; English: Law) | Law | 3 | 1 | 0 | 1 | 0 | multi-source surface queue; inspect source distribution |
 | `λουδ` (loud; English: Lud) | Lud | 3 | 1 | 0 | 1 | 0 | multi-source surface queue; inspect source distribution |
 | `πασχα` (pascha; English: Passover) | Passover | 2 | 1 | 0 | 1 | 0 | multi-source surface queue; inspect source distribution |
-| `σαλα` (sala; English: Shelah) | Shelah | 2 | 2 | 0 | 0 | 2 | source-specific surface queue |
+| `σαλα` (Sala; English: Shelah) | Shelah | 2 | 2 | 0 | 0 | 2 | source-specific surface queue |
 | `εικων` (eikon; English: Image) | Image | 1 | 1 | 0 | 0 | 1 | source-specific surface queue |
 | `ισραηλ` (israel; English: Israel) | Israel | 1 | 1 | 0 | 0 | 1 | source-specific surface queue |
 | `ιακωβ` (iakob; English: Jacob) | Jacob | 1 | 1 | 0 | 0 | 1 | source-specific surface queue |
@@ -87,10 +87,10 @@ Total exact-center surface patterns: 161.
 | `ανομια` (anomia; English: Lawlessness) | Matt 7:23 | 20 | forward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`Οὐδέποτε` (oudepote); BYZ_NT:`ουδεποτε` (oudepote); TCG_NT:`Οὐδέποτε` (oudepote); SBLGNT:`Οὐδέποτε` (oudepote) |
 | `σαβα` (saba; English: Seba) | Jas 5:4 | 37 | forward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`θερισάντων` (therisanton); BYZ_NT:`θερισαντων` (therisanton); TCG_NT:`θερισάντων` (therisanton); SBLGNT:`θερισάντων` (therisanton) |
 | `τερασ` (teras; English: Wonder) | Heb 9:11 | -13 | backward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`χειροποιήτου` (cheiropoietou); BYZ_NT:`χειροποιητου` (cheiropoietou); TCG_NT:`χειροποιήτου,` (cheiropoietou); SBLGNT:`χειροποιήτου,` (cheiropoietou) |
-| `σιων` (sion; English: Zion) | 1Pet 2:6 | -25 | backward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`καταισχυνθῇ` (kataischunthe); BYZ_NT:`καταισχυνθη` (kataischunthe); TCG_NT:`καταισχυνθῇ.` (kataischunthe); SBLGNT:`καταισχυνθῇ.` (kataischunthe) |
-| `σιων` (sion; English: Zion) | Acts 19:34 | -4 | backward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`ἐπὶ` (epi); BYZ_NT:`επι` (epi); TCG_NT:`ἐπὶ` (epi); SBLGNT:`ἐπὶ` (epi) |
-| `σιων` (sion; English: Zion) | Matt 21:5 | 6 | forward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`ἐπιβεβηκὼς` (epibebekos); BYZ_NT:`επιβεβηκωσ` (epibebekos); TCG_NT:`ἐπιβεβηκὼς` (epibebekos); SBLGNT:`ἐπιβεβηκὼς` (epibebekos) |
-| `σιων` (sion; English: Zion) | Rev 14:20 | 9 | forward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`χαλινῶν` (chalinon); BYZ_NT:`χαλινων` (chalinon); TCG_NT:`χαλινῶν` (chalinon); SBLGNT:`χαλινῶν` (chalinon) |
+| `σιων` (Sion; English: Zion) | 1Pet 2:6 | -25 | backward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`καταισχυνθῇ` (kataischunthe); BYZ_NT:`καταισχυνθη` (kataischunthe); TCG_NT:`καταισχυνθῇ.` (kataischunthe); SBLGNT:`καταισχυνθῇ.` (kataischunthe) |
+| `σιων` (Sion; English: Zion) | Acts 19:34 | -4 | backward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`ἐπὶ` (epi); BYZ_NT:`επι` (epi); TCG_NT:`ἐπὶ` (epi); SBLGNT:`ἐπὶ` (epi) |
+| `σιων` (Sion; English: Zion) | Matt 21:5 | 6 | forward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`ἐπιβεβηκὼς` (epibebekos); BYZ_NT:`επιβεβηκωσ` (epibebekos); TCG_NT:`ἐπιβεβηκὼς` (epibebekos); SBLGNT:`ἐπιβεβηκὼς` (epibebekos) |
+| `σιων` (Sion; English: Zion) | Rev 14:20 | 9 | forward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`χαλινῶν` (chalinon); BYZ_NT:`χαλινων` (chalinon); TCG_NT:`χαλινῶν` (chalinon); SBLGNT:`χαλινῶν` (chalinon) |
 
 ## Read
 

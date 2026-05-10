@@ -43,7 +43,7 @@ Selected target terms are excluded from the control candidate pool.
 | `ισαακ` (Isaak; English: Isaac) | `ακρισ` (akris; English: Locust) | Locust | 11/11/11/10 | 29 | 29 |
 | `ισαακ` (Isaak; English: Isaac) | `μηδια` (media; English: Media) | Media | 9/9/9/9 | 36 | 36 |
 | `ισαακ` (Isaak; English: Isaac) | `πασχα` (pascha; English: Passover) | Passover | 27/27/27/27 | 36 | 36 |
-| `ισαακ` (Isaak; English: Isaac) | `ελισα` (elisa; English: Elishah) | Elishah | 27/28/28/28 | 39 | 39 |
+| `ισαακ` (Isaak; English: Isaac) | `ελισα` (Elisa; English: Elishah) | Elishah | 27/28/28/28 | 39 | 39 |
 | `ισαακ` (Isaak; English: Isaac) | `νυμφη` (numphe; English: Bride) | Bride | 7/7/7/7 | 44 | 44 |
 | `ισαακ` (Isaak; English: Isaac) | `λιμοσ` (limos; English: Famine) | Famine | 7/7/7/7 | 44 | 44 |
 | `ισαακ` (Isaak; English: Isaac) | `εικων` (eikon; English: Image) | Image | 6/6/6/6 | 48 | 48 |
@@ -62,7 +62,7 @@ Selected target terms are excluded from the control candidate pool.
 | `ισαακ` (Isaak; English: Isaac) | `τυροσ` (turos; English: Tyre) | Tyre | 1/1/1/1 | 68 | 68 |
 | `ισαακ` (Isaak; English: Isaac) | `αζυμα` (azuma; English: Unleavened Bread) | Unleavened Bread | 1/1/1/1 | 68 | 68 |
 | `ισαακ` (Isaak; English: Isaac) | `νομοσ` (nomos; English: Law) | Law | 45/45/45/45 | 108 | 108 |
-| `ισαακ` (Isaak; English: Isaac) | `μαρια` (maria; English: Mary) | Mary | 46/46/46/46 | 112 | 112 |
+| `ισαακ` (Isaak; English: Isaac) | `μαρια` (Maria; English: Mary) | Mary | 46/46/46/46 | 112 | 112 |
 | `ισαακ` (Isaak; English: Isaac) | `ιακωβ` (iakob; English: Jacob) | Jacob | 63/63/63/63 | 180 | 180 |
 | `ισαακ` (Isaak; English: Isaac) | `ιουδα` (iouda; English: Judah) | Judah | 277/277/277/274 | 1033 | 1033 |
 | `ανομια` (anomia; English: Lawlessness) | `σκοτοσ` (skotos; English: Darkness) | Darkness | 13/13/13/13 | 3 | 3 |
@@ -87,19 +87,19 @@ Selected target terms are excluded from the control candidate pool.
 | `ανομια` (anomia; English: Lawlessness) | `εφραιμ` (ephraim; English: Ephraim) | Ephraim | 1/1/1/1 | 45 | 45 |
 | `ανομια` (anomia; English: Lawlessness) | `ιωσιασ` (iosias; English: Josiah) | Josiah | 1/1/1/1 | 45 | 45 |
 | `ανομια` (anomia; English: Lawlessness) | `ανεστη` (aneste; English: He Is Risen) | He Is Risen | 24/24/24/23 | 46 | 46 |
-| `ανομια` (anomia; English: Lawlessness) | `ιουδασ` (ioudas; English: Judas) | Judas | 24/24/24/24 | 47 | 47 |
+| `ανομια` (anomia; English: Lawlessness) | `ιουδασ` (Ioudas; English: Judas) | Judas | 24/24/24/24 | 47 | 47 |
 | `ανομια` (anomia; English: Lawlessness) | `ηρωδησ` (erodes; English: Herod) | Herod | 25/25/25/24 | 50 | 50 |
 | `ανομια` (anomia; English: Lawlessness) | `απαρχη` (aparche; English: Firstfruits) | Firstfruits | 27/27/27/27 | 59 | 59 |
 | `ανομια` (anomia; English: Lawlessness) | `αβρααμ` (abraam; English: Abraham) | Abraham | 69/69/69/69 | 227 | 227 |
 | `ανομια` (anomia; English: Lawlessness) | `ισραηλ` (israel; English: Israel) | Israel | 77/76/76/75 | 255 | 255 |
 | `ανομια` (anomia; English: Lawlessness) | `παυλοσ` (paulos; English: Paul) | Paul | 81/80/80/79 | 271 | 271 |
-| `ανομια` (anomia; English: Lawlessness) | `πετροσ` (petros; English: Peter) | Peter | 104/103/103/100 | 361 | 361 |
+| `ανομια` (anomia; English: Lawlessness) | `πετροσ` (Petros; English: Peter) | Peter | 104/103/103/100 | 361 | 361 |
 | `ανομια` (anomia; English: Lawlessness) | `καρδια` (kardia; English: Heart) | Heart | 151/150/150/148 | 550 | 550 |
 | `τερασ` (teras; English: Wonder) | `νομοσ` (nomos; English: Law) | Law | 45/45/45/45 | 6 | 8 |
-| `τερασ` (teras; English: Wonder) | `μαρια` (maria; English: Mary) | Mary | 46/46/46/46 | 10 | 10 |
+| `τερασ` (teras; English: Wonder) | `μαρια` (Maria; English: Mary) | Mary | 46/46/46/46 | 10 | 10 |
 | `τερασ` (teras; English: Wonder) | `ιωσηφ` (ioseph; English: Joseph) | Joseph | 34/34/34/34 | 38 | 38 |
 | `τερασ` (teras; English: Wonder) | `αστηρ` (aster; English: Star) | Star | 30/30/30/30 | 54 | 54 |
-| `τερασ` (teras; English: Wonder) | `ελισα` (elisa; English: Elishah) | Elishah | 27/28/28/28 | 63 | 63 |
+| `τερασ` (teras; English: Wonder) | `ελισα` (Elisa; English: Elishah) | Elishah | 27/28/28/28 | 63 | 63 |
 | `τερασ` (teras; English: Wonder) | `πασχα` (pascha; English: Passover) | Passover | 27/27/27/27 | 66 | 66 |
 | `τερασ` (teras; English: Wonder) | `κλεισ` (kleis; English: Key) | Key | 25/26/25/24 | 74 | 74 |
 | `τερασ` (teras; English: Wonder) | `βασαν` (basan; English: Bashan) | Bashan | 25/25/25/24 | 75 | 75 |

@@ -54,10 +54,10 @@ Selected target terms are excluded from the control candidate pool.
 | `ανομια` (anomia; English: Lawlessness) | `λυχνοσ` (luchnos; English: Lamp) | Lamp | 6/6/6/6 | 25 | 25 |
 | `ανομια` (anomia; English: Lawlessness) | `θρονοσ` (thronos; English: Throne) | Throne | 6/6/6/6 | 25 | 25 |
 | `τερασ` (teras; English: Wonder) | `νομοσ` (nomos; English: Law) | Law | 45/45/45/45 | 6 | 8 |
-| `τερασ` (teras; English: Wonder) | `μαρια` (maria; English: Mary) | Mary | 46/46/46/46 | 10 | 10 |
+| `τερασ` (teras; English: Wonder) | `μαρια` (Maria; English: Mary) | Mary | 46/46/46/46 | 10 | 10 |
 | `τερασ` (teras; English: Wonder) | `ιωσηφ` (ioseph; English: Joseph) | Joseph | 34/34/34/34 | 38 | 38 |
 | `τερασ` (teras; English: Wonder) | `αστηρ` (aster; English: Star) | Star | 30/30/30/30 | 54 | 54 |
-| `τερασ` (teras; English: Wonder) | `ελισα` (elisa; English: Elishah) | Elishah | 27/28/28/28 | 63 | 63 |
+| `τερασ` (teras; English: Wonder) | `ελισα` (Elisa; English: Elishah) | Elishah | 27/28/28/28 | 63 | 63 |
 | `τερασ` (teras; English: Wonder) | `πασχα` (pascha; English: Passover) | Passover | 27/27/27/27 | 66 | 66 |
 | `τερασ` (teras; English: Wonder) | `κλεισ` (kleis; English: Key) | Key | 25/26/25/24 | 74 | 74 |
 | `τερασ` (teras; English: Wonder) | `βασαν` (basan; English: Bashan) | Bashan | 25/25/25/24 | 75 | 75 |
