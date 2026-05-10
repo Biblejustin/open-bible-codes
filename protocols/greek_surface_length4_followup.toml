@@ -114,6 +114,7 @@ inputs = [
   "configs/example_ebible_grctcgnt.toml",
   "configs/example_sblgnt.toml",
   "els/corpus.py",
+  "els/term_display.py",
 ]
 outputs = [
   "reports/greek_surface_length4_followup/path_summary.csv",

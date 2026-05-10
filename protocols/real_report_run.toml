@@ -381,6 +381,7 @@ argv = ["-m", "scripts.run_protocol", "protocols/greek_expanded_surface_letter_p
 inputs = [
   "protocols/greek_expanded_surface_letter_paths.toml",
   "scripts/analyze_greek_surface_letter_paths.py",
+  "els/term_display.py",
   "reports/greek_expanded_surface_triage/selected_patterns.csv",
   "configs/example_ebible_grctr.toml",
   "configs/example_ebible_grcmt.toml",
@@ -456,6 +457,7 @@ inputs = [
   "scripts/analyze_greek_surface_control_pool.py",
   "scripts/analyze_greek_surface_control_evaluation.py",
   "scripts/analyze_greek_surface_letter_paths.py",
+  "els/term_display.py",
   "terms/greek_surface_prospective_terms.csv",
   "reports/greek_surface_prospective/surface_patterns.csv",
   "reports/greek_surface_prospective/term_summary.csv",

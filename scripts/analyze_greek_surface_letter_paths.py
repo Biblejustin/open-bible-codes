@@ -14,6 +14,7 @@ from typing import Any
 
 from els import __version__
 from els.corpus import Corpus, load_corpus
+from els.term_display import display_term
 
 
 SELECTED_IN = Path("reports/greek_expanded_surface_triage/selected_patterns.csv")
@@ -254,12 +255,12 @@ def write_markdown(
             "| "
             + " | ".join(
                 [
-                    f"`{row['normalized_term']}`",
+                    display_term(row["normalized_term"], english=row.get("concept", "")),
                     row["corpus"],
-                    f"`{row['sequence']}`",
+                    display_term(row["sequence"], english=row.get("concept", "")),
                     row["skip"],
                     row["center_ref"],
-                    f"`{row['center_word']}`",
+                    display_term(row["center_word"]),
                     row["path_refs"],
                 ]
             )
@@ -267,9 +268,13 @@ def write_markdown(
         )
     lines.extend(["", "## Letter Rows", ""])
     for summary in summary_rows:
+        heading_term = display_term(
+            summary["normalized_term"],
+            english=summary.get("concept", ""),
+        )
         lines.extend(
             [
-                f"### `{summary['normalized_term']}` / {summary['corpus']}",
+                f"### {heading_term} / {summary['corpus']}",
                 "",
                 "| # | Offset | Letter | Ref | Word |",
                 "| ---: | ---: | --- | --- | --- |",
@@ -284,9 +289,9 @@ def write_markdown(
                     [
                         row["letter_index"],
                         row["offset"],
-                        f"`{row['letter']}`",
+                        display_term(row["letter"]),
                         row["ref"],
-                        f"`{row['word']}`",
+                        display_term(row["word"]),
                     ]
                 )
                 + " |"

@@ -63,3 +63,27 @@ def test_build_audits_uses_present_corpora_and_offsets() -> None:
     assert len(audits) == 1
     assert audits[0].summary["corpus"] == "TEST"
     assert audits[0].summary["path_offsets"] == "0/2/4"
+
+
+def test_write_markdown_displays_original_language_terms(tmp_path) -> None:
+    audit = paths.audit_row(selected_row(), "TEST", sample_corpus(), 0, 2, 4)
+    out = tmp_path / "letter_paths.md"
+
+    paths.write_markdown(
+        out,
+        [audit.summary],
+        list(audit.letters),
+        args=type(
+            "Args",
+            (),
+            {
+                "title": "Greek Letter Paths",
+                "status": "test",
+                "selected": "selected.csv",
+            },
+        )(),
+    )
+
+    text = out.read_text(encoding="utf-8")
+    assert "`αγε` (age; English: Term)" in text
+    assert "`γδ` (gd)" in text
