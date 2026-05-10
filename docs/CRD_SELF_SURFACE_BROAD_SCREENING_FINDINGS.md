@@ -21,6 +21,7 @@ The input term set combines all committed term CSVs except `terms/crd_placeholde
 - exact center-word density summary: `reports/crd_self_surface/center_word_bible_vs_control_summary.csv`
 - exact center-word review queue: `reports/crd_self_surface/center_word_review_queue.csv`
 - exact center-word review packet: `reports/crd_self_surface/center_word_review_packet.md`
+- exact center-word version presence: `reports/crd_self_surface/center_word_presence.md`
 
 ## Reproduce
 
@@ -33,6 +34,7 @@ make crd-self-surface-center-word
 make crd-self-surface-center-word-density
 make crd-self-surface-center-word-queue
 make crd-self-surface-center-word-packet
+make crd-self-surface-center-word-presence
 ```
 
 ## Run Size
@@ -114,6 +116,13 @@ The center-word-only density summary contains 2,731 term rows:
 - Hebrew exceeds: 70
 - Greek exceeds: 35
 - English exceeds: 15
+
+The version-presence summary keeps source-specific results visible:
+
+- exact center-word term rows: 131
+- exact center-word hit rows: 1,044
+- language distribution: Hebrew 71, Greek 37, English 23
+- corpus-count distribution: 57 terms in 5 corpus labels, 1 term in 4, 5 terms in 3, 24 terms in 2, and 44 terms in 1
 
 Top finite center-word-only ratios:
 

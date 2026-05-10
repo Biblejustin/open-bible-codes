@@ -231,6 +231,9 @@ relevant rows. The strict exact center-word subset contains 1,044 Bible rows
 across 131 term IDs. In the center-word-only Bible-vs-control summary, 120
 terms exceed the secular maximum and 94 are Bible-positive with secular max
 zero.
+Version presence is mixed: 57 exact center-word terms appear in five Bible
+corpus labels, while 44 appear in only one. This supports source-specific
+reporting rather than requiring every pattern to appear in every edition.
 
 The concept-surface exact center-word Bible hit set is identical to the
 self-surface set: 1,044 rows, with zero self-only or concept-only Bible rows.

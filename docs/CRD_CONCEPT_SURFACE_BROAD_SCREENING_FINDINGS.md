@@ -23,6 +23,7 @@ The input term set combines all committed term CSVs except `terms/crd_placeholde
 - exact center-word density summary: `reports/crd_concept_surface/center_word_bible_vs_control_summary.csv`
 - exact center-word review queue: `reports/crd_concept_surface/center_word_review_queue.csv`
 - exact center-word review packet: `reports/crd_concept_surface/center_word_review_packet.md`
+- exact center-word version presence: `reports/crd_concept_surface/center_word_presence.md`
 
 ## Reproduce
 
@@ -35,6 +36,7 @@ make crd-concept-surface-center-word
 make crd-concept-surface-center-word-density
 make crd-concept-surface-center-word-queue
 make crd-concept-surface-center-word-packet
+make crd-concept-surface-center-word-presence
 ```
 
 ## Run Size
@@ -174,6 +176,7 @@ The exact center-word subset also has its own ignored density outputs:
 - summary: `reports/crd_concept_surface/center_word_bible_vs_control_summary.csv`
 - compact review queue: `reports/crd_concept_surface/center_word_review_queue.csv`
 - compact review packet: `reports/crd_concept_surface/center_word_review_packet.md`
+- version-presence summary: `reports/crd_concept_surface/center_word_presence.md`
 - summary rows: 2,731
 - terms exceeding secular max: 120
 - Bible-positive/secular-zero terms: 94
@@ -181,6 +184,8 @@ The exact center-word subset also has its own ignored density outputs:
 - exceeding Greek terms: 35
 - exceeding English terms: 15
 - exact center-word review queue rows: 202
+- exact center-word term rows in presence summary: 131
+- corpus-count distribution in presence summary: 57 terms in 5 corpus labels, 1 term in 4, 5 terms in 3, 24 terms in 2, and 44 terms in 1
 
 Top finite center-word-only ratios:
 

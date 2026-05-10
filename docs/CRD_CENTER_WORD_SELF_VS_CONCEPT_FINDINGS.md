@@ -37,6 +37,13 @@ The two changed rows are secular-control changes only:
 | `cc_acacia_h` | hebrew | 0 | HEB_PBY_BIALIK | 1.45022905 | HEB_PBY_AHAD_HAAM |
 | `wisdom_h` | hebrew | 0 | HEB_PBY_BIALIK | 0.362557261 | HEB_PBY_AHAD_HAAM |
 
+The exact center-word version-presence view contains:
+
+- exact center-word term rows: 131
+- exact center-word hit rows: 1,044
+- language distribution: Hebrew 71, Greek 37, English 23
+- corpus-count distribution: 57 terms in 5 corpus labels, 1 term in 4, 5 terms in 3, 24 terms in 2, and 44 terms in 1
+
 ## Interpretation
 
 For the strict exact center-word question, concept-surface expansion did not add Bible hits and did not change any exceedance decisions. That means the current exact center-word Bible signal can be reviewed from the self-surface output without losing any concept-surface Bible rows.

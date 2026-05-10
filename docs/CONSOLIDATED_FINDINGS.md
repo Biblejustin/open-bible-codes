@@ -267,6 +267,8 @@ self-surface rerun found 1,404,450 classified hit rows and 122,793 relevant
 rows. The strict exact `center_word` subset contains 1,044 Bible rows across
 131 term IDs. Its center-word-only Bible-vs-control summary has 120 terms
 exceeding the secular maximum, including 94 Bible-positive/secular-zero terms.
+Version presence is mixed rather than all-or-nothing: 57 exact center-word
+terms appear in five Bible corpus labels, while 44 appear in only one.
 The concept-surface run has the same 1,044 Bible exact center-word row keys;
 concept expansion changed only two secular-control center-word max rows and
 changed zero exact center-word exceedance decisions. Therefore exact
