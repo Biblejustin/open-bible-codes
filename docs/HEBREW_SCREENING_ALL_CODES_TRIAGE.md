@@ -38,25 +38,25 @@ It is a triage aid, not a claim-grade filter.
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
 | 1 | all_source | `desolation_h` `שממה` (shmmh; English: Desolation) | Desolation | 2 | 7 | Mic 1:7 | `שממה` (shmmh) | not_unusual |
-| 2 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | 1Chr 26:27 | `יהוה` (yhwh) | not_unusual |
-| 3 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | 1Chr 28:20 | `יהוה` (yhwh) | not_unusual |
-| 4 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | 1Kgs 10:5 | `יהוה` (yhwh) | not_unusual |
+| 2 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Chr 26:27 | `יהוה` (YHWH; English: YHWH) | not_unusual |
+| 3 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Chr 28:20 | `יהוה` (YHWH; English: YHWH) | not_unusual |
+| 4 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Kgs 10:5 | `יהוה` (YHWH; English: YHWH) | not_unusual |
 | 5 | all_source | `solomon_h` `שלמה` (shlmh; English: Solomon) | Solomon | -3 | 10 | 1Kgs 7:1 | `שלמה` (shlmh) | not_unusual |
-| 6 | all_source | `lord_h` `אדני` (dny; English: Lord) | Lord | 3 | 10 | 1Sam 25:14 | `אדנינו` (dnynw) | not_unusual |
-| 7 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | 1Sam 26:11 | `יהוה` (yhwh) | not_unusual |
-| 8 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | 1Sam 26:16 | `יהוה` (yhwh) | not_unusual |
-| 9 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | 1Sam 26:23 | `יהוה` (yhwh) | not_unusual |
-| 10 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | 1Sam 26:9 | `יהוה` (yhwh) | not_unusual |
+| 6 | all_source | `lord_h` `אדני` (Adonai; English: Lord) | Lord | 3 | 10 | 1Sam 25:14 | `אדנינו` (dnynw) | not_unusual |
+| 7 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Sam 26:11 | `יהוה` (YHWH; English: YHWH) | not_unusual |
+| 8 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Sam 26:16 | `יהוה` (YHWH; English: YHWH) | not_unusual |
+| 9 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Sam 26:23 | `יהוה` (YHWH; English: YHWH) | not_unusual |
+| 10 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Sam 26:9 | `יהוה` (YHWH; English: YHWH) | not_unusual |
 | 11 | all_source | `angel_h` `מלאכ` (mlk; English: Angel) | Angel | -3 | 10 | 1Sam 29:9 | `כמלאכ` (kmlk) | not_unusual |
-| 12 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | -3 | 10 | 2Chr 21:7 | `יהוה` (yhwh) | not_unusual |
-| 13 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | 2Chr 33:15 | `יהוה` (yhwh) | not_unusual |
-| 14 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | 2Chr 9:4 | `יהוה` (yhwh) | not_unusual |
-| 15 | all_source | `lord_h` `אדני` (dny; English: Lord) | Lord | -3 | 10 | 2Kgs 18:27 | `אדני` (dny) | not_unusual |
+| 12 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -3 | 10 | 2Chr 21:7 | `יהוה` (YHWH; English: YHWH) | not_unusual |
+| 13 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Chr 33:15 | `יהוה` (YHWH; English: YHWH) | not_unusual |
+| 14 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Chr 9:4 | `יהוה` (YHWH; English: YHWH) | not_unusual |
+| 15 | all_source | `lord_h` `אדני` (Adonai; English: Lord) | Lord | -3 | 10 | 2Kgs 18:27 | `אדני` (Adonai; English: Lord) | not_unusual |
 | 16 | all_source | `solomon_h` `שלמה` (shlmh; English: Solomon) | Solomon | -3 | 10 | 2Kgs 23:13 | `שלמה` (shlmh) | not_unusual |
-| 17 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | 2Kgs 23:24 | `יהוה` (yhwh) | not_unusual |
+| 17 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Kgs 23:24 | `יהוה` (YHWH; English: YHWH) | not_unusual |
 | 18 | all_source | `solomon_h` `שלמה` (shlmh; English: Solomon) | Solomon | -3 | 10 | 2Kgs 24:13 | `שלמה` (shlmh) | not_unusual |
-| 19 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | 2Kgs 25:13 | `ביתיהוה` (bytyhwh) | not_unusual |
-| 20 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | -3 | 10 | 2Kgs 8:19 | `יהוה` (yhwh) | not_unusual |
+| 19 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Kgs 25:13 | `ביתיהוה` (bytyhwh) | not_unusual |
+| 20 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -3 | 10 | 2Kgs 8:19 | `יהוה` (YHWH; English: YHWH) | not_unusual |
 
 ### center_word_same_concept
 
@@ -97,24 +97,24 @@ It is a triage aid, not a claim-grade filter.
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
 | 1 | all_source | `bibi_h` `ביבי` (byby; English: Bibi) | Bibi | -2 | 7 | 1Chr 2:55 | `ישבו` (yshbw) | not_unusual |
 | 2 | all_source | `lion_h` `אריה` (ryh; English: Lion) | Lion | 2 | 7 | 1Kgs 13:26 | `איש` (ysh) | not_unusual |
-| 3 | all_source | `lord_h` `אדני` (dny; English: Lord) | Lord | -2 | 7 | 1Kgs 20:9 | `בנהדד` (bnhdd) | not_unusual |
-| 4 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 2 | 7 | 1Kgs 2:42 | `הלוא` (hlw) | not_unusual |
+| 3 | all_source | `lord_h` `אדני` (Adonai; English: Lord) | Lord | -2 | 7 | 1Kgs 20:9 | `בנהדד` (bnhdd) | not_unusual |
+| 4 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 2 | 7 | 1Kgs 2:42 | `הלוא` (hlw) | not_unusual |
 | 5 | all_source | `heaven_h` `שמימ` (shmym; English: Heaven) | Heaven | -2 | 7 | 1Kgs 8:22 | `ויעמד` (wymd) | not_unusual |
-| 6 | all_source | `hell_sheol_h` `שאול` (shwl; English: Sheol) | Sheol | 2 | 7 | 1Sam 14:47 | `ישראל` (yshrl) | not_unusual |
-| 7 | all_source | `paul_h` `שאול` (shwl; English: Paul) | Paul | 2 | 7 | 1Sam 14:47 | `ישראל` (yshrl) | not_unusual |
-| 8 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 2 | 7 | 1Sam 17:46 | `היומ` (hywm) | not_unusual |
-| 9 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | -2 | 7 | 2Chr 13:10 | `וכהנימ` (wkhnym) | not_unusual |
-| 10 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 2 | 7 | 2Chr 20:15 | `ההמונ` (hhmwn) | not_unusual |
-| 11 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | -2 | 7 | 2Chr 24:8 | `חוצה` (chwtsh) | not_unusual |
+| 6 | all_source | `hell_sheol_h` `שאול` (shwl; English: Sheol) | Sheol | 2 | 7 | 1Sam 14:47 | `ישראל` (Yisrael; English: Israel) | not_unusual |
+| 7 | all_source | `paul_h` `שאול` (shwl; English: Paul) | Paul | 2 | 7 | 1Sam 14:47 | `ישראל` (Yisrael; English: Israel) | not_unusual |
+| 8 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 2 | 7 | 1Sam 17:46 | `היומ` (hywm) | not_unusual |
+| 9 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 2Chr 13:10 | `וכהנימ` (wkhnym) | not_unusual |
+| 10 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 2 | 7 | 2Chr 20:15 | `ההמונ` (hhmwn) | not_unusual |
+| 11 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 2Chr 24:8 | `חוצה` (chwtsh) | not_unusual |
 | 12 | all_source | `mary_h` `מרימ` (mrym; English: Mary) | Mary | 2 | 7 | 2Chr 28:15 | `מערמיהמ` (mrmyhm) | not_unusual |
 | 13 | all_source | `heaven_h` `שמימ` (shmym; English: Heaven) | Heaven | 2 | 7 | 2Chr 30:27 | `ויקמו` (wyqmw) | not_unusual |
 | 14 | all_source | `asshur_h` `אשור` (shwr; English: Asshur) | Asshur | -2 | 7 | 2Kgs 17:6 | `וישב` (wyshb) | not_unusual |
 | 15 | all_source | `assyria_h` `אשור` (shwr; English: Assyria) | Assyria | -2 | 7 | 2Kgs 17:6 | `וישב` (wyshb) | not_unusual |
 | 16 | all_source | `temple_h` `היכל` (hykl; English: Temple) | Temple | -2 | 7 | 2Kgs 23:4 | `כלהכלימ` (klhklym) | not_unusual |
-| 17 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | -2 | 7 | 2Kgs 5:11 | `והניפ` (whnyp) | not_unusual |
+| 17 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 2Kgs 5:11 | `והניפ` (whnyp) | not_unusual |
 | 18 | all_source | `peace_h` `שלומ` (shlwm; English: Peace) | Peace | 2 | 7 | 2Sam 20:9 | `לו` (lw) | not_unusual |
-| 19 | all_source | `hell_sheol_h` `שאול` (shwl; English: Sheol) | Sheol | 2 | 7 | 2Sam 3:10 | `ישראל` (yshrl) | not_unusual |
-| 20 | all_source | `paul_h` `שאול` (shwl; English: Paul) | Paul | 2 | 7 | 2Sam 3:10 | `ישראל` (yshrl) | not_unusual |
+| 19 | all_source | `hell_sheol_h` `שאול` (shwl; English: Sheol) | Sheol | 2 | 7 | 2Sam 3:10 | `ישראל` (Yisrael; English: Israel) | not_unusual |
+| 20 | all_source | `paul_h` `שאול` (shwl; English: Paul) | Paul | 2 | 7 | 2Sam 3:10 | `ישראל` (Yisrael; English: Israel) | not_unusual |
 
 ### center_verse_same_concept
 
@@ -127,7 +127,7 @@ It is a triage aid, not a claim-grade filter.
 | 5 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 11 | 34 | 2Chr 15:17 | `והבמות` (whbmwt) | not_unusual |
 | 6 | all_source | `year_2001_additive_h` `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 11 | 56 | Ezek 7:8 | `עליכ` (lyk) | not_unusual |
 | 7 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 14 | 43 | 2Sam 17:20 | `עבדי` (bdy) | not_unusual |
-| 8 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -14 | 43 | Num 11:4 | `ישראל` (yshrl) | not_unusual |
+| 8 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -14 | 43 | Num 11:4 | `ישראל` (Yisrael; English: Israel) | not_unusual |
 | 9 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 16 | 49 | Isa 29:18 | `דבריספר` (dbryspr) | not_unusual |
 | 10 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -16 | 49 | Jer 50:41 | `וגוי` (wgwy) | not_unusual |
 | 11 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 19 | 58 | Num 11:4 | `בני` (bny) | not_unusual |
@@ -172,24 +172,24 @@ It is a triage aid, not a claim-grade filter.
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
 | 1 | all_source | `heaven_h` `שמימ` (shmym; English: Heaven) | Heaven | 2 | 7 | Judg 19:3 | `ויקמ` (wyqm) | not_unusual |
 | 2 | all_source | `heaven_h` `שמימ` (shmym; English: Heaven) | Heaven | 2 | 7 | Neh 3:1 | `ויקמ` (wyqm) | not_unusual |
-| 3 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | -2 | 7 | Neh 8:13 | `התורה` (htwrh) | not_unusual |
-| 4 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | 1Chr 28:7 | `הזה` (hzh) | not_unusual |
-| 5 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | 1Kgs 3:6 | `הזה` (hzh) | not_unusual |
-| 6 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | 1Kgs 8:24 | `הזה` (hzh) | not_unusual |
-| 7 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | 2Chr 6:15 | `הזה` (hzh) | not_unusual |
-| 8 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | -3 | 10 | Exod 32:10 | `ועתה` (wth) | not_unusual |
-| 9 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | -3 | 10 | Ezek 22:13 | `והנה` (whnh) | not_unusual |
-| 10 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | -3 | 10 | Ezek 2:5 | `והמה` (whmh) | not_unusual |
-| 11 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | -3 | 10 | Ezek 30:9 | `ביומ` (bywm) | not_unusual |
-| 12 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | Ezek 44:14 | `בו` (bw) | not_unusual |
-| 13 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | Ezra 9:7 | `הזה` (hzh) | not_unusual |
-| 14 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | Gen 24:53 | `ויוצא` (wywts) | not_unusual |
-| 15 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | Isa 1:3 | `התבוננ` (htbwnn) | not_unusual |
-| 16 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | Isa 3:18 | `ביומ` (bywm) | not_unusual |
-| 17 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | -3 | 10 | Isa 3:18 | `ביומ` (bywm) | not_unusual |
-| 18 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | Isa 58:6 | `הלוא` (hlw) | not_unusual |
-| 19 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | Jer 44:6 | `הזה` (hzh) | not_unusual |
-| 20 | all_source | `yhwh_h` `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 10 | Josh 4:9 | `הזה` (hzh) | not_unusual |
+| 3 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | Neh 8:13 | `התורה` (htwrh) | not_unusual |
+| 4 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Chr 28:7 | `הזה` (hzh) | not_unusual |
+| 5 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Kgs 3:6 | `הזה` (hzh) | not_unusual |
+| 6 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Kgs 8:24 | `הזה` (hzh) | not_unusual |
+| 7 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Chr 6:15 | `הזה` (hzh) | not_unusual |
+| 8 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -3 | 10 | Exod 32:10 | `ועתה` (wth) | not_unusual |
+| 9 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -3 | 10 | Ezek 22:13 | `והנה` (whnh) | not_unusual |
+| 10 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -3 | 10 | Ezek 2:5 | `והמה` (whmh) | not_unusual |
+| 11 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -3 | 10 | Ezek 30:9 | `ביומ` (bywm) | not_unusual |
+| 12 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | Ezek 44:14 | `בו` (bw) | not_unusual |
+| 13 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | Ezra 9:7 | `הזה` (hzh) | not_unusual |
+| 14 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | Gen 24:53 | `ויוצא` (wywts) | not_unusual |
+| 15 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | Isa 1:3 | `התבוננ` (htbwnn) | not_unusual |
+| 16 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | Isa 3:18 | `ביומ` (bywm) | not_unusual |
+| 17 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -3 | 10 | Isa 3:18 | `ביומ` (bywm) | not_unusual |
+| 18 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | Isa 58:6 | `הלוא` (hlw) | not_unusual |
+| 19 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | Jer 44:6 | `הזה` (hzh) | not_unusual |
+| 20 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | Josh 4:9 | `הזה` (hzh) | not_unusual |
 
 ### span_same_concept
 

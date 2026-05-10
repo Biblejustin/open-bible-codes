@@ -91,8 +91,8 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 41 | greek_screening | `hidden_path_only` | all_source | `αμην` (amen; English: Amen) | Amen | 2 | 1Cor 1:10 | `μη` (me) |
 | 42 | greek_screening | `hidden_path_only` | all_source | `υιοσ` (huios; English: Son) | Son | 2 | 1Cor 5:12 | `τουσ` (tous) |
 | 43 | hebrew_screening | `center_word_exact` | all_source | `שממה` (shmmh; English: Desolation) | Desolation | 2 | Mic 1:7 | `שממה` (shmmh) |
-| 44 | hebrew_screening | `center_word_exact` | all_source | `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 1Chr 26:27 | `יהוה` (yhwh) |
-| 45 | hebrew_screening | `center_word_exact` | all_source | `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 1Chr 28:20 | `יהוה` (yhwh) |
+| 44 | hebrew_screening | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 26:27 | `יהוה` (YHWH; English: YHWH) |
+| 45 | hebrew_screening | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 28:20 | `יהוה` (YHWH; English: YHWH) |
 | 46 | hebrew_screening | `center_word_same_concept` | all_source | `רומא` (rwm; English: Rome) | Rome | 5 | Job 5:12 | `ערומימ` (rwmym) |
 | 47 | hebrew_screening | `center_word_same_concept` | all_source | `רומא` (rwm; English: Rome) | Rome | -42 | Eccl 10:6 | `במרומימ` (bmrwmym) |
 | 48 | hebrew_screening | `center_word_same_category` | all_source | `גרמניה` (grmnyh; English: Germany) | Germany | -18 | Jer 42:15 | `מצרימ` (mtsrym) |
@@ -100,7 +100,7 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 50 | hebrew_screening | `center_word_same_category` | all_source | `אמרי` (mry; English: Amorite) | Amorite | 2 | 1Chr 15:27 | `המשררימ` (hmshrrym) |
 | 51 | hebrew_screening | `center_verse_exact` | all_source | `ביבי` (byby; English: Bibi) | Bibi | -2 | 1Chr 2:55 | `ישבו` (yshbw) |
 | 52 | hebrew_screening | `center_verse_exact` | all_source | `אריה` (ryh; English: Lion) | Lion | 2 | 1Kgs 13:26 | `איש` (ysh) |
-| 53 | hebrew_screening | `center_verse_exact` | all_source | `אדני` (dny; English: Lord) | Lord | -2 | 1Kgs 20:9 | `בנהדד` (bnhdd) |
+| 53 | hebrew_screening | `center_verse_exact` | all_source | `אדני` (Adonai; English: Lord) | Lord | -2 | 1Kgs 20:9 | `בנהדד` (bnhdd) |
 | 54 | hebrew_screening | `center_verse_same_concept` | all_source | `רומי` (rwmy; English: Rome) | Rome | -6 | 1Kgs 7:40 | `ואתהמזרקות` (wthmzrqwt) |
 | 55 | hebrew_screening | `center_verse_same_concept` | all_source | `רומי` (rwmy; English: Rome) | Rome | 6 | Josh 22:5 | `אתכמ` (tkm) |
 | 56 | hebrew_screening | `center_verse_same_concept` | all_source | `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 11 | Ezek 7:8 | `עליכ` (lyk) |
@@ -117,10 +117,10 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 67 | hebrew_screening | `hidden_path_only` | all_source | `יומיהוה` (yom YHWH; English: Day Of The Lord) | Day Of The Lord | 4 | Song 4:6 | `שיפוח` (shypwch) |
 | 68 | hebrew_screening | `hidden_path_only` | all_source | `קברריק` (qbrryq; English: Empty Tomb) | Empty Tomb | 8 | Ezek 5:2 | `בתוכ` (btwk) |
 | 69 | hebrew_screening | `hidden_path_only` | all_source | `הצהרישומושלמ` (htshryshwmwshlm; English: Jesus Declared Perfect) | Jesus Declared Perfect | 9 | Gen 22:8 | `לעלה` (llh) |
-| 70 | hebrew_theology | `center_word_exact` | all_source | `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 1Chr 26:27 | `יהוה` (yhwh) |
-| 71 | hebrew_theology | `center_word_exact` | all_source | `יהוה` (yhwh; English: YHWH) | YHWH | 3 | 1Chr 28:20 | `יהוה` (yhwh) |
+| 70 | hebrew_theology | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 26:27 | `יהוה` (YHWH; English: YHWH) |
+| 71 | hebrew_theology | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 28:20 | `יהוה` (YHWH; English: YHWH) |
 | 72 | hebrew_theology | `center_word_same_category` | all_source | `תורה` (twrh; English: Torah) | Torah | 7 | 1Chr 5:1 | `בנישראל` (bnyshrl) |
-| 73 | hebrew_theology | `center_word_same_category` | all_source | `תורה` (twrh; English: Torah) | Torah | -7 | 2Kgs 17:20 | `ישראל` (yshrl) |
+| 73 | hebrew_theology | `center_word_same_category` | all_source | `תורה` (twrh; English: Torah) | Torah | -7 | 2Kgs 17:20 | `ישראל` (Yisrael; English: Israel) |
 | 74 | hebrew_theology | `center_word_same_category` | all_source | `ברית` (bryt; English: Covenant) | Covenant | 8 | Deut 34:9 | `חכמה` (chkmh) |
 | 75 | hebrew_theology | `center_verse_same_category` | all_source | `אהבה` (hbh; English: Love) | Love | 2 | 2Sam 14:21 | `הדבר` (hdbr) |
 | 76 | hebrew_theology | `center_verse_same_category` | all_source | `אהבה` (hbh; English: Love) | Love | 2 | 2Sam 15:27 | `שבה` (shbh) |

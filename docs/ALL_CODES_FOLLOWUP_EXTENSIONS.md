@@ -32,9 +32,9 @@ same-skip extension is an added review feature, not a requirement.
 
 | Rank | Queue | Bucket | Term | Corpus | Type | Extended sequence | Kind | Count | Examples |
 | ---: | --- | --- | --- | --- | --- | --- | --- | ---: | --- |
-| 53 | hebrew_screening | `center_verse_exact` | `אדני` (dny; English: Lord) | UXLC | `term_plus_after` | `אדניאמר` (dnymr) | `phrase_2` | 2 | אֲדֹנָי֙ אֹמֵ֔ר; אֲדֹנָ֑י אֱמֹ֕ר |
-| 45 | hebrew_screening | `center_word_exact` | `יהוה` (yhwh; English: YHWH) | UXLC | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2` | 6 | עַד־ יְהוָ֣ה; עַד־ יְהוָ֤ה; עֵ֧ד יְהוָ֣ה; עַד־ יְהוָ֔ה; עַ֖ד יְהוָ֣ה |
-| 71 | hebrew_theology | `center_word_exact` | `יהוה` (yhwh; English: YHWH) | UXLC | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2` | 6 | עַד־ יְהוָ֣ה; עַד־ יְהוָ֤ה; עֵ֧ד יְהוָ֣ה; עַד־ יְהוָ֔ה; עַ֖ד יְהוָ֣ה |
+| 53 | hebrew_screening | `center_verse_exact` | `אדני` (Adonai; English: Lord) | UXLC | `term_plus_after` | `אדניאמר` (dnymr) | `phrase_2` | 2 | אֲדֹנָי֙ אֹמֵ֔ר; אֲדֹנָ֑י אֱמֹ֕ר |
+| 45 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UXLC | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2` | 6 | עַד־ יְהוָ֣ה; עַד־ יְהוָ֤ה; עֵ֧ד יְהוָ֣ה; עַד־ יְהוָ֔ה; עַ֖ד יְהוָ֣ה |
+| 71 | hebrew_theology | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UXLC | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2` | 6 | עַד־ יְהוָ֣ה; עַד־ יְהוָ֤ה; עֵ֧ד יְהוָ֣ה; עַד־ יְהוָ֔ה; עַ֖ד יְהוָ֣ה |
 | 21 | english_screening | `hidden_path_only` | `bear` | KJV | `before_plus_term` | `dobear` | `phrase_2` | 2 | do bear |
 | 9 | english_screening | `center_verse_exact` | `hand` | KJV | `term_plus_after` | `hando` | `phrase_2` | 5 | hand, O |
 | 67 | hebrew_screening | `hidden_path_only` | `יומיהוה` (yom YHWH; English: Day Of The Lord) | UXLC | `before_plus_term` | `היומיהוה` (hayom YHWH; English: the day of YHWH) | `phrase_2` | 3 | הַיּ֔וֹם יְהוָ֖ה; הַיּ֗וֹם יְהוָ֛ה |
@@ -50,8 +50,8 @@ same-skip extension is an added review feature, not a requirement.
 | 79 | hebrew_theology | `span_same_category` | `משיח` (Mashiach; English: Messiah) | UXLC | `after_match` | `לובו` (lwbw) | `phrase_2` | 1 | ל֖וֹ בּֽוֹ׃ |
 | 51 | hebrew_screening | `center_verse_exact` | `ביבי` (byby; English: Bibi) | UXLC | `after_match` | `יפתח` (yptch) | `word` | 41 | יִפְתַּ֨ח; יִפְתַּ֣ח; יִפְתַּח־; יִפְתָּֽח׃; יִפְתָּ֗ח |
 | 31 | greek_screening | `center_verse_same_category` | `ναοσ` (naos; English: Temple) | SBLGNT | `before_match` | `υιον` (uion) | `word` | 85 | υἱὸν; υἱόν,; ⸀υἱόν·; υἱόν; υἱόν. |
-| 44 | hebrew_screening | `center_word_exact` | `יהוה` (yhwh; English: YHWH) | UXLC | `before_match` | `הילק` (hylq) | `word` | 3 | הַיָּ֑לֶק; הַיֶּ֔לֶק; הַיֶּ֖לֶק |
-| 70 | hebrew_theology | `center_word_exact` | `יהוה` (yhwh; English: YHWH) | UXLC | `before_match` | `הילק` (hylq) | `word` | 3 | הַיָּ֑לֶק; הַיֶּ֔לֶק; הַיֶּ֖לֶק |
+| 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UXLC | `before_match` | `הילק` (hylq) | `word` | 3 | הַיָּ֑לֶק; הַיֶּ֔לֶק; הַיֶּ֖לֶק |
+| 70 | hebrew_theology | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UXLC | `before_match` | `הילק` (hylq) | `word` | 3 | הַיָּ֑לֶק; הַיֶּ֔לֶק; הַיֶּ֖לֶק |
 | 75 | hebrew_theology | `center_verse_same_category` | `אהבה` (hbh; English: Love) | UXLC | `after_match` | `הלהב` (hlhb) | `word` | 3 | הַלַּ֗הַב; הַלַּ֔הַב; הַלַּ֜הַב |
 | 68 | hebrew_screening | `hidden_path_only` | `קברריק` (qbrryq; English: Empty Tomb) | UXLC | `after_match` | `שרית` (shryt) | `word` | 2 | שָׂרִ֧יתָ; שֵׁרִ֧ית |
 | 60 | hebrew_screening | `span_exact` | `שמימ` (shmym; English: Heaven) | UXLC | `after_match` | `יהי` (yhy) | `word` | 50 | יְהִ֣י; יְהִ֥י; יְהִ֤י; יְהִי־; יְהִ֨י |
@@ -103,34 +103,34 @@ same-skip extension is an added review feature, not a requirement.
 
 | Rank | Corpus | Term | Type | Extended sequence | Kind | Count | Refs |
 | ---: | --- | --- | --- | --- | --- | ---: | --- |
-| 53 | UXLC | `אדני` (dny; English: Lord) | `term_plus_after` | `אדניאמר` (dnymr) | `phrase_2` | 2 | Isa 6:8; Ezek 21:14 |
-| 53 | UHB | `אדני` (dny; English: Lord) | `term_plus_after` | `אדניאמר` (dnymr) | `phrase_2` | 2 | ISA 6:8; EZK 21:9 |
-| 53 | MT_WLC | `אדני` (dny; English: Lord) | `term_plus_after` | `אדניאמר` (dnymr) | `phrase_2` | 2 | Isa 6:8; Ezek 21:14 |
-| 53 | MAM | `אדני` (dny; English: Lord) | `term_plus_after` | `אדניאמר` (dnymr) | `phrase_2` | 2 | Isa 6:8; Ezek 21:14 |
-| 53 | EBIBLE_WLC | `אדני` (dny; English: Lord) | `term_plus_after` | `אדניאמר` (dnymr) | `phrase_2` | 2 | ISA 6:8; EZK 21:14 |
-| 45 | UXLC | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2` | 6 | Deut 4:30; Deut 30:2; 1 Sam 12:5; Isa 19:22; Hos 14:2 |
-| 71 | UXLC | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2` | 6 | Deut 4:30; Deut 30:2; 1 Sam 12:5; Isa 19:22; Hos 14:2 |
-| 45 | UHB | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2+word` | 6 | DEU 4:30; DEU 30:2; ISA 19:22; LAM 3:40; 1SA 12:5 |
-| 71 | UHB | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2+word` | 6 | DEU 4:30; DEU 30:2; ISA 19:22; LAM 3:40; 1SA 12:5 |
-| 45 | MT_WLC | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2` | 6 | Deut 4:30; Deut 30:2; 1Sam 12:5; Isa 19:22; Hos 14:2 |
-| 71 | MT_WLC | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2` | 6 | Deut 4:30; Deut 30:2; 1Sam 12:5; Isa 19:22; Hos 14:2 |
-| 45 | MAM | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2+word` | 6 | Deut 4:30; Deut 30:2; Isa 19:22; Lam 3:40; 1 Sam 12:5 |
-| 71 | MAM | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2+word` | 6 | Deut 4:30; Deut 30:2; Isa 19:22; Lam 3:40; 1 Sam 12:5 |
-| 45 | EBIBLE_WLC | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2+word` | 6 | DEU 4:30; DEU 30:2; ISA 19:22; LAM 3:40; 1SA 12:5 |
-| 71 | EBIBLE_WLC | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2+word` | 6 | DEU 4:30; DEU 30:2; ISA 19:22; LAM 3:40; 1SA 12:5 |
+| 53 | UXLC | `אדני` (Adonai; English: Lord) | `term_plus_after` | `אדניאמר` (dnymr) | `phrase_2` | 2 | Isa 6:8; Ezek 21:14 |
+| 53 | UHB | `אדני` (Adonai; English: Lord) | `term_plus_after` | `אדניאמר` (dnymr) | `phrase_2` | 2 | ISA 6:8; EZK 21:9 |
+| 53 | MT_WLC | `אדני` (Adonai; English: Lord) | `term_plus_after` | `אדניאמר` (dnymr) | `phrase_2` | 2 | Isa 6:8; Ezek 21:14 |
+| 53 | MAM | `אדני` (Adonai; English: Lord) | `term_plus_after` | `אדניאמר` (dnymr) | `phrase_2` | 2 | Isa 6:8; Ezek 21:14 |
+| 53 | EBIBLE_WLC | `אדני` (Adonai; English: Lord) | `term_plus_after` | `אדניאמר` (dnymr) | `phrase_2` | 2 | ISA 6:8; EZK 21:14 |
+| 45 | UXLC | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2` | 6 | Deut 4:30; Deut 30:2; 1 Sam 12:5; Isa 19:22; Hos 14:2 |
+| 71 | UXLC | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2` | 6 | Deut 4:30; Deut 30:2; 1 Sam 12:5; Isa 19:22; Hos 14:2 |
+| 45 | UHB | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2+word` | 6 | DEU 4:30; DEU 30:2; ISA 19:22; LAM 3:40; 1SA 12:5 |
+| 71 | UHB | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2+word` | 6 | DEU 4:30; DEU 30:2; ISA 19:22; LAM 3:40; 1SA 12:5 |
+| 45 | MT_WLC | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2` | 6 | Deut 4:30; Deut 30:2; 1Sam 12:5; Isa 19:22; Hos 14:2 |
+| 71 | MT_WLC | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2` | 6 | Deut 4:30; Deut 30:2; 1Sam 12:5; Isa 19:22; Hos 14:2 |
+| 45 | MAM | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2+word` | 6 | Deut 4:30; Deut 30:2; Isa 19:22; Lam 3:40; 1 Sam 12:5 |
+| 71 | MAM | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2+word` | 6 | Deut 4:30; Deut 30:2; Isa 19:22; Lam 3:40; 1 Sam 12:5 |
+| 45 | EBIBLE_WLC | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2+word` | 6 | DEU 4:30; DEU 30:2; ISA 19:22; LAM 3:40; 1SA 12:5 |
+| 71 | EBIBLE_WLC | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `עדיהוה` (dyhwh) | `phrase_2+word` | 6 | DEU 4:30; DEU 30:2; ISA 19:22; LAM 3:40; 1SA 12:5 |
 | 21 | KJV | `bear` | `before_plus_term` | `dobear` | `phrase_2` | 2 | PSA 89:50; JHN 5:36 |
-| 53 | UXLC | `אדני` (dny; English: Lord) | `term_plus_after` | `אדניאמ` (dnym) | `phrase_2` | 1 | Gen 18:3 |
-| 53 | MT_WLC | `אדני` (dny; English: Lord) | `term_plus_after` | `אדניאמ` (dnym) | `phrase_2` | 1 | Gen 18:3 |
+| 53 | UXLC | `אדני` (Adonai; English: Lord) | `term_plus_after` | `אדניאמ` (dnym) | `phrase_2` | 1 | Gen 18:3 |
+| 53 | MT_WLC | `אדני` (Adonai; English: Lord) | `term_plus_after` | `אדניאמ` (dnym) | `phrase_2` | 1 | Gen 18:3 |
 | 9 | KJV | `hand` | `term_plus_after` | `hando` | `phrase_2` | 5 | EXO 15:6; PSA 17:14; JER 18:6; DAN 3:17 |
 | 67 | UXLC | `יומיהוה` (yom YHWH; English: Day Of The Lord) | `before_plus_term` | `היומיהוה` (hayom YHWH; English: the day of YHWH) | `phrase_2` | 3 | Lev 9:4; 2 Kings 2:3; 2 Kings 2:5 |
 | 67 | UHB | `יומיהוה` (yom YHWH; English: Day Of The Lord) | `before_plus_term` | `היומיהוה` (hayom YHWH; English: the day of YHWH) | `phrase_2` | 3 | LEV 9:4; 2KI 2:3; 2KI 2:5 |
 | 67 | MT_WLC | `יומיהוה` (yom YHWH; English: Day Of The Lord) | `before_plus_term` | `היומיהוה` (hayom YHWH; English: the day of YHWH) | `phrase_2` | 3 | Lev 9:4; 2Kgs 2:3; 2Kgs 2:5 |
 | 67 | MAM | `יומיהוה` (yom YHWH; English: Day Of The Lord) | `before_plus_term` | `היומיהוה` (hayom YHWH; English: the day of YHWH) | `phrase_2` | 3 | Lev 9:4; 2 Kgs 2:3; 2 Kgs 2:5 |
 | 67 | EBIBLE_WLC | `יומיהוה` (yom YHWH; English: Day Of The Lord) | `before_plus_term` | `היומיהוה` (hayom YHWH; English: the day of YHWH) | `phrase_2` | 3 | LEV 9:4; 2KI 2:3; 2KI 2:5 |
-| 45 | UXLC | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `דיהוה` (dyhwh) | `phrase_2` | 1 | Dan 5:19 |
-| 71 | UXLC | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `דיהוה` (dyhwh) | `phrase_2` | 1 | Dan 5:19 |
-| 45 | MT_WLC | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `דיהוה` (dyhwh) | `phrase_2` | 1 | Dan 5:19 |
-| 71 | MT_WLC | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `דיהוה` (dyhwh) | `phrase_2` | 1 | Dan 5:19 |
+| 45 | UXLC | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `דיהוה` (dyhwh) | `phrase_2` | 1 | Dan 5:19 |
+| 71 | UXLC | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `דיהוה` (dyhwh) | `phrase_2` | 1 | Dan 5:19 |
+| 45 | MT_WLC | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `דיהוה` (dyhwh) | `phrase_2` | 1 | Dan 5:19 |
+| 71 | MT_WLC | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `דיהוה` (dyhwh) | `phrase_2` | 1 | Dan 5:19 |
 | 19 | KJV | `heal` | `before_plus_term` | `iheal` | `phrase_2` | 1 | DEU 32:39 |
 | 2 | KJV | `heth` | `term_plus_after` | `hethy` | `phrase_2` | 1 | DEU 32:6 |
 | 19 | KJV | `heal` | `term_plus_after` | `heala` | `phrase_2` | 1 | ECC 3:3 |
@@ -157,10 +157,10 @@ same-skip extension is an added review feature, not a requirement.
 | 52 | MT_WLC | `אריה` (ryh; English: Lion) | `before_plus_term` | `ואריה` (wryh) | `word` | 2 | Isa 11:7; Isa 65:25 |
 | 52 | MAM | `אריה` (ryh; English: Lion) | `before_plus_term` | `ואריה` (wryh) | `word` | 2 | Isa 11:7; Isa 65:25 |
 | 52 | EBIBLE_WLC | `אריה` (ryh; English: Lion) | `before_plus_term` | `ואריה` (wryh) | `word` | 2 | ISA 11:7; ISA 65:25 |
-| 45 | UHB | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `דיהוה` (dyhwh) | `word` | 1 | DAN 5:19 |
-| 71 | UHB | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `דיהוה` (dyhwh) | `word` | 1 | DAN 5:19 |
-| 45 | EBIBLE_WLC | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `דיהוה` (dyhwh) | `word` | 1 | DAN 5:19 |
-| 71 | EBIBLE_WLC | `יהוה` (yhwh; English: YHWH) | `before_plus_term` | `דיהוה` (dyhwh) | `word` | 1 | DAN 5:19 |
+| 45 | UHB | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `דיהוה` (dyhwh) | `word` | 1 | DAN 5:19 |
+| 71 | UHB | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `דיהוה` (dyhwh) | `word` | 1 | DAN 5:19 |
+| 45 | EBIBLE_WLC | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `דיהוה` (dyhwh) | `word` | 1 | DAN 5:19 |
+| 71 | EBIBLE_WLC | `יהוה` (YHWH; English: YHWH) | `before_plus_term` | `דיהוה` (dyhwh) | `word` | 1 | DAN 5:19 |
 
 ## Read
 
