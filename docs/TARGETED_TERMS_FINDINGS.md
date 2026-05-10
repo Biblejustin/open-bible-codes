@@ -17,7 +17,7 @@ Controls remain weak for claim-making: rows with low uncorrected p-values still 
 | Vance | LXX `vance_g` `βανσ` (bans; English: Vance) 1532 | not_unusual | 13 | 0 | modern-name screen; controls first |
 | Netanyahu | MT_WLC `netanyahu_h` `נתניהו` (ntnyhw; English: Netanyahu) 11 | not_unusual | 0 | 0 | modern-name screen; controls first |
 | Gog | LXX `gog_g` `γωγ` (Gog; English: Gog) 1800 | not_unusual | 124 | 0 | review as pair/proximity, not raw counts |
-| Magog | MT_WLC `magog_h` `מגוג` (mgwg; English: Magog) 93 | not_unusual | 0 | 0 | review as pair/proximity, not raw counts |
+| Magog | MT_WLC `magog_h` `מגוג` (Magog; English: Magog) 93 | not_unusual | 0 | 0 | review as pair/proximity, not raw counts |
 | Russia | LXX `russia_g` `ρωσια` (rosia; English: Russia) 268 | not_unusual | 16 | 0 | no robust signal |
 | Europe | MT_WLC `europe_h` `אירופה` (yrwph; English: Europe) 15 | not_unusual, uncorrected_p_le_0.05 | 0 | 0 | uncorrected screen only |
 | Turkey | MT_WLC `turkey_alt_h` `תורכיה` (twrkyh; English: Turkey) 17 | not_unusual | 0 | 0 | no robust signal |
@@ -68,7 +68,7 @@ Controls remain weak for claim-making: rows with low uncorrected p-values still 
 | LXX | `gog_g` | `γωγ` (Gog; English: Gog) | 1800 | not_unusual | 0 | 0 | high count, likely short-form density |
 | TR_NT | `gog_g` | `γωγ` (Gog; English: Gog) | 594 | not_unusual | 62 | 0 | has NT surface context |
 | SBLGNT | `gog_g` | `γωγ` (Gog; English: Gog) | 572 | not_unusual | 62 | 0 | has NT surface context |
-| MT_WLC | `gog_h` | `גוג` (gwg; English: Gog) | 1322 | not_unusual | 0 | 0 | high count, likely short-form density |
+| MT_WLC | `gog_h` | `גוג` (Gog; English: Gog) | 1322 | not_unusual | 0 | 0 | high count, likely short-form density |
 
 ### Magog
 
@@ -77,7 +77,7 @@ Controls remain weak for claim-making: rows with low uncorrected p-values still 
 | LXX | `magog_g` | `μαγωγ` (magog; English: Magog) | 9 | not_unusual | 0 | 0 | counted, not unusual |
 | TR_NT | `magog_g` | `μαγωγ` (magog; English: Magog) | 3 | not_unusual | 0 | 0 | counted, not unusual |
 | SBLGNT | `magog_g` | `μαγωγ` (magog; English: Magog) | 3 | not_unusual | 0 | 0 | counted, not unusual |
-| MT_WLC | `magog_h` | `מגוג` (mgwg; English: Magog) | 93 | not_unusual | 0 | 0 | counted, not unusual |
+| MT_WLC | `magog_h` | `מגוג` (Magog; English: Magog) | 93 | not_unusual | 0 | 0 | counted, not unusual |
 
 ### Russia
 

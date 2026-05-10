@@ -118,11 +118,11 @@ Broader ELS count sweep across every declared term list.
 | Vance | LXX | `vance_g` `βανσ` (bans; English: Vance) | 4 | 7841 | dense short form |
 | Dragon | MT_WLC | `dragon_h` `תנינ` (tnyn; English: Dragon) | 4 | 7839 | dense short form |
 | Dragon | EBIBLE_WLC | `dragon_h` `תנינ` (tnyn; English: Dragon) | 4 | 7835 | dense short form |
-| Gog | MAM | `gog_h` `גוג` (gwg; English: Gog) | 3 | 5876 | high-noise short form |
-| Gog | UHB | `gog_h` `גוג` (gwg; English: Gog) | 3 | 5824 | high-noise short form |
-| Gog | EBIBLE_WLC | `gog_h` `גוג` (gwg; English: Gog) | 3 | 5804 | high-noise short form |
-| Gog | MT_WLC | `gog_h` `גוג` (gwg; English: Gog) | 3 | 5800 | high-noise short form |
-| Gog | UXLC | `gog_h` `גוג` (gwg; English: Gog) | 3 | 5798 | high-noise short form |
+| Gog | MAM | `gog_h` `גוג` (Gog; English: Gog) | 3 | 5876 | high-noise short form |
+| Gog | UHB | `gog_h` `גוג` (Gog; English: Gog) | 3 | 5824 | high-noise short form |
+| Gog | EBIBLE_WLC | `gog_h` `גוג` (Gog; English: Gog) | 3 | 5804 | high-noise short form |
+| Gog | MT_WLC | `gog_h` `גוג` (Gog; English: Gog) | 3 | 5800 | high-noise short form |
+| Gog | UXLC | `gog_h` `גוג` (Gog; English: Gog) | 3 | 5798 | high-noise short form |
 | Gog | TR_NT | `gog_g` `γωγ` (Gog; English: Gog) | 3 | 2940 | high-noise short form |
 | Gog | SBLGNT | `gog_g` `γωγ` (Gog; English: Gog) | 3 | 2908 | high-noise short form |
 | Gog | TCG_NT | `gog_g` `γωγ` (Gog; English: Gog) | 3 | 2874 | high-noise short form |
