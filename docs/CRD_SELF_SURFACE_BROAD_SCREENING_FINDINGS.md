@@ -16,6 +16,9 @@ The input term set combines all committed term CSVs except `terms/crd_placeholde
 - density matrix: `reports/crd_self_surface/density_matrix.csv`
 - classified hits: `reports/crd_self_surface/classified_hits.csv`
 - comparison report: `reports/crd_self_surface/CRD_SELF_SURFACE_REPORT.md`
+- compact review queue: `reports/crd_self_surface/review_queue.csv`
+- Bible exact center-word hits: `reports/crd_self_surface/center_word_hits.csv`
+- exact center-word density summary: `reports/crd_self_surface/center_word_bible_vs_control_summary.csv`
 
 ## Reproduce
 
@@ -23,6 +26,9 @@ The input term set combines all committed term CSVs except `terms/crd_placeholde
 make crd-self-surface-prepare
 make crd-self-surface-run
 make crd-self-surface-report
+make crd-self-surface-queue
+make crd-self-surface-center-word
+make crd-self-surface-center-word-density
 ```
 
 ## Run Size
@@ -32,7 +38,9 @@ make crd-self-surface-report
 - classified hit rows: 1,404,450
 - corpora with output: 20
 - nonzero `(term, corpus)` density rows: 5,323
-- runtime: 7,887.973 seconds
+- compact review queue rows: 309
+- compact review queue selected terms: 50
+- runtime: 7,539.274 seconds
 
 ## Headline Counts
 
@@ -43,6 +51,17 @@ make crd-self-surface-report
 - English exceeds: 43 / 851
 
 Large numbers of secular-zero rows mean many terms have no self-surface match in the available control corpora. These rows are useful for triage, but they should not be interpreted as strong evidence without matched vocabulary controls or shuffled controls.
+
+## Surface Match Scope
+
+The rerun writes deterministic match scope for every relevant classified hit:
+
+- all relevant rows: `center_verse = 117,464`, `span = 4,084`, `center_word = 1,245`
+- Bible relevant rows: `center_verse = 14,647`, `span = 4,084`, `center_word = 1,044`
+- secular-control relevant rows: `center_verse = 102,817`, `center_word = 201`
+- compact review queue rows: `center_verse = 151`, `span = 138`, `center_word = 20`
+
+The exact `center_word` scope is the strictest form of self-surface coincidence: the hidden term is centered on the same visible word, not merely somewhere in the same verse or span.
 
 ## Strongest Finite Bible-Vs-Control Ratios
 
@@ -73,9 +92,49 @@ Large numbers of secular-zero rows mean many terms have no self-surface match in
 | `jacob_g` and duplicate | greek | 2.90734016 | TCG_NT |
 | `gpx_lawlessness_g` | greek | 2.89633859 | BYZ_NT |
 
+## Exact Center-Word Subset
+
+The exact center-word extraction contains:
+
+- Bible center-word rows: 1,044
+- distinct term IDs with Bible center-word rows: 131
+- rows whose term exceeds the secular maximum in the center-word-only summary: 1,023
+- rows whose term does not exceed the secular maximum in the center-word-only summary: 21
+
+The center-word-only density summary contains 2,731 term rows:
+
+- `exceeds_secular_max = true`: 120
+- Bible-positive / secular-zero terms: 94
+- Hebrew exceeds: 70
+- Greek exceeds: 35
+- English exceeds: 15
+
+Top finite center-word-only ratios:
+
+| Term | Language | Bible max | Bible corpus | Secular max | Secular corpus | Ratio |
+| --- | --- | ---: | --- | ---: | --- | ---: |
+| `desolation_h` | hebrew | 1.67276669 | UHB | 0.174947546 | HEB_PBY_BIALIK | 9.5615 |
+| `cc_wine_h`, `mt_wine_h`, `twn_wine_h` | hebrew | 1.67276669 | UHB | 0.179491289 | HEB_PBY_BRENNER | 9.3195 |
+| `cc_israel_h`, `htp_israel_h`, `israel_h`, `twn_israel_h` | hebrew | 5.84774803 | MT_WLC | 0.725114523 | HEB_PBY_AHAD_HAAM | 8.0646 |
+| `bcd_spoils_h` | hebrew | 2.50915003 | UHB | 0.349895093 | HEB_PBY_BIALIK | 7.1711 |
+| `solomon_h` | hebrew | 2.50915003 | UHB | 0.362557261 | HEB_PBY_AHAD_HAAM | 6.9207 |
+| `sephar_h` | hebrew | 2.50617773 | MT_WLC | 0.362557261 | HEB_PBY_AHAD_HAAM | 6.9125 |
+
+Top Bible-positive / secular-zero center-word terms:
+
+| Term | Language | Bible max | Bible corpus |
+| --- | --- | ---: | --- |
+| `yhwh_h` and duplicates | hebrew | 10.0247109 | MT_WLC |
+| `babel_h`, `babylon_h`, and duplicates | hebrew | 6.68314061 | MT_WLC |
+| `dyn_gog_g`, `gog_g`, `noah_g` | greek | 2.94169992 | SBLGNT |
+| `wisdom_g`, `wisdom_gxc` | greek | 2.89633859 | BYZ_NT |
+| `cc_elohim_h`, `god_h`, `lord_h` | hebrew | 2.50915003 | UHB |
+| `eng_david`, `eng_david_2` | english | 1.86148966 | KJV |
+
 ## Interpretation Notes
 
 - This run is about self-surface coincidence only: hidden `X` centered near visible `X`.
+- The `center_word` subset is the clearest review surface for hidden `X` centered directly on visible `X`; verse-level and span-level rows remain useful but should be reported separately.
 - It does not answer whether hidden `X` is centered on a broader related concept unless a separate relevance dictionary locks that relationship.
 - Duplicate term IDs from different claim lists were deduped by first-seen ID for this local run, but duplicate concepts with different IDs remain visible in the results.
 - The large 5.3 GB classified-hit file exposed a real scaling issue. `scripts/build_crd_comparison.py` now streams representative examples and agreement inputs instead of loading the whole file.
