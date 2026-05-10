@@ -38,7 +38,7 @@ make crd-concept-surface-queue
 - compact review queue selected terms: 50
 - corpora with output: 20
 - nonzero `(term, corpus)` density rows: 5,370
-- runtime: 7,096.908 seconds
+- runtime: 7,098.759 seconds
 - API calls: 0
 - estimated API cost: 0.0 USD
 
@@ -114,6 +114,20 @@ The compact queue extracts Bible-only examples from the strongest terms so the f
 - Hebrew rows: 138
 - Greek rows: 121
 - English rows: 50
+
+Surface-match scope in the compact queue:
+
+- `center_word`: 20
+- `center_verse`: 151
+- `span`: 138
+
+The full classified-hit output has the same scope field. Across all relevant Bible rows, the scoped counts are:
+
+- `center_word`: 1,044
+- `center_verse`: 15,087
+- `span`: 4,204
+
+This distinction matters. `center_word` is the strongest form of the claim: the hidden term is centered directly on the visible matching or same-concept word. `center_verse` and `span` are broader contextual relevance flags and should be reviewed separately.
 
 Top queue corpora by row count:
 
