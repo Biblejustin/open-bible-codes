@@ -356,6 +356,11 @@ def build_report(
             "term plus adjacent before/after letters. Adjacent-only extensions are",
             "logged but weaker because they do not contain the hidden term.",
             "",
+            "Original-language report cells use committed glossary entries when one",
+            "is available. When no locked gloss exists for an inflected surface word",
+            "or short extension fragment, the English parenthetical is a descriptive",
+            "review fallback, not a lexical translation.",
+            "",
             "This report does not add statistical support. It packages rows for",
             "inspection after the broad screen.",
         ]
