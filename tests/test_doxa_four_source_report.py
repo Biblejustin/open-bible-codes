@@ -1,5 +1,3 @@
-import json
-
 from scripts import build_doxa_four_source_claim_followup_report as report
 
 
@@ -93,7 +91,7 @@ def test_report_uses_build_commit_label_for_cached_subreports() -> None:
 
     assert "Local report build commit" in text
     assert "Run commit" not in text
-    assert "stable analysis timing" in text
+    assert "recorded in local manifests only" in text
     assert "`δοξα` (doxa; English: glory)" in text
     assert "`δοξανωσ` (doxanos; English: hidden extension form from doxa)" in text
     assert "`δόξαν ὡς` (doxan hos; English: glory as)" in text
@@ -131,13 +129,13 @@ def test_report_can_point_to_confirmatory_output_dir() -> None:
     assert "reports/doxa_four_source_confirmatory_followup/letter_paths.md" in text
 
 
-def test_report_uses_stable_step_output_manifest_timings(tmp_path) -> None:
+def test_report_omits_volatile_step_timings(tmp_path) -> None:
     (tmp_path / "paired_controls.manifest.json").write_text(
-        json.dumps({"created_utc": "2026-05-06T00:12:54+00:00", "seconds": 89.125}),
+        '{"created_utc": "2026-05-06T00:12:54+00:00", "seconds": 89.125}',
         encoding="utf-8",
     )
     (tmp_path / "context_review.manifest.json").write_text(
-        json.dumps({"created_utc": "2026-05-06T00:12:55+00:00", "seconds": 0.759}),
+        '{"created_utc": "2026-05-06T00:12:55+00:00", "seconds": 0.759}',
         encoding="utf-8",
     )
     text = report.build_report(
@@ -168,9 +166,11 @@ def test_report_uses_stable_step_output_manifest_timings(tmp_path) -> None:
         report_out=tmp_path / "report.md",
     )
 
-    assert "Paired controls completed UTC | `2026-05-06T00:12:54+00:00`" in text
-    assert "Context review completed UTC | `2026-05-06T00:12:55+00:00`" in text
-    assert "Analysis runtime | 89.884s" in text
+    assert "Paired controls completed UTC | recorded in local manifests only" in text
+    assert "Context review completed UTC | recorded in local manifests only" in text
+    assert "Analysis runtime | recorded in local manifests only" in text
+    assert "2026-05-06T00:12:54+00:00" not in text
+    assert "89.884s" not in text
     assert "volatile-start" not in text
     assert "0.016s" not in text
 

@@ -105,11 +105,7 @@ def build_report(
 ) -> str:
     rows = sorted(paired_rows, key=lambda row: row["corpus"])
     contexts_by_corpus = {row["corpus"]: row for row in context_rows}
-    step_rows = protocol_manifest.get("steps", [])
-    paired_step = next((step for step in step_rows if step.get("id") == "paired_controls"), {})
-    context_step = next((step for step in step_rows if step.get("id") == "context_review"), {})
     output_dir = default_output_dir_for_report(report_out)
-    run_metadata = stable_run_metadata(protocol_manifest, paired_step, context_step, output_dir)
     criteria = criteria_results(rows, context_rows, str(output_dir / "letter_paths.md"))
     status = followup_status(criteria)
     lines = [
@@ -129,16 +125,16 @@ def build_report(
         "| Local report build commit | recorded in local manifest only |",
         f"| Command | `python3 -m scripts.run_protocol {protocol_path} --resume` |",
         f"| Protocol | `{protocol_path}` |",
-        f"| Paired controls completed UTC | `{run_metadata['paired_completed_utc']}` |",
-        f"| Context review completed UTC | `{run_metadata['context_completed_utc']}` |",
-        f"| Analysis runtime | {run_metadata['analysis_runtime']}s |",
+        "| Paired controls completed UTC | recorded in local manifests only |",
+        "| Context review completed UTC | recorded in local manifests only |",
+        "| Analysis runtime | recorded in local manifests only |",
         f"| Protocol status | {protocol_manifest.get('status', '')} |",
-        f"| Paired-control runtime | {run_metadata['paired_runtime']}s |",
-        f"| Context-review runtime | {run_metadata['context_runtime']}s |",
+        "| Paired-control runtime | recorded in local manifests only |",
+        "| Context-review runtime | recorded in local manifests only |",
         "",
-        "For resumed protocol runs, this subreport uses the paired-control and",
-        "context-review output manifests for stable analysis timing. The build",
-        "commit is recorded in the local manifest; the top-level",
+        "Volatile completion timestamps and runtimes are recorded in the local",
+        "ignored manifests, not in tracked Markdown. The build commit is recorded",
+        "in the local manifest; the top-level",
         "`reports/real_report_run/summary.md` records the current assembly commit.",
         "",
         "Generated local outputs:",
@@ -296,71 +292,6 @@ def display_extension_key() -> str:
     )
 
 
-def stable_run_metadata(
-    protocol_manifest: dict[str, Any],
-    paired_step: dict[str, Any],
-    context_step: dict[str, Any],
-    output_dir: Path,
-) -> dict[str, str]:
-    paired_manifest = read_json_if_exists(output_dir / "paired_controls.manifest.json")
-    context_manifest = read_json_if_exists(output_dir / "context_review.manifest.json")
-    paired_runtime = first_present(
-        paired_manifest.get("seconds"),
-        paired_step.get("duration_seconds"),
-    )
-    context_runtime = first_present(
-        context_manifest.get("seconds"),
-        context_step.get("duration_seconds"),
-    )
-    analysis_runtime = summed_seconds(paired_runtime, context_runtime)
-    if analysis_runtime == "":
-        analysis_runtime = first_present(protocol_manifest.get("duration_seconds"))
-    return {
-        "paired_completed_utc": first_present(
-            paired_manifest.get("created_utc"),
-            paired_step.get("ended_utc"),
-        ),
-        "context_completed_utc": first_present(
-            context_manifest.get("created_utc"),
-            context_step.get("ended_utc"),
-            protocol_manifest.get("ended_utc"),
-        ),
-        "analysis_runtime": format_seconds(analysis_runtime),
-        "paired_runtime": format_seconds(paired_runtime),
-        "context_runtime": format_seconds(context_runtime),
-    }
-
-
-def first_present(*values: object) -> str:
-    for value in values:
-        if value not in (None, ""):
-            return str(value)
-    return ""
-
-
-def summed_seconds(*values: object) -> str:
-    numbers = [numeric_seconds(value) for value in values]
-    if any(value is None for value in numbers):
-        return ""
-    return str(sum(value for value in numbers if value is not None))
-
-
-def numeric_seconds(value: object) -> float | None:
-    if value in (None, ""):
-        return None
-    try:
-        return float(str(value))
-    except ValueError:
-        return None
-
-
-def format_seconds(value: object) -> str:
-    number = numeric_seconds(value)
-    if number is None:
-        return first_present(value)
-    return f"{number:.3f}".rstrip("0").rstrip(".")
-
-
 def empirical_floor(samples: int) -> str:
     return f"{1 / (samples + 1):.8g}"
 
@@ -472,12 +403,6 @@ def read_rows(path: Path) -> list[dict[str, str]]:
 
 def read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
-
-
-def read_json_if_exists(path: Path) -> dict[str, Any]:
-    if not path.exists():
-        return {}
-    return read_json(path)
 
 
 def git_commit() -> str:

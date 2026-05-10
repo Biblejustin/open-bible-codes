@@ -14,16 +14,16 @@ follow-up after
 | Local report build commit | recorded in local manifest only |
 | Command | `python3 -m scripts.run_protocol protocols/doxa_four_source_confirmatory_followup.toml --resume` |
 | Protocol | `protocols/doxa_four_source_confirmatory_followup.toml` |
-| Paired controls completed UTC | `2026-05-10T16:16:20.867052+00:00` |
-| Context review completed UTC | `2026-05-10T16:16:21.820514+00:00` |
-| Analysis runtime | 16.182s |
+| Paired controls completed UTC | recorded in local manifests only |
+| Context review completed UTC | recorded in local manifests only |
+| Analysis runtime | recorded in local manifests only |
 | Protocol status | success |
-| Paired-control runtime | 15.335s |
-| Context-review runtime | 0.847s |
+| Paired-control runtime | recorded in local manifests only |
+| Context-review runtime | recorded in local manifests only |
 
-For resumed protocol runs, this subreport uses the paired-control and
-context-review output manifests for stable analysis timing. The build
-commit is recorded in the local manifest; the top-level
+Volatile completion timestamps and runtimes are recorded in the local
+ignored manifests, not in tracked Markdown. The build commit is recorded
+in the local manifest; the top-level
 `reports/real_report_run/summary.md` records the current assembly commit.
 
 Generated local outputs:
