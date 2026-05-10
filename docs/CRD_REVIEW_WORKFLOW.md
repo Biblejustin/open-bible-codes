@@ -88,6 +88,10 @@ review packet with grouped examples and representative center-verse text.
 The center-word-presence target summarizes which Bible editions contain each
 exact center-word term; it is the correct view when a pattern may be
 source-specific rather than present in every edition.
+The generated findings intentionally report exact center-word term rows,
+distinct normalized surface forms, and distinct surface hit paths separately.
+Use the distinct surface-form count when asking how many visible words appear,
+and use the hit-path count when asking how many hidden-path instances appear.
 
 LLM-assisted drafting is allowed for lexical/context related-term proposals when
 the provenance names that assistance. The key rule is not "human-only"; the key

@@ -367,7 +367,9 @@ provenance. New cohorts require review, hash-locking in
 `docs/CRD_FRAMEWORK.md`. Generated report: `docs/CRD_REPORT.md`. Exact
 center-word summaries are tracked in
 `docs/CRD_CENTER_WORD_VERSION_PRESENCE_FINDINGS.md` and
-`docs/CRD_CENTER_WORD_SELF_VS_CONCEPT_FINDINGS.md`.
+`docs/CRD_CENTER_WORD_SELF_VS_CONCEPT_FINDINGS.md`; those summaries distinguish
+term rows, distinct normalized surface forms, and distinct surface hit paths so
+duplicate term-list entries do not get mistaken for separate visible words.
 
 Locked Greek surface prospective cohort:
 
