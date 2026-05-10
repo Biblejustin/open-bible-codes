@@ -250,6 +250,38 @@ class TargetedVersionPresenceTests(unittest.TestCase):
             self.assertIn("# Custom Title", text)
             self.assertIn("Custom description.", text)
 
+    def test_write_markdown_displays_original_language_terms(self) -> None:
+        rows = [
+            {
+                "language": "hebrew",
+                "concept": "Trump",
+                "term_id": "trump_h",
+                "category": "modern_names",
+                "term": "טראמפ",
+                "normalized_term": "טראמפ",
+                "exact_hit_counts_by_corpus": "",
+                "exact_total_hits": 4,
+                "exact_all_source_patterns": 1,
+                "exact_source_specific_patterns": 0,
+                "paired_control_available": "no",
+                "representative_control_available": "no",
+                "paired_best_band": "",
+                "paired_best_read": "not run",
+                "representative_best_band": "",
+                "representative_best_read": "not run",
+                "extension_summary_rows": 0,
+                "extension_strong_plus_term_rows": 0,
+                "overall_read": "screening row only",
+            }
+        ]
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "report.md"
+            write_markdown(path, rows, [])
+
+            text = path.read_text(encoding="utf-8")
+
+        self.assertIn("`טראמפ` (trmp; English: Trump)", text)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -26,24 +26,24 @@ No exact patterns were found in the capped exact-version matrix for: `htp_lamb_o
 
 | Language | Concept | Term ID | Normalized | Exact total | All-source | Source-specific | Control | Rep control | Extensions | Read |
 | --- | --- | --- | --- | ---: | ---: | ---: | --- | --- | ---: | --- |
-| hebrew | YHWH | `htp_yhwh_h` | `יהוה` | 108320 | 16312 | 6059 | not run in targeted paired controls | paired_uncorrected_p_le_0.05 | 0 | uncorrected representative-control screen only; no adjusted support |
-| hebrew | Love | `htp_love_h` | `אהבה` | 39575 | 6127 | 2021 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
-| hebrew | Peace | `htp_peace_h` | `שלומ` | 37669 | 5638 | 2254 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
-| hebrew | Torah | `htp_torah_h` | `תורה` | 32524 | 4897 | 1760 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
-| hebrew | Yeshua | `htp_yeshua_h` | `ישוע` | 27142 | 3949 | 1749 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
-| hebrew | Covenant | `htp_covenant_h` | `ברית` | 21429 | 3146 | 1322 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
-| hebrew | Messiah | `htp_messiah_h` | `משיח` | 12864 | 1911 | 771 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
-| hebrew | Wisdom | `htp_wisdom_h` | `חכמה` | 7218 | 1065 | 392 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
-| hebrew | Glory | `htp_glory_h` | `כבוד` | 6979 | 976 | 465 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
-| hebrew | Faith | `htp_faith_h` | `אמונה` | 3171 | 466 | 218 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
-| hebrew | Salvation | `htp_salvation_h` | `ישועה` | 2180 | 282 | 170 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
-| hebrew | Israel | `htp_israel_h` | `ישראל` | 2104 | 286 | 134 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
-| hebrew | Savior | `htp_savior_h` | `מושיע` | 2150 | 290 | 168 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
-| hebrew | Kingdom | `htp_kingdom_h` | `מלכות` | 1515 | 205 | 94 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
-| hebrew | Redemption | `htp_redemption_h` | `גאולה` | 513 | 71 | 30 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
-| hebrew | Lamb Of God | `htp_lamb_of_god_h` | `כבשהאלוהימ` | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
-| hebrew | Son Of God | `htp_son_of_god_h` | `בנהאלוהימ` | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
-| hebrew | Yeshua Messiah | `htp_yeshua_messiah_h` | `ישועהמשיח` | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
+| hebrew | YHWH | `htp_yhwh_h` | `יהוה` (yhwh; English: YHWH) | 108320 | 16312 | 6059 | not run in targeted paired controls | paired_uncorrected_p_le_0.05 | 0 | uncorrected representative-control screen only; no adjusted support |
+| hebrew | Love | `htp_love_h` | `אהבה` (hbh; English: Love) | 39575 | 6127 | 2021 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
+| hebrew | Peace | `htp_peace_h` | `שלומ` (shlwm; English: Peace) | 37669 | 5638 | 2254 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
+| hebrew | Torah | `htp_torah_h` | `תורה` (twrh; English: Torah) | 32524 | 4897 | 1760 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
+| hebrew | Yeshua | `htp_yeshua_h` | `ישוע` (Yeshua; English: Yeshua) | 27142 | 3949 | 1749 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
+| hebrew | Covenant | `htp_covenant_h` | `ברית` (bryt; English: Covenant) | 21429 | 3146 | 1322 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
+| hebrew | Messiah | `htp_messiah_h` | `משיח` (Mashiach; English: Messiah) | 12864 | 1911 | 771 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
+| hebrew | Wisdom | `htp_wisdom_h` | `חכמה` (chkmh; English: Wisdom) | 7218 | 1065 | 392 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
+| hebrew | Glory | `htp_glory_h` | `כבוד` (kbwd; English: Glory) | 6979 | 976 | 465 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
+| hebrew | Faith | `htp_faith_h` | `אמונה` (mwnh; English: Faith) | 3171 | 466 | 218 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
+| hebrew | Salvation | `htp_salvation_h` | `ישועה` (yshwh; English: Salvation) | 2180 | 282 | 170 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
+| hebrew | Israel | `htp_israel_h` | `ישראל` (yshrl; English: Israel) | 2104 | 286 | 134 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
+| hebrew | Savior | `htp_savior_h` | `מושיע` (mwshy; English: Savior) | 2150 | 290 | 168 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
+| hebrew | Kingdom | `htp_kingdom_h` | `מלכות` (mlkwt; English: Kingdom) | 1515 | 205 | 94 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
+| hebrew | Redemption | `htp_redemption_h` | `גאולה` (gwlh; English: Redemption) | 513 | 71 | 30 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
+| hebrew | Lamb Of God | `htp_lamb_of_god_h` | `כבשהאלוהימ` (kbshhlwhym; English: Lamb Of God) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
+| hebrew | Son Of God | `htp_son_of_god_h` | `בנהאלוהימ` (bnhlwhym; English: Son Of God) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
+| hebrew | Yeshua Messiah | `htp_yeshua_messiah_h` | `ישועהמשיח` (yshwhmshych; English: Yeshua Messiah) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 
 ## Exact Pattern Examples
 

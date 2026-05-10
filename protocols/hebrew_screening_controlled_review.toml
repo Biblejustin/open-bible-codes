@@ -62,6 +62,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_targeted_version_presence.py",
+  "els/term_display.py",
   "terms/theological_terms.csv",
   "terms/modern_names_dates.csv",
   "terms/table_of_nations.csv",
@@ -193,6 +194,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_targeted_version_presence.py",
+  "els/term_display.py",
   "terms/theological_terms.csv",
   "terms/modern_names_dates.csv",
   "terms/table_of_nations.csv",

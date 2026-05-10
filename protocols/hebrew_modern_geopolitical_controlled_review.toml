@@ -48,6 +48,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_targeted_version_presence.py",
+  "els/term_display.py",
   "terms/modern_names_dates.csv",
   "reports/hebrew_modern_geopolitical_version_presence/term_summary.csv",
   "reports/hebrew_modern_geopolitical_version_presence/hit_patterns.csv",
@@ -158,6 +159,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_targeted_version_presence.py",
+  "els/term_display.py",
   "terms/modern_names_dates.csv",
   "reports/hebrew_modern_geopolitical_version_presence/term_summary.csv",
   "reports/hebrew_modern_geopolitical_version_presence/hit_patterns.csv",

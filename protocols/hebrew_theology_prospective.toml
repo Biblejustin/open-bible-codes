@@ -112,6 +112,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_targeted_version_presence.py",
+  "els/term_display.py",
   "terms/hebrew_theology_prospective_terms.csv",
   "reports/hebrew_theology_prospective/term_summary.csv",
   "reports/hebrew_theology_prospective/hit_patterns.csv",
@@ -222,6 +223,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_targeted_version_presence.py",
+  "els/term_display.py",
   "terms/hebrew_theology_prospective_terms.csv",
   "reports/hebrew_theology_prospective/term_summary.csv",
   "reports/hebrew_theology_prospective/hit_patterns.csv",

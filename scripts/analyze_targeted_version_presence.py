@@ -13,6 +13,7 @@ from pathlib import Path
 
 from els import __version__
 from els.normalization import normalize_text
+from els.term_display import display_term
 
 
 DEFAULT_TERMS = [Path("terms/modern_names_dates.csv"), Path("terms/prophetic_terms.csv")]
@@ -724,7 +725,10 @@ def write_markdown(
                     str(row["language"]),
                     str(row["concept"]),
                     f"`{row['term_id']}`",
-                    f"`{row['normalized_term']}`",
+                    display_term(
+                        str(row["normalized_term"]),
+                        english=str(row.get("concept", "")),
+                    ),
                     str(row["exact_total_hits"]),
                     str(row["exact_all_source_patterns"]),
                     str(row["exact_source_specific_patterns"]),

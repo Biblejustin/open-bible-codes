@@ -23,6 +23,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_targeted_version_presence.py",
+  "els/term_display.py",
   "terms/modern_names_dates.csv",
   "terms/prophetic_terms.csv",
   "reports/hebrew_screening_version_presence/term_summary.csv",
@@ -114,6 +115,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_targeted_version_presence.py",
+  "els/term_display.py",
   "terms/modern_names_dates.csv",
   "terms/prophetic_terms.csv",
   "reports/hebrew_screening_version_presence/term_summary.csv",
