@@ -559,6 +559,8 @@ confirmatory calibration rather than original prospective claim evidence.
 Formal report assembly run:
 
 ```bash
+make real-report
+# equivalent:
 python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
 ```
 

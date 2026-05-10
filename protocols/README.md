@@ -25,6 +25,8 @@ python3 -m scripts.run_protocol protocols/public_baseline.toml --dry-run
 Formal report assembly run:
 
 ```bash
+make real-report
+# equivalent:
 python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
 ```
 
