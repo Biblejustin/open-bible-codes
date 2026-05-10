@@ -135,16 +135,16 @@ audit sheet, not an added statistical test.
 | 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | MT_WLC | `שממה` (shmmh; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shmmh; English: Desolation) | Mic 1:7 |
 | 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | UHB | `שממה` (shmmh; English: Desolation) | 2 | MIC 1:7 | `שְׁמָמָ֑ה` (shmmh; English: Desolation) | MIC 1:7 |
 | 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | UXLC | `שממה` (shmmh; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shmmh; English: Desolation) | Mic 1:7 |
-| 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | EBIBLE_WLC | `יהוה` (YHWH; English: YHWH) | 3 | 1CH 26:27 | `יְהוָֽה׃` (yhwh) | 1CH 26:27; 1CH 26:28 |
-| 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | MAM | `יהוה` (YHWH; English: YHWH) | 3 | 1 Chr 26:27 | `יְהֹוָֽה׃` (yhwh) | 1 Chr 26:27; 1 Chr 26:28 |
+| 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | EBIBLE_WLC | `יהוה` (YHWH; English: YHWH) | 3 | 1CH 26:27 | `יְהוָֽה׃` (YHWH; English: YHWH) | 1CH 26:27; 1CH 26:28 |
+| 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | MAM | `יהוה` (YHWH; English: YHWH) | 3 | 1 Chr 26:27 | `יְהֹוָֽה׃` (YHWH; English: YHWH) | 1 Chr 26:27; 1 Chr 26:28 |
 | 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | MT_WLC | `יהוה` (YHWH; English: YHWH) | 3 | 1Chr 26:27 | `יְהוָֽה` (YHWH; English: YHWH) | 1Chr 26:27; 1Chr 26:28 |
-| 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UHB | `יהוה` (YHWH; English: YHWH) | 3 | 1CH 26:27 | `יְהוָֽה׃` (yhwh) | 1CH 26:27; 1CH 26:28 |
-| 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UXLC | `יהוה` (YHWH; English: YHWH) | 3 | 1 Chr 26:27 | `יְהוָֽה׃` (yhwh) | 1 Chr 26:27; 1 Chr 26:28 |
-| 45 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | EBIBLE_WLC | `יהוה` (YHWH; English: YHWH) | 3 | 1CH 28:20 | `בֵּית־יְהוָֽה׃` (bytyhwh) | 1CH 28:20; 1CH 28:21 |
-| 45 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | MAM | `יהוה` (YHWH; English: YHWH) | 3 | 1 Chr 28:20 | `בֵּית־יְהֹוָֽה׃` (bytyhwh) | 1 Chr 28:20; 1 Chr 28:21 |
+| 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UHB | `יהוה` (YHWH; English: YHWH) | 3 | 1CH 26:27 | `יְהוָֽה׃` (YHWH; English: YHWH) | 1CH 26:27; 1CH 26:28 |
+| 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UXLC | `יהוה` (YHWH; English: YHWH) | 3 | 1 Chr 26:27 | `יְהוָֽה׃` (YHWH; English: YHWH) | 1 Chr 26:27; 1 Chr 26:28 |
+| 45 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | EBIBLE_WLC | `יהוה` (YHWH; English: YHWH) | 3 | 1CH 28:20 | `בֵּית־יְהוָֽה׃` (beit YHWH; English: house of YHWH) | 1CH 28:20; 1CH 28:21 |
+| 45 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | MAM | `יהוה` (YHWH; English: YHWH) | 3 | 1 Chr 28:20 | `בֵּית־יְהֹוָֽה׃` (beit YHWH; English: house of YHWH) | 1 Chr 28:20; 1 Chr 28:21 |
 | 45 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | MT_WLC | `יהוה` (YHWH; English: YHWH) | 3 | 1Chr 28:20 | `יְהוָֽה` (YHWH; English: YHWH) | 1Chr 28:20; 1Chr 28:21 |
-| 45 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UHB | `יהוה` (YHWH; English: YHWH) | 3 | 1CH 28:20 | `בֵּית־יְהוָֽה׃` (bytyhwh) | 1CH 28:20; 1CH 28:21 |
-| 45 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UXLC | `יהוה` (YHWH; English: YHWH) | 3 | 1 Chr 28:20 | `יְהוָֽה׃` (yhwh) | 1 Chr 28:20; 1 Chr 28:21 |
+| 45 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UHB | `יהוה` (YHWH; English: YHWH) | 3 | 1CH 28:20 | `בֵּית־יְהוָֽה׃` (beit YHWH; English: house of YHWH) | 1CH 28:20; 1CH 28:21 |
+| 45 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UXLC | `יהוה` (YHWH; English: YHWH) | 3 | 1 Chr 28:20 | `יְהוָֽה׃` (YHWH; English: YHWH) | 1 Chr 28:20; 1 Chr 28:21 |
 | ... | ... | ... | ... | ... | ... | ... | ... | ... | 175 more rows in CSV |
 
 ## Read

@@ -33,6 +33,7 @@ class TermDisplayTests(unittest.TestCase):
 
     def test_displays_known_hebrew_term_with_diacritics(self) -> None:
         self.assertEqual(display_term("יֵשׁ֤וּעַ"), "`יֵשׁ֤וּעַ` (Yeshua; English: Yeshua/Jeshua)")
+        self.assertEqual(display_term("יְהוָֽה׃"), "`יְהוָֽה׃` (YHWH; English: YHWH)")
 
     def test_displays_unambiguous_term_csv_concept_as_fallback_gloss(self) -> None:
         self.assertEqual(display_term("קאובוי"), "`קאובוי` (qwbwy; English: Cowboy)")
@@ -58,6 +59,7 @@ class TermDisplayTests(unittest.TestCase):
 
     def test_normalized_script_key_removes_marks_and_spacing(self) -> None:
         self.assertEqual(normalized_script_key("יום יהוה"), "יוםיהוה")
+        self.assertEqual(normalized_script_key("יְהוָֽה׃"), "יהוה")
 
 
 if __name__ == "__main__":

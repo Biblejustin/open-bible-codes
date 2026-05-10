@@ -247,6 +247,8 @@ def normalized_script_key(value: str) -> str:
             continue
         if char == "ς":
             chars.append("σ")
-        elif "\u0590" <= char <= "\u05ff" or "\u0370" <= char <= "\u03ff":
+        elif ("\u0590" <= char <= "\u05ff" or "\u0370" <= char <= "\u03ff") and (
+            unicodedata.category(char).startswith("L")
+        ):
             chars.append(char)
     return "".join(chars)

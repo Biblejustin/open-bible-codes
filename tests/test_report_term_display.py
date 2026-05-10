@@ -7,6 +7,7 @@ REPORT_PATHS = [
     Path("docs/FINAL_REPORT.md"),
     Path("docs/FINAL_REPORT_DRAFT.md"),
     Path("docs/FINAL_REPORT_HIGHLIGHTS.md"),
+    Path("docs/ALL_CODES_FOLLOWUP_REVIEW.md"),
 ]
 
 

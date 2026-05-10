@@ -238,8 +238,16 @@ def extension_note(extension: dict[str, str]) -> str:
     best_sequence = extension.get("best_extended_sequence", "")
     best_corpus = extension.get("best_audit_corpus", "")
     if is_compound_extension(extension):
-        return f"; compound same-skip extension {display_term(best_sequence)} in {best_corpus}"
-    return f"; adjacent same-skip extension {display_term(best_sequence)} in {best_corpus} ({best_type})"
+        return (
+            "; compound same-skip extension "
+            f"{display_with_fallback(best_sequence, 'hidden extension sequence')} "
+            f"in {best_corpus}"
+        )
+    return (
+        "; adjacent same-skip extension "
+        f"{display_with_fallback(best_sequence, 'hidden extension fragment')} "
+        f"in {best_corpus} ({best_type})"
+    )
 
 
 def build_report(
@@ -323,7 +331,7 @@ def build_report(
                     row["concept"],
                     row["skip"],
                     row["center_ref"],
-                    display_term(row["center_word"]),
+                    center_word_display(row),
                     row["path_corpora"],
                     extension_cell(row),
                     row["review_note"],
@@ -377,10 +385,31 @@ def is_compound_extension(extension: dict[str, str]) -> bool:
 def extension_cell(row: dict[str, str]) -> str:
     if row.get("best_extended_sequence", ""):
         return (
-            f"{display_term(row['best_extended_sequence'])} "
+            f"{display_with_fallback(row['best_extended_sequence'], 'hidden extension sequence')} "
             f"({row['best_extension_type']}; {row['best_extension_corpus']})"
         )
     return ""
+
+
+def center_word_display(row: dict[str, str]) -> str:
+    fallback = center_word_gloss(row)
+    return display_with_fallback(row.get("center_word", ""), fallback)
+
+
+def center_word_gloss(row: dict[str, str]) -> str:
+    concept = row.get("concept", "").strip()
+    if row.get("center_word_exact") == "True" and concept:
+        return concept
+    if concept:
+        return f"center surface word in {concept} review row"
+    return "center surface word"
+
+
+def display_with_fallback(value: str, fallback_english: str) -> str:
+    rendered = display_term(value)
+    if "English:" in rendered or not fallback_english:
+        return rendered
+    return display_term(value, english=fallback_english)
 
 
 def int_value(value: Any) -> int:
