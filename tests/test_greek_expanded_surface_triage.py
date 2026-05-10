@@ -102,6 +102,7 @@ def test_selected_pattern_rows_keep_only_all_source_long_terms() -> None:
 
 def test_length_filter_note_distinguishes_prospective_gate_from_length4_followup() -> None:
     assert "excludes the dense length-4" in " ".join(triage.length_filter_note(5))
+    assert "`αμην` (amen; English: Amen)" in " ".join(triage.length_filter_note(5))
     assert "post-discovery review material" in " ".join(triage.length_filter_note(4))
 
 
@@ -117,3 +118,17 @@ def test_ranked_cohort_counts_terms_by_length() -> None:
     assert by_id["a"]["length_cohort_all_source_rank"] == "1"
     assert by_id["b"]["length_cohort_all_source_rank"] == "2"
     assert by_id["c"]["length_cohort_terms"] == "1"
+
+
+def test_display_triage_term_adds_transliteration_and_english() -> None:
+    assert (
+        triage.display_triage_term({"normalized_term": "ανομια", "concept": "Lawlessness"})
+        == "`ανομια` (anomia; English: Lawlessness)"
+    )
+
+
+def test_display_center_words_by_corpus_adds_transliteration() -> None:
+    value = triage.display_center_words_by_corpus("TR_NT:οὖν; BYZ_NT:ουν")
+
+    assert "TR_NT:`οὖν` (oun)" in value
+    assert "BYZ_NT:`ουν` (oun)" in value

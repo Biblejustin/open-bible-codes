@@ -13,6 +13,7 @@ from pathlib import Path
 
 from els import __version__
 from els.normalization import normalize_greek
+from els.term_display import display_term
 
 
 TERMS_IN = Path("terms/greek_expanded_prospective_terms.csv")
@@ -295,14 +296,14 @@ def write_markdown(
             "| "
             + " | ".join(
                 [
-                    f"`{row['normalized_term']}`",
-                    row["concept"],
+                    md_cell(display_triage_term(row)),
+                    md_cell(row["concept"]),
                     row["normalized_length"],
                     row["center_ref"],
                     row["skip"],
                     row["direction"],
                     row["length_cohort_all_source_rank"],
-                    row["center_words_by_corpus"],
+                    display_center_words_by_corpus(row["center_words_by_corpus"]),
                 ]
             )
             + " |"
@@ -340,9 +341,7 @@ def triage_read_lines(
             f"The all-source surface patterns found here were below the length threshold: {all_source_short}.",
             "This is a negative result for the primary prospective filter, not a claim.",
         ]
-    selected_terms = ", ".join(
-        f"`{term}`" for term in sorted({row["normalized_term"] for row in selected_rows})
-    )
+    selected_terms = ", ".join(unique_display_terms(selected_rows))
     return [
         f"This creates a smaller review queue: {selected_terms}.",
         "It is not a claim-grade result. The next statistically honest control",
@@ -354,9 +353,10 @@ def triage_read_lines(
 
 def length_filter_note(min_length: int) -> list[str]:
     if min_length > 4:
+        amen_display = display_term("αμην", english="Amen")
         return [
             "The length filter is deliberately mechanical. It excludes the dense length-4",
-            "bucket, including `αμην`, without making a term-specific judgment about",
+            f"bucket, including {amen_display}, without making a term-specific judgment about",
             "which short terms are meaningful.",
         ]
     return [
@@ -379,6 +379,38 @@ def wrap_sentences(text: str) -> list[str]:
     if current:
         lines.append(" ".join(current))
     return lines
+
+
+def display_triage_term(row: dict[str, str]) -> str:
+    return display_term(row["normalized_term"], english=row.get("concept", ""))
+
+
+def display_center_words_by_corpus(value: str) -> str:
+    cells = []
+    for part in value.split("; "):
+        if ":" not in part:
+            cells.append(display_term(part))
+            continue
+        corpus, words = part.split(":", 1)
+        displayed_words = "/".join(display_term(word) for word in words.split("/") if word)
+        cells.append(f"{corpus}:{displayed_words}")
+    return md_cell("; ".join(cells))
+
+
+def unique_display_terms(rows: list[dict[str, str]]) -> list[str]:
+    seen: set[str] = set()
+    terms = []
+    for row in sorted(rows, key=lambda item: (item["normalized_term"], item["concept"])):
+        key = row["normalized_term"]
+        if key in seen:
+            continue
+        seen.add(key)
+        terms.append(display_triage_term(row))
+    return terms
+
+
+def md_cell(value: str) -> str:
+    return value.replace("|", "\\|")
 
 
 def write_manifest(

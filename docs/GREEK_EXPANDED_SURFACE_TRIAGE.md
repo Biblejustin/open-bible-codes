@@ -20,7 +20,7 @@ mechanical filter before any future controls are designed.
   context requires real words that can appear openly in a verse.
 
 The length filter is deliberately mechanical. It excludes the dense length-4
-bucket, including `αμην`, without making a term-specific judgment about
+bucket, including `αμην` (amen; English: Amen), without making a term-specific judgment about
 which short terms are meaningful.
 
 ## Result
@@ -32,9 +32,9 @@ which short terms are meaningful.
 
 | Term | Concept | Length | Center | Skip | Direction | Length-cohort rank | Center words |
 | --- | --- | ---: | --- | ---: | --- | ---: | --- |
-| `ισαακ` | Isaac | 5 | Heb 11:9 | -7 | backward | 1 | TR_NT:κατοικήσας; BYZ_NT:κατοικησασ; TCG_NT:κατοικήσας; SBLGNT:κατοικήσας |
-| `τερασ` | Wonder | 5 | Heb 9:11 | -13 | backward | 2 | TR_NT:χειροποιήτου; BYZ_NT:χειροποιητου; TCG_NT:χειροποιήτου,; SBLGNT:χειροποιήτου, |
-| `ανομια` | Lawlessness | 6 | Matt 7:23 | 20 | forward | 1 | TR_NT:Οὐδέποτε; BYZ_NT:ουδεποτε; TCG_NT:Οὐδέποτε; SBLGNT:Οὐδέποτε |
+| `ισαακ` (Isaak; English: Isaac) | Isaac | 5 | Heb 11:9 | -7 | backward | 1 | TR_NT:`κατοικήσας` (katoikesas); BYZ_NT:`κατοικησασ` (katoikesas); TCG_NT:`κατοικήσας` (katoikesas); SBLGNT:`κατοικήσας` (katoikesas) |
+| `τερασ` (teras; English: Wonder) | Wonder | 5 | Heb 9:11 | -13 | backward | 2 | TR_NT:`χειροποιήτου` (cheiropoietou); BYZ_NT:`χειροποιητου` (cheiropoietou); TCG_NT:`χειροποιήτου,` (cheiropoietou); SBLGNT:`χειροποιήτου,` (cheiropoietou) |
+| `ανομια` (anomia; English: Lawlessness) | Lawlessness | 6 | Matt 7:23 | 20 | forward | 1 | TR_NT:`Οὐδέποτε` (oudepote); BYZ_NT:`ουδεποτε` (oudepote); TCG_NT:`Οὐδέποτε` (oudepote); SBLGNT:`Οὐδέποτε` (oudepote) |
 
 ## Cohort Counts
 
@@ -48,7 +48,7 @@ which short terms are meaningful.
 
 ## Read
 
-This creates a smaller review queue: `ανομια`, `ισαακ`, `τερασ`.
+This creates a smaller review queue: `ανομια` (anomia; English: Lawlessness), `ισαακ` (Isaak; English: Isaac), `τερασ` (teras; English: Wonder).
 It is not a claim-grade result. The next statistically honest control
 compares these rows against real Greek terms matched by length and
 surface frequency, not against random strings that cannot satisfy the
