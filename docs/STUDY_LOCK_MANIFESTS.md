@@ -94,6 +94,11 @@ python3 -m scripts.preflight_prospective_study \
   --out reports/study_locks/greek_surface_future_study.preflight.json
 ```
 
+The prospective preflight also checks release hygiene before a run: remotes must
+point at `Biblejustin/open-bible-codes`, forbidden account text must not appear
+in remotes or tracked/repository files, risky generated artifacts must not be
+tracked, and high-confidence secret-token patterns fail the run.
+
 Use a study-specific `--out` path and pass that same file to the final report
 builder. If `--out` is omitted, the tool derives that path from the manifest
 name. For a historical locked run, do not add a preflight step to the locked
