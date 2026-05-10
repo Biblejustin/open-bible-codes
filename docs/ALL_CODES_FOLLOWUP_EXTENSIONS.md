@@ -72,7 +72,7 @@ same-skip extension is an added review feature, not a requirement.
 | 39 | greek_screening | `span_same_category` | `γαμερ` (gamer; English: Gomer) | TR_NT | `before_match` | `αο` (ao) | `phrase_2` | 3 | Ἃ ὁ; ἃ ὁ |
 | 22 | greek_screening | `center_word_exact` | `νατο` (nato; English: NATO) | TR_NT | `after_match` | `οο` (oo) | `phrase_2` | 2 | ὃ ὁ |
 | 26 | greek_screening | `center_word_same_category` | `ιωυαν` (Iouan; English: Javan) | TR_NT | `after_match` | `ηα` (ea) | `phrase_2` | 2 | ἢ ἃ; Ἢ ἃ |
-| 66 | hebrew_screening | `span_same_category` | `תתתתתכז` (tttttkz; English: Gregorian 2027 additive) | UXLC | `after_match` | `שה` (shh) | `word` | 24 | שֶׂ֣ה; שֶׂה־; שֶׂ֥ה; שֶׂ֔ה; שֶׂ֖ה |
+| 66 | hebrew_screening | `span_same_category` | `תתתתתכז` (tttttkz; English: Gregorian 2027 additive) | UXLC | `after_match` | `שה` (shh; English: Lamb) | `word` | 24 | שֶׂ֣ה; שֶׂה־; שֶׂ֥ה; שֶׂ֔ה; שֶׂ֖ה |
 | 47 | hebrew_screening | `center_word_same_concept` | `רומא` (rwm; English: Rome) | UXLC | `after_match` | `לי` (ly) | `word` | 749 | לִּ֥י; לִ֤י; לִ֣י; לִּ֑י; לִּ֔י |
 | 59 | hebrew_screening | `center_verse_same_category` | `טימותי` (tymwty; English: Timothy) | UXLC | `after_match` | `או` (w) | `word` | 321 | א֥וֹ; אוֹ־; א֣וֹ; א֚וֹ; א֖וֹ |
 | 42 | greek_screening | `hidden_path_only` | `υιοσ` (huios; English: Son) | TR_NT | `before_match` | `εν` (en) | `word` | 2870 | ἐν; Ἐν; ἓν; ἕν; Ἕν |

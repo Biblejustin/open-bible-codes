@@ -33,7 +33,7 @@ test.
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
-| 1 | 598579 | `ι` (i) | HEB 11:9 | `Ἰακώβ` (iakob) |
+| 1 | 598579 | `ι` (i) | HEB 11:9 | `Ἰακώβ` (iakob; English: Jacob) |
 | 2 | 598572 | `σ` (s) | HEB 11:9 | `Ἰσαὰκ` (Isaak; English: Isaac) |
 | 3 | 598565 | `α` (a) | HEB 11:9 | `κατοικήσας` (katoikesas) |
 | 4 | 598558 | `α` (a) | HEB 11:9 | `κατοικήσας` (katoikesas) |
@@ -43,7 +43,7 @@ test.
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
-| 1 | 598546 | `ι` (i) | HEB 11:9 | `ιακωβ` (iakob) |
+| 1 | 598546 | `ι` (i) | HEB 11:9 | `ιακωβ` (iakob; English: Jacob) |
 | 2 | 598539 | `σ` (s) | HEB 11:9 | `ισαακ` (Isaak; English: Isaac) |
 | 3 | 598532 | `α` (a) | HEB 11:9 | `κατοικησασ` (katoikesas) |
 | 4 | 598525 | `α` (a) | HEB 11:9 | `κατοικησασ` (katoikesas) |
@@ -53,7 +53,7 @@ test.
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
-| 1 | 596358 | `ι` (i) | HEB 11:9 | `Ἰακώβ,` (iakob) |
+| 1 | 596358 | `ι` (i) | HEB 11:9 | `Ἰακώβ,` (iakob; English: Jacob) |
 | 2 | 596351 | `σ` (s) | HEB 11:9 | `Ἰσαὰκ` (Isaak; English: Isaac) |
 | 3 | 596344 | `α` (a) | HEB 11:9 | `κατοικήσας` (katoikesas) |
 | 4 | 596337 | `α` (a) | HEB 11:9 | `κατοικήσας` (katoikesas) |
@@ -63,7 +63,7 @@ test.
 
 | # | Offset | Letter | Ref | Word |
 | ---: | ---: | --- | --- | --- |
-| 1 | 588541 | `ι` (i) | Heb 11:9 | `Ἰακὼβ` (iakob) |
+| 1 | 588541 | `ι` (i) | Heb 11:9 | `Ἰακὼβ` (iakob; English: Jacob) |
 | 2 | 588534 | `σ` (s) | Heb 11:9 | `Ἰσαὰκ` (Isaak; English: Isaac) |
 | 3 | 588527 | `α` (a) | Heb 11:9 | `κατοικήσας` (katoikesas) |
 | 4 | 588520 | `α` (a) | Heb 11:9 | `κατοικήσας` (katoikesas) |

@@ -40,7 +40,7 @@ separate prospective study registers them in advance.
 | `αμην` (amen; English: Amen) | Amen | 4 | John 5:24 | -3 | backward | 1 | TR_NT:`ζωήν` (zoen); BYZ_NT:`ζωην` (zoen); TCG_NT:`ζωήν` (zoen); SBLGNT:`ζωήν.` (zoen) |
 | `αμην` (amen; English: Amen) | Amen | 4 | Luke 18:17 | 8 | forward | 1 | TR_NT:`εἰσέλθῃ` (eiselthe); BYZ_NT:`εισελθη` (eiselthe); TCG_NT:`εἰσέλθῃ` (eiselthe); SBLGNT:`εἰσέλθῃ` (eiselthe) |
 | `αμην` (amen; English: Amen) | Amen | 4 | Mark 10:15 | 8 | forward | 1 | TR_NT:`εἰσέλθῃ` (eiselthe); BYZ_NT:`εισελθη` (eiselthe); TCG_NT:`εἰσέλθῃ` (eiselthe); SBLGNT:`εἰσέλθῃ` (eiselthe) |
-| `αμην` (amen; English: Amen) | Amen | 4 | Acts 22:28 | 14 | forward | 1 | TR_NT:`Παῦλος` (paulos); BYZ_NT:`παυλοσ` (paulos); TCG_NT:`Παῦλος` (paulos); SBLGNT:`Παῦλος` (paulos) |
+| `αμην` (amen; English: Amen) | Amen | 4 | Acts 22:28 | 14 | forward | 1 | TR_NT:`Παῦλος` (paulos; English: Paul); BYZ_NT:`παυλοσ` (paulos; English: Paul); TCG_NT:`Παῦλος` (paulos; English: Paul); SBLGNT:`Παῦλος` (paulos; English: Paul) |
 | `αμην` (amen; English: Amen) | Amen | 4 | Luke 21:32 | 17 | forward | 1 | TR_NT:`μὴ` (me); BYZ_NT:`μη` (me); TCG_NT:`μὴ` (me); SBLGNT:`μὴ` (me) |
 | `αμην` (amen; English: Amen) | Amen | 4 | Matt 18:18 | 19 | forward | 1 | TR_NT:`δήσητε` (desete); BYZ_NT:`δησητε` (desete); TCG_NT:`δήσητε` (desete); SBLGNT:`δήσητε` (desete) |
 | `σιων` (Sion; English: Zion) | Zion | 4 | 1Pet 2:6 | -25 | backward | 2 | TR_NT:`καταισχυνθῇ` (kataischunthe); BYZ_NT:`καταισχυνθη` (kataischunthe); TCG_NT:`καταισχυνθῇ.` (kataischunthe); SBLGNT:`καταισχυνθῇ.` (kataischunthe) |

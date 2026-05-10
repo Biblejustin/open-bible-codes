@@ -84,13 +84,13 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 34 | greek_screening | `span_exact` | all_source | `θεοσ` (theos; English: God) | God | 2 | Rom 14:2 | `εσθιει` (esthiei) |
 | 35 | greek_screening | `span_exact` | all_source | `ιραν` (iran; English: Iran) | Iran | -4 | Mark 14:48 | `αποκριθεισ` (apokritheis) |
 | 36 | greek_screening | `span_exact` | all_source | `νατο` (nato; English: NATO) | NATO | 7 | 1Cor 1:27 | `μωρα` (mora) |
-| 37 | greek_screening | `span_same_category` | all_source | `σαλα` (Sala; English: Shelah) | Shelah | 2 | Acts 7:42 | `ισραηλ` (israel) |
+| 37 | greek_screening | `span_same_category` | all_source | `σαλα` (Sala; English: Shelah) | Shelah | 2 | Acts 7:42 | `ισραηλ` (israel; English: Israel) |
 | 38 | greek_screening | `span_same_category` | all_source | `αδαμ` (adam; English: Adam) | Adam | 2 | Gal 4:27 | `ανδρα` (andra) |
 | 39 | greek_screening | `span_same_category` | all_source | `γαμερ` (gamer; English: Gomer) | Gomer | -3 | 2Cor 10:3 | `στρατευομεθα` (strateuometha) |
-| 40 | greek_screening | `hidden_path_only` | all_source | `σαλα` (Sala; English: Shelah) | Shelah | 2 | 1Cor 10:18 | `ισραηλ` (israel) |
+| 40 | greek_screening | `hidden_path_only` | all_source | `σαλα` (Sala; English: Shelah) | Shelah | 2 | 1Cor 10:18 | `ισραηλ` (israel; English: Israel) |
 | 41 | greek_screening | `hidden_path_only` | all_source | `αμην` (amen; English: Amen) | Amen | 2 | 1Cor 1:10 | `μη` (me) |
 | 42 | greek_screening | `hidden_path_only` | all_source | `υιοσ` (huios; English: Son) | Son | 2 | 1Cor 5:12 | `τουσ` (tous) |
-| 43 | hebrew_screening | `center_word_exact` | all_source | `שממה` (shmmh; English: Desolation) | Desolation | 2 | Mic 1:7 | `שממה` (shmmh) |
+| 43 | hebrew_screening | `center_word_exact` | all_source | `שממה` (shmmh; English: Desolation) | Desolation | 2 | Mic 1:7 | `שממה` (shmmh; English: Desolation) |
 | 44 | hebrew_screening | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 26:27 | `יהוה` (YHWH; English: YHWH) |
 | 45 | hebrew_screening | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 28:20 | `יהוה` (YHWH; English: YHWH) |
 | 46 | hebrew_screening | `center_word_same_concept` | all_source | `רומא` (rwm; English: Rome) | Rome | 5 | Job 5:12 | `ערומימ` (rwmym) |
@@ -121,7 +121,7 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 71 | hebrew_theology | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 28:20 | `יהוה` (YHWH; English: YHWH) |
 | 72 | hebrew_theology | `center_word_same_category` | all_source | `תורה` (twrh; English: Torah) | Torah | 7 | 1Chr 5:1 | `בנישראל` (bnyshrl) |
 | 73 | hebrew_theology | `center_word_same_category` | all_source | `תורה` (twrh; English: Torah) | Torah | -7 | 2Kgs 17:20 | `ישראל` (Yisrael; English: Israel) |
-| 74 | hebrew_theology | `center_word_same_category` | all_source | `ברית` (bryt; English: Covenant) | Covenant | 8 | Deut 34:9 | `חכמה` (chkmh) |
+| 74 | hebrew_theology | `center_word_same_category` | all_source | `ברית` (bryt; English: Covenant) | Covenant | 8 | Deut 34:9 | `חכמה` (chkmh; English: Wisdom) |
 | 75 | hebrew_theology | `center_verse_same_category` | all_source | `אהבה` (hbh; English: Love) | Love | 2 | 2Sam 14:21 | `הדבר` (hdbr) |
 | 76 | hebrew_theology | `center_verse_same_category` | all_source | `אהבה` (hbh; English: Love) | Love | 2 | 2Sam 15:27 | `שבה` (shbh) |
 | 77 | hebrew_theology | `center_verse_same_category` | all_source | `חכמה` (chkmh; English: Wisdom) | Wisdom | 3 | Isa 49:8 | `כה` (kh) |

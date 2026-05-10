@@ -72,7 +72,7 @@ Total exact-center surface patterns: 161.
 | `αμην` (amen; English: Amen) | John 5:24 | -3 | backward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`ζωήν` (zoen); BYZ_NT:`ζωην` (zoen); TCG_NT:`ζωήν` (zoen); SBLGNT:`ζωήν.` (zoen) |
 | `αμην` (amen; English: Amen) | Luke 18:17 | 8 | forward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`εἰσέλθῃ` (eiselthe); BYZ_NT:`εισελθη` (eiselthe); TCG_NT:`εἰσέλθῃ` (eiselthe); SBLGNT:`εἰσέλθῃ` (eiselthe) |
 | `αμην` (amen; English: Amen) | Mark 10:15 | 8 | forward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`εἰσέλθῃ` (eiselthe); BYZ_NT:`εισελθη` (eiselthe); TCG_NT:`εἰσέλθῃ` (eiselthe); SBLGNT:`εἰσέλθῃ` (eiselthe) |
-| `αμην` (amen; English: Amen) | Acts 22:28 | 14 | forward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`Παῦλος` (paulos); BYZ_NT:`παυλοσ` (paulos); TCG_NT:`Παῦλος` (paulos); SBLGNT:`Παῦλος` (paulos) |
+| `αμην` (amen; English: Amen) | Acts 22:28 | 14 | forward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`Παῦλος` (paulos; English: Paul); BYZ_NT:`παυλοσ` (paulos; English: Paul); TCG_NT:`Παῦλος` (paulos; English: Paul); SBLGNT:`Παῦλος` (paulos; English: Paul) |
 | `αμην` (amen; English: Amen) | Luke 21:32 | 17 | forward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`μὴ` (me); BYZ_NT:`μη` (me); TCG_NT:`μὴ` (me); SBLGNT:`μὴ` (me) |
 | `αμην` (amen; English: Amen) | Matt 18:18 | 19 | forward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`δήσητε` (desete); BYZ_NT:`δησητε` (desete); TCG_NT:`δήσητε` (desete); SBLGNT:`δήσητε` (desete) |
 | `αραμ` (aram; English: Aram) | Phil 2:1 | -12 | backward | TR_NT,BYZ_NT,TCG_NT,SBLGNT | TR_NT:`παράκλησις` (paraklesis); BYZ_NT:`παρακλησισ` (paraklesis); TCG_NT:`παράκλησις` (paraklesis); SBLGNT:`παράκλησις` (paraklesis) |

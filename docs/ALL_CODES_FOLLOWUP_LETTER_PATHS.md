@@ -106,10 +106,10 @@ audit sheet, not an added statistical test.
 | 36 | greek_screening | `span_exact` | `νατο` (nato; English: NATO) | SBLGNT | `νατο` (nato; English: NATO) | 7 | 1Cor 1:27 | `μωρὰ` (mora) | 1Cor 1:26; 1Cor 1:27 |
 | 36 | greek_screening | `span_exact` | `νατο` (nato; English: NATO) | TCG_NT | `νατο` (nato; English: NATO) | 7 | 1CO 1:27 | `μωρὰ` (mora) | 1CO 1:26; 1CO 1:27 |
 | 36 | greek_screening | `span_exact` | `νατο` (nato; English: NATO) | TR_NT | `νατο` (nato; English: NATO) | 7 | 1CO 1:27 | `μωρὰ` (mora) | 1CO 1:26; 1CO 1:27 |
-| 37 | greek_screening | `span_same_category` | `σαλα` (Sala; English: Shelah) | BYZ_NT | `σαλα` (Sala; English: Shelah) | 2 | ACT 7:42 | `ισραηλ` (israel) | ACT 7:42; ACT 7:43 |
-| 37 | greek_screening | `span_same_category` | `σαλα` (Sala; English: Shelah) | SBLGNT | `σαλα` (Sala; English: Shelah) | 2 | Acts 7:42 | `Ἰσραήλ;` (israel) | Acts 7:42; Acts 7:43 |
-| 37 | greek_screening | `span_same_category` | `σαλα` (Sala; English: Shelah) | TCG_NT | `σαλα` (Sala; English: Shelah) | 2 | ACT 7:42 | `Ἰσραήλ;` (israel) | ACT 7:42; ACT 7:43 |
-| 37 | greek_screening | `span_same_category` | `σαλα` (Sala; English: Shelah) | TR_NT | `σαλα` (Sala; English: Shelah) | 2 | ACT 7:42 | `Ἰσραήλ` (israel) | ACT 7:42; ACT 7:43 |
+| 37 | greek_screening | `span_same_category` | `σαλα` (Sala; English: Shelah) | BYZ_NT | `σαλα` (Sala; English: Shelah) | 2 | ACT 7:42 | `ισραηλ` (israel; English: Israel) | ACT 7:42; ACT 7:43 |
+| 37 | greek_screening | `span_same_category` | `σαλα` (Sala; English: Shelah) | SBLGNT | `σαλα` (Sala; English: Shelah) | 2 | Acts 7:42 | `Ἰσραήλ;` (israel; English: Israel) | Acts 7:42; Acts 7:43 |
+| 37 | greek_screening | `span_same_category` | `σαλα` (Sala; English: Shelah) | TCG_NT | `σαλα` (Sala; English: Shelah) | 2 | ACT 7:42 | `Ἰσραήλ;` (israel; English: Israel) | ACT 7:42; ACT 7:43 |
+| 37 | greek_screening | `span_same_category` | `σαλα` (Sala; English: Shelah) | TR_NT | `σαλα` (Sala; English: Shelah) | 2 | ACT 7:42 | `Ἰσραήλ` (israel; English: Israel) | ACT 7:42; ACT 7:43 |
 | 38 | greek_screening | `span_same_category` | `αδαμ` (adam; English: Adam) | BYZ_NT | `αδαμ` (adam; English: Adam) | 2 | GAL 4:27 | `ανδρα` (andra) | GAL 4:27; GAL 4:28 |
 | 38 | greek_screening | `span_same_category` | `αδαμ` (adam; English: Adam) | SBLGNT | `αδαμ` (adam; English: Adam) | 2 | Gal 4:27 | `ἄνδρα.` (andra) | Gal 4:27; Gal 4:28 |
 | 38 | greek_screening | `span_same_category` | `αδαμ` (adam; English: Adam) | TCG_NT | `αδαμ` (adam; English: Adam) | 2 | GAL 4:27 | `ἄνδρα.` (andra) | GAL 4:27; GAL 4:28 |
@@ -118,10 +118,10 @@ audit sheet, not an added statistical test.
 | 39 | greek_screening | `span_same_category` | `γαμερ` (gamer; English: Gomer) | SBLGNT | `γαμερ` (gamer; English: Gomer) | -3 | 2Cor 10:3 | `στρατευόμεθα—` (strateuometha) | 2Cor 10:4; 2Cor 10:3 |
 | 39 | greek_screening | `span_same_category` | `γαμερ` (gamer; English: Gomer) | TCG_NT | `γαμερ` (gamer; English: Gomer) | -3 | 2CO 10:3 | `στρατευόμεθα—` (strateuometha) | 2CO 10:4; 2CO 10:3 |
 | 39 | greek_screening | `span_same_category` | `γαμερ` (gamer; English: Gomer) | TR_NT | `γαμερ` (gamer; English: Gomer) | -3 | 2CO 10:3 | `στρατευόμεθα` (strateuometha) | 2CO 10:4; 2CO 10:3 |
-| 40 | greek_screening | `hidden_path_only` | `σαλα` (Sala; English: Shelah) | BYZ_NT | `σαλα` (Sala; English: Shelah) | 2 | 1CO 10:18 | `ισραηλ` (israel) | 1CO 10:18 |
-| 40 | greek_screening | `hidden_path_only` | `σαλα` (Sala; English: Shelah) | SBLGNT | `σαλα` (Sala; English: Shelah) | 2 | 1Cor 10:18 | `Ἰσραὴλ` (israel) | 1Cor 10:18 |
-| 40 | greek_screening | `hidden_path_only` | `σαλα` (Sala; English: Shelah) | TCG_NT | `σαλα` (Sala; English: Shelah) | 2 | 1CO 10:18 | `Ἰσραὴλ` (israel) | 1CO 10:18 |
-| 40 | greek_screening | `hidden_path_only` | `σαλα` (Sala; English: Shelah) | TR_NT | `σαλα` (Sala; English: Shelah) | 2 | 1CO 10:18 | `Ἰσραὴλ` (israel) | 1CO 10:18 |
+| 40 | greek_screening | `hidden_path_only` | `σαλα` (Sala; English: Shelah) | BYZ_NT | `σαλα` (Sala; English: Shelah) | 2 | 1CO 10:18 | `ισραηλ` (israel; English: Israel) | 1CO 10:18 |
+| 40 | greek_screening | `hidden_path_only` | `σαλα` (Sala; English: Shelah) | SBLGNT | `σαλα` (Sala; English: Shelah) | 2 | 1Cor 10:18 | `Ἰσραὴλ` (israel; English: Israel) | 1Cor 10:18 |
+| 40 | greek_screening | `hidden_path_only` | `σαλα` (Sala; English: Shelah) | TCG_NT | `σαλα` (Sala; English: Shelah) | 2 | 1CO 10:18 | `Ἰσραὴλ` (israel; English: Israel) | 1CO 10:18 |
+| 40 | greek_screening | `hidden_path_only` | `σαλα` (Sala; English: Shelah) | TR_NT | `σαλα` (Sala; English: Shelah) | 2 | 1CO 10:18 | `Ἰσραὴλ` (israel; English: Israel) | 1CO 10:18 |
 | 41 | greek_screening | `hidden_path_only` | `αμην` (amen; English: Amen) | BYZ_NT | `αμην` (amen; English: Amen) | 2 | 1CO 1:10 | `μη` (me) | 1CO 1:10 |
 | 41 | greek_screening | `hidden_path_only` | `αμην` (amen; English: Amen) | SBLGNT | `αμην` (amen; English: Amen) | 2 | 1Cor 1:10 | `μὴ` (me) | 1Cor 1:10 |
 | 41 | greek_screening | `hidden_path_only` | `αμην` (amen; English: Amen) | TCG_NT | `αμην` (amen; English: Amen) | 2 | 1CO 1:10 | `μὴ` (me) | 1CO 1:10 |
@@ -130,11 +130,11 @@ audit sheet, not an added statistical test.
 | 42 | greek_screening | `hidden_path_only` | `υιοσ` (huios; English: Son) | SBLGNT | `υιοσ` (huios; English: Son) | 2 | 1Cor 5:12 | `τοὺς` (tous) | 1Cor 5:12 |
 | 42 | greek_screening | `hidden_path_only` | `υιοσ` (huios; English: Son) | TCG_NT | `υιοσ` (huios; English: Son) | 2 | 1CO 5:12 | `τοὺς` (tous) | 1CO 5:12 |
 | 42 | greek_screening | `hidden_path_only` | `υιοσ` (huios; English: Son) | TR_NT | `υιοσ` (huios; English: Son) | 2 | 1CO 5:12 | `τοὺς` (tous) | 1CO 5:12 |
-| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | EBIBLE_WLC | `שממה` (shmmh; English: Desolation) | 2 | MIC 1:7 | `שְׁמָמָ֑ה` (shmmh) | MIC 1:7 |
-| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | MAM | `שממה` (shmmh; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shmmh) | Mic 1:7 |
-| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | MT_WLC | `שממה` (shmmh; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shmmh) | Mic 1:7 |
-| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | UHB | `שממה` (shmmh; English: Desolation) | 2 | MIC 1:7 | `שְׁמָמָ֑ה` (shmmh) | MIC 1:7 |
-| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | UXLC | `שממה` (shmmh; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shmmh) | Mic 1:7 |
+| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | EBIBLE_WLC | `שממה` (shmmh; English: Desolation) | 2 | MIC 1:7 | `שְׁמָמָ֑ה` (shmmh; English: Desolation) | MIC 1:7 |
+| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | MAM | `שממה` (shmmh; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shmmh; English: Desolation) | Mic 1:7 |
+| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | MT_WLC | `שממה` (shmmh; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shmmh; English: Desolation) | Mic 1:7 |
+| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | UHB | `שממה` (shmmh; English: Desolation) | 2 | MIC 1:7 | `שְׁמָמָ֑ה` (shmmh; English: Desolation) | MIC 1:7 |
+| 43 | hebrew_screening | `center_word_exact` | `שממה` (shmmh; English: Desolation) | UXLC | `שממה` (shmmh; English: Desolation) | 2 | Mic 1:7 | `שְׁמָמָ֑ה` (shmmh; English: Desolation) | Mic 1:7 |
 | 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | EBIBLE_WLC | `יהוה` (YHWH; English: YHWH) | 3 | 1CH 26:27 | `יְהוָֽה׃` (yhwh) | 1CH 26:27; 1CH 26:28 |
 | 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | MAM | `יהוה` (YHWH; English: YHWH) | 3 | 1 Chr 26:27 | `יְהֹוָֽה׃` (yhwh) | 1 Chr 26:27; 1 Chr 26:28 |
 | 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | MT_WLC | `יהוה` (YHWH; English: YHWH) | 3 | 1Chr 26:27 | `יְהוָֽה` (YHWH; English: YHWH) | 1Chr 26:27; 1Chr 26:28 |
