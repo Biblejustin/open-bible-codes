@@ -19,6 +19,7 @@ The input term set combines all committed term CSVs except `terms/crd_placeholde
 - compact review queue: `reports/crd_self_surface/review_queue.csv`
 - Bible exact center-word hits: `reports/crd_self_surface/center_word_hits.csv`
 - exact center-word density summary: `reports/crd_self_surface/center_word_bible_vs_control_summary.csv`
+- exact center-word review queue: `reports/crd_self_surface/center_word_review_queue.csv`
 
 ## Reproduce
 
@@ -29,6 +30,7 @@ make crd-self-surface-report
 make crd-self-surface-queue
 make crd-self-surface-center-word
 make crd-self-surface-center-word-density
+make crd-self-surface-center-word-queue
 ```
 
 ## Run Size
@@ -40,6 +42,8 @@ make crd-self-surface-center-word-density
 - nonzero `(term, corpus)` density rows: 5,323
 - compact review queue rows: 309
 - compact review queue selected terms: 50
+- exact center-word review queue rows: 202
+- exact center-word review queue selected terms: 50
 - runtime: 7,539.274 seconds
 
 ## Headline Counts

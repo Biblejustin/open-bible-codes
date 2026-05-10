@@ -19,6 +19,9 @@ The input term set combines all committed term CSVs except `terms/crd_placeholde
 - classified hits: `reports/crd_concept_surface/classified_hits.csv`
 - comparison report: `reports/crd_concept_surface/CRD_CONCEPT_SURFACE_REPORT.md`
 - compact review queue: `reports/crd_concept_surface/review_queue.csv`
+- Bible exact center-word hits: `reports/crd_concept_surface/center_word_hits.csv`
+- exact center-word density summary: `reports/crd_concept_surface/center_word_bible_vs_control_summary.csv`
+- exact center-word review queue: `reports/crd_concept_surface/center_word_review_queue.csv`
 
 ## Reproduce
 
@@ -27,6 +30,9 @@ make crd-concept-surface-prepare
 make crd-concept-surface-run
 make crd-concept-surface-report
 make crd-concept-surface-queue
+make crd-concept-surface-center-word
+make crd-concept-surface-center-word-density
+make crd-concept-surface-center-word-queue
 ```
 
 ## Run Size
@@ -36,6 +42,8 @@ make crd-concept-surface-queue
 - classified hit rows: 1,404,450
 - compact review queue rows: 309
 - compact review queue selected terms: 50
+- exact center-word review queue rows: 202
+- exact center-word review queue selected terms: 50
 - corpora with output: 20
 - nonzero `(term, corpus)` density rows: 5,370
 - runtime: 7,098.759 seconds
@@ -135,26 +143,26 @@ The rerun also produced an ignored local subset at `reports/crd_concept_surface/
 
 - Bible `center_word` rows: 1,044
 - distinct term IDs: 131
-- rows from terms that exceed secular max: 602
-- rows from terms that do not exceed secular max: 442
-- distinct exceeding terms: 54
-- exceeding Hebrew terms: 27
-- exceeding Greek terms: 19
-- exceeding English terms: 8
+- rows from terms that exceed secular max in the center-word-only summary: 1,023
+- rows from terms that do not exceed secular max in the center-word-only summary: 21
+- distinct exceeding terms: 120
+- exceeding Hebrew terms: 70
+- exceeding Greek terms: 35
+- exceeding English terms: 15
 
 Top exact center-word terms by Bible row count:
 
 | Term | Language | Visible term | Concept | Rows | Exceeds secular max | Bible max | Secular max | Ratio |
 | --- | --- | --- | --- | ---: | --- | ---: | ---: | ---: |
 | `bns_esther_yhwh_h` and YHWH duplicates | hebrew | `יהוה` | YHWH | 54 each | true | 63.5651342 | 9.4471675 | 6.72848599 |
-| `cc_israel_h` and Israel duplicates | hebrew | `ישראל` | Israel | 33 each | false | 55.741592 | 58.3717191 | 0.954941757 |
+| `cc_israel_h` and Israel duplicates | hebrew | `ישראל` | Israel | 33 each | true in center-word-only summary | 5.84774803 | 0.725114523 | 8.06458545 |
 | `bns_babylon_h`, `babylon_h`, `babylon_alt_h`, `babel_h` | hebrew | `בבל` | Babylon/Babel | 25 each | true | 12.5457502 | 5.80091618 | 2.16271875 |
 | `lord_h` | hebrew | `אדני` | Lord | 15 | true | 26.764267 | 1.22463282 | 21.854932 |
 | `cc_elohim_h`, `god_h` | hebrew | `אלהים` | Elohim/God | 15 each | true | 26.7325624 | 15.3953841 | 1.73640113 |
 | `wisdom_g`, `wisdom_gxc` | greek | `σοφια` | Wisdom | 7 each | true | 4.41254988 | 0 |  |
 | `eng_david`, `eng_david_2`, `eng_david_3` | english | `David` | David | 6 each | true | 4.65372414 | 0 |  |
 
-The exact center-word subset contains both strong-looking rows and obvious base-rate warnings. For example, exact centered `Israel` rows do not exceed the Hebrew secular maximum. This reinforces the need to compare center-word findings against controls, not just count them.
+The exact center-word subset should be compared with its own center-word-only control summary, not with the broader all-scope CRD summary. The broader summary includes verse-level and span-level matches, which can change the control maximum for a term.
 
 ### Center-Word-Only Bible-Vs-Control Density
 
@@ -162,12 +170,14 @@ The exact center-word subset also has its own ignored density outputs:
 
 - matrix: `reports/crd_concept_surface/center_word_density_matrix.csv`
 - summary: `reports/crd_concept_surface/center_word_bible_vs_control_summary.csv`
+- compact review queue: `reports/crd_concept_surface/center_word_review_queue.csv`
 - summary rows: 2,731
 - terms exceeding secular max: 120
 - Bible-positive/secular-zero terms: 94
 - exceeding Hebrew terms: 70
 - exceeding Greek terms: 35
 - exceeding English terms: 15
+- exact center-word review queue rows: 202
 
 Top finite center-word-only ratios:
 

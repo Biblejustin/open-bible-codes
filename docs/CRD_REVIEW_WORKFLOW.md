@@ -48,6 +48,7 @@ make crd-self-surface-report
 make crd-self-surface-queue
 make crd-self-surface-center-word
 make crd-self-surface-center-word-density
+make crd-self-surface-center-word-queue
 ```
 
 This writes ignored local artifacts under `reports/crd_self_surface/`.
@@ -64,6 +65,7 @@ make crd-concept-surface-report
 make crd-concept-surface-queue
 make crd-concept-surface-center-word
 make crd-concept-surface-center-word-density
+make crd-concept-surface-center-word-queue
 ```
 
 This writes ignored local artifacts under `reports/crd_concept_surface/`.
@@ -74,6 +76,9 @@ The center-word target extracts all Bible rows where the deterministic surface
 keyword matched the exact centered visible word.
 The center-word-density target recomputes Bible-vs-control density using only
 that exact center-word scope.
+The center-word-queue target builds a compact review CSV from that exact
+center-word subset, so review can begin with hidden `X` centered directly on
+visible `X`.
 
 LLM-assisted drafting is allowed for lexical/context related-term proposals when
 the provenance names that assistance. The key rule is not "human-only"; the key
