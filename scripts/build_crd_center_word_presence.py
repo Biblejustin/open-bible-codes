@@ -8,6 +8,8 @@ import csv
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from els.term_display import KNOWN_TERMS, display_term, normalized_script_key
+
 
 FIELDNAMES = [
     "term_id",
@@ -143,7 +145,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             "| "
             + " | ".join(
                 [
-                    f"`{escape_md(row['term_id'])}`",
+                    term_cell(row),
                     escape_md(row["language"]),
                     row["center_word_rows"],
                     row["corpus_count"],
@@ -168,6 +170,16 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
 
 
+def term_cell(row: dict[str, str]) -> str:
+    term = row.get("term", "")
+    concept = row.get("concept", "")
+    term_id = row.get("term_id", "")
+    if term:
+        english = None if normalized_script_key(term) in KNOWN_TERMS else concept or None
+        return md_cell(f"{display_term(term, english=english)}<br>`{term_id}`")
+    return f"`{escape_md(term_id)}`"
+
+
 def read_dicts(path: Path) -> list[dict[str, str]]:
     with path.open(newline="", encoding="utf-8") as handle:
         return list(csv.DictReader(handle))
@@ -179,6 +191,10 @@ def format_counter(counter: Counter[str]) -> str:
 
 def escape_md(value: str) -> str:
     return value.replace("|", "\\|")
+
+
+def md_cell(value: str) -> str:
+    return escape_md(value).replace("\n", " ")
 
 
 if __name__ == "__main__":

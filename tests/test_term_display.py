@@ -13,6 +13,10 @@ class TermDisplayTests(unittest.TestCase):
     def test_displays_common_hebrew_report_term_with_gloss(self) -> None:
         self.assertEqual(display_term("בבל"), "`בבל` (Bavel; English: Babylon)")
 
+    def test_displays_core_hebrew_report_terms_with_glosses(self) -> None:
+        self.assertEqual(display_term("יהוה"), "`יהוה` (YHWH; English: YHWH)")
+        self.assertEqual(display_term("ישראל"), "`ישראל` (Yisrael; English: Israel)")
+
     def test_displays_known_hebrew_term_with_diacritics(self) -> None:
         self.assertEqual(display_term("יֵשׁ֤וּעַ"), "`יֵשׁ֤וּעַ` (Yeshua; English: Yeshua/Jeshua)")
 

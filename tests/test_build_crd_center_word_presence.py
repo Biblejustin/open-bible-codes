@@ -18,9 +18,9 @@ class BuildCrdCenterWordPresenceTests(unittest.TestCase):
                 "\n".join(
                     [
                         "term_id,term,concept,category,language,corpus,center_ref",
-                        "beta_g,BETA,Beta,test,greek,SBLGNT,REV 20:8",
-                        "alpha_h,ALPHA,Alpha,test,hebrew,MT_WLC,GEN 1:1",
-                        "alpha_h,ALPHA,Alpha,test,hebrew,UHB,GEN 1:1",
+                        "beta_g,βητα,Beta,test,greek,SBLGNT,REV 20:8",
+                        "alpha_h,אב,Alpha,test,hebrew,MT_WLC,GEN 1:1",
+                        "alpha_h,אב,Alpha,test,hebrew,UHB,GEN 1:1",
                     ]
                 )
                 + "\n",
@@ -61,7 +61,8 @@ class BuildCrdCenterWordPresenceTests(unittest.TestCase):
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("# CRD Exact Center-Word Version Presence", text)
             self.assertIn("- term rows: 2", text)
-            self.assertIn("`alpha_h`", text)
+            self.assertIn("`אב` (b; English: Alpha)<br>`alpha_h`", text)
+            self.assertIn("`βητα` (beta; English: Beta)<br>`beta_g`", text)
 
 
 if __name__ == "__main__":
