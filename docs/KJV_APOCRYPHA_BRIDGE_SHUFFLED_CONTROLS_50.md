@@ -1,4 +1,4 @@
-# KJVA Apocrypha Bridge Shuffled Controls
+# KJVA Apocrypha Bridge Shuffled Controls (50 Samples)
 
 Status: shuffled-insertion controls. This is not a claim report.
 
