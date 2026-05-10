@@ -49,7 +49,7 @@ same-skip extension is an added review feature, not a requirement.
 | 78 | hebrew_theology | `span_same_category` | `משיח` (Mashiach; English: Messiah) | UXLC | `before_match` | `שבנא` (shbn) | `phrase_2+word` | 6 | שֶׁבְנָ֖א; שֶׁבְנָ֣א; שֵֽׁב־ נָ֣א; שֵׁ֣ב נָ֔א |
 | 79 | hebrew_theology | `span_same_category` | `משיח` (Mashiach; English: Messiah) | UXLC | `after_match` | `לובו` (lwbw) | `phrase_2` | 1 | ל֖וֹ בּֽוֹ׃ |
 | 51 | hebrew_screening | `center_verse_exact` | `ביבי` (byby; English: Bibi) | UXLC | `after_match` | `יפתח` (yptch) | `word` | 41 | יִפְתַּ֨ח; יִפְתַּ֣ח; יִפְתַּח־; יִפְתָּֽח׃; יִפְתָּ֗ח |
-| 31 | greek_screening | `center_verse_same_category` | `ναοσ` (naos; English: Temple) | SBLGNT | `before_match` | `υιον` (uion) | `word` | 85 | υἱὸν; υἱόν,; ⸀υἱόν·; υἱόν; υἱόν. |
+| 31 | greek_screening | `center_verse_same_category` | `ναοσ` (naos; English: Temple) | SBLGNT | `before_match` | `υιον` (uion; English: son) | `word` | 85 | υἱὸν; υἱόν,; ⸀υἱόν·; υἱόν; υἱόν. |
 | 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UXLC | `before_match` | `הילק` (hylq) | `word` | 3 | הַיָּ֑לֶק; הַיֶּ֔לֶק; הַיֶּ֖לֶק |
 | 70 | hebrew_theology | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UXLC | `before_match` | `הילק` (hylq) | `word` | 3 | הַיָּ֑לֶק; הַיֶּ֔לֶק; הַיֶּ֖לֶק |
 | 75 | hebrew_theology | `center_verse_same_category` | `אהבה` (hbh; English: Love) | UXLC | `after_match` | `הלהב` (hlhb) | `word` | 3 | הַלַּ֗הַב; הַלַּ֔הַב; הַלַּ֜הַב |

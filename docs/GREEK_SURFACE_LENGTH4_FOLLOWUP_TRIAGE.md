@@ -33,7 +33,7 @@ separate prospective study registers them in advance.
 | Term | Concept | Length | Center | Skip | Direction | Length-cohort rank | Center words |
 | --- | --- | ---: | --- | ---: | --- | ---: | --- |
 | `αμην` (amen; English: Amen) | Amen | 4 | John 10:7 | -42 | backward | 1 | TR_NT:`οὖν` (oun); BYZ_NT:`ουν` (oun); TCG_NT:`οὖν` (oun); SBLGNT:`οὖν` (oun) |
-| `αμην` (amen; English: Amen) | Amen | 4 | John 6:53 | -42 | backward | 1 | TR_NT:`ἀνθρώπου` (anthropou); BYZ_NT:`ανθρωπου` (anthropou); TCG_NT:`ἀνθρώπου` (anthropou); SBLGNT:`ἀνθρώπου` (anthropou) |
+| `αμην` (amen; English: Amen) | Amen | 4 | John 6:53 | -42 | backward | 1 | TR_NT:`ἀνθρώπου` (anthropou; English: man/human); BYZ_NT:`ανθρωπου` (anthropou; English: man/human); TCG_NT:`ἀνθρώπου` (anthropou; English: man/human); SBLGNT:`ἀνθρώπου` (anthropou; English: man/human) |
 | `αμην` (amen; English: Amen) | Amen | 4 | Mark 8:12 | -13 | backward | 1 | TR_NT:`ταύτῃ` (taute); BYZ_NT:`ταυτη` (taute); TCG_NT:`ταύτῃ` (taute); SBLGNT:`ταύτῃ` (taute) |
 | `αμην` (amen; English: Amen) | Amen | 4 | Matt 5:18 | -8 | backward | 1 | TR_NT:`ἰῶτα` (iota); BYZ_NT:`ιωτα` (iota); TCG_NT:`ἰῶτα` (iota); SBLGNT:`ἰῶτα` (iota) |
 | `αμην` (amen; English: Amen) | Amen | 4 | Matt 18:13 | -7 | backward | 1 | TR_NT:`λέγω` (lego); BYZ_NT:`λεγω` (lego); TCG_NT:`λέγω` (lego); SBLGNT:`λέγω` (lego) |

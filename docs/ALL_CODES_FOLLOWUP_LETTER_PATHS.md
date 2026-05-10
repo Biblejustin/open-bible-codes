@@ -58,10 +58,10 @@ audit sheet, not an added statistical test.
 | 24 | greek_screening | `center_word_exact` | `αιμα` (haima; English: Blood) | SBLGNT | `αιμα` (haima; English: Blood) | -10 | Rev 19:13 | `αἵματι,` (aimati) | Rev 19:13 |
 | 24 | greek_screening | `center_word_exact` | `αιμα` (haima; English: Blood) | TCG_NT | `αιμα` (haima; English: Blood) | -10 | REV 19:13 | `αἵματι,` (aimati) | REV 19:13 |
 | 24 | greek_screening | `center_word_exact` | `αιμα` (haima; English: Blood) | TR_NT | `αιμα` (haima; English: Blood) | -10 | REV 19:13 | `αἵματι` (aimati) | REV 19:13 |
-| 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | BYZ_NT | `λουδ` (loud; English: Lud) | -2 | PHP 2:7 | `δουλου` (doulou) | PHP 2:7 |
-| 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | SBLGNT | `λουδ` (loud; English: Lud) | -2 | Phil 2:7 | `δούλου` (doulou) | Phil 2:7 |
-| 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | TCG_NT | `λουδ` (loud; English: Lud) | -2 | PHP 2:7 | `δούλου` (doulou) | PHP 2:7 |
-| 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | TR_NT | `λουδ` (loud; English: Lud) | -2 | PHP 2:7 | `δούλου` (doulou) | PHP 2:7 |
+| 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | BYZ_NT | `λουδ` (loud; English: Lud) | -2 | PHP 2:7 | `δουλου` (doulou; English: servant) | PHP 2:7 |
+| 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | SBLGNT | `λουδ` (loud; English: Lud) | -2 | Phil 2:7 | `δούλου` (doulou; English: servant) | Phil 2:7 |
+| 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | TCG_NT | `λουδ` (loud; English: Lud) | -2 | PHP 2:7 | `δούλου` (doulou; English: servant) | PHP 2:7 |
+| 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | TR_NT | `λουδ` (loud; English: Lud) | -2 | PHP 2:7 | `δούλου` (doulou; English: servant) | PHP 2:7 |
 | 26 | greek_screening | `center_word_same_category` | `ιωυαν` (Iouan; English: Javan) | BYZ_NT | `ιωυαν` (Iouan; English: Javan) | -2 | 1PE 5:13 | `βαβυλωνι` (babuloni) | 1PE 5:13 |
 | 26 | greek_screening | `center_word_same_category` | `ιωυαν` (Iouan; English: Javan) | SBLGNT | `ιωυαν` (Iouan; English: Javan) | -2 | 1Pet 5:13 | `Βαβυλῶνι` (babuloni) | 1Pet 5:13 |
 | 26 | greek_screening | `center_word_same_category` | `ιωυαν` (Iouan; English: Javan) | TCG_NT | `ιωυαν` (Iouan; English: Javan) | -2 | 1PE 5:13 | `Βαβυλῶνι` (babuloni) | 1PE 5:13 |
@@ -82,10 +82,10 @@ audit sheet, not an added statistical test.
 | 30 | greek_screening | `center_verse_exact` | `αιμα` (haima; English: Blood) | SBLGNT | `αιμα` (haima; English: Blood) | 2 | Matt 13:55 | `Μαριὰμ` (mariam) | Matt 13:55 |
 | 30 | greek_screening | `center_verse_exact` | `αιμα` (haima; English: Blood) | TCG_NT | `αιμα` (haima; English: Blood) | 2 | MAT 13:55 | `Μαριάμ,` (mariam) | MAT 13:55 |
 | 30 | greek_screening | `center_verse_exact` | `αιμα` (haima; English: Blood) | TR_NT | `αιμα` (haima; English: Blood) | 2 | MAT 13:55 | `Μαριάμ` (mariam) | MAT 13:55 |
-| 31 | greek_screening | `center_verse_same_category` | `ναοσ` (naos; English: Temple) | BYZ_NT | `ναοσ` (naos; English: Temple) | 2 | 1CO 10:16 | `του` (tou) | 1CO 10:16 |
-| 31 | greek_screening | `center_verse_same_category` | `ναοσ` (naos; English: Temple) | SBLGNT | `ναοσ` (naos; English: Temple) | 2 | 1Cor 10:16 | `τοῦ` (tou) | 1Cor 10:16 |
-| 31 | greek_screening | `center_verse_same_category` | `ναοσ` (naos; English: Temple) | TCG_NT | `ναοσ` (naos; English: Temple) | 2 | 1CO 10:16 | `τοῦ` (tou) | 1CO 10:16 |
-| 31 | greek_screening | `center_verse_same_category` | `ναοσ` (naos; English: Temple) | TR_NT | `ναοσ` (naos; English: Temple) | 2 | 1CO 10:16 | `τοῦ` (tou) | 1CO 10:16 |
+| 31 | greek_screening | `center_verse_same_category` | `ναοσ` (naos; English: Temple) | BYZ_NT | `ναοσ` (naos; English: Temple) | 2 | 1CO 10:16 | `του` (tou; English: of the) | 1CO 10:16 |
+| 31 | greek_screening | `center_verse_same_category` | `ναοσ` (naos; English: Temple) | SBLGNT | `ναοσ` (naos; English: Temple) | 2 | 1Cor 10:16 | `τοῦ` (tou; English: of the) | 1Cor 10:16 |
+| 31 | greek_screening | `center_verse_same_category` | `ναοσ` (naos; English: Temple) | TCG_NT | `ναοσ` (naos; English: Temple) | 2 | 1CO 10:16 | `τοῦ` (tou; English: of the) | 1CO 10:16 |
+| 31 | greek_screening | `center_verse_same_category` | `ναοσ` (naos; English: Temple) | TR_NT | `ναοσ` (naos; English: Temple) | 2 | 1CO 10:16 | `τοῦ` (tou; English: of the) | 1CO 10:16 |
 | 32 | greek_screening | `center_verse_same_category` | `κινα` (kina; English: China) | BYZ_NT | `κινα` (kina; English: China) | 2 | 1JN 2:1 | `δικαιον` (dikaion) | 1JN 2:1; 1JN 2:2 |
 | 32 | greek_screening | `center_verse_same_category` | `κινα` (kina; English: China) | SBLGNT | `κινα` (kina; English: China) | 2 | 1John 2:1 | `δίκαιον,` (dikaion) | 1John 2:1; 1John 2:2 |
 | 32 | greek_screening | `center_verse_same_category` | `κινα` (kina; English: China) | TCG_NT | `κινα` (kina; English: China) | 2 | 1JN 2:1 | `δίκαιον.` (dikaion) | 1JN 2:1; 1JN 2:2 |

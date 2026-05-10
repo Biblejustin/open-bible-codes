@@ -62,7 +62,7 @@ It is a triage aid, not a claim-grade filter.
 
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | all_source | `lud_g` `λουδ` (loud; English: Lud) | Lud | -2 | 7 | Phil 2:7 | `δουλου` (doulou) |  |
+| 1 | all_source | `lud_g` `λουδ` (loud; English: Lud) | Lud | -2 | 7 | Phil 2:7 | `δουλου` (doulou; English: servant) |  |
 | 2 | all_source | `javan_g` `ιωυαν` (Iouan; English: Javan) | Javan | -2 | 9 | 1Pet 5:13 | `βαβυλωνι` (babuloni) |  |
 | 3 | all_source | `obal_g` `ευαλ` (eual; English: Obal) | Obal | -3 | 10 | 1Tim 5:14 | `βουλομαι` (boulomai) |  |
 | 4 | all_source | `zion_g` `σιων` (Sion; English: Zion) | Zion | 3 | 10 | Acts 7:12 | `ιακωβ` (iakob; English: Jacob) |  |
@@ -95,7 +95,7 @@ It is a triage aid, not a claim-grade filter.
 | 6 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | 3 | 10 | Eph 4:17 | `εν` (en) |  |
 | 7 | all_source | `amen_g` `αμην` (amen; English: Amen) | Amen | -3 | 10 | John 5:24 | `ζωην` (zoen) |  |
 | 8 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -3 | 10 | Rev 2:10 | `στεφανον` (stephanon) |  |
-| 9 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -4 | 13 | 1Cor 9:22 | `τοισ` (tois) |  |
+| 9 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -4 | 13 | 1Cor 9:22 | `τοισ` (tois; English: to the) |  |
 | 10 | all_source | `god_g` `θεοσ` (theos; English: God) | God | 4 | 13 | 1John 4:9 | `εισ` (eis) |  |
 | 11 | all_source | `zion_g` `σιων` (Sion; English: Zion) | Zion | -4 | 13 | Acts 19:34 | `επι` (epi) |  |
 | 12 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | -4 | 13 | Col 1:11 | `δυναμουμενοι` (dunamoumenoi) |  |
@@ -112,25 +112,25 @@ It is a triage aid, not a claim-grade filter.
 
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | all_source | `temple_g` `ναοσ` (naos; English: Temple) | Temple | 2 | 7 | 1Cor 10:16 | `του` (tou) |  |
+| 1 | all_source | `temple_g` `ναοσ` (naos; English: Temple) | Temple | 2 | 7 | 1Cor 10:16 | `του` (tou; English: of the) |  |
 | 2 | all_source | `china_g` `κινα` (kina; English: China) | China | 2 | 7 | 1John 2:1 | `δικαιον` (dikaion) |  |
 | 3 | all_source | `boils_g` `ελκη` (elke; English: Boils) | Boils | 2 | 7 | 1Pet 5:13 | `συνεκλεκτη` (suneklekte) |  |
 | 4 | all_source | `sores_g` `ελκη` (elke; English: Sores) | Sores | 2 | 7 | 1Pet 5:13 | `συνεκλεκτη` (suneklekte) |  |
 | 5 | all_source | `temple_g` `ναοσ` (naos; English: Temple) | Temple | 2 | 7 | 1Tim 5:13 | `μανθανουσι` (manthanousi) |  |
-| 6 | all_source | `seba_g` `σαβα` (saba; English: Seba) | Seba | 2 | 7 | 1Tim 6:9 | `και` (kai) |  |
+| 6 | all_source | `seba_g` `σαβα` (saba; English: Seba) | Seba | 2 | 7 | 1Tim 6:9 | `και` (kai; English: and) |  |
 | 7 | all_source | `lasha_g` `δασα` (dasa; English: Lasha) | Lasha | -2 | 7 | 2Cor 1:22 | `καρδιαισ` (kardiais) |  |
 | 8 | all_source | `lasha_g` `δασα` (dasa; English: Lasha) | Lasha | -2 | 7 | 2Cor 3:2 | `καρδιαισ` (kardiais) |  |
 | 9 | all_source | `lasha_g` `δασα` (dasa; English: Lasha) | Lasha | -2 | 7 | 2Cor 4:6 | `καρδιαισ` (kardiais) |  |
 | 10 | all_source | `lasha_g` `δασα` (dasa; English: Lasha) | Lasha | -2 | 7 | 2Cor 7:3 | `καρδιαισ` (kardiais) |  |
 | 11 | all_source | `lasha_g` `δασα` (dasa; English: Lasha) | Lasha | -2 | 7 | 2Tim 1:10 | `αφθαρσιαν` (aphtharsian) |  |
 | 12 | all_source | `aram_g` `αραμ` (aram; English: Aram) | Aram | 2 | 7 | 2Tim 1:9 | `εργα` (erga) |  |
-| 13 | all_source | `adam_g` `αδαμ` (adam; English: Adam) | Adam | 2 | 7 | Acts 13:22 | `καρδιαν` (kardian) |  |
+| 13 | all_source | `adam_g` `αδαμ` (adam; English: Adam) | Adam | 2 | 7 | Acts 13:22 | `καρδιαν` (kardian; English: heart) |  |
 | 14 | all_source | `iran_g` `ιραν` (iran; English: Iran) | Iran | -2 | 7 | Acts 15:23 | `χαιρειν` (chairein) |  |
-| 15 | all_source | `temple_g` `ναοσ` (naos; English: Temple) | Temple | 2 | 7 | Acts 16:22 | `και` (kai) |  |
+| 15 | all_source | `temple_g` `ναοσ` (naos; English: Temple) | Temple | 2 | 7 | Acts 16:22 | `και` (kai; English: and) |  |
 | 16 | all_source | `temple_g` `ναοσ` (naos; English: Temple) | Temple | -2 | 7 | Acts 7:58 | `ποδασ` (podas) |  |
 | 17 | all_source | `god_g` `θεοσ` (theos; English: God) | God | -2 | 7 | Acts 9:11 | `πορευθητι` (poreutheti) |  |
 | 18 | all_source | `china_g` `κινα` (kina; English: China) | China | 2 | 7 | Heb 11:19 | `εν` (en) |  |
-| 19 | all_source | `temple_g` `ναοσ` (naos; English: Temple) | Temple | 2 | 7 | Heb 2:17 | `τοισ` (tois) |  |
+| 19 | all_source | `temple_g` `ναοσ` (naos; English: Temple) | Temple | 2 | 7 | Heb 2:17 | `τοισ` (tois; English: to the) |  |
 | 20 | all_source | `cush_g` `χουσ` (chous; English: Cush) | Cush | -2 | 7 | Heb 4:7 | `τοσουτον` (tosouton) |  |
 
 ### span_exact
@@ -144,16 +144,16 @@ It is a triage aid, not a claim-grade filter.
 | 5 | all_source | `amen_g` `αμην` (amen; English: Amen) | Amen | -9 | 28 | 1John 1:1 | `ακηκοαμεν` (akekoamen) |  |
 | 6 | all_source | `god_g` `θεοσ` (theos; English: God) | God | 9 | 28 | Acts 17:29 | `ειναι` (einai) |  |
 | 7 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 10 | 31 | Acts 11:14 | `λαλησει` (lalesei) |  |
-| 8 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | -10 | 31 | Luke 11:52 | `τοισ` (tois) |  |
-| 9 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | -10 | 31 | Luke 11:52 | `τοισ` (tois) |  |
+| 8 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | -10 | 31 | Luke 11:52 | `τοισ` (tois; English: to the) |  |
+| 9 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | -10 | 31 | Luke 11:52 | `τοισ` (tois; English: to the) |  |
 | 10 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -10 | 31 | Matt 4:15 | `εθνων` (ethnon) |  |
-| 11 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | 11 | 34 | Luke 11:52 | `τοισ` (tois) |  |
-| 12 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | 11 | 34 | Luke 11:52 | `τοισ` (tois) |  |
+| 11 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | 11 | 34 | Luke 11:52 | `τοισ` (tois; English: to the) |  |
+| 12 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | 11 | 34 | Luke 11:52 | `τοισ` (tois; English: to the) |  |
 | 13 | all_source | `asher_g` `ασηρ` (aser; English: Asher) | Asher | -11 | 34 | Luke 23:8 | `ιδων` (idon) |  |
 | 14 | all_source | `blood_g` `αιμα` (haima; English: Blood) | Blood | -13 | 40 | Rom 3:16 | `ταλαιπωρια` (talaiporia) |  |
 | 15 | all_source | `haima_gnt` `αιμα` (haima; English: Blood) | Blood | -13 | 40 | Rom 3:16 | `ταλαιπωρια` (talaiporia) |  |
 | 16 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 13 | 40 | Rom 8:5 | `οντεσ` (ontes) |  |
-| 17 | all_source | `cush_g` `χουσ` (chous; English: Cush) | Cush | 14 | 43 | John 12:9 | `εκ` (ek) |  |
+| 17 | all_source | `cush_g` `χουσ` (chous; English: Cush) | Cush | 14 | 43 | John 12:9 | `εκ` (ek; English: from) |  |
 | 18 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 15 | 46 | 1Cor 15:53 | `αθανασιαν` (athanasian) |  |
 | 19 | all_source | `son_g` `υιοσ` (huios; English: Son) | Son | -16 | 49 | Acts 16:2 | `λυστροισ` (lustrois) |  |
 | 20 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | -17 | 52 | 2Cor 13:10 | `τουτο` (touto) |  |

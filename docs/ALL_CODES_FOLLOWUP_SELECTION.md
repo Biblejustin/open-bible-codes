@@ -72,13 +72,13 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 22 | greek_screening | `center_word_exact` | all_source | `νατο` (nato; English: NATO) | NATO | 8 | Rom 5:10 | `θανατου` (thanatou) |
 | 23 | greek_screening | `center_word_exact` | all_source | `ναοσ` (naos; English: Temple) | Temple | -9 | Matt 23:17 | `ναοσ` (naos; English: temple) |
 | 24 | greek_screening | `center_word_exact` | all_source | `αιμα` (haima; English: Blood) | Blood | -10 | Rev 19:13 | `αιματι` (aimati) |
-| 25 | greek_screening | `center_word_same_category` | all_source | `λουδ` (loud; English: Lud) | Lud | -2 | Phil 2:7 | `δουλου` (doulou) |
+| 25 | greek_screening | `center_word_same_category` | all_source | `λουδ` (loud; English: Lud) | Lud | -2 | Phil 2:7 | `δουλου` (doulou; English: servant) |
 | 26 | greek_screening | `center_word_same_category` | all_source | `ιωυαν` (Iouan; English: Javan) | Javan | -2 | 1Pet 5:13 | `βαβυλωνι` (babuloni) |
 | 27 | greek_screening | `center_word_same_category` | all_source | `ευαλ` (eual; English: Obal) | Obal | -3 | 1Tim 5:14 | `βουλομαι` (boulomai) |
 | 28 | greek_screening | `center_verse_exact` | all_source | `δασα` (dasa; English: Lasha) | Lasha | -2 | Acts 9:11 | `ταρσεα` (tarsea) |
 | 29 | greek_screening | `center_verse_exact` | all_source | `αιμα` (haima; English: Blood) | Blood | 2 | Matt 13:55 | `μαριαμ` (mariam) |
 | 30 | greek_screening | `center_verse_exact` | all_source | `αιμα` (haima; English: Blood) | Blood | 2 | Matt 13:55 | `μαριαμ` (mariam) |
-| 31 | greek_screening | `center_verse_same_category` | all_source | `ναοσ` (naos; English: Temple) | Temple | 2 | 1Cor 10:16 | `του` (tou) |
+| 31 | greek_screening | `center_verse_same_category` | all_source | `ναοσ` (naos; English: Temple) | Temple | 2 | 1Cor 10:16 | `του` (tou; English: of the) |
 | 32 | greek_screening | `center_verse_same_category` | all_source | `κινα` (kina; English: China) | China | 2 | 1John 2:1 | `δικαιον` (dikaion) |
 | 33 | greek_screening | `center_verse_same_category` | all_source | `ελκη` (elke; English: Boils) | Boils | 2 | 1Pet 5:13 | `συνεκλεκτη` (suneklekte) |
 | 34 | greek_screening | `span_exact` | all_source | `θεοσ` (theos; English: God) | God | 2 | Rom 14:2 | `εσθιει` (esthiei) |
