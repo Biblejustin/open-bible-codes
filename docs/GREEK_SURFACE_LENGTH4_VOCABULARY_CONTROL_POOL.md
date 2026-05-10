@@ -27,7 +27,7 @@ Selected target terms are excluded from the control candidate pool.
 | --- | --- | ---: | --- | ---: | ---: |
 | `αμην` (amen; English: Amen) | Amen | 4 | 155/155/155/130 | 595 | 200 |
 | `χουσ` (chous; English: Cush) | Cush | 4 | 107/107/106/106 | 426 | 200 |
-| `σιων` (sion; English: Zion) | Zion | 4 | 31/30/30/28 | 119 | 200 |
+| `σιων` (Sion; English: Zion) | Zion | 4 | 31/30/30/28 | 119 | 200 |
 | `δασα` (dasa; English: Lasha) | Lasha | 4 | 28/28/28/26 | 110 | 200 |
 | `αραμ` (aram; English: Aram) | Aram | 4 | 21/22/22/19 | 84 | 200 |
 | `σαβα` (saba; English: Seba) | Seba | 4 | 10/9/9/7 | 35 | 200 |

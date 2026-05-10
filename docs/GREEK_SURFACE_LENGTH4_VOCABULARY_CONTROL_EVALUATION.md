@@ -16,7 +16,7 @@ Matched controls per target range from 200 to 200. The best possible add-one emp
 | `χουσ` (chous; English: Cush) | Cush | 1 | 181 | 0.905473 | 0.905473 | matched controls overlap target |
 | `δασα` (dasa; English: Lasha) | Lasha | 2 | 75 | 0.378109 | 0.441127 | matched controls overlap target |
 | `σαβα` (saba; English: Seba) | Seba | 1 | 37 | 0.189055 | 0.365671 | matched controls overlap target |
-| `σιων` (sion; English: Zion) | Zion | 4 | 41 | 0.208955 | 0.365671 | matched controls overlap target |
+| `σιων` (Sion; English: Zion) | Zion | 4 | 41 | 0.208955 | 0.365671 | matched controls overlap target |
 
 ## Read
 

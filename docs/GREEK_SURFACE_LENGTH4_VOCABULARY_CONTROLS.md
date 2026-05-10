@@ -37,7 +37,7 @@ output because it is derived from local corpus files.
 | `gpx_cush_g` | `χουσ` (chous; English: Cush) | Cush |
 | `gpx_lasha_g` | `δασα` (dasa; English: Lasha) | Lasha |
 | `gpx_seba_g` | `σαβα` (saba; English: Seba) | Seba |
-| `gpx_zion_g` | `σιων` (sion; English: Zion) | Zion |
+| `gpx_zion_g` | `σιων` (Sion; English: Zion) | Zion |
 
 ## Control Preview
 
