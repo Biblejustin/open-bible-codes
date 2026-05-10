@@ -29,91 +29,91 @@ python3 -m scripts.build_dynamic_span_exact_center_original_language_shortlist -
 
 | Term | Rows |
 | --- | ---: |
-| `ιησουσ` | 57 |
-| `ישוע` | 14 |
-| `משיח` | 4 |
-| `γωγ` | 1 |
+| `ιησουσ` (Iesous; English: Jesus/Joshua) | 57 |
+| `ישוע` (Yeshua; English: Yeshua/Jeshua) | 14 |
+| `משיח` (Mashiach; English: Messiah/anointed one) | 4 |
+| `γωγ` (Gog; English: Gog) | 1 |
 
 ## Top Shortlist Rows
 
 | Rank | Priority | Corpus | Term | Center | Paths | Strong ext rows | Best extension | Matrix paths | Context |
 | ---: | --- | --- | --- | --- | ---: | ---: | --- | ---: | --- |
-| 1 | bible_exact_center | UHB | `ישוע` | NEH 8:17 | 85 | 0 |  | 85 | וַ⁠יֵּשְׁב֣וּ בַ⁠סֻּכּוֹת֒ כִּ֣י לֹֽא־עָשׂ֡וּ מִ⁠ימֵי֩ [יֵשׁ֨וּעַ] בִּן־נ֥וּן כֵּן֙ בְּנֵ֣י יִשְׂרָאֵ֔ל עַ֖ד |
-| 2 | bible_exact_center | UHB | `ישוע` | EZR 2:2 | 83 | 0 |  | 83 | אֲשֶׁר־בָּ֣אוּ עִם־זְרֻבָּבֶ֗ל [יֵשׁ֡וּעַ] נְ֠חֶמְיָה שְׂרָיָ֨ה רְֽעֵלָיָ֜ה מָרְדֳּכַ֥י בִּלְשָׁ֛ן |
-| 3 | bible_exact_center | UHB | `ישוע` | EZR 3:9 | 73 | 0 |  | 73 | וַ⁠יַּעֲמֹ֣ד [יֵשׁ֡וּעַ] בָּנָ֣י⁠ו וְ֠⁠אֶחָי⁠ו קַדְמִיאֵ֨ל וּ⁠בָנָ֤י⁠ו בְּנֵֽי־יְהוּדָה֙ |
-| 4 | bible_exact_center | UHB | `ישוע` | EZR 2:6 | 73 | 0 |  | 73 | בְּנֵֽי־פַחַ֥ת מוֹאָ֛ב לִ⁠בְנֵ֥י [יֵשׁ֖וּעַ] יוֹאָ֑ב אַלְפַּ֕יִם שְׁמֹנֶ֥ה מֵא֖וֹת וּ⁠שְׁנֵ֥ים |
-| 5 | bible_exact_center | UHB | `ישוע` | NEH 9:5 | 70 | 0 |  | 70 | וַ⁠יֹּאמְר֣וּ הַ⁠לְוִיִּ֡ם [יֵשׁ֣וּעַ] וְ֠⁠קַדְמִיאֵל בָּנִ֨י חֲשַׁבְנְיָ֜ה שֵׁרֵֽבְיָ֤ה הֽוֹדִיָּה֙ |
-| 6 | bible_exact_center | UHB | `ישוע` | NEH 12:8 | 69 | 0 |  | 69 | וְ⁠הַ⁠לְוִיִּ֗ם [יֵשׁ֧וּעַ] בִּנּ֛וּי קַדְמִיאֵ֥ל שֵׁרֵבְיָ֖ה יְהוּדָ֣ה מַתַּנְיָ֑ה |
-| 7 | bible_exact_center | UHB | `ישוע` | EZR 10:18 | 68 | 0 |  | 68 | אֲשֶׁ֥ר הֹשִׁ֖יבוּ נָשִׁ֣ים נָכְרִיּ֑וֹת מִ⁠בְּנֵ֨י [יֵשׁ֤וּעַ] בֶּן־יֽוֹצָדָק֙ וְ⁠אֶחָ֔י⁠ו מַֽעֲשֵׂיָה֙ וֶֽ⁠אֱלִיעֶ֔זֶר וְ⁠יָרִ֖יב |
-| 8 | bible_exact_center | UHB | `ישוע` | NEH 7:11 | 67 | 0 |  | 67 | בְּנֵֽי־פַחַ֥ת מוֹאָ֛ב לִ⁠בְנֵ֥י [יֵשׁ֖וּעַ] וְ⁠יוֹאָ֑ב אַלְפַּ֕יִם וּ⁠שְׁמֹנֶ֥ה מֵא֖וֹת שְׁמֹנָ֥ה |
-| 9 | bible_exact_center | UHB | `ישוע` | NEH 9:4 | 66 | 0 |  | 66 | וַ⁠יָּ֜קָם עַֽל־מַֽעֲלֵ֣ה הַ⁠לְוִיִּ֗ם [יֵשׁ֨וּעַ] וּ⁠בָנִ֜י קַדְמִיאֵ֧ל שְׁבַנְיָ֛ה בֻּנִּ֥י שֵׁרֵבְיָ֖ה |
-| 10 | bible_exact_center | UHB | `ישוע` | EZR 2:36 | 63 | 0 |  | 63 | הַֽ⁠כֹּהֲנִ֑ים בְּנֵ֤י יְדַֽעְיָה֙ לְ⁠בֵ֣ית [יֵשׁ֔וּעַ] תְּשַׁ֥ע מֵא֖וֹת שִׁבְעִ֥ים וּ⁠שְׁלֹשָֽׁה׃ |
-| 11 | bible_exact_center | UHB | `ישוע` | NEH 12:7 | 59 | 0 |  | 59 | אֵ֣לֶּה רָאשֵׁ֧י הַ⁠כֹּהֲנִ֛ים וַ⁠אֲחֵי⁠הֶ֖ם בִּ⁠ימֵ֥י [יֵשֽׁוּעַ׃] |
-| 12 | bible_exact_center | UHB | `ישוע` | NEH 7:39 | 56 | 0 |  | 56 | הַֽ⁠כֹּהֲנִ֑ים בְּנֵ֤י יְדַֽעְיָה֙ לְ⁠בֵ֣ית [יֵשׁ֔וּעַ] תְּשַׁ֥ע מֵא֖וֹת שִׁבְעִ֥ים וּ⁠שְׁלֹשָֽׁה׃ |
-| 13 | bible_exact_center | UHB | `ישוע` | NEH 7:7 | 55 | 0 |  | 55 | הַ⁠בָּאִ֣ים עִם־זְרֻבָּבֶ֗ל [יֵשׁ֡וּעַ] נְחֶמְיָ֡ה עֲ֠זַרְיָה רַֽעַמְיָ֨ה נַחֲמָ֜נִי מָרְדֳּכַ֥י |
-| 14 | bible_exact_center | UHB | `ישוע` | EZR 3:2 | 54 | 0 |  | 54 | וַ⁠יָּקָם֩ [יֵשׁ֨וּעַ] בֶּן־יֽוֹצָדָ֜ק וְ⁠אֶחָ֣י⁠ו הַ⁠כֹּהֲנִ֗ים וּ⁠זְרֻבָּבֶ֤ל בֶּן־שְׁאַלְתִּיאֵל֙ |
-| 15 | bible_exact_center | EBIBLE_WLC | `משיח` | 2SA 1:21 | 33 | 0 |  | 33 | מָגֵ֣ן גִּבּוֹרִ֔ים מָגֵ֣ן שָׁא֔וּל בְּלִ֖י [מָשִׁ֥יחַ] בַּשָּֽׁמֶן׃ |
-| 16 | bible_exact_center | EBIBLE_WLC | `משיח` | 2SA 23:1 | 30 | 0 |  | 30 | בֶּן־יִשַׁ֗י וּנְאֻ֤ם הַגֶּ֨בֶר֙ הֻ֣קַם עָ֔ל [מְשִׁ֨יחַ֙] אֱלֹהֵ֣י יַֽעֲקֹ֔ב וּנְעִ֖ים זְמִר֥וֹת יִשְׂרָאֵֽל׃ |
-| 17 | bible_exact_center | EBIBLE_WLC | `משיח` | LAM 4:20 | 11 | 0 |  | 11 | ר֤וּחַ אַפֵּ֨ינוּ֙ [מְשִׁ֣יחַ] יְהוָ֔ה נִלְכַּ֖ד בִּשְׁחִיתוֹתָ֑ם אֲשֶׁ֣ר אָמַ֔רְנוּ |
-| 18 | bible_exact_center | TCG_NT | `γωγ` | REV 20:8 | 4 | 0 |  | 4 | τέσσαρσι γωνίαις τῆς γῆς, τὸν [Γὼγ] καὶ τὸν Μαγώγ, συναγαγεῖν αὐτοὺς |
-| 19 | bible_exact_center | LXX | `ιησουσ` | JOS 22:7 | 3 | 0 |  | 3 | Βασανίτιδι, καὶ τῷ ἡμίσει ἔδωκεν [Ἰησοῦς] μετὰ τῶν ἀδελφῶν αὐτοῦ ἐν |
-| 20 | bible_exact_center | LXX | `ιησουσ` | JOS 8:3 | 3 | 0 |  | 3 | ἀναβῆναι εἰς Γαί. ἐπέλεξε δὲ [Ἰησοῦς] τριάκοντα χιλιάδας ἀνδρῶν δυνατοὺς ἐν |
-| 21 | bible_exact_center | LXX | `ιησουσ` | JOS 18:3 | 3 | 0 |  | 3 | καὶ εἶπεν [Ἰησοῦς] τοῖς υἱοῖς Ἰσραήλ· ἕως τίνος |
-| 22 | bible_exact_center | LXX | `ιησουσ` | NEH 9:5 | 2 | 0 |  | 2 | καὶ εἴποσαν οἱ Λευῖται [Ἰησοῦς] καὶ Καδμιήλ· ἀνάστητε, εὐλογεῖτε Κύριον |
-| 23 | bible_exact_center | LXX | `ιησουσ` | JOS 4:20 | 2 | 0 |  | 2 | ἔλαβεν ἐκ τοῦ Ἰορδάνου, ἔστησεν [Ἰησοῦς] ἐν Γαλγάλοις |
-| 24 | bible_exact_center | LXX | `ιησουσ` | JOS 8:3 | 2 | 0 |  | 2 | καὶ ἀνέστη [Ἰησοῦς] καὶ πᾶς ὁ λαὸς ὁ |
-| 25 | bible_exact_center | LXX | `ιησουσ` | JOS 24:30 | 2 | 0 |  | 2 | ἐγένετο μετ' ἐκεῖνα καὶ ἀπέθανεν [Ἰησοῦς] υἱὸς Ναυὴ δοῦλος Κυρίου ἑκατὸν |
-| 26 | bible_exact_center | LXX | `ιησουσ` | JOS 24:28 | 2 | 0 |  | 2 | καὶ ἀπέστειλεν [Ἰησοῦς] τὸν λαόν, καὶ ἐπορεύθησαν ἕκαστος |
-| 27 | bible_exact_center | LXX | `ιησουσ` | JOS 6:16 | 2 | 0 |  | 2 | ἐσάλπισαν οἱ ἱερεῖς, καὶ εἶπεν [Ἰησοῦς] τοῖς υἱοῖς Ἰσραήλ· κεκράξατε, παρέδωκε |
-| 28 | bible_exact_center | LXX | `ιησουσ` | JOS 10:24 | 2 | 0 |  | 2 | αὐτοὺς πρὸς Ἰησοῦν, καὶ συνεκάλεσεν [Ἰησοῦς] πάντα Ἰσραήλ, καὶ τοὺς ἐναρχομένους |
-| 29 | bible_exact_center | LXX | `ιησουσ` | JOS 9:33 | 1 | 0 |  | 1 | καὶ κατέστησεν αὐτοὺς [Ἰησοῦς] ἐν τῇ ἡμέρᾳ ἐκείνῃ ξυλοκόπους |
-| 30 | bible_exact_center | EBIBLE_WLC | `משיח` | DAN 9:26 | 1 | 0 |  | 1 | וְאַחֲרֵ֤י הַשָּׁבֻעִים֙ שִׁשִּׁ֣ים וּשְׁנַ֔יִם יִכָּרֵ֥ת [מָשִׁ֖יחַ] וְאֵ֣ין ל֑וֹ וְהָעִ֨יר וְהַקֹּ֜דֶשׁ יַ֠שְׁחִית |
-| 31 | bible_exact_center | LXX | `ιησουσ` | JOS 5:4 | 1 | 0 |  | 1 | ἐξ Αἰγύπτου, πάντας τούτους περιέτεμεν [Ἰησοῦς·] |
-| 32 | bible_exact_center | LXX | `ιησουσ` | JOS 13:1 | 1 | 0 |  | 1 | ΚΑΙ [Ἰησοῦς] πρεσβύτερος προβεβηκὼς τῶν ἡμερῶν. καὶ |
-| 33 | bible_exact_center | LXX | `ιησουσ` | NUM 14:6 | 1 | 0 |  | 1 | [Ἰησοῦς] δὲ ὁ τοῦ Ναυὴ καὶ |
-| 34 | bible_exact_center | LXX | `ιησουσ` | JOS 9:2 | 1 | 0 |  | 1 | θυσίαν σωτηρίου. 2γ καὶ ἔγραψεν [Ἰησοῦς] ἐπὶ τῶν λίθων τὸ δευτερονόμιον, |
-| 35 | bible_exact_center | LXX | `ιησουσ` | DEU 1:38 | 1 | 0 |  | 1 | [Ἰησοῦς] υἱὸς Ναυὴ ὁ παρεστηκώς σοι, |
-| 36 | bible_exact_center | LXX | `ιησουσ` | 1MA 2:55 | 1 | 0 |  | 1 | [Ἰησοῦς] ἐν τῷ πληρῶσαι λόγον ἐγένετο |
-| 37 | bible_exact_center | LXX | `ιησουσ` | JOS 4:9 | 1 | 0 |  | 1 | ἔστησε δὲ [Ἰησοῦς] καὶ ἄλλους δώδεκα λίθους ἐν |
-| 38 | bible_exact_center | LXX | `ιησουσ` | JOS 5:13 | 1 | 0 |  | 1 | τῇ χειρὶ αὐτοῦ. καὶ προσελθὼν [Ἰησοῦς] εἶπεν αὐτῷ· ἡμέτερος εἶ ἢ |
-| 39 | bible_exact_center | LXX | `ιησουσ` | HAG 1:12 | 1 | 0 |  | 1 | Σαλαθιὴλ ἐκ φυλῆς Ἰούδα καὶ [Ἰησοῦς] ὁ τοῦ Ἰωσεδὲκ ὁ ἱερεὺς |
-| 40 | bible_exact_center | LXX | `ιησουσ` | JOS 8:18 | 1 | 0 |  | 1 | τοῦ τόπου αὐτῶν. καὶ ἐξέτεινεν [Ἰησοῦς] τὴν χεῖρα αὐτοῦ, τὸν γαισόν, |
-| 41 | bible_exact_center | LXX | `ιησουσ` | JOS 24:1 | 1 | 0 |  | 1 | ΚΑΙ συνήγαγεν [Ἰησοῦς] πάσας φυλὰς Ἰσραὴλ εἰς Σηλὼ |
-| 42 | bible_exact_center | LXX | `ιησουσ` | JOS 22:6 | 1 | 0 |  | 1 | καὶ εὐλόγησεν αὐτοὺς [Ἰησοῦς] καὶ ἐξαπέστειλεν αὐτούς, καὶ ἐπορεύθησαν |
-| 43 | bible_exact_center | LXX | `ιησουσ` | JOS 10:31 | 1 | 0 |  | 1 | καὶ ἀπῆλθεν [Ἰησοῦς] καὶ πᾶς Ἰσραὴλ μετ' αὐτοῦ |
-| 44 | bible_exact_center | LXX | `ιησουσ` | JDG 2:6 | 1 | 0 |  | 1 | Καὶ ἐξαπέστειλεν [Ἰησοῦς] τὸν λαόν, καὶ ἦλθεν ἀνὴρ |
-| 45 | bible_exact_center | LXX | `ιησουσ` | JOS 7:7 | 1 | 0 |  | 1 | καὶ εἶπεν [Ἰησοῦς·] δέομαι Κύριε· ἱνατί διεβίβασεν ὁ |
-| 46 | bible_exact_center | LXX | `ιησουσ` | DEU 32:44 | 1 | 0 |  | 1 | ὦτα τοῦ λαοῦ, αὐτὸς καὶ [Ἰησοῦς] ὁ τοῦ Ναυή. |
-| 47 | bible_exact_center | LXX | `ιησουσ` | JOS 8:9 | 1 | 0 |  | 1 | καὶ ἀπέστειλεν αὐτοὺς [Ἰησοῦς,] καὶ ἐπορεύθησαν εἰς τὴν ἐνέδραν |
-| 48 | bible_exact_center | LXX | `ιησουσ` | JOS 9:32 | 1 | 0 |  | 1 | αὐτοῖς οὕτως· καὶ ἐξείλατο αὐτοὺς [Ἰησοῦς] ἐν τῇ ἡμέρᾳ ἐκείνῃ ἐκ |
-| 49 | bible_exact_center | LXX | `ιησουσ` | JOS 17:17 | 1 | 0 |  | 1 | καὶ εἶπεν [Ἰησοῦς] τοῖς υἱοῖς Ἰωσήφ· εἰ λαὸς |
-| 50 | bible_exact_center | LXX | `ιησουσ` | JOS 10:34 | 1 | 0 |  | 1 | καὶ ἀπῆλθεν [Ἰησοῦς] καὶ πᾶς Ἰσραὴλ μετ' αὐτοῦ |
-| 51 | bible_exact_center | LXX | `ιησουσ` | JOS 10:7 | 1 | 0 |  | 1 | καὶ ἀνέβη [Ἰησοῦς] ἐκ Γαλγάλων, αὐτὸς καὶ πᾶς |
-| 52 | bible_exact_center | LXX | `ιησουσ` | JOS 7:25 | 1 | 0 |  | 1 | καὶ εἶπεν [Ἰησοῦς] τῷ Ἄχαρ· τί ὠλόθρευσας ἡμᾶς; |
-| 53 | bible_exact_center | LXX | `ιησουσ` | JOS 7:19 | 1 | 0 |  | 1 | καὶ εἶπεν [Ἰησοῦς] τῷ Ἄχαρ· δὸς δόξαν σήμερον |
-| 54 | bible_exact_center | LXX | `ιησουσ` | JOS 22:34 | 1 | 0 |  | 1 | καὶ ἐπωνόμασεν [Ἰησοῦς] τὸν βωμὸν τῶν Ρουβὴν καὶ |
-| 55 | bible_exact_center | LXX | `ιησουσ` | JOS 18:10 | 1 | 0 |  | 1 | καὶ ἐνέβαλεν αὐτοῖς [Ἰησοῦς] κλῆρον ἐν Σηλὼ ἔναντι Κυρίου. |
-| 56 | bible_exact_center | LXX | `ιησουσ` | JOS 11:15 | 1 | 0 |  | 1 | τῷ Ἰησοῖ, καὶ οὕτως ἐποίησεν [Ἰησοῦς·] οὐ παρέβη οὐδὲν ἀπὸ πάντων, |
-| 57 | bible_exact_center | LXX | `ιησουσ` | SIR 46:1 | 1 | 0 |  | 1 | ΚΡΑΤΑΙΟΣ ἐν πολέμοις [Ἰησοῦς] Ναυῆ καὶ διάδοχος Μωυσῆ ἐν |
-| 58 | bible_exact_center | LXX | `ιησουσ` | JOS 6:12 | 1 | 0 |  | 1 | τῇ ἡμέρᾳ τῇ δευτέρᾳ ἀνέστη [Ἰησοῦς] τὸ πρωΐ, καὶ ᾖραν οἱ |
-| 59 | bible_exact_center | LXX | `ιησουσ` | JOS 9:21 | 1 | 0 |  | 1 | καὶ ἐποίησεν [Ἰησοῦς] πρὸς αὐτοὺς εἰρήνην καὶ διέθεντο |
-| 60 | bible_exact_center | LXX | `ιησουσ` | JOS 6:10 | 1 | 0 |  | 1 | τῷ δὲ λαῷ ἐνετείλατο [Ἰησοῦς] λέγων· μὴ βοᾶτε, μηδὲ ἀκουσάτω |
-| 61 | bible_exact_center | LXX | `ιησουσ` | JOS 7:6 | 1 | 0 |  | 1 | τὰ ἱμάτια αὐτοῦ, καὶ ἔπεσεν [Ἰησοῦς] ἐπὶ τὴν γῆν ἐπὶ πρόσωπον |
-| 62 | bible_exact_center | LXX | `ιησουσ` | JOS 9:8 | 1 | 0 |  | 1 | ἐσμεν. καὶ εἶπε πρὸς αὐτοὺς [Ἰησοῦς·] πόθεν ἐστὲ καὶ πόθεν παραγεγόνατε; |
-| 63 | bible_exact_center | LXX | `ιησουσ` | JOS 8:10 | 1 | 0 |  | 1 | καὶ ὀρθρίσας [Ἰησοῦς] τὸ πρωΐ ἐπεσκέψατο τὸν λαόν· |
-| 64 | bible_exact_center | LXX | `ιησουσ` | JOS 6:26 | 1 | 0 |  | 1 | καὶ ὥρκισεν [Ἰησοῦς] ἐν τῇ ἡμέρᾳ ἐκείνῃ ἐναντίον |
-| 65 | bible_exact_center | LXX | `ιησουσ` | JOS 23:1 | 1 | 0 |  | 1 | τῶν ἐχθρῶν αὐτοῦ κυκλόθεν, καὶ [Ἰησοῦς] πρεσβύτερος προβεβηκὼς ταῖς ἡμέραις, |
-| 66 | bible_exact_center | LXX | `ιησουσ` | JOS 10:18 | 1 | 0 |  | 1 | καὶ εἶπεν [Ἰησοῦς·] κυλίσατε λίθους ἐπὶ τὸ στόμα |
-| 67 | bible_exact_center | LXX | `ιησουσ` | JOS 9:2 | 1 | 0 |  | 1 | καὶ μετὰ ταῦτα οὕτως ἀνέγνω [Ἰησοῦς] πάντα τὰ ρήματα τοῦ νόμου |
-| 68 | bible_exact_center | LXX | `ιησουσ` | JOS 10:40 | 1 | 0 |  | 1 | καὶ ἐπάταξεν [Ἰησοῦς] πᾶσαν τὴν γῆν τῆς ὀρεινῆς |
-| 69 | bible_exact_center | LXX | `ιησουσ` | JOS 3:9 | 1 | 0 |  | 1 | καὶ εἶπεν [Ἰησοῦς] τοῖς υἱοῖς Ἰσραήλ· προσαγάγετε ὧδε |
-| 70 | bible_exact_center | LXX | `ιησουσ` | JOS 7:16 | 1 | 0 |  | 1 | καὶ ὤρθρισεν [Ἰησοῦς] καὶ προσήγαγε τὸν λαὸν κατὰ |
-| 71 | bible_exact_center | LXX | `ιησουσ` | JOS 5:13 | 1 | 0 |  | 1 | Καὶ ἐγένετο ὡς ἦν [Ἰησοῦς] ἐν Ἱεριχώ, καὶ ἀναβλέψας τοῖς |
-| 72 | bible_exact_center | LXX | `ιησουσ` | JOS 10:20 | 1 | 0 |  | 1 | καὶ ἐγένετο ὡς κατέπαυσεν [Ἰησοῦς] καὶ πᾶς υἱὸς Ἰσραὴλ κόπτοντες |
-| 73 | bible_exact_center | LXX | `ιησουσ` | JOS 10:42 | 1 | 0 |  | 1 | καὶ τὴν γῆν αὐτῶν ἐπάταξεν [Ἰησοῦς] εἰσάπαξ, ὅτι Κύριος ὁ Θεὸς |
-| 74 | bible_exact_center | LXX | `ιησουσ` | JOS 11:21 | 1 | 0 |  | 1 | Καὶ ἦλθεν [Ἰησοῦς] ἐν τῷ καιρῷ ἐκείνῳ καὶ |
-| 75 | bible_exact_center | LXX | `ιησουσ` | JOS 10:12 | 1 | 0 |  | 1 | Τότε ἐλάλησεν [Ἰησοῦς] πρὸς Κύριον, ᾗ ἡμέρᾳ παρέδωκεν |
-| 76 | bible_exact_center | LXX | `ιησουσ` | NEH 9:4 | 1 | 0 |  | 1 | ἔστη ἐπὶ ἀναβάσει τῶν Λευιτῶν [Ἰησοῦς] καὶ οἱ υἱοὶ Καδμιήλ, Σεχενία |
+| 1 | bible_exact_center | UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | NEH 8:17 `יֵשׁ֨וּעַ` (Yeshua; English: Yeshua/Jeshua) | 85 | 0 |  | 85 | וַ⁠יֵּשְׁב֣וּ בַ⁠סֻּכּוֹת֒ כִּ֣י לֹֽא־עָשׂ֡וּ מִ⁠ימֵי֩ [יֵשׁ֨וּעַ] בִּן־נ֥וּן כֵּן֙ בְּנֵ֣י יִשְׂרָאֵ֔ל עַ֖ד |
+| 2 | bible_exact_center | UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | EZR 2:2 `יֵשׁ֡וּעַ` (Yeshua; English: Yeshua/Jeshua) | 83 | 0 |  | 83 | אֲשֶׁר־בָּ֣אוּ עִם־זְרֻבָּבֶ֗ל [יֵשׁ֡וּעַ] נְ֠חֶמְיָה שְׂרָיָ֨ה רְֽעֵלָיָ֜ה מָרְדֳּכַ֥י בִּלְשָׁ֛ן |
+| 3 | bible_exact_center | UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | EZR 3:9 `יֵשׁ֡וּעַ` (Yeshua; English: Yeshua/Jeshua) | 73 | 0 |  | 73 | וַ⁠יַּעֲמֹ֣ד [יֵשׁ֡וּעַ] בָּנָ֣י⁠ו וְ֠⁠אֶחָי⁠ו קַדְמִיאֵ֨ל וּ⁠בָנָ֤י⁠ו בְּנֵֽי־יְהוּדָה֙ |
+| 4 | bible_exact_center | UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | EZR 2:6 `יֵשׁ֖וּעַ` (Yeshua; English: Yeshua/Jeshua) | 73 | 0 |  | 73 | בְּנֵֽי־פַחַ֥ת מוֹאָ֛ב לִ⁠בְנֵ֥י [יֵשׁ֖וּעַ] יוֹאָ֑ב אַלְפַּ֕יִם שְׁמֹנֶ֥ה מֵא֖וֹת וּ⁠שְׁנֵ֥ים |
+| 5 | bible_exact_center | UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | NEH 9:5 `יֵשׁ֣וּעַ` (Yeshua; English: Yeshua/Jeshua) | 70 | 0 |  | 70 | וַ⁠יֹּאמְר֣וּ הַ⁠לְוִיִּ֡ם [יֵשׁ֣וּעַ] וְ֠⁠קַדְמִיאֵל בָּנִ֨י חֲשַׁבְנְיָ֜ה שֵׁרֵֽבְיָ֤ה הֽוֹדִיָּה֙ |
+| 6 | bible_exact_center | UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | NEH 12:8 `יֵשׁ֧וּעַ` (Yeshua; English: Yeshua/Jeshua) | 69 | 0 |  | 69 | וְ⁠הַ⁠לְוִיִּ֗ם [יֵשׁ֧וּעַ] בִּנּ֛וּי קַדְמִיאֵ֥ל שֵׁרֵבְיָ֖ה יְהוּדָ֣ה מַתַּנְיָ֑ה |
+| 7 | bible_exact_center | UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | EZR 10:18 `יֵשׁ֤וּעַ` (Yeshua; English: Yeshua/Jeshua) | 68 | 0 |  | 68 | אֲשֶׁ֥ר הֹשִׁ֖יבוּ נָשִׁ֣ים נָכְרִיּ֑וֹת מִ⁠בְּנֵ֨י [יֵשׁ֤וּעַ] בֶּן־יֽוֹצָדָק֙ וְ⁠אֶחָ֔י⁠ו מַֽעֲשֵׂיָה֙ וֶֽ⁠אֱלִיעֶ֔זֶר וְ⁠יָרִ֖יב |
+| 8 | bible_exact_center | UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | NEH 7:11 `יֵשׁ֖וּעַ` (Yeshua; English: Yeshua/Jeshua) | 67 | 0 |  | 67 | בְּנֵֽי־פַחַ֥ת מוֹאָ֛ב לִ⁠בְנֵ֥י [יֵשׁ֖וּעַ] וְ⁠יוֹאָ֑ב אַלְפַּ֕יִם וּ⁠שְׁמֹנֶ֥ה מֵא֖וֹת שְׁמֹנָ֥ה |
+| 9 | bible_exact_center | UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | NEH 9:4 `יֵשׁ֨וּעַ` (Yeshua; English: Yeshua/Jeshua) | 66 | 0 |  | 66 | וַ⁠יָּ֜קָם עַֽל־מַֽעֲלֵ֣ה הַ⁠לְוִיִּ֗ם [יֵשׁ֨וּעַ] וּ⁠בָנִ֜י קַדְמִיאֵ֧ל שְׁבַנְיָ֛ה בֻּנִּ֥י שֵׁרֵבְיָ֖ה |
+| 10 | bible_exact_center | UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | EZR 2:36 `יֵשׁ֔וּעַ` (Yeshua; English: Yeshua/Jeshua) | 63 | 0 |  | 63 | הַֽ⁠כֹּהֲנִ֑ים בְּנֵ֤י יְדַֽעְיָה֙ לְ⁠בֵ֣ית [יֵשׁ֔וּעַ] תְּשַׁ֥ע מֵא֖וֹת שִׁבְעִ֥ים וּ⁠שְׁלֹשָֽׁה׃ |
+| 11 | bible_exact_center | UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | NEH 12:7 `יֵשֽׁוּעַ׃` (yshw) | 59 | 0 |  | 59 | אֵ֣לֶּה רָאשֵׁ֧י הַ⁠כֹּהֲנִ֛ים וַ⁠אֲחֵי⁠הֶ֖ם בִּ⁠ימֵ֥י [יֵשֽׁוּעַ׃] |
+| 12 | bible_exact_center | UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | NEH 7:39 `יֵשׁ֔וּעַ` (Yeshua; English: Yeshua/Jeshua) | 56 | 0 |  | 56 | הַֽ⁠כֹּהֲנִ֑ים בְּנֵ֤י יְדַֽעְיָה֙ לְ⁠בֵ֣ית [יֵשׁ֔וּעַ] תְּשַׁ֥ע מֵא֖וֹת שִׁבְעִ֥ים וּ⁠שְׁלֹשָֽׁה׃ |
+| 13 | bible_exact_center | UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | NEH 7:7 `יֵשׁ֡וּעַ` (Yeshua; English: Yeshua/Jeshua) | 55 | 0 |  | 55 | הַ⁠בָּאִ֣ים עִם־זְרֻבָּבֶ֗ל [יֵשׁ֡וּעַ] נְחֶמְיָ֡ה עֲ֠זַרְיָה רַֽעַמְיָ֨ה נַחֲמָ֜נִי מָרְדֳּכַ֥י |
+| 14 | bible_exact_center | UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | EZR 3:2 `יֵשׁ֨וּעַ` (Yeshua; English: Yeshua/Jeshua) | 54 | 0 |  | 54 | וַ⁠יָּקָם֩ [יֵשׁ֨וּעַ] בֶּן־יֽוֹצָדָ֜ק וְ⁠אֶחָ֣י⁠ו הַ⁠כֹּהֲנִ֗ים וּ⁠זְרֻבָּבֶ֤ל בֶּן־שְׁאַלְתִּיאֵל֙ |
+| 15 | bible_exact_center | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one) | 2SA 1:21 `מָשִׁ֥יחַ` (Mashiach; English: Messiah/anointed one) | 33 | 0 |  | 33 | מָגֵ֣ן גִּבּוֹרִ֔ים מָגֵ֣ן שָׁא֔וּל בְּלִ֖י [מָשִׁ֥יחַ] בַּשָּֽׁמֶן׃ |
+| 16 | bible_exact_center | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one) | 2SA 23:1 `מְשִׁ֨יחַ֙` (Mashiach; English: Messiah/anointed one) | 30 | 0 |  | 30 | בֶּן־יִשַׁ֗י וּנְאֻ֤ם הַגֶּ֨בֶר֙ הֻ֣קַם עָ֔ל [מְשִׁ֨יחַ֙] אֱלֹהֵ֣י יַֽעֲקֹ֔ב וּנְעִ֖ים זְמִר֥וֹת יִשְׂרָאֵֽל׃ |
+| 17 | bible_exact_center | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one) | LAM 4:20 `מְשִׁ֣יחַ` (Mashiach; English: Messiah/anointed one) | 11 | 0 |  | 11 | ר֤וּחַ אַפֵּ֨ינוּ֙ [מְשִׁ֣יחַ] יְהוָ֔ה נִלְכַּ֖ד בִּשְׁחִיתוֹתָ֑ם אֲשֶׁ֣ר אָמַ֔רְנוּ |
+| 18 | bible_exact_center | TCG_NT | `γωγ` (Gog; English: Gog) | REV 20:8 `Γὼγ` (Gog; English: Gog) | 4 | 0 |  | 4 | τέσσαρσι γωνίαις τῆς γῆς, τὸν [Γὼγ] καὶ τὸν Μαγώγ, συναγαγεῖν αὐτοὺς |
+| 19 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 22:7 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 3 | 0 |  | 3 | Βασανίτιδι, καὶ τῷ ἡμίσει ἔδωκεν [Ἰησοῦς] μετὰ τῶν ἀδελφῶν αὐτοῦ ἐν |
+| 20 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 8:3 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 3 | 0 |  | 3 | ἀναβῆναι εἰς Γαί. ἐπέλεξε δὲ [Ἰησοῦς] τριάκοντα χιλιάδας ἀνδρῶν δυνατοὺς ἐν |
+| 21 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 18:3 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 3 | 0 |  | 3 | καὶ εἶπεν [Ἰησοῦς] τοῖς υἱοῖς Ἰσραήλ· ἕως τίνος |
+| 22 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | NEH 9:5 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 2 | 0 |  | 2 | καὶ εἴποσαν οἱ Λευῖται [Ἰησοῦς] καὶ Καδμιήλ· ἀνάστητε, εὐλογεῖτε Κύριον |
+| 23 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 4:20 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 2 | 0 |  | 2 | ἔλαβεν ἐκ τοῦ Ἰορδάνου, ἔστησεν [Ἰησοῦς] ἐν Γαλγάλοις |
+| 24 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 8:3 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 2 | 0 |  | 2 | καὶ ἀνέστη [Ἰησοῦς] καὶ πᾶς ὁ λαὸς ὁ |
+| 25 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 24:30 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 2 | 0 |  | 2 | ἐγένετο μετ' ἐκεῖνα καὶ ἀπέθανεν [Ἰησοῦς] υἱὸς Ναυὴ δοῦλος Κυρίου ἑκατὸν |
+| 26 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 24:28 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 2 | 0 |  | 2 | καὶ ἀπέστειλεν [Ἰησοῦς] τὸν λαόν, καὶ ἐπορεύθησαν ἕκαστος |
+| 27 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 6:16 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 2 | 0 |  | 2 | ἐσάλπισαν οἱ ἱερεῖς, καὶ εἶπεν [Ἰησοῦς] τοῖς υἱοῖς Ἰσραήλ· κεκράξατε, παρέδωκε |
+| 28 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 10:24 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 2 | 0 |  | 2 | αὐτοὺς πρὸς Ἰησοῦν, καὶ συνεκάλεσεν [Ἰησοῦς] πάντα Ἰσραήλ, καὶ τοὺς ἐναρχομένους |
+| 29 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 9:33 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ κατέστησεν αὐτοὺς [Ἰησοῦς] ἐν τῇ ἡμέρᾳ ἐκείνῃ ξυλοκόπους |
+| 30 | bible_exact_center | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one) | DAN 9:26 `מָשִׁ֖יחַ` (Mashiach; English: Messiah/anointed one) | 1 | 0 |  | 1 | וְאַחֲרֵ֤י הַשָּׁבֻעִים֙ שִׁשִּׁ֣ים וּשְׁנַ֔יִם יִכָּרֵ֥ת [מָשִׁ֖יחַ] וְאֵ֣ין ל֑וֹ וְהָעִ֨יר וְהַקֹּ֜דֶשׁ יַ֠שְׁחִית |
+| 31 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 5:4 `Ἰησοῦς·` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | ἐξ Αἰγύπτου, πάντας τούτους περιέτεμεν [Ἰησοῦς·] |
+| 32 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 13:1 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | ΚΑΙ [Ἰησοῦς] πρεσβύτερος προβεβηκὼς τῶν ἡμερῶν. καὶ |
+| 33 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | NUM 14:6 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | [Ἰησοῦς] δὲ ὁ τοῦ Ναυὴ καὶ |
+| 34 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 9:2 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | θυσίαν σωτηρίου. 2γ καὶ ἔγραψεν [Ἰησοῦς] ἐπὶ τῶν λίθων τὸ δευτερονόμιον, |
+| 35 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | DEU 1:38 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | [Ἰησοῦς] υἱὸς Ναυὴ ὁ παρεστηκώς σοι, |
+| 36 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | 1MA 2:55 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | [Ἰησοῦς] ἐν τῷ πληρῶσαι λόγον ἐγένετο |
+| 37 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 4:9 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | ἔστησε δὲ [Ἰησοῦς] καὶ ἄλλους δώδεκα λίθους ἐν |
+| 38 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 5:13 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | τῇ χειρὶ αὐτοῦ. καὶ προσελθὼν [Ἰησοῦς] εἶπεν αὐτῷ· ἡμέτερος εἶ ἢ |
+| 39 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | HAG 1:12 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | Σαλαθιὴλ ἐκ φυλῆς Ἰούδα καὶ [Ἰησοῦς] ὁ τοῦ Ἰωσεδὲκ ὁ ἱερεὺς |
+| 40 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 8:18 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | τοῦ τόπου αὐτῶν. καὶ ἐξέτεινεν [Ἰησοῦς] τὴν χεῖρα αὐτοῦ, τὸν γαισόν, |
+| 41 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 24:1 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | ΚΑΙ συνήγαγεν [Ἰησοῦς] πάσας φυλὰς Ἰσραὴλ εἰς Σηλὼ |
+| 42 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 22:6 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ εὐλόγησεν αὐτοὺς [Ἰησοῦς] καὶ ἐξαπέστειλεν αὐτούς, καὶ ἐπορεύθησαν |
+| 43 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 10:31 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ ἀπῆλθεν [Ἰησοῦς] καὶ πᾶς Ἰσραὴλ μετ' αὐτοῦ |
+| 44 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JDG 2:6 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | Καὶ ἐξαπέστειλεν [Ἰησοῦς] τὸν λαόν, καὶ ἦλθεν ἀνὴρ |
+| 45 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 7:7 `Ἰησοῦς·` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ εἶπεν [Ἰησοῦς·] δέομαι Κύριε· ἱνατί διεβίβασεν ὁ |
+| 46 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | DEU 32:44 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | ὦτα τοῦ λαοῦ, αὐτὸς καὶ [Ἰησοῦς] ὁ τοῦ Ναυή. |
+| 47 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 8:9 `Ἰησοῦς,` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ ἀπέστειλεν αὐτοὺς [Ἰησοῦς,] καὶ ἐπορεύθησαν εἰς τὴν ἐνέδραν |
+| 48 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 9:32 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | αὐτοῖς οὕτως· καὶ ἐξείλατο αὐτοὺς [Ἰησοῦς] ἐν τῇ ἡμέρᾳ ἐκείνῃ ἐκ |
+| 49 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 17:17 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ εἶπεν [Ἰησοῦς] τοῖς υἱοῖς Ἰωσήφ· εἰ λαὸς |
+| 50 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 10:34 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ ἀπῆλθεν [Ἰησοῦς] καὶ πᾶς Ἰσραὴλ μετ' αὐτοῦ |
+| 51 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 10:7 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ ἀνέβη [Ἰησοῦς] ἐκ Γαλγάλων, αὐτὸς καὶ πᾶς |
+| 52 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 7:25 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ εἶπεν [Ἰησοῦς] τῷ Ἄχαρ· τί ὠλόθρευσας ἡμᾶς; |
+| 53 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 7:19 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ εἶπεν [Ἰησοῦς] τῷ Ἄχαρ· δὸς δόξαν σήμερον |
+| 54 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 22:34 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ ἐπωνόμασεν [Ἰησοῦς] τὸν βωμὸν τῶν Ρουβὴν καὶ |
+| 55 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 18:10 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ ἐνέβαλεν αὐτοῖς [Ἰησοῦς] κλῆρον ἐν Σηλὼ ἔναντι Κυρίου. |
+| 56 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 11:15 `Ἰησοῦς·` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | τῷ Ἰησοῖ, καὶ οὕτως ἐποίησεν [Ἰησοῦς·] οὐ παρέβη οὐδὲν ἀπὸ πάντων, |
+| 57 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | SIR 46:1 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | ΚΡΑΤΑΙΟΣ ἐν πολέμοις [Ἰησοῦς] Ναυῆ καὶ διάδοχος Μωυσῆ ἐν |
+| 58 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 6:12 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | τῇ ἡμέρᾳ τῇ δευτέρᾳ ἀνέστη [Ἰησοῦς] τὸ πρωΐ, καὶ ᾖραν οἱ |
+| 59 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 9:21 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ ἐποίησεν [Ἰησοῦς] πρὸς αὐτοὺς εἰρήνην καὶ διέθεντο |
+| 60 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 6:10 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | τῷ δὲ λαῷ ἐνετείλατο [Ἰησοῦς] λέγων· μὴ βοᾶτε, μηδὲ ἀκουσάτω |
+| 61 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 7:6 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | τὰ ἱμάτια αὐτοῦ, καὶ ἔπεσεν [Ἰησοῦς] ἐπὶ τὴν γῆν ἐπὶ πρόσωπον |
+| 62 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 9:8 `Ἰησοῦς·` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | ἐσμεν. καὶ εἶπε πρὸς αὐτοὺς [Ἰησοῦς·] πόθεν ἐστὲ καὶ πόθεν παραγεγόνατε; |
+| 63 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 8:10 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ ὀρθρίσας [Ἰησοῦς] τὸ πρωΐ ἐπεσκέψατο τὸν λαόν· |
+| 64 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 6:26 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ ὥρκισεν [Ἰησοῦς] ἐν τῇ ἡμέρᾳ ἐκείνῃ ἐναντίον |
+| 65 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 23:1 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | τῶν ἐχθρῶν αὐτοῦ κυκλόθεν, καὶ [Ἰησοῦς] πρεσβύτερος προβεβηκὼς ταῖς ἡμέραις, |
+| 66 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 10:18 `Ἰησοῦς·` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ εἶπεν [Ἰησοῦς·] κυλίσατε λίθους ἐπὶ τὸ στόμα |
+| 67 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 9:2 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ μετὰ ταῦτα οὕτως ἀνέγνω [Ἰησοῦς] πάντα τὰ ρήματα τοῦ νόμου |
+| 68 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 10:40 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ ἐπάταξεν [Ἰησοῦς] πᾶσαν τὴν γῆν τῆς ὀρεινῆς |
+| 69 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 3:9 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ εἶπεν [Ἰησοῦς] τοῖς υἱοῖς Ἰσραήλ· προσαγάγετε ὧδε |
+| 70 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 7:16 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ ὤρθρισεν [Ἰησοῦς] καὶ προσήγαγε τὸν λαὸν κατὰ |
+| 71 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 5:13 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | Καὶ ἐγένετο ὡς ἦν [Ἰησοῦς] ἐν Ἱεριχώ, καὶ ἀναβλέψας τοῖς |
+| 72 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 10:20 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ ἐγένετο ὡς κατέπαυσεν [Ἰησοῦς] καὶ πᾶς υἱὸς Ἰσραὴλ κόπτοντες |
+| 73 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 10:42 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | καὶ τὴν γῆν αὐτῶν ἐπάταξεν [Ἰησοῦς] εἰσάπαξ, ὅτι Κύριος ὁ Θεὸς |
+| 74 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 11:21 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | Καὶ ἦλθεν [Ἰησοῦς] ἐν τῷ καιρῷ ἐκείνῳ καὶ |
+| 75 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 10:12 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | Τότε ἐλάλησεν [Ἰησοῦς] πρὸς Κύριον, ᾗ ἡμέρᾳ παρέδωκεν |
+| 76 | bible_exact_center | LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | NEH 9:4 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | 1 | 0 |  | 1 | ἔστη ἐπὶ ἀναβάσει τῶν Λευιτῶν [Ἰησοῦς] καὶ οἱ υἱοὶ Καδμιήλ, Σεχενία |
 
 ## Read
 

@@ -1,9 +1,13 @@
 from collections import Counter
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from types import SimpleNamespace
 
 from scripts.build_dynamic_span_exact_center_original_language_findings import (
     build_findings,
     classify_recommendation,
     finding_sort_key,
+    write_markdown,
 )
 
 
@@ -148,3 +152,42 @@ def test_findings_sort_key_treats_lxx_zero_control_above_background() -> None:
     path_counts: Counter[str] = Counter({"4": 2, "5": 85})
 
     assert finding_sort_key(lxx, path_counts) < finding_sort_key(background, path_counts)
+
+
+def test_write_markdown_displays_original_language_terms() -> None:
+    with TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        out = root / "findings.md"
+        args = SimpleNamespace(
+            review_packet=root / "review.csv",
+            paths=root / "paths.csv",
+            out=root / "findings.csv",
+            markdown_out=out,
+            manifest_out=root / "manifest.json",
+            markdown_row_limit=90,
+        )
+
+        write_markdown(
+            out,
+            [
+                {
+                    "finding_rank": 1,
+                    "recommendation": "promote",
+                    "corpus": "TCG_NT",
+                    "normalized_term": "γωγ",
+                    "center_ref": "REV 20:8",
+                    "center_word": "Γὼγ",
+                    "exact_center_paths": 1,
+                    "example_start_ref": "REV 19:1",
+                    "example_end_ref": "REV 21:1",
+                    "control_read": "zero exact-center rows",
+                    "manual_review_note": "manual",
+                }
+            ],
+            args,
+        )
+
+        text = out.read_text(encoding="utf-8")
+
+    assert "`γωγ` (Gog; English: Gog)" in text
+    assert "`Γὼγ` (Gog; English: Gog)" in text

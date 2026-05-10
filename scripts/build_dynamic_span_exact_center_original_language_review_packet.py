@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
+from els.term_display import display_center, display_term
 
 
 DEFAULT_BUNDLE = Path("reports/dynamic_skip_focus/strong_full_span_exact_center_review_bundle.csv")
@@ -456,7 +457,7 @@ def summary_lines(review_rows: list[dict[str, object]], path_rows: list[dict[str
         lines.append(f"| {corpus} | {count:,} | {path_by_corpus[corpus]:,} |")
     lines.extend(["", "## Term Counts", "", "| Term | Review units |", "| --- | ---: |"])
     for term, count in sorted(by_term.items(), key=lambda item: (-item[1], item[0])):
-        lines.append(f"| `{term}` | {count:,} |")
+        lines.append(f"| {display_term(term)} | {count:,} |")
     lines.append("")
     return lines
 
@@ -476,7 +477,7 @@ def control_summary_lines(rows: list[dict[str, str]]) -> list[str]:
     ]
     for row in controls:
         lines.append(
-            f"| {row.get('corpus')} | `{row.get('normalized_term')}` | "
+            f"| {row.get('corpus')} | {display_term(row.get('normalized_term', ''))} | "
             f"{int_value(row.get('exact_center_rows')):,} | "
             f"{row.get('exact_center_rows_per_million_hits')} | "
             f"{md_cell(truncate(row.get('top_center_words', ''), 90))} |"
@@ -495,9 +496,11 @@ def review_table_lines(rows: list[dict[str, object]]) -> list[str]:
     for row in rows:
         span = f"{row['example_start_ref']} -> {row['center_ref']} -> {row['example_end_ref']}"
         matrix = f"{row['example_rows_spanned']} rows @ width {row['example_row_width']}"
+        term = display_term(str(row["normalized_term"]))
+        center = display_center(str(row["center_ref"]), str(row["center_word"]))
         lines.append(
-            f"| {row['review_rank']} | {row['corpus']} | `{row['normalized_term']}` | "
-            f"{row['center_ref']} `{row['center_word']}` | {int(row['exact_center_paths']):,} | "
+            f"| {row['review_rank']} | {row['corpus']} | {term} | "
+            f"{center} | {int(row['exact_center_paths']):,} | "
             f"{md_cell(span)} | {md_cell(matrix)} | {md_cell(row['control_read'])} | "
             f"{md_cell(truncate(str(row['center_word_context']), 100))} |"
         )
@@ -517,7 +520,7 @@ def path_table_lines(rows: list[dict[str, object]]) -> list[str]:
         matrix = f"rows {row['matrix_min_row']}-{row['matrix_max_row']}, col {row['matrix_min_col']}"
         lines.append(
             f"| {row['review_rank']} | {row['path_rank']} | {row['corpus']} | "
-            f"`{row['normalized_term']}` | {row['skip']} | {md_cell(span)} | "
+            f"{display_term(str(row['normalized_term']))} | {row['skip']} | {md_cell(span)} | "
             f"{md_cell(matrix)} | {md_cell(truncate(str(row['letter_path']), 140))} |"
         )
     lines.append("")
@@ -530,8 +533,10 @@ def read_lines() -> list[str]:
         "",
         "- This is a manual-review packet, not a claim report.",
         "- Exact-center means the hidden path centers on a matching surface word.",
-        "- Hebrew controls show substantial background exact-center pressure for `ישוע` and `משיח` in the Bialik control corpus.",
-        "- Greek Herodotus controls currently show zero exact-center rows for `ιησουσ` and `γωγ`, but that does not by itself create a claim.",
+        "- Hebrew controls show substantial background exact-center pressure for "
+        f"{display_term('ישוע')} and {display_term('משיח')} in the Bialik control corpus.",
+        "- Greek Herodotus controls currently show zero exact-center rows for "
+        f"{display_term('ιησουσ')} and {display_term('γωγ')}, but that does not by itself create a claim.",
         "- A promoted row still needs source/version comparison, surface-frequency checks, controls, and manual passage reading.",
         "",
     ]

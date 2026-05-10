@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
+from els.term_display import display_center, display_term
 
 
 DEFAULT_BUNDLE = Path("reports/dynamic_skip_focus/strong_full_span_exact_center_review_bundle.csv")
@@ -200,7 +201,7 @@ def summary_lines(rows: list[dict[str, object]]) -> list[str]:
         lines.append(f"| {corpus} | {count:,} |")
     lines.extend(["", "## Term Counts", "", "| Term | Rows |", "| --- | ---: |"])
     for term, count in sorted(by_term.items(), key=lambda item: (-item[1], item[0])):
-        lines.append(f"| `{term}` | {count:,} |")
+        lines.append(f"| {display_term(term)} | {count:,} |")
     lines.append("")
     return lines
 
@@ -213,9 +214,11 @@ def top_rows_lines(rows: list[dict[str, object]]) -> list[str]:
         "| ---: | --- | --- | --- | --- | ---: | ---: | --- | ---: | --- |",
     ]
     for row in rows:
+        term = display_term(str(row["normalized_term"]))
+        center = display_center(str(row["center_ref"]), str(row["center_word"]))
         lines.append(
             f"| {row['shortlist_rank']} | {row['priority']} | {row['corpus']} | "
-            f"`{row['normalized_term']}` | {row['center_ref']} | {row['exact_center_paths']} | "
+            f"{term} | {center} | {row['exact_center_paths']} | "
             f"{row['strong_extension_rows']} | {row['best_extension']} | {row['matrix_paths']} | "
             f"{row['center_word_context']} |"
         )

@@ -13,6 +13,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from els import __version__
+from els.term_display import display_center, display_term
 
 
 DEFAULT_REVIEW_PACKET = Path(
@@ -299,9 +300,15 @@ def bottom_line(rows: list[dict[str, object]]) -> list[str]:
         f"- `{len(promote)}` row is promoted for contextual centered-self review.",
         f"- `{len(hold)}` rows are held for manual/source comparison.",
         f"- `{len(background)}` rows are currently best read as background-pressure rows.",
-        "- The promoted row is Greek `γωγ` in `TCG_NT` centered on open `Γὼγ` at `REV 20:8`; this is an existence/context finding, not a frequency claim.",
-        "- LXX `ιησουσ` rows are control-zero in this run, but most center on ordinary Joshua/Yeshua surface contexts.",
-        "- Hebrew `ישוע` and `משיח` rows remain real exact-center rows, but Hebrew controls also produce exact-center rows for those normalized terms.",
+        "- The promoted row is Greek "
+        f"{display_term('γωγ', english='Gog')} in `TCG_NT` centered on open "
+        f"{display_term('Γὼγ', english='Gog')} at `REV 20:8`; this is an existence/context finding, not a frequency claim.",
+        "- LXX "
+        f"{display_term('ιησουσ', english='Jesus/Joshua')} rows are control-zero in this run, "
+        "but most center on ordinary Joshua/Yeshua surface contexts.",
+        "- Hebrew "
+        f"{display_term('ישוע', english='Yeshua/Jeshua')} and {display_term('משיח', english='Messiah/anointed one')} "
+        "rows remain real exact-center rows, but Hebrew controls also produce exact-center rows for those normalized terms.",
         "",
     ]
     return lines
@@ -326,7 +333,7 @@ def scope_lines(rows: list[dict[str, object]], args: argparse.Namespace) -> list
         lines.append(f"| {corpus} | {count:,} |")
     lines.extend(["", "## Term Counts", "", "| Term | Rows |", "| --- | ---: |"])
     for term, count in sorted(by_term.items(), key=lambda item: (-item[1], item[0])):
-        lines.append(f"| `{term}` | {count:,} |")
+        lines.append(f"| {display_term(term)} | {count:,} |")
     lines.append("")
     return lines
 
@@ -354,9 +361,11 @@ def findings_table_lines(rows: list[dict[str, object]]) -> list[str]:
     ]
     for row in rows:
         span = f"{row['example_start_ref']} -> {row['center_ref']} -> {row['example_end_ref']}"
+        term = display_term(str(row["normalized_term"]))
+        center = display_center(str(row["center_ref"]), str(row["center_word"]))
         lines.append(
             f"| {row['finding_rank']} | {row['recommendation']} | {row['corpus']} | "
-            f"`{row['normalized_term']}` | {row['center_ref']} `{row['center_word']}` | "
+            f"{term} | {center} | "
             f"{int(row['exact_center_paths']):,} | {md_cell(span)} | "
             f"{md_cell(row['control_read'])} | {md_cell(row['manual_review_note'])} |"
         )
@@ -371,9 +380,14 @@ def read_lines() -> list[str]:
         "- `promote` does not mean proved; it means the row is worth the next manual/source-comparison pass.",
         "- Exact-center rows are intentionally broad: hidden term centered on the same open surface word, or on a related surface word, is meaningful enough to preserve as an occurrence.",
         "- Frequency counts and matched controls should travel with the row, but they should not erase the occurrence from the final report.",
-        "- Hebrew `ישוע` and `משיח` rows should not be discarded, but the Bialik control background must travel with every interpretation.",
-        "- LXX `ιησουσ` rows need referent discipline because the same Greek spelling commonly represents Joshua/Yeshua in LXX contexts.",
-        "- Next review should inspect the promoted `γωγ` row path-by-path, then sample the highest-ranked LXX `ιησουσ` rows by center passage.",
+        "- Hebrew "
+        f"{display_term('ישוע', english='Yeshua/Jeshua')} and {display_term('משיח', english='Messiah/anointed one')} "
+        "rows should not be discarded, but the Bialik control background must travel with every interpretation.",
+        "- LXX "
+        f"{display_term('ιησουσ', english='Jesus/Joshua')} rows need referent discipline because the same Greek spelling commonly represents Joshua/Yeshua in LXX contexts.",
+        "- Next review should inspect the promoted "
+        f"{display_term('γωγ', english='Gog')} row path-by-path, then sample the highest-ranked LXX "
+        f"{display_term('ιησουσ', english='Jesus/Joshua')} rows by center passage.",
         "",
     ]
 

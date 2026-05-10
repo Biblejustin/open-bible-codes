@@ -1,4 +1,11 @@
-from scripts.build_dynamic_span_exact_center_original_language_shortlist import build_shortlist
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from types import SimpleNamespace
+
+from scripts.build_dynamic_span_exact_center_original_language_shortlist import (
+    build_shortlist,
+    write_markdown,
+)
 
 
 def row(
@@ -65,3 +72,42 @@ def test_shortlist_prefers_strong_extensions_then_path_count() -> None:
 
     assert [item["corpus"] for item in shortlist] == ["UHB", "SBLGNT", "LXX"]
     assert [item["shortlist_rank"] for item in shortlist] == [1, 2, 3]
+
+
+def test_write_markdown_displays_original_language_terms() -> None:
+    with TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        out = root / "shortlist.md"
+        args = SimpleNamespace(
+            bundle=root / "bundle.csv",
+            out=root / "shortlist.csv",
+            markdown_out=out,
+            manifest_out=root / "manifest.json",
+            limit=120,
+            markdown_row_limit=80,
+        )
+
+        write_markdown(
+            out,
+            [
+                {
+                    "shortlist_rank": 1,
+                    "priority": "bible_exact_center",
+                    "corpus": "TCG_NT",
+                    "normalized_term": "γωγ",
+                    "center_ref": "REV 20:8",
+                    "center_word": "Γὼγ",
+                    "exact_center_paths": 1,
+                    "strong_extension_rows": 0,
+                    "best_extension": "",
+                    "matrix_paths": 1,
+                    "center_word_context": "context",
+                }
+            ],
+            args,
+        )
+
+        text = out.read_text(encoding="utf-8")
+
+    assert "`γωγ` (Gog; English: Gog)" in text
+    assert "`Γὼγ` (Gog; English: Gog)" in text

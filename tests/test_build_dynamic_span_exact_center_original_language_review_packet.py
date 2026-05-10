@@ -1,4 +1,8 @@
-from scripts.build_dynamic_span_exact_center_original_language_review_packet import build_packet
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from types import SimpleNamespace
+
+from scripts.build_dynamic_span_exact_center_original_language_review_packet import build_packet, write_markdown
 
 
 def bundle_row(
@@ -197,3 +201,58 @@ def test_build_packet_reports_zero_control_summary() -> None:
     assert len(path_rows) == 1
     assert "zero exact-center rows" in str(review_rows[0]["control_read"])
     assert "GRC_PERSEUS_HERODOTUS:0 exact-center rows" in str(review_rows[0]["control_comparison"])
+
+
+def test_write_markdown_displays_original_language_terms() -> None:
+    with TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        out = root / "review.md"
+        args = SimpleNamespace(
+            review_out=root / "review.csv",
+            paths_out=root / "paths.csv",
+            exact_summary=root / "summary.csv",
+            bundle=root / "bundle.csv",
+            exact_rows=root / "exact.csv",
+            context=root / "context.csv",
+            matrix_dir=root / "matrix",
+            markdown_out=out,
+            manifest_out=root / "manifest.json",
+            markdown_row_limit=80,
+            markdown_path_limit=120,
+        )
+
+        write_markdown(
+            out,
+            [
+                {
+                    "review_rank": 1,
+                    "corpus": "TCG_NT",
+                    "normalized_term": "γωγ",
+                    "center_ref": "REV 20:8",
+                    "center_word": "Γὼγ",
+                    "exact_center_paths": 1,
+                    "example_start_ref": "REV 19:1",
+                    "example_end_ref": "REV 21:1",
+                    "example_rows_spanned": 3,
+                    "example_row_width": 10,
+                    "control_read": "zero exact-center rows",
+                    "center_word_context": "Gog and Magog",
+                }
+            ],
+            [],
+            [
+                {
+                    "corpus": "GRC_PERSEUS_HERODOTUS",
+                    "normalized_term": "γωγ",
+                    "exact_center_rows": "0",
+                    "exact_center_rows_per_million_hits": "0",
+                    "top_center_words": "",
+                }
+            ],
+            args,
+        )
+
+        text = out.read_text(encoding="utf-8")
+
+    assert "`γωγ` (Gog; English: Gog)" in text
+    assert "`Γὼγ` (Gog; English: Gog)" in text
