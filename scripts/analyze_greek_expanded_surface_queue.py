@@ -12,6 +12,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from els import __version__
+from els.term_display import display_term
 from scripts.analyze_hebrew_hit_version_presence import canonical_ref
 
 
@@ -320,7 +321,7 @@ def write_markdown(
             "| "
             + " | ".join(
                 [
-                    f"`{row['normalized_term']}`",
+                    display_queue_term(row),
                     row["concept"],
                     row["total_exact_center_hits"],
                     row["unique_patterns"],
@@ -346,12 +347,12 @@ def write_markdown(
             "| "
             + " | ".join(
                 [
-                    f"`{row['normalized_term']}`",
+                    display_queue_term(row),
                     row["center_ref"],
                     row["skip"],
                     row["direction"],
                     row["present_corpora"],
-                    row["center_words_by_corpus"],
+                    display_center_words_by_corpus(row["center_words_by_corpus"]),
                 ]
             )
             + " |"
@@ -368,6 +369,26 @@ def write_markdown(
     )
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+
+def display_queue_term(row: dict[str, str]) -> str:
+    return display_term(row["normalized_term"], english=row.get("concept", ""))
+
+
+def display_center_words_by_corpus(value: str) -> str:
+    cells = []
+    for part in value.split("; "):
+        if ":" not in part:
+            cells.append(display_term(part))
+            continue
+        corpus, words = part.split(":", 1)
+        displayed_words = "/".join(display_term(word) for word in words.split("/") if word)
+        cells.append(f"{corpus}:{displayed_words}")
+    return md_cell("; ".join(cells))
+
+
+def md_cell(value: str) -> str:
+    return value.replace("|", "\\|")
 
 
 def wrap_sentences(text: str) -> list[str]:

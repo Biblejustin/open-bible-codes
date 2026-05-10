@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
+from els.term_display import display_term
 
 
 DEFAULT_QUEUE = Path("reports/dynamic_skip_focus/strong_full_span_exact_center_review_queue.csv")
@@ -304,9 +305,9 @@ def write_markdown(path: Path, rows: list[dict[str, object]], args: argparse.Nam
 
 def bundle_markdown_row(row: dict[str, object]) -> str:
     return (
-        f"| {row['rank']} | {row['priority']} | {row['corpus']} | `{row['normalized_term']}` | "
+        f"| {row['rank']} | {row['priority']} | {row['corpus']} | {display_term(str(row['normalized_term']))} | "
         f"{row['center_ref']} | {int(row['exact_center_paths']):,} | "
-        f"{int(row['strong_extension_rows']):,} | {md_cell(str(row['best_extension']))} | "
+        f"{int(row['strong_extension_rows']):,} | {md_cell(display_term(str(row['best_extension'])))} | "
         f"{int(row['matrix_paths']):,} | {md_cell(truncate(str(row['center_word_context']), 100))} |"
     )
 

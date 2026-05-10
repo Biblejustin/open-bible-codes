@@ -47,3 +47,14 @@ def test_read_label_marks_related_byzantine_pair() -> None:
         queue.read_label(["BYZ_NT", "TCG_NT"], ("TR_NT", "BYZ_NT", "TCG_NT", "SBLGNT"))
         == "surface exact-center pattern in related Byzantine-source pair"
     )
+
+
+def test_display_queue_term_adds_transliteration_and_english() -> None:
+    assert queue.display_queue_term({"normalized_term": "αμην", "concept": "Amen"}) == "`αμην` (amen; English: Amen)"
+
+
+def test_display_center_words_by_corpus_adds_transliteration() -> None:
+    value = queue.display_center_words_by_corpus("TR_NT:οὖν; BYZ_NT:ουν")
+
+    assert "`οὖν` (oun)" in value
+    assert "`ουν` (oun)" in value

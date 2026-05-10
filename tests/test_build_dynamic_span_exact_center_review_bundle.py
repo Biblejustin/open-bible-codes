@@ -4,6 +4,7 @@ from scripts.build_dynamic_span_exact_center_review_bundle import (
     aggregate_extensions,
     aggregate_matrix,
     build_bundle,
+    bundle_markdown_row,
     bundle_sort_key,
     reproduce_command,
 )
@@ -134,6 +135,25 @@ class BuildDynamicSpanExactCenterReviewBundleTests(unittest.TestCase):
         bible = {"priority": "bible_exact_center", "exact_center_paths": "99", "rank": "1"}
 
         self.assertLess(bundle_sort_key(control), bundle_sort_key(bible))
+
+    def test_bundle_markdown_row_displays_original_language_terms(self) -> None:
+        row = {
+            "rank": "1",
+            "priority": "bible_exact_center_with_strong_extension",
+            "corpus": "SBLGNT",
+            "normalized_term": "δοξα",
+            "center_ref": "2TH 3:1",
+            "exact_center_paths": "3",
+            "strong_extension_rows": "1",
+            "best_extension": "δοξανωσ",
+            "matrix_paths": "3",
+            "center_word_context": "short context",
+        }
+
+        line = bundle_markdown_row(row)
+
+        self.assertIn("`δοξα` (doxa; English: glory)", line)
+        self.assertIn("`δοξανωσ` (doxanos; English: hidden extension form from doxa)", line)
 
     def test_reproduce_command_includes_all_inputs(self) -> None:
         args = type(

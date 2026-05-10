@@ -97,7 +97,7 @@ outputs = [
 [[steps]]
 id = "broad_search_report"
 description = "Summarize broad skip 2..100 count outputs."
-argv = ["-m", "scripts.analyze_broad_search"]
+argv = ["-m", "scripts.analyze_broad_search", "--docs-out", "docs/BROAD_SEARCH_FINDINGS.md"]
 inputs = [
   "scripts/analyze_broad_search.py",
   "els/term_display.py",
@@ -125,6 +125,7 @@ outputs = [
   "reports/broad_search/broad_search_focus.csv",
   "reports/broad_search/broad_search_delta_vs_baseline.csv",
   "reports/broad_search/broad_search.md",
+  "docs/BROAD_SEARCH_FINDINGS.md",
   "reports/broad_search/broad_search_summary.manifest.json",
 ]
 

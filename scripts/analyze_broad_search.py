@@ -21,6 +21,7 @@ TOP_OUT = Path("reports/broad_search/broad_search_top_counts.csv")
 FOCUS_OUT = Path("reports/broad_search/broad_search_focus.csv")
 DELTA_OUT = Path("reports/broad_search/broad_search_delta_vs_baseline.csv")
 MD_OUT = Path("reports/broad_search/broad_search.md")
+DOCS_OUT = Path("docs/BROAD_SEARCH_FINDINGS.md")
 MANIFEST_OUT = Path("reports/broad_search/broad_search_summary.manifest.json")
 
 FOCUS_CONCEPTS = {
@@ -117,6 +118,8 @@ def main(argv: list[str] | None = None) -> int:
     write_rows(args.focus_out, FOCUS_FIELDNAMES, focus_rows)
     write_rows(args.delta_out, DELTA_FIELDNAMES, delta_rows)
     write_markdown(args.markdown_out, summary_rows, top_rows, focus_rows, delta_rows, args)
+    if args.docs_out is not None:
+        write_markdown(args.docs_out, summary_rows, top_rows, focus_rows, delta_rows, args)
     write_manifest(args, len(rows), len(baseline_rows), started)
     print(args.summary_out)
     print(args.top_out)
@@ -139,6 +142,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--focus-out", type=Path, default=FOCUS_OUT)
     parser.add_argument("--delta-out", type=Path, default=DELTA_OUT)
     parser.add_argument("--markdown-out", type=Path, default=MD_OUT)
+    parser.add_argument("--docs-out", type=Path)
     parser.add_argument("--manifest-out", type=Path, default=MANIFEST_OUT)
     return parser
 
@@ -436,6 +440,16 @@ def write_manifest(
     baseline_rows: int,
     started: float,
 ) -> None:
+    outputs = [
+        str(args.summary_out),
+        str(args.top_out),
+        str(args.focus_out),
+        str(args.delta_out),
+        str(args.markdown_out),
+        str(args.manifest_out),
+    ]
+    if args.docs_out is not None:
+        outputs.append(str(args.docs_out))
     payload = {
         "tool": "analyze_broad_search",
         "version": __version__,
@@ -444,14 +458,7 @@ def write_manifest(
         "baseline_dir": str(args.baseline_dir),
         "rows": rows,
         "baseline_rows": baseline_rows,
-        "outputs": [
-            str(args.summary_out),
-            str(args.top_out),
-            str(args.focus_out),
-            str(args.delta_out),
-            str(args.markdown_out),
-            str(args.manifest_out),
-        ],
+        "outputs": outputs,
         "seconds": round(time.perf_counter() - started, 3),
     }
     args.manifest_out.parent.mkdir(parents=True, exist_ok=True)
