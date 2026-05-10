@@ -12,6 +12,12 @@ one local run summary.
 python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
 ```
 
+Equivalent Make target:
+
+```bash
+make real-report
+```
+
 Generated local outputs:
 
 - `reports/real_report_run/preflight.json`
