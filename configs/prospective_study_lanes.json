@@ -60,7 +60,7 @@
     {
       "id": "gog_magog_pair_controls",
       "title": "Gog Magog Prophetic Symbol Pair Controls",
-      "status": "design_ready_needs_protocol",
+      "status": "completed_negative_weak_controlled_result",
       "language": "hebrew",
       "term_file": "terms/gog_magog_pair_prospective_terms.csv",
       "protocol": "protocols/gog_magog_pair_prospective.toml",

@@ -213,7 +213,7 @@ Safe non-result-producing checks:
 
 ```bash
 python3 -m scripts.check_prospective_study_lanes
-python3 -m scripts.scaffold_prospective_study --profile gog_magog_pair_controls --print-command
+python3 -m scripts.scaffold_prospective_study --list-profiles
 ```
 
 Allowed post-discovery reruns with existing locks:
