@@ -41,7 +41,7 @@ Input Stats:
 Ref-Missing But Not Counted As Deleted:
 
 - Acts 19:41: adjacent merge into SBLGNT Acts 19:40.
-- 2 Corinthians 13:14: content renumbered as SBLGNT 2 Corinthians 13:13, minus final `αμην`.
+- 2 Corinthians 13:14: content renumbered as SBLGNT 2 Corinthians 13:13, minus final `αμην` (amen; English: amen).
 
 Broken Hits:
 
@@ -52,14 +52,14 @@ Broken Hits:
 
 Top Broken Terms:
 
-- Noah (`νωε`): 49.
-- Hul (`ουλ`): 41.
-- Temple (`ναος`): 18.
-- Son (`υιος`): 13.
-- Iran (`ιραν`): 8.
-- Blood (`αιμα`): 7.
-- Shem (`σημ`): 7.
-- Ham (`χαμ`): 7.
+- Noah: `νωε` (Noe; English: Noah), 49.
+- Hul: `ουλ` (Oul; English: Hul), 41.
+- Temple: `ναος` (naos; English: temple), 18.
+- Son: `υιος` (huios; English: son), 13.
+- Iran: `ιραν` (iran; English: Iran), 8.
+- Blood: `αιμα` (haima; English: blood), 7.
+- Shem: `σημ` (Sem; English: Shem), 7.
+- Ham: `χαμ` (Cham; English: Ham), 7.
 
 Top Deleted Blocks:
 

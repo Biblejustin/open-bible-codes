@@ -37,20 +37,20 @@ Results:
 
 Top MT WLC Lemmas:
 
-- noun `3068`, surface `יְהוָ֖ה`: 6,521.
-- verb `559`, surface `וַ/יֹּ֣אמֶר`: 5,272.
-- noun `3605`, surface `כָּל`: 5,200; multiple of 40.
-- noun `1121`, surface `בֶּן`: 4,010.
-- verb `1961`, surface `וַ/יְהִ֣י`: 3,543; multiple of 3.
+- noun `3068`, surface `יְהוָ֖ה` (YHWH; English: divine name): 6,521.
+- verb `559`, surface `וַ/יֹּ֣אמֶר` (vayyomer; English: and he said): 5,272.
+- noun `3605`, surface `כָּל` (kol; English: all/every): 5,200; multiple of 40.
+- noun `1121`, surface `בֶּן` (ben; English: son): 4,010.
+- verb `1961`, surface `וַ/יְהִ֣י` (vayehi; English: and it was): 3,543; multiple of 3.
 
 Top SBLGNT Lemmas:
 
-- verb `εἰμί`: 2,456.
-- verb `λέγω`: 2,345; multiple of 7.
-- noun `θεός`: 1,307.
-- adjective `πᾶς`: 1,244.
-- noun `Ἰησοῦς`: 906; multiple of 3.
-- noun `Χριστός`: 528; multiple of 3 and 12.
+- verb `εἰμί` (eimi; English: to be): 2,456.
+- verb `λέγω` (lego; English: to say): 2,345; multiple of 7.
+- noun `θεός` (theos; English: God): 1,307.
+- adjective `πᾶς` (pas; English: all/every): 1,244.
+- noun `Ἰησοῦς` (Iesous; English: Jesus/Joshua): 906; multiple of 3.
+- noun `Χριστός` (Christos; English: Christ): 528; multiple of 3 and 12.
 
 Limits:
 

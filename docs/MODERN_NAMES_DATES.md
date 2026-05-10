@@ -39,9 +39,9 @@ python3 -m els pairs \
 
 Date encoding:
 
-- Jewish year shorthand: `5785` -> `תשפה`; this omits the 5000 by normal convention.
-- Gregorian compact thousands: `2024` -> `בכד`; punctuation/thousands mark removed.
-- Pure additive gematria: `2024` -> `תתתתתכד`; value is literally 2024 by letter totals.
+- Jewish year shorthand: `5785` -> `תשפה` (tav-shin-peh-he; English: Hebrew year 5785 shorthand); this omits the 5000 by normal convention.
+- Gregorian compact thousands: `2024` -> `בכד` (bet-kaf-dalet; English: compact Hebrew-letter 2024); punctuation/thousands mark removed.
+- Pure additive gematria: `2024` -> `תתתתתכד` (tav-tav-tav-tav-tav-kaf-dalet; English: additive Hebrew-letter 2024); value is literally 2024 by letter totals.
 
 Helper:
 
@@ -52,7 +52,7 @@ python3 -m els gematria-year 2024
 Cautions:
 
 - `2024`, `2025`, etc. do not exist as digits in normalized Bible streams.
-- Date terms use explicit encodings. Hebrew year letters (`תשפה`) are cleaner than spelled-out Gregorian year words.
+- Date terms use explicit encodings. Hebrew year letters (`תשפה` (tav-shin-peh-he; English: Hebrew year 5785 shorthand)) are cleaner than spelled-out Gregorian year words.
 - Modern-name spellings are transliterations, not inspired spellings.
 - Modern-place spellings mix direct country names, common acronyms, and modern Hebrew/Greek forms; short acronyms are noisy.
 - Gog and Magog live in `terms/prophetic_terms.csv` and `terms/table_of_nations.csv`; they are not duplicated here as modern places.
@@ -82,46 +82,46 @@ Focused name counts, skips 2 through 50:
 
 | Term | MT_WLC | LXX | TR_NT | SBLGNT |
 |---|---:|---:|---:|---:|
-| Trump / `טראמפ` / `τραμπ` | 4 | 57 | 23 | 12 |
-| Vance / `ואנס` / `βανς` | 331 | 1,338 | 252 | 259 |
-| Vance alt / `ווענס` | 12 | n/a | n/a | n/a |
-| Netanyahu / `נתניהו` / `νετανιαχου` | 8 | 0 | 0 | 0 |
-| Iran / `איראן` / `ιραν` | 210 | 7,179 | 1,988 | 1,983 |
-| Persia / `פרס` / `περσια` | 907 | 24 | 7 | 6 |
+| Trump / `טראמפ` (Trump; English: Trump) / `τραμπ` (tramp; English: Trump) | 4 | 57 | 23 | 12 |
+| Vance / `ואנס` (Vance; English: Vance) / `βανς` (vans; English: Vance) | 331 | 1,338 | 252 | 259 |
+| Vance alt / `ווענס` (Vance; English: Vance alternate spelling) | 12 | n/a | n/a | n/a |
+| Netanyahu / `נתניהו` (Netanyahu; English: Netanyahu) / `νετανιαχου` (netaniachou; English: Netanyahu) | 8 | 0 | 0 | 0 |
+| Iran / `איראן` (Iran; English: Iran) / `ιραν` (iran; English: Iran) | 210 | 7,179 | 1,988 | 1,983 |
+| Persia / `פרס` (Paras; English: Persia) / `περσια` (persia; English: Persia) | 907 | 24 | 7 | 6 |
 
 Hebrew date count summary:
 
 | Date encoding | Term | MT_WLC hits |
 |---|---|---:|
-| 2026 compact | `בכו` | 26,640 |
-| 2025 compact | `בכה` | 20,985 |
-| 2024 compact | `בכד` | 6,818 |
-| 2027 compact | `בכז` | 1,899 |
-| 5786 Jewish-year shorthand | `תשפו` | 489 |
-| 5785 Jewish-year shorthand | `תשפה` | 378 |
-| 5784 Jewish-year shorthand | `תשפד` | 136 |
-| 5787 Jewish-year shorthand | `תשפז` | 34 |
-| 2025 additive full value | `תתתתתכה` | 1 |
-| 2027 additive full value | `תתתתתכז` | 1 |
-| 2024 additive full value | `תתתתתכד` | 0 |
-| 2026 additive full value | `תתתתתכו` | 0 |
+| 2026 compact | `בכו` (bet-kaf-vav; English: compact Hebrew-letter 2026) | 26,640 |
+| 2025 compact | `בכה` (bet-kaf-he; English: compact Hebrew-letter 2025) | 20,985 |
+| 2024 compact | `בכד` (bet-kaf-dalet; English: compact Hebrew-letter 2024) | 6,818 |
+| 2027 compact | `בכז` (bet-kaf-zayin; English: compact Hebrew-letter 2027) | 1,899 |
+| 5786 Jewish-year shorthand | `תשפו` (tav-shin-peh-vav; English: Hebrew year 5786 shorthand) | 489 |
+| 5785 Jewish-year shorthand | `תשפה` (tav-shin-peh-he; English: Hebrew year 5785 shorthand) | 378 |
+| 5784 Jewish-year shorthand | `תשפד` (tav-shin-peh-dalet; English: Hebrew year 5784 shorthand) | 136 |
+| 5787 Jewish-year shorthand | `תשפז` (tav-shin-peh-zayin; English: Hebrew year 5787 shorthand) | 34 |
+| 2025 additive full value | `תתתתתכה` (tav-tav-tav-tav-tav-kaf-he; English: additive Hebrew-letter 2025) | 1 |
+| 2027 additive full value | `תתתתתכז` (tav-tav-tav-tav-tav-kaf-zayin; English: additive Hebrew-letter 2027) | 1 |
+| 2024 additive full value | `תתתתתכד` (tav-tav-tav-tav-tav-kaf-dalet; English: additive Hebrew-letter 2024) | 0 |
+| 2026 additive full value | `תתתתתכו` (tav-tav-tav-tav-tav-kaf-vav; English: additive Hebrew-letter 2026) | 0 |
 
 Focused name/date proximity, MT_WLC, max span gap 500:
 
 | Pair | Best span gap | Best center distance | Notes |
 |---|---:|---:|---|
-| Trump ↔ 5786 / `תשפו` | 0 | 34.5 | Leviticus 14:11 region |
-| Trump ↔ 5785 / `תשפה` | 0 | 59.0 | Deuteronomy 16:16-18 region |
-| Netanyahu ↔ 5786 / `תשפו` | 176 | 288.0 | Ezekiel 10 region |
-| Netanyahu ↔ 5785 / `תשפה` | 221 | 373.5 | nearest under current rule |
-| Vance ↔ 5784 / `תשפד` | 0 | 0.5 | many overlaps; term/date are short |
-| Vance ↔ 5785 / `תשפה` | 0 | 11.0 | many overlaps; term/date are short |
-| Vance ↔ 5786 / `תשפו` | 0 | 4.0 | many overlaps; term/date are short |
+| Trump ↔ 5786 / `תשפו` (tav-shin-peh-vav; English: Hebrew year 5786 shorthand) | 0 | 34.5 | Leviticus 14:11 region |
+| Trump ↔ 5785 / `תשפה` (tav-shin-peh-he; English: Hebrew year 5785 shorthand) | 0 | 59.0 | Deuteronomy 16:16-18 region |
+| Netanyahu ↔ 5786 / `תשפו` (tav-shin-peh-vav; English: Hebrew year 5786 shorthand) | 176 | 288.0 | Ezekiel 10 region |
+| Netanyahu ↔ 5785 / `תשפה` (tav-shin-peh-he; English: Hebrew year 5785 shorthand) | 221 | 373.5 | nearest under current rule |
+| Vance ↔ 5784 / `תשפד` (tav-shin-peh-dalet; English: Hebrew year 5784 shorthand) | 0 | 0.5 | many overlaps; term/date are short |
+| Vance ↔ 5785 / `תשפה` (tav-shin-peh-he; English: Hebrew year 5785 shorthand) | 0 | 11.0 | many overlaps; term/date are short |
+| Vance ↔ 5786 / `תשפו` (tav-shin-peh-vav; English: Hebrew year 5786 shorthand) | 0 | 4.0 | many overlaps; term/date are short |
 
 Interpretive note:
 
 - Short transliterations and compact year encodings produce many near hits.
-- Compact Gregorian encodings (`בכו`, `בכה`) are especially frequent because they are only three letters.
+- Compact Gregorian encodings (`בכו` (bet-kaf-vav; English: compact Hebrew-letter 2026), `בכה` (bet-kaf-he; English: compact Hebrew-letter 2025)) are especially frequent because they are only three letters.
 - The additive full-value encodings are stricter but mostly absent.
 
 Iran/Persia related-name checks:
@@ -144,6 +144,6 @@ Iran/Persia related-name checks:
 
 Iran caveat:
 
-- Greek `ιραν` is only four normalized letters and extremely common as an ELS pattern.
-- Hebrew `פרס` / Persia is biblical and short, so it is very noisy.
+- Greek `ιραν` (iran; English: Iran) is only four normalized letters and extremely common as an ELS pattern.
+- Hebrew `פרס` (Paras; English: Persia) is biblical and short, so it is very noisy.
 - These are raw co-occurrence counts, not statistical controls.
