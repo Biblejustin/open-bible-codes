@@ -6,7 +6,13 @@ from pathlib import Path
 import pytest
 
 from els.report_db import import_csv_table
-from scripts.summarize_dynamic_span_hits import build_version_presence_rows, summarize_hit_file, summarize_hit_table
+from scripts.summarize_dynamic_span_hits import (
+    build_version_presence_rows,
+    display_center_word,
+    display_top_center_words,
+    summarize_hit_file,
+    summarize_hit_table,
+)
 
 
 class DynamicSpanHitSummaryTests(unittest.TestCase):
@@ -115,6 +121,16 @@ class DynamicSpanHitSummaryTests(unittest.TestCase):
         self.assertEqual(by_term["dyn_sample_g"]["bible_zero_corpora"], "SBLGNT")
         self.assertEqual(by_term["dyn_sample_g"]["control_zero_corpora"], "GRC_PERSEUS_ODYSSEY")
         self.assertEqual(by_term["dyn_other_g"]["bible_max_hit_count"], "0")
+
+    def test_display_center_word_annotates_exact_script_match_with_concept(self) -> None:
+        row = hit_row("TR_NT", "dyn_sample_g", "λογος", "λόγος", "forward", 2, "MAT 1:1")
+        row["concept"] = "Word"
+        row["center_normalized_word"] = "λογος"
+
+        self.assertEqual(display_center_word(row), "`λόγος` (logos; English: Word)")
+
+    def test_display_top_center_words_annotates_script_values_only(self) -> None:
+        self.assertEqual(display_top_center_words("λογος=2; and=1"), "`λογος` (logos)=2; and=1")
 
 
 def hit_row(

@@ -15,6 +15,7 @@ from typing import Any, Iterable
 
 from els import __version__
 from els.report_db import ReportDBStale, connect, quote_identifier, verify_table_current
+from els.term_display import contains_greek, contains_hebrew, display_term
 from scripts.export_dynamic_span_hits import DEFAULT_COUNTS, DEFAULT_OUT, ROOT
 
 
@@ -627,7 +628,8 @@ def write_report(
     for row in sorted(low_count, key=lambda item: (int(item["count_row_hit_count"]), item["corpus"], item["term_id"]))[:25]:
         lines.append(
             f"| {row['corpus']} | `{row['term_id']}` | {row['count_row_hit_count']} | "
-            f"{row['min_abs_skip']} | {cell(str(row['top_center_refs']))} | {cell(str(row['top_center_words']))} |"
+            f"{row['min_abs_skip']} | {cell(str(row['top_center_refs']))} | "
+            f"{cell(display_top_center_words(str(row['top_center_words'])))} |"
         )
     lines.extend(
         [
@@ -641,7 +643,7 @@ def write_report(
     for row in examples[:30]:
         lines.append(
             f"| `{row['example_type']}` | {row['corpus']} | `{row['term_id']}` | {row['skip']} | "
-            f"{row['start_ref']} | {row['center_ref']} | {row['end_ref']} | {cell(row['center_word'])} |"
+            f"{row['start_ref']} | {row['center_ref']} | {row['end_ref']} | {cell(display_center_word(row))} |"
         )
     lines.extend(
         [
@@ -706,6 +708,27 @@ def version_sort_key(row: dict[str, str]) -> tuple[int, int, str]:
 
 def cell(value: str) -> str:
     return value.replace("|", "\\|") if value else ""
+
+
+def display_center_word(row: dict[str, str]) -> str:
+    word = row.get("center_word", "")
+    if not (contains_hebrew(word) or contains_greek(word)):
+        return word
+    english = row.get("concept", "") if row.get("center_normalized_word") == row.get("normalized_term") else ""
+    return display_term(word, english=english or None)
+
+
+def display_top_center_words(value: str) -> str:
+    parts = []
+    for item in value.split("; "):
+        if not item:
+            continue
+        word, sep, count = item.rpartition("=")
+        if sep and (contains_hebrew(word) or contains_greek(word)):
+            parts.append(f"{display_term(word)}={count}")
+        else:
+            parts.append(item)
+    return "; ".join(parts)
 
 
 def max_cell(corpus: str, hit_count: str) -> str:
