@@ -1,6 +1,6 @@
 # Gog/Magog Pair Prospective Report
 
-Generated: 2026-05-09T15:04:35.844227+00:00
+Generated: 2026-05-10T17:36:03.624157+00:00
 
 Status: prospective controlled review output, not a claim.
 

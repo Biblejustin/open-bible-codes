@@ -51,6 +51,8 @@ KNOWN_TERMS: dict[str, tuple[str, str]] = {
     "μασση": ("Masse", "Mesha"),
     "ישוע": ("Yeshua", "Yeshua/Jeshua"),
     "משיח": ("Mashiach", "Messiah/anointed one"),
+    "גוג": ("Gog", "Gog"),
+    "מגוג": ("Magog", "Magog"),
     "יוםיהוה": ("yom YHWH", "day of YHWH"),
     "יומיהוה": ("yom YHWH", "day of YHWH"),
     "היומיהוה": ("hayom YHWH", "the day of YHWH"),

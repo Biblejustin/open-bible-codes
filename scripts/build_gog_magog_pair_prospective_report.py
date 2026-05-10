@@ -8,6 +8,8 @@ import csv
 from datetime import UTC, datetime
 from pathlib import Path
 
+from els.term_display import display_term
+
 
 ROOT = Path("reports/gog_magog_pair_prospective")
 TARGET_SUMMARY = ROOT / "target_summary.csv"
@@ -57,7 +59,9 @@ def report_markdown(
         "",
         *outcome_lines(target_rows, synthetic_rows),
         "",
-        "Locked rule: Hebrew `גוג` / `מגוג`, MT_WLC and UHB only, skip `2..100`, direction `both`, same chapter, same signed skip, max gap `500`.",
+        f"Locked rule: Hebrew {display_term('גוג')} / {display_term('מגוג')}, "
+        "MT_WLC and UHB only, skip `2..100`, direction `both`, same chapter, "
+        "same signed skip, max gap `500`.",
         "",
         "## Target Pair Controls",
         "",
