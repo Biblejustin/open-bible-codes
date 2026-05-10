@@ -40,13 +40,13 @@ Generated local outputs:
 
 | Field | Value |
 | --- | --- |
-| Base term | `δοξα` |
-| Extension key | `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` |
+| Base term | `δοξα` (doxa; English: glory) |
+| Extension key | base=`δοξα` (doxa; English: glory); skip=21; direction=forward; type=term_plus_after; extended=`δοξανωσ` (doxanos; English: hidden extension form from doxa) |
 | Skip | `21` |
 | Direction | `forward` |
 | Extension type | `term_plus_after` |
-| Extended normalized sequence | `δοξανωσ` |
-| Matched phrase | `δόξαν ὡς` |
+| Extended normalized sequence | `δοξανωσ` (doxanos; English: hidden extension form from doxa) |
+| Matched phrase | `δόξαν ὡς` (doxanos; English: glory as) |
 | Center passage | 2 Thessalonians 3:1 |
 | Matched phrase reference | John 1:14 / JHN 1:14 |
 
@@ -81,10 +81,10 @@ P-value floor:
 ## Context And Audit
 
 The base term has exact-center surface context through the surface form
-`δοξάζηται` in 2 Thessalonians 3:1.
+`δοξάζηται` (doxazetai; English: may be glorified) in 2 Thessalonians 3:1.
 
-The full hidden extension sequence `δοξανωσ` maps to the phrase
-`δόξαν ὡς`. This follow-up treats hidden-path-only material as meaningful
+The full hidden extension sequence `δοξανωσ` (doxanos; English: hidden extension form from doxa) maps to the phrase
+`δόξαν ὡς` (doxanos; English: glory as). This follow-up treats hidden-path-only material as meaningful
 review material, not as a failure. A same-span surface echo would be a
 stronger subtype, but it is not required by this registered study.
 
@@ -92,10 +92,10 @@ Context reads:
 
 | Corpus | Center | Hit refs | Context read |
 | --- | --- | --- | --- |
-| BYZ_NT | 2TH 3:1 `κυριου` | 2TH 3:1 | base normalized string appears in center verse surface text |
-| SBLGNT | 2Thess 3:1 `κυρίου` | 2Thess 3:1 | base normalized string appears in center verse surface text |
-| TCG_NT | 2TH 3:1 `Κυρίου` | 2TH 3:1 | base normalized string appears in center verse surface text |
-| TR_NT | 2TH 3:1 `Κυρίου` | 2TH 3:1 | base normalized string appears in center verse surface text |
+| BYZ_NT | 2TH 3:1 `κυριου` (kuriou) | 2TH 3:1 | base normalized string appears in center verse surface text |
+| SBLGNT | 2Thess 3:1 `κυρίου` (kuriou) | 2Thess 3:1 | base normalized string appears in center verse surface text |
+| TCG_NT | 2TH 3:1 `Κυρίου` (kuriou) | 2TH 3:1 | base normalized string appears in center verse surface text |
+| TR_NT | 2TH 3:1 `Κυρίου` (kuriou) | 2TH 3:1 | base normalized string appears in center verse surface text |
 
 Audit paths are saved in:
 

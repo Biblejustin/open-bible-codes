@@ -13,6 +13,7 @@ from typing import Any
 
 from els import __version__
 from els.statistics import numeric_value
+from els.term_display import display_term
 
 
 OUT_DIR = Path("reports/doxa_four_source_claim_followup")
@@ -22,6 +23,10 @@ PROTOCOL_MANIFEST = OUT_DIR / "protocol_run.manifest.json"
 REPORT_OUT = Path("docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md")
 MANIFEST_OUT = OUT_DIR / "report.manifest.json"
 TARGET_KEY = "δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ"
+BASE_TERM = "δοξα"
+EXTENDED_SEQUENCE = "δοξανωσ"
+MATCHED_PHRASE = "δόξαν ὡς"
+CENTER_SURFACE = "δοξάζηται"
 EXPECTED_CORPORA = ("BYZ_NT", "SBLGNT", "TCG_NT", "TR_NT")
 DEFAULT_TERM_CONTROL_SAMPLES = 5000
 DEFAULT_RANDOM_CONTROL_SAMPLES = 5000
@@ -149,13 +154,13 @@ def build_report(
         "",
         "| Field | Value |",
         "| --- | --- |",
-        "| Base term | `δοξα` |",
-        f"| Extension key | `{TARGET_KEY}` |",
+        f"| Base term | {display_term(BASE_TERM, english='glory')} |",
+        f"| Extension key | {display_extension_key()} |",
         "| Skip | `21` |",
         "| Direction | `forward` |",
         "| Extension type | `term_plus_after` |",
-        "| Extended normalized sequence | `δοξανωσ` |",
-        "| Matched phrase | `δόξαν ὡς` |",
+        f"| Extended normalized sequence | {display_term(EXTENDED_SEQUENCE)} |",
+        f"| Matched phrase | {display_term(MATCHED_PHRASE, english='glory as')} |",
         "| Center passage | 2 Thessalonians 3:1 |",
         "| Matched phrase reference | John 1:14 / JHN 1:14 |",
         "",
@@ -209,10 +214,10 @@ def build_report(
             "## Context And Audit",
             "",
             "The base term has exact-center surface context through the surface form",
-            "`δοξάζηται` in 2 Thessalonians 3:1.",
+            f"{display_term(CENTER_SURFACE, english='may be glorified')} in 2 Thessalonians 3:1.",
             "",
-            "The full hidden extension sequence `δοξανωσ` maps to the phrase",
-            "`δόξαν ὡς`. This follow-up treats hidden-path-only material as meaningful",
+            f"The full hidden extension sequence {display_term(EXTENDED_SEQUENCE)} maps to the phrase",
+            f"{display_term(MATCHED_PHRASE, english='glory as')}. This follow-up treats hidden-path-only material as meaningful",
             "review material, not as a failure. A same-span surface echo would be a",
             "stronger subtype, but it is not required by this registered study.",
             "",
@@ -228,7 +233,7 @@ def build_report(
             + " | ".join(
                 [
                     row["corpus"],
-                    f"{row['center_ref']} `{row['center_word']}`",
+                    f"{row['center_ref']} {display_term(row['center_word'])}",
                     row["hit_refs"],
                     row["context_read"],
                 ]
@@ -281,6 +286,13 @@ def default_output_dir_for_report(report_out: Path) -> Path:
     if report_out.parent.name == "docs":
         return Path("reports") / report_out.stem.lower().replace("_report", "")
     return report_out.parent
+
+
+def display_extension_key() -> str:
+    return (
+        f"base={display_term(BASE_TERM, english='glory')}; skip=21; direction=forward; "
+        f"type=term_plus_after; extended={display_term(EXTENDED_SEQUENCE)}"
+    )
 
 
 def stable_run_metadata(

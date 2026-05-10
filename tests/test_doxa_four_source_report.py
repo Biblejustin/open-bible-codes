@@ -94,6 +94,9 @@ def test_report_uses_build_commit_label_for_cached_subreports() -> None:
     assert "Local report build commit" in text
     assert "Run commit" not in text
     assert "stable analysis timing" in text
+    assert "`δοξα` (doxa; English: glory)" in text
+    assert "`δοξανωσ` (doxanos; English: hidden extension form from doxa)" in text
+    assert "`δοξαζηται` (doxazetai)" in text
 
 
 def test_report_can_point_to_confirmatory_output_dir() -> None:
