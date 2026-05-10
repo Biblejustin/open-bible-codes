@@ -63,7 +63,7 @@ eBible Hebrew WLC is not treated as a materially independent MT edition. It is
 a public-domain USFM package useful for checking whether another WLC packaging
 creates different normalized streams.
 
-The eBible package includes standalone Hebrew paragraph markers (`פ` / `ס`) in
+The eBible package includes standalone Hebrew paragraph markers (`פ` [pe; English: open paragraph marker] / `ס` [samekh; English: closed paragraph marker]) in
 the verse text. The importer strips those before ELS normalization. After that:
 
 - eBible WLC has the same normalized length as MT_WLC: 1,197,042 letters.

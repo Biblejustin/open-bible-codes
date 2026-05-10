@@ -39,6 +39,6 @@ python3 -m els batch \
 
 Cautions:
 
-- Greek accents and breathings normalize away. Final sigma normalizes to sigma. For example `Ἰησοῦς` searches as `ιησουσ`.
-- Phrase rows normalize by removing spaces. For example `Υἱός τοῦ Θεοῦ` searches as `υιοστουθεου`.
+- Greek accents and breathings normalize away. Final sigma normalizes to sigma. For example `Ἰησοῦς` (Iesous; English: Jesus/Joshua) searches as `ιησουσ` (Iesous; English: Jesus/Joshua).
+- Phrase rows normalize by removing spaces. For example `Υἱός τοῦ Θεοῦ` (huios tou theou; English: Son of God) searches as `υιοστουθεου` (huios tou theou; English: Son of God).
 - These terms are a screening list, not claims of significance.

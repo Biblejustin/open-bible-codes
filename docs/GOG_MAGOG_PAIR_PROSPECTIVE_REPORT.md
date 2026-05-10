@@ -8,7 +8,7 @@ Status: prospective controlled review output, not a claim.
 
 No `prospective_controlled_review_candidate` is produced. The target pair occurs, including strict overlap examples, but it does not beat the locked paired and synthetic controls.
 
-Locked rule: Hebrew `גוג` / `מגוג`, MT_WLC and UHB only, skip `2..100`, direction `both`, same chapter, same signed skip, max gap `500`.
+Locked rule: Hebrew `גוג` (Gog; English: Gog) / `מגוג` (Magog; English: Magog), MT_WLC and UHB only, skip `2..100`, direction `both`, same chapter, same signed skip, max gap `500`.
 
 ## Target Pair Controls
 

@@ -106,7 +106,7 @@ Initial local protocol timing:
 - outputs: ignored CSV/manifest files under `reports/nonbible_controls/`
 
 The pilot run immediately shows why these controls matter: short forms such as
-Hebrew `יהוה`, scrambled `וההי`, English `son`, and ordinary four-letter strings
+Hebrew `יהוה` (YHWH; English: YHWH), scrambled `וההי` (w-h-h-y; English: scrambled YHWH control), English `son`, and ordinary four-letter strings
 produce large counts in non-Bible corpora too. Treat short-form hits as
 background-noise candidates unless they survive stricter controls.
 

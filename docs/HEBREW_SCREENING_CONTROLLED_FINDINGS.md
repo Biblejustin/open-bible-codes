@@ -40,17 +40,17 @@ Uncorrected-only prompts:
 
 | Term | Concept | Normalized | Exact hits | Best p | Best q |
 | --- | --- | --- | ---: | ---: | ---: |
-| `second_death_h` | Second Death | `מותשני` | 213 | 0.009901 | 0.862801 |
-| `day_of_lord_h` | Day Of The Lord | `יומיהוה` | 105 | 0.009901 | 0.862801 |
-| `timothy_h` | Timothy | `טימותי` | 60 | 0.039604 | 1.0 |
-| `germany_h` | Germany | `גרמניה` | 38 | 0.049505 | 1.0 |
-| `empty_tomb_h` | Empty Tomb | `קברריק` | 18 | 0.019802 | 1.0 |
-| `rosh_hashanah_h` | Rosh Hashanah | `ראשהשנה` | 21 | 0.009901 | 0.862801 |
-| `pathrusim_h` | Pathrusim | `פתרסימ` | 17 | 0.009901 | 0.862801 |
-| `2027_additive_h` | Gregorian 2027 additive | `תתתתתכז` | 11 | 0.049505 | 1.0 |
-| `2025_additive_h` | Gregorian 2025 additive | `תתתתתכה` | 6 | 0.039604 | 1.0 |
-| `carthage_h` | Carthage | `קרתחדשה` | 5 | 0.019802 | 1.0 |
-| `yeshu_declared_perfect_h` | Jesus Declared Perfect | `הצהרישומושלמ` | 5 | 0.009901 | 0.862801 |
+| `second_death_h` | Second Death | `מותשני` (mavet sheni; English: second death) | 213 | 0.009901 | 0.862801 |
+| `day_of_lord_h` | Day Of The Lord | `יומיהוה` (yom YHWH; English: day of YHWH) | 105 | 0.009901 | 0.862801 |
+| `timothy_h` | Timothy | `טימותי` (Timothy; English: Timothy) | 60 | 0.039604 | 1.0 |
+| `germany_h` | Germany | `גרמניה` (Germanyah; English: Germany) | 38 | 0.049505 | 1.0 |
+| `empty_tomb_h` | Empty Tomb | `קברריק` (kever reik; English: empty tomb) | 18 | 0.019802 | 1.0 |
+| `rosh_hashanah_h` | Rosh Hashanah | `ראשהשנה` (Rosh Hashanah; English: head of the year) | 21 | 0.009901 | 0.862801 |
+| `pathrusim_h` | Pathrusim | `פתרסימ` (Pathrusim; English: Pathrusim) | 17 | 0.009901 | 0.862801 |
+| `2027_additive_h` | Gregorian 2027 additive | `תתתתתכז` (t-t-t-t-t-k-z; English: additive Hebrew-number control for 2027) | 11 | 0.049505 | 1.0 |
+| `2025_additive_h` | Gregorian 2025 additive | `תתתתתכה` (t-t-t-t-t-k-h; English: additive Hebrew-number control for 2025) | 6 | 0.039604 | 1.0 |
+| `carthage_h` | Carthage | `קרתחדשה` (Qart Chadashah; English: Carthage/new city) | 5 | 0.019802 | 1.0 |
+| `yeshu_declared_perfect_h` | Jesus Declared Perfect | `הצהרישומושלמ` (hutshar Yeshu mushlam; English: Jesus was declared perfect) | 5 | 0.009901 | 0.862801 |
 
 Those rows are review prompts only. None survived correction across the
 representative row family.

@@ -19,9 +19,9 @@ All 3 synthetic match rows are ELS-only at the hit span. The matched phrase exis
 
 | Corpus | Target | Synthetic | Center | Surface checks | Matched phrase |
 | --- | --- | --- | --- | --- | --- |
-| SBLGNT | `υιος` / `ουουιοσ` | `ασατ` / `πασατου` | Acts 23:34 `ἐπερωτήσας` | center query=no; hit query=no; extension phrase=no | `πᾶσα⸃ τοῦ` at Acts 27:20 |
-| SBLGNT | `υιος` / `ουουιοσ` | `οθει` / `τοθειον` | Acts 22:27 `χιλίαρχος` | center query=no; hit query=no; extension phrase=no | `τὸ θεῖον` at Acts 17:29 |
-| TR_NT | `δοξα` / `δοξανωσ` | `τινα` / `απαρτιναι` | LUK 1:74 `ἀφόβως` | center query=no; hit query=no; extension phrase=no | `ἀπ ἄρτι Ναὶ` at REV 14:13 |
+| SBLGNT | `υιος` (huios; English: son) / `ουουιοσ` (ouhuios; English: hidden extension form from huios) | `ασατ` (asat; English: synthetic query) / `πασατου` (pasatou; English: synthetic extension) | Acts 23:34 `ἐπερωτήσας` (eperotesas; English: having questioned) | center query=no; hit query=no; extension phrase=no | `πᾶσα⸃ τοῦ` (pasa tou; English: all/every of the) at Acts 27:20 |
+| SBLGNT | `υιος` (huios; English: son) / `ουουιοσ` (ouhuios; English: hidden extension form from huios) | `οθει` (othei; English: synthetic query) / `τοθειον` (totheion; English: synthetic extension) | Acts 22:27 `χιλίαρχος` (chiliarchos; English: commander) | center query=no; hit query=no; extension phrase=no | `τὸ θεῖον` (to theion; English: the divine) at Acts 17:29 |
+| TR_NT | `δοξα` (doxa; English: glory) / `δοξανωσ` (doxanos; English: hidden extension form from doxa) | `τινα` (tina; English: someone/something) / `απαρτιναι` (apartinai; English: synthetic extension) | LUK 1:74 `ἀφόβως` (aphobos; English: without fear) | center query=no; hit query=no; extension phrase=no | `ἀπ ἄρτι Ναὶ` (ap arti nai; English: from now, yes) at REV 14:13 |
 
 ## Verdict
 

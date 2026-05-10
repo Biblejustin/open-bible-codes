@@ -49,7 +49,7 @@ Pattern scope counts:
 ## Current Read
 
 Short Hebrew forms dominate the stable rows. Core and short claim terms such as
-`משיח`, `ישוע`, `רמבמ`, `יהוה`, `תורה`, `נביא`, and `שלום` all hit the per-term
+`משיח` (Mashiach; English: Messiah/anointed one), `ישוע` (Yeshua; English: Yeshua/Jeshua), `רמבמ` (Rambam; English: Maimonides), `יהוה` (YHWH; English: YHWH), `תורה` (Torah; English: Torah), `נביא` (navi; English: prophet), and `שלום` (shalom; English: peace) all hit the per-term
 cap in every Hebrew stream and produce many exact ref-key patterns shared by all
 five sources.
 
@@ -58,13 +58,13 @@ is not evidence by itself.
 
 Some longer or more phrase-like rows stay sparse or absent:
 
-- `אני ישוע` has 3 hits per source and 3 all-source exact patterns.
-- `ישוע יתלה` has 1-2 hits per source and 1 all-source exact pattern.
-- `ישוע ראוי` has 1 MAM-only hit and no all-source pattern.
-- `ישוע נצלב`, `ישוע המשיח`, `ישוע מושלם`, `ישוע יחזור`, and `ישוע מושיע` have no hits in this capped scan.
-- `גאון וילנא` has no hits in this capped scan, while shorter rabbinic abbreviations such as `רמבמ`, `רמבנ`, and `מהרל` are dense.
-- `היטלר` has all-source patterns, but `היטלר רשע` has none.
-- `טראמפ` has 6 all-source exact patterns; longer political phrases are mostly absent.
+- `אני ישוע` (ani Yeshua; English: I am Yeshua) has 3 hits per source and 3 all-source exact patterns.
+- `ישוע יתלה` (Yeshua yitlah; English: Yeshua will be hanged) has 1-2 hits per source and 1 all-source exact pattern.
+- `ישוע ראוי` (Yeshua ra'ui; English: Yeshua is worthy) has 1 MAM-only hit and no all-source pattern.
+- `ישוע נצלב` (Yeshua nitzlav; English: Yeshua was crucified), `ישוע המשיח` (Yeshua haMashiach; English: Yeshua the Messiah), `ישוע מושלם` (Yeshua mushlam; English: Yeshua perfect), `ישוע יחזור` (Yeshua yachzor; English: Yeshua will return), and `ישוע מושיע` (Yeshua moshia; English: Yeshua savior) have no hits in this capped scan.
+- `גאון וילנא` (Gaon Vilna; English: Vilna Gaon) has no hits in this capped scan, while shorter rabbinic abbreviations such as `רמבמ` (Rambam; English: Maimonides), `רמבנ` (Ramban; English: Nachmanides), and `מהרל` (Maharal; English: Maharal) are dense.
+- `היטלר` (Hitler; English: Hitler) has all-source patterns, but `היטלר רשע` (Hitler rasha; English: Hitler the wicked) has none.
+- `טראמפ` (Tramp; English: Trump) has 6 all-source exact patterns; longer political phrases are mostly absent.
 
 Zero-hit rows: `50` of the `125` summarized terms.
 

@@ -84,14 +84,14 @@ phrases in the ELS hit span unless separately reviewed.
 
 | Corpus | Term | Skip | Type | Matched normalized | Surface phrase examples | Phrase refs |
 | --- | --- | ---: | --- | --- | --- | --- |
-| `MT_WLC` | `איידס` | -70 | before only | `אוילי` | `אוי לי` variants | Isa 6:5; Isa 24:16; Jer 10:19 |
-| `MT_WLC` | `מלאך` | 2 | after only | `לואכ` | `לו אך` | 1Sam 18:8 |
-| `MT_WLC` | `קאובוי` | 40 | after only | `אומה` | `או מה` | 1Sam 20:10; Job 16:3 |
-| `UHB` | `איידס` | -70 | before only | `אוילי` | `אוי לי` variants | ISA 6:5; JER 15:10 |
-| `TR_NT` | `αμμων` | -8 | before only | `οεαν` | `ὃ ἐὰν` variants | MAT 12:36; MAT 14:7 |
-| `TR_NT` | `βασαν` | 54 | after only | `εισο` | `εἷς ὁ`; `εἰς ὃ` | MAT 19:17; MRK 2:7 |
-| `SBLGNT` | `χανααν` | 16 | after only | `οτασ` | `ὁ τὰς` | Heb 11:17 |
-| `SBLGNT` | `ιακωβ` | 4 | before only | `οσοι` | `ὅσοι` variants | Matt 14:36; Mark 3:10 |
+| `MT_WLC` | `איידס` (AIDS; English: AIDS) | -70 | before only | `אוילי` (oy li; English: woe to me) | `אוי לי` (oy li; English: woe to me) variants | Isa 6:5; Isa 24:16; Jer 10:19 |
+| `MT_WLC` | `מלאך` (malakh; English: angel/messenger) | 2 | after only | `לואכ` (lo akh; English: to him only/but) | `לו אך` (lo akh; English: to him only/but) | 1Sam 18:8 |
+| `MT_WLC` | `קאובוי` (kauboy; English: Cowboy) | 40 | after only | `אומה` (o mah; English: or what) | `או מה` (o mah; English: or what) | 1Sam 20:10; Job 16:3 |
+| `UHB` | `איידס` (AIDS; English: AIDS) | -70 | before only | `אוילי` (oy li; English: woe to me) | `אוי לי` (oy li; English: woe to me) variants | ISA 6:5; JER 15:10 |
+| `TR_NT` | `αμμων` (Ammon; English: Ammon) | -8 | before only | `οεαν` (ho ean; English: whoever/whatever) | `ὃ ἐὰν` (ho ean; English: whoever/whatever) variants | MAT 12:36; MAT 14:7 |
+| `TR_NT` | `βασαν` (Basan; English: Bashan) | 54 | after only | `εισο` (eis ho; English: one/the or into which) | `εἷς ὁ` (heis ho; English: one the); `εἰς ὃ` (eis ho; English: into which) | MAT 19:17; MRK 2:7 |
+| `SBLGNT` | `χανααν` (Chanaan; English: Canaan) | 16 | after only | `οτασ` (ho tas; English: the [feminine plural]) | `ὁ τὰς` (ho tas; English: the [feminine plural]) | Heb 11:17 |
+| `SBLGNT` | `ιακωβ` (Iakob; English: Jacob) | 4 | before only | `οσοι` (hosoi; English: as many as) | `ὅσοι` (hosoi; English: as many as) variants | Matt 14:36; Mark 3:10 |
 
 ## Current Read
 

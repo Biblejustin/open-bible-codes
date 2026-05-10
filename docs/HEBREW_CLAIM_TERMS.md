@@ -99,7 +99,7 @@ python3 -m els batch \
 Cautions:
 
 - Raw digits such as `1948` and `11.9` normalize away. Use declared Hebrew encodings for meaningful runs.
-- Short forms like `בא`, `קם`, `עד`, and `צר` are noisy or skipped by default.
+- Short forms like `בא` (ba; English: came), `קם` (qam; English: rose/stood), `עד` (ed; English: witness/until), and `צר` (tsar; English: foe/adversary) are noisy or skipped by default.
 - These terms are a screening list, not claims of significance.
 - The current claim-catalog entries for Rabin, Hitler/Shoah, and Hebrew Jesus
   phrases are `under_specified`, not reproduced claims.

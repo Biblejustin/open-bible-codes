@@ -158,12 +158,12 @@ Top exact center-word terms by Bible row count:
 
 | Term | Language | Visible term | Concept | Rows | Exceeds secular max | Bible max | Secular max | Ratio |
 | --- | --- | --- | --- | ---: | --- | ---: | ---: | ---: |
-| `bns_esther_yhwh_h` and YHWH duplicates | hebrew | `יהוה` | YHWH | 54 each | true | 63.5651342 | 9.4471675 | 6.72848599 |
-| `cc_israel_h` and Israel duplicates | hebrew | `ישראל` | Israel | 33 each | true in center-word-only summary | 5.84774803 | 0.725114523 | 8.06458545 |
-| `bns_babylon_h`, `babylon_h`, `babylon_alt_h`, `babel_h` | hebrew | `בבל` | Babylon/Babel | 25 each | true | 12.5457502 | 5.80091618 | 2.16271875 |
-| `lord_h` | hebrew | `אדני` | Lord | 15 | true | 26.764267 | 1.22463282 | 21.854932 |
-| `cc_elohim_h`, `god_h` | hebrew | `אלהים` | Elohim/God | 15 each | true | 26.7325624 | 15.3953841 | 1.73640113 |
-| `wisdom_g`, `wisdom_gxc` | greek | `σοφια` | Wisdom | 7 each | true | 4.41254988 | 0 |  |
+| `bns_esther_yhwh_h` and YHWH duplicates | hebrew | `יהוה` (YHWH; English: YHWH) | YHWH | 54 each | true | 63.5651342 | 9.4471675 | 6.72848599 |
+| `cc_israel_h` and Israel duplicates | hebrew | `ישראל` (Yisrael; English: Israel) | Israel | 33 each | true in center-word-only summary | 5.84774803 | 0.725114523 | 8.06458545 |
+| `bns_babylon_h`, `babylon_h`, `babylon_alt_h`, `babel_h` | hebrew | `בבל` (Bavel; English: Babylon/Babel) | Babylon/Babel | 25 each | true | 12.5457502 | 5.80091618 | 2.16271875 |
+| `lord_h` | hebrew | `אדני` (Adonai; English: Lord) | Lord | 15 | true | 26.764267 | 1.22463282 | 21.854932 |
+| `cc_elohim_h`, `god_h` | hebrew | `אלהים` (Elohim; English: God) | Elohim/God | 15 each | true | 26.7325624 | 15.3953841 | 1.73640113 |
+| `wisdom_g`, `wisdom_gxc` | greek | `σοφια` (sophia; English: wisdom) | Wisdom | 7 each | true | 4.41254988 | 0 |  |
 | `eng_david`, `eng_david_2`, `eng_david_3` | english | `David` | David | 6 each | true | 4.65372414 | 0 |  |
 
 The exact center-word subset should be compared with its own center-word-only control summary, not with the broader all-scope CRD summary. The broader summary includes verse-level and span-level matches, which can change the control maximum for a term.

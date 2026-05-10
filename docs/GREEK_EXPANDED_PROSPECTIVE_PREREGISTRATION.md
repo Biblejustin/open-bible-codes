@@ -42,7 +42,7 @@ Fixed generation rules:
 - exclude every normalized form already present in
   `terms/greek_exact_center_cohort_terms.csv`.
 
-This intentionally excludes the prior exact-center cohort, including `δοξα`,
+This intentionally excludes the prior exact-center cohort, including `δοξα` (doxa; English: glory),
 so this run does not recycle the strongest known row.
 
 ## Source Texts

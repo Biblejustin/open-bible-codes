@@ -35,11 +35,11 @@ Common pattern check:
 
 | Claim | Found | Book letters | Refs | Hits in book |
 |---|---:|---|---|---:|
-| Genesis `תורה` / `TWRH`, skip +50 | yes | 6 -> 156 | Genesis 1:1 -> Genesis 1:5 | 3 |
-| Exodus `תורה` / `TWRH`, skip +50 | yes | 8 -> 158 | Exodus 1:1 -> Exodus 1:6 | 7 |
-| Leviticus `יהוה` / `YHWH`, skip +8 | yes | 2 -> 26 | Leviticus 1:1 -> Leviticus 1:1 | 7 |
-| Numbers reverse `תורה` / `HRWT`, skip +50 | yes | 14 -> 164 | Numbers 1:1 -> Numbers 1:3 | 3 |
-| Deuteronomy reverse `תורה` / `HRWT`, skip +49 | yes | 279 -> 426 | Deuteronomy 1:5 -> Deuteronomy 1:8 | 2 |
+| Genesis `תורה` (Torah; English: Torah) / `TWRH`, skip +50 | yes | 6 -> 156 | Genesis 1:1 -> Genesis 1:5 | 3 |
+| Exodus `תורה` (Torah; English: Torah) / `TWRH`, skip +50 | yes | 8 -> 158 | Exodus 1:1 -> Exodus 1:6 | 7 |
+| Leviticus `יהוה` (YHWH; English: YHWH) / `YHWH`, skip +8 | yes | 2 -> 26 | Leviticus 1:1 -> Leviticus 1:1 | 7 |
+| Numbers reverse `תורה` (Torah; English: Torah) / `HRWT`, skip +50 | yes | 14 -> 164 | Numbers 1:1 -> Numbers 1:3 | 3 |
+| Deuteronomy reverse `תורה` (Torah; English: Torah) / `HRWT`, skip +49 | yes | 279 -> 426 | Deuteronomy 1:5 -> Deuteronomy 1:8 | 2 |
 
 Small count-only shuffled control, 200 shuffles:
 

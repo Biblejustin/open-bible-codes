@@ -43,7 +43,7 @@ The comparison writes ignored reports:
 | Normalized letters | 1,197,732 |
 
 The importer removes STEP punctuation suffixes after backslash separators before
-normalization. This keeps paragraph markers `פ` and `ס` out of the ELS stream.
+normalization. This keeps paragraph markers `פ` (pe; English: open paragraph marker) and `ס` (samekh; English: closed paragraph marker) out of the ELS stream.
 The pointed Hebrew is otherwise preserved in the processed CSV and normalized by
 the regular Hebrew loader.
 

@@ -6,7 +6,7 @@ texts.
 Use the audit before locking a new prospective term list. It checks whether a
 candidate term reuses already-seen evidence by normalized Hebrew/Greek spelling.
 It catches exact reuse and longer/shorter containment, including cases such as a
-future candidate that contains prior `δοξα`.
+future candidate that contains prior `δοξα` (doxa; English: glory).
 
 ## Command
 

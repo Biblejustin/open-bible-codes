@@ -47,12 +47,12 @@ The strict summary filter kept phrase-like extension rows only:
 
 | Corpus | Base term | Skip | Extension type | Extended sequence | Surface phrase match | Read |
 | --- | --- | ---: | --- | --- | --- | --- |
-| UHB | `ישראל` | -2 | before_plus_term | `אישישראל` | `איש ישראל` | biblical Israel phrase |
-| UHB | `ישראל` | -5 | term_plus_after | `ישראלוקח` | `ישראל וקח` | biblical Israel phrase |
-| MT_WLC | `מצרימ` | 15 | before_plus_term | `והנמצרימ` | `והנם צרים` | surface phrase is not Egypt |
-| MT_WLC | `ישראל` | -5 | term_plus_after | `ישראלוקח` | `ישראל וקח` | biblical Israel phrase |
-| LXX | `ισραηλ` | 15 | term_plus_after | `ισραηλανα` | `Ισραηλ ανα` | biblical Israel phrase |
-| SBLGNT | `χαρισ` | 10 | before_plus_term | `ιναηχαρισ` | `ινα η χαρις` | Harris transliteration collides with Greek grace |
+| UHB | `ישראל` (Yisrael; English: Israel) | -2 | before_plus_term | `אישישראל` (ish Yisrael; English: man of Israel) | `איש ישראל` (ish Yisrael; English: man of Israel) | biblical Israel phrase |
+| UHB | `ישראל` (Yisrael; English: Israel) | -5 | term_plus_after | `ישראלוקח` (Yisrael u-qach; English: Israel and take) | `ישראל וקח` (Yisrael u-qach; English: Israel and take) | biblical Israel phrase |
+| MT_WLC | `מצרימ` (Mitzrayim; English: Egypt/Egyptians) | 15 | before_plus_term | `והנמצרימ` (ve-hen metzarim; English: and behold, distressing/enemies) | `והנם צרים` (ve-hinnam tzarim; English: and behold, enemies) | surface phrase is not Egypt |
+| MT_WLC | `ישראל` (Yisrael; English: Israel) | -5 | term_plus_after | `ישראלוקח` (Yisrael u-qach; English: Israel and take) | `ישראל וקח` (Yisrael u-qach; English: Israel and take) | biblical Israel phrase |
+| LXX | `ισραηλ` (Israel; English: Israel) | 15 | term_plus_after | `ισραηλανα` (Israel ana; English: Israel up/again) | `Ισραηλ ανα` (Israel ana; English: Israel up/again) | biblical Israel phrase |
+| SBLGNT | `χαρισ` (charis; English: grace) | 10 | before_plus_term | `ιναηχαρισ` (hina he charis; English: so that the grace) | `ινα η χαρις` (hina he charis; English: so that the grace) | Harris transliteration collides with Greek grace |
 | TR_NT | none | - | - | - | - | no filtered top rows |
 
 ## Read
@@ -65,11 +65,11 @@ corpus.
 The first modern-term screen did not strengthen the modern-name rows. The best
 extension rows are explained by ordinary surface text:
 
-- `Israel` is a biblical surface term, so phrase extensions around `ישראל` and
-  `ισραηλ` are expected.
-- `Egypt` / `מצרימ` can be matched by unrelated Hebrew surface wording after
+- `Israel` is a biblical surface term, so phrase extensions around `ישראל` (Yisrael; English: Israel) and
+  `ισραηλ` (Israel; English: Israel) are expected.
+- `Egypt` / `מצרימ` (Mitzrayim; English: Egypt/Egyptians) can be matched by unrelated Hebrew surface wording after
   normalization and space removal.
-- `Harris` / `χαρις` collides with ordinary Greek `χαρις` / grace.
+- `Harris` / `χαρις` (charis; English: grace) collides with ordinary Greek `χαρις` (charis; English: grace).
 - Local terms such as Cowboy Catering, Simsberry, and Simscorner had no
   meaningful phrase-extension row in this capped screen.
 

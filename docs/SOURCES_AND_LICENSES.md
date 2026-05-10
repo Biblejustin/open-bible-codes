@@ -123,7 +123,7 @@ Additional WLC packaging check:
 - eBible marks this package public domain.
 - This is not expected to be a materially independent MT edition. Treat it as a
   packaging/versification comparison source against OSHB WLC and UXLC.
-- The importer strips standalone Hebrew paragraph markers (`פ` / `ס`) from the
+- The importer strips standalone Hebrew paragraph markers (`פ` [pe; English: open paragraph marker] / `ס` [samekh; English: closed paragraph marker]) from the
   USFM verse text before ELS normalization.
 
 Use:

@@ -29,7 +29,7 @@ Controls again prevent over-reading:
 
 - Greek controls have a higher all-source rate than Greek claim terms.
 - Scrambled Theos has 72 all-source exact patterns.
-- Common content anchors like `λαοσ`, `χειρ`, and `οικοσ` are dense and stable.
+- Common content anchors like `λαοσ` (laos; English: people), `χειρ` (cheir; English: hand), and `οικοσ` (oikos; English: house) are dense and stable.
 
 ## Practical Rule
 
