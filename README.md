@@ -343,6 +343,9 @@ shasum -a 256 terms/relevance_dictionary.toml \
 make crd-deterministic
 make crd-parallel
 make crd-llm
+make crd-self-surface-center-word-presence
+make crd-concept-surface-center-word-presence
+make crd-center-word-findings
 ```
 
 CRD compares centered ELS-hit density against locked relevance criteria across
@@ -351,7 +354,10 @@ currently locks the Gog/Magog prospective cohort with `gpt-5-assisted-draft`
 provenance. New cohorts require review, hash-locking in
 `protocols/centered_relevance_density.toml`, and a locked
 `docs/CRD_PREREGISTRATION.md` before interpretation. Method notes:
-`docs/CRD_FRAMEWORK.md`. Generated report: `docs/CRD_REPORT.md`.
+`docs/CRD_FRAMEWORK.md`. Generated report: `docs/CRD_REPORT.md`. Exact
+center-word summaries are tracked in
+`docs/CRD_CENTER_WORD_VERSION_PRESENCE_FINDINGS.md` and
+`docs/CRD_CENTER_WORD_SELF_VS_CONCEPT_FINDINGS.md`.
 
 Locked Greek surface prospective cohort:
 
