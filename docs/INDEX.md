@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 236
+Documents indexed: 237
 
 ## Controls
 
@@ -63,6 +63,7 @@ Documents indexed: 236
 | Broader Search Findings | `BROADER_SEARCH_FINDINGS.md` |
 | Broad Search Findings | `BROAD_SEARCH_FINDINGS.md` |
 | Consolidated Findings | `CONSOLIDATED_FINDINGS.md` |
+| CRD Center-Word Self Vs Concept Findings | `CRD_CENTER_WORD_SELF_VS_CONCEPT_FINDINGS.md` |
 | CRD Concept-Surface Broad Screening Findings | `CRD_CONCEPT_SURFACE_BROAD_SCREENING_FINDINGS.md` |
 | CRD Self-Surface Broad Screening Findings | `CRD_SELF_SURFACE_BROAD_SCREENING_FINDINGS.md` |
 | Dynamic Full-Span Hit Findings | `DYNAMIC_SKIP_FULL_SPAN_HIT_FINDINGS.md` |
