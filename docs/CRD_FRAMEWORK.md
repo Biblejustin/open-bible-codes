@@ -14,6 +14,14 @@ case (`center_word`) from broader contextual cases (`center_verse` or `span`).
 It also records the matched keyword and normalized matched keyword. This keeps
 "hidden term centered on the same visible word" separate from "hidden term
 centered in a verse or span that discusses the term."
+Verse and span matches are exact normalized word-token or contiguous phrase-token
+matches, not arbitrary substrings inside unrelated words.
+
+The optional dictionary `book_scope` is retained as locked provenance/context.
+It does not hard-filter deterministic surface-keyword matching, because CRD
+must compare Bible editions with secular controls using the same visible-word
+and visible-context rules. Exact `verse_refs` still only match when the hit row
+contains that exact reference.
 
 ## Lock Discipline
 

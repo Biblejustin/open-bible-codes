@@ -70,6 +70,16 @@ AGREEMENT_FIELDNAMES = [
     "disagreement_count",
 ]
 
+SCOPE_FIELDNAMES = [
+    "classifier_mode",
+    "corpus_class",
+    "term_id",
+    "term",
+    "language",
+    "match_scope",
+    "relevant_hit_count",
+]
+
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
@@ -127,6 +137,11 @@ def build_crd_comparison(
     per_term = per_term_rankings(rows)
     bible_control = bible_vs_control_summary(rows)
     edition_meta = edition_meta_summary(rows)
+    relevance_scope = relevance_scope_summary(
+        classified_hits if classified_hits.exists() else None,
+        db=db,
+        classified_table=table,
+    )
     agreement = classifier_agreement_summary(
         rows,
         classified_hits if classified_hits.exists() else None,
@@ -138,16 +153,19 @@ def build_crd_comparison(
     bible_control_out = out_dir / "bible_vs_control_summary.csv"
     edition_meta_out = out_dir / "edition_meta_summary.csv"
     agreement_out = out_dir / "classifier_agreement_summary.csv"
+    relevance_scope_out = out_dir / "relevance_scope_summary.csv"
     write_rows(per_term_out, PER_TERM_FIELDNAMES, per_term)
     write_rows(bible_control_out, BIBLE_CONTROL_FIELDNAMES, bible_control)
     write_rows(edition_meta_out, EDITION_META_FIELDNAMES, edition_meta)
     write_rows(agreement_out, AGREEMENT_FIELDNAMES, agreement)
-    write_markdown(markdown_out, rows, hit_examples, bible_control, edition_meta, agreement, manifest)
+    write_rows(relevance_scope_out, SCOPE_FIELDNAMES, relevance_scope)
+    write_markdown(markdown_out, rows, hit_examples, bible_control, edition_meta, agreement, relevance_scope, manifest)
     return {
         "per_term_rankings": str(per_term_out),
         "bible_vs_control_summary": str(bible_control_out),
         "edition_meta_summary": str(edition_meta_out),
         "classifier_agreement_summary": str(agreement_out),
+        "relevance_scope_summary": str(relevance_scope_out),
         "markdown": str(markdown_out),
     }
 
@@ -285,6 +303,105 @@ def classifier_agreement_summary(
     return sorted(out, key=lambda row: (row["scope"] != "overall", -int_value(row["disagreement_count"])))
 
 
+def relevance_scope_summary(
+    classified_hits: Path | None,
+    *,
+    db: Path | None = None,
+    classified_table: str = "",
+) -> list[dict[str, Any]]:
+    return (
+        relevance_scope_summary_from_db(db, classified_table)
+        if db is not None
+        else relevance_scope_summary_from_file(classified_hits)
+    )
+
+
+def relevance_scope_summary_from_file(classified_hits: Path | None) -> list[dict[str, Any]]:
+    if classified_hits is None or not classified_hits.exists():
+        return []
+    counts: dict[tuple[str, str, str, str, str, str], int] = defaultdict(int)
+    with classified_hits.open("r", encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            if row.get("is_relevant") != "true":
+                continue
+            scope = row.get("surface_match_scope") or row.get("relevance_type") or "unknown"
+            key = (
+                row.get("classifier_mode", ""),
+                row.get("corpus_class", ""),
+                row.get("term_id", ""),
+                row.get("term", ""),
+                row.get("language", ""),
+                scope,
+            )
+            counts[key] += 1
+    return relevance_scope_rows(counts)
+
+
+def relevance_scope_summary_from_db(db: Path | None, table: str) -> list[dict[str, Any]]:
+    if db is None:
+        return []
+    qtable = quote_identifier(sanitize_table_name(table))
+    rows = fetch_dicts(
+        db_path=db,
+        query=f"""
+            SELECT
+                classifier_mode,
+                corpus_class,
+                term_id,
+                term,
+                language,
+                CASE
+                    WHEN surface_match_scope IS NOT NULL AND surface_match_scope != '' THEN surface_match_scope
+                    WHEN relevance_type IS NOT NULL AND relevance_type != '' THEN relevance_type
+                    ELSE 'unknown'
+                END AS match_scope,
+                count(*) AS relevant_hit_count
+            FROM {qtable}
+            WHERE is_relevant = 'true'
+            GROUP BY 1, 2, 3, 4, 5, 6
+        """,
+    )
+    counts = {
+        (
+            str(row.get("classifier_mode", "")),
+            str(row.get("corpus_class", "")),
+            str(row.get("term_id", "")),
+            str(row.get("term", "")),
+            str(row.get("language", "")),
+            str(row.get("match_scope", "")),
+        ): int_value(row.get("relevant_hit_count"))
+        for row in rows
+    }
+    return relevance_scope_rows(counts)
+
+
+def relevance_scope_rows(counts: dict[tuple[str, str, str, str, str, str], int]) -> list[dict[str, Any]]:
+    rows = [
+        {
+            "classifier_mode": key[0],
+            "corpus_class": key[1],
+            "term_id": key[2],
+            "term": key[3],
+            "language": key[4],
+            "match_scope": key[5],
+            "relevant_hit_count": value,
+        }
+        for key, value in counts.items()
+    ]
+    return sorted(rows, key=lambda row: (scope_rank(str(row["match_scope"])), -int(row["relevant_hit_count"]), row["term_id"]))
+
+
+def scope_rank(scope: str) -> int:
+    order = {
+        "center_word": 0,
+        "center_verse": 1,
+        "span": 2,
+        "verse_ref_match": 3,
+        "concept_match": 4,
+    }
+    return order.get(scope, 99)
+
+
 def overall_agreement_from_file(classified_hits: Path | None) -> dict[str, Any]:
     if classified_hits is None or not classified_hits.exists():
         return empty_agreement_row("overall")
@@ -381,6 +498,7 @@ def write_markdown(
     bible_control: list[dict[str, Any]],
     edition_meta: list[dict[str, Any]],
     agreement: list[dict[str, Any]],
+    relevance_scope: list[dict[str, Any]],
     manifest_path: Path,
 ) -> None:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
@@ -463,13 +581,37 @@ def write_markdown(
                 )
                 + " |"
             )
+    if relevance_scope:
+        lines.extend(
+            [
+                "",
+                "## Relevance Scope Summary",
+                "",
+                "| Classifier | Corpus class | Term | Scope | Relevant hits |",
+                "| --- | --- | --- | --- | ---: |",
+            ]
+        )
+        for row in relevance_scope[:25]:
+            lines.append(
+                "| "
+                + " | ".join(
+                    [
+                        str(row["classifier_mode"]),
+                        str(row["corpus_class"]),
+                        f"`{row['term_id']}`",
+                        str(row["match_scope"]),
+                        str(row["relevant_hit_count"]),
+                    ]
+                )
+                + " |"
+            )
     lines.extend(
         [
             "",
             "## Representative Relevant Centers",
             "",
-            "| Term | Corpus | Center ref | Center word | Type | Skip |",
-            "| --- | --- | --- | --- | --- | ---: |",
+            "| Term | Corpus | Center ref | Center word | Type | Scope | Matched keyword | Skip |",
+            "| --- | --- | --- | --- | --- | --- | --- | ---: |",
         ]
     )
     for row in hit_examples[:25]:
@@ -482,6 +624,8 @@ def write_markdown(
                     row.get("center_ref", ""),
                     row.get("center_word", ""),
                     row.get("relevance_type", ""),
+                    row.get("surface_match_scope", ""),
+                    row.get("matched_surface_keyword", ""),
                     row.get("skip", ""),
                 ]
             )

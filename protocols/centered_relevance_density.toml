@@ -26,7 +26,7 @@ max_estimated_cost_usd = 0
 estimated_cost_per_call_usd = 0
 output_dir = "reports/crd"
 preregistration_doc = "docs/CRD_PREREGISTRATION.md"
-preregistration_sha256 = "71388e327d6f9598b44a86f7a353c87864df7ef7693b61c1109373ee38670d3e"
+preregistration_sha256 = "4be099ee5749aa423296714cc6e2cc9483ceda45eae487d70ef143acd1caebc2"
 
 [[corpus_list]]
 label = "MT_WLC"

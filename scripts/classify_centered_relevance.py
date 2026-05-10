@@ -142,9 +142,6 @@ class DeterministicClassifier(Classifier):
         if entry is None:
             return ClassificationResult(False, "none", audit_payload={"reason": "missing_dictionary_entry"})
 
-        if entry.book_scope and center_book(hit_row) not in set(entry.book_scope):
-            return ClassificationResult(False, "none", audit_payload={"reason": "outside_book_scope"})
-
         ref_values = {
             str(hit_row.get("center_ref", "")),
             str(hit_row.get("start_ref", "")),
@@ -196,7 +193,10 @@ class DeterministicClassifier(Classifier):
                 audit_payload={"matched_codes": sorted(wanted_codes & concept_values)},
             )
 
-        return ClassificationResult(False, "none", audit_payload={"reason": "no_deterministic_match"})
+        reason = "no_deterministic_match"
+        if entry.book_scope and center_book(hit_row) not in set(entry.book_scope):
+            reason = "outside_book_scope_no_match"
+        return ClassificationResult(False, "none", audit_payload={"reason": reason})
 
 
 def center_book(hit_row: dict[str, Any]) -> str:
@@ -223,18 +223,42 @@ def normalize_surface(value: str, language: str) -> str:
 def surface_keyword_match(entry: RelevanceEntry, hit_row: dict[str, Any], language: str) -> SurfaceKeywordMatch | None:
     center_word = normalize_surface(str(hit_row.get("center_word", "")), language)
     center_normalized_word = str(hit_row.get("center_normalized_word", "")).strip()
-    center_verse_text = normalize_surface(str(hit_row.get("center_verse_text", "")), language)
-    span_text = normalize_surface(str(hit_row.get("span_text", "")), language)
+    center_verse_text = str(hit_row.get("center_verse_text", ""))
+    span_text = str(hit_row.get("span_text", ""))
     for keyword in entry.surface_keywords:
         normalized_keyword = normalize_surface(keyword, language)
         if not normalized_keyword:
             continue
         if normalized_keyword == center_word or normalized_keyword == center_normalized_word:
             return SurfaceKeywordMatch("center_word", keyword, normalized_keyword)
-        if normalized_keyword in center_verse_text or normalized_keyword in span_text:
-            scope = "center_verse" if normalized_keyword in center_verse_text else "span"
+        if normalized_phrase_in_text(keyword, center_verse_text, language) or normalized_phrase_in_text(
+            keyword,
+            span_text,
+            language,
+        ):
+            scope = "center_verse" if normalized_phrase_in_text(keyword, center_verse_text, language) else "span"
             return SurfaceKeywordMatch(scope, keyword, normalized_keyword)
     return None
+
+
+def normalized_phrase_in_text(keyword: str, text: str, language: str) -> bool:
+    keyword_tokens = normalized_tokens(keyword, language)
+    if not keyword_tokens:
+        return False
+    text_tokens = normalized_tokens(text, language)
+    if len(keyword_tokens) == 1:
+        return keyword_tokens[0] in set(text_tokens)
+    width = len(keyword_tokens)
+    return any(text_tokens[index : index + width] == keyword_tokens for index in range(len(text_tokens) - width + 1))
+
+
+def normalized_tokens(text: str, language: str) -> list[str]:
+    tokens: list[str] = []
+    for raw_token in text.split():
+        normalized = normalize_surface(raw_token, language)
+        if normalized:
+            tokens.append(normalized)
+    return tokens
 
 
 class LLMClient(Protocol):

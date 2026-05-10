@@ -76,6 +76,12 @@ Compute deterministic relevant centered hits per million normalized corpus
 letters for each `(term, corpus)`. Compare Bible maximum density against
 language-matched secular-control maximum density per term. Treat
 `exceeds_secular_max = true` as a review-priority flag, not as significance.
+Deterministic surface-keyword matches are evaluated across both Bible and
+secular-control corpora using exact normalized word-token or contiguous
+phrase-token matches, not arbitrary substrings inside unrelated words. Optional
+dictionary `book_scope` is recorded as context/provenance and does not
+hard-filter surface-keyword matches. Exact verse-reference matches still
+require the hit row to contain the exact locked reference.
 
 ## Multiple Comparisons Correction
 

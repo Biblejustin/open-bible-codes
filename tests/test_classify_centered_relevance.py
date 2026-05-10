@@ -70,6 +70,61 @@ class DeterministicClassifierTests(unittest.TestCase):
         self.assertEqual(result.audit_payload["surface_match_scope"], "center_verse")
         self.assertEqual(result.audit_payload["matched_surface_keyword"], "king")
 
+    def test_surface_keyword_in_verse_requires_exact_token(self) -> None:
+        classifier = DeterministicClassifier(entries={"term": entry(surface_keywords=["דב"])})
+
+        absent = classifier.classify(
+            {
+                "term_id": "term",
+                "language": "hebrew",
+                "center_word": "תַּחְתָּ֜יו",
+                "center_verse_text": "תַּחְתָּ֜יו",
+                "span_text": "",
+            },
+            {"term_id": "term"},
+        )
+        present = classifier.classify(
+            {
+                "term_id": "term",
+                "language": "hebrew",
+                "center_word": "וַיֹּאמֶר",
+                "center_verse_text": "וַיֹּאמֶר דב",
+                "span_text": "",
+            },
+            {"term_id": "term"},
+        )
+
+        self.assertFalse(absent.is_relevant)
+        self.assertTrue(present.is_relevant)
+        self.assertEqual(present.audit_payload["surface_match_scope"], "center_verse")
+
+    def test_surface_keyword_phrase_requires_contiguous_tokens(self) -> None:
+        classifier = DeterministicClassifier(entries={"term": entry(surface_keywords=["בית יהוה"])})
+
+        present = classifier.classify(
+            {
+                "term_id": "term",
+                "language": "hebrew",
+                "center_word": "בית",
+                "center_verse_text": "אל בית יהוה",
+                "span_text": "",
+            },
+            {"term_id": "term"},
+        )
+        absent = classifier.classify(
+            {
+                "term_id": "term",
+                "language": "hebrew",
+                "center_word": "בית",
+                "center_verse_text": "בית גדול יהוה",
+                "span_text": "",
+            },
+            {"term_id": "term"},
+        )
+
+        self.assertTrue(present.is_relevant)
+        self.assertFalse(absent.is_relevant)
+
     def test_surface_keyword_absent(self) -> None:
         classifier = DeterministicClassifier(entries={"term": entry(surface_keywords=["מלך"])})
 
@@ -86,6 +141,46 @@ class DeterministicClassifierTests(unittest.TestCase):
 
         self.assertFalse(result.is_relevant)
         self.assertEqual(result.relevance_type, "none")
+
+    def test_book_scope_does_not_block_surface_keyword_match(self) -> None:
+        classifier = DeterministicClassifier(
+            entries={"term": entry(surface_keywords=["מלך"], book_scope=["Dan"])}
+        )
+
+        result = classifier.classify(
+            {
+                "term_id": "term",
+                "language": "hebrew",
+                "center_ref": "PBY Bialik",
+                "center_word": "מֶלֶךְ",
+                "center_verse_text": "מֶלֶךְ",
+                "span_text": "",
+            },
+            {"term_id": "term"},
+        )
+
+        self.assertTrue(result.is_relevant)
+        self.assertEqual(result.relevance_type, "surface_keyword_match")
+
+    def test_book_scope_reports_no_match_reason_without_hard_filtering(self) -> None:
+        classifier = DeterministicClassifier(
+            entries={"term": entry(surface_keywords=["מלך"], book_scope=["Dan"])}
+        )
+
+        result = classifier.classify(
+            {
+                "term_id": "term",
+                "language": "hebrew",
+                "center_ref": "PBY Bialik",
+                "center_word": "כהן",
+                "center_verse_text": "כהן",
+                "span_text": "",
+            },
+            {"term_id": "term"},
+        )
+
+        self.assertFalse(result.is_relevant)
+        self.assertEqual(result.audit_payload["reason"], "outside_book_scope_no_match")
 
     def test_verse_ref_match(self) -> None:
         classifier = DeterministicClassifier(entries={"term": entry(verse_refs=["Gen 1:1"])})
@@ -241,6 +336,7 @@ def entry(
     surface_keywords: list[str] | None = None,
     concept_codes: list[str] | None = None,
     verse_refs: list[str] | None = None,
+    book_scope: list[str] | None = None,
 ):
     return parse_relevance_entry(
         {
@@ -248,6 +344,7 @@ def entry(
             "surface_keywords": surface_keywords or [],
             "concept_codes": concept_codes or [],
             "verse_refs": verse_refs or [],
+            "book_scope": book_scope or [],
             "provenance": {
                 "author": "test",
                 "lock_date": "2026-01-01",
