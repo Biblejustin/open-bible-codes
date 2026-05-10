@@ -242,7 +242,7 @@ is tracked in
   5 Bible units and 38 control units.
 - Original-language review:
   `docs/DYNAMIC_SKIP_STRONG_FULL_SPAN_EXACT_CENTER_ORIGINAL_LANGUAGE_FINDINGS.md`
-  ranks the Hebrew/Greek subset. It promotes Greek `Gog` at Rev 20:8 for
+  ranks the Hebrew/Greek subset. It flags Greek `Gog` at Rev 20:8 for
   deeper review, holds LXX `Jesus/Joshua` rows for referent discipline, and
   treats Hebrew `Yeshua`/`Messiah` rows as background-pressure rows because
   Bialik controls also produce exact-center rows.
