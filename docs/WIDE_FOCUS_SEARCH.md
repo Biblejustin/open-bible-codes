@@ -47,7 +47,7 @@ Broader ELS count sweep across every declared term list.
 | Rank | Set | Corpus | Term | Length | Hits | Read |
 | ---: | --- | --- | --- | ---: | ---: | --- |
 | 1 | modern_names_dates | LXX | `nato_g` `νατο` (nato; English: NATO) | 4 | 80308 | dense short form |
-| 2 | prophetic_terms | LXX | `blood_g` `αιμα` (aima; English: Blood) | 4 | 55267 | dense short form |
+| 2 | prophetic_terms | LXX | `blood_g` `αιμα` (haima; English: Blood) | 4 | 55267 | dense short form |
 | 3 | modern_names_dates | LXX | `china_g` `κινα` (kina; English: China) | 4 | 55120 | dense short form |
 | 4 | modern_names_dates | LXX | `iran_g` `ιραν` (iran; English: Iran) | 4 | 43838 | dense short form |
 | 5 | prophetic_terms | MAM | `rome_h` `רומי` (rwmy; English: Rome) | 4 | 35090 | dense short form |
@@ -70,7 +70,7 @@ Broader ELS count sweep across every declared term list.
 | 22 | prophetic_terms | UHB | `lion_h` `אריה` (ryh; English: Lion) | 4 | 26476 | dense short form |
 | 23 | prophetic_terms | UXLC | `lion_h` `אריה` (ryh; English: Lion) | 4 | 26463 | dense short form |
 | 24 | prophetic_terms | MAM | `lion_h` `אריה` (ryh; English: Lion) | 4 | 26450 | dense short form |
-| 25 | prophetic_terms | LXX | `zion_g` `σιων` (sion; English: Zion) | 4 | 25442 | dense short form |
+| 25 | prophetic_terms | LXX | `zion_g` `σιων` (Sion; English: Zion) | 4 | 25442 | dense short form |
 | 26 | modern_names_dates | MAM | `bibi_h` `ביבי` (byby; English: Bibi) | 4 | 24771 | dense short form |
 | 27 | modern_names_dates | MT_WLC | `bibi_h` `ביבי` (byby; English: Bibi) | 4 | 24549 | dense short form |
 | 28 | modern_names_dates | EBIBLE_WLC | `bibi_h` `ביבי` (byby; English: Bibi) | 4 | 24542 | dense short form |
@@ -90,11 +90,11 @@ Broader ELS count sweep across every declared term list.
 | USA | LXX | `usa_abbrev_g` `ηπα` (epa; English: USA) | 3 | 216290 | high-noise short form |
 | United Nations | TR_NT | `united_nations_acronym_g` `οηε` (oee; English: United Nations) | 3 | 131208 | high-noise short form |
 | United Nations | TCG_NT | `united_nations_acronym_g` `οηε` (oee; English: United Nations) | 3 | 130689 | high-noise short form |
-| Beast | MT_WLC | `beast_h` `חיה` (chyh; English: Beast) | 3 | 130361 | high-noise short form |
-| Beast | UXLC | `beast_h` `חיה` (chyh; English: Beast) | 3 | 130342 | high-noise short form |
-| Beast | EBIBLE_WLC | `beast_h` `חיה` (chyh; English: Beast) | 3 | 130323 | high-noise short form |
-| Beast | MAM | `beast_h` `חיה` (chyh; English: Beast) | 3 | 130136 | high-noise short form |
-| Beast | UHB | `beast_h` `חיה` (chyh; English: Beast) | 3 | 130058 | high-noise short form |
+| Beast | MT_WLC | `beast_h` `חיה` (chayah; English: Beast) | 3 | 130361 | high-noise short form |
+| Beast | UXLC | `beast_h` `חיה` (chayah; English: Beast) | 3 | 130342 | high-noise short form |
+| Beast | EBIBLE_WLC | `beast_h` `חיה` (chayah; English: Beast) | 3 | 130323 | high-noise short form |
+| Beast | MAM | `beast_h` `חיה` (chayah; English: Beast) | 3 | 130136 | high-noise short form |
+| Beast | UHB | `beast_h` `חיה` (chayah; English: Beast) | 3 | 130058 | high-noise short form |
 | United Nations | BYZ_NT | `united_nations_acronym_g` `οηε` (oee; English: United Nations) | 3 | 129582 | high-noise short form |
 | United Nations | SBLGNT | `united_nations_acronym_g` `οηε` (oee; English: United Nations) | 3 | 127532 | high-noise short form |
 | USA | TR_NT | `usa_abbrev_g` `ηπα` (epa; English: USA) | 3 | 48141 | high-noise short form |
@@ -150,18 +150,18 @@ Broader ELS count sweep across every declared term list.
 | modern_names_dates | MT_WLC | `united_nations_acronym_h` `אומ` (wm; English: United Nations) | 81340 | 421133 | 339793 | 5.177 |
 | prophetic_terms | MT_WLC | `greece_h` `יונ` (ywn; English: Greece) | 67460 | 341633 | 274173 | 5.064 |
 | prophetic_terms | LXX | `ur_g` `ουρ` (our; English: Ur) | 57970 | 294528 | 236558 | 5.081 |
-| prophetic_terms | MT_WLC | `ur_h` `אור` (wr; English: Ur) | 57065 | 290922 | 233857 | 5.098 |
+| prophetic_terms | MT_WLC | `ur_h` `אור` (or; English: Ur) | 57065 | 290922 | 233857 | 5.098 |
 | prophetic_terms | MT_WLC | `lawlessness_h` `אונ` (wn; English: Lawlessness) | 45095 | 233282 | 188187 | 5.173 |
 | modern_names_dates | LXX | `usa_abbrev_g` `ηπα` (epa; English: USA) | 42727 | 216290 | 173563 | 5.062 |
 | prophetic_terms | MT_WLC | `pit_h` `בור` (bwr; English: Pit) | 40037 | 200223 | 160186 | 5.001 |
 | prophetic_terms | MT_WLC | `amen_h` `אמנ` (mn; English: Amen) | 34330 | 176602 | 142272 | 5.144 |
-| prophetic_terms | MT_WLC | `media_h` `מדי` (mdy; English: Media) | 30131 | 152767 | 122636 | 5.07 |
+| prophetic_terms | MT_WLC | `media_h` `מדי` (Madai; English: Media) | 30131 | 152767 | 122636 | 5.07 |
 | prophetic_terms | MT_WLC | `bride_h` `כלה` (klh; English: Bride) | 29217 | 148813 | 119596 | 5.093 |
 | modern_names_dates | MT_WLC | `2026_compact_h` `בכו` (bkw; English: Gregorian 2026 compact) | 26284 | 136350 | 110066 | 5.188 |
-| prophetic_terms | MT_WLC | `babylon_h` `בבל` (bbl; English: Babylon) | 26900 | 135150 | 108250 | 5.024 |
-| prophetic_terms | MT_WLC | `babylon_alt_h` `בבל` (bbl; English: Babylon) | 26900 | 135150 | 108250 | 5.024 |
+| prophetic_terms | MT_WLC | `babylon_h` `בבל` (Bavel; English: Babylon) | 26900 | 135150 | 108250 | 5.024 |
+| prophetic_terms | MT_WLC | `babylon_alt_h` `בבל` (Bavel; English: Babylon) | 26900 | 135150 | 108250 | 5.024 |
 | modern_names_dates | TR_NT | `united_nations_acronym_g` `οηε` (oee; English: United Nations) | 25587 | 131208 | 105621 | 5.128 |
-| prophetic_terms | MT_WLC | `beast_h` `חיה` (chyh; English: Beast) | 25397 | 130361 | 104964 | 5.133 |
+| prophetic_terms | MT_WLC | `beast_h` `חיה` (chayah; English: Beast) | 25397 | 130361 | 104964 | 5.133 |
 | modern_names_dates | SBLGNT | `united_nations_acronym_g` `οηε` (oee; English: United Nations) | 24918 | 127532 | 102614 | 5.118 |
 | prophetic_terms | MT_WLC | `leopard_h` `נמר` (nmr; English: Leopard) | 24749 | 126750 | 102001 | 5.121 |
 | prophetic_terms | MT_WLC | `oil_h` `שמנ` (shmn; English: Oil) | 21917 | 110131 | 88214 | 5.025 |
@@ -174,7 +174,7 @@ Broader ELS count sweep across every declared term list.
 | prophetic_terms | TR_NT | `ur_g` `ουρ` (our; English: Ur) | 13276 | 67379 | 54103 | 5.075 |
 | prophetic_terms | SBLGNT | `ur_g` `ουρ` (our; English: Ur) | 12846 | 65298 | 52452 | 5.083 |
 | prophetic_terms | MT_WLC | `earthquake_h` `רעש` (rsh; English: Earthquake) | 12158 | 62149 | 49991 | 5.112 |
-| prophetic_terms | LXX | `blood_g` `αιμα` (aima; English: Blood) | 11030 | 55267 | 44237 | 5.011 |
+| prophetic_terms | LXX | `blood_g` `αιμα` (haima; English: Blood) | 11030 | 55267 | 44237 | 5.011 |
 | modern_names_dates | LXX | `china_g` `κινα` (kina; English: China) | 10915 | 55120 | 44205 | 5.05 |
 
 ## Caution
