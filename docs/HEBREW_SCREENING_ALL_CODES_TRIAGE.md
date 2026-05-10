@@ -55,7 +55,7 @@ It is a triage aid, not a claim-grade filter.
 | 16 | all_source | `solomon_h` `שלמה` (shlmh; English: Solomon) | Solomon | -3 | 10 | 2Kgs 23:13 | `שלמה` (shlmh; English: Solomon) | not_unusual |
 | 17 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Kgs 23:24 | `יהוה` (YHWH; English: YHWH) | not_unusual |
 | 18 | all_source | `solomon_h` `שלמה` (shlmh; English: Solomon) | Solomon | -3 | 10 | 2Kgs 24:13 | `שלמה` (shlmh; English: Solomon) | not_unusual |
-| 19 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Kgs 25:13 | `ביתיהוה` (bytyhwh) | not_unusual |
+| 19 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Kgs 25:13 | `ביתיהוה` (beit YHWH; English: house of YHWH) | not_unusual |
 | 20 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -3 | 10 | 2Kgs 8:19 | `יהוה` (YHWH; English: YHWH) | not_unusual |
 
 ### center_word_same_concept

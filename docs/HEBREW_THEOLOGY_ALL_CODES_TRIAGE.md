@@ -48,12 +48,12 @@ It is a triage aid, not a claim-grade filter.
 | 9 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Chr 33:15 | `יהוה` (YHWH; English: YHWH) | paired_uncorrected_p_le_0.05 |
 | 10 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Chr 9:4 | `יהוה` (YHWH; English: YHWH) | paired_uncorrected_p_le_0.05 |
 | 11 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Kgs 23:24 | `יהוה` (YHWH; English: YHWH) | paired_uncorrected_p_le_0.05 |
-| 12 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Kgs 25:13 | `ביתיהוה` (bytyhwh) | paired_uncorrected_p_le_0.05 |
+| 12 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 2Kgs 25:13 | `ביתיהוה` (beit YHWH; English: house of YHWH) | paired_uncorrected_p_le_0.05 |
 | 13 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -3 | 10 | 2Kgs 8:19 | `יהוה` (YHWH; English: YHWH) | paired_uncorrected_p_le_0.05 |
 | 14 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -3 | 10 | 2Sam 10:12 | `ויהוה` (wyhwh) | paired_uncorrected_p_le_0.05 |
 | 15 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -3 | 10 | Isa 48:14 | `יהוה` (YHWH; English: YHWH) | paired_uncorrected_p_le_0.05 |
 | 16 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | Isa 51:22 | `יהוה` (YHWH; English: YHWH) | paired_uncorrected_p_le_0.05 |
-| 17 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | Jer 28:6 | `ביתיהוה` (bytyhwh) | paired_uncorrected_p_le_0.05 |
+| 17 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | Jer 28:6 | `ביתיהוה` (beit YHWH; English: house of YHWH) | paired_uncorrected_p_le_0.05 |
 | 18 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | Jer 52:17 | `לביתיהוה` (lbytyhwh) | paired_uncorrected_p_le_0.05 |
 | 19 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | Num 14:44 | `בריתיהוה` (brytyhwh) | paired_uncorrected_p_le_0.05 |
 | 20 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | Ps 32:5 | `ליהוה` (lyhwh) | paired_uncorrected_p_le_0.05 |
