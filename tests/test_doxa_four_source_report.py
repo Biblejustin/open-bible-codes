@@ -96,6 +96,7 @@ def test_report_uses_build_commit_label_for_cached_subreports() -> None:
     assert "stable analysis timing" in text
     assert "`δοξα` (doxa; English: glory)" in text
     assert "`δοξανωσ` (doxanos; English: hidden extension form from doxa)" in text
+    assert "`δόξαν ὡς` (doxan hos; English: glory as)" in text
     assert "`δοξαζηται` (doxazetai)" in text
 
 

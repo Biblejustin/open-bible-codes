@@ -46,7 +46,7 @@ Generated local outputs:
 | Direction | `forward` |
 | Extension type | `term_plus_after` |
 | Extended normalized sequence | `δοξανωσ` (doxanos; English: hidden extension form from doxa) |
-| Matched phrase | `δόξαν ὡς` (doxanos; English: glory as) |
+| Matched phrase | `δόξαν ὡς` (doxan hos; English: glory as) |
 | Center passage | 2 Thessalonians 3:1 |
 | Matched phrase reference | John 1:14 / JHN 1:14 |
 
@@ -84,7 +84,7 @@ The base term has exact-center surface context through the surface form
 `δοξάζηται` (doxazetai; English: may be glorified) in 2 Thessalonians 3:1.
 
 The full hidden extension sequence `δοξανωσ` (doxanos; English: hidden extension form from doxa) maps to the phrase
-`δόξαν ὡς` (doxanos; English: glory as). This follow-up treats hidden-path-only material as meaningful
+`δόξαν ὡς` (doxan hos; English: glory as). This follow-up treats hidden-path-only material as meaningful
 review material, not as a failure. A same-span surface echo would be a
 stronger subtype, but it is not required by this registered study.
 

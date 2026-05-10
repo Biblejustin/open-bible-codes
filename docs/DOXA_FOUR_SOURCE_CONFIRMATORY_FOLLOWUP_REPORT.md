@@ -14,12 +14,12 @@ follow-up after
 | Local report build commit | recorded in local manifest only |
 | Command | `python3 -m scripts.run_protocol protocols/doxa_four_source_confirmatory_followup.toml --resume` |
 | Protocol | `protocols/doxa_four_source_confirmatory_followup.toml` |
-| Paired controls completed UTC | `2026-05-10T13:42:01.169738+00:00` |
-| Context review completed UTC | `2026-05-10T13:42:02.082948+00:00` |
-| Analysis runtime | 14.678s |
+| Paired controls completed UTC | `2026-05-10T16:16:20.867052+00:00` |
+| Context review completed UTC | `2026-05-10T16:16:21.820514+00:00` |
+| Analysis runtime | 16.182s |
 | Protocol status | success |
-| Paired-control runtime | 13.854s |
-| Context-review runtime | 0.824s |
+| Paired-control runtime | 15.335s |
+| Context-review runtime | 0.847s |
 
 For resumed protocol runs, this subreport uses the paired-control and
 context-review output manifests for stable analysis timing. The build
@@ -46,7 +46,7 @@ Generated local outputs:
 | Direction | `forward` |
 | Extension type | `term_plus_after` |
 | Extended normalized sequence | `δοξανωσ` (doxanos; English: hidden extension form from doxa) |
-| Matched phrase | `δόξαν ὡς` (doxanos; English: glory as) |
+| Matched phrase | `δόξαν ὡς` (doxan hos; English: glory as) |
 | Center passage | 2 Thessalonians 3:1 |
 | Matched phrase reference | John 1:14 / JHN 1:14 |
 
@@ -84,7 +84,7 @@ The base term has exact-center surface context through the surface form
 `δοξάζηται` (doxazetai; English: may be glorified) in 2 Thessalonians 3:1.
 
 The full hidden extension sequence `δοξανωσ` (doxanos; English: hidden extension form from doxa) maps to the phrase
-`δόξαν ὡς` (doxanos; English: glory as). This follow-up treats hidden-path-only material as meaningful
+`δόξαν ὡς` (doxan hos; English: glory as). This follow-up treats hidden-path-only material as meaningful
 review material, not as a failure. A same-span surface echo would be a
 stronger subtype, but it is not required by this registered study.
 

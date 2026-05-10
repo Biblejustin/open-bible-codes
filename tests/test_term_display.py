@@ -28,6 +28,12 @@ class TermDisplayTests(unittest.TestCase):
     def test_english_term_is_left_plain(self) -> None:
         self.assertEqual(display_term("jesus"), "`jesus`")
 
+    def test_transliteration_override_handles_phrase_collision(self) -> None:
+        self.assertEqual(
+            display_term("δόξαν ὡς", english="glory as", transliteration="doxan hos"),
+            "`δόξαν ὡς` (doxan hos; English: glory as)",
+        )
+
     def test_normalized_script_key_removes_marks_and_spacing(self) -> None:
         self.assertEqual(normalized_script_key("יום יהוה"), "יוםיהוה")
 

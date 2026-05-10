@@ -27,6 +27,7 @@ BASE_TERM = "δοξα"
 EXTENDED_SEQUENCE = "δοξανωσ"
 MATCHED_PHRASE = "δόξαν ὡς"
 CENTER_SURFACE = "δοξάζηται"
+MATCHED_PHRASE_DISPLAY = display_term(MATCHED_PHRASE, english="glory as", transliteration="doxan hos")
 EXPECTED_CORPORA = ("BYZ_NT", "SBLGNT", "TCG_NT", "TR_NT")
 DEFAULT_TERM_CONTROL_SAMPLES = 5000
 DEFAULT_RANDOM_CONTROL_SAMPLES = 5000
@@ -160,7 +161,7 @@ def build_report(
         "| Direction | `forward` |",
         "| Extension type | `term_plus_after` |",
         f"| Extended normalized sequence | {display_term(EXTENDED_SEQUENCE)} |",
-        f"| Matched phrase | {display_term(MATCHED_PHRASE, english='glory as')} |",
+        f"| Matched phrase | {MATCHED_PHRASE_DISPLAY} |",
         "| Center passage | 2 Thessalonians 3:1 |",
         "| Matched phrase reference | John 1:14 / JHN 1:14 |",
         "",
@@ -217,7 +218,7 @@ def build_report(
             f"{display_term(CENTER_SURFACE, english='may be glorified')} in 2 Thessalonians 3:1.",
             "",
             f"The full hidden extension sequence {display_term(EXTENDED_SEQUENCE)} maps to the phrase",
-            f"{display_term(MATCHED_PHRASE, english='glory as')}. This follow-up treats hidden-path-only material as meaningful",
+            f"{MATCHED_PHRASE_DISPLAY}. This follow-up treats hidden-path-only material as meaningful",
             "review material, not as a failure. A same-span surface echo would be a",
             "stronger subtype, but it is not required by this registered study.",
             "",

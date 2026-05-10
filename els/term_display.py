@@ -141,7 +141,7 @@ HEBREW_MAP = {
 }
 
 
-def display_term(value: str, *, english: str | None = None) -> str:
+def display_term(value: str, *, english: str | None = None, transliteration: str | None = None) -> str:
     """Return a Markdown display string with transliteration and English gloss when useful."""
     text = value.strip()
     if not text:
@@ -150,9 +150,8 @@ def display_term(value: str, *, english: str | None = None) -> str:
         return f"`{text}`"
 
     key = normalized_script_key(text)
-    transliteration, fallback_english = KNOWN_TERMS.get(key, ("", ""))
-    if not transliteration:
-        transliteration = transliterate(text)
+    known_transliteration, fallback_english = KNOWN_TERMS.get(key, ("", ""))
+    transliteration = transliteration or known_transliteration or transliterate(text)
     gloss = english or fallback_english
     if gloss:
         return f"`{text}` ({transliteration}; English: {gloss})"
