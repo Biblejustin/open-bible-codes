@@ -26,6 +26,7 @@ KNOWN_TERMS: dict[str, tuple[str, str]] = {
     "σωτηρ": ("soter", "savior"),
     "ανεστη": ("aneste", "he is risen"),
     "κρισισ": ("krisis", "judgment"),
+    "σοφια": ("sophia", "wisdom"),
     "ιουδασ": ("Ioudas", "Judas"),
     "κυριοσ": ("kyrios", "Lord"),
     "κυριου": ("kyriou", "Lord"),
@@ -96,7 +97,13 @@ KNOWN_TERMS: dict[str, tuple[str, str]] = {
     "בריתיהוה": ("berit YHWH", "covenant of YHWH"),
     "פרס": ("Paras", "Persia"),
     "חיה": ("chayah", "beast/living creature"),
+    "חזון": ("chazon", "vision"),
+    "דריוש": ("Daryavesh", "Darius"),
+    "כורש": ("Koresh", "Cyrus"),
+    "קרן": ("qeren", "horn"),
+    "נביא": ("navi", "prophet"),
     "תו": ("tav", "mark/sign"),
+    "תנין": ("tannin", "dragon/sea monster"),
     "עד": ("ed", "witness"),
     "צר": ("tsar", "foe/adversary"),
     "ענן": ("anan", "cloud"),
@@ -112,6 +119,8 @@ KNOWN_TERMS: dict[str, tuple[str, str]] = {
     "קדש": ("qodesh", "holiness/sacred"),
     "נפש": ("nefesh", "soul/life"),
     "דבר": ("davar", "word/matter"),
+    "שטה": ("shittah", "acacia"),
+    "חוכמה": ("chokhmah", "wisdom"),
 }
 
 TERM_FILES_DIR = Path(__file__).resolve().parents[1] / "terms"

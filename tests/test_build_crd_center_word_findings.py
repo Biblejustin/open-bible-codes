@@ -84,7 +84,7 @@ class BuildCrdCenterWordFindingsTests(unittest.TestCase):
             self.assertEqual(result, 0)
             comparison_text = self_vs_concept.read_text(encoding="utf-8")
             self.assertIn("- matching row key set: true", comparison_text)
-            self.assertIn("`σοφια` (sophia; English: Wisdom)<br>`wisdom_g`", comparison_text)
+            self.assertIn("`σοφια` (sophia; English: wisdom)<br>`wisdom_g`", comparison_text)
             self.assertIn("- distinct normalized surface forms: 2", comparison_text)
             self.assertIn("- distinct normalized surface hit paths: 2", comparison_text)
             presence_text = version_presence.read_text(encoding="utf-8")
@@ -94,7 +94,7 @@ class BuildCrdCenterWordFindingsTests(unittest.TestCase):
             self.assertIn("## Strongest Distinct Surface Forms", presence_text)
             self.assertIn("`יהוה` (YHWH; English: YHWH)<br>`yhwh_alt_h, yhwh_h`", presence_text)
             self.assertIn("| `יהוה` (YHWH; English: YHWH)<br>`yhwh_alt_h, yhwh_h` | hebrew | 2 | 1 |", presence_text)
-            self.assertIn("`σοφια` (sophia; English: Wisdom)<br>`wisdom_g`", presence_text)
+            self.assertIn("`σοφια` (sophia; English: wisdom)<br>`wisdom_g`", presence_text)
 
 
 if __name__ == "__main__":

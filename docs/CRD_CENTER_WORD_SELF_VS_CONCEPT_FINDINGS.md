@@ -34,8 +34,8 @@ The changed rows are secular-control changes only:
 
 | Term | Language | Self secular max | Self secular corpus | Concept secular max | Concept secular corpus |
 | --- | --- | ---: | --- | ---: | --- |
-| `שטה` (shth; English: Acacia)<br>`cc_acacia_h` | hebrew | 0 | HEB_PBY_BIALIK | 1.45022905 | HEB_PBY_AHAD_HAAM |
-| `חוכמה` (chwkmh; English: Wisdom)<br>`wisdom_h` | hebrew | 0 | HEB_PBY_BIALIK | 0.362557261 | HEB_PBY_AHAD_HAAM |
+| `שטה` (shittah; English: acacia)<br>`cc_acacia_h` | hebrew | 0 | HEB_PBY_BIALIK | 1.45022905 | HEB_PBY_AHAD_HAAM |
+| `חוכמה` (chokhmah; English: wisdom)<br>`wisdom_h` | hebrew | 0 | HEB_PBY_BIALIK | 0.362557261 | HEB_PBY_AHAD_HAAM |
 
 The exact center-word version-presence view contains:
 

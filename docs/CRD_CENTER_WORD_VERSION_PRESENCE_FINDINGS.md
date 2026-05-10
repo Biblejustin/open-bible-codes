@@ -54,7 +54,7 @@ This table collapses duplicate term IDs that use the same normalized hidden spel
 | `יין` (yayin; English: wine)<br>`cc_wine_h, mt_wine_h, twn_wine_h` | hebrew | 3 | 10 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 1.67276669 | 0.179491289 |
 | `יהודה` (Yehudah; English: Judah)<br>`judah_h, mt_judas_absence_h` | hebrew | 2 | 10 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 1.67276669 | 0 |
 | `חסד` (chesed; English: mercy/steadfast love)<br>`htp_mercy_h, mercy_h` | hebrew | 2 | 10 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 1.67276669 | 0.349895093 |
-| `σοφια` (sophia; English: Wisdom)<br>`wisdom_g, wisdom_gxc` | greek | 2 | 7 | 5 | BYZ_NT; LXX; SBLGNT; TCG_NT; TR_NT | true | 2.89633859 | 0 |
+| `σοφια` (sophia; English: wisdom)<br>`wisdom_g, wisdom_gxc` | greek | 2 | 7 | 5 | BYZ_NT; LXX; SBLGNT; TCG_NT; TR_NT | true | 2.89633859 | 0 |
 | `פרץ` (prts; English: Pharez)<br>`twn_pharez_h` | hebrew | 1 | 7 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 1.67078515 | 0 |
 | `שנים` (shnym; English: Teeth)<br>`teeth_h` | hebrew | 1 | 5 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 0.836383345 | 0 |
 | `קדימה` (qdymh; English: Kadima)<br>`bcd_kadima_h` | hebrew | 1 | 5 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 0.836383345 | 0 |
