@@ -38,7 +38,7 @@ Selected target terms are excluded from the control candidate pool.
 | Target | Control | Control concept | Surface vector | Sum delta | Vector delta |
 | --- | --- | --- | --- | ---: | ---: |
 | `αμην` (amen; English: Amen) | `ερει` (erei; English: Surface vocabulary ερει) | Surface vocabulary ερει | 155/155/155/152 | 22 | 22 |
-| `αμην` (amen; English: Amen) | `υιοσ` (uios; English: Surface vocabulary υιοσ) | Surface vocabulary υιοσ | 155/156/156/151 | 23 | 23 |
+| `αμην` (amen; English: Amen) | `υιοσ` (huios; English: Surface vocabulary υιοσ) | Surface vocabulary υιοσ | 155/156/156/151 | 23 | 23 |
 | `αμην` (amen; English: Amen) | `ολου` (olou; English: Surface vocabulary ολου) | Surface vocabulary ολου | 154/152/152/149 | 12 | 26 |
 | `αμην` (amen; English: Amen) | `εμοι` (emoi; English: Surface vocabulary εμοι) | Surface vocabulary εμοι | 161/141/161/134 | 2 | 30 |
 | `αμην` (amen; English: Amen) | `δοξα` (doxa; English: Surface vocabulary δοξα) | Surface vocabulary δοξα | 150/150/150/147 | 2 | 32 |
@@ -76,7 +76,7 @@ Selected target terms are excluded from the control candidate pool.
 | `αμην` (amen; English: Amen) | `ημασ` (emas; English: Surface vocabulary ημασ) | Surface vocabulary ημασ | 187/180/181/175 | 128 | 128 |
 | `αμην` (amen; English: Amen) | `ουση` (ouse; English: Surface vocabulary ουση) | Surface vocabulary ουση | 117/118/118/113 | 129 | 129 |
 | `αμην` (amen; English: Amen) | `τινα` (tina; English: Surface vocabulary τινα) | Surface vocabulary τινα | 180/180/180/185 | 130 | 130 |
-| `αμην` (amen; English: Amen) | `αιμα` (aima; English: Surface vocabulary αιμα) | Surface vocabulary αιμα | 184/181/181/180 | 131 | 131 |
+| `αμην` (amen; English: Amen) | `αιμα` (haima; English: Surface vocabulary αιμα) | Surface vocabulary αιμα | 184/181/181/180 | 131 | 131 |
 | `αμην` (amen; English: Amen) | `εστη` (este; English: Surface vocabulary εστη) | Surface vocabulary εστη | 187/181/184/182 | 139 | 139 |
 | `αμην` (amen; English: Amen) | `ρημα` (rema; English: Surface vocabulary ρημα) | Surface vocabulary ρημα | 116/114/114/112 | 139 | 139 |
 | `αμην` (amen; English: Amen) | `εκτη` (ekte; English: Surface vocabulary εκτη) | Surface vocabulary εκτη | 115/114/115/111 | 140 | 140 |

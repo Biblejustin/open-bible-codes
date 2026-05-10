@@ -63,7 +63,7 @@ output because it is derived from local corpus files.
 | `gsvocab_0018_f65abce2` | `αετω` (aeto; English: Surface vocabulary αετω) | generated normalized Greek surface vocabulary control; verse_counts=BYZ_NT:1/SBLGNT:1/TCG_NT:1/TR_NT:1 |
 | `gsvocab_0019_155dae59` | `αζωρ` (azor; English: Surface vocabulary αζωρ) | generated normalized Greek surface vocabulary control; verse_counts=BYZ_NT:2/SBLGNT:2/TCG_NT:2/TR_NT:2 |
 | `gsvocab_0020_b2cc863e` | `αθλη` (athle; English: Surface vocabulary αθλη) | generated normalized Greek surface vocabulary control; verse_counts=BYZ_NT:1/SBLGNT:1/TCG_NT:1/TR_NT:1 |
-| `gsvocab_0021_baf09972` | `αιμα` (aima; English: Surface vocabulary αιμα) | generated normalized Greek surface vocabulary control; verse_counts=BYZ_NT:41/SBLGNT:42/TCG_NT:41/TR_NT:42 |
+| `gsvocab_0021_baf09972` | `αιμα` (haima; English: Surface vocabulary αιμα) | generated normalized Greek surface vocabulary control; verse_counts=BYZ_NT:41/SBLGNT:42/TCG_NT:41/TR_NT:42 |
 | `gsvocab_0022_bbf44314` | `αιρε` (aire; English: Surface vocabulary αιρε) | generated normalized Greek surface vocabulary control; verse_counts=BYZ_NT:3/SBLGNT:3/TCG_NT:3/TR_NT:3 |
 | `gsvocab_0023_bbec2f2f` | `ακοη` (akoe; English: Surface vocabulary ακοη) | generated normalized Greek surface vocabulary control; verse_counts=BYZ_NT:9/SBLGNT:9/TCG_NT:9/TR_NT:9 |
 | `gsvocab_0024_d0312fcb` | `ακων` (akon; English: Surface vocabulary ακων) | generated normalized Greek surface vocabulary control; verse_counts=BYZ_NT:1/SBLGNT:1/TCG_NT:1/TR_NT:1 |

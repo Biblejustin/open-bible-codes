@@ -127,6 +127,8 @@ def test_markdown_reports_dynamic_control_counts(tmp_path) -> None:
 
     text = path.read_text(encoding="utf-8")
     assert text.startswith("# Dynamic Title")
+    assert "`ανομια` (anomia; English: Lawlessness)" in text
+    assert "`ισαακ` (Isaak; English: Isaac)" in text
     assert "range from 30 to 33" in text
     assert "0.029412" in text
     assert "0.032258" in text

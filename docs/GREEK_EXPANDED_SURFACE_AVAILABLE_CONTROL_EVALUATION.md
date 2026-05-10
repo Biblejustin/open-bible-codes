@@ -10,9 +10,9 @@ Matched controls per target range from 30 to 32. The best possible add-one empir
 
 | Term | Concept | Observed all-source | Controls >= observed | p_ge | q | Read |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
-| `ισαακ` | Isaac | 1 | 0 | 0.030303 | 0.032258 | exploratory matched controls below p<=0.05; still post-screen |
-| `ανομια` | Lawlessness | 1 | 0 | 0.032258 | 0.032258 | exploratory matched controls below p<=0.05; still post-screen |
-| `τερασ` | Wonder | 1 | 0 | 0.030303 | 0.032258 | exploratory matched controls below p<=0.05; still post-screen |
+| `ισαακ` (Isaak; English: Isaac) | Isaac | 1 | 0 | 0.030303 | 0.032258 | exploratory matched controls below p<=0.05; still post-screen |
+| `ανομια` (anomia; English: Lawlessness) | Lawlessness | 1 | 0 | 0.032258 | 0.032258 | exploratory matched controls below p<=0.05; still post-screen |
+| `τερασ` (teras; English: Wonder) | Wonder | 1 | 0 | 0.030303 | 0.032258 | exploratory matched controls below p<=0.05; still post-screen |
 
 ## Read
 

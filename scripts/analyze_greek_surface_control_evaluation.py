@@ -13,6 +13,7 @@ from pathlib import Path
 
 from els import __version__
 from els.statistics import benjamini_hochberg_q_values, round_float, tail_p_value_ge
+from els.term_display import display_term
 
 
 COHORT_IN = Path("reports/greek_expanded_surface_triage/term_cohort.csv")
@@ -218,8 +219,8 @@ def write_markdown(path: Path, rows: list[dict[str, str]], title: str) -> None:
             "| "
             + " | ".join(
                 [
-                    f"`{row['target_normalized_term']}`",
-                    row["target_concept"],
+                    display_control_term(row),
+                    md_cell(row["target_concept"]),
                     row["observed_all_source_patterns"],
                     row["controls_ge_observed_all_source"],
                     row["all_source_p_ge"],
@@ -267,6 +268,19 @@ def control_read_lines(rows: list[dict[str, str]]) -> list[str]:
         "count are useful triage evidence, but this remains post-screen unless",
         "the control size and selection rule were frozen in advance.",
     ]
+
+
+def display_control_term(row: dict[str, str]) -> str:
+    return md_cell(
+        display_term(
+            row["target_normalized_term"],
+            english=row.get("target_concept", ""),
+        )
+    )
+
+
+def md_cell(value: str) -> str:
+    return value.replace("|", "\\|")
 
 
 def write_manifest(

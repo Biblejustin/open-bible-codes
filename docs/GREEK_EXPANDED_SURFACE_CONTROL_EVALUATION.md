@@ -10,9 +10,9 @@ Matched controls per target range from 10 to 10. The best possible add-one empir
 
 | Term | Concept | Observed all-source | Controls >= observed | p_ge | q | Read |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
-| `ισαακ` | Isaac | 1 | 0 | 0.090909 | 0.090909 | target exceeds matched controls, but small control pool is not significant |
-| `ανομια` | Lawlessness | 1 | 0 | 0.090909 | 0.090909 | target exceeds matched controls, but small control pool is not significant |
-| `τερασ` | Wonder | 1 | 0 | 0.090909 | 0.090909 | target exceeds matched controls, but small control pool is not significant |
+| `ισαακ` (Isaak; English: Isaac) | Isaac | 1 | 0 | 0.090909 | 0.090909 | target exceeds matched controls, but small control pool is not significant |
+| `ανομια` (anomia; English: Lawlessness) | Lawlessness | 1 | 0 | 0.090909 | 0.090909 | target exceeds matched controls, but small control pool is not significant |
+| `τερασ` (teras; English: Wonder) | Wonder | 1 | 0 | 0.090909 | 0.090909 | target exceeds matched controls, but small control pool is not significant |
 
 ## Read
 
