@@ -19,6 +19,18 @@ class TermDisplayTests(unittest.TestCase):
         self.assertEqual(display_term("יהוה"), "`יהוה` (YHWH; English: YHWH)")
         self.assertEqual(display_term("ישראל"), "`ישראל` (Yisrael; English: Israel)")
 
+    def test_displays_recurring_hebrew_yhwh_compounds_with_glosses(self) -> None:
+        self.assertEqual(display_term("ויהוה"), "`ויהוה` (ve-YHWH; English: and YHWH)")
+        self.assertEqual(display_term("ליהוה"), "`ליהוה` (le-YHWH; English: to/for YHWH)")
+        self.assertEqual(
+            display_term("לביתיהוה"),
+            "`לביתיהוה` (le-beit YHWH; English: to the house of YHWH)",
+        )
+        self.assertEqual(
+            display_term("בריתיהוה"),
+            "`בריתיהוה` (berit YHWH; English: covenant of YHWH)",
+        )
+
     def test_displays_known_hebrew_term_with_diacritics(self) -> None:
         self.assertEqual(display_term("יֵשׁ֤וּעַ"), "`יֵשׁ֤וּעַ` (Yeshua; English: Yeshua/Jeshua)")
 

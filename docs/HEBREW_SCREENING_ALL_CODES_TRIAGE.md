@@ -205,7 +205,7 @@ It is a triage aid, not a claim-grade filter.
 | 8 | all_source | `year_2001_additive_h` `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 35 | 176 | Eccl 3:10 | `לענות` (lnwt) | not_unusual |
 | 9 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 36 | 109 | Gen 42:9 | `אשר` (shr; English: Asher) | not_unusual |
 | 10 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -38 | 115 | Ezek 48:11 | `שמרו` (shmrw) | not_unusual |
-| 11 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 38 | 115 | Isa 2:12 | `ליהוה` (lyhwh) | not_unusual |
+| 11 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 38 | 115 | Isa 2:12 | `ליהוה` (le-YHWH; English: to/for YHWH) | not_unusual |
 | 12 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 39 | 118 | Prov 13:15 | `יתנחנ` (ytnchn) | not_unusual |
 | 13 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 40 | 121 | 1Sam 23:20 | `לרדת` (lrdt) | not_unusual |
 | 14 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -41 | 124 | Deut 20:7 | `ומיהאיש` (wmyhysh) | not_unusual |
