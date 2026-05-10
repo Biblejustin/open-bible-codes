@@ -40,7 +40,7 @@ def main(argv: list[str] | None = None) -> int:
         self_vs_concept_markdown(self_hits, concept_hits, self_summary, concept_summary),
         encoding="utf-8",
     )
-    args.version_presence_out.write_text(version_presence_markdown(presence_rows), encoding="utf-8")
+    args.version_presence_out.write_text(version_presence_markdown(presence_rows, self_hits), encoding="utf-8")
     print(args.self_vs_concept_out)
     print(args.version_presence_out)
     return 0
@@ -158,11 +158,12 @@ def self_vs_concept_markdown(
     return "\n".join(lines).rstrip() + "\n"
 
 
-def version_presence_markdown(rows: list[dict[str, str]]) -> str:
+def version_presence_markdown(rows: list[dict[str, str]], hit_rows: list[dict[str, str]]) -> str:
     language_counts = Counter(row["language"] for row in rows)
     corpus_counts = Counter(row["corpus_count"] for row in rows)
     exceeding = [row for row in rows if row.get("exceeds_secular_max") == "true"]
-    distinct_rows = distinct_surface_rows(rows)
+    distinct_rows = distinct_surface_rows(rows, hit_rows)
+    distinct_hit_path_count = len(distinct_surface_hit_paths(hit_rows))
     lines = [
         "# CRD Center-Word Version Presence Findings",
         "",
@@ -194,6 +195,7 @@ def version_presence_markdown(rows: list[dict[str, str]]) -> str:
         f"- exact center-word term rows: {len(rows):,}",
         f"- distinct normalized surface forms: {len(distinct_rows):,}",
         f"- exact center-word hit rows: {sum(int(row['center_word_rows']) for row in rows):,}",
+        f"- distinct normalized surface hit paths: {distinct_hit_path_count:,}",
         f"- terms exceeding secular max in the center-word-only summary: {len(exceeding):,}",
         f"- language distribution: {format_named_counts(language_counts)}",
         f"- corpus-count distribution: {format_corpus_count_distribution(corpus_counts)}",
@@ -202,7 +204,7 @@ def version_presence_markdown(rows: list[dict[str, str]]) -> str:
         "",
         "This table collapses duplicate term IDs that use the same normalized hidden spelling. The raw term-row table remains below.",
         "",
-        "| Term | Language | Term rows | Rows | Corpus count | Corpora | Exceeds secular max | Bible max | Secular max |",
+        "| Term | Language | Term rows | Unique paths | Corpus count | Corpora | Exceeds secular max | Bible max | Secular max |",
         "| --- | --- | ---: | ---: | ---: | --- | --- | ---: | ---: |",
     ]
     for row in distinct_rows[:20]:
@@ -325,7 +327,7 @@ def term_language_counts_from_hits(rows: list[dict[str, str]]) -> Counter[str]:
     return Counter(language for language in languages_by_term.values() if language)
 
 
-def distinct_surface_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+def distinct_surface_rows(rows: list[dict[str, str]], hit_rows: list[dict[str, str]]) -> list[dict[str, str]]:
     groups: dict[tuple[str, str], dict[str, Any]] = {}
     for row in rows:
         key = normalized_surface_group_key(row)
@@ -359,10 +361,18 @@ def distinct_surface_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
             parse_number(row.get("secular_max_density", "")),
         )
 
+    hit_paths_by_group: dict[tuple[str, str], set[tuple[str, ...]]] = {}
+    for row in hit_rows:
+        key = normalized_surface_group_key(row)
+        if not key[1]:
+            continue
+        hit_paths_by_group.setdefault(key, set()).add(distinct_surface_hit_path_key(row))
+
     collapsed: list[dict[str, str]] = []
-    for group in groups.values():
+    for key, group in groups.items():
         term_ids = sorted(cast(set[str], group["term_ids"]))
         corpora = sorted(cast(set[str], group["corpora"]))
+        unique_paths = len(hit_paths_by_group.get(key, set())) or int(group["center_word_rows"])
         collapsed.append(
             {
                 "term": str(group["term"]),
@@ -370,7 +380,7 @@ def distinct_surface_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
                 "concept": str(group["concept"]),
                 "language": str(group["language"]),
                 "term_row_count": str(len(term_ids)),
-                "center_word_rows": str(group["center_word_rows"]),
+                "center_word_rows": str(unique_paths),
                 "corpus_count": str(len(corpora)),
                 "corpora": ";".join(corpora),
                 "exceeds_secular_max": str(bool(group["exceeds_secular_max"])).lower(),
@@ -397,6 +407,29 @@ def normalized_surface_group_key(row: dict[str, str]) -> tuple[str, str]:
     if script_key:
         return language, script_key
     return language, "".join(char.lower() for char in term if char.isalnum())
+
+
+def distinct_surface_hit_paths(rows: list[dict[str, str]]) -> set[tuple[str, ...]]:
+    return {
+        distinct_surface_hit_path_key(row)
+        for row in rows
+        if row.get("corpus_class", "bible") == "bible"
+    }
+
+
+def distinct_surface_hit_path_key(row: dict[str, str]) -> tuple[str, ...]:
+    language, term_key = normalized_surface_group_key(row)
+    return (
+        language,
+        term_key,
+        row.get("corpus", ""),
+        row.get("skip", ""),
+        row.get("direction", ""),
+        row.get("start_ref", ""),
+        row.get("center_ref", ""),
+        row.get("end_ref", ""),
+        row.get("center_normalized_word", ""),
+    )
 
 
 def parse_number(value: str) -> float:

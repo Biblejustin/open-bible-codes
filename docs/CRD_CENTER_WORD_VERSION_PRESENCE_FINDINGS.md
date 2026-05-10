@@ -28,6 +28,7 @@ make crd-center-word-findings
 - exact center-word term rows: 131
 - distinct normalized surface forms: 76
 - exact center-word hit rows: 1,044
+- distinct normalized surface hit paths: 425
 - terms exceeding secular max in the center-word-only summary: 120
 - language distribution: Hebrew 71, Greek 37, English 23
 - corpus-count distribution: 57 terms in 5 corpus labels, 1 term in 4 corpus labels, 5 terms in 3 corpus labels, 24 terms in 2 corpus labels, 44 terms in 1 corpus label
@@ -36,28 +37,28 @@ make crd-center-word-findings
 
 This table collapses duplicate term IDs that use the same normalized hidden spelling. The raw term-row table remains below.
 
-| Term | Language | Term rows | Rows | Corpus count | Corpora | Exceeds secular max | Bible max | Secular max |
+| Term | Language | Term rows | Unique paths | Corpus count | Corpora | Exceeds secular max | Bible max | Secular max |
 | --- | --- | ---: | ---: | ---: | --- | --- | ---: | ---: |
-| `יהוה` (YHWH; English: YHWH)<br>`bns_esther_yhwh_h, cc_yhwh_h, dyn_yhwh_h, ...` | hebrew | 6 | 324 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 10.0247109 | 0 |
-| `ישראל` (Yisrael; English: Israel)<br>`cc_israel_h, htp_israel_h, israel_h, ...` | hebrew | 4 | 132 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 5.84774803 | 0.725114523 |
-| `בבל` (Bavel; English: Babylon)<br>`babel_h, babylon_alt_h, babylon_h, ...` | hebrew | 4 | 100 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 6.68314061 | 0 |
-| `אלהים` (Elohim; English: God/Elohim)<br>`cc_elohim_h, god_h` | hebrew | 2 | 30 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 2.50915003 | 0 |
-| `ענן` (anan; English: cloud)<br>`cc_annas_h, mt_annas_h, twn_annas_h` | hebrew | 3 | 30 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 1.67276669 | 0 |
-| `יין` (yayin; English: wine)<br>`cc_wine_h, mt_wine_h, twn_wine_h` | hebrew | 3 | 30 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 1.67276669 | 0.179491289 |
-| `יהודה` (Yehudah; English: Judah)<br>`judah_h, mt_judas_absence_h` | hebrew | 2 | 20 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 1.67276669 | 0 |
-| `חסד` (chesed; English: mercy/steadfast love)<br>`htp_mercy_h, mercy_h` | hebrew | 2 | 20 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 1.67276669 | 0.349895093 |
-| `יעקב` (Yaakov; English: Jacob)<br>`cc_james_h, jacob_h, mt_james_h, ...` | hebrew | 4 | 20 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 0.836383345 | 0 |
-| `צדק` (tzedek; English: righteousness/Jupiter)<br>`cc_jupiter_h` | hebrew | 1 | 16 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 4.17696288 | 1.08767178 |
+| `יהוה` (YHWH; English: YHWH)<br>`bns_esther_yhwh_h, cc_yhwh_h, dyn_yhwh_h, ...` | hebrew | 6 | 54 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 10.0247109 | 0 |
+| `ישראל` (Yisrael; English: Israel)<br>`cc_israel_h, htp_israel_h, israel_h, ...` | hebrew | 4 | 33 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 5.84774803 | 0.725114523 |
+| `בבל` (Bavel; English: Babylon)<br>`babel_h, babylon_alt_h, babylon_h, ...` | hebrew | 4 | 25 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 6.68314061 | 0 |
 | `שלמה` (Shlomo; English: Solomon)<br>`solomon_h` | hebrew | 1 | 15 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 2.50915003 | 0.362557261 |
 | `שלל` (shalal; English: spoil/plunder)<br>`bcd_spoils_h` | hebrew | 1 | 15 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 2.50915003 | 0.349895093 |
+| `אלהים` (Elohim; English: God/Elohim)<br>`cc_elohim_h, god_h` | hebrew | 2 | 15 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 2.50915003 | 0 |
 | `אדני` (Adonai; English: Lord)<br>`lord_h` | hebrew | 1 | 15 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 2.50915003 | 0 |
-| `σοφια` (sophia; English: Wisdom)<br>`wisdom_g, wisdom_gxc` | greek | 2 | 14 | 5 | BYZ_NT; LXX; SBLGNT; TCG_NT; TR_NT | true | 2.89633859 | 0 |
+| `צדק` (tzedek; English: righteousness/Jupiter)<br>`cc_jupiter_h` | hebrew | 1 | 12 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 4.17696288 | 1.08767178 |
 | `ספר` (sefer; English: book/Sephar)<br>`sephar_h` | hebrew | 1 | 12 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 2.50617773 | 0.362557261 |
 | `שממה` (shemamah; English: desolation)<br>`desolation_h` | hebrew | 1 | 10 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 1.67276669 | 0.174947546 |
 | `קדש` (qodesh; English: holiness/sacred)<br>`holy_h` | hebrew | 1 | 10 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 1.67276669 | 0 |
-| `נפש` (nefesh; English: soul/life)<br>`nefesh_h, soul_h` | hebrew | 2 | 10 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 0.836383345 | 0.179491289 |
-| `משה` (Moshe; English: Moses)<br>`bcd_moses_h, moses_h` | hebrew | 2 | 10 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 0.836383345 | 0 |
-| `דבר` (davar; English: word/matter)<br>`murrain_plague_h, word_h` | hebrew | 2 | 10 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 0.836383345 | 0 |
+| `ענן` (anan; English: cloud)<br>`cc_annas_h, mt_annas_h, twn_annas_h` | hebrew | 3 | 10 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 1.67276669 | 0 |
+| `יין` (yayin; English: wine)<br>`cc_wine_h, mt_wine_h, twn_wine_h` | hebrew | 3 | 10 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 1.67276669 | 0.179491289 |
+| `יהודה` (Yehudah; English: Judah)<br>`judah_h, mt_judas_absence_h` | hebrew | 2 | 10 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 1.67276669 | 0 |
+| `חסד` (chesed; English: mercy/steadfast love)<br>`htp_mercy_h, mercy_h` | hebrew | 2 | 10 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 1.67276669 | 0.349895093 |
+| `σοφια` (sophia; English: Wisdom)<br>`wisdom_g, wisdom_gxc` | greek | 2 | 7 | 5 | BYZ_NT; LXX; SBLGNT; TCG_NT; TR_NT | true | 2.89633859 | 0 |
+| `פרץ` (prts; English: Pharez)<br>`twn_pharez_h` | hebrew | 1 | 7 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 1.67078515 | 0 |
+| `שנים` (shnym; English: Teeth)<br>`teeth_h` | hebrew | 1 | 5 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 0.836383345 | 0 |
+| `קדימה` (qdymh; English: Kadima)<br>`bcd_kadima_h` | hebrew | 1 | 5 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 0.836383345 | 0 |
+| `נפש` (nefesh; English: soul/life)<br>`nefesh_h, soul_h` | hebrew | 2 | 5 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 0.836383345 | 0.179491289 |
 
 ## Strongest Multi-Version Rows
 

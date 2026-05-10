@@ -227,9 +227,10 @@ The self-surface mode asks the narrow question: hidden `X` centered near visible
 
 The self-surface rerun produced 1,404,450 classified hit rows and 122,793
 relevant rows. The strict exact center-word subset contains 1,044 Bible rows
-across 131 term IDs and 76 distinct normalized surface forms. In the
-center-word-only Bible-vs-control summary, 120 terms exceed the secular maximum
-and 94 are Bible-positive with secular max zero.
+across 131 term IDs, 76 distinct normalized surface forms, and 425 distinct
+normalized surface hit paths. In the center-word-only Bible-vs-control summary,
+120 terms exceed the secular maximum and 94 are Bible-positive with secular max
+zero.
 Version presence is mixed: 57 exact center-word terms appear in five Bible
 corpus labels, while 44 appear in only one. This supports source-specific
 reporting rather than requiring every pattern to appear in every edition.

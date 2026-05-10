@@ -21,6 +21,7 @@ class BuildCrdCenterWordFindingsTests(unittest.TestCase):
                 [
                     "hit_id,term_id,term,concept,category,language,corpus,corpus_class,classifier_mode,is_relevant,relevance_type,surface_match_scope,matched_surface_keyword,matched_normalized_surface_keyword,confidence,skip,direction,start_ref,center_ref,end_ref,center_word,center_normalized_word,center_verse_text,span_text",
                     "h1,yhwh_h,יהוה,YHWH,divine,hebrew,MT_WLC,bible,deterministic,true,surface_keyword_match,center_word,יהוה,יהוה,,3,forward,Gen 1:1,Gen 1:1,Gen 1:1,יהוה,יהוה,verse,span",
+                    "h1_alias,yhwh_alt_h,יהוה,YHWH Alt,divine,hebrew,MT_WLC,bible,deterministic,true,surface_keyword_match,center_word,יהוה,יהוה,,3,forward,Gen 1:1,Gen 1:1,Gen 1:1,יהוה,יהוה,verse,span",
                     "h2,wisdom_g,σοφια,Wisdom,wisdom,greek,SBLGNT,bible,deterministic,true,surface_keyword_match,center_word,σοφια,σοφια,,4,forward,Rev 1:1,Rev 1:1,Rev 1:1,σοφια,σοφια,verse,span",
                 ]
             )
@@ -87,8 +88,10 @@ class BuildCrdCenterWordFindingsTests(unittest.TestCase):
             presence_text = version_presence.read_text(encoding="utf-8")
             self.assertIn("`יהוה` (YHWH; English: YHWH)<br>`yhwh_h`", presence_text)
             self.assertIn("- distinct normalized surface forms: 2", presence_text)
+            self.assertIn("- distinct normalized surface hit paths: 2", presence_text)
             self.assertIn("## Strongest Distinct Surface Forms", presence_text)
             self.assertIn("`יהוה` (YHWH; English: YHWH)<br>`yhwh_alt_h, yhwh_h`", presence_text)
+            self.assertIn("| `יהוה` (YHWH; English: YHWH)<br>`yhwh_alt_h, yhwh_h` | hebrew | 2 | 1 |", presence_text)
             self.assertIn("`σοφια` (sophia; English: Wisdom)<br>`wisdom_g`", presence_text)
 
 
