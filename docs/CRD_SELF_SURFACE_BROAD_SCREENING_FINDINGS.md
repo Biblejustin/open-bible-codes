@@ -20,6 +20,7 @@ The input term set combines all committed term CSVs except `terms/crd_placeholde
 - Bible exact center-word hits: `reports/crd_self_surface/center_word_hits.csv`
 - exact center-word density summary: `reports/crd_self_surface/center_word_bible_vs_control_summary.csv`
 - exact center-word review queue: `reports/crd_self_surface/center_word_review_queue.csv`
+- exact center-word review packet: `reports/crd_self_surface/center_word_review_packet.md`
 
 ## Reproduce
 
@@ -31,6 +32,7 @@ make crd-self-surface-queue
 make crd-self-surface-center-word
 make crd-self-surface-center-word-density
 make crd-self-surface-center-word-queue
+make crd-self-surface-center-word-packet
 ```
 
 ## Run Size

@@ -49,6 +49,7 @@ make crd-self-surface-queue
 make crd-self-surface-center-word
 make crd-self-surface-center-word-density
 make crd-self-surface-center-word-queue
+make crd-self-surface-center-word-packet
 ```
 
 This writes ignored local artifacts under `reports/crd_self_surface/`.
@@ -66,6 +67,7 @@ make crd-concept-surface-queue
 make crd-concept-surface-center-word
 make crd-concept-surface-center-word-density
 make crd-concept-surface-center-word-queue
+make crd-concept-surface-center-word-packet
 ```
 
 This writes ignored local artifacts under `reports/crd_concept_surface/`.
@@ -79,6 +81,8 @@ that exact center-word scope.
 The center-word-queue target builds a compact review CSV from that exact
 center-word subset, so review can begin with hidden `X` centered directly on
 visible `X`.
+The center-word-packet target turns that compact CSV into a local Markdown
+review packet with grouped examples and representative center-verse text.
 
 LLM-assisted drafting is allowed for lexical/context related-term proposals when
 the provenance names that assistance. The key rule is not "human-only"; the key

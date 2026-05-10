@@ -22,6 +22,7 @@ The input term set combines all committed term CSVs except `terms/crd_placeholde
 - Bible exact center-word hits: `reports/crd_concept_surface/center_word_hits.csv`
 - exact center-word density summary: `reports/crd_concept_surface/center_word_bible_vs_control_summary.csv`
 - exact center-word review queue: `reports/crd_concept_surface/center_word_review_queue.csv`
+- exact center-word review packet: `reports/crd_concept_surface/center_word_review_packet.md`
 
 ## Reproduce
 
@@ -33,6 +34,7 @@ make crd-concept-surface-queue
 make crd-concept-surface-center-word
 make crd-concept-surface-center-word-density
 make crd-concept-surface-center-word-queue
+make crd-concept-surface-center-word-packet
 ```
 
 ## Run Size
@@ -171,6 +173,7 @@ The exact center-word subset also has its own ignored density outputs:
 - matrix: `reports/crd_concept_surface/center_word_density_matrix.csv`
 - summary: `reports/crd_concept_surface/center_word_bible_vs_control_summary.csv`
 - compact review queue: `reports/crd_concept_surface/center_word_review_queue.csv`
+- compact review packet: `reports/crd_concept_surface/center_word_review_packet.md`
 - summary rows: 2,731
 - terms exceeding secular max: 120
 - Bible-positive/secular-zero terms: 94
