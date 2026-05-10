@@ -42,6 +42,9 @@ The report keeps three layers separate:
 - source distribution: which textual witnesses contain the same pattern;
 - statistical background: whether matched controls make the row unusual.
 
+Report convention: Hebrew and Greek terms are shown with transliteration and an
+English gloss where available.
+
 ## Strongest Review Material
 
 ### Occurrence-First Rows
@@ -51,20 +54,20 @@ control cautions travel beside them.
 
 | Hidden term | Center | Source labels | Read |
 | --- | --- | --- | --- |
-| `γωγ` | Rev 20:8 `Gog` | BYZ_NT, SBLGNT, TCG_NT, TR_NT | Source-stable centered-self occurrence in the direct Gog/Magog passage; length-3 controls caution against frequency promotion. |
-| `ישוע` | Ezra 10:18 `יֵשׁ֤וּעַ` | UHB | Real centered-self occurrence; strong background and referent cautions remain. |
-| `משיח` | 2 Sam 1:21 `מָשִׁ֥יחַ` | EBIBLE_WLC | Real centered-self occurrence; background pressure prevents claim promotion. |
-| `ιησουσ` | Josh 8:3 `Ἰησοῦς` | LXX | Real centered-self occurrence; many LXX forms refer to Joshua. |
+| `γωγ` (Gog; English: Gog) | Rev 20:8 `Gog` | BYZ_NT, SBLGNT, TCG_NT, TR_NT | Source-stable centered-self occurrence in the direct Gog/Magog passage; length-3 controls caution against frequency promotion. |
+| `ישוע` (Yeshua; English: Yeshua/Jeshua) | Ezra 10:18 `יֵשׁ֤וּעַ` (Yeshua; English: Yeshua/Jeshua) | UHB | Real centered-self occurrence; strong background and referent cautions remain. |
+| `משיח` (Mashiach; English: Messiah/anointed one) | 2 Sam 1:21 `מָשִׁ֥יחַ` (Mashiach; English: Messiah/anointed one) | EBIBLE_WLC | Real centered-self occurrence; background pressure prevents claim promotion. |
+| `ιησουσ` (Iesous; English: Jesus/Joshua) | Josh 8:3 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | LXX | Real centered-self occurrence; many LXX forms refer to Joshua. |
 | `jesus` | Matt 4:10 `Jesus` | KJV | Real centered-self occurrence in an English translation screen; secondary to original-language testing. |
 
 Source artifact: `docs/FINAL_REPORT_HIGHLIGHTS.md`.
 
-### Greek `δοξα`
+### Greek `δοξα` (doxa; English: glory)
 
 The strongest Greek controlled review row is:
 
-- base term: `δοξα`
-- extension: `δοξανωσ`
+- base term: `δοξα` (doxa; English: glory)
+- extension: `δοξανωσ` (doxanos; English: hidden extension form from doxa)
 - skip: `21`
 - direction: `forward`
 - type: `term_plus_after`
@@ -80,12 +83,13 @@ Source artifacts:
 - `docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md`
 - `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`
 
-### Hebrew `יום יהוה` Compound Extension
+### Hebrew `יום יהוה` (yom YHWH; English: day of YHWH) Compound Extension
 
-The strongest all-codes compound-extension row is the selected `יום יהוה` ->
-`היומיהוה` key:
+The strongest all-codes compound-extension row is the selected `יום יהוה` (yom
+YHWH; English: day of YHWH) -> `היומיהוה` (hayom YHWH; English: the day of
+YHWH) key:
 
-- normalized base: `יומיהוה`
+- normalized base: `יומיהוה` (yom YHWH; English: day of YHWH)
 - skip: `4`
 - direction: `forward`
 - extension type: `before_plus_term`

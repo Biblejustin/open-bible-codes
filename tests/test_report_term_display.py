@@ -1,0 +1,25 @@
+import re
+import unittest
+from pathlib import Path
+
+
+REPORT_PATHS = [
+    Path("docs/FINAL_REPORT.md"),
+    Path("docs/FINAL_REPORT_DRAFT.md"),
+    Path("docs/FINAL_REPORT_HIGHLIGHTS.md"),
+]
+
+
+class ReportTermDisplayTests(unittest.TestCase):
+    def test_original_language_code_terms_include_english_gloss_nearby(self) -> None:
+        pattern = re.compile(r"`([^`]*[\u0590-\u05ff\u0370-\u03ff\u1f00-\u1fff][^`]*)`")
+        for path in REPORT_PATHS:
+            text = path.read_text(encoding="utf-8")
+            for match in pattern.finditer(text):
+                with self.subTest(path=str(path), term=match.group(1)):
+                    nearby = text[match.end() : match.end() + 140]
+                    self.assertIn("English:", nearby)
+
+
+if __name__ == "__main__":
+    unittest.main()

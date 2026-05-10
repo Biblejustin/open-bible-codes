@@ -22,10 +22,10 @@ python3 -m scripts.build_final_report_highlights --centered-summary reports/cent
 
 | Rank | Status | Term | Center | Corpora | Occurrence type | Paths | Read |
 | ---: | --- | --- | --- | --- | --- | ---: | --- |
-| 1 | contextual_occurrence_frequency_cautioned | `γωγ` | REV 20:8 Gog | BYZ_NT;SBLGNT;TCG_NT;TR_NT | `centered_self_exact_word` | 14 | List occurrence: hidden `γωγ` centered at REV 20:8 Gog; contextual occurrence frequency cautioned. |
-| 2 | occurrence_background_pressure | `ישוע` | EZR 10:18 יֵשׁ֤וּעַ | UHB | `centered_self_exact_word` | 68 | List occurrence: hidden `ישוע` centered at EZR 10:18 יֵשׁ֤וּעַ; occurrence background pressure. |
-| 3 | occurrence_background_pressure | `משיח` | 2SA 1:21 מָשִׁ֥יחַ | EBIBLE_WLC | `centered_self_exact_word` | 33 | List occurrence: hidden `משיח` centered at 2SA 1:21 מָשִׁ֥יחַ; occurrence background pressure. |
-| 4 | occurrence_hold_for_referent_or_controls | `ιησουσ` | JOS 8:3 Ἰησοῦς | LXX | `centered_self_exact_word` | 5 | List occurrence: hidden `ιησουσ` centered at JOS 8:3 Ἰησοῦς; occurrence hold for referent or controls. |
+| 1 | contextual_occurrence_frequency_cautioned | `γωγ` (Gog; English: Gog) | REV 20:8 Gog | BYZ_NT;SBLGNT;TCG_NT;TR_NT | `centered_self_exact_word` | 14 | List occurrence: hidden `γωγ` (Gog; English: Gog) centered at REV 20:8 Gog; contextual occurrence frequency cautioned. |
+| 2 | occurrence_background_pressure | `ישוע` (Yeshua; English: Yeshua/Jeshua) | EZR 10:18 `יֵשׁ֤וּעַ` (Yeshua; English: Yeshua/Jeshua) | UHB | `centered_self_exact_word` | 68 | List occurrence: hidden `ישוע` (Yeshua; English: Yeshua/Jeshua) centered at EZR 10:18 `יֵשׁ֤וּעַ` (Yeshua; English: Yeshua/Jeshua); occurrence background pressure. |
+| 3 | occurrence_background_pressure | `משיח` (Mashiach; English: Messiah/anointed one) | 2SA 1:21 `מָשִׁ֥יחַ` (Mashiach; English: Messiah/anointed one) | EBIBLE_WLC | `centered_self_exact_word` | 33 | List occurrence: hidden `משיח` (Mashiach; English: Messiah/anointed one) centered at 2SA 1:21 `מָשִׁ֥יחַ` (Mashiach; English: Messiah/anointed one); occurrence background pressure. |
+| 4 | occurrence_hold_for_referent_or_controls | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 8:3 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | LXX | `centered_self_exact_word` | 5 | List occurrence: hidden `ιησουσ` (Iesous; English: Jesus/Joshua) centered at JOS 8:3 `Ἰησοῦς` (Iesous; English: Jesus/Joshua); occurrence hold for referent or controls. |
 | 5 | occurrence_review_candidate_not_claim | `jesus` | MAT 4:10 Jesus | KJV | `centered_self_exact_word` | 4 | List occurrence: hidden `jesus` centered at MAT 4:10 Jesus; occurrence review candidate not claim. |
 
 ## Catalog Rows To Keep Beside The Highlights

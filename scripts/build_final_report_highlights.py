@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
+from els.term_display import display_center, display_term
 
 
 DEFAULT_CENTERED_SUMMARY = Path("reports/centered_occurrence_index/presence_summary.csv")
@@ -26,8 +27,10 @@ FIELDNAMES = [
     "highlight_type",
     "status",
     "normalized_term",
+    "display_term",
     "center_ref",
     "center_word",
+    "display_center",
     "corpora",
     "occurrence_type",
     "source_family",
@@ -115,8 +118,10 @@ def build_highlights(rows: list[dict[str, str]], *, limit: int) -> list[dict[str
                 "highlight_type": highlight_type(row),
                 "status": highlight_status(row),
                 "normalized_term": row.get("normalized_term", ""),
+                "display_term": display_term(row.get("normalized_term", "")),
                 "center_ref": row.get("center_ref", ""),
                 "center_word": row.get("center_word", ""),
+                "display_center": display_center(row.get("center_ref", ""), row.get("center_word", "")),
                 "corpora": row.get("corpora", ""),
                 "occurrence_type": row.get("occurrence_type", ""),
                 "source_family": row.get("source_family", ""),
@@ -192,10 +197,10 @@ def highlight_status(row: dict[str, str]) -> str:
 
 
 def final_report_read(row: dict[str, str]) -> str:
-    term = row.get("normalized_term", "")
-    center = " ".join(part for part in [row.get("center_ref", ""), row.get("center_word", "")] if part)
+    term = display_term(row.get("normalized_term", ""))
+    center = display_center(row.get("center_ref", ""), row.get("center_word", ""))
     status = highlight_status(row).replace("_", " ")
-    return f"List occurrence: hidden `{term}` centered at {center}; {status}."
+    return f"List occurrence: hidden {term} centered at {center}; {status}."
 
 
 def write_csv(path: Path, rows: list[dict[str, object]]) -> None:
@@ -260,15 +265,14 @@ def write_markdown(
         ]
     )
     for row in highlights[: args.limit]:
-        center = " ".join(str(row[key]) for key in ("center_ref", "center_word") if row.get(key))
         lines.append(
             "| "
             + " | ".join(
                 [
                     str(row["rank"]),
                     escape_md(str(row["status"])),
-                    f"`{escape_md(str(row['normalized_term']))}`",
-                    escape_md(center),
+                    escape_md(str(row["display_term"])),
+                    escape_md(str(row["display_center"])),
                     escape_md(str(row["corpora"])),
                     f"`{escape_md(str(row['occurrence_type']))}`",
                     str(row["total_paths"]),

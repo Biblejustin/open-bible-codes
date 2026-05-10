@@ -25,15 +25,15 @@ Bible and non-Bible controls often explain rows that initially look strong.
 
 The strongest review candidates are:
 
-- Greek `δοξα` / `δοξανωσ`, a cross-version controlled surface-anchored hidden
+- Greek `δοξα` (doxa; English: glory) / `δοξανωσ` (doxanos; English: hidden extension form from doxa), a cross-version controlled surface-anchored hidden
   candidate across TR_NT, BYZ_NT, TCG_NT, and SBLGNT.
-- Hebrew `יום יהוה` / `היומיהוה`, a locked post-discovery
+- Hebrew `יום יהוה` (yom YHWH; English: day of YHWH) / `היומיהוה` (hayom YHWH; English: the day of YHWH), a locked post-discovery
   compound-extension review candidate across five MT-family sources.
-- Greek `γωγ` centered on open `Gog` at Rev 20:8 across four Greek NT source
+- Greek `γωγ` (Gog; English: Gog) centered on open `Gog` at Rev 20:8 across four Greek NT source
   labels, a source-stable centered-self occurrence in a direct Gog/Magog verse.
-- LXX `ιησουσ` centered-self rows, which require referent discipline because
+- LXX `ιησουσ` (Iesous; English: Jesus/Joshua) centered-self rows, which require referent discipline because
   many surface occurrences refer to Joshua rather than Jesus of Nazareth.
-- Hebrew `ישוע` and `משיח` centered-self rows, which should be listed but kept
+- Hebrew `ישוע` (Yeshua; English: Yeshua/Jeshua) and `משיח` (Mashiach; English: Messiah/anointed one) centered-self rows, which should be listed but kept
   under control-background caution.
 
 ## Hypothesis And Scope
@@ -86,14 +86,14 @@ material, not claim-level proof.
 
 - Hidden terms centered on the same surface word do occur. These rows matter as
   occurrences even when frequency controls caution against promotion.
-- The clearest centered-self row is Greek `γωγ`, centered on open `Gog` at
+- The clearest centered-self row is Greek `γωγ` (Gog; English: Gog), centered on open `Gog` at
   Rev 20:8 across BYZ_NT, SBLGNT, TCG_NT, and TR_NT.
-- Additional centered-self occurrence rows include Hebrew `ישוע`, Hebrew
-  `משיח`, Greek `ιησουσ`, and English KJV `jesus`. These are listed because
+- Additional centered-self occurrence rows include Hebrew `ישוע` (Yeshua; English: Yeshua/Jeshua), Hebrew
+  `משיח` (Mashiach; English: Messiah/anointed one), Greek `ιησουσ` (Iesous; English: Jesus/Joshua), and English KJV `jesus`. These are listed because
   they occur, while their referent and control cautions stay attached.
-- The Greek `δοξα` / `δοξανωσ` same-skip extension remains the strongest
+- The Greek `δοξα` (doxa; English: glory) / `δοξανωσ` (doxanos; English: hidden extension form from doxa) same-skip extension remains the strongest
   cross-version controlled review candidate.
-- The Hebrew `יום יהוה` -> `היומיהוה` compound-extension row remains a strong
+- The Hebrew `יום יהוה` (yom YHWH; English: day of YHWH) -> `היומיהוה` (hayom YHWH; English: the day of YHWH) compound-extension row remains a strong
   post-discovery review candidate across five MT-family sources.
 - The KJVA apocrypha/deuterocanon bridge study produced a stronger
   post-screen follow-up set than the LXX bridge pass, including locked
@@ -152,10 +152,10 @@ Current highlight rows from `docs/FINAL_REPORT_HIGHLIGHTS.md`:
 
 | Status | Hidden term | Center | Corpora | Read |
 | --- | --- | --- | --- | --- |
-| contextual occurrence, frequency-cautioned | `γωγ` | REV 20:8 `Gog` | BYZ_NT; SBLGNT; TCG_NT; TR_NT | Real centered-self occurrence in the Gog/Magog passage; length-3 controls caution against frequency promotion. |
-| occurrence background pressure | `ישוע` | EZR 10:18 `יֵשׁ֤וּעַ` | UHB | List occurrence; strong background caution and referent discipline required. |
-| occurrence background pressure | `משיח` | 2SA 1:21 `מָשִׁ֥יחַ` | EBIBLE_WLC | List occurrence; background pressure prevents claim promotion. |
-| occurrence hold for referent/controls | `ιησουσ` | JOS 8:3 `Ἰησοῦς` | LXX | List occurrence; many LXX `Jesus` forms refer to Joshua. |
+| contextual occurrence, frequency-cautioned | `γωγ` (Gog; English: Gog) | REV 20:8 `Gog` | BYZ_NT; SBLGNT; TCG_NT; TR_NT | Real centered-self occurrence in the Gog/Magog passage; length-3 controls caution against frequency promotion. |
+| occurrence background pressure | `ישוע` (Yeshua; English: Yeshua/Jeshua) | EZR 10:18 `יֵשׁ֤וּעַ` (Yeshua; English: Yeshua/Jeshua) | UHB | List occurrence; strong background caution and referent discipline required. |
+| occurrence background pressure | `משיח` (Mashiach; English: Messiah/anointed one) | 2SA 1:21 `מָשִׁ֥יחַ` (Mashiach; English: Messiah/anointed one) | EBIBLE_WLC | List occurrence; background pressure prevents claim promotion. |
+| occurrence hold for referent/controls | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 8:3 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | LXX | List occurrence; many LXX `Jesus` forms refer to Joshua. |
 | occurrence review candidate, not claim | `jesus` | MAT 4:10 `Jesus` | KJV | List occurrence; English translation screen is secondary to the original-language hypothesis. |
 
 ## Current Main Findings
@@ -168,10 +168,9 @@ control rows. STEP_TAHOT-only rates were 2.449% for real rows and 2.388% for
 controls. This keeps STEP_TAHOT-only behavior in source-family review status,
 not claim status.
 
-### Greek `δοξα` Follow-Ups
+### Greek `δοξα` (doxa; English: glory) Follow-Ups
 
-The strongest Greek review candidate remains `δοξα|21|forward|term_plus_after|
-δοξανωσ|δοξανωσ`. It appears across TR_NT, BYZ_NT, TCG_NT, and SBLGNT.
+The strongest Greek review candidate remains `δοξα` (doxa; English: glory) at skip 21 forward with `δοξανωσ` (doxanos; English: hidden extension form from doxa) as the same-skip extension. It appears across TR_NT, BYZ_NT, TCG_NT, and SBLGNT.
 
 The 5000/5000 and 20000/20000 follow-ups both passed their registered q <= 0.01
 review gates. The conservative all-control q values remain around 0.043. The
@@ -181,7 +180,7 @@ selected after earlier screening, so it is not a prospective discovery.
 ### Greek Exact-Center Surface Rows
 
 The expanded Greek exact-center surface track found all-source rows including
-`ισαακ`, `τερασ`, and `ανομια`. These pass letter-path audit and all-available
+`ισαακ` (Isaak; English: Isaac), `τερασ` (teras; English: wonder), and `ανομια` (anomia; English: lawlessness). These pass letter-path audit and all-available
 real-word control review, but they remain post-screen review rows.
 
 The length-4 Greek surface bucket looked stronger under a small declared-term
@@ -213,11 +212,11 @@ The occurrence-first index currently contains:
 - 839 raw occurrence rows before presence grouping;
 - 526 `centered_self_exact_word` presence rows.
 
-The top row is Greek `γωγ` centered on open `Gog` at Rev 20:8 across BYZ_NT,
+The top row is Greek `γωγ` (Gog; English: Gog) centered on open `Gog` at Rev 20:8 across BYZ_NT,
 SBLGNT, TCG_NT, and TR_NT. This is a real source-stable centered-self
 occurrence in the direct Gog/Magog passage. It should appear in the final
 findings list. It should not be frequency-promoted, because all 24 matched
-length-3 non-target controls had more exact-center paths than `γωγ`.
+length-3 non-target controls had more exact-center paths than `γωγ` (Gog; English: Gog).
 
 ### Centered-Relevance Density
 
@@ -264,8 +263,8 @@ The relaxed all-codes follow-up deliberately keeps hidden-path-only rows
 visible while prioritizing rows with same-center-word, related center context,
 span context, and same-skip before/after extensions.
 
-The compound-extension confirmatory run selected five locked `יום יהוה` ->
-`היומיהוה` rows across EBIBLE_WLC, MAM, MT_WLC, UHB, and UXLC. Each row used
+The compound-extension confirmatory run selected five locked `יום יהוה` (yom YHWH; English: day of YHWH) ->
+`היומיהוה` (hayom YHWH; English: the day of YHWH) rows across EBIBLE_WLC, MAM, MT_WLC, UHB, and UXLC. Each row used
 5000 term controls and 5000 random controls. The conservative all-control q
 range was 0.005199 in the formal report summary. This remains a strong
 post-discovery review candidate, not claim evidence.
