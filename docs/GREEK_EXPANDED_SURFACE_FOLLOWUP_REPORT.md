@@ -40,10 +40,10 @@ commit is recorded in the local manifest; the top-level
 | `τερασ` (teras; English: Wonder) | BYZ_NT | `τερασ` (teras; English: wonder) | `χειροποιητου` (cheiropoietou) | HEB 9:11 |
 | `τερασ` (teras; English: Wonder) | TCG_NT | `τερασ` (teras; English: wonder) | `χειροποιήτου,` (cheiropoietou) | HEB 9:11 |
 | `τερασ` (teras; English: Wonder) | SBLGNT | `τερασ` (teras; English: wonder) | `χειροποιήτου,` (cheiropoietou) | Heb 9:11 |
-| `ανομια` (anomia; English: Lawlessness) | TR_NT | `ανομια` (anomia; English: lawlessness) | `Οὐδέποτε` (oudepote) | MAT 7:22; MAT 7:23 |
-| `ανομια` (anomia; English: Lawlessness) | BYZ_NT | `ανομια` (anomia; English: lawlessness) | `ουδεποτε` (oudepote) | MAT 7:22; MAT 7:23 |
-| `ανομια` (anomia; English: Lawlessness) | TCG_NT | `ανομια` (anomia; English: lawlessness) | `Οὐδέποτε` (oudepote) | MAT 7:22; MAT 7:23 |
-| `ανομια` (anomia; English: Lawlessness) | SBLGNT | `ανομια` (anomia; English: lawlessness) | `Οὐδέποτε` (oudepote) | Matt 7:22; Matt 7:23 |
+| `ανομια` (anomia; English: Lawlessness) | TR_NT | `ανομια` (anomia; English: lawlessness) | `Οὐδέποτε` (oudepote; English: never) | MAT 7:22; MAT 7:23 |
+| `ανομια` (anomia; English: Lawlessness) | BYZ_NT | `ανομια` (anomia; English: lawlessness) | `ουδεποτε` (oudepote; English: never) | MAT 7:22; MAT 7:23 |
+| `ανομια` (anomia; English: Lawlessness) | TCG_NT | `ανομια` (anomia; English: lawlessness) | `Οὐδέποτε` (oudepote; English: never) | MAT 7:22; MAT 7:23 |
+| `ανομια` (anomia; English: Lawlessness) | SBLGNT | `ανομια` (anomia; English: lawlessness) | `Οὐδέποτε` (oudepote; English: never) | Matt 7:22; Matt 7:23 |
 
 ## Follow-Up Checks
 

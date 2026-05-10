@@ -34,7 +34,7 @@ which short terms are meaningful.
 | --- | --- | ---: | --- | ---: | --- | ---: | --- |
 | `ισαακ` (Isaak; English: Isaac) | Isaac | 5 | Heb 11:9 | -7 | backward | 1 | TR_NT:`κατοικήσας` (katoikesas); BYZ_NT:`κατοικησασ` (katoikesas); TCG_NT:`κατοικήσας` (katoikesas); SBLGNT:`κατοικήσας` (katoikesas) |
 | `τερασ` (teras; English: Wonder) | Wonder | 5 | Heb 9:11 | -13 | backward | 2 | TR_NT:`χειροποιήτου` (cheiropoietou); BYZ_NT:`χειροποιητου` (cheiropoietou); TCG_NT:`χειροποιήτου,` (cheiropoietou); SBLGNT:`χειροποιήτου,` (cheiropoietou) |
-| `ανομια` (anomia; English: Lawlessness) | Lawlessness | 6 | Matt 7:23 | 20 | forward | 1 | TR_NT:`Οὐδέποτε` (oudepote); BYZ_NT:`ουδεποτε` (oudepote); TCG_NT:`Οὐδέποτε` (oudepote); SBLGNT:`Οὐδέποτε` (oudepote) |
+| `ανομια` (anomia; English: Lawlessness) | Lawlessness | 6 | Matt 7:23 | 20 | forward | 1 | TR_NT:`Οὐδέποτε` (oudepote; English: never); BYZ_NT:`ουδεποτε` (oudepote; English: never); TCG_NT:`Οὐδέποτε` (oudepote; English: never); SBLGNT:`Οὐδέποτε` (oudepote; English: never) |
 
 ## Cohort Counts
 

@@ -685,7 +685,7 @@ Tracked read: `docs/GREEK_LXX_NT_CORPUS_PRESENCE.md`.
 
 ### Greek Exact-Center Extension Row: `δοξα` (doxa; English: glory)
 
-The `δοξα` (doxa; English: glory) / `δοξανωσ` (doxanos; hidden extension form)
+The `δοξα` (doxa; English: glory) / `δοξανωσ` (doxanos; English: hidden extension form from doxa)
 extension is the strongest review row so far, but still not a claim.
 
 Why it remains interesting:

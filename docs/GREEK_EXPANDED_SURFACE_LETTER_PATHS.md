@@ -22,10 +22,10 @@ test.
 | `τερασ` (teras; English: Wonder) | BYZ_NT | `τερασ` (teras; English: Wonder) | -13 | HEB 9:11 | `χειροποιητου` (cheiropoietou) | HEB 9:11 |
 | `τερασ` (teras; English: Wonder) | TCG_NT | `τερασ` (teras; English: Wonder) | -13 | HEB 9:11 | `χειροποιήτου,` (cheiropoietou) | HEB 9:11 |
 | `τερασ` (teras; English: Wonder) | SBLGNT | `τερασ` (teras; English: Wonder) | -13 | Heb 9:11 | `χειροποιήτου,` (cheiropoietou) | Heb 9:11 |
-| `ανομια` (anomia; English: Lawlessness) | TR_NT | `ανομια` (anomia; English: Lawlessness) | 20 | MAT 7:23 | `Οὐδέποτε` (oudepote) | MAT 7:22; MAT 7:23 |
-| `ανομια` (anomia; English: Lawlessness) | BYZ_NT | `ανομια` (anomia; English: Lawlessness) | 20 | MAT 7:23 | `ουδεποτε` (oudepote) | MAT 7:22; MAT 7:23 |
-| `ανομια` (anomia; English: Lawlessness) | TCG_NT | `ανομια` (anomia; English: Lawlessness) | 20 | MAT 7:23 | `Οὐδέποτε` (oudepote) | MAT 7:22; MAT 7:23 |
-| `ανομια` (anomia; English: Lawlessness) | SBLGNT | `ανομια` (anomia; English: Lawlessness) | 20 | Matt 7:23 | `Οὐδέποτε` (oudepote) | Matt 7:22; Matt 7:23 |
+| `ανομια` (anomia; English: Lawlessness) | TR_NT | `ανομια` (anomia; English: Lawlessness) | 20 | MAT 7:23 | `Οὐδέποτε` (oudepote; English: never) | MAT 7:22; MAT 7:23 |
+| `ανομια` (anomia; English: Lawlessness) | BYZ_NT | `ανομια` (anomia; English: Lawlessness) | 20 | MAT 7:23 | `ουδεποτε` (oudepote; English: never) | MAT 7:22; MAT 7:23 |
+| `ανομια` (anomia; English: Lawlessness) | TCG_NT | `ανομια` (anomia; English: Lawlessness) | 20 | MAT 7:23 | `Οὐδέποτε` (oudepote; English: never) | MAT 7:22; MAT 7:23 |
+| `ανομια` (anomia; English: Lawlessness) | SBLGNT | `ανομια` (anomia; English: Lawlessness) | 20 | Matt 7:23 | `Οὐδέποτε` (oudepote; English: never) | Matt 7:22; Matt 7:23 |
 
 ## Letter Rows
 

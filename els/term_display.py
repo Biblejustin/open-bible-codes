@@ -36,6 +36,7 @@ KNOWN_TERMS: dict[str, tuple[str, str]] = {
     "πιλατοσ": ("Pilatos", "Pilate"),
     "χριστοσ": ("Christos", "Christ"),
     "ερχεται": ("erchetai", "he is coming"),
+    "ουδεποτε": ("oudepote", "never"),
     "ναοσ": ("naos", "temple"),
     "θεοσ": ("theos", "God"),
     "σιων": ("Sion", "Zion"),
