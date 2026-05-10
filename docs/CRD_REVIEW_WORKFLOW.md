@@ -45,9 +45,15 @@ For a broad self-surface screening run across all committed term CSVs, use:
 make crd-self-surface-prepare
 make crd-self-surface-run
 make crd-self-surface-report
+make crd-self-surface-queue
+make crd-self-surface-center-word
+make crd-self-surface-center-word-density
 ```
 
 This writes ignored local artifacts under `reports/crd_self_surface/`.
+The queue and center-word targets mirror the concept-surface workflow below.
+Use them when the review question is the strict case: hidden `X` centered on
+visible `X`.
 
 For the same broad run with same-concept surface variants, use:
 
