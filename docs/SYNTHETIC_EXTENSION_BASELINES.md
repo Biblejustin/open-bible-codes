@@ -21,10 +21,10 @@ Same-type synthetic controls did not match any target extension score, but any-t
 
 | Corpus | Target | Score | Synthetic same-type >= target | Same-type p_ge | Synthetic any >= target | Any p_ge |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| SBLGNT | `αιμα` 14 before_plus_term_plus_after `ναιμανο` | 3311 | 0 / 100 | 0.009901 | 0 / 100 | 0.009901 |
-| SBLGNT | `υιος` 25 before_plus_term `ουουιοσ` | 3214 | 0 / 100 | 0.009901 | 2 / 100 | 0.029703 |
-| SBLGNT | `δοξα` 21 term_plus_after `δοξανωσ` | 3211 | 0 / 100 | 0.009901 | 0 / 100 | 0.009901 |
-| TR_NT | `δοξα` 21 term_plus_after `δοξανωσ` | 3211 | 0 / 100 | 0.009901 | 1 / 100 | 0.019802 |
+| SBLGNT | `αιμα` (haima; English: blood), skip 14, before_plus_term_plus_after, `ναιμανο` (naimano; English: hidden extension form from haima) | 3311 | 0 / 100 | 0.009901 | 0 / 100 | 0.009901 |
+| SBLGNT | `υιος` (huios; English: son), skip 25, before_plus_term, `ουουιοσ` (ouhuios; English: hidden extension form from huios) | 3214 | 0 / 100 | 0.009901 | 2 / 100 | 0.029703 |
+| SBLGNT | `δοξα` (doxa; English: glory), skip 21, term_plus_after, `δοξανωσ` (doxanos; English: hidden extension form from doxa) | 3211 | 0 / 100 | 0.009901 | 0 / 100 | 0.009901 |
+| TR_NT | `δοξα` (doxa; English: glory), skip 21, term_plus_after, `δοξανωσ` (doxanos; English: hidden extension form from doxa) | 3211 | 0 / 100 | 0.009901 | 1 / 100 | 0.019802 |
 
 ## Verdict
 
@@ -32,7 +32,7 @@ This narrows the exact-center extension read:
 
 - Exact same extension type remains uncommon under sampled synthetic strings.
 - Broad any-extension scoring can still produce synthetic rows at or above the target score.
-- The `δοξα` row remains the strongest review item only because it also survives cross-text support and deeper shuffled-term controls.
+- The `δοξα` (doxa; English: glory) row remains the strongest review item only because it also survives cross-text support and deeper shuffled-term controls.
 - These rows remain review-only, not claims.
 
 ## Synthetic Match Rows
@@ -41,18 +41,18 @@ The match-detail report lists synthetic any-type rows that equal or exceed targe
 
 | Target | Synthetic matches | Read |
 | --- | ---: | --- |
-| SBLGNT `υιος` | 2 | broad any-type synthetic extensions can compete with target score |
-| TR_NT `δοξα` | 1 | broad any-type synthetic extensions can compete with target score |
-| SBLGNT `αιμα` | 0 | target exceeds sampled synthetic any-type density |
-| SBLGNT `δοξα` | 0 | target exceeds sampled synthetic any-type density |
+| SBLGNT `υιος` (huios; English: son) | 2 | broad any-type synthetic extensions can compete with target score |
+| TR_NT `δοξα` (doxa; English: glory) | 1 | broad any-type synthetic extensions can compete with target score |
+| SBLGNT `αιμα` (haima; English: blood) | 0 | target exceeds sampled synthetic any-type density |
+| SBLGNT `δοξα` (doxa; English: glory) | 0 | target exceeds sampled synthetic any-type density |
 
 Detailed synthetic matches:
 
 | Target | Synthetic query | Synthetic phrase | Synthetic refs | Score |
 | --- | --- | --- | --- | ---: |
-| SBLGNT `υιος` | `οθει` | `τὸ θεῖον` | Acts 17:29 | 3311 |
-| SBLGNT `υιος` | `ασατ` | `πᾶσα⸃ τοῦ` | Acts 27:20 | 3311 |
-| TR_NT `δοξα` | `τινα` | `ἀπ ἄρτι Ναὶ` | REV 14:13 | 5311 |
+| SBLGNT `υιος` (huios; English: son) | `οθει` (othei; English: synthetic query) | `τὸ θεῖον` (to theion; English: the divine thing) | Acts 17:29 | 3311 |
+| SBLGNT `υιος` (huios; English: son) | `ασατ` (asat; English: synthetic query) | `πᾶσα⸃ τοῦ` (pasa tou; English: every/of the) | Acts 27:20 | 3311 |
+| TR_NT `δοξα` (doxa; English: glory) | `τινα` (tina; English: someone/something) | `ἀπ ἄρτι Ναὶ` (ap arti nai; English: from now yes) | REV 14:13 | 5311 |
 
 Surface-context review for these synthetic match rows is tracked in
 `docs/SYNTHETIC_EXTENSION_MATCH_REVIEW.md`.
@@ -64,7 +64,7 @@ Synthetic strings are density controls, not lexical controls. Existing shuffled-
 ## Next Check
 
 - inspect the synthetic examples that matched/exceeded any-type scores
-- keep `δοξα` under final-gate review only
+- keep `δοξα` (doxa; English: glory) under final-gate review only
 - avoid promoting source-only exact-center rows without cross-text support
 
 ## Reproduce

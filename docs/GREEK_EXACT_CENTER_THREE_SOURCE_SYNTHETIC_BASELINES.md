@@ -41,18 +41,18 @@ Runtime:
 
 | Corpus | Target | Score | Synthetic same-type >= target | Same-type p | Synthetic any >= target | Any p |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| BYZ_NT | `υιος` 25 before_plus_term `ουουιοσ` | 3214 | 1 / 1000 | 0.001998 | 5 / 1000 | 0.005994 |
-| BYZ_NT | `δοξα` 21 term_plus_after `δοξανωσ` | 3211 | 0 / 1000 | 0.000999 | 2 / 1000 | 0.002997 |
-| SBLGNT | `υιος` 25 before_plus_term `ουουιοσ` | 3214 | 0 / 1000 | 0.000999 | 2 / 1000 | 0.002997 |
-| SBLGNT | `δοξα` 21 term_plus_after `δοξανωσ` | 3211 | 3 / 1000 | 0.003996 | 3 / 1000 | 0.003996 |
-| TR_NT | `δοξα` 21 term_plus_after `δοξανωσ` | 3211 | 0 / 1000 | 0.000999 | 5 / 1000 | 0.005994 |
+| BYZ_NT | `υιος` (huios; English: son), skip 25, before_plus_term, `ουουιοσ` (ouhuios; English: hidden extension form from huios) | 3214 | 1 / 1000 | 0.001998 | 5 / 1000 | 0.005994 |
+| BYZ_NT | `δοξα` (doxa; English: glory), skip 21, term_plus_after, `δοξανωσ` (doxanos; English: hidden extension form from doxa) | 3211 | 0 / 1000 | 0.000999 | 2 / 1000 | 0.002997 |
+| SBLGNT | `υιος` (huios; English: son), skip 25, before_plus_term, `ουουιοσ` (ouhuios; English: hidden extension form from huios) | 3214 | 0 / 1000 | 0.000999 | 2 / 1000 | 0.002997 |
+| SBLGNT | `δοξα` (doxa; English: glory), skip 21, term_plus_after, `δοξανωσ` (doxanos; English: hidden extension form from doxa) | 3211 | 3 / 1000 | 0.003996 | 3 / 1000 | 0.003996 |
+| TR_NT | `δοξα` (doxa; English: glory), skip 21, term_plus_after, `δοξανωσ` (doxanos; English: hidden extension form from doxa) | 3211 | 0 / 1000 | 0.000999 | 5 / 1000 | 0.005994 |
 
 Read:
 
 - Every target row had at least one any-type synthetic row match or exceed its
   score.
 - Two target rows also had same-type synthetic rows match or exceed their score:
-  BYZ_NT `υιος` and SBLGNT `δοξα`.
+  BYZ_NT `υιος` (huios; English: son) and SBLGNT `δοξα` (doxa; English: glory).
 - The p-value floor for this 1000-sample run is `0.000999`.
 
 ## Synthetic Match
@@ -76,10 +76,10 @@ Examples:
 
 | Corpus | Target | Synthetic query | Synthetic extension | Score | Matched phrase refs | Context read |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BYZ_NT | `υιος` / `ουουιοσ` | `αικα` | `εσταικαι` | 4319 | MAT 6:21; MAT 12:45; MAT 24:3; MAT 24:27; MAT 24:37 | hit-span query surface |
-| BYZ_NT | `υιος` / `ουουιοσ` | `αντι` | `εαντινα` | 3311 | JHN 13:20 | center-query surface |
-| SBLGNT | `δοξα` / `δοξανωσ` | `τισυ` | `τισυμασ` | 3219 | Matt 24:4; Mark 13:5; Luke 19:31; 2Cor 11:20; Gal 1:9 | hidden-path only |
-| TR_NT | `δοξα` / `δοξανωσ` | `τινα` | `απαρτιναι` | 5311 | REV 14:13 | hidden-path only |
+| BYZ_NT | `υιος` (huios; English: son) / `ουουιοσ` (ouhuios; English: hidden extension form from huios) | `αικα` (aika; English: synthetic query) | `εσταικαι` (estaikai; English: will be and) | 4319 | MAT 6:21; MAT 12:45; MAT 24:3; MAT 24:27; MAT 24:37 | hit-span query surface |
+| BYZ_NT | `υιος` (huios; English: son) / `ουουιοσ` (ouhuios; English: hidden extension form from huios) | `αντι` (anti; English: against/instead of) | `εαντινα` (eantina; English: if anyone) | 3311 | JHN 13:20 | center-query surface |
+| SBLGNT | `δοξα` (doxa; English: glory) / `δοξανωσ` (doxanos; English: hidden extension form from doxa) | `τισυ` (tisy; English: synthetic query) | `τισυμασ` (tisymas; English: synthetic extension) | 3219 | Matt 24:4; Mark 13:5; Luke 19:31; 2Cor 11:20; Gal 1:9 | hidden-path only |
+| TR_NT | `δοξα` (doxa; English: glory) / `δοξανωσ` (doxanos; English: hidden extension form from doxa) | `τινα` (tina; English: someone/something) | `απαρτιναι` (apartinai; English: synthetic extension) | 5311 | REV 14:13 | hidden-path only |
 
 ## Interpretation
 
