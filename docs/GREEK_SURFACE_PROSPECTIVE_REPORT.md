@@ -45,7 +45,7 @@ the prior selected surface rows from the expanded Greek term list.
 | Term | Concept | Exact-center hits | All-source | Multi-source | Source-only |
 | --- | --- | ---: | ---: | ---: | ---: |
 | `αμην` (amen; English: Amen) | Amen | 101 | 11 | 14 | 19 |
-| `σιων` (sion; English: Zion) | Zion | 37 | 4 | 5 | 8 |
+| `σιων` (Sion; English: Zion) | Zion | 37 | 4 | 5 | 8 |
 | `αραμ` (aram; English: Aram) | Aram | 14 | 3 | 0 | 2 |
 | `δασα` (dasa; English: Lasha) | Lasha | 36 | 2 | 7 | 12 |
 | `ασηρ` (aser; English: Asher) | Asher | 14 | 2 | 2 | 1 |

@@ -20,7 +20,7 @@ the locked Greek surface prospective cohort.
   context requires real words that can appear openly in a verse.
 
 The length filter is deliberately mechanical. It excludes the dense length-4
-bucket, including `αμην` (amen; English: amen), without making a term-specific judgment about
+bucket, including `αμην` (amen; English: Amen), without making a term-specific judgment about
 which short terms are meaningful.
 
 ## Result
