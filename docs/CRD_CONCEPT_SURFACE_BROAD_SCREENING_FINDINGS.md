@@ -82,6 +82,40 @@ Compared with the self-surface run, the concept-surface run is only slightly bro
 | `jacob_g` and duplicate | greek | 2.90734016 | TCG_NT |
 | `gpx_lawlessness_g` | greek | 2.89633859 | BYZ_NT |
 
+## Compact Review Queue
+
+The compact queue extracts Bible-only examples from the strongest terms so the full 5.3 GB classified-hit artifact does not need to be opened directly.
+
+- queue rows: 309
+- selected terms: 50
+- `top_finite_ratio` rows: 167
+- `bible_positive_secular_zero` rows: 142
+- Hebrew rows: 138
+- Greek rows: 121
+- English rows: 50
+
+Top queue corpora by row count:
+
+| Corpus | Rows |
+| --- | ---: |
+| UHB | 100 |
+| LXX | 55 |
+| KJV | 50 |
+| MT_WLC | 33 |
+| SBLGNT | 30 |
+| TR_NT | 24 |
+| TCG_NT | 8 |
+| MAM | 5 |
+| BYZ_NT | 4 |
+
+Selected finite-ratio terms:
+
+`bns_chaldea_h`, `bns_esther_yhwh_h`, `bns_jesus_g`, `cc_isaac_g`, `cc_yhwh_h`, `darius_h`, `dyn_jesus_g`, `dyn_yhwh_h`, `egypt_h`, `egypt_modern_h`, `ephraim_h`, `gilead_h`, `gpx_isaac_g`, `htp_yhwh_h`, `iesous_gnt`, `isaac_g`, `jebusite_h`, `jesus_g`, `jesus_gxc`, `lord_h`, `mizraim_h`, `pandemic_h`, `plague_h`, `twn_yhwh_h`, `yhwh_h`.
+
+Selected Bible-positive/secular-zero terms:
+
+`cc_aaron_g`, `david_g`, `elishah_g`, `eng_david`, `eng_david_2`, `eng_david_3`, `eng_zion`, `eng_zion_2`, `gpx_david_g`, `gpx_elishah_g`, `gpx_jacob_g`, `gpx_lawlessness_g`, `jacob_g`, `josiah_h`, `kyrios_gnt`, `lawlessness_g`, `lord_g`, `lord_gxc`, `peace_g`, `peace_gxc`, `spirit_g`, `spirit_gxc`, `spirit_pneuma_g`, `wisdom_g`, `wisdom_gxc`.
+
 ## Interpretation Notes
 
 - This run is deterministic concept-surface screening: hidden `X` centered near a visible spelling from the same committed concept.
