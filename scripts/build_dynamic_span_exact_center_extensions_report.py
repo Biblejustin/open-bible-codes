@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
+from els.term_display import display_term
 
 
 DEFAULT_DIR = Path("reports/dynamic_skip_focus/exact_center_extensions")
@@ -155,9 +156,9 @@ def write_markdown(path: Path, data: dict[str, Any], args: argparse.Namespace) -
 
 
 def strong_row(row: dict[str, str]) -> str:
-    extension = f"`{row['extended_sequence']}` ({row['extension_type']})"
+    extension = f"{display_term(row['extended_sequence'])} ({row['extension_type']})"
     return (
-        f"| {row['corpus']} | `{row['normalized_term']}` | {row['center_ref']} | "
+        f"| {row['corpus']} | {display_term(row['normalized_term'])} | {row['center_ref']} | "
         f"{extension} | {row['match_kind']} | {int(row['match_count']):,} | "
         f"{md_cell(row['matched_examples'])} |"
     )
@@ -165,7 +166,7 @@ def strong_row(row: dict[str, str]) -> str:
 
 def summary_row(row: dict[str, str]) -> str:
     return (
-        f"| {row['corpus']} | `{row['normalized_term']}` | {row['skip']} | {row['direction']} | "
+        f"| {row['corpus']} | {display_term(row['normalized_term'])} | {row['skip']} | {row['direction']} | "
         f"{row['extension_type']} | {row['match_kind']} | {int(row['rows']):,} | "
         f"{int(row['max_extension_length']):,} | {int(row['max_match_count']):,} |"
     )

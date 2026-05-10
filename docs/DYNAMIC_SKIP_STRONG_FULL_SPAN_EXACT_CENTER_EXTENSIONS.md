@@ -45,7 +45,7 @@ python3 -m scripts.build_dynamic_span_exact_center_extensions_report --input-dir
 
 | Corpus | Term | Skip | Direction | Type | Match kind | Rows | Max length | Max match count |
 | --- | --- | ---: | --- | --- | --- | ---: | ---: | ---: |
-| EBIBLE_WLC | `משיח` | -10396 | backward | before_match | phrase_2 | 1 | 5 | 3 |
+| EBIBLE_WLC | `משיח` (Mashiach; English: Messiah/anointed one) | -10396 | backward | before_match | phrase_2 | 1 | 5 | 3 |
 | KJV | `jesus` | -164165 | backward | term_plus_after | phrase_2 | 1 | 3 | 1 |
 | KJV | `jesus` | -136692 | backward | after_match | phrase_2 | 1 | 4 | 15 |
 | KJV | `jesus` | -136692 | backward | after_match | phrase_2+word | 1 | 3 | 70 |
@@ -72,17 +72,17 @@ python3 -m scripts.build_dynamic_span_exact_center_extensions_report --input-dir
 | KJV | `jesus` | 224928 | forward | before_match | phrase_2 | 1 | 4 | 1 |
 | KJV | `jesus` | 305395 | forward | before_match | phrase_2 | 1 | 3 | 37 |
 | KJV | `jesus` | 334349 | forward | before_match | phrase_2+word | 1 | 4 | 38 |
-| LXX | `ιησουσ` | -234932 | backward | before_match | phrase_2 | 1 | 4 | 4 |
-| LXX | `ιησουσ` | -53401 | backward | after_match | phrase_2 | 1 | 4 | 1 |
-| LXX | `ιησουσ` | 38593 | forward | before_match | phrase_2 | 1 | 3 | 2 |
-| LXX | `ιησουσ` | 119233 | forward | after_match | phrase_2 | 1 | 4 | 1 |
-| LXX | `ιησουσ` | 201469 | forward | after_match | phrase_2 | 1 | 4 | 9 |
-| TCG_NT | `γωγ` | -4568 | backward | after_match | phrase_2 | 1 | 3 | 56 |
-| UHB | `ישוע` | -81473 | backward | after_match | phrase_2 | 1 | 6 | 1 |
-| UHB | `ישוע` | -40029 | backward | before_match | phrase_2 | 1 | 4 | 1 |
-| UHB | `ישוע` | -26675 | backward | after_match | phrase_2 | 1 | 5 | 1 |
-| UHB | `ישוע` | -11422 | backward | after_match | phrase_2+word | 2 | 5 | 7 |
-| UHB | `ישוע` | 98746 | forward | before_match | phrase_2+word | 1 | 5 | 4 |
+| LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | -234932 | backward | before_match | phrase_2 | 1 | 4 | 4 |
+| LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | -53401 | backward | after_match | phrase_2 | 1 | 4 | 1 |
+| LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | 38593 | forward | before_match | phrase_2 | 1 | 3 | 2 |
+| LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | 119233 | forward | after_match | phrase_2 | 1 | 4 | 1 |
+| LXX | `ιησουσ` (Iesous; English: Jesus/Joshua) | 201469 | forward | after_match | phrase_2 | 1 | 4 | 9 |
+| TCG_NT | `γωγ` (Gog; English: Gog) | -4568 | backward | after_match | phrase_2 | 1 | 3 | 56 |
+| UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | -81473 | backward | after_match | phrase_2 | 1 | 6 | 1 |
+| UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | -40029 | backward | before_match | phrase_2 | 1 | 4 | 1 |
+| UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | -26675 | backward | after_match | phrase_2 | 1 | 5 | 1 |
+| UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | -11422 | backward | after_match | phrase_2+word | 2 | 5 | 7 |
+| UHB | `ישוע` (Yeshua; English: Yeshua/Jeshua) | 98746 | forward | before_match | phrase_2+word | 1 | 5 | 4 |
 
 ## Read
 

@@ -10,6 +10,7 @@ from scripts.build_dynamic_span_exact_center_extensions_report import (
     reproduce_command,
     shell_quote,
     top_sort_key,
+    write_markdown,
 )
 
 
@@ -78,6 +79,63 @@ class BuildDynamicSpanExactCenterExtensionsReportTests(unittest.TestCase):
 
     def test_shell_quote_handles_single_quotes(self) -> None:
         self.assertEqual(shell_quote("Bob's Report"), "'Bob'\"'\"'s Report'")
+
+    def test_write_markdown_displays_original_language_terms(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            out = root / "extensions.md"
+            args = type(
+                "Args",
+                (),
+                {
+                    "input_dir": root,
+                    "markdown_out": out,
+                    "manifest_out": root / "manifest.json",
+                    "title": "Control Exact-Center Extensions",
+                    "top": 25,
+                    "summary_row_limit": 120,
+                },
+            )()
+
+            write_markdown(
+                out,
+                {
+                    "manifests": [
+                        {"corpus_label": "HEB_PBY_BIALIK", "hit_count": "1", "extension_count": "1"}
+                    ],
+                    "summary_rows": [
+                        {
+                            "corpus": "HEB_PBY_BIALIK",
+                            "normalized_term": "משיח",
+                            "skip": "7",
+                            "direction": "forward",
+                            "extension_type": "term_plus_after",
+                            "match_kind": "phrase_2",
+                            "rows": "1",
+                            "max_extension_length": "3",
+                            "max_match_count": "2",
+                        }
+                    ],
+                    "top_rows": [
+                        {
+                            "corpus": "HEB_PBY_BIALIK",
+                            "normalized_term": "משיח",
+                            "center_ref": "PBY",
+                            "extended_sequence": "הממשיחימ",
+                            "extension_type": "before_plus_term_plus_after",
+                            "match_kind": "phrase_2",
+                            "match_count": "3",
+                            "matched_examples": "הם משיחים",
+                        }
+                    ],
+                },
+                args,
+            )
+
+            text = out.read_text(encoding="utf-8")
+
+        self.assertIn("`משיח` (Mashiach; English: Messiah/anointed one)", text)
+        self.assertIn("`הממשיחימ`", text)
 
 
 def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, str]]) -> None:
