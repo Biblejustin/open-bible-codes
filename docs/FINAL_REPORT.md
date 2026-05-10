@@ -85,9 +85,7 @@ Source artifacts:
 
 ### Hebrew `יום יהוה` (yom YHWH; English: day of YHWH) Compound Extension
 
-The strongest all-codes compound-extension row is the selected `יום יהוה` (yom
-YHWH; English: day of YHWH) -> `היומיהוה` (hayom YHWH; English: the day of
-YHWH) key:
+The strongest all-codes compound-extension row is the selected `יום יהוה` (yom YHWH; English: day of YHWH) -> `היומיהוה` (hayom YHWH; English: the day of YHWH) key:
 
 - normalized base: `יומיהוה` (yom YHWH; English: day of YHWH)
 - skip: `4`
