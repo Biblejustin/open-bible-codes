@@ -14,33 +14,34 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
-from els.report_db import default_table_name, fetch_dicts, quote_identifier, sanitize_table_name, verify_table_current
+from els.report_db import (
+    DuckDBUnavailable,
+    ReportDBStale,
+    fetch_dicts,
+    quote_identifier,
+    report_table_name_for_path,
+    sanitize_table_name,
+    verify_table_current,
+)
 
 
 DEFAULT_HITS = Path("reports/hebrew_theology_all_codes/surface_all_codes.csv")
 DEFAULT_SUMMARY = Path("reports/hebrew_theology_all_codes/surface_all_codes_summary.csv")
 DEFAULT_MD = Path("docs/HEBREW_THEOLOGY_ALL_CODES_COLLECTION.md")
 DEFAULT_MANIFEST = Path("reports/hebrew_theology_all_codes/summary.manifest.json")
+DEFAULT_REPORT_DB = Path("reports/db/open_bible_codes.duckdb")
 
 
 def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(argv)
-    if args.db is not None:
-        verify_table_current(
-            db_path=args.db,
-            table_name=args.hits_table or default_table_name(args.hits),
-            source_path=args.hits,
-        )
-        verify_table_current(
-            db_path=args.db,
-            table_name=args.summary_table or default_table_name(args.summary),
-            source_path=args.summary,
-        )
+    db = resolve_db(args)
+    args.effective_db = str(db) if db is not None else ""
+    if db is not None:
         aggregates = aggregate_db(
-            db=args.db,
-            hits_table=args.hits_table or default_table_name(args.hits),
-            summary_table=args.summary_table or default_table_name(args.summary),
+            db=db,
+            hits_table=args.hits_table or report_table_name_for_path(args.hits),
+            summary_table=args.summary_table or report_table_name_for_path(args.summary),
         )
     else:
         hit_rows = read_rows(args.hits)
@@ -73,6 +74,31 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--hits-table", help="DuckDB hits table name. Defaults to a name derived from --hits.")
     parser.add_argument("--summary-table", help="DuckDB summary table name. Defaults to a name derived from --summary.")
     return parser
+
+
+def resolve_db(args: argparse.Namespace) -> Path | None:
+    db = args.db
+    explicit = db is not None
+    if db is None:
+        db = DEFAULT_REPORT_DB
+        if not db.exists():
+            return None
+    try:
+        verify_table_current(
+            db_path=db,
+            table_name=args.hits_table or report_table_name_for_path(args.hits),
+            source_path=args.hits,
+        )
+        verify_table_current(
+            db_path=db,
+            table_name=args.summary_table or report_table_name_for_path(args.summary),
+            source_path=args.summary,
+        )
+    except (DuckDBUnavailable, FileNotFoundError, ReportDBStale):
+        if explicit:
+            raise
+        return None
+    return db
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:
@@ -292,6 +318,7 @@ def write_markdown(path: Path, args: argparse.Namespace, aggregates: dict[str, A
         "",
         f"- Hits: `{args.hits}`",
         f"- Summary: `{args.summary}`",
+        f"- Report DB: `{args.effective_db or 'not used'}`",
         f"- Corpora: `{', '.join(aggregates['corpora'])}`",
         "",
         "## Collection Counts",
@@ -386,6 +413,7 @@ def write_manifest(
         "git_commit": run_git("rev-parse", "--short", "HEAD"),
         "hits": str(args.hits),
         "summary": str(args.summary),
+        "report_db": args.effective_db,
         "markdown_out": str(args.markdown_out),
         "aggregates": {
             key: value

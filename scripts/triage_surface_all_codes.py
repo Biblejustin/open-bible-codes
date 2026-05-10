@@ -15,9 +15,11 @@ from typing import Any
 
 from els import __version__
 from els.report_db import (
-    default_table_name,
+    DuckDBUnavailable,
+    ReportDBStale,
     fetch_dicts,
     quote_identifier,
+    report_table_name_for_path,
     sanitize_table_name,
     sql_literal,
     verify_table_current,
@@ -30,6 +32,7 @@ DEFAULT_SUMMARY = Path("reports/hebrew_theology_all_codes/surface_all_codes_summ
 DEFAULT_QUEUE = Path("reports/hebrew_theology_all_codes/triage_queue.csv")
 DEFAULT_MD = Path("docs/HEBREW_THEOLOGY_ALL_CODES_TRIAGE.md")
 DEFAULT_MANIFEST = Path("reports/hebrew_theology_all_codes/triage.manifest.json")
+DEFAULT_REPORT_DB = Path("reports/db/open_bible_codes.duckdb")
 
 BUCKET_ORDER = {
     "center_word_exact": 0,
@@ -95,15 +98,12 @@ def main(argv: list[str] | None = None) -> int:
     control_by_term = read_control_summaries(args.controlled_summary)
     summary_by_term, all_corpora = read_summary(args.summary)
     candidate_limit = max(args.max_rows_per_bucket * args.candidate_multiplier, args.max_rows_per_bucket)
-    if args.db is not None:
-        verify_table_current(
-            db_path=args.db,
-            table_name=args.hits_table or default_table_name(args.hits),
-            source_path=args.hits,
-        )
+    db = resolve_db(args)
+    args.effective_db = str(db) if db is not None else ""
+    if db is not None:
         candidates_by_bucket, all_corpora_from_hits, scanned_rows = collect_candidates_db(
-            db=args.db,
-            table=args.hits_table or default_table_name(args.hits),
+            db=db,
+            table=args.hits_table or report_table_name_for_path(args.hits),
             control_by_term=control_by_term,
             limit=candidate_limit,
         )
@@ -120,8 +120,8 @@ def main(argv: list[str] | None = None) -> int:
         for candidate in candidates
     }
     presence_by_key = (
-        collect_presence_db(args.db, args.hits_table or default_table_name(args.hits), selected_keys)
-        if args.db is not None
+        collect_presence_db(db, args.hits_table or report_table_name_for_path(args.hits), selected_keys)
+        if db is not None
         else collect_presence(args.hits, selected_keys)
     )
     queue_rows = build_queue_rows(
@@ -168,6 +168,26 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--db", type=Path, help="Read hit rows from a DuckDB report database.")
     parser.add_argument("--hits-table", help="DuckDB hits table name. Defaults to a name derived from --hits.")
     return parser
+
+
+def resolve_db(args: argparse.Namespace) -> Path | None:
+    db = args.db
+    explicit = db is not None
+    if db is None:
+        db = DEFAULT_REPORT_DB
+        if not db.exists():
+            return None
+    try:
+        verify_table_current(
+            db_path=db,
+            table_name=args.hits_table or report_table_name_for_path(args.hits),
+            source_path=args.hits,
+        )
+    except (DuckDBUnavailable, FileNotFoundError, ReportDBStale):
+        if explicit:
+            raise
+        return None
+    return db
 
 
 def read_summary(path: Path) -> tuple[dict[str, dict[str, str]], set[str]]:
@@ -673,6 +693,7 @@ def write_markdown(
         "",
         f"- Hits: `{args.hits}`",
         f"- Summary: `{args.summary}`",
+        f"- Report DB: `{args.effective_db or 'not used'}`",
         f"- Queue CSV: `{args.queue_out}`",
         f"- Corpora: `{', '.join(sorted(all_corpora))}`",
         "",
@@ -750,6 +771,7 @@ def write_manifest(
         "git_commit": run_git("rev-parse", "--short", "HEAD"),
         "hits": str(args.hits),
         "summary": str(args.summary),
+        "report_db": args.effective_db,
         "controlled_summaries": [str(path) for path in args.controlled_summary],
         "queue_out": str(args.queue_out),
         "markdown_out": str(args.markdown_out),

@@ -9,8 +9,16 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from els.report_db import (
+    DuckDBUnavailable,
+    ReportDBStale,
+    connect,
+    report_table_name_for_path,
+    verify_table_current,
+)
 
-EXCLUDED_PATH_PARTS = {".step-stamps", "benchmarks"}
+
+EXCLUDED_PATH_PARTS = {".step-stamps", "benchmarks", "db", "partitions", "worker_batches", "worker_imports"}
 EXCLUDED_INDEX_FILES = {"INDEX.md", "index.json"}
 
 
@@ -28,16 +36,34 @@ class ReportEntry:
     metadata: dict[str, Any] = field(default_factory=dict)
 
 
-def scan_reports(root: str | Path, *, sample_limit: int = 3) -> list[ReportEntry]:
+def scan_reports(
+    root: str | Path,
+    *,
+    sample_limit: int = 3,
+    db_path: str | Path | None = None,
+    cache_path: str | Path | None = None,
+) -> list[ReportEntry]:
     root_path = Path(root).expanduser().resolve()
+    report_db = Path(db_path) if db_path is not None else root_path / "db" / "open_bible_codes.duckdb"
+    row_count_cache_path = Path(cache_path) if cache_path is not None else root_path / ".report_index_cache.json"
+    row_count_cache = _read_row_count_cache(row_count_cache_path)
     entries: list[ReportEntry] = []
     for path in sorted(root_path.rglob("*")):
         if should_skip_report_path(root_path, path):
             continue
         if path.suffix == ".csv":
-            entries.append(_summarize_csv(root_path, path, sample_limit=sample_limit))
+            entries.append(
+                _summarize_csv(
+                    root_path,
+                    path,
+                    sample_limit=sample_limit,
+                    db_path=report_db,
+                    row_count_cache=row_count_cache,
+                )
+            )
         elif path.suffix == ".json":
             entries.append(_summarize_json(root_path, path))
+    _write_row_count_cache(row_count_cache_path, row_count_cache)
     return entries
 
 
@@ -126,7 +152,14 @@ def write_json_index(entries: list[ReportEntry], out_path: str | Path) -> None:
     )
 
 
-def _summarize_csv(root: Path, path: Path, *, sample_limit: int) -> ReportEntry:
+def _summarize_csv(
+    root: Path,
+    path: Path,
+    *,
+    sample_limit: int,
+    db_path: Path | None,
+    row_count_cache: dict[str, dict[str, int]],
+) -> ReportEntry:
     sample: list[dict[str, str]] = []
     row_count = 0
     try:
@@ -137,6 +170,14 @@ def _summarize_csv(root: Path, path: Path, *, sample_limit: int) -> ReportEntry:
                 row_count += 1
                 if len(sample) < sample_limit:
                     sample.append({key: row.get(key, "") for key in columns})
+                if len(sample) >= sample_limit:
+                    break
+        db_row_count = _db_csv_row_count(db_path, path)
+        if db_row_count is not None:
+            row_count = db_row_count
+            _cache_row_count(root, path, row_count_cache, row_count)
+        else:
+            row_count = _cached_or_count_csv_rows(root, path, row_count_cache)
         return ReportEntry(
             path=str(path.relative_to(root)),
             kind="csv",
@@ -152,6 +193,82 @@ def _summarize_csv(root: Path, path: Path, *, sample_limit: int) -> ReportEntry:
             bytes=path.stat().st_size,
             error=str(exc),
         )
+
+
+def _count_csv_rows(path: Path) -> int:
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        reader = csv.reader(handle)
+        try:
+            next(reader)
+        except StopIteration:
+            return 0
+        return sum(1 for _row in reader)
+
+
+def _cached_or_count_csv_rows(root: Path, path: Path, cache: dict[str, dict[str, int]]) -> int:
+    key = str(path.relative_to(root))
+    stat = path.stat()
+    cached = cache.get(key)
+    if (
+        cached
+        and cached.get("size") == stat.st_size
+        and cached.get("mtime_ns") == stat.st_mtime_ns
+        and "rows" in cached
+    ):
+        return int(cached["rows"])
+    row_count = _count_csv_rows(path)
+    _cache_row_count(root, path, cache, row_count)
+    return row_count
+
+
+def _cache_row_count(root: Path, path: Path, cache: dict[str, dict[str, int]], row_count: int) -> None:
+    stat = path.stat()
+    cache[str(path.relative_to(root))] = {
+        "size": stat.st_size,
+        "mtime_ns": stat.st_mtime_ns,
+        "rows": row_count,
+    }
+
+
+def _read_row_count_cache(path: Path) -> dict[str, dict[str, int]]:
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    if not isinstance(data, dict):
+        return {}
+    return {
+        str(key): {
+            "size": int(value.get("size", 0)),
+            "mtime_ns": int(value.get("mtime_ns", 0)),
+            "rows": int(value.get("rows", 0)),
+        }
+        for key, value in data.items()
+        if isinstance(value, dict)
+    }
+
+
+def _write_row_count_cache(path: Path, cache: dict[str, dict[str, int]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(cache, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def _db_csv_row_count(db_path: Path | None, source_path: Path) -> int | None:
+    if db_path is None or not db_path.exists():
+        return None
+    table_name = report_table_name_for_path(source_path)
+    try:
+        verify_table_current(db_path=db_path, table_name=table_name, source_path=source_path)
+    except (DuckDBUnavailable, FileNotFoundError, ReportDBStale):
+        return None
+    with connect(db_path, read_only=True) as con:
+        row = con.execute(
+            "SELECT row_count FROM report_table_imports WHERE table_name = ?",
+            [table_name],
+        ).fetchone()
+    return int(row[0]) if row else None
 
 
 def _summarize_json(root: Path, path: Path) -> ReportEntry:

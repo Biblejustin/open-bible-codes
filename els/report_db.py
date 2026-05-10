@@ -51,6 +51,37 @@ def default_table_name(path: Path) -> str:
     return sanitize_table_name(name)
 
 
+DEFAULT_REPORT_TABLE_NAMES = {
+    "reports/crd_self_surface/classified_hits.csv": "crd_self_surface_classified_hits",
+    "reports/crd_self_surface/density_matrix.csv": "crd_self_surface_density_matrix",
+    "reports/crd_concept_surface/classified_hits.csv": "crd_concept_surface_classified_hits",
+    "reports/crd_concept_surface/density_matrix.csv": "crd_concept_surface_density_matrix",
+    "reports/crd/classified_hits.csv": "crd_classified_hits",
+    "reports/crd/density_matrix.csv": "crd_density_matrix",
+    "reports/hebrew_screening_all_codes/surface_all_codes.csv": "hebrew_screening_surface_all_codes",
+    "reports/hebrew_screening_all_codes/surface_all_codes_summary.csv": "hebrew_screening_surface_all_codes_summary",
+    "reports/english_screening_all_codes/surface_all_codes.csv": "english_screening_surface_all_codes",
+    "reports/english_screening_all_codes/surface_all_codes_summary.csv": "english_screening_surface_all_codes_summary",
+    "reports/greek_screening_all_codes/surface_all_codes.csv": "greek_screening_surface_all_codes",
+    "reports/greek_screening_all_codes/surface_all_codes_summary.csv": "greek_screening_surface_all_codes_summary",
+    "reports/hebrew_theology_all_codes/surface_all_codes.csv": "hebrew_theology_surface_all_codes",
+    "reports/hebrew_theology_all_codes/surface_all_codes_summary.csv": "hebrew_theology_surface_all_codes_summary",
+    "reports/dynamic_skip_focus/full_span_exported_hits.csv": "dynamic_skip_focus_full_span_exported_hits",
+}
+
+
+def report_table_name_for_path(path: Path) -> str:
+    candidates = [path.as_posix()]
+    try:
+        candidates.append(path.resolve().relative_to(Path.cwd().resolve()).as_posix())
+    except ValueError:
+        pass
+    for candidate in candidates:
+        if candidate in DEFAULT_REPORT_TABLE_NAMES:
+            return DEFAULT_REPORT_TABLE_NAMES[candidate]
+    return default_table_name(path)
+
+
 def sanitize_table_name(value: str) -> str:
     name = re.sub(r"[^0-9A-Za-z_]+", "_", value).strip("_").lower()
     if not name:
