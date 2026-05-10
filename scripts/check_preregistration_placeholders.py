@@ -10,6 +10,7 @@ from pathlib import Path
 
 
 PLACEHOLDER_RE = re.compile(r"\[[A-Za-z0-9_ .|/;:'-]+\]")
+TASK_LIST_MARKERS = {"[ ]", "[x]", "[X]"}
 
 
 @dataclass(frozen=True)
@@ -54,7 +55,7 @@ def find_placeholders(path: Path, *, allowed: set[str]) -> list[PlaceholderHit]:
     for line_index, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
         for match in PLACEHOLDER_RE.finditer(line):
             placeholder = match.group(0)
-            if placeholder in allowed:
+            if placeholder in allowed or placeholder in TASK_LIST_MARKERS:
                 continue
             hits.append(
                 PlaceholderHit(

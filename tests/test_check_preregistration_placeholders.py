@@ -21,6 +21,15 @@ def test_find_placeholders_honors_allow_list(tmp_path) -> None:
     assert [hit.placeholder for hit in hits] == ["[name]"]
 
 
+def test_find_placeholders_ignores_markdown_task_markers(tmp_path) -> None:
+    prereg = tmp_path / "study.md"
+    prereg.write_text("- [x] Locked\n- [ ] Reviewer sign-off pending\n", encoding="utf-8")
+
+    hits = check.find_placeholders(prereg, allowed=set())
+
+    assert hits == []
+
+
 def test_main_fails_for_unresolved_placeholders(tmp_path, capsys) -> None:
     prereg = tmp_path / "study.md"
     prereg.write_text("Protocol: `protocols/[protocol].toml`\n", encoding="utf-8")
