@@ -66,17 +66,17 @@ controls are eligible under the preregistered cross-text requirement.
 
 ## Controlled Results
 
-Only the known `δοξα` extension key survived exact-center plus cross-text
+Only the known `δοξα` (doxa; English: glory) extension key survived exact-center plus cross-text
 controls.
 
 | Corpus | Term | Center | Extension | Matched phrase ref | Score | Term-any p | Random-any p | Combined p | Combined q | Flags |
 | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| SBLGNT | `δοξα` | 2Thess 3:1 | `δοξανωσ` | John 1:14 | 3211 | 0.038961 | 0.002997 | 0.000999 | 0.000999 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
-| TR_NT | `δοξα` | 2TH 3:1 | `δοξανωσ` | JHN 1:14 | 3211 | 0.041958 | 0.007992 | 0.000999 | 0.000999 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
+| SBLGNT | `δοξα` (doxa; English: glory) | 2Thess 3:1 | `δοξανωσ` (doxanos; English: hidden extension form from doxa) | John 1:14 | 3211 | 0.038961 | 0.002997 | 0.000999 | 0.000999 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
+| TR_NT | `δοξα` (doxa; English: glory) | 2TH 3:1 | `δοξανωσ` (doxanos; English: hidden extension form from doxa) | JHN 1:14 | 3211 | 0.041958 | 0.007992 | 0.000999 | 0.000999 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
 
 Result:
 
-- `δοξα` remains the only controlled cross-text exact-center review candidate.
+- `δοξα` (doxa; English: glory) remains the only controlled cross-text exact-center review candidate.
 - No new controlled review candidate appeared in the broader locked cohort.
 
 ## Source-Only Exact-Center Rows
@@ -85,8 +85,8 @@ The context review also surfaced source-only exact-center rows:
 
 | Corpus | Term | Center | Extension | Matched phrase ref | Eligibility |
 | --- | --- | --- | --- | --- | --- |
-| SBLGNT | `αιμα` | Rev 17:6 | `ναιμανο` | Luke 4:27 | source-only; no cross-text control row |
-| SBLGNT | `υιος` | Luke 19:9 | `ουουιοσ` | Matt 17:9; Matt 26:24; Mark 14:21; John 4:46 | source-only; no cross-text control row |
+| SBLGNT | `αιμα` (haima; English: blood) | Rev 17:6 | `ναιμανο` (naimano; English: hidden extension form from haima) | Luke 4:27 | source-only; no cross-text control row |
+| SBLGNT | `υιος` (huios; English: son) | Luke 19:9 | `ουουιοσ` (ouhuios; English: hidden extension form from huios) | Matt 17:9; Matt 26:24; Mark 14:21; John 4:46 | source-only; no cross-text control row |
 
 These rows may be reviewed as context examples, but they do not pass the locked
 cross-text requirement and are not controlled review candidates in this study.
@@ -106,9 +106,9 @@ Exact-center top-pattern distribution:
 
 | Pattern | Present | Missing | Read |
 | --- | --- | --- | --- |
-| `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` | TR_NT, SBLGNT | none | all-source pattern within the two-source comparison |
-| `αιμα|14|forward|before_plus_term_plus_after|ναιμανο|ναιμανο` | SBLGNT | TR_NT | source-specific pattern |
-| `υιοσ|25|forward|before_plus_term|ουουιοσ|ουουιοσ` | SBLGNT | TR_NT | source-specific pattern |
+| `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` (base: `δοξα` (doxa; English: glory); extension: `δοξανωσ` (doxanos; English: hidden extension form from doxa)) | TR_NT, SBLGNT | none | all-source pattern within the two-source comparison |
+| `αιμα|14|forward|before_plus_term_plus_after|ναιμανο|ναιμανο` (base: `αιμα` (haima; English: blood); extension: `ναιμανο` (naimano; English: hidden extension form from haima)) | SBLGNT | TR_NT | source-specific pattern |
+| `υιοσ|25|forward|before_plus_term|ουουιοσ|ουουιοσ` (base: `υιος` (huios; English: son); extension: `ουουιοσ` (ouhuios; English: hidden extension form from huios)) | SBLGNT | TR_NT | source-specific pattern |
 
 This matrix is not a control result. It preserves version-specific rows for
 later review instead of discarding them because they are absent from another
@@ -116,13 +116,13 @@ source.
 
 ## Context Read
 
-For the controlled `δοξα` rows:
+For the controlled `δοξα` (doxa; English: glory) rows:
 
-- the base term has exact-center surface context through `δοξάζηται` in
+- the base term has exact-center surface context through `δοξάζηται` (doxazetai; English: may be glorified) in
   2 Thessalonians 3:1;
-- the hidden extension sequence is `δοξανωσ`;
-- it maps to the phrase `δόξαν ὡς`;
-- `δόξαν ὡς` is not surface text in the 2 Thessalonians 3:1-2 hit/extension
+- the hidden extension sequence is `δοξανωσ` (doxanos; English: hidden extension form from doxa);
+- it maps to the phrase `δόξαν ὡς` (doxan hos; English: glory as);
+- `δόξαν ὡς` (doxan hos; English: glory as) is not surface text in the 2 Thessalonians 3:1-2 hit/extension
   passage;
 - the matched phrase appears elsewhere, at John 1:14 / JHN 1:14.
 
@@ -134,9 +134,9 @@ Letter paths are saved in:
 
 | Criterion | Result | Note |
 | --- | --- | --- |
-| Exact-center base-term surface context | pass for `δοξα` | `δοξάζηται` in both Greek NT texts |
-| Exact extension-key overlap in TR_NT and SBLGNT | pass for `δοξα` | Same key in both texts |
-| `combined_min_q <= 0.01` | pass for `δοξα` | Both rows are `0.000999` |
+| Exact-center base-term surface context | pass for `δοξα` (doxa; English: glory) | `δοξάζηται` (doxazetai; English: may be glorified) in both Greek NT texts |
+| Exact extension-key overlap in TR_NT and SBLGNT | pass for `δοξα` (doxa; English: glory) | Same key in both texts |
+| `combined_min_q <= 0.01` | pass for `δοξα` (doxa; English: glory) | Both rows are `0.000999` |
 | Saved examples and letter paths | pass | Examples and letter paths generated |
 | Full phrase location reported | pass | Hidden-path only in hit passage |
 | Warning flags reported | pass | Short base term and low random same-type variance |
@@ -146,7 +146,7 @@ Letter paths are saved in:
 ## Interpretation
 
 This broader locked cohort did not produce a new result beyond the already-known
-`δοξα` row. It strengthens the practical conclusion that `δοξα` is the only
+`δοξα` (doxa; English: glory) row. It strengthens the practical conclusion that `δοξα` (doxa; English: glory) is the only
 current exact-center cross-text Greek NT extension row worth continued review.
 
 It still does not support:
@@ -158,16 +158,16 @@ It still does not support:
 
 Current status:
 
-- `δοξα`: `controlled_review_candidate`
-- `αιμα`: source-only hold
-- `υιος`: source-only hold
+- `δοξα` (doxa; English: glory): `controlled_review_candidate`
+- `αιμα` (haima; English: blood): source-only hold
+- `υιος` (huios; English: son): source-only hold
 
 ## Next Step
 
 The next useful work is not more Greek exact-center screening. Better options:
 
 - add independent Greek NT sources before rerunning the same locked cohort;
-- build a source-only SBLGNT study for `αιμα` and `υιος`, explicitly registered
+- build a source-only SBLGNT study for `αιμα` (haima; English: blood) and `υιος` (huios; English: son), explicitly registered
   as source-specific before controls;
 - for future reports, use `--require-control-row` with the context-review script
   when the review sheet should include only rows present in the control summary.

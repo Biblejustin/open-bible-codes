@@ -41,28 +41,28 @@ Prerequisite local outputs came from `protocols/greek_exact_center_cohort.toml`.
 
 | Term | Center | Extension | Matched phrase ref | Score | Term-any p | Random-any p | Combined p | Combined q | Flags |
 | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| `αιμα` | Rev 17:6 | `ναιμανο` | Luke 4:27 | 3311 | 0.080919 | 0.000999 | 0.000999 | 0.000999 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
-| `υιος` | Luke 19:9 | `ουουιοσ` | Matt 17:9; Matt 26:24; Mark 14:21; John 4:46 | 3214 | 0.032967 | 0.002997 | 0.000999 | 0.000999 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
+| `αιμα` (haima; English: blood) | Rev 17:6 | `ναιμανο` (naimano; English: hidden extension form from haima) | Luke 4:27 | 3311 | 0.080919 | 0.000999 | 0.000999 | 0.000999 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
+| `υιος` (huios; English: son) | Luke 19:9 | `ουουιοσ` (ouhuios; English: hidden extension form from huios) | Matt 17:9; Matt 26:24; Mark 14:21; John 4:46 | 3214 | 0.032967 | 0.002997 | 0.000999 | 0.000999 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
 
 Both rows stayed at the 1000/1000 control floor.
 
 ## Context Read
 
-`αιμα`:
+`αιμα` (haima; English: blood):
 
 - center passage: Rev 17:6
-- exact-center surface context: `αἵματος` appears in the center/hit passage
-- hidden extension sequence: `ναιμανο`
-- matched phrase: `Ναιμὰν ὁ`
+- exact-center surface context: `αἵματος` (haimatos; English: of blood) appears in the center/hit passage
+- hidden extension sequence: `ναιμανο` (naimano; English: hidden extension form from haima)
+- matched phrase: `Ναιμὰν ὁ` (Naiman ho; English: Naaman the)
 - matched phrase reference: Luke 4:27
 - full matched phrase is not surface text in the Rev 17:5-6 hit/extension span
 
-`υιος`:
+`υιος` (huios; English: son):
 
 - center passage: Luke 19:9
-- exact-center surface context: `υἱὸς` appears in Luke 19:9-10
-- hidden extension sequence: `ουουιοσ`
-- matched phrase: `οὗ ὁ υἱὸς`
+- exact-center surface context: `υἱὸς` (huios; English: son) appears in Luke 19:9-10
+- hidden extension sequence: `ουουιοσ` (ouhuios; English: hidden extension form from huios)
+- matched phrase: `οὗ ὁ υἱὸς` (hou ho huios; English: of whom the son)
 - matched phrase references: Matt 17:9; Matt 26:24; Mark 14:21; John 4:46
 - full matched phrase is not surface text in the Luke 19:8-10 hit/extension span
 
@@ -72,7 +72,7 @@ Letter paths are saved in:
 
 ## Preregistration Check
 
-| Criterion | `αιμα` | `υιος` | Note |
+| Criterion | `αιμα` (haima; English: blood) | `υιος` (huios; English: son) | Note |
 | --- | --- | --- | --- |
 | Registered row present | pass | pass | Both rows found |
 | Exact-center surface context | pass | pass | Both center passages contain the base term as surface text |

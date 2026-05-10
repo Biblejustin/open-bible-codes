@@ -30,7 +30,7 @@ Step timings:
 | Field | Value |
 | --- | --- |
 | Corpus | BYZ_NT |
-| Registered row | `υιοσ|-46|backward|before_plus_term|ειουιοσ|ειουιοσ` |
+| Registered row | `υιοσ|-46|backward|before_plus_term|ειουιοσ|ειουιοσ` (base: `υιος` (huios; English: son); extension: `ειουιοσ` (eiouios; English: hidden extension form from huios)) |
 | Control samples | 1000 shuffled-term; 1000 same-length random |
 | P-value floor | `0.000999` |
 | Cross-text requirement | not part of this source-only follow-up |
@@ -42,19 +42,19 @@ Prerequisite local outputs came from
 
 | Term | Center | Extension | Matched phrase refs | Score | Term-any p | Random-any p | Combined p | Combined q | Flags |
 | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| `υιος` | Acts 16:1 | `ειουιοσ` | Mark 1:11; Mark 3:11; Luke 3:22; Luke 22:70; John 1:49 | 3215 | 0.043956 | 0.004995 | 0.000999 | 0.000999 | `extension_min_p_adjusted;short_base_term` |
+| `υιος` (huios; English: son) | Acts 16:1 | `ειουιοσ` (eiouios; English: hidden extension form from huios) | Mark 1:11; Mark 3:11; Luke 3:22; Luke 22:70; John 1:49 | 3215 | 0.043956 | 0.004995 | 0.000999 | 0.000999 | `extension_min_p_adjusted;short_base_term` |
 
 The row stayed at the 1000/1000 control floor.
 
 ## Context Read
 
-`υιος`:
+`υιος` (huios; English: son):
 
 - center passage: Acts 16:1;
-- exact-center surface context: `υιοσ` appears in Acts 16:1;
+- exact-center surface context: `υιοσ` (huios; English: son) appears in Acts 16:1;
 - hit span: Acts 15:41 through Acts 16:2;
-- hidden extension sequence: `ειουιοσ`;
-- matched phrase: `εἶ ὁ υἱός` / `ει ο υιοσ`;
+- hidden extension sequence: `ειουιοσ` (eiouios; English: hidden extension form from huios);
+- matched phrase: `εἶ ὁ υἱός` (ei ho huios; English: you are the son) / `ει ο υιοσ` (ei ho huios; English: you are the son);
 - matched phrase references: Mark 1:11; Mark 3:11; Luke 3:22; Luke 22:70;
   John 1:49;
 - full matched phrase is not surface text in the Acts 15:41-16:3
@@ -68,8 +68,8 @@ Letter paths are saved in:
 
 | Criterion | Result | Note |
 | --- | --- | --- |
-| Registered row present | pass | BYZ_NT `υιος|-46` row found |
-| Exact-center surface context | pass | Acts 16:1 contains `υιοσ` as surface text |
+| Registered row present | pass | BYZ_NT `υιος|-46` (huios; English: son, skip -46) row found |
+| Exact-center surface context | pass | Acts 16:1 contains `υιοσ` (huios; English: son) as surface text |
 | `combined_min_q <= 0.01` | pass | q = `0.000999` |
 | Examples and letter paths generated | pass | Generated in local ignored reports |
 | Full phrase location reported | pass | Hidden-path only in the hit/extension span |

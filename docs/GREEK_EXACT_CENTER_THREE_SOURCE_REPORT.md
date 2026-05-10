@@ -82,18 +82,18 @@ Two exact extension keys survived the locked BYZ-overlap filters.
 
 | Key | Corpora | Center | Matched phrase refs | Best q | Status |
 | --- | --- | --- | --- | ---: | --- |
-| `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` | BYZ_NT, SBLGNT, TR_NT | 2 Thessalonians 3:1 | John 1:14 / JHN 1:14 | 0.001249 | all-three controlled review candidate |
-| `υιοσ|25|forward|before_plus_term|ουουιοσ|ουουιοσ` | BYZ_NT, SBLGNT | Luke 19:9 | Matt 17:9; Matt 26:24; Mark 14:21; John 4:46 | 0.001249 | BYZ/SBLGNT controlled review candidate |
+| `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` (base: `δοξα` (doxa; English: glory); extension: `δοξανωσ` (doxanos; English: hidden extension form from doxa)) | BYZ_NT, SBLGNT, TR_NT | 2 Thessalonians 3:1 | John 1:14 / JHN 1:14 | 0.001249 | all-three controlled review candidate |
+| `υιοσ|25|forward|before_plus_term|ουουιοσ|ουουιοσ` (base: `υιος` (huios; English: son); extension: `ουουιοσ` (ouhuios; English: hidden extension form from huios)) | BYZ_NT, SBLGNT | Luke 19:9 | Matt 17:9; Matt 26:24; Mark 14:21; John 4:46 | 0.001249 | BYZ/SBLGNT controlled review candidate |
 
 Row-level controls:
 
 | Corpus | Term | Extension | Overlap corpora | Score | Term-any p | Random-any p | Combined p | Combined q | Flags |
 | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| BYZ_NT | `δοξα` | `δοξανωσ` | BYZ_NT,SBLGNT,TR_NT | 3211 | 0.037962 | 0.001998 | 0.000999 | 0.001249 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
-| SBLGNT | `δοξα` | `δοξανωσ` | BYZ_NT,SBLGNT,TR_NT | 3211 | 0.038961 | 0.002997 | 0.000999 | 0.001249 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
-| TR_NT | `δοξα` | `δοξανωσ` | BYZ_NT,SBLGNT,TR_NT | 3211 | 0.041958 | 0.007992 | 0.000999 | 0.001249 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
-| BYZ_NT | `υιοσ` | `ουουιοσ` | BYZ_NT,SBLGNT | 3214 | 0.047952 | 0.001998 | 0.001998 | 0.001998 | `extension_min_p_adjusted;short_base_term` |
-| SBLGNT | `υιοσ` | `ουουιοσ` | BYZ_NT,SBLGNT | 3214 | 0.032967 | 0.002997 | 0.000999 | 0.001249 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
+| BYZ_NT | `δοξα` (doxa; English: glory) | `δοξανωσ` (doxanos; English: hidden extension form from doxa) | BYZ_NT,SBLGNT,TR_NT | 3211 | 0.037962 | 0.001998 | 0.000999 | 0.001249 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
+| SBLGNT | `δοξα` (doxa; English: glory) | `δοξανωσ` (doxanos; English: hidden extension form from doxa) | BYZ_NT,SBLGNT,TR_NT | 3211 | 0.038961 | 0.002997 | 0.000999 | 0.001249 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
+| TR_NT | `δοξα` (doxa; English: glory) | `δοξανωσ` (doxanos; English: hidden extension form from doxa) | BYZ_NT,SBLGNT,TR_NT | 3211 | 0.041958 | 0.007992 | 0.000999 | 0.001249 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
+| BYZ_NT | `υιοσ` (huios; English: son) | `ουουιοσ` (ouhuios; English: hidden extension form from huios) | BYZ_NT,SBLGNT | 3214 | 0.047952 | 0.001998 | 0.001998 | 0.001998 | `extension_min_p_adjusted;short_base_term` |
+| SBLGNT | `υιοσ` (huios; English: son) | `ουουιοσ` (ouhuios; English: hidden extension form from huios) | BYZ_NT,SBLGNT | 3214 | 0.032967 | 0.002997 | 0.000999 | 0.001249 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
 
 ## Version Presence View
 
@@ -110,10 +110,10 @@ Exact-center top-pattern distribution:
 
 | Pattern | Present | Missing | Read |
 | --- | --- | --- | --- |
-| `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` | TR_NT, BYZ_NT, SBLGNT | none | all-source pattern |
-| `υιοσ|25|forward|before_plus_term|ουουιοσ|ουουιοσ` | BYZ_NT, SBLGNT | TR_NT | multi-source pattern |
-| `αιμα|14|forward|before_plus_term_plus_after|ναιμανο|ναιμανο` | SBLGNT | TR_NT, BYZ_NT | source-specific pattern |
-| `υιοσ|-46|backward|before_plus_term|ειουιοσ|ειουιοσ` | BYZ_NT | TR_NT, SBLGNT | source-specific pattern |
+| `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` (base: `δοξα` (doxa; English: glory); extension: `δοξανωσ` (doxanos; English: hidden extension form from doxa)) | TR_NT, BYZ_NT, SBLGNT | none | all-source pattern |
+| `υιοσ|25|forward|before_plus_term|ουουιοσ|ουουιοσ` (base: `υιος` (huios; English: son); extension: `ουουιοσ` (ouhuios; English: hidden extension form from huios)) | BYZ_NT, SBLGNT | TR_NT | multi-source pattern |
+| `αιμα|14|forward|before_plus_term_plus_after|ναιμανο|ναιμανο` (base: `αιμα` (haima; English: blood); extension: `ναιμανο` (naimano; English: hidden extension form from haima)) | SBLGNT | TR_NT, BYZ_NT | source-specific pattern |
+| `υιοσ|-46|backward|before_plus_term|ειουιοσ|ειουιοσ` (base: `υιος` (huios; English: son); extension: `ειουιοσ` (eiouios; English: hidden extension form from huios)) | BYZ_NT | TR_NT, SBLGNT | source-specific pattern |
 
 This matrix is not a control result. It preserves version-specific rows for
 later review instead of discarding them because they are absent from another
@@ -129,19 +129,19 @@ For every controlled row:
 - the ELS path and surface phrase should therefore be described as hidden-path
   review material, not as a surface phrase in the hit passage.
 
-`δοξα`:
+`δοξα` (doxa; English: glory):
 
 - center: 2 Thessalonians 3:1 in all three Greek NT texts;
-- center surface context: `δοξάζηται`;
-- ELS extension: `δοξανωσ`;
-- matched phrase: `δόξαν ὡς` / `δοξαν ωσ` at John 1:14.
+- center surface context: `δοξάζηται` (doxazetai; English: may be glorified);
+- ELS extension: `δοξανωσ` (doxanos; English: hidden extension form from doxa);
+- matched phrase: `δόξαν ὡς` (doxan hos; English: glory as) / `δοξαν ωσ` (doxan hos; English: glory as) at John 1:14.
 
-`υιοσ`:
+`υιοσ` (huios; English: son):
 
 - center: Luke 19:9 in BYZ_NT and SBLGNT;
-- center surface context: `υἱὸς` / `υιοσ`;
-- ELS extension: `ουουιοσ`;
-- matched phrase: `οὗ ὁ υἱὸς` / `ου ο υιοσ` at Matthew 17:9, Matthew 26:24,
+- center surface context: `υἱὸς` (huios; English: son) / `υιοσ` (huios; English: son);
+- ELS extension: `ουουιοσ` (ouhuios; English: hidden extension form from huios);
+- matched phrase: `οὗ ὁ υἱὸς` (hou ho huios; English: of whom the son) / `ου ο υιοσ` (hou ho huios; English: of whom the son) at Matthew 17:9, Matthew 26:24,
   Mark 14:21, and John 4:46.
 
 Letter paths are saved in:
@@ -153,7 +153,7 @@ Letter paths are saved in:
 | Criterion | Result | Note |
 | --- | --- | --- |
 | Exact-center base-term surface context | pass | all five controlled rows |
-| Exact extension-key overlap includes BYZ_NT | pass | `δοξα` all three; `υιοσ` BYZ_NT + SBLGNT |
+| Exact extension-key overlap includes BYZ_NT | pass | `δοξα` (doxa; English: glory) all three; `υιοσ` (huios; English: son) BYZ_NT + SBLGNT |
 | `combined_min_q <= 0.01` | pass | all five rows |
 | Saved examples and letter paths | pass | generated |
 | Full phrase location reported | pass | hidden-path only in hit/extension span |
@@ -164,11 +164,11 @@ Letter paths are saved in:
 
 The independent Byzantine source changes the review queue:
 
-- `δοξα` is no longer only a TR_NT/SBLGNT overlap; it appears by the same exact
+- `δοξα` (doxa; English: glory) is no longer only a TR_NT/SBLGNT overlap; it appears by the same exact
   extension key in BYZ_NT too.
-- `υιοσ`, previously SBLGNT-only in the two-source cohort, now has BYZ_NT +
+- `υιοσ` (huios; English: son), previously SBLGNT-only in the two-source cohort, now has BYZ_NT +
   SBLGNT support under the locked filters.
-- `αιμα` remains source-only under this three-source exact-extension-key test.
+- `αιμα` (haima; English: blood) remains source-only under this three-source exact-extension-key test.
 
 This still does not support:
 
@@ -179,9 +179,9 @@ This still does not support:
 
 Current status:
 
-- `δοξα`: all-three controlled review candidate
-- `υιοσ`: BYZ/SBLGNT controlled review candidate
-- `αιμα`: source-only hold
+- `δοξα` (doxa; English: glory): all-three controlled review candidate
+- `υιοσ` (huios; English: son): BYZ/SBLGNT controlled review candidate
+- `αιμα` (haima; English: blood): source-only hold
 
 The next useful step is manual review and stronger baseline framing for these
 two keys, not broader unregistered term expansion.
@@ -195,7 +195,7 @@ Summary:
 
 - every target row had at least one any-type synthetic row match or exceed its
   score;
-- BYZ_NT `υιος` and SBLGNT `δοξα` also had same-type synthetic rows match or
+- BYZ_NT `υιος` (huios; English: son) and SBLGNT `δοξα` (doxa; English: glory) also had same-type synthetic rows match or
   exceed their score;
 - no synthetic matched phrase appeared as surface text in its extension span;
 - most synthetic matches were hidden-path only in their hit passage.

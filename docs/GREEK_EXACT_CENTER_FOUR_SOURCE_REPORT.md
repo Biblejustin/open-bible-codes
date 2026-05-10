@@ -86,16 +86,16 @@ One exact extension key survived the locked TCG-overlap filters.
 
 | Key | Corpora | Center | Matched phrase refs | Best q | Status |
 | --- | --- | --- | --- | ---: | --- |
-| `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` | BYZ_NT, SBLGNT, TCG_NT, TR_NT | 2 Thessalonians 3:1 | John 1:14 / JHN 1:14 | 0.001332 | four-source controlled review candidate |
+| `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` (base: `δοξα` (doxa; English: glory); extension: `δοξανωσ` (doxanos; English: hidden extension form from doxa)) | BYZ_NT, SBLGNT, TCG_NT, TR_NT | 2 Thessalonians 3:1 | John 1:14 / JHN 1:14 | 0.001332 | four-source controlled review candidate |
 
 Row-level controls:
 
 | Corpus | Term | Extension | Overlap corpora | Score | Term-any p | Random-any p | Combined p | Combined q | Flags |
 | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| BYZ_NT | `δοξα` | `δοξανωσ` | BYZ_NT,SBLGNT,TCG_NT,TR_NT | 3211 | 0.037962 | 0.001998 | 0.000999 | 0.001332 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
-| SBLGNT | `δοξα` | `δοξανωσ` | BYZ_NT,SBLGNT,TCG_NT,TR_NT | 3211 | 0.038961 | 0.002997 | 0.000999 | 0.001332 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
-| TR_NT | `δοξα` | `δοξανωσ` | BYZ_NT,SBLGNT,TCG_NT,TR_NT | 3211 | 0.041958 | 0.007992 | 0.000999 | 0.001332 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
-| TCG_NT | `δοξα` | `δοξανωσ` | BYZ_NT,SBLGNT,TCG_NT,TR_NT | 3211 | 0.047952 | 0.002997 | 0.001998 | 0.001998 | `extension_min_p_adjusted;short_base_term` |
+| BYZ_NT | `δοξα` (doxa; English: glory) | `δοξανωσ` (doxanos; English: hidden extension form from doxa) | BYZ_NT,SBLGNT,TCG_NT,TR_NT | 3211 | 0.037962 | 0.001998 | 0.000999 | 0.001332 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
+| SBLGNT | `δοξα` (doxa; English: glory) | `δοξανωσ` (doxanos; English: hidden extension form from doxa) | BYZ_NT,SBLGNT,TCG_NT,TR_NT | 3211 | 0.038961 | 0.002997 | 0.000999 | 0.001332 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
+| TR_NT | `δοξα` (doxa; English: glory) | `δοξανωσ` (doxanos; English: hidden extension form from doxa) | BYZ_NT,SBLGNT,TCG_NT,TR_NT | 3211 | 0.041958 | 0.007992 | 0.000999 | 0.001332 | `extension_min_p_adjusted;low_random_same_type_variance;short_base_term` |
+| TCG_NT | `δοξα` (doxa; English: glory) | `δοξανωσ` (doxanos; English: hidden extension form from doxa) | BYZ_NT,SBLGNT,TCG_NT,TR_NT | 3211 | 0.047952 | 0.002997 | 0.001998 | 0.001998 | `extension_min_p_adjusted;short_base_term` |
 
 ## Version Presence View
 
@@ -120,10 +120,10 @@ Exact-center top-pattern distribution:
 
 | Pattern | Present | Missing | Read |
 | --- | --- | --- | --- |
-| `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` | TR_NT, BYZ_NT, TCG_NT, SBLGNT | none | all-source pattern |
-| `υιοσ|25|forward|before_plus_term|ουουιοσ|ουουιοσ` | BYZ_NT, SBLGNT | TR_NT, TCG_NT | multi-source pattern |
-| `αιμα|14|forward|before_plus_term_plus_after|ναιμανο|ναιμανο` | SBLGNT | TR_NT, BYZ_NT, TCG_NT | source-specific pattern |
-| `υιοσ|-46|backward|before_plus_term|ειουιοσ|ειουιοσ` | BYZ_NT | TR_NT, TCG_NT, SBLGNT | source-specific pattern |
+| `δοξα|21|forward|term_plus_after|δοξανωσ|δοξανωσ` (base: `δοξα` (doxa; English: glory); extension: `δοξανωσ` (doxanos; English: hidden extension form from doxa)) | TR_NT, BYZ_NT, TCG_NT, SBLGNT | none | all-source pattern |
+| `υιοσ|25|forward|before_plus_term|ουουιοσ|ουουιοσ` (base: `υιος` (huios; English: son); extension: `ουουιοσ` (ouhuios; English: hidden extension form from huios)) | BYZ_NT, SBLGNT | TR_NT, TCG_NT | multi-source pattern |
+| `αιμα|14|forward|before_plus_term_plus_after|ναιμανο|ναιμανο` (base: `αιμα` (haima; English: blood); extension: `ναιμανο` (naimano; English: hidden extension form from haima)) | SBLGNT | TR_NT, BYZ_NT, TCG_NT | source-specific pattern |
+| `υιοσ|-46|backward|before_plus_term|ειουιοσ|ειουιοσ` (base: `υιος` (huios; English: son); extension: `ειουιοσ` (eiouios; English: hidden extension form from huios)) | BYZ_NT | TR_NT, TCG_NT, SBLGNT | source-specific pattern |
 
 This matrix is not a control result. It is a source-distribution view for
 deciding which version-specific rows deserve later review.
@@ -138,12 +138,12 @@ For every controlled row:
 - the ELS path and surface phrase should therefore be described as hidden-path
   review material, not as a surface phrase in the hit passage.
 
-`δοξα`:
+`δοξα` (doxa; English: glory):
 
 - center: 2 Thessalonians 3:1 in all four Greek NT texts;
-- center surface context: `δοξάζηται`;
-- ELS extension: `δοξανωσ`;
-- matched phrase: `δόξαν ὡς` / `δοξαν ωσ` at John 1:14.
+- center surface context: `δοξάζηται` (doxazetai; English: may be glorified);
+- ELS extension: `δοξανωσ` (doxanos; English: hidden extension form from doxa);
+- matched phrase: `δόξαν ὡς` (doxan hos; English: glory as) / `δοξαν ωσ` (doxan hos; English: glory as) at John 1:14.
 
 Letter paths are saved in:
 
@@ -154,7 +154,7 @@ Letter paths are saved in:
 | Criterion | Result | Note |
 | --- | --- | --- |
 | Exact-center base-term surface context | pass | all four controlled rows |
-| Exact extension-key overlap includes TCG_NT | pass | `δοξα` shared by all four sources |
+| Exact extension-key overlap includes TCG_NT | pass | `δοξα` (doxa; English: glory) shared by all four sources |
 | `combined_min_q <= 0.01` | pass | all four rows |
 | Saved examples and letter paths | pass | generated |
 | Full phrase location reported | pass | hidden-path only in hit/extension span |
@@ -163,12 +163,12 @@ Letter paths are saved in:
 
 ## Interpretation
 
-Adding TCG_NT leaves the earlier `δοξα` row in the review queue and strengthens
+Adding TCG_NT leaves the earlier `δοξα` (doxa; English: glory) row in the review queue and strengthens
 its cross-source footprint: the exact same key appears in TR_NT, BYZ_NT,
 TCG_NT, and SBLGNT.
 
-The added source does not carry forward the earlier `υιοσ` row under this
-locked TCG-overlap test. Under the four-source protocol, `υιοσ` is not a
+The added source does not carry forward the earlier `υιοσ` (huios; English: son) row under this
+locked TCG-overlap test. Under the four-source protocol, `υιοσ` (huios; English: son) is not a
 TCG-overlap controlled row.
 
 This still does not support:
@@ -180,9 +180,9 @@ This still does not support:
 
 Current status:
 
-- `δοξα`: four-source controlled review candidate
-- `υιοσ`: prior BYZ/SBLGNT candidate only; no TCG-overlap promotion here
-- `αιμα`: source-only hold
+- `δοξα` (doxa; English: glory): four-source controlled review candidate
+- `υιοσ` (huios; English: son): prior BYZ/SBLGNT candidate only; no TCG-overlap promotion here
+- `αιμα` (haima; English: blood): source-only hold
 
 The next useful step is either a broader Greek screening run using the expanded
-term lists or a stricter surface-phrase gate for this one `δοξα` key.
+term lists or a stricter surface-phrase gate for this one `δοξα` (doxa; English: glory) key.
