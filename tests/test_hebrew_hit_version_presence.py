@@ -18,6 +18,7 @@ from scripts.analyze_hebrew_hit_version_presence import (
     resolve_corpus_jobs,
     term_read,
     term_summary_rows,
+    write_markdown,
 )
 
 
@@ -228,6 +229,60 @@ class HebrewHitVersionPresenceTests(unittest.TestCase):
         self.assertEqual(observed, {"term": {"FIRST", "SECOND"}})
         self.assertEqual(normalized, {"term": "אב"})
         self.assertEqual(sorted(metadata), ["FIRST", "SECOND"])
+
+    def test_write_markdown_displays_original_language_terms(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "presence.md"
+            pattern_rows = [
+                {
+                    "term_id": "trump_h",
+                    "concept": "Trump",
+                    "normalized_term": "טראמפ",
+                    "skip": "2",
+                    "start_ref": "Gen 1:1",
+                    "center_ref": "Gen 1:1",
+                    "end_ref": "Gen 1:1",
+                    "present_corpora": "A,B",
+                    "absent_corpora": "",
+                    "presence_scope": "present_all_observed_sources",
+                    "read": "stable",
+                }
+            ]
+            summary_rows = [
+                {
+                    "term_id": "trump_h",
+                    "concept": "Trump",
+                    "normalized_term": "טראמפ",
+                    "hit_counts_by_corpus": "A:1;B:1",
+                    "unique_patterns": "1",
+                    "all_observed_patterns": "1",
+                    "all_leningrad_patterns": "0",
+                    "multi_source_patterns": "0",
+                    "source_specific_patterns": "0",
+                    "total_hits": "2",
+                    "read": "stable",
+                }
+            ]
+            write_markdown(
+                out,
+                pattern_rows,
+                summary_rows,
+                Namespace(
+                    report_title="Presence",
+                    min_skip=2,
+                    max_skip=100,
+                    direction="both",
+                    min_term_length=4,
+                    max_hits_per_term=200,
+                    language="hebrew",
+                    terms=[],
+                    stable_family_name="Leningrad",
+                ),
+            )
+
+            text = out.read_text(encoding="utf-8")
+
+        self.assertIn("`טראמפ` (trmp; English: Trump)", text)
 
 
 def sample_corpus() -> Corpus:

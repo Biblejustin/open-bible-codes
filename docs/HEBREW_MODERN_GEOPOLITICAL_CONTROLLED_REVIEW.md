@@ -8,19 +8,19 @@ It is a screening report, not a significance claim.
 
 | Metric | Rows |
 | --- | ---: |
-| Target rows | 73 |
-| Rows with all-source exact patterns | 52 |
-| Rows absent or unsummarized | 18 |
+| Target rows | 87 |
+| Rows with all-source exact patterns | 53 |
+| Rows absent or unsummarized | 31 |
 | Rows with paired controls | 0 |
-| Rows with representative controls | 54 |
-| Representative control target rows | 108 |
+| Rows with representative controls | 55 |
+| Representative control target rows | 110 |
 | Rows with strong plus-term extension tops | 0 |
 
 ## Current Read
 
-Representative paired controls are available for 54 rows. 50 rows are not unusual under those controls; 4 rows only clear an uncorrected p<=0.05 screen; 0 rows have adjusted representative-control support.
+Representative paired controls are available for 55 rows. 51 rows are not unusual under those controls; 4 rows only clear an uncorrected p<=0.05 screen; 0 rows have adjusted representative-control support.
 Use the uncorrected rows as review prompts only. They did not survive the row-family correction in this generated table.
-No exact patterns were found in the capped exact-version matrix for: `catering_h`, `coalition_h`, `confederacy_h`, `cowboy_catering_h`, `donald_trump_h`, `european_union_h`, `oct_7_text_h`, `palestine_h`, `pope_h`, `saudi_arabia_h`, `simsberry_h`, `simscorner_h`, `ukraine_h`, `united_nations_h`, `united_states_america_h`, `united_states_h`, `washington_h`, `zelensky_h`.
+No exact patterns were found in the capped exact-version matrix for: `ariel_sharon_pm_h`, `benjamin_netanyahu_pm_h`, `catering_h`, `coalition_h`, `confederacy_h`, `cowboy_catering_h`, `david_ben_gurion_h`, `donald_trump_h`, `ehud_barak_pm_h`, `ehud_olmert_pm_h`, `european_union_h`, `golda_meir_h`, `levi_eshkol_h`, `menachem_begin_h`, `naftali_bennett_h`, `oct_7_text_h`, `palestine_h`, `pope_h`, `saudi_arabia_h`, `shimon_peres_pm_h`, `simsberry_h`, `simscorner_h`, `ukraine_h`, `united_nations_h`, `united_states_america_h`, `united_states_h`, `washington_h`, `yair_lapid_h`, `yitzhak_rabin_pm_h`, `yitzhak_shamir_h`, `zelensky_h`.
 
 ## Rows
 
@@ -69,6 +69,7 @@ No exact patterns were found in the capped exact-version matrix for: `catering_h
 | hebrew | Hebrew year 5784 | `year_5784_jewish_h` | `התשפד` (htshpd; English: Hebrew year 5784) | 136 | 21 | 7 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
 | hebrew | Europe | `europe_h` | `אירופה` (yrwph; English: Europe) | 105 | 10 | 10 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
 | hebrew | Korea | `korea_h` | `קוריאה` (qwryh; English: Korea) | 82 | 9 | 6 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
+| hebrew | Moshe Sharett | `moshe_sharett_h` | `משהשרת` (mshhshrt; English: Moshe Sharett) | 86 | 13 | 4 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
 | hebrew | Vaccine | `vaccine_h` | `חיסונ` (chyswn; English: Vaccine) | 85 | 11 | 8 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
 | hebrew | America | `america_h` | `אמריקה` (mryqh; English: America) | 59 | 6 | 5 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
 | hebrew | Cowboy | `cowboy_h` | `קאובוי` (qwbwy; English: Cowboy) | 62 | 8 | 7 | not run in targeted paired controls | not_unusual | 1 | version-stable where present, but representative controls do not support a claim |
@@ -81,16 +82,26 @@ No exact patterns were found in the capped exact-version matrix for: `catering_h
 | hebrew | Moscow | `moscow_h` | `מוסקבה` (mwsqbh; English: Moscow) | 6 | 1 | 1 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
 | hebrew | Turkey | `turkey_h` | `טורקיה` (twrqyh; English: Turkey) | 5 | 1 | 0 | not run in targeted paired controls | not_unusual | 0 | version-stable where present, but representative controls do not support a claim |
 | hebrew | Gregorian 2024 additive | `2024_additive_h` | `תתתתתכד` (tttttkd; English: Gregorian 2024 additive) | 1 | 0 | 1 | not run in targeted paired controls | not run in representative paired controls | 0 | source-specific exact rows only; needs controls and context before interpretation |
+| hebrew | Ariel Sharon | `ariel_sharon_pm_h` | `אריאלשרונ` (rylshrwn; English: Ariel Sharon) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
+| hebrew | Benjamin Netanyahu | `benjamin_netanyahu_pm_h` | `בנימיננתניהו` (bnymynntnyhw; English: Benjamin Netanyahu) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 | hebrew | Catering | `catering_h` | `קייטרינג` (qyytryng; English: Catering) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 | hebrew | Coalition | `coalition_h` | `קואליציה` (qwlytsyh; English: Coalition) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 | hebrew | Confederacy | `confederacy_h` | `קונפדרציה` (qwnpdrtsyh; English: Confederacy) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 | hebrew | Cowboy Catering | `cowboy_catering_h` | `קאובויקייטרינג` (qwbwyqyytryng; English: Cowboy Catering) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
+| hebrew | David Ben-Gurion | `david_ben_gurion_h` | `דודבנגוריונ` (dwdbngwrywn; English: David Ben-Gurion) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 | hebrew | Donald Trump | `donald_trump_h` | `דונלדטראמפ` (dwnldtrmp; English: Donald Trump) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
+| hebrew | Ehud Barak | `ehud_barak_pm_h` | `אהודברק` (hwdbrq; English: Ehud Barak) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
+| hebrew | Ehud Olmert | `ehud_olmert_pm_h` | `אהודאולמרט` (hwdwlmrt; English: Ehud Olmert) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 | hebrew | European Union | `european_union_h` | `האיחודהאירופי` (hychwdhyrwpy; English: European Union) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
+| hebrew | Golda Meir | `golda_meir_h` | `גולדהמאיר` (gwldhmyr; English: Golda Meir) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
+| hebrew | Levi Eshkol | `levi_eshkol_h` | `לויאשכול` (lwyshkwl; English: Levi Eshkol) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
+| hebrew | Menachem Begin | `menachem_begin_h` | `מנחמבגינ` (mnchmbgyn; English: Menachem Begin) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
+| hebrew | Naftali Bennett | `naftali_bennett_h` | `נפתליבנט` (nptlybnt; English: Naftali Bennett) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 | hebrew | October 7 | `oct_7_text_h` | `שבעהבאוקטובר` (shbhbwqtwbr; English: October 7) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 | hebrew | Palestine | `palestine_h` | `פלסטינ` (plstyn; English: Palestine) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 | hebrew | Pope | `pope_h` | `אפיפיור` (pypywr; English: Pope) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 | hebrew | Saudi Arabia | `saudi_arabia_h` | `ערבהסעודית` (rbhswdyt; English: Saudi Arabia) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
+| hebrew | Shimon Peres | `shimon_peres_pm_h` | `שמעונפרס` (shmwnprs; English: Shimon Peres) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 | hebrew | Simsberry | `simsberry_h` | `סימסברי` (symsbry; English: Simsberry) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 | hebrew | Simscorner | `simscorner_h` | `סימסקורנר` (symsqwrnr; English: Simscorner) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 | hebrew | Ukraine | `ukraine_h` | `אוקראינה` (wqrynh; English: Ukraine) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
@@ -98,6 +109,9 @@ No exact patterns were found in the capped exact-version matrix for: `catering_h
 | hebrew | United States Of America | `united_states_america_h` | `ארצותהבריתשלאמריקה` (rtswthbrytshlmryqh; English: United States Of America) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 | hebrew | United States | `united_states_h` | `ארצותהברית` (rtswthbryt; English: United States) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 | hebrew | Washington | `washington_h` | `וושינגטונ` (wwshyngtwn; English: Washington) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
+| hebrew | Yair Lapid | `yair_lapid_h` | `יאירלפיד` (yyrlpyd; English: Yair Lapid) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
+| hebrew | Yitzhak Rabin | `yitzhak_rabin_pm_h` | `יצחקרבינ` (ytschqrbyn; English: Yitzhak Rabin) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
+| hebrew | Yitzhak Shamir | `yitzhak_shamir_h` | `יצחקשמיר` (ytschqshmyr; English: Yitzhak Shamir) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 | hebrew | Zelensky | `zelensky_h` | `זלנסקי` (zlnsqy; English: Zelensky) | 0 | 0 | 0 | not run in targeted paired controls | not run in representative paired controls | 0 | absent or unsummarized in exact-version matrix |
 
 ## Exact Pattern Examples

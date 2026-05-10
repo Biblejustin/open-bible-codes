@@ -10,6 +10,7 @@ description = "Compare exact modern/local Hebrew hit ref-key patterns across MT_
 argv = ["-m", "scripts.analyze_hebrew_hit_version_presence", "--corpus-jobs", "0"]
 inputs = [
   "scripts/analyze_hebrew_hit_version_presence.py",
+  "els/term_display.py",
   "terms/modern_names_dates.csv",
   "configs/example_oshb_wlc.toml",
   "configs/example_uxlc.toml",

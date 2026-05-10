@@ -66,6 +66,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_hebrew_hit_version_presence.py",
+  "els/term_display.py",
   "terms/modern_names_dates.csv",
   "terms/prophetic_terms.csv",
   "configs/example_oshb_wlc.toml",
@@ -140,6 +141,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_hebrew_hit_version_presence.py",
+  "els/term_display.py",
   "terms/modern_names_dates.csv",
   "terms/prophetic_terms.csv",
   "configs/example_ebible_grclxx.toml",

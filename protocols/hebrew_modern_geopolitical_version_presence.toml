@@ -28,6 +28,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_hebrew_hit_version_presence.py",
+  "els/term_display.py",
   "terms/modern_names_dates.csv",
   "configs/example_oshb_wlc.toml",
   "configs/example_uxlc.toml",

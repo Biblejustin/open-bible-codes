@@ -44,6 +44,7 @@ argv = [
 inputs = [
   "scripts/analyze_hit_version_presence.py",
   "scripts/analyze_hebrew_hit_version_presence.py",
+  "els/term_display.py",
   "terms/greek_nt_claim_terms.csv",
   "configs/example_ebible_grctr.toml",
   "configs/example_ebible_grcmt.toml",

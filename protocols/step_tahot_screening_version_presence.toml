@@ -49,6 +49,7 @@ argv = [
 inputs = [
   "scripts/analyze_hit_version_presence.py",
   "scripts/analyze_hebrew_hit_version_presence.py",
+  "els/term_display.py",
   "terms/theological_terms.csv",
   "terms/modern_names_dates.csv",
   "terms/table_of_nations.csv",

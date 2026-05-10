@@ -31,6 +31,7 @@ argv = [
 inputs = [
   "scripts/analyze_hit_version_presence.py",
   "scripts/analyze_hebrew_hit_version_presence.py",
+  "els/term_display.py",
   "terms/null_controls.csv",
   "terms/frequency_anchors.csv",
   "configs/example_oshb_wlc.toml",

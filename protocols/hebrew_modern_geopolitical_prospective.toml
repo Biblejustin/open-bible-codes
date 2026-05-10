@@ -51,6 +51,7 @@ argv = [
 inputs = [
   "scripts/analyze_hit_version_presence.py",
   "scripts/analyze_hebrew_hit_version_presence.py",
+  "els/term_display.py",
   "terms/hebrew_modern_geopolitical_prospective_terms.csv",
   "configs/example_oshb_wlc.toml",
   "configs/example_uxlc.toml",

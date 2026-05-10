@@ -76,16 +76,16 @@ screening counts, not complete counts.
 
 | Term | Normalized | Total capped hits | Exact patterns | All-source patterns |
 | --- | --- | ---: | ---: | ---: |
-| `aram_g` | `αραμ` | 200 | 59 | 45 |
-| `god_g` | `θεοσ` | 200 | 58 | 42 |
-| `asher_g` | `ασηρ` | 200 | 61 | 41 |
-| `lasha_g` | `δασα` | 200 | 62 | 41 |
-| `amen_g` | `αμην` | 200 | 61 | 40 |
-| `lion_g` | `λεων` | 200 | 60 | 40 |
-| `hell_hades_g` | `αδησ` | 200 | 65 | 39 |
-| `seba_g` | `σαβα` | 200 | 63 | 39 |
-| `shelah_g` | `σαλα` | 200 | 64 | 39 |
-| `boils_g` | `ελκη` | 200 | 63 | 38 |
+| `aram_g` | `αραμ` (aram; English: Aram) | 200 | 59 | 45 |
+| `god_g` | `θεοσ` (theos; English: God) | 200 | 58 | 42 |
+| `asher_g` | `ασηρ` (aser; English: Asher) | 200 | 61 | 41 |
+| `lasha_g` | `δασα` (dasa; English: Lasha) | 200 | 62 | 41 |
+| `amen_g` | `αμην` (amen; English: Amen) | 200 | 61 | 40 |
+| `lion_g` | `λεων` (leon; English: Lion) | 200 | 60 | 40 |
+| `hell_hades_g` | `αδησ` (ades; English: Hades) | 200 | 65 | 39 |
+| `seba_g` | `σαβα` (saba; English: Seba) | 200 | 63 | 39 |
+| `shelah_g` | `σαλα` (sala; English: Shelah) | 200 | 64 | 39 |
+| `boils_g` | `ελκη` (elke; English: Boils) | 200 | 63 | 38 |
 
 ## Modern And Local Rows
 
@@ -93,22 +93,22 @@ Selected rows from the modern/local additions:
 
 | Term | Normalized | Total capped hits | All-source | Multi-source | Source-specific |
 | --- | --- | ---: | ---: | ---: | ---: |
-| `nato_g` | `νατο` | 200 | 38 | 10 | 22 |
-| `iran_g` | `ιραν` | 200 | 38 | 14 | 12 |
-| `russia_g` | `ρωσια` | 200 | 17 | 38 | 43 |
-| `magog_g` | `μαγωγ` | 15 | 2 | 1 | 5 |
-| `france_g` | `γαλλια` | 7 | 0 | 1 | 5 |
-| `turkey_g` | `τουρκια` | 5 | 0 | 2 | 1 |
-| `europe_g` | `ευρωπη` | 3 | 0 | 0 | 3 |
-| `germany_g` | `γερμανια` | 0 | 0 | 0 | 0 |
-| `america_g` | `αμερικη` | 0 | 0 | 0 | 0 |
-| `united_states_g` | `ηνωμενεσπολιτειεσ` | 0 | 0 | 0 | 0 |
-| `united_nations_g` | `ηνωμεναεθνη` | 0 | 0 | 0 | 0 |
-| `european_union_g` | `ευρωπαικηενωση` | 0 | 0 | 0 | 0 |
-| `cowboy_g` | `καουμποι` | 0 | 0 | 0 | 0 |
-| `catering_g` | `κετερινγκ` | 0 | 0 | 0 | 0 |
-| `simsberry_g` | `σιμσμπερι` | 0 | 0 | 0 | 0 |
-| `simscorner_g` | `σιμσκορνερ` | 0 | 0 | 0 | 0 |
+| `nato_g` | `νατο` (nato; English: NATO) | 200 | 38 | 10 | 22 |
+| `iran_g` | `ιραν` (iran; English: Iran) | 200 | 38 | 14 | 12 |
+| `russia_g` | `ρωσια` (rosia; English: Russia) | 200 | 17 | 38 | 43 |
+| `magog_g` | `μαγωγ` (magog; English: Magog) | 15 | 2 | 1 | 5 |
+| `france_g` | `γαλλια` (gallia; English: France) | 7 | 0 | 1 | 5 |
+| `turkey_g` | `τουρκια` (tourkia; English: Turkey) | 5 | 0 | 2 | 1 |
+| `europe_g` | `ευρωπη` (europe; English: Europe) | 3 | 0 | 0 | 3 |
+| `germany_g` | `γερμανια` (germania; English: Germany) | 0 | 0 | 0 | 0 |
+| `america_g` | `αμερικη` (amerike; English: America) | 0 | 0 | 0 | 0 |
+| `united_states_g` | `ηνωμενεσπολιτειεσ` (enomenespoliteies; English: United States) | 0 | 0 | 0 | 0 |
+| `united_nations_g` | `ηνωμεναεθνη` (enomenaethne; English: United Nations) | 0 | 0 | 0 | 0 |
+| `european_union_g` | `ευρωπαικηενωση` (europaikeenose; English: European Union) | 0 | 0 | 0 | 0 |
+| `cowboy_g` | `καουμποι` (kaoumpoi; English: Cowboy) | 0 | 0 | 0 | 0 |
+| `catering_g` | `κετερινγκ` (keteringk; English: Catering) | 0 | 0 | 0 | 0 |
+| `simsberry_g` | `σιμσμπερι` (simsmperi; English: Simsberry) | 0 | 0 | 0 | 0 |
+| `simscorner_g` | `σιμσκορνερ` (simskorner; English: Simscorner) | 0 | 0 | 0 | 0 |
 
 ## Current Read
 

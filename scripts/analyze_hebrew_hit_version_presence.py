@@ -22,6 +22,7 @@ from els.search import (
     normalize_for_corpus,
     process_context,
 )
+from els.term_display import display_term
 from scripts.analyze_mt_version_differences import normalize_book
 
 
@@ -820,7 +821,7 @@ def write_markdown(
             "| "
             + " | ".join(
                 [
-                    f"`{row['term_id']}` `{row['normalized_term']}`",
+                    display_summary_term(row),
                     str(row["hit_counts_by_corpus"]),
                     str(row["unique_patterns"]),
                     str(row["all_observed_patterns"]),
@@ -848,7 +849,7 @@ def write_markdown(
             "| "
             + " | ".join(
                 [
-                    f"`{row['term_id']}` `{row['normalized_term']}`",
+                    display_summary_term(row),
                     str(row["skip"]),
                     f"{row['start_ref']} / {row['center_ref']} / {row['end_ref']}",
                     str(row["present_corpora"]),
@@ -869,6 +870,20 @@ def write_markdown(
         ]
     )
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def display_summary_term(row: dict[str, object]) -> str:
+    return " ".join(
+        part
+        for part in [
+            f"`{row['term_id']}`",
+            display_term(
+                str(row.get("normalized_term", "")),
+                english=str(row.get("concept", "")),
+            ),
+        ]
+        if part
+    )
 
 
 def current_read_lines(

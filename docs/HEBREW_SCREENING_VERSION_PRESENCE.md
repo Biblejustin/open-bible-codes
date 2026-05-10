@@ -78,16 +78,16 @@ The strongest all-source rows are short forms that hit the per-corpus cap of
 
 | Term | Normalized | Total capped hits | Exact patterns | All-source patterns |
 | --- | --- | ---: | ---: | ---: |
-| `damascus_h` | `דמשק` | 250 | 51 | 49 |
-| `5786_jewish_h` | `תשפו` | 250 | 54 | 47 |
-| `faith_h` | `אמונה` | 250 | 53 | 47 |
-| `manasseh_h` | `מנשה` | 250 | 52 | 47 |
-| `manasseh_tribe_h` | `מנשה` | 250 | 52 | 47 |
-| `5784_jewish_h` | `תשפד` | 250 | 54 | 46 |
-| `athens_h` | `אתונה` | 250 | 55 | 46 |
-| `calneh_h` | `כלנה` | 250 | 54 | 46 |
-| `canaan_h` | `כנענ` | 250 | 51 | 46 |
-| `france_h` | `צרפת` | 250 | 54 | 46 |
+| `damascus_h` | `דמשק` (dmshq; English: Damascus) | 250 | 51 | 49 |
+| `5786_jewish_h` | `תשפו` (tshpw; English: Hebrew year 5786) | 250 | 54 | 47 |
+| `faith_h` | `אמונה` (mwnh; English: Faith) | 250 | 53 | 47 |
+| `manasseh_h` | `מנשה` (mnshh; English: Manasseh) | 250 | 52 | 47 |
+| `manasseh_tribe_h` | `מנשה` (mnshh; English: Manasseh Tribe) | 250 | 52 | 47 |
+| `5784_jewish_h` | `תשפד` (tshpd; English: Hebrew year 5784) | 250 | 54 | 46 |
+| `athens_h` | `אתונה` (twnh; English: Athens) | 250 | 55 | 46 |
+| `calneh_h` | `כלנה` (klnh; English: Calneh) | 250 | 54 | 46 |
+| `canaan_h` | `כנענ` (knn; English: Canaan) | 250 | 51 | 46 |
+| `france_h` | `צרפת` (tsrpt; English: France) | 250 | 54 | 46 |
 
 ## Modern And Local Rows
 
@@ -95,25 +95,25 @@ Selected rows from the modern/local additions:
 
 | Term | Normalized | Total capped hits | All-source | Leningrad-family | Multi-source | Source-specific |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| `france_h` | `צרפת` | 250 | 46 | 3 | 1 | 4 |
-| `iran_h` | `איראנ` | 250 | 44 | 5 | 1 | 6 |
-| `vance_h` | `ואנס` | 250 | 43 | 6 | 1 | 9 |
-| `russia_h` | `רוסיה` | 250 | 31 | 18 | 1 | 21 |
-| `netanyahu_h` | `נתניהו` | 131 | 15 | 12 | 0 | 11 |
-| `europe_h` | `אירופה` | 105 | 10 | 10 | 2 | 10 |
-| `america_h` | `אמריקה` | 59 | 6 | 6 | 0 | 5 |
-| `cowboy_h` | `קאובוי` | 62 | 8 | 4 | 0 | 7 |
-| `germany_h` | `גרמניה` | 38 | 3 | 5 | 0 | 4 |
-| `trump_h` | `טראמפ` | 31 | 6 | 0 | 0 | 1 |
-| `turkey_h` | `טורקיה` | 5 | 1 | 0 | 0 | 0 |
-| `united_states_h` | `ארצותהברית` | 0 | 0 | 0 | 0 | 0 |
-| `united_states_america_h` | `ארצותהבריתשלאמריקה` | 0 | 0 | 0 | 0 | 0 |
-| `united_nations_h` | `האומותהמאוחדות` | 0 | 0 | 0 | 0 | 0 |
-| `european_union_h` | `האיחודהאירופי` | 0 | 0 | 0 | 0 | 0 |
-| `catering_h` | `קייטרינג` | 0 | 0 | 0 | 0 | 0 |
-| `cowboy_catering_h` | `קאובויקייטרינג` | 0 | 0 | 0 | 0 | 0 |
-| `simsberry_h` | `סימסברי` | 0 | 0 | 0 | 0 | 0 |
-| `simscorner_h` | `סימסקורנר` | 0 | 0 | 0 | 0 | 0 |
+| `france_h` | `צרפת` (tsrpt; English: France) | 250 | 46 | 3 | 1 | 4 |
+| `iran_h` | `איראנ` (yrn; English: Iran) | 250 | 44 | 5 | 1 | 6 |
+| `vance_h` | `ואנס` (wns; English: Vance) | 250 | 43 | 6 | 1 | 9 |
+| `russia_h` | `רוסיה` (rwsyh; English: Russia) | 250 | 31 | 18 | 1 | 21 |
+| `netanyahu_h` | `נתניהו` (ntnyhw; English: Netanyahu) | 131 | 15 | 12 | 0 | 11 |
+| `europe_h` | `אירופה` (yrwph; English: Europe) | 105 | 10 | 10 | 2 | 10 |
+| `america_h` | `אמריקה` (mryqh; English: America) | 59 | 6 | 6 | 0 | 5 |
+| `cowboy_h` | `קאובוי` (qwbwy; English: Cowboy) | 62 | 8 | 4 | 0 | 7 |
+| `germany_h` | `גרמניה` (grmnyh; English: Germany) | 38 | 3 | 5 | 0 | 4 |
+| `trump_h` | `טראמפ` (trmp; English: Trump) | 31 | 6 | 0 | 0 | 1 |
+| `turkey_h` | `טורקיה` (twrqyh; English: Turkey) | 5 | 1 | 0 | 0 | 0 |
+| `united_states_h` | `ארצותהברית` (rtswthbryt; English: United States) | 0 | 0 | 0 | 0 | 0 |
+| `united_states_america_h` | `ארצותהבריתשלאמריקה` (rtswthbrytshlmryqh; English: United States Of America) | 0 | 0 | 0 | 0 | 0 |
+| `united_nations_h` | `האומותהמאוחדות` (hwmwthmwchdwt; English: United Nations) | 0 | 0 | 0 | 0 | 0 |
+| `european_union_h` | `האיחודהאירופי` (hychwdhyrwpy; English: European Union) | 0 | 0 | 0 | 0 | 0 |
+| `catering_h` | `קייטרינג` (qyytryng; English: Catering) | 0 | 0 | 0 | 0 | 0 |
+| `cowboy_catering_h` | `קאובויקייטרינג` (qwbwyqyytryng; English: Cowboy Catering) | 0 | 0 | 0 | 0 | 0 |
+| `simsberry_h` | `סימסברי` (symsbry; English: Simsberry) | 0 | 0 | 0 | 0 | 0 |
+| `simscorner_h` | `סימסקורנר` (symsqwrnr; English: Simscorner) | 0 | 0 | 0 | 0 | 0 |
 
 ## Current Read
 
