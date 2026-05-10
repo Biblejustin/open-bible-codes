@@ -129,6 +129,33 @@ The full classified-hit output has the same scope field. Across all relevant Bib
 
 This distinction matters. `center_word` is the strongest form of the claim: the hidden term is centered directly on the visible matching or same-concept word. `center_verse` and `span` are broader contextual relevance flags and should be reviewed separately.
 
+## Exact Center-Word Subset
+
+The rerun also produced an ignored local subset at `reports/crd_concept_surface/center_word_hits.csv`.
+
+- Bible `center_word` rows: 1,044
+- distinct term IDs: 131
+- rows from terms that exceed secular max: 602
+- rows from terms that do not exceed secular max: 442
+- distinct exceeding terms: 54
+- exceeding Hebrew terms: 27
+- exceeding Greek terms: 19
+- exceeding English terms: 8
+
+Top exact center-word terms by Bible row count:
+
+| Term | Language | Visible term | Concept | Rows | Exceeds secular max | Bible max | Secular max | Ratio |
+| --- | --- | --- | --- | ---: | --- | ---: | ---: | ---: |
+| `bns_esther_yhwh_h` and YHWH duplicates | hebrew | `יהוה` | YHWH | 54 each | true | 63.5651342 | 9.4471675 | 6.72848599 |
+| `cc_israel_h` and Israel duplicates | hebrew | `ישראל` | Israel | 33 each | false | 55.741592 | 58.3717191 | 0.954941757 |
+| `bns_babylon_h`, `babylon_h`, `babylon_alt_h`, `babel_h` | hebrew | `בבל` | Babylon/Babel | 25 each | true | 12.5457502 | 5.80091618 | 2.16271875 |
+| `lord_h` | hebrew | `אדני` | Lord | 15 | true | 26.764267 | 1.22463282 | 21.854932 |
+| `cc_elohim_h`, `god_h` | hebrew | `אלהים` | Elohim/God | 15 each | true | 26.7325624 | 15.3953841 | 1.73640113 |
+| `wisdom_g`, `wisdom_gxc` | greek | `σοφια` | Wisdom | 7 each | true | 4.41254988 | 0 |  |
+| `eng_david`, `eng_david_2`, `eng_david_3` | english | `David` | David | 6 each | true | 4.65372414 | 0 |  |
+
+The exact center-word subset contains both strong-looking rows and obvious base-rate warnings. For example, exact centered `Israel` rows do not exceed the Hebrew secular maximum. This reinforces the need to compare center-word findings against controls, not just count them.
+
 Top queue corpora by row count:
 
 | Corpus | Rows |
