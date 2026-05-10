@@ -45,7 +45,7 @@ queue material until separate controls and context review are applied.
 | `alliance_h` `ברית` (bryt; English: Alliance) | EBIBLE_WLC:200; MAM:200; MT_WLC:200; UHB:200; UXLC:200 | 221 | 176 | 22 | 8 | 15 | has exact patterns stable across all observed streams |
 | `haifa_h` `חיפה` (chyph; English: Haifa) | EBIBLE_WLC:200; MAM:200; MT_WLC:200; UHB:200; UXLC:200 | 225 | 177 | 21 | 2 | 25 | has exact patterns stable across all observed streams |
 | `hamas_h` `חמאס` (chms; English: Hamas) | EBIBLE_WLC:200; MAM:200; MT_WLC:200; UHB:200; UXLC:200 | 266 | 136 | 62 | 8 | 60 | has exact patterns stable across all observed streams |
-| `israel_h` `ישראל` (yshrl; English: Israel) | EBIBLE_WLC:200; MAM:200; MT_WLC:200; UHB:200; UXLC:200 | 253 | 156 | 42 | 3 | 52 | has exact patterns stable across all observed streams |
+| `israel_h` `ישראל` (Yisrael; English: Israel) | EBIBLE_WLC:200; MAM:200; MT_WLC:200; UHB:200; UXLC:200 | 253 | 156 | 42 | 3 | 52 | has exact patterns stable across all observed streams |
 | `pandemic_h` `מגפה` (mgph; English: Pandemic) | EBIBLE_WLC:200; MAM:200; MT_WLC:200; UHB:200; UXLC:200 | 257 | 151 | 47 | 2 | 57 | has exact patterns stable across all observed streams |
 | `5784_jewish_h` `תשפד` (tshpd; English: Hebrew year 5784) | EBIBLE_WLC:200; MAM:200; MT_WLC:200; UHB:200; UXLC:200 | 261 | 150 | 47 | 4 | 60 | has exact patterns stable across all observed streams |
 | `biden_h` `ביידנ` (byydn; English: Biden) | EBIBLE_WLC:200; MAM:200; MT_WLC:200; UHB:200; UXLC:200 | 272 | 136 | 61 | 4 | 71 | has exact patterns stable across all observed streams |

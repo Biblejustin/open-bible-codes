@@ -11,8 +11,8 @@ Documents indexed: 241
 | All-Codes Compound Extension Controls | `ALL_CODES_COMPOUND_EXTENSION_CONTROLS.md` |
 | LXX Apocrypha Bridge Controls | `APOCRYPHA_BRIDGE_CONTROLS.md` |
 | LXX Apocrypha Bridge Shuffled Controls (5 Samples) | `APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md` |
-| LXX Apocrypha Bridge Shuffled Controls | `APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md` |
-| LXX Apocrypha Bridge Shuffled Controls | `APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md` |
+| LXX Apocrypha Bridge Shuffled Controls (100 Samples) | `APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md` |
+| LXX Apocrypha Bridge Shuffled Controls (50 Samples) | `APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md` |
 | Beast/Dragon Strict Controls | `BEAST_DRAGON_STRICT_CONTROLS.md` |
 | Dynamic Skip Bible-Control Comparison | `DYNAMIC_SKIP_BIBLE_CONTROL_COMPARISON.md` |
 | Gog Length-3 Surface Control Review | `DYNAMIC_SKIP_GOG_LENGTH3_SURFACE_CONTROL_REVIEW.md` |
@@ -44,9 +44,9 @@ Documents indexed: 241
 | KJVA Confirmatory Apocrypha Bridge Term Shuffled Controls (5000 Samples) | `KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md` |
 | KJVA Apocrypha Bridge Controls | `KJV_APOCRYPHA_BRIDGE_CONTROLS.md` |
 | KJVA Apocrypha Bridge Shuffled Controls (5 Samples) | `KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md` |
-| KJVA Apocrypha Bridge Shuffled Controls | `KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md` |
+| KJVA Apocrypha Bridge Shuffled Controls (100 Samples) | `KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md` |
 | KJVA Apocrypha Bridge Shuffled Controls (250 Samples) | `KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_250.md` |
-| KJVA Apocrypha Bridge Shuffled Controls | `KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md` |
+| KJVA Apocrypha Bridge Shuffled Controls (50 Samples) | `KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md` |
 | KJVA Apocrypha Bridge Term Shuffled Controls (100 Samples) | `KJV_APOCRYPHA_BRIDGE_TERM_SHUFFLED_CONTROLS_100.md` |
 | KJVA Apocrypha Bridge Term Shuffled Controls (1000 Samples) | `KJV_APOCRYPHA_BRIDGE_TERM_SHUFFLED_CONTROLS_1000.md` |
 | KJVA Apocrypha Bridge Term Shuffled Controls (300 Samples) | `KJV_APOCRYPHA_BRIDGE_TERM_SHUFFLED_CONTROLS_300.md` |
