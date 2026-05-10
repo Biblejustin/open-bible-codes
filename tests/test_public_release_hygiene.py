@@ -2,13 +2,22 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts import check_public_release_hygiene as hygiene
+from scripts import release_hygiene as hygiene
 
 
 class PublicReleaseHygieneTests(unittest.TestCase):
     def test_remote_owner_accepts_biblejustin_https_remote(self) -> None:
         failures = hygiene.remote_owner_failures(
             ["origin\thttps://github.com/Biblejustin/open-bible-codes.git (fetch)"],
+            owner="Biblejustin",
+            repo="open-bible-codes",
+        )
+
+        self.assertEqual(failures, [])
+
+    def test_remote_owner_accepts_biblejustin_ssh_remote(self) -> None:
+        failures = hygiene.remote_owner_failures(
+            ["origin\tgit@github.com:Biblejustin/open-bible-codes.git (push)"],
             owner="Biblejustin",
             repo="open-bible-codes",
         )
@@ -65,6 +74,16 @@ class PublicReleaseHygieneTests(unittest.TestCase):
         self.assertEqual(hits[0].path, "config.txt")
         self.assertEqual(hits[0].line, 2)
         self.assertEqual(hits[0].kind, "github_fine_grained_token")
+
+    def test_secret_scan_skips_binary_files(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            token = ("github_pat_" + "123456789012345678901234567890").encode()
+            (root / "binary.bin").write_bytes(b"\x00" + token)
+
+            hits = hygiene.scan_tracked_for_secret_patterns(root, ["binary.bin"])
+
+        self.assertEqual(hits, [])
 
     def test_forbidden_account_scan_checks_tracked_files_only(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
