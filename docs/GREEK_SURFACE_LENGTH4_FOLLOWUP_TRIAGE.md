@@ -32,30 +32,30 @@ separate prospective study registers them in advance.
 
 | Term | Concept | Length | Center | Skip | Direction | Length-cohort rank | Center words |
 | --- | --- | ---: | --- | ---: | --- | ---: | --- |
-| `αμην` (amen; English: Amen) | Amen | 4 | John 10:7 | -42 | backward | 1 | TR_NT:`οὖν` (oun); BYZ_NT:`ουν` (oun); TCG_NT:`οὖν` (oun); SBLGNT:`οὖν` (oun) |
+| `αμην` (amen; English: Amen) | Amen | 4 | John 10:7 | -42 | backward | 1 | TR_NT:`οὖν` (oun; English: therefore); BYZ_NT:`ουν` (oun; English: therefore); TCG_NT:`οὖν` (oun; English: therefore); SBLGNT:`οὖν` (oun; English: therefore) |
 | `αμην` (amen; English: Amen) | Amen | 4 | John 6:53 | -42 | backward | 1 | TR_NT:`ἀνθρώπου` (anthropou; English: man/human); BYZ_NT:`ανθρωπου` (anthropou; English: man/human); TCG_NT:`ἀνθρώπου` (anthropou; English: man/human); SBLGNT:`ἀνθρώπου` (anthropou; English: man/human) |
-| `αμην` (amen; English: Amen) | Amen | 4 | Mark 8:12 | -13 | backward | 1 | TR_NT:`ταύτῃ` (taute); BYZ_NT:`ταυτη` (taute); TCG_NT:`ταύτῃ` (taute); SBLGNT:`ταύτῃ` (taute) |
-| `αμην` (amen; English: Amen) | Amen | 4 | Matt 5:18 | -8 | backward | 1 | TR_NT:`ἰῶτα` (iota); BYZ_NT:`ιωτα` (iota); TCG_NT:`ἰῶτα` (iota); SBLGNT:`ἰῶτα` (iota) |
-| `αμην` (amen; English: Amen) | Amen | 4 | Matt 18:13 | -7 | backward | 1 | TR_NT:`λέγω` (lego); BYZ_NT:`λεγω` (lego); TCG_NT:`λέγω` (lego); SBLGNT:`λέγω` (lego) |
-| `αμην` (amen; English: Amen) | Amen | 4 | John 5:24 | -3 | backward | 1 | TR_NT:`ζωήν` (zoen); BYZ_NT:`ζωην` (zoen); TCG_NT:`ζωήν` (zoen); SBLGNT:`ζωήν.` (zoen) |
-| `αμην` (amen; English: Amen) | Amen | 4 | Luke 18:17 | 8 | forward | 1 | TR_NT:`εἰσέλθῃ` (eiselthe); BYZ_NT:`εισελθη` (eiselthe); TCG_NT:`εἰσέλθῃ` (eiselthe); SBLGNT:`εἰσέλθῃ` (eiselthe) |
-| `αμην` (amen; English: Amen) | Amen | 4 | Mark 10:15 | 8 | forward | 1 | TR_NT:`εἰσέλθῃ` (eiselthe); BYZ_NT:`εισελθη` (eiselthe); TCG_NT:`εἰσέλθῃ` (eiselthe); SBLGNT:`εἰσέλθῃ` (eiselthe) |
+| `αμην` (amen; English: Amen) | Amen | 4 | Mark 8:12 | -13 | backward | 1 | TR_NT:`ταύτῃ` (taute; English: to this/in this); BYZ_NT:`ταυτη` (taute; English: to this/in this); TCG_NT:`ταύτῃ` (taute; English: to this/in this); SBLGNT:`ταύτῃ` (taute; English: to this/in this) |
+| `αμην` (amen; English: Amen) | Amen | 4 | Matt 5:18 | -8 | backward | 1 | TR_NT:`ἰῶτα` (iota; English: iota); BYZ_NT:`ιωτα` (iota; English: iota); TCG_NT:`ἰῶτα` (iota; English: iota); SBLGNT:`ἰῶτα` (iota; English: iota) |
+| `αμην` (amen; English: Amen) | Amen | 4 | Matt 18:13 | -7 | backward | 1 | TR_NT:`λέγω` (lego; English: I say); BYZ_NT:`λεγω` (lego; English: I say); TCG_NT:`λέγω` (lego; English: I say); SBLGNT:`λέγω` (lego; English: I say) |
+| `αμην` (amen; English: Amen) | Amen | 4 | John 5:24 | -3 | backward | 1 | TR_NT:`ζωήν` (zoen; English: life); BYZ_NT:`ζωην` (zoen; English: life); TCG_NT:`ζωήν` (zoen; English: life); SBLGNT:`ζωήν.` (zoen; English: life) |
+| `αμην` (amen; English: Amen) | Amen | 4 | Luke 18:17 | 8 | forward | 1 | TR_NT:`εἰσέλθῃ` (eiselthe; English: enter); BYZ_NT:`εισελθη` (eiselthe; English: enter); TCG_NT:`εἰσέλθῃ` (eiselthe; English: enter); SBLGNT:`εἰσέλθῃ` (eiselthe; English: enter) |
+| `αμην` (amen; English: Amen) | Amen | 4 | Mark 10:15 | 8 | forward | 1 | TR_NT:`εἰσέλθῃ` (eiselthe; English: enter); BYZ_NT:`εισελθη` (eiselthe; English: enter); TCG_NT:`εἰσέλθῃ` (eiselthe; English: enter); SBLGNT:`εἰσέλθῃ` (eiselthe; English: enter) |
 | `αμην` (amen; English: Amen) | Amen | 4 | Acts 22:28 | 14 | forward | 1 | TR_NT:`Παῦλος` (paulos; English: Paul); BYZ_NT:`παυλοσ` (paulos; English: Paul); TCG_NT:`Παῦλος` (paulos; English: Paul); SBLGNT:`Παῦλος` (paulos; English: Paul) |
-| `αμην` (amen; English: Amen) | Amen | 4 | Luke 21:32 | 17 | forward | 1 | TR_NT:`μὴ` (me); BYZ_NT:`μη` (me); TCG_NT:`μὴ` (me); SBLGNT:`μὴ` (me) |
-| `αμην` (amen; English: Amen) | Amen | 4 | Matt 18:18 | 19 | forward | 1 | TR_NT:`δήσητε` (desete); BYZ_NT:`δησητε` (desete); TCG_NT:`δήσητε` (desete); SBLGNT:`δήσητε` (desete) |
-| `σιων` (Sion; English: Zion) | Zion | 4 | 1Pet 2:6 | -25 | backward | 2 | TR_NT:`καταισχυνθῇ` (kataischunthe); BYZ_NT:`καταισχυνθη` (kataischunthe); TCG_NT:`καταισχυνθῇ.` (kataischunthe); SBLGNT:`καταισχυνθῇ.` (kataischunthe) |
-| `σιων` (Sion; English: Zion) | Zion | 4 | Acts 19:34 | -4 | backward | 2 | TR_NT:`ἐπὶ` (epi); BYZ_NT:`επι` (epi); TCG_NT:`ἐπὶ` (epi); SBLGNT:`ἐπὶ` (epi) |
-| `σιων` (Sion; English: Zion) | Zion | 4 | Matt 21:5 | 6 | forward | 2 | TR_NT:`ἐπιβεβηκὼς` (epibebekos); BYZ_NT:`επιβεβηκωσ` (epibebekos); TCG_NT:`ἐπιβεβηκὼς` (epibebekos); SBLGNT:`ἐπιβεβηκὼς` (epibebekos) |
-| `σιων` (Sion; English: Zion) | Zion | 4 | Rev 14:20 | 9 | forward | 2 | TR_NT:`χαλινῶν` (chalinon); BYZ_NT:`χαλινων` (chalinon); TCG_NT:`χαλινῶν` (chalinon); SBLGNT:`χαλινῶν` (chalinon) |
-| `αραμ` (aram; English: Aram) | Aram | 4 | Phil 2:1 | -12 | backward | 3 | TR_NT:`παράκλησις` (paraklesis); BYZ_NT:`παρακλησισ` (paraklesis); TCG_NT:`παράκλησις` (paraklesis); SBLGNT:`παράκλησις` (paraklesis) |
-| `αραμ` (aram; English: Aram) | Aram | 4 | John 11:19 | -10 | backward | 3 | TR_NT:`ἵνα` (ina); BYZ_NT:`ινα` (ina); TCG_NT:`ἵνα` (ina); SBLGNT:`ἵνα` (ina) |
-| `αραμ` (aram; English: Aram) | Aram | 4 | 1Cor 16:6 | 24 | forward | 3 | TR_NT:`ὑμᾶς` (umas); BYZ_NT:`υμασ` (umas); TCG_NT:`ὑμᾶς` (umas); SBLGNT:`ὑμᾶς` (umas) |
-| `δασα` (dasa; English: Lasha) | Lasha | 4 | Acts 9:11 | -2 | backward | 4 | TR_NT:`Ταρσέα` (tarsea); BYZ_NT:`ταρσεα` (tarsea); TCG_NT:`Ταρσέα` (tarsea); SBLGNT:`Ταρσέα,` (tarsea) |
-| `δασα` (dasa; English: Lasha) | Lasha | 4 | Acts 5:10 | 30 | forward | 4 | TR_NT:`εἰσελθόντες` (eiselthontes); BYZ_NT:`εισελθοντεσ` (eiselthontes); TCG_NT:`εἰσελθόντες` (eiselthontes); SBLGNT:`εἰσελθόντες` (eiselthontes) |
-| `ασηρ` (aser; English: Asher) | Asher | 4 | Luke 2:36 | -18 | backward | 5 | TR_NT:`πολλαῖς` (pollais); BYZ_NT:`πολλαισ` (pollais); TCG_NT:`πολλαῖς,` (pollais); SBLGNT:`πολλαῖς,` (pollais) |
-| `ασηρ` (aser; English: Asher) | Asher | 4 | Luke 3:1 | 16 | forward | 5 | TR_NT:`Πιλάτου` (pilatou); BYZ_NT:`πιλατου` (pilatou); TCG_NT:`Πιλάτου` (pilatou); SBLGNT:`Πιλάτου` (pilatou) |
-| `χουσ` (chous; English: Cush) | Cush | 4 | Matt 6:2 | 27 | forward | 6 | TR_NT:`οὖν` (oun); BYZ_NT:`ουν` (oun); TCG_NT:`οὖν` (oun); SBLGNT:`οὖν` (oun) |
-| `σαβα` (saba; English: Seba) | Seba | 4 | Jas 5:4 | 37 | forward | 7 | TR_NT:`θερισάντων` (therisanton); BYZ_NT:`θερισαντων` (therisanton); TCG_NT:`θερισάντων` (therisanton); SBLGNT:`θερισάντων` (therisanton) |
+| `αμην` (amen; English: Amen) | Amen | 4 | Luke 21:32 | 17 | forward | 1 | TR_NT:`μὴ` (me; English: not); BYZ_NT:`μη` (me; English: not); TCG_NT:`μὴ` (me; English: not); SBLGNT:`μὴ` (me; English: not) |
+| `αμην` (amen; English: Amen) | Amen | 4 | Matt 18:18 | 19 | forward | 1 | TR_NT:`δήσητε` (desete; English: you bind); BYZ_NT:`δησητε` (desete; English: you bind); TCG_NT:`δήσητε` (desete; English: you bind); SBLGNT:`δήσητε` (desete; English: you bind) |
+| `σιων` (Sion; English: Zion) | Zion | 4 | 1Pet 2:6 | -25 | backward | 2 | TR_NT:`καταισχυνθῇ` (kataischunthe; English: be put to shame); BYZ_NT:`καταισχυνθη` (kataischunthe; English: be put to shame); TCG_NT:`καταισχυνθῇ.` (kataischunthe; English: be put to shame); SBLGNT:`καταισχυνθῇ.` (kataischunthe; English: be put to shame) |
+| `σιων` (Sion; English: Zion) | Zion | 4 | Acts 19:34 | -4 | backward | 2 | TR_NT:`ἐπὶ` (epi; English: on/upon); BYZ_NT:`επι` (epi; English: on/upon); TCG_NT:`ἐπὶ` (epi; English: on/upon); SBLGNT:`ἐπὶ` (epi; English: on/upon) |
+| `σιων` (Sion; English: Zion) | Zion | 4 | Matt 21:5 | 6 | forward | 2 | TR_NT:`ἐπιβεβηκὼς` (epibebekos; English: having mounted); BYZ_NT:`επιβεβηκωσ` (epibebekos; English: having mounted); TCG_NT:`ἐπιβεβηκὼς` (epibebekos; English: having mounted); SBLGNT:`ἐπιβεβηκὼς` (epibebekos; English: having mounted) |
+| `σιων` (Sion; English: Zion) | Zion | 4 | Rev 14:20 | 9 | forward | 2 | TR_NT:`χαλινῶν` (chalinon; English: bridles); BYZ_NT:`χαλινων` (chalinon; English: bridles); TCG_NT:`χαλινῶν` (chalinon; English: bridles); SBLGNT:`χαλινῶν` (chalinon; English: bridles) |
+| `αραμ` (aram; English: Aram) | Aram | 4 | Phil 2:1 | -12 | backward | 3 | TR_NT:`παράκλησις` (paraklesis; English: comfort/encouragement); BYZ_NT:`παρακλησισ` (paraklesis; English: comfort/encouragement); TCG_NT:`παράκλησις` (paraklesis; English: comfort/encouragement); SBLGNT:`παράκλησις` (paraklesis; English: comfort/encouragement) |
+| `αραμ` (aram; English: Aram) | Aram | 4 | John 11:19 | -10 | backward | 3 | TR_NT:`ἵνα` (hina; English: that); BYZ_NT:`ινα` (hina; English: that); TCG_NT:`ἵνα` (hina; English: that); SBLGNT:`ἵνα` (hina; English: that) |
+| `αραμ` (aram; English: Aram) | Aram | 4 | 1Cor 16:6 | 24 | forward | 3 | TR_NT:`ὑμᾶς` (umas; English: you); BYZ_NT:`υμασ` (umas; English: you); TCG_NT:`ὑμᾶς` (umas; English: you); SBLGNT:`ὑμᾶς` (umas; English: you) |
+| `δασα` (dasa; English: Lasha) | Lasha | 4 | Acts 9:11 | -2 | backward | 4 | TR_NT:`Ταρσέα` (tarsea; English: of Tarsus); BYZ_NT:`ταρσεα` (tarsea; English: of Tarsus); TCG_NT:`Ταρσέα` (tarsea; English: of Tarsus); SBLGNT:`Ταρσέα,` (tarsea; English: of Tarsus) |
+| `δασα` (dasa; English: Lasha) | Lasha | 4 | Acts 5:10 | 30 | forward | 4 | TR_NT:`εἰσελθόντες` (eiselthontes; English: having entered); BYZ_NT:`εισελθοντεσ` (eiselthontes; English: having entered); TCG_NT:`εἰσελθόντες` (eiselthontes; English: having entered); SBLGNT:`εἰσελθόντες` (eiselthontes; English: having entered) |
+| `ασηρ` (aser; English: Asher) | Asher | 4 | Luke 2:36 | -18 | backward | 5 | TR_NT:`πολλαῖς` (pollais; English: many); BYZ_NT:`πολλαισ` (pollais; English: many); TCG_NT:`πολλαῖς,` (pollais; English: many); SBLGNT:`πολλαῖς,` (pollais; English: many) |
+| `ασηρ` (aser; English: Asher) | Asher | 4 | Luke 3:1 | 16 | forward | 5 | TR_NT:`Πιλάτου` (pilatou; English: Pilate); BYZ_NT:`πιλατου` (pilatou; English: Pilate); TCG_NT:`Πιλάτου` (pilatou; English: Pilate); SBLGNT:`Πιλάτου` (pilatou; English: Pilate) |
+| `χουσ` (chous; English: Cush) | Cush | 4 | Matt 6:2 | 27 | forward | 6 | TR_NT:`οὖν` (oun; English: therefore); BYZ_NT:`ουν` (oun; English: therefore); TCG_NT:`οὖν` (oun; English: therefore); SBLGNT:`οὖν` (oun; English: therefore) |
+| `σαβα` (saba; English: Seba) | Seba | 4 | Jas 5:4 | 37 | forward | 7 | TR_NT:`θερισάντων` (therisanton; English: having harvested); BYZ_NT:`θερισαντων` (therisanton; English: having harvested); TCG_NT:`θερισάντων` (therisanton; English: having harvested); SBLGNT:`θερισάντων` (therisanton; English: having harvested) |
 
 ## Cohort Counts
 
