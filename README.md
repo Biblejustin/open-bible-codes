@@ -497,6 +497,8 @@ Bible and Science ELS critique/source audit:
 `docs/BIBLE_AND_SCIENCE_CODES_AUDIT.md`.
 Religions Wiki scriptural-codes critique/source audit:
 `docs/RELIGIONS_WIKI_SCRIPTURAL_CODES_AUDIT.md`.
+External claim/source term count baseline:
+`docs/EXTERNAL_CLAIM_SOURCE_COUNTS.md`.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.

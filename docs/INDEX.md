@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 241
+Documents indexed: 242
 
 ## Controls
 
@@ -198,6 +198,7 @@ Documents indexed: 241
 | Extension Exact-Center Cross-Text Review | `EXTENSION_EXACT_CENTER_CROSS_TEXT.md` |
 | Extension Exact-Center Final Gate | `EXTENSION_EXACT_CENTER_FINAL_GATE.md` |
 | Extension Top Hits Review | `EXTENSION_TOP_HITS_REVIEW.md` |
+| External Claim Source Count Summary | `EXTERNAL_CLAIM_SOURCE_COUNTS.md` |
 | Felcjo Ringo Algorithm Source Audit | `FELCJO_RINGO_ALGORITHM_AUDIT.md` |
 | Final Report Draft | `FINAL_REPORT_DRAFT.md` |
 | Final Report Highlights | `FINAL_REPORT_HIGHLIGHTS.md` |

@@ -137,6 +137,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--top", type=int, default=80)
     parser.add_argument("--delta-top", type=int, default=80)
     parser.add_argument("--min-top-length", type=int, default=4)
+    parser.add_argument("--title", default="Broad Search Summary")
+    parser.add_argument("--scope-line", default="Broader ELS count sweep across every declared term list.")
+    parser.add_argument(
+        "--main-read",
+        action="append",
+        help="Main-read bullet. May be repeated. Defaults to broad-screening interpretation bullets.",
+    )
     parser.add_argument("--summary-out", type=Path, default=SUMMARY_OUT)
     parser.add_argument("--top-out", type=Path, default=TOP_OUT)
     parser.add_argument("--focus-out", type=Path, default=FOCUS_OUT)
@@ -307,10 +314,16 @@ def write_markdown(
 ) -> None:
     manifest = read_manifest(args.counts_dir / "broad_search.manifest.json")
     max_skip = manifest.get("max_skip", 100)
+    main_read = getattr(args, "main_read", None) or [
+        f"Widening to skip {max_skip} mostly scales up already-dense short terms.",
+        "Length 4+ leaders still come from short Greek or Hebrew forms and acronyms.",
+        "Full modern phrases remain weak or absent; abbreviations dominate.",
+        "Frequency anchors and null controls are useful calibration rows because they also produce high counts.",
+    ]
     lines = [
-        "# Broad Search Summary",
+        f"# {getattr(args, 'title', 'Broad Search Summary')}",
         "",
-        "Broader ELS count sweep across every declared term list.",
+        getattr(args, "scope_line", "Broader ELS count sweep across every declared term list."),
         "",
         "## Scope",
         "",
@@ -322,10 +335,7 @@ def write_markdown(
         "",
         "## Main Read",
         "",
-        f"- Widening to skip {max_skip} mostly scales up already-dense short terms.",
-        "- Length 4+ leaders still come from short Greek or Hebrew forms and acronyms.",
-        "- Full modern phrases remain weak or absent; abbreviations dominate.",
-        "- Frequency anchors and null controls are useful calibration rows because they also produce high counts.",
+        *[f"- {item}" for item in main_read],
         "",
         "## Term Set Summary",
         "",

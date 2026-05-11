@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 79
+Protocols indexed: 80
 
 ## Analysis
 
@@ -49,6 +49,7 @@ Protocols indexed: 79
 | apocrypha_bridge_study | Run the apocrypha/deuterocanon coverage audit, bounded bridge scan, surface-context rev... | 13 | terms/english_search_terms.csv, terms/greek_nt_claim_terms.csv, terms/prophetic_terms.c... | reports/apocrypha_bridge_candidates, reports/apocrypha_bridge_context, reports/apocryph... | `apocrypha_bridge_study.toml` |
 | byz_source_only_exact_center | Post-discovery 1000/1000 controls for BYZ_NT source-only exact-center extension row. | 2 |  | reports/byz_source_only_exact_center | `byz_source_only_exact_center.toml` |
 | extension_deep_controls | Slow 1000/1000 paired-control follow-up for the exact-center cross-text Greek NT extens... | 1 |  | reports | `extension_deep_controls.toml` |
+| external_claim_source_counts | Count external-source claim and critique term lists across Bible corpora and language-m... | 2 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports/external_claim_source_counts | `external_claim_source_counts.toml` |
 | greek_control_version_presence | Capped exact ELS hit-pattern presence for Greek null and frequency controls across Gree... | 1 | terms/frequency_anchors.csv, terms/null_controls.csv | reports/greek_control_version_presence | `greek_control_version_presence.toml` |
 | greek_exact_center_final_gate | Consolidate Greek exact-center version presence, controls, context, and synthetic basel... | 1 |  | reports/greek_exact_center_final_gate | `greek_exact_center_final_gate.toml` |
 | greek_expanded_surface_available_control_evaluation | Exploratory all-available real-word matched-control evaluation for tightened Greek surf... | 2 | terms/greek_expanded_prospective_terms.csv | reports/greek_expanded_surface_available_control_evaluation, reports/greek_expanded_sur... | `greek_expanded_surface_available_control_evaluation.toml` |
