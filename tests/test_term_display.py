@@ -45,6 +45,10 @@ class TermDisplayTests(unittest.TestCase):
         self.assertEqual(display_term("חזון"), "`חזון` (chazon; English: vision)")
         self.assertEqual(display_term("דריוש"), "`דריוש` (Daryavesh; English: Darius)")
         self.assertEqual(display_term("שטה"), "`שטה` (shittah; English: acacia)")
+        self.assertEqual(display_term("ויקמ"), "`ויקמ` (vayaqom; English: and he arose)")
+        self.assertEqual(display_term("מצרימ"), "`מצרימ` (Mitzrayim; English: Egypt)")
+        self.assertEqual(display_term("איש"), "`איש` (ish; English: man)")
+        self.assertEqual(display_term("בתוכ"), "`בתוכ` (betokh; English: in the midst)")
 
     def test_displays_core_hebrew_report_terms_with_glosses(self) -> None:
         self.assertEqual(display_term("יהוה"), "`יהוה` (YHWH; English: YHWH)")
