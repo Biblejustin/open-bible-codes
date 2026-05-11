@@ -29,7 +29,7 @@ Protocols indexed: 81
 | --- | --- | ---: | --- | --- | --- |
 | churchages_statistics_audit | Compare published ChurchAges observed KJV ELS counts against letter-frequency expected ... | 1 |  | reports/churchages_statistics | `churchages_statistics_audit.toml` |
 | greek_expanded_surface_letter_paths | Letter-path audit sheet for tightened Greek exact-center surface rows. | 1 |  | reports/greek_expanded_surface_letter_paths | `greek_expanded_surface_letter_paths.toml` |
-| step_tahot_policy_hits | Audit STEP_TAHOT-only exact-hit rows against TAHOT source-type policy. | 2 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_tribes.csv, t... | reports/step_tahot_policy_hits, reports/step_tahot_screening_version_presence | `step_tahot_policy_hits.toml` |
+| step_tahot_policy_hits | Audit STEP_TAHOT-only exact-hit rows against TAHOT source-type policy. | 2 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_narrative_nam... | reports/step_tahot_policy_hits, reports/step_tahot_screening_version_presence | `step_tahot_policy_hits.toml` |
 | step_tahot_source_audit | Download STEP TAHOT and compare it against current Hebrew MT-family corpora. | 2 |  | reports/mt_version_comparison_step_tahot | `step_tahot_source_audit.toml` |
 
 ## Baseline
