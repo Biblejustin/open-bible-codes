@@ -173,10 +173,12 @@ inputs = [
   "docs/EXTERNAL_CLAIM_SOURCE_COUNTS.md",
   "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_COLLECTION.md",
   "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_TRIAGE.md",
+  "docs/EXTERNAL_CLAIM_SOURCE_FINDINGS.md",
   "scripts/audit_apocrypha_coverage.py",
   "scripts/analyze_apocrypha_bridge_shuffled_controls.py",
   "scripts/analyze_apocrypha_bridge_term_shuffled_controls.py",
   "scripts/analyze_broad_search.py",
+  "scripts/build_external_claim_source_findings.py",
   "scripts/summarize_kjv_apocrypha_bridge_terms.py",
   "scripts/download_ebible_engkjv_apocrypha.py",
   "scripts/build_study_lock_manifest.py",
@@ -864,6 +866,7 @@ inputs = [
   "protocols/external_claim_source_all_codes_collection.toml",
   "scripts/summarize_surface_all_codes.py",
   "scripts/triage_surface_all_codes.py",
+  "scripts/build_external_claim_source_findings.py",
   "els/term_display.py",
   "terms/bible_code_digest_claim_terms.csv",
   "terms/cri_els_critique_terms.csv",
@@ -878,8 +881,10 @@ outputs = [
   "reports/external_claim_source_all_codes/protocol_run.manifest.json",
   "reports/external_claim_source_all_codes/summary.manifest.json",
   "reports/external_claim_source_all_codes/triage.manifest.json",
+  "reports/external_claim_source_all_codes/findings.manifest.json",
   "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_COLLECTION.md",
   "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_TRIAGE.md",
+  "docs/EXTERNAL_CLAIM_SOURCE_FINDINGS.md",
 ]
 
 [[steps]]
@@ -962,6 +967,7 @@ inputs = [
   "reports/external_claim_source_all_codes/protocol_run.manifest.json",
   "reports/external_claim_source_all_codes/summary.manifest.json",
   "reports/external_claim_source_all_codes/triage.manifest.json",
+  "reports/external_claim_source_all_codes/findings.manifest.json",
   "reports/final_report_highlights/manifest.json",
 ]
 outputs = [
@@ -1071,9 +1077,11 @@ inputs = [
   "reports/external_claim_source_all_codes/summary.manifest.json",
   "reports/external_claim_source_all_codes/triage_queue.csv",
   "reports/external_claim_source_all_codes/triage.manifest.json",
+  "reports/external_claim_source_all_codes/findings.manifest.json",
   "docs/EXTERNAL_CLAIM_SOURCE_COUNTS.md",
   "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_COLLECTION.md",
   "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_TRIAGE.md",
+  "docs/EXTERNAL_CLAIM_SOURCE_FINDINGS.md",
   "docs/BIBLE_CODE_DIGEST_AUDIT.md",
   "docs/CRI_ELS_CRITIQUE_AUDIT.md",
   "docs/THEWORDNOTES_ELS_AUDIT.md",

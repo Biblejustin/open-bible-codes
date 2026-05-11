@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 244
+Documents indexed: 245
 
 ## Controls
 
@@ -72,6 +72,7 @@ Documents indexed: 244
 | Strong Control Full-Span Exact-Center Findings | `DYNAMIC_SKIP_STRONG_CONTROL_FULL_SPAN_EXACT_CENTER_FINDINGS.md` |
 | Strong Full-Span Exact-Center Findings | `DYNAMIC_SKIP_STRONG_FULL_SPAN_EXACT_CENTER_FINDINGS.md` |
 | Strong Full-Span Exact-Center Original-Language Findings | `DYNAMIC_SKIP_STRONG_FULL_SPAN_EXACT_CENTER_ORIGINAL_LANGUAGE_FINDINGS.md` |
+| External Claim Source Findings | `EXTERNAL_CLAIM_SOURCE_FINDINGS.md` |
 | Hebrew Modern Geopolitical Controlled Findings | `HEBREW_MODERN_GEOPOLITICAL_CONTROLLED_FINDINGS.md` |
 | Hebrew Modern Geopolitical Prospective Findings | `HEBREW_MODERN_GEOPOLITICAL_PROSPECTIVE_FINDINGS.md` |
 | Hebrew Screening Controlled Findings | `HEBREW_SCREENING_CONTROLLED_FINDINGS.md` |

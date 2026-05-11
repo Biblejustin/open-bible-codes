@@ -794,7 +794,7 @@ def write_summary(
         "- KJVA apocrypha/deuterocanon bridge term-level shuffled controls",
         "- KJVA apocrypha/deuterocanon bridge 5000-sample confirmatory controls",
         "- external claim/source count baseline across Bible and secular controls",
-        "- external claim/source relaxed all-codes collection and triage queue",
+        "- external claim/source relaxed all-codes collection, triage queue, and findings layer",
         "- completed Gog/Magog prospective pair-control report",
         "- prospective-study lock/readiness documents",
         "- Bible Code Digest source audit and term-list expansion",
@@ -1990,6 +1990,11 @@ def external_claim_source_section(
             "what is present in which editions and controls. It should not be read",
             "as claim reproduction without the source's original geometry and a",
             "locked control design.",
+            "",
+            "Source artifacts: `docs/EXTERNAL_CLAIM_SOURCE_COUNTS.md`,",
+            "`docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_COLLECTION.md`,",
+            "`docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_TRIAGE.md`, and",
+            "`docs/EXTERNAL_CLAIM_SOURCE_FINDINGS.md`.",
         ]
     )
     return lines

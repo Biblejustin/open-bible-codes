@@ -188,3 +188,32 @@ outputs = [
   "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_TRIAGE.md",
   "reports/external_claim_source_all_codes/triage.manifest.json",
 ]
+
+[[steps]]
+id = "findings"
+description = "Build a concise findings layer from external-source counts, summary, and triage rows."
+argv = [
+  "-m",
+  "scripts.build_external_claim_source_findings",
+  "--counts-summary",
+  "reports/external_claim_source_counts/summary.csv",
+  "--all-codes-summary",
+  "reports/external_claim_source_all_codes/surface_all_codes_summary.csv",
+  "--triage-queue",
+  "reports/external_claim_source_all_codes/triage_queue.csv",
+  "--markdown-out",
+  "docs/EXTERNAL_CLAIM_SOURCE_FINDINGS.md",
+  "--manifest-out",
+  "reports/external_claim_source_all_codes/findings.manifest.json",
+]
+inputs = [
+  "scripts/build_external_claim_source_findings.py",
+  "els/term_display.py",
+  "reports/external_claim_source_counts/summary.csv",
+  "reports/external_claim_source_all_codes/surface_all_codes_summary.csv",
+  "reports/external_claim_source_all_codes/triage_queue.csv",
+]
+outputs = [
+  "docs/EXTERNAL_CLAIM_SOURCE_FINDINGS.md",
+  "reports/external_claim_source_all_codes/findings.manifest.json",
+]

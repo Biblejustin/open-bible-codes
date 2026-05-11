@@ -85,6 +85,7 @@ Source artifacts:
 - `docs/EXTERNAL_CLAIM_SOURCE_COUNTS.md`
 - `docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_COLLECTION.md`
 - `docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_TRIAGE.md`
+- `docs/EXTERNAL_CLAIM_SOURCE_FINDINGS.md`
 
 ### Greek `δοξα` (doxa; English: glory)
 
