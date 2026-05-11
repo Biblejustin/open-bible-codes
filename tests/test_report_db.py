@@ -64,6 +64,10 @@ def test_report_table_name_for_mapped_all_codes_path() -> None:
         report_table_name_for_path(Path("reports/hebrew_screening_all_codes/surface_all_codes.csv"))
         == "hebrew_screening_surface_all_codes"
     )
+    assert (
+        report_table_name_for_path(Path("reports/external_claim_source_all_codes/surface_all_codes.csv"))
+        == "external_claim_source_surface_all_codes"
+    )
 
 
 def test_import_csv_table_uses_report_table_mapping_by_default(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:

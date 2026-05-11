@@ -66,6 +66,10 @@ DEFAULT_REPORT_TABLE_NAMES = {
     "reports/greek_screening_all_codes/surface_all_codes_summary.csv": "greek_screening_surface_all_codes_summary",
     "reports/hebrew_theology_all_codes/surface_all_codes.csv": "hebrew_theology_surface_all_codes",
     "reports/hebrew_theology_all_codes/surface_all_codes_summary.csv": "hebrew_theology_surface_all_codes_summary",
+    "reports/external_claim_source_all_codes/surface_all_codes.csv": "external_claim_source_surface_all_codes",
+    "reports/external_claim_source_all_codes/surface_all_codes_summary.csv": (
+        "external_claim_source_surface_all_codes_summary"
+    ),
     "reports/dynamic_skip_focus/full_span_exported_hits.csv": "dynamic_skip_focus_full_span_exported_hits",
     "reports/word_counts_by_word.csv": "word_counts_by_word",
     "reports/word_counts_by_book.csv": "word_counts_by_book",
