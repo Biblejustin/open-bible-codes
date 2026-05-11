@@ -8,48 +8,48 @@ content is actually meaningful, merely lexical, or unrelated.
 
 ## Counts
 
-- excerpt rows: 295
+- excerpt rows: 305
 - center verses containing normalized hidden term: 73
 - spans containing normalized hidden term: 100
-- rows by corpus: `{'BYZ_NT': 21, 'EBIBLE_WLC': 38, 'KJV': 21, 'MAM': 38, 'MT_WLC': 38, 'SBLGNT': 21, 'TCG_NT': 21, 'TR_NT': 21, 'UHB': 38, 'UXLC': 38}`
+- rows by corpus: `{'BYZ_NT': 21, 'EBIBLE_WLC': 40, 'KJV': 21, 'MAM': 40, 'MT_WLC': 40, 'SBLGNT': 21, 'TCG_NT': 21, 'TR_NT': 21, 'UHB': 40, 'UXLC': 40}`
 
 ## Excerpts
 
 | Rank | Corpus | Term | Center | Center has term | Span has term | Center excerpt |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | KJV | `heth` | ACT 25:20 | True | True | And because I doubted of such manner of questions, I asked him whether he would go to Jerusalem, and there be judged of these matters. |
-| 2 | KJV | `heth` | DEU 24:14 | True | True | ¶ Thou shalt not oppress an hired servant that is poor and needy, whether he be of thy brethren, or of thy strangers that are in thy land... |
-| 3 | KJV | `aids` | ISA 47:7 | True | True | ¶ And thou saidst, I shall be a lady for ever: so that thou didst not lay these things to thy heart, neither didst remember the latter en... |
-| 4 | KJV | `edom` | 1CH 19:1 | False | False | Now it came to pass after this, that Nahash the king of the children of Ammon died, and his son reigned in his stead. |
-| 5 | KJV | `shem` | 1CH 4:26 | False | False | And the sons of Mishma; Hamuel his son, Zacchur his son, Shimei his son. |
-| 6 | KJV | `seba` | 1CH 4:28 | False | False | And they dwelt at Beer-sheba, and Moladah, and Hazar-shual, |
+| 1 | KJV | `baal` | 2KI 10:19 | True | True | Now therefore call unto me all the prophets of Baal, all his servants, and all his priests; let none be wanting: for I have a great sacri... |
+| 2 | KJV | `heth` | ACT 25:20 | True | True | And because I doubted of such manner of questions, I asked him whether he would go to Jerusalem, and there be judged of these matters. |
+| 3 | KJV | `heth` | DEU 24:14 | True | True | ¶ Thou shalt not oppress an hired servant that is poor and needy, whether he be of thy brethren, or of thy strangers that are in thy land... |
+| 4 | KJV | `obed` | 1CH 16:3 | False | False | And he dealt to every one of Israel, both man and woman, to every one a loaf of bread, and a good piece of flesh, and a flagon of wine . |
+| 5 | KJV | `obed` | 1CH 16:3 | False | False | And he dealt to every one of Israel, both man and woman, to every one a loaf of bread, and a good piece of flesh, and a flagon of wine . |
+| 6 | KJV | `edom` | 1CH 19:1 | False | False | Now it came to pass after this, that Nahash the king of the children of Ammon died, and his son reigned in his stead. |
 | 7 | KJV | `hand` | 1CH 2:2 | True | True | Dan, Joseph, and Benjamin, Naphtali, Gad, and Asher. |
 | 8 | KJV | `heal` | 1KI 1:6 | True | True | And his father had not displeased him at any time in saying, Why hast thou done so? and he also was a very goodly man; and his mother bar... |
 | 9 | KJV | `hand` | 1KI 3:6 | True | True | And Solomon said, Thou hast shewed unto thy servant David my father great mercy, according as he walked before thee in truth, and in righ... |
 | 10 | KJV | `sign` | 1CH 10:13 | False | False | ¶ So Saul died for his transgression which he committed against the LORD , even against the word of the LORD , which he kept not, and als... |
 | 11 | KJV | `adar` | 1CH 11:19 | False | False | And said, My God forbid it me, that I should do this thing: shall I drink the blood of these men that have put their lives in jeopardy? f... |
 | 12 | KJV | `adam` | 1CH 12:31 | False | False | And of the half tribe of Manasseh eighteen thousand, which were expressed by name, to come and make David king. |
-| 13 | KJV | `lord` | 1SA 30:24 | False | True | For who will hearken unto you in this matter? but as his part is that goeth down to the battle, so shall his part be that tarrieth by the... |
-| 14 | KJV | `lord` | 1SA 30:24 | False | True | For who will hearken unto you in this matter? but as his part is that goeth down to the battle, so shall his part be that tarrieth by the... |
-| 15 | KJV | `isis` | JOS 15:19 | False | True | Who answered, Give me a blessing; for thou hast given me a south land; give me also springs of water. And he gave her the upper springs,... |
+| 13 | KJV | `thin` | 1JN 2:5 | False | True | But whoso keepeth his word, in him verily is the love of God perfected: hereby know we that we are in him. |
+| 14 | KJV | `rent` | GEN 31:55 | False | True | And early in the morning Laban rose up, and kissed his sons and his daughters, and blessed them: and Laban departed, and returned unto hi... |
+| 15 | KJV | `wine` | ISA 22:14 | False | True | And it was revealed in mine ears by the LORD of hosts, Surely this iniquity shall not be purged from you till ye die, saith the Lord GOD... |
 | 16 | KJV | `adar` | 1SA 15:14 | False | False | And Samuel said, What meaneth then this bleating of the sheep in mine ears, and the lowing of the oxen which I hear? |
 | 17 | KJV | `mash` | 1SA 28:18 | False | False | Because thou obeyedst not the voice of the LORD , nor executedst his fierce wrath upon Amalek, therefore hath the LORD done this thing un... |
 | 18 | KJV | `adam` | 1SA 9:22 | False | False | And Samuel took Saul and his servant, and brought them into the parlour, and made them sit in the chiefest place among them that were bid... |
 | 19 | KJV | `heal` | 1CH 10:11 | False | False | ¶ And when all Jabesh-gilead heard all that the Philistines had done to Saul, |
-| 20 | KJV | `cush` | 1CH 10:4 | False | False | Then said Saul to his armourbearer, Draw thy sword, and thrust me through therewith; lest these uncircumcised come and abuse me. But his... |
-| 21 | KJV | `bear` | 1CH 11:8 | False | False | And he built the city round about, even from Millo round about: and Joab repaired the rest of the city. |
-| 22 | BYZ_NT | `νατο` (nato; English: NATO) | ROM 5:10 | True | True | ει γαρ εχθροι οντεσ κατηλλαγημεν τω θεω δια του θανατου του υιου αυτου πολλω μαλλον καταλλαγεντεσ σωθησομεθα εν τη ζωη αυτου |
-| 22 | SBLGNT | `νατο` (nato; English: NATO) | Rom 5:10 | True | True | εἰ γὰρ ἐχθροὶ ὄντες κατηλλάγημεν τῷ θεῷ διὰ τοῦ θανάτου τοῦ υἱοῦ αὐτοῦ, πολλῷ μᾶλλον καταλλαγέντες σωθησόμεθα ἐν τῇ ζωῇ αὐτοῦ· |
-| 22 | TCG_NT | `νατο` (nato; English: NATO) | ROM 5:10 | True | True | Εἰ γὰρ ἐχθροὶ ὄντες κατηλλάγημεν τῷ Θεῷ διὰ τοῦ θανάτου τοῦ υἱοῦ αὐτοῦ, πολλῷ μᾶλλον καταλλαγέντες σωθησόμεθα ἐν τῇ ζωῇ αὐτοῦ· |
-| 22 | TR_NT | `νατο` (nato; English: NATO) | ROM 5:10 | True | True | Εἰ γὰρ ἐχθροὶ ὄντες κατηλλάγημεν τῷ Θεῷ διὰ τοῦ θανάτου τοῦ υἱοῦ αὐτοῦ , πολλῷ μᾶλλον καταλλαγέντες σωθησόμεθα ἐν τῇ ζωῇ αὐτοῦ · |
-| 23 | BYZ_NT | `ναοσ` (naos; English: Temple) | MAT 23:17 | True | True | μωροι και τυφλοι τισ γαρ μειζων εστιν ο χρυσοσ η ο ναοσ ο αγιαζων τον χρυσον |
-| 23 | SBLGNT | `ναοσ` (naos; English: Temple) | Matt 23:17 | True | True | μωροὶ καὶ τυφλοί, τίς γὰρ μείζων ἐστίν, ὁ χρυσὸς ἢ ὁ ναὸς ὁ ⸀ἁγιάσας τὸν χρυσόν; |
-| 23 | TCG_NT | `ναοσ` (naos; English: Temple) | MAT 23:17 | True | True | Μωροὶ καὶ τυφλοί · τίς γὰρ μείζων ἐστίν , ὁ χρυσός , ἢ ὁ ναὸς ὁ ἁγιάζων τὸν χρυσόν ; |
-| 23 | TR_NT | `ναοσ` (naos; English: Temple) | MAT 23:17 | True | True | Μωροὶ καὶ τυφλοί · τίς γὰρ μείζων ἐστίν , ὁ χρυσός , ἢ ὁ ναὸς ὁ ἁγιάζων τὸν χρυσόν ; |
-| 24 | BYZ_NT | `αιμα` (haima; English: Blood) | REV 19:13 | True | True | και περιβεβλημενοσ ιματιον βεβαμμενον αιματι και καλειται το ονομα αυτου ο λογοσ του θεου |
-| 24 | SBLGNT | `αιμα` (haima; English: Blood) | Rev 19:13 | True | True | καὶ περιβεβλημένος ἱμάτιον ⸀βεβαμμένον αἵματι, καὶ ⸀κέκληται τὸ ὄνομα αὐτοῦ ὁ Λόγος τοῦ Θεοῦ. |
-| 24 | TCG_NT | `αιμα` (haima; English: Blood) | REV 19:13 | True | True | καὶ περιβεβλημένος ἱμάτιον βεβαμμένον αἵματι, καὶ κέκληται τὸ ὄνομα αὐτοῦ ὁ Λόγος τοῦ Θεοῦ. |
-| 24 | TR_NT | `αιμα` (haima; English: Blood) | REV 19:13 | True | True | καὶ περιβεβλημένος ἱμάτιον βεβαμμένον αἵματι · καὶ καλεῖται τὸ ὄνομα αὐτοῦ , Ὁ λόγος τοῦ Θεοῦ . |
+| 20 | KJV | `sign` | 1CH 10:13 | False | False | ¶ So Saul died for his transgression which he committed against the LORD , even against the word of the LORD , which he kept not, and als... |
+| 21 | KJV | `cush` | 1CH 10:4 | False | False | Then said Saul to his armourbearer, Draw thy sword, and thrust me through therewith; lest these uncircumcised come and abuse me. But his... |
+| 22 | BYZ_NT | `παισ` (pais; English: Servant) | LUK 22:64 | True | True | και περικαλυψαντεσ αυτον ετυπτον αυτου το προσωπον και επηρωτων αυτον λεγοντεσ προφητευσον τισ εστιν ο παισασ σε |
+| 22 | SBLGNT | `παισ` (pais; English: Servant) | Luke 22:64 | True | True | καὶ περικαλύψαντες ⸂αὐτὸν ἐπηρώτων⸃ λέγοντες· Προφήτευσον, τίς ἐστιν ὁ παίσας σε; |
+| 22 | TCG_NT | `παισ` (pais; English: Servant) | LUK 22:64 | True | True | Καὶ περικαλύψαντες αὐτόν, ἔτυπτον αὐτοῦ τὸ πρόσωπον, καὶ ἐπηρώτων αὐτόν, λέγοντες, Προφήτευσον. Τίς ἐστιν ὁ παίσας σε; |
+| 22 | TR_NT | `παισ` (pais; English: Servant) | LUK 22:64 | True | True | Καὶ περικαλύψαντες αὐτόν , ἔτυπτον αὐτοῦ τὸ πρόσωπον , καὶ ἐπηρώτων αὐτόν , λέγοντες , Προφήτευσον . Τίς ἐστιν ὁ παίσας σε ; |
+| 23 | BYZ_NT | `αννα` (anna; English: Hannah) | MAT 21:9 | True | True | οι δε οχλοι οι προαγοντεσ και οι ακολουθουντεσ εκραζον λεγοντεσ ωσαννα τω υιω δαυιδ ευλογημενοσ ο ερχομενοσ εν ονοματι κυριου ωσαννα εν τ... |
+| 23 | SBLGNT | `αννα` (anna; English: Hannah) | Matt 21:9 | True | True | οἱ δὲ ὄχλοι οἱ προάγοντες ⸀αὐτὸν καὶ οἱ ἀκολουθοῦντες ἔκραζον λέγοντες· Ὡσαννὰ τῷ υἱῷ Δαυίδ· Εὐλογημένος ὁ ἐρχόμενος ἐν ὀνόματι κυρίου· Ὡ... |
+| 23 | TCG_NT | `αννα` (anna; English: Hannah) | MAT 21:9 | True | True | Οἱ δὲ ὄχλοι οἱ προάγοντες καὶ οἱ ἀκολουθοῦντες ἔκραζον, λέγοντες, Ὡσαννὰ τῷ υἱῷ Δαυίδ· εὐλογημένος ὁ ἐρχόμενος ἐν ὀνόματι Κυρίου. Ὡσαννὰ... |
+| 23 | TR_NT | `αννα` (anna; English: Hannah) | MAT 21:9 | True | True | Οἱ δὲ ὄχλοι οἱ προάγοντες καὶ οἱ ἀκολουθοῦντες ἔκραζον , λέγοντες , Ὡσαννὰ τῷ υἱῷ Δαβίδ· εὐλογημένος ὁ ἐρχόμενος ἐν ὀνόματι Κυρίου . Ὡσαν... |
+| 24 | BYZ_NT | `αννα` (anna; English: Hannah) | MAT 21:9 | True | True | οι δε οχλοι οι προαγοντεσ και οι ακολουθουντεσ εκραζον λεγοντεσ ωσαννα τω υιω δαυιδ ευλογημενοσ ο ερχομενοσ εν ονοματι κυριου ωσαννα εν τ... |
+| 24 | SBLGNT | `αννα` (anna; English: Hannah) | Matt 21:9 | True | True | οἱ δὲ ὄχλοι οἱ προάγοντες ⸀αὐτὸν καὶ οἱ ἀκολουθοῦντες ἔκραζον λέγοντες· Ὡσαννὰ τῷ υἱῷ Δαυίδ· Εὐλογημένος ὁ ἐρχόμενος ἐν ὀνόματι κυρίου· Ὡ... |
+| 24 | TCG_NT | `αννα` (anna; English: Hannah) | MAT 21:9 | True | True | Οἱ δὲ ὄχλοι οἱ προάγοντες καὶ οἱ ἀκολουθοῦντες ἔκραζον, λέγοντες, Ὡσαννὰ τῷ υἱῷ Δαυίδ· εὐλογημένος ὁ ἐρχόμενος ἐν ὀνόματι Κυρίου. Ὡσαννὰ... |
+| 24 | TR_NT | `αννα` (anna; English: Hannah) | MAT 21:9 | True | True | Οἱ δὲ ὄχλοι οἱ προάγοντες καὶ οἱ ἀκολουθοῦντες ἔκραζον , λέγοντες , Ὡσαννὰ τῷ υἱῷ Δαβίδ· εὐλογημένος ὁ ἐρχόμενος ἐν ὀνόματι Κυρίου . Ὡσαν... |
 | 25 | BYZ_NT | `λουδ` (loud; English: Lud) | PHP 2:7 | False | False | αλλ εαυτον εκενωσεν μορφην δουλου λαβων εν ομοιωματι ανθρωπων γενομενοσ |
 | 25 | SBLGNT | `λουδ` (loud; English: Lud) | Phil 2:7 | False | False | ἀλλὰ ἑαυτὸν ἐκένωσεν μορφὴν δούλου λαβών, ἐν ὁμοιώματι ἀνθρώπων γενόμενος· καὶ σχήματι εὑρεθεὶς ὡς ἄνθρωπος |
 | 25 | TCG_NT | `λουδ` (loud; English: Lud) | PHP 2:7 | False | False | ἀλλ᾽ ἑαυτὸν ἐκένωσε, μορφὴν δούλου λαβών, ἐν ὁμοιώματι ἀνθρώπων γενόμενος· |
@@ -97,7 +97,7 @@ content is actually meaningful, merely lexical, or unrelated.
 | 36 | BYZ_NT | `νατο` (nato; English: NATO) | 1CO 1:27 | True | True | αλλα τα μωρα του κοσμου εξελεξατο ο θεοσ ινα τουσ σοφουσ καταισχυνη και τα ασθενη του κοσμου εξελεξατο ο θεοσ ινα καταισχυνη τα ισχυρα |
 | 36 | SBLGNT | `νατο` (nato; English: NATO) | 1Cor 1:27 | False | True | ἀλλὰ τὰ μωρὰ τοῦ κόσμου ἐξελέξατο ὁ θεός, ἵνα ⸂καταισχύνῃ τοὺς σοφούς⸃, καὶ τὰ ἀσθενῆ τοῦ κόσμου ἐξελέξατο ὁ θεός, ἵνα καταισχύνῃ τὰ ἰσχυρά, |
 | 36 | TCG_NT | `νατο` (nato; English: NATO) | 1CO 1:27 | True | True | ἀλλὰ τὰ μωρὰ τοῦ κόσμου ἐξελέξατο ὁ Θεός, ἵνα τοὺς σοφοὺς καταισχύνῃ· καὶ τὰ ἀσθενῆ τοῦ κόσμου ἐξελέξατο ὁ Θεός, ἵνα καταισχύνῃ τὰ ἰσχυρά· |
-| ... | ... | ... | ... | ... | ... | 215 more rows in CSV |
+| ... | ... | ... | ... | ... | ... | 225 more rows in CSV |
 
 ## Read
 
