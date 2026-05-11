@@ -29,7 +29,7 @@ python3 -m scripts.build_crd_comparison
 | deterministic | `גוג` (Gog; English: Gog)<br>`gog_h` | 10.0247109 | 0 |  | true |
 | deterministic | `קרן` (qeren; English: horn)<br>`horn_h` | 5.84774803 | 0 |  | true |
 | deterministic | `נביא` (navi; English: prophet)<br>`prophet_h` | 3.3415703 | 0 |  | true |
-| deterministic | `חותם` (chwtm; English: Seal)<br>`seal_h` | 2.50617773 | 0 |  | true |
+| deterministic | `חותם` (chotam; English: seal)<br>`seal_h` | 2.50617773 | 0 |  | true |
 | deterministic | `חיה` (chayah; English: beast/living creature)<br>`beast_h` | 0 | 0 |  | false |
 | deterministic | `תנין` (tannin; English: dragon/sea monster)<br>`dragon_h` | 0 | 0 |  | false |
 
@@ -49,7 +49,7 @@ python3 -m scripts.build_crd_comparison
 | deterministic | `גוג` (Gog; English: Gog)<br>`gog_h` | 10.0247109 | MT_WLC |
 | deterministic | `קרן` (qeren; English: horn)<br>`horn_h` | 5.84774803 | MT_WLC |
 | deterministic | `נביא` (navi; English: prophet)<br>`prophet_h` | 3.3415703 | MT_WLC |
-| deterministic | `חותם` (chwtm; English: Seal)<br>`seal_h` | 2.50617773 | MT_WLC |
+| deterministic | `חותם` (chotam; English: seal)<br>`seal_h` | 2.50617773 | MT_WLC |
 
 ## Relevance Scope Summary
 
@@ -65,18 +65,18 @@ python3 -m scripts.build_crd_comparison
 | deterministic | bible | `קרן` (qeren; English: horn)<br>`horn_h` | center_verse | 27 |
 | deterministic | bible | `חזון` (chazon; English: vision)<br>`vision_h` | center_verse | 12 |
 | deterministic | bible | `נביא` (navi; English: prophet)<br>`prophet_h` | center_verse | 10 |
-| deterministic | bible | `חותם` (chwtm; English: Seal)<br>`seal_h` | center_verse | 5 |
+| deterministic | bible | `חותם` (chotam; English: seal)<br>`seal_h` | center_verse | 5 |
 | deterministic | bible | `דריוש` (Daryavesh; English: Darius)<br>`darius_h` | span | 130 |
 | deterministic | bible | `מגוג` (Magog; English: Magog)<br>`magog_h` | span | 67 |
 | deterministic | bible | `חזון` (chazon; English: vision)<br>`vision_h` | span | 25 |
 | deterministic | bible | `גוג` (Gog; English: Gog)<br>`gog_h` | span | 20 |
 | deterministic | bible | `כורש` (Koresh; English: Cyrus)<br>`cyrus_h` | span | 15 |
-| deterministic | bible | `חותם` (chwtm; English: Seal)<br>`seal_h` | span | 2 |
+| deterministic | bible | `חותם` (chotam; English: seal)<br>`seal_h` | span | 2 |
 | deterministic | bible | `מגוג` (Magog; English: Magog)<br>`magog_h` | verse_ref_match | 9 |
 | deterministic | bible | `דריוש` (Daryavesh; English: Darius)<br>`darius_h` | verse_ref_match | 6 |
 | deterministic | bible | `חזון` (chazon; English: vision)<br>`vision_h` | verse_ref_match | 5 |
 | deterministic | bible | `קרן` (qeren; English: horn)<br>`horn_h` | verse_ref_match | 3 |
-| deterministic | bible | `חותם` (chwtm; English: Seal)<br>`seal_h` | verse_ref_match | 3 |
+| deterministic | bible | `חותם` (chotam; English: seal)<br>`seal_h` | verse_ref_match | 3 |
 
 ## Representative Relevant Centers
 

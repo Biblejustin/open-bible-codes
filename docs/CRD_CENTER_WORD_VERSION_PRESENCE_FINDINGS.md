@@ -41,9 +41,9 @@ This table collapses duplicate term IDs that use the same normalized hidden spel
 | --- | --- | ---: | ---: | ---: | --- | --- | ---: | ---: |
 | `יהוה` (YHWH; English: YHWH)<br>`bns_esther_yhwh_h, cc_yhwh_h, dyn_yhwh_h, ...` | hebrew | 6 | 54 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 10.0247109 | 0 |
 | `ישראל` (Yisrael; English: Israel)<br>`cc_israel_h, htp_israel_h, israel_h, ...` | hebrew | 4 | 33 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 5.84774803 | 0.725114523 |
-| `זהב` (zhb; English: Gold)<br>`daniel_gold_h` | hebrew | 1 | 30 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 5.01830007 | 0 |
+| `זהב` (zahav; English: gold)<br>`daniel_gold_h` | hebrew | 1 | 30 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 5.01830007 | 0 |
 | `בבל` (Bavel; English: Babylon)<br>`babel_h, babylon_alt_h, babylon_h, ...` | hebrew | 4 | 25 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 6.68314061 | 0 |
-| `כסף` (ksp; English: Silver)<br>`daniel_silver_h` | hebrew | 1 | 22 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 4.17696288 | 0 |
+| `כסף` (kesef; English: silver)<br>`daniel_silver_h` | hebrew | 1 | 22 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 4.17696288 | 0 |
 | `שלמה` (Shlomo; English: Solomon)<br>`narrative_solomon_h, solomon_h` | hebrew | 2 | 15 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 2.50915003 | 0.362557261 |
 | `שלל` (shalal; English: spoil/plunder)<br>`bcd_spoils_h` | hebrew | 1 | 15 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 2.50915003 | 0.349895093 |
 | `אלהים` (Elohim; English: God/Elohim)<br>`cc_elohim_h, god_h` | hebrew | 2 | 15 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 2.50915003 | 0 |
@@ -74,12 +74,12 @@ This table collapses duplicate term IDs that use the same normalized hidden spel
 | `ישראל` (Yisrael; English: Israel)<br>`htp_israel_h` | hebrew | 33 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 5.84774803 | 0.725114523 |
 | `ישראל` (Yisrael; English: Israel)<br>`israel_h` | hebrew | 33 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 5.84774803 | 0.725114523 |
 | `ישראל` (Yisrael; English: Israel)<br>`twn_israel_h` | hebrew | 33 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 5.84774803 | 0.725114523 |
-| `זהב` (zhb; English: Gold)<br>`daniel_gold_h` | hebrew | 30 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 5.01830007 | 0 |
+| `זהב` (zahav; English: gold)<br>`daniel_gold_h` | hebrew | 30 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 5.01830007 | 0 |
 | `בבל` (Bavel; English: Babylon)<br>`babel_h` | hebrew | 25 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 6.68314061 | 0 |
 | `בבל` (Bavel; English: Babylon)<br>`babylon_alt_h` | hebrew | 25 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 6.68314061 | 0 |
 | `בבל` (Bavel; English: Babylon)<br>`babylon_h` | hebrew | 25 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 6.68314061 | 0 |
 | `בבל` (Bavel; English: Babylon)<br>`bns_babylon_h` | hebrew | 25 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 6.68314061 | 0 |
-| `כסף` (ksp; English: Silver)<br>`daniel_silver_h` | hebrew | 22 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 4.17696288 | 0 |
+| `כסף` (kesef; English: silver)<br>`daniel_silver_h` | hebrew | 22 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 4.17696288 | 0 |
 | `צדק` (tzedek; English: righteousness/Jupiter)<br>`cc_jupiter_h` | hebrew | 16 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 4.17696288 | 1.08767178 |
 | `שלל` (shalal; English: spoil/plunder)<br>`bcd_spoils_h` | hebrew | 15 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 2.50915003 | 0.349895093 |
 | `אלהים` (Elohim; English: God/Elohim)<br>`cc_elohim_h` | hebrew | 15 | 5 | EBIBLE_WLC; MAM; MT_WLC; UHB; UXLC | true | 2.50915003 | 0 |

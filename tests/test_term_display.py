@@ -49,6 +49,18 @@ class TermDisplayTests(unittest.TestCase):
         self.assertEqual(display_term("מצרימ"), "`מצרימ` (Mitzrayim; English: Egypt)")
         self.assertEqual(display_term("איש"), "`איש` (ish; English: man)")
         self.assertEqual(display_term("בתוכ"), "`בתוכ` (betokh; English: in the midst)")
+        self.assertEqual(display_term("דוד"), "`דוד` (David; English: David)")
+        self.assertEqual(display_term("כסא"), "`כסא` (kisse; English: throne)")
+        self.assertEqual(display_term("ציונ"), "`ציונ` (Tziyon; English: Zion)")
+        self.assertEqual(display_term("פסח"), "`פסח` (Pesach; English: Passover)")
+        self.assertEqual(display_term("מלכות"), "`מלכות` (malkhut; English: kingdom)")
+        self.assertEqual(display_term("חבורה"), "`חבורה` (chabburah; English: stripe/wound)")
+        self.assertEqual(display_term("שמע"), "`שמע` (shema; English: hear)")
+        self.assertEqual(display_term("לחמ"), "`לחמ` (lechem; English: bread)")
+        self.assertEqual(display_term("ארצ"), "`ארצ` (eretz; English: earth/land)")
+        self.assertEqual(display_term("עבד"), "`עבד` (eved; English: servant)")
+        self.assertEqual(display_term("קבר"), "`קבר` (qever; English: grave)")
+        self.assertEqual(display_term("חותם"), "`חותם` (chotam; English: seal)")
 
     def test_displays_core_hebrew_report_terms_with_glosses(self) -> None:
         self.assertEqual(display_term("יהוה"), "`יהוה` (YHWH; English: YHWH)")
