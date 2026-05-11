@@ -123,6 +123,7 @@ def test_write_markdown_includes_declared_gap_target_section(tmp_path) -> None:
         "centered_elsewhere": "25",
         "centered_in_passage": "0",
         "expected_in_passage_uniform": "3.000",
+        "uniform_zero_probability": "0.049787",
         "sample_center_refs": "",
     }
 
@@ -132,3 +133,5 @@ def test_write_markdown_includes_declared_gap_target_section(tmp_path) -> None:
     assert "## Declared Gap-Target Passages" in text
     assert "## Declared Gap-Target Detail" in text
     assert "Leviticus 24 Blasphemy Law" in text
+    assert "Uniform Zero P" in text
+    assert "0.049787" in text

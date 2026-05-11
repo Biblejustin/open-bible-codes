@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import math
 import time
 from collections import defaultdict
 from dataclasses import dataclass
@@ -55,6 +56,7 @@ DETAIL_FIELDS = [
     "centered_in_passage",
     "centered_elsewhere",
     "expected_in_passage_uniform",
+    "uniform_zero_probability",
     "passage_letters",
     "corpus_letters",
     "passage_hit_rate_per_million",
@@ -415,6 +417,7 @@ def detail_row(
         "centered_in_passage": centered_in_passage,
         "centered_elsewhere": max(total_hits - centered_in_passage, 0),
         "expected_in_passage_uniform": f"{expected_in_passage:.3f}",
+        "uniform_zero_probability": f"{math.exp(-expected_in_passage):.6f}",
         "passage_letters": passage_span.norm_length,
         "corpus_letters": len(corpus.text),
         "passage_hit_rate_per_million": f"{passage_rate:.3f}",
@@ -527,15 +530,15 @@ def write_markdown(
                 "",
                 "## Declared Gap-Target Detail",
                 "",
-                "| Passage | Corpus | Term | Gap Class | Hits Elsewhere | Hits In Passage | Uniform Expected | Sample Center Refs |",
-                "| --- | --- | --- | --- | ---: | ---: | ---: | --- |",
+                "| Passage | Corpus | Term | Gap Class | Hits Elsewhere | Hits In Passage | Uniform Expected | Uniform Zero P | Sample Center Refs |",
+                "| --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- |",
             ]
         )
         for row in declared_gap_target_details[:40]:
             term_display = display_term(str(row["normalized_term"]), english=str(row["concept"]))
             lines.append(
                 "| {passage_concept} | {corpus_label} | {term} | {gap_class} | {centered_elsewhere} | "
-                "{centered_in_passage} | {expected_in_passage_uniform} | {sample_center_refs} |".format(
+                "{centered_in_passage} | {expected_in_passage_uniform} | {uniform_zero_probability} | {sample_center_refs} |".format(
                     passage_concept=row["passage_concept"],
                     corpus_label=row["corpus_label"],
                     term=term_display,
@@ -543,6 +546,7 @@ def write_markdown(
                     centered_elsewhere=row["centered_elsewhere"],
                     centered_in_passage=row["centered_in_passage"],
                     expected_in_passage_uniform=row["expected_in_passage_uniform"],
+                    uniform_zero_probability=row["uniform_zero_probability"],
                     sample_center_refs=row["sample_center_refs"],
                 )
             )
@@ -571,15 +575,15 @@ def write_markdown(
             "",
             "Rows are sorted by gap class first, then by how frequently the term appears centered elsewhere in the same corpus.",
             "",
-            "| Passage | Corpus | Term | Gap Class | Hits Elsewhere | Hits In Passage | Uniform Expected | Sample Center Refs |",
-            "| --- | --- | --- | --- | ---: | ---: | ---: | --- |",
+            "| Passage | Corpus | Term | Gap Class | Hits Elsewhere | Hits In Passage | Uniform Expected | Uniform Zero P | Sample Center Refs |",
+            "| --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- |",
         ]
     )
     for row in notable_absences[:80]:
         term_display = display_term(str(row["normalized_term"]), english=str(row["concept"]))
         lines.append(
             "| {passage_concept} | {corpus_label} | {term} | {gap_class} | {centered_elsewhere} | "
-            "{centered_in_passage} | {expected_in_passage_uniform} | {sample_center_refs} |".format(
+            "{centered_in_passage} | {expected_in_passage_uniform} | {uniform_zero_probability} | {sample_center_refs} |".format(
                 passage_concept=row["passage_concept"],
                 corpus_label=row["corpus_label"],
                 term=term_display,
@@ -587,6 +591,7 @@ def write_markdown(
                 centered_elsewhere=row["centered_elsewhere"],
                 centered_in_passage=row["centered_in_passage"],
                 expected_in_passage_uniform=row["expected_in_passage_uniform"],
+                uniform_zero_probability=row["uniform_zero_probability"],
                 sample_center_refs=row["sample_center_refs"],
             )
         )
@@ -603,6 +608,7 @@ def write_markdown(
             "",
             "- This report does not treat absence as a negative proof. It records silence and lower-density rows so they can be reviewed alongside positive centered hits.",
             "- `expected_in_passage_uniform` is a descriptive baseline only; it is not a formal p-value.",
+            "- `uniform_zero_probability` is the simple Poisson `exp(-expected)` probability of zero hits under that uniform baseline; it is a triage aid, not a formal independence test.",
             "- Short surface terms can be skipped by the minimum term length rule; skipped rows remain in the detail CSV for auditability.",
             "- Passage ranges are resolved independently per source; versification and source differences can change passage letter counts even when the declared start/end refs are the same.",
         ]
