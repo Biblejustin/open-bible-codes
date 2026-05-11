@@ -62,6 +62,30 @@ control cautions travel beside them.
 
 Source artifact: `docs/FINAL_REPORT_HIGHLIGHTS.md`.
 
+### External Claim Source Runs
+
+The external-source lane brings term lists gathered from Bible Code Digest,
+TheWordNotes, Cosmic Codes, Mark Tabata's Isaiah 53 article, Bible-codes.org,
+Bible and Science, CRI, and Religions Wiki into the same Bible-vs-control
+screening machinery.
+
+The skip 2..100 count baseline measured 3,708 corpus-term rows across 8
+external term sets and 21 Bible/control corpora. The relaxed all-codes export
+then retained 8,443,775 length-4+ hidden-path rows for inspection. Of those,
+14,043 rows had a center word containing the same hidden term and 131,580 had
+a center word containing a related term. The triage queue keeps 926 rows for
+manual review.
+
+This is useful source-derived collection work, not reproduction of any external
+claim. A claim reproduction still needs that source's spelling, skip geometry,
+matrix width, proximity rule, and locked controls.
+
+Source artifacts:
+
+- `docs/EXTERNAL_CLAIM_SOURCE_COUNTS.md`
+- `docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_COLLECTION.md`
+- `docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_TRIAGE.md`
+
 ### Greek `δοξα` (doxa; English: glory)
 
 The strongest Greek controlled review row is:

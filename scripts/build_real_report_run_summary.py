@@ -111,6 +111,22 @@ KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_TERM_SUMMARY = Path(
 KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_MANIFEST = Path(
     "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/manifest.json"
 )
+EXTERNAL_CLAIM_COUNTS_SUMMARY = Path("reports/external_claim_source_counts/summary.csv")
+EXTERNAL_CLAIM_COUNTS_MANIFEST = Path(
+    "reports/external_claim_source_counts/summary.manifest.json"
+)
+EXTERNAL_CLAIM_ALL_CODES_SUMMARY = Path(
+    "reports/external_claim_source_all_codes/surface_all_codes_summary.csv"
+)
+EXTERNAL_CLAIM_ALL_CODES_SUMMARY_MANIFEST = Path(
+    "reports/external_claim_source_all_codes/summary.manifest.json"
+)
+EXTERNAL_CLAIM_ALL_CODES_TRIAGE = Path(
+    "reports/external_claim_source_all_codes/triage_queue.csv"
+)
+EXTERNAL_CLAIM_ALL_CODES_TRIAGE_MANIFEST = Path(
+    "reports/external_claim_source_all_codes/triage.manifest.json"
+)
 REPORT_INDEX = Path("reports/INDEX.md")
 OUT_DIR = Path("reports/real_report_run")
 SUMMARY_OUT = OUT_DIR / "summary.md"
@@ -207,6 +223,16 @@ def main(argv: list[str] | None = None) -> int:
     kjva_apocrypha_bridge_confirmatory_manifest = read_json(
         args.kjva_apocrypha_bridge_confirmatory_manifest
     )
+    external_claim_counts_rows = read_rows(args.external_claim_counts_summary)
+    external_claim_counts_manifest = read_json(args.external_claim_counts_manifest)
+    external_claim_all_codes_rows = read_rows(args.external_claim_all_codes_summary)
+    external_claim_all_codes_summary_manifest = read_json(
+        args.external_claim_all_codes_summary_manifest
+    )
+    external_claim_all_codes_triage_rows = read_rows(args.external_claim_all_codes_triage)
+    external_claim_all_codes_triage_manifest = read_json(
+        args.external_claim_all_codes_triage_manifest
+    )
     commit = git_commit()
 
     write_summary(
@@ -275,6 +301,12 @@ def main(argv: list[str] | None = None) -> int:
         centered_occurrence_manifest=centered_occurrence_manifest,
         kjva_apocrypha_bridge_confirmatory_rows=kjva_apocrypha_bridge_confirmatory_rows,
         kjva_apocrypha_bridge_confirmatory_manifest=kjva_apocrypha_bridge_confirmatory_manifest,
+        external_claim_counts_rows=external_claim_counts_rows,
+        external_claim_counts_manifest=external_claim_counts_manifest,
+        external_claim_all_codes_rows=external_claim_all_codes_rows,
+        external_claim_all_codes_summary_manifest=external_claim_all_codes_summary_manifest,
+        external_claim_all_codes_triage_rows=external_claim_all_codes_triage_rows,
+        external_claim_all_codes_triage_manifest=external_claim_all_codes_triage_manifest,
         report_index=args.report_index,
     )
     write_manifest(
@@ -343,6 +375,12 @@ def main(argv: list[str] | None = None) -> int:
         centered_occurrence_manifest=centered_occurrence_manifest,
         kjva_apocrypha_bridge_confirmatory_rows=kjva_apocrypha_bridge_confirmatory_rows,
         kjva_apocrypha_bridge_confirmatory_manifest=kjva_apocrypha_bridge_confirmatory_manifest,
+        external_claim_counts_rows=external_claim_counts_rows,
+        external_claim_counts_manifest=external_claim_counts_manifest,
+        external_claim_all_codes_rows=external_claim_all_codes_rows,
+        external_claim_all_codes_summary_manifest=external_claim_all_codes_summary_manifest,
+        external_claim_all_codes_triage_rows=external_claim_all_codes_triage_rows,
+        external_claim_all_codes_triage_manifest=external_claim_all_codes_triage_manifest,
         started=started,
     )
     print(args.summary_out)
@@ -587,6 +625,36 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_MANIFEST,
     )
+    parser.add_argument(
+        "--external-claim-counts-summary",
+        type=Path,
+        default=EXTERNAL_CLAIM_COUNTS_SUMMARY,
+    )
+    parser.add_argument(
+        "--external-claim-counts-manifest",
+        type=Path,
+        default=EXTERNAL_CLAIM_COUNTS_MANIFEST,
+    )
+    parser.add_argument(
+        "--external-claim-all-codes-summary",
+        type=Path,
+        default=EXTERNAL_CLAIM_ALL_CODES_SUMMARY,
+    )
+    parser.add_argument(
+        "--external-claim-all-codes-summary-manifest",
+        type=Path,
+        default=EXTERNAL_CLAIM_ALL_CODES_SUMMARY_MANIFEST,
+    )
+    parser.add_argument(
+        "--external-claim-all-codes-triage",
+        type=Path,
+        default=EXTERNAL_CLAIM_ALL_CODES_TRIAGE,
+    )
+    parser.add_argument(
+        "--external-claim-all-codes-triage-manifest",
+        type=Path,
+        default=EXTERNAL_CLAIM_ALL_CODES_TRIAGE_MANIFEST,
+    )
     parser.add_argument("--report-index", type=Path, default=REPORT_INDEX)
     parser.add_argument("--summary-out", type=Path, default=SUMMARY_OUT)
     parser.add_argument("--manifest-out", type=Path, default=MANIFEST_OUT)
@@ -660,6 +728,12 @@ def write_summary(
     centered_occurrence_manifest: dict[str, Any],
     kjva_apocrypha_bridge_confirmatory_rows: list[dict[str, str]],
     kjva_apocrypha_bridge_confirmatory_manifest: dict[str, Any],
+    external_claim_counts_rows: list[dict[str, str]],
+    external_claim_counts_manifest: dict[str, Any],
+    external_claim_all_codes_rows: list[dict[str, str]],
+    external_claim_all_codes_summary_manifest: dict[str, Any],
+    external_claim_all_codes_triage_rows: list[dict[str, str]],
+    external_claim_all_codes_triage_manifest: dict[str, Any],
     report_index: Path,
 ) -> None:
     real_counts = step_manifest.get("real_counts", {})
@@ -719,6 +793,8 @@ def write_summary(
         "- KJVA apocrypha/deuterocanon bridge term-level review",
         "- KJVA apocrypha/deuterocanon bridge term-level shuffled controls",
         "- KJVA apocrypha/deuterocanon bridge 5000-sample confirmatory controls",
+        "- external claim/source count baseline across Bible and secular controls",
+        "- external claim/source relaxed all-codes collection and triage queue",
         "- completed Gog/Magog prospective pair-control report",
         "- prospective-study lock/readiness documents",
         "- Bible Code Digest source audit and term-list expansion",
@@ -941,6 +1017,16 @@ def write_summary(
         )
     )
     lines.extend(
+        external_claim_source_section(
+            external_claim_counts_rows,
+            external_claim_counts_manifest,
+            external_claim_all_codes_rows,
+            external_claim_all_codes_summary_manifest,
+            external_claim_all_codes_triage_rows,
+            external_claim_all_codes_triage_manifest,
+        )
+    )
+    lines.extend(
         [
             "",
             "## Report Index",
@@ -1134,6 +1220,12 @@ def write_manifest(
     centered_occurrence_manifest: dict[str, Any],
     kjva_apocrypha_bridge_confirmatory_rows: list[dict[str, str]],
     kjva_apocrypha_bridge_confirmatory_manifest: dict[str, Any],
+    external_claim_counts_rows: list[dict[str, str]],
+    external_claim_counts_manifest: dict[str, Any],
+    external_claim_all_codes_rows: list[dict[str, str]],
+    external_claim_all_codes_summary_manifest: dict[str, Any],
+    external_claim_all_codes_triage_rows: list[dict[str, str]],
+    external_claim_all_codes_triage_manifest: dict[str, Any],
     started: float,
 ) -> None:
     payload = {
@@ -1245,6 +1337,16 @@ def write_manifest(
             ),
             "kjva_apocrypha_bridge_confirmatory_manifest": str(
                 args.kjva_apocrypha_bridge_confirmatory_manifest
+            ),
+            "external_claim_counts_summary": str(args.external_claim_counts_summary),
+            "external_claim_counts_manifest": str(args.external_claim_counts_manifest),
+            "external_claim_all_codes_summary": str(args.external_claim_all_codes_summary),
+            "external_claim_all_codes_summary_manifest": str(
+                args.external_claim_all_codes_summary_manifest
+            ),
+            "external_claim_all_codes_triage": str(args.external_claim_all_codes_triage),
+            "external_claim_all_codes_triage_manifest": str(
+                args.external_claim_all_codes_triage_manifest
             ),
             "report_index": str(args.report_index),
         },
@@ -1403,6 +1505,28 @@ def write_manifest(
         ),
         "kjva_apocrypha_bridge_confirmatory_terms_q_le_0_05": kjva_apocrypha_bridge_confirmatory_manifest.get(
             "terms_q_le_0_05", 0
+        ),
+        "external_claim_count_summary_rows": len(external_claim_counts_rows),
+        "external_claim_count_term_sets": len(
+            {row.get("term_set", "") for row in external_claim_counts_rows}
+        ),
+        "external_claim_count_corpora": len(
+            {row.get("corpus", "") for row in external_claim_counts_rows}
+        ),
+        "external_claim_count_total_hits": sum(
+            int_value(row, "total_hits") for row in external_claim_counts_rows
+        ),
+        "external_claim_count_manifest_rows": external_claim_counts_manifest.get("rows", 0),
+        "external_claim_all_codes_summary_rows": len(external_claim_all_codes_rows),
+        "external_claim_all_codes_hit_rows": external_claim_all_codes_summary_manifest.get(
+            "aggregates", {}
+        ).get("hit_rows", 0),
+        "external_claim_all_codes_context_hits": external_claim_all_codes_summary_manifest.get(
+            "aggregates", {}
+        ).get("context_hits", 0),
+        "external_claim_all_codes_triage_rows": len(external_claim_all_codes_triage_rows),
+        "external_claim_all_codes_triage_bucket_counts": external_claim_all_codes_triage_manifest.get(
+            "bucket_counts", {}
         ),
         "outputs": {
             "summary": str(args.summary_out),
@@ -1726,6 +1850,146 @@ def kjva_apocrypha_bridge_confirmatory_section(
             "and three terms exceed every shuffled sample. This raises follow-up",
             "priority for KJVA bridge rows, but the row family remains post-screen",
             "and should not be promoted as a claim without a new prospective study.",
+        ]
+    )
+    return lines
+
+
+def external_claim_source_section(
+    count_rows: list[dict[str, str]],
+    count_manifest: dict[str, Any],
+    all_codes_rows: list[dict[str, str]],
+    all_codes_summary_manifest: dict[str, Any],
+    triage_rows: list[dict[str, str]],
+    triage_manifest: dict[str, Any],
+) -> list[str]:
+    term_sets = {row.get("term_set", "") for row in count_rows if row.get("term_set")}
+    corpora = {row.get("corpus", "") for row in count_rows if row.get("corpus")}
+    total_hits = sum(int_value(row, "total_hits") for row in count_rows)
+    zero_rows = sum(int_value(row, "zero_rows") for row in count_rows)
+    top_count_rows = sorted(
+        count_rows,
+        key=lambda row: (-int_value(row, "total_hits"), row.get("term_set", "")),
+    )
+    aggregates = all_codes_summary_manifest.get("aggregates", {})
+    context_counts = aggregates.get("context_counts", {})
+    bucket_counts = triage_manifest.get("bucket_counts", {})
+    top_triage_rows = sorted(
+        triage_rows,
+        key=lambda row: (
+            int_value(row, "overall_rank"),
+            int_value(row, "bucket_rank"),
+            row.get("term_id", ""),
+        ),
+    )
+    lines = [
+        "",
+        "## External Claim Source Runs",
+        "",
+        "These runs bring the audited external-source term lists into the same",
+        "count and relaxed all-codes pipeline used elsewhere in the project. They",
+        "are source-derived screening and collection outputs; reproducing any",
+        "external claim still requires that source's exact spelling, skip",
+        "geometry, matrix width, proximity metric, and controls.",
+        "",
+        "| Metric | Count |",
+        "| --- | ---: |",
+        f"| Term-set/corpus summary rows | {len(count_rows):,} |",
+        f"| Term sets | {len(term_sets):,} |",
+        f"| Corpora | {len(corpora):,} |",
+        f"| Skip 2..100 count hits | {total_hits:,} |",
+        f"| Zero corpus-term rows | {zero_rows:,} |",
+        f"| All-codes summary rows | {len(all_codes_rows):,} |",
+        f"| Hidden-path rows retained | {int_value(aggregates, 'hit_rows'):,} |",
+        f"| Any surface-context hits | {int_value(aggregates, 'context_hits'):,} |",
+        f"| Center word contains same term | {int_value(aggregates, 'center_word_exact_hits'):,} |",
+        f"| Center word contains related term | {int_value(aggregates, 'center_word_related_hits'):,} |",
+        f"| Triage queue rows | {len(triage_rows):,} |",
+        "",
+        "Top count-summary rows:",
+        "",
+        "| Term set | Corpus | Counted | Zero | Hits | Max row |",
+        "| --- | --- | ---: | ---: | ---: | --- |",
+    ]
+    for row in top_count_rows[:8]:
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    md_cell(row.get("term_set", "")),
+                    md_cell(row.get("corpus", "")),
+                    f"{int_value(row, 'counted_rows'):,}",
+                    f"{int_value(row, 'zero_rows'):,}",
+                    f"{int_value(row, 'total_hits'):,}",
+                    md_cell(
+                        f"{row.get('max_term_id', '')} "
+                        f"{display_term(row.get('max_normalized_term', ''), english=row.get('max_concept', ''))} "
+                        f"({int_value(row, 'max_hit_count'):,})"
+                    ),
+                ]
+            )
+            + " |"
+        )
+    lines.extend(
+        [
+            "",
+            "All-codes context labels:",
+            "",
+            "| Label | Rows |",
+            "| --- | ---: |",
+        ]
+    )
+    for label, count in sorted(context_counts.items(), key=lambda item: (-item[1], item[0])):
+        lines.append(f"| `{label}` | {count:,} |")
+    lines.extend(
+        [
+            "",
+            "Triage bucket counts:",
+            "",
+            "| Bucket | Queue rows |",
+            "| --- | ---: |",
+        ]
+    )
+    for label, count in sorted(bucket_counts.items(), key=lambda item: (-item[1], item[0])):
+        lines.append(f"| `{label}` | {count:,} |")
+    lines.extend(
+        [
+            "",
+            "Top triage rows:",
+            "",
+            "| Rank | Bucket | Scope | Term | Center | Best context |",
+            "| ---: | --- | --- | --- | --- | --- |",
+        ]
+    )
+    for row in top_triage_rows[:10]:
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    row.get("overall_rank", ""),
+                    f"`{row.get('bucket', '')}`",
+                    f"`{row.get('presence_scope', '')}`",
+                    md_cell(
+                        f"{row.get('term_id', '')} "
+                        f"{display_term(row.get('normalized_term', ''), english=row.get('concept', ''))}"
+                    ),
+                    md_cell(
+                        f"{row.get('center_ref', '')} "
+                        f"{display_term(row.get('center_normalized_word', ''))}"
+                    ),
+                    f"`{row.get('best_context', '')}`",
+                ]
+            )
+            + " |"
+        )
+    lines.extend(
+        [
+            "",
+            f"Count manifest raw rows: {int_value(count_manifest, 'rows'):,}.",
+            "Current read: this broad source-audit lane is useful for discovering",
+            "what is present in which editions and controls. It should not be read",
+            "as claim reproduction without the source's original geometry and a",
+            "locked control design.",
         ]
     )
     return lines

@@ -68,6 +68,8 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("all_codes_followup_extensions", steps_by_id)
         self.assertIn("all_codes_compound_extension_controls", steps_by_id)
         self.assertIn("all_codes_followup_review", steps_by_id)
+        self.assertIn("external_claim_source_counts", steps_by_id)
+        self.assertIn("external_claim_source_all_codes_collection", steps_by_id)
         for step_id in [
             "greek_expanded_surface_queue",
             "greek_expanded_surface_triage",
@@ -94,6 +96,14 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("final_report_highlights", steps_by_id)
         self.assertIn(
             "reports/final_report_highlights/highlights.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
+            "reports/external_claim_source_counts/summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
+            "reports/external_claim_source_all_codes/triage_queue.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
@@ -145,6 +155,15 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/KJV_APOCRYPHA_BRIDGE_CONTEXT.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/KJV_APOCRYPHA_BRIDGE_CONTROLS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/EXTERNAL_CLAIM_SOURCE_COUNTS.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn(
+            "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_COLLECTION.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "protocols/external_claim_source_counts.toml",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
         self.assertIn("configs/example_ebible_engkjv_apocrypha.toml", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("protocols/apocrypha_bridge_study.toml", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/ALL_CODES_FOLLOWUP_LETTER_PATHS.md", preflight.DEFAULT_REQUIRED_PATHS)
@@ -603,6 +622,56 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("`γωγ`", text)
         self.assertIn("REV 20:8", text)
         self.assertIn("short length still", text)
+
+    def test_external_claim_source_section_summarizes_counts_and_triage(self) -> None:
+        lines = summary.external_claim_source_section(
+            [
+                {
+                    "term_set": "bible_code_digest_claim_terms",
+                    "corpus": "MT_WLC",
+                    "counted_rows": "3",
+                    "zero_rows": "1",
+                    "total_hits": "42",
+                    "max_term_id": "bcd_yhwh_h",
+                    "max_normalized_term": "יהוה",
+                    "max_concept": "YHWH",
+                    "max_hit_count": "25",
+                }
+            ],
+            {"rows": 3},
+            [{"term_id": "bcd_yhwh_h"}],
+            {
+                "aggregates": {
+                    "hit_rows": 100,
+                    "context_hits": 80,
+                    "center_word_exact_hits": 3,
+                    "center_word_related_hits": 5,
+                    "context_counts": {"exact_center": 40, "hidden_path_only": 20},
+                }
+            },
+            [
+                {
+                    "overall_rank": "1",
+                    "bucket_rank": "1",
+                    "bucket": "center_word_exact",
+                    "presence_scope": "multi_source",
+                    "term_id": "bcd_yhwh_h",
+                    "normalized_term": "יהוה",
+                    "concept": "YHWH",
+                    "center_ref": "1Kgs 10:5",
+                    "center_normalized_word": "יהוה",
+                    "best_context": "exact_center",
+                }
+            ],
+            {"bucket_counts": {"center_word_exact": 1}},
+        )
+        text = "\n".join(lines)
+
+        self.assertIn("## External Claim Source Runs", text)
+        self.assertIn("| Hidden-path rows retained | 100 |", text)
+        self.assertIn("`יהוה` (YHWH; English: YHWH)", text)
+        self.assertIn("center_word_exact", text)
+        self.assertIn("source's original geometry", text)
 
 
 if __name__ == "__main__":

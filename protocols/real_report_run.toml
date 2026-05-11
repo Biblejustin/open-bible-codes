@@ -168,9 +168,15 @@ inputs = [
   "protocols/kjv_apocrypha_bridge_term_review.toml",
   "protocols/kjv_apocrypha_bridge_term_shuffled_controls_1000.toml",
   "protocols/kjv_apocrypha_bridge_confirmatory_controls_5000.toml",
+  "protocols/external_claim_source_counts.toml",
+  "protocols/external_claim_source_all_codes_collection.toml",
+  "docs/EXTERNAL_CLAIM_SOURCE_COUNTS.md",
+  "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_COLLECTION.md",
+  "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_TRIAGE.md",
   "scripts/audit_apocrypha_coverage.py",
   "scripts/analyze_apocrypha_bridge_shuffled_controls.py",
   "scripts/analyze_apocrypha_bridge_term_shuffled_controls.py",
+  "scripts/analyze_broad_search.py",
   "scripts/summarize_kjv_apocrypha_bridge_terms.py",
   "scripts/download_ebible_engkjv_apocrypha.py",
   "scripts/build_study_lock_manifest.py",
@@ -828,6 +834,55 @@ inputs = [
 outputs = ["reports/kjv_apocrypha_bridge_confirmatory_controls_5000/protocol_run.manifest.json"]
 
 [[steps]]
+id = "external_claim_source_counts"
+description = "Refresh external-source claim and critique count baselines."
+argv = ["-m", "scripts.run_protocol", "protocols/external_claim_source_counts.toml", "--resume"]
+inputs = [
+  "protocols/external_claim_source_counts.toml",
+  "scripts/analyze_broad_search.py",
+  "els/term_display.py",
+  "terms/bible_code_digest_claim_terms.csv",
+  "terms/cri_els_critique_terms.csv",
+  "terms/thewordnotes_els_claim_terms.csv",
+  "terms/cosmic_codes_claim_terms.csv",
+  "terms/mark_tabata_isaiah53_claim_terms.csv",
+  "terms/bible_and_science_codes_terms.csv",
+  "terms/religions_wiki_scriptural_codes_terms.csv",
+  "terms/bible_codes_org_claim_terms.csv",
+]
+outputs = [
+  "reports/external_claim_source_counts/protocol_run.manifest.json",
+  "reports/external_claim_source_counts/summary.manifest.json",
+  "docs/EXTERNAL_CLAIM_SOURCE_COUNTS.md",
+]
+
+[[steps]]
+id = "external_claim_source_all_codes_collection"
+description = "Refresh external-source relaxed all-codes collection and triage."
+argv = ["-m", "scripts.run_protocol", "protocols/external_claim_source_all_codes_collection.toml", "--resume"]
+inputs = [
+  "protocols/external_claim_source_all_codes_collection.toml",
+  "scripts/summarize_surface_all_codes.py",
+  "scripts/triage_surface_all_codes.py",
+  "els/term_display.py",
+  "terms/bible_code_digest_claim_terms.csv",
+  "terms/cri_els_critique_terms.csv",
+  "terms/thewordnotes_els_claim_terms.csv",
+  "terms/cosmic_codes_claim_terms.csv",
+  "terms/mark_tabata_isaiah53_claim_terms.csv",
+  "terms/bible_and_science_codes_terms.csv",
+  "terms/religions_wiki_scriptural_codes_terms.csv",
+  "terms/bible_codes_org_claim_terms.csv",
+]
+outputs = [
+  "reports/external_claim_source_all_codes/protocol_run.manifest.json",
+  "reports/external_claim_source_all_codes/summary.manifest.json",
+  "reports/external_claim_source_all_codes/triage.manifest.json",
+  "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_COLLECTION.md",
+  "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_TRIAGE.md",
+]
+
+[[steps]]
 id = "final_report_highlights"
 description = "Build compact final-report highlight table from locked occurrence and catalog artifacts."
 argv = ["-m", "scripts.build_final_report_highlights"]
@@ -902,6 +957,11 @@ inputs = [
   "reports/kjv_apocrypha_bridge_term_shuffled_controls_1000/manifest.json",
   "reports/kjv_apocrypha_bridge_term_review/manifest.json",
   "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/manifest.json",
+  "reports/external_claim_source_counts/protocol_run.manifest.json",
+  "reports/external_claim_source_counts/summary.manifest.json",
+  "reports/external_claim_source_all_codes/protocol_run.manifest.json",
+  "reports/external_claim_source_all_codes/summary.manifest.json",
+  "reports/external_claim_source_all_codes/triage.manifest.json",
   "reports/final_report_highlights/manifest.json",
 ]
 outputs = [
@@ -1005,6 +1065,15 @@ inputs = [
   "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/manifest.json",
   "docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_PREREGISTRATION.md",
   "docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md",
+  "reports/external_claim_source_counts/summary.csv",
+  "reports/external_claim_source_counts/summary.manifest.json",
+  "reports/external_claim_source_all_codes/surface_all_codes_summary.csv",
+  "reports/external_claim_source_all_codes/summary.manifest.json",
+  "reports/external_claim_source_all_codes/triage_queue.csv",
+  "reports/external_claim_source_all_codes/triage.manifest.json",
+  "docs/EXTERNAL_CLAIM_SOURCE_COUNTS.md",
+  "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_COLLECTION.md",
+  "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_TRIAGE.md",
   "docs/BIBLE_CODE_DIGEST_AUDIT.md",
   "docs/CRI_ELS_CRITIQUE_AUDIT.md",
   "docs/THEWORDNOTES_ELS_AUDIT.md",
