@@ -7,7 +7,7 @@ Broader ELS count sweep across every declared term list.
 - Skip range: `2..100`
 - Direction: `both`
 - Term sets: 21
-- Rows: 8249
+- Rows: 8318
 - Manifest: `reports/broad_search/broad_search.manifest.json`
 
 ## Main Read
@@ -76,7 +76,7 @@ Broader ELS count sweep across every declared term list.
 | daniel_statue_metals | TR_NT | 5 | 3 | 42 | `daniel_clay_g` `πηλοσ` (pelos; English: Clay) (40) |
 | daniel_statue_metals | UHB | 5 | 0 | 12421 | `daniel_gold_h` `זהב` (zhb; English: Gold) (8325) |
 | daniel_statue_metals | UXLC | 5 | 0 | 12475 | `daniel_gold_h` `זהב` (zhb; English: Gold) (8369) |
-| english_search_terms | KJV | 1289 | 657 | 3735404 | `eng_end` `end` (273618) |
+| english_search_terms | KJV | 1298 | 661 | 3819361 | `eng_end` `end` (273618) |
 | eschatology_expanded_terms | BYZ_NT | 9 | 6 | 409 | `esch_666_g` `χξσ` (chxs; English: 666) (253) |
 | eschatology_expanded_terms | EBIBLE_WLC | 8 | 5 | 89256 | `esch_666_h` `תרו` (trw; English: 666) (74794) |
 | eschatology_expanded_terms | LXX | 9 | 6 | 1796 | `esch_666_g` `χξσ` (chxs; English: 666) (1156) |
@@ -192,16 +192,16 @@ Broader ELS count sweep across every declared term list.
 | table_of_nations | TR_NT | 91 | 29 | 88399 | `noah_g` `νωε` (Noe; English: Noah) (34092) |
 | table_of_nations | UHB | 86 | 2 | 1129891 | `javan_h` `יונ` (ywn; English: Javan) (136105) |
 | table_of_nations | UXLC | 86 | 2 | 1131366 | `javan_h` `יונ` (ywn; English: Javan) (136087) |
-| theological_terms | BYZ_NT | 74 | 22 | 117729 | `eve_g` `ευα` (eua; English: Eve) (86765) |
-| theological_terms | EBIBLE_WLC | 59 | 0 | 1015395 | `light_h` `אור` (or; English: Light) (115243) |
-| theological_terms | LXX | 74 | 15 | 509870 | `eve_g` `ευα` (eua; English: Eve) (378085) |
-| theological_terms | MAM | 59 | 0 | 1019006 | `light_h` `אור` (or; English: Light) (115587) |
-| theological_terms | MT_WLC | 59 | 0 | 1015373 | `light_h` `אור` (or; English: Light) (115238) |
-| theological_terms | SBLGNT | 74 | 21 | 116006 | `eve_g` `ευα` (eua; English: Eve) (85401) |
-| theological_terms | TCG_NT | 74 | 19 | 117985 | `eve_g` `ευα` (eua; English: Eve) (87390) |
-| theological_terms | TR_NT | 74 | 22 | 118581 | `eve_g` `ευα` (eua; English: Eve) (87671) |
-| theological_terms | UHB | 59 | 0 | 1014467 | `light_h` `אור` (or; English: Light) (115249) |
-| theological_terms | UXLC | 59 | 0 | 1015352 | `light_h` `אור` (or; English: Light) (115230) |
+| theological_terms | BYZ_NT | 78 | 24 | 118047 | `eve_g` `ευα` (eua; English: Eve) (86765) |
+| theological_terms | EBIBLE_WLC | 65 | 2 | 1032248 | `light_h` `אור` (or; English: Light) (115243) |
+| theological_terms | LXX | 78 | 16 | 511409 | `eve_g` `ευα` (eua; English: Eve) (378085) |
+| theological_terms | MAM | 65 | 2 | 1035940 | `light_h` `אור` (or; English: Light) (115587) |
+| theological_terms | MT_WLC | 65 | 2 | 1032242 | `light_h` `אור` (or; English: Light) (115238) |
+| theological_terms | SBLGNT | 78 | 23 | 116337 | `eve_g` `ευα` (eua; English: Eve) (85401) |
+| theological_terms | TCG_NT | 78 | 21 | 118310 | `eve_g` `ευα` (eua; English: Eve) (87390) |
+| theological_terms | TR_NT | 78 | 24 | 118903 | `eve_g` `ευα` (eua; English: Eve) (87671) |
+| theological_terms | UHB | 65 | 2 | 1031358 | `light_h` `אור` (or; English: Light) (115249) |
+| theological_terms | UXLC | 65 | 2 | 1032221 | `light_h` `אור` (or; English: Light) (115230) |
 
 ## Top Length 4+ Counts
 
