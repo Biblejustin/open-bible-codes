@@ -118,7 +118,7 @@ def import_csv_table(
 ) -> TableImportResult:
     if not csv_path.exists():
         raise FileNotFoundError(csv_path)
-    table = sanitize_table_name(table_name or default_table_name(csv_path))
+    table = sanitize_table_name(table_name or report_table_name_for_path(csv_path))
     qtable = quote_identifier(table)
     create_mode = "OR REPLACE " if replace else ""
     source = sql_literal(csv_path)

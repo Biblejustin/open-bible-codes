@@ -7,7 +7,7 @@ import argparse
 from dataclasses import dataclass
 from pathlib import Path
 
-from els.report_db import ReportDBStale, default_table_name, import_csv_table, sanitize_table_name, verify_table_current
+from els.report_db import ReportDBStale, import_csv_table, report_table_name_for_path, sanitize_table_name, verify_table_current
 
 
 DEFAULT_DB = Path("reports/db/open_bible_codes.duckdb")
@@ -126,7 +126,7 @@ def parse_table_specs(values: list[str]) -> list[DefaultReportTable]:
             table_name = sanitize_table_name(table_text)
         else:
             path_text = value
-            table_name = default_table_name(Path(path_text))
+            table_name = report_table_name_for_path(Path(path_text))
         specs.append(DefaultReportTable(Path(path_text), table_name))
     return specs
 

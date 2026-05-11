@@ -59,6 +59,26 @@ def test_report_table_name_for_count_paths() -> None:
     assert report_table_name_for_path(Path("reports/morph_counts_by_lemma.csv")) == "morph_counts_by_lemma"
 
 
+def test_report_table_name_for_mapped_all_codes_path() -> None:
+    assert (
+        report_table_name_for_path(Path("reports/hebrew_screening_all_codes/surface_all_codes.csv"))
+        == "hebrew_screening_surface_all_codes"
+    )
+
+
+def test_import_csv_table_uses_report_table_mapping_by_default(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    csv_path = tmp_path / "reports" / "hebrew_screening_all_codes" / "surface_all_codes.csv"
+    csv_path.parent.mkdir(parents=True)
+    write_rows(csv_path, [{"term_id": "yhwh", "hit_id": "1"}])
+    db = tmp_path / "reports" / "db" / "open_bible_codes.duckdb"
+
+    monkeypatch.chdir(tmp_path)
+    result = import_csv_table(db_path=db, csv_path=Path("reports/hebrew_screening_all_codes/surface_all_codes.csv"))
+
+    assert result.table_name == "hebrew_screening_surface_all_codes"
+    assert fetch_dicts(db_path=db, query="SELECT hit_id FROM hebrew_screening_surface_all_codes") == [{"hit_id": "1"}]
+
+
 def test_sanitize_table_name_prefixes_digit() -> None:
     assert sanitize_table_name("123 hits!") == "t_123_hits"
 
