@@ -1,12 +1,14 @@
 # CRD Self-Surface Broad Screening Findings
 
-Status: local deterministic broad screening run completed on 2026-05-09. Raw artifacts are intentionally kept under ignored `reports/crd_self_surface/` because `classified_hits.csv` is 5.3 GB.
+Status: local deterministic broad screening run completed at `2026-05-11T04:38:10.763436+00:00`. Raw artifacts stay under ignored `reports/crd_self_surface/`; `classified_hits.csv` is 6.56 GB.
 
 ## Scope
 
-This run asks a narrow, non-interpretive question: when a hidden ELS term is centered, does the visible surface context contain that same term spelling? It does not test broader related-term relevance. It uses the same Bible and secular-control corpus list as the locked CRD Gog/Magog protocol, with `skip_range = 2..100`, `direction = both`, `min_term_length = 3`, and `max_hits_per_term = 200`.
+This run asks a deterministic centered-relevance question: when a hidden ELS term is centered, does the visible surface context contain that same term spelling? It uses exact normalized dictionary matching only; no fuzzy matching, embeddings, or live interpretation are used.
 
-The input term set combines all committed term CSVs except `terms/crd_placeholder_terms.csv`, deduped by first-seen `term_id`. The local self-surface dictionary was generated with `--seed-surface-term`, so each deterministic entry uses only the term's own visible spelling as `surface_keywords`.
+The run uses the same Bible and secular-control corpus list as the CRD protocol, with `skip_range = 2..100`, `direction = both`, `min_term_length = 3`, and `max_hits_per_term = 200`.
+
+The input term set combines all committed term CSVs except `terms/crd_placeholder_terms.csv`, deduped by first-seen `term_id`. Self-surface means hidden `X` is centered near visible `X`.
 
 ## Outputs
 
@@ -18,16 +20,14 @@ The input term set combines all committed term CSVs except `terms/crd_placeholde
 - comparison report: `reports/crd_self_surface/CRD_SELF_SURFACE_REPORT.md`
 - compact review queue: `reports/crd_self_surface/review_queue.csv`
 - Bible exact center-word hits: `reports/crd_self_surface/center_word_hits.csv`
-- exact center-word density summary: `reports/crd_self_surface/center_word_bible_vs_control_summary.csv`
-- exact center-word review queue: `reports/crd_self_surface/center_word_review_queue.csv`
-- exact center-word review packet: `reports/crd_self_surface/center_word_review_packet.md`
 - exact center-word version presence: `reports/crd_self_surface/center_word_presence.md`
 
 ## Reproduce
 
 ```bash
 make crd-self-surface-prepare
-make crd-self-surface-run
+python3 -m scripts.run_crd_density reports/crd_self_surface/protocol.toml --classifier-mode deterministic --resume --force-reset
+make report-db
 make crd-self-surface-report
 make crd-self-surface-queue
 make crd-self-surface-center-word
@@ -35,127 +35,125 @@ make crd-self-surface-center-word-density
 make crd-self-surface-center-word-queue
 make crd-self-surface-center-word-packet
 make crd-self-surface-center-word-presence
+make crd-broad-screening-findings
+make crd-center-word-findings
 ```
 
 ## Run Size
 
-- density rows: 18,444
-- term/control comparison rows: 2,731
-- classified hit rows: 1,404,450
+- density rows: 22,220
+- term/control comparison rows: 3,503
+- classified hit rows: 1,621,960
 - corpora with output: 20
-- nonzero `(term, corpus)` density rows: 5,323
-- compact review queue rows: 309
+- nonzero `(term, corpus)` density rows: 13,120
+- compact review queue rows: 419
 - compact review queue selected terms: 50
-- exact center-word review queue rows: 202
+- exact center-word review queue rows: 215
 - exact center-word review queue selected terms: 50
-- runtime: 7,539.274 seconds
+- runtime: 8553.895 seconds
+- API calls: 0
+- estimated API cost: 0.0 USD
 
 ## Headline Counts
 
-- `exceeds_secular_max = true`: 221 / 2,731 terms
-- rows with secular max density = 0: 1,680 / 2,731 terms
-- Hebrew exceeds: 80 / 1,018
-- Greek exceeds: 98 / 862
-- English exceeds: 43 / 851
+- `exceeds_secular_max = true`: 577 / 3,503 terms
+- rows with secular max density = 0: 3,385 / 3,503 terms
+- rows with Bible max > 0 and secular max = 0: 489 / 3,503 terms
+- English exceeds: 196 / 1,451
+- Greek exceeds: 153 / 947
+- Hebrew exceeds: 228 / 1,105
 
-Large numbers of secular-zero rows mean many terms have no self-surface match in the available control corpora. These rows are useful for triage, but they should not be interpreted as strong evidence without matched vocabulary controls or shuffled controls.
+Large numbers of secular-zero rows are review-priority flags, not automatic claim promotions. They can reflect dictionary vocabulary and control-corpus coverage.
 
 ## Surface Match Scope
 
-The rerun writes deterministic match scope for every relevant classified hit:
+Relevant classified-hit rows by scope:
 
-- all relevant rows: `center_verse = 117,464`, `span = 4,084`, `center_word = 1,245`
-- Bible relevant rows: `center_verse = 14,647`, `span = 4,084`, `center_word = 1,044`
-- secular-control relevant rows: `center_verse = 102,817`, `center_word = 201`
-- compact review queue rows: `center_verse = 151`, `span = 138`, `center_word = 20`
+- `bible.center_word`: 1,153
+- `bible.center_verse`: 5,424
+- `bible.span`: 2,476
+- `secular_control.center_word`: 219
+- `secular_control.center_verse`: 0
+- `secular_control.span`: 0
 
-The exact `center_word` scope is the strictest form of self-surface coincidence: the hidden term is centered on the same visible word, not merely somewhere in the same verse or span.
+Compact review queue scope:
+
+- `center_verse`: 265
+- `center_word`: 70
+- `span`: 84
+
+The exact `center_word` scope is the strictest form: the hidden term is centered directly on the visible matching or same-concept word. `center_verse` and `span` remain broader contextual flags and should be reviewed separately.
 
 ## Strongest Finite Bible-Vs-Control Ratios
 
 | Term | Language | Bible max | Bible corpus | Secular max | Secular corpus | Ratio |
 | --- | --- | ---: | --- | ---: | --- | ---: |
-| `gilead_h` | hebrew | 5.01830007 | UHB | 0.174947546 | HEB_PBY_BIALIK | 28.6845982 |
-| `lord_h` | hebrew | 26.764267 | UHB | 1.22463282 | HEB_PBY_BIALIK | 21.854932 |
-| `darius_h` | hebrew | 4.1598203 | MAM | 0.362557261 | HEB_PBY_AHAD_HAAM | 11.473554 |
-| `ephraim_h` | hebrew | 7.5274501 | UHB | 0.874737732 | HEB_PBY_BIALIK | 8.60537945 |
-| `jebusite_h` | hebrew | 2.50617773 | MT_WLC | 0.349895093 | HEB_PBY_BIALIK | 7.16265469 |
-| `yhwh_h` and duplicates | hebrew | 63.5651342 | UHB | 9.4471675 | HEB_PBY_BIALIK | 6.72848599 |
-| `bns_chaldea_h` | hebrew | 3.34553338 | UHB | 0.524842639 | HEB_PBY_BIALIK | 6.37435515 |
-| `plague_h` | hebrew | 3.34553338 | UHB | 0.524842639 | HEB_PBY_BIALIK | 6.37435515 |
-| `isaac_g` and duplicates | greek | 5.88339984 | SBLGNT | 1.03924717 | GRC_PERSEUS_HERODOTUS | 5.66121324 |
-| `bns_jesus_g` and duplicates | greek | 5.79012812 | TR_NT | 1.03924717 | GRC_PERSEUS_HERODOTUS | 5.57146393 |
+| `ישראל` (Yisrael; English: Israel)<br>`cc_israel_h` | hebrew | 52.6297323 | MT_WLC | 0.725114523 | HEB_PBY_AHAD_HAAM | 72.5812691 |
+| `ישראל` (Yisrael; English: Israel)<br>`htp_israel_h` | hebrew | 52.6297323 | MT_WLC | 0.725114523 | HEB_PBY_AHAD_HAAM | 72.5812691 |
+| `ישראל` (Yisrael; English: Israel)<br>`israel_h` | hebrew | 52.6297323 | MT_WLC | 0.725114523 | HEB_PBY_AHAD_HAAM | 72.5812691 |
+| `ישראל` (Yisrael; English: Israel)<br>`twn_israel_h` | hebrew | 52.6297323 | MT_WLC | 0.725114523 | HEB_PBY_AHAD_HAAM | 72.5812691 |
+| `יוסף` (ywsp; English: Joseph)<br>`cc_joseph_h` | hebrew | 11.6954961 | MT_WLC | 0.174947546 | HEB_PBY_BIALIK | 66.8514441 |
+| `יוסף` (ywsp; English: Joseph)<br>`joseph_h` | hebrew | 11.6954961 | MT_WLC | 0.174947546 | HEB_PBY_BIALIK | 66.8514441 |
+| `יוסף` (ywsp; English: Joseph Tribe)<br>`joseph_tribe_h` | hebrew | 11.6954961 | MT_WLC | 0.174947546 | HEB_PBY_BIALIK | 66.8514441 |
+| `יוסף` (ywsp; English: Joseph)<br>`mt_joseph_h` | hebrew | 11.6954961 | MT_WLC | 0.174947546 | HEB_PBY_BIALIK | 66.8514441 |
+| `Lord`<br>`eng_lord` | english | 19.2353931 | KJV | 0.739422378 | ENG_PG_SHAKESPEARE | 26.0140803 |
+| `Lord`<br>`eng_lord_2` | english | 19.2353931 | KJV | 0.739422378 | ENG_PG_SHAKESPEARE | 26.0140803 |
 
 ## Strongest Bible Hits With Secular Max Zero
 
 | Term | Language | Bible max | Bible corpus |
 | --- | --- | ---: | --- |
-| `david_g` and duplicate | greek | 6.80550128 | LXX |
-| `spirit_g`, `spirit_gxc`, `spirit_pneuma_g` | greek | 5.88339984 | SBLGNT |
-| `eng_david` and duplicates | english | 4.65372414 | KJV |
-| `wisdom_g`, `wisdom_gxc` | greek | 4.41254988 | SBLGNT |
-| `kyrios_gnt`, `lord_g`, `lord_gxc` | greek | 3.2236585 | LXX |
-| `eng_zion` and duplicate rows | english | 3.10248276 | KJV |
-| `elishah_g` and duplicate | greek | 2.90734016 | TCG_NT |
-| `jacob_g` and duplicate | greek | 2.90734016 | TCG_NT |
-| `gpx_lawlessness_g` | greek | 2.89633859 | BYZ_NT |
+| `יהוה` (YHWH; English: YHWH Esther Acrostic)<br>`bns_esther_yhwh_h` | hebrew | 50.9589471 | MT_WLC |
+| `יהוה` (YHWH; English: YHWH)<br>`cc_yhwh_h` | hebrew | 50.9589471 | MT_WLC |
+| `יהוה` (YHWH; English: YHWH)<br>`dyn_yhwh_h` | hebrew | 50.9589471 | MT_WLC |
+| `יהוה` (YHWH; English: YHWH)<br>`htp_yhwh_h` | hebrew | 50.9589471 | MT_WLC |
+| `יהוה` (YHWH; English: YHWH)<br>`twn_yhwh_h` | hebrew | 50.9589471 | MT_WLC |
+| `יהוה` (YHWH; English: YHWH)<br>`yhwh_h` | hebrew | 50.9589471 | MT_WLC |
+| `אשר` (shr; English: Asher)<br>`asher_h` | hebrew | 34.2510956 | MT_WLC |
+| `יהודה` (Yehudah; English: Judah)<br>`judah_h` | hebrew | 20.8848144 | MT_WLC |
+| `יהודה` (Yehudah; English: Judas Absence)<br>`mt_judas_absence_h` | hebrew | 20.8848144 | MT_WLC |
+| `אדני` (Adonai; English: Lord)<br>`lord_h` | hebrew | 18.3786367 | MT_WLC |
 
 ## Exact Center-Word Subset
 
-The exact center-word extraction contains:
-
-- Bible center-word rows: 1,044
-- distinct term IDs with Bible center-word rows: 131
-- distinct normalized surface forms: 76
-- distinct normalized surface hit paths: 425
-- rows whose term exceeds the secular maximum in the center-word-only summary: 1,023
-- rows whose term does not exceed the secular maximum in the center-word-only summary: 21
-
-The center-word-only density summary contains 2,731 term rows:
-
-- `exceeds_secular_max = true`: 120
-- Bible-positive / secular-zero terms: 94
-- Hebrew exceeds: 70
-- Greek exceeds: 35
-- English exceeds: 15
-
-The version-presence summary keeps source-specific results visible:
-
-- exact center-word term rows: 131
-- distinct normalized surface forms: 76
-- exact center-word hit rows: 1,044
-- distinct normalized surface hit paths: 425
-- language distribution: Hebrew 71, Greek 37, English 23
-- corpus-count distribution: 57 terms in 5 corpus labels, 1 term in 4, 5 terms in 3, 24 terms in 2, and 44 terms in 1
+- Bible center-word rows: 1,153
+- distinct term IDs with Bible center-word rows: 154
+- exact center-word presence rows: 154
+- distinct visible spellings in presence output: 90
+- center-word-only summary rows: 3,503; `exceeds_secular_max = true`: 141
+- Bible-positive / secular-zero center-word terms: 114
+- English center-word exceeds: 27 / 1,451
+- Greek center-word exceeds: 37 / 947
+- Hebrew center-word exceeds: 77 / 1,105
+- corpus-count distribution: 63 terms in 5 corpus labels, 1 term in 4 corpus labels, 5 terms in 3 corpus labels, 25 terms in 2 corpus labels, 60 terms in 1 corpus label
 
 Top finite center-word-only ratios:
 
 | Term | Language | Bible max | Bible corpus | Secular max | Secular corpus | Ratio |
 | --- | --- | ---: | --- | ---: | --- | ---: |
-| `desolation_h` | hebrew | 1.67276669 | UHB | 0.174947546 | HEB_PBY_BIALIK | 9.5615 |
-| `cc_wine_h`, `mt_wine_h`, `twn_wine_h` | hebrew | 1.67276669 | UHB | 0.179491289 | HEB_PBY_BRENNER | 9.3195 |
-| `cc_israel_h`, `htp_israel_h`, `israel_h`, `twn_israel_h` | hebrew | 5.84774803 | MT_WLC | 0.725114523 | HEB_PBY_AHAD_HAAM | 8.0646 |
-| `bcd_spoils_h` | hebrew | 2.50915003 | UHB | 0.349895093 | HEB_PBY_BIALIK | 7.1711 |
-| `solomon_h` | hebrew | 2.50915003 | UHB | 0.362557261 | HEB_PBY_AHAD_HAAM | 6.9207 |
-| `sephar_h` | hebrew | 2.50617773 | MT_WLC | 0.362557261 | HEB_PBY_AHAD_HAAM | 6.9125 |
+| `שממה` (shemamah; English: Desolation)<br>`desolation_h` | hebrew | 1.67276669 | UHB | 0.174947546 | HEB_PBY_BIALIK | 9.56153275 |
+| `יין` (yayin; English: Wine)<br>`cc_wine_h` | hebrew | 1.67276669 | UHB | 0.179491289 | HEB_PBY_BRENNER | 9.31948675 |
+| `יין` (yayin; English: Wine)<br>`mt_wine_h` | hebrew | 1.67276669 | UHB | 0.179491289 | HEB_PBY_BRENNER | 9.31948675 |
+| `יין` (yayin; English: Wine)<br>`twn_wine_h` | hebrew | 1.67276669 | UHB | 0.179491289 | HEB_PBY_BRENNER | 9.31948675 |
+| `ישראל` (Yisrael; English: Israel)<br>`cc_israel_h` | hebrew | 5.84774803 | MT_WLC | 0.725114523 | HEB_PBY_AHAD_HAAM | 8.06458545 |
+| `ישראל` (Yisrael; English: Israel)<br>`htp_israel_h` | hebrew | 5.84774803 | MT_WLC | 0.725114523 | HEB_PBY_AHAD_HAAM | 8.06458545 |
 
 Top Bible-positive / secular-zero center-word terms:
 
 | Term | Language | Bible max | Bible corpus |
 | --- | --- | ---: | --- |
-| `yhwh_h` and duplicates | hebrew | 10.0247109 | MT_WLC |
-| `babel_h`, `babylon_h`, and duplicates | hebrew | 6.68314061 | MT_WLC |
-| `dyn_gog_g`, `gog_g`, `noah_g` | greek | 2.94169992 | SBLGNT |
-| `wisdom_g`, `wisdom_gxc` | greek | 2.89633859 | BYZ_NT |
-| `cc_elohim_h`, `god_h`, `lord_h` | hebrew | 2.50915003 | UHB |
-| `eng_david`, `eng_david_2` | english | 1.86148966 | KJV |
+| `יהוה` (YHWH; English: YHWH Esther Acrostic)<br>`bns_esther_yhwh_h` | hebrew | 10.0247109 | MT_WLC |
+| `יהוה` (YHWH; English: YHWH)<br>`cc_yhwh_h` | hebrew | 10.0247109 | MT_WLC |
+| `יהוה` (YHWH; English: YHWH)<br>`dyn_yhwh_h` | hebrew | 10.0247109 | MT_WLC |
+| `יהוה` (YHWH; English: YHWH)<br>`htp_yhwh_h` | hebrew | 10.0247109 | MT_WLC |
+| `יהוה` (YHWH; English: YHWH)<br>`twn_yhwh_h` | hebrew | 10.0247109 | MT_WLC |
+| `יהוה` (YHWH; English: YHWH)<br>`yhwh_h` | hebrew | 10.0247109 | MT_WLC |
 
 ## Interpretation Notes
 
-- This run is about self-surface coincidence only: hidden `X` centered near visible `X`.
-- The `center_word` subset is the clearest review surface for hidden `X` centered directly on visible `X`; verse-level and span-level rows remain useful but should be reported separately.
-- It does not answer whether hidden `X` is centered on a broader related concept unless a separate relevance dictionary locks that relationship.
-- Duplicate term IDs from different claim lists were deduped by first-seen ID for this local run, but duplicate concepts with different IDs remain visible in the results.
-- The large 5.3 GB classified-hit file exposed a real scaling issue. `scripts/build_crd_comparison.py` now streams representative examples and agreement inputs instead of loading the whole file.
-- `scripts/run_crd_density.py` now streams classified-hit rows during generation so future broad runs do not buffer millions of hit rows in memory.
-- The next production improvement should be resumable per-corpus or per-term checkpointing for interrupted broad CRD runs.
+- This run is about self-surface coincidence; all broader interpretation remains downstream review.
+- The `center_word` subset is the clearest review surface and is reported separately from verse/span relevance.
+- Duplicate term IDs from different claim lists were deduped by first-seen ID for this local run, but duplicate concepts with different IDs remain visible.
+- The large classified-hit file is intentionally ignored; the DuckDB mirror is used for fast summaries.
+- LLM and parallel modes require audit-log review before interpretation.
+- Interpret results only against the dictionary and preregistration hashes recorded in the manifest.

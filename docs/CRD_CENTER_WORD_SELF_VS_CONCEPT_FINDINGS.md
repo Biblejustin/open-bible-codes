@@ -16,15 +16,15 @@ The exact `center_word` subset is stricter than both verse-level and span-level 
 
 The Bible exact center-word hit set is identical in the self-surface and concept-surface runs.
 
-- self-surface Bible exact center-word rows: 1,044
-- concept-surface Bible exact center-word rows: 1,044
+- self-surface Bible exact center-word rows: 1,153
+- concept-surface Bible exact center-word rows: 1,153
 - matching row key set: true
 - self-only Bible rows: 0
 - concept-only Bible rows: 0
 
 The center-word density summaries are also effectively stable:
 
-- term rows compared: 2,731
+- term rows compared: 3,503
 - rows with changed summary values: 2
 - rows with changed Bible max density or Bible max corpus: 0
 - rows with changed `exceeds_secular_max`: 0
@@ -39,12 +39,12 @@ The changed rows are secular-control changes only:
 
 The exact center-word version-presence view contains:
 
-- exact center-word term rows: 131
-- distinct normalized surface forms: 76
-- exact center-word hit rows: 1,044
-- distinct normalized surface hit paths: 425
-- language distribution: Hebrew 71, Greek 37, English 23
-- corpus-count distribution: 57 terms in 5 corpus labels, 1 term in 4 corpus labels, 5 terms in 3 corpus labels, 24 terms in 2 corpus labels, 44 terms in 1 corpus label
+- exact center-word term rows: 154
+- distinct normalized surface forms: 87
+- exact center-word hit rows: 1,153
+- distinct normalized surface hit paths: 496
+- language distribution: Hebrew 78, Greek 40, English 36
+- corpus-count distribution: 63 terms in 5 corpus labels, 1 term in 4 corpus labels, 5 terms in 3 corpus labels, 25 terms in 2 corpus labels, 60 terms in 1 corpus label
 
 ## Interpretation
 
