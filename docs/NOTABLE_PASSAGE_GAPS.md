@@ -49,6 +49,63 @@ These rows rank declared passages by how many eligible terms are absent inside t
 | Isaiah 9 Child King | UXLC | 378 | 36 | 15 | 0 | 283 | 298.464 |
 | Isaiah 9 Child King | UHB | 437 | 36 | 15 | 0 | 319 | 345.043 |
 
+## Declared Gap-Target Passages
+
+These rows isolate passages explicitly registered as gap targets, instead of letting short high-profile passages dominate the global ranking.
+
+| Passage | Corpus | Letters | Present | Absent Common Elsewhere | Low Vs Uniform | Observed Hits | Uniform Expected Hits |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Leviticus 24 Blasphemy Law | MT_WLC | 1037 | 40 | 11 | 0 | 790 | 818.824 |
+| Leviticus 24 Blasphemy Law | UXLC | 1037 | 40 | 11 | 0 | 790 | 818.803 |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | 1037 | 40 | 11 | 0 | 790 | 818.837 |
+| Leviticus 24 Blasphemy Law | MAM | 1037 | 40 | 11 | 0 | 790 | 818.559 |
+| Leviticus 24 Blasphemy Law | UHB | 1037 | 40 | 11 | 0 | 790 | 818.787 |
+
+## Declared Gap-Target Detail
+
+| Passage | Corpus | Term | Gap Class | Hits Elsewhere | Hits In Passage | Uniform Expected | Sample Center Refs |
+| --- | --- | --- | --- | ---: | ---: | ---: | --- |
+| Leviticus 24 Blasphemy Law | MAM | `כסא` (ks; English: Throne) | absent_in_passage_common_elsewhere | 4656 | 0 | 4.017 |  |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `כסא` (ks; English: Throne) | absent_in_passage_common_elsewhere | 4611 | 0 | 3.995 |  |
+| Leviticus 24 Blasphemy Law | MT_WLC | `כסא` (ks; English: Throne) | absent_in_passage_common_elsewhere | 4610 | 0 | 3.994 |  |
+| Leviticus 24 Blasphemy Law | UXLC | `כסא` (ks; English: Throne) | absent_in_passage_common_elsewhere | 4608 | 0 | 3.992 |  |
+| Leviticus 24 Blasphemy Law | UHB | `כסא` (ks; English: Throne) | absent_in_passage_common_elsewhere | 4599 | 0 | 3.989 |  |
+| Leviticus 24 Blasphemy Law | UHB | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 2482 | 0 | 2.153 |  |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 2482 | 0 | 2.150 |  |
+| Leviticus 24 Blasphemy Law | MT_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 2480 | 0 | 2.148 |  |
+| Leviticus 24 Blasphemy Law | UXLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 2480 | 0 | 2.148 |  |
+| Leviticus 24 Blasphemy Law | MAM | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 2460 | 0 | 2.122 |  |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `ציונ` (tsywn; English: Zion) | absent_in_passage_common_elsewhere | 1666 | 0 | 1.443 |  |
+| Leviticus 24 Blasphemy Law | UXLC | `ציונ` (tsywn; English: Zion) | absent_in_passage_common_elsewhere | 1666 | 0 | 1.443 |  |
+| Leviticus 24 Blasphemy Law | MT_WLC | `ציונ` (tsywn; English: Zion) | absent_in_passage_common_elsewhere | 1665 | 0 | 1.442 |  |
+| Leviticus 24 Blasphemy Law | MAM | `ציונ` (tsywn; English: Zion) | absent_in_passage_common_elsewhere | 1660 | 0 | 1.432 |  |
+| Leviticus 24 Blasphemy Law | UHB | `ציונ` (tsywn; English: Zion) | absent_in_passage_common_elsewhere | 1644 | 0 | 1.426 |  |
+| Leviticus 24 Blasphemy Law | MAM | `פסח` (psch; English: Passover) | absent_in_passage_common_elsewhere | 662 | 0 | 0.571 |  |
+| Leviticus 24 Blasphemy Law | MT_WLC | `פסח` (psch; English: Passover) | absent_in_passage_common_elsewhere | 640 | 0 | 0.554 |  |
+| Leviticus 24 Blasphemy Law | UXLC | `פסח` (psch; English: Passover) | absent_in_passage_common_elsewhere | 640 | 0 | 0.554 |  |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `פסח` (psch; English: Passover) | absent_in_passage_common_elsewhere | 639 | 0 | 0.554 |  |
+| Leviticus 24 Blasphemy Law | UHB | `פסח` (psch; English: Passover) | absent_in_passage_common_elsewhere | 631 | 0 | 0.547 |  |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `ישראל` (Yisrael; English: Israel) | absent_in_passage_common_elsewhere | 427 | 0 | 0.370 |  |
+| Leviticus 24 Blasphemy Law | MT_WLC | `ישראל` (Yisrael; English: Israel) | absent_in_passage_common_elsewhere | 426 | 0 | 0.369 |  |
+| Leviticus 24 Blasphemy Law | UXLC | `ישראל` (Yisrael; English: Israel) | absent_in_passage_common_elsewhere | 426 | 0 | 0.369 |  |
+| Leviticus 24 Blasphemy Law | UHB | `ישראל` (Yisrael; English: Israel) | absent_in_passage_common_elsewhere | 425 | 0 | 0.369 |  |
+| Leviticus 24 Blasphemy Law | MAM | `ישראל` (Yisrael; English: Israel) | absent_in_passage_common_elsewhere | 400 | 0 | 0.345 |  |
+| Leviticus 24 Blasphemy Law | MT_WLC | `מלכות` (mlkwt; English: Kingdom) | absent_in_passage_common_elsewhere | 308 | 0 | 0.267 |  |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `מלכות` (mlkwt; English: Kingdom) | absent_in_passage_common_elsewhere | 307 | 0 | 0.266 |  |
+| Leviticus 24 Blasphemy Law | UXLC | `מלכות` (mlkwt; English: Kingdom) | absent_in_passage_common_elsewhere | 307 | 0 | 0.266 |  |
+| Leviticus 24 Blasphemy Law | UHB | `מלכות` (mlkwt; English: Kingdom) | absent_in_passage_common_elsewhere | 297 | 0 | 0.258 |  |
+| Leviticus 24 Blasphemy Law | MAM | `מלכות` (mlkwt; English: Kingdom) | absent_in_passage_common_elsewhere | 296 | 0 | 0.255 |  |
+| Leviticus 24 Blasphemy Law | MAM | `מגוג` (Magog; English: Magog) | absent_in_passage_common_elsewhere | 201 | 0 | 0.173 |  |
+| Leviticus 24 Blasphemy Law | UHB | `מגוג` (Magog; English: Magog) | absent_in_passage_common_elsewhere | 191 | 0 | 0.166 |  |
+| Leviticus 24 Blasphemy Law | MT_WLC | `מגוג` (Magog; English: Magog) | absent_in_passage_common_elsewhere | 185 | 0 | 0.160 |  |
+| Leviticus 24 Blasphemy Law | UXLC | `מגוג` (Magog; English: Magog) | absent_in_passage_common_elsewhere | 185 | 0 | 0.160 |  |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `מגוג` (Magog; English: Magog) | absent_in_passage_common_elsewhere | 184 | 0 | 0.159 |  |
+| Leviticus 24 Blasphemy Law | UHB | `חבורה` (chbwrh; English: Wound) | absent_in_passage_common_elsewhere | 146 | 0 | 0.127 |  |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `חבורה` (chbwrh; English: Wound) | absent_in_passage_common_elsewhere | 146 | 0 | 0.126 |  |
+| Leviticus 24 Blasphemy Law | MT_WLC | `חבורה` (chbwrh; English: Wound) | absent_in_passage_common_elsewhere | 146 | 0 | 0.126 |  |
+| Leviticus 24 Blasphemy Law | UXLC | `חבורה` (chbwrh; English: Wound) | absent_in_passage_common_elsewhere | 146 | 0 | 0.126 |  |
+| Leviticus 24 Blasphemy Law | MAM | `חבורה` (chbwrh; English: Wound) | absent_in_passage_common_elsewhere | 140 | 0 | 0.121 |  |
+
 ## Passage Summary
 
 | Passage | Corpus | Letters | Eligible Terms | Present | Absent Elsewhere | Absent Common Elsewhere | Low Vs Uniform | Observed Hits | Uniform Expected Hits |

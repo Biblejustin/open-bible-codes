@@ -1,4 +1,5 @@
 from array import array
+from types import SimpleNamespace
 
 from els.corpus import Corpus, VerseSpan, WordSpan
 from scripts.analyze_notable_passage_gaps import (
@@ -6,6 +7,7 @@ from scripts.analyze_notable_passage_gaps import (
     classify_gap,
     parse_ref,
     passage_span,
+    write_markdown,
 )
 
 
@@ -79,3 +81,54 @@ def test_classify_gap_low_vs_uniform() -> None:
         )
         == "low_in_passage_vs_uniform"
     )
+
+
+def test_write_markdown_includes_declared_gap_target_section(tmp_path) -> None:
+    out = tmp_path / "gaps.md"
+    args = SimpleNamespace(
+        passages="passages.csv",
+        terms="terms.csv",
+        min_skip=2,
+        max_skip=100,
+        direction="both",
+        min_term_length=3,
+        common_elsewhere_threshold=10,
+        detail_out="detail.csv",
+        summary_out="summary.csv",
+        manifest_out="manifest.json",
+    )
+    summary_row = {
+        "passage_id": "lev24",
+        "passage_concept": "Leviticus 24 Blasphemy Law",
+        "passage_category": "notable_passage_gap",
+        "corpus_label": "MT_WLC",
+        "passage_letters": "1037",
+        "eligible_terms": "1",
+        "terms_present_in_passage": "0",
+        "terms_absent_in_passage_present_elsewhere": "1",
+        "terms_absent_in_passage_common_elsewhere": "1",
+        "terms_low_vs_uniform": "0",
+        "observed_centered_hits_in_passage": "0",
+        "expected_centered_hits_in_passage_uniform": "3.000",
+    }
+    detail_row = {
+        "passage_id": "lev24",
+        "passage_concept": "Leviticus 24 Blasphemy Law",
+        "passage_category": "notable_passage_gap",
+        "corpus_label": "MT_WLC",
+        "term_id": "npg_yhwh_h",
+        "normalized_term": "יהוה",
+        "concept": "YHWH",
+        "gap_class": "absent_in_passage_common_elsewhere",
+        "centered_elsewhere": "25",
+        "centered_in_passage": "0",
+        "expected_in_passage_uniform": "3.000",
+        "sample_center_refs": "",
+    }
+
+    write_markdown(out, detail_rows=[detail_row], summary_rows=[summary_row], args=args)
+
+    text = out.read_text(encoding="utf-8")
+    assert "## Declared Gap-Target Passages" in text
+    assert "## Declared Gap-Target Detail" in text
+    assert "Leviticus 24 Blasphemy Law" in text

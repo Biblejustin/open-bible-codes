@@ -38,6 +38,7 @@ MANIFEST_OUT = OUT_DIR / "manifest.json"
 DETAIL_FIELDS = [
     "passage_id",
     "passage_concept",
+    "passage_category",
     "corpus_label",
     "corpus_name",
     "term_id",
@@ -65,6 +66,7 @@ DETAIL_FIELDS = [
 SUMMARY_FIELDS = [
     "passage_id",
     "passage_concept",
+    "passage_category",
     "corpus_label",
     "corpus_name",
     "language",
@@ -348,6 +350,7 @@ def analyze_corpus(
             {
                 "passage_id": passage.passage_id,
                 "passage_concept": passage.concept,
+                "passage_category": passage.category,
                 "corpus_label": corpus_label,
                 "corpus_name": corpus.name,
                 "language": corpus.language,
@@ -395,6 +398,7 @@ def detail_row(
     return {
         "passage_id": passage.passage_id,
         "passage_concept": passage.concept,
+        "passage_category": passage.category,
         "corpus_label": corpus_label,
         "corpus_name": corpus.name,
         "term_id": term.term_id,
@@ -461,6 +465,14 @@ def write_markdown(
             str(row["corpus_label"]),
         ),
     )
+    declared_gap_targets = [
+        row for row in summary_rows if row.get("passage_category") == "notable_passage_gap"
+    ]
+    declared_gap_target_details = [
+        row
+        for row in notable_absences
+        if row.get("passage_category") == "notable_passage_gap"
+    ]
     lines = [
         "# Notable Passage Gaps",
         "",
@@ -490,6 +502,50 @@ def write_markdown(
             "{terms_low_vs_uniform} | {observed_centered_hits_in_passage} | "
             "{expected_centered_hits_in_passage_uniform} |".format(**row)
         )
+    if declared_gap_targets:
+        lines.extend(
+            [
+                "",
+                "## Declared Gap-Target Passages",
+                "",
+                "These rows isolate passages explicitly registered as gap targets, instead of letting short high-profile passages dominate the global ranking.",
+                "",
+                "| Passage | Corpus | Letters | Present | Absent Common Elsewhere | Low Vs Uniform | Observed Hits | Uniform Expected Hits |",
+                "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |",
+            ]
+        )
+        for row in declared_gap_targets:
+            lines.append(
+                "| {passage_concept} | {corpus_label} | {passage_letters} | "
+                "{terms_present_in_passage} | {terms_absent_in_passage_common_elsewhere} | "
+                "{terms_low_vs_uniform} | {observed_centered_hits_in_passage} | "
+                "{expected_centered_hits_in_passage_uniform} |".format(**row)
+            )
+    if declared_gap_target_details:
+        lines.extend(
+            [
+                "",
+                "## Declared Gap-Target Detail",
+                "",
+                "| Passage | Corpus | Term | Gap Class | Hits Elsewhere | Hits In Passage | Uniform Expected | Sample Center Refs |",
+                "| --- | --- | --- | --- | ---: | ---: | ---: | --- |",
+            ]
+        )
+        for row in declared_gap_target_details[:40]:
+            term_display = display_term(str(row["normalized_term"]), english=str(row["concept"]))
+            lines.append(
+                "| {passage_concept} | {corpus_label} | {term} | {gap_class} | {centered_elsewhere} | "
+                "{centered_in_passage} | {expected_in_passage_uniform} | {sample_center_refs} |".format(
+                    passage_concept=row["passage_concept"],
+                    corpus_label=row["corpus_label"],
+                    term=term_display,
+                    gap_class=row["gap_class"],
+                    centered_elsewhere=row["centered_elsewhere"],
+                    centered_in_passage=row["centered_in_passage"],
+                    expected_in_passage_uniform=row["expected_in_passage_uniform"],
+                    sample_center_refs=row["sample_center_refs"],
+                )
+            )
     lines.extend(
         [
             "",
