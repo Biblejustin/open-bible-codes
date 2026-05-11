@@ -400,6 +400,7 @@ class TermListTests(unittest.TestCase):
         anno_mundi_ids = term_ids(TERMS_DIR / "hebrew_anno_mundi_years.csv")
         disaster_war_ids = term_ids(TERMS_DIR / "modern_disaster_war_terms.csv")
         maccabean_ids = term_ids(TERMS_DIR / "maccabean_apocrypha_names.csv")
+        theological_ids = term_ids(TERMS_DIR / "theological_terms.csv")
 
         self.assertGreaterEqual(
             narrative_ids,
@@ -490,6 +491,19 @@ class TermListTests(unittest.TestCase):
                 "macc_judah_maccabee_h",
                 "macc_tobit_g",
                 "macc_holofernes_h",
+            },
+        )
+        self.assertGreaterEqual(
+            theological_ids,
+            {
+                "el_shaddai_h",
+                "el_elyon_h",
+                "yhwh_tzevaot_h",
+                "sabaoth_g",
+                "ruach_hakodesh_h",
+                "holy_spirit_g",
+                "trinity_g",
+                "father_g",
             },
         )
 

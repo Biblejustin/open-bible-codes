@@ -468,9 +468,17 @@ eng_clay,Clay,daniel_metals,english,Clay,generated from declared concept labels;
 eng_gold,Gold,daniel_metals,english,Gold,generated from declared concept labels; sources: daniel_statue_metals.csv:daniel_gold_g; daniel_statue_metals.csv:daniel_gold_h
 eng_iron,Iron,daniel_metals,english,Iron,generated from declared concept labels; sources: daniel_statue_metals.csv:daniel_iron_g; daniel_statue_metals.csv:daniel_iron_h
 eng_silver,Silver,daniel_metals,english,Silver,generated from declared concept labels; sources: daniel_statue_metals.csv:daniel_silver_g; daniel_statue_metals.csv:daniel_silver_h
+eng_ehyeh,Ehyeh,divine_names,english,Ehyeh,generated from declared concept labels; sources: theological_terms.csv:ehyeh_h
+eng_elelyon,El Elyon,divine_names,english,El Elyon,generated from declared concept labels; sources: theological_terms.csv:el_elyon_h
+eng_elshaddai,El Shaddai,divine_names,english,El Shaddai,generated from declared concept labels; sources: theological_terms.csv:el_shaddai_h
+eng_father,Father,divine_names,english,Father,generated from declared concept labels; sources: theological_terms.csv:father_g; theological_terms.csv:father_h
 eng_god,God,divine_names,english,God,generated from declared concept labels; sources: greek_exact_center_cohort_terms.csv:god_gxc; theological_terms.csv:god_g; theological_terms.csv:god_h
 eng_lord_2,Lord,divine_names,english,Lord,generated from declared concept labels; sources: greek_exact_center_cohort_terms.csv:lord_gxc; theological_terms.csv:lord_g; theological_terms.csv:lord_h
+eng_lordofhosts,Lord Of Hosts,divine_names,english,Lord Of Hosts,generated from declared concept labels; sources: theological_terms.csv:sabaoth_g; theological_terms.csv:tzevaot_h
 eng_yhwh_3,YHWH,divine_names,english,YHWH,generated from declared concept labels; sources: hebrew_theology_prospective_terms.csv:htp_yhwh_h; theological_terms.csv:yhwh_h
+eng_yhwhtzevaot,YHWH Tzevaot,divine_names,english,YHWH Tzevaot,generated from declared concept labels; sources: theological_terms.csv:yhwh_tzevaot_h
+eng_yah,Yah,divine_names,english,Yah,generated from declared concept labels; sources: theological_terms.csv:yah_h
+eng_trinity,Trinity,doctrine,english,Trinity,generated from declared concept labels; sources: theological_terms.csv:trinity_g
 eng_alexandria,Alexandria,empires_places,english,Alexandria,generated from declared concept labels; sources: greek_expanded_prospective_terms.csv:gpx_alexandria_g; greek_surface_prospective_terms.csv:gpx_alexandria_g; prophetic_terms.csv:alexandria_g; prophetic_terms.csv:alexandria_h
 eng_ammon,Ammon,empires_places,english,Ammon,generated from declared concept labels; sources: greek_expanded_prospective_terms.csv:gpx_ammon_g; greek_surface_prospective_terms.csv:gpx_ammon_g; prophetic_terms.csv:ammon_g; prophetic_terms.csv:ammon_h
 eng_antioch,Antioch,empires_places,english,Antioch,generated from declared concept labels; sources: greek_expanded_prospective_terms.csv:gpx_antioch_g; greek_surface_prospective_terms.csv:gpx_antioch_g; prophetic_terms.csv:antioch_g; prophetic_terms.csv:antioch_h
@@ -868,6 +876,7 @@ eng_peter_4,Peter,people,english,Peter,generated from declared concept labels; s
 eng_pilate,Pilate,people,english,Pilate,generated from declared concept labels; sources: greek_expanded_prospective_terms.csv:gpx_pilatos_gnt; greek_nt_claim_terms.csv:pilatos_gnt; greek_surface_prospective_terms.csv:gpx_pilatos_gnt
 eng_example,Example,placeholder,english,Example,generated from declared concept labels; sources: crd_placeholder_terms.csv:EXAMPLE_TERM
 eng_holy_2,Holy,pneumatology,english,Holy,generated from declared concept labels; sources: greek_exact_center_cohort_terms.csv:holy_gxc
+eng_holyspirit,Holy Spirit,pneumatology,english,Holy Spirit,generated from declared concept labels; sources: theological_terms.csv:holy_spirit_g; theological_terms.csv:ruach_hakodesh_h
 eng_spirit,Spirit,pneumatology,english,Spirit,generated from declared concept labels; sources: greek_exact_center_cohort_terms.csv:spirit_gxc; theological_terms.csv:spirit_g; theological_terms.csv:spirit_h
 eng_spiritpneuma,Spirit Pneuma,pneumatology,english,Spirit Pneuma,generated from declared concept labels; sources: theological_terms.csv:spirit_pneuma_g
 eng_dayofthelord,Day Of The Lord,prophetic,english,Day Of The Lord,generated from declared concept labels; sources: greek_expanded_prospective_terms.csv:gpx_day_of_lord_g; greek_surface_prospective_terms.csv:gpx_day_of_lord_g; theological_terms.csv:day_of_lord_g; theological_terms.csv:day_of_lord_h

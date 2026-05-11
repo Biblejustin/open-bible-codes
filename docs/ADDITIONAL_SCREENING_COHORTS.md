@@ -17,6 +17,7 @@ The added CSV files are:
 | `terms/hebrew_anno_mundi_years.csv` | Hebrew Anno Mundi year encodings for common modern-event years. |
 | `terms/modern_disaster_war_terms.csv` | Disaster, disease, and named-war terms for modern-event screening. |
 | `terms/maccabean_apocrypha_names.csv` | Named-entity bridge terms for Maccabean and apocrypha-focused follow-up. |
+| `terms/theological_terms.csv` | Also includes the expanded names/titles of God additions: El Shaddai, El Elyon, YHWH Tzevaot, Sabaoth, Ehyeh, Yah, Father, Holy Spirit, and Trinity. |
 
 ## Wiring
 

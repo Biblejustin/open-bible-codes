@@ -4,11 +4,23 @@ god_g,God,divine_names,greek,θεος,
 yhwh_h,YHWH,divine_names,hebrew,יהוה,
 lord_h,Lord,divine_names,hebrew,אדני,
 lord_g,Lord,divine_names,greek,κυριος,
+el_shaddai_h,El Shaddai,divine_names,hebrew,אל שדי,expanded names and titles of God cohort
+el_elyon_h,El Elyon,divine_names,hebrew,אל עליון,expanded names and titles of God cohort
+yhwh_tzevaot_h,YHWH Tzevaot,divine_names,hebrew,יהוה צבאות,expanded names and titles of God cohort
+tzevaot_h,Lord Of Hosts,divine_names,hebrew,צבאות,expanded names and titles of God cohort
+sabaoth_g,Lord Of Hosts,divine_names,greek,σαβαωθ,expanded names and titles of God cohort
+ehyeh_h,Ehyeh,divine_names,hebrew,אהיה,expanded names and titles of God cohort
+yah_h,Yah,divine_names,hebrew,יה,short divine name; normally skipped by min_term_length=3
+father_h,Father,divine_names,hebrew,אב,short title; normally skipped by min_term_length=3
+father_g,Father,divine_names,greek,πατηρ,expanded names and titles of God cohort
 jesus_g,Jesus,christology,greek,ιησους,
 christ_h,Messiah/Christ,christology,hebrew,משיח,
 christ_g,Messiah/Christ,christology,greek,χριστος,
 spirit_h,Spirit,pneumatology,hebrew,רוח,
 spirit_g,Spirit,pneumatology,greek,πνευμα,
+ruach_hakodesh_h,Holy Spirit,pneumatology,hebrew,רוח הקדש,expanded names and titles of God cohort
+holy_spirit_g,Holy Spirit,pneumatology,greek,πνευμα αγιον,expanded names and titles of God cohort
+trinity_g,Trinity,doctrine,greek,τριας,doctrinal term rather than biblical phrase
 holy_h,Holy,attributes,hebrew,קדש,
 holy_g,Holy,attributes,greek,αγιος,
 son_h,Son,christology,hebrew,בן,
