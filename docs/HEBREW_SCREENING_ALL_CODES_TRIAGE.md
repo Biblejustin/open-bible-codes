@@ -87,8 +87,8 @@ It is a triage aid, not a claim-grade filter.
 | 9 | all_source | `shinar_h` `שנער` (shnr; English: Shinar) | Shinar | 2 | 7 | 1Kgs 15:1 | `שמנה` (shmnh) | not_unusual |
 | 10 | all_source | `asshur_h` `אשור` (shwr; English: Asshur) | Asshur | -2 | 7 | 1Kgs 18:25 | `בשמ` (bshm) | not_unusual |
 | 11 | all_source | `shinar_h` `שנער` (shnr; English: Shinar) | Shinar | 2 | 7 | 1Kgs 7:15 | `שמנה` (shmnh) | not_unusual |
-| 12 | all_source | `peace_h` `שלומ` (shlwm; English: Peace) | Peace | 2 | 7 | 1Sam 18:30 | `דוד` (dwd; English: David) | not_unusual |
-| 13 | all_source | `peace_h` `שלומ` (shlwm; English: Peace) | Peace | 2 | 7 | 1Sam 20:28 | `דוד` (dwd; English: David) | not_unusual |
+| 12 | all_source | `peace_h` `שלומ` (shlwm; English: Peace) | Peace | 2 | 7 | 1Sam 18:30 | `דוד` (David; English: David) | not_unusual |
+| 13 | all_source | `peace_h` `שלומ` (shlwm; English: Peace) | Peace | 2 | 7 | 1Sam 20:28 | `דוד` (David; English: David) | not_unusual |
 | 14 | all_source | `locust_h` `ארבה` (rbh; English: Locust) | Locust | 2 | 7 | 2Chr 10:12 | `דבר` (davar; English: word/matter) | not_unusual |
 | 15 | all_source | `locust_plague_h` `ארבה` (rbh; English: Locust Plague) | Locust Plague | 2 | 7 | 2Chr 10:12 | `דבר` (davar; English: word/matter) | not_unusual |
 | 16 | all_source | `locusts_plague_h` `ארבה` (rbh; English: Locusts) | Locusts | 2 | 7 | 2Chr 10:12 | `דבר` (davar; English: word/matter) | not_unusual |
@@ -106,7 +106,7 @@ It is a triage aid, not a claim-grade filter.
 | 3 | all_source | `prophet_joel_h` `יואל` (ywl; English: Joel) | Joel | 2 | 7 | 1Kgs 20:23 | `במישור` (bmyshwr) | not_unusual |
 | 4 | all_source | `lord_h` `אדני` (Adonai; English: Lord) | Lord | -2 | 7 | 1Kgs 20:9 | `בנהדד` (Ben-Hadad; English: Ben-Hadad) | not_unusual |
 | 5 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 2 | 7 | 1Kgs 2:42 | `הלוא` (hlw) | not_unusual |
-| 6 | all_source | `heaven_h` `שמימ` (shmym; English: Heaven) | Heaven | -2 | 7 | 1Kgs 8:22 | `ויעמד` (wymd) | not_unusual |
+| 6 | all_source | `heaven_h` `שמימ` (shamayim; English: Heaven) | Heaven | -2 | 7 | 1Kgs 8:22 | `ויעמד` (wymd) | not_unusual |
 | 7 | all_source | `hell_sheol_h` `שאול` (shwl; English: Sheol) | Sheol | 2 | 7 | 1Sam 14:47 | `ישראל` (Yisrael; English: Israel) | not_unusual |
 | 8 | all_source | `paul_h` `שאול` (shwl; English: Paul) | Paul | 2 | 7 | 1Sam 14:47 | `ישראל` (Yisrael; English: Israel) | not_unusual |
 | 9 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 2 | 7 | 1Sam 17:46 | `היומ` (hywm) | not_unusual |
@@ -114,7 +114,7 @@ It is a triage aid, not a claim-grade filter.
 | 11 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 2 | 7 | 2Chr 20:15 | `ההמונ` (hhmwn) | not_unusual |
 | 12 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 2Chr 24:8 | `חוצה` (chwtsh) | not_unusual |
 | 13 | all_source | `mary_h` `מרימ` (mrym; English: Mary) | Mary | 2 | 7 | 2Chr 28:15 | `מערמיהמ` (mrmyhm) | not_unusual |
-| 14 | all_source | `heaven_h` `שמימ` (shmym; English: Heaven) | Heaven | 2 | 7 | 2Chr 30:27 | `ויקמו` (wyqmw) | not_unusual |
+| 14 | all_source | `heaven_h` `שמימ` (shamayim; English: Heaven) | Heaven | 2 | 7 | 2Chr 30:27 | `ויקמו` (wyqmw) | not_unusual |
 | 15 | all_source | `asshur_h` `אשור` (shwr; English: Asshur) | Asshur | -2 | 7 | 2Kgs 17:6 | `וישב` (wyshb) | not_unusual |
 | 16 | all_source | `assyria_h` `אשור` (shwr; English: Assyria) | Assyria | -2 | 7 | 2Kgs 17:6 | `וישב` (wyshb) | not_unusual |
 | 17 | all_source | `tabernacle_temple_h` `היכל` (hykl; English: Temple) | Temple | -2 | 7 | 2Kgs 23:4 | `כלהכלימ` (klhklym) | not_unusual |
@@ -162,7 +162,7 @@ It is a triage aid, not a claim-grade filter.
 | 9 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -100 | 501 | Neh 7:11 | `מאות` (mwt) | paired_uncorrected_p_le_0.05 |
 | 10 | all_source | `locust_h` `ארבה` (rbh; English: Locust) | Locust | 2 | 7 | 1Chr 10:14 | `דרש` (drsh) | not_unusual |
 | 11 | all_source | `elul_h` `אלול` (lwl; English: Elul) | Elul | 2 | 7 | 1Chr 10:4 | `כליו` (klyw) | not_unusual |
-| 12 | all_source | `heaven_h` `שמימ` (shmym; English: Heaven) | Heaven | -2 | 7 | 1Chr 10:4 | `ויאמר` (wymr) | not_unusual |
+| 12 | all_source | `heaven_h` `שמימ` (shamayim; English: Heaven) | Heaven | -2 | 7 | 1Chr 10:4 | `ויאמר` (wymr) | not_unusual |
 | 13 | all_source | `teeth_h` `שנימ` (shnym; English: Teeth) | Teeth | -2 | 7 | 1Chr 11:19 | `בנפשותמ` (bnpshwtm) | not_unusual |
 | 14 | all_source | `mary_h` `מרימ` (mrym; English: Mary) | Mary | 2 | 7 | 1Chr 13:2 | `מגרשיהמ` (mgrshyhm) | not_unusual |
 | 15 | all_source | `obal_h` `עובל` (wbl; English: Obal) | Obal | 2 | 7 | 1Chr 14:11 | `בבעל` (bbl) | not_unusual |
@@ -176,8 +176,8 @@ It is a triage aid, not a claim-grade filter.
 
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | all_source | `heaven_h` `שמימ` (shmym; English: Heaven) | Heaven | 2 | 7 | Judg 19:3 | `ויקמ` (vayaqom; English: and he arose) | not_unusual |
-| 2 | all_source | `heaven_h` `שמימ` (shmym; English: Heaven) | Heaven | 2 | 7 | Neh 3:1 | `ויקמ` (vayaqom; English: and he arose) | not_unusual |
+| 1 | all_source | `heaven_h` `שמימ` (shamayim; English: Heaven) | Heaven | 2 | 7 | Judg 19:3 | `ויקמ` (vayaqom; English: and he arose) | not_unusual |
+| 2 | all_source | `heaven_h` `שמימ` (shamayim; English: Heaven) | Heaven | 2 | 7 | Neh 3:1 | `ויקמ` (vayaqom; English: and he arose) | not_unusual |
 | 3 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Chr 28:7 | `הזה` (hzh) | not_unusual |
 | 4 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Kgs 3:6 | `הזה` (hzh) | not_unusual |
 | 5 | all_source | `yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 10 | 1Kgs 8:24 | `הזה` (hzh) | not_unusual |
@@ -244,7 +244,7 @@ It is a triage aid, not a claim-grade filter.
 | 16 | all_source | `yemen_h` `תימנ` (tymn; English: Yemen) | Yemen | 2 | 7 | 1Chr 17:2 | `ויאמר` (wymr) | not_unusual |
 | 17 | all_source | `torment_h` `ענוי` (nwy; English: Torment) | Torment | -2 | 7 | 1Chr 19:15 | `ובני` (wbny) | not_unusual |
 | 18 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 2 | 7 | 1Chr 1:45 | `וימת` (wymt) | not_unusual |
-| 19 | all_source | `zion_h` `ציונ` (tsywn; English: Zion) | Zion | -2 | 7 | 1Kgs 11:19 | `וימצא` (wymts) | not_unusual |
+| 19 | all_source | `zion_h` `ציונ` (Tziyon; English: Zion) | Zion | -2 | 7 | 1Kgs 11:19 | `וימצא` (wymts) | not_unusual |
 | 20 | all_source | `life_h` `חיימ` (chyym; English: Life) | Life | 2 | 7 | 1Kgs 11:23 | `ויקמ` (vayaqom; English: and he arose) | not_unusual |
 
 ### hidden_path_only

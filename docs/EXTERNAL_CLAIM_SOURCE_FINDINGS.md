@@ -87,7 +87,7 @@ compare with language-matched secular controls.
 | 115 | `center_word_same_concept` | `source_specific` | twn_obed_h `עובד` (wbd; English: Obed) | PBY Bialik `לאתעבד` (ltbd) | HEB_BIALIK |
 | 116 | `center_word_same_concept` | `source_specific` | twn_obed_h `עובד` (wbd; English: Obed) | PBY Brenner `עבדותעולמ` (bdwtwlm) | HEB_BRENNER |
 | 117 | `center_word_same_concept` | `source_specific` | twn_obed_h `עובד` (wbd; English: Obed) | PBY Bialik `ותעבדהו` (wtbdhw) | HEB_BIALIK |
-| 118 | `center_word_same_concept` | `source_specific` | twn_obed_h `עובד` (wbd; English: Obed) | PBY Brenner `עבד` (bd) | HEB_BRENNER |
+| 118 | `center_word_same_concept` | `source_specific` | twn_obed_h `עובד` (wbd; English: Obed) | PBY Brenner `עבד` (eved; English: servant) | HEB_BRENNER |
 | 119 | `center_word_same_concept` | `source_specific` | twn_obed_h `עובד` (wbd; English: Obed) | PBY Bialik `משתעבדות` (mshtbdwt) | HEB_BIALIK |
 | 120 | `center_word_same_concept` | `source_specific` | twn_obed_h `עובד` (wbd; English: Obed) | PBY Brenner `המשועבד` (hmshwbd) | HEB_BRENNER |
 | 123 | `center_word_same_concept` | `source_specific` | twn_obed_h `עובד` (wbd; English: Obed) | PBY Bialik `עבדו` (bdw) | HEB_BIALIK |

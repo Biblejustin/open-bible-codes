@@ -57,7 +57,7 @@ same-skip extension is an added review feature, not a requirement.
 | 78 | hebrew_theology | `center_verse_same_category` | `אהבה` (hbh; English: Love) | UXLC | `after_match` | `הלהב` (hlhb) | `word` | 3 | הַלַּ֗הַב; הַלַּ֔הַב; הַלַּ֜הַב |
 | 71 | hebrew_screening | `hidden_path_only` | `קברריק` (qbrryq; English: Empty Tomb) | UXLC | `after_match` | `שרית` (shryt) | `word` | 2 | שָׂרִ֧יתָ; שֵׁרִ֧ית |
 | 56 | hebrew_screening | `center_verse_same_concept` | `התשח` (htshch; English: Hebrew year 5708) | UXLC | `before_match` | `יברא` (ybr) | `word` | 1 | יִבְרָ֣א |
-| 61 | hebrew_screening | `span_exact` | `שמימ` (shmym; English: Heaven) | UXLC | `after_match` | `יהי` (yhy) | `word` | 50 | יְהִ֣י; יְהִ֥י; יְהִ֤י; יְהִי־; יְהִ֨י |
+| 61 | hebrew_screening | `span_exact` | `שמימ` (shamayim; English: Heaven) | UXLC | `after_match` | `יהי` (yhy) | `word` | 50 | יְהִ֣י; יְהִ֥י; יְהִ֤י; יְהִי־; יְהִ֨י |
 | 55 | hebrew_screening | `center_verse_same_concept` | `רומי` (rwmy; English: Rome) | UXLC | `before_match` | `שמת` (shmt) | `word` | 25 | שְׁמֹ֖ת; שְׁמֹ֧ת; שְׁמֹ֨ת; שֵׁמֹ֗ת; שַׂ֤מְתָּ |
 | 63 | hebrew_screening | `span_exact` | `מרימ` (mrym; English: Mary) | UXLC | `after_match` | `מרה` (mrh) | `word` | 11 | מָרָֽה׃; מֹרֶֽה׃; מָ֙רָה֙; מָרָ֥ה; מָרָ֖ה |
 | 59 | hebrew_screening | `center_verse_same_category` | `מותשני` (mwtshny; English: Second Death) | UXLC | `before_match` | `אפי` (py) | `word` | 20 | אַפִּ֔י; אַפִּ֥י; אַפִּ֣י; אַפִּ֑י; אַפִּ֤י |
@@ -71,7 +71,7 @@ same-skip extension is an added review feature, not a requirement.
 | 49 | hebrew_screening | `center_word_same_category` | `גרמניה` (grmnyh; English: Germany) | UXLC | `after_match` | `ערש` (rsh) | `word` | 4 | עֶ֣רֶשׂ; עָֽרֶשׂ׃; עֶ֥רֶשׂ |
 | 76 | hebrew_theology | `center_word_same_category` | `תורה` (twrh; English: Torah) | UXLC | `after_match` | `ואח` (wch) | `word` | 2 | וְאָ֥ח; וָאָ֣ח |
 | 43 | hebrew_screening | `center_word_exact` | `שממה` (shemamah; English: Desolation) | UXLC | `before_match` | `עבה` (bh) | `word` | 2 | עָבָ֖ה |
-| 62 | hebrew_screening | `span_exact` | `שמימ` (shmym; English: Heaven) | UXLC | `before_match` | `ובר` (wbr) | `word` | 2 | וּֽבַר־; וּ֝בַ֗ר |
+| 62 | hebrew_screening | `span_exact` | `שמימ` (shamayim; English: Heaven) | UXLC | `before_match` | `ובר` (wbr) | `word` | 2 | וּֽבַר־; וּ֝בַ֗ר |
 | 79 | hebrew_theology | `center_verse_same_category` | `אהבה` (hbh; English: Love) | UXLC | `after_match` | `יבל` (ybl) | `word` | 1 | יָבָ֑ל |
 | 26 | greek_screening | `center_word_same_category` | `ιωυαν` (Iouan; English: Javan) | TR_NT | `after_match` | `ηα` (ea) | `phrase_2` | 2 | ἢ ἃ; Ἢ ἃ |
 | 69 | hebrew_screening | `span_same_category` | `תתתתתכז` (tttttkz; English: Gregorian 2027 additive) | UXLC | `after_match` | `שה` (shh; English: Lamb) | `word` | 24 | שֶׂ֣ה; שֶׂה־; שֶׂ֥ה; שֶׂ֔ה; שֶׂ֖ה |

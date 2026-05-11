@@ -6,7 +6,7 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 
 - Hits: `reports/hebrew_screening_all_codes/surface_all_codes.csv`
 - Summary: `reports/hebrew_screening_all_codes/surface_all_codes_summary.csv`
-- Report DB: `not used`
+- Report DB: `reports/db/open_bible_codes.duckdb`
 - Corpora: `EBIBLE_WLC, MAM, MT_WLC, UHB, UXLC`
 
 ## Collection Counts
@@ -59,7 +59,7 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 | `אמרי` (mry; English: Amorite) | Amorite | 49,829 | 54 | 4,363 | 3,731 | 34,827 | 55,743 |
 | `ביבי` (byby; English: Bibi) | Bibi | 49,308 | 0 | 11 | 249 | 270 | 1,460 |
 | `רומא` (rwm; English: Rome) | Rome | 47,072 | 0 | 1,028 | 42 | 11,161 | 24,976 |
-| `שמימ` (shmym; English: Heaven) | Heaven | 46,923 | 121 | 81 | 1,361 | 1,045 | 6,217 |
+| `שמימ` (shamayim; English: Heaven) | Heaven | 46,923 | 121 | 81 | 1,361 | 1,045 | 6,217 |
 | `יובב` (ywbb; English: Jobab) | Jobab | 46,688 | 0 | 3,831 | 127 | 31,266 | 43,752 |
 | `תהומ` (thwm; English: Abyss) | Abyss | 46,075 | 10 | 2,219 | 75 | 23,746 | 39,993 |
 | `מואב` (mwb; English: Moab) | Moab | 44,467 | 32 | 886 | 645 | 9,681 | 23,996 |

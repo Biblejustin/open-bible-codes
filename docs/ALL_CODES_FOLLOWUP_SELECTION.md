@@ -108,8 +108,8 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 58 | hebrew_screening | `center_verse_same_category` | all_source | `מותשני` (mwtshny; English: Second Death) | Second Death | 9 | Jer 43:3 | `בבל` (Bavel; English: Babylon) |
 | 59 | hebrew_screening | `center_verse_same_category` | all_source | `מותשני` (mwtshny; English: Second Death) | Second Death | -11 | Num 29:29 | `ארבעה` (arbaah; English: four) |
 | 60 | hebrew_screening | `center_verse_same_category` | all_source | `טימותי` (tymwty; English: Timothy) | Timothy | 16 | Gen 30:20 | `אתשמו` (et shemo; English: his name) |
-| 61 | hebrew_screening | `span_exact` | all_source | `שמימ` (shmym; English: Heaven) | Heaven | 2 | Judg 19:3 | `ויקמ` (vayaqom; English: and he arose) |
-| 62 | hebrew_screening | `span_exact` | all_source | `שמימ` (shmym; English: Heaven) | Heaven | 2 | Neh 3:1 | `ויקמ` (vayaqom; English: and he arose) |
+| 61 | hebrew_screening | `span_exact` | all_source | `שמימ` (shamayim; English: Heaven) | Heaven | 2 | Judg 19:3 | `ויקמ` (vayaqom; English: and he arose) |
+| 62 | hebrew_screening | `span_exact` | all_source | `שמימ` (shamayim; English: Heaven) | Heaven | 2 | Neh 3:1 | `ויקמ` (vayaqom; English: and he arose) |
 | 63 | hebrew_screening | `span_exact` | all_source | `מרימ` (mrym; English: Mary) | Mary | -3 | Mic 6:5 | `זכרנא` (zekhor na; English: remember, please) |
 | 64 | hebrew_screening | `span_same_concept` | all_source | `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 35 | Eccl 3:10 | `לענות` (la-anot; English: to answer/afflict) |
 | 65 | hebrew_screening | `span_same_concept` | all_source | `התשח` (htshch; English: Hebrew year 5708) | Hebrew year 5708 | 40 | Lev 22:27 | `והלאה` (whlh) |

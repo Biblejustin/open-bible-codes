@@ -51,7 +51,7 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 | `ישועה` (yshwh; English: Salvation) | Salvation | 2,180 | 0 | 0 | 5 | 0 | 40 |
 | `מושיע` (mwshy; English: Savior) | Savior | 2,150 | 0 | 0 | 0 | 9 | 49 |
 | `ישראל` (Yisrael; English: Israel) | Israel | 2,104 | 83 | 0 | 403 | 10 | 879 |
-| `מלכות` (mlkwt; English: Kingdom) | Kingdom | 1,515 | 14 | 0 | 34 | 0 | 75 |
+| `מלכות` (malkhut; English: Kingdom) | Kingdom | 1,515 | 14 | 0 | 34 | 0 | 75 |
 | `גאולה` (gwlh; English: Redemption) | Redemption | 513 | 0 | 0 | 0 | 4 | 4 |
 | `כבשהאלוהימ` (kbshhlwhym; English: Lamb Of God) | Lamb Of God | 0 | 0 | 0 | 0 | 0 | 0 |
 | `חסד` (chesed; English: Mercy) | Mercy | 0 | 0 | 0 | 0 | 0 | 0 |

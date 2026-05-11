@@ -79,7 +79,7 @@ It is a triage aid, not a claim-grade filter.
 | 15 | source_specific | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 8 | 25 | PBY Bialik | `לאתעבד` (ltbd) | not_run |
 | 16 | source_specific | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -12 | 37 | PBY Brenner | `עבדותעולמ` (bdwtwlm) | not_run |
 | 17 | source_specific | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 38 | 115 | PBY Bialik | `ותעבדהו` (wtbdhw) | not_run |
-| 18 | source_specific | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 55 | 166 | PBY Brenner | `עבד` (bd) | not_run |
+| 18 | source_specific | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 55 | 166 | PBY Brenner | `עבד` (eved; English: servant) | not_run |
 | 19 | source_specific | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 62 | 187 | PBY Bialik | `משתעבדות` (mshtbdwt) | not_run |
 | 20 | source_specific | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -65 | 196 | PBY Brenner | `המשועבד` (hmshwbd) | not_run |
 
@@ -88,7 +88,7 @@ It is a triage aid, not a claim-grade filter.
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
 | 1 | multi_source | `cc_poplar_h` `לבנה` (lbnh; English: Poplar) | Poplar | -2 | 7 | 1Chr 16:14 | `אלהינו` (lhynw) | not_run |
-| 2 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 2 | 7 | 1Sam 25:4 | `דוד` (dwd; English: David) | not_run |
+| 2 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 2 | 7 | 1Sam 25:4 | `דוד` (David; English: David) | not_run |
 | 3 | multi_source | `cc_fig_h` `תאנה` (tnh; English: Fig) | Fig | -2 | 7 | 1Sam 2:2 | `כאלהינו` (klhynw) | not_run |
 | 4 | multi_source | `cc_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 2Chr 34:19 | `התורה` (htwrh) | not_run |
 | 5 | multi_source | `twn_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 2Chr 34:19 | `התורה` (htwrh) | not_run |
