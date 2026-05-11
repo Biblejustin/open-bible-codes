@@ -3,6 +3,7 @@ import gzip
 import json
 import tempfile
 import unittest
+from argparse import Namespace
 from pathlib import Path
 
 from scripts.compress_dynamic_span_partition_outputs import compress_rows
@@ -18,6 +19,7 @@ from scripts.summarize_dynamic_span_partition_outputs import (
     summarize_cached_partitions,
     summarize_partition_output,
     summarize_partitions,
+    write_report,
     write_summary_cache,
 )
 
@@ -211,6 +213,47 @@ class DynamicSpanPartitionOutputSummaryTests(unittest.TestCase):
             "This targeted follow-up scans archived dense hit payloads for the",
             report_intro_lines(Path("docs/DYNAMIC_SKIP_STRONG_FULL_SPAN_EXACT_CENTER_FINDINGS.md")),
         )
+
+    def test_manifest_only_report_links_exact_center_followups(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            report = tmp_path / "report.md"
+            args = Namespace(
+                plan=tmp_path / "plan.csv",
+                partition_summary=tmp_path / "partition_summary.csv",
+                term_summary=tmp_path / "term_summary.csv",
+                examples=tmp_path / "examples.csv",
+                report=report,
+                cache_only=False,
+                manifest_only=True,
+                no_cache=False,
+                examples_per_partition=3,
+            )
+            plan_rows = [plan_template("TR_NT", "dyn_a", "1", "1")]
+            partition_rows = [
+                {
+                    **partition_summary("TR_NT", "dyn_a", "1", "1", "not_computed", "123"),
+                    "estimated_partition_hits": "120",
+                    "estimate_delta": "3",
+                }
+            ]
+            term_rows = build_term_summary(plan_rows, partition_rows)
+
+            write_report(
+                report,
+                plan_rows,
+                partition_rows,
+                term_rows,
+                [],
+                args,
+                {"hits": 0, "misses": 0, "entries": 0},
+            )
+
+            body = report.read_text(encoding="utf-8")
+
+        self.assertIn("## Targeted Exact-Center Follow-Ups", body)
+        self.assertIn("not mean exact-center", body)
+        self.assertIn("DYNAMIC_SKIP_STRONG_FULL_SPAN_EXACT_CENTER_ORIGINAL_LANGUAGE_FINDINGS.md", body)
 
     def test_summarize_partitions_reuses_matching_cache_entries(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

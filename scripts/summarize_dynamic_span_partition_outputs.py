@@ -477,20 +477,59 @@ def write_report(
             f"| `{row['example_type']}` | {row['corpus']} | {cell(display_term_cell(row))} | "
             f"{row['skip']} | {row['center_ref']} | {cell(display_center_word(row))} |"
         )
+    lines.extend(exact_center_followup_lines(args, exact_hits))
     lines.extend(
         [
             "",
             "## Read",
             "",
             "- Completed partition rows are no longer deferred; their hit-level metadata exists.",
-        "- Exact center-word hits are flags, not the admission rule.",
-        "- `not_computed` means the manifest-only path was used; hit counts still come from export manifests.",
-        "- Partition estimates are planning estimates; exported hit rows are observed counts.",
+            "- Exact center-word hits are flags, not the admission rule.",
+            "- `not_computed` means the manifest-only path was used; hit counts still come from export manifests.",
+            "- Partition estimates are planning estimates; exported hit rows are observed counts.",
             "- The ignored partition CSVs are reproducible from the tracked plan and runner.",
             "",
         ]
     )
     path.write_text("\n".join(lines), encoding="utf-8")
+
+
+def exact_center_followup_lines(args: argparse.Namespace, exact_hits: int | str) -> list[str]:
+    if not (args.manifest_only or exact_hits == "not_computed"):
+        return []
+    followups = [
+        ROOT / "docs/DYNAMIC_SKIP_FULL_SPAN_HIT_FINDINGS.md",
+        ROOT / "docs/DYNAMIC_SKIP_STRONG_FULL_SPAN_EXACT_CENTER_FINDINGS.md",
+        ROOT / "docs/DYNAMIC_SKIP_STRONG_CONTROL_FULL_SPAN_EXACT_CENTER_FINDINGS.md",
+        ROOT / "docs/DYNAMIC_SKIP_STRONG_FULL_SPAN_EXACT_CENTER_ORIGINAL_LANGUAGE_FINDINGS.md",
+    ]
+    lines = [
+        "",
+        "## Targeted Exact-Center Follow-Ups",
+        "",
+        "This broad summary used manifest-only mode, so it preserves the full",
+        "partition completion and hit-count totals without rescanning archived dense",
+        "hit payloads for center-word metadata. `not_computed` in this report means",
+        "center-word metadata was not scanned here; it does not mean exact-center",
+        "hits are absent.",
+        "",
+        "| Follow-up | Purpose |",
+        "| --- | --- |",
+    ]
+    descriptions = {
+        "DYNAMIC_SKIP_FULL_SPAN_HIT_FINDINGS.md": "manageable full-span hit summary with exact-center examples",
+        "DYNAMIC_SKIP_STRONG_FULL_SPAN_EXACT_CENTER_FINDINGS.md": "Bible rows where strong full-span signals were rescanned for exact centers",
+        "DYNAMIC_SKIP_STRONG_CONTROL_FULL_SPAN_EXACT_CENTER_FINDINGS.md": (
+            "language-matched control rows corresponding to strong Bible exact-center rows"
+        ),
+        "DYNAMIC_SKIP_STRONG_FULL_SPAN_EXACT_CENTER_ORIGINAL_LANGUAGE_FINDINGS.md": (
+            "original-language synthesis of promoted, hold, and background exact-center rows"
+        ),
+    }
+    for path in followups:
+        label = path.name
+        lines.append(f"| `{display_path(path)}` | {descriptions[label]} |")
+    return lines
 
 
 def write_manifest(

@@ -239,6 +239,21 @@ python3 -m scripts.summarize_dynamic_span_partition_outputs --plan reports/dynam
 | Type | Corpus | Term | Skip | Center | Center word |
 | --- | --- | --- | ---: | --- | --- |
 
+## Targeted Exact-Center Follow-Ups
+
+This broad summary used manifest-only mode, so it preserves the full
+partition completion and hit-count totals without rescanning archived dense
+hit payloads for center-word metadata. `not_computed` in this report means
+center-word metadata was not scanned here; it does not mean exact-center
+hits are absent.
+
+| Follow-up | Purpose |
+| --- | --- |
+| `docs/DYNAMIC_SKIP_FULL_SPAN_HIT_FINDINGS.md` | manageable full-span hit summary with exact-center examples |
+| `docs/DYNAMIC_SKIP_STRONG_FULL_SPAN_EXACT_CENTER_FINDINGS.md` | Bible rows where strong full-span signals were rescanned for exact centers |
+| `docs/DYNAMIC_SKIP_STRONG_CONTROL_FULL_SPAN_EXACT_CENTER_FINDINGS.md` | language-matched control rows corresponding to strong Bible exact-center rows |
+| `docs/DYNAMIC_SKIP_STRONG_FULL_SPAN_EXACT_CENTER_ORIGINAL_LANGUAGE_FINDINGS.md` | original-language synthesis of promoted, hold, and background exact-center rows |
+
 ## Read
 
 - Completed partition rows are no longer deferred; their hit-level metadata exists.
