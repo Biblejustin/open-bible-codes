@@ -61,6 +61,37 @@ def test_filter_rows_can_read_from_duckdb(tmp_path: Path) -> None:
     assert filtered[0]["hit_id"] == "1"
 
 
+def test_filter_rows_uses_mapped_report_db_table_by_default(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    pytest.importorskip("duckdb")
+    hits = tmp_path / "reports" / "crd_self_surface" / "classified_hits.csv"
+    output = tmp_path / "center_word.csv"
+    db = tmp_path / "reports" / "db.duckdb"
+    write_rows(
+        hits,
+        [
+            row("1", "bible", "true", "center_word"),
+            row("2", "bible", "true", "center_verse"),
+        ],
+    )
+
+    monkeypatch.chdir(tmp_path)
+    import_csv_table(db_path=db, csv_path=Path("reports/crd_self_surface/classified_hits.csv"))
+    count = filter_rows(
+        classified_hits=Path("reports/crd_self_surface/classified_hits.csv"),
+        output=output,
+        corpus_class="bible",
+        is_relevant="true",
+        surface_match_scope="center_word",
+        db=db,
+    )
+
+    filtered = read_rows(output)
+    assert count == 1
+    assert filtered[0]["hit_id"] == "1"
+
+
 def row(hit_id: str, corpus_class: str, is_relevant: str, scope: str) -> dict[str, str]:
     return {
         "hit_id": hit_id,
@@ -72,6 +103,7 @@ def row(hit_id: str, corpus_class: str, is_relevant: str, scope: str) -> dict[st
 
 
 def write_rows(path: Path, rows: list[dict[str, str]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
         writer.writeheader()

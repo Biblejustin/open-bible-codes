@@ -7,7 +7,14 @@ import argparse
 from dataclasses import dataclass
 from pathlib import Path
 
-from els.report_db import ReportDBStale, import_csv_table, report_table_name_for_path, sanitize_table_name, verify_table_current
+from els.report_db import (
+    DEFAULT_REPORT_TABLE_NAMES,
+    ReportDBStale,
+    import_csv_table,
+    report_table_name_for_path,
+    sanitize_table_name,
+    verify_table_current,
+)
 
 
 DEFAULT_DB = Path("reports/db/open_bible_codes.duckdb")
@@ -20,46 +27,7 @@ class DefaultReportTable:
 
 
 DEFAULT_REPORT_TABLES = [
-    DefaultReportTable(Path("reports/crd_self_surface/classified_hits.csv"), "crd_self_surface_classified_hits"),
-    DefaultReportTable(Path("reports/crd_self_surface/density_matrix.csv"), "crd_self_surface_density_matrix"),
-    DefaultReportTable(Path("reports/crd_concept_surface/classified_hits.csv"), "crd_concept_surface_classified_hits"),
-    DefaultReportTable(Path("reports/crd_concept_surface/density_matrix.csv"), "crd_concept_surface_density_matrix"),
-    DefaultReportTable(Path("reports/crd/classified_hits.csv"), "crd_classified_hits"),
-    DefaultReportTable(Path("reports/crd/density_matrix.csv"), "crd_density_matrix"),
-    DefaultReportTable(Path("reports/hebrew_screening_all_codes/surface_all_codes.csv"), "hebrew_screening_surface_all_codes"),
-    DefaultReportTable(
-        Path("reports/hebrew_screening_all_codes/surface_all_codes_summary.csv"),
-        "hebrew_screening_surface_all_codes_summary",
-    ),
-    DefaultReportTable(Path("reports/english_screening_all_codes/surface_all_codes.csv"), "english_screening_surface_all_codes"),
-    DefaultReportTable(
-        Path("reports/english_screening_all_codes/surface_all_codes_summary.csv"),
-        "english_screening_surface_all_codes_summary",
-    ),
-    DefaultReportTable(Path("reports/greek_screening_all_codes/surface_all_codes.csv"), "greek_screening_surface_all_codes"),
-    DefaultReportTable(
-        Path("reports/greek_screening_all_codes/surface_all_codes_summary.csv"),
-        "greek_screening_surface_all_codes_summary",
-    ),
-    DefaultReportTable(Path("reports/hebrew_theology_all_codes/surface_all_codes.csv"), "hebrew_theology_surface_all_codes"),
-    DefaultReportTable(
-        Path("reports/hebrew_theology_all_codes/surface_all_codes_summary.csv"),
-        "hebrew_theology_surface_all_codes_summary",
-    ),
-    DefaultReportTable(
-        Path("reports/dynamic_skip_focus/full_span_exported_hits.csv"),
-        "dynamic_skip_focus_full_span_exported_hits",
-    ),
-    DefaultReportTable(Path("reports/word_counts_by_word.csv"), "word_counts_by_word"),
-    DefaultReportTable(Path("reports/word_counts_by_book.csv"), "word_counts_by_book"),
-    DefaultReportTable(Path("reports/word_counts_by_chapter.csv"), "word_counts_by_chapter"),
-    DefaultReportTable(Path("reports/word_counts_by_verse.csv"), "word_counts_by_verse"),
-    DefaultReportTable(Path("reports/word_count_multiples.csv"), "word_count_multiples"),
-    DefaultReportTable(Path("reports/morph_counts_by_lemma.csv"), "morph_counts_by_lemma"),
-    DefaultReportTable(Path("reports/morph_counts_by_book.csv"), "morph_counts_by_book"),
-    DefaultReportTable(Path("reports/morph_counts_by_chapter.csv"), "morph_counts_by_chapter"),
-    DefaultReportTable(Path("reports/morph_counts_by_verse.csv"), "morph_counts_by_verse"),
-    DefaultReportTable(Path("reports/morph_count_multiples.csv"), "morph_count_multiples"),
+    DefaultReportTable(Path(path), table_name) for path, table_name in DEFAULT_REPORT_TABLE_NAMES.items()
 ]
 
 

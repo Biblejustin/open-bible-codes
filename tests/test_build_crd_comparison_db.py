@@ -58,6 +58,42 @@ def test_build_crd_comparison_can_read_classified_hits_from_duckdb(tmp_path: Pat
     assert "Representative Relevant Centers" in report
 
 
+def test_build_crd_comparison_uses_mapped_report_db_table_by_default(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    pytest.importorskip("duckdb")
+    density = tmp_path / "density_matrix.csv"
+    hits = tmp_path / "reports" / "crd_self_surface" / "classified_hits.csv"
+    manifest = tmp_path / "manifest.json"
+    out_dir = tmp_path / "out"
+    db = tmp_path / "reports" / "db.duckdb"
+    write_rows(
+        density,
+        DENSITY_FIELDNAMES,
+        [
+            density_row("deterministic", "term", "BIBLE", "bible", "10", "1"),
+            density_row("deterministic", "term", "CTRL", "secular_control", "10", "0"),
+        ],
+    )
+    write_rows(hits, CLASSIFIED_HIT_FIELDNAMES, [hit_row("h1", "deterministic", "term", "BIBLE", "true")])
+    manifest.write_text(json.dumps({"status": "completed"}), encoding="utf-8")
+
+    monkeypatch.chdir(tmp_path)
+    import_csv_table(db_path=db, csv_path=Path("reports/crd_self_surface/classified_hits.csv"))
+
+    build_crd_comparison(
+        density_matrix=density,
+        classified_hits=Path("reports/crd_self_surface/classified_hits.csv"),
+        manifest=manifest,
+        out_dir=out_dir,
+        markdown_out=out_dir / "CRD_REPORT.md",
+        db=db,
+    )
+
+    report = (out_dir / "CRD_REPORT.md").read_text(encoding="utf-8")
+    assert "Representative Relevant Centers" in report
+
+
 def test_build_crd_comparison_displays_script_terms_with_glosses(tmp_path: Path) -> None:
     density = tmp_path / "density_matrix.csv"
     hits = tmp_path / "classified_hits.csv"

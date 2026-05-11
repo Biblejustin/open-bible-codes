@@ -143,6 +143,48 @@ def test_build_review_queue_can_read_from_duckdb(tmp_path: Path) -> None:
     assert rows[0]["hit_id"] == "1"
 
 
+def test_build_review_queue_uses_mapped_report_db_table_by_default(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    pytest.importorskip("duckdb")
+    summary = tmp_path / "summary.csv"
+    hits = tmp_path / "reports" / "crd_self_surface" / "classified_hits.csv"
+    output = tmp_path / "queue.csv"
+    db = tmp_path / "reports" / "db.duckdb"
+    write_rows(
+        summary,
+        [
+            {
+                "term_id": "high",
+                "bible_max_corpus": "BIBLE",
+                "bible_max_density": "10",
+                "secular_max_corpus": "CTRL",
+                "secular_max_density": "2",
+                "ratio": "5",
+                "exceeds_secular_max": "true",
+            }
+        ],
+    )
+    write_rows(hits, [hit_row("high", "BIBLE", "bible", "true", "1")])
+
+    monkeypatch.chdir(tmp_path)
+    import_csv_table(db_path=db, csv_path=Path("reports/crd_self_surface/classified_hits.csv"))
+
+    selected = select_terms(summary, top_finite=1, top_zero=0)
+    written = build_review_queue(
+        classified_hits=Path("reports/crd_self_surface/classified_hits.csv"),
+        output=output,
+        selected_terms=selected,
+        examples_per_term=1,
+        all_bible_corpora=False,
+        db=db,
+    )
+
+    rows = read_rows(output)
+    assert written == 1
+    assert rows[0]["hit_id"] == "1"
+
+
 def hit_row(term_id: str, corpus: str, corpus_class: str, is_relevant: str, hit_id: str) -> dict[str, str]:
     return {
         "hit_id": hit_id,
@@ -173,6 +215,7 @@ def hit_row(term_id: str, corpus: str, corpus_class: str, is_relevant: str, hit_
 
 
 def write_rows(path: Path, rows: list[dict[str, str]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
         writer.writeheader()

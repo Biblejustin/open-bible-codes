@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from els.report_db import import_csv_table
-from scripts.build_crd_scope_density import build_matrix_rows, build_summary_rows, count_scope_hits, count_scope_hits_db
+from scripts.build_crd_scope_density import build_matrix_rows, build_summary_rows, count_scope_hits, count_scope_hits_db, main
 
 
 def test_scope_density_counts_and_compares_bible_controls(tmp_path: Path) -> None:
@@ -66,6 +66,46 @@ def test_count_scope_hits_can_read_from_duckdb(tmp_path: Path) -> None:
     assert counts[("deterministic", "term", "CTRL")] == 1
 
 
+def test_scope_density_uses_mapped_report_db_table_by_default(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    pytest.importorskip("duckdb")
+    classified_hits = tmp_path / "reports" / "crd_self_surface" / "classified_hits.csv"
+    density = tmp_path / "density.csv"
+    matrix_out = tmp_path / "matrix.csv"
+    summary_out = tmp_path / "summary.csv"
+    db = tmp_path / "reports" / "db.duckdb"
+    write_rows(classified_hits, [hit("term", "BIBLE", "bible", "center_word")])
+    write_rows(density, [density_row("term", "BIBLE", "bible", letters="100", total_hits="1")])
+
+    monkeypatch.chdir(tmp_path)
+    import_csv_table(db_path=db, csv_path=Path("reports/crd_self_surface/classified_hits.csv"))
+
+    assert (
+        main(
+            [
+                "--base-density-matrix",
+                str(density),
+                "--classified-hits",
+                "reports/crd_self_surface/classified_hits.csv",
+                "--surface-match-scope",
+                "center_word",
+                "--matrix-out",
+                str(matrix_out),
+                "--summary-out",
+                str(summary_out),
+                "--db",
+                str(db),
+            ]
+        )
+        == 0
+    )
+
+    with matrix_out.open(newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle))
+    assert rows[0]["scope_relevant_hits"] == "1"
+
+
 def hit(term_id: str, corpus: str, corpus_class: str, scope: str) -> dict[str, str]:
     return {
         "classifier_mode": "deterministic",
@@ -93,6 +133,7 @@ def density_row(term_id: str, corpus: str, corpus_class: str, *, letters: str, t
 
 
 def write_rows(path: Path, rows: list[dict[str, str]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
         writer.writeheader()
