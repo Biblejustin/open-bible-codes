@@ -58,7 +58,7 @@ Read:
 
 ## Caution
 
-The exact-center gate is stronger than same-category context, but the full matched phrase `δόξαν ὡς` (doxan hos; English: glory as) does not appear as surface text in the hit/extension span. The term is also short (`δοξα` [doxa; English: glory]), and both rows still carry low random-variance warnings.
+The exact-center gate is stronger than same-category context, but the full matched phrase `δόξαν ὡς` (doxan hos; English: glory as) does not appear as surface text in the hit/extension span. The term is also short (`δοξα` (doxa; English: glory)), and both rows still carry low random-variance warnings.
 
 ## Next Check
 

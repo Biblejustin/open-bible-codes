@@ -131,8 +131,8 @@ Only two target rows appeared in the bounded strict phrase-extension summaries:
 
 | Term | Extension summary rows | Best extension summary row |
 | --- | ---: | --- |
-| `cowboy_h` (Hebrew `קאובוי` [kauboy; English: Cowboy]) | 1 | `MT_WLC after_match skip=40 match=phrase_2 max_len=4` |
-| `hamas_g` (Greek `χαμασ` [chamas; English: Hamas]) | 2 | `TR_NT after_match skip=16 match=phrase_2 max_len=4` |
+| `cowboy_h` (Hebrew `קאובוי` (kauboy; English: Cowboy)) | 1 | `MT_WLC after_match skip=40 match=phrase_2 max_len=4` |
+| `hamas_g` (Greek `χαμασ` (chamas; English: Hamas)) | 2 | `TR_NT after_match skip=16 match=phrase_2 max_len=4` |
 
 Neither produced a strong `before_plus_term`, `term_plus_after`, or
 `before_plus_term_plus_after` top row.

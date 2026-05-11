@@ -58,13 +58,13 @@ By Corpus:
 
 Top Exact-Center Terms:
 
-- Hul (`ουλ` [Oul; English: Hul]): TR 1,091; SBLGNT 1,059.
-- Shem (`σημ` [Sem; English: Shem]): TR 648; SBLGNT 614.
-- Noah (`νωε` [Noe; English: Noah]): TR 188; SBLGNT 154.
-- Blood (`αιμα` [haima; English: blood]): TR 109; SBLGNT 99.
-- Son (`υιοσ` [huios; English: son]): TR 103; SBLGNT 77.
-- God (`θεοσ` [theos; English: God]): TR 49; SBLGNT 46.
-- Gog (`γωγ` [Gog; English: Gog]): TR 22; SBLGNT 26.
+- Hul (`ουλ` (Oul; English: Hul)): TR 1,091; SBLGNT 1,059.
+- Shem (`σημ` (Sem; English: Shem)): TR 648; SBLGNT 614.
+- Noah (`νωε` (Noe; English: Noah)): TR 188; SBLGNT 154.
+- Blood (`αιμα` (haima; English: blood)): TR 109; SBLGNT 99.
+- Son (`υιοσ` (huios; English: son)): TR 103; SBLGNT 77.
+- God (`θεοσ` (theos; English: God)): TR 49; SBLGNT 46.
+- Gog (`γωγ` (Gog; English: Gog)): TR 22; SBLGNT 26.
 
 Cautions:
 

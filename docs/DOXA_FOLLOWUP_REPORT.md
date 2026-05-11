@@ -97,8 +97,8 @@ Those paths show the same 7-letter hidden sequence in both Greek NT texts:
 
 | Corpus | Letter path |
 | --- | --- |
-| SBLGNT | `δ@2Thess 3:1:547432;ο@2Thess 3:1:547453;ξ@2Thess 3:1:547474;α@2Thess 3:1:547495;ν@2Thess 3:2:547516;ω@2Thess 3:2:547537;σ@2Thess 3:2:547558` (letters spell `δοξανωσ` [doxanos; English: hidden extension form from doxa]) |
-| TR_NT | `δ@2TH 3:1:556748;ο@2TH 3:1:556769;ξ@2TH 3:1:556790;α@2TH 3:1:556811;ν@2TH 3:2:556832;ω@2TH 3:2:556853;σ@2TH 3:2:556874` (letters spell `δοξανωσ` [doxanos; English: hidden extension form from doxa]) |
+| SBLGNT | `δ@2Thess 3:1:547432;ο@2Thess 3:1:547453;ξ@2Thess 3:1:547474;α@2Thess 3:1:547495;ν@2Thess 3:2:547516;ω@2Thess 3:2:547537;σ@2Thess 3:2:547558` (letters spell `δοξανωσ` (doxanos; English: hidden extension form from doxa)) |
+| TR_NT | `δ@2TH 3:1:556748;ο@2TH 3:1:556769;ξ@2TH 3:1:556790;α@2TH 3:1:556811;ν@2TH 3:2:556832;ω@2TH 3:2:556853;σ@2TH 3:2:556874` (letters spell `δοξανωσ` (doxanos; English: hidden extension form from doxa)) |
 
 ## Preregistration Check
 

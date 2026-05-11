@@ -70,7 +70,7 @@ The three long phrase rows with no exact hits were:
 
 ## Control Read
 
-Only `htp_yhwh_h` (`יהוה` [YHWH; English: YHWH]) cleared an uncorrected representative-control screen:
+Only `htp_yhwh_h` (`יהוה` (YHWH; English: YHWH)) cleared an uncorrected representative-control screen:
 
 | Term | Exact hits | All-source patterns | Best p | Best q | Read |
 | --- | ---: | ---: | ---: | ---: | --- |
