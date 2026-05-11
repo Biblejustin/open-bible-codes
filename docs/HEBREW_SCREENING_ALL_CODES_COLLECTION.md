@@ -13,28 +13,28 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 
 | Metric | Count |
 | --- | ---: |
-| Terms represented | 725 |
-| Corpus-term summary rows | 3,825 |
-| Hidden-path rows retained | 3,665,348 |
-| Total hits from summary | 3,665,348 |
-| Any surface-context hits | 1,815,029 |
+| Terms represented | 726 |
+| Corpus-term summary rows | 3,830 |
+| Hidden-path rows retained | 3,680,528 |
+| Total hits from summary | 3,680,528 |
+| Any surface-context hits | 1,828,415 |
 | Center word contains same term | 9,266 |
-| Center word contains related term | 110,593 |
-| Center verse contains same term | 119,148 |
-| Center verse contains related term | 1,009,783 |
-| Hit span contains same/related term | 1,972,408 |
+| Center word contains related term | 111,654 |
+| Center verse contains same term | 119,153 |
+| Center verse contains related term | 1,018,957 |
+| Hit span contains same/related term | 1,986,939 |
 
 ## Context Labels
 
 | Best context | Rows |
 | --- | ---: |
-| `hidden_path_only` | 1,850,319 |
-| `same_category_center` | 944,739 |
-| `same_category_span` | 673,653 |
-| `exact_center` | 119,148 |
+| `hidden_path_only` | 1,852,113 |
+| `same_category_center` | 953,242 |
+| `same_category_span` | 677,798 |
+| `exact_center` | 119,153 |
 | `exact_span` | 76,629 |
-| `same_concept_span` | 555 |
-| `same_concept_center` | 305 |
+| `same_concept_span` | 878 |
+| `same_concept_center` | 715 |
 
 ## Top Terms
 
@@ -68,7 +68,7 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 | `שאול` (shwl; English: Paul) | Paul | 37,020 | 137 | 416 | 1,420 | 5,470 | 13,951 |
 | `מיכה` (mykh; English: Micah) | Micah | 36,642 | 6 | 104 | 119 | 1,990 | 5,354 |
 | `הוכה` (hwkh; English: Beaten) | Beaten | 36,228 | 0 | 91 | 65 | 1,681 | 5,203 |
-| `שממה` (shemamah; English: Desolation) | Desolation | 34,908 | 22 | 2,038 | 140 | 20,638 | 31,545 |
+| `שממה` (shemamah; English: Desolation) | Desolation | 34,908 | 22 | 2,038 | 140 | 20,643 | 31,545 |
 | `מהרל` (mhrl; English: Maharal) | Maharal | 34,750 | 0 | 0 | 0 | 130 | 344 |
 
 ## Read

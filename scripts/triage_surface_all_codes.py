@@ -34,6 +34,8 @@ DEFAULT_QUEUE = Path("reports/hebrew_theology_all_codes/triage_queue.csv")
 DEFAULT_MD = Path("docs/HEBREW_THEOLOGY_ALL_CODES_TRIAGE.md")
 DEFAULT_MANIFEST = Path("reports/hebrew_theology_all_codes/triage.manifest.json")
 DEFAULT_REPORT_DB = Path("reports/db/open_bible_codes.duckdb")
+MISSING_CONTROL_BAND = "not_run"
+MISSING_CONTROL_READ = "not run in exact controlled matrix"
 
 BUCKET_ORDER = {
     "center_word_exact": 0,
@@ -532,20 +534,36 @@ def queue_row(
             )
             if part
         ),
-        "control_band": control.get("representative_best_band")
-        or control.get("paired_best_band")
-        or control.get("paired_band", ""),
+        "control_band": control_band(control),
         "control_p": control.get("representative_best_p")
         or control.get("paired_best_p")
         or control.get("combined_min_p_ge", ""),
         "control_q": control.get("representative_best_q")
         or control.get("paired_best_q")
         or control.get("combined_min_q_value", ""),
-        "control_read": control.get("representative_best_read")
-        or control.get("paired_best_read")
-        or control.get("read", ""),
+        "control_read": control_read(control),
         "triage_score": "",
     }
+
+
+def control_band(control: dict[str, str]) -> str:
+    if not control:
+        return MISSING_CONTROL_BAND
+    return (
+        control.get("representative_best_band")
+        or control.get("paired_best_band")
+        or control.get("paired_band", "")
+    )
+
+
+def control_read(control: dict[str, str]) -> str:
+    if not control:
+        return MISSING_CONTROL_READ
+    return (
+        control.get("representative_best_read")
+        or control.get("paired_best_read")
+        or control.get("read", "")
+    )
 
 
 def bucket_for_row(row: dict[str, str]) -> str:

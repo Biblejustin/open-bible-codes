@@ -323,6 +323,7 @@ frogs_plague_g,Frogs Plague,judgment_terms,greek,βατραχος,Exodus 8
 lice_plague_h,Lice Plague,judgment_terms,hebrew,כנים,Exodus 8
 lice_plague_g,Lice Plague,judgment_terms,greek,σκνιφες,Exodus 8 LXX
 flies_plague_h,Flies Plague,judgment_terms,hebrew,ערב,Exodus 8 mixed insect plague
+flies_plague_full_h,Flies Plague,judgment_terms,hebrew,ערוב,Fuller Hebrew spelling variant requested for plague cohort screening
 flies_plague_g,Flies Plague,judgment_terms,greek,κυνομυια,Exodus 8 LXX
 murrain_plague_h,Livestock Plague,judgment_terms,hebrew,דבר,collides with word/pestilence root
 murrain_plague_g,Livestock Plague,judgment_terms,greek,θανατος,Exodus 9 LXX

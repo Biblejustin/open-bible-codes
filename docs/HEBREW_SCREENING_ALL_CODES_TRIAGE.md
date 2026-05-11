@@ -18,13 +18,13 @@ It is a triage aid, not a claim-grade filter.
 
 | Metric | Count |
 | --- | ---: |
-| Raw rows scanned | 3,665,348 |
-| Queue rows | 877 |
+| Raw rows scanned | 3,680,528 |
+| Queue rows | 909 |
 | `center_word_exact` queue rows | 100 |
-| `center_word_same_concept` queue rows | 3 |
+| `center_word_same_concept` queue rows | 9 |
 | `center_word_same_category` queue rows | 100 |
 | `center_verse_exact` queue rows | 100 |
-| `center_verse_same_concept` queue rows | 74 |
+| `center_verse_same_concept` queue rows | 100 |
 | `center_verse_same_category` queue rows | 100 |
 | `span_exact` queue rows | 100 |
 | `span_same_concept` queue rows | 100 |
@@ -64,7 +64,13 @@ It is a triage aid, not a claim-grade filter.
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
 | 1 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 5 | 16 | Job 5:12 | `ערומימ` (arumim; English: crafty/shrewd) | not_unusual |
 | 2 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -42 | 127 | Eccl 10:6 | `במרומימ` (ba-meromim; English: in the heights) | not_unusual |
-| 3 | multi_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 7 | 22 | 1Chr 11:33 | `הבחרומי` (hbchrwmy) | not_unusual |
+| 3 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | -3 | 10 | 2Chr 13:11 | `ובערב` (wbrb) | not_run |
+| 4 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 38 | 115 | Lev 13:57 | `אובערב` (wbrb) | not_run |
+| 5 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 42 | 127 | Deut 1:1 | `בערבה` (brbh) | not_run |
+| 6 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 65 | 196 | 2Sam 11:2 | `הערב` (hrb) | not_run |
+| 7 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | -81 | 244 | 1Sam 14:24 | `הערב` (hrb) | not_run |
+| 8 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 94 | 283 | Lev 15:17 | `עדהערב` (dhrb) | not_run |
+| 9 | multi_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 7 | 22 | 1Chr 11:33 | `הבחרומי` (hbchrwmy) | not_unusual |
 
 ### center_word_same_category
 
@@ -196,7 +202,7 @@ It is a triage aid, not a claim-grade filter.
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
 | 1 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 11 | 34 | Num 22:13 | `לתתי` (ltty) | not_unusual |
-| 2 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -14 | 43 | Ps 73:7 | `לבב` (lbb) | not_unusual |
+| 2 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -14 | 43 | Ps 73:7 | `לבב` (lbb; English: Heart) | not_unusual |
 | 3 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -21 | 64 | Isa 33:15 | `אזנו` (znw) | not_unusual |
 | 4 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -27 | 82 | Isa 53:9 | `ויתנ` (wytn) | not_unusual |
 | 5 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 29 | 88 | 1Sam 23:23 | `המחבאימ` (hmchbym) | not_unusual |
