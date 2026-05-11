@@ -10,7 +10,7 @@ It is a triage aid, not a claim-grade filter.
 
 - Hits: `reports/english_screening_all_codes/surface_all_codes.csv`
 - Summary: `reports/english_screening_all_codes/surface_all_codes_summary.csv`
-- Report DB: `not used`
+- Report DB: `reports/db/open_bible_codes.duckdb`
 - Queue CSV: `reports/english_screening_all_codes/triage_queue.csv`
 - Corpora: `KJV`
 
@@ -18,7 +18,7 @@ It is a triage aid, not a claim-grade filter.
 
 | Metric | Count |
 | --- | ---: |
-| Raw rows scanned | 1,373,147 |
+| Raw rows scanned | 1,374,596 |
 | Queue rows | 700 |
 | `center_word_exact` queue rows | 100 |
 | `center_word_same_concept` queue rows | 0 |

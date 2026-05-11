@@ -13,26 +13,26 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 
 | Metric | Count |
 | --- | ---: |
-| Terms represented | 1,294 |
-| Corpus-term summary rows | 1,294 |
-| Hidden-path rows retained | 1,373,147 |
-| Total hits from summary | 1,373,147 |
-| Any surface-context hits | 320,866 |
+| Terms represented | 1,303 |
+| Corpus-term summary rows | 1,303 |
+| Hidden-path rows retained | 1,374,596 |
+| Total hits from summary | 1,374,596 |
+| Any surface-context hits | 322,059 |
 | Center word contains same term | 908 |
-| Center word contains related term | 9,196 |
-| Center verse contains same term | 27,258 |
-| Center verse contains related term | 168,484 |
-| Hit span contains same/related term | 356,359 |
+| Center word contains related term | 9,217 |
+| Center verse contains same term | 27,260 |
+| Center verse contains related term | 169,292 |
+| Hit span contains same/related term | 357,748 |
 
 ## Context Labels
 
 | Best context | Rows |
 | --- | ---: |
-| `hidden_path_only` | 1,052,281 |
-| `same_category_center` | 152,296 |
-| `same_category_span` | 119,814 |
-| `exact_center` | 27,258 |
-| `exact_span` | 21,498 |
+| `hidden_path_only` | 1,052,537 |
+| `same_category_center` | 153,021 |
+| `same_category_span` | 120,299 |
+| `exact_center` | 27,260 |
+| `exact_span` | 21,479 |
 
 ## Top Terms
 

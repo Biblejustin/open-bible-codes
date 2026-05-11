@@ -136,6 +136,17 @@ outputs = [
 ]
 
 [[steps]]
+id = "report_db"
+description = "Refresh DuckDB mirror before triage so large hit scans use the current DB table."
+argv = ["-m", "scripts.build_report_db", "--skip-missing"]
+inputs = [
+  "scripts/build_report_db.py",
+  "els/report_db.py",
+  "reports/hebrew_screening_all_codes/surface_all_codes.csv",
+  "reports/hebrew_screening_all_codes/surface_all_codes_summary.csv",
+]
+
+[[steps]]
 id = "triage"
 description = "Build a compact ranked triage queue from broad Hebrew relaxed all-codes rows."
 argv = [
@@ -145,6 +156,10 @@ argv = [
   "reports/hebrew_screening_all_codes/surface_all_codes.csv",
   "--summary",
   "reports/hebrew_screening_all_codes/surface_all_codes_summary.csv",
+  "--db",
+  "reports/db/open_bible_codes.duckdb",
+  "--hits-table",
+  "hebrew_screening_surface_all_codes",
   "--controlled-summary",
   "reports/hebrew_screening_controlled_review/controlled_summary.csv",
   "--title",

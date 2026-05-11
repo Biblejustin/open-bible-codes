@@ -13,26 +13,26 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 
 | Metric | Count |
 | --- | ---: |
-| Terms represented | 717 |
-| Corpus-term summary rows | 3,785 |
-| Hidden-path rows retained | 3,580,932 |
-| Total hits from summary | 3,580,932 |
-| Any surface-context hits | 1,702,830 |
-| Center word contains same term | 9,224 |
-| Center word contains related term | 89,313 |
-| Center verse contains same term | 118,223 |
-| Center verse contains related term | 862,530 |
-| Hit span contains same/related term | 1,804,044 |
+| Terms represented | 725 |
+| Corpus-term summary rows | 3,825 |
+| Hidden-path rows retained | 3,665,348 |
+| Total hits from summary | 3,665,348 |
+| Any surface-context hits | 1,815,029 |
+| Center word contains same term | 9,266 |
+| Center word contains related term | 110,593 |
+| Center verse contains same term | 119,148 |
+| Center verse contains related term | 1,009,783 |
+| Hit span contains same/related term | 1,972,408 |
 
 ## Context Labels
 
 | Best context | Rows |
 | --- | ---: |
-| `hidden_path_only` | 1,878,102 |
-| `same_category_center` | 835,958 |
-| `same_category_span` | 655,283 |
-| `exact_center` | 118,223 |
-| `exact_span` | 92,506 |
+| `hidden_path_only` | 1,850,319 |
+| `same_category_center` | 944,739 |
+| `same_category_span` | 673,653 |
+| `exact_center` | 119,148 |
+| `exact_span` | 76,629 |
 | `same_concept_span` | 555 |
 | `same_concept_center` | 305 |
 
@@ -40,10 +40,11 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 
 | Term | Concept | Hidden hits | Center word same | Center word related | Center verse same | Center verse related | Span context |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| `יהוה` (YHWH; English: YHWH) | YHWH | 216,640 | 6,658 | 2,401 | 83,838 | 25,087 | 205,559 |
+| `יהוה` (YHWH; English: YHWH) | YHWH | 216,640 | 6,658 | 12,875 | 83,838 | 98,141 | 283,038 |
 | `מרימ` (mrym; English: Mary) | Mary | 108,806 | 102 | 2,257 | 1,414 | 24,667 | 52,512 |
 | `יואל` (ywl; English: Joel) | Joel | 85,440 | 1 | 424 | 901 | 4,518 | 14,505 |
 | `נביא` (navi; English: Prophet) | Prophet | 83,913 | 153 | 1,624 | 1,662 | 17,441 | 43,302 |
+| `אהיה` (hyh; English: Ehyeh) | Ehyeh | 83,036 | 42 | 9,277 | 914 | 66,070 | 83,188 |
 | `אהבה` (hbh; English: Love) | Love | 79,150 | 20 | 1,123 | 314 | 11,890 | 24,029 |
 | `שלומ` (shlwm; English: Peace) | Peace | 75,338 | 180 | 985 | 1,462 | 11,138 | 25,125 |
 | `אייר` (yyr; English: Iyyar) | Iyyar | 72,657 | 0 | 1,471 | 35 | 17,865 | 39,974 |
@@ -69,7 +70,6 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 | `הוכה` (hwkh; English: Beaten) | Beaten | 36,228 | 0 | 91 | 65 | 1,681 | 5,203 |
 | `שממה` (shemamah; English: Desolation) | Desolation | 34,908 | 22 | 2,038 | 140 | 20,638 | 31,545 |
 | `מהרל` (mhrl; English: Maharal) | Maharal | 34,750 | 0 | 0 | 0 | 130 | 344 |
-| `אלונ` (lwn; English: Oak) | Oak | 33,896 | 1 | 60 | 84 | 703 | 2,439 |
 
 ## Read
 

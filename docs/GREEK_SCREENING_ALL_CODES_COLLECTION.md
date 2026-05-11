@@ -13,26 +13,26 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 
 | Metric | Count |
 | --- | ---: |
-| Terms represented | 569 |
-| Corpus-term summary rows | 2,364 |
-| Hidden-path rows retained | 480,616 |
-| Total hits from summary | 480,616 |
-| Any surface-context hits | 82,365 |
+| Terms represented | 573 |
+| Corpus-term summary rows | 2,380 |
+| Hidden-path rows retained | 481,912 |
+| Total hits from summary | 481,912 |
+| Any surface-context hits | 82,518 |
 | Center word contains same term | 294 |
-| Center word contains related term | 1,946 |
-| Center verse contains same term | 6,639 |
-| Center verse contains related term | 34,652 |
-| Hit span contains same/related term | 89,596 |
+| Center word contains related term | 1,954 |
+| Center verse contains same term | 6,641 |
+| Center verse contains related term | 34,733 |
+| Hit span contains same/related term | 89,789 |
 
 ## Context Labels
 
 | Best context | Rows |
 | --- | ---: |
-| `hidden_path_only` | 398,251 |
-| `same_category_span` | 36,018 |
-| `same_category_center` | 31,841 |
-| `exact_span` | 7,867 |
-| `exact_center` | 6,639 |
+| `hidden_path_only` | 399,394 |
+| `same_category_span` | 36,101 |
+| `same_category_center` | 31,914 |
+| `exact_span` | 7,862 |
+| `exact_center` | 6,641 |
 
 ## Top Terms
 
@@ -57,7 +57,7 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 | `λευι` (leui; English: Levi) | Levi | 8,271 | 1 | 40 | 9 | 444 | 986 |
 | `αραμ` (aram; English: Aram) | Aram | 6,876 | 1 | 76 | 30 | 1,238 | 2,602 |
 | `ασηρ` (aser; English: Asher) | Asher | 6,282 | 0 | 20 | 18 | 358 | 763 |
-| `θεοσ` (theos; English: God) | God | 6,186 | 12 | 10 | 350 | 127 | 1,225 |
+| `θεοσ` (theos; English: God) | God | 6,186 | 12 | 18 | 350 | 196 | 1,383 |
 | `αμην` (amen; English: Amen) | Amen | 5,552 | 1 | 1 | 195 | 17 | 456 |
 | `ωσηε` (osee; English: Hosea) | Hosea | 5,024 | 0 | 6 | 1 | 77 | 165 |
 | `αμωσ` (amos; English: Amos) | Amos | 4,239 | 1 | 4 | 1 | 50 | 164 |
