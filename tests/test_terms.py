@@ -390,6 +390,109 @@ class TermListTests(unittest.TestCase):
             },
         )
 
+    def test_additional_screening_cohorts_remain_declared(self) -> None:
+        narrative_ids = term_ids(TERMS_DIR / "biblical_narrative_names.csv")
+        prophet_ids = term_ids(TERMS_DIR / "biblical_prophets_cohort.csv")
+        eschatology_ids = term_ids(TERMS_DIR / "eschatology_expanded_terms.csv")
+        isaiah53_ids = term_ids(TERMS_DIR / "isaiah53_servant_cohort.csv")
+        tabernacle_ids = term_ids(TERMS_DIR / "tabernacle_temple_terms.csv")
+        metals_ids = term_ids(TERMS_DIR / "daniel_statue_metals.csv")
+        anno_mundi_ids = term_ids(TERMS_DIR / "hebrew_anno_mundi_years.csv")
+        disaster_war_ids = term_ids(TERMS_DIR / "modern_disaster_war_terms.csv")
+        maccabean_ids = term_ids(TERMS_DIR / "maccabean_apocrypha_names.csv")
+
+        self.assertGreaterEqual(
+            narrative_ids,
+            {
+                "narrative_joshua_h",
+                "narrative_joshua_g",
+                "narrative_esther_h",
+                "narrative_samuel_h",
+                "narrative_mary_magdalene_g",
+                "narrative_caiaphas_g",
+            },
+        )
+        self.assertGreaterEqual(
+            prophet_ids,
+            {
+                "prophet_isaiah_h",
+                "prophet_jeremiah_g",
+                "prophet_hosea_h",
+                "prophet_jonah_g",
+                "prophet_malachi_h",
+            },
+        )
+        self.assertGreaterEqual(
+            eschatology_ids,
+            {
+                "esch_antichrist_g",
+                "esch_rapture_g",
+                "esch_666_h",
+                "esch_666_stigma_g",
+                "esch_number_of_beast_g",
+                "esch_end_h",
+            },
+        )
+        self.assertGreaterEqual(
+            isaiah53_ids,
+            {
+                "isa53_transgression_h",
+                "isa53_iniquity_g",
+                "isa53_wound_h",
+                "isa53_lamb_g",
+                "isa53_grave_h",
+            },
+        )
+        self.assertGreaterEqual(
+            tabernacle_ids,
+            {
+                "tabernacle_mishkan_h",
+                "tabernacle_ark_g",
+                "tabernacle_mercy_seat_h",
+                "tabernacle_holy_of_holies_g",
+            },
+        )
+        self.assertGreaterEqual(
+            metals_ids,
+            {
+                "daniel_gold_h",
+                "daniel_silver_g",
+                "daniel_bronze_h",
+                "daniel_iron_g",
+                "daniel_clay_h",
+            },
+        )
+        self.assertGreaterEqual(
+            anno_mundi_ids,
+            {
+                "am_5708_compact_h",
+                "am_5727_full_h",
+                "am_5733_compact_h",
+                "am_5790_full_h",
+                "am_5793_compact_h",
+            },
+        )
+        self.assertGreaterEqual(
+            disaster_war_ids,
+            {
+                "disaster_earthquake_h",
+                "disaster_cancer_g",
+                "war_ww1_h",
+                "war_six_day_h",
+                "war_yom_kippur_g",
+            },
+        )
+        self.assertGreaterEqual(
+            maccabean_ids,
+            {
+                "macc_antiochus_h",
+                "macc_mattathias_g",
+                "macc_judah_maccabee_h",
+                "macc_tobit_g",
+                "macc_holofernes_h",
+            },
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

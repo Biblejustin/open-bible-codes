@@ -1,0 +1,13 @@
+term_id,concept,category,language,term,notes
+am_5708_compact_h,Hebrew year 5708,anno_mundi_years,hebrew,תשח,Anno Mundi year for 1948; compact form omits thousands
+am_5708_full_h,Hebrew year 5708,anno_mundi_years,hebrew,התשח,Anno Mundi year for 1948; full thousands prefix
+am_5727_compact_h,Hebrew year 5727,anno_mundi_years,hebrew,תשכז,Anno Mundi year for 1967; compact form omits thousands
+am_5727_full_h,Hebrew year 5727,anno_mundi_years,hebrew,התשכז,Anno Mundi year for 1967; full thousands prefix
+am_5733_compact_h,Hebrew year 5733,anno_mundi_years,hebrew,תשלג,Anno Mundi year for 1973; compact form omits thousands
+am_5733_full_h,Hebrew year 5733,anno_mundi_years,hebrew,התשלג,Anno Mundi year for 1973; full thousands prefix
+am_5784_compact_h,Hebrew year 5784,anno_mundi_years,hebrew,תשפד,Anno Mundi year for 2023-2024; partial-year boundary noted
+am_5784_full_h,Hebrew year 5784,anno_mundi_years,hebrew,התשפד,Anno Mundi year for 2023-2024; full thousands prefix
+am_5790_compact_h,Hebrew year 5790,anno_mundi_years,hebrew,תשצ,Anno Mundi year near 2029-2030; partial-year boundary noted
+am_5790_full_h,Hebrew year 5790,anno_mundi_years,hebrew,התשצ,Anno Mundi year near 2029-2030; full thousands prefix
+am_5793_compact_h,Hebrew year 5793,anno_mundi_years,hebrew,תשצג,Anno Mundi year near 2032-2033; partial-year boundary noted
+am_5793_full_h,Hebrew year 5793,anno_mundi_years,hebrew,התשצג,Anno Mundi year near 2032-2033; full thousands prefix

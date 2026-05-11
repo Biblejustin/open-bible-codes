@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 245
+Documents indexed: 246
 
 ## Controls
 
@@ -146,6 +146,7 @@ Documents indexed: 245
 
 | Title | Path |
 | --- | --- |
+| Additional Screening Cohorts | `ADDITIONAL_SCREENING_COHORTS.md` |
 | All-Codes Follow-Up Context | `ALL_CODES_FOLLOWUP_CONTEXT.md` |
 | All-Codes Follow-Up Extensions | `ALL_CODES_FOLLOWUP_EXTENSIONS.md` |
 | All-Codes Follow-Up Letter Paths | `ALL_CODES_FOLLOWUP_LETTER_PATHS.md` |

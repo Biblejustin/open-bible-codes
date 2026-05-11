@@ -1,0 +1,28 @@
+term_id,concept,category,language,term,notes
+disaster_earthquake_h,Earthquake,modern_disasters,hebrew,רעש,biblical and modern disaster term
+disaster_earthquake_g,Earthquake,modern_disasters,greek,σεισμος,biblical and modern disaster term
+disaster_tsunami_h,Tsunami,modern_disasters,hebrew,צונאמי,modern Hebrew transliteration
+disaster_tsunami_g,Tsunami,modern_disasters,greek,τσουνάμι,modern Greek transliteration
+disaster_volcano_h,Volcano,modern_disasters,hebrew,הר געש,modern Hebrew phrase
+disaster_volcano_g,Volcano,modern_disasters,greek,ηφαιστειο,modern Greek term
+disaster_cancer_h,Cancer,modern_disasters,hebrew,סרטן,disease term; also zodiac/crab homograph
+disaster_cancer_g,Cancer,modern_disasters,greek,καρκινος,disease term; also crab term
+disaster_ebola_h,Ebola,modern_disasters,hebrew,אבולה,modern Hebrew transliteration
+disaster_ebola_g,Ebola,modern_disasters,greek,εμπολα,modern Greek transliteration
+disaster_pestilence_h,Pestilence,modern_disasters,hebrew,דבר,biblical pestilence term; also word/matter homograph
+disaster_pestilence_g,Pestilence,modern_disasters,greek,λοιμος,pestilence term
+war_ww1_h,World War One,modern_wars,hebrew,מלחמת העולם הראשונה,modern Hebrew phrase
+war_ww1_g,World War One,modern_wars,greek,πρωτος παγκοσμιος πολεμος,modern Greek phrase
+war_ww2_h,World War Two,modern_wars,hebrew,מלחמת העולם השניה,modern Hebrew phrase
+war_ww2_g,World War Two,modern_wars,greek,δευτερος παγκοσμιος πολεμος,modern Greek phrase
+war_korean_h,Korean War,modern_wars,hebrew,מלחמת קוריאה,modern Hebrew phrase
+war_korean_g,Korean War,modern_wars,greek,πολεμος της κορεας,modern Greek phrase
+war_vietnam_h,Vietnam War,modern_wars,hebrew,מלחמת וייטנאם,modern Hebrew phrase
+war_vietnam_g,Vietnam War,modern_wars,greek,πολεμος του βιετναμ,modern Greek phrase
+war_cold_h,Cold War,modern_wars,hebrew,המלחמה הקרה,modern Hebrew phrase
+war_cold_g,Cold War,modern_wars,greek,ψυχρος πολεμος,modern Greek phrase
+war_six_day_h,Six-Day War,modern_wars,hebrew,מלחמת ששת הימים,modern Hebrew phrase
+war_six_day_g,Six-Day War,modern_wars,greek,πολεμος των εξι ημερων,modern Greek phrase
+war_yom_kippur_h,Yom Kippur War,modern_wars,hebrew,מלחמת יום הכפורים,modern Hebrew phrase
+war_yom_kippur_alt_h,Yom Kippur War,modern_wars,hebrew,מלחמת יום כיפור,modern colloquial spelling
+war_yom_kippur_g,Yom Kippur War,modern_wars,greek,πολεμος του γιομ κιπουρ,modern Greek phrase

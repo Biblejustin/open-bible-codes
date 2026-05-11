@@ -1,0 +1,17 @@
+term_id,concept,category,language,term,notes
+isa53_servant_h,Servant,isaiah53_servant,hebrew,עבד,Isaiah servant theme
+isa53_servant_g,Servant,isaiah53_servant,greek,παις,Greek servant/child term
+isa53_transgression_h,Transgression,isaiah53_servant,hebrew,פשע,Isaiah 53 term family
+isa53_transgression_g,Transgression,isaiah53_servant,greek,παραπτωμα,Greek transgression term
+isa53_iniquity_h,Iniquity,isaiah53_servant,hebrew,עון,Isaiah 53 term family
+isa53_iniquity_g,Iniquity,isaiah53_servant,greek,ανομια,Greek lawlessness/iniquity term
+isa53_wound_h,Wound,isaiah53_servant,hebrew,חבורה,Isaiah 53 stripes/wound term
+isa53_wound_g,Wound,isaiah53_servant,greek,μωλωψ,Greek stripe/wound term
+isa53_lamb_h,Lamb,isaiah53_servant,hebrew,שה,Isaiah 53 lamb image
+isa53_lamb_g,Lamb,isaiah53_servant,greek,αμνος,Greek lamb term
+isa53_silent_h,Silent,isaiah53_servant,hebrew,נאלם,Isaiah 53 silence term
+isa53_silent_g,Silent,isaiah53_servant,greek,σιωπαω,Greek silence term
+isa53_grave_h,Grave,isaiah53_servant,hebrew,קבר,Isaiah 53 grave term
+isa53_grave_g,Grave,isaiah53_servant,greek,ταφος,Greek tomb/grave term
+isa53_bruised_h,Bruised,isaiah53_servant,hebrew,דכא,Isaiah 53 crushed/bruised term
+isa53_bruised_g,Bruised,isaiah53_servant,greek,τραυματιζω,Greek wounded/bruised verb family

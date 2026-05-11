@@ -1,0 +1,17 @@
+term_id,concept,category,language,term,notes
+tabernacle_mishkan_h,Tabernacle,tabernacle_temple,hebrew,משכן,tabernacle architecture cohort
+tabernacle_mishkan_g,Tabernacle,tabernacle_temple,greek,σκηνη,tabernacle/tent term
+tabernacle_ark_h,Ark,tabernacle_temple,hebrew,ארון,ark of covenant term
+tabernacle_ark_g,Ark,tabernacle_temple,greek,κιβωτος,ark term
+tabernacle_mercy_seat_h,Mercy Seat,tabernacle_temple,hebrew,כפרת,mercy seat/kapporet term
+tabernacle_mercy_seat_g,Mercy Seat,tabernacle_temple,greek,ιλαστηριον,mercy seat/propitiatory term
+tabernacle_menorah_h,Menorah,tabernacle_temple,hebrew,מנורה,lampstand term
+tabernacle_menorah_g,Menorah,tabernacle_temple,greek,λυχνια,lampstand term
+tabernacle_cherubim_h,Cherubim,tabernacle_temple,hebrew,כרובים,cherubim term
+tabernacle_cherubim_g,Cherubim,tabernacle_temple,greek,χερουβιμ,cherubim term
+tabernacle_holy_of_holies_h,Holy Of Holies,tabernacle_temple,hebrew,קדש הקדשים,inner sanctuary phrase
+tabernacle_holy_of_holies_g,Holy Of Holies,tabernacle_temple,greek,αγια αγιων,inner sanctuary phrase
+tabernacle_temple_h,Temple,tabernacle_temple,hebrew,היכל,temple/palace term
+tabernacle_temple_g,Temple,tabernacle_temple,greek,ναος,temple/sanctuary term
+tabernacle_altar_h,Altar,tabernacle_temple,hebrew,מזבח,altar term
+tabernacle_altar_g,Altar,tabernacle_temple,greek,θυσιαστηριον,altar term

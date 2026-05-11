@@ -1,0 +1,19 @@
+term_id,concept,category,language,term,notes
+esch_antichrist_h,Antichrist,eschatology,hebrew,אנטיכריסט,modern Hebrew transliteration; Greek term is primary NT form
+esch_antichrist_phrase_h,Antichrist,eschatology,hebrew,צורר המשיח,Hebrew phrase; adversary of Messiah
+esch_antichrist_g,Antichrist,eschatology,greek,αντιχριστος,NT eschatology term
+esch_tribulation_h,Tribulation,eschatology,hebrew,צרה,Hebrew distress/tribulation term
+esch_tribulation_g,Tribulation,eschatology,greek,θλιψις,Greek tribulation term
+esch_rapture_h,Rapture,eschatology,hebrew,לקיחה,Hebrew taking/catching-away concept term
+esch_rapture_g,Rapture,eschatology,greek,αρπαγη,Greek noun form for catching away
+esch_harpazo_g,Harpazo,eschatology,greek,αρπαζω,Greek verb used in rapture discussions
+esch_millennium_h,Thousand Years,eschatology,hebrew,אלף שנים,millennium phrase
+esch_millennium_g,Thousand Years,eschatology,greek,χιλια ετη,Revelation 20 phrase
+esch_666_h,666,eschatology,hebrew,תרו,Hebrew gematria form for 666
+esch_666_words_h,666,eschatology,hebrew,שש מאות ששים ושש,number of beast spelled out
+esch_666_g,666,eschatology,greek,χξς,Greek numeral form using final sigma normalization
+esch_666_stigma_g,666,eschatology,greek,χξϛ,Greek numeral form with stigma
+esch_number_of_beast_h,Number Of The Beast,eschatology,hebrew,מספר החיה,Revelation phrase
+esch_number_of_beast_g,Number Of The Beast,eschatology,greek,αριθμος θηριου,Revelation phrase
+esch_end_h,End,eschatology,hebrew,קץ,Daniel end term; short term may be excluded by min length
+esch_end_g,End,eschatology,greek,τελος,Greek end term

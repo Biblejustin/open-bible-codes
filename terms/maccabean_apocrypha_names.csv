@@ -1,0 +1,15 @@
+term_id,concept,category,language,term,notes
+macc_antiochus_h,Antiochus,maccabean_apocrypha_names,hebrew,אנטיוכוס,Maccabean/apocrypha bridge proper-name cohort
+macc_antiochus_g,Antiochus,maccabean_apocrypha_names,greek,αντιοχος,Maccabean/apocrypha bridge proper-name cohort
+macc_mattathias_h,Mattathias,maccabean_apocrypha_names,hebrew,מתתיהו,Maccabean/apocrypha bridge proper-name cohort
+macc_mattathias_g,Mattathias,maccabean_apocrypha_names,greek,ματταθιας,Maccabean/apocrypha bridge proper-name cohort
+macc_judah_maccabee_h,Judah Maccabee,maccabean_apocrypha_names,hebrew,יהודה המכבי,Maccabean/apocrypha bridge proper-name cohort
+macc_judah_maccabee_g,Judah Maccabee,maccabean_apocrypha_names,greek,ιουδας μακκαβαιος,Maccabean/apocrypha bridge proper-name cohort
+macc_eleazar_h,Eleazar,maccabean_apocrypha_names,hebrew,אלעזר,Maccabean/apocrypha bridge proper-name cohort
+macc_eleazar_g,Eleazar,maccabean_apocrypha_names,greek,ελεαζαρ,Maccabean/apocrypha bridge proper-name cohort
+macc_tobit_h,Tobit,maccabean_apocrypha_names,hebrew,טוביה,apocrypha bridge proper-name cohort
+macc_tobit_g,Tobit,maccabean_apocrypha_names,greek,τωβιτ,apocrypha bridge proper-name cohort
+macc_judith_h,Judith,maccabean_apocrypha_names,hebrew,יהודית,apocrypha bridge proper-name cohort
+macc_judith_g,Judith,maccabean_apocrypha_names,greek,ιουδιθ,apocrypha bridge proper-name cohort
+macc_holofernes_h,Holofernes,maccabean_apocrypha_names,hebrew,הולופרנס,apocrypha bridge proper-name cohort
+macc_holofernes_g,Holofernes,maccabean_apocrypha_names,greek,ολοφερνης,apocrypha bridge proper-name cohort

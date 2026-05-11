@@ -1,0 +1,11 @@
+term_id,concept,category,language,term,notes
+daniel_gold_h,Gold,daniel_metals,hebrew,זהב,Daniel 2 statue metal cohort
+daniel_gold_g,Gold,daniel_metals,greek,χρυσος,Daniel 2 statue metal cohort
+daniel_silver_h,Silver,daniel_metals,hebrew,כסף,Daniel 2 statue metal cohort
+daniel_silver_g,Silver,daniel_metals,greek,αργυρος,Daniel 2 statue metal cohort
+daniel_bronze_h,Bronze,daniel_metals,hebrew,נחשת,Daniel 2 statue metal cohort
+daniel_bronze_g,Bronze,daniel_metals,greek,χαλκος,Daniel 2 statue metal cohort
+daniel_iron_h,Iron,daniel_metals,hebrew,ברזל,Daniel 2 statue metal cohort
+daniel_iron_g,Iron,daniel_metals,greek,σιδηρος,Daniel 2 statue metal cohort
+daniel_clay_h,Clay,daniel_metals,hebrew,חרס,Daniel 2 statue material cohort
+daniel_clay_g,Clay,daniel_metals,greek,πηλος,Daniel 2 statue material cohort

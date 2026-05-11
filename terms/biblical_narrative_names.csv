@@ -1,0 +1,30 @@
+term_id,concept,category,language,term,notes
+narrative_joshua_h,Joshua,biblical_narrative_names,hebrew,יהושע,Joshua son of Nun; referent control for Greek Iesous rows
+narrative_joshua_g,Joshua,biblical_narrative_names,greek,ιησους,Greek Iesous can refer to Joshua or Jesus by context
+narrative_solomon_h,Solomon,biblical_narrative_names,hebrew,שלמה,declared narrative-name cohort
+narrative_solomon_g,Solomon,biblical_narrative_names,greek,σολομων,declared narrative-name cohort
+narrative_esther_h,Esther,biblical_narrative_names,hebrew,אסתר,declared narrative-name cohort
+narrative_esther_g,Esther,biblical_narrative_names,greek,εσθηρ,declared narrative-name cohort
+narrative_ruth_h,Ruth,biblical_narrative_names,hebrew,רות,declared narrative-name cohort
+narrative_ruth_g,Ruth,biblical_narrative_names,greek,ρουθ,declared narrative-name cohort
+narrative_hannah_h,Hannah,biblical_narrative_names,hebrew,חנה,declared narrative-name cohort
+narrative_hannah_g,Hannah,biblical_narrative_names,greek,αννα,Greek Anna/Hannah form
+narrative_samuel_h,Samuel,biblical_narrative_names,hebrew,שמואל,declared narrative-name cohort
+narrative_samuel_g,Samuel,biblical_narrative_names,greek,σαμουηλ,declared narrative-name cohort
+narrative_rebekah_h,Rebekah,biblical_narrative_names,hebrew,רבקה,declared matriarch cohort
+narrative_rebekah_g,Rebekah,biblical_narrative_names,greek,ρεβεκκα,declared matriarch cohort
+narrative_rachel_h,Rachel,biblical_narrative_names,hebrew,רחל,declared matriarch cohort
+narrative_rachel_g,Rachel,biblical_narrative_names,greek,ραχηλ,declared matriarch cohort
+narrative_leah_h,Leah,biblical_narrative_names,hebrew,לאה,declared matriarch cohort
+narrative_leah_g,Leah,biblical_narrative_names,greek,λεια,declared matriarch cohort
+narrative_james_g,James,biblical_narrative_names,greek,ιακωβος,NT apostle cohort
+narrative_andrew_g,Andrew,biblical_narrative_names,greek,ανδρεας,NT apostle cohort
+narrative_thomas_g,Thomas,biblical_narrative_names,greek,θωμας,NT apostle cohort
+narrative_matthew_g,Matthew,biblical_narrative_names,greek,ματθαιος,NT apostle cohort
+narrative_philip_g,Philip,biblical_narrative_names,greek,φιλιππος,NT apostle cohort
+narrative_stephen_g,Stephen,biblical_narrative_names,greek,στεφανος,NT figure cohort
+narrative_barnabas_g,Barnabas,biblical_narrative_names,greek,βαρναβας,NT figure cohort
+narrative_mary_magdalene_g,Mary Magdalene,biblical_narrative_names,greek,μαρια μαγδαληνη,passion and resurrection narrative cohort
+narrative_lazarus_g,Lazarus,biblical_narrative_names,greek,λαζαρος,NT narrative cohort
+narrative_caiaphas_h,Caiaphas,biblical_narrative_names,hebrew,קיפא,Hebrew/Aramaic form for high priest name
+narrative_caiaphas_g,Caiaphas,biblical_narrative_names,greek,καιαφας,passion narrative cohort
