@@ -85,6 +85,30 @@ class DynamicSpanPartitionOutputSummaryTests(unittest.TestCase):
         self.assertEqual(summary["forward_hits"], "not_computed")
         self.assertEqual(examples, [])
 
+    def test_manifest_only_completed_rows_do_not_require_payload(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            out = tmp_path / "partition.csv"
+            manifest = tmp_path / "partition.manifest.json"
+            manifest.write_text(json.dumps({"exported_hits": 123}) + "\n", encoding="utf-8")
+            row = plan_row(out, manifest)
+
+            self.assertEqual(completed_plan_rows([row]), [])
+            self.assertEqual(
+                [item["partition_id"] for item in completed_plan_rows([row], manifest_only=True)],
+                ["p1"],
+            )
+            summaries, examples, _stats = summarize_partitions(
+                [row],
+                examples_per_partition=2,
+                cache={},
+                manifest_only=True,
+            )
+
+        self.assertEqual(summaries[0]["exported_hits"], "123")
+        self.assertEqual(summaries[0]["exact_center_word_hits"], "not_computed")
+        self.assertEqual(examples, [])
+
     def test_summarize_partition_output_reads_compressed_csv(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

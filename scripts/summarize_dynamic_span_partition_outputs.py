@@ -91,7 +91,7 @@ def main(argv: list[str] | None = None) -> int:
         completed = cached_plan_rows(plan_rows, cache)
         partition_rows, examples, cache_stats = summarize_cached_partitions(completed, cache)
     else:
-        completed = completed_plan_rows(plan_rows)
+        completed = completed_plan_rows(plan_rows, manifest_only=args.manifest_only)
         partition_rows, examples, cache_stats = summarize_partitions(
             completed,
             examples_per_partition=args.examples_per_partition,
@@ -138,12 +138,18 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def completed_plan_rows(plan_rows: list[dict[str, str]]) -> list[dict[str, str]]:
+def completed_plan_rows(
+    plan_rows: list[dict[str, str]],
+    *,
+    manifest_only: bool = False,
+) -> list[dict[str, str]]:
     completed = []
     for row in plan_rows:
         out = partition_output_path(row)
         manifest = partition_manifest_path(row)
-        if out.exists() and manifest.exists():
+        if manifest_only and manifest.exists():
+            completed.append(row)
+        elif out.exists() and manifest.exists():
             completed.append(row)
     return completed
 
@@ -634,17 +640,14 @@ def partition_fingerprint(
 ) -> dict[str, int | str | bool]:
     out = partition_output_path(row)
     manifest = partition_manifest_path(row)
-    out_stat = out.stat()
     manifest_stat = manifest.stat()
     marker = archive_marker_path(row)
     marker_stat = marker.stat() if marker.exists() else None
-    return {
+    fingerprint: dict[str, int | str | bool] = {
         "cache_version": CACHE_VERSION,
         "examples_per_partition": examples_per_partition,
         "manifest_only": manifest_only,
         "out": display_path(out),
-        "out_size": out_stat.st_size,
-        "out_mtime_ns": out_stat.st_mtime_ns,
         "manifest": display_path(manifest),
         "manifest_size": manifest_stat.st_size,
         "manifest_mtime_ns": manifest_stat.st_mtime_ns,
@@ -652,6 +655,17 @@ def partition_fingerprint(
         "archive_marker_size": marker_stat.st_size if marker_stat else 0,
         "archive_marker_mtime_ns": marker_stat.st_mtime_ns if marker_stat else 0,
     }
+    if out.exists():
+        out_stat = out.stat()
+        fingerprint.update(
+            {
+                "out_size": out_stat.st_size,
+                "out_mtime_ns": out_stat.st_mtime_ns,
+            }
+        )
+    elif not manifest_only:
+        out.stat()
+    return fingerprint
 
 
 def partition_output_path(row: dict[str, str]) -> Path:

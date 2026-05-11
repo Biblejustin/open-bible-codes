@@ -77,8 +77,8 @@ def compare_completed(rows: list[dict[str, str]]) -> list[dict[str, str]]:
         control_rows = sorted((row for row in group if is_control_corpus(row["corpus"])), key=lambda row: row["corpus"])
         bible_hits = sum(hit_count(row) for row in bible_rows)
         control_hits = sum(hit_count(row) for row in control_rows)
-        bible_exact = sum(exact_hits(row) for row in bible_rows)
-        control_exact = sum(exact_hits(row) for row in control_rows)
+        bible_exact = sum_exact_hits(bible_rows)
+        control_exact = sum_exact_hits(control_rows)
         bible_max = max(bible_rows, key=hit_count) if bible_rows else None
         control_max = max(control_rows, key=hit_count) if control_rows else None
         output.append(
@@ -90,14 +90,14 @@ def compare_completed(rows: list[dict[str, str]]) -> list[dict[str, str]]:
                 "control_completed_corpora": ", ".join(row["corpus"] for row in control_rows),
                 "bible_completed_hits": str(bible_hits),
                 "control_completed_hits": str(control_hits),
-                "bible_exact_center_word_hits": str(bible_exact),
-                "control_exact_center_word_hits": str(control_exact),
+                "bible_exact_center_word_hits": bible_exact,
+                "control_exact_center_word_hits": control_exact,
                 "bible_max_corpus": bible_max["corpus"] if bible_max else "",
                 "bible_max_hits": str(hit_count(bible_max)) if bible_max else "",
                 "control_max_corpus": control_max["corpus"] if control_max else "",
                 "control_max_hits": str(hit_count(control_max)) if control_max else "",
                 "control_over_bible_hits_ratio": ratio_text(control_hits, bible_hits),
-                "control_over_bible_exact_center_ratio": ratio_text(control_exact, bible_exact),
+                "control_over_bible_exact_center_ratio": ratio_text_cells(control_exact, bible_exact),
             }
         )
     return output
@@ -115,14 +115,34 @@ def hit_count(row: dict[str, str] | None) -> int:
     return int(row.get("completed_exported_hits") or 0) if row else 0
 
 
-def exact_hits(row: dict[str, str] | None) -> int:
-    return int(row.get("exact_center_word_hits") or 0) if row else 0
+def sum_exact_hits(rows: list[dict[str, str]]) -> str:
+    total = 0
+    for row in rows:
+        value = row.get("exact_center_word_hits") or "0"
+        if value == "not_computed":
+            return "not_computed"
+        total += int(value)
+    return str(total)
 
 
 def ratio_text(numerator: int, denominator: int) -> str:
     if denominator == 0:
         return "inf" if numerator > 0 else ""
     return str(round(numerator / denominator, 6))
+
+
+def ratio_text_cells(numerator: str, denominator: str) -> str:
+    try:
+        return ratio_text(int(numerator), int(denominator))
+    except ValueError:
+        return ""
+
+
+def format_count_cell(value: str) -> str:
+    try:
+        return f"{int(value):,}"
+    except ValueError:
+        return value
 
 
 def is_control_corpus(corpus: str) -> bool:
@@ -189,7 +209,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
     for row in sorted(bible_only, key=lambda item: int(item["bible_completed_hits"]), reverse=True)[:60]:
         lines.append(
             f"| `{row['term_id']}` | `{row['mode']}` | {row['bible_completed_corpora']} | "
-            f"{int(row['bible_completed_hits']):,} | {int(row['bible_exact_center_word_hits']):,} |"
+            f"{int(row['bible_completed_hits']):,} | {format_count_cell(row['bible_exact_center_word_hits'])} |"
         )
     lines.extend(
         [
@@ -203,7 +223,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
     for row in sorted(control_only, key=lambda item: int(item["control_completed_hits"]), reverse=True)[:60]:
         lines.append(
             f"| `{row['term_id']}` | `{row['mode']}` | {row['control_completed_corpora']} | "
-            f"{int(row['control_completed_hits']):,} | {int(row['control_exact_center_word_hits']):,} |"
+            f"{int(row['control_completed_hits']):,} | {format_count_cell(row['control_exact_center_word_hits'])} |"
         )
     lines.extend(
         [
@@ -222,8 +242,8 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
 def summary_row(row: dict[str, str]) -> str:
     return (
         f"| `{row['term_id']}` | `{row['mode']}` | {int(row['bible_completed_hits']):,} | "
-        f"{int(row['control_completed_hits']):,} | {int(row['bible_exact_center_word_hits']):,} | "
-        f"{int(row['control_exact_center_word_hits']):,} | {row['control_over_bible_hits_ratio']} |"
+        f"{int(row['control_completed_hits']):,} | {format_count_cell(row['bible_exact_center_word_hits'])} | "
+        f"{format_count_cell(row['control_exact_center_word_hits'])} | {row['control_over_bible_hits_ratio']} |"
     )
 
 

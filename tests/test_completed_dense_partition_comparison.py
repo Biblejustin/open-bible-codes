@@ -29,13 +29,28 @@ class CompletedDensePartitionComparisonTests(unittest.TestCase):
         self.assertEqual(compared[0]["control_completed_hits"], "7")
         self.assertEqual(compared[0]["bible_completed_hits"], "0")
 
+    def test_compare_completed_preserves_not_computed_exact_hits(self) -> None:
+        rows = [
+            row("KJV", "dyn_jesus_e", "complete", 10, "not_computed"),
+            row("ENG_PG_SHAKESPEARE", "dyn_jesus_e", "complete", 20, "not_computed"),
+        ]
+
+        compared = compare_completed(rows)
+
+        self.assertEqual(compared[0]["bible_completed_hits"], "10")
+        self.assertEqual(compared[0]["control_completed_hits"], "20")
+        self.assertEqual(compared[0]["bible_exact_center_word_hits"], "not_computed")
+        self.assertEqual(compared[0]["control_exact_center_word_hits"], "not_computed")
+        self.assertEqual(compared[0]["control_over_bible_hits_ratio"], "2.0")
+        self.assertEqual(compared[0]["control_over_bible_exact_center_ratio"], "")
+
 
 def row(
     corpus: str,
     term_id: str,
     status: str,
     hits: int,
-    exact_hits: int,
+    exact_hits: int | str,
 ) -> dict[str, str]:
     return {
         "corpus": corpus,
