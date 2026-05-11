@@ -225,7 +225,7 @@ The self-surface mode asks the narrow question: hidden `X` centered near visible
 `X`. The concept-surface mode allows visible spellings from the same committed
 `(language, concept)` group.
 
-The self-surface rerun produced 1,621,960 classified hit rows and 9,272
+The self-surface rerun produced 1,629,913 classified hit rows and 9,318
 relevant rows. The strict exact center-word subset contains 1,153 Bible rows
 across 154 term IDs, 87 distinct normalized surface forms, and 496 distinct
 normalized surface hit paths. In the center-word-only Bible-vs-control summary,

@@ -24,7 +24,7 @@ The Bible exact center-word hit set is identical in the self-surface and concept
 
 The center-word density summaries are also effectively stable:
 
-- term rows compared: 3,503
+- term rows compared: 3,522
 - rows with changed summary values: 2
 - rows with changed Bible max density or Bible max corpus: 0
 - rows with changed `exceeds_secular_max`: 0

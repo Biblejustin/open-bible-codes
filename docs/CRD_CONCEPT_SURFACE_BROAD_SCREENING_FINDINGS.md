@@ -1,6 +1,6 @@
 # CRD Concept-Surface Broad Screening Findings
 
-Status: local deterministic broad screening run completed at `2026-05-11T07:02:23.586783+00:00`. Raw artifacts stay under ignored `reports/crd_concept_surface/`; `classified_hits.csv` is 6.56 GB.
+Status: local deterministic broad screening run completed at `2026-05-11T12:33:43.193461+00:00`. Raw artifacts stay under ignored `reports/crd_concept_surface/`; `classified_hits.csv` is 6.59 GB.
 
 ## Scope
 
@@ -41,27 +41,27 @@ make crd-center-word-findings
 
 ## Run Size
 
-- density rows: 22,220
-- term/control comparison rows: 3,503
-- classified hit rows: 1,621,960
+- density rows: 22,336
+- term/control comparison rows: 3,522
+- classified hit rows: 1,629,913
 - corpora with output: 20
-- nonzero `(term, corpus)` density rows: 13,120
+- nonzero `(term, corpus)` density rows: 13,187
 - compact review queue rows: 419
 - compact review queue selected terms: 50
 - exact center-word review queue rows: 215
 - exact center-word review queue selected terms: 50
-- runtime: 8523.210 seconds
+- runtime: 8687.731 seconds
 - API calls: 0
 - estimated API cost: 0.0 USD
 
 ## Headline Counts
 
-- `exceeds_secular_max = true`: 582 / 3,503 terms
-- rows with secular max density = 0: 3,383 / 3,503 terms
-- rows with Bible max > 0 and secular max = 0: 493 / 3,503 terms
-- English exceeds: 196 / 1,451
-- Greek exceeds: 153 / 947
-- Hebrew exceeds: 233 / 1,105
+- `exceeds_secular_max = true`: 585 / 3,522 terms
+- rows with secular max density = 0: 3,402 / 3,522 terms
+- rows with Bible max > 0 and secular max = 0: 496 / 3,522 terms
+- English exceeds: 197 / 1,460
+- Greek exceeds: 154 / 951
+- Hebrew exceeds: 234 / 1,111
 
 Large numbers of secular-zero rows are review-priority flags, not automatic claim promotions. They can reflect dictionary vocabulary and control-corpus coverage.
 
@@ -70,8 +70,8 @@ Large numbers of secular-zero rows are review-priority flags, not automatic clai
 Relevant classified-hit rows by scope:
 
 - `bible.center_word`: 1,153
-- `bible.center_verse`: 5,458
-- `bible.span`: 2,494
+- `bible.center_verse`: 5,468
+- `bible.span`: 2,530
 - `secular_control.center_word`: 225
 - `secular_control.center_verse`: 0
 - `secular_control.span`: 0
@@ -120,11 +120,11 @@ The exact `center_word` scope is the strictest form: the hidden term is centered
 - distinct term IDs with Bible center-word rows: 154
 - exact center-word presence rows: 154
 - distinct visible spellings in presence output: 90
-- center-word-only summary rows: 3,503; `exceeds_secular_max = true`: 141
+- center-word-only summary rows: 3,522; `exceeds_secular_max = true`: 141
 - Bible-positive / secular-zero center-word terms: 114
-- English center-word exceeds: 27 / 1,451
-- Greek center-word exceeds: 37 / 947
-- Hebrew center-word exceeds: 77 / 1,105
+- English center-word exceeds: 27 / 1,460
+- Greek center-word exceeds: 37 / 951
+- Hebrew center-word exceeds: 77 / 1,111
 - corpus-count distribution: 63 terms in 5 corpus labels, 1 term in 4 corpus labels, 5 terms in 3 corpus labels, 25 terms in 2 corpus labels, 60 terms in 1 corpus label
 
 Top finite center-word-only ratios:
