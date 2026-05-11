@@ -62,7 +62,7 @@ It is a triage aid, not a claim-grade filter.
 
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | 7 | 22 | 1Chr 5:1 | `בנישראל` (bnyshrl) | not_unusual |
+| 1 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | 7 | 22 | 1Chr 5:1 | `בנישראל` (bnei Yisrael; English: children of Israel) | not_unusual |
 | 2 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | -7 | 22 | 2Kgs 17:20 | `ישראל` (Yisrael; English: Israel) | not_unusual |
 | 3 | all_source | `htp_covenant_h` `ברית` (bryt; English: Covenant) | Covenant | 8 | 25 | Deut 34:9 | `חכמה` (chkmh; English: Wisdom) | not_unusual |
 | 4 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | 9 | 28 | 1Sam 17:45 | `ישראל` (Yisrael; English: Israel) | not_unusual |
@@ -113,8 +113,8 @@ It is a triage aid, not a claim-grade filter.
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
 | 1 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | -2 | 7 | 1Sam 6:5 | `הארצ` (hrts) | not_unusual |
-| 2 | all_source | `htp_love_h` `אהבה` (hbh; English: Love) | Love | 2 | 7 | 2Sam 14:21 | `הדבר` (hdbr) | not_unusual |
-| 3 | all_source | `htp_love_h` `אהבה` (hbh; English: Love) | Love | 2 | 7 | 2Sam 15:27 | `שבה` (shbh) | not_unusual |
+| 2 | all_source | `htp_love_h` `אהבה` (hbh; English: Love) | Love | 2 | 7 | 2Sam 14:21 | `הדבר` (ha-davar; English: the word/matter) | not_unusual |
+| 3 | all_source | `htp_love_h` `אהבה` (hbh; English: Love) | Love | 2 | 7 | 2Sam 15:27 | `שבה` (shuvah; English: return) | not_unusual |
 | 4 | all_source | `htp_love_h` `אהבה` (hbh; English: Love) | Love | 2 | 7 | Exod 18:23 | `אתהדבר` (thdbr) | not_unusual |
 | 5 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | -2 | 7 | Ezek 36:10 | `והחרבות` (whchrbwt) | not_unusual |
 | 6 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | -2 | 7 | Ezra 10:2 | `הארצ` (hrts) | not_unusual |
@@ -126,7 +126,7 @@ It is a triage aid, not a claim-grade filter.
 | 12 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | -3 | 10 | Deut 9:1 | `היומ` (hywm) | not_unusual |
 | 13 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | -3 | 10 | Exod 10:23 | `במושבתמ` (bmwshbtm) | not_unusual |
 | 14 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | -3 | 10 | Ezra 7:7 | `והשערימ` (whshrym) | not_unusual |
-| 15 | all_source | `htp_wisdom_h` `חכמה` (chkmh; English: Wisdom) | Wisdom | 3 | 10 | Isa 49:8 | `כה` (kh) | not_unusual |
+| 15 | all_source | `htp_wisdom_h` `חכמה` (chkmh; English: Wisdom) | Wisdom | 3 | 10 | Isa 49:8 | `כה` (koh; English: thus) | not_unusual |
 | 16 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | 4 | 13 | 1Chr 11:10 | `ואלה` (wlh) | not_unusual |
 | 17 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | 4 | 13 | 1Sam 14:45 | `אשר` (shr; English: Asher) | not_unusual |
 | 18 | all_source | `htp_glory_h` `כבוד` (kbwd; English: Glory) | Glory | -4 | 13 | Ezek 27:16 | `בעזבוניכ` (bzbwnyk) | not_unusual |
@@ -176,10 +176,10 @@ It is a triage aid, not a claim-grade filter.
 | 12 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | 4 | 13 | Lev 25:1 | `וידבר` (wydbr) | not_unusual |
 | 13 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | -5 | 16 | 1Sam 8:5 | `אליו` (lyw) | not_unusual |
 | 14 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | -6 | 19 | 2Sam 12:6 | `חמל` (chml) | not_unusual |
-| 15 | all_source | `htp_messiah_h` `משיח` (Mashiach; English: Messiah) | Messiah | 6 | 19 | Ezra 2:5 | `ושבעימ` (wshbym) | not_unusual |
+| 15 | all_source | `htp_messiah_h` `משיח` (Mashiach; English: Messiah) | Messiah | 6 | 19 | Ezra 2:5 | `ושבעימ` (ve-shivim; English: and seventy) | not_unusual |
 | 16 | all_source | `htp_love_h` `אהבה` (hbh; English: Love) | Love | -6 | 19 | Jer 34:6 | `ירמיהו` (yrmyhw; English: Jeremiah) | not_unusual |
 | 17 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | 6 | 19 | Jer 3:7 | `ואמר` (wmr) | not_unusual |
-| 18 | all_source | `htp_messiah_h` `משיח` (Mashiach; English: Messiah) | Messiah | 6 | 19 | Neh 7:10 | `ושנימ` (wshnym) | not_unusual |
+| 18 | all_source | `htp_messiah_h` `משיח` (Mashiach; English: Messiah) | Messiah | 6 | 19 | Neh 7:10 | `ושנימ` (ve-shenayim; English: and two) | not_unusual |
 | 19 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | -7 | 22 | 2Kgs 14:18 | `אמציהו` (mtsyhw) | not_unusual |
 | 20 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | 9 | 28 | 2Chr 11:15 | `ולעגלימ` (wlglym) | not_unusual |
 
