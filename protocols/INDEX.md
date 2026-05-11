@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 81
+Protocols indexed: 82
 
 ## Analysis
 
@@ -19,6 +19,7 @@ Protocols indexed: 81
 | local_terms_appendix | Negative/curiosity appendix for fixed local pastor-business and church-location terms. | 5 | terms/local_terms_appendix.csv | reports/local_terms_appendix | `local_terms_appendix.toml` |
 | modern_focus_extensions | Capped same-skip extension screen for modern names, places, and local terms. | 11 | terms/modern_names_dates.csv | reports/modern_extension_screen | `modern_focus_extensions.toml` |
 | mt_version_comparison | Compare normalized Hebrew MT-family verse text across MT_WLC, UXLC, MAM, eBible WLC, an... | 1 |  | reports/mt_version_comparison | `mt_version_comparison.toml` |
+| notable_passage_gaps | Record declared notable passages where selected ELS terms are absent, sparse, or presen... | 1 | terms/notable_passage_gap_terms.csv | reports/notable_passage_gaps | `notable_passage_gaps.toml` |
 | step_tahot_version_presence | Run focused modern/local exact-hit version presence with STEP_TAHOT included as a separ... | 2 | terms/modern_names_dates.csv | reports/step_tahot_version_presence | `step_tahot_version_presence.toml` |
 | version_presence_extensions | Same-skip extension screen for bounded all-source version-presence hit queues. | 10 |  | reports/version_presence_extensions | `version_presence_extensions.toml` |
 | wide_focus_exact_presence | Capped exact-hit version-presence review for the focused wide-search terms. | 2 | terms/modern_names_dates.csv, terms/prophetic_terms.csv | reports/wide_focus_exact_presence | `wide_focus_exact_presence.toml` |
@@ -121,10 +122,10 @@ Protocols indexed: 81
 | --- | --- | ---: | --- | --- | --- |
 | broad_search | Broader skip 2..100 screening run across every declared term list. | 3 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_narrative_nam... | reports/broad_search | `broad_search.toml` |
 | english_kjv_screening | English KJV skip 2..100 screening run over generated English search terms. | 1 | terms/english_search_terms.csv | reports/english_kjv_screening | `english_kjv_screening.toml` |
-| english_screening_all_codes_collection | Relaxed all-codes collection for the broad English KJV screening cohort with center-wor... | 3 | terms/english_search_terms.csv | reports/english_screening_all_codes | `english_screening_all_codes_collection.toml` |
-| greek_screening_all_codes_collection | Relaxed all-codes collection for the broad Greek screening cohort with center-word surf... | 3 | terms/biblical_festivals.csv, terms/biblical_narrative_names.csv, terms/biblical_prophe... | reports/greek_screening_all_codes | `greek_screening_all_codes_collection.toml` |
+| english_screening_all_codes_collection | Relaxed all-codes collection for the broad English KJV screening cohort with center-wor... | 4 | terms/english_search_terms.csv | reports/english_screening_all_codes | `english_screening_all_codes_collection.toml` |
+| greek_screening_all_codes_collection | Relaxed all-codes collection for the broad Greek screening cohort with center-word surf... | 4 | terms/biblical_festivals.csv, terms/biblical_narrative_names.csv, terms/biblical_prophe... | reports/greek_screening_all_codes | `greek_screening_all_codes_collection.toml` |
 | greek_screening_version_presence | Capped exact ELS hit-pattern presence for broader Greek screening terms across Greek NT... | 1 | terms/biblical_festivals.csv, terms/biblical_narrative_names.csv, terms/biblical_prophe... | reports/greek_screening_version_presence | `greek_screening_version_presence.toml` |
-| hebrew_screening_all_codes_collection | Relaxed all-codes collection for the broad Hebrew screening cohort with center-word sur... | 3 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_narrative_nam... | reports/hebrew_screening_all_codes | `hebrew_screening_all_codes_collection.toml` |
+| hebrew_screening_all_codes_collection | Relaxed all-codes collection for the broad Hebrew screening cohort with center-word sur... | 4 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_narrative_nam... | reports/hebrew_screening_all_codes | `hebrew_screening_all_codes_collection.toml` |
 | hebrew_screening_version_presence | Capped exact ELS hit-pattern presence for broader Hebrew screening terms across MT-fami... | 1 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_narrative_nam... | reports/hebrew_screening_version_presence | `hebrew_screening_version_presence.toml` |
 | step_tahot_screening_version_presence | Run broader Hebrew exact-hit version presence with STEP_TAHOT included as a separate so... | 2 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_narrative_nam... | reports/step_tahot_screening_version_presence | `step_tahot_screening_version_presence.toml` |
 | wide_focus_search | Focused skip 2..250 screening run for modern/geopolitical/local and prophetic terms. | 3 | terms/modern_names_dates.csv, terms/prophetic_terms.csv | reports/wide_focus_search | `wide_focus_search.toml` |

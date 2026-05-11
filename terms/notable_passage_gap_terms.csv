@@ -1,0 +1,21 @@
+term_id,concept,category,language,term,notes
+npg_yhwh_h,YHWH,divine_names,hebrew,יהוה,divine name anchor
+npg_torah_h,Torah,core_foundational,hebrew,תורה,law/instruction anchor
+npg_israel_h,Israel,core_foundational,hebrew,ישראל,Israel anchor
+npg_messiah_h,Messiah,christology,hebrew,משיח,messianic anchor
+npg_yeshua_h,Yeshua,christology,hebrew,ישוע,Jesus/Yeshua anchor
+npg_salvation_h,Salvation,soteriology,hebrew,ישועה,salvation anchor
+npg_sabbath_h,Sabbath,leviticus_24_surface,hebrew,שבת,Leviticus 24 surface-context term
+npg_lampstand_h,Lampstand,leviticus_24_surface,hebrew,מנורה,Leviticus 24 lampstand context
+npg_bread_h,Bread,leviticus_24_surface,hebrew,לחם,Leviticus 24 showbread context
+npg_stone_h,Stone,leviticus_24_surface,hebrew,אבן,Leviticus 24 stoning context
+npg_stone_verb_h,Stone Verb,leviticus_24_surface,hebrew,רגם,Leviticus 24 stoning verb
+npg_curse_h,Curse,leviticus_24_surface,hebrew,קלל,Leviticus 24 curse/blasphemy context
+npg_pierce_name_h,Pierce Name,leviticus_24_surface,hebrew,נקב,Leviticus 24 named/blasphemed verb root
+npg_judgment_h,Judgment,leviticus_24_surface,hebrew,משפט,Leviticus 24 judgment/legal context
+npg_stranger_h,Stranger,leviticus_24_surface,hebrew,גר,Short surface-context term; may be skipped by min_term_length
+npg_name_h,Name,leviticus_24_surface,hebrew,שם,Short surface-context term; may be skipped by min_term_length
+npg_gog_h,Gog,prophetic,hebrew,גוג,Ezekiel/Revelation motif
+npg_magog_h,Magog,prophetic,hebrew,מגוג,Ezekiel/Revelation motif
+npg_beast_h,Beast,apocalyptic,hebrew,חיה,Daniel/Revelation motif
+npg_dragon_h,Dragon,apocalyptic,hebrew,תנין,dragon motif

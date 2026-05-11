@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 246
+Documents indexed: 247
 
 ## Controls
 
@@ -239,6 +239,7 @@ Documents indexed: 246
 | Modern Extension Screen | `MODERN_EXTENSION_SCREEN.md` |
 | Modern Names And Dates | `MODERN_NAMES_DATES.md` |
 | Morphology Counts Study | `MORPHOLOGY_COUNTS_STUDY.md` |
+| Notable Passage Gaps | `NOTABLE_PASSAGE_GAPS.md` |
 | Pair Baselines | `PAIR_BASELINES.md` |
 | Pair Compactness | `PAIR_COMPACTNESS.md` |
 | Partition Worker Workflow | `PARTITION_WORKER_WORKFLOW.md` |

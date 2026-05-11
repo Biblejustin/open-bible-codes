@@ -1,0 +1,55 @@
+name = "notable_passage_gaps"
+description = "Record declared notable passages where selected ELS terms are absent, sparse, or present when centered inside the passage."
+manifest_out = "reports/notable_passage_gaps/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "lev24_gap_scan"
+description = "Run the initial Leviticus 24 notable-passage gap scan over Hebrew MT-family corpora."
+argv = [
+  "-m",
+  "scripts.analyze_notable_passage_gaps",
+  "--passages",
+  "configs/notable_passage_gap_passages.csv",
+  "--terms",
+  "terms/notable_passage_gap_terms.csv",
+  "--min-skip",
+  "2",
+  "--max-skip",
+  "100",
+  "--direction",
+  "both",
+  "--min-term-length",
+  "3",
+  "--common-elsewhere-threshold",
+  "10",
+  "--detail-out",
+  "reports/notable_passage_gaps/term_gap_detail.csv",
+  "--summary-out",
+  "reports/notable_passage_gaps/passage_summary.csv",
+  "--markdown-out",
+  "docs/NOTABLE_PASSAGE_GAPS.md",
+  "--manifest-out",
+  "reports/notable_passage_gaps/manifest.json",
+]
+inputs = [
+  "scripts/analyze_notable_passage_gaps.py",
+  "configs/notable_passage_gap_passages.csv",
+  "terms/notable_passage_gap_terms.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "els/corpus.py",
+  "els/search.py",
+  "els/term_display.py",
+  "scripts/analyze_mt_version_differences.py",
+]
+outputs = [
+  "reports/notable_passage_gaps/term_gap_detail.csv",
+  "reports/notable_passage_gaps/passage_summary.csv",
+  "docs/NOTABLE_PASSAGE_GAPS.md",
+  "reports/notable_passage_gaps/manifest.json",
+]
