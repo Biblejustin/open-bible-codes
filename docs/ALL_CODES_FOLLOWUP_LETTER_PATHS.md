@@ -13,13 +13,13 @@ audit sheet, not an added statistical test.
 
 ## Counts
 
-- selected input rows: 82
-- path summary rows: 305
-- letter rows: 1,384
+- selected input rows: 83
+- path summary rows: 310
+- letter rows: 1,404
 - sequence mismatches: 0
-- selected by queue: `{'english_screening': 21, 'greek_screening': 21, 'hebrew_screening': 29, 'hebrew_theology': 11}`
-- path rows by corpus: `{'BYZ_NT': 21, 'EBIBLE_WLC': 40, 'KJV': 21, 'MAM': 40, 'MT_WLC': 40, 'SBLGNT': 21, 'TCG_NT': 21, 'TR_NT': 21, 'UHB': 40, 'UXLC': 40}`
-- path rows by bucket: `{'center_verse_exact': 30, 'center_verse_same_category': 45, 'center_verse_same_concept': 15, 'center_word_exact': 40, 'center_word_same_category': 45, 'center_word_same_concept': 10, 'hidden_path_only': 30, 'span_exact': 30, 'span_same_category': 45, 'span_same_concept': 15}`
+- selected by queue: `{'english_screening': 21, 'greek_screening': 21, 'hebrew_screening': 30, 'hebrew_theology': 11}`
+- path rows by corpus: `{'BYZ_NT': 21, 'EBIBLE_WLC': 41, 'KJV': 21, 'MAM': 41, 'MT_WLC': 41, 'SBLGNT': 21, 'TCG_NT': 21, 'TR_NT': 21, 'UHB': 41, 'UXLC': 41}`
+- path rows by bucket: `{'center_verse_exact': 30, 'center_verse_same_category': 45, 'center_verse_same_concept': 15, 'center_word_exact': 40, 'center_word_same_category': 45, 'center_word_same_concept': 15, 'hidden_path_only': 30, 'span_exact': 30, 'span_same_category': 45, 'span_same_concept': 15}`
 
 ## Path Summary
 
@@ -145,7 +145,7 @@ audit sheet, not an added statistical test.
 | 45 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | MT_WLC | `יהוה` (YHWH; English: YHWH) | 3 | 1Chr 28:20 | `יְהוָֽה` (YHWH; English: YHWH) | 1Chr 28:20; 1Chr 28:21 |
 | 45 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UHB | `יהוה` (YHWH; English: YHWH) | 3 | 1CH 28:20 | `בֵּית־יְהוָֽה׃` (beit YHWH; English: house of YHWH) | 1CH 28:20; 1CH 28:21 |
 | 45 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UXLC | `יהוה` (YHWH; English: YHWH) | 3 | 1 Chr 28:20 | `יְהוָֽה׃` (YHWH; English: YHWH) | 1 Chr 28:20; 1 Chr 28:21 |
-| ... | ... | ... | ... | ... | ... | ... | ... | ... | 185 more rows in CSV |
+| ... | ... | ... | ... | ... | ... | ... | ... | ... | 190 more rows in CSV |
 
 ## Read
 

@@ -8,10 +8,10 @@ content is actually meaningful, merely lexical, or unrelated.
 
 ## Counts
 
-- excerpt rows: 305
+- excerpt rows: 310
 - center verses containing normalized hidden term: 73
 - spans containing normalized hidden term: 100
-- rows by corpus: `{'BYZ_NT': 21, 'EBIBLE_WLC': 40, 'KJV': 21, 'MAM': 40, 'MT_WLC': 40, 'SBLGNT': 21, 'TCG_NT': 21, 'TR_NT': 21, 'UHB': 40, 'UXLC': 40}`
+- rows by corpus: `{'BYZ_NT': 21, 'EBIBLE_WLC': 41, 'KJV': 21, 'MAM': 41, 'MT_WLC': 41, 'SBLGNT': 21, 'TCG_NT': 21, 'TR_NT': 21, 'UHB': 41, 'UXLC': 41}`
 
 ## Excerpts
 
@@ -97,7 +97,7 @@ content is actually meaningful, merely lexical, or unrelated.
 | 36 | BYZ_NT | `νατο` (nato; English: NATO) | 1CO 1:27 | True | True | αλλα τα μωρα του κοσμου εξελεξατο ο θεοσ ινα τουσ σοφουσ καταισχυνη και τα ασθενη του κοσμου εξελεξατο ο θεοσ ινα καταισχυνη τα ισχυρα |
 | 36 | SBLGNT | `νατο` (nato; English: NATO) | 1Cor 1:27 | False | True | ἀλλὰ τὰ μωρὰ τοῦ κόσμου ἐξελέξατο ὁ θεός, ἵνα ⸂καταισχύνῃ τοὺς σοφούς⸃, καὶ τὰ ἀσθενῆ τοῦ κόσμου ἐξελέξατο ὁ θεός, ἵνα καταισχύνῃ τὰ ἰσχυρά, |
 | 36 | TCG_NT | `νατο` (nato; English: NATO) | 1CO 1:27 | True | True | ἀλλὰ τὰ μωρὰ τοῦ κόσμου ἐξελέξατο ὁ Θεός, ἵνα τοὺς σοφοὺς καταισχύνῃ· καὶ τὰ ἀσθενῆ τοῦ κόσμου ἐξελέξατο ὁ Θεός, ἵνα καταισχύνῃ τὰ ἰσχυρά· |
-| ... | ... | ... | ... | ... | ... | 225 more rows in CSV |
+| ... | ... | ... | ... | ... | ... | 230 more rows in CSV |
 
 ## Read
 

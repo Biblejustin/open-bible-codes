@@ -28,13 +28,13 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | --- | ---: | ---: |
 | english_screening | 700 | 21 |
 | greek_screening | 700 | 21 |
-| hebrew_screening | 877 | 29 |
+| hebrew_screening | 909 | 30 |
 | hebrew_theology | 700 | 11 |
 
 | Selected bucket | Rows |
 | --- | ---: |
 | `center_word_exact` | 11 |
-| `center_word_same_concept` | 2 |
+| `center_word_same_concept` | 3 |
 | `center_word_same_category` | 12 |
 | `center_verse_exact` | 9 |
 | `center_verse_same_concept` | 3 |
@@ -95,41 +95,42 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 45 | hebrew_screening | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 28:20 | `יהוה` (YHWH; English: YHWH) |
 | 46 | hebrew_screening | `center_word_same_concept` | all_source | `רומא` (rwm; English: Rome) | Rome | 5 | Job 5:12 | `ערומימ` (arumim; English: crafty/shrewd) |
 | 47 | hebrew_screening | `center_word_same_concept` | all_source | `רומא` (rwm; English: Rome) | Rome | -42 | Eccl 10:6 | `במרומימ` (ba-meromim; English: in the heights) |
-| 48 | hebrew_screening | `center_word_same_category` | all_source | `גרמניה` (grmnyh; English: Germany) | Germany | -18 | Jer 42:15 | `מצרימ` (Mitzrayim; English: Egypt) |
-| 49 | hebrew_screening | `center_word_same_category` | all_source | `אמרי` (mry; English: Amorite) | Amorite | -2 | 1Chr 15:22 | `במשא` (be-massa; English: in bearing/song service) |
-| 50 | hebrew_screening | `center_word_same_category` | all_source | `אמרי` (mry; English: Amorite) | Amorite | 2 | 1Chr 15:27 | `המשררימ` (ha-meshorerim; English: the singers) |
-| 51 | hebrew_screening | `center_verse_exact` | all_source | `ביבי` (byby; English: Bibi) | Bibi | -2 | 1Chr 2:55 | `ישבו` (yashvu; English: they dwelt/sat) |
-| 52 | hebrew_screening | `center_verse_exact` | all_source | `אריה` (ryh; English: Lion) | Lion | 2 | 1Kgs 13:26 | `איש` (ish; English: man) |
-| 53 | hebrew_screening | `center_verse_exact` | all_source | `יואל` (ywl; English: Joel) | Joel | 2 | 1Kgs 20:23 | `במישור` (bmyshwr) |
-| 54 | hebrew_screening | `center_verse_same_concept` | all_source | `רומי` (rwmy; English: Rome) | Rome | -6 | 1Kgs 7:40 | `ואתהמזרקות` (ve-et ha-mizraqot; English: and the basins) |
-| 55 | hebrew_screening | `center_verse_same_concept` | all_source | `התשח` (htshch; English: Hebrew year 5708) | Hebrew year 5708 | 6 | Isa 37:30 | `אכול` (kwl) |
-| 56 | hebrew_screening | `center_verse_same_concept` | all_source | `רומי` (rwmy; English: Rome) | Rome | 6 | Josh 22:5 | `אתכמ` (etkhem; English: you) |
-| 57 | hebrew_screening | `center_verse_same_category` | all_source | `מותשני` (mwtshny; English: Second Death) | Second Death | 9 | Jer 43:3 | `בבל` (Bavel; English: Babylon) |
-| 58 | hebrew_screening | `center_verse_same_category` | all_source | `מותשני` (mwtshny; English: Second Death) | Second Death | -11 | Num 29:29 | `ארבעה` (arbaah; English: four) |
-| 59 | hebrew_screening | `center_verse_same_category` | all_source | `טימותי` (tymwty; English: Timothy) | Timothy | 16 | Gen 30:20 | `אתשמו` (et shemo; English: his name) |
-| 60 | hebrew_screening | `span_exact` | all_source | `שמימ` (shmym; English: Heaven) | Heaven | 2 | Judg 19:3 | `ויקמ` (vayaqom; English: and he arose) |
-| 61 | hebrew_screening | `span_exact` | all_source | `שמימ` (shmym; English: Heaven) | Heaven | 2 | Neh 3:1 | `ויקמ` (vayaqom; English: and he arose) |
-| 62 | hebrew_screening | `span_exact` | all_source | `מרימ` (mrym; English: Mary) | Mary | -3 | Mic 6:5 | `זכרנא` (zekhor na; English: remember, please) |
-| 63 | hebrew_screening | `span_same_concept` | all_source | `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 35 | Eccl 3:10 | `לענות` (la-anot; English: to answer/afflict) |
-| 64 | hebrew_screening | `span_same_concept` | all_source | `התשח` (htshch; English: Hebrew year 5708) | Hebrew year 5708 | 40 | Lev 22:27 | `והלאה` (whlh) |
-| 65 | hebrew_screening | `span_same_concept` | all_source | `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | -48 | Gen 6:15 | `חמשימ` (chmshym) |
-| 66 | hebrew_screening | `span_same_category` | all_source | `פתרסימ` (ptrsym; English: Pathrusim) | Pathrusim | -52 | Isa 26:17 | `תזעק` (tizak; English: she cries out) |
-| 67 | hebrew_screening | `span_same_category` | all_source | `טימותי` (tymwty; English: Timothy) | Timothy | -66 | Jer 46:28 | `יעקב` (Yaakov; English: Jacob) |
-| 68 | hebrew_screening | `span_same_category` | all_source | `תתתתתכז` (tttttkz; English: Gregorian 2027 additive) | Gregorian 2027 additive | 86 | Deut 11:16 | `יפתה` (yifteh; English: will be enticed) |
-| 69 | hebrew_screening | `hidden_path_only` | all_source | `יומיהוה` (yom YHWH; English: Day Of The Lord) | Day Of The Lord | 4 | Song 4:6 | `שיפוח` (she-yafuach; English: until it breathes/blows) |
-| 70 | hebrew_screening | `hidden_path_only` | all_source | `קברריק` (qbrryq; English: Empty Tomb) | Empty Tomb | 8 | Ezek 5:2 | `בתוכ` (betokh; English: in the midst) |
-| 71 | hebrew_screening | `hidden_path_only` | all_source | `הצהרישומושלמ` (htshryshwmwshlm; English: Jesus Declared Perfect) | Jesus Declared Perfect | 9 | Gen 22:8 | `לעלה` (le-olah; English: for a burnt offering) |
-| 72 | hebrew_theology | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 26:27 | `יהוה` (YHWH; English: YHWH) |
-| 73 | hebrew_theology | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 28:20 | `יהוה` (YHWH; English: YHWH) |
-| 74 | hebrew_theology | `center_word_same_category` | all_source | `תורה` (twrh; English: Torah) | Torah | 7 | 1Chr 5:1 | `בנישראל` (bnei Yisrael; English: children of Israel) |
-| 75 | hebrew_theology | `center_word_same_category` | all_source | `תורה` (twrh; English: Torah) | Torah | -7 | 2Kgs 17:20 | `ישראל` (Yisrael; English: Israel) |
-| 76 | hebrew_theology | `center_word_same_category` | all_source | `ברית` (bryt; English: Covenant) | Covenant | 8 | Deut 34:9 | `חכמה` (chkmh; English: Wisdom) |
-| 77 | hebrew_theology | `center_verse_same_category` | all_source | `אהבה` (hbh; English: Love) | Love | 2 | 2Sam 14:21 | `הדבר` (ha-davar; English: the word/matter) |
-| 78 | hebrew_theology | `center_verse_same_category` | all_source | `אהבה` (hbh; English: Love) | Love | 2 | 2Sam 15:27 | `שבה` (shuvah; English: return) |
-| 79 | hebrew_theology | `center_verse_same_category` | all_source | `חכמה` (chkmh; English: Wisdom) | Wisdom | 3 | Isa 49:8 | `כה` (koh; English: thus) |
-| 80 | hebrew_theology | `span_same_category` | all_source | `משיח` (Mashiach; English: Messiah) | Messiah | 6 | Ezra 2:5 | `ושבעימ` (ve-shivim; English: and seventy) |
-| 81 | hebrew_theology | `span_same_category` | all_source | `משיח` (Mashiach; English: Messiah) | Messiah | 6 | Neh 7:10 | `ושנימ` (ve-shenayim; English: and two) |
-| 82 | hebrew_theology | `span_same_category` | all_source | `ברית` (bryt; English: Covenant) | Covenant | -10 | Prov 30:4 | `עלהשמימ` (alah shamayim; English: went up to heaven) |
+| 48 | hebrew_screening | `center_word_same_concept` | all_source | `ערוב` (rwb; English: Flies Plague) | Flies Plague | -3 | 2Chr 13:11 | `ובערב` (wbrb) |
+| 49 | hebrew_screening | `center_word_same_category` | all_source | `גרמניה` (grmnyh; English: Germany) | Germany | -18 | Jer 42:15 | `מצרימ` (Mitzrayim; English: Egypt) |
+| 50 | hebrew_screening | `center_word_same_category` | all_source | `אמרי` (mry; English: Amorite) | Amorite | -2 | 1Chr 15:22 | `במשא` (be-massa; English: in bearing/song service) |
+| 51 | hebrew_screening | `center_word_same_category` | all_source | `אמרי` (mry; English: Amorite) | Amorite | 2 | 1Chr 15:27 | `המשררימ` (ha-meshorerim; English: the singers) |
+| 52 | hebrew_screening | `center_verse_exact` | all_source | `ביבי` (byby; English: Bibi) | Bibi | -2 | 1Chr 2:55 | `ישבו` (yashvu; English: they dwelt/sat) |
+| 53 | hebrew_screening | `center_verse_exact` | all_source | `אריה` (ryh; English: Lion) | Lion | 2 | 1Kgs 13:26 | `איש` (ish; English: man) |
+| 54 | hebrew_screening | `center_verse_exact` | all_source | `יואל` (ywl; English: Joel) | Joel | 2 | 1Kgs 20:23 | `במישור` (bmyshwr) |
+| 55 | hebrew_screening | `center_verse_same_concept` | all_source | `רומי` (rwmy; English: Rome) | Rome | -6 | 1Kgs 7:40 | `ואתהמזרקות` (ve-et ha-mizraqot; English: and the basins) |
+| 56 | hebrew_screening | `center_verse_same_concept` | all_source | `התשח` (htshch; English: Hebrew year 5708) | Hebrew year 5708 | 6 | Isa 37:30 | `אכול` (kwl) |
+| 57 | hebrew_screening | `center_verse_same_concept` | all_source | `רומי` (rwmy; English: Rome) | Rome | 6 | Josh 22:5 | `אתכמ` (etkhem; English: you) |
+| 58 | hebrew_screening | `center_verse_same_category` | all_source | `מותשני` (mwtshny; English: Second Death) | Second Death | 9 | Jer 43:3 | `בבל` (Bavel; English: Babylon) |
+| 59 | hebrew_screening | `center_verse_same_category` | all_source | `מותשני` (mwtshny; English: Second Death) | Second Death | -11 | Num 29:29 | `ארבעה` (arbaah; English: four) |
+| 60 | hebrew_screening | `center_verse_same_category` | all_source | `טימותי` (tymwty; English: Timothy) | Timothy | 16 | Gen 30:20 | `אתשמו` (et shemo; English: his name) |
+| 61 | hebrew_screening | `span_exact` | all_source | `שמימ` (shmym; English: Heaven) | Heaven | 2 | Judg 19:3 | `ויקמ` (vayaqom; English: and he arose) |
+| 62 | hebrew_screening | `span_exact` | all_source | `שמימ` (shmym; English: Heaven) | Heaven | 2 | Neh 3:1 | `ויקמ` (vayaqom; English: and he arose) |
+| 63 | hebrew_screening | `span_exact` | all_source | `מרימ` (mrym; English: Mary) | Mary | -3 | Mic 6:5 | `זכרנא` (zekhor na; English: remember, please) |
+| 64 | hebrew_screening | `span_same_concept` | all_source | `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 35 | Eccl 3:10 | `לענות` (la-anot; English: to answer/afflict) |
+| 65 | hebrew_screening | `span_same_concept` | all_source | `התשח` (htshch; English: Hebrew year 5708) | Hebrew year 5708 | 40 | Lev 22:27 | `והלאה` (whlh) |
+| 66 | hebrew_screening | `span_same_concept` | all_source | `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | -48 | Gen 6:15 | `חמשימ` (chmshym) |
+| 67 | hebrew_screening | `span_same_category` | all_source | `פתרסימ` (ptrsym; English: Pathrusim) | Pathrusim | -52 | Isa 26:17 | `תזעק` (tizak; English: she cries out) |
+| 68 | hebrew_screening | `span_same_category` | all_source | `טימותי` (tymwty; English: Timothy) | Timothy | -66 | Jer 46:28 | `יעקב` (Yaakov; English: Jacob) |
+| 69 | hebrew_screening | `span_same_category` | all_source | `תתתתתכז` (tttttkz; English: Gregorian 2027 additive) | Gregorian 2027 additive | 86 | Deut 11:16 | `יפתה` (yifteh; English: will be enticed) |
+| 70 | hebrew_screening | `hidden_path_only` | all_source | `יומיהוה` (yom YHWH; English: Day Of The Lord) | Day Of The Lord | 4 | Song 4:6 | `שיפוח` (she-yafuach; English: until it breathes/blows) |
+| 71 | hebrew_screening | `hidden_path_only` | all_source | `קברריק` (qbrryq; English: Empty Tomb) | Empty Tomb | 8 | Ezek 5:2 | `בתוכ` (betokh; English: in the midst) |
+| 72 | hebrew_screening | `hidden_path_only` | all_source | `הצהרישומושלמ` (htshryshwmwshlm; English: Jesus Declared Perfect) | Jesus Declared Perfect | 9 | Gen 22:8 | `לעלה` (le-olah; English: for a burnt offering) |
+| 73 | hebrew_theology | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 26:27 | `יהוה` (YHWH; English: YHWH) |
+| 74 | hebrew_theology | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 28:20 | `יהוה` (YHWH; English: YHWH) |
+| 75 | hebrew_theology | `center_word_same_category` | all_source | `תורה` (twrh; English: Torah) | Torah | 7 | 1Chr 5:1 | `בנישראל` (bnei Yisrael; English: children of Israel) |
+| 76 | hebrew_theology | `center_word_same_category` | all_source | `תורה` (twrh; English: Torah) | Torah | -7 | 2Kgs 17:20 | `ישראל` (Yisrael; English: Israel) |
+| 77 | hebrew_theology | `center_word_same_category` | all_source | `ברית` (bryt; English: Covenant) | Covenant | 8 | Deut 34:9 | `חכמה` (chkmh; English: Wisdom) |
+| 78 | hebrew_theology | `center_verse_same_category` | all_source | `אהבה` (hbh; English: Love) | Love | 2 | 2Sam 14:21 | `הדבר` (ha-davar; English: the word/matter) |
+| 79 | hebrew_theology | `center_verse_same_category` | all_source | `אהבה` (hbh; English: Love) | Love | 2 | 2Sam 15:27 | `שבה` (shuvah; English: return) |
+| 80 | hebrew_theology | `center_verse_same_category` | all_source | `חכמה` (chkmh; English: Wisdom) | Wisdom | 3 | Isa 49:8 | `כה` (koh; English: thus) |
+| 81 | hebrew_theology | `span_same_category` | all_source | `משיח` (Mashiach; English: Messiah) | Messiah | 6 | Ezra 2:5 | `ושבעימ` (ve-shivim; English: and seventy) |
+| 82 | hebrew_theology | `span_same_category` | all_source | `משיח` (Mashiach; English: Messiah) | Messiah | 6 | Neh 7:10 | `ושנימ` (ve-shenayim; English: and two) |
+| 83 | hebrew_theology | `span_same_category` | all_source | `ברית` (bryt; English: Covenant) | Covenant | -10 | Prov 30:4 | `עלהשמימ` (alah shamayim; English: went up to heaven) |
 
 ## Read
 
