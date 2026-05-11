@@ -225,18 +225,18 @@ The self-surface mode asks the narrow question: hidden `X` centered near visible
 `X`. The concept-surface mode allows visible spellings from the same committed
 `(language, concept)` group.
 
-The self-surface rerun produced 1,404,450 classified hit rows and 122,793
-relevant rows. The strict exact center-word subset contains 1,044 Bible rows
-across 131 term IDs, 76 distinct normalized surface forms, and 425 distinct
+The self-surface rerun produced 1,621,960 classified hit rows and 9,272
+relevant rows. The strict exact center-word subset contains 1,153 Bible rows
+across 154 term IDs, 87 distinct normalized surface forms, and 496 distinct
 normalized surface hit paths. In the center-word-only Bible-vs-control summary,
-120 terms exceed the secular maximum and 94 are Bible-positive with secular max
+141 terms exceed the secular maximum and 114 are Bible-positive with secular max
 zero.
-Version presence is mixed: 57 exact center-word terms appear in five Bible
-corpus labels, while 44 appear in only one. This supports source-specific
+Version presence is mixed: 63 exact center-word terms appear in five Bible
+corpus labels, while 60 appear in only one. This supports source-specific
 reporting rather than requiring every pattern to appear in every edition.
 
 The concept-surface exact center-word Bible hit set is identical to the
-self-surface set: 1,044 rows, with zero self-only or concept-only Bible rows.
+self-surface set: 1,153 rows, with zero self-only or concept-only Bible rows.
 Concept expansion changed only two secular-control center-word maximums and
 changed zero exact center-word exceedance decisions. That means exact
 center-word findings should be reviewed from the self-surface packet, while

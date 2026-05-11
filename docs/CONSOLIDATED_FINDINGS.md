@@ -270,14 +270,14 @@ because exact-center hits can be driven by ordinary surface vocabulary.
 
 The CRD self-surface and concept-surface broad screens add a separate
 centered-relevance view over the fixed `skip_range = 2..100` corpus set. The
-self-surface rerun found 1,404,450 classified hit rows and 122,793 relevant
-rows. The strict exact `center_word` subset contains 1,044 Bible rows across
-131 term IDs, 76 distinct normalized surface forms, and 425 distinct normalized
-surface hit paths. Its center-word-only Bible-vs-control summary has 120 terms
-exceeding the secular maximum, including 94 Bible-positive/secular-zero terms.
-Version presence is mixed rather than all-or-nothing: 57 exact center-word
-terms appear in five Bible corpus labels, while 44 appear in only one.
-The concept-surface run has the same 1,044 Bible exact center-word row keys;
+self-surface rerun found 1,621,960 classified hit rows and 9,272 relevant
+rows. The strict exact `center_word` subset contains 1,153 Bible rows across
+154 term IDs, 87 distinct normalized surface forms, and 496 distinct normalized
+surface hit paths. Its center-word-only Bible-vs-control summary has 141 terms
+exceeding the secular maximum, including 114 Bible-positive/secular-zero terms.
+Version presence is mixed rather than all-or-nothing: 63 exact center-word
+terms appear in five Bible corpus labels, while 60 appear in only one.
+The concept-surface run has the same 1,153 Bible exact center-word row keys;
 concept expansion changed only two secular-control center-word max rows and
 changed zero exact center-word exceedance decisions. Therefore exact
 center-word review can use the self-surface packet without losing
