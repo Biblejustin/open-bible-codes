@@ -19,3 +19,40 @@ npg_gog_h,Gog,prophetic,hebrew,גוג,Ezekiel/Revelation motif
 npg_magog_h,Magog,prophetic,hebrew,מגוג,Ezekiel/Revelation motif
 npg_beast_h,Beast,apocalyptic,hebrew,חיה,Daniel/Revelation motif
 npg_dragon_h,Dragon,apocalyptic,hebrew,תנין,dragon motif
+npg_creation_h,Create,creation,hebrew,ברא,Genesis 1 surface-context term
+npg_light_h,Light,creation,hebrew,אור,Genesis and prophetic surface-context term
+npg_heavens_h,Heavens,creation,hebrew,שמים,Creation and cosmology term
+npg_earth_h,Earth,creation,hebrew,ארץ,Creation and land term
+npg_abraham_h,Abraham,names,hebrew,אברהם,Genesis 22 surface-context term
+npg_isaac_h,Isaac,names,hebrew,יצחק,Genesis 22 surface-context term
+npg_lamb_h,Lamb,sacrifice_typology,hebrew,כבש,Sacrifice and servant-song term
+npg_blood_h,Blood,redemption,hebrew,דם,Passover and atonement term; short but eligible
+npg_passover_h,Passover,calendar,hebrew,פסח,Passover and festival term
+npg_covenant_h,Covenant,covenant,hebrew,ברית,Covenant anchor
+npg_atone_h,Atone,atonement,hebrew,כפר,Atonement root
+npg_holy_h,Holy,sanctuary,hebrew,קדש,Sanctuary and holiness term
+npg_bless_h,Bless,blessing,hebrew,ברך,Priestly blessing and covenant term
+npg_peace_h,Peace,blessing,hebrew,שלום,Priestly blessing and prophetic term
+npg_hear_h,Hear,covenant_love,hebrew,שמע,Shema surface-context term
+npg_love_h,Love,covenant_love,hebrew,אהב,Love command root
+npg_heart_h,Heart,covenant_love,hebrew,לבב,Heart term
+npg_david_h,David,davidic_covenant,hebrew,דוד,Davidic covenant and messianic term
+npg_king_h,King,kingship,hebrew,מלך,Royal and prophetic term
+npg_kingdom_h,Kingdom,kingship,hebrew,מלכות,Kingdom term
+npg_throne_h,Throne,kingship,hebrew,כסא,Davidic and apocalyptic throne term
+npg_zion_h,Zion,kingship,hebrew,ציון,Zion term
+npg_priest_h,Priest,priest_king,hebrew,כהן,Priest term
+npg_melchizedek_h,Melchizedek,priest_king,hebrew,מלכי צדק,Psalm 110 surface-context term
+npg_servant_h,Servant,servant_song,hebrew,עבד,Isaiah servant-song term
+npg_transgression_h,Transgression,servant_song,hebrew,פשע,Isaiah 53 surface-context term
+npg_iniquity_h,Iniquity,servant_song,hebrew,עון,Isaiah 53 surface-context term
+npg_wound_h,Wound,servant_song,hebrew,חבורה,Isaiah 53 stripes/wound term
+npg_grave_h,Grave,servant_song,hebrew,קבר,Isaiah 53 tomb/grave term
+npg_horn_h,Horn,apocalyptic,hebrew,קרן,Daniel apocalyptic horn term
+npg_covenant_cut_h,Cut Covenant,apocalyptic_messianic,hebrew,כרת ברית,Daniel 9 covenant phrase
+npg_jerusalem_h,Jerusalem,prophetic_city,hebrew,ירושלים,Jerusalem prophetic term
+npg_spirit_h,Spirit,prophetic,hebrew,רוח,Joel 2 and theology term
+npg_day_yhwh_h,Day Of YHWH,prophetic,hebrew,יום יהוה,Prophetic day-of-YHWH phrase
+npg_pierced_h,Pierced,prophetic,hebrew,דקר,Zechariah 12 surface-context term
+npg_messenger_h,Messenger,prophetic,hebrew,מלאך,Malachi 3 surface-context term
+npg_lord_h,Lord,divine_names,hebrew,אדון,Lord/master term

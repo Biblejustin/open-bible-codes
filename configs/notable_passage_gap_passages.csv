@@ -1,2 +1,25 @@
 passage_id,concept,category,language,corpus_group,start_ref,end_ref,notes
+gen1_creation,Genesis 1 Creation,creation,hebrew,mt_family,Gen 1:1,Gen 1:31,Creation passage; useful for tracking whether core theological terms appear or are absent in a high-profile opening chapter.
+gen22_binding_isaac,Genesis 22 Binding Of Isaac,sacrifice_typology,hebrew,mt_family,Gen 22:1,Gen 22:19,Akedah passage; common comparative target for sacrifice and messianic typology claims.
+exod12_passover,Exodus 12 Passover,redemption,hebrew,mt_family,Exod 12:1,Exod 12:51,Passover institution; useful for absence and enrichment checks around blood lamb and deliverance terms.
+exod20_decalogue,Exodus 20 Decalogue,law,hebrew,mt_family,Exod 20:1,Exod 20:26,Ten Words / Decalogue passage; useful for law covenant Sabbath and commandment terms.
+lev16_day_of_atonement,Leviticus 16 Day Of Atonement,atonement,hebrew,mt_family,Lev 16:1,Lev 16:34,Day of Atonement passage; useful for atonement priestly and sanctuary terms.
+lev23_festivals,Leviticus 23 Festivals,calendar,hebrew,mt_family,Lev 23:1,Lev 23:44,Feast calendar chapter; useful for Sabbath Passover festival and appointed-time terms.
 lev24_blasphemy_law,Leviticus 24 Blasphemy Law,notable_passage_gap,hebrew,mt_family,Lev 24:1,Lev 24:23,Initial notable-passage gap target requested for tracking terms absent or underrepresented inside a significant passage.
+num6_priestly_blessing,Numbers 6 Priestly Blessing,blessing,hebrew,mt_family,Num 6:22,Num 6:27,Priestly blessing; useful for name blessing peace and face/presence terms.
+deut6_shema,Deuteronomy 6 Shema,covenant_love,hebrew,mt_family,Deut 6:4,Deut 6:9,Shema and love command; useful for unity love Torah and heart terms.
+sam2_7_davidic_covenant,2 Samuel 7 Davidic Covenant,davidic_covenant,hebrew,mt_family,2Sam 7:1,2Sam 7:29,Davidic covenant chapter; useful for David king kingdom house throne and messianic terms.
+ps2_messianic_king,Psalm 2 Messianic King,messianic_psalm,hebrew,mt_family,Ps 2:1,Ps 2:12,Messianic royal psalm; useful for Messiah king son nations and Zion terms.
+ps22_suffering_psalm,Psalm 22 Suffering Psalm,suffering_psalm,hebrew,mt_family,Ps 22:1,Ps 22:31,Suffering psalm; common passion-typology comparison target.
+ps110_priest_king,Psalm 110 Priest King,messianic_psalm,hebrew,mt_family,Ps 110:1,Ps 110:7,Priest-king psalm; useful for Lord priest king and Melchizedek terms.
+isa7_immanuel,Isaiah 7 Immanuel,immanuel,hebrew,mt_family,Isa 7:10,Isa 7:17,Immanuel sign passage; common messianic-interpretation comparison target.
+isa9_child_king,Isaiah 9 Child King,messianic_prophecy,hebrew,mt_family,Isa 9:1,Isa 9:7,Child and kingdom passage; common messianic-interpretation comparison target.
+isa53_servant,Isaiah 53 Servant Song,servant_song,hebrew,mt_family,Isa 52:13,Isa 53:12,Suffering servant passage; common ELS and typology comparison target.
+dan7_son_of_man,Daniel 7 Son Of Man,apocalyptic,hebrew,mt_family,Dan 7:1,Dan 7:28,Beasts and son-of-man vision; useful for apocalyptic and kingdom terms.
+dan9_seventy_weeks,Daniel 9 Seventy Weeks,apocalyptic_messianic,hebrew,mt_family,Dan 9:20,Dan 9:27,Seventy weeks passage; useful for Messiah covenant sanctuary and end-time terms.
+ezek38_gog,Ezekiel 38 Gog,apocalyptic,hebrew,mt_family,Ezek 38:1,Ezek 38:23,Gog oracle chapter; useful for Gog Magog Russia and apocalyptic control comparisons.
+ezek39_gog,Ezekiel 39 Gog,apocalyptic,hebrew,mt_family,Ezek 39:1,Ezek 39:29,Gog oracle continuation; useful for Gog Magog judgment and restoration comparisons.
+joel2_spirit_day,Joel 2 Spirit And Day Of YHWH,prophetic,hebrew,mt_family,Joel 2:1,Joel 2:32,Day of YHWH and Spirit passage; useful for judgment salvation and Spirit terms.
+zech12_pierced,Zechariah 12 Pierced One,prophetic,hebrew,mt_family,Zech 12:1,Zech 12:14,Jerusalem and pierced-one passage; common messianic-interpretation comparison target.
+zech14_day_of_yhwh,Zechariah 14 Day Of YHWH,prophetic,hebrew,mt_family,Zech 14:1,Zech 14:21,Day of YHWH and kingship passage; useful for king Jerusalem and divine-name terms.
+mal3_messenger,Malachi 3 Messenger,prophetic,hebrew,mt_family,Mal 3:1,Mal 3:18,Messenger and covenant passage; useful for messenger covenant judgment and Lord terms.

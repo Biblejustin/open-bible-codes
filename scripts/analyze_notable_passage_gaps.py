@@ -443,12 +443,23 @@ def write_markdown(
     ]
     notable_absences.sort(
         key=lambda row: (
-            str(row["passage_id"]),
-            str(row["corpus_label"]),
             0 if row["gap_class"] == "absent_in_passage_common_elsewhere" else 1,
             -int(row["centered_elsewhere"]),
+            -float(row["expected_in_passage_uniform"]),
+            str(row["passage_id"]),
+            str(row["corpus_label"]),
             str(row["term_id"]),
         )
+    )
+    highest_gap_passages = sorted(
+        summary_rows,
+        key=lambda row: (
+            -int(row["terms_absent_in_passage_common_elsewhere"]),
+            -int(row["terms_low_vs_uniform"]),
+            int(row["passage_letters"]),
+            str(row["passage_id"]),
+            str(row["corpus_label"]),
+        ),
     )
     lines = [
         "# Notable Passage Gaps",
@@ -465,11 +476,29 @@ def write_markdown(
         f"- Minimum normalized term length: `{args.min_term_length}`",
         f"- Common-elsewhere threshold: `{args.common_elsewhere_threshold}` centered hits outside the passage",
         "",
+        "## Highest Gap Passage Rows",
+        "",
+        "These rows rank declared passages by how many eligible terms are absent inside the passage while recurring at least the threshold count elsewhere in the same corpus. Short passages naturally rank high, so use this as a triage list rather than a formal significance test.",
+        "",
+        "| Passage | Corpus | Letters | Present | Absent Common Elsewhere | Low Vs Uniform | Observed Hits | Uniform Expected Hits |",
+        "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |",
+    ]
+    for row in highest_gap_passages[:30]:
+        lines.append(
+            "| {passage_concept} | {corpus_label} | {passage_letters} | "
+            "{terms_present_in_passage} | {terms_absent_in_passage_common_elsewhere} | "
+            "{terms_low_vs_uniform} | {observed_centered_hits_in_passage} | "
+            "{expected_centered_hits_in_passage_uniform} |".format(**row)
+        )
+    lines.extend(
+        [
+            "",
         "## Passage Summary",
         "",
         "| Passage | Corpus | Letters | Eligible Terms | Present | Absent Elsewhere | Absent Common Elsewhere | Low Vs Uniform | Observed Hits | Uniform Expected Hits |",
         "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
-    ]
+        ]
+    )
     for row in summary_rows:
         lines.append(
             "| {passage_concept} | {corpus_label} | {passage_letters} | {eligible_terms} | "
@@ -483,6 +512,8 @@ def write_markdown(
         [
             "",
             "## Notable Absence / Low-Density Rows",
+            "",
+            "Rows are sorted by gap class first, then by how frequently the term appears centered elsewhere in the same corpus.",
             "",
             "| Passage | Corpus | Term | Gap Class | Hits Elsewhere | Hits In Passage | Uniform Expected | Sample Center Refs |",
             "| --- | --- | --- | --- | ---: | ---: | ---: | --- |",
@@ -517,6 +548,7 @@ def write_markdown(
             "- This report does not treat absence as a negative proof. It records silence and lower-density rows so they can be reviewed alongside positive centered hits.",
             "- `expected_in_passage_uniform` is a descriptive baseline only; it is not a formal p-value.",
             "- Short surface terms can be skipped by the minimum term length rule; skipped rows remain in the detail CSV for auditability.",
+            "- Passage ranges are resolved independently per source; versification and source differences can change passage letter counts even when the declared start/end refs are the same.",
         ]
     )
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
