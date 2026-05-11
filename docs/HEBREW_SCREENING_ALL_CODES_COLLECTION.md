@@ -6,35 +6,35 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 
 - Hits: `reports/hebrew_screening_all_codes/surface_all_codes.csv`
 - Summary: `reports/hebrew_screening_all_codes/surface_all_codes_summary.csv`
-- Report DB: `reports/db/open_bible_codes.duckdb`
+- Report DB: `not used`
 - Corpora: `EBIBLE_WLC, MAM, MT_WLC, UHB, UXLC`
 
 ## Collection Counts
 
 | Metric | Count |
 | --- | ---: |
-| Terms represented | 628 |
-| Corpus-term summary rows | 3,340 |
-| Hidden-path rows retained | 3,196,917 |
-| Total hits from summary | 3,196,917 |
-| Any surface-context hits | 1,628,286 |
-| Center word contains same term | 9,008 |
-| Center word contains related term | 87,005 |
-| Center verse contains same term | 114,172 |
-| Center verse contains related term | 833,004 |
-| Hit span contains same/related term | 1,720,777 |
+| Terms represented | 717 |
+| Corpus-term summary rows | 3,785 |
+| Hidden-path rows retained | 3,580,932 |
+| Total hits from summary | 3,580,932 |
+| Any surface-context hits | 1,702,830 |
+| Center word contains same term | 9,224 |
+| Center word contains related term | 89,313 |
+| Center verse contains same term | 118,223 |
+| Center verse contains related term | 862,530 |
+| Hit span contains same/related term | 1,804,044 |
 
 ## Context Labels
 
 | Best context | Rows |
 | --- | ---: |
-| `hidden_path_only` | 1,568,631 |
-| `same_category_center` | 809,688 |
-| `same_category_span` | 616,592 |
-| `exact_center` | 114,172 |
-| `exact_span` | 87,024 |
-| `same_concept_span` | 515 |
-| `same_concept_center` | 295 |
+| `hidden_path_only` | 1,878,102 |
+| `same_category_center` | 835,958 |
+| `same_category_span` | 655,283 |
+| `exact_center` | 118,223 |
+| `exact_span` | 92,506 |
+| `same_concept_span` | 555 |
+| `same_concept_center` | 305 |
 
 ## Top Terms
 
@@ -42,6 +42,7 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | `יהוה` (YHWH; English: YHWH) | YHWH | 216,640 | 6,658 | 2,401 | 83,838 | 25,087 | 205,559 |
 | `מרימ` (mrym; English: Mary) | Mary | 108,806 | 102 | 2,257 | 1,414 | 24,667 | 52,512 |
+| `יואל` (ywl; English: Joel) | Joel | 85,440 | 1 | 424 | 901 | 4,518 | 14,505 |
 | `נביא` (navi; English: Prophet) | Prophet | 83,913 | 153 | 1,624 | 1,662 | 17,441 | 43,302 |
 | `אהבה` (hbh; English: Love) | Love | 79,150 | 20 | 1,123 | 314 | 11,890 | 24,029 |
 | `שלומ` (shlwm; English: Peace) | Peace | 75,338 | 180 | 985 | 1,462 | 11,138 | 25,125 |
@@ -52,6 +53,7 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 | `אותו` (wtw; English: Otho) | Otho | 58,270 | 16 | 0 | 670 | 10 | 1,803 |
 | `יובל` (ywbl; English: Jubilee) | Jubilee | 58,070 | 14 | 174 | 123 | 2,246 | 6,459 |
 | `אלול` (lwl; English: Elul) | Elul | 57,414 | 8 | 1,146 | 274 | 14,415 | 32,520 |
+| `יונה` (ywnh; English: Jonah) | Jonah | 56,927 | 10 | 248 | 331 | 3,404 | 9,581 |
 | `אריה` (ryh; English: Lion) | Lion | 52,033 | 0 | 2,654 | 146 | 26,544 | 44,300 |
 | `אמרי` (mry; English: Amorite) | Amorite | 49,829 | 54 | 4,363 | 3,731 | 34,827 | 55,743 |
 | `ביבי` (byby; English: Bibi) | Bibi | 49,308 | 0 | 11 | 249 | 270 | 1,460 |
@@ -63,13 +65,11 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 | `שואה` (shwh; English: Shoah) | Shoah | 41,491 | 0 | 95 | 4 | 1,240 | 3,758 |
 | `שאול` (shwl; English: Sheol) | Sheol | 37,020 | 137 | 62 | 1,420 | 728 | 4,997 |
 | `שאול` (shwl; English: Paul) | Paul | 37,020 | 137 | 416 | 1,420 | 5,470 | 13,951 |
+| `מיכה` (mykh; English: Micah) | Micah | 36,642 | 6 | 104 | 119 | 1,990 | 5,354 |
 | `הוכה` (hwkh; English: Beaten) | Beaten | 36,228 | 0 | 91 | 65 | 1,681 | 5,203 |
 | `שממה` (shemamah; English: Desolation) | Desolation | 34,908 | 22 | 2,038 | 140 | 20,638 | 31,545 |
 | `מהרל` (mhrl; English: Maharal) | Maharal | 34,750 | 0 | 0 | 0 | 130 | 344 |
 | `אלונ` (lwn; English: Oak) | Oak | 33,896 | 1 | 60 | 84 | 703 | 2,439 |
-| `בריא` (bry; English: Berea) | Berea | 33,467 | 11 | 712 | 255 | 7,827 | 17,756 |
-| `היכל` (hykl; English: Temple) | Temple | 32,867 | 12 | 813 | 517 | 10,380 | 22,841 |
-| `תורה` (twrh; English: Law) | Law | 32,524 | 20 | 771 | 204 | 7,245 | 17,261 |
 
 ## Read
 

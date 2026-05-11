@@ -6,8 +6,8 @@ Broader ELS count sweep across every declared term list.
 
 - Skip range: `2..100`
 - Direction: `both`
-- Term sets: 12
-- Rows: 6778
+- Term sets: 21
+- Rows: 8249
 - Manifest: `reports/broad_search/broad_search.manifest.json`
 
 ## Main Read
@@ -36,6 +36,26 @@ Broader ELS count sweep across every declared term list.
 | biblical_festivals | TR_NT | 6 | 3 | 47 | `pesach_g` `πασχα` (pascha; English: Passover) (37) |
 | biblical_festivals | UHB | 13 | 4 | 47023 | `shabbat_h` `שבת` (shbt; English: Shabbat) (33090) |
 | biblical_festivals | UXLC | 13 | 4 | 47043 | `shabbat_h` `שבת` (shbt; English: Shabbat) (33053) |
+| biblical_narrative_names | BYZ_NT | 19 | 10 | 16129 | `narrative_hannah_g` `αννα` (anna; English: Hannah) (11876) |
+| biblical_narrative_names | EBIBLE_WLC | 10 | 0 | 247220 | `narrative_leah_h` `לאה` (lh; English: Leah) (120383) |
+| biblical_narrative_names | LXX | 19 | 9 | 63236 | `narrative_hannah_g` `αννα` (anna; English: Hannah) (45882) |
+| biblical_narrative_names | MAM | 10 | 0 | 247492 | `narrative_leah_h` `לאה` (lh; English: Leah) (120375) |
+| biblical_narrative_names | MT_WLC | 10 | 0 | 247226 | `narrative_leah_h` `לאה` (lh; English: Leah) (120412) |
+| biblical_narrative_names | SBLGNT | 19 | 9 | 16055 | `narrative_hannah_g` `αννα` (anna; English: Hannah) (11808) |
+| biblical_narrative_names | TCG_NT | 19 | 11 | 15204 | `narrative_hannah_g` `αννα` (anna; English: Hannah) (10914) |
+| biblical_narrative_names | TR_NT | 19 | 11 | 15389 | `narrative_hannah_g` `αννα` (anna; English: Hannah) (11002) |
+| biblical_narrative_names | UHB | 10 | 0 | 246903 | `narrative_leah_h` `לאה` (lh; English: Leah) (120184) |
+| biblical_narrative_names | UXLC | 10 | 0 | 247216 | `narrative_leah_h` `לאה` (lh; English: Leah) (120405) |
+| biblical_prophets_cohort | BYZ_NT | 16 | 8 | 3242 | `prophet_hosea_g` `ωσηε` (osee; English: Hosea) (1248) |
+| biblical_prophets_cohort | EBIBLE_WLC | 16 | 0 | 48635 | `prophet_joel_h` `יואל` (ywl; English: Joel) (17051) |
+| biblical_prophets_cohort | LXX | 16 | 6 | 13509 | `prophet_hosea_g` `ωσηε` (osee; English: Hosea) (5192) |
+| biblical_prophets_cohort | MAM | 16 | 1 | 48807 | `prophet_joel_h` `יואל` (ywl; English: Joel) (17169) |
+| biblical_prophets_cohort | MT_WLC | 16 | 0 | 48652 | `prophet_joel_h` `יואל` (ywl; English: Joel) (17065) |
+| biblical_prophets_cohort | SBLGNT | 16 | 9 | 3192 | `prophet_hosea_g` `ωσηε` (osee; English: Hosea) (1230) |
+| biblical_prophets_cohort | TCG_NT | 16 | 7 | 3307 | `prophet_hosea_g` `ωσηε` (osee; English: Hosea) (1287) |
+| biblical_prophets_cohort | TR_NT | 16 | 7 | 3273 | `prophet_hosea_g` `ωσηε` (osee; English: Hosea) (1259) |
+| biblical_prophets_cohort | UHB | 16 | 0 | 48683 | `prophet_joel_h` `יואל` (ywl; English: Joel) (17085) |
+| biblical_prophets_cohort | UXLC | 16 | 0 | 48658 | `prophet_joel_h` `יואל` (ywl; English: Joel) (17070) |
 | biblical_tribes | BYZ_NT | 14 | 5 | 32253 | `dan_g` `δαν` (dan; English: Dan) (23816) |
 | biblical_tribes | EBIBLE_WLC | 12 | 0 | 275668 | `levi_h` `לוי` (lwy; English: Levi) (218876) |
 | biblical_tribes | LXX | 14 | 3 | 111415 | `dan_g` `δαν` (dan; English: Dan) (80217) |
@@ -46,7 +66,27 @@ Broader ELS count sweep across every declared term list.
 | biblical_tribes | TR_NT | 14 | 4 | 31413 | `dan_g` `δαν` (dan; English: Dan) (22829) |
 | biblical_tribes | UHB | 12 | 0 | 275567 | `levi_h` `לוי` (lwy; English: Levi) (218750) |
 | biblical_tribes | UXLC | 12 | 0 | 275671 | `levi_h` `לוי` (lwy; English: Levi) (218875) |
-| english_search_terms | KJV | 689 | 309 | 2229701 | `eng_dan` `dan` (195200) |
+| daniel_statue_metals | BYZ_NT | 5 | 4 | 24 | `daniel_clay_g` `πηλοσ` (pelos; English: Clay) (24) |
+| daniel_statue_metals | EBIBLE_WLC | 5 | 0 | 12477 | `daniel_gold_h` `זהב` (zhb; English: Gold) (8368) |
+| daniel_statue_metals | LXX | 5 | 2 | 144 | `daniel_clay_g` `πηλοσ` (pelos; English: Clay) (136) |
+| daniel_statue_metals | MAM | 5 | 0 | 12561 | `daniel_gold_h` `זהב` (zhb; English: Gold) (8420) |
+| daniel_statue_metals | MT_WLC | 5 | 0 | 12478 | `daniel_gold_h` `זהב` (zhb; English: Gold) (8371) |
+| daniel_statue_metals | SBLGNT | 5 | 1 | 34 | `daniel_clay_g` `πηλοσ` (pelos; English: Clay) (31) |
+| daniel_statue_metals | TCG_NT | 5 | 2 | 49 | `daniel_clay_g` `πηλοσ` (pelos; English: Clay) (46) |
+| daniel_statue_metals | TR_NT | 5 | 3 | 42 | `daniel_clay_g` `πηλοσ` (pelos; English: Clay) (40) |
+| daniel_statue_metals | UHB | 5 | 0 | 12421 | `daniel_gold_h` `זהב` (zhb; English: Gold) (8325) |
+| daniel_statue_metals | UXLC | 5 | 0 | 12475 | `daniel_gold_h` `זהב` (zhb; English: Gold) (8369) |
+| english_search_terms | KJV | 1289 | 657 | 3735404 | `eng_end` `end` (273618) |
+| eschatology_expanded_terms | BYZ_NT | 9 | 6 | 409 | `esch_666_g` `χξσ` (chxs; English: 666) (253) |
+| eschatology_expanded_terms | EBIBLE_WLC | 8 | 5 | 89256 | `esch_666_h` `תרו` (trw; English: 666) (74794) |
+| eschatology_expanded_terms | LXX | 9 | 6 | 1796 | `esch_666_g` `χξσ` (chxs; English: 666) (1156) |
+| eschatology_expanded_terms | MAM | 8 | 5 | 89717 | `esch_666_h` `תרו` (trw; English: 666) (75199) |
+| eschatology_expanded_terms | MT_WLC | 8 | 5 | 89264 | `esch_666_h` `תרו` (trw; English: 666) (74791) |
+| eschatology_expanded_terms | SBLGNT | 9 | 6 | 448 | `esch_666_g` `χξσ` (chxs; English: 666) (267) |
+| eschatology_expanded_terms | TCG_NT | 9 | 7 | 460 | `esch_666_g` `χξσ` (chxs; English: 666) (269) |
+| eschatology_expanded_terms | TR_NT | 9 | 7 | 448 | `esch_666_g` `χξσ` (chxs; English: 666) (264) |
+| eschatology_expanded_terms | UHB | 8 | 5 | 89074 | `esch_666_h` `תרו` (trw; English: 666) (74683) |
+| eschatology_expanded_terms | UXLC | 8 | 5 | 89255 | `esch_666_h` `תרו` (trw; English: 666) (74785) |
 | frequency_anchors | BYZ_NT | 8 | 1 | 3790 | `laos_g` `λαοσ` (laos; English: People) (2971) |
 | frequency_anchors | EBIBLE_WLC | 7 | 0 | 411043 | `yom_h` `יומ` (ywm; English: Day) (244302) |
 | frequency_anchors | LXX | 8 | 1 | 15920 | `laos_g` `λαοσ` (laos; English: People) (12608) |
@@ -62,11 +102,46 @@ Broader ELS count sweep across every declared term list.
 | greek_nt_claim_terms | SBLGNT | 32 | 17 | 4855 | `haima_gnt` `αιμα` (haima; English: Blood) (4527) |
 | greek_nt_claim_terms | TCG_NT | 32 | 15 | 4887 | `haima_gnt` `αιμα` (haima; English: Blood) (4575) |
 | greek_nt_claim_terms | TR_NT | 32 | 16 | 4975 | `haima_gnt` `αιμα` (haima; English: Blood) (4652) |
+| hebrew_anno_mundi_years | EBIBLE_WLC | 12 | 0 | 24512 | `am_5708_compact_h` `תשח` (tshch; English: Hebrew year 5708) (14327) |
+| hebrew_anno_mundi_years | MAM | 12 | 0 | 24715 | `am_5708_compact_h` `תשח` (tshch; English: Hebrew year 5708) (14481) |
+| hebrew_anno_mundi_years | MT_WLC | 12 | 0 | 24496 | `am_5708_compact_h` `תשח` (tshch; English: Hebrew year 5708) (14311) |
+| hebrew_anno_mundi_years | UHB | 12 | 0 | 24474 | `am_5708_compact_h` `תשח` (tshch; English: Hebrew year 5708) (14312) |
+| hebrew_anno_mundi_years | UXLC | 12 | 0 | 24489 | `am_5708_compact_h` `תשח` (tshch; English: Hebrew year 5708) (14309) |
 | hebrew_claim_terms | EBIBLE_WLC | 140 | 55 | 685431 | `light_h` `אור` (or; English: Light) (115243) |
 | hebrew_claim_terms | MAM | 140 | 51 | 687949 | `light_h` `אור` (or; English: Light) (115587) |
 | hebrew_claim_terms | MT_WLC | 140 | 55 | 685458 | `light_h` `אור` (or; English: Light) (115238) |
 | hebrew_claim_terms | UHB | 140 | 54 | 684726 | `light_h` `אור` (or; English: Light) (115249) |
 | hebrew_claim_terms | UXLC | 140 | 55 | 685458 | `light_h` `אור` (or; English: Light) (115230) |
+| isaiah53_servant_cohort | BYZ_NT | 8 | 3 | 3841 | `isa53_servant_g` `παισ` (pais; English: Servant) (3455) |
+| isaiah53_servant_cohort | EBIBLE_WLC | 7 | 0 | 99198 | `isa53_iniquity_h` `עונ` (wn; English: Iniquity) (43764) |
+| isaiah53_servant_cohort | LXX | 8 | 3 | 17537 | `isa53_servant_g` `παισ` (pais; English: Servant) (16170) |
+| isaiah53_servant_cohort | MAM | 7 | 0 | 99705 | `isa53_iniquity_h` `עונ` (wn; English: Iniquity) (44074) |
+| isaiah53_servant_cohort | MT_WLC | 7 | 0 | 99189 | `isa53_iniquity_h` `עונ` (wn; English: Iniquity) (43760) |
+| isaiah53_servant_cohort | SBLGNT | 8 | 3 | 3891 | `isa53_servant_g` `παισ` (pais; English: Servant) (3501) |
+| isaiah53_servant_cohort | TCG_NT | 8 | 3 | 3807 | `isa53_servant_g` `παισ` (pais; English: Servant) (3439) |
+| isaiah53_servant_cohort | TR_NT | 8 | 2 | 3812 | `isa53_servant_g` `παισ` (pais; English: Servant) (3437) |
+| isaiah53_servant_cohort | UHB | 7 | 0 | 99128 | `isa53_iniquity_h` `עונ` (wn; English: Iniquity) (43797) |
+| isaiah53_servant_cohort | UXLC | 7 | 0 | 99205 | `isa53_iniquity_h` `עונ` (wn; English: Iniquity) (43766) |
+| maccabean_apocrypha_names | BYZ_NT | 7 | 5 | 20 | `macc_tobit_g` `τωβιτ` (tobit; English: Tobit) (17) |
+| maccabean_apocrypha_names | EBIBLE_WLC | 7 | 3 | 202 | `macc_tobit_h` `טוביה` (twbyh; English: Tobit) (67) |
+| maccabean_apocrypha_names | LXX | 7 | 5 | 70 | `macc_tobit_g` `τωβιτ` (tobit; English: Tobit) (62) |
+| maccabean_apocrypha_names | MAM | 7 | 3 | 208 | `macc_tobit_h` `טוביה` (twbyh; English: Tobit) (69) |
+| maccabean_apocrypha_names | MT_WLC | 7 | 3 | 203 | `macc_tobit_h` `טוביה` (twbyh; English: Tobit) (67) |
+| maccabean_apocrypha_names | SBLGNT | 7 | 5 | 14 | `macc_tobit_g` `τωβιτ` (tobit; English: Tobit) (13) |
+| maccabean_apocrypha_names | TCG_NT | 7 | 5 | 20 | `macc_tobit_g` `τωβιτ` (tobit; English: Tobit) (15) |
+| maccabean_apocrypha_names | TR_NT | 7 | 5 | 22 | `macc_tobit_g` `τωβιτ` (tobit; English: Tobit) (19) |
+| maccabean_apocrypha_names | UHB | 7 | 3 | 201 | `macc_tobit_h` `טוביה` (twbyh; English: Tobit) (70) |
+| maccabean_apocrypha_names | UXLC | 7 | 3 | 203 | `macc_tobit_h` `טוביה` (twbyh; English: Tobit) (67) |
+| modern_disaster_war_terms | BYZ_NT | 13 | 10 | 12 | `disaster_pestilence_g` `λοιμοσ` (loimos; English: Pestilence) (8) |
+| modern_disaster_war_terms | EBIBLE_WLC | 14 | 8 | 45112 | `disaster_earthquake_h` `רעש` (rsh; English: Earthquake) (24575) |
+| modern_disaster_war_terms | LXX | 13 | 10 | 39 | `disaster_pestilence_g` `λοιμοσ` (loimos; English: Pestilence) (21) |
+| modern_disaster_war_terms | MAM | 14 | 8 | 45350 | `disaster_earthquake_h` `רעש` (rsh; English: Earthquake) (24714) |
+| modern_disaster_war_terms | MT_WLC | 14 | 8 | 45120 | `disaster_earthquake_h` `רעש` (rsh; English: Earthquake) (24572) |
+| modern_disaster_war_terms | SBLGNT | 13 | 9 | 6 | `disaster_earthquake_g` `σεισμοσ` (seismos; English: Earthquake) (2) |
+| modern_disaster_war_terms | TCG_NT | 13 | 10 | 13 | `disaster_pestilence_g` `λοιμοσ` (loimos; English: Pestilence) (9) |
+| modern_disaster_war_terms | TR_NT | 13 | 10 | 11 | `disaster_pestilence_g` `λοιμοσ` (loimos; English: Pestilence) (7) |
+| modern_disaster_war_terms | UHB | 14 | 8 | 45040 | `disaster_earthquake_h` `רעש` (rsh; English: Earthquake) (24544) |
+| modern_disaster_war_terms | UXLC | 14 | 8 | 45118 | `disaster_earthquake_h` `רעש` (rsh; English: Earthquake) (24572) |
 | modern_names_dates | BYZ_NT | 60 | 40 | 88708 | `united_nations_acronym_g` `οηε` (oee; English: United Nations) (51298) |
 | modern_names_dates | EBIBLE_WLC | 96 | 32 | 356541 | `united_nations_acronym_h` `אומ` (wm; English: United Nations) (165755) |
 | modern_names_dates | LXX | 60 | 37 | 354220 | `united_nations_acronym_g` `οηε` (oee; English: United Nations) (191280) |
@@ -97,6 +172,16 @@ Broader ELS count sweep across every declared term list.
 | prophetic_terms | TR_NT | 229 | 142 | 53319 | `ur_g` `ουρ` (our; English: Ur) (26737) |
 | prophetic_terms | UHB | 221 | 77 | 1425083 | `greece_h` `יונ` (ywn; English: Greece) (136105) |
 | prophetic_terms | UXLC | 221 | 75 | 1427254 | `greece_h` `יונ` (ywn; English: Greece) (136087) |
+| tabernacle_temple_terms | BYZ_NT | 8 | 5 | 9175 | `tabernacle_temple_g` `ναοσ` (naos; English: Temple) (9130) |
+| tabernacle_temple_terms | EBIBLE_WLC | 8 | 1 | 14618 | `tabernacle_temple_h` `היכל` (hykl; English: Temple) (6557) |
+| tabernacle_temple_terms | LXX | 8 | 5 | 35578 | `tabernacle_temple_g` `ναοσ` (naos; English: Temple) (35302) |
+| tabernacle_temple_terms | MAM | 8 | 1 | 14705 | `tabernacle_temple_h` `היכל` (hykl; English: Temple) (6622) |
+| tabernacle_temple_terms | MT_WLC | 8 | 1 | 14608 | `tabernacle_temple_h` `היכל` (hykl; English: Temple) (6554) |
+| tabernacle_temple_terms | SBLGNT | 8 | 4 | 9000 | `tabernacle_temple_g` `ναοσ` (naos; English: Temple) (8955) |
+| tabernacle_temple_terms | TCG_NT | 8 | 5 | 8792 | `tabernacle_temple_g` `ναοσ` (naos; English: Temple) (8739) |
+| tabernacle_temple_terms | TR_NT | 8 | 5 | 8847 | `tabernacle_temple_g` `ναοσ` (naos; English: Temple) (8793) |
+| tabernacle_temple_terms | UHB | 8 | 1 | 14612 | `tabernacle_temple_h` `היכל` (hykl; English: Temple) (6581) |
+| tabernacle_temple_terms | UXLC | 8 | 1 | 14606 | `tabernacle_temple_h` `היכל` (hykl; English: Temple) (6553) |
 | table_of_nations | BYZ_NT | 91 | 32 | 89470 | `noah_g` `νωε` (Noe; English: Noah) (35247) |
 | table_of_nations | EBIBLE_WLC | 86 | 2 | 1131362 | `javan_h` `יונ` (ywn; English: Javan) (136086) |
 | table_of_nations | LXX | 91 | 25 | 338044 | `noah_g` `νωε` (Noe; English: Noah) (116736) |
@@ -123,35 +208,35 @@ Broader ELS count sweep across every declared term list.
 | Rank | Set | Corpus | Term | Length | Hits | Read |
 | ---: | --- | --- | --- | ---: | ---: | --- |
 | 1 | english_search_terms | KJV | `eng_heth` `heth` | 4 | 62273 | dense short form |
-| 2 | theological_terms | LXX | `temple_g` `ναοσ` (naos; English: Temple) | 4 | 35302 | dense short form |
-| 3 | modern_names_dates | LXX | `nato_g` `νατο` (nato; English: NATO) | 4 | 31674 | dense short form |
-| 4 | english_search_terms | KJV | `eng_otho` `otho` | 4 | 30851 | dense short form |
-| 5 | english_search_terms | KJV | `eng_nato` `nato` | 4 | 27042 | dense short form |
-| 6 | theological_terms | LXX | `son_g` `υιοσ` (huios; English: Son) | 4 | 25745 | dense short form |
-| 7 | english_search_terms | KJV | `eng_noah` `noah` | 4 | 24538 | dense short form |
-| 8 | english_search_terms | KJV | `eng_heal` `heal` | 4 | 23995 | dense short form |
-| 9 | english_search_terms | KJV | `eng_nero` `nero` | 4 | 22308 | dense short form |
-| 10 | english_search_terms | KJV | `eng_nero_2` `nero` | 4 | 22308 | dense short form |
-| 11 | null_controls | MAM | `scrambled_yhwh_h` `וההי` (whhy; English: Scrambled YHWH) | 4 | 22293 | dense short form |
-| 12 | null_controls | MT_WLC | `scrambled_yhwh_h` `וההי` (whhy; English: Scrambled YHWH) | 4 | 22277 | dense short form |
-| 13 | null_controls | EBIBLE_WLC | `scrambled_yhwh_h` `וההי` (whhy; English: Scrambled YHWH) | 4 | 22271 | dense short form |
-| 14 | null_controls | UXLC | `scrambled_yhwh_h` `וההי` (whhy; English: Scrambled YHWH) | 4 | 22269 | dense short form |
-| 15 | null_controls | UHB | `scrambled_yhwh_h` `וההי` (whhy; English: Scrambled YHWH) | 4 | 22204 | dense short form |
-| 16 | greek_nt_claim_terms | LXX | `haima_gnt` `αιμα` (haima; English: Blood) | 4 | 22054 | dense short form |
-| 17 | prophetic_terms | LXX | `blood_g` `αιμα` (haima; English: Blood) | 4 | 22054 | dense short form |
-| 18 | theological_terms | LXX | `blood_g` `αιμα` (haima; English: Blood) | 4 | 22054 | dense short form |
-| 19 | hebrew_claim_terms | MAM | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21812 | dense short form |
-| 20 | theological_terms | MAM | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21812 | dense short form |
-| 21 | modern_names_dates | LXX | `china_g` `κινα` (kina; English: China) | 4 | 21772 | dense short form |
-| 22 | hebrew_claim_terms | UHB | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21640 | dense short form |
-| 23 | theological_terms | UHB | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21640 | dense short form |
-| 24 | hebrew_claim_terms | MT_WLC | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21626 | dense short form |
-| 25 | theological_terms | MT_WLC | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21626 | dense short form |
-| 26 | hebrew_claim_terms | UXLC | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21622 | dense short form |
-| 27 | theological_terms | UXLC | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21622 | dense short form |
-| 28 | hebrew_claim_terms | EBIBLE_WLC | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21620 | dense short form |
-| 29 | theological_terms | EBIBLE_WLC | `yhwh_h` `יהוה` (YHWH; English: YHWH) | 4 | 21620 | dense short form |
-| 30 | table_of_nations | LXX | `shelah_g` `σαλα` (Sala; English: Shelah) | 4 | 18310 | dense short form |
+| 2 | english_search_terms | KJV | `eng_tree` `tree` | 4 | 54170 | dense short form |
+| 3 | english_search_terms | KJV | `eng_tree_2` `tree` | 4 | 54170 | dense short form |
+| 4 | biblical_narrative_names | LXX | `narrative_hannah_g` `αννα` (anna; English: Hannah) | 4 | 45882 | dense short form |
+| 5 | english_search_terms | KJV | `eng_eden` `eden` | 4 | 35476 | dense short form |
+| 6 | tabernacle_temple_terms | LXX | `tabernacle_temple_g` `ναοσ` (naos; English: Temple) | 4 | 35302 | dense short form |
+| 7 | theological_terms | LXX | `temple_g` `ναοσ` (naos; English: Temple) | 4 | 35302 | dense short form |
+| 8 | modern_names_dates | LXX | `nato_g` `νατο` (nato; English: NATO) | 4 | 31674 | dense short form |
+| 9 | english_search_terms | KJV | `eng_otho` `otho` | 4 | 30851 | dense short form |
+| 10 | english_search_terms | KJV | `eng_otho_2` `otho` | 4 | 30851 | dense short form |
+| 11 | english_search_terms | KJV | `eng_seed` `seed` | 4 | 29311 | dense short form |
+| 12 | english_search_terms | KJV | `eng_seed_2` `seed` | 4 | 29311 | dense short form |
+| 13 | english_search_terms | KJV | `eng_seed_3` `seed` | 4 | 29311 | dense short form |
+| 14 | english_search_terms | KJV | `eng_rent` `rent` | 4 | 28706 | dense short form |
+| 15 | english_search_terms | KJV | `eng_nato` `nato` | 4 | 27042 | dense short form |
+| 16 | english_search_terms | KJV | `eng_nato_2` `nato` | 4 | 27042 | dense short form |
+| 17 | theological_terms | LXX | `son_g` `υιοσ` (huios; English: Son) | 4 | 25745 | dense short form |
+| 18 | english_search_terms | KJV | `eng_shot` `shot` | 4 | 25133 | dense short form |
+| 19 | english_search_terms | KJV | `eng_noah` `noah` | 4 | 24538 | dense short form |
+| 20 | english_search_terms | KJV | `eng_noah_2` `noah` | 4 | 24538 | dense short form |
+| 21 | english_search_terms | KJV | `eng_heal` `heal` | 4 | 23995 | dense short form |
+| 22 | english_search_terms | KJV | `eng_leah` `leah` | 4 | 23788 | dense short form |
+| 23 | english_search_terms | KJV | `eng_nero` `nero` | 4 | 22308 | dense short form |
+| 24 | english_search_terms | KJV | `eng_nero_2` `nero` | 4 | 22308 | dense short form |
+| 25 | null_controls | MAM | `scrambled_yhwh_h` `וההי` (whhy; English: Scrambled YHWH) | 4 | 22293 | dense short form |
+| 26 | null_controls | MT_WLC | `scrambled_yhwh_h` `וההי` (whhy; English: Scrambled YHWH) | 4 | 22277 | dense short form |
+| 27 | null_controls | EBIBLE_WLC | `scrambled_yhwh_h` `וההי` (whhy; English: Scrambled YHWH) | 4 | 22271 | dense short form |
+| 28 | null_controls | UXLC | `scrambled_yhwh_h` `וההי` (whhy; English: Scrambled YHWH) | 4 | 22269 | dense short form |
+| 29 | null_controls | UHB | `scrambled_yhwh_h` `וההי` (whhy; English: Scrambled YHWH) | 4 | 22204 | dense short form |
+| 30 | english_search_terms | KJV | `eng_thin` `thin` | 4 | 22130 | dense short form |
 
 ## Focus Terms
 
@@ -180,7 +265,10 @@ Broader ELS count sweep across every declared term list.
 | USA | SBLGNT | `usa_abbrev_g` `ηπα` (epa; English: USA) | 3 | 18649 | high-noise short form |
 | Iran | LXX | `iran_g` `ιραν` (iran; English: Iran) | 4 | 17335 | dense short form |
 | Gog | KJV | `eng_gog` `gog` | 3 | 15290 | high-noise short form |
+| Gog | KJV | `eng_gog_2` `gog` | 3 | 15290 | high-noise short form |
+| Gog | KJV | `eng_gog_3` `gog` | 3 | 15290 | high-noise short form |
 | Iran | KJV | `eng_iran` `iran` | 4 | 11859 | dense short form |
+| Iran | KJV | `eng_iran_2` `iran` | 4 | 11859 | dense short form |
 | USA | UHB | `usa_abbrev_h` `ארהב` (rhb; English: USA) | 4 | 5044 | dense short form |
 | USA | EBIBLE_WLC | `usa_abbrev_h` `ארהב` (rhb; English: USA) | 4 | 5035 | dense short form |
 | USA | MT_WLC | `usa_abbrev_h` `ארהב` (rhb; English: USA) | 4 | 5029 | dense short form |
@@ -209,14 +297,11 @@ Broader ELS count sweep across every declared term list.
 | Beast | KJV | `eng_beast` `beast` | 5 | 584 | present; screen only |
 | Beast | KJV | `eng_beast_2` `beast` | 5 | 584 | present; screen only |
 | Beast | KJV | `eng_beast_3` `beast` | 5 | 584 | present; screen only |
+| Beast | KJV | `eng_beast_4` `beast` | 5 | 584 | present; screen only |
+| Beast | KJV | `eng_beast_5` `beast` | 5 | 584 | present; screen only |
 | Vance | EBIBLE_WLC | `vance_h` `ואנס` (wns; English: Vance) | 4 | 556 | present; screen only |
 | Vance | MAM | `vance_h` `ואנס` (wns; English: Vance) | 4 | 556 | present; screen only |
 | Vance | MT_WLC | `vance_h` `ואנס` (wns; English: Vance) | 4 | 556 | present; screen only |
-| Vance | UXLC | `vance_h` `ואנס` (wns; English: Vance) | 4 | 555 | present; screen only |
-| Vance | UHB | `vance_h` `ואנס` (wns; English: Vance) | 4 | 546 | present; screen only |
-| Russia | LXX | `russia_g` `ρωσια` (rosia; English: Russia) | 5 | 534 | present; screen only |
-| Vance | SBLGNT | `vance_g` `βανσ` (bans; English: Vance) | 4 | 512 | present; screen only |
-| Vance | BYZ_NT | `vance_g` `βανσ` (bans; English: Vance) | 4 | 501 | present; screen only |
 
 ## Largest Increases Vs Skip 2..50
 
