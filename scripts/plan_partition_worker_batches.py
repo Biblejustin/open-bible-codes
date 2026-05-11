@@ -17,7 +17,11 @@ from scripts.export_dynamic_span_hits import ROOT
 from scripts.plan_dynamic_span_partitions import DEFAULT_OUT as DEFAULT_PLAN
 from scripts.plan_dynamic_span_partitions import export_command
 from scripts.run_dynamic_span_partitions import is_control_corpus, read_rows
-from scripts.summarize_dynamic_span_partition_outputs import completed_plan_rows
+from scripts.summarize_dynamic_span_partition_outputs import (
+    archive_marker_path,
+    partition_manifest_path,
+    partition_output_path,
+)
 
 
 DEFAULT_OUT_DIR = ROOT / "reports/dynamic_skip_focus/worker_batches"
@@ -51,6 +55,7 @@ COUNT_FIELDNAMES = [
 @dataclass
 class WorkerBucket:
     label: str
+    weight: float = 1.0
     rows: list[dict[str, str]] = field(default_factory=list)
     estimated_hits: int = 0
 
@@ -58,13 +63,18 @@ class WorkerBucket:
     def partition_count(self) -> int:
         return len(self.rows)
 
+    @property
+    def weighted_load(self) -> float:
+        return self.estimated_hits / self.weight
+
 
 def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(argv)
     plan_rows = read_rows(args.plan)
     selected = select_remaining_rows(plan_rows, args)
-    buckets = assign_rows(selected, args.workers, args.worker_prefix)
+    worker_weights = parse_worker_weights(args.workers, args.worker_prefix, args.worker_weight)
+    buckets = assign_rows(selected, args.workers, args.worker_prefix, worker_weights)
     write_worker_files(args.out_dir, buckets, args, plan_rows)
     write_manifest(args.out_dir / "manifest.json", args, plan_rows, selected, buckets, started)
     print(args.out_dir)
@@ -84,6 +94,16 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--bible-only", action="store_true")
     parser.add_argument("--controls-only", action="store_true")
     parser.add_argument("--limit", type=int)
+    parser.add_argument(
+        "--worker-weight",
+        action="append",
+        default=[],
+        metavar="WORKER=WEIGHT",
+        help=(
+            "Relative worker speed/capacity, for example worker_01=2.0. "
+            "Higher weights receive proportionally more estimated hits."
+        ),
+    )
     return parser
 
 
@@ -92,7 +112,7 @@ def select_remaining_rows(rows: list[dict[str, str]], args: argparse.Namespace) 
         raise ValueError("--workers must be at least 1")
     if args.bible_only and args.controls_only:
         raise ValueError("--bible-only and --controls-only cannot both be set")
-    completed_ids = {row["partition_id"] for row in completed_plan_rows(rows)}
+    completed_ids = {row["partition_id"] for row in rows if partition_artifact_completed(row)}
     partition_counts = set(args.partition_count)
     selected: list[dict[str, str]] = []
     for row in rows:
@@ -118,10 +138,46 @@ def select_remaining_rows(rows: list[dict[str, str]], args: argparse.Namespace) 
     return selected
 
 
-def assign_rows(rows: list[dict[str, str]], workers: int, worker_prefix: str) -> list[WorkerBucket]:
-    buckets = [WorkerBucket(f"{worker_prefix}_{index:02d}") for index in range(1, workers + 1)]
+def partition_artifact_completed(row: dict[str, str]) -> bool:
+    if not partition_manifest_path(row).exists():
+        return False
+    if partition_output_path(row).exists():
+        return True
+    return archive_marker_path(row).exists()
+
+
+def parse_worker_weights(workers: int, worker_prefix: str, values: list[str]) -> dict[str, float]:
+    labels = {f"{worker_prefix}_{index:02d}" for index in range(1, workers + 1)}
+    weights = {label: 1.0 for label in labels}
+    for value in values:
+        if "=" not in value:
+            raise ValueError(f"--worker-weight must be WORKER=WEIGHT, got {value!r}")
+        label, raw_weight = value.split("=", 1)
+        if label not in labels:
+            raise ValueError(f"unknown worker label {label!r}; expected one of {sorted(labels)}")
+        try:
+            weight = float(raw_weight)
+        except ValueError as exc:
+            raise ValueError(f"invalid worker weight for {label}: {raw_weight!r}") from exc
+        if weight <= 0:
+            raise ValueError(f"worker weight must be positive for {label}: {weight}")
+        weights[label] = weight
+    return weights
+
+
+def assign_rows(
+    rows: list[dict[str, str]],
+    workers: int,
+    worker_prefix: str,
+    worker_weights: dict[str, float] | None = None,
+) -> list[WorkerBucket]:
+    weights = worker_weights or {}
+    buckets = [
+        WorkerBucket(f"{worker_prefix}_{index:02d}", weight=weights.get(f"{worker_prefix}_{index:02d}", 1.0))
+        for index in range(1, workers + 1)
+    ]
     for row in sorted(rows, key=lambda item: (-int(item["estimated_partition_hits"]), row_sort_key(item))):
-        bucket = min(buckets, key=lambda item: (item.estimated_hits, item.partition_count, item.label))
+        bucket = min(buckets, key=lambda item: (item.weighted_load, item.partition_count, item.label))
         bucket.rows.append(row)
         bucket.estimated_hits += int(row["estimated_partition_hits"])
     for bucket in buckets:
@@ -163,6 +219,7 @@ def write_worker_readme(path: Path, bucket: WorkerBucket, csv_path: Path, count_
         "",
         f"- assigned partitions: {bucket.partition_count}",
         f"- estimated hits: {bucket.estimated_hits:,}",
+        f"- worker weight: {bucket.weight:g}",
         f"- worker plan CSV: `{rel_csv}`",
         f"- worker counts CSV: `{rel_counts}`",
         "",
@@ -205,8 +262,10 @@ def write_manifest(
         "buckets": [
             {
                 "worker": bucket.label,
+                "weight": bucket.weight,
                 "partitions": bucket.partition_count,
                 "estimated_hits": bucket.estimated_hits,
+                "weighted_load": round(bucket.weighted_load, 3),
                 "assignment": display_path(path.parent / f"{bucket.label}_partitions.csv"),
                 "counts": display_path(path.parent / f"{bucket.label}_counts.csv"),
             }

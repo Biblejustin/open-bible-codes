@@ -18,6 +18,24 @@ Workers should not commit or push. They only return bundles.
 python3 -m scripts.plan_partition_worker_batches --workers 3 --max-estimated-hits 1000000
 ```
 
+For unequal machines, add relative speed weights. Higher weights receive a
+larger share of the remaining estimated hits while still keeping partitions
+non-overlapping:
+
+```bash
+python3 -m scripts.plan_partition_worker_batches \
+  --workers 3 \
+  --worker-weight worker_01=2.0 \
+  --worker-weight worker_02=1.0 \
+  --worker-weight worker_03=0.5 \
+  --max-estimated-hits 1000000
+```
+
+Example use: fast Mac = `worker_01=2.0`, Windows desktop = `worker_02=1.0`,
+slower laptop = `worker_03=0.5`. Re-run the planner only after importing or
+marking completed results, so the next assignment is based on genuinely
+remaining coordinator work.
+
 Outputs:
 
 - `reports/dynamic_skip_focus/worker_batches/partition_worker_assignments.csv`

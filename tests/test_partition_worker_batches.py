@@ -1,4 +1,5 @@
 import csv
+import json
 import tempfile
 import unittest
 from argparse import Namespace
@@ -9,6 +10,7 @@ from scripts import import_partition_worker_bundle as import_bundle
 from scripts.plan_partition_worker_batches import (
     COUNT_FIELDNAMES,
     assign_rows,
+    parse_worker_weights,
     select_remaining_rows,
     write_worker_files,
 )
@@ -42,6 +44,33 @@ class PartitionWorkerBatchTests(unittest.TestCase):
 
         self.assertEqual([row["partition_id"] for row in selected], ["keep"])
 
+    def test_select_remaining_rows_treats_archived_marker_as_complete(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            archived = partition_row(root, "archived", "TR_NT", "dyn_a", 1, 10, 20)
+            Path(archived["manifest_out"]).write_text("{}\n", encoding="utf-8")
+            gz_out = Path(archived["out"]).with_suffix(Path(archived["out"]).suffix + ".gz")
+            marker = gz_out.with_suffix(gz_out.suffix + ".archived.json")
+            marker.write_text(
+                json.dumps({"archive_path": str(root / "offline-drive" / gz_out.name)}) + "\n",
+                encoding="utf-8",
+            )
+            keep = partition_row(root, "keep", "TR_NT", "dyn_a", 2, 10, 20)
+            args = Namespace(
+                workers=2,
+                partition_count=[],
+                min_partition_count=None,
+                max_partition_count=None,
+                max_estimated_hits=100,
+                bible_only=False,
+                controls_only=False,
+                limit=None,
+            )
+
+            selected = select_remaining_rows([archived, keep], args)
+
+        self.assertEqual([row["partition_id"] for row in selected], ["keep"])
+
     def test_assign_rows_balances_estimated_hits_without_overlap(self) -> None:
         rows = [
             partition_stub("a", 100),
@@ -56,6 +85,40 @@ class PartitionWorkerBatchTests(unittest.TestCase):
         self.assertEqual(sorted(assigned), ["a", "b", "c", "d"])
         self.assertEqual(len(assigned), len(set(assigned)))
         self.assertEqual([bucket.label for bucket in buckets], ["box_01", "box_02"])
+
+    def test_assign_rows_respects_worker_weights(self) -> None:
+        rows = [
+            partition_stub("a", 100),
+            partition_stub("b", 100),
+            partition_stub("c", 100),
+            partition_stub("d", 100),
+            partition_stub("e", 100),
+            partition_stub("f", 100),
+        ]
+
+        buckets = assign_rows(
+            rows,
+            workers=2,
+            worker_prefix="box",
+            worker_weights={"box_01": 2.0, "box_02": 1.0},
+        )
+
+        by_label = {bucket.label: bucket for bucket in buckets}
+        self.assertGreater(by_label["box_01"].estimated_hits, by_label["box_02"].estimated_hits)
+        self.assertEqual(by_label["box_01"].estimated_hits, 400)
+        self.assertEqual(by_label["box_02"].estimated_hits, 200)
+
+    def test_parse_worker_weights_rejects_bad_values(self) -> None:
+        self.assertEqual(
+            parse_worker_weights(2, "box", ["box_01=2.5"]),
+            {"box_01": 2.5, "box_02": 1.0},
+        )
+        with self.assertRaises(ValueError):
+            parse_worker_weights(2, "box", ["box_03=2"])
+        with self.assertRaises(ValueError):
+            parse_worker_weights(2, "box", ["box_01=0"])
+        with self.assertRaises(ValueError):
+            parse_worker_weights(2, "box", ["box_01"])
 
     def test_write_worker_files_emits_local_count_source(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
