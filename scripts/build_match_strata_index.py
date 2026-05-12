@@ -45,6 +45,7 @@ DEFAULT_MEANINGFUL_CONSTANTS = Path("terms/meaningful_constants.csv")
 DEFAULT_THEMATIC_CHAPTERS = Path("data/study/mappings/thematic_chapters.csv")
 DEFAULT_AUTHOR_BOOK_MAPPING = Path("data/study/mappings/author_book_mapping.csv")
 DEFAULT_PROTAGONIST_NARRATIVE_MAPPING = Path("data/study/mappings/protagonist_narrative_mapping.csv")
+DEFAULT_OT_IN_NT_QUOTATIONS = Path("data/study/mappings/ot_in_nt_quotations.csv")
 
 GROUP_FIELDS = ("source_family", "source_queue", "corpus", "present_corpora", "term_id", "normalized_term")
 DEFAULT_CORPUS_CONFIGS = (
@@ -114,6 +115,12 @@ FIELDNAMES = [
     "protagonist_in_own_narrative",
     "protagonist_in_own_narrative_mappings",
     "protagonist_in_own_narrative_evidence",
+    "nt_quotation_anchor",
+    "nt_quotation_anchor_mappings",
+    "nt_quotation_anchor_evidence",
+    "nt_quotation_span",
+    "nt_quotation_span_mappings",
+    "nt_quotation_span_evidence",
     "boundary_strata",
     "boundary_corpora",
     "boundary_evidence",
@@ -148,6 +155,7 @@ def main(argv: list[str] | None = None) -> int:
     thematic_mappings = read_mapping_rows(args.thematic_chapters)
     author_mappings = read_mapping_rows(args.author_book_mapping)
     protagonist_mappings = read_mapping_rows(args.protagonist_narrative_mapping)
+    quotation_mappings = read_mapping_rows(args.ot_in_nt_quotations)
     corpus_configs = corpus_config_map(args.corpus_config)
     boundary_indexes, bigram_profiles, letter_frequency_profiles = load_corpus_metadata(corpus_configs)
     rows = build_strata_rows(
@@ -157,6 +165,7 @@ def main(argv: list[str] | None = None) -> int:
         thematic_mappings=thematic_mappings,
         author_mappings=author_mappings,
         protagonist_mappings=protagonist_mappings,
+        quotation_mappings=quotation_mappings,
         bigram_profiles=bigram_profiles,
         letter_frequency_profiles=letter_frequency_profiles,
     )
@@ -183,6 +192,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--thematic-chapters", type=Path, default=DEFAULT_THEMATIC_CHAPTERS)
     parser.add_argument("--author-book-mapping", type=Path, default=DEFAULT_AUTHOR_BOOK_MAPPING)
     parser.add_argument("--protagonist-narrative-mapping", type=Path, default=DEFAULT_PROTAGONIST_NARRATIVE_MAPPING)
+    parser.add_argument("--ot-in-nt-quotations", type=Path, default=DEFAULT_OT_IN_NT_QUOTATIONS)
     parser.add_argument("--markdown-row-limit", type=int, default=80)
     parser.add_argument("--cross-skip-letter-distance", type=int, default=10)
     parser.add_argument(
@@ -202,6 +212,7 @@ def build_strata_rows(
     thematic_mappings: list[dict[str, str]] | None = None,
     author_mappings: list[dict[str, str]] | None = None,
     protagonist_mappings: list[dict[str, str]] | None = None,
+    quotation_mappings: list[dict[str, str]] | None = None,
     bigram_profiles: dict[str, BigramProfile] | None = None,
     letter_frequency_profiles: dict[str, LetterFrequencyProfile] | None = None,
     cross_skip_letter_distance: int = 10,
@@ -214,6 +225,7 @@ def build_strata_rows(
     thematic_mappings = thematic_mappings or []
     author_mappings = author_mappings or []
     protagonist_mappings = protagonist_mappings or []
+    quotation_mappings = quotation_mappings or []
     bigram_profiles = bigram_profiles or {}
     letter_frequency_profiles = letter_frequency_profiles or {}
     cross_skip = cross_skip_annotations(input_rows, within_letter_distance=cross_skip_letter_distance)
@@ -240,6 +252,7 @@ def build_strata_rows(
             term_field="protagonist_term_id",
             name_field="protagonist_name",
         )
+        quotation_anchor_matches, quotation_span_matches = quotation_mapping_matches(row, quotation_mappings)
         cross = cross_skip.get(row_identity(row), {})
         skip_values = sorted({abs(value) for value in parse_skip_values(row.get("skip", ""))})
         constant_skips = [value for value in skip_values if value in meaningful_constants]
@@ -271,6 +284,10 @@ def build_strata_rows(
             strata.append("author_in_own_book")
         if protagonist_matches:
             strata.append("protagonist_in_own_narrative")
+        if quotation_anchor_matches:
+            strata.append("nt_quotation_anchor")
+        if quotation_span_matches:
+            strata.append("nt_quotation_span")
         if cross.get("word_pair_count"):
             strata.append("cross_skip_pair_at_word")
         if cross.get("letter_pair_count"):
@@ -351,6 +368,16 @@ def build_strata_rows(
                 "protagonist_in_own_narrative_evidence": ";".join(
                     match["evidence"] for match in protagonist_matches
                 ),
+                "nt_quotation_anchor": "yes" if quotation_anchor_matches else "no",
+                "nt_quotation_anchor_mappings": ";".join(
+                    match["mapping_id"] for match in quotation_anchor_matches
+                ),
+                "nt_quotation_anchor_evidence": ";".join(
+                    match["evidence"] for match in quotation_anchor_matches
+                ),
+                "nt_quotation_span": "yes" if quotation_span_matches else "no",
+                "nt_quotation_span_mappings": ";".join(match["mapping_id"] for match in quotation_span_matches),
+                "nt_quotation_span_evidence": ";".join(match["evidence"] for match in quotation_span_matches),
                 "boundary_strata": ";".join(boundary_strata),
                 "boundary_corpora": ";".join(boundary_corpora),
                 "boundary_evidence": ";".join(boundary_evidence),
@@ -704,6 +731,87 @@ def ref_inside_mapping_scope(center: Any, mapping: dict[str, str]) -> bool:
     return start_key <= center_key <= end_key
 
 
+def quotation_mapping_matches(
+    row: dict[str, str],
+    mappings: list[dict[str, str]],
+) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+    anchor_matches: list[dict[str, str]] = []
+    span_matches: list[dict[str, str]] = []
+    if not mappings:
+        return anchor_matches, span_matches
+    center = parse_ref(row.get("center_ref", ""))
+    row_range = row_ref_range(row)
+    for mapping in mappings:
+        if not quotation_corpus_matches(row, mapping.get("ot_corpus", "")):
+            continue
+        mapping_start = parse_ref(mapping.get("ot_ref_start", ""))
+        mapping_end = parse_ref(mapping.get("ot_ref_end", ""))
+        if mapping_start is None or mapping_end is None:
+            continue
+        mapping_range = (
+            ref_key_for_parsed(mapping_start),
+            ref_key_for_parsed(mapping_end),
+        )
+        if center is not None and ref_range_contains(mapping_range, ref_key_for_parsed(center)):
+            anchor_normalized = mapping.get("anchor_normalized", "").strip()
+            if not anchor_normalized or anchor_normalized == row.get("center_normalized_word", "").strip():
+                anchor_matches.append(quotation_match_row(mapping, "anchor"))
+        if row_range is not None and ref_ranges_overlap(row_range, mapping_range):
+            span_matches.append(quotation_match_row(mapping, "span"))
+    return anchor_matches, span_matches
+
+
+def quotation_corpus_matches(row: dict[str, str], ot_corpus: str) -> bool:
+    wanted = ot_corpus.strip()
+    if not wanted:
+        return True
+    return wanted in candidate_corpora(row)
+
+
+def quotation_match_row(mapping: dict[str, str], kind: str) -> dict[str, str]:
+    return {
+        "mapping_id": mapping.get("mapping_id", ""),
+        "evidence": (
+            f"{mapping.get('mapping_id', '')}:{kind}:"
+            f"{mapping.get('ot_ref_start', '')}-{mapping.get('ot_ref_end', '')}"
+        ),
+    }
+
+
+def row_ref_range(row: dict[str, str]) -> tuple[tuple[int, int, int], tuple[int, int, int]] | None:
+    start = parse_ref(row.get("start_ref", ""))
+    end = parse_ref(row.get("end_ref", ""))
+    if start is None or end is None:
+        center = parse_ref(row.get("center_ref", ""))
+        if center is None:
+            return None
+        key = ref_key_for_parsed(center)
+        return key, key
+    start_key = ref_key_for_parsed(start)
+    end_key = ref_key_for_parsed(end)
+    if end_key < start_key:
+        return end_key, start_key
+    return start_key, end_key
+
+
+def ref_key_for_parsed(parsed: Any) -> tuple[int, int, int]:
+    return (BOOK_ORDER.get(parsed.book, 999999), parsed.chapter, parsed.verse)
+
+
+def ref_range_contains(
+    ref_range: tuple[tuple[int, int, int], tuple[int, int, int]],
+    ref_key: tuple[int, int, int],
+) -> bool:
+    return ref_range[0] <= ref_key <= ref_range[1]
+
+
+def ref_ranges_overlap(
+    left: tuple[tuple[int, int, int], tuple[int, int, int]],
+    right: tuple[tuple[int, int, int], tuple[int, int, int]],
+) -> bool:
+    return max(left[0], right[0]) <= min(left[1], right[1])
+
+
 def write_markdown(
     path: Path,
     rows: list[dict[str, object]],
@@ -728,7 +836,7 @@ def write_markdown(
         "",
         f"- annotated occurrence rows: {len(rows):,}",
         "- materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, available `boundary_*` endpoint strata, and cross-skip pair strata.",
-        "- mapping-dependent strata use locked CSVs under `data/study/mappings/`; only rows matching populated entries are flagged.",
+        "- mapping-dependent and quotation strata use locked CSVs under `data/study/mappings/`; only rows matching populated entries are flagged.",
         "- meaningful skip strata use the locked constants file and standard Hebrew/Greek gematria only as review flags.",
         "- bigram-surprise strata compare the hidden term's adjacent letter pairs to the matched corpus text.",
         "- letter-frequency anomaly strata compare the hidden term's individual letters to the matched corpus text.",
@@ -837,6 +945,27 @@ def write_markdown(
             lines.append(
                 f"| ... | ... | ... | ... | ... | ... | {len(mapping_rows) - args.markdown_row_limit:,} more mapping rows in CSV |"
             )
+    quotation_rows = [
+        row
+        for row in rows
+        if row.get("nt_quotation_anchor") == "yes" or row.get("nt_quotation_span") == "yes"
+    ]
+    if quotation_rows:
+        lines.extend(
+            [
+                "",
+                "## OT-In-NT Quotation Rows",
+                "",
+                "| Rank | Term | Center | Anchor | Span | Source |",
+                "| ---: | --- | --- | --- | --- | --- |",
+            ]
+        )
+        for row in quotation_rows[: args.markdown_row_limit]:
+            lines.append(quotation_markdown_row(row))
+        if len(quotation_rows) > args.markdown_row_limit:
+            lines.append(
+                f"| ... | ... | ... | ... | ... | {len(quotation_rows) - args.markdown_row_limit:,} more quotation rows in CSV |"
+            )
     meaningful_rows = [
         row
         for row in rows
@@ -906,7 +1035,7 @@ def write_markdown(
             "- `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.",
             "- `cross_skip_pair_at_letter` means two different terms at different skips share at least one retained letter-path position.",
             "- `cross_skip_pair_within_N_letters` means two different terms at different skips have endpoints within the configured letter distance.",
-            "- `canonical_first_in_thematic_chapter`, `author_in_own_book`, and `protagonist_in_own_narrative` are locked-mapping annotations only; empty or nonmatching mapping entries do not flag rows.",
+            "- `canonical_first_in_thematic_chapter`, `author_in_own_book`, `protagonist_in_own_narrative`, `nt_quotation_anchor`, and `nt_quotation_span` are locked-mapping annotations only; empty or nonmatching mapping entries do not flag rows.",
             "- Meaningful-skip and gematria-skip strata are metadata flags; they do not change the search space or promote claim status.",
             "- Bigram-surprise strata are corpus-local review aids, not claim promotion rules; missing adjacent surface bigrams count as rare.",
             "- Letter-frequency anomaly strata are corpus-local review aids; missing letters count as rare.",
@@ -1004,6 +1133,17 @@ def mapping_markdown_row(row: dict[str, object]) -> str:
     )
 
 
+def quotation_markdown_row(row: dict[str, object]) -> str:
+    term = display_term(str(row.get("normalized_term", "")), english=str(row.get("concept", "")))
+    center = f"{row.get('center_ref', '')} {display_term(str(row.get('center_word', '')))}"
+    return (
+        f"| {row.get('occurrence_rank', '')} | {term} | {md_cell(center)} | "
+        f"{md_cell(row.get('nt_quotation_anchor_evidence', ''))} | "
+        f"{md_cell(row.get('nt_quotation_span_evidence', ''))} | "
+        f"`{row.get('source_family', '')}` |"
+    )
+
+
 def bigram_markdown_row(row: dict[str, object]) -> str:
     term = display_term(str(row.get("normalized_term", "")), english=str(row.get("concept", "")))
     center = f"{row.get('center_ref', '')} {display_term(str(row.get('center_word', '')))}"
@@ -1065,6 +1205,7 @@ def write_manifest(
             "thematic_chapters": str(args.thematic_chapters),
             "author_book_mapping": str(args.author_book_mapping),
             "protagonist_narrative_mapping": str(args.protagonist_narrative_mapping),
+            "ot_in_nt_quotations": str(args.ot_in_nt_quotations),
         },
         "outputs": {
             "out": str(args.out),
@@ -1228,6 +1369,7 @@ def reproduce_command(args: argparse.Namespace) -> str:
         f"--thematic-chapters {args.thematic_chapters} "
         f"--author-book-mapping {args.author_book_mapping} "
         f"--protagonist-narrative-mapping {args.protagonist_narrative_mapping} "
+        f"--ot-in-nt-quotations {args.ot_in_nt_quotations} "
         f"--out {args.out} "
         f"--summary-out {args.summary_out} "
         f"--markdown-out {args.markdown_out} "

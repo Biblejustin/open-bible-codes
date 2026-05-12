@@ -26,6 +26,7 @@ support. Status labels are engineering status only, not claim status.
 | `canonical_first_in_thematic_chapter` | implemented against locked term-to-chapter mappings | `data/study/mappings/thematic_chapters.csv` |
 | `author_in_own_book` | implemented against locked author-to-book mappings | `data/study/mappings/author_book_mapping.csv` |
 | `protagonist_in_own_narrative` | implemented against locked protagonist-range mappings | `data/study/mappings/protagonist_narrative_mapping.csv` |
+| `nt_quotation_anchor` / `nt_quotation_span` | implemented against locked OT-in-NT quotation mappings | `data/study/mappings/ot_in_nt_quotations.csv` |
 | `skip_equals_meaningful_constant` | implemented against locked constants | `terms/meaningful_constants.csv` |
 | `skip_equals_term_gematria` | implemented for standard Hebrew/Greek values | `scripts/build_match_strata_index.py` |
 | `skip_equals_center_word_gematria` | implemented for standard Hebrew/Greek values | `scripts/build_match_strata_index.py` |
@@ -68,7 +69,6 @@ warnings and capped-row flags.
 
 | Stratum | Data dependency |
 | --- | --- |
-| `nt_quotation_anchor` / `nt_quotation_span` | OT-in-NT quotation catalog with anchors |
 | `lxx_vs_mt_semantic_divergence` | locked MT/LXX divergence catalog |
 | `root_only_match` | locked Hebrew root policy template |
 | full word-token `word_skip_ELS` | token-level word skip definition plus matched controls |

@@ -320,6 +320,50 @@ def test_build_strata_rows_adds_mapping_dependent_flags() -> None:
     assert "protagonist_in_own_narrative" in by_term["moses_h"]["extended_strata"]
 
 
+def test_build_strata_rows_adds_quotation_mapping_flags() -> None:
+    rows = build_strata_rows(
+        [
+            {
+                "occurrence_rank": "1",
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT",
+                "present_corpora": "MT",
+                "term_id": "servant",
+                "concept": "Servant",
+                "category": "quotation",
+                "normalized_term": "servant",
+                "start_ref": "Isa 53:4",
+                "center_ref": "Isa 53:5",
+                "end_ref": "Isa 53:6",
+                "center_word": "wounded",
+                "center_normalized_word": "wounded",
+                "skip": "7",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+            }
+        ],
+        quotation_mappings=[
+            {
+                "mapping_id": "isa53_acts8",
+                "ot_corpus": "MT",
+                "ot_ref_start": "Isa 53:4",
+                "ot_ref_end": "Isa 53:6",
+                "nt_ref_start": "Acts 8:32",
+                "nt_ref_end": "Acts 8:35",
+                "anchor_normalized": "wounded",
+            }
+        ],
+    )
+
+    row = rows[0]
+    assert row["nt_quotation_anchor"] == "yes"
+    assert row["nt_quotation_span"] == "yes"
+    assert row["nt_quotation_anchor_mappings"] == "isa53_acts8"
+    assert "nt_quotation_anchor" in row["extended_strata"]
+    assert "nt_quotation_span" in row["extended_strata"]
+
+
 def test_build_strata_rows_adds_meaningful_skip_and_gematria_flags() -> None:
     rows = build_strata_rows(
         [

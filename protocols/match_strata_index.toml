@@ -19,6 +19,7 @@ inputs = [
   "data/study/mappings/thematic_chapters.csv",
   "data/study/mappings/author_book_mapping.csv",
   "data/study/mappings/protagonist_narrative_mapping.csv",
+  "data/study/mappings/ot_in_nt_quotations.csv",
   "reports/centered_occurrence_index/centered_occurrences.csv",
   "configs/example_oshb_wlc.toml",
   "configs/example_uxlc.toml",
