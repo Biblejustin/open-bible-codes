@@ -312,8 +312,11 @@ def write_markdown(
     delta_rows: list[dict[str, object]],
     args: argparse.Namespace,
 ) -> None:
-    manifest = read_manifest(args.counts_dir / "broad_search.manifest.json")
+    manifest_path = find_run_manifest(args.counts_dir)
+    manifest = read_manifest(manifest_path)
     max_skip = manifest.get("max_skip", 100)
+    term_sets = manifest.get("term_sets", [])
+    term_set_count = len(term_sets) if term_sets else len({str(row["term_set"]) for row in summary_rows})
     main_read = getattr(args, "main_read", None) or [
         f"Widening to skip {max_skip} mostly scales up already-dense short terms.",
         "Length 4+ leaders still come from short Greek or Hebrew forms and acronyms.",
@@ -329,9 +332,9 @@ def write_markdown(
         "",
         f"- Skip range: `{manifest.get('min_skip', 2)}..{manifest.get('max_skip', 100)}`",
         f"- Direction: `{manifest.get('direction', 'both')}`",
-        f"- Term sets: {len(manifest.get('term_sets', []))}",
+        f"- Term sets: {term_set_count}",
         f"- Rows: {len(read_count_rows(args.counts_dir))}",
-        f"- Manifest: `{args.counts_dir / 'broad_search.manifest.json'}`",
+        f"- Manifest: `{manifest_path}`",
         "",
         "## Main Read",
         "",
@@ -538,6 +541,18 @@ def read_manifest(path: Path) -> dict[str, object]:
     if not path.exists():
         return {}
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def find_run_manifest(counts_dir: Path) -> Path:
+    preferred = counts_dir / "broad_search.manifest.json"
+    if preferred.exists():
+        return preferred
+    candidates = [
+        path
+        for path in counts_dir.glob("*.manifest.json")
+        if not path.name.endswith("_counts.manifest.json") and path.name != "summary.manifest.json"
+    ]
+    return sorted(candidates)[0] if candidates else preferred
 
 
 if __name__ == "__main__":
