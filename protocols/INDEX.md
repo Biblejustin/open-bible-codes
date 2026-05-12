@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 85
+Protocols indexed: 86
 
 ## Analysis
 
@@ -31,6 +31,7 @@ Protocols indexed: 85
 | --- | --- | ---: | --- | --- | --- |
 | churchages_statistics_audit | Compare published ChurchAges observed KJV ELS counts against letter-frequency expected ... | 1 |  | reports/churchages_statistics | `churchages_statistics_audit.toml` |
 | greek_expanded_surface_letter_paths | Letter-path audit sheet for tightened Greek exact-center surface rows. | 1 |  | reports/greek_expanded_surface_letter_paths | `greek_expanded_surface_letter_paths.toml` |
+| hebrew_albam_audit | Opt-in Hebrew ALBAM transformed-text ELS audit for declared Jeremiah cryptogram terms. | 9 | terms/hebrew_atbash_audit_terms.csv | reports/hebrew_albam_audit | `hebrew_albam_audit.toml` |
 | hebrew_atbash_audit | Opt-in Hebrew Atbash transformed-text ELS audit for declared Jeremiah cryptogram terms. | 9 | terms/hebrew_atbash_audit_terms.csv | reports/hebrew_atbash_audit | `hebrew_atbash_audit.toml` |
 | step_tahot_policy_hits | Audit STEP_TAHOT-only exact-hit rows against TAHOT source-type policy. | 2 |  | reports/step_tahot_policy_hits, reports/step_tahot_screening_version_presence | `step_tahot_policy_hits.toml` |
 | step_tahot_source_audit | Download STEP TAHOT and compare it against current Hebrew MT-family corpora. | 2 |  | reports/mt_version_comparison_step_tahot | `step_tahot_source_audit.toml` |

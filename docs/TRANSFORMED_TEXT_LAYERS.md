@@ -16,18 +16,23 @@ Both transforms preserve corpus offsets and original surface-word metadata.
 The hidden path is found in the transformed letter stream, then reported
 against the original corpus references.
 
-## Current Audit
+## Current Audits
 
-The committed Atbash audit uses declared Jeremiah cryptogram terms:
+The committed Atbash and ALBAM audits use the same declared Jeremiah
+cryptogram term set. This allows the transform layer to vary while the target
+terms and controls stay fixed.
 
 ```bash
 python3 -m scripts.run_protocol protocols/hebrew_atbash_audit.toml --resume
+python3 -m scripts.run_protocol protocols/hebrew_albam_audit.toml --resume
 ```
 
 Outputs:
 
 - `reports/hebrew_atbash_audit/summary.csv`
 - `docs/HEBREW_ATBASH_AUDIT.md`
+- `reports/hebrew_albam_audit/summary.csv`
+- `docs/HEBREW_ALBAM_AUDIT.md`
 
 ## Custom ALBAM Search
 
@@ -54,5 +59,5 @@ python3 -m scripts.search_transformed_els \
 - Non-Bible controls must be transformed with the same rule before any
   Bible-vs-control comparison.
 - Atbash has explicit historical precedent in Jeremiah cryptogram discussion;
-  ALBAM is included as a deterministic Jewish cipher layer, but it still needs
-  a declared protocol before result language.
+  ALBAM is included as a deterministic Jewish cipher layer. Both remain
+  opt-in widened search families.

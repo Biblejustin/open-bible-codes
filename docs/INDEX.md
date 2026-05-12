@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 256
+Documents indexed: 257
 
 ## Controls
 
@@ -226,6 +226,7 @@ Documents indexed: 256
 | Greek Surface Prospective Queue | `GREEK_SURFACE_PROSPECTIVE_QUEUE.md` |
 | Greek Surface Prospective Triage | `GREEK_SURFACE_PROSPECTIVE_TRIAGE.md` |
 | Greek Surface Second Cohort Readiness | `GREEK_SURFACE_SECOND_COHORT_READINESS.md` |
+| Hebrew ALBAM Transformed-Text Audit | `HEBREW_ALBAM_AUDIT.md` |
 | Hebrew Atbash Transformed-Text Audit | `HEBREW_ATBASH_AUDIT.md` |
 | Hebrew Claim Terms | `HEBREW_CLAIM_TERMS.md` |
 | Hebrew MT Source Candidates | `HEBREW_MT_SOURCE_CANDIDATES.md` |
