@@ -48,36 +48,8 @@ outputs = [
 ]
 
 [[steps]]
-id = "summary"
-description = "Summarize the broad English relaxed all-codes collection."
-argv = [
-  "-m",
-  "scripts.summarize_surface_all_codes",
-  "--hits",
-  "reports/english_screening_all_codes/surface_all_codes.csv",
-  "--summary",
-  "reports/english_screening_all_codes/surface_all_codes_summary.csv",
-  "--title",
-  "English KJV Screening All-Codes Collection",
-  "--markdown-out",
-  "docs/ENGLISH_SCREENING_ALL_CODES_COLLECTION.md",
-  "--manifest-out",
-  "reports/english_screening_all_codes/summary.manifest.json",
-]
-inputs = [
-  "scripts/summarize_surface_all_codes.py",
-  "els/term_display.py",
-  "reports/english_screening_all_codes/surface_all_codes.csv",
-  "reports/english_screening_all_codes/surface_all_codes_summary.csv",
-]
-outputs = [
-  "docs/ENGLISH_SCREENING_ALL_CODES_COLLECTION.md",
-  "reports/english_screening_all_codes/summary.manifest.json",
-]
-
-[[steps]]
 id = "report_db"
-description = "Refresh DuckDB mirror before triage so large hit scans use the current DB table."
+description = "Refresh DuckDB mirror before summary and triage so large hit scans use the current DB table."
 argv = [
   "-m",
   "scripts.build_report_db",
@@ -93,6 +65,42 @@ inputs = [
 ]
 outputs = [
   "reports/db/open_bible_codes.manifest.json",
+]
+
+[[steps]]
+id = "summary"
+description = "Summarize the broad English relaxed all-codes collection."
+argv = [
+  "-m",
+  "scripts.summarize_surface_all_codes",
+  "--hits",
+  "reports/english_screening_all_codes/surface_all_codes.csv",
+  "--summary",
+  "reports/english_screening_all_codes/surface_all_codes_summary.csv",
+  "--db",
+  "reports/db/open_bible_codes.duckdb",
+  "--hits-table",
+  "english_screening_surface_all_codes",
+  "--summary-table",
+  "english_screening_surface_all_codes_summary",
+  "--title",
+  "English KJV Screening All-Codes Collection",
+  "--markdown-out",
+  "docs/ENGLISH_SCREENING_ALL_CODES_COLLECTION.md",
+  "--manifest-out",
+  "reports/english_screening_all_codes/summary.manifest.json",
+]
+inputs = [
+  "scripts/summarize_surface_all_codes.py",
+  "els/report_db.py",
+  "els/term_display.py",
+  "reports/english_screening_all_codes/surface_all_codes.csv",
+  "reports/english_screening_all_codes/surface_all_codes_summary.csv",
+  "reports/db/open_bible_codes.manifest.json",
+]
+outputs = [
+  "docs/ENGLISH_SCREENING_ALL_CODES_COLLECTION.md",
+  "reports/english_screening_all_codes/summary.manifest.json",
 ]
 
 [[steps]]

@@ -13,8 +13,8 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 
 | Metric | Count |
 | --- | ---: |
-| Terms represented | 726 |
-| Corpus-term summary rows | 3,830 |
+| Terms represented | 727 |
+| Corpus-term summary rows | 3,835 |
 | Hidden-path rows retained | 3,680,528 |
 | Total hits from summary | 3,680,528 |
 | Any surface-context hits | 1,828,415 |

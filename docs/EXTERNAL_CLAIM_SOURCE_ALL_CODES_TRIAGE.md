@@ -227,7 +227,7 @@ It is a triage aid, not a claim-grade filter.
 | 13 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -38 | 115 | Judg 2:9 | `מצפונ` (mtspwn) | not_run |
 | 14 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 39 | 118 | 1Kgs 2:42 | `ויאמר` (wymr) | not_run |
 | 15 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -39 | 118 | Isa 48:21 | `בחרבות` (bchrbwt) | not_run |
-| 16 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 39 | 118 | Josh 11:13 | `יהושע` (yhwsh; English: Joshua) | not_run |
+| 16 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 39 | 118 | Josh 11:13 | `יהושע` (Yehoshua; English: Joshua) | not_run |
 | 17 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 42 | 127 | 1Chr 16:14 | `משפטיו` (mshptyw) | not_run |
 | 18 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -42 | 127 | 1Kgs 15:30 | `אתישראל` (tyshrl) | not_run |
 | 19 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -45 | 136 | 2Kgs 9:27 | `מגדו` (mgdw) | not_run |

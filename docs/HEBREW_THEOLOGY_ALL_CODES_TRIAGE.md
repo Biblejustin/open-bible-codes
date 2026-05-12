@@ -81,7 +81,7 @@ It is a triage aid, not a claim-grade filter.
 | 17 | all_source | `htp_glory_h` `כבוד` (kbwd; English: Glory) | Glory | -18 | 55 | Lev 13:57 | `ואמתראה` (wmtrh) | not_unusual |
 | 18 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | 20 | 61 | 1Chr 7:29 | `ישראל` (Yisrael; English: Israel) | not_unusual |
 | 19 | all_source | `htp_love_h` `אהבה` (hbh; English: Love) | Love | -20 | 61 | 2Sam 15:34 | `לאבשלומ` (lbshlwm) | not_unusual |
-| 20 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | 22 | 67 | Num 15:32 | `בניישראל` (bnyyshrl) | not_unusual |
+| 20 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | 22 | 67 | Num 15:32 | `בניישראל` (bnyyshrl; English: Children Israel) | not_unusual |
 
 ### center_verse_exact
 
