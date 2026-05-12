@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 253
+Documents indexed: 254
 
 ## Controls
 
@@ -267,6 +267,7 @@ Documents indexed: 253
 | Table Of Nations Study | `TABLE_OF_NATIONS_STUDY.md` |
 | Theological Terms Study | `THEOLOGICAL_TERMS_STUDY.md` |
 | TheWordNotes ELS Source Audit | `THEWORDNOTES_ELS_AUDIT.md` |
+| Transformed Text Layers | `TRANSFORMED_TEXT_LAYERS.md` |
 | Wide Focus Exact-Hit Presence | `WIDE_FOCUS_EXACT_PRESENCE.md` |
 | Broad Search Summary | `WIDE_FOCUS_SEARCH.md` |
 | Windows CPU Broad 2..500 Surface Follow-Up | `WINDOWS_CPU_BROAD_2_500_SURFACE_FOLLOWUP.md` |
