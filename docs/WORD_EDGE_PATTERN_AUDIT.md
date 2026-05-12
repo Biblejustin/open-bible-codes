@@ -83,7 +83,8 @@ review surface and needs matched controls before claim language.
 
 - Acrostic means first letters of normalized words.
 - Telestic means last letters of normalized words.
+- `word_skip_ELS` means full normalized surface-word tokens, not first/last letters.
 - Word skip is the interval between consumed surface words. Consecutive-word rows have word skip 1.
-- Backward means the word-edge sequence reads the target term in reverse.
+- Backward means the consumed word-edge or word-token sequence reads the target term in reverse.
 - `Capped=yes` means `hits` may be a floor because at least one direction reached its per-term limit.
 
