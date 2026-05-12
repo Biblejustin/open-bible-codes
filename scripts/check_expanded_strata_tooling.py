@@ -34,6 +34,11 @@ ENTRIES = (
     ToolingEntry("cohort cluster density", Path("scripts/build_cohort_cluster_density.py"), "cohort-cluster-density"),
 )
 
+REQUIRED_SNIPPETS = (
+    ("matrix doc row width flag", "doc", "--row-width 50"),
+    ("matrix Makefile row width flag", "makefile", "--row-width \"$(MATRIX_CLUSTER_WIDTH)\""),
+)
+
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
@@ -88,6 +93,13 @@ def check_tooling(doc: Path, makefile: Path) -> dict[str, object]:
             missing.append(f"{doc}:{target_text}")
         if not make_mentions_target:
             missing.append(f"{makefile}:{target_def}")
+
+    for name, source, snippet in REQUIRED_SNIPPETS:
+        path = doc if source == "doc" else makefile
+        haystack = doc_text if source == "doc" else make_text
+        checked.append({"name": name, "path": str(path), "required_snippet": snippet, "snippet_present": snippet in haystack})
+        if snippet not in haystack:
+            missing.append(f"{path}:{snippet}")
 
     return {"ok": not missing, "missing": missing, "checked": checked}
 

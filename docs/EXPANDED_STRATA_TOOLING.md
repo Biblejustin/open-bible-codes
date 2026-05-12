@@ -210,7 +210,7 @@ Primary tool path: `scripts/build_matrix_cluster_candidates.py`
 ```bash
 python3 -m scripts.build_matrix_cluster_candidates \
   --hits reports/centered_occurrence_index/centered_occurrences.csv \
-  --width 50 \
+  --row-width 50 \
   --max-cell-distance 1 \
   --out reports/matrix_clusters/candidates.csv \
   --summary-out reports/matrix_clusters/summary.csv \

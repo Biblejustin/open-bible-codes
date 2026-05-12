@@ -82,7 +82,7 @@ word-edge-pattern-audit:
 	python3 -m scripts.run_protocol protocols/word_edge_pattern_audit.toml --resume
 
 matrix-cluster-candidates:
-	python3 -m scripts.build_matrix_cluster_candidates --hits "$(MATRIX_CLUSTER_HITS)" --width "$(MATRIX_CLUSTER_WIDTH)" --max-cell-distance "$(MATRIX_CLUSTER_DISTANCE)" --out reports/matrix_clusters/candidates.csv --summary-out reports/matrix_clusters/summary.csv --manifest-out reports/matrix_clusters/manifest.json
+	python3 -m scripts.build_matrix_cluster_candidates --hits "$(MATRIX_CLUSTER_HITS)" --row-width "$(MATRIX_CLUSTER_WIDTH)" --max-cell-distance "$(MATRIX_CLUSTER_DISTANCE)" --out reports/matrix_clusters/candidates.csv --summary-out reports/matrix_clusters/summary.csv --manifest-out reports/matrix_clusters/manifest.json
 
 cipher-layered-pairs:
 	python3 -m scripts.build_cipher_layered_pairs --plain-hits "$(CIPHER_LAYERED_PLAIN_HITS)" --cipher-hits "$(CIPHER_LAYERED_CIPHER_HITS)" --out reports/cipher_layered_pairs/pairs.csv --summary-out reports/cipher_layered_pairs/summary.csv --manifest-out reports/cipher_layered_pairs/manifest.json
