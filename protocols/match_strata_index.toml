@@ -1,0 +1,22 @@
+name = "match_strata_index"
+description = "Annotate centered occurrences with extended post-search strata that do not widen search by themselves."
+manifest_out = "reports/match_strata_index/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "match_strata_index"
+description = "Build direction and canonical-first strata over the centered occurrence index."
+argv = ["-m", "scripts.build_match_strata_index"]
+inputs = [
+  "scripts/build_match_strata_index.py",
+  "els/match_strata.py",
+  "els/term_display.py",
+  "reports/centered_occurrence_index/centered_occurrences.csv",
+]
+outputs = [
+  "reports/match_strata_index/occurrence_strata.csv",
+  "reports/match_strata_index/strata_summary.csv",
+  "docs/MATCH_STRATA_INDEX.md",
+  "reports/match_strata_index/manifest.json",
+]

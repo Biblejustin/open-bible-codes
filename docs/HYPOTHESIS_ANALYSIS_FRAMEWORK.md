@@ -49,6 +49,137 @@ they happen, then attach frequency/control reads as interpretation context.
 Counts can warn that a pattern is common, but they should not delete a real
 occurrence from the review list.
 
+## Extended Match Strata
+
+The existing strata stay in place. The following strata widen what the toolkit
+can record, but none should enter routine claim language without a predeclared
+rule, a matched control family, and a registered review gate.
+
+### Tier 1: External-Claim Audit Strata
+
+These strata answer claim families already cataloged in external-source audits
+such as Bible Code Digest, Bible-codes.org, Cosmic Codes, Isaiah 53 claims, and
+WRR-style geometry.
+
+- `matrix_cluster_at_width_W`: two or more declared cohort terms hit within one
+  matrix cell or its 8-neighborhood at wrap width `W`.
+- `matrix_orthogonal`: hidden terms intersect on the same matrix row or column.
+- `matrix_diagonal`: hidden terms intersect on the same matrix diagonal.
+- `matrix_adjacent_row`: hidden terms fall within a declared row-distance.
+- `atbash_path`: hidden term found after deterministic Hebrew atbash
+  substitution.
+- `atbash_centered_self`: atbash-substituted hidden term centers on its
+  pre-substitution surface word, or the reverse.
+- `albam_path`: hidden term found after deterministic albam substitution.
+- `cipher_layered_pair`: term found in plain text while its cipher form appears
+  as a hidden path at the same anchor.
+- `cross_skip_pair_at_word`: two terms at different skips share the same center
+  word.
+- `cross_skip_pair_at_letter`: two terms at different skips share a letter
+  position.
+- `cross_skip_pair_within_N_letters`: two terms at different skips have
+  endpoints within a declared letter distance.
+- `boundary_start_verse`, `boundary_start_chapter`, `boundary_start_book`:
+  hidden path starts at the beginning of a verse, chapter, or book.
+- `boundary_end_verse`, `boundary_end_chapter`, `boundary_end_book`: hidden path
+  ends at the end of a verse, chapter, or book.
+- `boundary_both_endpoints`: both endpoints land on the same declared boundary
+  class.
+
+Matrix strata require the exact row-width or cylinder rule to be locked before
+the run. Cipher strata require the same substitution pass on Bible and control
+corpora. Boundary strata require controls with comparable structural breaks:
+verse/chapter/book for Bible texts and paragraph/section/book breaks for
+non-Bible corpora.
+
+### Tier 2: Interpretive Anchoring Strata
+
+- `canonical_first_occurrence`: first hidden occurrence of the term in
+  canonical order within the declared search family.
+- `canonical_first_in_thematic_chapter`: first occurrence lands in a
+  predeclared thematically loaded chapter for the term.
+- `author_in_own_book`: hidden author name centers in a book traditionally
+  attributed to that author.
+- `protagonist_in_own_narrative`: hidden protagonist name centers in the
+  declared narrative arc for that protagonist.
+- `nt_quotation_anchor`: hidden term centers on an OT word modified, expanded,
+  or reused in a declared NT quotation.
+- `nt_quotation_span`: hidden term span overlaps the OT verse(s) cited by the
+  NT.
+- `forward_only`: term appears forward in the declared corpus/search family but
+  not backward.
+- `backward_only`: term appears backward but not forward.
+- `bidirectional_present`: term appears in both directions.
+- `direction_imbalance_score`: continuous forward/backward ratio for downstream
+  filtering.
+
+Thematic chapters, author books, protagonist ranges, and OT-in-NT quotation
+anchors must be declared in data files before any density or promotion report is
+computed.
+
+### Tier 3: Methodological Strata
+
+- `low_bigram_surprise`: hidden term uses only common host-language bigrams.
+- `high_bigram_surprise`: hidden term contains at least one rare host-language
+  bigram under a locked threshold.
+- `skip_equals_meaningful_constant`: skip matches a locked constant such as 7,
+  12, 22, 26, 40, 50, 70, 144, or 666.
+- `skip_equals_term_gematria`: skip equals the hidden term's gematria under a
+  declared scheme.
+- `skip_equals_center_word_gematria`: skip equals the center surface word's
+  gematria under a declared scheme.
+- `cohort_cluster_density_window_N`: distinct hidden terms from a declared
+  cohort center inside a sliding window of `N` words.
+- `cohort_full_house`: every term in a declared cohort has at least one centered
+  hit inside the window.
+
+### Tier 4: Declared Future Variants
+
+- `word_skip_ELS`: every `K`th word rather than every `K`th letter.
+- `acrostic_pattern`: term formed from the first letter of consecutive surface
+  words.
+- `telestic_pattern`: term formed from the last letter of consecutive surface
+  words.
+- `lxx_vs_mt_semantic_divergence`: ELS locus tracks either MT consonants or LXX
+  semantics where the two diverge.
+- `root_only_match`: hidden Hebrew root accepted as a centered match for a
+  surface inflection of that root.
+- `term_absence_at_thematic_chapter`: relevant term absent at all declared skips
+  in a chapter where it would be expected.
+- `chapter_position_bias`: hidden patterns concentrate in chapter-initial or
+  chapter-final verses more than controls.
+- `letter_frequency_anomaly`: hidden term uses individually rare host-language
+  letters.
+
+## Extended-Strata Implementation Order
+
+1. `boundary_*`: offset-based annotation on existing hit rows.
+2. `forward_only`, `backward_only`, and `bidirectional_present`: metadata over
+   existing hits.
+3. `canonical_first_occurrence`: post-processing pass over indexed hits.
+4. `author_in_own_book`: add an author-to-book mapping and reuse centered
+   strata.
+5. `cross_skip_pair_at_word`: promote pair compactness into typed hit metadata.
+6. `matrix_cluster_at_width_W`: implement locked geometry for visual claims.
+7. `atbash_path`: add deterministic transform layer with matched controls.
+8. `nt_quotation_anchor`: add OT-in-NT quotation anchor data.
+9. Bigram, meaningful-constant, gematria, and cohort-density strata as separate
+   preregistered studies.
+
+## Extended-Strata Data Dependencies
+
+- `terms/thematic_chapters.csv`
+- `terms/author_book_mapping.csv`
+- `terms/protagonist_narrative_mapping.csv`
+- `data/study/ot_in_nt_quotations.csv`
+- `data/study/bigram_frequencies/{language}_{corpus}.csv`
+- `terms/meaningful_constants.csv`
+- `terms/gematria_schemes.toml`
+- `terms/cohorts/`
+
+Each file must be locked before the corresponding stratum is used for promotion
+or claim-level language.
+
 ## Full-Span Rule
 
 Full-span searches are valid search targets. We cannot decide that a full-span
