@@ -17,6 +17,7 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 - materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, and available `boundary_*` endpoint strata.
 - meaningful skip strata use the locked constants file and standard Hebrew/Greek gematria only as review flags.
 - bigram-surprise strata compare the hidden term's adjacent letter pairs to the matched corpus text.
+- letter-frequency anomaly strata compare the hidden term's individual letters to the matched corpus text.
 - center-position strata flag when the center verse is first/last in its chapter or book.
 - boundary strata are exact only when the source occurrence row retains endpoint offsets for a mapped corpus.
 
@@ -424,5 +425,6 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 - `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.
 - `skip_equals_meaningful_constant` and `skip_equals_term_gematria` are metadata flags; they do not change the search space or promote claim status.
 - Bigram-surprise strata are corpus-local review aids, not claim promotion rules; missing adjacent surface bigrams count as rare.
+- Letter-frequency anomaly strata are corpus-local review aids; missing letters count as rare.
 - Matrix, cipher, broader cross-skip, and cohort-density strata widen the review surface and need separate locked controls before claim language.
 

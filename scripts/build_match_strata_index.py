@@ -17,7 +17,7 @@ from typing import Any
 from els import __version__
 from els.corpus import load_corpus
 from els.gematria import standard_gematria_value
-from els.letter_stats import BigramProfile, BigramSurprise
+from els.letter_stats import BigramProfile, BigramSurprise, LetterFrequencyAnomaly, LetterFrequencyProfile
 from els.match_strata import (
     BoundaryIndex,
     boundary_strata_for_offsets,
@@ -84,6 +84,10 @@ FIELDNAMES = [
     "bigram_surprise_evidence",
     "bigram_min_count",
     "bigram_max_count",
+    "letter_frequency_stratum",
+    "letter_frequency_evidence",
+    "letter_frequency_min_count",
+    "letter_frequency_max_count",
     "forward_direction_count",
     "backward_direction_count",
     "direction_stratum",
@@ -114,12 +118,13 @@ def main(argv: list[str] | None = None) -> int:
     input_rows = read_rows(args.occurrences)
     meaningful_constants = read_meaningful_constants(args.meaningful_constants)
     corpus_configs = corpus_config_map(args.corpus_config)
-    boundary_indexes, bigram_profiles = load_corpus_metadata(corpus_configs)
+    boundary_indexes, bigram_profiles, letter_frequency_profiles = load_corpus_metadata(corpus_configs)
     rows = build_strata_rows(
         input_rows,
         boundary_indexes=boundary_indexes,
         meaningful_constants=meaningful_constants,
         bigram_profiles=bigram_profiles,
+        letter_frequency_profiles=letter_frequency_profiles,
     )
     summary_rows = build_summary_rows(rows)
     write_rows(args.out, FIELDNAMES, rows)
@@ -157,6 +162,7 @@ def build_strata_rows(
     boundary_indexes: dict[str, BoundaryIndex] | None = None,
     meaningful_constants: dict[int, str] | None = None,
     bigram_profiles: dict[str, BigramProfile] | None = None,
+    letter_frequency_profiles: dict[str, LetterFrequencyProfile] | None = None,
 ) -> list[dict[str, object]]:
     direction_counts = direction_counts_by_key(input_rows, key_fields=GROUP_FIELDS)
     direction_by_key = direction_strata_by_key(input_rows, key_fields=GROUP_FIELDS)
@@ -164,6 +170,7 @@ def build_strata_rows(
     boundary_indexes = boundary_indexes or {}
     meaningful_constants = meaningful_constants or {}
     bigram_profiles = bigram_profiles or {}
+    letter_frequency_profiles = letter_frequency_profiles or {}
     cross_skip = cross_skip_annotations(input_rows)
     output = []
     for row in input_rows:
@@ -184,6 +191,7 @@ def build_strata_rows(
         )
         gematria_skips = [value for value in skip_values if term_gematria_value > 0 and value == term_gematria_value]
         bigram_surprise = bigram_surprise_for_row(row, bigram_profiles)
+        letter_frequency = letter_frequency_for_row(row, letter_frequency_profiles)
         strata = [
             row.get("occurrence_type", ""),
             direction_by_key.get(key, ""),
@@ -200,6 +208,8 @@ def build_strata_rows(
             strata.append("skip_equals_term_gematria")
         if bigram_surprise.stratum:
             strata.append(bigram_surprise.stratum)
+        if letter_frequency.stratum:
+            strata.append(letter_frequency.stratum)
         output.append(
             {
                 "occurrence_rank": row.get("occurrence_rank", ""),
@@ -229,6 +239,14 @@ def build_strata_rows(
                 "bigram_surprise_evidence": bigram_surprise.evidence,
                 "bigram_min_count": "" if bigram_surprise.min_count is None else str(bigram_surprise.min_count),
                 "bigram_max_count": "" if bigram_surprise.max_count is None else str(bigram_surprise.max_count),
+                "letter_frequency_stratum": letter_frequency.stratum,
+                "letter_frequency_evidence": letter_frequency.evidence,
+                "letter_frequency_min_count": (
+                    "" if letter_frequency.min_count is None else str(letter_frequency.min_count)
+                ),
+                "letter_frequency_max_count": (
+                    "" if letter_frequency.max_count is None else str(letter_frequency.max_count)
+                ),
                 "forward_direction_count": counts.forward,
                 "backward_direction_count": counts.backward,
                 "direction_stratum": direction_by_key.get(key, ""),
@@ -327,6 +345,16 @@ def bigram_surprise_for_row(row: dict[str, str], profiles: dict[str, BigramProfi
     return profile.classify_term(row.get("normalized_term", ""))
 
 
+def letter_frequency_for_row(
+    row: dict[str, str],
+    profiles: dict[str, LetterFrequencyProfile],
+) -> LetterFrequencyAnomaly:
+    profile = profiles.get(row.get("corpus", ""))
+    if profile is None:
+        return LetterFrequencyProfile.from_text("").classify_term("")
+    return profile.classify_term(row.get("normalized_term", ""))
+
+
 def write_markdown(
     path: Path,
     rows: list[dict[str, object]],
@@ -353,6 +381,7 @@ def write_markdown(
         "- materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, and available `boundary_*` endpoint strata.",
         "- meaningful skip strata use the locked constants file and standard Hebrew/Greek gematria only as review flags.",
         "- bigram-surprise strata compare the hidden term's adjacent letter pairs to the matched corpus text.",
+        "- letter-frequency anomaly strata compare the hidden term's individual letters to the matched corpus text.",
         "- center-position strata flag when the center verse is first/last in its chapter or book.",
         "- boundary strata are exact only when the source occurrence row retains endpoint offsets for a mapped corpus.",
         "",
@@ -467,6 +496,23 @@ def write_markdown(
             lines.append(
                 f"| ... | ... | ... | ... | ... | ... | {len(bigram_rows) - args.markdown_row_limit:,} more bigram rows in CSV |"
             )
+    letter_rows = [row for row in rows if row.get("letter_frequency_stratum")]
+    if letter_rows:
+        lines.extend(
+            [
+                "",
+                "## Letter Frequency Rows",
+                "",
+                "| Rank | Term | Center | Stratum | Evidence | Min/max counts | Source |",
+                "| ---: | --- | --- | --- | --- | --- | --- |",
+            ]
+        )
+        for row in letter_rows[: args.markdown_row_limit]:
+            lines.append(letter_frequency_markdown_row(row))
+        if len(letter_rows) > args.markdown_row_limit:
+            lines.append(
+                f"| ... | ... | ... | ... | ... | ... | {len(letter_rows) - args.markdown_row_limit:,} more letter-frequency rows in CSV |"
+            )
     lines.extend(
         [
             "",
@@ -479,6 +525,7 @@ def write_markdown(
             "- `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.",
             "- `skip_equals_meaningful_constant` and `skip_equals_term_gematria` are metadata flags; they do not change the search space or promote claim status.",
             "- Bigram-surprise strata are corpus-local review aids, not claim promotion rules; missing adjacent surface bigrams count as rare.",
+            "- Letter-frequency anomaly strata are corpus-local review aids; missing letters count as rare.",
             "- Matrix, cipher, broader cross-skip, and cohort-density strata widen the review surface and need separate locked controls before claim language.",
             "",
         ]
@@ -547,6 +594,18 @@ def bigram_markdown_row(row: dict[str, object]) -> str:
         f"| {row.get('occurrence_rank', '')} | {term} | {md_cell(center)} | "
         f"`{row.get('bigram_surprise_stratum', '')}` | "
         f"{md_cell(row.get('bigram_surprise_evidence', ''))} | "
+        f"{md_cell(counts)} | `{row.get('source_family', '')}` |"
+    )
+
+
+def letter_frequency_markdown_row(row: dict[str, object]) -> str:
+    term = display_term(str(row.get("normalized_term", "")), english=str(row.get("concept", "")))
+    center = f"{row.get('center_ref', '')} {display_term(str(row.get('center_word', '')))}"
+    counts = f"{row.get('letter_frequency_min_count', '')}/{row.get('letter_frequency_max_count', '')}"
+    return (
+        f"| {row.get('occurrence_rank', '')} | {term} | {md_cell(center)} | "
+        f"`{row.get('letter_frequency_stratum', '')}` | "
+        f"{md_cell(row.get('letter_frequency_evidence', ''))} | "
         f"{md_cell(counts)} | `{row.get('source_family', '')}` |"
     )
 
@@ -627,9 +686,12 @@ def corpus_config_map(overrides: list[str]) -> dict[str, str]:
     return output
 
 
-def load_corpus_metadata(configs: dict[str, str]) -> tuple[dict[str, BoundaryIndex], dict[str, BigramProfile]]:
+def load_corpus_metadata(
+    configs: dict[str, str],
+) -> tuple[dict[str, BoundaryIndex], dict[str, BigramProfile], dict[str, LetterFrequencyProfile]]:
     boundary_indexes = {}
     bigram_profiles = {}
+    letter_frequency_profiles = {}
     for label, path in configs.items():
         try:
             corpus = load_corpus(path)
@@ -637,7 +699,8 @@ def load_corpus_metadata(configs: dict[str, str]) -> tuple[dict[str, BoundaryInd
             continue
         boundary_indexes[label] = build_boundary_index(corpus)
         bigram_profiles[label] = BigramProfile.from_text(corpus.text)
-    return boundary_indexes, bigram_profiles
+        letter_frequency_profiles[label] = LetterFrequencyProfile.from_text(corpus.text)
+    return boundary_indexes, bigram_profiles, letter_frequency_profiles
 
 
 def boundary_annotations(

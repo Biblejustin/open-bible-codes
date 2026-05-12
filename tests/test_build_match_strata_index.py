@@ -1,5 +1,5 @@
 from els.match_strata import build_boundary_index
-from els.letter_stats import BigramProfile
+from els.letter_stats import BigramProfile, LetterFrequencyProfile
 from scripts.build_match_strata_index import (
     build_strata_rows,
     build_summary_rows,
@@ -212,6 +212,33 @@ def test_build_strata_rows_adds_bigram_surprise_flags() -> None:
     assert row["bigram_surprise_stratum"] == "high_bigram_surprise"
     assert row["bigram_surprise_evidence"] == "cd:1"
     assert "high_bigram_surprise" in row["extended_strata"]
+
+
+def test_build_strata_rows_adds_letter_frequency_flags() -> None:
+    rows = build_strata_rows(
+        [
+            {
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT",
+                "present_corpora": "MT",
+                "term_id": "rare",
+                "normalized_term": "af",
+                "center_ref": "Gen 1:1",
+                "center_word": "center",
+                "center_normalized_word": "center",
+                "skip": "5",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+            }
+        ],
+        letter_frequency_profiles={"MT": LetterFrequencyProfile.from_text("aaaaaaaaaabcdef")},
+    )
+
+    row = rows[0]
+    assert row["letter_frequency_stratum"] == "letter_frequency_anomaly"
+    assert row["letter_frequency_evidence"] == "f:1"
+    assert "letter_frequency_anomaly" in row["extended_strata"]
 
 
 def test_read_meaningful_constants_ignores_bad_values(tmp_path) -> None:

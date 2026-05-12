@@ -54,3 +54,47 @@ class BigramSurprise:
     evidence: str
     min_count: int | None
     max_count: int | None
+
+
+@dataclass(frozen=True)
+class LetterFrequencyProfile:
+    counts: Counter[str]
+    rare_threshold: int
+
+    @classmethod
+    def from_text(cls, text: str) -> "LetterFrequencyProfile":
+        counts = Counter(text)
+        if not counts:
+            return cls(counts=counts, rare_threshold=0)
+        values = sorted(counts.values())
+        rare_threshold = values[min(len(values) - 1, max(int(len(values) * 0.10) - 1, 0))]
+        return cls(counts=counts, rare_threshold=rare_threshold)
+
+    def classify_term(self, term: str) -> "LetterFrequencyAnomaly":
+        letters = tuple(term)
+        if not letters or not self.counts:
+            return LetterFrequencyAnomaly(stratum="", evidence="", min_count=None, max_count=None)
+
+        counts = tuple(self.counts.get(letter, 0) for letter in letters)
+        rare = tuple(letter for letter, count in zip(letters, counts, strict=True) if count <= self.rare_threshold)
+        if rare:
+            stratum = "letter_frequency_anomaly"
+            evidence = ";".join(f"{letter}:{self.counts.get(letter, 0)}" for letter in rare)
+        else:
+            stratum = ""
+            evidence = ""
+
+        return LetterFrequencyAnomaly(
+            stratum=stratum,
+            evidence=evidence,
+            min_count=min(counts),
+            max_count=max(counts),
+        )
+
+
+@dataclass(frozen=True)
+class LetterFrequencyAnomaly:
+    stratum: str
+    evidence: str
+    min_count: int | None
+    max_count: int | None
