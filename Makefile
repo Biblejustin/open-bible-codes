@@ -16,7 +16,7 @@ MATRIX_CLUSTER_DISTANCE ?= 1
 CIPHER_LAYERED_PLAIN_HITS ?= reports/plain_hits.csv
 CIPHER_LAYERED_CIPHER_HITS ?= reports/hebrew_atbash_audit/MT_WLC_hits.csv
 
-.PHONY: demo indexes test lint public-release-check study-mapping-schemas real-report report-db dynamic-full-span-hit-findings notable-passage-gaps match-strata-index hebrew-atbash-audit hebrew-albam-audit word-edge-pattern-audit matrix-cluster-candidates cipher-layered-pairs crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-broad-screening-findings crd-center-word-findings crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-self-surface-queue crd-self-surface-center-word crd-self-surface-center-word-density crd-self-surface-center-word-queue crd-self-surface-center-word-packet crd-self-surface-center-word-presence crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density crd-concept-surface-center-word-queue crd-concept-surface-center-word-packet crd-concept-surface-center-word-presence
+.PHONY: demo indexes test lint public-release-check study-mapping-schemas expanded-strata-tooling-check real-report report-db dynamic-full-span-hit-findings notable-passage-gaps match-strata-index hebrew-atbash-audit hebrew-albam-audit word-edge-pattern-audit matrix-cluster-candidates cipher-layered-pairs crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-broad-screening-findings crd-center-word-findings crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-self-surface-queue crd-self-surface-center-word crd-self-surface-center-word-density crd-self-surface-center-word-queue crd-self-surface-center-word-packet crd-self-surface-center-word-presence crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density crd-concept-surface-center-word-queue crd-concept-surface-center-word-packet crd-concept-surface-center-word-presence
 
 demo:
 	python3 -m els.demo
@@ -36,6 +36,9 @@ public-release-check:
 
 study-mapping-schemas:
 	python3 -m scripts.validate_study_mapping_schemas
+
+expanded-strata-tooling-check:
+	python3 -m scripts.check_expanded_strata_tooling
 
 real-report:
 	python3 -m scripts.run_protocol protocols/real_report_run.toml --resume

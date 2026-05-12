@@ -6,6 +6,12 @@ or annotates the review surface; it does not promote any row to claim language
 without a locked protocol, matched controls, and correction for the tested
 family.
 
+Check that this guide and its Makefile shortcuts still point at live tools with:
+
+```bash
+make expanded-strata-tooling-check
+```
+
 ## Post-Search Metadata
 
 These strata annotate existing centered occurrence rows. They do not perform a
@@ -71,6 +77,8 @@ language-matched controls before any Bible-vs-control language is used.
 Cipher layered pairs compare ordinary ELS rows and transformed-layer ELS rows
 at the same declared anchor.
 
+Primary tool path: `scripts/build_cipher_layered_pairs.py`
+
 ```bash
 python3 -m scripts.build_cipher_layered_pairs \
   --plain-hits reports/plain_hits.csv \
@@ -120,6 +128,8 @@ ELS. Full word-token ELS remains a separate definition problem.
 
 Matrix candidate extraction maps hit paths into a wrapped text matrix and
 records nearest-cell relations between declared cohort terms.
+
+Primary tool path: `scripts/build_matrix_cluster_candidates.py`
 
 ```bash
 python3 -m scripts.build_matrix_cluster_candidates \
