@@ -87,6 +87,34 @@ Source artifacts:
 - `docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_TRIAGE.md`
 - `docs/EXTERNAL_CLAIM_SOURCE_FINDINGS.md`
 
+### Matrix Cluster Control Summary
+
+The matrix-cluster layer is now represented in the report set as a screened
+geometry audit, not as a visual-code claim. It wraps centered-hit positions to
+matrix width 50, counts declared term-pair neighborhoods, and compares Bible
+corpora against language-matched secular controls.
+
+The relation summary currently shows Bible/control corpus ratios above 1 for
+all relation classes, with opportunity-normalized ratios similar to the corpus
+ratios:
+
+| Relation | Bible/control corpus ratio | Bible/control opportunity ratio |
+| --- | ---: | ---: |
+| all | 3.358659 | 3.396015 |
+| diagonal | 5.300000 | 5.358948 |
+| orthogonal | 5.789189 | 5.853579 |
+| same_cell | 2.035714 | 2.058356 |
+
+Top rows include `גוג` (Gog; English: Gog) with `מגוג` (Magog; English:
+Magog) in same-cell and diagonal relations. This is useful review material,
+but still needs locked row-width families, relation metrics, matched controls,
+and multiple-comparison correction before any matrix claim could be made.
+
+Source artifacts:
+
+- `docs/MATRIX_CLUSTER_CANDIDATES.md`
+- `docs/MATRIX_CLUSTER_CONTROL_SUMMARY.md`
+
 ### Broad 2..500 Bible-Control Screen
 
 The Windows CPU broad run searched 22 term sets across 21 Bible and
@@ -230,7 +258,29 @@ YHWH), and `ירושלימ` (yrwshlym; English: Jerusalem). The low-density row 
 `כסא` (kisse; English: Throne): present, but lower than the broad uniform
 placement expectation inside Leviticus 24.
 
+The cross-source summary now groups those gaps by term across editions. The
+MT-family Leviticus 24 rows above reproduce across all five compared Hebrew
+witnesses. Separate one-source rows appear for KJVA `magog` and for LXX
+`κρισισ` (krisis; English: Judgment), `λυχνια` (luchnia; English: Lampstand),
+and `μαγωγ` (magog; English: Magog).
+
 Source artifact: `docs/NOTABLE_PASSAGE_GAPS.md`.
+
+### Thematic Chapter Absence Ledger
+
+The thematic-chapter absence ledger checks locked term-to-chapter mappings and
+keeps both presence and absence visible. Gog and Magog are present in the
+registered Ezekiel 38-39 thematic window across the MT-family witnesses, and
+`חיה` (chayah; English: Beast) is present in the Daniel 7 beast window. The
+same ledger also records absence-review rows, including `חבורה` (chabburah;
+English: Wound) missing from the Isaiah 53 Hebrew wound mapping across five
+MT-family witnesses at the registered skip 2..100 settings, plus LXX
+Isaiah-53 rows for `ταφοσ` (taphos; English: Grave), `ανομια` (anomia;
+English: Iniquity), and `σιωπαω` (siopao; English: Silent).
+
+These rows are review facts, not proof by presence or proof by absence.
+
+Source artifact: `docs/THEMATIC_CHAPTER_ABSENCE.md`.
 
 ### Full-Span Skip Expansion
 
@@ -306,7 +356,9 @@ Primary tracked summary artifacts:
 - `docs/PROSPECTIVE_STUDY_NEXT_LOCK.md`
 - `docs/WINDOWS_CPU_BROAD_2_500_FINDINGS.md`
 - `docs/WINDOWS_CPU_BROAD_2_500_SURFACE_FOLLOWUP.md`
+- `docs/MATRIX_CLUSTER_CONTROL_SUMMARY.md`
 - `docs/NOTABLE_PASSAGE_GAPS.md`
+- `docs/THEMATIC_CHAPTER_ABSENCE.md`
 
 ## Bottom Line
 

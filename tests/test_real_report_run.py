@@ -160,10 +160,16 @@ class RealReportRunTests(unittest.TestCase):
             "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_COLLECTION.md",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
+        self.assertIn("docs/MATRIX_CLUSTER_CONTROL_SUMMARY.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/NOTABLE_PASSAGE_GAPS.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/THEMATIC_CHAPTER_ABSENCE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn(
             "protocols/external_claim_source_counts.toml",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
+        self.assertIn("protocols/matrix_cluster_control_summary.toml", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("protocols/notable_passage_gaps.toml", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("protocols/thematic_chapter_absence.toml", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("configs/example_ebible_engkjv_apocrypha.toml", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("protocols/apocrypha_bridge_study.toml", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/ALL_CODES_FOLLOWUP_LETTER_PATHS.md", preflight.DEFAULT_REQUIRED_PATHS)
@@ -672,6 +678,94 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("`יהוה` (YHWH; English: YHWH)", text)
         self.assertIn("center_word_exact", text)
         self.assertIn("source's original geometry", text)
+
+    def test_matrix_cluster_control_section_lists_opportunity_ratio(self) -> None:
+        lines = summary.matrix_cluster_control_section(
+            [
+                {
+                    "cell_relation": "orthogonal",
+                    "bible_pairs": "20",
+                    "secular_control_pairs": "4",
+                    "bible_to_control_rate_ratio": "5.000000",
+                    "bible_to_control_opportunity_ratio": "4.500000",
+                    "exceeds_secular_max": "yes",
+                }
+            ],
+            [
+                {
+                    "cell_relation": "orthogonal",
+                    "term_a_id": "gog_h",
+                    "term_b_id": "magog_h",
+                    "term_a_concept": "Gog",
+                    "term_b_concept": "Magog",
+                    "term_a_normalized": "גוג",
+                    "term_b_normalized": "מגוג",
+                    "bible_pairs": "10",
+                    "secular_control_pairs": "1",
+                    "bible_to_control_rate_ratio": "10.000000",
+                    "bible_to_control_opportunity_ratio": "9.000000",
+                }
+            ],
+        )
+        text = "\n".join(lines)
+
+        self.assertIn("## Matrix Cluster Control Summary", text)
+        self.assertIn("4.500000", text)
+        self.assertIn("`גוג` (Gog; English: Gog)", text)
+        self.assertIn("not a", text)
+
+    def test_gap_sections_list_cross_source_rows(self) -> None:
+        notable_lines = summary.notable_passage_gap_section(
+            [
+                {
+                    "passage_id": "lev24_blasphemy_law",
+                    "terms_present_in_passage": "45",
+                    "terms_absent_in_passage_common_elsewhere": "7",
+                    "terms_low_vs_uniform": "1",
+                }
+            ],
+            [
+                {
+                    "passage_id": "lev24_blasphemy_law",
+                    "passage_concept": "Leviticus 24 Blasphemy Law",
+                    "normalized_term": "גוג",
+                    "concept": "Gog",
+                    "strongest_gap_class": "absent_in_passage_common_elsewhere",
+                    "gap_corpus_count": "5",
+                    "present_corpus_count": "0",
+                }
+            ],
+        )
+        thematic_lines = summary.thematic_chapter_absence_section(
+            [],
+            [
+                {
+                    "passage_concept": "Wound Thematic Chapter",
+                    "normalized_term": "חבורה",
+                    "concept": "Wound",
+                    "strongest_gap_class": "absent_in_passage_common_elsewhere",
+                    "gap_corpus_count": "5",
+                    "present_corpus_count": "0",
+                },
+                {
+                    "passage_concept": "Gog Thematic Chapter",
+                    "normalized_term": "גוג",
+                    "concept": "Gog",
+                    "strongest_gap_class": "present_in_passage",
+                    "gap_corpus_count": "0",
+                    "present_corpus_count": "5",
+                },
+            ],
+        )
+        notable_text = "\n".join(notable_lines)
+        thematic_text = "\n".join(thematic_lines)
+
+        self.assertIn("## Notable Passage Gap Ledger", notable_text)
+        self.assertIn("45", notable_text)
+        self.assertIn("`גוג` (Gog; English: Gog)", notable_text)
+        self.assertIn("## Thematic Chapter Absence Ledger", thematic_text)
+        self.assertIn("`חבורה` (chabburah; English: Wound)", thematic_text)
+        self.assertIn("`גוג` (Gog; English: Gog)", thematic_text)
 
 
 if __name__ == "__main__":

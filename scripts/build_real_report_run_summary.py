@@ -127,6 +127,22 @@ EXTERNAL_CLAIM_ALL_CODES_TRIAGE = Path(
 EXTERNAL_CLAIM_ALL_CODES_TRIAGE_MANIFEST = Path(
     "reports/external_claim_source_all_codes/triage.manifest.json"
 )
+MATRIX_CLUSTER_RELATION_CONTROL_SUMMARY = Path(
+    "reports/matrix_clusters/relation_control_summary.csv"
+)
+MATRIX_CLUSTER_TERM_PAIR_CONTROL_SUMMARY = Path(
+    "reports/matrix_clusters/term_pair_control_summary.csv"
+)
+NOTABLE_PASSAGE_GAP_PASSAGE_SUMMARY = Path("reports/notable_passage_gaps/passage_summary.csv")
+NOTABLE_PASSAGE_GAP_CROSS_SOURCE_SUMMARY = Path(
+    "reports/notable_passage_gaps/cross_source_gap_summary.csv"
+)
+THEMATIC_CHAPTER_ABSENCE_PASSAGE_SUMMARY = Path(
+    "reports/thematic_chapter_absence/passage_summary.csv"
+)
+THEMATIC_CHAPTER_ABSENCE_CROSS_SOURCE_SUMMARY = Path(
+    "reports/thematic_chapter_absence/cross_source_gap_summary.csv"
+)
 REPORT_INDEX = Path("reports/INDEX.md")
 OUT_DIR = Path("reports/real_report_run")
 SUMMARY_OUT = OUT_DIR / "summary.md"
@@ -233,6 +249,22 @@ def main(argv: list[str] | None = None) -> int:
     external_claim_all_codes_triage_manifest = read_json(
         args.external_claim_all_codes_triage_manifest
     )
+    matrix_cluster_relation_control_rows = read_rows(
+        args.matrix_cluster_relation_control_summary
+    )
+    matrix_cluster_term_pair_control_rows = read_rows(
+        args.matrix_cluster_term_pair_control_summary
+    )
+    notable_passage_gap_passage_rows = read_rows(args.notable_passage_gap_passage_summary)
+    notable_passage_gap_cross_source_rows = read_rows(
+        args.notable_passage_gap_cross_source_summary
+    )
+    thematic_chapter_absence_passage_rows = read_rows(
+        args.thematic_chapter_absence_passage_summary
+    )
+    thematic_chapter_absence_cross_source_rows = read_rows(
+        args.thematic_chapter_absence_cross_source_summary
+    )
     commit = git_commit()
 
     write_summary(
@@ -307,6 +339,12 @@ def main(argv: list[str] | None = None) -> int:
         external_claim_all_codes_summary_manifest=external_claim_all_codes_summary_manifest,
         external_claim_all_codes_triage_rows=external_claim_all_codes_triage_rows,
         external_claim_all_codes_triage_manifest=external_claim_all_codes_triage_manifest,
+        matrix_cluster_relation_control_rows=matrix_cluster_relation_control_rows,
+        matrix_cluster_term_pair_control_rows=matrix_cluster_term_pair_control_rows,
+        notable_passage_gap_passage_rows=notable_passage_gap_passage_rows,
+        notable_passage_gap_cross_source_rows=notable_passage_gap_cross_source_rows,
+        thematic_chapter_absence_passage_rows=thematic_chapter_absence_passage_rows,
+        thematic_chapter_absence_cross_source_rows=thematic_chapter_absence_cross_source_rows,
         report_index=args.report_index,
     )
     write_manifest(
@@ -381,6 +419,12 @@ def main(argv: list[str] | None = None) -> int:
         external_claim_all_codes_summary_manifest=external_claim_all_codes_summary_manifest,
         external_claim_all_codes_triage_rows=external_claim_all_codes_triage_rows,
         external_claim_all_codes_triage_manifest=external_claim_all_codes_triage_manifest,
+        matrix_cluster_relation_control_rows=matrix_cluster_relation_control_rows,
+        matrix_cluster_term_pair_control_rows=matrix_cluster_term_pair_control_rows,
+        notable_passage_gap_passage_rows=notable_passage_gap_passage_rows,
+        notable_passage_gap_cross_source_rows=notable_passage_gap_cross_source_rows,
+        thematic_chapter_absence_passage_rows=thematic_chapter_absence_passage_rows,
+        thematic_chapter_absence_cross_source_rows=thematic_chapter_absence_cross_source_rows,
         started=started,
     )
     print(args.summary_out)
@@ -655,6 +699,36 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=EXTERNAL_CLAIM_ALL_CODES_TRIAGE_MANIFEST,
     )
+    parser.add_argument(
+        "--matrix-cluster-relation-control-summary",
+        type=Path,
+        default=MATRIX_CLUSTER_RELATION_CONTROL_SUMMARY,
+    )
+    parser.add_argument(
+        "--matrix-cluster-term-pair-control-summary",
+        type=Path,
+        default=MATRIX_CLUSTER_TERM_PAIR_CONTROL_SUMMARY,
+    )
+    parser.add_argument(
+        "--notable-passage-gap-passage-summary",
+        type=Path,
+        default=NOTABLE_PASSAGE_GAP_PASSAGE_SUMMARY,
+    )
+    parser.add_argument(
+        "--notable-passage-gap-cross-source-summary",
+        type=Path,
+        default=NOTABLE_PASSAGE_GAP_CROSS_SOURCE_SUMMARY,
+    )
+    parser.add_argument(
+        "--thematic-chapter-absence-passage-summary",
+        type=Path,
+        default=THEMATIC_CHAPTER_ABSENCE_PASSAGE_SUMMARY,
+    )
+    parser.add_argument(
+        "--thematic-chapter-absence-cross-source-summary",
+        type=Path,
+        default=THEMATIC_CHAPTER_ABSENCE_CROSS_SOURCE_SUMMARY,
+    )
     parser.add_argument("--report-index", type=Path, default=REPORT_INDEX)
     parser.add_argument("--summary-out", type=Path, default=SUMMARY_OUT)
     parser.add_argument("--manifest-out", type=Path, default=MANIFEST_OUT)
@@ -734,6 +808,12 @@ def write_summary(
     external_claim_all_codes_summary_manifest: dict[str, Any],
     external_claim_all_codes_triage_rows: list[dict[str, str]],
     external_claim_all_codes_triage_manifest: dict[str, Any],
+    matrix_cluster_relation_control_rows: list[dict[str, str]],
+    matrix_cluster_term_pair_control_rows: list[dict[str, str]],
+    notable_passage_gap_passage_rows: list[dict[str, str]],
+    notable_passage_gap_cross_source_rows: list[dict[str, str]],
+    thematic_chapter_absence_passage_rows: list[dict[str, str]],
+    thematic_chapter_absence_cross_source_rows: list[dict[str, str]],
     report_index: Path,
 ) -> None:
     real_counts = step_manifest.get("real_counts", {})
@@ -795,6 +875,9 @@ def write_summary(
         "- KJVA apocrypha/deuterocanon bridge 5000-sample confirmatory controls",
         "- external claim/source count baseline across Bible and secular controls",
         "- external claim/source relaxed all-codes collection, triage queue, and findings layer",
+        "- matrix-cluster relation control summary",
+        "- notable-passage cross-source gap ledger",
+        "- thematic-chapter absence ledger",
         "- completed Gog/Magog prospective pair-control report",
         "- prospective-study lock/readiness documents",
         "- Bible Code Digest source audit and term-list expansion",
@@ -1027,6 +1110,24 @@ def write_summary(
         )
     )
     lines.extend(
+        matrix_cluster_control_section(
+            matrix_cluster_relation_control_rows,
+            matrix_cluster_term_pair_control_rows,
+        )
+    )
+    lines.extend(
+        notable_passage_gap_section(
+            notable_passage_gap_passage_rows,
+            notable_passage_gap_cross_source_rows,
+        )
+    )
+    lines.extend(
+        thematic_chapter_absence_section(
+            thematic_chapter_absence_passage_rows,
+            thematic_chapter_absence_cross_source_rows,
+        )
+    )
+    lines.extend(
         [
             "",
             "## Report Index",
@@ -1226,6 +1327,12 @@ def write_manifest(
     external_claim_all_codes_summary_manifest: dict[str, Any],
     external_claim_all_codes_triage_rows: list[dict[str, str]],
     external_claim_all_codes_triage_manifest: dict[str, Any],
+    matrix_cluster_relation_control_rows: list[dict[str, str]],
+    matrix_cluster_term_pair_control_rows: list[dict[str, str]],
+    notable_passage_gap_passage_rows: list[dict[str, str]],
+    notable_passage_gap_cross_source_rows: list[dict[str, str]],
+    thematic_chapter_absence_passage_rows: list[dict[str, str]],
+    thematic_chapter_absence_cross_source_rows: list[dict[str, str]],
     started: float,
 ) -> None:
     payload = {
@@ -1347,6 +1454,24 @@ def write_manifest(
             "external_claim_all_codes_triage": str(args.external_claim_all_codes_triage),
             "external_claim_all_codes_triage_manifest": str(
                 args.external_claim_all_codes_triage_manifest
+            ),
+            "matrix_cluster_relation_control_summary": str(
+                args.matrix_cluster_relation_control_summary
+            ),
+            "matrix_cluster_term_pair_control_summary": str(
+                args.matrix_cluster_term_pair_control_summary
+            ),
+            "notable_passage_gap_passage_summary": str(
+                args.notable_passage_gap_passage_summary
+            ),
+            "notable_passage_gap_cross_source_summary": str(
+                args.notable_passage_gap_cross_source_summary
+            ),
+            "thematic_chapter_absence_passage_summary": str(
+                args.thematic_chapter_absence_passage_summary
+            ),
+            "thematic_chapter_absence_cross_source_summary": str(
+                args.thematic_chapter_absence_cross_source_summary
             ),
             "report_index": str(args.report_index),
         },
@@ -1527,6 +1652,14 @@ def write_manifest(
         "external_claim_all_codes_triage_rows": len(external_claim_all_codes_triage_rows),
         "external_claim_all_codes_triage_bucket_counts": external_claim_all_codes_triage_manifest.get(
             "bucket_counts", {}
+        ),
+        "matrix_cluster_relation_control_rows": len(matrix_cluster_relation_control_rows),
+        "matrix_cluster_term_pair_control_rows": len(matrix_cluster_term_pair_control_rows),
+        "notable_passage_gap_passage_rows": len(notable_passage_gap_passage_rows),
+        "notable_passage_gap_cross_source_rows": len(notable_passage_gap_cross_source_rows),
+        "thematic_chapter_absence_passage_rows": len(thematic_chapter_absence_passage_rows),
+        "thematic_chapter_absence_cross_source_rows": len(
+            thematic_chapter_absence_cross_source_rows
         ),
         "outputs": {
             "summary": str(args.summary_out),
@@ -2000,8 +2133,296 @@ def external_claim_source_section(
     return lines
 
 
+def matrix_cluster_control_section(
+    relation_rows: list[dict[str, str]],
+    term_pair_rows: list[dict[str, str]],
+) -> list[str]:
+    top_pairs = sorted(
+        term_pair_rows,
+        key=lambda row: (
+            -int_value(row, "bible_pairs"),
+            row.get("cell_relation", ""),
+            row.get("term_a_id", ""),
+            row.get("term_b_id", ""),
+        ),
+    )
+    lines = [
+        "",
+        "## Matrix Cluster Control Summary",
+        "",
+        "This opt-in geometry layer wraps centered-hit positions to width 50 and",
+        "counts declared term-pair neighborhoods by nearest relation. It compares",
+        "Bible corpora against language-matched secular controls, normalized both",
+        "per observed corpus and per possible centered-hit pair opportunity.",
+        "",
+        "| Relation | Bible pairs | Control pairs | Corpus ratio | Opportunity ratio | Exceeds control max |",
+        "| --- | ---: | ---: | ---: | ---: | --- |",
+    ]
+    for row in relation_rows:
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    f"`{row.get('cell_relation', '')}`",
+                    f"{int_value(row, 'bible_pairs'):,}",
+                    f"{int_value(row, 'secular_control_pairs'):,}",
+                    numeric_cell(row.get("bible_to_control_rate_ratio", "")),
+                    numeric_cell(row.get("bible_to_control_opportunity_ratio", "")),
+                    f"`{row.get('exceeds_secular_max', '')}`",
+                ]
+            )
+            + " |"
+        )
+    lines.extend(
+        [
+            "",
+            "Top term-pair rows:",
+            "",
+            "| Relation | Term A | Term B | Bible pairs | Control pairs | Corpus ratio | Opportunity ratio |",
+            "| --- | --- | --- | ---: | ---: | ---: | ---: |",
+        ]
+    )
+    for row in top_pairs[:10]:
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    f"`{row.get('cell_relation', '')}`",
+                    display_term(
+                        row.get("term_a_normalized", ""),
+                        english=row.get("term_a_concept", ""),
+                    ),
+                    display_term(
+                        row.get("term_b_normalized", ""),
+                        english=row.get("term_b_concept", ""),
+                    ),
+                    f"{int_value(row, 'bible_pairs'):,}",
+                    f"{int_value(row, 'secular_control_pairs'):,}",
+                    numeric_cell(row.get("bible_to_control_rate_ratio", "")),
+                    numeric_cell(row.get("bible_to_control_opportunity_ratio", "")),
+                ]
+            )
+            + " |"
+        )
+    lines.extend(
+        [
+            "",
+            "Current read: this is a relation-specific screening summary, not a",
+            "matrix-code claim. Claim-grade matrix work still needs locked row-width",
+            "families, relation metrics, matched controls, and multiple-comparison",
+            "correction.",
+            "",
+            "Source artifacts: `docs/MATRIX_CLUSTER_CANDIDATES.md` and",
+            "`docs/MATRIX_CLUSTER_CONTROL_SUMMARY.md`.",
+        ]
+    )
+    return lines
+
+
+def notable_passage_gap_section(
+    passage_rows: list[dict[str, str]],
+    cross_source_rows: list[dict[str, str]],
+) -> list[str]:
+    declared_rows = [
+        row
+        for row in passage_rows
+        if row.get("passage_id") == "lev24_blasphemy_law"
+    ]
+    lev24_cross_rows = [
+        row
+        for row in cross_source_rows
+        if row.get("passage_id") in {
+            "lev24_blasphemy_law",
+            "lev24_blasphemy_law_lxx",
+            "lev24_blasphemy_law_kjva",
+        }
+        and int_value(row, "gap_corpus_count") > 0
+    ]
+    top_cross_rows = sorted(
+        lev24_cross_rows,
+        key=lambda row: (
+            -int_value(row, "gap_corpus_count"),
+            row.get("passage_id", ""),
+            row.get("term_id", ""),
+        ),
+    )
+    min_present = min_int(declared_rows, "terms_present_in_passage")
+    max_present = max_int(declared_rows, "terms_present_in_passage")
+    min_absent = min_int(declared_rows, "terms_absent_in_passage_common_elsewhere")
+    max_absent = max_int(declared_rows, "terms_absent_in_passage_common_elsewhere")
+    min_low = min_int(declared_rows, "terms_low_vs_uniform")
+    max_low = max_int(declared_rows, "terms_low_vs_uniform")
+    lines = [
+        "",
+        "## Notable Passage Gap Ledger",
+        "",
+        "This absence layer records declared passages where selected centered ELS",
+        "terms are absent or sparse inside the passage while appearing elsewhere",
+        "in the same corpus. It is a screening ledger, not negative proof.",
+        "",
+        "The current declared Leviticus 24 blasphemy-law target uses skip 2..500.",
+        (
+            "Across the five MT-family witnesses, present terms range "
+            f"{range_text(min_present, max_present)}, absent-common-elsewhere terms "
+            f"range {range_text(min_absent, max_absent)}, and low-vs-uniform terms "
+            f"range {range_text(min_low, max_low)}."
+            if declared_rows
+            else "No Leviticus 24 MT-family passage-summary rows were available."
+        ),
+        "",
+        "| Passage | Term | Gap class | Gap corpora | Present corpora |",
+        "| --- | --- | --- | ---: | ---: |",
+    ]
+    for row in top_cross_rows[:12]:
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    md_cell(row.get("passage_concept", "")),
+                    display_term(
+                        row.get("normalized_term", ""),
+                        english=row.get("concept", ""),
+                    ),
+                    f"`{row.get('strongest_gap_class', '')}`",
+                    f"{int_value(row, 'gap_corpus_count'):,}",
+                    f"{int_value(row, 'present_corpus_count'):,}",
+                ]
+            )
+            + " |"
+        )
+    lines.extend(
+        [
+            "",
+            "Current read: the cross-source file groups absence and low-density rows",
+            "by term across editions, so repeated gaps can be reviewed separately",
+            "from one-source curiosities.",
+            "",
+            "Source artifact: `docs/NOTABLE_PASSAGE_GAPS.md`.",
+        ]
+    )
+    return lines
+
+
+def thematic_chapter_absence_section(
+    passage_rows: list[dict[str, str]],
+    cross_source_rows: list[dict[str, str]],
+) -> list[str]:
+    gap_rows = [
+        row
+        for row in cross_source_rows
+        if int_value(row, "gap_corpus_count") > 0
+    ]
+    present_rows = [
+        row
+        for row in cross_source_rows
+        if int_value(row, "present_corpus_count") > 0
+        and int_value(row, "gap_corpus_count") == 0
+    ]
+    top_gap_rows = sorted(
+        gap_rows,
+        key=lambda row: (
+            -int_value(row, "gap_corpus_count"),
+            row.get("passage_id", ""),
+            row.get("term_id", ""),
+        ),
+    )
+    top_present_rows = sorted(
+        present_rows,
+        key=lambda row: (
+            -int_value(row, "present_corpus_count"),
+            row.get("passage_id", ""),
+            row.get("term_id", ""),
+        ),
+    )
+    lines = [
+        "",
+        "## Thematic Chapter Absence Ledger",
+        "",
+        "This narrower ledger checks locked term-to-chapter mappings. It keeps",
+        "positive thematic presence and thematic absence in the same view, because",
+        "both are review facts.",
+        "",
+        "| Metric | Count |",
+        "| --- | ---: |",
+        f"| Passage summary rows | {len(passage_rows):,} |",
+        f"| Cross-source rows | {len(cross_source_rows):,} |",
+        f"| Rows with any gap corpus | {len(gap_rows):,} |",
+        f"| Rows present without gap | {len(present_rows):,} |",
+        "",
+        "Top gap rows:",
+        "",
+        "| Passage | Term | Gap class | Gap corpora | Present corpora |",
+        "| --- | --- | --- | ---: | ---: |",
+    ]
+    for row in top_gap_rows[:10]:
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    md_cell(row.get("passage_concept", "")),
+                    display_term(
+                        row.get("normalized_term", ""),
+                        english=row.get("concept", ""),
+                    ),
+                    f"`{row.get('strongest_gap_class', '')}`",
+                    f"{int_value(row, 'gap_corpus_count'):,}",
+                    f"{int_value(row, 'present_corpus_count'):,}",
+                ]
+            )
+            + " |"
+        )
+    lines.extend(
+        [
+            "",
+            "Top present rows:",
+            "",
+            "| Passage | Term | Present corpora |",
+            "| --- | --- | ---: |",
+        ]
+    )
+    for row in top_present_rows[:8]:
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    md_cell(row.get("passage_concept", "")),
+                    display_term(
+                        row.get("normalized_term", ""),
+                        english=row.get("concept", ""),
+                    ),
+                    f"{int_value(row, 'present_corpus_count'):,}",
+                ]
+            )
+            + " |"
+        )
+    lines.extend(
+        [
+            "",
+            "Current read: Gog, Magog, and Beast thematic chapters have positive",
+            "MT-family presence rows, while Isaiah 53 wound/Greek servant-term rows",
+            "remain absence-review material at the registered settings.",
+            "",
+            "Source artifact: `docs/THEMATIC_CHAPTER_ABSENCE.md`.",
+        ]
+    )
+    return lines
+
+
 def md_cell(value: object) -> str:
     return str(value).replace("|", "\\|").replace("\n", " ")
+
+
+def numeric_cell(value: object) -> str:
+    text = str(value)
+    return text if text else "--"
+
+
+def range_text(low: int | None, high: int | None) -> str:
+    if low is None or high is None:
+        return "none"
+    if low == high:
+        return f"{low:,}"
+    return f"{low:,}..{high:,}"
 
 
 def doxa_section(
