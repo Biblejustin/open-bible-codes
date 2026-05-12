@@ -12,12 +12,14 @@ def test_build_report_db_skips_current_table(tmp_path: Path, capsys: pytest.Capt
     pytest.importorskip("duckdb")
     csv_path = tmp_path / "hits.csv"
     db = tmp_path / "reports" / "db.duckdb"
+    manifest = tmp_path / "reports" / "db.manifest.json"
     write_rows(csv_path, [{"hit_id": "1", "term_id": "term"}])
 
-    assert main(["--db", str(db), "--no-defaults", "--table", f"{csv_path}:hits"]) == 0
+    args = ["--db", str(db), "--no-defaults", "--table", f"{csv_path}:hits", "--manifest-out", str(manifest)]
+    assert main(args) == 0
     first = capsys.readouterr().out
     assert "imported=1" in first
-    assert main(["--db", str(db), "--no-defaults", "--table", f"{csv_path}:hits"]) == 0
+    assert main(args) == 0
     second = capsys.readouterr().out
     assert "current hits" in second
     assert "imported=0" in second
@@ -28,12 +30,14 @@ def test_build_report_db_reimports_stale_table(tmp_path: Path, capsys: pytest.Ca
     pytest.importorskip("duckdb")
     csv_path = tmp_path / "hits.csv"
     db = tmp_path / "reports" / "db.duckdb"
+    manifest = tmp_path / "reports" / "db.manifest.json"
     write_rows(csv_path, [{"hit_id": "1", "term_id": "term"}])
-    assert main(["--db", str(db), "--no-defaults", "--table", f"{csv_path}:hits"]) == 0
+    args = ["--db", str(db), "--no-defaults", "--table", f"{csv_path}:hits", "--manifest-out", str(manifest)]
+    assert main(args) == 0
     capsys.readouterr()
     write_rows(csv_path, [{"hit_id": "1", "term_id": "term"}, {"hit_id": "2", "term_id": "term"}])
 
-    assert main(["--db", str(db), "--no-defaults", "--table", f"{csv_path}:hits"]) == 0
+    assert main(args) == 0
     output = capsys.readouterr().out
     assert "rows=2" in output
     assert "imported=1" in output
