@@ -8,13 +8,14 @@ same preregistered controls described in `docs/HYPOTHESIS_ANALYSIS_FRAMEWORK.md`
 ## Reproduce
 
 ```bash
-python3 -m scripts.build_match_strata_index --occurrences reports/centered_occurrence_index/centered_occurrences.csv --out reports/match_strata_index/occurrence_strata.csv --summary-out reports/match_strata_index/strata_summary.csv --markdown-out docs/MATCH_STRATA_INDEX.md --manifest-out reports/match_strata_index/manifest.json
+python3 -m scripts.build_match_strata_index --occurrences reports/centered_occurrence_index/centered_occurrences.csv --meaningful-constants terms/meaningful_constants.csv --out reports/match_strata_index/occurrence_strata.csv --summary-out reports/match_strata_index/strata_summary.csv --markdown-out docs/MATCH_STRATA_INDEX.md --manifest-out reports/match_strata_index/manifest.json
 ```
 
 ## Bottom Line
 
 - annotated occurrence rows: 923
 - materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, and available `boundary_*` endpoint strata.
+- meaningful skip strata use the locked constants file and standard Hebrew/Greek gematria only as review flags.
 - boundary strata are exact only when the source occurrence row retains endpoint offsets for a mapped corpus.
 
 ## Strata Counts
@@ -32,6 +33,7 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 | `boundary_start_verse` | 22 |
 | `relevant_center_same_category` | 14 |
 | `boundary_end_verse` | 13 |
+| `skip_equals_meaningful_constant` | 10 |
 | `centered_self_surface_form` | 5 |
 | `relevant_center_same_concept` | 3 |
 | `boundary_end_book` | 2 |
@@ -251,11 +253,27 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 | 852 | `life` | TOB 1:1 `the` | 7 | ahab;fire;gate;rent;seed;tyre | -229;-225;-169;-121;54;73;229 | `kjv_apocrypha_bridge_context` |
 | ... | ... | ... | ... | ... | ... | 42 more cross-skip rows in CSV |
 
+## Meaningful Skip Rows
+
+| Rank | Term | Center | Skip | Constant match | Term gematria match | Source |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 2 | `γωγ` (Gog; English: Gog) | Rev 20:8=4 `Gog` | -7;7;-4423;4423 | 7: Sabbath / completeness |  | `gog_source_review` |
+| 626 | `παισ` (pais; English: Servant) | Luke 22:64 `παίσας` (paisas) | -7 | 7: Sabbath / completeness |  | `all_codes_followup` |
+| 636 | `תורה` (twrh; English: Torah) | 1Chr 5:1 `בֶּן־יִשְׂרָאֵ֑ל` (bnyshrl) | 7 | 7: Sabbath / completeness |  | `all_codes_followup` |
+| 637 | `תורה` (twrh; English: Torah) | 2Kgs 17:20 `יִשְׂרָאֵל֙` (Yisrael; English: Israel) | -7 | 7: Sabbath / completeness |  | `all_codes_followup` |
+| 685 | `hand` | MAL 4:6 `their` | 40 | 40: Wilderness / testing |  | `kjv_apocrypha_bridge_context` |
+| 720 | `התשח` (htshch; English: Hebrew year 5708) | Lev 22:27 `וָהָ֔לְאָה` (whlh) | 40 | 40: Wilderness / testing |  | `all_codes_followup` |
+| 735 | `νατο` (nato; English: NATO) | 1Cor 1:27 `μωρὰ` (mora; English: foolish things) | 7 | 7: Sabbath / completeness |  | `all_codes_followup` |
+| 795 | `gate` | MAL 4:5 `great` | -144 | 144: Revelation square of twelve |  | `kjv_apocrypha_bridge_context` |
+| 829 | `hits` | MAL 4:5 `before` | 144 | 144: Revelation square of twelve |  | `kjv_apocrypha_bridge_context` |
+| 896 | `soot` | TOB 1:1 `of` | -70 | 70: Nations / exile years |  | `kjv_apocrypha_bridge_context` |
+
 ## Read
 
 - `canonical_first_occurrence` means first centered occurrence within the current indexed family, not first hidden occurrence in every raw hit export.
 - Direction strata are computed per source family / queue / corpus set / term group.
 - Boundary strata are computed only from retained endpoint offsets, so blank boundary fields mean unavailable evidence, not proven absence.
 - `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.
+- `skip_equals_meaningful_constant` and `skip_equals_term_gematria` are metadata flags; they do not change the search space or promote claim status.
 - Matrix, cipher, broader cross-skip, and cohort-density strata widen the review surface and need separate locked controls before claim language.
 

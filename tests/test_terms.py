@@ -6,6 +6,11 @@ from els.normalization import normalize_text
 
 
 TERMS_DIR = Path("terms")
+NON_TERM_METADATA_FILES = {"meaningful_constants.csv"}
+
+
+def term_list_paths() -> list[Path]:
+    return [path for path in sorted(TERMS_DIR.glob("*.csv")) if path.name not in NON_TERM_METADATA_FILES]
 
 
 def term_ids(path: Path) -> set[str]:
@@ -15,7 +20,7 @@ def term_ids(path: Path) -> set[str]:
 
 class TermListTests(unittest.TestCase):
     def test_term_lists_have_required_fields_and_unique_ids(self) -> None:
-        for path in sorted(TERMS_DIR.glob("*.csv")):
+        for path in term_list_paths():
             with self.subTest(path=path):
                 with path.open("r", encoding="utf-8", newline="") as handle:
                     rows = list(csv.DictReader(handle))
@@ -31,7 +36,7 @@ class TermListTests(unittest.TestCase):
                 self.assertEqual(len(term_ids), len(set(term_ids)))
 
     def test_terms_normalize_to_letters(self) -> None:
-        for path in sorted(TERMS_DIR.glob("*.csv")):
+        for path in term_list_paths():
             with path.open("r", encoding="utf-8", newline="") as handle:
                 for row in csv.DictReader(handle):
                     with self.subTest(path=path, term_id=row["term_id"]):
@@ -42,6 +47,19 @@ class TermListTests(unittest.TestCase):
                         normalized = normalize_text(row["term"], row["language"])
                         if normalized == "":
                             self.assertIn("digits are removed", row.get("notes", ""))
+
+    def test_meaningful_constants_schema(self) -> None:
+        path = TERMS_DIR / "meaningful_constants.csv"
+        with path.open("r", encoding="utf-8", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+
+        self.assertGreaterEqual(
+            set(rows[0]),
+            {"constant_id", "value", "label", "category", "notes"},
+        )
+        values = [int(row["value"]) for row in rows]
+        self.assertEqual(len(values), len(set(values)))
+        self.assertGreaterEqual(set(values), {7, 12, 22, 26, 40, 42, 50, 70, 144, 666})
 
     def test_prophetic_terms_include_expected_categories(self) -> None:
         path = TERMS_DIR / "prophetic_terms.csv"

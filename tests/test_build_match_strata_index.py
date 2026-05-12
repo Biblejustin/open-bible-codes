@@ -1,5 +1,10 @@
 from els.match_strata import build_boundary_index
-from scripts.build_match_strata_index import build_strata_rows, build_summary_rows, parse_offset_triplets
+from scripts.build_match_strata_index import (
+    build_strata_rows,
+    build_summary_rows,
+    parse_offset_triplets,
+    read_meaningful_constants,
+)
 from tests.test_match_strata import tiny_corpus
 
 
@@ -126,6 +131,49 @@ def test_build_strata_rows_adds_cross_skip_pair_at_word() -> None:
     assert rows[0]["cross_skip_pair_terms"] == "right"
     assert rows[1]["cross_skip_pair_terms"] == "left"
     assert "cross_skip_pair_at_word" in rows[0]["extended_strata"]
+
+
+def test_build_strata_rows_adds_meaningful_skip_and_gematria_flags() -> None:
+    rows = build_strata_rows(
+        [
+            {
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT",
+                "present_corpora": "MT",
+                "term_id": "yhwh",
+                "concept": "YHWH",
+                "normalized_term": "יהוה",
+                "center_ref": "Gen 1:1",
+                "center_word": "center",
+                "center_normalized_word": "center",
+                "skip": "7;26",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+            }
+        ],
+        meaningful_constants={7: "Sabbath", 26: "YHWH standard Hebrew gematria"},
+    )
+
+    row = rows[0]
+    assert row["skip_equals_meaningful_constant"] == "yes"
+    assert row["meaningful_constant_skips"] == "7;26"
+    assert row["term_gematria_value"] == "26"
+    assert row["skip_equals_term_gematria"] == "yes"
+    assert "skip_equals_meaningful_constant" in row["extended_strata"]
+    assert "skip_equals_term_gematria" in row["extended_strata"]
+
+
+def test_read_meaningful_constants_ignores_bad_values(tmp_path) -> None:
+    path = tmp_path / "constants.csv"
+    path.write_text(
+        "constant_id,value,label,category,notes\n"
+        "seven,7,Sabbath,biblical,\n"
+        "bad,not-a-number,Bad,biblical,\n",
+        encoding="utf-8",
+    )
+
+    assert read_meaningful_constants(path) == {7: "Sabbath"}
 
 
 def test_parse_offset_triplets_ignores_malformed_offsets() -> None:

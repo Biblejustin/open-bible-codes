@@ -1,6 +1,8 @@
-"""Basic Hebrew numeral helpers for date terms."""
+"""Basic Hebrew numeral and gematria helpers for date and skip studies."""
 
 from __future__ import annotations
+
+import unicodedata
 
 
 HEBREW_ONES = {
@@ -33,6 +35,84 @@ HEBREW_HUNDREDS = {
     300: "ש",
     400: "ת",
 }
+
+HEBREW_STANDARD_VALUES = {
+    **{letter: value for value, letter in HEBREW_ONES.items()},
+    **{letter: value for value, letter in HEBREW_TENS.items()},
+    **{letter: value for value, letter in HEBREW_HUNDREDS.items()},
+    "ך": 20,
+    "ם": 40,
+    "ן": 50,
+    "ף": 80,
+    "ץ": 90,
+}
+
+GREEK_STANDARD_VALUES = {
+    "α": 1,
+    "β": 2,
+    "γ": 3,
+    "δ": 4,
+    "ε": 5,
+    "ϛ": 6,
+    "ς": 200,
+    "ζ": 7,
+    "η": 8,
+    "θ": 9,
+    "ι": 10,
+    "κ": 20,
+    "λ": 30,
+    "μ": 40,
+    "ν": 50,
+    "ξ": 60,
+    "ο": 70,
+    "π": 80,
+    "ϟ": 90,
+    "ρ": 100,
+    "σ": 200,
+    "τ": 300,
+    "υ": 400,
+    "φ": 500,
+    "χ": 600,
+    "ψ": 700,
+    "ω": 800,
+    "ϡ": 900,
+}
+
+HEBREW_LANGUAGES = {"hebrew", "michigan"}
+GREEK_LANGUAGES = {"greek"}
+
+
+def _strip_marks(value: str) -> str:
+    return "".join(
+        char
+        for char in unicodedata.normalize("NFKD", value.lower())
+        if unicodedata.category(char) != "Mn"
+    )
+
+
+def hebrew_standard_value(text: str) -> int:
+    """Standard Hebrew gematria sum, ignoring unmapped characters."""
+    return sum(HEBREW_STANDARD_VALUES.get(char, 0) for char in text)
+
+
+def greek_standard_value(text: str) -> int:
+    """Standard Greek isopsephy sum, ignoring unmapped characters."""
+    return sum(GREEK_STANDARD_VALUES.get(char, 0) for char in _strip_marks(text))
+
+
+def standard_gematria_value(text: str, language: str = "") -> tuple[str, int]:
+    """Return the standard scheme and value for Hebrew or Greek text."""
+    language = language.strip().lower()
+    if language in HEBREW_LANGUAGES:
+        return "hebrew_standard", hebrew_standard_value(text)
+    if language in GREEK_LANGUAGES:
+        return "greek_standard", greek_standard_value(text)
+    if any(char in HEBREW_STANDARD_VALUES for char in text):
+        return "hebrew_standard", hebrew_standard_value(text)
+    stripped = _strip_marks(text)
+    if any(char in GREEK_STANDARD_VALUES for char in stripped):
+        return "greek_standard", greek_standard_value(stripped)
+    return "", 0
 
 
 def hebrew_number(value: int) -> str:

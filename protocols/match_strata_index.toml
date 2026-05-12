@@ -11,8 +11,10 @@ argv = ["-m", "scripts.build_match_strata_index"]
 inputs = [
   "scripts/build_match_strata_index.py",
   "els/match_strata.py",
+  "els/gematria.py",
   "els/corpus.py",
   "els/term_display.py",
+  "terms/meaningful_constants.csv",
   "reports/centered_occurrence_index/centered_occurrences.csv",
   "configs/example_oshb_wlc.toml",
   "configs/example_uxlc.toml",

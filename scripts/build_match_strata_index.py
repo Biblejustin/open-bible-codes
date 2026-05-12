@@ -16,6 +16,7 @@ from typing import Any
 
 from els import __version__
 from els.corpus import load_corpus
+from els.gematria import standard_gematria_value
 from els.match_strata import (
     BoundaryIndex,
     boundary_strata_for_offsets,
@@ -34,6 +35,7 @@ DEFAULT_OUT = Path("reports/match_strata_index/occurrence_strata.csv")
 DEFAULT_SUMMARY_OUT = Path("reports/match_strata_index/strata_summary.csv")
 DEFAULT_MARKDOWN = Path("docs/MATCH_STRATA_INDEX.md")
 DEFAULT_MANIFEST = Path("reports/match_strata_index/manifest.json")
+DEFAULT_MEANINGFUL_CONSTANTS = Path("terms/meaningful_constants.csv")
 
 GROUP_FIELDS = ("source_family", "source_queue", "corpus", "present_corpora", "term_id", "normalized_term")
 DEFAULT_CORPUS_CONFIGS = (
@@ -69,6 +71,13 @@ FIELDNAMES = [
     "occurrence_type",
     "skip",
     "direction",
+    "skip_equals_meaningful_constant",
+    "meaningful_constant_skips",
+    "meaningful_constant_labels",
+    "gematria_scheme",
+    "term_gematria_value",
+    "skip_equals_term_gematria",
+    "term_gematria_matching_skips",
     "forward_direction_count",
     "backward_direction_count",
     "direction_stratum",
@@ -94,9 +103,14 @@ def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(argv)
     input_rows = read_rows(args.occurrences)
+    meaningful_constants = read_meaningful_constants(args.meaningful_constants)
     corpus_configs = corpus_config_map(args.corpus_config)
     boundary_indexes = load_boundary_indexes(corpus_configs)
-    rows = build_strata_rows(input_rows, boundary_indexes=boundary_indexes)
+    rows = build_strata_rows(
+        input_rows,
+        boundary_indexes=boundary_indexes,
+        meaningful_constants=meaningful_constants,
+    )
     summary_rows = build_summary_rows(rows)
     write_rows(args.out, FIELDNAMES, rows)
     write_rows(args.summary_out, SUMMARY_FIELDNAMES, summary_rows)
@@ -116,6 +130,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MARKDOWN)
     parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST)
+    parser.add_argument("--meaningful-constants", type=Path, default=DEFAULT_MEANINGFUL_CONSTANTS)
     parser.add_argument("--markdown-row-limit", type=int, default=80)
     parser.add_argument(
         "--corpus-config",
@@ -130,11 +145,13 @@ def build_strata_rows(
     input_rows: list[dict[str, str]],
     *,
     boundary_indexes: dict[str, BoundaryIndex] | None = None,
+    meaningful_constants: dict[int, str] | None = None,
 ) -> list[dict[str, object]]:
     direction_counts = direction_counts_by_key(input_rows, key_fields=GROUP_FIELDS)
     direction_by_key = direction_strata_by_key(input_rows, key_fields=GROUP_FIELDS)
     canonical_first = canonical_first_keys(input_rows, group_fields=GROUP_FIELDS)
     boundary_indexes = boundary_indexes or {}
+    meaningful_constants = meaningful_constants or {}
     cross_skip = cross_skip_annotations(input_rows)
     output = []
     for row in input_rows:
@@ -143,6 +160,13 @@ def build_strata_rows(
         counts = direction_counts[key]
         boundary_strata, boundary_corpora, boundary_evidence = boundary_annotations(row, boundary_indexes)
         cross = cross_skip.get(row_identity(row), {})
+        skip_values = sorted({abs(value) for value in parse_skip_values(row.get("skip", ""))})
+        constant_skips = [value for value in skip_values if value in meaningful_constants]
+        gematria_scheme, term_gematria_value = standard_gematria_value(
+            row.get("normalized_term", ""),
+            row.get("language", ""),
+        )
+        gematria_skips = [value for value in skip_values if term_gematria_value > 0 and value == term_gematria_value]
         strata = [
             row.get("occurrence_type", ""),
             direction_by_key.get(key, ""),
@@ -152,6 +176,10 @@ def build_strata_rows(
             strata.append("canonical_first_occurrence")
         if cross:
             strata.append("cross_skip_pair_at_word")
+        if constant_skips:
+            strata.append("skip_equals_meaningful_constant")
+        if gematria_skips:
+            strata.append("skip_equals_term_gematria")
         output.append(
             {
                 "occurrence_rank": row.get("occurrence_rank", ""),
@@ -170,6 +198,13 @@ def build_strata_rows(
                 "occurrence_type": row.get("occurrence_type", ""),
                 "skip": row.get("skip", ""),
                 "direction": row.get("direction", ""),
+                "skip_equals_meaningful_constant": "yes" if constant_skips else "no",
+                "meaningful_constant_skips": ";".join(str(value) for value in constant_skips),
+                "meaningful_constant_labels": ";".join(meaningful_constants[value] for value in constant_skips),
+                "gematria_scheme": gematria_scheme,
+                "term_gematria_value": str(term_gematria_value) if term_gematria_value else "",
+                "skip_equals_term_gematria": "yes" if gematria_skips else "no",
+                "term_gematria_matching_skips": ";".join(str(value) for value in gematria_skips),
                 "forward_direction_count": counts.forward,
                 "backward_direction_count": counts.backward,
                 "direction_stratum": direction_by_key.get(key, ""),
@@ -282,6 +317,7 @@ def write_markdown(
         "",
         f"- annotated occurrence rows: {len(rows):,}",
         "- materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, and available `boundary_*` endpoint strata.",
+        "- meaningful skip strata use the locked constants file and standard Hebrew/Greek gematria only as review flags.",
         "- boundary strata are exact only when the source occurrence row retains endpoint offsets for a mapped corpus.",
         "",
         "## Strata Counts",
@@ -340,6 +376,27 @@ def write_markdown(
             lines.append(
                 f"| ... | ... | ... | ... | ... | ... | {len(cross_skip_rows) - args.markdown_row_limit:,} more cross-skip rows in CSV |"
             )
+    meaningful_rows = [
+        row
+        for row in rows
+        if row.get("skip_equals_meaningful_constant") == "yes" or row.get("skip_equals_term_gematria") == "yes"
+    ]
+    if meaningful_rows:
+        lines.extend(
+            [
+                "",
+                "## Meaningful Skip Rows",
+                "",
+                "| Rank | Term | Center | Skip | Constant match | Term gematria match | Source |",
+                "| ---: | --- | --- | --- | --- | --- | --- |",
+            ]
+        )
+        for row in meaningful_rows[: args.markdown_row_limit]:
+            lines.append(meaningful_skip_markdown_row(row))
+        if len(meaningful_rows) > args.markdown_row_limit:
+            lines.append(
+                f"| ... | ... | ... | ... | ... | ... | {len(meaningful_rows) - args.markdown_row_limit:,} more meaningful-skip rows in CSV |"
+            )
     lines.extend(
         [
             "",
@@ -349,6 +406,7 @@ def write_markdown(
             "- Direction strata are computed per source family / queue / corpus set / term group.",
             "- Boundary strata are computed only from retained endpoint offsets, so blank boundary fields mean unavailable evidence, not proven absence.",
             "- `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.",
+            "- `skip_equals_meaningful_constant` and `skip_equals_term_gematria` are metadata flags; they do not change the search space or promote claim status.",
             "- Matrix, cipher, broader cross-skip, and cohort-density strata widen the review surface and need separate locked controls before claim language.",
             "",
         ]
@@ -374,6 +432,28 @@ def cross_skip_markdown_row(row: dict[str, object]) -> str:
         f"| {row.get('occurrence_rank', '')} | {term} | {md_cell(center)} | "
         f"{row.get('cross_skip_pair_count', '')} | {md_cell(row.get('cross_skip_pair_terms', ''))} | "
         f"{md_cell(row.get('cross_skip_pair_skips', ''))} | `{row.get('source_family', '')}` |"
+    )
+
+
+def meaningful_skip_markdown_row(row: dict[str, object]) -> str:
+    term = display_term(str(row.get("normalized_term", "")), english=str(row.get("concept", "")))
+    center = f"{row.get('center_ref', '')} {display_term(str(row.get('center_word', '')))}"
+    constant_match = ""
+    if row.get("skip_equals_meaningful_constant") == "yes":
+        constant_match = (
+            f"{row.get('meaningful_constant_skips', '')}: "
+            f"{row.get('meaningful_constant_labels', '')}"
+        )
+    gematria_match = ""
+    if row.get("skip_equals_term_gematria") == "yes":
+        gematria_match = (
+            f"{row.get('term_gematria_matching_skips', '')} "
+            f"({row.get('gematria_scheme', '')})"
+        )
+    return (
+        f"| {row.get('occurrence_rank', '')} | {term} | {md_cell(center)} | "
+        f"{md_cell(row.get('skip', ''))} | {md_cell(constant_match)} | "
+        f"{md_cell(gematria_match)} | `{row.get('source_family', '')}` |"
     )
 
 
@@ -407,7 +487,10 @@ def write_manifest(
         "summary_rows": len(summary_rows),
         "materialized_strata": [row["stratum"] for row in summary_rows],
         "corpus_configs": corpus_configs,
-        "inputs": {"occurrences": str(args.occurrences)},
+        "inputs": {
+            "occurrences": str(args.occurrences),
+            "meaningful_constants": str(args.meaningful_constants),
+        },
         "outputs": {
             "out": str(args.out),
             "summary_out": str(args.summary_out),
@@ -417,6 +500,20 @@ def write_manifest(
     }
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def read_meaningful_constants(path: Path) -> dict[int, str]:
+    constants: dict[int, str] = {}
+    if not path.exists():
+        return constants
+    with path.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            try:
+                value = int(row["value"])
+            except (KeyError, ValueError):
+                continue
+            constants[value] = row.get("label", str(value)).strip() or str(value)
+    return constants
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:
@@ -510,6 +607,7 @@ def reproduce_command(args: argparse.Namespace) -> str:
     return (
         "python3 -m scripts.build_match_strata_index "
         f"--occurrences {args.occurrences} "
+        f"--meaningful-constants {args.meaningful_constants} "
         f"--out {args.out} "
         f"--summary-out {args.summary_out} "
         f"--markdown-out {args.markdown_out} "

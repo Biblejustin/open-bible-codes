@@ -1,0 +1,11 @@
+constant_id,value,label,category,notes
+sabbath_7,7,Sabbath / completeness,biblical_number,Locked review constant from HYPOTHESIS_ANALYSIS_FRAMEWORK.
+tribes_12,12,Twelve tribes / apostles,biblical_number,Locked review constant from HYPOTHESIS_ANALYSIS_FRAMEWORK.
+hebrew_alphabet_22,22,Hebrew alphabet length,alphabet,Locked review constant from HYPOTHESIS_ANALYSIS_FRAMEWORK.
+yhwh_26,26,YHWH standard Hebrew gematria,gematria_constant,Locked review constant from HYPOTHESIS_ANALYSIS_FRAMEWORK.
+wilderness_40,40,Wilderness / testing,biblical_number,Locked review constant from HYPOTHESIS_ANALYSIS_FRAMEWORK.
+matthew_generations_42,42,Matthew genealogy generations,biblical_number,Locked review constant from HYPOTHESIS_ANALYSIS_FRAMEWORK.
+jubilee_50,50,Jubilee / Pentecost,biblical_number,Locked review constant from HYPOTHESIS_ANALYSIS_FRAMEWORK.
+nations_exile_70,70,Nations / exile years,biblical_number,Locked review constant from HYPOTHESIS_ANALYSIS_FRAMEWORK.
+revelation_144,144,Revelation square of twelve,biblical_number,Locked review constant from HYPOTHESIS_ANALYSIS_FRAMEWORK.
+beast_666,666,Number of the beast,biblical_number,Locked review constant from HYPOTHESIS_ANALYSIS_FRAMEWORK.
