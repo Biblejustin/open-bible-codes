@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import csv
+import json
+import time
 from pathlib import Path
 
 import pytest
 
+from scripts.build_report_db import main as build_report_db_main
 from els.report_db import (
     ReportDBStale,
     default_table_name,
@@ -81,6 +84,38 @@ def test_import_csv_table_uses_report_table_mapping_by_default(tmp_path: Path, m
 
     assert result.table_name == "hebrew_screening_surface_all_codes"
     assert fetch_dicts(db_path=db, query="SELECT hit_id FROM hebrew_screening_surface_all_codes") == [{"hit_id": "1"}]
+
+
+def test_build_report_db_writes_stable_manifest(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    csv_path = tmp_path / "reports" / "english_screening_all_codes" / "surface_all_codes.csv"
+    csv_path.parent.mkdir(parents=True)
+    write_rows(csv_path, [{"term_id": "tree", "hit_id": "1"}])
+    db = tmp_path / "reports" / "db" / "open_bible_codes.duckdb"
+    manifest = tmp_path / "reports" / "db" / "open_bible_codes.manifest.json"
+    monkeypatch.chdir(tmp_path)
+
+    args = [
+        "--db",
+        str(db),
+        "--no-defaults",
+        "--table",
+        "reports/english_screening_all_codes/surface_all_codes.csv",
+        "--manifest-out",
+        str(manifest),
+    ]
+    assert build_report_db_main(args) == 0
+    first_payload = json.loads(manifest.read_text(encoding="utf-8"))
+    first_mtime_ns = manifest.stat().st_mtime_ns
+
+    time.sleep(0.01)
+    assert build_report_db_main(args) == 0
+    second_payload = json.loads(manifest.read_text(encoding="utf-8"))
+
+    assert first_payload == second_payload
+    assert manifest.stat().st_mtime_ns == first_mtime_ns
+    assert first_payload["table_count"] == 1
+    assert first_payload["tables"][0]["table_name"] == "english_screening_surface_all_codes"
+    assert first_payload["tables"][0]["row_count"] == 1
 
 
 def test_sanitize_table_name_prefixes_digit() -> None:

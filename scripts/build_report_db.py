@@ -4,12 +4,14 @@
 from __future__ import annotations
 
 import argparse
+import json
 from dataclasses import dataclass
 from pathlib import Path
 
 from els.report_db import (
     DEFAULT_REPORT_TABLE_NAMES,
     ReportDBStale,
+    connect,
     import_csv_table,
     report_table_name_for_path,
     sanitize_table_name,
@@ -18,6 +20,7 @@ from els.report_db import (
 
 
 DEFAULT_DB = Path("reports/db/open_bible_codes.duckdb")
+DEFAULT_MANIFEST = Path("reports/db/open_bible_codes.manifest.json")
 
 
 @dataclass(frozen=True)
@@ -62,6 +65,7 @@ def main(argv: list[str] | None = None) -> int:
         )
         imported += 1
         print(f"{result.table_name}\trows={result.row_count}\tsize={result.source_size_bytes}\tsource={result.source_path}")
+    write_manifest(args.manifest_out, db_path=args.db, specs=specs, skip_missing=args.skip_missing)
     print(f"db={args.db}")
     print(f"imported={imported}")
     print(f"current={current}")
@@ -83,6 +87,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--no-replace", action="store_true", help="Fail if a target table already exists.")
     parser.add_argument("--skip-missing", action="store_true")
     parser.add_argument("--force", action="store_true", help="Re-import tables even when source metadata is current.")
+    parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
 
@@ -97,6 +102,63 @@ def parse_table_specs(values: list[str]) -> list[DefaultReportTable]:
             table_name = report_table_name_for_path(Path(path_text))
         specs.append(DefaultReportTable(Path(path_text), table_name))
     return specs
+
+
+def write_manifest(
+    path: Path,
+    *,
+    db_path: Path,
+    specs: list[DefaultReportTable],
+    skip_missing: bool,
+) -> None:
+    table_names = [spec.table_name for spec in specs if spec.path.exists()]
+    metadata_by_table: dict[str, dict[str, object]] = {}
+    if db_path.exists() and table_names:
+        placeholders = ", ".join("?" for _ in table_names)
+        with connect(db_path, read_only=True) as con:
+            metadata_rows = con.execute(
+                f"""
+                SELECT table_name, source_path, source_size_bytes, source_mtime_ns, row_count
+                FROM report_table_imports
+                WHERE table_name IN ({placeholders})
+                ORDER BY table_name
+                """,
+                table_names,
+            ).fetchall()
+        metadata_by_table = {
+            str(table_name): {
+                "table_name": str(table_name),
+                "source_path": str(source_path),
+                "source_size_bytes": int(source_size_bytes),
+                "source_mtime_ns": int(source_mtime_ns),
+                "row_count": int(row_count),
+            }
+            for table_name, source_path, source_size_bytes, source_mtime_ns, row_count in metadata_rows
+        }
+    tables = []
+    for spec in specs:
+        if not spec.path.exists():
+            if skip_missing:
+                tables.append(
+                    {
+                        "table_name": spec.table_name,
+                        "source_path": str(spec.path),
+                        "status": "missing_skipped",
+                    }
+                )
+                continue
+            raise FileNotFoundError(spec.path)
+        tables.append(metadata_by_table.get(spec.table_name, {"table_name": spec.table_name, "status": "missing_metadata"}))
+    payload = {
+        "db_path": str(db_path),
+        "table_count": sum(1 for table in tables if table.get("status") != "missing_skipped"),
+        "tables": tables,
+    }
+    manifest_text = json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if path.exists() and path.read_text(encoding="utf-8") == manifest_text:
+        return
+    path.write_text(manifest_text, encoding="utf-8")
 
 
 if __name__ == "__main__":

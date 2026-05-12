@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import io
 import json
 import re
 import urllib.parse
@@ -175,7 +176,7 @@ def tahot_raw_url(filename: str) -> str:
 def download_file(url: str, out_path: Path) -> None:
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(request, timeout=120) as response:
-        out_path.write_bytes(response.read())
+        write_bytes_if_changed(out_path, response.read())
 
 
 def parse_tahot_files(paths: list[Path]) -> list[TahotVerse]:
@@ -225,33 +226,33 @@ def normalize_number(value: str) -> str:
 
 
 def write_csv(path: Path, verses: list[TahotVerse]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(
-            handle,
-            fieldnames=[
-                "ref",
-                "book",
-                "chapter",
-                "verse",
-                "text",
-                "word_count",
-                "source_types",
-            ],
+    handle = io.StringIO(newline="")
+    writer = csv.DictWriter(
+        handle,
+        fieldnames=[
+            "ref",
+            "book",
+            "chapter",
+            "verse",
+            "text",
+            "word_count",
+            "source_types",
+        ],
+    )
+    writer.writeheader()
+    for verse in verses:
+        writer.writerow(
+            {
+                "ref": verse.ref,
+                "book": verse.book,
+                "chapter": verse.chapter,
+                "verse": verse.verse,
+                "text": verse.text,
+                "word_count": len(verse.words),
+                "source_types": " ".join(verse.source_types),
+            }
         )
-        writer.writeheader()
-        for verse in verses:
-            writer.writerow(
-                {
-                    "ref": verse.ref,
-                    "book": verse.book,
-                    "chapter": verse.chapter,
-                    "verse": verse.verse,
-                    "text": verse.text,
-                    "word_count": len(verse.words),
-                    "source_types": " ".join(verse.source_types),
-                }
-            )
+    write_text_if_changed(path, handle.getvalue())
 
 
 def write_manifest(
@@ -261,25 +262,32 @@ def write_manifest(
     csv_path: Path,
     verses: list[TahotVerse],
 ) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
+    raw_file_entries = [
+        {
+            "path": str(file),
+            "source_url": tahot_raw_url(file.name),
+            "bytes": file.stat().st_size,
+            "sha256": sha256_file(file),
+        }
+        for file in raw_files
+    ]
+    csv_sha256 = sha256_file(csv_path)
+    downloaded_at = stable_downloaded_at(
+        path,
+        raw_file_entries=raw_file_entries,
+        csv_sha256=csv_sha256,
+        verse_count=len(verses),
+    )
     manifest = {
         "source_id": SOURCE_ID,
         "source_name": SOURCE_NAME,
         "source_repo_url": SOURCE_REPO_URL,
         "source_dir_url": SOURCE_DIR_URL,
         "license": LICENSE_LABEL,
-        "downloaded_at": datetime.now(UTC).isoformat(),
-        "raw_files": [
-            {
-                "path": str(file),
-                "source_url": tahot_raw_url(file.name),
-                "bytes": file.stat().st_size,
-                "sha256": sha256_file(file),
-            }
-            for file in raw_files
-        ],
+        "downloaded_at": downloaded_at,
+        "raw_files": raw_file_entries,
         "csv_path": str(csv_path),
-        "csv_sha256": sha256_file(csv_path),
+        "csv_sha256": csv_sha256,
         "book_count": len({verse.book for verse in verses}),
         "verse_count": len(verses),
         "normalization": (
@@ -296,10 +304,44 @@ def write_manifest(
             "treat as a pure Leningrad ketiv stream."
         ),
     }
-    path.write_text(
-        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    write_text_if_changed(path, json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
+
+
+def stable_downloaded_at(
+    path: Path,
+    *,
+    raw_file_entries: list[dict[str, object]],
+    csv_sha256: str,
+    verse_count: int,
+) -> str:
+    if path.exists():
+        try:
+            existing = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            existing = {}
+        if (
+            existing.get("raw_files") == raw_file_entries
+            and existing.get("csv_sha256") == csv_sha256
+            and existing.get("verse_count") == verse_count
+            and isinstance(existing.get("downloaded_at"), str)
+        ):
+            return str(existing["downloaded_at"])
+    return datetime.now(UTC).isoformat()
+
+
+def write_text_if_changed(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    content = text.encode("utf-8")
+    if path.exists() and path.read_bytes() == content:
+        return
+    path.write_bytes(content)
+
+
+def write_bytes_if_changed(path: Path, content: bytes) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if path.exists() and path.read_bytes() == content:
+        return
+    path.write_bytes(content)
 
 
 def sha256_file(path: Path) -> str:

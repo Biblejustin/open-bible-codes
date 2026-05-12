@@ -1,5 +1,6 @@
 import json
 import tempfile
+import time
 import unittest
 from pathlib import Path
 
@@ -68,11 +69,41 @@ class StepTahotDownloadTests(unittest.TestCase):
                 verses=verses,
             )
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            manifest_mtime_ns = manifest_path.stat().st_mtime_ns
 
-        self.assertEqual(manifest["license"], download_step_tahot.LICENSE_LABEL)
-        self.assertEqual(manifest["book_count"], 1)
-        self.assertIn("paragraph markers", manifest["normalization"])
-        self.assertIn("Do not treat as a pure Leningrad ketiv stream", manifest["text_policy"])
+            time.sleep(0.01)
+            download_step_tahot.write_manifest(
+                manifest_path,
+                raw_files=[raw_path],
+                csv_path=csv_path,
+                verses=verses,
+            )
+
+            self.assertEqual(manifest["license"], download_step_tahot.LICENSE_LABEL)
+            self.assertEqual(manifest["book_count"], 1)
+            self.assertIn("paragraph markers", manifest["normalization"])
+            self.assertIn("Do not treat as a pure Leningrad ketiv stream", manifest["text_policy"])
+            self.assertEqual(manifest_path.stat().st_mtime_ns, manifest_mtime_ns)
+
+    def test_write_csv_does_not_rewrite_unchanged_content(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            csv_path = Path(tmp) / "tahot.csv"
+            verses = [
+                download_step_tahot.TahotVerse(
+                    book="Gen",
+                    chapter="1",
+                    verse="1",
+                    words=["בראשית"],
+                    source_types=["L"],
+                )
+            ]
+
+            download_step_tahot.write_csv(csv_path, verses)
+            first_mtime_ns = csv_path.stat().st_mtime_ns
+            time.sleep(0.01)
+            download_step_tahot.write_csv(csv_path, verses)
+
+            self.assertEqual(csv_path.stat().st_mtime_ns, first_mtime_ns)
 
 
 if __name__ == "__main__":

@@ -78,12 +78,21 @@ outputs = [
 [[steps]]
 id = "report_db"
 description = "Refresh DuckDB mirror before triage so large hit scans use the current DB table."
-argv = ["-m", "scripts.build_report_db", "--skip-missing"]
+argv = [
+  "-m",
+  "scripts.build_report_db",
+  "--skip-missing",
+  "--manifest-out",
+  "reports/db/open_bible_codes.manifest.json",
+]
 inputs = [
   "scripts/build_report_db.py",
   "els/report_db.py",
   "reports/english_screening_all_codes/surface_all_codes.csv",
   "reports/english_screening_all_codes/surface_all_codes_summary.csv",
+]
+outputs = [
+  "reports/db/open_bible_codes.manifest.json",
 ]
 
 [[steps]]
