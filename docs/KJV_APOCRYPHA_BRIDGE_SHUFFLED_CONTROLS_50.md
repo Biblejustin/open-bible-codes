@@ -13,7 +13,7 @@ python3 -m scripts.analyze_apocrypha_bridge_shuffled_controls --canonical-label 
 
 ## Summary
 
-- observed bridge rows: 350
+- observed bridge rows: 535
 - shuffled samples: 50
 - shuffled min/mean/max: 155 / 186.06 / 216
 - shuffled samples >= observed: 0
