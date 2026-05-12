@@ -62,6 +62,32 @@ control cautions travel beside them.
 
 Source artifact: `docs/FINAL_REPORT_HIGHLIGHTS.md`.
 
+### Expanded Post-Search Strata
+
+The expanded-strata layer annotates retained occurrence rows with additional
+review facts: boundary alignment, first/last chapter position, direction
+asymmetry, canonical-first status, cross-skip overlap, meaningful skip values,
+gematria-skip matches, and corpus-local letter/bigram rarity. These are
+review-prioritization fields, not new claim labels.
+
+Current generated counts include 22 `boundary_start_verse` rows, 13
+`boundary_end_verse` rows, 49 forward-only term/corpus groups, 51 backward-only
+groups, 53 bidirectional groups, 153 canonical-first centered occurrences, 231
+cross-skip candidate rows, 10 meaningful-constant skip rows, and 49
+bigram-surprise rows. The declared biblical-tribes cohort-window audit produced
+no windows meeting its current threshold.
+
+Source artifacts:
+
+- `docs/MATCH_STRATA_INDEX.md`
+- `docs/BOUNDARY_ALIGNMENT.md`
+- `docs/CHAPTER_POSITION_BIAS.md`
+- `docs/DIRECTION_ASYMMETRY.md`
+- `docs/CANONICAL_FIRST_SUMMARY.md`
+- `docs/CROSS_SKIP_SUMMARY.md`
+- `docs/REVIEW_FLAG_SUMMARY.md`
+- `docs/COHORT_CLUSTER_DENSITY_AUDIT.md`
+
 ### External Claim Source Runs
 
 The external-source lane brings term lists gathered from Bible Code Digest,
@@ -354,6 +380,10 @@ Primary tracked summary artifacts:
 - `docs/FINAL_REPORT_HIGHLIGHTS.md`
 - `docs/CLAIM_CATALOG.md`
 - `docs/PROSPECTIVE_STUDY_NEXT_LOCK.md`
+- `docs/MATCH_STRATA_INDEX.md`
+- `docs/BOUNDARY_ALIGNMENT.md`
+- `docs/DIRECTION_ASYMMETRY.md`
+- `docs/CROSS_SKIP_SUMMARY.md`
 - `docs/WINDOWS_CPU_BROAD_2_500_FINDINGS.md`
 - `docs/WINDOWS_CPU_BROAD_2_500_SURFACE_FOLLOWUP.md`
 - `docs/MATRIX_CLUSTER_CONTROL_SUMMARY.md`

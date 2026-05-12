@@ -163,6 +163,11 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/MATRIX_CLUSTER_CONTROL_SUMMARY.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/NOTABLE_PASSAGE_GAPS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/THEMATIC_CHAPTER_ABSENCE.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/MATCH_STRATA_INDEX.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/BOUNDARY_ALIGNMENT.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/DIRECTION_ASYMMETRY.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/CROSS_SKIP_SUMMARY.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/COHORT_CLUSTER_DENSITY_AUDIT.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn(
             "protocols/external_claim_source_counts.toml",
             preflight.DEFAULT_REQUIRED_PATHS,
@@ -170,6 +175,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("protocols/matrix_cluster_control_summary.toml", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("protocols/notable_passage_gaps.toml", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("protocols/thematic_chapter_absence.toml", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("protocols/boundary_alignment.toml", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("protocols/direction_asymmetry.toml", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("protocols/cross_skip_summary.toml", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("protocols/cohort_cluster_density_audit.toml", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("configs/example_ebible_engkjv_apocrypha.toml", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("protocols/apocrypha_bridge_study.toml", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/ALL_CODES_FOLLOWUP_LETTER_PATHS.md", preflight.DEFAULT_REQUIRED_PATHS)
@@ -713,6 +722,25 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("4.500000", text)
         self.assertIn("`גוג` (Gog; English: Gog)", text)
         self.assertIn("not a", text)
+
+    def test_expanded_strata_summary_section_lists_post_search_counts(self) -> None:
+        lines = summary.expanded_strata_summary_section(
+            [{"stratum": "cross_skip_pair_at_word", "rows": "12"}],
+            [{"bucket": "boundary_start_verse", "rows": "2"}],
+            [{"bucket": "center_verse_first_in_chapter", "rows": "3"}],
+            [{"bucket": "forward_only", "term_groups": "4"}],
+            [{"bucket": "canonical_first_centered_occurrence", "rows": "5"}],
+            [{"bucket": "cross_skip_pair_at_letter", "rows": "6"}],
+            [{"flag_type": "skip_equals_meaningful_constant", "flag_rows": "7"}],
+            [{"bucket": "all", "windows": "0", "max_distinct_term_count": "0"}],
+        )
+        text = "\n".join(lines)
+
+        self.assertIn("## Expanded Post-Search Strata", text)
+        self.assertIn("`cross_skip_pair_at_word`", text)
+        self.assertIn("boundary_start_verse", text)
+        self.assertIn("forward_only", text)
+        self.assertIn("no cohort windows", text)
 
     def test_gap_sections_list_cross_source_rows(self) -> None:
         notable_lines = summary.notable_passage_gap_section(

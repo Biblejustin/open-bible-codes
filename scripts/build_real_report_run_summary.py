@@ -143,6 +143,14 @@ THEMATIC_CHAPTER_ABSENCE_PASSAGE_SUMMARY = Path(
 THEMATIC_CHAPTER_ABSENCE_CROSS_SOURCE_SUMMARY = Path(
     "reports/thematic_chapter_absence/cross_source_gap_summary.csv"
 )
+MATCH_STRATA_SUMMARY = Path("reports/match_strata_index/strata_summary.csv")
+BOUNDARY_ALIGNMENT_SUMMARY = Path("reports/boundary_alignment/summary.csv")
+CHAPTER_POSITION_BIAS_SUMMARY = Path("reports/chapter_position_bias/summary.csv")
+DIRECTION_ASYMMETRY_SUMMARY = Path("reports/direction_asymmetry/summary.csv")
+CANONICAL_FIRST_SUMMARY = Path("reports/canonical_first_summary/summary.csv")
+CROSS_SKIP_SUMMARY = Path("reports/cross_skip_summary/summary.csv")
+REVIEW_FLAG_SUMMARY = Path("reports/review_flag_summary/summary.csv")
+COHORT_CLUSTER_DENSITY_SUMMARY = Path("reports/cohort_cluster_density/summary.csv")
 REPORT_INDEX = Path("reports/INDEX.md")
 OUT_DIR = Path("reports/real_report_run")
 SUMMARY_OUT = OUT_DIR / "summary.md"
@@ -265,6 +273,14 @@ def main(argv: list[str] | None = None) -> int:
     thematic_chapter_absence_cross_source_rows = read_rows(
         args.thematic_chapter_absence_cross_source_summary
     )
+    match_strata_summary_rows = read_rows(args.match_strata_summary)
+    boundary_alignment_summary_rows = read_rows(args.boundary_alignment_summary)
+    chapter_position_bias_summary_rows = read_rows(args.chapter_position_bias_summary)
+    direction_asymmetry_summary_rows = read_rows(args.direction_asymmetry_summary)
+    canonical_first_summary_rows = read_rows(args.canonical_first_summary)
+    cross_skip_summary_rows = read_rows(args.cross_skip_summary)
+    review_flag_summary_rows = read_rows(args.review_flag_summary)
+    cohort_cluster_density_summary_rows = read_rows(args.cohort_cluster_density_summary)
     commit = git_commit()
 
     write_summary(
@@ -345,6 +361,14 @@ def main(argv: list[str] | None = None) -> int:
         notable_passage_gap_cross_source_rows=notable_passage_gap_cross_source_rows,
         thematic_chapter_absence_passage_rows=thematic_chapter_absence_passage_rows,
         thematic_chapter_absence_cross_source_rows=thematic_chapter_absence_cross_source_rows,
+        match_strata_summary_rows=match_strata_summary_rows,
+        boundary_alignment_summary_rows=boundary_alignment_summary_rows,
+        chapter_position_bias_summary_rows=chapter_position_bias_summary_rows,
+        direction_asymmetry_summary_rows=direction_asymmetry_summary_rows,
+        canonical_first_summary_rows=canonical_first_summary_rows,
+        cross_skip_summary_rows=cross_skip_summary_rows,
+        review_flag_summary_rows=review_flag_summary_rows,
+        cohort_cluster_density_summary_rows=cohort_cluster_density_summary_rows,
         report_index=args.report_index,
     )
     write_manifest(
@@ -425,6 +449,14 @@ def main(argv: list[str] | None = None) -> int:
         notable_passage_gap_cross_source_rows=notable_passage_gap_cross_source_rows,
         thematic_chapter_absence_passage_rows=thematic_chapter_absence_passage_rows,
         thematic_chapter_absence_cross_source_rows=thematic_chapter_absence_cross_source_rows,
+        match_strata_summary_rows=match_strata_summary_rows,
+        boundary_alignment_summary_rows=boundary_alignment_summary_rows,
+        chapter_position_bias_summary_rows=chapter_position_bias_summary_rows,
+        direction_asymmetry_summary_rows=direction_asymmetry_summary_rows,
+        canonical_first_summary_rows=canonical_first_summary_rows,
+        cross_skip_summary_rows=cross_skip_summary_rows,
+        review_flag_summary_rows=review_flag_summary_rows,
+        cohort_cluster_density_summary_rows=cohort_cluster_density_summary_rows,
         started=started,
     )
     print(args.summary_out)
@@ -729,6 +761,34 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=THEMATIC_CHAPTER_ABSENCE_CROSS_SOURCE_SUMMARY,
     )
+    parser.add_argument("--match-strata-summary", type=Path, default=MATCH_STRATA_SUMMARY)
+    parser.add_argument(
+        "--boundary-alignment-summary",
+        type=Path,
+        default=BOUNDARY_ALIGNMENT_SUMMARY,
+    )
+    parser.add_argument(
+        "--chapter-position-bias-summary",
+        type=Path,
+        default=CHAPTER_POSITION_BIAS_SUMMARY,
+    )
+    parser.add_argument(
+        "--direction-asymmetry-summary",
+        type=Path,
+        default=DIRECTION_ASYMMETRY_SUMMARY,
+    )
+    parser.add_argument(
+        "--canonical-first-summary",
+        type=Path,
+        default=CANONICAL_FIRST_SUMMARY,
+    )
+    parser.add_argument("--cross-skip-summary", type=Path, default=CROSS_SKIP_SUMMARY)
+    parser.add_argument("--review-flag-summary", type=Path, default=REVIEW_FLAG_SUMMARY)
+    parser.add_argument(
+        "--cohort-cluster-density-summary",
+        type=Path,
+        default=COHORT_CLUSTER_DENSITY_SUMMARY,
+    )
     parser.add_argument("--report-index", type=Path, default=REPORT_INDEX)
     parser.add_argument("--summary-out", type=Path, default=SUMMARY_OUT)
     parser.add_argument("--manifest-out", type=Path, default=MANIFEST_OUT)
@@ -814,6 +874,14 @@ def write_summary(
     notable_passage_gap_cross_source_rows: list[dict[str, str]],
     thematic_chapter_absence_passage_rows: list[dict[str, str]],
     thematic_chapter_absence_cross_source_rows: list[dict[str, str]],
+    match_strata_summary_rows: list[dict[str, str]],
+    boundary_alignment_summary_rows: list[dict[str, str]],
+    chapter_position_bias_summary_rows: list[dict[str, str]],
+    direction_asymmetry_summary_rows: list[dict[str, str]],
+    canonical_first_summary_rows: list[dict[str, str]],
+    cross_skip_summary_rows: list[dict[str, str]],
+    review_flag_summary_rows: list[dict[str, str]],
+    cohort_cluster_density_summary_rows: list[dict[str, str]],
     report_index: Path,
 ) -> None:
     real_counts = step_manifest.get("real_counts", {})
@@ -875,6 +943,7 @@ def write_summary(
         "- KJVA apocrypha/deuterocanon bridge 5000-sample confirmatory controls",
         "- external claim/source count baseline across Bible and secular controls",
         "- external claim/source relaxed all-codes collection, triage queue, and findings layer",
+        "- expanded post-search strata summaries",
         "- matrix-cluster relation control summary",
         "- notable-passage cross-source gap ledger",
         "- thematic-chapter absence ledger",
@@ -1091,6 +1160,18 @@ def write_summary(
         centered_occurrence_section(
             centered_occurrence_presence_rows,
             centered_occurrence_manifest,
+        )
+    )
+    lines.extend(
+        expanded_strata_summary_section(
+            match_strata_summary_rows,
+            boundary_alignment_summary_rows,
+            chapter_position_bias_summary_rows,
+            direction_asymmetry_summary_rows,
+            canonical_first_summary_rows,
+            cross_skip_summary_rows,
+            review_flag_summary_rows,
+            cohort_cluster_density_summary_rows,
         )
     )
     lines.extend(
@@ -1333,6 +1414,14 @@ def write_manifest(
     notable_passage_gap_cross_source_rows: list[dict[str, str]],
     thematic_chapter_absence_passage_rows: list[dict[str, str]],
     thematic_chapter_absence_cross_source_rows: list[dict[str, str]],
+    match_strata_summary_rows: list[dict[str, str]],
+    boundary_alignment_summary_rows: list[dict[str, str]],
+    chapter_position_bias_summary_rows: list[dict[str, str]],
+    direction_asymmetry_summary_rows: list[dict[str, str]],
+    canonical_first_summary_rows: list[dict[str, str]],
+    cross_skip_summary_rows: list[dict[str, str]],
+    review_flag_summary_rows: list[dict[str, str]],
+    cohort_cluster_density_summary_rows: list[dict[str, str]],
     started: float,
 ) -> None:
     payload = {
@@ -1473,6 +1562,14 @@ def write_manifest(
             "thematic_chapter_absence_cross_source_summary": str(
                 args.thematic_chapter_absence_cross_source_summary
             ),
+            "match_strata_summary": str(args.match_strata_summary),
+            "boundary_alignment_summary": str(args.boundary_alignment_summary),
+            "chapter_position_bias_summary": str(args.chapter_position_bias_summary),
+            "direction_asymmetry_summary": str(args.direction_asymmetry_summary),
+            "canonical_first_summary": str(args.canonical_first_summary),
+            "cross_skip_summary": str(args.cross_skip_summary),
+            "review_flag_summary": str(args.review_flag_summary),
+            "cohort_cluster_density_summary": str(args.cohort_cluster_density_summary),
             "report_index": str(args.report_index),
         },
         "step_tahot": {
@@ -1661,6 +1758,14 @@ def write_manifest(
         "thematic_chapter_absence_cross_source_rows": len(
             thematic_chapter_absence_cross_source_rows
         ),
+        "match_strata_summary_rows": len(match_strata_summary_rows),
+        "boundary_alignment_summary_rows": len(boundary_alignment_summary_rows),
+        "chapter_position_bias_summary_rows": len(chapter_position_bias_summary_rows),
+        "direction_asymmetry_summary_rows": len(direction_asymmetry_summary_rows),
+        "canonical_first_summary_rows": len(canonical_first_summary_rows),
+        "cross_skip_summary_rows": len(cross_skip_summary_rows),
+        "review_flag_summary_rows": len(review_flag_summary_rows),
+        "cohort_cluster_density_summary_rows": len(cohort_cluster_density_summary_rows),
         "outputs": {
             "summary": str(args.summary_out),
             "manifest": str(args.manifest_out),
@@ -2133,6 +2238,70 @@ def external_claim_source_section(
     return lines
 
 
+def expanded_strata_summary_section(
+    match_strata_rows: list[dict[str, str]],
+    boundary_rows: list[dict[str, str]],
+    chapter_rows: list[dict[str, str]],
+    direction_rows: list[dict[str, str]],
+    canonical_rows: list[dict[str, str]],
+    cross_skip_rows: list[dict[str, str]],
+    review_flag_rows: list[dict[str, str]],
+    cohort_cluster_rows: list[dict[str, str]],
+) -> list[str]:
+    top_strata = sorted(
+        match_strata_rows,
+        key=lambda row: (-int_value(row, "rows"), row.get("stratum", "")),
+    )
+    lines = [
+        "",
+        "## Expanded Post-Search Strata",
+        "",
+        "These summaries annotate already retained occurrence rows. They do not run",
+        "new ELS searches and do not promote rows into claims. Their purpose is to",
+        "preserve extra review dimensions: boundary alignment, direction asymmetry,",
+        "canonical-first status, cross-skip overlap, meaningful skips, and rarity",
+        "flags.",
+        "",
+        "Top strata from the match-strata index:",
+        "",
+        "| Stratum | Rows |",
+        "| --- | ---: |",
+    ]
+    for row in top_strata[:12]:
+        lines.append(
+            f"| `{row.get('stratum', '')}` | {int_value(row, 'rows'):,} |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "Post-search summary counts:",
+            "",
+            "| Summary | Key read |",
+            "| --- | --- |",
+            f"| Boundary alignment | {bucket_count_text(boundary_rows, 'bucket', 'rows')} |",
+            f"| Chapter position | {bucket_count_text(chapter_rows, 'bucket', 'rows')} |",
+            f"| Direction asymmetry | {bucket_count_text(direction_rows, 'bucket', 'term_groups')} |",
+            f"| Canonical first | {bucket_count_text(canonical_rows, 'bucket', 'rows')} |",
+            f"| Cross-skip pairs | {bucket_count_text(cross_skip_rows, 'bucket', 'rows')} |",
+            f"| Review flags | {bucket_count_text(review_flag_rows, 'flag_type', 'flag_rows')} |",
+            f"| Cohort windows | {cohort_window_text(cohort_cluster_rows)} |",
+            "",
+            "Current read: these are review-prioritization fields. A boundary hit,",
+            "canonical-first hit, meaningful skip, or cross-skip pair is worth",
+            "recording, but claim language still requires a narrower locked study and",
+            "matched controls for that exact family.",
+            "",
+            "Source artifacts: `docs/MATCH_STRATA_INDEX.md`,",
+            "`docs/BOUNDARY_ALIGNMENT.md`, `docs/CHAPTER_POSITION_BIAS.md`,",
+            "`docs/DIRECTION_ASYMMETRY.md`, `docs/CANONICAL_FIRST_SUMMARY.md`,",
+            "`docs/CROSS_SKIP_SUMMARY.md`, `docs/REVIEW_FLAG_SUMMARY.md`, and",
+            "`docs/COHORT_CLUSTER_DENSITY_AUDIT.md`.",
+        ]
+    )
+    return lines
+
+
 def matrix_cluster_control_section(
     relation_rows: list[dict[str, str]],
     term_pair_rows: list[dict[str, str]],
@@ -2410,6 +2579,26 @@ def thematic_chapter_absence_section(
 
 def md_cell(value: object) -> str:
     return str(value).replace("|", "\\|").replace("\n", " ")
+
+
+def bucket_count_text(rows: list[dict[str, str]], label_key: str, count_key: str) -> str:
+    totals: Counter[str] = Counter()
+    for row in rows:
+        label = row.get(label_key, "")
+        if label:
+            totals[label] += int_value(row, count_key)
+    if not totals:
+        return "none"
+    top = sorted(totals.items(), key=lambda item: (-item[1], item[0]))[:4]
+    return md_cell(", ".join(f"`{label}`={count:,}" for label, count in top))
+
+
+def cohort_window_text(rows: list[dict[str, str]]) -> str:
+    windows = sum(int_values(rows, "windows"))
+    if windows == 0:
+        return "no cohort windows met the declared threshold"
+    max_distinct = max_int(rows, "max_distinct_term_count")
+    return f"{windows:,} windows; max distinct term count {max_distinct or 0:,}"
 
 
 def numeric_cell(value: object) -> str:
