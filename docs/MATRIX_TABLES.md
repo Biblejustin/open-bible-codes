@@ -89,6 +89,26 @@ Older hit CSVs without center fields are accepted. In that case `center_offset`
 is recomputed from the span and center ref/word fields are filled from the
 configured corpus.
 
+## Control Summary
+
+For matrix candidates generated from CRD hit rows, use the control summary to
+compare each nearest-cell relation against the same language-matched secular
+controls:
+
+```bash
+python3 -m scripts.run_protocol protocols/matrix_cluster_control_summary.toml --resume
+```
+
+The summary emits relation-level and term-pair-level CSVs. It reports two
+screening ratios:
+
+- candidate pairs per observed corpus in each corpus class;
+- candidate pairs per possible cross-term pair opportunity, using the same CRD
+  hit file as the denominator.
+
+These ratios are review aids. They are not p-values and do not promote a
+matrix row to a claim.
+
 ## Cautions
 
 Matrix coordinates are an audit aid. They do not create statistical support by
