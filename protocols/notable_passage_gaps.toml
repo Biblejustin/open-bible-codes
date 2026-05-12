@@ -17,7 +17,7 @@ argv = [
   "--min-skip",
   "2",
   "--max-skip",
-  "100",
+  "500",
   "--direction",
   "both",
   "--min-term-length",

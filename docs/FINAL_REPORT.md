@@ -87,6 +87,33 @@ Source artifacts:
 - `docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_TRIAGE.md`
 - `docs/EXTERNAL_CLAIM_SOURCE_FINDINGS.md`
 
+### Broad 2..500 Bible-Control Screen
+
+The Windows CPU broad run searched 22 term sets across 21 Bible and
+language-matched non-Bible corpora with skip range 2..500 and both directions.
+The Bible-control comparison normalizes by legal ELS positions rather than
+using raw hit totals alone.
+
+The strongest longer original-language Bible-over-control rows include
+`ιωβαβ` (iobab; English: Jobab), `προβοσ` (probos; English: Probus),
+`ιακωβ` (iakob; English: Jacob), `ισαακ` (Isaak; English: Isaac),
+`σαβαωθ` (sabaoth; English: Lord of Hosts), and `σαβα`
+(saba; English: Seba). These rows exceed observed language-matched controls
+in the broad count comparison, but null-control and frequency-anchor rows also
+produce favorable ratios. That keeps the result in review-candidate territory.
+
+The full contextual follow-up for the 30 strongest original-language rows
+counted all hidden hits in scope and wrote context-bearing rows for review.
+It found 65 exact center-word Bible hits and zero exact center-word hits in
+the matched non-Bible controls. Controls still produced many broader
+center/span surface-context rows, so the important distinction is exact
+center-word occurrence versus looser surface context.
+
+Source artifacts:
+
+- `docs/WINDOWS_CPU_BROAD_2_500_FINDINGS.md`
+- `docs/WINDOWS_CPU_BROAD_2_500_SURFACE_FOLLOWUP.md`
+
 ### Greek `δοξα` (doxa; English: glory)
 
 The strongest Greek controlled review row is:
@@ -186,6 +213,25 @@ Source artifacts:
 - `docs/HEBREW_MODERN_GEOPOLITICAL_PROSPECTIVE_FINDINGS.md`
 - `docs/LOCAL_TERMS_APPENDIX_REPORT.md`
 
+### Notable Passage Gap Ledger
+
+The notable-passage gap ledger records places where declared terms are absent
+or sparse inside a passage while appearing elsewhere in the same corpus. It is
+a screening ledger, not negative proof.
+
+The Leviticus 24 blasphemy-law target now uses skip range 2..500. Across the
+five MT-family witnesses, 45 of 54 eligible declared terms appear centered
+inside the passage, 7 are absent there while common elsewhere, and 1 is low
+relative to a uniform-placement expectation. Notable absent-in-passage rows
+include `גוג` (Gog; English: Gog), `פסח` (Pesach; English: Passover),
+`מגוג` (Magog; English: Magog), `חבורה` (chabburah; English: Wound),
+`משפט` (mshpt; English: Judgment), `יומיהוה` (yom YHWH; English: Day of
+YHWH), and `ירושלימ` (yrwshlym; English: Jerusalem). The low-density row is
+`כסא` (kisse; English: Throne): present, but lower than the broad uniform
+placement expectation inside Leviticus 24.
+
+Source artifact: `docs/NOTABLE_PASSAGE_GAPS.md`.
+
 ### Full-Span Skip Expansion
 
 Full-span search collects very large hit sets. The dense export summarized
@@ -258,6 +304,9 @@ Primary tracked summary artifacts:
 - `docs/FINAL_REPORT_HIGHLIGHTS.md`
 - `docs/CLAIM_CATALOG.md`
 - `docs/PROSPECTIVE_STUDY_NEXT_LOCK.md`
+- `docs/WINDOWS_CPU_BROAD_2_500_FINDINGS.md`
+- `docs/WINDOWS_CPU_BROAD_2_500_SURFACE_FOLLOWUP.md`
+- `docs/NOTABLE_PASSAGE_GAPS.md`
 
 ## Bottom Line
 
