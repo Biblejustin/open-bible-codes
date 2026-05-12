@@ -73,6 +73,8 @@ python3 -m scripts.build_report_db --skip-missing --force
 - `greek_screening_surface_all_codes_summary`
 - `hebrew_theology_surface_all_codes`
 - `hebrew_theology_surface_all_codes_summary`
+- `external_claim_source_surface_all_codes`
+- `external_claim_source_surface_all_codes_summary`
 - `dynamic_skip_focus_full_span_exported_hits`
 - `matrix_cluster_candidates`
 - `matrix_cluster_summary`

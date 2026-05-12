@@ -9,6 +9,7 @@ import pytest
 
 from scripts.build_report_db import main as build_report_db_main
 from els.report_db import (
+    DEFAULT_REPORT_TABLE_NAMES,
     ReportDBStale,
     default_table_name,
     fetch_dicts,
@@ -122,6 +123,13 @@ def test_report_table_name_for_expanded_strata_paths() -> None:
         report_table_name_for_path(Path("reports/cohort_cluster_density/summary.csv"))
         == "cohort_cluster_density_summary"
     )
+
+
+def test_report_database_doc_lists_default_tables() -> None:
+    text = Path("docs/REPORT_DATABASE.md").read_text(encoding="utf-8")
+    missing = [table for table in DEFAULT_REPORT_TABLE_NAMES.values() if f"`{table}`" not in text]
+
+    assert missing == []
 
 
 def test_import_csv_table_uses_report_table_mapping_by_default(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
