@@ -21,7 +21,7 @@ COHORT_CLUSTER_WINDOW_WORDS ?= 50
 COHORT_CLUSTER_MIN_DISTINCT ?= 2
 COHORT_CLUSTER_CORPUS_CONFIGS ?= --corpus-config MT_WLC=configs/example_oshb_wlc.toml --corpus-config UXLC=configs/example_uxlc.toml --corpus-config EBIBLE_WLC=configs/example_ebible_hebwlc.toml --corpus-config MAM=configs/example_mam.toml --corpus-config UHB=configs/example_uhb.toml --corpus-config LXX=configs/example_ebible_grclxx.toml --corpus-config KJV=configs/example_ebible_engkjv.toml --corpus-config KJVA=configs/example_ebible_engkjv_apocrypha.toml --corpus-config TR_NT=configs/example_ebible_grctr.toml --corpus-config SBLGNT=configs/example_sblgnt.toml --corpus-config BYZ_NT=configs/example_ebible_grcmt.toml --corpus-config TCG_NT=configs/example_ebible_grctcgnt.toml --corpus-config HEB_PBY_AHAD_HAAM=configs/nonbible_hebrew_pby_ahad_haam.toml --corpus-config HEB_PBY_BIALIK=configs/nonbible_hebrew_pby_bialik.toml --corpus-config HEB_PBY_BRENNER=configs/nonbible_hebrew_pby_brenner.toml --corpus-config ENG_PG_SHAKESPEARE=configs/nonbible_english_pg_shakespeare.toml
 
-.PHONY: demo indexes test lint public-release-check study-mapping-schemas expanded-strata-tooling-check expanded-strata-postprocess real-report report-db dynamic-full-span-hit-findings notable-passage-gaps match-strata-index boundary-alignment chapter-position-bias direction-asymmetry canonical-first-summary hebrew-atbash-audit hebrew-albam-audit word-edge-pattern-audit matrix-cluster-candidates cipher-layered-pairs cohort-cluster-density crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-broad-screening-findings crd-center-word-findings crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-self-surface-queue crd-self-surface-center-word crd-self-surface-center-word-density crd-self-surface-center-word-queue crd-self-surface-center-word-packet crd-self-surface-center-word-presence crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density crd-concept-surface-center-word-queue crd-concept-surface-center-word-packet crd-concept-surface-center-word-presence
+.PHONY: demo indexes test lint public-release-check study-mapping-schemas expanded-strata-tooling-check expanded-strata-postprocess real-report report-db dynamic-full-span-hit-findings notable-passage-gaps match-strata-index boundary-alignment chapter-position-bias direction-asymmetry canonical-first-summary cross-skip-summary hebrew-atbash-audit hebrew-albam-audit word-edge-pattern-audit matrix-cluster-candidates cipher-layered-pairs cohort-cluster-density crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-broad-screening-findings crd-center-word-findings crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-self-surface-queue crd-self-surface-center-word crd-self-surface-center-word-density crd-self-surface-center-word-queue crd-self-surface-center-word-packet crd-self-surface-center-word-presence crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density crd-concept-surface-center-word-queue crd-concept-surface-center-word-packet crd-concept-surface-center-word-presence
 
 demo:
 	python3 -m els.demo
@@ -46,7 +46,7 @@ study-mapping-schemas:
 expanded-strata-tooling-check:
 	python3 -m scripts.check_expanded_strata_tooling
 
-expanded-strata-postprocess: match-strata-index boundary-alignment chapter-position-bias direction-asymmetry canonical-first-summary cohort-cluster-density
+expanded-strata-postprocess: match-strata-index boundary-alignment chapter-position-bias direction-asymmetry canonical-first-summary cross-skip-summary cohort-cluster-density
 
 real-report:
 	python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
@@ -74,6 +74,9 @@ direction-asymmetry:
 
 canonical-first-summary:
 	python3 -m scripts.run_protocol protocols/canonical_first_summary.toml --resume
+
+cross-skip-summary:
+	python3 -m scripts.run_protocol protocols/cross_skip_summary.toml --resume
 
 hebrew-atbash-audit:
 	python3 -m scripts.run_protocol protocols/hebrew_atbash_audit.toml --resume

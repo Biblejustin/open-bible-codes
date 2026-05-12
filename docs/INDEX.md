@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 263
+Documents indexed: 264
 
 ## Controls
 
@@ -179,6 +179,7 @@ Documents indexed: 263
 | Critical Omission Breaks | `CRITICAL_OMISSION_BREAKS.md` |
 | Critical Surface Variants | `CRITICAL_SURFACE_VARIANTS.md` |
 | CRI ELS Critique Audit | `CRI_ELS_CRITIQUE_AUDIT.md` |
+| Cross-Skip Summary | `CROSS_SKIP_SUMMARY.md` |
 | Direction Asymmetry | `DIRECTION_ASYMMETRY.md` |
 | Completed Dense Bible-Control Comparison | `DYNAMIC_SKIP_COMPLETED_DENSE_COMPARISON.md` |
 | Dynamic Skip Focus Counts | `DYNAMIC_SKIP_FOCUS_COUNTS.md` |

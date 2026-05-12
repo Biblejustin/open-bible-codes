@@ -1,0 +1,27 @@
+name = "cross_skip_summary"
+description = "Summarize cross-skip pair strata from the match-strata index."
+manifest_out = "reports/cross_skip_summary/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "cross_skip_summary"
+description = "Build cross-skip pair summary from occurrence strata."
+argv = [
+  "-m", "scripts.build_cross_skip_summary",
+  "--strata", "reports/match_strata_index/occurrence_strata.csv",
+  "--out", "reports/cross_skip_summary/summary.csv",
+  "--candidate-out", "reports/cross_skip_summary/candidate_rows.csv",
+  "--markdown-out", "docs/CROSS_SKIP_SUMMARY.md",
+  "--manifest-out", "reports/cross_skip_summary/manifest.json",
+]
+inputs = [
+  "scripts/build_cross_skip_summary.py",
+  "reports/match_strata_index/occurrence_strata.csv",
+]
+outputs = [
+  "reports/cross_skip_summary/summary.csv",
+  "reports/cross_skip_summary/candidate_rows.csv",
+  "docs/CROSS_SKIP_SUMMARY.md",
+  "reports/cross_skip_summary/manifest.json",
+]

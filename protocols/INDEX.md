@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 91
+Protocols indexed: 92
 
 ## Analysis
 
@@ -10,6 +10,7 @@ Protocols indexed: 91
 | boundary_alignment | Summarize ELS start/end verse, chapter, and book boundary flags from the match-strata i... | 1 |  | reports/boundary_alignment | `boundary_alignment.toml` |
 | canonical_first_summary | Summarize canonical-first centered occurrences from the match-strata index. | 1 |  | reports/canonical_first_summary | `canonical_first_summary.toml` |
 | chapter_position_bias | Summarize first/last chapter and book center-verse flags from the match-strata index. | 1 |  | reports/chapter_position_bias | `chapter_position_bias.toml` |
+| cross_skip_summary | Summarize cross-skip pair strata from the match-strata index. | 1 |  | reports/cross_skip_summary | `cross_skip_summary.toml` |
 | direction_asymmetry | Summarize forward/backward direction strata from the match-strata index. | 1 |  | reports/direction_asymmetry | `direction_asymmetry.toml` |
 | greek_exact_center_cohort | Locked Greek theological exact-center cross-text extension cohort. | 8 | terms/greek_exact_center_cohort_terms.csv | reports/greek_exact_center_cohort | `greek_exact_center_cohort.toml` |
 | greek_exact_center_four_source | Locked Greek exact-center extension cohort with added text-critical Greek NT source. | 12 | terms/greek_exact_center_cohort_terms.csv | reports/greek_exact_center_four_source | `greek_exact_center_four_source.toml` |

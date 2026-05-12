@@ -145,6 +145,32 @@ Primary outputs:
 - `docs/CANONICAL_FIRST_SUMMARY.md`
 - `reports/canonical_first_summary/manifest.json`
 
+## Cross-Skip Summary
+
+Cross-skip summary lists centered rows where another declared term appears at
+the same center word, at a shared hidden-letter position, or within the
+configured endpoint-letter distance at a different skip. It uses the flags
+already produced by the match-strata index and does not run a new ELS search.
+
+Primary protocol: `protocols/cross_skip_summary.toml`
+
+```bash
+python3 -m scripts.run_protocol protocols/cross_skip_summary.toml --resume
+```
+
+Shortcut:
+
+```bash
+make cross-skip-summary
+```
+
+Primary outputs:
+
+- `reports/cross_skip_summary/summary.csv`
+- `reports/cross_skip_summary/candidate_rows.csv`
+- `docs/CROSS_SKIP_SUMMARY.md`
+- `reports/cross_skip_summary/manifest.json`
+
 ## Transformed Hebrew Text
 
 Atbash and ALBAM are opt-in deterministic transform layers. They search a
