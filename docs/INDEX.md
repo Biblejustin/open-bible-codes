@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 267
+Documents indexed: 268
 
 ## Controls
 
@@ -248,6 +248,7 @@ Documents indexed: 267
 | Mark Tabata Isaiah 53 ELS Source Audit | `MARK_TABATA_ISAIAH53_AUDIT.md` |
 | Extended Match Strata Index | `MATCH_STRATA_INDEX.md` |
 | Match Type Extension Status | `MATCH_TYPE_EXTENSION_STATUS.md` |
+| Matrix Cluster Candidates | `MATRIX_CLUSTER_CANDIDATES.md` |
 | Matrix Tables | `MATRIX_TABLES.md` |
 | Modern Extension Screen | `MODERN_EXTENSION_SCREEN.md` |
 | Modern Names And Dates | `MODERN_NAMES_DATES.md` |

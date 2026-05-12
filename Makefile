@@ -10,9 +10,6 @@ CRD_SELF_TABLE_DB_ARGS := $(shell test -f "$(REPORT_DB)" && echo "--db $(REPORT_
 CRD_CONCEPT_COMPARISON_DB_ARGS := $(shell test -f "$(REPORT_DB)" && echo "--db $(REPORT_DB) --classified-table $(CRD_CONCEPT_CLASSIFIED_TABLE)")
 CRD_CONCEPT_TABLE_DB_ARGS := $(shell test -f "$(REPORT_DB)" && echo "--db $(REPORT_DB) --table $(CRD_CONCEPT_CLASSIFIED_TABLE)")
 DYNAMIC_FULL_SPAN_HITS_DB_ARGS := $(shell test -f "$(REPORT_DB)" && echo "--db $(REPORT_DB) --hits-table $(DYNAMIC_FULL_SPAN_HITS_TABLE)")
-MATRIX_CLUSTER_HITS ?= reports/centered_occurrence_index/centered_occurrences.csv
-MATRIX_CLUSTER_WIDTH ?= 50
-MATRIX_CLUSTER_DISTANCE ?= 1
 CIPHER_LAYERED_PLAIN_HITS ?= reports/cipher_layered_pairs/plain_mt_wlc_hits.csv
 CIPHER_LAYERED_PLAIN_CONFIG ?= configs/example_oshb_wlc.toml
 CIPHER_LAYERED_PLAIN_CORPUS ?= MT_WLC
@@ -100,7 +97,7 @@ word-skip-term-audit:
 	python3 -m scripts.run_protocol protocols/word_skip_term_audit.toml --resume
 
 matrix-cluster-candidates:
-	python3 -m scripts.build_matrix_cluster_candidates --hits "$(MATRIX_CLUSTER_HITS)" --row-width "$(MATRIX_CLUSTER_WIDTH)" --max-cell-distance "$(MATRIX_CLUSTER_DISTANCE)" --out reports/matrix_clusters/candidates.csv --summary-out reports/matrix_clusters/summary.csv --manifest-out reports/matrix_clusters/manifest.json
+	python3 -m scripts.run_protocol protocols/matrix_cluster_candidates.toml --resume
 
 cipher-layered-plain-hits:
 	python3 -m scripts.search_transformed_els --config "$(CIPHER_LAYERED_PLAIN_CONFIG)" --corpus-label "$(CIPHER_LAYERED_PLAIN_CORPUS)" --transform plain --terms "$(CIPHER_LAYERED_TERMS)" --min-skip 2 --max-skip 100 --direction both --max-hits-per-term 200 --out "$(CIPHER_LAYERED_PLAIN_HITS)"

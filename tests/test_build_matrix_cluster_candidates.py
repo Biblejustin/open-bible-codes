@@ -141,6 +141,7 @@ def test_main_writes_candidates_summary_and_manifest(tmp_path: Path) -> None:
     hits = tmp_path / "hits.csv"
     out = tmp_path / "clusters.csv"
     summary = tmp_path / "summary.csv"
+    markdown = tmp_path / "matrix.md"
     manifest = tmp_path / "manifest.json"
     with hits.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(hit_row(term_id="x", start_offset=0, skip=3)))
@@ -161,6 +162,8 @@ def test_main_writes_candidates_summary_and_manifest(tmp_path: Path) -> None:
                 str(out),
                 "--summary-out",
                 str(summary),
+                "--markdown-out",
+                str(markdown),
                 "--manifest-out",
                 str(manifest),
             ]
@@ -170,7 +173,9 @@ def test_main_writes_candidates_summary_and_manifest(tmp_path: Path) -> None:
 
     assert "orthogonal" in out.read_text(encoding="utf-8")
     assert "cell_relation" in summary.read_text(encoding="utf-8")
+    assert "Matrix Cluster Candidates" in markdown.read_text(encoding="utf-8")
     assert '"candidate_pairs": 1' in manifest.read_text(encoding="utf-8")
+    assert '"markdown_out":' in manifest.read_text(encoding="utf-8")
     assert '"skipped_input_rows": 0' in manifest.read_text(encoding="utf-8")
 
 

@@ -17,10 +17,12 @@ from typing import Any
 
 from els import __version__
 from els.matrix import MatrixCell, cell_relation, closest_cell_pair, matrix_cell, validate_row_width
+from els.term_display import display_term
 
 
 DEFAULT_OUT = Path("reports/matrix_clusters/candidates.csv")
 DEFAULT_SUMMARY_OUT = Path("reports/matrix_clusters/summary.csv")
+DEFAULT_MARKDOWN_OUT = Path("docs/MATRIX_CLUSTER_CANDIDATES.md")
 DEFAULT_MANIFEST_OUT = Path("reports/matrix_clusters/manifest.json")
 
 FIELDNAMES = [
@@ -89,6 +91,7 @@ def main(argv: list[str] | None = None) -> int:
     summary_rows = summarize_rows(rows)
     write_rows(args.out, rows)
     write_rows(args.summary_out, summary_rows, fieldnames=SUMMARY_FIELDS)
+    write_markdown(args.markdown_out, args, read_result=read_result, rows=rows, summary_rows=summary_rows)
     write_manifest(
         args.manifest_out,
         args,
@@ -99,6 +102,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     print(args.out)
     print(args.summary_out)
+    print(args.markdown_out)
     print(args.manifest_out)
     return 0
 
@@ -114,6 +118,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--require-parsed-hits", action="store_true")
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
+    parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MARKDOWN_OUT)
     parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST_OUT)
     return parser
 
@@ -324,6 +329,93 @@ def write_rows(path: Path, rows: list[dict[str, object]], *, fieldnames: list[st
         writer.writerows(rows)
 
 
+def write_markdown(
+    path: Path,
+    args: argparse.Namespace,
+    *,
+    read_result: ReadHitsResult,
+    rows: list[dict[str, object]],
+    summary_rows: list[dict[str, object]],
+) -> None:
+    relation_counts = {
+        row["value"]: int(row["pairs"]) for row in summary_rows if row.get("bucket") == "cell_relation"
+    }
+    corpus_counts = {row["value"]: int(row["pairs"]) for row in summary_rows if row.get("bucket") == "corpus_label"}
+    lines = [
+        "# Matrix Cluster Candidates",
+        "",
+        "This is an opt-in geometry screen over already-exported raw ELS hit rows. It wraps each hit path into a matrix of the locked row width, then records declared-term pairs whose letter paths share a cell or fall within the configured cell-neighborhood distance.",
+        "",
+        "This report is candidate extraction only. It is not claim promotion. Matrix-style claims still require a locked row-width protocol, matched Bible and non-Bible controls, and correction for the widened geometry search family.",
+        "",
+        "## Run Settings",
+        "",
+        f"- input files: `{', '.join(str(path) for path in args.hits)}`",
+        f"- row width: `{args.row_width}`",
+        f"- max cell distance: `{args.max_cell_distance}`",
+        f"- max pairs: `{args.max_pairs:,}`",
+        f"- allow same term pairs: `{args.allow_same_term}`",
+        f"- parsed hit rows: `{len(read_result.hits):,}` of `{read_result.input_rows:,}`",
+        f"- skipped input rows: `{read_result.skipped_rows:,}`",
+        f"- candidate pairs: `{len(rows):,}`",
+        "",
+        "## Relation Counts",
+        "",
+        "| Relation | Pairs |",
+        "| --- | ---: |",
+    ]
+    if relation_counts:
+        for relation, count in sorted(relation_counts.items(), key=lambda item: (-item[1], item[0])):
+            lines.append(f"| {relation} | {count:,} |")
+    else:
+        lines.append("| none | 0 |")
+    lines.extend(["", "## Corpus Counts", "", "| Corpus | Pairs |", "| --- | ---: |"])
+    if corpus_counts:
+        for corpus, count in sorted(corpus_counts.items(), key=lambda item: (-item[1], item[0])):
+            lines.append(f"| {corpus} | {count:,} |")
+    else:
+        lines.append("| none | 0 |")
+    lines.extend(
+        [
+            "",
+            "## Sample Candidates",
+            "",
+            "| Relation | Corpus | Left | Right | Left center | Right center | Cells |",
+            "| --- | --- | --- | --- | --- | --- | --- |",
+        ]
+    )
+    for row in rows[:25]:
+        left = display_term(str(row["left_normalized_term"]), english=str(row["left_concept"]))
+        right = display_term(str(row["right_normalized_term"]), english=str(row["right_concept"]))
+        left_center = f"{row['left_center_ref']} / {display_term(str(row['left_center_word']))}"
+        right_center = f"{row['right_center_ref']} / {display_term(str(row['right_center_word']))}"
+        cells = f"{row['left_cell']} -> {row['right_cell']}"
+        lines.append(
+            "| "
+            + " | ".join(
+                md_cell(str(value))
+                for value in (
+                    row["cell_relation"],
+                    row["corpus_label"],
+                    left,
+                    right,
+                    left_center,
+                    right_center,
+                    cells,
+                )
+            )
+            + " |"
+        )
+    if not rows:
+        lines.append("| none |  |  |  |  |  |  |")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def md_cell(value: str) -> str:
+    return value.replace("|", "\\|").replace("\n", " ")
+
+
 def write_manifest(
     path: Path,
     args: argparse.Namespace,
@@ -354,6 +446,7 @@ def write_manifest(
         "outputs": {
             "out": str(args.out),
             "summary_out": str(args.summary_out),
+            "markdown_out": str(args.markdown_out),
             "manifest_out": str(args.manifest_out),
         },
     }

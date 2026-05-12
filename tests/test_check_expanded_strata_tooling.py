@@ -29,7 +29,10 @@ def test_check_tooling_flags_matrix_width_flag_drift(tmp_path: Path) -> None:
     repo_makefile = Path("Makefile").read_text(encoding="utf-8")
     doc.write_text(repo_doc.replace("--row-width 50", "--width 50"), encoding="utf-8")
     makefile.write_text(
-        repo_makefile.replace('--row-width "$(MATRIX_CLUSTER_WIDTH)"', '--width "$(MATRIX_CLUSTER_WIDTH)"'),
+        repo_makefile.replace(
+            "protocols/matrix_cluster_candidates.toml",
+            "protocols/matrix_cluster_candidates_drift.toml",
+        ),
         encoding="utf-8",
     )
 
@@ -37,4 +40,4 @@ def test_check_tooling_flags_matrix_width_flag_drift(tmp_path: Path) -> None:
 
     assert result["ok"] is False
     assert any("--row-width 50" in item for item in result["missing"])
-    assert any('--row-width "$(MATRIX_CLUSTER_WIDTH)"' in item for item in result["missing"])
+    assert any("protocols/matrix_cluster_candidates.toml" in item for item in result["missing"])

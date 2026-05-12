@@ -325,16 +325,10 @@ Primary outputs:
 Matrix candidate extraction maps hit paths into a wrapped text matrix and
 records nearest-cell relations between declared cohort terms.
 
-Primary tool path: `scripts/build_matrix_cluster_candidates.py`
+Primary protocol: `protocols/matrix_cluster_candidates.toml`
 
 ```bash
-python3 -m scripts.build_matrix_cluster_candidates \
-  --hits reports/centered_occurrence_index/centered_occurrences.csv \
-  --row-width 50 \
-  --max-cell-distance 1 \
-  --out reports/matrix_clusters/candidates.csv \
-  --summary-out reports/matrix_clusters/summary.csv \
-  --manifest-out reports/matrix_clusters/manifest.json
+python3 -m scripts.run_protocol protocols/matrix_cluster_candidates.toml --resume
 ```
 
 Shortcut:
@@ -343,8 +337,10 @@ Shortcut:
 make matrix-cluster-candidates
 ```
 
-Matrix input rows must include enough path detail to reconstruct letter cells:
-`sequence`, `start_offset`, and `skip`, or extension-style
+The default protocol uses `reports/surface_context_center_exact_hits.csv`
+because it retains raw path offsets and locks `--row-width 50` with
+`--max-cell-distance 1`. Matrix input rows must include enough path detail to
+reconstruct letter cells: `sequence`, `start_offset`, and `skip`, or extension-style
 `extended_sequence`, `extension_start_offset`, and `skip`. Add
 `--require-parsed-hits` for locked runs so a missing path-detail column fails
 instead of writing an empty candidate file. The manifest records input rows,
@@ -354,6 +350,13 @@ The output labels nearest-cell relation as `same_cell`, `orthogonal`,
 `diagonal`, or `neighborhood`. Width and distance are study-defining choices;
 claim-grade use requires those values to be locked before looking at results
 and repeated on matched controls.
+
+Primary outputs:
+
+- `reports/matrix_clusters/candidates.csv`
+- `reports/matrix_clusters/summary.csv`
+- `docs/MATRIX_CLUSTER_CANDIDATES.md`
+- `reports/matrix_clusters/manifest.json`
 
 ## Cohort Cluster Density
 

@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 95
+Protocols indexed: 96
 
 ## Analysis
 
@@ -23,6 +23,7 @@ Protocols indexed: 95
 | hebrew_theology_all_codes_collection | Relaxed all-codes collection for the Hebrew theology cohort with center-word surface fl... | 3 | terms/hebrew_theology_prospective_terms.csv | reports/hebrew_theology_all_codes | `hebrew_theology_all_codes_collection.toml` |
 | local_terms_appendix | Negative/curiosity appendix for fixed local pastor-business and church-location terms. | 5 | terms/local_terms_appendix.csv | reports/local_terms_appendix | `local_terms_appendix.toml` |
 | match_strata_index | Annotate centered occurrences with extended post-search strata that do not widen search... | 1 | terms/meaningful_constants.csv | reports/match_strata_index | `match_strata_index.toml` |
+| matrix_cluster_candidates | Opt-in matrix-neighborhood candidate extraction over raw centered ELS hit rows. | 1 |  | reports/matrix_clusters | `matrix_cluster_candidates.toml` |
 | modern_focus_extensions | Capped same-skip extension screen for modern names, places, and local terms. | 11 | terms/modern_names_dates.csv | reports/modern_extension_screen | `modern_focus_extensions.toml` |
 | mt_version_comparison | Compare normalized Hebrew MT-family verse text across MT_WLC, UXLC, MAM, eBible WLC, an... | 1 |  | reports/mt_version_comparison | `mt_version_comparison.toml` |
 | notable_passage_gaps | Record declared notable passages where selected ELS terms are absent, sparse, or presen... | 1 | terms/notable_passage_gap_terms.csv | reports/notable_passage_gaps | `notable_passage_gaps.toml` |

@@ -34,14 +34,14 @@ ENTRIES = (
     ToolingEntry("Hebrew ALBAM audit", Path("protocols/hebrew_albam_audit.toml"), "hebrew-albam-audit"),
     ToolingEntry("word-edge pattern audit", Path("protocols/word_edge_pattern_audit.toml"), "word-edge-pattern-audit"),
     ToolingEntry("word-skip term audit", Path("protocols/word_skip_term_audit.toml"), "word-skip-term-audit"),
-    ToolingEntry("matrix cluster candidates", Path("scripts/build_matrix_cluster_candidates.py"), "matrix-cluster-candidates"),
+    ToolingEntry("matrix cluster candidates", Path("protocols/matrix_cluster_candidates.toml"), "matrix-cluster-candidates"),
     ToolingEntry("cipher layered pairs", Path("scripts/build_cipher_layered_pairs.py"), "cipher-layered-pairs"),
     ToolingEntry("cohort cluster density", Path("scripts/build_cohort_cluster_density.py"), "cohort-cluster-density"),
 )
 
 REQUIRED_SNIPPETS = (
     ("matrix doc row width flag", "doc", "--row-width 50"),
-    ("matrix Makefile row width flag", "makefile", "--row-width \"$(MATRIX_CLUSTER_WIDTH)\""),
+    ("matrix Makefile protocol target", "makefile", "protocols/matrix_cluster_candidates.toml"),
 )
 
 

@@ -64,7 +64,7 @@ warnings and capped-row flags.
 
 | Stratum | Current support | Missing for claim-grade use |
 | --- | --- | --- |
-| `matrix_cluster_at_width_W` | parameterized matrix-neighborhood candidate extraction exists | locked row-width protocol and matched controls |
+| `matrix_cluster_at_width_W` | locked width-50 candidate protocol over raw centered hit rows exists | matched Bible/non-Bible controls |
 | `matrix_orthogonal` / `matrix_diagonal` / `matrix_adjacent_row` | candidate extraction labels nearest-cell relation | locked relation-specific metric and correction family |
 | WRR-style pair geometry | cylindrical distance primitives exist | full corrected WRR distance, domain weights, permutation driver |
 

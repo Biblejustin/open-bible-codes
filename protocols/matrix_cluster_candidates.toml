@@ -1,0 +1,32 @@
+name = "matrix_cluster_candidates"
+description = "Opt-in matrix-neighborhood candidate extraction over raw centered ELS hit rows."
+manifest_out = "reports/matrix_clusters/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "matrix_cluster_candidates"
+description = "Wrap raw centered hit paths at width 50 and export same-cell / neighboring-cell declared-term pairs."
+argv = [
+  "-m", "scripts.build_matrix_cluster_candidates",
+  "--hits", "reports/surface_context_center_exact_hits.csv",
+  "--row-width", "50",
+  "--max-cell-distance", "1",
+  "--max-pairs", "100000",
+  "--require-parsed-hits",
+  "--out", "reports/matrix_clusters/candidates.csv",
+  "--summary-out", "reports/matrix_clusters/summary.csv",
+  "--markdown-out", "docs/MATRIX_CLUSTER_CANDIDATES.md",
+  "--manifest-out", "reports/matrix_clusters/manifest.json",
+]
+inputs = [
+  "scripts/build_matrix_cluster_candidates.py",
+  "els/matrix.py",
+  "reports/surface_context_center_exact_hits.csv",
+]
+outputs = [
+  "reports/matrix_clusters/candidates.csv",
+  "reports/matrix_clusters/summary.csv",
+  "docs/MATRIX_CLUSTER_CANDIDATES.md",
+  "reports/matrix_clusters/manifest.json",
+]
