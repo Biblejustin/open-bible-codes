@@ -1,0 +1,5 @@
+term_id,concept,category,language,term,notes
+atbash_sheshach_h,Sheshach,hebrew_atbash_cryptograms,hebrew,ששך,Jeremiah Atbash cryptogram discussed as Babel/Babylon
+atbash_babylon_h,Babylon,hebrew_atbash_cryptograms,hebrew,בבל,decoded Sheshach target
+atbash_leb_kamai_h,Leb Kamai,hebrew_atbash_cryptograms,hebrew,לב קמי,Jeremiah Atbash cryptogram discussed as Chaldea
+atbash_chaldea_h,Chaldea,hebrew_atbash_cryptograms,hebrew,כשדים,decoded Leb Kamai target
