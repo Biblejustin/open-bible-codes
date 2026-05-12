@@ -12,6 +12,7 @@ inputs = [
   "scripts/build_match_strata_index.py",
   "els/match_strata.py",
   "els/gematria.py",
+  "els/letter_stats.py",
   "els/corpus.py",
   "els/term_display.py",
   "terms/meaningful_constants.csv",

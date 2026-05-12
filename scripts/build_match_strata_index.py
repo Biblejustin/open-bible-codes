@@ -17,6 +17,7 @@ from typing import Any
 from els import __version__
 from els.corpus import load_corpus
 from els.gematria import standard_gematria_value
+from els.letter_stats import BigramProfile, BigramSurprise
 from els.match_strata import (
     BoundaryIndex,
     boundary_strata_for_offsets,
@@ -78,6 +79,10 @@ FIELDNAMES = [
     "term_gematria_value",
     "skip_equals_term_gematria",
     "term_gematria_matching_skips",
+    "bigram_surprise_stratum",
+    "bigram_surprise_evidence",
+    "bigram_min_count",
+    "bigram_max_count",
     "forward_direction_count",
     "backward_direction_count",
     "direction_stratum",
@@ -105,11 +110,12 @@ def main(argv: list[str] | None = None) -> int:
     input_rows = read_rows(args.occurrences)
     meaningful_constants = read_meaningful_constants(args.meaningful_constants)
     corpus_configs = corpus_config_map(args.corpus_config)
-    boundary_indexes = load_boundary_indexes(corpus_configs)
+    boundary_indexes, bigram_profiles = load_corpus_metadata(corpus_configs)
     rows = build_strata_rows(
         input_rows,
         boundary_indexes=boundary_indexes,
         meaningful_constants=meaningful_constants,
+        bigram_profiles=bigram_profiles,
     )
     summary_rows = build_summary_rows(rows)
     write_rows(args.out, FIELDNAMES, rows)
@@ -146,12 +152,14 @@ def build_strata_rows(
     *,
     boundary_indexes: dict[str, BoundaryIndex] | None = None,
     meaningful_constants: dict[int, str] | None = None,
+    bigram_profiles: dict[str, BigramProfile] | None = None,
 ) -> list[dict[str, object]]:
     direction_counts = direction_counts_by_key(input_rows, key_fields=GROUP_FIELDS)
     direction_by_key = direction_strata_by_key(input_rows, key_fields=GROUP_FIELDS)
     canonical_first = canonical_first_keys(input_rows, group_fields=GROUP_FIELDS)
     boundary_indexes = boundary_indexes or {}
     meaningful_constants = meaningful_constants or {}
+    bigram_profiles = bigram_profiles or {}
     cross_skip = cross_skip_annotations(input_rows)
     output = []
     for row in input_rows:
@@ -167,6 +175,7 @@ def build_strata_rows(
             row.get("language", ""),
         )
         gematria_skips = [value for value in skip_values if term_gematria_value > 0 and value == term_gematria_value]
+        bigram_surprise = bigram_surprise_for_row(row, bigram_profiles)
         strata = [
             row.get("occurrence_type", ""),
             direction_by_key.get(key, ""),
@@ -180,6 +189,8 @@ def build_strata_rows(
             strata.append("skip_equals_meaningful_constant")
         if gematria_skips:
             strata.append("skip_equals_term_gematria")
+        if bigram_surprise.stratum:
+            strata.append(bigram_surprise.stratum)
         output.append(
             {
                 "occurrence_rank": row.get("occurrence_rank", ""),
@@ -205,6 +216,10 @@ def build_strata_rows(
                 "term_gematria_value": str(term_gematria_value) if term_gematria_value else "",
                 "skip_equals_term_gematria": "yes" if gematria_skips else "no",
                 "term_gematria_matching_skips": ";".join(str(value) for value in gematria_skips),
+                "bigram_surprise_stratum": bigram_surprise.stratum,
+                "bigram_surprise_evidence": bigram_surprise.evidence,
+                "bigram_min_count": "" if bigram_surprise.min_count is None else str(bigram_surprise.min_count),
+                "bigram_max_count": "" if bigram_surprise.max_count is None else str(bigram_surprise.max_count),
                 "forward_direction_count": counts.forward,
                 "backward_direction_count": counts.backward,
                 "direction_stratum": direction_by_key.get(key, ""),
@@ -293,6 +308,13 @@ def has_different_skip(left: set[int], right: set[int]) -> bool:
     return any(left_skip != right_skip for left_skip in left for right_skip in right)
 
 
+def bigram_surprise_for_row(row: dict[str, str], profiles: dict[str, BigramProfile]) -> BigramSurprise:
+    profile = profiles.get(row.get("corpus", ""))
+    if profile is None:
+        return BigramProfile.from_text("").classify_term("")
+    return profile.classify_term(row.get("normalized_term", ""))
+
+
 def write_markdown(
     path: Path,
     rows: list[dict[str, object]],
@@ -318,6 +340,7 @@ def write_markdown(
         f"- annotated occurrence rows: {len(rows):,}",
         "- materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, and available `boundary_*` endpoint strata.",
         "- meaningful skip strata use the locked constants file and standard Hebrew/Greek gematria only as review flags.",
+        "- bigram-surprise strata compare the hidden term's adjacent letter pairs to the matched corpus text.",
         "- boundary strata are exact only when the source occurrence row retains endpoint offsets for a mapped corpus.",
         "",
         "## Strata Counts",
@@ -397,6 +420,23 @@ def write_markdown(
             lines.append(
                 f"| ... | ... | ... | ... | ... | ... | {len(meaningful_rows) - args.markdown_row_limit:,} more meaningful-skip rows in CSV |"
             )
+    bigram_rows = [row for row in rows if row.get("bigram_surprise_stratum")]
+    if bigram_rows:
+        lines.extend(
+            [
+                "",
+                "## Bigram Surprise Rows",
+                "",
+                "| Rank | Term | Center | Stratum | Evidence | Min/max counts | Source |",
+                "| ---: | --- | --- | --- | --- | --- | --- |",
+            ]
+        )
+        for row in bigram_rows[: args.markdown_row_limit]:
+            lines.append(bigram_markdown_row(row))
+        if len(bigram_rows) > args.markdown_row_limit:
+            lines.append(
+                f"| ... | ... | ... | ... | ... | ... | {len(bigram_rows) - args.markdown_row_limit:,} more bigram rows in CSV |"
+            )
     lines.extend(
         [
             "",
@@ -407,6 +447,7 @@ def write_markdown(
             "- Boundary strata are computed only from retained endpoint offsets, so blank boundary fields mean unavailable evidence, not proven absence.",
             "- `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.",
             "- `skip_equals_meaningful_constant` and `skip_equals_term_gematria` are metadata flags; they do not change the search space or promote claim status.",
+            "- Bigram-surprise strata are corpus-local review aids, not claim promotion rules; missing adjacent surface bigrams count as rare.",
             "- Matrix, cipher, broader cross-skip, and cohort-density strata widen the review surface and need separate locked controls before claim language.",
             "",
         ]
@@ -454,6 +495,18 @@ def meaningful_skip_markdown_row(row: dict[str, object]) -> str:
         f"| {row.get('occurrence_rank', '')} | {term} | {md_cell(center)} | "
         f"{md_cell(row.get('skip', ''))} | {md_cell(constant_match)} | "
         f"{md_cell(gematria_match)} | `{row.get('source_family', '')}` |"
+    )
+
+
+def bigram_markdown_row(row: dict[str, object]) -> str:
+    term = display_term(str(row.get("normalized_term", "")), english=str(row.get("concept", "")))
+    center = f"{row.get('center_ref', '')} {display_term(str(row.get('center_word', '')))}"
+    counts = f"{row.get('bigram_min_count', '')}/{row.get('bigram_max_count', '')}"
+    return (
+        f"| {row.get('occurrence_rank', '')} | {term} | {md_cell(center)} | "
+        f"`{row.get('bigram_surprise_stratum', '')}` | "
+        f"{md_cell(row.get('bigram_surprise_evidence', ''))} | "
+        f"{md_cell(counts)} | `{row.get('source_family', '')}` |"
     )
 
 
@@ -533,14 +586,17 @@ def corpus_config_map(overrides: list[str]) -> dict[str, str]:
     return output
 
 
-def load_boundary_indexes(configs: dict[str, str]) -> dict[str, BoundaryIndex]:
-    indexes = {}
+def load_corpus_metadata(configs: dict[str, str]) -> tuple[dict[str, BoundaryIndex], dict[str, BigramProfile]]:
+    boundary_indexes = {}
+    bigram_profiles = {}
     for label, path in configs.items():
         try:
-            indexes[label] = build_boundary_index(load_corpus(path))
+            corpus = load_corpus(path)
         except FileNotFoundError:
             continue
-    return indexes
+        boundary_indexes[label] = build_boundary_index(corpus)
+        bigram_profiles[label] = BigramProfile.from_text(corpus.text)
+    return boundary_indexes, bigram_profiles
 
 
 def boundary_annotations(

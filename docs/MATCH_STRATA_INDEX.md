@@ -16,6 +16,7 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 - annotated occurrence rows: 923
 - materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, and available `boundary_*` endpoint strata.
 - meaningful skip strata use the locked constants file and standard Hebrew/Greek gematria only as review flags.
+- bigram-surprise strata compare the hidden term's adjacent letter pairs to the matched corpus text.
 - boundary strata are exact only when the source occurrence row retains endpoint offsets for a mapped corpus.
 
 ## Strata Counts
@@ -30,6 +31,7 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 | `backward_only` | 77 |
 | `center_verse_relevant` | 73 |
 | `forward_only` | 66 |
+| `low_bigram_surprise` | 49 |
 | `boundary_start_verse` | 22 |
 | `relevant_center_same_category` | 14 |
 | `boundary_end_verse` | 13 |
@@ -268,6 +270,60 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 | 829 | `hits` | MAL 4:5 `before` | 144 | 144: Revelation square of twelve |  | `kjv_apocrypha_bridge_context` |
 | 896 | `soot` | TOB 1:1 `of` | -70 | 70: Nations / exile years |  | `kjv_apocrypha_bridge_context` |
 
+## Bigram Surprise Rows
+
+| Rank | Term | Center | Stratum | Evidence | Min/max counts | Source |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 644 | `μαρια` (Maria; English: Mary) | MAL 4:6 `Ἰσραὴλ` (israel; English: Israel) | `low_bigram_surprise` | μα:16196;αρ:17084;ρι:20410;ια:32513 | 16196/32513 | `apocrypha_bridge_context` |
+| 678 | `eden` | MAL 4:4 `judgments.` | `low_bigram_surprise` | ed:33489;de:17773;en:40399 | 17773/40399 | `kjv_apocrypha_bridge_context` |
+| 685 | `hand` | MAL 4:6 `their` | `low_bigram_surprise` | ha:58723;an:90242;nd:76718 | 58723/90242 | `kjv_apocrypha_bridge_context` |
+| 686 | `hand` | MAL 4:6 `lest` | `low_bigram_surprise` | ha:58723;an:90242;nd:76718 | 58723/90242 | `kjv_apocrypha_bridge_context` |
+| 687 | `hand` | MAT 1:5 `begat` | `low_bigram_surprise` | ha:58723;an:90242;nd:76718 | 58723/90242 | `kjv_apocrypha_bridge_context` |
+| 776 | `bear` | MAT 1:3 `and` | `low_bigram_surprise` | be:22507;ea:43577;ar:25373 | 22507/43577 | `kjv_apocrypha_bridge_context` |
+| 778 | `death` | TOB 1:2 `Assyrians` | `low_bigram_surprise` | de:17773;ea:43577;at:39393;th:195529 | 17773/195529 | `kjv_apocrypha_bridge_context` |
+| 779 | `dedan` | MAL 4:6 `And` | `low_bigram_surprise` | de:17773;ed:33489;da:24821;an:90242 | 17773/90242 | `kjv_apocrypha_bridge_context` |
+| 780 | `earth` | 2ES 16:75 `afraid` | `low_bigram_surprise` | ea:43577;ar:25373;rt:18883;th:195529 | 18883/195529 | `kjv_apocrypha_bridge_context` |
+| 784 | `eden` | MAL 4:5 `you` | `low_bigram_surprise` | ed:33489;de:17773;en:40399 | 17773/40399 | `kjv_apocrypha_bridge_context` |
+| 785 | `eden` | MAL 4:6 `and` | `low_bigram_surprise` | ed:33489;de:17773;en:40399 | 17773/40399 | `kjv_apocrypha_bridge_context` |
+| 786 | `eden` | TOB 1:1 `The` | `low_bigram_surprise` | ed:33489;de:17773;en:40399 | 17773/40399 | `kjv_apocrypha_bridge_context` |
+| 787 | `eden` | TOB 1:2 `properly` | `low_bigram_surprise` | ed:33489;de:17773;en:40399 | 17773/40399 | `kjv_apocrypha_bridge_context` |
+| 807 | `hand` | 2ES 16:77 `their` | `low_bigram_surprise` | ha:58723;an:90242;nd:76718 | 58723/90242 | `kjv_apocrypha_bridge_context` |
+| 808 | `hand` | MAL 4:5 `Behold,` | `low_bigram_surprise` | ha:58723;an:90242;nd:76718 | 58723/90242 | `kjv_apocrypha_bridge_context` |
+| 809 | `hand` | TOB 1:1 `son` | `low_bigram_surprise` | ha:58723;an:90242;nd:76718 | 58723/90242 | `kjv_apocrypha_bridge_context` |
+| 810 | `heal` | MAL 4:4 `law` | `low_bigram_surprise` | he:153400;ea:43577;al:32047 | 32047/153400 | `kjv_apocrypha_bridge_context` |
+| 811 | `heart` | MAL 4:4 `commanded` | `low_bigram_surprise` | he:153400;ea:43577;ar:25373;rt:18883 | 18883/153400 | `kjv_apocrypha_bridge_context` |
+| 812 | `heart` | MAL 4:5 `great` | `low_bigram_surprise` | he:153400;ea:43577;ar:25373;rt:18883 | 18883/153400 | `kjv_apocrypha_bridge_context` |
+| 813 | `heart` | MAL 4:5 `Elijah` | `low_bigram_surprise` | he:153400;ea:43577;ar:25373;rt:18883 | 18883/153400 | `kjv_apocrypha_bridge_context` |
+| 814 | `heart` | TOB 1:2 `Assyrians` | `low_bigram_surprise` | he:153400;ea:43577;ar:25373;rt:18883 | 18883/153400 | `kjv_apocrypha_bridge_context` |
+| 816 | `heth` | MAL 4:4 `judgments.` | `low_bigram_surprise` | he:153400;et:40713;th:195529 | 40713/195529 | `kjv_apocrypha_bridge_context` |
+| 817 | `heth` | MAL 4:4 `which` | `low_bigram_surprise` | he:153400;et:40713;th:195529 | 40713/195529 | `kjv_apocrypha_bridge_context` |
+| 818 | `heth` | MAL 4:4 `servant,` | `low_bigram_surprise` | he:153400;et:40713;th:195529 | 40713/195529 | `kjv_apocrypha_bridge_context` |
+| 819 | `heth` | MAL 4:5 `will` | `low_bigram_surprise` | he:153400;et:40713;th:195529 | 40713/195529 | `kjv_apocrypha_bridge_context` |
+| 820 | `heth` | MAT 1:1 `son` | `low_bigram_surprise` | he:153400;et:40713;th:195529 | 40713/195529 | `kjv_apocrypha_bridge_context` |
+| 821 | `heth` | MAT 1:2 `Jacob;` | `low_bigram_surprise` | he:153400;et:40713;th:195529 | 40713/195529 | `kjv_apocrypha_bridge_context` |
+| 822 | `heth` | MAT 1:5 `Booz` | `low_bigram_surprise` | he:153400;et:40713;th:195529 | 40713/195529 | `kjv_apocrypha_bridge_context` |
+| 823 | `heth` | TOB 1:3 `nation,` | `low_bigram_surprise` | he:153400;et:40713;th:195529 | 40713/195529 | `kjv_apocrypha_bridge_context` |
+| 857 | `mash` | 2ES 16:77 `like` | `low_bigram_surprise` | ma:20579;as:23084;sh:27021 | 20579/27021 | `kjv_apocrypha_bridge_context` |
+| 858 | `mash` | MAT 1:2 `begat` | `low_bigram_surprise` | ma:20579;as:23084;sh:27021 | 20579/27021 | `kjv_apocrypha_bridge_context` |
+| 870 | `otho` | 2ES 16:76 `weigh` | `low_bigram_surprise` | ot:25564;th:195529;ho:25372 | 25372/195529 | `kjv_apocrypha_bridge_context` |
+| 871 | `otho` | 2ES 16:77 `unto` | `low_bigram_surprise` | ot:25564;th:195529;ho:25372 | 25372/195529 | `kjv_apocrypha_bridge_context` |
+| 872 | `rent` | TOB 1:1 `the` | `low_bigram_surprise` | re:50330;en:40399;nt:46361 | 40399/50330 | `kjv_apocrypha_bridge_context` |
+| 873 | `rent` | TOB 1:2 `which` | `low_bigram_surprise` | re:50330;en:40399;nt:46361 | 40399/50330 | `kjv_apocrypha_bridge_context` |
+| 874 | `rent` | TOB 1:2 `right` | `low_bigram_surprise` | re:50330;en:40399;nt:46361 | 40399/50330 | `kjv_apocrypha_bridge_context` |
+| 875 | `resen` | 2ES 16:76 `iniquities` | `low_bigram_surprise` | re:50330;es:47860;se:28717;en:40399 | 28717/50330 | `kjv_apocrypha_bridge_context` |
+| 886 | `shem` | MAL 4:4 `Israel,` | `low_bigram_surprise` | sh:27021;he:153400;em:21585 | 21585/153400 | `kjv_apocrypha_bridge_context` |
+| 904 | `thin` | 2ES 16:77 `travel` | `low_bigram_surprise` | th:195529;hi:41738;in:55949 | 41738/195529 | `kjv_apocrypha_bridge_context` |
+| 905 | `thin` | 2ES 16:77 `travel` | `low_bigram_surprise` | th:195529;hi:41738;in:55949 | 41738/195529 | `kjv_apocrypha_bridge_context` |
+| 906 | `thin` | 2ES 16:78 `be` | `low_bigram_surprise` | th:195529;hi:41738;in:55949 | 41738/195529 | `kjv_apocrypha_bridge_context` |
+| 907 | `thin` | MAL 4:5 `prophet` | `low_bigram_surprise` | th:195529;hi:41738;in:55949 | 41738/195529 | `kjv_apocrypha_bridge_context` |
+| 908 | `thin` | MAT 1:5 `Salmon` | `low_bigram_surprise` | th:195529;hi:41738;in:55949 | 41738/195529 | `kjv_apocrypha_bridge_context` |
+| 909 | `thin` | TOB 1:1 `Nephthali;` | `low_bigram_surprise` | th:195529;hi:41738;in:55949 | 41738/195529 | `kjv_apocrypha_bridge_context` |
+| 910 | `thin` | TOB 1:2 `king` | `low_bigram_surprise` | th:195529;hi:41738;in:55949 | 41738/195529 | `kjv_apocrypha_bridge_context` |
+| 919 | `wine` | MAL 4:5 `coming` | `low_bigram_surprise` | wi:17895;in:55949;ne:20523 | 17895/55949 | `kjv_apocrypha_bridge_context` |
+| 920 | `wine` | MAL 4:6 `fathers` | `low_bigram_surprise` | wi:17895;in:55949;ne:20523 | 17895/55949 | `kjv_apocrypha_bridge_context` |
+| 921 | `wine` | MAT 1:2 `and` | `low_bigram_surprise` | wi:17895;in:55949;ne:20523 | 17895/55949 | `kjv_apocrypha_bridge_context` |
+| 922 | `wine` | TOB 1:3 `have` | `low_bigram_surprise` | wi:17895;in:55949;ne:20523 | 17895/55949 | `kjv_apocrypha_bridge_context` |
+
 ## Read
 
 - `canonical_first_occurrence` means first centered occurrence within the current indexed family, not first hidden occurrence in every raw hit export.
@@ -275,5 +331,6 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 - Boundary strata are computed only from retained endpoint offsets, so blank boundary fields mean unavailable evidence, not proven absence.
 - `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.
 - `skip_equals_meaningful_constant` and `skip_equals_term_gematria` are metadata flags; they do not change the search space or promote claim status.
+- Bigram-surprise strata are corpus-local review aids, not claim promotion rules; missing adjacent surface bigrams count as rare.
 - Matrix, cipher, broader cross-skip, and cohort-density strata widen the review surface and need separate locked controls before claim language.
 

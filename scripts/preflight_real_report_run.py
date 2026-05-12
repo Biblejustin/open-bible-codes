@@ -218,6 +218,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_match_strata_index.py",
     "els/match_strata.py",
     "els/gematria.py",
+    "els/letter_stats.py",
     "els/term_display.py",
     "terms/meaningful_constants.csv",
     "scripts/build_final_report_highlights.py",

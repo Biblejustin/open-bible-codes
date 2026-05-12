@@ -1,4 +1,5 @@
 from els.match_strata import build_boundary_index
+from els.letter_stats import BigramProfile
 from scripts.build_match_strata_index import (
     build_strata_rows,
     build_summary_rows,
@@ -162,6 +163,33 @@ def test_build_strata_rows_adds_meaningful_skip_and_gematria_flags() -> None:
     assert row["skip_equals_term_gematria"] == "yes"
     assert "skip_equals_meaningful_constant" in row["extended_strata"]
     assert "skip_equals_term_gematria" in row["extended_strata"]
+
+
+def test_build_strata_rows_adds_bigram_surprise_flags() -> None:
+    rows = build_strata_rows(
+        [
+            {
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT",
+                "present_corpora": "MT",
+                "term_id": "rare",
+                "normalized_term": "cd",
+                "center_ref": "Gen 1:1",
+                "center_word": "center",
+                "center_normalized_word": "center",
+                "skip": "5",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+            }
+        ],
+        bigram_profiles={"MT": BigramProfile.from_text("ababababababababcd")},
+    )
+
+    row = rows[0]
+    assert row["bigram_surprise_stratum"] == "high_bigram_surprise"
+    assert row["bigram_surprise_evidence"] == "cd:1"
+    assert "high_bigram_surprise" in row["extended_strata"]
 
 
 def test_read_meaningful_constants_ignores_bad_values(tmp_path) -> None:
