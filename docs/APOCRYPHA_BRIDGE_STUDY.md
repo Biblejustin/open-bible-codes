@@ -38,6 +38,8 @@ KJV + Apocrypha bridge surface-context review:
 KJV + Apocrypha bridge controls: `docs/KJV_APOCRYPHA_BRIDGE_CONTROLS.md`.
 KJV + Apocrypha bridge term-level review:
 `docs/KJV_APOCRYPHA_BRIDGE_TERM_REVIEW.md`.
+Bridge-completion review packet:
+`docs/APOCRYPHA_BRIDGE_COMPLETION_REVIEW.md`.
 KJV + Apocrypha bridge term-level shuffled controls:
 `docs/KJV_APOCRYPHA_BRIDGE_TERM_SHUFFLED_CONTROLS_1000.md`.
 KJV + Apocrypha bridge confirmatory preregistration:

@@ -10,5 +10,6 @@ def test_lxx_apocrypha_bridge_display_steps_track_term_display_helper() -> None:
         "bridge_context",
         "bridge_controls",
         "apocrypha_only_counts",
+        "bridge_completion_review",
     ]:
         assert "els/term_display.py" in steps_by_id[step_id]["inputs"], step_id

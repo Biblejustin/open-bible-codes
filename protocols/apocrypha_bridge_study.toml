@@ -323,6 +323,24 @@ outputs = [
 ]
 
 [[steps]]
+id = "bridge_completion_review"
+description = "Restate LXX and KJVA bridge candidates as canonical-partial / apocrypha-completed paths."
+argv = ["-m", "scripts.build_apocrypha_bridge_completion_review"]
+inputs = [
+  "scripts/build_apocrypha_bridge_completion_review.py",
+  "reports/apocrypha_bridge_candidates/bridge_candidates.csv",
+  "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
+  "els/report_index.py",
+  "els/term_display.py",
+]
+outputs = [
+  "reports/apocrypha_bridge_completion_review/completion_rows.csv",
+  "reports/apocrypha_bridge_completion_review/summary.csv",
+  "docs/APOCRYPHA_BRIDGE_COMPLETION_REVIEW.md",
+  "reports/apocrypha_bridge_completion_review/manifest.json",
+]
+
+[[steps]]
 id = "docs_index"
 description = "Refresh documentation index after apocrypha study outputs."
 argv = ["-m", "scripts.build_docs_index", "--docs-dir", "docs", "--out", "docs/INDEX.md"]
@@ -341,6 +359,7 @@ inputs = [
   "docs/KJV_APOCRYPHA_BRIDGE_CONTEXT.md",
   "docs/KJV_APOCRYPHA_BRIDGE_CONTROLS.md",
   "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md",
+  "docs/APOCRYPHA_BRIDGE_COMPLETION_REVIEW.md",
 ]
 outputs = ["docs/INDEX.md"]
 
