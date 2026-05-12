@@ -73,6 +73,30 @@ Primary outputs:
 - `docs/CHAPTER_POSITION_BIAS.md`
 - `reports/chapter_position_bias/manifest.json`
 
+## Direction Asymmetry
+
+Direction asymmetry summarizes whether each term/corpus group is forward-only,
+backward-only, or present in both directions. It does not run a new ELS search.
+
+Primary protocol: `protocols/direction_asymmetry.toml`
+
+```bash
+python3 -m scripts.run_protocol protocols/direction_asymmetry.toml --resume
+```
+
+Shortcut:
+
+```bash
+make direction-asymmetry
+```
+
+Primary outputs:
+
+- `reports/direction_asymmetry/summary.csv`
+- `reports/direction_asymmetry/term_summary.csv`
+- `docs/DIRECTION_ASYMMETRY.md`
+- `reports/direction_asymmetry/manifest.json`
+
 ## Transformed Hebrew Text
 
 Atbash and ALBAM are opt-in deterministic transform layers. They search a

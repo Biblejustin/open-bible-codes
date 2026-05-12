@@ -15,6 +15,7 @@ support. Status labels are engineering status only, not claim status.
 | `center_verse_first_in_book` / `center_verse_last_in_book` | implemented from center verse refs | `scripts/build_match_strata_index.py` |
 | `chapter_position_bias` | implemented as a distribution summary over center-position flags | `scripts/build_chapter_position_bias.py` |
 | `forward_only` / `backward_only` / `bidirectional_present` | implemented by grouped direction counts | `scripts/build_match_strata_index.py` |
+| `direction_imbalance_score` | summarized as term/corpus direction asymmetry review metadata | `scripts/build_direction_asymmetry.py` |
 | `canonical_first_occurrence` | implemented within the current centered occurrence family | `scripts/build_match_strata_index.py` |
 | `cross_skip_pair_at_word` | implemented for same center word/reference with different skips | `scripts/build_match_strata_index.py` |
 | `cross_skip_pair_at_letter` | implemented when retained/reconstructed letter paths share a letter position | `scripts/build_match_strata_index.py` |

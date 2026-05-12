@@ -1,13 +1,14 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 88
+Protocols indexed: 89
 
 ## Analysis
 
 | Name | Description | Steps | Terms | Output Roots | Path |
 | --- | --- | ---: | --- | --- | --- |
 | chapter_position_bias | Summarize first/last chapter and book center-verse flags from the match-strata index. | 1 |  | reports/chapter_position_bias | `chapter_position_bias.toml` |
+| direction_asymmetry | Summarize forward/backward direction strata from the match-strata index. | 1 |  | reports/direction_asymmetry | `direction_asymmetry.toml` |
 | greek_exact_center_cohort | Locked Greek theological exact-center cross-text extension cohort. | 8 | terms/greek_exact_center_cohort_terms.csv | reports/greek_exact_center_cohort | `greek_exact_center_cohort.toml` |
 | greek_exact_center_four_source | Locked Greek exact-center extension cohort with added text-critical Greek NT source. | 12 | terms/greek_exact_center_cohort_terms.csv | reports/greek_exact_center_four_source | `greek_exact_center_four_source.toml` |
 | greek_exact_center_three_source | Locked Greek exact-center extension cohort with independent Byzantine NT source. | 10 | terms/greek_exact_center_cohort_terms.csv | reports/greek_exact_center_three_source | `greek_exact_center_three_source.toml` |

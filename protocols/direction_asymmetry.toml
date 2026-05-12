@@ -1,0 +1,27 @@
+name = "direction_asymmetry"
+description = "Summarize forward/backward direction strata from the match-strata index."
+manifest_out = "reports/direction_asymmetry/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "direction_asymmetry"
+description = "Build direction-asymmetry distribution summary from occurrence strata."
+argv = [
+  "-m", "scripts.build_direction_asymmetry",
+  "--strata", "reports/match_strata_index/occurrence_strata.csv",
+  "--out", "reports/direction_asymmetry/summary.csv",
+  "--term-out", "reports/direction_asymmetry/term_summary.csv",
+  "--markdown-out", "docs/DIRECTION_ASYMMETRY.md",
+  "--manifest-out", "reports/direction_asymmetry/manifest.json",
+]
+inputs = [
+  "scripts/build_direction_asymmetry.py",
+  "reports/match_strata_index/occurrence_strata.csv",
+]
+outputs = [
+  "reports/direction_asymmetry/summary.csv",
+  "reports/direction_asymmetry/term_summary.csv",
+  "docs/DIRECTION_ASYMMETRY.md",
+  "reports/direction_asymmetry/manifest.json",
+]
