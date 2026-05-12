@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 262
+Documents indexed: 263
 
 ## Controls
 
@@ -167,6 +167,7 @@ Documents indexed: 262
 | Biblical Festivals | `BIBLICAL_FESTIVALS.md` |
 | Biblical Tribes | `BIBLICAL_TRIBES.md` |
 | Boundary Alignment | `BOUNDARY_ALIGNMENT.md` |
+| Canonical First Summary | `CANONICAL_FIRST_SUMMARY.md` |
 | Centered Occurrence Index | `CENTERED_OCCURRENCE_INDEX.md` |
 | Chapter Position Bias | `CHAPTER_POSITION_BIAS.md` |
 | Claim Catalog | `CLAIM_CATALOG.md` |

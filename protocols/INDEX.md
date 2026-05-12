@@ -1,13 +1,14 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 90
+Protocols indexed: 91
 
 ## Analysis
 
 | Name | Description | Steps | Terms | Output Roots | Path |
 | --- | --- | ---: | --- | --- | --- |
 | boundary_alignment | Summarize ELS start/end verse, chapter, and book boundary flags from the match-strata i... | 1 |  | reports/boundary_alignment | `boundary_alignment.toml` |
+| canonical_first_summary | Summarize canonical-first centered occurrences from the match-strata index. | 1 |  | reports/canonical_first_summary | `canonical_first_summary.toml` |
 | chapter_position_bias | Summarize first/last chapter and book center-verse flags from the match-strata index. | 1 |  | reports/chapter_position_bias | `chapter_position_bias.toml` |
 | direction_asymmetry | Summarize forward/backward direction strata from the match-strata index. | 1 |  | reports/direction_asymmetry | `direction_asymmetry.toml` |
 | greek_exact_center_cohort | Locked Greek theological exact-center cross-text extension cohort. | 8 | terms/greek_exact_center_cohort_terms.csv | reports/greek_exact_center_cohort | `greek_exact_center_cohort.toml` |

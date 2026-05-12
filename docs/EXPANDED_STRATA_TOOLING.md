@@ -120,6 +120,31 @@ Primary outputs:
 - `docs/DIRECTION_ASYMMETRY.md`
 - `reports/direction_asymmetry/manifest.json`
 
+## Canonical First Summary
+
+Canonical-first summary lists the first centered occurrence of each term/corpus
+group in canonical order, using the flag already produced by the match-strata
+index. It does not run a new ELS search.
+
+Primary protocol: `protocols/canonical_first_summary.toml`
+
+```bash
+python3 -m scripts.run_protocol protocols/canonical_first_summary.toml --resume
+```
+
+Shortcut:
+
+```bash
+make canonical-first-summary
+```
+
+Primary outputs:
+
+- `reports/canonical_first_summary/summary.csv`
+- `reports/canonical_first_summary/first_occurrences.csv`
+- `docs/CANONICAL_FIRST_SUMMARY.md`
+- `reports/canonical_first_summary/manifest.json`
+
 ## Transformed Hebrew Text
 
 Atbash and ALBAM are opt-in deterministic transform layers. They search a

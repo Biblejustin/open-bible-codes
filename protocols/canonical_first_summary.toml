@@ -1,0 +1,27 @@
+name = "canonical_first_summary"
+description = "Summarize canonical-first centered occurrences from the match-strata index."
+manifest_out = "reports/canonical_first_summary/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "canonical_first_summary"
+description = "Build canonical-first occurrence summary from occurrence strata."
+argv = [
+  "-m", "scripts.build_canonical_first_summary",
+  "--strata", "reports/match_strata_index/occurrence_strata.csv",
+  "--out", "reports/canonical_first_summary/summary.csv",
+  "--first-out", "reports/canonical_first_summary/first_occurrences.csv",
+  "--markdown-out", "docs/CANONICAL_FIRST_SUMMARY.md",
+  "--manifest-out", "reports/canonical_first_summary/manifest.json",
+]
+inputs = [
+  "scripts/build_canonical_first_summary.py",
+  "reports/match_strata_index/occurrence_strata.csv",
+]
+outputs = [
+  "reports/canonical_first_summary/summary.csv",
+  "reports/canonical_first_summary/first_occurrences.csv",
+  "docs/CANONICAL_FIRST_SUMMARY.md",
+  "reports/canonical_first_summary/manifest.json",
+]

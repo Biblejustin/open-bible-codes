@@ -26,6 +26,7 @@ ENTRIES = (
     ToolingEntry("boundary alignment", Path("protocols/boundary_alignment.toml"), "boundary-alignment"),
     ToolingEntry("chapter position bias", Path("protocols/chapter_position_bias.toml"), "chapter-position-bias"),
     ToolingEntry("direction asymmetry", Path("protocols/direction_asymmetry.toml"), "direction-asymmetry"),
+    ToolingEntry("canonical first summary", Path("protocols/canonical_first_summary.toml"), "canonical-first-summary"),
     ToolingEntry("Hebrew Atbash audit", Path("protocols/hebrew_atbash_audit.toml"), "hebrew-atbash-audit"),
     ToolingEntry("Hebrew ALBAM audit", Path("protocols/hebrew_albam_audit.toml"), "hebrew-albam-audit"),
     ToolingEntry("word-edge pattern audit", Path("protocols/word_edge_pattern_audit.toml"), "word-edge-pattern-audit"),
