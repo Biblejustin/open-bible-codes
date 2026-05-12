@@ -62,14 +62,14 @@ It is a triage aid, not a claim-grade filter.
 
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 5 | 16 | Job 5:12 | `ערומימ` (arumim; English: crafty/shrewd) | not_unusual |
-| 2 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -42 | 127 | Eccl 10:6 | `במרומימ` (ba-meromim; English: in the heights) | not_unusual |
-| 3 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | -3 | 10 | 2Chr 13:11 | `ובערב` (wbrb) | not_run |
-| 4 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 38 | 115 | Lev 13:57 | `אובערב` (wbrb) | not_run |
-| 5 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 42 | 127 | Deut 1:1 | `בערבה` (brbh) | not_run |
-| 6 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 65 | 196 | 2Sam 11:2 | `הערב` (hrb) | not_run |
-| 7 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | -81 | 244 | 1Sam 14:24 | `הערב` (hrb) | not_run |
-| 8 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 94 | 283 | Lev 15:17 | `עדהערב` (dhrb) | not_run |
+| 1 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | -3 | 10 | 2Chr 13:11 | `ובערב` (wbrb) | not_unusual |
+| 2 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 5 | 16 | Job 5:12 | `ערומימ` (arumim; English: crafty/shrewd) | not_unusual |
+| 3 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 38 | 115 | Lev 13:57 | `אובערב` (wbrb) | not_unusual |
+| 4 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 42 | 127 | Deut 1:1 | `בערבה` (brbh) | not_unusual |
+| 5 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -42 | 127 | Eccl 10:6 | `במרומימ` (ba-meromim; English: in the heights) | not_unusual |
+| 6 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 65 | 196 | 2Sam 11:2 | `הערב` (hrb) | not_unusual |
+| 7 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | -81 | 244 | 1Sam 14:24 | `הערב` (hrb) | not_unusual |
+| 8 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 94 | 283 | Lev 15:17 | `עדהערב` (dhrb) | not_unusual |
 | 9 | multi_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 7 | 22 | 1Chr 11:33 | `הבחרומי` (hbchrwmy) | not_unusual |
 
 ### center_word_same_category
@@ -84,18 +84,18 @@ It is a triage aid, not a claim-grade filter.
 | 6 | all_source | `locust_h` `ארבה` (rbh; English: Locust) | Locust | 2 | 7 | 1Kgs 12:12 | `דבר` (davar; English: word/matter) | not_unusual |
 | 7 | all_source | `locust_plague_h` `ארבה` (rbh; English: Locust Plague) | Locust Plague | 2 | 7 | 1Kgs 12:12 | `דבר` (davar; English: word/matter) | not_unusual |
 | 8 | all_source | `locusts_plague_h` `ארבה` (rbh; English: Locusts) | Locusts | 2 | 7 | 1Kgs 12:12 | `דבר` (davar; English: word/matter) | not_unusual |
-| 9 | all_source | `shinar_h` `שנער` (shnr; English: Shinar) | Shinar | 2 | 7 | 1Kgs 15:1 | `שמנה` (shmnh) | not_unusual |
-| 10 | all_source | `asshur_h` `אשור` (shwr; English: Asshur) | Asshur | -2 | 7 | 1Kgs 18:25 | `בשמ` (bshm) | not_unusual |
-| 11 | all_source | `shinar_h` `שנער` (shnr; English: Shinar) | Shinar | 2 | 7 | 1Kgs 7:15 | `שמנה` (shmnh) | not_unusual |
-| 12 | all_source | `peace_h` `שלומ` (shlwm; English: Peace) | Peace | 2 | 7 | 1Sam 18:30 | `דוד` (David; English: David) | not_unusual |
-| 13 | all_source | `peace_h` `שלומ` (shlwm; English: Peace) | Peace | 2 | 7 | 1Sam 20:28 | `דוד` (David; English: David) | not_unusual |
-| 14 | all_source | `locust_h` `ארבה` (rbh; English: Locust) | Locust | 2 | 7 | 2Chr 10:12 | `דבר` (davar; English: word/matter) | not_unusual |
-| 15 | all_source | `locust_plague_h` `ארבה` (rbh; English: Locust Plague) | Locust Plague | 2 | 7 | 2Chr 10:12 | `דבר` (davar; English: word/matter) | not_unusual |
-| 16 | all_source | `locusts_plague_h` `ארבה` (rbh; English: Locusts) | Locusts | 2 | 7 | 2Chr 10:12 | `דבר` (davar; English: word/matter) | not_unusual |
-| 17 | all_source | `prophet_h` `נביא` (navi; English: Prophet) | Prophet | 2 | 7 | 2Chr 21:7 | `הברית` (hbryt) | not_unusual |
-| 18 | all_source | `locust_h` `ארבה` (rbh; English: Locust) | Locust | -2 | 7 | 2Chr 26:23 | `הקבורה` (hqbwrh) | not_unusual |
-| 19 | all_source | `desolation_h` `שממה` (shemamah; English: Desolation) | Desolation | 2 | 7 | 2Chr 32:30 | `למטהמערבה` (lmthmrbh) | not_unusual |
-| 20 | all_source | `elam_h` `עילמ` (ylm; English: Elam) | Elam | -2 | 7 | 2Chr 32:31 | `המשלחימ` (hmshlchym) | not_unusual |
+| 9 | all_source | `ehyeh_h` `אהיה` (hyh; English: Ehyeh) | Ehyeh | 2 | 7 | 1Kgs 13:14 | `אישהאלהימ` (yshhlhym) | not_unusual |
+| 10 | all_source | `shinar_h` `שנער` (shnr; English: Shinar) | Shinar | 2 | 7 | 1Kgs 15:1 | `שמנה` (shmnh) | not_unusual |
+| 11 | all_source | `asshur_h` `אשור` (shwr; English: Asshur) | Asshur | -2 | 7 | 1Kgs 18:25 | `בשמ` (bshm) | not_unusual |
+| 12 | all_source | `ehyeh_h` `אהיה` (hyh; English: Ehyeh) | Ehyeh | 2 | 7 | 1Kgs 6:17 | `היה` (hyh) | not_unusual |
+| 13 | all_source | `shinar_h` `שנער` (shnr; English: Shinar) | Shinar | 2 | 7 | 1Kgs 7:15 | `שמנה` (shmnh) | not_unusual |
+| 14 | all_source | `peace_h` `שלומ` (shlwm; English: Peace) | Peace | 2 | 7 | 1Sam 18:30 | `דוד` (David; English: David) | not_unusual |
+| 15 | all_source | `peace_h` `שלומ` (shlwm; English: Peace) | Peace | 2 | 7 | 1Sam 20:28 | `דוד` (David; English: David) | not_unusual |
+| 16 | all_source | `locust_h` `ארבה` (rbh; English: Locust) | Locust | 2 | 7 | 2Chr 10:12 | `דבר` (davar; English: word/matter) | not_unusual |
+| 17 | all_source | `locust_plague_h` `ארבה` (rbh; English: Locust Plague) | Locust Plague | 2 | 7 | 2Chr 10:12 | `דבר` (davar; English: word/matter) | not_unusual |
+| 18 | all_source | `locusts_plague_h` `ארבה` (rbh; English: Locusts) | Locusts | 2 | 7 | 2Chr 10:12 | `דבר` (davar; English: word/matter) | not_unusual |
+| 19 | all_source | `prophet_h` `נביא` (navi; English: Prophet) | Prophet | 2 | 7 | 2Chr 21:7 | `הברית` (hbryt) | not_unusual |
+| 20 | all_source | `locust_h` `ארבה` (rbh; English: Locust) | Locust | -2 | 7 | 2Chr 26:23 | `הקבורה` (hqbwrh) | not_unusual |
 
 ### center_verse_exact
 
@@ -126,26 +126,26 @@ It is a triage aid, not a claim-grade filter.
 
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | -6 | 19 | 1Kgs 7:40 | `ואתהמזרקות` (ve-et ha-mizraqot; English: and the basins) | not_unusual |
-| 2 | all_source | `am_5708_full_h` `התשח` (htshch; English: Hebrew year 5708) | Hebrew year 5708 | 6 | 19 | Isa 37:30 | `אכול` (kwl) | not_unusual |
-| 3 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 6 | 19 | Josh 22:5 | `אתכמ` (etkhem; English: you) | not_unusual |
-| 4 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | -8 | 25 | Gen 42:7 | `באתמ` (btm) | not_unusual |
-| 5 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | -9 | 28 | Gen 7:19 | `עלהארצ` (lhrts) | not_unusual |
-| 6 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 11 | 34 | 2Chr 15:17 | `והבמות` (whbmwt) | not_unusual |
-| 7 | all_source | `year_2001_additive_h` `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 11 | 56 | Ezek 7:8 | `עליכ` (alekha; English: upon you) | not_unusual |
-| 8 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 14 | 43 | 2Sam 17:20 | `עבדי` (bdy) | not_unusual |
-| 9 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -14 | 43 | Num 11:4 | `ישראל` (Yisrael; English: Israel) | not_unusual |
-| 10 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 16 | 49 | Isa 29:18 | `דבריספר` (dbryspr) | not_unusual |
-| 11 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -16 | 49 | Jer 50:41 | `וגוי` (wgwy) | not_unusual |
-| 12 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 19 | 58 | Num 11:4 | `בני` (bny) | not_unusual |
-| 13 | all_source | `year_2001_additive_h` `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | -19 | 96 | Exod 10:1 | `בקרבו` (bqrbw) | not_unusual |
-| 14 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 23 | 70 | Deut 2:6 | `מאתמ` (mtm) | not_unusual |
-| 15 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -24 | 73 | 1Sam 23:22 | `הכינו` (hkynw) | not_unusual |
-| 16 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 28 | 85 | 2Sam 22:17 | `ישלח` (yshlch) | not_unusual |
-| 17 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 29 | 88 | Job 22:6 | `תפשיט` (tpshyt) | not_unusual |
-| 18 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -33 | 100 | 2Sam 17:20 | `מיכל` (mykl) | not_unusual |
-| 19 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -33 | 100 | Ezek 34:14 | `יהיה` (yhyh) | not_unusual |
-| 20 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | -35 | 106 | Isa 38:14 | `כסוס` (ksws) | not_unusual |
+| 1 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 2 | 7 | Num 9:11 | `יומ` (ywm) | not_unusual |
+| 2 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 2 | 7 | Num 9:3 | `עשריומ` (shrywm) | not_unusual |
+| 3 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | -4 | 13 | 1Kgs 10:15 | `הארצ` (hrts) | not_unusual |
+| 4 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 4 | 13 | Jer 44:6 | `יהודה` (Yehudah; English: Judah) | not_unusual |
+| 5 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | -4 | 13 | Num 9:5 | `בארבעה` (brbh) | not_unusual |
+| 6 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 5 | 16 | Exod 16:8 | `לאכל` (lkl) | not_unusual |
+| 7 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 5 | 16 | Isa 45:6 | `ממזרחשמש` (mmzrchshmsh) | not_unusual |
+| 8 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 5 | 16 | Josh 12:8 | `הפרזי` (hprzy) | not_unusual |
+| 9 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 5 | 16 | Ps 147:9 | `יקראו` (yqrw) | not_unusual |
+| 10 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | -6 | 19 | 1Kgs 7:40 | `ואתהמזרקות` (ve-et ha-mizraqot; English: and the basins) | not_unusual |
+| 11 | all_source | `am_5708_full_h` `התשח` (htshch; English: Hebrew year 5708) | Hebrew year 5708 | 6 | 19 | Isa 37:30 | `אכול` (kwl) | not_unusual |
+| 12 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 6 | 19 | Josh 22:5 | `אתכמ` (etkhem; English: you) | not_unusual |
+| 13 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | -8 | 25 | Gen 42:7 | `באתמ` (btm) | not_unusual |
+| 14 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 9 | 28 | Exod 16:8 | `בתת` (btt) | not_unusual |
+| 15 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | -9 | 28 | Gen 7:19 | `עלהארצ` (lhrts) | not_unusual |
+| 16 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 11 | 34 | 2Chr 15:17 | `והבמות` (whbmwt) | not_unusual |
+| 17 | all_source | `year_2001_additive_h` `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 11 | 56 | Ezek 7:8 | `עליכ` (alekha; English: upon you) | not_unusual |
+| 18 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 13 | 40 | Exod 27:21 | `עלהעדת` (lhdt) | not_unusual |
+| 19 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | -13 | 40 | Isa 34:11 | `וינשופ` (wynshwp) | not_unusual |
+| 20 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 14 | 43 | 2Sam 17:20 | `עבדי` (bdy) | not_unusual |
 
 ### center_verse_same_category
 
@@ -164,13 +164,13 @@ It is a triage aid, not a claim-grade filter.
 | 11 | all_source | `elul_h` `אלול` (lwl; English: Elul) | Elul | 2 | 7 | 1Chr 10:4 | `כליו` (klyw) | not_unusual |
 | 12 | all_source | `heaven_h` `שמימ` (shamayim; English: Heaven) | Heaven | -2 | 7 | 1Chr 10:4 | `ויאמר` (wymr) | not_unusual |
 | 13 | all_source | `teeth_h` `שנימ` (shnym; English: Teeth) | Teeth | -2 | 7 | 1Chr 11:19 | `בנפשותמ` (bnpshwtm) | not_unusual |
-| 14 | all_source | `mary_h` `מרימ` (mrym; English: Mary) | Mary | 2 | 7 | 1Chr 13:2 | `מגרשיהמ` (mgrshyhm) | not_unusual |
-| 15 | all_source | `obal_h` `עובל` (wbl; English: Obal) | Obal | 2 | 7 | 1Chr 14:11 | `בבעל` (bbl) | not_unusual |
-| 16 | all_source | `amorite_h` `אמרי` (mry; English: Amorite) | Amorite | 2 | 7 | 1Chr 15:13 | `פרצ` (prts) | not_unusual |
-| 17 | all_source | `riphath_h` `ריפת` (rypt; English: Riphath) | Riphath | -2 | 7 | 1Chr 15:24 | `לפני` (lpny) | not_unusual |
-| 18 | all_source | `heshvan_h` `חשונ` (chshwn; English: Heshvan) | Heshvan | -2 | 7 | 1Chr 16:29 | `השתחוו` (hshtchww) | not_unusual |
-| 19 | all_source | `jobab_h` `יובב` (ywbb; English: Jobab) | Jobab | 2 | 7 | 1Chr 17:1 | `יושב` (ywshb) | not_unusual |
-| 20 | all_source | `torment_h` `ענוי` (nwy; English: Torment) | Torment | -2 | 7 | 1Chr 17:9 | `בני` (bny) | not_unusual |
+| 14 | all_source | `ehyeh_h` `אהיה` (hyh; English: Ehyeh) | Ehyeh | 2 | 7 | 1Chr 11:23 | `האיש` (hysh) | not_unusual |
+| 15 | all_source | `mary_h` `מרימ` (mrym; English: Mary) | Mary | 2 | 7 | 1Chr 13:2 | `מגרשיהמ` (mgrshyhm) | not_unusual |
+| 16 | all_source | `obal_h` `עובל` (wbl; English: Obal) | Obal | 2 | 7 | 1Chr 14:11 | `בבעל` (bbl) | not_unusual |
+| 17 | all_source | `amorite_h` `אמרי` (mry; English: Amorite) | Amorite | 2 | 7 | 1Chr 15:13 | `פרצ` (prts) | not_unusual |
+| 18 | all_source | `riphath_h` `ריפת` (rypt; English: Riphath) | Riphath | -2 | 7 | 1Chr 15:24 | `לפני` (lpny) | not_unusual |
+| 19 | all_source | `heshvan_h` `חשונ` (chshwn; English: Heshvan) | Heshvan | -2 | 7 | 1Chr 16:29 | `השתחוו` (hshtchww) | not_unusual |
+| 20 | all_source | `jobab_h` `יובב` (ywbb; English: Jobab) | Jobab | 2 | 7 | 1Chr 17:1 | `יושב` (ywshb) | not_unusual |
 
 ### span_exact
 
@@ -201,26 +201,26 @@ It is a triage aid, not a claim-grade filter.
 
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 11 | 34 | Num 22:13 | `לתתי` (ltty) | not_unusual |
-| 2 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -14 | 43 | Ps 73:7 | `לבב` (lbb; English: Heart) | not_unusual |
-| 3 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -21 | 64 | Isa 33:15 | `אזנו` (znw) | not_unusual |
-| 4 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -27 | 82 | Isa 53:9 | `ויתנ` (wytn) | not_unusual |
-| 5 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 29 | 88 | 1Sam 23:23 | `המחבאימ` (hmchbym) | not_unusual |
-| 6 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 32 | 97 | Isa 38:15 | `עלמר` (lmr) | not_unusual |
-| 7 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 35 | 106 | Isa 33:17 | `תחזינה` (tchzynh) | not_unusual |
-| 8 | all_source | `year_2001_additive_h` `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 35 | 176 | Eccl 3:10 | `לענות` (la-anot; English: to answer/afflict) | not_unusual |
-| 9 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 36 | 109 | Gen 42:9 | `אשר` (shr; English: Asher) | not_unusual |
-| 10 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -38 | 115 | Ezek 48:11 | `שמרו` (shmrw) | not_unusual |
-| 11 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 38 | 115 | Isa 2:12 | `ליהוה` (le-YHWH; English: to/for YHWH) | not_unusual |
-| 12 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 39 | 118 | Prov 13:15 | `יתנחנ` (ytnchn) | not_unusual |
-| 13 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 40 | 121 | 1Sam 23:20 | `לרדת` (lrdt) | not_unusual |
-| 14 | all_source | `am_5708_full_h` `התשח` (htshch; English: Hebrew year 5708) | Hebrew year 5708 | 40 | 121 | Lev 22:27 | `והלאה` (whlh) | not_unusual |
-| 15 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -41 | 124 | Deut 20:7 | `ומיהאיש` (wmyhysh) | not_unusual |
-| 16 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -42 | 127 | Hab 3:8 | `כי` (ky) | not_unusual |
-| 17 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -43 | 130 | 2Sam 22:19 | `ביומ` (bywm) | not_unusual |
-| 18 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 43 | 130 | Job 22:9 | `אלמנות` (lmnwt) | not_unusual |
-| 19 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 44 | 133 | Isa 2:16 | `כלשכיות` (klshkywt) | not_unusual |
-| 20 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | -47 | 142 | Gen 7:18 | `ויגברו` (wygbrw) | not_unusual |
+| 1 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | -3 | 10 | Prov 27:14 | `מברכ` (mbrk) | not_unusual |
+| 2 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 11 | 34 | Num 22:13 | `לתתי` (ltty) | not_unusual |
+| 3 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | -13 | 40 | Isa 24:12 | `נשאר` (nshr) | not_unusual |
+| 4 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -14 | 43 | Ps 73:7 | `לבב` (lbb; English: Heart) | not_unusual |
+| 5 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -21 | 64 | Isa 33:15 | `אזנו` (znw) | not_unusual |
+| 6 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | -26 | 79 | Exod 12:17 | `חקת` (chqt) | not_unusual |
+| 7 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -27 | 82 | Isa 53:9 | `ויתנ` (wytn) | not_unusual |
+| 8 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 29 | 88 | 1Sam 23:23 | `המחבאימ` (hmchbym) | not_unusual |
+| 9 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 32 | 97 | Isa 38:15 | `עלמר` (lmr) | not_unusual |
+| 10 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 34 | 103 | 1Chr 26:19 | `מררי` (mrry) | not_unusual |
+| 11 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 34 | 103 | Ezek 46:3 | `בשבתות` (bshbtwt) | not_unusual |
+| 12 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 35 | 106 | Isa 33:17 | `תחזינה` (tchzynh) | not_unusual |
+| 13 | all_source | `year_2001_additive_h` `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 35 | 176 | Eccl 3:10 | `לענות` (la-anot; English: to answer/afflict) | not_unusual |
+| 14 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | -36 | 109 | Exod 12:17 | `לדרתיכמ` (ldrtykm) | not_unusual |
+| 15 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 36 | 109 | Gen 42:9 | `אשר` (shr; English: Asher) | not_unusual |
+| 16 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | -37 | 112 | Lev 23:3 | `מושבתיכמ` (mwshbtykm) | not_unusual |
+| 17 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -38 | 115 | Ezek 48:11 | `שמרו` (shmrw) | not_unusual |
+| 18 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 38 | 115 | Isa 2:12 | `ליהוה` (le-YHWH; English: to/for YHWH) | not_unusual |
+| 19 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 39 | 118 | Prov 13:15 | `יתנחנ` (ytnchn) | not_unusual |
+| 20 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 40 | 121 | 1Sam 23:20 | `לרדת` (lrdt) | not_unusual |
 
 ### span_same_category
 
