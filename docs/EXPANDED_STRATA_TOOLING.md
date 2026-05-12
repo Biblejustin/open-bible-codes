@@ -217,6 +217,7 @@ Primary outputs:
 
 - `reports/thematic_chapter_absence/term_gap_detail.csv`
 - `reports/thematic_chapter_absence/passage_summary.csv`
+- `reports/thematic_chapter_absence/cross_source_gap_summary.csv`
 - `reports/thematic_chapter_absence/manifest.json`
 - `docs/THEMATIC_CHAPTER_ABSENCE.md`
 

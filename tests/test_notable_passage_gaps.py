@@ -9,6 +9,7 @@ from scripts.analyze_notable_passage_gaps import (
     add_uniform_zero_q_values,
     merge_terms,
     classify_gap,
+    cross_source_gap_rows,
     parse_ref,
     passage_span,
     restricted_term_ids_for_passages,
@@ -194,6 +195,58 @@ def test_add_uniform_zero_q_values_only_scores_gap_rows() -> None:
     assert rows[2]["uniform_zero_bh_q"] == "0.020000"
 
 
+def test_cross_source_gap_rows_groups_passage_term_across_corpora() -> None:
+    rows = [
+        {
+            "passage_id": "lev24",
+            "passage_concept": "Leviticus 24",
+            "passage_category": "notable_passage_gap",
+            "language": "hebrew",
+            "term_id": "gog_h",
+            "concept": "Gog",
+            "category": "prophetic",
+            "normalized_term": "גוג",
+            "corpus_label": "MT_WLC",
+            "status": "eligible",
+            "gap_class": "absent_in_passage_common_elsewhere",
+        },
+        {
+            "passage_id": "lev24",
+            "passage_concept": "Leviticus 24",
+            "passage_category": "notable_passage_gap",
+            "language": "hebrew",
+            "term_id": "gog_h",
+            "concept": "Gog",
+            "category": "prophetic",
+            "normalized_term": "גוג",
+            "corpus_label": "UHB",
+            "status": "eligible",
+            "gap_class": "present_in_passage",
+        },
+        {
+            "passage_id": "lev24",
+            "passage_concept": "Leviticus 24",
+            "passage_category": "notable_passage_gap",
+            "language": "hebrew",
+            "term_id": "gog_h",
+            "concept": "Gog",
+            "category": "prophetic",
+            "normalized_term": "גוג",
+            "corpus_label": "MAM",
+            "status": "eligible",
+            "gap_class": "low_in_passage_vs_uniform",
+        },
+    ]
+
+    summary = cross_source_gap_rows(rows)
+
+    assert len(summary) == 1
+    assert summary[0]["gap_corpora"] == "MAM;MT_WLC"
+    assert summary[0]["present_corpora"] == "UHB"
+    assert summary[0]["gap_corpus_count"] == 2
+    assert summary[0]["strongest_gap_class"] == "absent_in_passage_common_elsewhere"
+
+
 def test_write_markdown_includes_declared_gap_target_section(tmp_path) -> None:
     out = tmp_path / "gaps.md"
     args = SimpleNamespace(
@@ -207,6 +260,7 @@ def test_write_markdown_includes_declared_gap_target_section(tmp_path) -> None:
         common_elsewhere_threshold=10,
         detail_out="detail.csv",
         summary_out="summary.csv",
+        cross_source_out="cross.csv",
         manifest_out="manifest.json",
     )
     summary_row = {
@@ -238,8 +292,26 @@ def test_write_markdown_includes_declared_gap_target_section(tmp_path) -> None:
         "uniform_zero_probability": "0.049787",
         "sample_center_refs": "",
     }
+    cross_source_row = {
+        "passage_id": "lev24",
+        "passage_concept": "Leviticus 24 Blasphemy Law",
+        "passage_category": "notable_passage_gap",
+        "term_id": "npg_yhwh_h",
+        "normalized_term": "יהוה",
+        "concept": "YHWH",
+        "gap_corpora": "MT_WLC",
+        "present_corpora": "",
+        "gap_corpus_count": 1,
+        "strongest_gap_class": "absent_in_passage_common_elsewhere",
+    }
 
-    write_markdown(out, detail_rows=[detail_row], summary_rows=[summary_row], args=args)
+    write_markdown(
+        out,
+        detail_rows=[detail_row],
+        summary_rows=[summary_row],
+        cross_source_rows=[cross_source_row],
+        args=args,
+    )
 
     text = out.read_text(encoding="utf-8")
     assert "## Declared Gap-Target Passages" in text
@@ -248,3 +320,5 @@ def test_write_markdown_includes_declared_gap_target_section(tmp_path) -> None:
     assert "Uniform Zero P" in text
     assert "Uniform Zero Q" in text
     assert "0.049787" in text
+    assert "## Declared Gap-Target Cross-Source Summary" in text
+    assert "Cross-source gap summary CSV" in text

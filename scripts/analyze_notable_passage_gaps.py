@@ -37,6 +37,7 @@ DEFAULT_TERMS_DIR = Path("terms")
 OUT_DIR = Path("reports/notable_passage_gaps")
 DETAIL_OUT = OUT_DIR / "term_gap_detail.csv"
 SUMMARY_OUT = OUT_DIR / "passage_summary.csv"
+CROSS_SOURCE_OUT = OUT_DIR / "cross_source_gap_summary.csv"
 MD_OUT = Path("docs/NOTABLE_PASSAGE_GAPS.md")
 MANIFEST_OUT = OUT_DIR / "manifest.json"
 
@@ -90,6 +91,29 @@ SUMMARY_FIELDS = [
     "terms_low_vs_uniform",
     "observed_centered_hits_in_passage",
     "expected_centered_hits_in_passage_uniform",
+]
+
+CROSS_SOURCE_FIELDS = [
+    "passage_id",
+    "passage_concept",
+    "passage_category",
+    "language",
+    "term_id",
+    "concept",
+    "category",
+    "normalized_term",
+    "corpus_count",
+    "eligible_corpora",
+    "skipped_corpora",
+    "present_corpora",
+    "absent_common_elsewhere_corpora",
+    "absent_present_elsewhere_corpora",
+    "low_vs_uniform_corpora",
+    "no_hits_anywhere_corpora",
+    "gap_corpora",
+    "gap_corpus_count",
+    "present_corpus_count",
+    "strongest_gap_class",
 ]
 
 
@@ -605,11 +629,98 @@ def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, object]]) 
         writer.writerows(rows)
 
 
+def cross_source_gap_rows(detail_rows: list[dict[str, object]]) -> list[dict[str, object]]:
+    grouped: dict[tuple[str, str], list[dict[str, object]]] = defaultdict(list)
+    for row in detail_rows:
+        grouped[(str(row.get("passage_id", "")), str(row.get("term_id", "")))].append(row)
+
+    rows: list[dict[str, object]] = []
+    for (_passage_id, _term_id), group_rows in grouped.items():
+        first = group_rows[0]
+        by_class = {
+            "present_in_passage": corpora_for_gap_class(group_rows, "present_in_passage"),
+            "absent_in_passage_common_elsewhere": corpora_for_gap_class(group_rows, "absent_in_passage_common_elsewhere"),
+            "absent_in_passage_present_elsewhere": corpora_for_gap_class(group_rows, "absent_in_passage_present_elsewhere"),
+            "low_in_passage_vs_uniform": corpora_for_gap_class(group_rows, "low_in_passage_vs_uniform"),
+            "no_hits_anywhere": corpora_for_gap_class(group_rows, "no_hits_anywhere"),
+            "skipped_short_term": corpora_for_gap_class(group_rows, "skipped_short_term"),
+        }
+        gap_corpora = sorted(
+            set(by_class["absent_in_passage_common_elsewhere"])
+            | set(by_class["low_in_passage_vs_uniform"])
+        )
+        eligible_corpora = sorted(
+            str(row.get("corpus_label", ""))
+            for row in group_rows
+            if str(row.get("status", "")) == "eligible" and str(row.get("corpus_label", ""))
+        )
+        rows.append(
+            {
+                "passage_id": first.get("passage_id", ""),
+                "passage_concept": first.get("passage_concept", ""),
+                "passage_category": first.get("passage_category", ""),
+                "language": first.get("language", ""),
+                "term_id": first.get("term_id", ""),
+                "concept": first.get("concept", ""),
+                "category": first.get("category", ""),
+                "normalized_term": first.get("normalized_term", ""),
+                "corpus_count": len({str(row.get("corpus_label", "")) for row in group_rows if row.get("corpus_label", "")}),
+                "eligible_corpora": ";".join(eligible_corpora),
+                "skipped_corpora": ";".join(by_class["skipped_short_term"]),
+                "present_corpora": ";".join(by_class["present_in_passage"]),
+                "absent_common_elsewhere_corpora": ";".join(by_class["absent_in_passage_common_elsewhere"]),
+                "absent_present_elsewhere_corpora": ";".join(by_class["absent_in_passage_present_elsewhere"]),
+                "low_vs_uniform_corpora": ";".join(by_class["low_in_passage_vs_uniform"]),
+                "no_hits_anywhere_corpora": ";".join(by_class["no_hits_anywhere"]),
+                "gap_corpora": ";".join(gap_corpora),
+                "gap_corpus_count": len(gap_corpora),
+                "present_corpus_count": len(by_class["present_in_passage"]),
+                "strongest_gap_class": strongest_gap_class(by_class),
+            }
+        )
+    return sorted(
+        rows,
+        key=lambda row: (
+            -int(row["gap_corpus_count"]),
+            -int(row["present_corpus_count"]),
+            str(row["passage_id"]),
+            str(row["term_id"]),
+        ),
+    )
+
+
+def corpora_for_gap_class(rows: list[dict[str, object]], gap_class: str) -> list[str]:
+    return sorted(
+        str(row.get("corpus_label", ""))
+        for row in rows
+        if row.get("gap_class", "") == gap_class and str(row.get("corpus_label", ""))
+    )
+
+
+def strongest_gap_class(by_class: dict[str, list[str]]) -> str:
+    for gap_class in (
+        "absent_in_passage_common_elsewhere",
+        "low_in_passage_vs_uniform",
+        "absent_in_passage_present_elsewhere",
+        "no_hits_anywhere",
+        "skipped_short_term",
+        "present_in_passage",
+    ):
+        if by_class.get(gap_class):
+            return gap_class
+    return ""
+
+
+def md_cell(value: str) -> str:
+    return value.replace("|", "\\|").replace("\n", " ")
+
+
 def write_markdown(
     path: Path,
     *,
     detail_rows: list[dict[str, object]],
     summary_rows: list[dict[str, object]],
+    cross_source_rows: list[dict[str, object]],
     args: argparse.Namespace,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -645,6 +756,12 @@ def write_markdown(
         row
         for row in notable_absences
         if row.get("passage_category") == "notable_passage_gap"
+    ]
+    declared_cross_source_gaps = [
+        row
+        for row in cross_source_rows
+        if row.get("passage_category") == "notable_passage_gap"
+        and int(row.get("gap_corpus_count", 0)) > 0
     ]
     lines = [
         f"# {getattr(args, 'title', 'Notable Passage Gaps')}",
@@ -726,6 +843,29 @@ def write_markdown(
                     sample_center_refs=row["sample_center_refs"],
                 )
             )
+    if declared_cross_source_gaps:
+        lines.extend(
+            [
+                "",
+                "## Declared Gap-Target Cross-Source Summary",
+                "",
+                "These rows group each declared gap-target term across compared editions, so absence and low-density patterns can be reviewed as version-distribution data rather than isolated rows.",
+                "",
+                "| Passage | Term | Gap corpora | Present corpora | Strongest gap class |",
+                "| --- | --- | --- | --- | --- |",
+            ]
+        )
+        for row in declared_cross_source_gaps[:80]:
+            term_display = display_term(str(row["normalized_term"]), english=str(row["concept"]))
+            lines.append(
+                "| {passage_concept} | {term} | {gap_corpora} | {present_corpora} | `{strongest_gap_class}` |".format(
+                    passage_concept=row["passage_concept"],
+                    term=term_display,
+                    gap_corpora=md_cell(str(row.get("gap_corpora", ""))),
+                    present_corpora=md_cell(str(row.get("present_corpora", ""))),
+                    strongest_gap_class=row.get("strongest_gap_class", ""),
+                )
+            )
     lines.extend(
         [
             "",
@@ -780,6 +920,7 @@ def write_markdown(
             "",
             f"- Detail CSV: `{args.detail_out}`",
             f"- Passage summary CSV: `{args.summary_out}`",
+            f"- Cross-source gap summary CSV: `{args.cross_source_out}`",
             f"- Manifest: `{args.manifest_out}`",
             "",
             "## Cautions",
@@ -802,6 +943,7 @@ def write_manifest(
     started: float,
     detail_rows: list[dict[str, object]],
     summary_rows: list[dict[str, object]],
+    cross_source_rows: list[dict[str, object]],
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = {
@@ -826,6 +968,7 @@ def write_manifest(
         "skip_missing_passages": args.skip_missing_passages,
         "detail_rows": len(detail_rows),
         "summary_rows": len(summary_rows),
+        "cross_source_rows": len(cross_source_rows),
     }
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
@@ -848,6 +991,7 @@ def main() -> int:
     parser.add_argument("--title", default="Notable Passage Gaps")
     parser.add_argument("--detail-out", type=Path, default=DETAIL_OUT)
     parser.add_argument("--summary-out", type=Path, default=SUMMARY_OUT)
+    parser.add_argument("--cross-source-out", type=Path, default=CROSS_SOURCE_OUT)
     parser.add_argument("--markdown-out", type=Path, default=MD_OUT)
     parser.add_argument("--manifest-out", type=Path, default=MANIFEST_OUT)
     args = parser.parse_args()
@@ -885,18 +1029,28 @@ def main() -> int:
         summary_rows.extend(corpus_summary)
 
     add_uniform_zero_q_values(detail_rows)
+    cross_source_rows = cross_source_gap_rows(detail_rows)
     write_csv(args.detail_out, DETAIL_FIELDS, detail_rows)
     write_csv(args.summary_out, SUMMARY_FIELDS, summary_rows)
-    write_markdown(args.markdown_out, detail_rows=detail_rows, summary_rows=summary_rows, args=args)
+    write_csv(args.cross_source_out, CROSS_SOURCE_FIELDS, cross_source_rows)
+    write_markdown(
+        args.markdown_out,
+        detail_rows=detail_rows,
+        summary_rows=summary_rows,
+        cross_source_rows=cross_source_rows,
+        args=args,
+    )
     write_manifest(
         args.manifest_out,
         args=args,
         started=started,
         detail_rows=detail_rows,
         summary_rows=summary_rows,
+        cross_source_rows=cross_source_rows,
     )
     print(args.detail_out)
     print(args.summary_out)
+    print(args.cross_source_out)
     print(args.markdown_out)
     return 0
 

@@ -140,6 +140,7 @@ Rows are sorted by gap class first, then by how frequently the term appears cent
 
 - Detail CSV: `reports/thematic_chapter_absence/term_gap_detail.csv`
 - Passage summary CSV: `reports/thematic_chapter_absence/passage_summary.csv`
+- Cross-source gap summary CSV: `reports/thematic_chapter_absence/cross_source_gap_summary.csv`
 - Manifest: `reports/thematic_chapter_absence/manifest.json`
 
 ## Cautions

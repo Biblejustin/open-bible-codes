@@ -6,12 +6,15 @@ It is intentionally a screening ledger: absence inside a short passage is often 
 ## Run Settings
 
 - Passages: `configs/notable_passage_gap_passages.csv`
+- Config passages disabled: `false`
 - Terms: `terms/notable_passage_gap_terms.csv`
+- Thematic chapters: ``
 - Skip range: `2..500`
 - Direction: `both`
 - Jobs: `0`
 - Minimum normalized term length: `3`
 - Common-elsewhere threshold: `10` centered hits outside the passage
+- Missing declared passages skipped: `false`
 
 ## Highest Gap Passage Rows
 
@@ -108,6 +111,25 @@ These rows isolate passages explicitly registered as gap targets, instead of let
 | Leviticus 24 Blasphemy Law | MT_WLC | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 22 | 0 | 0.019 | 0.981122 | 0.997247 |  |
 | Leviticus 24 Blasphemy Law | UXLC | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 22 | 0 | 0.019 | 0.981122 | 0.997247 |  |
 | Leviticus 24 Blasphemy Law | MAM | `כסא` (kisse; English: Throne) | low_in_passage_vs_uniform | 23834 | 4 | 20.566 | 0.000000 | 0.000000 | Lev 24:14 |
+
+## Declared Gap-Target Cross-Source Summary
+
+These rows group each declared gap-target term across compared editions, so absence and low-density patterns can be reviewed as version-distribution data rather than isolated rows.
+
+| Passage | Term | Gap corpora | Present corpora | Strongest gap class |
+| --- | --- | --- | --- | --- |
+| Leviticus 24 Blasphemy Law | `יומיהוה` (yom YHWH; English: Day Of YHWH) | EBIBLE_WLC;MAM;MT_WLC;UHB;UXLC |  | `absent_in_passage_common_elsewhere` |
+| Leviticus 24 Blasphemy Law | `גוג` (Gog; English: Gog) | EBIBLE_WLC;MAM;MT_WLC;UHB;UXLC |  | `absent_in_passage_common_elsewhere` |
+| Leviticus 24 Blasphemy Law | `ירושלימ` (yrwshlym; English: Jerusalem) | EBIBLE_WLC;MAM;MT_WLC;UHB;UXLC |  | `absent_in_passage_common_elsewhere` |
+| Leviticus 24 Blasphemy Law | `משפט` (mshpt; English: Judgment) | EBIBLE_WLC;MAM;MT_WLC;UHB;UXLC |  | `absent_in_passage_common_elsewhere` |
+| Leviticus 24 Blasphemy Law | `מגוג` (Magog; English: Magog) | EBIBLE_WLC;MAM;MT_WLC;UHB;UXLC |  | `absent_in_passage_common_elsewhere` |
+| Leviticus 24 Blasphemy Law | `פסח` (Pesach; English: Passover) | EBIBLE_WLC;MAM;MT_WLC;UHB;UXLC |  | `absent_in_passage_common_elsewhere` |
+| Leviticus 24 Blasphemy Law | `כסא` (kisse; English: Throne) | EBIBLE_WLC;MAM;MT_WLC;UHB;UXLC |  | `low_in_passage_vs_uniform` |
+| Leviticus 24 Blasphemy Law | `חבורה` (chabburah; English: Wound) | EBIBLE_WLC;MAM;MT_WLC;UHB;UXLC |  | `absent_in_passage_common_elsewhere` |
+| Leviticus 24 Blasphemy Law KJVA | `magog` | KJVA |  | `absent_in_passage_common_elsewhere` |
+| Leviticus 24 Blasphemy Law LXX | `κρισισ` (krisis; English: Judgment) | LXX |  | `absent_in_passage_common_elsewhere` |
+| Leviticus 24 Blasphemy Law LXX | `λυχνια` (luchnia; English: Lampstand) | LXX |  | `absent_in_passage_common_elsewhere` |
+| Leviticus 24 Blasphemy Law LXX | `μαγωγ` (magog; English: Magog) | LXX |  | `absent_in_passage_common_elsewhere` |
 
 ## Passage Summary
 
@@ -327,6 +349,7 @@ Rows are sorted by gap class first, then by how frequently the term appears cent
 
 - Detail CSV: `reports/notable_passage_gaps/term_gap_detail.csv`
 - Passage summary CSV: `reports/notable_passage_gaps/passage_summary.csv`
+- Cross-source gap summary CSV: `reports/notable_passage_gaps/cross_source_gap_summary.csv`
 - Manifest: `reports/notable_passage_gaps/manifest.json`
 
 ## Cautions

@@ -54,6 +54,8 @@ argv = [
   "reports/thematic_chapter_absence/term_gap_detail.csv",
   "--summary-out",
   "reports/thematic_chapter_absence/passage_summary.csv",
+  "--cross-source-out",
+  "reports/thematic_chapter_absence/cross_source_gap_summary.csv",
   "--markdown-out",
   "docs/THEMATIC_CHAPTER_ABSENCE.md",
   "--manifest-out",
@@ -82,6 +84,7 @@ inputs = [
 outputs = [
   "reports/thematic_chapter_absence/term_gap_detail.csv",
   "reports/thematic_chapter_absence/passage_summary.csv",
+  "reports/thematic_chapter_absence/cross_source_gap_summary.csv",
   "docs/THEMATIC_CHAPTER_ABSENCE.md",
   "reports/thematic_chapter_absence/manifest.json",
 ]
