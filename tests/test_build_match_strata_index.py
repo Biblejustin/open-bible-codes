@@ -88,5 +88,45 @@ def test_build_strata_rows_adds_boundary_flags_from_offset_triplets() -> None:
     assert "boundary_both_endpoints" in rows[0]["extended_strata"]
 
 
+def test_build_strata_rows_adds_cross_skip_pair_at_word() -> None:
+    rows = build_strata_rows(
+        [
+            {
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT",
+                "present_corpora": "MT",
+                "term_id": "left",
+                "normalized_term": "left",
+                "center_ref": "Gen 1:1",
+                "center_word": "center",
+                "center_normalized_word": "center",
+                "skip": "5",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+            },
+            {
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT",
+                "present_corpora": "MT",
+                "term_id": "right",
+                "normalized_term": "right",
+                "center_ref": "Gen 1:1",
+                "center_word": "center",
+                "center_normalized_word": "center",
+                "skip": "-7",
+                "direction": "backward",
+                "occurrence_type": "hidden_path_only",
+            },
+        ]
+    )
+
+    assert {row["cross_skip_pair_at_word"] for row in rows} == {"yes"}
+    assert rows[0]["cross_skip_pair_terms"] == "right"
+    assert rows[1]["cross_skip_pair_terms"] == "left"
+    assert "cross_skip_pair_at_word" in rows[0]["extended_strata"]
+
+
 def test_parse_offset_triplets_ignores_malformed_offsets() -> None:
     assert parse_offset_triplets("MT:1/2/3;bad;KJV:x/y/z") == [("MT", 1, 3)]

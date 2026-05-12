@@ -23,6 +23,7 @@ from els.match_strata import (
     canonical_first_keys,
     direction_counts_by_key,
     direction_strata_by_key,
+    parse_skip_values,
     row_identity,
 )
 from els.term_display import display_term
@@ -77,6 +78,10 @@ FIELDNAMES = [
     "boundary_strata",
     "boundary_corpora",
     "boundary_evidence",
+    "cross_skip_pair_at_word",
+    "cross_skip_pair_count",
+    "cross_skip_pair_terms",
+    "cross_skip_pair_skips",
     "extended_strata",
     "review_note",
     "source_record",
@@ -130,12 +135,14 @@ def build_strata_rows(
     direction_by_key = direction_strata_by_key(input_rows, key_fields=GROUP_FIELDS)
     canonical_first = canonical_first_keys(input_rows, group_fields=GROUP_FIELDS)
     boundary_indexes = boundary_indexes or {}
+    cross_skip = cross_skip_annotations(input_rows)
     output = []
     for row in input_rows:
         key = tuple(row.get(field, "") for field in GROUP_FIELDS)
         is_first = row_identity(row) in canonical_first
         counts = direction_counts[key]
         boundary_strata, boundary_corpora, boundary_evidence = boundary_annotations(row, boundary_indexes)
+        cross = cross_skip.get(row_identity(row), {})
         strata = [
             row.get("occurrence_type", ""),
             direction_by_key.get(key, ""),
@@ -143,6 +150,8 @@ def build_strata_rows(
         ]
         if is_first:
             strata.append("canonical_first_occurrence")
+        if cross:
+            strata.append("cross_skip_pair_at_word")
         output.append(
             {
                 "occurrence_rank": row.get("occurrence_rank", ""),
@@ -170,6 +179,10 @@ def build_strata_rows(
                 "boundary_strata": ";".join(boundary_strata),
                 "boundary_corpora": ";".join(boundary_corpora),
                 "boundary_evidence": ";".join(boundary_evidence),
+                "cross_skip_pair_at_word": "yes" if cross else "no",
+                "cross_skip_pair_count": cross.get("pair_count", "") if cross else "",
+                "cross_skip_pair_terms": cross.get("terms", "") if cross else "",
+                "cross_skip_pair_skips": cross.get("skips", "") if cross else "",
                 "extended_strata": ";".join(value for value in strata if value),
                 "review_note": row.get("review_note", ""),
                 "source_record": row.get("source_record", ""),
@@ -192,6 +205,57 @@ def direction_imbalance_score(forward: int, backward: int) -> str:
     if total == 0:
         return ""
     return f"{(forward - backward) / total:.6f}"
+
+
+def cross_skip_annotations(rows: list[dict[str, str]]) -> dict[tuple[str, ...], dict[str, str]]:
+    groups: dict[tuple[str, ...], list[dict[str, str]]] = {}
+    for row in rows:
+        groups.setdefault(cross_skip_group_key(row), []).append(row)
+
+    annotations: dict[tuple[str, ...], dict[str, str]] = {}
+    for group_rows in groups.values():
+        if len({row.get("normalized_term", "") for row in group_rows}) < 2:
+            continue
+        skip_sets = {row_identity(row): set(parse_skip_values(row.get("skip", ""))) for row in group_rows}
+        for row in group_rows:
+            row_key = row_identity(row)
+            row_skips = skip_sets[row_key]
+            peer_rows = [
+                peer
+                for peer in group_rows
+                if peer is not row
+                and peer.get("normalized_term", "") != row.get("normalized_term", "")
+                and has_different_skip(row_skips, skip_sets[row_identity(peer)])
+            ]
+            if not peer_rows:
+                continue
+            annotations[row_key] = {
+                "pair_count": str(len(peer_rows)),
+                "terms": ";".join(sorted({peer.get("normalized_term", "") for peer in peer_rows if peer.get("normalized_term")})),
+                "skips": ";".join(
+                    str(value)
+                    for value in sorted({skip for peer in peer_rows for skip in skip_sets[row_identity(peer)]})
+                ),
+            }
+    return annotations
+
+
+def cross_skip_group_key(row: dict[str, str]) -> tuple[str, str, str, str, str, str, str]:
+    return (
+        row.get("source_family", ""),
+        row.get("source_queue", ""),
+        row.get("corpus", ""),
+        row.get("present_corpora", ""),
+        row.get("center_ref", ""),
+        row.get("center_normalized_word", ""),
+        row.get("center_word", ""),
+    )
+
+
+def has_different_skip(left: set[int], right: set[int]) -> bool:
+    if not left or not right:
+        return False
+    return any(left_skip != right_skip for left_skip in left for right_skip in right)
 
 
 def write_markdown(
@@ -259,6 +323,23 @@ def write_markdown(
             lines.append(
                 f"| ... | ... | ... | ... | ... | {len(boundary_rows) - args.markdown_row_limit:,} more boundary rows in CSV |"
             )
+    cross_skip_rows = [row for row in rows if row.get("cross_skip_pair_at_word") == "yes"]
+    if cross_skip_rows:
+        lines.extend(
+            [
+                "",
+                "## Cross-Skip Center Rows",
+                "",
+                "| Rank | Term | Center | Pair count | Peer terms | Skip values | Source |",
+                "| ---: | --- | --- | ---: | --- | --- | --- |",
+            ]
+        )
+        for row in cross_skip_rows[: args.markdown_row_limit]:
+            lines.append(cross_skip_markdown_row(row))
+        if len(cross_skip_rows) > args.markdown_row_limit:
+            lines.append(
+                f"| ... | ... | ... | ... | ... | ... | {len(cross_skip_rows) - args.markdown_row_limit:,} more cross-skip rows in CSV |"
+            )
     lines.extend(
         [
             "",
@@ -267,7 +348,8 @@ def write_markdown(
             "- `canonical_first_occurrence` means first centered occurrence within the current indexed family, not first hidden occurrence in every raw hit export.",
             "- Direction strata are computed per source family / queue / corpus set / term group.",
             "- Boundary strata are computed only from retained endpoint offsets, so blank boundary fields mean unavailable evidence, not proven absence.",
-            "- Matrix, cipher, cross-skip, and cohort-density strata widen the review surface and need separate locked controls before claim language.",
+            "- `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.",
+            "- Matrix, cipher, broader cross-skip, and cohort-density strata widen the review surface and need separate locked controls before claim language.",
             "",
         ]
     )
@@ -282,6 +364,16 @@ def boundary_markdown_row(row: dict[str, object]) -> str:
         f"| {row.get('occurrence_rank', '')} | {term} | {md_cell(center)} | "
         f"{md_cell(row.get('boundary_strata', ''))} | "
         f"{md_cell(row.get('boundary_evidence', ''))} | `{row.get('source_family', '')}` |"
+    )
+
+
+def cross_skip_markdown_row(row: dict[str, object]) -> str:
+    term = display_term(str(row.get("normalized_term", "")), english=str(row.get("concept", "")))
+    center = f"{row.get('center_ref', '')} {display_term(str(row.get('center_word', '')))}"
+    return (
+        f"| {row.get('occurrence_rank', '')} | {term} | {md_cell(center)} | "
+        f"{row.get('cross_skip_pair_count', '')} | {md_cell(row.get('cross_skip_pair_terms', ''))} | "
+        f"{md_cell(row.get('cross_skip_pair_skips', ''))} | `{row.get('source_family', '')}` |"
     )
 
 
