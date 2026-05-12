@@ -93,6 +93,7 @@ def search_word_edge_patterns(
     rows: list[dict[str, str | int]] = []
     patterns = ("acrostic", "telestic") if pattern == "both" else (pattern,)
     directions = ("forward", "backward") if direction == "both" else (direction,)
+    letters_by_pattern = {pattern_type: word_edge_letters(corpus.words, pattern_type) for pattern_type in patterns}
     for term_row in term_rows:
         query = normalize_text(
             term_row.get("term", ""),
@@ -102,7 +103,7 @@ def search_word_edge_patterns(
         if not query:
             continue
         for pattern_type in patterns:
-            letters = word_edge_letters(corpus.words, pattern_type)
+            letters = letters_by_pattern[pattern_type]
             for direction_value in directions:
                 target = query if direction_value == "forward" else query[::-1]
                 hits = 0

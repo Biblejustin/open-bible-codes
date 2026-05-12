@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 84
+Protocols indexed: 85
 
 ## Analysis
 
@@ -34,6 +34,7 @@ Protocols indexed: 84
 | hebrew_atbash_audit | Opt-in Hebrew Atbash transformed-text ELS audit for declared Jeremiah cryptogram terms. | 9 | terms/hebrew_atbash_audit_terms.csv | reports/hebrew_atbash_audit | `hebrew_atbash_audit.toml` |
 | step_tahot_policy_hits | Audit STEP_TAHOT-only exact-hit rows against TAHOT source-type policy. | 2 |  | reports/step_tahot_policy_hits, reports/step_tahot_screening_version_presence | `step_tahot_policy_hits.toml` |
 | step_tahot_source_audit | Download STEP TAHOT and compare it against current Hebrew MT-family corpora. | 2 |  | reports/mt_version_comparison_step_tahot | `step_tahot_source_audit.toml` |
+| word_edge_pattern_audit | Opt-in consecutive-word acrostic and telestic audit for declared Hebrew word-edge terms. | 9 | terms/word_edge_pattern_audit_terms.csv | reports/word_edge_patterns | `word_edge_pattern_audit.toml` |
 
 ## Baseline
 

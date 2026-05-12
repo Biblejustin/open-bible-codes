@@ -1,0 +1,94 @@
+name = "word_edge_pattern_audit"
+description = "Opt-in consecutive-word acrostic and telestic audit for declared Hebrew word-edge terms."
+manifest_out = "reports/word_edge_patterns/protocol_run.manifest.json"
+max_parallel = 4
+progress_interval_seconds = 15
+
+[[steps]]
+id = "search_mt_wlc"
+description = "Search MT_WLC for consecutive-word acrostic/telestic patterns."
+argv = ["-m", "scripts.search_word_edge_patterns", "--config", "configs/example_oshb_wlc.toml", "--corpus-label", "MT_WLC", "--terms", "terms/word_edge_pattern_audit_terms.csv", "--pattern", "both", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/word_edge_patterns/MT_WLC_hits.csv"]
+inputs = ["scripts/search_word_edge_patterns.py", "els/corpus.py", "els/normalization.py", "configs/example_oshb_wlc.toml", "terms/word_edge_pattern_audit_terms.csv"]
+outputs = ["reports/word_edge_patterns/MT_WLC_hits.csv"]
+
+[[steps]]
+id = "search_uxlc"
+description = "Search UXLC for consecutive-word acrostic/telestic patterns."
+argv = ["-m", "scripts.search_word_edge_patterns", "--config", "configs/example_uxlc.toml", "--corpus-label", "UXLC", "--terms", "terms/word_edge_pattern_audit_terms.csv", "--pattern", "both", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/word_edge_patterns/UXLC_hits.csv"]
+inputs = ["scripts/search_word_edge_patterns.py", "els/corpus.py", "els/normalization.py", "configs/example_uxlc.toml", "terms/word_edge_pattern_audit_terms.csv"]
+outputs = ["reports/word_edge_patterns/UXLC_hits.csv"]
+
+[[steps]]
+id = "search_mam"
+description = "Search MAM for consecutive-word acrostic/telestic patterns."
+argv = ["-m", "scripts.search_word_edge_patterns", "--config", "configs/example_mam.toml", "--corpus-label", "MAM", "--terms", "terms/word_edge_pattern_audit_terms.csv", "--pattern", "both", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/word_edge_patterns/MAM_hits.csv"]
+inputs = ["scripts/search_word_edge_patterns.py", "els/corpus.py", "els/normalization.py", "configs/example_mam.toml", "terms/word_edge_pattern_audit_terms.csv"]
+outputs = ["reports/word_edge_patterns/MAM_hits.csv"]
+
+[[steps]]
+id = "search_ebible_wlc"
+description = "Search EBIBLE_WLC for consecutive-word acrostic/telestic patterns."
+argv = ["-m", "scripts.search_word_edge_patterns", "--config", "configs/example_ebible_hebwlc.toml", "--corpus-label", "EBIBLE_WLC", "--terms", "terms/word_edge_pattern_audit_terms.csv", "--pattern", "both", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/word_edge_patterns/EBIBLE_WLC_hits.csv"]
+inputs = ["scripts/search_word_edge_patterns.py", "els/corpus.py", "els/normalization.py", "configs/example_ebible_hebwlc.toml", "terms/word_edge_pattern_audit_terms.csv"]
+outputs = ["reports/word_edge_patterns/EBIBLE_WLC_hits.csv"]
+
+[[steps]]
+id = "search_uhb"
+description = "Search UHB for consecutive-word acrostic/telestic patterns."
+argv = ["-m", "scripts.search_word_edge_patterns", "--config", "configs/example_uhb.toml", "--corpus-label", "UHB", "--terms", "terms/word_edge_pattern_audit_terms.csv", "--pattern", "both", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/word_edge_patterns/UHB_hits.csv"]
+inputs = ["scripts/search_word_edge_patterns.py", "els/corpus.py", "els/normalization.py", "configs/example_uhb.toml", "terms/word_edge_pattern_audit_terms.csv"]
+outputs = ["reports/word_edge_patterns/UHB_hits.csv"]
+
+[[steps]]
+id = "search_hebrew_ahad_haam"
+description = "Search Hebrew Ahad Ha'am control for consecutive-word acrostic/telestic patterns."
+argv = ["-m", "scripts.search_word_edge_patterns", "--config", "configs/nonbible_hebrew_pby_ahad_haam.toml", "--corpus-label", "HEB_AHAD_HAAM", "--terms", "terms/word_edge_pattern_audit_terms.csv", "--pattern", "both", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/word_edge_patterns/HEB_AHAD_HAAM_hits.csv"]
+inputs = ["scripts/search_word_edge_patterns.py", "els/corpus.py", "els/normalization.py", "configs/nonbible_hebrew_pby_ahad_haam.toml", "terms/word_edge_pattern_audit_terms.csv"]
+outputs = ["reports/word_edge_patterns/HEB_AHAD_HAAM_hits.csv"]
+
+[[steps]]
+id = "search_hebrew_bialik"
+description = "Search Hebrew Bialik control for consecutive-word acrostic/telestic patterns."
+argv = ["-m", "scripts.search_word_edge_patterns", "--config", "configs/nonbible_hebrew_pby_bialik.toml", "--corpus-label", "HEB_BIALIK", "--terms", "terms/word_edge_pattern_audit_terms.csv", "--pattern", "both", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/word_edge_patterns/HEB_BIALIK_hits.csv"]
+inputs = ["scripts/search_word_edge_patterns.py", "els/corpus.py", "els/normalization.py", "configs/nonbible_hebrew_pby_bialik.toml", "terms/word_edge_pattern_audit_terms.csv"]
+outputs = ["reports/word_edge_patterns/HEB_BIALIK_hits.csv"]
+
+[[steps]]
+id = "search_hebrew_brenner"
+description = "Search Hebrew Brenner control for consecutive-word acrostic/telestic patterns."
+argv = ["-m", "scripts.search_word_edge_patterns", "--config", "configs/nonbible_hebrew_pby_brenner.toml", "--corpus-label", "HEB_BRENNER", "--terms", "terms/word_edge_pattern_audit_terms.csv", "--pattern", "both", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/word_edge_patterns/HEB_BRENNER_hits.csv"]
+inputs = ["scripts/search_word_edge_patterns.py", "els/corpus.py", "els/normalization.py", "configs/nonbible_hebrew_pby_brenner.toml", "terms/word_edge_pattern_audit_terms.csv"]
+outputs = ["reports/word_edge_patterns/HEB_BRENNER_hits.csv"]
+
+[[steps]]
+id = "summary"
+description = "Summarize word-edge pattern audit hits."
+argv = [
+  "-m", "scripts.summarize_word_edge_patterns",
+  "--hits", "reports/word_edge_patterns/MT_WLC_hits.csv",
+  "--hits", "reports/word_edge_patterns/UXLC_hits.csv",
+  "--hits", "reports/word_edge_patterns/MAM_hits.csv",
+  "--hits", "reports/word_edge_patterns/EBIBLE_WLC_hits.csv",
+  "--hits", "reports/word_edge_patterns/UHB_hits.csv",
+  "--hits", "reports/word_edge_patterns/HEB_AHAD_HAAM_hits.csv",
+  "--hits", "reports/word_edge_patterns/HEB_BIALIK_hits.csv",
+  "--hits", "reports/word_edge_patterns/HEB_BRENNER_hits.csv",
+  "--title", "Word-Edge Pattern Audit",
+  "--description", "Opt-in consecutive-word acrostic and telestic audit over declared Hebrew terms.",
+  "--summary-out", "reports/word_edge_patterns/summary.csv",
+  "--markdown-out", "docs/WORD_EDGE_PATTERN_AUDIT.md",
+  "--manifest-out", "reports/word_edge_patterns/summary.manifest.json"
+]
+inputs = [
+  "scripts/summarize_word_edge_patterns.py",
+  "els/term_display.py",
+  "reports/word_edge_patterns/MT_WLC_hits.csv",
+  "reports/word_edge_patterns/UXLC_hits.csv",
+  "reports/word_edge_patterns/MAM_hits.csv",
+  "reports/word_edge_patterns/EBIBLE_WLC_hits.csv",
+  "reports/word_edge_patterns/UHB_hits.csv",
+  "reports/word_edge_patterns/HEB_AHAD_HAAM_hits.csv",
+  "reports/word_edge_patterns/HEB_BIALIK_hits.csv",
+  "reports/word_edge_patterns/HEB_BRENNER_hits.csv",
+]
+outputs = ["reports/word_edge_patterns/summary.csv", "docs/WORD_EDGE_PATTERN_AUDIT.md", "reports/word_edge_patterns/summary.manifest.json"]

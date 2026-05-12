@@ -1,0 +1,5 @@
+term_id,concept,category,language,term,notes
+word_edge_yhwh_h,YHWH,word_edge_audit,hebrew,יהוה,declared acrostic/telestic audit term; includes Esther acrostic context
+word_edge_torah_h,Torah,word_edge_audit,hebrew,תורה,declared acrostic/telestic audit term
+word_edge_babylon_h,Babylon,word_edge_audit,hebrew,בבל,declared acrostic/telestic audit term
+word_edge_sheshach_h,Sheshach,word_edge_audit,hebrew,ששך,declared acrostic/telestic audit term
