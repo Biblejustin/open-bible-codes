@@ -20,6 +20,7 @@ from els.term_display import display_term
 
 SUMMARY_FIELDS = [
     "transform",
+    "corpus_label",
     "base_corpus",
     "term_id",
     "concept",
@@ -37,6 +38,7 @@ SUMMARY_FIELDS = [
 @dataclass(frozen=True)
 class SummaryKey:
     transform: str
+    corpus_label: str
     base_corpus: str
     term_id: str
     concept: str
@@ -85,6 +87,7 @@ def summarize_rows(rows: list[dict[str, str]]) -> list[dict[str, object]]:
     for row in rows:
         key = SummaryKey(
             transform=row.get("transform", ""),
+            corpus_label=row.get("corpus_label", ""),
             base_corpus=row.get("base_corpus", ""),
             term_id=row.get("term_id", ""),
             concept=row.get("concept", ""),
@@ -101,6 +104,7 @@ def summarize_rows(rows: list[dict[str, str]]) -> list[dict[str, object]]:
         output.append(
             {
                 "transform": key.transform,
+                "corpus_label": key.corpus_label,
                 "base_corpus": key.base_corpus,
                 "term_id": key.term_id,
                 "concept": key.concept,
@@ -114,7 +118,15 @@ def summarize_rows(rows: list[dict[str, str]]) -> list[dict[str, object]]:
                 "center_refs_sample": ";".join(refs[:10]),
             }
         )
-    return sorted(output, key=lambda row: (str(row["transform"]), str(row["base_corpus"]), -int(row["hits"]), str(row["term_id"])))
+    return sorted(
+        output,
+        key=lambda row: (
+            str(row["transform"]),
+            str(row["corpus_label"] or row["base_corpus"]),
+            -int(row["hits"]),
+            str(row["term_id"]),
+        ),
+    )
 
 
 def abs_int(value: str) -> int | None:
@@ -184,8 +196,9 @@ def markdown_row(row: dict[str, object]) -> str:
     term = display_term(str(row.get("normalized_term", "")), english=str(row.get("concept", "")))
     skip_range = f"{row.get('min_abs_skip', '')}-{row.get('max_abs_skip', '')}"
     direction_counts = f"{row.get('forward_hits', 0)}/{row.get('backward_hits', 0)}"
+    corpus = row.get("corpus_label", "") or row.get("base_corpus", "")
     return (
-        f"| `{row.get('transform', '')}` | `{row.get('base_corpus', '')}` | {term} | "
+        f"| `{row.get('transform', '')}` | `{corpus}` | {term} | "
         f"{int(row.get('hits', 0)):,} | {direction_counts} | {skip_range} | "
         f"{md_cell(row.get('center_refs_sample', ''))} |"
     )

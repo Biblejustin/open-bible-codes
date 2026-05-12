@@ -7,6 +7,7 @@ def test_summarize_rows_groups_hits_by_transform_corpus_and_term() -> None:
     rows = [
         {
             "transform": "hebrew_atbash",
+            "corpus_label": "MT_WLC",
             "base_corpus": "MT_WLC",
             "term_id": "babylon",
             "concept": "Babylon",
@@ -18,6 +19,7 @@ def test_summarize_rows_groups_hits_by_transform_corpus_and_term() -> None:
         },
         {
             "transform": "hebrew_atbash",
+            "corpus_label": "MT_WLC",
             "base_corpus": "MT_WLC",
             "term_id": "babylon",
             "concept": "Babylon",
@@ -43,8 +45,8 @@ def test_summarize_rows_groups_hits_by_transform_corpus_and_term() -> None:
 def test_main_writes_summary_markdown_and_manifest(tmp_path: Path) -> None:
     hits = tmp_path / "hits.csv"
     hits.write_text(
-        "transform,base_corpus,term_id,concept,category,normalized_term,direction,skip,center_ref\n"
-        "hebrew_atbash,MT_WLC,babylon,Babylon,cryptogram,בבל,forward,5,Jer 25:26\n",
+        "transform,corpus_label,base_corpus,term_id,concept,category,normalized_term,direction,skip,center_ref\n"
+        "hebrew_atbash,MT_WLC,OSHB Westminster Leningrad Codex,babylon,Babylon,cryptogram,בבל,forward,5,Jer 25:26\n",
         encoding="utf-8",
     )
     summary = tmp_path / "summary.csv"

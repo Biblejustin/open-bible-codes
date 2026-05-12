@@ -23,6 +23,7 @@ def test_transformed_search_rows_find_decoded_term() -> None:
         transformed,
         [{"term_id": "babylon", "concept": "Babylon", "category": "test", "term": "בבל"}],
         transform=TRANSFORM_HEBREW_ATBASH,
+        corpus_label="TINY",
         min_skip=1,
         max_skip=1,
         direction="forward",
@@ -31,6 +32,7 @@ def test_transformed_search_rows_find_decoded_term() -> None:
 
     assert len(rows) == 1
     assert rows[0]["base_corpus"] == "tiny"
+    assert rows[0]["corpus_label"] == "TINY"
     assert rows[0]["transform"] == TRANSFORM_HEBREW_ATBASH
     assert rows[0]["term_id"] == "babylon"
     assert rows[0]["center_ref"] == "Jer 25:26"

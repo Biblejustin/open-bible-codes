@@ -14,6 +14,7 @@ from els.transforms import TRANSFORM_HEBREW_ATBASH, transform_corpus
 
 FIELDNAMES = [
     "transform",
+    "corpus_label",
     "base_corpus",
     "transformed_corpus",
     "term_id",
@@ -51,6 +52,7 @@ def main(argv: list[str] | None = None) -> int:
         transformed,
         term_rows,
         transform=args.transform,
+        corpus_label=args.corpus_label,
         min_skip=args.min_skip,
         max_skip=args.max_skip,
         direction=args.direction,
@@ -64,6 +66,7 @@ def main(argv: list[str] | None = None) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", required=True, help="Corpus config TOML.")
+    parser.add_argument("--corpus-label", default="")
     parser.add_argument("--transform", default=TRANSFORM_HEBREW_ATBASH)
     parser.add_argument("--term", action="append", default=[])
     parser.add_argument("--terms", action="append", type=Path, default=[])
@@ -97,6 +100,7 @@ def transformed_search_rows(
     term_rows: list[dict[str, str]],
     *,
     transform: str,
+    corpus_label: str = "",
     min_skip: int,
     max_skip: int,
     direction: str,
@@ -117,7 +121,16 @@ def transformed_search_rows(
                 max_hits=max_hits_per_term,
             )
             for hit in hits:
-                rows.append(transformed_hit_row(base_corpus, transformed, term_row, hit, transform=transform))
+                rows.append(
+                    transformed_hit_row(
+                        base_corpus,
+                        transformed,
+                        term_row,
+                        hit,
+                        transform=transform,
+                        corpus_label=corpus_label,
+                    )
+                )
         except ValueError:
             continue
     return rows
@@ -130,9 +143,11 @@ def transformed_hit_row(
     hit: ELSHit,
     *,
     transform: str,
+    corpus_label: str = "",
 ) -> dict[str, str | int]:
     row = {
         "transform": transform,
+        "corpus_label": corpus_label,
         "base_corpus": base_corpus.name,
         "transformed_corpus": transformed.name,
         "term_id": term_row.get("term_id", ""),

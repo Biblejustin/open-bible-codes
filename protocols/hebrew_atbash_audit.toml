@@ -7,56 +7,56 @@ progress_interval_seconds = 15
 [[steps]]
 id = "search_mt_wlc"
 description = "Search MT_WLC after Hebrew Atbash substitution."
-argv = ["-m", "scripts.search_transformed_els", "--config", "configs/example_oshb_wlc.toml", "--transform", "hebrew_atbash", "--terms", "terms/hebrew_atbash_audit_terms.csv", "--min-skip", "2", "--max-skip", "100", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/hebrew_atbash_audit/MT_WLC_hits.csv"]
+argv = ["-m", "scripts.search_transformed_els", "--config", "configs/example_oshb_wlc.toml", "--corpus-label", "MT_WLC", "--transform", "hebrew_atbash", "--terms", "terms/hebrew_atbash_audit_terms.csv", "--min-skip", "2", "--max-skip", "100", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/hebrew_atbash_audit/MT_WLC_hits.csv"]
 inputs = ["scripts/search_transformed_els.py", "els/transforms.py", "els/search.py", "els/corpus.py", "configs/example_oshb_wlc.toml", "terms/hebrew_atbash_audit_terms.csv"]
 outputs = ["reports/hebrew_atbash_audit/MT_WLC_hits.csv"]
 
 [[steps]]
 id = "search_uxlc"
 description = "Search UXLC after Hebrew Atbash substitution."
-argv = ["-m", "scripts.search_transformed_els", "--config", "configs/example_uxlc.toml", "--transform", "hebrew_atbash", "--terms", "terms/hebrew_atbash_audit_terms.csv", "--min-skip", "2", "--max-skip", "100", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/hebrew_atbash_audit/UXLC_hits.csv"]
+argv = ["-m", "scripts.search_transformed_els", "--config", "configs/example_uxlc.toml", "--corpus-label", "UXLC", "--transform", "hebrew_atbash", "--terms", "terms/hebrew_atbash_audit_terms.csv", "--min-skip", "2", "--max-skip", "100", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/hebrew_atbash_audit/UXLC_hits.csv"]
 inputs = ["scripts/search_transformed_els.py", "els/transforms.py", "els/search.py", "els/corpus.py", "configs/example_uxlc.toml", "terms/hebrew_atbash_audit_terms.csv"]
 outputs = ["reports/hebrew_atbash_audit/UXLC_hits.csv"]
 
 [[steps]]
 id = "search_mam"
 description = "Search MAM after Hebrew Atbash substitution."
-argv = ["-m", "scripts.search_transformed_els", "--config", "configs/example_mam.toml", "--transform", "hebrew_atbash", "--terms", "terms/hebrew_atbash_audit_terms.csv", "--min-skip", "2", "--max-skip", "100", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/hebrew_atbash_audit/MAM_hits.csv"]
+argv = ["-m", "scripts.search_transformed_els", "--config", "configs/example_mam.toml", "--corpus-label", "MAM", "--transform", "hebrew_atbash", "--terms", "terms/hebrew_atbash_audit_terms.csv", "--min-skip", "2", "--max-skip", "100", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/hebrew_atbash_audit/MAM_hits.csv"]
 inputs = ["scripts/search_transformed_els.py", "els/transforms.py", "els/search.py", "els/corpus.py", "configs/example_mam.toml", "terms/hebrew_atbash_audit_terms.csv"]
 outputs = ["reports/hebrew_atbash_audit/MAM_hits.csv"]
 
 [[steps]]
 id = "search_ebible_wlc"
 description = "Search EBIBLE_WLC after Hebrew Atbash substitution."
-argv = ["-m", "scripts.search_transformed_els", "--config", "configs/example_ebible_hebwlc.toml", "--transform", "hebrew_atbash", "--terms", "terms/hebrew_atbash_audit_terms.csv", "--min-skip", "2", "--max-skip", "100", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/hebrew_atbash_audit/EBIBLE_WLC_hits.csv"]
+argv = ["-m", "scripts.search_transformed_els", "--config", "configs/example_ebible_hebwlc.toml", "--corpus-label", "EBIBLE_WLC", "--transform", "hebrew_atbash", "--terms", "terms/hebrew_atbash_audit_terms.csv", "--min-skip", "2", "--max-skip", "100", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/hebrew_atbash_audit/EBIBLE_WLC_hits.csv"]
 inputs = ["scripts/search_transformed_els.py", "els/transforms.py", "els/search.py", "els/corpus.py", "configs/example_ebible_hebwlc.toml", "terms/hebrew_atbash_audit_terms.csv"]
 outputs = ["reports/hebrew_atbash_audit/EBIBLE_WLC_hits.csv"]
 
 [[steps]]
 id = "search_uhb"
 description = "Search UHB after Hebrew Atbash substitution."
-argv = ["-m", "scripts.search_transformed_els", "--config", "configs/example_uhb.toml", "--transform", "hebrew_atbash", "--terms", "terms/hebrew_atbash_audit_terms.csv", "--min-skip", "2", "--max-skip", "100", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/hebrew_atbash_audit/UHB_hits.csv"]
+argv = ["-m", "scripts.search_transformed_els", "--config", "configs/example_uhb.toml", "--corpus-label", "UHB", "--transform", "hebrew_atbash", "--terms", "terms/hebrew_atbash_audit_terms.csv", "--min-skip", "2", "--max-skip", "100", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/hebrew_atbash_audit/UHB_hits.csv"]
 inputs = ["scripts/search_transformed_els.py", "els/transforms.py", "els/search.py", "els/corpus.py", "configs/example_uhb.toml", "terms/hebrew_atbash_audit_terms.csv"]
 outputs = ["reports/hebrew_atbash_audit/UHB_hits.csv"]
 
 [[steps]]
 id = "search_hebrew_ahad_haam"
 description = "Search Hebrew Ahad Ha'am control after Hebrew Atbash substitution."
-argv = ["-m", "scripts.search_transformed_els", "--config", "configs/nonbible_hebrew_pby_ahad_haam.toml", "--transform", "hebrew_atbash", "--terms", "terms/hebrew_atbash_audit_terms.csv", "--min-skip", "2", "--max-skip", "100", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/hebrew_atbash_audit/HEB_AHAD_HAAM_hits.csv"]
+argv = ["-m", "scripts.search_transformed_els", "--config", "configs/nonbible_hebrew_pby_ahad_haam.toml", "--corpus-label", "HEB_AHAD_HAAM", "--transform", "hebrew_atbash", "--terms", "terms/hebrew_atbash_audit_terms.csv", "--min-skip", "2", "--max-skip", "100", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/hebrew_atbash_audit/HEB_AHAD_HAAM_hits.csv"]
 inputs = ["scripts/search_transformed_els.py", "els/transforms.py", "els/search.py", "els/corpus.py", "configs/nonbible_hebrew_pby_ahad_haam.toml", "terms/hebrew_atbash_audit_terms.csv"]
 outputs = ["reports/hebrew_atbash_audit/HEB_AHAD_HAAM_hits.csv"]
 
 [[steps]]
 id = "search_hebrew_bialik"
 description = "Search Hebrew Bialik control after Hebrew Atbash substitution."
-argv = ["-m", "scripts.search_transformed_els", "--config", "configs/nonbible_hebrew_pby_bialik.toml", "--transform", "hebrew_atbash", "--terms", "terms/hebrew_atbash_audit_terms.csv", "--min-skip", "2", "--max-skip", "100", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/hebrew_atbash_audit/HEB_BIALIK_hits.csv"]
+argv = ["-m", "scripts.search_transformed_els", "--config", "configs/nonbible_hebrew_pby_bialik.toml", "--corpus-label", "HEB_BIALIK", "--transform", "hebrew_atbash", "--terms", "terms/hebrew_atbash_audit_terms.csv", "--min-skip", "2", "--max-skip", "100", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/hebrew_atbash_audit/HEB_BIALIK_hits.csv"]
 inputs = ["scripts/search_transformed_els.py", "els/transforms.py", "els/search.py", "els/corpus.py", "configs/nonbible_hebrew_pby_bialik.toml", "terms/hebrew_atbash_audit_terms.csv"]
 outputs = ["reports/hebrew_atbash_audit/HEB_BIALIK_hits.csv"]
 
 [[steps]]
 id = "search_hebrew_brenner"
 description = "Search Hebrew Brenner control after Hebrew Atbash substitution."
-argv = ["-m", "scripts.search_transformed_els", "--config", "configs/nonbible_hebrew_pby_brenner.toml", "--transform", "hebrew_atbash", "--terms", "terms/hebrew_atbash_audit_terms.csv", "--min-skip", "2", "--max-skip", "100", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/hebrew_atbash_audit/HEB_BRENNER_hits.csv"]
+argv = ["-m", "scripts.search_transformed_els", "--config", "configs/nonbible_hebrew_pby_brenner.toml", "--corpus-label", "HEB_BRENNER", "--transform", "hebrew_atbash", "--terms", "terms/hebrew_atbash_audit_terms.csv", "--min-skip", "2", "--max-skip", "100", "--direction", "both", "--max-hits-per-term", "200", "--out", "reports/hebrew_atbash_audit/HEB_BRENNER_hits.csv"]
 inputs = ["scripts/search_transformed_els.py", "els/transforms.py", "els/search.py", "els/corpus.py", "configs/nonbible_hebrew_pby_brenner.toml", "terms/hebrew_atbash_audit_terms.csv"]
 outputs = ["reports/hebrew_atbash_audit/HEB_BRENNER_hits.csv"]
 
