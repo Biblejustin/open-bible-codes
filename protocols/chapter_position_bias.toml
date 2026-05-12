@@ -1,0 +1,25 @@
+name = "chapter_position_bias"
+description = "Summarize first/last chapter and book center-verse flags from the match-strata index."
+manifest_out = "reports/chapter_position_bias/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "chapter_position_bias"
+description = "Build chapter-position distribution summary from occurrence strata."
+argv = [
+  "-m", "scripts.build_chapter_position_bias",
+  "--strata", "reports/match_strata_index/occurrence_strata.csv",
+  "--out", "reports/chapter_position_bias/summary.csv",
+  "--markdown-out", "docs/CHAPTER_POSITION_BIAS.md",
+  "--manifest-out", "reports/chapter_position_bias/manifest.json",
+]
+inputs = [
+  "scripts/build_chapter_position_bias.py",
+  "reports/match_strata_index/occurrence_strata.csv",
+]
+outputs = [
+  "reports/chapter_position_bias/summary.csv",
+  "docs/CHAPTER_POSITION_BIAS.md",
+  "reports/chapter_position_bias/manifest.json",
+]

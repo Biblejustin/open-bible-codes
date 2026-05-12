@@ -44,6 +44,29 @@ Current coverage:
 - term-gematria and center-word-gematria skip flags
 - letter-frequency and bigram-surprise metadata
 
+## Chapter Position Bias
+
+Chapter-position bias summarizes the first/last chapter and book center-verse
+flags from the match-strata index. It does not run a new ELS search.
+
+Primary protocol: `protocols/chapter_position_bias.toml`
+
+```bash
+python3 -m scripts.run_protocol protocols/chapter_position_bias.toml --resume
+```
+
+Shortcut:
+
+```bash
+make chapter-position-bias
+```
+
+Primary outputs:
+
+- `reports/chapter_position_bias/summary.csv`
+- `docs/CHAPTER_POSITION_BIAS.md`
+- `reports/chapter_position_bias/manifest.json`
+
 ## Transformed Hebrew Text
 
 Atbash and ALBAM are opt-in deterministic transform layers. They search a
