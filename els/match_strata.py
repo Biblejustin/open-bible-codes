@@ -10,7 +10,7 @@ from __future__ import annotations
 import re
 from collections import Counter, defaultdict
 from collections.abc import Iterable, Mapping, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 from .corpus import NT_BOOK_ORDER, OT_BOOK_ORDER, Corpus, VerseSpan
@@ -217,6 +217,7 @@ class BoundaryIndex:
     last_chapter_verse_indexes: frozenset[int]
     first_book_verse_indexes: frozenset[int]
     last_book_verse_indexes: frozenset[int]
+    verse_ref_indexes: Mapping[tuple[str, int, int], int] = field(default_factory=dict)
 
 
 def direction_counts_from_row(row: Mapping[str, Any]) -> DirectionCounts:
@@ -360,8 +361,12 @@ def build_boundary_index(corpus: Corpus) -> BoundaryIndex:
     last_book: set[int] = set()
     previous_chapter_key: tuple[str, str] | None = None
     previous_book: str | None = None
+    verse_ref_indexes: dict[tuple[str, int, int], int] = {}
 
     for index, verse in enumerate(corpus.verses):
+        ref_key = verse_ref_key(verse)
+        if ref_key is not None:
+            verse_ref_indexes.setdefault(ref_key, index)
         chapter_key = (verse.book, verse.chapter)
         if chapter_key != previous_chapter_key:
             first_chapter.add(index)
@@ -384,7 +389,41 @@ def build_boundary_index(corpus: Corpus) -> BoundaryIndex:
         last_chapter_verse_indexes=frozenset(last_chapter),
         first_book_verse_indexes=frozenset(first_book),
         last_book_verse_indexes=frozenset(last_book),
+        verse_ref_indexes=verse_ref_indexes,
     )
+
+
+def verse_ref_key(verse: VerseSpan) -> tuple[str, int, int] | None:
+    try:
+        return (normalize_book(verse.book), int(verse.chapter), int(verse.verse))
+    except ValueError:
+        parsed = parse_ref(verse.ref)
+        if parsed is None:
+            return None
+        return (parsed.book, parsed.chapter, parsed.verse)
+
+
+def center_position_strata_for_ref(
+    ref: Any,
+    *,
+    boundary_index: BoundaryIndex,
+) -> tuple[str, ...]:
+    parsed = parse_ref(ref)
+    if parsed is None:
+        return ()
+    verse_index = boundary_index.verse_ref_indexes.get((parsed.book, parsed.chapter, parsed.verse))
+    if verse_index is None:
+        return ()
+    strata: list[str] = []
+    if verse_index in boundary_index.first_chapter_verse_indexes:
+        strata.append("center_verse_first_in_chapter")
+    if verse_index in boundary_index.last_chapter_verse_indexes:
+        strata.append("center_verse_last_in_chapter")
+    if verse_index in boundary_index.first_book_verse_indexes:
+        strata.append("center_verse_first_in_book")
+    if verse_index in boundary_index.last_book_verse_indexes:
+        strata.append("center_verse_last_in_book")
+    return tuple(strata)
 
 
 def boundary_strata_for_offsets(

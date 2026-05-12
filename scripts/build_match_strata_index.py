@@ -23,6 +23,7 @@ from els.match_strata import (
     boundary_strata_for_offsets,
     build_boundary_index,
     canonical_first_keys,
+    center_position_strata_for_ref,
     direction_counts_by_key,
     direction_strata_by_key,
     parse_skip_values,
@@ -92,6 +93,9 @@ FIELDNAMES = [
     "boundary_strata",
     "boundary_corpora",
     "boundary_evidence",
+    "center_position_strata",
+    "center_position_corpora",
+    "center_position_evidence",
     "cross_skip_pair_at_word",
     "cross_skip_pair_count",
     "cross_skip_pair_terms",
@@ -167,6 +171,10 @@ def build_strata_rows(
         is_first = row_identity(row) in canonical_first
         counts = direction_counts[key]
         boundary_strata, boundary_corpora, boundary_evidence = boundary_annotations(row, boundary_indexes)
+        center_position_strata, center_position_corpora, center_position_evidence = center_position_annotations(
+            row,
+            boundary_indexes,
+        )
         cross = cross_skip.get(row_identity(row), {})
         skip_values = sorted({abs(value) for value in parse_skip_values(row.get("skip", ""))})
         constant_skips = [value for value in skip_values if value in meaningful_constants]
@@ -180,6 +188,7 @@ def build_strata_rows(
             row.get("occurrence_type", ""),
             direction_by_key.get(key, ""),
             *boundary_strata,
+            *center_position_strata,
         ]
         if is_first:
             strata.append("canonical_first_occurrence")
@@ -229,6 +238,9 @@ def build_strata_rows(
                 "boundary_strata": ";".join(boundary_strata),
                 "boundary_corpora": ";".join(boundary_corpora),
                 "boundary_evidence": ";".join(boundary_evidence),
+                "center_position_strata": ";".join(center_position_strata),
+                "center_position_corpora": ";".join(center_position_corpora),
+                "center_position_evidence": ";".join(center_position_evidence),
                 "cross_skip_pair_at_word": "yes" if cross else "no",
                 "cross_skip_pair_count": cross.get("pair_count", "") if cross else "",
                 "cross_skip_pair_terms": cross.get("terms", "") if cross else "",
@@ -341,6 +353,7 @@ def write_markdown(
         "- materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, and available `boundary_*` endpoint strata.",
         "- meaningful skip strata use the locked constants file and standard Hebrew/Greek gematria only as review flags.",
         "- bigram-surprise strata compare the hidden term's adjacent letter pairs to the matched corpus text.",
+        "- center-position strata flag when the center verse is first/last in its chapter or book.",
         "- boundary strata are exact only when the source occurrence row retains endpoint offsets for a mapped corpus.",
         "",
         "## Strata Counts",
@@ -381,6 +394,23 @@ def write_markdown(
         if len(boundary_rows) > args.markdown_row_limit:
             lines.append(
                 f"| ... | ... | ... | ... | ... | {len(boundary_rows) - args.markdown_row_limit:,} more boundary rows in CSV |"
+            )
+    center_position_rows = [row for row in rows if row.get("center_position_strata")]
+    if center_position_rows:
+        lines.extend(
+            [
+                "",
+                "## Center Position Rows",
+                "",
+                "| Rank | Term | Center | Center position strata | Evidence | Source |",
+                "| ---: | --- | --- | --- | --- | --- |",
+            ]
+        )
+        for row in center_position_rows[: args.markdown_row_limit]:
+            lines.append(center_position_markdown_row(row))
+        if len(center_position_rows) > args.markdown_row_limit:
+            lines.append(
+                f"| ... | ... | ... | ... | ... | {len(center_position_rows) - args.markdown_row_limit:,} more center-position rows in CSV |"
             )
     cross_skip_rows = [row for row in rows if row.get("cross_skip_pair_at_word") == "yes"]
     if cross_skip_rows:
@@ -445,6 +475,7 @@ def write_markdown(
             "- `canonical_first_occurrence` means first centered occurrence within the current indexed family, not first hidden occurrence in every raw hit export.",
             "- Direction strata are computed per source family / queue / corpus set / term group.",
             "- Boundary strata are computed only from retained endpoint offsets, so blank boundary fields mean unavailable evidence, not proven absence.",
+            "- Center-position strata use the center verse reference, not ELS path endpoints.",
             "- `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.",
             "- `skip_equals_meaningful_constant` and `skip_equals_term_gematria` are metadata flags; they do not change the search space or promote claim status.",
             "- Bigram-surprise strata are corpus-local review aids, not claim promotion rules; missing adjacent surface bigrams count as rare.",
@@ -463,6 +494,16 @@ def boundary_markdown_row(row: dict[str, object]) -> str:
         f"| {row.get('occurrence_rank', '')} | {term} | {md_cell(center)} | "
         f"{md_cell(row.get('boundary_strata', ''))} | "
         f"{md_cell(row.get('boundary_evidence', ''))} | `{row.get('source_family', '')}` |"
+    )
+
+
+def center_position_markdown_row(row: dict[str, object]) -> str:
+    term = display_term(str(row.get("normalized_term", "")), english=str(row.get("concept", "")))
+    center = f"{row.get('center_ref', '')} {display_term(str(row.get('center_word', '')))}"
+    return (
+        f"| {row.get('occurrence_rank', '')} | {term} | {md_cell(center)} | "
+        f"{md_cell(row.get('center_position_strata', ''))} | "
+        f"{md_cell(row.get('center_position_evidence', ''))} | `{row.get('source_family', '')}` |"
     )
 
 
@@ -615,6 +656,30 @@ def boundary_annotations(
     corpora = sorted(strata_by_corpus)
     evidence = [f"{corpus}:{','.join(strata_by_corpus[corpus])}" for corpus in corpora]
     return strata, corpora, evidence
+
+
+def center_position_annotations(
+    row: dict[str, str],
+    boundary_indexes: dict[str, BoundaryIndex],
+) -> tuple[list[str], list[str], list[str]]:
+    strata_by_corpus: dict[str, tuple[str, ...]] = {}
+    for corpus in candidate_corpora(row):
+        index = boundary_indexes.get(corpus)
+        if index is None:
+            continue
+        strata = center_position_strata_for_ref(row.get("center_ref", ""), boundary_index=index)
+        if strata:
+            strata_by_corpus[corpus] = strata
+    strata = sorted({value for values in strata_by_corpus.values() for value in values})
+    corpora = sorted(strata_by_corpus)
+    evidence = [f"{corpus}:{','.join(strata_by_corpus[corpus])}" for corpus in corpora]
+    return strata, corpora, evidence
+
+
+def candidate_corpora(row: dict[str, str]) -> list[str]:
+    values = [row.get("corpus", "")]
+    values.extend(re.split(r"[;,| ]+", row.get("present_corpora", "")))
+    return sorted({value for value in values if value})
 
 
 def offset_records(row: dict[str, str]) -> list[tuple[str, int, int]]:

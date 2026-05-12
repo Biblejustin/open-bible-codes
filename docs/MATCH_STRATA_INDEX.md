@@ -17,6 +17,7 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 - materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, and available `boundary_*` endpoint strata.
 - meaningful skip strata use the locked constants file and standard Hebrew/Greek gematria only as review flags.
 - bigram-surprise strata compare the hidden term's adjacent letter pairs to the matched corpus text.
+- center-position strata flag when the center verse is first/last in its chapter or book.
 - boundary strata are exact only when the source occurrence row retains endpoint offsets for a mapped corpus.
 
 ## Strata Counts
@@ -28,10 +29,14 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 | `span_relevant` | 205 |
 | `canonical_first_occurrence` | 153 |
 | `cross_skip_pair_at_word` | 122 |
+| `center_verse_first_in_chapter` | 82 |
 | `backward_only` | 77 |
 | `center_verse_relevant` | 73 |
 | `forward_only` | 66 |
+| `center_verse_last_in_chapter` | 64 |
+| `center_verse_first_in_book` | 50 |
 | `low_bigram_surprise` | 49 |
+| `center_verse_last_in_book` | 42 |
 | `boundary_start_verse` | 22 |
 | `relevant_center_same_category` | 14 |
 | `boundary_end_verse` | 13 |
@@ -168,6 +173,92 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 | 867 | `obed` | 2ES 16:78 `and` | boundary_end_verse | KJVA:boundary_end_verse | `kjv_apocrypha_bridge_context` |
 | 902 | `teeth` | MAL 4:3 `tread` | boundary_end_verse | KJVA:boundary_end_verse | `kjv_apocrypha_bridge_context` |
 | 918 | `water` | TOB 1:3 `Tobit` | boundary_end_book;boundary_end_chapter;boundary_end_verse | KJVA:boundary_end_verse,boundary_end_chapter,boundary_end_book | `kjv_apocrypha_bridge_context` |
+
+## Center Position Rows
+
+| Rank | Term | Center | Center position strata | Evidence | Source |
+| ---: | --- | --- | --- | --- | --- |
+| 20 | `משיח` (Mashiach; English: Messiah/anointed one) | 2SA 23:1 `מְשִׁ֨יחַ֙` (Mashiach; English: Messiah/anointed one) | center_verse_first_in_chapter | EBIBLE_WLC:center_verse_first_in_chapter | `original_language_findings` |
+| 44 | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 10:42 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | center_verse_last_in_chapter | LXX:center_verse_last_in_chapter | `original_language_findings` |
+| 48 | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 13:1 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | center_verse_first_in_chapter | LXX:center_verse_first_in_chapter | `original_language_findings` |
+| 51 | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 22:34 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | center_verse_last_in_chapter | LXX:center_verse_last_in_chapter | `original_language_findings` |
+| 53 | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 23:1 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | center_verse_first_in_chapter | LXX:center_verse_first_in_chapter | `original_language_findings` |
+| 54 | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 24:1 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | center_verse_first_in_chapter | LXX:center_verse_first_in_chapter | `original_language_findings` |
+| 75 | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 9:33 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | center_verse_last_in_chapter | LXX:center_verse_last_in_chapter | `original_language_findings` |
+| 79 | `ιησουσ` (Iesous; English: Jesus/Joshua) | SIR 46:1 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | center_verse_first_in_chapter | LXX:center_verse_first_in_chapter | `original_language_findings` |
+| 96 | `משיח` (Mashiach; English: Messiah/anointed one) | 2SA 23:1 `מְשִׁ֨יחַ֙` (Mashiach; English: Messiah/anointed one) | center_verse_first_in_chapter | EBIBLE_WLC:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 101 | `jesus` | ACT 18:28 `Jesus` | center_verse_last_in_chapter | KJV:center_verse_last_in_chapter | `strong_full_span_exact_center` |
+| 107 | `jesus` | MAT 18:1 `Jesus,` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 112 | `jesus` | MAT 2:1 `Jesus` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 114 | `jesus` | MAT 8:34 `Jesus:` | center_verse_last_in_chapter | KJV:center_verse_last_in_chapter | `strong_full_span_exact_center` |
+| 123 | `jesus` | ACT 28:31 `Jesus` | center_verse_last_in_book;center_verse_last_in_chapter | KJV:center_verse_last_in_chapter,center_verse_last_in_book | `strong_full_span_exact_center` |
+| 129 | `jesus` | GAL 1:1 `Jesus` | center_verse_first_in_book;center_verse_first_in_chapter | KJV:center_verse_first_in_chapter,center_verse_first_in_book | `strong_full_span_exact_center` |
+| 139 | `jesus` | JHN 21:1 `Jesus` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 152 | `jesus` | LUK 19:1 `Jesus` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 162 | `jesus` | MAT 13:1 `Jesus` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 165 | `jesus` | MAT 15:1 `Jesus` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 174 | `jesus` | MAT 24:1 `Jesus` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 178 | `jesus` | MAT 26:75 `Jesus,` | center_verse_last_in_chapter | KJV:center_verse_last_in_chapter | `strong_full_span_exact_center` |
+| 189 | `jesus` | MRK 11:33 `Jesus` | center_verse_last_in_chapter | KJV:center_verse_last_in_chapter | `strong_full_span_exact_center` |
+| 196 | `jesus` | ROM 8:39 `Jesus` | center_verse_last_in_chapter | KJV:center_verse_last_in_chapter | `strong_full_span_exact_center` |
+| 211 | `jesus` | 1TH 1:1 `Jesus` | center_verse_first_in_book;center_verse_first_in_chapter | KJV:center_verse_first_in_chapter,center_verse_first_in_book | `strong_full_span_exact_center` |
+| 233 | `jesus` | ACT 5:42 `Jesus` | center_verse_last_in_chapter | KJV:center_verse_last_in_chapter | `strong_full_span_exact_center` |
+| 237 | `jesus` | COL 1:1 `Jesus` | center_verse_first_in_book;center_verse_first_in_chapter | KJV:center_verse_first_in_chapter,center_verse_first_in_book | `strong_full_span_exact_center` |
+| 245 | `jesus` | JAS 1:1 `Jesus` | center_verse_first_in_book;center_verse_first_in_chapter | KJV:center_verse_first_in_chapter,center_verse_first_in_book | `strong_full_span_exact_center` |
+| 263 | `jesus` | JHN 17:1 `Jesus,` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 287 | `jesus` | JHN 21:25 `Jesus` | center_verse_last_in_book;center_verse_last_in_chapter | KJV:center_verse_last_in_chapter,center_verse_last_in_book | `strong_full_span_exact_center` |
+| 292 | `jesus` | JHN 4:1 `Jesus` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 311 | `jesus` | JHN 8:1 `Jesus` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 321 | `jesus` | JHN 8:59 `Jesus` | center_verse_last_in_chapter | KJV:center_verse_last_in_chapter | `strong_full_span_exact_center` |
+| 342 | `jesus` | LUK 2:52 `Jesus` | center_verse_last_in_chapter | KJV:center_verse_last_in_chapter | `strong_full_span_exact_center` |
+| 344 | `jesus` | LUK 4:1 `Jesus` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 364 | `jesus` | MAT 11:1 `Jesus` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 365 | `jesus` | MAT 12:1 `Jesus` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 368 | `jesus` | MAT 14:1 `Jesus,` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 380 | `jesus` | MAT 19:1 `Jesus` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 386 | `jesus` | MAT 1:25 `JESUS.` | center_verse_last_in_chapter | KJV:center_verse_last_in_chapter | `strong_full_span_exact_center` |
+| 392 | `jesus` | MAT 22:1 `Jesus` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 396 | `jesus` | MAT 23:1 `Jesus` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 414 | `jesus` | MAT 4:1 `Jesus` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 434 | `jesus` | MRK 10:52 `Jesus` | center_verse_last_in_chapter | KJV:center_verse_last_in_chapter | `strong_full_span_exact_center` |
+| 450 | `jesus` | MRK 1:1 `Jesus` | center_verse_first_in_book;center_verse_first_in_chapter | KJV:center_verse_first_in_chapter,center_verse_first_in_book | `strong_full_span_exact_center` |
+| 470 | `jesus` | PHP 1:1 `Jesus` | center_verse_first_in_book;center_verse_first_in_chapter | KJV:center_verse_first_in_chapter,center_verse_first_in_book | `strong_full_span_exact_center` |
+| 473 | `jesus` | PHP 4:23 `Jesus` | center_verse_last_in_book;center_verse_last_in_chapter | KJV:center_verse_last_in_chapter,center_verse_last_in_book | `strong_full_span_exact_center` |
+| 475 | `jesus` | ROM 13:14 `Jesus` | center_verse_last_in_chapter | KJV:center_verse_last_in_chapter | `strong_full_span_exact_center` |
+| 477 | `jesus` | ROM 1:1 `Jesus` | center_verse_first_in_book;center_verse_first_in_chapter | KJV:center_verse_first_in_chapter,center_verse_first_in_book | `strong_full_span_exact_center` |
+| 481 | `jesus` | ROM 6:23 `Jesus` | center_verse_last_in_chapter | KJV:center_verse_last_in_chapter | `strong_full_span_exact_center` |
+| 483 | `jesus` | ROM 7:25 `Jesus` | center_verse_last_in_chapter | KJV:center_verse_last_in_chapter | `strong_full_span_exact_center` |
+| 484 | `jesus` | ROM 8:1 `Jesus,` | center_verse_first_in_chapter | KJV:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 485 | `jesus` | TIT 1:1 `Jesus` | center_verse_first_in_book;center_verse_first_in_chapter | KJV:center_verse_first_in_chapter,center_verse_first_in_book | `strong_full_span_exact_center` |
+| 497 | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 10:42 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | center_verse_last_in_chapter | LXX:center_verse_last_in_chapter | `strong_full_span_exact_center` |
+| 501 | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 13:1 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | center_verse_first_in_chapter | LXX:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 504 | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 22:34 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | center_verse_last_in_chapter | LXX:center_verse_last_in_chapter | `strong_full_span_exact_center` |
+| 506 | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 23:1 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | center_verse_first_in_chapter | LXX:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 507 | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 24:1 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | center_verse_first_in_chapter | LXX:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 528 | `ιησουσ` (Iesous; English: Jesus/Joshua) | JOS 9:33 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | center_verse_last_in_chapter | LXX:center_verse_last_in_chapter | `strong_full_span_exact_center` |
+| 532 | `ιησουσ` (Iesous; English: Jesus/Joshua) | SIR 46:1 `Ἰησοῦς` (Iesous; English: Jesus/Joshua) | center_verse_first_in_chapter | LXX:center_verse_first_in_chapter | `strong_full_span_exact_center` |
+| 636 | `תורה` (twrh; English: Torah) | 1Chr 5:1 `בֶּן־יִשְׂרָאֵ֑ל` (bnyshrl) | center_verse_first_in_chapter | MAM:center_verse_first_in_chapter;MT_WLC:center_verse_first_in_chapter;UXLC:center_verse_first_in_chapter | `all_codes_followup` |
+| 644 | `μαρια` (Maria; English: Mary) | MAL 4:6 `Ἰσραὴλ` (israel; English: Israel) | center_verse_last_in_book;center_verse_last_in_chapter | LXX:center_verse_last_in_chapter,center_verse_last_in_book | `apocrypha_bridge_context` |
+| 645 | `torah` | MAT 1:1 `Abraham.` | center_verse_first_in_book;center_verse_first_in_chapter | KJVA:center_verse_first_in_chapter,center_verse_first_in_book | `kjv_apocrypha_bridge_context` |
+| 649 | `ביבי` (byby; English: Bibi) | 1Chr 2:55 `ישבו` (yashvu; English: they dwelt/sat) | center_verse_last_in_chapter | MAM:center_verse_last_in_chapter;MT_WLC:center_verse_last_in_chapter;UXLC:center_verse_last_in_chapter | `all_codes_followup` |
+| 662 | `κινα` (kina; English: China) | 1John 2:1 `δίκαιον` (dikaion; English: righteous) | center_verse_first_in_chapter | SBLGNT:center_verse_first_in_chapter | `all_codes_followup` |
+| 670 | `αμην` (amen; English: Amen) | MAL 4:6 `δικαιώματα.` (dikaiomata; English: ordinances) | center_verse_last_in_book;center_verse_last_in_chapter | LXX:center_verse_last_in_chapter,center_verse_last_in_book | `apocrypha_bridge_context` |
+| 672 | `σιων` (Sion; English: Zion) | MAL 4:6 `δικαιώματα.` (dikaiomata; English: ordinances) | center_verse_last_in_book;center_verse_last_in_chapter | LXX:center_verse_last_in_chapter,center_verse_last_in_book | `apocrypha_bridge_context` |
+| 674 | `ahab` | MAT 1:1 `generation` | center_verse_first_in_book;center_verse_first_in_chapter | KJVA:center_verse_first_in_chapter,center_verse_first_in_book | `kjv_apocrypha_bridge_context` |
+| 682 | `gate` | MAL 4:6 `children` | center_verse_last_in_book;center_verse_last_in_chapter | KJVA:center_verse_last_in_chapter,center_verse_last_in_book | `kjv_apocrypha_bridge_context` |
+| 684 | `hail` | 2ES 16:78 `be` | center_verse_last_in_book;center_verse_last_in_chapter | KJVA:center_verse_last_in_chapter,center_verse_last_in_book | `kjv_apocrypha_bridge_context` |
+| 685 | `hand` | MAL 4:6 `their` | center_verse_last_in_book;center_verse_last_in_chapter | KJVA:center_verse_last_in_chapter,center_verse_last_in_book | `kjv_apocrypha_bridge_context` |
+| 686 | `hand` | MAL 4:6 `lest` | center_verse_last_in_book;center_verse_last_in_chapter | KJVA:center_verse_last_in_chapter,center_verse_last_in_book | `kjv_apocrypha_bridge_context` |
+| 690 | `hits` | MAL 4:6 `heart` | center_verse_last_in_book;center_verse_last_in_chapter | KJVA:center_verse_last_in_chapter,center_verse_last_in_book | `kjv_apocrypha_bridge_context` |
+| 691 | `hits` | MAL 4:6 `fathers` | center_verse_last_in_book;center_verse_last_in_chapter | KJVA:center_verse_last_in_chapter,center_verse_last_in_book | `kjv_apocrypha_bridge_context` |
+| 695 | `lane` | MAL 4:6 `children,` | center_verse_last_in_book;center_verse_last_in_chapter | KJVA:center_verse_last_in_chapter,center_verse_last_in_book | `kjv_apocrypha_bridge_context` |
+| 696 | `lane` | MAL 4:6 `fathers,` | center_verse_last_in_book;center_verse_last_in_chapter | KJVA:center_verse_last_in_chapter,center_verse_last_in_book | `kjv_apocrypha_bridge_context` |
+| 697 | `lane` | MAL 4:6 `heart` | center_verse_last_in_book;center_verse_last_in_chapter | KJVA:center_verse_last_in_chapter,center_verse_last_in_book | `kjv_apocrypha_bridge_context` |
+| 698 | `lane` | MAL 4:6 `and` | center_verse_last_in_book;center_verse_last_in_chapter | KJVA:center_verse_last_in_chapter,center_verse_last_in_book | `kjv_apocrypha_bridge_context` |
+| 706 | `seed` | TOB 1:1 `the` | center_verse_first_in_book;center_verse_first_in_chapter | KJVA:center_verse_first_in_chapter,center_verse_first_in_book | `kjv_apocrypha_bridge_context` |
+| 707 | `seed` | TOB 1:1 `tribe` | center_verse_first_in_book;center_verse_first_in_chapter | KJVA:center_verse_first_in_chapter,center_verse_first_in_book | `kjv_apocrypha_bridge_context` |
+| 708 | `seed` | TOB 1:1 `son` | center_verse_first_in_book;center_verse_first_in_chapter | KJVA:center_verse_first_in_chapter,center_verse_first_in_book | `kjv_apocrypha_bridge_context` |
+| ... | ... | ... | ... | ... | 66 more center-position rows in CSV |
 
 ## Cross-Skip Center Rows
 
@@ -329,6 +420,7 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 - `canonical_first_occurrence` means first centered occurrence within the current indexed family, not first hidden occurrence in every raw hit export.
 - Direction strata are computed per source family / queue / corpus set / term group.
 - Boundary strata are computed only from retained endpoint offsets, so blank boundary fields mean unavailable evidence, not proven absence.
+- Center-position strata use the center verse reference, not ELS path endpoints.
 - `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.
 - `skip_equals_meaningful_constant` and `skip_equals_term_gematria` are metadata flags; they do not change the search space or promote claim status.
 - Bigram-surprise strata are corpus-local review aids, not claim promotion rules; missing adjacent surface bigrams count as rare.

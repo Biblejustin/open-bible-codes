@@ -94,6 +94,28 @@ def test_build_strata_rows_adds_boundary_flags_from_offset_triplets() -> None:
     assert "boundary_both_endpoints" in rows[0]["extended_strata"]
 
 
+def test_build_strata_rows_adds_center_position_flags() -> None:
+    rows = build_strata_rows(
+        [
+            {
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "TINY",
+                "present_corpora": "TINY",
+                "term_id": "term",
+                "normalized_term": "abc",
+                "center_ref": "Gen 1:1",
+                "direction": "forward",
+                "occurrence_type": "centered_self_exact_word",
+            }
+        ],
+        boundary_indexes={"TINY": build_boundary_index(tiny_corpus())},
+    )
+
+    assert "center_verse_first_in_chapter" in rows[0]["center_position_strata"]
+    assert "center_verse_first_in_book" in rows[0]["extended_strata"]
+
+
 def test_build_strata_rows_adds_cross_skip_pair_at_word() -> None:
     rows = build_strata_rows(
         [

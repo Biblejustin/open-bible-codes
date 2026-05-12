@@ -6,6 +6,7 @@ from els.match_strata import (
     build_boundary_index,
     canonical_first_keys,
     canonical_ref_sort_key,
+    center_position_strata_for_ref,
     direction_counts_by_key,
     direction_counts_from_row,
     direction_strata_by_key,
@@ -76,6 +77,18 @@ def test_boundary_strata_detect_verse_chapter_book_edges() -> None:
     last = boundary_strata_for_offsets(start_offset=6, end_offset=8, boundary_index=index)
     assert "boundary_end_chapter" in last
     assert "boundary_end_book" in last
+
+
+def test_center_position_strata_detect_first_and_last_verses() -> None:
+    index = build_boundary_index(tiny_corpus())
+
+    first = center_position_strata_for_ref("Gen 1:1", boundary_index=index)
+    assert "center_verse_first_in_chapter" in first
+    assert "center_verse_first_in_book" in first
+
+    last = center_position_strata_for_ref("Exod 1:1", boundary_index=index)
+    assert "center_verse_last_in_chapter" in last
+    assert "center_verse_last_in_book" in last
 
 
 def tiny_corpus() -> Corpus:
