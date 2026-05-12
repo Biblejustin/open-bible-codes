@@ -1,4 +1,6 @@
-from scripts.build_match_strata_index import build_strata_rows, build_summary_rows
+from els.match_strata import build_boundary_index
+from scripts.build_match_strata_index import build_strata_rows, build_summary_rows, parse_offset_triplets
+from tests.test_match_strata import tiny_corpus
 
 
 def test_build_strata_rows_adds_direction_and_canonical_first_flags() -> None:
@@ -42,6 +44,9 @@ def test_build_strata_rows_adds_direction_and_canonical_first_flags() -> None:
     output = build_strata_rows(rows)
 
     assert {row["direction_stratum"] for row in output} == {"bidirectional_present"}
+    assert output[0]["forward_direction_count"] == 1
+    assert output[0]["backward_direction_count"] == 1
+    assert output[0]["direction_imbalance_score"] == "0.000000"
     assert output[0]["canonical_first_centered_occurrence"] == "no"
     assert output[1]["canonical_first_centered_occurrence"] == "yes"
     assert "canonical_first_occurrence" in str(output[1]["extended_strata"])
@@ -57,3 +62,31 @@ def test_build_summary_rows_counts_each_extended_stratum() -> None:
     by_stratum = {row["stratum"]: row["rows"] for row in summary}
     assert by_stratum["forward_only"] == 2
     assert by_stratum["canonical_first_occurrence"] == 1
+
+
+def test_build_strata_rows_adds_boundary_flags_from_offset_triplets() -> None:
+    rows = build_strata_rows(
+        [
+            {
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "TINY",
+                "present_corpora": "TINY",
+                "term_id": "term",
+                "normalized_term": "abc",
+                "center_ref": "Gen 1:1",
+                "offset_triplets": "TINY:0/1/2",
+                "direction": "forward",
+                "occurrence_type": "centered_self_exact_word",
+            }
+        ],
+        boundary_indexes={"TINY": build_boundary_index(tiny_corpus())},
+    )
+
+    assert "boundary_start_verse" in rows[0]["boundary_strata"]
+    assert "boundary_end_verse" in rows[0]["boundary_strata"]
+    assert "boundary_both_endpoints" in rows[0]["extended_strata"]
+
+
+def test_parse_offset_triplets_ignores_malformed_offsets() -> None:
+    assert parse_offset_triplets("MT:1/2/3;bad;KJV:x/y/z") == [("MT", 1, 3)]

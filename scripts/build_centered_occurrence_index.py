@@ -19,6 +19,7 @@ from els.term_display import display_term
 
 
 DEFAULT_ALL_CODES_REVIEW = Path("reports/all_codes_followup_review/review_summary.csv")
+DEFAULT_ALL_CODES_SELECTED = Path("reports/all_codes_followup_selection/selected_rows.csv")
 DEFAULT_ALL_CODES_CONTEXT = Path("reports/all_codes_followup_context/context_excerpts.csv")
 DEFAULT_STRONG_QUEUE = Path("reports/dynamic_skip_focus/strong_full_span_exact_center_review_queue.csv")
 DEFAULT_STRONG_BUNDLE = Path("reports/dynamic_skip_focus/strong_full_span_exact_center_review_bundle.csv")
@@ -46,9 +47,13 @@ FIELDNAMES = [
     "concept",
     "category",
     "normalized_term",
+    "start_ref",
     "center_ref",
+    "end_ref",
     "center_word",
     "center_normalized_word",
+    "offset_triplets",
+    "letter_path",
     "skip",
     "direction",
     "path_rows",
@@ -121,6 +126,7 @@ def main(argv: list[str] | None = None) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
     parser.add_argument("--all-codes-review", type=Path, default=DEFAULT_ALL_CODES_REVIEW)
+    parser.add_argument("--all-codes-selected", type=Path, default=DEFAULT_ALL_CODES_SELECTED)
     parser.add_argument("--all-codes-context", type=Path, default=DEFAULT_ALL_CODES_CONTEXT)
     parser.add_argument("--strong-queue", type=Path, default=DEFAULT_STRONG_QUEUE)
     parser.add_argument("--strong-bundle", type=Path, default=DEFAULT_STRONG_BUNDLE)
@@ -148,6 +154,7 @@ def build_occurrences(args: argparse.Namespace) -> list[dict[str, object]]:
         all_codes_occurrences(
             read_rows_if_exists(args.all_codes_review),
             read_rows_if_exists(args.all_codes_context),
+            read_rows_if_exists(args.all_codes_selected),
         )
     )
     rows.extend(
@@ -236,8 +243,10 @@ def presence_sort_key(row: dict[str, object]) -> tuple[int, int, int, str, str, 
 def all_codes_occurrences(
     review_rows: list[dict[str, str]],
     context_rows: list[dict[str, str]],
+    selected_rows: list[dict[str, str]] | None = None,
 ) -> list[dict[str, object]]:
     context_by_rank = context_examples_by_rank(context_rows)
+    selected_by_rank = {row.get("selection_rank", ""): row for row in selected_rows or []}
     rows = []
     for row in review_rows:
         if row.get("bucket") not in {
@@ -253,6 +262,7 @@ def all_codes_occurrences(
         }:
             continue
         context = context_by_rank.get(row.get("selection_rank", ""), {})
+        selected = selected_by_rank.get(row.get("selection_rank", ""), {})
         rows.append(
             base_row(
                 source_family="all_codes_followup",
@@ -265,9 +275,12 @@ def all_codes_occurrences(
                 concept=row.get("concept", ""),
                 category=row.get("category", ""),
                 normalized_term=row.get("normalized_term", ""),
+                start_ref=selected.get("start_ref", ""),
                 center_ref=row.get("center_ref", ""),
+                end_ref=selected.get("end_ref", ""),
                 center_word=row.get("center_word", ""),
                 center_normalized_word=row.get("center_normalized_word", ""),
+                offset_triplets=selected.get("offsets_by_corpus", ""),
                 skip=row.get("skip", ""),
                 direction=row.get("direction", ""),
                 path_rows=row.get("path_rows", ""),
@@ -304,9 +317,12 @@ def strong_full_span_occurrences(
                 concept="",
                 category="",
                 normalized_term=row.get("normalized_term", ""),
+                start_ref=row.get("example_start_ref", ""),
                 center_ref=row.get("center_ref", ""),
+                end_ref=row.get("example_end_ref", ""),
                 center_word=row.get("center_word", ""),
                 center_normalized_word=row.get("center_normalized_word", ""),
+                offset_triplets=offset_triplet(row.get("corpus", ""), row),
                 skip=row.get("example_skip", ""),
                 direction=row.get("example_direction", ""),
                 path_rows=row.get("source_paths", ""),
@@ -338,7 +354,9 @@ def original_language_occurrences(rows: list[dict[str, str]]) -> list[dict[str, 
                 concept="",
                 category="",
                 normalized_term=row.get("normalized_term", ""),
+                start_ref=row.get("example_start_ref", ""),
                 center_ref=row.get("center_ref", ""),
+                end_ref=row.get("example_end_ref", ""),
                 center_word=row.get("center_word", ""),
                 center_normalized_word=row.get("center_word", ""),
                 skip=row.get("example_skip", ""),
@@ -374,7 +392,9 @@ def gog_source_occurrences(rows: list[dict[str, str]], frequency_read_value: str
                 concept="Gog",
                 category="apocalyptic",
                 normalized_term=row.get("normalized_term", "γωγ"),
+                start_ref="",
                 center_ref=row.get("center_refs", ""),
+                end_ref="",
                 center_word="Gog",
                 center_normalized_word=row.get("normalized_term", "γωγ"),
                 skip=row.get("skip_values", ""),
@@ -414,9 +434,12 @@ def apocrypha_bridge_occurrences(
                 concept=row.get("concepts", ""),
                 category=row.get("categories", ""),
                 normalized_term=row.get("normalized_term", ""),
+                start_ref=row.get("start_ref", ""),
                 center_ref=row.get("center_ref", ""),
+                end_ref=row.get("end_ref", ""),
                 center_word=row.get("center_word", ""),
                 center_normalized_word=row.get("center_normalized_word", ""),
+                letter_path=row.get("letter_path", ""),
                 skip=row.get("skip", ""),
                 direction=row.get("direction", ""),
                 path_rows="1",
@@ -504,6 +527,15 @@ def strong_key(row: dict[str, str]) -> tuple[str, str, str, str]:
         row.get("center_ref", ""),
         row.get("center_word_index", ""),
     )
+
+
+def offset_triplet(corpus: str, row: dict[str, str]) -> str:
+    start = row.get("example_start_offset", "")
+    center = row.get("example_center_offset", "")
+    end = row.get("example_end_offset", "")
+    if not corpus or not start or not center or not end:
+        return ""
+    return f"{corpus}:{start}/{center}/{end}"
 
 
 def occurrence_sort_key(row: dict[str, object]) -> tuple[int, int, int, int, str, str, str]:
@@ -640,6 +672,7 @@ def write_manifest(
         "summary_source_counts": dict(Counter(str(row["source_family"]) for row in summary_rows)),
         "inputs": {
             "all_codes_review": str(args.all_codes_review),
+            "all_codes_selected": str(args.all_codes_selected),
             "all_codes_context": str(args.all_codes_context),
             "strong_queue": str(args.strong_queue),
             "strong_bundle": str(args.strong_bundle),
@@ -664,6 +697,7 @@ def reproduce_command(args: argparse.Namespace) -> str:
     return (
         "python3 -m scripts.build_centered_occurrence_index "
         f"--all-codes-review {args.all_codes_review} "
+        f"--all-codes-selected {args.all_codes_selected} "
         f"--all-codes-context {args.all_codes_context} "
         f"--strong-queue {args.strong_queue} "
         f"--strong-bundle {args.strong_bundle} "

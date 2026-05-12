@@ -6,6 +6,7 @@ from els.match_strata import (
     build_boundary_index,
     canonical_first_keys,
     canonical_ref_sort_key,
+    direction_counts_by_key,
     direction_counts_from_row,
     direction_strata_by_key,
     direction_stratum,
@@ -28,8 +29,10 @@ def test_direction_strata_group_rows_by_term_and_corpus() -> None:
         {"source_family": "f", "corpus": "MT", "term_id": "b", "normalized_term": "גד", "direction": "forward"},
     ]
     strata = direction_strata_by_key(rows, key_fields=("source_family", "corpus", "term_id", "normalized_term"))
+    counts = direction_counts_by_key(rows, key_fields=("source_family", "corpus", "term_id", "normalized_term"))
     assert strata[("f", "MT", "a", "אב")] == "bidirectional_present"
     assert strata[("f", "MT", "b", "גד")] == "forward_only"
+    assert counts[("f", "MT", "a", "אב")] == DirectionCounts(forward=1, backward=1)
 
 
 def test_canonical_ref_sort_key_handles_ot_and_nt_refs() -> None:

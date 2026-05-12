@@ -200,6 +200,8 @@ inputs = [
   "scripts/analyze_extension_paired_controls.py",
   "scripts/build_all_codes_followup_report.py",
   "scripts/build_centered_occurrence_index.py",
+  "scripts/build_match_strata_index.py",
+  "els/match_strata.py",
   "els/term_display.py",
   "scripts/build_final_report_highlights.py",
   "scripts/build_gog_magog_pair_prospective_report.py",
@@ -774,6 +776,7 @@ inputs = [
   "scripts/build_centered_occurrence_index.py",
   "els/term_display.py",
   "reports/all_codes_followup_review/review_summary.csv",
+  "reports/all_codes_followup_selection/selected_rows.csv",
   "reports/all_codes_followup_context/context_excerpts.csv",
   "reports/dynamic_skip_focus/strong_full_span_exact_center_review_queue.csv",
   "reports/dynamic_skip_focus/strong_full_span_exact_center_review_bundle.csv",
@@ -787,6 +790,36 @@ outputs = [
   "reports/centered_occurrence_index/centered_occurrences.csv",
   "reports/centered_occurrence_index/presence_summary.csv",
   "reports/centered_occurrence_index/manifest.json",
+]
+
+[[steps]]
+id = "match_strata_index"
+description = "Annotate centered occurrences with extended post-search strata."
+argv = ["-m", "scripts.build_match_strata_index"]
+inputs = [
+  "scripts/build_match_strata_index.py",
+  "els/match_strata.py",
+  "els/corpus.py",
+  "els/term_display.py",
+  "reports/centered_occurrence_index/centered_occurrences.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_engkjv.toml",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+]
+outputs = [
+  "reports/match_strata_index/occurrence_strata.csv",
+  "reports/match_strata_index/strata_summary.csv",
+  "docs/MATCH_STRATA_INDEX.md",
+  "reports/match_strata_index/manifest.json",
 ]
 
 [[steps]]

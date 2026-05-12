@@ -11,8 +11,21 @@ argv = ["-m", "scripts.build_match_strata_index"]
 inputs = [
   "scripts/build_match_strata_index.py",
   "els/match_strata.py",
+  "els/corpus.py",
   "els/term_display.py",
   "reports/centered_occurrence_index/centered_occurrences.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_engkjv.toml",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
 ]
 outputs = [
   "reports/match_strata_index/occurrence_strata.csv",

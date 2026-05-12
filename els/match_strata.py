@@ -224,6 +224,14 @@ def direction_counts_from_row(row: Mapping[str, Any]) -> DirectionCounts:
     skips = parse_skip_values(row.get("skip", ""))
     forward = 0
     backward = 0
+    if skips:
+        for skip in skips:
+            if skip > 0:
+                forward += 1
+            elif skip < 0:
+                backward += 1
+        return DirectionCounts(forward=forward, backward=backward)
+
     if direction == "both":
         forward += 1
         backward += 1
@@ -232,13 +240,7 @@ def direction_counts_from_row(row: Mapping[str, Any]) -> DirectionCounts:
     elif direction == "backward":
         backward += 1
 
-    for skip in skips:
-        if skip > 0:
-            forward += 1
-        elif skip < 0:
-            backward += 1
-
-    if not direction and not skips:
+    if not direction:
         return DirectionCounts()
     return DirectionCounts(forward=forward, backward=backward)
 
@@ -258,16 +260,21 @@ def direction_strata_by_key(
     *,
     key_fields: Sequence[str],
 ) -> dict[tuple[str, ...], str]:
+    return {key: direction_stratum(counts) for key, counts in direction_counts_by_key(rows, key_fields=key_fields).items()}
+
+
+def direction_counts_by_key(
+    rows: Iterable[Mapping[str, Any]],
+    *,
+    key_fields: Sequence[str],
+) -> dict[tuple[str, ...], DirectionCounts]:
     totals: dict[tuple[str, ...], Counter[str]] = defaultdict(Counter)
     for row in rows:
         key = tuple(str(row.get(field, "")) for field in key_fields)
         counts = direction_counts_from_row(row)
         totals[key]["forward"] += counts.forward
         totals[key]["backward"] += counts.backward
-    return {
-        key: direction_stratum(DirectionCounts(counts["forward"], counts["backward"]))
-        for key, counts in totals.items()
-    }
+    return {key: DirectionCounts(counts["forward"], counts["backward"]) for key, counts in totals.items()}
 
 
 def parse_skip_values(value: Any) -> tuple[int, ...]:

@@ -106,12 +106,23 @@ def test_all_codes_occurrences_add_context_and_frequency_read() -> None:
                 "center_verse_text": "and his garment was dipped in blood",
             }
         ],
+        [
+            {
+                "selection_rank": "1",
+                "start_ref": "REV 19:12",
+                "end_ref": "REV 19:13",
+                "offsets_by_corpus": "TR_NT:10/20/30",
+            }
+        ],
     )
 
     assert len(rows) == 1
     assert rows[0]["occurrence_type"] == "centered_self_surface_form"
     assert rows[0]["frequency_read"] == "control q=0.10; control p=0.05"
     assert rows[0]["context_excerpt"] == "and his garment was dipped in blood"
+    assert rows[0]["start_ref"] == "REV 19:12"
+    assert rows[0]["end_ref"] == "REV 19:13"
+    assert rows[0]["offset_triplets"] == "TR_NT:10/20/30"
 
 
 def test_gog_source_occurrences_attach_frequency_caution() -> None:

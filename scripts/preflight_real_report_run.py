@@ -215,6 +215,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/analyze_extension_paired_controls.py",
     "scripts/build_all_codes_followup_report.py",
     "scripts/build_centered_occurrence_index.py",
+    "scripts/build_match_strata_index.py",
+    "els/match_strata.py",
     "els/term_display.py",
     "scripts/build_final_report_highlights.py",
     "scripts/build_gog_magog_pair_prospective_report.py",
