@@ -93,7 +93,8 @@ verse/chapter/book for Bible texts and paragraph/section/book breaks for
 non-Bible corpora.
 
 Implementation note: Hebrew atbash is available as an opt-in deterministic
-corpus transform in `els/transforms.py`. It is not part of routine searches
+corpus transform in `els/transforms.py` and as a standalone search entry point
+through `scripts/search_transformed_els.py`. It is not part of routine searches
 unless a protocol explicitly declares the transform and its matched controls.
 
 ### Tier 2: Interpretive Anchoring Strata
