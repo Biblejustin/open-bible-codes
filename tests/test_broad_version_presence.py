@@ -2,7 +2,11 @@ import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from scripts.analyze_broad_version_presence import read_count_rows, version_presence_rows
+from scripts.analyze_broad_version_presence import (
+    read_count_rows,
+    version_presence_rows,
+    write_markdown,
+)
 
 
 class BroadVersionPresenceTests(unittest.TestCase):
@@ -52,6 +56,18 @@ class BroadVersionPresenceTests(unittest.TestCase):
 
         self.assertEqual([row["term_id"] for row in rows], ["trump_h"])
 
+    def test_markdown_displays_transliteration_and_english_gloss(self) -> None:
+        with TemporaryDirectory() as tmp:
+            rows = version_presence_rows(
+                [row("modern", "trump_h", "MT_WLC", "4", term_language="hebrew", term="טראמפ")]
+            )
+            path = Path(tmp) / "presence.md"
+
+            write_markdown(path, rows, object())
+
+            text = path.read_text(encoding="utf-8")
+        self.assertIn("`טראמפ` (trmp; English: Trump)", text)
+
 
 def row(
     term_set: str,
@@ -60,14 +76,16 @@ def row(
     hits: str,
     *,
     length: str = "5",
+    term_language: str = "greek",
+    term: str = "τραμπ",
 ) -> dict[str, str]:
     return {
         "term_set": term_set,
         "term_id": term_id,
         "concept": "Trump",
         "category": "modern_names",
-        "term_language": "greek",
-        "normalized_term": "τραμπ",
+        "term_language": term_language,
+        "normalized_term": term,
         "normalized_length": length,
         "corpus": corpus,
         "hit_count": hits,

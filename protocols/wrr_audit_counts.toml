@@ -134,6 +134,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_wrr_audit_counts.py",
+  "els/term_display.py",
   "reports/wrr_1994/wrr2_genesis_counts.csv",
 ]
 outputs = [

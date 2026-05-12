@@ -545,6 +545,7 @@ inputs = [
   "scripts/download_wrr_sources.py",
   "scripts/import_wrr_terms.py",
   "scripts/analyze_wrr_audit_counts.py",
+  "els/term_display.py",
   "scripts/analyze_wrr_text_source.py",
   "scripts/analyze_wrr_pair_audit.py",
   "scripts/analyze_wrr_pair_controls.py",
@@ -946,6 +947,7 @@ argv = ["-m", "scripts.run_protocol", "protocols/kjv_apocrypha_bridge_term_shuff
 inputs = [
   "protocols/kjv_apocrypha_bridge_term_shuffled_controls_1000.toml",
   "scripts/analyze_apocrypha_bridge_term_shuffled_controls.py",
+  "els/term_display.py",
   "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
 ]
 outputs = ["reports/kjv_apocrypha_bridge_term_shuffled_controls_1000/protocol_run.manifest.json"]
@@ -980,6 +982,7 @@ inputs = [
   "protocols/kjv_apocrypha_bridge_confirmatory_controls_5000.toml",
   "terms/kjv_apocrypha_bridge_confirmatory_terms.csv",
   "scripts/analyze_apocrypha_bridge_term_shuffled_controls.py",
+  "els/term_display.py",
   "scripts/analyze_apocrypha_bridge_shuffled_controls.py",
   "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
 ]

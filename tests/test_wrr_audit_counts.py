@@ -1,6 +1,13 @@
 import unittest
+from pathlib import Path
+from tempfile import TemporaryDirectory
 
-from scripts.analyze_wrr_audit_counts import category_summary, summarize_by_concept, top_counts
+from scripts.analyze_wrr_audit_counts import (
+    category_summary,
+    summarize_by_concept,
+    top_counts,
+    write_markdown,
+)
 
 
 class WrrAuditCountsTests(unittest.TestCase):
@@ -39,6 +46,25 @@ class WrrAuditCountsTests(unittest.TestCase):
         )
 
         self.assertEqual(stats["wrr_appellation"], {"rows": 2, "zero_rows": 1, "total_hits": 2})
+
+    def test_markdown_displays_transliteration_and_english_gloss(self) -> None:
+        top = [
+            {
+                "rank": 1,
+                "term_id": "rashi_h",
+                "concept": "Rashi",
+                "category": "wrr_appellation",
+                "normalized_term": "רשי",
+                "normalized_length": 3,
+                "hit_count": 7,
+            }
+        ]
+        with TemporaryDirectory() as tmp:
+            path = Path(tmp) / "wrr.md"
+            write_markdown(path, [], [], top)
+
+            text = path.read_text(encoding="utf-8")
+        self.assertIn("`רשי` (rshy; English: Rashi)", text)
 
 
 def row(term_id: str, concept: str, category: str, hits: str) -> dict[str, str]:

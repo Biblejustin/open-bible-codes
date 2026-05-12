@@ -12,6 +12,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from els import __version__
+from els.term_display import display_term
 
 
 COUNTS_OUT = Path("reports/wrr_1994/wrr2_genesis_counts.csv")
@@ -175,7 +176,7 @@ def write_markdown(
             + " | ".join(
                 [
                     str(row["rank"]),
-                    f"`{row['term_id']}` `{row['normalized_term']}`",
+                    display_top_term(row),
                     str(row["concept"]),
                     f"`{row['category']}`",
                     str(row["normalized_length"]),
@@ -219,6 +220,12 @@ def write_markdown(
     )
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+
+def display_top_term(row: dict[str, object]) -> str:
+    term_id = str(row["term_id"])
+    term = display_term(str(row["normalized_term"]), english=str(row.get("concept", "")) or None)
+    return f"`{term_id}` {term}"
 
 
 def category_summary(rows: list[dict[str, str]]) -> dict[str, dict[str, int]]:

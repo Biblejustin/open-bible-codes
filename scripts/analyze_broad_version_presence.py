@@ -12,6 +12,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from els import __version__
+from els.term_display import display_term
 
 
 COUNTS_DIR = Path("reports/broad_search")
@@ -199,6 +200,12 @@ def presence_sort_key(row: dict[str, object]) -> tuple[int, int, str, str]:
     )
 
 
+def display_presence_term(row: dict[str, object]) -> str:
+    term_id = str(row["term_id"])
+    term = display_term(str(row["normalized_term"]), english=str(row.get("concept", "")) or None)
+    return f"`{term_id}` {term}"
+
+
 def write_rows(path: Path, rows: list[dict[str, object]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
@@ -246,7 +253,7 @@ def write_markdown(
             + " | ".join(
                 [
                     str(row["term_set"]),
-                    f"`{row['term_id']}` `{row['normalized_term']}`",
+                    display_presence_term(row),
                     str(row["observed_corpora"]),
                     str(row["present_corpora"]),
                     str(row["absent_corpora"]),

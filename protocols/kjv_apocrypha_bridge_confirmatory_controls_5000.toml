@@ -25,6 +25,7 @@ argv = [
 inputs = [
   "docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_PREREGISTRATION.md",
   "scripts/analyze_apocrypha_bridge_term_shuffled_controls.py",
+  "els/term_display.py",
   "scripts/analyze_apocrypha_bridge_shuffled_controls.py",
   "scripts/analyze_apocrypha_bridge_candidates.py",
   "scripts/analyze_apocrypha_bridge_controls.py",

@@ -18,6 +18,7 @@ from els import __version__
 from els.corpus import load_corpus
 from els.search import process_context, resolve_count_jobs
 from els.statistics import benjamini_hochberg_q_values, round_float, tail_p_value_ge
+from els.term_display import display_term
 from scripts.analyze_apocrypha_bridge_candidates import DEFAULT_TERMS, read_term_records
 from scripts.analyze_apocrypha_bridge_controls import (
     DEFAULT_CANONICAL_CONFIG,
@@ -466,7 +467,7 @@ def write_markdown(
             + " | ".join(
                 [
                     str(row["rank"]),
-                    f"`{row['normalized_term']}`",
+                    display_summary_term(row),
                     str(row["concepts"]),
                     str(row["observed_bridge_rows"]),
                     str(row["sample_max"]),
@@ -493,6 +494,10 @@ def write_markdown(
     )
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+
+def display_summary_term(row: dict[str, object]) -> str:
+    return display_term(str(row["normalized_term"]), english=str(row.get("concepts", "")) or None)
 
 
 def write_manifest(

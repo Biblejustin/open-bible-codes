@@ -98,6 +98,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_broad_version_presence.py",
+  "els/term_display.py",
   "reports/wide_focus_search/modern_names_dates_counts.csv",
   "reports/wide_focus_search/prophetic_terms_counts.csv",
 ]

@@ -180,6 +180,7 @@ description = "Summarize which broad-search terms appear in which observed corpo
 argv = ["-m", "scripts.analyze_broad_version_presence"]
 inputs = [
   "scripts/analyze_broad_version_presence.py",
+  "els/term_display.py",
   "reports/broad_search/theological_terms_counts.csv",
   "reports/broad_search/modern_names_dates_counts.csv",
   "reports/broad_search/table_of_nations_counts.csv",

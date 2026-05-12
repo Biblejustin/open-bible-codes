@@ -2,12 +2,14 @@ import argparse
 import unittest
 from collections import Counter
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from scripts.analyze_apocrypha_bridge_term_shuffled_controls import (
     manifest_args,
     run_samples,
     summarize_terms,
     term_sample_records,
+    write_markdown,
 )
 
 
@@ -130,3 +132,63 @@ class ApocryphaBridgeTermShuffledControlsTests(unittest.TestCase):
         args = argparse.Namespace(terms=[Path("terms/a.csv")], samples=10)
 
         self.assertEqual(manifest_args(args), {"terms": ["terms/a.csv"], "samples": 10})
+
+    def test_markdown_displays_transliteration_and_english_gloss(self) -> None:
+        args = argparse.Namespace(
+            canonical_label="Test",
+            samples=1,
+            seed=1,
+            min_skip=2,
+            max_skip=4,
+            direction="both",
+            min_term_length=3,
+            jobs=1,
+            resume_samples=False,
+            canonical_config=Path("configs/test.toml"),
+            observed=Path("observed.csv"),
+            terms=[Path("terms/test.csv")],
+            sample_out=Path("sample.csv"),
+            term_sample_out=Path("term_samples.csv"),
+            term_summary_out=Path("term_summary.csv"),
+            markdown_out=Path("report.md"),
+            manifest_out=Path("manifest.json"),
+        )
+        term_summary = [
+            {
+                "rank": 1,
+                "normalized_term": "ישוע",
+                "concepts": "Yeshua",
+                "observed_bridge_rows": 2,
+                "sample_max": 0,
+                "sample_mean": 0,
+                "samples_ge_observed": 0,
+                "p_ge": 0.5,
+                "q_ge": 0.5,
+                "observed_minus_sample_max": 2,
+                "observed_gt_sample_max": "True",
+            }
+        ]
+        with TemporaryDirectory() as tmp:
+            path = Path(tmp) / "bridge.md"
+            write_markdown(
+                path,
+                term_summary,
+                [{"bridge_rows": 0}],
+                fake_corpus(),
+                fake_boundary(),
+                args,
+            )
+
+            text = path.read_text(encoding="utf-8")
+        self.assertIn("`ישוע` (Yeshua; English: Yeshua)", text)
+
+
+def fake_corpus() -> object:
+    class Corpus:
+        text = "abcdef"
+
+    return Corpus()
+
+
+def fake_boundary() -> dict[str, int]:
+    return {"canonical_prefix_letters": 3, "apocrypha_block_letters": 3}
