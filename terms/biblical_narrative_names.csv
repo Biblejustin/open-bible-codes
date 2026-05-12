@@ -24,6 +24,7 @@ narrative_matthew_g,Matthew,biblical_narrative_names,greek,ματθαιος,NT a
 narrative_philip_g,Philip,biblical_narrative_names,greek,φιλιππος,NT apostle cohort
 narrative_stephen_g,Stephen,biblical_narrative_names,greek,στεφανος,NT figure cohort
 narrative_barnabas_g,Barnabas,biblical_narrative_names,greek,βαρναβας,NT figure cohort
+narrative_mary_magdalene_h,Mary Magdalene,biblical_narrative_names,hebrew,מרים המגדלית,Hebrew transliteration for passion and resurrection narrative cohort
 narrative_mary_magdalene_g,Mary Magdalene,biblical_narrative_names,greek,μαρια μαγδαληνη,passion and resurrection narrative cohort
 narrative_lazarus_g,Lazarus,biblical_narrative_names,greek,λαζαρος,NT narrative cohort
 narrative_caiaphas_h,Caiaphas,biblical_narrative_names,hebrew,קיפא,Hebrew/Aramaic form for high priest name
