@@ -11,19 +11,19 @@ python3 -m scripts.analyze_apocrypha_bridge_controls --canonical-label KJVA --ca
 
 ## Observed Bridge Baseline
 
-- observed bridge rows: 350
-- observed terms with bridge rows: 81
-- observed apocrypha_to_canonical: 178
-- observed canonical_to_apocrypha: 172
+- observed bridge rows: 535
+- observed terms with bridge rows: 114
+- observed apocrypha_to_canonical: 270
+- observed canonical_to_apocrypha: 265
 - non-Bible controls >= observed total: 0 of 3
 
 ## Control Summary
 
 | Control | Bridge rows | Terms | C→A | A→C | Multi |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `SHAKESPEARE` | 182 | 60 | 98 | 84 | 0 |
-| `WAR_PEACE` | 140 | 50 | 72 | 68 | 0 |
-| `MOBY_DICK` | 168 | 59 | 90 | 78 | 0 |
+| `SHAKESPEARE` | 289 | 85 | 157 | 132 | 0 |
+| `WAR_PEACE` | 207 | 69 | 105 | 102 | 0 |
+| `MOBY_DICK` | 262 | 81 | 133 | 129 | 0 |
 
 ## Top Control Terms
 
@@ -31,44 +31,44 @@ python3 -m scripts.analyze_apocrypha_bridge_controls --canonical-label KJVA --ca
 | --- | --- | ---: | ---: | ---: | ---: |
 | `WAR_PEACE` | `heth` | 29 | 15 | 14 | 0 |
 | `MOBY_DICK` | `heth` | 24 | 15 | 9 | 0 |
+| `MOBY_DICK` | `tree` | 24 | 14 | 10 | 0 |
 | `SHAKESPEARE` | `heth` | 23 | 13 | 10 | 0 |
+| `SHAKESPEARE` | `tree` | 22 | 12 | 10 | 0 |
+| `WAR_PEACE` | `tree` | 16 | 8 | 8 | 0 |
+| `MOBY_DICK` | `rent` | 13 | 6 | 7 | 0 |
 | `SHAKESPEARE` | `otho` | 12 | 8 | 4 | 0 |
 | `SHAKESPEARE` | `heal` | 11 | 4 | 7 | 0 |
+| `SHAKESPEARE` | `leah` | 11 | 7 | 4 | 0 |
 | `SHAKESPEARE` | `seal` | 10 | 6 | 4 | 0 |
+| `MOBY_DICK` | `leah` | 9 | 7 | 2 | 0 |
 | `MOBY_DICK` | `nero` | 9 | 5 | 4 | 0 |
 | `SHAKESPEARE` | `noah` | 9 | 6 | 3 | 0 |
 | `MOBY_DICK` | `otho` | 8 | 5 | 3 | 0 |
+| `SHAKESPEARE` | `hits` | 8 | 6 | 2 | 0 |
+| `SHAKESPEARE` | `seed` | 8 | 4 | 4 | 0 |
+| `SHAKESPEARE` | `shot` | 8 | 6 | 2 | 0 |
 | `MOBY_DICK` | `heal` | 7 | 4 | 3 | 0 |
+| `MOBY_DICK` | `seed` | 7 | 1 | 6 | 0 |
 | `SHAKESPEARE` | `shem` | 7 | 3 | 4 | 0 |
+| `WAR_PEACE` | `haiti` | 7 | 5 | 2 | 0 |
+| `WAR_PEACE` | `leah` | 7 | 5 | 2 | 0 |
 | `MOBY_DICK` | `aram` | 6 | 1 | 5 | 0 |
+| `MOBY_DICK` | `eden` | 6 | 2 | 4 | 0 |
+| `SHAKESPEARE` | `eden` | 6 | 1 | 5 | 0 |
+| `SHAKESPEARE` | `lane` | 6 | 3 | 3 | 0 |
 | `SHAKESPEARE` | `nero` | 6 | 3 | 3 | 0 |
+| `SHAKESPEARE` | `soot` | 6 | 2 | 4 | 0 |
 | `SHAKESPEARE` | `star` | 6 | 5 | 1 | 0 |
 | `WAR_PEACE` | `heal` | 6 | 0 | 6 | 0 |
+| `WAR_PEACE` | `rent` | 6 | 4 | 2 | 0 |
+| `WAR_PEACE` | `thin` | 6 | 0 | 6 | 0 |
 | `MOBY_DICK` | `elam` | 5 | 3 | 2 | 0 |
 | `MOBY_DICK` | `eyes` | 5 | 2 | 3 | 0 |
+| `MOBY_DICK` | `hits` | 5 | 1 | 4 | 0 |
 | `MOBY_DICK` | `rome` | 5 | 2 | 3 | 0 |
+| `MOBY_DICK` | `ruth` | 5 | 3 | 2 | 0 |
+| `SHAKESPEARE` | `gate` | 5 | 2 | 3 | 0 |
 | `SHAKESPEARE` | `heart` | 5 | 3 | 2 | 0 |
-| `SHAKESPEARE` | `isis` | 5 | 1 | 4 | 0 |
-| `SHAKESPEARE` | `life` | 5 | 5 | 0 | 0 |
-| `SHAKESPEARE` | `lord` | 5 | 2 | 3 | 0 |
-| `WAR_PEACE` | `city` | 5 | 0 | 5 | 0 |
-| `WAR_PEACE` | `hand` | 5 | 0 | 5 | 0 |
-| `WAR_PEACE` | `star` | 5 | 5 | 0 | 0 |
-| `WAR_PEACE` | `teeth` | 5 | 2 | 3 | 0 |
-| `MOBY_DICK` | `heart` | 4 | 3 | 1 | 0 |
-| `MOBY_DICK` | `nato` | 4 | 2 | 2 | 0 |
-| `MOBY_DICK` | `noah` | 4 | 4 | 0 | 0 |
-| `MOBY_DICK` | `seal` | 4 | 4 | 0 | 0 |
-| `MOBY_DICK` | `star` | 4 | 3 | 1 | 0 |
-| `MOBY_DICK` | `torah` | 4 | 3 | 1 | 0 |
-| `SHAKESPEARE` | `fire` | 4 | 3 | 1 | 0 |
-| `SHAKESPEARE` | `horn` | 4 | 4 | 0 | 0 |
-| `SHAKESPEARE` | `iran` | 4 | 1 | 3 | 0 |
-| `SHAKESPEARE` | `nato` | 4 | 3 | 1 | 0 |
-| `WAR_PEACE` | `adar` | 4 | 3 | 1 | 0 |
-| `WAR_PEACE` | `aids` | 4 | 1 | 3 | 0 |
-| `WAR_PEACE` | `face` | 4 | 4 | 0 | 0 |
-| `WAR_PEACE` | `nero` | 4 | 3 | 1 | 0 |
 
 ## Read
 

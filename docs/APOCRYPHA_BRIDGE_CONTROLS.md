@@ -61,7 +61,7 @@ python3 -m scripts.analyze_apocrypha_bridge_controls --canonical-label LXX --can
 | `HERODOTUS` | `αδαμ` (adam; English: Adam) | 1 | 1 | 0 | 0 |
 | `HERODOTUS` | `βασαν` (basan; English: Bashan) | 1 | 1 | 0 | 0 |
 | `HERODOTUS` | `δαυιδ` (dauid; English: David) | 1 | 0 | 1 | 0 |
-| `HERODOTUS` | `ελκη` (elke) | 1 | 0 | 1 | 0 |
+| `HERODOTUS` | `ελκη` (elke; English: boils/sores) | 1 | 0 | 1 | 0 |
 | `HERODOTUS` | `ηλιασ` (elias; English: Elijah) | 1 | 1 | 0 | 0 |
 | `HERODOTUS` | `καροσ` (karos; English: Carus) | 1 | 0 | 1 | 0 |
 | `HERODOTUS` | `κερασ` (keras; English: Horn) | 1 | 0 | 1 | 0 |

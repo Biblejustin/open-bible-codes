@@ -15,7 +15,7 @@ python3 -m scripts.analyze_apocrypha_bridge_shuffled_controls --canonical-label 
 
 - observed bridge rows: 62
 - shuffled samples: 5
-- shuffled min/mean/max: 50 / 52.0 / 57
+- shuffled min/mean/max: 50 / 52.4 / 57
 - shuffled samples >= observed: 0
 - empirical p_ge: 0.166667
 
@@ -23,7 +23,7 @@ python3 -m scripts.analyze_apocrypha_bridge_shuffled_controls --canonical-label 
 
 | Sample | Seed | Bridge rows | Terms | C→A | A→C | Multi |
 | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 1 | 20260509 | 50 | 16 | 23 | 27 | 0 |
+| 1 | 20260509 | 52 | 17 | 25 | 27 | 0 |
 | 2 | 20260510 | 51 | 22 | 26 | 25 | 0 |
 | 3 | 20260511 | 52 | 21 | 30 | 22 | 0 |
 | 4 | 20260512 | 50 | 19 | 22 | 28 | 0 |

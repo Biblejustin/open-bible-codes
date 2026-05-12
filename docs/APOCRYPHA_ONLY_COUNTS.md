@@ -12,25 +12,25 @@ python3 -m scripts.analyze_apocrypha_only_counts --corpus-label LXX --config con
 
 ## Summary
 
-- queries_tested: 292
+- queries_tested: 296
 - min_skip: 2
 - max_skip: 250
 - direction: both
 - bible_apocrypha:LXX:letters: 560880
-- bible_apocrypha:LXX:nonzero_terms: 136
-- bible_apocrypha:LXX:total_hits: 78606
+- bible_apocrypha:LXX:nonzero_terms: 139
+- bible_apocrypha:LXX:total_hits: 79418
 - bible_canonical:LXX:letters: 2230979
-- bible_canonical:LXX:nonzero_terms: 152
-- bible_canonical:LXX:total_hits: 306964
+- bible_canonical:LXX:nonzero_terms: 155
+- bible_canonical:LXX:total_hits: 310013
 - nonbible_control:ILIAD:letters: 560880
-- nonbible_control:ILIAD:nonzero_terms: 138
-- nonbible_control:ILIAD:total_hits: 73856
+- nonbible_control:ILIAD:nonzero_terms: 141
+- nonbible_control:ILIAD:total_hits: 74454
 - nonbible_control:ODYSSEY:letters: 560880
-- nonbible_control:ODYSSEY:nonzero_terms: 125
-- nonbible_control:ODYSSEY:total_hits: 75664
+- nonbible_control:ODYSSEY:nonzero_terms: 127
+- nonbible_control:ODYSSEY:total_hits: 76236
 - nonbible_control:HERODOTUS:letters: 560880
-- nonbible_control:HERODOTUS:nonzero_terms: 136
-- nonbible_control:HERODOTUS:total_hits: 69541
+- nonbible_control:HERODOTUS:nonzero_terms: 138
+- nonbible_control:HERODOTUS:total_hits: 70259
 
 ## Top Apocrypha Terms By Hit Count
 
@@ -51,6 +51,7 @@ python3 -m scripts.analyze_apocrypha_only_counts --corpus-label LXX --config con
 | `ελκη` (elke; English: Boils;Sores) | Boils;Sores | 1097 | 3.930068 | 4.354365 | 4.689571 | `control_background` |
 | `τιτοσ` (titos; English: Titus) | Titus | 972 | 3.483031 | 3.628092 | 4.393206 | `control_background` |
 | `οθων` (othon; English: Otho) | Otho | 883 | 3.163401 | 3.050846 | 3.661376 | `control_background` |
+| `τριασ` (trias; English: Trinity) | Trinity | 689 | 2.468939 | 2.347907 | 2.153603 | `above_controls` |
 | `τερασ` (teras; English: Wonder) | Wonder | 645 | 2.311271 | 2.180457 | 2.605107 | `control_background` |
 | `οργη` (orge; English: Wrath) | Wrath | 523 | 1.873679 | 1.819345 | 2.185362 | `control_background` |
 | `αμνοσ` (amnos; English: Lamb) | Lamb | 512 | 1.834683 | 1.657399 | 2.124936 | `control_background` |
@@ -75,7 +76,6 @@ python3 -m scripts.analyze_apocrypha_only_counts --corpus-label LXX --config con
 | `θυσια` (thusia; English: Sacrifice) | Sacrifice | 225 | 0.806257 | 0.925479 | 0.648589 | `above_controls` |
 | `κλεισ` (kleis; English: Key) | Key | 222 | 0.795507 | 0.83095 | 0.895841 | `control_background` |
 | `μωαβ` (moab; English: Moab) | Moab | 210 | 0.752338 | 0.842606 | 0.537384 | `above_controls` |
-| `δοξα` (doxa; English: Glory) | Glory | 199 | 0.712929 | 0.683267 | 1.210905 | `control_background` |
 
 ## Read
 
