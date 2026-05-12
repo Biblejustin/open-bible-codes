@@ -45,8 +45,8 @@ warnings and capped-row flags.
 
 | Stratum | Current support | Missing for claim-grade use |
 | --- | --- | --- |
-| `matrix_cluster_at_width_W` | matrix coordinate primitives exist | locked row-width protocol, cluster metric, matched controls |
-| `matrix_orthogonal` / `matrix_diagonal` / `matrix_adjacent_row` | matrix coordinate primitives exist | cluster extraction and correction family |
+| `matrix_cluster_at_width_W` | parameterized matrix-neighborhood candidate extraction exists | locked row-width protocol and matched controls |
+| `matrix_orthogonal` / `matrix_diagonal` / `matrix_adjacent_row` | matrix coordinate and neighborhood primitives exist | orthogonal/diagonal-specific metrics and correction family |
 | WRR-style pair geometry | cylindrical distance primitives exist | full corrected WRR distance, domain weights, permutation driver |
 | `cohort_cluster_density_window_N` | centered rows and cohorts exist | locked window/cohort protocol and matched controls |
 | `term_absence_at_thematic_chapter` | notable-passage gap protocol exists | generalized term-to-chapter mapping |

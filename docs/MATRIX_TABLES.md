@@ -29,6 +29,24 @@ Override it with:
 
 Use an explicit width when comparing multiple hits in the same table layout.
 
+## Cluster Candidates
+
+To extract multi-term matrix-neighborhood candidates from an existing hit CSV,
+use:
+
+```bash
+python3 -m scripts.build_matrix_cluster_candidates \
+  --hits reports/search_hits.csv \
+  --row-width 50 \
+  --max-cell-distance 1 \
+  --out reports/matrix_clusters/candidates.csv
+```
+
+This reports pairs of different terms whose ELS letter paths touch the same
+matrix cell or fall within the declared Chebyshev cell distance. The script is
+parameterized on row width and distance; it does not choose a geometry for a
+claim.
+
 ## Outputs
 
 The letter output has one row per ELS letter:
@@ -50,6 +68,15 @@ The summary output has one row per hit:
 - row/column span;
 - first/last offset;
 - start, end, and center refs.
+
+The cluster-candidate output has one row per neighboring hit pair:
+
+- row width and maximum allowed cell distance;
+- observed nearest cell distance;
+- nearest left/right cells;
+- corpus label;
+- left/right hit indexes, term ids, skips, directions, center refs, and center
+  words.
 
 Older hit CSVs without center fields are accepted. In that case `center_offset`
 is recomputed from the span and center ref/word fields are filled from the

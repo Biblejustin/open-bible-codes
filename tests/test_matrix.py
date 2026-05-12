@@ -5,7 +5,15 @@ from pathlib import Path
 
 from els.cli import hit_from_row, hit_with_corpus_center, main
 from els.corpus import Corpus, VerseSpan
-from els.matrix import hit_offsets, matrix_letters, matrix_summary
+from els.matrix import (
+    chebyshev_cell_distance,
+    closest_cell_pair,
+    hit_matrix_cells,
+    hit_offsets,
+    matrix_cell,
+    matrix_letters,
+    matrix_summary,
+)
 from els.search import ELSHit
 
 
@@ -64,6 +72,17 @@ class MatrixTests(unittest.TestCase):
         self.assertEqual(summary.row_width, 5)
         self.assertEqual(summary.rows_spanned, 3)
         self.assertEqual(summary.cols_spanned, 1)
+
+    def test_matrix_cell_helpers_compute_distance(self) -> None:
+        hit = sample_hit(5)
+
+        self.assertEqual(matrix_cell(12, 5), (2, 2))
+        self.assertEqual(hit_matrix_cells(hit), ((0, 2), (1, 2), (2, 2)))
+        self.assertEqual(chebyshev_cell_distance((1, 2), (3, 4)), 2)
+        self.assertEqual(
+            closest_cell_pair(((0, 0), (5, 5)), ((2, 1), (6, 6))),
+            (1, (5, 5), (6, 6)),
+        )
 
     def test_cli_matrix_exports_letter_path(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -38,6 +38,9 @@ class MatrixSummary:
     last_offset: int
 
 
+MatrixCell = tuple[int, int]
+
+
 def hit_offsets(hit: ELSHit) -> tuple[int, ...]:
     """Return letter offsets in ELS reading order."""
 
@@ -55,6 +58,41 @@ def validate_row_width(row_width: int) -> int:
     if row_width <= 0:
         raise ValueError("row width must be > 0")
     return row_width
+
+
+def matrix_cell(offset: int, row_width: int) -> MatrixCell:
+    width = validate_row_width(row_width)
+    if offset < 0:
+        raise ValueError("offset must be >= 0")
+    return (offset // width, offset % width)
+
+
+def hit_matrix_cells(hit: ELSHit, *, row_width: int | None = None) -> tuple[MatrixCell, ...]:
+    width = validate_row_width(row_width or default_row_width(hit))
+    return tuple(matrix_cell(offset, width) for offset in hit_offsets(hit))
+
+
+def chebyshev_cell_distance(left: MatrixCell, right: MatrixCell) -> int:
+    return max(abs(left[0] - right[0]), abs(left[1] - right[1]))
+
+
+def closest_cell_pair(
+    left_cells: Iterable[MatrixCell],
+    right_cells: Iterable[MatrixCell],
+) -> tuple[int, MatrixCell, MatrixCell]:
+    best_distance: int | None = None
+    best_left: MatrixCell | None = None
+    best_right: MatrixCell | None = None
+    for left in left_cells:
+        for right in right_cells:
+            distance = chebyshev_cell_distance(left, right)
+            if best_distance is None or distance < best_distance:
+                best_distance = distance
+                best_left = left
+                best_right = right
+    if best_distance is None or best_left is None or best_right is None:
+        raise ValueError("closest cell pair requires non-empty cell sets")
+    return best_distance, best_left, best_right
 
 
 def matrix_letters(
