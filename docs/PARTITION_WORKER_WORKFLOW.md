@@ -36,6 +36,14 @@ slower laptop = `worker_03=0.5`. Re-run the planner only after importing or
 marking completed results, so the next assignment is based on genuinely
 remaining coordinator work.
 
+Do not restart an old worker assignment after the coordinator has continued
+locally or imported another machine's results. A stale `worker_NN_partitions.csv`
+can still run successfully on the worker, but it may only duplicate partitions
+that the coordinator already has archived. Before relaunching a worker, regenerate
+assignments on the coordinator and send the worker its fresh `worker_NN_*` files.
+If the planner reports zero selected rows, the partition queue is already complete
+from the coordinator's point of view.
+
 Outputs:
 
 - `reports/dynamic_skip_focus/worker_batches/partition_worker_assignments.csv`
