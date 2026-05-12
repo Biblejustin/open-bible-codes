@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 257
+Documents indexed: 258
 
 ## Controls
 
@@ -197,6 +197,7 @@ Documents indexed: 257
 | English KJV Search | `ENGLISH_KJV_SEARCH.md` |
 | English KJV Screening All-Codes Collection | `ENGLISH_SCREENING_ALL_CODES_COLLECTION.md` |
 | English KJV Screening All-Codes Triage | `ENGLISH_SCREENING_ALL_CODES_TRIAGE.md` |
+| Expanded Strata Tooling | `EXPANDED_STRATA_TOOLING.md` |
 | Extension Context Review | `EXTENSION_CONTEXT_REVIEW.md` |
 | Extension Exact-Center Cohort Review | `EXTENSION_EXACT_CENTER_COHORT_REVIEW.md` |
 | Extension Exact-Center Cross-Text Review | `EXTENSION_EXACT_CENTER_CROSS_TEXT.md` |
