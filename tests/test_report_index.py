@@ -1,5 +1,6 @@
 import json
 import tempfile
+import time
 import unittest
 from pathlib import Path
 
@@ -24,8 +25,15 @@ class ReportIndexTests(unittest.TestCase):
             index_json = root / "index.json"
             write_markdown_index(entries, markdown, reports_root=root)
             write_json_index(entries, index_json)
+            first_markdown_mtime_ns = markdown.stat().st_mtime_ns
+            first_json_mtime_ns = index_json.stat().st_mtime_ns
+            time.sleep(0.01)
+            write_markdown_index(entries, markdown, reports_root=root)
+            write_json_index(entries, index_json)
             payload = json.loads(index_json.read_text(encoding="utf-8"))
             markdown_text = markdown.read_text(encoding="utf-8")
+            second_markdown_mtime_ns = markdown.stat().st_mtime_ns
+            second_json_mtime_ns = index_json.stat().st_mtime_ns
 
         csv_entry = next(entry for entry in entries if entry.kind == "csv")
         json_entry = next(entry for entry in entries if entry.kind == "json")
@@ -34,6 +42,8 @@ class ReportIndexTests(unittest.TestCase):
         self.assertEqual(json_entry.label, "sample")
         self.assertEqual(payload["reports"][0]["path"], "a.csv")
         self.assertIn("Report Index", markdown_text)
+        self.assertEqual(second_markdown_mtime_ns, first_markdown_mtime_ns)
+        self.assertEqual(second_json_mtime_ns, first_json_mtime_ns)
 
     def test_scan_reports_skips_operational_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

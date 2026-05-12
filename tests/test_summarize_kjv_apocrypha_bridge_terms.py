@@ -1,10 +1,16 @@
 import argparse
+import json
+import tempfile
+import time
 import unittest
 from pathlib import Path
 
 from scripts.summarize_kjv_apocrypha_bridge_terms import (
+    FIELDNAMES,
     manifest_args,
     sample_refs,
+    write_csv,
+    write_manifest,
     summarize_term_shuffled,
     summarize_terms,
 )
@@ -85,6 +91,40 @@ class KJVAapocryphaBridgeTermReviewTests(unittest.TestCase):
             manifest_args(args),
             {"candidates": "reports/candidates.csv", "sample_count": 10},
         )
+
+    def test_writers_do_not_rewrite_unchanged_content(self) -> None:
+        with self.subTest("csv"):
+            with tempfile.TemporaryDirectory() as tmp:
+                out = Path(tmp) / "term_review.csv"
+                rows = [{"rank": 1, **{field: "" for field in FIELDNAMES if field != "rank"}}]
+                write_csv(out, rows)
+                first_mtime_ns = out.stat().st_mtime_ns
+                time.sleep(0.01)
+                write_csv(out, rows)
+                self.assertEqual(out.stat().st_mtime_ns, first_mtime_ns)
+
+        with self.subTest("manifest"):
+            with tempfile.TemporaryDirectory() as tmp:
+                out = Path(tmp) / "manifest.json"
+                args = argparse.Namespace(
+                    candidates=Path("candidates.csv"),
+                    context=Path("context.csv"),
+                    controls=Path("controls.csv"),
+                    shuffled_summary=Path("shuffled.csv"),
+                    term_shuffled_summary=Path("term_shuffled.csv"),
+                    out=Path("out.csv"),
+                    markdown_out=Path("out.md"),
+                    manifest_out=out,
+                )
+                rows = [{"observed_gt_all_controls": "True"}]
+                write_manifest(out, rows, {}, {}, args, time.perf_counter())
+                first_payload = json.loads(out.read_text(encoding="utf-8"))
+                first_mtime_ns = out.stat().st_mtime_ns
+                time.sleep(0.01)
+                write_manifest(out, rows, {}, {}, args, time.perf_counter())
+                second_payload = json.loads(out.read_text(encoding="utf-8"))
+                self.assertEqual(second_payload, first_payload)
+                self.assertEqual(out.stat().st_mtime_ns, first_mtime_ns)
 
 
 def candidate(

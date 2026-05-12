@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import io
 import json
 import subprocess
 import time
@@ -207,11 +208,11 @@ def sample_refs(rows: Iterable[dict[str, str]], *, limit: int = 5) -> str:
 
 
 def write_csv(path: Path, rows: list[dict[str, object]]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=FIELDNAMES)
-        writer.writeheader()
-        writer.writerows(rows)
+    handle = io.StringIO(newline="")
+    writer = csv.DictWriter(handle, fieldnames=FIELDNAMES)
+    writer.writeheader()
+    writer.writerows(rows)
+    write_text_if_changed(path, handle.getvalue())
 
 
 def write_markdown(
@@ -312,8 +313,7 @@ def write_markdown(
             "  prospective term list and term-level controls are locked before running.",
         ]
     )
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+    write_text_if_changed(path, "\n".join(lines).rstrip() + "\n")
 
 
 def write_manifest(
@@ -324,11 +324,9 @@ def write_manifest(
     args: argparse.Namespace,
     started: float,
 ) -> None:
-    payload = {
+    semantic_payload = {
         "tool": "summarize_kjv_apocrypha_bridge_terms",
         "version": __version__,
-        "created_utc": datetime.now(UTC).isoformat(),
-        "seconds": round(time.perf_counter() - started, 3),
         "git_commit": git_commit(),
         "args": manifest_args(args),
         "term_rows": len(rows),
@@ -336,8 +334,38 @@ def write_manifest(
         "shuffled_summary": shuffled,
         "term_shuffled_summary": term_shuffled,
     }
+    created_utc, seconds = stable_manifest_metadata(path, semantic_payload, started)
+    payload = {
+        **semantic_payload,
+        "created_utc": created_utc,
+        "seconds": seconds,
+    }
+    write_text_if_changed(path, json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
+
+
+def stable_manifest_metadata(path: Path, semantic_payload: dict[str, object], started: float) -> tuple[str, float]:
+    seconds = round(time.perf_counter() - started, 3)
+    if path.exists():
+        try:
+            existing = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            existing = {}
+        existing_semantic = {key: existing.get(key) for key in semantic_payload}
+        if (
+            existing_semantic == semantic_payload
+            and isinstance(existing.get("created_utc"), str)
+            and isinstance(existing.get("seconds"), int | float)
+        ):
+            return str(existing["created_utc"]), float(existing["seconds"])
+    return datetime.now(UTC).isoformat(), seconds
+
+
+def write_text_if_changed(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    content = text.encode("utf-8")
+    if path.exists() and path.read_bytes() == content:
+        return
+    path.write_bytes(content)
 
 
 def manifest_args(args: argparse.Namespace) -> dict[str, object]:

@@ -5,7 +5,6 @@ from __future__ import annotations
 import csv
 import json
 from dataclasses import dataclass, field
-from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -90,7 +89,6 @@ def write_markdown_index(
     lines = [
         "# Report Index",
         "",
-        f"Generated UTC: {datetime.now(UTC).isoformat()}",
         f"Reports root: `{Path(reports_root)}`",
         "",
         "## CSV Reports",
@@ -122,14 +120,12 @@ def write_markdown_index(
         if not entry.sample_rows:
             continue
         lines.extend(_sample_table(entry))
-    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    write_text_if_changed(out, "\n".join(lines) + "\n")
 
 
 def write_json_index(entries: list[ReportEntry], out_path: str | Path) -> None:
     out = Path(out_path)
-    out.parent.mkdir(parents=True, exist_ok=True)
     payload = {
-        "generated_utc": datetime.now(UTC).isoformat(),
         "reports": [
             {
                 "path": entry.path,
@@ -145,10 +141,7 @@ def write_json_index(entries: list[ReportEntry], out_path: str | Path) -> None:
             for entry in entries
         ],
     }
-    out.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    write_text_if_changed(out, json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
 
 
 def _summarize_csv(
@@ -250,8 +243,15 @@ def _read_row_count_cache(path: Path) -> dict[str, dict[str, int]]:
 
 
 def _write_row_count_cache(path: Path, cache: dict[str, dict[str, int]]) -> None:
+    write_text_if_changed(path, json.dumps(cache, ensure_ascii=False, sort_keys=True) + "\n")
+
+
+def write_text_if_changed(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(cache, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
+    content = text.encode("utf-8")
+    if path.exists() and path.read_bytes() == content:
+        return
+    path.write_bytes(content)
 
 
 def _db_row_counts(db_path: Path | None) -> dict[str, tuple[int, int, int]]:
