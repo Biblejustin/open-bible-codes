@@ -29,6 +29,7 @@ SUMMARY_FIELDS = [
     "hits",
     "forward_hits",
     "backward_hits",
+    "capped_at_step_limit",
     "center_refs_sample",
 ]
 
@@ -48,7 +49,7 @@ def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(argv)
     rows = read_hit_rows(args.hits)
-    summary_rows = summarize_rows(rows)
+    summary_rows = summarize_rows(rows, cap_threshold=args.cap_threshold)
     write_rows(args.summary_out, summary_rows)
     write_markdown(args.markdown_out, summary_rows, rows, args)
     write_manifest(args.manifest_out, args, rows, summary_rows, started)
@@ -66,6 +67,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--manifest-out", type=Path, default=Path("reports/word_edge_patterns/summary.manifest.json"))
     parser.add_argument("--title", default="Word-Edge Pattern Audit")
     parser.add_argument("--description", default="Opt-in consecutive-word acrostic and telestic pattern audit.")
+    parser.add_argument("--cap-threshold", type=int, default=0)
     parser.add_argument("--markdown-row-limit", type=int, default=80)
     return parser
 
@@ -80,7 +82,7 @@ def read_hit_rows(paths: list[Path]) -> list[dict[str, str]]:
     return rows
 
 
-def summarize_rows(rows: list[dict[str, str]]) -> list[dict[str, object]]:
+def summarize_rows(rows: list[dict[str, str]], *, cap_threshold: int = 0) -> list[dict[str, object]]:
     groups: dict[SummaryKey, list[dict[str, str]]] = {}
     for row in rows:
         key = SummaryKey(
@@ -110,6 +112,12 @@ def summarize_rows(rows: list[dict[str, str]]) -> list[dict[str, object]]:
                 "hits": len(group_rows),
                 "forward_hits": directions["forward"],
                 "backward_hits": directions["backward"],
+                "capped_at_step_limit": (
+                    "yes"
+                    if cap_threshold > 0
+                    and (directions["forward"] >= cap_threshold or directions["backward"] >= cap_threshold)
+                    else "no"
+                ),
                 "center_refs_sample": ";".join(refs[:10]),
             }
         )
@@ -159,13 +167,13 @@ def write_markdown(
         "",
         "## Summary Rows",
         "",
-        "| Pattern | Corpus | Term | Hits | F/B | Center refs sample |",
-        "| --- | --- | --- | ---: | ---: | --- |",
+        "| Pattern | Corpus | Term | Hits | Capped | F/B | Center refs sample |",
+        "| --- | --- | --- | ---: | --- | ---: | --- |",
     ]
     for row in summary_rows[: args.markdown_row_limit]:
         lines.append(markdown_row(row))
     if len(summary_rows) > args.markdown_row_limit:
-        lines.append(f"| ... | ... | ... | ... | ... | {len(summary_rows) - args.markdown_row_limit:,} more rows in CSV |")
+        lines.append(f"| ... | ... | ... | ... | ... | ... | {len(summary_rows) - args.markdown_row_limit:,} more rows in CSV |")
     lines.extend(
         [
             "",
@@ -174,7 +182,7 @@ def write_markdown(
             "- Acrostic means first letters of consecutive normalized words.",
             "- Telestic means last letters of consecutive normalized words.",
             "- Backward means the consecutive word-edge sequence reads the target term in reverse.",
-            "- Capped rows mean `hits` may be a floor when the search step used `--max-hits-per-term`.",
+            "- `Capped=yes` means `hits` may be a floor because at least one direction reached its per-term limit.",
             "",
         ]
     )
@@ -188,7 +196,7 @@ def markdown_row(row: dict[str, object]) -> str:
     direction_counts = f"{row.get('forward_hits', 0)}/{row.get('backward_hits', 0)}"
     return (
         f"| `{row.get('pattern_type', '')}` | `{corpus}` | {term} | "
-        f"{int(row.get('hits', 0)):,} | {direction_counts} | "
+        f"{int(row.get('hits', 0)):,} | `{row.get('capped_at_step_limit', '')}` | {direction_counts} | "
         f"{md_cell(row.get('center_refs_sample', ''))} |"
     )
 

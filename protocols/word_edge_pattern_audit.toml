@@ -75,6 +75,7 @@ argv = [
   "--hits", "reports/word_edge_patterns/HEB_BRENNER_hits.csv",
   "--title", "Word-Edge Pattern Audit",
   "--description", "Opt-in consecutive-word acrostic and telestic audit over declared Hebrew terms.",
+  "--cap-threshold", "200",
   "--summary-out", "reports/word_edge_patterns/summary.csv",
   "--markdown-out", "docs/WORD_EDGE_PATTERN_AUDIT.md",
   "--manifest-out", "reports/word_edge_patterns/summary.manifest.json"

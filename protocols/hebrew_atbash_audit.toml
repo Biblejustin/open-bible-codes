@@ -75,6 +75,7 @@ argv = [
   "--hits", "reports/hebrew_atbash_audit/HEB_BRENNER_hits.csv",
   "--title", "Hebrew Atbash Transformed-Text Audit",
   "--description", "Opt-in Hebrew Atbash transformed-text ELS audit over declared Jeremiah cryptogram terms.",
+  "--cap-threshold", "200",
   "--summary-out", "reports/hebrew_atbash_audit/summary.csv",
   "--markdown-out", "docs/HEBREW_ATBASH_AUDIT.md",
   "--manifest-out", "reports/hebrew_atbash_audit/summary.manifest.json"

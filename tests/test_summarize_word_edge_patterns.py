@@ -29,12 +29,13 @@ def test_summarize_rows_groups_word_edge_hits() -> None:
         },
     ]
 
-    output = summarize_rows(rows)
+    output = summarize_rows(rows, cap_threshold=1)
 
     assert len(output) == 1
     assert output[0]["hits"] == 2
     assert output[0]["forward_hits"] == 1
     assert output[0]["backward_hits"] == 1
+    assert output[0]["capped_at_step_limit"] == "yes"
     assert output[0]["center_refs_sample"] == "Esth 5:4;Esth 7:5"
 
 
@@ -60,11 +61,14 @@ def test_main_writes_word_edge_summary(tmp_path: Path) -> None:
                 str(markdown),
                 "--manifest-out",
                 str(manifest),
+                "--cap-threshold",
+                "1",
             ]
         )
         == 0
     )
 
     assert "yhwh" in summary.read_text(encoding="utf-8")
+    assert "capped_at_step_limit" in summary.read_text(encoding="utf-8")
     assert "Acrostic means first letters" in markdown.read_text(encoding="utf-8")
     assert manifest.exists()
