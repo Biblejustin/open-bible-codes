@@ -1,0 +1,63 @@
+name = "cohort_cluster_density_audit"
+description = "Post-process centered occurrences for declared-cohort word-window density candidates."
+manifest_out = "reports/cohort_cluster_density/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "tribes_cluster_density"
+description = "Find centered biblical-tribe rows that cluster inside a 50-word window."
+argv = [
+  "-m", "scripts.build_cohort_cluster_density",
+  "--occurrences", "reports/centered_occurrence_index/centered_occurrences.csv",
+  "--cohort", "terms/biblical_tribes.csv",
+  "--window-words", "50",
+  "--min-distinct-terms", "2",
+  "--corpus-config", "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus-config", "UXLC=configs/example_uxlc.toml",
+  "--corpus-config", "EBIBLE_WLC=configs/example_ebible_hebwlc.toml",
+  "--corpus-config", "MAM=configs/example_mam.toml",
+  "--corpus-config", "UHB=configs/example_uhb.toml",
+  "--corpus-config", "LXX=configs/example_ebible_grclxx.toml",
+  "--corpus-config", "KJV=configs/example_ebible_engkjv.toml",
+  "--corpus-config", "KJVA=configs/example_ebible_engkjv_apocrypha.toml",
+  "--corpus-config", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus-config", "SBLGNT=configs/example_sblgnt.toml",
+  "--corpus-config", "BYZ_NT=configs/example_ebible_grcmt.toml",
+  "--corpus-config", "TCG_NT=configs/example_ebible_grctcgnt.toml",
+  "--corpus-config", "HEB_PBY_AHAD_HAAM=configs/nonbible_hebrew_pby_ahad_haam.toml",
+  "--corpus-config", "HEB_PBY_BIALIK=configs/nonbible_hebrew_pby_bialik.toml",
+  "--corpus-config", "HEB_PBY_BRENNER=configs/nonbible_hebrew_pby_brenner.toml",
+  "--corpus-config", "ENG_PG_SHAKESPEARE=configs/nonbible_english_pg_shakespeare.toml",
+  "--out", "reports/cohort_cluster_density/windows.csv",
+  "--summary-out", "reports/cohort_cluster_density/summary.csv",
+  "--manifest-out", "reports/cohort_cluster_density/manifest.json",
+]
+inputs = [
+  "scripts/build_cohort_cluster_density.py",
+  "els/corpus.py",
+  "els/match_strata.py",
+  "reports/centered_occurrence_index/centered_occurrences.csv",
+  "terms/biblical_tribes.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_engkjv.toml",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/nonbible_hebrew_pby_ahad_haam.toml",
+  "configs/nonbible_hebrew_pby_bialik.toml",
+  "configs/nonbible_hebrew_pby_brenner.toml",
+  "configs/nonbible_english_pg_shakespeare.toml",
+]
+outputs = [
+  "reports/cohort_cluster_density/windows.csv",
+  "reports/cohort_cluster_density/summary.csv",
+  "reports/cohort_cluster_density/manifest.json",
+]

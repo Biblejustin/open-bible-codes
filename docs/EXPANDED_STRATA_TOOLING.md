@@ -177,10 +177,19 @@ Shortcut:
 make cohort-cluster-density
 ```
 
+Protocol wrapper:
+
+```bash
+python3 -m scripts.run_protocol protocols/cohort_cluster_density_audit.toml --resume
+```
+
 The default Makefile target uses `terms/biblical_tribes.csv` only as a concrete
-declared cohort. Override `COHORT_CLUSTER_TERMS`, `COHORT_CLUSTER_WINDOW_WORDS`,
-and `COHORT_CLUSTER_MIN_DISTINCT` for a locked study. Rows are review
-candidates only; cohort choice and window width are study-defining inputs.
+declared cohort and supplies the common corpus config mappings needed to resolve
+center refs to global word ordinals. If an occurrence file already includes
+`center_word_ordinal`, direct script calls can omit `--corpus-config`.
+Override `COHORT_CLUSTER_TERMS`, `COHORT_CLUSTER_WINDOW_WORDS`, and
+`COHORT_CLUSTER_MIN_DISTINCT` for a locked study. Rows are review candidates
+only; cohort choice and window width are study-defining inputs.
 
 ## Mapping-Dependent Strata
 
