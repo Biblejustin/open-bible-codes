@@ -29,6 +29,8 @@ SUMMARY_FIELDS = [
     "hits",
     "forward_hits",
     "backward_hits",
+    "min_word_skip",
+    "max_word_skip",
     "capped_at_step_limit",
     "center_refs_sample",
 ]
@@ -99,6 +101,7 @@ def summarize_rows(rows: list[dict[str, str]], *, cap_threshold: int = 0) -> lis
     output = []
     for key, group_rows in groups.items():
         directions = Counter(row.get("direction", "") for row in group_rows)
+        word_skips = sorted(int_value(row.get("word_skip", "1")) for row in group_rows)
         refs = sorted({row.get("center_ref", "") for row in group_rows if row.get("center_ref", "")})
         output.append(
             {
@@ -112,6 +115,8 @@ def summarize_rows(rows: list[dict[str, str]], *, cap_threshold: int = 0) -> lis
                 "hits": len(group_rows),
                 "forward_hits": directions["forward"],
                 "backward_hits": directions["backward"],
+                "min_word_skip": min(word_skips) if word_skips else 1,
+                "max_word_skip": max(word_skips) if word_skips else 1,
                 "capped_at_step_limit": (
                     "yes"
                     if cap_threshold > 0
@@ -154,9 +159,9 @@ def write_markdown(
         args.description,
         "",
         "This is not an ordinary ELS path search. Each pattern consumes one",
-        "letter from each consecutive surface word, using either first letters",
-        "(acrostic) or last letters (telestic). It widens the review surface and",
-        "needs matched controls before claim language.",
+        "letter from surface words at a declared word interval, using either",
+        "first letters (acrostic) or last letters (telestic). It widens the",
+        "review surface and needs matched controls before claim language.",
         "",
         "## Bottom Line",
         "",
@@ -167,8 +172,8 @@ def write_markdown(
         "",
         "## Summary Rows",
         "",
-        "| Pattern | Corpus | Term | Hits | Capped | F/B | Center refs sample |",
-        "| --- | --- | --- | ---: | --- | ---: | --- |",
+        "| Pattern | Corpus | Term | Hits | Capped | F/B | Word skip | Center refs sample |",
+        "| --- | --- | --- | ---: | --- | ---: | --- | --- |",
     ]
     for row in summary_rows[: args.markdown_row_limit]:
         lines.append(markdown_row(row))
@@ -179,9 +184,10 @@ def write_markdown(
             "",
             "## Read",
             "",
-            "- Acrostic means first letters of consecutive normalized words.",
-            "- Telestic means last letters of consecutive normalized words.",
-            "- Backward means the consecutive word-edge sequence reads the target term in reverse.",
+            "- Acrostic means first letters of normalized words.",
+            "- Telestic means last letters of normalized words.",
+            "- Word skip is the interval between consumed surface words. Consecutive-word rows have word skip 1.",
+            "- Backward means the word-edge sequence reads the target term in reverse.",
             "- `Capped=yes` means `hits` may be a floor because at least one direction reached its per-term limit.",
             "",
         ]
@@ -194,11 +200,20 @@ def markdown_row(row: dict[str, object]) -> str:
     term = display_term(str(row.get("normalized_term", "")), english=str(row.get("concept", "")))
     corpus = row.get("corpus_label", "") or row.get("corpus", "")
     direction_counts = f"{row.get('forward_hits', 0)}/{row.get('backward_hits', 0)}"
+    word_skip = f"{row.get('min_word_skip', 1)}-{row.get('max_word_skip', 1)}"
     return (
         f"| `{row.get('pattern_type', '')}` | `{corpus}` | {term} | "
         f"{int(row.get('hits', 0)):,} | `{row.get('capped_at_step_limit', '')}` | {direction_counts} | "
+        f"{word_skip} | "
         f"{md_cell(row.get('center_refs_sample', ''))} |"
     )
+
+
+def int_value(value: object, default: int = 1) -> int:
+    try:
+        return int(str(value))
+    except (TypeError, ValueError):
+        return default
 
 
 def write_manifest(

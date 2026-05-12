@@ -4,6 +4,7 @@ from pathlib import Path
 from els.corpus import Corpus, VerseSpan, WordSpan
 from scripts.search_word_edge_patterns import (
     main,
+    matching_starts,
     search_word_edge_patterns,
     word_edge_letters,
 )
@@ -50,6 +51,31 @@ def test_search_word_edge_patterns_finds_forward_acrostic() -> None:
     assert rows[0]["corpus_label"] == "TINY"
     assert rows[0]["center_word"] == "beta"
     assert rows[0]["sequence"] == "abg"
+    assert rows[0]["word_skip"] == 1
+    assert rows[0]["word_span"] == 3
+
+
+def test_matching_starts_supports_word_skip_lanes() -> None:
+    assert matching_starts("abgd", "bd", word_skip=2) == [1]
+
+
+def test_search_word_edge_patterns_finds_word_skip_acrostic() -> None:
+    rows = search_word_edge_patterns(
+        tiny_word_corpus(),
+        [{"term_id": "bd", "concept": "BD", "category": "test", "term": "bd"}],
+        pattern="acrostic",
+        direction="forward",
+        min_word_skip=2,
+        max_word_skip=2,
+        max_hits_per_term=10,
+    )
+
+    assert len(rows) == 1
+    assert rows[0]["sequence"] == "bd"
+    assert rows[0]["word_skip"] == 2
+    assert rows[0]["word_span"] == 3
+    assert rows[0]["start_word"] == "beta"
+    assert rows[0]["end_word"] == "delta"
 
 
 def test_search_word_edge_patterns_finds_backward_telestic() -> None:

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Search consecutive-word acrostic and telestic patterns."""
+"""Search word-edge acrostic and telestic patterns."""
 
 from __future__ import annotations
 
@@ -23,6 +23,8 @@ FIELDNAMES = [
     "direction",
     "sequence",
     "word_count",
+    "word_skip",
+    "word_span",
     "start_word_global_index",
     "end_word_global_index",
     "start_ref",
@@ -45,6 +47,8 @@ def main(argv: list[str] | None = None) -> int:
         corpus_label=args.corpus_label,
         pattern=args.pattern,
         direction=args.direction,
+        min_word_skip=args.min_word_skip,
+        max_word_skip=args.max_word_skip,
         max_hits_per_term=args.max_hits_per_term,
     )
     write_rows(args.out, rows)
@@ -60,6 +64,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--terms", action="append", type=Path, default=[])
     parser.add_argument("--pattern", choices=["acrostic", "telestic", "both"], default="both")
     parser.add_argument("--direction", choices=["forward", "backward", "both"], default="both")
+    parser.add_argument("--min-word-skip", type=int, default=1)
+    parser.add_argument("--max-word-skip", type=int, default=1)
     parser.add_argument("--max-hits-per-term", type=int, default=200)
     parser.add_argument("--out", type=Path, default=Path("reports/word_edge_patterns/hits.csv"))
     return parser
@@ -88,8 +94,11 @@ def search_word_edge_patterns(
     corpus_label: str = "",
     pattern: str = "both",
     direction: str = "both",
+    min_word_skip: int = 1,
+    max_word_skip: int = 1,
     max_hits_per_term: int = 200,
 ) -> list[dict[str, str | int]]:
+    validate_word_skip_range(min_word_skip, max_word_skip)
     rows: list[dict[str, str | int]] = []
     patterns = ("acrostic", "telestic") if pattern == "both" else (pattern,)
     directions = ("forward", "backward") if direction == "both" else (direction,)
@@ -107,20 +116,24 @@ def search_word_edge_patterns(
             for direction_value in directions:
                 target = query if direction_value == "forward" else query[::-1]
                 hits = 0
-                for start_index in matching_starts(letters, target):
-                    rows.append(
-                        word_edge_hit_row(
-                            corpus,
-                            term_row,
-                            normalized_term=query,
-                            pattern_type=pattern_type,
-                            corpus_label=corpus_label,
-                            direction=direction_value,
-                            sequence=target,
-                            start_index=start_index,
+                for word_skip in range(min_word_skip, max_word_skip + 1):
+                    for start_index in matching_starts(letters, target, word_skip=word_skip):
+                        rows.append(
+                            word_edge_hit_row(
+                                corpus,
+                                term_row,
+                                normalized_term=query,
+                                pattern_type=pattern_type,
+                                corpus_label=corpus_label,
+                                direction=direction_value,
+                                sequence=target,
+                                word_skip=word_skip,
+                                start_index=start_index,
+                            )
                         )
-                    )
-                    hits += 1
+                        hits += 1
+                        if hits >= max_hits_per_term:
+                            break
                     if hits >= max_hits_per_term:
                         break
     return rows
@@ -134,12 +147,24 @@ def word_edge_letters(words: tuple[WordSpan, ...], pattern_type: str) -> str:
     raise ValueError(f"unknown word-edge pattern type: {pattern_type}")
 
 
-def matching_starts(text: str, query: str) -> list[int]:
-    starts = []
-    position = text.find(query)
-    while position != -1:
-        starts.append(position)
-        position = text.find(query, position + 1)
+def validate_word_skip_range(min_word_skip: int, max_word_skip: int) -> None:
+    if min_word_skip < 1:
+        raise ValueError("min_word_skip must be >= 1")
+    if max_word_skip < min_word_skip:
+        raise ValueError("max_word_skip must be >= min_word_skip")
+
+
+def matching_starts(text: str, query: str, *, word_skip: int = 1) -> list[int]:
+    starts: list[int] = []
+    if not query:
+        return starts
+    for offset in range(min(word_skip, len(text))):
+        lane = text[offset::word_skip]
+        position = lane.find(query)
+        while position != -1:
+            starts.append(offset + position * word_skip)
+            position = lane.find(query, position + 1)
+    starts.sort()
     return starts
 
 
@@ -152,10 +177,11 @@ def word_edge_hit_row(
     corpus_label: str,
     direction: str,
     sequence: str,
+    word_skip: int,
     start_index: int,
 ) -> dict[str, str | int]:
-    end_index = start_index + len(sequence) - 1
-    center_index = start_index + (len(sequence) - 1) // 2
+    end_index = start_index + (len(sequence) - 1) * word_skip
+    center_index = start_index + ((len(sequence) - 1) // 2) * word_skip
     start_word = corpus.words[start_index]
     end_word = corpus.words[end_index]
     center_word = corpus.words[center_index]
@@ -171,6 +197,8 @@ def word_edge_hit_row(
         "direction": direction,
         "sequence": sequence,
         "word_count": len(sequence),
+        "word_skip": word_skip,
+        "word_span": end_index - start_index + 1,
         "start_word_global_index": start_index,
         "end_word_global_index": end_index,
         "start_ref": start_word.ref,

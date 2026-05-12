@@ -140,11 +140,13 @@ computed.
 
 ### Tier 4: Declared Future Variants
 
-- `word_skip_ELS`: every `K`th word rather than every `K`th letter.
-- `acrostic_pattern`: term formed from the first letter of consecutive surface
-  words.
-- `telestic_pattern`: term formed from the last letter of consecutive surface
-  words.
+- `word_skip_ELS`: every `K`th word rather than every `K`th letter. Current
+  tooling supports first-letter/last-letter word-edge skip rows; full
+  token-level word skips remain a separate definition problem.
+- `acrostic_pattern`: term formed from the first letter of surface words at a
+  declared word interval.
+- `telestic_pattern`: term formed from the last letter of surface words at a
+  declared word interval.
 - `lxx_vs_mt_semantic_divergence`: ELS locus tracks either MT consonants or LXX
   semantics where the two diverge.
 - `root_only_match`: hidden Hebrew root accepted as a centered match for a

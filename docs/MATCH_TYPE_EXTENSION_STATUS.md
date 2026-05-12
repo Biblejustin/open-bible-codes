@@ -33,9 +33,10 @@ python3 -m scripts.run_protocol protocols/match_strata_index.toml --resume
 | Family | Current support | Primary artifact |
 | --- | --- | --- |
 | `atbash_path` | Hebrew Atbash transformed-corpus search | `protocols/hebrew_atbash_audit.toml` |
-| `albam_path` | Hebrew ALBAM transform primitive; custom search supported | `els/transforms.py` |
-| `acrostic_pattern` | consecutive first-letter word-edge scanner | `protocols/word_edge_pattern_audit.toml` |
-| `telestic_pattern` | consecutive last-letter word-edge scanner | `protocols/word_edge_pattern_audit.toml` |
+| `albam_path` | Hebrew ALBAM transformed-corpus search | `protocols/hebrew_albam_audit.toml` |
+| `acrostic_pattern` | first-letter word-edge scanner with optional word skip | `protocols/word_edge_pattern_audit.toml` |
+| `telestic_pattern` | last-letter word-edge scanner with optional word skip | `protocols/word_edge_pattern_audit.toml` |
+| word-edge `word_skip_ELS` | first/last letter every `K`th word; full word-token variant remains deferred | `scripts/search_word_edge_patterns.py` |
 
 These families widen the search surface. Their reports include control
 warnings and capped-row flags.
@@ -60,7 +61,7 @@ warnings and capped-row flags.
 | `nt_quotation_anchor` / `nt_quotation_span` | OT-in-NT quotation catalog with anchors |
 | `lxx_vs_mt_semantic_divergence` | locked MT/LXX divergence catalog |
 | `root_only_match` | locked Hebrew root/lemma analyzer policy |
-| `word_skip_ELS` | word-token skip search plus matched controls |
+| full word-token `word_skip_ELS` | token-level word skip definition plus matched controls |
 | `cipher_layered_pair` | declared plain/cipher pairing rule |
 
 The mapping-dependent rows above now have header-only templates in
