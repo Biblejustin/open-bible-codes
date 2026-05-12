@@ -1,4 +1,5 @@
 import csv
+import tomllib
 import unittest
 from pathlib import Path
 
@@ -60,6 +61,21 @@ class TermListTests(unittest.TestCase):
         values = [int(row["value"]) for row in rows]
         self.assertEqual(len(values), len(set(values)))
         self.assertGreaterEqual(set(values), {7, 12, 22, 26, 40, 42, 50, 70, 144, 666})
+
+    def test_gematria_schemes_schema(self) -> None:
+        path = TERMS_DIR / "gematria_schemes.toml"
+        data = tomllib.loads(path.read_text(encoding="utf-8"))
+        schemes = data["schemes"]
+
+        self.assertGreaterEqual(
+            {scheme["scheme_id"] for scheme in schemes},
+            {"hebrew_standard", "greek_standard"},
+        )
+        for scheme in schemes:
+            with self.subTest(scheme=scheme["scheme_id"]):
+                self.assertIn(scheme["language"], {"hebrew", "greek"})
+                self.assertTrue(scheme["implementation"].startswith("els.gematria."))
+                self.assertEqual(scheme["status"], "implemented")
 
     def test_prophetic_terms_include_expected_categories(self) -> None:
         path = TERMS_DIR / "prophetic_terms.csv"

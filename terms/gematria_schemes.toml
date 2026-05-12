@@ -1,0 +1,20 @@
+[metadata]
+schema_version = "1"
+status = "declared lock file"
+notes = "Current post-search gematria flags use the standard Hebrew and Greek schemes implemented in els/gematria.py. Future schemes must be added here before result-producing runs."
+
+[[schemes]]
+scheme_id = "hebrew_standard"
+language = "hebrew"
+label = "Standard Hebrew gematria"
+implementation = "els.gematria.hebrew_standard_value"
+status = "implemented"
+notes = "Final forms map to their ordinary letter values."
+
+[[schemes]]
+scheme_id = "greek_standard"
+language = "greek"
+label = "Standard Greek isopsephy"
+implementation = "els.gematria.greek_standard_value"
+status = "implemented"
+notes = "Diacritic marks are stripped before value lookup."
