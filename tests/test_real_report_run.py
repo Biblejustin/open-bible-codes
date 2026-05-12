@@ -85,6 +85,28 @@ class RealReportRunTests(unittest.TestCase):
             "reports/centered_occurrence_index/presence_summary.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
+        for step_id in [
+            "boundary_alignment",
+            "chapter_position_bias",
+            "direction_asymmetry",
+            "canonical_first_summary",
+            "cross_skip_summary",
+            "review_flag_summary",
+            "cohort_cluster_density_audit",
+        ]:
+            self.assertIn(step_id, steps_by_id)
+            self.assertIn(
+                f"protocols/{step_id}.toml",
+                steps_by_id[step_id]["inputs"],
+            )
+        self.assertIn(
+            "reports/boundary_alignment/summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
+            "reports/cohort_cluster_density/summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
         self.assertIn(
             "reports/apocrypha_bridge_context/context.csv",
             steps_by_id["centered_occurrence_index"]["inputs"],

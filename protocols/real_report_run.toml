@@ -862,6 +862,84 @@ outputs = [
 ]
 
 [[steps]]
+id = "boundary_alignment"
+description = "Refresh boundary-alignment summary from occurrence strata."
+argv = ["-m", "scripts.run_protocol", "protocols/boundary_alignment.toml", "--resume"]
+inputs = [
+  "protocols/boundary_alignment.toml",
+  "scripts/build_boundary_alignment.py",
+  "reports/match_strata_index/occurrence_strata.csv",
+]
+outputs = ["reports/boundary_alignment/protocol_run.manifest.json"]
+
+[[steps]]
+id = "chapter_position_bias"
+description = "Refresh chapter-position bias summary from occurrence strata."
+argv = ["-m", "scripts.run_protocol", "protocols/chapter_position_bias.toml", "--resume"]
+inputs = [
+  "protocols/chapter_position_bias.toml",
+  "scripts/build_chapter_position_bias.py",
+  "reports/match_strata_index/occurrence_strata.csv",
+]
+outputs = ["reports/chapter_position_bias/protocol_run.manifest.json"]
+
+[[steps]]
+id = "direction_asymmetry"
+description = "Refresh direction-asymmetry summary from occurrence strata."
+argv = ["-m", "scripts.run_protocol", "protocols/direction_asymmetry.toml", "--resume"]
+inputs = [
+  "protocols/direction_asymmetry.toml",
+  "scripts/build_direction_asymmetry.py",
+  "reports/match_strata_index/occurrence_strata.csv",
+]
+outputs = ["reports/direction_asymmetry/protocol_run.manifest.json"]
+
+[[steps]]
+id = "canonical_first_summary"
+description = "Refresh canonical-first summary from occurrence strata."
+argv = ["-m", "scripts.run_protocol", "protocols/canonical_first_summary.toml", "--resume"]
+inputs = [
+  "protocols/canonical_first_summary.toml",
+  "scripts/build_canonical_first_summary.py",
+  "reports/match_strata_index/occurrence_strata.csv",
+]
+outputs = ["reports/canonical_first_summary/protocol_run.manifest.json"]
+
+[[steps]]
+id = "cross_skip_summary"
+description = "Refresh cross-skip summary from occurrence strata."
+argv = ["-m", "scripts.run_protocol", "protocols/cross_skip_summary.toml", "--resume"]
+inputs = [
+  "protocols/cross_skip_summary.toml",
+  "scripts/build_cross_skip_summary.py",
+  "reports/match_strata_index/occurrence_strata.csv",
+]
+outputs = ["reports/cross_skip_summary/protocol_run.manifest.json"]
+
+[[steps]]
+id = "review_flag_summary"
+description = "Refresh review-flag summary from occurrence strata."
+argv = ["-m", "scripts.run_protocol", "protocols/review_flag_summary.toml", "--resume"]
+inputs = [
+  "protocols/review_flag_summary.toml",
+  "scripts/build_review_flag_summary.py",
+  "reports/match_strata_index/occurrence_strata.csv",
+]
+outputs = ["reports/review_flag_summary/protocol_run.manifest.json"]
+
+[[steps]]
+id = "cohort_cluster_density_audit"
+description = "Refresh declared-cohort cluster-density audit from centered occurrences."
+argv = ["-m", "scripts.run_protocol", "protocols/cohort_cluster_density_audit.toml", "--resume"]
+inputs = [
+  "protocols/cohort_cluster_density_audit.toml",
+  "scripts/build_cohort_cluster_density.py",
+  "reports/centered_occurrence_index/centered_occurrences.csv",
+  "terms/biblical_tribes.csv",
+]
+outputs = ["reports/cohort_cluster_density/protocol_run.manifest.json"]
+
+[[steps]]
 id = "kjv_apocrypha_bridge_term_shuffled_controls"
 description = "Run KJVA bridge term-level shuffled controls."
 argv = ["-m", "scripts.run_protocol", "protocols/kjv_apocrypha_bridge_term_shuffled_controls_1000.toml", "--resume"]
@@ -1031,6 +1109,13 @@ inputs = [
   "reports/all_codes_compound_extension_confirmatory/manifest.json",
   "reports/all_codes_followup_review/manifest.json",
   "reports/centered_occurrence_index/manifest.json",
+  "reports/boundary_alignment/protocol_run.manifest.json",
+  "reports/chapter_position_bias/protocol_run.manifest.json",
+  "reports/direction_asymmetry/protocol_run.manifest.json",
+  "reports/canonical_first_summary/protocol_run.manifest.json",
+  "reports/cross_skip_summary/protocol_run.manifest.json",
+  "reports/review_flag_summary/protocol_run.manifest.json",
+  "reports/cohort_cluster_density/protocol_run.manifest.json",
   "reports/kjv_apocrypha_bridge_term_shuffled_controls_1000/manifest.json",
   "reports/kjv_apocrypha_bridge_term_review/manifest.json",
   "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/manifest.json",
