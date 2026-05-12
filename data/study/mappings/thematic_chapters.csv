@@ -1,1 +1,24 @@
 mapping_id,term_id,concept,language,book,chapter_start,chapter_end,notes,locked_by,locked_at
+gog_ezekiel_h,dyn_gog_h,Gog,hebrew,Ezek,38,39,Gog named in Ezekiel 38-39,LLM-assisted conservative seed,2026-05-12
+magog_ezekiel_h,dyn_magog_h,Magog,hebrew,Ezek,38,39,Magog named in Ezekiel 38-39,LLM-assisted conservative seed,2026-05-12
+gog_revelation_g,dyn_gog_g,Gog,greek,Rev,20,20,Gog named in Revelation 20,LLM-assisted conservative seed,2026-05-12
+magog_revelation_g,dyn_magog_g,Magog,greek,Rev,20,20,Magog named in Revelation 20,LLM-assisted conservative seed,2026-05-12
+beast_daniel_h,dyn_beast_h,Beast,hebrew,Dan,7,7,Beast imagery in Daniel 7,LLM-assisted conservative seed,2026-05-12
+beast_revelation_g,dyn_beast_g,Beast,greek,Rev,13,13,Beast named in Revelation 13,LLM-assisted conservative seed,2026-05-12
+dragon_revelation_g,dyn_dragon_g,Dragon,greek,Rev,12,12,Dragon named in Revelation 12,LLM-assisted conservative seed,2026-05-12
+isa53_servant_h,isa53_servant_h,Servant,hebrew,Isa,53,53,Isaiah 53 servant cohort,LLM-assisted conservative seed,2026-05-12
+isa53_servant_g,isa53_servant_g,Servant,greek,Isa,53,53,Isaiah 53 servant cohort,LLM-assisted conservative seed,2026-05-12
+isa53_transgression_h,isa53_transgression_h,Transgression,hebrew,Isa,53,53,Isaiah 53 servant cohort,LLM-assisted conservative seed,2026-05-12
+isa53_transgression_g,isa53_transgression_g,Transgression,greek,Isa,53,53,Isaiah 53 servant cohort,LLM-assisted conservative seed,2026-05-12
+isa53_iniquity_h,isa53_iniquity_h,Iniquity,hebrew,Isa,53,53,Isaiah 53 servant cohort,LLM-assisted conservative seed,2026-05-12
+isa53_iniquity_g,isa53_iniquity_g,Iniquity,greek,Isa,53,53,Isaiah 53 servant cohort,LLM-assisted conservative seed,2026-05-12
+isa53_wound_h,isa53_wound_h,Wound,hebrew,Isa,53,53,Isaiah 53 servant cohort,LLM-assisted conservative seed,2026-05-12
+isa53_wound_g,isa53_wound_g,Wound,greek,Isa,53,53,Isaiah 53 servant cohort,LLM-assisted conservative seed,2026-05-12
+isa53_lamb_h,isa53_lamb_h,Lamb,hebrew,Isa,53,53,Isaiah 53 servant cohort,LLM-assisted conservative seed,2026-05-12
+isa53_lamb_g,isa53_lamb_g,Lamb,greek,Isa,53,53,Isaiah 53 servant cohort,LLM-assisted conservative seed,2026-05-12
+isa53_silent_h,isa53_silent_h,Silent,hebrew,Isa,53,53,Isaiah 53 servant cohort,LLM-assisted conservative seed,2026-05-12
+isa53_silent_g,isa53_silent_g,Silent,greek,Isa,53,53,Isaiah 53 servant cohort,LLM-assisted conservative seed,2026-05-12
+isa53_grave_h,isa53_grave_h,Grave,hebrew,Isa,53,53,Isaiah 53 servant cohort,LLM-assisted conservative seed,2026-05-12
+isa53_grave_g,isa53_grave_g,Grave,greek,Isa,53,53,Isaiah 53 servant cohort,LLM-assisted conservative seed,2026-05-12
+isa53_bruised_h,isa53_bruised_h,Bruised,hebrew,Isa,53,53,Isaiah 53 servant cohort,LLM-assisted conservative seed,2026-05-12
+isa53_bruised_g,isa53_bruised_g,Bruised,greek,Isa,53,53,Isaiah 53 servant cohort,LLM-assisted conservative seed,2026-05-12

@@ -68,6 +68,8 @@ BOOK_ALIASES = {
     "ezekiel": "Ezek",
     "hos": "Hos",
     "hosea": "Hos",
+    "joel": "Joel",
+    "amos": "Amos",
     "obad": "Obad",
     "obadiah": "Obad",
     "jon": "Jonah",

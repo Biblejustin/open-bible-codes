@@ -6,7 +6,9 @@ human or source-reviewed interpretive mappings before any result-producing run.
 locks accepted surface-form/root assignments and analyzer provenance before
 root-level matching can be used.
 
-Header-only files are valid planning artifacts. Populated files must pass:
+Header-only files are valid planning artifacts. Some files contain conservative
+seed rows for currently implemented post-search metadata; other files remain
+templates for future work. Populated files must pass:
 
 ```bash
 python3 -m scripts.validate_study_mapping_schemas

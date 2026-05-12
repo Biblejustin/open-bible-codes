@@ -73,8 +73,9 @@ warnings and capped-row flags.
 | `root_only_match` | locked Hebrew root policy template |
 | full word-token `word_skip_ELS` | token-level word skip definition plus matched controls |
 
-The mapping-dependent rows above now have header-only templates in
-`data/study/mappings/`. Before any populated mapping can drive promotion, run:
+Mapping-dependent rows use the locked CSV files in `data/study/mappings/`.
+Some mapping files now contain conservative seed rows; others remain header-only
+templates. Before any populated mapping can drive promotion, run:
 
 ```bash
 python3 -m scripts.validate_study_mapping_schemas

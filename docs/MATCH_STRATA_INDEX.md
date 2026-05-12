@@ -15,7 +15,7 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 
 - annotated occurrence rows: 923
 - materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, available `boundary_*` endpoint strata, and cross-skip pair strata.
-- mapping-dependent strata use locked CSVs under `data/study/mappings/` and stay blank until those maps are populated.
+- mapping-dependent strata use locked CSVs under `data/study/mappings/`; only rows matching populated entries are flagged.
 - meaningful skip strata use the locked constants file and standard Hebrew/Greek gematria only as review flags.
 - bigram-surprise strata compare the hidden term's adjacent letter pairs to the matched corpus text.
 - letter-frequency anomaly strata compare the hidden term's individual letters to the matched corpus text.
@@ -28,6 +28,7 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 | --- | ---: |
 | `bidirectional_present` | 780 |
 | `centered_self_exact_word` | 623 |
+| `protagonist_in_own_narrative` | 305 |
 | `cross_skip_pair_within_N_letters` | 228 |
 | `span_relevant` | 205 |
 | `cross_skip_pair_at_letter` | 171 |
@@ -45,6 +46,7 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 | `relevant_center_same_category` | 14 |
 | `boundary_end_verse` | 13 |
 | `skip_equals_meaningful_constant` | 10 |
+| `canonical_first_in_thematic_chapter` | 6 |
 | `centered_self_surface_form` | 5 |
 | `relevant_center_same_concept` | 3 |
 | `boundary_end_book` | 2 |
@@ -350,6 +352,92 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 | 772 | `ahab` | 2ES 16:78 `consumed` |  | 2: horn;obal | 7: hail;hits;horn;isaac;lane;obed;thin; min=3 | `kjv_apocrypha_bridge_context` |
 | ... | ... | ... | ... | ... | ... | 151 more cross-skip rows in CSV |
 
+## Mapping-Dependent Rows
+
+| Rank | Term | Center | Thematic first | Author scope | Protagonist scope | Source |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | `γωγ` (Gog; English: Gog) | REV 20:8=4 `Gog` | gog_revelation_g:Rev 20-20 |  |  | `gog_source_review` |
+| 2 | `γωγ` (Gog; English: Gog) | Rev 20:8=4 `Gog` | gog_revelation_g:Rev 20-20 |  |  | `gog_source_review` |
+| 3 | `γωγ` (Gog; English: Gog) | REV 20:8=4 `Gog` | gog_revelation_g:Rev 20-20 |  |  | `gog_source_review` |
+| 4 | `γωγ` (Gog; English: Gog) | REV 20:8=2 `Gog` | gog_revelation_g:Rev 20-20 |  |  | `gog_source_review` |
+| 22 | `γωγ` (Gog; English: Gog) | REV 20:8 `Γὼγ` (Gog; English: Gog) | gog_revelation_g:Rev 20-20 |  |  | `original_language_findings` |
+| 98 | `jesus` | MAT 4:10 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 99 | `jesus` | MRK 10:5 `Jesus` |  |  | jesus_mark_e:Jesus Mark 1:1-Mark 16:20 | `strong_full_span_exact_center` |
+| 100 | `γωγ` (Gog; English: Gog) | REV 20:8 `Γὼγ` (Gog; English: Gog) | gog_revelation_g:Rev 20-20 |  |  | `strong_full_span_exact_center` |
+| 102 | `jesus` | JHN 12:21 `Jesus.` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 103 | `jesus` | JHN 21:20 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 104 | `jesus` | LUK 17:17 `Jesus` |  |  | jesus_luke_e:Jesus Luke 1:1-Luke 24:53 | `strong_full_span_exact_center` |
+| 105 | `jesus` | LUK 9:42 `Jesus` |  |  | jesus_luke_e:Jesus Luke 1:1-Luke 24:53 | `strong_full_span_exact_center` |
+| 106 | `jesus` | MAT 12:15 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 107 | `jesus` | MAT 18:1 `Jesus,` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 108 | `jesus` | MAT 20:22 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 109 | `jesus` | MAT 20:25 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 110 | `jesus` | MAT 21:24 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 111 | `jesus` | MAT 26:17 `Jesus,` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 112 | `jesus` | MAT 2:1 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 113 | `jesus` | MAT 3:13 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 114 | `jesus` | MAT 8:34 `Jesus:` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 115 | `jesus` | MRK 10:23 `Jesus` |  |  | jesus_mark_e:Jesus Mark 1:1-Mark 16:20 | `strong_full_span_exact_center` |
+| 116 | `jesus` | MRK 5:27 `Jesus,` |  |  | jesus_mark_e:Jesus Mark 1:1-Mark 16:20 | `strong_full_span_exact_center` |
+| 130 | `jesus` | JHN 12:11 `Jesus.` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 131 | `jesus` | JHN 12:35 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 132 | `jesus` | JHN 18:7 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 133 | `jesus` | JHN 18:8 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 134 | `jesus` | JHN 19:28 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 135 | `jesus` | JHN 19:38 `Jesus,` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 136 | `jesus` | JHN 19:40 `Jesus,` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 137 | `jesus` | JHN 20:12 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 138 | `jesus` | JHN 20:26 `Jesus,` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 139 | `jesus` | JHN 21:1 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 140 | `jesus` | JHN 21:5 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 141 | `jesus` | JHN 2:13 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 142 | `jesus` | JHN 3:10 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 143 | `jesus` | JHN 4:2 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 144 | `jesus` | JHN 4:44 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 145 | `jesus` | JHN 4:7 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 146 | `jesus` | JHN 6:24 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 147 | `jesus` | JHN 6:61 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 148 | `jesus` | JHN 7:50 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 149 | `jesus` | JHN 7:6 `Jesus` |  |  | jesus_john_e:Jesus John 1:1-John 21:25 | `strong_full_span_exact_center` |
+| 150 | `jesus` | LUK 18:19 `Jesus` |  |  | jesus_luke_e:Jesus Luke 1:1-Luke 24:53 | `strong_full_span_exact_center` |
+| 151 | `jesus` | LUK 18:40 `Jesus` |  |  | jesus_luke_e:Jesus Luke 1:1-Luke 24:53 | `strong_full_span_exact_center` |
+| 152 | `jesus` | LUK 19:1 `Jesus` |  |  | jesus_luke_e:Jesus Luke 1:1-Luke 24:53 | `strong_full_span_exact_center` |
+| 153 | `jesus` | LUK 19:3 `Jesus` |  |  | jesus_luke_e:Jesus Luke 1:1-Luke 24:53 | `strong_full_span_exact_center` |
+| 154 | `jesus` | LUK 19:9 `Jesus` |  |  | jesus_luke_e:Jesus Luke 1:1-Luke 24:53 | `strong_full_span_exact_center` |
+| 155 | `jesus` | LUK 23:52 `Jesus.` |  |  | jesus_luke_e:Jesus Luke 1:1-Luke 24:53 | `strong_full_span_exact_center` |
+| 156 | `jesus` | LUK 24:15 `Jesus` |  |  | jesus_luke_e:Jesus Luke 1:1-Luke 24:53 | `strong_full_span_exact_center` |
+| 157 | `jesus` | LUK 4:8 `Jesus` |  |  | jesus_luke_e:Jesus Luke 1:1-Luke 24:53 | `strong_full_span_exact_center` |
+| 158 | `jesus` | LUK 5:10 `Jesus` |  |  | jesus_luke_e:Jesus Luke 1:1-Luke 24:53 | `strong_full_span_exact_center` |
+| 159 | `jesus` | LUK 6:11 `Jesus.` |  |  | jesus_luke_e:Jesus Luke 1:1-Luke 24:53 | `strong_full_span_exact_center` |
+| 160 | `jesus` | LUK 8:50 `Jesus` |  |  | jesus_luke_e:Jesus Luke 1:1-Luke 24:53 | `strong_full_span_exact_center` |
+| 161 | `jesus` | MAT 10:5 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 162 | `jesus` | MAT 13:1 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 163 | `jesus` | MAT 13:53 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 164 | `jesus` | MAT 14:16 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 165 | `jesus` | MAT 15:1 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 166 | `jesus` | MAT 15:32 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 167 | `jesus` | MAT 16:21 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 168 | `jesus` | MAT 16:8 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 169 | `jesus` | MAT 17:11 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 170 | `jesus` | MAT 18:22 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 171 | `jesus` | MAT 19:28 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 172 | `jesus` | MAT 21:16 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 173 | `jesus` | MAT 21:31 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 174 | `jesus` | MAT 24:1 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 175 | `jesus` | MAT 26:55 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 176 | `jesus` | MAT 26:57 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 177 | `jesus` | MAT 26:71 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 178 | `jesus` | MAT 26:75 `Jesus,` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 179 | `jesus` | MAT 27:46 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 180 | `jesus` | MAT 28:9 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 181 | `jesus` | MAT 8:18 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 182 | `jesus` | MAT 8:20 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 183 | `jesus` | MAT 8:4 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 184 | `jesus` | MAT 9:10 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 185 | `jesus` | MAT 9:15 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| 186 | `jesus` | MAT 9:19 `Jesus` |  |  | jesus_matthew_e:Jesus Matt 1:1-Matt 28:20 | `strong_full_span_exact_center` |
+| ... | ... | ... | ... | ... | ... | 231 more mapping rows in CSV |
+
 ## Meaningful Skip Rows
 
 | Rank | Term | Center | Skip | Constant match | Term gematria match | Center-word gematria match | Source |
@@ -428,7 +516,7 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 - `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.
 - `cross_skip_pair_at_letter` means two different terms at different skips share at least one retained letter-path position.
 - `cross_skip_pair_within_N_letters` means two different terms at different skips have endpoints within the configured letter distance.
-- `canonical_first_in_thematic_chapter`, `author_in_own_book`, and `protagonist_in_own_narrative` are locked-mapping annotations only; empty mapping files mean no rows are flagged.
+- `canonical_first_in_thematic_chapter`, `author_in_own_book`, and `protagonist_in_own_narrative` are locked-mapping annotations only; empty or nonmatching mapping entries do not flag rows.
 - Meaningful-skip and gematria-skip strata are metadata flags; they do not change the search space or promote claim status.
 - Bigram-surprise strata are corpus-local review aids, not claim promotion rules; missing adjacent surface bigrams count as rare.
 - Letter-frequency anomaly strata are corpus-local review aids; missing letters count as rare.

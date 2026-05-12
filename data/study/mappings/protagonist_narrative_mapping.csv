@@ -1,1 +1,27 @@
 mapping_id,protagonist_term_id,protagonist_name,language,book,scope_start_ref,scope_end_ref,notes,locked_by,locked_at
+joshua_book_h,narrative_joshua_h,Joshua,hebrew,Josh,Josh 1:1,Josh 24:33,Joshua narrative book,LLM-assisted conservative seed,2026-05-12
+joshua_book_g,narrative_joshua_g,Joshua,greek,Josh,Josh 1:1,Josh 24:33,Joshua narrative book,LLM-assisted conservative seed,2026-05-12
+ruth_book_h,narrative_ruth_h,Ruth,hebrew,Ruth,Ruth 1:1,Ruth 4:22,Ruth narrative book,LLM-assisted conservative seed,2026-05-12
+ruth_book_g,narrative_ruth_g,Ruth,greek,Ruth,Ruth 1:1,Ruth 4:22,Ruth narrative book,LLM-assisted conservative seed,2026-05-12
+esther_book_h,narrative_esther_h,Esther,hebrew,Esth,Esth 1:1,Esth 10:3,Esther narrative book,LLM-assisted conservative seed,2026-05-12
+esther_book_g,narrative_esther_g,Esther,greek,Esth,Esth 1:1,Esth 10:3,Esther narrative book,LLM-assisted conservative seed,2026-05-12
+samuel_birth_h,narrative_samuel_h,Samuel,hebrew,1Sam,1Sam 1:1,1Sam 25:1,Samuel birth and ministry narrative,LLM-assisted conservative seed,2026-05-12
+samuel_birth_g,narrative_samuel_g,Samuel,greek,1Sam,1Sam 1:1,1Sam 25:1,Samuel birth and ministry narrative,LLM-assisted conservative seed,2026-05-12
+solomon_reign_h,narrative_solomon_h,Solomon,hebrew,1Kgs,1Kgs 1:1,1Kgs 11:43,Solomon accession and reign narrative,LLM-assisted conservative seed,2026-05-12
+solomon_reign_g,narrative_solomon_g,Solomon,greek,1Kgs,1Kgs 1:1,1Kgs 11:43,Solomon accession and reign narrative,LLM-assisted conservative seed,2026-05-12
+moses_exodus_h,moses_h,Moses,hebrew,Exod,Exod 1:1,Exod 40:38,Moses Exodus narrative scope,LLM-assisted conservative seed,2026-05-12
+moses_leviticus_h,moses_h,Moses,hebrew,Lev,Lev 1:1,Lev 27:34,Moses Torah wilderness scope,LLM-assisted conservative seed,2026-05-12
+moses_numbers_h,moses_h,Moses,hebrew,Num,Num 1:1,Num 36:13,Moses Torah wilderness scope,LLM-assisted conservative seed,2026-05-12
+moses_deuteronomy_h,moses_h,Moses,hebrew,Deut,Deut 1:1,Deut 34:12,Moses Deuteronomy narrative scope,LLM-assisted conservative seed,2026-05-12
+moses_exodus_g,moses_g,Moses,greek,Exod,Exod 1:1,Exod 40:38,Moses Exodus narrative scope,LLM-assisted conservative seed,2026-05-12
+moses_leviticus_g,moses_g,Moses,greek,Lev,Lev 1:1,Lev 27:34,Moses Torah wilderness scope,LLM-assisted conservative seed,2026-05-12
+moses_numbers_g,moses_g,Moses,greek,Num,Num 1:1,Num 36:13,Moses Torah wilderness scope,LLM-assisted conservative seed,2026-05-12
+moses_deuteronomy_g,moses_g,Moses,greek,Deut,Deut 1:1,Deut 34:12,Moses Deuteronomy narrative scope,LLM-assisted conservative seed,2026-05-12
+jesus_matthew_g,dyn_jesus_g,Jesus,greek,Matt,Matt 1:1,Matt 28:20,Jesus Gospel narrative scope,LLM-assisted conservative seed,2026-05-12
+jesus_mark_g,dyn_jesus_g,Jesus,greek,Mark,Mark 1:1,Mark 16:20,Jesus Gospel narrative scope,LLM-assisted conservative seed,2026-05-12
+jesus_luke_g,dyn_jesus_g,Jesus,greek,Luke,Luke 1:1,Luke 24:53,Jesus Gospel narrative scope,LLM-assisted conservative seed,2026-05-12
+jesus_john_g,dyn_jesus_g,Jesus,greek,John,John 1:1,John 21:25,Jesus Gospel narrative scope,LLM-assisted conservative seed,2026-05-12
+jesus_matthew_e,dyn_jesus_e,Jesus,english,Matt,Matt 1:1,Matt 28:20,Jesus Gospel narrative scope,LLM-assisted conservative seed,2026-05-12
+jesus_mark_e,dyn_jesus_e,Jesus,english,Mark,Mark 1:1,Mark 16:20,Jesus Gospel narrative scope,LLM-assisted conservative seed,2026-05-12
+jesus_luke_e,dyn_jesus_e,Jesus,english,Luke,Luke 1:1,Luke 24:53,Jesus Gospel narrative scope,LLM-assisted conservative seed,2026-05-12
+jesus_john_e,dyn_jesus_e,Jesus,english,John,John 1:1,John 21:25,Jesus Gospel narrative scope,LLM-assisted conservative seed,2026-05-12
