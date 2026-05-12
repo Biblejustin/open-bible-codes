@@ -12,6 +12,12 @@ Check that this guide and its Makefile shortcuts still point at live tools with:
 make expanded-strata-tooling-check
 ```
 
+Run the post-search expanded-strata chain in dependency order with:
+
+```bash
+make expanded-strata-postprocess
+```
+
 ## Post-Search Metadata
 
 These strata annotate existing centered occurrence rows. They do not perform a
