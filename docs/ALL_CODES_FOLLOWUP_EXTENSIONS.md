@@ -21,12 +21,12 @@ same-skip extension is an added review feature, not a requirement.
 - path rows checked: 310
 - selected rows checked: 83
 - selected rows with extensions: 69
-- extension rows: 677
+- extension rows: 692
 - selected rows with compound extensions: 13
 - compound extension rows containing hidden term: 55
 - max extension length: 5
-- extension rows by corpus: `{'BYZ_NT': 28, 'EBIBLE_WLC': 100, 'KJV': 35, 'MAM': 106, 'MT_WLC': 113, 'SBLGNT': 26, 'TCG_NT': 28, 'TR_NT': 28, 'UHB': 101, 'UXLC': 112}`
-- extension rows by type: `{'after_match': 302, 'before_match': 320, 'before_plus_term': 39, 'term_plus_after': 16}`
+- extension rows by corpus: `{'BYZ_NT': 28, 'EBIBLE_WLC': 103, 'KJV': 35, 'MAM': 109, 'MT_WLC': 116, 'SBLGNT': 26, 'TCG_NT': 28, 'TR_NT': 28, 'UHB': 104, 'UXLC': 115}`
+- extension rows by type: `{'after_match': 302, 'before_match': 335, 'before_plus_term': 39, 'term_plus_after': 16}`
 
 ## Best Extensions By Selected Row
 
@@ -45,8 +45,8 @@ same-skip extension is an added review feature, not a requirement.
 | 80 | hebrew_theology | `center_verse_same_category` | `חכמה` (chkmh; English: Wisdom) | UXLC | `before_plus_term` | `וחכמה` (wchkmh) | `word` | 6 | וְ֝חָכְמָ֗ה; וְחָכְמָ֔ה; וְחָכְמָ֑ה; וְחָכְמָ֥ה; וְחָכְמָֽה׃ |
 | 51 | hebrew_screening | `center_word_same_category` | `אמרי` (mry; English: Amorite) | UXLC | `term_plus_after` | `אמריו` (mryw) | `word` | 4 | אֲ֭מָרָיו; אֲ֝מָרָ֗יו; אֲמָרָ֣יו |
 | 53 | hebrew_screening | `center_verse_exact` | `אריה` (ryh; English: Lion) | UXLC | `before_plus_term` | `ואריה` (wryh) | `word` | 2 | וְאַרְיֵ֖ה; וְאַרְיֵה֙ |
-| 46 | hebrew_screening | `center_word_same_concept` | `רומא` (rwm; English: Rome) | UXLC | `before_match` | `שלומי` (shlwmy) | `word` | 4 | שְׁלוֹמִי֙; שְׁלוֹמִ֜י; שְׁלוֹמִ֔י; שְׁלוֹמִ֨י |
-| 64 | hebrew_screening | `span_same_concept` | `תתתתתא` (ttttt; English: Gregorian 2001) | UXLC | `before_match` | `מאותו` (mwtw) | `word` | 3 | מֵאוֹתֽוֹ׃; מֵאוֹת֑וֹ; מֵֽאוֹתוֹ֙ |
+| 47 | hebrew_screening | `center_word_same_concept` | `רומא` (rwm; English: Rome) | UXLC | `before_match` | `שלומי` (shlwmy) | `word` | 4 | שְׁלוֹמִי֙; שְׁלוֹמִ֜י; שְׁלוֹמִ֔י; שְׁלוֹמִ֨י |
+| 65 | hebrew_screening | `span_same_concept` | `תתתתתא` (ttttt; English: Gregorian 2001) | UXLC | `before_match` | `מאותו` (mwtw) | `word` | 3 | מֵאוֹתֽוֹ׃; מֵאוֹת֑וֹ; מֵֽאוֹתוֹ֙ |
 | 81 | hebrew_theology | `span_same_category` | `משיח` (Mashiach; English: Messiah) | UXLC | `before_match` | `שבנא` (shbn) | `phrase_2+word` | 6 | שֶׁבְנָ֖א; שֶׁבְנָ֣א; שֵֽׁב־ נָ֣א; שֵׁ֣ב נָ֔א |
 | 82 | hebrew_theology | `span_same_category` | `משיח` (Mashiach; English: Messiah) | UXLC | `after_match` | `לובו` (lwbw) | `phrase_2` | 1 | ל֖וֹ בּֽוֹ׃ |
 | 52 | hebrew_screening | `center_verse_exact` | `ביבי` (byby; English: Bibi) | UXLC | `after_match` | `יפתח` (yptch) | `word` | 41 | יִפְתַּ֨ח; יִפְתַּ֣ח; יִפְתַּח־; יִפְתָּֽח׃; יִפְתָּ֗ח |
@@ -59,6 +59,7 @@ same-skip extension is an added review feature, not a requirement.
 | 56 | hebrew_screening | `center_verse_same_concept` | `התשח` (htshch; English: Hebrew year 5708) | UXLC | `before_match` | `יברא` (ybr) | `word` | 1 | יִבְרָ֣א |
 | 61 | hebrew_screening | `span_exact` | `שמימ` (shamayim; English: Heaven) | UXLC | `after_match` | `יהי` (yhy) | `word` | 50 | יְהִ֣י; יְהִ֥י; יְהִ֤י; יְהִי־; יְהִ֨י |
 | 55 | hebrew_screening | `center_verse_same_concept` | `רומי` (rwmy; English: Rome) | UXLC | `before_match` | `שמת` (shmt) | `word` | 25 | שְׁמֹ֖ת; שְׁמֹ֧ת; שְׁמֹ֨ת; שֵׁמֹ֗ת; שַׂ֤מְתָּ |
+| 64 | hebrew_screening | `span_same_concept` | `רומא` (rwm; English: Rome) | UXLC | `after_match` | `עלו` (lw) | `word` | 41 | עֻלּ֖וֹ; עֲל֥וּ; עָל֥וּ; עָל֖וּ; עָל֤וּ |
 | 63 | hebrew_screening | `span_exact` | `מרימ` (mrym; English: Mary) | UXLC | `after_match` | `מרה` (mrh) | `word` | 11 | מָרָֽה׃; מֹרֶֽה׃; מָ֙רָה֙; מָרָ֥ה; מָרָ֖ה |
 | 59 | hebrew_screening | `center_verse_same_category` | `מותשני` (mwtshny; English: Second Death) | UXLC | `before_match` | `אפי` (py) | `word` | 20 | אַפִּ֔י; אַפִּ֥י; אַפִּ֣י; אַפִּ֑י; אַפִּ֤י |
 | 50 | hebrew_screening | `center_word_same_category` | `אמרי` (mry; English: Amorite) | UXLC | `after_match` | `שבי` (shby) | `word` | 20 | שְׁבִ֧י; שֶֽׁבִי׃; שְׁבִי֙; שְׁבִ֨י; שְׁבִי־ |
@@ -67,7 +68,7 @@ same-skip extension is an added review feature, not a requirement.
 | 54 | hebrew_screening | `center_verse_exact` | `יואל` (ywl; English: Joel) | UXLC | `after_match` | `נזמ` (nzm) | `word` | 7 | נֶ֣זֶם; נֶ֥זֶם; נֶ֙זֶם֙ |
 | 67 | hebrew_screening | `span_same_category` | `פתרסימ` (ptrsym; English: Pathrusim) | UXLC | `before_match` | `עכנ` (kn) | `word` | 6 | עָכָ֣ן; עָכָ֞ן; עָכָ֗ן; עָכָ֛ן |
 | 68 | hebrew_screening | `span_same_category` | `טימותי` (tymwty; English: Timothy) | UXLC | `before_match` | `חלי` (chly) | `word` | 5 | חֹ֑לִי; חֳלִי֙; חֳלִ֥י; חֳלִ֖י |
-| 48 | hebrew_screening | `center_word_same_concept` | `ערוב` (rwb; English: Flies Plague) | UXLC | `before_match` | `מרו` (mrw) | `word` | 4 | מָר֥וּ; מָ֥רוּ; מָ֝ר֗וּ; מָר֖וֹ |
+| 46 | hebrew_screening | `center_word_same_concept` | `ערוב` (rwb; English: Flies Plague) | UXLC | `before_match` | `מרו` (mrw) | `word` | 4 | מָר֥וּ; מָ֥רוּ; מָ֝ר֗וּ; מָר֖וֹ |
 | 49 | hebrew_screening | `center_word_same_category` | `גרמניה` (grmnyh; English: Germany) | UXLC | `after_match` | `ערש` (rsh) | `word` | 4 | עֶ֣רֶשׂ; עָֽרֶשׂ׃; עֶ֥רֶשׂ |
 | 76 | hebrew_theology | `center_word_same_category` | `תורה` (twrh; English: Torah) | UXLC | `after_match` | `ואח` (wch) | `word` | 2 | וְאָ֥ח; וָאָ֣ח |
 | 43 | hebrew_screening | `center_word_exact` | `שממה` (shemamah; English: Desolation) | UXLC | `before_match` | `עבה` (bh) | `word` | 2 | עָבָ֖ה |
@@ -75,8 +76,6 @@ same-skip extension is an added review feature, not a requirement.
 | 79 | hebrew_theology | `center_verse_same_category` | `אהבה` (hbh; English: Love) | UXLC | `after_match` | `יבל` (ybl) | `word` | 1 | יָבָ֑ל |
 | 26 | greek_screening | `center_word_same_category` | `ιωυαν` (Iouan; English: Javan) | TR_NT | `after_match` | `ηα` (ea) | `phrase_2` | 2 | ἢ ἃ; Ἢ ἃ |
 | 69 | hebrew_screening | `span_same_category` | `תתתתתכז` (tttttkz; English: Gregorian 2027 additive) | UXLC | `after_match` | `שה` (shh; English: Lamb) | `word` | 24 | שֶׂ֣ה; שֶׂה־; שֶׂ֥ה; שֶׂ֔ה; שֶׂ֖ה |
-| 66 | hebrew_screening | `span_same_concept` | `תתתתתא` (ttttt; English: Gregorian 2001) | UXLC | `after_match` | `חת` (Chet; English: Heth) | `word` | 16 | חֵֽת׃; חֵ֖ת; חֵ֛ת; חֵ֑ת; חֵ֔ת |
-| 47 | hebrew_screening | `center_word_same_concept` | `רומא` (rwm; English: Rome) | UXLC | `after_match` | `לי` (ly) | `word` | 749 | לִּ֥י; לִ֤י; לִ֣י; לִּ֑י; לִּ֔י |
 | 60 | hebrew_screening | `center_verse_same_category` | `טימותי` (tymwty; English: Timothy) | UXLC | `after_match` | `או` (w) | `word` | 321 | א֥וֹ; אוֹ־; א֣וֹ; א֚וֹ; א֖וֹ |
 | 27 | greek_screening | `center_word_same_category` | `ευαλ` (eual; English: Obal) | TR_NT | `before_match` | `σε` (se) | `word` | 197 | σε; σὲ; σέ |
 | 23 | greek_screening | `center_word_exact` | `αννα` (anna; English: Hannah) | TCG_NT | `after_match` | `γε` (ge) | `word` | 28 | γε; γε, |
@@ -85,7 +84,8 @@ same-skip extension is an added review feature, not a requirement.
 | 17 | english_screening | `span_same_category` | `mash` | KJV | `before_match` | `or` | `word` | 1122 | or; Or; or,; Or, |
 | 83 | hebrew_theology | `span_same_category` | `ברית` (bryt; English: Covenant) | UXLC | `after_match` | `דא` (d) | `word` | 5 | דָא־; דָּ֥א; דָּֽא׃; דָ֔א |
 | 21 | english_screening | `hidden_path_only` | `cush` | KJV | `before_match` | `ur` | `word` | 5 | Ur; Ur, |
-| 65 | hebrew_screening | `span_same_concept` | `התשח` (htshch; English: Hebrew year 5708) | UXLC | `before_match` | `הכ` (hk) | `word` | 4 | הַךְ־; הַ֨ךְ; הַ֤ךְ |
+| 66 | hebrew_screening | `span_same_concept` | `התשח` (htshch; English: Hebrew year 5708) | UXLC | `before_match` | `הכ` (hk) | `word` | 4 | הַךְ־; הַ֨ךְ; הַ֤ךְ |
+| 48 | hebrew_screening | `center_word_same_concept` | `ערוב` (rwb; English: Flies Plague) | UXLC | `before_match` | `לח` (lch) | `word` | 3 | לַ֖ח; לָ֔ח; לַח֩ |
 | 57 | hebrew_screening | `center_verse_same_concept` | `רומי` (rwmy; English: Rome) | UXLC | `before_match` | `תו` (tav; English: mark/sign) | `word` | 1 | תָּ֜ו |
 | 25 | greek_screening | `center_word_same_category` | `λουδ` (loud; English: Lud) | TR_NT | `after_match` | `ηρ` (er) | `word` | 1 | Ἤρ |
 | 37 | greek_screening | `span_same_category` | `σαλα` (Sala; English: Shelah) | SBLGNT | `after_match` | `α` (a) | `word` | 117 | ἃ; ⸂ἃ; ⸀ἃ; Ἃ; ἅ |

@@ -93,9 +93,9 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 43 | hebrew_screening | `center_word_exact` | all_source | `שממה` (shemamah; English: Desolation) | Desolation | 2 | Mic 1:7 | `שממה` (shemamah; English: desolation) |
 | 44 | hebrew_screening | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 26:27 | `יהוה` (YHWH; English: YHWH) |
 | 45 | hebrew_screening | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 28:20 | `יהוה` (YHWH; English: YHWH) |
-| 46 | hebrew_screening | `center_word_same_concept` | all_source | `רומא` (rwm; English: Rome) | Rome | 5 | Job 5:12 | `ערומימ` (arumim; English: crafty/shrewd) |
-| 47 | hebrew_screening | `center_word_same_concept` | all_source | `רומא` (rwm; English: Rome) | Rome | -42 | Eccl 10:6 | `במרומימ` (ba-meromim; English: in the heights) |
-| 48 | hebrew_screening | `center_word_same_concept` | all_source | `ערוב` (rwb; English: Flies Plague) | Flies Plague | -3 | 2Chr 13:11 | `ובערב` (wbrb) |
+| 46 | hebrew_screening | `center_word_same_concept` | all_source | `ערוב` (rwb; English: Flies Plague) | Flies Plague | -3 | 2Chr 13:11 | `ובערב` (wbrb) |
+| 47 | hebrew_screening | `center_word_same_concept` | all_source | `רומא` (rwm; English: Rome) | Rome | 5 | Job 5:12 | `ערומימ` (arumim; English: crafty/shrewd) |
+| 48 | hebrew_screening | `center_word_same_concept` | all_source | `ערוב` (rwb; English: Flies Plague) | Flies Plague | 38 | Lev 13:57 | `אובערב` (wbrb) |
 | 49 | hebrew_screening | `center_word_same_category` | all_source | `גרמניה` (grmnyh; English: Germany) | Germany | -18 | Jer 42:15 | `מצרימ` (Mitzrayim; English: Egypt) |
 | 50 | hebrew_screening | `center_word_same_category` | all_source | `אמרי` (mry; English: Amorite) | Amorite | -2 | 1Chr 15:22 | `במשא` (be-massa; English: in bearing/song service) |
 | 51 | hebrew_screening | `center_word_same_category` | all_source | `אמרי` (mry; English: Amorite) | Amorite | 2 | 1Chr 15:27 | `המשררימ` (ha-meshorerim; English: the singers) |
@@ -111,9 +111,9 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 61 | hebrew_screening | `span_exact` | all_source | `שמימ` (shamayim; English: Heaven) | Heaven | 2 | Judg 19:3 | `ויקמ` (vayaqom; English: and he arose) |
 | 62 | hebrew_screening | `span_exact` | all_source | `שמימ` (shamayim; English: Heaven) | Heaven | 2 | Neh 3:1 | `ויקמ` (vayaqom; English: and he arose) |
 | 63 | hebrew_screening | `span_exact` | all_source | `מרימ` (mrym; English: Mary) | Mary | -3 | Mic 6:5 | `זכרנא` (zekhor na; English: remember, please) |
-| 64 | hebrew_screening | `span_same_concept` | all_source | `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 35 | Eccl 3:10 | `לענות` (la-anot; English: to answer/afflict) |
-| 65 | hebrew_screening | `span_same_concept` | all_source | `התשח` (htshch; English: Hebrew year 5708) | Hebrew year 5708 | 40 | Lev 22:27 | `והלאה` (whlh) |
-| 66 | hebrew_screening | `span_same_concept` | all_source | `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | -48 | Gen 6:15 | `חמשימ` (chmshym) |
+| 64 | hebrew_screening | `span_same_concept` | all_source | `רומא` (rwm; English: Rome) | Rome | -14 | Ps 73:7 | `לבב` (lbb; English: Heart) |
+| 65 | hebrew_screening | `span_same_concept` | all_source | `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 35 | Eccl 3:10 | `לענות` (la-anot; English: to answer/afflict) |
+| 66 | hebrew_screening | `span_same_concept` | all_source | `התשח` (htshch; English: Hebrew year 5708) | Hebrew year 5708 | 40 | Lev 22:27 | `והלאה` (whlh) |
 | 67 | hebrew_screening | `span_same_category` | all_source | `פתרסימ` (ptrsym; English: Pathrusim) | Pathrusim | -52 | Isa 26:17 | `תזעק` (tizak; English: she cries out) |
 | 68 | hebrew_screening | `span_same_category` | all_source | `טימותי` (tymwty; English: Timothy) | Timothy | -66 | Jer 46:28 | `יעקב` (Yaakov; English: Jacob) |
 | 69 | hebrew_screening | `span_same_category` | all_source | `תתתתתכז` (tttttkz; English: Gregorian 2027 additive) | Gregorian 2027 additive | 86 | Deut 11:16 | `יפתה` (yifteh; English: will be enticed) |

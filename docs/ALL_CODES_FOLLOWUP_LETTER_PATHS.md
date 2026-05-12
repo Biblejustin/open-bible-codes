@@ -15,7 +15,7 @@ audit sheet, not an added statistical test.
 
 - selected input rows: 83
 - path summary rows: 310
-- letter rows: 1,404
+- letter rows: 1,394
 - sequence mismatches: 0
 - selected by queue: `{'english_screening': 21, 'greek_screening': 21, 'hebrew_screening': 30, 'hebrew_theology': 11}`
 - path rows by corpus: `{'BYZ_NT': 21, 'EBIBLE_WLC': 41, 'KJV': 21, 'MAM': 41, 'MT_WLC': 41, 'SBLGNT': 21, 'TCG_NT': 21, 'TR_NT': 21, 'UHB': 41, 'UXLC': 41}`
