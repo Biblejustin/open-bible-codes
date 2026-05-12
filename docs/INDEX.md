@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 248
+Documents indexed: 249
 
 ## Controls
 
@@ -266,6 +266,7 @@ Documents indexed: 248
 | TheWordNotes ELS Source Audit | `THEWORDNOTES_ELS_AUDIT.md` |
 | Wide Focus Exact-Hit Presence | `WIDE_FOCUS_EXACT_PRESENCE.md` |
 | Broad Search Summary | `WIDE_FOCUS_SEARCH.md` |
+| Windows CPU Broad 2..500 Surface Follow-Up | `WINDOWS_CPU_BROAD_2_500_SURFACE_FOLLOWUP.md` |
 | Word Counts Study | `WORD_COUNTS_STUDY.md` |
 
 ## Version Studies
