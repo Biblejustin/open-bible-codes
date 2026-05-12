@@ -10,6 +10,8 @@ description = "Summarize matrix candidate relations and term-pair rows against s
 argv = [
   "-m", "scripts.summarize_matrix_cluster_controls",
   "--candidates", "reports/matrix_clusters/candidates.csv",
+  "--hits", "reports/crd/classified_hits.csv",
+  "--row-width", "50",
   "--relation-out", "reports/matrix_clusters/relation_control_summary.csv",
   "--term-pair-out", "reports/matrix_clusters/term_pair_control_summary.csv",
   "--markdown-out", "docs/MATRIX_CLUSTER_CONTROL_SUMMARY.md",
@@ -17,7 +19,9 @@ argv = [
 ]
 inputs = [
   "scripts/summarize_matrix_cluster_controls.py",
+  "scripts/build_matrix_cluster_candidates.py",
   "reports/matrix_clusters/candidates.csv",
+  "reports/crd/classified_hits.csv",
 ]
 outputs = [
   "reports/matrix_clusters/relation_control_summary.csv",

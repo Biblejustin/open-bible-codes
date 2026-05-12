@@ -373,10 +373,11 @@ make matrix-cluster-control-summary
 ```
 
 This summary does not run a new search. It reads the matrix candidate CSV and
-compares same-cell, orthogonal, diagonal, and neighborhood candidate counts
-between Bible editions and secular controls. Ratios are per observed corpus
-class and are review aids only; they are not p-values and do not promote a
-candidate to a claim.
+the same CRD hit file used to build those candidates, then compares same-cell,
+orthogonal, diagonal, and neighborhood candidate counts between Bible editions
+and secular controls. It reports both per-corpus ratios and opportunity ratios
+normalized by the possible cross-term pair denominator. These are review aids
+only; they are not p-values and do not promote a candidate to a claim.
 
 Primary outputs:
 

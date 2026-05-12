@@ -64,8 +64,8 @@ warnings and capped-row flags.
 
 | Stratum | Current support | Missing for claim-grade use |
 | --- | --- | --- |
-| `matrix_cluster_at_width_W` | locked width-50 candidate protocol over CRD Bible/control hit rows exists, with relation-level Bible/control summary | locked correction family and promotion threshold |
-| `matrix_orthogonal` / `matrix_diagonal` / `matrix_adjacent_row` | candidate extraction labels nearest-cell relation over Bible/control rows and summarizes relation counts against controls | locked relation-specific promotion metric and correction family |
+| `matrix_cluster_at_width_W` | locked width-50 candidate protocol over CRD Bible/control hit rows exists, with relation-level Bible/control and opportunity-normalized summary | locked correction family and promotion threshold |
+| `matrix_orthogonal` / `matrix_diagonal` / `matrix_adjacent_row` | candidate extraction labels nearest-cell relation over Bible/control rows and summarizes relation counts plus possible-pair denominators against controls | locked relation-specific promotion metric and correction family |
 | WRR-style pair geometry | cylindrical distance primitives exist | full corrected WRR distance, domain weights, permutation driver |
 
 ## Deferred Pending Declared Data
