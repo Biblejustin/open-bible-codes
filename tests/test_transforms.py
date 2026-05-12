@@ -2,12 +2,23 @@ import pytest
 
 from els.corpus import Corpus, VerseSpan
 from els.search import find_els
-from els.transforms import TRANSFORM_HEBREW_ATBASH, atbash_hebrew, transform_corpus
+from els.transforms import (
+    TRANSFORM_HEBREW_ALBAM,
+    TRANSFORM_HEBREW_ATBASH,
+    albam_hebrew,
+    atbash_hebrew,
+    transform_corpus,
+)
 
 
 def test_atbash_hebrew_maps_babel_and_sheshach() -> None:
     assert atbash_hebrew("בבל") == "ששכ"
     assert atbash_hebrew("ששך") == "בבל"
+
+
+def test_albam_hebrew_maps_paired_halves() -> None:
+    assert albam_hebrew("אבטיכ") == "למרשת"
+    assert albam_hebrew("למרשת") == "אבטיכ"
 
 
 def test_transform_corpus_preserves_offsets_and_surface_words() -> None:
@@ -57,3 +68,17 @@ def test_hebrew_atbash_rejects_non_hebrew_corpus() -> None:
 
     with pytest.raises(ValueError, match="requires a Hebrew corpus"):
         transform_corpus(corpus, TRANSFORM_HEBREW_ATBASH)
+
+
+def test_hebrew_albam_rejects_non_hebrew_corpus() -> None:
+    corpus = Corpus(
+        name="tiny",
+        language="english",
+        keep_hebrew_final_forms=False,
+        text="abc",
+        verses=(VerseSpan("test", "Gen 1:1", "Gen", "1", "1", "abc", 0, 3, 3),),
+        position_to_verse=[0, 0, 0],
+    )
+
+    with pytest.raises(ValueError, match="requires a Hebrew corpus"):
+        transform_corpus(corpus, TRANSFORM_HEBREW_ALBAM)

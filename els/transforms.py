@@ -35,7 +35,39 @@ HEBREW_ATBASH = {
     "ת": "א",
 }
 
+HEBREW_ALBAM = {
+    "א": "ל",
+    "ב": "מ",
+    "ג": "נ",
+    "ד": "ס",
+    "ה": "ע",
+    "ו": "פ",
+    "ז": "צ",
+    "ח": "ק",
+    "ט": "ר",
+    "י": "ש",
+    "כ": "ת",
+    "ך": "ת",
+    "ל": "א",
+    "מ": "ב",
+    "ם": "ב",
+    "נ": "ג",
+    "ן": "ג",
+    "ס": "ד",
+    "ע": "ה",
+    "פ": "ו",
+    "ף": "ו",
+    "צ": "ז",
+    "ץ": "ז",
+    "ק": "ח",
+    "ר": "ט",
+    "ש": "י",
+    "ת": "כ",
+}
+
 TRANSFORM_HEBREW_ATBASH = "hebrew_atbash"
+TRANSFORM_HEBREW_ALBAM = "hebrew_albam"
+HEBREW_TRANSFORMS = {TRANSFORM_HEBREW_ATBASH, TRANSFORM_HEBREW_ALBAM}
 
 
 def atbash_hebrew(text: str) -> str:
@@ -43,16 +75,23 @@ def atbash_hebrew(text: str) -> str:
     return "".join(HEBREW_ATBASH.get(char, char) for char in text)
 
 
+def albam_hebrew(text: str) -> str:
+    """Apply Hebrew albam letter substitution, preserving unmapped chars."""
+    return "".join(HEBREW_ALBAM.get(char, char) for char in text)
+
+
 def transform_text(text: str, transform: str) -> str:
     if transform == TRANSFORM_HEBREW_ATBASH:
         return atbash_hebrew(text)
+    if transform == TRANSFORM_HEBREW_ALBAM:
+        return albam_hebrew(text)
     raise ValueError(f"unsupported transform: {transform}")
 
 
 def transform_corpus(corpus: Corpus, transform: str) -> Corpus:
     """Return a same-offset corpus with transformed letter stream only."""
-    if transform == TRANSFORM_HEBREW_ATBASH and corpus.language != "hebrew":
-        raise ValueError("hebrew_atbash requires a Hebrew corpus")
+    if transform in HEBREW_TRANSFORMS and corpus.language != "hebrew":
+        raise ValueError(f"{transform} requires a Hebrew corpus")
     return Corpus(
         name=f"{corpus.name}:{transform}",
         language=corpus.language,
