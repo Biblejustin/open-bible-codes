@@ -10,8 +10,13 @@ CRD_SELF_TABLE_DB_ARGS := $(shell test -f "$(REPORT_DB)" && echo "--db $(REPORT_
 CRD_CONCEPT_COMPARISON_DB_ARGS := $(shell test -f "$(REPORT_DB)" && echo "--db $(REPORT_DB) --classified-table $(CRD_CONCEPT_CLASSIFIED_TABLE)")
 CRD_CONCEPT_TABLE_DB_ARGS := $(shell test -f "$(REPORT_DB)" && echo "--db $(REPORT_DB) --table $(CRD_CONCEPT_CLASSIFIED_TABLE)")
 DYNAMIC_FULL_SPAN_HITS_DB_ARGS := $(shell test -f "$(REPORT_DB)" && echo "--db $(REPORT_DB) --hits-table $(DYNAMIC_FULL_SPAN_HITS_TABLE)")
+MATRIX_CLUSTER_HITS ?= reports/centered_occurrence_index/centered_occurrences.csv
+MATRIX_CLUSTER_WIDTH ?= 50
+MATRIX_CLUSTER_DISTANCE ?= 1
+CIPHER_LAYERED_PLAIN_HITS ?= reports/plain_hits.csv
+CIPHER_LAYERED_CIPHER_HITS ?= reports/hebrew_atbash_audit/MT_WLC_hits.csv
 
-.PHONY: demo indexes test lint public-release-check study-mapping-schemas real-report report-db dynamic-full-span-hit-findings notable-passage-gaps match-strata-index crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-broad-screening-findings crd-center-word-findings crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-self-surface-queue crd-self-surface-center-word crd-self-surface-center-word-density crd-self-surface-center-word-queue crd-self-surface-center-word-packet crd-self-surface-center-word-presence crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density crd-concept-surface-center-word-queue crd-concept-surface-center-word-packet crd-concept-surface-center-word-presence
+.PHONY: demo indexes test lint public-release-check study-mapping-schemas real-report report-db dynamic-full-span-hit-findings notable-passage-gaps match-strata-index hebrew-atbash-audit hebrew-albam-audit word-edge-pattern-audit matrix-cluster-candidates cipher-layered-pairs crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-broad-screening-findings crd-center-word-findings crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-self-surface-queue crd-self-surface-center-word crd-self-surface-center-word-density crd-self-surface-center-word-queue crd-self-surface-center-word-packet crd-self-surface-center-word-presence crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density crd-concept-surface-center-word-queue crd-concept-surface-center-word-packet crd-concept-surface-center-word-presence
 
 demo:
 	python3 -m els.demo
@@ -46,6 +51,21 @@ notable-passage-gaps:
 
 match-strata-index:
 	python3 -m scripts.run_protocol protocols/match_strata_index.toml --resume
+
+hebrew-atbash-audit:
+	python3 -m scripts.run_protocol protocols/hebrew_atbash_audit.toml --resume
+
+hebrew-albam-audit:
+	python3 -m scripts.run_protocol protocols/hebrew_albam_audit.toml --resume
+
+word-edge-pattern-audit:
+	python3 -m scripts.run_protocol protocols/word_edge_pattern_audit.toml --resume
+
+matrix-cluster-candidates:
+	python3 -m scripts.build_matrix_cluster_candidates --hits "$(MATRIX_CLUSTER_HITS)" --width "$(MATRIX_CLUSTER_WIDTH)" --max-cell-distance "$(MATRIX_CLUSTER_DISTANCE)" --out reports/matrix_clusters/candidates.csv --summary-out reports/matrix_clusters/summary.csv --manifest-out reports/matrix_clusters/manifest.json
+
+cipher-layered-pairs:
+	python3 -m scripts.build_cipher_layered_pairs --plain-hits "$(CIPHER_LAYERED_PLAIN_HITS)" --cipher-hits "$(CIPHER_LAYERED_CIPHER_HITS)" --out reports/cipher_layered_pairs/pairs.csv --summary-out reports/cipher_layered_pairs/summary.csv --manifest-out reports/cipher_layered_pairs/manifest.json
 
 crd-review-scaffold:
 	python3 -m scripts.scaffold_crd_relevance_dictionary --term-file terms/gog_magog_pair_prospective_terms.csv --out reports/crd/relevance_dictionary_draft.toml --queue-out reports/crd/relevance_review_queue.csv --locked-by "$(CRD_LOCKED_BY)" --reviewer "$(CRD_REVIEWER)" --drafted-with "$(CRD_DRAFTED_WITH)"

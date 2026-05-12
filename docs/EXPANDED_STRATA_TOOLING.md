@@ -15,6 +15,12 @@ new ELS search by themselves.
 python3 -m scripts.run_protocol protocols/match_strata_index.toml --resume
 ```
 
+Shortcut:
+
+```bash
+make match-strata-index
+```
+
 Primary outputs:
 
 - `reports/match_strata_index/occurrence_strata.csv`
@@ -43,6 +49,13 @@ python3 -m scripts.run_protocol protocols/hebrew_atbash_audit.toml --resume
 python3 -m scripts.run_protocol protocols/hebrew_albam_audit.toml --resume
 ```
 
+Shortcuts:
+
+```bash
+make hebrew-atbash-audit
+make hebrew-albam-audit
+```
+
 Primary outputs:
 
 - `reports/hebrew_atbash_audit/summary.csv`
@@ -67,6 +80,12 @@ python3 -m scripts.build_cipher_layered_pairs \
   --manifest-out reports/cipher_layered_pairs/manifest.json
 ```
 
+Shortcut:
+
+```bash
+make cipher-layered-pairs
+```
+
 Default anchor fields are corpus label, term id, center reference, and center
 normalized word. Use repeated `--anchor-field` arguments only in a locked
 protocol. The manifest records the anchor fields and row counts so downstream
@@ -79,6 +98,12 @@ last letters of surface words, including optional word skips.
 
 ```bash
 python3 -m scripts.run_protocol protocols/word_edge_pattern_audit.toml --resume
+```
+
+Shortcut:
+
+```bash
+make word-edge-pattern-audit
 ```
 
 Primary outputs:
@@ -104,6 +129,12 @@ python3 -m scripts.build_matrix_cluster_candidates \
   --out reports/matrix_clusters/candidates.csv \
   --summary-out reports/matrix_clusters/summary.csv \
   --manifest-out reports/matrix_clusters/manifest.json
+```
+
+Shortcut:
+
+```bash
+make matrix-cluster-candidates
 ```
 
 The output labels nearest-cell relation as `same_cell`, `orthogonal`,
