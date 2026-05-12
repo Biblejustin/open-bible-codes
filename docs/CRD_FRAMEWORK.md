@@ -17,6 +17,11 @@ centered in a verse or span that discusses the term."
 Verse and span matches are exact normalized word-token or contiguous phrase-token
 matches, not arbitrary substrings inside unrelated words.
 
+`classified_hits.csv` also retains the raw ELS path fields
+`start_offset`, `end_offset`, `center_offset`, `span_letters`, and `sequence`.
+That keeps CRD output usable for later geometry and matrix-style post-processing
+without rerunning the underlying ELS search.
+
 The optional dictionary `book_scope` is retained as locked provenance/context.
 It does not hard-filter deterministic surface-keyword matching, because CRD
 must compare Bible editions with secular controls using the same visible-word

@@ -24,12 +24,17 @@ class CRDDensityRunnerTests(unittest.TestCase):
 
             run_crd_density(root / "protocol.toml")
             rows = read_csv(root / "reports" / "crd" / "density_matrix.csv")
+            hit_rows = read_csv(root / "reports" / "crd" / "classified_hits.csv")
 
         self.assertEqual(len(rows), 1)
         self.assertEqual(rows[0]["classifier_mode"], "deterministic")
         self.assertEqual(rows[0]["total_centered_hits"], "1")
         self.assertEqual(rows[0]["relevant_centered_hits"], "1")
         self.assertEqual(rows[0]["relevance_rate"], "1")
+        self.assertEqual(hit_rows[0]["start_offset"], "0")
+        self.assertEqual(hit_rows[0]["end_offset"], "4")
+        self.assertEqual(hit_rows[0]["center_offset"], "2")
+        self.assertEqual(hit_rows[0]["sequence"], "ace")
 
     def test_llm_mode_computes_density(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
