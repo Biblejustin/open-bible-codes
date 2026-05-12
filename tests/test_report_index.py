@@ -51,6 +51,7 @@ class ReportIndexTests(unittest.TestCase):
             (root / "real.csv").write_text("term,count\nθεος,7\n", encoding="utf-8")
             (root / "index.json").write_text("{}", encoding="utf-8")
             (root / "INDEX.md").write_text("# stale\n", encoding="utf-8")
+            (root / "protocol_run.manifest.json").write_text("{}", encoding="utf-8")
             stamp_dir = root / "protocols" / "sample" / ".step-stamps"
             stamp_dir.mkdir(parents=True)
             (stamp_dir / "one.json").write_text("{}", encoding="utf-8")

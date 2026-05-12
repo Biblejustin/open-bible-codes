@@ -16,7 +16,7 @@ from els.report_db import (
 
 
 EXCLUDED_PATH_PARTS = {".step-stamps", "benchmarks", "db", "partitions", "worker_batches", "worker_imports"}
-EXCLUDED_INDEX_FILES = {"INDEX.md", "index.json"}
+EXCLUDED_INDEX_FILES = {"INDEX.md", "index.json", "protocol_run.manifest.json"}
 
 
 @dataclass(frozen=True)
