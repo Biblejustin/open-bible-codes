@@ -14,14 +14,25 @@ with `--include-all` so hidden-path-only hits remain visible.
 - summary rows with any surface context: 113
 - exact center-word hit rows: 12
 - corpora represented in sampled hits: 10
+- control summary rows: 90
+- control sampled hit rows: 8265
+- control exact center-word hit rows: 0
 
 ## Main Read
 
 - Exact center-word hits are rare but present in this bounded follow-up.
+- The matched non-Bible control follow-up produced zero exact center-word hits under the same bounded rules.
 - The Jesus/Joshua rows share the same normalized Greek spelling (`ιησουσ`), so referent review matters.
 - The `Bashan` rows are morphological/substring matches to torment language, not the place name Bashan.
 - Rows with context count zero are still retained as hidden-path-only evidence.
 - This is a capped review queue, not a complete all-hit export for the selected terms.
+
+## Bible Vs Control Surface Follow-Up
+
+| Cohort | Summary rows | Sampled hit rows | Rows with context | Exact center-word hit rows |
+| --- | ---: | ---: | ---: | ---: |
+| Bible corpora | 150 | 16755 | 113 | 12 |
+| Non-Bible controls | 90 | 8265 | 57 | 0 |
 
 ## Exact Center-Word Hits
 
@@ -74,6 +85,44 @@ with `--include-all` so hidden-path-only hits remain visible.
 | `cyrus_g` `κυροσ` (kuros; English: Cyrus) | LXX | 200 | 4 | 0 | 1 | 1 | 3 |
 | `prophet_isaiah_g` `ησαιασ` (esaias; English: Isaiah) | SBLGNT | 198 | 4 | 0 | 1 | 4 | 0 |
 | `jacob_g` `ιακωβ` (iakob; English: Jacob) | SBLGNT | 40 | 4 | 0 | 1 | 2 | 2 |
+
+## Highest Control Surface-Context Rows
+
+Controls still produce many center/span surface-context rows. What they
+did not produce in this bounded pass is an exact center-word row.
+
+| Term | Corpus | Hits sampled | Context hits | Exact center-word | Exact center | Exact span | Same-category span |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `abimael_h` `אבימאל` (byml; English: Abimael) | HEB_BIALIK | 200 | 200 | 0 | 200 | 200 | 0 |
+| `seba_g` `σαβα` (saba; English: Seba) | GRK_ILIAD | 200 | 200 | 0 | 200 | 200 | 0 |
+| `locust_g` `ακρισ` (akris; English: Locust) | GRK_ILIAD | 200 | 200 | 0 | 200 | 200 | 200 |
+| `isaac_g` `ισαακ` (Isaak; English: Isaac) | GRK_HERODOTUS | 200 | 200 | 0 | 200 | 200 | 0 |
+| `seba_g` `σαβα` (saba; English: Seba) | GRK_HERODOTUS | 200 | 200 | 0 | 200 | 200 | 200 |
+| `cyrus_g` `κυροσ` (kuros; English: Cyrus) | GRK_HERODOTUS | 200 | 200 | 0 | 200 | 200 | 200 |
+| `syria_g` `συρια` (suria; English: Syria) | GRK_HERODOTUS | 200 | 200 | 0 | 200 | 200 | 0 |
+| `bashan_g` `βασαν` (basan; English: Bashan) | GRK_HERODOTUS | 200 | 200 | 0 | 200 | 200 | 200 |
+| `locust_g` `ακρισ` (akris; English: Locust) | GRK_HERODOTUS | 200 | 200 | 0 | 200 | 200 | 200 |
+| `cainan_g` `καιναν` (kainan; English: Cainan) | GRK_HERODOTUS | 189 | 189 | 0 | 189 | 189 | 189 |
+| `cyrus_g` `κυροσ` (kuros; English: Cyrus) | GRK_ILIAD | 160 | 160 | 0 | 160 | 160 | 160 |
+| `bashan_g` `βασαν` (basan; English: Bashan) | GRK_ILIAD | 157 | 157 | 0 | 157 | 157 | 157 |
+| `bashan_g` `βασαν` (basan; English: Bashan) | GRK_ODYSSEY | 131 | 131 | 0 | 131 | 131 | 0 |
+| `prophet_isaiah_g` `ησαιασ` (esaias; English: Isaiah) | GRK_ILIAD | 107 | 107 | 0 | 107 | 107 | 0 |
+| `narrative_joshua_g` `ιησουσ` (Iesous; English: Joshua) | GRK_HERODOTUS | 88 | 88 | 0 | 88 | 88 | 0 |
+| `dyn_jesus_g` `ιησουσ` (Iesous; English: Jesus) | GRK_HERODOTUS | 88 | 88 | 0 | 88 | 88 | 0 |
+| `krisis_gnt` `κρισισ` (krisis; English: Judgment) | GRK_HERODOTUS | 49 | 49 | 0 | 49 | 49 | 49 |
+| `kyrios_gnt` `κυριοσ` (kyrios; English: Lord) | GRK_HERODOTUS | 41 | 41 | 0 | 41 | 41 | 41 |
+| `witness_g` `μαρτυσ` (martus; English: Witness) | GRK_HERODOTUS | 32 | 32 | 0 | 32 | 32 | 32 |
+| `rosh_hashanah_h` `ראשהשנה` (rshhshnh; English: Rosh Hashanah) | HEB_BIALIK | 26 | 26 | 0 | 26 | 26 | 0 |
+| `narrative_joshua_g` `ιησουσ` (Iesous; English: Joshua) | GRK_ODYSSEY | 26 | 26 | 0 | 26 | 26 | 0 |
+| `dyn_jesus_g` `ιησουσ` (Iesous; English: Jesus) | GRK_ODYSSEY | 26 | 26 | 0 | 26 | 26 | 0 |
+| `rosh_hashanah_h` `ראשהשנה` (rshhshnh; English: Rosh Hashanah) | HEB_BRENNER | 19 | 19 | 0 | 19 | 19 | 0 |
+| `rosh_hashanah_h` `ראשהשנה` (rshhshnh; English: Rosh Hashanah) | HEB_AHAD_HAAM | 8 | 8 | 0 | 8 | 8 | 0 |
+| `probus_g` `προβοσ` (probos; English: Probus) | GRK_HERODOTUS | 5 | 5 | 0 | 5 | 5 | 5 |
+| `overcome_g` `νικαω` (nikao; English: Overcome) | GRK_ILIAD | 200 | 200 | 0 | 0 | 0 | 200 |
+| `javan_g` `ιωυαν` (Iouan; English: Javan) | GRK_ILIAD | 200 | 200 | 0 | 0 | 0 | 200 |
+| `overcome_g` `νικαω` (nikao; English: Overcome) | GRK_ODYSSEY | 200 | 200 | 0 | 0 | 0 | 200 |
+| `locust_g` `ακρισ` (akris; English: Locust) | GRK_ODYSSEY | 200 | 200 | 0 | 0 | 0 | 200 |
+| `overcome_g` `νικαω` (nikao; English: Overcome) | GRK_HERODOTUS | 200 | 200 | 0 | 0 | 0 | 200 |
 
 ## Hidden-Path-Only Sample Rows
 

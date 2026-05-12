@@ -20,6 +20,8 @@ from els.term_display import display_term
 
 SUMMARY = Path("reports/windows_cpu/broad_2_500/followup_surface_context_summary.csv")
 HITS = Path("reports/windows_cpu/broad_2_500/followup_surface_context.csv")
+CONTROL_SUMMARY = Path("reports/windows_cpu/broad_2_500/followup_surface_context_controls_summary.csv")
+CONTROL_HITS = Path("reports/windows_cpu/broad_2_500/followup_surface_context_controls.csv")
 OUT = Path("docs/WINDOWS_CPU_BROAD_2_500_SURFACE_FOLLOWUP.md")
 MANIFEST_OUT = Path("reports/windows_cpu/broad_2_500/followup_surface_report.manifest.json")
 DEFAULT_CORPUS_CONFIGS = {
@@ -41,8 +43,10 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     summary_rows = read_rows(args.summary)
     hit_rows = read_rows(args.hits)
-    write_markdown(args.out, summary_rows, hit_rows, args)
-    write_manifest(args.manifest_out, args, summary_rows, hit_rows, started)
+    control_summary_rows = read_rows(args.control_summary) if args.control_summary.exists() else []
+    control_hit_rows = read_rows(args.control_hits) if args.control_hits.exists() else []
+    write_markdown(args.out, summary_rows, hit_rows, control_summary_rows, control_hit_rows, args)
+    write_manifest(args.manifest_out, args, summary_rows, hit_rows, control_summary_rows, control_hit_rows, started)
     print(args.out)
     print(args.manifest_out)
     return 0
@@ -52,6 +56,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
     parser.add_argument("--summary", type=Path, default=SUMMARY)
     parser.add_argument("--hits", type=Path, default=HITS)
+    parser.add_argument("--control-summary", type=Path, default=CONTROL_SUMMARY)
+    parser.add_argument("--control-hits", type=Path, default=CONTROL_HITS)
     parser.add_argument("--out", type=Path, default=OUT)
     parser.add_argument("--manifest-out", type=Path, default=MANIFEST_OUT)
     parser.add_argument("--title", default="Windows CPU Broad 2..500 Surface Follow-Up")
@@ -75,12 +81,20 @@ def write_markdown(
     path: Path,
     summary_rows: list[dict[str, str]],
     hit_rows: list[dict[str, str]],
+    control_summary_rows: list[dict[str, str]],
+    control_hit_rows: list[dict[str, str]],
     args: argparse.Namespace,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     exact_center_word_hits = [row for row in hit_rows if is_true(row.get("center_word_exact"))]
+    control_exact_center_word_hits = [
+        row for row in control_hit_rows if is_true(row.get("center_word_exact"))
+    ]
     center_verses = center_verse_lookup(exact_center_word_hits, corpus_configs(args.corpus_config))
     context_rows = [row for row in summary_rows if int_value(row.get("context_hit_count")) > 0]
+    control_context_rows = [
+        row for row in control_summary_rows if int_value(row.get("context_hit_count")) > 0
+    ]
     hidden_only_rows = [
         row
         for row in summary_rows
@@ -104,14 +118,25 @@ def write_markdown(
         f"- summary rows with any surface context: {len(context_rows)}",
         f"- exact center-word hit rows: {len(exact_center_word_hits)}",
         f"- corpora represented in sampled hits: {len(by_corpus)}",
+        f"- control summary rows: {len(control_summary_rows)}",
+        f"- control sampled hit rows: {len(control_hit_rows)}",
+        f"- control exact center-word hit rows: {len(control_exact_center_word_hits)}",
         "",
         "## Main Read",
         "",
         "- Exact center-word hits are rare but present in this bounded follow-up.",
+        "- The matched non-Bible control follow-up produced zero exact center-word hits under the same bounded rules.",
         "- The Jesus/Joshua rows share the same normalized Greek spelling (`ιησουσ`), so referent review matters.",
         "- The `Bashan` rows are morphological/substring matches to torment language, not the place name Bashan.",
         "- Rows with context count zero are still retained as hidden-path-only evidence.",
         "- This is a capped review queue, not a complete all-hit export for the selected terms.",
+        "",
+        "## Bible Vs Control Surface Follow-Up",
+        "",
+        "| Cohort | Summary rows | Sampled hit rows | Rows with context | Exact center-word hit rows |",
+        "| --- | ---: | ---: | ---: | ---: |",
+        f"| Bible corpora | {len(summary_rows)} | {len(hit_rows)} | {len(context_rows)} | {len(exact_center_word_hits)} |",
+        f"| Non-Bible controls | {len(control_summary_rows)} | {len(control_hit_rows)} | {len(control_context_rows)} | {len(control_exact_center_word_hits)} |",
         "",
         "## Exact Center-Word Hits",
         "",
@@ -130,6 +155,20 @@ def write_markdown(
         ]
     )
     for row in sorted(context_rows, key=context_sort_key, reverse=True)[: args.summary_limit]:
+        lines.append(summary_row(row))
+    lines.extend(
+        [
+            "",
+            "## Highest Control Surface-Context Rows",
+            "",
+            "Controls still produce many center/span surface-context rows. What they",
+            "did not produce in this bounded pass is an exact center-word row.",
+            "",
+            "| Term | Corpus | Hits sampled | Context hits | Exact center-word | Exact center | Exact span | Same-category span |",
+            "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |",
+        ]
+    )
+    for row in sorted(control_context_rows, key=context_sort_key, reverse=True)[: args.summary_limit]:
         lines.append(summary_row(row))
     lines.extend(
         [
@@ -273,6 +312,8 @@ def write_manifest(
     args: argparse.Namespace,
     summary_rows: list[dict[str, str]],
     hit_rows: list[dict[str, str]],
+    control_summary_rows: list[dict[str, str]],
+    control_hit_rows: list[dict[str, str]],
     started: float,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -282,8 +323,12 @@ def write_manifest(
         "created_utc": datetime.now(UTC).isoformat(),
         "summary": str(args.summary),
         "hits": str(args.hits),
+        "control_summary": str(args.control_summary),
+        "control_hits": str(args.control_hits),
         "summary_rows": len(summary_rows),
         "hit_rows": len(hit_rows),
+        "control_summary_rows": len(control_summary_rows),
+        "control_hit_rows": len(control_hit_rows),
         "out": str(args.out),
         "git_commit": git_commit(),
         "seconds": round(time.perf_counter() - started, 3),
