@@ -8,14 +8,14 @@ same preregistered controls described in `docs/HYPOTHESIS_ANALYSIS_FRAMEWORK.md`
 ## Reproduce
 
 ```bash
-python3 -m scripts.build_match_strata_index --occurrences reports/centered_occurrence_index/centered_occurrences.csv --meaningful-constants terms/meaningful_constants.csv --thematic-chapters data/study/mappings/thematic_chapters.csv --author-book-mapping data/study/mappings/author_book_mapping.csv --protagonist-narrative-mapping data/study/mappings/protagonist_narrative_mapping.csv --ot-in-nt-quotations data/study/mappings/ot_in_nt_quotations.csv --mt-lxx-semantic-divergence data/study/mappings/mt_lxx_semantic_divergence.csv --out reports/match_strata_index/occurrence_strata.csv --summary-out reports/match_strata_index/strata_summary.csv --markdown-out docs/MATCH_STRATA_INDEX.md --manifest-out reports/match_strata_index/manifest.json --cross-skip-letter-distance 10
+python3 -m scripts.build_match_strata_index --occurrences reports/centered_occurrence_index/centered_occurrences.csv --meaningful-constants terms/meaningful_constants.csv --thematic-chapters data/study/mappings/thematic_chapters.csv --author-book-mapping data/study/mappings/author_book_mapping.csv --protagonist-narrative-mapping data/study/mappings/protagonist_narrative_mapping.csv --ot-in-nt-quotations data/study/mappings/ot_in_nt_quotations.csv --mt-lxx-semantic-divergence data/study/mappings/mt_lxx_semantic_divergence.csv --hebrew-root-policy data/study/mappings/hebrew_root_policy.csv --out reports/match_strata_index/occurrence_strata.csv --summary-out reports/match_strata_index/strata_summary.csv --markdown-out docs/MATCH_STRATA_INDEX.md --manifest-out reports/match_strata_index/manifest.json --cross-skip-letter-distance 10
 ```
 
 ## Bottom Line
 
 - annotated occurrence rows: 923
 - materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, available `boundary_*` endpoint strata, and cross-skip pair strata.
-- mapping-dependent, quotation, and MT/LXX divergence strata use locked CSVs under `data/study/mappings/`; only rows matching populated entries are flagged.
+- mapping-dependent, quotation, MT/LXX divergence, and Hebrew-root strata use locked CSVs under `data/study/mappings/`; only rows matching populated entries are flagged.
 - meaningful skip strata use the locked constants file and standard Hebrew/Greek gematria only as review flags.
 - bigram-surprise strata compare the hidden term's adjacent letter pairs to the matched corpus text.
 - letter-frequency anomaly strata compare the hidden term's individual letters to the matched corpus text.
@@ -516,8 +516,9 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 - `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.
 - `cross_skip_pair_at_letter` means two different terms at different skips share at least one retained letter-path position.
 - `cross_skip_pair_within_N_letters` means two different terms at different skips have endpoints within the configured letter distance.
-- `canonical_first_in_thematic_chapter`, `author_in_own_book`, `protagonist_in_own_narrative`, `nt_quotation_anchor`, `nt_quotation_span`, and `lxx_vs_mt_semantic_divergence` are locked-mapping annotations only; empty or nonmatching mapping entries do not flag rows.
+- `canonical_first_in_thematic_chapter`, `author_in_own_book`, `protagonist_in_own_narrative`, `nt_quotation_anchor`, `nt_quotation_span`, `lxx_vs_mt_semantic_divergence`, and `root_only_match` are locked-mapping annotations only; empty or nonmatching mapping entries do not flag rows.
 - `lxx_vs_mt_semantic_divergence` is center-locus only; a full-span hidden path is not flagged merely because it crosses a declared MT/LXX divergence.
+- `root_only_match` uses a locked surface-form/root policy, not an automatic Hebrew root analyzer.
 - Meaningful-skip and gematria-skip strata are metadata flags; they do not change the search space or promote claim status.
 - Bigram-surprise strata are corpus-local review aids, not claim promotion rules; missing adjacent surface bigrams count as rare.
 - Letter-frequency anomaly strata are corpus-local review aids; missing letters count as rare.

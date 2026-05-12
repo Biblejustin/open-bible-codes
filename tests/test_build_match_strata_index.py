@@ -447,6 +447,83 @@ def test_build_strata_rows_adds_semantic_divergence_flags() -> None:
     assert by_rank["3"]["lxx_vs_mt_semantic_divergence"] == "no"
 
 
+def test_build_strata_rows_adds_root_policy_flags() -> None:
+    rows = build_strata_rows(
+        [
+            {
+                "occurrence_rank": "1",
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT_WLC",
+                "present_corpora": "MT_WLC",
+                "term_id": "root_mlk_h",
+                "concept": "Rule",
+                "category": "root",
+                "normalized_term": "מלך",
+                "center_ref": "Gen 1:1",
+                "center_word": "מלכים",
+                "center_normalized_word": "מלכים",
+                "skip": "7",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+            },
+            {
+                "occurrence_rank": "2",
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT_WLC",
+                "present_corpora": "MT_WLC",
+                "term_id": "root_mlk_h",
+                "concept": "Rule",
+                "category": "root",
+                "normalized_term": "מלך",
+                "center_ref": "Gen 1:2",
+                "center_word": "מלכה",
+                "center_normalized_word": "מלכה",
+                "skip": "7",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+            },
+            {
+                "occurrence_rank": "3",
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT_WLC",
+                "present_corpora": "MT_WLC",
+                "term_id": "root_mlk_h",
+                "concept": "Rule",
+                "category": "root",
+                "normalized_term": "מלכ",
+                "center_ref": "Gen 1:3",
+                "center_word": "מלכים",
+                "center_normalized_word": "מלכים",
+                "skip": "7",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+            },
+        ],
+        root_policy_mappings=[
+            {
+                "mapping_id": "mlk_kings",
+                "term_id": "root_mlk_h",
+                "concept": "Rule",
+                "language": "hebrew",
+                "surface_form": "מלכים",
+                "normalized_surface_form": "מלכים",
+                "root": "מלך",
+                "root_scheme": "manual",
+            }
+        ],
+    )
+
+    by_rank = {row["occurrence_rank"]: row for row in rows}
+    assert by_rank["1"]["root_only_match"] == "yes"
+    assert by_rank["1"]["root_only_match_mappings"] == "mlk_kings"
+    assert "root_only_match" in by_rank["1"]["extended_strata"]
+    assert by_rank["2"]["root_only_match"] == "no"
+    assert by_rank["3"]["root_only_match"] == "no"
+
+
 def test_build_strata_rows_adds_meaningful_skip_and_gematria_flags() -> None:
     rows = build_strata_rows(
         [

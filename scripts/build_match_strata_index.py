@@ -47,6 +47,7 @@ DEFAULT_AUTHOR_BOOK_MAPPING = Path("data/study/mappings/author_book_mapping.csv"
 DEFAULT_PROTAGONIST_NARRATIVE_MAPPING = Path("data/study/mappings/protagonist_narrative_mapping.csv")
 DEFAULT_OT_IN_NT_QUOTATIONS = Path("data/study/mappings/ot_in_nt_quotations.csv")
 DEFAULT_MT_LXX_SEMANTIC_DIVERGENCE = Path("data/study/mappings/mt_lxx_semantic_divergence.csv")
+DEFAULT_HEBREW_ROOT_POLICY = Path("data/study/mappings/hebrew_root_policy.csv")
 
 GROUP_FIELDS = ("source_family", "source_queue", "corpus", "present_corpora", "term_id", "normalized_term")
 MT_CORPUS_LABELS = frozenset({"MT", "MT_WLC", "UXLC", "EBIBLE_WLC", "MAM", "UHB"})
@@ -128,6 +129,9 @@ FIELDNAMES = [
     "lxx_vs_mt_semantic_divergence_side",
     "lxx_vs_mt_semantic_divergence_mappings",
     "lxx_vs_mt_semantic_divergence_evidence",
+    "root_only_match",
+    "root_only_match_mappings",
+    "root_only_match_evidence",
     "boundary_strata",
     "boundary_corpora",
     "boundary_evidence",
@@ -164,6 +168,7 @@ def main(argv: list[str] | None = None) -> int:
     protagonist_mappings = read_mapping_rows(args.protagonist_narrative_mapping)
     quotation_mappings = read_mapping_rows(args.ot_in_nt_quotations)
     semantic_divergence_mappings = read_mapping_rows(args.mt_lxx_semantic_divergence)
+    root_policy_mappings = read_mapping_rows(args.hebrew_root_policy)
     corpus_configs = corpus_config_map(args.corpus_config)
     boundary_indexes, bigram_profiles, letter_frequency_profiles = load_corpus_metadata(corpus_configs)
     rows = build_strata_rows(
@@ -175,6 +180,7 @@ def main(argv: list[str] | None = None) -> int:
         protagonist_mappings=protagonist_mappings,
         quotation_mappings=quotation_mappings,
         semantic_divergence_mappings=semantic_divergence_mappings,
+        root_policy_mappings=root_policy_mappings,
         bigram_profiles=bigram_profiles,
         letter_frequency_profiles=letter_frequency_profiles,
     )
@@ -203,6 +209,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--protagonist-narrative-mapping", type=Path, default=DEFAULT_PROTAGONIST_NARRATIVE_MAPPING)
     parser.add_argument("--ot-in-nt-quotations", type=Path, default=DEFAULT_OT_IN_NT_QUOTATIONS)
     parser.add_argument("--mt-lxx-semantic-divergence", type=Path, default=DEFAULT_MT_LXX_SEMANTIC_DIVERGENCE)
+    parser.add_argument("--hebrew-root-policy", type=Path, default=DEFAULT_HEBREW_ROOT_POLICY)
     parser.add_argument("--markdown-row-limit", type=int, default=80)
     parser.add_argument("--cross-skip-letter-distance", type=int, default=10)
     parser.add_argument(
@@ -224,6 +231,7 @@ def build_strata_rows(
     protagonist_mappings: list[dict[str, str]] | None = None,
     quotation_mappings: list[dict[str, str]] | None = None,
     semantic_divergence_mappings: list[dict[str, str]] | None = None,
+    root_policy_mappings: list[dict[str, str]] | None = None,
     bigram_profiles: dict[str, BigramProfile] | None = None,
     letter_frequency_profiles: dict[str, LetterFrequencyProfile] | None = None,
     cross_skip_letter_distance: int = 10,
@@ -238,6 +246,7 @@ def build_strata_rows(
     protagonist_mappings = protagonist_mappings or []
     quotation_mappings = quotation_mappings or []
     semantic_divergence_mappings = semantic_divergence_mappings or []
+    root_policy_mappings = root_policy_mappings or []
     bigram_profiles = bigram_profiles or {}
     letter_frequency_profiles = letter_frequency_profiles or {}
     cross_skip = cross_skip_annotations(input_rows, within_letter_distance=cross_skip_letter_distance)
@@ -266,6 +275,7 @@ def build_strata_rows(
         )
         quotation_anchor_matches, quotation_span_matches = quotation_mapping_matches(row, quotation_mappings)
         semantic_divergence_matches = semantic_divergence_mapping_matches(row, semantic_divergence_mappings)
+        root_policy_matches = root_policy_mapping_matches(row, root_policy_mappings)
         cross = cross_skip.get(row_identity(row), {})
         skip_values = sorted({abs(value) for value in parse_skip_values(row.get("skip", ""))})
         constant_skips = [value for value in skip_values if value in meaningful_constants]
@@ -303,6 +313,8 @@ def build_strata_rows(
             strata.append("nt_quotation_span")
         if semantic_divergence_matches:
             strata.append("lxx_vs_mt_semantic_divergence")
+        if root_policy_matches:
+            strata.append("root_only_match")
         if cross.get("word_pair_count"):
             strata.append("cross_skip_pair_at_word")
         if cross.get("letter_pair_count"):
@@ -403,6 +415,9 @@ def build_strata_rows(
                 "lxx_vs_mt_semantic_divergence_evidence": ";".join(
                     match["evidence"] for match in semantic_divergence_matches
                 ),
+                "root_only_match": "yes" if root_policy_matches else "no",
+                "root_only_match_mappings": ";".join(match["mapping_id"] for match in root_policy_matches),
+                "root_only_match_evidence": ";".join(match["evidence"] for match in root_policy_matches),
                 "boundary_strata": ";".join(boundary_strata),
                 "boundary_corpora": ";".join(boundary_corpora),
                 "boundary_evidence": ";".join(boundary_evidence),
@@ -848,6 +863,37 @@ def semantic_divergence_evidence(mapping: dict[str, str], side: str) -> str:
     )
 
 
+def root_policy_mapping_matches(row: dict[str, str], mappings: list[dict[str, str]]) -> list[dict[str, str]]:
+    if not mappings:
+        return []
+    term_id = row.get("term_id", "").strip()
+    center_normalized = row.get("center_normalized_word", "").strip()
+    hidden_root = row.get("normalized_term", "").strip()
+    matches: list[dict[str, str]] = []
+    for mapping in mappings:
+        if mapping.get("language", "").strip() != "hebrew":
+            continue
+        if mapping.get("term_id", "").strip() != term_id:
+            continue
+        if mapping.get("normalized_surface_form", "").strip() != center_normalized:
+            continue
+        root = mapping.get("root", "").strip()
+        if root and hidden_root and root != hidden_root:
+            continue
+        matches.append(
+            {
+                "mapping_id": mapping.get("mapping_id", ""),
+                "evidence": (
+                    f"{mapping.get('mapping_id', '')}:"
+                    f"{mapping.get('surface_form', '')}->"
+                    f"{root or hidden_root}:"
+                    f"{mapping.get('root_scheme', '')}"
+                ),
+            }
+        )
+    return matches
+
+
 def row_ref_range(row: dict[str, str]) -> tuple[tuple[int, int, int], tuple[int, int, int]] | None:
     start = parse_ref(row.get("start_ref", ""))
     end = parse_ref(row.get("end_ref", ""))
@@ -906,7 +952,7 @@ def write_markdown(
         "",
         f"- annotated occurrence rows: {len(rows):,}",
         "- materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, available `boundary_*` endpoint strata, and cross-skip pair strata.",
-        "- mapping-dependent, quotation, and MT/LXX divergence strata use locked CSVs under `data/study/mappings/`; only rows matching populated entries are flagged.",
+        "- mapping-dependent, quotation, MT/LXX divergence, and Hebrew-root strata use locked CSVs under `data/study/mappings/`; only rows matching populated entries are flagged.",
         "- meaningful skip strata use the locked constants file and standard Hebrew/Greek gematria only as review flags.",
         "- bigram-surprise strata compare the hidden term's adjacent letter pairs to the matched corpus text.",
         "- letter-frequency anomaly strata compare the hidden term's individual letters to the matched corpus text.",
@@ -1055,6 +1101,23 @@ def write_markdown(
             lines.append(
                 f"| ... | ... | ... | ... | ... | {len(semantic_divergence_rows) - args.markdown_row_limit:,} more MT/LXX divergence rows in CSV |"
             )
+    root_rows = [row for row in rows if row.get("root_only_match") == "yes"]
+    if root_rows:
+        lines.extend(
+            [
+                "",
+                "## Hebrew Root Policy Rows",
+                "",
+                "| Rank | Term | Center | Evidence | Source |",
+                "| ---: | --- | --- | --- | --- |",
+            ]
+        )
+        for row in root_rows[: args.markdown_row_limit]:
+            lines.append(root_policy_markdown_row(row))
+        if len(root_rows) > args.markdown_row_limit:
+            lines.append(
+                f"| ... | ... | ... | ... | {len(root_rows) - args.markdown_row_limit:,} more root-policy rows in CSV |"
+            )
     meaningful_rows = [
         row
         for row in rows
@@ -1124,8 +1187,9 @@ def write_markdown(
             "- `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.",
             "- `cross_skip_pair_at_letter` means two different terms at different skips share at least one retained letter-path position.",
             "- `cross_skip_pair_within_N_letters` means two different terms at different skips have endpoints within the configured letter distance.",
-            "- `canonical_first_in_thematic_chapter`, `author_in_own_book`, `protagonist_in_own_narrative`, `nt_quotation_anchor`, `nt_quotation_span`, and `lxx_vs_mt_semantic_divergence` are locked-mapping annotations only; empty or nonmatching mapping entries do not flag rows.",
+            "- `canonical_first_in_thematic_chapter`, `author_in_own_book`, `protagonist_in_own_narrative`, `nt_quotation_anchor`, `nt_quotation_span`, `lxx_vs_mt_semantic_divergence`, and `root_only_match` are locked-mapping annotations only; empty or nonmatching mapping entries do not flag rows.",
             "- `lxx_vs_mt_semantic_divergence` is center-locus only; a full-span hidden path is not flagged merely because it crosses a declared MT/LXX divergence.",
+            "- `root_only_match` uses a locked surface-form/root policy, not an automatic Hebrew root analyzer.",
             "- Meaningful-skip and gematria-skip strata are metadata flags; they do not change the search space or promote claim status.",
             "- Bigram-surprise strata are corpus-local review aids, not claim promotion rules; missing adjacent surface bigrams count as rare.",
             "- Letter-frequency anomaly strata are corpus-local review aids; missing letters count as rare.",
@@ -1245,6 +1309,16 @@ def semantic_divergence_markdown_row(row: dict[str, object]) -> str:
     )
 
 
+def root_policy_markdown_row(row: dict[str, object]) -> str:
+    term = display_term(str(row.get("normalized_term", "")), english=str(row.get("concept", "")))
+    center = f"{row.get('center_ref', '')} {display_term(str(row.get('center_word', '')))}"
+    return (
+        f"| {row.get('occurrence_rank', '')} | {term} | {md_cell(center)} | "
+        f"{md_cell(row.get('root_only_match_evidence', ''))} | "
+        f"`{row.get('source_family', '')}` |"
+    )
+
+
 def bigram_markdown_row(row: dict[str, object]) -> str:
     term = display_term(str(row.get("normalized_term", "")), english=str(row.get("concept", "")))
     center = f"{row.get('center_ref', '')} {display_term(str(row.get('center_word', '')))}"
@@ -1308,6 +1382,7 @@ def write_manifest(
             "protagonist_narrative_mapping": str(args.protagonist_narrative_mapping),
             "ot_in_nt_quotations": str(args.ot_in_nt_quotations),
             "mt_lxx_semantic_divergence": str(args.mt_lxx_semantic_divergence),
+            "hebrew_root_policy": str(args.hebrew_root_policy),
         },
         "outputs": {
             "out": str(args.out),
@@ -1473,6 +1548,7 @@ def reproduce_command(args: argparse.Namespace) -> str:
         f"--protagonist-narrative-mapping {args.protagonist_narrative_mapping} "
         f"--ot-in-nt-quotations {args.ot_in_nt_quotations} "
         f"--mt-lxx-semantic-divergence {args.mt_lxx_semantic_divergence} "
+        f"--hebrew-root-policy {args.hebrew_root_policy} "
         f"--out {args.out} "
         f"--summary-out {args.summary_out} "
         f"--markdown-out {args.markdown_out} "

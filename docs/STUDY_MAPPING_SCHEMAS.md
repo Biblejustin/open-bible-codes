@@ -22,7 +22,7 @@ Header-only templates live under `data/study/mappings/`:
   `lxx_vs_mt_semantic_divergence`.
 - `hebrew_root_policy.csv`: locked surface-form to root assignments for
   `root_only_match`. This is a policy file, not a root analyzer; it records
-  which analyzer/source and root scheme a future run is allowed to use.
+  which analyzer/source and root scheme the matcher is allowed to use.
 
 ## Validation
 

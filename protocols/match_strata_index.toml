@@ -21,6 +21,7 @@ inputs = [
   "data/study/mappings/protagonist_narrative_mapping.csv",
   "data/study/mappings/ot_in_nt_quotations.csv",
   "data/study/mappings/mt_lxx_semantic_divergence.csv",
+  "data/study/mappings/hebrew_root_policy.csv",
   "reports/centered_occurrence_index/centered_occurrences.csv",
   "configs/example_oshb_wlc.toml",
   "configs/example_uxlc.toml",
