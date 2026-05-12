@@ -14,10 +14,10 @@ python3 -m scripts.build_centered_occurrence_index --all-codes-review reports/al
 
 ## Bottom Line
 
-- indexed occurrence rows: 842
-- unique term-center presence rows: 739
-- Bible occurrence rows: 758
-- Bible presence rows: 736
+- indexed occurrence rows: 923
+- unique term-center presence rows: 812
+- Bible occurrence rows: 839
+- Bible presence rows: 809
 - control occurrence rows: 84
 - control presence rows: 3
 - frequency controls are interpretation context, not deletion criteria.
@@ -30,15 +30,15 @@ python3 -m scripts.build_centered_occurrence_index --all-codes-review reports/al
 | `centered_self_surface_form` | 4 | 5 |
 | `relevant_center_same_concept` | 3 | 3 |
 | `relevant_center_same_category` | 13 | 14 |
-| `center_verse_relevant` | 58 | 59 |
-| `span_relevant` | 135 | 138 |
+| `center_verse_relevant` | 70 | 73 |
+| `span_relevant` | 196 | 205 |
 
 ## Source Families
 
 | Source family | Presence rows | Occurrence rows |
 | --- | ---: | ---: |
 | `strong_full_span_exact_center` | 448 | 537 |
-| `kjv_apocrypha_bridge_context` | 120 | 122 |
+| `kjv_apocrypha_bridge_context` | 193 | 203 |
 | `original_language_findings` | 73 | 76 |
 | `all_codes_followup` | 69 | 74 |
 | `apocrypha_bridge_context` | 28 | 29 |
@@ -128,7 +128,7 @@ python3 -m scripts.build_centered_occurrence_index --all-codes-review reports/al
 | 78 | `centered_self_exact_word` | `strong_full_span_exact_center` | KJV | `jesus` | 1CO 1:8 `Jesus` | 1 | 1 | bible low-count review | the day of our Lord [Jesus] Christ. |
 | 79 | `centered_self_exact_word` | `strong_full_span_exact_center` | KJV | `jesus` | 1CO 2:2 `Jesus` | 1 | 1 | bible low-count review | any thing among you, save [Jesus] Christ, and him crucified. |
 | 80 | `centered_self_exact_word` | `strong_full_span_exact_center` | KJV | `jesus` | 1CO 5:4 `Jesus` | 2 | 2 | bible low-count review | the name of our Lord [Jesus] Christ, when ye are gathered |
-| ... | ... | ... | ... | ... | ... | ... | ... | ... | 659 more rows in CSV |
+| ... | ... | ... | ... | ... | ... | ... | ... | ... | 732 more rows in CSV |
 
 ## Read
 
