@@ -2,6 +2,7 @@ import unittest
 
 from scripts.build_broad_surface_followup_report import (
     context_sort_key,
+    corpus_class,
     exact_hit_row,
     is_true,
     markdown_cell,
@@ -71,6 +72,11 @@ class BroadSurfaceFollowupReportTests(unittest.TestCase):
 
     def test_markdown_cell_escapes_pipes(self) -> None:
         self.assertEqual(markdown_cell("left | right"), "left \\| right")
+
+    def test_corpus_class_marks_language_controls(self) -> None:
+        self.assertEqual(corpus_class("GRK_HERODOTUS"), "control")
+        self.assertEqual(corpus_class("HEB_BIALIK"), "control")
+        self.assertEqual(corpus_class("LXX"), "bible")
 
 
 if __name__ == "__main__":

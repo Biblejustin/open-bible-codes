@@ -18,10 +18,10 @@ from els.corpus import load_corpus
 from els.term_display import display_term
 
 
-SUMMARY = Path("reports/windows_cpu/broad_2_500/followup_surface_context_summary.csv")
-HITS = Path("reports/windows_cpu/broad_2_500/followup_surface_context.csv")
-CONTROL_SUMMARY = Path("reports/windows_cpu/broad_2_500/followup_surface_context_controls_summary.csv")
-CONTROL_HITS = Path("reports/windows_cpu/broad_2_500/followup_surface_context_controls.csv")
+SUMMARY = Path("reports/windows_cpu/broad_2_500/followup_surface_context_full_context_summary.csv")
+HITS = Path("reports/windows_cpu/broad_2_500/followup_surface_context_full_context.csv")
+CONTROL_SUMMARY = SUMMARY
+CONTROL_HITS = HITS
 OUT = Path("docs/WINDOWS_CPU_BROAD_2_500_SURFACE_FOLLOWUP.md")
 MANIFEST_OUT = Path("reports/windows_cpu/broad_2_500/followup_surface_report.manifest.json")
 DEFAULT_CORPUS_CONFIGS = {
@@ -45,6 +45,12 @@ def main(argv: list[str] | None = None) -> int:
     hit_rows = read_rows(args.hits)
     control_summary_rows = read_rows(args.control_summary) if args.control_summary.exists() else []
     control_hit_rows = read_rows(args.control_hits) if args.control_hits.exists() else []
+    if args.control_summary == args.summary:
+        control_summary_rows = [row for row in summary_rows if corpus_class(row.get("corpus", "")) == "control"]
+        summary_rows = [row for row in summary_rows if corpus_class(row.get("corpus", "")) == "bible"]
+    if args.control_hits == args.hits:
+        control_hit_rows = [row for row in hit_rows if corpus_class(row.get("corpus", "")) == "control"]
+        hit_rows = [row for row in hit_rows if corpus_class(row.get("corpus", "")) == "bible"]
     write_markdown(args.out, summary_rows, hit_rows, control_summary_rows, control_hit_rows, args)
     write_manifest(args.manifest_out, args, summary_rows, hit_rows, control_summary_rows, control_hit_rows, started)
     print(args.out)
@@ -104,36 +110,37 @@ def write_markdown(
     lines = [
         f"# {args.title}",
         "",
-        "This is a bounded hit-level follow-up to the Windows CPU broad `2..500`",
+        "This is a full contextual follow-up to the Windows CPU broad `2..500`",
         "Bible-control comparison. It uses the 30 strongest original-language",
         "Bible-over-control rows as a review queue, then runs `surface-context`",
-        "with `--include-all` so hidden-path-only hits remain visible.",
+        "without a per-term hit cap. The summary counts all hidden hits in scope;",
+        "the hit CSV writes context-bearing rows rather than exporting every hit.",
         "",
         "## Scope",
         "",
         f"- summary input: `{args.summary}`",
         f"- hit input: `{args.hits}`",
         f"- summary rows: {len(summary_rows)}",
-        f"- sampled hit rows: {len(hit_rows)}",
+        f"- context hit rows written: {len(hit_rows)}",
         f"- summary rows with any surface context: {len(context_rows)}",
         f"- exact center-word hit rows: {len(exact_center_word_hits)}",
-        f"- corpora represented in sampled hits: {len(by_corpus)}",
+        f"- corpora represented in context hit rows: {len(by_corpus)}",
         f"- control summary rows: {len(control_summary_rows)}",
-        f"- control sampled hit rows: {len(control_hit_rows)}",
+        f"- control context hit rows written: {len(control_hit_rows)}",
         f"- control exact center-word hit rows: {len(control_exact_center_word_hits)}",
         "",
         "## Main Read",
         "",
-        "- Exact center-word hits are rare but present in this bounded follow-up.",
-        "- The matched non-Bible control follow-up produced zero exact center-word hits under the same bounded rules.",
+        "- Exact center-word hits are rare but present in this full contextual follow-up.",
+        "- The matched non-Bible controls produced zero exact center-word hits under the same uncapped summary rules.",
         "- The Jesus/Joshua rows share the same normalized Greek spelling (`ιησουσ`), so referent review matters.",
         "- The `Bashan` rows are morphological/substring matches to torment language, not the place name Bashan.",
-        "- Rows with context count zero are still retained as hidden-path-only evidence.",
-        "- This is a capped review queue, not a complete all-hit export for the selected terms.",
+        "- Summary rows with context count zero are still retained as hidden-path-only evidence.",
+        "- This is a complete summary count for the selected terms and corpora, not a full row export of every hit.",
         "",
         "## Bible Vs Control Surface Follow-Up",
         "",
-        "| Cohort | Summary rows | Sampled hit rows | Rows with context | Exact center-word hit rows |",
+        "| Cohort | Summary rows | Context hit rows written | Rows with context | Exact center-word hit rows |",
         "| --- | ---: | ---: | ---: | ---: |",
         f"| Bible corpora | {len(summary_rows)} | {len(hit_rows)} | {len(context_rows)} | {len(exact_center_word_hits)} |",
         f"| Non-Bible controls | {len(control_summary_rows)} | {len(control_hit_rows)} | {len(control_context_rows)} | {len(control_exact_center_word_hits)} |",
@@ -150,7 +157,7 @@ def write_markdown(
             "",
             "## Highest Surface-Context Summary Rows",
             "",
-            "| Term | Corpus | Hits sampled | Context hits | Exact center-word | Exact center | Exact span | Same-category span |",
+            "| Term | Corpus | Hidden hits counted | Context hits | Exact center-word | Exact center | Exact span | Same-category span |",
             "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |",
         ]
     )
@@ -162,9 +169,9 @@ def write_markdown(
             "## Highest Control Surface-Context Rows",
             "",
             "Controls still produce many center/span surface-context rows. What they",
-            "did not produce in this bounded pass is an exact center-word row.",
+            "did not produce in this full pass is an exact center-word row.",
             "",
-            "| Term | Corpus | Hits sampled | Context hits | Exact center-word | Exact center | Exact span | Same-category span |",
+            "| Term | Corpus | Hidden hits counted | Context hits | Exact center-word | Exact center | Exact span | Same-category span |",
             "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |",
         ]
     )
@@ -173,12 +180,12 @@ def write_markdown(
     lines.extend(
         [
             "",
-            "## Hidden-Path-Only Sample Rows",
+            "## Hidden-Path-Only Summary Rows",
             "",
-            "These sampled rows had hidden hits in the bounded follow-up but no exact,",
+            "These summary rows had hidden hits in the full contextual follow-up but no exact,",
             "same-concept, or same-category surface-context promotion.",
             "",
-            "| Term | Corpus | Hits sampled | Exact center-word | Context hits |",
+            "| Term | Corpus | Hidden hits counted | Exact center-word | Context hits |",
             "| --- | --- | ---: | ---: | ---: |",
         ]
     )
@@ -203,7 +210,7 @@ def write_markdown(
             "",
             "## Corpus Hit Rows",
             "",
-            "| Corpus | Sampled hit rows |",
+            "| Corpus | Context hit rows written |",
             "| --- | ---: |",
         ]
     )
@@ -260,6 +267,10 @@ def corpus_configs(values: list[str]) -> dict[str, Path]:
             raise ValueError(f"corpus config must be LABEL=path: {value}")
         configs[label] = Path(path)
     return configs
+
+
+def corpus_class(corpus_label: str) -> str:
+    return "control" if corpus_label.startswith(("HEB_", "GRK_", "ENG_")) else "bible"
 
 
 def center_verse_lookup(
