@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
+from els.corpus import load_corpus
 from els.term_display import display_term
 
 
@@ -21,6 +22,18 @@ SUMMARY = Path("reports/windows_cpu/broad_2_500/followup_surface_context_summary
 HITS = Path("reports/windows_cpu/broad_2_500/followup_surface_context.csv")
 OUT = Path("docs/WINDOWS_CPU_BROAD_2_500_SURFACE_FOLLOWUP.md")
 MANIFEST_OUT = Path("reports/windows_cpu/broad_2_500/followup_surface_report.manifest.json")
+DEFAULT_CORPUS_CONFIGS = {
+    "MT_WLC": Path("configs/example_oshb_wlc.toml"),
+    "UXLC": Path("configs/example_uxlc.toml"),
+    "MAM": Path("configs/example_mam.toml"),
+    "EBIBLE_WLC": Path("configs/example_ebible_hebwlc.toml"),
+    "UHB": Path("configs/example_uhb.toml"),
+    "LXX": Path("configs/example_ebible_grclxx.toml"),
+    "TR_NT": Path("configs/example_ebible_grctr.toml"),
+    "BYZ_NT": Path("configs/example_ebible_grcmt.toml"),
+    "TCG_NT": Path("configs/example_ebible_grctcgnt.toml"),
+    "SBLGNT": Path("configs/example_sblgnt.toml"),
+}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -44,6 +57,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--title", default="Windows CPU Broad 2..500 Surface Follow-Up")
     parser.add_argument("--summary-limit", type=int, default=30)
     parser.add_argument("--hidden-only-limit", type=int, default=20)
+    parser.add_argument(
+        "--corpus-config",
+        action="append",
+        default=[],
+        help="Corpus config as LABEL=path. Defaults cover the broad follow-up Bible corpora.",
+    )
     return parser
 
 
@@ -60,6 +79,7 @@ def write_markdown(
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     exact_center_word_hits = [row for row in hit_rows if is_true(row.get("center_word_exact"))]
+    center_verses = center_verse_lookup(exact_center_word_hits, corpus_configs(args.corpus_config))
     context_rows = [row for row in summary_rows if int_value(row.get("context_hit_count")) > 0]
     hidden_only_rows = [
         row
@@ -95,11 +115,11 @@ def write_markdown(
         "",
         "## Exact Center-Word Hits",
         "",
-        "| Term | Corpus | Skip | Center | Surface word | Path | Context refs |",
-        "| --- | --- | ---: | --- | --- | --- | --- |",
+        "| Term | Corpus | Skip | Center | Surface word | Center verse text | Path | Context refs |",
+        "| --- | --- | ---: | --- | --- | --- | --- | --- |",
     ]
     for row in exact_center_word_hits:
-        lines.append(exact_hit_row(row))
+        lines.append(exact_hit_row(row, center_verses))
     lines.extend(
         [
             "",
@@ -165,13 +185,19 @@ def write_markdown(
     path.write_text("\n".join(lines), encoding="utf-8")
 
 
-def exact_hit_row(row: dict[str, str]) -> str:
+def exact_hit_row(
+    row: dict[str, str],
+    center_verses: dict[tuple[str, str], str] | None = None,
+) -> str:
     path = f"{row['start_ref']} -> {row['end_ref']}"
     center = f"{row['center_ref']}"
     refs = row.get("span_exact_refs") or row.get("span_same_category_refs") or ""
+    center_text = ""
+    if center_verses is not None:
+        center_text = center_verses.get((row["corpus"], row["center_ref"]), "")
     return (
         f"| {term_cell(row)} | {row['corpus']} | {row['skip']} | {center} "
-        f"| `{row['center_word']}` | {path} | {refs} |"
+        f"| `{row['center_word']}` | {markdown_cell(center_text)} | {path} | {refs} |"
     )
 
 
@@ -185,6 +211,42 @@ def summary_row(row: dict[str, str]) -> str:
 
 def term_cell(row: dict[str, str]) -> str:
     return f"`{row['term_id']}` {display_term(row['normalized_term'], english=row['concept'])}"
+
+
+def corpus_configs(values: list[str]) -> dict[str, Path]:
+    configs = dict(DEFAULT_CORPUS_CONFIGS)
+    for value in values:
+        label, separator, path = value.partition("=")
+        if not separator:
+            raise ValueError(f"corpus config must be LABEL=path: {value}")
+        configs[label] = Path(path)
+    return configs
+
+
+def center_verse_lookup(
+    rows: list[dict[str, str]],
+    configs: dict[str, Path],
+) -> dict[tuple[str, str], str]:
+    wanted_by_corpus: dict[str, set[str]] = {}
+    for row in rows:
+        wanted_by_corpus.setdefault(row["corpus"], set()).add(row["center_ref"])
+    output = {}
+    for corpus_label, refs in wanted_by_corpus.items():
+        config = configs.get(corpus_label)
+        if config is None or not config.exists():
+            continue
+        corpus = load_corpus(config)
+        verses_by_ref = {verse.ref: verse.raw_text for verse in corpus.verses}
+        for ref in refs:
+            output[(corpus_label, ref)] = verses_by_ref.get(ref, "")
+    return output
+
+
+def markdown_cell(value: str, *, limit: int = 180) -> str:
+    compact = " ".join(value.split())
+    if len(compact) > limit:
+        compact = compact[: limit - 1].rstrip() + "…"
+    return compact.replace("|", "\\|")
 
 
 def context_sort_key(row: dict[str, str]) -> tuple[int, int, int, int]:

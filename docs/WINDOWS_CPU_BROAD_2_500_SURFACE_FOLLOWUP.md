@@ -25,20 +25,20 @@ with `--include-all` so hidden-path-only hits remain visible.
 
 ## Exact Center-Word Hits
 
-| Term | Corpus | Skip | Center | Surface word | Path | Context refs |
-| --- | --- | ---: | --- | --- | --- | --- |
-| `jacob_g` `ιακωβ` (iakob; English: Jacob) | LXX | 185 | 1CH 1:34 | `Ἰακὼβ` | 1CH 1:28 -> 1CH 1:42 | 1CH 1:34 |
-| `kyrios_gnt` `κυριοσ` (kyrios; English: Lord) | LXX | -224 | JER 11:21 | `Κύριος` | JER 12:3 -> JER 11:16 | JER 11:16;JER 11:17;JER 11:21 |
-| `kyrios_gnt` `κυριοσ` (kyrios; English: Lord) | LXX | 277 | PSA 117:24 | `Κύριος·` | PSA 117:12 -> PSA 118:6 | PSA 117:13;PSA 117:14;PSA 117:18;PSA 117:24;PSA 117:27 |
-| `kyrios_gnt` `κυριοσ` (kyrios; English: Lord) | LXX | -359 | LEV 24:22 | `Κύριος` | LEV 25:8 -> LEV 24:11 | LEV 24:13;LEV 24:22;LEV 24:23;LEV 25:1 |
-| `bashan_g` `βασαν` (basan; English: Bashan) | TR_NT | -62 | REV 11:10 | `ἐβασάνισαν` | REV 11:11 -> REV 11:9 | REV 11:10 |
-| `narrative_joshua_g` `ιησουσ` (Iesous; English: Joshua) | BYZ_NT | -192 | JHN 8:6 | `ιησουσ` | JHN 8:11 -> JHN 7:52 | JHN 8:1;JHN 8:6;JHN 8:9;JHN 8:10;JHN 8:11 |
-| `dyn_jesus_g` `ιησουσ` (Iesous; English: Jesus) | BYZ_NT | -192 | JHN 8:6 | `ιησουσ` | JHN 8:11 -> JHN 7:52 | JHN 8:1;JHN 8:6;JHN 8:9;JHN 8:10;JHN 8:11 |
-| `bashan_g` `βασαν` (basan; English: Bashan) | SBLGNT | 194 | Rev 14:11 | `βασανισμοῦ` | Rev 14:8 -> Rev 14:14 | Rev 14:10;Rev 14:11 |
-| `narrative_joshua_g` `ιησουσ` (Iesous; English: Joshua) | SBLGNT | -141 | Heb 13:8 | `Ἰησοῦς` | Heb 13:12 -> Heb 13:3 | Heb 13:8;Heb 13:12 |
-| `narrative_joshua_g` `ιησουσ` (Iesous; English: Joshua) | SBLGNT | -192 | John 8:6 | `Ἰησοῦς` | John 8:11 -> John 7:52 | John 8:1;John 8:6;John 8:9;John 8:10;John 8:11 |
-| `dyn_jesus_g` `ιησουσ` (Iesous; English: Jesus) | SBLGNT | -141 | Heb 13:8 | `Ἰησοῦς` | Heb 13:12 -> Heb 13:3 | Heb 13:8;Heb 13:12 |
-| `dyn_jesus_g` `ιησουσ` (Iesous; English: Jesus) | SBLGNT | -192 | John 8:6 | `Ἰησοῦς` | John 8:11 -> John 7:52 | John 8:1;John 8:6;John 8:9;John 8:10;John 8:11 |
+| Term | Corpus | Skip | Center | Surface word | Center verse text | Path | Context refs |
+| --- | --- | ---: | --- | --- | --- | --- | --- |
+| `jacob_g` `ιακωβ` (iakob; English: Jacob) | LXX | 185 | 1CH 1:34 | `Ἰακὼβ` | καὶ ἐγέννησεν Ἁβραὰμ τὸν Ἰσαάκ. καὶ υἱοὶ Ἰσαάκ· Ἰακὼβ καὶ Ἡσαῦ. | 1CH 1:28 -> 1CH 1:42 | 1CH 1:34 |
+| `kyrios_gnt` `κυριοσ` (kyrios; English: Lord) | LXX | -224 | JER 11:21 | `Κύριος` | διὰ τοῦτο τάδε λέγει Κύριος ἐπὶ τοὺς ἄνδρας Ἀναθὼθ τοὺς ζητοῦντας τὴν ψυχήν μου, τοὺς λέγοντας· οὐ μὴ προφητεύσεις ἐπὶ τῷ ὀνόματι Κυρίου, εἰ δὲ μή, ἀποθάνῃ ἐν ταῖς χερσὶν ἡμῶν. | JER 12:3 -> JER 11:16 | JER 11:16;JER 11:17;JER 11:21 |
+| `kyrios_gnt` `κυριοσ` (kyrios; English: Lord) | LXX | 277 | PSA 117:24 | `Κύριος·` | αὕτη ἡ ἡμέρα, ἣν ἐποίησεν ὁ Κύριος· ἀγαλλιασώμεθα καὶ εὐφρανθῶμεν ἐν αὐτῇ. | PSA 117:12 -> PSA 118:6 | PSA 117:13;PSA 117:14;PSA 117:18;PSA 117:24;PSA 117:27 |
+| `kyrios_gnt` `κυριοσ` (kyrios; English: Lord) | LXX | -359 | LEV 24:22 | `Κύριος` | δικαίωσις μία ἔσται τῷ προσηλύτῳ καὶ τῷ ἐγχωρίῳ, ὅτι ἐγώ εἰμι Κύριος ὁ Θεὸς ὑμῶν. | LEV 25:8 -> LEV 24:11 | LEV 24:13;LEV 24:22;LEV 24:23;LEV 25:1 |
+| `bashan_g` `βασαν` (basan; English: Bashan) | TR_NT | -62 | REV 11:10 | `ἐβασάνισαν` | Καὶ οἱ κατοικοῦντες ἐπὶ τῆς γῆς χαροῦσιν ἐπ ᾿ αὐτοῖς καὶ εὐφρανθήσονται , καὶ δῶρα πέμψουσιν ἀλλήλοις , ὅτι οὗτοι οἱ δύο προφῆται ἐβασάνισαν τοὺς κατοικοῦντας ἐπὶ τῆς γῆς . | REV 11:11 -> REV 11:9 | REV 11:10 |
+| `narrative_joshua_g` `ιησουσ` (Iesous; English: Joshua) | BYZ_NT | -192 | JHN 8:6 | `ιησουσ` | τουτο δε ελεγον πειραζοντεσ αυτον ινα εχωσιν κατηγορειν αυτου ο δε ιησουσ κατω κυψασ τω δακτυλω εγραφεν εισ την γην μη προσποιουμενοσ | JHN 8:11 -> JHN 7:52 | JHN 8:1;JHN 8:6;JHN 8:9;JHN 8:10;JHN 8:11 |
+| `dyn_jesus_g` `ιησουσ` (Iesous; English: Jesus) | BYZ_NT | -192 | JHN 8:6 | `ιησουσ` | τουτο δε ελεγον πειραζοντεσ αυτον ινα εχωσιν κατηγορειν αυτου ο δε ιησουσ κατω κυψασ τω δακτυλω εγραφεν εισ την γην μη προσποιουμενοσ | JHN 8:11 -> JHN 7:52 | JHN 8:1;JHN 8:6;JHN 8:9;JHN 8:10;JHN 8:11 |
+| `bashan_g` `βασαν` (basan; English: Bashan) | SBLGNT | 194 | Rev 14:11 | `βασανισμοῦ` | καὶ ὁ καπνὸς τοῦ βασανισμοῦ αὐτῶν εἰς αἰῶνας αἰώνων ἀναβαίνει, καὶ οὐκ ἔχουσιν ἀνάπαυσιν ἡμέρας καὶ νυκτός, οἱ προσκυνοῦντες τὸ θηρίον καὶ τὴν εἰκόνα αὐτοῦ, καὶ εἴ τις λαμβάνει τὸ… | Rev 14:8 -> Rev 14:14 | Rev 14:10;Rev 14:11 |
+| `narrative_joshua_g` `ιησουσ` (Iesous; English: Joshua) | SBLGNT | -141 | Heb 13:8 | `Ἰησοῦς` | Ἰησοῦς Χριστὸς ἐχθὲς καὶ σήμερον ὁ αὐτός, καὶ εἰς τοὺς αἰῶνας. | Heb 13:12 -> Heb 13:3 | Heb 13:8;Heb 13:12 |
+| `narrative_joshua_g` `ιησουσ` (Iesous; English: Joshua) | SBLGNT | -192 | John 8:6 | `Ἰησοῦς` | τοῦτο δὲ ἔλεγον πειράζοντες αὐτόν, ἵνα ἔχωσιν κατηγορεῖν αὐτοῦ. ὁ δὲ Ἰησοῦς κάτω κύψας, τῷ δακτύλῳ ἔγραφεν εἰς τὴν γῆν, μὴ προσποιούμενος. | John 8:11 -> John 7:52 | John 8:1;John 8:6;John 8:9;John 8:10;John 8:11 |
+| `dyn_jesus_g` `ιησουσ` (Iesous; English: Jesus) | SBLGNT | -141 | Heb 13:8 | `Ἰησοῦς` | Ἰησοῦς Χριστὸς ἐχθὲς καὶ σήμερον ὁ αὐτός, καὶ εἰς τοὺς αἰῶνας. | Heb 13:12 -> Heb 13:3 | Heb 13:8;Heb 13:12 |
+| `dyn_jesus_g` `ιησουσ` (Iesous; English: Jesus) | SBLGNT | -192 | John 8:6 | `Ἰησοῦς` | τοῦτο δὲ ἔλεγον πειράζοντες αὐτόν, ἵνα ἔχωσιν κατηγορεῖν αὐτοῦ. ὁ δὲ Ἰησοῦς κάτω κύψας, τῷ δακτύλῳ ἔγραφεν εἰς τὴν γῆν, μὴ προσποιούμενος. | John 8:11 -> John 7:52 | John 8:1;John 8:6;John 8:9;John 8:10;John 8:11 |
 
 ## Highest Surface-Context Summary Rows
 

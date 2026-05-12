@@ -4,6 +4,7 @@ from scripts.build_broad_surface_followup_report import (
     context_sort_key,
     exact_hit_row,
     is_true,
+    markdown_cell,
 )
 
 
@@ -48,6 +49,28 @@ class BroadSurfaceFollowupReportTests(unittest.TestCase):
 
         self.assertIn("`Ἰησοῦς`", text)
         self.assertIn("Heb 13:12 -> Heb 13:3", text)
+
+    def test_exact_hit_row_adds_center_verse_text_when_available(self) -> None:
+        row = {
+            "term_id": "lord_g",
+            "normalized_term": "κυριοσ",
+            "concept": "Lord",
+            "corpus": "LXX",
+            "skip": "277",
+            "center_ref": "PSA 117:24",
+            "center_word": "Κύριος",
+            "start_ref": "PSA 117:12",
+            "end_ref": "PSA 118:6",
+            "span_exact_refs": "PSA 117:24",
+            "span_same_category_refs": "",
+        }
+
+        text = exact_hit_row(row, {("LXX", "PSA 117:24"): "This is the day of the Lord"})
+
+        self.assertIn("This is the day of the Lord", text)
+
+    def test_markdown_cell_escapes_pipes(self) -> None:
+        self.assertEqual(markdown_cell("left | right"), "left \\| right")
 
 
 if __name__ == "__main__":
