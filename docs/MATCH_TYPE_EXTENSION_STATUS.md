@@ -63,6 +63,13 @@ warnings and capped-row flags.
 | `word_skip_ELS` | word-token skip search plus matched controls |
 | `cipher_layered_pair` | declared plain/cipher pairing rule |
 
+The mapping-dependent rows above now have header-only templates in
+`data/study/mappings/`. Before any populated mapping can drive promotion, run:
+
+```bash
+python3 -m scripts.validate_study_mapping_schemas
+```
+
 ## Current Caution
 
 Every added stratum widens either the metadata surface or the search surface.

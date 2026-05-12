@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 255
+Documents indexed: 256
 
 ## Controls
 
@@ -261,6 +261,7 @@ Documents indexed: 255
 | STEP TAHOT Policy Hit Audit | `STEP_TAHOT_POLICY_HIT_AUDIT.md` |
 | STEP TAHOT Source Audit | `STEP_TAHOT_SOURCE_AUDIT.md` |
 | Study Lock Manifests | `STUDY_LOCK_MANIFESTS.md` |
+| Study Mapping Schemas | `STUDY_MAPPING_SCHEMAS.md` |
 | Surface Context Study | `SURFACE_CONTEXT_STUDY.md` |
 | Synthetic Extension Baselines | `SYNTHETIC_EXTENSION_BASELINES.md` |
 | Synthetic Extension Match Review | `SYNTHETIC_EXTENSION_MATCH_REVIEW.md` |

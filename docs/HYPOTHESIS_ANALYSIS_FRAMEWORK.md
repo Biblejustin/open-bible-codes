@@ -173,17 +173,20 @@ computed.
 
 ## Extended-Strata Data Dependencies
 
-- `terms/thematic_chapters.csv`
-- `terms/author_book_mapping.csv`
-- `terms/protagonist_narrative_mapping.csv`
-- `data/study/ot_in_nt_quotations.csv`
+- `data/study/mappings/thematic_chapters.csv`
+- `data/study/mappings/author_book_mapping.csv`
+- `data/study/mappings/protagonist_narrative_mapping.csv`
+- `data/study/mappings/ot_in_nt_quotations.csv`
+- `data/study/mappings/mt_lxx_semantic_divergence.csv`
 - `data/study/bigram_frequencies/{language}_{corpus}.csv`
 - `terms/meaningful_constants.csv`
 - `terms/gematria_schemes.toml`
 - `terms/cohorts/`
 
-Each file must be locked before the corresponding stratum is used for promotion
-or claim-level language.
+Mapping files are header-only planning artifacts until populated. Populated
+mapping files must pass `python3 -m scripts.validate_study_mapping_schemas` and
+must be locked before the corresponding stratum is used for promotion or
+claim-level language.
 
 ## Full-Span Rule
 
