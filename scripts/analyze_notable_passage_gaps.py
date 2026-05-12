@@ -32,6 +32,8 @@ DEFAULT_CORPORA = [
 ]
 DEFAULT_PASSAGES = Path("configs/notable_passage_gap_passages.csv")
 DEFAULT_TERMS = Path("terms/notable_passage_gap_terms.csv")
+DEFAULT_THEMATIC_CHAPTERS = Path("data/study/mappings/thematic_chapters.csv")
+DEFAULT_TERMS_DIR = Path("terms")
 OUT_DIR = Path("reports/notable_passage_gaps")
 DETAIL_OUT = OUT_DIR / "term_gap_detail.csv"
 SUMMARY_OUT = OUT_DIR / "passage_summary.csv"
@@ -108,6 +110,7 @@ class Passage:
     start_ref: str
     end_ref: str
     notes: str
+    term_ids: str = ""
 
 
 @dataclass(frozen=True)
@@ -205,14 +208,125 @@ def classify_gap(
     return "present_in_passage"
 
 
+def term_allowed_for_passage(term: TermRow, passage: Passage) -> bool:
+    allowed = passage_term_ids(passage)
+    return not allowed or term.term_id in allowed
+
+
+def passage_term_ids(passage: Passage) -> set[str]:
+    return {
+        value.strip()
+        for value in re.split(r"[;,| ]+", passage.term_ids)
+        if value.strip()
+    }
+
+
+def restricted_term_ids_for_passages(passages: list[Passage]) -> set[str] | None:
+    if not passages:
+        return set()
+    restricted: set[str] = set()
+    for passage in passages:
+        term_ids = passage_term_ids(passage)
+        if not term_ids:
+            return None
+        restricted.update(term_ids)
+    return restricted
+
+
 def read_passages(path: Path) -> list[Passage]:
     with path.open("r", encoding="utf-8", newline="") as handle:
-        return [Passage(**row) for row in csv.DictReader(handle)]
+        return [passage_from_row(row) for row in csv.DictReader(handle)]
 
 
 def read_terms(path: Path) -> list[TermRow]:
     with path.open("r", encoding="utf-8", newline="") as handle:
-        return [TermRow(**row) for row in csv.DictReader(handle)]
+        return [term_from_row(row) for row in csv.DictReader(handle)]
+
+
+def passage_from_row(row: dict[str, str]) -> Passage:
+    return Passage(
+        passage_id=row.get("passage_id", ""),
+        concept=row.get("concept", ""),
+        category=row.get("category", ""),
+        language=row.get("language", ""),
+        corpus_group=row.get("corpus_group", ""),
+        start_ref=row.get("start_ref", ""),
+        end_ref=row.get("end_ref", ""),
+        notes=row.get("notes", ""),
+        term_ids=row.get("term_ids", ""),
+    )
+
+
+def term_from_row(row: dict[str, str]) -> TermRow:
+    return TermRow(
+        term_id=row.get("term_id", ""),
+        concept=row.get("concept", ""),
+        category=row.get("category", ""),
+        language=row.get("language", ""),
+        term=row.get("term", ""),
+        notes=row.get("notes", ""),
+    )
+
+
+def read_term_lookup(terms_dir: Path) -> dict[str, TermRow]:
+    lookup: dict[str, TermRow] = {}
+    for path in sorted(terms_dir.glob("*.csv")):
+        with path.open("r", encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle)
+            if not {"term_id", "concept", "category", "language", "term"}.issubset(reader.fieldnames or ()):
+                continue
+            for row in reader:
+                term = term_from_row(row)
+                if term.term_id:
+                    lookup.setdefault(term.term_id, term)
+    return lookup
+
+
+def read_thematic_chapter_targets(
+    path: Path,
+    *,
+    terms_dir: Path,
+) -> tuple[list[Passage], list[TermRow]]:
+    if not path.exists():
+        return [], []
+    term_lookup = read_term_lookup(terms_dir)
+    passages: list[Passage] = []
+    terms: dict[str, TermRow] = {}
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            term_id = row.get("term_id", "").strip()
+            term = term_lookup.get(term_id)
+            if term is None:
+                continue
+            mapping_id = row.get("mapping_id", "").strip()
+            book = row.get("book", "").strip()
+            chapter_start = row.get("chapter_start", "").strip()
+            chapter_end = row.get("chapter_end", "").strip()
+            if not mapping_id or not book or not chapter_start or not chapter_end:
+                continue
+            passages.append(
+                Passage(
+                    passage_id=f"thematic_absence_{mapping_id}",
+                    concept=f"{row.get('concept', term.concept)} Thematic Chapter",
+                    category="thematic_chapter_absence",
+                    language=row.get("language", term.language),
+                    corpus_group="thematic_mapping",
+                    start_ref=f"{book} {chapter_start}:1",
+                    end_ref=f"{book} {chapter_end}:999",
+                    notes=f"Generated from {path}:{mapping_id}",
+                    term_ids=term_id,
+                )
+            )
+            terms[term_id] = term
+    return passages, list(terms.values())
+
+
+def merge_terms(primary: list[TermRow], extra: list[TermRow]) -> list[TermRow]:
+    merged: dict[str, TermRow] = {term.term_id: term for term in primary if term.term_id}
+    for term in extra:
+        if term.term_id:
+            merged.setdefault(term.term_id, term)
+    return list(merged.values())
 
 
 def parse_corpus_arg(value: str) -> tuple[str, Path]:
@@ -244,14 +358,28 @@ def analyze_corpus(
     min_term_length: int,
     common_elsewhere_threshold: int,
     jobs: int,
+    skip_missing_passages: bool = False,
 ) -> tuple[list[dict[str, object]], list[dict[str, object]]]:
     usable_passages = [passage for passage in passages if passage.language == corpus.language]
-    spans = {passage.passage_id: passage_span(corpus, passage) for passage in usable_passages}
+    spans: dict[str, PassageSpan] = {}
+    found_passages: list[Passage] = []
+    for passage in usable_passages:
+        try:
+            spans[passage.passage_id] = passage_span(corpus, passage)
+        except ValueError:
+            if skip_missing_passages:
+                continue
+            raise
+        found_passages.append(passage)
+    usable_passages = found_passages
+    allowed_term_ids = restricted_term_ids_for_passages(usable_passages)
 
     eligible_by_query: dict[str, list[TermRow]] = defaultdict(list)
     skipped_terms: list[tuple[TermRow, str]] = []
     for term in terms:
         if term.language != corpus.language:
+            continue
+        if allowed_term_ids is not None and term.term_id not in allowed_term_ids:
             continue
         query = normalize_for_corpus(corpus, term.term)
         if len(query) < min_term_length:
@@ -307,6 +435,8 @@ def analyze_corpus(
         skipped_for_passage = 0
 
         for term, query in skipped_terms:
+            if not term_allowed_for_passage(term, passage):
+                continue
             skipped_for_passage += 1
             detail_rows.append(
                 detail_row(
@@ -328,12 +458,15 @@ def analyze_corpus(
             )
 
         for query, query_terms in eligible_by_query.items():
+            allowed_query_terms = [term for term in query_terms if term_allowed_for_passage(term, passage)]
+            if not allowed_query_terms:
+                continue
             total_hits = counts[query]
             centered = passage_counts[(passage.passage_id, query)]
             expected = total_hits * span.norm_length / corpus_letters if corpus_letters else 0.0
             expected_total += expected
             observed_total += centered
-            for term in query_terms:
+            for term in allowed_query_terms:
                 eligible_terms += 1
                 common_elsewhere = (total_hits - centered) >= common_elsewhere_threshold
                 gap_class = classify_gap(
@@ -514,7 +647,7 @@ def write_markdown(
         if row.get("passage_category") == "notable_passage_gap"
     ]
     lines = [
-        "# Notable Passage Gaps",
+        f"# {getattr(args, 'title', 'Notable Passage Gaps')}",
         "",
         "This report records declared passages where selected ELS terms are absent, sparse, or present when centered inside the passage.",
         "It is intentionally a screening ledger: absence inside a short passage is often expected, so the useful rows are the terms that are absent in the passage while recurring elsewhere in the same corpus, or present at notably lower density than a uniform placement expectation.",
@@ -522,12 +655,15 @@ def write_markdown(
         "## Run Settings",
         "",
         f"- Passages: `{args.passages}`",
+        f"- Config passages disabled: `{str(getattr(args, 'no_config_passages', False)).lower()}`",
         f"- Terms: `{args.terms}`",
+        f"- Thematic chapters: `{getattr(args, 'thematic_chapters', None) or ''}`",
         f"- Skip range: `{args.min_skip}..{args.max_skip}`",
         f"- Direction: `{args.direction}`",
         f"- Jobs: `{args.jobs}`",
         f"- Minimum normalized term length: `{args.min_term_length}`",
         f"- Common-elsewhere threshold: `{args.common_elsewhere_threshold}` centered hits outside the passage",
+        f"- Missing declared passages skipped: `{str(getattr(args, 'skip_missing_passages', False)).lower()}`",
         "",
         "## Highest Gap Passage Rows",
         "",
@@ -671,11 +807,15 @@ def write_manifest(
     payload = {
         "script": "scripts/analyze_notable_passage_gaps.py",
         "version": __version__,
+        "title": args.title,
         "started_at": datetime.fromtimestamp(started, UTC).isoformat(),
         "finished_at": datetime.now(UTC).isoformat(),
         "elapsed_seconds": round(time.time() - started, 3),
         "passages": str(args.passages),
         "terms": str(args.terms),
+        "thematic_chapters": "" if args.thematic_chapters is None else str(args.thematic_chapters),
+        "terms_dir": str(args.terms_dir),
+        "no_config_passages": args.no_config_passages,
         "corpora": args.corpus,
         "min_skip": args.min_skip,
         "max_skip": args.max_skip,
@@ -683,6 +823,7 @@ def write_manifest(
         "jobs": args.jobs,
         "min_term_length": args.min_term_length,
         "common_elsewhere_threshold": args.common_elsewhere_threshold,
+        "skip_missing_passages": args.skip_missing_passages,
         "detail_rows": len(detail_rows),
         "summary_rows": len(summary_rows),
     }
@@ -692,7 +833,10 @@ def write_manifest(
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--passages", type=Path, default=DEFAULT_PASSAGES)
+    parser.add_argument("--no-config-passages", action="store_true")
     parser.add_argument("--terms", type=Path, default=DEFAULT_TERMS)
+    parser.add_argument("--thematic-chapters", type=Path)
+    parser.add_argument("--terms-dir", type=Path, default=DEFAULT_TERMS_DIR)
     parser.add_argument("--corpus", action="append", default=[])
     parser.add_argument("--min-skip", type=int, default=2)
     parser.add_argument("--max-skip", type=int, default=100)
@@ -700,6 +844,8 @@ def main() -> int:
     parser.add_argument("--jobs", type=int, default=1)
     parser.add_argument("--min-term-length", type=int, default=3)
     parser.add_argument("--common-elsewhere-threshold", type=int, default=10)
+    parser.add_argument("--skip-missing-passages", action="store_true")
+    parser.add_argument("--title", default="Notable Passage Gaps")
     parser.add_argument("--detail-out", type=Path, default=DETAIL_OUT)
     parser.add_argument("--summary-out", type=Path, default=SUMMARY_OUT)
     parser.add_argument("--markdown-out", type=Path, default=MD_OUT)
@@ -707,8 +853,15 @@ def main() -> int:
     args = parser.parse_args()
 
     started = time.time()
-    passages = read_passages(args.passages)
+    passages = [] if args.no_config_passages else read_passages(args.passages)
     terms = read_terms(args.terms)
+    if args.thematic_chapters is not None:
+        thematic_passages, thematic_terms = read_thematic_chapter_targets(
+            args.thematic_chapters,
+            terms_dir=args.terms_dir,
+        )
+        passages.extend(thematic_passages)
+        terms = merge_terms(terms, thematic_terms)
     corpus_specs = [parse_corpus_arg(value) for value in (args.corpus or DEFAULT_CORPORA)]
 
     detail_rows: list[dict[str, object]] = []
@@ -726,6 +879,7 @@ def main() -> int:
             min_term_length=args.min_term_length,
             common_elsewhere_threshold=args.common_elsewhere_threshold,
             jobs=args.jobs,
+            skip_missing_passages=args.skip_missing_passages,
         )
         detail_rows.extend(corpus_detail)
         summary_rows.extend(corpus_summary)

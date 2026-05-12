@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 266
+Documents indexed: 267
 
 ## Controls
 
@@ -276,6 +276,7 @@ Documents indexed: 266
 | Synthetic Extension Match Review | `SYNTHETIC_EXTENSION_MATCH_REVIEW.md` |
 | Synthetic Pair Baselines | `SYNTHETIC_PAIR_BASELINES.md` |
 | Table Of Nations Study | `TABLE_OF_NATIONS_STUDY.md` |
+| Thematic Chapter Absence | `THEMATIC_CHAPTER_ABSENCE.md` |
 | Theological Terms Study | `THEOLOGICAL_TERMS_STUDY.md` |
 | TheWordNotes ELS Source Audit | `THEWORDNOTES_ELS_AUDIT.md` |
 | Transformed Text Layers | `TRANSFORMED_TEXT_LAYERS.md` |

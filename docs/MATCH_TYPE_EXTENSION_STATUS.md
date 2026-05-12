@@ -37,6 +37,7 @@ support. Status labels are engineering status only, not claim status.
 | `review_flag_summary` | implemented as a meaningful-skip and rarity review export | `scripts/build_review_flag_summary.py` |
 | `cohort_cluster_density_window_N` | implemented as declared-cohort word-window post-processing | `scripts/build_cohort_cluster_density.py` |
 | `cohort_full_house` | implemented when every declared cohort term appears in the same word window | `scripts/build_cohort_cluster_density.py` |
+| `term_absence_at_thematic_chapter` | implemented as optional thematic-chapter targets in the notable-passage gap analyzer | `scripts/analyze_notable_passage_gaps.py` |
 
 Current generated report:
 
@@ -66,12 +67,12 @@ warnings and capped-row flags.
 | `matrix_cluster_at_width_W` | parameterized matrix-neighborhood candidate extraction exists | locked row-width protocol and matched controls |
 | `matrix_orthogonal` / `matrix_diagonal` / `matrix_adjacent_row` | candidate extraction labels nearest-cell relation | locked relation-specific metric and correction family |
 | WRR-style pair geometry | cylindrical distance primitives exist | full corrected WRR distance, domain weights, permutation driver |
-| `term_absence_at_thematic_chapter` | notable-passage gap protocol exists | generalized term-to-chapter mapping |
 
 ## Deferred Pending Declared Data
 
-| Stratum | Data dependency |
-| --- | --- |
+No declared-data-only strata are currently waiting on schema support. Some
+implemented mapping files remain header-only templates until populated and
+locked for a specific study.
 
 Mapping-dependent rows use the locked CSV files in `data/study/mappings/`.
 Some mapping files now contain conservative seed rows; others remain header-only

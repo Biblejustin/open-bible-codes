@@ -1,14 +1,20 @@
 from array import array
+from pathlib import Path
 from types import SimpleNamespace
 
 from els.corpus import Corpus, VerseSpan, WordSpan
 from scripts.analyze_notable_passage_gaps import (
     Passage,
+    TermRow,
     add_uniform_zero_q_values,
+    merge_terms,
     classify_gap,
     parse_ref,
     passage_span,
+    restricted_term_ids_for_passages,
+    read_thematic_chapter_targets,
     ref_number,
+    term_allowed_for_passage,
     verse_key_or_none,
     write_markdown,
 )
@@ -93,6 +99,76 @@ def test_classify_gap_low_vs_uniform() -> None:
         )
         == "low_in_passage_vs_uniform"
     )
+
+
+def test_term_allowed_for_passage_uses_optional_term_filter() -> None:
+    filtered = Passage(
+        passage_id="thematic",
+        concept="Thematic",
+        category="test",
+        language="hebrew",
+        corpus_group="test",
+        start_ref="Isa 53:1",
+        end_ref="Isa 53:999",
+        notes="",
+        term_ids="servant_h; lamb_h",
+    )
+    open_passage = Passage(
+        passage_id="open",
+        concept="Open",
+        category="test",
+        language="hebrew",
+        corpus_group="test",
+        start_ref="Isa 53:1",
+        end_ref="Isa 53:999",
+        notes="",
+    )
+    servant = TermRow("servant_h", "Servant", "test", "hebrew", "עבד", "")
+    gog = TermRow("gog_h", "Gog", "test", "hebrew", "גוג", "")
+
+    assert term_allowed_for_passage(servant, filtered)
+    assert not term_allowed_for_passage(gog, filtered)
+    assert term_allowed_for_passage(gog, open_passage)
+
+
+def test_restricted_term_ids_for_passages_returns_none_when_any_open_passage() -> None:
+    filtered = Passage("filtered", "Filtered", "test", "hebrew", "test", "Isa 53:1", "Isa 53:999", "", "servant_h")
+    open_passage = Passage("open", "Open", "test", "hebrew", "test", "Isa 53:1", "Isa 53:999", "")
+
+    assert restricted_term_ids_for_passages([filtered]) == {"servant_h"}
+    assert restricted_term_ids_for_passages([filtered, open_passage]) is None
+
+
+def test_read_thematic_chapter_targets_uses_term_lookup(tmp_path: Path) -> None:
+    terms_dir = tmp_path / "terms"
+    terms_dir.mkdir()
+    (terms_dir / "terms.csv").write_text(
+        "term_id,concept,category,language,term,notes\n"
+        "servant_h,Servant,servant_song,hebrew,עבד,\n",
+        encoding="utf-8",
+    )
+    mappings = tmp_path / "thematic.csv"
+    mappings.write_text(
+        "mapping_id,term_id,concept,language,book,chapter_start,chapter_end,notes,locked_by,locked_at\n"
+        "isa53_servant,servant_h,Servant,hebrew,Isa,53,53,Isaiah 53,test,2026-05-12\n",
+        encoding="utf-8",
+    )
+
+    passages, terms = read_thematic_chapter_targets(mappings, terms_dir=terms_dir)
+
+    assert len(passages) == 1
+    assert passages[0].passage_id == "thematic_absence_isa53_servant"
+    assert passages[0].start_ref == "Isa 53:1"
+    assert passages[0].end_ref == "Isa 53:999"
+    assert passages[0].term_ids == "servant_h"
+    assert terms == [TermRow("servant_h", "Servant", "servant_song", "hebrew", "עבד", "")]
+
+
+def test_merge_terms_keeps_primary_rows() -> None:
+    primary = [TermRow("term", "Primary", "cat", "hebrew", "אמת", "primary")]
+    extra = [TermRow("term", "Extra", "cat", "hebrew", "שקר", "extra")]
+
+    assert merge_terms(primary, extra) == primary
 
 
 def test_add_uniform_zero_q_values_only_scores_gap_rows() -> None:

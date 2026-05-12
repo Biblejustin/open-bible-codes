@@ -196,6 +196,30 @@ Primary outputs:
 - `docs/REVIEW_FLAG_SUMMARY.md`
 - `reports/review_flag_summary/manifest.json`
 
+## Thematic Chapter Absence
+
+The notable-passage gap analyzer can run only locked
+`data/study/mappings/thematic_chapters.csv` targets. Each generated passage is
+filtered to its mapped term, so this is a term-to-chapter absence screen rather
+than an all-terms/all-passages sweep.
+
+```bash
+python3 -m scripts.run_protocol protocols/thematic_chapter_absence.toml --resume
+```
+
+Shortcut:
+
+```bash
+make thematic-chapter-absence
+```
+
+Primary outputs:
+
+- `reports/thematic_chapter_absence/term_gap_detail.csv`
+- `reports/thematic_chapter_absence/passage_summary.csv`
+- `reports/thematic_chapter_absence/manifest.json`
+- `docs/THEMATIC_CHAPTER_ABSENCE.md`
+
 ## Transformed Hebrew Text
 
 Atbash and ALBAM are opt-in deterministic transform layers. They search a
