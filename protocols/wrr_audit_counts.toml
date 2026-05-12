@@ -163,6 +163,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_wrr_skip_caps.py",
+  "els/term_display.py",
   "reports/wrr_1994/wrr2_terms.csv",
   "reports/wrr_1994/wrr2_genesis_counts.csv",
   "configs/example_koren_genesis.toml",
@@ -269,6 +270,7 @@ argv = [
 ]
 inputs = [
   "scripts/analyze_wrr_perturbation_diagnostics.py",
+  "els/term_display.py",
   "reports/wrr_1994/wrr2_terms.csv",
   "reports/wrr_1994/wrr2_genesis_counts.csv",
   "configs/example_koren_genesis.toml",

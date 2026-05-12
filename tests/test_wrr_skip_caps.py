@@ -1,7 +1,7 @@
 import unittest
 from types import SimpleNamespace
 
-from scripts.analyze_wrr_skip_caps import skip_cap_band, summarize
+from scripts.analyze_wrr_skip_caps import skip_cap_band, skip_cap_markdown_row, summarize
 
 
 class WrrSkipCapsTests(unittest.TestCase):
@@ -34,6 +34,21 @@ class WrrSkipCapsTests(unittest.TestCase):
         self.assertEqual(summary["cap_gt_1000"], 1)
         self.assertEqual(summary["target_unreached_rows"], 1)
         self.assertEqual(summary["observed_zero_rows"], 2)
+
+    def test_markdown_row_displays_transliteration_and_english_gloss(self) -> None:
+        rendered = skip_cap_markdown_row(
+            {
+                "term_id": "rashi_h",
+                "concept": "Rashi",
+                "normalized_term": "רשי",
+                "normalized_length": 3,
+                "observed_hits": 4,
+                "skip_cap": 250,
+                "expected_at_skip_cap": 10.0,
+            }
+        )
+
+        self.assertIn("`רשי` (rshy; English: Rashi)", rendered)
 
 
 def row(

@@ -16,6 +16,7 @@ from els import __version__
 from els.cli import accepted_term_languages
 from els.corpus import Corpus, load_corpus
 from els.search import iter_els_query_matches_by_lanes, normalize_for_corpus
+from els.term_display import display_term
 from els.wrr import (
     expected_els_count,
     perturbed_offsets,
@@ -367,7 +368,7 @@ def write_markdown(
             "| "
             + " | ".join(
                 [
-                    f"`{row['term_id']}` `{row['normalized_term']}`",
+                    display_boundary_term(row),
                     str(row["sampled_hits"]),
                     str(row["min_in_bounds_perturbations"]),
                     str(row["read"]),
@@ -388,6 +389,12 @@ def write_markdown(
     )
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+
+def display_boundary_term(row: dict[str, object]) -> str:
+    term_id = str(row["term_id"])
+    term = display_term(str(row["normalized_term"]), english=str(row.get("concept", "")) or None)
+    return f"`{term_id}` {term}"
 
 
 def write_rows(path: Path, fieldnames: list[str], rows: list[dict[str, object]]) -> None:

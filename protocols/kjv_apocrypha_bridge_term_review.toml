@@ -12,6 +12,7 @@ argv = [
 ]
 inputs = [
   "scripts/summarize_kjv_apocrypha_bridge_terms.py",
+  "els/term_display.py",
   "reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv",
   "reports/kjv_apocrypha_bridge_context/context.csv",
   "reports/kjv_apocrypha_bridge_controls/term_summary.csv",

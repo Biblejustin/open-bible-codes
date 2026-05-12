@@ -3,6 +3,7 @@ import unittest
 
 from scripts.analyze_wrr_perturbation_diagnostics import (
     diagnostic_read,
+    display_boundary_term,
     offsets_in_bounds,
     summarize,
     valid_perturbation_count,
@@ -53,6 +54,17 @@ class WrrPerturbationDiagnosticsTests(unittest.TestCase):
         self.assertEqual(summary["min_in_bounds_perturbations"], 9)
         self.assertEqual(summary["max_in_bounds_perturbations"], 20)
         self.assertEqual(summary["ordinary_in_bounds_failures"], 1)
+
+    def test_boundary_term_displays_transliteration_and_english_gloss(self) -> None:
+        rendered = display_boundary_term(
+            {
+                "term_id": "rashi_h",
+                "concept": "Rashi",
+                "normalized_term": "רשי",
+            }
+        )
+
+        self.assertEqual(rendered, "`rashi_h` `רשי` (rshy; English: Rashi)")
 
 
 def row(

@@ -15,6 +15,7 @@ from els import __version__
 from els.cli import accepted_term_languages
 from els.corpus import load_corpus
 from els.search import normalize_for_corpus
+from els.term_display import display_term
 from els.wrr import expected_els_count, relative_letter_frequencies, skip_cap_for_expected_count
 
 
@@ -233,11 +234,12 @@ def write_markdown(
 
 
 def skip_cap_markdown_row(row: dict[str, object]) -> str:
+    term = display_term(str(row["normalized_term"]), english=str(row.get("concept", "")) or None)
     return (
         "| "
         + " | ".join(
             [
-                f"`{row['term_id']}` `{row['normalized_term']}`",
+                f"`{row['term_id']}` {term}",
                 str(row["normalized_length"]),
                 str(row["observed_hits"]),
                 str(row["skip_cap"]),

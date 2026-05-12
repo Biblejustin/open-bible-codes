@@ -7,6 +7,7 @@ from pathlib import Path
 
 from scripts.summarize_kjv_apocrypha_bridge_terms import (
     FIELDNAMES,
+    display_summary_term,
     manifest_args,
     sample_refs,
     write_csv,
@@ -91,6 +92,11 @@ class KJVAapocryphaBridgeTermReviewTests(unittest.TestCase):
             manifest_args(args),
             {"candidates": "reports/candidates.csv", "sample_count": 10},
         )
+
+    def test_display_summary_term_adds_transliteration_and_english_gloss(self) -> None:
+        rendered = display_summary_term({"normalized_term": "ישוע", "concepts": "Yeshua"})
+
+        self.assertEqual(rendered, "`ישוע` (Yeshua; English: Yeshua)")
 
     def test_writers_do_not_rewrite_unchanged_content(self) -> None:
         with self.subTest("csv"):

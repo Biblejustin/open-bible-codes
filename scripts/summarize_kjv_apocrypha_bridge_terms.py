@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Iterable
 
 from els import __version__
+from els.term_display import display_term
 
 
 DEFAULT_CANDIDATES = Path("reports/kjv_apocrypha_bridge_candidates/bridge_candidates.csv")
@@ -289,7 +290,7 @@ def write_markdown(
             + " | ".join(
                 [
                     str(row["rank"]),
-                    f"`{row['normalized_term']}`",
+                    display_summary_term(row),
                     str(row["concepts"]),
                     str(row["observed_bridge_rows"]),
                     str(row["control_max_bridge_rows"]),
@@ -314,6 +315,10 @@ def write_markdown(
         ]
     )
     write_text_if_changed(path, "\n".join(lines).rstrip() + "\n")
+
+
+def display_summary_term(row: dict[str, object]) -> str:
+    return display_term(str(row["normalized_term"]), english=str(row.get("concepts", "")) or None)
 
 
 def write_manifest(
