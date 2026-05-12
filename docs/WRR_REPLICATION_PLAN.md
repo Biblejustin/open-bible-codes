@@ -57,8 +57,8 @@ Source audit:
 Still needed:
 
 - canonical pair-set reconciliation against the paper's declared sample;
-- replication-grade generated or reviewed `terms/wrr_1994_rabbis.csv`;
-- replication-grade generated or reviewed `terms/wrr_1994_dates.csv`;
+- replication-grade generated or reviewed future file `terms/[wrr_1994_rabbis].csv`;
+- replication-grade generated or reviewed future file `terms/[wrr_1994_dates].csv`;
 - WRR corrected-distance implementation for `c(w,w')`;
 - WRR aggregate runner for `P1`, `P2`, `P3`, and `P4` over all declared pairs
   once `c(w,w')` exists;

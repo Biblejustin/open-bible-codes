@@ -128,7 +128,7 @@ placeholder checker, lock manifest builder, and lock checker:
 
 ```bash
 python3 -m scripts.scaffold_prospective_study --name STUDY_NAME
-python3 -m scripts.check_preregistration_placeholders docs/STUDY_PREREGISTRATION.md
+python3 -m scripts.check_preregistration_placeholders docs/PROSPECTIVE_STUDY_PREREGISTRATION_TEMPLATE.md
 python3 -m scripts.build_study_lock_manifest --name STUDY_NAME --path ...
 python3 -m scripts.check_study_lock_manifest reports/study_locks/STUDY_NAME.manifest.json
 ```

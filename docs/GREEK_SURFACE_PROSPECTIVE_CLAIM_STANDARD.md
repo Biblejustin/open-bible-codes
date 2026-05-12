@@ -41,8 +41,8 @@ Lock helper:
 ```bash
 python3 -m scripts.build_study_lock_manifest \
   --name greek_surface_future_study \
-  --path terms/<future-term-file>.csv \
-  --path protocols/<future-protocol>.toml \
+  --path terms/[future-term-file].csv \
+  --path protocols/[future-protocol].toml \
   --path configs/example_ebible_grctr.toml \
   --path configs/example_ebible_grcmt.toml \
   --path configs/example_ebible_grctcgnt.toml \

@@ -38,7 +38,7 @@ python3 -m scripts.scaffold_prospective_study \
   --print-command
 python3 -m scripts.scaffold_prospective_study \
   --profile compound_extension_prospective \
-  --out docs/COMPOUND_EXTENSION_PROSPECTIVE_PREREGISTRATION.md
+  --out docs/[COMPOUND_EXTENSION_PROSPECTIVE_PREREGISTRATION].md
 ```
 
 Profiles are stored in `configs/prospective_study_lanes.json`. They are planning
@@ -50,7 +50,7 @@ After filling a study-specific preregistration document, run:
 
 ```bash
 python3 -m scripts.check_preregistration_placeholders \
-  docs/GREEK_SURFACE_FUTURE_STUDY_PREREGISTRATION.md
+  docs/[GREEK_SURFACE_FUTURE_STUDY_PREREGISTRATION].md
 ```
 
 The placeholder checker fails on leftover bracket tokens such as `[name]`,
@@ -62,7 +62,7 @@ preflight:
 
 ```bash
 python3 -m scripts.audit_prospective_terms \
-  --candidate terms/<future-term-file>.csv \
+  --candidate terms/[future-term-file].csv \
   --evidence reports/<prior-evidence>.csv \
   --min-normalized-length 5 \
   --out reports/study_locks/greek_surface_future_study.term_audit.csv \
@@ -78,18 +78,18 @@ discovery list:
 
 ```bash
 python3 -m scripts.filter_prospective_terms \
-  --candidate terms/<future-term-file>.csv \
+  --candidate terms/[future-term-file].csv \
   --audit reports/study_locks/greek_surface_future_study.term_audit.csv \
-  --out terms/<future-term-file-clean>.csv
+  --out terms/[future-term-file-clean].csv
 ```
 
 Before a result-producing run, combine the checks:
 
 ```bash
 python3 -m scripts.preflight_prospective_study \
-  --preregistration docs/GREEK_SURFACE_FUTURE_STUDY_PREREGISTRATION.md \
+  --preregistration docs/[GREEK_SURFACE_FUTURE_STUDY_PREREGISTRATION].md \
   --manifest reports/study_locks/greek_surface_future_study.manifest.json \
-  --protocol protocols/greek_surface_future_study.toml \
+  --protocol protocols/[greek_surface_future_study].toml \
   --clean-term-audit reports/study_locks/greek_surface_future_study.term_audit.csv.summary.json \
   --out reports/study_locks/greek_surface_future_study.preflight.json
 ```
@@ -113,8 +113,8 @@ The current target-readiness matrix is tracked in
 ```bash
 python3 -m scripts.build_study_lock_manifest \
   --name greek_surface_future_study \
-  --path terms/<future-term-file>.csv \
-  --path protocols/<future-protocol>.toml \
+  --path terms/[future-term-file].csv \
+  --path protocols/[future-protocol].toml \
   --path configs/example_ebible_grctr.toml \
   --path configs/example_ebible_grcmt.toml \
   --path configs/example_ebible_grctcgnt.toml \

@@ -17,7 +17,7 @@ Before the lock, audit the candidate term list for reuse of prior evidence:
 
 ```bash
 python3 -m scripts.audit_prospective_terms \
-  --candidate terms/STUDY_TERMS.csv \
+  --candidate terms/[STUDY_TERMS].csv \
   --evidence reports/PRIOR_EVIDENCE.csv \
   --min-normalized-length 5 \
   --out reports/study_locks/STUDY.term_audit.csv \
@@ -28,9 +28,9 @@ After a preregistration and lock manifest exist, run:
 
 ```bash
 python3 -m scripts.preflight_prospective_study \
-  --preregistration docs/STUDY_PREREGISTRATION.md \
+  --preregistration docs/[STUDY_PREREGISTRATION].md \
   --manifest reports/study_locks/STUDY.manifest.json \
-  --protocol protocols/study.toml \
+  --protocol protocols/[study].toml \
   --clean-term-audit reports/study_locks/STUDY.term_audit.csv.summary.json \
   --out reports/study_locks/STUDY.preflight.json
 ```

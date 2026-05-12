@@ -12,7 +12,7 @@ future candidate that contains prior `δοξα` (doxa; English: glory).
 
 ```bash
 python3 -m scripts.audit_prospective_terms \
-  --candidate terms/new_prospective_terms.csv \
+  --candidate terms/[new_prospective_terms].csv \
   --evidence reports/greek_expanded_surface_triage/selected_patterns.csv \
   --evidence reports/extension_exact_center_deep_controls_summary.csv \
   --min-normalized-length 5 \
@@ -40,9 +40,9 @@ Require a clean audit during prospective preflight:
 
 ```bash
 python3 -m scripts.preflight_prospective_study \
-  --preregistration docs/STUDY_PREREGISTRATION.md \
+  --preregistration docs/[STUDY_PREREGISTRATION].md \
   --manifest reports/study_locks/STUDY.manifest.json \
-  --protocol protocols/study.toml \
+  --protocol protocols/[study].toml \
   --clean-term-audit reports/study_locks/new_prospective_term_audit.csv.summary.json
 ```
 
@@ -55,9 +55,9 @@ After an audit, write a clean candidate file with matched rows removed:
 
 ```bash
 python3 -m scripts.filter_prospective_terms \
-  --candidate terms/new_prospective_terms.csv \
+  --candidate terms/[new_prospective_terms].csv \
   --audit reports/study_locks/new_prospective_term_audit.csv \
-  --out terms/new_prospective_terms_clean.csv \
+  --out terms/[new_prospective_terms_clean].csv \
   --min-remaining 10
 ```
 
