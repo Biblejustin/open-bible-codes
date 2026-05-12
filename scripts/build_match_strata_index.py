@@ -108,6 +108,14 @@ FIELDNAMES = [
     "cross_skip_pair_count",
     "cross_skip_pair_terms",
     "cross_skip_pair_skips",
+    "cross_skip_pair_at_letter",
+    "cross_skip_pair_at_letter_count",
+    "cross_skip_pair_at_letter_terms",
+    "cross_skip_pair_within_N_letters",
+    "cross_skip_pair_within_letter_distance",
+    "cross_skip_pair_within_letter_min_distance",
+    "cross_skip_pair_within_letter_count",
+    "cross_skip_pair_within_letter_terms",
     "extended_strata",
     "review_note",
     "source_record",
@@ -151,6 +159,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--meaningful-constants", type=Path, default=DEFAULT_MEANINGFUL_CONSTANTS)
     parser.add_argument("--markdown-row-limit", type=int, default=80)
+    parser.add_argument("--cross-skip-letter-distance", type=int, default=10)
     parser.add_argument(
         "--corpus-config",
         action="append",
@@ -167,6 +176,7 @@ def build_strata_rows(
     meaningful_constants: dict[int, str] | None = None,
     bigram_profiles: dict[str, BigramProfile] | None = None,
     letter_frequency_profiles: dict[str, LetterFrequencyProfile] | None = None,
+    cross_skip_letter_distance: int = 10,
 ) -> list[dict[str, object]]:
     direction_counts = direction_counts_by_key(input_rows, key_fields=GROUP_FIELDS)
     direction_by_key = direction_strata_by_key(input_rows, key_fields=GROUP_FIELDS)
@@ -175,7 +185,7 @@ def build_strata_rows(
     meaningful_constants = meaningful_constants or {}
     bigram_profiles = bigram_profiles or {}
     letter_frequency_profiles = letter_frequency_profiles or {}
-    cross_skip = cross_skip_annotations(input_rows)
+    cross_skip = cross_skip_annotations(input_rows, within_letter_distance=cross_skip_letter_distance)
     output = []
     for row in input_rows:
         key = tuple(row.get(field, "") for field in GROUP_FIELDS)
@@ -211,8 +221,12 @@ def build_strata_rows(
         ]
         if is_first:
             strata.append("canonical_first_occurrence")
-        if cross:
+        if cross.get("word_pair_count"):
             strata.append("cross_skip_pair_at_word")
+        if cross.get("letter_pair_count"):
+            strata.append("cross_skip_pair_at_letter")
+        if cross.get("within_pair_count"):
+            strata.append("cross_skip_pair_within_N_letters")
         if constant_skips:
             strata.append("skip_equals_meaningful_constant")
         if gematria_skips:
@@ -280,10 +294,20 @@ def build_strata_rows(
                 "center_position_strata": ";".join(center_position_strata),
                 "center_position_corpora": ";".join(center_position_corpora),
                 "center_position_evidence": ";".join(center_position_evidence),
-                "cross_skip_pair_at_word": "yes" if cross else "no",
-                "cross_skip_pair_count": cross.get("pair_count", "") if cross else "",
-                "cross_skip_pair_terms": cross.get("terms", "") if cross else "",
-                "cross_skip_pair_skips": cross.get("skips", "") if cross else "",
+                "cross_skip_pair_at_word": "yes" if cross.get("word_pair_count") else "no",
+                "cross_skip_pair_count": cross.get("word_pair_count", ""),
+                "cross_skip_pair_terms": cross.get("word_terms", ""),
+                "cross_skip_pair_skips": cross.get("word_skips", ""),
+                "cross_skip_pair_at_letter": "yes" if cross.get("letter_pair_count") else "no",
+                "cross_skip_pair_at_letter_count": cross.get("letter_pair_count", ""),
+                "cross_skip_pair_at_letter_terms": cross.get("letter_terms", ""),
+                "cross_skip_pair_within_N_letters": "yes" if cross.get("within_pair_count") else "no",
+                "cross_skip_pair_within_letter_distance": (
+                    str(cross_skip_letter_distance) if cross.get("within_pair_count") else ""
+                ),
+                "cross_skip_pair_within_letter_min_distance": cross.get("within_min_distance", ""),
+                "cross_skip_pair_within_letter_count": cross.get("within_pair_count", ""),
+                "cross_skip_pair_within_letter_terms": cross.get("within_terms", ""),
                 "extended_strata": ";".join(value for value in strata if value),
                 "review_note": row.get("review_note", ""),
                 "source_record": row.get("source_record", ""),
@@ -308,13 +332,19 @@ def direction_imbalance_score(forward: int, backward: int) -> str:
     return f"{(forward - backward) / total:.6f}"
 
 
-def cross_skip_annotations(rows: list[dict[str, str]]) -> dict[tuple[str, ...], dict[str, str]]:
-    groups: dict[tuple[str, ...], list[dict[str, str]]] = {}
+def cross_skip_annotations(
+    rows: list[dict[str, str]],
+    *,
+    within_letter_distance: int = 10,
+) -> dict[tuple[str, ...], dict[str, str]]:
+    if within_letter_distance < 0:
+        raise ValueError("within_letter_distance must be >= 0")
+    annotations: dict[tuple[str, ...], dict[str, Any]] = {}
+    word_groups: dict[tuple[str, ...], list[dict[str, str]]] = {}
     for row in rows:
-        groups.setdefault(cross_skip_group_key(row), []).append(row)
+        word_groups.setdefault(cross_skip_group_key(row), []).append(row)
 
-    annotations: dict[tuple[str, ...], dict[str, str]] = {}
-    for group_rows in groups.values():
+    for group_rows in word_groups.values():
         if len({row.get("normalized_term", "") for row in group_rows}) < 2:
             continue
         skip_sets = {row_identity(row): set(parse_skip_values(row.get("skip", ""))) for row in group_rows}
@@ -330,15 +360,105 @@ def cross_skip_annotations(rows: list[dict[str, str]]) -> dict[tuple[str, ...], 
             ]
             if not peer_rows:
                 continue
-            annotations[row_key] = {
-                "pair_count": str(len(peer_rows)),
-                "terms": ";".join(sorted({peer.get("normalized_term", "") for peer in peer_rows if peer.get("normalized_term")})),
-                "skips": ";".join(
-                    str(value)
-                    for value in sorted({skip for peer in peer_rows for skip in skip_sets[row_identity(peer)]})
-                ),
-            }
-    return annotations
+            for peer in peer_rows:
+                note_cross_skip_pair(
+                    annotations,
+                    row,
+                    peer,
+                    kind="word",
+                    peer_skips=skip_sets[row_identity(peer)],
+                )
+
+    broad_groups: dict[tuple[str, ...], list[dict[str, str]]] = {}
+    for row in rows:
+        broad_groups.setdefault(cross_skip_broad_group_key(row), []).append(row)
+    for group_rows in broad_groups.values():
+        if len({row.get("normalized_term", "") for row in group_rows}) < 2:
+            continue
+        skip_sets = {row_identity(row): set(parse_skip_values(row.get("skip", ""))) for row in group_rows}
+        path_positions = {row_identity(row): path_positions_by_corpus(row) for row in group_rows}
+        endpoints = {row_identity(row): endpoint_positions_by_corpus(row) for row in group_rows}
+        for left_index, left in enumerate(group_rows):
+            left_key = row_identity(left)
+            for right in group_rows[left_index + 1 :]:
+                right_key = row_identity(right)
+                if left.get("normalized_term", "") == right.get("normalized_term", ""):
+                    continue
+                if not has_different_skip(skip_sets[left_key], skip_sets[right_key]):
+                    continue
+                if shares_letter_position(path_positions[left_key], path_positions[right_key]):
+                    note_cross_skip_pair(
+                        annotations,
+                        left,
+                        right,
+                        kind="letter",
+                        peer_skips=skip_sets[right_key],
+                    )
+                    note_cross_skip_pair(
+                        annotations,
+                        right,
+                        left,
+                        kind="letter",
+                        peer_skips=skip_sets[left_key],
+                    )
+                distance = minimum_endpoint_distance(endpoints[left_key], endpoints[right_key])
+                if distance is not None and distance <= within_letter_distance:
+                    note_cross_skip_pair(
+                        annotations,
+                        left,
+                        right,
+                        kind="within",
+                        peer_skips=skip_sets[right_key],
+                        distance=distance,
+                    )
+                    note_cross_skip_pair(
+                        annotations,
+                        right,
+                        left,
+                        kind="within",
+                        peer_skips=skip_sets[left_key],
+                        distance=distance,
+                    )
+    return finalize_cross_skip_annotations(annotations)
+
+
+def note_cross_skip_pair(
+    annotations: dict[tuple[str, ...], dict[str, Any]],
+    row: dict[str, str],
+    peer: dict[str, str],
+    *,
+    kind: str,
+    peer_skips: set[int],
+    distance: int | None = None,
+) -> None:
+    annotation = annotations.setdefault(row_identity(row), {})
+    annotation.setdefault(f"{kind}_terms", set()).add(peer.get("normalized_term", ""))
+    annotation.setdefault(f"{kind}_skips", set()).update(peer_skips)
+    annotation[f"{kind}_pair_count"] = int(annotation.get(f"{kind}_pair_count", 0)) + 1
+    if distance is not None:
+        current = annotation.get(f"{kind}_min_distance")
+        annotation[f"{kind}_min_distance"] = distance if current is None else min(int(current), distance)
+
+
+def finalize_cross_skip_annotations(
+    annotations: dict[tuple[str, ...], dict[str, Any]],
+) -> dict[tuple[str, ...], dict[str, str]]:
+    output: dict[tuple[str, ...], dict[str, str]] = {}
+    for key, annotation in annotations.items():
+        row: dict[str, str] = {}
+        for kind in ("word", "letter", "within"):
+            pair_count = int(annotation.get(f"{kind}_pair_count", 0))
+            if not pair_count:
+                continue
+            terms = sorted(value for value in annotation.get(f"{kind}_terms", set()) if value)
+            skips = sorted(annotation.get(f"{kind}_skips", set()))
+            row[f"{kind}_pair_count"] = str(pair_count)
+            row[f"{kind}_terms"] = ";".join(terms)
+            row[f"{kind}_skips"] = ";".join(str(value) for value in skips)
+            if f"{kind}_min_distance" in annotation:
+                row[f"{kind}_min_distance"] = str(annotation[f"{kind}_min_distance"])
+        output[key] = row
+    return output
 
 
 def cross_skip_group_key(row: dict[str, str]) -> tuple[str, str, str, str, str, str, str]:
@@ -353,10 +473,83 @@ def cross_skip_group_key(row: dict[str, str]) -> tuple[str, str, str, str, str, 
     )
 
 
+def cross_skip_broad_group_key(row: dict[str, str]) -> tuple[str, str, str, str]:
+    return (
+        row.get("source_family", ""),
+        row.get("source_queue", ""),
+        row.get("corpus", ""),
+        row.get("present_corpora", ""),
+    )
+
+
 def has_different_skip(left: set[int], right: set[int]) -> bool:
     if not left or not right:
         return False
     return any(left_skip != right_skip for left_skip in left for right_skip in right)
+
+
+def path_positions_by_corpus(row: dict[str, str]) -> dict[str, set[int]]:
+    corpus = row.get("corpus", "")
+    positions: dict[str, set[int]] = {}
+    letter_positions = letter_path_positions(row)
+    if corpus and letter_positions:
+        positions[corpus] = set(letter_positions)
+    for record_corpus, start, end in offset_records(row):
+        positions.setdefault(record_corpus, set()).update(reconstructed_path_positions(row, start, end))
+    return positions
+
+
+def endpoint_positions_by_corpus(row: dict[str, str]) -> dict[str, set[int]]:
+    endpoints: dict[str, set[int]] = {}
+    for corpus, start, end in offset_records(row):
+        endpoints.setdefault(corpus, set()).update((start, end))
+    if endpoints:
+        return endpoints
+    corpus = row.get("corpus", "")
+    positions = letter_path_positions(row)
+    if corpus and positions:
+        endpoints[corpus] = {min(positions), max(positions)}
+    return endpoints
+
+
+def letter_path_positions(row: dict[str, str]) -> list[int]:
+    positions = []
+    for part in row.get("letter_path", "").split(";"):
+        match = LETTER_PATH_RE.match(part.strip())
+        if match:
+            positions.append(int(match.group("position")))
+    return positions
+
+
+def reconstructed_path_positions(row: dict[str, str], start: int, end: int) -> set[int]:
+    term_length = len(row.get("normalized_term", ""))
+    if term_length <= 1:
+        return {start}
+    gap_count = term_length - 1
+    delta = end - start
+    if delta % gap_count != 0:
+        return {start, end}
+    step = delta // gap_count
+    return {start + index * step for index in range(term_length)}
+
+
+def shares_letter_position(left: dict[str, set[int]], right: dict[str, set[int]]) -> bool:
+    for corpus in set(left) & set(right):
+        if left[corpus] & right[corpus]:
+            return True
+    return False
+
+
+def minimum_endpoint_distance(left: dict[str, set[int]], right: dict[str, set[int]]) -> int | None:
+    distances = [
+        abs(left_position - right_position)
+        for corpus in set(left) & set(right)
+        for left_position in left[corpus]
+        for right_position in right[corpus]
+    ]
+    if not distances:
+        return None
+    return min(distances)
 
 
 def bigram_surprise_for_row(row: dict[str, str], profiles: dict[str, BigramProfile]) -> BigramSurprise:
@@ -399,7 +592,7 @@ def write_markdown(
         "## Bottom Line",
         "",
         f"- annotated occurrence rows: {len(rows):,}",
-        "- materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, and available `boundary_*` endpoint strata.",
+        "- materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, available `boundary_*` endpoint strata, and cross-skip pair strata.",
         "- meaningful skip strata use the locked constants file and standard Hebrew/Greek gematria only as review flags.",
         "- bigram-surprise strata compare the hidden term's adjacent letter pairs to the matched corpus text.",
         "- letter-frequency anomaly strata compare the hidden term's individual letters to the matched corpus text.",
@@ -462,15 +655,21 @@ def write_markdown(
             lines.append(
                 f"| ... | ... | ... | ... | ... | {len(center_position_rows) - args.markdown_row_limit:,} more center-position rows in CSV |"
             )
-    cross_skip_rows = [row for row in rows if row.get("cross_skip_pair_at_word") == "yes"]
+    cross_skip_rows = [
+        row
+        for row in rows
+        if row.get("cross_skip_pair_at_word") == "yes"
+        or row.get("cross_skip_pair_at_letter") == "yes"
+        or row.get("cross_skip_pair_within_N_letters") == "yes"
+    ]
     if cross_skip_rows:
         lines.extend(
             [
                 "",
-                "## Cross-Skip Center Rows",
+                "## Cross-Skip Pair Rows",
                 "",
-                "| Rank | Term | Center | Pair count | Peer terms | Skip values | Source |",
-                "| ---: | --- | --- | ---: | --- | --- | --- |",
+                "| Rank | Term | Center | At word | At letter | Within N letters | Source |",
+                "| ---: | --- | --- | --- | --- | --- | --- |",
             ]
         )
         for row in cross_skip_rows[: args.markdown_row_limit]:
@@ -546,6 +745,8 @@ def write_markdown(
             "- Boundary strata are computed only from retained endpoint offsets, so blank boundary fields mean unavailable evidence, not proven absence.",
             "- Center-position strata use the center verse reference, not ELS path endpoints.",
             "- `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.",
+            "- `cross_skip_pair_at_letter` means two different terms at different skips share at least one retained letter-path position.",
+            "- `cross_skip_pair_within_N_letters` means two different terms at different skips have endpoints within the configured letter distance.",
             "- Meaningful-skip and gematria-skip strata are metadata flags; they do not change the search space or promote claim status.",
             "- Bigram-surprise strata are corpus-local review aids, not claim promotion rules; missing adjacent surface bigrams count as rare.",
             "- Letter-frequency anomaly strata are corpus-local review aids; missing letters count as rare.",
@@ -580,10 +781,26 @@ def center_position_markdown_row(row: dict[str, object]) -> str:
 def cross_skip_markdown_row(row: dict[str, object]) -> str:
     term = display_term(str(row.get("normalized_term", "")), english=str(row.get("concept", "")))
     center = f"{row.get('center_ref', '')} {display_term(str(row.get('center_word', '')))}"
+    at_word = ""
+    if row.get("cross_skip_pair_at_word") == "yes":
+        at_word = f"{row.get('cross_skip_pair_count', '')}: {row.get('cross_skip_pair_terms', '')}"
+    at_letter = ""
+    if row.get("cross_skip_pair_at_letter") == "yes":
+        at_letter = (
+            f"{row.get('cross_skip_pair_at_letter_count', '')}: "
+            f"{row.get('cross_skip_pair_at_letter_terms', '')}"
+        )
+    within = ""
+    if row.get("cross_skip_pair_within_N_letters") == "yes":
+        within = (
+            f"{row.get('cross_skip_pair_within_letter_count', '')}: "
+            f"{row.get('cross_skip_pair_within_letter_terms', '')}; "
+            f"min={row.get('cross_skip_pair_within_letter_min_distance', '')}"
+        )
     return (
         f"| {row.get('occurrence_rank', '')} | {term} | {md_cell(center)} | "
-        f"{row.get('cross_skip_pair_count', '')} | {md_cell(row.get('cross_skip_pair_terms', ''))} | "
-        f"{md_cell(row.get('cross_skip_pair_skips', ''))} | `{row.get('source_family', '')}` |"
+        f"{md_cell(at_word)} | {md_cell(at_letter)} | {md_cell(within)} | "
+        f"`{row.get('source_family', '')}` |"
     )
 
 
@@ -668,6 +885,7 @@ def write_manifest(
         "rows": len(rows),
         "summary_rows": len(summary_rows),
         "materialized_strata": [row["stratum"] for row in summary_rows],
+        "cross_skip_letter_distance": args.cross_skip_letter_distance,
         "corpus_configs": corpus_configs,
         "inputs": {
             "occurrences": str(args.occurrences),
@@ -824,7 +1042,8 @@ def reproduce_command(args: argparse.Namespace) -> str:
         f"--out {args.out} "
         f"--summary-out {args.summary_out} "
         f"--markdown-out {args.markdown_out} "
-        f"--manifest-out {args.manifest_out}"
+        f"--manifest-out {args.manifest_out} "
+        f"--cross-skip-letter-distance {args.cross_skip_letter_distance}"
     )
 
 

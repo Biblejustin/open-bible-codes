@@ -6,8 +6,8 @@ progress_interval_seconds = 15
 
 [[steps]]
 id = "match_strata_index"
-description = "Build direction and canonical-first strata over the centered occurrence index."
-argv = ["-m", "scripts.build_match_strata_index"]
+description = "Build direction, canonical-first, boundary, and cross-skip strata over the centered occurrence index."
+argv = ["-m", "scripts.build_match_strata_index", "--cross-skip-letter-distance", "10"]
 inputs = [
   "scripts/build_match_strata_index.py",
   "els/match_strata.py",

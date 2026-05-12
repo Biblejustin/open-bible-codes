@@ -8,13 +8,13 @@ same preregistered controls described in `docs/HYPOTHESIS_ANALYSIS_FRAMEWORK.md`
 ## Reproduce
 
 ```bash
-python3 -m scripts.build_match_strata_index --occurrences reports/centered_occurrence_index/centered_occurrences.csv --meaningful-constants terms/meaningful_constants.csv --out reports/match_strata_index/occurrence_strata.csv --summary-out reports/match_strata_index/strata_summary.csv --markdown-out docs/MATCH_STRATA_INDEX.md --manifest-out reports/match_strata_index/manifest.json
+python3 -m scripts.build_match_strata_index --occurrences reports/centered_occurrence_index/centered_occurrences.csv --meaningful-constants terms/meaningful_constants.csv --out reports/match_strata_index/occurrence_strata.csv --summary-out reports/match_strata_index/strata_summary.csv --markdown-out docs/MATCH_STRATA_INDEX.md --manifest-out reports/match_strata_index/manifest.json --cross-skip-letter-distance 10
 ```
 
 ## Bottom Line
 
 - annotated occurrence rows: 923
-- materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, and available `boundary_*` endpoint strata.
+- materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, available `boundary_*` endpoint strata, and cross-skip pair strata.
 - meaningful skip strata use the locked constants file and standard Hebrew/Greek gematria only as review flags.
 - bigram-surprise strata compare the hidden term's adjacent letter pairs to the matched corpus text.
 - letter-frequency anomaly strata compare the hidden term's individual letters to the matched corpus text.
@@ -27,7 +27,9 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 | --- | ---: |
 | `bidirectional_present` | 780 |
 | `centered_self_exact_word` | 623 |
+| `cross_skip_pair_within_N_letters` | 228 |
 | `span_relevant` | 205 |
+| `cross_skip_pair_at_letter` | 171 |
 | `canonical_first_occurrence` | 153 |
 | `cross_skip_pair_at_word` | 122 |
 | `center_verse_first_in_chapter` | 82 |
@@ -261,91 +263,91 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 | 708 | `seed` | TOB 1:1 `son` | center_verse_first_in_book;center_verse_first_in_chapter | KJVA:center_verse_first_in_chapter,center_verse_first_in_book | `kjv_apocrypha_bridge_context` |
 | ... | ... | ... | ... | ... | 66 more center-position rows in CSV |
 
-## Cross-Skip Center Rows
+## Cross-Skip Pair Rows
 
-| Rank | Term | Center | Pair count | Peer terms | Skip values | Source |
-| ---: | --- | --- | ---: | --- | --- | --- |
-| 670 | `αμην` (amen; English: Amen) | MAL 4:6 `δικαιώματα.` (dikaiomata; English: ordinances) | 2 | ελαμ;σιων | -209;-154 | `apocrypha_bridge_context` |
-| 672 | `σιων` (Sion; English: Zion) | MAL 4:6 `δικαιώματα.` (dikaiomata; English: ordinances) | 2 | αμην;ελαμ | -209;191 | `apocrypha_bridge_context` |
-| 674 | `ahab` | MAT 1:1 `generation` | 3 | gate;obal;star | -111;-84;194 | `kjv_apocrypha_bridge_context` |
-| 678 | `eden` | MAL 4:4 `judgments.` | 1 | heth | 163 | `kjv_apocrypha_bridge_context` |
-| 681 | `eyes` | 2ES 16:77 `field` | 1 | tomb | 134 | `kjv_apocrypha_bridge_context` |
-| 684 | `hail` | 2ES 16:78 `be` | 2 | soot;thin | 188;227 | `kjv_apocrypha_bridge_context` |
-| 685 | `hand` | MAL 4:6 `their` | 1 | seed | -238 | `kjv_apocrypha_bridge_context` |
-| 690 | `hits` | MAL 4:6 `heart` | 3 | lane;soot;torah | -81;226;240 | `kjv_apocrypha_bridge_context` |
-| 691 | `hits` | MAL 4:6 `fathers` | 2 | soot;wine | 124;131 | `kjv_apocrypha_bridge_context` |
-| 692 | `house` | TOB 1:3 `justice,` | 1 | hits | -210 | `kjv_apocrypha_bridge_context` |
-| 693 | `isaac` | MAT 1:2 `Judas` | 1 | tomb | 217 | `kjv_apocrypha_bridge_context` |
-| 694 | `king` | MAL 4:5 `the` | 2 | hail;yhwh | -218;189 | `kjv_apocrypha_bridge_context` |
-| 696 | `lane` | MAL 4:6 `fathers,` | 2 | seed;soot | -123;-53 | `kjv_apocrypha_bridge_context` |
-| 697 | `lane` | MAL 4:6 `heart` | 3 | hits;soot;torah | -85;-81;240 | `kjv_apocrypha_bridge_context` |
-| 698 | `lane` | MAL 4:6 `and` | 2 | eden;seed | -115;140 | `kjv_apocrypha_bridge_context` |
-| 699 | `lane` | MAT 1:2 `Isaac` | 2 | horn | 126;208 | `kjv_apocrypha_bridge_context` |
-| 700 | `light` | TOB 1:2 `Galilee` | 1 | tyre | 198 | `kjv_apocrypha_bridge_context` |
-| 701 | `lion` | 2ES 16:77 `may` | 1 | fire | 176 | `kjv_apocrypha_bridge_context` |
-| 702 | `love` | TOB 1:2 `of` | 1 | holy | 204 | `kjv_apocrypha_bridge_context` |
-| 703 | `obal` | MAT 1:3 `begat` | 1 | seed | -182 | `kjv_apocrypha_bridge_context` |
-| 705 | `rome` | TOB 1:2 `properly` | 2 | eden;seed | -238;-197 | `kjv_apocrypha_bridge_context` |
-| 706 | `seed` | TOB 1:1 `the` | 7 | ahab;fire;gate;life;rent;tyre | -229;-225;-169;-159;-121;73;229 | `kjv_apocrypha_bridge_context` |
-| 708 | `seed` | TOB 1:1 `son` | 2 | ahab;hand | -206;-161 | `kjv_apocrypha_bridge_context` |
-| 710 | `seed` | TOB 1:1 `of` | 4 | hits;nato;sign;soot | -222;-73;-70;248 | `kjv_apocrypha_bridge_context` |
-| 711 | `seed` | TOB 1:2 `captive` | 1 | hits | -166 | `kjv_apocrypha_bridge_context` |
-| 712 | `seed` | TOB 1:2 `properly` | 2 | eden;rome | -197;250 | `kjv_apocrypha_bridge_context` |
-| 713 | `soot` | MAL 4:6 `fathers,` | 2 | lane;seed | -53;192 | `kjv_apocrypha_bridge_context` |
-| 714 | `soot` | MAL 4:6 `fathers` | 2 | hits;wine | -141;131 | `kjv_apocrypha_bridge_context` |
-| 715 | `soot` | MAL 4:6 `heart` | 3 | hits;lane;torah | -85;-81;226 | `kjv_apocrypha_bridge_context` |
-| 717 | `tomb` | 2ES 16:77 `field` | 1 | eyes | -143 | `kjv_apocrypha_bridge_context` |
-| 718 | `tyre` | TOB 1:2 `Galilee` | 1 | light | -127 | `kjv_apocrypha_bridge_context` |
-| 746 | `αιμα` (haima; English: Blood) | TOB 1:2 `ὁδοῖς` (odois; English: ways) | 1 | βασαν | -222 | `apocrypha_bridge_context` |
-| 752 | `αμην` (amen; English: Amen) | TOB 1:1 `Τωβιήλ,` (tobiel; English: Tobiel) | 1 | ρωμη | -221 | `apocrypha_bridge_context` |
-| 754 | `βασαν` (basan; English: Bashan) | TOB 1:2 `ὁδοῖς` (odois; English: ways) | 1 | αιμα | -210 | `apocrypha_bridge_context` |
-| 755 | `ελαμ` (Elam; English: Elam) | MAL 4:6 `δικαιώματα.` (dikaiomata; English: ordinances) | 2 | αμην;σιων | -154;191 | `apocrypha_bridge_context` |
-| 756 | `ελαμ` (Elam; English: Elam) | TOB 1:2 `βασιλέως` (basileos; English: king) | 1 | σιων | -218 | `apocrypha_bridge_context` |
-| 761 | `ρωμη` (rome; English: Rome) | TOB 1:1 `Τωβιήλ,` (tobiel; English: Tobiel) | 1 | αμην | 247 | `apocrypha_bridge_context` |
-| 767 | `σιων` (Sion; English: Zion) | TOB 1:2 `βασιλέως` (basileos; English: king) | 1 | ελαμ | 120 | `apocrypha_bridge_context` |
-| 768 | `aaron` | 2ES 16:78 `undressed,` | 1 | obed | -224 | `kjv_apocrypha_bridge_context` |
-| 773 | `ahab` | TOB 1:1 `son` | 2 | hand;seed | -206;-73 | `kjv_apocrypha_bridge_context` |
-| 774 | `ahab` | TOB 1:1 `the` | 7 | fire;gate;life;rent;seed;tyre | -229;-225;-159;-121;54;73;229 | `kjv_apocrypha_bridge_context` |
-| 778 | `death` | TOB 1:2 `Assyrians` | 1 | heart | -165 | `kjv_apocrypha_bridge_context` |
-| 781 | `eber` | TOB 1:3 `the` | 1 | noah | -231 | `kjv_apocrypha_bridge_context` |
-| 782 | `eber` | TOB 1:3 `days` | 1 | ehyeh | -198 | `kjv_apocrypha_bridge_context` |
-| 783 | `eber` | TOB 1:3 `the` | 1 | noah | -231 | `kjv_apocrypha_bridge_context` |
-| 785 | `eden` | MAL 4:6 `and` | 2 | lane;seed | -232;-115 | `kjv_apocrypha_bridge_context` |
-| 787 | `eden` | TOB 1:2 `properly` | 2 | rome;seed | -238;250 | `kjv_apocrypha_bridge_context` |
-| 789 | `ehyeh` | TOB 1:3 `days` | 1 | eber | 211 | `kjv_apocrypha_bridge_context` |
-| 791 | `fire` | 2ES 16:77 `may` | 1 | lion | 226 | `kjv_apocrypha_bridge_context` |
-| 792 | `fire` | TOB 1:1 `the` | 6 | ahab;gate;life;rent;seed;tyre | -225;-169;-159;-121;54;73 | `kjv_apocrypha_bridge_context` |
-| 793 | `fire` | TOB 1:1 `the` | 6 | ahab;gate;life;rent;seed;tyre | -225;-169;-159;-121;54;73 | `kjv_apocrypha_bridge_context` |
-| 795 | `gate` | MAL 4:5 `great` | 2 | heart;torah | -130;-85 | `kjv_apocrypha_bridge_context` |
-| 796 | `gate` | MAT 1:1 `generation` | 3 | ahab;obal;star | -111;145;194 | `kjv_apocrypha_bridge_context` |
-| 798 | `gate` | MAT 1:1 `The` | 1 | water | -200 | `kjv_apocrypha_bridge_context` |
-| 801 | `gate` | TOB 1:1 `the` | 7 | ahab;fire;life;rent;seed;tyre | -229;-225;-169;-159;54;73;229 | `kjv_apocrypha_bridge_context` |
-| 802 | `haifa` | MAL 4:6 `I` | 1 | life | 250 | `kjv_apocrypha_bridge_context` |
-| 804 | `hail` | MAL 4:5 `the` | 2 | king;yhwh | -218;-192 | `kjv_apocrypha_bridge_context` |
-| 805 | `hail` | MAL 4:5 `LORD` | 1 | sidon | 224 | `kjv_apocrypha_bridge_context` |
-| 806 | `hail` | TOB 1:2 `Who` | 1 | soot | -221 | `kjv_apocrypha_bridge_context` |
-| 808 | `hand` | MAL 4:5 `Behold,` | 1 | seed | 189 | `kjv_apocrypha_bridge_context` |
-| 809 | `hand` | TOB 1:1 `son` | 2 | ahab;seed | -161;-73 | `kjv_apocrypha_bridge_context` |
-| 812 | `heart` | MAL 4:5 `great` | 2 | gate;torah | -144;-85 | `kjv_apocrypha_bridge_context` |
-| 814 | `heart` | TOB 1:2 `Assyrians` | 1 | death | 228 | `kjv_apocrypha_bridge_context` |
-| 815 | `herod` | 2ES 16:77 `covered` | 2 | hits | 205;215 | `kjv_apocrypha_bridge_context` |
-| 816 | `heth` | MAL 4:4 `judgments.` | 1 | eden | 233 | `kjv_apocrypha_bridge_context` |
-| 821 | `heth` | MAT 1:2 `Jacob;` | 1 | seed | -156 | `kjv_apocrypha_bridge_context` |
-| 822 | `heth` | MAT 1:5 `Booz` | 1 | shoah | 231 | `kjv_apocrypha_bridge_context` |
-| 825 | `hits` | 2ES 16:77 `covered` | 1 | herod | 238 | `kjv_apocrypha_bridge_context` |
-| 826 | `hits` | 2ES 16:77 `covered` | 1 | herod | 238 | `kjv_apocrypha_bridge_context` |
-| 830 | `hits` | MAL 4:5 `dreadful` | 1 | seed | -178 | `kjv_apocrypha_bridge_context` |
-| 832 | `hits` | TOB 1:1 `of` | 4 | nato;seed;sign;soot | -222;-178;-70;248 | `kjv_apocrypha_bridge_context` |
-| 833 | `hits` | TOB 1:1 `Tobit,` | 1 | lord | -145 | `kjv_apocrypha_bridge_context` |
-| 834 | `hits` | TOB 1:2 `captive` | 1 | seed | 125 | `kjv_apocrypha_bridge_context` |
-| 836 | `hits` | TOB 1:3 `justice,` | 1 | house | 196 | `kjv_apocrypha_bridge_context` |
-| 837 | `holy` | TOB 1:2 `is` | 1 | ruth | -242 | `kjv_apocrypha_bridge_context` |
-| 838 | `holy` | TOB 1:2 `of` | 1 | love | 222 | `kjv_apocrypha_bridge_context` |
-| 840 | `horn` | MAT 1:2 `Isaac` | 1 | lane | -124 | `kjv_apocrypha_bridge_context` |
-| 841 | `horn` | MAT 1:2 `Isaac` | 1 | lane | -124 | `kjv_apocrypha_bridge_context` |
-| 851 | `life` | MAL 4:6 `I` | 1 | haifa | -121 | `kjv_apocrypha_bridge_context` |
-| 852 | `life` | TOB 1:1 `the` | 7 | ahab;fire;gate;rent;seed;tyre | -229;-225;-169;-121;54;73;229 | `kjv_apocrypha_bridge_context` |
-| ... | ... | ... | ... | ... | ... | 42 more cross-skip rows in CSV |
+| Rank | Term | Center | At word | At letter | Within N letters | Source |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 639 | `ιωυαν` (Iouan; English: Javan) | 1Pet 5:13 `Βαβυλῶνι` (babuloni; English: Babylon) |  |  | 1: ελκη; min=4 | `all_codes_followup` |
+| 644 | `μαρια` (Maria; English: Mary) | MAL 4:6 `Ἰσραὴλ` (israel; English: Israel) |  | 2: αδαμ;ελαμ | 2: αδαμ;ελαμ; min=0 | `apocrypha_bridge_context` |
+| 645 | `torah` | MAT 1:1 `Abraham.` |  | 1: gate | 5: bread;gate;herod;horn;sheba; min=4 | `kjv_apocrypha_bridge_context` |
+| 661 | `ελκη` (elke; English: Boils) | 1Pet 5:13 `συνεκλεκτή` (suneklekte; English: co-elect) |  |  | 1: ιωυαν; min=4 | `all_codes_followup` |
+| 670 | `αμην` (amen; English: Amen) | MAL 4:6 `δικαιώματα.` (dikaiomata; English: ordinances) | 2: ελαμ;σιων |  | 1: θεοσ; min=2 | `apocrypha_bridge_context` |
+| 671 | `αμμων` (ammon; English: Ammon) | TOB 1:3 `ἐμοῦ` (emou; English: of me) |  | 1: αμην | 2: αιμα;αμην; min=0 | `apocrypha_bridge_context` |
+| 672 | `σιων` (Sion; English: Zion) | MAL 4:6 `δικαιώματα.` (dikaiomata; English: ordinances) | 2: αμην;ελαμ |  | 1: βασαν; min=10 | `apocrypha_bridge_context` |
+| 673 | `admah` | MAT 1:4 `Salmon;` |  | 1: heth | 3: earth;hail;heth; min=0 | `kjv_apocrypha_bridge_context` |
+| 674 | `ahab` | MAT 1:1 `generation` | 3: gate;obal;star | 1: sheba | 6: heth;hits;horn;star;tomb; min=1 | `kjv_apocrypha_bridge_context` |
+| 675 | `altar` | TOB 1:4 `country,` |  | 1: rent | 4: eber;rent;rome; min=0 | `kjv_apocrypha_bridge_context` |
+| 676 | `aram` | MAT 1:4 `begat` |  | 1: adam | 3: aaron;sheba;tomb; min=7 | `kjv_apocrypha_bridge_context` |
+| 677 | `bush` | 2ES 16:77 `a` |  |  | 9: hail;hand;hits;horn;house;mash;otho;resen; min=3 | `kjv_apocrypha_bridge_context` |
+| 678 | `eden` | MAL 4:4 `judgments.` | 1: heth |  | 15: heart;heth;hits;king;seed;shem;sidon;soot;yhwh; min=2 | `kjv_apocrypha_bridge_context` |
+| 679 | `ehyeh` | 2ES 16:76 `you` |  | 1: teeth | 2: sivan;teeth; min=5 | `kjv_apocrypha_bridge_context` |
+| 680 | `elam` | TOB 1:2 `at` |  |  | 7: eden;hits;lane;life;rent;rome;water; min=1 | `kjv_apocrypha_bridge_context` |
+| 681 | `eyes` | 2ES 16:77 `field` | 1: tomb | 1: soot | 3: bread;obed;soot; min=0 | `kjv_apocrypha_bridge_context` |
+| 682 | `gate` | MAL 4:6 `children` |  |  | 9: heart;heth;holy;lane;leah;love;noah;ruth;torah; min=5 | `kjv_apocrypha_bridge_context` |
+| 683 | `gate` | MAT 1:2 `his` |  | 1: torah | 6: heth;image;obal;seed; min=1 | `kjv_apocrypha_bridge_context` |
+| 684 | `hail` | 2ES 16:78 `be` | 2: soot;thin | 2: lamb;thin | 7: ahab;annas;hits;lamb;lane;lion;thin; min=0 | `kjv_apocrypha_bridge_context` |
+| 685 | `hand` | MAL 4:6 `their` | 1: seed | 3: hits;lane;wine | 7: ehyeh;hits;rent;teeth;torah; min=0 | `kjv_apocrypha_bridge_context` |
+| 686 | `hand` | MAL 4:6 `lest` |  | 1: lane | 9: ahab;edom;lane;leah;life; min=1 | `kjv_apocrypha_bridge_context` |
+| 688 | `hannah` | MAT 1:6 `Jesse` |  | 1: obal | 3: gate;horn;lane; min=2 | `kjv_apocrypha_bridge_context` |
+| 689 | `hannah` | MAT 1:6 `Jesse` |  | 1: obal | 3: gate;horn;lane; min=2 | `kjv_apocrypha_bridge_context` |
+| 690 | `hits` | MAL 4:6 `heart` | 3: lane;soot;torah | 2: heth;thin | 8: gate;heth;life;lord;love;noah;seed; min=0 | `kjv_apocrypha_bridge_context` |
+| 691 | `hits` | MAL 4:6 `fathers` | 2: soot;wine | 2: ahab;sign | 9: death;fire;heart;leah;nato;rent;sign;tyre; min=0 | `kjv_apocrypha_bridge_context` |
+| 692 | `house` | TOB 1:3 `justice,` | 1: hits | 1: noah | 8: eden;hits;holy;lane;noah;seed;sivan;thin; min=0 | `kjv_apocrypha_bridge_context` |
+| 693 | `isaac` | MAT 1:2 `Judas` | 1: tomb | 2: star;water | 3: ahab;mash;obed; min=6 | `kjv_apocrypha_bridge_context` |
+| 694 | `king` | MAL 4:5 `the` | 2: hail;yhwh | 1: sign | 7: eden;hits;seed;soot; min=2 | `kjv_apocrypha_bridge_context` |
+| 695 | `lane` | MAL 4:6 `children,` |  | 5: hand;leah;rent;wine | 9: ahab;gate;nato;seed;shem;soot;torah;wine; min=1 | `kjv_apocrypha_bridge_context` |
+| 696 | `lane` | MAL 4:6 `fathers,` | 2: seed;soot | 1: hand | 2: leah;lord; min=5 | `kjv_apocrypha_bridge_context` |
+| 697 | `lane` | MAL 4:6 `heart` | 3: hits;soot;torah | 4: heal;heart;life;rent | 15: ahab;hail;hand;heart;hits;leah;life;seed;wine; min=0 | `kjv_apocrypha_bridge_context` |
+| 698 | `lane` | MAL 4:6 `and` | 2: eden;seed | 2: leah;noah | 10: ahab;hand;leah;life;soot; min=0 | `kjv_apocrypha_bridge_context` |
+| 699 | `lane` | MAT 1:2 `Isaac` | 2: horn |  | 11: ahab;annas;gate;hail;hannah;horn;lamb;lion;obed;thin; min=2 | `kjv_apocrypha_bridge_context` |
+| 700 | `light` | TOB 1:2 `Galilee` | 1: tyre | 2: heart;life | 8: heth;hits;life;seed;soot;water;wine; min=0 | `kjv_apocrypha_bridge_context` |
+| 701 | `lion` | 2ES 16:77 `may` | 1: fire | 2: otho;sivan | 8: annas;hail;horn;lamb;lane;obed;thin; min=2 | `kjv_apocrypha_bridge_context` |
+| 702 | `love` | TOB 1:2 `of` | 1: holy | 2: noah;sivan | 11: ahab;gate;hail;heart;hits;life;lord;noah;seed;thin; min=1 | `kjv_apocrypha_bridge_context` |
+| 703 | `obal` | MAT 1:3 `begat` | 1: seed | 3: ahab;hannah | 5: adam;gate;seed; min=1 | `kjv_apocrypha_bridge_context` |
+| 704 | `rome` | TOB 1:2 `Nephthali` |  |  | 6: altar;eber;eden;lane;rent;tyre; min=6 | `kjv_apocrypha_bridge_context` |
+| 705 | `rome` | TOB 1:2 `properly` | 2: eden;seed | 3: rent;sidon;torah | 5: death;eber;elam;life;rent; min=0 | `kjv_apocrypha_bridge_context` |
+| 706 | `seed` | TOB 1:1 `the` | 7: ahab;fire;gate;life;rent;tyre | 3: dedan;hits;wine | 9: eden;hail;heth;hits;light;soot;star;water;wine; min=0 | `kjv_apocrypha_bridge_context` |
+| 707 | `seed` | TOB 1:1 `tribe` |  | 1: hits | 9: gate;heart;heth;hits;light;soot;water;wine; min=0 | `kjv_apocrypha_bridge_context` |
+| 708 | `seed` | TOB 1:1 `son` | 2: ahab;hand | 4: eden;hits;leah;soot | 14: eden;hail;hits;house;noah;sivan;soot;star;yhwh; min=0 | `kjv_apocrypha_bridge_context` |
+| 709 | `seed` | TOB 1:1 `Tobiel,` |  | 1: sidon | 4: ehyeh;gate;hits;nato; min=2 | `kjv_apocrypha_bridge_context` |
+| 710 | `seed` | TOB 1:1 `of` | 4: hits;nato;sign;soot | 2: eden;lord | 9: ahab;hits;life;lord;love;noah;sidon; min=0 | `kjv_apocrypha_bridge_context` |
+| 711 | `seed` | TOB 1:2 `captive` | 1: hits | 1: hits | 7: eber;eden;hand;heth;hits;life;thin; min=0 | `kjv_apocrypha_bridge_context` |
+| 712 | `seed` | TOB 1:2 `properly` | 2: eden;rome | 3: edom;life;wine | 3: eber;nato;sivan; min=3 | `kjv_apocrypha_bridge_context` |
+| 713 | `soot` | MAL 4:6 `fathers,` | 2: lane;seed | 5: hits;holy;seed | 10: eden;hail;hits;seed;star;torah;yhwh; min=0 | `kjv_apocrypha_bridge_context` |
+| 714 | `soot` | MAL 4:6 `fathers` | 2: hits;wine | 1: torah | 8: eden;haifa;heart;seed;shem;torah;wine; min=1 | `kjv_apocrypha_bridge_context` |
+| 715 | `soot` | MAL 4:6 `heart` | 3: hits;lane;torah |  | 3: edom;lane;leah; min=5 | `kjv_apocrypha_bridge_context` |
+| 716 | `star` | 2ES 16:77 `man` |  | 2: heth;hits | 5: ahab;heth;tomb; min=2 | `kjv_apocrypha_bridge_context` |
+| 717 | `tomb` | 2ES 16:77 `field` | 1: eyes |  | 3: fire;obed;star; min=5 | `kjv_apocrypha_bridge_context` |
+| 718 | `tyre` | TOB 1:2 `Galilee` | 1: light | 3: gate;wine;yhwh | 6: eber;noah;rent;rome;ruth;wine; min=0 | `kjv_apocrypha_bridge_context` |
+| 743 | `αδαμ` (adam; English: Adam) | TOB 1:1 `Νεφθαλίμ,` (nephthalim; English: Naphtali) |  |  | 3: αιμα;ναοσ;σιων; min=7 | `apocrypha_bridge_context` |
+| 744 | `αδαμ` (adam; English: Adam) | TOB 1:2 `Τωβὶτ` (tobit; English: Tobit) |  | 2: ελαμ;μαρια | 3: ελαμ;μαρια;σιων; min=0 | `apocrypha_bridge_context` |
+| 745 | `αιμα` (haima; English: Blood) | TOB 1:1 `τοῦ` (tou; English: of the) |  |  | 2: αδαμ;αμην; min=5 | `apocrypha_bridge_context` |
+| 746 | `αιμα` (haima; English: Blood) | TOB 1:2 `ὁδοῖς` (odois; English: ways) | 1: βασαν | 1: σιων |  | `apocrypha_bridge_context` |
+| 747 | `αιμα` (haima; English: Blood) | TOB 1:2 `ᾐχμαλωτεύθη` (echmaloteuthe; English: was taken captive) |  |  | 2: σιων; min=1 | `apocrypha_bridge_context` |
+| 748 | `αιμα` (haima; English: Blood) | TOB 1:2 `ἀληθείας` (aletheias; English: truth) |  |  | 2: αμην;αμμων; min=1 | `apocrypha_bridge_context` |
+| 749 | `αιμα` (haima; English: Blood) | TOB 1:3 `τοῖς` (tois; English: to the) |  |  | 1: σιων; min=2 | `apocrypha_bridge_context` |
+| 750 | `αιμα` (haima; English: Blood) | TOB 1:3 `τοῖς` (tois; English: to the) |  |  | 1: βασαν; min=7 | `apocrypha_bridge_context` |
+| 752 | `αμην` (amen; English: Amen) | TOB 1:1 `Τωβιήλ,` (tobiel; English: Tobiel) | 1: ρωμη |  | 1: αιμα; min=5 | `apocrypha_bridge_context` |
+| 753 | `αμην` (amen; English: Amen) | TOB 1:2 `ὑπεράνω` (uperano; English: above) |  | 2: αμμων;ελαμ | 2: αιμα;αμμων; min=0 | `apocrypha_bridge_context` |
+| 754 | `βασαν` (basan; English: Bashan) | TOB 1:2 `ὁδοῖς` (odois; English: ways) | 1: αιμα |  | 2: αιμα;σιων; min=7 | `apocrypha_bridge_context` |
+| 755 | `ελαμ` (Elam; English: Elam) | MAL 4:6 `δικαιώματα.` (dikaiomata; English: ordinances) | 2: αμην;σιων |  |  | `apocrypha_bridge_context` |
+| 756 | `ελαμ` (Elam; English: Elam) | TOB 1:2 `βασιλέως` (basileos; English: king) | 1: σιων | 1: αμην | 1: θεοσ; min=9 | `apocrypha_bridge_context` |
+| 757 | `ελαμ` (Elam; English: Elam) | TOB 1:2 `Ἐνεμεσσάρου` (enemessarou; English: Enemessar) |  | 2: αδαμ;μαρια | 3: αδαμ;θεοσ;μαρια; min=0 | `apocrypha_bridge_context` |
+| 758 | `θεοσ` (theos; English: God) | MAL 4:4 `ἐπιφανῆ,` (epiphane; English: manifest/glorious) |  | 1: σιων | 2: σιων; min=0 | `apocrypha_bridge_context` |
+| 759 | `θεοσ` (theos; English: God) | TOB 1:1 `Τωβίτ,` (tobit; English: Tobit) |  |  | 3: αμην;ελαμ; min=2 | `apocrypha_bridge_context` |
+| 760 | `ναοσ` (naos; English: Temple) | TOB 1:2 `Θίσβης,` (thisbes; English: Thisbe) |  |  | 1: αδαμ; min=9 | `apocrypha_bridge_context` |
+| 761 | `ρωμη` (rome; English: Rome) | TOB 1:1 `Τωβιήλ,` (tobiel; English: Tobiel) | 1: αμην |  | 1: σιων; min=5 | `apocrypha_bridge_context` |
+| 763 | `σιων` (Sion; English: Zion) | MAL 4:5 `πρὸς` (pros; English: toward) |  |  | 1: θεοσ; min=8 | `apocrypha_bridge_context` |
+| 764 | `σιων` (Sion; English: Zion) | MAL 4:5 `υἱὸν` (uion; English: son) |  | 1: θεοσ | 1: θεοσ; min=0 | `apocrypha_bridge_context` |
+| 765 | `σιων` (Sion; English: Zion) | TOB 1:1 `Γαβαήλ,` (gabael; English: Gabael) |  |  | 2: αιμα;ρωμη; min=1 | `apocrypha_bridge_context` |
+| 766 | `σιων` (Sion; English: Zion) | TOB 1:2 `ἐπορευόμην` (eporeuomen; English: I walked) |  | 1: αιμα | 2: αδαμ;αιμα; min=2 | `apocrypha_bridge_context` |
+| 767 | `σιων` (Sion; English: Zion) | TOB 1:2 `βασιλέως` (basileos; English: king) | 1: ελαμ |  | 2: αδαμ;αιμα; min=3 | `apocrypha_bridge_context` |
+| 768 | `aaron` | 2ES 16:78 `undressed,` | 1: obed | 1: sheba | 3: aram;sheba;tomb; min=0 | `kjv_apocrypha_bridge_context` |
+| 769 | `aaron` | MAT 1:3 `Esrom` |  | 2: adam;horn | 6: adam;gate;heth;shoah;thin;wine; min=0 | `kjv_apocrypha_bridge_context` |
+| 770 | `adam` | MAT 1:3 `Aram;` |  | 1: hail | 4: obal;seed; min=3 | `kjv_apocrypha_bridge_context` |
+| 771 | `adam` | MAT 1:4 `Naasson;` |  | 2: aaron;aram | 4: aaron;heth;mash;thin; min=0 | `kjv_apocrypha_bridge_context` |
+| 772 | `ahab` | 2ES 16:78 `consumed` |  | 2: horn;obal | 7: hail;hits;horn;isaac;lane;obed;thin; min=3 | `kjv_apocrypha_bridge_context` |
+| ... | ... | ... | ... | ... | ... | 151 more cross-skip rows in CSV |
 
 ## Meaningful Skip Rows
 
@@ -423,6 +425,8 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 - Boundary strata are computed only from retained endpoint offsets, so blank boundary fields mean unavailable evidence, not proven absence.
 - Center-position strata use the center verse reference, not ELS path endpoints.
 - `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.
+- `cross_skip_pair_at_letter` means two different terms at different skips share at least one retained letter-path position.
+- `cross_skip_pair_within_N_letters` means two different terms at different skips have endpoints within the configured letter distance.
 - Meaningful-skip and gematria-skip strata are metadata flags; they do not change the search space or promote claim status.
 - Bigram-surprise strata are corpus-local review aids, not claim promotion rules; missing adjacent surface bigrams count as rare.
 - Letter-frequency anomaly strata are corpus-local review aids; missing letters count as rare.

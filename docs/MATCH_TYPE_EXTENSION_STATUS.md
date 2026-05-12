@@ -16,6 +16,8 @@ support. Status labels are engineering status only, not claim status.
 | `forward_only` / `backward_only` / `bidirectional_present` | implemented by grouped direction counts | `scripts/build_match_strata_index.py` |
 | `canonical_first_occurrence` | implemented within the current centered occurrence family | `scripts/build_match_strata_index.py` |
 | `cross_skip_pair_at_word` | implemented for same center word/reference with different skips | `scripts/build_match_strata_index.py` |
+| `cross_skip_pair_at_letter` | implemented when retained/reconstructed letter paths share a letter position | `scripts/build_match_strata_index.py` |
+| `cross_skip_pair_within_N_letters` | implemented for endpoint proximity under a configured distance | `scripts/build_match_strata_index.py` |
 | `skip_equals_meaningful_constant` | implemented against locked constants | `terms/meaningful_constants.csv` |
 | `skip_equals_term_gematria` | implemented for standard Hebrew/Greek values | `scripts/build_match_strata_index.py` |
 | `skip_equals_center_word_gematria` | implemented for standard Hebrew/Greek values | `scripts/build_match_strata_index.py` |

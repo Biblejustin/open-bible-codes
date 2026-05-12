@@ -156,6 +156,91 @@ def test_build_strata_rows_adds_cross_skip_pair_at_word() -> None:
     assert "cross_skip_pair_at_word" in rows[0]["extended_strata"]
 
 
+def test_build_strata_rows_adds_cross_skip_pair_at_letter() -> None:
+    rows = build_strata_rows(
+        [
+            {
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT",
+                "present_corpora": "MT",
+                "term_id": "left",
+                "normalized_term": "left",
+                "center_ref": "Gen 1:1",
+                "center_word": "left",
+                "center_normalized_word": "left",
+                "skip": "5",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+                "letter_path": "1:left@MT:canonical:10;2:left@MT:canonical:20",
+            },
+            {
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT",
+                "present_corpora": "MT",
+                "term_id": "right",
+                "normalized_term": "right",
+                "center_ref": "Gen 1:2",
+                "center_word": "right",
+                "center_normalized_word": "right",
+                "skip": "7",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+                "letter_path": "1:right@MT:canonical:20;2:right@MT:canonical:30",
+            },
+        ]
+    )
+
+    assert {row["cross_skip_pair_at_letter"] for row in rows} == {"yes"}
+    assert rows[0]["cross_skip_pair_at_word"] == "no"
+    assert rows[0]["cross_skip_pair_at_letter_terms"] == "right"
+    assert "cross_skip_pair_at_letter" in rows[0]["extended_strata"]
+
+
+def test_build_strata_rows_adds_cross_skip_pair_within_n_letters() -> None:
+    rows = build_strata_rows(
+        [
+            {
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT",
+                "present_corpora": "MT",
+                "term_id": "left",
+                "normalized_term": "abc",
+                "center_ref": "Gen 1:1",
+                "center_word": "left",
+                "center_normalized_word": "left",
+                "skip": "5",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+                "offset_triplets": "MT:100/105/110",
+            },
+            {
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT",
+                "present_corpora": "MT",
+                "term_id": "right",
+                "normalized_term": "def",
+                "center_ref": "Gen 1:2",
+                "center_word": "right",
+                "center_normalized_word": "right",
+                "skip": "7",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+                "offset_triplets": "MT:113/120/127",
+            },
+        ],
+        cross_skip_letter_distance=5,
+    )
+
+    assert {row["cross_skip_pair_within_N_letters"] for row in rows} == {"yes"}
+    assert rows[0]["cross_skip_pair_within_letter_min_distance"] == "3"
+    assert rows[0]["cross_skip_pair_within_letter_terms"] == "def"
+    assert "cross_skip_pair_within_N_letters" in rows[0]["extended_strata"]
+
+
 def test_build_strata_rows_adds_meaningful_skip_and_gematria_flags() -> None:
     rows = build_strata_rows(
         [
