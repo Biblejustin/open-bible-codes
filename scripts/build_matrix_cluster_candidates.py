@@ -5,12 +5,23 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
+import subprocess
+import time
 from collections import defaultdict
+from collections import Counter
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from pathlib import Path
+from typing import Any
 
+from els import __version__
 from els.matrix import MatrixCell, cell_relation, closest_cell_pair, matrix_cell, validate_row_width
 
+
+DEFAULT_OUT = Path("reports/matrix_clusters/candidates.csv")
+DEFAULT_SUMMARY_OUT = Path("reports/matrix_clusters/summary.csv")
+DEFAULT_MANIFEST_OUT = Path("reports/matrix_clusters/manifest.json")
 
 FIELDNAMES = [
     "row_width",
@@ -38,6 +49,8 @@ FIELDNAMES = [
     "right_center_word",
 ]
 
+SUMMARY_FIELDS = ["bucket", "value", "pairs"]
+
 
 @dataclass(frozen=True)
 class MatrixHit:
@@ -54,6 +67,7 @@ class MatrixHit:
 
 
 def main(argv: list[str] | None = None) -> int:
+    started = time.perf_counter()
     args = build_parser().parse_args(argv)
     hits = read_hits(args.hits, row_width=args.row_width, max_rows=args.max_input_rows)
     rows = matrix_cluster_rows(
@@ -63,8 +77,13 @@ def main(argv: list[str] | None = None) -> int:
         max_pairs=args.max_pairs,
         allow_same_term=args.allow_same_term,
     )
+    summary_rows = summarize_rows(rows)
     write_rows(args.out, rows)
+    write_rows(args.summary_out, summary_rows, fieldnames=SUMMARY_FIELDS)
+    write_manifest(args.manifest_out, args, input_hits=hits, rows=rows, summary_rows=summary_rows, started=started)
     print(args.out)
+    print(args.summary_out)
+    print(args.manifest_out)
     return 0
 
 
@@ -76,7 +95,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--max-pairs", type=int, default=100_000)
     parser.add_argument("--max-input-rows", type=int, default=0)
     parser.add_argument("--allow-same-term", action="store_true")
-    parser.add_argument("--out", type=Path, default=Path("reports/matrix_clusters/candidates.csv"))
+    parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
+    parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
+    parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST_OUT)
     return parser
 
 
@@ -238,12 +259,68 @@ def format_cell(cell: MatrixCell) -> str:
     return f"{cell[0]}:{cell[1]}"
 
 
-def write_rows(path: Path, rows: list[dict[str, object]]) -> None:
+def summarize_rows(rows: list[dict[str, object]]) -> list[dict[str, object]]:
+    relation_counts = Counter(str(row.get("cell_relation", "")) for row in rows)
+    corpus_counts = Counter(str(row.get("corpus_label", "")) for row in rows)
+    distance_counts = Counter(str(row.get("cell_distance", "")) for row in rows)
+    summary_rows: list[dict[str, object]] = []
+    for bucket, counts in (
+        ("cell_relation", relation_counts),
+        ("corpus_label", corpus_counts),
+        ("cell_distance", distance_counts),
+    ):
+        for value, count in sorted(counts.items(), key=lambda item: (-item[1], item[0])):
+            summary_rows.append({"bucket": bucket, "value": value, "pairs": count})
+    return summary_rows
+
+
+def write_rows(path: Path, rows: list[dict[str, object]], *, fieldnames: list[str] | None = None) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=FIELDNAMES)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames or FIELDNAMES)
         writer.writeheader()
         writer.writerows(rows)
+
+
+def write_manifest(
+    path: Path,
+    args: argparse.Namespace,
+    *,
+    input_hits: list[MatrixHit],
+    rows: list[dict[str, object]],
+    summary_rows: list[dict[str, object]],
+    started: float,
+) -> None:
+    payload: dict[str, Any] = {
+        "script": "scripts/build_matrix_cluster_candidates.py",
+        "version": __version__,
+        "created_at": datetime.now(UTC).isoformat(),
+        "elapsed_seconds": round(time.perf_counter() - started, 3),
+        "git_commit": git_commit(),
+        "row_width": args.row_width,
+        "max_cell_distance": args.max_cell_distance,
+        "max_pairs": args.max_pairs,
+        "max_input_rows": args.max_input_rows,
+        "allow_same_term": args.allow_same_term,
+        "input_hit_rows": len(input_hits),
+        "candidate_pairs": len(rows),
+        "summary_rows": len(summary_rows),
+        "inputs": {"hits": [str(path) for path in args.hits]},
+        "outputs": {
+            "out": str(args.out),
+            "summary_out": str(args.summary_out),
+            "manifest_out": str(args.manifest_out),
+        },
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def git_commit() -> str:
+    try:
+        return subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+    except Exception:
+        return ""
 
 
 if __name__ == "__main__":

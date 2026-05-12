@@ -39,7 +39,9 @@ python3 -m scripts.build_matrix_cluster_candidates \
   --hits reports/search_hits.csv \
   --row-width 50 \
   --max-cell-distance 1 \
-  --out reports/matrix_clusters/candidates.csv
+  --out reports/matrix_clusters/candidates.csv \
+  --summary-out reports/matrix_clusters/summary.csv \
+  --manifest-out reports/matrix_clusters/manifest.json
 ```
 
 This reports pairs of different terms whose ELS letter paths touch the same
@@ -78,6 +80,10 @@ The cluster-candidate output has one row per neighboring hit pair:
 - corpus label;
 - left/right hit indexes, term ids, skips, directions, center refs, and center
   words.
+
+The summary output counts pairs by relation, corpus label, and nearest-cell
+distance. The manifest records row width, max distance, input hit count, output
+pair count, and the source hit files used.
 
 Older hit CSVs without center fields are accepted. In that case `center_offset`
 is recomputed from the span and center ref/word fields are filled from the

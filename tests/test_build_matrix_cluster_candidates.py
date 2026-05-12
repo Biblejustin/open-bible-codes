@@ -2,9 +2,11 @@ import csv
 from pathlib import Path
 
 from scripts.build_matrix_cluster_candidates import (
+    main,
     matrix_cluster_rows,
     matrix_hit_from_row,
     read_hits,
+    summarize_rows,
 )
 
 
@@ -84,3 +86,55 @@ def test_read_hits_and_main_shape(tmp_path: Path) -> None:
 
     assert len(rows) == 1
     assert rows[0]["corpus_label"] == "TINY"
+
+
+def test_summarize_rows_counts_relations_corpora_and_distances() -> None:
+    left = matrix_hit_from_row(hit_row(term_id="left", start_offset=0, skip=3), hit_index=1, row_width=3)
+    right = matrix_hit_from_row(hit_row(term_id="right", start_offset=1, skip=3), hit_index=2, row_width=3)
+    rows = matrix_cluster_rows(
+        [hit for hit in (left, right) if hit is not None],
+        row_width=3,
+        max_cell_distance=1,
+    )
+
+    summary = summarize_rows(rows)
+
+    assert {"bucket": "cell_relation", "value": "orthogonal", "pairs": 1} in summary
+    assert {"bucket": "corpus_label", "value": "TINY", "pairs": 1} in summary
+    assert {"bucket": "cell_distance", "value": "1", "pairs": 1} in summary
+
+
+def test_main_writes_candidates_summary_and_manifest(tmp_path: Path) -> None:
+    hits = tmp_path / "hits.csv"
+    out = tmp_path / "clusters.csv"
+    summary = tmp_path / "summary.csv"
+    manifest = tmp_path / "manifest.json"
+    with hits.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(hit_row(term_id="x", start_offset=0, skip=3)))
+        writer.writeheader()
+        writer.writerow(hit_row(term_id="left", start_offset=0, skip=3))
+        writer.writerow(hit_row(term_id="right", start_offset=1, skip=3))
+
+    assert (
+        main(
+            [
+                "--hits",
+                str(hits),
+                "--row-width",
+                "3",
+                "--max-cell-distance",
+                "1",
+                "--out",
+                str(out),
+                "--summary-out",
+                str(summary),
+                "--manifest-out",
+                str(manifest),
+            ]
+        )
+        == 0
+    )
+
+    assert "orthogonal" in out.read_text(encoding="utf-8")
+    assert "cell_relation" in summary.read_text(encoding="utf-8")
+    assert '"candidate_pairs": 1' in manifest.read_text(encoding="utf-8")
