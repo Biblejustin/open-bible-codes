@@ -20,12 +20,16 @@ from els.gematria import standard_gematria_value
 from els.letter_stats import BigramProfile, BigramSurprise, LetterFrequencyAnomaly, LetterFrequencyProfile
 from els.match_strata import (
     BoundaryIndex,
+    BOOK_ORDER,
     boundary_strata_for_offsets,
     build_boundary_index,
+    canonical_ref_sort_key,
     canonical_first_keys,
     center_position_strata_for_ref,
     direction_counts_by_key,
     direction_strata_by_key,
+    normalize_book,
+    parse_ref,
     parse_skip_values,
     row_identity,
 )
@@ -38,6 +42,9 @@ DEFAULT_SUMMARY_OUT = Path("reports/match_strata_index/strata_summary.csv")
 DEFAULT_MARKDOWN = Path("docs/MATCH_STRATA_INDEX.md")
 DEFAULT_MANIFEST = Path("reports/match_strata_index/manifest.json")
 DEFAULT_MEANINGFUL_CONSTANTS = Path("terms/meaningful_constants.csv")
+DEFAULT_THEMATIC_CHAPTERS = Path("data/study/mappings/thematic_chapters.csv")
+DEFAULT_AUTHOR_BOOK_MAPPING = Path("data/study/mappings/author_book_mapping.csv")
+DEFAULT_PROTAGONIST_NARRATIVE_MAPPING = Path("data/study/mappings/protagonist_narrative_mapping.csv")
 
 GROUP_FIELDS = ("source_family", "source_queue", "corpus", "present_corpora", "term_id", "normalized_term")
 DEFAULT_CORPUS_CONFIGS = (
@@ -98,6 +105,15 @@ FIELDNAMES = [
     "direction_imbalance_score",
     "canonical_first_centered_occurrence",
     "canonical_first_group",
+    "canonical_first_in_thematic_chapter",
+    "thematic_chapter_mappings",
+    "thematic_chapter_evidence",
+    "author_in_own_book",
+    "author_in_own_book_mappings",
+    "author_in_own_book_evidence",
+    "protagonist_in_own_narrative",
+    "protagonist_in_own_narrative_mappings",
+    "protagonist_in_own_narrative_evidence",
     "boundary_strata",
     "boundary_corpora",
     "boundary_evidence",
@@ -129,12 +145,18 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     input_rows = read_rows(args.occurrences)
     meaningful_constants = read_meaningful_constants(args.meaningful_constants)
+    thematic_mappings = read_mapping_rows(args.thematic_chapters)
+    author_mappings = read_mapping_rows(args.author_book_mapping)
+    protagonist_mappings = read_mapping_rows(args.protagonist_narrative_mapping)
     corpus_configs = corpus_config_map(args.corpus_config)
     boundary_indexes, bigram_profiles, letter_frequency_profiles = load_corpus_metadata(corpus_configs)
     rows = build_strata_rows(
         input_rows,
         boundary_indexes=boundary_indexes,
         meaningful_constants=meaningful_constants,
+        thematic_mappings=thematic_mappings,
+        author_mappings=author_mappings,
+        protagonist_mappings=protagonist_mappings,
         bigram_profiles=bigram_profiles,
         letter_frequency_profiles=letter_frequency_profiles,
     )
@@ -158,6 +180,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MARKDOWN)
     parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--meaningful-constants", type=Path, default=DEFAULT_MEANINGFUL_CONSTANTS)
+    parser.add_argument("--thematic-chapters", type=Path, default=DEFAULT_THEMATIC_CHAPTERS)
+    parser.add_argument("--author-book-mapping", type=Path, default=DEFAULT_AUTHOR_BOOK_MAPPING)
+    parser.add_argument("--protagonist-narrative-mapping", type=Path, default=DEFAULT_PROTAGONIST_NARRATIVE_MAPPING)
     parser.add_argument("--markdown-row-limit", type=int, default=80)
     parser.add_argument("--cross-skip-letter-distance", type=int, default=10)
     parser.add_argument(
@@ -174,6 +199,9 @@ def build_strata_rows(
     *,
     boundary_indexes: dict[str, BoundaryIndex] | None = None,
     meaningful_constants: dict[int, str] | None = None,
+    thematic_mappings: list[dict[str, str]] | None = None,
+    author_mappings: list[dict[str, str]] | None = None,
+    protagonist_mappings: list[dict[str, str]] | None = None,
     bigram_profiles: dict[str, BigramProfile] | None = None,
     letter_frequency_profiles: dict[str, LetterFrequencyProfile] | None = None,
     cross_skip_letter_distance: int = 10,
@@ -183,6 +211,9 @@ def build_strata_rows(
     canonical_first = canonical_first_keys(input_rows, group_fields=GROUP_FIELDS)
     boundary_indexes = boundary_indexes or {}
     meaningful_constants = meaningful_constants or {}
+    thematic_mappings = thematic_mappings or []
+    author_mappings = author_mappings or []
+    protagonist_mappings = protagonist_mappings or []
     bigram_profiles = bigram_profiles or {}
     letter_frequency_profiles = letter_frequency_profiles or {}
     cross_skip = cross_skip_annotations(input_rows, within_letter_distance=cross_skip_letter_distance)
@@ -195,6 +226,19 @@ def build_strata_rows(
         center_position_strata, center_position_corpora, center_position_evidence = center_position_annotations(
             row,
             boundary_indexes,
+        )
+        thematic_matches = thematic_chapter_matches(row, thematic_mappings) if is_first else []
+        author_matches = scoped_mapping_matches(
+            row,
+            author_mappings,
+            term_field="author_term_id",
+            name_field="author_name",
+        )
+        protagonist_matches = scoped_mapping_matches(
+            row,
+            protagonist_mappings,
+            term_field="protagonist_term_id",
+            name_field="protagonist_name",
         )
         cross = cross_skip.get(row_identity(row), {})
         skip_values = sorted({abs(value) for value in parse_skip_values(row.get("skip", ""))})
@@ -221,6 +265,12 @@ def build_strata_rows(
         ]
         if is_first:
             strata.append("canonical_first_occurrence")
+        if thematic_matches:
+            strata.append("canonical_first_in_thematic_chapter")
+        if author_matches:
+            strata.append("author_in_own_book")
+        if protagonist_matches:
+            strata.append("protagonist_in_own_narrative")
         if cross.get("word_pair_count"):
             strata.append("cross_skip_pair_at_word")
         if cross.get("letter_pair_count"):
@@ -288,6 +338,19 @@ def build_strata_rows(
                 "direction_imbalance_score": direction_imbalance_score(counts.forward, counts.backward),
                 "canonical_first_centered_occurrence": "yes" if is_first else "no",
                 "canonical_first_group": "|".join(key),
+                "canonical_first_in_thematic_chapter": "yes" if thematic_matches else "no",
+                "thematic_chapter_mappings": ";".join(match["mapping_id"] for match in thematic_matches),
+                "thematic_chapter_evidence": ";".join(match["evidence"] for match in thematic_matches),
+                "author_in_own_book": "yes" if author_matches else "no",
+                "author_in_own_book_mappings": ";".join(match["mapping_id"] for match in author_matches),
+                "author_in_own_book_evidence": ";".join(match["evidence"] for match in author_matches),
+                "protagonist_in_own_narrative": "yes" if protagonist_matches else "no",
+                "protagonist_in_own_narrative_mappings": ";".join(
+                    match["mapping_id"] for match in protagonist_matches
+                ),
+                "protagonist_in_own_narrative_evidence": ";".join(
+                    match["evidence"] for match in protagonist_matches
+                ),
                 "boundary_strata": ";".join(boundary_strata),
                 "boundary_corpora": ";".join(boundary_corpora),
                 "boundary_evidence": ";".join(boundary_evidence),
@@ -569,6 +632,78 @@ def letter_frequency_for_row(
     return profile.classify_term(row.get("normalized_term", ""))
 
 
+def thematic_chapter_matches(row: dict[str, str], mappings: list[dict[str, str]]) -> list[dict[str, str]]:
+    center = parse_ref(row.get("center_ref", ""))
+    if center is None:
+        return []
+    matches: list[dict[str, str]] = []
+    for mapping in mappings:
+        if mapping.get("term_id", "").strip() != row.get("term_id", "").strip():
+            continue
+        book = normalize_book(mapping.get("book", ""))
+        if book != center.book:
+            continue
+        try:
+            chapter_start = int(mapping.get("chapter_start", ""))
+            chapter_end = int(mapping.get("chapter_end", ""))
+        except ValueError:
+            continue
+        if chapter_start <= center.chapter <= chapter_end:
+            matches.append(
+                {
+                    "mapping_id": mapping.get("mapping_id", ""),
+                    "evidence": (
+                        f"{mapping.get('mapping_id', '')}:"
+                        f"{book} {chapter_start}-{chapter_end}"
+                    ),
+                }
+            )
+    return matches
+
+
+def scoped_mapping_matches(
+    row: dict[str, str],
+    mappings: list[dict[str, str]],
+    *,
+    term_field: str,
+    name_field: str,
+) -> list[dict[str, str]]:
+    center = parse_ref(row.get("center_ref", ""))
+    if center is None:
+        return []
+    matches: list[dict[str, str]] = []
+    for mapping in mappings:
+        if mapping.get(term_field, "").strip() != row.get("term_id", "").strip():
+            continue
+        if not ref_inside_mapping_scope(center, mapping):
+            continue
+        matches.append(
+            {
+                "mapping_id": mapping.get("mapping_id", ""),
+                "evidence": (
+                    f"{mapping.get('mapping_id', '')}:"
+                    f"{mapping.get(name_field, '')} "
+                    f"{mapping.get('scope_start_ref', '')}-{mapping.get('scope_end_ref', '')}"
+                ),
+            }
+        )
+    return matches
+
+
+def ref_inside_mapping_scope(center: Any, mapping: dict[str, str]) -> bool:
+    book = normalize_book(mapping.get("book", ""))
+    if book and book != center.book:
+        return False
+    start = parse_ref(mapping.get("scope_start_ref", ""))
+    end = parse_ref(mapping.get("scope_end_ref", ""))
+    if start is None or end is None:
+        return bool(book and book == center.book)
+    center_key = (BOOK_ORDER.get(center.book, 999999), center.chapter, center.verse)
+    start_key = canonical_ref_sort_key(mapping.get("scope_start_ref", ""))[:3]
+    end_key = canonical_ref_sort_key(mapping.get("scope_end_ref", ""))[:3]
+    return start_key <= center_key <= end_key
+
+
 def write_markdown(
     path: Path,
     rows: list[dict[str, object]],
@@ -593,6 +728,7 @@ def write_markdown(
         "",
         f"- annotated occurrence rows: {len(rows):,}",
         "- materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, available `boundary_*` endpoint strata, and cross-skip pair strata.",
+        "- mapping-dependent strata use locked CSVs under `data/study/mappings/` and stay blank until those maps are populated.",
         "- meaningful skip strata use the locked constants file and standard Hebrew/Greek gematria only as review flags.",
         "- bigram-surprise strata compare the hidden term's adjacent letter pairs to the matched corpus text.",
         "- letter-frequency anomaly strata compare the hidden term's individual letters to the matched corpus text.",
@@ -678,6 +814,29 @@ def write_markdown(
             lines.append(
                 f"| ... | ... | ... | ... | ... | ... | {len(cross_skip_rows) - args.markdown_row_limit:,} more cross-skip rows in CSV |"
             )
+    mapping_rows = [
+        row
+        for row in rows
+        if row.get("canonical_first_in_thematic_chapter") == "yes"
+        or row.get("author_in_own_book") == "yes"
+        or row.get("protagonist_in_own_narrative") == "yes"
+    ]
+    if mapping_rows:
+        lines.extend(
+            [
+                "",
+                "## Mapping-Dependent Rows",
+                "",
+                "| Rank | Term | Center | Thematic first | Author scope | Protagonist scope | Source |",
+                "| ---: | --- | --- | --- | --- | --- | --- |",
+            ]
+        )
+        for row in mapping_rows[: args.markdown_row_limit]:
+            lines.append(mapping_markdown_row(row))
+        if len(mapping_rows) > args.markdown_row_limit:
+            lines.append(
+                f"| ... | ... | ... | ... | ... | ... | {len(mapping_rows) - args.markdown_row_limit:,} more mapping rows in CSV |"
+            )
     meaningful_rows = [
         row
         for row in rows
@@ -747,6 +906,7 @@ def write_markdown(
             "- `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.",
             "- `cross_skip_pair_at_letter` means two different terms at different skips share at least one retained letter-path position.",
             "- `cross_skip_pair_within_N_letters` means two different terms at different skips have endpoints within the configured letter distance.",
+            "- `canonical_first_in_thematic_chapter`, `author_in_own_book`, and `protagonist_in_own_narrative` are locked-mapping annotations only; empty mapping files mean no rows are flagged.",
             "- Meaningful-skip and gematria-skip strata are metadata flags; they do not change the search space or promote claim status.",
             "- Bigram-surprise strata are corpus-local review aids, not claim promotion rules; missing adjacent surface bigrams count as rare.",
             "- Letter-frequency anomaly strata are corpus-local review aids; missing letters count as rare.",
@@ -832,6 +992,18 @@ def meaningful_skip_markdown_row(row: dict[str, object]) -> str:
     )
 
 
+def mapping_markdown_row(row: dict[str, object]) -> str:
+    term = display_term(str(row.get("normalized_term", "")), english=str(row.get("concept", "")))
+    center = f"{row.get('center_ref', '')} {display_term(str(row.get('center_word', '')))}"
+    return (
+        f"| {row.get('occurrence_rank', '')} | {term} | {md_cell(center)} | "
+        f"{md_cell(row.get('thematic_chapter_evidence', ''))} | "
+        f"{md_cell(row.get('author_in_own_book_evidence', ''))} | "
+        f"{md_cell(row.get('protagonist_in_own_narrative_evidence', ''))} | "
+        f"`{row.get('source_family', '')}` |"
+    )
+
+
 def bigram_markdown_row(row: dict[str, object]) -> str:
     term = display_term(str(row.get("normalized_term", "")), english=str(row.get("concept", "")))
     center = f"{row.get('center_ref', '')} {display_term(str(row.get('center_word', '')))}"
@@ -890,6 +1062,9 @@ def write_manifest(
         "inputs": {
             "occurrences": str(args.occurrences),
             "meaningful_constants": str(args.meaningful_constants),
+            "thematic_chapters": str(args.thematic_chapters),
+            "author_book_mapping": str(args.author_book_mapping),
+            "protagonist_narrative_mapping": str(args.protagonist_narrative_mapping),
         },
         "outputs": {
             "out": str(args.out),
@@ -914,6 +1089,17 @@ def read_meaningful_constants(path: Path) -> dict[int, str]:
                 continue
             constants[value] = row.get("label", str(value)).strip() or str(value)
     return constants
+
+
+def read_mapping_rows(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    with path.open(newline="", encoding="utf-8") as handle:
+        return [
+            {key: (value or "").strip() for key, value in row.items()}
+            for row in csv.DictReader(handle)
+            if any((value or "").strip() for value in row.values())
+        ]
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:
@@ -1039,6 +1225,9 @@ def reproduce_command(args: argparse.Namespace) -> str:
         "python3 -m scripts.build_match_strata_index "
         f"--occurrences {args.occurrences} "
         f"--meaningful-constants {args.meaningful_constants} "
+        f"--thematic-chapters {args.thematic_chapters} "
+        f"--author-book-mapping {args.author_book_mapping} "
+        f"--protagonist-narrative-mapping {args.protagonist_narrative_mapping} "
         f"--out {args.out} "
         f"--summary-out {args.summary_out} "
         f"--markdown-out {args.markdown_out} "

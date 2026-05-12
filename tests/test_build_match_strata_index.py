@@ -241,6 +241,85 @@ def test_build_strata_rows_adds_cross_skip_pair_within_n_letters() -> None:
     assert "cross_skip_pair_within_N_letters" in rows[0]["extended_strata"]
 
 
+def test_build_strata_rows_adds_mapping_dependent_flags() -> None:
+    rows = build_strata_rows(
+        [
+            {
+                "occurrence_rank": "1",
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT",
+                "present_corpora": "MT",
+                "term_id": "isaiah_h",
+                "concept": "Isaiah",
+                "category": "prophet",
+                "normalized_term": "ישעיהו",
+                "center_ref": "Isa 53:5",
+                "center_word": "wounded",
+                "center_normalized_word": "wounded",
+                "skip": "7",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+            },
+            {
+                "occurrence_rank": "2",
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT",
+                "present_corpora": "MT",
+                "term_id": "moses_h",
+                "concept": "Moses",
+                "category": "protagonist",
+                "normalized_term": "משה",
+                "center_ref": "Exod 12:1",
+                "center_word": "passover",
+                "center_normalized_word": "passover",
+                "skip": "9",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+            },
+        ],
+        thematic_mappings=[
+            {
+                "mapping_id": "isaiah_servant",
+                "term_id": "isaiah_h",
+                "book": "Isa",
+                "chapter_start": "53",
+                "chapter_end": "53",
+            }
+        ],
+        author_mappings=[
+            {
+                "mapping_id": "isaiah_author",
+                "author_term_id": "isaiah_h",
+                "author_name": "Isaiah",
+                "book": "Isa",
+                "scope_start_ref": "Isa 1:1",
+                "scope_end_ref": "Isa 66:24",
+            }
+        ],
+        protagonist_mappings=[
+            {
+                "mapping_id": "moses_exodus",
+                "protagonist_term_id": "moses_h",
+                "protagonist_name": "Moses",
+                "book": "Exod",
+                "scope_start_ref": "Exod 1:1",
+                "scope_end_ref": "Exod 40:38",
+            }
+        ],
+    )
+
+    by_term = {row["term_id"]: row for row in rows}
+    assert by_term["isaiah_h"]["canonical_first_in_thematic_chapter"] == "yes"
+    assert by_term["isaiah_h"]["author_in_own_book"] == "yes"
+    assert by_term["isaiah_h"]["protagonist_in_own_narrative"] == "no"
+    assert "canonical_first_in_thematic_chapter" in by_term["isaiah_h"]["extended_strata"]
+    assert "author_in_own_book" in by_term["isaiah_h"]["extended_strata"]
+    assert by_term["moses_h"]["protagonist_in_own_narrative"] == "yes"
+    assert "protagonist_in_own_narrative" in by_term["moses_h"]["extended_strata"]
+
+
 def test_build_strata_rows_adds_meaningful_skip_and_gematria_flags() -> None:
     rows = build_strata_rows(
         [

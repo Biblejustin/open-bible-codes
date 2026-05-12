@@ -23,6 +23,9 @@ support. Status labels are engineering status only, not claim status.
 | `cross_skip_pair_at_letter` | implemented when retained/reconstructed letter paths share a letter position | `scripts/build_match_strata_index.py` |
 | `cross_skip_pair_within_N_letters` | implemented for endpoint proximity under a configured distance | `scripts/build_match_strata_index.py` |
 | `cross_skip_summary` | implemented as a distribution and candidate-row review export | `scripts/build_cross_skip_summary.py` |
+| `canonical_first_in_thematic_chapter` | implemented against locked term-to-chapter mappings | `data/study/mappings/thematic_chapters.csv` |
+| `author_in_own_book` | implemented against locked author-to-book mappings | `data/study/mappings/author_book_mapping.csv` |
+| `protagonist_in_own_narrative` | implemented against locked protagonist-range mappings | `data/study/mappings/protagonist_narrative_mapping.csv` |
 | `skip_equals_meaningful_constant` | implemented against locked constants | `terms/meaningful_constants.csv` |
 | `skip_equals_term_gematria` | implemented for standard Hebrew/Greek values | `scripts/build_match_strata_index.py` |
 | `skip_equals_center_word_gematria` | implemented for standard Hebrew/Greek values | `scripts/build_match_strata_index.py` |
@@ -65,9 +68,6 @@ warnings and capped-row flags.
 
 | Stratum | Data dependency |
 | --- | --- |
-| `canonical_first_in_thematic_chapter` | locked term-to-thematic-chapter mapping |
-| `author_in_own_book` | locked author-to-book mapping |
-| `protagonist_in_own_narrative` | locked protagonist range mapping |
 | `nt_quotation_anchor` / `nt_quotation_span` | OT-in-NT quotation catalog with anchors |
 | `lxx_vs_mt_semantic_divergence` | locked MT/LXX divergence catalog |
 | `root_only_match` | locked Hebrew root policy template |
