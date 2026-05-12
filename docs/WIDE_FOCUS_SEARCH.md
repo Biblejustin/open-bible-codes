@@ -7,7 +7,7 @@ Broader ELS count sweep across every declared term list.
 - Skip range: `2..250`
 - Direction: `both`
 - Term sets: 2
-- Rows: 3075
+- Rows: 3080
 - Manifest: `reports/wide_focus_search/broad_search.manifest.json`
 
 ## Main Read
@@ -32,15 +32,15 @@ Broader ELS count sweep across every declared term list.
 | modern_names_dates | UHB | 96 | 30 | 902382 | `united_nations_acronym_h` `אומ` (wm; English: United Nations) (420971) |
 | modern_names_dates | UXLC | 96 | 30 | 902509 | `united_nations_acronym_h` `אומ` (wm; English: United Nations) (421106) |
 | prophetic_terms | BYZ_NT | 229 | 134 | 133042 | `ur_g` `ουρ` (our; English: Ur) (66457) |
-| prophetic_terms | EBIBLE_WLC | 221 | 70 | 3588930 | `greece_h` `יונ` (ywn; English: Greece) (341669) |
+| prophetic_terms | EBIBLE_WLC | 222 | 70 | 3596530 | `greece_h` `יונ` (ywn; English: Greece) (341669) |
 | prophetic_terms | LXX | 229 | 117 | 574406 | `ur_g` `ουρ` (our; English: Ur) (294528) |
-| prophetic_terms | MAM | 221 | 71 | 3603332 | `greece_h` `יונ` (ywn; English: Greece) (343126) |
-| prophetic_terms | MT_WLC | 221 | 70 | 3589114 | `greece_h` `יונ` (ywn; English: Greece) (341633) |
+| prophetic_terms | MAM | 222 | 71 | 3611016 | `greece_h` `יונ` (ywn; English: Greece) (343126) |
+| prophetic_terms | MT_WLC | 222 | 70 | 3596714 | `greece_h` `יונ` (ywn; English: Greece) (341633) |
 | prophetic_terms | SBLGNT | 229 | 137 | 130868 | `ur_g` `ουρ` (our; English: Ur) (65298) |
 | prophetic_terms | TCG_NT | 229 | 135 | 133435 | `ur_g` `ουρ` (our; English: Ur) (67054) |
 | prophetic_terms | TR_NT | 229 | 133 | 134453 | `ur_g` `ουρ` (our; English: Ur) (67379) |
-| prophetic_terms | UHB | 221 | 70 | 3583659 | `greece_h` `יונ` (ywn; English: Greece) (341626) |
-| prophetic_terms | UXLC | 221 | 70 | 3589079 | `greece_h` `יונ` (ywn; English: Greece) (341645) |
+| prophetic_terms | UHB | 222 | 70 | 3591196 | `greece_h` `יונ` (ywn; English: Greece) (341626) |
+| prophetic_terms | UXLC | 222 | 70 | 3596679 | `greece_h` `יונ` (ywn; English: Greece) (341645) |
 
 ## Top Length 4+ Counts
 
