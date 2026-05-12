@@ -6,6 +6,7 @@ from pathlib import Path
 from els.cli import hit_from_row, hit_with_corpus_center, main
 from els.corpus import Corpus, VerseSpan
 from els.matrix import (
+    cell_relation,
     chebyshev_cell_distance,
     closest_cell_pair,
     hit_matrix_cells,
@@ -79,6 +80,10 @@ class MatrixTests(unittest.TestCase):
         self.assertEqual(matrix_cell(12, 5), (2, 2))
         self.assertEqual(hit_matrix_cells(hit), ((0, 2), (1, 2), (2, 2)))
         self.assertEqual(chebyshev_cell_distance((1, 2), (3, 4)), 2)
+        self.assertEqual(cell_relation((1, 2), (1, 2)), "same_cell")
+        self.assertEqual(cell_relation((1, 2), (1, 4)), "orthogonal")
+        self.assertEqual(cell_relation((1, 2), (3, 4)), "diagonal")
+        self.assertEqual(cell_relation((1, 2), (2, 4)), "neighborhood")
         self.assertEqual(
             closest_cell_pair(((0, 0), (5, 5)), ((2, 1), (6, 6))),
             (1, (5, 5), (6, 6)),

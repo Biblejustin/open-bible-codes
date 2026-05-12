@@ -9,13 +9,14 @@ from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 
-from els.matrix import MatrixCell, closest_cell_pair, matrix_cell, validate_row_width
+from els.matrix import MatrixCell, cell_relation, closest_cell_pair, matrix_cell, validate_row_width
 
 
 FIELDNAMES = [
     "row_width",
     "max_cell_distance",
     "cell_distance",
+    "cell_relation",
     "left_cell",
     "right_cell",
     "corpus_label",
@@ -210,6 +211,7 @@ def matrix_cluster_row(
         "row_width": row_width,
         "max_cell_distance": max_cell_distance,
         "cell_distance": cell_distance,
+        "cell_relation": cell_relation(left_cell, right_cell),
         "left_cell": format_cell(left_cell),
         "right_cell": format_cell(right_cell),
         "corpus_label": left.corpus_label,

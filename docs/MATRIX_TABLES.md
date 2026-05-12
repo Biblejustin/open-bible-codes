@@ -72,7 +72,8 @@ The summary output has one row per hit:
 The cluster-candidate output has one row per neighboring hit pair:
 
 - row width and maximum allowed cell distance;
-- observed nearest cell distance;
+- observed nearest cell distance and relation
+  (`same_cell`, `orthogonal`, `diagonal`, or `neighborhood`);
 - nearest left/right cells;
 - corpus label;
 - left/right hit indexes, term ids, skips, directions, center refs, and center

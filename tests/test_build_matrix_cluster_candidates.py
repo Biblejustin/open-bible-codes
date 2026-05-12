@@ -52,6 +52,7 @@ def test_matrix_cluster_rows_finds_neighboring_terms() -> None:
     assert rows[0]["left_term_id"] == "left"
     assert rows[0]["right_term_id"] == "right"
     assert rows[0]["cell_distance"] == 1
+    assert rows[0]["cell_relation"] == "orthogonal"
     assert rows[0]["left_cell"] == "0:0"
     assert rows[0]["right_cell"] == "0:1"
 

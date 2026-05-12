@@ -76,6 +76,18 @@ def chebyshev_cell_distance(left: MatrixCell, right: MatrixCell) -> int:
     return max(abs(left[0] - right[0]), abs(left[1] - right[1]))
 
 
+def cell_relation(left: MatrixCell, right: MatrixCell) -> str:
+    row_delta = abs(left[0] - right[0])
+    col_delta = abs(left[1] - right[1])
+    if row_delta == 0 and col_delta == 0:
+        return "same_cell"
+    if row_delta == 0 or col_delta == 0:
+        return "orthogonal"
+    if row_delta == col_delta:
+        return "diagonal"
+    return "neighborhood"
+
+
 def closest_cell_pair(
     left_cells: Iterable[MatrixCell],
     right_cells: Iterable[MatrixCell],
