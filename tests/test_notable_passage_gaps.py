@@ -7,6 +7,8 @@ from scripts.analyze_notable_passage_gaps import (
     classify_gap,
     parse_ref,
     passage_span,
+    ref_number,
+    verse_key_or_none,
     write_markdown,
 )
 
@@ -40,6 +42,15 @@ def test_parse_ref_normalizes_book_alias() -> None:
     assert parsed.book == "Lev"
     assert parsed.chapter == 24
     assert parsed.verse == 23
+
+
+def test_ref_number_accepts_lxx_suffixes() -> None:
+    assert ref_number("14α") == 14
+
+
+def test_verse_key_or_none_skips_unmapped_apocrypha_book() -> None:
+    verse = VerseSpan("test", "TOB 1:1", "TOB", "1", "1", "text", 0, 4, 4)
+    assert verse_key_or_none(verse) is None
 
 
 def test_passage_span_finds_requested_verses() -> None:
@@ -91,6 +102,7 @@ def test_write_markdown_includes_declared_gap_target_section(tmp_path) -> None:
         min_skip=2,
         max_skip=100,
         direction="both",
+        jobs=1,
         min_term_length=3,
         common_elsewhere_threshold=10,
         detail_out="detail.csv",

@@ -56,3 +56,25 @@ npg_day_yhwh_h,Day Of YHWH,prophetic,hebrew,יום יהוה,Prophetic day-of-YHW
 npg_pierced_h,Pierced,prophetic,hebrew,דקר,Zechariah 12 surface-context term
 npg_messenger_h,Messenger,prophetic,hebrew,מלאך,Malachi 3 surface-context term
 npg_lord_h,Lord,divine_names,hebrew,אדון,Lord/master term
+npg_gog_g,Gog,prophetic,greek,γωγ,Ezekiel/Revelation motif for Greek notable-passage gap checks
+npg_magog_g,Magog,prophetic,greek,μαγωγ,Ezekiel/Revelation motif for Greek notable-passage gap checks
+npg_sabbath_g,Sabbath,leviticus_24_surface,greek,σαββατον,Leviticus 24 surface-context term in Greek
+npg_lampstand_g,Lampstand,leviticus_24_surface,greek,λυχνια,Leviticus 24 lampstand context in Greek
+npg_bread_g,Bread,leviticus_24_surface,greek,αρτος,Leviticus 24 bread context in Greek
+npg_stone_g,Stone,leviticus_24_surface,greek,λιθος,Leviticus 24 stoning context in Greek
+npg_blasphemy_g,Blasphemy,leviticus_24_surface,greek,βλασφημια,Leviticus 24 blasphemy context in Greek
+npg_name_g,Name,leviticus_24_surface,greek,ονομα,Leviticus 24 divine-name context in Greek
+npg_judgment_g,Judgment,leviticus_24_surface,greek,κρισις,Judgment/legal context in Greek
+npg_lord_g,Lord,divine_names,greek,κυριος,Lord term in Greek
+npg_god_g,God,divine_names,greek,θεος,God term in Greek
+npg_gog_e,Gog,prophetic,english,Gog,Ezekiel/Revelation motif for English notable-passage gap checks
+npg_magog_e,Magog,prophetic,english,Magog,Ezekiel/Revelation motif for English notable-passage gap checks
+npg_sabbath_e,Sabbath,leviticus_24_surface,english,Sabbath,Leviticus 24 surface-context term in English
+npg_lampstand_e,Lampstand,leviticus_24_surface,english,Candlestick,Leviticus 24 lampstand/candlestick context in KJV English
+npg_bread_e,Bread,leviticus_24_surface,english,Bread,Leviticus 24 showbread context in English
+npg_stone_e,Stone,leviticus_24_surface,english,Stone,Leviticus 24 stoning context in English
+npg_blasphemy_e,Blasphemy,leviticus_24_surface,english,Blasphemy,Leviticus 24 blasphemy context in English
+npg_name_e,Name,leviticus_24_surface,english,Name,Leviticus 24 divine-name context in English
+npg_judgment_e,Judgment,leviticus_24_surface,english,Judgment,Judgment/legal context in English
+npg_lord_e,Lord,divine_names,english,Lord,Lord term in English
+npg_god_e,God,divine_names,english,God,God term in English

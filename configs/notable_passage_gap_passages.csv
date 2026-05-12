@@ -6,6 +6,8 @@ exod20_decalogue,Exodus 20 Decalogue,law,hebrew,mt_family,Exod 20:1,Exod 20:26,T
 lev16_day_of_atonement,Leviticus 16 Day Of Atonement,atonement,hebrew,mt_family,Lev 16:1,Lev 16:34,Day of Atonement passage; useful for atonement priestly and sanctuary terms.
 lev23_festivals,Leviticus 23 Festivals,calendar,hebrew,mt_family,Lev 23:1,Lev 23:44,Feast calendar chapter; useful for Sabbath Passover festival and appointed-time terms.
 lev24_blasphemy_law,Leviticus 24 Blasphemy Law,notable_passage_gap,hebrew,mt_family,Lev 24:1,Lev 24:23,Initial notable-passage gap target requested for tracking terms absent or underrepresented inside a significant passage.
+lev24_blasphemy_law_lxx,Leviticus 24 Blasphemy Law LXX,notable_passage_gap,greek,lxx_family,LEV 24:1,LEV 24:23,Greek LXX counterpart to the requested Leviticus 24 gap target.
+lev24_blasphemy_law_kjva,Leviticus 24 Blasphemy Law KJVA,notable_passage_gap,english,kjva_family,LEV 24:1,LEV 24:23,English KJV Apocrypha stream counterpart to the requested Leviticus 24 gap target.
 num6_priestly_blessing,Numbers 6 Priestly Blessing,blessing,hebrew,mt_family,Num 6:22,Num 6:27,Priestly blessing; useful for name blessing peace and face/presence terms.
 deut6_shema,Deuteronomy 6 Shema,covenant_love,hebrew,mt_family,Deut 6:4,Deut 6:9,Shema and love command; useful for unity love Torah and heart terms.
 sam2_7_davidic_covenant,2 Samuel 7 Davidic Covenant,davidic_covenant,hebrew,mt_family,2Sam 7:1,2Sam 7:29,Davidic covenant chapter; useful for David king kingdom house throne and messianic terms.

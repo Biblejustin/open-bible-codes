@@ -6,10 +6,24 @@ progress_interval_seconds = 15
 
 [[steps]]
 id = "lev24_gap_scan"
-description = "Run the initial Leviticus 24 notable-passage gap scan over Hebrew MT-family corpora."
+description = "Run the Leviticus 24 notable-passage gap scan over Hebrew MT-family, LXX, and KJVA corpora."
 argv = [
   "-m",
   "scripts.analyze_notable_passage_gaps",
+  "--corpus",
+  "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus",
+  "UXLC=configs/example_uxlc.toml",
+  "--corpus",
+  "EBIBLE_WLC=configs/example_ebible_hebwlc.toml",
+  "--corpus",
+  "MAM=configs/example_mam.toml",
+  "--corpus",
+  "UHB=configs/example_uhb.toml",
+  "--corpus",
+  "LXX=configs/example_ebible_grclxx.toml",
+  "--corpus",
+  "KJVA=configs/example_ebible_engkjv_apocrypha.toml",
   "--passages",
   "configs/notable_passage_gap_passages.csv",
   "--terms",
@@ -20,6 +34,8 @@ argv = [
   "500",
   "--direction",
   "both",
+  "--jobs",
+  "0",
   "--min-term-length",
   "3",
   "--common-elsewhere-threshold",
@@ -42,6 +58,8 @@ inputs = [
   "configs/example_ebible_hebwlc.toml",
   "configs/example_mam.toml",
   "configs/example_uhb.toml",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_engkjv_apocrypha.toml",
   "els/corpus.py",
   "els/search.py",
   "els/term_display.py",

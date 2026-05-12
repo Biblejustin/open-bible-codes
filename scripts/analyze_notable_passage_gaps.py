@@ -7,6 +7,7 @@ import argparse
 import csv
 import json
 import math
+import re
 import time
 from collections import defaultdict
 from dataclasses import dataclass
@@ -125,17 +126,31 @@ class PassageSpan:
     norm_length: int
 
 
+def ref_number(value: str) -> int:
+    match = re.match(r"\d+", value.strip())
+    if match is None:
+        raise ValueError(f"unsupported ref number: {value}")
+    return int(match.group(0))
+
+
 def parse_ref(value: str) -> RefKey:
     book_and_rest = value.strip().rsplit(" ", 1)
     if len(book_and_rest) != 2 or ":" not in book_and_rest[1]:
         raise ValueError(f"unsupported ref: {value}")
     book, chapter_verse = book_and_rest
     chapter, verse = chapter_verse.split(":", 1)
-    return RefKey(normalize_book(book), int(chapter), int(verse))
+    return RefKey(normalize_book(book), ref_number(chapter), ref_number(verse))
 
 
 def verse_key(verse: VerseSpan) -> RefKey:
-    return RefKey(normalize_book(verse.book), int(verse.chapter), int(verse.verse))
+    return RefKey(normalize_book(verse.book), ref_number(verse.chapter), ref_number(verse.verse))
+
+
+def verse_key_or_none(verse: VerseSpan) -> RefKey | None:
+    try:
+        return verse_key(verse)
+    except ValueError:
+        return None
 
 
 def passage_span(corpus: Corpus, passage: Passage) -> PassageSpan:
@@ -144,13 +159,7 @@ def passage_span(corpus: Corpus, passage: Passage) -> PassageSpan:
     if (start.book, start.chapter, start.verse) > (end.book, end.chapter, end.verse):
         raise ValueError(f"passage start is after end: {passage.passage_id}")
 
-    verses = tuple(
-        verse
-        for verse in corpus.verses
-        if (start.book, start.chapter, start.verse)
-        <= (verse_key(verse).book, verse_key(verse).chapter, verse_key(verse).verse)
-        <= (end.book, end.chapter, end.verse)
-    )
+    verses = tuple(verse for verse in corpus.verses if verse_in_range(verse, start, end))
     if not verses:
         raise ValueError(f"passage {passage.passage_id} not found in {corpus.name}")
     return PassageSpan(
@@ -158,6 +167,17 @@ def passage_span(corpus: Corpus, passage: Passage) -> PassageSpan:
         norm_start=min(verse.norm_start for verse in verses),
         norm_end=max(verse.norm_end for verse in verses),
         norm_length=sum(verse.norm_length for verse in verses),
+    )
+
+
+def verse_in_range(verse: VerseSpan, start: RefKey, end: RefKey) -> bool:
+    key = verse_key_or_none(verse)
+    if key is None:
+        return False
+    return (
+        (start.book, start.chapter, start.verse)
+        <= (key.book, key.chapter, key.verse)
+        <= (end.book, end.chapter, end.verse)
     )
 
 
@@ -221,6 +241,7 @@ def analyze_corpus(
     direction: str,
     min_term_length: int,
     common_elsewhere_threshold: int,
+    jobs: int,
 ) -> tuple[list[dict[str, object]], list[dict[str, object]]]:
     usable_passages = [passage for passage in passages if passage.language == corpus.language]
     spans = {passage.passage_id: passage_span(corpus, passage) for passage in usable_passages}
@@ -247,6 +268,7 @@ def analyze_corpus(
         min_skip=min_skip,
         max_skip=max_skip,
         direction=direction,
+        jobs=jobs,
     ):
         counts[query] += 1
         low = min(start, end)
@@ -488,6 +510,7 @@ def write_markdown(
         f"- Terms: `{args.terms}`",
         f"- Skip range: `{args.min_skip}..{args.max_skip}`",
         f"- Direction: `{args.direction}`",
+        f"- Jobs: `{args.jobs}`",
         f"- Minimum normalized term length: `{args.min_term_length}`",
         f"- Common-elsewhere threshold: `{args.common_elsewhere_threshold}` centered hits outside the passage",
         "",
@@ -637,6 +660,7 @@ def write_manifest(
         "min_skip": args.min_skip,
         "max_skip": args.max_skip,
         "direction": args.direction,
+        "jobs": args.jobs,
         "min_term_length": args.min_term_length,
         "common_elsewhere_threshold": args.common_elsewhere_threshold,
         "detail_rows": len(detail_rows),
@@ -653,6 +677,7 @@ def main() -> int:
     parser.add_argument("--min-skip", type=int, default=2)
     parser.add_argument("--max-skip", type=int, default=100)
     parser.add_argument("--direction", choices=["forward", "backward", "both"], default="both")
+    parser.add_argument("--jobs", type=int, default=1)
     parser.add_argument("--min-term-length", type=int, default=3)
     parser.add_argument("--common-elsewhere-threshold", type=int, default=10)
     parser.add_argument("--detail-out", type=Path, default=DETAIL_OUT)
@@ -680,6 +705,7 @@ def main() -> int:
             direction=args.direction,
             min_term_length=args.min_term_length,
             common_elsewhere_threshold=args.common_elsewhere_threshold,
+            jobs=args.jobs,
         )
         detail_rows.extend(corpus_detail)
         summary_rows.extend(corpus_summary)

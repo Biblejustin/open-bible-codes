@@ -9,6 +9,7 @@ It is intentionally a screening ledger: absence inside a short passage is often 
 - Terms: `terms/notable_passage_gap_terms.csv`
 - Skip range: `2..500`
 - Direction: `both`
+- Jobs: `0`
 - Minimum normalized term length: `3`
 - Common-elsewhere threshold: `10` centered hits outside the passage
 
@@ -60,6 +61,8 @@ These rows isolate passages explicitly registered as gap targets, instead of let
 | Leviticus 24 Blasphemy Law | EBIBLE_WLC | 1037 | 45 | 7 | 1 | 3836 | 4123.395 |
 | Leviticus 24 Blasphemy Law | MAM | 1037 | 45 | 7 | 1 | 3814 | 4122.093 |
 | Leviticus 24 Blasphemy Law | UHB | 1037 | 45 | 7 | 1 | 3836 | 4122.449 |
+| Leviticus 24 Blasphemy Law LXX | LXX | 2074 | 6 | 3 | 0 | 55 | 42.402 |
+| Leviticus 24 Blasphemy Law KJVA | KJVA | 2230 | 6 | 1 | 0 | 211 | 260.823 |
 
 ## Declared Gap-Target Detail
 
@@ -90,21 +93,21 @@ These rows isolate passages explicitly registered as gap targets, instead of let
 | Leviticus 24 Blasphemy Law | EBIBLE_WLC | `משפט` (mshpt; English: Judgment) | absent_in_passage_common_elsewhere | 408 | 0 | 0.353 | 0.702260 |  |
 | Leviticus 24 Blasphemy Law | UXLC | `משפט` (mshpt; English: Judgment) | absent_in_passage_common_elsewhere | 407 | 0 | 0.353 | 0.702869 |  |
 | Leviticus 24 Blasphemy Law | MT_WLC | `משפט` (mshpt; English: Judgment) | absent_in_passage_common_elsewhere | 406 | 0 | 0.352 | 0.703478 |  |
+| Leviticus 24 Blasphemy Law LXX | LXX | `κρισισ` (krisis; English: Judgment) | absent_in_passage_common_elsewhere | 289 | 0 | 0.215 | 0.806791 |  |
+| Leviticus 24 Blasphemy Law KJVA | KJVA | `magog` | absent_in_passage_common_elsewhere | 170 | 0 | 0.099 | 0.905438 |  |
 | Leviticus 24 Blasphemy Law | UHB | `יומיהוה` (yom YHWH; English: Day Of YHWH) | absent_in_passage_common_elsewhere | 119 | 0 | 0.103 | 0.901936 |  |
 | Leviticus 24 Blasphemy Law | MAM | `יומיהוה` (yom YHWH; English: Day Of YHWH) | absent_in_passage_common_elsewhere | 111 | 0 | 0.096 | 0.908678 |  |
 | Leviticus 24 Blasphemy Law | EBIBLE_WLC | `יומיהוה` (yom YHWH; English: Day Of YHWH) | absent_in_passage_common_elsewhere | 109 | 0 | 0.094 | 0.909894 |  |
 | Leviticus 24 Blasphemy Law | MT_WLC | `יומיהוה` (yom YHWH; English: Day Of YHWH) | absent_in_passage_common_elsewhere | 106 | 0 | 0.092 | 0.912262 |  |
 | Leviticus 24 Blasphemy Law | UXLC | `יומיהוה` (yom YHWH; English: Day Of YHWH) | absent_in_passage_common_elsewhere | 106 | 0 | 0.092 | 0.912262 |  |
+| Leviticus 24 Blasphemy Law LXX | LXX | `μαγωγ` (magog; English: Magog) | absent_in_passage_common_elsewhere | 60 | 0 | 0.045 | 0.956406 |  |
 | Leviticus 24 Blasphemy Law | UHB | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 29 | 0 | 0.025 | 0.975161 |  |
+| Leviticus 24 Blasphemy Law LXX | LXX | `λυχνια` (luchnia; English: Lampstand) | absent_in_passage_common_elsewhere | 27 | 0 | 0.020 | 0.980142 |  |
 | Leviticus 24 Blasphemy Law | MAM | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 25 | 0 | 0.022 | 0.978662 |  |
 | Leviticus 24 Blasphemy Law | EBIBLE_WLC | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 22 | 0 | 0.019 | 0.981122 |  |
 | Leviticus 24 Blasphemy Law | MT_WLC | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 22 | 0 | 0.019 | 0.981122 |  |
 | Leviticus 24 Blasphemy Law | UXLC | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 22 | 0 | 0.019 | 0.981122 |  |
 | Leviticus 24 Blasphemy Law | MAM | `כסא` (kisse; English: Throne) | low_in_passage_vs_uniform | 23834 | 4 | 20.566 | 0.000000 | Lev 24:14 |
-| Leviticus 24 Blasphemy Law | MT_WLC | `כסא` (kisse; English: Throne) | low_in_passage_vs_uniform | 23461 | 4 | 20.328 | 0.000000 | Lev 24:14 |
-| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `כסא` (kisse; English: Throne) | low_in_passage_vs_uniform | 23458 | 4 | 20.325 | 0.000000 | LEV 24:14 |
-| Leviticus 24 Blasphemy Law | UXLC | `כסא` (kisse; English: Throne) | low_in_passage_vs_uniform | 23451 | 4 | 20.319 | 0.000000 | Lev 24:14 |
-| Leviticus 24 Blasphemy Law | UHB | `כסא` (kisse; English: Throne) | low_in_passage_vs_uniform | 23364 | 4 | 20.268 | 0.000000 | LEV 24:14 |
 
 ## Passage Summary
 
@@ -230,6 +233,8 @@ These rows isolate passages explicitly registered as gap targets, instead of let
 | Zechariah 12 Pierced One | UHB | 923 | 54 | 46 | 7 | 6 | 1 | 3460 | 3669.258 |
 | Zechariah 14 Day Of YHWH | UHB | 1417 | 54 | 49 | 4 | 3 | 0 | 5254 | 5633.087 |
 | Malachi 3 Messenger | UHB | 1103 | 54 | 46 | 7 | 6 | 0 | 4251 | 4384.823 |
+| Leviticus 24 Blasphemy Law LXX | LXX | 2074 | 11 | 6 | 3 | 3 | 0 | 55 | 42.402 |
+| Leviticus 24 Blasphemy Law KJVA | KJVA | 2230 | 11 | 6 | 2 | 1 | 0 | 211 | 260.823 |
 
 ## Notable Absence / Low-Density Rows
 
