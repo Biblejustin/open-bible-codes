@@ -5,12 +5,21 @@ from __future__ import annotations
 
 import argparse
 import csv
-from collections import defaultdict
+import json
+import subprocess
+import time
+from collections import Counter, defaultdict
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from pathlib import Path
+from typing import Any
 
+from els import __version__
 
 DEFAULT_ANCHOR_FIELDS = ("corpus_label", "term_id", "center_ref", "center_normalized_word")
+DEFAULT_OUT = Path("reports/cipher_layered_pairs/pairs.csv")
+DEFAULT_SUMMARY_OUT = Path("reports/cipher_layered_pairs/summary.csv")
+DEFAULT_MANIFEST_OUT = Path("reports/cipher_layered_pairs/manifest.json")
 
 FIELDNAMES = [
     "anchor_key",
@@ -29,6 +38,8 @@ FIELDNAMES = [
     "cipher_transform",
 ]
 
+SUMMARY_FIELDS = ["bucket", "value", "pairs"]
+
 
 @dataclass(frozen=True)
 class LayerHit:
@@ -38,6 +49,7 @@ class LayerHit:
 
 
 def main(argv: list[str] | None = None) -> int:
+    started = time.perf_counter()
     args = build_parser().parse_args(argv)
     anchor_fields = tuple(args.anchor_field or DEFAULT_ANCHOR_FIELDS)
     plain_hits = read_layer_hits(args.plain_hits, layer="plain")
@@ -48,8 +60,22 @@ def main(argv: list[str] | None = None) -> int:
         anchor_fields=anchor_fields,
         max_pairs=args.max_pairs,
     )
+    summary_rows = summarize_rows(rows)
     write_rows(args.out, rows)
+    write_rows(args.summary_out, summary_rows, fieldnames=SUMMARY_FIELDS)
+    write_manifest(
+        args.manifest_out,
+        args,
+        anchor_fields=anchor_fields,
+        plain_hits=plain_hits,
+        cipher_hits=cipher_hits,
+        rows=rows,
+        summary_rows=summary_rows,
+        started=started,
+    )
     print(args.out)
+    print(args.summary_out)
+    print(args.manifest_out)
     return 0
 
 
@@ -64,7 +90,9 @@ def build_parser() -> argparse.ArgumentParser:
         help="Field used in the pairing key. Repeatable. Defaults to corpus, term, center ref, and center word.",
     )
     parser.add_argument("--max-pairs", type=int, default=100_000)
-    parser.add_argument("--out", type=Path, default=Path("reports/cipher_layered_pairs/pairs.csv"))
+    parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
+    parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
+    parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST_OUT)
     return parser
 
 
@@ -136,12 +164,71 @@ def pair_row(plain_hit: LayerHit, cipher_hit: LayerHit, key: tuple[str, ...]) ->
     }
 
 
-def write_rows(path: Path, rows: list[dict[str, object]]) -> None:
+def summarize_rows(rows: list[dict[str, object]]) -> list[dict[str, object]]:
+    transform_counts = Counter(str(row.get("cipher_transform", "")) for row in rows)
+    corpus_counts = Counter(str(row.get("corpus_label", "")) for row in rows)
+    term_counts = Counter(str(row.get("term_id", "")) for row in rows)
+    summary_rows: list[dict[str, object]] = []
+    for bucket, counts in (
+        ("cipher_transform", transform_counts),
+        ("corpus_label", corpus_counts),
+        ("term_id", term_counts),
+    ):
+        for value, count in sorted(counts.items(), key=lambda item: (-item[1], item[0])):
+            summary_rows.append({"bucket": bucket, "value": value, "pairs": count})
+    return summary_rows
+
+
+def write_rows(path: Path, rows: list[dict[str, object]], *, fieldnames: list[str] | None = None) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=FIELDNAMES)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames or FIELDNAMES)
         writer.writeheader()
         writer.writerows(rows)
+
+
+def write_manifest(
+    path: Path,
+    args: argparse.Namespace,
+    *,
+    anchor_fields: tuple[str, ...],
+    plain_hits: list[LayerHit],
+    cipher_hits: list[LayerHit],
+    rows: list[dict[str, object]],
+    summary_rows: list[dict[str, object]],
+    started: float,
+) -> None:
+    payload: dict[str, Any] = {
+        "script": "scripts/build_cipher_layered_pairs.py",
+        "version": __version__,
+        "created_at": datetime.now(UTC).isoformat(),
+        "elapsed_seconds": round(time.perf_counter() - started, 3),
+        "git_commit": git_commit(),
+        "anchor_fields": list(anchor_fields),
+        "max_pairs": args.max_pairs,
+        "plain_hit_rows": len(plain_hits),
+        "cipher_hit_rows": len(cipher_hits),
+        "paired_rows": len(rows),
+        "summary_rows": len(summary_rows),
+        "inputs": {
+            "plain_hits": [str(path) for path in args.plain_hits],
+            "cipher_hits": [str(path) for path in args.cipher_hits],
+        },
+        "outputs": {
+            "out": str(args.out),
+            "summary_out": str(args.summary_out),
+            "manifest_out": str(args.manifest_out),
+        },
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def git_commit() -> str:
+    try:
+        return subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+    except Exception:
+        return ""
 
 
 if __name__ == "__main__":

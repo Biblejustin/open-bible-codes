@@ -43,12 +43,16 @@ anchor, use:
 python3 -m scripts.build_cipher_layered_pairs \
   --plain-hits reports/plain_hits.csv \
   --cipher-hits reports/hebrew_atbash_audit/MT_WLC_hits.csv \
-  --out reports/cipher_layered_pairs/pairs.csv
+  --out reports/cipher_layered_pairs/pairs.csv \
+  --summary-out reports/cipher_layered_pairs/summary.csv \
+  --manifest-out reports/cipher_layered_pairs/manifest.json
 ```
 
 By default, the pairing key is corpus label, term id, center reference, and
 center normalized word. Override it with repeated `--anchor-field` arguments
-only in a locked protocol.
+only in a locked protocol. The summary file counts pairs by transform, corpus,
+and term; the manifest records input paths, output paths, anchor fields, row
+counts, elapsed time, and the local git commit.
 
 ## Custom ALBAM Search
 

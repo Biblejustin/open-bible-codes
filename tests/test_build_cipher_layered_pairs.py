@@ -1,4 +1,5 @@
 import csv
+import json
 from pathlib import Path
 
 from scripts.build_cipher_layered_pairs import (
@@ -6,6 +7,7 @@ from scripts.build_cipher_layered_pairs import (
     anchor_key,
     cipher_layered_pair_rows,
     main,
+    summarize_rows,
 )
 
 
@@ -58,10 +60,24 @@ def test_cipher_layered_pair_rows_do_not_match_different_anchor() -> None:
     assert cipher_layered_pair_rows([plain], [cipher]) == []
 
 
+def test_summarize_rows_counts_core_buckets() -> None:
+    plain = LayerHit(hit_index=1, layer="plain", row=hit(skip="7"))
+    cipher = LayerHit(hit_index=1, layer="cipher", row=hit(skip="13", transform="hebrew_atbash"))
+    rows = cipher_layered_pair_rows([plain], [cipher])
+
+    summary = summarize_rows(rows)
+
+    assert {"bucket": "cipher_transform", "value": "hebrew_atbash", "pairs": 1} in summary
+    assert {"bucket": "corpus_label", "value": "MT_WLC", "pairs": 1} in summary
+    assert {"bucket": "term_id", "value": "babel_h", "pairs": 1} in summary
+
+
 def test_main_writes_pairs(tmp_path: Path) -> None:
     plain = tmp_path / "plain.csv"
     cipher = tmp_path / "cipher.csv"
     out = tmp_path / "pairs.csv"
+    summary = tmp_path / "summary.csv"
+    manifest = tmp_path / "manifest.json"
     fieldnames = list(hit())
     with plain.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
@@ -72,7 +88,25 @@ def test_main_writes_pairs(tmp_path: Path) -> None:
         writer.writeheader()
         writer.writerow(hit(skip="13", transform="hebrew_albam"))
 
-    assert main(["--plain-hits", str(plain), "--cipher-hits", str(cipher), "--out", str(out)]) == 0
+    assert (
+        main(
+            [
+                "--plain-hits",
+                str(plain),
+                "--cipher-hits",
+                str(cipher),
+                "--out",
+                str(out),
+                "--summary-out",
+                str(summary),
+                "--manifest-out",
+                str(manifest),
+            ]
+        )
+        == 0
+    )
     text = out.read_text(encoding="utf-8")
     assert "hebrew_albam" in text
     assert "babel_h" in text
+    assert "cipher_transform" in summary.read_text(encoding="utf-8")
+    assert json.loads(manifest.read_text(encoding="utf-8"))["paired_rows"] == 1
