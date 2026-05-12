@@ -13,7 +13,10 @@ DYNAMIC_FULL_SPAN_HITS_DB_ARGS := $(shell test -f "$(REPORT_DB)" && echo "--db $
 MATRIX_CLUSTER_HITS ?= reports/centered_occurrence_index/centered_occurrences.csv
 MATRIX_CLUSTER_WIDTH ?= 50
 MATRIX_CLUSTER_DISTANCE ?= 1
-CIPHER_LAYERED_PLAIN_HITS ?= reports/plain_hits.csv
+CIPHER_LAYERED_PLAIN_HITS ?= reports/cipher_layered_pairs/plain_mt_wlc_hits.csv
+CIPHER_LAYERED_PLAIN_CONFIG ?= configs/example_oshb_wlc.toml
+CIPHER_LAYERED_PLAIN_CORPUS ?= MT_WLC
+CIPHER_LAYERED_TERMS ?= terms/hebrew_atbash_audit_terms.csv
 CIPHER_LAYERED_CIPHER_HITS ?= reports/hebrew_atbash_audit/MT_WLC_hits.csv
 COHORT_CLUSTER_OCCURRENCES ?= reports/centered_occurrence_index/centered_occurrences.csv
 COHORT_CLUSTER_TERMS ?= terms/biblical_tribes.csv
@@ -21,7 +24,7 @@ COHORT_CLUSTER_WINDOW_WORDS ?= 50
 COHORT_CLUSTER_MIN_DISTINCT ?= 2
 COHORT_CLUSTER_CORPUS_CONFIGS ?= --corpus-config MT_WLC=configs/example_oshb_wlc.toml --corpus-config UXLC=configs/example_uxlc.toml --corpus-config EBIBLE_WLC=configs/example_ebible_hebwlc.toml --corpus-config MAM=configs/example_mam.toml --corpus-config UHB=configs/example_uhb.toml --corpus-config LXX=configs/example_ebible_grclxx.toml --corpus-config KJV=configs/example_ebible_engkjv.toml --corpus-config KJVA=configs/example_ebible_engkjv_apocrypha.toml --corpus-config TR_NT=configs/example_ebible_grctr.toml --corpus-config SBLGNT=configs/example_sblgnt.toml --corpus-config BYZ_NT=configs/example_ebible_grcmt.toml --corpus-config TCG_NT=configs/example_ebible_grctcgnt.toml --corpus-config HEB_PBY_AHAD_HAAM=configs/nonbible_hebrew_pby_ahad_haam.toml --corpus-config HEB_PBY_BIALIK=configs/nonbible_hebrew_pby_bialik.toml --corpus-config HEB_PBY_BRENNER=configs/nonbible_hebrew_pby_brenner.toml --corpus-config ENG_PG_SHAKESPEARE=configs/nonbible_english_pg_shakespeare.toml
 
-.PHONY: demo indexes test lint public-release-check study-mapping-schemas expanded-strata-tooling-check expanded-strata-postprocess real-report report-db dynamic-full-span-hit-findings notable-passage-gaps match-strata-index boundary-alignment chapter-position-bias direction-asymmetry canonical-first-summary cross-skip-summary review-flag-summary hebrew-atbash-audit hebrew-albam-audit word-edge-pattern-audit matrix-cluster-candidates cipher-layered-pairs cohort-cluster-density crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-broad-screening-findings crd-center-word-findings crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-self-surface-queue crd-self-surface-center-word crd-self-surface-center-word-density crd-self-surface-center-word-queue crd-self-surface-center-word-packet crd-self-surface-center-word-presence crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density crd-concept-surface-center-word-queue crd-concept-surface-center-word-packet crd-concept-surface-center-word-presence
+.PHONY: demo indexes test lint public-release-check study-mapping-schemas expanded-strata-tooling-check expanded-strata-postprocess real-report report-db dynamic-full-span-hit-findings notable-passage-gaps match-strata-index boundary-alignment chapter-position-bias direction-asymmetry canonical-first-summary cross-skip-summary review-flag-summary hebrew-atbash-audit hebrew-albam-audit word-edge-pattern-audit matrix-cluster-candidates cipher-layered-plain-hits cipher-layered-pairs cohort-cluster-density crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-broad-screening-findings crd-center-word-findings crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-self-surface-queue crd-self-surface-center-word crd-self-surface-center-word-density crd-self-surface-center-word-queue crd-self-surface-center-word-packet crd-self-surface-center-word-presence crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density crd-concept-surface-center-word-queue crd-concept-surface-center-word-packet crd-concept-surface-center-word-presence
 
 demo:
 	python3 -m els.demo
@@ -93,7 +96,10 @@ word-edge-pattern-audit:
 matrix-cluster-candidates:
 	python3 -m scripts.build_matrix_cluster_candidates --hits "$(MATRIX_CLUSTER_HITS)" --row-width "$(MATRIX_CLUSTER_WIDTH)" --max-cell-distance "$(MATRIX_CLUSTER_DISTANCE)" --out reports/matrix_clusters/candidates.csv --summary-out reports/matrix_clusters/summary.csv --manifest-out reports/matrix_clusters/manifest.json
 
-cipher-layered-pairs:
+cipher-layered-plain-hits:
+	python3 -m scripts.search_transformed_els --config "$(CIPHER_LAYERED_PLAIN_CONFIG)" --corpus-label "$(CIPHER_LAYERED_PLAIN_CORPUS)" --transform plain --terms "$(CIPHER_LAYERED_TERMS)" --min-skip 2 --max-skip 100 --direction both --max-hits-per-term 200 --out "$(CIPHER_LAYERED_PLAIN_HITS)"
+
+cipher-layered-pairs: cipher-layered-plain-hits
 	python3 -m scripts.build_cipher_layered_pairs --plain-hits "$(CIPHER_LAYERED_PLAIN_HITS)" --cipher-hits "$(CIPHER_LAYERED_CIPHER_HITS)" --out reports/cipher_layered_pairs/pairs.csv --summary-out reports/cipher_layered_pairs/summary.csv --manifest-out reports/cipher_layered_pairs/manifest.json
 
 cohort-cluster-density:

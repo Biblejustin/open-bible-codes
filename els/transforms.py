@@ -67,6 +67,7 @@ HEBREW_ALBAM = {
 
 TRANSFORM_HEBREW_ATBASH = "hebrew_atbash"
 TRANSFORM_HEBREW_ALBAM = "hebrew_albam"
+TRANSFORM_PLAIN = "plain"
 HEBREW_TRANSFORMS = {TRANSFORM_HEBREW_ATBASH, TRANSFORM_HEBREW_ALBAM}
 
 
@@ -81,6 +82,8 @@ def albam_hebrew(text: str) -> str:
 
 
 def transform_text(text: str, transform: str) -> str:
+    if transform == TRANSFORM_PLAIN:
+        return text
     if transform == TRANSFORM_HEBREW_ATBASH:
         return atbash_hebrew(text)
     if transform == TRANSFORM_HEBREW_ALBAM:
@@ -90,6 +93,17 @@ def transform_text(text: str, transform: str) -> str:
 
 def transform_corpus(corpus: Corpus, transform: str) -> Corpus:
     """Return a same-offset corpus with transformed letter stream only."""
+    if transform == TRANSFORM_PLAIN:
+        return Corpus(
+            name=f"{corpus.name}:{transform}",
+            language=corpus.language,
+            keep_hebrew_final_forms=corpus.keep_hebrew_final_forms,
+            text=corpus.text,
+            verses=corpus.verses,
+            position_to_verse=corpus.position_to_verse,
+            words=corpus.words,
+            position_to_word=corpus.position_to_word,
+        )
     if transform in HEBREW_TRANSFORMS and corpus.language != "hebrew":
         raise ValueError(f"{transform} requires a Hebrew corpus")
     return Corpus(

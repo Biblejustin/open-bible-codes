@@ -5,6 +5,7 @@ from els.search import find_els
 from els.transforms import (
     TRANSFORM_HEBREW_ALBAM,
     TRANSFORM_HEBREW_ATBASH,
+    TRANSFORM_PLAIN,
     albam_hebrew,
     atbash_hebrew,
     transform_corpus,
@@ -37,6 +38,23 @@ def test_transform_corpus_preserves_offsets_and_surface_words() -> None:
     assert transformed.text == "בבל"
     assert transformed.ref_at(0) == "Jer 25:26"
     assert list(transformed.position_to_verse) == [0, 0, 0]
+
+
+def test_plain_transform_preserves_text_for_pairing_layer() -> None:
+    corpus = Corpus(
+        name="tiny",
+        language="english",
+        keep_hebrew_final_forms=False,
+        text="abc",
+        verses=(VerseSpan("test", "Gen 1:1", "Gen", "1", "1", "abc", 0, 3, 3),),
+        position_to_verse=[0, 0, 0],
+    )
+
+    transformed = transform_corpus(corpus, TRANSFORM_PLAIN)
+
+    assert transformed.name == "tiny:plain"
+    assert transformed.text == "abc"
+    assert transformed.language == "english"
 
 
 def test_atbash_transformed_corpus_can_be_searched_for_decoded_term() -> None:
