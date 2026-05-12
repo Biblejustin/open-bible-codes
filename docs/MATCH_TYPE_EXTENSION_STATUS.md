@@ -52,7 +52,8 @@ python3 -m scripts.run_protocol protocols/match_strata_index.toml --resume
 | `albam_path` | Hebrew ALBAM transformed-corpus search | `protocols/hebrew_albam_audit.toml` |
 | `acrostic_pattern` | first-letter word-edge scanner with optional word skip | `protocols/word_edge_pattern_audit.toml` |
 | `telestic_pattern` | last-letter word-edge scanner with optional word skip | `protocols/word_edge_pattern_audit.toml` |
-| word-edge `word_skip_ELS` | first/last letter every `K`th word; full word-token variant remains deferred | `scripts/search_word_edge_patterns.py` |
+| word-edge `word_skip_ELS` | first/last letter every `K`th word | `scripts/search_word_edge_patterns.py` |
+| full word-token `word_skip_ELS` | full normalized surface-word tokens every `K`th word | `protocols/word_skip_term_audit.toml` |
 | `cipher_layered_pair` | pairs ordinary and transformed hits at a declared same-anchor key | `scripts/build_cipher_layered_pairs.py` |
 
 These families widen the search surface. Their reports include control
@@ -71,7 +72,6 @@ warnings and capped-row flags.
 
 | Stratum | Data dependency |
 | --- | --- |
-| full word-token `word_skip_ELS` | token-level word skip definition plus matched controls |
 
 Mapping-dependent rows use the locked CSV files in `data/study/mappings/`.
 Some mapping files now contain conservative seed rows; others remain header-only

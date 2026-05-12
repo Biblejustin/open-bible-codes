@@ -1,0 +1,95 @@
+name = "word_skip_term_audit"
+description = "Opt-in full word-token every-Kth-word audit for declared Hebrew phrases."
+manifest_out = "reports/word_skip_terms/protocol_run.manifest.json"
+max_parallel = 4
+progress_interval_seconds = 15
+
+[[steps]]
+id = "search_mt_wlc"
+description = "Search MT_WLC for full word-token skip phrases."
+argv = ["-m", "scripts.search_word_skip_terms", "--config", "configs/example_oshb_wlc.toml", "--corpus-label", "MT_WLC", "--terms", "terms/word_skip_term_audit_terms.csv", "--direction", "both", "--min-word-skip", "1", "--max-word-skip", "5", "--max-hits-per-term", "200", "--out", "reports/word_skip_terms/MT_WLC_hits.csv"]
+inputs = ["scripts/search_word_skip_terms.py", "els/corpus.py", "els/normalization.py", "configs/example_oshb_wlc.toml", "terms/word_skip_term_audit_terms.csv"]
+outputs = ["reports/word_skip_terms/MT_WLC_hits.csv"]
+
+[[steps]]
+id = "search_uxlc"
+description = "Search UXLC for full word-token skip phrases."
+argv = ["-m", "scripts.search_word_skip_terms", "--config", "configs/example_uxlc.toml", "--corpus-label", "UXLC", "--terms", "terms/word_skip_term_audit_terms.csv", "--direction", "both", "--min-word-skip", "1", "--max-word-skip", "5", "--max-hits-per-term", "200", "--out", "reports/word_skip_terms/UXLC_hits.csv"]
+inputs = ["scripts/search_word_skip_terms.py", "els/corpus.py", "els/normalization.py", "configs/example_uxlc.toml", "terms/word_skip_term_audit_terms.csv"]
+outputs = ["reports/word_skip_terms/UXLC_hits.csv"]
+
+[[steps]]
+id = "search_mam"
+description = "Search MAM for full word-token skip phrases."
+argv = ["-m", "scripts.search_word_skip_terms", "--config", "configs/example_mam.toml", "--corpus-label", "MAM", "--terms", "terms/word_skip_term_audit_terms.csv", "--direction", "both", "--min-word-skip", "1", "--max-word-skip", "5", "--max-hits-per-term", "200", "--out", "reports/word_skip_terms/MAM_hits.csv"]
+inputs = ["scripts/search_word_skip_terms.py", "els/corpus.py", "els/normalization.py", "configs/example_mam.toml", "terms/word_skip_term_audit_terms.csv"]
+outputs = ["reports/word_skip_terms/MAM_hits.csv"]
+
+[[steps]]
+id = "search_ebible_wlc"
+description = "Search EBIBLE_WLC for full word-token skip phrases."
+argv = ["-m", "scripts.search_word_skip_terms", "--config", "configs/example_ebible_hebwlc.toml", "--corpus-label", "EBIBLE_WLC", "--terms", "terms/word_skip_term_audit_terms.csv", "--direction", "both", "--min-word-skip", "1", "--max-word-skip", "5", "--max-hits-per-term", "200", "--out", "reports/word_skip_terms/EBIBLE_WLC_hits.csv"]
+inputs = ["scripts/search_word_skip_terms.py", "els/corpus.py", "els/normalization.py", "configs/example_ebible_hebwlc.toml", "terms/word_skip_term_audit_terms.csv"]
+outputs = ["reports/word_skip_terms/EBIBLE_WLC_hits.csv"]
+
+[[steps]]
+id = "search_uhb"
+description = "Search UHB for full word-token skip phrases."
+argv = ["-m", "scripts.search_word_skip_terms", "--config", "configs/example_uhb.toml", "--corpus-label", "UHB", "--terms", "terms/word_skip_term_audit_terms.csv", "--direction", "both", "--min-word-skip", "1", "--max-word-skip", "5", "--max-hits-per-term", "200", "--out", "reports/word_skip_terms/UHB_hits.csv"]
+inputs = ["scripts/search_word_skip_terms.py", "els/corpus.py", "els/normalization.py", "configs/example_uhb.toml", "terms/word_skip_term_audit_terms.csv"]
+outputs = ["reports/word_skip_terms/UHB_hits.csv"]
+
+[[steps]]
+id = "search_hebrew_ahad_haam"
+description = "Search Hebrew Ahad Ha'am control for full word-token skip phrases."
+argv = ["-m", "scripts.search_word_skip_terms", "--config", "configs/nonbible_hebrew_pby_ahad_haam.toml", "--corpus-label", "HEB_AHAD_HAAM", "--terms", "terms/word_skip_term_audit_terms.csv", "--direction", "both", "--min-word-skip", "1", "--max-word-skip", "5", "--max-hits-per-term", "200", "--out", "reports/word_skip_terms/HEB_AHAD_HAAM_hits.csv"]
+inputs = ["scripts/search_word_skip_terms.py", "els/corpus.py", "els/normalization.py", "configs/nonbible_hebrew_pby_ahad_haam.toml", "terms/word_skip_term_audit_terms.csv"]
+outputs = ["reports/word_skip_terms/HEB_AHAD_HAAM_hits.csv"]
+
+[[steps]]
+id = "search_hebrew_bialik"
+description = "Search Hebrew Bialik control for full word-token skip phrases."
+argv = ["-m", "scripts.search_word_skip_terms", "--config", "configs/nonbible_hebrew_pby_bialik.toml", "--corpus-label", "HEB_BIALIK", "--terms", "terms/word_skip_term_audit_terms.csv", "--direction", "both", "--min-word-skip", "1", "--max-word-skip", "5", "--max-hits-per-term", "200", "--out", "reports/word_skip_terms/HEB_BIALIK_hits.csv"]
+inputs = ["scripts/search_word_skip_terms.py", "els/corpus.py", "els/normalization.py", "configs/nonbible_hebrew_pby_bialik.toml", "terms/word_skip_term_audit_terms.csv"]
+outputs = ["reports/word_skip_terms/HEB_BIALIK_hits.csv"]
+
+[[steps]]
+id = "search_hebrew_brenner"
+description = "Search Hebrew Brenner control for full word-token skip phrases."
+argv = ["-m", "scripts.search_word_skip_terms", "--config", "configs/nonbible_hebrew_pby_brenner.toml", "--corpus-label", "HEB_BRENNER", "--terms", "terms/word_skip_term_audit_terms.csv", "--direction", "both", "--min-word-skip", "1", "--max-word-skip", "5", "--max-hits-per-term", "200", "--out", "reports/word_skip_terms/HEB_BRENNER_hits.csv"]
+inputs = ["scripts/search_word_skip_terms.py", "els/corpus.py", "els/normalization.py", "configs/nonbible_hebrew_pby_brenner.toml", "terms/word_skip_term_audit_terms.csv"]
+outputs = ["reports/word_skip_terms/HEB_BRENNER_hits.csv"]
+
+[[steps]]
+id = "summary"
+description = "Summarize word-token skip audit hits."
+argv = [
+  "-m", "scripts.summarize_word_edge_patterns",
+  "--hits", "reports/word_skip_terms/MT_WLC_hits.csv",
+  "--hits", "reports/word_skip_terms/UXLC_hits.csv",
+  "--hits", "reports/word_skip_terms/MAM_hits.csv",
+  "--hits", "reports/word_skip_terms/EBIBLE_WLC_hits.csv",
+  "--hits", "reports/word_skip_terms/UHB_hits.csv",
+  "--hits", "reports/word_skip_terms/HEB_AHAD_HAAM_hits.csv",
+  "--hits", "reports/word_skip_terms/HEB_BIALIK_hits.csv",
+  "--hits", "reports/word_skip_terms/HEB_BRENNER_hits.csv",
+  "--title", "Word-Skip Term Audit",
+  "--description", "Opt-in full normalized surface-word token audit over declared Hebrew phrases.",
+  "--cap-threshold", "200",
+  "--summary-out", "reports/word_skip_terms/summary.csv",
+  "--markdown-out", "docs/WORD_SKIP_TERM_AUDIT.md",
+  "--manifest-out", "reports/word_skip_terms/summary.manifest.json"
+]
+inputs = [
+  "scripts/summarize_word_edge_patterns.py",
+  "els/term_display.py",
+  "reports/word_skip_terms/MT_WLC_hits.csv",
+  "reports/word_skip_terms/UXLC_hits.csv",
+  "reports/word_skip_terms/MAM_hits.csv",
+  "reports/word_skip_terms/EBIBLE_WLC_hits.csv",
+  "reports/word_skip_terms/UHB_hits.csv",
+  "reports/word_skip_terms/HEB_AHAD_HAAM_hits.csv",
+  "reports/word_skip_terms/HEB_BIALIK_hits.csv",
+  "reports/word_skip_terms/HEB_BRENNER_hits.csv",
+]
+outputs = ["reports/word_skip_terms/summary.csv", "docs/WORD_SKIP_TERM_AUDIT.md", "reports/word_skip_terms/summary.manifest.json"]

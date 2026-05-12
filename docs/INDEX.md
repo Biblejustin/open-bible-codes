@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 265
+Documents indexed: 266
 
 ## Controls
 
@@ -284,6 +284,7 @@ Documents indexed: 265
 | Windows CPU Broad 2..500 Surface Follow-Up | `WINDOWS_CPU_BROAD_2_500_SURFACE_FOLLOWUP.md` |
 | Word Counts Study | `WORD_COUNTS_STUDY.md` |
 | Word-Edge Pattern Audit | `WORD_EDGE_PATTERN_AUDIT.md` |
+| Word-Skip Term Audit | `WORD_SKIP_TERM_AUDIT.md` |
 
 ## Version Studies
 

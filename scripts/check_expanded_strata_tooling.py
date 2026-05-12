@@ -32,6 +32,7 @@ ENTRIES = (
     ToolingEntry("Hebrew Atbash audit", Path("protocols/hebrew_atbash_audit.toml"), "hebrew-atbash-audit"),
     ToolingEntry("Hebrew ALBAM audit", Path("protocols/hebrew_albam_audit.toml"), "hebrew-albam-audit"),
     ToolingEntry("word-edge pattern audit", Path("protocols/word_edge_pattern_audit.toml"), "word-edge-pattern-audit"),
+    ToolingEntry("word-skip term audit", Path("protocols/word_skip_term_audit.toml"), "word-skip-term-audit"),
     ToolingEntry("matrix cluster candidates", Path("scripts/build_matrix_cluster_candidates.py"), "matrix-cluster-candidates"),
     ToolingEntry("cipher layered pairs", Path("scripts/build_cipher_layered_pairs.py"), "cipher-layered-pairs"),
     ToolingEntry("cohort cluster density", Path("scripts/build_cohort_cluster_density.py"), "cohort-cluster-density"),

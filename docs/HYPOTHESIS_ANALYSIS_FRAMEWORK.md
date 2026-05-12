@@ -145,8 +145,8 @@ computed.
 ### Tier 4: Declared Future Variants
 
 - `word_skip_ELS`: every `K`th word rather than every `K`th letter. Current
-  tooling supports first-letter/last-letter word-edge skip rows; full
-  token-level word skips remain a separate definition problem.
+  tooling supports both first-letter/last-letter word-edge skip rows and
+  full normalized surface-word token skip rows.
 - `acrostic_pattern`: term formed from the first letter of surface words at a
   declared word interval.
 - `telestic_pattern`: term formed from the last letter of surface words at a

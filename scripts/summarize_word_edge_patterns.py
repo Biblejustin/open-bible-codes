@@ -158,10 +158,7 @@ def write_markdown(
         "",
         args.description,
         "",
-        "This is not an ordinary ELS path search. Each pattern consumes one",
-        "letter from surface words at a declared word interval, using either",
-        "first letters (acrostic) or last letters (telestic). It widens the",
-        "review surface and needs matched controls before claim language.",
+        *methodology_lines(hit_rows),
         "",
         "## Bottom Line",
         "",
@@ -186,14 +183,38 @@ def write_markdown(
             "",
             "- Acrostic means first letters of normalized words.",
             "- Telestic means last letters of normalized words.",
+            "- `word_skip_ELS` means full normalized surface-word tokens, not first/last letters.",
             "- Word skip is the interval between consumed surface words. Consecutive-word rows have word skip 1.",
-            "- Backward means the word-edge sequence reads the target term in reverse.",
+            "- Backward means the consumed word-edge or word-token sequence reads the target term in reverse.",
             "- `Capped=yes` means `hits` may be a floor because at least one direction reached its per-term limit.",
             "",
         ]
     )
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def methodology_lines(hit_rows: list[dict[str, str]]) -> list[str]:
+    pattern_types = {row.get("pattern_type", "") for row in hit_rows}
+    if pattern_types == {"word_skip_ELS"}:
+        return [
+            "This is not an ordinary letter-ELS path search. Each pattern consumes",
+            "full normalized surface-word tokens at a declared word interval. It",
+            "widens the review surface and needs matched controls before claim language.",
+        ]
+    if "word_skip_ELS" in pattern_types:
+        return [
+            "This is not an ordinary letter-ELS path search. Rows may consume either",
+            "first/last letters of surface words or full normalized surface-word",
+            "tokens at a declared word interval. This widens the review surface and",
+            "needs matched controls before claim language.",
+        ]
+    return [
+        "This is not an ordinary ELS path search. Each pattern consumes one",
+        "letter from surface words at a declared word interval, using either",
+        "first letters (acrostic) or last letters (telestic). It widens the",
+        "review surface and needs matched controls before claim language.",
+    ]
 
 
 def markdown_row(row: dict[str, object]) -> str:

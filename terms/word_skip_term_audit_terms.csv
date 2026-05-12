@@ -1,0 +1,5 @@
+term_id,concept,category,language,term,notes
+word_skip_yhwh_said_h,YHWH Said,word_skip_audit,hebrew,יהוה אמר,declared full word-token skip audit phrase
+word_skip_children_israel_h,Children Israel,word_skip_audit,hebrew,בני ישראל,declared full word-token skip audit phrase
+word_skip_king_israel_h,King Israel,word_skip_audit,hebrew,מלך ישראל,declared full word-token skip audit phrase
+word_skip_land_egypt_h,Land Egypt,word_skip_audit,hebrew,ארץ מצרים,declared full word-token skip audit phrase

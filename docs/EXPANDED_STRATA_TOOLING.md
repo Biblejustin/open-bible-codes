@@ -273,8 +273,28 @@ Primary outputs:
 - `reports/word_edge_patterns/summary.manifest.json`
 - `docs/WORD_EDGE_PATTERN_AUDIT.md`
 
-Current support is word-edge letter paths, not full token-level every-Kth-word
-ELS. Full word-token ELS remains a separate definition problem.
+## Word-Skip Term Patterns
+
+The word-skip term scanner supports full normalized surface-word-token phrases
+at every `K`th word. It is separate from word-edge acrostic/telestic scanning
+and widens the search surface.
+
+```bash
+python3 -m scripts.run_protocol protocols/word_skip_term_audit.toml --resume
+```
+
+Shortcut:
+
+```bash
+make word-skip-term-audit
+```
+
+Primary outputs:
+
+- `reports/word_skip_terms/*_hits.csv`
+- `reports/word_skip_terms/summary.csv`
+- `reports/word_skip_terms/summary.manifest.json`
+- `docs/WORD_SKIP_TERM_AUDIT.md`
 
 ## Matrix Cluster Candidates
 
