@@ -137,6 +137,8 @@ computed.
   cohort center inside a sliding window of `N` words.
 - `cohort_full_house`: every term in a declared cohort has at least one centered
   hit inside the window.
+- `lxx_vs_mt_semantic_divergence`: center-locus annotation where a hidden term
+  centers on a locked MT/LXX divergence anchor in either textual tradition.
 
 ### Tier 4: Declared Future Variants
 
@@ -147,8 +149,6 @@ computed.
   declared word interval.
 - `telestic_pattern`: term formed from the last letter of surface words at a
   declared word interval.
-- `lxx_vs_mt_semantic_divergence`: ELS locus tracks either MT consonants or LXX
-  semantics where the two diverge.
 - `root_only_match`: hidden Hebrew root accepted as a centered match for a
   surface inflection of that root.
 - `term_absence_at_thematic_chapter`: relevant term absent at all declared skips

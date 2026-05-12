@@ -364,6 +364,89 @@ def test_build_strata_rows_adds_quotation_mapping_flags() -> None:
     assert "nt_quotation_span" in row["extended_strata"]
 
 
+def test_build_strata_rows_adds_semantic_divergence_flags() -> None:
+    rows = build_strata_rows(
+        [
+            {
+                "occurrence_rank": "1",
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT_WLC",
+                "present_corpora": "MT_WLC",
+                "term_id": "term_h",
+                "concept": "Term",
+                "category": "semantic",
+                "normalized_term": "אבג",
+                "start_ref": "Gen 4:7",
+                "center_ref": "Gen 4:8",
+                "end_ref": "Gen 4:9",
+                "center_word": "center",
+                "center_normalized_word": "center",
+                "skip": "7",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+            },
+            {
+                "occurrence_rank": "2",
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "LXX",
+                "present_corpora": "LXX",
+                "term_id": "term_g",
+                "concept": "Term",
+                "category": "semantic",
+                "normalized_term": "αβγ",
+                "start_ref": "Gen 4:6",
+                "center_ref": "Gen 4:7",
+                "end_ref": "Gen 4:8",
+                "center_word": "center",
+                "center_normalized_word": "center",
+                "skip": "7",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+            },
+            {
+                "occurrence_rank": "3",
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT_WLC",
+                "present_corpora": "MT_WLC",
+                "term_id": "span_only",
+                "concept": "Span Only",
+                "category": "semantic",
+                "normalized_term": "דגה",
+                "start_ref": "Gen 4:8",
+                "center_ref": "Gen 4:10",
+                "end_ref": "Gen 4:11",
+                "center_word": "center",
+                "center_normalized_word": "center",
+                "skip": "7",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+            },
+        ],
+        semantic_divergence_mappings=[
+            {
+                "mapping_id": "gen4_dialogue",
+                "mt_ref": "Gen 4:8",
+                "lxx_ref": "Gen 4:7",
+                "mt_anchor_text": "field",
+                "lxx_anchor_text": "field",
+                "divergence_type": "plus_minus",
+            }
+        ],
+    )
+
+    by_rank = {row["occurrence_rank"]: row for row in rows}
+    assert by_rank["1"]["lxx_vs_mt_semantic_divergence"] == "yes"
+    assert by_rank["1"]["lxx_vs_mt_semantic_divergence_side"] == "mt"
+    assert by_rank["1"]["lxx_vs_mt_semantic_divergence_mappings"] == "gen4_dialogue"
+    assert "lxx_vs_mt_semantic_divergence" in by_rank["1"]["extended_strata"]
+    assert by_rank["2"]["lxx_vs_mt_semantic_divergence"] == "yes"
+    assert by_rank["2"]["lxx_vs_mt_semantic_divergence_side"] == "lxx"
+    assert by_rank["3"]["lxx_vs_mt_semantic_divergence"] == "no"
+
+
 def test_build_strata_rows_adds_meaningful_skip_and_gematria_flags() -> None:
     rows = build_strata_rows(
         [

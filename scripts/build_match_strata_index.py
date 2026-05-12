@@ -46,8 +46,11 @@ DEFAULT_THEMATIC_CHAPTERS = Path("data/study/mappings/thematic_chapters.csv")
 DEFAULT_AUTHOR_BOOK_MAPPING = Path("data/study/mappings/author_book_mapping.csv")
 DEFAULT_PROTAGONIST_NARRATIVE_MAPPING = Path("data/study/mappings/protagonist_narrative_mapping.csv")
 DEFAULT_OT_IN_NT_QUOTATIONS = Path("data/study/mappings/ot_in_nt_quotations.csv")
+DEFAULT_MT_LXX_SEMANTIC_DIVERGENCE = Path("data/study/mappings/mt_lxx_semantic_divergence.csv")
 
 GROUP_FIELDS = ("source_family", "source_queue", "corpus", "present_corpora", "term_id", "normalized_term")
+MT_CORPUS_LABELS = frozenset({"MT", "MT_WLC", "UXLC", "EBIBLE_WLC", "MAM", "UHB"})
+LXX_CORPUS_LABELS = frozenset({"LXX"})
 DEFAULT_CORPUS_CONFIGS = (
     "MT_WLC=configs/example_oshb_wlc.toml",
     "UXLC=configs/example_uxlc.toml",
@@ -121,6 +124,10 @@ FIELDNAMES = [
     "nt_quotation_span",
     "nt_quotation_span_mappings",
     "nt_quotation_span_evidence",
+    "lxx_vs_mt_semantic_divergence",
+    "lxx_vs_mt_semantic_divergence_side",
+    "lxx_vs_mt_semantic_divergence_mappings",
+    "lxx_vs_mt_semantic_divergence_evidence",
     "boundary_strata",
     "boundary_corpora",
     "boundary_evidence",
@@ -156,6 +163,7 @@ def main(argv: list[str] | None = None) -> int:
     author_mappings = read_mapping_rows(args.author_book_mapping)
     protagonist_mappings = read_mapping_rows(args.protagonist_narrative_mapping)
     quotation_mappings = read_mapping_rows(args.ot_in_nt_quotations)
+    semantic_divergence_mappings = read_mapping_rows(args.mt_lxx_semantic_divergence)
     corpus_configs = corpus_config_map(args.corpus_config)
     boundary_indexes, bigram_profiles, letter_frequency_profiles = load_corpus_metadata(corpus_configs)
     rows = build_strata_rows(
@@ -166,6 +174,7 @@ def main(argv: list[str] | None = None) -> int:
         author_mappings=author_mappings,
         protagonist_mappings=protagonist_mappings,
         quotation_mappings=quotation_mappings,
+        semantic_divergence_mappings=semantic_divergence_mappings,
         bigram_profiles=bigram_profiles,
         letter_frequency_profiles=letter_frequency_profiles,
     )
@@ -193,6 +202,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--author-book-mapping", type=Path, default=DEFAULT_AUTHOR_BOOK_MAPPING)
     parser.add_argument("--protagonist-narrative-mapping", type=Path, default=DEFAULT_PROTAGONIST_NARRATIVE_MAPPING)
     parser.add_argument("--ot-in-nt-quotations", type=Path, default=DEFAULT_OT_IN_NT_QUOTATIONS)
+    parser.add_argument("--mt-lxx-semantic-divergence", type=Path, default=DEFAULT_MT_LXX_SEMANTIC_DIVERGENCE)
     parser.add_argument("--markdown-row-limit", type=int, default=80)
     parser.add_argument("--cross-skip-letter-distance", type=int, default=10)
     parser.add_argument(
@@ -213,6 +223,7 @@ def build_strata_rows(
     author_mappings: list[dict[str, str]] | None = None,
     protagonist_mappings: list[dict[str, str]] | None = None,
     quotation_mappings: list[dict[str, str]] | None = None,
+    semantic_divergence_mappings: list[dict[str, str]] | None = None,
     bigram_profiles: dict[str, BigramProfile] | None = None,
     letter_frequency_profiles: dict[str, LetterFrequencyProfile] | None = None,
     cross_skip_letter_distance: int = 10,
@@ -226,6 +237,7 @@ def build_strata_rows(
     author_mappings = author_mappings or []
     protagonist_mappings = protagonist_mappings or []
     quotation_mappings = quotation_mappings or []
+    semantic_divergence_mappings = semantic_divergence_mappings or []
     bigram_profiles = bigram_profiles or {}
     letter_frequency_profiles = letter_frequency_profiles or {}
     cross_skip = cross_skip_annotations(input_rows, within_letter_distance=cross_skip_letter_distance)
@@ -253,6 +265,7 @@ def build_strata_rows(
             name_field="protagonist_name",
         )
         quotation_anchor_matches, quotation_span_matches = quotation_mapping_matches(row, quotation_mappings)
+        semantic_divergence_matches = semantic_divergence_mapping_matches(row, semantic_divergence_mappings)
         cross = cross_skip.get(row_identity(row), {})
         skip_values = sorted({abs(value) for value in parse_skip_values(row.get("skip", ""))})
         constant_skips = [value for value in skip_values if value in meaningful_constants]
@@ -288,6 +301,8 @@ def build_strata_rows(
             strata.append("nt_quotation_anchor")
         if quotation_span_matches:
             strata.append("nt_quotation_span")
+        if semantic_divergence_matches:
+            strata.append("lxx_vs_mt_semantic_divergence")
         if cross.get("word_pair_count"):
             strata.append("cross_skip_pair_at_word")
         if cross.get("letter_pair_count"):
@@ -378,6 +393,16 @@ def build_strata_rows(
                 "nt_quotation_span": "yes" if quotation_span_matches else "no",
                 "nt_quotation_span_mappings": ";".join(match["mapping_id"] for match in quotation_span_matches),
                 "nt_quotation_span_evidence": ";".join(match["evidence"] for match in quotation_span_matches),
+                "lxx_vs_mt_semantic_divergence": "yes" if semantic_divergence_matches else "no",
+                "lxx_vs_mt_semantic_divergence_side": ";".join(
+                    sorted({match["side"] for match in semantic_divergence_matches})
+                ),
+                "lxx_vs_mt_semantic_divergence_mappings": ";".join(
+                    match["mapping_id"] for match in semantic_divergence_matches
+                ),
+                "lxx_vs_mt_semantic_divergence_evidence": ";".join(
+                    match["evidence"] for match in semantic_divergence_matches
+                ),
                 "boundary_strata": ";".join(boundary_strata),
                 "boundary_corpora": ";".join(boundary_corpora),
                 "boundary_evidence": ";".join(boundary_evidence),
@@ -778,6 +803,51 @@ def quotation_match_row(mapping: dict[str, str], kind: str) -> dict[str, str]:
     }
 
 
+def semantic_divergence_mapping_matches(
+    row: dict[str, str],
+    mappings: list[dict[str, str]],
+) -> list[dict[str, str]]:
+    center = parse_ref(row.get("center_ref", ""))
+    if center is None or not mappings:
+        return []
+    center_key = ref_key_for_parsed(center)
+    matches: list[dict[str, str]] = []
+    for side in semantic_divergence_sides(row):
+        ref_column = "mt_ref" if side == "mt" else "lxx_ref"
+        for mapping in mappings:
+            mapped = parse_ref(mapping.get(ref_column, ""))
+            if mapped is None or ref_key_for_parsed(mapped) != center_key:
+                continue
+            matches.append(
+                {
+                    "mapping_id": mapping.get("mapping_id", ""),
+                    "side": side,
+                    "evidence": semantic_divergence_evidence(mapping, side),
+                }
+            )
+    return matches
+
+
+def semantic_divergence_sides(row: dict[str, str]) -> list[str]:
+    labels = candidate_corpora(row)
+    sides = []
+    if any(label in MT_CORPUS_LABELS for label in labels):
+        sides.append("mt")
+    if any(label in LXX_CORPUS_LABELS for label in labels):
+        sides.append("lxx")
+    return sides
+
+
+def semantic_divergence_evidence(mapping: dict[str, str], side: str) -> str:
+    ref = mapping.get("mt_ref", "") if side == "mt" else mapping.get("lxx_ref", "")
+    other_ref = mapping.get("lxx_ref", "") if side == "mt" else mapping.get("mt_ref", "")
+    return (
+        f"{mapping.get('mapping_id', '')}:{side}:"
+        f"{ref} vs {other_ref}:"
+        f"{mapping.get('divergence_type', '')}"
+    )
+
+
 def row_ref_range(row: dict[str, str]) -> tuple[tuple[int, int, int], tuple[int, int, int]] | None:
     start = parse_ref(row.get("start_ref", ""))
     end = parse_ref(row.get("end_ref", ""))
@@ -836,7 +906,7 @@ def write_markdown(
         "",
         f"- annotated occurrence rows: {len(rows):,}",
         "- materialized now: `forward_only`, `backward_only`, `bidirectional_present`, `canonical_first_occurrence`, available `boundary_*` endpoint strata, and cross-skip pair strata.",
-        "- mapping-dependent and quotation strata use locked CSVs under `data/study/mappings/`; only rows matching populated entries are flagged.",
+        "- mapping-dependent, quotation, and MT/LXX divergence strata use locked CSVs under `data/study/mappings/`; only rows matching populated entries are flagged.",
         "- meaningful skip strata use the locked constants file and standard Hebrew/Greek gematria only as review flags.",
         "- bigram-surprise strata compare the hidden term's adjacent letter pairs to the matched corpus text.",
         "- letter-frequency anomaly strata compare the hidden term's individual letters to the matched corpus text.",
@@ -966,6 +1036,25 @@ def write_markdown(
             lines.append(
                 f"| ... | ... | ... | ... | ... | {len(quotation_rows) - args.markdown_row_limit:,} more quotation rows in CSV |"
             )
+    semantic_divergence_rows = [
+        row for row in rows if row.get("lxx_vs_mt_semantic_divergence") == "yes"
+    ]
+    if semantic_divergence_rows:
+        lines.extend(
+            [
+                "",
+                "## MT/LXX Semantic Divergence Rows",
+                "",
+                "| Rank | Term | Center | Side | Evidence | Source |",
+                "| ---: | --- | --- | --- | --- | --- |",
+            ]
+        )
+        for row in semantic_divergence_rows[: args.markdown_row_limit]:
+            lines.append(semantic_divergence_markdown_row(row))
+        if len(semantic_divergence_rows) > args.markdown_row_limit:
+            lines.append(
+                f"| ... | ... | ... | ... | ... | {len(semantic_divergence_rows) - args.markdown_row_limit:,} more MT/LXX divergence rows in CSV |"
+            )
     meaningful_rows = [
         row
         for row in rows
@@ -1035,7 +1124,8 @@ def write_markdown(
             "- `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.",
             "- `cross_skip_pair_at_letter` means two different terms at different skips share at least one retained letter-path position.",
             "- `cross_skip_pair_within_N_letters` means two different terms at different skips have endpoints within the configured letter distance.",
-            "- `canonical_first_in_thematic_chapter`, `author_in_own_book`, `protagonist_in_own_narrative`, `nt_quotation_anchor`, and `nt_quotation_span` are locked-mapping annotations only; empty or nonmatching mapping entries do not flag rows.",
+            "- `canonical_first_in_thematic_chapter`, `author_in_own_book`, `protagonist_in_own_narrative`, `nt_quotation_anchor`, `nt_quotation_span`, and `lxx_vs_mt_semantic_divergence` are locked-mapping annotations only; empty or nonmatching mapping entries do not flag rows.",
+            "- `lxx_vs_mt_semantic_divergence` is center-locus only; a full-span hidden path is not flagged merely because it crosses a declared MT/LXX divergence.",
             "- Meaningful-skip and gematria-skip strata are metadata flags; they do not change the search space or promote claim status.",
             "- Bigram-surprise strata are corpus-local review aids, not claim promotion rules; missing adjacent surface bigrams count as rare.",
             "- Letter-frequency anomaly strata are corpus-local review aids; missing letters count as rare.",
@@ -1144,6 +1234,17 @@ def quotation_markdown_row(row: dict[str, object]) -> str:
     )
 
 
+def semantic_divergence_markdown_row(row: dict[str, object]) -> str:
+    term = display_term(str(row.get("normalized_term", "")), english=str(row.get("concept", "")))
+    center = f"{row.get('center_ref', '')} {display_term(str(row.get('center_word', '')))}"
+    return (
+        f"| {row.get('occurrence_rank', '')} | {term} | {md_cell(center)} | "
+        f"{md_cell(row.get('lxx_vs_mt_semantic_divergence_side', ''))} | "
+        f"{md_cell(row.get('lxx_vs_mt_semantic_divergence_evidence', ''))} | "
+        f"`{row.get('source_family', '')}` |"
+    )
+
+
 def bigram_markdown_row(row: dict[str, object]) -> str:
     term = display_term(str(row.get("normalized_term", "")), english=str(row.get("concept", "")))
     center = f"{row.get('center_ref', '')} {display_term(str(row.get('center_word', '')))}"
@@ -1206,6 +1307,7 @@ def write_manifest(
             "author_book_mapping": str(args.author_book_mapping),
             "protagonist_narrative_mapping": str(args.protagonist_narrative_mapping),
             "ot_in_nt_quotations": str(args.ot_in_nt_quotations),
+            "mt_lxx_semantic_divergence": str(args.mt_lxx_semantic_divergence),
         },
         "outputs": {
             "out": str(args.out),
@@ -1370,6 +1472,7 @@ def reproduce_command(args: argparse.Namespace) -> str:
         f"--author-book-mapping {args.author_book_mapping} "
         f"--protagonist-narrative-mapping {args.protagonist_narrative_mapping} "
         f"--ot-in-nt-quotations {args.ot_in_nt_quotations} "
+        f"--mt-lxx-semantic-divergence {args.mt_lxx_semantic_divergence} "
         f"--out {args.out} "
         f"--summary-out {args.summary_out} "
         f"--markdown-out {args.markdown_out} "
