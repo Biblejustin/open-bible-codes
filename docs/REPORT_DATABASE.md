@@ -14,6 +14,10 @@ are not huge individually, but together they currently add about 1.9 million
 rows and are much easier to compare, filter by multiple, and join from DuckDB
 than by repeatedly scanning CSVs.
 
+The expanded post-search strata outputs are also imported by default. They are
+small today, but keeping them in DuckDB makes final-report audit joins consistent
+with the larger CRD, all-codes, matrix-cluster, and passage-gap tables.
+
 ## Install
 
 DuckDB is optional. The command-line DuckDB installed by Homebrew is useful, but
@@ -70,6 +74,30 @@ python3 -m scripts.build_report_db --skip-missing --force
 - `hebrew_theology_surface_all_codes`
 - `hebrew_theology_surface_all_codes_summary`
 - `dynamic_skip_focus_full_span_exported_hits`
+- `matrix_cluster_candidates`
+- `matrix_cluster_summary`
+- `matrix_cluster_relation_control_summary`
+- `matrix_cluster_term_pair_control_summary`
+- `notable_passage_gap_detail`
+- `notable_passage_gap_passage_summary`
+- `notable_passage_gap_cross_source_summary`
+- `thematic_chapter_absence_detail`
+- `thematic_chapter_absence_passage_summary`
+- `thematic_chapter_absence_cross_source_summary`
+- `match_strata_occurrence_strata`
+- `match_strata_summary`
+- `boundary_alignment_summary`
+- `chapter_position_bias_summary`
+- `direction_asymmetry_summary`
+- `direction_asymmetry_term_summary`
+- `canonical_first_summary`
+- `canonical_first_occurrences`
+- `cross_skip_summary`
+- `cross_skip_candidate_rows`
+- `review_flag_summary`
+- `review_flag_rows`
+- `cohort_cluster_density_windows`
+- `cohort_cluster_density_summary`
 - `word_counts_by_word`
 - `word_counts_by_book`
 - `word_counts_by_chapter`

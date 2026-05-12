@@ -89,6 +89,41 @@ def test_report_table_name_for_matrix_and_gap_paths() -> None:
     )
 
 
+def test_report_table_name_for_expanded_strata_paths() -> None:
+    assert (
+        report_table_name_for_path(Path("reports/match_strata_index/occurrence_strata.csv"))
+        == "match_strata_occurrence_strata"
+    )
+    assert report_table_name_for_path(Path("reports/match_strata_index/strata_summary.csv")) == "match_strata_summary"
+    assert report_table_name_for_path(Path("reports/boundary_alignment/summary.csv")) == "boundary_alignment_summary"
+    assert (
+        report_table_name_for_path(Path("reports/chapter_position_bias/summary.csv"))
+        == "chapter_position_bias_summary"
+    )
+    assert report_table_name_for_path(Path("reports/direction_asymmetry/summary.csv")) == "direction_asymmetry_summary"
+    assert (
+        report_table_name_for_path(Path("reports/direction_asymmetry/term_summary.csv"))
+        == "direction_asymmetry_term_summary"
+    )
+    assert report_table_name_for_path(Path("reports/canonical_first_summary/summary.csv")) == "canonical_first_summary"
+    assert (
+        report_table_name_for_path(Path("reports/canonical_first_summary/first_occurrences.csv"))
+        == "canonical_first_occurrences"
+    )
+    assert report_table_name_for_path(Path("reports/cross_skip_summary/summary.csv")) == "cross_skip_summary"
+    assert report_table_name_for_path(Path("reports/cross_skip_summary/candidate_rows.csv")) == "cross_skip_candidate_rows"
+    assert report_table_name_for_path(Path("reports/review_flag_summary/summary.csv")) == "review_flag_summary"
+    assert report_table_name_for_path(Path("reports/review_flag_summary/flag_rows.csv")) == "review_flag_rows"
+    assert (
+        report_table_name_for_path(Path("reports/cohort_cluster_density/windows.csv"))
+        == "cohort_cluster_density_windows"
+    )
+    assert (
+        report_table_name_for_path(Path("reports/cohort_cluster_density/summary.csv"))
+        == "cohort_cluster_density_summary"
+    )
+
+
 def test_import_csv_table_uses_report_table_mapping_by_default(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     csv_path = tmp_path / "reports" / "hebrew_screening_all_codes" / "surface_all_codes.csv"
     csv_path.parent.mkdir(parents=True)
