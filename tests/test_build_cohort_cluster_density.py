@@ -81,6 +81,7 @@ def test_main_writes_outputs(tmp_path: Path) -> None:
     cohort = tmp_path / "demo_terms.csv"
     out = tmp_path / "windows.csv"
     summary = tmp_path / "summary.csv"
+    markdown = tmp_path / "report.md"
     manifest = tmp_path / "manifest.json"
 
     rows = [occurrence("alpha", 10), occurrence("beta", 15)]
@@ -107,6 +108,8 @@ def test_main_writes_outputs(tmp_path: Path) -> None:
                 str(out),
                 "--summary-out",
                 str(summary),
+                "--markdown-out",
+                str(markdown),
                 "--manifest-out",
                 str(manifest),
             ]
@@ -116,4 +119,5 @@ def test_main_writes_outputs(tmp_path: Path) -> None:
 
     assert "alpha;beta" in out.read_text(encoding="utf-8")
     assert "demo_terms" in summary.read_text(encoding="utf-8")
+    assert "Candidate Windows" in markdown.read_text(encoding="utf-8")
     assert json.loads(manifest.read_text(encoding="utf-8"))["window_rows"] == 1

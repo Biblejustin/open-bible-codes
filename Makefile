@@ -77,7 +77,7 @@ cipher-layered-pairs:
 	python3 -m scripts.build_cipher_layered_pairs --plain-hits "$(CIPHER_LAYERED_PLAIN_HITS)" --cipher-hits "$(CIPHER_LAYERED_CIPHER_HITS)" --out reports/cipher_layered_pairs/pairs.csv --summary-out reports/cipher_layered_pairs/summary.csv --manifest-out reports/cipher_layered_pairs/manifest.json
 
 cohort-cluster-density:
-	python3 -m scripts.build_cohort_cluster_density --occurrences "$(COHORT_CLUSTER_OCCURRENCES)" --cohort "$(COHORT_CLUSTER_TERMS)" --window-words "$(COHORT_CLUSTER_WINDOW_WORDS)" --min-distinct-terms "$(COHORT_CLUSTER_MIN_DISTINCT)" $(COHORT_CLUSTER_CORPUS_CONFIGS) --out reports/cohort_cluster_density/windows.csv --summary-out reports/cohort_cluster_density/summary.csv --manifest-out reports/cohort_cluster_density/manifest.json
+	python3 -m scripts.build_cohort_cluster_density --occurrences "$(COHORT_CLUSTER_OCCURRENCES)" --cohort "$(COHORT_CLUSTER_TERMS)" --window-words "$(COHORT_CLUSTER_WINDOW_WORDS)" --min-distinct-terms "$(COHORT_CLUSTER_MIN_DISTINCT)" $(COHORT_CLUSTER_CORPUS_CONFIGS) --out reports/cohort_cluster_density/windows.csv --summary-out reports/cohort_cluster_density/summary.csv --markdown-out docs/COHORT_CLUSTER_DENSITY_AUDIT.md --manifest-out reports/cohort_cluster_density/manifest.json
 
 crd-review-scaffold:
 	python3 -m scripts.scaffold_crd_relevance_dictionary --term-file terms/gog_magog_pair_prospective_terms.csv --out reports/crd/relevance_dictionary_draft.toml --queue-out reports/crd/relevance_review_queue.csv --locked-by "$(CRD_LOCKED_BY)" --reviewer "$(CRD_REVIEWER)" --drafted-with "$(CRD_DRAFTED_WITH)"

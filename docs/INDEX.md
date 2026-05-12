@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 258
+Documents indexed: 259
 
 ## Controls
 
@@ -168,6 +168,7 @@ Documents indexed: 258
 | Biblical Tribes | `BIBLICAL_TRIBES.md` |
 | Centered Occurrence Index | `CENTERED_OCCURRENCE_INDEX.md` |
 | Claim Catalog | `CLAIM_CATALOG.md` |
+| Cohort Cluster Density Audit | `COHORT_CLUSTER_DENSITY_AUDIT.md` |
 | Common Bible Codes / ELS Test | `COMMON_EDLS_TEST.md` |
 | Cosmic Codes Source Audit | `COSMIC_CODES_AUDIT.md` |
 | Centered-Relevance Density Framework | `CRD_FRAMEWORK.md` |

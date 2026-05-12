@@ -22,6 +22,7 @@ DEFAULT_OCCURRENCES = Path("reports/centered_occurrence_index/centered_occurrenc
 DEFAULT_OUT = Path("reports/cohort_cluster_density/windows.csv")
 DEFAULT_SUMMARY_OUT = Path("reports/cohort_cluster_density/summary.csv")
 DEFAULT_MANIFEST_OUT = Path("reports/cohort_cluster_density/manifest.json")
+DEFAULT_MARKDOWN_OUT = Path("docs/COHORT_CLUSTER_DENSITY_AUDIT.md")
 
 FIELDNAMES = [
     "cohort_id",
@@ -79,6 +80,7 @@ def main(argv: list[str] | None = None) -> int:
     summary_rows = summarize_rows(window_rows)
     write_rows(args.out, FIELDNAMES, window_rows)
     write_rows(args.summary_out, SUMMARY_FIELDNAMES, summary_rows)
+    write_markdown(args.markdown_out, args, window_rows, summary_rows)
     write_manifest(
         args.manifest_out,
         args,
@@ -91,6 +93,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     print(args.out)
     print(args.summary_out)
+    print(args.markdown_out)
     print(args.manifest_out)
     return 0
 
@@ -110,7 +113,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
+    parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MARKDOWN_OUT)
     parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST_OUT)
+    parser.add_argument("--markdown-row-limit", type=int, default=40)
     return parser
 
 
@@ -318,6 +323,75 @@ def write_rows(path: Path, fieldnames: list[str], rows: list[dict[str, object]])
         writer.writerows(rows)
 
 
+def write_markdown(
+    path: Path,
+    args: argparse.Namespace,
+    rows: list[dict[str, object]],
+    summary_rows: list[dict[str, object]],
+) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    lines = [
+        "# Cohort Cluster Density Audit",
+        "",
+        "Status: post-search review aid, not claim promotion.",
+        "",
+        "This report finds centered hits from a declared cohort that land inside",
+        "a fixed word window in the same corpus. Cohort choice and window size are",
+        "study-defining inputs and require matched controls for claim language.",
+        "",
+        "## Settings",
+        "",
+        f"- Occurrences: `{args.occurrences}`",
+        f"- Cohorts: {', '.join(f'`{path}`' for path in args.cohort)}",
+        f"- Window words: `{args.window_words}`",
+        f"- Minimum distinct terms: `{args.min_distinct_terms}`",
+        f"- Candidate windows: `{len(rows)}`",
+        "",
+        "## Summary",
+        "",
+    ]
+    if summary_rows:
+        lines.extend(["| Bucket | Value | Windows | Max distinct terms |", "| --- | --- | ---: | ---: |"])
+        for row in summary_rows:
+            lines.append(
+                f"| `{row['bucket']}` | `{row['value']}` | {row['windows']} | {row['max_distinct_term_count']} |"
+            )
+    else:
+        lines.append("No windows met the declared threshold.")
+
+    lines.extend(["", "## Candidate Windows", ""])
+    if rows:
+        lines.extend(
+            [
+                "| Cohort | Corpus | Window | Distinct terms | Terms | Center refs |",
+                "| --- | --- | --- | ---: | --- | --- |",
+            ]
+        )
+        for row in rows[: args.markdown_row_limit]:
+            lines.append(
+                "| "
+                f"`{row['cohort_id']}` | `{row['corpus']}` | "
+                f"{row['start_word_ordinal']}..{row['end_word_ordinal']} | "
+                f"{row['distinct_term_count']} | `{row['term_ids']}` | `{row['center_refs']}` |"
+            )
+    else:
+        lines.append("No candidate windows were produced.")
+
+    lines.extend(
+        [
+            "",
+            "## Caution",
+            "",
+            "A cohort-window row is a review prioritization signal. It must be",
+            "rerun against language-matched controls with the same cohort, same",
+            "window width, same centered-occurrence source, and the same correction",
+            "family before it can support comparative claims.",
+            "",
+        ]
+    )
+    path.write_text("\n".join(lines), encoding="utf-8")
+
+
 def write_manifest(
     path: Path,
     args: argparse.Namespace,
@@ -348,6 +422,7 @@ def write_manifest(
         "outputs": {
             "out": str(args.out),
             "summary_out": str(args.summary_out),
+            "markdown_out": str(args.markdown_out),
             "manifest_out": str(args.manifest_out),
         },
         "occurrence_rows": len(occurrence_rows),

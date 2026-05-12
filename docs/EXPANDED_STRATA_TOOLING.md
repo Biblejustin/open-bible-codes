@@ -168,6 +168,7 @@ python3 -m scripts.build_cohort_cluster_density \
   --min-distinct-terms 2 \
   --out reports/cohort_cluster_density/windows.csv \
   --summary-out reports/cohort_cluster_density/summary.csv \
+  --markdown-out docs/COHORT_CLUSTER_DENSITY_AUDIT.md \
   --manifest-out reports/cohort_cluster_density/manifest.json
 ```
 
