@@ -4,6 +4,7 @@ from types import SimpleNamespace
 from els.corpus import Corpus, VerseSpan, WordSpan
 from scripts.analyze_notable_passage_gaps import (
     Passage,
+    add_uniform_zero_q_values,
     classify_gap,
     parse_ref,
     passage_span,
@@ -94,6 +95,29 @@ def test_classify_gap_low_vs_uniform() -> None:
     )
 
 
+def test_add_uniform_zero_q_values_only_scores_gap_rows() -> None:
+    rows = [
+        {
+            "gap_class": "absent_in_passage_common_elsewhere",
+            "uniform_zero_probability": "0.010000",
+        },
+        {
+            "gap_class": "present_in_passage",
+            "uniform_zero_probability": "0.001000",
+        },
+        {
+            "gap_class": "low_in_passage_vs_uniform",
+            "uniform_zero_probability": "0.020000",
+        },
+    ]
+
+    add_uniform_zero_q_values(rows)
+
+    assert rows[0]["uniform_zero_bh_q"] == "0.020000"
+    assert rows[1]["uniform_zero_bh_q"] == ""
+    assert rows[2]["uniform_zero_bh_q"] == "0.020000"
+
+
 def test_write_markdown_includes_declared_gap_target_section(tmp_path) -> None:
     out = tmp_path / "gaps.md"
     args = SimpleNamespace(
@@ -146,4 +170,5 @@ def test_write_markdown_includes_declared_gap_target_section(tmp_path) -> None:
     assert "## Declared Gap-Target Detail" in text
     assert "Leviticus 24 Blasphemy Law" in text
     assert "Uniform Zero P" in text
+    assert "Uniform Zero Q" in text
     assert "0.049787" in text

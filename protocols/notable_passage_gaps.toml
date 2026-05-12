@@ -62,6 +62,7 @@ inputs = [
   "configs/example_ebible_engkjv_apocrypha.toml",
   "els/corpus.py",
   "els/search.py",
+  "els/statistics.py",
   "els/term_display.py",
   "scripts/analyze_mt_version_differences.py",
 ]

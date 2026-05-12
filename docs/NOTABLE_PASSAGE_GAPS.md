@@ -66,48 +66,48 @@ These rows isolate passages explicitly registered as gap targets, instead of let
 
 ## Declared Gap-Target Detail
 
-| Passage | Corpus | Term | Gap Class | Hits Elsewhere | Hits In Passage | Uniform Expected | Uniform Zero P | Sample Center Refs |
-| --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| Leviticus 24 Blasphemy Law | UXLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11262 | 0 | 9.756 | 0.000058 |  |
-| Leviticus 24 Blasphemy Law | MT_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11258 | 0 | 9.753 | 0.000058 |  |
-| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11256 | 0 | 9.751 | 0.000058 |  |
-| Leviticus 24 Blasphemy Law | MAM | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11254 | 0 | 9.709 | 0.000061 |  |
-| Leviticus 24 Blasphemy Law | UHB | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11202 | 0 | 9.716 | 0.000060 |  |
-| Leviticus 24 Blasphemy Law | MAM | `פסח` (Pesach; English: Passover) | absent_in_passage_common_elsewhere | 3163 | 0 | 2.729 | 0.065293 |  |
-| Leviticus 24 Blasphemy Law | UHB | `פסח` (Pesach; English: Passover) | absent_in_passage_common_elsewhere | 3049 | 0 | 2.644 | 0.071042 |  |
-| Leviticus 24 Blasphemy Law | MT_WLC | `פסח` (Pesach; English: Passover) | absent_in_passage_common_elsewhere | 3049 | 0 | 2.641 | 0.071265 |  |
-| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `פסח` (Pesach; English: Passover) | absent_in_passage_common_elsewhere | 3047 | 0 | 2.640 | 0.071388 |  |
-| Leviticus 24 Blasphemy Law | UXLC | `פסח` (Pesach; English: Passover) | absent_in_passage_common_elsewhere | 3045 | 0 | 2.638 | 0.071512 |  |
-| Leviticus 24 Blasphemy Law | UXLC | `מגוג` (Magog; English: Magog) | absent_in_passage_common_elsewhere | 914 | 0 | 0.792 | 0.453029 |  |
-| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `מגוג` (Magog; English: Magog) | absent_in_passage_common_elsewhere | 912 | 0 | 0.790 | 0.453814 |  |
-| Leviticus 24 Blasphemy Law | MT_WLC | `מגוג` (Magog; English: Magog) | absent_in_passage_common_elsewhere | 912 | 0 | 0.790 | 0.453814 |  |
-| Leviticus 24 Blasphemy Law | MAM | `מגוג` (Magog; English: Magog) | absent_in_passage_common_elsewhere | 909 | 0 | 0.784 | 0.456468 |  |
-| Leviticus 24 Blasphemy Law | UHB | `מגוג` (Magog; English: Magog) | absent_in_passage_common_elsewhere | 877 | 0 | 0.761 | 0.467363 |  |
-| Leviticus 24 Blasphemy Law | UHB | `חבורה` (chabburah; English: Wound) | absent_in_passage_common_elsewhere | 768 | 0 | 0.666 | 0.513703 |  |
-| Leviticus 24 Blasphemy Law | MAM | `חבורה` (chabburah; English: Wound) | absent_in_passage_common_elsewhere | 763 | 0 | 0.658 | 0.517743 |  |
-| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `חבורה` (chabburah; English: Wound) | absent_in_passage_common_elsewhere | 761 | 0 | 0.659 | 0.517236 |  |
-| Leviticus 24 Blasphemy Law | MT_WLC | `חבורה` (chabburah; English: Wound) | absent_in_passage_common_elsewhere | 757 | 0 | 0.656 | 0.519032 |  |
-| Leviticus 24 Blasphemy Law | UXLC | `חבורה` (chabburah; English: Wound) | absent_in_passage_common_elsewhere | 756 | 0 | 0.655 | 0.519482 |  |
-| Leviticus 24 Blasphemy Law | MAM | `משפט` (mshpt; English: Judgment) | absent_in_passage_common_elsewhere | 445 | 0 | 0.384 | 0.681184 |  |
-| Leviticus 24 Blasphemy Law | UHB | `משפט` (mshpt; English: Judgment) | absent_in_passage_common_elsewhere | 430 | 0 | 0.373 | 0.688698 |  |
-| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `משפט` (mshpt; English: Judgment) | absent_in_passage_common_elsewhere | 408 | 0 | 0.353 | 0.702260 |  |
-| Leviticus 24 Blasphemy Law | UXLC | `משפט` (mshpt; English: Judgment) | absent_in_passage_common_elsewhere | 407 | 0 | 0.353 | 0.702869 |  |
-| Leviticus 24 Blasphemy Law | MT_WLC | `משפט` (mshpt; English: Judgment) | absent_in_passage_common_elsewhere | 406 | 0 | 0.352 | 0.703478 |  |
-| Leviticus 24 Blasphemy Law LXX | LXX | `κρισισ` (krisis; English: Judgment) | absent_in_passage_common_elsewhere | 289 | 0 | 0.215 | 0.806791 |  |
-| Leviticus 24 Blasphemy Law KJVA | KJVA | `magog` | absent_in_passage_common_elsewhere | 170 | 0 | 0.099 | 0.905438 |  |
-| Leviticus 24 Blasphemy Law | UHB | `יומיהוה` (yom YHWH; English: Day Of YHWH) | absent_in_passage_common_elsewhere | 119 | 0 | 0.103 | 0.901936 |  |
-| Leviticus 24 Blasphemy Law | MAM | `יומיהוה` (yom YHWH; English: Day Of YHWH) | absent_in_passage_common_elsewhere | 111 | 0 | 0.096 | 0.908678 |  |
-| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `יומיהוה` (yom YHWH; English: Day Of YHWH) | absent_in_passage_common_elsewhere | 109 | 0 | 0.094 | 0.909894 |  |
-| Leviticus 24 Blasphemy Law | MT_WLC | `יומיהוה` (yom YHWH; English: Day Of YHWH) | absent_in_passage_common_elsewhere | 106 | 0 | 0.092 | 0.912262 |  |
-| Leviticus 24 Blasphemy Law | UXLC | `יומיהוה` (yom YHWH; English: Day Of YHWH) | absent_in_passage_common_elsewhere | 106 | 0 | 0.092 | 0.912262 |  |
-| Leviticus 24 Blasphemy Law LXX | LXX | `μαγωγ` (magog; English: Magog) | absent_in_passage_common_elsewhere | 60 | 0 | 0.045 | 0.956406 |  |
-| Leviticus 24 Blasphemy Law | UHB | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 29 | 0 | 0.025 | 0.975161 |  |
-| Leviticus 24 Blasphemy Law LXX | LXX | `λυχνια` (luchnia; English: Lampstand) | absent_in_passage_common_elsewhere | 27 | 0 | 0.020 | 0.980142 |  |
-| Leviticus 24 Blasphemy Law | MAM | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 25 | 0 | 0.022 | 0.978662 |  |
-| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 22 | 0 | 0.019 | 0.981122 |  |
-| Leviticus 24 Blasphemy Law | MT_WLC | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 22 | 0 | 0.019 | 0.981122 |  |
-| Leviticus 24 Blasphemy Law | UXLC | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 22 | 0 | 0.019 | 0.981122 |  |
-| Leviticus 24 Blasphemy Law | MAM | `כסא` (kisse; English: Throne) | low_in_passage_vs_uniform | 23834 | 4 | 20.566 | 0.000000 | Lev 24:14 |
+| Passage | Corpus | Term | Gap Class | Hits Elsewhere | Hits In Passage | Uniform Expected | Uniform Zero P | Uniform Zero Q | Sample Center Refs |
+| --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Leviticus 24 Blasphemy Law | UXLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11262 | 0 | 9.756 | 0.000058 | 0.000513 |  |
+| Leviticus 24 Blasphemy Law | MT_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11258 | 0 | 9.753 | 0.000058 | 0.000513 |  |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11256 | 0 | 9.751 | 0.000058 | 0.000513 |  |
+| Leviticus 24 Blasphemy Law | MAM | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11254 | 0 | 9.709 | 0.000061 | 0.000530 |  |
+| Leviticus 24 Blasphemy Law | UHB | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11202 | 0 | 9.716 | 0.000060 | 0.000526 |  |
+| Leviticus 24 Blasphemy Law | MAM | `פסח` (Pesach; English: Passover) | absent_in_passage_common_elsewhere | 3163 | 0 | 2.729 | 0.065293 | 0.276038 |  |
+| Leviticus 24 Blasphemy Law | UHB | `פסח` (Pesach; English: Passover) | absent_in_passage_common_elsewhere | 3049 | 0 | 2.644 | 0.071042 | 0.291905 |  |
+| Leviticus 24 Blasphemy Law | MT_WLC | `פסח` (Pesach; English: Passover) | absent_in_passage_common_elsewhere | 3049 | 0 | 2.641 | 0.071265 | 0.291905 |  |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `פסח` (Pesach; English: Passover) | absent_in_passage_common_elsewhere | 3047 | 0 | 2.640 | 0.071388 | 0.291905 |  |
+| Leviticus 24 Blasphemy Law | UXLC | `פסח` (Pesach; English: Passover) | absent_in_passage_common_elsewhere | 3045 | 0 | 2.638 | 0.071512 | 0.291905 |  |
+| Leviticus 24 Blasphemy Law | UXLC | `מגוג` (Magog; English: Magog) | absent_in_passage_common_elsewhere | 914 | 0 | 0.792 | 0.453029 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `מגוג` (Magog; English: Magog) | absent_in_passage_common_elsewhere | 912 | 0 | 0.790 | 0.453814 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | MT_WLC | `מגוג` (Magog; English: Magog) | absent_in_passage_common_elsewhere | 912 | 0 | 0.790 | 0.453814 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | MAM | `מגוג` (Magog; English: Magog) | absent_in_passage_common_elsewhere | 909 | 0 | 0.784 | 0.456468 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | UHB | `מגוג` (Magog; English: Magog) | absent_in_passage_common_elsewhere | 877 | 0 | 0.761 | 0.467363 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | UHB | `חבורה` (chabburah; English: Wound) | absent_in_passage_common_elsewhere | 768 | 0 | 0.666 | 0.513703 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | MAM | `חבורה` (chabburah; English: Wound) | absent_in_passage_common_elsewhere | 763 | 0 | 0.658 | 0.517743 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `חבורה` (chabburah; English: Wound) | absent_in_passage_common_elsewhere | 761 | 0 | 0.659 | 0.517236 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | MT_WLC | `חבורה` (chabburah; English: Wound) | absent_in_passage_common_elsewhere | 757 | 0 | 0.656 | 0.519032 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | UXLC | `חבורה` (chabburah; English: Wound) | absent_in_passage_common_elsewhere | 756 | 0 | 0.655 | 0.519482 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | MAM | `משפט` (mshpt; English: Judgment) | absent_in_passage_common_elsewhere | 445 | 0 | 0.384 | 0.681184 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | UHB | `משפט` (mshpt; English: Judgment) | absent_in_passage_common_elsewhere | 430 | 0 | 0.373 | 0.688698 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `משפט` (mshpt; English: Judgment) | absent_in_passage_common_elsewhere | 408 | 0 | 0.353 | 0.702260 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | UXLC | `משפט` (mshpt; English: Judgment) | absent_in_passage_common_elsewhere | 407 | 0 | 0.353 | 0.702869 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | MT_WLC | `משפט` (mshpt; English: Judgment) | absent_in_passage_common_elsewhere | 406 | 0 | 0.352 | 0.703478 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law LXX | LXX | `κρισισ` (krisis; English: Judgment) | absent_in_passage_common_elsewhere | 289 | 0 | 0.215 | 0.806791 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law KJVA | KJVA | `magog` | absent_in_passage_common_elsewhere | 170 | 0 | 0.099 | 0.905438 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | UHB | `יומיהוה` (yom YHWH; English: Day Of YHWH) | absent_in_passage_common_elsewhere | 119 | 0 | 0.103 | 0.901936 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | MAM | `יומיהוה` (yom YHWH; English: Day Of YHWH) | absent_in_passage_common_elsewhere | 111 | 0 | 0.096 | 0.908678 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `יומיהוה` (yom YHWH; English: Day Of YHWH) | absent_in_passage_common_elsewhere | 109 | 0 | 0.094 | 0.909894 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | MT_WLC | `יומיהוה` (yom YHWH; English: Day Of YHWH) | absent_in_passage_common_elsewhere | 106 | 0 | 0.092 | 0.912262 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | UXLC | `יומיהוה` (yom YHWH; English: Day Of YHWH) | absent_in_passage_common_elsewhere | 106 | 0 | 0.092 | 0.912262 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law LXX | LXX | `μαγωγ` (magog; English: Magog) | absent_in_passage_common_elsewhere | 60 | 0 | 0.045 | 0.956406 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | UHB | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 29 | 0 | 0.025 | 0.975161 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law LXX | LXX | `λυχνια` (luchnia; English: Lampstand) | absent_in_passage_common_elsewhere | 27 | 0 | 0.020 | 0.980142 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | MAM | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 25 | 0 | 0.022 | 0.978662 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 22 | 0 | 0.019 | 0.981122 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | MT_WLC | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 22 | 0 | 0.019 | 0.981122 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | UXLC | `ירושלימ` (yrwshlym; English: Jerusalem) | absent_in_passage_common_elsewhere | 22 | 0 | 0.019 | 0.981122 | 0.997247 |  |
+| Leviticus 24 Blasphemy Law | MAM | `כסא` (kisse; English: Throne) | low_in_passage_vs_uniform | 23834 | 4 | 20.566 | 0.000000 | 0.000000 | Lev 24:14 |
 
 ## Passage Summary
 
@@ -240,88 +240,88 @@ These rows isolate passages explicitly registered as gap targets, instead of let
 
 Rows are sorted by gap class first, then by how frequently the term appears centered elsewhere in the same corpus.
 
-| Passage | Corpus | Term | Gap Class | Hits Elsewhere | Hits In Passage | Uniform Expected | Uniform Zero P | Sample Center Refs |
-| --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| Deuteronomy 6 Shema | MAM | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47982 | 0 | 8.183 | 0.000279 |  |
-| Numbers 6 Priestly Blessing | MAM | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47982 | 0 | 5.988 | 0.002509 |  |
-| Deuteronomy 6 Shema | UXLC | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47586 | 0 | 8.149 | 0.000289 |  |
-| Numbers 6 Priestly Blessing | UXLC | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47586 | 0 | 5.963 | 0.002572 |  |
-| Deuteronomy 6 Shema | MT_WLC | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47582 | 0 | 8.149 | 0.000289 |  |
-| Numbers 6 Priestly Blessing | MT_WLC | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47582 | 0 | 5.962 | 0.002574 |  |
-| Deuteronomy 6 Shema | EBIBLE_WLC | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47540 | 0 | 8.141 | 0.000291 |  |
-| Numbers 6 Priestly Blessing | EBIBLE_WLC | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47540 | 0 | 5.957 | 0.002587 |  |
-| Deuteronomy 6 Shema | UHB | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47483 | 0 | 8.141 | 0.000291 |  |
-| Numbers 6 Priestly Blessing | UHB | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47483 | 0 | 5.957 | 0.002587 |  |
-| Numbers 6 Priestly Blessing | UXLC | `נקב` (nqb; English: Pierce Name) | absent_in_passage_common_elsewhere | 41114 | 0 | 5.152 | 0.005788 |  |
-| Numbers 6 Priestly Blessing | MT_WLC | `נקב` (nqb; English: Pierce Name) | absent_in_passage_common_elsewhere | 41091 | 0 | 5.149 | 0.005805 |  |
-| Numbers 6 Priestly Blessing | EBIBLE_WLC | `נקב` (nqb; English: Pierce Name) | absent_in_passage_common_elsewhere | 41082 | 0 | 5.148 | 0.005811 |  |
-| Numbers 6 Priestly Blessing | UHB | `נקב` (nqb; English: Pierce Name) | absent_in_passage_common_elsewhere | 41023 | 0 | 5.147 | 0.005819 |  |
-| Numbers 6 Priestly Blessing | MAM | `נקב` (nqb; English: Pierce Name) | absent_in_passage_common_elsewhere | 40988 | 0 | 5.115 | 0.006005 |  |
-| Numbers 6 Priestly Blessing | MAM | `ישוע` (Yeshua; English: Yeshua) | absent_in_passage_common_elsewhere | 27440 | 0 | 3.424 | 0.032570 |  |
-| Numbers 6 Priestly Blessing | UHB | `ישוע` (Yeshua; English: Yeshua) | absent_in_passage_common_elsewhere | 27200 | 0 | 3.412 | 0.032961 |  |
-| Numbers 6 Priestly Blessing | EBIBLE_WLC | `ישוע` (Yeshua; English: Yeshua) | absent_in_passage_common_elsewhere | 27048 | 0 | 3.389 | 0.033730 |  |
-| Numbers 6 Priestly Blessing | UXLC | `ישוע` (Yeshua; English: Yeshua) | absent_in_passage_common_elsewhere | 27036 | 0 | 3.388 | 0.033781 |  |
-| Numbers 6 Priestly Blessing | MT_WLC | `ישוע` (Yeshua; English: Yeshua) | absent_in_passage_common_elsewhere | 27033 | 0 | 3.387 | 0.033794 |  |
-| Numbers 6 Priestly Blessing | MAM | `דקר` (dqr; English: Pierced) | absent_in_passage_common_elsewhere | 24883 | 0 | 3.105 | 0.044813 |  |
-| Numbers 6 Priestly Blessing | EBIBLE_WLC | `דקר` (dqr; English: Pierced) | absent_in_passage_common_elsewhere | 24728 | 0 | 3.099 | 0.045111 |  |
-| Numbers 6 Priestly Blessing | MT_WLC | `דקר` (dqr; English: Pierced) | absent_in_passage_common_elsewhere | 24708 | 0 | 3.096 | 0.045224 |  |
-| Numbers 6 Priestly Blessing | UXLC | `דקר` (dqr; English: Pierced) | absent_in_passage_common_elsewhere | 24706 | 0 | 3.096 | 0.045235 |  |
-| Numbers 6 Priestly Blessing | UHB | `דקר` (dqr; English: Pierced) | absent_in_passage_common_elsewhere | 24642 | 0 | 3.092 | 0.045433 |  |
-| Genesis 1 Creation | MAM | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23838 | 0 | 33.140 | 0.000000 |  |
-| Daniel 9 Seventy Weeks | MAM | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23838 | 0 | 12.098 | 0.000006 |  |
-| Psalm 110 Priest King | MAM | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23838 | 0 | 4.780 | 0.008399 |  |
-| Deuteronomy 6 Shema | MAM | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23838 | 0 | 4.066 | 0.017152 |  |
-| Numbers 6 Priestly Blessing | MAM | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23838 | 0 | 2.975 | 0.051055 |  |
-| Genesis 1 Creation | MT_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23465 | 0 | 32.756 | 0.000000 |  |
-| Daniel 9 Seventy Weeks | MT_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23465 | 0 | 11.781 | 0.000008 |  |
-| Psalm 110 Priest King | MT_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23465 | 0 | 4.724 | 0.008878 |  |
-| Deuteronomy 6 Shema | MT_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23465 | 0 | 4.019 | 0.017980 |  |
-| Numbers 6 Priestly Blessing | MT_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23465 | 0 | 2.940 | 0.052846 |  |
-| Genesis 1 Creation | EBIBLE_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23462 | 0 | 32.752 | 0.000000 |  |
-| Daniel 9 Seventy Weeks | EBIBLE_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23462 | 0 | 11.780 | 0.000008 |  |
-| Psalm 110 Priest King | EBIBLE_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23462 | 0 | 4.724 | 0.008883 |  |
-| Deuteronomy 6 Shema | EBIBLE_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23462 | 0 | 4.018 | 0.017989 |  |
-| Numbers 6 Priestly Blessing | EBIBLE_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23462 | 0 | 2.940 | 0.052866 |  |
-| Genesis 1 Creation | UXLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23455 | 0 | 32.742 | 0.000000 |  |
-| Daniel 9 Seventy Weeks | UXLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23455 | 0 | 11.776 | 0.000008 |  |
-| Psalm 110 Priest King | UXLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23455 | 0 | 4.722 | 0.008896 |  |
-| Deuteronomy 6 Shema | UXLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23455 | 0 | 4.017 | 0.018011 |  |
-| Numbers 6 Priestly Blessing | UXLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23455 | 0 | 2.939 | 0.052912 |  |
-| Genesis 1 Creation | UHB | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23368 | 0 | 32.659 | 0.000000 |  |
-| Daniel 9 Seventy Weeks | UHB | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23368 | 0 | 11.746 | 0.000008 |  |
-| Psalm 110 Priest King | UHB | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23368 | 0 | 4.710 | 0.009003 |  |
-| Deuteronomy 6 Shema | UHB | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23368 | 0 | 4.007 | 0.018194 |  |
-| Numbers 6 Priestly Blessing | UHB | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23368 | 0 | 2.932 | 0.053307 |  |
-| Psalm 2 Messianic King | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah) | absent_in_passage_common_elsewhere | 12904 | 0 | 3.999 | 0.018328 |  |
-| Isaiah 7 Immanuel | MAM | `משיח` (Mashiach; English: Messiah) | absent_in_passage_common_elsewhere | 12903 | 0 | 3.704 | 0.024637 |  |
-| Genesis 22 Binding Of Isaac | UXLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11262 | 0 | 10.866 | 0.000019 |  |
-| Exodus 20 Decalogue | UXLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11262 | 0 | 10.754 | 0.000021 |  |
-| Leviticus 24 Blasphemy Law | UXLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11262 | 0 | 9.756 | 0.000058 |  |
-| Deuteronomy 6 Shema | UXLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11262 | 0 | 1.929 | 0.145340 |  |
-| Genesis 22 Binding Of Isaac | MT_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11258 | 0 | 10.863 | 0.000019 |  |
-| Exodus 20 Decalogue | MT_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11258 | 0 | 10.750 | 0.000021 |  |
-| Leviticus 24 Blasphemy Law | MT_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11258 | 0 | 9.753 | 0.000058 |  |
-| Deuteronomy 6 Shema | MT_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11258 | 0 | 1.928 | 0.145440 |  |
-| Genesis 22 Binding Of Isaac | EBIBLE_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11256 | 0 | 10.861 | 0.000019 |  |
-| Exodus 20 Decalogue | EBIBLE_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11256 | 0 | 10.748 | 0.000021 |  |
-| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11256 | 0 | 9.751 | 0.000058 |  |
-| Psalm 2 Messianic King | EBIBLE_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11256 | 0 | 3.489 | 0.030544 |  |
-| Deuteronomy 6 Shema | EBIBLE_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11256 | 0 | 1.928 | 0.145489 |  |
-| Genesis 22 Binding Of Isaac | MAM | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11254 | 0 | 10.814 | 0.000020 |  |
-| Leviticus 24 Blasphemy Law | MAM | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11254 | 0 | 9.709 | 0.000061 |  |
-| Daniel 9 Seventy Weeks | MAM | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11254 | 0 | 5.711 | 0.003308 |  |
-| Psalm 110 Priest King | MAM | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11254 | 0 | 2.256 | 0.104720 |  |
-| Deuteronomy 6 Shema | MAM | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11254 | 0 | 1.919 | 0.146695 |  |
-| Genesis 22 Binding Of Isaac | UHB | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11202 | 0 | 10.821 | 0.000020 |  |
-| Exodus 20 Decalogue | UHB | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11202 | 0 | 10.709 | 0.000022 |  |
-| Leviticus 24 Blasphemy Law | UHB | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11202 | 0 | 9.716 | 0.000060 |  |
-| Psalm 2 Messianic King | UHB | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11202 | 0 | 3.476 | 0.030932 |  |
-| Deuteronomy 6 Shema | UHB | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11202 | 0 | 1.921 | 0.146507 |  |
-| Numbers 6 Priestly Blessing | UXLC | `ציונ` (Tziyon; English: Zion) | absent_in_passage_common_elsewhere | 8731 | 0 | 1.094 | 0.334851 |  |
-| Numbers 6 Priestly Blessing | MT_WLC | `ציונ` (Tziyon; English: Zion) | absent_in_passage_common_elsewhere | 8724 | 0 | 1.093 | 0.335144 |  |
-| Numbers 6 Priestly Blessing | EBIBLE_WLC | `ציונ` (Tziyon; English: Zion) | absent_in_passage_common_elsewhere | 8717 | 0 | 1.092 | 0.335438 |  |
-| Numbers 6 Priestly Blessing | UHB | `ציונ` (Tziyon; English: Zion) | absent_in_passage_common_elsewhere | 8630 | 0 | 1.083 | 0.338680 |  |
-| Numbers 6 Priestly Blessing | MAM | `ציונ` (Tziyon; English: Zion) | absent_in_passage_common_elsewhere | 8549 | 0 | 1.067 | 0.344084 |  |
+| Passage | Corpus | Term | Gap Class | Hits Elsewhere | Hits In Passage | Uniform Expected | Uniform Zero P | Uniform Zero Q | Sample Center Refs |
+| --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Deuteronomy 6 Shema | MAM | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47982 | 0 | 8.183 | 0.000279 | 0.002318 |  |
+| Numbers 6 Priestly Blessing | MAM | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47982 | 0 | 5.988 | 0.002509 | 0.017865 |  |
+| Deuteronomy 6 Shema | UXLC | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47586 | 0 | 8.149 | 0.000289 | 0.002335 |  |
+| Numbers 6 Priestly Blessing | UXLC | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47586 | 0 | 5.963 | 0.002572 | 0.017882 |  |
+| Deuteronomy 6 Shema | MT_WLC | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47582 | 0 | 8.149 | 0.000289 | 0.002335 |  |
+| Numbers 6 Priestly Blessing | MT_WLC | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47582 | 0 | 5.962 | 0.002574 | 0.017882 |  |
+| Deuteronomy 6 Shema | EBIBLE_WLC | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47540 | 0 | 8.141 | 0.000291 | 0.002335 |  |
+| Numbers 6 Priestly Blessing | EBIBLE_WLC | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47540 | 0 | 5.957 | 0.002587 | 0.017882 |  |
+| Deuteronomy 6 Shema | UHB | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47483 | 0 | 8.141 | 0.000291 | 0.002335 |  |
+| Numbers 6 Priestly Blessing | UHB | `רגמ` (ragam; English: Stone Verb) | absent_in_passage_common_elsewhere | 47483 | 0 | 5.957 | 0.002587 | 0.017882 |  |
+| Numbers 6 Priestly Blessing | UXLC | `נקב` (nqb; English: Pierce Name) | absent_in_passage_common_elsewhere | 41114 | 0 | 5.152 | 0.005788 | 0.037234 |  |
+| Numbers 6 Priestly Blessing | MT_WLC | `נקב` (nqb; English: Pierce Name) | absent_in_passage_common_elsewhere | 41091 | 0 | 5.149 | 0.005805 | 0.037234 |  |
+| Numbers 6 Priestly Blessing | EBIBLE_WLC | `נקב` (nqb; English: Pierce Name) | absent_in_passage_common_elsewhere | 41082 | 0 | 5.148 | 0.005811 | 0.037234 |  |
+| Numbers 6 Priestly Blessing | UHB | `נקב` (nqb; English: Pierce Name) | absent_in_passage_common_elsewhere | 41023 | 0 | 5.147 | 0.005819 | 0.037234 |  |
+| Numbers 6 Priestly Blessing | MAM | `נקב` (nqb; English: Pierce Name) | absent_in_passage_common_elsewhere | 40988 | 0 | 5.115 | 0.006005 | 0.038166 |  |
+| Numbers 6 Priestly Blessing | MAM | `ישוע` (Yeshua; English: Yeshua) | absent_in_passage_common_elsewhere | 27440 | 0 | 3.424 | 0.032570 | 0.160645 |  |
+| Numbers 6 Priestly Blessing | UHB | `ישוע` (Yeshua; English: Yeshua) | absent_in_passage_common_elsewhere | 27200 | 0 | 3.412 | 0.032961 | 0.161731 |  |
+| Numbers 6 Priestly Blessing | EBIBLE_WLC | `ישוע` (Yeshua; English: Yeshua) | absent_in_passage_common_elsewhere | 27048 | 0 | 3.389 | 0.033730 | 0.163280 |  |
+| Numbers 6 Priestly Blessing | UXLC | `ישוע` (Yeshua; English: Yeshua) | absent_in_passage_common_elsewhere | 27036 | 0 | 3.388 | 0.033781 | 0.163280 |  |
+| Numbers 6 Priestly Blessing | MT_WLC | `ישוע` (Yeshua; English: Yeshua) | absent_in_passage_common_elsewhere | 27033 | 0 | 3.387 | 0.033794 | 0.163280 |  |
+| Numbers 6 Priestly Blessing | MAM | `דקר` (dqr; English: Pierced) | absent_in_passage_common_elsewhere | 24883 | 0 | 3.105 | 0.044813 | 0.214055 |  |
+| Numbers 6 Priestly Blessing | EBIBLE_WLC | `דקר` (dqr; English: Pierced) | absent_in_passage_common_elsewhere | 24728 | 0 | 3.099 | 0.045111 | 0.214055 |  |
+| Numbers 6 Priestly Blessing | MT_WLC | `דקר` (dqr; English: Pierced) | absent_in_passage_common_elsewhere | 24708 | 0 | 3.096 | 0.045224 | 0.214055 |  |
+| Numbers 6 Priestly Blessing | UXLC | `דקר` (dqr; English: Pierced) | absent_in_passage_common_elsewhere | 24706 | 0 | 3.096 | 0.045235 | 0.214055 |  |
+| Numbers 6 Priestly Blessing | UHB | `דקר` (dqr; English: Pierced) | absent_in_passage_common_elsewhere | 24642 | 0 | 3.092 | 0.045433 | 0.214055 |  |
+| Genesis 1 Creation | MAM | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23838 | 0 | 33.140 | 0.000000 | 0.000000 |  |
+| Daniel 9 Seventy Weeks | MAM | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23838 | 0 | 12.098 | 0.000006 | 0.000063 |  |
+| Psalm 110 Priest King | MAM | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23838 | 0 | 4.780 | 0.008399 | 0.049717 |  |
+| Deuteronomy 6 Shema | MAM | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23838 | 0 | 4.066 | 0.017152 | 0.088759 |  |
+| Numbers 6 Priestly Blessing | MAM | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23838 | 0 | 2.975 | 0.051055 | 0.235509 |  |
+| Genesis 1 Creation | MT_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23465 | 0 | 32.756 | 0.000000 | 0.000000 |  |
+| Daniel 9 Seventy Weeks | MT_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23465 | 0 | 11.781 | 0.000008 | 0.000081 |  |
+| Psalm 110 Priest King | MT_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23465 | 0 | 4.724 | 0.008878 | 0.051684 |  |
+| Deuteronomy 6 Shema | MT_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23465 | 0 | 4.019 | 0.017980 | 0.091701 |  |
+| Numbers 6 Priestly Blessing | MT_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23465 | 0 | 2.940 | 0.052846 | 0.235509 |  |
+| Genesis 1 Creation | EBIBLE_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23462 | 0 | 32.752 | 0.000000 | 0.000000 |  |
+| Daniel 9 Seventy Weeks | EBIBLE_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23462 | 0 | 11.780 | 0.000008 | 0.000081 |  |
+| Psalm 110 Priest King | EBIBLE_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23462 | 0 | 4.724 | 0.008883 | 0.051684 |  |
+| Deuteronomy 6 Shema | EBIBLE_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23462 | 0 | 4.018 | 0.017989 | 0.091701 |  |
+| Numbers 6 Priestly Blessing | EBIBLE_WLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23462 | 0 | 2.940 | 0.052866 | 0.235509 |  |
+| Genesis 1 Creation | UXLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23455 | 0 | 32.742 | 0.000000 | 0.000000 |  |
+| Daniel 9 Seventy Weeks | UXLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23455 | 0 | 11.776 | 0.000008 | 0.000081 |  |
+| Psalm 110 Priest King | UXLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23455 | 0 | 4.722 | 0.008896 | 0.051684 |  |
+| Deuteronomy 6 Shema | UXLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23455 | 0 | 4.017 | 0.018011 | 0.091701 |  |
+| Numbers 6 Priestly Blessing | UXLC | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23455 | 0 | 2.939 | 0.052912 | 0.235509 |  |
+| Genesis 1 Creation | UHB | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23368 | 0 | 32.659 | 0.000000 | 0.000000 |  |
+| Daniel 9 Seventy Weeks | UHB | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23368 | 0 | 11.746 | 0.000008 | 0.000081 |  |
+| Psalm 110 Priest King | UHB | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23368 | 0 | 4.710 | 0.009003 | 0.051987 |  |
+| Deuteronomy 6 Shema | UHB | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23368 | 0 | 4.007 | 0.018194 | 0.092138 |  |
+| Numbers 6 Priestly Blessing | UHB | `כסא` (kisse; English: Throne) | absent_in_passage_common_elsewhere | 23368 | 0 | 2.932 | 0.053307 | 0.235509 |  |
+| Psalm 2 Messianic King | EBIBLE_WLC | `משיח` (Mashiach; English: Messiah) | absent_in_passage_common_elsewhere | 12904 | 0 | 3.999 | 0.018328 | 0.092322 |  |
+| Isaiah 7 Immanuel | MAM | `משיח` (Mashiach; English: Messiah) | absent_in_passage_common_elsewhere | 12903 | 0 | 3.704 | 0.024637 | 0.123446 |  |
+| Genesis 22 Binding Of Isaac | UXLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11262 | 0 | 10.866 | 0.000019 | 0.000185 |  |
+| Exodus 20 Decalogue | UXLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11262 | 0 | 10.754 | 0.000021 | 0.000195 |  |
+| Leviticus 24 Blasphemy Law | UXLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11262 | 0 | 9.756 | 0.000058 | 0.000513 |  |
+| Deuteronomy 6 Shema | UXLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11262 | 0 | 1.929 | 0.145340 | 0.553326 |  |
+| Genesis 22 Binding Of Isaac | MT_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11258 | 0 | 10.863 | 0.000019 | 0.000185 |  |
+| Exodus 20 Decalogue | MT_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11258 | 0 | 10.750 | 0.000021 | 0.000195 |  |
+| Leviticus 24 Blasphemy Law | MT_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11258 | 0 | 9.753 | 0.000058 | 0.000513 |  |
+| Deuteronomy 6 Shema | MT_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11258 | 0 | 1.928 | 0.145440 | 0.553326 |  |
+| Genesis 22 Binding Of Isaac | EBIBLE_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11256 | 0 | 10.861 | 0.000019 | 0.000185 |  |
+| Exodus 20 Decalogue | EBIBLE_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11256 | 0 | 10.748 | 0.000021 | 0.000195 |  |
+| Leviticus 24 Blasphemy Law | EBIBLE_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11256 | 0 | 9.751 | 0.000058 | 0.000513 |  |
+| Psalm 2 Messianic King | EBIBLE_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11256 | 0 | 3.489 | 0.030544 | 0.152238 |  |
+| Deuteronomy 6 Shema | EBIBLE_WLC | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11256 | 0 | 1.928 | 0.145489 | 0.553326 |  |
+| Genesis 22 Binding Of Isaac | MAM | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11254 | 0 | 10.814 | 0.000020 | 0.000191 |  |
+| Leviticus 24 Blasphemy Law | MAM | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11254 | 0 | 9.709 | 0.000061 | 0.000530 |  |
+| Daniel 9 Seventy Weeks | MAM | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11254 | 0 | 5.711 | 0.003308 | 0.021907 |  |
+| Psalm 110 Priest King | MAM | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11254 | 0 | 2.256 | 0.104720 | 0.425622 |  |
+| Deuteronomy 6 Shema | MAM | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11254 | 0 | 1.919 | 0.146695 | 0.553467 |  |
+| Genesis 22 Binding Of Isaac | UHB | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11202 | 0 | 10.821 | 0.000020 | 0.000191 |  |
+| Exodus 20 Decalogue | UHB | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11202 | 0 | 10.709 | 0.000022 | 0.000200 |  |
+| Leviticus 24 Blasphemy Law | UHB | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11202 | 0 | 9.716 | 0.000060 | 0.000526 |  |
+| Psalm 2 Messianic King | UHB | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11202 | 0 | 3.476 | 0.030932 | 0.153364 |  |
+| Deuteronomy 6 Shema | UHB | `גוג` (Gog; English: Gog) | absent_in_passage_common_elsewhere | 11202 | 0 | 1.921 | 0.146507 | 0.553467 |  |
+| Numbers 6 Priestly Blessing | UXLC | `ציונ` (Tziyon; English: Zion) | absent_in_passage_common_elsewhere | 8731 | 0 | 1.094 | 0.334851 | 0.980431 |  |
+| Numbers 6 Priestly Blessing | MT_WLC | `ציונ` (Tziyon; English: Zion) | absent_in_passage_common_elsewhere | 8724 | 0 | 1.093 | 0.335144 | 0.980431 |  |
+| Numbers 6 Priestly Blessing | EBIBLE_WLC | `ציונ` (Tziyon; English: Zion) | absent_in_passage_common_elsewhere | 8717 | 0 | 1.092 | 0.335438 | 0.980431 |  |
+| Numbers 6 Priestly Blessing | UHB | `ציונ` (Tziyon; English: Zion) | absent_in_passage_common_elsewhere | 8630 | 0 | 1.083 | 0.338680 | 0.981038 |  |
+| Numbers 6 Priestly Blessing | MAM | `ציונ` (Tziyon; English: Zion) | absent_in_passage_common_elsewhere | 8549 | 0 | 1.067 | 0.344084 | 0.981038 |  |
 
 ## Output Files
 
@@ -334,5 +334,6 @@ Rows are sorted by gap class first, then by how frequently the term appears cent
 - This report does not treat absence as a negative proof. It records silence and lower-density rows so they can be reviewed alongside positive centered hits.
 - `expected_in_passage_uniform` is a descriptive baseline only; it is not a formal p-value.
 - `uniform_zero_probability` is the simple Poisson `exp(-expected)` probability of zero hits under that uniform baseline; it is a triage aid, not a formal independence test.
+- `uniform_zero_bh_q` applies Benjamini-Hochberg correction to that simple zero-hit triage probability over absent/low-density detail rows.
 - Short surface terms can be skipped by the minimum term length rule; skipped rows remain in the detail CSV for auditability.
 - Passage ranges are resolved independently per source; versification and source differences can change passage letter counts even when the declared start/end refs are the same.
