@@ -65,7 +65,7 @@ warnings and capped-row flags.
 | `protagonist_in_own_narrative` | locked protagonist range mapping |
 | `nt_quotation_anchor` / `nt_quotation_span` | OT-in-NT quotation catalog with anchors |
 | `lxx_vs_mt_semantic_divergence` | locked MT/LXX divergence catalog |
-| `root_only_match` | locked Hebrew root/lemma analyzer policy |
+| `root_only_match` | locked Hebrew root policy template |
 | full word-token `word_skip_ELS` | token-level word skip definition plus matched controls |
 
 The mapping-dependent rows above now have header-only templates in

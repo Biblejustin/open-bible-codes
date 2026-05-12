@@ -161,6 +161,38 @@ SCHEMAS: tuple[MappingSchema, ...] = (
             "locked_at",
         ),
     ),
+    MappingSchema(
+        filename="hebrew_root_policy.csv",
+        required_columns=(
+            "mapping_id",
+            "term_id",
+            "concept",
+            "language",
+            "surface_form",
+            "normalized_surface_form",
+            "root",
+            "root_scheme",
+            "analyzer",
+            "source",
+            "notes",
+            "locked_by",
+            "locked_at",
+        ),
+        required_values=(
+            "mapping_id",
+            "term_id",
+            "concept",
+            "language",
+            "surface_form",
+            "normalized_surface_form",
+            "root",
+            "root_scheme",
+            "analyzer",
+            "source",
+            "locked_by",
+            "locked_at",
+        ),
+    ),
 )
 
 

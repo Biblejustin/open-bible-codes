@@ -73,3 +73,18 @@ def test_thematic_chapter_range_must_be_ordered(tmp_path: Path) -> None:
     failures = mappings.validate_mapping_dir(tmp_path)
 
     assert any("chapter_start must be <= chapter_end" in failure for failure in failures)
+
+
+def test_root_policy_requires_analyzer_provenance(tmp_path: Path) -> None:
+    write_all_headers(tmp_path)
+    path = tmp_path / "hebrew_root_policy.csv"
+    path.write_text(
+        ",".join(mappings.SCHEMAS[-1].required_columns)
+        + "\n"
+        + "root_love,love_h,Love,hebrew,אהבה,אהבה,אהב,standard,,source,notes,reviewer,2026-05-12\n",
+        encoding="utf-8",
+    )
+
+    failures = mappings.validate_mapping_dir(tmp_path)
+
+    assert any("missing value for analyzer" in failure for failure in failures)

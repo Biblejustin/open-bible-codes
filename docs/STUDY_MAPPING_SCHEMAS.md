@@ -20,6 +20,9 @@ Header-only templates live under `data/study/mappings/`:
   text for `nt_quotation_anchor` and `nt_quotation_span`.
 - `mt_lxx_semantic_divergence.csv`: locked MT/LXX divergence anchors for
   `lxx_vs_mt_semantic_divergence`.
+- `hebrew_root_policy.csv`: locked surface-form to root assignments for
+  `root_only_match`. This is a policy file, not a root analyzer; it records
+  which analyzer/source and root scheme a future run is allowed to use.
 
 ## Validation
 
