@@ -152,6 +152,36 @@ The output labels nearest-cell relation as `same_cell`, `orthogonal`,
 claim-grade use requires those values to be locked before looking at results
 and repeated on matched controls.
 
+## Cohort Cluster Density
+
+Cohort cluster density finds centered hits from a declared term file that land
+within a word window in the same corpus. It uses existing centered occurrence
+rows and does not run a new ELS search.
+
+Primary tool path: `scripts/build_cohort_cluster_density.py`
+
+```bash
+python3 -m scripts.build_cohort_cluster_density \
+  --occurrences reports/centered_occurrence_index/centered_occurrences.csv \
+  --cohort terms/biblical_tribes.csv \
+  --window-words 50 \
+  --min-distinct-terms 2 \
+  --out reports/cohort_cluster_density/windows.csv \
+  --summary-out reports/cohort_cluster_density/summary.csv \
+  --manifest-out reports/cohort_cluster_density/manifest.json
+```
+
+Shortcut:
+
+```bash
+make cohort-cluster-density
+```
+
+The default Makefile target uses `terms/biblical_tribes.csv` only as a concrete
+declared cohort. Override `COHORT_CLUSTER_TERMS`, `COHORT_CLUSTER_WINDOW_WORDS`,
+and `COHORT_CLUSTER_MIN_DISTINCT` for a locked study. Rows are review
+candidates only; cohort choice and window width are study-defining inputs.
+
 ## Mapping-Dependent Strata
 
 The following strata have schema support but no committed theological or

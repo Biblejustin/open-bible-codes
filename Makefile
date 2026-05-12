@@ -15,8 +15,12 @@ MATRIX_CLUSTER_WIDTH ?= 50
 MATRIX_CLUSTER_DISTANCE ?= 1
 CIPHER_LAYERED_PLAIN_HITS ?= reports/plain_hits.csv
 CIPHER_LAYERED_CIPHER_HITS ?= reports/hebrew_atbash_audit/MT_WLC_hits.csv
+COHORT_CLUSTER_OCCURRENCES ?= reports/centered_occurrence_index/centered_occurrences.csv
+COHORT_CLUSTER_TERMS ?= terms/biblical_tribes.csv
+COHORT_CLUSTER_WINDOW_WORDS ?= 50
+COHORT_CLUSTER_MIN_DISTINCT ?= 2
 
-.PHONY: demo indexes test lint public-release-check study-mapping-schemas expanded-strata-tooling-check real-report report-db dynamic-full-span-hit-findings notable-passage-gaps match-strata-index hebrew-atbash-audit hebrew-albam-audit word-edge-pattern-audit matrix-cluster-candidates cipher-layered-pairs crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-broad-screening-findings crd-center-word-findings crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-self-surface-queue crd-self-surface-center-word crd-self-surface-center-word-density crd-self-surface-center-word-queue crd-self-surface-center-word-packet crd-self-surface-center-word-presence crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density crd-concept-surface-center-word-queue crd-concept-surface-center-word-packet crd-concept-surface-center-word-presence
+.PHONY: demo indexes test lint public-release-check study-mapping-schemas expanded-strata-tooling-check real-report report-db dynamic-full-span-hit-findings notable-passage-gaps match-strata-index hebrew-atbash-audit hebrew-albam-audit word-edge-pattern-audit matrix-cluster-candidates cipher-layered-pairs cohort-cluster-density crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-broad-screening-findings crd-center-word-findings crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-self-surface-queue crd-self-surface-center-word crd-self-surface-center-word-density crd-self-surface-center-word-queue crd-self-surface-center-word-packet crd-self-surface-center-word-presence crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density crd-concept-surface-center-word-queue crd-concept-surface-center-word-packet crd-concept-surface-center-word-presence
 
 demo:
 	python3 -m els.demo
@@ -70,6 +74,9 @@ matrix-cluster-candidates:
 
 cipher-layered-pairs:
 	python3 -m scripts.build_cipher_layered_pairs --plain-hits "$(CIPHER_LAYERED_PLAIN_HITS)" --cipher-hits "$(CIPHER_LAYERED_CIPHER_HITS)" --out reports/cipher_layered_pairs/pairs.csv --summary-out reports/cipher_layered_pairs/summary.csv --manifest-out reports/cipher_layered_pairs/manifest.json
+
+cohort-cluster-density:
+	python3 -m scripts.build_cohort_cluster_density --occurrences "$(COHORT_CLUSTER_OCCURRENCES)" --cohort "$(COHORT_CLUSTER_TERMS)" --window-words "$(COHORT_CLUSTER_WINDOW_WORDS)" --min-distinct-terms "$(COHORT_CLUSTER_MIN_DISTINCT)" --out reports/cohort_cluster_density/windows.csv --summary-out reports/cohort_cluster_density/summary.csv --manifest-out reports/cohort_cluster_density/manifest.json
 
 crd-review-scaffold:
 	python3 -m scripts.scaffold_crd_relevance_dictionary --term-file terms/gog_magog_pair_prospective_terms.csv --out reports/crd/relevance_dictionary_draft.toml --queue-out reports/crd/relevance_review_queue.csv --locked-by "$(CRD_LOCKED_BY)" --reviewer "$(CRD_REVIEWER)" --drafted-with "$(CRD_DRAFTED_WITH)"

@@ -28,6 +28,7 @@ ENTRIES = (
     ToolingEntry("word-edge pattern audit", Path("protocols/word_edge_pattern_audit.toml"), "word-edge-pattern-audit"),
     ToolingEntry("matrix cluster candidates", Path("scripts/build_matrix_cluster_candidates.py"), "matrix-cluster-candidates"),
     ToolingEntry("cipher layered pairs", Path("scripts/build_cipher_layered_pairs.py"), "cipher-layered-pairs"),
+    ToolingEntry("cohort cluster density", Path("scripts/build_cohort_cluster_density.py"), "cohort-cluster-density"),
 )
 
 
