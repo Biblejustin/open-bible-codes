@@ -1,0 +1,27 @@
+name = "matrix_cluster_control_summary"
+description = "Relation-specific Bible-vs-secular-control summary for matrix cluster candidates."
+manifest_out = "reports/matrix_clusters/control_summary.protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "matrix_cluster_control_summary"
+description = "Summarize matrix candidate relations and term-pair rows against secular-control candidates."
+argv = [
+  "-m", "scripts.summarize_matrix_cluster_controls",
+  "--candidates", "reports/matrix_clusters/candidates.csv",
+  "--relation-out", "reports/matrix_clusters/relation_control_summary.csv",
+  "--term-pair-out", "reports/matrix_clusters/term_pair_control_summary.csv",
+  "--markdown-out", "docs/MATRIX_CLUSTER_CONTROL_SUMMARY.md",
+  "--manifest-out", "reports/matrix_clusters/control_summary.manifest.json",
+]
+inputs = [
+  "scripts/summarize_matrix_cluster_controls.py",
+  "reports/matrix_clusters/candidates.csv",
+]
+outputs = [
+  "reports/matrix_clusters/relation_control_summary.csv",
+  "reports/matrix_clusters/term_pair_control_summary.csv",
+  "docs/MATRIX_CLUSTER_CONTROL_SUMMARY.md",
+  "reports/matrix_clusters/control_summary.manifest.json",
+]

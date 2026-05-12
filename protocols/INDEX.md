@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 96
+Protocols indexed: 97
 
 ## Analysis
 
@@ -82,6 +82,7 @@ Protocols indexed: 96
 | kjv_apocrypha_bridge_term_shuffled_controls_1000 | Run 1000-sample term-level shuffled apocrypha/deuterocanon bridge controls for KJVA bri... | 1 | terms/english_search_terms.csv | reports/kjv_apocrypha_bridge_term_shuffled_controls_1000 | `kjv_apocrypha_bridge_term_shuffled_controls_1000.toml` |
 | kjv_apocrypha_bridge_term_shuffled_controls_300 | Run 300-sample term-level shuffled apocrypha/deuterocanon bridge controls for KJVA brid... | 1 | terms/english_search_terms.csv | reports/kjv_apocrypha_bridge_term_shuffled_controls_300 | `kjv_apocrypha_bridge_term_shuffled_controls_300.toml` |
 | matrix_cluster_candidates | Opt-in matrix-neighborhood candidate extraction over CRD raw centered ELS hit rows with... | 1 |  | reports/matrix_clusters | `matrix_cluster_candidates.toml` |
+| matrix_cluster_control_summary | Relation-specific Bible-vs-secular-control summary for matrix cluster candidates. | 1 |  | reports/matrix_clusters | `matrix_cluster_control_summary.toml` |
 | nonbible_control_counts | Skip 2..100 screening counts against large non-Bible Hebrew, Greek, and English control... | 1 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_tribes.csv, t... | reports/nonbible_controls | `nonbible_control_counts.toml` |
 | real_report_run | Formal report assembly run over locked STEP_TAHOT, Greek exact-center, doxa follow-ups,... | 41 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports, reports/all_codes_compound_extension_confirmatory, reports/all_codes_compound_... | `real_report_run.toml` |
 | sblgnt_source_only_exact_center | Post-discovery 1000/1000 controls for SBLGNT source-only exact-center extension rows. | 2 |  | reports/sblgnt_source_only_exact_center | `sblgnt_source_only_exact_center.toml` |

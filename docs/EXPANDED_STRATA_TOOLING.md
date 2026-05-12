@@ -359,6 +359,32 @@ Primary outputs:
 - `docs/MATRIX_CLUSTER_CANDIDATES.md`
 - `reports/matrix_clusters/manifest.json`
 
+Relation-specific control summary protocol:
+`protocols/matrix_cluster_control_summary.toml`
+
+```bash
+python3 -m scripts.run_protocol protocols/matrix_cluster_control_summary.toml --resume
+```
+
+Shortcut:
+
+```bash
+make matrix-cluster-control-summary
+```
+
+This summary does not run a new search. It reads the matrix candidate CSV and
+compares same-cell, orthogonal, diagonal, and neighborhood candidate counts
+between Bible editions and secular controls. Ratios are per observed corpus
+class and are review aids only; they are not p-values and do not promote a
+candidate to a claim.
+
+Primary outputs:
+
+- `reports/matrix_clusters/relation_control_summary.csv`
+- `reports/matrix_clusters/term_pair_control_summary.csv`
+- `docs/MATRIX_CLUSTER_CONTROL_SUMMARY.md`
+- `reports/matrix_clusters/control_summary.manifest.json`
+
 ## Cohort Cluster Density
 
 Cohort cluster density finds centered hits from a declared term file that land

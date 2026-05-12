@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 268
+Documents indexed: 269
 
 ## Controls
 
@@ -50,6 +50,7 @@ Documents indexed: 268
 | KJVA Apocrypha Bridge Term Shuffled Controls (100 Samples) | `KJV_APOCRYPHA_BRIDGE_TERM_SHUFFLED_CONTROLS_100.md` |
 | KJVA Apocrypha Bridge Term Shuffled Controls (1000 Samples) | `KJV_APOCRYPHA_BRIDGE_TERM_SHUFFLED_CONTROLS_1000.md` |
 | KJVA Apocrypha Bridge Term Shuffled Controls (300 Samples) | `KJV_APOCRYPHA_BRIDGE_TERM_SHUFFLED_CONTROLS_300.md` |
+| Matrix Cluster Control Summary | `MATRIX_CLUSTER_CONTROL_SUMMARY.md` |
 | Non-Bible Control Corpora | `NONBIBLE_CONTROL_CORPORA.md` |
 | Null Controls | `NULL_CONTROLS.md` |
 | STEP TAHOT Control Version Presence | `STEP_TAHOT_CONTROL_VERSION_PRESENCE.md` |
