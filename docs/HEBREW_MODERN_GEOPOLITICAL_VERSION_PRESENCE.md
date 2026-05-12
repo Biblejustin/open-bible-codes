@@ -63,7 +63,7 @@ queue material until separate controls and context review are applied.
 | `bibi_h` `ביבי` (byby; English: Bibi) | EBIBLE_WLC:200; MAM:200; MT_WLC:200; UHB:200; UXLC:200 | 241 | 175 | 17 | 4 | 45 | has exact patterns stable across all observed streams |
 | `knesset_h` `כנסת` (knst; English: Knesset) | EBIBLE_WLC:158; MAM:176; MT_WLC:158; UHB:159; UXLC:158 | 223 | 115 | 41 | 4 | 63 | has exact patterns stable across all observed streams |
 | `france_h` `צרפת` (tsrpt; English: France) | EBIBLE_WLC:156; MAM:161; MT_WLC:156; UHB:153; UXLC:156 | 192 | 127 | 28 | 1 | 36 | has exact patterns stable across all observed streams |
-| `egypt_modern_h` `מצרימ` (mtsrym; English: Egypt Modern) | EBIBLE_WLC:153; MAM:152; MT_WLC:153; UHB:145; UXLC:152 | 207 | 103 | 46 | 5 | 53 | has exact patterns stable across all observed streams |
+| `egypt_modern_h` `מצרימ` (Mitzrayim; English: Egypt Modern) | EBIBLE_WLC:153; MAM:152; MT_WLC:153; UHB:145; UXLC:152 | 207 | 103 | 46 | 5 | 53 | has exact patterns stable across all observed streams |
 | `vatican_h` `ותיקנ` (wtyqn; English: Vatican) | EBIBLE_WLC:102; MAM:111; MT_WLC:102; UHB:101; UXLC:102 | 138 | 76 | 23 | 4 | 35 | has exact patterns stable across all observed streams |
 | `syria_h` `סוריה` (swryh; English: Syria) | EBIBLE_WLC:94; MAM:103; MT_WLC:94; UHB:91; UXLC:94 | 128 | 71 | 22 | 1 | 34 | has exact patterns stable across all observed streams |
 | `year_5786_jewish_h` `התשפו` (htshpw; English: Hebrew year 5786) | EBIBLE_WLC:95; MAM:96; MT_WLC:95; UHB:95; UXLC:94 | 129 | 66 | 27 | 2 | 34 | has exact patterns stable across all observed streams |
