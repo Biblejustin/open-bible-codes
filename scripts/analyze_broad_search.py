@@ -552,6 +552,10 @@ def find_run_manifest(counts_dir: Path) -> Path:
         for path in counts_dir.glob("*.manifest.json")
         if not path.name.endswith("_counts.manifest.json") and path.name != "summary.manifest.json"
     ]
+    for path in sorted(candidates):
+        manifest = read_manifest(path)
+        if manifest.get("mode") == "batch-many" and manifest.get("term_sets") and manifest.get("corpora"):
+            return path
     return sorted(candidates)[0] if candidates else preferred
 
 

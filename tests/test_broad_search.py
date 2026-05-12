@@ -170,6 +170,21 @@ class BroadSearchTests(unittest.TestCase):
 
             self.assertEqual(find_run_manifest(counts_dir), standard)
 
+    def test_find_run_manifest_prefers_batch_many_manifest(self) -> None:
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            counts_dir = root / "counts"
+            counts_dir.mkdir()
+            generated = counts_dir / "bible_control_comparison.manifest.json"
+            run = counts_dir / "broad_2_500.manifest.json"
+            generated.write_text('{"script":"generated"}', encoding="utf-8")
+            run.write_text(
+                '{"mode":"batch-many","term_sets":[{"term_set":"set"}],"corpora":[{"label":"BIBLE"}]}',
+                encoding="utf-8",
+            )
+
+            self.assertEqual(find_run_manifest(counts_dir), run)
+
 
 def write_count_csv(path: Path, term_id: str) -> None:
     path.write_text(

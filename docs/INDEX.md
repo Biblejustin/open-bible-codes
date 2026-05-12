@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 247
+Documents indexed: 248
 
 ## Controls
 
@@ -79,6 +79,7 @@ Documents indexed: 247
 | Hebrew Theology Prospective Findings | `HEBREW_THEOLOGY_PROSPECTIVE_FINDINGS.md` |
 | Public Baseline Findings | `PUBLIC_BASELINE_FINDINGS.md` |
 | Targeted Terms Report | `TARGETED_TERMS_FINDINGS.md` |
+| Windows CPU Broad Skip 2..500 Bible-Control Findings | `WINDOWS_CPU_BROAD_2_500_FINDINGS.md` |
 
 ## Methodology
 
