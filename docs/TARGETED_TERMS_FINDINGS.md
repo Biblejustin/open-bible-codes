@@ -126,14 +126,14 @@ Controls remain weak for claim-making: rows with low uncorrected p-values still 
 | Iran | TR_NT | `ιραν` (iran; English: Iran) | -9 | EPH 6:18-EPH 6:17 | EPH 6:17 `ὅ` (o) | exact_center |
 | Iran | TR_NT | `ιραν` (iran; English: Iran) | -13 | 1PE 1:2-1PE 1:2 | 1PE 1:2 `αἵματος` (aimatos) | exact_center |
 | Iran | SBLGNT | `ιραν` (iran; English: Iran) | -13 | 1Pet 1:2-1Pet 1:2 | 1Pet 1:2 `αἵματος` (aimatos) | exact_center |
-| Iran | SBLGNT | `ιραν` (iran; English: Iran) | -14 | John 18:3-John 18:2 | John 18:3 `τὴν` (ten) | exact_center |
+| Iran | SBLGNT | `ιραν` (iran; English: Iran) | -14 | John 18:3-John 18:2 | John 18:3 `τὴν` (ten; English: the) | exact_center |
 | Iran | SBLGNT | `ιραν` (iran; English: Iran) | -19 | Gal 1:1-2Cor 13:13 | Gal 1:1 `ἀνθρώπων` (anthropon) | exact_center |
 | Trump | TR_NT | `τραμπ` (tramp; English: Trump) | -13 | ACT 4:33-ACT 4:32 | ACT 4:33 `ἀπεδίδουν` (apedidoun) | same_category_center |
 | Trump | SBLGNT | `τραμπ` (tramp; English: Trump) | 44 | Acts 25:11-Acts 25:12 | Acts 25:11 `Καίσαρα` (kaisara) | same_category_center |
-| Vance | TR_NT | `βανσ` (bans; English: Vance) | -8 | ACT 13:21-ACT 13:21 | ACT 13:21 `ἄνδρα` (andra) | same_category_center |
+| Vance | TR_NT | `βανσ` (bans; English: Vance) | -8 | ACT 13:21-ACT 13:21 | ACT 13:21 `ἄνδρα` (andra; English: man) | same_category_center |
 | Vance | TR_NT | `βανσ` (bans; English: Vance) | -35 | LUK 7:44-LUK 7:43 | LUK 7:43 `εἶπεν` (eipen) | same_category_center |
-| Vance | TR_NT | `βανσ` (bans; English: Vance) | -4 | 1TH 5:19-1TH 5:18 | 1TH 5:19 `πνεῦμα` (pneuma) | same_category_span |
-| Vance | SBLGNT | `βανσ` (bans; English: Vance) | -8 | Acts 13:21-Acts 13:21 | Acts 13:21 `ἄνδρα` (andra) | same_category_center |
+| Vance | TR_NT | `βανσ` (bans; English: Vance) | -4 | 1TH 5:19-1TH 5:18 | 1TH 5:19 `πνεῦμα` (pneuma; English: spirit) | same_category_span |
+| Vance | SBLGNT | `βανσ` (bans; English: Vance) | -8 | Acts 13:21-Acts 13:21 | Acts 13:21 `ἄνδρα` (andra; English: man) | same_category_center |
 | Vance | SBLGNT | `βανσ` (bans; English: Vance) | -38 | Acts 28:15-Acts 28:14 | Acts 28:15 `ἀκούσαντες` (akousantes) | same_category_center |
 | Vance | SBLGNT | `βανσ` (bans; English: Vance) | -41 | Rom 5:21-Rom 5:20 | Rom 5:20 `ὑπερεπερίσσευσεν` (upereperisseusen) | same_category_center |
 | Gog | TR_NT | `γωγ` (Gog; English: Gog) | 6 | JHN 12:42-JHN 12:43 | JHN 12:42 `γένωνται` (genontai) | exact_center |
@@ -142,7 +142,7 @@ Controls remain weak for claim-making: rows with low uncorrected p-values still 
 | Gog | SBLGNT | `γωγ` (Gog; English: Gog) | 6 | John 12:42-John 12:43 | John 12:42 `γένωνται,` (genontai) | exact_center |
 | Gog | SBLGNT | `γωγ` (Gog; English: Gog) | -6 | John 12:43-John 12:42 | John 12:42 `γένωνται,` (genontai) | exact_center |
 | Gog | SBLGNT | `γωγ` (Gog; English: Gog) | 7 | Matt 10:17-Matt 10:17 | Matt 10:17 `αὐτῶν` (auton) | exact_center |
-| Russia | TR_NT | `ρωσια` (rosia; English: Russia) | -18 | MAT 24:37-MAT 24:36 | MAT 24:37 `Ὥσπερ` (osper) | same_category_center |
+| Russia | TR_NT | `ρωσια` (rosia; English: Russia) | -18 | MAT 24:37-MAT 24:36 | MAT 24:37 `Ὥσπερ` (hosper; English: just as) | same_category_center |
 | Russia | TR_NT | `ρωσια` (rosia; English: Russia) | 35 | REV 14:3-REV 14:4 | REV 14:3 `τέσσαρες` (tessares) | same_category_center |
 | Russia | TR_NT | `ρωσια` (rosia; English: Russia) | -15 | 2CO 4:11-2CO 4:10 | 2CO 4:10 `Ἰησοῦ` (iesou) | same_category_span |
 | Russia | SBLGNT | `ρωσια` (rosia; English: Russia) | 30 | Heb 4:12-Heb 4:13 | Heb 4:12 `ἐνθυμήσεων` (enthumeseon) | same_category_center |
