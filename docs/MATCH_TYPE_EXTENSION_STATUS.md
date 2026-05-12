@@ -28,6 +28,7 @@ support. Status labels are engineering status only, not claim status.
 | `skip_equals_center_word_gematria` | implemented for standard Hebrew/Greek values | `scripts/build_match_strata_index.py` |
 | `low_bigram_surprise` / `high_bigram_surprise` | implemented as corpus-local review metadata | `els/letter_stats.py` |
 | `letter_frequency_anomaly` | implemented as corpus-local review metadata | `els/letter_stats.py` |
+| `review_flag_summary` | implemented as a meaningful-skip and rarity review export | `scripts/build_review_flag_summary.py` |
 | `cohort_cluster_density_window_N` | implemented as declared-cohort word-window post-processing | `scripts/build_cohort_cluster_density.py` |
 | `cohort_full_house` | implemented when every declared cohort term appears in the same word window | `scripts/build_cohort_cluster_density.py` |
 

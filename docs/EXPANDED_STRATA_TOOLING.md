@@ -171,6 +171,31 @@ Primary outputs:
 - `docs/CROSS_SKIP_SUMMARY.md`
 - `reports/cross_skip_summary/manifest.json`
 
+## Review Flag Summary
+
+Review-flag summary unpivots meaningful-skip, gematria-skip,
+bigram-surprise, and letter-frequency anomaly flags from the match-strata
+index. It does not run a new ELS search.
+
+Primary protocol: `protocols/review_flag_summary.toml`
+
+```bash
+python3 -m scripts.run_protocol protocols/review_flag_summary.toml --resume
+```
+
+Shortcut:
+
+```bash
+make review-flag-summary
+```
+
+Primary outputs:
+
+- `reports/review_flag_summary/summary.csv`
+- `reports/review_flag_summary/flag_rows.csv`
+- `docs/REVIEW_FLAG_SUMMARY.md`
+- `reports/review_flag_summary/manifest.json`
+
 ## Transformed Hebrew Text
 
 Atbash and ALBAM are opt-in deterministic transform layers. They search a

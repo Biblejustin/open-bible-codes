@@ -1,0 +1,27 @@
+name = "review_flag_summary"
+description = "Summarize meaningful-skip and rarity review flags from the match-strata index."
+manifest_out = "reports/review_flag_summary/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "review_flag_summary"
+description = "Build review-flag summary from occurrence strata."
+argv = [
+  "-m", "scripts.build_review_flag_summary",
+  "--strata", "reports/match_strata_index/occurrence_strata.csv",
+  "--out", "reports/review_flag_summary/summary.csv",
+  "--flag-out", "reports/review_flag_summary/flag_rows.csv",
+  "--markdown-out", "docs/REVIEW_FLAG_SUMMARY.md",
+  "--manifest-out", "reports/review_flag_summary/manifest.json",
+]
+inputs = [
+  "scripts/build_review_flag_summary.py",
+  "reports/match_strata_index/occurrence_strata.csv",
+]
+outputs = [
+  "reports/review_flag_summary/summary.csv",
+  "reports/review_flag_summary/flag_rows.csv",
+  "docs/REVIEW_FLAG_SUMMARY.md",
+  "reports/review_flag_summary/manifest.json",
+]

@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 92
+Protocols indexed: 93
 
 ## Analysis
 
@@ -26,6 +26,7 @@ Protocols indexed: 92
 | modern_focus_extensions | Capped same-skip extension screen for modern names, places, and local terms. | 11 | terms/modern_names_dates.csv | reports/modern_extension_screen | `modern_focus_extensions.toml` |
 | mt_version_comparison | Compare normalized Hebrew MT-family verse text across MT_WLC, UXLC, MAM, eBible WLC, an... | 1 |  | reports/mt_version_comparison | `mt_version_comparison.toml` |
 | notable_passage_gaps | Record declared notable passages where selected ELS terms are absent, sparse, or presen... | 1 | terms/notable_passage_gap_terms.csv | reports/notable_passage_gaps | `notable_passage_gaps.toml` |
+| review_flag_summary | Summarize meaningful-skip and rarity review flags from the match-strata index. | 1 |  | reports/review_flag_summary | `review_flag_summary.toml` |
 | step_tahot_version_presence | Run focused modern/local exact-hit version presence with STEP_TAHOT included as a separ... | 2 | terms/modern_names_dates.csv | reports/step_tahot_version_presence | `step_tahot_version_presence.toml` |
 | version_presence_extensions | Same-skip extension screen for bounded all-source version-presence hit queues. | 10 |  | reports/version_presence_extensions | `version_presence_extensions.toml` |
 | wide_focus_exact_presence | Capped exact-hit version-presence review for the focused wide-search terms. | 2 | terms/modern_names_dates.csv, terms/prophetic_terms.csv | reports/wide_focus_exact_presence | `wide_focus_exact_presence.toml` |
