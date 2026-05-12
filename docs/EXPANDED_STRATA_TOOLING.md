@@ -337,8 +337,9 @@ Shortcut:
 make matrix-cluster-candidates
 ```
 
-The default protocol uses `reports/surface_context_center_exact_hits.csv`
-because it retains raw path offsets and locks `--row-width 50` with
+The default protocol uses `reports/crd/classified_hits.csv` after the locked
+CRD run, because that file now retains raw path offsets for Bible editions and
+language-matched secular controls. It locks `--row-width 50` with
 `--max-cell-distance 1`. Matrix input rows must include enough path detail to
 reconstruct letter cells: `sequence`, `start_offset`, and `skip`, or extension-style
 `extended_sequence`, `extension_start_offset`, and `skip`. Add

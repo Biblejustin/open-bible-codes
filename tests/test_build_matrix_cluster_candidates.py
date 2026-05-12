@@ -21,6 +21,7 @@ def hit_row(
 ) -> dict[str, str]:
     return {
         "corpus_label": corpus_label,
+        "corpus_class": "bible",
         "term_id": term_id,
         "concept": term_id.upper(),
         "normalized_term": sequence,
@@ -100,6 +101,7 @@ def test_read_hits_and_main_shape(tmp_path: Path) -> None:
 
     assert len(rows) == 1
     assert rows[0]["corpus_label"] == "TINY"
+    assert rows[0]["corpus_class"] == "bible"
 
 
 def test_read_hits_with_stats_counts_unusable_rows(tmp_path: Path) -> None:
@@ -134,6 +136,7 @@ def test_summarize_rows_counts_relations_corpora_and_distances() -> None:
 
     assert {"bucket": "cell_relation", "value": "orthogonal", "pairs": 1} in summary
     assert {"bucket": "corpus_label", "value": "TINY", "pairs": 1} in summary
+    assert {"bucket": "corpus_class", "value": "bible", "pairs": 1} in summary
     assert {"bucket": "cell_distance", "value": "1", "pairs": 1} in summary
 
 

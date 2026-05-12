@@ -2,60 +2,73 @@
 
 This is an opt-in geometry screen over already-exported raw ELS hit rows. It wraps each hit path into a matrix of the locked row width, then records declared-term pairs whose letter paths share a cell or fall within the configured cell-neighborhood distance.
 
-This report is candidate extraction only. It is not claim promotion. Matrix-style claims still require a locked row-width protocol, matched Bible and non-Bible controls, and correction for the widened geometry search family.
+This report is candidate extraction only. It is not claim promotion. When the input is CRD output, Bible and secular-control rows are both present; matrix-style claims still require a locked relation-specific metric and correction for the widened geometry search family.
 
 ## Run Settings
 
-- input files: `reports/surface_context_center_exact_hits.csv`
+- input files: `reports/crd/classified_hits.csv`
 - row width: `50`
 - max cell distance: `1`
 - max pairs: `100,000`
 - allow same term pairs: `False`
-- parsed hit rows: `4,502` of `4,502`
+- parsed hit rows: `15,945` of `15,945`
 - skipped input rows: `0`
-- candidate pairs: `356`
+- candidate pairs: `1,181`
 
 ## Relation Counts
 
 | Relation | Pairs |
 | --- | ---: |
-| diagonal | 171 |
-| orthogonal | 149 |
-| same_cell | 36 |
+| same_cell | 492 |
+| orthogonal | 394 |
+| diagonal | 295 |
 
 ## Corpus Counts
 
 | Corpus | Pairs |
 | --- | ---: |
-| TR_NT | 193 |
-| SBLGNT | 163 |
+| UHB | 204 |
+| EBIBLE_WLC | 202 |
+| UXLC | 202 |
+| MT_WLC | 201 |
+| MAM | 193 |
+| HEB_PBY_AHAD_HAAM | 94 |
+| HEB_PBY_BIALIK | 45 |
+| HEB_PBY_BRENNER | 40 |
+
+## Corpus Class Counts
+
+| Corpus class | Pairs |
+| --- | ---: |
+| bible | 1,002 |
+| secular_control | 179 |
 
 ## Sample Candidates
 
 | Relation | Corpus | Left | Right | Left center | Right center | Cells |
 | --- | --- | --- | --- | --- | --- | --- |
-| same_cell | TR_NT | `ιησουσ` (Iesous; English: Jesus) | `υιοσ` (huios; English: Son) | John 11:4 / `αυτης` (autes) | John 11:4 / `ακουσας` (akousas) | 5739:31 -> 5739:31 |
-| diagonal | TR_NT | `υιοσ` (huios; English: Son) | `ζωη` (zoe; English: Life) | John 11:27 / `εγω` (ego; English: I) | John 11:25 / `ζωη` (zoe; English: Life) | 5768:47 -> 5767:48 |
-| diagonal | TR_NT | `υιοσ` (huios; English: Son) | `αιμα` (haima; English: Blood) | Matthew 13:55 / `ιουδας` (Ioudas; English: Judas) | Matthew 13:55 / `μαριαμ` (mariam; English: Mary) | 798:30 -> 797:31 |
-| orthogonal | TR_NT | `υιοσ` (huios; English: Son) | `αιμα` (haima; English: Blood) | Matthew 13:55 / `λεγεται` (legetai) | Matthew 13:55 / `μαριαμ` (mariam; English: Mary) | 796:33 -> 797:33 |
-| orthogonal | TR_NT | `υιοσ` (huios; English: Son) | `αιμα` (haima; English: Blood) | Mark 10:33 / `κατακρινουσιν` (katakrinousin) | Mark 10:34 / `αποκτενουσιν` (apoktenousin) | 2542:30 -> 2542:29 |
-| orthogonal | TR_NT | `υιοσ` (huios; English: Son) | `αιμα` (haima; English: Blood) | Mark 10:33 / `κατακρινουσιν` (katakrinousin) | Mark 10:34 / `και` (kai; English: and) | 2541:36 -> 2542:36 |
-| diagonal | TR_NT | `υιοσ` (huios; English: Son) | `νωε` (Noe; English: Noah) | 1 John 5:20 / `αληθινω` (alethino) | 1 John 5:20 / `γινωσκωμεν` (ginoskomen) | 12828:35 -> 12827:34 |
-| diagonal | TR_NT | `αιμα` (haima; English: Blood) | `νωε` (Noe; English: Noah) | Colossians 1:14 / `απολυτρωσιν` (apolutrosin) | Colossians 1:14 / `αμαρτιων` (amartion) | 10830:18 -> 10831:19 |
-| diagonal | TR_NT | `υιοσ` (huios; English: Son) | `νωε` (Noe; English: Noah) | 1 John 5:20 / `αληθινω` (alethino) | 1 John 5:20 / `χριστω` (christo; English: Christ) | 12827:37 -> 12828:38 |
-| orthogonal | TR_NT | `υιοσ` (huios; English: Son) | `νωε` (Noe; English: Noah) | 1 John 5:20 / `αληθινω` (alethino) | 1 John 5:20 / `υιω` (uio) | 12828:35 -> 12827:35 |
-| diagonal | TR_NT | `αιμα` (haima; English: Blood) | `νωε` (Noe; English: Noah) | Colossians 1:14 / `απολυτρωσιν` (apolutrosin) | Colossians 1:14 / `ω` (o) | 10830:3 -> 10829:2 |
-| same_cell | TR_NT | `υιοσ` (huios; English: Son) | `σημ` (Sem; English: Shem) | 1 John 5:5 / `μη` (me; English: not) | 1 John 5:4 / `η` (e) | 12797:38 -> 12797:38 |
-| orthogonal | TR_NT | `υιοσ` (huios; English: Son) | `σημ` (Sem; English: Shem) | 1 John 5:5 / `εστιν` (estin) | 1 John 5:4 / `η` (e) | 12797:33 -> 12797:32 |
-| diagonal | TR_NT | `νωε` (Noe; English: Noah) | `σημ` (Sem; English: Shem) | 1 Timothy 1:2 / `γνησιω` (gnesio) | 1 Timothy 1:2 / `ιησου` (iesou) | 11203:5 -> 11204:6 |
-| diagonal | TR_NT | `νωε` (Noe; English: Noah) | `σημ` (Sem; English: Shem) | 1 Timothy 1:2 / `ημων` (emon) | 1 Timothy 1:2 / `ιησου` (iesou) | 11203:5 -> 11204:6 |
-| diagonal | TR_NT | `φωσ` (phos; English: Light) | `σημ` (Sem; English: Shem) | Philippians 2:15 / `φωστηρες` (phosteres) | Philippians 2:16 / `ημεραν` (emeran) | 10715:29 -> 10716:30 |
-| diagonal | TR_NT | `υιοσ` (huios; English: Son) | `σημ` (Sem; English: Shem) | 2 Corinthians 1:19 / `υμιν` (umin; English: to you) | 2 Corinthians 1:18 / `ημων` (emon) | 9766:9 -> 9765:10 |
-| same_cell | TR_NT | `υιοσ` (huios; English: Son) | `σημ` (Sem; English: Shem) | 2 Corinthians 1:19 / `θεου` (theou) | 2 Corinthians 1:18 / `ημων` (emon) | 9764:40 -> 9764:40 |
-| same_cell | TR_NT | `ζωη` (zoe; English: Life) | `σημ` (Sem; English: Shem) | 2 Peter 1:3 / `δυναμεως` (dunameos) | 2 Peter 1:3 / `της` (tes; English: of the) | 12519:29 -> 12519:29 |
-| diagonal | TR_NT | `υιοσ` (huios; English: Son) | `σημ` (Sem; English: Shem) | Matthew 12:40 / `τρεις` (treis) | Matthew 12:39 / `δοθησεται` (dothesetai) | 673:18 -> 672:17 |
-| same_cell | TR_NT | `υιοσ` (huios; English: Son) | `σημ` (Sem; English: Shem) | John 12:34 / `εις` (eis; English: into/for) | John 12:34 / `απεκριθη` (apekrithe) | 5875:25 -> 5875:25 |
-| orthogonal | TR_NT | `αγαπη` (agape; English: Love) | `σημ` (Sem; English: Shem) | 1 John 3:17 / `αυτω` (auto; English: to him) | 1 John 3:19 / `της` (tes; English: of the) | 12740:0 -> 12741:0 |
-| orthogonal | TR_NT | `νωε` (Noe; English: Noah) | `σημ` (Sem; English: Shem) | 1 Timothy 1:2 / `γνησιω` (gnesio) | 1 Timothy 1:1 / `ιησου` (iesou) | 11202:48 -> 11201:48 |
-| diagonal | TR_NT | `νωε` (Noe; English: Noah) | `σημ` (Sem; English: Shem) | Luke 17:26 / `ουτως` (outos) | Luke 17:27 / `ηλθεν` (elthen) | 4398:21 -> 4399:22 |
-| orthogonal | TR_NT | `νωε` (Noe; English: Noah) | `σημ` (Sem; English: Shem) | Luke 17:26 / `ουτως` (outos) | Luke 17:27 / `ηλθεν` (elthen) | 4398:22 -> 4399:22 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | 2Sam 22:8 / `וַ/יִּֽתְגָּעֲשׁ֖וּ` (wytgshw) | 2Sam 22:8 / `יִרְגָּ֑זוּ` (yrgzw) | 9449:16 -> 9449:16 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | 2Sam 22:8 / `וַ/יִּֽתְגָּעֲשׁ֖וּ` (wytgshw) | 2Sam 22:8 / `יִרְגָּ֑זוּ` (yrgzw) | 9449:22 -> 9449:22 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Ps 18:8 / `וַ֝/יִּתְגָּֽעֲשׁ֗וּ` (wytgshw) | Ps 18:8 / `יִרְגָּ֑זוּ` (yrgzw) | 17304:48 -> 17304:48 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Ps 18:8 / `וַ֝/יִּתְגָּֽעֲשׁ֗וּ` (wytgshw) | Ps 18:8 / `יִרְגָּ֑זוּ` (yrgzw) | 17305:4 -> 17305:4 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Josh 6:1 / `וּ/מְסֻגֶּ֔רֶת` (wmsgrt) | Josh 6:1 / `וּ/מְסֻגֶּ֔רֶת` (wmsgrt) | 6228:37 -> 6228:37 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Josh 6:1 / `וּ/מְסֻגֶּ֔רֶת` (wmsgrt) | Josh 6:1 / `וּ/מְסֻגֶּ֔רֶת` (wmsgrt) | 6228:43 -> 6228:43 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | 2Kgs 9:35 / `וְ/הָ/רַגְלַ֖יִם` (whrglym) | 2Kgs 9:35 / `וְ/הָ/רַגְלַ֖יִם` (whrglym) | 10897:1 -> 10897:1 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | 2Kgs 9:35 / `וְ/הָ/רַגְלַ֖יִם` (whrglym) | 2Kgs 9:35 / `וְ/הָ/רַגְלַ֖יִם` (whrglym) | 10897:7 -> 10897:7 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | 1Chr 6:65 / `וְ/אֶת` (wt) | 1Chr 6:65 / `בַּ/גִּלְעָ֖ד` (bgld) | 22169:8 -> 22169:8 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | 1Chr 6:65 / `וְ/אֶת` (wt) | 1Chr 6:65 / `בַּ/גִּלְעָ֖ד` (bgld) | 22169:16 -> 22169:16 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | 1Chr 12:9 / `וּ/מִן` (wmn) | 1Chr 12:8 / `הַ/גְּדֽוֹר` (hgdwr) | 22339:0 -> 22339:0 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | 1Chr 12:9 / `וּ/מִן` (wmn) | 1Chr 12:8 / `הַ/גְּדֽוֹר` (hgdwr) | 22339:8 -> 22339:8 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Jer 51:55 / `וְ/הָמ֤וּ` (whmw) | Jer 51:55 / `וְ/הָמ֤וּ` (whmw) | 14489:24 -> 14489:24 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Jer 51:55 / `וְ/הָמ֤וּ` (whmw) | Jer 51:55 / `וְ/הָמ֤וּ` (whmw) | 14489:32 -> 14489:32 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Jer 27:8 / `וְ/הָיָ֨ה` (whyh) | Jer 27:7 / `גְּדֹלִֽים` (gdlym) | 13631:1 -> 13631:1 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Jer 27:8 / `וְ/הָיָ֨ה` (whyh) | Jer 27:7 / `גְּדֹלִֽים` (gdlym) | 13631:11 -> 13631:11 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Gen 27:15 / `עֵשָׂ֜ו` (shw) | Gen 27:15 / `בְּנָ֤/הּ` (bnh) | 737:31 -> 737:31 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Gen 27:15 / `עֵשָׂ֜ו` (shw) | Gen 27:15 / `בְּנָ֤/הּ` (bnh) | 737:41 -> 737:41 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Gen 49:19 / `וְ/ה֖וּא` (whw) | Gen 49:19 / `וְ/ה֖וּא` (whw) | 1519:9 -> 1519:9 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Gen 49:19 / `וְ/ה֖וּא` (whw) | Gen 49:19 / `וְ/ה֖וּא` (whw) | 1519:19 -> 1519:19 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Jer 27:8 / `וְ/הָיָ֨ה` (whyh) | Jer 27:8 / `וְ/הָיָ֨ה` (whyh) | 13631:1 -> 13631:1 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Jer 27:8 / `וְ/הָיָ֨ה` (whyh) | Jer 27:8 / `וְ/הָיָ֨ה` (whyh) | 13631:11 -> 13631:11 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Deut 33:15 / `עוֹלָֽם` (wlm) | Deut 33:15 / `גִּבְע֥וֹת` (gbwt) | 6070:29 -> 6070:29 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Deut 33:15 / `עוֹלָֽם` (wlm) | Deut 33:15 / `גִּבְע֥וֹת` (gbwt) | 6070:41 -> 6070:41 |
+| same_cell | MT_WLC | `גוג` (Gog; English: Gog) | `מגוג` (Magog; English: Magog) | Ps 120:4 / `שְׁנוּנִ֑ים` (shnwnym) | Ps 120:4 / `גִבּ֣וֹר` (gbwr) | 18543:2 -> 18543:2 |

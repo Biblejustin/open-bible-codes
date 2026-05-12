@@ -33,6 +33,7 @@ FIELDNAMES = [
     "left_cell",
     "right_cell",
     "corpus_label",
+    "corpus_class",
     "left_hit_index",
     "right_hit_index",
     "left_term_id",
@@ -58,6 +59,7 @@ SUMMARY_FIELDS = ["bucket", "value", "pairs"]
 class MatrixHit:
     hit_index: int
     corpus_label: str
+    corpus_class: str
     term_id: str
     concept: str
     normalized_term: str
@@ -166,6 +168,7 @@ def matrix_hit_from_row(
     return MatrixHit(
         hit_index=hit_index,
         corpus_label=corpus_label(row),
+        corpus_class=row.get("corpus_class", ""),
         term_id=row.get("term_id", "") or row.get("term", ""),
         concept=row.get("concept", ""),
         normalized_term=row.get("normalized_term", "") or sequence,
@@ -283,6 +286,7 @@ def matrix_cluster_row(
         "left_cell": format_cell(left_cell),
         "right_cell": format_cell(right_cell),
         "corpus_label": left.corpus_label,
+        "corpus_class": left.corpus_class,
         "left_hit_index": left.hit_index,
         "right_hit_index": right.hit_index,
         "left_term_id": left.term_id,
@@ -309,11 +313,13 @@ def format_cell(cell: MatrixCell) -> str:
 def summarize_rows(rows: list[dict[str, object]]) -> list[dict[str, object]]:
     relation_counts = Counter(str(row.get("cell_relation", "")) for row in rows)
     corpus_counts = Counter(str(row.get("corpus_label", "")) for row in rows)
+    corpus_class_counts = Counter(str(row.get("corpus_class", "")) for row in rows)
     distance_counts = Counter(str(row.get("cell_distance", "")) for row in rows)
     summary_rows: list[dict[str, object]] = []
     for bucket, counts in (
         ("cell_relation", relation_counts),
         ("corpus_label", corpus_counts),
+        ("corpus_class", corpus_class_counts),
         ("cell_distance", distance_counts),
     ):
         for value, count in sorted(counts.items(), key=lambda item: (-item[1], item[0])):
@@ -341,12 +347,15 @@ def write_markdown(
         row["value"]: int(row["pairs"]) for row in summary_rows if row.get("bucket") == "cell_relation"
     }
     corpus_counts = {row["value"]: int(row["pairs"]) for row in summary_rows if row.get("bucket") == "corpus_label"}
+    corpus_class_counts = {
+        row["value"]: int(row["pairs"]) for row in summary_rows if row.get("bucket") == "corpus_class"
+    }
     lines = [
         "# Matrix Cluster Candidates",
         "",
         "This is an opt-in geometry screen over already-exported raw ELS hit rows. It wraps each hit path into a matrix of the locked row width, then records declared-term pairs whose letter paths share a cell or fall within the configured cell-neighborhood distance.",
         "",
-        "This report is candidate extraction only. It is not claim promotion. Matrix-style claims still require a locked row-width protocol, matched Bible and non-Bible controls, and correction for the widened geometry search family.",
+        "This report is candidate extraction only. It is not claim promotion. When the input is CRD output, Bible and secular-control rows are both present; matrix-style claims still require a locked relation-specific metric and correction for the widened geometry search family.",
         "",
         "## Run Settings",
         "",
@@ -373,6 +382,12 @@ def write_markdown(
     if corpus_counts:
         for corpus, count in sorted(corpus_counts.items(), key=lambda item: (-item[1], item[0])):
             lines.append(f"| {corpus} | {count:,} |")
+    else:
+        lines.append("| none | 0 |")
+    lines.extend(["", "## Corpus Class Counts", "", "| Corpus class | Pairs |", "| --- | ---: |"])
+    if corpus_class_counts:
+        for corpus_class, count in sorted(corpus_class_counts.items(), key=lambda item: (-item[1], item[0])):
+            lines.append(f"| {corpus_class or 'unspecified'} | {count:,} |")
     else:
         lines.append("| none | 0 |")
     lines.extend(
