@@ -7,7 +7,7 @@ Broader ELS count sweep across every declared term list.
 - Skip range: `2..100`
 - Direction: `both`
 - Term sets: 21
-- Rows: 8318
+- Rows: 8323
 - Manifest: `reports/broad_search/broad_search.manifest.json`
 
 ## Main Read
@@ -67,15 +67,15 @@ Broader ELS count sweep across every declared term list.
 | biblical_tribes | UHB | 12 | 0 | 275567 | `levi_h` `לוי` (lwy; English: Levi) (218750) |
 | biblical_tribes | UXLC | 12 | 0 | 275671 | `levi_h` `לוי` (lwy; English: Levi) (218875) |
 | daniel_statue_metals | BYZ_NT | 5 | 4 | 24 | `daniel_clay_g` `πηλοσ` (pelos; English: Clay) (24) |
-| daniel_statue_metals | EBIBLE_WLC | 5 | 0 | 12477 | `daniel_gold_h` `זהב` (zhb; English: Gold) (8368) |
+| daniel_statue_metals | EBIBLE_WLC | 5 | 0 | 12477 | `daniel_gold_h` `זהב` (zahav; English: Gold) (8368) |
 | daniel_statue_metals | LXX | 5 | 2 | 144 | `daniel_clay_g` `πηλοσ` (pelos; English: Clay) (136) |
-| daniel_statue_metals | MAM | 5 | 0 | 12561 | `daniel_gold_h` `זהב` (zhb; English: Gold) (8420) |
-| daniel_statue_metals | MT_WLC | 5 | 0 | 12478 | `daniel_gold_h` `זהב` (zhb; English: Gold) (8371) |
+| daniel_statue_metals | MAM | 5 | 0 | 12561 | `daniel_gold_h` `זהב` (zahav; English: Gold) (8420) |
+| daniel_statue_metals | MT_WLC | 5 | 0 | 12478 | `daniel_gold_h` `זהב` (zahav; English: Gold) (8371) |
 | daniel_statue_metals | SBLGNT | 5 | 1 | 34 | `daniel_clay_g` `πηλοσ` (pelos; English: Clay) (31) |
 | daniel_statue_metals | TCG_NT | 5 | 2 | 49 | `daniel_clay_g` `πηλοσ` (pelos; English: Clay) (46) |
 | daniel_statue_metals | TR_NT | 5 | 3 | 42 | `daniel_clay_g` `πηλοσ` (pelos; English: Clay) (40) |
-| daniel_statue_metals | UHB | 5 | 0 | 12421 | `daniel_gold_h` `זהב` (zhb; English: Gold) (8325) |
-| daniel_statue_metals | UXLC | 5 | 0 | 12475 | `daniel_gold_h` `זהב` (zhb; English: Gold) (8369) |
+| daniel_statue_metals | UHB | 5 | 0 | 12421 | `daniel_gold_h` `זהב` (zahav; English: Gold) (8325) |
+| daniel_statue_metals | UXLC | 5 | 0 | 12475 | `daniel_gold_h` `זהב` (zahav; English: Gold) (8369) |
 | english_search_terms | KJV | 1298 | 661 | 3819361 | `eng_end` `end` (273618) |
 | eschatology_expanded_terms | BYZ_NT | 9 | 6 | 409 | `esch_666_g` `χξσ` (chxs; English: 666) (253) |
 | eschatology_expanded_terms | EBIBLE_WLC | 8 | 5 | 89256 | `esch_666_h` `תרו` (trw; English: 666) (74794) |
@@ -113,15 +113,15 @@ Broader ELS count sweep across every declared term list.
 | hebrew_claim_terms | UHB | 140 | 54 | 684726 | `light_h` `אור` (or; English: Light) (115249) |
 | hebrew_claim_terms | UXLC | 140 | 55 | 685458 | `light_h` `אור` (or; English: Light) (115230) |
 | isaiah53_servant_cohort | BYZ_NT | 8 | 3 | 3841 | `isa53_servant_g` `παισ` (pais; English: Servant) (3455) |
-| isaiah53_servant_cohort | EBIBLE_WLC | 7 | 0 | 99198 | `isa53_iniquity_h` `עונ` (wn; English: Iniquity) (43764) |
+| isaiah53_servant_cohort | EBIBLE_WLC | 7 | 0 | 99198 | `isa53_iniquity_h` `עונ` (avon; English: Iniquity) (43764) |
 | isaiah53_servant_cohort | LXX | 8 | 3 | 17537 | `isa53_servant_g` `παισ` (pais; English: Servant) (16170) |
-| isaiah53_servant_cohort | MAM | 7 | 0 | 99705 | `isa53_iniquity_h` `עונ` (wn; English: Iniquity) (44074) |
-| isaiah53_servant_cohort | MT_WLC | 7 | 0 | 99189 | `isa53_iniquity_h` `עונ` (wn; English: Iniquity) (43760) |
+| isaiah53_servant_cohort | MAM | 7 | 0 | 99705 | `isa53_iniquity_h` `עונ` (avon; English: Iniquity) (44074) |
+| isaiah53_servant_cohort | MT_WLC | 7 | 0 | 99189 | `isa53_iniquity_h` `עונ` (avon; English: Iniquity) (43760) |
 | isaiah53_servant_cohort | SBLGNT | 8 | 3 | 3891 | `isa53_servant_g` `παισ` (pais; English: Servant) (3501) |
 | isaiah53_servant_cohort | TCG_NT | 8 | 3 | 3807 | `isa53_servant_g` `παισ` (pais; English: Servant) (3439) |
 | isaiah53_servant_cohort | TR_NT | 8 | 2 | 3812 | `isa53_servant_g` `παισ` (pais; English: Servant) (3437) |
-| isaiah53_servant_cohort | UHB | 7 | 0 | 99128 | `isa53_iniquity_h` `עונ` (wn; English: Iniquity) (43797) |
-| isaiah53_servant_cohort | UXLC | 7 | 0 | 99205 | `isa53_iniquity_h` `עונ` (wn; English: Iniquity) (43766) |
+| isaiah53_servant_cohort | UHB | 7 | 0 | 99128 | `isa53_iniquity_h` `עונ` (avon; English: Iniquity) (43797) |
+| isaiah53_servant_cohort | UXLC | 7 | 0 | 99205 | `isa53_iniquity_h` `עונ` (avon; English: Iniquity) (43766) |
 | maccabean_apocrypha_names | BYZ_NT | 7 | 5 | 20 | `macc_tobit_g` `τωβιτ` (tobit; English: Tobit) (17) |
 | maccabean_apocrypha_names | EBIBLE_WLC | 7 | 3 | 202 | `macc_tobit_h` `טוביה` (twbyh; English: Tobit) (67) |
 | maccabean_apocrypha_names | LXX | 7 | 5 | 70 | `macc_tobit_g` `τωβιτ` (tobit; English: Tobit) (62) |
@@ -163,15 +163,15 @@ Broader ELS count sweep across every declared term list.
 | null_controls | UHB | 13 | 2 | 134433 | `scrambled_moses_h` `השמ` (hshm; English: Scrambled Moses) (81481) |
 | null_controls | UXLC | 13 | 2 | 134600 | `scrambled_moses_h` `השמ` (hshm; English: Scrambled Moses) (81466) |
 | prophetic_terms | BYZ_NT | 229 | 143 | 52867 | `ur_g` `ουρ` (our; English: Ur) (26527) |
-| prophetic_terms | EBIBLE_WLC | 221 | 75 | 1427243 | `greece_h` `יונ` (ywn; English: Greece) (136086) |
+| prophetic_terms | EBIBLE_WLC | 222 | 75 | 1430273 | `greece_h` `יונ` (ywn; English: Greece) (136086) |
 | prophetic_terms | LXX | 229 | 126 | 228575 | `ur_g` `ουρ` (our; English: Ur) (117550) |
-| prophetic_terms | MAM | 221 | 76 | 1433092 | `greece_h` `יונ` (ywn; English: Greece) (137065) |
-| prophetic_terms | MT_WLC | 221 | 75 | 1427290 | `greece_h` `יונ` (ywn; English: Greece) (136081) |
+| prophetic_terms | MAM | 222 | 76 | 1436167 | `greece_h` `יונ` (ywn; English: Greece) (137065) |
+| prophetic_terms | MT_WLC | 222 | 75 | 1430323 | `greece_h` `יונ` (ywn; English: Greece) (136081) |
 | prophetic_terms | SBLGNT | 229 | 145 | 52029 | `ur_g` `ουρ` (our; English: Ur) (25964) |
 | prophetic_terms | TCG_NT | 229 | 142 | 53010 | `ur_g` `ουρ` (our; English: Ur) (26634) |
 | prophetic_terms | TR_NT | 229 | 142 | 53319 | `ur_g` `ουρ` (our; English: Ur) (26737) |
-| prophetic_terms | UHB | 221 | 77 | 1425083 | `greece_h` `יונ` (ywn; English: Greece) (136105) |
-| prophetic_terms | UXLC | 221 | 75 | 1427254 | `greece_h` `יונ` (ywn; English: Greece) (136087) |
+| prophetic_terms | UHB | 222 | 77 | 1428092 | `greece_h` `יונ` (ywn; English: Greece) (136105) |
+| prophetic_terms | UXLC | 222 | 75 | 1430287 | `greece_h` `יונ` (ywn; English: Greece) (136087) |
 | tabernacle_temple_terms | BYZ_NT | 8 | 5 | 9175 | `tabernacle_temple_g` `ναοσ` (naos; English: Temple) (9130) |
 | tabernacle_temple_terms | EBIBLE_WLC | 8 | 1 | 14618 | `tabernacle_temple_h` `היכל` (hykl; English: Temple) (6557) |
 | tabernacle_temple_terms | LXX | 8 | 5 | 35578 | `tabernacle_temple_g` `ναοσ` (naos; English: Temple) (35302) |

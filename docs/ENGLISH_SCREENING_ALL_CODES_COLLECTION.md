@@ -6,7 +6,7 @@ This report intentionally keeps every hidden-path ELS row from the surface-conte
 
 - Hits: `reports/english_screening_all_codes/surface_all_codes.csv`
 - Summary: `reports/english_screening_all_codes/surface_all_codes_summary.csv`
-- Report DB: `not used`
+- Report DB: `reports/db/open_bible_codes.duckdb`
 - Corpora: `KJV`
 
 ## Collection Counts
