@@ -168,8 +168,8 @@ def test_build_strata_rows_adds_meaningful_skip_and_gematria_flags() -> None:
                 "concept": "YHWH",
                 "normalized_term": "יהוה",
                 "center_ref": "Gen 1:1",
-                "center_word": "center",
-                "center_normalized_word": "center",
+                "center_word": "לב",
+                "center_normalized_word": "לב",
                 "skip": "7;26",
                 "direction": "forward",
                 "occurrence_type": "hidden_path_only",
@@ -183,8 +183,39 @@ def test_build_strata_rows_adds_meaningful_skip_and_gematria_flags() -> None:
     assert row["meaningful_constant_skips"] == "7;26"
     assert row["term_gematria_value"] == "26"
     assert row["skip_equals_term_gematria"] == "yes"
+    assert row["center_word_gematria_value"] == "32"
+    assert row["skip_equals_center_word_gematria"] == "no"
     assert "skip_equals_meaningful_constant" in row["extended_strata"]
     assert "skip_equals_term_gematria" in row["extended_strata"]
+
+
+def test_build_strata_rows_adds_center_word_gematria_flags() -> None:
+    rows = build_strata_rows(
+        [
+            {
+                "source_family": "test",
+                "source_queue": "q",
+                "corpus": "MT",
+                "present_corpora": "MT",
+                "term_id": "term",
+                "concept": "Term",
+                "normalized_term": "אבג",
+                "center_ref": "Gen 1:1",
+                "center_word": "לב",
+                "center_normalized_word": "לב",
+                "skip": "32",
+                "direction": "forward",
+                "occurrence_type": "hidden_path_only",
+            }
+        ]
+    )
+
+    row = rows[0]
+    assert row["center_word_gematria_scheme"] == "hebrew_standard"
+    assert row["center_word_gematria_value"] == "32"
+    assert row["skip_equals_center_word_gematria"] == "yes"
+    assert row["center_word_gematria_matching_skips"] == "32"
+    assert "skip_equals_center_word_gematria" in row["extended_strata"]
 
 
 def test_build_strata_rows_adds_bigram_surprise_flags() -> None:

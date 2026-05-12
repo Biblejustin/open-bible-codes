@@ -349,18 +349,18 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 
 ## Meaningful Skip Rows
 
-| Rank | Term | Center | Skip | Constant match | Term gematria match | Source |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 2 | `γωγ` (Gog; English: Gog) | Rev 20:8=4 `Gog` | -7;7;-4423;4423 | 7: Sabbath / completeness |  | `gog_source_review` |
-| 626 | `παισ` (pais; English: Servant) | Luke 22:64 `παίσας` (paisas) | -7 | 7: Sabbath / completeness |  | `all_codes_followup` |
-| 636 | `תורה` (twrh; English: Torah) | 1Chr 5:1 `בֶּן־יִשְׂרָאֵ֑ל` (bnyshrl) | 7 | 7: Sabbath / completeness |  | `all_codes_followup` |
-| 637 | `תורה` (twrh; English: Torah) | 2Kgs 17:20 `יִשְׂרָאֵל֙` (Yisrael; English: Israel) | -7 | 7: Sabbath / completeness |  | `all_codes_followup` |
-| 685 | `hand` | MAL 4:6 `their` | 40 | 40: Wilderness / testing |  | `kjv_apocrypha_bridge_context` |
-| 720 | `התשח` (htshch; English: Hebrew year 5708) | Lev 22:27 `וָהָ֔לְאָה` (whlh) | 40 | 40: Wilderness / testing |  | `all_codes_followup` |
-| 735 | `νατο` (nato; English: NATO) | 1Cor 1:27 `μωρὰ` (mora; English: foolish things) | 7 | 7: Sabbath / completeness |  | `all_codes_followup` |
-| 795 | `gate` | MAL 4:5 `great` | -144 | 144: Revelation square of twelve |  | `kjv_apocrypha_bridge_context` |
-| 829 | `hits` | MAL 4:5 `before` | 144 | 144: Revelation square of twelve |  | `kjv_apocrypha_bridge_context` |
-| 896 | `soot` | TOB 1:1 `of` | -70 | 70: Nations / exile years |  | `kjv_apocrypha_bridge_context` |
+| Rank | Term | Center | Skip | Constant match | Term gematria match | Center-word gematria match | Source |
+| ---: | --- | --- | --- | --- | --- | --- | --- |
+| 2 | `γωγ` (Gog; English: Gog) | Rev 20:8=4 `Gog` | -7;7;-4423;4423 | 7: Sabbath / completeness |  |  | `gog_source_review` |
+| 626 | `παισ` (pais; English: Servant) | Luke 22:64 `παίσας` (paisas) | -7 | 7: Sabbath / completeness |  |  | `all_codes_followup` |
+| 636 | `תורה` (twrh; English: Torah) | 1Chr 5:1 `בֶּן־יִשְׂרָאֵ֑ל` (bnyshrl) | 7 | 7: Sabbath / completeness |  |  | `all_codes_followup` |
+| 637 | `תורה` (twrh; English: Torah) | 2Kgs 17:20 `יִשְׂרָאֵל֙` (Yisrael; English: Israel) | -7 | 7: Sabbath / completeness |  |  | `all_codes_followup` |
+| 685 | `hand` | MAL 4:6 `their` | 40 | 40: Wilderness / testing |  |  | `kjv_apocrypha_bridge_context` |
+| 720 | `התשח` (htshch; English: Hebrew year 5708) | Lev 22:27 `וָהָ֔לְאָה` (whlh) | 40 | 40: Wilderness / testing |  |  | `all_codes_followup` |
+| 735 | `νατο` (nato; English: NATO) | 1Cor 1:27 `μωρὰ` (mora; English: foolish things) | 7 | 7: Sabbath / completeness |  |  | `all_codes_followup` |
+| 795 | `gate` | MAL 4:5 `great` | -144 | 144: Revelation square of twelve |  |  | `kjv_apocrypha_bridge_context` |
+| 829 | `hits` | MAL 4:5 `before` | 144 | 144: Revelation square of twelve |  |  | `kjv_apocrypha_bridge_context` |
+| 896 | `soot` | TOB 1:1 `of` | -70 | 70: Nations / exile years |  |  | `kjv_apocrypha_bridge_context` |
 
 ## Bigram Surprise Rows
 
@@ -423,7 +423,7 @@ python3 -m scripts.build_match_strata_index --occurrences reports/centered_occur
 - Boundary strata are computed only from retained endpoint offsets, so blank boundary fields mean unavailable evidence, not proven absence.
 - Center-position strata use the center verse reference, not ELS path endpoints.
 - `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.
-- `skip_equals_meaningful_constant` and `skip_equals_term_gematria` are metadata flags; they do not change the search space or promote claim status.
+- Meaningful-skip and gematria-skip strata are metadata flags; they do not change the search space or promote claim status.
 - Bigram-surprise strata are corpus-local review aids, not claim promotion rules; missing adjacent surface bigrams count as rare.
 - Letter-frequency anomaly strata are corpus-local review aids; missing letters count as rare.
 - Matrix, cipher, broader cross-skip, and cohort-density strata widen the review surface and need separate locked controls before claim language.

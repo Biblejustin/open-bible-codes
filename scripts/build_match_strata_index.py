@@ -80,6 +80,10 @@ FIELDNAMES = [
     "term_gematria_value",
     "skip_equals_term_gematria",
     "term_gematria_matching_skips",
+    "center_word_gematria_scheme",
+    "center_word_gematria_value",
+    "skip_equals_center_word_gematria",
+    "center_word_gematria_matching_skips",
     "bigram_surprise_stratum",
     "bigram_surprise_evidence",
     "bigram_min_count",
@@ -190,6 +194,13 @@ def build_strata_rows(
             row.get("language", ""),
         )
         gematria_skips = [value for value in skip_values if term_gematria_value > 0 and value == term_gematria_value]
+        center_gematria_scheme, center_word_gematria_value = standard_gematria_value(
+            row.get("center_normalized_word", ""),
+            row.get("language", ""),
+        )
+        center_word_gematria_skips = [
+            value for value in skip_values if center_word_gematria_value > 0 and value == center_word_gematria_value
+        ]
         bigram_surprise = bigram_surprise_for_row(row, bigram_profiles)
         letter_frequency = letter_frequency_for_row(row, letter_frequency_profiles)
         strata = [
@@ -206,6 +217,8 @@ def build_strata_rows(
             strata.append("skip_equals_meaningful_constant")
         if gematria_skips:
             strata.append("skip_equals_term_gematria")
+        if center_word_gematria_skips:
+            strata.append("skip_equals_center_word_gematria")
         if bigram_surprise.stratum:
             strata.append(bigram_surprise.stratum)
         if letter_frequency.stratum:
@@ -235,6 +248,14 @@ def build_strata_rows(
                 "term_gematria_value": str(term_gematria_value) if term_gematria_value else "",
                 "skip_equals_term_gematria": "yes" if gematria_skips else "no",
                 "term_gematria_matching_skips": ";".join(str(value) for value in gematria_skips),
+                "center_word_gematria_scheme": center_gematria_scheme,
+                "center_word_gematria_value": (
+                    str(center_word_gematria_value) if center_word_gematria_value else ""
+                ),
+                "skip_equals_center_word_gematria": "yes" if center_word_gematria_skips else "no",
+                "center_word_gematria_matching_skips": ";".join(
+                    str(value) for value in center_word_gematria_skips
+                ),
                 "bigram_surprise_stratum": bigram_surprise.stratum,
                 "bigram_surprise_evidence": bigram_surprise.evidence,
                 "bigram_min_count": "" if bigram_surprise.min_count is None else str(bigram_surprise.min_count),
@@ -461,7 +482,9 @@ def write_markdown(
     meaningful_rows = [
         row
         for row in rows
-        if row.get("skip_equals_meaningful_constant") == "yes" or row.get("skip_equals_term_gematria") == "yes"
+        if row.get("skip_equals_meaningful_constant") == "yes"
+        or row.get("skip_equals_term_gematria") == "yes"
+        or row.get("skip_equals_center_word_gematria") == "yes"
     ]
     if meaningful_rows:
         lines.extend(
@@ -469,8 +492,8 @@ def write_markdown(
                 "",
                 "## Meaningful Skip Rows",
                 "",
-                "| Rank | Term | Center | Skip | Constant match | Term gematria match | Source |",
-                "| ---: | --- | --- | --- | --- | --- | --- |",
+                "| Rank | Term | Center | Skip | Constant match | Term gematria match | Center-word gematria match | Source |",
+                "| ---: | --- | --- | --- | --- | --- | --- | --- |",
             ]
         )
         for row in meaningful_rows[: args.markdown_row_limit]:
@@ -523,7 +546,7 @@ def write_markdown(
             "- Boundary strata are computed only from retained endpoint offsets, so blank boundary fields mean unavailable evidence, not proven absence.",
             "- Center-position strata use the center verse reference, not ELS path endpoints.",
             "- `cross_skip_pair_at_word` means at least one other normalized term shares the same center word/reference in the indexed family at a different skip.",
-            "- `skip_equals_meaningful_constant` and `skip_equals_term_gematria` are metadata flags; they do not change the search space or promote claim status.",
+            "- Meaningful-skip and gematria-skip strata are metadata flags; they do not change the search space or promote claim status.",
             "- Bigram-surprise strata are corpus-local review aids, not claim promotion rules; missing adjacent surface bigrams count as rare.",
             "- Letter-frequency anomaly strata are corpus-local review aids; missing letters count as rare.",
             "- Matrix, cipher, broader cross-skip, and cohort-density strata widen the review surface and need separate locked controls before claim language.",
@@ -579,10 +602,16 @@ def meaningful_skip_markdown_row(row: dict[str, object]) -> str:
             f"{row.get('term_gematria_matching_skips', '')} "
             f"({row.get('gematria_scheme', '')})"
         )
+    center_gematria_match = ""
+    if row.get("skip_equals_center_word_gematria") == "yes":
+        center_gematria_match = (
+            f"{row.get('center_word_gematria_matching_skips', '')} "
+            f"({row.get('center_word_gematria_scheme', '')})"
+        )
     return (
         f"| {row.get('occurrence_rank', '')} | {term} | {md_cell(center)} | "
         f"{md_cell(row.get('skip', ''))} | {md_cell(constant_match)} | "
-        f"{md_cell(gematria_match)} | `{row.get('source_family', '')}` |"
+        f"{md_cell(gematria_match)} | {md_cell(center_gematria_match)} | `{row.get('source_family', '')}` |"
     )
 
 
