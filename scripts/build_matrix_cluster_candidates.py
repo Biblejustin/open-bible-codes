@@ -66,12 +66,21 @@ class MatrixHit:
     cells: tuple[MatrixCell, ...]
 
 
+@dataclass(frozen=True)
+class ReadHitsResult:
+    hits: list[MatrixHit]
+    input_rows: int
+    skipped_rows: int
+
+
 def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(argv)
-    hits = read_hits(args.hits, row_width=args.row_width, max_rows=args.max_input_rows)
+    read_result = read_hits_with_stats(args.hits, row_width=args.row_width, max_rows=args.max_input_rows)
+    if args.require_parsed_hits and not read_result.hits:
+        raise SystemExit("no matrix-usable hit rows parsed; input must include sequence/start_offset/skip columns")
     rows = matrix_cluster_rows(
-        hits,
+        read_result.hits,
         row_width=args.row_width,
         max_cell_distance=args.max_cell_distance,
         max_pairs=args.max_pairs,
@@ -80,7 +89,14 @@ def main(argv: list[str] | None = None) -> int:
     summary_rows = summarize_rows(rows)
     write_rows(args.out, rows)
     write_rows(args.summary_out, summary_rows, fieldnames=SUMMARY_FIELDS)
-    write_manifest(args.manifest_out, args, input_hits=hits, rows=rows, summary_rows=summary_rows, started=started)
+    write_manifest(
+        args.manifest_out,
+        args,
+        read_result=read_result,
+        rows=rows,
+        summary_rows=summary_rows,
+        started=started,
+    )
     print(args.out)
     print(args.summary_out)
     print(args.manifest_out)
@@ -95,6 +111,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--max-pairs", type=int, default=100_000)
     parser.add_argument("--max-input-rows", type=int, default=0)
     parser.add_argument("--allow-same-term", action="store_true")
+    parser.add_argument("--require-parsed-hits", action="store_true")
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
     parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST_OUT)
@@ -102,17 +119,26 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def read_hits(paths: list[Path], *, row_width: int, max_rows: int = 0) -> list[MatrixHit]:
+    return read_hits_with_stats(paths, row_width=row_width, max_rows=max_rows).hits
+
+
+def read_hits_with_stats(paths: list[Path], *, row_width: int, max_rows: int = 0) -> ReadHitsResult:
     validate_row_width(row_width)
     hits: list[MatrixHit] = []
+    input_rows = 0
+    skipped_rows = 0
     for path in paths:
         with path.open(newline="", encoding="utf-8") as handle:
             for row in csv.DictReader(handle):
+                input_rows += 1
                 hit = matrix_hit_from_row(row, hit_index=len(hits) + 1, row_width=row_width)
                 if hit is not None:
                     hits.append(hit)
+                else:
+                    skipped_rows += 1
                 if max_rows > 0 and len(hits) >= max_rows:
-                    return hits
-    return hits
+                    return ReadHitsResult(hits=hits, input_rows=input_rows, skipped_rows=skipped_rows)
+    return ReadHitsResult(hits=hits, input_rows=input_rows, skipped_rows=skipped_rows)
 
 
 def matrix_hit_from_row(
@@ -121,11 +147,11 @@ def matrix_hit_from_row(
     hit_index: int,
     row_width: int,
 ) -> MatrixHit | None:
-    sequence = row.get("sequence", "")
+    sequence = sequence_value(row)
     if not sequence:
         return None
     try:
-        start_offset = int(row.get("start_offset", ""))
+        start_offset = int(offset_value(row))
         skip = int(row.get("skip", ""))
     except ValueError:
         return None
@@ -137,13 +163,29 @@ def matrix_hit_from_row(
         corpus_label=corpus_label(row),
         term_id=row.get("term_id", "") or row.get("term", ""),
         concept=row.get("concept", ""),
-        normalized_term=row.get("normalized_term", ""),
+        normalized_term=row.get("normalized_term", "") or sequence,
         skip=skip,
         direction=row.get("direction", "") or ("forward" if skip > 0 else "backward"),
         center_ref=row.get("center_ref", ""),
         center_word=row.get("center_word", ""),
         cells=tuple(matrix_cell(offset, row_width) for offset in offsets),
     )
+
+
+def sequence_value(row: dict[str, str]) -> str:
+    for key in ("sequence", "extended_sequence", "matched_normalized", "normalized_term"):
+        value = row.get(key, "").strip()
+        if value:
+            return value
+    return ""
+
+
+def offset_value(row: dict[str, str]) -> str:
+    for key in ("start_offset", "extension_start_offset"):
+        value = row.get(key, "").strip()
+        if value:
+            return value
+    return ""
 
 
 def corpus_label(row: dict[str, str]) -> str:
@@ -286,7 +328,7 @@ def write_manifest(
     path: Path,
     args: argparse.Namespace,
     *,
-    input_hits: list[MatrixHit],
+    read_result: ReadHitsResult,
     rows: list[dict[str, object]],
     summary_rows: list[dict[str, object]],
     started: float,
@@ -302,7 +344,10 @@ def write_manifest(
         "max_pairs": args.max_pairs,
         "max_input_rows": args.max_input_rows,
         "allow_same_term": args.allow_same_term,
-        "input_hit_rows": len(input_hits),
+        "require_parsed_hits": args.require_parsed_hits,
+        "input_rows": read_result.input_rows,
+        "input_hit_rows": len(read_result.hits),
+        "skipped_input_rows": read_result.skipped_rows,
         "candidate_pairs": len(rows),
         "summary_rows": len(summary_rows),
         "inputs": {"hits": [str(path) for path in args.hits]},

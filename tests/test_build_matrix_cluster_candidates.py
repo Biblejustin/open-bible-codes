@@ -6,6 +6,7 @@ from scripts.build_matrix_cluster_candidates import (
     matrix_cluster_rows,
     matrix_hit_from_row,
     read_hits,
+    read_hits_with_stats,
     summarize_rows,
 )
 
@@ -37,6 +38,19 @@ def test_matrix_hit_from_row_maps_offsets_to_cells() -> None:
 
     assert hit is not None
     assert hit.cells == ((0, 0), (1, 0), (2, 0))
+
+
+def test_matrix_hit_from_row_accepts_extension_offset_columns() -> None:
+    row = hit_row(term_id="left", start_offset=0, skip=3)
+    row.pop("start_offset")
+    row.pop("sequence")
+    row["extension_start_offset"] = "1"
+    row["extended_sequence"] = "abcd"
+
+    hit = matrix_hit_from_row(row, hit_index=1, row_width=3)
+
+    assert hit is not None
+    assert hit.cells == ((0, 1), (1, 1), (2, 1), (3, 1))
 
 
 def test_matrix_cluster_rows_finds_neighboring_terms() -> None:
@@ -86,6 +100,25 @@ def test_read_hits_and_main_shape(tmp_path: Path) -> None:
 
     assert len(rows) == 1
     assert rows[0]["corpus_label"] == "TINY"
+
+
+def test_read_hits_with_stats_counts_unusable_rows(tmp_path: Path) -> None:
+    hits = tmp_path / "hits.csv"
+    usable = hit_row(term_id="left", start_offset=0, skip=3)
+    unusable = dict(usable)
+    unusable["sequence"] = ""
+    unusable["normalized_term"] = ""
+    with hits.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(usable))
+        writer.writeheader()
+        writer.writerow(usable)
+        writer.writerow(unusable)
+
+    parsed = read_hits_with_stats([hits], row_width=3)
+
+    assert len(parsed.hits) == 1
+    assert parsed.input_rows == 2
+    assert parsed.skipped_rows == 1
 
 
 def test_summarize_rows_counts_relations_corpora_and_distances() -> None:
@@ -138,3 +171,39 @@ def test_main_writes_candidates_summary_and_manifest(tmp_path: Path) -> None:
     assert "orthogonal" in out.read_text(encoding="utf-8")
     assert "cell_relation" in summary.read_text(encoding="utf-8")
     assert '"candidate_pairs": 1' in manifest.read_text(encoding="utf-8")
+    assert '"skipped_input_rows": 0' in manifest.read_text(encoding="utf-8")
+
+
+def test_main_can_require_parsed_hits(tmp_path: Path) -> None:
+    hits = tmp_path / "hits.csv"
+    out = tmp_path / "clusters.csv"
+    summary = tmp_path / "summary.csv"
+    manifest = tmp_path / "manifest.json"
+    row = hit_row(term_id="left", start_offset=0, skip=3)
+    row["sequence"] = ""
+    row["normalized_term"] = ""
+    with hits.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(row))
+        writer.writeheader()
+        writer.writerow(row)
+
+    try:
+        main(
+            [
+                "--hits",
+                str(hits),
+                "--row-width",
+                "3",
+                "--require-parsed-hits",
+                "--out",
+                str(out),
+                "--summary-out",
+                str(summary),
+                "--manifest-out",
+                str(manifest),
+            ]
+        )
+    except SystemExit as exc:
+        assert "no matrix-usable hit rows parsed" in str(exc)
+    else:
+        raise AssertionError("expected SystemExit")

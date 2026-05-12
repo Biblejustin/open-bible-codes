@@ -223,6 +223,13 @@ Shortcut:
 make matrix-cluster-candidates
 ```
 
+Matrix input rows must include enough path detail to reconstruct letter cells:
+`sequence`, `start_offset`, and `skip`, or extension-style
+`extended_sequence`, `extension_start_offset`, and `skip`. Add
+`--require-parsed-hits` for locked runs so a missing path-detail column fails
+instead of writing an empty candidate file. The manifest records input rows,
+parsed hit rows, and skipped input rows.
+
 The output labels nearest-cell relation as `same_cell`, `orthogonal`,
 `diagonal`, or `neighborhood`. Width and distance are study-defining choices;
 claim-grade use requires those values to be locked before looking at results
