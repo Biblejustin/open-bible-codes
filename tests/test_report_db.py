@@ -73,6 +73,22 @@ def test_report_table_name_for_mapped_all_codes_path() -> None:
     )
 
 
+def test_report_table_name_for_matrix_and_gap_paths() -> None:
+    assert report_table_name_for_path(Path("reports/matrix_clusters/candidates.csv")) == "matrix_cluster_candidates"
+    assert (
+        report_table_name_for_path(Path("reports/matrix_clusters/relation_control_summary.csv"))
+        == "matrix_cluster_relation_control_summary"
+    )
+    assert (
+        report_table_name_for_path(Path("reports/notable_passage_gaps/cross_source_gap_summary.csv"))
+        == "notable_passage_gap_cross_source_summary"
+    )
+    assert (
+        report_table_name_for_path(Path("reports/thematic_chapter_absence/cross_source_gap_summary.csv"))
+        == "thematic_chapter_absence_cross_source_summary"
+    )
+
+
 def test_import_csv_table_uses_report_table_mapping_by_default(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     csv_path = tmp_path / "reports" / "hebrew_screening_all_codes" / "surface_all_codes.csv"
     csv_path.parent.mkdir(parents=True)
