@@ -34,6 +34,22 @@ Outputs:
 - `reports/hebrew_albam_audit/summary.csv`
 - `docs/HEBREW_ALBAM_AUDIT.md`
 
+## Layered Pairing
+
+To compare ordinary ELS hits against transformed-layer hits at the same declared
+anchor, use:
+
+```bash
+python3 -m scripts.build_cipher_layered_pairs \
+  --plain-hits reports/plain_hits.csv \
+  --cipher-hits reports/hebrew_atbash_audit/MT_WLC_hits.csv \
+  --out reports/cipher_layered_pairs/pairs.csv
+```
+
+By default, the pairing key is corpus label, term id, center reference, and
+center normalized word. Override it with repeated `--anchor-field` arguments
+only in a locked protocol.
+
 ## Custom ALBAM Search
 
 Example:

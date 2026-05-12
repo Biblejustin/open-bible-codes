@@ -37,6 +37,7 @@ python3 -m scripts.run_protocol protocols/match_strata_index.toml --resume
 | `acrostic_pattern` | first-letter word-edge scanner with optional word skip | `protocols/word_edge_pattern_audit.toml` |
 | `telestic_pattern` | last-letter word-edge scanner with optional word skip | `protocols/word_edge_pattern_audit.toml` |
 | word-edge `word_skip_ELS` | first/last letter every `K`th word; full word-token variant remains deferred | `scripts/search_word_edge_patterns.py` |
+| `cipher_layered_pair` | pairs ordinary and transformed hits at a declared same-anchor key | `scripts/build_cipher_layered_pairs.py` |
 
 These families widen the search surface. Their reports include control
 warnings and capped-row flags.
@@ -62,7 +63,6 @@ warnings and capped-row flags.
 | `lxx_vs_mt_semantic_divergence` | locked MT/LXX divergence catalog |
 | `root_only_match` | locked Hebrew root/lemma analyzer policy |
 | full word-token `word_skip_ELS` | token-level word skip definition plus matched controls |
-| `cipher_layered_pair` | declared plain/cipher pairing rule |
 
 The mapping-dependent rows above now have header-only templates in
 `data/study/mappings/`. Before any populated mapping can drive promotion, run:
