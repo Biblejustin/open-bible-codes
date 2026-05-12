@@ -50,6 +50,29 @@ Current coverage:
 - term-gematria and center-word-gematria skip flags
 - letter-frequency and bigram-surprise metadata
 
+## Boundary Alignment
+
+Boundary alignment summarizes whether ELS path starts and ends align with
+verse, chapter, or book boundaries. It does not run a new ELS search.
+
+Primary protocol: `protocols/boundary_alignment.toml`
+
+```bash
+python3 -m scripts.run_protocol protocols/boundary_alignment.toml --resume
+```
+
+Shortcut:
+
+```bash
+make boundary-alignment
+```
+
+Primary outputs:
+
+- `reports/boundary_alignment/summary.csv`
+- `docs/BOUNDARY_ALIGNMENT.md`
+- `reports/boundary_alignment/manifest.json`
+
 ## Chapter Position Bias
 
 Chapter-position bias summarizes the first/last chapter and book center-verse

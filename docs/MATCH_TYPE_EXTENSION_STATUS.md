@@ -13,6 +13,7 @@ support. Status labels are engineering status only, not claim status.
 | `boundary_*` endpoint flags | implemented from retained start/end offsets | `scripts/build_match_strata_index.py` |
 | `center_verse_first_in_chapter` / `center_verse_last_in_chapter` | implemented from center verse refs | `scripts/build_match_strata_index.py` |
 | `center_verse_first_in_book` / `center_verse_last_in_book` | implemented from center verse refs | `scripts/build_match_strata_index.py` |
+| `boundary_alignment` | implemented as a distribution summary over start/end boundary flags | `scripts/build_boundary_alignment.py` |
 | `chapter_position_bias` | implemented as a distribution summary over center-position flags | `scripts/build_chapter_position_bias.py` |
 | `forward_only` / `backward_only` / `bidirectional_present` | implemented by grouped direction counts | `scripts/build_match_strata_index.py` |
 | `direction_imbalance_score` | summarized as term/corpus direction asymmetry review metadata | `scripts/build_direction_asymmetry.py` |

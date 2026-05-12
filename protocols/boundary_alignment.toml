@@ -1,0 +1,25 @@
+name = "boundary_alignment"
+description = "Summarize ELS start/end verse, chapter, and book boundary flags from the match-strata index."
+manifest_out = "reports/boundary_alignment/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "boundary_alignment"
+description = "Build boundary-alignment distribution summary from occurrence strata."
+argv = [
+  "-m", "scripts.build_boundary_alignment",
+  "--strata", "reports/match_strata_index/occurrence_strata.csv",
+  "--out", "reports/boundary_alignment/summary.csv",
+  "--markdown-out", "docs/BOUNDARY_ALIGNMENT.md",
+  "--manifest-out", "reports/boundary_alignment/manifest.json",
+]
+inputs = [
+  "scripts/build_boundary_alignment.py",
+  "reports/match_strata_index/occurrence_strata.csv",
+]
+outputs = [
+  "reports/boundary_alignment/summary.csv",
+  "docs/BOUNDARY_ALIGNMENT.md",
+  "reports/boundary_alignment/manifest.json",
+]

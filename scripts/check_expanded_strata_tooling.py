@@ -23,6 +23,7 @@ class ToolingEntry:
 
 ENTRIES = (
     ToolingEntry("match strata index", Path("protocols/match_strata_index.toml"), "match-strata-index"),
+    ToolingEntry("boundary alignment", Path("protocols/boundary_alignment.toml"), "boundary-alignment"),
     ToolingEntry("chapter position bias", Path("protocols/chapter_position_bias.toml"), "chapter-position-bias"),
     ToolingEntry("direction asymmetry", Path("protocols/direction_asymmetry.toml"), "direction-asymmetry"),
     ToolingEntry("Hebrew Atbash audit", Path("protocols/hebrew_atbash_audit.toml"), "hebrew-atbash-audit"),
