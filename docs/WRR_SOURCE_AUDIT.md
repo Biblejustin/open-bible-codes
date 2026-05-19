@@ -238,6 +238,9 @@ Generated local outputs:
 - `reports/wrr_1994/wrr2_pair_table_reconciliation.csv`
 - `reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv`
 - `reports/wrr_1994/wrr2_pair_table_reconciliation.md`
+- `reports/wrr_1994/wrr2_pair_eligibility_table.csv`
+- `reports/wrr_1994/wrr2_pair_eligibility_summary.csv`
+- `reports/wrr_1994/wrr2_pair_eligibility_table.md`
 - `reports/wrr_1994/wrr2_perturbation_diagnostics.csv`
 - `reports/wrr_1994/wrr2_perturbation_diagnostics_summary.csv`
 - `reports/wrr_1994/wrr2_perturbation_diagnostics.md`
@@ -372,6 +375,26 @@ repo's current 5..8-letter audit filter reduces those rows to 86. Neither
 count is the locked WRR second-list distance table. The Zacut diagnostic now
 shows why a single length-eligible Zacut appellation exclusion would close the
 numeric gap, while excluding every WNP-disputed Zacut row would not.
+
+WRR pair-eligibility lock-prep table:
+
+| Item | Count |
+| --- | ---: |
+| imported same-record pair rows | 182 |
+| concepts | 30 |
+| appellation length >= 5 pair rows | 165 |
+| length 5..8 smoke-lane pair rows | 86 |
+| WNP Zacut diagnostic pair rows | 8 |
+| zero-hit pair rows at smoke cap | 129 |
+| pair rows with at least one skip-cap target unreached term | 155 |
+| pair rows with close hits within 500 letters | 40 |
+| pair rows with strict same-chapter/same-skip close hits | 5 |
+| status | `lock_prep_only_not_canonical` |
+
+This table gives the next reviewer a row-by-row pair id, source term ids,
+normalized lengths, Genesis smoke hit counts, expected-count skip caps,
+nearest-pair metrics, and eligibility notes. It still does not select the
+canonical 163-distance WRR pair set.
 
 WRR perturbation boundary diagnostic for length `5..8` rows:
 

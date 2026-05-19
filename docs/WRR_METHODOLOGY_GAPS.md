@@ -79,7 +79,7 @@ refutation of the WRR paper.
 | --- | --- | --- |
 | Source text | Exact Genesis text and normalization locked | Koren Genesis stream is fingerprinted and usable for smoke/audit work. |
 | Source pages | Cited paper/list context downloaded and hash-stamped | Paper, ANU files, WRR/Nations pages, MC key, and WNP critique pages are tracked in the source manifest. |
-| Pair universe | Declared second-list pair table resolves paper 298 candidates to 163 defined distances | Not locked; imported `WRR2.txt` yields 182 raw same-record pairs, 165 after appellation length >= 5, and 86 under the current 5..8 both-side screen. |
+| Pair universe | Declared second-list pair table resolves paper 298 candidates to 163 defined distances | Lock-prep table exists at `reports/wrr_1994/wrr2_pair_eligibility_table.csv`; imported `WRR2.txt` yields 182 raw same-record pairs, 165 after appellation length >= 5, and 86 under the current 5..8 both-side screen. |
 | Exclusions | Every excluded appellation/date row has a citable rule | Not locked; one Zacut-appellation exclusion would close 165 to 163, but that is only a diagnostic hypothesis. |
 | Skip caps | Term-specific WRR `D(w)` windows applied for each accepted term | Not locked; current pair/control screens still use broad fixed caps for smoke tests. |
 | Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Not built; low-level WRR distance/proximity helpers exist, but the corrected-distance transform is still missing. |
@@ -115,6 +115,24 @@ Before any reproduction run, the project needs a locked table showing:
 - every accepted date spelling;
 - which rows are excluded and why;
 - final pair count under the declared WRR rule.
+
+Current lock-prep output:
+
+| Item | Count |
+| --- | ---: |
+| imported same-record pair rows | 182 |
+| appellation length >= 5 pair rows | 165 |
+| length 5..8 smoke-lane pair rows | 86 |
+| WNP Zacut diagnostic pair rows | 8 |
+| pair rows with zero Genesis hits at the smoke cap | 129 |
+| pair rows where at least one term does not reach the skip-cap target | 155 |
+| pair rows with close hits in the nearest-pair smoke audit | 40 |
+| pair rows with strict same-chapter/same-skip close hits | 5 |
+
+The generated table is `reports/wrr_1994/wrr2_pair_eligibility_table.csv`;
+summary and reader output are `reports/wrr_1994/wrr2_pair_eligibility_summary.csv`
+and `reports/wrr_1994/wrr2_pair_eligibility_table.md`. It is explicitly
+`lock_prep_only_not_canonical`.
 
 ### 2. Primary-Source Cross-Check
 

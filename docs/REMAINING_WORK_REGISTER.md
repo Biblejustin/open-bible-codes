@@ -80,9 +80,10 @@ workflow names.
 
 ### 1. WRR Reproduction Upgrade
 
-Current status: smoke/source/import work only. Remaining claim-grade pieces:
+Current status: smoke/source/import work plus a lock-prep pair eligibility
+table. Remaining claim-grade pieces:
 
-- locked pair eligibility table;
+- citable canonical pair eligibility rule resolving the 163-distance set;
 - corrected distance `c(w,w')`;
 - term-specific skip-cap logic;
 - permutation-rank procedure;
@@ -93,6 +94,7 @@ Tracked references:
 - `docs/WRR_REPLICATION_PLAN.md`
 - `docs/WRR_METHODOLOGY_GAPS.md`
 - `docs/WRR_CORRECTED_DISTANCE_NOTES.md`
+- `reports/wrr_1994/wrr2_pair_eligibility_table.csv`
 - `tests/test_wrr_stats.py`
 
 ### 2. Source-Basis Audit Queue

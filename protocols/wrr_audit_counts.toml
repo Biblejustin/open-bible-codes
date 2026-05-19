@@ -249,6 +249,38 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr2_pair_eligibility_table"
+description = "Build lock-prep per-pair eligibility table from WRR2 terms, counts, skip caps, and pair metrics."
+argv = [
+  "-m", "scripts.build_wrr_pair_eligibility_table",
+  "--terms", "reports/wrr_1994/wrr2_terms.csv",
+  "--counts", "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "--skip-caps", "reports/wrr_1994/wrr2_skip_caps.csv",
+  "--pair-summary", "reports/wrr_1994/wrr2_genesis_pair_audit_summary.csv",
+  "--appellation-min-term-length", "5",
+  "--min-term-length", "5",
+  "--max-term-length", "8",
+  "--expected-published-pairs", "163",
+  "--out", "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "--summary-out", "reports/wrr_1994/wrr2_pair_eligibility_summary.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_pair_eligibility_table.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_pair_eligibility_table.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_pair_eligibility_table.py",
+  "reports/wrr_1994/wrr2_terms.csv",
+  "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "reports/wrr_1994/wrr2_skip_caps.csv",
+  "reports/wrr_1994/wrr2_genesis_pair_audit_summary.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "reports/wrr_1994/wrr2_pair_eligibility_summary.csv",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.md",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.manifest.json",
+]
+
+[[steps]]
 id = "diagnose_wrr2_perturbations"
 description = "Sample WRR-style perturbation boundary validity for imported 5..8-letter rows."
 argv = [
