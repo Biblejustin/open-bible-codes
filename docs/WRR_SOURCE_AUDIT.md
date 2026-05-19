@@ -429,7 +429,7 @@ corrected distance:
 - permutation-rank `rho` with half-weighted ties;
 - Bonferroni `rho0 = 4 min(rho_i)`.
 - WRR perturbation triples, perturbed offsets, first-ten row widths,
-  conservative single-ELS domain derivation for unambiguous shorter-skip cases,
+  conservative supplied-row domain labeling for unambiguous shorter-skip cases,
   domain-weighted `Q(w,w')` summation for domain-labeled ELS rows, and the
   corrected-distance rank step for already-computed perturbation proximities,
   including the strict WRR 1994 `v/m` rank and the tie-aware methodology-page

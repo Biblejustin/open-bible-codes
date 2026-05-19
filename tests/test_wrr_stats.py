@@ -25,6 +25,7 @@ from els.wrr import (
     wrr_els_els_alpha,
     wrr_els_els_distance_at_row_width,
     wrr_els_els_proximity_at_row_width,
+    wrr_label_minimality_domains,
     wrr_minimality_domain,
     wrr_offsets_span,
     wrr_ordinary_els_els_alpha,
@@ -217,6 +218,36 @@ class WrrStatsTests(unittest.TestCase):
         )
 
         self.assertIsNone(domain)
+
+    def test_wrr_label_minimality_domains_marks_defined_and_undefined_rows(self) -> None:
+        assignments = wrr_label_minimality_domains(
+            (
+                ((20, 30, 40), 10),
+                ((25, 35), 5),
+                ((70, 80), 12),
+            ),
+            text_length=100,
+        )
+
+        self.assertEqual(
+            [row.status for row in assignments],
+            ["undefined", "defined", "defined"],
+        )
+        self.assertEqual(
+            assignments[1].to_occurrence(),
+            WrrElsOccurrence((25, 35), 5, 0, 100),
+        )
+        self.assertEqual(assignments[2].domain_start, 26)
+        self.assertEqual(assignments[2].domain_end, 100)
+
+    def test_wrr_domain_assignment_rejects_undefined_occurrence_conversion(self) -> None:
+        assignment = wrr_label_minimality_domains(
+            (((20, 30, 40), 10), ((25, 35), 5)),
+            text_length=100,
+        )[0]
+
+        with self.assertRaises(ValueError):
+            assignment.to_occurrence()
 
     def test_wrr_domain_weight_uses_overlap_relative_to_text_length(self) -> None:
         left = WrrElsOccurrence((0, 10, 20), 10, 0, 50)

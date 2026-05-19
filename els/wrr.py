@@ -24,6 +24,30 @@ class WrrElsOccurrence:
     domain_end: int
 
 
+@dataclass(frozen=True)
+class WrrDomainAssignment:
+    """Domain-labeling result for one ELS candidate."""
+
+    offsets: tuple[int, ...]
+    skip: int
+    domain_start: int | None
+    domain_end: int | None
+    status: str
+
+    def to_occurrence(self) -> WrrElsOccurrence:
+        if (
+            self.status != "defined"
+            or self.domain_start is None
+            or self.domain_end is None
+        ):
+            raise ValueError("domain assignment is not defined")
+        return WrrElsOccurrence(
+            self.offsets,
+            self.skip,
+            self.domain_start,
+            self.domain_end,
+        )
+
 def perturbation_triples(radius: int = 2) -> tuple[tuple[int, int, int], ...]:
     """Return WRR perturbation triples `(x, y, z)`.
 
@@ -363,6 +387,37 @@ def wrr_minimality_domain(
     if domain_start > target_start or domain_end < target_end:
         return None
     return domain_start, domain_end
+
+
+def wrr_label_minimality_domains(
+    occurrences: Iterable[tuple[Iterable[int], int]],
+    *,
+    text_length: int,
+) -> tuple[WrrDomainAssignment, ...]:
+    """Label every same-word ELS row with its conservative minimality domain."""
+
+    rows = tuple((tuple(offsets), skip) for offsets, skip in occurrences)
+    assignments: list[WrrDomainAssignment] = []
+    for index, (offsets, skip) in enumerate(rows):
+        competitors = (
+            (other_offsets, other_skip)
+            for other_index, (other_offsets, other_skip) in enumerate(rows)
+            if other_index != index
+        )
+        domain = wrr_minimality_domain(
+            offsets,
+            target_skip=skip,
+            competing_occurrences=competitors,
+            text_length=text_length,
+        )
+        if domain is None:
+            assignments.append(WrrDomainAssignment(offsets, skip, None, None, "undefined"))
+        else:
+            domain_start, domain_end = domain
+            assignments.append(
+                WrrDomainAssignment(offsets, skip, domain_start, domain_end, "defined")
+            )
+    return tuple(assignments)
 
 
 def validate_wrr_occurrence(occurrence: WrrElsOccurrence, *, text_length: int) -> None:
