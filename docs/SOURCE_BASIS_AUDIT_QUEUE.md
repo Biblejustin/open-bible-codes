@@ -28,14 +28,12 @@ edition documentation.
 
 | Manifest | Rows | `needs_audit` | `broad_tradition` |
 | --- | ---: | ---: | ---: |
-| BibleGateway English versions | 64 | 1 | 63 |
+| BibleGateway English versions | 64 | 0 | 64 |
 | eBible English controls | 37 | 0 | 37 |
 
 ## BibleGateway Rows Needing Audit
 
-| Label | Current family | Current note |
-| --- | --- | --- |
-| WE | NT-only simplified tradition | NT only |
+None after this pass.
 
 ## BibleGateway Rows Audited This Pass
 
@@ -49,6 +47,7 @@ edition documentation.
 | EXB | `broad_tradition` | BibleGateway/Thomas Nelson notes identify EXB as NCV-family with original-language transparency. |
 | JUB | `broad_tradition` | BibleStudyTools/JUB notes identify Hebrew/Greek-to-Spanish Reina-Valera lineage plus Tyndale/KJV comparison. |
 | MSG | `broad_tradition` | BibleGateway/NavPress notes identify original-language work; keep as paraphrase surface comparison, not manuscript witness. |
+| WE | `broad_tradition` | BibleGateway/CourseBible notes identify Annie Cressman simplified NT with revisions kept in line with the Authorized Version; treat as indirect English simplified control, not direct Greek witness. |
 
 ## eBible Control Rows Needing Audit
 
@@ -70,9 +69,7 @@ None after this pass.
 
 ## Checked But Still Queued
 
-| Label | Reason |
-| --- | --- |
-| WE | BibleGateway identifies a simplified NT and KJV/Authorized Version alignment but not a Greek source basis. |
+None after this pass.
 
 ## Audit Rules
 
@@ -87,7 +84,5 @@ None after this pass.
 
 ## Suggested Next Pass
 
-1. For BibleGateway `WE`, find source documentation beyond KJV/Authorized
-   Version alignment.
-2. Leave missing private-only BibleGateway rows as metadata-only until lawful
+1. Leave missing private-only BibleGateway rows as metadata-only until lawful
    local texts are available.
