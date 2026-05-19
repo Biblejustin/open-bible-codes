@@ -28,8 +28,8 @@ edition documentation.
 
 | Manifest | Rows | `needs_audit` | `broad_tradition` |
 | --- | ---: | ---: | ---: |
-| BibleGateway English versions | 64 | 23 | 41 |
-| eBible English controls | 37 | 4 | 33 |
+| BibleGateway English versions | 64 | 22 | 42 |
+| eBible English controls | 37 | 0 | 37 |
 
 ## BibleGateway Rows Needing Audit
 
@@ -55,18 +55,12 @@ edition documentation.
 | NCV | modern critical tradition | Audit exact edition/source notes |
 | NLV | modern simplified tradition | Audit exact edition/source notes |
 | NTFE | NT-only critical/paraphrase tradition | NT only |
-| OJB | mixed Jewish-Christian tradition | Official eBible OJB source; CC BY 4.0; track as mixed until source-basis audit |
 | VOICE | modern paraphrase | Treat as paraphrase surface comparison |
 | WE | NT-only simplified tradition | NT only |
 
 ## eBible Control Rows Needing Audit
 
-| Label | Current family | Source ID |
-| --- | --- | --- |
-| BBE | simplified English control | `engBBE` |
-| NOY | nineteenth-century control | `engnoy` |
-| PEV | plain English control | `engPEV` |
-| OJB | mixed Jewish-Christian tradition | `engojb` |
+None after this pass.
 
 ## eBible Rows Audited This Pass
 
@@ -77,7 +71,10 @@ edition documentation.
 | MSB | `broad_tradition` | MajorityBible identifies BSB OT plus Robinson-Pierpont Byzantine Majority Text NT: <https://majoritybible.com/> |
 | OEBCW | `broad_tradition` | OEB FAQ identifies public-domain English bases, WLC/Leningrad OT, and W&H/TCNT NT: <https://openenglishbible.org/faq/> |
 | OEB | `broad_tradition` | Same source-basis evidence as OEBCW; U.S. spelling edition: <https://openenglishbible.org/faq/> |
-| PEV | `needs_audit` | License metadata corrected to CC BY-SA 4.0 from eBible page; source basis still needs audit: <https://ebible.org/find/show.php?id=engPEV> |
+| BBE | `broad_tradition` | Local eBible source package identifies the Bible in Basic English; 1965 introduction says the translation was made from Hebrew and Greek: `data/raw/ebible/engBBE_usfm.zip` and <https://www.bible-researcher.com/basic.html> |
+| NOY | `broad_tradition` | Local eBible source package identifies George Noyes Bible portions; Google Books title metadata identifies Noyes' NT as translated from Tischendorf's Greek text: `data/raw/ebible/engnoy_usfm.zip` and <https://books.google.com/books/about/The_New_Testament_Translated_from_the_Gr.html?id=lOJUAAAAcAAJ> |
+| PEV | `broad_tradition` | Local eBible source package front matter says the PEV used Hebrew and Greek language study aids; exact editions are not stated: `data/raw/ebible/engPEV_usfm.zip` |
+| OJB | `broad_tradition` | Local eBible source package identifies Tanakh and Orthodox Jewish Brit Chadasha presentation; exact textual editions are not stated: `data/raw/ebible/engojb_usfm.zip` |
 
 ## Checked But Still Queued
 
@@ -85,7 +82,6 @@ edition documentation.
 | --- | --- |
 | ERV | eBible/BibleGateway pages identify World Bible Translation Center/Bible League ownership and copyright, but not exact OT/NT textual bases: <https://ebible.org/find/show.php?id=engerv> |
 | GW | eBible/BibleGateway pages describe accuracy against ancient texts, but do not identify exact OT/NT textual bases: <https://ebible.org/find/show.php?id=enggw> |
-| OJB | eBible page identifies Tanakh and Orthodox Jewish Brit Chadasha presentation plus license, but not exact textual bases: <https://ebible.org/find/show.php?id=engojb> |
 
 ## Audit Rules
 
@@ -100,8 +96,9 @@ edition documentation.
 
 ## Suggested Next Pass
 
-1. Finish ambiguous eBible rows: `BBE`, `NOY`, `PEV`, and `OJB`.
-2. For BibleGateway `ERV`, `GW`, and `OJB`, look for publisher introductions
+1. For BibleGateway `ERV` and `GW`, look for publisher introductions
    beyond the eBible/BibleGateway metadata pages already checked.
+2. Continue publisher-source checks for the remaining BibleGateway
+   `needs_audit` rows.
 3. Leave missing private-only BibleGateway rows as metadata-only until lawful
    local texts are available.
