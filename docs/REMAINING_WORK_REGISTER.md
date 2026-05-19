@@ -90,19 +90,22 @@ Rows with `basis_status=needs_audit` should stay coarse until publisher
 introductions or official source notes are checked. Do not upgrade them to
 edition-level textual-critical claims from memory.
 
-Current queue after the eBible audit pass:
+Current queue after the BibleGateway/eBible audit pass:
 
-- BibleGateway English versions: 22 `needs_audit`, 42 `broad_tradition`.
+- BibleGateway English versions: 1 `needs_audit`, 63 `broad_tradition`.
 - eBible English controls: 0 `needs_audit`, 37 `broad_tradition`.
 - eBible rows moved to broad grouping: `ASVBT`, `BSB`, `MSB`, `OEBCW`, `OEB`,
   `BBE`, `NOY`, `PEV`, and `OJB`.
+- BibleGateway rows moved to broad grouping in the second audit pass include
+  `AMP`, `AMPC`, `CJB`, `CEV`, `DLNT`, `ERV`, `EASY`, `EXB`, `GW`, `ICB`,
+  `ISV`, `JUB`, `PHILLIPS`, `MSG`, `MOUNCE`, `NOG`, `NCB`, `NCV`, `NLV`,
+  `NTFE`, and `VOICE`.
 - `PEV` license metadata corrected to CC BY-SA 4.0; local source package says
   the translation used Hebrew and Greek language study aids but not exact
   editions.
 - `BBE` and `NOY` moved to broad grouping only. `BBE` has broad Hebrew/Greek
   source evidence; `NOY` NT title metadata identifies Tischendorf's Greek text.
-- `ERV` and `GW` eBible/BibleGateway pages checked; exact OT/NT
-  textual bases still require publisher-source evidence.
+- Remaining BibleGateway `needs_audit` row is `WE`.
 
 Suggested local queue command:
 

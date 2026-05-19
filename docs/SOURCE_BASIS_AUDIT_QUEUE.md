@@ -28,35 +28,27 @@ edition documentation.
 
 | Manifest | Rows | `needs_audit` | `broad_tradition` |
 | --- | ---: | ---: | ---: |
-| BibleGateway English versions | 64 | 22 | 42 |
+| BibleGateway English versions | 64 | 1 | 63 |
 | eBible English controls | 37 | 0 | 37 |
 
 ## BibleGateway Rows Needing Audit
 
 | Label | Current family | Current note |
 | --- | --- | --- |
-| AMP | modern critical tradition | Lockman translation; exact editions should be publisher-audited |
-| AMPC | modern critical tradition | Classic Lockman edition; exact editions should be publisher-audited |
-| CJB | mixed Jewish-Christian tradition | Track as mixed until source-basis audit |
-| CEV | modern critical tradition | American Bible Society translation; audit exact editions |
-| DLNT | NT-only critical tradition | NT only |
-| ERV | modern critical tradition | Official eBible ERV source; copyrighted local-only text; audit exact editions |
-| EASY | modern critical tradition | Audit exact edition/source notes |
-| EXB | modern critical tradition | Expanded NCV-related presentation; audit exact source notes |
-| GW | modern critical tradition | Official eBible GW source; copyrighted local-only text; audit exact edition/source notes |
-| ICB | modern critical tradition | NCV-family simplified translation; audit exact basis |
-| ISV | modern critical tradition | Audit exact edition/source notes |
-| PHILLIPS | NT-only paraphrase/translation | NT only |
-| JUB | Reformation/TR tradition | Audit exact relationship to Spanish/Reformation sources |
-| MSG | modern paraphrase | Treat as paraphrase surface comparison |
-| MOUNCE | NT-only critical tradition | NT only; audit exact Greek edition |
-| NOG | modern critical tradition | GOD'S WORD-related names edition; audit exact basis |
-| NCB | Catholic critical tradition | Audit edition/source notes |
-| NCV | modern critical tradition | Audit exact edition/source notes |
-| NLV | modern simplified tradition | Audit exact edition/source notes |
-| NTFE | NT-only critical/paraphrase tradition | NT only |
-| VOICE | modern paraphrase | Treat as paraphrase surface comparison |
 | WE | NT-only simplified tradition | NT only |
+
+## BibleGateway Rows Audited This Pass
+
+| Labels | Basis status | Source evidence |
+| --- | --- | --- |
+| AMP, AMPC | `broad_tradition` | BibleGateway/Lockman notes identify Hebrew/Aramaic and Greek source-text work; AMPC also identifies ASV plus Kittel Hebrew and Westcott-Hort/Nestle Greek checks. |
+| CJB | `broad_tradition` | BibleGateway/Stern notes identify OT relationship to the 1917 JPS and NT translation from ancient Greek. |
+| CEV, GW, ICB, ISV, NCB, NLV, NOG, VOICE | `broad_tradition` | BibleGateway version notes support broad original-language or ancient-text grouping, with exact editions left unstated where not supplied. |
+| DLNT, PHILLIPS, MOUNCE, NTFE | `broad_tradition` | BibleGateway version notes support broad Greek NT grouping, with exact Greek editions not stated. |
+| ERV, EASY, NCV | `broad_tradition` | BibleGateway version notes identify specific or semi-specific modern critical source bases, including BHS/Biblia Hebraica, UBS/NA Greek, and DSS/Septuagint checks where documented. |
+| EXB | `broad_tradition` | BibleGateway/Thomas Nelson notes identify EXB as NCV-family with original-language transparency. |
+| JUB | `broad_tradition` | BibleStudyTools/JUB notes identify Hebrew/Greek-to-Spanish Reina-Valera lineage plus Tyndale/KJV comparison. |
+| MSG | `broad_tradition` | BibleGateway/NavPress notes identify original-language work; keep as paraphrase surface comparison, not manuscript witness. |
 
 ## eBible Control Rows Needing Audit
 
@@ -80,8 +72,7 @@ None after this pass.
 
 | Label | Reason |
 | --- | --- |
-| ERV | eBible/BibleGateway pages identify World Bible Translation Center/Bible League ownership and copyright, but not exact OT/NT textual bases: <https://ebible.org/find/show.php?id=engerv> |
-| GW | eBible/BibleGateway pages describe accuracy against ancient texts, but do not identify exact OT/NT textual bases: <https://ebible.org/find/show.php?id=enggw> |
+| WE | BibleGateway identifies a simplified NT and KJV/Authorized Version alignment but not a Greek source basis. |
 
 ## Audit Rules
 
@@ -96,9 +87,7 @@ None after this pass.
 
 ## Suggested Next Pass
 
-1. For BibleGateway `ERV` and `GW`, look for publisher introductions
-   beyond the eBible/BibleGateway metadata pages already checked.
-2. Continue publisher-source checks for the remaining BibleGateway
-   `needs_audit` rows.
-3. Leave missing private-only BibleGateway rows as metadata-only until lawful
+1. For BibleGateway `WE`, find source documentation beyond KJV/Authorized
+   Version alignment.
+2. Leave missing private-only BibleGateway rows as metadata-only until lawful
    local texts are available.
