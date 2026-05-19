@@ -82,7 +82,7 @@ refutation of the WRR paper.
 | Pair universe | Declared second-list pair table resolves paper 298 candidates to 163 defined distances | Lock-prep table exists at `reports/wrr_1994/wrr2_pair_eligibility_table.csv`; imported `WRR2.txt` yields 182 raw same-record pairs, 165 after appellation length >= 5, and 86 under the current 5..8 both-side screen. |
 | Exclusions | Every excluded appellation/date row has a citable rule | Not locked; one Zacut-appellation exclusion would close 165 to 163, but that is only a diagnostic hypothesis. |
 | Skip caps | Term-specific WRR `D(w)` windows applied for each accepted term | Not locked; current pair/control screens still use broad fixed caps for smoke tests. |
-| Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Helpers now include domain-weighted `Q(w,w')` summation for already-domain-labeled ELS rows and the strict WRR 1994 `v/m` rank step; domain derivation and full per-pair `c(w,w')` are still missing. |
+| Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Helpers now include conservative single-ELS domain derivation for unambiguous shorter-skip cases, domain-weighted `Q(w,w')` summation for domain-labeled ELS rows, and the strict WRR 1994 `v/m` rank step; full-set domain labeling and per-pair `c(w,w')` are still missing. |
 | Aggregate statistic | `P1`, `P2`, `P3`, `P4`, rank handling, and `rho0` run over the locked pair set | Helpers exist, but no reproduction driver can run until the pair set and corrected distances are fixed. |
 | Permutation test | Date/rabbi pairings shuffled under the declared WRR rule with recorded seeds/counts | Not built. |
 | Report label | Result can be marked reproduction, failed reproduction, or under-specified | Current label must remain `under_specified`. |
@@ -145,18 +145,20 @@ The PDF table text is not currently reliable enough for direct automated import.
 
 ### 3. Corrected Distance `c(w,w')`
 
-The repo has cylindrical distance and WRR arithmetic helpers, domain-weighted
-`Q(w,w')` summation for already-domain-labeled ELS rows, plus the strict WRR
-1994 rank step for already-computed ordinary and perturbed proximity values. It
-still does not implement the paper's corrected distance value for every term
-pair because domain-of-minimality derivation and the per-pair `c(w,w')` driver
-are missing.
+The repo has cylindrical distance and WRR arithmetic helpers, conservative
+single-ELS domain derivation for unambiguous shorter-skip cases,
+domain-weighted `Q(w,w')` summation for already-domain-labeled ELS rows, plus
+the strict WRR 1994 rank step for already-computed ordinary and perturbed
+proximity values. It still does not implement the paper's corrected distance
+value for every term pair because full-set domain labeling, ambiguous
+enclosing-span handling, and the per-pair `c(w,w')` driver are missing.
 Implementation notes are now tracked in
 `docs/WRR_CORRECTED_DISTANCE_NOTES.md`.
 
 Needed next:
 
-- implement source-backed domain-of-minimality derivation from the full ELS set;
+- implement source-backed domain-of-minimality derivation across the full ELS
+  set, including an explicit policy for enclosing shorter-skip spans;
 - compute ordinary `Q(w,w')` and perturbed `Q(x,y,z)(w,w')` over real term
   pairs;
 - write small toy fixtures where expected corrected distances are known;

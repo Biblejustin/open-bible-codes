@@ -308,6 +308,63 @@ def wrr_ordinary_els_els_alpha(
     )
 
 
+def wrr_offsets_span(offsets: Iterable[int], *, text_length: int) -> tuple[int, int]:
+    """Return the half-open text span containing one ELS offset row."""
+
+    if text_length < 1:
+        raise ValueError("text_length must be > 0")
+    positions = tuple(offsets)
+    if not positions:
+        raise ValueError("offsets must not be empty")
+    if any(offset < 0 or offset >= text_length for offset in positions):
+        raise ValueError("offsets must be inside text")
+    return min(positions), max(positions) + 1
+
+
+def wrr_minimality_domain(
+    target_offsets: Iterable[int],
+    *,
+    target_skip: int,
+    competing_occurrences: Iterable[tuple[Iterable[int], int]],
+    text_length: int,
+) -> tuple[int, int] | None:
+    """Return the unambiguous half-open WRR domain of minimality for one ELS.
+
+    The source domain is the maximal segment containing `target_offsets` that
+    does not contain any same-word ELS with smaller absolute skip. If a smaller
+    ELS is inside the target span, no such domain can contain the target. If a
+    smaller ELS strictly encloses the target span, there are two incomparable
+    maximal choices; this helper returns `None` for that unresolved case.
+    """
+
+    if target_skip == 0:
+        raise ValueError("target_skip must not be 0")
+    target_start, target_end = wrr_offsets_span(target_offsets, text_length=text_length)
+    domain_start = 0
+    domain_end = text_length
+    target_abs_skip = abs(target_skip)
+    for competing_offsets, competing_skip in competing_occurrences:
+        if competing_skip == 0:
+            raise ValueError("competing skip must not be 0")
+        if abs(competing_skip) >= target_abs_skip:
+            continue
+        competing_start, competing_end = wrr_offsets_span(
+            competing_offsets,
+            text_length=text_length,
+        )
+        if competing_start >= target_start and competing_end <= target_end:
+            return None
+        if competing_start < target_start and competing_end > target_end:
+            return None
+        if competing_start < target_start:
+            domain_start = max(domain_start, competing_start + 1)
+        if competing_end > target_end:
+            domain_end = min(domain_end, competing_end - 1)
+    if domain_start > target_start or domain_end < target_end:
+        return None
+    return domain_start, domain_end
+
+
 def validate_wrr_occurrence(occurrence: WrrElsOccurrence, *, text_length: int) -> None:
     if text_length < 1:
         raise ValueError("text_length must be > 0")

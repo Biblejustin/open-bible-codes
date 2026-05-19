@@ -25,6 +25,8 @@ from els.wrr import (
     wrr_els_els_alpha,
     wrr_els_els_distance_at_row_width,
     wrr_els_els_proximity_at_row_width,
+    wrr_minimality_domain,
+    wrr_offsets_span,
     wrr_ordinary_els_els_alpha,
     wrr_weighted_els_pair_proximity,
     wrr_word_pair_proximity,
@@ -179,6 +181,43 @@ class WrrStatsTests(unittest.TestCase):
 
         self.assertEqual(alpha, 2 / 3)
 
+    def test_wrr_offsets_span_returns_half_open_bounds(self) -> None:
+        self.assertEqual(wrr_offsets_span((20, 10, 30), text_length=100), (10, 31))
+
+    def test_wrr_minimality_domain_bounds_shorter_skip_competitors(self) -> None:
+        domain = wrr_minimality_domain(
+            (20, 30, 40),
+            target_skip=10,
+            competing_occurrences=(
+                ((5, 15), 5),
+                ((70, 75), 5),
+                ((0, 50), 12),
+            ),
+            text_length=100,
+        )
+
+        self.assertEqual(domain, (6, 75))
+
+    def test_wrr_minimality_domain_is_undefined_for_inner_shorter_els(self) -> None:
+        domain = wrr_minimality_domain(
+            (20, 30, 40),
+            target_skip=10,
+            competing_occurrences=(((25, 35), 5),),
+            text_length=100,
+        )
+
+        self.assertIsNone(domain)
+
+    def test_wrr_minimality_domain_is_undefined_for_enclosing_shorter_els(self) -> None:
+        domain = wrr_minimality_domain(
+            (20, 30, 40),
+            target_skip=10,
+            competing_occurrences=(((10, 50), 5),),
+            text_length=100,
+        )
+
+        self.assertIsNone(domain)
+
     def test_wrr_domain_weight_uses_overlap_relative_to_text_length(self) -> None:
         left = WrrElsOccurrence((0, 10, 20), 10, 0, 50)
         right = WrrElsOccurrence((11, 21, 31), 10, 10, 40)
@@ -247,6 +286,17 @@ class WrrStatsTests(unittest.TestCase):
             wrr_els_els_distance_at_row_width((0,), (1, 2), row_width=10)
         with self.assertRaises(ValueError):
             wrr_els_els_distance_at_row_width((0, 1), (2,), row_width=10)
+        with self.assertRaises(ValueError):
+            wrr_offsets_span((), text_length=1)
+        with self.assertRaises(ValueError):
+            wrr_minimality_domain((0, 1), target_skip=0, competing_occurrences=(), text_length=2)
+        with self.assertRaises(ValueError):
+            wrr_minimality_domain(
+                (0, 1),
+                target_skip=1,
+                competing_occurrences=(((0, 1), 0),),
+                text_length=2,
+            )
         with self.assertRaises(ValueError):
             wrr_domain_weight(
                 WrrElsOccurrence((0,), 1, 0, 1),
