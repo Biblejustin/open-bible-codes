@@ -84,7 +84,7 @@ Current status: smoke/source/import work plus a lock-prep pair eligibility
 table. Remaining claim-grade pieces:
 
 - citable canonical pair eligibility rule resolving the 163-distance set;
-- real-corpus domain labeling and corrected distance `c(w,w')`;
+- enclosing-span domain policy and corrected distance `c(w,w')`;
 - term-specific skip-cap logic;
 - permutation-rank procedure;
 - study-level report over fixed terms and sources.

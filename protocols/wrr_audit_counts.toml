@@ -145,6 +145,40 @@ outputs = [
 ]
 
 [[steps]]
+id = "label_wrr2_genesis_domains"
+description = "Label imported WRR2 Genesis ELS hits with conservative domains of minimality."
+argv = [
+  "-m", "scripts.analyze_wrr_domain_labeling",
+  "--terms", "reports/wrr_1994/wrr2_terms.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--corpus-label", "KOREN_GENESIS",
+  "--min-skip", "2",
+  "--max-skip", "250",
+  "--direction", "both",
+  "--min-term-length", "3",
+  "--jobs", "0",
+  "--assignments-out", "reports/wrr_1994/wrr2_domain_assignments.csv",
+  "--summary-out", "reports/wrr_1994/wrr2_domain_summary.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_domain_labeling.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_domain_labeling.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_domain_labeling.py",
+  "reports/wrr_1994/wrr2_terms.csv",
+  "configs/example_koren_genesis.toml",
+  "els/corpus.py",
+  "els/normalization.py",
+  "els/search.py",
+  "els/wrr.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_domain_assignments.csv",
+  "reports/wrr_1994/wrr2_domain_summary.csv",
+  "reports/wrr_1994/wrr2_domain_labeling.md",
+  "reports/wrr_1994/wrr2_domain_labeling.manifest.json",
+]
+
+[[steps]]
 id = "audit_wrr2_skip_caps"
 description = "Estimate WRR expected-count skip caps for imported 5..8-letter rows."
 argv = [

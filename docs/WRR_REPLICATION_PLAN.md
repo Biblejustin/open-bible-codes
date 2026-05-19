@@ -52,6 +52,9 @@ Already implemented:
   `scripts/build_wrr_pair_eligibility_table.py`, joining imported pair rows,
   Genesis count smoke, expected-count skip caps, and nearest-pair audit
   metrics.
+- WRR real-corpus domain-labeling diagnostic in
+  `scripts/analyze_wrr_domain_labeling.py`, wired into
+  `protocols/wrr_audit_counts.toml`.
 
 Source audit:
 
@@ -67,8 +70,8 @@ Still needed:
   current eligibility table is lock prep, not the canonical 163-distance table;
 - replication-grade generated or reviewed future file `terms/[wrr_1994_rabbis].csv`;
 - replication-grade generated or reviewed future file `terms/[wrr_1994_dates].csv`;
-- WRR real-corpus domain-labeling driver, enclosing-span policy, and full
-  corrected-distance implementation for `c(w,w')`;
+- WRR enclosing-span policy and full corrected-distance implementation for
+  `c(w,w')`;
 - WRR aggregate runner for `P1`, `P2`, `P3`, and `P4` over all declared pairs
   once `c(w,w')` exists;
 - permutation driver that shuffles date/rabbi pairings under the declared rule;

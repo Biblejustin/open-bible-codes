@@ -66,6 +66,10 @@ Already implemented:
 - full supplied-row domain-labeling helper in `els/wrr.py` that applies the
   conservative interval helper across all ELS rows supplied for one word and
   separates defined from undefined domain assignments.
+- real-corpus WRR2 Genesis domain-labeling diagnostic in
+  `scripts/analyze_wrr_domain_labeling.py` and `protocols/wrr_audit_counts.toml`.
+  Current ignored output labels 17,426 imported-term hits: 6,079 defined domains
+  and 11,347 undefined domains under the conservative helper.
 - low-level WRR2/Nations ELS-vs-surface-string distance/proximity helpers in
   `els/wrr.py`. These implement the source-described fixed-row-width distance
   `f^2 + f'^2 + l^2 + 1`, use `f' = 1` for surface-letter strings, and sum
@@ -103,8 +107,8 @@ Already implemented:
 
 Not yet implemented:
 
-- real-corpus WRR domain-labeling driver over generated ELS hits, including
-  source-checked handling for ambiguous enclosing shorter-skip spans;
+- source-checked handling for ambiguous enclosing shorter-skip spans in domain
+  labeling;
 - corrected-distance `c(w,w')` calculation over real word pairs from those
   `Q` and perturbed-`Q` values;
 - permutation driver over the locked personality/date pair table.
@@ -124,8 +128,8 @@ Not yet implemented:
    The rank helper only consumes already-computed ordinary and perturbed
    proximity values. `els/wrr.py` can now sum domain-weighted ELS-pair
    contributions when domains are supplied and can derive unambiguous domain
-   boundaries across supplied same-word ELS rows. It does not yet run that
-   derivation over generated real-corpus hit files or resolve enclosing
+   boundaries across supplied same-word ELS rows and run the diagnostic over
+   generated real-corpus hit files. It does not yet resolve enclosing
    shorter-skip rows.
 
 3. ELS-vs-ELS versus ELS-vs-surface-text.
@@ -149,8 +153,7 @@ Not yet implemented:
 
 1. Reconcile the canonical WRR pair table against a primary or citable
    transcription.
-2. Implement source-backed real-corpus domain labeling over generated ELS hits,
-   including an explicit policy for enclosing shorter-skip spans.
+2. Establish an explicit source-backed policy for enclosing shorter-skip spans.
 3. Feed ordinary and perturbed `Q` values through the strict WRR 1994
    rank helper to produce `c(w,w')`.
 
