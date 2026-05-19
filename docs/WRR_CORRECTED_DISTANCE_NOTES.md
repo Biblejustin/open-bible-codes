@@ -71,6 +71,12 @@ Already implemented:
   and 11,347 undefined domains under the conservative helper. The current
   diagnostic splits those undefined rows as 11,347 blocked by an inner
   shorter-skip ELS and 0 ambiguous from enclosing shorter-skip ELS rows.
+- defined-domain-only ordinary `Q(w,w')` diagnostic in
+  `scripts/analyze_wrr_ordinary_q.py` and `protocols/wrr_audit_counts.toml`.
+  Current ignored output covers 182 imported same-record pairs: 53 have at
+  least one defined-domain pair, 17 have all observed domains defined, 36 are
+  incomplete because undefined rows were omitted, and 129 have no defined-domain
+  pair. This is not corrected distance.
 - low-level WRR2/Nations ELS-vs-surface-string distance/proximity helpers in
   `els/wrr.py`. These implement the source-described fixed-row-width distance
   `f^2 + f'^2 + l^2 + 1`, use `f' = 1` for surface-letter strings, and sum
@@ -110,8 +116,8 @@ Not yet implemented:
 
 - source-checked handling for undefined domain rows before they are used in a
   reproduction driver;
-- corrected-distance `c(w,w')` calculation over real word pairs from those
-  `Q` and perturbed-`Q` values;
+- perturbed `Q(x,y,z)(w,w')` and corrected-distance `c(w,w')` calculation over
+  real word pairs;
 - permutation driver over the locked personality/date pair table.
 
 ## Ambiguities To Pin Before Code

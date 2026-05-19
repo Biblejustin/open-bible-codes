@@ -82,7 +82,7 @@ refutation of the WRR paper.
 | Pair universe | Declared second-list pair table resolves paper 298 candidates to 163 defined distances | Lock-prep table exists at `reports/wrr_1994/wrr2_pair_eligibility_table.csv`; imported `WRR2.txt` yields 182 raw same-record pairs, 165 after appellation length >= 5, and 86 under the current 5..8 both-side screen. |
 | Exclusions | Every excluded appellation/date row has a citable rule | Not locked; one Zacut-appellation exclusion would close 165 to 163, but that is only a diagnostic hypothesis. |
 | Skip caps | Term-specific WRR `D(w)` windows applied for each accepted term | Not locked; current pair/control screens still use broad fixed caps for smoke tests. |
-| Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Helpers now include conservative supplied-row domain labeling, real-corpus WRR2 domain diagnostics with undefined-reason labels, domain-weighted `Q(w,w')` summation for domain-labeled ELS rows, and the strict WRR 1994 `v/m` rank step; undefined-domain policy and per-pair `c(w,w')` are still missing. |
+| Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Helpers now include conservative supplied-row domain labeling, real-corpus WRR2 domain diagnostics with undefined-reason labels, defined-domain-only ordinary `Q(w,w')` diagnostics, domain-weighted `Q(w,w')` summation for domain-labeled ELS rows, and the strict WRR 1994 `v/m` rank step; undefined-domain policy, perturbed `Q`, and per-pair `c(w,w')` are still missing. |
 | Aggregate statistic | `P1`, `P2`, `P3`, `P4`, rank handling, and `rho0` run over the locked pair set | Helpers exist, but no reproduction driver can run until the pair set and corrected distances are fixed. |
 | Permutation test | Date/rabbi pairings shuffled under the declared WRR rule with recorded seeds/counts | Not built. |
 | Report label | Result can be marked reproduction, failed reproduction, or under-specified | Current label must remain `under_specified`. |
@@ -152,17 +152,20 @@ domain-labeling diagnostic with undefined-reason labels, domain-weighted
 1994 rank step for already-computed ordinary and perturbed proximity values.
 Current domain diagnostics label 17,426 imported-term hits: 6,079 defined
 domains, 11,347 blocked by an inner shorter-skip ELS, and 0 ambiguous from
-enclosing shorter-skip rows under the smoke cap. The repo still does not
+enclosing shorter-skip rows under the smoke cap. The ordinary-Q diagnostic over
+182 imported same-record pairs finds 53 pairs with at least one defined-domain
+pair, 17 pairs with all observed domains defined, 36 incomplete defined-only
+pairs, and 129 pairs with no defined-domain pair. The repo still does not
 implement the paper's corrected distance value for every term pair because the
-undefined-domain policy and per-pair `c(w,w')` driver are missing.
+undefined-domain policy, perturbed `Q`, and per-pair `c(w,w')` driver are
+missing.
 Implementation notes are now tracked in
 `docs/WRR_CORRECTED_DISTANCE_NOTES.md`.
 
 Needed next:
 
 - establish an explicit source-backed policy for undefined domain rows;
-- compute ordinary `Q(w,w')` and perturbed `Q(x,y,z)(w,w')` over real term
-  pairs;
+- compute perturbed `Q(x,y,z)(w,w')` over real term pairs;
 - write small toy fixtures where expected corrected distances are known;
 - output per-pair `c(w,w')` rows before aggregate statistics are attempted.
 

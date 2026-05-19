@@ -315,6 +315,37 @@ outputs = [
 ]
 
 [[steps]]
+id = "diagnose_wrr2_ordinary_q"
+description = "Compute defined-domain-only ordinary Q diagnostics for imported WRR2 same-record pairs."
+argv = [
+  "-m", "scripts.analyze_wrr_ordinary_q",
+  "--pair-table", "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "--domain-assignments", "reports/wrr_1994/wrr2_domain_assignments.csv",
+  "--domain-summary", "reports/wrr_1994/wrr2_domain_summary.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--row-width-count", "10",
+  "--out", "reports/wrr_1994/wrr2_ordinary_q_defined_only.csv",
+  "--summary-out", "reports/wrr_1994/wrr2_ordinary_q_defined_only_summary.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_ordinary_q_defined_only.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_ordinary_q_defined_only.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_ordinary_q.py",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "reports/wrr_1994/wrr2_domain_assignments.csv",
+  "reports/wrr_1994/wrr2_domain_summary.csv",
+  "configs/example_koren_genesis.toml",
+  "els/corpus.py",
+  "els/wrr.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_ordinary_q_defined_only.csv",
+  "reports/wrr_1994/wrr2_ordinary_q_defined_only_summary.csv",
+  "reports/wrr_1994/wrr2_ordinary_q_defined_only.md",
+  "reports/wrr_1994/wrr2_ordinary_q_defined_only.manifest.json",
+]
+
+[[steps]]
 id = "diagnose_wrr2_perturbations"
 description = "Sample WRR-style perturbation boundary validity for imported 5..8-letter rows."
 argv = [

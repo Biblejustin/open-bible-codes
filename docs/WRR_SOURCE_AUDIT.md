@@ -432,10 +432,10 @@ corrected distance:
   conservative supplied-row domain labeling for unambiguous shorter-skip cases,
   candidate-domain enumeration for enclosing shorter-skip ambiguity,
   real-corpus domain-labeling diagnostics with undefined-reason labels,
-  domain-weighted `Q(w,w')` summation for domain-labeled ELS rows, and the
-  corrected-distance rank step for already-computed perturbation proximities,
-  including the strict WRR 1994 `v/m` rank and the tie-aware methodology-page
-  diagnostic rank.
+  defined-domain-only ordinary `Q(w,w')` diagnostics, domain-weighted
+  `Q(w,w')` summation for domain-labeled ELS rows, and the corrected-distance
+  rank step for already-computed perturbation proximities, including the strict
+  WRR 1994 `v/m` rank and the tie-aware methodology-page diagnostic rank.
 
 These helpers are tested, but they still need real `c(w,w')` values from a
 future corrected-distance implementation before they can produce WRR `P1..P4`.
