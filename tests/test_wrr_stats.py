@@ -27,6 +27,7 @@ from els.wrr import (
     wrr_els_els_proximity_at_row_width,
     wrr_label_minimality_domains,
     wrr_minimality_domain,
+    wrr_minimality_domain_candidates,
     wrr_offsets_span,
     wrr_ordinary_els_els_alpha,
     wrr_weighted_els_pair_proximity,
@@ -219,6 +220,16 @@ class WrrStatsTests(unittest.TestCase):
 
         self.assertIsNone(domain)
 
+    def test_wrr_minimality_domain_candidates_expose_enclosing_ambiguity(self) -> None:
+        domains = wrr_minimality_domain_candidates(
+            (20, 30, 40),
+            target_skip=10,
+            competing_occurrences=(((10, 50), 5),),
+            text_length=100,
+        )
+
+        self.assertEqual(domains, ((0, 50), (11, 100)))
+
     def test_wrr_label_minimality_domains_marks_defined_and_undefined_rows(self) -> None:
         assignments = wrr_label_minimality_domains(
             (
@@ -233,6 +244,7 @@ class WrrStatsTests(unittest.TestCase):
             [row.status for row in assignments],
             ["undefined", "defined", "defined"],
         )
+        self.assertEqual(assignments[0].reason, "blocked_by_inner_shorter_skip")
         self.assertEqual(
             assignments[1].to_occurrence(),
             WrrElsOccurrence((25, 35), 5, 0, 100),

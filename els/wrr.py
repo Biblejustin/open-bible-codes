@@ -33,6 +33,8 @@ class WrrDomainAssignment:
     domain_start: int | None
     domain_end: int | None
     status: str
+    reason: str = ""
+    candidate_count: int = 0
 
     def to_occurrence(self) -> WrrElsOccurrence:
         if (
@@ -361,32 +363,92 @@ def wrr_minimality_domain(
     maximal choices; this helper returns `None` for that unresolved case.
     """
 
+    candidates = wrr_minimality_domain_candidates(
+        target_offsets,
+        target_skip=target_skip,
+        competing_occurrences=competing_occurrences,
+        text_length=text_length,
+    )
+    if len(candidates) != 1:
+        return None
+    return candidates[0]
+
+
+def wrr_minimality_domain_candidates(
+    target_offsets: Iterable[int],
+    *,
+    target_skip: int,
+    competing_occurrences: Iterable[tuple[Iterable[int], int]],
+    text_length: int,
+) -> tuple[tuple[int, int], ...]:
+    """Return maximal half-open WRR minimality-domain candidates.
+
+    A shorter-skip same-word ELS inside the target span blocks every domain.
+    A shorter-skip ELS strictly enclosing the target span creates multiple
+    incomparable maximal segments; this helper exposes those candidates instead
+    of choosing one.
+    """
+
     if target_skip == 0:
         raise ValueError("target_skip must not be 0")
     target_start, target_end = wrr_offsets_span(target_offsets, text_length=text_length)
+    target_last = target_end - 1
     domain_start = 0
     domain_end = text_length
+    enclosing: list[tuple[int, int]] = []
     target_abs_skip = abs(target_skip)
     for competing_offsets, competing_skip in competing_occurrences:
+        competing_positions = tuple(competing_offsets)
         if competing_skip == 0:
             raise ValueError("competing skip must not be 0")
         if abs(competing_skip) >= target_abs_skip:
             continue
         competing_start, competing_end = wrr_offsets_span(
-            competing_offsets,
+            competing_positions,
             text_length=text_length,
         )
-        if competing_start >= target_start and competing_end <= target_end:
-            return None
-        if competing_start < target_start and competing_end > target_end:
-            return None
+        competing_last = competing_end - 1
+        if competing_start >= target_start and competing_last <= target_last:
+            return ()
+        if competing_start < target_start and competing_last > target_last:
+            enclosing.append((competing_start, competing_last))
+            continue
         if competing_start < target_start:
             domain_start = max(domain_start, competing_start + 1)
-        if competing_end > target_end:
-            domain_end = min(domain_end, competing_end - 1)
+        if competing_last > target_last:
+            domain_end = min(domain_end, competing_last)
     if domain_start > target_start or domain_end < target_end:
-        return None
-    return domain_start, domain_end
+        return ()
+    if not enclosing:
+        return ((domain_start, domain_end),)
+
+    starts = {domain_start, *(start + 1 for start, _ in enclosing)}
+    ends = {domain_end, *(last for _, last in enclosing)}
+    candidates: list[tuple[int, int]] = []
+    for start in starts:
+        if start < domain_start or start > target_start:
+            continue
+        for end in ends:
+            if end > domain_end or end < target_end or start >= end:
+                continue
+            if all(start > enc_start or end <= enc_last for enc_start, enc_last in enclosing):
+                candidates.append((start, end))
+    return maximal_intervals(candidates)
+
+
+def maximal_intervals(intervals: Iterable[tuple[int, int]]) -> tuple[tuple[int, int], ...]:
+    """Return intervals not strictly contained by another interval."""
+
+    unique = sorted(set(intervals))
+    maximal: list[tuple[int, int]] = []
+    for candidate in unique:
+        if any(
+            other != candidate and other[0] <= candidate[0] and other[1] >= candidate[1]
+            for other in unique
+        ):
+            continue
+        maximal.append(candidate)
+    return tuple(maximal)
 
 
 def wrr_label_minimality_domains(
@@ -404,18 +466,40 @@ def wrr_label_minimality_domains(
             for other_index, (other_offsets, other_skip) in enumerate(rows)
             if other_index != index
         )
-        domain = wrr_minimality_domain(
+        domains = wrr_minimality_domain_candidates(
             offsets,
             target_skip=skip,
             competing_occurrences=competitors,
             text_length=text_length,
         )
-        if domain is None:
-            assignments.append(WrrDomainAssignment(offsets, skip, None, None, "undefined"))
-        else:
-            domain_start, domain_end = domain
+        if len(domains) != 1:
+            reason = (
+                "blocked_by_inner_shorter_skip"
+                if len(domains) == 0
+                else "ambiguous_enclosing_shorter_skip"
+            )
             assignments.append(
-                WrrDomainAssignment(offsets, skip, domain_start, domain_end, "defined")
+                WrrDomainAssignment(
+                    offsets,
+                    skip,
+                    None,
+                    None,
+                    "undefined",
+                    reason=reason,
+                    candidate_count=len(domains),
+                )
+            )
+        else:
+            domain_start, domain_end = domains[0]
+            assignments.append(
+                WrrDomainAssignment(
+                    offsets,
+                    skip,
+                    domain_start,
+                    domain_end,
+                    "defined",
+                    candidate_count=1,
+                )
             )
     return tuple(assignments)
 

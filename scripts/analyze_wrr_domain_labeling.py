@@ -40,6 +40,8 @@ ASSIGNMENT_FIELDNAMES = [
     "start_offset",
     "end_offset",
     "domain_status",
+    "domain_reason",
+    "domain_candidate_count",
     "domain_start",
     "domain_end",
     "domain_length",
@@ -56,6 +58,8 @@ SUMMARY_FIELDNAMES = [
     "hit_count",
     "defined_domains",
     "undefined_domains",
+    "blocked_by_inner_shorter_skip",
+    "ambiguous_enclosing_shorter_skip",
     "undefined_rate",
     "read",
 ]
@@ -266,6 +270,8 @@ def assignment_row(
         "start_offset": hit.start_offset,
         "end_offset": hit.end_offset,
         "domain_status": assignment.status,
+        "domain_reason": assignment.reason,
+        "domain_candidate_count": assignment.candidate_count,
         "domain_start": empty_if_none(assignment.domain_start),
         "domain_end": empty_if_none(assignment.domain_end),
         "domain_length": domain_length,
@@ -281,6 +287,16 @@ def summarize_terms(
     for term in terms:
         assignments = assignments_by_query.get(term.normalized, ())
         defined = sum(1 for assignment in assignments if assignment.status == "defined")
+        blocked = sum(
+            1
+            for assignment in assignments
+            if assignment.reason == "blocked_by_inner_shorter_skip"
+        )
+        ambiguous = sum(
+            1
+            for assignment in assignments
+            if assignment.reason == "ambiguous_enclosing_shorter_skip"
+        )
         undefined = len(assignments) - defined
         rows.append(
             {
@@ -294,18 +310,25 @@ def summarize_terms(
                 "hit_count": len(assignments),
                 "defined_domains": defined,
                 "undefined_domains": undefined,
+                "blocked_by_inner_shorter_skip": blocked,
+                "ambiguous_enclosing_shorter_skip": ambiguous,
                 "undefined_rate": ratio(undefined, len(assignments)),
-                "read": summary_read_label(defined, undefined),
+                "read": summary_read_label(defined, blocked, ambiguous),
             }
         )
     return rows
 
 
-def summary_read_label(defined: int, undefined: int) -> str:
+def summary_read_label(defined: int, blocked: int, ambiguous: int) -> str:
+    undefined = blocked + ambiguous
     if defined == 0 and undefined == 0:
         return "no hits"
     if undefined == 0:
         return "all domains defined under conservative helper"
+    if defined == 0 and ambiguous == 0:
+        return "all domains blocked by inner shorter-skip rows"
+    if defined == 0 and blocked == 0:
+        return "all domains ambiguous from enclosing shorter-skip rows"
     if defined == 0:
         return "all domains undefined under conservative helper"
     return "mixed defined and undefined domains"
@@ -348,8 +371,8 @@ def write_markdown(
             "",
             "## Terms With Undefined Domains",
             "",
-            "| Term ID | Concept | Category | Hit count | Undefined | Undefined rate | Read |",
-            "| --- | --- | --- | ---: | ---: | ---: | --- |",
+            "| Term ID | Concept | Category | Hit count | Undefined | Blocked | Ambiguous | Undefined rate | Read |",
+            "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |",
         ]
     )
     shown = 0
@@ -365,6 +388,8 @@ def write_markdown(
                     str(row["category"]),
                     str(row["hit_count"]),
                     str(row["undefined_domains"]),
+                    str(row["blocked_by_inner_shorter_skip"]),
+                    str(row["ambiguous_enclosing_shorter_skip"]),
                     str(row["undefined_rate"]),
                     str(row["read"]),
                 ]
@@ -375,7 +400,7 @@ def write_markdown(
         if shown >= 25:
             break
     if shown == 0:
-        lines.append("| none |  |  | 0 | 0 | 0 | all domains defined or no hits |")
+        lines.append("| none |  |  | 0 | 0 | 0 | 0 | 0 | all domains defined or no hits |")
     lines.extend(
         [
             "",
@@ -398,6 +423,12 @@ def summarize_totals(rows: list[dict[str, object]]) -> dict[str, int]:
         "hits": sum(int(row["hit_count"]) for row in rows),
         "defined_domains": sum(int(row["defined_domains"]) for row in rows),
         "undefined_domains": sum(int(row["undefined_domains"]) for row in rows),
+        "blocked_by_inner_shorter_skip": sum(
+            int(row["blocked_by_inner_shorter_skip"]) for row in rows
+        ),
+        "ambiguous_enclosing_shorter_skip": sum(
+            int(row["ambiguous_enclosing_shorter_skip"]) for row in rows
+        ),
     }
 
 

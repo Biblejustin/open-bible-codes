@@ -59,17 +59,18 @@ Already implemented:
   attached. These implement the `omega(e,e') * alpha(e,e')` sum, but do not yet
   derive the domains from the full ELS set.
 - conservative WRR domain-of-minimality interval helper in `els/wrr.py` for
-  unambiguous shorter-skip boundary cases. It returns undefined for shorter ELS
-  rows inside the target span and for shorter ELS rows that strictly enclose the
-  target span, because those cases need source-checked handling before they are
-  used in a reproduction driver.
+  unambiguous shorter-skip boundary cases, plus a candidate-domain helper that
+  exposes multiple incomparable maximal segments when a shorter-skip row
+  strictly encloses the target span.
 - full supplied-row domain-labeling helper in `els/wrr.py` that applies the
   conservative interval helper across all ELS rows supplied for one word and
-  separates defined from undefined domain assignments.
+  separates defined from undefined domain assignments with reason labels.
 - real-corpus WRR2 Genesis domain-labeling diagnostic in
   `scripts/analyze_wrr_domain_labeling.py` and `protocols/wrr_audit_counts.toml`.
   Current ignored output labels 17,426 imported-term hits: 6,079 defined domains
-  and 11,347 undefined domains under the conservative helper.
+  and 11,347 undefined domains under the conservative helper. The current
+  diagnostic splits those undefined rows as 11,347 blocked by an inner
+  shorter-skip ELS and 0 ambiguous from enclosing shorter-skip ELS rows.
 - low-level WRR2/Nations ELS-vs-surface-string distance/proximity helpers in
   `els/wrr.py`. These implement the source-described fixed-row-width distance
   `f^2 + f'^2 + l^2 + 1`, use `f' = 1` for surface-letter strings, and sum
@@ -107,8 +108,8 @@ Already implemented:
 
 Not yet implemented:
 
-- source-checked handling for ambiguous enclosing shorter-skip spans in domain
-  labeling;
+- source-checked handling for undefined domain rows before they are used in a
+  reproduction driver;
 - corrected-distance `c(w,w')` calculation over real word pairs from those
   `Q` and perturbed-`Q` values;
 - permutation driver over the locked personality/date pair table.
@@ -129,8 +130,9 @@ Not yet implemented:
    proximity values. `els/wrr.py` can now sum domain-weighted ELS-pair
    contributions when domains are supplied and can derive unambiguous domain
    boundaries across supplied same-word ELS rows and run the diagnostic over
-   generated real-corpus hit files. It does not yet resolve enclosing
-   shorter-skip rows.
+   generated real-corpus hit files. It now identifies enclosing-span ambiguity
+   separately; the current WRR2 Genesis smoke cap has 0 enclosing-ambiguous
+   rows, while all undefined rows are blocked by inner shorter-skip ELS rows.
 
 3. ELS-vs-ELS versus ELS-vs-surface-text.
 
@@ -153,7 +155,7 @@ Not yet implemented:
 
 1. Reconcile the canonical WRR pair table against a primary or citable
    transcription.
-2. Establish an explicit source-backed policy for enclosing shorter-skip spans.
+2. Establish an explicit source-backed policy for undefined domain rows.
 3. Feed ordinary and perturbed `Q` values through the strict WRR 1994
    rank helper to produce `c(w,w')`.
 

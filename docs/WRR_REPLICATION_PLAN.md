@@ -44,6 +44,7 @@ Already implemented:
 - WRR appendix-compatible length `5..8` audit/control smoke in the same protocol.
 - WRR statistic arithmetic helpers in `els/wrr.py` for skip-window expectation,
   conservative supplied-row domain labeling for unambiguous shorter-skip cases,
+  candidate-domain enumeration for enclosing shorter-skip ambiguity,
   domain-weighted `Q(w,w')` summation over already-domain-labeled ELS rows,
   strict WRR 1994 corrected-distance rank over already-computed perturbation
   proximities, `P1`, `P2`, permutation rank, and Bonferroni `rho0`.
@@ -54,7 +55,7 @@ Already implemented:
   metrics.
 - WRR real-corpus domain-labeling diagnostic in
   `scripts/analyze_wrr_domain_labeling.py`, wired into
-  `protocols/wrr_audit_counts.toml`.
+  `protocols/wrr_audit_counts.toml`, with undefined rows split by reason.
 
 Source audit:
 
@@ -70,7 +71,7 @@ Still needed:
   current eligibility table is lock prep, not the canonical 163-distance table;
 - replication-grade generated or reviewed future file `terms/[wrr_1994_rabbis].csv`;
 - replication-grade generated or reviewed future file `terms/[wrr_1994_dates].csv`;
-- WRR enclosing-span policy and full corrected-distance implementation for
+- WRR undefined-domain policy and full corrected-distance implementation for
   `c(w,w')`;
 - WRR aggregate runner for `P1`, `P2`, `P3`, and `P4` over all declared pairs
   once `c(w,w')` exists;

@@ -26,6 +26,7 @@ class WrrDomainLabelingTests(unittest.TestCase):
             [assignment.status for assignment in assignments],
             ["undefined", "defined"],
         )
+        self.assertEqual(assignments[0].reason, "blocked_by_inner_shorter_skip")
         self.assertEqual(assignments[1].domain_start, 0)
         self.assertEqual(assignments[1].domain_end, 100)
 
@@ -47,10 +48,16 @@ class WrrDomainLabelingTests(unittest.TestCase):
 
         self.assertEqual(len(assignment_rows), 2)
         self.assertEqual(assignment_rows[0]["domain_status"], "undefined")
+        self.assertEqual(
+            assignment_rows[0]["domain_reason"],
+            "blocked_by_inner_shorter_skip",
+        )
         self.assertEqual(assignment_rows[1]["domain_length"], 100)
         self.assertEqual(summary_rows[0]["hit_count"], 2)
         self.assertEqual(summary_rows[0]["defined_domains"], 1)
         self.assertEqual(summary_rows[0]["undefined_domains"], 1)
+        self.assertEqual(summary_rows[0]["blocked_by_inner_shorter_skip"], 1)
+        self.assertEqual(summary_rows[0]["ambiguous_enclosing_shorter_skip"], 0)
         self.assertEqual(summary_rows[0]["read"], "mixed defined and undefined domains")
 
 
