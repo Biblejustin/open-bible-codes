@@ -693,7 +693,7 @@ def write_manifest(
             "Term controls shuffle letters within each normalized term while preserving term length and letter multiset.",
             "p_ge values are empirical greater-or-equal tail estimates with add-one smoothing.",
             "q_value fields use Benjamini-Hochberg correction across emitted summary rows.",
-            "combined_min_q_value corrects the screening minimum of letter_p_ge and term_p_ge; treat it as ranking evidence, not a proof statistic.",
+            "combined_min_q_value corrects the screening minimum of letter_p_ge and term_p_ge; treat it as ranking evidence, not a conclusion statistic.",
         ],
     }
     args.manifest_out.parent.mkdir(parents=True, exist_ok=True)

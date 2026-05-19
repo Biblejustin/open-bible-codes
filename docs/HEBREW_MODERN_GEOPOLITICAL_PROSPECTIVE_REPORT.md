@@ -1,6 +1,6 @@
 # Hebrew Modern Geopolitical Prospective Report
 
-This generated report joins exact version-presence summaries, representative paired controls, and bounded phrase-extension rows for the locked Hebrew modern/geopolitical cohort. It is source-distribution review material, not proof of meaning.
+This generated report joins exact version-presence summaries, representative paired controls, and bounded phrase-extension rows for the locked Hebrew modern/geopolitical cohort. It is source-distribution review material, not conclusive evidence of meaning.
 
 It is a screening report, not a significance claim.
 

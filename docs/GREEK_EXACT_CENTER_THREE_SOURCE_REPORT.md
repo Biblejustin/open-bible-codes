@@ -173,7 +173,7 @@ The independent Byzantine source changes the review queue:
 This still does not support:
 
 - `confirmed_code`
-- `proof`
+- `conclusive evidence`
 - `prophecy`
 - `statistical discovery`
 

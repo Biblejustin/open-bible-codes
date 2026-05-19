@@ -19,7 +19,7 @@ before/after extensions, and several kinds of controls.
 The current result is cautious. Hidden paths exist. Centered-self and
 relevant-center occurrences exist. Some rows are worth manual review. The most
 interesting rows are not random-looking in context, especially when a hidden
-term centers on the same open surface word. But no current row is claim-level.
+term centers on the same open surface word. But no current row is claim-grade.
 Short words are dense, wider skip ranges predictably raise counts, and matched
 Bible and non-Bible controls often explain rows that initially look strong.
 
@@ -82,7 +82,7 @@ source/version presence, control read, and final status label.
 ### What We Found
 
 The strongest current reportable material is occurrence and review-candidate
-material, not claim-level proof.
+material, not claim-grade evidence.
 
 - Hidden terms centered on the same surface word do occur. These rows matter as
   occurrences even when frequency controls caution against promotion.
@@ -103,7 +103,7 @@ material, not claim-level proof.
 
 No current row should be written as a public claim.
 
-- We did not find a prospective, claim-level result that survives all planned
+- We did not find a prospective, claim-grade result that survives all planned
   controls and source-distribution cautions.
 - We did not find support for promoting modern/geopolitical/local terms beyond
   ordinary screening status.
@@ -349,9 +349,8 @@ Use these labels:
 - `controlled_review_candidate`;
 - `under_specified`.
 
-Avoid stronger language such as proved, statistically impossible, prophecy
-confirmed, validation of inspiration, or claim-level unless a later locked
-prospective study actually earns that status.
+Avoid stronger theological or statistical conclusion language unless a later
+locked prospective study actually earns that status under predeclared controls.
 
 ## Future Work
 
@@ -389,7 +388,7 @@ across 575 English queries; same-length Shakespeare, War and Peace, and
 Moby-Dick control blocks produced 234,606, 227,967, and 232,226 hits.
 The KJVA bridge pass found 350 boundary-spanning rows, above the first
 same-length English control counts of 182, 140, and 168. Treat this as a
-follow-up candidate set, not a claim-level result. The KJVA bridge-context
+follow-up candidate set, not a claim-grade result. The KJVA bridge-context
 review found no center-word exact rows, four center-verse exact rows, and
 seventeen span-exact rows. The expanded KJVA shuffled-insertion control
 produced 149 to 236 bridge rows across 250 samples, with no shuffled sample at
@@ -403,7 +402,7 @@ The locked 5000-sample post-screen confirmatory follow-up over those 15 terms
 found all 15 with Benjamini-Hochberg `q_ge <= 0.01`, and 3 terms stood above
 every shuffled sample.
 That raises follow-up priority, but remains post-screen rather than
-claim-level evidence.
+claim-grade evidence.
 
 ## Source Trail
 

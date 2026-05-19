@@ -104,11 +104,11 @@ The locked 5000-sample post-screen confirmatory follow-up over those 15 terms
 found all 15 with Benjamini-Hochberg `q_ge <= 0.01`, and 3 terms stood above
 every shuffled sample. This strengthens follow-up priority, but it is still
 post-screen confirmatory calibration rather than original prospective discovery
-or claim-level evidence.
+or claim-grade evidence.
 The expanded KJVA shuffled-insertion control produced 149 to 236 bridge rows
 across 250 samples against 350 observed rows (`p_ge=0.003984`). That remains a
 stronger follow-up signal than the LXX boundary result, but it is still a
-screening/control result rather than claim-level evidence.
+screening/control result rather than claim-grade evidence.
 
 Add only sources with clean licensing and stable source metadata. Candidate
 families include:

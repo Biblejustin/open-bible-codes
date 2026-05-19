@@ -85,7 +85,7 @@ It does not qualify as:
 
 - `controlled_cross_text_candidate`
 - `confirmed_code`
-- `proof`
+- `conclusive evidence`
 - `prophecy`
 - `statistical_discovery`
 

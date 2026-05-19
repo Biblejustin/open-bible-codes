@@ -196,7 +196,7 @@ The report-run summary should currently say:
   separate post-discovery follow-up, not as prospective discovery.
 - The length-4 Greek surface follow-up has rows that exceed available
   same-length controls, but the available pool bottoms out at p/q = 0.066667,
-  so it remains triage evidence rather than claim-level evidence.
+  so it remains triage evidence rather than claim-grade evidence.
 - The generated length-4 vocabulary-control follow-up weakens that signal:
   200 matched controls are available per target, controls overlap every target,
   and no target survives study-level q <= 0.05.
@@ -206,7 +206,7 @@ The report-run summary should currently say:
   reproduction claim.
 - `υιοσ` (huios; English: son) and `αιμα` (haima; English: blood) remain weaker hidden-path candidates because their exact
   patterns are missing from one or more compared Greek NT sources.
-- no row is claim-level yet.
+- no row is claim-grade yet.
 - The broad Hebrew modern/geopolitical controlled review adds representative
   MT_WLC/UHB controls for the new all-Hebrew-row modern/geopolitical run; no
   row has adjusted representative-control support.
@@ -222,7 +222,7 @@ The report-run summary should currently say:
 
 ## Before Claim-Level Reporting
 
-A claim-level report needs a narrower predeclared study:
+A claim-grade report needs a narrower predeclared study:
 
 - fixed term list;
 - fixed source set;

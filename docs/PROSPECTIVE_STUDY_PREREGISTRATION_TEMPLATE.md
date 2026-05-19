@@ -131,7 +131,7 @@ Allowed labels:
 Disallowed labels:
 
 - `confirmed_code`;
-- `proof`;
+- `conclusive evidence`;
 - `prophecy`;
 - `statistical discovery`;
 - `claim`.
@@ -162,7 +162,7 @@ The report must include:
 - examples and warning flags;
 - context and letter-path output locations;
 - pass/fail table against this preregistration;
-- explicit statement that the run is review material, not proof of meaning.
+- explicit statement that the run is review material, not conclusive evidence of meaning.
 
 ## Interpretation Boundary
 

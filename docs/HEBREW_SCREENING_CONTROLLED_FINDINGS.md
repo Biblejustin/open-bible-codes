@@ -1,6 +1,6 @@
 # Hebrew Screening Controlled Findings
 
-Status: broader Hebrew screening controlled follow-up complete; no claim-level
+Status: broader Hebrew screening controlled follow-up complete; no claim-grade
 row.
 
 Source reports:
@@ -84,7 +84,7 @@ The broader run confirms the same pattern as the modern-only run:
 - many short Hebrew strings produce stable exact paths across MT-family streams;
 - long phrase rows are often absent in the capped screen;
 - paired controls explain the stable short-form rows well enough that no row
-  currently deserves claim-level treatment.
+  currently deserves claim-grade treatment.
 
 Current status: broader review material only. The next claim-grade path would
 be a narrower preregistered study with a fixed term list, fixed skip range, and

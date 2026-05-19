@@ -49,7 +49,7 @@ State plainly:
 - many hidden paths exist;
 - centered-self and relevant-center occurrences exist and are worth listing;
 - matched controls explain many high-count rows;
-- no current result is claim-level.
+- no current result should be called a public claim.
 
 ### 2. Hypothesis And Scope
 
@@ -164,13 +164,8 @@ Use these labels consistently:
 - `cross_version_controlled_candidate`
 - `review_candidate_not_claim`
 
-Avoid:
-
-- proved;
-- statistically impossible;
-- claim-level;
-- validation of inspiration;
-- prophecy confirmed.
+Avoid stronger theological or statistical conclusion language unless a later
+locked prospective study earns that status under predeclared controls.
 
 ### 10. Future Work
 

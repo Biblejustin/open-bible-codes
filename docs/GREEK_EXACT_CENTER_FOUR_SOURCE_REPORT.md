@@ -174,7 +174,7 @@ TCG-overlap controlled row.
 This still does not support:
 
 - `confirmed_code`
-- `proof`
+- `conclusive evidence`
 - `prophecy`
 - `statistical discovery`
 

@@ -74,14 +74,14 @@ chain gives us that review queue without hiding the control evidence.
 1. Original-language Bible rows where the center word is the same surface term:
    UHB `Yeshua`, EBIBLE_WLC `Messiah`, LXX `Jesus`, and TCG_NT `Gog`.
 2. KJV `Jesus` rows with strong same-skip phrase extensions, treated as
-   translation-side evidence rather than original-language proof.
+   translation-side evidence rather than original-language conclusive evidence.
 3. HEB_PBY_BIALIK control rows with strong same-skip phrase extensions, because
    they show the background rate problem most directly.
 4. Matrix rows for any candidate promoted to manual table inspection.
 
 ## Next Decision Point
 
-Before any claim-level report, each promoted row should carry:
+Before any claim-grade report, each promoted row should carry:
 
 - exact-center path data;
 - center/start/end context;

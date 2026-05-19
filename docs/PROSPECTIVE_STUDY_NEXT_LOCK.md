@@ -55,7 +55,7 @@ Success criterion:
 Failure criterion:
 
 - final report treats frequency caution as a reason to hide the occurrence, or
-  treats occurrence as claim-level evidence.
+  treats occurrence as claim-grade evidence.
 
 ## Track 2: Post-Discovery Controlled Review Candidates
 
@@ -86,7 +86,7 @@ Allowed status if reproduced:
 Disallowed status:
 
 - `claim`
-- `proof`
+- `conclusive evidence`
 - `original prospective discovery`
 
 ### Hebrew `יום יהוה` (yom YHWH; English: day of YHWH) / `היומיהוה` (hayom YHWH; English: the day of YHWH)
@@ -114,7 +114,7 @@ Allowed status if reproduced:
 Disallowed status:
 
 - `claim`
-- `proof`
+- `conclusive evidence`
 - `original prospective discovery`
 
 ### KJVA Apocrypha/Deuterocanon Bridge Terms
@@ -143,7 +143,7 @@ Allowed status if reproduced:
 Disallowed status:
 
 - `claim`
-- `proof`
+- `conclusive evidence`
 - `original prospective discovery`
 
 ## Track 3: Completed Fresh Prospective Lane
@@ -204,8 +204,8 @@ Allowed status if future rerun reproduces this result:
 Disallowed status:
 
 - `claim`
-- `proof`
-- `prophecy confirmed`
+- `conclusive evidence`
+- `prophecy-confirmation wording`
 
 ## Next Allowed Commands
 

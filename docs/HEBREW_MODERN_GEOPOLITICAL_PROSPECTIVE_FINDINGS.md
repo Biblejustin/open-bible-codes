@@ -74,7 +74,7 @@ The run confirms the broad-screen pattern in a locked narrower cohort:
 - longer modern phrases are often absent under the fixed capped exact-version
   matrix;
 - representative controls explain the nonzero rows well enough that none
-  currently deserves claim-level treatment.
+  currently deserves claim-grade treatment.
 
 Use this as source-distribution review material only. It does not establish a
 prophetic, historical, theological, or statistical claim.

@@ -61,7 +61,7 @@ bucket beyond hidden-path-only. A 1000-sample term-level shuffled control found
 The locked 5000-sample post-screen confirmatory follow-up over those 15 terms
 found all 15 with Benjamini-Hochberg `q_ge <= 0.01`, and 3 terms stood above
 every shuffled sample.
-Neither result is claim-level.
+Neither result is public-claim evidence.
 
 ## What Looks Weak
 
@@ -708,7 +708,7 @@ Why it remains interesting:
   key in all four Greek NT labels with combined q = 0.0009 in every row and
   conservative all-control q <= 0.05.
 
-Why it remains review-level rather than claim-level:
+Why it remains review-level rather than a public claim:
 
 - the full extension phrase is hidden-path only, which is a normal ELS
   candidate type rather than a failure;
@@ -796,7 +796,7 @@ Current viable choices:
   rather than rows selected from the existing all-codes queue;
 - a transparent local-term negative/curiosity appendix.
 
-The Greek surface claim-level standard is now written in
+The Greek surface public-claim standard is now written in
 `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`. Use it before launching a
 new result-producing surface study.
 
@@ -921,7 +921,7 @@ pool: 32 controls for `ισαακ` (Isaak; English: Isaac), 32 for `τερασ` 
 English: wonder), and 30 for `ανομια` (anomia; English: lawlessness). All three
 selected rows exceed their available matched controls on all-source
 surface-pattern count, with q = 0.032258. Current read: stronger triage
-evidence, but still post-screen and not claim-level support.
+evidence, but still post-screen and not public-claim support.
 
 The compact selected-row follow-up is tracked in
 `docs/GREEK_EXPANDED_SURFACE_FOLLOWUP_REPORT.md`. It joins the three selected

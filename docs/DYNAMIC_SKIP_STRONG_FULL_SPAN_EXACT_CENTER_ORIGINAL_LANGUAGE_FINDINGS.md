@@ -138,7 +138,7 @@ python3 -m scripts.build_dynamic_span_exact_center_original_language_findings --
 
 ## Read
 
-- `promote` does not mean proved; it means the row is worth the next manual/source-comparison pass.
+- `promote` does not mean established; it means the row is worth the next manual/source-comparison pass.
 - Exact-center rows are intentionally broad: hidden term centered on the same open surface word, or on a related surface word, is meaningful enough to preserve as an occurrence.
 - Frequency counts and matched controls should travel with the row, but they should not erase the occurrence from the final report.
 - Hebrew `ישוע` (Yeshua; English: Yeshua/Jeshua) and `משיח` (Mashiach; English: Messiah/anointed one) rows should not be discarded, but the Bialik control background must travel with every interpretation.

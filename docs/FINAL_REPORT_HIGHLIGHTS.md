@@ -48,5 +48,5 @@ python3 -m scripts.build_final_report_highlights --centered-summary reports/cent
 ## Read
 
 - This table is a presentation layer over the centered-occurrence index and claim catalog.
-- A row appears here because it is useful for final-report review, not because it is claim-level.
+- A row appears here because it is useful for final-report review, not because it is claim-grade.
 - Frequency and control reads should be carried into any public writeup beside the occurrence.

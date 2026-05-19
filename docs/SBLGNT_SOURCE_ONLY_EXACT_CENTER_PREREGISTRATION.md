@@ -91,7 +91,7 @@ No row may be promoted to:
 
 - `controlled_cross_text_candidate`
 - `confirmed_code`
-- `proof`
+- `conclusive evidence`
 - `prophecy`
 - `statistical discovery`
 

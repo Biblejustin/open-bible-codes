@@ -1095,7 +1095,7 @@ def write_summary(
             ),
             read=(
                 "Current read: this is stronger triage evidence after excluding selected "
-                "targets from controls, but it is still post-screen and not claim-level."
+                "targets from controls, but it is still post-screen and not claim-grade."
             ),
         )
     )
@@ -2427,7 +2427,7 @@ def notable_passage_gap_section(
         "",
         "This absence layer records declared passages where selected centered ELS",
         "terms are absent or sparse inside the passage while appearing elsewhere",
-        "in the same corpus. It is a screening ledger, not negative proof.",
+        "in the same corpus. It is a screening ledger, not a negative conclusion.",
         "",
         "The current declared Leviticus 24 blasphemy-law target uses skip 2..500.",
         (
@@ -3011,7 +3011,7 @@ def surface_length4_followup_section(
             "same-length real-word control on all-source exact-center surface-pattern",
             "count, but only 14 controls were available per target. The add-one",
             "empirical floor is p/q = 0.066667, so this remains triage evidence and",
-            "not a claim-level result.",
+            "not a claim-grade result.",
         ]
     )
     return lines
@@ -3201,7 +3201,7 @@ def wrr_audit_section(
         "Current read: WRR remains `under_specified`. The source/import smoke is",
         "useful, but a reproduction still needs a locked pair set, the corrected",
         "distance `c(w,w')`, term-specific skip caps, and the permutation-rank",
-        "procedure before any claim-level label is possible.",
+        "procedure before any claim-grade label is possible.",
     ]
     return lines
 

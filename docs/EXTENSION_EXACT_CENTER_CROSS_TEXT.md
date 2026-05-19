@@ -39,7 +39,7 @@ Read:
 
 ## Caution
 
-Cross-text support is a filter, not proof. `δοξα` (doxa; English: glory) still has a hidden full extension phrase, not a surface phrase in the passage.
+Cross-text support is a filter, not conclusive evidence. `δοξα` (doxa; English: glory) still has a hidden full extension phrase, not a surface phrase in the passage.
 
 ## Next Check
 

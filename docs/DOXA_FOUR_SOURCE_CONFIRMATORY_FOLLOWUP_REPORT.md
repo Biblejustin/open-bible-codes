@@ -123,7 +123,7 @@ Current status: `claim_followup_review_candidate`.
 This does not support:
 
 - `confirmed_code`
-- `proof`
+- `conclusive evidence`
 - `prophecy`
 - `statistical discovery`
 

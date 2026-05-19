@@ -32,7 +32,7 @@ Purpose:
 | Greek `γωγ` (Gog; English: Gog) centered occurrence | `controlled_review_candidate` | 1 | Hidden `γωγ` (Gog; English: Gog) centers on open `Gog` at Rev 20:8 across four Greek NT source labels; length-3 controls make it contextual rather than frequency-promoted. |
 | Greek expanded surface follow-up | `controlled_review_candidate` | 1 | `ανομια` (anomia; English: lawlessness), `ισαακ` (Isaak; English: Isaac), and `τερασ` (teras; English: wonder) pass letter-path and all-available real-word control review; still post-screen and not a claim. |
 | All-codes `יום יהוה` (yom YHWH; English: day of YHWH) compound-extension follow-up | `controlled_review_candidate` | 1 | The selected `יום יהוה` (yom YHWH; English: day of YHWH) -> `היומיהוה` (hayom YHWH; English: the day of YHWH) key passes locked 5000/5000 controls in five MT-family sources with conservative all-control q = 0.003599; still post-discovery and not a claim. |
-| CRD exact center-word broad screen | `partially_reproducible` | 1 | Self-surface and concept-surface CRD produce identical 1153 Bible exact center-word term-hit rows; collapsed counts are 154 term IDs / 87 distinct normalized surface forms / 496 distinct normalized surface hit paths; exact center-word rows are occurrence and density flags, not claim-level proof. |
+| CRD exact center-word broad screen | `partially_reproducible` | 1 | Self-surface and concept-surface CRD produce identical 1153 Bible exact center-word term-hit rows; collapsed counts are 154 term IDs / 87 distinct normalized surface forms / 496 distinct normalized surface hit paths; exact center-word rows are occurrence and density flags, not claim-grade evidence. |
 | Greek length-4 surface follow-up | `partially_reproducible` | 1 | Length-4 rows reproduce, but generated vocabulary controls overlap every target and no target survives study-level q <= 0.05. |
 | Modern/geopolitical short forms | `partially_reproducible` | 1 | Presence remains reproducible through the wide skip run; controls do not support significance. |
 | Full modern country phrases | `not_reproducible` | 1 | Long country and institution phrases remain absent through the wide exact follow-up. |
@@ -67,7 +67,7 @@ not enough for `reproducible`; the declared claim rule has to be reproduced.
 WRR-specific requirements are tracked in `docs/WRR_REPLICATION_PLAN.md`,
 `docs/WRR_SOURCE_AUDIT.md`, `docs/WRR_METHODOLOGY_GAPS.md`, and
 `docs/WRR_CORRECTED_DISTANCE_NOTES.md`.
-Greek surface claim-level requirements are tracked in
+Greek surface claim-grade requirements are tracked in
 `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`.
 Bible Code Digest source leads are tracked in `docs/BIBLE_CODE_DIGEST_AUDIT.md`.
 CRI critique guardrails are tracked in `docs/CRI_ELS_CRITIQUE_AUDIT.md`.

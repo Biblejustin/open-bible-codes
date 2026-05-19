@@ -106,4 +106,4 @@ Broad raw-count version presence:
 
 A source-specific row can be worth examining inside that source while still
 being much weaker than a cross-source row. None of these categories establish
-theological meaning, prophecy, proof, or statistical discovery by themselves.
+theological meaning, prophecy, conclusive evidence, or statistical discovery by themselves.

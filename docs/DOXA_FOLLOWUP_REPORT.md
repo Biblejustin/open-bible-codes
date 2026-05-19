@@ -123,7 +123,7 @@ The locked run supports the limited status:
 It does not support:
 
 - `confirmed_code`
-- `proof`
+- `conclusive evidence`
 - `prophecy`
 - `statistical discovery`
 

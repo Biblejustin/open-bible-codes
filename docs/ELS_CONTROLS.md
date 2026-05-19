@@ -27,13 +27,13 @@ Important fields:
 - `term_p_ge`: smoothed empirical probability that a shuffled-term count is at least observed
 - `letter_q_value` / `term_q_value`: Benjamini-Hochberg adjusted values across emitted rows
 - `combined_min_q_value`: adjusted screening value for the smaller of `letter_p_ge` and `term_p_ge`
-- `significance_band`: coarse screening bucket based on adjusted values, not a proof claim
+- `significance_band`: coarse screening bucket based on adjusted values, not a conclusive evidence claim
 - `search_space_positions`: estimated valid ELS start positions searched for this term
 - `hits_per_million_positions`: observed hits normalized by search space size
 - `letter_z_score` / `term_z_score`: observed count vs null mean and standard deviation
 - `warning_count` / `flags`: warnings such as few controls, zero variance, short terms, low observed hits, and huge search spaces
 
-These are screening controls, not proof of significance. The default public
+These are screening controls, not conclusive evidence of significance. The default public
 protocol uses a small sample (`3` letter shuffles, `25` term shuffles) so it can
 run quickly. Strong-looking rows need larger reruns, preregistered term lists,
 and review of the adjusted values and warning flags before making claims.

@@ -265,7 +265,7 @@ def build_report(
             "This does not support:",
             "",
             "- `confirmed_code`",
-            "- `proof`",
+            "- `conclusive evidence`",
             "- `prophecy`",
             "- `statistical discovery`",
             "",

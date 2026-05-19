@@ -21,5 +21,5 @@ Matched controls per target range from 200 to 200. The best possible add-one emp
 ## Read
 
 Matched controls overlap every target's observed all-source pattern
-count. This weakens the length-4 follow-up and leaves no claim-level
+count. This weakens the length-4 follow-up and leaves no claim-grade
 row under study-level correction.

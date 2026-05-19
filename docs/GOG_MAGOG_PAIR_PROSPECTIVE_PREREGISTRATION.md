@@ -11,7 +11,7 @@ pair controls.
 
 This is a review-candidate hypothesis only. A successful run may produce the
 label `prospective_controlled_review_candidate`; it may not produce claim,
-proof, or prophecy-confirmation language.
+conclusive evidence, or prophecy-confirmation language.
 
 ## Sources
 

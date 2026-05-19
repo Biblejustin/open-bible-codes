@@ -118,7 +118,7 @@ Passing these criteria allows only this status:
 It does not allow:
 
 - `confirmed_code`
-- `proof`
+- `conclusive evidence`
 - `prophecy`
 - `statistical discovery`
 

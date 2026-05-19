@@ -188,7 +188,7 @@ computed.
 Mapping files are header-only planning artifacts until populated. Populated
 mapping files must pass `python3 -m scripts.validate_study_mapping_schemas` and
 must be locked before the corresponding stratum is used for promotion or
-claim-level language.
+claim-grade language.
 
 ## Full-Span Rule
 
@@ -243,5 +243,5 @@ methodological challenge this project must answer. In practice that means:
 - no unbounded spelling variants without a declared spelling audit;
 - no matrix or cluster claim without a declared metric;
 - no prediction claim without archived source timing;
-- no claim-level language without language-matched controls and correction for
+- no claim-grade language without language-matched controls and correction for
   the full tested search space.

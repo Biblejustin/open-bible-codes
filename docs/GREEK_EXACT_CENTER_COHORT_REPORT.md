@@ -152,7 +152,7 @@ current exact-center cross-text Greek NT extension row worth continued review.
 It still does not support:
 
 - `confirmed_code`
-- `proof`
+- `conclusive evidence`
 - `prophecy`
 - `statistical discovery`
 

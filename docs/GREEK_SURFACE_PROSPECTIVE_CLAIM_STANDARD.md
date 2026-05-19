@@ -107,14 +107,14 @@ Required randomized controls:
 - same-length same-corpus random controls;
 - same skip, direction, source labels, and exact-center surface rule;
 - at least 5000 shuffled-term and 5000 random controls per tested target before
-  any claim-level wording is considered.
+  any claim-grade wording is considered.
 
-Suggested claim-level statistical threshold:
+Suggested claim-grade statistical threshold:
 
 - `q <= 0.01` for both real-word and randomized control families.
 
 If fewer than 30 real-word controls exist for a target, the row is held for
-review and cannot be claim-level under this standard.
+review and cannot be claim-grade under this standard.
 
 ## Required Audit Outputs
 
@@ -144,7 +144,7 @@ Allowed maximum labels:
 Disallowed labels without a separate stronger standard:
 
 - `confirmed_code`;
-- `proof`;
+- `conclusive evidence`;
 - `prophecy`;
 - `statistical discovery`;
 - `claim`.

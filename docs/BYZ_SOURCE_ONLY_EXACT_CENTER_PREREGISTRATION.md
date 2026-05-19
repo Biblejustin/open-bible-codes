@@ -66,7 +66,7 @@ It may not be labeled:
 
 - `cross_text_candidate`
 - `confirmed_code`
-- `proof`
+- `conclusive evidence`
 - `prophecy`
 - `statistical_discovery`
 

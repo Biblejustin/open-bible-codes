@@ -20,12 +20,12 @@ The current result is cautious:
 - hidden paths exist;
 - centered-self and relevant-center occurrences exist and should be listed;
 - several rows deserve manual review;
-- no current result is claim-level;
+- no current result should be presented as a public claim;
 - short terms and wider skip ranges create large background hit rates;
 - controls often explain rows that look striking before comparison.
 
 The best current public wording is: review candidates and occurrence findings,
-not proof.
+not conclusion language.
 
 ## Hypothesis Scope
 
@@ -227,7 +227,7 @@ confirmatory follow-up over those 15 terms found all 15 with `q_ge <= 0.01`,
 and 3 terms stood above every shuffled sample.
 
 This raises follow-up priority, but it remains post-screen rather than
-claim-level evidence.
+public-claim evidence.
 
 Source artifacts:
 
@@ -280,7 +280,7 @@ Source artifacts:
 
 The notable-passage gap ledger records places where declared terms are absent
 or sparse inside a passage while appearing elsewhere in the same corpus. It is
-a screening ledger, not negative proof.
+a screening ledger, not a negative conclusion.
 
 The Leviticus 24 blasphemy-law target now uses skip range 2..500. Across the
 five MT-family witnesses, 45 of 54 eligible declared terms appear centered
@@ -313,7 +313,8 @@ MT-family witnesses at the registered skip 2..100 settings, plus LXX
 Isaiah-53 rows for `ταφοσ` (taphos; English: Grave), `ανομια` (anomia;
 English: Iniquity), and `σιωπαω` (siopao; English: Silent).
 
-These rows are review facts, not proof by presence or proof by absence.
+These rows are review facts, not final conclusions from presence or absence
+alone.
 
 Source artifact: `docs/THEMATIC_CHAPTER_ABSENCE.md`.
 
@@ -366,9 +367,9 @@ Use these labels:
 - `controlled_review_candidate`
 - `under_specified`
 
-Do not use stronger language such as proved, statistically impossible,
-prophecy confirmed, validation of inspiration, or claim-level unless a later
-locked prospective study earns that status under its predeclared controls.
+Do not use stronger theological or statistical conclusion language unless a
+later locked prospective study earns that status under its predeclared
+controls.
 
 ## Reproduce
 
@@ -407,7 +408,7 @@ meaningful. It is that the toolkit can collect the rows, preserve their
 source/version/context details, run controls, and keep occurrence findings
 separate from claim language.
 
-At this point, no current row should be presented as proof. The proper next
-step is a narrower locked prospective study with fixed terms, fixed corpora,
-fixed skip rules, fixed center/extension rules, and fixed controls before
-seeing new result-producing output.
+At this point, no current row should be presented as a public claim. The proper
+next step is a narrower locked prospective study with fixed terms, fixed
+corpora, fixed skip rules, fixed center/extension rules, and fixed controls
+before seeing new result-producing output.

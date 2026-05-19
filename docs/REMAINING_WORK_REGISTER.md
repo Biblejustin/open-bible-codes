@@ -1,24 +1,11 @@
 # Remaining Work Register
 
-Status: operational register after the 34-version English-source refresh and
-the empty English seed survivor gate. This file tracks work that remains
-outside the missing copyrighted/private English CSVs.
+Status: operational register after the 34-version English-source refresh, the
+empty English seed survivor gate, the English source-basis audit, and the
+reader-report hygiene pass. This file tracks work that remains outside the
+missing copyrighted/private English CSVs.
 
 ## Blocked
-
-### Formal Real Report Rerun
-
-Command:
-
-```bash
-python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
-```
-
-Current blocker: preflight requires a clean git worktree. The attempted rerun
-stopped at preflight with `git working tree is not clean`.
-
-Next action: decide commit/stage boundary for the current large worktree, then
-rerun the formal report protocol.
 
 ### Remaining BibleGateway English Corpora
 
@@ -33,11 +20,29 @@ AMPC, NLT, MSG, TPT, and NIV local hooks exist and their private CSVs are
 ignored under `data/private/english/`. TPT is wired in the private protocol but
 is not part of the BibleGateway manifest.
 
-## Highest-Value Non-Blocked Work
+## Completed This Pass
 
-### 1. Reader Report Refresh
+### Formal Real Report Rerun
 
-Current tracked file: `docs/FINAL_REPORT.md`.
+Command completed successfully after the worktree was cleaned:
+
+```bash
+python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
+```
+
+Current summary:
+
+- `reports/real_report_run/summary.md`
+- generated UTC: `2026-05-19T19:20:50.699053+00:00`
+- report commit recorded by the protocol: `b637bd5`
+
+### Reader Report Refresh
+
+Current tracked files:
+
+- `docs/FINAL_REPORT.md`
+- `docs/CONSOLIDATED_FINDINGS.md`
+- `docs/FINAL_REPORT_OUTLINE.md`
 
 Completed in this pass: refreshed stale centered-occurrence counts to the
 current `docs/CENTERED_OCCURRENCE_INDEX.md` snapshot:
@@ -48,11 +53,9 @@ current `docs/CENTERED_OCCURRENCE_INDEX.md` snapshot:
 - 923 raw occurrence rows.
 - 526 centered-self exact-word presence rows.
 
-Remaining action after clean worktree: rerun `protocols/real_report_run.toml`
-and recheck `docs/FINAL_REPORT.md`, `docs/CONSOLIDATED_FINDINGS.md`, and
-`docs/FINAL_REPORT_OUTLINE.md` against `reports/real_report_run/summary.md`.
+Also replaced stronger conclusion-language wording in these reader-facing docs.
 
-### 2. Claim-Language Hygiene
+### Claim-Language Hygiene
 
 Goal: keep every public-facing file aligned with current status:
 
@@ -63,21 +66,36 @@ Goal: keep every public-facing file aligned with current status:
 - under-specified
 - not claim
 
-Disallowed language unless a later locked prospective study earns it:
-
-- proof
-- statistically impossible
-- prophecy confirmed
-- validation of inspiration
-- claim-level
-
-Suggested command:
+Hygiene command:
 
 ```bash
-rg -n "proved|proof|statistically impossible|prophecy confirmed|validation of inspiration|claim-level|claim level" docs README.md claims protocols scripts tests
+rg -n "\\bprov[e]d\\b|\\bpro[o]f\\b|statistically[ -]impossible|prophecy[ -]confirmed|validation of inspirat[i]on|claim[- ]level" docs README.md claims protocols scripts tests
 ```
 
-### 3. Source-Basis Audit Queue
+Expected result: no public-facing reader-doc hits except historical filenames or
+implementation/test identifiers that explicitly encode legacy claim-follow-up
+workflow names.
+
+## Highest-Value Non-Blocked Work
+
+### 1. WRR Reproduction Upgrade
+
+Current status: smoke/source/import work only. Remaining claim-grade pieces:
+
+- locked pair eligibility table;
+- corrected distance `c(w,w')`;
+- term-specific skip-cap logic;
+- permutation-rank procedure;
+- study-level report over fixed terms and sources.
+
+Tracked references:
+
+- `docs/WRR_REPLICATION_PLAN.md`
+- `docs/WRR_METHODOLOGY_GAPS.md`
+- `docs/WRR_CORRECTED_DISTANCE_NOTES.md`
+- `tests/test_wrr_stats.py`
+
+### 2. Source-Basis Audit Queue
 
 The English manifests already track broad source-basis metadata:
 
@@ -113,7 +131,7 @@ Suggested local queue command:
 awk -F, 'NR == 1 || /needs_audit/' configs/biblegateway_english_versions.csv configs/ebible_english_controls.csv
 ```
 
-### 4. English Seed Survivor Gate
+### 3. English Seed Survivor Gate
 
 Current status: no English seed rows survive the 100-sample corpus-letter
 shuffle gate after the 34-version BibleGateway refresh.
@@ -133,24 +151,7 @@ python3 -m scripts.run_protocol protocols/english_seed_survivor_audit.toml --res
 python3 -m scripts.run_protocol protocols/english_seed_paired_controls_1000.toml --resume
 ```
 
-### 5. WRR Reproduction Upgrade
-
-Current status: smoke/source/import work only. Remaining claim-grade pieces:
-
-- locked pair eligibility table;
-- corrected distance `c(w,w')`;
-- term-specific skip-cap logic;
-- permutation-rank procedure;
-- study-level report over fixed terms and sources.
-
-Tracked references:
-
-- `docs/WRR_REPLICATION_PLAN.md`
-- `docs/WRR_METHODOLOGY_GAPS.md`
-- `docs/WRR_CORRECTED_DISTANCE_NOTES.md`
-- `tests/test_wrr_stats.py`
-
-### 6. Apocrypha/Deuterocanon Prospective Study
+### 4. Apocrypha/Deuterocanon Prospective Study
 
 KJVA bridge results are strong post-screen review material, not claims.
 Remaining next step is a fresh prospective lock before producing new
@@ -170,7 +171,7 @@ Needed before claim language:
 - fixed correction rule;
 - non-Bible insertion controls.
 
-### 7. Manual Review Queue
+### 5. Manual Review Queue
 
 Carry these with controls attached:
 

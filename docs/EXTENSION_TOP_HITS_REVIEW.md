@@ -39,7 +39,7 @@ The top files are now filtered to phrase matches with base terms of at least fou
 Interpretation:
 
 - `ουλ` (Oul; English: Hul) was excluded because it dominated the previous top file and mostly extended into ordinary servant/people/Saul surface forms.
-- Phrase matches are surface-lexicon matches elsewhere in the same corpus, not proof that the hit location itself reads as that phrase.
+- Phrase matches are surface-lexicon matches elsewhere in the same corpus, not conclusive evidence that the hit location itself reads as that phrase.
 - Remaining rows are more readable. The first paired-control pass is tracked in
   `docs/EXTENSION_PAIRED_CONTROLS.md`.
 

@@ -22,4 +22,4 @@ Matched controls per target range from 14 to 14. The best possible add-one empir
 
 At least one target exceeds every matched control, but no row survives
 study-level q <= 0.05. This remains triage evidence rather than a
-claim-level result.
+claim-grade result.

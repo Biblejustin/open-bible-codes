@@ -46,6 +46,6 @@ chapter ranges.
 ## Lock Rule
 
 A populated mapping file must be included in the study lock manifest and
-preregistration before any density, promotion, or claim-level language uses it.
+preregistration before any density, promotion, or claim-grade language uses it.
 If a populated mapping changes after results are inspected, the run is invalid
 for prospective claim language and needs a new lock.

@@ -176,7 +176,7 @@ def build_report(
             "the all-available non-selected same-length control pool has study-level",
             "q = 0.032258 for the selected rows.",
             "",
-            "It is still post-screen. It does not establish a claim, proof, prophecy,",
+            "It is still post-screen. It does not establish a claim, conclusive evidence, prophecy,",
             "or statistical discovery. A stronger claim would require a prospective",
             "study whose term list, selection rule, control pool, and correction plan",
             "were fixed before the rows were discovered.",

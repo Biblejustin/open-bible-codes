@@ -132,7 +132,7 @@ support unless SBLGNT or TR_NT also share the exact extension key.
 No row may be promoted to:
 
 - `confirmed_code`
-- `proof`
+- `conclusive evidence`
 - `prophecy`
 - `statistical discovery`
 
@@ -160,7 +160,7 @@ The tracked report must include:
 - overlap corpora for every surviving row;
 - warning flags;
 - pass/fail table against this preregistration;
-- explicit statement that this is a locked screening protocol but not proof of
+- explicit statement that this is a locked screening protocol but not conclusive evidence of
   theological meaning.
 
 ## Interpretation Boundary

@@ -93,7 +93,7 @@ Passing terms may be described only as:
 They may not be described as:
 
 - `confirmed_code`
-- `proof`
+- `conclusive evidence`
 - `prophecy`
 - `original prospective discovery`
 

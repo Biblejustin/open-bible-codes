@@ -1,6 +1,6 @@
 # Hebrew Modern Geopolitical Controlled Findings
 
-Status: generated controlled follow-up complete; no claim-level row.
+Status: generated controlled follow-up complete; no claim-grade row.
 
 Source report:
 

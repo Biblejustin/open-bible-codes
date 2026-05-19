@@ -92,7 +92,7 @@ The wide-focus paired-control report classified 66 representative rows:
 
 This is the practical control result for modern/geopolitical/local screening:
 raw detections are common, but the representative controlled screen does not
-support claim-level promotion.
+support claim-grade promotion.
 
 ## Same-Skip Extensions
 
@@ -116,14 +116,14 @@ Current read:
 ## Current Claim Boundary
 
 No broader-search modern, geopolitical, local, Gog/Magog, or prophetic row is
-claim-level material. The current strongest rows are review candidates only:
+claim-grade material. The current strongest rows are review candidates only:
 
 - `δοξα` (doxa; English: glory) / `δοξανωσ` (doxanos; English: hidden extension form from doxa): strongest controlled Greek extension review candidate;
 - `ανομια` (anomia; English: lawlessness), `ισαακ` (Isaak; English: Isaac), `τερασ` (teras; English: wonder): post-screen Greek surface review candidates;
 - broad and wide modern/geopolitical rows: raw screens or control-weakened
   screens.
 
-Before any external claim-level report, use the preregistration template,
+Before any external claim-grade report, use the preregistration template,
 placeholder checker, lock manifest builder, and lock checker:
 
 ```bash

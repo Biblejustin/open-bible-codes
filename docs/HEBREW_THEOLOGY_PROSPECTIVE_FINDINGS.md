@@ -86,7 +86,7 @@ all-source rows. That by itself is not meaningful. The registered control gate
 is the useful filter here, and it produced no adjusted support.
 
 Use the YHWH row only as a review prompt if desired. It is not a confirmed
-pattern, proof, prophecy, or statistical discovery.
+pattern, conclusive evidence, prophecy, or statistical discovery.
 
 For non-claim-grade inspection, the relaxed all-codes companion run is tracked
 in `docs/HEBREW_THEOLOGY_ALL_CODES_COLLECTION.md`. That run keeps every hidden

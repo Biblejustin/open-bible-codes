@@ -52,6 +52,6 @@ through dense partitions. None had exact center-word hits.
   review candidates under this exact-center flag.
 - English and Greek `Jesus` are expected to benefit from surface-word
   occurrence in Bible corpora, so this should be interpreted as a surface-aware
-  review filter, not proof by itself.
+  review filter, not conclusive evidence by itself.
 - Greek `Gog` has only 4 exact-center hits, all in Revelation 20:8 in the Bible
   row, so it is theologically interesting but numerically small.

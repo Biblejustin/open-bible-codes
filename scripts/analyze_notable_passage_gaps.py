@@ -925,7 +925,7 @@ def write_markdown(
             "",
             "## Cautions",
             "",
-            "- This report does not treat absence as a negative proof. It records silence and lower-density rows so they can be reviewed alongside positive centered hits.",
+            "- This report does not treat absence as a negative conclusion. It records silence and lower-density rows so they can be reviewed alongside positive centered hits.",
             "- `expected_in_passage_uniform` is a descriptive baseline only; it is not a formal p-value.",
             "- `uniform_zero_probability` is the simple Poisson `exp(-expected)` probability of zero hits under that uniform baseline; it is a triage aid, not a formal independence test.",
             "- `uniform_zero_bh_q` applies Benjamini-Hochberg correction to that simple zero-hit triage probability over absent/low-density detail rows.",

@@ -218,7 +218,7 @@ argv = [
   "--markdown-title",
   "Hebrew Theology Prospective Report",
   "--markdown-description",
-  "This generated report joins exact version-presence summaries, representative paired controls, and bounded phrase-extension rows for the locked Hebrew theology cohort. It is review material, not proof of meaning.",
+  "This generated report joins exact version-presence summaries, representative paired controls, and bounded phrase-extension rows for the locked Hebrew theology cohort. It is review material, not conclusive evidence of meaning.",
   "--manifest-out",
   "reports/hebrew_theology_prospective/controlled_report.manifest.json",
 ]

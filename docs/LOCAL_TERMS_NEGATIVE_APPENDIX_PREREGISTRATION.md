@@ -1,6 +1,6 @@
 # Local Terms Negative Appendix Preregistration
 
-Status: locked local curiosity appendix; not claim-level evidence.
+Status: locked local curiosity appendix; not claim-grade evidence.
 
 ## Study Identity
 
@@ -85,7 +85,7 @@ Primary row-level outcome:
 
 Primary study-level outcome:
 
-- transparent negative/curiosity appendix; no claim-level outcome.
+- transparent negative/curiosity appendix; no claim-grade outcome.
 
 ## Candidate Labels
 
@@ -99,7 +99,7 @@ Allowed labels:
 Disallowed labels:
 
 - `confirmed_code`;
-- `proof`;
+- `conclusive evidence`;
 - `prophecy`;
 - `statistical discovery`;
 - `claim`.
@@ -122,7 +122,7 @@ The report must include:
 - term count;
 - exact presence/absence rows;
 - representative-control status for nonzero rows;
-- explicit statement that this is a curiosity appendix, not proof of meaning.
+- explicit statement that this is a curiosity appendix, not conclusive evidence of meaning.
 
 ## Interpretation Boundary
 

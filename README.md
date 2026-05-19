@@ -395,7 +395,7 @@ All-available matched-control follow-up:
 `docs/GREEK_EXPANDED_SURFACE_AVAILABLE_CONTROL_POOL.md` and
 `docs/GREEK_EXPANDED_SURFACE_AVAILABLE_CONTROL_EVALUATION.md`.
 Compact follow-up report: `docs/GREEK_EXPANDED_SURFACE_FOLLOWUP_REPORT.md`.
-Prospective claim-level standard:
+Prospective claim-grade standard:
 `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`.
 Future preregistration lock manifests can be produced with
 `python3 -m scripts.build_study_lock_manifest`, checked with

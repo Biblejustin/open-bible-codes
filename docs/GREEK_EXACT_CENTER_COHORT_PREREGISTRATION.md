@@ -122,7 +122,7 @@ A row may be labeled only as `controlled_review_candidate` if all criteria pass:
 No row may be promoted to:
 
 - `confirmed_code`
-- `proof`
+- `conclusive evidence`
 - `prophecy`
 - `statistical discovery`
 
@@ -149,7 +149,7 @@ The cohort report must include:
 - exact p/q values for every surviving row;
 - warning flags;
 - pass/fail table against this preregistration;
-- explicit statement that this is a locked cohort protocol but not proof of
+- explicit statement that this is a locked cohort protocol but not conclusive evidence of
   theological meaning.
 
 ## Interpretation Boundary

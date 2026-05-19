@@ -655,7 +655,7 @@ def write_report(
             "- Hidden-code presence and exact surface-center matches are separate observations.",
             "- The current export includes all hits for manageable count rows and defers dense rows for partitioned export.",
             "- A version-specific hit can be meaningful as a distribution fact even when the same term is absent elsewhere.",
-            "- Non-Bible controls are comparison backgrounds, not disproof by themselves.",
+            "- Non-Bible controls are comparison backgrounds, not negative conclusion by themselves.",
             "",
         ]
     )

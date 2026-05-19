@@ -45,4 +45,4 @@ Locked rule: Hebrew `גוג` (Gog; English: Gog) / `מגוג` (Magog; English: M
 
 List every observed pair result. Treat a successful row only as `prospective_controlled_review_candidate` if it beats declared pair baselines and synthetic length-matched baselines under this locked design.
 
-Do not call the result proof, prophecy confirmation, or claim-level evidence.
+Do not call the result conclusive evidence, prophecy confirmation, or claim-grade evidence.

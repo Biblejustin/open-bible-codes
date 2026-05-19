@@ -254,14 +254,14 @@ def control_read_lines(rows: list[dict[str, str]]) -> list[str]:
     if controls_ge and all(value > 0 for value in controls_ge):
         return [
             "Matched controls overlap every target's observed all-source pattern",
-            "count. This weakens the length-4 follow-up and leaves no claim-level",
+            "count. This weakens the length-4 follow-up and leaves no claim-grade",
             "row under study-level correction.",
         ]
     if q_values and min(q_values) > 0.05:
         return [
             "At least one target exceeds every matched control, but no row survives",
             "study-level q <= 0.05. This remains triage evidence rather than a",
-            "claim-level result.",
+            "claim-grade result.",
         ]
     return [
         "Rows where no matched control reaches the observed all-source pattern",

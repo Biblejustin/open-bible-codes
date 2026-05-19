@@ -129,7 +129,7 @@ Passing these criteria allows only this status:
 It does not allow:
 
 - `confirmed_code`
-- `proof`
+- `conclusive evidence`
 - `prophecy`
 - `statistical discovery`
 
@@ -149,6 +149,6 @@ The row fails this follow-up if any of these occur:
 ## Interpretation Boundary
 
 This study can only stress-test an already discovered row. It cannot make the
-row a theological proof or an original statistical discovery. A stronger claim
+row a theological conclusive evidence or an original statistical discovery. A stronger claim
 would require a separate prospective study with the candidate list and claim
 standard fixed before discovery.

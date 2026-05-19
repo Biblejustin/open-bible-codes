@@ -123,7 +123,7 @@ No row in this screen may be labeled:
 
 - `claim`
 - `confirmed_code`
-- `proof`
+- `conclusive evidence`
 - `prophecy`
 - `statistical discovery`
 

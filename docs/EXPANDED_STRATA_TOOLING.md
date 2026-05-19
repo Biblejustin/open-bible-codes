@@ -451,7 +451,7 @@ make study-mapping-schemas
 ```
 
 Populated mapping files must be locked in a preregistration before they drive
-density, promotion, or claim-level language.
+density, promotion, or claim-grade language.
 
 ## Suggested Review Order
 
