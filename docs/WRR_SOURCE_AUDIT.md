@@ -396,7 +396,7 @@ normalized lengths, Genesis smoke hit counts, expected-count skip caps,
 nearest-pair metrics, and eligibility notes. It still does not select the
 canonical 163-distance WRR pair set.
 
-WRR perturbation boundary diagnostic for length `5..8` rows:
+WRR perturbation boundary/exact-match diagnostic for length `5..8` rows:
 
 | Item | Count |
 | --- | ---: |
@@ -407,14 +407,18 @@ WRR perturbation boundary diagnostic for length `5..8` rows:
 | rows without sampled hits | 56 |
 | sampled hits | 447 |
 | rows with sample under 10 valid perturbations | 0 |
+| rows with sample under 10 exact matches | 64 |
 | minimum in-bound perturbations in sample | 125 |
+| median exact perturbed matches in sample | 1 |
+| maximum exact perturbed matches in sample | 5 |
 | ordinary in-bound failures | 0 |
-| perturbation diagnostic runtime | 3.977s |
+| ordinary exact-match failures | 0 |
+| perturbation diagnostic runtime | 6.026s |
 
-This only checks whether sampled ordinary ELS rows have enough in-bound
-last-three-gap perturbations to avoid the source-described boundary blocker.
-It does not compute proximity `Q(w,w')`, corrected distance `c(w,w')`, or a
-permutation statistic.
+This checks whether sampled ordinary ELS rows have enough in-bound
+last-three-gap perturbations and whether those perturbed rows still spell the
+same term exactly. It does not compute proximity `Q(w,w')`, corrected distance
+`c(w,w')`, or a permutation statistic.
 
 ## Statistic Helpers
 
@@ -428,7 +432,8 @@ corrected distance:
 - `P2` as the product-of-uniforms transform;
 - permutation-rank `rho` with half-weighted ties;
 - Bonferroni `rho0 = 4 min(rho_i)`.
-- WRR perturbation triples, perturbed offsets, first-ten row widths,
+- WRR perturbation triples, perturbed offsets, exact perturbed-ELS match
+  checks, first-ten row widths,
   conservative supplied-row domain labeling for unambiguous shorter-skip cases,
   candidate-domain enumeration for enclosing shorter-skip ambiguity,
   real-corpus domain-labeling diagnostics with undefined-reason labels,

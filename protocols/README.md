@@ -103,10 +103,10 @@ This counts the imported WRR2 appellation/date rows in Koren Genesis, emits a
 same-record appellation/date pair audit, and control-screens the top raw pair
 rows. It also repeats the pair audit/control screen with the WRR
 appendix-compatible `5..8` length filter, audits expected-count skip caps, and
-samples WRR-style perturbation boundary validity. It also fingerprints the
-Koren Genesis source stream and emits a pair-table reconciliation for the
-current imported-pair count versus the source-cited 163-distance WRR
-second-list sample. It is not the WRR proximity statistic.
+samples WRR-style perturbation boundary and exact-match validity. It also
+fingerprints the Koren Genesis source stream and emits a pair-table
+reconciliation for the current imported-pair count versus the source-cited
+163-distance WRR second-list sample. It is not the WRR proximity statistic.
 
 Hebrew MT-family version comparison:
 

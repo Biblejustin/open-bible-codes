@@ -114,7 +114,11 @@ Already implemented:
   appellation would close the 165-to-163 count gap, while excluding all four
   disputed Zacut rows would overshoot. These pages are not treated as the
   canonical WRR pair table.
-- perturbation boundary diagnostic over sampled imported length 5..8 ELS hits.
+- perturbation boundary/exact-match diagnostic over sampled imported length
+  5..8 ELS hits. Current output samples 447 hits across 64 rows with hits:
+  every sampled ordinary hit keeps all 125 triples in bounds, but every row
+  with hits has fewer than 10 exact perturbed matches; exact-match counts range
+  from 1 to 5, with median 1.
 
 Not yet implemented:
 

@@ -162,6 +162,13 @@ specifically, 30 of 86 pairs have defined-domain ordinary `Q`, 16 are complete,
 implement the paper's corrected distance value for every term pair because the
 undefined-domain policy, perturbed `Q`, and per-pair `c(w,w')` driver are
 missing.
+
+The perturbation diagnostic now distinguishes boundary validity from exact
+perturbed matches. In the current sampled output, 447 sampled hits across 64
+rows with hits keep all 125 perturbation triples in bounds, but every row with
+hits has fewer than 10 exact perturbed matches. Exact-match counts range from 1
+to 5, with median 1. This is still only a sampled term-hit diagnostic, not a
+pair-level corrected-distance calculation.
 Implementation notes are now tracked in
 `docs/WRR_CORRECTED_DISTANCE_NOTES.md`.
 

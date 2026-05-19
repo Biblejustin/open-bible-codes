@@ -4,6 +4,7 @@ import unittest
 from scripts.analyze_wrr_perturbation_diagnostics import (
     diagnostic_read,
     display_boundary_term,
+    exact_perturbation_match_count,
     offsets_in_bounds,
     summarize,
     valid_perturbation_count,
@@ -29,18 +30,39 @@ class WrrPerturbationDiagnosticsTests(unittest.TestCase):
 
         self.assertEqual(count, 2)
 
+    def test_exact_perturbation_match_count_checks_letters(self) -> None:
+        triples = ((0, 0, 0), (1, 0, 0), (-5, 0, 0))
+
+        count = exact_perturbation_match_count(
+            text="AXXBXCXD",
+            word="ABCD",
+            start=0,
+            skip=2,
+            triples=triples,
+        )
+
+        self.assertEqual(count, 1)
+
     def test_diagnostic_read_reports_boundary_states(self) -> None:
-        self.assertEqual(diagnostic_read([], 0), "no sampled hits")
-        self.assertEqual(diagnostic_read([9], 0), "sample includes fewer than 10 valid perturbations")
-        self.assertEqual(diagnostic_read([10], 0), "sample perturbation boundary ok")
-        self.assertEqual(diagnostic_read([10], 1), "ordinary hit boundary failure")
+        self.assertEqual(diagnostic_read([], [], 0, 0), "no sampled hits")
+        self.assertEqual(
+            diagnostic_read([9], [9], 0, 0),
+            "sample includes fewer than 10 in-bound perturbations",
+        )
+        self.assertEqual(
+            diagnostic_read([10], [9], 0, 0),
+            "sample includes fewer than 10 exact perturbation matches",
+        )
+        self.assertEqual(diagnostic_read([10], [10], 0, 0), "sample perturbation exact-match ok")
+        self.assertEqual(diagnostic_read([10], [10], 1, 0), "ordinary hit boundary failure")
+        self.assertEqual(diagnostic_read([10], [10], 0, 1), "ordinary hit exact-match failure")
 
     def test_summarize_counts_boundary_limited_rows(self) -> None:
         args = argparse.Namespace(search_max_skip=250, sample_hits_per_query=20)
         rows = [
-            row("a", "ABC", 2, 9, 12, 0),
-            row("b", "DEF", 0, "", "", 0),
-            row("c", "ABC", 1, 20, 30, 1),
+            row("a", "ABC", 2, 9, 12, 1, 3, 0, 0),
+            row("b", "DEF", 0, "", "", "", "", 0, 0),
+            row("c", "ABC", 1, 20, 30, 12, 14, 1, 2),
         ]
 
         summary = summarize(rows, args)
@@ -51,9 +73,13 @@ class WrrPerturbationDiagnosticsTests(unittest.TestCase):
         self.assertEqual(summary["rows_without_hits"], 1)
         self.assertEqual(summary["sampled_hits"], 3)
         self.assertEqual(summary["rows_with_sample_under_10_valid"], 1)
+        self.assertEqual(summary["rows_with_sample_under_10_exact_matches"], 1)
         self.assertEqual(summary["min_in_bounds_perturbations"], 9)
         self.assertEqual(summary["max_in_bounds_perturbations"], 20)
+        self.assertEqual(summary["min_exact_perturbation_matches"], 1)
+        self.assertEqual(summary["max_exact_perturbation_matches"], 12)
         self.assertEqual(summary["ordinary_in_bounds_failures"], 1)
+        self.assertEqual(summary["ordinary_exact_match_failures"], 2)
 
     def test_boundary_term_displays_transliteration_and_english_gloss(self) -> None:
         rendered = display_boundary_term(
@@ -73,7 +99,10 @@ def row(
     sampled_hits: int,
     min_valid: object,
     max_valid: object,
+    min_exact: object,
+    max_exact: object,
     failures: int,
+    exact_failures: int,
 ) -> dict[str, object]:
     return {
         "term_id": term_id,
@@ -81,7 +110,10 @@ def row(
         "sampled_hits": sampled_hits,
         "min_in_bounds_perturbations": min_valid,
         "max_in_bounds_perturbations": max_valid,
+        "min_exact_perturbation_matches": min_exact,
+        "max_exact_perturbation_matches": max_exact,
         "ordinary_in_bounds_failures": failures,
+        "ordinary_exact_match_failures": exact_failures,
     }
 
 

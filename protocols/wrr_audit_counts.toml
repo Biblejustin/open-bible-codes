@@ -349,7 +349,7 @@ outputs = [
 
 [[steps]]
 id = "diagnose_wrr2_perturbations"
-description = "Sample WRR-style perturbation boundary validity for imported 5..8-letter rows."
+description = "Sample WRR-style perturbation boundary and exact-match validity for imported 5..8-letter rows."
 argv = [
   "-m", "scripts.analyze_wrr_perturbation_diagnostics",
   "--terms", "reports/wrr_1994/wrr2_terms.csv",

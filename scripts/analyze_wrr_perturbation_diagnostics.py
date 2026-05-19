@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Diagnose WRR-style perturbation boundary behavior for imported terms."""
+"""Diagnose WRR-style perturbation boundary and exact-match behavior."""
 
 from __future__ import annotations
 
@@ -19,6 +19,7 @@ from els.search import iter_els_query_matches_by_lanes, normalize_for_corpus
 from els.term_display import display_term
 from els.wrr import (
     expected_els_count,
+    is_perturbed_els_match,
     perturbed_offsets,
     perturbation_triples,
     relative_letter_frequencies,
@@ -53,7 +54,11 @@ FIELDNAMES = [
     "min_in_bounds_perturbations",
     "median_in_bounds_perturbations",
     "max_in_bounds_perturbations",
+    "min_exact_perturbation_matches",
+    "median_exact_perturbation_matches",
+    "max_exact_perturbation_matches",
     "ordinary_in_bounds_failures",
+    "ordinary_exact_match_failures",
     "read",
 ]
 
@@ -67,10 +72,15 @@ SUMMARY_FIELDNAMES = [
     "rows_without_hits",
     "sampled_hits",
     "rows_with_sample_under_10_valid",
+    "rows_with_sample_under_10_exact_matches",
     "min_in_bounds_perturbations",
     "median_in_bounds_perturbations",
     "max_in_bounds_perturbations",
+    "min_exact_perturbation_matches",
+    "median_exact_perturbation_matches",
+    "max_exact_perturbation_matches",
     "ordinary_in_bounds_failures",
+    "ordinary_exact_match_failures",
 ]
 
 
@@ -233,12 +243,33 @@ def diagnostic_rows(
             )
             for sample in samples
         ]
+        exact_counts = [
+            exact_perturbation_match_count(
+                text=corpus.text,
+                word=term.normalized,
+                start=sample.start,
+                skip=sample.skip,
+                triples=triples,
+            )
+            for sample in samples
+        ]
         ordinary_failures = sum(
             1
             for sample in samples
             if not offsets_in_bounds(
                 perturbed_offsets(sample.start, sample.skip, term.length, (0, 0, 0)),
                 len(corpus.text),
+            )
+        )
+        ordinary_exact_failures = sum(
+            1
+            for sample in samples
+            if not is_perturbed_els_match(
+                corpus.text,
+                term.normalized,
+                sample.start,
+                sample.skip,
+                (0, 0, 0),
             )
         )
         rows.append(
@@ -258,8 +289,19 @@ def diagnostic_rows(
                 "min_in_bounds_perturbations": min(valid_counts) if valid_counts else "",
                 "median_in_bounds_perturbations": median_int(valid_counts) if valid_counts else "",
                 "max_in_bounds_perturbations": max(valid_counts) if valid_counts else "",
+                "min_exact_perturbation_matches": min(exact_counts) if exact_counts else "",
+                "median_exact_perturbation_matches": median_int(exact_counts)
+                if exact_counts
+                else "",
+                "max_exact_perturbation_matches": max(exact_counts) if exact_counts else "",
                 "ordinary_in_bounds_failures": ordinary_failures,
-                "read": diagnostic_read(valid_counts, ordinary_failures),
+                "ordinary_exact_match_failures": ordinary_exact_failures,
+                "read": diagnostic_read(
+                    valid_counts,
+                    exact_counts,
+                    ordinary_failures,
+                    ordinary_exact_failures,
+                ),
             }
         )
     return rows
@@ -281,6 +323,22 @@ def valid_perturbation_count(
     )
 
 
+def exact_perturbation_match_count(
+    *,
+    text: str,
+    word: str,
+    start: int,
+    skip: int,
+    triples: tuple[tuple[int, int, int], ...] | None = None,
+) -> int:
+    active_triples = triples if triples is not None else perturbation_triples()
+    return sum(
+        1
+        for triple in active_triples
+        if is_perturbed_els_match(text, word, start, skip, triple)
+    )
+
+
 def offsets_in_bounds(offsets: tuple[int, ...], text_length: int) -> bool:
     if text_length < 1:
         raise ValueError("text_length must be > 0")
@@ -291,14 +349,23 @@ def median_int(values: list[int]) -> int:
     return int(statistics.median(values))
 
 
-def diagnostic_read(valid_counts: list[int], ordinary_failures: int) -> str:
+def diagnostic_read(
+    valid_counts: list[int],
+    exact_counts: list[int],
+    ordinary_failures: int,
+    ordinary_exact_failures: int,
+) -> str:
     if ordinary_failures:
         return "ordinary hit boundary failure"
+    if ordinary_exact_failures:
+        return "ordinary hit exact-match failure"
     if not valid_counts:
         return "no sampled hits"
     if min(valid_counts) < 10:
-        return "sample includes fewer than 10 valid perturbations"
-    return "sample perturbation boundary ok"
+        return "sample includes fewer than 10 in-bound perturbations"
+    if min(exact_counts) < 10:
+        return "sample includes fewer than 10 exact perturbation matches"
+    return "sample perturbation exact-match ok"
 
 
 def summarize(rows: list[dict[str, object]], args: argparse.Namespace) -> dict[str, object]:
@@ -307,6 +374,11 @@ def summarize(rows: list[dict[str, object]], args: argparse.Namespace) -> dict[s
         int(row["min_in_bounds_perturbations"])
         for row in sampled_rows
         if row.get("min_in_bounds_perturbations") not in ("", None)
+    ]
+    exact_counts = [
+        int(row["min_exact_perturbation_matches"])
+        for row in sampled_rows
+        if row.get("min_exact_perturbation_matches") not in ("", None)
     ]
     return {
         "rows": len(rows),
@@ -318,11 +390,22 @@ def summarize(rows: list[dict[str, object]], args: argparse.Namespace) -> dict[s
         "rows_without_hits": len(rows) - len(sampled_rows),
         "sampled_hits": sum(int_or_zero(row.get("sampled_hits")) for row in rows),
         "rows_with_sample_under_10_valid": sum(1 for count in valid_counts if count < 10),
+        "rows_with_sample_under_10_exact_matches": sum(
+            1 for count in exact_counts if count < 10
+        ),
         "min_in_bounds_perturbations": min(valid_counts) if valid_counts else "",
         "median_in_bounds_perturbations": median_int(valid_counts) if valid_counts else "",
         "max_in_bounds_perturbations": max(valid_counts) if valid_counts else "",
+        "min_exact_perturbation_matches": min(exact_counts) if exact_counts else "",
+        "median_exact_perturbation_matches": median_int(exact_counts)
+        if exact_counts
+        else "",
+        "max_exact_perturbation_matches": max(exact_counts) if exact_counts else "",
         "ordinary_in_bounds_failures": sum(
             int_or_zero(row.get("ordinary_in_bounds_failures")) for row in rows
+        ),
+        "ordinary_exact_match_failures": sum(
+            int_or_zero(row.get("ordinary_exact_match_failures")) for row in rows
         ),
     }
 
@@ -337,8 +420,9 @@ def write_markdown(
         "",
         "This report samples imported WRR2 length 5..8 ELS hits and counts how many",
         "of the 125 WRR-style last-three-gap perturbation triples remain inside the",
-        "corpus boundaries. It does not compute proximity `Q(w,w')`, corrected",
-        "distance `c(w,w')`, or the WRR permutation statistic.",
+        "corpus boundaries and how many still spell the same term exactly. It does",
+        "not compute proximity `Q(w,w')`, corrected distance `c(w,w')`, or the WRR",
+        "permutation statistic.",
         "",
         "## Summary",
         "",
@@ -350,15 +434,16 @@ def write_markdown(
     lines.extend(
         [
             "",
-            "## Boundary-Limited Rows",
+            "## Boundary/Exact-Limited Rows",
             "",
-            "| Term | Hits sampled | Min valid perturbations | Read |",
-            "| --- | ---: | ---: | --- |",
+            "| Term | Hits sampled | Min in-bound | Min exact | Read |",
+            "| --- | ---: | ---: | ---: | --- |",
         ]
     )
     boundary_rows = sorted(
         rows,
         key=lambda row: (
+            int_or_large(row.get("min_exact_perturbation_matches")),
             int_or_large(row.get("min_in_bounds_perturbations")),
             str(row["term_id"]),
         ),
@@ -371,6 +456,7 @@ def write_markdown(
                     display_boundary_term(row),
                     str(row["sampled_hits"]),
                     str(row["min_in_bounds_perturbations"]),
+                    str(row["min_exact_perturbation_matches"]),
                     str(row["read"]),
                 ]
             )
@@ -381,8 +467,8 @@ def write_markdown(
             "",
             "## Caution",
             "",
-            "This is only a boundary diagnostic for future corrected-distance work.",
-            "A row with enough in-bound perturbations is not evidence for WRR; it only",
+            "This is only a term-hit diagnostic for future corrected-distance work.",
+            "A row with enough exact perturbed matches is not evidence for WRR; it only",
             "means that the sampled ordinary ELS rows are not blocked by this one",
             "source-described validity condition.",
         ]

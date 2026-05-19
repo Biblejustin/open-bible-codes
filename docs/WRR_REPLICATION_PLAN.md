@@ -60,6 +60,10 @@ Already implemented:
 - WRR defined-domain-only ordinary `Q(w,w')` diagnostic in
   `scripts/analyze_wrr_ordinary_q.py`, wired into
   `protocols/wrr_audit_counts.toml`.
+- WRR sampled perturbation diagnostic in
+  `scripts/analyze_wrr_perturbation_diagnostics.py`, wired into
+  `protocols/wrr_audit_counts.toml`, now splitting in-bound perturbations from
+  exact perturbed matches.
 
 Source audit:
 
