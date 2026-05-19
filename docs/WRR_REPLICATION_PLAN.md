@@ -45,6 +45,7 @@ Already implemented:
 - WRR statistic arithmetic helpers in `els/wrr.py` for skip-window expectation,
   conservative supplied-row domain labeling for unambiguous shorter-skip cases,
   candidate-domain enumeration for enclosing shorter-skip ambiguity,
+  exact perturbed-ELS match checks,
   domain-weighted `Q(w,w')` summation over already-domain-labeled ELS rows,
   strict WRR 1994 corrected-distance rank over already-computed perturbation
   proximities, `P1`, `P2`, permutation rank, and Bonferroni `rho0`.
@@ -74,8 +75,8 @@ Still needed:
   current eligibility table is lock prep, not the canonical 163-distance table;
 - replication-grade generated or reviewed future file `terms/[wrr_1994_rabbis].csv`;
 - replication-grade generated or reviewed future file `terms/[wrr_1994_dates].csv`;
-- WRR undefined-domain policy, perturbed `Q`, and full corrected-distance
-  implementation for `c(w,w')`;
+- WRR undefined-domain policy, real-pair perturbed `Q`, and full
+  corrected-distance implementation for `c(w,w')`;
 - WRR aggregate runner for `P1`, `P2`, `P3`, and `P4` over all declared pairs
   once `c(w,w')` exists;
 - permutation driver that shuffles date/rabbi pairings under the declared rule;

@@ -9,6 +9,8 @@ from els.wrr import (
     cylindrical_letter_distance_squared,
     els_window_count,
     expected_els_count,
+    is_perturbed_els_match,
+    iter_perturbed_els_matches,
     nearest_integer_half_up,
     ordinary_els_offsets,
     p1_binomial_tail,
@@ -78,6 +80,43 @@ class WrrStatsTests(unittest.TestCase):
         )
 
         self.assertEqual(offsets, (20, 18, 16, 11))
+
+    def test_perturbed_els_match_checks_actual_letters(self) -> None:
+        text = "AXXBXCXD"
+
+        self.assertTrue(is_perturbed_els_match(text, "ABCD", 0, 2, (1, 0, 0)))
+        self.assertFalse(is_perturbed_els_match(text, "ABCD", 0, 2, (0, 0, 0)))
+
+    def test_perturbed_els_match_returns_false_outside_text(self) -> None:
+        self.assertFalse(is_perturbed_els_match("ABC", "ABCD", 0, 1, (0, 0, 0)))
+
+    def test_iter_perturbed_els_matches_finds_forward_hits(self) -> None:
+        matches = list(
+            iter_perturbed_els_matches(
+                "AXXBXCXD",
+                "ABCD",
+                min_skip=2,
+                max_skip=2,
+                direction="forward",
+                perturbation=(1, 0, 0),
+            )
+        )
+
+        self.assertEqual(matches, [(0, 2, (0, 3, 5, 7))])
+
+    def test_iter_perturbed_els_matches_finds_backward_hits(self) -> None:
+        matches = list(
+            iter_perturbed_els_matches(
+                "DXCXBXXA",
+                "ABCD",
+                min_skip=2,
+                max_skip=2,
+                direction="backward",
+                perturbation=(-1, 0, 0),
+            )
+        )
+
+        self.assertEqual(matches, [(7, -2, (7, 4, 2, 0))])
 
     def test_nearest_integer_half_up_rounds_halves_upward(self) -> None:
         self.assertEqual(nearest_integer_half_up(10, 3), 3)
@@ -301,6 +340,29 @@ class WrrStatsTests(unittest.TestCase):
             perturbed_offsets(0, 1, 3, (0, 0, 0))
         with self.assertRaises(ValueError):
             perturbed_offsets(0, 1, 4, (0, 0))  # type: ignore[arg-type]
+        with self.assertRaises(ValueError):
+            is_perturbed_els_match("", "ABCD", 0, 1, (0, 0, 0))
+        with self.assertRaises(ValueError):
+            is_perturbed_els_match("ABCD", "", 0, 1, (0, 0, 0))
+        with self.assertRaises(ValueError):
+            list(
+                iter_perturbed_els_matches(
+                    "ABCD",
+                    "ABCD",
+                    min_skip=0,
+                    max_skip=1,
+                )
+            )
+        with self.assertRaises(ValueError):
+            list(
+                iter_perturbed_els_matches(
+                    "ABCD",
+                    "ABCD",
+                    min_skip=1,
+                    max_skip=1,
+                    direction="sideways",
+                )
+            )
         with self.assertRaises(ValueError):
             nearest_integer_half_up(-1, 1)
         with self.assertRaises(ValueError):

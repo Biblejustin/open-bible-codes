@@ -85,8 +85,9 @@ Already implemented:
   `f^2 + f'^2 + l^2 + 1`, use `f' = 1` for surface-letter strings, and sum
   the inverse distances across declared candidate row widths.
 - `P1`, `P2`, permutation-rank, and Bonferroni `rho0` helpers in `els/wrr.py`;
-- WRR perturbation triples, perturbed-offset generation, and first-ten
-  row-width helpers in `els/wrr.py`;
+- WRR perturbation triples, perturbed-offset generation, exact perturbed-ELS
+  match checks, bounded perturbed-match iteration, and first-ten row-width
+  helpers in `els/wrr.py`;
 - strict WRR 1994 corrected-distance rank helper in `els/wrr.py` for
   already-computed perturbation proximities. This helper implements the
   Appendix A.2 `v/m` step with strict greater-than counting.
@@ -120,7 +121,9 @@ Not yet implemented:
 - source-checked handling for undefined domain rows before they are used in a
   reproduction driver;
 - perturbed `Q(x,y,z)(w,w')` and corrected-distance `c(w,w')` calculation over
-  real word pairs;
+  real word pairs. The low-level exact perturbed-ELS match helper exists, but
+  there is not yet an optimized real-pair driver that computes all perturbed
+  proximity values.
 - permutation driver over the locked personality/date pair table.
 
 ## Ambiguities To Pin Before Code

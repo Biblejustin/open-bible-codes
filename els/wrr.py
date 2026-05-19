@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import math
 from collections import Counter
-from collections.abc import Iterable, Mapping
+from collections.abc import Iterable, Iterator, Mapping
 from dataclasses import dataclass
 
 
@@ -92,6 +92,70 @@ def perturbed_offsets(
             adjustment = x + y + z
         offsets.append(start + index * skip + adjustment)
     return tuple(offsets)
+
+
+def is_perturbed_els_match(
+    text: str,
+    word: str,
+    start: int,
+    skip: int,
+    perturbation: tuple[int, int, int],
+) -> bool:
+    """Return whether one WRR perturbed ELS exactly spells `word` in `text`."""
+
+    if not text:
+        raise ValueError("text must not be empty")
+    if not word:
+        raise ValueError("word must not be empty")
+    offsets = perturbed_offsets(start, skip, len(word), perturbation)
+    return all(
+        0 <= offset < len(text) and text[offset] == letter
+        for offset, letter in zip(offsets, word)
+    )
+
+
+def iter_perturbed_els_matches(
+    text: str,
+    word: str,
+    *,
+    min_skip: int,
+    max_skip: int,
+    direction: str = "both",
+    perturbation: tuple[int, int, int] = (0, 0, 0),
+    max_hits: int | None = None,
+) -> Iterator[tuple[int, int, tuple[int, ...]]]:
+    """Yield exact WRR perturbed ELS matches for bounded diagnostics."""
+
+    if not text:
+        raise ValueError("text must not be empty")
+    if not word:
+        raise ValueError("word must not be empty")
+    if min_skip < 1:
+        raise ValueError("min_skip must be >= 1")
+    if max_skip < min_skip:
+        raise ValueError("max_skip must be >= min_skip")
+    if direction not in {"forward", "backward", "both"}:
+        raise ValueError("direction must be forward, backward, or both")
+    if max_hits is not None and max_hits < 1:
+        raise ValueError("max_hits must be >= 1")
+
+    yielded = 0
+    skips: list[int] = []
+    if direction in {"forward", "both"}:
+        skips.extend(range(min_skip, max_skip + 1))
+    if direction in {"backward", "both"}:
+        skips.extend(range(-min_skip, -max_skip - 1, -1))
+    for skip in skips:
+        for start in range(len(text)):
+            offsets = perturbed_offsets(start, skip, len(word), perturbation)
+            if all(
+                0 <= offset < len(text) and text[offset] == letter
+                for offset, letter in zip(offsets, word)
+            ):
+                yield start, skip, offsets
+                yielded += 1
+                if max_hits is not None and yielded >= max_hits:
+                    return
 
 
 def nearest_integer_half_up(numerator: int, denominator: int) -> int:
