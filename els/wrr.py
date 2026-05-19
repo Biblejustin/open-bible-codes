@@ -311,6 +311,47 @@ def corrected_distance_rank(
     set. The ordinary `(0, 0, 0)` value must be present in that set.
     """
 
+    values = validate_corrected_distance_inputs(
+        ordinary_proximity,
+        perturbation_proximities,
+        minimum_valid=minimum_valid,
+    )
+    equal = sum(1 for value in values if value == ordinary_proximity)
+    greater = sum(1 for value in values if value > ordinary_proximity)
+    tied_others = equal - 1
+    rank = greater + 0.5 * tied_others
+    return rank / len(values)
+
+
+def corrected_distance_strict_rank(
+    ordinary_proximity: float,
+    perturbation_proximities: Iterable[float],
+    *,
+    minimum_valid: int = 10,
+) -> float:
+    """Return WRR 1994 Appendix A.2 corrected-distance rank `v / m`.
+
+    The 1994 paper defines `v(w,w')` as the number of valid perturbation
+    proximities greater than the ordinary proximity and `m(w,w')` as the
+    number of valid perturbation triples. Unlike the WRR2 tie-aware helper
+    above, this source formula does not half-weight tied perturbations.
+    """
+
+    values = validate_corrected_distance_inputs(
+        ordinary_proximity,
+        perturbation_proximities,
+        minimum_valid=minimum_valid,
+    )
+    greater = sum(1 for value in values if value > ordinary_proximity)
+    return greater / len(values)
+
+
+def validate_corrected_distance_inputs(
+    ordinary_proximity: float,
+    perturbation_proximities: Iterable[float],
+    *,
+    minimum_valid: int,
+) -> list[float]:
     if minimum_valid < 1:
         raise ValueError("minimum_valid must be >= 1")
     if not math.isfinite(ordinary_proximity):
@@ -324,10 +365,7 @@ def corrected_distance_rank(
     equal = sum(1 for value in values if value == ordinary_proximity)
     if equal == 0:
         raise ValueError("ordinary proximity must be present in perturbation set")
-    greater = sum(1 for value in values if value > ordinary_proximity)
-    tied_others = equal - 1
-    rank = greater + 0.5 * tied_others
-    return rank / len(values)
+    return values
 
 
 def els_window_count(text_length: int, word_length: int, max_skip: int) -> int:

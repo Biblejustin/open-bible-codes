@@ -37,8 +37,11 @@ The paper's Appendix A.1 and A.2 define these pieces:
 - Perturbed ELS offsets keep the early letters on the ordinary progression and
   perturb the last three gaps:
   `n, n+d, ..., n+(k-4)d, n+(k-3)d+x, n+(k-2)d+x+y, n+(k-1)d+x+y+z`.
+- The 1994 Appendix A.2 formula defines `v(w,w')` as the number of valid
+  triples whose perturbed proximity is greater than the ordinary proximity, and
+  `c(w,w') = v(w,w') / m(w,w')`, where `m(w,w')` is the number of valid triples.
 - The corrected distance is undefined if the ordinary `(0,0,0)` case is not in
-  the valid perturbation set or if fewer than 10 perturbation triples are valid.
+  the valid perturbation set or if `m(w,w') < 10`.
 
 ## Current Repo Coverage
 
@@ -58,11 +61,13 @@ Already implemented:
 - `P1`, `P2`, permutation-rank, and Bonferroni `rho0` helpers in `els/wrr.py`;
 - WRR perturbation triples, perturbed-offset generation, and first-ten
   row-width helpers in `els/wrr.py`;
-- corrected-distance rank helper in `els/wrr.py` for already-computed
-  perturbation proximities. The helper follows the WRR2 methodology-page
-  formula `c = v/m`, where `v` counts perturbed proximities greater than the
-  ordinary proximity and half-weights tied non-ordinary perturbations. A
-  uniquely strongest ordinary proximity therefore has corrected distance `0`.
+- strict WRR 1994 corrected-distance rank helper in `els/wrr.py` for
+  already-computed perturbation proximities. This helper implements the
+  Appendix A.2 `v/m` step with strict greater-than counting.
+- tie-aware corrected-distance rank helper in `els/wrr.py` for methodology-page
+  diagnostics where tied non-ordinary perturbations are half-weighted. A
+  uniquely strongest ordinary proximity has corrected distance `0` under both
+  helpers.
 - imported WRR2 term rows from the secondary ANU/McKay source under ignored
   `reports/wrr_1994/`;
 - count, same-record pair-audit, pair-control, and skip-cap smoke reports.
@@ -87,28 +92,34 @@ Already implemented:
 Not yet implemented:
 
 - WRR domain-of-minimality segmentation;
-- exact `Q(w,w')` proximity aggregation;
-- corrected-distance `c(w,w')` calculation from the ranked perturbation
-  proximities;
+- exact `Q(w,w')` proximity aggregation with domains of minimality;
+- corrected-distance `c(w,w')` calculation over real word pairs from those
+  `Q` and perturbed-`Q` values;
 - permutation driver over the locked personality/date pair table.
 
 ## Ambiguities To Pin Before Code
 
-1. Tie handling in the original 1994 formula transcription.
+1. Tie handling across related methodology descriptions.
 
-   The WRR2 methodology page says ties among perturbation proximities are
-   half-weighted when ranking the ordinary proximity, and defines `c = v/m`.
-   `els/wrr.py` now has a helper for that rank step. The paper PDF extraction
-   is less clean at the exact formula line, so keep source notes visible before
-   claiming a full 1994 reproduction.
+   The 1994 paper's Appendix A.2 text defines `v(w,w')` with strict
+   greater-than counting, while a related methodology-page diagnostic uses
+   half-weighted ties. `els/wrr.py` keeps both helpers separate. Use the strict
+   helper for WRR 1994 replication work unless a source-specific diagnostic
+   says otherwise.
 
-2. ELS-vs-ELS versus ELS-vs-surface-text.
+2. Full `Q(w,w')` aggregation.
+
+   The rank helper only consumes already-computed ordinary and perturbed
+   proximity values. It does not yet compute the domain-of-minimality weighted
+   `Q(w,w')` values needed by the paper.
+
+3. ELS-vs-ELS versus ELS-vs-surface-text.
 
    The WRR 1994 paper compares two ELS words. The WRR2/Nations page documents a
    related but not identical ELS-vs-surface-word version. Use the 1994 paper for
    rabbi/date reproduction.
 
-3. Pair table.
+4. Pair table.
 
    The current imported WRR2 file emits 199 source rows, 182 raw same-record
    appellation/date combinations, 165 pairs after an appellation length >= 5
@@ -123,8 +134,9 @@ Not yet implemented:
 
 1. Reconcile the canonical WRR pair table against a primary or citable
    transcription.
-2. Only after the pair table is reconciled, implement `Q(w,w')` and
-   `c(w,w')`.
+2. Implement source-backed `Q(w,w')` with domain-of-minimality weights.
+3. Feed those ordinary and perturbed `Q` values through the strict WRR 1994
+   rank helper to produce `c(w,w')`.
 
 ## Current Read
 

@@ -43,7 +43,8 @@ Already implemented:
 - top WRR pair-audit control screen in `scripts/analyze_wrr_pair_controls.py`.
 - WRR appendix-compatible length `5..8` audit/control smoke in the same protocol.
 - WRR statistic arithmetic helpers in `els/wrr.py` for skip-window expectation,
-  `P1`, `P2`, permutation rank, and Bonferroni `rho0`.
+  strict WRR 1994 corrected-distance rank over already-computed perturbation
+  proximities, `P1`, `P2`, permutation rank, and Bonferroni `rho0`.
 - WRR expected-count skip-cap audit in `scripts/analyze_wrr_skip_caps.py`.
 - WRR lock-prep pair eligibility table in
   `scripts/build_wrr_pair_eligibility_table.py`, joining imported pair rows,
@@ -64,7 +65,8 @@ Still needed:
   current eligibility table is lock prep, not the canonical 163-distance table;
 - replication-grade generated or reviewed future file `terms/[wrr_1994_rabbis].csv`;
 - replication-grade generated or reviewed future file `terms/[wrr_1994_dates].csv`;
-- WRR corrected-distance implementation for `c(w,w')`;
+- WRR `Q(w,w')` aggregation and full corrected-distance implementation for
+  `c(w,w')`;
 - WRR aggregate runner for `P1`, `P2`, `P3`, and `P4` over all declared pairs
   once `c(w,w')` exists;
 - permutation driver that shuffles date/rabbi pairings under the declared rule;
