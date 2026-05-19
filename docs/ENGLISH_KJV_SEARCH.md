@@ -99,3 +99,49 @@ This is a screening list, not an interpretation. KJV uses English translation
 surface forms, so a Hebrew source concept may need multiple English renderings
 for a serious claim test. Example: `YHWH` can be screened as `YHWH`, but KJV
 surface convention normally uses `LORD`.
+
+## Private English Version Comparison
+
+Local-only configs are available for user-supplied copyrighted English texts:
+
+- `configs/local_nlt.toml`
+- `configs/local_msg.toml`
+- `configs/local_tpt.toml`
+- `configs/local_niv.toml`
+
+Place CSVs under `data/private/english/`; that path is ignored by git. Then run:
+
+```bash
+python3 -m scripts.run_protocol protocols/private_english_versions.toml --resume
+```
+
+See `docs/PRIVATE_ENGLISH_VERSIONS.md` for file format and copyright limits.
+
+For the full BibleGateway English-version list, use:
+
+```bash
+python3 -m scripts.run_protocol protocols/biblegateway_english_versions.toml --resume
+```
+
+The manifest is `configs/biblegateway_english_versions.csv`. Missing local CSVs
+are reported locally under `reports/biblegateway_english_versions/`.
+
+For additional open/CC eBible English controls, use:
+
+```bash
+python3 -m scripts.download_ebible_english_controls --skip-existing
+python3 -m scripts.run_protocol protocols/ebible_english_controls.toml --resume
+```
+
+The control manifest is `configs/ebible_english_controls.csv`.
+
+Then compare the BibleGateway-overlap set against those controls:
+
+```bash
+python3 -m scripts.run_protocol protocols/english_version_control_triage.toml --resume
+```
+
+Main outputs:
+
+- `reports/english_version_control_triage/triage.md`
+- `reports/english_version_control_triage/context_review.md`

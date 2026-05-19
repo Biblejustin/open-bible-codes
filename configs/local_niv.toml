@@ -1,0 +1,12 @@
+name = "Local Private English NIV"
+language = "english"
+
+[[sources]]
+name = "NIV"
+format = "csv"
+path = "../data/private/english/niv.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

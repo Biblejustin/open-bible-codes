@@ -1,0 +1,64 @@
+name = "private_english_versions"
+description = "Local-only English translation screening against KJV, AMPC, NLT, MSG, TPT, and NIV."
+manifest_out = "reports/private_english_versions/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "private_english_version_counts"
+description = "Count generated English search terms across public KJV plus local private English versions."
+argv = [
+  "-m", "els", "batch-many",
+  "--term-set", "english_search_terms=terms/english_search_terms.csv",
+  "--corpus", "KJV=configs/example_ebible_engkjv.toml",
+  "--corpus", "AMPC=configs/local_ampc.toml",
+  "--corpus", "NLT=configs/local_nlt.toml",
+  "--corpus", "MSG=configs/local_msg.toml",
+  "--corpus", "TPT=configs/local_tpt.toml",
+  "--corpus", "NIV=configs/local_niv.toml",
+  "--min-skip", "2",
+  "--max-skip", "100",
+  "--jobs", "1",
+  "--corpus-jobs", "1",
+  "--out-dir", "reports/private_english_versions",
+  "--manifest-out", "reports/private_english_versions/private_english_versions.manifest.json",
+]
+inputs = [
+  "terms/english_search_terms.csv",
+  "configs/example_ebible_engkjv.toml",
+  "configs/local_ampc.toml",
+  "configs/local_nlt.toml",
+  "configs/local_msg.toml",
+  "configs/local_tpt.toml",
+  "configs/local_niv.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/private_english_versions/english_search_terms_counts.csv",
+  "reports/private_english_versions/english_search_terms_counts.manifest.json",
+  "reports/private_english_versions/private_english_versions.manifest.json",
+]
+
+[[steps]]
+id = "private_english_version_presence"
+description = "Summarize which English terms appear across KJV and local private English versions."
+argv = [
+  "-m", "scripts.analyze_broad_version_presence",
+  "--counts-dir", "reports/private_english_versions",
+  "--summary-out", "reports/private_english_versions/version_presence.csv",
+  "--markdown-out", "reports/private_english_versions/version_presence.md",
+  "--manifest-out", "reports/private_english_versions/version_presence.manifest.json",
+]
+inputs = [
+  "scripts/analyze_broad_version_presence.py",
+  "els/term_display.py",
+  "reports/private_english_versions/english_search_terms_counts.csv",
+  "reports/private_english_versions/english_search_terms_counts.manifest.json",
+]
+outputs = [
+  "reports/private_english_versions/version_presence.csv",
+  "reports/private_english_versions/version_presence.md",
+  "reports/private_english_versions/version_presence.manifest.json",
+]

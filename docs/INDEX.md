@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 270
+Documents indexed: 277
 
 ## Controls
 
@@ -19,6 +19,7 @@ Documents indexed: 270
 | Strong Control Full-Span Exact-Center Extensions | `DYNAMIC_SKIP_STRONG_CONTROL_FULL_SPAN_EXACT_CENTER_EXTENSIONS.md` |
 | Strong Control Manageable Full-Span Hit Export | `DYNAMIC_SKIP_STRONG_CONTROL_MANAGEABLE_FULL_SPAN_HIT_EXPORT.md` |
 | ELS Statistical Controls | `ELS_CONTROLS.md` |
+| English Seed Paired Controls 1000 | `ENGLISH_SEED_PAIRED_CONTROLS_1000.md` |
 | Extension Exact-Center Cohort Controls | `EXTENSION_EXACT_CENTER_COHORT_CONTROLS.md` |
 | Extension Exact-Center Controls | `EXTENSION_EXACT_CENTER_CONTROLS.md` |
 | Extension Exact-Center Deep Controls | `EXTENSION_EXACT_CENTER_DEEP_CONTROLS.md` |
@@ -131,6 +132,7 @@ Documents indexed: 270
 | Doxa Follow-Up Report | `DOXA_FOLLOWUP_REPORT.md` |
 | Doxa Four-Source Claim Follow-Up Report | `DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md` |
 | Doxa Four-Source Confirmatory Follow-Up Report | `DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md` |
+| English Seed Shuffle Follow-Up Report | `ENGLISH_SEED_SHUFFLE_FOLLOWUP_REPORT.md` |
 | Open Bible Codes Final Report | `FINAL_REPORT.md` |
 | Gog/Magog Pair Prospective Report | `GOG_MAGOG_PAIR_PROSPECTIVE_REPORT.md` |
 | Greek Exact-Center Cohort Report | `GREEK_EXACT_CENTER_COHORT_REPORT.md` |
@@ -204,6 +206,7 @@ Documents indexed: 270
 | English KJV Search | `ENGLISH_KJV_SEARCH.md` |
 | English KJV Screening All-Codes Collection | `ENGLISH_SCREENING_ALL_CODES_COLLECTION.md` |
 | English KJV Screening All-Codes Triage | `ENGLISH_SCREENING_ALL_CODES_TRIAGE.md` |
+| English Seed Survivor Audit | `ENGLISH_SEED_SURVIVOR_AUDIT.md` |
 | Expanded Strata Tooling | `EXPANDED_STRATA_TOOLING.md` |
 | Extension Context Review | `EXTENSION_CONTEXT_REVIEW.md` |
 | Extension Exact-Center Cohort Review | `EXTENSION_EXACT_CENTER_COHORT_REVIEW.md` |
@@ -254,6 +257,7 @@ Documents indexed: 270
 | Modern Extension Screen | `MODERN_EXTENSION_SCREEN.md` |
 | Modern Names And Dates | `MODERN_NAMES_DATES.md` |
 | Morphology Counts Study | `MORPHOLOGY_COUNTS_STUDY.md` |
+| MT-LXX Reciprocal Presence | `MT_LXX_RECIPROCAL_PRESENCE.md` |
 | Notable Passage Gaps | `NOTABLE_PASSAGE_GAPS.md` |
 | Pair Baselines | `PAIR_BASELINES.md` |
 | Pair Compactness | `PAIR_COMPACTNESS.md` |
@@ -265,10 +269,12 @@ Documents indexed: 270
 | Prospective Term Audits | `PROSPECTIVE_TERM_AUDITS.md` |
 | Real Report Run | `REAL_REPORT_RUN.md` |
 | Religions Wiki Scriptural Codes Source Audit | `RELIGIONS_WIKI_SCRIPTURAL_CODES_AUDIT.md` |
+| Remaining Work Register | `REMAINING_WORK_REGISTER.md` |
 | Report Database | `REPORT_DATABASE.md` |
 | Requested Term Expansion Coverage | `REQUESTED_TERM_EXPANSION_COVERAGE.md` |
 | Review Flag Summary | `REVIEW_FLAG_SUMMARY.md` |
 | Skip Planning | `SKIP_PLANNING.md` |
+| Source-Basis Audit Queue | `SOURCE_BASIS_AUDIT_QUEUE.md` |
 | STEP TAHOT Final Gate | `STEP_TAHOT_FINAL_GATE.md` |
 | STEP TAHOT Policy Hit Audit | `STEP_TAHOT_POLICY_HIT_AUDIT.md` |
 | STEP TAHOT Source Audit | `STEP_TAHOT_SOURCE_AUDIT.md` |
@@ -305,6 +311,7 @@ Documents indexed: 270
 | Hebrew Version Presence Comparison | `HEBREW_VERSION_PRESENCE_COMPARISON.md` |
 | Hebrew Version-Specific Distribution | `HEBREW_VERSION_SPECIFIC_DISTRIBUTION.md` |
 | MT Version Comparison | `MT_VERSION_COMPARISON.md` |
+| Private English Versions | `PRIVATE_ENGLISH_VERSIONS.md` |
 | STEP TAHOT Screening Version Presence | `STEP_TAHOT_SCREENING_VERSION_PRESENCE.md` |
 | STEP TAHOT Version Presence Review | `STEP_TAHOT_VERSION_PRESENCE_REVIEW.md` |
 | Targeted Version Presence Review | `TARGETED_VERSION_PRESENCE_REVIEW.md` |

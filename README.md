@@ -141,6 +141,82 @@ and generated English concept terms from `terms/english_search_terms.csv`.
 Combined current read over broad search, wide focus, controls, and same-skip
 extensions: `docs/BROADER_SEARCH_FINDINGS.md`.
 
+Local-only English version comparison is available for user-supplied AMPC, NLT,
+MSG, TPT, and NIV CSVs kept outside git:
+
+```bash
+python3 -m scripts.run_protocol protocols/private_english_versions.toml --resume
+```
+
+Setup notes: `docs/PRIVATE_ENGLISH_VERSIONS.md`.
+
+Full BibleGateway English-version local hooks:
+
+```bash
+python3 -m scripts.run_protocol protocols/biblegateway_english_versions.toml --resume
+```
+
+Version manifest: `configs/biblegateway_english_versions.csv`.
+
+Current broad refresh has 34 available BibleGateway-overlap English versions
+and skips 30 missing local CSVs. Missing rows are listed in
+`reports/biblegateway_english_versions/missing_versions.csv`.
+
+Additional open/CC eBible English control corpora:
+
+```bash
+python3 -m scripts.download_ebible_english_controls --skip-existing
+python3 -m scripts.run_protocol protocols/ebible_english_controls.toml --resume
+```
+
+Control manifest: `configs/ebible_english_controls.csv`.
+
+Compare the BibleGateway-overlap set against those controls and inspect the
+strongest seed-term contexts:
+
+```bash
+python3 -m scripts.run_protocol protocols/english_version_control_triage.toml --resume
+```
+
+Exploratory shuffled-letter baseline for observed English seed-term hits:
+
+```bash
+python3 -m scripts.run_protocol protocols/english_seed_shuffle_baseline.toml --resume
+```
+
+100-sample follow-up for rows that reached the exploratory p-floor:
+
+```bash
+python3 -m scripts.run_protocol protocols/english_seed_shuffle_followup_100.toml --resume
+```
+
+1000-sample same-letter term-shuffle controls for English seed survivors.
+Current 34-version refresh left `terms/english_seed_followup_survivors.csv`
+empty, so leave these downstream survivor commands idle until that file has
+data rows:
+
+```bash
+python3 -m scripts.run_protocol protocols/english_seed_term_shuffle_1000.toml --resume
+```
+
+Letter-path audit packet for English seed survivors:
+
+```bash
+python3 -m scripts.run_protocol protocols/english_seed_survivor_audit.toml --resume
+```
+
+Paired same-letter and corpus-random controls for English seed survivors:
+
+```bash
+python3 -m scripts.run_protocol protocols/english_seed_paired_controls_1000.toml --resume
+```
+
+MT/LXX reciprocal source-language presence gate:
+
+```bash
+python3 -m scripts.run_protocol protocols/mt_lxx_reciprocal_presence.toml --resume
+```
+
 Large non-Bible background controls are available for Hebrew, Greek, and
 English:
 
@@ -693,6 +769,17 @@ python3 -m els stats --config configs/example_ebible_engkjv_apocrypha.toml
 
 This keeps the KJV Apocrypha/Deuterocanon source in a separate `KJVA` corpus
 path so existing 66-book KJV baselines do not change silently.
+
+Private English comparison hooks:
+
+- `configs/local_ampc.toml`
+- `configs/local_nlt.toml`
+- `configs/local_msg.toml`
+- `configs/local_tpt.toml`
+- `configs/local_niv.toml`
+
+These expect local CSV files under `data/private/english/`, which is ignored by
+git. No AMPC, NLT, MSG, TPT, or NIV source text is bundled in this repo.
 
 Compiled Hebrew claim terms:
 

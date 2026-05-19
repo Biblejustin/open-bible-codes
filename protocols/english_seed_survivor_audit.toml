@@ -1,0 +1,30 @@
+name = "english_seed_survivor_audit"
+description = "Conditional letter-path and metadata audit for English seed rows surviving count-control gates."
+manifest_out = "reports/english_seed_survivor_audit/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "english_seed_survivor_audit"
+description = "Build survivor audit packet with exact letter paths and control summaries when the survivor list is non-empty."
+argv = [
+  "-m", "scripts.build_english_seed_survivor_audit",
+  "--corpus", "ERV=configs/example_ebible_engerv.toml",
+  "--corpus", "GW=configs/example_ebible_enggw.toml",
+]
+inputs = [
+  "reports/english_version_control_triage/context_hits.csv",
+  "reports/english_version_control_triage/triage.csv",
+  "reports/english_seed_shuffle_followup_100/summary.csv",
+  "reports/english_seed_term_shuffle_1000/summary.csv",
+  "configs/example_ebible_engerv.toml",
+  "configs/example_ebible_enggw.toml",
+  "scripts/build_english_seed_survivor_audit.py",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/english_seed_survivor_audit/summary.csv",
+  "reports/english_seed_survivor_audit/letter_paths.csv",
+  "docs/ENGLISH_SEED_SURVIVOR_AUDIT.md",
+  "reports/english_seed_survivor_audit/manifest.json",
+]

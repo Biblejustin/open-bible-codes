@@ -1,6 +1,6 @@
 # CRD Concept-Surface Broad Screening Findings
 
-Status: local deterministic broad screening run completed at `2026-05-11T12:33:43.193461+00:00`. Raw artifacts stay under ignored `reports/crd_concept_surface/`; `classified_hits.csv` is 6.59 GB.
+Status: local deterministic broad screening run completed at `2026-05-12T18:14:56.381518+00:00`. Raw artifacts stay under ignored `reports/crd_concept_surface/`; `classified_hits.csv` is 7.07 GB.
 
 ## Scope
 
@@ -41,27 +41,27 @@ make crd-center-word-findings
 
 ## Run Size
 
-- density rows: 22,336
-- term/control comparison rows: 3,522
-- classified hit rows: 1,629,913
+- density rows: 23,012
+- term/control comparison rows: 3,612
+- classified hit rows: 1,734,450
 - corpora with output: 20
-- nonzero `(term, corpus)` density rows: 13,187
-- compact review queue rows: 419
+- nonzero `(term, corpus)` density rows: 13,795
+- compact review queue rows: 433
 - compact review queue selected terms: 50
-- exact center-word review queue rows: 215
+- exact center-word review queue rows: 233
 - exact center-word review queue selected terms: 50
-- runtime: 8687.731 seconds
+- runtime: 8875.021 seconds
 - API calls: 0
 - estimated API cost: 0.0 USD
 
 ## Headline Counts
 
-- `exceeds_secular_max = true`: 585 / 3,522 terms
-- rows with secular max density = 0: 3,402 / 3,522 terms
-- rows with Bible max > 0 and secular max = 0: 496 / 3,522 terms
-- English exceeds: 197 / 1,460
-- Greek exceeds: 154 / 951
-- Hebrew exceeds: 234 / 1,111
+- `exceeds_secular_max = true`: 629 / 3,612 terms
+- rows with secular max density = 0: 3,478 / 3,612 terms
+- rows with Bible max > 0 and secular max = 0: 529 / 3,612 terms
+- English exceeds: 202 / 1,471
+- Greek exceeds: 160 / 962
+- Hebrew exceeds: 267 / 1,179
 
 Large numbers of secular-zero rows are review-priority flags, not automatic claim promotions. They can reflect dictionary vocabulary and control-corpus coverage.
 
@@ -69,18 +69,18 @@ Large numbers of secular-zero rows are review-priority flags, not automatic clai
 
 Relevant classified-hit rows by scope:
 
-- `bible.center_word`: 1,153
-- `bible.center_verse`: 5,468
-- `bible.span`: 2,530
-- `secular_control.center_word`: 225
+- `bible.center_word`: 1,383
+- `bible.center_verse`: 6,471
+- `bible.span`: 2,844
+- `secular_control.center_word`: 251
 - `secular_control.center_verse`: 0
 - `secular_control.span`: 0
 
 Compact review queue scope:
 
-- `center_verse`: 265
-- `center_word`: 70
-- `span`: 84
+- `center_verse`: 263
+- `center_word`: 71
+- `span`: 99
 
 The exact `center_word` scope is the strictest form: the hidden term is centered directly on the visible matching or same-concept word. `center_verse` and `span` remain broader contextual flags and should be reviewed separately.
 
@@ -91,13 +91,13 @@ The exact `center_word` scope is the strictest form: the hidden term is centered
 | `ישראל` (Yisrael; English: Israel)<br>`cc_israel_h` | hebrew | 52.6297323 | MT_WLC | 0.725114523 | HEB_PBY_AHAD_HAAM | 72.5812691 |
 | `ישראל` (Yisrael; English: Israel)<br>`htp_israel_h` | hebrew | 52.6297323 | MT_WLC | 0.725114523 | HEB_PBY_AHAD_HAAM | 72.5812691 |
 | `ישראל` (Yisrael; English: Israel)<br>`israel_h` | hebrew | 52.6297323 | MT_WLC | 0.725114523 | HEB_PBY_AHAD_HAAM | 72.5812691 |
+| `ישראל` (Yisrael; English: Israel)<br>`npg_israel_h` | hebrew | 52.6297323 | MT_WLC | 0.725114523 | HEB_PBY_AHAD_HAAM | 72.5812691 |
 | `ישראל` (Yisrael; English: Israel)<br>`twn_israel_h` | hebrew | 52.6297323 | MT_WLC | 0.725114523 | HEB_PBY_AHAD_HAAM | 72.5812691 |
 | `יוסף` (ywsp; English: Joseph)<br>`cc_joseph_h` | hebrew | 11.6954961 | MT_WLC | 0.174947546 | HEB_PBY_BIALIK | 66.8514441 |
 | `יוסף` (ywsp; English: Joseph)<br>`joseph_h` | hebrew | 11.6954961 | MT_WLC | 0.174947546 | HEB_PBY_BIALIK | 66.8514441 |
 | `יוסף` (ywsp; English: Joseph Tribe)<br>`joseph_tribe_h` | hebrew | 11.6954961 | MT_WLC | 0.174947546 | HEB_PBY_BIALIK | 66.8514441 |
 | `יוסף` (ywsp; English: Joseph)<br>`mt_joseph_h` | hebrew | 11.6954961 | MT_WLC | 0.174947546 | HEB_PBY_BIALIK | 66.8514441 |
 | `Lord`<br>`eng_lord` | english | 19.2353931 | KJV | 0.739422378 | ENG_PG_SHAKESPEARE | 26.0140803 |
-| `Lord`<br>`eng_lord_2` | english | 19.2353931 | KJV | 0.739422378 | ENG_PG_SHAKESPEARE | 26.0140803 |
 
 ## Strongest Bible Hits With Secular Max Zero
 
@@ -107,25 +107,25 @@ The exact `center_word` scope is the strictest form: the hidden term is centered
 | `יהוה` (YHWH; English: YHWH)<br>`cc_yhwh_h` | hebrew | 50.9589471 | MT_WLC |
 | `יהוה` (YHWH; English: YHWH)<br>`dyn_yhwh_h` | hebrew | 50.9589471 | MT_WLC |
 | `יהוה` (YHWH; English: YHWH)<br>`htp_yhwh_h` | hebrew | 50.9589471 | MT_WLC |
+| `יהוה` (YHWH; English: YHWH)<br>`npg_yhwh_h` | hebrew | 50.9589471 | MT_WLC |
 | `יהוה` (YHWH; English: YHWH)<br>`twn_yhwh_h` | hebrew | 50.9589471 | MT_WLC |
+| `יהוה` (YHWH; English: YHWH)<br>`word_edge_yhwh_h` | hebrew | 50.9589471 | MT_WLC |
 | `יהוה` (YHWH; English: YHWH)<br>`yhwh_h` | hebrew | 50.9589471 | MT_WLC |
 | `אשר` (shr; English: Asher)<br>`asher_h` | hebrew | 34.2510956 | MT_WLC |
 | `יהודה` (Yehudah; English: Judah)<br>`judah_h` | hebrew | 20.8848144 | MT_WLC |
-| `יהודה` (Yehudah; English: Judas Absence)<br>`mt_judas_absence_h` | hebrew | 20.8848144 | MT_WLC |
-| `אדני` (Adonai; English: Lord)<br>`lord_h` | hebrew | 18.3786367 | MT_WLC |
 
 ## Exact Center-Word Subset
 
-- Bible center-word rows: 1,153
-- distinct term IDs with Bible center-word rows: 154
-- exact center-word presence rows: 154
-- distinct visible spellings in presence output: 90
-- center-word-only summary rows: 3,522; `exceeds_secular_max = true`: 141
-- Bible-positive / secular-zero center-word terms: 114
-- English center-word exceeds: 27 / 1,460
-- Greek center-word exceeds: 37 / 951
-- Hebrew center-word exceeds: 77 / 1,111
-- corpus-count distribution: 63 terms in 5 corpus labels, 1 term in 4 corpus labels, 5 terms in 3 corpus labels, 25 terms in 2 corpus labels, 60 terms in 1 corpus label
+- Bible center-word rows: 1,383
+- distinct term IDs with Bible center-word rows: 169
+- exact center-word presence rows: 169
+- distinct visible spellings in presence output: 92
+- center-word-only summary rows: 3,612; `exceeds_secular_max = true`: 155
+- Bible-positive / secular-zero center-word terms: 124
+- English center-word exceeds: 27 / 1,471
+- Greek center-word exceeds: 39 / 962
+- Hebrew center-word exceeds: 89 / 1,179
+- corpus-count distribution: 69 terms in 5 corpus labels, 1 term in 4 corpus labels, 6 terms in 3 corpus labels, 30 terms in 2 corpus labels, 63 terms in 1 corpus label
 
 Top finite center-word-only ratios:
 
@@ -146,27 +146,27 @@ Top Bible-positive / secular-zero center-word terms:
 | `יהוה` (YHWH; English: YHWH)<br>`cc_yhwh_h` | hebrew | 10.0247109 | MT_WLC |
 | `יהוה` (YHWH; English: YHWH)<br>`dyn_yhwh_h` | hebrew | 10.0247109 | MT_WLC |
 | `יהוה` (YHWH; English: YHWH)<br>`htp_yhwh_h` | hebrew | 10.0247109 | MT_WLC |
+| `יהוה` (YHWH; English: YHWH)<br>`npg_yhwh_h` | hebrew | 10.0247109 | MT_WLC |
 | `יהוה` (YHWH; English: YHWH)<br>`twn_yhwh_h` | hebrew | 10.0247109 | MT_WLC |
-| `יהוה` (YHWH; English: YHWH)<br>`yhwh_h` | hebrew | 10.0247109 | MT_WLC |
 
 ## Delta Versus Self-Surface Run
 
-The concept-surface dictionary changed 26 `(term, corpus)` density rows compared with self-surface and created 26 newly nonzero rows.
+The concept-surface dictionary changed 48 `(term, corpus)` density rows compared with self-surface and created 40 newly nonzero rows.
 
 Largest increases by added relevant centered hits:
 
 | Term | Corpus | Concept | Self hits | Concept hits | Added hits |
 | --- | --- | --- | ---: | ---: | ---: |
+| `אדון` (adon; English: Lord)<br>`npg_lord_h` | MAM | Lord | 1 | 13 | 12 |
+| `אדון` (adon; English: Lord)<br>`npg_lord_h` | UHB | Lord | 1 | 13 | 12 |
+| `אדון` (adon; English: Lord)<br>`npg_lord_h` | MT_WLC | Lord | 1 | 12 | 11 |
+| `אדון` (adon; English: Lord)<br>`npg_lord_h` | UXLC | Lord | 1 | 12 | 11 |
+| `אדון` (adon; English: Lord)<br>`npg_lord_h` | EBIBLE_WLC | Lord | 1 | 12 | 11 |
 | `עובד` (wbd; English: Obed)<br>`twn_obed_h` | MT_WLC | Obed | 0 | 7 | 7 |
 | `עובד` (wbd; English: Obed)<br>`twn_obed_h` | UXLC | Obed | 0 | 7 | 7 |
+| `לבב` (lbb; English: Heart)<br>`npg_heart_h` | MT_WLC | Heart | 3 | 7 | 4 |
+| `לבב` (lbb; English: Heart)<br>`npg_heart_h` | UXLC | Heart | 3 | 7 | 4 |
 | `עובד` (wbd; English: Obed)<br>`twn_obed_h` | MAM | Obed | 0 | 4 | 4 |
-| `עובד` (wbd; English: Obed)<br>`twn_obed_h` | EBIBLE_WLC | Obed | 0 | 4 | 4 |
-| `עובד` (wbd; English: Obed)<br>`twn_obed_h` | UHB | Obed | 0 | 4 | 4 |
-| `שטה` (shittah; English: Acacia)<br>`cc_acacia_h` | HEB_PBY_AHAD_HAAM | Acacia | 0 | 4 | 4 |
-| `תתתתתא` (ttttt; English: Gregorian 2001)<br>`year_2001_additive_h` | MT_WLC | Gregorian 2001 | 0 | 2 | 2 |
-| `צור` (tswr; English: Tyre)<br>`tyre_alt_h` | MT_WLC | Tyre | 0 | 2 | 2 |
-| `תתתתתא` (ttttt; English: Gregorian 2001)<br>`year_2001_additive_h` | UXLC | Gregorian 2001 | 0 | 2 | 2 |
-| `צור` (tswr; English: Tyre)<br>`tyre_alt_h` | UXLC | Tyre | 0 | 2 | 2 |
 
 Same-concept expansion broadens recall, but it also broadens control hits. Treat concept-surface rows as a review queue, not as stronger evidence by default.
 

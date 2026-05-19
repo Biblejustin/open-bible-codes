@@ -1,0 +1,12 @@
+name = "eBible GOD'S WORD"
+language = "english"
+
+[[sources]]
+name = "eBible GW"
+format = "csv"
+path = "../data/processed/ebible/enggw.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

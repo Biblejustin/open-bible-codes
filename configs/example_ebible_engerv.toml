@@ -1,0 +1,12 @@
+name = "eBible Easy-to-Read Version"
+language = "english"
+
+[[sources]]
+name = "eBible ERV"
+format = "csv"
+path = "../data/processed/ebible/engerv.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

@@ -1,0 +1,12 @@
+name = "eBible Darby Translation"
+language = "english"
+
+[[sources]]
+name = "eBible DBY"
+format = "csv"
+path = "../data/processed/ebible/engDBY.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

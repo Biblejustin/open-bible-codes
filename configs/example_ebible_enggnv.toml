@@ -1,0 +1,12 @@
+name = "eBible Geneva Bible 1599"
+language = "english"
+
+[[sources]]
+name = "eBible GNV"
+format = "csv"
+path = "../data/processed/ebible/enggnv.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

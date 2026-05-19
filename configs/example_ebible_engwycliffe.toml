@@ -1,0 +1,12 @@
+name = "eBible Wycliffe Bible"
+language = "english"
+
+[[sources]]
+name = "eBible WYC"
+format = "csv"
+path = "../data/processed/ebible/engWycliffe.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

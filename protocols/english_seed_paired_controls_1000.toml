@@ -1,0 +1,56 @@
+name = "english_seed_paired_controls_1000"
+description = "Conditional 1000-sample term-shuffle and corpus-random paired controls for English seed survivors."
+manifest_out = "reports/english_seed_paired_controls_1000/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "survivor_targets"
+description = "Build target-summary rows from the survivor audit output when current survivor rows exist."
+argv = [
+  "-m", "scripts.build_english_seed_survivor_targets",
+]
+inputs = [
+  "reports/english_seed_survivor_audit/summary.csv",
+  "scripts/build_english_seed_survivor_targets.py",
+]
+outputs = [
+  "reports/english_seed_survivor_targets/target_summary.csv",
+  "reports/english_seed_survivor_targets/manifest.json",
+]
+
+[[steps]]
+id = "paired_controls_1000"
+description = "Run same-letter and corpus-random controls for current English survivor target rows."
+argv = [
+  "-m", "scripts.analyze_targeted_paired_controls",
+  "--target-summary", "reports/english_seed_survivor_targets/target_summary.csv",
+  "--corpus", "ERV=configs/example_ebible_engerv.toml",
+  "--corpus", "GW=configs/example_ebible_enggw.toml",
+  "--min-skip", "2",
+  "--max-skip", "100",
+  "--direction", "both",
+  "--term-shuffle-samples", "1000",
+  "--random-samples", "1000",
+  "--seed", "20260522",
+  "--jobs", "4",
+  "--summary-out", "reports/english_seed_paired_controls_1000/summary.csv",
+  "--examples-out", "reports/english_seed_paired_controls_1000/examples.csv",
+  "--markdown-out", "docs/ENGLISH_SEED_PAIRED_CONTROLS_1000.md",
+  "--manifest-out", "reports/english_seed_paired_controls_1000/manifest.json",
+  "--title", "English Seed Paired Controls 1000",
+]
+inputs = [
+  "reports/english_seed_survivor_targets/target_summary.csv",
+  "configs/example_ebible_engerv.toml",
+  "configs/example_ebible_enggw.toml",
+  "scripts/analyze_targeted_paired_controls.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/english_seed_paired_controls_1000/summary.csv",
+  "reports/english_seed_paired_controls_1000/examples.csv",
+  "docs/ENGLISH_SEED_PAIRED_CONTROLS_1000.md",
+  "reports/english_seed_paired_controls_1000/manifest.json",
+]

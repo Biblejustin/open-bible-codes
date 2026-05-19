@@ -1,0 +1,12 @@
+name = "eBible Young's Literal Translation"
+language = "english"
+
+[[sources]]
+name = "eBible YLT"
+format = "csv"
+path = "../data/processed/ebible/engylt.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

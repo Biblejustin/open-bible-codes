@@ -1,0 +1,12 @@
+name = "eBible Orthodox Jewish Bible"
+language = "english"
+
+[[sources]]
+name = "eBible OJB"
+format = "csv"
+path = "../data/processed/ebible/engojb.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

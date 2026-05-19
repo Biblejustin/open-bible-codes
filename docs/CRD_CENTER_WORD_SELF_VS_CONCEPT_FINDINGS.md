@@ -14,21 +14,21 @@ The exact `center_word` subset is stricter than both verse-level and span-level 
 
 ## Result
 
-The Bible exact center-word hit set is identical in the self-surface and concept-surface runs.
+The Bible exact center-word hit set differs between the self-surface and concept-surface runs.
 
-- self-surface Bible exact center-word rows: 1,153
-- concept-surface Bible exact center-word rows: 1,153
-- matching row key set: true
+- self-surface Bible exact center-word rows: 1,379
+- concept-surface Bible exact center-word rows: 1,383
+- matching row key set: false
 - self-only Bible rows: 0
-- concept-only Bible rows: 0
+- concept-only Bible rows: 4
 
 The center-word density summaries are also effectively stable:
 
-- term rows compared: 3,522
-- rows with changed summary values: 2
-- rows with changed Bible max density or Bible max corpus: 0
+- term rows compared: 3,612
+- rows with changed summary values: 3
+- rows with changed Bible max density or Bible max corpus: 1
 - rows with changed `exceeds_secular_max`: 0
-- rows with changed secular max density or corpus: 2
+- rows with changed secular max density or corpus: 3
 
 The changed rows are secular-control changes only:
 
@@ -39,12 +39,12 @@ The changed rows are secular-control changes only:
 
 The exact center-word version-presence view contains:
 
-- exact center-word term rows: 154
-- distinct normalized surface forms: 87
-- exact center-word hit rows: 1,153
-- distinct normalized surface hit paths: 496
-- language distribution: Hebrew 78, Greek 40, English 36
-- corpus-count distribution: 63 terms in 5 corpus labels, 1 term in 4 corpus labels, 5 terms in 3 corpus labels, 25 terms in 2 corpus labels, 60 terms in 1 corpus label
+- exact center-word term rows: 169
+- distinct normalized surface forms: 89
+- exact center-word hit rows: 1,379
+- distinct normalized surface hit paths: 504
+- language distribution: Hebrew 90, Greek 42, English 37
+- corpus-count distribution: 69 terms in 5 corpus labels, 1 term in 4 corpus labels, 6 terms in 3 corpus labels, 30 terms in 2 corpus labels, 63 terms in 1 corpus label
 
 ## Interpretation
 

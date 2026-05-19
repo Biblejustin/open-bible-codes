@@ -99,10 +99,12 @@ Use `docs/CENTERED_OCCURRENCE_INDEX.md` as the source of truth.
 
 Current snapshot:
 
-- 589 unique term-center presence rows.
-- 586 Bible presence rows.
+- 812 unique term-center presence rows.
+- 809 Bible presence rows.
 - 3 control presence rows.
-- 688 raw occurrence rows before presence grouping.
+- 923 raw occurrence rows before presence grouping.
+- 839 Bible occurrence rows.
+- 84 control occurrence rows.
 - 526 `centered_self_exact_word` presence rows.
 
 Report `Gog` at Rev 20:8 carefully:

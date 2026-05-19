@@ -164,7 +164,7 @@ def main(argv: list[str] | None = None) -> int:
         EXAMPLE_FIELDNAMES,
         example_rows(sorted(outputs, key=example_sort_key), args.max_examples),
     )
-    write_markdown(args.markdown_out, summary_rows)
+    write_markdown(args.markdown_out, summary_rows, title=args.title)
     write_manifest(args, corpus_manifests, len(summary_rows), started)
 
     print(args.summary_out)
@@ -203,6 +203,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--examples-out", type=Path, default=EXAMPLES_OUT)
     parser.add_argument("--markdown-out", type=Path, default=MD_OUT)
     parser.add_argument("--manifest-out", type=Path, default=MANIFEST_OUT)
+    parser.add_argument("--title", default="Targeted Paired Controls")
     return parser
 
 
@@ -538,12 +539,33 @@ def example_rows(rows: list[PairedControlRow], limit: int) -> list[dict[str, obj
     return output
 
 
-def write_markdown(path: Path, rows: list[dict[str, object]]) -> None:
+def write_markdown(
+    path: Path,
+    rows: list[dict[str, object]],
+    *,
+    title: str = "Targeted Paired Controls",
+) -> None:
+    if not rows:
+        lines = [
+            f"# {title}",
+            "",
+            "Status: no target rows.",
+            "",
+            "No paired-control rows were emitted because the target summary was empty.",
+            "This is expected for conditional survivor protocols when the upstream",
+            "survivor gate has no rows.",
+        ]
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        return
+
     band_counts = Counter(str(row["paired_band"]) for row in rows)
     lines = [
-        "# Targeted Paired Controls",
+        f"# {title}",
         "",
         "This report reruns focused target rows against two paired controls: shuffled term letters and corpus-letter random strings of the same normalized length.",
+        "",
+        "Read: rows that pass the same-letter term-shuffle side but not the random same-length corpus-string side remain screens, not claims. The random-string control is intentionally broad and checks whether same-length strings drawn from the same corpus letter frequencies are also easy to find.",
         "",
         "## Band Counts",
         "",
@@ -570,7 +592,7 @@ def write_markdown(path: Path, rows: list[dict[str, object]]) -> None:
                 [
                     concept,
                     f"{best['corpus']} `{best['term_id']}` hits={best['observed_hits']}",
-                    f"`{best['paired_band']}` p={best['combined_min_p_ge']} q={best['combined_min_q_value']}",
+                    f"`{best['paired_band']}` term p={best['term_shuffle_p_ge']} random p={best['random_p_ge']} q={best['combined_min_q_value']}",
                     str(best["read"]),
                 ]
             )
@@ -620,6 +642,7 @@ def write_manifest(
         "version": __version__,
         "created_utc": datetime.now(UTC).isoformat(),
         "target_summary": str(args.target_summary),
+        "title": args.title,
         "min_skip": args.min_skip,
         "max_skip": args.max_skip,
         "direction": args.direction,

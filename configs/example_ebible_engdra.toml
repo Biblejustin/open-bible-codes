@@ -1,0 +1,12 @@
+name = "eBible Douay-Rheims 1899"
+language = "english"
+
+[[sources]]
+name = "eBible DRA"
+format = "csv"
+path = "../data/processed/ebible/engDRA.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

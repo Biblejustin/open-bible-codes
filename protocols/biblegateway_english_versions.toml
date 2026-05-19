@@ -1,0 +1,35 @@
+name = "biblegateway_english_versions"
+description = "Local-only English version screening for BibleGateway's English version list."
+manifest_out = "reports/biblegateway_english_versions/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "biblegateway_english_version_presence"
+description = "Count generated English terms in available local BibleGateway English-version CSVs and summarize version presence."
+argv = [
+  "-m", "scripts.run_biblegateway_english_versions",
+  "--versions", "configs/biblegateway_english_versions.csv",
+  "--terms", "terms/english_search_terms.csv",
+  "--out-dir", "reports/biblegateway_english_versions",
+]
+inputs = [
+  "configs/biblegateway_english_versions.csv",
+  "terms/english_search_terms.csv",
+  "scripts/run_biblegateway_english_versions.py",
+  "scripts/analyze_broad_version_presence.py",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/biblegateway_english_versions/included_versions.csv",
+  "reports/biblegateway_english_versions/missing_versions.csv",
+  "reports/biblegateway_english_versions/english_search_terms_counts.csv",
+  "reports/biblegateway_english_versions/english_search_terms_counts.manifest.json",
+  "reports/biblegateway_english_versions/biblegateway_english_versions.manifest.json",
+  "reports/biblegateway_english_versions/version_presence.csv",
+  "reports/biblegateway_english_versions/version_presence.md",
+  "reports/biblegateway_english_versions/version_presence.manifest.json",
+  "reports/biblegateway_english_versions/run_biblegateway_english_versions.manifest.json",
+]

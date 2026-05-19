@@ -1,0 +1,12 @@
+name = "eBible American Standard Version"
+language = "english"
+
+[[sources]]
+name = "eBible ASV"
+format = "csv"
+path = "../data/processed/ebible/eng-asv.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

@@ -62,6 +62,15 @@ control cautions travel beside them.
 
 Source artifact: `docs/FINAL_REPORT_HIGHLIGHTS.md`.
 
+Current centered-occurrence index snapshot:
+
+- 812 unique term-center presence rows.
+- 809 Bible presence rows and 3 control presence rows.
+- 923 raw occurrence rows before presence grouping.
+- 526 `centered_self_exact_word` presence rows.
+- Bridge-context additions contribute 28 LXX and 193 KJVA
+  apocrypha/deuterocanon bridge presence rows.
+
 ### Expanded Post-Search Strata
 
 The expanded-strata layer annotates retained occurrence rows with additional
@@ -72,7 +81,7 @@ review-prioritization fields, not new claim labels.
 
 Current generated counts include 22 `boundary_start_verse` rows, 13
 `boundary_end_verse` rows, 49 forward-only term/corpus groups, 51 backward-only
-groups, 53 bidirectional groups, 153 canonical-first centered occurrences, 231
+groups, 53 bidirectional groups, 153 canonical-first centered occurrences, 228
 cross-skip candidate rows, 10 meaningful-constant skip rows, and 49
 bigram-surprise rows. The declared biblical-tribes cohort-window audit produced
 no windows meeting its current threshold.

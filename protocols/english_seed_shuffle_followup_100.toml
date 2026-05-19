@@ -1,0 +1,38 @@
+name = "english_seed_shuffle_followup_100"
+description = "100-sample shuffled-letter follow-up for English seed rows that reached the exploratory p-floor."
+manifest_out = "reports/english_seed_shuffle_followup_100/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "english_seed_shuffle_followup_100"
+description = "Run 100-sample full-corpus shuffled-letter controls for exploratory English p-floor rows."
+argv = [
+  "-m", "scripts.analyze_english_seed_shuffle_baseline",
+  "--candidate-summary", "reports/english_seed_shuffle_baseline/summary.csv",
+  "--candidate-read", "observed above shuffled baseline floor",
+  "--samples", "100",
+  "--seed", "20260520",
+  "--min-skip", "2",
+  "--max-skip", "100",
+  "--direction", "both",
+  "--jobs", "4",
+  "--out", "reports/english_seed_shuffle_followup_100/summary.csv",
+  "--markdown-out", "reports/english_seed_shuffle_followup_100/summary.md",
+  "--manifest-out", "reports/english_seed_shuffle_followup_100/manifest.json",
+]
+inputs = [
+  "reports/english_version_control_triage/context_summary.csv",
+  "reports/english_version_control_triage/context_seed_terms.csv",
+  "reports/biblegateway_english_versions/included_versions.csv",
+  "reports/english_seed_shuffle_baseline/summary.csv",
+  "scripts/analyze_english_seed_shuffle_baseline.py",
+  "els/corpus.py",
+  "els/stats.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/english_seed_shuffle_followup_100/summary.csv",
+  "reports/english_seed_shuffle_followup_100/summary.md",
+  "reports/english_seed_shuffle_followup_100/manifest.json",
+]

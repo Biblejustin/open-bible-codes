@@ -1,0 +1,12 @@
+name = "eBible World English Bible"
+language = "english"
+
+[[sources]]
+name = "eBible WEB"
+format = "csv"
+path = "../data/processed/ebible/engwebp.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

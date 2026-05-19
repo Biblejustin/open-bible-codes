@@ -1,0 +1,12 @@
+name = "Local Private English Passion Translation"
+language = "english"
+
+[[sources]]
+name = "TPT"
+format = "csv"
+path = "../data/private/english/tpt.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

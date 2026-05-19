@@ -35,11 +35,12 @@ beside each occurrence instead of using them as a deletion filter.
 
 Current centered-occurrence snapshot:
 
-- 737 unique term-center presence rows.
-- 734 Bible presence rows and 3 control presence rows.
-- 839 raw occurrence rows before presence grouping.
+- 812 unique term-center presence rows.
+- 809 Bible presence rows and 3 control presence rows.
+- 923 raw occurrence rows before presence grouping.
+- 839 Bible occurrence rows and 84 control occurrence rows.
 - 526 `centered_self_exact_word` presence rows.
-- Bridge-context additions contribute 28 LXX and 120 KJVA apocrypha/deuterocanon
+- Bridge-context additions contribute 28 LXX and 193 KJVA apocrypha/deuterocanon
   bridge presence rows.
 - The top presence row is Greek `γωγ` (Gog; English: Gog) centered on open
   `Gog` at Rev 20:8 across BYZ_NT, SBLGNT, TCG_NT, and TR_NT. It remains frequency-cautioned:

@@ -1,0 +1,42 @@
+name = "english_seed_term_shuffle_1000"
+description = "Conditional 1000-sample same-letter term-shuffle controls for English seed rows surviving corpus-letter follow-up."
+manifest_out = "reports/english_seed_term_shuffle_1000/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "english_seed_term_shuffle_1000"
+description = "Run same-letter term-shuffle controls for current ERV/GW English seed survivor terms when the survivor list is non-empty."
+argv = [
+  "-m", "scripts.analyze_els_controls",
+  "--term-set", "english_seed_followup_survivors=terms/english_seed_followup_survivors.csv",
+  "--corpus", "ERV=configs/example_ebible_engerv.toml",
+  "--corpus", "GW=configs/example_ebible_enggw.toml",
+  "--min-skip", "2",
+  "--max-skip", "100",
+  "--direction", "both",
+  "--min-term-length", "4",
+  "--letter-shuffles", "0",
+  "--term-shuffles", "1000",
+  "--seed", "20260521",
+  "--jobs", "4",
+  "--summary-out", "reports/english_seed_term_shuffle_1000/summary.csv",
+  "--examples-out", "reports/english_seed_term_shuffle_1000/examples.csv",
+  "--manifest-out", "reports/english_seed_term_shuffle_1000/manifest.json",
+  "--progress",
+  "--progress-interval", "30",
+]
+inputs = [
+  "terms/english_seed_followup_survivors.csv",
+  "configs/example_ebible_engerv.toml",
+  "configs/example_ebible_enggw.toml",
+  "scripts/analyze_els_controls.py",
+  "els/corpus.py",
+  "els/stats.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/english_seed_term_shuffle_1000/summary.csv",
+  "reports/english_seed_term_shuffle_1000/examples.csv",
+  "reports/english_seed_term_shuffle_1000/manifest.json",
+]

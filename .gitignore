@@ -4,13 +4,17 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.playwright-cli/
 .venv/
 venv/
 configs/*.local.toml
+substack-favicon.ico
+substack-icon.svg
 
 # Raw/processed source texts can have separate licenses.
 data/raw/
 data/processed/
+data/private/
 data/cache/
 
 # Local exploratory output.
@@ -26,6 +30,10 @@ reports/**/*.json
 reports/**/*.md
 reports/**/*.toml
 reports/**/*.zip
+reports/**/*.txt
+reports/**/*.err
+reports/**/*.ps1
+reports/**/*.pid
 reports/**/*.duckdb
 reports/**/*.duckdb.wal
 reports/wrr_1994/*.txt

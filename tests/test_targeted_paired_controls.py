@@ -9,6 +9,7 @@ from scripts.analyze_targeted_paired_controls import (
     sample_random_controls,
     sample_term_controls,
     stable_seed,
+    write_markdown,
 )
 
 
@@ -61,6 +62,16 @@ class TargetedPairedControlsTests(unittest.TestCase):
             rows = read_targets(path, corpora={"MT_WLC"}, min_observed_hits=1)
 
         self.assertEqual([row.row["term_id"] for row in rows], ["trump_h"])
+
+    def test_write_markdown_handles_empty_targets(self) -> None:
+        with TemporaryDirectory() as tmp:
+            path = Path(tmp) / "paired.md"
+
+            write_markdown(path, [])
+
+            text = path.read_text(encoding="utf-8")
+        self.assertIn("Status: no target rows.", text)
+        self.assertIn("target summary was empty", text)
 
 
 if __name__ == "__main__":

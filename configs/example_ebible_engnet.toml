@@ -1,0 +1,12 @@
+name = "eBible NET Bible"
+language = "english"
+
+[[sources]]
+name = "eBible NET"
+format = "csv"
+path = "../data/processed/ebible/engnet.csv"
+text_column = "text"
+ref_column = "ref"
+book_column = "book"
+chapter_column = "chapter"
+verse_column = "verse"

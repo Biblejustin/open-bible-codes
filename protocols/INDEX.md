@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 97
+Protocols indexed: 107
 
 ## Analysis
 
@@ -24,6 +24,7 @@ Protocols indexed: 97
 | local_terms_appendix | Negative/curiosity appendix for fixed local pastor-business and church-location terms. | 5 | terms/local_terms_appendix.csv | reports/local_terms_appendix | `local_terms_appendix.toml` |
 | match_strata_index | Annotate centered occurrences with extended post-search strata that do not widen search... | 1 | terms/meaningful_constants.csv | reports/match_strata_index | `match_strata_index.toml` |
 | modern_focus_extensions | Capped same-skip extension screen for modern names, places, and local terms. | 11 | terms/modern_names_dates.csv | reports/modern_extension_screen | `modern_focus_extensions.toml` |
+| mt_lxx_reciprocal_presence | Compare concept-level ELS presence between MT Hebrew and LXX Greek at aligned verse/cha... | 1 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_narrative_nam... | reports/mt_lxx_reciprocal_presence | `mt_lxx_reciprocal_presence.toml` |
 | mt_version_comparison | Compare normalized Hebrew MT-family verse text across MT_WLC, UXLC, MAM, eBible WLC, an... | 1 |  | reports/mt_version_comparison | `mt_version_comparison.toml` |
 | notable_passage_gaps | Record declared notable passages where selected ELS terms are absent, sparse, or presen... | 1 | terms/notable_passage_gap_terms.csv | reports/notable_passage_gaps | `notable_passage_gaps.toml` |
 | review_flag_summary | Summarize meaningful-skip and rarity review flags from the match-strata index. | 1 |  | reports/review_flag_summary | `review_flag_summary.toml` |
@@ -50,6 +51,7 @@ Protocols indexed: 97
 
 | Name | Description | Steps | Terms | Output Roots | Path |
 | --- | --- | ---: | --- | --- | --- |
+| english_seed_shuffle_baseline | Exploratory shuffled-letter null baseline for English triage seed-term hits. | 1 |  | reports/english_seed_shuffle_baseline | `english_seed_shuffle_baseline.toml` |
 | public_baseline | Public-source baseline for MT WLC, LXX GRCLXX, TR GRCTR, and SBLGNT. | 30 | terms/modern_names_dates.csv, terms/prophetic_terms.csv, terms/table_of_nations.csv, te... | reports, reports/protocols/public_baseline | `public_baseline.toml` |
 
 ## Controls
@@ -62,6 +64,11 @@ Protocols indexed: 97
 | apocrypha_bridge_shuffled_controls_50 | Run 50-sample shuffled apocrypha/deuterocanon bridge controls for LXX and KJVA bridge c... | 2 | terms/english_search_terms.csv, terms/greek_nt_claim_terms.csv, terms/prophetic_terms.c... | reports/apocrypha_bridge_shuffled_controls_50, reports/kjv_apocrypha_bridge_shuffled_co... | `apocrypha_bridge_shuffled_controls_50.toml` |
 | apocrypha_bridge_study | Run the apocrypha/deuterocanon coverage audit, bounded bridge scan, surface-context rev... | 14 | terms/english_search_terms.csv, terms/greek_nt_claim_terms.csv, terms/prophetic_terms.c... | reports/apocrypha_bridge_candidates, reports/apocrypha_bridge_completion_review, report... | `apocrypha_bridge_study.toml` |
 | byz_source_only_exact_center | Post-discovery 1000/1000 controls for BYZ_NT source-only exact-center extension row. | 2 |  | reports/byz_source_only_exact_center | `byz_source_only_exact_center.toml` |
+| ebible_english_controls | Open and CC eBible English control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/ebible_english_controls | `ebible_english_controls.toml` |
+| english_seed_paired_controls_1000 | Conditional 1000-sample term-shuffle and corpus-random paired controls for English seed... | 2 |  | reports/english_seed_paired_controls_1000, reports/english_seed_survivor_targets | `english_seed_paired_controls_1000.toml` |
+| english_seed_survivor_audit | Conditional letter-path and metadata audit for English seed rows surviving count-contro... | 1 |  | reports/english_seed_survivor_audit | `english_seed_survivor_audit.toml` |
+| english_seed_term_shuffle_1000 | Conditional 1000-sample same-letter term-shuffle controls for English seed rows survivi... | 1 | terms/english_seed_followup_survivors.csv | reports/english_seed_term_shuffle_1000 | `english_seed_term_shuffle_1000.toml` |
+| english_version_control_triage | Compare BibleGateway-overlap English versions against eBible controls and inspect stron... | 3 |  | reports/english_version_control_triage | `english_version_control_triage.toml` |
 | extension_deep_controls | Slow 1000/1000 paired-control follow-up for the exact-center cross-text Greek NT extens... | 1 |  | reports | `extension_deep_controls.toml` |
 | external_claim_source_all_codes_collection | Relaxed all-codes collection for external-source claim and critique term lists across B... | 4 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports/external_claim_source_all_codes | `external_claim_source_all_codes_collection.toml` |
 | external_claim_source_counts | Count external-source claim and critique term lists across Bible corpora and language-m... | 2 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports/external_claim_source_counts | `external_claim_source_counts.toml` |
@@ -103,6 +110,7 @@ Protocols indexed: 97
 | all_codes_followup_selection | Compact manual-review follow-up selection from relaxed all-codes triage queues. | 1 |  | reports/all_codes_followup_selection | `all_codes_followup_selection.toml` |
 | doxa_four_source_claim_followup | Locked 5000/5000 four-source follow-up for the strongest Greek exact-center doxa extens... | 2 |  | reports/doxa_four_source_claim_followup | `doxa_four_source_claim_followup.toml` |
 | doxa_four_source_confirmatory_followup | Locked 20000/20000 confirmatory follow-up for the strongest Greek exact-center doxa ext... | 2 |  | reports/doxa_four_source_confirmatory_followup | `doxa_four_source_confirmatory_followup.toml` |
+| english_seed_shuffle_followup_100 | 100-sample shuffled-letter follow-up for English seed rows that reached the exploratory... | 1 |  | reports/english_seed_shuffle_followup_100 | `english_seed_shuffle_followup_100.toml` |
 | greek_expanded_surface_followup | Compact post-screen follow-up report for selected Greek exact-center surface rows. | 1 |  | reports/greek_expanded_surface_followup | `greek_expanded_surface_followup.toml` |
 
 ## Partitions
@@ -135,6 +143,7 @@ Protocols indexed: 97
 
 | Name | Description | Steps | Terms | Output Roots | Path |
 | --- | --- | ---: | --- | --- | --- |
+| biblegateway_english_versions | Local-only English version screening for BibleGateway's English version list. | 1 | terms/english_search_terms.csv | reports/biblegateway_english_versions | `biblegateway_english_versions.toml` |
 | broad_search | Broader skip 2..100 screening run across every declared term list. | 3 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_narrative_nam... | reports/broad_search | `broad_search.toml` |
 | english_kjv_screening | English KJV skip 2..100 screening run over generated English search terms. | 1 | terms/english_search_terms.csv | reports/english_kjv_screening | `english_kjv_screening.toml` |
 | english_screening_all_codes_collection | Relaxed all-codes collection for the broad English KJV screening cohort with center-wor... | 4 | terms/english_search_terms.csv | reports/db, reports/english_screening_all_codes | `english_screening_all_codes_collection.toml` |
@@ -142,5 +151,6 @@ Protocols indexed: 97
 | greek_screening_version_presence | Capped exact ELS hit-pattern presence for broader Greek screening terms across Greek NT... | 1 | terms/biblical_festivals.csv, terms/biblical_narrative_names.csv, terms/biblical_prophe... | reports/greek_screening_version_presence | `greek_screening_version_presence.toml` |
 | hebrew_screening_all_codes_collection | Relaxed all-codes collection for the broad Hebrew screening cohort with center-word sur... | 4 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_narrative_nam... | reports/db, reports/hebrew_screening_all_codes | `hebrew_screening_all_codes_collection.toml` |
 | hebrew_screening_version_presence | Capped exact ELS hit-pattern presence for broader Hebrew screening terms across MT-fami... | 1 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_narrative_nam... | reports/hebrew_screening_version_presence | `hebrew_screening_version_presence.toml` |
+| private_english_versions | Local-only English translation screening against KJV, AMPC, NLT, MSG, TPT, and NIV. | 2 | terms/english_search_terms.csv | reports/private_english_versions | `private_english_versions.toml` |
 | step_tahot_screening_version_presence | Run broader Hebrew exact-hit version presence with STEP_TAHOT included as a separate so... | 2 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_narrative_nam... | reports/step_tahot_screening_version_presence | `step_tahot_screening_version_presence.toml` |
 | wide_focus_search | Focused skip 2..250 screening run for modern/geopolitical/local and prophetic terms. | 3 | terms/modern_names_dates.csv, terms/prophetic_terms.csv | reports/wide_focus_search | `wide_focus_search.toml` |

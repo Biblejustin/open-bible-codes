@@ -8,6 +8,7 @@ from els.normalization import normalize_text
 
 TERMS_DIR = Path("terms")
 NON_TERM_METADATA_FILES = {"meaningful_constants.csv"}
+ALLOW_EMPTY_TERM_FILES = {"english_seed_followup_survivors.csv"}
 
 
 def term_list_paths() -> list[Path]:
@@ -24,7 +25,15 @@ class TermListTests(unittest.TestCase):
         for path in term_list_paths():
             with self.subTest(path=path):
                 with path.open("r", encoding="utf-8", newline="") as handle:
-                    rows = list(csv.DictReader(handle))
+                    reader = csv.DictReader(handle)
+                    rows = list(reader)
+                if not rows:
+                    self.assertIn(path.name, ALLOW_EMPTY_TERM_FILES)
+                    self.assertGreaterEqual(
+                        set(reader.fieldnames or []),
+                        {"term_id", "concept", "category", "language", "term"},
+                    )
+                    continue
                 self.assertGreater(len(rows), 0)
                 self.assertGreaterEqual(
                     set(rows[0]),

@@ -51,6 +51,37 @@ Bootstrap large non-Bible background-control source paths separately:
 python3 -m scripts.download_nonbible_controls
 ```
 
+Private English translation hooks:
+
+- `configs/local_nlt.toml`
+- `configs/local_msg.toml`
+- `configs/local_tpt.toml`
+- `configs/local_niv.toml`
+- `configs/biblegateway_english_versions.csv`
+
+These configs point at user-supplied CSV files under `data/private/english/`.
+That directory is ignored by git. Do not add downloaders, bundled text, or
+generated full-text extracts for copyrighted English versions.
+
+Open/CC eBible English controls:
+
+- `configs/ebible_english_controls.csv`
+- `scripts/download_ebible_english_controls.py`
+- `protocols/ebible_english_controls.toml`
+
+These controls use eBible USFM packages marked public-domain, CC BY 4.0, or
+CC BY-SA 4.0 by eBible. Raw and processed source text stays under ignored
+`data/raw/` and `data/processed/`; generated reports stay under ignored
+`reports/`.
+
+Use:
+
+```bash
+python3 -m scripts.download_ebible_english_controls --skip-existing
+python3 -m scripts.run_protocol protocols/ebible_english_controls.toml --resume
+python3 -m scripts.run_protocol protocols/english_version_control_triage.toml --resume
+```
+
 Generic eBible USFM import:
 
 ```bash
@@ -60,6 +91,17 @@ python3 -m scripts.download_ebible_usfm --source grcmt
 python3 -m scripts.download_ebible_usfm --source grctcgnt
 python3 -m scripts.download_ebible_usfm --source eng-kjv2006
 python3 -m scripts.download_ebible_usfm --source eng-kjv
+python3 -m scripts.download_ebible_usfm --source eng-asv
+python3 -m scripts.download_ebible_usfm --source engDBY
+python3 -m scripts.download_ebible_usfm --source engDRA
+python3 -m scripts.download_ebible_usfm --source engerv
+python3 -m scripts.download_ebible_usfm --source enggnv
+python3 -m scripts.download_ebible_usfm --source enggw
+python3 -m scripts.download_ebible_usfm --source engnet
+python3 -m scripts.download_ebible_usfm --source engojb
+python3 -m scripts.download_ebible_usfm --source engwebp
+python3 -m scripts.download_ebible_usfm --source engWycliffe
+python3 -m scripts.download_ebible_usfm --source engylt
 ```
 
 ## Current Source Choices

@@ -1,0 +1,32 @@
+name = "english_seed_shuffle_baseline"
+description = "Exploratory shuffled-letter null baseline for English triage seed-term hits."
+manifest_out = "reports/english_seed_shuffle_baseline/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "english_seed_shuffle_baseline"
+description = "Run 20-sample full-corpus shuffled-letter controls for observed English seed-term hit rows."
+argv = [
+  "-m", "scripts.analyze_english_seed_shuffle_baseline",
+  "--samples", "20",
+  "--seed", "20260519",
+  "--min-skip", "2",
+  "--max-skip", "100",
+  "--direction", "both",
+  "--jobs", "4",
+]
+inputs = [
+  "reports/english_version_control_triage/context_summary.csv",
+  "reports/english_version_control_triage/context_seed_terms.csv",
+  "reports/biblegateway_english_versions/included_versions.csv",
+  "scripts/analyze_english_seed_shuffle_baseline.py",
+  "els/corpus.py",
+  "els/stats.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/english_seed_shuffle_baseline/summary.csv",
+  "reports/english_seed_shuffle_baseline/summary.md",
+  "reports/english_seed_shuffle_baseline/manifest.json",
+]
