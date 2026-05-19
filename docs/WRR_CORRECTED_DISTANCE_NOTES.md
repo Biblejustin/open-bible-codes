@@ -76,7 +76,10 @@ Already implemented:
   Current ignored output covers 182 imported same-record pairs: 53 have at
   least one defined-domain pair, 17 have all observed domains defined, 36 are
   incomplete because undefined rows were omitted, and 129 have no defined-domain
-  pair. This is not corrected distance.
+  pair. The length-5..8 smoke lane has 86 pairs, of which 30 have
+  defined-domain ordinary `Q`, 16 have all observed domains defined, 14 are
+  incomplete, and 56 have no defined-domain pair. This is not corrected
+  distance.
 - low-level WRR2/Nations ELS-vs-surface-string distance/proximity helpers in
   `els/wrr.py`. These implement the source-described fixed-row-width distance
   `f^2 + f'^2 + l^2 + 1`, use `f' = 1` for surface-letter strings, and sum

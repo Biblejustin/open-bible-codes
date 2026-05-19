@@ -326,6 +326,7 @@ argv = [
   "--row-width-count", "10",
   "--out", "reports/wrr_1994/wrr2_ordinary_q_defined_only.csv",
   "--summary-out", "reports/wrr_1994/wrr2_ordinary_q_defined_only_summary.csv",
+  "--lane-summary-out", "reports/wrr_1994/wrr2_ordinary_q_defined_only_lanes.csv",
   "--markdown-out", "reports/wrr_1994/wrr2_ordinary_q_defined_only.md",
   "--manifest-out", "reports/wrr_1994/wrr2_ordinary_q_defined_only.manifest.json",
 ]
@@ -341,6 +342,7 @@ inputs = [
 outputs = [
   "reports/wrr_1994/wrr2_ordinary_q_defined_only.csv",
   "reports/wrr_1994/wrr2_ordinary_q_defined_only_summary.csv",
+  "reports/wrr_1994/wrr2_ordinary_q_defined_only_lanes.csv",
   "reports/wrr_1994/wrr2_ordinary_q_defined_only.md",
   "reports/wrr_1994/wrr2_ordinary_q_defined_only.manifest.json",
 ]

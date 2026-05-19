@@ -8,6 +8,7 @@ from scripts.analyze_wrr_ordinary_q import (
     DomainSummary,
     build_q_rows,
     read_defined_occurrences,
+    summarize_lane_rows,
     summarize_q_rows,
 )
 
@@ -94,12 +95,53 @@ class WrrOrdinaryQTests(unittest.TestCase):
         self.assertEqual(summary["no_defined_domain_pair_pairs"], 1)
         self.assertEqual(summary["max_q_pair_id"], "p1")
 
+    def test_summarize_lane_rows_splits_candidate_lanes(self) -> None:
+        pair_rows = [
+            pair_row("p1", "app", "date", lane="length_5_8_smoke_candidate"),
+            pair_row("p2", "empty", "date", lane="excluded_by_appellation_min_length"),
+        ]
+        summaries = {
+            "app": DomainSummary(hit_count=1, defined_domains=1, undefined_domains=0),
+            "date": DomainSummary(hit_count=1, defined_domains=1, undefined_domains=0),
+            "empty": DomainSummary(hit_count=0, defined_domains=0, undefined_domains=0),
+        }
+        occurrences = {
+            "app": (WrrElsOccurrence((0, 10, 20), 10, 0, 50),),
+            "date": (WrrElsOccurrence((11, 21, 31), 10, 10, 40),),
+        }
 
-def pair_row(pair_id: str, app_id: str, date_id: str) -> dict[str, str]:
+        rows = build_q_rows(
+            pair_rows,
+            summaries,
+            occurrences,
+            text_length=100,
+            row_width_count=1,
+        )
+        lane_rows = summarize_lane_rows(rows)
+
+        lanes = {row["candidate_lane"]: row for row in lane_rows}
+        self.assertEqual(lanes["length_5_8_smoke_candidate"]["pairs"], 1)
+        self.assertEqual(
+            lanes["length_5_8_smoke_candidate"]["all_observed_domains_defined_pairs"],
+            1,
+        )
+        self.assertEqual(
+            lanes["excluded_by_appellation_min_length"]["no_defined_domain_pair_pairs"],
+            1,
+        )
+
+
+def pair_row(
+    pair_id: str,
+    app_id: str,
+    date_id: str,
+    *,
+    lane: str = "length_5_8_smoke_candidate",
+) -> dict[str, str]:
     return {
         "pair_id": pair_id,
         "concept": "WRR2 01",
-        "candidate_lane": "length_5_8_smoke_candidate",
+        "candidate_lane": lane,
         "pair_review_status": "needs_primary_source_pair_rule",
         "appellation_term_id": app_id,
         "date_term_id": date_id,

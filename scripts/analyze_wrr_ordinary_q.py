@@ -22,6 +22,7 @@ DOMAIN_SUMMARY = Path("reports/wrr_1994/wrr2_domain_summary.csv")
 CONFIG = Path("configs/example_koren_genesis.toml")
 OUT = Path("reports/wrr_1994/wrr2_ordinary_q_defined_only.csv")
 SUMMARY_OUT = Path("reports/wrr_1994/wrr2_ordinary_q_defined_only_summary.csv")
+LANE_SUMMARY_OUT = Path("reports/wrr_1994/wrr2_ordinary_q_defined_only_lanes.csv")
 MD_OUT = Path("reports/wrr_1994/wrr2_ordinary_q_defined_only.md")
 MANIFEST_OUT = Path("reports/wrr_1994/wrr2_ordinary_q_defined_only.manifest.json")
 
@@ -55,6 +56,17 @@ SUMMARY_FIELDNAMES = [
     "status",
 ]
 
+LANE_SUMMARY_FIELDNAMES = [
+    "candidate_lane",
+    "pairs",
+    "pairs_with_defined_domain_pair",
+    "all_observed_domains_defined_pairs",
+    "defined_only_incomplete_pairs",
+    "no_defined_domain_pair_pairs",
+    "max_ordinary_q_defined_only",
+    "max_q_pair_id",
+]
+
 
 @dataclass(frozen=True)
 class DomainSummary:
@@ -78,13 +90,16 @@ def main(argv: list[str] | None = None) -> int:
         row_width_count=args.row_width_count,
     )
     summary = summarize_q_rows(rows)
+    lane_rows = summarize_lane_rows(rows)
     write_rows(args.out, FIELDNAMES, rows)
     write_rows(args.summary_out, SUMMARY_FIELDNAMES, [summary])
-    write_markdown(args.markdown_out, rows, summary, args)
+    write_rows(args.lane_summary_out, LANE_SUMMARY_FIELDNAMES, lane_rows)
+    write_markdown(args.markdown_out, rows, summary, lane_rows, args)
     if args.manifest_out:
-        write_manifest(args, corpus.summary(), rows, summary, started)
+        write_manifest(args, corpus.summary(), rows, summary, lane_rows, started)
     print(args.out)
     print(args.summary_out)
+    print(args.lane_summary_out)
     print(args.markdown_out)
     if args.manifest_out:
         print(args.manifest_out)
@@ -100,6 +115,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--row-width-count", type=int, default=10)
     parser.add_argument("--out", type=Path, default=OUT)
     parser.add_argument("--summary-out", type=Path, default=SUMMARY_OUT)
+    parser.add_argument("--lane-summary-out", type=Path, default=LANE_SUMMARY_OUT)
     parser.add_argument("--markdown-out", type=Path, default=MD_OUT)
     parser.add_argument("--manifest-out", type=Path, default=MANIFEST_OUT)
     return parser
@@ -240,6 +256,35 @@ def summarize_q_rows(rows: list[dict[str, object]]) -> dict[str, object]:
     }
 
 
+def summarize_lane_rows(rows: list[dict[str, object]]) -> list[dict[str, object]]:
+    lanes = sorted({str(row["candidate_lane"]) for row in rows})
+    return [summarize_lane(row_group(rows, "candidate_lane", lane), lane) for lane in lanes]
+
+
+def summarize_lane(rows: list[dict[str, object]], lane: str) -> dict[str, object]:
+    summary = summarize_q_rows(rows)
+    return {
+        "candidate_lane": lane,
+        "pairs": summary["pairs"],
+        "pairs_with_defined_domain_pair": summary["pairs_with_defined_domain_pair"],
+        "all_observed_domains_defined_pairs": summary[
+            "all_observed_domains_defined_pairs"
+        ],
+        "defined_only_incomplete_pairs": summary["defined_only_incomplete_pairs"],
+        "no_defined_domain_pair_pairs": summary["no_defined_domain_pair_pairs"],
+        "max_ordinary_q_defined_only": summary["max_ordinary_q_defined_only"],
+        "max_q_pair_id": summary["max_q_pair_id"],
+    }
+
+
+def row_group(
+    rows: list[dict[str, object]],
+    field: str,
+    value: str,
+) -> list[dict[str, object]]:
+    return [row for row in rows if str(row[field]) == value]
+
+
 def count_status(rows: list[dict[str, object]], status: str) -> int:
     return sum(1 for row in rows if row["q_status"] == status)
 
@@ -256,6 +301,7 @@ def write_markdown(
     path: Path,
     rows: list[dict[str, object]],
     summary: dict[str, object],
+    lane_rows: list[dict[str, object]],
     args: argparse.Namespace,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -272,6 +318,31 @@ def write_markdown(
     ]
     for key, value in summary.items():
         lines.append(f"| {key} | {value} |")
+    lines.extend(
+        [
+            "",
+            "## Candidate Lanes",
+            "",
+            "| Lane | Pairs | Defined-domain pairs | Complete | Incomplete | Unavailable | Max Q |",
+            "| --- | ---: | ---: | ---: | ---: | ---: | ---: |",
+        ]
+    )
+    for row in lane_rows:
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    str(row["candidate_lane"]),
+                    str(row["pairs"]),
+                    str(row["pairs_with_defined_domain_pair"]),
+                    str(row["all_observed_domains_defined_pairs"]),
+                    str(row["defined_only_incomplete_pairs"]),
+                    str(row["no_defined_domain_pair_pairs"]),
+                    str(row["max_ordinary_q_defined_only"]),
+                ]
+            )
+            + " |"
+        )
     lines.extend(
         [
             "",
@@ -330,6 +401,7 @@ def write_manifest(
     corpus_summary: dict[str, object],
     rows: list[dict[str, object]],
     summary: dict[str, object],
+    lane_rows: list[dict[str, object]],
     started: float,
 ) -> None:
     payload = {
@@ -348,9 +420,10 @@ def write_manifest(
         "outputs": {
             "rows": str(args.out),
             "summary": str(args.summary_out),
+            "lane_summary": str(args.lane_summary_out),
             "markdown": str(args.markdown_out),
         },
-        "counts": {"rows": len(rows), **summary},
+        "counts": {"rows": len(rows), "lane_rows": len(lane_rows), **summary},
     }
     args.manifest_out.parent.mkdir(parents=True, exist_ok=True)
     args.manifest_out.write_text(

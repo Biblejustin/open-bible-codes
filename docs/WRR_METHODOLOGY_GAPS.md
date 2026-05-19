@@ -155,7 +155,9 @@ domains, 11,347 blocked by an inner shorter-skip ELS, and 0 ambiguous from
 enclosing shorter-skip rows under the smoke cap. The ordinary-Q diagnostic over
 182 imported same-record pairs finds 53 pairs with at least one defined-domain
 pair, 17 pairs with all observed domains defined, 36 incomplete defined-only
-pairs, and 129 pairs with no defined-domain pair. The repo still does not
+pairs, and 129 pairs with no defined-domain pair. In the length-5..8 smoke lane
+specifically, 30 of 86 pairs have defined-domain ordinary `Q`, 16 are complete,
+14 are incomplete, and 56 have no defined-domain pair. The repo still does not
 implement the paper's corrected distance value for every term pair because the
 undefined-domain policy, perturbed `Q`, and per-pair `c(w,w')` driver are
 missing.
