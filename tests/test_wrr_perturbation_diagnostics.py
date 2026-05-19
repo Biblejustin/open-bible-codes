@@ -6,6 +6,8 @@ from scripts.analyze_wrr_perturbation_diagnostics import (
     display_boundary_term,
     exact_perturbation_match_count,
     offsets_in_bounds,
+    sample_cap,
+    sample_label,
     summarize,
     valid_perturbation_count,
 )
@@ -30,6 +32,13 @@ class WrrPerturbationDiagnosticsTests(unittest.TestCase):
 
         self.assertEqual(count, 2)
 
+    def test_sample_cap_zero_means_all_hits(self) -> None:
+        self.assertIsNone(sample_cap(0))
+        self.assertIsNone(sample_cap(-1))
+        self.assertEqual(sample_cap(20), 20)
+        self.assertEqual(sample_label(0), "all")
+        self.assertEqual(sample_label(20), 20)
+
     def test_exact_perturbation_match_count_checks_letters(self) -> None:
         triples = ((0, 0, 0), (1, 0, 0), (-5, 0, 0))
 
@@ -44,16 +53,19 @@ class WrrPerturbationDiagnosticsTests(unittest.TestCase):
         self.assertEqual(count, 1)
 
     def test_diagnostic_read_reports_boundary_states(self) -> None:
-        self.assertEqual(diagnostic_read([], [], 0, 0), "no sampled hits")
+        self.assertEqual(diagnostic_read([], [], 0, 0), "no checked hits")
         self.assertEqual(
             diagnostic_read([9], [9], 0, 0),
-            "sample includes fewer than 10 in-bound perturbations",
+            "checked hits include fewer than 10 in-bound perturbations",
         )
         self.assertEqual(
             diagnostic_read([10], [9], 0, 0),
-            "sample includes fewer than 10 exact perturbation matches",
+            "checked hits include fewer than 10 exact perturbation matches",
         )
-        self.assertEqual(diagnostic_read([10], [10], 0, 0), "sample perturbation exact-match ok")
+        self.assertEqual(
+            diagnostic_read([10], [10], 0, 0),
+            "checked perturbation exact-match ok",
+        )
         self.assertEqual(diagnostic_read([10], [10], 1, 0), "ordinary hit boundary failure")
         self.assertEqual(diagnostic_read([10], [10], 0, 1), "ordinary hit exact-match failure")
 

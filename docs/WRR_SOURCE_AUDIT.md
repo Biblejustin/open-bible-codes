@@ -403,19 +403,19 @@ WRR perturbation boundary/exact-match diagnostic for length `5..8` rows:
 | length-filtered rows | 120 |
 | unique normalized terms | 109 |
 | perturbation triples | 125 |
-| rows with sampled hits | 64 |
-| rows without sampled hits | 56 |
-| sampled hits | 447 |
-| rows with sample under 10 valid perturbations | 0 |
-| rows with sample under 10 exact matches | 64 |
-| minimum in-bound perturbations in sample | 125 |
-| median exact perturbed matches in sample | 1 |
-| maximum exact perturbed matches in sample | 5 |
+| rows with hits | 64 |
+| rows without hits | 56 |
+| checked hits | 959 |
+| rows with under 10 valid perturbations | 0 |
+| rows with under 10 exact matches | 64 |
+| minimum in-bound perturbations | 125 |
+| median exact perturbed matches | 1 |
+| maximum exact perturbed matches | 5 |
 | ordinary in-bound failures | 0 |
 | ordinary exact-match failures | 0 |
-| perturbation diagnostic runtime | 6.026s |
+| perturbation diagnostic runtime | 4.782s |
 
-This checks whether sampled ordinary ELS rows have enough in-bound
+This checks whether checked ordinary ELS rows have enough in-bound
 last-three-gap perturbations and whether those perturbed rows still spell the
 same term exactly. It does not compute proximity `Q(w,w')`, corrected distance
 `c(w,w')`, or a permutation statistic.
@@ -426,12 +426,12 @@ WRR perturbation pair-readiness join:
 | --- | ---: |
 | imported same-record pairs | 182 |
 | length-5..8 smoke-lane pairs | 86 |
-| pairs outside perturbation sample scope | 96 |
-| pairs missing sampled hits | 56 |
+| pairs outside perturbation diagnostic scope | 96 |
+| pairs missing checked hits | 56 |
 | pairs under 10 exact perturbed matches | 30 |
-| pairs sample-ready for perturbed `Q` | 0 |
+| pairs ready for perturbed `Q` | 0 |
 
-This joins the lock-prep pair table to the sampled perturbation diagnostic.
+This joins the lock-prep pair table to the checked perturbation diagnostic.
 It is still not a corrected-distance run.
 
 ## Statistic Helpers

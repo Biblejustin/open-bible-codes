@@ -164,15 +164,15 @@ undefined-domain policy, perturbed `Q`, and per-pair `c(w,w')` driver are
 missing.
 
 The perturbation diagnostic now distinguishes boundary validity from exact
-perturbed matches. In the current sampled output, 447 sampled hits across 64
-rows with hits keep all 125 perturbation triples in bounds, but every row with
-hits has fewer than 10 exact perturbed matches. Exact-match counts range from 1
-to 5, with median 1. This is still only a sampled term-hit diagnostic, not a
-pair-level corrected-distance calculation.
+perturbed matches. In the current output, all 959 smoke-cap hits across 64 rows
+with hits keep all 125 perturbation triples in bounds, but every row with hits
+has fewer than 10 exact perturbed matches. Exact-match counts range from 1 to
+5, with median 1. This is still only a term-hit diagnostic, not a pair-level
+corrected-distance calculation.
 
 The pair-readiness join gives the same warning at the pair-table level: of 86
-length-5..8 smoke-lane pairs, 56 lack sampled hits for at least one side, 30
-have fewer than 10 exact perturbed matches, and 0 are sample-ready for
+length-5..8 smoke-lane pairs, 56 lack checked hits for at least one side, 30
+have fewer than 10 exact perturbed matches, and 0 are ready for
 pair-level perturbed `Q`. The other 96 imported same-record pairs are outside
 the current length-5..8 perturbation sample scope.
 Implementation notes are now tracked in

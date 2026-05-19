@@ -114,15 +114,15 @@ Already implemented:
   appellation would close the 165-to-163 count gap, while excluding all four
   disputed Zacut rows would overshoot. These pages are not treated as the
   canonical WRR pair table.
-- perturbation boundary/exact-match diagnostic over sampled imported length
-  5..8 ELS hits. Current output samples 447 hits across 64 rows with hits:
-  every sampled ordinary hit keeps all 125 triples in bounds, but every row
-  with hits has fewer than 10 exact perturbed matches; exact-match counts range
-  from 1 to 5, with median 1.
-- perturbation pair-readiness diagnostic joining sampled exact-match term rows
+- perturbation boundary/exact-match diagnostic over imported length 5..8 ELS
+  hits. Current output checks all 959 smoke-cap hits across 64 rows with hits:
+  every ordinary hit keeps all 125 triples in bounds, but every row with hits
+  has fewer than 10 exact perturbed matches; exact-match counts range from 1 to
+  5, with median 1.
+- perturbation pair-readiness diagnostic joining checked exact-match term rows
   to the lock-prep pair table. Current output has 86 length-5..8 smoke-lane
-  pairs: 56 lack sampled hits for at least one side, 30 have fewer than 10
-  exact perturbed matches, and 0 are sample-ready for pair-level perturbed `Q`.
+  pairs: 56 lack checked hits for at least one side, 30 have fewer than 10
+  exact perturbed matches, and 0 are ready for pair-level perturbed `Q`.
 
 Not yet implemented:
 

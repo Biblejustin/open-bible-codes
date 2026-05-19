@@ -122,7 +122,7 @@ def main(argv: list[str] | None = None) -> int:
         min_skip=args.min_skip,
         max_skip=args.search_max_skip,
         direction=args.direction,
-        sample_hits_per_query=args.sample_hits_per_query,
+        sample_hits_per_query=sample_cap(args.sample_hits_per_query),
     )
     rows = diagnostic_rows(terms, count_rows, query_samples, corpus, args)
     summary = summarize(rows, args)
@@ -150,7 +150,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--search-max-skip", type=int, default=250)
     parser.add_argument("--direction", choices=["forward", "backward", "both"], default="both")
     parser.add_argument("--target-expected-hits", type=float, default=10.0)
-    parser.add_argument("--sample-hits-per-query", type=int, default=20)
+    parser.add_argument(
+        "--sample-hits-per-query",
+        type=int,
+        default=20,
+        help="Maximum hits to check per normalized query; 0 or less checks all hits.",
+    )
     parser.add_argument("--out", type=Path, default=OUT)
     parser.add_argument("--summary-out", type=Path, default=SUMMARY_OUT)
     parser.add_argument("--markdown-out", type=Path, default=MD_OUT)
@@ -199,7 +204,7 @@ def collect_query_samples(
     min_skip: int,
     max_skip: int,
     direction: str,
-    sample_hits_per_query: int,
+    sample_hits_per_query: int | None,
 ) -> dict[str, list[HitSample]]:
     samples = {query: [] for query in queries}
     for query, skip, start, end in iter_els_query_matches_by_lanes(
@@ -360,12 +365,12 @@ def diagnostic_read(
     if ordinary_exact_failures:
         return "ordinary hit exact-match failure"
     if not valid_counts:
-        return "no sampled hits"
+        return "no checked hits"
     if min(valid_counts) < 10:
-        return "sample includes fewer than 10 in-bound perturbations"
+        return "checked hits include fewer than 10 in-bound perturbations"
     if min(exact_counts) < 10:
-        return "sample includes fewer than 10 exact perturbation matches"
-    return "sample perturbation exact-match ok"
+        return "checked hits include fewer than 10 exact perturbation matches"
+    return "checked perturbation exact-match ok"
 
 
 def summarize(rows: list[dict[str, object]], args: argparse.Namespace) -> dict[str, object]:
@@ -384,7 +389,7 @@ def summarize(rows: list[dict[str, object]], args: argparse.Namespace) -> dict[s
         "rows": len(rows),
         "unique_normalized_terms": len({row["normalized_term"] for row in rows}),
         "search_max_skip": args.search_max_skip,
-        "sample_hits_per_query": args.sample_hits_per_query,
+        "sample_hits_per_query": sample_label(args.sample_hits_per_query),
         "perturbation_triples": len(perturbation_triples()),
         "rows_with_hits": len(sampled_rows),
         "rows_without_hits": len(rows) - len(sampled_rows),
@@ -410,6 +415,14 @@ def summarize(rows: list[dict[str, object]], args: argparse.Namespace) -> dict[s
     }
 
 
+def sample_cap(value: int) -> int | None:
+    return None if value <= 0 else value
+
+
+def sample_label(value: int) -> int | str:
+    return "all" if value <= 0 else value
+
+
 def write_markdown(
     path: Path,
     rows: list[dict[str, object]],
@@ -418,11 +431,11 @@ def write_markdown(
     lines = [
         "# WRR2 Perturbation Diagnostics",
         "",
-        "This report samples imported WRR2 length 5..8 ELS hits and counts how many",
-        "of the 125 WRR-style last-three-gap perturbation triples remain inside the",
-        "corpus boundaries and how many still spell the same term exactly. It does",
-        "not compute proximity `Q(w,w')`, corrected distance `c(w,w')`, or the WRR",
-        "permutation statistic.",
+        "This report checks imported WRR2 length 5..8 ELS hits and counts how many",
+        "of the 125 WRR-style last-three-gap perturbation triples remain inside",
+        "the corpus boundaries and how many still spell the same term exactly. It",
+        "does not compute proximity `Q(w,w')`, corrected distance `c(w,w')`, or",
+        "the WRR permutation statistic.",
         "",
         "## Summary",
         "",
@@ -436,7 +449,7 @@ def write_markdown(
             "",
             "## Boundary/Exact-Limited Rows",
             "",
-            "| Term | Hits sampled | Min in-bound | Min exact | Read |",
+            "| Term | Hits checked | Min in-bound | Min exact | Read |",
             "| --- | ---: | ---: | ---: | --- |",
         ]
     )
@@ -469,7 +482,7 @@ def write_markdown(
             "",
             "This is only a term-hit diagnostic for future corrected-distance work.",
             "A row with enough exact perturbed matches is not evidence for WRR; it only",
-            "means that the sampled ordinary ELS rows are not blocked by this one",
+            "means that the checked ordinary ELS rows are not blocked by this one",
             "source-described validity condition.",
         ]
     )
