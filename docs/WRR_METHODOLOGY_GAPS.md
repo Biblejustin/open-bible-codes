@@ -174,7 +174,7 @@ The pair-readiness join gives the same warning at the pair-table level: of 86
 length-5..8 smoke-lane pairs, 56 lack checked hits for at least one side, 30
 have fewer than 10 exact perturbed matches, and 0 are ready for
 pair-level perturbed `Q`. The other 96 imported same-record pairs are outside
-the current length-5..8 perturbation sample scope.
+the current length-5..8 perturbation diagnostic scope.
 Implementation notes are now tracked in
 `docs/WRR_CORRECTED_DISTANCE_NOTES.md`.
 

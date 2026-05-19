@@ -83,9 +83,9 @@ class WrrPerturbationDiagnosticsTests(unittest.TestCase):
         self.assertEqual(summary["unique_normalized_terms"], 2)
         self.assertEqual(summary["rows_with_hits"], 2)
         self.assertEqual(summary["rows_without_hits"], 1)
-        self.assertEqual(summary["sampled_hits"], 3)
-        self.assertEqual(summary["rows_with_sample_under_10_valid"], 1)
-        self.assertEqual(summary["rows_with_sample_under_10_exact_matches"], 1)
+        self.assertEqual(summary["checked_hits"], 3)
+        self.assertEqual(summary["rows_with_checked_under_10_valid"], 1)
+        self.assertEqual(summary["rows_with_checked_under_10_exact_matches"], 1)
         self.assertEqual(summary["min_in_bounds_perturbations"], 9)
         self.assertEqual(summary["max_in_bounds_perturbations"], 20)
         self.assertEqual(summary["min_exact_perturbation_matches"], 1)
@@ -108,7 +108,7 @@ class WrrPerturbationDiagnosticsTests(unittest.TestCase):
 def row(
     term_id: str,
     normalized: str,
-    sampled_hits: int,
+    checked_hits: int,
     min_valid: object,
     max_valid: object,
     min_exact: object,
@@ -119,7 +119,7 @@ def row(
     return {
         "term_id": term_id,
         "normalized_term": normalized,
-        "sampled_hits": sampled_hits,
+        "checked_hits": checked_hits,
         "min_in_bounds_perturbations": min_valid,
         "max_in_bounds_perturbations": max_valid,
         "min_exact_perturbation_matches": min_exact,

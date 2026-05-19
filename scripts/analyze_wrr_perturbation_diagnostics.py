@@ -50,7 +50,7 @@ FIELDNAMES = [
     "skip_cap",
     "expected_at_skip_cap",
     "target_reached",
-    "sampled_hits",
+    "checked_hits",
     "min_in_bounds_perturbations",
     "median_in_bounds_perturbations",
     "max_in_bounds_perturbations",
@@ -70,9 +70,9 @@ SUMMARY_FIELDNAMES = [
     "perturbation_triples",
     "rows_with_hits",
     "rows_without_hits",
-    "sampled_hits",
-    "rows_with_sample_under_10_valid",
-    "rows_with_sample_under_10_exact_matches",
+    "checked_hits",
+    "rows_with_checked_under_10_valid",
+    "rows_with_checked_under_10_exact_matches",
     "min_in_bounds_perturbations",
     "median_in_bounds_perturbations",
     "max_in_bounds_perturbations",
@@ -237,43 +237,43 @@ def diagnostic_rows(
         )
         expected_at_cap = expected_els_count(len(corpus.text), term.normalized, cap, frequencies)
         target_reached = expected_at_cap >= args.target_expected_hits
-        samples = query_samples.get(term.normalized, [])
+        checked_hits = query_samples.get(term.normalized, [])
         valid_counts = [
             valid_perturbation_count(
-                start=sample.start,
-                skip=sample.skip,
+                start=hit.start,
+                skip=hit.skip,
                 word_length=term.length,
                 text_length=len(corpus.text),
                 triples=triples,
             )
-            for sample in samples
+            for hit in checked_hits
         ]
         exact_counts = [
             exact_perturbation_match_count(
                 text=corpus.text,
                 word=term.normalized,
-                start=sample.start,
-                skip=sample.skip,
+                start=hit.start,
+                skip=hit.skip,
                 triples=triples,
             )
-            for sample in samples
+            for hit in checked_hits
         ]
         ordinary_failures = sum(
             1
-            for sample in samples
+            for hit in checked_hits
             if not offsets_in_bounds(
-                perturbed_offsets(sample.start, sample.skip, term.length, (0, 0, 0)),
+                perturbed_offsets(hit.start, hit.skip, term.length, (0, 0, 0)),
                 len(corpus.text),
             )
         )
         ordinary_exact_failures = sum(
             1
-            for sample in samples
+            for hit in checked_hits
             if not is_perturbed_els_match(
                 corpus.text,
                 term.normalized,
-                sample.start,
-                sample.skip,
+                hit.start,
+                hit.skip,
                 (0, 0, 0),
             )
         )
@@ -290,7 +290,7 @@ def diagnostic_rows(
                 "skip_cap": cap,
                 "expected_at_skip_cap": round(expected_at_cap, 6),
                 "target_reached": target_reached,
-                "sampled_hits": len(samples),
+                "checked_hits": len(checked_hits),
                 "min_in_bounds_perturbations": min(valid_counts) if valid_counts else "",
                 "median_in_bounds_perturbations": median_int(valid_counts) if valid_counts else "",
                 "max_in_bounds_perturbations": max(valid_counts) if valid_counts else "",
@@ -374,15 +374,15 @@ def diagnostic_read(
 
 
 def summarize(rows: list[dict[str, object]], args: argparse.Namespace) -> dict[str, object]:
-    sampled_rows = [row for row in rows if row.get("sampled_hits") not in ("", 0)]
+    checked_rows = [row for row in rows if row.get("checked_hits") not in ("", 0)]
     valid_counts = [
         int(row["min_in_bounds_perturbations"])
-        for row in sampled_rows
+        for row in checked_rows
         if row.get("min_in_bounds_perturbations") not in ("", None)
     ]
     exact_counts = [
         int(row["min_exact_perturbation_matches"])
-        for row in sampled_rows
+        for row in checked_rows
         if row.get("min_exact_perturbation_matches") not in ("", None)
     ]
     return {
@@ -391,11 +391,11 @@ def summarize(rows: list[dict[str, object]], args: argparse.Namespace) -> dict[s
         "search_max_skip": args.search_max_skip,
         "sample_hits_per_query": sample_label(args.sample_hits_per_query),
         "perturbation_triples": len(perturbation_triples()),
-        "rows_with_hits": len(sampled_rows),
-        "rows_without_hits": len(rows) - len(sampled_rows),
-        "sampled_hits": sum(int_or_zero(row.get("sampled_hits")) for row in rows),
-        "rows_with_sample_under_10_valid": sum(1 for count in valid_counts if count < 10),
-        "rows_with_sample_under_10_exact_matches": sum(
+        "rows_with_hits": len(checked_rows),
+        "rows_without_hits": len(rows) - len(checked_rows),
+        "checked_hits": sum(int_or_zero(row.get("checked_hits")) for row in rows),
+        "rows_with_checked_under_10_valid": sum(1 for count in valid_counts if count < 10),
+        "rows_with_checked_under_10_exact_matches": sum(
             1 for count in exact_counts if count < 10
         ),
         "min_in_bounds_perturbations": min(valid_counts) if valid_counts else "",
@@ -467,7 +467,7 @@ def write_markdown(
             + " | ".join(
                 [
                     display_boundary_term(row),
-                    str(row["sampled_hits"]),
+                    str(row["checked_hits"]),
                     str(row["min_in_bounds_perturbations"]),
                     str(row["min_exact_perturbation_matches"]),
                     str(row["read"]),

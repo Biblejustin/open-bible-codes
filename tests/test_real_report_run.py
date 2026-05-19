@@ -508,7 +508,7 @@ class RealReportRunTests(unittest.TestCase):
                 {
                     "rows": "120",
                     "rows_with_hits": "64",
-                    "rows_with_sample_under_10_valid": "0",
+                    "rows_with_checked_under_10_valid": "0",
                     "ordinary_in_bounds_failures": "0",
                 }
             ],

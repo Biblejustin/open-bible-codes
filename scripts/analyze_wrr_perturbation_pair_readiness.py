@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Join WRR pair rows to sampled perturbation exact-match diagnostics."""
+"""Join WRR pair rows to checked perturbation exact-match diagnostics."""
 
 from __future__ import annotations
 
@@ -26,27 +26,27 @@ FIELDNAMES = [
     "candidate_lane",
     "appellation_term_id",
     "date_term_id",
-    "appellation_sampled_hits",
-    "date_sampled_hits",
+    "appellation_checked_hits",
+    "date_checked_hits",
     "appellation_min_in_bounds",
     "date_min_in_bounds",
     "appellation_min_exact",
     "date_min_exact",
     "appellation_read",
     "date_read",
-    "perturbation_sample_status",
+    "perturbation_readiness_status",
     "perturbation_notes",
 ]
 
 SUMMARY_FIELDNAMES = [
     "pairs",
     "length_5_8_smoke_candidate_pairs",
-    "pairs_outside_sample_scope",
+    "pairs_outside_diagnostic_scope",
     "pairs_missing_diagnostic",
-    "pairs_missing_sampled_hits",
+    "pairs_missing_checked_hits",
     "pairs_under_10_in_bound",
     "pairs_under_10_exact_matches",
-    "pairs_sample_ready",
+    "pairs_ready",
 ]
 
 
@@ -102,8 +102,8 @@ def build_pair_rows(
                 "candidate_lane": pair["candidate_lane"],
                 "appellation_term_id": pair["appellation_term_id"],
                 "date_term_id": pair["date_term_id"],
-                "appellation_sampled_hits": field_or_empty(app, "sampled_hits"),
-                "date_sampled_hits": field_or_empty(date, "sampled_hits"),
+                "appellation_checked_hits": field_or_empty(app, "checked_hits"),
+                "date_checked_hits": field_or_empty(date, "checked_hits"),
                 "appellation_min_in_bounds": field_or_empty(
                     app,
                     "min_in_bounds_perturbations",
@@ -116,7 +116,7 @@ def build_pair_rows(
                 "date_min_exact": field_or_empty(date, "min_exact_perturbation_matches"),
                 "appellation_read": field_or_empty(app, "read"),
                 "date_read": field_or_empty(date, "read"),
-                "perturbation_sample_status": status,
+                "perturbation_readiness_status": status,
                 "perturbation_notes": notes,
             }
         )
@@ -129,14 +129,14 @@ def pair_status(
     date: dict[str, str] | None,
 ) -> tuple[str, str]:
     if candidate_lane != "length_5_8_smoke_candidate":
-        return "outside_sample_scope", f"candidate lane {candidate_lane} not sampled"
+        return "outside_diagnostic_scope", f"candidate lane {candidate_lane} not checked"
     if app is None or date is None:
         return "missing_diagnostic", missing_note(app, date)
 
-    app_hits = int_or_zero(app.get("sampled_hits"))
-    date_hits = int_or_zero(date.get("sampled_hits"))
+    app_hits = int_or_zero(app.get("checked_hits"))
+    date_hits = int_or_zero(date.get("checked_hits"))
     if app_hits == 0 or date_hits == 0:
-        return "missing_sampled_hits", missing_sample_note(app_hits, date_hits)
+        return "missing_checked_hits", missing_hit_note(app_hits, date_hits)
 
     app_in_bound = int_or_zero(app.get("min_in_bounds_perturbations"))
     date_in_bound = int_or_zero(date.get("min_in_bounds_perturbations"))
@@ -148,7 +148,7 @@ def pair_status(
     if app_exact < 10 or date_exact < 10:
         return "under_10_exact_matches", f"min exact {min(app_exact, date_exact)}"
 
-    return "sample_ready", "sample has >=10 exact perturbed matches on both terms"
+    return "ready", "checked hits have >=10 exact perturbed matches on both terms"
 
 
 def missing_note(app: dict[str, str] | None, date: dict[str, str] | None) -> str:
@@ -160,13 +160,13 @@ def missing_note(app: dict[str, str] | None, date: dict[str, str] | None) -> str
     return "missing diagnostic: " + ",".join(missing)
 
 
-def missing_sample_note(app_hits: int, date_hits: int) -> str:
+def missing_hit_note(app_hits: int, date_hits: int) -> str:
     missing = []
     if app_hits == 0:
         missing.append("appellation")
     if date_hits == 0:
         missing.append("date")
-    return "no sampled hits: " + ",".join(missing)
+    return "no checked hits: " + ",".join(missing)
 
 
 def field_or_empty(row: dict[str, str] | None, key: str) -> str:
@@ -183,35 +183,35 @@ def summarize(rows: list[dict[str, object]]) -> dict[str, object]:
             "candidate_lane",
             "length_5_8_smoke_candidate",
         ),
-        "pairs_outside_sample_scope": count_where(
+        "pairs_outside_diagnostic_scope": count_where(
             rows,
-            "perturbation_sample_status",
-            "outside_sample_scope",
+            "perturbation_readiness_status",
+            "outside_diagnostic_scope",
         ),
         "pairs_missing_diagnostic": count_where(
             rows,
-            "perturbation_sample_status",
+            "perturbation_readiness_status",
             "missing_diagnostic",
         ),
-        "pairs_missing_sampled_hits": count_where(
+        "pairs_missing_checked_hits": count_where(
             rows,
-            "perturbation_sample_status",
-            "missing_sampled_hits",
+            "perturbation_readiness_status",
+            "missing_checked_hits",
         ),
         "pairs_under_10_in_bound": count_where(
             rows,
-            "perturbation_sample_status",
+            "perturbation_readiness_status",
             "under_10_in_bound",
         ),
         "pairs_under_10_exact_matches": count_where(
             rows,
-            "perturbation_sample_status",
+            "perturbation_readiness_status",
             "under_10_exact_matches",
         ),
-        "pairs_sample_ready": count_where(
+        "pairs_ready": count_where(
             rows,
-            "perturbation_sample_status",
-            "sample_ready",
+            "perturbation_readiness_status",
+            "ready",
         ),
     }
 
@@ -228,8 +228,8 @@ def write_markdown(
     lines = [
         "# WRR2 Perturbation Pair Readiness",
         "",
-        "This joins the lock-prep pair table to the sampled perturbation diagnostic.",
-        "It is not a corrected-distance run; it only identifies whether sampled",
+        "This joins the lock-prep pair table to the checked perturbation diagnostic.",
+        "It is not a corrected-distance run; it only identifies whether checked",
         "ordinary hits currently satisfy the minimum exact-perturbation condition",
         "needed before pair-level perturbed `Q(x,y,z)` can be meaningful.",
         "",
@@ -269,7 +269,7 @@ def write_markdown(
                     f"`{row['candidate_lane']}`",
                     str(row["appellation_min_exact"]),
                     str(row["date_min_exact"]),
-                    f"`{row['perturbation_sample_status']}`",
+                    f"`{row['perturbation_readiness_status']}`",
                 ]
             )
             + " |"
@@ -281,7 +281,7 @@ def write_markdown(
 def status_counts(rows: list[dict[str, object]]) -> dict[str, int]:
     counts: dict[str, int] = {}
     for row in rows:
-        status = str(row["perturbation_sample_status"])
+        status = str(row["perturbation_readiness_status"])
         counts[status] = counts.get(status, 0) + 1
     return counts
 
