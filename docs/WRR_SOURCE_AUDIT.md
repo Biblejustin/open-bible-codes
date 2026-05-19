@@ -420,6 +420,20 @@ last-three-gap perturbations and whether those perturbed rows still spell the
 same term exactly. It does not compute proximity `Q(w,w')`, corrected distance
 `c(w,w')`, or a permutation statistic.
 
+WRR perturbation pair-readiness join:
+
+| Item | Count |
+| --- | ---: |
+| imported same-record pairs | 182 |
+| length-5..8 smoke-lane pairs | 86 |
+| pairs outside perturbation sample scope | 96 |
+| pairs missing sampled hits | 56 |
+| pairs under 10 exact perturbed matches | 30 |
+| pairs sample-ready for perturbed `Q` | 0 |
+
+This joins the lock-prep pair table to the sampled perturbation diagnostic.
+It is still not a corrected-distance run.
+
 ## Statistic Helpers
 
 `els/wrr.py` now implements the WRR-independent arithmetic around the missing

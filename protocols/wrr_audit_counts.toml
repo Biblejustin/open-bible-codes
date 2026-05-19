@@ -377,13 +377,36 @@ inputs = [
   "els/corpus.py",
   "els/normalization.py",
   "els/search.py",
-  "els/wrr.py",
 ]
 outputs = [
   "reports/wrr_1994/wrr2_perturbation_diagnostics.csv",
   "reports/wrr_1994/wrr2_perturbation_diagnostics_summary.csv",
   "reports/wrr_1994/wrr2_perturbation_diagnostics.md",
   "reports/wrr_1994/wrr2_perturbation_diagnostics.manifest.json",
+]
+
+[[steps]]
+id = "diagnose_wrr2_perturbation_pair_readiness"
+description = "Join WRR2 pair rows to sampled perturbation exact-match diagnostics."
+argv = [
+  "-m", "scripts.analyze_wrr_perturbation_pair_readiness",
+  "--pair-table", "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "--perturbations", "reports/wrr_1994/wrr2_perturbation_diagnostics.csv",
+  "--out", "reports/wrr_1994/wrr2_perturbation_pair_readiness.csv",
+  "--summary-out", "reports/wrr_1994/wrr2_perturbation_pair_readiness_summary.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_perturbation_pair_readiness.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_perturbation_pair_readiness.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_perturbation_pair_readiness.py",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "reports/wrr_1994/wrr2_perturbation_diagnostics.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_perturbation_pair_readiness.csv",
+  "reports/wrr_1994/wrr2_perturbation_pair_readiness_summary.csv",
+  "reports/wrr_1994/wrr2_perturbation_pair_readiness.md",
+  "reports/wrr_1994/wrr2_perturbation_pair_readiness.manifest.json",
 ]
 
 [[steps]]

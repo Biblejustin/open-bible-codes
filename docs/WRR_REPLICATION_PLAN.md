@@ -64,6 +64,10 @@ Already implemented:
   `scripts/analyze_wrr_perturbation_diagnostics.py`, wired into
   `protocols/wrr_audit_counts.toml`, now splitting in-bound perturbations from
   exact perturbed matches.
+- WRR perturbation pair-readiness join in
+  `scripts/analyze_wrr_perturbation_pair_readiness.py`, wired into
+  `protocols/wrr_audit_counts.toml`, summarizing whether lock-prep pairs pass
+  the sampled exact-perturbation threshold before pair-level perturbed `Q`.
 
 Source audit:
 

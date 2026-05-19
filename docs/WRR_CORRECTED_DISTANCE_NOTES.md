@@ -119,6 +119,10 @@ Already implemented:
   every sampled ordinary hit keeps all 125 triples in bounds, but every row
   with hits has fewer than 10 exact perturbed matches; exact-match counts range
   from 1 to 5, with median 1.
+- perturbation pair-readiness diagnostic joining sampled exact-match term rows
+  to the lock-prep pair table. Current output has 86 length-5..8 smoke-lane
+  pairs: 56 lack sampled hits for at least one side, 30 have fewer than 10
+  exact perturbed matches, and 0 are sample-ready for pair-level perturbed `Q`.
 
 Not yet implemented:
 
