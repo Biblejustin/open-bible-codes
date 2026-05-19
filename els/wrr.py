@@ -1,9 +1,9 @@
 """WRR-style statistic helpers.
 
 These helpers cover arithmetic that is independent of the disputed term list:
-skip-window expectation, low-level WRR ELS proximity primitives, P1/P2
-aggregate transforms, and permutation ranks. They do not implement the full
-corrected distance c(w,w').
+skip-window expectation, low-level WRR ELS proximity primitives, Q aggregation
+for already-domain-labeled ELS rows, P1/P2 aggregate transforms, and
+permutation ranks. They do not implement the full corrected distance c(w,w').
 """
 
 from __future__ import annotations
@@ -11,6 +11,17 @@ from __future__ import annotations
 import math
 from collections import Counter
 from collections.abc import Iterable, Mapping
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class WrrElsOccurrence:
+    """One ELS occurrence plus its half-open domain of minimality."""
+
+    offsets: tuple[int, ...]
+    skip: int
+    domain_start: int
+    domain_end: int
 
 
 def perturbation_triples(radius: int = 2) -> tuple[tuple[int, int, int], ...]:
@@ -294,6 +305,92 @@ def wrr_ordinary_els_els_alpha(
         left_skip=left_skip,
         right_skip=right_skip,
         row_width_count=row_width_count,
+    )
+
+
+def validate_wrr_occurrence(occurrence: WrrElsOccurrence, *, text_length: int) -> None:
+    if text_length < 1:
+        raise ValueError("text_length must be > 0")
+    if occurrence.skip == 0:
+        raise ValueError("skip must not be 0")
+    if len(occurrence.offsets) < 2:
+        raise ValueError("offsets must contain at least two positions")
+    if any(offset < 0 or offset >= text_length for offset in occurrence.offsets):
+        raise ValueError("offsets must be inside text")
+    if not (0 <= occurrence.domain_start < occurrence.domain_end <= text_length):
+        raise ValueError("domain must be a non-empty half-open interval inside text")
+    if min(occurrence.offsets) < occurrence.domain_start:
+        raise ValueError("domain must include occurrence offsets")
+    if max(occurrence.offsets) >= occurrence.domain_end:
+        raise ValueError("domain must include occurrence offsets")
+
+
+def wrr_domain_intersection_length(
+    left: WrrElsOccurrence,
+    right: WrrElsOccurrence,
+    *,
+    text_length: int,
+) -> int:
+    """Return `X(e,e')`, the overlap length of two domains of minimality."""
+
+    validate_wrr_occurrence(left, text_length=text_length)
+    validate_wrr_occurrence(right, text_length=text_length)
+    start = max(left.domain_start, right.domain_start)
+    end = min(left.domain_end, right.domain_end)
+    return max(0, end - start)
+
+
+def wrr_domain_weight(
+    left: WrrElsOccurrence,
+    right: WrrElsOccurrence,
+    *,
+    text_length: int,
+) -> float:
+    """Return WRR `omega(e,e') = X(e,e') / X(G)` for two ELS occurrences."""
+
+    return wrr_domain_intersection_length(left, right, text_length=text_length) / text_length
+
+
+def wrr_weighted_els_pair_proximity(
+    left: WrrElsOccurrence,
+    right: WrrElsOccurrence,
+    *,
+    text_length: int,
+    row_width_count: int = 10,
+) -> float:
+    """Return one WRR `omega(e,e') * alpha(e,e')` contribution."""
+
+    return wrr_domain_weight(left, right, text_length=text_length) * wrr_els_els_alpha(
+        left.offsets,
+        right.offsets,
+        left_skip=left.skip,
+        right_skip=right.skip,
+        row_width_count=row_width_count,
+    )
+
+
+def wrr_word_pair_proximity(
+    left_occurrences: Iterable[WrrElsOccurrence],
+    right_occurrences: Iterable[WrrElsOccurrence],
+    *,
+    text_length: int,
+    row_width_count: int = 10,
+) -> float:
+    """Return WRR `Q(w,w')` from already-domain-labeled ELS occurrences."""
+
+    left_rows = tuple(left_occurrences)
+    right_rows = tuple(right_occurrences)
+    if not left_rows or not right_rows:
+        return 0.0
+    return sum(
+        wrr_weighted_els_pair_proximity(
+            left,
+            right,
+            text_length=text_length,
+            row_width_count=row_width_count,
+        )
+        for left in left_rows
+        for right in right_rows
     )
 
 

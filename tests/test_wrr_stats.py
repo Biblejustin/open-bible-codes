@@ -19,10 +19,15 @@ from els.wrr import (
     product_uniform_cdf_from_log,
     relative_letter_frequencies,
     skip_cap_for_expected_count,
+    WrrElsOccurrence,
+    wrr_domain_intersection_length,
+    wrr_domain_weight,
     wrr_els_els_alpha,
     wrr_els_els_distance_at_row_width,
     wrr_els_els_proximity_at_row_width,
     wrr_ordinary_els_els_alpha,
+    wrr_weighted_els_pair_proximity,
+    wrr_word_pair_proximity,
     wrr2_els_sl_distance_at_row_width,
     wrr2_els_sl_proximity,
     wrr2_els_sl_proximity_at_row_width,
@@ -174,6 +179,37 @@ class WrrStatsTests(unittest.TestCase):
 
         self.assertEqual(alpha, 2 / 3)
 
+    def test_wrr_domain_weight_uses_overlap_relative_to_text_length(self) -> None:
+        left = WrrElsOccurrence((0, 10, 20), 10, 0, 50)
+        right = WrrElsOccurrence((11, 21, 31), 10, 10, 40)
+
+        self.assertEqual(wrr_domain_intersection_length(left, right, text_length=100), 30)
+        self.assertEqual(wrr_domain_weight(left, right, text_length=100), 0.3)
+
+    def test_wrr_weighted_pair_proximity_multiplies_alpha_by_domain_weight(self) -> None:
+        left = WrrElsOccurrence((0, 10, 20), 10, 0, 50)
+        right = WrrElsOccurrence((11, 21, 31), 10, 10, 40)
+
+        proximity = wrr_weighted_els_pair_proximity(
+            left,
+            right,
+            text_length=100,
+            row_width_count=1,
+        )
+
+        self.assertAlmostEqual(proximity, 0.2)
+
+    def test_wrr_word_pair_proximity_sums_all_domain_weighted_pairs(self) -> None:
+        left = (
+            WrrElsOccurrence((0, 10, 20), 10, 0, 50),
+            WrrElsOccurrence((50, 60, 70), 10, 50, 90),
+        )
+        right = (WrrElsOccurrence((11, 21, 31), 10, 10, 40),)
+
+        proximity = wrr_word_pair_proximity(left, right, text_length=100, row_width_count=1)
+
+        self.assertAlmostEqual(proximity, 0.2)
+
     def test_wrr_helper_argument_validation(self) -> None:
         with self.assertRaises(ValueError):
             perturbation_triples(-1)
@@ -211,6 +247,18 @@ class WrrStatsTests(unittest.TestCase):
             wrr_els_els_distance_at_row_width((0,), (1, 2), row_width=10)
         with self.assertRaises(ValueError):
             wrr_els_els_distance_at_row_width((0, 1), (2,), row_width=10)
+        with self.assertRaises(ValueError):
+            wrr_domain_weight(
+                WrrElsOccurrence((0,), 1, 0, 1),
+                WrrElsOccurrence((0, 1), 1, 0, 2),
+                text_length=2,
+            )
+        with self.assertRaises(ValueError):
+            wrr_domain_weight(
+                WrrElsOccurrence((0, 1), 1, 1, 2),
+                WrrElsOccurrence((0, 1), 1, 0, 2),
+                text_length=2,
+            )
 
     def test_corrected_distance_rank_is_small_for_large_proximity(self) -> None:
         rank = corrected_distance_rank(9.0, [9.0, 7.0, 5.0, 3.0, 1.0], minimum_valid=1)

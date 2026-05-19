@@ -54,6 +54,10 @@ Already implemented:
   These implement the paper's fixed-row-width distance `f^2 + f'^2 + l^2`
   and the `alpha(e,e')` row-width sum across the first ten widths from each
   ELS skip.
+- WRR domain-overlap weighting and `Q(w,w')` summation helpers in `els/wrr.py`
+  for ELS occurrences that already have half-open domains of minimality
+  attached. These implement the `omega(e,e') * alpha(e,e')` sum, but do not yet
+  derive the domains from the full ELS set.
 - low-level WRR2/Nations ELS-vs-surface-string distance/proximity helpers in
   `els/wrr.py`. These implement the source-described fixed-row-width distance
   `f^2 + f'^2 + l^2 + 1`, use `f' = 1` for surface-letter strings, and sum
@@ -91,8 +95,7 @@ Already implemented:
 
 Not yet implemented:
 
-- WRR domain-of-minimality segmentation;
-- exact `Q(w,w')` proximity aggregation with domains of minimality;
+- WRR domain-of-minimality segmentation from the full ELS set;
 - corrected-distance `c(w,w')` calculation over real word pairs from those
   `Q` and perturbed-`Q` values;
 - permutation driver over the locked personality/date pair table.
@@ -107,11 +110,13 @@ Not yet implemented:
    helper for WRR 1994 replication work unless a source-specific diagnostic
    says otherwise.
 
-2. Full `Q(w,w')` aggregation.
+2. Domain-of-minimality derivation.
 
    The rank helper only consumes already-computed ordinary and perturbed
-   proximity values. It does not yet compute the domain-of-minimality weighted
-   `Q(w,w')` values needed by the paper.
+   proximity values. `els/wrr.py` can now sum domain-weighted ELS-pair
+   contributions when domains are supplied, but it does not yet derive each
+   ELS's maximal domain of minimality from all shorter-skip occurrences of the
+   same word.
 
 3. ELS-vs-ELS versus ELS-vs-surface-text.
 
@@ -134,8 +139,9 @@ Not yet implemented:
 
 1. Reconcile the canonical WRR pair table against a primary or citable
    transcription.
-2. Implement source-backed `Q(w,w')` with domain-of-minimality weights.
-3. Feed those ordinary and perturbed `Q` values through the strict WRR 1994
+2. Implement source-backed domain-of-minimality derivation from the full ELS
+   set.
+3. Feed ordinary and perturbed `Q` values through the strict WRR 1994
    rank helper to produce `c(w,w')`.
 
 ## Current Read
