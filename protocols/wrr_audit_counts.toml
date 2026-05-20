@@ -31,6 +31,26 @@ outputs = [
 ]
 
 [[steps]]
+id = "audit_wrr_primary_pdf_anchors"
+description = "Check key WRR 1994 primary-PDF method anchors in extracted text."
+argv = [
+  "-m", "scripts.analyze_wrr_primary_pdf_anchors",
+  "--source", "reports/wrr_1994/wrr_1994_paper.pdf",
+  "--out", "reports/wrr_1994/wrr_primary_pdf_anchors.csv",
+  "--markdown-out", "reports/wrr_1994/wrr_primary_pdf_anchors.md",
+  "--manifest-out", "reports/wrr_1994/wrr_primary_pdf_anchors.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_primary_pdf_anchors.py",
+  "reports/wrr_1994/wrr_1994_paper.pdf",
+]
+outputs = [
+  "reports/wrr_1994/wrr_primary_pdf_anchors.csv",
+  "reports/wrr_1994/wrr_primary_pdf_anchors.md",
+  "reports/wrr_1994/wrr_primary_pdf_anchors.manifest.json",
+]
+
+[[steps]]
 id = "audit_wrr_source_shapes"
 description = "Summarize raw ANU famous-rabbis source-list record shapes."
 argv = [
