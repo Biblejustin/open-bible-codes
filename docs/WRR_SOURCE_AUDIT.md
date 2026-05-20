@@ -138,9 +138,10 @@ that were previously open in this repo: `c(w,w')` uses a greater-than-or-equal
 `v/m` count, and `c(w,w')` is undefined unless the ordinary `(0,0,0)` proximity
 is defined and at least 10 perturbation proximities are defined. MBBK also notes
 that the printed WRR expected-ELS window formula differs from the formula used
-by the WRR programs. The current code still uses the printed formula; a full
-reproduction driver must choose paper formula versus program formula before
-final `D(w)` calculations.
+by the WRR programs. The current code supports both formula choices; the
+skip-cap audit keeps printed selected while reporting program caps side by side.
+A full reproduction driver must choose paper formula versus program formula
+before final `D(w)` calculations.
 
 The ANU/McKay data page provides plain-text WRR lists in a modified
 Michigan-Claremont transliteration. That is useful for a reproducible import
@@ -640,9 +641,11 @@ WRR expected-count skip-cap audit for length `5..8` rows:
 | rows with `D(w) <= 500` but `> 250` | 7 |
 | rows with `D(w) <= 1000` but `> 500` | 17 |
 | rows with `D(w) > 1000` | 80 |
+| rows where reported-program `D(w)` is smaller than printed `D(w)` | 13 |
+| rows where reported-program `D(w)` equals printed `D(w)` | 107 |
 | rows not reaching expected 10 by word-max skip | 55 |
 | rows with zero observed hits at max skip 250 | 56 |
-| skip-cap audit runtime | 0.693s |
+| skip-cap audit runtime | 2.571s |
 
 This matters because the pair/control smoke above uses `max_skip=250`, while
 the WRR appendix describes term-specific `D(w)` caps based on expected ELS

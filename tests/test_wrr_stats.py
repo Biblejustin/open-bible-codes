@@ -474,12 +474,28 @@ class WrrStatsTests(unittest.TestCase):
             9 * (200 - 4 * 12),
         )
 
+    def test_els_window_count_supports_reported_program_formula(self) -> None:
+        self.assertEqual(
+            els_window_count(text_length=100, word_length=5, max_skip=10, formula="program"),
+            9 * (200 - 4 * 10),
+        )
+
     def test_expected_count_uses_letter_frequencies(self) -> None:
         frequencies = {"A": 0.5, "B": 0.25}
 
         count = expected_els_count(100, "AB", 4, frequencies)
 
         self.assertEqual(count, 0.125 * els_window_count(100, 2, 4))
+
+    def test_expected_count_accepts_program_formula(self) -> None:
+        frequencies = {"A": 0.5, "B": 0.25}
+
+        count = expected_els_count(100, "AB", 4, frequencies, formula="program")
+
+        self.assertEqual(
+            count,
+            0.125 * els_window_count(100, 2, 4, formula="program"),
+        )
 
     def test_skip_cap_returns_first_cap_reaching_target(self) -> None:
         cap = skip_cap_for_expected_count(
@@ -491,6 +507,24 @@ class WrrStatsTests(unittest.TestCase):
 
         self.assertEqual(cap, 3)
 
+    def test_skip_cap_can_use_reported_program_formula(self) -> None:
+        printed = skip_cap_for_expected_count(
+            "AAAAABBBBB",
+            "AB",
+            target_expected=8,
+            max_skip_limit=10,
+        )
+        program = skip_cap_for_expected_count(
+            "AAAAABBBBB",
+            "AB",
+            target_expected=8,
+            max_skip_limit=10,
+            formula="program",
+        )
+
+        self.assertEqual(printed, 4)
+        self.assertEqual(program, 3)
+
     def test_skip_cap_limit_is_capped_to_possible_word_span(self) -> None:
         cap = skip_cap_for_expected_count(
             "AAAAABBBBB",
@@ -500,6 +534,10 @@ class WrrStatsTests(unittest.TestCase):
         )
 
         self.assertEqual(cap, 9)
+
+    def test_skip_cap_rejects_unknown_formula(self) -> None:
+        with self.assertRaises(ValueError):
+            skip_cap_for_expected_count("AAAAABBBBB", "AB", formula="other")
 
     def test_relative_letter_frequencies_sum_to_one(self) -> None:
         frequencies = relative_letter_frequencies("AAB")

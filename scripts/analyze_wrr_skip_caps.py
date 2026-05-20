@@ -40,6 +40,12 @@ FIELDNAMES = [
     "target_expected_hits",
     "skip_cap",
     "expected_at_skip_cap",
+    "skip_cap_formula",
+    "printed_skip_cap",
+    "program_skip_cap",
+    "program_minus_printed",
+    "expected_at_program_skip_cap",
+    "program_target_reached",
     "target_reached",
     "skip_cap_band",
 ]
@@ -50,10 +56,15 @@ SUMMARY_FIELDNAMES = [
     "observed_max_skip",
     "target_expected_hits",
     "max_skip_limit",
+    "skip_cap_formula",
     "cap_le_observed_max_skip",
     "cap_le_500",
     "cap_le_1000",
     "cap_gt_1000",
+    "program_cap_lt_printed",
+    "program_cap_eq_printed",
+    "program_cap_gt_printed",
+    "program_target_unreached_rows",
     "target_unreached_rows",
     "observed_zero_rows",
 ]
@@ -89,6 +100,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--observed-max-skip", type=int, default=250)
     parser.add_argument("--target-expected-hits", type=float, default=10.0)
     parser.add_argument("--max-skip-limit", type=int)
+    parser.add_argument("--skip-cap-formula", choices=["printed", "program"], default="printed")
     parser.add_argument("--out", type=Path, default=OUT)
     parser.add_argument("--summary-out", type=Path, default=SUMMARY_OUT)
     parser.add_argument("--markdown-out", type=Path, default=MD_OUT)
@@ -121,15 +133,45 @@ def skip_cap_rows(
             normalized,
             target_expected=args.target_expected_hits,
             max_skip_limit=args.max_skip_limit,
+            formula=args.skip_cap_formula,
+        )
+        printed_cap = skip_cap_for_expected_count(
+            corpus.text,
+            normalized,
+            target_expected=args.target_expected_hits,
+            max_skip_limit=args.max_skip_limit,
+            formula="printed",
+        )
+        program_cap = skip_cap_for_expected_count(
+            corpus.text,
+            normalized,
+            target_expected=args.target_expected_hits,
+            max_skip_limit=args.max_skip_limit,
+            formula="program",
         )
         expected_at_observed = expected_els_count(
             len(corpus.text),
             normalized,
             args.observed_max_skip,
             frequencies,
+            formula=args.skip_cap_formula,
         )
-        expected_at_cap = expected_els_count(len(corpus.text), normalized, cap, frequencies)
+        expected_at_cap = expected_els_count(
+            len(corpus.text),
+            normalized,
+            cap,
+            frequencies,
+            formula=args.skip_cap_formula,
+        )
+        expected_at_program_cap = expected_els_count(
+            len(corpus.text),
+            normalized,
+            program_cap,
+            frequencies,
+            formula="program",
+        )
         target_reached = expected_at_cap >= args.target_expected_hits
+        program_target_reached = expected_at_program_cap >= args.target_expected_hits
         count_row = count_rows.get(row["term_id"], {})
         output.append(
             {
@@ -145,6 +187,12 @@ def skip_cap_rows(
                 "target_expected_hits": args.target_expected_hits,
                 "skip_cap": cap,
                 "expected_at_skip_cap": round(expected_at_cap, 6),
+                "skip_cap_formula": args.skip_cap_formula,
+                "printed_skip_cap": printed_cap,
+                "program_skip_cap": program_cap,
+                "program_minus_printed": program_cap - printed_cap,
+                "expected_at_program_skip_cap": round(expected_at_program_cap, 6),
+                "program_target_reached": program_target_reached,
                 "target_reached": target_reached,
                 "skip_cap_band": skip_cap_band(cap, args),
             }
@@ -161,10 +209,23 @@ def summarize(rows: list[dict[str, object]], args: argparse.Namespace) -> dict[s
         "observed_max_skip": args.observed_max_skip,
         "target_expected_hits": args.target_expected_hits,
         "max_skip_limit": args.max_skip_limit or "word_max",
+        "skip_cap_formula": args.skip_cap_formula,
         "cap_le_observed_max_skip": sum(1 for cap in caps if cap <= args.observed_max_skip),
         "cap_le_500": bands["cap_le_500"],
         "cap_le_1000": bands["cap_le_1000"],
         "cap_gt_1000": bands["cap_gt_1000"],
+        "program_cap_lt_printed": sum(
+            1 for row in rows if int(row.get("program_skip_cap", 0)) < int(row.get("printed_skip_cap", 0))
+        ),
+        "program_cap_eq_printed": sum(
+            1 for row in rows if int(row.get("program_skip_cap", 0)) == int(row.get("printed_skip_cap", 0))
+        ),
+        "program_cap_gt_printed": sum(
+            1 for row in rows if int(row.get("program_skip_cap", 0)) > int(row.get("printed_skip_cap", 0))
+        ),
+        "program_target_unreached_rows": sum(
+            1 for row in rows if not bool(row.get("program_target_reached", False))
+        ),
         "target_unreached_rows": sum(1 for row in rows if not bool(row["target_reached"])),
         "observed_zero_rows": sum(1 for row in rows if int_or_zero(row["observed_hits"]) == 0),
     }
@@ -191,6 +252,7 @@ def write_markdown(
         "# WRR2 Skip-Cap Audit",
         "",
         "This report estimates the WRR appendix-style skip cap D(w) where expected ELS hits reach 10 for imported length 5..8 terms.",
+        "It keeps the selected formula in `skip_cap` and also reports printed-formula and reported-program-formula caps side by side.",
         "",
         "## Summary",
         "",
@@ -204,8 +266,8 @@ def write_markdown(
             "",
             "## Smallest Caps",
             "",
-            "| Term | Length | Observed hits at 250 | Skip cap | Expected at cap |",
-            "| --- | ---: | ---: | ---: | ---: |",
+            "| Term | Length | Observed hits at 250 | Skip cap | Program cap | Expected at cap |",
+            "| --- | ---: | ---: | ---: | ---: | ---: |",
         ]
     )
     for row in top_low:
@@ -215,8 +277,8 @@ def write_markdown(
             "",
             "## Largest Caps",
             "",
-            "| Term | Length | Observed hits at 250 | Skip cap | Expected at cap |",
-            "| --- | ---: | ---: | ---: | ---: |",
+            "| Term | Length | Observed hits at 250 | Skip cap | Program cap | Expected at cap |",
+            "| --- | ---: | ---: | ---: | ---: | ---: |",
         ]
     )
     for row in top_high:
@@ -227,6 +289,7 @@ def write_markdown(
             "## Caution",
             "",
             "This estimates D(w) from corpus letter frequencies only. It does not compute corrected distances or WRR permutation statistics.",
+            "The printed-formula versus reported-program-formula choice remains a reproduction-method decision.",
         ]
     )
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -243,6 +306,7 @@ def skip_cap_markdown_row(row: dict[str, object]) -> str:
                 str(row["normalized_length"]),
                 str(row["observed_hits"]),
                 str(row["skip_cap"]),
+                str(row.get("program_skip_cap", "")),
                 str(row["expected_at_skip_cap"]),
             ]
         )
@@ -273,6 +337,7 @@ def write_manifest(
         "terms": str(args.terms),
         "counts": str(args.counts),
         "config": str(args.config),
+        "skip_cap_formula": args.skip_cap_formula,
         "corpus": corpus.summary(),
         "summary": summary,
         "rows": len(rows),

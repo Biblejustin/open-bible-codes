@@ -81,7 +81,7 @@ refutation of the WRR paper.
 | Source pages | Cited paper/list context downloaded and hash-stamped | Paper, ANU files, WRR/Nations pages, MC key, WNP critique pages, MBBK 1999 response, Chance article, Torah-code papers page, and Bombach/Gans/Haralick/Levitt/Rips/Schwartzman/Witztum papers/data are tracked in the source manifest. |
 | Pair universe | Declared second-list candidate set yields 163 source-defined distances after the corrected-distance eligibility rule | Lock-prep table exists at `reports/wrr_1994/wrr2_pair_eligibility_table.csv`; imported `WRR2.txt` yields 182 raw same-record pairs, 165 after appellation length >= 5, and 86 under the current 5..8 both-side screen. The `163` count is now treated as a defined-distance output count, not a raw pair table. |
 | Exclusions | Every excluded appellation/date row has a citable rule | Not locked; one Zacut-appellation exclusion would close 165 to 163, but that is only a diagnostic hypothesis. |
-| Skip caps | Term-specific WRR `D(w)` windows applied for each accepted term | Not locked; current pair/control screens still use broad fixed caps for smoke tests. |
+| Skip caps | Term-specific WRR `D(w)` windows applied for each accepted term | Not locked; helpers now support both the printed WRR formula and the reported WRR-program formula. The skip-cap audit keeps printed selected while reporting program caps side by side. Current pair/control screens still use broad fixed caps for smoke tests. |
 | Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Helpers now include conservative supplied-row domain labeling, real-corpus WRR2 domain diagnostics with undefined-reason labels, defined-domain-only ordinary `Q(w,w')` diagnostics, exact perturbed-ELS match checks, domain-weighted `Q(w,w')` summation for domain-labeled ELS rows, and the source-count WRR `v/m` rank step. Undefined `c(w,w')` conditions are source-backed; perturbed `Q` and the per-pair `c(w,w')` driver are still missing. |
 | Aggregate statistic | `P1`, `P2`, `P3`, `P4`, rank handling, and `rho0` run over the locked pair set | Helpers exist, but no reproduction driver can run until the pair set and corrected distances are fixed. |
 | Permutation test | Date/rabbi pairings shuffled under the declared WRR rule with recorded seeds/counts | Not built. |
@@ -203,10 +203,13 @@ Current length 5..8 skip-cap smoke:
 | length-filtered rows | 120 |
 | unique normalized terms | 109 |
 | rows with estimated `D(w) <= 250` | 16 |
+| rows where reported-program `D(w)` is smaller than printed `D(w)` | 13 |
+| rows where reported-program `D(w)` equals printed `D(w)` | 107 |
 | rows not reaching expected 10 by word-max skip | 55 |
 | rows with zero observed hits at max skip 250 | 56 |
 
-This means fixed `max_skip=250` is not a reproduction setting.
+This means fixed `max_skip=250` is not a reproduction setting, and the printed
+formula versus reported-program formula choice remains a method lock item.
 
 ### 5. Aggregate Statistic And Permutations
 

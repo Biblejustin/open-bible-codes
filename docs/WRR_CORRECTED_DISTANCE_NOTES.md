@@ -33,8 +33,9 @@ The paper's Appendix A.1 and A.2 define these pieces:
   for each ELS skip.
 - ELS rows are weighted by the intersection of their domains of minimality.
 - Skip caps are term-specific: choose `D(w)` so the expected ELS count is about
-  10. The existing `els/wrr.py` helpers already implement the expected-count
-  arithmetic and skip-cap selection.
+  10. The `els/wrr.py` helpers support both the printed WRR formula and the
+  reported WRR-program formula for expected-count arithmetic and skip-cap
+  selection.
 - Corrected distance `c(w,w')` is based on ranking the ordinary proximity
   against 125 perturbation proximities from triples `(x,y,z)` with each element
   in `{-2,-1,0,1,2}`.
@@ -48,9 +49,10 @@ The paper's Appendix A.1 and A.2 define these pieces:
   the valid perturbation set or if `m(w,w') < 10`.
 - MBBK Appendix A notes a formula mismatch for the ELS-window count: the printed
   WRR formula uses `(D - 1)(2L - (k - 1)(D + 2))`, while the WRR programs used
-  `(D - 1)(2L - (k - 1)D)`. The current helper implements the printed formula;
-  a reproduction driver must explicitly choose paper formula versus program
-  formula before final `D(w)` runs.
+  `(D - 1)(2L - (k - 1)D)`. The helper can now compute either formula; the
+  current skip-cap audit keeps the printed formula selected while reporting
+  program-formula caps side by side. A reproduction driver must explicitly
+  choose one before final `D(w)` runs.
 
 ## Current Repo Coverage
 
@@ -183,7 +185,7 @@ Not yet implemented:
 ## Proposed Implementation Order
 
 1. Decide whether `D(w)` uses the printed WRR count formula or the program
-   formula documented by MBBK.
+   formula documented by MBBK; current audit rows expose both.
 2. Implement the real-pair perturbed `Q` driver and enforce the source-backed
    undefined `c(w,w')` conditions.
 3. Feed ordinary and perturbed `Q` values through the WRR source-count rank

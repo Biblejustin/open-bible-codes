@@ -85,7 +85,8 @@ table. Remaining claim-grade pieces:
 
 - candidate pair source/reconciliation, with `163` treated as the
   source-defined corrected-distance output count rather than a raw pair table;
-- printed-formula vs WRR-program `D(w)` choice;
+- printed-formula vs WRR-program `D(w)` choice, now side-by-side audited but
+  not locked;
 - real-pair perturbed `Q` and corrected distance `c(w,w')`, enforcing
   source-backed undefined conditions;
 - term-specific skip-cap logic;
@@ -109,10 +110,11 @@ simulation harness and an ELS/cylinder level-1 analogue:
 - `docs/TORAH_CODE_RESEARCH_MODEL_SIMULATION.md`
 - `docs/TORAH_CODE_RESEARCH_ELS_MODEL_SIMULATION.md`
 
-Next research-program upgrade: replace the current transparent resonant
-row-width proxy with a fuller source-method reconstruction, add source-specific
-Fisher order-statistic weights, and only then consider real Torah-code source
-data.
+The research-program ELS harness now includes a split-fit Fisher
+order-statistic row. Next research-program upgrade: replace the current
+transparent resonant row-width proxy with a fuller source-method reconstruction,
+recover source-published Fisher weights if a citable source becomes available,
+and only then consider real Torah-code source data.
 
 ### 2. Source-Basis Audit Queue
 

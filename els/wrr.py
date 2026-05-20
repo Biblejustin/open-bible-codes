@@ -744,19 +744,30 @@ def validate_corrected_distance_inputs(
     return values
 
 
-def els_window_count(text_length: int, word_length: int, max_skip: int) -> int:
+def els_window_count(
+    text_length: int,
+    word_length: int,
+    max_skip: int,
+    *,
+    formula: str = "printed",
+) -> int:
     """Count signed ELS windows with 2 <= |skip| <= max_skip.
 
-    Formula from the WRR appendix:
-    (D - 1) * (2L - (k - 1) * (D + 2)).
+    The WRR appendix printed `(D - 1)(2L - (k - 1)(D + 2))`.
+    MBBK Appendix A reports that the WRR programs used
+    `(D - 1)(2L - (k - 1)D)`.
     """
 
     if text_length < 1:
         raise ValueError("text_length must be > 0")
     if word_length < 1:
         raise ValueError("word_length must be > 0")
+    if formula not in {"printed", "program"}:
+        raise ValueError("formula must be printed or program")
     if max_skip < 2:
         return 0
+    if formula == "program":
+        return max(0, (max_skip - 1) * (2 * text_length - (word_length - 1) * max_skip))
     return max(0, (max_skip - 1) * (2 * text_length - (word_length - 1) * (max_skip + 2)))
 
 
@@ -773,13 +784,15 @@ def expected_els_count(
     word: str,
     max_skip: int,
     frequencies: Mapping[str, float],
+    *,
+    formula: str = "printed",
 ) -> float:
     if not word:
         raise ValueError("word must not be empty")
     probability = 1.0
     for letter in word:
         probability *= frequencies.get(letter, 0.0)
-    return probability * els_window_count(text_length, len(word), max_skip)
+    return probability * els_window_count(text_length, len(word), max_skip, formula=formula)
 
 
 def skip_cap_for_expected_count(
@@ -788,6 +801,7 @@ def skip_cap_for_expected_count(
     *,
     target_expected: float = 10.0,
     max_skip_limit: int | None = None,
+    formula: str = "printed",
 ) -> int:
     """Return the first D whose expected count reaches target_expected.
 
@@ -802,11 +816,16 @@ def skip_cap_for_expected_count(
         raise ValueError("text must not be empty")
     if not word:
         raise ValueError("word must not be empty")
+    if formula not in {"printed", "program"}:
+        raise ValueError("formula must be printed or program")
     possible_limit = max(2, (len(text) - 1) // max(1, len(word) - 1))
     limit = min(max_skip_limit or possible_limit, possible_limit)
     frequencies = relative_letter_frequencies(text)
     for max_skip in range(2, limit + 1):
-        if expected_els_count(len(text), word, max_skip, frequencies) >= target_expected:
+        if (
+            expected_els_count(len(text), word, max_skip, frequencies, formula=formula)
+            >= target_expected
+        ):
             return max_skip
     return limit
 

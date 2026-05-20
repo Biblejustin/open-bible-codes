@@ -18,11 +18,12 @@ class WrrSkipCapsTests(unittest.TestCase):
             observed_max_skip=250,
             target_expected_hits=10.0,
             max_skip_limit=None,
+            skip_cap_formula="printed",
         )
         rows = [
-            row("A", 100, 0, True, "cap_le_observed_max_skip"),
-            row("B", 600, 2, True, "cap_le_1000"),
-            row("A", 5000, 0, False, "cap_gt_1000"),
+            row("A", 100, 95, 0, True, True, "cap_le_observed_max_skip"),
+            row("B", 600, 600, 2, True, True, "cap_le_1000"),
+            row("A", 5000, 5000, 0, False, False, "cap_gt_1000"),
         ]
 
         summary = summarize(rows, args)
@@ -32,6 +33,9 @@ class WrrSkipCapsTests(unittest.TestCase):
         self.assertEqual(summary["cap_le_observed_max_skip"], 1)
         self.assertEqual(summary["cap_le_1000"], 1)
         self.assertEqual(summary["cap_gt_1000"], 1)
+        self.assertEqual(summary["program_cap_lt_printed"], 1)
+        self.assertEqual(summary["program_cap_eq_printed"], 2)
+        self.assertEqual(summary["program_target_unreached_rows"], 1)
         self.assertEqual(summary["target_unreached_rows"], 1)
         self.assertEqual(summary["observed_zero_rows"], 2)
 
@@ -44,25 +48,32 @@ class WrrSkipCapsTests(unittest.TestCase):
                 "normalized_length": 3,
                 "observed_hits": 4,
                 "skip_cap": 250,
+                "program_skip_cap": 248,
                 "expected_at_skip_cap": 10.0,
             }
         )
 
         self.assertIn("`רשי` (rshy; English: Rashi)", rendered)
+        self.assertIn("| 250 | 248 | 10.0 |", rendered)
 
 
 def row(
     term: str,
     cap: int,
+    program_cap: int,
     observed_hits: int,
     target_reached: bool,
+    program_target_reached: bool,
     band: str,
 ) -> dict[str, object]:
     return {
         "normalized_term": term,
         "skip_cap": cap,
+        "printed_skip_cap": cap,
+        "program_skip_cap": program_cap,
         "observed_hits": observed_hits,
         "target_reached": target_reached,
+        "program_target_reached": program_target_reached,
         "skip_cap_band": band,
     }
 
