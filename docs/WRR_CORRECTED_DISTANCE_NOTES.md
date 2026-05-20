@@ -103,6 +103,11 @@ Already implemented:
   perturbation proximities. This helper implements the source-described `v/m`
   step with greater-than-or-equal counting. The older
   `corrected_distance_strict_rank` name remains as a backward-compatible alias.
+- pair-level corrected-distance arithmetic bridge in `els/wrr.py` for
+  already-domain-labeled perturbation occurrence sets. It computes
+  `Q(x,y,z)(w,w')` per valid triple, requires a valid ordinary `(0,0,0)` triple,
+  enforces the minimum valid-perturbation count, and returns the source-count
+  WRR rank. It does not generate the real perturbed ELS/domain rows.
 - tie-aware corrected-distance rank helper in `els/wrr.py` for methodology-page
   diagnostics where tied non-ordinary perturbations are half-weighted. A
   uniquely strongest ordinary proximity has corrected distance `0` under the
@@ -138,12 +143,11 @@ Already implemented:
 
 Not yet implemented:
 
-- a real-pair corrected-distance driver enforcing the source-backed undefined
-  conditions before aggregate statistics are attempted;
-- perturbed `Q(x,y,z)(w,w')` and corrected-distance `c(w,w')` calculation over
-  real word pairs. The low-level exact perturbed-ELS match helper exists, but
-  there is not yet an optimized real-pair driver that computes all perturbed
-  proximity values.
+- a real-pair corrected-distance driver that generates exact perturbed ELS rows,
+  labels their domains, and feeds them into the tested pair-level arithmetic
+  bridge before aggregate statistics are attempted;
+- optimized real-corpus generation of all perturbed `Q(x,y,z)(w,w')` inputs for
+  imported word pairs.
 - permutation driver over the locked personality/date pair table.
 
 ## Ambiguities To Pin Before Code

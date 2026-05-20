@@ -33,6 +33,7 @@ from els.wrr import (
     wrr_minimality_domain_candidates,
     wrr_offsets_span,
     wrr_ordinary_els_els_alpha,
+    wrr_corrected_distance_from_perturbation_sets,
     wrr_weighted_els_pair_proximity,
     wrr_word_pair_proximity,
     wrr2_els_sl_distance_at_row_width,
@@ -332,6 +333,65 @@ class WrrStatsTests(unittest.TestCase):
 
         self.assertAlmostEqual(proximity, 0.2)
 
+    def test_wrr_corrected_distance_computes_rank_from_perturbed_q_values(self) -> None:
+        perturbations = tuple((index, 0, 0) for index in range(10))
+        right_starts = {
+            (0, 0, 0): 2,
+            (1, 0, 0): 1,
+            (2, 0, 0): 40,
+            (3, 0, 0): 3,
+            (4, 0, 0): 5,
+            (5, 0, 0): 15,
+            (6, 0, 0): 25,
+            (7, 0, 0): 35,
+            (8, 0, 0): 45,
+            (9, 0, 0): 55,
+        }
+        left_by_perturbation = {triple: (wrr_occurrence(0),) for triple in perturbations}
+        right_by_perturbation = {
+            triple: (wrr_occurrence(right_starts[triple]),) for triple in perturbations
+        }
+
+        result = wrr_corrected_distance_from_perturbation_sets(
+            left_by_perturbation,
+            right_by_perturbation,
+            text_length=100,
+            row_width_count=1,
+        )
+
+        self.assertEqual(result.valid_perturbations, 10)
+        self.assertAlmostEqual(result.ordinary_proximity, 1 / 3)
+        self.assertEqual(result.corrected_distance, 3 / 10)
+
+    def test_wrr_corrected_distance_requires_ordinary_perturbation(self) -> None:
+        with self.assertRaises(ValueError):
+            wrr_corrected_distance_from_perturbation_sets(
+                {(1, 0, 0): (wrr_occurrence(0),)},
+                {(1, 0, 0): (wrr_occurrence(1),)},
+                text_length=100,
+                row_width_count=1,
+                minimum_valid=1,
+            )
+
+    def test_wrr_corrected_distance_enforces_minimum_valid_perturbations(self) -> None:
+        left_by_perturbation = {
+            (0, 0, 0): (wrr_occurrence(0),),
+            (1, 0, 0): (wrr_occurrence(0),),
+        }
+        right_by_perturbation = {
+            (0, 0, 0): (wrr_occurrence(1),),
+            (1, 0, 0): (wrr_occurrence(2),),
+        }
+
+        with self.assertRaises(ValueError):
+            wrr_corrected_distance_from_perturbation_sets(
+                left_by_perturbation,
+                right_by_perturbation,
+                text_length=100,
+                row_width_count=1,
+                minimum_valid=3,
+            )
+
     def test_wrr_helper_argument_validation(self) -> None:
         with self.assertRaises(ValueError):
             perturbation_triples(-1)
@@ -569,6 +629,10 @@ class WrrStatsTests(unittest.TestCase):
 
     def test_bonferroni_rho0_does_not_cap_above_one(self) -> None:
         self.assertEqual(bonferroni_rho0([0.3, 0.4]), 1.2)
+
+
+def wrr_occurrence(start: int) -> WrrElsOccurrence:
+    return WrrElsOccurrence((start, start + 10, start + 20), 10, 0, 100)
 
 
 if __name__ == "__main__":

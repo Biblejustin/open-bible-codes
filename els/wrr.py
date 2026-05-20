@@ -3,7 +3,8 @@
 These helpers cover arithmetic that is independent of the disputed term list:
 skip-window expectation, low-level WRR ELS proximity primitives, Q aggregation
 for already-domain-labeled ELS rows, P1/P2 aggregate transforms, and
-permutation ranks. They do not implement the full corrected distance c(w,w').
+permutation ranks. They do not implement the full real-corpus corrected-distance
+driver.
 """
 
 from __future__ import annotations
@@ -49,6 +50,17 @@ class WrrDomainAssignment:
             self.domain_start,
             self.domain_end,
         )
+
+
+@dataclass(frozen=True)
+class WrrCorrectedDistance:
+    """Computed WRR corrected-distance rank for one word pair."""
+
+    ordinary_proximity: float
+    perturbation_proximities: tuple[float, ...]
+    corrected_distance: float
+    valid_perturbations: int
+
 
 def perturbation_triples(radius: int = 2) -> tuple[tuple[int, int, int], ...]:
     """Return WRR perturbation triples `(x, y, z)`.
@@ -651,6 +663,60 @@ def wrr_word_pair_proximity(
         )
         for left in left_rows
         for right in right_rows
+    )
+
+
+def wrr_corrected_distance_from_perturbation_sets(
+    left_occurrences_by_perturbation: Mapping[tuple[int, int, int], Iterable[WrrElsOccurrence]],
+    right_occurrences_by_perturbation: Mapping[tuple[int, int, int], Iterable[WrrElsOccurrence]],
+    *,
+    text_length: int,
+    row_width_count: int = 10,
+    minimum_valid: int = 10,
+    ordinary_perturbation: tuple[int, int, int] = (0, 0, 0),
+) -> WrrCorrectedDistance:
+    """Return source-count WRR `c(w,w')` from domain-labeled perturbations.
+
+    This is the pair-level arithmetic bridge only. Callers must first generate
+    exact perturbed ELS rows and domain labels for each valid perturbation triple.
+    A triple is considered valid here when both words have at least one supplied
+    domain-defined occurrence.
+    """
+
+    if text_length < 1:
+        raise ValueError("text_length must be > 0")
+    proximity_by_perturbation: dict[tuple[int, int, int], float] = {}
+    for perturbation in sorted(
+        set(left_occurrences_by_perturbation) & set(right_occurrences_by_perturbation)
+    ):
+        left_rows = tuple(left_occurrences_by_perturbation[perturbation])
+        right_rows = tuple(right_occurrences_by_perturbation[perturbation])
+        if not left_rows or not right_rows:
+            continue
+        proximity_by_perturbation[perturbation] = wrr_word_pair_proximity(
+            left_rows,
+            right_rows,
+            text_length=text_length,
+            row_width_count=row_width_count,
+        )
+
+    if ordinary_perturbation not in proximity_by_perturbation:
+        raise ValueError("ordinary perturbation must be valid")
+    perturbation_proximities = tuple(
+        proximity_by_perturbation[perturbation]
+        for perturbation in sorted(proximity_by_perturbation)
+    )
+    ordinary_proximity = proximity_by_perturbation[ordinary_perturbation]
+    corrected_distance = corrected_distance_wrr_rank(
+        ordinary_proximity,
+        perturbation_proximities,
+        minimum_valid=minimum_valid,
+    )
+    return WrrCorrectedDistance(
+        ordinary_proximity=ordinary_proximity,
+        perturbation_proximities=perturbation_proximities,
+        corrected_distance=corrected_distance,
+        valid_perturbations=len(perturbation_proximities),
     )
 
 
