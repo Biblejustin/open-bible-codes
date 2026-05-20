@@ -85,6 +85,8 @@ class WrrMethodStatusTests(unittest.TestCase):
 
         self.assertIn("# WRR Method Status", text)
         self.assertIn("| Pair universe | `open` | current | evidence | next |", text)
+        self.assertIn("## Source Anchors", text)
+        self.assertIn("WRR printed D(w) formula", text)
 
     def test_main_writes_csv_markdown_and_manifest(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

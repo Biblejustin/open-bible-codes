@@ -29,6 +29,34 @@ FIELDNAMES = [
     "next_action",
 ]
 
+SOURCE_ANCHORS = [
+    {
+        "topic": "WRR printed D(w) formula",
+        "source": "WRR 1994 Appendix A.4",
+        "read": "Uses a term-specific skip bound chosen so the expected ELS count is 10; printed window count uses (D - 1)(2L - (k - 1)(D + 2)).",
+    },
+    {
+        "topic": "WRR second-list filtered sample",
+        "source": "WRR 1994 Appendix A.3",
+        "read": "Restricts words to length 5..8 for the corrected-distance calculation and reports 298 word pairs before later defined-distance filtering.",
+    },
+    {
+        "topic": "WRR permutation count",
+        "source": "WRR 1994 main text and Appendix A.6",
+        "read": "Uses 999,999 random permutations of the 32 personalities for significance calculations.",
+    },
+    {
+        "topic": "Program formula mismatch",
+        "source": "MBBK 1999 Appendix A",
+        "read": "Reports that WRR programs used (D - 1)(2L - (k - 1)D), not the printed WRR 1994 formula.",
+    },
+    {
+        "topic": "Corrected-distance definedness",
+        "source": "MBBK 1999 Appendix A and Gans communities method section",
+        "read": "Treats c(w,w') as defined only when the ordinary perturbation is defined and at least 10 perturbation values are defined.",
+    },
+]
+
 
 def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
@@ -217,6 +245,27 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
                     markdown_cell(row["current_read"]),
                     markdown_cell(row["evidence"]),
                     markdown_cell(row["next_action"]),
+                ]
+            )
+            + " |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Source Anchors",
+            "",
+            "| Topic | Source | Current read |",
+            "| --- | --- | --- |",
+        ]
+    )
+    for row in SOURCE_ANCHORS:
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    markdown_cell(row["topic"]),
+                    markdown_cell(row["source"]),
+                    markdown_cell(row["read"]),
                 ]
             )
             + " |"

@@ -21,3 +21,13 @@ python3 -m scripts.build_wrr_method_status --text-source reports/wrr_1994/koren_
 | D(w) skip-cap formula | `open` | Printed and reported-program formulas are both implemented; final choice remains source decision. | 120 length-filtered rows; 13 program caps below printed; 107 equal caps; 55 rows do not reach target expected hits | Choose printed-paper formula or reported-program formula before final corrected-distance run. |
 | Corrected distance c(w,w') | `smoke_only` | Smoke driver exists, but current candidate lane produces no defined corrected distances. | term_printed: 0 defined, term_program: 0 defined, fixed_250: 0 defined; maximum valid perturbation count 4; total defined 0 | Optimize and rerun over final pair universe after D(w) and source rows are locked. |
 | Aggregate statistic and permutation | `not_built` | P1/P2 arithmetic helpers exist, but no claim-grade P1..P4 or date-permutation runner exists. | No current protocol step computes full WRR aggregate scores or permutation ranks from defined c-values. | Implement only after final pair universe and corrected-distance values are locked. |
+
+## Source Anchors
+
+| Topic | Source | Current read |
+| --- | --- | --- |
+| WRR printed D(w) formula | WRR 1994 Appendix A.4 | Uses a term-specific skip bound chosen so the expected ELS count is 10; printed window count uses (D - 1)(2L - (k - 1)(D + 2)). |
+| WRR second-list filtered sample | WRR 1994 Appendix A.3 | Restricts words to length 5..8 for the corrected-distance calculation and reports 298 word pairs before later defined-distance filtering. |
+| WRR permutation count | WRR 1994 main text and Appendix A.6 | Uses 999,999 random permutations of the 32 personalities for significance calculations. |
+| Program formula mismatch | MBBK 1999 Appendix A | Reports that WRR programs used (D - 1)(2L - (k - 1)D), not the printed WRR 1994 formula. |
+| Corrected-distance definedness | MBBK 1999 Appendix A and Gans communities method section | Treats c(w,w') as defined only when the ordinary perturbation is defined and at least 10 perturbation values are defined. |
