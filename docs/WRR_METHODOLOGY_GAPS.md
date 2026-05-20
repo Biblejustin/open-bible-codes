@@ -78,24 +78,26 @@ refutation of the WRR paper.
 | Gate | Required before claim language | Current state |
 | --- | --- | --- |
 | Source text | Exact Genesis text and normalization locked | Koren Genesis stream is fingerprinted and usable for smoke/audit work. |
-| Source pages | Cited paper/list context downloaded and hash-stamped | Paper, ANU files, WRR/Nations pages, MC key, and WNP critique pages are tracked in the source manifest. |
-| Pair universe | Declared second-list pair table resolves paper 298 candidates to 163 defined distances | Lock-prep table exists at `reports/wrr_1994/wrr2_pair_eligibility_table.csv`; imported `WRR2.txt` yields 182 raw same-record pairs, 165 after appellation length >= 5, and 86 under the current 5..8 both-side screen. |
+| Source pages | Cited paper/list context downloaded and hash-stamped | Paper, ANU files, WRR/Nations pages, MC key, WNP critique pages, MBBK 1999 response, Chance article, Torah-code papers page, and Bombach/Gans/Haralick/Levitt/Rips/Schwartzman/Witztum papers/data are tracked in the source manifest. |
+| Pair universe | Declared second-list candidate set yields 163 source-defined distances after the corrected-distance eligibility rule | Lock-prep table exists at `reports/wrr_1994/wrr2_pair_eligibility_table.csv`; imported `WRR2.txt` yields 182 raw same-record pairs, 165 after appellation length >= 5, and 86 under the current 5..8 both-side screen. The `163` count is now treated as a defined-distance output count, not a raw pair table. |
 | Exclusions | Every excluded appellation/date row has a citable rule | Not locked; one Zacut-appellation exclusion would close 165 to 163, but that is only a diagnostic hypothesis. |
 | Skip caps | Term-specific WRR `D(w)` windows applied for each accepted term | Not locked; current pair/control screens still use broad fixed caps for smoke tests. |
-| Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Helpers now include conservative supplied-row domain labeling, real-corpus WRR2 domain diagnostics with undefined-reason labels, defined-domain-only ordinary `Q(w,w')` diagnostics, exact perturbed-ELS match checks, domain-weighted `Q(w,w')` summation for domain-labeled ELS rows, and the strict WRR 1994 `v/m` rank step; undefined-domain policy, perturbed `Q`, and per-pair `c(w,w')` are still missing. |
+| Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Helpers now include conservative supplied-row domain labeling, real-corpus WRR2 domain diagnostics with undefined-reason labels, defined-domain-only ordinary `Q(w,w')` diagnostics, exact perturbed-ELS match checks, domain-weighted `Q(w,w')` summation for domain-labeled ELS rows, and the source-count WRR `v/m` rank step. Undefined `c(w,w')` conditions are source-backed; perturbed `Q` and the per-pair `c(w,w')` driver are still missing. |
 | Aggregate statistic | `P1`, `P2`, `P3`, `P4`, rank handling, and `rho0` run over the locked pair set | Helpers exist, but no reproduction driver can run until the pair set and corrected distances are fixed. |
 | Permutation test | Date/rabbi pairings shuffled under the declared WRR rule with recorded seeds/counts | Not built. |
 | Report label | Result can be marked reproduction, failed reproduction, or under-specified | Current label must remain `under_specified`. |
 
 ## Blocking Gaps
 
-### 1. Canonical Pair Set
+### 1. Candidate Pair Set And Defined-Distance Count
 
 The current import creates 182 same-record appellation/date pair rows at
 minimum length 3. Filtering only appellations shorter than 5 letters gives 165
 rows, while the 5..8 length screen gives 86 rows. That does not yet reconcile
-to the source-cited WRR second-list distance count of 163, but the 165-row
-intermediate is the closest current rule.
+to the source-cited WRR second-list distance count of 163 by raw combinatorics.
+The better current reading is that `163` is produced after applying the
+corrected-distance eligibility screen, not by selecting a separate raw
+same-record pair table.
 
 The WNP/McKay-Bar-Natan source critique confirms the 5-8 appellation-length
 restriction and disputes several Rabbi II-27 Moshe Zacut variants
@@ -104,9 +106,8 @@ rows in the imported source, one length-eligible appellation exclusion there
 would explain the remaining 165-to-163 gap. Excluding all four WNP-disputed
 Zacut rows would remove eight pairs, leaving 157, so the critique page does not
 by itself explain the published count. Treat this as a hypothesis, not a
-declared rule. Do not make Zacut-specific exclusions until a citable WRR pair
-table or source rule identifies exactly which rows belong in the 163-distance
-set.
+declared rule. Do not make Zacut-specific exclusions unless a citable WRR pair
+source requires them before the corrected-distance eligibility screen.
 
 Before any reproduction run, the project needs a locked table showing:
 
@@ -114,7 +115,8 @@ Before any reproduction run, the project needs a locked table showing:
 - every accepted appellation spelling;
 - every accepted date spelling;
 - which rows are excluded and why;
-- final pair count under the declared WRR rule.
+- final candidate count under the declared WRR rule;
+- final defined-distance count after `c(w,w')` eligibility is applied.
 
 Current lock-prep output:
 
@@ -149,8 +151,11 @@ The repo has cylindrical distance and WRR arithmetic helpers, conservative
 domain labeling for supplied same-word ELS rows, a real-corpus WRR2 Genesis
 domain-labeling diagnostic with undefined-reason labels, exact perturbed-ELS
 match checks, domain-weighted `Q(w,w')` summation for already-domain-labeled
-ELS rows, plus the strict WRR 1994 rank step for already-computed ordinary and
-perturbed proximity values.
+ELS rows, plus the source-count WRR rank step for already-computed ordinary and
+perturbed proximity values. MBBK Appendix A and the Gans communities paper
+support the undefined `c(w,w')` rule: the ordinary `(0,0,0)` value must be
+defined and at least 10 perturbation proximities must be defined; the `v/m`
+count uses perturbation proximity values greater than or equal to ordinary.
 Current domain diagnostics label 17,426 imported-term hits: 6,079 defined
 domains, 11,347 blocked by an inner shorter-skip ELS, and 0 ambiguous from
 enclosing shorter-skip rows under the smoke cap. The ordinary-Q diagnostic over
@@ -159,9 +164,8 @@ pair, 17 pairs with all observed domains defined, 36 incomplete defined-only
 pairs, and 129 pairs with no defined-domain pair. In the length-5..8 smoke lane
 specifically, 30 of 86 pairs have defined-domain ordinary `Q`, 16 are complete,
 14 are incomplete, and 56 have no defined-domain pair. The repo still does not
-implement the paper's corrected distance value for every term pair because the
-undefined-domain policy, perturbed `Q`, and per-pair `c(w,w')` driver are
-missing.
+implement the paper's corrected distance value for every term pair because
+perturbed `Q` and the per-pair `c(w,w')` driver are missing.
 
 The perturbation diagnostic now distinguishes boundary validity from exact
 perturbed matches. In the current output, all 959 smoke-cap hits across 64 rows
@@ -180,7 +184,8 @@ Implementation notes are now tracked in
 
 Needed next:
 
-- establish an explicit source-backed policy for undefined domain rows;
+- decide whether `D(w)` uses the printed WRR count formula or the WRR program
+  formula documented by MBBK;
 - compute perturbed `Q(x,y,z)(w,w')` over real term pairs from exact
   perturbed-ELS matches;
 - write small toy fixtures where expected corrected distances are known;

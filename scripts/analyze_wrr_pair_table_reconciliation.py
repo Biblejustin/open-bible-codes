@@ -303,7 +303,7 @@ def write_markdown(
             "Moshe Zacut variants: `ZKWT)`, `ZKWTW`, `M$H ZKWT)`, and `M$H ZKWTW`.",
             "In the imported source these correspond to `ZKWTA`, `ZKWTW`, `M$HZKWTA`,",
             "and `M$HZKWTW`. This section is diagnostic only; those pages are not used",
-            "as the canonical WRR pair table.",
+            "as a source rule for pre-filtering the candidate set.",
             "",
             "| Diagnostic | Count |",
             "| --- | ---: |",
@@ -358,8 +358,9 @@ def write_markdown(
             "combinations against the source-cited WRR 163-distance sample. Filtering out",
             "only appellations shorter than 5 letters gives 165 rows, while the repo's",
             "5..8 length filter yields only 86 rows. Do not treat the current pair",
-            "audit as a replication until the canonical pair table is reconciled. The",
-            "Zacut diagnostic above is a source-audit clue, not an exclusion rule.",
+            "audit as a replication until the candidate set and corrected-distance",
+            "eligibility path are implemented. The Zacut diagnostic above is a",
+            "source-audit clue, not an exclusion rule.",
         ]
     )
     path.parent.mkdir(parents=True, exist_ok=True)

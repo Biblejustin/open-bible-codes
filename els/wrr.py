@@ -680,7 +680,7 @@ def corrected_distance_rank(
     return rank / len(values)
 
 
-def corrected_distance_strict_rank(
+def corrected_distance_wrr_rank(
     ordinary_proximity: float,
     perturbation_proximities: Iterable[float],
     *,
@@ -688,10 +688,10 @@ def corrected_distance_strict_rank(
 ) -> float:
     """Return WRR 1994 Appendix A.2 corrected-distance rank `v / m`.
 
-    The 1994 paper defines `v(w,w')` as the number of valid perturbation
-    proximities greater than the ordinary proximity and `m(w,w')` as the
-    number of valid perturbation triples. Unlike the WRR2 tie-aware helper
-    above, this source formula does not half-weight tied perturbations.
+    Source descriptions define `v(w,w')` as the number of valid perturbation
+    proximities greater than or equal to the ordinary proximity and `m(w,w')`
+    as the number of valid perturbation triples. Unlike the WRR2 tie-aware
+    helper above, this source formula gives full weight to tied perturbations.
     """
 
     values = validate_corrected_distance_inputs(
@@ -699,8 +699,27 @@ def corrected_distance_strict_rank(
         perturbation_proximities,
         minimum_valid=minimum_valid,
     )
-    greater = sum(1 for value in values if value > ordinary_proximity)
-    return greater / len(values)
+    greater_or_equal = sum(1 for value in values if value >= ordinary_proximity)
+    return greater_or_equal / len(values)
+
+
+def corrected_distance_strict_rank(
+    ordinary_proximity: float,
+    perturbation_proximities: Iterable[float],
+    *,
+    minimum_valid: int = 10,
+) -> float:
+    """Backward-compatible name for `corrected_distance_wrr_rank`.
+
+    The old name meant "not tie-aware"; source checks now show the WRR count
+    includes perturbation proximities greater than or equal to ordinary.
+    """
+
+    return corrected_distance_wrr_rank(
+        ordinary_proximity,
+        perturbation_proximities,
+        minimum_valid=minimum_valid,
+    )
 
 
 def validate_corrected_distance_inputs(

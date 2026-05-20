@@ -83,9 +83,11 @@ workflow names.
 Current status: smoke/source/import work plus a lock-prep pair eligibility
 table. Remaining claim-grade pieces:
 
-- citable canonical pair eligibility rule resolving the 163-distance set;
-- undefined-domain policy, real-pair perturbed `Q`, and corrected distance
-  `c(w,w')`;
+- candidate pair source/reconciliation, with `163` treated as the
+  source-defined corrected-distance output count rather than a raw pair table;
+- printed-formula vs WRR-program `D(w)` choice;
+- real-pair perturbed `Q` and corrected distance `c(w,w')`, enforcing
+  source-backed undefined conditions;
 - term-specific skip-cap logic;
 - permutation-rank procedure;
 - study-level report over fixed terms and sources.

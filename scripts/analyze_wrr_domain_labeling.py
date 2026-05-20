@@ -406,7 +406,8 @@ def write_markdown(
             "",
             "This is a domain-labeling diagnostic for future corrected-distance "
             "work. Undefined rows are not exclusions; they mark cases needing "
-            "source-checked handling before a WRR reproduction run.",
+            "the source-backed `c(w,w')` undefined policy inside a full WRR "
+            "reproduction driver.",
             "",
         ]
     )

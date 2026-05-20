@@ -173,16 +173,19 @@ def iter_els_query_matches_by_lanes(
         max_skip - min_skip + 1,
     )
     if effective_jobs > 1:
-        yield from iter_els_query_matches_by_lanes_parallel(
-            text,
-            tuple(unique_queries),
-            min_skip=min_skip,
-            max_skip=max_skip,
-            direction=direction,
-            jobs=effective_jobs,
-            max_skip_by_query=query_skip_caps,
-        )
-        return
+        try:
+            yield from iter_els_query_matches_by_lanes_parallel(
+                text,
+                tuple(unique_queries),
+                min_skip=min_skip,
+                max_skip=max_skip,
+                direction=direction,
+                jobs=effective_jobs,
+                max_skip_by_query=query_skip_caps,
+            )
+            return
+        except PermissionError:
+            pass
 
     forward_automaton = None
     forward_encoded_text = None
@@ -391,15 +394,18 @@ def count_els_terms_by_lanes(
 
     effective_jobs = resolve_count_jobs(jobs, max_skip - min_skip + 1)
     if effective_jobs > 1:
-        return count_els_terms_by_lanes_parallel(
-            text,
-            tuple(unique_queries),
-            min_skip=min_skip,
-            max_skip=max_skip,
-            direction=direction,
-            jobs=effective_jobs,
-            max_skip_by_query=query_skip_caps,
-        )
+        try:
+            return count_els_terms_by_lanes_parallel(
+                text,
+                tuple(unique_queries),
+                min_skip=min_skip,
+                max_skip=max_skip,
+                direction=direction,
+                jobs=effective_jobs,
+                max_skip_by_query=query_skip_caps,
+            )
+        except PermissionError:
+            pass
 
     automaton = build_count_automaton(unique_queries, direction)
 

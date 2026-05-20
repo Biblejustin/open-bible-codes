@@ -11,6 +11,10 @@ Related methodology source:
 
 - WRR2/Nations methodology page:
   `https://www.math.toronto.edu/drorbn/Codes/Nations/WRR2/index.html`
+- McKay/Bar-Natan/Bar-Hillel/Kalai 1999 response, Appendix A:
+  `https://users.cecs.anu.edu.au/~bdm/codes/StatSci/StatSci.pdf`
+- Gans communities paper:
+  `https://www.torah-code.org/papers/gans.pdf`
 
 ## What Is Clear Enough To Implement
 
@@ -37,11 +41,16 @@ The paper's Appendix A.1 and A.2 define these pieces:
 - Perturbed ELS offsets keep the early letters on the ordinary progression and
   perturb the last three gaps:
   `n, n+d, ..., n+(k-4)d, n+(k-3)d+x, n+(k-2)d+x+y, n+(k-1)d+x+y+z`.
-- The 1994 Appendix A.2 formula defines `v(w,w')` as the number of valid
-  triples whose perturbed proximity is greater than the ordinary proximity, and
+- The source descriptions define `v(w,w')` as the number of valid triples whose
+  perturbed proximity is greater than or equal to the ordinary proximity, and
   `c(w,w') = v(w,w') / m(w,w')`, where `m(w,w')` is the number of valid triples.
 - The corrected distance is undefined if the ordinary `(0,0,0)` case is not in
   the valid perturbation set or if `m(w,w') < 10`.
+- MBBK Appendix A notes a formula mismatch for the ELS-window count: the printed
+  WRR formula uses `(D - 1)(2L - (k - 1)(D + 2))`, while the WRR programs used
+  `(D - 1)(2L - (k - 1)D)`. The current helper implements the printed formula;
+  a reproduction driver must explicitly choose paper formula versus program
+  formula before final `D(w)` runs.
 
 ## Current Repo Coverage
 
@@ -88,13 +97,14 @@ Already implemented:
 - WRR perturbation triples, perturbed-offset generation, exact perturbed-ELS
   match checks, bounded perturbed-match iteration, and first-ten row-width
   helpers in `els/wrr.py`;
-- strict WRR 1994 corrected-distance rank helper in `els/wrr.py` for
-  already-computed perturbation proximities. This helper implements the
-  Appendix A.2 `v/m` step with strict greater-than counting.
+- WRR corrected-distance rank helper in `els/wrr.py` for already-computed
+  perturbation proximities. This helper implements the source-described `v/m`
+  step with greater-than-or-equal counting. The older
+  `corrected_distance_strict_rank` name remains as a backward-compatible alias.
 - tie-aware corrected-distance rank helper in `els/wrr.py` for methodology-page
   diagnostics where tied non-ordinary perturbations are half-weighted. A
-  uniquely strongest ordinary proximity has corrected distance `0` under both
-  helpers.
+  uniquely strongest ordinary proximity has corrected distance `0` under the
+  tie-aware helper and `1/m` under the source-count helper.
 - imported WRR2 term rows from the secondary ANU/McKay source under ignored
   `reports/wrr_1994/`;
 - count, same-record pair-audit, pair-control, and skip-cap smoke reports.
@@ -112,8 +122,8 @@ Already implemented:
   and flag several Rabbi II-27 Moshe Zacut variants as disputed. The
   reconciliation diagnostic shows that excluding one length-eligible Zacut
   appellation would close the 165-to-163 count gap, while excluding all four
-  disputed Zacut rows would overshoot. These pages are not treated as the
-  canonical WRR pair table.
+  disputed Zacut rows would overshoot. These pages are not treated as a source
+  rule for pre-filtering the candidate set.
 - perturbation boundary/exact-match diagnostic over imported length 5..8 ELS
   hits. Current output checks all 959 smoke-cap hits across 64 rows with hits:
   every ordinary hit keeps all 125 triples in bounds, but every row with hits
@@ -126,8 +136,8 @@ Already implemented:
 
 Not yet implemented:
 
-- source-checked handling for undefined domain rows before they are used in a
-  reproduction driver;
+- a real-pair corrected-distance driver enforcing the source-backed undefined
+  conditions before aggregate statistics are attempted;
 - perturbed `Q(x,y,z)(w,w')` and corrected-distance `c(w,w')` calculation over
   real word pairs. The low-level exact perturbed-ELS match helper exists, but
   there is not yet an optimized real-pair driver that computes all perturbed
@@ -138,11 +148,10 @@ Not yet implemented:
 
 1. Tie handling across related methodology descriptions.
 
-   The 1994 paper's Appendix A.2 text defines `v(w,w')` with strict
-   greater-than counting, while a related methodology-page diagnostic uses
-   half-weighted ties. `els/wrr.py` keeps both helpers separate. Use the strict
-   helper for WRR 1994 replication work unless a source-specific diagnostic
-   says otherwise.
+   The source-count WRR formula uses greater-than-or-equal counting. A related
+   methodology-page diagnostic uses half-weighted ties. `els/wrr.py` keeps both
+   helpers separate. Use `corrected_distance_wrr_rank` for WRR 1994 replication
+   work unless a source-specific diagnostic says otherwise.
 
 2. Domain-of-minimality derivation.
 
@@ -167,17 +176,18 @@ Not yet implemented:
    screen, and 86 length-filtered rows under the repo audit. The WRR discussion
    sources cite 163 second-list distances, while the 1994 paper says the
    length-5..8 second-list sample has 298 word pairs before the defined-distance
-   screen. Before computing `c(w,w')`, lock a reconciliation table explaining
-   how the 298 candidate pairs reduce to the 163 defined distances cited in
-   later discussion.
+   screen. Current read: `163` is a defined-distance output count, not a raw
+   same-record pair table. Before aggregate statistics, derive that count by
+   applying the source-backed `c(w,w')` eligibility rules over the candidate set.
 
 ## Proposed Implementation Order
 
-1. Reconcile the canonical WRR pair table against a primary or citable
-   transcription.
-2. Establish an explicit source-backed policy for undefined domain rows.
-3. Feed ordinary and perturbed `Q` values through the strict WRR 1994
-   rank helper to produce `c(w,w')`.
+1. Decide whether `D(w)` uses the printed WRR count formula or the program
+   formula documented by MBBK.
+2. Implement the real-pair perturbed `Q` driver and enforce the source-backed
+   undefined `c(w,w')` conditions.
+3. Feed ordinary and perturbed `Q` values through the WRR source-count rank
+   helper to produce defined `c(w,w')` rows.
 
 ## Current Read
 

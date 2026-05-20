@@ -275,6 +275,13 @@ Current external sources:
   description.
 - Modified Michigan-Claremont transliteration key from the same site.
 - WNP/McKay-Bar-Natan critique pages in modified Michigan-Claremont notation
+  and English transliteration from the same site.
+- MBBK 1999 response paper, its linked data page, and the Chance article from
+  Brendan McKay's Bible Codes Refuted pages, used as source-method context for
+  corrected-distance details and critique.
+- Torah-code.org papers and data pages, including Haralick protocol papers,
+  Bombach/Gans/Levitt/Rips/Witztum papers, and associated data PDFs, used as
+  source-audit context and possible future test leads.
 
 ### Copyrighted Source-Audit Books
 
@@ -298,7 +305,6 @@ leads. These files are not committed and are not redistributed by this project.
   scriptural-code critique and methodology context in
   `docs/RELIGIONS_WIKI_SCRIPTURAL_CODES_AUDIT.md`. The page states Creative
   Commons Attribution-ShareAlike 2.5 availability.
-  and English transliteration from the same site.
 
 These files are secondary audit sources. They do not by themselves make a WRR
 replication claim-ready. See `docs/WRR_SOURCE_AUDIT.md`.

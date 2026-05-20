@@ -47,7 +47,7 @@ Already implemented:
   candidate-domain enumeration for enclosing shorter-skip ambiguity,
   exact perturbed-ELS match checks,
   domain-weighted `Q(w,w')` summation over already-domain-labeled ELS rows,
-  strict WRR 1994 corrected-distance rank over already-computed perturbation
+  source-count WRR corrected-distance rank over already-computed perturbation
   proximities, `P1`, `P2`, permutation rank, and Bonferroni `rho0`.
 - WRR expected-count skip-cap audit in `scripts/analyze_wrr_skip_caps.py`.
 - WRR lock-prep pair eligibility table in
@@ -75,16 +75,24 @@ Source audit:
 - `docs/WRR_METHODOLOGY_GAPS.md`
 - `docs/WRR_CORRECTED_DISTANCE_NOTES.md`
 
+Newly tracked source context includes the MBBK 1999 `Statistical Science`
+response, its data page, the Chance article, the Torah-code papers page,
+Bombach/Gans/Haralick/Levitt/Rips/Schwartzman/Witztum papers, and their
+available data/attachment files.
+
 ## Not Yet Built
 
 Still needed:
 
-- canonical pair-set reconciliation against the paper's declared sample; the
-  current eligibility table is lock prep, not the canonical 163-distance table;
+- candidate pair-set reconciliation against the paper's declared sample; the
+  current eligibility table is lock prep, and `163` is treated as the
+  source-defined corrected-distance output count rather than a raw pair table;
 - replication-grade generated or reviewed future file `terms/[wrr_1994_rabbis].csv`;
 - replication-grade generated or reviewed future file `terms/[wrr_1994_dates].csv`;
-- WRR undefined-domain policy, real-pair perturbed `Q`, and full
-  corrected-distance implementation for `c(w,w')`;
+- `D(w)` formula choice between the printed WRR formula and the WRR program
+  formula documented by MBBK;
+- real-pair perturbed `Q` and full corrected-distance implementation for
+  `c(w,w')`, enforcing source-backed undefined conditions;
 - WRR aggregate runner for `P1`, `P2`, `P3`, and `P4` over all declared pairs
   once `c(w,w')` exists;
 - permutation driver that shuffles date/rabbi pairings under the declared rule;

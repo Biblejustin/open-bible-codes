@@ -6,6 +6,7 @@ from pathlib import Path
 from els.protocol_runner import load_protocol
 from scripts import build_real_report_run_summary as summary
 from scripts import preflight_real_report_run as preflight
+from scripts.download_wrr_sources import REQUIRED_MANIFEST_LABELS
 
 
 class RealReportRunTests(unittest.TestCase):
@@ -426,21 +427,28 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("overlaps every length-4", text)
 
     def test_wrr_audit_section_keeps_under_specified_read(self) -> None:
+        source_hashes = {label: f"{label}hash" for label in REQUIRED_MANIFEST_LABELS}
+        source_hashes.update(
+            {
+                "wrr_1994_paper": "paperhash",
+                "wrr1": "wrr1hash",
+                "wrr2": "abc",
+                "se2a": "se2ahash",
+                "se2b": "se2bhash",
+                "se3": "se3hash",
+                "mc_key": "def",
+                "wrr_nations_mc": "nationsmc",
+                "wrr_nations_gir": "nationsgir",
+                "wnp_mc": "wnpmc",
+                "wnp_en": "wnpen",
+            }
+        )
         lines = summary.wrr_audit_section(
             {"status": "success", "duration_seconds": 12.3},
             {
                 "downloads": [
-                    {"label": "wrr_1994_paper", "sha256": "paperhash"},
-                    {"label": "wrr1", "sha256": "wrr1hash"},
-                    {"label": "wrr2", "sha256": "abc"},
-                    {"label": "se2a", "sha256": "se2ahash"},
-                    {"label": "se2b", "sha256": "se2bhash"},
-                    {"label": "se3", "sha256": "se3hash"},
-                    {"label": "mc_key", "sha256": "def"},
-                    {"label": "wrr_nations_mc", "sha256": "nationsmc"},
-                    {"label": "wrr_nations_gir", "sha256": "nationsgir"},
-                    {"label": "wnp_mc", "sha256": "wnpmc"},
-                    {"label": "wnp_en", "sha256": "wnpen"},
+                    {"label": label, "sha256": digest}
+                    for label, digest in source_hashes.items()
                 ]
             },
             [

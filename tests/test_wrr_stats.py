@@ -6,6 +6,7 @@ from els.wrr import (
     bonferroni_rho0,
     corrected_distance_rank,
     corrected_distance_strict_rank,
+    corrected_distance_wrr_rank,
     cylindrical_letter_distance_squared,
     els_window_count,
     expected_els_count,
@@ -430,19 +431,28 @@ class WrrStatsTests(unittest.TestCase):
 
         self.assertEqual(rank, 2 / 5)
 
-    def test_corrected_distance_strict_rank_uses_1994_greater_than_count(self) -> None:
+    def test_corrected_distance_wrr_rank_uses_1994_greater_or_equal_count(self) -> None:
+        rank = corrected_distance_wrr_rank(
+            8.0,
+            [10.0, 8.0, 8.0, 8.0, 2.0],
+            minimum_valid=1,
+        )
+
+        self.assertEqual(rank, 4 / 5)
+
+    def test_corrected_distance_wrr_rank_counts_ordinary_value(self) -> None:
+        rank = corrected_distance_wrr_rank(9.0, [9.0, 7.0, 5.0, 3.0, 1.0], minimum_valid=1)
+
+        self.assertEqual(rank, 1 / 5)
+
+    def test_corrected_distance_strict_rank_is_legacy_alias(self) -> None:
         rank = corrected_distance_strict_rank(
             8.0,
             [10.0, 8.0, 8.0, 8.0, 2.0],
             minimum_valid=1,
         )
 
-        self.assertEqual(rank, 1 / 5)
-
-    def test_corrected_distance_strict_rank_is_zero_for_strongest_ordinary(self) -> None:
-        rank = corrected_distance_strict_rank(9.0, [9.0, 7.0, 5.0, 3.0, 1.0], minimum_valid=1)
-
-        self.assertEqual(rank, 0)
+        self.assertEqual(rank, 4 / 5)
 
     def test_corrected_distance_rank_validates_source_conditions(self) -> None:
         with self.assertRaises(ValueError):
@@ -456,7 +466,7 @@ class WrrStatsTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             corrected_distance_rank(1.0, [1.0], minimum_valid=0)
         with self.assertRaises(ValueError):
-            corrected_distance_strict_rank(1.0, [1.0] * 9)
+            corrected_distance_wrr_rank(1.0, [1.0] * 9)
 
     def test_els_window_count_matches_appendix_formula(self) -> None:
         self.assertEqual(

@@ -1,11 +1,41 @@
 # WRR Source Audit
 
-Status: secondary source path identified; canonical WRR pair table not locked.
+Status: secondary source path identified; corrected-distance driver not built.
 
 ## Sources Found
 
 - Primary paper PDF:
   `https://academicweb.nd.edu/~rwilliam/ndonly/readings/Methods/06-ContentAnalysis/Equidistant%20Letter%20Sequences%20in%20the%20Book%20of%20Genesis%201994.pdf`
+- McKay/Bar-Natan/Bar-Hillel/Kalai 1999 response PDF:
+  `https://users.cecs.anu.edu.au/~bdm/codes/StatSci/StatSci.pdf`
+- MBBK data page:
+  `https://users.cecs.anu.edu.au/~bdm/codes/StatSci/data.html`
+- Bar-Hillel/Bar-Natan/McKay Chance article:
+  `https://users.cecs.anu.edu.au/~bdm/codes/Chance.pdf`
+- Torah-code papers page:
+  `https://www.torah-code.org/papers.html`
+- Torah-code co-linear ELS/verse paper and attachments:
+  `https://www.torah-code.org/papers/bombach.pdf`
+  `https://www.torah-code.org/papers/attachments.html`
+- Gans communities paper:
+  `https://www.torah-code.org/papers/gans.pdf`
+- Gans communities data:
+  `https://www.torah-code.org/papers/communities_data.pdf`
+- Haralick protocol and controversy papers:
+  `https://www.torah-code.org/papers/sspr98.pdf`
+  `https://www.torah-code.org/papers/icpr98.pdf`
+  `https://www.torah-code.org/papers/skeptical_inquirer_02_15_07.pdf`
+  `https://www.torah-code.org/papers/wdp.pdf`
+  `https://www.torah-code.org/papers/wdp2.pdf`
+- Levitt/Rips/Schwartzman/Witztum papers and data:
+  `https://www.torah-code.org/papers/levitt.pdf`
+  `https://www.torah-code.org/papers/caweb.pdf`
+  `https://www.torah-code.org/papers/belgpdf.pdf`
+  `https://www.torah-code.org/papers/belj.pdf`
+  `https://www.torah-code.org/papers/rips.pdf`
+  `https://www.torah-code.org/papers/mode_1.pdf`
+  `https://www.torah-code.org/papers/witztum.pdf`
+  `https://www.torah-code.org/papers/personaldata.pdf`
 - WRR/Nations discussion page citing 163 famous-rabbi second-list distances:
   `https://www.math.utoronto.ca/drorbn/Codes/Nations/main_gir.html`
 - WRR/Nations discussion page in modified Michigan-Claremont notation:
@@ -32,6 +62,8 @@ Status: secondary source path identified; canonical WRR pair table not locked.
   `https://bible-codes.github.io/`
 - Browser app source repository advertised in search/cache results:
   `https://github.com/bible-codes/bible-codes.github.io`
+- GitHub DMCA notice now blocking that repository:
+  `https://github.com/github/dmca/blob/master/2026/05/2026-05-12-torahbiblecodes.md`
 
 ## Current Assessment
 
@@ -46,17 +78,48 @@ defined distances after that screen. The extracted PDF text is not reliable
 enough for a machine-ready Hebrew term list because Hebrew table text is
 garbled by PDF/OCR extraction.
 
+The MBBK 1999 response and the Gans communities paper clarify two method pieces
+that were previously open in this repo: `c(w,w')` uses a greater-than-or-equal
+`v/m` count, and `c(w,w')` is undefined unless the ordinary `(0,0,0)` proximity
+is defined and at least 10 perturbation proximities are defined. MBBK also notes
+that the printed WRR expected-ELS window formula differs from the formula used
+by the WRR programs. The current code still uses the printed formula; a full
+reproduction driver must choose paper formula versus program formula before
+final `D(w)` calculations.
+
 The ANU/McKay data page provides plain-text WRR lists in a modified
 Michigan-Claremont transliteration. That is useful for a reproducible import
 path, but it is a secondary critical source rather than the WRR paper itself.
 
+The Torah-code.org papers page adds possible future test leads: co-linear ELS
+pairs linked to verses, Genesis ELS-pair/community data, protocol papers about
+word-permuted controls and expected-hit skip caps, and Witztum birth-date data.
+These are source leads, not claim-ready evidence.
+
+## Additional Test Leads From Torah-Code.org
+
+- Co-linear ELS phrase/verse test: Bombach/Gans use all Pentateuch words of at
+  least 5 letters, skip range `2..1000`, co-linear ELS pairs, verse-root links,
+  and released attachment tables. This can become a separate protocol after the
+  attachment PDFs are parsed and source rows are reviewed.
+- Genesis ELS-pair/community test: the Gans/Inbal/Bombach paper plus data file
+  provide another fixed data set for pair compactness checks, independent from
+  the WRR famous-rabbis table.
+- Haralick protocol tests: the papers describe cleaner a priori protocol design,
+  word-permuted or chapter-word-permuted Genesis controls, expected-hit skip
+  caps of 5 or 10, and simpler 1D/2D compactness measures that can be tested as
+  transparent alternatives before implementing full WRR corrected distance.
+- Witztum Genesis birth-date data: the paper/data file provide another declared
+  personality/date-style data set to import after the WRR path has a fixed
+  parser and claim-safe report structure.
+
 The browser app appears in search/cache results as an Apache-2.0 repository with
-a WRR replication interface. In the current audit check, however, the GitHub API
-and `git ls-remote` did not expose a cloneable repository at the advertised
-path, and the GitHub Pages URL returned a 404 page. Treat this as an
-inaccessible source candidate, not an admissible data source. Do not import data
-from cached search snippets or screenshots; require a live source URL, stable
-file path, license, and checksum before using it as a cross-check.
+a WRR replication interface. In the current audit check, however, cloning the
+GitHub repository fails with a DMCA takedown notice, and the GitHub Pages URL
+returned a 404 page. Treat this as an inaccessible source candidate, not an
+admissible data source. Do not import data from cached search snippets or
+screenshots; require a live source URL, stable file path, license, and checksum
+before using it as a cross-check.
 
 The TorahBibleCodes repository is visible, but its README asserts restrictive
 reuse terms and alleges copyright issues around the browser app. It should not
@@ -109,6 +172,27 @@ browser-app note that those records lack recorded death dates.
 Latest protocol smoke output:
 
 - `reports/wrr_1994/wrr_1994_paper.pdf`
+- `reports/wrr_1994/mmbbk_1999_paper.pdf`
+- `reports/wrr_1994/mmbbk_data_page.html`
+- `reports/wrr_1994/chance_torah_codes_puzzle_solution.pdf`
+- `reports/wrr_1994/torah_code_papers.html`
+- `reports/wrr_1994/torah_code_colinear_paper.pdf`
+- `reports/wrr_1994/torah_code_colinear_attachments.html`
+- `reports/wrr_1994/gans_communities_paper.pdf`
+- `reports/wrr_1994/gans_communities_data.pdf`
+- `reports/wrr_1994/haralick_new_protocols.pdf`
+- `reports/wrr_1994/haralick_controversy.pdf`
+- `reports/wrr_1994/haralick_skeptical_response.pdf`
+- `reports/wrr_1994/haralick_basic_concepts.pdf`
+- `reports/wrr_1994/haralick_experimental_protocol.pdf`
+- `reports/wrr_1994/levitt_component_analysis.pdf`
+- `reports/wrr_1994/levitt_component_data.pdf`
+- `reports/wrr_1994/levitt_long_phrases.pdf`
+- `reports/wrr_1994/levitt_linguistic_connections.pdf`
+- `reports/wrr_1994/rips_twin_towers.pdf`
+- `reports/wrr_1994/schwartzman_dialog_mode.pdf`
+- `reports/wrr_1994/witztum_birth_dates.pdf`
+- `reports/wrr_1994/witztum_birth_dates_data.pdf`
 - `reports/wrr_1994/WRR1.txt`
 - `reports/wrr_1994/WRR2.txt`
 - `reports/wrr_1994/SE2a.txt`
@@ -133,6 +217,27 @@ Latest source hashes:
 | Label | Bytes | SHA-256 |
 | --- | ---: | --- |
 | `wrr_1994_paper.pdf` | 1,467,241 | `f7632fce3e1f9aba3c3fdcb62be8ee258c4cad60074d148259c5f0c4e6e97bb3` |
+| `mmbbk_1999_paper.pdf` | 426,996 | `b222a8761e0c8c01d68859a454b416743ddcfbf7b994dd2811dd8e856c039d5d` |
+| `mmbbk_data_page.html` | 2,809 | `4eb306c594ed727b47b5a037928c05b3f90a30e87a52128edad563a720dbddc4` |
+| `chance_torah_codes_puzzle_solution.pdf` | 92,736 | `d6485a348454eec26e52dd0a729fef23da55af00c195e987733a583e84d6878c` |
+| `torah_code_papers.html` | 15,527 | `a33a25292525125e0c4ad1af2229ae5d931e86e73be01cf6cdee1e221fa68876` |
+| `torah_code_colinear_paper.pdf` | 113,287 | `2ccc1bc563ea8a71d8ab861411fbd94943677f5c086d63dfc53016d665cf5a24` |
+| `torah_code_colinear_attachments.html` | 18,135 | `f87ccdbb2a1b65f2b2d413837274d2cabf7e167c894cbd4c55b065b9acd85203` |
+| `gans_communities_paper.pdf` | 126,543 | `212cb24f918b9a417a6837ce5f1d6c6af3c80abba77bac084d6cd068c572adf0` |
+| `gans_communities_data.pdf` | 349,586 | `ac0b221064e144ca9a70d616064bcd58f7d8e68cd2fe6bedb202dd81991feb86` |
+| `haralick_new_protocols.pdf` | 202,375 | `425f999305ca7d1f5b73e63c67ea9cab65d1788e7a9f2a820c83f8fb15d0d2ab` |
+| `haralick_controversy.pdf` | 133,338 | `e2924da0118ca39a5416399404eab51f74d4d09d3e20229bdbe1a2a02aed615c` |
+| `haralick_skeptical_response.pdf` | 24,296 | `2376020224db7d2c9d37abc2f5c4f4f4d9876b3b8fa656807b4e1e825e8a2c53` |
+| `haralick_basic_concepts.pdf` | 145,507 | `0e71a9454d157739b74e40537a3b95b26233b02d524490910e865d766a5cdd78` |
+| `haralick_experimental_protocol.pdf` | 140,968 | `8674b44bb33e39b0a4e61ccb795cb835781586124dd820e1485d5f11edb46d7d` |
+| `levitt_component_analysis.pdf` | 145,200 | `b060e9c04923756e30a690fa7f8ecaf4c1a6d3d9be90e425def07956419bb0b8` |
+| `levitt_component_data.pdf` | 473,832 | `14d7dc84415bb98f860ad4c3d48a3f668059e1d61fab310218fcd1552420efa0` |
+| `levitt_long_phrases.pdf` | 237,313 | `9d616c58b0b13443ad23d4a57845b2d95c664a0517c30d91c47fd7fa5e79922c` |
+| `levitt_linguistic_connections.pdf` | 448,026 | `ee20ff8f9eb710e01093eca7f27cc9a1576731361a995dfbaaaf858dc2d43c2f` |
+| `rips_twin_towers.pdf` | 239,909 | `a0d5a68cc85b59ce74cccda3a1353d762f136a52ddb897049c88eadaf60aa0b7` |
+| `schwartzman_dialog_mode.pdf` | 95,499 | `6bfdec5696c9470df2460fb5db4d0ff15c2f184f325e340eace4987000ad4e5c` |
+| `witztum_birth_dates.pdf` | 120,533 | `e1c4ee142c5138af53cdcbeded23a6ae724000b82c5f015b07f1e212c05ec56e` |
+| `witztum_birth_dates_data.pdf` | 186,829 | `20296eaa82a60065e5f01032833da76eaf004c0f11801617e6646bb33f83dcfe` |
 | `WRR1.txt` | 2,016 | `7879343bb78ced3b20db0d232579762ed76bd7bd2b1ec198a2eef9871dde69fb` |
 | `WRR2.txt` | 2,038 | `927c133d6d3a57aa06d57518f8a89137292654056b51433a08a0480c7d245be5` |
 | `SE2a.txt` | 1,776 | `89ba88172d2d9c127b5f19549b04d8913de3431c4a5879854af2849b7f1d69b2` |
@@ -202,7 +307,7 @@ appellation would move 165 to 163. Excluding all four WNP-disputed Zacut
 appellations would remove eight pairs and overshoot to 157. That is only a
 diagnostic clue. The project does not currently apply any Zacut-specific
 exclusion because the WNP page is a critical alternative-source discussion, not
-a canonical WRR pair table.
+a source rule for pre-filtering the candidate set.
 
 ## Count Smoke
 
@@ -371,10 +476,11 @@ This is the current concrete mismatch: the secondary `WRR2.txt` source imports
 to 182 same-record appellation/date combinations, while WRR discussion sources
 cite 163 second-list distances. Filtering out only appellations shorter than 5
 letters yields 165 combinations, only two above the cited count, while the
-repo's current 5..8-letter audit filter reduces those rows to 86. Neither
-count is the locked WRR second-list distance table. The Zacut diagnostic now
-shows why a single length-eligible Zacut appellation exclusion would close the
-numeric gap, while excluding every WNP-disputed Zacut row would not.
+repo's current 5..8-letter audit filter reduces those rows to 86. Current read:
+the 163-distance count must be derived by the corrected-distance eligibility
+screen, not by raw pair-count reconciliation. The Zacut diagnostic now shows why
+a single length-eligible Zacut appellation exclusion would close the numeric
+gap, while excluding every WNP-disputed Zacut row would not.
 
 WRR pair-eligibility lock-prep table:
 
@@ -394,7 +500,7 @@ WRR pair-eligibility lock-prep table:
 This table gives the next reviewer a row-by-row pair id, source term ids,
 normalized lengths, Genesis smoke hit counts, expected-count skip caps,
 nearest-pair metrics, and eligibility notes. It still does not select the
-canonical 163-distance WRR pair set.
+defined 163-distance WRR output set.
 
 WRR perturbation boundary/exact-match diagnostic for length `5..8` rows:
 
@@ -453,8 +559,9 @@ corrected distance:
   real-corpus domain-labeling diagnostics with undefined-reason labels,
   defined-domain-only ordinary `Q(w,w')` diagnostics, domain-weighted
   `Q(w,w')` summation for domain-labeled ELS rows, and the corrected-distance
-  rank step for already-computed perturbation proximities, including the strict
-  WRR 1994 `v/m` rank and the tie-aware methodology-page diagnostic rank.
+  rank step for already-computed perturbation proximities, including the
+  source-count WRR `v/m` rank and the tie-aware methodology-page diagnostic
+  rank.
 
 These helpers are tested, but they still need real `c(w,w')` values from a
 future corrected-distance implementation before they can produce WRR `P1..P4`.
