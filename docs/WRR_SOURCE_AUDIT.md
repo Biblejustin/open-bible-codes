@@ -241,6 +241,11 @@ Table 3 published rank rows from PDF text and derives the reported
 Bonferroni-style `p0 = 4 * min(pi)` values. This source-locks the published
 result table without treating those rows as a local recomputation.
 
+`scripts/analyze_wrr_primary_table2_anchors.py` checks that the English row
+labels for the 32 second-list personalities in Table 2 are visible in the
+primary PDF extraction. It does not treat the garbled Hebrew table cells as
+machine-ready term/date data.
+
 `scripts/simulate_torah_code_research_model.py` turns the Torah-code.org
 research-program geometric level-1 model into a reproducible simulation harness.
 It is intentionally a model-design/power sanity check, not a Torah-code result.
