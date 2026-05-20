@@ -17,6 +17,7 @@ DEFAULT_TEXT_SOURCE = Path("reports/wrr_1994/koren_genesis_text_source.csv")
 DEFAULT_PAIR_SUMMARY = Path("reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv")
 DEFAULT_SKIP_SUMMARY = Path("reports/wrr_1994/wrr2_skip_caps_summary.csv")
 DEFAULT_VARIANTS = Path("reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv")
+DEFAULT_PRIMARY_RESULT_TABLE = Path("reports/wrr_1994/wrr_primary_result_table.csv")
 DEFAULT_OUT = Path("reports/wrr_1994/wrr_method_status.csv")
 DEFAULT_MD = Path("docs/WRR_METHOD_STATUS.md")
 DEFAULT_MANIFEST = Path("reports/wrr_1994/wrr_method_status.manifest.json")
@@ -69,7 +70,8 @@ def main(argv: list[str] | None = None) -> int:
     pair_row = read_one_row(args.pair_summary)
     skip_row = read_one_row(args.skip_summary)
     variant_rows = read_rows(args.corrected_distance_variants)
-    rows = build_status_rows(text_row, pair_row, skip_row, variant_rows)
+    primary_result_rows = read_rows(args.primary_result_table)
+    rows = build_status_rows(text_row, pair_row, skip_row, variant_rows, primary_result_rows)
     write_csv(args.out, rows)
     write_markdown(args.markdown_out, rows, args)
     write_manifest(args, rows, started)
@@ -85,6 +87,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--pair-summary", type=Path, default=DEFAULT_PAIR_SUMMARY)
     parser.add_argument("--skip-summary", type=Path, default=DEFAULT_SKIP_SUMMARY)
     parser.add_argument("--corrected-distance-variants", type=Path, default=DEFAULT_VARIANTS)
+    parser.add_argument("--primary-result-table", type=Path, default=DEFAULT_PRIMARY_RESULT_TABLE)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
     parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST)
@@ -108,6 +111,7 @@ def build_status_rows(
     pair_row: dict[str, str],
     skip_row: dict[str, str],
     variant_rows: list[dict[str, str]],
+    primary_result_rows: list[dict[str, str]] | None = None,
 ) -> list[dict[str, str]]:
     return [
         {
@@ -161,13 +165,7 @@ def build_status_rows(
             "next_action": "Choose printed-paper formula or reported-program formula before final corrected-distance run.",
         },
         corrected_distance_status(variant_rows),
-        {
-            "decision_area": "Aggregate statistic and permutation",
-            "status": "not_built",
-            "current_read": "P1/P2 arithmetic helpers exist, but no claim-grade P1..P4 or date-permutation runner exists.",
-            "evidence": "No current protocol step computes full WRR aggregate scores or permutation ranks from defined c-values.",
-            "next_action": "Implement only after final pair universe and corrected-distance values are locked.",
-        },
+        aggregate_status(primary_result_rows or []),
     ]
 
 
@@ -192,6 +190,37 @@ def corrected_distance_status(variant_rows: list[dict[str, str]]) -> dict[str, s
         "current_read": "Smoke driver exists, but current candidate lane produces no defined corrected distances.",
         "evidence": f"{variants}; maximum valid perturbation count {max_valid}; total defined {sum(defined_counts)}",
         "next_action": "Optimize and rerun over final pair universe after D(w) and source rows are locked.",
+    }
+
+
+def aggregate_status(primary_result_rows: list[dict[str, str]]) -> dict[str, str]:
+    genesis = next(
+        (row for row in primary_result_rows if row.get("label") == "G" and row.get("status") == "found"),
+        None,
+    )
+    if genesis is None:
+        return {
+            "decision_area": "Aggregate statistic and permutation",
+            "status": "not_built",
+            "current_read": "P1/P2 arithmetic helpers exist, but no claim-grade P1..P4 or date-permutation runner exists.",
+            "evidence": "No primary Table 3 source-result row was supplied; no current protocol step computes full WRR aggregate scores or permutation ranks from defined c-values.",
+            "next_action": "Implement only after final pair universe and corrected-distance values are locked.",
+        }
+    control_summary = ", ".join(
+        f"{row.get('label', '')} p0={row.get('bonferroni_p0', '')}"
+        for row in primary_result_rows
+        if row.get("label") != "G" and row.get("status") == "found"
+    )
+    return {
+        "decision_area": "Aggregate statistic and permutation",
+        "status": "source_locked_not_built",
+        "current_read": "Published Table 3 ranks are source-audited, but local claim-grade P1..P4 and date-permutation runners are not built.",
+        "evidence": (
+            f"Source Table 3: G min {genesis.get('min_statistic', '')} rank "
+            f"{genesis.get('min_rank', '')}, p0={genesis.get('bonferroni_p0', '')}; "
+            f"controls: {control_summary}; no local aggregate recomputation from defined c-values"
+        ),
+        "next_action": "Implement only after final pair universe and corrected-distance values are locked.",
     }
 
 
@@ -228,6 +257,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             f"--pair-summary {args.pair_summary} "
             f"--skip-summary {args.skip_summary} "
             f"--corrected-distance-variants {args.corrected_distance_variants} "
+            f"--primary-result-table {args.primary_result_table} "
             f"--out {args.out} "
             f"--markdown-out {args.markdown_out} "
             f"--manifest-out {args.manifest_out}"
@@ -293,6 +323,7 @@ def write_manifest(args: argparse.Namespace, rows: list[dict[str, str]], started
             "pair_summary": str(args.pair_summary),
             "skip_summary": str(args.skip_summary),
             "corrected_distance_variants": str(args.corrected_distance_variants),
+            "primary_result_table": str(args.primary_result_table),
         },
         "outputs": {
             "csv": str(args.out),

@@ -37,6 +37,16 @@ class WrrMethodStatusTests(unittest.TestCase):
                 {"variant": "term_printed", "defined_corrected_distances": "0", "max_pair_valid_perturbations": "3"},
                 {"variant": "fixed_250", "defined_corrected_distances": "0", "max_pair_valid_perturbations": "4"},
             ],
+            primary_result_rows=[
+                {
+                    "label": "G",
+                    "status": "found",
+                    "min_statistic": "P4",
+                    "min_rank": "4",
+                    "bonferroni_p0": "0.000016",
+                },
+                {"label": "V", "status": "found", "bonferroni_p0": "0.847108"},
+            ],
         )
 
         by_area = {row["decision_area"]: row for row in rows}
@@ -47,6 +57,8 @@ class WrrMethodStatusTests(unittest.TestCase):
         self.assertIn("13 program caps below printed", by_area["D(w) skip-cap formula"]["evidence"])
         self.assertEqual(by_area["Corrected distance c(w,w')"]["status"], "smoke_only")
         self.assertIn("maximum valid perturbation count 4", by_area["Corrected distance c(w,w')"]["evidence"])
+        self.assertEqual(by_area["Aggregate statistic and permutation"]["status"], "source_locked_not_built")
+        self.assertIn("G min P4 rank 4", by_area["Aggregate statistic and permutation"]["evidence"])
 
     def test_markdown_cell_escapes_pipes(self) -> None:
         self.assertEqual(markdown_cell("a|b\nc"), "a\\|b c")
@@ -62,6 +74,7 @@ class WrrMethodStatusTests(unittest.TestCase):
                     "pair_summary": Path("pairs.csv"),
                     "skip_summary": Path("skip.csv"),
                     "corrected_distance_variants": Path("variants.csv"),
+                    "primary_result_table": Path("primary.csv"),
                     "out": Path("out.csv"),
                     "markdown_out": path,
                     "manifest_out": Path("manifest.json"),
@@ -95,6 +108,7 @@ class WrrMethodStatusTests(unittest.TestCase):
             pair_summary = root / "pairs.csv"
             skip_summary = root / "skip.csv"
             variants = root / "variants.csv"
+            primary_results = root / "primary.csv"
             out = root / "status.csv"
             markdown = root / "status.md"
             manifest = root / "manifest.json"
@@ -147,6 +161,18 @@ class WrrMethodStatusTests(unittest.TestCase):
                     }
                 ],
             )
+            write_dict_rows(
+                primary_results,
+                [
+                    {
+                        "label": "G",
+                        "status": "found",
+                        "min_statistic": "P4",
+                        "min_rank": "4",
+                        "bonferroni_p0": "0.000016",
+                    }
+                ],
+            )
 
             rc = main(
                 [
@@ -158,6 +184,8 @@ class WrrMethodStatusTests(unittest.TestCase):
                     str(skip_summary),
                     "--corrected-distance-variants",
                     str(variants),
+                    "--primary-result-table",
+                    str(primary_results),
                     "--out",
                     str(out),
                     "--markdown-out",

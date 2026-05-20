@@ -236,6 +236,11 @@ word-pair sample statement, Koren text statement, 999,999 permutation count,
 and expected-ELS skip-cap description. It deliberately does not treat the
 garbled Hebrew table extraction as a machine-ready term source.
 
+`scripts/analyze_wrr_primary_result_table.py` extracts the primary paper's
+Table 3 published rank rows from PDF text and derives the reported
+Bonferroni-style `p0 = 4 * min(pi)` values. This source-locks the published
+result table without treating those rows as a local recomputation.
+
 `scripts/simulate_torah_code_research_model.py` turns the Torah-code.org
 research-program geometric level-1 model into a reproducible simulation harness.
 It is intentionally a model-design/power sanity check, not a Torah-code result.
