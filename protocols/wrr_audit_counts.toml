@@ -448,6 +448,102 @@ outputs = [
 ]
 
 [[steps]]
+id = "compute_wrr2_corrected_distance_smoke_program"
+description = "Repeat corrected-distance smoke using the reported WRR-program skip-cap formula."
+argv = [
+  "-m", "scripts.analyze_wrr_corrected_distance",
+  "--pair-table", "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--candidate-lane", "length_5_8_smoke_candidate",
+  "--min-skip", "2",
+  "--search-max-skip", "250",
+  "--direction", "both",
+  "--jobs", "0",
+  "--row-width-count", "10",
+  "--minimum-valid", "10",
+  "--skip-cap-mode", "term",
+  "--skip-cap-formula", "program",
+  "--out", "reports/wrr_1994/wrr2_corrected_distance_smoke_program.csv",
+  "--summary-out", "reports/wrr_1994/wrr2_corrected_distance_smoke_program_summary.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_corrected_distance_smoke_program.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_corrected_distance_smoke_program.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_corrected_distance.py",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "configs/example_koren_genesis.toml",
+  "els/wrr.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_corrected_distance_smoke_program.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_smoke_program_summary.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_smoke_program.md",
+  "reports/wrr_1994/wrr2_corrected_distance_smoke_program.manifest.json",
+]
+
+[[steps]]
+id = "compute_wrr2_corrected_distance_smoke_fixed_250"
+description = "Repeat corrected-distance smoke using a fixed 250 skip cap for sensitivity only."
+argv = [
+  "-m", "scripts.analyze_wrr_corrected_distance",
+  "--pair-table", "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--candidate-lane", "length_5_8_smoke_candidate",
+  "--min-skip", "2",
+  "--search-max-skip", "250",
+  "--direction", "both",
+  "--jobs", "0",
+  "--row-width-count", "10",
+  "--minimum-valid", "10",
+  "--skip-cap-mode", "fixed",
+  "--skip-cap-formula", "printed",
+  "--out", "reports/wrr_1994/wrr2_corrected_distance_smoke_fixed_250.csv",
+  "--summary-out", "reports/wrr_1994/wrr2_corrected_distance_smoke_fixed_250_summary.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_corrected_distance_smoke_fixed_250.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_corrected_distance_smoke_fixed_250.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_corrected_distance.py",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "configs/example_koren_genesis.toml",
+  "els/wrr.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_corrected_distance_smoke_fixed_250.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_smoke_fixed_250_summary.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_smoke_fixed_250.md",
+  "reports/wrr_1994/wrr2_corrected_distance_smoke_fixed_250.manifest.json",
+]
+
+[[steps]]
+id = "compare_wrr2_corrected_distance_variants"
+description = "Compare corrected-distance smoke summaries across skip-cap variants."
+argv = [
+  "-m", "scripts.compare_wrr_corrected_distance_variants",
+  "--variant", "term_printed=reports/wrr_1994/wrr2_corrected_distance_smoke_summary.csv",
+  "--variant", "term_program=reports/wrr_1994/wrr2_corrected_distance_smoke_program_summary.csv",
+  "--variant", "fixed_250=reports/wrr_1994/wrr2_corrected_distance_smoke_fixed_250_summary.csv",
+  "--out", "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.manifest.json",
+]
+inputs = [
+  "scripts/compare_wrr_corrected_distance_variants.py",
+  "reports/wrr_1994/wrr2_corrected_distance_smoke_summary.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_smoke_program_summary.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_smoke_fixed_250_summary.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.md",
+  "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.manifest.json",
+]
+
+[[steps]]
 id = "control_wrr2_genesis_top_pairs"
 description = "Control-screen the top raw WRR2 same-record pair rows."
 argv = [

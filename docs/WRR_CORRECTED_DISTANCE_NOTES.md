@@ -148,6 +148,12 @@ Already implemented:
   defined corrected distances: 56 pairs lack a valid ordinary perturbation and
   30 have fewer than 10 valid perturbations; the maximum valid perturbation
   count is 3.
+- corrected-distance smoke variant comparison in
+  `scripts/compare_wrr_corrected_distance_variants.py`. Current 5..8
+  candidate-lane comparison gives 0 defined corrected distances for term
+  printed, term program, and fixed-250 settings. Term printed and term program
+  both have maximum valid perturbation count 3; fixed-250 raises that maximum
+  to 4 but still does not define any corrected distances.
 
 Not yet implemented:
 

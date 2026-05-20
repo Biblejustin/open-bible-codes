@@ -186,7 +186,10 @@ pair-level bridge to the same 86 length-5..8 smoke-lane pairs. Current output
 has 0 defined corrected distances: 56 pairs lack a valid ordinary perturbation,
 30 are below the 10-valid-perturbation floor, and the maximum valid
 perturbation count is 3. That is still not a WRR reproduction because the final
-pair universe and `D(w)` formula remain unlocked.
+pair universe and `D(w)` formula remain unlocked. A variant comparison now
+checks term-printed, term-program, and fixed-250 skip settings side by side:
+all three produce 0 defined corrected distances; fixed-250 only raises the
+maximum valid perturbation count from 3 to 4.
 Implementation notes are now tracked in
 `docs/WRR_CORRECTED_DISTANCE_NOTES.md`.
 
