@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 278
+Documents indexed: 279
 
 ## Controls
 
@@ -288,6 +288,7 @@ Documents indexed: 278
 | Thematic Chapter Absence | `THEMATIC_CHAPTER_ABSENCE.md` |
 | Theological Terms Study | `THEOLOGICAL_TERMS_STUDY.md` |
 | TheWordNotes ELS Source Audit | `THEWORDNOTES_ELS_AUDIT.md` |
+| Torah-Code ELS Model Simulation | `TORAH_CODE_RESEARCH_ELS_MODEL_SIMULATION.md` |
 | Torah-Code Research Model Simulation | `TORAH_CODE_RESEARCH_MODEL_SIMULATION.md` |
 | Transformed Text Layers | `TRANSFORMED_TEXT_LAYERS.md` |
 | Wide Focus Exact-Hit Presence | `WIDE_FOCUS_EXACT_PRESENCE.md` |

@@ -230,6 +230,11 @@ source files so the 163-distance mismatch is visible before any metric work.
 research-program geometric level-1 model into a reproducible simulation harness.
 It is intentionally a model-design/power sanity check, not a Torah-code result.
 
+`scripts/simulate_torah_code_research_els_model.py` adds a matching ELS/cylinder
+analogue. It uses shared WRR row-width helpers as a transparent resonant
+cylinder proxy and compares arithmetic, geometric, harmonic, and trimmed
+order-statistic means over generated ELS-meeting distances.
+
 Example:
 
 ```bash

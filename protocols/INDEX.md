@@ -30,7 +30,7 @@ Protocols indexed: 108
 | review_flag_summary | Summarize meaningful-skip and rarity review flags from the match-strata index. | 1 |  | reports/review_flag_summary | `review_flag_summary.toml` |
 | step_tahot_version_presence | Run focused modern/local exact-hit version presence with STEP_TAHOT included as a separ... | 2 | terms/modern_names_dates.csv | reports/step_tahot_version_presence | `step_tahot_version_presence.toml` |
 | thematic_chapter_absence | Run term-absence checks over locked thematic chapter mappings only. | 1 |  | reports/thematic_chapter_absence | `thematic_chapter_absence.toml` |
-| torah_code_research_geometric_model | Simulate Torah-code.org research-program geometric level-1 compactness model. | 1 |  | reports/torah_code_research_model | `torah_code_research_geometric_model.toml` |
+| torah_code_research_geometric_model | Simulate Torah-code.org research-program geometric and ELS level-1 compactness models. | 2 |  | reports/torah_code_research_model | `torah_code_research_geometric_model.toml` |
 | version_presence_extensions | Same-skip extension screen for bounded all-source version-presence hit queues. | 10 |  | reports/version_presence_extensions | `version_presence_extensions.toml` |
 | wide_focus_exact_presence | Capped exact-hit version-presence review for the focused wide-search terms. | 2 | terms/modern_names_dates.csv, terms/prophetic_terms.csv | reports/wide_focus_exact_presence | `wide_focus_exact_presence.toml` |
 

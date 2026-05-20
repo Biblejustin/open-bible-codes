@@ -101,15 +101,18 @@ Tracked references:
 - `tests/test_wrr_stats.py`
 
 Recent source-audit follow-up added a Torah-code.org geometric level-1
-simulation harness:
+simulation harness and an ELS/cylinder level-1 analogue:
 
 - `scripts/simulate_torah_code_research_model.py`
+- `scripts/simulate_torah_code_research_els_model.py`
 - `protocols/torah_code_research_geometric_model.toml`
 - `docs/TORAH_CODE_RESEARCH_MODEL_SIMULATION.md`
+- `docs/TORAH_CODE_RESEARCH_ELS_MODEL_SIMULATION.md`
 
-Next research-program upgrade: implement an ELS/cylinder analogue of this
-simulation, then compare which compactness statistic has acceptable power before
-using it on real Torah-code source data.
+Next research-program upgrade: replace the current transparent resonant
+row-width proxy with a fuller source-method reconstruction, add source-specific
+Fisher order-statistic weights, and only then consider real Torah-code source
+data.
 
 ### 2. Source-Basis Audit Queue
 
