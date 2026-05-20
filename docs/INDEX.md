@@ -89,6 +89,7 @@ Documents indexed: 279
 | --- | --- |
 | ELS Hypothesis Analysis Framework | `HYPOTHESIS_ANALYSIS_FRAMEWORK.md` |
 | WRR Corrected Distance Notes | `WRR_CORRECTED_DISTANCE_NOTES.md` |
+| WRR Method Status | `WRR_METHOD_STATUS.md` |
 | WRR Methodology Gaps | `WRR_METHODOLOGY_GAPS.md` |
 | WRR 1994 Replication Plan | `WRR_REPLICATION_PLAN.md` |
 | WRR Source Audit | `WRR_SOURCE_AUDIT.md` |

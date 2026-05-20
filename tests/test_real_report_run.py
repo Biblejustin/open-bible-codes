@@ -36,6 +36,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/release_hygiene.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_public_release_hygiene.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_REPLICATION_PLAN.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn("docs/WRR_METHOD_STATUS.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("claims/claim_catalog.csv", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/CLAIM_CATALOG.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("configs/prospective_study_lanes.json", steps_by_id["preflight"]["inputs"])
@@ -141,6 +142,7 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn("docs/WRR_REPLICATION_PLAN.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/WRR_METHOD_STATUS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/release_hygiene.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_public_release_hygiene.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("claims/claim_catalog.csv", preflight.DEFAULT_REQUIRED_PATHS)

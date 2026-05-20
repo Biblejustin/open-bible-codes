@@ -544,6 +544,32 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_method_status"
+description = "Summarize current WRR locks, open method decisions, and next actions."
+argv = [
+  "-m", "scripts.build_wrr_method_status",
+  "--text-source", "reports/wrr_1994/koren_genesis_text_source.csv",
+  "--pair-summary", "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "--skip-summary", "reports/wrr_1994/wrr2_skip_caps_summary.csv",
+  "--corrected-distance-variants", "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
+  "--out", "reports/wrr_1994/wrr_method_status.csv",
+  "--markdown-out", "docs/WRR_METHOD_STATUS.md",
+  "--manifest-out", "reports/wrr_1994/wrr_method_status.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_method_status.py",
+  "reports/wrr_1994/koren_genesis_text_source.csv",
+  "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "reports/wrr_1994/wrr2_skip_caps_summary.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_method_status.csv",
+  "docs/WRR_METHOD_STATUS.md",
+  "reports/wrr_1994/wrr_method_status.manifest.json",
+]
+
+[[steps]]
 id = "control_wrr2_genesis_top_pairs"
 description = "Control-screen the top raw WRR2 same-record pair rows."
 argv = [
