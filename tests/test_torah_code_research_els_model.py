@@ -45,6 +45,43 @@ class TorahCodeResearchElsModelTests(unittest.TestCase):
         self.assertEqual(moved.start, 35)
         self.assertEqual(moved.skip, occurrence.skip)
 
+    def test_projected_start_on_cylinder_wraps_shortest_column_path(self) -> None:
+        self.assertEqual(
+            model.projected_start_on_cylinder(
+                9,
+                0,
+                row_width=10,
+                compactness_factor=0.0,
+            ),
+            0,
+        )
+        self.assertEqual(
+            model.projected_start_on_cylinder(
+                9,
+                0,
+                row_width=10,
+                compactness_factor=1.0,
+            ),
+            9,
+        )
+
+    def test_move_els_toward_meeting_reduces_cylinder_distance(self) -> None:
+        occurrence = model.ElsOccurrence(start=90, skip=10, word_length=3)
+        target = model.ElsOccurrence(start=10, skip=10, word_length=3)
+        meeting = model.MeetingChoice(target=target, distance=8, row_width=10)
+
+        moved = model.move_els_toward_meeting(
+            occurrence,
+            meeting,
+            compactness_factor=0.25,
+            text_length=200,
+        )
+
+        before = model.els_pair_distance_at_row_width(occurrence.offsets(), target.offsets(), 10)
+        after = model.els_pair_distance_at_row_width(moved.offsets(), target.offsets(), 10)
+        self.assertLess(after, before)
+        self.assertEqual(moved.skip, occurrence.skip)
+
     def test_meeting_statistics_compare_mean_families(self) -> None:
         left = (model.ElsOccurrence(start=10, skip=5, word_length=3),)
         right = (model.ElsOccurrence(start=20, skip=5, word_length=3),)

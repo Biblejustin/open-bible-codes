@@ -75,6 +75,13 @@ class ElsOccurrence:
         return ordinary_els_offsets(self.start, self.skip, self.word_length)
 
 
+@dataclass(frozen=True)
+class MeetingChoice:
+    target: ElsOccurrence
+    distance: float
+    row_width: int
+
+
 def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(argv)
@@ -340,10 +347,15 @@ def els_pair_distance(
         return None
     left_offsets = left.offsets()
     right_offsets = right.offsets()
-    return min(
-        hausdorff_cylinder_distance(left_offsets, right_offsets, row_width)
-        for row_width in widths
-    )
+    return min(els_pair_distance_at_row_width(left_offsets, right_offsets, row_width) for row_width in widths)
+
+
+def els_pair_distance_at_row_width(
+    left_offsets: tuple[int, ...],
+    right_offsets: tuple[int, ...],
+    row_width: int,
+) -> float:
+    return hausdorff_cylinder_distance(left_offsets, right_offsets, row_width)
 
 
 def hausdorff_cylinder_distance(
@@ -415,9 +427,9 @@ def move_toward_best_meetings(
         if index not in selected:
             moved.append(occurrence)
             continue
-        best = best_meeting(occurrence, fixed, row_width_count=row_width_count)
+        best = best_meeting_choice(occurrence, fixed, row_width_count=row_width_count)
         moved.append(
-            move_els_toward(
+            move_els_toward_meeting(
                 occurrence,
                 best,
                 compactness_factor=compactness_factor,
@@ -435,14 +447,78 @@ def best_meeting(
     *,
     row_width_count: int,
 ) -> ElsOccurrence | None:
-    best: tuple[float, ElsOccurrence] | None = None
+    choice = best_meeting_choice(occurrence, candidates, row_width_count=row_width_count)
+    return choice.target if choice is not None else None
+
+
+def best_meeting_choice(
+    occurrence: ElsOccurrence,
+    candidates: tuple[ElsOccurrence, ...],
+    *,
+    row_width_count: int,
+) -> MeetingChoice | None:
+    best: MeetingChoice | None = None
     for candidate in candidates:
-        distance = els_pair_distance(occurrence, candidate, row_width_count=row_width_count)
-        if distance is None:
+        choice = best_width_for_pair(occurrence, candidate, row_width_count=row_width_count)
+        if choice is None:
             continue
-        if best is None or distance < best[0]:
-            best = (distance, candidate)
-    return best[1] if best is not None else None
+        if best is None or choice.distance < best.distance:
+            best = choice
+    return best
+
+
+def best_width_for_pair(
+    occurrence: ElsOccurrence,
+    candidate: ElsOccurrence,
+    *,
+    row_width_count: int,
+) -> MeetingChoice | None:
+    widths = resonant_row_widths(occurrence.skip, candidate.skip, row_width_count=row_width_count)
+    if not widths:
+        return None
+    left_offsets = occurrence.offsets()
+    right_offsets = candidate.offsets()
+    distance, row_width = min(
+        (
+            els_pair_distance_at_row_width(left_offsets, right_offsets, row_width),
+            row_width,
+        )
+        for row_width in widths
+    )
+    return MeetingChoice(target=candidate, distance=distance, row_width=row_width)
+
+
+def move_els_toward_meeting(
+    occurrence: ElsOccurrence,
+    meeting: MeetingChoice,
+    *,
+    compactness_factor: float,
+    text_length: int,
+) -> ElsOccurrence:
+    projected = projected_start_on_cylinder(
+        occurrence.start,
+        meeting.target.start,
+        row_width=meeting.row_width,
+        compactness_factor=compactness_factor,
+    )
+    target_distance = meeting.distance * compactness_factor
+    candidates = candidate_starts_near_projection(
+        projected,
+        occurrence=occurrence,
+        text_length=text_length,
+        radius=max(meeting.row_width, abs(occurrence.skip), 12),
+    )
+    target_offsets = meeting.target.offsets()
+    best_score: tuple[float, float, int, int] | None = None
+    best_occurrence = occurrence
+    for start in candidates:
+        shifted = ElsOccurrence(start=start, skip=occurrence.skip, word_length=occurrence.word_length)
+        distance = els_pair_distance_at_row_width(shifted.offsets(), target_offsets, meeting.row_width)
+        score = (abs(distance - target_distance), distance, abs(start - projected), start)
+        if best_score is None or score < best_score:
+            best_score = score
+            best_occurrence = shifted
+    return best_occurrence
 
 
 def move_els_toward(
@@ -463,6 +539,58 @@ def move_els_toward(
         skip=occurrence.skip,
         word_length=occurrence.word_length,
     )
+
+
+def projected_start_on_cylinder(
+    start: int,
+    target_start: int,
+    *,
+    row_width: int,
+    compactness_factor: float,
+) -> int:
+    start_row, start_col = divmod(start, row_width)
+    target_row, target_col = divmod(target_start, row_width)
+    row = round(target_row + compactness_factor * (start_row - target_row))
+    col_delta = shortest_column_delta(start_col, target_col, row_width)
+    col = round(target_col + compactness_factor * col_delta) % row_width
+    return row * row_width + col
+
+
+def shortest_column_delta(start_col: int, target_col: int, row_width: int) -> int:
+    delta = start_col - target_col
+    half = row_width / 2
+    if delta > half:
+        delta -= row_width
+    elif delta < -half:
+        delta += row_width
+    return delta
+
+
+def candidate_starts_near_projection(
+    projected: int,
+    *,
+    occurrence: ElsOccurrence,
+    text_length: int,
+    radius: int,
+) -> tuple[int, ...]:
+    high = text_length - 1 - (occurrence.word_length - 1) * occurrence.skip
+    if high < 0:
+        raise ValueError("skip/word length cannot fit in text")
+    projected = max(0, min(high, projected))
+    starts = {
+        projected,
+        occurrence.start,
+        clamp_start(
+            projected,
+            skip=occurrence.skip,
+            word_length=occurrence.word_length,
+            text_length=text_length,
+        ),
+    }
+    low = max(0, projected - radius)
+    high_window = min(high, projected + radius)
+    starts.update(range(low, high_window + 1))
+    return tuple(sorted(starts))
 
 
 def clamp_start(
@@ -591,13 +719,16 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
         "",
         "This implements a level-1 ELS analogue of the research-program model:",
         "two random ELS sets are generated under a null model; under the",
-        "alternative, a declared fraction of the second set is translated toward",
-        "its best resonant-cylinder meeting in the first set.",
+        "alternative, a declared fraction of the second set is repositioned",
+        "toward its best resonant-cylinder meeting in the first set.",
         "",
         "The implementation uses the repo's WRR row-width helper as a transparent",
         "resonance proxy: candidate cylinder sizes are the intersection of the",
         "first row widths derived from each ELS skip. Pair distance is the best",
         "symmetric Hausdorff letter distance across those shared cylinder sizes.",
+        "For moved ELSs, the script identifies the best target ELS and row width,",
+        "projects the moving start position along the shortest cylinder path, and",
+        "then searches nearby valid starts for a distance closest to `a*d`.",
         "",
         "Statistics compared here are arithmetic, geometric, harmonic, and a simple",
         "trimmed order-statistic mean. The source statistic-selection page mentions",
@@ -640,6 +771,8 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             "- It does not test real Torah text.",
             "- It translates generated ELS start positions; it does not require",
             "  the moved ELS to spell a real word in a real corpus.",
+            "- The moved start search is local around the projected cylinder target,",
+            "  not an exhaustive global optimizer.",
             "- The resonant-cylinder definition is explicit and reproducible but",
             "  narrower than a complete source-method reconstruction.",
         ]
