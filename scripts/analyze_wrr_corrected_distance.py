@@ -215,7 +215,13 @@ def collect_perturbed_occurrences_by_term(
     dict[str, PerturbedTermStats],
 ]:
     active_triples = triples if triples is not None else perturbation_triples()
-    queries = sorted({term.normalized for term in terms.values() if term.normalized})
+    queries = sorted(
+        {
+            term.normalized
+            for term in terms.values()
+            if len(term.normalized) >= 4
+        }
+    )
     raw_by_query: dict[str, dict[tuple[int, int, int], set[tuple[tuple[int, ...], int]]]] = {
         query: {} for query in queries
     }

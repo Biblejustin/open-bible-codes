@@ -52,6 +52,22 @@ class WrrCorrectedDistanceScriptTests(unittest.TestCase):
             (WrrElsOccurrence((0, 3, 5, 7), 2, 0, 8),),
         )
 
+    def test_collect_perturbed_occurrences_skips_too_short_terms(self) -> None:
+        terms = {"term": PairTerm("term", "ABC")}
+
+        occurrences, stats = collect_perturbed_occurrences_by_term(
+            "ABCABC",
+            terms,
+            min_skip=2,
+            max_skip=2,
+            direction="forward",
+            triples=((0, 0, 0),),
+        )
+
+        self.assertEqual(occurrences["term"], {})
+        self.assertEqual(stats["term"].ordinary_hits, 0)
+        self.assertEqual(stats["term"].defined_perturbed_rows, 0)
+
     def test_build_corrected_distance_rows_outputs_defined_rank(self) -> None:
         triples = tuple((index, 0, 0) for index in range(10))
         app_occurrences = {triple: (wrr_occurrence(0),) for triple in triples}
