@@ -85,6 +85,12 @@ Status: secondary source path identified; corrected-distance driver not built.
   `https://www.torah-code.org/controversy/witztum_statement.pdf`
   `https://www.torah-code.org/experiments/ark_experiment.shtml`
   `https://www.torah-code.org/experiments/ark_code_1.pdf`
+- Torah-code research-program pages:
+  `https://www.torah-code.org/research/research_1.html`
+  `https://www.torah-code.org/research/research_2.html`
+  `https://www.torah-code.org/research/research_2a.html`
+  `https://www.torah-code.org/research/research_3.html`
+  `https://www.torah-code.org/research/research_3c.html`
 - WRR/Nations discussion page citing 163 famous-rabbi second-list distances:
   `https://www.math.utoronto.ca/drorbn/Codes/Nations/main_gir.html`
 - WRR/Nations discussion page in modified Michigan-Claremont notation:
@@ -183,6 +189,17 @@ These are source leads, not claim-ready evidence.
 - Chumash, Twin Towers, Tsunami, Katrina, Great Rabbis, and Son Rabbis pages
   were live but marked under construction in this crawl. Keep their hashes for
   source-status tracking, but do not treat them as data-bearing protocols.
+- Research-program pages: useful for method-design requirements rather than a
+  data set. The pages argue for explicit models, public a-priori history, and a
+  three-level alternative hypothesis: ELS set from one word pair, word pairs for
+  one event, and event lists. The geometric level-1 model moves a fraction of
+  one random point set toward nearest points in another set; the ELS level-1
+  model mirrors that by generating null ELSs and moving a fraction toward more
+  compact resonant-cylinder meetings. This is a lead for simulation harnesses
+  and power tests, not a claim-ready Torah-code result.
+- Linked research pages `research_3a.html`, `research_3b.html`,
+  `research_3d.html`, and `research_3e.html` returned 404 wrapper pages during
+  this crawl. Treat them as missing source material until live content appears.
 
 The browser app appears in search/cache results as an Apache-2.0 repository with
 a WRR replication interface. In the current audit check, however, cloning the
@@ -308,6 +325,11 @@ Latest protocol smoke output:
 - `reports/wrr_1994/torah_code_experiment_witztum_statement.pdf`
 - `reports/wrr_1994/torah_code_experiment_ark.html`
 - `reports/wrr_1994/torah_code_experiment_ark_code.pdf`
+- `reports/wrr_1994/torah_code_research_program_1.html`
+- `reports/wrr_1994/torah_code_research_program_2.html`
+- `reports/wrr_1994/torah_code_research_model_overview.html`
+- `reports/wrr_1994/torah_code_research_geometric_model_level_1.html`
+- `reports/wrr_1994/torah_code_research_els_model_level_1.html`
 - `reports/wrr_1994/WRR1.txt`
 - `reports/wrr_1994/WRR2.txt`
 - `reports/wrr_1994/SE2a.txt`
@@ -397,6 +419,11 @@ Latest source hashes:
 | `torah_code_experiment_witztum_statement.pdf` | 17,708 | `64697e721380308729afec4998c8a8fc45239ad10c07c58b5d185aa7065003f3` |
 | `torah_code_experiment_ark.html` | 9,067 | `c1d708b8f9364c287e39a69fdff03298d7df948e61a36fe103367a4f4e6d9fe7` |
 | `torah_code_experiment_ark_code.pdf` | 1,821,480 | `1619442c641dfb72bec848df6f97efb0bc3f39547a182e6371e16d7b1890381b` |
+| `torah_code_research_program_1.html` | 11,224 | `a8f5932a737d1ad542c8a0ffb7793f56f12bd6279073127c34dc4b0259e89b06` |
+| `torah_code_research_program_2.html` | 9,360 | `64065269d11e6a4e4abd6bfc690d96101656ccdb85a0d0413fe33e146b17f0fb` |
+| `torah_code_research_model_overview.html` | 10,737 | `dd3f10c3f773f179d88e7ae4f5bc0c0385d1f7b983dd52135073468e4a08eb7a` |
+| `torah_code_research_geometric_model_level_1.html` | 9,866 | `429a3383f545284f74dbb6e243d67849331f71b0a89014a1e06d23f97d430fe8` |
+| `torah_code_research_els_model_level_1.html` | 10,552 | `cb32e52f89a80921f35cb0ee6171eacddc44f6619c649cbe817a9fc10ba9673e` |
 | `WRR1.txt` | 2,016 | `7879343bb78ced3b20db0d232579762ed76bd7bd2b1ec198a2eef9871dde69fb` |
 | `WRR2.txt` | 2,038 | `927c133d6d3a57aa06d57518f8a89137292654056b51433a08a0480c7d245be5` |
 | `SE2a.txt` | 1,776 | `89ba88172d2d9c127b5f19549b04d8913de3431c4a5879854af2849b7f1d69b2` |

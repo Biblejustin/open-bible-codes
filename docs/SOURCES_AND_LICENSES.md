@@ -288,6 +288,9 @@ Current external sources:
   pages. These are source-audit and protocol-design leads only; do not treat
   them as claim-ready evidence without a separately locked protocol and source
   parser.
+- Torah-code.org research-program pages, used as methodology and simulation
+  design context for model-driven ELS tests. These pages are not raw Bible text
+  and not statistical evidence by themselves.
 
 ### Copyrighted Source-Audit Books
 

@@ -124,6 +124,16 @@ class DownloadWrrSourcesTests(unittest.TestCase):
         for label, expected in experiment_names.items():
             with self.subTest(label=label):
                 self.assertEqual(source_filename(label, "https://example.test/source.bin"), expected)
+        research_names = {
+            "torah_code_research_program_1": "torah_code_research_program_1.html",
+            "torah_code_research_program_2": "torah_code_research_program_2.html",
+            "torah_code_research_model_overview": "torah_code_research_model_overview.html",
+            "torah_code_research_geometric_model_level_1": "torah_code_research_geometric_model_level_1.html",
+            "torah_code_research_els_model_level_1": "torah_code_research_els_model_level_1.html",
+        }
+        for label, expected in research_names.items():
+            with self.subTest(label=label):
+                self.assertEqual(source_filename(label, "https://example.test/source.bin"), expected)
         self.assertEqual(source_filename("wrr1", "https://example.test/source.txt"), "WRR1.txt")
         self.assertEqual(source_filename("wrr2", "https://example.test/source.txt"), "WRR2.txt")
         self.assertEqual(source_filename("se2a", "https://example.test/source.txt"), "SE2a.txt")
@@ -170,6 +180,9 @@ class DownloadWrrSourcesTests(unittest.TestCase):
         self.assertIn("torah_code_experiment_cities_margolioth_data", REQUIRED_MANIFEST_LABELS)
         self.assertIn("torah_code_experiment_sons_of_haman_data", REQUIRED_MANIFEST_LABELS)
         self.assertIn("torah_code_experiment_ark_code", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_research_program_1", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_research_model_overview", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_research_els_model_level_1", REQUIRED_MANIFEST_LABELS)
         self.assertIn("wrr_nations_mc", REQUIRED_MANIFEST_LABELS)
         self.assertIn("wrr_nations_gir", REQUIRED_MANIFEST_LABELS)
 
