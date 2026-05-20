@@ -100,6 +100,17 @@ Tracked references:
 - `reports/wrr_1994/wrr2_pair_eligibility_table.csv`
 - `tests/test_wrr_stats.py`
 
+Recent source-audit follow-up added a Torah-code.org geometric level-1
+simulation harness:
+
+- `scripts/simulate_torah_code_research_model.py`
+- `protocols/torah_code_research_geometric_model.toml`
+- `docs/TORAH_CODE_RESEARCH_MODEL_SIMULATION.md`
+
+Next research-program upgrade: implement an ELS/cylinder analogue of this
+simulation, then compare which compactness statistic has acceptable power before
+using it on real Torah-code source data.
+
 ### 2. Source-Basis Audit Queue
 
 The English manifests already track broad source-basis metadata:

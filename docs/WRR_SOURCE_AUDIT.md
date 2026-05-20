@@ -226,6 +226,10 @@ into the repo term CSV schema without committing the source data itself.
 `scripts/analyze_wrr_source_shapes.py` summarizes the raw ANU famous-rabbis
 source files so the 163-distance mismatch is visible before any metric work.
 
+`scripts/simulate_torah_code_research_model.py` turns the Torah-code.org
+research-program geometric level-1 model into a reproducible simulation harness.
+It is intentionally a model-design/power sanity check, not a Torah-code result.
+
 Example:
 
 ```bash
@@ -236,6 +240,10 @@ python3 -m scripts.download_wrr_sources \
 python3 scripts/import_wrr_terms.py \
   --source reports/wrr_1994/WRR2.txt \
   --out reports/wrr_1994/wrr2_terms.csv
+
+python3 -m scripts.run_protocol \
+  protocols/torah_code_research_geometric_model.toml \
+  --resume
 ```
 
 Protocol:

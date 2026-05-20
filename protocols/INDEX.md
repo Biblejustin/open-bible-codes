@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 107
+Protocols indexed: 108
 
 ## Analysis
 
@@ -30,6 +30,7 @@ Protocols indexed: 107
 | review_flag_summary | Summarize meaningful-skip and rarity review flags from the match-strata index. | 1 |  | reports/review_flag_summary | `review_flag_summary.toml` |
 | step_tahot_version_presence | Run focused modern/local exact-hit version presence with STEP_TAHOT included as a separ... | 2 | terms/modern_names_dates.csv | reports/step_tahot_version_presence | `step_tahot_version_presence.toml` |
 | thematic_chapter_absence | Run term-absence checks over locked thematic chapter mappings only. | 1 |  | reports/thematic_chapter_absence | `thematic_chapter_absence.toml` |
+| torah_code_research_geometric_model | Simulate Torah-code.org research-program geometric level-1 compactness model. | 1 |  | reports/torah_code_research_model | `torah_code_research_geometric_model.toml` |
 | version_presence_extensions | Same-skip extension screen for bounded all-source version-presence hit queues. | 10 |  | reports/version_presence_extensions | `version_presence_extensions.toml` |
 | wide_focus_exact_presence | Capped exact-hit version-presence review for the focused wide-search terms. | 2 | terms/modern_names_dates.csv, terms/prophetic_terms.csv | reports/wide_focus_exact_presence | `wide_focus_exact_presence.toml` |
 
@@ -136,7 +137,7 @@ Protocols indexed: 107
 
 | Name | Description | Steps | Terms | Output Roots | Path |
 | --- | --- | ---: | --- | --- | --- |
-| wrr_audit_counts | WRR2 imported-term count and same-record pair smoke on Koren Genesis; not the WRR stati... | 16 |  | reports/wrr_1994 | `wrr_audit_counts.toml` |
+| wrr_audit_counts | WRR2 imported-term count and same-record pair smoke on Koren Genesis; not the WRR stati... | 17 |  | reports/wrr_1994 | `wrr_audit_counts.toml` |
 | wrr_source_import | Download external WRR audit files and convert WRR2 into repo term rows. | 3 |  | reports/wrr_1994 | `wrr_source_import.toml` |
 
 ## Screening

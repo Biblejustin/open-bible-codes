@@ -1,0 +1,30 @@
+name = "torah_code_research_geometric_model"
+description = "Simulate Torah-code.org research-program geometric level-1 compactness model."
+manifest_out = "reports/torah_code_research_model/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "simulate_geometric_level1"
+description = "Run model-design simulation for independent point sets vs moved-nearest-neighbor alternatives."
+argv = [
+  "-m",
+  "scripts.simulate_torah_code_research_model",
+  "--replicates",
+  "200",
+  "--out",
+  "reports/torah_code_research_model/geometric_level1.csv",
+  "--markdown-out",
+  "docs/TORAH_CODE_RESEARCH_MODEL_SIMULATION.md",
+  "--manifest-out",
+  "reports/torah_code_research_model/manifest.json",
+]
+inputs = [
+  "scripts/simulate_torah_code_research_model.py",
+  "docs/WRR_SOURCE_AUDIT.md",
+]
+outputs = [
+  "reports/torah_code_research_model/geometric_level1.csv",
+  "docs/TORAH_CODE_RESEARCH_MODEL_SIMULATION.md",
+  "reports/torah_code_research_model/manifest.json",
+]
