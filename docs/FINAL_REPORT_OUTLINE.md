@@ -148,10 +148,13 @@ State these visibly:
 Use cautious language:
 
 - current WRR work is source/import/count smoke work;
-- corrected distance and full permutation statistic are not implemented as a
-  claim-grade reproduction;
+- corrected-distance smoke exists, but current 5..8 term-printed,
+  term-program, and fixed-250 variants all produce 0 defined corrected
+  distances;
+- full corrected-distance run and permutation statistic are not implemented as
+  a claim-grade reproduction;
 - WRR remains under-specified in this project until the locked pair table,
-  corrected-distance metric, and permutation procedure are complete.
+  final `D(w)` decision, and permutation procedure are complete.
 
 ### 9. Claim-Language Boundary
 

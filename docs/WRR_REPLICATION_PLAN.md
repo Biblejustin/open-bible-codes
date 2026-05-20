@@ -68,6 +68,18 @@ Already implemented:
   `scripts/analyze_wrr_perturbation_pair_readiness.py`, wired into
   `protocols/wrr_audit_counts.toml`, summarizing whether lock-prep pairs pass
   the checked exact-perturbation threshold before pair-level perturbed `Q`.
+- WRR corrected-distance smoke driver in
+  `scripts/analyze_wrr_corrected_distance.py`, wired into
+  `protocols/wrr_audit_counts.toml`, generating exact perturbed rows from
+  ordinary hits, labeling domains per perturbation triple, and applying the
+  source-count `v/m` corrected-distance bridge. Current length-5..8 smoke output
+  defines 0 corrected distances.
+- WRR corrected-distance skip-cap variant comparison in
+  `scripts/compare_wrr_corrected_distance_variants.py`, wired into
+  `protocols/wrr_audit_counts.toml`, comparing term-printed, term-program, and
+  fixed-250 settings. Current output defines 0 corrected distances for all
+  three variants; fixed-250 only raises the maximum valid perturbation count
+  from 3 to 4.
 
 Source audit:
 
@@ -89,10 +101,9 @@ Still needed:
   source-defined corrected-distance output count rather than a raw pair table;
 - replication-grade generated or reviewed future file `terms/[wrr_1994_rabbis].csv`;
 - replication-grade generated or reviewed future file `terms/[wrr_1994_dates].csv`;
-- `D(w)` formula choice between the printed WRR formula and the WRR program
-  formula documented by MBBK;
-- real-pair perturbed `Q` and full corrected-distance implementation for
-  `c(w,w')`, enforcing source-backed undefined conditions;
+- final `D(w)` formula decision between the printed WRR formula and the WRR
+  program formula documented by MBBK;
+- optimized full corrected-distance run over the final locked pair universe;
 - WRR aggregate runner for `P1`, `P2`, `P3`, and `P4` over all declared pairs
   once `c(w,w')` exists;
 - permutation driver that shuffles date/rabbi pairings under the declared rule;

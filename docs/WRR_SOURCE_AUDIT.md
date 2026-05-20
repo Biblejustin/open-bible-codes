@@ -1,6 +1,7 @@
 # WRR Source Audit
 
-Status: secondary source path identified; corrected-distance driver not built.
+Status: secondary source path identified; corrected-distance smoke driver built,
+but no claim-grade WRR reproduction yet.
 
 ## Sources Found
 
@@ -139,9 +140,11 @@ that were previously open in this repo: `c(w,w')` uses a greater-than-or-equal
 is defined and at least 10 perturbation proximities are defined. MBBK also notes
 that the printed WRR expected-ELS window formula differs from the formula used
 by the WRR programs. The current code supports both formula choices; the
-skip-cap audit keeps printed selected while reporting program caps side by side.
-A full reproduction driver must choose paper formula versus program formula
-before final `D(w)` calculations.
+skip-cap audit keeps printed selected while reporting program caps side by side,
+and the corrected-distance smoke comparison now runs term-printed,
+term-program, and fixed-250 variants. Current smoke output still defines 0
+corrected distances, so a full reproduction driver must choose paper formula
+versus program formula before final `D(w)` calculations.
 
 The ANU/McKay data page provides plain-text WRR lists in a modified
 Michigan-Claremont transliteration. That is useful for a reproducible import
@@ -235,6 +238,16 @@ It is intentionally a model-design/power sanity check, not a Torah-code result.
 analogue. It uses shared WRR row-width helpers as a transparent resonant
 cylinder proxy and compares arithmetic, geometric, harmonic, and trimmed
 order-statistic means over generated ELS-meeting distances.
+
+`scripts/analyze_wrr_corrected_distance.py` runs a real-corpus corrected-distance
+smoke over the current length-5..8 candidate lane. It generates exact perturbed
+ELS rows from ordinary hits, labels domains by perturbation triple, and applies
+the source-count `v/m` rank helper. Current output is diagnostic only, with 0
+defined corrected distances.
+
+`scripts/compare_wrr_corrected_distance_variants.py` compares corrected-distance
+smoke summaries across the term-printed, term-program, and fixed-250 skip-cap
+variants so the `D(w)` choice remains visible in reports.
 
 Example:
 
