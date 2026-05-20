@@ -82,7 +82,7 @@ refutation of the WRR paper.
 | Pair universe | Declared second-list candidate set yields 163 source-defined distances after the corrected-distance eligibility rule | Lock-prep table exists at `reports/wrr_1994/wrr2_pair_eligibility_table.csv`; imported `WRR2.txt` yields 182 raw same-record pairs, 165 after appellation length >= 5, and 86 under the current 5..8 both-side screen. The `163` count is now treated as a defined-distance output count, not a raw pair table. |
 | Exclusions | Every excluded appellation/date row has a citable rule | Not locked; one Zacut-appellation exclusion would close 165 to 163, but that is only a diagnostic hypothesis. |
 | Skip caps | Term-specific WRR `D(w)` windows applied for each accepted term | Not locked; helpers now support both the printed WRR formula and the reported WRR-program formula. The skip-cap audit keeps printed selected while reporting program caps side by side. Current pair/control screens still use broad fixed caps for smoke tests. |
-| Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Helpers now include conservative supplied-row domain labeling, real-corpus WRR2 domain diagnostics with undefined-reason labels, defined-domain-only ordinary `Q(w,w')` diagnostics, exact perturbed-ELS match checks, domain-weighted `Q(w,w')` summation for domain-labeled ELS rows, a tested pair-level corrected-distance arithmetic bridge for already-domain-labeled perturbation sets, and the source-count WRR `v/m` rank step. Undefined `c(w,w')` conditions are source-backed; the real-corpus perturbed-row/domain generator and per-pair output driver are still missing. |
+| Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Helpers now include conservative supplied-row domain labeling, real-corpus WRR2 domain diagnostics with undefined-reason labels, defined-domain-only ordinary `Q(w,w')` diagnostics, exact perturbed-ELS match checks, domain-weighted `Q(w,w')` summation for domain-labeled ELS rows, a tested pair-level corrected-distance arithmetic bridge for already-domain-labeled perturbation sets, a smoke real-corpus perturbed-row/domain driver, and the source-count WRR `v/m` rank step. Undefined `c(w,w')` conditions are source-backed; optimized full-run corrected distances over the final pair universe are still missing. |
 | Aggregate statistic | `P1`, `P2`, `P3`, `P4`, rank handling, and `rho0` run over the locked pair set | Helpers exist, but no reproduction driver can run until the pair set and corrected distances are fixed. |
 | Permutation test | Date/rabbi pairings shuffled under the declared WRR rule with recorded seeds/counts | Not built. |
 | Report label | Result can be marked reproduction, failed reproduction, or under-specified | Current label must remain `under_specified`. |
@@ -152,12 +152,12 @@ domain labeling for supplied same-word ELS rows, a real-corpus WRR2 Genesis
 domain-labeling diagnostic with undefined-reason labels, exact perturbed-ELS
 match checks, domain-weighted `Q(w,w')` summation for already-domain-labeled
 ELS rows, a tested pair-level arithmetic bridge from domain-labeled
-perturbation sets to `c(w,w')`, plus the source-count WRR rank step for
-already-computed ordinary and perturbed proximity values. MBBK Appendix A and
-the Gans communities paper support the undefined `c(w,w')` rule: the ordinary
-`(0,0,0)` value must be defined and at least 10 perturbation proximities must be
-defined; the `v/m` count uses perturbation proximity values greater than or
-equal to ordinary.
+perturbation sets to `c(w,w')`, a smoke real-corpus corrected-distance driver,
+plus the source-count WRR rank step for already-computed ordinary and perturbed
+proximity values. MBBK Appendix A and the Gans communities paper support the
+undefined `c(w,w')` rule: the ordinary `(0,0,0)` value must be defined and at
+least 10 perturbation proximities must be defined; the `v/m` count uses
+perturbation proximity values greater than or equal to ordinary.
 Current domain diagnostics label 17,426 imported-term hits: 6,079 defined
 domains, 11,347 blocked by an inner shorter-skip ELS, and 0 ambiguous from
 enclosing shorter-skip rows under the smoke cap. The ordinary-Q diagnostic over
@@ -165,10 +165,7 @@ enclosing shorter-skip rows under the smoke cap. The ordinary-Q diagnostic over
 pair, 17 pairs with all observed domains defined, 36 incomplete defined-only
 pairs, and 129 pairs with no defined-domain pair. In the length-5..8 smoke lane
 specifically, 30 of 86 pairs have defined-domain ordinary `Q`, 16 are complete,
-14 are incomplete, and 56 have no defined-domain pair. The repo still does not
-implement the paper's corrected distance value for every term pair because the
-real-corpus perturbed-row/domain generator and per-pair output driver are
-missing.
+14 are incomplete, and 56 have no defined-domain pair.
 
 The perturbation diagnostic now distinguishes boundary validity from exact
 perturbed matches. In the current output, all 959 smoke-cap hits across 64 rows
@@ -182,6 +179,14 @@ length-5..8 smoke-lane pairs, 56 lack checked hits for at least one side, 30
 have fewer than 10 exact perturbed matches, and 0 are ready for
 pair-level perturbed `Q`. The other 96 imported same-record pairs are outside
 the current length-5..8 perturbation diagnostic scope.
+
+The corrected-distance smoke driver now generates exact perturbed rows from
+ordinary ELS hits, labels domains per perturbation triple, and applies the
+pair-level bridge to the same 86 length-5..8 smoke-lane pairs. Current output
+has 0 defined corrected distances: 56 pairs lack a valid ordinary perturbation,
+30 are below the 10-valid-perturbation floor, and the maximum valid
+perturbation count is 3. That is still not a WRR reproduction because the final
+pair universe and `D(w)` formula remain unlocked.
 Implementation notes are now tracked in
 `docs/WRR_CORRECTED_DISTANCE_NOTES.md`.
 
@@ -189,9 +194,10 @@ Needed next:
 
 - lock whether `D(w)` uses the printed WRR count formula or the WRR program
   formula documented by MBBK;
-- generate and domain-label real perturbed ELS rows per term/triple;
-- feed real perturbed `Q(x,y,z)(w,w')` rows through the tested pair-level bridge;
-- output per-pair `c(w,w')` rows before aggregate statistics are attempted.
+- lock the final pair universe;
+- extend the smoke corrected-distance driver into the full locked run;
+- output defined per-pair `c(w,w')` rows before aggregate statistics are
+  attempted.
 
 ### 4. Term-Specific Skip Caps
 

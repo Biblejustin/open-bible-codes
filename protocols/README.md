@@ -104,10 +104,11 @@ same-record appellation/date pair audit, and control-screens the top raw pair
 rows. It also repeats the pair audit/control screen with the WRR
 appendix-compatible `5..8` length filter, audits expected-count skip caps, and
 samples WRR-style perturbation boundary and exact-match validity, then joins
-that diagnostic back to the lock-prep pair table. It also fingerprints the
-Koren Genesis source stream and emits a pair-table reconciliation for the
-current imported-pair count versus the source-cited 163-distance WRR
-second-list sample. It is not the WRR proximity statistic.
+that diagnostic back to the lock-prep pair table. It now also emits a
+corrected-distance smoke table from generated perturbed rows for the 5..8
+candidate lane. It fingerprints the Koren Genesis source stream and emits a
+pair-table reconciliation for the current imported-pair count versus the
+source-cited 163-distance WRR second-list sample. It is not a WRR reproduction.
 
 Hebrew MT-family version comparison:
 

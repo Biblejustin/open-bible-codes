@@ -140,14 +140,19 @@ Already implemented:
   to the lock-prep pair table. Current output has 86 length-5..8 smoke-lane
   pairs: 56 lack checked hits for at least one side, 30 have fewer than 10
   exact perturbed matches, and 0 are ready for pair-level perturbed `Q`.
+- real-corpus corrected-distance smoke driver in
+  `scripts/analyze_wrr_corrected_distance.py`. It generates exact perturbed
+  rows from ordinary ELS hits, labels domains per perturbation triple, and
+  feeds domain-defined rows through the pair-level corrected-distance bridge.
+  Current smoke output for the 86 length-5..8 candidate-lane pairs has 0
+  defined corrected distances: 56 pairs lack a valid ordinary perturbation and
+  30 have fewer than 10 valid perturbations; the maximum valid perturbation
+  count is 3.
 
 Not yet implemented:
 
-- a real-pair corrected-distance driver that generates exact perturbed ELS rows,
-  labels their domains, and feeds them into the tested pair-level arithmetic
-  bridge before aggregate statistics are attempted;
-- optimized real-corpus generation of all perturbed `Q(x,y,z)(w,w')` inputs for
-  imported word pairs.
+- an optimized full-run real-corpus corrected-distance driver over the final
+  locked pair universe and source-selected `D(w)` formula;
 - permutation driver over the locked personality/date pair table.
 
 ## Ambiguities To Pin Before Code
@@ -190,10 +195,9 @@ Not yet implemented:
 
 1. Decide whether `D(w)` uses the printed WRR count formula or the program
    formula documented by MBBK; current audit rows expose both.
-2. Implement the real-pair perturbed `Q` driver and enforce the source-backed
-   undefined `c(w,w')` conditions.
-3. Feed ordinary and perturbed `Q` values through the WRR source-count rank
-   helper to produce defined `c(w,w')` rows.
+2. Extend the smoke corrected-distance driver into an optimized full run over
+   the final locked pair universe.
+3. Feed defined `c(w,w')` rows into aggregate `P1`/`P2` and permutation tests.
 
 ## Current Read
 
