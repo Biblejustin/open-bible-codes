@@ -53,7 +53,11 @@ SOURCE_ANCHORS = [
     {
         "topic": "Corrected-distance definedness",
         "source": "MBBK 1999 Appendix A and Gans communities method section",
-        "read": "Treats c(w,w') as defined only when the ordinary perturbation is defined and at least 10 perturbation values are defined.",
+        "read": (
+            "Treats c(w,w') as defined only when the ordinary perturbation is defined and at least 10 "
+            "perturbation values are defined; MBBK uses greater-than-or-equal ranking while extracted "
+            "WRR 1994 text has strict greater-than wording in one passage."
+        ),
     },
 ]
 

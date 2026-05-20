@@ -42,9 +42,11 @@ The paper's Appendix A.1 and A.2 define these pieces:
 - Perturbed ELS offsets keep the early letters on the ordinary progression and
   perturb the last three gaps:
   `n, n+d, ..., n+(k-4)d, n+(k-3)d+x, n+(k-2)d+x+y, n+(k-1)d+x+y+z`.
-- The source descriptions define `v(w,w')` as the number of valid triples whose
-  perturbed proximity is greater than or equal to the ordinary proximity, and
-  `c(w,w') = v(w,w') / m(w,w')`, where `m(w,w')` is the number of valid triples.
+- MBBK Appendix A defines `c(w,w')` as the fraction of valid perturbation values
+  greater than or equal to the ordinary proximity; the extracted WRR 1994 text
+  uses strict greater-than wording in one passage. The current source-count
+  helper follows the later MBBK `>=` description and keeps tie-sensitive
+  behavior isolated in separate helper tests.
 - The corrected distance is undefined if the ordinary `(0,0,0)` case is not in
   the valid perturbation set or if `m(w,w') < 10`.
 - MBBK Appendix A notes a formula mismatch for the ELS-window count: the printed

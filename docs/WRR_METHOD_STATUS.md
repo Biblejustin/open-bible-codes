@@ -30,4 +30,4 @@ python3 -m scripts.build_wrr_method_status --text-source reports/wrr_1994/koren_
 | WRR second-list filtered sample | WRR 1994 Appendix A.3 | Restricts words to length 5..8 for the corrected-distance calculation and reports 298 word pairs before later defined-distance filtering. |
 | WRR permutation count | WRR 1994 main text and Appendix A.6 | Uses 999,999 random permutations of the 32 personalities for significance calculations. |
 | Program formula mismatch | MBBK 1999 Appendix A | Reports that WRR programs used (D - 1)(2L - (k - 1)D), not the printed WRR 1994 formula. |
-| Corrected-distance definedness | MBBK 1999 Appendix A and Gans communities method section | Treats c(w,w') as defined only when the ordinary perturbation is defined and at least 10 perturbation values are defined. |
+| Corrected-distance definedness | MBBK 1999 Appendix A and Gans communities method section | Treats c(w,w') as defined only when the ordinary perturbation is defined and at least 10 perturbation values are defined; MBBK uses greater-than-or-equal ranking while extracted WRR 1994 text has strict greater-than wording in one passage. |
