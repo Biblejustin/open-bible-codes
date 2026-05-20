@@ -36,6 +36,55 @@ Status: secondary source path identified; corrected-distance driver not built.
   `https://www.torah-code.org/papers/mode_1.pdf`
   `https://www.torah-code.org/papers/witztum.pdf`
   `https://www.torah-code.org/papers/personaldata.pdf`
+- Torah-code experiments index and source-policy/personal-statement page:
+  `https://www.torah-code.org/experiments.html`
+  `https://www.torah-code.org/experiments/personal_statement.shtml`
+- American-presidents experiment, transliteration rules, and input data:
+  `https://www.torah-code.org/experiments/american_presidents.shtml`
+  `https://www.torah-code.org/experiments/american_presidents.pdf`
+  `https://www.torah-code.org/experiments/americanpresidents_nasi_data.pdf`
+  `https://www.torah-code.org/experiments/english_hebrew_transliteration_rule.pdf`
+- Israeli-prime-ministers experiment and linked keyword pages:
+  `https://www.torah-code.org/experiments/israeli_prime_ministers.shtml`
+  `https://www.torah-code.org/experiments/Israeli_prime_ministers.pdf`
+  `https://www.torah-code.org/experiments/israeli_prime_ministers_1.html`
+  `https://www.torah-code.org/experiments/israeli_prime_ministers_2.html`
+  `https://www.torah-code.org/experiments/israeli_prime_ministers_3.html`
+  `https://www.torah-code.org/experiments/israeli_prime_ministers_4.html`
+  `https://www.torah-code.org/experiments/israeli_prime_ministers_5.html`
+  `https://www.torah-code.org/experiments/israeli_prime_ministers_6.html`
+  `https://www.torah-code.org/experiments/israeli_prime_ministers_7.html`
+  `https://www.torah-code.org/experiments/israeli_prime_ministers_8.html`
+- Cities/Aumann/Simon-McKay experiment source pages and data:
+  `https://www.torah-code.org/experiments/cities_experiment.shtml`
+  `https://www.torah-code.org/papers/gans_original_report.pdf`
+  `https://www.torah-code.org/experiments/gans_cities.html`
+  `https://www.torah-code.org/experiments/aumann_experiment.html`
+  `https://www.torah-code.org/experiments/dp364_short.pdf`
+  `https://www.torah-code.org/experiments/dp364_appendix_3.pdf`
+  `https://www.torah-code.org/experiments/dp364_appendix_4.pdf`
+  `https://www.torah-code.org/experiments/dp364_appendix_5.pdf`
+  `https://www.torah-code.org/experiments/simon_mckay_experiment.html`
+  `https://www.torah-code.org/experiments/Margcities.pdf`
+  `https://www.torah-code.org/experiments/Margoliot_Cities_Data.pdf`
+  `https://www.torah-code.org/experiments/cities_comparison.pdf`
+  `https://www.torah-code.org/experiments/haralick_cities_experiment.html`
+- Other Torah-code experiment pages and data files:
+  `https://www.torah-code.org/experiments/chumash_experiment.shtml`
+  `https://www.torah-code.org/experiments/sons_of_haman_experiment.shtml`
+  `https://www.torah-code.org/experiments/sons_of_haman_experiment_1.html`
+  `https://www.torah-code.org/experiments/twin_towers_experiment.shtml`
+  `https://www.torah-code.org/experiments/tsunami_experiment.shtml`
+  `https://www.torah-code.org/experiments/katrina_experiment.shtml`
+  `https://www.torah-code.org/experiments/great_rabbis_experiment.shtml`
+  `https://www.torah-code.org/experiments/son_rabbis_experiment.shtml`
+  `https://www.torah-code.org/experiments/pumbedita_experiment.shtml`
+  `https://www.torah-code.org/experiments/pumbedita.pdf`
+  `https://www.torah-code.org/experiments/auschwitz_experiment.shtml`
+  `https://www.torah-code.org/experiments/auschwitz.pdf`
+  `https://www.torah-code.org/controversy/witztum_statement.pdf`
+  `https://www.torah-code.org/experiments/ark_experiment.shtml`
+  `https://www.torah-code.org/experiments/ark_code_1.pdf`
 - WRR/Nations discussion page citing 163 famous-rabbi second-list distances:
   `https://www.math.utoronto.ca/drorbn/Codes/Nations/main_gir.html`
 - WRR/Nations discussion page in modified Michigan-Claremont notation:
@@ -112,6 +161,28 @@ These are source leads, not claim-ready evidence.
 - Witztum Genesis birth-date data: the paper/data file provide another declared
   personality/date-style data set to import after the WRR path has a fixed
   parser and claim-safe report structure.
+- Torah-code experiments index: the site explicitly presents a mixed list of
+  successful and failed experiments. Treat this as a guard against cherry-picked
+  source intake; source pages should be tagged by declared outcome, whether
+  successful, non-significant, under-construction, or critique/replication.
+- American presidents: useful as a non-rabbinic proper-name transliteration
+  test because the page supplies rule-based English-to-Hebrew spelling rules
+  and input data. It should be a separate protocol from WRR because the
+  alternative hypothesis and transliteration generation are different.
+- Israeli prime ministers: useful as a small modern-person/entity protocol with
+  linked keyword pages. The current crawl found keyword pages 1..8; later
+  missing or unpublished pages should be treated as missing source material, not
+  inferred rows.
+- Cities/Aumann/Simon-McKay: useful for a source-chain and replication-failure
+  lane because the pages separate Gans/Inbal rule-based city spellings, Aumann
+  committee expert data, and Simon/McKay/Margolioth variants.
+- Sons of Haman, Pumbedita, Auschwitz, and Ark: useful as post-WRR event/object
+  claim leads. These should require stricter preregistration flags before any
+  statistical interpretation because several are visibly post-hoc or
+  replication-style experiments.
+- Chumash, Twin Towers, Tsunami, Katrina, Great Rabbis, and Son Rabbis pages
+  were live but marked under construction in this crawl. Keep their hashes for
+  source-status tracking, but do not treat them as data-bearing protocols.
 
 The browser app appears in search/cache results as an Apache-2.0 repository with
 a WRR replication interface. In the current audit check, however, cloning the
@@ -193,6 +264,50 @@ Latest protocol smoke output:
 - `reports/wrr_1994/schwartzman_dialog_mode.pdf`
 - `reports/wrr_1994/witztum_birth_dates.pdf`
 - `reports/wrr_1994/witztum_birth_dates_data.pdf`
+- `reports/wrr_1994/torah_code_experiments.html`
+- `reports/wrr_1994/torah_code_experiment_personal_statement.html`
+- `reports/wrr_1994/torah_code_experiment_american_presidents.html`
+- `reports/wrr_1994/torah_code_experiment_american_presidents.pdf`
+- `reports/wrr_1994/torah_code_experiment_american_presidents_data.pdf`
+- `reports/wrr_1994/torah_code_experiment_english_hebrew_transliteration_rules.pdf`
+- `reports/wrr_1994/torah_code_experiment_israeli_prime_ministers.html`
+- `reports/wrr_1994/torah_code_experiment_israeli_prime_ministers.pdf`
+- `reports/wrr_1994/torah_code_experiment_israeli_prime_ministers_1.html`
+- `reports/wrr_1994/torah_code_experiment_israeli_prime_ministers_2.html`
+- `reports/wrr_1994/torah_code_experiment_israeli_prime_ministers_3.html`
+- `reports/wrr_1994/torah_code_experiment_israeli_prime_ministers_4.html`
+- `reports/wrr_1994/torah_code_experiment_israeli_prime_ministers_5.html`
+- `reports/wrr_1994/torah_code_experiment_israeli_prime_ministers_6.html`
+- `reports/wrr_1994/torah_code_experiment_israeli_prime_ministers_7.html`
+- `reports/wrr_1994/torah_code_experiment_israeli_prime_ministers_8.html`
+- `reports/wrr_1994/torah_code_experiment_cities.html`
+- `reports/wrr_1994/torah_code_experiment_cities_gans_original_report.pdf`
+- `reports/wrr_1994/torah_code_experiment_cities_gans.html`
+- `reports/wrr_1994/torah_code_experiment_cities_aumann.html`
+- `reports/wrr_1994/torah_code_experiment_cities_aumann_report.pdf`
+- `reports/wrr_1994/torah_code_experiment_cities_aumann_expert_instructions.pdf`
+- `reports/wrr_1994/torah_code_experiment_cities_aumann_city_names.pdf`
+- `reports/wrr_1994/torah_code_experiment_cities_aumann_minority_reports.pdf`
+- `reports/wrr_1994/torah_code_experiment_cities_simon_mckay.html`
+- `reports/wrr_1994/torah_code_experiment_cities_margolioth_report.pdf`
+- `reports/wrr_1994/torah_code_experiment_cities_margolioth_data.pdf`
+- `reports/wrr_1994/torah_code_experiment_cities_comparison.pdf`
+- `reports/wrr_1994/torah_code_experiment_cities_haralick.html`
+- `reports/wrr_1994/torah_code_experiment_chumash.html`
+- `reports/wrr_1994/torah_code_experiment_sons_of_haman.html`
+- `reports/wrr_1994/torah_code_experiment_sons_of_haman_data.html`
+- `reports/wrr_1994/torah_code_experiment_twin_towers.html`
+- `reports/wrr_1994/torah_code_experiment_tsunami.html`
+- `reports/wrr_1994/torah_code_experiment_katrina.html`
+- `reports/wrr_1994/torah_code_experiment_great_rabbis.html`
+- `reports/wrr_1994/torah_code_experiment_son_rabbis.html`
+- `reports/wrr_1994/torah_code_experiment_pumbedita.html`
+- `reports/wrr_1994/torah_code_experiment_pumbedita_data.pdf`
+- `reports/wrr_1994/torah_code_experiment_auschwitz.html`
+- `reports/wrr_1994/torah_code_experiment_auschwitz_data.pdf`
+- `reports/wrr_1994/torah_code_experiment_witztum_statement.pdf`
+- `reports/wrr_1994/torah_code_experiment_ark.html`
+- `reports/wrr_1994/torah_code_experiment_ark_code.pdf`
 - `reports/wrr_1994/WRR1.txt`
 - `reports/wrr_1994/WRR2.txt`
 - `reports/wrr_1994/SE2a.txt`
@@ -238,6 +353,50 @@ Latest source hashes:
 | `schwartzman_dialog_mode.pdf` | 95,499 | `6bfdec5696c9470df2460fb5db4d0ff15c2f184f325e340eace4987000ad4e5c` |
 | `witztum_birth_dates.pdf` | 120,533 | `e1c4ee142c5138af53cdcbeded23a6ae724000b82c5f015b07f1e212c05ec56e` |
 | `witztum_birth_dates_data.pdf` | 186,829 | `20296eaa82a60065e5f01032833da76eaf004c0f11801617e6646bb33f83dcfe` |
+| `torah_code_experiments.html` | 9,796 | `0efcfa3b1a445060821c36520f3422c290bb1aeb32c28b6d18b645b77dcd58e3` |
+| `torah_code_experiment_personal_statement.html` | 10,431 | `075a5caa7d7f9e9da34ba2ec1e4949acc2227d13b9a2aa4450e67cd1224562c1` |
+| `torah_code_experiment_american_presidents.html` | 9,940 | `d13fd0dd548e6e11d00c5e65947740bcf489a455653b587fba7b95b45322ac49` |
+| `torah_code_experiment_american_presidents.pdf` | 253,433 | `3733725c0bae51c620dd87825cb646ae09cf12d5e4424dd5a464fe4654f4b8cd` |
+| `torah_code_experiment_american_presidents_data.pdf` | 16,400 | `90d2d1938cb481155c6b90a0b8504d9cab3cada4a771e65a7fb769789f778a40` |
+| `torah_code_experiment_english_hebrew_transliteration_rules.pdf` | 19,062 | `e77d931f3364961ef29dff5a55ab3b8d190311d8c14ce9f0b37cca6bf9e4d020` |
+| `torah_code_experiment_israeli_prime_ministers.html` | 10,443 | `4e31e4ab43ac3bc02568f065ba7a8bf3a746c9d62738a779bb26ab026dba4a19` |
+| `torah_code_experiment_israeli_prime_ministers.pdf` | 9,105 | `6186edac84d0e31563865086af02a63690717d61918f93e3ca43fe7fece73b67` |
+| `torah_code_experiment_israeli_prime_ministers_1.html` | 8,149 | `288496152975a1e9cabd90e2ee4e988541dee0a7d3a5b3be700a38d5db545800` |
+| `torah_code_experiment_israeli_prime_ministers_2.html` | 8,287 | `90c65e7d052d92e42fd0bea1ee49793b1a19070365be0ae9eedf240b8ff8fa30` |
+| `torah_code_experiment_israeli_prime_ministers_3.html` | 8,299 | `76505826f611725daddbc34aa315badfacd32f0fcb03ebe0a4dd195f07c5f441` |
+| `torah_code_experiment_israeli_prime_ministers_4.html` | 8,282 | `29b5a45c93097fd075512ca50e749004932bc5dfd249c4460ab7320b6f9345b2` |
+| `torah_code_experiment_israeli_prime_ministers_5.html` | 8,296 | `8c00687049acfe333ded0896055c69d210d61bbc5e8a1d4d8b8c4a4b1b25d7bf` |
+| `torah_code_experiment_israeli_prime_ministers_6.html` | 8,297 | `4055ce4a8a920ac8e0254f7fe016c8bb60271fc7f040ab0d320b66545e0a4a68` |
+| `torah_code_experiment_israeli_prime_ministers_7.html` | 8,306 | `f2f6d08242e8816e4f4bca6ea32906b10476d0dbffd6720050b07570db8e5b28` |
+| `torah_code_experiment_israeli_prime_ministers_8.html` | 8,241 | `e38735c0baadba9791abddcc57f8bbd64b700973eee275f1111ef026c5f6429c` |
+| `torah_code_experiment_cities.html` | 10,051 | `de83c911e518e773bed34a529252ee3b929b21a84101bb5cfc00146a2760cb98` |
+| `torah_code_experiment_cities_gans_original_report.pdf` | 130,826 | `dddb0817d633a486e4a15542d9f19a9fe7c76c57f2c3e2237cff2613d55452ad` |
+| `torah_code_experiment_cities_gans.html` | 9,538 | `013c9ccd504f54ebbcd92f3e2a41f126010ffa1af9b9bf00555db86292e9972e` |
+| `torah_code_experiment_cities_aumann.html` | 14,390 | `ada423413fbbeafeffb54408823a9174456f024e260e63ac65d4091e21c4945a` |
+| `torah_code_experiment_cities_aumann_report.pdf` | 190,088 | `e66ad829b18e92688fdc458d9b2c75c345f41f76600e211ec0aa4132fc566741` |
+| `torah_code_experiment_cities_aumann_expert_instructions.pdf` | 150,624 | `df9baf1c2a4310efdf0be7531878814099e6702b4341c80e63943371f5fa0215` |
+| `torah_code_experiment_cities_aumann_city_names.pdf` | 150,624 | `bca0e2e0063a16ae6e1f04fd0c0cba41db64c7ea15f707746374c03a0a3faf1c` |
+| `torah_code_experiment_cities_aumann_minority_reports.pdf` | 150,625 | `be198e0c66c5f4cc788ea5c14ad5c27c14b7a4d5fa0470f073806d0041189d90` |
+| `torah_code_experiment_cities_simon_mckay.html` | 12,273 | `c83155c450935b9df297fa1a08c5bf04963d7a48300a2e98cb6ba5e1f19f76e2` |
+| `torah_code_experiment_cities_margolioth_report.pdf` | 150,624 | `2621f306e2d11ed4907ceb6c343901c7a4c7f65a4c0c5929506f406f4320286a` |
+| `torah_code_experiment_cities_margolioth_data.pdf` | 114,271 | `0eb89b82243a7f4332b0e396411652419bc4ea2c146b4d751dd1e8f04639a677` |
+| `torah_code_experiment_cities_comparison.pdf` | 150,625 | `7eb0188e5ff9c41930dcc1835e4769b9b59713af82d661dbae2b770915af659d` |
+| `torah_code_experiment_cities_haralick.html` | 8,006 | `4a38249be8906bae234f7f4e95c58178d4ed37ead055388aa08775f6deb98dc3` |
+| `torah_code_experiment_chumash.html` | 7,940 | `71ab88e7fb6c480655fa5696e74d2abd5af1643cfca8d434f9a9a80c9ef414c1` |
+| `torah_code_experiment_sons_of_haman.html` | 10,357 | `8d5cce3d2749ddfb3d791036ce64a2090d27ea75a4552d318362eace3fb876b3` |
+| `torah_code_experiment_sons_of_haman_data.html` | 11,110 | `8649ab87dec826d19c91284f1751e5f91a2ffc1e24942994c5d547024c2dedbb` |
+| `torah_code_experiment_twin_towers.html` | 7,954 | `4a40aa3d0450a8c535e83d1f5df39a26974e12abcfadd2a404aeedae76899c5e` |
+| `torah_code_experiment_tsunami.html` | 7,934 | `ab63c3dcc4c14508a385d06d330356e634ebeb20b967c1621023cf5b70565c6d` |
+| `torah_code_experiment_katrina.html` | 7,934 | `d80fe43ceae27c094bf4e099777c749fc895f4cab67ce999a3f99653dc292677` |
+| `torah_code_experiment_great_rabbis.html` | 7,950 | `98f5dc78d2961ca4013a1615ac98350f98317db0540aa30e99cd5371f3c401d0` |
+| `torah_code_experiment_son_rabbis.html` | 7,946 | `c0f7599105b3411787a99310bf9eefc6b1cf96586259bb65e623606b794bab27` |
+| `torah_code_experiment_pumbedita.html` | 9,578 | `62e4d050a8e93bc8d03f44414def486d16fcc5b76b4e7b0b006db91236881417` |
+| `torah_code_experiment_pumbedita_data.pdf` | 9,747 | `3fe55662e57f593b862181c5ed57f28054c0921adb654a5cae29177bec0f862e` |
+| `torah_code_experiment_auschwitz.html` | 10,515 | `97a1f36d55d9cf2da8153441ff9aaddd56aff2a7ab66fa59ad68e3d0d3d30da0` |
+| `torah_code_experiment_auschwitz_data.pdf` | 8,655 | `68fb6521496708efba5980edd27517df7c036fdb984455c7c6a002fafce8ec38` |
+| `torah_code_experiment_witztum_statement.pdf` | 17,708 | `64697e721380308729afec4998c8a8fc45239ad10c07c58b5d185aa7065003f3` |
+| `torah_code_experiment_ark.html` | 9,067 | `c1d708b8f9364c287e39a69fdff03298d7df948e61a36fe103367a4f4e6d9fe7` |
+| `torah_code_experiment_ark_code.pdf` | 1,821,480 | `1619442c641dfb72bec848df6f97efb0bc3f39547a182e6371e16d7b1890381b` |
 | `WRR1.txt` | 2,016 | `7879343bb78ced3b20db0d232579762ed76bd7bd2b1ec198a2eef9871dde69fb` |
 | `WRR2.txt` | 2,038 | `927c133d6d3a57aa06d57518f8a89137292654056b51433a08a0480c7d245be5` |
 | `SE2a.txt` | 1,776 | `89ba88172d2d9c127b5f19549b04d8913de3431c4a5879854af2849b7f1d69b2` |

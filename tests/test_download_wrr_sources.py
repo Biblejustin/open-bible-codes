@@ -100,6 +100,30 @@ class DownloadWrrSourcesTests(unittest.TestCase):
             source_filename("witztum_birth_dates_data", "https://example.test/personaldata.pdf"),
             "witztum_birth_dates_data.pdf",
         )
+        experiment_names = {
+            "torah_code_experiments_page": "torah_code_experiments.html",
+            "torah_code_experiment_personal_statement": "torah_code_experiment_personal_statement.html",
+            "torah_code_experiment_american_presidents_page": "torah_code_experiment_american_presidents.html",
+            "torah_code_experiment_american_presidents_paper": "torah_code_experiment_american_presidents.pdf",
+            "torah_code_experiment_american_presidents_data": "torah_code_experiment_american_presidents_data.pdf",
+            "torah_code_experiment_english_hebrew_transliteration_rules": "torah_code_experiment_english_hebrew_transliteration_rules.pdf",
+            "torah_code_experiment_israeli_prime_ministers_page": "torah_code_experiment_israeli_prime_ministers.html",
+            "torah_code_experiment_israeli_prime_ministers_paper": "torah_code_experiment_israeli_prime_ministers.pdf",
+            "torah_code_experiment_israeli_prime_ministers_1": "torah_code_experiment_israeli_prime_ministers_1.html",
+            "torah_code_experiment_israeli_prime_ministers_8": "torah_code_experiment_israeli_prime_ministers_8.html",
+            "torah_code_experiment_cities_page": "torah_code_experiment_cities.html",
+            "torah_code_experiment_cities_gans_original_report": "torah_code_experiment_cities_gans_original_report.pdf",
+            "torah_code_experiment_cities_aumann_report": "torah_code_experiment_cities_aumann_report.pdf",
+            "torah_code_experiment_cities_simon_mckay_page": "torah_code_experiment_cities_simon_mckay.html",
+            "torah_code_experiment_cities_margolioth_data": "torah_code_experiment_cities_margolioth_data.pdf",
+            "torah_code_experiment_sons_of_haman_data": "torah_code_experiment_sons_of_haman_data.html",
+            "torah_code_experiment_pumbedita_data": "torah_code_experiment_pumbedita_data.pdf",
+            "torah_code_experiment_auschwitz_data": "torah_code_experiment_auschwitz_data.pdf",
+            "torah_code_experiment_ark_code": "torah_code_experiment_ark_code.pdf",
+        }
+        for label, expected in experiment_names.items():
+            with self.subTest(label=label):
+                self.assertEqual(source_filename(label, "https://example.test/source.bin"), expected)
         self.assertEqual(source_filename("wrr1", "https://example.test/source.txt"), "WRR1.txt")
         self.assertEqual(source_filename("wrr2", "https://example.test/source.txt"), "WRR2.txt")
         self.assertEqual(source_filename("se2a", "https://example.test/source.txt"), "SE2a.txt")
@@ -139,6 +163,13 @@ class DownloadWrrSourcesTests(unittest.TestCase):
         self.assertIn("haralick_new_protocols", REQUIRED_MANIFEST_LABELS)
         self.assertIn("haralick_experimental_protocol", REQUIRED_MANIFEST_LABELS)
         self.assertIn("witztum_birth_dates_data", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_experiments_page", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_experiment_american_presidents_data", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_experiment_israeli_prime_ministers_8", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_experiment_cities_aumann_report", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_experiment_cities_margolioth_data", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_experiment_sons_of_haman_data", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_experiment_ark_code", REQUIRED_MANIFEST_LABELS)
         self.assertIn("wrr_nations_mc", REQUIRED_MANIFEST_LABELS)
         self.assertIn("wrr_nations_gir", REQUIRED_MANIFEST_LABELS)
 

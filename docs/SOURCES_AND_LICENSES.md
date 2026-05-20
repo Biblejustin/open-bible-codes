@@ -282,6 +282,12 @@ Current external sources:
 - Torah-code.org papers and data pages, including Haralick protocol papers,
   Bombach/Gans/Levitt/Rips/Witztum papers, and associated data PDFs, used as
   source-audit context and possible future test leads.
+- Torah-code.org experiments pages and linked data/report PDFs, including the
+  personal-statement page, American Presidents, Israeli Prime Ministers,
+  Cities/Aumann/Simon-McKay, Sons of Haman, Pumbedita, Auschwitz, and Ark
+  pages. These are source-audit and protocol-design leads only; do not treat
+  them as claim-ready evidence without a separately locked protocol and source
+  parser.
 
 ### Copyrighted Source-Audit Books
 
