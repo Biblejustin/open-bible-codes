@@ -362,6 +362,7 @@ argv = [
   "--search-max-skip", "250",
   "--direction", "both",
   "--target-expected-hits", "10",
+  "--skip-cap-formula", "printed",
   "--sample-hits-per-query", "0",
   "--out", "reports/wrr_1994/wrr2_perturbation_diagnostics.csv",
   "--summary-out", "reports/wrr_1994/wrr2_perturbation_diagnostics_summary.csv",

@@ -48,6 +48,7 @@ FIELDNAMES = [
     "observed_hits",
     "search_max_skip",
     "skip_cap",
+    "skip_cap_formula",
     "expected_at_skip_cap",
     "target_reached",
     "checked_hits",
@@ -67,6 +68,8 @@ SUMMARY_FIELDNAMES = [
     "unique_normalized_terms",
     "search_max_skip",
     "sample_hits_per_query",
+    "target_expected_hits",
+    "skip_cap_formula",
     "perturbation_triples",
     "rows_with_hits",
     "rows_without_hits",
@@ -150,6 +153,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--search-max-skip", type=int, default=250)
     parser.add_argument("--direction", choices=["forward", "backward", "both"], default="both")
     parser.add_argument("--target-expected-hits", type=float, default=10.0)
+    parser.add_argument("--skip-cap-formula", choices=["printed", "program"], default="printed")
     parser.add_argument(
         "--sample-hits-per-query",
         type=int,
@@ -234,8 +238,15 @@ def diagnostic_rows(
             corpus.text,
             term.normalized,
             target_expected=args.target_expected_hits,
+            formula=args.skip_cap_formula,
         )
-        expected_at_cap = expected_els_count(len(corpus.text), term.normalized, cap, frequencies)
+        expected_at_cap = expected_els_count(
+            len(corpus.text),
+            term.normalized,
+            cap,
+            frequencies,
+            formula=args.skip_cap_formula,
+        )
         target_reached = expected_at_cap >= args.target_expected_hits
         checked_hits = query_samples.get(term.normalized, [])
         valid_counts = [
@@ -288,6 +299,7 @@ def diagnostic_rows(
                 "observed_hits": int_or_zero(count_rows.get(term.term_id, {}).get("hit_count")),
                 "search_max_skip": args.search_max_skip,
                 "skip_cap": cap,
+                "skip_cap_formula": args.skip_cap_formula,
                 "expected_at_skip_cap": round(expected_at_cap, 6),
                 "target_reached": target_reached,
                 "checked_hits": len(checked_hits),
@@ -390,6 +402,8 @@ def summarize(rows: list[dict[str, object]], args: argparse.Namespace) -> dict[s
         "unique_normalized_terms": len({row["normalized_term"] for row in rows}),
         "search_max_skip": args.search_max_skip,
         "sample_hits_per_query": sample_label(args.sample_hits_per_query),
+        "target_expected_hits": args.target_expected_hits,
+        "skip_cap_formula": args.skip_cap_formula,
         "perturbation_triples": len(perturbation_triples()),
         "rows_with_hits": len(checked_rows),
         "rows_without_hits": len(rows) - len(checked_rows),
@@ -519,6 +533,7 @@ def write_manifest(
         "terms": str(args.terms),
         "counts": str(args.counts),
         "config": str(args.config),
+        "skip_cap_formula": args.skip_cap_formula,
         "corpus": corpus.summary(),
         "summary": summary,
         "rows": len(rows),

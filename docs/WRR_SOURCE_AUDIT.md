@@ -710,6 +710,8 @@ WRR perturbation boundary/exact-match diagnostic for length `5..8` rows:
 | --- | ---: |
 | length-filtered rows | 120 |
 | unique normalized terms | 109 |
+| target expected hits | 10.0 |
+| skip-cap formula | `printed` |
 | perturbation triples | 125 |
 | rows with hits | 64 |
 | rows without hits | 56 |
@@ -721,7 +723,7 @@ WRR perturbation boundary/exact-match diagnostic for length `5..8` rows:
 | maximum exact perturbed matches | 5 |
 | ordinary in-bound failures | 0 |
 | ordinary exact-match failures | 0 |
-| perturbation diagnostic runtime | 4.813s |
+| perturbation diagnostic runtime | 4.561s |
 
 This checks whether checked ordinary ELS rows have enough in-bound
 last-three-gap perturbations and whether those perturbed rows still spell the

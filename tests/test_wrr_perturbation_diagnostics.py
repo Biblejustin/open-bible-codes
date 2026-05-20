@@ -70,7 +70,12 @@ class WrrPerturbationDiagnosticsTests(unittest.TestCase):
         self.assertEqual(diagnostic_read([10], [10], 0, 1), "ordinary hit exact-match failure")
 
     def test_summarize_counts_boundary_limited_rows(self) -> None:
-        args = argparse.Namespace(search_max_skip=250, sample_hits_per_query=20)
+        args = argparse.Namespace(
+            search_max_skip=250,
+            sample_hits_per_query=20,
+            target_expected_hits=10.0,
+            skip_cap_formula="printed",
+        )
         rows = [
             row("a", "ABC", 2, 9, 12, 1, 3, 0, 0),
             row("b", "DEF", 0, "", "", "", "", 0, 0),
@@ -81,6 +86,8 @@ class WrrPerturbationDiagnosticsTests(unittest.TestCase):
 
         self.assertEqual(summary["rows"], 3)
         self.assertEqual(summary["unique_normalized_terms"], 2)
+        self.assertEqual(summary["target_expected_hits"], 10.0)
+        self.assertEqual(summary["skip_cap_formula"], "printed")
         self.assertEqual(summary["rows_with_hits"], 2)
         self.assertEqual(summary["rows_without_hits"], 1)
         self.assertEqual(summary["checked_hits"], 3)
