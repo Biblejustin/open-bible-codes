@@ -184,6 +184,33 @@ outputs = [
 ]
 
 [[steps]]
+id = "probe_wrr_primary_table2_row_ocr"
+description = "Probe row-aligned primary Table 2 Hebrew OCR against secondary WRR2 terms without treating it as verification."
+argv = [
+  "-m", "scripts.analyze_wrr_primary_table2_row_ocr_probe",
+  "--source", "reports/wrr_1994/wrr_1994_paper.pdf",
+  "--source-records", "reports/wrr_1994/WRR2.txt",
+  "--tessdata-dir", "reports/wrr_1994/tessdata",
+  "--out", "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv",
+  "--summary-out", "reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv",
+  "--markdown-out", "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.md",
+  "--manifest-out", "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_primary_table2_row_ocr_probe.py",
+  "scripts/analyze_wrr_primary_table2_ocr_probe.py",
+  "scripts/import_wrr_terms.py",
+  "reports/wrr_1994/wrr_1994_paper.pdf",
+  "reports/wrr_1994/WRR2.txt",
+]
+outputs = [
+  "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv",
+  "reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv",
+  "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.md",
+  "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.manifest.json",
+]
+
+[[steps]]
 id = "audit_koren_genesis_text_source"
 description = "Fingerprint the Koren Genesis source text used by the WRR smoke audit."
 argv = [
@@ -663,6 +690,7 @@ argv = [
   "--pair-summary", "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
   "--table2-bridge-summary", "reports/wrr_1994/wrr_table2_source_bridge_summary.csv",
   "--table2-ocr-summary", "reports/wrr_1994/wrr_primary_table2_ocr_probe_summary.csv",
+  "--table2-row-ocr-summary", "reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv",
   "--skip-summary", "reports/wrr_1994/wrr2_skip_caps_summary.csv",
   "--corrected-distance-variants", "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
   "--primary-result-table", "reports/wrr_1994/wrr_primary_result_table.csv",
@@ -676,6 +704,7 @@ inputs = [
   "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
   "reports/wrr_1994/wrr_table2_source_bridge_summary.csv",
   "reports/wrr_1994/wrr_primary_table2_ocr_probe_summary.csv",
+  "reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv",
   "reports/wrr_1994/wrr2_skip_caps_summary.csv",
   "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
   "reports/wrr_1994/wrr_primary_result_table.csv",

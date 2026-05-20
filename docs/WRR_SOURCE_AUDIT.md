@@ -257,6 +257,12 @@ normalized secondary WRR2 terms appear somewhere in the full-page OCR text.
 This is a triage probe only; it is not row-aligned primary Hebrew
 transcription.
 
+`scripts/analyze_wrr_primary_table2_row_ocr_probe.py` performs a stricter OCR
+probe by deriving Table 2 row bands from Tesseract TSV row markers, then
+checking each secondary WRR2 Hebrew term only inside the matching row and the
+expected name/date column. It remains OCR triage, not verified primary Hebrew
+transcription.
+
 `scripts/simulate_torah_code_research_model.py` turns the Torah-code.org
 research-program geometric level-1 model into a reproducible simulation harness.
 It is intentionally a model-design/power sanity check, not a Torah-code result.

@@ -62,12 +62,25 @@ class WrrMethodStatusTests(unittest.TestCase):
                 "matched_date_terms": "29",
                 "status": "ocr_probe_not_verification",
             },
+            table2_row_ocr_row={
+                "total_terms": "205",
+                "matched_terms": "128",
+                "appellation_terms": "174",
+                "matched_appellation_terms": "99",
+                "date_terms": "31",
+                "matched_date_terms": "29",
+                "detected_row_markers": "31",
+                "inferred_row_markers": "1",
+                "status": "row_ocr_probe_not_verification",
+            },
         )
 
         by_area = {row["decision_area"]: row for row in rows}
         self.assertIn("32/32 primary Table 2", by_area["WRR2 term source"]["evidence"])
         self.assertIn("0 primary Hebrew cells verified", by_area["WRR2 term source"]["evidence"])
         self.assertIn("OCR probe matched 132/205", by_area["WRR2 term source"]["evidence"])
+        self.assertIn("row OCR probe matched 128/205", by_area["WRR2 term source"]["evidence"])
+        self.assertIn("31 detected row markers", by_area["WRR2 term source"]["evidence"])
         self.assertEqual(by_area["Pair universe"]["status"], "open")
         self.assertIn("182 raw same-record pairs", by_area["Pair universe"]["evidence"])
         self.assertIn("163 cited second-list distances", by_area["Pair universe"]["evidence"])
@@ -128,6 +141,7 @@ class WrrMethodStatusTests(unittest.TestCase):
             pair_summary = root / "pairs.csv"
             bridge_summary = root / "bridge_summary.csv"
             ocr_summary = root / "ocr_summary.csv"
+            row_ocr_summary = root / "row_ocr_summary.csv"
             skip_summary = root / "skip.csv"
             variants = root / "variants.csv"
             primary_results = root / "primary.csv"
@@ -188,6 +202,22 @@ class WrrMethodStatusTests(unittest.TestCase):
                 ],
             )
             write_dict_rows(
+                row_ocr_summary,
+                [
+                    {
+                        "total_terms": "205",
+                        "matched_terms": "128",
+                        "appellation_terms": "174",
+                        "matched_appellation_terms": "99",
+                        "date_terms": "31",
+                        "matched_date_terms": "29",
+                        "detected_row_markers": "31",
+                        "inferred_row_markers": "1",
+                        "status": "row_ocr_probe_not_verification",
+                    }
+                ],
+            )
+            write_dict_rows(
                 skip_summary,
                 [
                     {
@@ -231,6 +261,8 @@ class WrrMethodStatusTests(unittest.TestCase):
                     str(bridge_summary),
                     "--table2-ocr-summary",
                     str(ocr_summary),
+                    "--table2-row-ocr-summary",
+                    str(row_ocr_summary),
                     "--skip-summary",
                     str(skip_summary),
                     "--corrected-distance-variants",
