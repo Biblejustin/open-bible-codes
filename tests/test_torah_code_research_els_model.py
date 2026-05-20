@@ -89,10 +89,26 @@ class TorahCodeResearchElsModelTests(unittest.TestCase):
         stats = model.meeting_statistics(left, right, row_width_count=5)
 
         self.assertEqual(stats["comparable_distances"], 2)
+        self.assertEqual(stats["order_vector"], (2.0,))
         self.assertGreater(stats["arithmetic_mean"], 0)
         self.assertGreater(stats["geometric_mean"], 0)
         self.assertGreater(stats["harmonic_mean"], 0)
         self.assertEqual(stats["order_trimmed_mean"], stats["arithmetic_mean"])
+
+    def test_order_statistic_vector_omits_smallest_distance(self) -> None:
+        self.assertEqual(model.order_statistic_vector([3.0, 1.0, 2.0]), (2.0, 3.0))
+
+    def test_fisher_order_weights_score_compact_vectors_lower(self) -> None:
+        null_vectors = [(10.0, 12.0), (11.0, 13.0), (12.0, 14.0)]
+        alternative_vectors = [(4.0, 6.0), (5.0, 7.0), (6.0, 8.0)]
+
+        weights = model.fisher_order_weights(null_vectors, alternative_vectors)
+
+        self.assertGreater(weights[0], 0)
+        self.assertLess(
+            model.dot(weights, alternative_vectors[0]),
+            model.dot(weights, null_vectors[0]),
+        )
 
     def test_summarize_setting_detects_strong_compactness_shift(self) -> None:
         rows = model.summarize_setting(
@@ -110,8 +126,10 @@ class TorahCodeResearchElsModelTests(unittest.TestCase):
         )
 
         arithmetic = next(row for row in rows if row["statistic"] == "arithmetic_mean")
+        fisher = next(row for row in rows if row["statistic"] == "fisher_order_split")
         self.assertGreater(float(arithmetic["null_mean"]), float(arithmetic["alternative_mean"]))
         self.assertGreater(float(arithmetic["power_p_le_alpha"]), 0.7)
+        self.assertGreater(float(fisher["null_mean"]), float(fisher["alternative_mean"]))
         self.assertIn(
             arithmetic["interpretation"],
             {"moderate_power_for_declared_model", "high_power_for_declared_model"},

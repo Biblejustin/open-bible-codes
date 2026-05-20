@@ -20,10 +20,10 @@ For moved ELSs, the script identifies the best target ELS and row width,
 projects the moving start position along the shortest cylinder path, and
 then searches nearby valid starts for a distance closest to `a*d`.
 
-Statistics compared here are arithmetic, geometric, harmonic, and a simple
-trimmed order-statistic mean. The source statistic-selection page mentions
-a Fisher linear discriminant over order statistics, but does not provide
-weights here; that remains a later upgrade.
+Statistics compared here are arithmetic, geometric, harmonic, a simple
+trimmed order-statistic mean, and a split-fit Fisher order-statistic
+score. The Fisher row learns weights from the first half of generated
+null/alternative runs and reports power only on the held-out half.
 
 Reproduce with:
 
@@ -45,7 +45,9 @@ python3 -m scripts.simulate_torah_code_research_els_model
 | N | moved fraction | factor | statistic | null mean | alternative mean | power | read |
 | ---: | ---: | ---: | --- | ---: | ---: | ---: | --- |
 | 10 | 0.5 | 0.25 | harmonic_mean | 18.5355 | 11.3893 | 0.555 | moderate_power_for_declared_model |
+| 10 | 0.5 | 0.25 | fisher_order_split | 60.1061 | 38.3847 | 0.47 | low_power_for_declared_model |
 | 10 | 0.5 | 0.25 | geometric_mean | 25.4167 | 17.4211 | 0.41 | low_power_for_declared_model |
+| 10 | 0.5 | 0.5 | fisher_order_split | 31.5248 | 23.0422 | 0.24 | low_power_for_declared_model |
 | 10 | 0.5 | 0.5 | harmonic_mean | 18.7506 | 13.8274 | 0.21 | low_power_for_declared_model |
 | 10 | 0.5 | 0.25 | arithmetic_mean | 53.8513 | 46.9175 | 0.17 | low_power_for_declared_model |
 | 10 | 0.5 | 0.25 | order_trimmed_mean | 56.2816 | 49.1586 | 0.17 | low_power_for_declared_model |
@@ -54,8 +56,6 @@ python3 -m scripts.simulate_torah_code_research_els_model
 | 10 | 0.5 | 0.75 | order_trimmed_mean | 59.4635 | 52.4779 | 0.155 | low_power_for_declared_model |
 | 10 | 0.25 | 0.25 | harmonic_mean | 18.4633 | 14.7401 | 0.145 | low_power_for_declared_model |
 | 10 | 0.5 | 0.75 | geometric_mean | 26.5721 | 22.901 | 0.145 | low_power_for_declared_model |
-| 10 | 0.5 | 0.75 | harmonic_mean | 19.2516 | 16.0888 | 0.14 | low_power_for_declared_model |
-| 10 | 0.25 | 0.5 | harmonic_mean | 18.7202 | 15.9997 | 0.1 | low_power_for_declared_model |
 
 ## Caveats
 
@@ -65,5 +65,7 @@ python3 -m scripts.simulate_torah_code_research_els_model
   the moved ELS to spell a real word in a real corpus.
 - The moved start search is local around the projected cylinder target,
   not an exhaustive global optimizer.
+- The Fisher row is data-driven simulation scaffolding; it is not a
+  source-published set of weights.
 - The resonant-cylinder definition is explicit and reproducible but
   narrower than a complete source-method reconstruction.

@@ -247,7 +247,7 @@ def summarize_setting(
                 row_width_count=row_width_count,
             )
         )
-    return [
+    rows = [
         summarize_statistic(
             statistic=statistic,
             null_runs=null_runs,
@@ -266,6 +266,24 @@ def summarize_setting(
         )
         for statistic in STATISTICS
     ]
+    fisher = summarize_fisher_order_statistic(
+        null_runs=null_runs,
+        alternative_runs=alternative_runs,
+        els_count=els_count,
+        left_word_length=left_word_length,
+        right_word_length=right_word_length,
+        text_length=text_length,
+        max_skip=max_skip,
+        row_width_count=row_width_count,
+        moved_fraction=moved_fraction,
+        compactness_factor=compactness_factor,
+        replicates=replicates,
+        seed=seed,
+        alpha=alpha,
+    )
+    if fisher is not None:
+        rows.append(fisher)
+    return rows
 
 
 def random_els_set(
@@ -612,11 +630,19 @@ def meeting_statistics(
     right: tuple[ElsOccurrence, ...],
     *,
     row_width_count: int,
-) -> dict[str, float | int | None]:
+) -> dict[str, float | int | tuple[float, ...] | None]:
     distances = nearest_meeting_distances(left, right, row_width_count=row_width_count)
-    stats: dict[str, float | int | None] = {"comparable_distances": len(distances)}
+    stats: dict[str, float | int | tuple[float, ...] | None] = {
+        "comparable_distances": len(distances),
+        "order_vector": order_statistic_vector(distances),
+    }
     stats.update(statistic_values(distances))
     return stats
+
+
+def order_statistic_vector(distances: list[float]) -> tuple[float, ...]:
+    ordered = sorted(distances)
+    return tuple(ordered[1:]) if len(ordered) > 1 else tuple()
 
 
 def statistic_values(distances: list[float]) -> dict[str, float | None]:
@@ -635,8 +661,8 @@ def statistic_values(distances: list[float]) -> dict[str, float | None]:
 def summarize_statistic(
     *,
     statistic: str,
-    null_runs: list[dict[str, float | int | None]],
-    alternative_runs: list[dict[str, float | int | None]],
+    null_runs: list[dict[str, float | int | tuple[float, ...] | None]],
+    alternative_runs: list[dict[str, float | int | tuple[float, ...] | None]],
     els_count: int,
     left_word_length: int,
     right_word_length: int,
@@ -688,11 +714,124 @@ def summarize_statistic(
     }
 
 
-def numeric_values(rows: list[dict[str, float | int | None]], key: str) -> list[float]:
+def summarize_fisher_order_statistic(
+    *,
+    null_runs: list[dict[str, float | int | tuple[float, ...] | None]],
+    alternative_runs: list[dict[str, float | int | tuple[float, ...] | None]],
+    els_count: int,
+    left_word_length: int,
+    right_word_length: int,
+    text_length: int,
+    max_skip: int,
+    row_width_count: int,
+    moved_fraction: float,
+    compactness_factor: float,
+    replicates: int,
+    seed: int,
+    alpha: float,
+) -> dict[str, str] | None:
+    dimension = common_order_dimension(null_runs, alternative_runs)
+    if dimension < 1:
+        return None
+    null_vectors = order_vectors(null_runs, dimension=dimension)
+    alternative_vectors = order_vectors(alternative_runs, dimension=dimension)
+    split = min(len(null_vectors), len(alternative_vectors)) // 2
+    if split < 1:
+        return None
+    null_train = null_vectors[:split]
+    alternative_train = alternative_vectors[:split]
+    null_holdout = null_vectors[split:]
+    alternative_holdout = alternative_vectors[split:]
+    if not null_holdout or not alternative_holdout:
+        return None
+    weights = fisher_order_weights(null_train, alternative_train)
+    null_values = [dot(weights, vector) for vector in null_holdout]
+    alternative_values = [dot(weights, vector) for vector in alternative_holdout]
+    p_values = [left_tail_p_value(null_values, value) for value in alternative_values]
+    power = sum(1 for value in p_values if value <= alpha) / len(p_values)
+    lower_than_mean = sum(1 for value in alternative_values if value < mean(null_values)) / len(
+        alternative_values
+    )
+    shift = mean(null_values) - mean(alternative_values)
+    return {
+        "els_count": str(els_count),
+        "left_word_length": str(left_word_length),
+        "right_word_length": str(right_word_length),
+        "text_length": str(text_length),
+        "max_skip": str(max_skip),
+        "row_width_count": str(row_width_count),
+        "moved_fraction": format_float(moved_fraction),
+        "compactness_factor": format_float(compactness_factor),
+        "statistic": "fisher_order_split",
+        "replicates": str(replicates),
+        "seed": str(seed),
+        "alpha": format_float(alpha),
+        "null_usable": str(len(null_values)),
+        "alternative_usable": str(len(alternative_values)),
+        "null_comparable_distance_mean": format_float(comparable_distance_mean(null_runs)),
+        "alternative_comparable_distance_mean": format_float(comparable_distance_mean(alternative_runs)),
+        "null_mean": format_float(mean(null_values)),
+        "null_stdev": format_float(pstdev(null_values)),
+        "alternative_mean": format_float(mean(alternative_values)),
+        "alternative_stdev": format_float(pstdev(alternative_values)),
+        "mean_shift": format_float(shift),
+        "power_p_le_alpha": format_float(power),
+        "median_null_p_value": format_float(median(p_values)),
+        "alternative_lower_than_null_mean_rate": format_float(lower_than_mean),
+        "interpretation": interpretation(power, shift),
+    }
+
+
+def common_order_dimension(
+    null_runs: list[dict[str, float | int | tuple[float, ...] | None]],
+    alternative_runs: list[dict[str, float | int | tuple[float, ...] | None]],
+) -> int:
+    vectors = order_vectors(null_runs) + order_vectors(alternative_runs)
+    return min((len(vector) for vector in vectors), default=0)
+
+
+def order_vectors(
+    rows: list[dict[str, float | int | tuple[float, ...] | None]],
+    *,
+    dimension: int | None = None,
+) -> list[tuple[float, ...]]:
+    vectors = [value for row in rows if isinstance((value := row["order_vector"]), tuple) and value]
+    if dimension is None:
+        return vectors
+    return [vector[:dimension] for vector in vectors if len(vector) >= dimension]
+
+
+def fisher_order_weights(
+    null_vectors: list[tuple[float, ...]],
+    alternative_vectors: list[tuple[float, ...]],
+) -> tuple[float, ...]:
+    dimension = len(null_vectors[0])
+    weights = []
+    for index in range(dimension):
+        null_column = [vector[index] for vector in null_vectors]
+        alternative_column = [vector[index] for vector in alternative_vectors]
+        delta = mean(null_column) - mean(alternative_column)
+        variance = pooled_variance(null_column, alternative_column)
+        weights.append(delta / max(variance, EPSILON))
+    return tuple(weights)
+
+
+def pooled_variance(left: list[float], right: list[float]) -> float:
+    return (pstdev(left) ** 2 + pstdev(right) ** 2) / 2
+
+
+def dot(left: tuple[float, ...], right: tuple[float, ...]) -> float:
+    return sum(left_value * right_value for left_value, right_value in zip(left, right, strict=True))
+
+
+def numeric_values(
+    rows: list[dict[str, float | int | tuple[float, ...] | None]],
+    key: str,
+) -> list[float]:
     return [float(value) for row in rows if (value := row[key]) is not None]
 
 
-def comparable_distance_mean(rows: list[dict[str, float | int | None]]) -> float:
+def comparable_distance_mean(rows: list[dict[str, float | int | tuple[float, ...] | None]]) -> float:
     return mean(float(row["comparable_distances"]) for row in rows)
 
 
@@ -730,10 +869,10 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
         "projects the moving start position along the shortest cylinder path, and",
         "then searches nearby valid starts for a distance closest to `a*d`.",
         "",
-        "Statistics compared here are arithmetic, geometric, harmonic, and a simple",
-        "trimmed order-statistic mean. The source statistic-selection page mentions",
-        "a Fisher linear discriminant over order statistics, but does not provide",
-        "weights here; that remains a later upgrade.",
+        "Statistics compared here are arithmetic, geometric, harmonic, a simple",
+        "trimmed order-statistic mean, and a split-fit Fisher order-statistic",
+        "score. The Fisher row learns weights from the first half of generated",
+        "null/alternative runs and reports power only on the held-out half.",
         "",
         "Reproduce with:",
         "",
@@ -773,6 +912,8 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             "  the moved ELS to spell a real word in a real corpus.",
             "- The moved start search is local around the projected cylinder target,",
             "  not an exhaustive global optimizer.",
+            "- The Fisher row is data-driven simulation scaffolding; it is not a",
+            "  source-published set of weights.",
             "- The resonant-cylinder definition is explicit and reproducible but",
             "  narrower than a complete source-method reconstruction.",
         ]
