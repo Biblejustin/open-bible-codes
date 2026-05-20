@@ -91,6 +91,31 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_table2_source_bridge"
+description = "Bridge primary Table 2 row-label anchors to secondary WRR2 record shapes."
+argv = [
+  "-m", "scripts.build_wrr_table2_source_bridge",
+  "--anchors", "reports/wrr_1994/wrr_primary_table2_anchors.csv",
+  "--source", "reports/wrr_1994/WRR2.txt",
+  "--out", "reports/wrr_1994/wrr_table2_source_bridge.csv",
+  "--summary-out", "reports/wrr_1994/wrr_table2_source_bridge_summary.csv",
+  "--markdown-out", "reports/wrr_1994/wrr_table2_source_bridge.md",
+  "--manifest-out", "reports/wrr_1994/wrr_table2_source_bridge.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_table2_source_bridge.py",
+  "scripts/import_wrr_terms.py",
+  "reports/wrr_1994/wrr_primary_table2_anchors.csv",
+  "reports/wrr_1994/WRR2.txt",
+]
+outputs = [
+  "reports/wrr_1994/wrr_table2_source_bridge.csv",
+  "reports/wrr_1994/wrr_table2_source_bridge_summary.csv",
+  "reports/wrr_1994/wrr_table2_source_bridge.md",
+  "reports/wrr_1994/wrr_table2_source_bridge.manifest.json",
+]
+
+[[steps]]
 id = "audit_wrr_source_shapes"
 description = "Summarize raw ANU famous-rabbis source-list record shapes."
 argv = [
@@ -610,6 +635,7 @@ argv = [
   "-m", "scripts.build_wrr_method_status",
   "--text-source", "reports/wrr_1994/koren_genesis_text_source.csv",
   "--pair-summary", "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "--table2-bridge-summary", "reports/wrr_1994/wrr_table2_source_bridge_summary.csv",
   "--skip-summary", "reports/wrr_1994/wrr2_skip_caps_summary.csv",
   "--corrected-distance-variants", "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
   "--primary-result-table", "reports/wrr_1994/wrr_primary_result_table.csv",
@@ -621,6 +647,7 @@ inputs = [
   "scripts/build_wrr_method_status.py",
   "reports/wrr_1994/koren_genesis_text_source.csv",
   "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "reports/wrr_1994/wrr_table2_source_bridge_summary.csv",
   "reports/wrr_1994/wrr2_skip_caps_summary.csv",
   "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
   "reports/wrr_1994/wrr_primary_result_table.csv",

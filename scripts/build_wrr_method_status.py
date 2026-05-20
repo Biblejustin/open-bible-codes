@@ -15,6 +15,7 @@ from els import __version__
 
 DEFAULT_TEXT_SOURCE = Path("reports/wrr_1994/koren_genesis_text_source.csv")
 DEFAULT_PAIR_SUMMARY = Path("reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv")
+DEFAULT_TABLE2_BRIDGE_SUMMARY = Path("reports/wrr_1994/wrr_table2_source_bridge_summary.csv")
 DEFAULT_SKIP_SUMMARY = Path("reports/wrr_1994/wrr2_skip_caps_summary.csv")
 DEFAULT_VARIANTS = Path("reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv")
 DEFAULT_PRIMARY_RESULT_TABLE = Path("reports/wrr_1994/wrr_primary_result_table.csv")
@@ -68,10 +69,18 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     text_row = read_one_row(args.text_source)
     pair_row = read_one_row(args.pair_summary)
+    table2_bridge_row = read_one_row(args.table2_bridge_summary)
     skip_row = read_one_row(args.skip_summary)
     variant_rows = read_rows(args.corrected_distance_variants)
     primary_result_rows = read_rows(args.primary_result_table)
-    rows = build_status_rows(text_row, pair_row, skip_row, variant_rows, primary_result_rows)
+    rows = build_status_rows(
+        text_row,
+        pair_row,
+        skip_row,
+        variant_rows,
+        primary_result_rows,
+        table2_bridge_row,
+    )
     write_csv(args.out, rows)
     write_markdown(args.markdown_out, rows, args)
     write_manifest(args, rows, started)
@@ -85,6 +94,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
     parser.add_argument("--text-source", type=Path, default=DEFAULT_TEXT_SOURCE)
     parser.add_argument("--pair-summary", type=Path, default=DEFAULT_PAIR_SUMMARY)
+    parser.add_argument("--table2-bridge-summary", type=Path, default=DEFAULT_TABLE2_BRIDGE_SUMMARY)
     parser.add_argument("--skip-summary", type=Path, default=DEFAULT_SKIP_SUMMARY)
     parser.add_argument("--corrected-distance-variants", type=Path, default=DEFAULT_VARIANTS)
     parser.add_argument("--primary-result-table", type=Path, default=DEFAULT_PRIMARY_RESULT_TABLE)
@@ -112,6 +122,7 @@ def build_status_rows(
     skip_row: dict[str, str],
     variant_rows: list[dict[str, str]],
     primary_result_rows: list[dict[str, str]] | None = None,
+    table2_bridge_row: dict[str, str] | None = None,
 ) -> list[dict[str, str]]:
     return [
         {
@@ -130,6 +141,8 @@ def build_status_rows(
             "status": "secondary_source_imported",
             "current_read": "ANU/McKay WRR2 plain text is imported for audit, not treated as primary-paper ground truth.",
             "evidence": (
+                table2_bridge_evidence(table2_bridge_row)
+                + "; "
                 f"{pair_row.get('source_records', '')} source records; "
                 f"{pair_row.get('source_appellations', '')} appellations; "
                 f"{pair_row.get('source_dates', '')} date rows; "
@@ -255,6 +268,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             "python3 -m scripts.build_wrr_method_status "
             f"--text-source {args.text_source} "
             f"--pair-summary {args.pair_summary} "
+            f"--table2-bridge-summary {args.table2_bridge_summary} "
             f"--skip-summary {args.skip_summary} "
             f"--corrected-distance-variants {args.corrected_distance_variants} "
             f"--primary-result-table {args.primary_result_table} "
@@ -312,6 +326,16 @@ def markdown_cell(value: str) -> str:
     return value.replace("|", "\\|").replace("\n", " ").strip()
 
 
+def table2_bridge_evidence(row: dict[str, str] | None) -> str:
+    if not row:
+        return "primary Table 2 bridge not supplied"
+    return (
+        f"{row.get('primary_rows_found', '')}/{row.get('primary_rows', '')} primary Table 2 "
+        f"English row labels found; {row.get('secondary_records', '')} secondary records; "
+        f"{row.get('primary_hebrew_cells_verified', '')} primary Hebrew cells verified"
+    )
+
+
 def write_manifest(args: argparse.Namespace, rows: list[dict[str, str]], started: float) -> None:
     payload = {
         "tool": Path(__file__).name,
@@ -321,6 +345,7 @@ def write_manifest(args: argparse.Namespace, rows: list[dict[str, str]], started
         "inputs": {
             "text_source": str(args.text_source),
             "pair_summary": str(args.pair_summary),
+            "table2_bridge_summary": str(args.table2_bridge_summary),
             "skip_summary": str(args.skip_summary),
             "corrected_distance_variants": str(args.corrected_distance_variants),
             "primary_result_table": str(args.primary_result_table),

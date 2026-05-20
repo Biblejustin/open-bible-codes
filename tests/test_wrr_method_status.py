@@ -47,9 +47,17 @@ class WrrMethodStatusTests(unittest.TestCase):
                 },
                 {"label": "V", "status": "found", "bonferroni_p0": "0.847108"},
             ],
+            table2_bridge_row={
+                "primary_rows": "32",
+                "primary_rows_found": "32",
+                "secondary_records": "32",
+                "primary_hebrew_cells_verified": "0",
+            },
         )
 
         by_area = {row["decision_area"]: row for row in rows}
+        self.assertIn("32/32 primary Table 2", by_area["WRR2 term source"]["evidence"])
+        self.assertIn("0 primary Hebrew cells verified", by_area["WRR2 term source"]["evidence"])
         self.assertEqual(by_area["Pair universe"]["status"], "open")
         self.assertIn("182 raw same-record pairs", by_area["Pair universe"]["evidence"])
         self.assertIn("163 cited second-list distances", by_area["Pair universe"]["evidence"])
@@ -72,6 +80,7 @@ class WrrMethodStatusTests(unittest.TestCase):
                 {
                     "text_source": Path("text.csv"),
                     "pair_summary": Path("pairs.csv"),
+                    "table2_bridge_summary": Path("bridge_summary.csv"),
                     "skip_summary": Path("skip.csv"),
                     "corrected_distance_variants": Path("variants.csv"),
                     "primary_result_table": Path("primary.csv"),
@@ -106,6 +115,7 @@ class WrrMethodStatusTests(unittest.TestCase):
             root = Path(tmp)
             text_source = root / "text.csv"
             pair_summary = root / "pairs.csv"
+            bridge_summary = root / "bridge_summary.csv"
             skip_summary = root / "skip.csv"
             variants = root / "variants.csv"
             primary_results = root / "primary.csv"
@@ -137,6 +147,17 @@ class WrrMethodStatusTests(unittest.TestCase):
                         "length_filter_min": "5",
                         "length_filter_max": "8",
                         "expected_published_pairs": "163",
+                    }
+                ],
+            )
+            write_dict_rows(
+                bridge_summary,
+                [
+                    {
+                        "primary_rows": "32",
+                        "primary_rows_found": "32",
+                        "secondary_records": "32",
+                        "primary_hebrew_cells_verified": "0",
                     }
                 ],
             )
@@ -180,6 +201,8 @@ class WrrMethodStatusTests(unittest.TestCase):
                     str(text_source),
                     "--pair-summary",
                     str(pair_summary),
+                    "--table2-bridge-summary",
+                    str(bridge_summary),
                     "--skip-summary",
                     str(skip_summary),
                     "--corrected-distance-variants",
