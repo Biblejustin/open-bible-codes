@@ -16,6 +16,7 @@ from els import __version__
 DEFAULT_TEXT_SOURCE = Path("reports/wrr_1994/koren_genesis_text_source.csv")
 DEFAULT_PAIR_SUMMARY = Path("reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv")
 DEFAULT_TABLE2_BRIDGE_SUMMARY = Path("reports/wrr_1994/wrr_table2_source_bridge_summary.csv")
+DEFAULT_TABLE2_OCR_SUMMARY = Path("reports/wrr_1994/wrr_primary_table2_ocr_probe_summary.csv")
 DEFAULT_SKIP_SUMMARY = Path("reports/wrr_1994/wrr2_skip_caps_summary.csv")
 DEFAULT_VARIANTS = Path("reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv")
 DEFAULT_PRIMARY_RESULT_TABLE = Path("reports/wrr_1994/wrr_primary_result_table.csv")
@@ -70,6 +71,7 @@ def main(argv: list[str] | None = None) -> int:
     text_row = read_one_row(args.text_source)
     pair_row = read_one_row(args.pair_summary)
     table2_bridge_row = read_one_row(args.table2_bridge_summary)
+    table2_ocr_row = read_one_row(args.table2_ocr_summary)
     skip_row = read_one_row(args.skip_summary)
     variant_rows = read_rows(args.corrected_distance_variants)
     primary_result_rows = read_rows(args.primary_result_table)
@@ -80,6 +82,7 @@ def main(argv: list[str] | None = None) -> int:
         variant_rows,
         primary_result_rows,
         table2_bridge_row,
+        table2_ocr_row,
     )
     write_csv(args.out, rows)
     write_markdown(args.markdown_out, rows, args)
@@ -95,6 +98,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--text-source", type=Path, default=DEFAULT_TEXT_SOURCE)
     parser.add_argument("--pair-summary", type=Path, default=DEFAULT_PAIR_SUMMARY)
     parser.add_argument("--table2-bridge-summary", type=Path, default=DEFAULT_TABLE2_BRIDGE_SUMMARY)
+    parser.add_argument("--table2-ocr-summary", type=Path, default=DEFAULT_TABLE2_OCR_SUMMARY)
     parser.add_argument("--skip-summary", type=Path, default=DEFAULT_SKIP_SUMMARY)
     parser.add_argument("--corrected-distance-variants", type=Path, default=DEFAULT_VARIANTS)
     parser.add_argument("--primary-result-table", type=Path, default=DEFAULT_PRIMARY_RESULT_TABLE)
@@ -123,6 +127,7 @@ def build_status_rows(
     variant_rows: list[dict[str, str]],
     primary_result_rows: list[dict[str, str]] | None = None,
     table2_bridge_row: dict[str, str] | None = None,
+    table2_ocr_row: dict[str, str] | None = None,
 ) -> list[dict[str, str]]:
     return [
         {
@@ -142,6 +147,8 @@ def build_status_rows(
             "current_read": "ANU/McKay WRR2 plain text is imported for audit, not treated as primary-paper ground truth.",
             "evidence": (
                 table2_bridge_evidence(table2_bridge_row)
+                + "; "
+                + table2_ocr_evidence(table2_ocr_row)
                 + "; "
                 f"{pair_row.get('source_records', '')} source records; "
                 f"{pair_row.get('source_appellations', '')} appellations; "
@@ -269,6 +276,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             f"--text-source {args.text_source} "
             f"--pair-summary {args.pair_summary} "
             f"--table2-bridge-summary {args.table2_bridge_summary} "
+            f"--table2-ocr-summary {args.table2_ocr_summary} "
             f"--skip-summary {args.skip_summary} "
             f"--corrected-distance-variants {args.corrected_distance_variants} "
             f"--primary-result-table {args.primary_result_table} "
@@ -336,6 +344,18 @@ def table2_bridge_evidence(row: dict[str, str] | None) -> str:
     )
 
 
+def table2_ocr_evidence(row: dict[str, str] | None) -> str:
+    if not row:
+        return "primary Table 2 OCR probe not supplied"
+    return (
+        f"OCR probe matched {row.get('matched_terms', '')}/{row.get('total_terms', '')} "
+        f"secondary Hebrew terms "
+        f"({row.get('matched_appellation_terms', '')}/{row.get('appellation_terms', '')} appellations, "
+        f"{row.get('matched_date_terms', '')}/{row.get('date_terms', '')} dates); "
+        f"{row.get('status', '')}"
+    )
+
+
 def write_manifest(args: argparse.Namespace, rows: list[dict[str, str]], started: float) -> None:
     payload = {
         "tool": Path(__file__).name,
@@ -346,6 +366,7 @@ def write_manifest(args: argparse.Namespace, rows: list[dict[str, str]], started
             "text_source": str(args.text_source),
             "pair_summary": str(args.pair_summary),
             "table2_bridge_summary": str(args.table2_bridge_summary),
+            "table2_ocr_summary": str(args.table2_ocr_summary),
             "skip_summary": str(args.skip_summary),
             "corrected_distance_variants": str(args.corrected_distance_variants),
             "primary_result_table": str(args.primary_result_table),

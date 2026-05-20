@@ -251,6 +251,12 @@ anchors to the secondary WRR2 plain-text record shape by row number. This makes
 the current dependency explicit: English row labels are primary-audited, while
 Hebrew appellation/date tokens still come from secondary transcription.
 
+`scripts/analyze_wrr_primary_table2_ocr_probe.py` renders/OCRs the primary
+Table 2 page when Hebrew Tesseract data is present and checks whether
+normalized secondary WRR2 terms appear somewhere in the full-page OCR text.
+This is a triage probe only; it is not row-aligned primary Hebrew
+transcription.
+
 `scripts/simulate_torah_code_research_model.py` turns the Torah-code.org
 research-program geometric level-1 model into a reproducible simulation harness.
 It is intentionally a model-design/power sanity check, not a Torah-code result.

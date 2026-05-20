@@ -111,7 +111,8 @@ fixed-250 skip settings. It also writes `docs/WRR_METHOD_STATUS.md`, a compact
 matrix of current locks, open method decisions, and next actions. It
 fingerprints the Koren Genesis source stream, checks primary-PDF method anchors,
 source-locks the primary Table 2 row labels and Table 3 published rank rows,
-bridges Table 2 row labels to secondary WRR2 record counts, and emits a pair-table
+bridges Table 2 row labels to secondary WRR2 record counts, runs a
+probe-only Hebrew OCR check against those secondary terms, and emits a pair-table
 reconciliation for the current imported-pair count versus the source-cited
 163-distance WRR second-list sample. It is not a WRR reproduction.
 

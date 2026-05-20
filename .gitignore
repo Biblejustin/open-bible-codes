@@ -31,6 +31,8 @@ reports/**/*.md
 reports/**/*.toml
 reports/**/*.zip
 reports/**/*.txt
+reports/**/*.png
+reports/**/*.traineddata
 reports/**/*.err
 reports/**/*.ps1
 reports/**/*.pid
