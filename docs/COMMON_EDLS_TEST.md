@@ -11,7 +11,7 @@ Source used for this check:
 Commands:
 
 ```bash
-python3 -m unittest discover -s tests
+python3 -m pytest -q
 python3 -m els stats --config configs/example_michigan_torah.toml
 python3 -m els search --config configs/example_michigan_torah.toml --term תורה --min-skip 50 --max-skip 50 --out reports/torah_skip50.csv
 python3 -m els search --config configs/example_michigan_torah.toml --term HRWT --min-skip 50 --max-skip 50 --direction forward --out reports/hrwt_forward50.csv
