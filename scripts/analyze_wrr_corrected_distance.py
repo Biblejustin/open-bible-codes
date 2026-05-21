@@ -285,6 +285,8 @@ def collect_perturbed_occurrences_by_term(
                 # Sources require exact perturbed letters, but use the unperturbed
                 # (n,d,k) positions for distance/domain measurements.
                 offsets = ordinary_els_offsets(start, skip, len(query))
+                if not offsets_are_in_bounds(offsets, len(text)):
+                    continue
                 raw_by_query[query].setdefault(triple, set()).add((offsets, skip))
 
     occurrences_by_query: dict[
@@ -374,6 +376,10 @@ def build_suffix_perturbation_index(
         x: {y: tuple(sorted(z_values)) for y, z_values in y_values.items()}
         for x, y_values in grouped.items()
     }
+
+
+def offsets_are_in_bounds(offsets: tuple[int, ...], text_length: int) -> bool:
+    return all(0 <= offset < text_length for offset in offsets)
 
 
 def matching_perturbed_suffix_triples(

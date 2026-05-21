@@ -168,6 +168,12 @@ still stays blocked until pair universe, `D(w)`, full corrected distance, and
 permutation/aggregate statuses are locked. This is not yet the claim-grade
 P1..P4/permutation driver.
 
+All-lane diagnostic follow-up now exists:
+`protocols/wrr_corrected_distance_direct_all_lanes.toml` and
+`docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md`. It defines 50 values at cap 250 and
+72 at cap 1000 over all 182 imported same-record pairs, still far below the
+source-cited 163 defined second-list distances.
+
 ### 2. Source-Basis Audit Queue
 
 The English manifests already track broad source-basis metadata:

@@ -91,6 +91,21 @@ class WrrCorrectedDistanceScriptTests(unittest.TestCase):
             (WrrElsOccurrence((0, 2, 4, 6), 2, 0, 8),),
         )
 
+    def test_collect_perturbed_occurrences_requires_unperturbed_offsets_in_bounds(self) -> None:
+        terms = {"term": PairTerm("term", "ABCD")}
+
+        occurrences, stats = collect_perturbed_occurrences_by_term(
+            "ABCD",
+            terms,
+            min_skip=2,
+            max_skip=2,
+            direction="forward",
+            triples=((-1, -1, -1),),
+        )
+
+        self.assertEqual(stats["term"].exact_perturbed_rows, 0)
+        self.assertEqual(occurrences["term"], {})
+
     def test_collect_perturbed_occurrences_skips_too_short_terms(self) -> None:
         terms = {"term": PairTerm("term", "ABC")}
 

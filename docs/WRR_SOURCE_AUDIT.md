@@ -145,7 +145,9 @@ and the corrected-distance smoke comparison now runs term-printed,
 term-program, and fixed-250 variants. Current direct-search smoke output
 defines 28 corrected distances at cap 250 and the cap-1000 split diagnostic
 defines 46, so a full reproduction driver must still choose paper formula
-versus program formula before final `D(w)` calculations.
+versus program formula before final `D(w)` calculations. A direct all-lane
+diagnostic over all 182 imported same-record pairs defines 72 values at cap
+1000, still not the source-cited 163 second-list distances.
 
 The ANU/McKay data page provides plain-text WRR lists in a modified
 Michigan-Claremont transliteration. User decision on 2026-05-21: use this

@@ -183,6 +183,14 @@ Already implemented:
   `8.66346313541e-05`. The retained all-hit high-cap perturbation and
   pair-readiness diagnostics are ordinary-hit-only legacy checks, not
   direct-search blockers.
+- all-lane direct diagnostic protocol in
+  `protocols/wrr_corrected_distance_direct_all_lanes.toml`. Current ignored
+  output over all 182 imported same-record WRR2 pairs has 50 defined corrected
+  distances at cap 250 and 72 defined corrected distances at cap 1000. The
+  cap-1000 split defines 46 rows in the length-5..8 lane, 12 additional rows in
+  the appellation-min-length lane, and 14 rows currently marked
+  `excluded_by_appellation_min_length`. This remains pair-universe diagnostic
+  evidence only; see `docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md`.
 - exploratory all-lane corrected-distance diagnostics over all 182 imported
   same-record pairs were run before direct perturbed-letter search and should be
   treated as obsolete historical diagnostics until rerun with the current

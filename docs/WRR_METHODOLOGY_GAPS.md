@@ -99,6 +99,13 @@ The better current reading is that `163` is produced after applying the
 corrected-distance eligibility screen, not by selecting a separate raw
 same-record pair table.
 
+The direct all-lane corrected-distance diagnostic now tests all 182 imported
+same-record pairs. It defines 50 values at cap 250 and 72 values at cap 1000,
+so it still does not explain the source-cited 163 count. At cap 1000, 14
+defined values come from rows currently marked
+`excluded_by_appellation_min_length`, which is useful diagnostic pressure but
+not a source rule.
+
 The WNP/McKay-Bar-Natan source critique confirms the 5-8 appellation-length
 restriction and disputes several Rabbi II-27 Moshe Zacut variants
 (`ZKWT)`, `ZKWTW`, `M$H ZKWT)`, `M$H ZKWTW`). Since Rabbi II-27 has two date
@@ -193,6 +200,13 @@ That is still not a WRR reproduction because the final pair universe and
 `D(w)` formula remain unlocked. A variant comparison now checks term-printed,
 term-program, and fixed-250 skip settings side by side: all three produce 28
 defined corrected distances at cap 250.
+
+The separate direct all-lane diagnostic over all 182 imported same-record pairs
+has 50 defined values at cap 250 and 72 defined values at cap 1000. It is
+tracked in `docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md` and
+`protocols/wrr_corrected_distance_direct_all_lanes.toml`. A cap-1000
+reported-program formula rerun produced 0 changed pair rows versus the printed
+formula in this diagnostic.
 Implementation notes are now tracked in
 `docs/WRR_CORRECTED_DISTANCE_NOTES.md`.
 

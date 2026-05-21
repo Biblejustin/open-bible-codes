@@ -98,6 +98,11 @@ Already implemented:
   same smoke lane at `search-max-skip=1000` and joining term-level
   legacy ordinary-hit perturbation readiness output. Current local output
   defines 46 diagnostic corrected distances.
+- Direct all-lane corrected-distance diagnostic in
+  `protocols/wrr_corrected_distance_direct_all_lanes.toml`, testing all 182
+  imported same-record WRR2 pairs. Current output defines 50 diagnostic
+  corrected distances at cap 250 and 72 at cap 1000; see
+  `docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md`.
 - WRR claim-readiness gate in `scripts/check_wrr_claim_readiness.py`, wired
   into `protocols/wrr_audit_counts.toml`, keeping reproduction language blocked
   until pair universe, `D(w)`, full corrected distance, and permutation/aggregate

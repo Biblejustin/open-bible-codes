@@ -155,6 +155,8 @@ Use cautious language:
   term-program, and fixed-250 variants each produce 28 defined corrected
   distances at cap 250, and the high-cap 1000 split produces 46 defined
   diagnostic distances;
+- all-lane direct diagnostic over 182 imported same-record WRR2 pairs produces
+  72 defined diagnostic distances at cap 1000, not the source-cited 163;
 - full corrected-distance run and permutation statistic are not implemented as
   a claim-grade reproduction;
 - WRR remains under-specified in this project until the locked pair table,
