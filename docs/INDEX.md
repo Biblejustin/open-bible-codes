@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 302
+Documents indexed: 303
 
 ## Controls
 
@@ -300,6 +300,7 @@ Documents indexed: 302
 | STEP TAHOT Final Gate | `STEP_TAHOT_FINAL_GATE.md` |
 | STEP TAHOT Policy Hit Audit | `STEP_TAHOT_POLICY_HIT_AUDIT.md` |
 | STEP TAHOT Source Audit | `STEP_TAHOT_SOURCE_AUDIT.md` |
+| Strict Follow-Up Gate Summary | `STRICT_FOLLOWUP_GATE_SUMMARY.md` |
 | Study Lock Manifests | `STUDY_LOCK_MANIFESTS.md` |
 | Study Mapping Schemas | `STUDY_MAPPING_SCHEMAS.md` |
 | Surface Context Study | `SURFACE_CONTEXT_STUDY.md` |

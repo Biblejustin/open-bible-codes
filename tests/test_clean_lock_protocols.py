@@ -81,3 +81,12 @@ def test_greek_surface_context_review_tracks_manual_read() -> None:
     assert "ordinary \"name\" passages" in text
     assert "review-material" in text
     assert "category" in text
+
+
+def test_strict_followup_gate_summary_has_zero_claim_ready_rows() -> None:
+    text = Path("docs/STRICT_FOLLOWUP_GATE_SUMMARY.md").read_text(encoding="utf-8")
+
+    assert "| Hebrew concordance uncorrected queue | 87 | 0 |" in text
+    assert "| Greek surface new terms controlled rows | 5 | 0 |" in text
+    assert "All rows fail adjusted support" in text
+    assert "They do not pass a context-distance gate" in text
