@@ -68,7 +68,8 @@ def test_hebrew_concordance_report_tracks_initial_control_state() -> None:
         encoding="utf-8"
     )
 
-    assert "| Target rows | 3,577 |" in text
-    assert "| Representative control target rows | 6,790 |" in text
-    assert "| Rows with adjusted `combined_min_q_value <= 0.05` | 0 |" in text
-    assert "HEBREW_CONCORDANCE_WORDS_CONTROL_PILOT_REPORT.md" in text
+    assert "| Target rows | 3577 |" in text
+    assert "| Representative control target rows | 6790 |" in text
+    assert "| Rows with representative controls | 3398 |" in text
+    assert "87 rows only clear an uncorrected p<=0.05 screen" in text
+    assert "0 rows have adjusted representative-control support" in text
