@@ -47,15 +47,15 @@ Examples include:
 
 Same-chapter plus same-skip is a stronger filter than plain proximity, but it still screens short strings. It should be read as a smaller review queue, not a claim.
 
-## Next Check
+## Follow-Up Status
 
-- inspect the 25 strict examples by passage
-- compare Gog/Magog against unrelated 3-letter / 5-letter prophetic pairs
-- raise random controls only if runtime remains acceptable
+- Observed unrelated pair baselines are tracked in `docs/PAIR_BASELINES.md`.
+- Length-matched synthetic short-Hebrew pair baselines are tracked in
+  `docs/SYNTHETIC_PAIR_BASELINES.md`.
+- Gog/Magog prospective gating is tracked in
+  `docs/GOG_MAGOG_PROSPECTIVE_GATED_REPORT.md`.
 
-Observed unrelated pair baselines are now tracked in `docs/PAIR_BASELINES.md`.
-Length-matched synthetic short-Hebrew pair baselines are tracked in
-`docs/SYNTHETIC_PAIR_BASELINES.md`.
+The strict examples remain passage-review material, not evidence for a claim.
 
 ## Reproduce
 

@@ -63,14 +63,22 @@ This is a screening queue. Exact-center context means the base term appears in t
 
 The SBLGNT-only `αιμα` (haima; English: blood) and `υιος` (huios; English: son) rows need separate cross-text checks before they can be compared with the TR/SBLGNT `δοξα` (doxa; English: glory) overlap.
 
-## Next Check
+## Follow-Up Status
 
-- inspect the `αιμα` (haima; English: blood) and `υιος` (huios; English: son) letter paths and surface passages
-- run cross-text overlap checks for exact-center cohort rows
-- raise controls to 200/200 only for rows that survive manual context review
+- Manual context and letter-path review is tracked in
+  `docs/EXTENSION_EXACT_CENTER_COHORT_REVIEW.md`.
+- Cross-text filtering is tracked in
+  `docs/EXTENSION_EXACT_CENTER_CROSS_TEXT.md`.
+- 200/200 controls for the surviving overlap row are tracked in
+  `docs/EXTENSION_EXACT_CENTER_CONTROLS.md`.
+- The final exact-center gate is tracked in
+  `docs/EXTENSION_EXACT_CENTER_FINAL_GATE.md`.
+- Four-source and confirmatory doxa follow-ups are tracked in
+  `docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md` and
+  `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`.
 
-Manual context and letter-path review is now tracked in
-`docs/EXTENSION_EXACT_CENTER_COHORT_REVIEW.md`.
+The source-only `αιμα` (haima; English: blood) and `υιος` (huios; English: son)
+rows remain screens, not promoted candidates.
 
 ## Reproduce
 

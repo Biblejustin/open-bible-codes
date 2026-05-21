@@ -38,11 +38,18 @@ The final gate keeps only `δοξα` (doxa; English: glory) as a review row. It 
 Focused 1000/1000 follow-up controls are tracked in
 `docs/EXTENSION_EXACT_CENTER_DEEP_CONTROLS.md`.
 
-## Next Check
+## Follow-Up Status
 
-- if continuing extension work, review only `δοξα` (doxa; English: glory) unless looser source-specific rules are declared
-- compare against `docs/SYNTHETIC_EXTENSION_BASELINES.md` before promoting any short-term ELS pattern
-- keep `αιμα` (haima; English: blood) and `υιος` (huios; English: son) as source-only screens
+- Focused 1000/1000 controls are tracked in
+  `docs/EXTENSION_EXACT_CENTER_DEEP_CONTROLS.md`.
+- Synthetic extension baselines are tracked in
+  `docs/SYNTHETIC_EXTENSION_BASELINES.md`.
+- Four-source and confirmatory doxa follow-ups are tracked in
+  `docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md` and
+  `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`.
+
+Future extension work should review only `δοξα` (doxa; English: glory) unless a
+new prospective rule explicitly admits source-specific rows.
 
 ## Reproduce
 

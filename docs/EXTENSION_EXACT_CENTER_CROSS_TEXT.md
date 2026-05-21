@@ -41,13 +41,18 @@ Read:
 
 Cross-text support is a filter, not conclusive evidence. `δοξα` (doxa; English: glory) still has a hidden full extension phrase, not a surface phrase in the passage.
 
-## Next Check
+## Follow-Up Status
 
-- keep `δοξα` (doxa; English: glory) as the only exact-center cross-text extension review row
-- apply 200/200 controls only to cross-text rows
-- if testing SBLGNT-only rows, mark them as source-specific screens
+- 200/200 controls for the surviving `δοξα` (doxa; English: glory) row are
+  tracked in `docs/EXTENSION_EXACT_CENTER_CONTROLS.md`.
+- The final exact-center gate is tracked in
+  `docs/EXTENSION_EXACT_CENTER_FINAL_GATE.md`.
+- Four-source and confirmatory doxa follow-ups are tracked in
+  `docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md` and
+  `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`.
 
-Final gate report is now tracked in `docs/EXTENSION_EXACT_CENTER_FINAL_GATE.md`.
+The SBLGNT-only rows remain source-specific screens unless a new prospective
+rule explicitly includes source-only rows.
 
 ## Reproduce
 

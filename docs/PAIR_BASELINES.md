@@ -43,16 +43,17 @@ Read:
 
 The baseline pairs were chosen as declared unrelated comparators, not exhaustive controls. The next rigorous check is full paired controls for any baseline pair with comparable strict observed density.
 
-## Next Check
+## Follow-Up Status
 
-- add length-matched synthetic or shuffled pair baselines
-- keep Gog/Magog claims framed as exploratory unless they beat these baselines under the same controls
+- Full strict paired controls for MT_WLC Beast/Dragon are tracked in
+  `docs/BEAST_DRAGON_STRICT_CONTROLS.md`.
+- Length-matched synthetic 3+4 Hebrew pair baselines are tracked in
+  `docs/SYNTHETIC_PAIR_BASELINES.md`.
+- Gog/Magog prospective gating is tracked in
+  `docs/GOG_MAGOG_PROSPECTIVE_GATED_REPORT.md`.
 
-Full strict paired controls for MT_WLC Beast/Dragon are now tracked in
-`docs/BEAST_DRAGON_STRICT_CONTROLS.md`.
-
-Length-matched synthetic 3+4 Hebrew pair baselines are now tracked in
-`docs/SYNTHETIC_PAIR_BASELINES.md`.
+Gog/Magog claims should remain exploratory unless they beat these baselines
+under the same locked controls.
 
 ## Reproduce
 

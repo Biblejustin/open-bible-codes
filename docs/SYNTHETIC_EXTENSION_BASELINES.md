@@ -61,11 +61,18 @@ Surface-context review for these synthetic match rows is tracked in
 
 Synthetic strings are density controls, not lexical controls. Existing shuffled-term controls are still the stronger comparison for real Greek word rows. This report is useful mainly as a pressure test against pure letter-distribution effects.
 
-## Next Check
+## Follow-Up Status
 
-- inspect the synthetic examples that matched/exceeded any-type scores
-- keep `δοξα` (doxa; English: glory) under final-gate review only
-- avoid promoting source-only exact-center rows without cross-text support
+- Synthetic match context is tracked in
+  `docs/SYNTHETIC_EXTENSION_MATCH_REVIEW.md`.
+- The doxa exact-center result is tracked through the final gate in
+  `docs/EXTENSION_EXACT_CENTER_FINAL_GATE.md`.
+- Four-source and confirmatory doxa follow-ups are tracked in
+  `docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md` and
+  `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`.
+
+Source-only exact-center rows remain screens unless a newly locked prospective
+rule explicitly promotes source-specific candidates.
 
 ## Reproduce
 

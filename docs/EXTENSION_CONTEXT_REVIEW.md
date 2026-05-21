@@ -72,10 +72,14 @@ The generated `reports/extension_letter_paths.md` file now gives one compact tab
 
 This is the human review sheet for the 3 strict overlaps.
 
-## Next Stronger Review
+## Follow-Up Status
 
-- use `docs/EXTENSION_EXACT_CENTER_CONTROLS.md` as the deeper exact-center follow-up
-- use `docs/EXTENSION_EXACT_CENTER_COHORT_CONTROLS.md` to compare `δοξα` (doxa; English: glory) with the broader exact-center top-row cohort
+- Deeper exact-center follow-up is tracked in
+  `docs/EXTENSION_EXACT_CENTER_CONTROLS.md`.
+- Broader exact-center top-row comparison is tracked in
+  `docs/EXTENSION_EXACT_CENTER_COHORT_CONTROLS.md`.
+- The final gate is tracked in
+  `docs/EXTENSION_EXACT_CENTER_FINAL_GATE.md`.
 
 ## Reproduce
 

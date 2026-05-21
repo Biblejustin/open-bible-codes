@@ -39,11 +39,14 @@ Read:
 
 Random controls remain limited to 5 samples because short Hebrew strings can produce very large hit lists. Still, both term-shuffle and random controls point away from significance here.
 
-## Next Check
+## Follow-Up Status
 
-- use Beast/Dragon as a caution baseline when reviewing Gog/Magog
-- add length-matched synthetic pair controls for short Hebrew pairs
-- avoid promoting raw strict close-pair counts without paired controls
+- Beast/Dragon now serves as a caution baseline for Gog/Magog review.
+- Length-matched synthetic pair controls are tracked in
+  `docs/SYNTHETIC_PAIR_BASELINES.md`.
+- Broader pair baselines are tracked in `docs/PAIR_BASELINES.md`.
+
+Raw strict close-pair counts should not be promoted without paired controls.
 
 ## Reproduce
 

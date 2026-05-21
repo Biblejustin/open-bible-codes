@@ -133,14 +133,17 @@ It remains limited because the full phrase is hidden-path only, the base term is
 short, and synthetic extension controls show that same-skip phrase scoring can
 produce convincing-looking hidden phrases from control strings.
 
-## Next Step
+## Follow-Up Status
 
-The next defensible analysis is a broader prospective cohort, locked before any
-new results are inspected. Good candidates:
+The broader prospective cohort has now been split into locked follow-up lanes:
 
-- exact-center Greek theological terms;
-- fixed TR_NT/SBLGNT cross-text requirement;
-- same 1000/1000 controls;
-- saved context and letter-path outputs;
-- same promotion boundary: controlled review only unless a new claim standard is
-  registered in advance.
+- four-source claim follow-up:
+  `docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md`;
+- four-source confirmatory follow-up:
+  `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`;
+- exact-center final gate:
+  `docs/EXTENSION_EXACT_CENTER_FINAL_GATE.md`.
+
+Any next stronger analysis should be locked before new results are inspected and
+should keep the same promotion boundary: controlled review only unless a new
+claim standard is registered in advance.

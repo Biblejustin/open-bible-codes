@@ -290,14 +290,13 @@ Targeted next round:
    - Synthetic extension baselines: same-type synthetic controls do not match target scores, but any-type synthetic controls can match/exceed 2 of 4 rows with 3 detailed synthetic match rows.
    - Synthetic match review: all 3 synthetic match rows are ELS-only at the hit span; matched phrases appear elsewhere.
 
-## Next Commands To Add Or Run
+## Current Follow-Up Map
 
-Recommended next implementation:
-
-- Add larger/deeper controls only if we want to make formal extension claims.
-
-Recommended next analysis run:
-
-- Use the tracked `targeted_paired_controls` report as the focused-term baseline.
-- Use `docs/SYNTHETIC_PAIR_BASELINES.md` and `docs/PAIR_BASELINES.md` as the Gog/Magog baseline comparison.
-- Use `docs/EXTENSION_EXACT_CENTER_FINAL_GATE.md`, `docs/SYNTHETIC_EXTENSION_BASELINES.md`, and `docs/SYNTHETIC_EXTENSION_MATCH_REVIEW.md` as the filtered extension review baseline.
+- Focused-term baseline: tracked `targeted_paired_controls` report.
+- Gog/Magog baseline comparison: `docs/SYNTHETIC_PAIR_BASELINES.md` and
+  `docs/PAIR_BASELINES.md`.
+- Filtered extension review baseline: `docs/EXTENSION_EXACT_CENTER_FINAL_GATE.md`,
+  `docs/SYNTHETIC_EXTENSION_BASELINES.md`, and
+  `docs/SYNTHETIC_EXTENSION_MATCH_REVIEW.md`.
+- Formal extension claims require newly locked larger/deeper controls before any
+  promotion language.

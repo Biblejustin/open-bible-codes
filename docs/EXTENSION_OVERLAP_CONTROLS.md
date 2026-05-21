@@ -81,12 +81,20 @@ This is a stronger review queue than the 10/10 all-extension screen, but still n
 - Rows remain short Greek theological terms.
 - TR/SBLGNT overlap reduces text-form noise, but does not remove search-space effects.
 
-## Next Stronger Run
+## Follow-Up Status
 
-- raise controls to 200/200 for these 6 rows if runtime is acceptable
-- score only exact extension type and exact extension length, not any strong extension type
-- require exact center/span surface context in both TR_NT and SBLGNT
-- use the letter-path diagrams in `reports/extension_letter_paths.md` for John 5:13, Hebrews 13:16, and 2 Thessalonians 3:1
+- Exact-center surface-context filtering is tracked in
+  `docs/EXTENSION_EXACT_CENTER_COHORT_REVIEW.md`.
+- 200/200 controls for the surviving exact-center overlap row are tracked in
+  `docs/EXTENSION_EXACT_CENTER_CONTROLS.md`.
+- The final exact-center gate is tracked in
+  `docs/EXTENSION_EXACT_CENTER_FINAL_GATE.md`.
+- Four-source and confirmatory doxa follow-ups are tracked in
+  `docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md` and
+  `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`.
+
+Any stronger run should now be a newly locked prospective design, not a rerun
+of this post-screen overlap queue.
 
 ## Reproduce
 

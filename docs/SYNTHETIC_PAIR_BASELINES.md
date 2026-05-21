@@ -38,11 +38,16 @@ This strongly cautions against reading short Hebrew pair proximity as meaningful
 
 These synthetic strings are sampled from MT_WLC letter frequencies. They are not filtered for pronounceability or lexical validity. That is intentional: this is a density/control baseline, not a word-list claim.
 
-## Next Check
+## Follow-Up Status
 
-- require semantic surface context before reviewing short Hebrew pair hits
-- increase synthetic samples if making a formal claim
-- keep Gog/Magog as exploratory, not evidential, unless it beats length-matched baselines
+- Gog/Magog strict-pair limits are tracked in
+  `docs/GOG_MAGOG_STRICT_PAIR_CONTROLS.md`.
+- Beast/Dragon strict-pair controls are tracked in
+  `docs/BEAST_DRAGON_STRICT_CONTROLS.md`.
+- Broader pair baselines are tracked in `docs/PAIR_BASELINES.md`.
+
+Short Hebrew pair hits should remain exploratory unless a newly locked study
+requires semantic surface context and stronger length-matched controls.
 
 ## Reproduce
 
