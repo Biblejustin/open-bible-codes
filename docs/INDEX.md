@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 296
+Documents indexed: 297
 
 ## Controls
 
@@ -150,6 +150,7 @@ Documents indexed: 296
 | Greek Expanded Surface Follow-Up Report | `GREEK_EXPANDED_SURFACE_FOLLOWUP_REPORT.md` |
 | Greek Surface New Terms Prospective Report | `GREEK_SURFACE_NEW_TERMS_REPORT.md` |
 | Greek Surface Prospective Report | `GREEK_SURFACE_PROSPECTIVE_REPORT.md` |
+| Hebrew Concordance Words Control Pilot Report | `HEBREW_CONCORDANCE_WORDS_CONTROL_PILOT_REPORT.md` |
 | Hebrew Concordance Words Prospective Report | `HEBREW_CONCORDANCE_WORDS_PROSPECTIVE_REPORT.md` |
 | Hebrew Modern Geopolitical Prospective Report | `HEBREW_MODERN_GEOPOLITICAL_PROSPECTIVE_REPORT.md` |
 | Hebrew Theology Prospective Report | `HEBREW_THEOLOGY_PROSPECTIVE_REPORT.md` |

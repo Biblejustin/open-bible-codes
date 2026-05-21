@@ -1,0 +1,119 @@
+name = "hebrew_concordance_words_control_pilot"
+description = "Deterministic 200-row representative-control pilot for the Hebrew concordance clean-lock lane."
+manifest_out = "reports/hebrew_concordance_words_control_pilot/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "select_targets"
+description = "Select deterministic MT_WLC/UHB pilot targets from the full Hebrew concordance control-target table."
+argv = [
+  "-m",
+  "scripts.select_control_target_pilot",
+  "--targets",
+  "reports/hebrew_concordance_words_prospective/control_targets.csv",
+  "--out",
+  "reports/hebrew_concordance_words_control_pilot/control_targets.csv",
+  "--markdown-out",
+  "reports/hebrew_concordance_words_control_pilot/target_selection.md",
+  "--manifest-out",
+  "reports/hebrew_concordance_words_control_pilot/target_selection.manifest.json",
+  "--per-corpus",
+  "100",
+  "--top-per-corpus",
+  "20",
+  "--title",
+  "Hebrew Concordance Words Control Pilot Target Selection",
+]
+inputs = [
+  "scripts/select_control_target_pilot.py",
+  "reports/hebrew_concordance_words_prospective/control_targets.csv",
+]
+outputs = [
+  "reports/hebrew_concordance_words_control_pilot/control_targets.csv",
+  "reports/hebrew_concordance_words_control_pilot/target_selection.md",
+  "reports/hebrew_concordance_words_control_pilot/target_selection.manifest.json",
+]
+
+[[steps]]
+id = "paired_controls"
+description = "Run 1000+1000 paired controls over the deterministic pilot rows."
+argv = [
+  "-m",
+  "scripts.analyze_targeted_paired_controls",
+  "--target-summary",
+  "reports/hebrew_concordance_words_control_pilot/control_targets.csv",
+  "--target-corpus",
+  "MT_WLC",
+  "--target-corpus",
+  "UHB",
+  "--min-skip",
+  "2",
+  "--max-skip",
+  "100",
+  "--term-shuffle-samples",
+  "1000",
+  "--random-samples",
+  "1000",
+  "--jobs",
+  "0",
+  "--summary-out",
+  "reports/hebrew_concordance_words_control_pilot/paired_controls_summary.csv",
+  "--examples-out",
+  "reports/hebrew_concordance_words_control_pilot/paired_controls_examples.csv",
+  "--markdown-out",
+  "reports/hebrew_concordance_words_control_pilot/paired_controls.md",
+  "--manifest-out",
+  "reports/hebrew_concordance_words_control_pilot/paired_controls.manifest.json",
+  "--title",
+  "Hebrew Concordance Words Control Pilot",
+]
+inputs = [
+  "scripts/analyze_targeted_paired_controls.py",
+  "reports/hebrew_concordance_words_control_pilot/control_targets.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uhb.toml",
+  "els/corpus.py",
+  "els/search.py",
+  "els/statistics.py",
+  "els/stats.py",
+]
+outputs = [
+  "reports/hebrew_concordance_words_control_pilot/paired_controls_summary.csv",
+  "reports/hebrew_concordance_words_control_pilot/paired_controls_examples.csv",
+  "reports/hebrew_concordance_words_control_pilot/paired_controls.md",
+  "reports/hebrew_concordance_words_control_pilot/paired_controls.manifest.json",
+]
+
+[[steps]]
+id = "pilot_report"
+description = "Build a compact tracked report for the Hebrew concordance control pilot."
+argv = [
+  "-m",
+  "scripts.build_control_pilot_report",
+  "--full-targets",
+  "reports/hebrew_concordance_words_prospective/control_targets.csv",
+  "--pilot-targets",
+  "reports/hebrew_concordance_words_control_pilot/control_targets.csv",
+  "--controls",
+  "reports/hebrew_concordance_words_control_pilot/paired_controls_summary.csv",
+  "--out",
+  "docs/HEBREW_CONCORDANCE_WORDS_CONTROL_PILOT_REPORT.md",
+  "--manifest-out",
+  "reports/hebrew_concordance_words_control_pilot/report.manifest.json",
+  "--title",
+  "Hebrew Concordance Words Control Pilot Report",
+  "--description",
+  "This report summarizes a deterministic 200-row MT_WLC/UHB paired-control pilot for the Hebrew concordance clean-lock lane.",
+]
+inputs = [
+  "scripts/build_control_pilot_report.py",
+  "els/term_display.py",
+  "reports/hebrew_concordance_words_prospective/control_targets.csv",
+  "reports/hebrew_concordance_words_control_pilot/control_targets.csv",
+  "reports/hebrew_concordance_words_control_pilot/paired_controls_summary.csv",
+]
+outputs = [
+  "docs/HEBREW_CONCORDANCE_WORDS_CONTROL_PILOT_REPORT.md",
+  "reports/hebrew_concordance_words_control_pilot/report.manifest.json",
+]

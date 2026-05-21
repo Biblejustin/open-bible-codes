@@ -38,6 +38,25 @@ The generated control-target list contains 6,790 rows: 3,398 for `MT_WLC` and
 random controls per target row, so the full control pass is a large run and
 should not be started casually.
 
+## Control Pilot
+
+A deterministic 200-row MT_WLC/UHB pilot has now been run:
+
+| Metric | Rows |
+| --- | ---: |
+| Pilot target rows | 200 |
+| Term-shuffle samples per row | 1,000 |
+| Random samples per row | 1,000 |
+| Rows not unusual under paired controls | 167 |
+| Rows with uncorrected `combined_min_p_ge <= 0.05` | 33 |
+| Rows with adjusted `combined_min_q_value <= 0.05` | 0 |
+
+Tracked pilot report:
+`docs/HEBREW_CONCORDANCE_WORDS_CONTROL_PILOT_REPORT.md`.
+
+The pilot supports a conservative read: even in a top-density/stratified subset,
+no row survived row-family correction.
+
 ## Local Generated Files
 
 These generated files are ignored by git and can be regenerated from the
@@ -52,8 +71,8 @@ protocol:
 
 ## Next Decision
 
-Next work should choose one of these before launching controls:
+Next work should choose one of these before launching full controls:
 
 1. Full registered controls over all 6,790 target rows.
-2. A smaller registered pilot control run over a fixed top-risk subset.
+2. A larger fixed pilot subset if more calibration is desired.
 3. A stratified sample control run across term length, corpus, and hit-count bands.

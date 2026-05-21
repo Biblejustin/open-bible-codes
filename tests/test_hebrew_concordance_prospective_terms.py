@@ -70,4 +70,5 @@ def test_hebrew_concordance_report_tracks_initial_control_state() -> None:
 
     assert "| Target rows | 3,577 |" in text
     assert "| Representative control target rows | 6,790 |" in text
-    assert "representative controls pending" in text
+    assert "| Rows with adjusted `combined_min_q_value <= 0.05` | 0 |" in text
+    assert "HEBREW_CONCORDANCE_WORDS_CONTROL_PILOT_REPORT.md" in text

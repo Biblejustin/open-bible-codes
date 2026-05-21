@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 111
+Protocols indexed: 112
 
 ## Analysis
 
@@ -81,6 +81,7 @@ Protocols indexed: 111
 | greek_expanded_surface_control_pool | Real-word surface-frequency control pool for tightened expanded Greek surface rows. | 1 | terms/greek_expanded_prospective_terms.csv | reports/greek_expanded_surface_control_pool | `greek_expanded_surface_control_pool.toml` |
 | greek_pattern_versions | Consolidate Greek exact-center pattern presence and source-specific control status. | 1 |  | reports/greek_pattern_versions | `greek_pattern_versions.toml` |
 | greek_surface_length4_vocabulary_controls | Post-discovery length-4 Greek surface follow-up against generated real surface-vocabula... | 6 | terms/greek_surface_prospective_terms.csv | reports/greek_surface_length4_vocab_controls | `greek_surface_length4_vocabulary_controls.toml` |
+| hebrew_concordance_words_control_pilot | Deterministic 200-row representative-control pilot for the Hebrew concordance clean-loc... | 3 |  | reports/hebrew_concordance_words_control_pilot | `hebrew_concordance_words_control_pilot.toml` |
 | hebrew_control_version_presence | Capped exact ELS hit-pattern presence for Hebrew null and frequency controls across MT-... | 1 | terms/frequency_anchors.csv, terms/null_controls.csv | reports/hebrew_control_version_presence | `hebrew_control_version_presence.toml` |
 | hebrew_modern_geopolitical_controlled_review | Join the broad Hebrew modern/geopolitical MT-family version-presence run with represent... | 3 | terms/modern_names_dates.csv | reports/hebrew_modern_geopolitical_controlled_review | `hebrew_modern_geopolitical_controlled_review.toml` |
 | hebrew_screening_controlled_review | Join the broader Hebrew screening MT-family version-presence run with representative pa... | 3 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_tribes.csv, t... | reports/hebrew_screening_controlled_review | `hebrew_screening_controlled_review.toml` |
