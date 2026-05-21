@@ -3,6 +3,7 @@ from collections import Counter
 from pathlib import Path
 
 from els.normalization import normalize_text
+from scripts import build_hebrew_concordance_uncorrected_audit as audit
 from scripts import build_hebrew_concordance_prospective_terms as builder
 
 
@@ -94,3 +95,33 @@ def test_hebrew_concordance_top_uncorrected_context_review_keeps_triage_read() -
     assert "corrected family-level result remains negative" in text
     assert "common-letter/short-string effects" in text
     assert "triage category" in text
+
+
+def test_hebrew_concordance_uncorrected_audit_classifies_common_risks() -> None:
+    row = {
+        "category": "strong_proper_names",
+        "normalized_length": "4",
+        "exact_all_source_patterns": "2000",
+        "exact_total_hits": "50000",
+    }
+
+    flags = audit.classify_row(row)
+
+    assert flags == [
+        "no_adjusted_support",
+        "short_string",
+        "high_pattern_volume",
+        "proper_name_gloss",
+    ]
+    assert audit.primary_read(row, flags) == "high-volume short-string/common-letter risk; triage only"
+
+
+def test_hebrew_concordance_uncorrected_audit_doc_tracks_generated_read() -> None:
+    text = Path("docs/HEBREW_CONCORDANCE_UNCORRECTED_SCREENING_AUDIT.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert "| Audit rows | 87 |" in text
+    assert "| `proper_name_gloss` flags | 42 |" in text
+    assert "| high-volume short-string/common-letter risk; triage only | 10 |" in text
+    assert "Do not use this audit as a claim list" in text

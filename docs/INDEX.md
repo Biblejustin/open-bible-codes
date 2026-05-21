@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 301
+Documents indexed: 302
 
 ## Controls
 
@@ -259,6 +259,7 @@ Documents indexed: 301
 | Hebrew Concordance Prospective Terms | `HEBREW_CONCORDANCE_PROSPECTIVE_TERMS.md` |
 | Hebrew Concordance Top Uncorrected Context Review | `HEBREW_CONCORDANCE_TOP_UNCORRECTED_CONTEXT_REVIEW.md` |
 | Hebrew Concordance Uncorrected Review Queue | `HEBREW_CONCORDANCE_UNCORRECTED_QUEUE.md` |
+| Hebrew Concordance Uncorrected Screening Audit | `HEBREW_CONCORDANCE_UNCORRECTED_SCREENING_AUDIT.md` |
 | Hebrew MT Source Candidates | `HEBREW_MT_SOURCE_CANDIDATES.md` |
 | Hebrew Screening All-Codes Collection | `HEBREW_SCREENING_ALL_CODES_COLLECTION.md` |
 | Hebrew Screening All-Codes Triage | `HEBREW_SCREENING_ALL_CODES_TRIAGE.md` |
