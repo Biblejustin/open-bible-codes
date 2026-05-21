@@ -99,6 +99,11 @@ def test_final_report_includes_clean_lock_closeout() -> None:
     assert "0 Hebrew concordance rows and 0 Greek surface rows" in text
     assert "`docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`" in text
 
+    draft = Path("docs/FINAL_REPORT_DRAFT.md").read_text(encoding="utf-8")
+    outline = Path("docs/FINAL_REPORT_OUTLINE.md").read_text(encoding="utf-8")
+    assert "0 Hebrew concordance" in draft
+    assert "`docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`" in outline
+
 
 def test_consolidated_findings_include_clean_lock_closeout() -> None:
     text = Path("docs/CONSOLIDATED_FINDINGS.md").read_text(encoding="utf-8")

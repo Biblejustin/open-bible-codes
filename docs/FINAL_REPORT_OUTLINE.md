@@ -23,6 +23,8 @@ Primary summary artifacts:
 - `docs/CONSOLIDATED_FINDINGS.md`
 - `docs/CENTERED_OCCURRENCE_INDEX.md`
 - `docs/CLAIM_CATALOG.md`
+- `docs/CLEAN_LOCK_RESULTS_SUMMARY.md`
+- `docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`
 - `reports/INDEX.md`
 
 Methodology artifacts:
@@ -50,6 +52,7 @@ State plainly:
 - centered-self and relevant-center occurrences exist and are worth listing;
 - matched controls explain many high-count rows;
 - no current result should be called a public claim.
+- clean-lock follow-up queues add 0 claim-ready rows under strict gates.
 
 ### 2. Hypothesis And Scope
 

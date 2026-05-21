@@ -36,6 +36,13 @@ The strongest review candidates are:
 - Hebrew `ישוע` (Yeshua; English: Yeshua/Jeshua) and `משיח` (Mashiach; English: Messiah/anointed one) centered-self rows, which should be listed but kept
   under control-background caution.
 
+The latest clean-lock follow-up lanes do not add claim-ready rows. Hebrew
+concordance words produced 87 uncorrected-only representative-control prompts
+and 0 adjusted-support terms. Greek surface new terms produced 5 controlled
+rows with `q <= 0.05`, but manual context review found local surface-context
+or self-lexeme effects. The strict follow-up gate leaves 0 Hebrew concordance
+rows and 0 Greek surface rows claim-ready from these clean-lock queues.
+
 ## Hypothesis And Scope
 
 The working hypothesis is that original-language biblical texts may contain
