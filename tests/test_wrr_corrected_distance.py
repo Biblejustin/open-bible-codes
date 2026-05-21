@@ -68,7 +68,7 @@ class WrrCorrectedDistanceScriptTests(unittest.TestCase):
         self.assertEqual(set(occurrences["term"]), {(0, 0, 0), (1, 0, 0)})
         self.assertEqual(
             occurrences["term"][(1, 0, 0)],
-            (WrrElsOccurrence((0, 3, 5, 7), 2, 0, 8),),
+            (WrrElsOccurrence((0, 2, 4, 6), 2, 0, 8),),
         )
 
     def test_collect_perturbed_occurrences_skips_too_short_terms(self) -> None:

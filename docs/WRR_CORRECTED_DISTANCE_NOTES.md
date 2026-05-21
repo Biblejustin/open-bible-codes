@@ -42,6 +42,9 @@ The paper's Appendix A.1 and A.2 define these pieces:
 - Perturbed ELS offsets keep the early letters on the ordinary progression and
   perturb the last three gaps:
   `n, n+d, ..., n+(k-4)d, n+(k-3)d+x, n+(k-2)d+x+y, n+(k-1)d+x+y+z`.
+- The exact perturbed letters must spell the word, but the source descriptions
+  say distance measurements use the unperturbed `(n,d,k)` positions for the
+  perturbed ELS.
 - MBBK Appendix A defines `c(w,w')` as the fraction of valid perturbation values
   greater than or equal to the ordinary proximity; the extracted WRR 1994 text
   uses strict greater-than wording in one passage. The current source-count
@@ -145,9 +148,11 @@ Already implemented:
   exact perturbed matches, and 0 are ready for pair-level perturbed `Q`.
 - real-corpus corrected-distance smoke driver in
   `scripts/analyze_wrr_corrected_distance.py`. It generates exact perturbed
-  rows from ordinary ELS hits, labels domains per perturbation triple, and
-  feeds domain-defined rows through the pair-level corrected-distance bridge.
-  Current smoke output for the 86 length-5..8 candidate-lane pairs has 0
+  rows from ordinary ELS hits, stores the source-described unperturbed `(n,d,k)`
+  offsets for distance/domain measurement, labels domains per perturbation
+  triple, and feeds domain-defined rows through the pair-level
+  corrected-distance bridge. Current smoke output for the 86 length-5..8
+  candidate-lane pairs has 0
   defined corrected distances: 56 pairs lack a valid ordinary perturbation and
   30 have fewer than 10 valid perturbations; the maximum valid perturbation
   count is 3.

@@ -17,7 +17,7 @@ from els.search import iter_els_query_matches_by_lanes
 from els.wrr import (
     WrrElsOccurrence,
     is_perturbed_els_match,
-    perturbed_offsets,
+    ordinary_els_offsets,
     perturbation_triples,
     skip_cap_for_expected_count,
     wrr_corrected_distance_from_perturbation_sets,
@@ -274,7 +274,9 @@ def collect_perturbed_occurrences_by_term(
         for triple in active_triples:
             if not is_perturbed_els_match(text, query, start, skip, triple):
                 continue
-            offsets = perturbed_offsets(start, skip, len(query), triple)
+            # Sources require exact perturbed letters, but use the unperturbed
+            # (n,d,k) positions for distance/domain measurements.
+            offsets = ordinary_els_offsets(start, skip, len(query))
             raw_by_query[query].setdefault(triple, set()).add((offsets, skip))
 
     occurrences_by_query: dict[
