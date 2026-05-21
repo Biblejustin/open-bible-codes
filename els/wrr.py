@@ -13,6 +13,7 @@ import math
 from collections import Counter
 from collections.abc import Iterable, Iterator, Mapping
 from dataclasses import dataclass
+from functools import lru_cache
 
 
 @dataclass(frozen=True)
@@ -183,6 +184,7 @@ def nearest_integer_half_up(numerator: int, denominator: int) -> int:
     return quotient
 
 
+@lru_cache(maxsize=None)
 def wrr_row_widths(skip: int, *, count: int = 10) -> tuple[int, ...]:
     """Return the first WRR candidate row widths for an ELS skip.
 
@@ -230,6 +232,27 @@ def cylindrical_letter_distance_squared(
     col_delta = min(raw_col_delta, row_width - raw_col_delta)
     row_delta = abs(left_row - right_row)
     return col_delta * col_delta + row_delta * row_delta
+
+
+def _cylindrical_coord_distance_squared(
+    left: tuple[int, int],
+    right: tuple[int, int],
+    row_width: int,
+) -> int:
+    left_row, left_col = left
+    right_row, right_col = right
+    raw_col_delta = abs(left_col - right_col)
+    col_delta = min(raw_col_delta, row_width - raw_col_delta)
+    row_delta = abs(left_row - right_row)
+    return col_delta * col_delta + row_delta * row_delta
+
+
+@lru_cache(maxsize=500_000)
+def _offset_row_coords(
+    offsets: tuple[int, ...],
+    row_width: int,
+) -> tuple[tuple[int, int], ...]:
+    return tuple(divmod(offset, row_width) for offset in offsets)
 
 
 def wrr2_els_sl_distance_at_row_width(
@@ -342,12 +365,34 @@ def wrr_els_els_distance_at_row_width(
     right = tuple(right_offsets)
     if len(left) < 2 or len(right) < 2:
         raise ValueError("both ELS offset sequences must contain at least two offsets")
-    left_f_squared = cylindrical_letter_distance_squared(left[0], left[1], row_width)
-    right_f_squared = cylindrical_letter_distance_squared(right[0], right[1], row_width)
+    if row_width <= 0:
+        raise ValueError("row_width must be > 0")
+    if any(offset < 0 for offset in left + right):
+        raise ValueError("offsets must be >= 0")
+    return _wrr_els_els_distance_at_row_width_fast(left, right, row_width)
+
+
+def _wrr_els_els_distance_at_row_width_fast(
+    left: tuple[int, ...],
+    right: tuple[int, ...],
+    row_width: int,
+) -> int:
+    left_coords = _offset_row_coords(left, row_width)
+    right_coords = _offset_row_coords(right, row_width)
+    left_f_squared = _cylindrical_coord_distance_squared(
+        left_coords[0],
+        left_coords[1],
+        row_width,
+    )
+    right_f_squared = _cylindrical_coord_distance_squared(
+        right_coords[0],
+        right_coords[1],
+        row_width,
+    )
     nearest_squared = min(
-        cylindrical_letter_distance_squared(left_offset, right_offset, row_width)
-        for left_offset in left
-        for right_offset in right
+        _cylindrical_coord_distance_squared(left_coord, right_coord, row_width)
+        for left_coord in left_coords
+        for right_coord in right_coords
     )
     return left_f_squared + right_f_squared + nearest_squared
 
@@ -379,12 +424,16 @@ def wrr_els_els_alpha(
 
     left = tuple(left_offsets)
     right = tuple(right_offsets)
+    if len(left) < 2 or len(right) < 2:
+        raise ValueError("both ELS offset sequences must contain at least two offsets")
+    if any(offset < 0 for offset in left + right):
+        raise ValueError("offsets must be >= 0")
     widths = wrr_row_widths(left_skip, count=row_width_count) + wrr_row_widths(
         right_skip,
         count=row_width_count,
     )
     return sum(
-        wrr_els_els_proximity_at_row_width(left, right, row_width=row_width)
+        1.0 / _wrr_els_els_distance_at_row_width_fast(left, right, row_width)
         for row_width in widths
     )
 
@@ -641,6 +690,26 @@ def wrr_weighted_els_pair_proximity(
     )
 
 
+def _wrr_weighted_els_pair_proximity_fast(
+    left: WrrElsOccurrence,
+    right: WrrElsOccurrence,
+    *,
+    text_length: int,
+    row_width_count: int,
+) -> float:
+    start = max(left.domain_start, right.domain_start)
+    end = min(left.domain_end, right.domain_end)
+    if end <= start:
+        return 0.0
+    return ((end - start) / text_length) * wrr_els_els_alpha(
+        left.offsets,
+        right.offsets,
+        left_skip=left.skip,
+        right_skip=right.skip,
+        row_width_count=row_width_count,
+    )
+
+
 def wrr_word_pair_proximity(
     left_occurrences: Iterable[WrrElsOccurrence],
     right_occurrences: Iterable[WrrElsOccurrence],
@@ -654,8 +723,10 @@ def wrr_word_pair_proximity(
     right_rows = tuple(right_occurrences)
     if not left_rows or not right_rows:
         return 0.0
+    for occurrence in left_rows + right_rows:
+        validate_wrr_occurrence(occurrence, text_length=text_length)
     return sum(
-        wrr_weighted_els_pair_proximity(
+        _wrr_weighted_els_pair_proximity_fast(
             left,
             right,
             text_length=text_length,
@@ -925,10 +996,43 @@ def binomial_upper_tail(n: int, k: int, probability: float) -> float:
         return 0.0
     if not 0 <= probability <= 1:
         raise ValueError("probability must be in [0, 1]")
-    return sum(
-        math.comb(n, j) * probability**j * (1.0 - probability) ** (n - j)
-        for j in range(k, n + 1)
+    if probability == 0:
+        return 1.0 if k <= 0 else 0.0
+    if probability == 1:
+        return 1.0
+    mean = n * probability
+    if k <= mean:
+        return _clamp_probability(
+            1.0 - _binomial_range_sum(n, 0, k - 1, probability),
+        )
+    return _clamp_probability(_binomial_range_sum(n, k, n, probability))
+
+
+def _binomial_range_sum(n: int, start: int, end: int, probability: float) -> float:
+    if start > end:
+        return 0.0
+    complement = 1.0 - probability
+    log_prob = (
+        math.lgamma(n + 1)
+        - math.lgamma(start + 1)
+        - math.lgamma(n - start + 1)
+        + start * math.log(probability)
+        + (n - start) * math.log(complement)
     )
+    current = math.exp(log_prob)
+    total = current
+    for j in range(start, end):
+        current *= ((n - j) / (j + 1)) * (probability / complement)
+        total += current
+    return total
+
+
+def _clamp_probability(value: float) -> float:
+    if value < 0.0:
+        return 0.0
+    if value > 1.0:
+        return 1.0
+    return value
 
 
 def p2_product_statistic(c_values: Iterable[float]) -> float:

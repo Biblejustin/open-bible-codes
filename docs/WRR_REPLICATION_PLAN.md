@@ -103,6 +103,11 @@ Already implemented:
   imported same-record WRR2 pairs. Current output defines 50 diagnostic
   corrected distances at cap 250 and 72 at cap 1000; see
   `docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md`.
+- WRR2 cross-pair grid in `scripts/build_wrr_cross_pair_grid.py` and
+  `protocols/wrr_cross_pair_grid.toml`, crossing every imported appellation
+  with every imported date for future date-label permutation diagnostics.
+  Current cap-250 diagnostic output defines 1,423 corrected distances over
+  5,208 generated rows; see `docs/WRR_CROSS_PAIR_GRID.md`.
 - WRR claim-readiness gate in `scripts/check_wrr_claim_readiness.py`, wired
   into `protocols/wrr_audit_counts.toml`, keeping reproduction language blocked
   until pair universe, `D(w)`, full corrected distance, and permutation/aggregate
@@ -133,7 +138,8 @@ Still needed:
 - optimized full corrected-distance run over the final locked pair universe;
 - WRR claim-grade aggregate runner for `P1`, `P2`, `P3`, and `P4` over all
   declared pairs once `c(w,w')` exists;
-- permutation driver that shuffles date/rabbi pairings under the declared rule;
+- permutation driver that shuffles date/rabbi pairings under the declared rule,
+  using the cross-pair corrected-distance matrix once locked;
 - report that labels each run as reproduction, failed reproduction, or
   under-specified.
 

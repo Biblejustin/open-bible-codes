@@ -1,0 +1,440 @@
+#!/usr/bin/env python3
+"""Build a WRR2 appellation/date cross-pair grid for permutation diagnostics."""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import time
+from datetime import UTC, datetime
+from pathlib import Path
+
+from els import __version__
+from els.wrr import is_wrr_rabbi_title_appellation
+
+
+TERMS = Path("reports/wrr_1994/wrr2_terms.csv")
+COUNTS = Path("reports/wrr_1994/wrr2_genesis_counts.csv")
+SKIP_CAPS = Path("reports/wrr_1994/wrr2_skip_caps.csv")
+OUT = Path("reports/wrr_1994/wrr2_cross_pair_grid.csv")
+SUMMARY_OUT = Path("reports/wrr_1994/wrr2_cross_pair_grid_summary.csv")
+MD_OUT = Path("reports/wrr_1994/wrr2_cross_pair_grid.md")
+MANIFEST_OUT = Path("reports/wrr_1994/wrr2_cross_pair_grid.manifest.json")
+
+APP_CATEGORY = "wrr_appellation"
+DATE_CATEGORY = "wrr_date"
+WNP_DISPUTED_ZACUT_CONCEPT = "WRR2 27"
+WNP_DISPUTED_ZACUT_TERMS = frozenset({"ZKWTA", "ZKWTW", "M$HZKWTA", "M$HZKWTW"})
+
+FIELDNAMES = [
+    "pair_id",
+    "concept",
+    "appellation_concept",
+    "date_concept",
+    "same_record_pair",
+    "appellation_term_id",
+    "appellation_term",
+    "appellation_normalized",
+    "appellation_starts_with_rabbi_title",
+    "appellation_length",
+    "appellation_hit_count",
+    "appellation_skip_cap",
+    "appellation_target_reached",
+    "date_term_id",
+    "date_term",
+    "date_normalized",
+    "date_length",
+    "date_hit_count",
+    "date_skip_cap",
+    "date_target_reached",
+    "appellation_min_length_ok",
+    "appellation_wrr_length_ok",
+    "date_wrr_length_ok",
+    "length_filtered_pair_ok",
+    "wnp_disputed_zacut_appellation",
+    "candidate_lane",
+    "pair_review_status",
+    "eligibility_notes",
+]
+
+SUMMARY_FIELDNAMES = [
+    "pairs",
+    "same_record_pairs",
+    "cross_record_pairs",
+    "appellations",
+    "dates",
+    "appellation_concepts",
+    "date_concepts",
+    "appellation_min_length_pairs",
+    "length_filtered_pairs",
+    "wnp_disputed_zacut_pairs",
+    "rabbi_title_pairs",
+    "non_rabbi_title_pairs",
+    "length_filtered_non_rabbi_title_pairs",
+    "zero_hit_pairs",
+    "pairs_with_skip_cap_target_unreached",
+    "status",
+]
+
+
+def main(argv: list[str] | None = None) -> int:
+    started = time.perf_counter()
+    args = build_parser().parse_args(argv)
+    terms = read_rows(args.terms)
+    counts = {row["term_id"]: row for row in read_rows(args.counts)}
+    skip_caps = {row["term_id"]: row for row in read_optional_rows(args.skip_caps)}
+    rows = build_grid_rows(
+        terms,
+        counts,
+        skip_caps,
+        app_min_length=args.appellation_min_term_length,
+        min_length=args.min_term_length,
+        max_length=args.max_term_length,
+    )
+    summary = summarize(rows)
+    write_rows(args.out, FIELDNAMES, rows)
+    write_rows(args.summary_out, SUMMARY_FIELDNAMES, [summary])
+    write_markdown(args.markdown_out, rows, summary, args)
+    if args.manifest_out:
+        write_manifest(args, rows, summary, started)
+    print(args.out)
+    print(args.summary_out)
+    print(args.markdown_out)
+    if args.manifest_out:
+        print(args.manifest_out)
+    return 0
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--terms", type=Path, default=TERMS)
+    parser.add_argument("--counts", type=Path, default=COUNTS)
+    parser.add_argument("--skip-caps", type=Path, default=SKIP_CAPS)
+    parser.add_argument("--appellation-min-term-length", type=int, default=5)
+    parser.add_argument("--min-term-length", type=int, default=5)
+    parser.add_argument("--max-term-length", type=int, default=8)
+    parser.add_argument("--out", type=Path, default=OUT)
+    parser.add_argument("--summary-out", type=Path, default=SUMMARY_OUT)
+    parser.add_argument("--markdown-out", type=Path, default=MD_OUT)
+    parser.add_argument("--manifest-out", type=Path, default=MANIFEST_OUT)
+    return parser
+
+
+def read_rows(path: Path) -> list[dict[str, str]]:
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        return list(csv.DictReader(handle))
+
+
+def read_optional_rows(path: Path | None) -> list[dict[str, str]]:
+    if not path or not path.exists():
+        return []
+    return read_rows(path)
+
+
+def build_grid_rows(
+    terms: list[dict[str, str]],
+    counts: dict[str, dict[str, str]],
+    skip_caps: dict[str, dict[str, str]],
+    *,
+    app_min_length: int,
+    min_length: int,
+    max_length: int,
+) -> list[dict[str, object]]:
+    apps = sorted(
+        (row for row in terms if row.get("category") == APP_CATEGORY),
+        key=lambda row: row.get("term_id", ""),
+    )
+    dates = sorted(
+        (row for row in terms if row.get("category") == DATE_CATEGORY),
+        key=lambda row: row.get("term_id", ""),
+    )
+    return [
+        build_pair_row(
+            app,
+            date,
+            counts,
+            skip_caps,
+            app_min_length=app_min_length,
+            min_length=min_length,
+            max_length=max_length,
+        )
+        for app in apps
+        for date in dates
+    ]
+
+
+def build_pair_row(
+    app: dict[str, str],
+    date: dict[str, str],
+    counts: dict[str, dict[str, str]],
+    skip_caps: dict[str, dict[str, str]],
+    *,
+    app_min_length: int,
+    min_length: int,
+    max_length: int,
+) -> dict[str, object]:
+    app_count = counts.get(app["term_id"], {})
+    date_count = counts.get(date["term_id"], {})
+    app_skip = skip_caps.get(app["term_id"], {})
+    date_skip = skip_caps.get(date["term_id"], {})
+    app_length = int_or_zero(app_count.get("normalized_length"))
+    date_length = int_or_zero(date_count.get("normalized_length"))
+    app_min_ok = app_length >= app_min_length
+    app_wrr_length_ok = min_length <= app_length <= max_length
+    date_wrr_length_ok = min_length <= date_length <= max_length
+    length_filtered_ok = app_wrr_length_ok and date_wrr_length_ok
+    same_record = app.get("concept") == date.get("concept")
+    wnp_disputed = is_wnp_disputed_zacut_appellation(app)
+    rabbi_title = is_wrr_rabbi_title_appellation(app.get("term", ""))
+    concept = (
+        app.get("concept", "")
+        if same_record
+        else f"{app.get('concept', '')}->{date.get('concept', '')}"
+    )
+    return {
+        "pair_id": f"{app['term_id']}__{date['term_id']}",
+        "concept": concept,
+        "appellation_concept": app.get("concept", ""),
+        "date_concept": date.get("concept", ""),
+        "same_record_pair": same_record,
+        "appellation_term_id": app["term_id"],
+        "appellation_term": app.get("term", ""),
+        "appellation_normalized": app_count.get("normalized_term", ""),
+        "appellation_starts_with_rabbi_title": rabbi_title,
+        "appellation_length": app_length,
+        "appellation_hit_count": int_or_zero(app_count.get("hit_count")),
+        "appellation_skip_cap": app_skip.get("skip_cap", ""),
+        "appellation_target_reached": app_skip.get("target_reached", ""),
+        "date_term_id": date["term_id"],
+        "date_term": date.get("term", ""),
+        "date_normalized": date_count.get("normalized_term", ""),
+        "date_length": date_length,
+        "date_hit_count": int_or_zero(date_count.get("hit_count")),
+        "date_skip_cap": date_skip.get("skip_cap", ""),
+        "date_target_reached": date_skip.get("target_reached", ""),
+        "appellation_min_length_ok": app_min_ok,
+        "appellation_wrr_length_ok": app_wrr_length_ok,
+        "date_wrr_length_ok": date_wrr_length_ok,
+        "length_filtered_pair_ok": length_filtered_ok,
+        "wnp_disputed_zacut_appellation": wnp_disputed,
+        "candidate_lane": candidate_lane(app_min_ok, length_filtered_ok),
+        "pair_review_status": pair_review_status(same_record, wnp_disputed),
+        "eligibility_notes": "; ".join(
+            eligibility_notes(
+                app_length=app_length,
+                date_length=date_length,
+                app_min_ok=app_min_ok,
+                app_wrr_length_ok=app_wrr_length_ok,
+                date_wrr_length_ok=date_wrr_length_ok,
+                app_hits=int_or_zero(app_count.get("hit_count")),
+                date_hits=int_or_zero(date_count.get("hit_count")),
+                app_target_reached=app_skip.get("target_reached", ""),
+                date_target_reached=date_skip.get("target_reached", ""),
+                same_record=same_record,
+                wnp_disputed=wnp_disputed,
+            )
+        ),
+    }
+
+
+def candidate_lane(app_min_ok: bool, length_filtered_ok: bool) -> str:
+    if not app_min_ok:
+        return "excluded_by_appellation_min_length"
+    if length_filtered_ok:
+        return "length_5_8_permutation_candidate"
+    return "appellation_min_length_permutation_candidate"
+
+
+def pair_review_status(same_record: bool, wnp_disputed: bool) -> str:
+    if wnp_disputed:
+        return "diagnostic_exclusion_candidate_not_locked"
+    if same_record:
+        return "same_record_source_pair"
+    return "cross_record_permutation_pair"
+
+
+def eligibility_notes(
+    *,
+    app_length: int,
+    date_length: int,
+    app_min_ok: bool,
+    app_wrr_length_ok: bool,
+    date_wrr_length_ok: bool,
+    app_hits: int,
+    date_hits: int,
+    app_target_reached: object,
+    date_target_reached: object,
+    same_record: bool,
+    wnp_disputed: bool,
+) -> list[str]:
+    notes: list[str] = ["same-record pair" if same_record else "cross-record permutation pair"]
+    if not app_min_ok:
+        notes.append(f"appellation length {app_length} below minimum")
+    if not app_wrr_length_ok:
+        notes.append("appellation outside 5..8 lane")
+    if not date_wrr_length_ok:
+        notes.append(f"date length {date_length} outside 5..8 lane")
+    if app_hits == 0:
+        notes.append("appellation has zero Genesis hits at smoke cap")
+    if date_hits == 0:
+        notes.append("date has zero Genesis hits at smoke cap")
+    if app_target_reached not in ("", None) and not truthy(app_target_reached):
+        notes.append("appellation expected-count skip cap target not reached")
+    if date_target_reached not in ("", None) and not truthy(date_target_reached):
+        notes.append("date expected-count skip cap target not reached")
+    if wnp_disputed:
+        notes.append("WNP Zacut dispute diagnostic only; not an exclusion rule")
+    return notes
+
+
+def is_wnp_disputed_zacut_appellation(row: dict[str, str]) -> bool:
+    return (
+        row.get("concept") == WNP_DISPUTED_ZACUT_CONCEPT
+        and row.get("category") == APP_CATEGORY
+        and row.get("term") in WNP_DISPUTED_ZACUT_TERMS
+    )
+
+
+def summarize(rows: list[dict[str, object]]) -> dict[str, object]:
+    same_record_pairs = sum(1 for row in rows if truthy(row["same_record_pair"]))
+    app_min_pairs = sum(1 for row in rows if truthy(row["appellation_min_length_ok"]))
+    length_pairs = sum(1 for row in rows if truthy(row["length_filtered_pair_ok"]))
+    rabbi_title_pairs = sum(
+        1 for row in rows if truthy(row["appellation_starts_with_rabbi_title"])
+    )
+    return {
+        "pairs": len(rows),
+        "same_record_pairs": same_record_pairs,
+        "cross_record_pairs": len(rows) - same_record_pairs,
+        "appellations": len({row["appellation_term_id"] for row in rows}),
+        "dates": len({row["date_term_id"] for row in rows}),
+        "appellation_concepts": len({row["appellation_concept"] for row in rows}),
+        "date_concepts": len({row["date_concept"] for row in rows}),
+        "appellation_min_length_pairs": app_min_pairs,
+        "length_filtered_pairs": length_pairs,
+        "wnp_disputed_zacut_pairs": sum(
+            1 for row in rows if truthy(row["wnp_disputed_zacut_appellation"])
+        ),
+        "rabbi_title_pairs": rabbi_title_pairs,
+        "non_rabbi_title_pairs": len(rows) - rabbi_title_pairs,
+        "length_filtered_non_rabbi_title_pairs": sum(
+            1
+            for row in rows
+            if truthy(row["length_filtered_pair_ok"])
+            and not truthy(row["appellation_starts_with_rabbi_title"])
+        ),
+        "zero_hit_pairs": sum(
+            1
+            for row in rows
+            if int_or_zero(row["appellation_hit_count"]) == 0
+            or int_or_zero(row["date_hit_count"]) == 0
+        ),
+        "pairs_with_skip_cap_target_unreached": sum(
+            1
+            for row in rows
+            if target_unreached(row["appellation_target_reached"])
+            or target_unreached(row["date_target_reached"])
+        ),
+        "status": "diagnostic_cross_pair_grid_not_claim_grade",
+    }
+
+
+def write_rows(path: Path, fieldnames: list[str], rows: list[dict[str, object]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def write_markdown(
+    path: Path,
+    rows: list[dict[str, object]],
+    summary: dict[str, object],
+    args: argparse.Namespace,
+) -> None:
+    lines = [
+        "# WRR2 Cross-Pair Grid",
+        "",
+        "Status: diagnostic cross-pair table for permutation prep, not a locked WRR pair universe.",
+        "",
+        "This builds every imported WRR2 appellation against every imported WRR2 date",
+        "from the working ANU/McKay source. It is meant to support future date-label",
+        "permutation diagnostics after corrected distances are computed for the grid.",
+        "",
+        "## Summary",
+        "",
+        "| Item | Count |",
+        "| --- | ---: |",
+    ]
+    for field in SUMMARY_FIELDNAMES:
+        lines.append(f"| `{field}` | {summary[field]} |")
+    lines.extend(
+        [
+            "",
+            "## Rules Used",
+            "",
+            f"- Appellation minimum length: `{args.appellation_min_term_length}`.",
+            f"- Length lane: `{args.min_term_length}..{args.max_term_length}` for both appellation and date terms.",
+            "- WNP Zacut rows are flagged as diagnostics only, not excluded.",
+            "- Cross-record rows are not source pairs; they are generated for permutation prep.",
+        ]
+    )
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+
+def write_manifest(
+    args: argparse.Namespace,
+    rows: list[dict[str, object]],
+    summary: dict[str, object],
+    started: float,
+) -> None:
+    payload = {
+        "tool": Path(__file__).name,
+        "edls_version": __version__,
+        "created_utc": datetime.now(UTC).isoformat(),
+        "duration_seconds": round(time.perf_counter() - started, 6),
+        "inputs": {
+            "terms": str(args.terms),
+            "counts": str(args.counts),
+            "skip_caps": str(args.skip_caps),
+        },
+        "parameters": {
+            "appellation_min_term_length": args.appellation_min_term_length,
+            "min_term_length": args.min_term_length,
+            "max_term_length": args.max_term_length,
+        },
+        "summary": summary,
+        "rows": len(rows),
+        "outputs": {
+            "csv": str(args.out),
+            "summary": str(args.summary_out),
+            "markdown": str(args.markdown_out),
+            "manifest": str(args.manifest_out),
+        },
+    }
+    args.manifest_out.parent.mkdir(parents=True, exist_ok=True)
+    args.manifest_out.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
+def int_or_zero(value: object) -> int:
+    if value in ("", None):
+        return 0
+    return int(float(str(value)))
+
+
+def truthy(value: object) -> bool:
+    return str(value).strip().lower() in {"1", "true", "yes"}
+
+
+def target_unreached(value: object) -> bool:
+    return value not in ("", None) and not truthy(value)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

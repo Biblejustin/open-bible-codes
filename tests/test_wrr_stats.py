@@ -611,6 +611,13 @@ class WrrStatsTests(unittest.TestCase):
 
         self.assertAlmostEqual(p1_binomial_tail(values), binomial_upper_tail(3, 2, 0.2))
 
+    def test_binomial_upper_tail_handles_large_n_without_overflow(self) -> None:
+        tail = binomial_upper_tail(1423, 400, 0.2)
+
+        self.assertGreaterEqual(tail, 0.0)
+        self.assertLessEqual(tail, 1.0)
+        self.assertTrue(math.isfinite(tail))
+
     def test_is_wrr_rabbi_title_appellation_uses_source_prefix(self) -> None:
         self.assertTrue(is_wrr_rabbi_title_appellation("RBYABRHM"))
         self.assertTrue(is_wrr_rabbi_title_appellation("RBYYHWDH"))

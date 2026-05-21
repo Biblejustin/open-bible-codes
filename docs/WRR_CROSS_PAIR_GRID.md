@@ -1,0 +1,80 @@
+# WRR Cross-Pair Grid
+
+Status: diagnostic-only, not a WRR reproduction.
+
+The WRR corrected-distance permutation test needs distances for generated
+appellation/date pairings, not only the same-record source pairs. This grid
+crosses every imported WRR2 appellation with every imported WRR2 date so future
+date-label permutation work can read a complete candidate matrix.
+
+## Reproduce
+
+```bash
+python3 -m scripts.run_protocol protocols/wrr_cross_pair_grid.toml --resume
+```
+
+## Current Grid Shape
+
+| Item | Count |
+| --- | ---: |
+| pairs | 5208 |
+| same-record source pairs | 182 |
+| cross-record permutation pairs | 5026 |
+| appellations | 168 |
+| dates | 31 |
+| appellation concepts | 30 |
+| date concepts | 30 |
+| appellation-min-length pairs | 4743 |
+| length-5..8 pairs | 2231 |
+| WNP disputed Zacut diagnostic pairs | 124 |
+| Rabbi-title pairs | 992 |
+| non-Rabbi-title pairs | 4216 |
+| length-filtered non-Rabbi-title pairs | 1633 |
+| zero-hit pairs at count-smoke cap | 3696 |
+| pairs with skip-cap target unreached | 2233 |
+
+## Cap-250 Corrected-Distance Diagnostic
+
+| Item | Count |
+| --- | ---: |
+| selected grid rows | 5208 |
+| defined `c(w,w')` rows | 1423 |
+| ordinary-not-valid rows | 3720 |
+| under-minimum-valid rows | 65 |
+| minimum corrected distance | 0.008 |
+| maximum valid perturbations for one pair | 125 |
+
+Status by candidate lane:
+
+| Candidate lane | Defined | Ordinary not valid | Under minimum |
+| --- | ---: | ---: | ---: |
+| `length_5_8_permutation_candidate` | 718 | 1463 | 50 |
+| `appellation_min_length_permutation_candidate` | 383 | 2128 | 1 |
+| `excluded_by_appellation_min_length` | 322 | 129 | 14 |
+
+Status by review flag:
+
+| Review flag | Defined | Ordinary not valid | Under minimum |
+| --- | ---: | ---: | ---: |
+| `cross_record_permutation_pair` | 1329 | 3520 | 61 |
+| `same_record_source_pair` | 48 | 124 | 2 |
+| `diagnostic_exclusion_candidate_not_locked` | 46 | 76 | 2 |
+
+Cap-250 diagnostic aggregate:
+
+| Metric | Value |
+| --- | ---: |
+| defined `c(w,w')` values | 1423 |
+| P1 | 0.321861824814 |
+| P2 | 0.202650210076 |
+| P3 | 0.174975735761 |
+| P4 | 0.137608477166 |
+
+## Read
+
+- Same-record rows preserve the imported WRR2 source pairing.
+- Cross-record rows are generated permutation-prep rows.
+- WNP Zacut rows are flagged because the WNP critique disputes those records;
+  that flag is not yet an exclusion rule.
+- Corrected-distance output from this grid is diagnostic until the final pair
+  universe, `D(w)` rule, and permutation procedure are locked.

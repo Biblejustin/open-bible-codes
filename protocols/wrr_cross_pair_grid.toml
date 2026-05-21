@@ -1,0 +1,90 @@
+name = "wrr_cross_pair_grid"
+description = "Build the WRR2 appellation/date cross-pair grid and run cap-250 corrected-distance diagnostics."
+manifest_out = "reports/wrr_1994/cross_pair_grid/protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_wrr2_cross_pair_grid"
+description = "Cross every imported WRR2 appellation with every imported WRR2 date for permutation prep."
+argv = [
+  "-m", "scripts.build_wrr_cross_pair_grid",
+  "--terms", "reports/wrr_1994/wrr2_terms.csv",
+  "--counts", "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "--skip-caps", "reports/wrr_1994/wrr2_skip_caps.csv",
+  "--out", "reports/wrr_1994/wrr2_cross_pair_grid.csv",
+  "--summary-out", "reports/wrr_1994/wrr2_cross_pair_grid_summary.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_cross_pair_grid.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_cross_pair_grid.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_cross_pair_grid.py",
+  "reports/wrr_1994/wrr2_terms.csv",
+  "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "reports/wrr_1994/wrr2_skip_caps.csv",
+  "els/wrr.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_cross_pair_grid.csv",
+  "reports/wrr_1994/wrr2_cross_pair_grid_summary.csv",
+  "reports/wrr_1994/wrr2_cross_pair_grid.md",
+  "reports/wrr_1994/wrr2_cross_pair_grid.manifest.json",
+]
+
+[[steps]]
+id = "compute_wrr2_cross_pair_corrected_distance_250"
+description = "Run direct perturbed-letter corrected-distance diagnostics over the generated cross-pair grid at cap 250."
+argv = [
+  "-m", "scripts.analyze_wrr_corrected_distance",
+  "--pair-table", "reports/wrr_1994/wrr2_cross_pair_grid.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--candidate-lane", "all",
+  "--min-skip", "2",
+  "--search-max-skip", "250",
+  "--direction", "both",
+  "--jobs", "0",
+  "--row-width-count", "10",
+  "--minimum-valid", "10",
+  "--skip-cap-mode", "term",
+  "--skip-cap-formula", "printed",
+  "--out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250.csv",
+  "--summary-out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250_summary.csv",
+  "--markdown-out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250.md",
+  "--manifest-out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_corrected_distance.py",
+  "reports/wrr_1994/wrr2_cross_pair_grid.csv",
+  "configs/example_koren_genesis.toml",
+  "els/wrr.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250.csv",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250_summary.csv",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250.md",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250.manifest.json",
+]
+
+[[steps]]
+id = "aggregate_wrr2_cross_pair_corrected_distance_250"
+description = "Aggregate cap-250 cross-pair corrected-distance diagnostics into P1..P4."
+argv = [
+  "-m", "scripts.analyze_wrr_corrected_distance_aggregate",
+  "--input", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250.csv",
+  "--p1-threshold", "0.2",
+  "--out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250_aggregate.csv",
+  "--markdown-out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250_aggregate.md",
+  "--manifest-out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250_aggregate.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_corrected_distance_aggregate.py",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250.csv",
+  "els/wrr.py",
+]
+outputs = [
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250_aggregate.csv",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250_aggregate.md",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250_aggregate.manifest.json",
+]
