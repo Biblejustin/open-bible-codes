@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import csv
-from datetime import UTC, datetime
 from pathlib import Path
 
 from els.term_display import display_term
@@ -53,7 +52,7 @@ def report_markdown(
     lines = [
         "# Gog/Magog Pair Prospective Report",
         "",
-        f"Generated: {datetime.now(UTC).isoformat()}",
+        "Generated: recorded in local protocol manifest only.",
         "",
         "Status: prospective controlled review output, not a claim.",
         "",

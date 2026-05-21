@@ -23,3 +23,10 @@ def test_locked_rule_displays_gog_magog_with_transliteration_and_gloss() -> None
     )
 
     assert "`גוג` (Gog; English: Gog) / `מגוג` (Magog; English: Magog)" in text
+
+
+def test_report_omits_volatile_generated_timestamp() -> None:
+    text = report_markdown([], [], [])
+
+    assert "Generated: recorded in local protocol manifest only." in text
+    assert "T" not in text.splitlines()[2]

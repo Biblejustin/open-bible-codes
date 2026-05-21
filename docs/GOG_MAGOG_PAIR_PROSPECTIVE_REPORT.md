@@ -1,6 +1,6 @@
 # Gog/Magog Pair Prospective Report
 
-Generated: 2026-05-10T17:36:03.624157+00:00
+Generated: recorded in local protocol manifest only.
 
 Status: prospective controlled review output, not a claim.
 
