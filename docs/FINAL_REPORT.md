@@ -345,7 +345,8 @@ WRR 1994 has not yet been reproduced. The current repo imports source files,
 audits source shape, counts terms in Koren Genesis, and documents methodology
 gaps. It does not yet implement the full corrected distance `c(w,w')`, the
 locked pair eligibility path, term-specific skip caps, or the permutation-rank
-procedure needed for a claim-grade WRR reproduction.
+procedure needed for a claim-grade WRR reproduction. The current claim-readiness
+gate remains blocked for those method-lock reasons.
 
 Source artifacts:
 
@@ -353,6 +354,7 @@ Source artifacts:
 - `docs/WRR_REPLICATION_PLAN.md`
 - `docs/WRR_METHODOLOGY_GAPS.md`
 - `docs/WRR_CORRECTED_DISTANCE_NOTES.md`
+- `docs/WRR_CLAIM_READINESS.md`
 
 ## Current Status Labels
 

@@ -778,6 +778,10 @@ track. It then builds a generated report index and writes
 `reports/real_report_run/summary.md`. It does not expand declared screening
 lists, widen skip ranges, or promote rows to claims.
 
+WRR claim readiness is explicitly gated in `docs/WRR_CLAIM_READINESS.md`; it is
+blocked until the pair universe, `D(w)` formula, full corrected-distance run,
+and aggregate/permutation procedure are locked.
+
 ## Best Next Work
 
 The most useful next work is not more raw counting. The broad search and

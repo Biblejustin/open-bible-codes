@@ -203,7 +203,8 @@ The report-run summary should currently say:
 - WRR remains under-specified: the report includes source/import/text-checksum
   lock, count smoke outputs, and an ANU source-shape check, but not the locked
   pair table, corrected-distance, and permutation statistic required for a
-  reproduction claim.
+  reproduction claim. The explicit readiness gate is tracked in
+  `docs/WRR_CLAIM_READINESS.md` and remains blocked.
 - `υιοσ` (huios; English: son) and `αιμα` (haima; English: blood) remain weaker hidden-path candidates because their exact
   patterns are missing from one or more compared Greek NT sources.
 - no row is claim-grade yet.

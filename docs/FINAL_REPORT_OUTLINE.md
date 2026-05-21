@@ -154,7 +154,8 @@ Use cautious language:
 - full corrected-distance run and permutation statistic are not implemented as
   a claim-grade reproduction;
 - WRR remains under-specified in this project until the locked pair table,
-  final `D(w)` decision, and permutation procedure are complete.
+  final `D(w)` decision, and permutation procedure are complete;
+- current readiness gate: `docs/WRR_CLAIM_READINESS.md`, blocked.
 
 ### 9. Claim-Language Boundary
 
