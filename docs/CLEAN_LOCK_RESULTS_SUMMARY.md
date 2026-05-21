@@ -20,9 +20,12 @@ keeps the conservative read visible in one place.
 | --- | --- |
 | Greek surface new terms | `docs/GREEK_SURFACE_NEW_TERMS_REPORT.md` |
 | Greek surface new terms controls | `docs/GREEK_SURFACE_NEW_TERMS_CONTROL_EVALUATION.md` |
+| Greek surface new terms context review | `docs/GREEK_SURFACE_NEW_TERMS_CONTEXT_REVIEW.md` |
 | Hebrew Gospel/genealogy | `docs/COMPOUND_EXTENSION_PROSPECTIVE_REPORT.md` |
 | Hebrew concordance words | `docs/HEBREW_CONCORDANCE_WORDS_PROSPECTIVE_REPORT.md` |
 | Hebrew concordance control pilot | `docs/HEBREW_CONCORDANCE_WORDS_CONTROL_PILOT_REPORT.md` |
+| Hebrew concordance uncorrected queue | `docs/HEBREW_CONCORDANCE_UNCORRECTED_QUEUE.md` |
+| Hebrew concordance uncorrected audit | `docs/HEBREW_CONCORDANCE_UNCORRECTED_SCREENING_AUDIT.md` |
 
 ## Read
 
@@ -34,13 +37,19 @@ control run reduced 6,790 control rows to 136 uncorrected-only control rows and
 0 adjusted-support rows. At the term-summary level that reads as 87
 uncorrected-only terms and 0 adjusted-support terms.
 
+The Hebrew concordance uncorrected audit keeps those 87 terms bounded as a
+triage list: 38 ordinary lexical prompts, 33 proper-name/gloss prompts, 10
+high-volume short-string/common-letter prompts, 5 sparse all-source prompts,
+and 1 control-artifact prompt. It does not create a claim list.
+
 The Greek surface new-terms lane remains different: 5 controlled surface rows
-met the registered `q <= 0.05` threshold. Those rows need manual context review
-before any stronger statement, because the report is surface-context review
-material and not a theological, prophetic, historical, or statistical claim.
+met the registered `q <= 0.05` threshold. Manual context review found ordinary
+local surface-context/self-lexeme effects, so the result stays in the
+review-material category and not a theological, prophetic, historical, or
+statistical claim.
 
 ## Next Work
 
-1. Manual context review for the 5 Greek surface new-terms control rows.
-2. If desired, inspect the 87 Hebrew concordance uncorrected-only terms as review prompts only.
-3. Decide whether any follow-up lane should be preregistered from the Greek manual review, instead of mining the full result table after the fact.
+1. Any next follow-up should be preregistered from stricter gates before searching.
+2. Hebrew concordance follow-up gates should exclude adjusted-negative, sparse, high-volume short-string, and proper-name/gloss rows unless they are handled in separate strata.
+3. Greek follow-up gates should exclude direct self-lexeme rows and define a context-distance rule before rerunning controls.

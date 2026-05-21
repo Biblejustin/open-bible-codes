@@ -66,6 +66,11 @@ def test_clean_lock_results_summary_tracks_completed_lanes() -> None:
     assert "| Hebrew Gospel/genealogy | 27 |" in text
     assert "| Hebrew concordance words | 3,577 |" in text
     assert "0 adjusted-support terms" in text
+    assert "38 ordinary lexical prompts" in text
+    assert "10" in text
+    assert "high-volume short-string/common-letter prompts" in text
+    assert "ordinary" in text
+    assert "local surface-context/self-lexeme effects" in text
 
 
 def test_greek_surface_context_review_tracks_manual_read() -> None:
