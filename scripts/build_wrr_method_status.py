@@ -267,8 +267,9 @@ def corrected_distance_status(
         f"{row.get('variant', '')}: {row.get('defined_corrected_distances', '')} defined"
         for row in variant_rows
     )
+    total_defined = sum(defined_counts)
     evidence_parts = [
-        f"{variants}; maximum valid perturbation count {max_valid}; total defined {sum(defined_counts)}"
+        f"{variants}; maximum valid perturbation count {max_valid}; total defined {total_defined}"
     ]
     highcap = highcap_evidence(
         highcap_corrected_distance_row,
@@ -280,10 +281,20 @@ def corrected_distance_status(
     return {
         "decision_area": "Corrected distance c(w,w')",
         "status": "smoke_only",
-        "current_read": "Smoke driver exists, but current candidate lane produces no defined corrected distances.",
+        "current_read": corrected_distance_current_read(total_defined),
         "evidence": "; ".join(evidence_parts),
-        "next_action": "Optimize and rerun over final pair universe after D(w) and source rows are locked.",
+        "next_action": "Extend direct perturbed search over final pair universe after D(w) and source rows are locked.",
     }
+
+
+def corrected_distance_current_read(total_defined: int) -> str:
+    if total_defined:
+        return (
+            "Direct perturbed-letter smoke driver now produces defined corrected distances in the "
+            "current candidate lane, but this remains diagnostic until the pair universe and D(w) "
+            "formula are locked."
+        )
+    return "Smoke driver exists, but current candidate lane produces no defined corrected distances."
 
 
 def highcap_evidence(
@@ -302,14 +313,14 @@ def highcap_evidence(
         )
     if perturbation_row:
         parts.append(
-            "term diagnostic: "
+            "legacy ordinary-hit perturbation diagnostic: "
             f"{perturbation_row.get('rows_with_hits', '')}/{perturbation_row.get('rows', '')} rows with hits, "
             f"max row-min exact {perturbation_row.get('max_exact_perturbation_matches', '')}, "
             f"{perturbation_row.get('rows_with_checked_under_10_exact_matches', '')} rows under 10 exact"
         )
     if pair_readiness_row:
         parts.append(
-            "pair readiness: "
+            "legacy ordinary-hit pair readiness: "
             f"{pair_readiness_row.get('pairs_ready', '')} ready, "
             f"{pair_readiness_row.get('pairs_missing_checked_hits', '')} missing hits, "
             f"{pair_readiness_row.get('pairs_under_10_exact_matches', '')} under exact"

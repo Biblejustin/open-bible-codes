@@ -142,8 +142,9 @@ that the printed WRR expected-ELS window formula differs from the formula used
 by the WRR programs. The current code supports both formula choices; the
 skip-cap audit keeps printed selected while reporting program caps side by side,
 and the corrected-distance smoke comparison now runs term-printed,
-term-program, and fixed-250 variants. Current smoke output still defines 0
-corrected distances, so a full reproduction driver must choose paper formula
+term-program, and fixed-250 variants. Current direct-search smoke output
+defines 28 corrected distances at cap 250 and the cap-1000 split diagnostic
+defines 46, so a full reproduction driver must still choose paper formula
 versus program formula before final `D(w)` calculations.
 
 The ANU/McKay data page provides plain-text WRR lists in a modified

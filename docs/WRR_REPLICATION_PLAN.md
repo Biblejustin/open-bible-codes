@@ -63,29 +63,31 @@ Already implemented:
 - WRR perturbation diagnostic in
   `scripts/analyze_wrr_perturbation_diagnostics.py`, wired into
   `protocols/wrr_audit_counts.toml`, now splitting in-bound perturbations from
-  exact perturbed matches.
+  exact perturbed matches for ordinary-hit diagnostics.
 - WRR perturbation pair-readiness join in
   `scripts/analyze_wrr_perturbation_pair_readiness.py`, wired into
   `protocols/wrr_audit_counts.toml`, summarizing whether lock-prep pairs pass
-  the checked exact-perturbation threshold before pair-level perturbed `Q`.
+  the older ordinary-hit exact-perturbation threshold before pair-level
+  perturbed `Q`. This is retained as a legacy diagnostic, not a direct-search
+  readiness gate.
 - WRR corrected-distance smoke driver in
   `scripts/analyze_wrr_corrected_distance.py`, wired into
-  `protocols/wrr_audit_counts.toml`, generating exact perturbed rows from
-  ordinary hits, labeling domains per perturbation triple, and applying the
-  source-count `v/m` corrected-distance bridge. Current length-5..8 smoke output
-  defines 0 corrected distances.
+  `protocols/wrr_audit_counts.toml`, generating exact perturbed rows by direct
+  perturbed-letter search, labeling domains per perturbation triple, and
+  applying the source-count `v/m` corrected-distance bridge. Current length-5..8
+  cap-250 smoke output defines 28 corrected distances.
 - WRR corrected-distance skip-cap variant comparison in
   `scripts/compare_wrr_corrected_distance_variants.py`, wired into
   `protocols/wrr_audit_counts.toml`, comparing term-printed, term-program, and
-  fixed-250 settings. Current output defines 0 corrected distances for all
-  three variants; fixed-250 only raises the maximum valid perturbation count
-  from 3 to 4.
+  fixed-250 settings. Current output defines 28 corrected distances for all
+  three variants, each with maximum valid perturbation count 125.
 - WRR corrected-distance aggregate diagnostic in
   `scripts/analyze_wrr_corrected_distance_aggregate.py`, wired into
   `protocols/wrr_audit_counts.toml`, computing P1/P2 over all defined
   corrected-distance values and P3/P4 over the smaller non-Rabbi-title sample.
-  Current length-5..8 smoke output has 0 defined values, so P1..P4 remain
-  blank.
+  Current length-5..8 cap-250 smoke output has 28 defined values and diagnostic
+  P1..P4 values; this is not claim-grade until the pair universe, `D(w)`, and
+  permutation procedure are locked.
 - Corrected-distance shard support in `scripts/analyze_wrr_corrected_distance.py`
   plus `scripts/merge_wrr_corrected_distance_shards.py`; see
   `docs/WRR_WINDOWS_SPLIT.md` and
@@ -94,8 +96,8 @@ Already implemented:
 - High-cap corrected-distance split diagnostic in
   `protocols/wrr_corrected_distance_highcap_1000_split_2.toml`, rerunning the
   same smoke lane at `search-max-skip=1000` and joining term-level
-  perturbation readiness output. Current local output still defines 0 corrected
-  distances.
+  legacy ordinary-hit perturbation readiness output. Current local output
+  defines 46 diagnostic corrected distances.
 - WRR claim-readiness gate in `scripts/check_wrr_claim_readiness.py`, wired
   into `protocols/wrr_audit_counts.toml`, keeping reproduction language blocked
   until pair universe, `D(w)`, full corrected distance, and permutation/aggregate

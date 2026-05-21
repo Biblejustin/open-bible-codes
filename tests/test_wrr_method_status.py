@@ -115,12 +115,51 @@ class WrrMethodStatusTests(unittest.TestCase):
         self.assertEqual(by_area["Corrected distance c(w,w')"]["status"], "smoke_only")
         self.assertIn("maximum valid perturbation count 4", by_area["Corrected distance c(w,w')"]["evidence"])
         self.assertIn("high-cap 1000 split: 0 defined over 86 pairs", by_area["Corrected distance c(w,w')"]["evidence"])
-        self.assertIn("term diagnostic: 80/120 rows with hits", by_area["Corrected distance c(w,w')"]["evidence"])
+        self.assertIn("legacy ordinary-hit perturbation diagnostic: 80/120 rows with hits", by_area["Corrected distance c(w,w')"]["evidence"])
         self.assertIn("max row-min exact 12", by_area["Corrected distance c(w,w')"]["evidence"])
-        self.assertIn("pair readiness: 0 ready, 40 missing hits, 46 under exact", by_area["Corrected distance c(w,w')"]["evidence"])
+        self.assertIn("legacy ordinary-hit pair readiness: 0 ready, 40 missing hits, 46 under exact", by_area["Corrected distance c(w,w')"]["evidence"])
         self.assertEqual(by_area["Aggregate statistic and permutation"]["status"], "source_locked_not_built")
         self.assertIn("G min P4 rank 4", by_area["Aggregate statistic and permutation"]["evidence"])
         self.assertIn("0 defined c-values from 86 rows", by_area["Aggregate statistic and permutation"]["evidence"])
+
+    def test_corrected_distance_status_summarizes_defined_smoke_rows(self) -> None:
+        rows = build_status_rows(
+            text_row={
+                "normalized_letters": "78064",
+                "verse_count": "2075",
+                "normalized_text_sha256": "abc123",
+            },
+            pair_row={
+                "source_records": "32",
+                "source_appellations": "174",
+                "source_dates": "31",
+                "source_undated_records": "2",
+                "source_same_record_pairs": "182",
+                "appellation_min_length_same_record_pairs": "165",
+                "appellation_min_length": "5",
+                "length_filtered_same_record_pairs": "86",
+                "length_filter_min": "5",
+                "length_filter_max": "8",
+                "expected_published_pairs": "163",
+            },
+            skip_row={
+                "rows": "120",
+                "program_cap_lt_printed": "13",
+                "program_cap_eq_printed": "107",
+                "target_unreached_rows": "55",
+            },
+            variant_rows=[
+                {"variant": "term_printed", "defined_corrected_distances": "28", "max_pair_valid_perturbations": "125"},
+                {"variant": "fixed_250", "defined_corrected_distances": "28", "max_pair_valid_perturbations": "125"},
+            ],
+        )
+
+        corrected = {row["decision_area"]: row for row in rows}["Corrected distance c(w,w')"]
+
+        self.assertEqual(corrected["status"], "smoke_only")
+        self.assertIn("produces defined corrected distances", corrected["current_read"])
+        self.assertIn("total defined 56", corrected["evidence"])
+        self.assertIn("Extend direct perturbed search", corrected["next_action"])
 
     def test_markdown_cell_escapes_pipes(self) -> None:
         self.assertEqual(markdown_cell("a|b\nc"), "a\\|b c")

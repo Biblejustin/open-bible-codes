@@ -83,7 +83,7 @@ refutation of the WRR paper.
 | Exclusions | Every excluded appellation/date row has a citable rule | Not locked; one Zacut-appellation exclusion would close 165 to 163, but that is only a diagnostic hypothesis. |
 | Skip caps | Term-specific WRR `D(w)` windows applied for each accepted term | Not locked; helpers now support both the printed WRR formula and the reported WRR-program formula. The skip-cap audit keeps printed selected while reporting program caps side by side. Current pair/control screens still use broad fixed caps for smoke tests. |
 | Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Helpers now include conservative supplied-row domain labeling, real-corpus WRR2 domain diagnostics with undefined-reason labels, defined-domain-only ordinary `Q(w,w')` diagnostics, exact perturbed-ELS match checks, domain-weighted `Q(w,w')` summation for domain-labeled ELS rows, a tested pair-level corrected-distance arithmetic bridge for already-domain-labeled perturbation sets, a smoke real-corpus perturbed-row/domain driver, and the source-count WRR `v/m` rank step. Undefined `c(w,w')` conditions are source-backed; optimized full-run corrected distances over the final pair universe are still missing. |
-| Aggregate statistic | `P1`, `P2`, `P3`, `P4`, rank handling, and `rho0` run over the locked pair set | P1..P4 diagnostic aggregation now exists for defined corrected-distance rows; P3/P4 use the smaller non-Rabbi-title sample. Current smoke output has 0 defined values. No reproduction driver can run until the pair set and corrected distances are fixed. |
+| Aggregate statistic | `P1`, `P2`, `P3`, `P4`, rank handling, and `rho0` run over the locked pair set | P1..P4 diagnostic aggregation now exists for defined corrected-distance rows; P3/P4 use the smaller non-Rabbi-title sample. Current direct-search smoke output has 28 defined values at cap 250 and 46 defined values at cap 1000. No reproduction driver can run until the pair set, `D(w)` formula, and permutation procedure are locked. |
 | Permutation test | Date/rabbi pairings shuffled under the declared WRR rule with recorded seeds/counts | Not built. |
 | Report label | Result can be marked reproduction, failed reproduction, or under-specified | Current label must remain `under_specified`; `docs/WRR_CLAIM_READINESS.md` keeps the claim gate blocked. |
 
@@ -169,29 +169,30 @@ pairs, and 129 pairs with no defined-domain pair. In the length-5..8 smoke lane
 specifically, 30 of 86 pairs have defined-domain ordinary `Q`, 16 are complete,
 14 are incomplete, and 56 have no defined-domain pair.
 
-The perturbation diagnostic now distinguishes boundary validity from exact
-perturbed matches. In the current output, all 959 smoke-cap hits across 64 rows
-with hits keep all 125 perturbation triples in bounds, but every row with hits
-has fewer than 10 exact perturbed matches. Exact-match counts range from 1 to
-5, with median 1. This is still only a term-hit diagnostic, not a pair-level
-corrected-distance calculation.
+The retained perturbation diagnostic distinguishes boundary validity from exact
+perturbed matches over ordinary ELS hits. In the current output, all 959
+smoke-cap ordinary hits across 64 rows with hits keep all 125 perturbation
+triples in bounds, but every row with ordinary hits has fewer than 10 exact
+perturbed matches. Exact-match counts range from 1 to 5, with median 1. This is
+now a legacy ordinary-hit diagnostic only; the corrected-distance driver no
+longer requires a full ordinary ELS hit before testing perturbed letters.
 
-The pair-readiness join gives the same warning at the pair-table level: of 86
-length-5..8 smoke-lane pairs, 56 lack checked hits for at least one side, 30
-have fewer than 10 exact perturbed matches, and 0 are ready for
-pair-level perturbed `Q`. The other 96 imported same-record pairs are outside
-the current length-5..8 perturbation diagnostic scope.
+The legacy pair-readiness join gives the same warning for the ordinary-hit-only
+screen: of 86 length-5..8 smoke-lane pairs, 56 lack checked ordinary hits for
+at least one side, 30 have fewer than 10 ordinary-hit exact perturbed matches,
+and 0 are ready under that older screen. It is not a readiness gate for direct
+perturbed-letter search.
 
-The corrected-distance smoke driver now generates exact perturbed rows from
-ordinary ELS hits, labels domains per perturbation triple, and applies the
-pair-level bridge to the same 86 length-5..8 smoke-lane pairs. Current output
-has 0 defined corrected distances: 56 pairs lack a valid ordinary perturbation,
-30 are below the 10-valid-perturbation floor, and the maximum valid
-perturbation count is 3. That is still not a WRR reproduction because the final
-pair universe and `D(w)` formula remain unlocked. A variant comparison now
-checks term-printed, term-program, and fixed-250 skip settings side by side:
-all three produce 0 defined corrected distances; fixed-250 only raises the
-maximum valid perturbation count from 3 to 4.
+The corrected-distance smoke driver now generates exact perturbed rows by
+direct perturbed-letter search from the unperturbed prefix, labels domains per
+perturbation triple, and applies the pair-level bridge to the same 86
+length-5..8 smoke-lane pairs. Current cap-250 output has 28 defined corrected
+distances: 56 pairs lack a valid ordinary perturbation, 2 are below the
+10-valid-perturbation floor, and the maximum valid perturbation count is 125.
+That is still not a WRR reproduction because the final pair universe and
+`D(w)` formula remain unlocked. A variant comparison now checks term-printed,
+term-program, and fixed-250 skip settings side by side: all three produce 28
+defined corrected distances at cap 250.
 Implementation notes are now tracked in
 `docs/WRR_CORRECTED_DISTANCE_NOTES.md`.
 
@@ -228,8 +229,12 @@ formula versus reported-program formula choice remains a method lock item.
 
 The repo has tested helpers for `P1`, `P2`, permutation rank, and Bonferroni
 `rho0`, plus a P1..P4 aggregate diagnostic over already-defined
-corrected-distance rows. Current smoke output has 0 defined c-values, so local
-P1..P4 remain blank. It still needs a claim-grade driver that:
+corrected-distance rows. Current cap-250 smoke output has 28 defined c-values
+and diagnostic P1 `0.000373062903552`, P2 `5.981029379e-05`, P3
+`0.000349191888979`, and P4 `7.69538206457e-05`. Current cap-1000 split output
+has 46 defined c-values and diagnostic P1 `0.00220968684352`, P2
+`6.37334076429e-06`, P3 `0.0108669973844`, and P4 `8.66346313541e-05`. These
+are still diagnostic-only. The repo still needs a claim-grade driver that:
 
 - computes corrected distances for the locked pair set;
 - computes `P1`, `P2`, `P3`, and `P4` over that locked set;

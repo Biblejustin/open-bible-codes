@@ -7,6 +7,7 @@ import argparse
 import csv
 import json
 import time
+from collections.abc import Iterable
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -16,7 +17,6 @@ from els.corpus import load_corpus
 from els.search import iter_els_query_matches_by_lanes
 from els.wrr import (
     WrrElsOccurrence,
-    is_perturbed_els_match,
     ordinary_els_offsets,
     perturbation_triples,
     skip_cap_for_expected_count,
@@ -260,24 +260,32 @@ def collect_perturbed_occurrences_by_term(
     raw_by_query: dict[str, dict[tuple[int, int, int], set[tuple[tuple[int, ...], int]]]] = {
         query: {} for query in queries
     }
-    ordinary_hits_by_query = {query: 0 for query in queries}
-    for query, skip, start, _end in iter_els_query_matches_by_lanes(
+    queries_by_prefix = group_queries_by_unperturbed_prefix(queries)
+    max_skip_by_prefix = prefix_skip_caps(queries_by_prefix, max_skip_by_query, max_skip)
+    suffix_index = build_suffix_perturbation_index(active_triples)
+    for prefix, skip, start, _end in iter_els_query_matches_by_lanes(
         text,
-        queries,
+        queries_by_prefix,
         min_skip=min_skip,
         max_skip=max_skip,
         direction=direction,
         jobs=jobs,
-        max_skip_by_query=max_skip_by_query,
+        max_skip_by_query=max_skip_by_prefix,
     ):
-        ordinary_hits_by_query[query] += 1
-        for triple in active_triples:
-            if not is_perturbed_els_match(text, query, start, skip, triple):
+        for query in queries_by_prefix[prefix]:
+            if abs(skip) > (max_skip_by_query or {}).get(query, max_skip):
                 continue
-            # Sources require exact perturbed letters, but use the unperturbed
-            # (n,d,k) positions for distance/domain measurements.
-            offsets = ordinary_els_offsets(start, skip, len(query))
-            raw_by_query[query].setdefault(triple, set()).add((offsets, skip))
+            for triple in matching_perturbed_suffix_triples(
+                text,
+                query,
+                start,
+                skip,
+                suffix_index,
+            ):
+                # Sources require exact perturbed letters, but use the unperturbed
+                # (n,d,k) positions for distance/domain measurements.
+                offsets = ordinary_els_offsets(start, skip, len(query))
+                raw_by_query[query].setdefault(triple, set()).add((offsets, skip))
 
     occurrences_by_query: dict[
         str,
@@ -305,7 +313,7 @@ def collect_perturbed_occurrences_by_term(
             term_id="",
             normalized=query,
             search_max_skip=(max_skip_by_query or {}).get(query, max_skip),
-            ordinary_hits=ordinary_hits_by_query[query],
+            ordinary_hits=len(raw_by_query[query].get(ORDINARY_PERTURBATION, set())),
             exact_perturbed_rows=exact_rows,
             defined_perturbed_rows=defined_rows,
             triples_with_exact_rows=len(raw_by_query[query]),
@@ -334,6 +342,81 @@ def collect_perturbed_occurrences_by_term(
             triples_with_defined_rows=query_stats.triples_with_defined_rows,
         )
     return occurrences_by_term, stats_by_term
+
+
+def group_queries_by_unperturbed_prefix(queries: list[str]) -> dict[str, list[str]]:
+    grouped: dict[str, list[str]] = {}
+    for query in queries:
+        grouped.setdefault(query[:-3], []).append(query)
+    return grouped
+
+
+def prefix_skip_caps(
+    queries_by_prefix: dict[str, list[str]],
+    max_skip_by_query: dict[str, int] | None,
+    default_max_skip: int,
+) -> dict[str, int] | None:
+    if max_skip_by_query is None:
+        return None
+    return {
+        prefix: max(max_skip_by_query.get(query, default_max_skip) for query in queries)
+        for prefix, queries in queries_by_prefix.items()
+    }
+
+
+def build_suffix_perturbation_index(
+    triples: tuple[tuple[int, int, int], ...],
+) -> dict[int, dict[int, tuple[int, ...]]]:
+    grouped: dict[int, dict[int, set[int]]] = {}
+    for x, y, z in triples:
+        grouped.setdefault(x, {}).setdefault(y, set()).add(z)
+    return {
+        x: {y: tuple(sorted(z_values)) for y, z_values in y_values.items()}
+        for x, y_values in grouped.items()
+    }
+
+
+def matching_perturbed_suffix_triples(
+    text: str,
+    query: str,
+    start: int,
+    skip: int,
+    suffix_index: dict[int, dict[int, tuple[int, ...]]],
+) -> Iterable[tuple[int, int, int]]:
+    word_length = len(query)
+    first_suffix_index = word_length - 3
+    second_suffix_index = word_length - 2
+    third_suffix_index = word_length - 1
+    first_suffix_base = start + first_suffix_index * skip
+    second_suffix_base = start + second_suffix_index * skip
+    third_suffix_base = start + third_suffix_index * skip
+    text_length = len(text)
+    first_suffix_letter = query[first_suffix_index]
+    second_suffix_letter = query[second_suffix_index]
+    third_suffix_letter = query[third_suffix_index]
+    for x, y_values in suffix_index.items():
+        first_offset = first_suffix_base + x
+        if (
+            first_offset < 0
+            or first_offset >= text_length
+            or text[first_offset] != first_suffix_letter
+        ):
+            continue
+        for y, z_values in y_values.items():
+            second_offset = second_suffix_base + x + y
+            if (
+                second_offset < 0
+                or second_offset >= text_length
+                or text[second_offset] != second_suffix_letter
+            ):
+                continue
+            for z in z_values:
+                third_offset = third_suffix_base + x + y + z
+                if (
+                    0 <= third_offset < text_length
+                    and text[third_offset] == third_suffix_letter
+                ):
+                    yield (x, y, z)
 
 
 def perturbed_row_sort_key(row: tuple[tuple[int, ...], int]) -> tuple[int, int, tuple[int, ...]]:
@@ -516,9 +599,10 @@ def write_markdown(
     lines = [
         "# WRR2 Corrected Distance Smoke",
         "",
-        "This generates exact WRR perturbation rows from ordinary ELS hits, labels",
-        "their domains conservatively, and computes pair-level corrected distance",
-        "when the ordinary triple and minimum valid perturbation count are present.",
+        "This generates exact WRR perturbation rows by direct perturbed-letter",
+        "search, labels their domains conservatively, and computes pair-level",
+        "corrected distance when the ordinary triple and minimum valid",
+        "perturbation count are present.",
         "It remains a smoke diagnostic, not a WRR reproduction.",
         "",
         f"- pair table: `{args.pair_table}`",

@@ -151,9 +151,10 @@ State these visibly:
 Use cautious language:
 
 - current WRR work is source/import/count smoke work;
-- corrected-distance smoke exists, but current 5..8 term-printed,
-  term-program, and fixed-250 variants all produce 0 defined corrected
-  distances;
+- corrected-distance smoke exists; current 5..8 direct-search term-printed,
+  term-program, and fixed-250 variants each produce 28 defined corrected
+  distances at cap 250, and the high-cap 1000 split produces 46 defined
+  diagnostic distances;
 - full corrected-distance run and permutation statistic are not implemented as
   a claim-grade reproduction;
 - WRR remains under-specified in this project until the locked pair table,

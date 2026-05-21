@@ -139,49 +139,54 @@ Already implemented:
   appellation would close the 165-to-163 count gap, while excluding all four
   disputed Zacut rows would overshoot. These pages are not treated as a source
   rule for pre-filtering the candidate set.
-- perturbation boundary/exact-match diagnostic over imported length 5..8 ELS
-  hits. Current output checks all 959 smoke-cap hits across 64 rows with hits:
-  every ordinary hit keeps all 125 triples in bounds, but every row with hits
-  has fewer than 10 exact perturbed matches; exact-match counts range from 1 to
-  5, with median 1.
-- perturbation pair-readiness diagnostic joining checked exact-match term rows
-  to the lock-prep pair table. Current output has 86 length-5..8 smoke-lane
-  pairs: 56 lack checked hits for at least one side, 30 have fewer than 10
-  exact perturbed matches, and 0 are ready for pair-level perturbed `Q`.
+- legacy perturbation boundary/exact-match diagnostic over ordinary imported
+  length 5..8 ELS hits. Current output checks all 959 smoke-cap ordinary hits
+  across 64 rows with hits: every ordinary hit keeps all 125 triples in bounds,
+  but every row with ordinary hits has fewer than 10 exact perturbed matches;
+  exact-match counts range from 1 to 5, with median 1. This is now retained as
+  an ordinary-hit diagnostic only; direct corrected-distance search no longer
+  requires a full ordinary ELS hit before testing perturbed letters.
+- legacy perturbation pair-readiness diagnostic joining ordinary-hit
+  exact-match term rows to the lock-prep pair table. Current output has 86
+  length-5..8 smoke-lane pairs: 56 lack checked ordinary hits for at least one
+  side, 30 have fewer than 10 ordinary-hit exact perturbed matches, and 0 are
+  ready under that older ordinary-hit-only screen. This is not a direct-search
+  readiness gate.
 - real-corpus corrected-distance smoke driver in
   `scripts/analyze_wrr_corrected_distance.py`. It generates exact perturbed
-  rows from ordinary ELS hits, stores the source-described unperturbed `(n,d,k)`
-  offsets for distance/domain measurement, labels domains per perturbation
-  triple, and feeds domain-defined rows through the pair-level
-  corrected-distance bridge. Current smoke output for the 86 length-5..8
-  candidate-lane pairs has 0
-  defined corrected distances: 56 pairs lack a valid ordinary perturbation and
-  30 have fewer than 10 valid perturbations; the maximum valid perturbation
-  count is 3.
+  rows by direct perturbed-letter search from the unperturbed prefix, stores the
+  source-described unperturbed `(n,d,k)` offsets for distance/domain
+  measurement, labels domains per perturbation triple, and feeds domain-defined
+  rows through the pair-level corrected-distance bridge. Current smoke output
+  for the 86 length-5..8 candidate-lane pairs has 28 defined corrected
+  distances: 56 pairs lack a valid ordinary perturbation and 2 have fewer than
+  10 valid perturbations; the maximum valid perturbation count is 125.
 - corrected-distance smoke variant comparison in
   `scripts/compare_wrr_corrected_distance_variants.py`. Current 5..8
-  candidate-lane comparison gives 0 defined corrected distances for term
-  printed, term program, and fixed-250 settings. Term printed and term program
-  both have maximum valid perturbation count 3; fixed-250 raises that maximum
-  to 4 but still does not define any corrected distances.
+  candidate-lane comparison gives 28 defined corrected distances for term
+  printed, term program, and fixed-250 settings. All three variants have a
+  maximum valid perturbation count of 125 under the direct-search driver.
 - corrected-distance aggregate diagnostic in
   `scripts/analyze_wrr_corrected_distance_aggregate.py`. It computes P1/P2
   from all defined `c(w,w')` rows and P3/P4 from the smaller sample that omits
   appellations whose imported source token starts with title `RBY`. Current
-  length-5..8 smoke output has 0 defined values, so aggregate P1..P4 are
-  intentionally blank.
+  length-5..8 smoke output has 28 defined values; the diagnostic aggregate is
+  P1 `0.000373062903552`, P2 `5.981029379e-05`, P3
+  `0.000349191888979`, and P4 `7.69538206457e-05`. This remains
+  diagnostic-only because the pair universe and `D(w)` formula are not locked.
 - high-cap local diagnostic protocol in
   `protocols/wrr_corrected_distance_highcap_1000_split_2.toml`. Current
-  ignored output at `search-max-skip=1000` still has 0 defined corrected
-  distances over 86 length-5..8 smoke-lane pairs. The merged corrected-distance
-  summary has maximum valid perturbation count 4. The all-hit high-cap
-  perturbation diagnostic has 80/120 rows with hits, 3,694 checked hits, and
-  80 rows whose minimum exact perturbation count remains below 10. The joined
-  pair-readiness diagnostic has 0 ready pairs, 40 pairs missing checked hits on
-  one side, and 46 pairs below the exact-perturbation threshold.
+  ignored output at `search-max-skip=1000` has 46 defined corrected distances
+  over 86 length-5..8 smoke-lane pairs, 40 ordinary-not-valid pairs, and a
+  maximum valid perturbation count of 125. Its diagnostic aggregate is P1
+  `0.00220968684352`, P2 `6.37334076429e-06`, P3 `0.0108669973844`, and P4
+  `8.66346313541e-05`. The retained all-hit high-cap perturbation and
+  pair-readiness diagnostics are ordinary-hit-only legacy checks, not
+  direct-search blockers.
 - exploratory all-lane corrected-distance diagnostics over all 182 imported
-  same-record pairs also define 0 corrected distances. At `search-max-skip=250`
-  the max valid perturbation count is 3; at `search-max-skip=1000` it is 4.
+  same-record pairs were run before direct perturbed-letter search and should be
+  treated as obsolete historical diagnostics until rerun with the current
+  driver.
 
 Not yet implemented:
 
