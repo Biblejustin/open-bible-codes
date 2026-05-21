@@ -27,6 +27,30 @@ The current result is cautious:
 The best current public wording is: review candidates and occurrence findings,
 not conclusion language.
 
+## Clean-Lock Close-Out
+
+The latest clean-lock lanes added after earlier evidence rows were excluded do
+not create new claim material.
+
+Hebrew concordance words produced 87 uncorrected-only representative-control
+prompts and 0 adjusted-support terms. The audit buckets those prompts as 38
+ordinary lexical prompts, 33 proper-name/gloss prompts, 10 high-volume
+short-string/common-letter prompts, 5 sparse all-source prompts, and 1
+control-artifact prompt.
+
+Greek surface new terms produced 5 controlled rows with `q <= 0.05`, but manual
+context review found visible local surface-context or direct self-lexeme effects.
+
+Strict follow-up gate result: 0 Hebrew concordance rows and 0 Greek surface rows
+are claim-ready from these clean-lock queues.
+
+Source artifacts:
+
+- `docs/CLEAN_LOCK_RESULTS_SUMMARY.md`
+- `docs/HEBREW_CONCORDANCE_UNCORRECTED_SCREENING_AUDIT.md`
+- `docs/GREEK_SURFACE_NEW_TERMS_CONTEXT_REVIEW.md`
+- `docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`
+
 ## Hypothesis Scope
 
 The working hypothesis is that original-language biblical texts may contain

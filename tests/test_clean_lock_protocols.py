@@ -90,3 +90,11 @@ def test_strict_followup_gate_summary_has_zero_claim_ready_rows() -> None:
     assert "| Greek surface new terms controlled rows | 5 | 0 |" in text
     assert "All rows fail adjusted support" in text
     assert "They do not pass a context-distance gate" in text
+
+
+def test_final_report_includes_clean_lock_closeout() -> None:
+    text = Path("docs/FINAL_REPORT.md").read_text(encoding="utf-8")
+
+    assert "## Clean-Lock Close-Out" in text
+    assert "0 Hebrew concordance rows and 0 Greek surface rows" in text
+    assert "`docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`" in text
