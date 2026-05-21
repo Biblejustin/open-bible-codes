@@ -55,12 +55,14 @@ itself is part of the lock manifest fingerprint.
 ## Candidate Lanes
 
 Machine-readable lane profiles live in
-`configs/prospective_study_lanes.json`. Use:
+`configs/prospective_study_lanes.json`. A generated lane-status view is tracked
+in `docs/PROSPECTIVE_LANE_STATUS.md`. Use:
 
 ```bash
 python3 -m scripts.check_prospective_study_lanes
 python3 -m scripts.scaffold_prospective_study --list-profiles
 python3 -m scripts.scaffold_prospective_study --profile PROFILE_ID --print-command
+python3 -m scripts.build_prospective_lane_status
 ```
 
 | Lane | Current evidence | What can be prospective? | Main risk |

@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 282
+Documents indexed: 283
 
 ## Controls
 
@@ -266,6 +266,7 @@ Documents indexed: 282
 | Pair Compactness | `PAIR_COMPACTNESS.md` |
 | Partition Worker Workflow | `PARTITION_WORKER_WORKFLOW.md` |
 | Prophetic Terms Study | `PROPHETIC_TERMS_STUDY.md` |
+| Prospective Lane Status | `PROSPECTIVE_LANE_STATUS.md` |
 | Next Prospective Study Lock | `PROSPECTIVE_STUDY_NEXT_LOCK.md` |
 | Prospective Study Preregistration Template | `PROSPECTIVE_STUDY_PREREGISTRATION_TEMPLATE.md` |
 | Prospective Study Readiness | `PROSPECTIVE_STUDY_READINESS.md` |

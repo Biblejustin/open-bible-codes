@@ -214,6 +214,7 @@ Safe non-result-producing checks:
 ```bash
 python3 -m scripts.check_prospective_study_lanes
 python3 -m scripts.scaffold_prospective_study --list-profiles
+python3 -m scripts.build_prospective_lane_status
 ```
 
 Allowed post-discovery reruns with existing locks:

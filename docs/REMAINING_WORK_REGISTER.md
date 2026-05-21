@@ -256,6 +256,7 @@ Carry these with controls attached:
 Navigation aid:
 
 - `docs/MANUAL_REVIEW_QUEUE.md`
+- `docs/PROSPECTIVE_LANE_STATUS.md`
 
 ## Validation Commands
 
