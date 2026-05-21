@@ -80,6 +80,11 @@ Already implemented:
   fixed-250 settings. Current output defines 0 corrected distances for all
   three variants; fixed-250 only raises the maximum valid perturbation count
   from 3 to 4.
+- WRR corrected-distance aggregate diagnostic in
+  `scripts/analyze_wrr_corrected_distance_aggregate.py`, wired into
+  `protocols/wrr_audit_counts.toml`, computing P1/P2 only when defined
+  corrected-distance values exist. Current length-5..8 smoke output has 0
+  defined values, so P1/P2 remain blank.
 
 Source audit:
 
@@ -104,8 +109,8 @@ Still needed:
 - final `D(w)` formula decision between the printed WRR formula and the WRR
   program formula documented by MBBK;
 - optimized full corrected-distance run over the final locked pair universe;
-- WRR aggregate runner for `P1`, `P2`, `P3`, and `P4` over all declared pairs
-  once `c(w,w')` exists;
+- WRR claim-grade aggregate runner for `P1`, `P2`, `P3`, and `P4` over all
+  declared pairs once `c(w,w')` exists;
 - permutation driver that shuffles date/rabbi pairings under the declared rule;
 - report that labels each run as reproduction, failed reproduction, or
   under-specified.

@@ -73,6 +73,12 @@ class WrrMethodStatusTests(unittest.TestCase):
                 "inferred_row_markers": "1",
                 "status": "row_ocr_probe_not_verification",
             },
+            corrected_distance_aggregate_row={
+                "rows": "86",
+                "defined_corrected_distances": "0",
+                "p1": "",
+                "p2": "",
+            },
         )
 
         by_area = {row["decision_area"]: row for row in rows}
@@ -90,6 +96,7 @@ class WrrMethodStatusTests(unittest.TestCase):
         self.assertIn("maximum valid perturbation count 4", by_area["Corrected distance c(w,w')"]["evidence"])
         self.assertEqual(by_area["Aggregate statistic and permutation"]["status"], "source_locked_not_built")
         self.assertIn("G min P4 rank 4", by_area["Aggregate statistic and permutation"]["evidence"])
+        self.assertIn("0 defined c-values from 86 rows", by_area["Aggregate statistic and permutation"]["evidence"])
 
     def test_markdown_cell_escapes_pipes(self) -> None:
         self.assertEqual(markdown_cell("a|b\nc"), "a\\|b c")
@@ -107,6 +114,7 @@ class WrrMethodStatusTests(unittest.TestCase):
                     "table2_ocr_summary": Path("ocr_summary.csv"),
                     "skip_summary": Path("skip.csv"),
                     "corrected_distance_variants": Path("variants.csv"),
+                    "corrected_distance_aggregate": Path("aggregate.csv"),
                     "primary_result_table": Path("primary.csv"),
                     "out": Path("out.csv"),
                     "markdown_out": path,
@@ -144,6 +152,7 @@ class WrrMethodStatusTests(unittest.TestCase):
             row_ocr_summary = root / "row_ocr_summary.csv"
             skip_summary = root / "skip.csv"
             variants = root / "variants.csv"
+            aggregate = root / "aggregate.csv"
             primary_results = root / "primary.csv"
             out = root / "status.csv"
             markdown = root / "status.md"
@@ -239,6 +248,17 @@ class WrrMethodStatusTests(unittest.TestCase):
                 ],
             )
             write_dict_rows(
+                aggregate,
+                [
+                    {
+                        "rows": "86",
+                        "defined_corrected_distances": "0",
+                        "p1": "",
+                        "p2": "",
+                    }
+                ],
+            )
+            write_dict_rows(
                 primary_results,
                 [
                     {
@@ -267,6 +287,8 @@ class WrrMethodStatusTests(unittest.TestCase):
                     str(skip_summary),
                     "--corrected-distance-variants",
                     str(variants),
+                    "--corrected-distance-aggregate",
+                    str(aggregate),
                     "--primary-result-table",
                     str(primary_results),
                     "--out",

@@ -156,12 +156,17 @@ Already implemented:
   printed, term program, and fixed-250 settings. Term printed and term program
   both have maximum valid perturbation count 3; fixed-250 raises that maximum
   to 4 but still does not define any corrected distances.
+- corrected-distance aggregate diagnostic in
+  `scripts/analyze_wrr_corrected_distance_aggregate.py`. It computes P1/P2
+  only from defined `c(w,w')` rows. Current length-5..8 smoke output has 0
+  defined values, so aggregate P1/P2 are intentionally blank.
 
 Not yet implemented:
 
 - an optimized full-run real-corpus corrected-distance driver over the final
   locked pair universe and source-selected `D(w)` formula;
-- permutation driver over the locked personality/date pair table.
+- claim-grade P1..P4 and permutation driver over the locked personality/date
+  pair table.
 
 ## Ambiguities To Pin Before Code
 
@@ -205,7 +210,8 @@ Not yet implemented:
    formula documented by MBBK; current audit rows expose both.
 2. Extend the smoke corrected-distance driver into an optimized full run over
    the final locked pair universe.
-3. Feed defined `c(w,w')` rows into aggregate `P1`/`P2` and permutation tests.
+3. Feed defined `c(w,w')` rows into claim-grade aggregate `P1`..`P4` and
+   permutation tests.
 
 ## Current Read
 

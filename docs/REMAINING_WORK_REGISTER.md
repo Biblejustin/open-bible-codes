@@ -148,6 +148,15 @@ transparent resonant row-width proxy with a fuller source-method reconstruction,
 recover source-published Fisher weights if a citable source becomes available,
 and only then consider real Torah-code source data.
 
+WRR aggregate work now has a diagnostic P1/P2 bridge:
+
+- `scripts/analyze_wrr_corrected_distance_aggregate.py`
+- `reports/wrr_1994/wrr2_corrected_distance_aggregate.csv`
+
+Current read: the length-5..8 corrected-distance smoke output still has 0
+defined `c(w,w')` values, so P1/P2 remain blank. This is not yet the
+claim-grade P1..P4/permutation driver.
+
 ### 2. Source-Basis Audit Queue
 
 The English manifests already track broad source-basis metadata:

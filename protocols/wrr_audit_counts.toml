@@ -682,6 +682,28 @@ outputs = [
 ]
 
 [[steps]]
+id = "aggregate_wrr2_corrected_distance_smoke"
+description = "Aggregate defined corrected-distance smoke rows into P1/P2 diagnostic statistics."
+argv = [
+  "-m", "scripts.analyze_wrr_corrected_distance_aggregate",
+  "--input", "reports/wrr_1994/wrr2_corrected_distance_smoke.csv",
+  "--p1-threshold", "0.2",
+  "--out", "reports/wrr_1994/wrr2_corrected_distance_aggregate.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_corrected_distance_aggregate.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_corrected_distance_aggregate.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_corrected_distance_aggregate.py",
+  "reports/wrr_1994/wrr2_corrected_distance_smoke.csv",
+  "els/wrr.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_corrected_distance_aggregate.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_aggregate.md",
+  "reports/wrr_1994/wrr2_corrected_distance_aggregate.manifest.json",
+]
+
+[[steps]]
 id = "build_wrr_method_status"
 description = "Summarize current WRR locks, open method decisions, and next actions."
 argv = [
@@ -693,6 +715,7 @@ argv = [
   "--table2-row-ocr-summary", "reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv",
   "--skip-summary", "reports/wrr_1994/wrr2_skip_caps_summary.csv",
   "--corrected-distance-variants", "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
+  "--corrected-distance-aggregate", "reports/wrr_1994/wrr2_corrected_distance_aggregate.csv",
   "--primary-result-table", "reports/wrr_1994/wrr_primary_result_table.csv",
   "--out", "reports/wrr_1994/wrr_method_status.csv",
   "--markdown-out", "docs/WRR_METHOD_STATUS.md",
@@ -707,6 +730,7 @@ inputs = [
   "reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv",
   "reports/wrr_1994/wrr2_skip_caps_summary.csv",
   "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_aggregate.csv",
   "reports/wrr_1994/wrr_primary_result_table.csv",
 ]
 outputs = [

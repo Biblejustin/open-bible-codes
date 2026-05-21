@@ -20,6 +20,7 @@ DEFAULT_TABLE2_OCR_SUMMARY = Path("reports/wrr_1994/wrr_primary_table2_ocr_probe
 DEFAULT_TABLE2_ROW_OCR_SUMMARY = Path("reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv")
 DEFAULT_SKIP_SUMMARY = Path("reports/wrr_1994/wrr2_skip_caps_summary.csv")
 DEFAULT_VARIANTS = Path("reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv")
+DEFAULT_AGGREGATE = Path("reports/wrr_1994/wrr2_corrected_distance_aggregate.csv")
 DEFAULT_PRIMARY_RESULT_TABLE = Path("reports/wrr_1994/wrr_primary_result_table.csv")
 DEFAULT_OUT = Path("reports/wrr_1994/wrr_method_status.csv")
 DEFAULT_MD = Path("docs/WRR_METHOD_STATUS.md")
@@ -76,6 +77,7 @@ def main(argv: list[str] | None = None) -> int:
     table2_row_ocr_row = read_one_row(args.table2_row_ocr_summary) if args.table2_row_ocr_summary.exists() else None
     skip_row = read_one_row(args.skip_summary)
     variant_rows = read_rows(args.corrected_distance_variants)
+    aggregate_row = read_one_row(args.corrected_distance_aggregate) if args.corrected_distance_aggregate.exists() else None
     primary_result_rows = read_rows(args.primary_result_table)
     rows = build_status_rows(
         text_row,
@@ -86,6 +88,7 @@ def main(argv: list[str] | None = None) -> int:
         table2_bridge_row,
         table2_ocr_row,
         table2_row_ocr_row,
+        aggregate_row,
     )
     write_csv(args.out, rows)
     write_markdown(args.markdown_out, rows, args)
@@ -105,6 +108,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--table2-row-ocr-summary", type=Path, default=DEFAULT_TABLE2_ROW_OCR_SUMMARY)
     parser.add_argument("--skip-summary", type=Path, default=DEFAULT_SKIP_SUMMARY)
     parser.add_argument("--corrected-distance-variants", type=Path, default=DEFAULT_VARIANTS)
+    parser.add_argument("--corrected-distance-aggregate", type=Path, default=DEFAULT_AGGREGATE)
     parser.add_argument("--primary-result-table", type=Path, default=DEFAULT_PRIMARY_RESULT_TABLE)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
@@ -133,6 +137,7 @@ def build_status_rows(
     table2_bridge_row: dict[str, str] | None = None,
     table2_ocr_row: dict[str, str] | None = None,
     table2_row_ocr_row: dict[str, str] | None = None,
+    corrected_distance_aggregate_row: dict[str, str] | None = None,
 ) -> list[dict[str, str]]:
     return [
         {
@@ -192,7 +197,7 @@ def build_status_rows(
             "next_action": "Choose printed-paper formula or reported-program formula before final corrected-distance run.",
         },
         corrected_distance_status(variant_rows),
-        aggregate_status(primary_result_rows or []),
+        aggregate_status(primary_result_rows or [], corrected_distance_aggregate_row),
     ]
 
 
@@ -220,7 +225,11 @@ def corrected_distance_status(variant_rows: list[dict[str, str]]) -> dict[str, s
     }
 
 
-def aggregate_status(primary_result_rows: list[dict[str, str]]) -> dict[str, str]:
+def aggregate_status(
+    primary_result_rows: list[dict[str, str]],
+    corrected_distance_aggregate_row: dict[str, str] | None = None,
+) -> dict[str, str]:
+    local_evidence = aggregate_evidence(corrected_distance_aggregate_row)
     genesis = next(
         (row for row in primary_result_rows if row.get("label") == "G" and row.get("status") == "found"),
         None,
@@ -229,8 +238,8 @@ def aggregate_status(primary_result_rows: list[dict[str, str]]) -> dict[str, str
         return {
             "decision_area": "Aggregate statistic and permutation",
             "status": "not_built",
-            "current_read": "P1/P2 arithmetic helpers exist, but no claim-grade P1..P4 or date-permutation runner exists.",
-            "evidence": "No primary Table 3 source-result row was supplied; no current protocol step computes full WRR aggregate scores or permutation ranks from defined c-values.",
+            "current_read": "P1/P2 arithmetic helpers and a corrected-distance aggregate diagnostic exist, but no claim-grade P1..P4 or date-permutation runner exists.",
+            "evidence": f"No primary Table 3 source-result row was supplied; {local_evidence}",
             "next_action": "Implement only after final pair universe and corrected-distance values are locked.",
         }
     control_summary = ", ".join(
@@ -241,14 +250,29 @@ def aggregate_status(primary_result_rows: list[dict[str, str]]) -> dict[str, str
     return {
         "decision_area": "Aggregate statistic and permutation",
         "status": "source_locked_not_built",
-        "current_read": "Published Table 3 ranks are source-audited, but local claim-grade P1..P4 and date-permutation runners are not built.",
+        "current_read": "Published Table 3 ranks are source-audited; local P1/P2 aggregate diagnostics exist, but claim-grade P1..P4 and date-permutation runners are not built.",
         "evidence": (
             f"Source Table 3: G min {genesis.get('min_statistic', '')} rank "
             f"{genesis.get('min_rank', '')}, p0={genesis.get('bonferroni_p0', '')}; "
-            f"controls: {control_summary}; no local aggregate recomputation from defined c-values"
+            f"controls: {control_summary}; {local_evidence}"
         ),
         "next_action": "Implement only after final pair universe and corrected-distance values are locked.",
     }
+
+
+def aggregate_evidence(row: dict[str, str] | None) -> str:
+    if not row:
+        return "no current protocol step computes aggregate scores from defined c-values"
+    defined = row.get("defined_corrected_distances", "")
+    if defined == "0":
+        return (
+            f"local P1/P2 aggregate diagnostic has {defined} defined c-values "
+            f"from {row.get('rows', '')} rows, so P1/P2 remain blank"
+        )
+    return (
+        f"local P1={row.get('p1', '')}, P2={row.get('p2', '')} from "
+        f"{defined} defined c-values"
+    )
 
 
 def int_value(value: str) -> int:
@@ -287,6 +311,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             f"--table2-row-ocr-summary {getattr(args, 'table2_row_ocr_summary', '')} "
             f"--skip-summary {args.skip_summary} "
             f"--corrected-distance-variants {args.corrected_distance_variants} "
+            f"--corrected-distance-aggregate {args.corrected_distance_aggregate} "
             f"--primary-result-table {args.primary_result_table} "
             f"--out {args.out} "
             f"--markdown-out {args.markdown_out} "
@@ -398,6 +423,7 @@ def write_manifest(args: argparse.Namespace, rows: list[dict[str, str]], started
             "table2_row_ocr_summary": str(args.table2_row_ocr_summary),
             "skip_summary": str(args.skip_summary),
             "corrected_distance_variants": str(args.corrected_distance_variants),
+            "corrected_distance_aggregate": str(args.corrected_distance_aggregate),
             "primary_result_table": str(args.primary_result_table),
         },
         "outputs": {
