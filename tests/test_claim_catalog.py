@@ -83,6 +83,16 @@ class ClaimCatalogTests(unittest.TestCase):
                 self.assertEqual(rows[claim_id]["status"], "under_specified")
                 self.assertEqual(rows[claim_id]["evidence"], "docs/BIBLE_CODES_ORG_AUDIT.md")
 
+    def test_wrr_claim_catalog_is_blocked_by_readiness_gate(self) -> None:
+        with CATALOG_PATH.open("r", encoding="utf-8", newline="") as handle:
+            rows = {row["claim_id"]: row for row in csv.DictReader(handle)}
+
+        row = rows["wrr_1994_great_rabbis"]
+        self.assertEqual(row["status"], "under_specified")
+        self.assertEqual(row["evidence"], "docs/WRR_CLAIM_READINESS.md")
+        self.assertIn("readiness gate", row["notes"])
+        self.assertIn("docs/WRR_SOURCE_AUDIT.md", row["notes"])
+
 
 if __name__ == "__main__":
     unittest.main()

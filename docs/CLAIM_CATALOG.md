@@ -27,7 +27,7 @@ Purpose:
 | Group | Status | Entries | Current read |
 | --- | --- | ---: | --- |
 | Common Torah skip-50 examples | `reproducible` | 5 | Engine sanity checks pass on Koren Torah files. |
-| WRR 1994 rabbis | `under_specified` | 1 | Source audit exists; needs locked 298-to-163 pair path, corrected distance, skip caps, and permutation rule. |
+| WRR 1994 rabbis | `under_specified` | 1 | Source audit exists, but the explicit readiness gate remains blocked; needs locked 298-to-163 pair path, corrected distance, skip caps, and permutation rule. |
 | Greek `δοξα` (doxa; English: glory) extension follow-up | `controlled_review_candidate` | 1 | Four-source 5000/5000 and 20000/20000 follow-ups passed their registered review gates; still post-discovery and not a claim. |
 | Greek `γωγ` (Gog; English: Gog) centered occurrence | `controlled_review_candidate` | 1 | Hidden `γωγ` (Gog; English: Gog) centers on open `Gog` at Rev 20:8 across four Greek NT source labels; length-3 controls make it contextual rather than frequency-promoted. |
 | Greek expanded surface follow-up | `controlled_review_candidate` | 1 | `ανομια` (anomia; English: lawlessness), `ισαακ` (Isaak; English: Isaac), and `τερασ` (teras; English: wonder) pass letter-path and all-available real-word control review; still post-screen and not a claim. |
@@ -65,8 +65,9 @@ This catalog is deliberately conservative. A term appearing in an ELS screen is
 not enough for `reproducible`; the declared claim rule has to be reproduced.
 
 WRR-specific requirements are tracked in `docs/WRR_REPLICATION_PLAN.md`,
-`docs/WRR_SOURCE_AUDIT.md`, `docs/WRR_METHODOLOGY_GAPS.md`, and
-`docs/WRR_CORRECTED_DISTANCE_NOTES.md`.
+`docs/WRR_SOURCE_AUDIT.md`, `docs/WRR_METHODOLOGY_GAPS.md`,
+`docs/WRR_CORRECTED_DISTANCE_NOTES.md`, and
+`docs/WRR_CLAIM_READINESS.md`.
 Greek surface claim-grade requirements are tracked in
 `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`.
 Bible Code Digest source leads are tracked in `docs/BIBLE_CODE_DIGEST_AUDIT.md`.
