@@ -83,3 +83,14 @@ def test_hebrew_concordance_uncorrected_queue_tracks_no_claim_read() -> None:
     assert "| Shared representative q value | 0.819154 |" in text
     assert "manual-review prompts, not evidence rows" in text
     assert "`hcon_h4968`" in text
+
+
+def test_hebrew_concordance_top_uncorrected_context_review_keeps_triage_read() -> None:
+    text = Path("docs/HEBREW_CONCORDANCE_TOP_UNCORRECTED_CONTEXT_REVIEW.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert "manual context review of the first 10 uncorrected queue rows" in text
+    assert "corrected family-level result remains negative" in text
+    assert "common-letter/short-string effects" in text
+    assert "triage category" in text
