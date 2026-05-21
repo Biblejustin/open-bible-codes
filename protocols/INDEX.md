@@ -137,7 +137,7 @@ Protocols indexed: 108
 
 | Name | Description | Steps | Terms | Output Roots | Path |
 | --- | --- | ---: | --- | --- | --- |
-| wrr_audit_counts | WRR2 imported-term count and same-record pair smoke on Koren Genesis; not the WRR stati... | 17 |  | reports/wrr_1994 | `wrr_audit_counts.toml` |
+| wrr_audit_counts | WRR2 imported-term count and same-record pair smoke on Koren Genesis; not the WRR stati... | 28 |  | reports/wrr_1994 | `wrr_audit_counts.toml` |
 | wrr_source_import | Download external WRR audit files and convert WRR2 into repo term rows. | 3 |  | reports/wrr_1994 | `wrr_source_import.toml` |
 
 ## Screening
