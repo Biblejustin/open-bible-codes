@@ -1,9 +1,9 @@
 # Remaining Work Register
 
 Status: operational register after the 34-version English-source refresh, the
-empty English seed survivor gate, the English source-basis audit, and the
-reader-report hygiene pass. This file tracks work that remains outside the
-missing copyrighted/private English CSVs.
+empty English seed survivor gate, the English source-basis audit, reader-report
+hygiene, locked-report reruns, and volatility cleanup. This file tracks work
+that remains outside the missing copyrighted/private English CSVs.
 
 ## Blocked
 
@@ -21,6 +21,34 @@ ignored under `data/private/english/`. TPT is wired in the private protocol but
 is not part of the BibleGateway manifest.
 
 ## Completed This Pass
+
+### Locked Report Rerun And Volatility Cleanup
+
+Completed locked reruns:
+
+```bash
+python3 -m scripts.run_protocol protocols/doxa_four_source_claim_followup.toml --resume
+python3 -m scripts.run_protocol protocols/doxa_four_source_confirmatory_followup.toml --resume
+python3 -m scripts.run_protocol protocols/all_codes_compound_extension_confirmatory.toml --resume
+python3 -m scripts.run_protocol protocols/kjv_apocrypha_bridge_confirmatory_controls_5000.toml --resume
+python3 -m scripts.run_protocol protocols/gog_magog_pair_prospective.toml --resume
+python3 -m scripts.run_protocol protocols/wrr_audit_counts.toml --resume
+```
+
+Guardrails added:
+
+- Doxa four-source report builder now requires explicit
+  `--preregistration-commit`, so locked reports do not drift with current
+  `HEAD`.
+- README Doxa rerun snippets include pinned preregistration commits.
+- Gog/Magog prospective tracked report now records generated time in local
+  manifests only, not tracked Markdown.
+
+Current pushed commits for this cleanup:
+
+- `5850141` Require locked doxa prereg commits.
+- `201a341` Refresh generated indexes.
+- `4aac5c1` Stabilize Gog Magog prospective report.
 
 ### Formal Real Report Rerun
 
@@ -214,9 +242,10 @@ python3 -m scripts.build_protocol_index --protocols-dir protocols --out protocol
 python3 -m scripts.check_public_release_hygiene --allow-dirty
 ```
 
-Current observed result after the English-source refresh:
+Current observed result after the locked-rerun and volatility-cleanup pass:
 
-- `python3 -m unittest discover -v` passed: 586 tests.
+- `python3 -m unittest discover -v` passed: 695 tests.
 - `python3 -m pytest tests/test_import_bolls_translation.py tests/test_english_version_manifests.py -q` passed: 11 tests and 117 subtests.
+- `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
