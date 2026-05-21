@@ -129,6 +129,7 @@ KNOWN_TERMS: dict[str, tuple[str, str]] = {
     "κτισισ": ("ktisis", "creation"),
     "λαλησει": ("lalesei", "he will speak"),
     "λεγω": ("lego", "I say"),
+    "λογοσ": ("logos", "Word"),
     "λογων": ("logon", "words"),
     "λυστροισ": ("lustrois", "Lystra"),
     "μακεδονιαν": ("makedonian", "Macedonia"),
@@ -246,6 +247,7 @@ KNOWN_TERMS: dict[str, tuple[str, str]] = {
     "αγγελου": ("aggelou", "angel"),
     "γωνιασ": ("gonias", "corner"),
     "καλουσα": ("kalousa", "calling"),
+    "ισραηλ": ("israel", "Israel"),
     "ישוע": ("Yeshua", "Yeshua/Jeshua"),
     "יהושע": ("Yehoshua", "Joshua"),
     "יהוה": ("YHWH", "YHWH"),
@@ -475,6 +477,8 @@ def csv_known_terms() -> dict[str, tuple[str, str]]:
                     term = row.get("term", "").strip()
                     concept = row.get("concept", "").strip()
                     if not term or not concept:
+                        continue
+                    if contains_hebrew(concept) or contains_greek(concept):
                         continue
                     if not (contains_hebrew(term) or contains_greek(term)):
                         continue

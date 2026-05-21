@@ -37,10 +37,11 @@ def test_blocked_profiles_accepts_blocked_and_needs_statuses() -> None:
     profiles = [
         {"id": "a", "status": "blocked_until_new_term_source"},
         {"id": "b", "status": "needs_predeclared_term_list"},
-        {"id": "c", "status": "completed_negative_controlled_result"},
+        {"id": "c", "status": "needs_clean_prospective_lock"},
+        {"id": "d", "status": "completed_negative_controlled_result"},
     ]
 
-    assert [profile["id"] for profile in status.blocked_profiles(profiles)] == ["a", "b"]
+    assert [profile["id"] for profile in status.blocked_profiles(profiles)] == ["a", "b", "c"]
 
 
 def test_tracked_lane_status_doc_matches_profiles() -> None:

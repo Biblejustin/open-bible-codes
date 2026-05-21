@@ -126,7 +126,7 @@ def test_profile_values_populate_lane_defaults() -> None:
     assert values["skip_range"] == "2..100"
     assert values["min_normalized_length"] == "5"
     assert "configs/example_oshb_wlc.toml" in values["config_path_lines"]
-    assert "predeclared compound-extension target list" in values["source_term_files"]
+    assert "Hebrew Gospel/genealogy target list" in values["source_term_files"]
 
 
 def test_profile_values_can_be_overridden() -> None:

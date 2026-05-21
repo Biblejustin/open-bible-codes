@@ -1,0 +1,69 @@
+term_id,concept,category,language,term,notes
+user_jesus_h,Jesus/Yeshua,gospel_core_names,hebrew,ישוע,user requested 2026-05-21 before result-producing prospective run
+user_christ_messiah_h,Christ/Messiah,gospel_core_names,hebrew,משיח,user requested 2026-05-21 before result-producing prospective run
+user_mary_h,Mary,gospel_women,hebrew,מרים,user requested 2026-05-21 before result-producing prospective run
+user_mary_magdalene_h,Mary Magdalene,gospel_women,hebrew,מרים מגדלית,user requested 2026-05-21 before result-producing prospective run
+user_martha_h,Martha,gospel_women,hebrew,מרתא,user requested 2026-05-21 before result-producing prospective run
+user_elizabeth_h,Elizabeth,gospel_women,hebrew,אלישבע,user requested 2026-05-21 before result-producing prospective run
+user_anna_h,Anna/Hannah,gospel_women,hebrew,חנה,user requested 2026-05-21 before result-producing prospective run
+user_joanna_h,Joanna,gospel_women,hebrew,יוחנה,user requested 2026-05-21 before result-producing prospective run
+user_susanna_h,Susanna,gospel_women,hebrew,שושנה,user requested 2026-05-21 before result-producing prospective run
+user_salome_h,Salome,gospel_women,hebrew,שלומית,user requested 2026-05-21 before result-producing prospective run
+user_tamar_h,Tamar,christ_genealogy,hebrew,תמר,user requested 2026-05-21 before result-producing prospective run
+user_rahab_h,Rahab,christ_genealogy,hebrew,רחב,user requested 2026-05-21 before result-producing prospective run
+user_ruth_h,Ruth,christ_genealogy,hebrew,רות,user requested 2026-05-21 before result-producing prospective run
+user_bathsheba_h,Bathsheba,christ_genealogy,hebrew,בת שבע,user requested 2026-05-21 before result-producing prospective run
+user_joseph_h,Joseph husband of Mary / Joseph of Arimathea,christ_genealogy,hebrew,יוסף,user requested 2026-05-21 before result-producing prospective run
+user_abraham_h,Abraham,christ_genealogy,hebrew,אברהם,user requested 2026-05-21 before result-producing prospective run
+user_isaac_h,Isaac,christ_genealogy,hebrew,יצחק,user requested 2026-05-21 before result-producing prospective run
+user_jacob_h,Jacob/James,christ_genealogy,hebrew,יעקב,user requested 2026-05-21 before result-producing prospective run
+user_judah_h,Judah,christ_genealogy,hebrew,יהודה,user requested 2026-05-21 before result-producing prospective run
+user_perez_h,Perez,christ_genealogy,hebrew,פרץ,user requested 2026-05-21 before result-producing prospective run
+user_hezron_h,Hezron,christ_genealogy,hebrew,חצרון,user requested 2026-05-21 before result-producing prospective run
+user_ram_h,Ram,christ_genealogy,hebrew,רם,user requested 2026-05-21 before result-producing prospective run
+user_amminadab_h,Amminadab,christ_genealogy,hebrew,עמינדב,user requested 2026-05-21 before result-producing prospective run
+user_nahshon_h,Nahshon,christ_genealogy,hebrew,נחשון,user requested 2026-05-21 before result-producing prospective run
+user_salmon_h,Salmon,christ_genealogy,hebrew,שלמון,user requested 2026-05-21 before result-producing prospective run
+user_boaz_h,Boaz,christ_genealogy,hebrew,בעז,user requested 2026-05-21 before result-producing prospective run
+user_obed_h,Obed,christ_genealogy,hebrew,עובד,user requested 2026-05-21 before result-producing prospective run
+user_jesse_h,Jesse,christ_genealogy,hebrew,ישי,user requested 2026-05-21 before result-producing prospective run
+user_david_h,David,christ_genealogy,hebrew,דוד,user requested 2026-05-21 before result-producing prospective run
+user_solomon_h,Solomon,christ_genealogy,hebrew,שלמה,user requested 2026-05-21 before result-producing prospective run
+user_rehoboam_h,Rehoboam,christ_genealogy,hebrew,רחבעם,user requested 2026-05-21 before result-producing prospective run
+user_abijah_h,Abijah,christ_genealogy,hebrew,אביה,user requested 2026-05-21 before result-producing prospective run
+user_asa_h,Asa,christ_genealogy,hebrew,אסא,user requested 2026-05-21 before result-producing prospective run
+user_jehoshaphat_h,Jehoshaphat,christ_genealogy,hebrew,יהושפט,user requested 2026-05-21 before result-producing prospective run
+user_joram_h,Joram,christ_genealogy,hebrew,יורם,user requested 2026-05-21 before result-producing prospective run
+user_uzziah_h,Uzziah,christ_genealogy,hebrew,עזיה,user requested 2026-05-21 before result-producing prospective run
+user_jotham_h,Jotham,christ_genealogy,hebrew,יותם,user requested 2026-05-21 before result-producing prospective run
+user_ahaz_h,Ahaz,christ_genealogy,hebrew,אחז,user requested 2026-05-21 before result-producing prospective run
+user_hezekiah_h,Hezekiah,christ_genealogy,hebrew,חזקיה,user requested 2026-05-21 before result-producing prospective run
+user_manasseh_h,Manasseh,christ_genealogy,hebrew,מנשה,user requested 2026-05-21 before result-producing prospective run
+user_amos_h,Amos/Amon,christ_genealogy,hebrew,אמון,user requested 2026-05-21 before result-producing prospective run
+user_josiah_h,Josiah,christ_genealogy,hebrew,יאשיה,user requested 2026-05-21 before result-producing prospective run
+user_jeconiah_h,Jeconiah,christ_genealogy,hebrew,יכניה,user requested 2026-05-21 before result-producing prospective run
+user_shealtiel_h,Shealtiel,christ_genealogy,hebrew,שאלתיאל,user requested 2026-05-21 before result-producing prospective run
+user_zerubbabel_h,Zerubbabel,christ_genealogy,hebrew,זרובבל,user requested 2026-05-21 before result-producing prospective run
+user_eliakim_h,Eliakim,christ_genealogy,hebrew,אליקים,user requested 2026-05-21 before result-producing prospective run
+user_eleazar_h,Eleazar/Lazarus,christ_genealogy,hebrew,אלעזר,user requested 2026-05-21 before result-producing prospective run
+user_matthan_h,Matthan,christ_genealogy,hebrew,מתן,user requested 2026-05-21 before result-producing prospective run
+user_john_h,John,gospel_people,hebrew,יוחנן,user requested 2026-05-21 before result-producing prospective run
+user_zachariah_h,Zachariah,gospel_people,hebrew,זכריה,user requested 2026-05-21 before result-producing prospective run
+user_simeon_h,Simeon,gospel_people,hebrew,שמעון,user requested 2026-05-21 before result-producing prospective run
+user_nicodemus_h,Nicodemus,gospel_people,hebrew,נקדימון,user requested 2026-05-21 before result-producing prospective run
+user_caiaphas_h,Caiaphas,gospel_people,hebrew,קיפא,user requested 2026-05-21 before result-producing prospective run
+user_annas_h,Annas,gospel_people,hebrew,חנן,user requested 2026-05-21 before result-producing prospective run
+user_herod_h,Herod,gospel_people,hebrew,הורדוס,user requested 2026-05-21 before result-producing prospective run
+user_pilate_h,Pilate,gospel_people,hebrew,פילטוס,user requested 2026-05-21 before result-producing prospective run
+user_barabbas_h,Barabbas,gospel_people,hebrew,בר אבא,user requested 2026-05-21 before result-producing prospective run
+user_simon_cyrene_h,Simon of Cyrene,gospel_people,hebrew,שמעון הקירני,user requested 2026-05-21 before result-producing prospective run
+user_cleopas_h,Cleopas,gospel_people,hebrew,קלופס,user requested 2026-05-21 before result-producing prospective run
+user_zacchaeus_h,Zacchaeus,gospel_people,hebrew,זכי,user requested 2026-05-21 before result-producing prospective run
+user_simon_peter_h,Simon Peter,disciples,hebrew,שמעון פטרוס,user requested 2026-05-21 before result-producing prospective run
+user_andrew_h,Andrew,disciples,hebrew,אנדרי,user requested 2026-05-21 before result-producing prospective run
+user_philip_h,Philip,disciples,hebrew,פיליפוס,user requested 2026-05-21 before result-producing prospective run
+user_bartholomew_h,Bartholomew,disciples,hebrew,ברתולמי,user requested 2026-05-21 before result-producing prospective run
+user_thomas_h,Thomas,disciples,hebrew,תומא,user requested 2026-05-21 before result-producing prospective run
+user_matthew_h,Matthew,disciples,hebrew,מתתיה,user requested 2026-05-21 before result-producing prospective run
+user_thaddaeus_h,Thaddaeus,disciples,hebrew,תדי,user requested 2026-05-21 before result-producing prospective run
+user_judas_iscariot_h,Judas Iscariot,disciples,hebrew,יהודה איש קריות,user requested 2026-05-21 before result-producing prospective run

@@ -3,7 +3,7 @@
     {
       "id": "greek_surface_new_terms",
       "title": "Greek Surface Prospective New Terms",
-      "status": "blocked_until_new_term_source",
+      "status": "needs_clean_prospective_lock",
       "language": "greek",
       "term_file": "terms/greek_surface_new_terms.csv",
       "protocol": "protocols/greek_surface_new_terms.toml",
@@ -21,9 +21,9 @@
       "context_rule": "ELS center verse contains normalized target as surface text",
       "controls": "all_available_same_length_real_word_controls",
       "correction": "benjamini_hochberg_across_selected_rows",
-      "source_term_files": "new external Greek term source; not the existing expanded Greek pool",
+      "source_term_files": "user-requested 2026-05-21 Greek term source, after prior-evidence screening",
       "dedupe_rule": "language + normalized term",
-      "excluded_prior": "all terms and patterns already present in Greek expanded surface and Greek surface prospective evidence",
+      "excluded_prior": "all terms and patterns already present in Greek expanded surface, Greek surface prospective evidence, and centered occurrence evidence",
       "candidate_rule": "all four Greek NT sources have exact-center surface pattern with normalized length >= 5",
       "primary_row_outcome": "selected row beats same-length controls by all-source exact-center surface-pattern count",
       "primary_study_outcome": "BH q <= 0.05 across all tested selected rows"
@@ -86,7 +86,7 @@
     {
       "id": "compound_extension_prospective",
       "title": "Prospective Compound Extension Study",
-      "status": "needs_predeclared_term_list",
+      "status": "needs_clean_prospective_lock",
       "language": "hebrew",
       "term_file": "terms/compound_extension_prospective_terms.csv",
       "protocol": "protocols/compound_extension_prospective.toml",
@@ -105,9 +105,9 @@
       "context_rule": "hidden term plus adjacent same-skip letters forms a surface word or phrase from the same corpus",
       "controls": "5000 shuffled-term and 5000 random controls per registered target",
       "correction": "benjamini_hochberg_across_all_registered_compound_targets",
-      "source_term_files": "new predeclared compound-extension target list, not rows selected from the all-codes queue",
+      "source_term_files": "user-requested 2026-05-21 Hebrew Gospel/genealogy target list, after prior-evidence screening",
       "dedupe_rule": "normalized term + skip + direction + extension type + extended sequence",
-      "excluded_prior": "all rows selected from the relaxed all-codes queue, including יום יהוה -> היומיהוה",
+      "excluded_prior": "all rows selected from the relaxed all-codes queue plus exact/review overlaps from prior term and centered occurrence evidence",
       "candidate_rule": "predeclared terms produce compound extensions and survive conservative all-control q threshold",
       "primary_row_outcome": "conservative all-control q for each compound extension row",
       "primary_study_outcome": "BH q <= 0.05 across all registered compound-extension rows"

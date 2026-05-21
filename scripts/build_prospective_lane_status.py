@@ -16,6 +16,7 @@ DEFAULT_OUT = Path("docs/PROSPECTIVE_LANE_STATUS.md")
 STATUS_READS = {
     "blocked_until_new_term_source": "blocked; needs new external term source",
     "needs_predeclared_term_list": "blocked; needs predeclared term list",
+    "needs_clean_prospective_lock": "blocked; term source added, needs clean prospective lock",
     "completed_negative_controlled_result": "completed negative controlled result",
     "completed_negative_weak_controlled_result": "completed weak or negative controlled result",
     "completed_negative_curiosity_appendix": "completed negative curiosity appendix",
