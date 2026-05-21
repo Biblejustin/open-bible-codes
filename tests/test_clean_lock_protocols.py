@@ -98,3 +98,12 @@ def test_final_report_includes_clean_lock_closeout() -> None:
     assert "## Clean-Lock Close-Out" in text
     assert "0 Hebrew concordance rows and 0 Greek surface rows" in text
     assert "`docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`" in text
+
+
+def test_consolidated_findings_include_clean_lock_closeout() -> None:
+    text = Path("docs/CONSOLIDATED_FINDINGS.md").read_text(encoding="utf-8")
+
+    assert "Clean-lock follow-up lanes" in text
+    assert "87" in text
+    assert "uncorrected-only representative-control prompts" in text
+    assert "0 Hebrew concordance rows and 0 Greek surface rows" in text

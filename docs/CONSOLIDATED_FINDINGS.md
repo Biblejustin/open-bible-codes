@@ -63,6 +63,17 @@ found all 15 with Benjamini-Hochberg `q_ge <= 0.01`, and 3 terms stood above
 every shuffled sample.
 Neither result is public-claim evidence.
 
+Clean-lock follow-up lanes added after earlier evidence rows were excluded did
+not produce claim-ready material. Hebrew concordance words produced 87
+uncorrected-only representative-control prompts and 0 adjusted-support terms.
+The audit buckets those prompts as 38 ordinary lexical prompts, 33
+proper-name/gloss prompts, 10 high-volume short-string/common-letter prompts, 5
+sparse all-source prompts, and 1 control-artifact prompt. Greek surface new
+terms produced 5 controlled rows with `q <= 0.05`, but manual context review
+found visible local surface-context or direct self-lexeme effects. The strict
+follow-up gate leaves 0 Hebrew concordance rows and 0 Greek surface rows as
+claim-ready from these clean-lock queues.
+
 ## What Looks Weak
 
 ### Modern Names And Geopolitical Terms
