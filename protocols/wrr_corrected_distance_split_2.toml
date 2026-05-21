@@ -1,0 +1,134 @@
+name = "wrr_corrected_distance_split_2"
+description = "Two-shard WRR corrected-distance diagnostic run and merge; local/Windows split compatible."
+manifest_out = "reports/wrr_1994/shards/split_2_protocol.manifest.json"
+max_parallel = 2
+progress_interval_seconds = 15
+
+[[steps]]
+id = "compute_wrr2_corrected_distance_shard_0_of_2"
+description = "Run corrected-distance diagnostic shard 0 of 2."
+parallel_group = "wrr_corrected_distance_shards"
+argv = [
+  "-m", "scripts.analyze_wrr_corrected_distance",
+  "--pair-table", "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--candidate-lane", "length_5_8_smoke_candidate",
+  "--min-skip", "2",
+  "--search-max-skip", "250",
+  "--direction", "both",
+  "--jobs", "0",
+  "--row-width-count", "10",
+  "--minimum-valid", "10",
+  "--skip-cap-mode", "term",
+  "--skip-cap-formula", "printed",
+  "--shard-index", "0",
+  "--shard-count", "2",
+  "--out", "reports/wrr_1994/shards/wrr2_corrected_distance_s00of02.csv",
+  "--summary-out", "reports/wrr_1994/shards/wrr2_corrected_distance_s00of02_summary.csv",
+  "--markdown-out", "reports/wrr_1994/shards/wrr2_corrected_distance_s00of02.md",
+  "--manifest-out", "reports/wrr_1994/shards/wrr2_corrected_distance_s00of02.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_corrected_distance.py",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "configs/example_koren_genesis.toml",
+  "els/wrr.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wrr_1994/shards/wrr2_corrected_distance_s00of02.csv",
+  "reports/wrr_1994/shards/wrr2_corrected_distance_s00of02_summary.csv",
+  "reports/wrr_1994/shards/wrr2_corrected_distance_s00of02.md",
+  "reports/wrr_1994/shards/wrr2_corrected_distance_s00of02.manifest.json",
+]
+
+[[steps]]
+id = "compute_wrr2_corrected_distance_shard_1_of_2"
+description = "Run corrected-distance diagnostic shard 1 of 2."
+parallel_group = "wrr_corrected_distance_shards"
+argv = [
+  "-m", "scripts.analyze_wrr_corrected_distance",
+  "--pair-table", "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--candidate-lane", "length_5_8_smoke_candidate",
+  "--min-skip", "2",
+  "--search-max-skip", "250",
+  "--direction", "both",
+  "--jobs", "0",
+  "--row-width-count", "10",
+  "--minimum-valid", "10",
+  "--skip-cap-mode", "term",
+  "--skip-cap-formula", "printed",
+  "--shard-index", "1",
+  "--shard-count", "2",
+  "--out", "reports/wrr_1994/shards/wrr2_corrected_distance_s01of02.csv",
+  "--summary-out", "reports/wrr_1994/shards/wrr2_corrected_distance_s01of02_summary.csv",
+  "--markdown-out", "reports/wrr_1994/shards/wrr2_corrected_distance_s01of02.md",
+  "--manifest-out", "reports/wrr_1994/shards/wrr2_corrected_distance_s01of02.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_corrected_distance.py",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "configs/example_koren_genesis.toml",
+  "els/wrr.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wrr_1994/shards/wrr2_corrected_distance_s01of02.csv",
+  "reports/wrr_1994/shards/wrr2_corrected_distance_s01of02_summary.csv",
+  "reports/wrr_1994/shards/wrr2_corrected_distance_s01of02.md",
+  "reports/wrr_1994/shards/wrr2_corrected_distance_s01of02.manifest.json",
+]
+
+[[steps]]
+id = "merge_wrr2_corrected_distance_split_2"
+description = "Merge two corrected-distance diagnostic shards."
+argv = [
+  "-m", "scripts.merge_wrr_corrected_distance_shards",
+  "--expected-shard-count", "2",
+  "--shard", "reports/wrr_1994/shards/wrr2_corrected_distance_s00of02.csv",
+  "--shard", "reports/wrr_1994/shards/wrr2_corrected_distance_s01of02.csv",
+  "--shard-summary", "reports/wrr_1994/shards/wrr2_corrected_distance_s00of02_summary.csv",
+  "--shard-summary", "reports/wrr_1994/shards/wrr2_corrected_distance_s01of02_summary.csv",
+  "--out", "reports/wrr_1994/wrr2_corrected_distance_smoke_merged.csv",
+  "--summary-out", "reports/wrr_1994/wrr2_corrected_distance_smoke_merged_summary.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_corrected_distance_smoke_merged.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_corrected_distance_smoke_merged.manifest.json",
+]
+inputs = [
+  "scripts/merge_wrr_corrected_distance_shards.py",
+  "reports/wrr_1994/shards/wrr2_corrected_distance_s00of02.csv",
+  "reports/wrr_1994/shards/wrr2_corrected_distance_s01of02.csv",
+  "reports/wrr_1994/shards/wrr2_corrected_distance_s00of02_summary.csv",
+  "reports/wrr_1994/shards/wrr2_corrected_distance_s01of02_summary.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_corrected_distance_smoke_merged.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_smoke_merged_summary.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_smoke_merged.md",
+  "reports/wrr_1994/wrr2_corrected_distance_smoke_merged.manifest.json",
+]
+
+[[steps]]
+id = "aggregate_wrr2_corrected_distance_split_2"
+description = "Aggregate merged corrected-distance diagnostic rows into P1..P4 diagnostics."
+argv = [
+  "-m", "scripts.analyze_wrr_corrected_distance_aggregate",
+  "--input", "reports/wrr_1994/wrr2_corrected_distance_smoke_merged.csv",
+  "--p1-threshold", "0.2",
+  "--out", "reports/wrr_1994/wrr2_corrected_distance_aggregate_merged.csv",
+  "--markdown-out", "reports/wrr_1994/wrr2_corrected_distance_aggregate_merged.md",
+  "--manifest-out", "reports/wrr_1994/wrr2_corrected_distance_aggregate_merged.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_corrected_distance_aggregate.py",
+  "reports/wrr_1994/wrr2_corrected_distance_smoke_merged.csv",
+  "els/wrr.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr2_corrected_distance_aggregate_merged.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_aggregate_merged.md",
+  "reports/wrr_1994/wrr2_corrected_distance_aggregate_merged.manifest.json",
+]

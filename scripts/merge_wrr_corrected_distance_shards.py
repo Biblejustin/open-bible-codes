@@ -32,6 +32,11 @@ def main(argv: list[str] | None = None) -> int:
         raise ValueError("number of --shard inputs does not match --expected-shard-count")
     rows = merge_rows(read_shards(shard_paths))
     summary_rows = read_summaries(args.shard_summary)
+    validate_merge_inputs(
+        rows,
+        summary_rows,
+        expected_shard_count=args.expected_shard_count,
+    )
     summary = summarize_merged_rows(rows, summary_rows)
     write_csv(args.out, FIELDNAMES, rows)
     write_csv(args.summary_out, SUMMARY_FIELDNAMES, [summary])
@@ -139,6 +144,47 @@ def summarize_merged_rows(
     }
 
 
+def validate_merge_inputs(
+    rows: list[dict[str, str]],
+    summary_rows: list[dict[str, str]],
+    *,
+    expected_shard_count: int = 0,
+) -> None:
+    if not summary_rows:
+        return
+    expected_rows = sum(int_value(row.get("pairs", "")) for row in summary_rows)
+    if expected_rows != len(rows):
+        raise ValueError(f"shard summaries report {expected_rows} rows, merged CSV has {len(rows)}")
+    shard_count = shard_count_from_summaries(summary_rows)
+    if expected_shard_count and shard_count != expected_shard_count:
+        raise ValueError(
+            f"shard summaries use shard_count {shard_count}, expected {expected_shard_count}"
+        )
+    indexes = sorted(int_value(row.get("shard_index", "")) for row in summary_rows)
+    expected_indexes = list(range(shard_count))
+    if indexes != expected_indexes:
+        raise ValueError(f"shard indexes {indexes} do not match expected {expected_indexes}")
+    selected_values = {
+        int_value(row.get("selected_pairs", ""))
+        for row in summary_rows
+        if row.get("selected_pairs", "") != ""
+    }
+    if len(selected_values) == 1 and len(rows) != next(iter(selected_values)):
+        raise ValueError(
+            f"merged CSV has {len(rows)} rows, selected_pairs reports {next(iter(selected_values))}"
+        )
+
+
+def shard_count_from_summaries(summary_rows: list[dict[str, str]]) -> int:
+    values = {int_value(row.get("shard_count", "")) for row in summary_rows}
+    if len(values) != 1:
+        raise ValueError(f"shard summaries disagree on shard_count: {sorted(values)}")
+    shard_count = next(iter(values))
+    if shard_count < 1:
+        raise ValueError("shard_count must be >= 1")
+    return shard_count
+
+
 def merged_parameters(summary_rows: list[dict[str, str]]) -> dict[str, str]:
     if not summary_rows:
         return {}
@@ -158,6 +204,12 @@ def merged_parameters(summary_rows: list[dict[str, str]]) -> dict[str, str]:
             raise ValueError(f"shard summaries disagree on {field}: {sorted(values)}")
         params[field] = next(iter(values), "")
     return params
+
+
+def int_value(value: object) -> int:
+    if value in ("", None):
+        return 0
+    return int(float(str(value)))
 
 
 def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, object]]) -> None:

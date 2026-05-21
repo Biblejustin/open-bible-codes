@@ -88,7 +88,9 @@ Already implemented:
   blank.
 - Corrected-distance shard support in `scripts/analyze_wrr_corrected_distance.py`
   plus `scripts/merge_wrr_corrected_distance_shards.py`; see
-  `docs/WRR_WINDOWS_SPLIT.md` for Mac/Windows split commands.
+  `docs/WRR_WINDOWS_SPLIT.md` and
+  `protocols/wrr_corrected_distance_split_2.toml` for Mac/Windows split
+  commands and local split/merge verification.
 - WRR claim-readiness gate in `scripts/check_wrr_claim_readiness.py`, wired
   into `protocols/wrr_audit_counts.toml`, keeping reproduction language blocked
   until pair universe, `D(w)`, full corrected distance, and permutation/aggregate

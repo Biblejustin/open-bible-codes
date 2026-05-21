@@ -5,6 +5,12 @@ Windows. This is diagnostic only, not claim-grade reproduction.
 
 Use the same git commit and source files on both machines.
 
+For a Mac-only verification of the same split/merge flow:
+
+```bash
+python3 -m scripts.run_protocol protocols/wrr_corrected_distance_split_2.toml --resume
+```
+
 ## Mac Shard
 
 ```bash
