@@ -258,7 +258,7 @@ Carry these with controls attached:
 Current fast validation:
 
 ```bash
-python3 -m unittest discover -v
+python3 -m pytest -q
 git diff --check
 python3 -m scripts.build_docs_index --docs-dir docs --out docs/INDEX.md
 python3 -m scripts.build_protocol_index --protocols-dir protocols --out protocols/INDEX.md
