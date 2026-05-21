@@ -53,6 +53,11 @@ Current pushed commits for this cleanup:
 - `201a341` Refresh generated indexes.
 - `4aac5c1` Stabilize Gog Magog prospective report.
 - `bf48336` Update follow-up status docs.
+- `d0ff0fb` Add WRR corrected-distance aggregate diagnostic.
+- `c421b5d` Add WRR claim readiness gate.
+- `fc07423` Link WRR readiness gate in reports.
+- `59cce62` Gate WRR claim catalog on readiness.
+- `cb24ceb` Require WRR readiness in report preflight.
 
 ### Formal Real Report Rerun
 
@@ -130,6 +135,7 @@ Tracked references:
 - `docs/WRR_REPLICATION_PLAN.md`
 - `docs/WRR_METHODOLOGY_GAPS.md`
 - `docs/WRR_CORRECTED_DISTANCE_NOTES.md`
+- `docs/WRR_CLAIM_READINESS.md`
 - `reports/wrr_1994/wrr2_pair_eligibility_table.csv`
 - `tests/test_wrr_stats.py`
 
@@ -259,11 +265,12 @@ python3 -m scripts.build_protocol_index --protocols-dir protocols --out protocol
 python3 -m scripts.check_public_release_hygiene --allow-dirty
 ```
 
-Current observed result after the locked-rerun and volatility-cleanup pass:
+Current observed result after the WRR readiness gate and preflight guard pass:
 
-- `python3 -m unittest discover -v` passed: 695 tests after the follow-up
-  status doc cleanup.
+- `python3 -m pytest -q` passed: 1022 tests and 5730 subtests.
 - `python3 -m pytest tests/test_import_bolls_translation.py tests/test_english_version_manifests.py -q` passed: 11 tests and 117 subtests.
 - `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
+- `python3 -m pytest tests/test_real_report_run.py tests/test_claim_catalog.py tests/test_wrr_claim_readiness.py -q` passed: 32 tests and 60 subtests.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_check.json` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
