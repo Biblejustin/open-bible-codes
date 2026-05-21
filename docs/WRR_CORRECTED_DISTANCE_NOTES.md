@@ -177,6 +177,9 @@ Already implemented:
   80 rows whose minimum exact perturbation count remains below 10. The joined
   pair-readiness diagnostic has 0 ready pairs, 40 pairs missing checked hits on
   one side, and 46 pairs below the exact-perturbation threshold.
+- exploratory all-lane corrected-distance diagnostics over all 182 imported
+  same-record pairs also define 0 corrected distances. At `search-max-skip=250`
+  the max valid perturbation count is 3; at `search-max-skip=1000` it is 4.
 
 Not yet implemented:
 
