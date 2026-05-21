@@ -152,10 +152,14 @@ WRR aggregate work now has a diagnostic P1/P2 bridge:
 
 - `scripts/analyze_wrr_corrected_distance_aggregate.py`
 - `reports/wrr_1994/wrr2_corrected_distance_aggregate.csv`
+- `scripts/check_wrr_claim_readiness.py`
+- `docs/WRR_CLAIM_READINESS.md`
 
 Current read: the length-5..8 corrected-distance smoke output still has 0
-defined `c(w,w')` values, so P1/P2 remain blank. This is not yet the
-claim-grade P1..P4/permutation driver.
+defined `c(w,w')` values, so P1/P2 remain blank. The readiness gate stays
+blocked until pair universe, `D(w)`, full corrected distance, and
+permutation/aggregate statuses are locked. This is not yet the claim-grade
+P1..P4/permutation driver.
 
 ### 2. Source-Basis Audit Queue
 

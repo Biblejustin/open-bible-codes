@@ -774,6 +774,26 @@ outputs = [
 ]
 
 [[steps]]
+id = "check_wrr_claim_readiness"
+description = "Write the WRR claim-readiness gate from the current method-status matrix."
+argv = [
+  "-m", "scripts.check_wrr_claim_readiness",
+  "--status", "reports/wrr_1994/wrr_method_status.csv",
+  "--out", "reports/wrr_1994/wrr_claim_readiness.csv",
+  "--markdown-out", "docs/WRR_CLAIM_READINESS.md",
+  "--manifest-out", "reports/wrr_1994/wrr_claim_readiness.manifest.json",
+]
+inputs = [
+  "scripts/check_wrr_claim_readiness.py",
+  "reports/wrr_1994/wrr_method_status.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_claim_readiness.csv",
+  "docs/WRR_CLAIM_READINESS.md",
+  "reports/wrr_1994/wrr_claim_readiness.manifest.json",
+]
+
+[[steps]]
 id = "audit_wrr2_genesis_pairs_len_5_8"
 description = "Audit WRR appendix-compatible 5..8-letter same-record pair rows."
 argv = [

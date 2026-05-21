@@ -85,6 +85,10 @@ Already implemented:
   `protocols/wrr_audit_counts.toml`, computing P1/P2 only when defined
   corrected-distance values exist. Current length-5..8 smoke output has 0
   defined values, so P1/P2 remain blank.
+- WRR claim-readiness gate in `scripts/check_wrr_claim_readiness.py`, wired
+  into `protocols/wrr_audit_counts.toml`, keeping reproduction language blocked
+  until pair universe, `D(w)`, full corrected distance, and permutation/aggregate
+  statuses are locked.
 
 Source audit:
 

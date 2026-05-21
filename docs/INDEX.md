@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 280
+Documents indexed: 281
 
 ## Controls
 
@@ -88,6 +88,7 @@ Documents indexed: 280
 | Title | Path |
 | --- | --- |
 | ELS Hypothesis Analysis Framework | `HYPOTHESIS_ANALYSIS_FRAMEWORK.md` |
+| WRR Claim Readiness | `WRR_CLAIM_READINESS.md` |
 | WRR Corrected Distance Notes | `WRR_CORRECTED_DISTANCE_NOTES.md` |
 | WRR Methodology Gaps | `WRR_METHODOLOGY_GAPS.md` |
 | WRR Method Status | `WRR_METHOD_STATUS.md` |
