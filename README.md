@@ -336,6 +336,18 @@ Locked four-source `δοξα` claim follow-up:
 
 ```bash
 python3 -m scripts.run_protocol protocols/doxa_four_source_claim_followup.toml --resume
+python3 -m scripts.build_doxa_four_source_claim_followup_report \
+  --paired-summary reports/doxa_four_source_claim_followup/paired_controls_summary.csv \
+  --context-summary reports/doxa_four_source_claim_followup/context_review_summary.csv \
+  --protocol-manifest reports/doxa_four_source_claim_followup/protocol_run.manifest.json \
+  --report-out docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md \
+  --manifest-out reports/doxa_four_source_claim_followup/report.manifest.json \
+  --report-title "Doxa Four-Source Claim Follow-Up Report" \
+  --preregistration-doc docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_PREREGISTRATION.md \
+  --protocol-path protocols/doxa_four_source_claim_followup.toml \
+  --term-control-samples 5000 \
+  --random-control-samples 5000 \
+  --preregistration-commit c91925b
 ```
 
 Preregistration:
@@ -356,7 +368,8 @@ python3 -m scripts.build_doxa_four_source_claim_followup_report \
   --preregistration-doc docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_PREREGISTRATION.md \
   --protocol-path protocols/doxa_four_source_confirmatory_followup.toml \
   --term-control-samples 20000 \
-  --random-control-samples 20000
+  --random-control-samples 20000 \
+  --preregistration-commit 79f3c73
 ```
 
 Preregistration:

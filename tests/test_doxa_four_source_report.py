@@ -1,3 +1,5 @@
+import pytest
+
 from scripts import build_doxa_four_source_claim_followup_report as report
 
 
@@ -127,6 +129,33 @@ def test_report_can_point_to_confirmatory_output_dir() -> None:
     assert "20000 shuffled-term controls" in text
     assert "reports/doxa_four_source_confirmatory_followup/paired_controls_summary.csv" in text
     assert "reports/doxa_four_source_confirmatory_followup/letter_paths.md" in text
+
+
+def test_cli_requires_explicit_preregistration_commit(tmp_path) -> None:
+    paired = tmp_path / "paired.csv"
+    context = tmp_path / "context.csv"
+    manifest = tmp_path / "protocol.json"
+    paired.write_text("corpus\n", encoding="utf-8")
+    context.write_text("corpus\n", encoding="utf-8")
+    manifest.write_text("{}", encoding="utf-8")
+
+    with pytest.raises(SystemExit, match="preregistration-commit"):
+        report.main(
+            [
+                "--paired-summary",
+                str(paired),
+                "--context-summary",
+                str(context),
+                "--protocol-manifest",
+                str(manifest),
+                "--report-out",
+                str(tmp_path / "report.md"),
+                "--manifest-out",
+                str(tmp_path / "manifest.json"),
+                "--run-commit",
+                "abc123",
+            ]
+        )
 
 
 def test_report_omits_volatile_step_timings(tmp_path) -> None:

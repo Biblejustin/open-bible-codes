@@ -42,7 +42,11 @@ def main(argv: list[str] | None = None) -> int:
     context_rows = read_rows(args.context_summary)
     protocol_manifest = read_json(args.protocol_manifest)
     run_commit = args.run_commit or git_commit()
-    prereg_commit = args.preregistration_commit or run_commit
+    if not args.preregistration_commit:
+        raise SystemExit(
+            "--preregistration-commit is required so locked reports do not drift with HEAD"
+        )
+    prereg_commit = args.preregistration_commit
     report = build_report(
         paired_rows=paired_rows,
         context_rows=context_rows,
