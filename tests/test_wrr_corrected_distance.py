@@ -9,6 +9,7 @@ from scripts.analyze_wrr_corrected_distance import (
     collect_perturbed_occurrences_by_term,
     collect_pair_terms,
     select_pair_rows,
+    shard_pair_rows,
     summarize,
 )
 
@@ -24,6 +25,24 @@ class WrrCorrectedDistanceScriptTests(unittest.TestCase):
 
         self.assertEqual([row["pair_id"] for row in selected], ["p1"])
         self.assertEqual(select_pair_rows(rows, "all"), rows)
+
+    def test_shard_pair_rows_splits_by_stable_position(self) -> None:
+        rows = [
+            pair("p0", "app", "date"),
+            pair("p1", "app", "date"),
+            pair("p2", "app", "date"),
+            pair("p3", "app", "date"),
+            pair("p4", "app", "date"),
+        ]
+
+        self.assertEqual(
+            [row["pair_id"] for row in shard_pair_rows(rows, shard_index=0, shard_count=2)],
+            ["p0", "p2", "p4"],
+        )
+        self.assertEqual(
+            [row["pair_id"] for row in shard_pair_rows(rows, shard_index=1, shard_count=2)],
+            ["p1", "p3"],
+        )
 
     def test_collect_pair_terms_reads_appellation_and_date_normalized_terms(self) -> None:
         terms = collect_pair_terms([pair("p1", "app", "date")])
@@ -138,6 +157,8 @@ class WrrCorrectedDistanceScriptTests(unittest.TestCase):
             skip_cap_mode="term",
             skip_cap_formula="printed",
             minimum_valid=10,
+            shard_index=1,
+            shard_count=3,
         )
         rows = [
             {
@@ -160,8 +181,11 @@ class WrrCorrectedDistanceScriptTests(unittest.TestCase):
             },
         ]
 
-        summary = summarize(rows, args)
+        summary = summarize(rows, args, selected_pair_count=9)
 
+        self.assertEqual(summary["selected_pairs"], 9)
+        self.assertEqual(summary["shard_index"], 1)
+        self.assertEqual(summary["shard_count"], 3)
         self.assertEqual(summary["pairs"], 3)
         self.assertEqual(summary["defined_corrected_distances"], 1)
         self.assertEqual(summary["ordinary_not_valid_pairs"], 1)

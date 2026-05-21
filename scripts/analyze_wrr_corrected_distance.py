@@ -59,6 +59,9 @@ FIELDNAMES = [
 ]
 
 SUMMARY_FIELDNAMES = [
+    "selected_pairs",
+    "shard_index",
+    "shard_count",
     "pairs",
     "candidate_lane",
     "search_max_skip",
@@ -96,8 +99,14 @@ class PerturbedTermStats:
 def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(argv)
+    validate_shard_args(args.shard_index, args.shard_count)
     corpus = load_corpus(args.config)
-    pair_rows = select_pair_rows(read_rows(args.pair_table), args.candidate_lane)
+    selected_pair_rows = select_pair_rows(read_rows(args.pair_table), args.candidate_lane)
+    pair_rows = shard_pair_rows(
+        selected_pair_rows,
+        shard_index=args.shard_index,
+        shard_count=args.shard_count,
+    )
     terms = collect_pair_terms(pair_rows)
     max_skip_by_query = build_max_skip_by_query(corpus.text, terms, args)
     occurrences, stats = collect_perturbed_occurrences_by_term(
@@ -118,7 +127,7 @@ def main(argv: list[str] | None = None) -> int:
         row_width_count=args.row_width_count,
         minimum_valid=args.minimum_valid,
     )
-    summary = summarize(rows, args)
+    summary = summarize(rows, args, selected_pair_count=len(selected_pair_rows))
     write_rows(args.out, FIELDNAMES, rows)
     write_rows(args.summary_out, SUMMARY_FIELDNAMES, [summary])
     write_markdown(args.markdown_out, rows, summary, args)
@@ -146,11 +155,20 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--skip-cap-mode", choices=["term", "fixed"], default="term")
     parser.add_argument("--target-expected-hits", type=float, default=10.0)
     parser.add_argument("--skip-cap-formula", choices=["printed", "program"], default="printed")
+    parser.add_argument("--shard-index", type=int, default=0)
+    parser.add_argument("--shard-count", type=int, default=1)
     parser.add_argument("--out", type=Path, default=OUT)
     parser.add_argument("--summary-out", type=Path, default=SUMMARY_OUT)
     parser.add_argument("--markdown-out", type=Path, default=MD_OUT)
     parser.add_argument("--manifest-out", type=Path, default=MANIFEST_OUT)
     return parser
+
+
+def validate_shard_args(shard_index: int, shard_count: int) -> None:
+    if shard_count < 1:
+        raise ValueError("--shard-count must be >= 1")
+    if shard_index < 0 or shard_index >= shard_count:
+        raise ValueError("--shard-index must be >= 0 and < --shard-count")
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:
@@ -165,6 +183,22 @@ def select_pair_rows(
     if candidate_lane in ("", "all"):
         return rows
     return [row for row in rows if row.get("candidate_lane", "") == candidate_lane]
+
+
+def shard_pair_rows(
+    rows: list[dict[str, str]],
+    *,
+    shard_index: int,
+    shard_count: int,
+) -> list[dict[str, str]]:
+    validate_shard_args(shard_index, shard_count)
+    if shard_count == 1:
+        return rows
+    return [
+        row
+        for index, row in enumerate(rows)
+        if index % shard_count == shard_index
+    ]
 
 
 def collect_pair_terms(rows: list[dict[str, str]]) -> dict[str, PairTerm]:
@@ -419,7 +453,12 @@ def read_label(status: str, valid_triples: int, minimum_valid: int) -> str:
     return "undefined"
 
 
-def summarize(rows: list[dict[str, object]], args: argparse.Namespace) -> dict[str, object]:
+def summarize(
+    rows: list[dict[str, object]],
+    args: argparse.Namespace,
+    *,
+    selected_pair_count: int | None = None,
+) -> dict[str, object]:
     defined_rows = [
         row for row in rows if row.get("corrected_distance_status") == "defined"
     ]
@@ -429,6 +468,9 @@ def summarize(rows: list[dict[str, object]], args: argparse.Namespace) -> dict[s
         default=None,
     )
     return {
+        "selected_pairs": len(rows) if selected_pair_count is None else selected_pair_count,
+        "shard_index": args.shard_index,
+        "shard_count": args.shard_count,
         "pairs": len(rows),
         "candidate_lane": args.candidate_lane,
         "search_max_skip": args.search_max_skip,
@@ -481,6 +523,7 @@ def write_markdown(
         f"- candidate lane: `{args.candidate_lane}`",
         f"- skip cap mode: `{args.skip_cap_mode}`",
         f"- skip cap formula: `{args.skip_cap_formula}`",
+        f"- shard: `{args.shard_index}` of `{args.shard_count}`",
         "",
         "## Summary",
         "",
@@ -543,6 +586,8 @@ def write_manifest(
             "skip_cap_mode": args.skip_cap_mode,
             "skip_cap_formula": args.skip_cap_formula,
             "target_expected_hits": args.target_expected_hits,
+            "shard_index": args.shard_index,
+            "shard_count": args.shard_count,
         },
         "corpus": corpus_summary,
         "term_count": len(stats),
