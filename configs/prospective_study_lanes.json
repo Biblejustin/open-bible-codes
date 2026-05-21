@@ -113,6 +113,35 @@
       "primary_study_outcome": "BH q <= 0.05 across all registered compound-extension rows"
     },
     {
+      "id": "hebrew_concordance_words_prospective",
+      "title": "Hebrew Concordance Words Prospective",
+      "status": "needs_clean_prospective_lock",
+      "language": "hebrew",
+      "term_file": "terms/hebrew_concordance_prospective_terms.csv",
+      "protocol": "protocols/hebrew_concordance_words_prospective.toml",
+      "report_doc": "docs/HEBREW_CONCORDANCE_PROSPECTIVE_TERMS.md",
+      "sources": [
+        {"label": "MT_WLC", "path": "configs/example_oshb_wlc.toml"},
+        {"label": "UXLC", "path": "configs/example_uxlc.toml"},
+        {"label": "EBIBLE_WLC", "path": "configs/example_ebible_hebwlc.toml"},
+        {"label": "MAM", "path": "configs/example_mam.toml"},
+        {"label": "UHB", "path": "configs/example_uhb.toml"}
+      ],
+      "skip_range": "2..100",
+      "direction": "both",
+      "min_normalized_length": "4",
+      "candidate_type": "open-concordance Hebrew headword rows",
+      "context_rule": "version-presence matrix; no surface-context promotion before clean lock",
+      "controls": "representative MT_WLC and UHB shuffled-term/random controls after clean lock",
+      "correction": "benjamini_hochberg_across_representative_control_rows",
+      "source_term_files": "OpenScriptures StrongHebrewG headwords cross-checked against STEP Bible TAHOT main lexical tags",
+      "dedupe_rule": "language + normalized term",
+      "excluded_prior": "all exact/review overlaps from prior term pools and centered occurrence evidence",
+      "candidate_rule": "headword is in StrongHebrewG, normalized length >= 4, and appears as STEP TAHOT main lexical tag",
+      "primary_row_outcome": "version-presence scope plus representative-control q value",
+      "primary_study_outcome": "source-distribution report until a clean locked cohort is promoted"
+    },
+    {
       "id": "local_terms_negative_appendix",
       "title": "Local Terms Negative Appendix",
       "status": "completed_negative_curiosity_appendix",
