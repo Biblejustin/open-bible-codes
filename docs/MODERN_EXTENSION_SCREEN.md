@@ -28,17 +28,17 @@ Generated local reports:
   skip lane
 - Phrase lexicon: surface words and surface phrases up to 4 words in the same
   corpus
-- Runtime observed: 32.910s
+- Runtime observed: 38.262s
 
 ## Hit Counts
 
 | Corpus | Terms | Capped hits | Context hits | Zero-hit rows |
 | --- | ---: | ---: | ---: | ---: |
-| MT_WLC | 82 | 1,136 | 193 | 28 |
-| UHB | 82 | 1,133 | 191 | 28 |
-| LXX | 46 | 410 | 49 | 25 |
-| TR_NT | 46 | 343 | 36 | 27 |
-| SBLGNT | 46 | 338 | 29 | 28 |
+| MT_WLC | 96 | 1,153 | 193 | 41 |
+| UHB | 96 | 1,149 | 191 | 41 |
+| LXX | 60 | 410 | 49 | 39 |
+| TR_NT | 60 | 343 | 36 | 41 |
+| SBLGNT | 60 | 338 | 29 | 42 |
 
 ## Top Phrase Extensions
 
@@ -54,6 +54,16 @@ The strict summary filter kept phrase-like extension rows only:
 | LXX | `ισραηλ` (Israel; English: Israel) | 15 | term_plus_after | `ισραηλανα` (Israel ana; English: Israel up/again) | `Ισραηλ ανα` (Israel ana; English: Israel up/again) | biblical Israel phrase |
 | SBLGNT | `χαρισ` (charis; English: grace) | 10 | before_plus_term | `ιναηχαρισ` (hina he charis; English: so that the grace) | `ινα η χαρις` (hina he charis; English: so that the grace) | Harris transliteration collides with Greek grace |
 | TR_NT | none | - | - | - | - | no filtered top rows |
+
+Phrase-summary rows after the strict filter:
+
+| Corpus | Phrase rows | Strict top rows | Plus-term top rows |
+| --- | ---: | ---: | ---: |
+| MT_WLC | 51 | 2 | 2 |
+| UHB | 24 | 2 | 2 |
+| LXX | 35 | 1 | 1 |
+| TR_NT | 24 | 0 | 0 |
+| SBLGNT | 27 | 1 | 1 |
 
 ## Read
 

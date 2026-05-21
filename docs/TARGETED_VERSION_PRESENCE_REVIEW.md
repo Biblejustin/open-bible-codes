@@ -26,9 +26,9 @@ Latest observed runtimes:
 
 | Step | Runtime |
 | --- | ---: |
-| `targeted_version_presence` | `0.182s` |
-| `targeted_version_presence_paired_controls` | `10.809s` |
-| `targeted_version_presence_controlled_review` | `0.177s` |
+| `targeted_version_presence` | `0.223s` |
+| `targeted_version_presence_paired_controls` | `11.009s` |
+| `targeted_version_presence_controlled_review` | `0.222s` |
 
 ## Scope
 

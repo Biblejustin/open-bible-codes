@@ -41,12 +41,12 @@ First observed uncached timings:
 
 | Step | Runtime |
 | --- | ---: |
-| export Hebrew hits | 0.939s |
-| export Greek hits | 0.492s |
-| MT_WLC extensions | 2.868s |
-| UHB extensions | 2.555s |
-| TR_NT extensions | 1.371s |
-| SBLGNT extensions | 1.373s |
+| export Hebrew hits | 0.979s |
+| export Greek hits | 0.511s |
+| MT_WLC extensions | 4.176s |
+| UHB extensions | 3.724s |
+| TR_NT extensions | 1.879s |
+| SBLGNT extensions | 1.848s |
 
 Resume check after the run was cached.
 
@@ -54,19 +54,19 @@ Resume check after the run was cached.
 
 | Output | Rows |
 | --- | ---: |
-| `extensions_hebrew_mt_wlc.csv` | 298 |
-| `extensions_hebrew_uhb.csv` | 263 |
-| `extensions_greek_tr_nt.csv` | 153 |
-| `extensions_greek_sblgnt.csv` | 152 |
+| `extensions_hebrew_mt_wlc.csv` | 284 |
+| `extensions_hebrew_uhb.csv` | 252 |
+| `extensions_greek_tr_nt.csv` | 137 |
+| `extensions_greek_sblgnt.csv` | 140 |
 
 Phrase-summary rows after the strict filter:
 
 | Corpus | Phrase rows |
 | --- | ---: |
-| `MT_WLC` | 6 |
-| `UHB` | 4 |
-| `TR_NT` | 15 |
-| `SBLGNT` | 10 |
+| `MT_WLC` | 5 |
+| `UHB` | 3 |
+| `TR_NT` | 11 |
+| `SBLGNT` | 8 |
 
 Strict top rows:
 
