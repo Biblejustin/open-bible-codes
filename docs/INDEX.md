@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 297
+Documents indexed: 298
 
 ## Controls
 
@@ -185,6 +185,7 @@ Documents indexed: 297
 | Centered Occurrence Index | `CENTERED_OCCURRENCE_INDEX.md` |
 | Chapter Position Bias | `CHAPTER_POSITION_BIAS.md` |
 | Claim Catalog | `CLAIM_CATALOG.md` |
+| Clean-Lock Results Summary | `CLEAN_LOCK_RESULTS_SUMMARY.md` |
 | Cohort Cluster Density Audit | `COHORT_CLUSTER_DENSITY_AUDIT.md` |
 | Common Bible Codes / ELS Test | `COMMON_EDLS_TEST.md` |
 | Cosmic Codes Source Audit | `COSMIC_CODES_AUDIT.md` |

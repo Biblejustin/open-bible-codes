@@ -57,3 +57,12 @@ def test_greek_new_terms_report_step_uses_specific_title() -> None:
     argv = step["argv"]
 
     assert argv[argv.index("--title") + 1] == "Greek Surface New Terms Prospective Report"
+
+
+def test_clean_lock_results_summary_tracks_completed_lanes() -> None:
+    text = Path("docs/CLEAN_LOCK_RESULTS_SUMMARY.md").read_text(encoding="utf-8")
+
+    assert "| Greek surface new terms | 236 |" in text
+    assert "| Hebrew Gospel/genealogy | 27 |" in text
+    assert "| Hebrew concordance words | 3,577 |" in text
+    assert "0 adjusted-support terms" in text
