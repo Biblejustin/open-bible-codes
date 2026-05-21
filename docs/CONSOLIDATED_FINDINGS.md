@@ -789,20 +789,25 @@ Current viable choices:
 
 - a genuinely new Greek surface prospective cohort, if a clean new term source
   is supplied;
-- a Hebrew/modern/geopolitical source-distribution study, framed as version
-  presence rather than claim support;
-- a Gog/Magog prophetic-symbol pair-control study;
 - a true prospective compound-extension study, using a predeclared term list
-  rather than rows selected from the existing all-codes queue;
-- a transparent local-term negative/curiosity appendix.
+  rather than rows selected from the existing all-codes queue.
+
+Completed lanes should not be rerun as claim-oriented studies without a
+materially new hypothesis or term source:
+
+- Hebrew/modern/geopolitical source-distribution study: completed as weak or
+  negative controlled review material;
+- Gog/Magog prophetic-symbol pair-control study: completed as weak or negative
+  controlled prospective material;
+- local-term negative/curiosity appendix: completed.
 
 The Greek surface public-claim standard is now written in
 `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`. Use it before launching a
 new result-producing surface study.
 
-Recommended next target if continuing analysis: choose one of the five lanes in
-`docs/PROSPECTIVE_STUDY_READINESS.md` and lock it before running. Avoid more
-raw count expansion until the claim standard is fixed in advance.
+Recommended next target if continuing analysis: choose one of the still-open
+lanes in `docs/PROSPECTIVE_STUDY_READINESS.md` and lock it before running.
+Avoid more raw count expansion until the claim standard is fixed in advance.
 
 That post-discovery follow-up design is now frozen in
 `docs/DOXA_FOLLOWUP_PREREGISTRATION.md`. The first locked follow-up run is
