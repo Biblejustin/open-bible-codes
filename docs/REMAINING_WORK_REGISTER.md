@@ -154,7 +154,7 @@ transparent resonant row-width proxy with a fuller source-method reconstruction,
 recover source-published Fisher weights if a citable source becomes available,
 and only then consider real Torah-code source data.
 
-WRR aggregate work now has a diagnostic P1/P2 bridge:
+WRR aggregate work now has a diagnostic P1..P4 bridge:
 
 - `scripts/analyze_wrr_corrected_distance_aggregate.py`
 - `reports/wrr_1994/wrr2_corrected_distance_aggregate.csv`
@@ -162,7 +162,7 @@ WRR aggregate work now has a diagnostic P1/P2 bridge:
 - `docs/WRR_CLAIM_READINESS.md`
 
 Current read: the length-5..8 corrected-distance smoke output still has 0
-defined `c(w,w')` values, so P1/P2 remain blank. The readiness gate stays
+defined `c(w,w')` values, so P1..P4 remain blank. The readiness gate stays
 blocked until pair universe, `D(w)`, full corrected distance, and
 permutation/aggregate statuses are locked. This is not yet the claim-grade
 P1..P4/permutation driver.

@@ -10,6 +10,7 @@ from els.wrr import (
     cylindrical_letter_distance_squared,
     els_window_count,
     expected_els_count,
+    is_wrr_rabbi_title_appellation,
     is_perturbed_els_match,
     iter_perturbed_els_matches,
     nearest_integer_half_up,
@@ -609,6 +610,12 @@ class WrrStatsTests(unittest.TestCase):
         values = [0.1, 0.2, 0.4]
 
         self.assertAlmostEqual(p1_binomial_tail(values), binomial_upper_tail(3, 2, 0.2))
+
+    def test_is_wrr_rabbi_title_appellation_uses_source_prefix(self) -> None:
+        self.assertTrue(is_wrr_rabbi_title_appellation("RBYABRHM"))
+        self.assertTrue(is_wrr_rabbi_title_appellation("RBYYHWDH"))
+        self.assertFalse(is_wrr_rabbi_title_appellation("RABY"))
+        self.assertFalse(is_wrr_rabbi_title_appellation("HRABY"))
 
     def test_product_uniform_cdf_matches_singleton_product(self) -> None:
         self.assertAlmostEqual(product_uniform_cdf_from_log(math.log(0.25), 1), 0.25)

@@ -97,7 +97,8 @@ Already implemented:
   `els/wrr.py`. These implement the source-described fixed-row-width distance
   `f^2 + f'^2 + l^2 + 1`, use `f' = 1` for surface-letter strings, and sum
   the inverse distances across declared candidate row widths.
-- `P1`, `P2`, permutation-rank, and Bonferroni `rho0` helpers in `els/wrr.py`;
+- `P1`, `P2`, Rabbi-title appellation screening for the smaller P3/P4
+  sample, permutation-rank, and Bonferroni `rho0` helpers in `els/wrr.py`;
 - WRR perturbation triples, perturbed-offset generation, exact perturbed-ELS
   match checks, bounded perturbed-match iteration, and first-ten row-width
   helpers in `els/wrr.py`;
@@ -158,8 +159,10 @@ Already implemented:
   to 4 but still does not define any corrected distances.
 - corrected-distance aggregate diagnostic in
   `scripts/analyze_wrr_corrected_distance_aggregate.py`. It computes P1/P2
-  only from defined `c(w,w')` rows. Current length-5..8 smoke output has 0
-  defined values, so aggregate P1/P2 are intentionally blank.
+  from all defined `c(w,w')` rows and P3/P4 from the smaller sample that omits
+  appellations whose imported source token starts with title `RBY`. Current
+  length-5..8 smoke output has 0 defined values, so aggregate P1..P4 are
+  intentionally blank.
 
 Not yet implemented:
 
@@ -210,8 +213,8 @@ Not yet implemented:
    formula documented by MBBK; current audit rows expose both.
 2. Extend the smoke corrected-distance driver into an optimized full run over
    the final locked pair universe.
-3. Feed defined `c(w,w')` rows into claim-grade aggregate `P1`..`P4` and
-   permutation tests.
+3. Feed defined `c(w,w')` rows into the aggregate `P1`..`P4` diagnostic and
+   then into claim-grade permutation tests.
 
 ## Current Read
 

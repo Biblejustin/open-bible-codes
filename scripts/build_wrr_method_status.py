@@ -238,7 +238,7 @@ def aggregate_status(
         return {
             "decision_area": "Aggregate statistic and permutation",
             "status": "not_built",
-            "current_read": "P1/P2 arithmetic helpers and a corrected-distance aggregate diagnostic exist, but no claim-grade P1..P4 or date-permutation runner exists.",
+            "current_read": "P1..P4 arithmetic diagnostics over corrected-distance rows exist, but no date-permutation runner exists.",
             "evidence": f"No primary Table 3 source-result row was supplied; {local_evidence}",
             "next_action": "Implement only after final pair universe and corrected-distance values are locked.",
         }
@@ -250,7 +250,7 @@ def aggregate_status(
     return {
         "decision_area": "Aggregate statistic and permutation",
         "status": "source_locked_not_built",
-        "current_read": "Published Table 3 ranks are source-audited; local P1/P2 aggregate diagnostics exist, but claim-grade P1..P4 and date-permutation runners are not built.",
+        "current_read": "Published Table 3 ranks are source-audited; local P1..P4 aggregate diagnostics exist, but the date-permutation runner is not built.",
         "evidence": (
             f"Source Table 3: G min {genesis.get('min_statistic', '')} rank "
             f"{genesis.get('min_rank', '')}, p0={genesis.get('bonferroni_p0', '')}; "
@@ -266,12 +266,14 @@ def aggregate_evidence(row: dict[str, str] | None) -> str:
     defined = row.get("defined_corrected_distances", "")
     if defined == "0":
         return (
-            f"local P1/P2 aggregate diagnostic has {defined} defined c-values "
-            f"from {row.get('rows', '')} rows, so P1/P2 remain blank"
+            f"local P1..P4 aggregate diagnostic has {defined} defined c-values "
+            f"from {row.get('rows', '')} rows, so P1..P4 remain blank"
         )
     return (
-        f"local P1={row.get('p1', '')}, P2={row.get('p2', '')} from "
-        f"{defined} defined c-values"
+        f"local P1={row.get('p1', '')}, P2={row.get('p2', '')}, "
+        f"P3={row.get('p3', '')}, P4={row.get('p4', '')} from "
+        f"{defined} defined c-values; P3/P4 smaller sample has "
+        f"{row.get('p3_p4_sample_defined_corrected_distances', '')} defined c-values"
     )
 
 

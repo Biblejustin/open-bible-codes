@@ -12,6 +12,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from els import __version__
+from els.wrr import is_wrr_rabbi_title_appellation
 
 
 TERMS = Path("reports/wrr_1994/wrr2_terms.csv")
@@ -34,6 +35,7 @@ FIELDNAMES = [
     "appellation_term_id",
     "appellation_term",
     "appellation_normalized",
+    "appellation_starts_with_rabbi_title",
     "appellation_length",
     "appellation_hit_count",
     "appellation_skip_cap",
@@ -67,6 +69,9 @@ SUMMARY_FIELDNAMES = [
     "appellation_min_length_pairs",
     "length_filtered_pairs",
     "wnp_disputed_zacut_pairs",
+    "rabbi_title_pairs",
+    "non_rabbi_title_pairs",
+    "length_filtered_non_rabbi_title_pairs",
     "zero_hit_pairs",
     "pairs_with_skip_cap_target_unreached",
     "pairs_with_close_hits",
@@ -207,6 +212,7 @@ def build_pair_row(
     date_wrr_length_ok = min_length <= date_length <= max_length
     length_filtered_ok = app_wrr_length_ok and date_wrr_length_ok
     wnp_disputed = is_wnp_disputed_zacut_appellation(app)
+    rabbi_title = is_wrr_rabbi_title_appellation(app.get("term", ""))
     app_target_reached = app_skip.get("target_reached", "")
     date_target_reached = date_skip.get("target_reached", "")
     notes = eligibility_notes(
@@ -227,6 +233,7 @@ def build_pair_row(
         "appellation_term_id": app["term_id"],
         "appellation_term": app.get("term", ""),
         "appellation_normalized": app_count.get("normalized_term", ""),
+        "appellation_starts_with_rabbi_title": rabbi_title,
         "appellation_length": app_length,
         "appellation_hit_count": int_or_zero(app_count.get("hit_count")),
         "appellation_skip_cap": app_skip.get("skip_cap", ""),
@@ -315,6 +322,9 @@ def eligibility_notes(
 def summarize(rows: list[dict[str, object]], *, expected_published_pairs: int) -> dict[str, object]:
     app_min_pairs = sum(1 for row in rows if bool(row["appellation_min_length_ok"]))
     length_pairs = sum(1 for row in rows if bool(row["length_filtered_pair_ok"]))
+    rabbi_title_pairs = sum(
+        1 for row in rows if bool(row.get("appellation_starts_with_rabbi_title"))
+    )
     return {
         "pairs": len(rows),
         "concepts": len({row["concept"] for row in rows}),
@@ -322,6 +332,14 @@ def summarize(rows: list[dict[str, object]], *, expected_published_pairs: int) -
         "length_filtered_pairs": length_pairs,
         "wnp_disputed_zacut_pairs": sum(
             1 for row in rows if bool(row["wnp_disputed_zacut_appellation"])
+        ),
+        "rabbi_title_pairs": rabbi_title_pairs,
+        "non_rabbi_title_pairs": len(rows) - rabbi_title_pairs,
+        "length_filtered_non_rabbi_title_pairs": sum(
+            1
+            for row in rows
+            if bool(row["length_filtered_pair_ok"])
+            and not bool(row.get("appellation_starts_with_rabbi_title"))
         ),
         "zero_hit_pairs": sum(
             1

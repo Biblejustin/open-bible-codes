@@ -800,6 +800,8 @@ corrected distance:
   count;
 - `P1` as the binomial upper tail for `c(w,w') <= 0.2`;
 - `P2` as the product-of-uniforms transform;
+- the paper-described P3/P4 smaller-sample split that omits appellations whose
+  imported source token starts with title `RBY`;
 - permutation-rank `rho` with half-weighted ties;
 - Bonferroni `rho0 = 4 min(rho_i)`.
 - WRR perturbation triples, perturbed offsets, exact perturbed-ELS match

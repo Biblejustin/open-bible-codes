@@ -83,7 +83,7 @@ refutation of the WRR paper.
 | Exclusions | Every excluded appellation/date row has a citable rule | Not locked; one Zacut-appellation exclusion would close 165 to 163, but that is only a diagnostic hypothesis. |
 | Skip caps | Term-specific WRR `D(w)` windows applied for each accepted term | Not locked; helpers now support both the printed WRR formula and the reported WRR-program formula. The skip-cap audit keeps printed selected while reporting program caps side by side. Current pair/control screens still use broad fixed caps for smoke tests. |
 | Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Helpers now include conservative supplied-row domain labeling, real-corpus WRR2 domain diagnostics with undefined-reason labels, defined-domain-only ordinary `Q(w,w')` diagnostics, exact perturbed-ELS match checks, domain-weighted `Q(w,w')` summation for domain-labeled ELS rows, a tested pair-level corrected-distance arithmetic bridge for already-domain-labeled perturbation sets, a smoke real-corpus perturbed-row/domain driver, and the source-count WRR `v/m` rank step. Undefined `c(w,w')` conditions are source-backed; optimized full-run corrected distances over the final pair universe are still missing. |
-| Aggregate statistic | `P1`, `P2`, `P3`, `P4`, rank handling, and `rho0` run over the locked pair set | P1/P2 diagnostic aggregation now exists for defined corrected-distance rows, but current smoke output has 0 defined values. No reproduction driver can run until the pair set and corrected distances are fixed. |
+| Aggregate statistic | `P1`, `P2`, `P3`, `P4`, rank handling, and `rho0` run over the locked pair set | P1..P4 diagnostic aggregation now exists for defined corrected-distance rows; P3/P4 use the smaller non-Rabbi-title sample. Current smoke output has 0 defined values. No reproduction driver can run until the pair set and corrected distances are fixed. |
 | Permutation test | Date/rabbi pairings shuffled under the declared WRR rule with recorded seeds/counts | Not built. |
 | Report label | Result can be marked reproduction, failed reproduction, or under-specified | Current label must remain `under_specified`; `docs/WRR_CLAIM_READINESS.md` keeps the claim gate blocked. |
 
@@ -225,9 +225,9 @@ formula versus reported-program formula choice remains a method lock item.
 ### 5. Aggregate Statistic And Permutations
 
 The repo has tested helpers for `P1`, `P2`, permutation rank, and Bonferroni
-`rho0`, plus a P1/P2 aggregate diagnostic over already-defined
+`rho0`, plus a P1..P4 aggregate diagnostic over already-defined
 corrected-distance rows. Current smoke output has 0 defined c-values, so local
-P1/P2 remain blank. It still needs a claim-grade driver that:
+P1..P4 remain blank. It still needs a claim-grade driver that:
 
 - computes corrected distances for the locked pair set;
 - computes `P1`, `P2`, `P3`, and `P4` over that locked set;

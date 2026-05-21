@@ -905,6 +905,17 @@ def p1_binomial_tail(c_values: Iterable[float], *, threshold: float = 0.2) -> fl
     return binomial_upper_tail(n, k, threshold)
 
 
+def is_wrr_rabbi_title_appellation(term: str) -> bool:
+    """Return whether a WRR ASCII source term starts with title `Rabbi`.
+
+    The imported WRR2 plain-text source represents the Hebrew title Rabbi as
+    the ASCII prefix `RBY`. Terms such as `RABY` include an aleph in the source
+    transcription and are not title matches.
+    """
+
+    return term.strip().upper().startswith("RBY")
+
+
 def binomial_upper_tail(n: int, k: int, probability: float) -> float:
     if n < 0:
         raise ValueError("n must be >= 0")

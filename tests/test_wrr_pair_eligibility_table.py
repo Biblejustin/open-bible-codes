@@ -52,6 +52,7 @@ class WrrPairEligibilityTableTests(unittest.TestCase):
             by_pair["app_ok__date_ok"]["candidate_lane"],
             "length_5_8_smoke_candidate",
         )
+        self.assertFalse(by_pair["app_ok__date_ok"]["appellation_starts_with_rabbi_title"])
         self.assertEqual(
             by_pair["app_ok__date_long"]["candidate_lane"],
             "appellation_min_length_candidate",
@@ -94,6 +95,32 @@ class WrrPairEligibilityTableTests(unittest.TestCase):
         )
         self.assertEqual(rows[0]["candidate_lane"], "length_5_8_smoke_candidate")
 
+    def test_rabbi_title_appellation_is_flagged_for_p3_p4_sample(self) -> None:
+        terms = [
+            term("rabbi_app", "WRR2 01", "wrr_appellation", "RBYABRHM"),
+            term("plain_app", "WRR2 01", "wrr_appellation", "RABY"),
+            term("date", "WRR2 01", "wrr_date", "DATEA"),
+        ]
+        counts = {
+            "rabbi_app": count("RBYABRHM", 8, 1),
+            "plain_app": count("R)BY", 4, 1),
+            "date": count("DATEA", 5, 1),
+        }
+
+        rows = build_pair_rows(
+            terms,
+            counts,
+            {},
+            {},
+            app_min_length=4,
+            min_length=4,
+            max_length=8,
+        )
+        by_app = {row["appellation_term_id"]: row for row in rows}
+
+        self.assertTrue(by_app["rabbi_app"]["appellation_starts_with_rabbi_title"])
+        self.assertFalse(by_app["plain_app"]["appellation_starts_with_rabbi_title"])
+
     def test_summarize_reports_gap_counts(self) -> None:
         rows = [
             {
@@ -129,6 +156,9 @@ class WrrPairEligibilityTableTests(unittest.TestCase):
         self.assertEqual(summary["appellation_min_length_pairs"], 2)
         self.assertEqual(summary["length_filtered_pairs"], 1)
         self.assertEqual(summary["wnp_disputed_zacut_pairs"], 1)
+        self.assertEqual(summary["rabbi_title_pairs"], 0)
+        self.assertEqual(summary["non_rabbi_title_pairs"], 2)
+        self.assertEqual(summary["length_filtered_non_rabbi_title_pairs"], 1)
         self.assertEqual(summary["zero_hit_pairs"], 1)
         self.assertEqual(summary["pairs_with_skip_cap_target_unreached"], 1)
         self.assertEqual(summary["gap_appellation_min_length_to_expected"], 1)

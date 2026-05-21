@@ -97,6 +97,7 @@ class WrrCorrectedDistanceScriptTests(unittest.TestCase):
         )
 
         self.assertEqual(rows[0]["pair_valid_perturbations"], 10)
+        self.assertEqual(rows[0]["appellation_starts_with_rabbi_title"], "True")
         self.assertEqual(rows[0]["ordinary_q"], "0.333333333333")
         self.assertEqual(rows[0]["corrected_distance"], "0.3")
         self.assertEqual(rows[0]["corrected_distance_status"], "defined")
@@ -182,6 +183,7 @@ def pair(
         "candidate_lane": lane,
         "pair_review_status": "needs_primary_source_pair_rule",
         "appellation_term_id": app_id,
+        "appellation_starts_with_rabbi_title": "True",
         "appellation_normalized": "ABC",
         "date_term_id": date_id,
         "date_normalized": "DEF",

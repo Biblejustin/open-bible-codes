@@ -41,6 +41,7 @@ FIELDNAMES = [
     "candidate_lane",
     "pair_review_status",
     "appellation_term_id",
+    "appellation_starts_with_rabbi_title",
     "date_term_id",
     "appellation_ordinary_hits",
     "date_ordinary_hits",
@@ -350,6 +351,10 @@ def build_corrected_distance_rows(
                 "candidate_lane": pair.get("candidate_lane", ""),
                 "pair_review_status": pair.get("pair_review_status", ""),
                 "appellation_term_id": app_id,
+                "appellation_starts_with_rabbi_title": pair.get(
+                    "appellation_starts_with_rabbi_title",
+                    "",
+                ),
                 "date_term_id": date_id,
                 "appellation_ordinary_hits": app_stats.ordinary_hits,
                 "date_ordinary_hits": date_stats.ordinary_hits,
