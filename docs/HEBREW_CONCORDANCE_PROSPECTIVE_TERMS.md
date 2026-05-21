@@ -51,10 +51,18 @@ The ignored audit artifacts were written under `reports/study_locks/`:
 - `hebrew_concordance_prospective_terms.prior_evidence_audit.*`
 - `hebrew_concordance_prospective_terms.clean_candidates.*`
 
-## Interpretation
+## Outcome
 
 - The concordance-derived raw list is now a tracked study input.
 - The raw list is not a clean prospective lock because 266 rows overlap prior evidence.
 - The clean lock file was re-audited with zero prior-evidence matches.
-- A result-producing run should use the clean locked candidate set.
-- `docs/PROSPECTIVE_LANE_STATUS.md` marks this lane ready for lock manifest and preflight.
+- The clean locked candidate set was run through the prospective protocol.
+- The full representative-control run found 87 uncorrected-only review prompts
+  and 0 adjusted-support terms.
+- `docs/PROSPECTIVE_LANE_STATUS.md` now marks this lane completed negative.
+
+Result artifacts:
+
+- `docs/HEBREW_CONCORDANCE_WORDS_PROSPECTIVE_REPORT.md`
+- `docs/HEBREW_CONCORDANCE_UNCORRECTED_SCREENING_AUDIT.md`
+- `docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`

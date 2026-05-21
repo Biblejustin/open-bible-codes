@@ -130,3 +130,15 @@ def test_prospective_readiness_marks_current_profiles_closed() -> None:
     assert "lane" in readiness
     assert "Do not rerun a completed profile as a claim lane" in readiness
     assert "historical/status records" in manifests
+
+
+def test_term_source_notes_point_to_completed_outcomes() -> None:
+    user_terms = Path("docs/USER_REQUESTED_PROSPECTIVE_TERMS.md").read_text(encoding="utf-8")
+    concordance = Path("docs/HEBREW_CONCORDANCE_PROSPECTIVE_TERMS.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert "now marks the affected lanes completed" in user_terms
+    assert "manual context review found local surface-context/self-lexeme effects" in user_terms
+    assert "now marks this lane completed negative" in concordance
+    assert "87 uncorrected-only review prompts" in concordance

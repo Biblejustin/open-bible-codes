@@ -41,10 +41,21 @@ The ignored audit artifacts were written under `reports/study_locks/`:
 - `compound_extension_prospective_terms.prior_evidence_audit.*`
 - `compound_extension_prospective_terms.clean_candidates.*`
 
-## Interpretation
+## Outcome
 
 - The raw lists are now tracked study inputs.
 - The raw lists are not clean prospective locks because many rows overlap prior evidence.
 - The clean lock files above were re-audited with zero prior-evidence matches.
-- A result-producing run should use the clean locked candidate sets.
-- `docs/PROSPECTIVE_LANE_STATUS.md` marks the affected lanes ready for lock manifest and preflight.
+- The clean locked candidate sets were run through their prospective protocols.
+- Greek surface new terms produced 5 controlled review rows with `q <= 0.05`,
+  but manual context review found local surface-context/self-lexeme effects.
+- Hebrew Gospel/genealogy terms produced 3 uncorrected-only representative-
+  control rows and 0 adjusted-support terms.
+- `docs/PROSPECTIVE_LANE_STATUS.md` now marks the affected lanes completed.
+
+Result artifacts:
+
+- `docs/GREEK_SURFACE_NEW_TERMS_REPORT.md`
+- `docs/GREEK_SURFACE_NEW_TERMS_CONTEXT_REVIEW.md`
+- `docs/COMPOUND_EXTENSION_PROSPECTIVE_REPORT.md`
+- `docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`
