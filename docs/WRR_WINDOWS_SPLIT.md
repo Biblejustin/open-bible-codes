@@ -11,6 +11,19 @@ For a Mac-only verification of the same split/merge flow:
 python3 -m scripts.run_protocol protocols/wrr_corrected_distance_split_2.toml --resume
 ```
 
+For the local high-cap diagnostic used to test whether the default cap is the
+only reason no corrected distances define:
+
+```bash
+python3 -m scripts.run_protocol protocols/wrr_corrected_distance_highcap_1000_split_2.toml --resume
+```
+
+Current high-cap diagnostic read: `search-max-skip=1000` still yields 0
+defined corrected distances over 86 smoke-lane pairs. The merged run has max
+valid perturbation count 4. Pair readiness has 0 ready pairs, 40 pairs missing
+checked hits on at least one side, and 46 pairs below the exact-perturbation
+threshold.
+
 ## Mac Shard
 
 ```bash

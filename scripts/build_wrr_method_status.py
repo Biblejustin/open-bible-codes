@@ -21,6 +21,15 @@ DEFAULT_TABLE2_ROW_OCR_SUMMARY = Path("reports/wrr_1994/wrr_primary_table2_row_o
 DEFAULT_SKIP_SUMMARY = Path("reports/wrr_1994/wrr2_skip_caps_summary.csv")
 DEFAULT_VARIANTS = Path("reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv")
 DEFAULT_AGGREGATE = Path("reports/wrr_1994/wrr2_corrected_distance_aggregate.csv")
+DEFAULT_HIGHCAP_CORRECTED_DISTANCE_SUMMARY = Path(
+    "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_merged_summary.csv"
+)
+DEFAULT_HIGHCAP_PERTURBATION_SUMMARY = Path(
+    "reports/wrr_1994/highcap_1000/wrr2_perturbation_diagnostics_summary.csv"
+)
+DEFAULT_HIGHCAP_PAIR_READINESS_SUMMARY = Path(
+    "reports/wrr_1994/highcap_1000/wrr2_perturbation_pair_readiness_summary.csv"
+)
 DEFAULT_PRIMARY_RESULT_TABLE = Path("reports/wrr_1994/wrr_primary_result_table.csv")
 DEFAULT_OUT = Path("reports/wrr_1994/wrr_method_status.csv")
 DEFAULT_MD = Path("docs/WRR_METHOD_STATUS.md")
@@ -78,6 +87,11 @@ def main(argv: list[str] | None = None) -> int:
     skip_row = read_one_row(args.skip_summary)
     variant_rows = read_rows(args.corrected_distance_variants)
     aggregate_row = read_one_row(args.corrected_distance_aggregate) if args.corrected_distance_aggregate.exists() else None
+    highcap_corrected_distance_row = read_optional_one_row(
+        args.highcap_corrected_distance_summary
+    )
+    highcap_perturbation_row = read_optional_one_row(args.highcap_perturbation_summary)
+    highcap_pair_readiness_row = read_optional_one_row(args.highcap_pair_readiness_summary)
     primary_result_rows = read_rows(args.primary_result_table)
     rows = build_status_rows(
         text_row,
@@ -89,6 +103,9 @@ def main(argv: list[str] | None = None) -> int:
         table2_ocr_row,
         table2_row_ocr_row,
         aggregate_row,
+        highcap_corrected_distance_row,
+        highcap_perturbation_row,
+        highcap_pair_readiness_row,
     )
     write_csv(args.out, rows)
     write_markdown(args.markdown_out, rows, args)
@@ -109,6 +126,21 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--skip-summary", type=Path, default=DEFAULT_SKIP_SUMMARY)
     parser.add_argument("--corrected-distance-variants", type=Path, default=DEFAULT_VARIANTS)
     parser.add_argument("--corrected-distance-aggregate", type=Path, default=DEFAULT_AGGREGATE)
+    parser.add_argument(
+        "--highcap-corrected-distance-summary",
+        type=Path,
+        default=DEFAULT_HIGHCAP_CORRECTED_DISTANCE_SUMMARY,
+    )
+    parser.add_argument(
+        "--highcap-perturbation-summary",
+        type=Path,
+        default=DEFAULT_HIGHCAP_PERTURBATION_SUMMARY,
+    )
+    parser.add_argument(
+        "--highcap-pair-readiness-summary",
+        type=Path,
+        default=DEFAULT_HIGHCAP_PAIR_READINESS_SUMMARY,
+    )
     parser.add_argument("--primary-result-table", type=Path, default=DEFAULT_PRIMARY_RESULT_TABLE)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
@@ -128,6 +160,12 @@ def read_one_row(path: Path) -> dict[str, str]:
     return rows[0]
 
 
+def read_optional_one_row(path: Path) -> dict[str, str] | None:
+    if not path.exists():
+        return None
+    return read_one_row(path)
+
+
 def build_status_rows(
     text_row: dict[str, str],
     pair_row: dict[str, str],
@@ -138,6 +176,9 @@ def build_status_rows(
     table2_ocr_row: dict[str, str] | None = None,
     table2_row_ocr_row: dict[str, str] | None = None,
     corrected_distance_aggregate_row: dict[str, str] | None = None,
+    highcap_corrected_distance_row: dict[str, str] | None = None,
+    highcap_perturbation_row: dict[str, str] | None = None,
+    highcap_pair_readiness_row: dict[str, str] | None = None,
 ) -> list[dict[str, str]]:
     return [
         {
@@ -196,12 +237,22 @@ def build_status_rows(
             ),
             "next_action": "Choose printed-paper formula or reported-program formula before final corrected-distance run.",
         },
-        corrected_distance_status(variant_rows),
+        corrected_distance_status(
+            variant_rows,
+            highcap_corrected_distance_row,
+            highcap_perturbation_row,
+            highcap_pair_readiness_row,
+        ),
         aggregate_status(primary_result_rows or [], corrected_distance_aggregate_row),
     ]
 
 
-def corrected_distance_status(variant_rows: list[dict[str, str]]) -> dict[str, str]:
+def corrected_distance_status(
+    variant_rows: list[dict[str, str]],
+    highcap_corrected_distance_row: dict[str, str] | None = None,
+    highcap_perturbation_row: dict[str, str] | None = None,
+    highcap_pair_readiness_row: dict[str, str] | None = None,
+) -> dict[str, str]:
     if not variant_rows:
         return {
             "decision_area": "Corrected distance c(w,w')",
@@ -216,13 +267,54 @@ def corrected_distance_status(variant_rows: list[dict[str, str]]) -> dict[str, s
         f"{row.get('variant', '')}: {row.get('defined_corrected_distances', '')} defined"
         for row in variant_rows
     )
+    evidence_parts = [
+        f"{variants}; maximum valid perturbation count {max_valid}; total defined {sum(defined_counts)}"
+    ]
+    highcap = highcap_evidence(
+        highcap_corrected_distance_row,
+        highcap_perturbation_row,
+        highcap_pair_readiness_row,
+    )
+    if highcap:
+        evidence_parts.append(highcap)
     return {
         "decision_area": "Corrected distance c(w,w')",
         "status": "smoke_only",
         "current_read": "Smoke driver exists, but current candidate lane produces no defined corrected distances.",
-        "evidence": f"{variants}; maximum valid perturbation count {max_valid}; total defined {sum(defined_counts)}",
+        "evidence": "; ".join(evidence_parts),
         "next_action": "Optimize and rerun over final pair universe after D(w) and source rows are locked.",
     }
+
+
+def highcap_evidence(
+    corrected_distance_row: dict[str, str] | None,
+    perturbation_row: dict[str, str] | None,
+    pair_readiness_row: dict[str, str] | None,
+) -> str:
+    parts: list[str] = []
+    if corrected_distance_row:
+        parts.append(
+            "high-cap "
+            f"{corrected_distance_row.get('search_max_skip', '')} split: "
+            f"{corrected_distance_row.get('defined_corrected_distances', '')} defined over "
+            f"{corrected_distance_row.get('pairs', '')} pairs, max valid "
+            f"{corrected_distance_row.get('max_pair_valid_perturbations', '')}"
+        )
+    if perturbation_row:
+        parts.append(
+            "term diagnostic: "
+            f"{perturbation_row.get('rows_with_hits', '')}/{perturbation_row.get('rows', '')} rows with hits, "
+            f"max row-min exact {perturbation_row.get('max_exact_perturbation_matches', '')}, "
+            f"{perturbation_row.get('rows_with_checked_under_10_exact_matches', '')} rows under 10 exact"
+        )
+    if pair_readiness_row:
+        parts.append(
+            "pair readiness: "
+            f"{pair_readiness_row.get('pairs_ready', '')} ready, "
+            f"{pair_readiness_row.get('pairs_missing_checked_hits', '')} missing hits, "
+            f"{pair_readiness_row.get('pairs_under_10_exact_matches', '')} under exact"
+        )
+    return "; ".join(part for part in parts if part)
 
 
 def aggregate_status(
@@ -314,6 +406,9 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             f"--skip-summary {args.skip_summary} "
             f"--corrected-distance-variants {args.corrected_distance_variants} "
             f"--corrected-distance-aggregate {args.corrected_distance_aggregate} "
+            f"--highcap-corrected-distance-summary {args.highcap_corrected_distance_summary} "
+            f"--highcap-perturbation-summary {args.highcap_perturbation_summary} "
+            f"--highcap-pair-readiness-summary {args.highcap_pair_readiness_summary} "
             f"--primary-result-table {args.primary_result_table} "
             f"--out {args.out} "
             f"--markdown-out {args.markdown_out} "
@@ -426,6 +521,11 @@ def write_manifest(args: argparse.Namespace, rows: list[dict[str, str]], started
             "skip_summary": str(args.skip_summary),
             "corrected_distance_variants": str(args.corrected_distance_variants),
             "corrected_distance_aggregate": str(args.corrected_distance_aggregate),
+            "highcap_corrected_distance_summary": str(
+                args.highcap_corrected_distance_summary
+            ),
+            "highcap_perturbation_summary": str(args.highcap_perturbation_summary),
+            "highcap_pair_readiness_summary": str(args.highcap_pair_readiness_summary),
             "primary_result_table": str(args.primary_result_table),
         },
         "outputs": {

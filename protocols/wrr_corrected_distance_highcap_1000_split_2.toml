@@ -1,0 +1,195 @@
+name = "wrr_corrected_distance_highcap_1000_split_2"
+description = "Two-shard WRR corrected-distance diagnostic at search cap 1000, plus high-cap perturbation readiness checks."
+manifest_out = "reports/wrr_1994/highcap_1000/split_2_protocol.manifest.json"
+max_parallel = 2
+progress_interval_seconds = 15
+
+[[steps]]
+id = "compute_wrr2_highcap_1000_corrected_distance_shard_0_of_2"
+description = "Run high-cap corrected-distance diagnostic shard 0 of 2."
+parallel_group = "wrr_highcap_1000_corrected_distance_shards"
+argv = [
+  "-m", "scripts.analyze_wrr_corrected_distance",
+  "--pair-table", "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--candidate-lane", "length_5_8_smoke_candidate",
+  "--min-skip", "2",
+  "--search-max-skip", "1000",
+  "--direction", "both",
+  "--jobs", "1",
+  "--row-width-count", "10",
+  "--minimum-valid", "10",
+  "--skip-cap-mode", "term",
+  "--skip-cap-formula", "printed",
+  "--shard-index", "0",
+  "--shard-count", "2",
+  "--out", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s00of02.csv",
+  "--summary-out", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s00of02_summary.csv",
+  "--markdown-out", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s00of02.md",
+  "--manifest-out", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s00of02.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_corrected_distance.py",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "configs/example_koren_genesis.toml",
+  "els/wrr.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s00of02.csv",
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s00of02_summary.csv",
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s00of02.md",
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s00of02.manifest.json",
+]
+
+[[steps]]
+id = "compute_wrr2_highcap_1000_corrected_distance_shard_1_of_2"
+description = "Run high-cap corrected-distance diagnostic shard 1 of 2."
+parallel_group = "wrr_highcap_1000_corrected_distance_shards"
+argv = [
+  "-m", "scripts.analyze_wrr_corrected_distance",
+  "--pair-table", "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--candidate-lane", "length_5_8_smoke_candidate",
+  "--min-skip", "2",
+  "--search-max-skip", "1000",
+  "--direction", "both",
+  "--jobs", "1",
+  "--row-width-count", "10",
+  "--minimum-valid", "10",
+  "--skip-cap-mode", "term",
+  "--skip-cap-formula", "printed",
+  "--shard-index", "1",
+  "--shard-count", "2",
+  "--out", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s01of02.csv",
+  "--summary-out", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s01of02_summary.csv",
+  "--markdown-out", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s01of02.md",
+  "--manifest-out", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s01of02.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_corrected_distance.py",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "configs/example_koren_genesis.toml",
+  "els/wrr.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s01of02.csv",
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s01of02_summary.csv",
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s01of02.md",
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s01of02.manifest.json",
+]
+
+[[steps]]
+id = "merge_wrr2_highcap_1000_corrected_distance_split_2"
+description = "Merge two high-cap corrected-distance diagnostic shards."
+argv = [
+  "-m", "scripts.merge_wrr_corrected_distance_shards",
+  "--expected-shard-count", "2",
+  "--shard", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s00of02.csv",
+  "--shard", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s01of02.csv",
+  "--shard-summary", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s00of02_summary.csv",
+  "--shard-summary", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s01of02_summary.csv",
+  "--out", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_merged.csv",
+  "--summary-out", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_merged_summary.csv",
+  "--markdown-out", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_merged.md",
+  "--manifest-out", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_merged.manifest.json",
+]
+inputs = [
+  "scripts/merge_wrr_corrected_distance_shards.py",
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s00of02.csv",
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s01of02.csv",
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s00of02_summary.csv",
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_s01of02_summary.csv",
+]
+outputs = [
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_merged.csv",
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_merged_summary.csv",
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_merged.md",
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_merged.manifest.json",
+]
+
+[[steps]]
+id = "aggregate_wrr2_highcap_1000_corrected_distance_split_2"
+description = "Aggregate merged high-cap corrected-distance diagnostic rows into P1..P4 diagnostics."
+argv = [
+  "-m", "scripts.analyze_wrr_corrected_distance_aggregate",
+  "--input", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_merged.csv",
+  "--p1-threshold", "0.2",
+  "--out", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_aggregate.csv",
+  "--markdown-out", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_aggregate.md",
+  "--manifest-out", "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_aggregate.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_corrected_distance_aggregate.py",
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_merged.csv",
+  "els/wrr.py",
+]
+outputs = [
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_aggregate.csv",
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_aggregate.md",
+  "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_aggregate.manifest.json",
+]
+
+[[steps]]
+id = "diagnose_wrr2_highcap_1000_perturbations"
+description = "Check all high-cap ordinary hits for perturbation boundary and exact-match validity."
+argv = [
+  "-m", "scripts.analyze_wrr_perturbation_diagnostics",
+  "--terms", "reports/wrr_1994/wrr2_terms.csv",
+  "--counts", "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--min-term-length", "5",
+  "--max-term-length", "8",
+  "--min-skip", "2",
+  "--search-max-skip", "1000",
+  "--direction", "both",
+  "--target-expected-hits", "10",
+  "--skip-cap-formula", "printed",
+  "--sample-hits-per-query", "0",
+  "--out", "reports/wrr_1994/highcap_1000/wrr2_perturbation_diagnostics.csv",
+  "--summary-out", "reports/wrr_1994/highcap_1000/wrr2_perturbation_diagnostics_summary.csv",
+  "--markdown-out", "reports/wrr_1994/highcap_1000/wrr2_perturbation_diagnostics.md",
+  "--manifest-out", "reports/wrr_1994/highcap_1000/wrr2_perturbation_diagnostics.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_perturbation_diagnostics.py",
+  "reports/wrr_1994/wrr2_terms.csv",
+  "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "configs/example_koren_genesis.toml",
+  "els/wrr.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wrr_1994/highcap_1000/wrr2_perturbation_diagnostics.csv",
+  "reports/wrr_1994/highcap_1000/wrr2_perturbation_diagnostics_summary.csv",
+  "reports/wrr_1994/highcap_1000/wrr2_perturbation_diagnostics.md",
+  "reports/wrr_1994/highcap_1000/wrr2_perturbation_diagnostics.manifest.json",
+]
+
+[[steps]]
+id = "diagnose_wrr2_highcap_1000_perturbation_pair_readiness"
+description = "Join high-cap perturbation diagnostics to WRR2 pair rows."
+argv = [
+  "-m", "scripts.analyze_wrr_perturbation_pair_readiness",
+  "--pair-table", "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "--perturbations", "reports/wrr_1994/highcap_1000/wrr2_perturbation_diagnostics.csv",
+  "--out", "reports/wrr_1994/highcap_1000/wrr2_perturbation_pair_readiness.csv",
+  "--summary-out", "reports/wrr_1994/highcap_1000/wrr2_perturbation_pair_readiness_summary.csv",
+  "--markdown-out", "reports/wrr_1994/highcap_1000/wrr2_perturbation_pair_readiness.md",
+  "--manifest-out", "reports/wrr_1994/highcap_1000/wrr2_perturbation_pair_readiness.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_perturbation_pair_readiness.py",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "reports/wrr_1994/highcap_1000/wrr2_perturbation_diagnostics.csv",
+]
+outputs = [
+  "reports/wrr_1994/highcap_1000/wrr2_perturbation_pair_readiness.csv",
+  "reports/wrr_1994/highcap_1000/wrr2_perturbation_pair_readiness_summary.csv",
+  "reports/wrr_1994/highcap_1000/wrr2_perturbation_pair_readiness.md",
+  "reports/wrr_1994/highcap_1000/wrr2_perturbation_pair_readiness.manifest.json",
+]

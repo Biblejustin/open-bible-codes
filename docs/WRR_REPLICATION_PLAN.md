@@ -91,6 +91,11 @@ Already implemented:
   `docs/WRR_WINDOWS_SPLIT.md` and
   `protocols/wrr_corrected_distance_split_2.toml` for Mac/Windows split
   commands and local split/merge verification.
+- High-cap corrected-distance split diagnostic in
+  `protocols/wrr_corrected_distance_highcap_1000_split_2.toml`, rerunning the
+  same smoke lane at `search-max-skip=1000` and joining term-level
+  perturbation readiness output. Current local output still defines 0 corrected
+  distances.
 - WRR claim-readiness gate in `scripts/check_wrr_claim_readiness.py`, wired
   into `protocols/wrr_audit_counts.toml`, keeping reproduction language blocked
   until pair universe, `D(w)`, full corrected distance, and permutation/aggregate

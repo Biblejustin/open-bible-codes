@@ -163,6 +163,15 @@ Already implemented:
   appellations whose imported source token starts with title `RBY`. Current
   length-5..8 smoke output has 0 defined values, so aggregate P1..P4 are
   intentionally blank.
+- high-cap local diagnostic protocol in
+  `protocols/wrr_corrected_distance_highcap_1000_split_2.toml`. Current
+  ignored output at `search-max-skip=1000` still has 0 defined corrected
+  distances over 86 length-5..8 smoke-lane pairs. The merged corrected-distance
+  summary has maximum valid perturbation count 4. The all-hit high-cap
+  perturbation diagnostic has 80/120 rows with hits, 3,694 checked hits, and
+  80 rows whose minimum exact perturbation count remains below 10. The joined
+  pair-readiness diagnostic has 0 ready pairs, 40 pairs missing checked hits on
+  one side, and 46 pairs below the exact-perturbation threshold.
 
 Not yet implemented:
 

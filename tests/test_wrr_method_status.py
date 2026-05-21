@@ -79,6 +79,23 @@ class WrrMethodStatusTests(unittest.TestCase):
                 "p1": "",
                 "p2": "",
             },
+            highcap_corrected_distance_row={
+                "search_max_skip": "1000",
+                "pairs": "86",
+                "defined_corrected_distances": "0",
+                "max_pair_valid_perturbations": "4",
+            },
+            highcap_perturbation_row={
+                "rows": "120",
+                "rows_with_hits": "80",
+                "max_exact_perturbation_matches": "12",
+                "rows_with_checked_under_10_exact_matches": "80",
+            },
+            highcap_pair_readiness_row={
+                "pairs_ready": "0",
+                "pairs_missing_checked_hits": "40",
+                "pairs_under_10_exact_matches": "46",
+            },
         )
 
         by_area = {row["decision_area"]: row for row in rows}
@@ -94,6 +111,10 @@ class WrrMethodStatusTests(unittest.TestCase):
         self.assertIn("13 program caps below printed", by_area["D(w) skip-cap formula"]["evidence"])
         self.assertEqual(by_area["Corrected distance c(w,w')"]["status"], "smoke_only")
         self.assertIn("maximum valid perturbation count 4", by_area["Corrected distance c(w,w')"]["evidence"])
+        self.assertIn("high-cap 1000 split: 0 defined over 86 pairs", by_area["Corrected distance c(w,w')"]["evidence"])
+        self.assertIn("term diagnostic: 80/120 rows with hits", by_area["Corrected distance c(w,w')"]["evidence"])
+        self.assertIn("max row-min exact 12", by_area["Corrected distance c(w,w')"]["evidence"])
+        self.assertIn("pair readiness: 0 ready, 40 missing hits, 46 under exact", by_area["Corrected distance c(w,w')"]["evidence"])
         self.assertEqual(by_area["Aggregate statistic and permutation"]["status"], "source_locked_not_built")
         self.assertIn("G min P4 rank 4", by_area["Aggregate statistic and permutation"]["evidence"])
         self.assertIn("0 defined c-values from 86 rows", by_area["Aggregate statistic and permutation"]["evidence"])
@@ -115,6 +136,9 @@ class WrrMethodStatusTests(unittest.TestCase):
                     "skip_summary": Path("skip.csv"),
                     "corrected_distance_variants": Path("variants.csv"),
                     "corrected_distance_aggregate": Path("aggregate.csv"),
+                    "highcap_corrected_distance_summary": Path("highcap_corrected.csv"),
+                    "highcap_perturbation_summary": Path("highcap_perturbation.csv"),
+                    "highcap_pair_readiness_summary": Path("highcap_pair_readiness.csv"),
                     "primary_result_table": Path("primary.csv"),
                     "out": Path("out.csv"),
                     "markdown_out": path,
@@ -153,6 +177,9 @@ class WrrMethodStatusTests(unittest.TestCase):
             skip_summary = root / "skip.csv"
             variants = root / "variants.csv"
             aggregate = root / "aggregate.csv"
+            highcap_corrected = root / "missing_highcap_corrected.csv"
+            highcap_perturbation = root / "missing_highcap_perturbation.csv"
+            highcap_pair_readiness = root / "missing_highcap_pair_readiness.csv"
             primary_results = root / "primary.csv"
             out = root / "status.csv"
             markdown = root / "status.md"
@@ -289,6 +316,12 @@ class WrrMethodStatusTests(unittest.TestCase):
                     str(variants),
                     "--corrected-distance-aggregate",
                     str(aggregate),
+                    "--highcap-corrected-distance-summary",
+                    str(highcap_corrected),
+                    "--highcap-perturbation-summary",
+                    str(highcap_perturbation),
+                    "--highcap-pair-readiness-summary",
+                    str(highcap_pair_readiness),
                     "--primary-result-table",
                     str(primary_results),
                     "--out",

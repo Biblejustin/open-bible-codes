@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 112
+Protocols indexed: 114
 
 ## Analysis
 
@@ -142,6 +142,8 @@ Protocols indexed: 112
 | Name | Description | Steps | Terms | Output Roots | Path |
 | --- | --- | ---: | --- | --- | --- |
 | wrr_audit_counts | WRR2 imported-term count and same-record pair smoke on Koren Genesis; not the WRR stati... | 30 |  | reports/wrr_1994 | `wrr_audit_counts.toml` |
+| wrr_corrected_distance_highcap_1000_split_2 | Two-shard WRR corrected-distance diagnostic at search cap 1000, plus high-cap perturbat... | 6 |  | reports/wrr_1994 | `wrr_corrected_distance_highcap_1000_split_2.toml` |
+| wrr_corrected_distance_split_2 | Two-shard WRR corrected-distance diagnostic run and merge; local/Windows split compatible. | 4 |  | reports/wrr_1994 | `wrr_corrected_distance_split_2.toml` |
 | wrr_source_import | Download external WRR audit files and convert WRR2 into repo term rows. | 3 |  | reports/wrr_1994 | `wrr_source_import.toml` |
 
 ## Screening
