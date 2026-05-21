@@ -49,3 +49,14 @@ def test_tracked_lane_status_doc_matches_profiles() -> None:
     expected = status.render_markdown(profiles, status.DEFAULT_PROFILES)
 
     assert status.DEFAULT_OUT.read_text(encoding="utf-8") == expected
+
+
+def test_clean_lock_lanes_are_no_longer_ready_for_preflight() -> None:
+    profiles = {profile["id"]: profile for profile in scaffold.load_profiles(status.DEFAULT_PROFILES)}
+
+    assert profiles["greek_surface_new_terms"]["status"] == "completed_context_cautioned_review_material"
+    assert profiles["compound_extension_prospective"]["status"] == "completed_negative_controlled_result"
+    assert (
+        profiles["hebrew_concordance_words_prospective"]["status"]
+        == "completed_negative_controlled_result"
+    )

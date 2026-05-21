@@ -18,6 +18,7 @@ STATUS_READS = {
     "needs_predeclared_term_list": "blocked; needs predeclared term list",
     "needs_clean_prospective_lock": "blocked; term source added, needs clean prospective lock",
     "ready_for_preflight": "ready for lock manifest and preflight",
+    "completed_context_cautioned_review_material": "completed context-cautioned review material",
     "completed_negative_controlled_result": "completed negative controlled result",
     "completed_negative_weak_controlled_result": "completed weak or negative controlled result",
     "completed_negative_curiosity_appendix": "completed negative curiosity appendix",

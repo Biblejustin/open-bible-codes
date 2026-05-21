@@ -28,23 +28,20 @@ python3 -m scripts.scaffold_prospective_study \
 The scaffold helper writes a draft preregistration document only. It does not
 create a term file, create a protocol, build a lock manifest, or run a search.
 
-Current readiness profiles can prefill the same scaffold:
+Current readiness profiles can prefill the same scaffold, but they are now
+historical/status records. Do not use a completed profile as a new
+claim-producing lane without first creating a genuinely new term/source target
+set and a new clean lock.
 
 ```bash
 python3 -m scripts.scaffold_prospective_study --list-profiles
 python3 -m scripts.check_prospective_study_lanes
-python3 -m scripts.scaffold_prospective_study \
-  --profile compound_extension_prospective \
-  --print-command
-python3 -m scripts.scaffold_prospective_study \
-  --profile compound_extension_prospective \
-  --out docs/[COMPOUND_EXTENSION_PROSPECTIVE_PREREGISTRATION].md
 ```
 
 Profiles are stored in `configs/prospective_study_lanes.json`. They are planning
-defaults only. `scripts.check_prospective_study_lanes` validates profile shape
-and source-config paths, but it does not decide which lane to run. Review and
-edit the generated preregistration before building a lock manifest.
+defaults/status records only. `scripts.check_prospective_study_lanes` validates
+profile shape and source-config paths, but it does not decide which lane to run.
+Review and edit any generated preregistration before building a lock manifest.
 
 After filling a study-specific preregistration document, run:
 

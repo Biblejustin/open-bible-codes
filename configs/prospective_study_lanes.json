@@ -3,7 +3,7 @@
     {
       "id": "greek_surface_new_terms",
       "title": "Greek Surface Prospective New Terms",
-      "status": "ready_for_preflight",
+      "status": "completed_context_cautioned_review_material",
       "language": "greek",
       "term_file": "terms/greek_surface_new_terms_clean_lock.csv",
       "protocol": "protocols/greek_surface_new_terms.toml",
@@ -86,7 +86,7 @@
     {
       "id": "compound_extension_prospective",
       "title": "Hebrew Gospel/Genealogy Prospective",
-      "status": "ready_for_preflight",
+      "status": "completed_negative_controlled_result",
       "language": "hebrew",
       "term_file": "terms/compound_extension_prospective_terms_clean_lock.csv",
       "protocol": "protocols/compound_extension_prospective.toml",
@@ -115,7 +115,7 @@
     {
       "id": "hebrew_concordance_words_prospective",
       "title": "Hebrew Concordance Words Prospective",
-      "status": "ready_for_preflight",
+      "status": "completed_negative_controlled_result",
       "language": "hebrew",
       "term_file": "terms/hebrew_concordance_prospective_terms_clean_lock.csv",
       "protocol": "protocols/hebrew_concordance_words_prospective.toml",

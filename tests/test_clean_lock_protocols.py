@@ -120,3 +120,13 @@ def test_next_lock_tracks_completed_clean_lock_expansion() -> None:
     assert "## Track 4: Completed Clean-Lock Expansion" in text
     assert "0 Greek surface rows and 0 Hebrew concordance rows" in text
     assert "`prospective_controlled_review_candidate`" in text
+
+
+def test_prospective_readiness_marks_current_profiles_closed() -> None:
+    readiness = Path("docs/PROSPECTIVE_STUDY_READINESS.md").read_text(encoding="utf-8")
+    manifests = Path("docs/STUDY_LOCK_MANIFESTS.md").read_text(encoding="utf-8")
+
+    assert "There is no remaining `ready_for_preflight`" in readiness
+    assert "lane" in readiness
+    assert "Do not rerun a completed profile as a claim lane" in readiness
+    assert "historical/status records" in manifests

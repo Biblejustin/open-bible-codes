@@ -11,6 +11,11 @@ Use this matrix to decide which next result-producing study to lock. Every lane
 below must be converted into a study-specific preregistration document, lock
 manifest, and protocol before any new result-producing run.
 
+Current registry status: all tracked profiles are completed, negative/weak, or
+context-cautioned review material. There is no remaining `ready_for_preflight`
+lane in `configs/prospective_study_lanes.json`. A new result-producing study
+now needs a fresh term/source target set and a new clean prospective lock.
+
 ## Preflight Command
 
 Before the lock, audit the candidate term list for reuse of prior evidence:
@@ -77,17 +82,17 @@ python3 -m scripts.build_prospective_lane_status
 
 ## Recommended Order
 
-1. A second Greek surface prospective cohort only if a genuinely new term source
-   is supplied; the existing expanded Greek pool is blocked by
-   `docs/GREEK_SURFACE_SECOND_COHORT_READINESS.md`.
-2. Hebrew/modern/geopolitical is complete and should stay as
-   source-distribution review material unless a materially new hypothesis is
-   supplied.
-3. Gog/Magog should stay in negative/weak findings unless a materially new,
-   separately locked hypothesis is supplied.
-4. All-codes compound-extension follow-up only after a larger matched-control
-   design is locked.
-5. Local-term study is complete as a transparent negative/curiosity appendix.
+1. Do not rerun a completed profile as a claim lane.
+2. A second Greek surface prospective cohort requires a genuinely new term
+   source; the existing expanded Greek pool is prior evidence.
+3. Hebrew concordance and Gospel/genealogy clean-lock lanes are complete and
+   strict-gate negative.
+4. Hebrew/modern/geopolitical and Gog/Magog should stay negative/weak unless a
+   materially new hypothesis is supplied.
+5. All-codes compound-extension follow-up requires a larger locked matched-
+   control design and must remain post-discovery review unless a new
+   prospective term set is supplied.
+6. Local-term study is complete as a transparent negative/curiosity appendix.
 
 ## Minimum Lock Contents
 
