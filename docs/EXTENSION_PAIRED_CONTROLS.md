@@ -67,13 +67,18 @@ Rows to inspect first:
 - Duplicate-looking rows can appear when separate term rows normalize to the same ELS term.
 - This is not enough for external claim-making.
 
-## Stronger Next Run
+## Follow-Up Status
 
-Recommended next filters:
+- Overlap-only follow-up is tracked in
+  `docs/EXTENSION_OVERLAP_CONTROLS.md`.
+- Exact-center surface-context follow-up is tracked in
+  `docs/EXTENSION_EXACT_CENTER_CONTROLS.md`.
+- Four-source and confirmatory doxa follow-ups are tracked in
+  `docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md` and
+  `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`.
 
-- review the stronger overlap-only run in `docs/EXTENSION_OVERLAP_CONTROLS.md`
-- compare same exact extension type separately from any strong extension type
-- add a center/span surface-context requirement to the extension-control screen
+Any stronger run should now be a newly locked prospective design, not a rerun
+of this post-screen queue.
 
 ## Reproduce
 

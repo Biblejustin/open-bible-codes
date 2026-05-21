@@ -35,13 +35,19 @@ All 4 rows pass the exact-center gate because the base normalized term appears i
 
 This review strengthens context only for the base terms. It does not promote the full extension strings as readable surface phrases.
 
-## Next Check
+## Follow-Up Status
 
-- compare exact-center cohort rows against cross-text overlap requirements
-- run 200/200 controls only for rows that survive context plus overlap
-- keep these as review queue rows unless stronger null controls remain favorable
+- Cross-text overlap is tracked in
+  `docs/EXTENSION_EXACT_CENTER_CROSS_TEXT.md`.
+- 200/200 controls for the surviving overlap row are tracked in
+  `docs/EXTENSION_EXACT_CENTER_CONTROLS.md`.
+- Final gate status is tracked in
+  `docs/EXTENSION_EXACT_CENTER_FINAL_GATE.md`.
+- Later four-source and confirmatory doxa follow-ups are tracked in
+  `docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md` and
+  `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`.
 
-Cross-text review is now tracked in `docs/EXTENSION_EXACT_CENTER_CROSS_TEXT.md`.
+Keep these as review queue rows unless stronger null controls remain favorable.
 
 ## Reproduce
 

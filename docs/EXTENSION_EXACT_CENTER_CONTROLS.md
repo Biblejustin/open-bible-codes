@@ -60,13 +60,20 @@ Read:
 
 The exact-center gate is stronger than same-category context, but the full matched phrase `δόξαν ὡς` (doxan hos; English: glory as) does not appear as surface text in the hit/extension span. The term is also short (`δοξα` (doxa; English: glory)), and both rows still carry low random-variance warnings.
 
-## Next Check
+## Follow-Up Status
 
-- manually review 2 Thessalonians 3:1-2 and the letter path table
-- compare this exact-center `δοξα` (doxa; English: glory) row against other exact-center theological rows, not only this hand-picked overlap
-- avoid promotion unless it remains unusual after a broader exact-center extension cohort is tested
-- broader cohort check is tracked in `docs/EXTENSION_EXACT_CENTER_COHORT_CONTROLS.md`
-- 1000/1000 follow-up controls are tracked in `docs/EXTENSION_EXACT_CENTER_DEEP_CONTROLS.md`
+- Manual context and letter-path review is tracked in
+  `docs/EXTENSION_EXACT_CENTER_COHORT_REVIEW.md`.
+- Broader cohort checks are tracked in
+  `docs/EXTENSION_EXACT_CENTER_COHORT_CONTROLS.md`.
+- 1000/1000 follow-up controls are tracked in
+  `docs/EXTENSION_EXACT_CENTER_DEEP_CONTROLS.md`.
+- Four-source and confirmatory doxa follow-ups are tracked in
+  `docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md` and
+  `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`.
+
+Avoid promotion unless a future prospective design is locked before any new
+result-producing run.
 
 ## Reproduce
 
