@@ -73,3 +73,13 @@ def test_hebrew_concordance_report_tracks_initial_control_state() -> None:
     assert "| Rows with representative controls | 3398 |" in text
     assert "87 rows only clear an uncorrected p<=0.05 screen" in text
     assert "0 rows have adjusted representative-control support" in text
+
+
+def test_hebrew_concordance_uncorrected_queue_tracks_no_claim_read() -> None:
+    text = Path("docs/HEBREW_CONCORDANCE_UNCORRECTED_QUEUE.md").read_text(encoding="utf-8")
+
+    assert "| Queue rows | 87 |" in text
+    assert "| Adjusted-support rows | 0 |" in text
+    assert "| Shared representative q value | 0.819154 |" in text
+    assert "manual-review prompts, not evidence rows" in text
+    assert "`hcon_h4968`" in text

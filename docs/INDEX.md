@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 299
+Documents indexed: 300
 
 ## Controls
 
@@ -257,6 +257,7 @@ Documents indexed: 299
 | Hebrew Atbash Transformed-Text Audit | `HEBREW_ATBASH_AUDIT.md` |
 | Hebrew Claim Terms | `HEBREW_CLAIM_TERMS.md` |
 | Hebrew Concordance Prospective Terms | `HEBREW_CONCORDANCE_PROSPECTIVE_TERMS.md` |
+| Hebrew Concordance Uncorrected Review Queue | `HEBREW_CONCORDANCE_UNCORRECTED_QUEUE.md` |
 | Hebrew MT Source Candidates | `HEBREW_MT_SOURCE_CANDIDATES.md` |
 | Hebrew Screening All-Codes Collection | `HEBREW_SCREENING_ALL_CODES_COLLECTION.md` |
 | Hebrew Screening All-Codes Triage | `HEBREW_SCREENING_ALL_CODES_TRIAGE.md` |
