@@ -67,7 +67,7 @@ It is a triage aid, not a claim-grade filter.
 | 3 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -19 | 58 | Josh 22:5 | `ולעבדו` (wlbdw) | not_run |
 | 4 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -22 | 67 | Num 4:23 | `לעבד` (lbd) | not_run |
 | 5 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 53 | 160 | 1Kgs 20:12 | `אלעבדיו` (lbdyw) | not_run |
-| 6 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 54 | 163 | 2Kgs 10:21 | `כלעבדי` (klbdy) | not_run |
+| 6 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 54 | 163 | 2Kgs 10:21 | `עבדי` (bdy) | not_run |
 | 7 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 8 | 25 | Gen 32:17 | `בידעבדיו` (bydbdyw) | not_run |
 | 8 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 77 | 232 | 2Chr 29:12 | `עבדי` (bdy) | not_run |
 | 9 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -67 | 202 | 1Kgs 22:50 | `עבדי` (bdy) | not_run |
@@ -142,19 +142,19 @@ It is a triage aid, not a claim-grade filter.
 | 3 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -3 | 10 | 1Sam 12:10 | `איבינו` (ybynw) | not_run |
 | 4 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 3 | 10 | Lam 1:3 | `ומרב` (wmrb) | not_run |
 | 5 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 4 | 13 | 2Sam 13:36 | `בכו` (bkw; English: Gregorian 2026 compact) | not_run |
-| 6 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -5 | 16 | Ps 90:16 | `עלבניהמ` (lbnyhm) | not_run |
+| 6 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -5 | 16 | Ps 90:16 | `בניהמ` (bnyhm) | not_run |
 | 7 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 6 | 19 | 1Chr 19:2 | `ויבאו` (wybw) | not_run |
 | 8 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -6 | 19 | 2Sam 7:20 | `אליכ` (lyk) | not_run |
 | 9 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -6 | 19 | Gen 29:20 | `אתה` (th) | not_run |
 | 10 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 7 | 22 | 1Chr 13:13 | `ויטהו` (wythw) | not_run |
 | 11 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 7 | 22 | 2Sam 15:34 | `ואמרת` (wmrt) | not_run |
-| 12 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -8 | 25 | 2Kgs 24:1 | `ויהילו` (wyhylw) | not_run |
+| 12 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -8 | 25 | 2Kgs 24:1 | `ויהי` (wyhy) | not_run |
 | 13 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -8 | 25 | Jer 2:20 | `כי` (ky) | not_run |
 | 14 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -9 | 28 | Deut 26:6 | `וירעו` (wyrw) | not_run |
 | 15 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 9 | 28 | Isa 60:12 | `והגוימ` (whgwym) | not_run |
 | 16 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -10 | 31 | Dan 2:49 | `מלכא` (mlk) | not_run |
 | 17 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 10 | 31 | Jer 37:2 | `הארצ` (hrts) | not_run |
-| 18 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 10 | 31 | Ps 134:1 | `אתיהוה` (tyhwh) | not_run |
+| 18 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 10 | 31 | Ps 134:1 | `יהוה` (YHWH; English: YHWH) | not_run |
 | 19 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -12 | 37 | 2Chr 24:25 | `המלכימ` (hmlkym) | not_run |
 | 20 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -12 | 37 | 2Chr 35:24 | `יאשיהו` (yshyhw; English: Josiah) | not_run |
 
@@ -221,7 +221,7 @@ It is a triage aid, not a claim-grade filter.
 | 7 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -30 | 91 | Gen 15:15 | `תקבר` (tqbr) | not_run |
 | 8 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 34 | 103 | Num 3:9 | `בני` (bny) | not_run |
 | 9 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 35 | 106 | 1Chr 8:32 | `ואפ` (wp) | not_run |
-| 10 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -37 | 112 | Gen 29:21 | `אללבנ` (llbn) | not_run |
+| 10 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -37 | 112 | Gen 29:21 | `אל` (l) | not_run |
 | 11 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -37 | 112 | Num 9:1 | `לצאתמ` (ltstm) | not_run |
 | 12 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -38 | 115 | Isa 53:12 | `שלל` (shalal; English: spoil/plunder) | not_run |
 | 13 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -38 | 115 | Judg 2:9 | `מצפונ` (mtspwn) | not_run |
@@ -229,9 +229,9 @@ It is a triage aid, not a claim-grade filter.
 | 15 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -39 | 118 | Isa 48:21 | `בחרבות` (bchrbwt) | not_run |
 | 16 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 39 | 118 | Josh 11:13 | `יהושע` (Yehoshua; English: Joshua) | not_run |
 | 17 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 42 | 127 | 1Chr 16:14 | `משפטיו` (mshptyw) | not_run |
-| 18 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -42 | 127 | 1Kgs 15:30 | `אתישראל` (tyshrl) | not_run |
+| 18 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -42 | 127 | 1Kgs 15:30 | `ישראל` (Yisrael; English: Israel) | not_run |
 | 19 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -45 | 136 | 2Kgs 9:27 | `מגדו` (mgdw) | not_run |
-| 20 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -45 | 136 | Exod 12:33 | `עלהעמ` (lhm) | not_run |
+| 20 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -45 | 136 | Exod 12:33 | `העמ` (hm) | not_run |
 
 ### span_same_category
 
@@ -255,8 +255,8 @@ It is a triage aid, not a claim-grade filter.
 | 16 | multi_source | `mt_levites_h` `לוימ` (lwym; English: Levites) | Levites | 2 | 7 | 1Sam 15:1 | `ויאמר` (wymr) | not_run |
 | 17 | multi_source | `twn_levites_h` `לוימ` (lwym; English: Levites) | Levites | 2 | 7 | 1Sam 15:1 | `ויאמר` (wymr) | not_run |
 | 18 | multi_source | `cc_pomegranate_h` `רמונ` (rmwn; English: Pomegranate) | Pomegranate | 2 | 7 | 1Sam 1:6 | `רחמה` (rchmh) | not_run |
-| 19 | multi_source | `cc_mary_h` `מרימ` (mrym; English: Mary) | Mary | 2 | 7 | Deut 7:5 | `כיאמכה` (kymkh) | not_run |
-| 20 | multi_source | `mt_mary_h` `מרימ` (mrym; English: Mary) | Mary | 2 | 7 | Deut 7:5 | `כיאמכה` (kymkh) | not_run |
+| 19 | multi_source | `cc_mary_h` `מרימ` (mrym; English: Mary) | Mary | 2 | 7 | Deut 7:5 | `כי` (ky) | not_run |
+| 20 | multi_source | `mt_mary_h` `מרימ` (mrym; English: Mary) | Mary | 2 | 7 | Deut 7:5 | `כי` (ky) | not_run |
 
 ### hidden_path_only
 

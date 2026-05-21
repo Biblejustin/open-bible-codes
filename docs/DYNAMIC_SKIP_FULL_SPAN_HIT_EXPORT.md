@@ -18,6 +18,8 @@ python3 -m scripts.export_dynamic_span_hits --max-count-row-hits 50000
 - exported hit rows: 918,266
 - max count row hits: 50,000
 - max export hits per term/corpus/mode: 50,000
+- min abs skip override:
+- max abs skip override:
 - hit CSV: `reports/dynamic_skip_focus/full_span_exported_hits.csv`
 
 ## Status Counts
