@@ -147,8 +147,11 @@ corrected distances, so a full reproduction driver must choose paper formula
 versus program formula before final `D(w)` calculations.
 
 The ANU/McKay data page provides plain-text WRR lists in a modified
-Michigan-Claremont transliteration. That is useful for a reproducible import
-path, but it is a secondary critical source rather than the WRR paper itself.
+Michigan-Claremont transliteration. User decision on 2026-05-21: use this
+plain-text WRR2 file as the working machine-readable source for continued
+corrected-distance work. It remains a secondary critical source rather than the
+WRR paper itself, so primary/OCR bridge evidence stays in the audit as a
+provenance caveat.
 
 The Torah-code.org papers page adds possible future test leads: co-linear ELS
 pairs linked to verses, Genesis ELS-pair/community data, protocol papers about

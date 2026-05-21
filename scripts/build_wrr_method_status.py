@@ -194,8 +194,8 @@ def build_status_rows(
         },
         {
             "decision_area": "WRR2 term source",
-            "status": "secondary_source_imported",
-            "current_read": "ANU/McKay WRR2 plain text is imported for audit, not treated as primary-paper ground truth.",
+            "status": "working_source_locked",
+            "current_read": "User authorized ANU/McKay WRR2 plain text as the working machine-readable source; it remains secondary-source, not primary-paper ground truth.",
             "evidence": (
                 table2_bridge_evidence(table2_bridge_row)
                 + "; "
@@ -208,7 +208,7 @@ def build_status_rows(
                 f"{pair_row.get('source_dates', '')} date rows; "
                 f"{pair_row.get('source_undated_records', '')} undated records skipped"
             ),
-            "next_action": "Cross-check imported spellings and dates against primary paper table or citable transcription.",
+            "next_action": "Use this source for working corrected-distance runs while keeping primary/OCR bridge evidence as provenance caveat.",
         },
         {
             "decision_area": "Pair universe",

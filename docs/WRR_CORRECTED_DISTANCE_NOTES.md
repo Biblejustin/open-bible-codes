@@ -119,7 +119,9 @@ Already implemented:
   uniquely strongest ordinary proximity has corrected distance `0` under the
   tie-aware helper and `1/m` under the source-count helper.
 - imported WRR2 term rows from the secondary ANU/McKay source under ignored
-  `reports/wrr_1994/`;
+  `reports/wrr_1994/`. User decision on 2026-05-21 authorizes this as the
+  working machine-readable source for continued WRR2 corrected-distance work,
+  while retaining its secondary-source provenance caveat;
 - count, same-record pair-audit, pair-control, and skip-cap smoke reports.
 - Koren Genesis text-source fingerprinting for raw compressed bytes,
   decompressed source bytes, and the normalized Genesis stream used by the WRR

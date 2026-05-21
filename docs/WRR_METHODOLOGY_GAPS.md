@@ -139,9 +139,11 @@ and `reports/wrr_1994/wrr2_pair_eligibility_table.md`. It is explicitly
 ### 2. Primary-Source Cross-Check
 
 The current machine-readable WRR2 source is the ANU/McKay secondary plain-text
-file. It is useful because it is stable and parseable, but it must be checked
-against a citable transcription of the paper table or another source with clear
-provenance.
+file. User decision on 2026-05-21: use this file as the working source for
+continued corrected-distance work because it is stable and parseable. It remains
+secondary rather than primary-paper ground truth; a citable table cross-check
+would improve provenance, but it is no longer the current implementation
+blocker.
 
 The PDF table text is not currently reliable enough for direct automated import.
 
