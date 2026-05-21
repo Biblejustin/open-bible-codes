@@ -66,3 +66,13 @@ def test_clean_lock_results_summary_tracks_completed_lanes() -> None:
     assert "| Hebrew Gospel/genealogy | 27 |" in text
     assert "| Hebrew concordance words | 3,577 |" in text
     assert "0 adjusted-support terms" in text
+
+
+def test_greek_surface_context_review_tracks_manual_read() -> None:
+    text = Path("docs/GREEK_SURFACE_NEW_TERMS_CONTEXT_REVIEW.md").read_text(encoding="utf-8")
+
+    assert "# Greek Surface New Terms Context Review" in text
+    assert "direct surface/self-lexeme hit" in text
+    assert "ordinary \"name\" passages" in text
+    assert "review-material" in text
+    assert "category" in text

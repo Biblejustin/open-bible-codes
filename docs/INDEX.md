@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 298
+Documents indexed: 299
 
 ## Controls
 
@@ -244,6 +244,7 @@ Documents indexed: 298
 | Greek Screening All-Codes Triage | `GREEK_SCREENING_ALL_CODES_TRIAGE.md` |
 | Greek Surface Length-4 Follow-Up Triage | `GREEK_SURFACE_LENGTH4_FOLLOWUP_TRIAGE.md` |
 | Greek Surface Length-4 Letter Paths | `GREEK_SURFACE_LENGTH4_LETTER_PATHS.md` |
+| Greek Surface New Terms Context Review | `GREEK_SURFACE_NEW_TERMS_CONTEXT_REVIEW.md` |
 | Greek Surface New Terms Letter Paths | `GREEK_SURFACE_NEW_TERMS_LETTER_PATHS.md` |
 | Greek Surface New Terms Queue | `GREEK_SURFACE_NEW_TERMS_QUEUE.md` |
 | Greek Surface New Terms Triage | `GREEK_SURFACE_NEW_TERMS_TRIAGE.md` |
