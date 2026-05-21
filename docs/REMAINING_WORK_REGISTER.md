@@ -253,6 +253,10 @@ Carry these with controls attached:
 - LXX `ιησουσ` rows with Joshua/Jesus referent discipline.
 - Hebrew `ישוע` and `משיח` centered rows with background-pressure cautions.
 
+Navigation aid:
+
+- `docs/MANUAL_REVIEW_QUEUE.md`
+
 ## Validation Commands
 
 Current fast validation:

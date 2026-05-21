@@ -136,6 +136,7 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn("docs/ALL_CODES_FOLLOWUP_REVIEW.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn("docs/MANUAL_REVIEW_QUEUE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/ALL_CODES_FOLLOWUP_CONTEXT.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/ALL_CODES_FOLLOWUP_EXTENSIONS.md", steps_by_id["preflight"]["inputs"])
         self.assertIn(
@@ -210,6 +211,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("protocols/apocrypha_bridge_study.toml", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/ALL_CODES_FOLLOWUP_LETTER_PATHS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/ALL_CODES_FOLLOWUP_REVIEW.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/MANUAL_REVIEW_QUEUE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/ALL_CODES_FOLLOWUP_CONTEXT.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/ALL_CODES_FOLLOWUP_EXTENSIONS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn(

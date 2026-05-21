@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 281
+Documents indexed: 282
 
 ## Controls
 
@@ -251,6 +251,7 @@ Documents indexed: 281
 | KJVA Apocrypha Bridge Context | `KJV_APOCRYPHA_BRIDGE_CONTEXT.md` |
 | KJVA Apocrypha Bridge Term Review | `KJV_APOCRYPHA_BRIDGE_TERM_REVIEW.md` |
 | KJVA Apocrypha-Only Counts | `KJV_APOCRYPHA_ONLY_COUNTS.md` |
+| Manual Review Queue | `MANUAL_REVIEW_QUEUE.md` |
 | Mark Tabata Isaiah 53 ELS Source Audit | `MARK_TABATA_ISAIAH53_AUDIT.md` |
 | Extended Match Strata Index | `MATCH_STRATA_INDEX.md` |
 | Match Type Extension Status | `MATCH_TYPE_EXTENSION_STATUS.md` |
