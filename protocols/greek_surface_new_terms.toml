@@ -1,0 +1,223 @@
+name = "greek_surface_new_terms"
+description = "Locked Greek surface new-terms exact-center screen for the clean user-requested term lock."
+manifest_out = "reports/greek_surface_new_terms/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "surface_context"
+description = "Find Greek NT ELS hits whose center/span surface text discusses locked prospective terms."
+argv = [
+  "-m", "els", "surface-context",
+  "--terms", "terms/greek_surface_new_terms_clean_lock.csv",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "BYZ_NT=configs/example_ebible_grcmt.toml",
+  "--corpus", "TCG_NT=configs/example_ebible_grctcgnt.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--min-skip", "2",
+  "--max-skip", "50",
+  "--direction", "both",
+  "--min-term-length", "4",
+  "--jobs", "0",
+  "--out", "reports/greek_surface_new_terms/surface_context_hits.csv",
+  "--summary-out", "reports/greek_surface_new_terms/surface_context_summary.csv",
+  "--manifest-out", "reports/greek_surface_new_terms/surface_context.manifest.json",
+]
+inputs = [
+  "terms/greek_surface_new_terms_clean_lock.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+  "els/surface.py",
+]
+outputs = [
+  "reports/greek_surface_new_terms/surface_context_hits.csv",
+  "reports/greek_surface_new_terms/surface_context_summary.csv",
+  "reports/greek_surface_new_terms/surface_context.manifest.json",
+]
+
+[[steps]]
+id = "surface_queue"
+description = "Summarize prospective exact-center surface patterns by Greek NT source distribution."
+argv = [
+  "-m", "scripts.analyze_greek_expanded_surface_queue",
+  "--surface-hits", "reports/greek_surface_new_terms/surface_context_hits.csv",
+  "--patterns-out", "reports/greek_surface_new_terms/surface_patterns.csv",
+  "--summary-out", "reports/greek_surface_new_terms/term_summary.csv",
+  "--title", "Greek Surface New Terms Queue",
+  "--status", "prospective exact-center surface queue; no claim.",
+  "--term-scope", "terms/greek_surface_new_terms_clean_lock.csv",
+  "--description", "This report summarizes exact-center surface hits from the locked Greek surface new-terms term screen after prior selected rows were removed. It does not require same-skip phrase extension and does not run controls.",
+  "--markdown-out", "docs/GREEK_SURFACE_NEW_TERMS_QUEUE.md",
+  "--manifest-out", "reports/greek_surface_new_terms/surface_queue.manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_expanded_surface_queue.py",
+  "els/term_display.py",
+  "reports/greek_surface_new_terms/surface_context_hits.csv",
+]
+outputs = [
+  "reports/greek_surface_new_terms/surface_patterns.csv",
+  "reports/greek_surface_new_terms/term_summary.csv",
+  "docs/GREEK_SURFACE_NEW_TERMS_QUEUE.md",
+  "reports/greek_surface_new_terms/surface_queue.manifest.json",
+]
+
+[[steps]]
+id = "surface_triage"
+description = "Apply the registered all-source exact-center surface rule."
+argv = [
+  "-m", "scripts.analyze_greek_expanded_surface_triage",
+  "--terms", "terms/greek_surface_new_terms_clean_lock.csv",
+  "--patterns", "reports/greek_surface_new_terms/surface_patterns.csv",
+  "--term-summary", "reports/greek_surface_new_terms/term_summary.csv",
+  "--min-length", "5",
+  "--title", "Greek Surface New Terms Triage",
+  "--status", "prospective triage under registered all-source length filter; no claim.",
+  "--description", "This report applies the registered all-source exact-center surface filter to the locked Greek surface new-terms cohort.",
+  "--selected-out", "reports/greek_surface_new_terms/selected_patterns.csv",
+  "--cohort-out", "reports/greek_surface_new_terms/term_cohort.csv",
+  "--markdown-out", "docs/GREEK_SURFACE_NEW_TERMS_TRIAGE.md",
+  "--manifest-out", "reports/greek_surface_new_terms/surface_triage.manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_expanded_surface_triage.py",
+  "els/term_display.py",
+  "terms/greek_surface_new_terms_clean_lock.csv",
+  "reports/greek_surface_new_terms/surface_patterns.csv",
+  "reports/greek_surface_new_terms/term_summary.csv",
+]
+outputs = [
+  "reports/greek_surface_new_terms/selected_patterns.csv",
+  "reports/greek_surface_new_terms/term_cohort.csv",
+  "docs/GREEK_SURFACE_NEW_TERMS_TRIAGE.md",
+  "reports/greek_surface_new_terms/surface_triage.manifest.json",
+]
+
+[[steps]]
+id = "available_control_pool"
+description = "Build all available same-length real-word controls matched by Greek NT surface frequency."
+argv = [
+  "-m", "scripts.analyze_greek_surface_control_pool",
+  "--terms", "terms/greek_surface_new_terms_clean_lock.csv",
+  "--selected", "reports/greek_surface_new_terms/selected_patterns.csv",
+  "--top-controls", "999",
+  "--title", "Greek Surface New Terms Control Pool",
+  "--frequencies-out", "reports/greek_surface_new_terms/term_surface_frequencies.csv",
+  "--matched-out", "reports/greek_surface_new_terms/matched_controls.csv",
+  "--markdown-out", "docs/GREEK_SURFACE_NEW_TERMS_CONTROL_POOL.md",
+  "--manifest-out", "reports/greek_surface_new_terms/control_pool.manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_surface_control_pool.py",
+  "els/term_display.py",
+  "terms/greek_surface_new_terms_clean_lock.csv",
+  "reports/greek_surface_new_terms/selected_patterns.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+]
+outputs = [
+  "reports/greek_surface_new_terms/term_surface_frequencies.csv",
+  "reports/greek_surface_new_terms/matched_controls.csv",
+  "docs/GREEK_SURFACE_NEW_TERMS_CONTROL_POOL.md",
+  "reports/greek_surface_new_terms/control_pool.manifest.json",
+]
+
+[[steps]]
+id = "available_control_evaluation"
+description = "Evaluate selected prospective surface rows against all available same-length controls."
+argv = [
+  "-m", "scripts.analyze_greek_surface_control_evaluation",
+  "--cohort", "reports/greek_surface_new_terms/term_cohort.csv",
+  "--matched-controls", "reports/greek_surface_new_terms/matched_controls.csv",
+  "--title", "Greek Surface New Terms Control Evaluation",
+  "--summary-out", "reports/greek_surface_new_terms/control_summary.csv",
+  "--details-out", "reports/greek_surface_new_terms/control_details.csv",
+  "--markdown-out", "docs/GREEK_SURFACE_NEW_TERMS_CONTROL_EVALUATION.md",
+  "--manifest-out", "reports/greek_surface_new_terms/control_evaluation.manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_surface_control_evaluation.py",
+  "els/term_display.py",
+  "reports/greek_surface_new_terms/term_cohort.csv",
+  "reports/greek_surface_new_terms/matched_controls.csv",
+]
+outputs = [
+  "reports/greek_surface_new_terms/control_summary.csv",
+  "reports/greek_surface_new_terms/control_details.csv",
+  "docs/GREEK_SURFACE_NEW_TERMS_CONTROL_EVALUATION.md",
+  "reports/greek_surface_new_terms/control_evaluation.manifest.json",
+]
+
+[[steps]]
+id = "letter_paths"
+description = "Reconstruct every selected ELS letter path across the compared Greek NT sources."
+argv = [
+  "-m", "scripts.analyze_greek_surface_letter_paths",
+  "--selected", "reports/greek_surface_new_terms/selected_patterns.csv",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "BYZ_NT=configs/example_ebible_grcmt.toml",
+  "--corpus", "TCG_NT=configs/example_ebible_grctcgnt.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--title", "Greek Surface New Terms Letter Paths",
+  "--status", "audit sheet for selected prospective surface rows; no claim.",
+  "--summary-out", "reports/greek_surface_new_terms/path_summary.csv",
+  "--letters-out", "reports/greek_surface_new_terms/letter_paths.csv",
+  "--markdown-out", "docs/GREEK_SURFACE_NEW_TERMS_LETTER_PATHS.md",
+  "--manifest-out", "reports/greek_surface_new_terms/letter_paths.manifest.json",
+]
+inputs = [
+  "scripts/analyze_greek_surface_letter_paths.py",
+  "els/term_display.py",
+  "reports/greek_surface_new_terms/selected_patterns.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+]
+outputs = [
+  "reports/greek_surface_new_terms/path_summary.csv",
+  "reports/greek_surface_new_terms/letter_paths.csv",
+  "docs/GREEK_SURFACE_NEW_TERMS_LETTER_PATHS.md",
+  "reports/greek_surface_new_terms/letter_paths.manifest.json",
+]
+
+[[steps]]
+id = "prospective_report"
+description = "Build one compact report for the locked Greek surface new-terms run."
+argv = [
+  "-m", "scripts.build_greek_surface_new_terms_report",
+  "--terms", "terms/greek_surface_new_terms_clean_lock.csv",
+  "--queue", "reports/greek_surface_new_terms/term_summary.csv",
+  "--patterns", "reports/greek_surface_new_terms/surface_patterns.csv",
+  "--selected", "reports/greek_surface_new_terms/selected_patterns.csv",
+  "--cohort", "reports/greek_surface_new_terms/term_cohort.csv",
+  "--control-summary", "reports/greek_surface_new_terms/control_summary.csv",
+  "--lock-manifest", "reports/study_locks/greek_surface_new_terms.manifest.json",
+  "--preflight", "reports/study_locks/greek_surface_new_terms.preflight.json",
+  "--report-out", "docs/GREEK_SURFACE_NEW_TERMS_REPORT.md",
+  "--manifest-out", "reports/greek_surface_new_terms/report.manifest.json",
+]
+inputs = [
+  "scripts/build_greek_surface_new_terms_report.py",
+  "els/term_display.py",
+  "terms/greek_surface_new_terms_clean_lock.csv",
+  "reports/greek_surface_new_terms/term_summary.csv",
+  "reports/greek_surface_new_terms/surface_patterns.csv",
+  "reports/greek_surface_new_terms/selected_patterns.csv",
+  "reports/greek_surface_new_terms/term_cohort.csv",
+  "reports/greek_surface_new_terms/control_summary.csv",
+  "reports/study_locks/greek_surface_new_terms.manifest.json",
+  "reports/study_locks/greek_surface_new_terms.preflight.json",
+]
+outputs = [
+  "docs/GREEK_SURFACE_NEW_TERMS_REPORT.md",
+  "reports/greek_surface_new_terms/report.manifest.json",
+]

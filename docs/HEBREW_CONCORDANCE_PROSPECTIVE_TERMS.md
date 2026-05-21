@@ -9,7 +9,8 @@ On 2026-05-21, an open Hebrew concordance/lexicon source lane was added for futu
 - OpenScriptures StrongHebrewG XML: public-domain Strong's Hebrew dictionary headwords.
 - STEP Bible TAHOT: CC BY 4.0 lexical tags used as an occurrence cross-check.
 
-The tracked term file is `terms/hebrew_concordance_prospective_terms.csv`.
+The raw tracked term file is `terms/hebrew_concordance_prospective_terms.csv`.
+The clean tracked lock file is `terms/hebrew_concordance_prospective_terms_clean_lock.csv`.
 Raw source files remain ignored under `data/raw/`.
 
 ## Build Rule
@@ -54,5 +55,6 @@ The ignored audit artifacts were written under `reports/study_locks/`:
 
 - The concordance-derived raw list is now a tracked study input.
 - The raw list is not a clean prospective lock because 266 rows overlap prior evidence.
-- A result-producing run should use a clean locked candidate set or explicitly label overlapping rows as post-screen/review-only.
-- `docs/PROSPECTIVE_LANE_STATUS.md` keeps this lane blocked until a clean prospective lock is created.
+- The clean lock file was re-audited with zero prior-evidence matches.
+- A result-producing run should use the clean locked candidate set.
+- `docs/PROSPECTIVE_LANE_STATUS.md` marks this lane ready for lock manifest and preflight.

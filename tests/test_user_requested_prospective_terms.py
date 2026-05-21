@@ -50,3 +50,8 @@ def test_user_requested_terms_are_deduped_by_normalized_surface() -> None:
 def test_tracked_user_requested_term_files_match_builder() -> None:
     assert _tracked_rows(builder.GREEK_OUT) == _term_rows(builder.build_greek_terms())
     assert _tracked_rows(builder.HEBREW_OUT) == _term_rows(builder.build_hebrew_terms())
+
+
+def test_tracked_user_requested_clean_locks_have_expected_counts() -> None:
+    assert len(_tracked_rows(Path("terms/greek_surface_new_terms_clean_lock.csv"))) == 236
+    assert len(_tracked_rows(Path("terms/compound_extension_prospective_terms_clean_lock.csv"))) == 27

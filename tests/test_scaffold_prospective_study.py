@@ -179,5 +179,5 @@ def test_profile_scaffold_quotes_settings_with_spaces() -> None:
         values,
     )
 
-    assert "--setting 'controls=5000 shuffled-term and 5000 random controls per registered target'" in text
-    assert "--setting correction=benjamini_hochberg_across_all_registered_compound_targets" in text
+    assert "--setting 'controls=representative MT_WLC and UHB shuffled-term/random controls'" in text
+    assert "--setting correction=benjamini_hochberg_across_representative_control_rows" in text

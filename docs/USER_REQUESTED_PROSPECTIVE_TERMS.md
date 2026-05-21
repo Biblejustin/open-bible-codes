@@ -7,6 +7,11 @@ On 2026-05-21, a user-requested Gospel and Greek surface term source was added f
 - `terms/greek_surface_new_terms.csv`
 - `terms/compound_extension_prospective_terms.csv`
 
+The clean tracked lock files are:
+
+- `terms/greek_surface_new_terms_clean_lock.csv`
+- `terms/compound_extension_prospective_terms_clean_lock.csv`
+
 ## Scope
 
 The Greek file contains user-supplied Greek terms plus curated Greek Gospel names: the genealogy of Christ, disciples, named women in the Gospels, and other Gospel people.
@@ -40,5 +45,6 @@ The ignored audit artifacts were written under `reports/study_locks/`:
 
 - The raw lists are now tracked study inputs.
 - The raw lists are not clean prospective locks because many rows overlap prior evidence.
-- A result-producing run should use a clean locked candidate set or explicitly label overlapping rows as post-screen/review-only.
-- `docs/PROSPECTIVE_LANE_STATUS.md` keeps the affected lanes blocked until a clean prospective lock is created.
+- The clean lock files above were re-audited with zero prior-evidence matches.
+- A result-producing run should use the clean locked candidate sets.
+- `docs/PROSPECTIVE_LANE_STATUS.md` marks the affected lanes ready for lock manifest and preflight.

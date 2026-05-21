@@ -1,0 +1,51 @@
+from pathlib import Path
+
+from els.protocol_runner import load_protocol
+from scripts.check_preregistration_placeholders import find_placeholders
+
+
+PROFILES = [
+    (
+        Path("protocols/greek_surface_new_terms.toml"),
+        Path("docs/GREEK_SURFACE_NEW_TERMS_PREREGISTRATION.md"),
+        "terms/greek_surface_new_terms_clean_lock.csv",
+        "greek_surface_new_terms",
+    ),
+    (
+        Path("protocols/compound_extension_prospective.toml"),
+        Path("docs/COMPOUND_EXTENSION_PROSPECTIVE_PREREGISTRATION.md"),
+        "terms/compound_extension_prospective_terms_clean_lock.csv",
+        "compound_extension_prospective",
+    ),
+    (
+        Path("protocols/hebrew_concordance_words_prospective.toml"),
+        Path("docs/HEBREW_CONCORDANCE_WORDS_PROSPECTIVE_PREREGISTRATION.md"),
+        "terms/hebrew_concordance_prospective_terms_clean_lock.csv",
+        "hebrew_concordance_words_prospective",
+    ),
+]
+
+
+def test_clean_lock_protocols_use_clean_term_files() -> None:
+    for protocol_path, _prereg, term_file, name in PROFILES:
+        protocol = load_protocol(protocol_path)
+        argv_values = [value for step in protocol["steps"] for value in step["argv"]]
+        input_values = [value for step in protocol["steps"] for value in step.get("inputs", [])]
+
+        assert protocol["name"] == name
+        assert term_file in argv_values
+        assert term_file in input_values
+
+
+def test_clean_lock_preregistrations_have_no_placeholders() -> None:
+    for _protocol_path, prereg, _term_file, _name in PROFILES:
+        assert list(find_placeholders(prereg, allowed=set())) == []
+
+
+def test_clean_lock_protocols_have_expected_first_steps() -> None:
+    assert load_protocol("protocols/greek_surface_new_terms.toml")["steps"][0]["id"] == "surface_context"
+    assert load_protocol("protocols/compound_extension_prospective.toml")["steps"][0]["id"] == "version_presence"
+    assert (
+        load_protocol("protocols/hebrew_concordance_words_prospective.toml")["steps"][0]["id"]
+        == "version_presence"
+    )

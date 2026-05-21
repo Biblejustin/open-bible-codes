@@ -50,3 +50,14 @@ def test_tracked_hebrew_concordance_terms_have_expected_counts() -> None:
         "strong_particles_other": 21,
         "strong_verbs": 15,
     }
+
+
+def test_tracked_hebrew_concordance_clean_lock_count() -> None:
+    path = Path("terms/hebrew_concordance_prospective_terms_clean_lock.csv")
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+
+    normalized = [normalize_text(row["term"], "hebrew") for row in rows]
+
+    assert len(rows) == 3577
+    assert len(normalized) == len(set(normalized))
