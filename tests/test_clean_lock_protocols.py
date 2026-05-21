@@ -49,3 +49,11 @@ def test_clean_lock_protocols_have_expected_first_steps() -> None:
         load_protocol("protocols/hebrew_concordance_words_prospective.toml")["steps"][0]["id"]
         == "version_presence"
     )
+
+
+def test_greek_new_terms_report_step_uses_specific_title() -> None:
+    protocol = load_protocol("protocols/greek_surface_new_terms.toml")
+    step = next(step for step in protocol["steps"] if step["id"] == "prospective_report")
+    argv = step["argv"]
+
+    assert argv[argv.index("--title") + 1] == "Greek Surface New Terms Prospective Report"

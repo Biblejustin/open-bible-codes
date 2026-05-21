@@ -4,6 +4,8 @@ from pathlib import Path
 from scripts.build_greek_surface_prospective_report import (
     PREFLIGHT_IN,
     display_report_term,
+    interpretation_read,
+    primary_filter_read,
     preflight_artifact,
     registered_outcome,
     report_status,
@@ -123,6 +125,20 @@ def test_surface_report_term_display_adds_transliteration_and_english() -> None:
     assert (
         display_report_term({"normalized_term": "σιων", "concept": "Zion"})
         == "`σιων` (Sion; English: Zion)"
+    )
+    assert (
+        display_report_term({"normalized_term": "ονομα", "concept": "ὄνομα"})
+        == "`ονομα` (onoma; English: Name)"
+    )
+
+
+def test_surface_report_interpretation_tracks_selected_rows() -> None:
+    assert "no all-source rows" in primary_filter_read([])
+    assert "1 selected review rows" in primary_filter_read([{"term_id": "demo"}])
+    assert "negative result" in interpretation_read([], [])
+    assert "controlled review material" in interpretation_read(
+        [{"term_id": "demo"}],
+        [{"all_source_q_value": "0.01"}],
     )
 
 

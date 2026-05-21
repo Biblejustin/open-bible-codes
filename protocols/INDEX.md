@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 108
+Protocols indexed: 111
 
 ## Analysis
 
@@ -17,6 +17,7 @@ Protocols indexed: 108
 | greek_exact_center_three_source | Locked Greek exact-center extension cohort with independent Byzantine NT source. | 10 | terms/greek_exact_center_cohort_terms.csv | reports/greek_exact_center_three_source | `greek_exact_center_three_source.toml` |
 | greek_expanded_surface_triage | Post-screen triage for expanded Greek exact-center surface rows. | 1 | terms/greek_expanded_prospective_terms.csv | reports/greek_expanded_surface_triage | `greek_expanded_surface_triage.toml` |
 | greek_nt_claim_version_presence | Capped exact ELS hit-pattern presence for Greek NT claim terms across Greek NT corpora. | 1 | terms/greek_nt_claim_terms.csv | reports/greek_nt_claim_version_presence | `greek_nt_claim_version_presence.toml` |
+| greek_surface_new_terms | Locked Greek surface new-terms exact-center screen for the clean user-requested term lock. | 7 | terms/greek_surface_new_terms_clean_lock.csv | reports/greek_surface_new_terms | `greek_surface_new_terms.toml` |
 | hebrew_claim_version_presence | Capped exact ELS hit-pattern presence for declared Hebrew claim terms across MT-family ... | 1 | terms/hebrew_claim_terms.csv | reports/hebrew_claim_version_presence | `hebrew_claim_version_presence.toml` |
 | hebrew_hit_version_presence | Capped exact ELS hit-pattern presence across Hebrew MT-family corpora. | 1 | terms/modern_names_dates.csv | reports/hebrew_hit_version_presence | `hebrew_hit_version_presence.toml` |
 | hebrew_modern_geopolitical_version_presence | Broad Hebrew modern/geopolitical/local/date exact ELS hit-pattern presence across MT-fa... | 1 | terms/modern_names_dates.csv | reports/hebrew_modern_geopolitical_version_presence | `hebrew_modern_geopolitical_version_presence.toml` |
@@ -125,11 +126,13 @@ Protocols indexed: 108
 | Name | Description | Steps | Terms | Output Roots | Path |
 | --- | --- | ---: | --- | --- | --- |
 | centered_relevance_density | Locked deterministic Centered-Relevance Density run for the Gog/Magog prospective Hebre... | 2 | terms/gog_magog_pair_prospective_terms.csv | reports/crd | `centered_relevance_density.toml` |
+| compound_extension_prospective | Locked Hebrew Gospel/genealogy clean-lock exact-version and representative-control screen. | 4 | terms/compound_extension_prospective_terms_clean_lock.csv | reports/compound_extension_prospective | `compound_extension_prospective.toml` |
 | gog_magog_pair_prospective | Locked prospective Hebrew Gog/Magog same-chapter same-signed-skip pair-control study ov... | 5 | terms/gog_magog_pair_prospective_terms.csv | reports/gog_magog_pair_prospective | `gog_magog_pair_prospective.toml` |
 | greek_expanded_prospective_exact_center | Prospective expanded Greek exact-center extension screen over new declared terms. | 10 | terms/greek_expanded_prospective_terms.csv | reports/greek_expanded_prospective_exact_center | `greek_expanded_prospective_exact_center.toml` |
 | greek_expanded_surface_queue | Post-screen exact-center surface queue from the expanded Greek prospective run. | 1 |  | reports/greek_expanded_surface_queue | `greek_expanded_surface_queue.toml` |
 | greek_surface_length4_followup | Post-discovery follow-up for length-4 all-source Greek surface rows exposed by the lock... | 4 | terms/greek_surface_prospective_terms.csv | reports/greek_surface_length4_followup | `greek_surface_length4_followup.toml` |
 | greek_surface_prospective | Locked Greek surface prospective exact-center screen after removing prior selected rows. | 7 | terms/greek_surface_prospective_terms.csv | reports/greek_surface_prospective | `greek_surface_prospective.toml` |
+| hebrew_concordance_words_prospective | Locked Hebrew concordance clean-lock exact-version and representative-control screen. | 4 | terms/hebrew_concordance_prospective_terms_clean_lock.csv | reports/hebrew_concordance_words_prospective | `hebrew_concordance_words_prospective.toml` |
 | hebrew_modern_geopolitical_prospective | Locked Hebrew modern/geopolitical exact-version presence and representative-control rep... | 4 | terms/hebrew_modern_geopolitical_prospective_terms.csv | reports/hebrew_modern_geopolitical_prospective | `hebrew_modern_geopolitical_prospective.toml` |
 | hebrew_theology_prospective | Locked Hebrew theology registered follow-up exact-version and representative-control sc... | 4 | terms/hebrew_theology_prospective_terms.csv | reports/hebrew_theology_prospective | `hebrew_theology_prospective.toml` |
 

@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
-from els.term_display import display_term
+from els.term_display import contains_greek, contains_hebrew, display_term
 
 
 TERMS_IN = Path("terms/greek_surface_prospective_terms.csv")
@@ -48,6 +48,8 @@ def main(argv: list[str] | None = None) -> int:
         lock=lock,
         preflight=preflight,
         protocol=protocol,
+        title=args.title,
+        description=args.description,
     )
     args.report_out.parent.mkdir(parents=True, exist_ok=True)
     args.report_out.write_text(report, encoding="utf-8")
@@ -70,6 +72,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--protocol-manifest", type=Path)
     parser.add_argument("--report-out", type=Path, default=REPORT_OUT)
     parser.add_argument("--manifest-out", type=Path, default=MANIFEST_OUT)
+    parser.add_argument("--title", default="Greek Surface Prospective Report")
+    parser.add_argument(
+        "--description",
+        default=(
+            "This is the first locked Greek surface prospective run after removing\n"
+            "the prior selected surface rows from the expanded Greek term list."
+        ),
+    )
     return parser
 
 
@@ -84,6 +94,8 @@ def build_report(
     lock: dict[str, Any],
     preflight: dict[str, Any],
     protocol: dict[str, Any],
+    title: str,
+    description: str,
 ) -> str:
     scope_counts = Counter(row["presence_scope"] for row in patterns)
     cohort_counts = Counter(
@@ -92,12 +104,11 @@ def build_report(
     )
     lock_commit = lock.get("git", {}).get("commit", "")
     lines = [
-        "# Greek Surface Prospective Report",
+        f"# {title}",
         "",
         f"Status: {report_status(selected, controls)}.",
         "",
-        "This is the first locked Greek surface prospective run after removing",
-        "the prior selected surface rows from the expanded Greek term list.",
+        description,
         "",
         "## Lock",
         "",
@@ -163,17 +174,11 @@ def build_report(
             "",
             registered_outcome(selected, controls),
             "",
-            "The primary filter was deliberately stricter than the exploratory queue:",
-            "all-source exact-center surface rows had to have normalized length at",
-            "least 5. The run found all-source rows only in the dense length-4 bucket",
-            "after prior selected rows were removed.",
+            primary_filter_read(selected),
             "",
             "## Interpretation Boundary",
             "",
-            "This is a valid negative result for the registered primary gate. It does",
-            "not make a theological, prophetic, historical, or statistical claim. It",
-            "does preserve lower-strength queue data for later separately locked",
-            "studies, especially if a future study explicitly registers length-4 rows.",
+            interpretation_read(selected, controls),
         ]
     )
     return "\n".join(lines).rstrip() + "\n"
@@ -226,7 +231,49 @@ def sum_int(rows: list[dict[str, str]], field: str) -> int:
 
 
 def display_report_term(row: dict[str, str]) -> str:
-    return md_cell(display_term(row["normalized_term"], english=row.get("concept", "")))
+    concept = row.get("concept", "")
+    english = "" if contains_greek(concept) or contains_hebrew(concept) else concept
+    return md_cell(display_term(row["normalized_term"], english=english))
+
+
+def primary_filter_read(selected: list[dict[str, str]]) -> str:
+    base = (
+        "The primary filter was deliberately stricter than the exploratory queue: "
+        "all-source exact-center surface rows had to have normalized length at least 5."
+    )
+    if selected:
+        return (
+            f"{base} This run produced {len(selected):,} selected review rows for "
+            "matched-control interpretation."
+        )
+    return (
+        f"{base} The run found no all-source rows meeting that registered gate after "
+        "prior selected rows were removed."
+    )
+
+
+def interpretation_read(
+    selected: list[dict[str, str]],
+    controls: list[dict[str, str]],
+) -> str:
+    if not selected:
+        return (
+            "This is a valid negative result for the registered primary gate. It does "
+            "not make a theological, prophetic, historical, or statistical claim."
+        )
+    if controls:
+        passing = [
+            row for row in controls if float(row.get("all_source_q_value") or "1") <= 0.05
+        ]
+        return (
+            "This is controlled review material, not a theological, prophetic, "
+            f"historical, or statistical claim. {len(passing):,} control-summary rows "
+            "met the registered q<=0.05 threshold and need manual review."
+        )
+    return (
+        "This is selected review material without matched-control interpretation. It "
+        "does not make a theological, prophetic, historical, or statistical claim."
+    )
 
 
 def md_cell(value: str) -> str:

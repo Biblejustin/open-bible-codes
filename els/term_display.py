@@ -445,7 +445,11 @@ def display_term(value: str, *, english: str | None = None, transliteration: str
     key = normalized_script_key(text)
     known_transliteration, fallback_english = known_term_display(key)
     transliteration = transliteration or known_transliteration or transliterate(text)
-    gloss = english or fallback_english
+    gloss = (
+        english
+        if english and not (contains_hebrew(english) or contains_greek(english))
+        else fallback_english
+    )
     if gloss:
         return f"`{text}` ({transliteration}; English: {gloss})"
     return f"`{text}` ({transliteration})"

@@ -61,3 +61,13 @@ def test_tracked_hebrew_concordance_clean_lock_count() -> None:
 
     assert len(rows) == 3577
     assert len(normalized) == len(set(normalized))
+
+
+def test_hebrew_concordance_report_tracks_initial_control_state() -> None:
+    text = Path("docs/HEBREW_CONCORDANCE_WORDS_PROSPECTIVE_REPORT.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert "| Target rows | 3,577 |" in text
+    assert "| Representative control target rows | 6,790 |" in text
+    assert "representative controls pending" in text

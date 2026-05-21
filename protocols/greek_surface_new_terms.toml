@@ -193,7 +193,7 @@ outputs = [
 id = "prospective_report"
 description = "Build one compact report for the locked Greek surface new-terms run."
 argv = [
-  "-m", "scripts.build_greek_surface_new_terms_report",
+  "-m", "scripts.build_greek_surface_prospective_report",
   "--terms", "terms/greek_surface_new_terms_clean_lock.csv",
   "--queue", "reports/greek_surface_new_terms/term_summary.csv",
   "--patterns", "reports/greek_surface_new_terms/surface_patterns.csv",
@@ -204,9 +204,11 @@ argv = [
   "--preflight", "reports/study_locks/greek_surface_new_terms.preflight.json",
   "--report-out", "docs/GREEK_SURFACE_NEW_TERMS_REPORT.md",
   "--manifest-out", "reports/greek_surface_new_terms/report.manifest.json",
+  "--title", "Greek Surface New Terms Prospective Report",
+  "--description", "This is the first locked Greek surface new-terms prospective run over the clean user-requested term lock after prior selected rows were removed.",
 ]
 inputs = [
-  "scripts/build_greek_surface_new_terms_report.py",
+  "scripts/build_greek_surface_prospective_report.py",
   "els/term_display.py",
   "terms/greek_surface_new_terms_clean_lock.csv",
   "reports/greek_surface_new_terms/term_summary.csv",

@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 283
+Documents indexed: 296
 
 ## Controls
 
@@ -37,6 +37,8 @@ Documents indexed: 283
 | Greek Surface Length-4 Vocabulary Controls | `GREEK_SURFACE_LENGTH4_VOCABULARY_CONTROLS.md` |
 | Greek Surface Length-4 Vocabulary Control Evaluation | `GREEK_SURFACE_LENGTH4_VOCABULARY_CONTROL_EVALUATION.md` |
 | Greek Surface Length-4 Vocabulary Control Pool | `GREEK_SURFACE_LENGTH4_VOCABULARY_CONTROL_POOL.md` |
+| Greek Surface New Terms Control Evaluation | `GREEK_SURFACE_NEW_TERMS_CONTROL_EVALUATION.md` |
+| Greek Surface New Terms Control Pool | `GREEK_SURFACE_NEW_TERMS_CONTROL_POOL.md` |
 | Greek Surface Prospective Control Evaluation | `GREEK_SURFACE_PROSPECTIVE_CONTROL_EVALUATION.md` |
 | Greek Surface Prospective Control Pool | `GREEK_SURFACE_PROSPECTIVE_CONTROL_POOL.md` |
 | Hebrew Control Version Presence | `HEBREW_CONTROL_VERSION_PRESENCE.md` |
@@ -101,6 +103,7 @@ Documents indexed: 283
 | --- | --- |
 | All-Codes Compound Extension Confirmatory Preregistration | `ALL_CODES_COMPOUND_EXTENSION_CONFIRMATORY_PREREGISTRATION.md` |
 | BYZ_NT Source-Only Exact-Center Preregistration | `BYZ_SOURCE_ONLY_EXACT_CENTER_PREREGISTRATION.md` |
+| Prospective Study Preregistration Template | `COMPOUND_EXTENSION_PROSPECTIVE_PREREGISTRATION.md` |
 | CRD Preregistration | `CRD_PREREGISTRATION.md` |
 | Doxa Follow-Up Preregistration | `DOXA_FOLLOWUP_PREREGISTRATION.md` |
 | Doxa Four-Source Claim Follow-Up Preregistration | `DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_PREREGISTRATION.md` |
@@ -110,7 +113,9 @@ Documents indexed: 283
 | Greek Exact-Center Four-Source Preregistration | `GREEK_EXACT_CENTER_FOUR_SOURCE_PREREGISTRATION.md` |
 | Greek Exact-Center Three-Source Preregistration | `GREEK_EXACT_CENTER_THREE_SOURCE_PREREGISTRATION.md` |
 | Greek Expanded Prospective Exact-Center Preregistration | `GREEK_EXPANDED_PROSPECTIVE_PREREGISTRATION.md` |
+| Prospective Study Preregistration Template | `GREEK_SURFACE_NEW_TERMS_PREREGISTRATION.md` |
 | Greek Surface Prospective Preregistration | `GREEK_SURFACE_PROSPECTIVE_PREREGISTRATION.md` |
+| Prospective Study Preregistration Template | `HEBREW_CONCORDANCE_WORDS_PROSPECTIVE_PREREGISTRATION.md` |
 | Hebrew Modern Geopolitical Presence Preregistration | `HEBREW_MODERN_GEOPOLITICAL_PRESENCE_PREREGISTRATION.md` |
 | Hebrew Theology Prospective Preregistration | `HEBREW_THEOLOGY_PROSPECTIVE_PREREGISTRATION.md` |
 | KJVA Apocrypha Bridge Confirmatory Follow-Up Preregistration | `KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_PREREGISTRATION.md` |
@@ -130,6 +135,7 @@ Documents indexed: 283
 | Title | Path |
 | --- | --- |
 | BYZ_NT Source-Only Exact-Center Report | `BYZ_SOURCE_ONLY_EXACT_CENTER_REPORT.md` |
+| Hebrew Gospel/Genealogy Prospective Report | `COMPOUND_EXTENSION_PROSPECTIVE_REPORT.md` |
 | CRD Report | `CRD_REPORT.md` |
 | Doxa Follow-Up Report | `DOXA_FOLLOWUP_REPORT.md` |
 | Doxa Four-Source Claim Follow-Up Report | `DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md` |
@@ -142,7 +148,9 @@ Documents indexed: 283
 | Greek Exact-Center Three-Source Report | `GREEK_EXACT_CENTER_THREE_SOURCE_REPORT.md` |
 | Greek Expanded Prospective Report | `GREEK_EXPANDED_PROSPECTIVE_REPORT.md` |
 | Greek Expanded Surface Follow-Up Report | `GREEK_EXPANDED_SURFACE_FOLLOWUP_REPORT.md` |
+| Greek Surface New Terms Prospective Report | `GREEK_SURFACE_NEW_TERMS_REPORT.md` |
 | Greek Surface Prospective Report | `GREEK_SURFACE_PROSPECTIVE_REPORT.md` |
+| Hebrew Concordance Words Prospective Report | `HEBREW_CONCORDANCE_WORDS_PROSPECTIVE_REPORT.md` |
 | Hebrew Modern Geopolitical Prospective Report | `HEBREW_MODERN_GEOPOLITICAL_PROSPECTIVE_REPORT.md` |
 | Hebrew Theology Prospective Report | `HEBREW_THEOLOGY_PROSPECTIVE_REPORT.md` |
 | Local Terms Negative Appendix Report | `LOCAL_TERMS_APPENDIX_REPORT.md` |
@@ -234,6 +242,9 @@ Documents indexed: 283
 | Greek Screening All-Codes Triage | `GREEK_SCREENING_ALL_CODES_TRIAGE.md` |
 | Greek Surface Length-4 Follow-Up Triage | `GREEK_SURFACE_LENGTH4_FOLLOWUP_TRIAGE.md` |
 | Greek Surface Length-4 Letter Paths | `GREEK_SURFACE_LENGTH4_LETTER_PATHS.md` |
+| Greek Surface New Terms Letter Paths | `GREEK_SURFACE_NEW_TERMS_LETTER_PATHS.md` |
+| Greek Surface New Terms Queue | `GREEK_SURFACE_NEW_TERMS_QUEUE.md` |
+| Greek Surface New Terms Triage | `GREEK_SURFACE_NEW_TERMS_TRIAGE.md` |
 | Greek Surface Prospective Claim Standard | `GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md` |
 | Greek Surface Prospective Letter Paths | `GREEK_SURFACE_PROSPECTIVE_LETTER_PATHS.md` |
 | Greek Surface Prospective Queue | `GREEK_SURFACE_PROSPECTIVE_QUEUE.md` |
@@ -242,6 +253,7 @@ Documents indexed: 283
 | Hebrew ALBAM Transformed-Text Audit | `HEBREW_ALBAM_AUDIT.md` |
 | Hebrew Atbash Transformed-Text Audit | `HEBREW_ATBASH_AUDIT.md` |
 | Hebrew Claim Terms | `HEBREW_CLAIM_TERMS.md` |
+| Hebrew Concordance Prospective Terms | `HEBREW_CONCORDANCE_PROSPECTIVE_TERMS.md` |
 | Hebrew MT Source Candidates | `HEBREW_MT_SOURCE_CANDIDATES.md` |
 | Hebrew Screening All-Codes Collection | `HEBREW_SCREENING_ALL_CODES_COLLECTION.md` |
 | Hebrew Screening All-Codes Triage | `HEBREW_SCREENING_ALL_CODES_TRIAGE.md` |
@@ -295,6 +307,7 @@ Documents indexed: 283
 | Torah-Code ELS Model Simulation | `TORAH_CODE_RESEARCH_ELS_MODEL_SIMULATION.md` |
 | Torah-Code Research Model Simulation | `TORAH_CODE_RESEARCH_MODEL_SIMULATION.md` |
 | Transformed Text Layers | `TRANSFORMED_TEXT_LAYERS.md` |
+| User-Requested Prospective Terms | `USER_REQUESTED_PROSPECTIVE_TERMS.md` |
 | Wide Focus Exact-Hit Presence | `WIDE_FOCUS_EXACT_PRESENCE.md` |
 | Broad Search Summary | `WIDE_FOCUS_SEARCH.md` |
 | Windows CPU Broad 2..500 Surface Follow-Up | `WINDOWS_CPU_BROAD_2_500_SURFACE_FOLLOWUP.md` |
