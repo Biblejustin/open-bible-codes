@@ -209,6 +209,40 @@ Disallowed status:
 - `conclusive evidence`
 - `prophecy-confirmation wording`
 
+## Track 4: Completed Clean-Lock Expansion
+
+The later clean-lock expansion added fresh Greek surface terms and Hebrew
+concordance terms after earlier evidence rows were excluded. It produced review
+queues, not claim-ready rows.
+
+Primary artifacts:
+
+- `docs/CLEAN_LOCK_RESULTS_SUMMARY.md`
+- `docs/GREEK_SURFACE_NEW_TERMS_CONTEXT_REVIEW.md`
+- `docs/HEBREW_CONCORDANCE_UNCORRECTED_SCREENING_AUDIT.md`
+- `docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`
+
+Observed outcome:
+
+- Greek surface new terms: 5 controlled rows reached `q <= 0.05`;
+- manual context review found local surface-context/self-lexeme effects;
+- Hebrew concordance words: 87 uncorrected-only representative-control prompts;
+- Hebrew concordance words: 0 adjusted-support terms;
+- strict follow-up gate: 0 Greek surface rows and 0 Hebrew concordance rows
+  are claim-ready.
+
+Allowed status:
+
+- audit material
+- triage list
+- negative strict-gate result
+
+Disallowed status:
+
+- `claim`
+- `conclusive evidence`
+- `prospective_controlled_review_candidate`
+
 ## Next Allowed Commands
 
 Safe non-result-producing checks:

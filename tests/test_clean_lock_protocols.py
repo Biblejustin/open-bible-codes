@@ -107,3 +107,11 @@ def test_consolidated_findings_include_clean_lock_closeout() -> None:
     assert "87" in text
     assert "uncorrected-only representative-control prompts" in text
     assert "0 Hebrew concordance rows and 0 Greek surface rows" in text
+
+
+def test_next_lock_tracks_completed_clean_lock_expansion() -> None:
+    text = Path("docs/PROSPECTIVE_STUDY_NEXT_LOCK.md").read_text(encoding="utf-8")
+
+    assert "## Track 4: Completed Clean-Lock Expansion" in text
+    assert "0 Greek surface rows and 0 Hebrew concordance rows" in text
+    assert "`prospective_controlled_review_candidate`" in text
