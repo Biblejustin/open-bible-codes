@@ -3,7 +3,9 @@
 Status: planning lock for the next result-producing phase. This document does
 not run a search and does not promote any result to a claim.
 
-Locked on top of report assembly commit: `ce39e9a`.
+Initial planning lock recorded after report assembly commit: `ce39e9a`.
+Current lane status is generated from `configs/prospective_study_lanes.json`
+in `docs/PROSPECTIVE_LANE_STATUS.md`.
 
 ## Purpose
 
