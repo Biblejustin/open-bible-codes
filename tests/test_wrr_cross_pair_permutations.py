@@ -1,8 +1,13 @@
 import unittest
+import csv
+import tempfile
+from pathlib import Path
 
 from scripts.analyze_wrr_cross_pair_permutations import (
     analyze_permutations,
+    analyze_permutations_streaming,
     build_pair_index,
+    filtered_rows,
     row_concepts,
     rows_for_mapping,
     source_concepts,
@@ -99,6 +104,69 @@ class WrrCrossPairPermutationsTests(unittest.TestCase):
         self.assertEqual(stats["p3_p4_sample_rows"], 1)
         self.assertEqual(stats["p3_p4_sample_defined_corrected_distances"], 1)
 
+    def test_filtered_rows_applies_lane_and_review_status_filters(self) -> None:
+        rows = [
+            row(
+                "keep",
+                "WRR2 01",
+                "0.1",
+                candidate_lane="length_5_8",
+                pair_review_status="same_record",
+            ),
+            row(
+                "wrong_lane",
+                "WRR2 01",
+                "0.2",
+                candidate_lane="other",
+                pair_review_status="same_record",
+            ),
+            row(
+                "excluded",
+                "WRR2 01",
+                "0.3",
+                candidate_lane="length_5_8",
+                pair_review_status="diagnostic",
+            ),
+        ]
+
+        result = filtered_rows(
+            rows,
+            candidate_lanes=["length_5_8"],
+            pair_review_statuses=[],
+            excluded_pair_review_statuses=["diagnostic"],
+        )
+
+        self.assertEqual([item["pair_id"] for item in result], ["keep"])
+
+    def test_streaming_analysis_can_limit_sample_output(self) -> None:
+        rows = [
+            row("a_a", "WRR2 01", "0.1"),
+            row("a_b", "WRR2 01->WRR2 02", "0.4"),
+            row("b_a", "WRR2 02->WRR2 01", "0.2"),
+            row("b_b", "WRR2 02", "0.3"),
+        ]
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "samples.csv"
+
+            summary = analyze_permutations_streaming(
+                rows,
+                source="input.csv",
+                permutations=3,
+                seed=7,
+                p1_threshold=0.2,
+                sample_output_limit=1,
+                out=out,
+            )
+
+            with out.open(encoding="utf-8", newline="") as handle:
+                written = list(csv.DictReader(handle))
+
+        self.assertEqual(summary["permutations"], 3)
+        self.assertEqual(summary["sample_rows_written"], 2)
+        self.assertEqual(len(written), 2)
+        self.assertEqual(written[0]["sample_type"], "observed")
+        self.assertEqual(written[1]["sample_type"], "permutation")
+
 
 def row(
     pair_id: str,
@@ -106,6 +174,8 @@ def row(
     corrected_distance: str,
     *,
     rabbi_title: str = "False",
+    candidate_lane: str = "",
+    pair_review_status: str = "",
 ) -> dict[str, str]:
     return {
         "pair_id": pair_id,
@@ -113,6 +183,8 @@ def row(
         "corrected_distance": corrected_distance,
         "corrected_distance_status": "defined",
         "appellation_starts_with_rabbi_title": rabbi_title,
+        "candidate_lane": candidate_lane,
+        "pair_review_status": pair_review_status,
     }
 
 

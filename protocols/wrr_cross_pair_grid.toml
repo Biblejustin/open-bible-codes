@@ -98,6 +98,7 @@ argv = [
   "--permutations", "1000",
   "--seed", "1994",
   "--p1-threshold", "0.2",
+  "--sample-output-limit", "-1",
   "--out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000.csv",
   "--summary-out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000_summary.csv",
   "--markdown-out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000.md",

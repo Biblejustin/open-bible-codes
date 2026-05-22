@@ -79,6 +79,7 @@ not the WRR claim-grade 999,999-permutation run.
 | --- | ---: |
 | permutations | 1000 |
 | seed | 1994 |
+| sample rows written | 1001 |
 | concepts shuffled | 30 |
 | observed source rows | 182 |
 | observed defined `c(w,w')` values | 50 |
@@ -94,6 +95,23 @@ not the WRR claim-grade 999,999-permutation run.
 | permutation row range | 169..182 |
 | permutation defined-value range | 33..59 |
 | identity permutations | 0 |
+
+WNP-dispute-flagged rows excluded, same seed and sample count:
+
+| Item | Value |
+| --- | ---: |
+| sample rows written | 1 |
+| observed source rows | 174 |
+| observed defined `c(w,w')` values | 48 |
+| observed P1 | 0.003809014117 |
+| observed P2 | 0.000200641225415 |
+| observed P3 | 0.0102141568845 |
+| observed P4 | 0.00054397278983 |
+| rho P1 | 0.001998001998 |
+| rho P2 | 0.000999000999001 |
+| rho P3 | 0.00699300699301 |
+| rho P4 | 0.001998001998 |
+| Bonferroni rho0 | 0.003996003996 |
 
 ## Read
 
