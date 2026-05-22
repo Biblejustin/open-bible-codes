@@ -117,6 +117,7 @@ Current pushed commits for this cleanup:
 - `061ba7e` Document WRR blocker packet guard.
 - `d1aacc2` Refresh WRR blocker packet guard status.
 - `123ca07` Guard WRR lock options in preflight.
+- `71c6465` Document WRR lock options guard.
 
 ### Formal Real Report Rerun
 
