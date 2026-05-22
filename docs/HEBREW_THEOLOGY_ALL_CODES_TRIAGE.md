@@ -64,10 +64,10 @@ It is a triage aid, not a claim-grade filter.
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
 | 1 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | 7 | 22 | 1Chr 5:1 | `בנישראל` (bnei Yisrael; English: children of Israel) | not_unusual |
 | 2 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | -7 | 22 | 2Kgs 17:20 | `ישראל` (Yisrael; English: Israel) | not_unusual |
-| 3 | all_source | `htp_covenant_h` `ברית` (bryt; English: Covenant) | Covenant | 8 | 25 | Deut 34:9 | `חכמה` (chkmh; English: Wisdom) | not_unusual |
+| 3 | all_source | `htp_covenant_h` `ברית` (bryt; English: Covenant) | Covenant | 8 | 25 | Deut 34:9 | `חכמה` (chkmh) | not_unusual |
 | 4 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | 9 | 28 | 1Sam 17:45 | `ישראל` (Yisrael; English: Israel) | not_unusual |
 | 5 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | 13 | 40 | Ezek 48:11 | `ישראל` (Yisrael; English: Israel) | not_unusual |
-| 6 | all_source | `htp_covenant_h` `ברית` (bryt; English: Covenant) | Covenant | -13 | 40 | Prov 1:7 | `חכמה` (chkmh; English: Wisdom) | not_unusual |
+| 6 | all_source | `htp_covenant_h` `ברית` (bryt; English: Covenant) | Covenant | -13 | 40 | Prov 1:7 | `חכמה` (chkmh) | not_unusual |
 | 7 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | 14 | 43 | 1Sam 2:22 | `ישראל` (Yisrael; English: Israel) | not_unusual |
 | 8 | all_source | `htp_torah_h` `תורה` (twrh; English: Torah) | Torah | 14 | 43 | Exod 7:5 | `אתבניישראל` (tbnyyshrl) | not_unusual |
 | 9 | all_source | `htp_love_h` `אהבה` (hbh; English: Love) | Love | -15 | 46 | 2Sam 14:30 | `אבשלומ` (bshlwm) | not_unusual |
@@ -98,7 +98,7 @@ It is a triage aid, not a claim-grade filter.
 | 9 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | Ezek 46:13 | `עולה` (wlh) | paired_uncorrected_p_le_0.05 |
 | 10 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | Ezek 4:3 | `אותה` (wth) | paired_uncorrected_p_le_0.05 |
 | 11 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | Gen 39:21 | `ויהי` (wyhy) | paired_uncorrected_p_le_0.05 |
-| 12 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | Isa 40:2 | `עונה` (wnh) | paired_uncorrected_p_le_0.05 |
+| 12 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | Isa 40:2 | `עונה` (wnh; English: 1) cohabitation, conjugal rights) | paired_uncorrected_p_le_0.05 |
 | 13 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | Jer 3:23 | `המונ` (hmwn) | paired_uncorrected_p_le_0.05 |
 | 14 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | Lev 10:19 | `היומ` (hywm) | paired_uncorrected_p_le_0.05 |
 | 15 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | Mal 1:13 | `אותה` (wth) | paired_uncorrected_p_le_0.05 |
@@ -191,14 +191,14 @@ It is a triage aid, not a claim-grade filter.
 | 2 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 2 | 7 | 1Chr 29:28 | `טובה` (twbh) | paired_uncorrected_p_le_0.05 |
 | 3 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 2 | 7 | 1Kgs 13:24 | `וימיתהו` (wymythw) | paired_uncorrected_p_le_0.05 |
 | 4 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 1Kgs 8:8 | `החוצה` (hchwtsh) | paired_uncorrected_p_le_0.05 |
-| 5 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 1Sam 25:16 | `חומה` (chwmh) | paired_uncorrected_p_le_0.05 |
+| 5 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 1Sam 25:16 | `חומה` (chwmh; English: 1) wall) | paired_uncorrected_p_le_0.05 |
 | 6 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 2 | 7 | 1Sam 26:21 | `היומ` (hywm) | paired_uncorrected_p_le_0.05 |
 | 7 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 2 | 7 | 1Sam 30:25 | `מהיומ` (mhywm) | paired_uncorrected_p_le_0.05 |
 | 8 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 2 | 7 | 2Chr 20:12 | `ההמונ` (hhmwn) | paired_uncorrected_p_le_0.05 |
 | 9 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 2Chr 24:16 | `טובה` (twbh) | paired_uncorrected_p_le_0.05 |
 | 10 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 2Chr 31:18 | `ולהתיחש` (wlhtychsh) | paired_uncorrected_p_le_0.05 |
 | 11 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 2Chr 32:18 | `החומה` (hchwmh) | paired_uncorrected_p_le_0.05 |
-| 12 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 2Chr 33:14 | `חומה` (chwmh) | paired_uncorrected_p_le_0.05 |
+| 12 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 2Chr 33:14 | `חומה` (chwmh; English: 1) wall) | paired_uncorrected_p_le_0.05 |
 | 13 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 2Chr 34:19 | `התורה` (htwrh) | paired_uncorrected_p_le_0.05 |
 | 14 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 2Chr 5:9 | `החוצה` (hchwtsh) | paired_uncorrected_p_le_0.05 |
 | 15 | all_source | `htp_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | -2 | 7 | 2Kgs 22:11 | `התורה` (htwrh) | paired_uncorrected_p_le_0.05 |

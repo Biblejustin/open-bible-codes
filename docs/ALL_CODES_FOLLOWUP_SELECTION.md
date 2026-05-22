@@ -124,7 +124,7 @@ center-word, related center-word, center-verse, and span-context buckets first.
 | 74 | hebrew_theology | `center_word_exact` | all_source | `יהוה` (YHWH; English: YHWH) | YHWH | 3 | 1Chr 28:20 | `יהוה` (YHWH; English: YHWH) |
 | 75 | hebrew_theology | `center_word_same_category` | all_source | `תורה` (twrh; English: Torah) | Torah | 7 | 1Chr 5:1 | `בנישראל` (bnei Yisrael; English: children of Israel) |
 | 76 | hebrew_theology | `center_word_same_category` | all_source | `תורה` (twrh; English: Torah) | Torah | -7 | 2Kgs 17:20 | `ישראל` (Yisrael; English: Israel) |
-| 77 | hebrew_theology | `center_word_same_category` | all_source | `ברית` (bryt; English: Covenant) | Covenant | 8 | Deut 34:9 | `חכמה` (chkmh; English: Wisdom) |
+| 77 | hebrew_theology | `center_word_same_category` | all_source | `ברית` (bryt; English: Covenant) | Covenant | 8 | Deut 34:9 | `חכמה` (chkmh) |
 | 78 | hebrew_theology | `center_verse_same_category` | all_source | `אהבה` (hbh; English: Love) | Love | 2 | 2Sam 14:21 | `הדבר` (ha-davar; English: the word/matter) |
 | 79 | hebrew_theology | `center_verse_same_category` | all_source | `אהבה` (hbh; English: Love) | Love | 2 | 2Sam 15:27 | `שבה` (shuvah; English: return) |
 | 80 | hebrew_theology | `center_verse_same_category` | all_source | `חכמה` (chkmh; English: Wisdom) | Wisdom | 3 | Isa 49:8 | `כה` (koh; English: thus) |

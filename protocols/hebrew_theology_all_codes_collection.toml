@@ -60,6 +60,26 @@ outputs = [
 ]
 
 [[steps]]
+id = "report_db"
+description = "Refresh DuckDB mirror before summary and triage so large hit scans use the current DB table."
+argv = [
+  "-m",
+  "scripts.build_report_db",
+  "--skip-missing",
+  "--manifest-out",
+  "reports/db/open_bible_codes.manifest.json",
+]
+inputs = [
+  "scripts/build_report_db.py",
+  "els/report_db.py",
+  "reports/hebrew_theology_all_codes/surface_all_codes.csv",
+  "reports/hebrew_theology_all_codes/surface_all_codes_summary.csv",
+]
+outputs = [
+  "reports/db/open_bible_codes.manifest.json",
+]
+
+[[steps]]
 id = "summary"
 description = "Summarize the relaxed all-codes collection."
 argv = [
@@ -69,6 +89,12 @@ argv = [
   "reports/hebrew_theology_all_codes/surface_all_codes.csv",
   "--summary",
   "reports/hebrew_theology_all_codes/surface_all_codes_summary.csv",
+  "--db",
+  "reports/db/open_bible_codes.duckdb",
+  "--hits-table",
+  "hebrew_theology_surface_all_codes",
+  "--summary-table",
+  "hebrew_theology_surface_all_codes_summary",
   "--title",
   "Hebrew Theology All-Codes Collection",
   "--markdown-out",
@@ -78,9 +104,11 @@ argv = [
 ]
 inputs = [
   "scripts/summarize_surface_all_codes.py",
+  "els/report_db.py",
   "els/term_display.py",
   "reports/hebrew_theology_all_codes/surface_all_codes.csv",
   "reports/hebrew_theology_all_codes/surface_all_codes_summary.csv",
+  "reports/db/open_bible_codes.manifest.json",
 ]
 outputs = [
   "docs/HEBREW_THEOLOGY_ALL_CODES_COLLECTION.md",
@@ -97,6 +125,10 @@ argv = [
   "reports/hebrew_theology_all_codes/surface_all_codes.csv",
   "--summary",
   "reports/hebrew_theology_all_codes/surface_all_codes_summary.csv",
+  "--db",
+  "reports/db/open_bible_codes.duckdb",
+  "--hits-table",
+  "hebrew_theology_surface_all_codes",
   "--controlled-summary",
   "reports/hebrew_theology_prospective/controlled_summary.csv",
   "--title",
@@ -110,10 +142,12 @@ argv = [
 ]
 inputs = [
   "scripts/triage_surface_all_codes.py",
+  "els/report_db.py",
   "els/term_display.py",
   "reports/hebrew_theology_all_codes/surface_all_codes.csv",
   "reports/hebrew_theology_all_codes/surface_all_codes_summary.csv",
   "reports/hebrew_theology_prospective/controlled_summary.csv",
+  "reports/db/open_bible_codes.manifest.json",
 ]
 outputs = [
   "reports/hebrew_theology_all_codes/triage_queue.csv",

@@ -69,8 +69,8 @@ It is a triage aid, not a claim-grade filter.
 | 5 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 53 | 160 | 1Kgs 20:12 | `אלעבדיו` (lbdyw) | not_run |
 | 6 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 54 | 163 | 2Kgs 10:21 | `כלעבדי` (klbdy) | not_run |
 | 7 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 8 | 25 | Gen 32:17 | `בידעבדיו` (bydbdyw) | not_run |
-| 8 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 77 | 232 | 2Chr 29:12 | `עבדי` (bdy) | not_run |
-| 9 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -67 | 202 | 1Kgs 22:50 | `עבדי` (bdy) | not_run |
+| 8 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 77 | 232 | 2Chr 29:12 | `עבדי` (bdy; English: Abdi = "servant of Jehovah") | not_run |
+| 9 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -67 | 202 | 1Kgs 22:50 | `עבדי` (bdy; English: Abdi = "servant of Jehovah") | not_run |
 | 10 | source_specific | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -2 | 7 | PBY Brenner | `עבדותעולמ` (bdwtwlm) | not_run |
 | 11 | source_specific | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -3 | 10 | PBY Brenner | `לעבדו` (lbdw) | not_run |
 | 12 | source_specific | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -4 | 13 | PBY Bialik | `ועבדו` (wbdw) | not_run |
@@ -112,9 +112,9 @@ It is a triage aid, not a claim-grade filter.
 
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | multi_source | `cc_levites_h` `לוימ` (lwym; English: Levites) | Levites | -2 | 7 | 1Chr 15:11 | `שמעיה` (shmyh) | not_run |
-| 2 | multi_source | `mt_levites_h` `לוימ` (lwym; English: Levites) | Levites | -2 | 7 | 1Chr 15:11 | `שמעיה` (shmyh) | not_run |
-| 3 | multi_source | `twn_levites_h` `לוימ` (lwym; English: Levites) | Levites | -2 | 7 | 1Chr 15:11 | `שמעיה` (shmyh) | not_run |
+| 1 | multi_source | `cc_levites_h` `לוימ` (lwym; English: Levites) | Levites | -2 | 7 | 1Chr 15:11 | `שמעיה` (shmyh; English: Shemaiah = "heard by Jehovah") | not_run |
+| 2 | multi_source | `mt_levites_h` `לוימ` (lwym; English: Levites) | Levites | -2 | 7 | 1Chr 15:11 | `שמעיה` (shmyh; English: Shemaiah = "heard by Jehovah") | not_run |
+| 3 | multi_source | `twn_levites_h` `לוימ` (lwym; English: Levites) | Levites | -2 | 7 | 1Chr 15:11 | `שמעיה` (shmyh; English: Shemaiah = "heard by Jehovah") | not_run |
 | 4 | multi_source | `bns_esther_yhwh_h` `יהוה` (YHWH; English: YHWH Esther Acrostic) | YHWH Esther Acrostic | 2 | 7 | 1Kgs 2:42 | `הלוא` (hlw) | not_run |
 | 5 | multi_source | `cc_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 2 | 7 | 1Kgs 2:42 | `הלוא` (hlw) | not_run |
 | 6 | multi_source | `twn_yhwh_h` `יהוה` (YHWH; English: YHWH) | YHWH | 2 | 7 | 1Kgs 2:42 | `הלוא` (hlw) | not_run |
@@ -152,7 +152,7 @@ It is a triage aid, not a claim-grade filter.
 | 13 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -8 | 25 | Jer 2:20 | `כי` (ky) | not_run |
 | 14 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -9 | 28 | Deut 26:6 | `וירעו` (wyrw) | not_run |
 | 15 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 9 | 28 | Isa 60:12 | `והגוימ` (whgwym) | not_run |
-| 16 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -10 | 31 | Dan 2:49 | `מלכא` (mlk) | not_run |
+| 16 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -10 | 31 | Dan 2:49 | `מלכא` (mlk; English: 1) queen) | not_run |
 | 17 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 10 | 31 | Jer 37:2 | `הארצ` (hrts) | not_run |
 | 18 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 10 | 31 | Ps 134:1 | `אתיהוה` (tyhwh) | not_run |
 | 19 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -12 | 37 | 2Chr 24:25 | `המלכימ` (hmlkym) | not_run |
@@ -213,7 +213,7 @@ It is a triage aid, not a claim-grade filter.
 | Rank | Scope | Term | Concept | Skip | Span | Center | Center word | Control |
 | ---: | --- | --- | --- | ---: | ---: | --- | --- | --- |
 | 1 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -2 | 7 | Dan 3:27 | `בהונ` (bhwn) | not_run |
-| 2 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -7 | 22 | Ps 90:12 | `חכמה` (chkmh; English: Wisdom) | not_run |
+| 2 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -7 | 22 | Ps 90:12 | `חכמה` (chkmh) | not_run |
 | 3 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | -10 | 31 | Josh 5:15 | `יהוה` (YHWH; English: YHWH) | not_run |
 | 4 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 12 | 37 | 2Chr 25:25 | `אמציהו` (mtsyhw) | not_run |
 | 5 | multi_source | `twn_obed_h` `עובד` (wbd; English: Obed) | Obed | 16 | 49 | Lev 23:20 | `לכהנ` (lkhn) | not_run |
@@ -248,7 +248,7 @@ It is a triage aid, not a claim-grade filter.
 | 9 | multi_source | `twn_levites_h` `לוימ` (lwym; English: Levites) | Levites | -2 | 7 | 1Chr 26:7 | `וסמכיהו` (wsmkyhw) | not_run |
 | 10 | multi_source | `cc_shiloh_h` `שילה` (shylh; English: Shiloh) | Shiloh | -2 | 7 | 1Chr 27:17 | `ללוי` (llwy) | not_run |
 | 11 | multi_source | `mt_shiloh_h` `שילה` (shylh; English: Shiloh) | Shiloh | -2 | 7 | 1Chr 27:17 | `ללוי` (llwy) | not_run |
-| 12 | multi_source | `bcd_saul_h` `שאול` (shwl; English: Saul) | Saul | 2 | 7 | 1Chr 4:35 | `עשיאל` (shyl) | not_run |
+| 12 | multi_source | `bcd_saul_h` `שאול` (shwl; English: Saul) | Saul | 2 | 7 | 1Chr 4:35 | `עשיאל` (shyl; English: Asiel = "made by God") | not_run |
 | 13 | multi_source | `cc_jonah_h` `יונה` (ywnh; English: Jonah) | Jonah | 2 | 7 | 1Kgs 4:4 | `ובניהו` (wbnyhw) | not_run |
 | 14 | multi_source | `mt_jonah_h` `יונה` (ywnh; English: Jonah) | Jonah | 2 | 7 | 1Kgs 4:4 | `ובניהו` (wbnyhw) | not_run |
 | 15 | multi_source | `cc_levites_h` `לוימ` (lwym; English: Levites) | Levites | 2 | 7 | 1Sam 15:1 | `ויאמר` (wymr) | not_run |

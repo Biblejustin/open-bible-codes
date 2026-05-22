@@ -85,10 +85,10 @@ It is a triage aid, not a claim-grade filter.
 | 7 | all_source | `locust_plague_h` `ארבה` (rbh; English: Locust Plague) | Locust Plague | 2 | 7 | 1Kgs 12:12 | `דבר` (davar; English: word/matter) | not_unusual |
 | 8 | all_source | `locusts_plague_h` `ארבה` (rbh; English: Locusts) | Locusts | 2 | 7 | 1Kgs 12:12 | `דבר` (davar; English: word/matter) | not_unusual |
 | 9 | all_source | `ehyeh_h` `אהיה` (hyh; English: Ehyeh) | Ehyeh | 2 | 7 | 1Kgs 13:14 | `אישהאלהימ` (yshhlhym) | not_unusual |
-| 10 | all_source | `shinar_h` `שנער` (shnr; English: Shinar) | Shinar | 2 | 7 | 1Kgs 15:1 | `שמנה` (shmnh) | not_unusual |
+| 10 | all_source | `shinar_h` `שנער` (shnr; English: Shinar) | Shinar | 2 | 7 | 1Kgs 15:1 | `שמנה` (shmnh; English: 1) eight, eighth) | not_unusual |
 | 11 | all_source | `asshur_h` `אשור` (shwr; English: Asshur) | Asshur | -2 | 7 | 1Kgs 18:25 | `בשמ` (bshm) | not_unusual |
 | 12 | all_source | `ehyeh_h` `אהיה` (hyh; English: Ehyeh) | Ehyeh | 2 | 7 | 1Kgs 6:17 | `היה` (hyh) | not_unusual |
-| 13 | all_source | `shinar_h` `שנער` (shnr; English: Shinar) | Shinar | 2 | 7 | 1Kgs 7:15 | `שמנה` (shmnh) | not_unusual |
+| 13 | all_source | `shinar_h` `שנער` (shnr; English: Shinar) | Shinar | 2 | 7 | 1Kgs 7:15 | `שמנה` (shmnh; English: 1) eight, eighth) | not_unusual |
 | 14 | all_source | `peace_h` `שלומ` (shlwm; English: Peace) | Peace | 2 | 7 | 1Sam 18:30 | `דוד` (David; English: David) | not_unusual |
 | 15 | all_source | `peace_h` `שלומ` (shlwm; English: Peace) | Peace | 2 | 7 | 1Sam 20:28 | `דוד` (David; English: David) | not_unusual |
 | 16 | all_source | `locust_h` `ארבה` (rbh; English: Locust) | Locust | 2 | 7 | 2Chr 10:12 | `דבר` (davar; English: word/matter) | not_unusual |
@@ -145,7 +145,7 @@ It is a triage aid, not a claim-grade filter.
 | 17 | all_source | `year_2001_additive_h` `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 11 | 56 | Ezek 7:8 | `עליכ` (alekha; English: upon you) | not_unusual |
 | 18 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 13 | 40 | Exod 27:21 | `עלהעדת` (lhdt) | not_unusual |
 | 19 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | -13 | 40 | Isa 34:11 | `וינשופ` (wynshwp) | not_unusual |
-| 20 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 14 | 43 | 2Sam 17:20 | `עבדי` (bdy) | not_unusual |
+| 20 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 14 | 43 | 2Sam 17:20 | `עבדי` (bdy; English: Abdi = "servant of Jehovah") | not_unusual |
 
 ### center_verse_same_category
 
@@ -210,7 +210,7 @@ It is a triage aid, not a claim-grade filter.
 | 7 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | -27 | 82 | Isa 53:9 | `ויתנ` (wytn) | not_unusual |
 | 8 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 29 | 88 | 1Sam 23:23 | `המחבאימ` (hmchbym) | not_unusual |
 | 9 | all_source | `rome_h` `רומי` (rwmy; English: Rome) | Rome | 32 | 97 | Isa 38:15 | `עלמר` (lmr) | not_unusual |
-| 10 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 34 | 103 | 1Chr 26:19 | `מררי` (mrry) | not_unusual |
+| 10 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 34 | 103 | 1Chr 26:19 | `מררי` (mrry; English: Merari = "bitter") | not_unusual |
 | 11 | all_source | `flies_plague_full_h` `ערוב` (rwb; English: Flies Plague) | Flies Plague | 34 | 103 | Ezek 46:3 | `בשבתות` (bshbtwt) | not_unusual |
 | 12 | all_source | `rome_alt_h` `רומא` (rwm; English: Rome) | Rome | 35 | 106 | Isa 33:17 | `תחזינה` (tchzynh) | not_unusual |
 | 13 | all_source | `year_2001_additive_h` `תתתתתא` (ttttt; English: Gregorian 2001) | Gregorian 2001 | 35 | 176 | Eccl 3:10 | `לענות` (la-anot; English: to answer/afflict) | not_unusual |
@@ -229,11 +229,11 @@ It is a triage aid, not a claim-grade filter.
 | 1 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -12 | 61 | Jer 38:26 | `בית` (byt; English: House) | paired_uncorrected_p_le_0.05 |
 | 2 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -34 | 171 | Lev 9:22 | `ויברכמ` (wybrkm) | paired_uncorrected_p_le_0.05 |
 | 3 | all_source | `pathrusim_h` `פתרסימ` (ptrsym; English: Pathrusim) | Pathrusim | -52 | 261 | Isa 26:17 | `תזעק` (tizak; English: she cries out) | paired_uncorrected_p_le_0.05 |
-| 4 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -57 | 286 | Job 31:35 | `ריבי` (ryby) | paired_uncorrected_p_le_0.05 |
+| 4 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -57 | 286 | Job 31:35 | `ריבי` (ryby; English: Ribai = "pleader with Jehovah") | paired_uncorrected_p_le_0.05 |
 | 5 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 62 | 311 | Prov 24:29 | `כאשר` (kshr) | paired_uncorrected_p_le_0.05 |
 | 6 | all_source | `timothy_h` `טימותי` (tymwty; English: Timothy) | Timothy | -66 | 331 | Jer 46:28 | `יעקב` (Yaakov; English: Jacob) | paired_uncorrected_p_le_0.05 |
 | 7 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -69 | 346 | Ps 99:6 | `אליהוה` (lyhwh) | paired_uncorrected_p_le_0.05 |
-| 8 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -73 | 366 | Num 11:16 | `מועד` (mwd) | paired_uncorrected_p_le_0.05 |
+| 8 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -73 | 366 | Num 11:16 | `מועד` (mwd; English: 1) appointed place, appointed time, meeting) | paired_uncorrected_p_le_0.05 |
 | 9 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 78 | 391 | 2Kgs 17:39 | `אמאתיהוה` (mtyhwh) | paired_uncorrected_p_le_0.05 |
 | 10 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 82 | 411 | Ezek 20:13 | `חללו` (chllw) | paired_uncorrected_p_le_0.05 |
 | 11 | all_source | `2027_additive_h` `תתתתתכז` (tttttkz; English: Gregorian 2027 additive) | Gregorian 2027 additive | 86 | 517 | Deut 11:16 | `יפתה` (yifteh; English: will be enticed) | paired_uncorrected_p_le_0.05 |
@@ -254,12 +254,12 @@ It is a triage aid, not a claim-grade filter.
 | 1 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -2 | 11 | Jer 51:39 | `שנתעולמ` (shntwlm) | paired_uncorrected_p_le_0.05 |
 | 2 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -2 | 11 | Jer 51:57 | `שנתעולמ` (shntwlm) | paired_uncorrected_p_le_0.05 |
 | 3 | all_source | `day_of_lord_h` `יומיהוה` (yom YHWH; English: Day Of The Lord) | Day Of The Lord | 4 | 25 | Song 4:6 | `שיפוח` (she-yafuach; English: until it breathes/blows) | paired_uncorrected_p_le_0.05 |
-| 4 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 5 | 26 | Isa 60:9 | `תרשיש` (trshysh; English: Tarshish) | paired_uncorrected_p_le_0.05 |
+| 4 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 5 | 26 | Isa 60:9 | `תרשיש` (trshysh) | paired_uncorrected_p_le_0.05 |
 | 5 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -5 | 26 | Judg 8:18 | `הרגתמ` (hrgtm) | paired_uncorrected_p_le_0.05 |
 | 6 | all_source | `empty_tomb_h` `קברריק` (qbrryq; English: Empty Tomb) | Empty Tomb | 8 | 41 | Ezek 5:2 | `בתוכ` (betokh; English: in the midst) | paired_uncorrected_p_le_0.05 |
 | 7 | all_source | `timothy_h` `טימותי` (tymwty; English: Timothy) | Timothy | -8 | 41 | Ps 37:14 | `ודרכו` (wdrkw) | paired_uncorrected_p_le_0.05 |
 | 8 | all_source | `yeshu_declared_perfect_h` `הצהרישומושלמ` (htshryshwmwshlm; English: Jesus Declared Perfect) | Jesus Declared Perfect | 9 | 100 | Gen 22:8 | `לעלה` (le-olah; English: for a burnt offering) | paired_uncorrected_p_le_0.05 |
-| 9 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 10 | 51 | Ezek 23:11 | `אהליבה` (hlybh) | paired_uncorrected_p_le_0.05 |
+| 9 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 10 | 51 | Ezek 23:11 | `אהליבה` (hlybh; English: Aholibah = "woman of the tent" or "the tent is in her") | paired_uncorrected_p_le_0.05 |
 | 10 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -11 | 56 | Num 29:26 | `ארבעה` (arbaah; English: four) | paired_uncorrected_p_le_0.05 |
 | 11 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 11 | 56 | Prov 22:18 | `כינעימ` (kynym) | paired_uncorrected_p_le_0.05 |
 | 12 | all_source | `day_of_lord_h` `יומיהוה` (yom YHWH; English: Day Of The Lord) | Day Of The Lord | 12 | 73 | Ezek 29:9 | `וידעו` (wydw) | paired_uncorrected_p_le_0.05 |

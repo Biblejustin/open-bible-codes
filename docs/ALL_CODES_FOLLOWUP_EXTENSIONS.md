@@ -47,9 +47,9 @@ same-skip extension is an added review feature, not a requirement.
 | 53 | hebrew_screening | `center_verse_exact` | `אריה` (ryh; English: Lion) | UXLC | `before_plus_term` | `ואריה` (wryh) | `word` | 2 | וְאַרְיֵ֖ה; וְאַרְיֵה֙ |
 | 47 | hebrew_screening | `center_word_same_concept` | `רומא` (rwm; English: Rome) | UXLC | `before_match` | `שלומי` (shlwmy) | `word` | 4 | שְׁלוֹמִי֙; שְׁלוֹמִ֜י; שְׁלוֹמִ֔י; שְׁלוֹמִ֨י |
 | 65 | hebrew_screening | `span_same_concept` | `תתתתתא` (ttttt; English: Gregorian 2001) | UXLC | `before_match` | `מאותו` (mwtw) | `word` | 3 | מֵאוֹתֽוֹ׃; מֵאוֹת֑וֹ; מֵֽאוֹתוֹ֙ |
-| 81 | hebrew_theology | `span_same_category` | `משיח` (Mashiach; English: Messiah) | UXLC | `before_match` | `שבנא` (shbn) | `phrase_2+word` | 6 | שֶׁבְנָ֖א; שֶׁבְנָ֣א; שֵֽׁב־ נָ֣א; שֵׁ֣ב נָ֔א |
+| 81 | hebrew_theology | `span_same_category` | `משיח` (Mashiach; English: Messiah) | UXLC | `before_match` | `שבנא` (shbn; English: Shebna = "vigour") | `phrase_2+word` | 6 | שֶׁבְנָ֖א; שֶׁבְנָ֣א; שֵֽׁב־ נָ֣א; שֵׁ֣ב נָ֔א |
 | 82 | hebrew_theology | `span_same_category` | `משיח` (Mashiach; English: Messiah) | UXLC | `after_match` | `לובו` (lwbw) | `phrase_2` | 1 | ל֖וֹ בּֽוֹ׃ |
-| 52 | hebrew_screening | `center_verse_exact` | `ביבי` (byby; English: Bibi) | UXLC | `after_match` | `יפתח` (yptch) | `word` | 41 | יִפְתַּ֨ח; יִפְתַּ֣ח; יִפְתַּח־; יִפְתָּֽח׃; יִפְתָּ֗ח |
+| 52 | hebrew_screening | `center_verse_exact` | `ביבי` (byby; English: Bibi) | UXLC | `after_match` | `יפתח` (yptch; English: Jephthah or Jiphtah = "he opens") | `word` | 41 | יִפְתַּ֨ח; יִפְתַּ֣ח; יִפְתַּח־; יִפְתָּֽח׃; יִפְתָּ֗ח |
 | 31 | greek_screening | `center_verse_same_category` | `ναοσ` (naos; English: Temple) | SBLGNT | `before_match` | `υιον` (uion; English: son) | `word` | 85 | υἱὸν; υἱόν,; ⸀υἱόν·; υἱόν; υἱόν. |
 | 40 | greek_screening | `hidden_path_only` | `ναοσ` (naos; English: Temple) | SBLGNT | `before_match` | `υιον` (uion; English: son) | `word` | 85 | υἱὸν; υἱόν,; ⸀υἱόν·; υἱόν; υἱόν. |
 | 44 | hebrew_screening | `center_word_exact` | `יהוה` (YHWH; English: YHWH) | UXLC | `before_match` | `הילק` (hylq) | `word` | 3 | הַיָּ֑לֶק; הַיֶּ֔לֶק; הַיֶּ֖לֶק |
