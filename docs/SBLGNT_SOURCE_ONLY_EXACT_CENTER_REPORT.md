@@ -100,10 +100,16 @@ context and favorable 1000/1000 controls within SBLGNT. The result remains weak
 for external claims because both rows are source-only, short-base-term rows, and
 the full matched phrases are hidden-path only in the hit spans.
 
-## Next Step
+## Follow-Up Status
 
-The next useful move is not to promote these rows. It is either:
+Later Greek exact-center follow-ups added BYZ_NT and TCG_NT comparison sources.
+Those runs moved `υιος` (huios; English: son) into BYZ_NT/SBLGNT multi-source
+review status in `docs/GREEK_EXACT_CENTER_THREE_SOURCE_REPORT.md`, but it did
+not survive the stricter TCG-overlap rule in
+`docs/GREEK_EXACT_CENTER_FOUR_SOURCE_REPORT.md`. `αιμα` (haima; English: blood)
+remains source-specific.
 
-- add independent Greek NT sources and rerun a locked cross-text cohort; or
-- create a formal source-specific study standard that explains why source-only
-  rows should be examined despite the weaker evidence boundary.
+The BYZ_NT source-only row is tracked separately in
+`docs/BYZ_SOURCE_ONLY_EXACT_CENTER_REPORT.md`. None of these source-only or
+source-specific rows should be promoted without a new prospective lock and a
+source-specific standard defined before result-bearing output.
