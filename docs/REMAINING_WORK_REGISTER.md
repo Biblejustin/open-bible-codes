@@ -413,9 +413,10 @@ python3 -m scripts.build_protocol_index --protocols-dir protocols --out protocol
 python3 -m scripts.check_public_release_hygiene --allow-dirty
 ```
 
-Current observed result after the WRR readiness gate and preflight guard pass:
+Current observed result after the WRR gap-reason audit, readiness gate, and
+preflight guard pass:
 
-- `python3 -m pytest -q` passed: 1025 tests and 5730 subtests.
+- `python3 -m pytest -q` passed: 1118 tests and 13951 subtests.
 - `python3 -m pytest tests/test_import_bolls_translation.py tests/test_english_version_manifests.py -q` passed: 11 tests and 117 subtests.
 - `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_claim_catalog.py tests/test_wrr_claim_readiness.py -q` passed: 32 tests and 60 subtests.
