@@ -79,9 +79,9 @@ refutation of the WRR paper.
 | --- | --- | --- |
 | Source text | Exact Genesis text and normalization locked | Koren Genesis stream is fingerprinted and usable for smoke/audit work. |
 | Source pages | Cited paper/list context downloaded and hash-stamped | Paper, ANU files, WRR/Nations pages, MC key, WNP critique pages, MBBK 1999 response, Chance article, Torah-code papers page, and Bombach/Gans/Haralick/Levitt/Rips/Schwartzman/Witztum papers/data are tracked in the source manifest. |
-| Pair universe | Declared second-list candidate set yields 163 source-defined distances after the corrected-distance eligibility rule | Lock-prep table exists at `reports/wrr_1994/wrr2_pair_eligibility_table.csv`; imported `WRR2.txt` yields 182 raw same-record pairs, 165 after appellation length >= 5, and 86 under the current 5..8 both-side screen. The `163` count is now treated as a defined-distance output count, not a raw pair table. |
-| Exclusions | Every excluded appellation/date row has a citable rule | Not locked; one Zacut-appellation exclusion would close 165 to 163, but that is only a diagnostic hypothesis. |
-| Skip caps | Term-specific WRR `D(w)` windows applied for each accepted term | Not locked; helpers now support both the printed WRR formula and the reported WRR-program formula. The skip-cap audit keeps printed selected while reporting program caps side by side. Current pair/control screens still use broad fixed caps for smoke tests. |
+| Pair universe | Declared second-list candidate set yields 163 source-defined distances after the corrected-distance eligibility rule | Lock-prep table exists at `reports/wrr_1994/wrr2_pair_eligibility_table.csv`; imported `WRR2.txt` yields 182 raw same-record pairs, 165 after appellation length >= 5, and 86 under the current 5..8 both-side screen. The `163` count is now treated as a defined-distance output count, not a raw pair table. Source-policy scenarios are diagnostic only: baseline 165 >=5 pairs, exclude WNP Zacut 157, exclude all source-review flags 154. |
+| Exclusions | Every excluded appellation/date row has a citable rule | Not locked; one Zacut-appellation exclusion would close 165 to 163, but that is only a diagnostic hypothesis. The source-policy scenario packet does not select any exclusion rule. |
+| Skip caps | Term-specific WRR `D(w)` windows applied for each accepted term | Not locked; helpers now support both the printed WRR formula and the reported WRR-program formula. The skip-cap audit keeps printed selected while reporting program caps side by side. D(w) sensitivity currently shows cap-1000 all-lane printed/program defined 72/72 with 0 changed pair rows. |
 | Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Helpers now include conservative supplied-row domain labeling, real-corpus WRR2 domain diagnostics with undefined-reason labels, defined-domain-only ordinary `Q(w,w')` diagnostics, exact perturbed-ELS match checks, domain-weighted `Q(w,w')` summation for domain-labeled ELS rows, a tested pair-level corrected-distance arithmetic bridge for already-domain-labeled perturbation sets, a smoke real-corpus perturbed-row/domain driver, and the source-count WRR `v/m` rank step. Undefined `c(w,w')` conditions are source-backed; optimized full-run corrected distances over the final pair universe are still missing. |
 | Aggregate statistic | `P1`, `P2`, `P3`, `P4`, rank handling, and `rho0` run over the locked pair set | P1..P4 diagnostic aggregation now exists for defined corrected-distance rows; P3/P4 use the smaller non-Rabbi-title sample. Current direct-search smoke output has 28 defined values at cap 250 and 46 defined values at cap 1000. Cross-pair date-label permutation diagnostics now include a 1,000-sample all-row run and a repo-defined WNP-excluded 999,999-permutation run, but no reproduction driver can run until the pair set, `D(w)` formula, and permutation procedure are locked. |
 | Permutation test | Date/rabbi pairings shuffled under the declared WRR rule with recorded seeds/counts | Diagnostic date-label shuffles exist; claim-grade permutation remains blocked by pair-universe and `D(w)` locks. |
@@ -232,9 +232,10 @@ Implementation notes are now tracked in
 
 Needed next:
 
+- select the source policy for WNP/context-reviewed rows;
+- lock the final pair universe;
 - lock whether `D(w)` uses the printed WRR count formula or the WRR program
   formula documented by MBBK;
-- lock the final pair universe;
 - extend the smoke corrected-distance driver into the full locked run;
 - output defined per-pair `c(w,w')` rows before aggregate statistics are
   attempted.
@@ -285,5 +286,5 @@ still diagnostic-only. The repo still needs a claim-grade driver that:
 ## Review Rule
 
 Treat current WRR outputs as source-audit and smoke-test evidence only. Move to
-claim language only after the pair set, corrected distance, skip caps, and
+claim language only after source policy, pair set, D(w), corrected distance, and
 permutation procedure are all locked before looking at final results.
