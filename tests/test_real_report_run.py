@@ -90,8 +90,13 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/check_source_basis_audit_queue.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_expanded_strata_tooling.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/validate_study_mapping_schemas.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn("scripts/check_crd_relevance_dictionary.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn("scripts/classify_centered_relevance.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/EXPANDED_STRATA_TOOLING.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/STUDY_MAPPING_SCHEMAS.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn("docs/CRD_PREREGISTRATION.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn("terms/relevance_dictionary.toml", steps_by_id["preflight"]["inputs"])
+        self.assertIn("protocols/centered_relevance_density.toml", steps_by_id["preflight"]["inputs"])
         self.assertIn("Makefile", steps_by_id["preflight"]["inputs"])
         self.assertIn("data/study/mappings/thematic_chapters.csv", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/FINAL_REPORT_OUTLINE.md", steps_by_id["preflight"]["inputs"])
@@ -258,8 +263,13 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/check_source_basis_audit_queue.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_expanded_strata_tooling.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/validate_study_mapping_schemas.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/check_crd_relevance_dictionary.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/classify_centered_relevance.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/EXPANDED_STRATA_TOOLING.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/STUDY_MAPPING_SCHEMAS.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/CRD_PREREGISTRATION.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("terms/relevance_dictionary.toml", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("protocols/centered_relevance_density.toml", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("Makefile", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("data/study/mappings/thematic_chapters.csv", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/FINAL_REPORT_OUTLINE.md", preflight.DEFAULT_REQUIRED_PATHS)
@@ -395,6 +405,7 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("study_mapping_schema_failures", payload)
             self.assertIn("preregistration_placeholder_paths", payload)
             self.assertIn("preregistration_placeholder_failures", payload)
+            self.assertIn("crd_relevance_dictionary_failures", payload)
             self.assertIn("stale_generated_indexes", payload)
 
     def test_preflight_fails_on_prospective_lane_validation_failure(self) -> None:
@@ -519,6 +530,27 @@ class RealReportRunTests(unittest.TestCase):
             self.assertEqual(
                 preflight.concrete_preregistration_paths(root),
                 [Path("docs/ALPHA_PREREGISTRATION.md")],
+            )
+
+    def test_preflight_fails_on_crd_relevance_dictionary_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight,
+                "check_crd_relevance_dictionary_lock",
+                return_value=["dictionary sha256 mismatch"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["crd_relevance_dictionary_failures"],
+                ["dictionary sha256 mismatch"],
+            )
+            self.assertIn(
+                "CRD relevance dictionary failures: dictionary sha256 mismatch",
+                payload["failures"],
             )
 
     def test_preflight_detects_stale_generated_indexes(self) -> None:

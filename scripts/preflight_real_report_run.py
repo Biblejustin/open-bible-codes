@@ -8,6 +8,7 @@ import json
 import subprocess
 import tempfile
 import time
+import tomllib
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -19,6 +20,7 @@ from els.project_index import (
     write_protocol_index,
 )
 from scripts import (
+    check_crd_relevance_dictionary,
     check_expanded_strata_tooling,
     check_preregistration_placeholders,
     check_prospective_study_lanes,
@@ -78,6 +80,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/gog_magog_pair_prospective.toml",
     "protocols/wrr_audit_counts.toml",
     "protocols/wrr_cross_pair_grid.toml",
+    "protocols/centered_relevance_density.toml",
     "protocols/matrix_cluster_candidates.toml",
     "protocols/matrix_cluster_control_summary.toml",
     "protocols/notable_passage_gaps.toml",
@@ -154,6 +157,11 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_CLAIM_BLOCKER_PACKET.md",
     "docs/WRR_SOURCE_POLICY_SCENARIOS.md",
     "docs/WRR_DW_FORMULA_SENSITIVITY.md",
+    "docs/CRD_FRAMEWORK.md",
+    "docs/CRD_PREREGISTRATION.md",
+    "docs/CRD_REPORT.md",
+    "docs/CRD_CENTER_WORD_SELF_VS_CONCEPT_FINDINGS.md",
+    "docs/CRD_CENTER_WORD_VERSION_PRESENCE_FINDINGS.md",
     "docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md",
     "docs/STUDY_LOCK_MANIFESTS.md",
     "docs/EXPANDED_STRATA_TOOLING.md",
@@ -304,8 +312,12 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_all_codes_followup_report.py",
     "scripts/build_centered_occurrence_index.py",
     "scripts/build_match_strata_index.py",
+    "scripts/check_crd_relevance_dictionary.py",
     "scripts/check_expanded_strata_tooling.py",
     "scripts/validate_study_mapping_schemas.py",
+    "scripts/run_crd_density.py",
+    "scripts/classify_centered_relevance.py",
+    "scripts/build_crd_comparison.py",
     "els/match_strata.py",
     "els/gematria.py",
     "els/letter_stats.py",
@@ -354,6 +366,9 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/hebrew_screening_all_codes_collection.toml",
     "protocols/greek_screening_all_codes_collection.toml",
     "protocols/wrr_audit_counts.toml",
+    "terms/relevance_dictionary.toml",
+    "prompts/crd_classifier_v1/system.md",
+    "prompts/crd_classifier_v1/user_template.md",
     "terms/theological_terms.csv",
     "terms/modern_names_dates.csv",
     "terms/greek_nt_claim_terms.csv",
@@ -460,6 +475,13 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(preregistration_placeholder_failures)
         )
 
+    crd_relevance_dictionary_failures = check_crd_relevance_dictionary_lock()
+    if crd_relevance_dictionary_failures:
+        failures.append(
+            "CRD relevance dictionary failures: "
+            + "; ".join(crd_relevance_dictionary_failures)
+        )
+
     stale_indexes = stale_generated_indexes(root)
     if stale_indexes:
         failures.append("stale generated indexes: " + ", ".join(stale_indexes))
@@ -487,6 +509,7 @@ def main(argv: list[str] | None = None) -> int:
             str(path) for path in preregistration_placeholder_paths
         ],
         "preregistration_placeholder_failures": preregistration_placeholder_failures,
+        "crd_relevance_dictionary_failures": crd_relevance_dictionary_failures,
         "stale_generated_indexes": stale_indexes,
         "forbidden_account_terms": FORBIDDEN_ACCOUNT_TERMS,
         "forbidden_repo_hits": forbidden_repo_hits,
@@ -576,6 +599,35 @@ def find_preregistration_placeholder_failures(paths: list[Path]) -> list[str]:
                 f"{hit.path}:{hit.line_number}:{hit.column_number}: {hit.placeholder}"
             )
     return failures
+
+
+def check_crd_relevance_dictionary_lock(
+    protocol_path: Path = Path("protocols/centered_relevance_density.toml"),
+) -> list[str]:
+    try:
+        protocol = tomllib.loads(protocol_path.read_text(encoding="utf-8"))
+        term_file = protocol.get("term_file")
+        dictionary = protocol.get("relevance_dictionary")
+        expected_sha256 = protocol.get("relevance_dictionary_sha256")
+        if not isinstance(term_file, str) or not term_file.strip():
+            return [f"{protocol_path}: missing term_file"]
+        if not isinstance(dictionary, str) or not dictionary.strip():
+            return [f"{protocol_path}: missing relevance_dictionary"]
+        if not isinstance(expected_sha256, str) or not expected_sha256.strip():
+            return [f"{protocol_path}: missing relevance_dictionary_sha256"]
+        report = check_crd_relevance_dictionary.check_dictionary(
+            dictionary=Path(dictionary),
+            term_files=[Path(term_file)],
+            require_reviewed=True,
+            expected_sha256=expected_sha256,
+        )
+    except Exception as exc:
+        return [str(exc)]
+    if report["missing_entries"]:
+        return [f"{dictionary}: missing entries: {report['missing_entries']}"]
+    if report["extra_entries"]:
+        return [f"{dictionary}: extra entries: {report['extra_entries']}"]
+    return []
 
 
 def git_status_short(root: Path) -> list[str]:
