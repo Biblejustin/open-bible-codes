@@ -21,7 +21,7 @@ WRR variant-gap method-status evidence propagation, WRR source-review queue doc
 guarding, WRR D(w) formula sensitivity doc guarding, and WRR source-policy
 scenario doc guarding, WRR cross-pair grid doc guarding, and WRR direct
 all-lane diagnostic doc guarding, and WRR source visual-review notes doc
-guarding.
+guarding, plus WRR source visual-review row triage refinement.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -148,6 +148,7 @@ Current pushed commits for this cleanup:
 - `61b8060` Guard WRR source policy scenario doc.
 - `bf099f7` Guard WRR cross pair grid doc.
 - `96de90a` Guard WRR direct all-lane diagnostic doc.
+- `4914f41` Guard WRR source visual notes doc.
 
 ### Formal Real Report Rerun
 
