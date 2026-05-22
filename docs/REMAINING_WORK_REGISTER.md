@@ -9,7 +9,8 @@ cleanup, prospective-lane validator tightening, source-audit preflight guard
 coverage, prospective-lane validation in report preflight, source-basis audit
 queue guarding, English source-basis preflight inputs, formal source-basis
 queue validation, source-basis validation documentation, and formal preflight
-metadata-check documentation, plus study-tooling preflight coverage.
+metadata-check documentation, study-tooling preflight coverage, and
+preregistration placeholder guarding.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -98,6 +99,7 @@ Current pushed commits for this cleanup:
 - `53c51b8` Document formal preflight metadata checks.
 - `34ecc61` Wire study tooling checks into report preflight.
 - `5782725` Document study tooling preflight coverage.
+- `06e77b4` Guard preregistration placeholders in preflight.
 
 ### Formal Real Report Rerun
 
@@ -475,9 +477,11 @@ validator tightening, source-audit preflight guard coverage, prospective-lane
 validation in report preflight, source-basis audit queue guarding, and English
 source-basis preflight inputs, formal source-basis queue validation, and
 source-basis validation documentation, plus formal preflight metadata-check
-documentation, and study-tooling preflight coverage:
+documentation, study-tooling preflight coverage, and preregistration
+placeholder guarding:
 
-- `python3 -m pytest -q` passed: 1152 tests and 13951 subtests.
+- `python3 -m pytest -q` passed: 1154 tests and 13951 subtests.
+- `python3 -m pytest tests/test_real_report_run.py tests/test_check_preregistration_placeholders.py -q` passed: 36 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_check_expanded_strata_tooling.py tests/test_validate_study_mapping_schemas.py -q` passed: 38 tests.
 - `python3 -m pytest tests/test_import_bolls_translation.py tests/test_english_version_manifests.py -q` passed: 12 tests and 117 subtests.
 - `python3 -m pytest tests/test_english_version_manifests.py -q` passed: 8 tests and 117 subtests.
@@ -495,6 +499,7 @@ documentation, and study-tooling preflight coverage:
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_source_basis_docs.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_run_docs_source_basis.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_expanded_mapping_fullgate.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_prereg_placeholders.json` passed.
 - `python3 -m scripts.check_prospective_study_lanes` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.

@@ -130,6 +130,8 @@ It requires:
   Make targets;
 - future study-mapping CSV schemas retain required columns, required locked
   values, and supported language markers;
+- concrete preregistration docs contain no unresolved bracketed placeholders
+  while the prospective-study template remains available as a template;
 - checked-in `docs/INDEX.md` and `protocols/INDEX.md` freshness;
 - existing generated inputs needed by the final gates.
 
