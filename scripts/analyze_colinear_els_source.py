@@ -41,6 +41,8 @@ DEFAULT_ROOTS_ROWS_OUT = Path("reports/wrr_1994/colinear_els_roots_rows.csv")
 DEFAULT_ROOTS_SUMMARY_OUT = Path("reports/wrr_1994/colinear_els_roots_rows_summary.csv")
 DEFAULT_ALL_ROWS_OUT = Path("reports/wrr_1994/colinear_els_all_1698_rows.csv")
 DEFAULT_ALL_SUMMARY_OUT = Path("reports/wrr_1994/colinear_els_all_1698_rows_summary.csv")
+DEFAULT_REVIEW_SET_ROWS_OUT = Path("reports/wrr_1994/colinear_els_review_set_rows.csv")
+DEFAULT_REVIEW_SET_SUMMARY_OUT = Path("reports/wrr_1994/colinear_els_review_set_rows_summary.csv")
 DEFAULT_SUMMARY_OUT = Path("reports/wrr_1994/colinear_els_source_summary.csv")
 DEFAULT_ANCHORS_OUT = Path("reports/wrr_1994/colinear_els_protocol_anchors.csv")
 DEFAULT_MD = Path("docs/COLINEAR_ELS_SOURCE_AUDIT.md")
@@ -54,6 +56,7 @@ EXPECTED_ROW_COUNTS = {
     "intersec_108": 108,
     "comb_143": 143,
 }
+REVIEW_SET_LABELS = ("res_113", "consul_138", "intersec_108", "comb_143")
 
 BIDI_CONTROL_CHARS = dict.fromkeys(
     map(ord, "\u200e\u200f\u202a\u202b\u202c\u202d\u202e\ufeff"),
@@ -84,6 +87,14 @@ ALL_1698_FIELDNAMES = [
     "word_a",
     "source_position",
     "index_marker",
+    "raw_line",
+]
+REVIEW_SET_FIELDNAMES = [
+    "label",
+    "row_index",
+    "word_b",
+    "word_a",
+    "source_position",
     "raw_line",
 ]
 PLS_SUMMARY_FIELDNAMES = [
@@ -117,6 +128,18 @@ ALL_1698_SUMMARY_FIELDNAMES = [
     "unique_pairs",
     "claim_status",
 ]
+REVIEW_SET_SUMMARY_FIELDNAMES = [
+    "label",
+    "expected_rows",
+    "rows",
+    "row_index_min",
+    "row_index_max",
+    "missing_row_indexes",
+    "duplicate_row_indexes",
+    "rows_with_source_position",
+    "unique_pairs",
+    "claim_status",
+]
 SUMMARY_FIELDNAMES = [
     "paper_pdf",
     "paper_sha256",
@@ -137,6 +160,8 @@ SUMMARY_FIELDNAMES = [
     "roots_single_token_rows",
     "all_1698_rows",
     "all_1698_hash_marker_rows",
+    "review_set_rows",
+    "review_set_rows_with_source_position",
     "claim_status",
 ]
 ANCHOR_FIELDNAMES = ["source", "anchor", "status", "diagnostic"]
@@ -196,6 +221,8 @@ def main(argv: list[str] | None = None) -> int:
     roots_summary = summarize_roots_rows(roots_rows)
     all_1698_rows = parse_all_1698_rows(all_1698_attachment_path(attachments))
     all_1698_summary = summarize_all_1698_rows(all_1698_rows)
+    review_set_rows = parse_review_set_rows(attachments)
+    review_set_summary = summarize_review_set_rows(review_set_rows)
     summary = build_summary(
         args,
         paper_text,
@@ -204,6 +231,7 @@ def main(argv: list[str] | None = None) -> int:
         pls_summary,
         roots_summary,
         all_1698_summary,
+        review_set_summary,
     )
     anchors = protocol_anchors(
         paper_text,
@@ -212,6 +240,7 @@ def main(argv: list[str] | None = None) -> int:
         pls_summary,
         roots_summary,
         all_1698_summary,
+        review_set_summary,
     )
     write_csv(args.out, ATTACHMENT_FIELDNAMES, rows)
     write_csv(args.pls_pairs_out, PLS_FIELDNAMES, pls_pairs)
@@ -220,6 +249,8 @@ def main(argv: list[str] | None = None) -> int:
     write_csv(args.roots_summary_out, ROOTS_SUMMARY_FIELDNAMES, [roots_summary])
     write_csv(args.all_1698_rows_out, ALL_1698_FIELDNAMES, all_1698_rows)
     write_csv(args.all_1698_summary_out, ALL_1698_SUMMARY_FIELDNAMES, [all_1698_summary])
+    write_csv(args.review_set_rows_out, REVIEW_SET_FIELDNAMES, review_set_rows)
+    write_csv(args.review_set_summary_out, REVIEW_SET_SUMMARY_FIELDNAMES, review_set_summary)
     write_csv(args.summary_out, SUMMARY_FIELDNAMES, [summary])
     write_csv(args.anchors_out, ANCHOR_FIELDNAMES, anchors)
     write_markdown(args.markdown_out, summary, rows, anchors)
@@ -244,6 +275,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--roots-summary-out", type=Path, default=DEFAULT_ROOTS_SUMMARY_OUT)
     parser.add_argument("--all-1698-rows-out", type=Path, default=DEFAULT_ALL_ROWS_OUT)
     parser.add_argument("--all-1698-summary-out", type=Path, default=DEFAULT_ALL_SUMMARY_OUT)
+    parser.add_argument("--review-set-rows-out", type=Path, default=DEFAULT_REVIEW_SET_ROWS_OUT)
+    parser.add_argument("--review-set-summary-out", type=Path, default=DEFAULT_REVIEW_SET_SUMMARY_OUT)
     parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
     parser.add_argument("--anchors-out", type=Path, default=DEFAULT_ANCHORS_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
@@ -475,6 +508,113 @@ def summarize_all_1698_rows(rows: list[dict[str, object]]) -> dict[str, object]:
     }
 
 
+def parse_review_set_rows(paths: list[Path]) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for path in paths:
+        label = attachment_label(path)
+        if label not in REVIEW_SET_LABELS:
+            continue
+        rows.extend(
+            parse_review_set_rows_from_text(
+                extract_pdf_text(path),
+                label,
+                int(EXPECTED_ROW_COUNTS[label]),
+            )
+        )
+    return rows
+
+
+def parse_review_set_rows_from_text(
+    text: str,
+    label: str,
+    expected_rows: int,
+) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    word_b_col: int | None = None
+    word_a_col: int | None = None
+    for raw_line in text.splitlines():
+        line = clean_text(raw_line).rstrip()
+        stripped = line.strip()
+        if not stripped:
+            continue
+        header_matches = list(re.finditer(r"מילה\s+[בא]", line))
+        if len(header_matches) >= 2 and "פסוק" in stripped:
+            word_b_col = header_matches[-2].start()
+            word_a_col = header_matches[-1].start()
+            continue
+        if stripped.isdigit() or word_b_col is None or word_a_col is None:
+            continue
+        row_index = len(rows) + 1
+        numbers = [int(match) for match in re.findall(r"(?<!\d)(\d{1,5})(?!\d)", stripped)]
+        if row_index not in numbers:
+            continue
+        tokens = [
+            (match.group(), match.start())
+            for match in re.finditer(r"[\u0590-\u05ff']+", line)
+        ]
+        if len(tokens) < 2:
+            continue
+        word_b, word_a = nearest_word_pair(tokens, word_b_col, word_a_col)
+        if abs(word_b[1] - word_b_col) > 14 or abs(word_a[1] - word_a_col) > 14:
+            continue
+        source_position = next((number for number in numbers if number > 999), "")
+        rows.append(
+            {
+                "label": label,
+                "row_index": row_index,
+                "word_b": word_b[0],
+                "word_a": word_a[0],
+                "source_position": source_position,
+                "raw_line": stripped,
+            }
+        )
+        if len(rows) == expected_rows:
+            break
+    return rows
+
+
+def nearest_word_pair(
+    tokens: list[tuple[str, int]],
+    word_b_col: int,
+    word_a_col: int,
+) -> tuple[tuple[str, int], tuple[str, int]]:
+    word_b = min(tokens, key=lambda token: abs(token[1] - word_b_col))
+    word_a = min(
+        [token for token in tokens if token != word_b],
+        key=lambda token: abs(token[1] - word_a_col),
+    )
+    return word_b, word_a
+
+
+def summarize_review_set_rows(rows: list[dict[str, object]]) -> list[dict[str, object]]:
+    summaries: list[dict[str, object]] = []
+    for label in REVIEW_SET_LABELS:
+        label_rows = [row for row in rows if row["label"] == label]
+        indexes = [int(row["row_index"]) for row in label_rows]
+        expected_rows = int(EXPECTED_ROW_COUNTS[label])
+        observed = set(indexes)
+        missing = sorted(set(range(1, expected_rows + 1)).difference(observed))
+        summaries.append(
+            {
+                "label": label,
+                "expected_rows": expected_rows,
+                "rows": len(label_rows),
+                "row_index_min": min(indexes, default=""),
+                "row_index_max": max(indexes, default=""),
+                "missing_row_indexes": " ".join(str(index) for index in missing),
+                "duplicate_row_indexes": len(indexes) - len(observed),
+                "rows_with_source_position": sum(
+                    1 for row in label_rows if row["source_position"] != ""
+                ),
+                "unique_pairs": len(
+                    {(str(row["word_a"]), str(row["word_b"])) for row in label_rows}
+                ),
+                "claim_status": "source_row_extraction_only_not_result_bearing",
+            }
+        )
+    return summaries
+
+
 def numeric_row_prefix(text: str, expected_rows: int) -> int:
     if expected_rows <= 0:
         return 0
@@ -497,8 +637,10 @@ def build_summary(
     pls_summary: dict[str, object],
     roots_summary: dict[str, object],
     all_1698_summary: dict[str, object],
+    review_set_summary: list[dict[str, object]],
 ) -> dict[str, object]:
     expected_rows = [row for row in rows if row["expected_rows"] != ""]
+    review_set_rows = sum(int(row["rows"]) for row in review_set_summary)
     return {
         "paper_pdf": str(args.paper),
         "paper_sha256": sha256(args.paper),
@@ -525,6 +667,10 @@ def build_summary(
         "roots_single_token_rows": roots_summary["single_token_rows"],
         "all_1698_rows": all_1698_summary["rows"],
         "all_1698_hash_marker_rows": all_1698_summary["hash_marker_rows"],
+        "review_set_rows": review_set_rows,
+        "review_set_rows_with_source_position": sum(
+            int(row["rows_with_source_position"]) for row in review_set_summary
+        ),
         "claim_status": "source_shape_only_not_result_bearing",
     }
 
@@ -536,6 +682,7 @@ def protocol_anchors(
     pls_summary: dict[str, object],
     roots_summary: dict[str, object],
     all_1698_summary: dict[str, object],
+    review_set_summary: list[dict[str, object]],
 ) -> list[dict[str, str]]:
     paper = normalize_space(clean_text(paper_text))
     by_label = {str(row["label"]): row for row in rows}
@@ -627,6 +774,14 @@ def protocol_anchors(
             == 502,
             "four reviewed subset attachments expose 502 rows",
         ),
+        (
+            "review_sets",
+            "review_sets_502_machine_rows",
+            sum(int(row["rows"]) for row in review_set_summary) == 502
+            and all(int(row["duplicate_row_indexes"]) == 0 for row in review_set_summary)
+            and all(not row["missing_row_indexes"] for row in review_set_summary),
+            "four reviewed subset PDFs extracted to 502 raw rows",
+        ),
     ]
     return [
         {
@@ -669,6 +824,8 @@ def write_markdown(
         f"| roots single-token rows | {summary['roots_single_token_rows']} |",
         f"| all_1698 rows extracted | {summary['all_1698_rows']} |",
         f"| all_1698 hash-marker rows | {summary['all_1698_hash_marker_rows']} |",
+        f"| reviewed subset rows extracted | {summary['review_set_rows']} |",
+        f"| reviewed subset rows with source positions | {summary['review_set_rows_with_source_position']} |",
         "",
         "## Attachment PDFs",
         "",
@@ -704,8 +861,9 @@ def write_markdown(
             "The paper and attachment files are usable as source-shape material for a",
             "future co-linear ELS/verse protocol. This audit only records file coverage,",
             "protocol anchors, table row counts, raw PLS pair rows, raw roots rows,",
-            "and raw all_1698 phrase/verse rows. It does not normalize Hebrew terms,",
-            "select roots, compute ELSs, score verse links, or evaluate controls.",
+            "raw all_1698 phrase/verse rows, and raw reviewed subset rows. It does",
+            "not normalize Hebrew terms, select roots, compute ELSs, score verse",
+            "links, or evaluate controls.",
         ]
     )
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -789,6 +947,8 @@ def write_manifest(
             "roots_summary": str(args.roots_summary_out),
             "all_1698_rows": str(args.all_1698_rows_out),
             "all_1698_summary": str(args.all_1698_summary_out),
+            "review_set_rows": str(args.review_set_rows_out),
+            "review_set_summary": str(args.review_set_summary_out),
             "summary": str(args.summary_out),
             "anchors": str(args.anchors_out),
             "markdown": str(args.markdown_out),

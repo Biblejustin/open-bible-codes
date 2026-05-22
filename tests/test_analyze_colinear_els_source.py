@@ -90,6 +90,28 @@ class ColinearElsSourceAuditTests(unittest.TestCase):
         self.assertEqual(summary["hash_marker_rows"], 1)
         self.assertEqual(summary["rows_with_source_position"], 3)
 
+    def test_parse_review_set_rows_from_text_uses_header_columns(self) -> None:
+        text = (
+            "\u05de\u05d9\u05dc\u05d4 \u05d1   \u05de\u05d9\u05dc\u05d4 \u05d0"
+            "                  \u05e4\u05e1\u05d5\u05e7       \u05de\u05d9\u05e7\u05d5\u05dd   #\n"
+            "\u05d9\u05d1\u05d0\u05d4\u05d5    \u05d0\u05d9\u05dc\u05de\u05d4"
+            "                 verse text         21527   1\n"
+            "\u05e9\u05d5\u05dc\u05d9\u05d9\u05dd\n"
+            "\u05d9\u05d1\u05d0\u05d4\u05d5    \u05d0\u05d9\u05dc\u05de\u05d4"
+            "                 verse text         43309   2\n"
+        )
+        rows = audit.parse_review_set_rows_from_text(text, "consul_138", 2)
+        summary = audit.summarize_review_set_rows(rows)
+
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(rows[0]["label"], "consul_138")
+        self.assertEqual(rows[0]["word_b"], "\u05d9\u05d1\u05d0\u05d4\u05d5")
+        self.assertEqual(rows[0]["word_a"], "\u05d0\u05d9\u05dc\u05de\u05d4")
+        self.assertEqual(rows[0]["source_position"], 21527)
+        by_label = {row["label"]: row for row in summary}
+        self.assertEqual(by_label["consul_138"]["rows"], 2)
+        self.assertEqual(by_label["consul_138"]["rows_with_source_position"], 2)
+
     def test_hash_markers_can_complete_all_1698_count(self) -> None:
         pls_summary = {
             "rows": 6060,
@@ -105,6 +127,12 @@ class ColinearElsSourceAuditTests(unittest.TestCase):
             "duplicate_row_indexes": 0,
             "missing_row_indexes": "",
         }
+        review_set_summary = [
+            {"rows": 113, "duplicate_row_indexes": 0, "missing_row_indexes": ""},
+            {"rows": 138, "duplicate_row_indexes": 0, "missing_row_indexes": ""},
+            {"rows": 108, "duplicate_row_indexes": 0, "missing_row_indexes": ""},
+            {"rows": 143, "duplicate_row_indexes": 0, "missing_row_indexes": ""},
+        ]
         row = {
             "label": "all_1698",
             "expected_rows": 1698,
@@ -131,6 +159,7 @@ class ColinearElsSourceAuditTests(unittest.TestCase):
             pls_summary,
             roots_summary,
             all_1698_summary,
+            review_set_summary,
         )
 
         by_anchor = {anchor["anchor"]: anchor["status"] for anchor in anchors}
@@ -139,6 +168,7 @@ class ColinearElsSourceAuditTests(unittest.TestCase):
         self.assertEqual(by_anchor["all_1698_machine_rows_extracted"], "found")
         self.assertEqual(by_anchor["all_1698_rows_observed"], "found")
         self.assertEqual(by_anchor["review_sets_502_rows_observed"], "found")
+        self.assertEqual(by_anchor["review_sets_502_machine_rows"], "found")
 
 
 if __name__ == "__main__":

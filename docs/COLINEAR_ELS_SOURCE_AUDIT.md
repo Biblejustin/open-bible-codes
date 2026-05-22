@@ -20,6 +20,8 @@ statistical test, and not a claim-ready co-linear ELS reproduction.
 | roots single-token rows | 2 |
 | all_1698 rows extracted | 1698 |
 | all_1698 hash-marker rows | 699 |
+| reviewed subset rows extracted | 502 |
+| reviewed subset rows with source positions | 389 |
 
 ## Attachment PDFs
 
@@ -36,7 +38,7 @@ statistical test, and not a claim-ready co-linear ELS reproduction.
 
 ## Protocol Anchors
 
-Found anchors: 13 of 13.
+Found anchors: 14 of 14.
 
 | Source | Anchor | Status | Diagnostic |
 | --- | --- | --- | --- |
@@ -53,11 +55,13 @@ Found anchors: 13 of 13.
 | all_1698 | `all_1698_machine_rows_extracted` | found | all_1698 PDF extracted to 1,698 raw phrase/verse rows |
 | attachments | `all_1698_rows_observed` | found | all_1698 attachment exposes 1,698 source rows |
 | attachments | `review_sets_502_rows_observed` | found | four reviewed subset attachments expose 502 rows |
+| review_sets | `review_sets_502_machine_rows` | found | four reviewed subset PDFs extracted to 502 raw rows |
 
 ## Use Boundary
 
 The paper and attachment files are usable as source-shape material for a
 future co-linear ELS/verse protocol. This audit only records file coverage,
 protocol anchors, table row counts, raw PLS pair rows, raw roots rows,
-and raw all_1698 phrase/verse rows. It does not normalize Hebrew terms,
-select roots, compute ELSs, score verse links, or evaluate controls.
+raw all_1698 phrase/verse rows, and raw reviewed subset rows. It does
+not normalize Hebrew terms, select roots, compute ELSs, score verse
+links, or evaluate controls.

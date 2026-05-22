@@ -209,7 +209,8 @@ The co-linear ELS source audit confirms the paper PDF, 8 linked attachment
 PDFs, 515 attachment pages, 6 attachments with explicit row-count expectations,
 8,260 expected and observed source rows, 6,060 raw PLS pair rows extracted from
 the PLS PDF, 12,830 raw roots rows extracted from the roots PDF, 1,698 raw
-all_1698 phrase/verse rows extracted from the all_1698 PDF, and 13/13 protocol
+all_1698 phrase/verse rows extracted from the all_1698 PDF, 502 raw reviewed
+subset rows extracted from the four reviewed subset PDFs, and 14/14 protocol
 anchors. The
 communities audit confirms 66 data records and 210 pre-filter community
 rows. The presidents audit confirms 42 data records and 292 pre-test spelling

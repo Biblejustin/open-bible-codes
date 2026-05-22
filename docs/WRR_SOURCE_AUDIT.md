@@ -183,7 +183,8 @@ These are source leads, not claim-ready evidence.
   expectations, 8,260 expected source rows, 6,060 raw PLS pair rows extracted
   from the PLS PDF, 12,830 raw roots rows extracted from the roots PDF,
   1,698 raw all_1698 phrase/verse rows extracted from the all_1698 PDF, and
-  13/13 protocol anchors before any Hebrew normalization, ELS computation,
+  502 raw reviewed subset rows extracted from the four reviewed subset PDFs,
+  with 14/14 protocol anchors before any Hebrew normalization, ELS computation,
   verse scoring, or controls.
 - Genesis ELS-pair/community test: the Gans/Inbal/Bombach paper plus data file
   provide another fixed data set for pair compactness checks, independent from
@@ -284,7 +285,9 @@ and a tracked audit summary. It verifies source coverage, protocol anchors, and
 row-count shape, but does not normalize Hebrew terms, compute ELSs, score verse
 links, or evaluate controls. It also emits ignored raw PLS pair rows from the
 PLS attachment, raw roots rows from the roots attachment, and raw all_1698
-phrase/verse rows from the all_1698 attachment for future locked import work.
+phrase/verse rows from the all_1698 attachment, plus raw reviewed subset rows
+from the res_113, consul_138, intersec_108, and comb_143 attachments for
+future locked import work.
 
 `scripts/analyze_wrr_primary_pdf_anchors.py` checks that key WRR 1994
 method/count anchors are reachable in extracted PDF text, including the 298
