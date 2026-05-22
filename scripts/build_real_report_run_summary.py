@@ -68,6 +68,7 @@ WRR_CROSS_PAIR_RECOMMENDED_PERMUTATION_SUMMARY = Path(
     "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv"
 )
 WRR_SOURCE_POLICY_SCENARIOS = Path("reports/wrr_1994/wrr_source_policy_scenarios.csv")
+WRR_SOURCE_POLICY_TERM_IMPACTS = Path("reports/wrr_1994/wrr_source_policy_term_impacts.csv")
 WRR_DW_FORMULA_SENSITIVITY = Path("reports/wrr_1994/wrr_dw_formula_sensitivity.csv")
 HEBREW_THEOLOGY_ALL_CODES_TRIAGE_MANIFEST = Path(
     "reports/hebrew_theology_all_codes/triage.manifest.json"
@@ -225,6 +226,7 @@ def main(argv: list[str] | None = None) -> int:
         args.wrr_cross_pair_recommended_permutation_summary
     )
     wrr_source_policy_scenario_rows = read_rows(args.wrr_source_policy_scenarios)
+    wrr_source_policy_term_impact_rows = read_rows(args.wrr_source_policy_term_impacts)
     wrr_dw_formula_sensitivity_rows = read_rows(args.wrr_dw_formula_sensitivity)
     hebrew_theology_all_codes_triage_manifest = read_json(
         args.hebrew_theology_all_codes_triage_manifest
@@ -366,6 +368,7 @@ def main(argv: list[str] | None = None) -> int:
             wrr_cross_pair_recommended_permutation_rows
         ),
         wrr_source_policy_scenario_rows=wrr_source_policy_scenario_rows,
+        wrr_source_policy_term_impact_rows=wrr_source_policy_term_impact_rows,
         wrr_dw_formula_sensitivity_rows=wrr_dw_formula_sensitivity_rows,
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
         hebrew_screening_all_codes_triage_manifest=hebrew_screening_all_codes_triage_manifest,
@@ -463,6 +466,7 @@ def main(argv: list[str] | None = None) -> int:
             wrr_cross_pair_recommended_permutation_rows
         ),
         wrr_source_policy_scenario_rows=wrr_source_policy_scenario_rows,
+        wrr_source_policy_term_impact_rows=wrr_source_policy_term_impact_rows,
         wrr_dw_formula_sensitivity_rows=wrr_dw_formula_sensitivity_rows,
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
         hebrew_screening_all_codes_triage_manifest=hebrew_screening_all_codes_triage_manifest,
@@ -657,6 +661,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--wrr-source-policy-scenarios",
         type=Path,
         default=WRR_SOURCE_POLICY_SCENARIOS,
+    )
+    parser.add_argument(
+        "--wrr-source-policy-term-impacts",
+        type=Path,
+        default=WRR_SOURCE_POLICY_TERM_IMPACTS,
     )
     parser.add_argument(
         "--wrr-dw-formula-sensitivity",
@@ -930,6 +939,7 @@ def write_summary(
     wrr_perturbation_summary_rows: list[dict[str, str]],
     wrr_cross_pair_recommended_permutation_rows: list[dict[str, str]],
     wrr_source_policy_scenario_rows: list[dict[str, str]],
+    wrr_source_policy_term_impact_rows: list[dict[str, str]],
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1231,6 +1241,7 @@ def write_summary(
             wrr_perturbation_summary_rows,
             wrr_cross_pair_recommended_permutation_rows,
             wrr_source_policy_scenario_rows,
+            wrr_source_policy_term_impact_rows,
             wrr_dw_formula_sensitivity_rows,
         )
     )
@@ -1502,6 +1513,7 @@ def write_manifest(
     wrr_perturbation_summary_rows: list[dict[str, str]],
     wrr_cross_pair_recommended_permutation_rows: list[dict[str, str]],
     wrr_source_policy_scenario_rows: list[dict[str, str]],
+    wrr_source_policy_term_impact_rows: list[dict[str, str]],
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1605,6 +1617,9 @@ def write_manifest(
                 args.wrr_cross_pair_recommended_permutation_summary
             ),
             "wrr_source_policy_scenarios": str(args.wrr_source_policy_scenarios),
+            "wrr_source_policy_term_impacts": str(
+                args.wrr_source_policy_term_impacts
+            ),
             "wrr_dw_formula_sensitivity": str(args.wrr_dw_formula_sensitivity),
             "hebrew_theology_all_codes_triage_manifest": str(
                 args.hebrew_theology_all_codes_triage_manifest
@@ -1770,6 +1785,7 @@ def write_manifest(
             wrr_cross_pair_recommended_permutation_rows
         ),
         "wrr_source_policy_scenario_rows": len(wrr_source_policy_scenario_rows),
+        "wrr_source_policy_term_impact_rows": len(wrr_source_policy_term_impact_rows),
         "wrr_dw_formula_sensitivity_rows": len(wrr_dw_formula_sensitivity_rows),
         "hebrew_theology_all_codes_triage_rows": hebrew_theology_all_codes_triage_manifest.get(
             "queue_rows", 0
@@ -3336,6 +3352,7 @@ def wrr_audit_section(
     perturbation_rows: list[dict[str, str]],
     cross_pair_recommended_permutation_rows: list[dict[str, str]],
     source_policy_scenario_rows: list[dict[str, str]],
+    source_policy_term_impact_rows: list[dict[str, str]],
     dw_formula_sensitivity_rows: list[dict[str, str]],
 ) -> list[str]:
     source_hashes = {
@@ -3534,6 +3551,45 @@ def wrr_audit_section(
                         row.get("gap_to_source_cited_163_after_appellation_min_length", "")
                     ),
                     remaining_len=md_cell(row.get("remaining_length_filtered_pairs", "")),
+                )
+            )
+    closing_term_impacts = [
+        row
+        for row in source_policy_term_impact_rows
+        if row.get("closes_appellation_min_length_gap_to_163", "").lower() == "true"
+    ]
+    if closing_term_impacts:
+        lines.extend(
+            [
+                "",
+                "Single-term source-policy impacts that close the raw >=5 count gap:",
+                "",
+                "| Term ID | Term | Flags | Affected >=5 pairs | Remaining >=5 | Gap >=5 vs 163 | Read |",
+                "| --- | --- | --- | ---: | ---: | ---: | --- |",
+            ]
+        )
+        for row in closing_term_impacts:
+            lines.append(
+                "| {term_id} | {term} | {flags} | {affected_app} | {remaining_app} | {gap_app} | {read} |".format(
+                    term_id=md_cell(row.get("term_id", "")),
+                    term=md_cell(row.get("term", "")),
+                    flags=md_cell(row.get("flags", "")),
+                    affected_app=md_cell(
+                        row.get("affected_appellation_min_length_pairs", "")
+                    ),
+                    remaining_app=md_cell(
+                        row.get(
+                            "remaining_appellation_min_length_pairs_if_excluded",
+                            "",
+                        )
+                    ),
+                    gap_app=md_cell(
+                        row.get(
+                            "gap_to_source_cited_163_after_appellation_min_length_if_excluded",
+                            "",
+                        )
+                    ),
+                    read=md_cell(row.get("diagnostic_read", "")),
                 )
             )
     if dw_formula_sensitivity_rows:

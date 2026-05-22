@@ -42,6 +42,10 @@ class RealReportRunTests(unittest.TestCase):
             "scripts/analyze_wrr_dw_formula_sensitivity.py",
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
+        self.assertIn(
+            "reports/wrr_1994/wrr_source_policy_term_impacts.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
         self.assertIn("scripts/release_hygiene.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_public_release_hygiene.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("els/project_index.py", steps_by_id["preflight"]["inputs"])
@@ -130,6 +134,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/wrr_1994/wrr_source_policy_scenarios.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_source_policy_term_impacts.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
@@ -672,6 +680,18 @@ class RealReportRunTests(unittest.TestCase):
             ],
             [
                 {
+                    "term_id": "wrr2_27_app_02",
+                    "term": "ZKWTA",
+                    "flags": "wnp_disputed_zacut_appellation",
+                    "affected_appellation_min_length_pairs": "2",
+                    "remaining_appellation_min_length_pairs_if_excluded": "163",
+                    "gap_to_source_cited_163_after_appellation_min_length_if_excluded": "0",
+                    "closes_appellation_min_length_gap_to_163": "true",
+                    "diagnostic_read": "single-term exclusion closes >=5 count gap",
+                }
+            ],
+            [
+                {
                     "scope": "all_lanes_cap1000",
                     "row_count": "182",
                     "printed_defined_corrected_distances": "72",
@@ -702,6 +722,11 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("| Repo-defined date-label permutations | 999,999 |", text)
         self.assertIn("| Repo-defined Bonferroni rho0 | 0.00086 |", text)
         self.assertIn("| exclude_wnp_zacut_only | 8 | 157 | 6 | 78 |", text)
+        self.assertIn("Single-term source-policy impacts", text)
+        self.assertIn(
+            "| wrr2_27_app_02 | ZKWTA | wnp_disputed_zacut_appellation | 2 | 163 | 0 | single-term exclusion closes >=5 count gap |",
+            text,
+        )
         self.assertIn("| all_lanes_cap1000 | 182 | 72 | 72 | 0 |", text)
 
     def test_wrr_audit_section_requires_all_source_hashes(self) -> None:
@@ -709,6 +734,7 @@ class RealReportRunTests(unittest.TestCase):
             summary.wrr_audit_section(
                 {"status": "success", "duration_seconds": 12.3},
                 {"downloads": [{"label": "wrr_1994_paper", "sha256": "paperhash"}]},
+                [],
                 [],
                 [],
                 [],
