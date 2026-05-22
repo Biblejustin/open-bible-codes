@@ -26,7 +26,9 @@ The protocol restricts city names to between 5 and 8 letters.
 </body></html>"""
 
 WRAPPER_HTML = """<!doctype html><html><head><title>Wayback</title></head><body>
-Archived wrapper page, not the underlying PDF.
+Wayback Machine
+Sorry
+Job failed
 </body></html>"""
 
 
@@ -46,6 +48,7 @@ class CitiesSourceChainTests(unittest.TestCase):
             self.assertEqual(row["extension"], "pdf")
             self.assertEqual(row["detected_kind"], "html")
             self.assertEqual(row["status"], "html_wrapper_saved_as_pdf")
+            self.assertEqual(row["diagnostic"], "wayback_save_job_failed")
             self.assertEqual(row["title"], "Wayback")
 
     def test_protocol_anchors_find_declared_source_chain_claims(self) -> None:
@@ -106,6 +109,7 @@ class CitiesSourceChainTests(unittest.TestCase):
             summary_rows = list(csv.DictReader((root / "summary.csv").open(encoding="utf-8")))
             self.assertEqual(summary_rows[0]["source_files"], "5")
             self.assertEqual(summary_rows[0]["html_wrapper_pdf_files"], "1")
+            self.assertEqual(summary_rows[0]["wayback_job_failed_wrappers"], "1")
             markdown = (root / "audit.md").read_text(encoding="utf-8")
             self.assertIn("source-shape audit only", markdown)
             self.assertIn("Found anchors: 7 of 7", markdown)

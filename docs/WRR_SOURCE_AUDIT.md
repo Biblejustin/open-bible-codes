@@ -224,8 +224,9 @@ These are source leads, not claim-ready evidence.
   lane because the pages separate Gans/Inbal rule-based city spellings, Aumann
   committee expert data, and Simon/McKay/Margolioth variants. The source-chain
   audit in `docs/CITIES_SOURCE_CHAIN_AUDIT.md` now confirms 13 local source
-  files, 6 `.pdf`-named HTML wrappers, 1 parse-error PDF, 1 no-text PDF, and
-  7/7 protocol anchors before any city-name import.
+  files, 6 `.pdf`-named HTML wrappers, 5 Wayback job-failed wrappers, 1
+  parse-error PDF, 1 no-text PDF, and 7/7 protocol anchors before any city-name
+  import.
 - Sons of Haman, Pumbedita, Auschwitz, and Ark: useful as post-WRR event/object
   claim leads. The source-shape audit in
   `docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md` now confirms 8 source files,
@@ -355,9 +356,9 @@ the reported p-level.
 
 `scripts/analyze_cities_source_chain.py` classifies the Cities/Aumann/
 Simon-McKay HTML pages and PDF-shaped downloads into ignored source-chain CSVs
-and a tracked audit summary. It verifies wrapper/parse/no-text status and key
-source anchors, but does not normalize city names, run ELS hits, or verify
-reported p-levels.
+and a tracked audit summary. It verifies wrapper/parse/no-text status, flags
+Wayback save-job-failed wrapper downloads, and checks key source anchors, but
+does not normalize city names, run ELS hits, or verify reported p-levels.
 
 `scripts/analyze_event_object_experiments_source.py` parses the Sons of Haman,
 Pumbedita, Auschwitz, and Ark source pages plus linked data/tutorial PDFs into

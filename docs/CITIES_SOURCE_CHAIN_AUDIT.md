@@ -16,6 +16,7 @@ statistical test, and not a claim-ready replication.
 | `.pdf` files that are HTML wrappers | 6 |
 | PDF-header files with parse errors | 1 |
 | PDF files with no extracted text | 1 |
+| Wayback job-failed wrapper files | 5 |
 | HTML links | 879 |
 | HTML PDF links | 36 |
 
@@ -37,8 +38,9 @@ Found anchors: 7 of 7.
 
 This audit records which Cities source-chain files are actually usable local
 sources. Several downloaded files with `.pdf` names are Wayback/HTML wrapper
-pages, not PDFs. Those files must not be treated as source data unless the
-underlying PDFs are recovered and checksummed.
+pages, not PDFs; the local wrapper pages report failed Wayback save jobs.
+Those files must not be treated as source data unless the underlying PDFs
+are recovered and checksummed.
 
 No city-name rows are normalized, no ELS search is run, and no p-level is
 verified here.

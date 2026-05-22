@@ -604,7 +604,8 @@ Israeli prime-ministers source-shape audit:
 `docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md` (12 PDF rows, 43 PDF keyword
 rows, 8 detail rows).
 Cities source-chain audit:
-`docs/CITIES_SOURCE_CHAIN_AUDIT.md`.
+`docs/CITIES_SOURCE_CHAIN_AUDIT.md` (6 PDF-named wrappers, 5 Wayback job
+failures).
 Event/object experiment source audit:
 `docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md` (65 machine-readable source rows).
 Under-construction experiment source audit:

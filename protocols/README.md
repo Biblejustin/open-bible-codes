@@ -159,8 +159,9 @@ python3 -m scripts.run_protocol protocols/cities_source_chain_audit.toml --resum
 ```
 
 This classifies Torah-code.org Cities/Aumann/Simon-McKay HTML pages and
-PDF-shaped downloads. It records wrapper downloads, parse status, and source
-anchors without normalizing city names or testing ELS results. Tracked audit:
+PDF-shaped downloads. It records wrapper downloads, Wayback job-failed wrapper
+status, parse status, and source anchors without normalizing city names or
+testing ELS results. Tracked audit:
 `docs/CITIES_SOURCE_CHAIN_AUDIT.md`.
 
 Event/object experiment source audit:

@@ -39,6 +39,7 @@ FILE_FIELDNAMES = [
     "title",
     "link_count",
     "pdf_link_count",
+    "diagnostic",
 ]
 SUMMARY_FIELDNAMES = [
     "source_files",
@@ -50,6 +51,7 @@ SUMMARY_FIELDNAMES = [
     "html_wrapper_pdf_files",
     "pdf_parse_error_files",
     "empty_text_pdf_files",
+    "wayback_job_failed_wrappers",
     "html_links",
     "html_pdf_links",
     "claim_status",
@@ -142,6 +144,7 @@ def analyze_file(path: Path) -> dict[str, object]:
     pdf_pages = ""
     text_chars = 0
     status = detected_kind
+    diagnostic = ""
     if detected_kind == "html":
         html = raw.decode("utf-8", errors="replace")
         extractor = TextExtractor()
@@ -152,6 +155,7 @@ def analyze_file(path: Path) -> dict[str, object]:
         text_chars = len(extractor.text)
         if extension == "pdf":
             status = "html_wrapper_saved_as_pdf"
+            diagnostic = html_wrapper_diagnostic(extractor.text)
     elif detected_kind == "pdf":
         pdf_pages = pdfinfo_pages(path)
         pdf_text = pdftotext(path)
@@ -174,6 +178,7 @@ def analyze_file(path: Path) -> dict[str, object]:
         "title": title,
         "link_count": link_count,
         "pdf_link_count": pdf_link_count,
+        "diagnostic": diagnostic,
     }
 
 
@@ -234,6 +239,9 @@ def build_summary(rows: list[dict[str, object]]) -> dict[str, object]:
         ),
         "pdf_parse_error_files": sum(1 for row in rows if row["status"] == "pdf_parse_error"),
         "empty_text_pdf_files": sum(1 for row in rows if row["status"] == "pdf_no_extractable_text"),
+        "wayback_job_failed_wrappers": sum(
+            1 for row in rows if row["diagnostic"] == "wayback_save_job_failed"
+        ),
         "html_links": sum(int(row["link_count"]) for row in rows),
         "html_pdf_links": sum(int(row["pdf_link_count"]) for row in rows),
         "claim_status": "source_shape_only_not_result_bearing",
@@ -298,6 +306,15 @@ def protocol_anchors(rows: list[dict[str, object]]) -> list[dict[str, str]]:
     ]
 
 
+def html_wrapper_diagnostic(text: str) -> str:
+    lowered = text.lower()
+    if "wayback machine" in lowered and "job failed" in lowered:
+        return "wayback_save_job_failed"
+    if "wayback machine" in lowered:
+        return "wayback_html_wrapper"
+    return "html_wrapper_not_pdf"
+
+
 def html_text_by_path(rows: list[dict[str, object]]) -> dict[str, str]:
     texts: dict[str, str] = {}
     for row in rows:
@@ -336,6 +353,7 @@ def write_markdown(
         f"| `.pdf` files that are HTML wrappers | {summary['html_wrapper_pdf_files']} |",
         f"| PDF-header files with parse errors | {summary['pdf_parse_error_files']} |",
         f"| PDF files with no extracted text | {summary['empty_text_pdf_files']} |",
+        f"| Wayback job-failed wrapper files | {summary['wayback_job_failed_wrappers']} |",
         f"| HTML links | {summary['html_links']} |",
         f"| HTML PDF links | {summary['html_pdf_links']} |",
         "",
@@ -357,8 +375,9 @@ def write_markdown(
             "",
             "This audit records which Cities source-chain files are actually usable local",
             "sources. Several downloaded files with `.pdf` names are Wayback/HTML wrapper",
-            "pages, not PDFs. Those files must not be treated as source data unless the",
-            "underlying PDFs are recovered and checksummed.",
+            "pages, not PDFs; the local wrapper pages report failed Wayback save jobs.",
+            "Those files must not be treated as source data unless the underlying PDFs",
+            "are recovered and checksummed.",
             "",
             "No city-name rows are normalized, no ELS search is run, and no p-level is",
             "verified here.",
