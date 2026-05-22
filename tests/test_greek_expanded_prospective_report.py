@@ -91,3 +91,18 @@ def test_report_keeps_volatile_protocol_timing_out_of_tracked_markdown() -> None
     assert "1.234s" not in text
     assert "| Runtime | recorded in local manifest only |" in text
     assert "| Status | success |" in text
+
+
+def test_report_keeps_follow_up_boundary_current() -> None:
+    text = report.build_report(
+        surface_rows=[],
+        pattern_rows=[],
+        protocol_manifest={"status": "success"},
+        commit="abc123",
+    )
+
+    assert "## Follow-Up Boundary" in text
+    assert "registered length >= 5 primary rule" in text
+    assert "fresh term/source target set and a clean" in text
+    assert "## Next Step" not in text
+    assert "The next defensible move" not in text
