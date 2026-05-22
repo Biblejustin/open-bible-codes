@@ -114,6 +114,7 @@ Current pushed commits for this cleanup:
 - `3a4fecc` Document WRR readiness doc guard.
 - `40aeb28` Refresh WRR readiness doc guard status.
 - `441d429` Guard WRR blocker packet in preflight.
+- `061ba7e` Document WRR blocker packet guard.
 
 ### Formal Real Report Rerun
 
