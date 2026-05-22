@@ -122,6 +122,9 @@ Current pushed commits for this cleanup:
 - `9c28769` Refresh WRR lock options guard status.
 - `c9b1cf3` Guard WRR method status in preflight.
 - `2fa41bd` Document WRR method status guard.
+- `81cc9a1` Refresh WRR method status guard.
+- `bc3e098` Record WRR source redirect metadata.
+- `549faf4` Document WRR source recovery probes.
 
 ### Formal Real Report Rerun
 
