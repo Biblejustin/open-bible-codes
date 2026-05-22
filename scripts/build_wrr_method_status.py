@@ -418,7 +418,7 @@ def source_policy_evidence(rows: list[dict[str, str]]) -> str:
     return (
         "source-policy scenarios: "
         + "; ".join(scenario_parts)
-        + "; no source policy selected"
+        + "; no source policy selected; Visual triage notes do not exclude pairs automatically"
     )
 
 

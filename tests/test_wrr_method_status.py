@@ -246,6 +246,10 @@ class WrrMethodStatusTests(unittest.TestCase):
         self.assertIn("83 no-appellation ordinary hits", by_area["Pair universe"]["evidence"])
         self.assertIn("source-policy scenarios", by_area["Pair universe"]["evidence"])
         self.assertIn("exclude WNP Zacut >=5 157", by_area["Pair universe"]["evidence"])
+        self.assertIn(
+            "Visual triage notes do not exclude pairs automatically",
+            by_area["Pair universe"]["evidence"],
+        )
         self.assertIn("single-term source-policy impacts", by_area["Pair universe"]["evidence"])
         self.assertIn("ZKWTA", by_area["Pair universe"]["evidence"])
         self.assertIn("variant-gap impact best run all_lanes_cap1000", by_area["Pair universe"]["evidence"])
