@@ -27,7 +27,12 @@ def test_missing_gap_reason_doc_fails(tmp_path: Path) -> None:
 
 def test_missing_pair_set_best_run_phrase_fails(tmp_path: Path) -> None:
     doc = tmp_path / "WRR_DEFINED_PAIR_SET_AUDIT.md"
-    doc.write_text("\n".join(check.PAIR_SET_REQUIRED_PHRASES[:-2]) + "\n", encoding="utf-8")
+    phrases = [
+        phrase
+        for phrase in check.PAIR_SET_REQUIRED_PHRASES
+        if "72 of 163" not in phrase
+    ]
+    doc.write_text("\n".join(phrases) + "\n", encoding="utf-8")
 
     failures = check.validate_doc(doc, check.PAIR_SET_REQUIRED_PHRASES)
 

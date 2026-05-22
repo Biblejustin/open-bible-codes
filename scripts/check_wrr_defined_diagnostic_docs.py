@@ -16,6 +16,7 @@ PAIR_SET_REQUIRED_PHRASES = (
     "Status: diagnostic-only pair-universe pressure audit, not a WRR reproduction.",
     "| all_lanes_cap1000 | 182 | 72 | 91 | 110 | 0 | 0 |",
     "Best current run: `all_lanes_cap1000` defines 72 of 163.",
+    "Visual-review notes do not change pair inclusion until an explicit source policy is selected.",
     "Claim language stays blocked by `docs/WRR_CLAIM_READINESS.md`.",
 )
 
@@ -70,11 +71,16 @@ def validate_doc(doc: Path, required_phrases: tuple[str, ...]) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
     text = doc.read_text(encoding="utf-8")
+    normalized_text = normalize_space(text)
     return [
         f"{doc} missing phrase: {phrase}"
         for phrase in required_phrases
-        if phrase not in text
+        if phrase not in text and normalize_space(phrase) not in normalized_text
     ]
+
+
+def normalize_space(text: str) -> str:
+    return " ".join(text.split())
 
 
 if __name__ == "__main__":

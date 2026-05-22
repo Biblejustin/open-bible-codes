@@ -64,4 +64,6 @@ python3 -m scripts.analyze_wrr_defined_pair_set --pair-summary reports/wrr_1994/
 - The missing mass is ordinary-not-valid, not an under-minimum-valid edge case.
 - Candidate-lane and WNP-Zacut rows are diagnostic pressure only; they do
   not establish a source-locked pair rule.
+- Visual-review notes do not change pair inclusion until an explicit
+  source policy is selected.
 - Claim language stays blocked by `docs/WRR_CLAIM_READINESS.md`.

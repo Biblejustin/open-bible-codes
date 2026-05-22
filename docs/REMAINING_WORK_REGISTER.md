@@ -26,7 +26,7 @@ source-review queue visual-triage action propagation, with downstream WRR
 source-policy and blocker-packet action refresh, and non-exclusion visual
 triage fields in the WRR source-review queue, WRR support docs, WRR source
 audit, claim catalog, WRR method-status evidence, and WRR source-policy
-scenario docs.
+scenario docs, plus WRR defined pair-set diagnostic docs.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -167,6 +167,7 @@ Current pushed commits for this cleanup:
 - `98273a8` Guard WRR support visual non exclusions.
 - `0cf7727` Guard WRR catalog visual non exclusions.
 - `2e56611` Propagate WRR visual boundary to method status.
+- `9f40d0d` Guard WRR source policy visual boundary.
 
 ### Formal Real Report Rerun
 
