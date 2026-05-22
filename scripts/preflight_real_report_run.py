@@ -323,6 +323,7 @@ DEFAULT_REQUIRED_PATHS = [
     "data/study/mappings/ot_in_nt_quotations.csv",
     "data/study/mappings/protagonist_narrative_mapping.csv",
     "data/study/mappings/thematic_chapters.csv",
+    "data/study/mappings/wrr_manual_decision_records.csv",
     "protocols/apocrypha_bridge_study.toml",
     "protocols/kjv_apocrypha_bridge_shuffled_controls_250.toml",
     "protocols/kjv_apocrypha_bridge_term_review.toml",

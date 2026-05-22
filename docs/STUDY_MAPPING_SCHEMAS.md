@@ -23,6 +23,12 @@ Header-only templates live under `data/study/mappings/`:
 - `hebrew_root_policy.csv`: locked surface-form to root assignments for
   `root_only_match`. This is a policy file, not a root analyzer; it records
   which analyzer/source and root scheme the matcher is allowed to use.
+- `wrr_manual_decision_records.csv`: header-only template for future WRR
+  manual-lock decisions. It records decision rank, lane, target, source
+  checklist, selected action, evidence citation, evidence summary, and lock
+  fields when populated. Header-only status means no WRR source correction,
+  row transcription, method change, replacement lock, or pair exclusion has
+  been selected.
 
 ## Validation
 

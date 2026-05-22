@@ -17,3 +17,7 @@ python3 -m scripts.validate_study_mapping_schemas
 
 Before a populated mapping is used for claim-level language, lock it with the
 study manifest workflow and include it in the relevant preregistration.
+
+`wrr_manual_decision_records.csv` is a header-only template for future WRR
+manual-lock decisions. It is not a decision log until populated with cited
+evidence, reviewer lock fields, and selected actions.

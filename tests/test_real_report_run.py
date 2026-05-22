@@ -411,6 +411,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("protocols/centered_relevance_density.toml", steps_by_id["preflight"]["inputs"])
         self.assertIn("Makefile", steps_by_id["preflight"]["inputs"])
         self.assertIn("data/study/mappings/thematic_chapters.csv", steps_by_id["preflight"]["inputs"])
+        self.assertIn(
+            "data/study/mappings/wrr_manual_decision_records.csv",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("docs/FINAL_REPORT_OUTLINE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/FINAL_REPORT_DRAFT.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/FINAL_REPORT.md", steps_by_id["preflight"]["inputs"])
@@ -873,6 +877,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/ALL_CODES_FOLLOWUP_EXTENSIONS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn(
             "docs/ALL_CODES_COMPOUND_EXTENSION_CONTROLS.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "data/study/mappings/wrr_manual_decision_records.csv",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn("docs/FINAL_REPORT_HIGHLIGHTS.md", preflight.DEFAULT_REQUIRED_PATHS)

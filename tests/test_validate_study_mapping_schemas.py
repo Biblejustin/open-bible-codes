@@ -3,6 +3,10 @@ from pathlib import Path
 from scripts import validate_study_mapping_schemas as mappings
 
 
+def schema_by_name(filename: str) -> mappings.MappingSchema:
+    return next(schema for schema in mappings.SCHEMAS if schema.filename == filename)
+
+
 def write_all_headers(root: Path) -> None:
     root.mkdir(parents=True, exist_ok=True)
     for schema in mappings.SCHEMAS:
@@ -77,9 +81,10 @@ def test_thematic_chapter_range_must_be_ordered(tmp_path: Path) -> None:
 
 def test_root_policy_requires_analyzer_provenance(tmp_path: Path) -> None:
     write_all_headers(tmp_path)
+    schema = schema_by_name("hebrew_root_policy.csv")
     path = tmp_path / "hebrew_root_policy.csv"
     path.write_text(
-        ",".join(mappings.SCHEMAS[-1].required_columns)
+        ",".join(schema.required_columns)
         + "\n"
         + "root_love,love_h,Love,hebrew,אהבה,אהבה,אהב,standard,,source,notes,reviewer,2026-05-12\n",
         encoding="utf-8",
@@ -88,3 +93,22 @@ def test_root_policy_requires_analyzer_provenance(tmp_path: Path) -> None:
     failures = mappings.validate_mapping_dir(tmp_path)
 
     assert any("missing value for analyzer" in failure for failure in failures)
+
+
+def test_wrr_manual_decision_records_require_evidence_and_lock(tmp_path: Path) -> None:
+    write_all_headers(tmp_path)
+    schema = schema_by_name("wrr_manual_decision_records.csv")
+    path = tmp_path / schema.filename
+    path.write_text(
+        ",".join(schema.required_columns)
+        + "\n"
+        + "wrr_decision_001,1,source_policy_pair_rule,pending_source_policy_pair_rule_lock,"
+        + "Chelm source-policy/pair-rule target,docs/WRR_MANUAL_DECISION_REGISTER.md,"
+        + "accepted_keep,no_source_change,,,reviewer,2026-05-22,notes\n",
+        encoding="utf-8",
+    )
+
+    failures = mappings.validate_mapping_dir(tmp_path)
+
+    assert any("missing value for evidence_citation" in failure for failure in failures)
+    assert any("missing value for evidence_summary" in failure for failure in failures)
