@@ -35,6 +35,17 @@ def test_missing_upper_bound_doc_fails(tmp_path: Path) -> None:
     assert failures == [f"{tmp_path / 'missing_upper.md'} is missing"]
 
 
+def test_missing_residual_packet_doc_fails(tmp_path: Path) -> None:
+    failures = check.validate_variant_gap_docs(
+        zero_hit_doc=check.DEFAULT_ZERO_HIT_DOC,
+        variant_gap_doc=check.DEFAULT_VARIANT_GAP_DOC,
+        upper_bound_doc=check.DEFAULT_UPPER_BOUND_DOC,
+        residual_packet_doc=tmp_path / "missing_residual.md",
+    )
+
+    assert failures == [f"{tmp_path / 'missing_residual.md'} is missing"]
+
+
 def test_missing_zero_hit_summary_fails(tmp_path: Path) -> None:
     doc = tmp_path / "WRR_ZERO_HIT_VARIANT_PROBE.md"
     doc.write_text("\n".join(check.ZERO_HIT_REQUIRED_PHRASES[:-2]) + "\n", encoding="utf-8")
@@ -60,6 +71,18 @@ def test_missing_upper_bound_summary_fails(tmp_path: Path) -> None:
     failures = check.validate_doc(doc, check.UPPER_BOUND_REQUIRED_PHRASES)
 
     assert any("163-distance" in failure for failure in failures)
+
+
+def test_missing_residual_packet_summary_fails(tmp_path: Path) -> None:
+    doc = tmp_path / "WRR_VARIANT_RESIDUAL_REVIEW_PACKET.md"
+    doc.write_text(
+        "\n".join(check.RESIDUAL_PACKET_REQUIRED_PHRASES[:-2]) + "\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_doc(doc, check.RESIDUAL_PACKET_REQUIRED_PHRASES)
+
+    assert any("frontier" in failure for failure in failures)
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:

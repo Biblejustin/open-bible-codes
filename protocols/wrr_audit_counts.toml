@@ -875,6 +875,34 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_variant_residual_review_packet"
+description = "Build residual WRR review packet after the simple-variant upper-bound diagnostic."
+argv = [
+  "-m", "scripts.build_wrr_variant_residual_review_packet",
+  "--blocked-pairs", "reports/wrr_1994/wrr_defined_gap_blocked_pairs.csv",
+  "--variant-impact", "reports/wrr_1994/wrr_variant_gap_impact.csv",
+  "--source-queue", "reports/wrr_1994/wrr_source_review_queue.csv",
+  "--upper-bound", "reports/wrr_1994/wrr_variant_gap_upper_bound.csv",
+  "--out", "reports/wrr_1994/wrr_variant_residual_review_packet.csv",
+  "--summary-out", "reports/wrr_1994/wrr_variant_residual_review_summary.csv",
+  "--markdown-out", "docs/WRR_VARIANT_RESIDUAL_REVIEW_PACKET.md",
+  "--manifest-out", "reports/wrr_1994/wrr_variant_residual_review_packet.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_variant_residual_review_packet.py",
+  "reports/wrr_1994/wrr_defined_gap_blocked_pairs.csv",
+  "reports/wrr_1994/wrr_variant_gap_impact.csv",
+  "reports/wrr_1994/wrr_source_review_queue.csv",
+  "reports/wrr_1994/wrr_variant_gap_upper_bound.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_variant_residual_review_packet.csv",
+  "reports/wrr_1994/wrr_variant_residual_review_summary.csv",
+  "docs/WRR_VARIANT_RESIDUAL_REVIEW_PACKET.md",
+  "reports/wrr_1994/wrr_variant_residual_review_packet.manifest.json",
+]
+
+[[steps]]
 id = "analyze_wrr_source_policy_scenarios"
 description = "Count diagnostic source-policy scenario impacts without selecting a policy."
 argv = [

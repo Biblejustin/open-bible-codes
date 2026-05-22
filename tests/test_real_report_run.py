@@ -65,6 +65,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_ZERO_HIT_VARIANT_PROBE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_VARIANT_GAP_IMPACT.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_VARIANT_GAP_UPPER_BOUND.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn(
+            "docs/WRR_VARIANT_RESIDUAL_REVIEW_PACKET.md",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("docs/WRR_SOURCE_REVIEW_QUEUE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn(
             "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md",
@@ -81,7 +85,15 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
+            "scripts/build_wrr_variant_residual_review_packet.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_variant_gap_upper_bound.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_variant_residual_review_packet.csv",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
@@ -332,6 +344,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_ZERO_HIT_VARIANT_PROBE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_VARIANT_GAP_IMPACT.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_VARIANT_GAP_UPPER_BOUND.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn(
+            "docs/WRR_VARIANT_RESIDUAL_REVIEW_PACKET.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
         self.assertIn("docs/WRR_SOURCE_REVIEW_QUEUE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn(
             "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md",
@@ -348,6 +364,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_variant_gap_docs.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/build_wrr_variant_residual_review_packet.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(

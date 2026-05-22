@@ -11,6 +11,7 @@ from pathlib import Path
 DEFAULT_ZERO_HIT_DOC = Path("docs/WRR_ZERO_HIT_VARIANT_PROBE.md")
 DEFAULT_VARIANT_GAP_DOC = Path("docs/WRR_VARIANT_GAP_IMPACT.md")
 DEFAULT_UPPER_BOUND_DOC = Path("docs/WRR_VARIANT_GAP_UPPER_BOUND.md")
+DEFAULT_RESIDUAL_PACKET_DOC = Path("docs/WRR_VARIANT_RESIDUAL_REVIEW_PACKET.md")
 
 ZERO_HIT_REQUIRED_PHRASES = (
     "# WRR Zero-Hit Variant Probe",
@@ -44,6 +45,20 @@ UPPER_BOUND_REQUIRED_PHRASES = (
     "accepting any variant still requires a citable source rule",
 )
 
+RESIDUAL_PACKET_REQUIRED_PHRASES = (
+    "# WRR Variant Residual Review Packet",
+    "Status: diagnostic-only residual review packet after the simple-variant upper bound.",
+    "It does not select source corrections, replace terms, or reproduce WRR.",
+    "- Residual needed after that upper bound: 40.",
+    "- Residual candidate pool: 59 pairs.",
+    "- Residual slack: 19 pairs.",
+    "| `residual_pool` | `candidate_pairs_not_closed_by_all-blocker_simple_variants` | 59 |",
+    "| `review_frontier` | `minimum_residual_frontier` | 40 |",
+    "| `impact_status` | `no_blocking_term_variant_hit` | 50 |",
+    "| `impact_status` | `some_blocking_terms_have_variant_hit` | 9 |",
+    "The frontier is deterministic triage, not a correction set.",
+)
+
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
@@ -51,6 +66,7 @@ def main(argv: list[str] | None = None) -> int:
         zero_hit_doc=args.zero_hit_doc,
         variant_gap_doc=args.variant_gap_doc,
         upper_bound_doc=args.upper_bound_doc,
+        residual_packet_doc=args.residual_packet_doc,
     )
     if failures:
         for failure in failures:
@@ -58,7 +74,8 @@ def main(argv: list[str] | None = None) -> int:
         return 1
     print(
         "WRR variant-gap docs ok: "
-        f"{args.zero_hit_doc}, {args.variant_gap_doc}, {args.upper_bound_doc}"
+        f"{args.zero_hit_doc}, {args.variant_gap_doc}, "
+        f"{args.upper_bound_doc}, {args.residual_packet_doc}"
     )
     return 0
 
@@ -68,6 +85,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--zero-hit-doc", type=Path, default=DEFAULT_ZERO_HIT_DOC)
     parser.add_argument("--variant-gap-doc", type=Path, default=DEFAULT_VARIANT_GAP_DOC)
     parser.add_argument("--upper-bound-doc", type=Path, default=DEFAULT_UPPER_BOUND_DOC)
+    parser.add_argument(
+        "--residual-packet-doc",
+        type=Path,
+        default=DEFAULT_RESIDUAL_PACKET_DOC,
+    )
     return parser
 
 
@@ -76,11 +98,13 @@ def validate_variant_gap_docs(
     zero_hit_doc: Path = DEFAULT_ZERO_HIT_DOC,
     variant_gap_doc: Path = DEFAULT_VARIANT_GAP_DOC,
     upper_bound_doc: Path = DEFAULT_UPPER_BOUND_DOC,
+    residual_packet_doc: Path = DEFAULT_RESIDUAL_PACKET_DOC,
 ) -> list[str]:
     return [
         *validate_doc(zero_hit_doc, ZERO_HIT_REQUIRED_PHRASES),
         *validate_doc(variant_gap_doc, VARIANT_GAP_REQUIRED_PHRASES),
         *validate_doc(upper_bound_doc, UPPER_BOUND_REQUIRED_PHRASES),
+        *validate_doc(residual_packet_doc, RESIDUAL_PACKET_REQUIRED_PHRASES),
     ]
 
 

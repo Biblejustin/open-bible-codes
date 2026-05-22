@@ -26,7 +26,8 @@ source-review queue visual-triage action propagation, with downstream WRR
 source-policy and blocker-packet action refresh, and non-exclusion visual
 triage fields in the WRR source-review queue, WRR support docs, WRR source
 audit, claim catalog, WRR method-status evidence, WRR source-policy scenario
-docs, WRR defined pair-set diagnostic docs, and WRR cross-pair diagnostics.
+docs, WRR defined pair-set diagnostic docs, WRR cross-pair diagnostics, and
+WRR variant residual review-packet guarding.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
