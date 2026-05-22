@@ -66,9 +66,11 @@ This assembly run includes:
   `docs/GREEK_SURFACE_LENGTH4_VOCABULARY_CONTROLS.md`,
   `docs/GREEK_SURFACE_LENGTH4_VOCABULARY_CONTROL_POOL.md`, and
   `docs/GREEK_SURFACE_LENGTH4_VOCABULARY_CONTROL_EVALUATION.md`
-- WRR 1994 source/import/text-lock/count/pair-table/perturbation-boundary smoke audit:
-  `docs/WRR_SOURCE_AUDIT.md`, `docs/WRR_METHODOLOGY_GAPS.md`, and
-  `docs/WRR_CORRECTED_DISTANCE_NOTES.md`
+- WRR 1994 source/import/text-lock/count/pair-table/perturbation-boundary audit
+  plus repo-defined cross-pair permutation diagnostic:
+  `docs/WRR_SOURCE_AUDIT.md`, `docs/WRR_METHODOLOGY_GAPS.md`,
+  `docs/WRR_CORRECTED_DISTANCE_NOTES.md`, and
+  `docs/WRR_CROSS_PAIR_GRID.md`
 - broader search/current findings writeup:
   `docs/BROADER_SEARCH_FINDINGS.md`
 - broad Hebrew modern/geopolitical version-distribution run:
@@ -200,11 +202,12 @@ The report-run summary should currently say:
 - The generated length-4 vocabulary-control follow-up weakens that signal:
   200 matched controls are available per target, controls overlap every target,
   and no target survives study-level q <= 0.05.
-- WRR remains under-specified: the report includes source/import/text-checksum
-  lock, count smoke outputs, and an ANU source-shape check, but not the locked
-  pair table, corrected-distance, and permutation statistic required for a
-  reproduction claim. The explicit readiness gate is tracked in
-  `docs/WRR_CLAIM_READINESS.md` and remains blocked.
+- WRR now has repo-defined diagnostic evidence: the accepted 999,999
+  date-label permutation run excludes WNP-dispute-flagged rows and reports
+  Bonferroni `rho0 = 0.00086`. Exact WRR reproduction remains under-specified
+  until the source-locked pair table and `D(w)` decision are resolved. The
+  explicit readiness gate is tracked in `docs/WRR_CLAIM_READINESS.md` and
+  remains blocked.
 - `υιοσ` (huios; English: son) and `αιμα` (haima; English: blood) remain weaker hidden-path candidates because their exact
   patterns are missing from one or more compared Greek NT sources.
 - no row is claim-grade yet.

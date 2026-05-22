@@ -64,6 +64,9 @@ WRR_PAIR_CONTROLS_LEN_5_8 = Path("reports/wrr_1994/wrr2_genesis_pair_controls_le
 WRR_SKIP_CAPS_SUMMARY = Path("reports/wrr_1994/wrr2_skip_caps_summary.csv")
 WRR_PAIR_TABLE_RECONCILIATION = Path("reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv")
 WRR_PERTURBATION_SUMMARY = Path("reports/wrr_1994/wrr2_perturbation_diagnostics_summary.csv")
+WRR_CROSS_PAIR_RECOMMENDED_PERMUTATION_SUMMARY = Path(
+    "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv"
+)
 HEBREW_THEOLOGY_ALL_CODES_TRIAGE_MANIFEST = Path(
     "reports/hebrew_theology_all_codes/triage.manifest.json"
 )
@@ -204,6 +207,9 @@ def main(argv: list[str] | None = None) -> int:
     wrr_skip_caps_summary_rows = read_rows(args.wrr_skip_caps_summary)
     wrr_pair_table_reconciliation_rows = read_rows(args.wrr_pair_table_reconciliation)
     wrr_perturbation_summary_rows = read_rows(args.wrr_perturbation_summary)
+    wrr_cross_pair_recommended_permutation_rows = read_rows(
+        args.wrr_cross_pair_recommended_permutation_summary
+    )
     hebrew_theology_all_codes_triage_manifest = read_json(
         args.hebrew_theology_all_codes_triage_manifest
     )
@@ -328,6 +334,9 @@ def main(argv: list[str] | None = None) -> int:
         wrr_skip_caps_summary_rows=wrr_skip_caps_summary_rows,
         wrr_pair_table_reconciliation_rows=wrr_pair_table_reconciliation_rows,
         wrr_perturbation_summary_rows=wrr_perturbation_summary_rows,
+        wrr_cross_pair_recommended_permutation_rows=(
+            wrr_cross_pair_recommended_permutation_rows
+        ),
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
         hebrew_screening_all_codes_triage_manifest=hebrew_screening_all_codes_triage_manifest,
         greek_screening_all_codes_triage_manifest=greek_screening_all_codes_triage_manifest,
@@ -416,6 +425,9 @@ def main(argv: list[str] | None = None) -> int:
         wrr_skip_caps_summary_rows=wrr_skip_caps_summary_rows,
         wrr_pair_table_reconciliation_rows=wrr_pair_table_reconciliation_rows,
         wrr_perturbation_summary_rows=wrr_perturbation_summary_rows,
+        wrr_cross_pair_recommended_permutation_rows=(
+            wrr_cross_pair_recommended_permutation_rows
+        ),
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
         hebrew_screening_all_codes_triage_manifest=hebrew_screening_all_codes_triage_manifest,
         greek_screening_all_codes_triage_manifest=greek_screening_all_codes_triage_manifest,
@@ -595,6 +607,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--wrr-perturbation-summary",
         type=Path,
         default=WRR_PERTURBATION_SUMMARY,
+    )
+    parser.add_argument(
+        "--wrr-cross-pair-recommended-permutation-summary",
+        type=Path,
+        default=WRR_CROSS_PAIR_RECOMMENDED_PERMUTATION_SUMMARY,
     )
     parser.add_argument(
         "--hebrew-theology-all-codes-triage-manifest",
@@ -841,6 +858,7 @@ def write_summary(
     wrr_skip_caps_summary_rows: list[dict[str, str]],
     wrr_pair_table_reconciliation_rows: list[dict[str, str]],
     wrr_perturbation_summary_rows: list[dict[str, str]],
+    wrr_cross_pair_recommended_permutation_rows: list[dict[str, str]],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
     greek_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1133,6 +1151,7 @@ def write_summary(
             wrr_skip_caps_summary_rows,
             wrr_pair_table_reconciliation_rows,
             wrr_perturbation_summary_rows,
+            wrr_cross_pair_recommended_permutation_rows,
         )
     )
     lines.extend(
@@ -1257,6 +1276,8 @@ def write_summary(
             "- `docs/WRR_REPLICATION_PLAN.md`",
             "- `docs/WRR_METHODOLOGY_GAPS.md`",
             "- `docs/WRR_CORRECTED_DISTANCE_NOTES.md`",
+            "- `docs/WRR_CROSS_PAIR_GRID.md`",
+            "- `docs/WRR_METHOD_STATUS.md`",
             "- `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`",
             "- `docs/STUDY_LOCK_MANIFESTS.md`",
             "- `docs/PROSPECTIVE_STUDY_PREREGISTRATION_TEMPLATE.md`",
@@ -1381,6 +1402,7 @@ def write_manifest(
     wrr_skip_caps_summary_rows: list[dict[str, str]],
     wrr_pair_table_reconciliation_rows: list[dict[str, str]],
     wrr_perturbation_summary_rows: list[dict[str, str]],
+    wrr_cross_pair_recommended_permutation_rows: list[dict[str, str]],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
     greek_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1475,6 +1497,9 @@ def write_manifest(
             "wrr_skip_caps_summary": str(args.wrr_skip_caps_summary),
             "wrr_pair_table_reconciliation": str(args.wrr_pair_table_reconciliation),
             "wrr_perturbation_summary": str(args.wrr_perturbation_summary),
+            "wrr_cross_pair_recommended_permutation_summary": str(
+                args.wrr_cross_pair_recommended_permutation_summary
+            ),
             "hebrew_theology_all_codes_triage_manifest": str(
                 args.hebrew_theology_all_codes_triage_manifest
             ),
@@ -1623,6 +1648,9 @@ def write_manifest(
         "wrr_skip_caps_summary_rows": len(wrr_skip_caps_summary_rows),
         "wrr_pair_table_reconciliation_rows": len(wrr_pair_table_reconciliation_rows),
         "wrr_perturbation_summary_rows": len(wrr_perturbation_summary_rows),
+        "wrr_cross_pair_recommended_permutation_rows": len(
+            wrr_cross_pair_recommended_permutation_rows
+        ),
         "hebrew_theology_all_codes_triage_rows": hebrew_theology_all_codes_triage_manifest.get(
             "queue_rows", 0
         ),
@@ -3086,6 +3114,7 @@ def wrr_audit_section(
     skip_cap_rows: list[dict[str, str]],
     reconciliation_rows: list[dict[str, str]],
     perturbation_rows: list[dict[str, str]],
+    cross_pair_recommended_permutation_rows: list[dict[str, str]],
 ) -> list[str]:
     source_hashes = {
         download["label"]: download.get("sha256", "")
@@ -3119,6 +3148,11 @@ def wrr_audit_section(
     text_source = text_source_rows[0] if text_source_rows else {}
     reconciliation = reconciliation_rows[0] if reconciliation_rows else {}
     perturbations = perturbation_rows[0] if perturbation_rows else {}
+    cross_pair_permutation = (
+        cross_pair_recommended_permutation_rows[0]
+        if cross_pair_recommended_permutation_rows
+        else {}
+    )
     adjusted_signal_rows = sum(
         1
         for row in control_rows
@@ -3237,6 +3271,14 @@ def wrr_audit_section(
         f"| Perturbation rows with checked hits | {int_value(perturbations, 'rows_with_hits'):,} |",
         f"| Perturbation rows with checked-hit < 10 valid | {int_value(perturbations, 'rows_with_checked_under_10_valid'):,} |",
         f"| Perturbation ordinary boundary failures | {int_value(perturbations, 'ordinary_in_bounds_failures'):,} |",
+        f"| Repo-defined date-label permutations | {int_value(cross_pair_permutation, 'permutations'):,} |",
+        f"| Repo-defined observed rows | {int_value(cross_pair_permutation, 'observed_rows'):,} |",
+        f"| Repo-defined observed c-values | {int_value(cross_pair_permutation, 'observed_defined_corrected_distances'):,} |",
+        f"| Repo-defined rho P1 | {cross_pair_permutation.get('rho_p1', '')} |",
+        f"| Repo-defined rho P2 | {cross_pair_permutation.get('rho_p2', '')} |",
+        f"| Repo-defined rho P3 | {cross_pair_permutation.get('rho_p3', '')} |",
+        f"| Repo-defined rho P4 | {cross_pair_permutation.get('rho_p4', '')} |",
+        f"| Repo-defined Bonferroni rho0 | {cross_pair_permutation.get('rho0_bonferroni', '')} |",
         "",
         "The WRR 1994 paper's 298 second-list word pairs and the later WRR/Nations",
         "163-distance statement are treated here as distinct quantities. Current",

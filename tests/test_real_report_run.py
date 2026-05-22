@@ -33,10 +33,12 @@ class RealReportRunTests(unittest.TestCase):
         self.assertTrue(steps_by_id["preflight"]["always_run"])
         self.assertTrue(steps_by_id["real_report_summary"]["always_run"])
         self.assertIn("wrr_audit_counts", steps_by_id)
+        self.assertIn("wrr_cross_pair_grid", steps_by_id)
         self.assertIn("scripts/release_hygiene.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_public_release_hygiene.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_REPLICATION_PLAN.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_METHOD_STATUS.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn("docs/WRR_CROSS_PAIR_GRID.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_CLAIM_READINESS.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("claims/claim_catalog.csv", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/CLAIM_CATALOG.md", steps_by_id["preflight"]["inputs"])
@@ -87,6 +89,10 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("els/term_display.py", steps_by_id[step_id]["inputs"])
         self.assertIn(
             "reports/centered_occurrence_index/presence_summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
         for step_id in [
@@ -146,6 +152,7 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn("docs/WRR_REPLICATION_PLAN.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_METHOD_STATUS.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/WRR_CROSS_PAIR_GRID.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_CLAIM_READINESS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/release_hygiene.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_public_release_hygiene.py", preflight.DEFAULT_REQUIRED_PATHS)
@@ -529,6 +536,18 @@ class RealReportRunTests(unittest.TestCase):
                     "ordinary_in_bounds_failures": "0",
                 }
             ],
+            [
+                {
+                    "permutations": "999999",
+                    "observed_rows": "174",
+                    "observed_defined_corrected_distances": "48",
+                    "rho_p1": "0.0011565",
+                    "rho_p2": "0.000215",
+                    "rho_p3": "0.0069545",
+                    "rho_p4": "0.000926",
+                    "rho0_bonferroni": "0.00086",
+                }
+            ],
         )
         text = "\n".join(lines)
 
@@ -549,12 +568,15 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("| Gap after one Zacut appellation exclusion | 0 |", text)
         self.assertIn("| Gap to source-cited 163 distances after length filter | 77 |", text)
         self.assertIn("| Perturbation diagnostic rows | 120 |", text)
+        self.assertIn("| Repo-defined date-label permutations | 999,999 |", text)
+        self.assertIn("| Repo-defined Bonferroni rho0 | 0.00086 |", text)
 
     def test_wrr_audit_section_requires_all_source_hashes(self) -> None:
         with self.assertRaisesRegex(ValueError, "wrr_nations_mc"):
             summary.wrr_audit_section(
                 {"status": "success", "duration_seconds": 12.3},
                 {"downloads": [{"label": "wrr_1994_paper", "sha256": "paperhash"}]},
+                [],
                 [],
                 [],
                 [],

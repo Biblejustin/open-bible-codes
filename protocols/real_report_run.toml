@@ -45,6 +45,7 @@ inputs = [
   "protocols/all_codes_followup_review.toml",
   "protocols/gog_magog_pair_prospective.toml",
   "protocols/wrr_audit_counts.toml",
+  "protocols/wrr_cross_pair_grid.toml",
   "protocols/matrix_cluster_candidates.toml",
   "protocols/matrix_cluster_control_summary.toml",
   "protocols/notable_passage_gaps.toml",
@@ -101,6 +102,7 @@ inputs = [
   "docs/WRR_METHOD_STATUS.md",
   "docs/WRR_METHODOLOGY_GAPS.md",
   "docs/WRR_CORRECTED_DISTANCE_NOTES.md",
+  "docs/WRR_CROSS_PAIR_GRID.md",
   "docs/WRR_CLAIM_READINESS.md",
   "docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md",
   "docs/STUDY_LOCK_MANIFESTS.md",
@@ -246,6 +248,10 @@ inputs = [
   "scripts/analyze_wrr_skip_caps.py",
   "scripts/analyze_wrr_pair_table_reconciliation.py",
   "scripts/analyze_wrr_perturbation_diagnostics.py",
+  "scripts/build_wrr_cross_pair_grid.py",
+  "scripts/analyze_wrr_corrected_distance.py",
+  "scripts/analyze_wrr_corrected_distance_aggregate.py",
+  "scripts/analyze_wrr_cross_pair_permutations.py",
   "scripts/build_matrix_cluster_candidates.py",
   "scripts/summarize_matrix_cluster_controls.py",
   "scripts/analyze_notable_passage_gaps.py",
@@ -565,6 +571,26 @@ inputs = [
   "els/search.py",
 ]
 outputs = ["reports/wrr_1994/audit_counts_protocol.manifest.json"]
+
+[[steps]]
+id = "wrr_cross_pair_grid"
+description = "Refresh the WRR cross-pair repo-defined date-label permutation diagnostic."
+argv = ["-m", "scripts.run_protocol", "protocols/wrr_cross_pair_grid.toml", "--resume"]
+inputs = [
+  "protocols/wrr_cross_pair_grid.toml",
+  "scripts/build_wrr_cross_pair_grid.py",
+  "scripts/analyze_wrr_corrected_distance.py",
+  "scripts/analyze_wrr_corrected_distance_aggregate.py",
+  "scripts/analyze_wrr_cross_pair_permutations.py",
+  "reports/wrr_1994/wrr2_terms.csv",
+  "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "reports/wrr_1994/wrr2_skip_caps.csv",
+  "configs/example_koren_genesis.toml",
+  "els/wrr.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = ["reports/wrr_1994/cross_pair_grid/protocol.manifest.json"]
 
 [[steps]]
 id = "hebrew_modern_geopolitical_controlled_review"
@@ -1193,6 +1219,7 @@ inputs = [
   "reports/wrr_1994/wrr2_skip_caps_summary.csv",
   "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
   "reports/wrr_1994/wrr2_perturbation_diagnostics_summary.csv",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv",
   "reports/hebrew_modern_geopolitical_controlled_review/controlled.manifest.json",
   "reports/hebrew_modern_geopolitical_prospective/protocol_run.manifest.json",
   "reports/hebrew_modern_geopolitical_prospective/controlled_report.manifest.json",
