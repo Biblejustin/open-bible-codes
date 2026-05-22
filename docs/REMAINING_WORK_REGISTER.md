@@ -29,7 +29,7 @@ audit, claim catalog, WRR method-status evidence, WRR source-policy scenario
 docs, WRR defined pair-set diagnostic docs, WRR cross-pair diagnostics, and
 WRR variant residual review-packet guarding, plus WRR residual method-status,
 blocker-packet, and unresolved-term burden propagation, and WRR Wayback
-source-recovery probing/guarding.
+source-recovery probing/guarding, and WRR public handoff doc guarding.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -189,6 +189,7 @@ Current pushed commits for this cleanup:
 - `f5e167f` Surface WRR near match lane in blockers.
 - `222f231` Sync WRR public handoff docs.
 - `90fa1e4` Sync WRR final outline handoff.
+- `604b215` Guard WRR public handoff docs.
 
 ### Formal Real Report Rerun
 
@@ -495,6 +496,10 @@ pair-universe evidence is locked.
 method-lane terms: all are OCR-matched, all have zero skip-250 appellation
 counts, all have zero high-cap appellation ordinary hits, and 2 pairs have zero
 ordinary hits on both sides.
+`scripts/check_wrr_public_handoff_docs.py` now guards the README, report-run
+doc, final report files, consolidated findings, outline, and remaining-work
+register against stale WRR blocker wording. It is wired into report preflight
+and treats public handoff drift as a formal preflight failure.
 The next WRR work is therefore source/term/pair-rule reconciliation plus method
 and pair-universe decisions before any exact published reproduction language.
 
@@ -652,9 +657,10 @@ doc guarding, WRR variant-gap method-status evidence propagation, and WRR
 residual burden summary/blocker propagation, and WRR Wayback source-recovery
 probing/guarding, residual unique-term reconciliation queue guarding, and
 residual term blocker-packet propagation, and residual reconciliation action
-plan guarding:
+plan guarding, and WRR public handoff doc guarding:
 
-- `python3 -m pytest -q` passed: 1275 tests and 13961 subtests.
+- `python3 -m pytest -q` passed: 1302 tests and 13961 subtests.
+- `python3 -m pytest tests/test_check_wrr_public_handoff_docs.py tests/test_real_report_run.py -q` passed: 57 tests.
 - `python3 -m pytest tests/test_build_wrr_residual_reconciliation_action_plan.py tests/test_check_wrr_residual_reconciliation_action_plan_doc.py -q` passed: 6 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_clean_lock_protocols.py tests/test_build_wrr_residual_reconciliation_action_plan.py tests/test_check_wrr_residual_reconciliation_action_plan_doc.py -q` passed: 69 tests.
 - `python3 -m pytest tests/test_build_wrr_claim_blocker_packet.py tests/test_check_wrr_claim_blocker_packet_doc.py tests/test_clean_lock_protocols.py tests/test_wrr_cross_pair_grid.py tests/test_real_report_run.py -q` passed: 71 tests.
@@ -726,6 +732,8 @@ plan guarding:
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_residual_term_queue.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_residual_term_blocker.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_residual_action_plan.json` passed.
+- `python3 -m scripts.check_wrr_public_handoff_docs` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_public_handoff_guard.json` passed.
 - `python3 -m scripts.check_prospective_study_lanes` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
