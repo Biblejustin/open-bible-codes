@@ -286,6 +286,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/analyze_wrr_defined_pair_set.py",
     "scripts/analyze_wrr_defined_gap_reasons.py",
     "scripts/analyze_wrr_variant_gap_impact.py",
+    "scripts/build_wrr_source_review_queue.py",
     "scripts/build_wrr_method_status.py",
     "scripts/check_wrr_claim_readiness.py",
     "scripts/build_matrix_cluster_candidates.py",

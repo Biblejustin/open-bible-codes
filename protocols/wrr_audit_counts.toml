@@ -827,6 +827,32 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_source_review_queue"
+description = "Rank current WRR blocked terms for source/OCR/normalization review."
+argv = [
+  "-m", "scripts.build_wrr_source_review_queue",
+  "--blocked-pairs", "reports/wrr_1994/wrr_defined_gap_blocked_pairs.csv",
+  "--variants", "reports/wrr_1994/wrr_zero_hit_variant_probe.csv",
+  "--row-ocr", "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv",
+  "--out", "reports/wrr_1994/wrr_source_review_queue.csv",
+  "--summary-out", "reports/wrr_1994/wrr_source_review_queue_summary.csv",
+  "--markdown-out", "docs/WRR_SOURCE_REVIEW_QUEUE.md",
+  "--manifest-out", "reports/wrr_1994/wrr_source_review_queue.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_source_review_queue.py",
+  "reports/wrr_1994/wrr_defined_gap_blocked_pairs.csv",
+  "reports/wrr_1994/wrr_zero_hit_variant_probe.csv",
+  "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_source_review_queue.csv",
+  "reports/wrr_1994/wrr_source_review_queue_summary.csv",
+  "docs/WRR_SOURCE_REVIEW_QUEUE.md",
+  "reports/wrr_1994/wrr_source_review_queue.manifest.json",
+]
+
+[[steps]]
 id = "build_wrr_method_status"
 description = "Summarize current WRR locks, open method decisions, and next actions."
 argv = [
