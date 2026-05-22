@@ -7,10 +7,12 @@ import argparse
 from pathlib import Path
 from typing import Any
 
+from scripts import build_prospective_lane_status as lane_status
 from scripts import scaffold_prospective_study as scaffold
 
 
 DEFAULT_PROFILE_FILE = Path("configs/prospective_study_lanes.json")
+ALLOWED_STATUSES = frozenset(lane_status.STATUS_READS)
 REQUIRED_FIELDS = [
     "id",
     "title",
@@ -83,9 +85,12 @@ def validate_profile(profile: dict[str, Any], *, profile_id: str) -> list[str]:
     else:
         if normalized_id != profile_id:
             failures.append(f"{profile_id}: id must already be normalized")
-    failures.extend(validate_path_prefix(profile, profile_id, "term_file", "terms/"))
-    failures.extend(validate_path_prefix(profile, profile_id, "protocol", "protocols/"))
-    failures.extend(validate_path_prefix(profile, profile_id, "report_doc", "docs/"))
+    status = profile.get("status")
+    if not missing(status) and str(status) not in ALLOWED_STATUSES:
+        failures.append(f"{profile_id}: unknown status: {status}")
+    failures.extend(validate_profile_path(profile, profile_id, "term_file", "terms/"))
+    failures.extend(validate_profile_path(profile, profile_id, "protocol", "protocols/"))
+    failures.extend(validate_profile_path(profile, profile_id, "report_doc", "docs/"))
     sources = profile.get("sources", [])
     if isinstance(sources, list):
         for source_index, source in enumerate(sources, start=1):
@@ -95,7 +100,7 @@ def validate_profile(profile: dict[str, Any], *, profile_id: str) -> list[str]:
     return failures
 
 
-def validate_path_prefix(
+def validate_profile_path(
     profile: dict[str, Any],
     profile_id: str,
     field: str,
@@ -107,6 +112,8 @@ def validate_path_prefix(
     text = str(value)
     if not text.startswith(prefix):
         return [f"{profile_id}: {field} must start with {prefix}"]
+    if not Path(text).exists():
+        return [f"{profile_id}: {field} path missing: {text}"]
     return []
 
 
