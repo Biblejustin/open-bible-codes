@@ -18,7 +18,12 @@ from els.project_index import (
     write_docs_index,
     write_protocol_index,
 )
-from scripts import check_prospective_study_lanes, check_source_basis_audit_queue
+from scripts import (
+    check_expanded_strata_tooling,
+    check_prospective_study_lanes,
+    check_source_basis_audit_queue,
+    validate_study_mapping_schemas,
+)
 from scripts.release_hygiene import (
     FORBIDDEN_ACCOUNT_TERMS,
     forbidden_hits,
@@ -37,6 +42,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/release_hygiene.py",
     "scripts/check_public_release_hygiene.py",
     "els/project_index.py",
+    "Makefile",
     "protocols/real_report_run.toml",
     "protocols/INDEX.md",
     "protocols/step_tahot_final_gate.toml",
@@ -149,6 +155,8 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_DW_FORMULA_SENSITIVITY.md",
     "docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md",
     "docs/STUDY_LOCK_MANIFESTS.md",
+    "docs/EXPANDED_STRATA_TOOLING.md",
+    "docs/STUDY_MAPPING_SCHEMAS.md",
     "docs/PROSPECTIVE_STUDY_PREREGISTRATION_TEMPLATE.md",
     "docs/PROSPECTIVE_TERM_AUDITS.md",
     "docs/BROADER_SEARCH_FINDINGS.md",
@@ -246,6 +254,13 @@ DEFAULT_REQUIRED_PATHS = [
     "terms/kjv_apocrypha_bridge_prospective_terms.csv",
     "configs/example_ebible_engkjv_apocrypha.toml",
     "configs/prospective_study_lanes.json",
+    "data/study/mappings/README.md",
+    "data/study/mappings/author_book_mapping.csv",
+    "data/study/mappings/hebrew_root_policy.csv",
+    "data/study/mappings/mt_lxx_semantic_divergence.csv",
+    "data/study/mappings/ot_in_nt_quotations.csv",
+    "data/study/mappings/protagonist_narrative_mapping.csv",
+    "data/study/mappings/thematic_chapters.csv",
     "protocols/apocrypha_bridge_study.toml",
     "protocols/kjv_apocrypha_bridge_shuffled_controls_250.toml",
     "protocols/kjv_apocrypha_bridge_term_review.toml",
@@ -288,6 +303,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_all_codes_followup_report.py",
     "scripts/build_centered_occurrence_index.py",
     "scripts/build_match_strata_index.py",
+    "scripts/check_expanded_strata_tooling.py",
+    "scripts/validate_study_mapping_schemas.py",
     "els/match_strata.py",
     "els/gematria.py",
     "els/letter_stats.py",
@@ -409,6 +426,29 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(source_basis_failures)
         )
 
+    expanded_strata_tooling_result = check_expanded_strata_tooling.check_tooling(
+        check_expanded_strata_tooling.DEFAULT_DOC,
+        check_expanded_strata_tooling.DEFAULT_MAKEFILE,
+    )
+    expanded_strata_tooling_failures = [
+        str(item)
+        for item in expanded_strata_tooling_result.get("missing", [])
+    ]
+    if expanded_strata_tooling_failures:
+        failures.append(
+            "expanded-strata tooling failures: "
+            + "; ".join(expanded_strata_tooling_failures)
+        )
+
+    study_mapping_schema_failures = validate_study_mapping_schemas.validate_mapping_dir(
+        validate_study_mapping_schemas.MAPPINGS_DIR
+    )
+    if study_mapping_schema_failures:
+        failures.append(
+            "study mapping schema failures: "
+            + "; ".join(study_mapping_schema_failures)
+        )
+
     stale_indexes = stale_generated_indexes(root)
     if stale_indexes:
         failures.append("stale generated indexes: " + ", ".join(stale_indexes))
@@ -430,6 +470,8 @@ def main(argv: list[str] | None = None) -> int:
         "missing_paths": missing_paths,
         "prospective_lane_failures": prospective_lane_failures,
         "source_basis_failures": source_basis_failures,
+        "expanded_strata_tooling_failures": expanded_strata_tooling_failures,
+        "study_mapping_schema_failures": study_mapping_schema_failures,
         "stale_generated_indexes": stale_indexes,
         "forbidden_account_terms": FORBIDDEN_ACCOUNT_TERMS,
         "forbidden_repo_hits": forbidden_repo_hits,

@@ -88,6 +88,12 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("configs/prospective_study_lanes.json", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_prospective_study_lanes.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_source_basis_audit_queue.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn("scripts/check_expanded_strata_tooling.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn("scripts/validate_study_mapping_schemas.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn("docs/EXPANDED_STRATA_TOOLING.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn("docs/STUDY_MAPPING_SCHEMAS.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn("Makefile", steps_by_id["preflight"]["inputs"])
+        self.assertIn("data/study/mappings/thematic_chapters.csv", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/FINAL_REPORT_OUTLINE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/FINAL_REPORT_DRAFT.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/FINAL_REPORT.md", steps_by_id["preflight"]["inputs"])
@@ -250,6 +256,12 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("configs/prospective_study_lanes.json", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_prospective_study_lanes.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_source_basis_audit_queue.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/check_expanded_strata_tooling.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/validate_study_mapping_schemas.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/EXPANDED_STRATA_TOOLING.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/STUDY_MAPPING_SCHEMAS.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("Makefile", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("data/study/mappings/thematic_chapters.csv", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/FINAL_REPORT_OUTLINE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/FINAL_REPORT_DRAFT.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/FINAL_REPORT.md", preflight.DEFAULT_REQUIRED_PATHS)
@@ -379,6 +391,8 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("secret_pattern_hits", payload)
             self.assertIn("prospective_lane_failures", payload)
             self.assertIn("source_basis_failures", payload)
+            self.assertIn("expanded_strata_tooling_failures", payload)
+            self.assertIn("study_mapping_schema_failures", payload)
             self.assertIn("stale_generated_indexes", payload)
 
     def test_preflight_fails_on_prospective_lane_validation_failure(self) -> None:
@@ -421,6 +435,49 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "source-basis validation failures: needs_audit rows remain: "
                 "BibleGateway English versions:DEMO",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_expanded_strata_tooling_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_expanded_strata_tooling,
+                "check_tooling",
+                return_value={"ok": False, "missing": ["docs/EXPANDED_STRATA_TOOLING.md:make demo"]},
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["expanded_strata_tooling_failures"],
+                ["docs/EXPANDED_STRATA_TOOLING.md:make demo"],
+            )
+            self.assertIn(
+                "expanded-strata tooling failures: docs/EXPANDED_STRATA_TOOLING.md:make demo",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_study_mapping_schema_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.validate_study_mapping_schemas,
+                "validate_mapping_dir",
+                return_value=["data/study/mappings/demo.csv missing required columns: locked_at"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["study_mapping_schema_failures"],
+                ["data/study/mappings/demo.csv missing required columns: locked_at"],
+            )
+            self.assertIn(
+                "study mapping schema failures: "
+                "data/study/mappings/demo.csv missing required columns: locked_at",
                 payload["failures"],
             )
 
