@@ -803,6 +803,30 @@ outputs = [
 ]
 
 [[steps]]
+id = "analyze_wrr_variant_gap_impact"
+description = "Join current WRR blocked-pair rows to zero-hit variant leads for source-review triage."
+argv = [
+  "-m", "scripts.analyze_wrr_variant_gap_impact",
+  "--blocked-pairs", "reports/wrr_1994/wrr_defined_gap_blocked_pairs.csv",
+  "--variants", "reports/wrr_1994/wrr_zero_hit_variant_probe.csv",
+  "--out", "reports/wrr_1994/wrr_variant_gap_impact.csv",
+  "--summary-out", "reports/wrr_1994/wrr_variant_gap_impact_summary.csv",
+  "--markdown-out", "docs/WRR_VARIANT_GAP_IMPACT.md",
+  "--manifest-out", "reports/wrr_1994/wrr_variant_gap_impact.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_variant_gap_impact.py",
+  "reports/wrr_1994/wrr_defined_gap_blocked_pairs.csv",
+  "reports/wrr_1994/wrr_zero_hit_variant_probe.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_variant_gap_impact.csv",
+  "reports/wrr_1994/wrr_variant_gap_impact_summary.csv",
+  "docs/WRR_VARIANT_GAP_IMPACT.md",
+  "reports/wrr_1994/wrr_variant_gap_impact.manifest.json",
+]
+
+[[steps]]
 id = "build_wrr_method_status"
 description = "Summarize current WRR locks, open method decisions, and next actions."
 argv = [

@@ -122,6 +122,11 @@ Already implemented:
   `protocols/wrr_audit_counts.toml`, checking simple one-edit variants for
   imported WRR2 terms with zero Genesis count-smoke hits. It is source-review
   triage only; see `docs/WRR_ZERO_HIT_VARIANT_PROBE.md`.
+- WRR variant-gap impact join in
+  `scripts/analyze_wrr_variant_gap_impact.py`, wired into
+  `protocols/wrr_audit_counts.toml`, joining current blocked-pair rows to
+  zero-hit variant leads. It prioritizes source-review triage only; see
+  `docs/WRR_VARIANT_GAP_IMPACT.md`.
 - WRR2 cross-pair grid in `scripts/build_wrr_cross_pair_grid.py` and
   `protocols/wrr_cross_pair_grid.toml`, crossing every imported appellation
   with every imported date for future date-label permutation diagnostics.
