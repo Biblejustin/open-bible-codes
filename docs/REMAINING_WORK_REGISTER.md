@@ -121,6 +121,7 @@ Current pushed commits for this cleanup:
 - `71c6465` Document WRR lock options guard.
 - `9c28769` Refresh WRR lock options guard status.
 - `c9b1cf3` Guard WRR method status in preflight.
+- `2fa41bd` Document WRR method status guard.
 
 ### Formal Real Report Rerun
 
