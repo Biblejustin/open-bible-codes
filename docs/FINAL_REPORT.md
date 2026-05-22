@@ -390,7 +390,11 @@ Source artifacts:
 - `docs/WRR_CORRECTED_DISTANCE_NOTES.md`
 - `docs/WRR_CROSS_PAIR_GRID.md`
 - `docs/WRR_METHOD_STATUS.md`
+- `docs/WRR_LOCK_OPTIONS.md`
 - `docs/WRR_CLAIM_READINESS.md`
+- `docs/WRR_CLAIM_BLOCKER_PACKET.md`
+- `docs/WRR_SOURCE_POLICY_SCENARIOS.md`
+- `docs/WRR_DW_FORMULA_SENSITIVITY.md`
 
 ## Current Status Labels
 

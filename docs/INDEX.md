@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 322
+Documents indexed: 329
 
 ## Controls
 
@@ -92,18 +92,25 @@ Documents indexed: 322
 | Title | Path |
 | --- | --- |
 | ELS Hypothesis Analysis Framework | `HYPOTHESIS_ANALYSIS_FRAMEWORK.md` |
+| WRR Claim Blocker Packet | `WRR_CLAIM_BLOCKER_PACKET.md` |
 | WRR Claim Readiness | `WRR_CLAIM_READINESS.md` |
 | WRR Corrected Distance Notes | `WRR_CORRECTED_DISTANCE_NOTES.md` |
 | WRR Cross-Pair Grid | `WRR_CROSS_PAIR_GRID.md` |
 | WRR Defined Gap Reason Audit | `WRR_DEFINED_GAP_REASON_AUDIT.md` |
 | WRR Defined Pair-Set Audit | `WRR_DEFINED_PAIR_SET_AUDIT.md` |
 | WRR Direct All-Lane Corrected-Distance Diagnostic | `WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md` |
+| WRR D(w) Formula Sensitivity | `WRR_DW_FORMULA_SENSITIVITY.md` |
 | WRR Lock Options | `WRR_LOCK_OPTIONS.md` |
 | WRR Methodology Gaps | `WRR_METHODOLOGY_GAPS.md` |
 | WRR Method Status | `WRR_METHOD_STATUS.md` |
 | WRR 1994 Replication Plan | `WRR_REPLICATION_PLAN.md` |
 | WRR Source Audit | `WRR_SOURCE_AUDIT.md` |
+| WRR Source Policy Scenario Impact | `WRR_SOURCE_POLICY_SCENARIOS.md` |
+| WRR Source Review Queue | `WRR_SOURCE_REVIEW_QUEUE.md` |
+| WRR Source Visual Review Notes | `WRR_SOURCE_VISUAL_REVIEW_NOTES.md` |
+| WRR Variant Gap Impact | `WRR_VARIANT_GAP_IMPACT.md` |
 | WRR Windows Split Run | `WRR_WINDOWS_SPLIT.md` |
+| WRR Zero-Hit Variant Probe | `WRR_ZERO_HIT_VARIANT_PROBE.md` |
 
 ## Preregistrations
 
