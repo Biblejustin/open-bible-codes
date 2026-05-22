@@ -1344,6 +1344,8 @@ def write_summary(
             "- `docs/WRR_CROSS_PAIR_GRID.md`",
             "- `docs/WRR_METHOD_STATUS.md`",
             "- `docs/WRR_LOCK_OPTIONS.md`",
+            "- `docs/WRR_CLAIM_READINESS.md`",
+            "- `docs/WRR_CLAIM_BLOCKER_PACKET.md`",
             "- `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`",
             "- `docs/STUDY_LOCK_MANIFESTS.md`",
             "- `docs/PROSPECTIVE_STUDY_PREREGISTRATION_TEMPLATE.md`",
@@ -3488,7 +3490,8 @@ def wrr_audit_section(
         "Current read: WRR has repo-defined diagnostic evidence, but exact WRR",
         "reproduction remains `under_specified`. Exact reproduction still needs a",
         "source-locked pair set and source-locked `D(w)` before claim-grade WRR",
-        "language is possible.",
+        "language is possible. The claim-blocker packet gathers the current",
+        "readiness blockers, lock options, and WNP/context source-review flags.",
     ]
     return lines
 

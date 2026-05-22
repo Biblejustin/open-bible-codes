@@ -70,7 +70,8 @@ This assembly run includes:
   plus repo-defined cross-pair permutation diagnostic:
   `docs/WRR_SOURCE_AUDIT.md`, `docs/WRR_METHODOLOGY_GAPS.md`,
   `docs/WRR_CORRECTED_DISTANCE_NOTES.md`, `docs/WRR_CROSS_PAIR_GRID.md`, and
-  `docs/WRR_LOCK_OPTIONS.md`
+  `docs/WRR_LOCK_OPTIONS.md`, plus `docs/WRR_CLAIM_READINESS.md` and
+  `docs/WRR_CLAIM_BLOCKER_PACKET.md`
 - broader search/current findings writeup:
   `docs/BROADER_SEARCH_FINDINGS.md`
 - broad Hebrew modern/geopolitical version-distribution run:
@@ -211,7 +212,8 @@ The report-run summary should currently say:
   Bonferroni `rho0 = 0.00086`. Exact WRR reproduction remains under-specified
   until the source-locked pair table and `D(w)` decision are resolved. The
   explicit readiness gate is tracked in `docs/WRR_CLAIM_READINESS.md` and
-  remains blocked.
+  remains blocked; `docs/WRR_CLAIM_BLOCKER_PACKET.md` gathers the current
+  blockers, lock options, and WNP/context source-review flags.
 - `υιοσ` (huios; English: son) and `αιμα` (haima; English: blood) remain weaker hidden-path candidates because their exact
   patterns are missing from one or more compared Greek NT sources.
 - no row is claim-grade yet.
