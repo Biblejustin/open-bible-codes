@@ -138,6 +138,17 @@ and downloaded detail pages. It records source-shape counts and the current
 detail-page coverage gap without normalizing terms or testing ELS results.
 Tracked audit: `docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md`.
 
+Cities source-chain audit:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_chain_audit.toml --resume
+```
+
+This classifies Torah-code.org Cities/Aumann/Simon-McKay HTML pages and
+PDF-shaped downloads. It records wrapper downloads, parse status, and source
+anchors without normalizing city names or testing ELS results. Tracked audit:
+`docs/CITIES_SOURCE_CHAIN_AUDIT.md`.
+
 WRR imported-term Genesis count and pair smoke:
 
 ```bash

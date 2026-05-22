@@ -200,7 +200,10 @@ These are source leads, not claim-ready evidence.
   treated as missing detail-source coverage, not inferred rows.
 - Cities/Aumann/Simon-McKay: useful for a source-chain and replication-failure
   lane because the pages separate Gans/Inbal rule-based city spellings, Aumann
-  committee expert data, and Simon/McKay/Margolioth variants.
+  committee expert data, and Simon/McKay/Margolioth variants. The source-chain
+  audit in `docs/CITIES_SOURCE_CHAIN_AUDIT.md` now confirms 13 local source
+  files, 6 `.pdf`-named HTML wrappers, 1 parse-error PDF, 1 no-text PDF, and
+  7/7 protocol anchors before any city-name import.
 - Sons of Haman, Pumbedita, Auschwitz, and Ark: useful as post-WRR event/object
   claim leads. These should require stricter preregistration flags before any
   statistical interpretation because several are visibly post-hoc or
@@ -301,6 +304,12 @@ prime-ministers main page, keyword PDF, and downloaded detail pages into ignored
 source-shape CSVs and a tracked audit summary. It verifies the PDF row count,
 main-page protocol anchors, and the current detail-page coverage gap, but does
 not normalize terms, run ELS hits, or verify the reported p-level.
+
+`scripts/analyze_cities_source_chain.py` classifies the Cities/Aumann/
+Simon-McKay HTML pages and PDF-shaped downloads into ignored source-chain CSVs
+and a tracked audit summary. It verifies wrapper/parse/no-text status and key
+source anchors, but does not normalize city names, run ELS hits, or verify
+reported p-levels.
 
 `scripts/simulate_torah_code_research_model.py` turns the Torah-code.org
 research-program geometric level-1 model into a reproducible simulation harness.

@@ -599,6 +599,8 @@ Witztum birth-date source-shape audit:
 `docs/WITZTUM_BIRTH_DATES_SOURCE_AUDIT.md`.
 Israeli prime-ministers source-shape audit:
 `docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md`.
+Cities source-chain audit:
+`docs/CITIES_SOURCE_CHAIN_AUDIT.md`.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.

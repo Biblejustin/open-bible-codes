@@ -1,0 +1,56 @@
+name = "cities_source_chain_audit"
+description = "Audit Torah-code.org Cities source-chain HTML and PDF-shaped downloads without running ELS results."
+manifest_out = "reports/wrr_1994/cities_source_chain_audit_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "download_wrr_sources"
+description = "Download Torah-code.org experiment pages and source PDFs into ignored reports output."
+argv = [
+  "-m", "scripts.download_wrr_sources",
+  "--out-dir", "reports/wrr_1994",
+  "--manifest-out", "reports/wrr_1994/sources.manifest.json",
+]
+inputs = [
+  "scripts/download_wrr_sources.py",
+]
+outputs = [
+  "reports/wrr_1994/torah_code_experiment_cities.html",
+  "reports/wrr_1994/torah_code_experiment_cities_gans.html",
+  "reports/wrr_1994/torah_code_experiment_cities_aumann.html",
+  "reports/wrr_1994/torah_code_experiment_cities_simon_mckay.html",
+  "reports/wrr_1994/torah_code_experiment_cities_haralick.html",
+  "reports/wrr_1994/torah_code_experiment_cities_aumann_report.pdf",
+  "reports/wrr_1994/sources.manifest.json",
+]
+
+[[steps]]
+id = "audit_cities_source_chain"
+description = "Classify Cities source-chain files, wrapper downloads, parse status, and protocol anchors."
+argv = [
+  "-m", "scripts.analyze_cities_source_chain",
+  "--source-glob", "reports/wrr_1994/torah_code_experiment_cities*.html",
+  "--source-glob", "reports/wrr_1994/torah_code_experiment_cities*.pdf",
+  "--out", "reports/wrr_1994/cities_source_chain_files.csv",
+  "--summary-out", "reports/wrr_1994/cities_source_chain_summary.csv",
+  "--anchors-out", "reports/wrr_1994/cities_source_chain_anchors.csv",
+  "--markdown-out", "docs/CITIES_SOURCE_CHAIN_AUDIT.md",
+  "--manifest-out", "reports/wrr_1994/cities_source_chain_audit.manifest.json",
+]
+inputs = [
+  "scripts/analyze_cities_source_chain.py",
+  "reports/wrr_1994/torah_code_experiment_cities.html",
+  "reports/wrr_1994/torah_code_experiment_cities_gans.html",
+  "reports/wrr_1994/torah_code_experiment_cities_aumann.html",
+  "reports/wrr_1994/torah_code_experiment_cities_simon_mckay.html",
+  "reports/wrr_1994/torah_code_experiment_cities_haralick.html",
+  "reports/wrr_1994/torah_code_experiment_cities_aumann_report.pdf",
+]
+outputs = [
+  "reports/wrr_1994/cities_source_chain_files.csv",
+  "reports/wrr_1994/cities_source_chain_summary.csv",
+  "reports/wrr_1994/cities_source_chain_anchors.csv",
+  "docs/CITIES_SOURCE_CHAIN_AUDIT.md",
+  "reports/wrr_1994/cities_source_chain_audit.manifest.json",
+]

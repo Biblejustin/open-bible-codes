@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 122
+Protocols indexed: 123
 
 ## Analysis
 
@@ -41,6 +41,7 @@ Protocols indexed: 122
 | --- | --- | ---: | --- | --- | --- |
 | american_presidents_source_audit | Audit Torah-code.org American presidents data and transliteration-rule source PDFs with... | 2 |  | reports/wrr_1994 | `american_presidents_source_audit.toml` |
 | churchages_statistics_audit | Compare published ChurchAges observed KJV ELS counts against letter-frequency expected ... | 1 |  | reports/churchages_statistics | `churchages_statistics_audit.toml` |
+| cities_source_chain_audit | Audit Torah-code.org Cities source-chain HTML and PDF-shaped downloads without running ... | 2 |  | reports/wrr_1994 | `cities_source_chain_audit.toml` |
 | cohort_cluster_density_audit | Post-process centered occurrences for declared-cohort word-window density candidates. | 1 | terms/biblical_tribes.csv | reports/cohort_cluster_density | `cohort_cluster_density_audit.toml` |
 | gans_communities_source_audit | Audit the Gans/Inbal/Bombach communities data PDF source shape without running ELS resu... | 2 |  | reports/wrr_1994 | `gans_communities_source_audit.toml` |
 | greek_expanded_surface_letter_paths | Letter-path audit sheet for tightened Greek exact-center surface rows. | 1 |  | reports/greek_expanded_surface_letter_paths | `greek_expanded_surface_letter_paths.toml` |

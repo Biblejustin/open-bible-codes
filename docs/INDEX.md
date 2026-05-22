@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 315
+Documents indexed: 316
 
 ## Controls
 
@@ -192,6 +192,7 @@ Documents indexed: 315
 | Canonical First Summary | `CANONICAL_FIRST_SUMMARY.md` |
 | Centered Occurrence Index | `CENTERED_OCCURRENCE_INDEX.md` |
 | Chapter Position Bias | `CHAPTER_POSITION_BIAS.md` |
+| Cities Source Chain Audit | `CITIES_SOURCE_CHAIN_AUDIT.md` |
 | Claim Catalog | `CLAIM_CATALOG.md` |
 | Clean-Lock Results Summary | `CLEAN_LOCK_RESULTS_SUMMARY.md` |
 | Cohort Cluster Density Audit | `COHORT_CLUSTER_DENSITY_AUDIT.md` |

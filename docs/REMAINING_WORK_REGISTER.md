@@ -178,12 +178,20 @@ The Israeli prime-ministers source has a source-shape audit:
 - `protocols/israeli_prime_ministers_source_audit.toml`
 - `docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md`
 
+The Cities/Aumann/Simon-McKay source chain has a source-shape audit:
+
+- `scripts/analyze_cities_source_chain.py`
+- `protocols/cities_source_chain_audit.toml`
+- `docs/CITIES_SOURCE_CHAIN_AUDIT.md`
+
 The communities audit confirms 66 data records and 210 pre-filter community
 rows. The presidents audit confirms 42 data records and 292 pre-test spelling
 rows. The birth-date audit confirms two S1/S2 tables, 14 rows per table, and
 51 date forms per table. The Israeli prime-ministers audit confirms 12 PDF
 rows but only 8 downloaded detail pages with keyword labels, leaving a 4-page
-detail-source coverage gap. These lanes stay non-result-bearing. The
+detail-source coverage gap. The Cities audit confirms 13 source-chain files,
+6 `.pdf`-named HTML wrappers, 1 parse-error PDF, 1 no-text PDF, and 7/7 source
+anchors. These lanes stay non-result-bearing. The
 research-program ELS harness now includes a split-fit Fisher order-statistic
 row. Next research-program upgrade: replace the current transparent resonant
 row-width proxy with a fuller source-method reconstruction, recover
@@ -192,7 +200,9 @@ then consider real Torah-code source data, communities compactness runs,
 American-presidents transliteration experiments, or Witztum birth-date
 ELS/SL-proximity tests. Do not run an Israeli prime-ministers result protocol
 until the missing detail-page coverage is resolved or explicitly scoped out in a
-new preregistration.
+new preregistration. Do not import Cities city-name rows until the wrapped or
+missing PDF sources are recovered, or the usable HTML-only source boundary is
+explicitly locked.
 
 WRR aggregate work now has a diagnostic P1..P4 bridge:
 
