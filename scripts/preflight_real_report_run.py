@@ -26,6 +26,7 @@ from scripts import (
     check_preregistration_placeholders,
     check_prospective_study_lanes,
     check_source_basis_audit_queue,
+    check_wrr_claim_blocker_packet_doc,
     check_wrr_claim_readiness_doc,
     validate_study_mapping_schemas,
 )
@@ -352,6 +353,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_wrr_method_status.py",
     "scripts/check_wrr_claim_readiness.py",
     "scripts/check_wrr_claim_readiness_doc.py",
+    "scripts/check_wrr_claim_blocker_packet_doc.py",
     "scripts/build_wrr_claim_blocker_packet.py",
     "scripts/build_matrix_cluster_candidates.py",
     "scripts/summarize_matrix_cluster_controls.py",
@@ -506,6 +508,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_claim_readiness_doc_failures)
         )
 
+    wrr_claim_blocker_packet_doc_failures = (
+        check_wrr_claim_blocker_packet_doc.validate_blocker_packet_doc(
+            check_wrr_claim_blocker_packet_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_claim_blocker_packet_doc_failures:
+        failures.append(
+            "WRR claim-blocker packet failures: "
+            + "; ".join(wrr_claim_blocker_packet_doc_failures)
+        )
+
     stale_indexes = stale_generated_indexes(root)
     if stale_indexes:
         failures.append("stale generated indexes: " + ", ".join(stale_indexes))
@@ -536,6 +549,9 @@ def main(argv: list[str] | None = None) -> int:
         "crd_relevance_dictionary_failures": crd_relevance_dictionary_failures,
         "manual_review_queue_failures": manual_review_queue_failures,
         "wrr_claim_readiness_doc_failures": wrr_claim_readiness_doc_failures,
+        "wrr_claim_blocker_packet_doc_failures": (
+            wrr_claim_blocker_packet_doc_failures
+        ),
         "stale_generated_indexes": stale_indexes,
         "forbidden_account_terms": FORBIDDEN_ACCOUNT_TERMS,
         "forbidden_repo_hits": forbidden_repo_hits,

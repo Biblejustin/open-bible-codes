@@ -94,6 +94,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/classify_centered_relevance.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_manual_review_queue.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_wrr_claim_readiness_doc.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn(
+            "scripts/check_wrr_claim_blocker_packet_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("docs/EXPANDED_STRATA_TOOLING.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/STUDY_MAPPING_SCHEMAS.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/CRD_PREREGISTRATION.md", steps_by_id["preflight"]["inputs"])
@@ -269,6 +273,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/classify_centered_relevance.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_manual_review_queue.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_wrr_claim_readiness_doc.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn(
+            "scripts/check_wrr_claim_blocker_packet_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
         self.assertIn("docs/EXPANDED_STRATA_TOOLING.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/STUDY_MAPPING_SCHEMAS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/CRD_PREREGISTRATION.md", preflight.DEFAULT_REQUIRED_PATHS)
@@ -412,6 +420,7 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("crd_relevance_dictionary_failures", payload)
             self.assertIn("manual_review_queue_failures", payload)
             self.assertIn("wrr_claim_readiness_doc_failures", payload)
+            self.assertIn("wrr_claim_blocker_packet_doc_failures", payload)
             self.assertIn("stale_generated_indexes", payload)
 
     def test_preflight_fails_on_prospective_lane_validation_failure(self) -> None:
@@ -600,6 +609,28 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "WRR claim-readiness doc failures: "
                 "docs/WRR_CLAIM_READINESS.md missing blocked status",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_claim_blocker_packet_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_claim_blocker_packet_doc,
+                "validate_blocker_packet_doc",
+                return_value=["docs/WRR_CLAIM_BLOCKER_PACKET.md missing no-input status"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_claim_blocker_packet_doc_failures"],
+                ["docs/WRR_CLAIM_BLOCKER_PACKET.md missing no-input status"],
+            )
+            self.assertIn(
+                "WRR claim-blocker packet failures: "
+                "docs/WRR_CLAIM_BLOCKER_PACKET.md missing no-input status",
                 payload["failures"],
             )
 

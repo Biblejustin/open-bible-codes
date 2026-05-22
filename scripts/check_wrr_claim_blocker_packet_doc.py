@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+"""Validate WRR blocker packet keeps no-input claim blockers visible."""
+
+from __future__ import annotations
+
+import argparse
+import sys
+from pathlib import Path
+
+
+DEFAULT_DOC = Path("docs/WRR_CLAIM_BLOCKER_PACKET.md")
+
+REQUIRED_PHRASES = (
+    "# WRR Claim Blocker Packet",
+    "Status: no-input diagnostics exhausted for claim-grade WRR reproduction.",
+    "| Pair universe | `open` |",
+    "| D(w) skip-cap formula | `open` |",
+    "| Corrected distance c(w,w') | `smoke_only` |",
+    "| Aggregate statistic and permutation | `diagnostic_not_claim_grade` |",
+    "select pair-universe/source-review policy",
+    "select printed WRR formula or reported WRR-program formula",
+    "This is a decision packet, not a reproduction result.",
+    "No pair exclusion or D(w) formula is chosen here.",
+)
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = build_parser().parse_args(argv)
+    failures = validate_blocker_packet_doc(args.doc)
+    if failures:
+        for failure in failures:
+            print(f"WRR claim-blocker packet failure: {failure}", file=sys.stderr)
+        return 1
+    print(f"WRR claim-blocker packet ok: {args.doc}")
+    return 0
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--doc", type=Path, default=DEFAULT_DOC)
+    return parser
+
+
+def validate_blocker_packet_doc(doc: Path) -> list[str]:
+    if not doc.exists():
+        return [f"{doc} is missing"]
+    text = doc.read_text(encoding="utf-8")
+    return [
+        f"{doc} missing phrase: {phrase}"
+        for phrase in REQUIRED_PHRASES
+        if phrase not in text
+    ]
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

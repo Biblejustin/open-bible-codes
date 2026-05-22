@@ -319,6 +319,7 @@ inputs = [
   "scripts/build_wrr_method_status.py",
   "scripts/check_wrr_claim_readiness.py",
   "scripts/check_wrr_claim_readiness_doc.py",
+  "scripts/check_wrr_claim_blocker_packet_doc.py",
   "scripts/build_wrr_claim_blocker_packet.py",
   "scripts/build_matrix_cluster_candidates.py",
   "scripts/summarize_matrix_cluster_controls.py",
