@@ -21,6 +21,8 @@ REQUIRED_PHRASES = (
     "| `ocr_matched_with_variant_lead` | 32 | 45 | 948 |",
     "| `ocr_not_matched_no_variant_lead` | 44 | 45 | 0 |",
     "WNP Context For Queued Terms",
+    "visual notes show title text without visible B@L prefix",
+    "visual notes show English of-Chelm label but primary Hebrew cell only supports RBY$LMH in this pass",
     "Variant leads do not validate the original blocked pairs.",
     "Locked source rows and pair rules are still required before reproduction language.",
 )

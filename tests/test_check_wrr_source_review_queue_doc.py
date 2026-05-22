@@ -15,7 +15,12 @@ def test_missing_doc_fails(tmp_path: Path) -> None:
 
 def test_missing_queue_counts_fail(tmp_path: Path) -> None:
     doc = tmp_path / "WRR_SOURCE_REVIEW_QUEUE.md"
-    doc.write_text("\n".join(check.REQUIRED_PHRASES[:-5]) + "\n", encoding="utf-8")
+    phrases = [
+        phrase
+        for phrase in check.REQUIRED_PHRASES
+        if "ocr_not_matched_no_variant_lead" not in phrase
+    ]
+    doc.write_text("\n".join(phrases) + "\n", encoding="utf-8")
 
     failures = check.validate_source_review_queue_doc(doc)
 

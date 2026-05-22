@@ -42,6 +42,17 @@ class WrrSourceReviewQueueTests(unittest.TestCase):
         self.assertIn("primary Zacut form", note)
         self.assertIn("diagnostic flag only", action)
 
+    def test_source_review_context_mentions_visual_notes_for_chelm(self) -> None:
+        flags, note, action = queue.source_review_context(
+            ["WRR2 32"],
+            "appellation",
+            "$LMHMXLMA",
+        )
+
+        self.assertEqual(flags, "wnp_chelm_spelling_context")
+        self.assertIn("CLMA/CILMA", note)
+        self.assertIn("visual notes show English of-Chelm label", action)
+
     def test_build_queue_rows_groups_blocking_terms_for_best_run(self) -> None:
         blocked = [
             {

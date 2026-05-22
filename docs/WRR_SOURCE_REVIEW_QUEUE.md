@@ -89,11 +89,11 @@ python3 -m scripts.build_wrr_source_review_queue --blocked-pairs reports/wrr_199
 
 | Rank | Term id | Flags | Note | Action |
 | ---: | --- | --- | --- | --- |
-| 2 | `wrr2_30_app_05` | `wnp_book_title_appellation_dispute` | WNP argues Y$RLBB is a book title, not a valid Ricchi appellation. | source/title-prefix rule review before source correction |
-| 5 | `wrr2_32_app_04` | `wnp_chelm_spelling_context` | WNP discusses CLMA/CILMA spelling variants and $LMH CLMA forms. | source/pair-rule review; do not decide from OCR crop alone |
+| 2 | `wrr2_30_app_05` | `wnp_book_title_appellation_dispute` | WNP argues Y$RLBB is a book title, not a valid Ricchi appellation. | source/title-prefix rule review; visual notes show title text without visible B@L prefix |
+| 5 | `wrr2_32_app_04` | `wnp_chelm_spelling_context` | WNP discusses CLMA/CILMA spelling variants and $LMH CLMA forms. | source/pair-rule review; visual notes show English of-Chelm label but primary Hebrew cell only supports RBY$LMH in this pass |
 | 7 | `wrr2_27_app_06` | `wnp_disputed_zacut_appellation` | WNP argues primary Zacut form is ZKWT and removes M$HZKWTA/M$HZKWTW. | diagnostic flag only; do not exclude without source-lock policy |
 | 12 | `wrr2_27_app_05` | `wnp_disputed_zacut_appellation` | WNP argues primary Zacut form is ZKWT and removes M$HZKWTA/M$HZKWTW. | diagnostic flag only; do not exclude without source-lock policy |
-| 83 | `wrr2_32_app_05` | `wnp_chelm_spelling_context` | WNP discusses CLMA/CILMA spelling variants and $LMH CLMA forms. | source/pair-rule review; do not decide from OCR crop alone |
+| 83 | `wrr2_32_app_05` | `wnp_chelm_spelling_context` | WNP discusses CLMA/CILMA spelling variants and $LMH CLMA forms. | source/pair-rule review; visual notes show English of-Chelm label but primary Hebrew cell only supports RBY$LMH in this pass |
 
 ## Interpretation
 

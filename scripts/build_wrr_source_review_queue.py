@@ -96,17 +96,17 @@ WNP_CONTEXT = {
     ("WRR2 30", "appellation", "B@LY$RLBB"): (
         "wnp_book_title_appellation_dispute",
         "WNP argues Y$RLBB is a book title, not a valid Ricchi appellation.",
-        "source/title-prefix rule review before source correction",
+        "source/title-prefix rule review; visual notes show title text without visible B@L prefix",
     ),
     ("WRR2 32", "appellation", "$LMHMXLMA"): (
         "wnp_chelm_spelling_context",
         "WNP discusses CLMA/CILMA spelling variants and $LMH CLMA forms.",
-        "source/pair-rule review; do not decide from OCR crop alone",
+        "source/pair-rule review; visual notes show English of-Chelm label but primary Hebrew cell only supports RBY$LMH in this pass",
     ),
     ("WRR2 32", "appellation", "$LMHMX@LMA"): (
         "wnp_chelm_spelling_context",
         "WNP discusses CLMA/CILMA spelling variants and $LMH CLMA forms.",
-        "source/pair-rule review; do not decide from OCR crop alone",
+        "source/pair-rule review; visual notes show English of-Chelm label but primary Hebrew cell only supports RBY$LMH in this pass",
     ),
 }
 
