@@ -55,18 +55,18 @@ class WrrMethodStatusTests(unittest.TestCase):
             },
             table2_ocr_row={
                 "total_terms": "205",
-                "matched_terms": "132",
+                "matched_terms": "135",
                 "appellation_terms": "174",
-                "matched_appellation_terms": "103",
+                "matched_appellation_terms": "106",
                 "date_terms": "31",
                 "matched_date_terms": "29",
                 "status": "ocr_probe_not_verification",
             },
             table2_row_ocr_row={
                 "total_terms": "205",
-                "matched_terms": "128",
+                "matched_terms": "132",
                 "appellation_terms": "174",
-                "matched_appellation_terms": "99",
+                "matched_appellation_terms": "103",
                 "date_terms": "31",
                 "matched_date_terms": "29",
                 "detected_row_markers": "31",
@@ -123,8 +123,8 @@ class WrrMethodStatusTests(unittest.TestCase):
         by_area = {row["decision_area"]: row for row in rows}
         self.assertIn("32/32 primary Table 2", by_area["WRR2 term source"]["evidence"])
         self.assertIn("0 primary Hebrew cells verified", by_area["WRR2 term source"]["evidence"])
-        self.assertIn("OCR probe matched 132/205", by_area["WRR2 term source"]["evidence"])
-        self.assertIn("row OCR probe matched 128/205", by_area["WRR2 term source"]["evidence"])
+        self.assertIn("OCR probe matched 135/205", by_area["WRR2 term source"]["evidence"])
+        self.assertIn("row OCR probe matched 132/205", by_area["WRR2 term source"]["evidence"])
         self.assertIn("31 detected row markers", by_area["WRR2 term source"]["evidence"])
         self.assertEqual(by_area["WRR2 term source"]["status"], "working_source_locked")
         self.assertIn("User authorized ANU/McKay WRR2", by_area["WRR2 term source"]["current_read"])
