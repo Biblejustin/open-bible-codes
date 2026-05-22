@@ -169,9 +169,11 @@ Use cautious language:
   term, 43 source-transcription terms, 3 page-image near-match terms, and 11
   method/pair-universe terms; the claim-blocker packet mirrors top term
   targets, row clusters, page-image near matches, and method/pair-universe
-  counts, and the row-review checklist keeps 22 row clusters in pending
-  manual source-lock state; the remaining-lane checklist keeps 3 page-image
-  terms and 11 method/pair-universe terms in pending manual lock state;
+  counts, the source-policy checklist keeps the Chełm source-policy/pair-rule
+  target in pending manual lock state, and the row-review checklist keeps 22
+  row clusters in pending manual source-lock state; the remaining-lane
+  checklist keeps 3 page-image terms and 11 method/pair-universe terms in
+  pending manual lock state;
 - current accepted repo-defined 999,999 date-label permutation result keeps the
   selected full source universe, uses the cap-1000 corrected-distance field,
   observes 182 rows and 72 defined `c(w,w')` values, and reports Bonferroni

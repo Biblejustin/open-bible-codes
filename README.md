@@ -649,6 +649,10 @@ WRR source-policy evidence packet:
 `docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md`.
 It ties the Chełm source-policy residual to local WNP context, row OCR, and
 scenario status without choosing a correction or exclusion.
+WRR source-policy review checklist:
+`docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md`.
+It keeps the Chełm source-policy/pair-rule target in pending manual lock state
+with required decision-record fields.
 WRR source-transcription evidence packet:
 `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md`.
 It groups 43 row-transcription residual terms into 22 row clusters for

@@ -42,6 +42,7 @@ from scripts import (
     check_wrr_wayback_source_recovery_probe_doc,
     check_wrr_method_pair_universe_evidence_packet_doc,
     check_wrr_source_policy_evidence_packet_doc,
+    check_wrr_source_policy_review_checklist_doc,
     check_wrr_source_transcription_evidence_packet_doc,
     check_wrr_source_transcription_row_review_checklist_doc,
     check_wrr_remaining_lane_evidence_packets_doc,
@@ -199,6 +200,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_CLAIM_READINESS.md",
     "docs/WRR_CLAIM_BLOCKER_PACKET.md",
     "docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md",
+    "docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md",
     "docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md",
     "docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md",
     "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md",
@@ -406,6 +408,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/analyze_wrr_source_policy_scenarios.py",
     "scripts/build_wrr_source_policy_evidence_packet.py",
     "scripts/check_wrr_source_policy_evidence_packet_doc.py",
+    "scripts/build_wrr_source_policy_review_checklist.py",
+    "scripts/check_wrr_source_policy_review_checklist_doc.py",
     "scripts/build_wrr_source_transcription_evidence_packet.py",
     "scripts/check_wrr_source_transcription_evidence_packet_doc.py",
     "scripts/build_wrr_source_transcription_row_review_checklist.py",
@@ -681,6 +685,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_source_policy_evidence_packet_doc_failures)
         )
 
+    wrr_source_policy_review_checklist_doc_failures = (
+        check_wrr_source_policy_review_checklist_doc.validate_source_policy_review_checklist_doc(
+            check_wrr_source_policy_review_checklist_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_source_policy_review_checklist_doc_failures:
+        failures.append(
+            "WRR source-policy checklist failures: "
+            + "; ".join(wrr_source_policy_review_checklist_doc_failures)
+        )
+
     wrr_source_transcription_evidence_packet_doc_failures = (
         check_wrr_source_transcription_evidence_packet_doc.validate_source_transcription_evidence_packet_doc(
             check_wrr_source_transcription_evidence_packet_doc.DEFAULT_DOC
@@ -883,6 +898,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "wrr_source_policy_evidence_packet_doc_failures": (
             wrr_source_policy_evidence_packet_doc_failures
+        ),
+        "wrr_source_policy_review_checklist_doc_failures": (
+            wrr_source_policy_review_checklist_doc_failures
         ),
         "wrr_source_transcription_evidence_packet_doc_failures": (
             wrr_source_transcription_evidence_packet_doc_failures

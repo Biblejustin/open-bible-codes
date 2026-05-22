@@ -1009,6 +1009,30 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_source_policy_review_checklist"
+description = "Build no-input checklist for WRR source-policy and Chełm pair-rule review."
+argv = [
+  "-m", "scripts.build_wrr_source_policy_review_checklist",
+  "--packet", "reports/wrr_1994/wrr_source_policy_evidence_packet.csv",
+  "--context", "reports/wrr_1994/wrr_source_policy_evidence_context.csv",
+  "--summary", "reports/wrr_1994/wrr_source_policy_evidence_summary.csv",
+  "--out", "reports/wrr_1994/wrr_source_policy_review_checklist.csv",
+  "--markdown-out", "docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md",
+  "--manifest-out", "reports/wrr_1994/wrr_source_policy_review_checklist.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_source_policy_review_checklist.py",
+  "reports/wrr_1994/wrr_source_policy_evidence_packet.csv",
+  "reports/wrr_1994/wrr_source_policy_evidence_context.csv",
+  "reports/wrr_1994/wrr_source_policy_evidence_summary.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_source_policy_review_checklist.csv",
+  "docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md",
+  "reports/wrr_1994/wrr_source_policy_review_checklist.manifest.json",
+]
+
+[[steps]]
 id = "build_wrr_source_transcription_evidence_packet"
 description = "Build diagnostic row-transcription evidence packet for residual WRR action targets."
 argv = [

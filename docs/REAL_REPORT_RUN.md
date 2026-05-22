@@ -72,6 +72,7 @@ This assembly run includes:
   `docs/WRR_CORRECTED_DISTANCE_NOTES.md`, `docs/WRR_CROSS_PAIR_GRID.md`, and
   `docs/WRR_LOCK_OPTIONS.md`, plus `docs/WRR_SOURCE_POLICY_SCENARIOS.md`,
   `docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md`,
+  `docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md`,
   `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md`,
   `docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md`,
   `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md`,
@@ -154,6 +155,8 @@ It requires:
 - WRR claim-blocker packet states no-input limits, keeps no-correction and
   no-exclusion boundaries visible, and summarizes the residual term, row,
   page-image, and method/pair-universe review lanes;
+- WRR source-policy checklist keeps the Chełm source-policy/pair-rule target
+  in pending manual lock state with required decision-record fields;
 - WRR source-transcription row checklist keeps the 22 row clusters in
   pending manual source-lock state with required decision-record fields;
 - WRR remaining-lane checklist keeps 3 page-image terms and 11
@@ -260,7 +263,9 @@ The report-run summary should currently say:
   page-image near matches, and method/pair-universe counts;
   `docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md` ties the Chełm source-policy
   residual to WNP context, row OCR, and scenario status without changing the
-  source lock; `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md` groups the
+  source lock; `docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md` keeps that
+  source-policy/pair-rule target in pending manual lock state;
+  `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md` groups the
   43 transcription/alignment terms into 22 row clusters for primary row review;
   `docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md` keeps those 22 row
   clusters in pending manual source-lock state;

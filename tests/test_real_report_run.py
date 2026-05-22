@@ -85,6 +85,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md",
             steps_by_id["preflight"]["inputs"],
         )
@@ -133,6 +137,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/build_wrr_source_policy_evidence_packet.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_wrr_source_policy_review_checklist.py",
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
@@ -189,6 +197,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/wrr_1994/wrr_source_policy_evidence_summary.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_source_policy_review_checklist.csv",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
@@ -253,6 +265,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_source_policy_evidence_packet_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_source_policy_review_checklist_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -616,6 +632,18 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/build_wrr_source_policy_review_checklist.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_source_policy_review_checklist_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -855,6 +883,7 @@ class RealReportRunTests(unittest.TestCase):
                 "wrr_source_transcription_row_review_checklist_doc_failures",
                 payload,
             )
+            self.assertIn("wrr_source_policy_review_checklist_doc_failures", payload)
             self.assertIn("wrr_remaining_lane_review_checklist_doc_failures", payload)
             self.assertIn("wrr_lock_options_doc_failures", payload)
             self.assertIn("wrr_method_status_doc_failures", payload)
@@ -1244,6 +1273,28 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "WRR source-policy evidence packet failures: "
                 "docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md missing boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_source_policy_checklist_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_source_policy_review_checklist_doc,
+                "validate_source_policy_review_checklist_doc",
+                return_value=["docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md missing boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_source_policy_review_checklist_doc_failures"],
+                ["docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md missing boundary"],
+            )
+            self.assertIn(
+                "WRR source-policy checklist failures: "
+                "docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md missing boundary",
                 payload["failures"],
             )
 
