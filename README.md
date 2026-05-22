@@ -630,8 +630,12 @@ KJV + Apocrypha bridge prospective candidates:
 `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md`.
 KJV + Apocrypha bridge prospective shuffled controls:
 `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md`.
+KJV + Apocrypha bridge prospective non-Bible insertion controls:
+`docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md`.
 KJV + Apocrypha bridge prospective shuffled-control protocol:
 `protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml`.
+KJV + Apocrypha bridge prospective non-Bible control protocol:
+`protocols/kjv_apocrypha_bridge_prospective_nonbible_controls.toml`.
 KJV + Apocrypha bridge shuffled controls:
 `docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md`.
 KJV + Apocrypha expanded 50-sample bridge shuffled controls:
@@ -664,6 +668,9 @@ proper names before any observed/control outputs under
 `protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml`. The locked
 run found 1 observed bridge row (`tobit`), 0 terms with
 Benjamini-Hochberg `q_ge <= 0.05`, and 0 terms above every shuffled sample.
+The secondary non-Bible insertion check found 1 of 3 controls at or above the
+observed total because the Moby Dick replacement block also produced 1 `tobit`
+bridge row.
 
 Formal report assembly run:
 

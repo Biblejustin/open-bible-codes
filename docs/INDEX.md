@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 310
+Documents indexed: 311
 
 ## Controls
 
@@ -46,6 +46,7 @@ Documents indexed: 310
 | Hebrew Screening Controlled Review | `HEBREW_SCREENING_CONTROLLED_REVIEW.md` |
 | KJVA Confirmatory Apocrypha Bridge Term Shuffled Controls (5000 Samples) | `KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md` |
 | KJVA Prospective Apocrypha Bridge Term Shuffled Controls (5000 Samples) | `KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md` |
+| KJVA Prospective Apocrypha Bridge Controls | `KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md` |
 | KJVA Apocrypha Bridge Controls | `KJV_APOCRYPHA_BRIDGE_CONTROLS.md` |
 | KJVA Apocrypha Bridge Shuffled Controls (5 Samples) | `KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md` |
 | KJVA Apocrypha Bridge Shuffled Controls (100 Samples) | `KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md` |

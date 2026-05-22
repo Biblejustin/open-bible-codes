@@ -179,6 +179,7 @@ inputs = [
   "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md",
   "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md",
   "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md",
+  "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md",
   "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md",
   "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md",
   "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md",
@@ -203,6 +204,7 @@ inputs = [
   "protocols/kjv_apocrypha_bridge_term_shuffled_controls_1000.toml",
   "protocols/kjv_apocrypha_bridge_confirmatory_controls_5000.toml",
   "protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml",
+  "protocols/kjv_apocrypha_bridge_prospective_nonbible_controls.toml",
   "protocols/external_claim_source_counts.toml",
   "protocols/external_claim_source_all_codes_collection.toml",
   "docs/EXTERNAL_CLAIM_SOURCE_COUNTS.md",
@@ -1047,6 +1049,24 @@ inputs = [
 outputs = ["reports/kjv_apocrypha_bridge_prospective/protocol_run.manifest.json"]
 
 [[steps]]
+id = "kjv_apocrypha_bridge_prospective_nonbible_controls"
+description = "Run secondary non-Bible KJVA bridge prospective insertion controls."
+argv = ["-m", "scripts.run_protocol", "protocols/kjv_apocrypha_bridge_prospective_nonbible_controls.toml", "--resume"]
+inputs = [
+  "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md",
+  "protocols/kjv_apocrypha_bridge_prospective_nonbible_controls.toml",
+  "terms/kjv_apocrypha_bridge_prospective_terms.csv",
+  "scripts/analyze_apocrypha_bridge_controls.py",
+  "scripts/analyze_apocrypha_bridge_candidates.py",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "configs/nonbible_english_pg_shakespeare.toml",
+  "configs/nonbible_english_pg_war_and_peace.toml",
+  "configs/nonbible_english_pg_moby_dick.toml",
+  "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
+]
+outputs = ["reports/kjv_apocrypha_bridge_prospective_nonbible_controls/protocol_run.manifest.json"]
+
+[[steps]]
 id = "external_claim_source_counts"
 description = "Refresh external-source claim and critique count baselines."
 argv = ["-m", "scripts.run_protocol", "protocols/external_claim_source_counts.toml", "--resume"]
@@ -1295,6 +1315,9 @@ inputs = [
   "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md",
   "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md",
   "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md",
+  "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/control_summary.csv",
+  "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/manifest.json",
+  "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md",
   "reports/external_claim_source_counts/summary.csv",
   "reports/external_claim_source_counts/summary.manifest.json",
   "reports/external_claim_source_all_codes/surface_all_codes_summary.csv",

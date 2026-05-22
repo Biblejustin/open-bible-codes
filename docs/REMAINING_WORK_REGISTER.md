@@ -252,6 +252,8 @@ outputs:
 - `protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml`
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md`
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md`
+- `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md`
+- `protocols/kjv_apocrypha_bridge_prospective_nonbible_controls.toml`
 
 Candidate inputs:
 
@@ -261,10 +263,14 @@ Candidate inputs:
 
 Prospective result: 7 registered terms, 1 observed bridge row (`tobit`), 0
 terms with Benjamini-Hochberg `q_ge <= 0.05`, and 0 terms above every shuffled
-sample. This is negative under the registered control rule.
+sample. This is negative under the registered shuffled-insertion control rule.
+The secondary non-Bible insertion control is also cautionary: 1 of 3 non-Bible
+controls is at or above the observed total because the Moby Dick replacement
+block also produced 1 `tobit` bridge row.
 
-Current next no-input step: add non-Bible insertion controls for the KJVA
-boundary model before any stronger apocrypha/deuterocanon claim language.
+Current next no-input step: look for independent replication designs or other
+locked prospective lanes; no KJVA prospective bridge claim language is
+supported by the current controls.
 
 Covered by the prospective lock:
 
@@ -275,7 +281,8 @@ Covered by the prospective lock:
 
 Still needed before claim language:
 
-- non-Bible insertion controls.
+- independent replication or a new locked prospective design that survives
+  shuffled and non-Bible insertion controls.
 
 ### 5. Manual Review Queue
 

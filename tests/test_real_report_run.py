@@ -74,7 +74,12 @@ class RealReportRunTests(unittest.TestCase):
             "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md",
             steps_by_id["preflight"]["inputs"],
         )
+        self.assertIn(
+            "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("kjv_apocrypha_bridge_prospective_controls", steps_by_id)
+        self.assertIn("kjv_apocrypha_bridge_prospective_nonbible_controls", steps_by_id)
         self.assertIn("all_codes_followup_letter_paths", steps_by_id)
         self.assertIn("all_codes_followup_context", steps_by_id)
         self.assertIn("all_codes_followup_extensions", steps_by_id)
@@ -149,6 +154,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
+            "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/control_summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
             "docs/ALL_CODES_FOLLOWUP_LETTER_PATHS.md",
             steps_by_id["preflight"]["inputs"],
         )
@@ -217,7 +226,15 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "protocols/kjv_apocrypha_bridge_prospective_nonbible_controls.toml",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(

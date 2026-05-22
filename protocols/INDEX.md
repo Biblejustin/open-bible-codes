@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 117
+Protocols indexed: 118
 
 ## Analysis
 
@@ -94,7 +94,7 @@ Protocols indexed: 117
 | matrix_cluster_candidates | Opt-in matrix-neighborhood candidate extraction over CRD raw centered ELS hit rows with... | 1 |  | reports/matrix_clusters | `matrix_cluster_candidates.toml` |
 | matrix_cluster_control_summary | Relation-specific Bible-vs-secular-control summary for matrix cluster candidates. | 1 |  | reports/matrix_clusters | `matrix_cluster_control_summary.toml` |
 | nonbible_control_counts | Skip 2..100 screening counts against large non-Bible Hebrew, Greek, and English control... | 1 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_tribes.csv, t... | reports/nonbible_controls | `nonbible_control_counts.toml` |
-| real_report_run | Formal report assembly run over locked STEP_TAHOT, Greek exact-center, doxa follow-ups,... | 50 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports, reports/all_codes_compound_extension_confirmatory, reports/all_codes_compound_... | `real_report_run.toml` |
+| real_report_run | Formal report assembly run over locked STEP_TAHOT, Greek exact-center, doxa follow-ups,... | 51 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports, reports/all_codes_compound_extension_confirmatory, reports/all_codes_compound_... | `real_report_run.toml` |
 | sblgnt_source_only_exact_center | Post-discovery 1000/1000 controls for SBLGNT source-only exact-center extension rows. | 2 |  | reports/sblgnt_source_only_exact_center | `sblgnt_source_only_exact_center.toml` |
 | step_tahot_control_policy_hits | Audit STEP_TAHOT-only control rows against TAHOT source-type policy. | 2 |  | reports/step_tahot_control_policy_hits, reports/step_tahot_control_version_presence | `step_tahot_control_policy_hits.toml` |
 | step_tahot_control_version_presence | Capped exact ELS hit-pattern presence for Hebrew null/frequency controls across MT-fami... | 1 | terms/frequency_anchors.csv, terms/null_controls.csv | reports/step_tahot_control_version_presence | `step_tahot_control_version_presence.toml` |
@@ -137,6 +137,7 @@ Protocols indexed: 117
 | hebrew_modern_geopolitical_prospective | Locked Hebrew modern/geopolitical exact-version presence and representative-control rep... | 4 | terms/hebrew_modern_geopolitical_prospective_terms.csv | reports/hebrew_modern_geopolitical_prospective | `hebrew_modern_geopolitical_prospective.toml` |
 | hebrew_theology_prospective | Locked Hebrew theology registered follow-up exact-version and representative-control sc... | 4 | terms/hebrew_theology_prospective_terms.csv | reports/hebrew_theology_prospective | `hebrew_theology_prospective.toml` |
 | kjv_apocrypha_bridge_prospective_controls_5000 | Locked 5000-sample prospective shuffled controls for fixed KJVA apocrypha/deuterocanon ... | 2 | terms/kjv_apocrypha_bridge_prospective_terms.csv | reports/kjv_apocrypha_bridge_prospective | `kjv_apocrypha_bridge_prospective_controls_5000.toml` |
+| kjv_apocrypha_bridge_prospective_nonbible_controls | Secondary non-Bible insertion controls for the fixed KJVA apocrypha/deuterocanon prospe... | 1 | terms/kjv_apocrypha_bridge_prospective_terms.csv | reports/kjv_apocrypha_bridge_prospective_nonbible_controls | `kjv_apocrypha_bridge_prospective_nonbible_controls.toml` |
 
 ## Replication
 

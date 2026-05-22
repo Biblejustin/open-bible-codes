@@ -120,6 +120,12 @@ KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_TERM_SUMMARY = Path(
 KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_MANIFEST = Path(
     "reports/kjv_apocrypha_bridge_prospective/manifest.json"
 )
+KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_SUMMARY = Path(
+    "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/control_summary.csv"
+)
+KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_MANIFEST = Path(
+    "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/manifest.json"
+)
 EXTERNAL_CLAIM_COUNTS_SUMMARY = Path("reports/external_claim_source_counts/summary.csv")
 EXTERNAL_CLAIM_COUNTS_MANIFEST = Path(
     "reports/external_claim_source_counts/summary.manifest.json"
@@ -265,6 +271,12 @@ def main(argv: list[str] | None = None) -> int:
     kjva_apocrypha_bridge_prospective_manifest = read_json(
         args.kjva_apocrypha_bridge_prospective_manifest
     )
+    kjva_apocrypha_bridge_prospective_nonbible_rows = read_rows(
+        args.kjva_apocrypha_bridge_prospective_nonbible_summary
+    )
+    kjva_apocrypha_bridge_prospective_nonbible_manifest = read_json(
+        args.kjva_apocrypha_bridge_prospective_nonbible_manifest
+    )
     external_claim_counts_rows = read_rows(args.external_claim_counts_summary)
     external_claim_counts_manifest = read_json(args.external_claim_counts_manifest)
     external_claim_all_codes_rows = read_rows(args.external_claim_all_codes_summary)
@@ -372,6 +384,8 @@ def main(argv: list[str] | None = None) -> int:
         kjva_apocrypha_bridge_confirmatory_manifest=kjva_apocrypha_bridge_confirmatory_manifest,
         kjva_apocrypha_bridge_prospective_rows=kjva_apocrypha_bridge_prospective_rows,
         kjva_apocrypha_bridge_prospective_manifest=kjva_apocrypha_bridge_prospective_manifest,
+        kjva_apocrypha_bridge_prospective_nonbible_rows=kjva_apocrypha_bridge_prospective_nonbible_rows,
+        kjva_apocrypha_bridge_prospective_nonbible_manifest=kjva_apocrypha_bridge_prospective_nonbible_manifest,
         external_claim_counts_rows=external_claim_counts_rows,
         external_claim_counts_manifest=external_claim_counts_manifest,
         external_claim_all_codes_rows=external_claim_all_codes_rows,
@@ -465,6 +479,8 @@ def main(argv: list[str] | None = None) -> int:
         kjva_apocrypha_bridge_confirmatory_manifest=kjva_apocrypha_bridge_confirmatory_manifest,
         kjva_apocrypha_bridge_prospective_rows=kjva_apocrypha_bridge_prospective_rows,
         kjva_apocrypha_bridge_prospective_manifest=kjva_apocrypha_bridge_prospective_manifest,
+        kjva_apocrypha_bridge_prospective_nonbible_rows=kjva_apocrypha_bridge_prospective_nonbible_rows,
+        kjva_apocrypha_bridge_prospective_nonbible_manifest=kjva_apocrypha_bridge_prospective_nonbible_manifest,
         external_claim_counts_rows=external_claim_counts_rows,
         external_claim_counts_manifest=external_claim_counts_manifest,
         external_claim_all_codes_rows=external_claim_all_codes_rows,
@@ -745,6 +761,16 @@ def build_parser() -> argparse.ArgumentParser:
         default=KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_MANIFEST,
     )
     parser.add_argument(
+        "--kjva-apocrypha-bridge-prospective-nonbible-summary",
+        type=Path,
+        default=KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_SUMMARY,
+    )
+    parser.add_argument(
+        "--kjva-apocrypha-bridge-prospective-nonbible-manifest",
+        type=Path,
+        default=KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_MANIFEST,
+    )
+    parser.add_argument(
         "--external-claim-counts-summary",
         type=Path,
         default=EXTERNAL_CLAIM_COUNTS_SUMMARY,
@@ -908,6 +934,8 @@ def write_summary(
     kjva_apocrypha_bridge_confirmatory_manifest: dict[str, Any],
     kjva_apocrypha_bridge_prospective_rows: list[dict[str, str]],
     kjva_apocrypha_bridge_prospective_manifest: dict[str, Any],
+    kjva_apocrypha_bridge_prospective_nonbible_rows: list[dict[str, str]],
+    kjva_apocrypha_bridge_prospective_nonbible_manifest: dict[str, Any],
     external_claim_counts_rows: list[dict[str, str]],
     external_claim_counts_manifest: dict[str, Any],
     external_claim_all_codes_rows: list[dict[str, str]],
@@ -1231,6 +1259,7 @@ def write_summary(
         kjva_apocrypha_bridge_prospective_section(
             kjva_apocrypha_bridge_prospective_rows,
             kjva_apocrypha_bridge_prospective_manifest,
+            kjva_apocrypha_bridge_prospective_nonbible_rows,
         )
     )
     lines.extend(
@@ -1372,6 +1401,7 @@ def write_summary(
             "- `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md`",
             "- `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md`",
             "- `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md`",
+            "- `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md`",
             "- `docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md`",
             "- `docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md`",
             "- `docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md`",
@@ -1380,15 +1410,16 @@ def write_summary(
             "- `protocols/kjv_apocrypha_bridge_term_shuffled_controls_1000.toml`",
             "- `protocols/kjv_apocrypha_bridge_confirmatory_controls_5000.toml`",
             "- `protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml`",
+            "- `protocols/kjv_apocrypha_bridge_prospective_nonbible_controls.toml`",
             "- `docs/VERSION_DISTRIBUTION_INDEX.md`",
             "- `claims/claim_catalog.csv`",
             "",
             "## Next Formal Step",
             "",
-            "Before moving from review candidates to claims, add non-Bible",
-            "insertion controls and an independent replication design. The fresh",
-            "KJVA prospective bridge run is locked and negative under the registered",
-            "control rule, so it does not supply claim-grade support.",
+            "Before moving from review candidates to claims, require independent",
+            "replication or a new locked prospective design that survives both",
+            "shuffled and non-Bible insertion controls. The fresh KJVA prospective",
+            "bridge run is negative under both control families.",
         ]
     )
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -1465,6 +1496,8 @@ def write_manifest(
     kjva_apocrypha_bridge_confirmatory_manifest: dict[str, Any],
     kjva_apocrypha_bridge_prospective_rows: list[dict[str, str]],
     kjva_apocrypha_bridge_prospective_manifest: dict[str, Any],
+    kjva_apocrypha_bridge_prospective_nonbible_rows: list[dict[str, str]],
+    kjva_apocrypha_bridge_prospective_nonbible_manifest: dict[str, Any],
     external_claim_counts_rows: list[dict[str, str]],
     external_claim_counts_manifest: dict[str, Any],
     external_claim_all_codes_rows: list[dict[str, str]],
@@ -1605,6 +1638,12 @@ def write_manifest(
             ),
             "kjva_apocrypha_bridge_prospective_manifest": str(
                 args.kjva_apocrypha_bridge_prospective_manifest
+            ),
+            "kjva_apocrypha_bridge_prospective_nonbible_summary": str(
+                args.kjva_apocrypha_bridge_prospective_nonbible_summary
+            ),
+            "kjva_apocrypha_bridge_prospective_nonbible_manifest": str(
+                args.kjva_apocrypha_bridge_prospective_nonbible_manifest
             ),
             "external_claim_counts_summary": str(args.external_claim_counts_summary),
             "external_claim_counts_manifest": str(args.external_claim_counts_manifest),
@@ -1814,6 +1853,13 @@ def write_manifest(
         ),
         "kjva_apocrypha_bridge_prospective_terms_q_le_0_05": kjva_apocrypha_bridge_prospective_manifest.get(
             "terms_q_le_0_05", 0
+        ),
+        "kjva_apocrypha_bridge_prospective_nonbible_controls": len(
+            kjva_apocrypha_bridge_prospective_nonbible_rows
+        ),
+        "kjva_apocrypha_bridge_prospective_nonbible_controls_ge_observed": sum(
+            int_value(row, "bridge_rows") >= 1
+            for row in kjva_apocrypha_bridge_prospective_nonbible_rows
         ),
         "external_claim_count_summary_rows": len(external_claim_counts_rows),
         "external_claim_count_term_sets": len(
@@ -2184,6 +2230,7 @@ def kjva_apocrypha_bridge_confirmatory_section(
 def kjva_apocrypha_bridge_prospective_section(
     rows: list[dict[str, str]],
     manifest: dict[str, Any],
+    nonbible_rows: list[dict[str, str]],
 ) -> list[str]:
     rows_above_all = [row for row in rows if row.get("observed_gt_sample_max") == "True"]
     rows_q_le_01 = [
@@ -2200,6 +2247,21 @@ def kjva_apocrypha_bridge_prospective_section(
             row.get("normalized_term", ""),
         ),
     )
+    observed_total = max((int_value(row, "observed_bridge_rows") for row in rows), default=0)
+    nonbible_max = max((int_value(row, "bridge_rows") for row in nonbible_rows), default=0)
+    nonbible_max_labels = [
+        row.get("control_label", "")
+        for row in nonbible_rows
+        if int_value(row, "bridge_rows") == nonbible_max
+    ]
+    nonbible_ge_observed = sum(
+        int_value(row, "bridge_rows") >= observed_total for row in nonbible_rows
+    )
+    nonbible_max_display = (
+        f"{nonbible_max:,} ({', '.join(label for label in nonbible_max_labels if label)})"
+        if nonbible_rows
+        else "0"
+    )
     lines = [
         "",
         "## KJVA Apocrypha Bridge Prospective Controls",
@@ -2207,15 +2269,20 @@ def kjva_apocrypha_bridge_prospective_section(
         "This is the fresh prospective KJVA bridge run over 7 fixed",
         "apocrypha/deuterocanon proper names. The observed scan found one bridge",
         "row, for `tobit`, and the 5000-sample shuffled-insertion control did not",
-        "produce a prospective review candidate.",
+        "produce a prospective review candidate. Secondary non-Bible insertion",
+        "controls also do not support claim language: one same-length replacement",
+        "block matched the observed total with one `tobit` bridge row.",
         "",
         "| Metric | Count |",
         "| --- | ---: |",
         f"| Registered terms reviewed | {len(rows):,} |",
+        f"| Observed bridge rows | {observed_total:,} |",
         f"| Shuffled samples | {int_value(manifest, 'samples'):,} |",
         f"| Terms with q_ge <= 0.01 | {len(rows_q_le_01):,} |",
         f"| Terms with q_ge <= 0.05 | {len(rows_q_le_05):,} |",
         f"| Terms above every shuffled sample | {len(rows_above_all):,} |",
+        f"| Non-Bible controls >= observed total | {nonbible_ge_observed:,} / {len(nonbible_rows):,} |",
+        f"| Max non-Bible control rows | {nonbible_max_display} |",
         f"| Corpus letters | {int_value(manifest, 'corpus_letters'):,} |",
         "",
         "| Rank | Term | Observed | Shuffled max | p_ge | q_ge | Delta |",

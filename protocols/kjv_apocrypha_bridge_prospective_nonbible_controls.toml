@@ -1,0 +1,49 @@
+name = "kjv_apocrypha_bridge_prospective_nonbible_controls"
+description = "Secondary non-Bible insertion controls for the fixed KJVA apocrypha/deuterocanon prospective bridge cohort."
+manifest_out = "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "kjva_bridge_prospective_nonbible_controls"
+description = "Compare KJVA prospective bridge candidates with same-length non-Bible English replacement blocks."
+argv = [
+  "-m", "scripts.analyze_apocrypha_bridge_controls",
+  "--canonical-label", "KJVA Prospective",
+  "--canonical-config", "configs/example_ebible_engkjv_apocrypha.toml",
+  "--terms", "terms/kjv_apocrypha_bridge_prospective_terms.csv",
+  "--control", "SHAKESPEARE=configs/nonbible_english_pg_shakespeare.toml",
+  "--control", "WAR_PEACE=configs/nonbible_english_pg_war_and_peace.toml",
+  "--control", "MOBY_DICK=configs/nonbible_english_pg_moby_dick.toml",
+  "--observed", "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
+  "--min-skip", "2",
+  "--max-skip", "250",
+  "--direction", "both",
+  "--min-term-length", "4",
+  "--jobs", "0",
+  "--out", "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/control_summary.csv",
+  "--term-out", "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/term_summary.csv",
+  "--markdown-out", "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md",
+  "--manifest-out", "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/manifest.json",
+]
+inputs = [
+  "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md",
+  "scripts/analyze_apocrypha_bridge_controls.py",
+  "scripts/analyze_apocrypha_bridge_candidates.py",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "configs/nonbible_english_pg_shakespeare.toml",
+  "configs/nonbible_english_pg_war_and_peace.toml",
+  "configs/nonbible_english_pg_moby_dick.toml",
+  "data/processed/ebible/eng-kjv.csv",
+  "data/processed/nonbible_controls/english_pg_shakespeare.txt",
+  "data/processed/nonbible_controls/english_pg_war_and_peace.txt",
+  "data/processed/nonbible_controls/english_pg_moby_dick.txt",
+  "terms/kjv_apocrypha_bridge_prospective_terms.csv",
+  "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
+]
+outputs = [
+  "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/control_summary.csv",
+  "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/term_summary.csv",
+  "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md",
+  "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/manifest.json",
+]
