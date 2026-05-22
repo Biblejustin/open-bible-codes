@@ -70,7 +70,8 @@ This assembly run includes:
   plus repo-defined cross-pair permutation diagnostic:
   `docs/WRR_SOURCE_AUDIT.md`, `docs/WRR_METHODOLOGY_GAPS.md`,
   `docs/WRR_CORRECTED_DISTANCE_NOTES.md`, `docs/WRR_CROSS_PAIR_GRID.md`, and
-  `docs/WRR_LOCK_OPTIONS.md`, plus `docs/WRR_CLAIM_READINESS.md` and
+  `docs/WRR_LOCK_OPTIONS.md`, plus `docs/WRR_SOURCE_POLICY_SCENARIOS.md`,
+  `docs/WRR_DW_FORMULA_SENSITIVITY.md`, `docs/WRR_CLAIM_READINESS.md`, and
   `docs/WRR_CLAIM_BLOCKER_PACKET.md`
 - broader search/current findings writeup:
   `docs/BROADER_SEARCH_FINDINGS.md`
@@ -121,6 +122,7 @@ It requires:
 - no tracked report/database/raw-source artifacts beyond allowed placeholders;
 - no high-confidence secret-token patterns in tracked files;
 - required protocols, docs, and term files present;
+- checked-in `docs/INDEX.md` and `protocols/INDEX.md` freshness;
 - existing generated inputs needed by the final gates.
 
 The protocol is meant to be run from a committed state. During development, run

@@ -220,7 +220,9 @@ bridges Table 2 row labels to secondary WRR2 record counts, runs a
 probe-only Hebrew OCR check against those secondary terms, and emits a pair-table
 reconciliation for the current imported-pair count versus the source-cited
 163-distance WRR second-list sample. It also reads the current repo-defined
-999,999 date-label permutation diagnostic into the WRR method-status matrix.
+999,999 date-label permutation diagnostic into the WRR method-status matrix,
+emits source-policy scenario impact, emits D(w) formula sensitivity, and gathers
+lock options plus the claim-blocker packet.
 It is not an exact WRR reproduction.
 
 Hebrew MT-family version comparison:
