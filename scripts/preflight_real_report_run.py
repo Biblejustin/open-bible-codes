@@ -38,6 +38,7 @@ from scripts import (
     check_wrr_source_recovery_probe_doc,
     check_wrr_source_policy_scenarios_doc,
     check_wrr_source_review_queue_doc,
+    check_wrr_source_visual_review_notes_doc,
     check_wrr_variant_gap_docs,
     validate_study_mapping_schemas,
 )
@@ -170,6 +171,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_ZERO_HIT_VARIANT_PROBE.md",
     "docs/WRR_VARIANT_GAP_IMPACT.md",
     "docs/WRR_SOURCE_REVIEW_QUEUE.md",
+    "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md",
     "docs/WRR_METHODOLOGY_GAPS.md",
     "docs/WRR_CORRECTED_DISTANCE_NOTES.md",
     "docs/WRR_CROSS_PAIR_GRID.md",
@@ -370,6 +372,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/analyze_wrr_variant_gap_impact.py",
     "scripts/build_wrr_source_review_queue.py",
     "scripts/check_wrr_source_review_queue_doc.py",
+    "scripts/check_wrr_source_visual_review_notes_doc.py",
     "scripts/analyze_wrr_source_policy_scenarios.py",
     "scripts/check_wrr_source_policy_scenarios_doc.py",
     "scripts/analyze_wrr_dw_formula_sensitivity.py",
@@ -577,6 +580,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_source_review_queue_doc_failures)
         )
 
+    wrr_source_visual_review_notes_doc_failures = (
+        check_wrr_source_visual_review_notes_doc.validate_source_visual_review_notes_doc(
+            check_wrr_source_visual_review_notes_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_source_visual_review_notes_doc_failures:
+        failures.append(
+            "WRR source visual-review notes doc failures: "
+            + "; ".join(wrr_source_visual_review_notes_doc_failures)
+        )
+
     wrr_dw_formula_sensitivity_doc_failures = (
         check_wrr_dw_formula_sensitivity_doc.validate_dw_formula_sensitivity_doc(
             check_wrr_dw_formula_sensitivity_doc.DEFAULT_DOC
@@ -701,6 +715,9 @@ def main(argv: list[str] | None = None) -> int:
         "wrr_defined_diagnostic_doc_failures": wrr_defined_diagnostic_doc_failures,
         "wrr_variant_gap_doc_failures": wrr_variant_gap_doc_failures,
         "wrr_source_review_queue_doc_failures": wrr_source_review_queue_doc_failures,
+        "wrr_source_visual_review_notes_doc_failures": (
+            wrr_source_visual_review_notes_doc_failures
+        ),
         "wrr_dw_formula_sensitivity_doc_failures": (
             wrr_dw_formula_sensitivity_doc_failures
         ),

@@ -65,10 +65,18 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_ZERO_HIT_VARIANT_PROBE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_VARIANT_GAP_IMPACT.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_SOURCE_REVIEW_QUEUE.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn(
+            "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("docs/WRR_SOURCE_POLICY_SCENARIOS.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_DW_FORMULA_SENSITIVITY.md", steps_by_id["preflight"]["inputs"])
         self.assertIn(
             "scripts/check_wrr_source_review_queue_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_source_visual_review_notes_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -315,6 +323,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_ZERO_HIT_VARIANT_PROBE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_VARIANT_GAP_IMPACT.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_SOURCE_REVIEW_QUEUE.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn(
+            "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
         self.assertIn("docs/WRR_SOURCE_POLICY_SCENARIOS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_DW_FORMULA_SENSITIVITY.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("protocols/wrr_source_recovery_probe.toml", preflight.DEFAULT_REQUIRED_PATHS)
@@ -330,6 +342,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_source_review_queue_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_source_visual_review_notes_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -922,6 +938,30 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "WRR direct all-lane doc failures: "
                 "docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md missing diagnostic status",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_source_visual_review_notes_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_source_visual_review_notes_doc,
+                "validate_source_visual_review_notes_doc",
+                return_value=[
+                    "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md missing triage status"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_source_visual_review_notes_doc_failures"],
+                ["docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md missing triage status"],
+            )
+            self.assertIn(
+                "WRR source visual-review notes doc failures: "
+                "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md missing triage status",
                 payload["failures"],
             )
 
