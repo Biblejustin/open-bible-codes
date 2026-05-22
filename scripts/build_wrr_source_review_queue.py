@@ -141,6 +141,18 @@ VISUAL_CONTEXT_BY_TERM_ID = {
         "primary page row visibly contains Moshe/Zacut forms; row OCR has near match",
         "check WNP Zacut dispute and page image before treating as source difference",
     ),
+    "wrr2_19_app_11": (
+        "primary page row visibly contains Maharit/Trani forms including Yosef Trani; row OCR has one-edit near match",
+        "keep as page-image near-match until a locked transcription resolves the aleph spelling",
+    ),
+    "wrr2_19_app_12": (
+        "primary page row visibly contains Maharit/Trani forms including Matrani/Mitrani variants; row OCR has one-edit near match",
+        "keep as page-image near-match until a locked transcription resolves the aleph spelling",
+    ),
+    "wrr2_31_app_07": (
+        "primary page row visibly contains Rabbi Shalom Sharabi forms including Sar Shalom and MaharaSHaSH; exact SMSh form is not settled by this crop",
+        "keep as page-image or pair-rule review before any source correction",
+    ),
 }
 
 BUCKET_READS = {

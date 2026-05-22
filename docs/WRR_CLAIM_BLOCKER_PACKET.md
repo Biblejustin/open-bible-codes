@@ -135,6 +135,9 @@ The queue compresses repeated residual pair blockers into unique unresolved term
 | 5 | `wrr2_32_app_04` | English label says of-Chelm; visible primary Hebrew cell supports Rabbi Shelomo only in this pass | review source/pair rule before using this as a Hebrew-cell match |
 | 6 | `wrr2_27_date_01` | primary page row visibly contains 16 Tishri date forms; row OCR has near match | check page image before treating as source difference |
 | 7 | `wrr2_27_app_06` | primary page row visibly contains Moshe/Zacut forms; row OCR has near match | check WNP Zacut dispute and page image before treating as source difference |
+| 84 | `wrr2_19_app_11` | primary page row visibly contains Maharit/Trani forms including Yosef Trani; row OCR has one-edit near match | keep as page-image near-match until a locked transcription resolves the aleph spelling |
+| 85 | `wrr2_19_app_12` | primary page row visibly contains Maharit/Trani forms including Matrani/Mitrani variants; row OCR has one-edit near match | keep as page-image near-match until a locked transcription resolves the aleph spelling |
+| 86 | `wrr2_31_app_07` | primary page row visibly contains Rabbi Shalom Sharabi forms including Sar Shalom and MaharaSHaSH; exact SMSh form is not settled by this crop | keep as page-image or pair-rule review before any source correction |
 
 ## Flagged Source-Review Rows
 

@@ -29,6 +29,7 @@ class WrrRemainingLaneEvidencePacketTests(unittest.TestCase):
         self.assertEqual(len(rows), 2)
         self.assertEqual(rows[0]["action_lane"], "page_image_near_match_review")
         self.assertIn("page-image", rows[0]["evidence_required"])
+        self.assertIn("visual note", rows[0]["visual_review_note"])
         self.assertEqual(rows[1]["action_lane"], "method_or_pair_universe_review")
         self.assertEqual(len(summary), 2)
 
@@ -118,6 +119,8 @@ def source_row(
         "row_ocr_near_match_text": near_text,
         "best_variant_hit_count": "0",
         "best_variant_rule": "none",
+        "visual_review_note": "visual note",
+        "visual_review_action": "visual action",
     }
 
 

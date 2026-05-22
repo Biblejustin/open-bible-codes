@@ -59,6 +59,16 @@ class WrrSourceReviewQueueTests(unittest.TestCase):
         self.assertIn("row OCR missed it", note)
         self.assertIn("visual OCR miss", action)
 
+    def test_visual_review_context_adds_page_image_near_match_notes(self) -> None:
+        note, action = queue.visual_review_context("wrr2_19_app_11")
+
+        self.assertIn("Maharit/Trani", note)
+        self.assertIn("locked transcription", action)
+
+        note, action = queue.visual_review_context("wrr2_31_app_07")
+        self.assertIn("Rabbi Shalom Sharabi", note)
+        self.assertIn("pair-rule review", action)
+
     def test_build_queue_rows_groups_blocking_terms_for_best_run(self) -> None:
         blocked = [
             {

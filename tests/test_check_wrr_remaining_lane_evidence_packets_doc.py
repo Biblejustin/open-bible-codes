@@ -24,6 +24,8 @@ class WrrRemainingLaneEvidencePacketDocTests(unittest.TestCase):
                         "`YWSP+RANY`",
                         "`wrr2_02_app_03`",
                         "`ZR@ABRHM`",
+                        "primary page row visibly contains Maharit/Trani forms",
+                        "primary page row visibly contains Rabbi Shalom Sharabi forms",
                         "Page-image near-match rows need page-image review before source edits.",
                         "OCR-matched method rows need method or pair-universe explanation before source edits.",
                     ]

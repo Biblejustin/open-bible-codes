@@ -52,6 +52,8 @@ PACKET_FIELDNAMES = [
     "row_ocr_near_match_distance",
     "row_ocr_near_match_text",
     "row_ocr_text_normalized",
+    "visual_review_note",
+    "visual_review_action",
     "best_variant_hit_count",
     "best_variant_rule",
     "evidence_required",
@@ -153,6 +155,8 @@ def build_packet_rows(
                     "row_ocr_text_normalized",
                     source_row.get("row_ocr_text_normalized", ""),
                 ),
+                "visual_review_note": source_row.get("visual_review_note", ""),
+                "visual_review_action": source_row.get("visual_review_action", ""),
                 "best_variant_hit_count": source_row.get(
                     "best_variant_hit_count",
                     action_row.get("source_queue_best_variant_hits", ""),
@@ -256,15 +260,16 @@ def write_markdown(
             "",
             "## Action Terms",
             "",
-            "| Rank | Lane | Term id | Term | Row | Pairs | Frontier | OCR status | Near match | Evidence read |",
-            "| ---: | --- | --- | --- | --- | ---: | ---: | --- | --- | --- |",
+            "| Rank | Lane | Term id | Term | Row | Pairs | Frontier | OCR status | Near match | Visual note | Evidence read |",
+            "| ---: | --- | --- | --- | --- | ---: | ---: | --- | --- | --- | --- |",
         ]
     )
     for row in packet_rows:
         near = near_match_display(row)
         lines.append(
             "| {evidence_rank} | `{action_lane}` | `{term_id}` | `{term}` | `{row_number}` | "
-            "{residual_pairs} | {frontier_pairs} | {row_ocr_status} | {near} | {evidence_read} |".format(
+            "{residual_pairs} | {frontier_pairs} | {row_ocr_status} | {near} | "
+            "{visual_review_note} | {evidence_read} |".format(
                 near=near,
                 **markdown_row(row),
             )

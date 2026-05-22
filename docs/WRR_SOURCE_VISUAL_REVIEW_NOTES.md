@@ -17,6 +17,9 @@ render `reports/wrr_1994/wrr_primary_table2_page-06.png`.
 | `wrr2_32_app_04` `$LMHMXLMA` | 32 | Full page and bottom row crop visibly show `רבי שלמה`; the primary Hebrew name cell does not visibly show full `שלמה מחלמא`. Row OCR normalizes the name cell as `רבישלמהה`. | Source/pair-rule review needed; the English row label says `of Chelm`, but the primary Hebrew cell is not enough by itself to verify this secondary Hebrew appellation. |
 | `wrr2_27_date_01` `/+Z/T$RY` | 27 | Row visibly contains `ט"ז תשרי` forms. | OCR-near-match case; page image should be checked before treating as source difference. |
 | `wrr2_27_app_06` `M$HZKWTW` | 27 | Row visibly contains Moses/Zechut forms; OCR near match is one edit from imported term. | OCR-near-match case; page image should be checked before treating as source difference. |
+| `wrr2_19_app_11` `YWSP+RANY` | 19 | Row crop visibly contains Maharit/Trani forms, including `יוסף טרני`/`טראני` material; row OCR near match is one edit from imported `יוספטראני`. | OCR-near-match case; keep as page-image review until a locked transcription resolves the aleph spelling. |
+| `wrr2_19_app_12` `YWSPM+RANY` | 19 | Row crop visibly contains Maharit/Trani forms, including `מטרני`/`מטראני` material; row OCR near match is one edit from imported `יוספמטראני`. | OCR-near-match case; keep as page-image review until a locked transcription resolves the aleph spelling. |
+| `wrr2_31_app_07` `$M$` | 31 | Row crop visibly contains Rabbi Shalom Sharabi forms, including `שר שלום` and `מהרש"ש`; the exact imported `שמש` form is not settled by this crop. | Page-image or pair-rule review needed before any source correction. |
 
 ## Local WNP Critique Context
 
@@ -37,6 +40,11 @@ Source reviewed: `reports/wrr_1994/wnp_en.html`.
 - Row 32 is a separate Hebrew-cell versus English-label issue: the page label
   gives `of Chelm`, while the visible Hebrew name cell only supports `רבי שלמה`
   in this visual/OCR pass.
+- Row 19 is a page-image spelling issue: visible Trani/Matrani material is close
+  to the imported terms, but the aleph spelling still needs a locked
+  transcription before source edits.
+- Row 31 is not a simple OCR miss from this crop: visible Sharabi abbreviation
+  material does not by itself settle the imported `שמש` term.
 - None of these notes authorize changing WRR terms or claiming reproduction.
   They only narrow the next source-lock work.
 - No visual-review note excludes a pair automatically; pair exclusion still
