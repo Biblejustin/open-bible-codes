@@ -1033,7 +1033,7 @@ def write_summary(
         "- Bible-codes.org pictogram/source audit and term-list expansion",
         "- Bible and Science ELS critique/source audit",
         "- Religions Wiki scriptural-codes critique/source audit",
-        "- Torah-code WRR-adjacent source-shape audits for Gans communities, American presidents, Witztum birth dates, Israeli prime ministers, and Cities source-chain files",
+        "- Torah-code WRR-adjacent source-shape audits for Gans communities, American presidents, Witztum birth dates, Israeli prime ministers, Cities source-chain files, and event/object experiment pages",
         "- report file index",
         "",
         "## Current Read",

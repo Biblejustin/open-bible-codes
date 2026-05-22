@@ -1,0 +1,60 @@
+name = "event_object_experiments_source_audit"
+description = "Audit Torah-code.org Sons of Haman, Pumbedita, Auschwitz, and Ark source files without running ELS results."
+manifest_out = "reports/wrr_1994/event_object_experiment_source_audit_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "download_wrr_sources"
+description = "Download Torah-code.org experiment pages and source PDFs into ignored reports output."
+argv = [
+  "-m", "scripts.download_wrr_sources",
+  "--out-dir", "reports/wrr_1994",
+  "--manifest-out", "reports/wrr_1994/sources.manifest.json",
+]
+inputs = [
+  "scripts/download_wrr_sources.py",
+]
+outputs = [
+  "reports/wrr_1994/torah_code_experiment_sons_of_haman.html",
+  "reports/wrr_1994/torah_code_experiment_sons_of_haman_data.html",
+  "reports/wrr_1994/torah_code_experiment_pumbedita.html",
+  "reports/wrr_1994/torah_code_experiment_pumbedita_data.pdf",
+  "reports/wrr_1994/torah_code_experiment_auschwitz.html",
+  "reports/wrr_1994/torah_code_experiment_auschwitz_data.pdf",
+  "reports/wrr_1994/torah_code_experiment_ark.html",
+  "reports/wrr_1994/torah_code_experiment_ark_code.pdf",
+  "reports/wrr_1994/sources.manifest.json",
+]
+
+[[steps]]
+id = "audit_event_object_experiment_sources"
+description = "Extract source-shape counts, declared statuses, and protocol anchors for event/object experiments."
+argv = [
+  "-m", "scripts.analyze_event_object_experiments_source",
+  "--out", "reports/wrr_1994/event_object_experiment_source_files.csv",
+  "--status-out", "reports/wrr_1994/event_object_experiment_status.csv",
+  "--summary-out", "reports/wrr_1994/event_object_experiment_summary.csv",
+  "--anchors-out", "reports/wrr_1994/event_object_experiment_anchors.csv",
+  "--markdown-out", "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
+  "--manifest-out", "reports/wrr_1994/event_object_experiment_source_audit.manifest.json",
+]
+inputs = [
+  "scripts/analyze_event_object_experiments_source.py",
+  "reports/wrr_1994/torah_code_experiment_sons_of_haman.html",
+  "reports/wrr_1994/torah_code_experiment_sons_of_haman_data.html",
+  "reports/wrr_1994/torah_code_experiment_pumbedita.html",
+  "reports/wrr_1994/torah_code_experiment_pumbedita_data.pdf",
+  "reports/wrr_1994/torah_code_experiment_auschwitz.html",
+  "reports/wrr_1994/torah_code_experiment_auschwitz_data.pdf",
+  "reports/wrr_1994/torah_code_experiment_ark.html",
+  "reports/wrr_1994/torah_code_experiment_ark_code.pdf",
+]
+outputs = [
+  "reports/wrr_1994/event_object_experiment_source_files.csv",
+  "reports/wrr_1994/event_object_experiment_status.csv",
+  "reports/wrr_1994/event_object_experiment_summary.csv",
+  "reports/wrr_1994/event_object_experiment_anchors.csv",
+  "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
+  "reports/wrr_1994/event_object_experiment_source_audit.manifest.json",
+]

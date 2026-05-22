@@ -184,6 +184,13 @@ The Cities/Aumann/Simon-McKay source chain has a source-shape audit:
 - `protocols/cities_source_chain_audit.toml`
 - `docs/CITIES_SOURCE_CHAIN_AUDIT.md`
 
+The Sons of Haman, Pumbedita, Auschwitz, and Ark source pages have a
+source-shape audit:
+
+- `scripts/analyze_event_object_experiments_source.py`
+- `protocols/event_object_experiments_source_audit.toml`
+- `docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md`
+
 The communities audit confirms 66 data records and 210 pre-filter community
 rows. The presidents audit confirms 42 data records and 292 pre-test spelling
 rows. The birth-date audit confirms two S1/S2 tables, 14 rows per table, and
@@ -191,7 +198,10 @@ rows. The birth-date audit confirms two S1/S2 tables, 14 rows per table, and
 rows but only 8 downloaded detail pages with keyword labels, leaving a 4-page
 detail-source coverage gap. The Cities audit confirms 13 source-chain files,
 6 `.pdf`-named HTML wrappers, 1 parse-error PDF, 1 no-text PDF, and 7/7 source
-anchors. These lanes stay non-result-bearing. The
+anchors. The event/object audit confirms 8 source files, 20 Pumbedita rows, 32
+Auschwitz rows, a 57-page Ark tutorial PDF, one reported significant follow-up
+page, two reported non-significant pages, and one under-construction page.
+These lanes stay non-result-bearing. The
 research-program ELS harness now includes a split-fit Fisher order-statistic
 row. Next research-program upgrade: replace the current transparent resonant
 row-width proxy with a fuller source-method reconstruction, recover
@@ -202,7 +212,9 @@ ELS/SL-proximity tests. Do not run an Israeli prime-ministers result protocol
 until the missing detail-page coverage is resolved or explicitly scoped out in a
 new preregistration. Do not import Cities city-name rows until the wrapped or
 missing PDF sources are recovered, or the usable HTML-only source boundary is
-explicitly locked.
+explicitly locked. Do not promote the event/object pages beyond source-shape
+status until each lane has its own preregistered term normalization and
+control design.
 
 WRR aggregate work now has a diagnostic P1..P4 bridge:
 

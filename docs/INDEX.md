@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 316
+Documents indexed: 317
 
 ## Controls
 
@@ -228,6 +228,7 @@ Documents indexed: 316
 | English KJV Screening All-Codes Collection | `ENGLISH_SCREENING_ALL_CODES_COLLECTION.md` |
 | English KJV Screening All-Codes Triage | `ENGLISH_SCREENING_ALL_CODES_TRIAGE.md` |
 | English Seed Survivor Audit | `ENGLISH_SEED_SURVIVOR_AUDIT.md` |
+| Event/Object Experiment Source Audit | `EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md` |
 | Expanded Strata Tooling | `EXPANDED_STRATA_TOOLING.md` |
 | Extension Context Review | `EXTENSION_CONTEXT_REVIEW.md` |
 | Extension Exact-Center Cohort Review | `EXTENSION_EXACT_CENTER_COHORT_REVIEW.md` |

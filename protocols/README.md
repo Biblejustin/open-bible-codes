@@ -149,6 +149,17 @@ PDF-shaped downloads. It records wrapper downloads, parse status, and source
 anchors without normalizing city names or testing ELS results. Tracked audit:
 `docs/CITIES_SOURCE_CHAIN_AUDIT.md`.
 
+Event/object experiment source audit:
+
+```bash
+python3 -m scripts.run_protocol protocols/event_object_experiments_source_audit.toml --resume
+```
+
+This parses the Sons of Haman, Pumbedita, Auschwitz, and Ark source pages plus
+linked data/tutorial PDFs. It records declared status and source rows without
+normalizing spellings or testing ELS results. Tracked audit:
+`docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md`.
+
 WRR imported-term Genesis count and pair smoke:
 
 ```bash

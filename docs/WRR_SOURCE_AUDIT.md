@@ -205,9 +205,13 @@ These are source leads, not claim-ready evidence.
   files, 6 `.pdf`-named HTML wrappers, 1 parse-error PDF, 1 no-text PDF, and
   7/7 protocol anchors before any city-name import.
 - Sons of Haman, Pumbedita, Auschwitz, and Ark: useful as post-WRR event/object
-  claim leads. These should require stricter preregistration flags before any
-  statistical interpretation because several are visibly post-hoc or
-  replication-style experiments.
+  claim leads. The source-shape audit in
+  `docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md` now confirms 8 source files,
+  20 Pumbedita rows, 32 Auschwitz rows, a 57-page Ark tutorial PDF, one
+  reported significant follow-up page, two reported non-significant pages, and
+  one under-construction page. These should require stricter preregistration
+  flags before any statistical interpretation because several are visibly
+  post-hoc, replication-style, or incomplete experiments.
 - Chumash, Twin Towers, Tsunami, Katrina, Great Rabbis, and Son Rabbis pages
   were live but marked under construction in this crawl. Keep their hashes for
   source-status tracking, but do not treat them as data-bearing protocols.
@@ -310,6 +314,12 @@ Simon-McKay HTML pages and PDF-shaped downloads into ignored source-chain CSVs
 and a tracked audit summary. It verifies wrapper/parse/no-text status and key
 source anchors, but does not normalize city names, run ELS hits, or verify
 reported p-levels.
+
+`scripts/analyze_event_object_experiments_source.py` parses the Sons of Haman,
+Pumbedita, Auschwitz, and Ark source pages plus linked data/tutorial PDFs into
+ignored source-shape CSVs and a tracked audit summary. It verifies declared
+status, small source-row counts, and protocol anchors, but does not normalize
+spellings, run ELS hits, or verify reported p-values.
 
 `scripts/simulate_torah_code_research_model.py` turns the Torah-code.org
 research-program geometric level-1 model into a reproducible simulation harness.
