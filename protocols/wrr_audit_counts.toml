@@ -710,12 +710,43 @@ outputs = [
 ]
 
 [[steps]]
+id = "analyze_wrr_defined_pair_set"
+description = "Summarize which current WRR working pairs define corrected distances across direct all-lane diagnostics."
+argv = [
+  "-m", "scripts.analyze_wrr_defined_pair_set",
+  "--pair-summary", "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "--pair-table", "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "--run", "all_lanes_cap250=reports/wrr_1994/direct_all/wrr2_corrected_distance_all_lanes_250.csv",
+  "--run", "all_lanes_cap1000=reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.csv",
+  "--run", "all_lanes_cap1000_program=reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv",
+  "--out", "reports/wrr_1994/wrr_defined_pair_set_audit.csv",
+  "--summary-out", "reports/wrr_1994/wrr_defined_pair_set_audit_summary.csv",
+  "--markdown-out", "docs/WRR_DEFINED_PAIR_SET_AUDIT.md",
+  "--manifest-out", "reports/wrr_1994/wrr_defined_pair_set_audit.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_defined_pair_set.py",
+  "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "reports/wrr_1994/direct_all/wrr2_corrected_distance_all_lanes_250.csv",
+  "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.csv",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_defined_pair_set_audit.csv",
+  "reports/wrr_1994/wrr_defined_pair_set_audit_summary.csv",
+  "docs/WRR_DEFINED_PAIR_SET_AUDIT.md",
+  "reports/wrr_1994/wrr_defined_pair_set_audit.manifest.json",
+]
+
+[[steps]]
 id = "build_wrr_method_status"
 description = "Summarize current WRR locks, open method decisions, and next actions."
 argv = [
   "-m", "scripts.build_wrr_method_status",
   "--text-source", "reports/wrr_1994/koren_genesis_text_source.csv",
   "--pair-summary", "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "--defined-pair-summary", "reports/wrr_1994/wrr_defined_pair_set_audit_summary.csv",
   "--table2-bridge-summary", "reports/wrr_1994/wrr_table2_source_bridge_summary.csv",
   "--table2-ocr-summary", "reports/wrr_1994/wrr_primary_table2_ocr_probe_summary.csv",
   "--table2-row-ocr-summary", "reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv",
@@ -733,6 +764,7 @@ inputs = [
   "scripts/build_wrr_method_status.py",
   "reports/wrr_1994/koren_genesis_text_source.csv",
   "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "reports/wrr_1994/wrr_defined_pair_set_audit_summary.csv",
   "reports/wrr_1994/wrr_table2_source_bridge_summary.csv",
   "reports/wrr_1994/wrr_primary_table2_ocr_probe_summary.csv",
   "reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv",
@@ -783,36 +815,6 @@ outputs = [
   "reports/wrr_1994/wrr_lock_options.csv",
   "docs/WRR_LOCK_OPTIONS.md",
   "reports/wrr_1994/wrr_lock_options.manifest.json",
-]
-
-[[steps]]
-id = "analyze_wrr_defined_pair_set"
-description = "Summarize which current WRR working pairs define corrected distances across direct all-lane diagnostics."
-argv = [
-  "-m", "scripts.analyze_wrr_defined_pair_set",
-  "--pair-summary", "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
-  "--pair-table", "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
-  "--run", "all_lanes_cap250=reports/wrr_1994/direct_all/wrr2_corrected_distance_all_lanes_250.csv",
-  "--run", "all_lanes_cap1000=reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.csv",
-  "--run", "all_lanes_cap1000_program=reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv",
-  "--out", "reports/wrr_1994/wrr_defined_pair_set_audit.csv",
-  "--summary-out", "reports/wrr_1994/wrr_defined_pair_set_audit_summary.csv",
-  "--markdown-out", "docs/WRR_DEFINED_PAIR_SET_AUDIT.md",
-  "--manifest-out", "reports/wrr_1994/wrr_defined_pair_set_audit.manifest.json",
-]
-inputs = [
-  "scripts/analyze_wrr_defined_pair_set.py",
-  "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
-  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
-  "reports/wrr_1994/direct_all/wrr2_corrected_distance_all_lanes_250.csv",
-  "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.csv",
-  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv",
-]
-outputs = [
-  "reports/wrr_1994/wrr_defined_pair_set_audit.csv",
-  "reports/wrr_1994/wrr_defined_pair_set_audit_summary.csv",
-  "docs/WRR_DEFINED_PAIR_SET_AUDIT.md",
-  "reports/wrr_1994/wrr_defined_pair_set_audit.manifest.json",
 ]
 
 [[steps]]
