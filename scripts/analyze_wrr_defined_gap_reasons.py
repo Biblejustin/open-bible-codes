@@ -18,6 +18,7 @@ from els import __version__
 
 DEFAULT_PAIR_SUMMARY = Path("reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv")
 DEFAULT_PAIR_TABLE = Path("reports/wrr_1994/wrr2_pair_eligibility_table.csv")
+DEFAULT_ROW_OCR = Path("reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv")
 DEFAULT_RUNS = (
     (
         "all_lanes_cap250",
@@ -90,6 +91,9 @@ TERM_FIELDNAMES = [
     "concepts",
     "candidate_lanes",
     "pair_ids",
+    "row_ocr_status",
+    "row_ocr_column",
+    "row_ocr_match_basis",
     "reasons",
 ]
 
@@ -105,13 +109,14 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     expected_defined = expected_defined_count(read_one_row(args.pair_summary))
     pair_rows = keyed_rows(read_rows(args.pair_table), key="pair_id")
+    row_ocr_rows = keyed_rows(read_rows(args.row_ocr), key="term_id") if args.row_ocr.exists() else {}
     run_specs = parse_run_specs(args.run)
     summary_rows: list[dict[str, object]] = []
     term_rows: list[dict[str, object]] = []
     for run in run_specs:
         rows = enrich_corrected_rows(read_rows(run.path), pair_rows)
         summary_rows.extend(summarize_run(run, rows, expected_defined))
-        term_rows.extend(term_burden_rows(run, rows))
+        term_rows.extend(term_burden_rows(run, rows, row_ocr_rows))
     write_csv(args.out, SUMMARY_FIELDNAMES, summary_rows)
     write_csv(args.term_out, TERM_FIELDNAMES, term_rows)
     write_markdown(args.markdown_out, summary_rows, term_rows, args)
@@ -127,6 +132,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--pair-summary", type=Path, default=DEFAULT_PAIR_SUMMARY)
     parser.add_argument("--pair-table", type=Path, default=DEFAULT_PAIR_TABLE)
+    parser.add_argument("--row-ocr", type=Path, default=DEFAULT_ROW_OCR)
     parser.add_argument(
         "--run",
         action="append",
@@ -238,7 +244,11 @@ def reason_for_row(row: dict[str, str]) -> str:
     return REASON_ORDINARY_TRIPLE_ONLY
 
 
-def term_burden_rows(run: RunSpec, rows: list[dict[str, str]]) -> list[dict[str, object]]:
+def term_burden_rows(
+    run: RunSpec,
+    rows: list[dict[str, str]],
+    row_ocr_rows: dict[str, dict[str, str]] | None = None,
+) -> list[dict[str, object]]:
     buckets: dict[tuple[str, str], dict[str, object]] = {}
     reasons: dict[tuple[str, str], set[str]] = defaultdict(set)
     contexts: dict[tuple[str, str], dict[str, set[str]]] = defaultdict(
@@ -269,10 +279,14 @@ def term_burden_rows(run: RunSpec, rows: list[dict[str, str]]) -> list[dict[str,
     out = []
     for key, count in counts.items():
         row = dict(buckets[key])
+        ocr_row = (row_ocr_rows or {}).get(str(row["term_id"]), {})
         row["ordinary_not_valid_pairs"] = count
         row["concepts"] = joined_context(contexts[key]["concepts"])
         row["candidate_lanes"] = joined_context(contexts[key]["candidate_lanes"])
         row["pair_ids"] = joined_context(contexts[key]["pair_ids"])
+        row["row_ocr_status"] = ocr_row.get("row_ocr_status", "")
+        row["row_ocr_column"] = ocr_row.get("column", "")
+        row["row_ocr_match_basis"] = ocr_row.get("match_basis", "")
         row["reasons"] = ";".join(sorted(reasons[key], key=reason_sort_key))
         out.append(row)
     return sorted(
@@ -326,6 +340,7 @@ def write_markdown(
             "python3 -m scripts.analyze_wrr_defined_gap_reasons "
             f"--pair-summary {args.pair_summary} "
             f"--pair-table {args.pair_table} "
+            f"--row-ocr {args.row_ocr} "
             f"--out {args.out} "
             f"--term-out {args.term_out} "
             f"--markdown-out {args.markdown_out} "
@@ -360,13 +375,13 @@ def write_markdown(
                 "",
                 "## Top Ordinary-Missing Terms In Best Run",
                 "",
-                "| Side | Term id | Concepts | Term | Normalized | Ordinary hits | Defined rows | Pairs blocked | Reasons |",
+                "| Side | Term id | Concepts | Term | Row OCR | Ordinary hits | Defined rows | Pairs blocked | Reasons |",
                 "| --- | --- | --- | --- | --- | ---: | ---: | ---: | --- |",
             ]
         )
         for row in best_terms:
             lines.append(
-                "| {term_side} | `{term_id}` | `{concepts}` | `{term}` | `{normalized}` | "
+                "| {term_side} | `{term_id}` | `{concepts}` | `{term}` | `{row_ocr_status}` | "
                 "{ordinary_hits} | {defined_perturbed_rows} | "
                 "{ordinary_not_valid_pairs} | `{reasons}` |".format(**row)
             )
@@ -379,6 +394,8 @@ def write_markdown(
             "  and the minimum perturbation count is met.",
             "- Zero ordinary hits for an imported appellation or date term is a source",
             "  alignment problem before it is a permutation problem.",
+            "- Row OCR status is inherited from the existing Table 2 row-aligned",
+            "  OCR probe; it is triage evidence, not verified primary transcription.",
             "- This audit narrows the next WRR work toward term normalization, source",
             "  row boundaries, and the final pair-universe rule.",
             "",
@@ -469,6 +486,7 @@ def write_manifest(
         "inputs": {
             "pair_summary": str(args.pair_summary),
             "pair_table": str(args.pair_table),
+            "row_ocr": str(args.row_ocr),
             "runs": {run.label: str(run.path) for run in runs},
         },
         "outputs": {

@@ -73,6 +73,7 @@ class WrrDefinedGapReasonTests(unittest.TestCase):
             root = Path(tmp)
             pair_summary = root / "pair_summary.csv"
             pair_table = root / "pair_table.csv"
+            row_ocr = root / "row_ocr.csv"
             corrected = root / "corrected.csv"
             out = root / "out.csv"
             term_out = root / "terms.csv"
@@ -133,6 +134,17 @@ class WrrDefinedGapReasonTests(unittest.TestCase):
                     },
                 ],
             )
+            write_csv(
+                row_ocr,
+                [
+                    {
+                        "term_id": "app2",
+                        "row_ocr_status": "matched",
+                        "column": "name",
+                        "match_basis": "row_exact",
+                    }
+                ],
+            )
 
             rc = audit.main(
                 [
@@ -140,6 +152,8 @@ class WrrDefinedGapReasonTests(unittest.TestCase):
                     str(pair_summary),
                     "--pair-table",
                     str(pair_table),
+                    "--row-ocr",
+                    str(row_ocr),
                     "--run",
                     f"sample={corrected}",
                     "--out",
@@ -163,6 +177,9 @@ class WrrDefinedGapReasonTests(unittest.TestCase):
             self.assertEqual(term_rows[0]["concepts"], "WRR2 02")
             self.assertEqual(term_rows[0]["candidate_lanes"], "sample_lane")
             self.assertEqual(term_rows[0]["pair_ids"], "p2")
+            self.assertEqual(term_rows[0]["row_ocr_status"], "matched")
+            self.assertEqual(term_rows[0]["row_ocr_column"], "name")
+            self.assertEqual(term_rows[0]["row_ocr_match_basis"], "row_exact")
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("WRR Defined Gap Reason Audit", text)
             self.assertIn("Gap to the source-cited count remains 2", text)
