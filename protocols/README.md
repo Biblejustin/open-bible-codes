@@ -94,6 +94,17 @@ data. It also summarizes the raw ANU famous-rabbis source-list shapes so the
 163-distance mismatch is visible before metric work. Tracked audit:
 `docs/WRR_SOURCE_AUDIT.md`.
 
+Gans communities source-shape audit:
+
+```bash
+python3 -m scripts.run_protocol protocols/gans_communities_source_audit.toml --resume
+```
+
+This parses the Gans/Inbal/Bombach communities data PDF into ignored record
+shape outputs and writes a tracked source-boundary summary. It does not run
+ELS hits or compactness statistics. Tracked audit:
+`docs/GANS_COMMUNITIES_SOURCE_AUDIT.md`.
+
 WRR imported-term Genesis count and pair smoke:
 
 ```bash

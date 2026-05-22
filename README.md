@@ -591,6 +591,8 @@ External claim/source term count baseline:
 External claim/source retained all-codes collection and triage:
 `docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_COLLECTION.md` and
 `docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_TRIAGE.md`.
+Gans communities source-shape audit:
+`docs/GANS_COMMUNITIES_SOURCE_AUDIT.md`.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.

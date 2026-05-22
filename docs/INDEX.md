@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 311
+Documents indexed: 312
 
 ## Controls
 
@@ -240,6 +240,7 @@ Documents indexed: 311
 | Final Report Highlights | `FINAL_REPORT_HIGHLIGHTS.md` |
 | Final Report Outline | `FINAL_REPORT_OUTLINE.md` |
 | Frequency Anchors | `FREQUENCY_ANCHORS.md` |
+| Gans Communities Source Audit | `GANS_COMMUNITIES_SOURCE_AUDIT.md` |
 | Greek Exact-Center Final Gate | `GREEK_EXACT_CENTER_FINAL_GATE.md` |
 | Greek Three-Source Synthetic Extension Baselines | `GREEK_EXACT_CENTER_THREE_SOURCE_SYNTHETIC_BASELINES.md` |
 | Greek Expanded Surface Letter Paths | `GREEK_EXPANDED_SURFACE_LETTER_PATHS.md` |

@@ -154,11 +154,19 @@ simulation harness and an ELS/cylinder level-1 analogue:
 - `docs/TORAH_CODE_RESEARCH_MODEL_SIMULATION.md`
 - `docs/TORAH_CODE_RESEARCH_ELS_MODEL_SIMULATION.md`
 
-The research-program ELS harness now includes a split-fit Fisher
-order-statistic row. Next research-program upgrade: replace the current
-transparent resonant row-width proxy with a fuller source-method reconstruction,
-recover source-published Fisher weights if a citable source becomes available,
-and only then consider real Torah-code source data.
+The Gans/Inbal/Bombach communities data source now has a source-shape audit:
+
+- `scripts/analyze_gans_communities_source.py`
+- `protocols/gans_communities_source_audit.toml`
+- `docs/GANS_COMMUNITIES_SOURCE_AUDIT.md`
+
+The audit confirms 66 data records and 210 pre-filter community rows while
+keeping the lane non-result-bearing. The research-program ELS harness now
+includes a split-fit Fisher order-statistic row. Next research-program upgrade:
+replace the current transparent resonant row-width proxy with a fuller
+source-method reconstruction, recover source-published Fisher weights if a
+citable source becomes available, and only then consider real Torah-code source
+data or communities compactness runs.
 
 WRR aggregate work now has a diagnostic P1..P4 bridge:
 

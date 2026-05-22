@@ -18,6 +18,7 @@ data/private/
 data/cache/
 
 # Local exploratory output.
+tmp/
 *.log
 reports/*.csv
 reports/*.csv.gz

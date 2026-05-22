@@ -169,7 +169,9 @@ These are source leads, not claim-ready evidence.
   attachment PDFs are parsed and source rows are reviewed.
 - Genesis ELS-pair/community test: the Gans/Inbal/Bombach paper plus data file
   provide another fixed data set for pair compactness checks, independent from
-  the WRR famous-rabbis table.
+  the WRR famous-rabbis table. The source-shape audit in
+  `docs/GANS_COMMUNITIES_SOURCE_AUDIT.md` now confirms 66 data records,
+  210 community rows before experiment filters, and the key protocol anchors.
 - Haralick protocol tests: the papers describe cleaner a priori protocol design,
   word-permuted or chapter-word-permuted Genesis controls, expected-hit skip
   caps of 5 or 10, and simpler 1D/2D compactness measures that can be tested as
@@ -268,6 +270,12 @@ probe by deriving Table 2 row bands from Tesseract TSV row markers, then
 checking each secondary WRR2 Hebrew term only inside the matching row and the
 expected name/date column. It remains OCR triage, not verified primary Hebrew
 transcription.
+
+`scripts/analyze_gans_communities_source.py` parses the Gans/Inbal/Bombach
+communities data PDF into ignored source-shape CSVs and a tracked audit
+summary. It verifies the 66-record data table shape and protocol anchors, but
+does not normalize spellings, apply experiment filters, run ELS hits, or test
+compactness.
 
 `scripts/simulate_torah_code_research_model.py` turns the Torah-code.org
 research-program geometric level-1 model into a reproducible simulation harness.

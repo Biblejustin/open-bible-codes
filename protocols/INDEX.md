@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 118
+Protocols indexed: 119
 
 ## Analysis
 
@@ -41,6 +41,7 @@ Protocols indexed: 118
 | --- | --- | ---: | --- | --- | --- |
 | churchages_statistics_audit | Compare published ChurchAges observed KJV ELS counts against letter-frequency expected ... | 1 |  | reports/churchages_statistics | `churchages_statistics_audit.toml` |
 | cohort_cluster_density_audit | Post-process centered occurrences for declared-cohort word-window density candidates. | 1 | terms/biblical_tribes.csv | reports/cohort_cluster_density | `cohort_cluster_density_audit.toml` |
+| gans_communities_source_audit | Audit the Gans/Inbal/Bombach communities data PDF source shape without running ELS resu... | 2 |  | reports/wrr_1994 | `gans_communities_source_audit.toml` |
 | greek_expanded_surface_letter_paths | Letter-path audit sheet for tightened Greek exact-center surface rows. | 1 |  | reports/greek_expanded_surface_letter_paths | `greek_expanded_surface_letter_paths.toml` |
 | hebrew_albam_audit | Opt-in Hebrew ALBAM transformed-text ELS audit for declared Jeremiah cryptogram terms. | 9 | terms/hebrew_atbash_audit_terms.csv | reports/hebrew_albam_audit | `hebrew_albam_audit.toml` |
 | hebrew_atbash_audit | Opt-in Hebrew Atbash transformed-text ELS audit for declared Jeremiah cryptogram terms. | 9 | terms/hebrew_atbash_audit_terms.csv | reports/hebrew_atbash_audit | `hebrew_atbash_audit.toml` |
