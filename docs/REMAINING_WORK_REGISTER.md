@@ -244,8 +244,12 @@ python3 -m scripts.run_protocol protocols/english_seed_paired_controls_1000.toml
 ### 4. Apocrypha/Deuterocanon Prospective Study
 
 KJVA bridge results are strong post-screen review material, not claims.
-Remaining next step is a fresh prospective lock before producing new
-result-bearing outputs.
+The fresh prospective lock now exists before producing new result-bearing
+outputs:
+
+- `terms/kjv_apocrypha_bridge_prospective_terms.csv`
+- `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md`
+- `protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml`
 
 Candidate inputs:
 
@@ -253,12 +257,18 @@ Candidate inputs:
 - `docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md`
 - `terms/kjv_apocrypha_bridge_confirmatory_terms.csv`
 
-Needed before claim language:
+Current next no-input step after this lock is committed: run the prospective
+protocol and report the result as review material only.
+
+Covered by the prospective lock:
 
 - fixed prospective term list;
 - fixed insertion/control design;
 - fixed skip range;
-- fixed correction rule;
+- fixed correction rule.
+
+Still needed before claim language:
+
 - non-Bible insertion controls.
 
 ### 5. Manual Review Queue

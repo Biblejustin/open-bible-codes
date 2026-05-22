@@ -1,0 +1,84 @@
+name = "kjv_apocrypha_bridge_prospective_controls_5000"
+description = "Locked 5000-sample prospective shuffled controls for fixed KJVA apocrypha/deuterocanon proper-name bridge terms."
+manifest_out = "reports/kjv_apocrypha_bridge_prospective/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 30
+
+[[steps]]
+id = "kjva_bridge_prospective_candidates"
+description = "Run the observed KJVA bridge scan for the registered prospective proper-name cohort."
+argv = [
+  "-m", "scripts.analyze_apocrypha_bridge_candidates",
+  "--corpus-label", "KJVA Prospective",
+  "--config", "configs/example_ebible_engkjv_apocrypha.toml",
+  "--terms", "terms/kjv_apocrypha_bridge_prospective_terms.csv",
+  "--min-skip", "2",
+  "--max-skip", "250",
+  "--direction", "both",
+  "--min-term-length", "4",
+  "--jobs", "0",
+  "--out", "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
+  "--summary-out", "reports/kjv_apocrypha_bridge_prospective/bridge_summary.csv",
+  "--markdown-out", "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md",
+  "--manifest-out", "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.manifest.json",
+]
+inputs = [
+  "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md",
+  "scripts/analyze_apocrypha_bridge_candidates.py",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "data/processed/ebible/eng-kjv.csv",
+  "terms/kjv_apocrypha_bridge_prospective_terms.csv",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
+  "reports/kjv_apocrypha_bridge_prospective/bridge_summary.csv",
+  "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md",
+  "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.manifest.json",
+]
+
+[[steps]]
+id = "kjva_bridge_prospective_controls_5000"
+description = "Compare registered prospective KJVA bridge terms with 5000 shuffled apocrypha-block controls."
+argv = [
+  "-m", "scripts.analyze_apocrypha_bridge_term_shuffled_controls",
+  "--canonical-label", "KJVA Prospective",
+  "--canonical-config", "configs/example_ebible_engkjv_apocrypha.toml",
+  "--terms", "terms/kjv_apocrypha_bridge_prospective_terms.csv",
+  "--observed", "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
+  "--samples", "5000",
+  "--seed", "20260522",
+  "--min-skip", "2",
+  "--max-skip", "250",
+  "--direction", "both",
+  "--min-term-length", "4",
+  "--jobs", "0",
+  "--resume-samples",
+  "--sample-out", "reports/kjv_apocrypha_bridge_prospective/sample_summary.csv",
+  "--term-sample-out", "reports/kjv_apocrypha_bridge_prospective/term_samples.csv",
+  "--term-summary-out", "reports/kjv_apocrypha_bridge_prospective/term_summary.csv",
+  "--markdown-out", "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md",
+  "--manifest-out", "reports/kjv_apocrypha_bridge_prospective/manifest.json",
+]
+inputs = [
+  "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md",
+  "scripts/analyze_apocrypha_bridge_term_shuffled_controls.py",
+  "scripts/analyze_apocrypha_bridge_shuffled_controls.py",
+  "scripts/analyze_apocrypha_bridge_candidates.py",
+  "scripts/analyze_apocrypha_bridge_controls.py",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+  "data/processed/ebible/eng-kjv.csv",
+  "terms/kjv_apocrypha_bridge_prospective_terms.csv",
+  "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
+  "els/term_display.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/kjv_apocrypha_bridge_prospective/sample_summary.csv",
+  "reports/kjv_apocrypha_bridge_prospective/term_samples.csv",
+  "reports/kjv_apocrypha_bridge_prospective/term_summary.csv",
+  "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md",
+  "reports/kjv_apocrypha_bridge_prospective/manifest.json",
+]

@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 116
+Protocols indexed: 117
 
 ## Analysis
 
@@ -136,6 +136,7 @@ Protocols indexed: 116
 | hebrew_concordance_words_prospective | Locked Hebrew concordance clean-lock exact-version and representative-control screen. | 4 | terms/hebrew_concordance_prospective_terms_clean_lock.csv | reports/hebrew_concordance_words_prospective | `hebrew_concordance_words_prospective.toml` |
 | hebrew_modern_geopolitical_prospective | Locked Hebrew modern/geopolitical exact-version presence and representative-control rep... | 4 | terms/hebrew_modern_geopolitical_prospective_terms.csv | reports/hebrew_modern_geopolitical_prospective | `hebrew_modern_geopolitical_prospective.toml` |
 | hebrew_theology_prospective | Locked Hebrew theology registered follow-up exact-version and representative-control sc... | 4 | terms/hebrew_theology_prospective_terms.csv | reports/hebrew_theology_prospective | `hebrew_theology_prospective.toml` |
+| kjv_apocrypha_bridge_prospective_controls_5000 | Locked 5000-sample prospective shuffled controls for fixed KJVA apocrypha/deuterocanon ... | 2 | terms/kjv_apocrypha_bridge_prospective_terms.csv | reports/kjv_apocrypha_bridge_prospective | `kjv_apocrypha_bridge_prospective_controls_5000.toml` |
 
 ## Replication
 

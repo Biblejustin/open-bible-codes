@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 307
+Documents indexed: 308
 
 ## Controls
 
@@ -123,6 +123,7 @@ Documents indexed: 307
 | Hebrew Modern Geopolitical Presence Preregistration | `HEBREW_MODERN_GEOPOLITICAL_PRESENCE_PREREGISTRATION.md` |
 | Hebrew Theology Prospective Preregistration | `HEBREW_THEOLOGY_PROSPECTIVE_PREREGISTRATION.md` |
 | KJVA Apocrypha Bridge Confirmatory Follow-Up Preregistration | `KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_PREREGISTRATION.md` |
+| KJVA Apocrypha Bridge Prospective Preregistration | `KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md` |
 | Local Terms Negative Appendix Preregistration | `LOCAL_TERMS_NEGATIVE_APPENDIX_PREREGISTRATION.md` |
 | SBLGNT Source-Only Exact-Center Preregistration | `SBLGNT_SOURCE_ONLY_EXACT_CENTER_PREREGISTRATION.md` |
 
