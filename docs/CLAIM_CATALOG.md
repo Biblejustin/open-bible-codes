@@ -27,7 +27,7 @@ Purpose:
 | Group | Status | Entries | Current read |
 | --- | --- | ---: | --- |
 | Common Torah skip-50 examples | `reproducible` | 5 | Engine sanity checks pass on Koren Torah files. |
-| WRR 1994 rabbis | `under_specified` | 1 | Source audit exists, but the explicit readiness gate remains blocked; needs source-policy selection, source-locked pair universe, D(w) formula lock, full corrected-distance run, and permutation rule. |
+| WRR 1994 rabbis | `under_specified` | 1 | Source audit exists, but the explicit readiness gate remains blocked; single-term Zacut diagnostics identify four rows that each leave 163 >=5 pairs with gap 0 if excluded, but this is source-policy evidence only; claim language still needs source-policy selection, source-locked pair universe, D(w) formula lock, full corrected-distance run, and permutation rule. |
 | Greek `δοξα` (doxa; English: glory) extension follow-up | `controlled_review_candidate` | 1 | Four-source 5000/5000 and 20000/20000 follow-ups passed their registered review gates; still post-discovery and not a claim. |
 | Greek `γωγ` (Gog; English: Gog) centered occurrence | `controlled_review_candidate` | 1 | Hidden `γωγ` (Gog; English: Gog) centers on open `Gog` at Rev 20:8 across four Greek NT source labels; length-3 controls make it contextual rather than frequency-promoted. |
 | Greek expanded surface follow-up | `controlled_review_candidate` | 1 | `ανομια` (anomia; English: lawlessness), `ισαακ` (Isaak; English: Isaac), and `τερασ` (teras; English: wonder) pass letter-path and all-available real-word control review; still post-screen and not a claim. |
@@ -67,7 +67,8 @@ not enough for `reproducible`; the declared claim rule has to be reproduced.
 WRR-specific requirements are tracked in `docs/WRR_REPLICATION_PLAN.md`,
 `docs/WRR_SOURCE_AUDIT.md`, `docs/WRR_METHODOLOGY_GAPS.md`,
 `docs/WRR_CORRECTED_DISTANCE_NOTES.md`, and
-`docs/WRR_CLAIM_READINESS.md`.
+`docs/WRR_CLAIM_READINESS.md`, with decision packets in
+`docs/WRR_CLAIM_BLOCKER_PACKET.md` and `docs/WRR_LOCK_OPTIONS.md`.
 Greek surface claim-grade requirements are tracked in
 `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`.
 Bible Code Digest source leads are tracked in `docs/BIBLE_CODE_DIGEST_AUDIT.md`.
