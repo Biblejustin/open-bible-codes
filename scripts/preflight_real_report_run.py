@@ -33,6 +33,7 @@ from scripts import (
     check_wrr_lock_options_doc,
     check_wrr_method_status_doc,
     check_wrr_source_recovery_probe_doc,
+    check_wrr_variant_gap_docs,
     validate_study_mapping_schemas,
 )
 from scripts.release_hygiene import (
@@ -161,6 +162,8 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_LOCK_OPTIONS.md",
     "docs/WRR_DEFINED_PAIR_SET_AUDIT.md",
     "docs/WRR_DEFINED_GAP_REASON_AUDIT.md",
+    "docs/WRR_ZERO_HIT_VARIANT_PROBE.md",
+    "docs/WRR_VARIANT_GAP_IMPACT.md",
     "docs/WRR_METHODOLOGY_GAPS.md",
     "docs/WRR_CORRECTED_DISTANCE_NOTES.md",
     "docs/WRR_CROSS_PAIR_GRID.md",
@@ -368,6 +371,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_method_status_doc.py",
     "scripts/check_wrr_source_recovery_probe_doc.py",
     "scripts/check_hypothesis_testing_source_audit_doc.py",
+    "scripts/check_wrr_variant_gap_docs.py",
     "scripts/build_wrr_claim_blocker_packet.py",
     "scripts/build_matrix_cluster_candidates.py",
     "scripts/summarize_matrix_cluster_controls.py",
@@ -543,6 +547,13 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_defined_diagnostic_doc_failures)
         )
 
+    wrr_variant_gap_doc_failures = check_wrr_variant_gap_docs.validate_variant_gap_docs()
+    if wrr_variant_gap_doc_failures:
+        failures.append(
+            "WRR variant-gap doc failures: "
+            + "; ".join(wrr_variant_gap_doc_failures)
+        )
+
     wrr_lock_options_doc_failures = (
         check_wrr_lock_options_doc.validate_lock_options_doc(
             check_wrr_lock_options_doc.DEFAULT_DOC
@@ -621,6 +632,7 @@ def main(argv: list[str] | None = None) -> int:
             wrr_claim_blocker_packet_doc_failures
         ),
         "wrr_defined_diagnostic_doc_failures": wrr_defined_diagnostic_doc_failures,
+        "wrr_variant_gap_doc_failures": wrr_variant_gap_doc_failures,
         "wrr_lock_options_doc_failures": wrr_lock_options_doc_failures,
         "wrr_method_status_doc_failures": wrr_method_status_doc_failures,
         "wrr_source_recovery_probe_doc_failures": wrr_source_recovery_probe_doc_failures,
