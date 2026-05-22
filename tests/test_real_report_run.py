@@ -117,6 +117,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_wrr_defined_diagnostic_docs.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_wrr_lock_options_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -308,6 +312,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/check_wrr_claim_readiness_doc.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn(
             "scripts/check_wrr_claim_blocker_packet_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_defined_diagnostic_docs.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -674,6 +682,28 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "WRR claim-blocker packet failures: "
                 "docs/WRR_CLAIM_BLOCKER_PACKET.md missing no-input status",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_defined_diagnostic_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_defined_diagnostic_docs,
+                "validate_defined_diagnostic_docs",
+                return_value=["docs/WRR_DEFINED_PAIR_SET_AUDIT.md missing 72 of 163"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_defined_diagnostic_doc_failures"],
+                ["docs/WRR_DEFINED_PAIR_SET_AUDIT.md missing 72 of 163"],
+            )
+            self.assertIn(
+                "WRR defined diagnostic doc failures: "
+                "docs/WRR_DEFINED_PAIR_SET_AUDIT.md missing 72 of 163",
                 payload["failures"],
             )
 

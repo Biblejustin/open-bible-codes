@@ -29,6 +29,7 @@ from scripts import (
     check_source_basis_audit_queue,
     check_wrr_claim_blocker_packet_doc,
     check_wrr_claim_readiness_doc,
+    check_wrr_defined_diagnostic_docs,
     check_wrr_lock_options_doc,
     check_wrr_method_status_doc,
     check_wrr_source_recovery_probe_doc,
@@ -362,6 +363,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_claim_readiness.py",
     "scripts/check_wrr_claim_readiness_doc.py",
     "scripts/check_wrr_claim_blocker_packet_doc.py",
+    "scripts/check_wrr_defined_diagnostic_docs.py",
     "scripts/check_wrr_lock_options_doc.py",
     "scripts/check_wrr_method_status_doc.py",
     "scripts/check_wrr_source_recovery_probe_doc.py",
@@ -532,6 +534,15 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_claim_blocker_packet_doc_failures)
         )
 
+    wrr_defined_diagnostic_doc_failures = (
+        check_wrr_defined_diagnostic_docs.validate_defined_diagnostic_docs()
+    )
+    if wrr_defined_diagnostic_doc_failures:
+        failures.append(
+            "WRR defined diagnostic doc failures: "
+            + "; ".join(wrr_defined_diagnostic_doc_failures)
+        )
+
     wrr_lock_options_doc_failures = (
         check_wrr_lock_options_doc.validate_lock_options_doc(
             check_wrr_lock_options_doc.DEFAULT_DOC
@@ -609,6 +620,7 @@ def main(argv: list[str] | None = None) -> int:
         "wrr_claim_blocker_packet_doc_failures": (
             wrr_claim_blocker_packet_doc_failures
         ),
+        "wrr_defined_diagnostic_doc_failures": wrr_defined_diagnostic_doc_failures,
         "wrr_lock_options_doc_failures": wrr_lock_options_doc_failures,
         "wrr_method_status_doc_failures": wrr_method_status_doc_failures,
         "wrr_source_recovery_probe_doc_failures": wrr_source_recovery_probe_doc_failures,

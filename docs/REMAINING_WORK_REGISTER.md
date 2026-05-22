@@ -15,7 +15,8 @@ manual-review queue preflight guarding, WRR readiness-doc guarding, WRR
 blocker-packet preflight guarding, WRR lock-options preflight guarding, and
 WRR method-status preflight guarding, WRR source-recovery probing, WRR
 source-recovery probe guarding, `.shtml` research-source alternate probing,
-and hypothesis-testing source-status auditing/guarding.
+and hypothesis-testing source-status auditing/guarding, plus WRR
+defined-distance diagnostic doc guarding.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -131,6 +132,9 @@ Current pushed commits for this cleanup:
 - `87636a5` Add WRR source recovery probe.
 - `cc1527c` Guard WRR source recovery probe doc.
 - `d8864e8` Probe WRR source shtml alternates.
+- `2eea419` Refresh WRR source recovery register.
+- `60f6ba1` Audit Torah-code hypothesis source pages.
+- `2822abe` Guard hypothesis source audit doc.
 
 ### Formal Real Report Rerun
 
@@ -535,12 +539,14 @@ placeholder guarding, CRD relevance-lock guarding, manual-review queue
 preflight guarding, WRR readiness-doc guarding, WRR blocker-packet preflight
 guarding, WRR lock-options preflight guarding, and WRR method-status preflight
 guarding, WRR source-recovery probing, WRR source-recovery probe guarding, and
-`.shtml` research-source alternate probing:
+`.shtml` research-source alternate probing, hypothesis-testing source-status
+guarding, and WRR defined-distance diagnostic doc guarding:
 
-- `python3 -m pytest -q` passed: 1190 tests and 13957 subtests.
+- `python3 -m pytest -q` passed: 1204 tests and 13961 subtests.
 - `python3 -m pytest tests/test_download_wrr_sources.py tests/test_build_wrr_source_recovery_probe.py tests/test_check_wrr_source_recovery_probe_doc.py tests/test_real_report_run.py -q` passed: 50 tests and 42 subtests.
 - `python3 -m pytest tests/test_analyze_hypothesis_testing_source.py tests/test_download_wrr_sources.py -q` passed: 9 tests and 46 subtests.
 - `python3 -m pytest tests/test_check_hypothesis_testing_source_audit_doc.py tests/test_real_report_run.py -q` passed: 42 tests.
+- `python3 -m pytest tests/test_check_wrr_defined_diagnostic_docs.py tests/test_real_report_run.py -q` passed: 45 tests.
 - `python3 -m pytest tests/test_check_wrr_claim_readiness_doc.py tests/test_real_report_run.py -q` passed: 38 tests.
 - `python3 -m pytest tests/test_check_wrr_claim_blocker_packet_doc.py tests/test_real_report_run.py -q` passed: 39 tests.
 - `python3 -m pytest tests/test_check_wrr_lock_options_doc.py tests/test_real_report_run.py -q` passed: 40 tests.
@@ -561,6 +567,7 @@ guarding, WRR source-recovery probing, WRR source-recovery probe guarding, and
 - `python3 -m scripts.check_wrr_claim_blocker_packet_doc` passed.
 - `python3 -m scripts.check_wrr_lock_options_doc` passed.
 - `python3 -m scripts.check_wrr_method_status_doc` passed.
+- `python3 -m scripts.check_wrr_defined_diagnostic_docs` passed.
 - `python3 -m scripts.run_protocol protocols/wrr_source_recovery_probe.toml --resume` passed.
 - `python3 -m scripts.run_protocol protocols/hypothesis_testing_source_audit.toml --resume` passed.
 - `python3 -m scripts.check_wrr_source_recovery_probe_doc` passed.
@@ -583,6 +590,7 @@ guarding, WRR source-recovery probing, WRR source-recovery probe guarding, and
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wrr_lock_options_doc.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wrr_method_status_doc.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_hypothesis_source_guard.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wrr_defined_diag_docs.json` passed.
 - `python3 -m scripts.check_prospective_study_lanes` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
