@@ -121,7 +121,9 @@ Already implemented:
   `scripts/analyze_wrr_source_policy_scenarios.py`, wired into
   `protocols/wrr_audit_counts.toml`, showing diagnostic pair-universe movement
   without selecting a policy: baseline 165 >=5 pairs, exclude WNP Zacut 157, and
-  exclude all source-review flags 154.
+  exclude all source-review flags 154. The paired single-term impact table
+  identifies `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and `M$HZKWTW` as individual Zacut
+  rows whose exclusion leaves 163 >=5 pairs with gap 0.
 - WRR zero-hit variant probe in
   `scripts/analyze_wrr_zero_hit_variant_probe.py`, wired into
   `protocols/wrr_audit_counts.toml`, checking simple one-edit variants for

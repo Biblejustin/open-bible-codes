@@ -120,6 +120,21 @@ def test_final_report_tracks_wrr_single_term_source_policy_impacts() -> None:
         assert "gap 0" in text
 
 
+def test_wrr_support_docs_track_single_term_source_policy_impacts() -> None:
+    report_paths = [
+        Path("docs/CONSOLIDATED_FINDINGS.md"),
+        Path("docs/WRR_CORRECTED_DISTANCE_NOTES.md"),
+        Path("docs/WRR_REPLICATION_PLAN.md"),
+        Path("docs/WRR_METHODOLOGY_GAPS.md"),
+    ]
+
+    for path in report_paths:
+        text = path.read_text(encoding="utf-8")
+        assert "`M$HZKWTW`" in text
+        assert "163 >=5 pairs" in text
+        assert "gap 0" in text
+
+
 def test_consolidated_findings_include_clean_lock_closeout() -> None:
     text = Path("docs/CONSOLIDATED_FINDINGS.md").read_text(encoding="utf-8")
 

@@ -141,7 +141,9 @@ Already implemented:
   rule for pre-filtering the candidate set.
 - source-policy scenario diagnostics now keep the policy impact visible without
   selecting a policy: baseline 165 >=5 pairs, exclude WNP Zacut 157, and exclude
-  all source-review flags 154.
+  all source-review flags 154. The single-term Zacut impact table identifies
+  `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and `M$HZKWTW` as individual exclusions that
+  would leave 163 >=5 pairs with gap 0, still as diagnostic evidence only.
 - legacy perturbation boundary/exact-match diagnostic over ordinary imported
   length 5..8 ELS hits. Current output checks all 959 smoke-cap ordinary hits
   across 64 rows with hits: every ordinary hit keeps all 125 triples in bounds,
@@ -259,7 +261,9 @@ Not yet implemented:
    same-record pair table. Before aggregate statistics, derive that count by
    applying the source-backed `c(w,w')` eligibility rules over the candidate set.
    The source-policy scenarios are decision aids only: they show how WNP/context
-   exclusions move the raw >=5 count, but do not select the final pair universe.
+   exclusions move the raw >=5 count, including four single Zacut rows whose
+   individual exclusion leaves 163 >=5 pairs with gap 0, but do not select the
+   final pair universe.
 
 ## Proposed Implementation Order
 

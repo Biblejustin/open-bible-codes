@@ -796,7 +796,10 @@ Exact WRR claim readiness is still explicitly gated in
 `docs/WRR_CLAIM_READINESS.md`; it remains blocked until the source-locked pair
 universe and source-locked `D(w)` formula are resolved. Current source-policy
 scenarios remain diagnostic: baseline 165 >=5 pairs, exclude WNP Zacut 157, and
-exclude all source-review flags 154.
+exclude all source-review flags 154. The single-term Zacut diagnostic narrows
+the count gap further: `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and `M$HZKWTW` each
+individually leave 163 >=5 pairs with gap 0 if excluded, but no source policy is
+selected from that count alone.
 
 ## Best Next Work
 
