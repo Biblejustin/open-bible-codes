@@ -32,8 +32,9 @@ python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
 
 This runs preflight checks, refreshes locked STEP_TAHOT and Greek exact-center
 final gates with resume, refreshes WRR source/import audit state and the
-current WRR repo-defined diagnostic status, builds the generated report index,
-and writes `reports/real_report_run/summary.md`.
+current WRR repo-defined diagnostic status, validates prospective-lane and
+English source-basis metadata, builds the generated report index, and writes
+`reports/real_report_run/summary.md`.
 Tracked plan: `docs/REAL_REPORT_RUN.md`.
 
 Run one step:

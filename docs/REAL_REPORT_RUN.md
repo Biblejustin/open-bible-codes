@@ -122,6 +122,10 @@ It requires:
 - no tracked report/database/raw-source artifacts beyond allowed placeholders;
 - no high-confidence secret-token patterns in tracked files;
 - required protocols, docs, and term files present;
+- prospective lane profiles valid, with registered term/protocol/report paths
+  present;
+- English source-basis manifests and audit-queue counts valid, with no current
+  `needs_audit` rows unless the policy is explicitly changed;
 - checked-in `docs/INDEX.md` and `protocols/INDEX.md` freshness;
 - existing generated inputs needed by the final gates.
 

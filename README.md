@@ -162,6 +162,10 @@ Current broad refresh has 34 available BibleGateway-overlap English versions
 and skips 30 missing local CSVs. Missing rows are listed in
 `reports/biblegateway_english_versions/missing_versions.csv`.
 
+Source-basis metadata queue:
+`docs/SOURCE_BASIS_AUDIT_QUEUE.md`. Validate it with
+`python3 -m scripts.check_source_basis_audit_queue`.
+
 Additional open/CC eBible English control corpora:
 
 ```bash
