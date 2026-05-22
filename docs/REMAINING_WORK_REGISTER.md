@@ -267,6 +267,8 @@ sample. This is negative under the registered shuffled-insertion control rule.
 The secondary non-Bible insertion control is also cautionary: 1 of 3 non-Bible
 controls is at or above the observed total because the Moby Dick replacement
 block also produced 1 `tobit` bridge row.
+The lane is now recorded in `configs/prospective_study_lanes.json` and
+`docs/PROSPECTIVE_LANE_STATUS.md` as a completed negative controlled result.
 
 Current next no-input step: look for independent replication designs or other
 locked prospective lanes; no KJVA prospective bridge claim language is

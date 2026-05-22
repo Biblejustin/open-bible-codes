@@ -168,6 +168,31 @@
       "candidate_rule": "document absent, source-specific, or ordinary controlled rows",
       "primary_row_outcome": "presence/absence and representative-control q when applicable",
       "primary_study_outcome": "transparent negative/curiosity appendix; no claim-level outcome"
+    },
+    {
+      "id": "kjva_apocrypha_bridge_prospective",
+      "title": "KJVA Apocrypha Bridge Prospective",
+      "status": "completed_negative_controlled_result",
+      "language": "english",
+      "term_file": "terms/kjv_apocrypha_bridge_prospective_terms.csv",
+      "protocol": "protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml",
+      "report_doc": "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md",
+      "sources": [
+        {"label": "KJVA", "path": "configs/example_ebible_engkjv_apocrypha.toml"}
+      ],
+      "skip_range": "2..250",
+      "direction": "both",
+      "min_normalized_length": "4",
+      "candidate_type": "canonical/apocrypha boundary bridge rows",
+      "context_rule": "expanded KJVA stream; row must cross canonical/apocrypha boundary",
+      "controls": "5000 shuffled apocrypha-block samples plus same-length non-Bible insertion controls",
+      "correction": "benjamini_hochberg_across_registered_terms",
+      "source_term_files": "fixed KJVA apocrypha/deuterocanon proper-name prospective list",
+      "dedupe_rule": "normalized term + bridge row family",
+      "excluded_prior": "post-screen KJVA bridge confirmatory rows remain review-only prior evidence",
+      "candidate_rule": "fixed term produces boundary-crossing ELS row under registered skip/direction settings",
+      "primary_row_outcome": "observed bridge rows versus shuffled term-level sample max and non-Bible insertion totals",
+      "primary_study_outcome": "negative: no term survives BH q <= 0.05 and one non-Bible control matches the observed total"
     }
   ]
 }

@@ -15,6 +15,7 @@ It lists which lanes are completed, blocked, or waiting on a new lock.
 | `compound_extension_prospective` | `completed_negative_controlled_result` | completed negative controlled result | `terms/compound_extension_prospective_terms_clean_lock.csv` | `protocols/compound_extension_prospective.toml` | `docs/COMPOUND_EXTENSION_PROSPECTIVE_REPORT.md` |
 | `hebrew_concordance_words_prospective` | `completed_negative_controlled_result` | completed negative controlled result | `terms/hebrew_concordance_prospective_terms_clean_lock.csv` | `protocols/hebrew_concordance_words_prospective.toml` | `docs/HEBREW_CONCORDANCE_WORDS_PROSPECTIVE_REPORT.md` |
 | `local_terms_negative_appendix` | `completed_negative_curiosity_appendix` | completed negative curiosity appendix | `terms/local_terms_appendix.csv` | `protocols/local_terms_appendix.toml` | `docs/LOCAL_TERMS_APPENDIX_REPORT.md` |
+| `kjva_apocrypha_bridge_prospective` | `completed_negative_controlled_result` | completed negative controlled result | `terms/kjv_apocrypha_bridge_prospective_terms.csv` | `protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml` | `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md` |
 
 ## Blocked Lanes
 
