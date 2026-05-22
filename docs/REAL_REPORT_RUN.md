@@ -126,6 +126,10 @@ It requires:
   present;
 - English source-basis manifests and audit-queue counts valid, with no current
   `needs_audit` rows unless the policy is explicitly changed;
+- expanded-strata operator docs point at live scripts, protocol files, and
+  Make targets;
+- future study-mapping CSV schemas retain required columns, required locked
+  values, and supported language markers;
 - checked-in `docs/INDEX.md` and `protocols/INDEX.md` freshness;
 - existing generated inputs needed by the final gates.
 

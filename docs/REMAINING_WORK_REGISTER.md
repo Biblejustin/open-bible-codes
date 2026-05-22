@@ -9,7 +9,7 @@ cleanup, prospective-lane validator tightening, source-audit preflight guard
 coverage, prospective-lane validation in report preflight, source-basis audit
 queue guarding, English source-basis preflight inputs, formal source-basis
 queue validation, source-basis validation documentation, and formal preflight
-metadata-check documentation.
+metadata-check documentation, plus study-tooling preflight coverage.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -96,6 +96,7 @@ Current pushed commits for this cleanup:
 - `dd777bc` Validate source basis audit queue in preflight.
 - `381bcfb` Document source basis queue validation.
 - `53c51b8` Document formal preflight metadata checks.
+- `34ecc61` Wire study tooling checks into report preflight.
 
 ### Formal Real Report Rerun
 
@@ -473,13 +474,16 @@ validator tightening, source-audit preflight guard coverage, prospective-lane
 validation in report preflight, source-basis audit queue guarding, and English
 source-basis preflight inputs, formal source-basis queue validation, and
 source-basis validation documentation, plus formal preflight metadata-check
-documentation:
+documentation, and study-tooling preflight coverage:
 
-- `python3 -m pytest -q` passed: 1150 tests and 13951 subtests.
+- `python3 -m pytest -q` passed: 1152 tests and 13951 subtests.
+- `python3 -m pytest tests/test_real_report_run.py tests/test_check_expanded_strata_tooling.py tests/test_validate_study_mapping_schemas.py -q` passed: 38 tests.
 - `python3 -m pytest tests/test_import_bolls_translation.py tests/test_english_version_manifests.py -q` passed: 12 tests and 117 subtests.
 - `python3 -m pytest tests/test_english_version_manifests.py -q` passed: 8 tests and 117 subtests.
 - `python3 -m pytest tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py tests/test_real_report_run.py -q` passed: 39 tests and 117 subtests.
 - `python3 -m scripts.check_source_basis_audit_queue` passed.
+- `python3 -m scripts.check_expanded_strata_tooling --report /tmp/edls_expanded_tooling_after_patch.json` passed.
+- `python3 -m scripts.validate_study_mapping_schemas` passed.
 - `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_claim_catalog.py tests/test_wrr_claim_readiness.py -q` passed: 32 tests and 60 subtests.
 - `python3 -m pytest tests/test_real_report_run.py -q` passed: 25 tests.
@@ -489,6 +493,7 @@ documentation:
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_english_source_basis.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_source_basis_docs.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_run_docs_source_basis.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_expanded_mapping_fullgate.json` passed.
 - `python3 -m scripts.check_prospective_study_lanes` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
