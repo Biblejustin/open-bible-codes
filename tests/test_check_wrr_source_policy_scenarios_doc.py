@@ -15,7 +15,12 @@ def test_missing_doc_fails(tmp_path: Path) -> None:
 
 def test_missing_exclusion_counts_fail(tmp_path: Path) -> None:
     doc = tmp_path / "WRR_SOURCE_POLICY_SCENARIOS.md"
-    doc.write_text("\n".join(check.REQUIRED_PHRASES[:-5]) + "\n", encoding="utf-8")
+    phrases = [
+        phrase
+        for phrase in check.REQUIRED_PHRASES
+        if "exclude_all_source_review_flags" not in phrase
+    ]
+    doc.write_text("\n".join(phrases) + "\n", encoding="utf-8")
 
     failures = check.validate_source_policy_scenarios_doc(doc)
 

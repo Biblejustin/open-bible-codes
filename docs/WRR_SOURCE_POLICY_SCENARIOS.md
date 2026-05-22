@@ -30,9 +30,9 @@ python3 -m scripts.analyze_wrr_source_policy_scenarios --pair-table reports/wrr_
 | `wrr2_27_app_03` | `ZKWTW` | `appellation` | `wnp_disputed_zacut_appellation` | `pair_table_wnp_flag` |  |
 | `wrr2_27_app_05` | `M$HZKWTA` | `appellation` | `wnp_disputed_zacut_appellation` | `pair_table_wnp_flag;source_queue` | diagnostic flag only; do not exclude without source-lock policy |
 | `wrr2_27_app_06` | `M$HZKWTW` | `appellation` | `wnp_disputed_zacut_appellation` | `pair_table_wnp_flag;source_queue` | diagnostic flag only; do not exclude without source-lock policy |
-| `wrr2_30_app_05` | `B@LY$RLBB` | `appellation` | `wnp_book_title_appellation_dispute` | `source_queue` | source/title-prefix rule review before source correction |
-| `wrr2_32_app_04` | `$LMHMXLMA` | `appellation` | `wnp_chelm_spelling_context` | `source_queue` | source/pair-rule review; do not decide from OCR crop alone |
-| `wrr2_32_app_05` | `$LMHMX@LMA` | `appellation` | `wnp_chelm_spelling_context` | `source_queue` | source/pair-rule review; do not decide from OCR crop alone |
+| `wrr2_30_app_05` | `B@LY$RLBB` | `appellation` | `wnp_book_title_appellation_dispute` | `source_queue` | source/title-prefix rule review; visual notes show title text without visible B@L prefix |
+| `wrr2_32_app_04` | `$LMHMXLMA` | `appellation` | `wnp_chelm_spelling_context` | `source_queue` | source/pair-rule review; visual notes show English of-Chelm label but primary Hebrew cell only supports RBY$LMH in this pass |
+| `wrr2_32_app_05` | `$LMHMX@LMA` | `appellation` | `wnp_chelm_spelling_context` | `source_queue` | source/pair-rule review; visual notes show English of-Chelm label but primary Hebrew cell only supports RBY$LMH in this pass |
 
 ## Single-Term Impact
 

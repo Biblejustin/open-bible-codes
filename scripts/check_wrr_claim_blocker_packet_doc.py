@@ -19,6 +19,8 @@ REQUIRED_PHRASES = (
     "| Aggregate statistic and permutation | `diagnostic_not_claim_grade` |",
     "select pair-universe/source-review policy",
     "select printed WRR formula or reported WRR-program formula",
+    "source/title-prefix rule review; visual notes show title text without visible B@L prefix",
+    "source/pair-rule review; visual notes show English of-Chelm label but primary Hebrew cell only supports RBY$LMH in this pass",
     "This is a decision packet, not a reproduction result.",
     "No pair exclusion or D(w) formula is chosen here.",
 )

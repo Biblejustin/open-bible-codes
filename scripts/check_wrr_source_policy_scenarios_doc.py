@@ -17,6 +17,8 @@ REQUIRED_PHRASES = (
     "| keep_all_working_source | `baseline` | 0 | 0 | 165 | 86 | -2 | 77 |",
     "| exclude_wnp_zacut_only | `diagnostic_exclusion` | 8 | 0 | 157 | 78 | 6 | 85 |",
     "| exclude_all_source_review_flags | `diagnostic_exclusion` | 11 | 0 | 154 | 78 | 9 | 85 |",
+    "source/title-prefix rule review; visual notes show title text without visible B@L prefix",
+    "source/pair-rule review; visual notes show English of-Chelm label but primary Hebrew cell only supports RBY$LMH in this pass",
     "## Single-Term Impact",
     "| `wrr2_27_app_02` | `ZKWTA` | `wnp_disputed_zacut_appellation` | 2 | 163 | 0 | single-term exclusion closes >=5 count gap |",
     "`review_chelm_spelling_only` keeps pair counts stable and records review scope.",

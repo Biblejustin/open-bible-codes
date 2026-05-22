@@ -22,7 +22,8 @@ guarding, WRR D(w) formula sensitivity doc guarding, and WRR source-policy
 scenario doc guarding, WRR cross-pair grid doc guarding, and WRR direct
 all-lane diagnostic doc guarding, and WRR source visual-review notes doc
 guarding, WRR source visual-review row triage refinement, and WRR
-source-review queue visual-triage action propagation.
+source-review queue visual-triage action propagation, with downstream WRR
+source-policy and blocker-packet action refresh.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -151,6 +152,7 @@ Current pushed commits for this cleanup:
 - `96de90a` Guard WRR direct all-lane diagnostic doc.
 - `4914f41` Guard WRR source visual notes doc.
 - `fb2b54d` Refine WRR visual source triage.
+- `2b7022d` Propagate WRR visual triage to source queue.
 
 ### Formal Real Report Rerun
 
