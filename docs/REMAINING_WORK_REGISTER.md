@@ -14,7 +14,8 @@ preregistration placeholder guarding, CRD relevance-lock guarding,
 manual-review queue preflight guarding, WRR readiness-doc guarding, WRR
 blocker-packet preflight guarding, WRR lock-options preflight guarding, and
 WRR method-status preflight guarding, WRR source-recovery probing, WRR
-source-recovery probe guarding, and `.shtml` research-source alternate probing.
+source-recovery probe guarding, `.shtml` research-source alternate probing,
+and hypothesis-testing source-status auditing.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -275,6 +276,13 @@ placeholder pages have a source-status audit:
 - `protocols/under_construction_experiments_source_audit.toml`
 - `docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md`
 
+The Torah-code.org hypothesis-testing overview and linked subpages have a
+source-status audit:
+
+- `scripts/analyze_hypothesis_testing_source.py`
+- `protocols/hypothesis_testing_source_audit.toml`
+- `docs/HYPOTHESIS_TESTING_SOURCE_AUDIT.md`
+
 The Bombach/Gans co-linear ELS/verse paper and attachment files have a
 source-shape audit:
 
@@ -304,6 +312,10 @@ PDF, one reported significant follow-up page, two reported non-significant
 pages, and one under-construction page.
 The under-construction audit confirms six placeholder pages, no PDF data links,
 four copied-title mismatches, and the Katrina page mislabeled as Tsunami.
+The hypothesis-testing source audit confirms four hypothesis-testing URLs now
+redirect to the Torah-code root, share the same spam-root hash prefix
+`d60a59519b55bcff`, contain no expected labels, and provide zero usable method
+source pages in the current live crawl.
 The missing-model-pages audit confirms that four linked Torah-code.org
 level-2/3 geometric and ELS model pages currently download as root-canonical
 pages with unrelated slot/gambling content, no expected model labels, and zero
@@ -527,6 +539,7 @@ guarding, WRR source-recovery probing, WRR source-recovery probe guarding, and
 
 - `python3 -m pytest -q` passed: 1190 tests and 13957 subtests.
 - `python3 -m pytest tests/test_download_wrr_sources.py tests/test_build_wrr_source_recovery_probe.py tests/test_check_wrr_source_recovery_probe_doc.py tests/test_real_report_run.py -q` passed: 50 tests and 42 subtests.
+- `python3 -m pytest tests/test_analyze_hypothesis_testing_source.py tests/test_download_wrr_sources.py -q` passed: 9 tests and 46 subtests.
 - `python3 -m pytest tests/test_check_wrr_claim_readiness_doc.py tests/test_real_report_run.py -q` passed: 38 tests.
 - `python3 -m pytest tests/test_check_wrr_claim_blocker_packet_doc.py tests/test_real_report_run.py -q` passed: 39 tests.
 - `python3 -m pytest tests/test_check_wrr_lock_options_doc.py tests/test_real_report_run.py -q` passed: 40 tests.
@@ -548,6 +561,7 @@ guarding, WRR source-recovery probing, WRR source-recovery probe guarding, and
 - `python3 -m scripts.check_wrr_lock_options_doc` passed.
 - `python3 -m scripts.check_wrr_method_status_doc` passed.
 - `python3 -m scripts.run_protocol protocols/wrr_source_recovery_probe.toml --resume` passed.
+- `python3 -m scripts.run_protocol protocols/hypothesis_testing_source_audit.toml --resume` passed.
 - `python3 -m scripts.check_wrr_source_recovery_probe_doc` passed.
 - `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_claim_catalog.py tests/test_wrr_claim_readiness.py -q` passed: 32 tests and 60 subtests.

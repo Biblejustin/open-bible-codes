@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 128
+Protocols indexed: 129
 
 ## Analysis
 
@@ -152,6 +152,7 @@ Protocols indexed: 128
 
 | Name | Description | Steps | Terms | Output Roots | Path |
 | --- | --- | ---: | --- | --- | --- |
+| hypothesis_testing_source_audit | Audit Torah-code.org hypothesis-testing pages so they are not treated as WRR data-beari... | 2 |  | reports/wrr_1994 | `hypothesis_testing_source_audit.toml` |
 | wrr_audit_counts | WRR2 imported-term count, same-record pair smoke, and current repo-defined diagnostic s... | 39 |  | reports/wrr_1994 | `wrr_audit_counts.toml` |
 | wrr_corrected_distance_direct_all_lanes | Direct perturbed-letter WRR corrected-distance diagnostics over all imported same-recor... | 9 |  | reports/wrr_1994 | `wrr_corrected_distance_direct_all_lanes.toml` |
 | wrr_corrected_distance_highcap_1000_split_2 | Two-shard WRR corrected-distance diagnostic at search cap 1000, plus high-cap perturbat... | 6 |  | reports/wrr_1994 | `wrr_corrected_distance_highcap_1000_split_2.toml` |

@@ -614,6 +614,8 @@ Event/object experiment source audit:
 `docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md` (65 machine-readable source rows).
 Under-construction experiment source audit:
 `docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md`.
+Hypothesis-testing source audit:
+`docs/HYPOTHESIS_TESTING_SOURCE_AUDIT.md`.
 Research missing model pages audit:
 `docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md`.
 Targeted recovery probes can refresh individual WRR/Torah-code source labels:

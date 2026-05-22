@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 330
+Documents indexed: 331
 
 ## Controls
 
@@ -92,6 +92,7 @@ Documents indexed: 330
 | Title | Path |
 | --- | --- |
 | ELS Hypothesis Analysis Framework | `HYPOTHESIS_ANALYSIS_FRAMEWORK.md` |
+| Hypothesis-Testing Source Audit | `HYPOTHESIS_TESTING_SOURCE_AUDIT.md` |
 | WRR Claim Blocker Packet | `WRR_CLAIM_BLOCKER_PACKET.md` |
 | WRR Claim Readiness | `WRR_CLAIM_READINESS.md` |
 | WRR Corrected Distance Notes | `WRR_CORRECTED_DISTANCE_NOTES.md` |

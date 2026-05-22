@@ -139,6 +139,10 @@ class DownloadWrrSourcesTests(unittest.TestCase):
             "torah_code_experiment_pumbedita_data": "torah_code_experiment_pumbedita_data.pdf",
             "torah_code_experiment_auschwitz_data": "torah_code_experiment_auschwitz_data.pdf",
             "torah_code_experiment_ark_code": "torah_code_experiment_ark_code.pdf",
+            "torah_code_hypothesis_testing_overview": "torah_code_hypothesis_testing_overview.html",
+            "torah_code_hypothesis_testing_errors": "torah_code_hypothesis_testing_errors.html",
+            "torah_code_hypothesis_testing_hypotheses": "torah_code_hypothesis_testing_hypotheses.html",
+            "torah_code_hypothesis_testing_simulated_experiments": "torah_code_hypothesis_testing_simulated_experiments.html",
         }
         for label, expected in experiment_names.items():
             with self.subTest(label=label):

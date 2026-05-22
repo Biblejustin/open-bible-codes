@@ -1,0 +1,56 @@
+name = "hypothesis_testing_source_audit"
+description = "Audit Torah-code.org hypothesis-testing pages so they are not treated as WRR data-bearing sources."
+manifest_out = "reports/wrr_1994/hypothesis_testing_source_audit_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "download_hypothesis_testing_sources"
+description = "Refresh selected Torah-code.org hypothesis-testing pages into ignored reports output."
+always_run = true
+argv = [
+  "-m", "scripts.download_wrr_sources",
+  "--out-dir", "reports/wrr_1994",
+  "--manifest-out", "reports/wrr_1994/hypothesis_testing_sources.manifest.json",
+  "--refresh",
+  "--label", "torah_code_hypothesis_testing_overview",
+  "--label", "torah_code_hypothesis_testing_errors",
+  "--label", "torah_code_hypothesis_testing_hypotheses",
+  "--label", "torah_code_hypothesis_testing_simulated_experiments",
+]
+inputs = [
+  "scripts/download_wrr_sources.py",
+]
+outputs = [
+  "reports/wrr_1994/torah_code_hypothesis_testing_overview.html",
+  "reports/wrr_1994/torah_code_hypothesis_testing_errors.html",
+  "reports/wrr_1994/torah_code_hypothesis_testing_hypotheses.html",
+  "reports/wrr_1994/torah_code_hypothesis_testing_simulated_experiments.html",
+  "reports/wrr_1994/hypothesis_testing_sources.manifest.json",
+]
+
+[[steps]]
+id = "audit_hypothesis_testing_sources"
+description = "Record source-status and method-anchor availability for hypothesis-testing pages."
+argv = [
+  "-m", "scripts.analyze_hypothesis_testing_source",
+  "--out", "reports/wrr_1994/hypothesis_testing_source_pages.csv",
+  "--summary-out", "reports/wrr_1994/hypothesis_testing_source_summary.csv",
+  "--anchors-out", "reports/wrr_1994/hypothesis_testing_source_anchors.csv",
+  "--markdown-out", "docs/HYPOTHESIS_TESTING_SOURCE_AUDIT.md",
+  "--manifest-out", "reports/wrr_1994/hypothesis_testing_source_audit.manifest.json",
+]
+inputs = [
+  "scripts/analyze_hypothesis_testing_source.py",
+  "reports/wrr_1994/torah_code_hypothesis_testing_overview.html",
+  "reports/wrr_1994/torah_code_hypothesis_testing_errors.html",
+  "reports/wrr_1994/torah_code_hypothesis_testing_hypotheses.html",
+  "reports/wrr_1994/torah_code_hypothesis_testing_simulated_experiments.html",
+]
+outputs = [
+  "reports/wrr_1994/hypothesis_testing_source_pages.csv",
+  "reports/wrr_1994/hypothesis_testing_source_summary.csv",
+  "reports/wrr_1994/hypothesis_testing_source_anchors.csv",
+  "docs/HYPOTHESIS_TESTING_SOURCE_AUDIT.md",
+  "reports/wrr_1994/hypothesis_testing_source_audit.manifest.json",
+]
