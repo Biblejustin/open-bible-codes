@@ -19,7 +19,7 @@ and hypothesis-testing source-status auditing/guarding, plus WRR
 defined-distance diagnostic doc guarding, WRR variant-gap doc guarding, and
 WRR variant-gap method-status evidence propagation, WRR source-review queue doc
 guarding, WRR D(w) formula sensitivity doc guarding, and WRR source-policy
-scenario doc guarding.
+scenario doc guarding, and WRR cross-pair grid doc guarding.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -143,6 +143,7 @@ Current pushed commits for this cleanup:
 - `cb09f08` Surface WRR variant gap method evidence.
 - `c94b991` Guard WRR source review queue doc.
 - `2a700c8` Guard WRR D formula sensitivity doc.
+- `61b8060` Guard WRR source policy scenario doc.
 
 ### Formal Real Report Rerun
 

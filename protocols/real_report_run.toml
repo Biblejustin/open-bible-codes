@@ -317,6 +317,7 @@ inputs = [
   "scripts/analyze_wrr_corrected_distance.py",
   "scripts/analyze_wrr_corrected_distance_aggregate.py",
   "scripts/analyze_wrr_cross_pair_permutations.py",
+  "scripts/check_wrr_cross_pair_grid_doc.py",
   "scripts/analyze_wrr_defined_pair_set.py",
   "scripts/analyze_wrr_defined_gap_reasons.py",
   "scripts/analyze_wrr_variant_gap_impact.py",

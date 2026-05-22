@@ -29,6 +29,7 @@ from scripts import (
     check_source_basis_audit_queue,
     check_wrr_claim_blocker_packet_doc,
     check_wrr_claim_readiness_doc,
+    check_wrr_cross_pair_grid_doc,
     check_wrr_defined_diagnostic_docs,
     check_wrr_dw_formula_sensitivity_doc,
     check_wrr_lock_options_doc,
@@ -360,6 +361,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/analyze_wrr_corrected_distance.py",
     "scripts/analyze_wrr_corrected_distance_aggregate.py",
     "scripts/analyze_wrr_cross_pair_permutations.py",
+    "scripts/check_wrr_cross_pair_grid_doc.py",
     "scripts/analyze_wrr_defined_pair_set.py",
     "scripts/analyze_wrr_defined_gap_reasons.py",
     "scripts/analyze_wrr_variant_gap_impact.py",
@@ -594,6 +596,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_source_policy_scenarios_doc_failures)
         )
 
+    wrr_cross_pair_grid_doc_failures = (
+        check_wrr_cross_pair_grid_doc.validate_cross_pair_grid_doc(
+            check_wrr_cross_pair_grid_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_cross_pair_grid_doc_failures:
+        failures.append(
+            "WRR cross-pair grid doc failures: "
+            + "; ".join(wrr_cross_pair_grid_doc_failures)
+        )
+
     wrr_lock_options_doc_failures = (
         check_wrr_lock_options_doc.validate_lock_options_doc(
             check_wrr_lock_options_doc.DEFAULT_DOC
@@ -680,6 +693,7 @@ def main(argv: list[str] | None = None) -> int:
         "wrr_source_policy_scenarios_doc_failures": (
             wrr_source_policy_scenarios_doc_failures
         ),
+        "wrr_cross_pair_grid_doc_failures": wrr_cross_pair_grid_doc_failures,
         "wrr_lock_options_doc_failures": wrr_lock_options_doc_failures,
         "wrr_method_status_doc_failures": wrr_method_status_doc_failures,
         "wrr_source_recovery_probe_doc_failures": wrr_source_recovery_probe_doc_failures,
