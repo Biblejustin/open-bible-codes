@@ -13,7 +13,8 @@ metadata-check documentation, study-tooling preflight coverage, and
 preregistration placeholder guarding, CRD relevance-lock guarding,
 manual-review queue preflight guarding, WRR readiness-doc guarding, WRR
 blocker-packet preflight guarding, WRR lock-options preflight guarding, and
-WRR method-status preflight guarding.
+WRR method-status preflight guarding, WRR source-recovery probing, WRR
+source-recovery probe guarding, and `.shtml` research-source alternate probing.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -125,6 +126,10 @@ Current pushed commits for this cleanup:
 - `81cc9a1` Refresh WRR method status guard.
 - `bc3e098` Record WRR source redirect metadata.
 - `549faf4` Document WRR source recovery probes.
+- `44cb7d9` Refresh WRR source recovery status.
+- `87636a5` Add WRR source recovery probe.
+- `cc1527c` Guard WRR source recovery probe doc.
+- `d8864e8` Probe WRR source shtml alternates.
 
 ### Formal Real Report Rerun
 
@@ -517,9 +522,11 @@ documentation, study-tooling preflight coverage, and preregistration
 placeholder guarding, CRD relevance-lock guarding, manual-review queue
 preflight guarding, WRR readiness-doc guarding, WRR blocker-packet preflight
 guarding, WRR lock-options preflight guarding, and WRR method-status preflight
-guarding:
+guarding, WRR source-recovery probing, WRR source-recovery probe guarding, and
+`.shtml` research-source alternate probing:
 
-- `python3 -m pytest -q` passed: 1180 tests and 13951 subtests.
+- `python3 -m pytest -q` passed: 1190 tests and 13957 subtests.
+- `python3 -m pytest tests/test_download_wrr_sources.py tests/test_build_wrr_source_recovery_probe.py tests/test_check_wrr_source_recovery_probe_doc.py tests/test_real_report_run.py -q` passed: 50 tests and 42 subtests.
 - `python3 -m pytest tests/test_check_wrr_claim_readiness_doc.py tests/test_real_report_run.py -q` passed: 38 tests.
 - `python3 -m pytest tests/test_check_wrr_claim_blocker_packet_doc.py tests/test_real_report_run.py -q` passed: 39 tests.
 - `python3 -m pytest tests/test_check_wrr_lock_options_doc.py tests/test_real_report_run.py -q` passed: 40 tests.
@@ -540,6 +547,8 @@ guarding:
 - `python3 -m scripts.check_wrr_claim_blocker_packet_doc` passed.
 - `python3 -m scripts.check_wrr_lock_options_doc` passed.
 - `python3 -m scripts.check_wrr_method_status_doc` passed.
+- `python3 -m scripts.run_protocol protocols/wrr_source_recovery_probe.toml --resume` passed.
+- `python3 -m scripts.check_wrr_source_recovery_probe_doc` passed.
 - `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_claim_catalog.py tests/test_wrr_claim_readiness.py -q` passed: 32 tests and 60 subtests.
 - `python3 -m pytest tests/test_real_report_run.py -q` passed: 25 tests.
