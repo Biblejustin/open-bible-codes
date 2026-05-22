@@ -29,6 +29,7 @@ argv = [
   "--data-source", "reports/wrr_1994/torah_code_experiment_american_presidents_data.pdf",
   "--rules-source", "reports/wrr_1994/torah_code_experiment_english_hebrew_transliteration_rules.pdf",
   "--out", "reports/wrr_1994/american_presidents_source_records.csv",
+  "--spellings-out", "reports/wrr_1994/american_presidents_source_spellings.csv",
   "--summary-out", "reports/wrr_1994/american_presidents_source_summary.csv",
   "--anchors-out", "reports/wrr_1994/american_presidents_protocol_anchors.csv",
   "--markdown-out", "docs/AMERICAN_PRESIDENTS_SOURCE_AUDIT.md",
@@ -41,6 +42,7 @@ inputs = [
 ]
 outputs = [
   "reports/wrr_1994/american_presidents_source_records.csv",
+  "reports/wrr_1994/american_presidents_source_spellings.csv",
   "reports/wrr_1994/american_presidents_source_summary.csv",
   "reports/wrr_1994/american_presidents_protocol_anchors.csv",
   "docs/AMERICAN_PRESIDENTS_SOURCE_AUDIT.md",

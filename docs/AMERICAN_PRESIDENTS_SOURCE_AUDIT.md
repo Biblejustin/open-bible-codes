@@ -19,11 +19,12 @@ statistical test, and not a claim-ready replication.
 | data records | 42 |
 | record index minimum | 1 |
 | record index maximum | 42 |
-| last-name spelling rows | 140 |
+| last-name spelling rows | 127 |
 | last-name plus initial spelling rows | 152 |
-| total spelling rows | 292 |
+| total spelling rows | 279 |
+| machine spelling rows extracted | 279 |
 | maximum spelling rows per record | 16 |
-| records with initial-only continuation lines | 6 |
+| records with initial-only continuation lines | 13 |
 
 ## Protocol Anchors
 

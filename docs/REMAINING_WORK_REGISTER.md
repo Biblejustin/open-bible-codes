@@ -213,9 +213,10 @@ all_1698 phrase/verse rows extracted from the all_1698 PDF, 502 raw reviewed
 subset rows extracted from the four reviewed subset PDFs, 7 Hebrew-method
 appendix anchors, and 21/21 protocol anchors. The
 communities audit confirms 66 data records and 210 machine-readable pre-filter
-community rows. The presidents audit confirms 42 data records and 292 pre-test spelling
-rows. The birth-date audit confirms two S1/S2 tables, 14 rows per table, and
-51 date forms per table. The Israeli prime-ministers audit confirms 12 PDF
+community rows. The presidents audit confirms 42 data records and 279
+machine-readable spelling rows. The birth-date audit confirms two S1/S2
+tables, 14 rows per table, and 51 date forms per table. The Israeli
+prime-ministers audit confirms 12 PDF
 rows but only 8 downloaded detail pages with keyword labels, leaving a 4-page
 detail-source coverage gap. The Cities audit confirms 13 source-chain files,
 6 `.pdf`-named HTML wrappers, 1 parse-error PDF, 1 no-text PDF, and 7/7 source

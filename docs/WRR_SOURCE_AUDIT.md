@@ -211,9 +211,9 @@ These are source leads, not claim-ready evidence.
   test because the page supplies rule-based English-to-Hebrew spelling rules
   and input data. The source-shape audit in
   `docs/AMERICAN_PRESIDENTS_SOURCE_AUDIT.md` now confirms 42 data records and
-  292 spelling rows before any variant-choice or ELS test. It should be a
-  separate protocol from WRR because the alternative hypothesis and
-  transliteration generation are different.
+  279 machine-readable spelling rows before any variant-choice or ELS test. It
+  should be a separate protocol from WRR because the alternative hypothesis
+  and transliteration generation are different.
 - Israeli prime ministers: useful as a small modern-person/entity protocol with
   linked keyword pages. The source-shape audit in
   `docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md` now confirms 12 PDF rows and
@@ -334,9 +334,9 @@ experiment filters, run ELS hits, or test compactness.
 
 `scripts/analyze_american_presidents_source.py` parses the American presidents
 data PDF and linked English-to-Hebrew transliteration-rule PDF into ignored
-source-shape CSVs and a tracked audit summary. It verifies the 42-record data
-table shape and rule anchors, but does not choose variants, run ELS hits, or
-evaluate controls.
+source-shape CSVs, a spelling-row CSV, and a tracked audit summary. It verifies
+the 42-record data table shape, exports 279 spelling rows, and checks rule
+anchors, but does not choose variants, run ELS hits, or evaluate controls.
 
 `scripts/analyze_witztum_birth_dates_source.py` parses the Witztum Genesis
 birth-date paper and data PDFs into ignored source-shape CSVs and a tracked

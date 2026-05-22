@@ -597,7 +597,7 @@ Gans communities source-shape audit:
 `docs/GANS_COMMUNITIES_SOURCE_AUDIT.md` (66 records and 210 raw pre-filter
 community rows).
 American presidents source-shape audit:
-`docs/AMERICAN_PRESIDENTS_SOURCE_AUDIT.md`.
+`docs/AMERICAN_PRESIDENTS_SOURCE_AUDIT.md` (42 records and 279 spelling rows).
 Witztum birth-date source-shape audit:
 `docs/WITZTUM_BIRTH_DATES_SOURCE_AUDIT.md`.
 Israeli prime-ministers source-shape audit:

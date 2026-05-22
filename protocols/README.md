@@ -125,8 +125,8 @@ python3 -m scripts.run_protocol protocols/american_presidents_source_audit.toml 
 ```
 
 This parses the Torah-code.org American presidents data PDF and linked
-transliteration-rule PDF into ignored source-shape outputs. It does not choose
-variants, run ELS hits, or evaluate controls. Tracked audit:
+transliteration-rule PDF into ignored source-shape and spelling-row outputs. It
+does not choose variants, run ELS hits, or evaluate controls. Tracked audit:
 `docs/AMERICAN_PRESIDENTS_SOURCE_AUDIT.md`.
 
 Witztum birth-date source-shape audit:

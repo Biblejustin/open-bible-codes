@@ -23,6 +23,7 @@ DEFAULT_RULES_SOURCE = Path(
     "reports/wrr_1994/torah_code_experiment_english_hebrew_transliteration_rules.pdf"
 )
 DEFAULT_OUT = Path("reports/wrr_1994/american_presidents_source_records.csv")
+DEFAULT_SPELLINGS_OUT = Path("reports/wrr_1994/american_presidents_source_spellings.csv")
 DEFAULT_SUMMARY_OUT = Path("reports/wrr_1994/american_presidents_source_summary.csv")
 DEFAULT_ANCHORS_OUT = Path("reports/wrr_1994/american_presidents_protocol_anchors.csv")
 DEFAULT_MD = Path("docs/AMERICAN_PRESIDENTS_SOURCE_AUDIT.md")
@@ -36,6 +37,13 @@ FIELDNAMES = [
     "last_name_with_initial_spellings",
     "total_spellings",
     "has_continuation_only_initial_spellings",
+]
+SPELLING_FIELDNAMES = [
+    "record_index",
+    "spelling_row_index",
+    "spelling_type",
+    "hebrew_spelling",
+    "raw_line",
 ]
 SUMMARY_FIELDNAMES = [
     "data_pdf",
@@ -53,6 +61,7 @@ SUMMARY_FIELDNAMES = [
     "last_name_spellings",
     "last_name_with_initial_spellings",
     "total_spellings",
+    "machine_spelling_rows",
     "max_spellings_per_record",
     "records_with_initial_only_lines",
     "claim_status",
@@ -61,21 +70,28 @@ ANCHOR_FIELDNAMES = ["source", "anchor", "status", "diagnostic"]
 
 
 @dataclass(frozen=True)
+class PresidentLine:
+    raw_line: str
+    last_name: str
+    initial: str
+
+
+@dataclass(frozen=True)
 class PresidentRecord:
     record_index: int
-    lines: tuple[str, ...]
+    lines: tuple[PresidentLine, ...]
 
     @property
     def last_name_spellings(self) -> int:
-        return sum(1 for line in self.lines if last_name_field(line))
+        return sum(1 for line in self.lines if line.last_name)
 
     @property
     def with_initial_spellings(self) -> int:
-        return sum(1 for line in self.lines if initial_field(line))
+        return sum(1 for line in self.lines if line.initial)
 
     @property
     def has_continuation_only_initial_spellings(self) -> bool:
-        return any(initial_field(line) and not last_name_field(line) for line in self.lines)
+        return any(line.initial and not line.last_name for line in self.lines)
 
     def as_row(self) -> dict[str, object]:
         last = self.last_name_spellings
@@ -99,9 +115,11 @@ def main(argv: list[str] | None = None) -> int:
     rules_text = extract_pdf_text(args.rules_source)
     records = parse_records(data_text)
     record_rows = [record.as_row() for record in records]
+    spelling_rows = spelling_rows_from_records(records)
     summary = build_summary(args, data_text, rules_text, records)
     anchors = protocol_anchors(data_text, rules_text)
     write_csv(args.out, FIELDNAMES, record_rows)
+    write_csv(args.spellings_out, SPELLING_FIELDNAMES, spelling_rows)
     write_csv(args.summary_out, SUMMARY_FIELDNAMES, [summary])
     write_csv(args.anchors_out, ANCHOR_FIELDNAMES, anchors)
     write_markdown(args.markdown_out, summary, anchors)
@@ -119,6 +137,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--data-source", type=Path, default=DEFAULT_DATA_SOURCE)
     parser.add_argument("--rules-source", type=Path, default=DEFAULT_RULES_SOURCE)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
+    parser.add_argument("--spellings-out", type=Path, default=DEFAULT_SPELLINGS_OUT)
     parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
     parser.add_argument("--anchors-out", type=Path, default=DEFAULT_ANCHORS_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
@@ -140,28 +159,85 @@ def extract_pdf_text(path: Path) -> str:
 
 
 def parse_records(text: str) -> list[PresidentRecord]:
-    grouped: list[tuple[int, list[str]]] = []
+    grouped: list[tuple[int, list[PresidentLine]]] = []
     current_index: int | None = None
-    current_lines: list[str] = []
+    current_lines: list[PresidentLine] = []
+    last_col = 27
+    initial_col = 49
     for raw_line in text.splitlines():
         line = raw_line.lstrip("\f").rstrip()
-        if not is_data_line(line):
+        header_columns = spelling_columns(line)
+        if header_columns is not None:
+            last_col, initial_col = header_columns
             continue
+        if not is_data_line(line, last_col, initial_col):
+            continue
+        parsed_line = parse_president_line(line, last_col, initial_col)
         match = RECORD_START_RE.match(line)
         if match:
             if current_index is not None:
                 grouped.append((current_index, current_lines))
             current_index = int(match.group(1))
-            current_lines = [line]
+            current_lines = [parsed_line]
             continue
         if current_index is not None:
-            current_lines.append(line)
+            current_lines.append(parsed_line)
     if current_index is not None:
         grouped.append((current_index, current_lines))
     return [PresidentRecord(index, tuple(lines)) for index, lines in grouped]
 
 
-def is_data_line(line: str) -> bool:
+def spelling_rows_from_records(records: list[PresidentRecord]) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for record in records:
+        row_index = 0
+        for line in record.lines:
+            stripped = line.raw_line.strip()
+            last_name = line.last_name
+            if last_name:
+                row_index += 1
+                rows.append(
+                    {
+                        "record_index": record.record_index,
+                        "spelling_row_index": row_index,
+                        "spelling_type": "last_name",
+                        "hebrew_spelling": last_name,
+                        "raw_line": stripped,
+                    }
+                )
+            initial = line.initial
+            if initial:
+                row_index += 1
+                rows.append(
+                    {
+                        "record_index": record.record_index,
+                        "spelling_row_index": row_index,
+                        "spelling_type": "last_name_with_initial",
+                        "hebrew_spelling": initial,
+                        "raw_line": stripped,
+                    }
+                )
+    return rows
+
+
+def spelling_columns(line: str) -> tuple[int, int] | None:
+    last_col = line.find("Last Name Hebrew")
+    initial_col = line.find("Last Name and First")
+    if last_col < 0 or initial_col < 0:
+        return None
+    return last_col, initial_col
+
+
+def parse_president_line(line: str, last_col: int, initial_col: int) -> PresidentLine:
+    last_name, initial = split_spelling_fields(line, initial_col)
+    return PresidentLine(
+        raw_line=line,
+        last_name=last_name,
+        initial=initial,
+    )
+
+
+def is_data_line(line: str, last_col: int = 27, initial_col: int = 49) -> bool:
     stripped = line.strip()
     if not stripped:
         return False
@@ -171,15 +247,45 @@ def is_data_line(line: str) -> bool:
         return False
     if stripped.startswith("Last Name"):
         return False
-    return bool(RECORD_START_RE.match(line) or last_name_field(line) or initial_field(line))
+    return bool(
+        RECORD_START_RE.match(line)
+        or last_name_field(line, last_col, initial_col)
+        or initial_field(line, initial_col)
+    )
 
 
-def last_name_field(line: str) -> str:
-    return line[27:49].strip() if len(line) > 27 else ""
+def split_spelling_fields(line: str, initial_col: int = 49) -> tuple[str, str]:
+    stripped = line.strip()
+    if not stripped:
+        return "", ""
+    parts = re.split(r"\s{2,}", stripped)
+    is_record_start = bool(RECORD_START_RE.match(line))
+    if is_record_start and len(parts) >= 3:
+        return clean_last_name_candidate(parts[-2]), parts[-1].strip()
+    if not is_record_start and len(parts) >= 2:
+        return clean_last_name_candidate(parts[-2]), parts[-1].strip()
+    if not is_record_start and len(parts) == 1:
+        first_nonspace = len(line) - len(line.lstrip())
+        if first_nonspace >= initial_col - 3:
+            return "", parts[0].strip()
+        return clean_last_name_candidate(parts[0]), ""
+    return "", ""
 
 
-def initial_field(line: str) -> str:
-    return line[49:].strip() if len(line) > 49 else ""
+def clean_last_name_candidate(value: str) -> str:
+    candidate = value.strip()
+    if re.search(r"[A-Z]\.|[A-Z][a-z]", candidate):
+        return candidate.split()[-1]
+    return candidate
+
+
+def last_name_field(line: str, last_col: int = 27, initial_col: int = 49) -> str:
+    del last_col
+    return split_spelling_fields(line, initial_col)[0]
+
+
+def initial_field(line: str, initial_col: int = 49) -> str:
+    return split_spelling_fields(line, initial_col)[1]
 
 
 def build_summary(
@@ -212,6 +318,7 @@ def build_summary(
         "last_name_spellings": last_total,
         "last_name_with_initial_spellings": initial_total,
         "total_spellings": last_total + initial_total,
+        "machine_spelling_rows": len(spelling_rows_from_records(records)),
         "max_spellings_per_record": max((int(row["total_spellings"]) for row in rows), default=0),
         "records_with_initial_only_lines": sum(
             int(row["has_continuation_only_initial_spellings"]) for row in rows
@@ -329,6 +436,7 @@ def write_markdown(
         f"| last-name spelling rows | {summary['last_name_spellings']} |",
         f"| last-name plus initial spelling rows | {summary['last_name_with_initial_spellings']} |",
         f"| total spelling rows | {summary['total_spellings']} |",
+        f"| machine spelling rows extracted | {summary['machine_spelling_rows']} |",
         f"| maximum spelling rows per record | {summary['max_spellings_per_record']} |",
         f"| records with initial-only continuation lines | {summary['records_with_initial_only_lines']} |",
         "",
@@ -393,6 +501,7 @@ def write_manifest(
         "rows": rows,
         "outputs": {
             "records": str(args.out),
+            "spellings": str(args.spellings_out),
             "summary": str(args.summary_out),
             "anchors": str(args.anchors_out),
             "markdown": str(args.markdown_out),

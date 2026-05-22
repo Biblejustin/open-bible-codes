@@ -25,6 +25,7 @@ If a name has a double consonant, we form spelling variations with the consonant
 class AmericanPresidentsSourceTests(unittest.TestCase):
     def test_parse_records_counts_spelling_columns(self) -> None:
         records = presidents.parse_records(DATA_TEXT)
+        spelling_rows = presidents.spelling_rows_from_records(records)
 
         self.assertEqual([record.record_index for record in records], [1, 2])
         self.assertEqual(records[0].last_name_spellings, 2)
@@ -32,6 +33,11 @@ class AmericanPresidentsSourceTests(unittest.TestCase):
         self.assertEqual(records[1].last_name_spellings, 1)
         self.assertEqual(records[1].with_initial_spellings, 2)
         self.assertTrue(records[1].has_continuation_only_initial_spellings)
+        self.assertEqual(len(spelling_rows), 7)
+        self.assertEqual(spelling_rows[0]["spelling_type"], "last_name")
+        self.assertEqual(spelling_rows[0]["hebrew_spelling"], "pehbpiye")
+        self.assertEqual(spelling_rows[1]["spelling_type"], "last_name_with_initial")
+        self.assertEqual(spelling_rows[-1]["hebrew_spelling"], "qnc` w b")
 
     def test_protocol_anchors_find_data_and_rule_sources(self) -> None:
         anchors = presidents.protocol_anchors(DATA_TEXT, RULES_TEXT)
@@ -59,6 +65,8 @@ class AmericanPresidentsSourceTests(unittest.TestCase):
                         str(rules),
                         "--out",
                         str(root / "records.csv"),
+                        "--spellings-out",
+                        str(root / "spellings.csv"),
                         "--summary-out",
                         str(root / "summary.csv"),
                         "--anchors-out",
@@ -76,7 +84,9 @@ class AmericanPresidentsSourceTests(unittest.TestCase):
             markdown = (root / "audit.md").read_text(encoding="utf-8")
             self.assertIn("source-shape audit only", markdown)
             self.assertIn("data records | 2", markdown)
+            self.assertIn("machine spelling rows extracted | 7", markdown)
             self.assertIn("not a claim-ready replication", markdown)
+            self.assertTrue((root / "spellings.csv").exists())
             self.assertTrue((root / "manifest.json").exists())
 
 
