@@ -24,7 +24,7 @@ all-lane diagnostic doc guarding, and WRR source visual-review notes doc
 guarding, WRR source visual-review row triage refinement, and WRR
 source-review queue visual-triage action propagation, with downstream WRR
 source-policy and blocker-packet action refresh, and non-exclusion visual
-triage fields in the WRR source-review queue.
+triage fields in the WRR source-review queue and WRR support docs.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -161,6 +161,7 @@ Current pushed commits for this cleanup:
 - `de37840` Surface WRR visual triage in blockers.
 - `c336717` Refresh WRR visual triage run summary.
 - `c34290b` Sync final reports with WRR visual triage.
+- `b4fe347` Document WRR blocker visual triage protocol.
 
 ### Formal Real Report Rerun
 

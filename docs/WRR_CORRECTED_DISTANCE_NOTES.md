@@ -144,6 +144,8 @@ Already implemented:
   all source-review flags 154. The single-term Zacut impact table identifies
   `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and `M$HZKWTW` as individual exclusions that
   would leave 163 >=5 pairs with gap 0, still as diagnostic evidence only.
+  Visual triage notes separate OCR misses from title-prefix and Chelm
+  source-rule questions, but do not exclude pairs automatically.
 - legacy perturbation boundary/exact-match diagnostic over ordinary imported
   length 5..8 ELS hits. Current output checks all 959 smoke-cap ordinary hits
   across 64 rows with hits: every ordinary hit keeps all 125 triples in bounds,
@@ -263,7 +265,8 @@ Not yet implemented:
    The source-policy scenarios are decision aids only: they show how WNP/context
    exclusions move the raw >=5 count, including four single Zacut rows whose
    individual exclusion leaves 163 >=5 pairs with gap 0, but do not select the
-   final pair universe.
+   final pair universe. Visual triage notes stay non-exclusionary until a
+   source-lock policy is selected.
 
 ## Proposed Implementation Order
 
