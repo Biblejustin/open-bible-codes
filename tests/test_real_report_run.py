@@ -67,6 +67,10 @@ class RealReportRunTests(unittest.TestCase):
             "scripts/check_wrr_source_review_queue_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
+        self.assertIn(
+            "scripts/check_wrr_dw_formula_sensitivity_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
         for source_audit_doc in [
             "docs/TORAH_CODE_RESEARCH_MODEL_SIMULATION.md",
             "docs/TORAH_CODE_RESEARCH_ELS_MODEL_SIMULATION.md",
@@ -314,6 +318,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/analyze_wrr_dw_formula_sensitivity.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_dw_formula_sensitivity_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn("scripts/release_hygiene.py", preflight.DEFAULT_REQUIRED_PATHS)
@@ -792,6 +800,28 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "WRR source-review queue doc failures: "
                 "docs/WRR_SOURCE_REVIEW_QUEUE.md missing diagnostic status",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_dw_formula_sensitivity_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_dw_formula_sensitivity_doc,
+                "validate_dw_formula_sensitivity_doc",
+                return_value=["docs/WRR_DW_FORMULA_SENSITIVITY.md missing unlocked status"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_dw_formula_sensitivity_doc_failures"],
+                ["docs/WRR_DW_FORMULA_SENSITIVITY.md missing unlocked status"],
+            )
+            self.assertIn(
+                "WRR D(w) formula sensitivity doc failures: "
+                "docs/WRR_DW_FORMULA_SENSITIVITY.md missing unlocked status",
                 payload["failures"],
             )
 

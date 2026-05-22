@@ -30,6 +30,7 @@ from scripts import (
     check_wrr_claim_blocker_packet_doc,
     check_wrr_claim_readiness_doc,
     check_wrr_defined_diagnostic_docs,
+    check_wrr_dw_formula_sensitivity_doc,
     check_wrr_lock_options_doc,
     check_wrr_method_status_doc,
     check_wrr_source_recovery_probe_doc,
@@ -365,6 +366,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_source_review_queue_doc.py",
     "scripts/analyze_wrr_source_policy_scenarios.py",
     "scripts/analyze_wrr_dw_formula_sensitivity.py",
+    "scripts/check_wrr_dw_formula_sensitivity_doc.py",
     "scripts/build_wrr_method_status.py",
     "scripts/check_wrr_claim_readiness.py",
     "scripts/check_wrr_claim_readiness_doc.py",
@@ -568,6 +570,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_source_review_queue_doc_failures)
         )
 
+    wrr_dw_formula_sensitivity_doc_failures = (
+        check_wrr_dw_formula_sensitivity_doc.validate_dw_formula_sensitivity_doc(
+            check_wrr_dw_formula_sensitivity_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_dw_formula_sensitivity_doc_failures:
+        failures.append(
+            "WRR D(w) formula sensitivity doc failures: "
+            + "; ".join(wrr_dw_formula_sensitivity_doc_failures)
+        )
+
     wrr_lock_options_doc_failures = (
         check_wrr_lock_options_doc.validate_lock_options_doc(
             check_wrr_lock_options_doc.DEFAULT_DOC
@@ -648,6 +661,9 @@ def main(argv: list[str] | None = None) -> int:
         "wrr_defined_diagnostic_doc_failures": wrr_defined_diagnostic_doc_failures,
         "wrr_variant_gap_doc_failures": wrr_variant_gap_doc_failures,
         "wrr_source_review_queue_doc_failures": wrr_source_review_queue_doc_failures,
+        "wrr_dw_formula_sensitivity_doc_failures": (
+            wrr_dw_formula_sensitivity_doc_failures
+        ),
         "wrr_lock_options_doc_failures": wrr_lock_options_doc_failures,
         "wrr_method_status_doc_failures": wrr_method_status_doc_failures,
         "wrr_source_recovery_probe_doc_failures": wrr_source_recovery_probe_doc_failures,

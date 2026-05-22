@@ -17,8 +17,8 @@ WRR method-status preflight guarding, WRR source-recovery probing, WRR
 source-recovery probe guarding, `.shtml` research-source alternate probing,
 and hypothesis-testing source-status auditing/guarding, plus WRR
 defined-distance diagnostic doc guarding, WRR variant-gap doc guarding, and
-WRR variant-gap method-status evidence propagation, and WRR source-review queue
-doc guarding.
+WRR variant-gap method-status evidence propagation, WRR source-review queue doc
+guarding, and WRR D(w) formula sensitivity doc guarding.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -140,6 +140,7 @@ Current pushed commits for this cleanup:
 - `11d22fc` Guard WRR defined diagnostic docs.
 - `34c240d` Guard WRR variant gap docs.
 - `cb09f08` Surface WRR variant gap method evidence.
+- `c94b991` Guard WRR source review queue doc.
 
 ### Formal Real Report Rerun
 

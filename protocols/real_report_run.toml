@@ -324,6 +324,7 @@ inputs = [
   "scripts/check_wrr_source_review_queue_doc.py",
   "scripts/analyze_wrr_source_policy_scenarios.py",
   "scripts/analyze_wrr_dw_formula_sensitivity.py",
+  "scripts/check_wrr_dw_formula_sensitivity_doc.py",
   "scripts/build_wrr_method_status.py",
   "scripts/check_wrr_claim_readiness.py",
   "scripts/check_wrr_claim_readiness_doc.py",
