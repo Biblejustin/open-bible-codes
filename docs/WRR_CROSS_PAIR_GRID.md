@@ -145,5 +145,7 @@ Recommended repo-defined 999,999-permutation run:
 - Cross-record rows are generated permutation-prep rows.
 - WNP Zacut rows are flagged because the WNP critique disputes those records;
   the recommended repo-defined run excludes that flag.
+- Visual-review notes do not change pair inclusion until an explicit source
+  policy is selected.
 - Corrected-distance and date-permutation output from this grid is diagnostic
   for the current repo protocol, not exact WRR reproduction language.

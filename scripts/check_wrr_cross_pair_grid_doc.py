@@ -26,6 +26,7 @@ REQUIRED_PHRASES = (
     "| permutations | 999999 |",
     "| observed defined `c(w,w')` values | 48 |",
     "| Bonferroni rho0 | 0.00086 |",
+    "Visual-review notes do not change pair inclusion until an explicit source policy is selected.",
     "Corrected-distance and date-permutation output from this grid is diagnostic",
 )
 

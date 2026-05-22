@@ -25,8 +25,8 @@ guarding, WRR source visual-review row triage refinement, and WRR
 source-review queue visual-triage action propagation, with downstream WRR
 source-policy and blocker-packet action refresh, and non-exclusion visual
 triage fields in the WRR source-review queue, WRR support docs, WRR source
-audit, claim catalog, WRR method-status evidence, and WRR source-policy
-scenario docs, plus WRR defined pair-set diagnostic docs.
+audit, claim catalog, WRR method-status evidence, WRR source-policy scenario
+docs, WRR defined pair-set diagnostic docs, and WRR cross-pair diagnostics.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -168,6 +168,7 @@ Current pushed commits for this cleanup:
 - `0cf7727` Guard WRR catalog visual non exclusions.
 - `2e56611` Propagate WRR visual boundary to method status.
 - `9f40d0d` Guard WRR source policy visual boundary.
+- `0423a7c` Guard WRR defined visual non exclusions.
 
 ### Formal Real Report Rerun
 
