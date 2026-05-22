@@ -1,11 +1,17 @@
 # KJVA Apocrypha Bridge Prospective Preregistration
 
-Status: prospective lock, no result-bearing outputs yet.
+Status: preregistration/protocol lock; completed negative controlled result.
 
 This freezes a fresh KJVA apocrypha/deuterocanon bridge study before running
 the observed bridge scan or shuffled-insertion controls for this term cohort.
 It is separate from the earlier post-screen confirmatory follow-up over 15
 terms selected from prior KJVA bridge results.
+
+Lock basis: commit `b4a5799` added this preregistration, the fixed term file,
+and the protocol before the result-bearing run. This older lane does not have a
+`reports/study_locks/*.manifest.json` or preflight sidecar. Any future KJVA
+bridge follow-up should use the current full study-lock-manifest and preflight
+workflow before producing new result-bearing output.
 
 ## Registered Terms
 

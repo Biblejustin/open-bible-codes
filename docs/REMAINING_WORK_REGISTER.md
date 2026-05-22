@@ -376,8 +376,8 @@ python3 -m scripts.run_protocol protocols/english_seed_paired_controls_1000.toml
 ### 4. Apocrypha/Deuterocanon Prospective Study
 
 KJVA bridge results are strong post-screen review material, not claims.
-The fresh prospective lock now exists before producing new result-bearing
-outputs:
+The KJVA prospective lane used a preregistration/protocol/term-file lock before
+producing result-bearing outputs:
 
 - `terms/kjv_apocrypha_bridge_prospective_terms.csv`
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md`
@@ -386,6 +386,12 @@ outputs:
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md`
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md`
 - `protocols/kjv_apocrypha_bridge_prospective_nonbible_controls.toml`
+
+Boundary note: this older lane does not have a
+`reports/study_locks/*.manifest.json` or preflight sidecar. Its negative result
+can be rerun for reproducibility, but any future KJVA bridge follow-up should
+use the current full study-lock-manifest and preflight workflow before
+producing new result-bearing output.
 
 Candidate inputs:
 

@@ -71,6 +71,8 @@ def test_clean_lock_results_summary_tracks_completed_lanes() -> None:
     assert "high-volume short-string/common-letter prompts" in text
     assert "ordinary" in text
     assert "local surface-context/self-lexeme effects" in text
+    assert "KJVA apocrypha bridge prospective lane used a committed" in text
+    assert "current manifest/preflight workflow" in text
 
 
 def test_greek_surface_context_review_tracks_manual_read() -> None:

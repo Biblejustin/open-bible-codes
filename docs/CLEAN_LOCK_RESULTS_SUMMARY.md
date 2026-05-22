@@ -1,10 +1,16 @@
 # Clean-Lock Results Summary
 
-Status: summary of completed clean-lock runs; no claim.
+Status: summary of completed clean-lock and preregistered prospective runs; no claim.
 
 This page summarizes the clean prospective lanes that were added after prior
 evidence rows were excluded. It points to the detailed generated reports and
 keeps the conservative read visible in one place.
+
+Lock-basis note: the KJVA apocrypha bridge prospective lane used a committed
+preregistration, fixed term file, and protocol before its result run. It does
+not have the later `reports/study_locks/*.manifest.json` and preflight sidecar
+used by the other clean-lock lanes, so any future KJVA follow-up should use the
+current manifest/preflight workflow before producing new result-bearing output.
 
 ## Lanes
 
