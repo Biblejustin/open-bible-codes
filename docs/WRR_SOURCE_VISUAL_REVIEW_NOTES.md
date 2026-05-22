@@ -39,3 +39,5 @@ Source reviewed: `reports/wrr_1994/wnp_en.html`.
   in this visual/OCR pass.
 - None of these notes authorize changing WRR terms or claiming reproduction.
   They only narrow the next source-lock work.
+- No visual-review note excludes a pair automatically; pair exclusion still
+  requires an explicit source-policy decision.

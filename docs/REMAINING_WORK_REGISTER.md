@@ -156,6 +156,7 @@ Current pushed commits for this cleanup:
 - `2b7022d` Propagate WRR visual triage to source queue.
 - `40f2693` Refresh WRR downstream source actions.
 - `db8634d` Add WRR visual triage queue fields.
+- `b02bb8e` Guard WRR no-input lock posture.
 
 ### Formal Real Report Rerun
 

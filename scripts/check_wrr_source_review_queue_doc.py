@@ -29,6 +29,7 @@ REQUIRED_PHRASES = (
     "visual notes show English of-Chelm label but primary Hebrew cell only supports RBY$LMH in this pass",
     "Variant leads do not validate the original blocked pairs.",
     "Locked source rows and pair rules are still required before reproduction language.",
+    "Visual-review notes do not exclude pairs automatically.",
 )
 
 

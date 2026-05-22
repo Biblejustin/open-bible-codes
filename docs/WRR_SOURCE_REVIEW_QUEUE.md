@@ -112,5 +112,6 @@ python3 -m scripts.build_wrr_source_review_queue --blocked-pairs reports/wrr_199
 - Review queue ranks source-transcription and normalization checks.
 - Variant leads do not validate the original blocked pairs.
 - WNP flags are diagnostic context only, not exclusion rules.
+- Visual-review notes do not exclude pairs automatically.
 - OCR matches are probe evidence only, not claim-grade primary transcription.
 - Locked source rows and pair rules are still required before reproduction language.

@@ -27,6 +27,20 @@ def test_missing_queue_counts_fail(tmp_path: Path) -> None:
     assert any("ocr_not_matched_no_variant_lead" in failure for failure in failures)
 
 
+def test_missing_visual_review_boundary_fails(tmp_path: Path) -> None:
+    doc = tmp_path / "WRR_SOURCE_REVIEW_QUEUE.md"
+    phrases = [
+        phrase
+        for phrase in check.REQUIRED_PHRASES
+        if phrase != "Visual-review notes do not exclude pairs automatically."
+    ]
+    doc.write_text("\n".join(phrases) + "\n", encoding="utf-8")
+
+    failures = check.validate_source_review_queue_doc(doc)
+
+    assert any("Visual-review notes do not exclude" in failure for failure in failures)
+
+
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
     missing = tmp_path / "missing.md"
 

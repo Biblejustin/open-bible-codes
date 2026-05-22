@@ -19,6 +19,20 @@ def test_missing_scope_warning_fails(tmp_path: Path) -> None:
 
     failures = check.validate_source_visual_review_notes_doc(doc)
 
+    assert any("visual-review note excludes" in failure for failure in failures)
+
+
+def test_missing_term_change_warning_fails(tmp_path: Path) -> None:
+    doc = tmp_path / "WRR_SOURCE_VISUAL_REVIEW_NOTES.md"
+    text = "\n".join(
+        phrase
+        for phrase in check.REQUIRED_PHRASES
+        if phrase != "None of these notes authorize changing WRR terms or claiming reproduction."
+    )
+    doc.write_text(text + "\n", encoding="utf-8")
+
+    failures = check.validate_source_visual_review_notes_doc(doc)
+
     assert any("authorize changing WRR terms" in failure for failure in failures)
 
 

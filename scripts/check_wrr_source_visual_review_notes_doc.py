@@ -36,6 +36,7 @@ REQUIRED_PHRASES = (
     "Some rows are not simple source errors; they look like title/prefix normalization questions",
     "Row 32 is a separate Hebrew-cell versus English-label issue",
     "None of these notes authorize changing WRR terms or claiming reproduction.",
+    "No visual-review note excludes a pair automatically; pair exclusion still requires an explicit source-policy decision.",
 )
 
 
