@@ -1,0 +1,54 @@
+name = "under_construction_experiments_source_audit"
+description = "Audit Torah-code.org under-construction experiment pages so they are not treated as data-bearing sources."
+manifest_out = "reports/wrr_1994/under_construction_experiment_source_audit_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "download_wrr_sources"
+description = "Download Torah-code.org experiment pages and source PDFs into ignored reports output."
+argv = [
+  "-m", "scripts.download_wrr_sources",
+  "--out-dir", "reports/wrr_1994",
+  "--manifest-out", "reports/wrr_1994/sources.manifest.json",
+]
+inputs = [
+  "scripts/download_wrr_sources.py",
+]
+outputs = [
+  "reports/wrr_1994/torah_code_experiment_chumash.html",
+  "reports/wrr_1994/torah_code_experiment_twin_towers.html",
+  "reports/wrr_1994/torah_code_experiment_tsunami.html",
+  "reports/wrr_1994/torah_code_experiment_katrina.html",
+  "reports/wrr_1994/torah_code_experiment_great_rabbis.html",
+  "reports/wrr_1994/torah_code_experiment_son_rabbis.html",
+  "reports/wrr_1994/sources.manifest.json",
+]
+
+[[steps]]
+id = "audit_under_construction_experiment_sources"
+description = "Record source-status and title/heading anomalies for under-construction experiment pages."
+argv = [
+  "-m", "scripts.analyze_under_construction_experiments_source",
+  "--out", "reports/wrr_1994/under_construction_experiment_pages.csv",
+  "--summary-out", "reports/wrr_1994/under_construction_experiment_summary.csv",
+  "--anchors-out", "reports/wrr_1994/under_construction_experiment_anchors.csv",
+  "--markdown-out", "docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md",
+  "--manifest-out", "reports/wrr_1994/under_construction_experiment_source_audit.manifest.json",
+]
+inputs = [
+  "scripts/analyze_under_construction_experiments_source.py",
+  "reports/wrr_1994/torah_code_experiment_chumash.html",
+  "reports/wrr_1994/torah_code_experiment_twin_towers.html",
+  "reports/wrr_1994/torah_code_experiment_tsunami.html",
+  "reports/wrr_1994/torah_code_experiment_katrina.html",
+  "reports/wrr_1994/torah_code_experiment_great_rabbis.html",
+  "reports/wrr_1994/torah_code_experiment_son_rabbis.html",
+]
+outputs = [
+  "reports/wrr_1994/under_construction_experiment_pages.csv",
+  "reports/wrr_1994/under_construction_experiment_summary.csv",
+  "reports/wrr_1994/under_construction_experiment_anchors.csv",
+  "docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md",
+  "reports/wrr_1994/under_construction_experiment_source_audit.manifest.json",
+]

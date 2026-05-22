@@ -160,6 +160,17 @@ linked data/tutorial PDFs. It records declared status and source rows without
 normalizing spellings or testing ELS results. Tracked audit:
 `docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md`.
 
+Under-construction experiment source audit:
+
+```bash
+python3 -m scripts.run_protocol protocols/under_construction_experiments_source_audit.toml --resume
+```
+
+This records source-status placeholders for Chumash, Twin Towers, Tsunami,
+Katrina, Great Rabbis, and Son Rabbis experiment pages. It also records copied
+title/heading anomalies so those pages are not treated as data-bearing sources.
+Tracked audit: `docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md`.
+
 WRR imported-term Genesis count and pair smoke:
 
 ```bash

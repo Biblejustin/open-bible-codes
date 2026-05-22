@@ -191,6 +191,13 @@ source-shape audit:
 - `protocols/event_object_experiments_source_audit.toml`
 - `docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md`
 
+The Chumash, Twin Towers, Tsunami, Katrina, Great Rabbis, and Son Rabbis
+placeholder pages have a source-status audit:
+
+- `scripts/analyze_under_construction_experiments_source.py`
+- `protocols/under_construction_experiments_source_audit.toml`
+- `docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md`
+
 The communities audit confirms 66 data records and 210 pre-filter community
 rows. The presidents audit confirms 42 data records and 292 pre-test spelling
 rows. The birth-date audit confirms two S1/S2 tables, 14 rows per table, and
@@ -201,6 +208,8 @@ detail-source coverage gap. The Cities audit confirms 13 source-chain files,
 anchors. The event/object audit confirms 8 source files, 20 Pumbedita rows, 32
 Auschwitz rows, a 57-page Ark tutorial PDF, one reported significant follow-up
 page, two reported non-significant pages, and one under-construction page.
+The under-construction audit confirms six placeholder pages, no PDF data links,
+four copied-title mismatches, and the Katrina page mislabeled as Tsunami.
 These lanes stay non-result-bearing. The
 research-program ELS harness now includes a split-fit Fisher order-statistic
 row. Next research-program upgrade: replace the current transparent resonant
@@ -214,7 +223,8 @@ new preregistration. Do not import Cities city-name rows until the wrapped or
 missing PDF sources are recovered, or the usable HTML-only source boundary is
 explicitly locked. Do not promote the event/object pages beyond source-shape
 status until each lane has its own preregistered term normalization and
-control design.
+control design. Do not use under-construction placeholder pages as data-bearing
+protocols unless future source recovery finds real data pages.
 
 WRR aggregate work now has a diagnostic P1..P4 bridge:
 

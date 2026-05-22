@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 317
+Documents indexed: 318
 
 ## Controls
 
@@ -327,6 +327,7 @@ Documents indexed: 317
 | Torah-Code ELS Model Simulation | `TORAH_CODE_RESEARCH_ELS_MODEL_SIMULATION.md` |
 | Torah-Code Research Model Simulation | `TORAH_CODE_RESEARCH_MODEL_SIMULATION.md` |
 | Transformed Text Layers | `TRANSFORMED_TEXT_LAYERS.md` |
+| Under-Construction Experiment Source Audit | `UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md` |
 | User-Requested Prospective Terms | `USER_REQUESTED_PROSPECTIVE_TERMS.md` |
 | Wide Focus Exact-Hit Presence | `WIDE_FOCUS_EXACT_PRESENCE.md` |
 | Broad Search Summary | `WIDE_FOCUS_SEARCH.md` |

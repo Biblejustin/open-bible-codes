@@ -213,8 +213,12 @@ These are source leads, not claim-ready evidence.
   flags before any statistical interpretation because several are visibly
   post-hoc, replication-style, or incomplete experiments.
 - Chumash, Twin Towers, Tsunami, Katrina, Great Rabbis, and Son Rabbis pages
-  were live but marked under construction in this crawl. Keep their hashes for
-  source-status tracking, but do not treat them as data-bearing protocols.
+  were live but marked under construction in this crawl. The source-status audit
+  in `docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md` confirms all six pages
+  are placeholders with no PDF data links, and records copied-title anomalies:
+  Chumash, Great Rabbis, and Son Rabbis are titled Cities, while Katrina is
+  titled and headed Tsunami. Keep their hashes for source-status tracking, but
+  do not treat them as data-bearing protocols.
 - Research-program pages: useful for method-design requirements rather than a
   data set. The pages argue for explicit models, public a-priori history, and a
   three-level alternative hypothesis: ELS set from one word pair, word pairs for
@@ -320,6 +324,12 @@ Pumbedita, Auschwitz, and Ark source pages plus linked data/tutorial PDFs into
 ignored source-shape CSVs and a tracked audit summary. It verifies declared
 status, small source-row counts, and protocol anchors, but does not normalize
 spellings, run ELS hits, or verify reported p-values.
+
+`scripts/analyze_under_construction_experiments_source.py` audits Chumash, Twin
+Towers, Tsunami, Katrina, Great Rabbis, and Son Rabbis placeholder pages into
+ignored source-status CSVs and a tracked audit summary. It verifies
+under-construction status and title/heading anomalies, but does not treat these
+pages as term or result sources.
 
 `scripts/simulate_torah_code_research_model.py` turns the Torah-code.org
 research-program geometric level-1 model into a reproducible simulation harness.

@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 124
+Protocols indexed: 125
 
 ## Analysis
 
@@ -51,6 +51,7 @@ Protocols indexed: 124
 | israeli_prime_ministers_source_audit | Audit Torah-code.org Israeli prime-ministers main page, keyword PDF, and detail pages w... | 2 |  | reports/wrr_1994 | `israeli_prime_ministers_source_audit.toml` |
 | step_tahot_policy_hits | Audit STEP_TAHOT-only exact-hit rows against TAHOT source-type policy. | 2 |  | reports/step_tahot_policy_hits, reports/step_tahot_screening_version_presence | `step_tahot_policy_hits.toml` |
 | step_tahot_source_audit | Download STEP TAHOT and compare it against current Hebrew MT-family corpora. | 2 |  | reports/mt_version_comparison_step_tahot | `step_tahot_source_audit.toml` |
+| under_construction_experiments_source_audit | Audit Torah-code.org under-construction experiment pages so they are not treated as dat... | 2 |  | reports/wrr_1994 | `under_construction_experiments_source_audit.toml` |
 | witztum_birth_dates_source_audit | Audit Witztum Genesis birth-date paper and data PDFs without running ELS results. | 2 |  | reports/wrr_1994 | `witztum_birth_dates_source_audit.toml` |
 | word_edge_pattern_audit | Opt-in consecutive-word acrostic and telestic audit for declared Hebrew word-edge terms. | 9 | terms/word_edge_pattern_audit_terms.csv | reports/word_edge_patterns | `word_edge_pattern_audit.toml` |
 | word_skip_term_audit | Opt-in full word-token every-Kth-word audit for declared Hebrew phrases. | 9 | terms/word_skip_term_audit_terms.csv | reports/word_skip_terms | `word_skip_term_audit.toml` |
