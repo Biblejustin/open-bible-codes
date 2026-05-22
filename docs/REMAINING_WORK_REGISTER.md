@@ -27,7 +27,8 @@ source-policy and blocker-packet action refresh, and non-exclusion visual
 triage fields in the WRR source-review queue, WRR support docs, WRR source
 audit, claim catalog, WRR method-status evidence, WRR source-policy scenario
 docs, WRR defined pair-set diagnostic docs, WRR cross-pair diagnostics, and
-WRR variant residual review-packet guarding.
+WRR variant residual review-packet guarding, plus WRR residual method-status,
+blocker-packet, and unresolved-term burden propagation.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -170,6 +171,14 @@ Current pushed commits for this cleanup:
 - `2e56611` Propagate WRR visual boundary to method status.
 - `9f40d0d` Guard WRR source policy visual boundary.
 - `0423a7c` Guard WRR defined visual non exclusions.
+- `77b1fcb` Promote WRR full corrected distance gate.
+- `4ffcf8b` Lock WRR cap1000 permutation gate.
+- `5984b9a` Clarify WRR locked-method language.
+- `f5229d8` Add WRR variant gap upper bound.
+- `b8bb1bc` Add WRR residual variant review packet.
+- `e2cdd1a` Surface WRR residual packet in method status.
+- `470971e` Surface WRR residual caveat in blocker packet.
+- `725e251` Add WRR residual burden summary.
 
 ### Formal Real Report Rerun
 
@@ -429,6 +438,14 @@ simple variant lead. `docs/WRR_VARIANT_GAP_UPPER_BOUND.md` now records the
 simple-variant upper bound: even if every fully covered simple variant lead
 were valid source evidence, the best current run would rise only from 72 to
 123 defined distances, leaving a residual gap of 40 to the source-cited 163.
+`docs/WRR_VARIANT_RESIDUAL_REVIEW_PACKET.md` and
+`docs/WRR_CLAIM_BLOCKER_PACKET.md` now keep that residual caveat visible: the
+residual pool has 59 candidate pairs, the deterministic minimum frontier has
+40 rows, and the frontier breaks down to 31 no-simple-variant rows plus 9
+partial-simple-variant rows. The residual unresolved-term burden is entirely
+on appellation terms in this pass: 45 not-matched/no-variant-lead rows, 11
+matched/no-variant-lead rows, 3 near-match/no-variant-lead rows, and one
+`wnp_chelm_spelling_context` flag.
 The next WRR work is therefore source/term/pair-rule reconciliation before any
 exact published reproduction language.
 
@@ -582,14 +599,16 @@ guarding, WRR lock-options preflight guarding, and WRR method-status preflight
 guarding, WRR source-recovery probing, WRR source-recovery probe guarding, and
 `.shtml` research-source alternate probing, hypothesis-testing source-status
 guarding, WRR defined-distance diagnostic doc guarding, and WRR variant-gap
-doc guarding, and WRR variant-gap method-status evidence propagation:
+doc guarding, WRR variant-gap method-status evidence propagation, and WRR
+residual burden summary/blocker propagation:
 
-- `python3 -m pytest -q` passed: 1211 tests and 13961 subtests.
+- `python3 -m pytest -q` passed: 1257 tests and 13961 subtests.
 - `python3 -m pytest tests/test_download_wrr_sources.py tests/test_build_wrr_source_recovery_probe.py tests/test_check_wrr_source_recovery_probe_doc.py tests/test_real_report_run.py -q` passed: 50 tests and 42 subtests.
 - `python3 -m pytest tests/test_analyze_hypothesis_testing_source.py tests/test_download_wrr_sources.py -q` passed: 9 tests and 46 subtests.
 - `python3 -m pytest tests/test_check_hypothesis_testing_source_audit_doc.py tests/test_real_report_run.py -q` passed: 42 tests.
 - `python3 -m pytest tests/test_check_wrr_defined_diagnostic_docs.py tests/test_real_report_run.py -q` passed: 45 tests.
 - `python3 -m pytest tests/test_check_wrr_variant_gap_docs.py tests/test_real_report_run.py -q` passed: 46 tests.
+- `python3 -m pytest tests/test_build_wrr_variant_residual_review_packet.py tests/test_check_wrr_variant_gap_docs.py tests/test_build_wrr_claim_blocker_packet.py tests/test_check_wrr_claim_blocker_packet_doc.py tests/test_wrr_method_status.py tests/test_real_report_run.py -q` passed: 70 tests.
 - `python3 -m pytest tests/test_wrr_method_status.py tests/test_wrr_cross_pair_grid.py tests/test_check_wrr_method_status_doc.py tests/test_check_wrr_claim_readiness_doc.py -q` passed: 15 tests.
 - `python3 -m pytest tests/test_check_wrr_claim_readiness_doc.py tests/test_real_report_run.py -q` passed: 38 tests.
 - `python3 -m pytest tests/test_check_wrr_claim_blocker_packet_doc.py tests/test_real_report_run.py -q` passed: 39 tests.
@@ -639,6 +658,7 @@ doc guarding, and WRR variant-gap method-status evidence propagation:
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wrr_variant_gap_docs.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_variant_gap_method_status.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_variant_gap_method_status_cross_pair.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_residual_burden.json` passed.
 - `python3 -m scripts.check_prospective_study_lanes` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
