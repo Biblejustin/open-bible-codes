@@ -36,6 +36,7 @@ python3 -m scripts.analyze_wrr_defined_gap_reasons --pair-summary reports/wrr_19
 - `all_lanes_cap1000` defines 72 of 163 source-cited distances.
 - Gap to the source-cited count remains 91.
 - Ordinary-missing rows total 110; under-minimum rows total 0.
+- Row-OCR term burden: 43 matched, 54 not_matched contributing terms; 56 matched, 69 not_matched blocked-pair contributions.
 
 ## Top Ordinary-Missing Terms In Best Run
 

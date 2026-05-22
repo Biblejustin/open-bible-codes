@@ -372,6 +372,7 @@ def write_markdown(
                 ),
                 f"- Gap to the source-cited count remains {best['run_gap_to_source_cited']}.",
                 best_read(summary_rows, best_label),
+                row_ocr_burden_read(term_rows, best_label),
                 "",
                 "## Top Ordinary-Missing Terms In Best Run",
                 "",
@@ -429,6 +430,27 @@ def best_read(summary_rows: list[dict[str, object]], run_label: str) -> str:
         f"- Ordinary-missing rows total {ordinary_missing}; under-minimum rows total "
         f"{under_minimum}."
     )
+
+
+def row_ocr_burden_read(term_rows: list[dict[str, object]], run_label: str) -> str:
+    rows = [row for row in term_rows if row["run_label"] == run_label]
+    if not rows:
+        return "- Row-OCR burden summary unavailable."
+    unweighted: Counter[str] = Counter(str(row.get("row_ocr_status", "") or "missing") for row in rows)
+    weighted: Counter[str] = Counter()
+    for row in rows:
+        weighted[str(row.get("row_ocr_status", "") or "missing")] += int(
+            row["ordinary_not_valid_pairs"]
+        )
+    return (
+        "- Row-OCR term burden: "
+        f"{format_counter(unweighted)} contributing terms; "
+        f"{format_counter(weighted)} blocked-pair contributions."
+    )
+
+
+def format_counter(counter: Counter[str]) -> str:
+    return ", ".join(f"{counter[key]} {key}" for key in sorted(counter))
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:

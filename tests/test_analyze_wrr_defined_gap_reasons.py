@@ -183,6 +183,7 @@ class WrrDefinedGapReasonTests(unittest.TestCase):
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("WRR Defined Gap Reason Audit", text)
             self.assertIn("Gap to the source-cited count remains 2", text)
+            self.assertIn("Row-OCR term burden", text)
             self.assertTrue(manifest.exists())
 
 
