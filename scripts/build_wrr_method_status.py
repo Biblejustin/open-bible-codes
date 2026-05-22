@@ -23,6 +23,8 @@ DEFAULT_TABLE2_OCR_SUMMARY = Path("reports/wrr_1994/wrr_primary_table2_ocr_probe
 DEFAULT_TABLE2_ROW_OCR_SUMMARY = Path("reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv")
 DEFAULT_SKIP_SUMMARY = Path("reports/wrr_1994/wrr2_skip_caps_summary.csv")
 DEFAULT_VARIANTS = Path("reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv")
+DEFAULT_SOURCE_POLICY_SCENARIOS = Path("reports/wrr_1994/wrr_source_policy_scenarios.csv")
+DEFAULT_DW_FORMULA_SENSITIVITY = Path("reports/wrr_1994/wrr_dw_formula_sensitivity.csv")
 DEFAULT_AGGREGATE = Path("reports/wrr_1994/wrr2_corrected_distance_aggregate.csv")
 DEFAULT_CROSS_PAIR_PERMUTATION_SUMMARY = Path(
     "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000_summary.csv"
@@ -98,6 +100,8 @@ def main(argv: list[str] | None = None) -> int:
     table2_row_ocr_row = read_one_row(args.table2_row_ocr_summary) if args.table2_row_ocr_summary.exists() else None
     skip_row = read_one_row(args.skip_summary)
     variant_rows = read_rows(args.corrected_distance_variants)
+    source_policy_rows = read_optional_rows(args.source_policy_scenarios)
+    dw_formula_rows = read_optional_rows(args.dw_formula_sensitivity)
     aggregate_row = read_one_row(args.corrected_distance_aggregate) if args.corrected_distance_aggregate.exists() else None
     cross_pair_permutation_row = read_optional_one_row(
         args.cross_pair_permutation_summary
@@ -119,6 +123,8 @@ def main(argv: list[str] | None = None) -> int:
         zero_hit_variant_rows,
         skip_row,
         variant_rows,
+        source_policy_rows,
+        dw_formula_rows,
         primary_result_rows,
         table2_bridge_row,
         table2_ocr_row,
@@ -151,6 +157,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--table2-row-ocr-summary", type=Path, default=DEFAULT_TABLE2_ROW_OCR_SUMMARY)
     parser.add_argument("--skip-summary", type=Path, default=DEFAULT_SKIP_SUMMARY)
     parser.add_argument("--corrected-distance-variants", type=Path, default=DEFAULT_VARIANTS)
+    parser.add_argument("--source-policy-scenarios", type=Path, default=DEFAULT_SOURCE_POLICY_SCENARIOS)
+    parser.add_argument("--dw-formula-sensitivity", type=Path, default=DEFAULT_DW_FORMULA_SENSITIVITY)
     parser.add_argument("--corrected-distance-aggregate", type=Path, default=DEFAULT_AGGREGATE)
     parser.add_argument(
         "--cross-pair-permutation-summary",
@@ -202,6 +210,12 @@ def read_optional_one_row(path: Path) -> dict[str, str] | None:
     return read_one_row(path)
 
 
+def read_optional_rows(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    return read_rows(path)
+
+
 def build_status_rows(
     text_row: dict[str, str],
     pair_row: dict[str, str],
@@ -210,6 +224,8 @@ def build_status_rows(
     zero_hit_variant_rows: list[dict[str, str]] | None,
     skip_row: dict[str, str],
     variant_rows: list[dict[str, str]],
+    source_policy_rows: list[dict[str, str]] | None = None,
+    dw_formula_rows: list[dict[str, str]] | None = None,
     primary_result_rows: list[dict[str, str]] | None = None,
     table2_bridge_row: dict[str, str] | None = None,
     table2_ocr_row: dict[str, str] | None = None,
@@ -260,6 +276,7 @@ def build_status_rows(
                 pair_row,
                 defined_pair_rows or [],
                 defined_gap_reason_rows or [],
+                source_policy_rows or [],
             ),
             "next_action": "Derive final pair set from source-backed corrected-distance eligibility, not raw counts alone.",
         },
@@ -272,6 +289,7 @@ def build_status_rows(
                 f"{skip_row.get('program_cap_lt_printed', '')} program caps below printed; "
                 f"{skip_row.get('program_cap_eq_printed', '')} equal caps; "
                 f"{skip_row.get('target_unreached_rows', '')} rows do not reach target expected hits"
+                + optional_evidence(dw_formula_sensitivity_evidence(dw_formula_rows or []))
             ),
             "next_action": "Choose printed-paper formula or reported-program formula before final corrected-distance run.",
         },
@@ -294,6 +312,7 @@ def pair_universe_evidence(
     pair_row: dict[str, str],
     defined_pair_rows: list[dict[str, str]],
     defined_gap_reason_rows: list[dict[str, str]],
+    source_policy_rows: list[dict[str, str]],
 ) -> str:
     parts = [
         f"{pair_row.get('source_same_record_pairs', '')} raw same-record pairs",
@@ -319,6 +338,9 @@ def pair_universe_evidence(
     gap_read = best_gap_reason_evidence(defined_gap_reason_rows)
     if gap_read:
         parts.append(gap_read)
+    source_policy_read = source_policy_evidence(source_policy_rows)
+    if source_policy_read:
+        parts.append(source_policy_read)
     return "; ".join(parts)
 
 
@@ -354,6 +376,59 @@ def pairs_for_reason(rows_by_reason: dict[str, dict[str, str]], reason: str) -> 
 
 def optional_evidence(value: str) -> str:
     return f"; {value}" if value else ""
+
+
+def source_policy_evidence(rows: list[dict[str, str]]) -> str:
+    if not rows:
+        return ""
+    scenarios = [
+        scenario_evidence(rows, "keep_all_working_source", "baseline"),
+        scenario_evidence(rows, "exclude_wnp_zacut_only", "exclude WNP Zacut"),
+        scenario_evidence(rows, "exclude_all_source_review_flags", "exclude all flags"),
+    ]
+    scenario_parts = [part for part in scenarios if part]
+    if not scenario_parts:
+        return ""
+    return (
+        "source-policy scenarios: "
+        + "; ".join(scenario_parts)
+        + "; no source policy selected"
+    )
+
+
+def scenario_evidence(rows: list[dict[str, str]], scenario: str, label: str) -> str:
+    row = next((item for item in rows if item.get("scenario") == scenario), None)
+    if not row:
+        return ""
+    return (
+        f"{label} >=5 {row.get('remaining_appellation_min_length_pairs', '')} "
+        f"(gap {row.get('gap_to_source_cited_163_after_appellation_min_length', '')})"
+    )
+
+
+def dw_formula_sensitivity_evidence(rows: list[dict[str, str]]) -> str:
+    if not rows:
+        return ""
+    all_lanes = next((row for row in rows if row.get("scope") == "all_lanes_cap1000"), None)
+    smoke = next((row for row in rows if row.get("scope") == "smoke_length_5_8_cap250"), None)
+    parts: list[str] = []
+    if all_lanes:
+        parts.append(
+            "all-lane cap1000 printed/program defined "
+            f"{all_lanes.get('printed_defined_corrected_distances', '')}/"
+            f"{all_lanes.get('program_defined_corrected_distances', '')}; "
+            f"{all_lanes.get('changed_pairs', '')} changed pairs"
+        )
+    if smoke:
+        parts.append(
+            "smoke cap250 printed/program/fixed250 defined "
+            f"{smoke.get('printed_defined_corrected_distances', '')}/"
+            f"{smoke.get('program_defined_corrected_distances', '')}/"
+            f"{smoke.get('fixed_250_defined_corrected_distances', '')}"
+        )
+    if not parts:
+        return ""
+    return "D(w) sensitivity: " + "; ".join(parts) + "; no formula selected"
 
 
 def zero_hit_variant_evidence(rows: list[dict[str, str]]) -> str:
@@ -610,6 +685,8 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             f"--table2-row-ocr-summary {getattr(args, 'table2_row_ocr_summary', '')} "
             f"--skip-summary {args.skip_summary} "
             f"--corrected-distance-variants {args.corrected_distance_variants} "
+            f"--source-policy-scenarios {args.source_policy_scenarios} "
+            f"--dw-formula-sensitivity {args.dw_formula_sensitivity} "
             f"--corrected-distance-aggregate {args.corrected_distance_aggregate} "
             f"--cross-pair-permutation-summary {args.cross_pair_permutation_summary} "
             f"--cross-pair-recommended-permutation-summary {args.cross_pair_recommended_permutation_summary} "
@@ -730,6 +807,8 @@ def write_manifest(args: argparse.Namespace, rows: list[dict[str, str]], started
             "table2_row_ocr_summary": str(args.table2_row_ocr_summary),
             "skip_summary": str(args.skip_summary),
             "corrected_distance_variants": str(args.corrected_distance_variants),
+            "source_policy_scenarios": str(args.source_policy_scenarios),
+            "dw_formula_sensitivity": str(args.dw_formula_sensitivity),
             "corrected_distance_aggregate": str(args.corrected_distance_aggregate),
             "cross_pair_permutation_summary": str(args.cross_pair_permutation_summary),
             "cross_pair_recommended_permutation_summary": str(

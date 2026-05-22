@@ -88,6 +88,37 @@ class WrrMethodStatusTests(unittest.TestCase):
                 {"variant": "term_printed", "defined_corrected_distances": "0", "max_pair_valid_perturbations": "3"},
                 {"variant": "fixed_250", "defined_corrected_distances": "0", "max_pair_valid_perturbations": "4"},
             ],
+            source_policy_rows=[
+                {
+                    "scenario": "keep_all_working_source",
+                    "remaining_appellation_min_length_pairs": "165",
+                    "gap_to_source_cited_163_after_appellation_min_length": "-2",
+                },
+                {
+                    "scenario": "exclude_wnp_zacut_only",
+                    "remaining_appellation_min_length_pairs": "157",
+                    "gap_to_source_cited_163_after_appellation_min_length": "6",
+                },
+                {
+                    "scenario": "exclude_all_source_review_flags",
+                    "remaining_appellation_min_length_pairs": "154",
+                    "gap_to_source_cited_163_after_appellation_min_length": "9",
+                },
+            ],
+            dw_formula_rows=[
+                {
+                    "scope": "smoke_length_5_8_cap250",
+                    "printed_defined_corrected_distances": "28",
+                    "program_defined_corrected_distances": "28",
+                    "fixed_250_defined_corrected_distances": "28",
+                },
+                {
+                    "scope": "all_lanes_cap1000",
+                    "printed_defined_corrected_distances": "72",
+                    "program_defined_corrected_distances": "72",
+                    "changed_pairs": "0",
+                },
+            ],
             primary_result_rows=[
                 {
                     "label": "G",
@@ -188,8 +219,12 @@ class WrrMethodStatusTests(unittest.TestCase):
         self.assertIn("defined pair-set audit best run all_lanes_cap1000", by_area["Pair universe"]["evidence"])
         self.assertIn("gap 91", by_area["Pair universe"]["evidence"])
         self.assertIn("83 no-appellation ordinary hits", by_area["Pair universe"]["evidence"])
+        self.assertIn("source-policy scenarios", by_area["Pair universe"]["evidence"])
+        self.assertIn("exclude WNP Zacut >=5 157", by_area["Pair universe"]["evidence"])
         self.assertEqual(by_area["D(w) skip-cap formula"]["status"], "open")
         self.assertIn("13 program caps below printed", by_area["D(w) skip-cap formula"]["evidence"])
+        self.assertIn("all-lane cap1000 printed/program defined 72/72", by_area["D(w) skip-cap formula"]["evidence"])
+        self.assertIn("0 changed pairs", by_area["D(w) skip-cap formula"]["evidence"])
         self.assertEqual(by_area["Corrected distance c(w,w')"]["status"], "smoke_only")
         self.assertIn("maximum valid perturbation count 4", by_area["Corrected distance c(w,w')"]["evidence"])
         self.assertIn("high-cap 1000 split: 0 defined over 86 pairs", by_area["Corrected distance c(w,w')"]["evidence"])
@@ -265,6 +300,8 @@ class WrrMethodStatusTests(unittest.TestCase):
                     "table2_ocr_summary": Path("ocr_summary.csv"),
                     "skip_summary": Path("skip.csv"),
                     "corrected_distance_variants": Path("variants.csv"),
+                    "source_policy_scenarios": Path("source_policy.csv"),
+                    "dw_formula_sensitivity": Path("dw_formula.csv"),
                     "corrected_distance_aggregate": Path("aggregate.csv"),
                     "cross_pair_permutation_summary": Path("missing_permutations.csv"),
                     "cross_pair_recommended_permutation_summary": Path("missing_recommended_permutations.csv"),
@@ -311,6 +348,8 @@ class WrrMethodStatusTests(unittest.TestCase):
             row_ocr_summary = root / "row_ocr_summary.csv"
             skip_summary = root / "skip.csv"
             variants = root / "variants.csv"
+            source_policy = root / "missing_source_policy.csv"
+            dw_formula = root / "missing_dw_formula.csv"
             aggregate = root / "aggregate.csv"
             highcap_corrected = root / "missing_highcap_corrected.csv"
             highcap_perturbation = root / "missing_highcap_perturbation.csv"
@@ -492,6 +531,10 @@ class WrrMethodStatusTests(unittest.TestCase):
                     str(skip_summary),
                     "--corrected-distance-variants",
                     str(variants),
+                    "--source-policy-scenarios",
+                    str(source_policy),
+                    "--dw-formula-sensitivity",
+                    str(dw_formula),
                     "--corrected-distance-aggregate",
                     str(aggregate),
                     "--cross-pair-permutation-summary",
