@@ -87,6 +87,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/CLAIM_CATALOG.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("configs/prospective_study_lanes.json", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_prospective_study_lanes.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn("scripts/check_source_basis_audit_queue.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/FINAL_REPORT_OUTLINE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/FINAL_REPORT_DRAFT.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/FINAL_REPORT.md", steps_by_id["preflight"]["inputs"])
@@ -248,6 +249,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/CLAIM_CATALOG.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("configs/prospective_study_lanes.json", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_prospective_study_lanes.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/check_source_basis_audit_queue.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/FINAL_REPORT_OUTLINE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/FINAL_REPORT_DRAFT.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/FINAL_REPORT.md", preflight.DEFAULT_REQUIRED_PATHS)
@@ -376,6 +378,7 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("risky_tracked_paths", payload)
             self.assertIn("secret_pattern_hits", payload)
             self.assertIn("prospective_lane_failures", payload)
+            self.assertIn("source_basis_failures", payload)
             self.assertIn("stale_generated_indexes", payload)
 
     def test_preflight_fails_on_prospective_lane_validation_failure(self) -> None:
@@ -396,6 +399,28 @@ class RealReportRunTests(unittest.TestCase):
             )
             self.assertIn(
                 "prospective lane validation failures: demo_lane: unknown status: ready",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_source_basis_validation_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_source_basis_audit_queue,
+                "validate_source_basis_queue",
+                return_value=["needs_audit rows remain: BibleGateway English versions:DEMO"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["source_basis_failures"],
+                ["needs_audit rows remain: BibleGateway English versions:DEMO"],
+            )
+            self.assertIn(
+                "source-basis validation failures: needs_audit rows remain: "
+                "BibleGateway English versions:DEMO",
                 payload["failures"],
             )
 

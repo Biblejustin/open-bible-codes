@@ -18,7 +18,7 @@ from els.project_index import (
     write_docs_index,
     write_protocol_index,
 )
-from scripts import check_prospective_study_lanes
+from scripts import check_prospective_study_lanes, check_source_basis_audit_queue
 from scripts.release_hygiene import (
     FORBIDDEN_ACCOUNT_TERMS,
     forbidden_hits,
@@ -274,6 +274,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/preflight_prospective_study.py",
     "scripts/scaffold_prospective_study.py",
     "scripts/check_prospective_study_lanes.py",
+    "scripts/check_source_basis_audit_queue.py",
     "scripts/build_prospective_lane_status.py",
     "scripts/build_greek_surface_prospective_report.py",
     "scripts/build_greek_surface_vocabulary_controls.py",
@@ -397,6 +398,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(prospective_lane_failures)
         )
 
+    source_basis_failures = check_source_basis_audit_queue.validate_source_basis_queue(
+        biblegateway_manifest=root / check_source_basis_audit_queue.DEFAULT_BIBLEGATEWAY_MANIFEST,
+        ebible_controls=root / check_source_basis_audit_queue.DEFAULT_EBIBLE_CONTROLS,
+        audit_queue=root / check_source_basis_audit_queue.DEFAULT_AUDIT_QUEUE,
+    )
+    if source_basis_failures:
+        failures.append(
+            "source-basis validation failures: "
+            + "; ".join(source_basis_failures)
+        )
+
     stale_indexes = stale_generated_indexes(root)
     if stale_indexes:
         failures.append("stale generated indexes: " + ", ".join(stale_indexes))
@@ -417,6 +429,7 @@ def main(argv: list[str] | None = None) -> int:
         "required_paths": required_paths(args),
         "missing_paths": missing_paths,
         "prospective_lane_failures": prospective_lane_failures,
+        "source_basis_failures": source_basis_failures,
         "stale_generated_indexes": stale_indexes,
         "forbidden_account_terms": FORBIDDEN_ACCOUNT_TERMS,
         "forbidden_repo_hits": forbidden_repo_hits,
