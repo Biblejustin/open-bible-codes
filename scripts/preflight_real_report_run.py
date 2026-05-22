@@ -33,6 +33,7 @@ from scripts import (
     check_wrr_lock_options_doc,
     check_wrr_method_status_doc,
     check_wrr_source_recovery_probe_doc,
+    check_wrr_source_review_queue_doc,
     check_wrr_variant_gap_docs,
     validate_study_mapping_schemas,
 )
@@ -164,6 +165,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_DEFINED_GAP_REASON_AUDIT.md",
     "docs/WRR_ZERO_HIT_VARIANT_PROBE.md",
     "docs/WRR_VARIANT_GAP_IMPACT.md",
+    "docs/WRR_SOURCE_REVIEW_QUEUE.md",
     "docs/WRR_METHODOLOGY_GAPS.md",
     "docs/WRR_CORRECTED_DISTANCE_NOTES.md",
     "docs/WRR_CROSS_PAIR_GRID.md",
@@ -360,6 +362,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/analyze_wrr_defined_gap_reasons.py",
     "scripts/analyze_wrr_variant_gap_impact.py",
     "scripts/build_wrr_source_review_queue.py",
+    "scripts/check_wrr_source_review_queue_doc.py",
     "scripts/analyze_wrr_source_policy_scenarios.py",
     "scripts/analyze_wrr_dw_formula_sensitivity.py",
     "scripts/build_wrr_method_status.py",
@@ -554,6 +557,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_variant_gap_doc_failures)
         )
 
+    wrr_source_review_queue_doc_failures = (
+        check_wrr_source_review_queue_doc.validate_source_review_queue_doc(
+            check_wrr_source_review_queue_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_source_review_queue_doc_failures:
+        failures.append(
+            "WRR source-review queue doc failures: "
+            + "; ".join(wrr_source_review_queue_doc_failures)
+        )
+
     wrr_lock_options_doc_failures = (
         check_wrr_lock_options_doc.validate_lock_options_doc(
             check_wrr_lock_options_doc.DEFAULT_DOC
@@ -633,6 +647,7 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "wrr_defined_diagnostic_doc_failures": wrr_defined_diagnostic_doc_failures,
         "wrr_variant_gap_doc_failures": wrr_variant_gap_doc_failures,
+        "wrr_source_review_queue_doc_failures": wrr_source_review_queue_doc_failures,
         "wrr_lock_options_doc_failures": wrr_lock_options_doc_failures,
         "wrr_method_status_doc_failures": wrr_method_status_doc_failures,
         "wrr_source_recovery_probe_doc_failures": wrr_source_recovery_probe_doc_failures,

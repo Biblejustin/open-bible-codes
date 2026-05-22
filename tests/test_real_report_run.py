@@ -60,8 +60,13 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_CLAIM_BLOCKER_PACKET.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_ZERO_HIT_VARIANT_PROBE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_VARIANT_GAP_IMPACT.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn("docs/WRR_SOURCE_REVIEW_QUEUE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_SOURCE_POLICY_SCENARIOS.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_DW_FORMULA_SENSITIVITY.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn(
+            "scripts/check_wrr_source_review_queue_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
         for source_audit_doc in [
             "docs/TORAH_CODE_RESEARCH_MODEL_SIMULATION.md",
             "docs/TORAH_CODE_RESEARCH_ELS_MODEL_SIMULATION.md",
@@ -285,6 +290,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_CLAIM_BLOCKER_PACKET.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_ZERO_HIT_VARIANT_PROBE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_VARIANT_GAP_IMPACT.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/WRR_SOURCE_REVIEW_QUEUE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_SOURCE_POLICY_SCENARIOS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_DW_FORMULA_SENSITIVITY.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("protocols/wrr_source_recovery_probe.toml", preflight.DEFAULT_REQUIRED_PATHS)
@@ -296,6 +302,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_variant_gap_docs.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_source_review_queue_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -760,6 +770,28 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "WRR lock-options doc failures: "
                 "docs/WRR_LOCK_OPTIONS.md missing decision aid status",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_source_review_queue_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_source_review_queue_doc,
+                "validate_source_review_queue_doc",
+                return_value=["docs/WRR_SOURCE_REVIEW_QUEUE.md missing diagnostic status"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_source_review_queue_doc_failures"],
+                ["docs/WRR_SOURCE_REVIEW_QUEUE.md missing diagnostic status"],
+            )
+            self.assertIn(
+                "WRR source-review queue doc failures: "
+                "docs/WRR_SOURCE_REVIEW_QUEUE.md missing diagnostic status",
                 payload["failures"],
             )
 
