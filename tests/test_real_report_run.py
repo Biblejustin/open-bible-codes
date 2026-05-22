@@ -1386,6 +1386,7 @@ class RealReportRunTests(unittest.TestCase):
             text,
         )
         self.assertIn("| all_lanes_cap1000 | 182 | 72 | 72 | 0 |", text)
+        self.assertIn("and visual triage notes.", text)
 
     def test_wrr_audit_section_requires_all_source_hashes(self) -> None:
         with self.assertRaisesRegex(ValueError, "wrr_nations_mc"):

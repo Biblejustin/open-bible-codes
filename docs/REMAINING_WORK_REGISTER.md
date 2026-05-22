@@ -158,6 +158,7 @@ Current pushed commits for this cleanup:
 - `db8634d` Add WRR visual triage queue fields.
 - `b02bb8e` Guard WRR no-input lock posture.
 - `80583a7` Guard WRR visual notes as non exclusions.
+- `de37840` Surface WRR visual triage in blockers.
 
 ### Formal Real Report Rerun
 
