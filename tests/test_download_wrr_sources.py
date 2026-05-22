@@ -40,6 +40,19 @@ class DownloadWrrSourcesTests(unittest.TestCase):
             source_filename("torah_code_colinear_attachments", "https://example.test/attachments.html"),
             "torah_code_colinear_attachments.html",
         )
+        colinear_attachment_names = {
+            "torah_code_colinear_attachment_pls": "torah_code_colinear_attachment_pls.pdf",
+            "torah_code_colinear_attachment_roots": "torah_code_colinear_attachment_roots.pdf",
+            "torah_code_colinear_attachment_all_1698": "torah_code_colinear_attachment_all_1698.pdf",
+            "torah_code_colinear_attachment_res_113": "torah_code_colinear_attachment_res_113.pdf",
+            "torah_code_colinear_attachment_consul_138": "torah_code_colinear_attachment_consul_138.pdf",
+            "torah_code_colinear_attachment_intersec_108": "torah_code_colinear_attachment_intersec_108.pdf",
+            "torah_code_colinear_attachment_comb_143": "torah_code_colinear_attachment_comb_143.pdf",
+            "torah_code_colinear_attachment_att_heb": "torah_code_colinear_attachment_att_heb.pdf",
+        }
+        for label, expected in colinear_attachment_names.items():
+            with self.subTest(label=label):
+                self.assertEqual(source_filename(label, "https://example.test/source.bin"), expected)
         self.assertEqual(
             source_filename("gans_communities_paper", "https://example.test/gans.pdf"),
             "gans_communities_paper.pdf",
@@ -172,6 +185,8 @@ class DownloadWrrSourcesTests(unittest.TestCase):
         self.assertIn("torah_code_papers_page", REQUIRED_MANIFEST_LABELS)
         self.assertIn("torah_code_colinear_paper", REQUIRED_MANIFEST_LABELS)
         self.assertIn("torah_code_colinear_attachments", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_colinear_attachment_pls", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_colinear_attachment_att_heb", REQUIRED_MANIFEST_LABELS)
         self.assertIn("gans_communities_paper", REQUIRED_MANIFEST_LABELS)
         self.assertIn("gans_communities_data", REQUIRED_MANIFEST_LABELS)
         self.assertIn("haralick_new_protocols", REQUIRED_MANIFEST_LABELS)

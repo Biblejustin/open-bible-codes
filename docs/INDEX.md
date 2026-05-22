@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 319
+Documents indexed: 320
 
 ## Controls
 
@@ -196,6 +196,7 @@ Documents indexed: 319
 | Claim Catalog | `CLAIM_CATALOG.md` |
 | Clean-Lock Results Summary | `CLEAN_LOCK_RESULTS_SUMMARY.md` |
 | Cohort Cluster Density Audit | `COHORT_CLUSTER_DENSITY_AUDIT.md` |
+| Co-linear ELS Source Audit | `COLINEAR_ELS_SOURCE_AUDIT.md` |
 | Common Bible Codes / ELS Test | `COMMON_EDLS_TEST.md` |
 | Cosmic Codes Source Audit | `COSMIC_CODES_AUDIT.md` |
 | Centered-Relevance Density Framework | `CRD_FRAMEWORK.md` |

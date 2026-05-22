@@ -198,7 +198,17 @@ placeholder pages have a source-status audit:
 - `protocols/under_construction_experiments_source_audit.toml`
 - `docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md`
 
-The communities audit confirms 66 data records and 210 pre-filter community
+The Bombach/Gans co-linear ELS/verse paper and attachment files have a
+source-shape audit:
+
+- `scripts/analyze_colinear_els_source.py`
+- `protocols/colinear_els_source_audit.toml`
+- `docs/COLINEAR_ELS_SOURCE_AUDIT.md`
+
+The co-linear ELS source audit confirms the paper PDF, 8 linked attachment
+PDFs, 515 attachment pages, 6 attachments with explicit row-count expectations,
+8,260 expected and observed source rows, and 10/10 protocol anchors. The
+communities audit confirms 66 data records and 210 pre-filter community
 rows. The presidents audit confirms 42 data records and 292 pre-test spelling
 rows. The birth-date audit confirms two S1/S2 tables, 14 rows per table, and
 51 date forms per table. The Israeli prime-ministers audit confirms 12 PDF
@@ -229,7 +239,9 @@ status until each lane has its own preregistered term normalization and
 control design. Do not use under-construction placeholder pages as data-bearing
 protocols unless future source recovery finds real data pages. Do not use the
 four level-2/3 research model downloads as method sources unless clean
-Torah-code pages are recovered and checksummed.
+Torah-code pages are recovered and checksummed. Do not promote the co-linear
+ELS/verse source lane until Hebrew term/root normalization, verse-link scoring,
+and controls are preregistered separately.
 
 WRR aggregate work now has a diagnostic P1..P4 bridge:
 

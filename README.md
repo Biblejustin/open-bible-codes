@@ -591,6 +591,8 @@ External claim/source term count baseline:
 External claim/source retained all-codes collection and triage:
 `docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_COLLECTION.md` and
 `docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_TRIAGE.md`.
+Co-linear ELS source audit:
+`docs/COLINEAR_ELS_SOURCE_AUDIT.md`.
 Gans communities source-shape audit:
 `docs/GANS_COMMUNITIES_SOURCE_AUDIT.md`.
 American presidents source-shape audit:

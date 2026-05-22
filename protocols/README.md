@@ -94,6 +94,17 @@ data. It also summarizes the raw ANU famous-rabbis source-list shapes so the
 163-distance mismatch is visible before metric work. Tracked audit:
 `docs/WRR_SOURCE_AUDIT.md`.
 
+Co-linear ELS source audit:
+
+```bash
+python3 -m scripts.run_protocol protocols/colinear_els_source_audit.toml --resume
+```
+
+This parses the Bombach/Gans co-linear ELS paper, attachment index, and linked
+PDF tables into source-shape counts. It records source coverage and row counts
+without normalizing Hebrew terms, computing ELSs, scoring verse links, or
+evaluating controls. Tracked audit: `docs/COLINEAR_ELS_SOURCE_AUDIT.md`.
+
 Gans communities source-shape audit:
 
 ```bash

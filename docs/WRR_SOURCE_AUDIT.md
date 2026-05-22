@@ -18,6 +18,14 @@ but no claim-grade WRR reproduction yet.
 - Torah-code co-linear ELS/verse paper and attachments:
   `https://www.torah-code.org/papers/bombach.pdf`
   `https://www.torah-code.org/papers/attachments.html`
+  `http://www.torahcodes.org/patterns/pls.pdf`
+  `http://www.torahcodes.org/patterns/roots.pdf`
+  `http://www.torahcodes.org/patterns/all_1698.pdf`
+  `http://www.torahcodes.org/patterns/res_113.pdf`
+  `http://www.torahcodes.org/patterns/consul_138.pdf`
+  `http://www.torahcodes.org/patterns/intersec_108.pdf`
+  `http://www.torahcodes.org/patterns/comb_143.pdf`
+  `http://www.torahcodes.org/patterns/att_heb.pdf`
 - Gans communities paper:
   `https://www.torah-code.org/papers/gans.pdf`
 - Gans communities data:
@@ -169,8 +177,11 @@ These are source leads, not claim-ready evidence.
 
 - Co-linear ELS phrase/verse test: Bombach/Gans use all Pentateuch words of at
   least 5 letters, skip range `2..1000`, co-linear ELS pairs, verse-root links,
-  and released attachment tables. This can become a separate protocol after the
-  attachment PDFs are parsed and source rows are reviewed.
+  and released attachment tables. The source-shape audit in
+  `docs/COLINEAR_ELS_SOURCE_AUDIT.md` now confirms the paper PDF, 8 linked
+  attachment PDFs, 515 attachment pages, 6 attachments with explicit row-count
+  expectations, 8,260 expected source rows, and 10/10 protocol anchors before
+  any Hebrew normalization, ELS computation, verse scoring, or controls.
 - Genesis ELS-pair/community test: the Gans/Inbal/Bombach paper plus data file
   provide another fixed data set for pair compactness checks, independent from
   the WRR famous-rabbis table. The source-shape audit in
@@ -263,6 +274,12 @@ into the repo term CSV schema without committing the source data itself.
 
 `scripts/analyze_wrr_source_shapes.py` summarizes the raw ANU famous-rabbis
 source files so the 163-distance mismatch is visible before any metric work.
+
+`scripts/analyze_colinear_els_source.py` parses the Bombach/Gans co-linear ELS
+paper, attachment index, and linked PDF tables into ignored source-shape CSVs
+and a tracked audit summary. It verifies source coverage, protocol anchors, and
+row-count shape, but does not normalize Hebrew terms, compute ELSs, score verse
+links, or evaluate controls.
 
 `scripts/analyze_wrr_primary_pdf_anchors.py` checks that key WRR 1994
 method/count anchors are reachable in extracted PDF text, including the 298
@@ -408,6 +425,14 @@ Latest protocol smoke output:
 - `reports/wrr_1994/torah_code_papers.html`
 - `reports/wrr_1994/torah_code_colinear_paper.pdf`
 - `reports/wrr_1994/torah_code_colinear_attachments.html`
+- `reports/wrr_1994/torah_code_colinear_attachment_pls.pdf`
+- `reports/wrr_1994/torah_code_colinear_attachment_roots.pdf`
+- `reports/wrr_1994/torah_code_colinear_attachment_all_1698.pdf`
+- `reports/wrr_1994/torah_code_colinear_attachment_res_113.pdf`
+- `reports/wrr_1994/torah_code_colinear_attachment_consul_138.pdf`
+- `reports/wrr_1994/torah_code_colinear_attachment_intersec_108.pdf`
+- `reports/wrr_1994/torah_code_colinear_attachment_comb_143.pdf`
+- `reports/wrr_1994/torah_code_colinear_attachment_att_heb.pdf`
 - `reports/wrr_1994/gans_communities_paper.pdf`
 - `reports/wrr_1994/gans_communities_data.pdf`
 - `reports/wrr_1994/haralick_new_protocols.pdf`
@@ -506,6 +531,14 @@ Latest source hashes:
 | `torah_code_papers.html` | 15,527 | `a33a25292525125e0c4ad1af2229ae5d931e86e73be01cf6cdee1e221fa68876` |
 | `torah_code_colinear_paper.pdf` | 113,287 | `2ccc1bc563ea8a71d8ab861411fbd94943677f5c086d63dfc53016d665cf5a24` |
 | `torah_code_colinear_attachments.html` | 18,135 | `f87ccdbb2a1b65f2b2d413837274d2cabf7e167c894cbd4c55b065b9acd85203` |
+| `torah_code_colinear_attachment_pls.pdf` | 321,848 | `c01f568e6e7f02af2f1f9245669209fe4fa050632ba632dbd8f383498f13b66d` |
+| `torah_code_colinear_attachment_roots.pdf` | 496,085 | `61b66fe395225f5832ebe7743913ea3af5f60f4b6aedc8ab04ed4ae665a71575` |
+| `torah_code_colinear_attachment_all_1698.pdf` | 519,278 | `9d3bf83fc5a36f88ca0edf4911b01847c5068d08b13fa01ae31563b070689e22` |
+| `torah_code_colinear_attachment_res_113.pdf` | 164,618 | `fddf2e6768a65c5ef78b2d8dd350f420c8fb781d00d9d61b104526bcdb786b00` |
+| `torah_code_colinear_attachment_consul_138.pdf` | 101,104 | `ae72ad132f718498cfb3986654c7072bb70a27a25cd79c3fbfe84e1017c5387c` |
+| `torah_code_colinear_attachment_intersec_108.pdf` | 92,220 | `0f13709db015d78e0fdf34731353a2e0a898ce619aff692e60307bff46ce7853` |
+| `torah_code_colinear_attachment_comb_143.pdf` | 107,837 | `d85a9deb624d1f247c80dd2d99ceeb840b7e44268545ff3c4edf7c0ae11ff77e` |
+| `torah_code_colinear_attachment_att_heb.pdf` | 139,700 | `d2c92037486dd6b84f3e168bd205b5c651e77632ab8f0ea316094bb5536c6673` |
 | `gans_communities_paper.pdf` | 126,543 | `212cb24f918b9a417a6837ce5f1d6c6af3c80abba77bac084d6cd068c572adf0` |
 | `gans_communities_data.pdf` | 349,586 | `ac0b221064e144ca9a70d616064bcd58f7d8e68cd2fe6bedb202dd81991feb86` |
 | `haralick_new_protocols.pdf` | 202,375 | `425f999305ca7d1f5b73e63c67ea9cab65d1788e7a9f2a820c83f8fb15d0d2ab` |
