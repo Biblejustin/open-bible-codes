@@ -653,6 +653,10 @@ WRR source-transcription evidence packet:
 `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md`.
 It groups 43 row-transcription residual terms into 22 row clusters for
 primary row or row-alignment review, without choosing corrections.
+WRR source-transcription row review checklist:
+`docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md`.
+It keeps those 22 row clusters in review order with pending manual source-lock
+state and required decision-record fields.
 WRR remaining-lane evidence packets:
 `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md`.
 They cover the remaining 14 page-image/method residual terms without choosing

@@ -396,7 +396,9 @@ terms, and 11 method/pair-universe terms. The method/pair-universe packet
 isolates OCR-matched terms that still have zero current appellation hits. The
 claim-blocker packet mirrors the same no-input handoff with term targets,
 row-cluster priorities, page-image near matches, and method/pair-universe
-counts. These packets organize review evidence without choosing corrections,
+counts. The row-review checklist keeps the 22 source-transcription row
+clusters in pending manual source-lock state with required decision-record
+fields. These packets organize review evidence without choosing corrections,
 method changes, or exclusions.
 
 Source artifacts:

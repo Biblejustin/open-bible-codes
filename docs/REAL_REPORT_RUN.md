@@ -73,6 +73,7 @@ This assembly run includes:
   `docs/WRR_LOCK_OPTIONS.md`, plus `docs/WRR_SOURCE_POLICY_SCENARIOS.md`,
   `docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md`,
   `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md`,
+  `docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md`,
   `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md`,
   `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md`,
   `docs/WRR_DW_FORMULA_SENSITIVITY.md`, `docs/WRR_CLAIM_READINESS.md`, and
@@ -152,6 +153,8 @@ It requires:
 - WRR claim-blocker packet states no-input limits, keeps no-correction and
   no-exclusion boundaries visible, and summarizes the residual term, row,
   page-image, and method/pair-universe review lanes;
+- WRR source-transcription row checklist keeps the 22 row clusters in
+  pending manual source-lock state with required decision-record fields;
 - checked-in `docs/INDEX.md` and `protocols/INDEX.md` freshness;
 - existing generated inputs needed by the final gates.
 
@@ -255,6 +258,8 @@ The report-run summary should currently say:
   residual to WNP context, row OCR, and scenario status without changing the
   source lock; `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md` groups the
   43 transcription/alignment terms into 22 row clusters for primary row review;
+  `docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md` keeps those 22 row
+  clusters in pending manual source-lock state;
   `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md` covers the 14 remaining
   page-image and method/pair-universe terms without selecting source edits; and
   `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` isolates the 11

@@ -805,7 +805,9 @@ The residual handoff is now packetized without selecting corrections: 1
 source-policy term, 43 source-transcription terms, 3 page-image near-match
 terms, and 11 method/pair-universe terms, with the claim-blocker packet
 mirroring top term targets, row clusters, page-image near matches, and
-method/pair-universe counts.
+method/pair-universe counts. The row-review checklist keeps the 22
+source-transcription row clusters in pending manual source-lock state with
+required decision-record fields.
 
 ## Best Next Work
 

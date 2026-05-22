@@ -341,7 +341,9 @@ The residual handoff is packetized without selecting corrections: 1
 source-policy term, 43 source-transcription terms, 3 page-image near-match
 terms, and 11 method/pair-universe terms. The claim-blocker packet mirrors
 top term targets, row clusters, page-image near matches, and
-method/pair-universe counts for no-input review.
+method/pair-universe counts for no-input review. The row-review checklist
+keeps the 22 source-transcription row clusters in pending manual source-lock
+state with required decision-record fields.
 
 ## Negative And Weak Results
 

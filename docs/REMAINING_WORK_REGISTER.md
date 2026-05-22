@@ -488,6 +488,10 @@ and 3 WNP context blocks, with no automatic correction or exclusion.
 source-transcription lane: 43 action terms, 44 residual pair links, 35
 minimum-frontier links, and 22 row clusters, with row 06 first at 4 frontier
 terms.
+`docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md` keeps those 22 row
+clusters in pending manual source-lock state, preserving review order and
+required decision-record fields without selecting row transcriptions,
+corrections, exclusions, or method changes.
 `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md` now handles the two remaining
 residual lanes: 3 page-image near-match terms and 11 method/pair-universe
 terms, preserving the no-correction boundary until page-image, method, or
