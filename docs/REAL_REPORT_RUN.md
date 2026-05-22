@@ -80,6 +80,10 @@ This assembly run includes:
 - locked Hebrew modern/geopolitical prospective source-distribution report:
   `docs/HEBREW_MODERN_GEOPOLITICAL_PROSPECTIVE_REPORT.md` and
   `docs/HEBREW_MODERN_GEOPOLITICAL_PROSPECTIVE_FINDINGS.md`
+- locked KJVA apocrypha/deuterocanon bridge prospective run:
+  `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md`,
+  `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md`, and
+  `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md`
 - broader Hebrew screening representative-control review:
   `docs/HEBREW_SCREENING_CONTROLLED_REVIEW.md`
 - relaxed all-codes follow-up:
