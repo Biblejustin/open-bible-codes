@@ -22,6 +22,21 @@ def test_missing_no_input_status_fails(tmp_path: Path) -> None:
     assert any("no-input diagnostics exhausted" in failure for failure in failures)
 
 
+def test_missing_visual_boundary_fails(tmp_path: Path) -> None:
+    doc = tmp_path / "WRR_CLAIM_BLOCKER_PACKET.md"
+    text = "\n".join(
+        phrase
+        for phrase in check.REQUIRED_PHRASES
+        if phrase
+        != "No visual-review note excludes a pair automatically; pair exclusion still requires source-policy lock."
+    )
+    doc.write_text(text + "\n", encoding="utf-8")
+
+    failures = check.validate_blocker_packet_doc(doc)
+
+    assert any("visual-review note excludes" in failure for failure in failures)
+
+
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
     missing = tmp_path / "missing.md"
 

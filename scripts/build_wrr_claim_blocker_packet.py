@@ -191,6 +191,11 @@ def flagged_source_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
     return sorted(flagged, key=lambda row: int_or_zero(row.get("priority_rank", "")))
 
 
+def visual_source_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    visual = [row for row in rows if row.get("visual_review_note")]
+    return sorted(visual, key=lambda row: int_or_zero(row.get("priority_rank", "")))
+
+
 def write_markdown(
     path: Path,
     packet_rows: list[dict[str, str]],
@@ -206,8 +211,8 @@ def write_markdown(
         "Status: no-input diagnostics exhausted for claim-grade WRR reproduction.",
         "",
         "This packet does not choose disputed WRR method policy. It gathers the",
-        "claim-readiness blockers, current lock options, and WNP/context source",
-        "queue flags into one handoff artifact.",
+        "claim-readiness blockers, current lock options, WNP/context source",
+        "queue flags, and visual triage notes into one handoff artifact.",
         "",
         "## Reproduce",
         "",
@@ -354,6 +359,26 @@ def write_markdown(
                 )
             )
     flagged_rows = flagged_source_rows(source_rows)
+    visual_rows = visual_source_rows(source_rows)
+    if visual_rows:
+        lines.extend(
+            [
+                "",
+                "## Visual Triage Highlights",
+                "",
+                "| Rank | Term id | Note | Action |",
+                "| ---: | --- | --- | --- |",
+            ]
+        )
+        for row in visual_rows:
+            lines.append(
+                "| {rank} | `{term_id}` | {note} | {action} |".format(
+                    rank=markdown_cell(row.get("priority_rank", "")),
+                    term_id=markdown_cell(row.get("term_id", "")),
+                    note=markdown_cell(row.get("visual_review_note", "")),
+                    action=markdown_cell(row.get("visual_review_action", "")),
+                )
+            )
     if flagged_rows:
         lines.extend(
             [
@@ -383,6 +408,7 @@ def write_markdown(
             "- This is a decision packet, not a reproduction result.",
             "- Further diagnostics can stay useful, but claim-grade wording requires a source policy.",
             "- No pair exclusion or D(w) formula is chosen here.",
+            "- No visual-review note excludes a pair automatically; pair exclusion still requires source-policy lock.",
             "",
         ]
     )

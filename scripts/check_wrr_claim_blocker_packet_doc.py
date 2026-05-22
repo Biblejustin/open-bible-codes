@@ -21,8 +21,12 @@ REQUIRED_PHRASES = (
     "select printed WRR formula or reported WRR-program formula",
     "source/title-prefix rule review; visual notes show title text without visible B@L prefix",
     "source/pair-rule review; visual notes show English of-Chelm label but primary Hebrew cell only supports RBY$LMH in this pass",
+    "## Visual Triage Highlights",
+    "primary page row visibly contains Yaakov Ha-Levi wording; row OCR missed it",
+    "treat as visual OCR miss until a locked transcription says otherwise",
     "This is a decision packet, not a reproduction result.",
     "No pair exclusion or D(w) formula is chosen here.",
+    "No visual-review note excludes a pair automatically; pair exclusion still requires source-policy lock.",
 )
 
 

@@ -157,6 +157,7 @@ Current pushed commits for this cleanup:
 - `40f2693` Refresh WRR downstream source actions.
 - `db8634d` Add WRR visual triage queue fields.
 - `b02bb8e` Guard WRR no-input lock posture.
+- `80583a7` Guard WRR visual notes as non exclusions.
 
 ### Formal Real Report Rerun
 

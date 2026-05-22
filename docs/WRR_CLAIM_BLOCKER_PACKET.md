@@ -3,8 +3,8 @@
 Status: no-input diagnostics exhausted for claim-grade WRR reproduction.
 
 This packet does not choose disputed WRR method policy. It gathers the
-claim-readiness blockers, current lock options, and WNP/context source
-queue flags into one handoff artifact.
+claim-readiness blockers, current lock options, WNP/context source
+queue flags, and visual triage notes into one handoff artifact.
 
 ## Reproduce
 
@@ -57,6 +57,18 @@ python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/w
 | smoke_length_5_8_cap250 | 86 | 28 | 28 |  | smoke lane sensitivity; no D(w) formula selected |
 | all_lanes_cap1000 | 182 | 72 | 72 | 0 | row-level printed/program comparison; no D(w) formula selected |
 
+## Visual Triage Highlights
+
+| Rank | Term id | Note | Action |
+| ---: | --- | --- | --- |
+| 1 | `wrr2_23_app_04` | primary page row visibly contains Yaakov Ha-Levi wording; row OCR missed it | treat as visual OCR miss until a locked transcription says otherwise |
+| 2 | `wrr2_30_app_05` | primary Hebrew name cell visibly contains Yosher Levav text without visible B@L prefix | review title-prefix/appellation rule before any source correction |
+| 3 | `wrr2_23_app_05` | primary page row visibly contains Maharil Segal wording; row OCR missed it | treat as visual OCR miss until a locked transcription says otherwise |
+| 4 | `wrr2_28_app_04` | primary Hebrew name cell visibly contains Pnei Moshe text without visible B@L prefix | review title-prefix/appellation rule before any source correction |
+| 5 | `wrr2_32_app_04` | English label says of-Chelm; visible primary Hebrew cell supports Rabbi Shelomo only in this pass | review source/pair rule before using this as a Hebrew-cell match |
+| 6 | `wrr2_27_date_01` | primary page row visibly contains 16 Tishri date forms; row OCR has near match | check page image before treating as source difference |
+| 7 | `wrr2_27_app_06` | primary page row visibly contains Moshe/Zacut forms; row OCR has near match | check WNP Zacut dispute and page image before treating as source difference |
+
 ## Flagged Source-Review Rows
 
 | Rank | Term id | Term | Bucket | Flags | Action |
@@ -72,3 +84,4 @@ python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/w
 - This is a decision packet, not a reproduction result.
 - Further diagnostics can stay useful, but claim-grade wording requires a source policy.
 - No pair exclusion or D(w) formula is chosen here.
+- No visual-review note excludes a pair automatically; pair exclusion still requires source-policy lock.

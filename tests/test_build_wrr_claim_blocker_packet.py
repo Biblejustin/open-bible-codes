@@ -110,6 +110,8 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                         "review_bucket": "ocr_near_match_with_variant_lead",
                         "source_review_flags": "wnp_disputed_zacut_appellation",
                         "source_review_action": "diagnostic flag only",
+                        "visual_review_note": "primary page row visibly contains Moshe/Zacut forms",
+                        "visual_review_action": "check page image before treating as source difference",
                     }
                 ],
             )
@@ -196,6 +198,9 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("WRR Claim Blocker Packet", text)
             self.assertIn("Flagged Source-Review Rows", text)
+            self.assertIn("Visual Triage Highlights", text)
+            self.assertIn("primary page row visibly contains Moshe/Zacut forms", text)
+            self.assertIn("No visual-review note excludes a pair automatically", text)
             self.assertIn("Source Policy Scenario Impact", text)
             self.assertIn("Single-Term Source Policy Impact", text)
             self.assertIn("wrr2_27_app_02", text)
