@@ -131,6 +131,10 @@ Already implemented:
   wired into `protocols/wrr_audit_counts.toml`, ranking blocked terms by
   row-OCR status, blocking-pair burden, and zero-hit variant leads. It is
   source-review triage only; see `docs/WRR_SOURCE_REVIEW_QUEUE.md`.
+- WRR visual source-review notes in
+  `docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md`, recording page-image reads for
+  the highest-priority source-review queue items. These notes are triage
+  only, not locked transcription.
 - WRR2 cross-pair grid in `scripts/build_wrr_cross_pair_grid.py` and
   `protocols/wrr_cross_pair_grid.toml`, crossing every imported appellation
   with every imported date for future date-label permutation diagnostics.
