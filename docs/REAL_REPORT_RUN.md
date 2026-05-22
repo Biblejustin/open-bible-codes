@@ -74,6 +74,7 @@ This assembly run includes:
   `docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md`,
   `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md`,
   `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md`,
+  `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md`,
   `docs/WRR_DW_FORMULA_SENSITIVITY.md`, `docs/WRR_CLAIM_READINESS.md`, and
   `docs/WRR_CLAIM_BLOCKER_PACKET.md`, plus
   `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md`
@@ -250,7 +251,9 @@ The report-run summary should currently say:
   source lock; `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md` groups the
   43 transcription/alignment terms into 22 row clusters for primary row review;
   `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md` covers the 14 remaining
-  page-image and method/pair-universe terms without selecting source edits.
+  page-image and method/pair-universe terms without selecting source edits; and
+  `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` isolates the 11
+  OCR-matched method-lane terms with zero current appellation hits.
 - `υιοσ` (huios; English: son) and `αιμα` (haima; English: blood) remain weaker hidden-path candidates because their exact
   patterns are missing from one or more compared Greek NT sources.
 - no row is claim-grade yet.

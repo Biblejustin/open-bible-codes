@@ -1063,6 +1063,34 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_method_pair_universe_evidence_packet"
+description = "Build diagnostic evidence packet for WRR OCR-matched method/pair-universe residuals."
+argv = [
+  "-m", "scripts.build_wrr_method_pair_universe_evidence_packet",
+  "--remaining-packet", "reports/wrr_1994/wrr_remaining_lane_evidence_packet.csv",
+  "--source-queue", "reports/wrr_1994/wrr_source_review_queue.csv",
+  "--counts", "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "--corrected-distance", "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.csv",
+  "--out", "reports/wrr_1994/wrr_method_pair_universe_evidence_packet.csv",
+  "--summary-out", "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
+  "--markdown-out", "docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md",
+  "--manifest-out", "reports/wrr_1994/wrr_method_pair_universe_evidence_packet.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_method_pair_universe_evidence_packet.py",
+  "reports/wrr_1994/wrr_remaining_lane_evidence_packet.csv",
+  "reports/wrr_1994/wrr_source_review_queue.csv",
+  "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_method_pair_universe_evidence_packet.csv",
+  "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
+  "docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md",
+  "reports/wrr_1994/wrr_method_pair_universe_evidence_packet.manifest.json",
+]
+
+[[steps]]
 id = "analyze_wrr_dw_formula_sensitivity"
 description = "Compare printed and reported-program D(w) formula diagnostics without selecting a formula."
 argv = [

@@ -78,6 +78,9 @@ WRR_SOURCE_TRANSCRIPTION_EVIDENCE_ROW_SUMMARY = Path(
 WRR_REMAINING_LANE_EVIDENCE_SUMMARY = Path(
     "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv"
 )
+WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_SUMMARY = Path(
+    "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv"
+)
 WRR_DW_FORMULA_SENSITIVITY = Path("reports/wrr_1994/wrr_dw_formula_sensitivity.csv")
 HEBREW_THEOLOGY_ALL_CODES_TRIAGE_MANIFEST = Path(
     "reports/hebrew_theology_all_codes/triage.manifest.json"
@@ -245,6 +248,9 @@ def main(argv: list[str] | None = None) -> int:
     wrr_remaining_lane_evidence_summary_rows = read_rows(
         args.wrr_remaining_lane_evidence_summary
     )
+    wrr_method_pair_universe_evidence_summary_rows = read_rows(
+        args.wrr_method_pair_universe_evidence_summary
+    )
     wrr_dw_formula_sensitivity_rows = read_rows(args.wrr_dw_formula_sensitivity)
     hebrew_theology_all_codes_triage_manifest = read_json(
         args.hebrew_theology_all_codes_triage_manifest
@@ -396,6 +402,9 @@ def main(argv: list[str] | None = None) -> int:
         wrr_remaining_lane_evidence_summary_rows=(
             wrr_remaining_lane_evidence_summary_rows
         ),
+        wrr_method_pair_universe_evidence_summary_rows=(
+            wrr_method_pair_universe_evidence_summary_rows
+        ),
         wrr_dw_formula_sensitivity_rows=wrr_dw_formula_sensitivity_rows,
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
         hebrew_screening_all_codes_triage_manifest=hebrew_screening_all_codes_triage_manifest,
@@ -502,6 +511,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         wrr_remaining_lane_evidence_summary_rows=(
             wrr_remaining_lane_evidence_summary_rows
+        ),
+        wrr_method_pair_universe_evidence_summary_rows=(
+            wrr_method_pair_universe_evidence_summary_rows
         ),
         wrr_dw_formula_sensitivity_rows=wrr_dw_formula_sensitivity_rows,
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
@@ -717,6 +729,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--wrr-remaining-lane-evidence-summary",
         type=Path,
         default=WRR_REMAINING_LANE_EVIDENCE_SUMMARY,
+    )
+    parser.add_argument(
+        "--wrr-method-pair-universe-evidence-summary",
+        type=Path,
+        default=WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_SUMMARY,
     )
     parser.add_argument(
         "--wrr-dw-formula-sensitivity",
@@ -994,6 +1011,7 @@ def write_summary(
     wrr_source_policy_evidence_summary_rows: list[dict[str, str]],
     wrr_source_transcription_evidence_row_summary_rows: list[dict[str, str]],
     wrr_remaining_lane_evidence_summary_rows: list[dict[str, str]],
+    wrr_method_pair_universe_evidence_summary_rows: list[dict[str, str]],
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1300,6 +1318,7 @@ def write_summary(
             wrr_source_policy_evidence_summary_rows,
             wrr_source_transcription_evidence_row_summary_rows,
             wrr_remaining_lane_evidence_summary_rows,
+            wrr_method_pair_universe_evidence_summary_rows,
             wrr_dw_formula_sensitivity_rows,
         )
     )
@@ -1439,6 +1458,7 @@ def write_summary(
             "- `docs/WRR_CLAIM_BLOCKER_PACKET.md`",
             "- `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md`",
             "- `docs/WRR_SOURCE_POLICY_SCENARIOS.md`",
+            "- `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md`",
             "- `docs/WRR_DW_FORMULA_SENSITIVITY.md`",
             "- `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`",
             "- `docs/STUDY_LOCK_MANIFESTS.md`",
@@ -1576,6 +1596,7 @@ def write_manifest(
     wrr_source_policy_evidence_summary_rows: list[dict[str, str]],
     wrr_source_transcription_evidence_row_summary_rows: list[dict[str, str]],
     wrr_remaining_lane_evidence_summary_rows: list[dict[str, str]],
+    wrr_method_pair_universe_evidence_summary_rows: list[dict[str, str]],
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1690,6 +1711,9 @@ def write_manifest(
             ),
             "wrr_remaining_lane_evidence_summary": str(
                 args.wrr_remaining_lane_evidence_summary
+            ),
+            "wrr_method_pair_universe_evidence_summary": str(
+                args.wrr_method_pair_universe_evidence_summary
             ),
             "wrr_dw_formula_sensitivity": str(args.wrr_dw_formula_sensitivity),
             "hebrew_theology_all_codes_triage_manifest": str(
@@ -1865,6 +1889,9 @@ def write_manifest(
         ),
         "wrr_remaining_lane_evidence_summary_rows": len(
             wrr_remaining_lane_evidence_summary_rows
+        ),
+        "wrr_method_pair_universe_evidence_summary_rows": len(
+            wrr_method_pair_universe_evidence_summary_rows
         ),
         "wrr_dw_formula_sensitivity_rows": len(wrr_dw_formula_sensitivity_rows),
         "hebrew_theology_all_codes_triage_rows": hebrew_theology_all_codes_triage_manifest.get(
@@ -3436,6 +3463,7 @@ def wrr_audit_section(
     source_policy_evidence_summary_rows: list[dict[str, str]],
     source_transcription_evidence_row_summary_rows: list[dict[str, str]],
     remaining_lane_evidence_summary_rows: list[dict[str, str]],
+    method_pair_universe_evidence_summary_rows: list[dict[str, str]],
     dw_formula_sensitivity_rows: list[dict[str, str]],
 ) -> list[str]:
     source_hashes = {
@@ -3759,6 +3787,33 @@ def wrr_audit_section(
                     read=md_cell(row.get("read", "")),
                 )
             )
+    if method_pair_universe_evidence_summary_rows:
+        summary = method_pair_universe_evidence_summary_rows[0]
+        lines.extend(
+            [
+                "",
+                "Method/pair-universe evidence packet status:",
+                "",
+                "| Terms | Pairs | OCR matched | Zero skip-250 | Zero high-cap | Both sides zero | Read |",
+                "| ---: | ---: | ---: | ---: | ---: | ---: | --- |",
+                (
+                    "| {terms} | {pairs} | {ocr} | {zero_250} | {zero_highcap} | "
+                    "{both_zero} | {read} |"
+                ).format(
+                    terms=md_cell(summary.get("action_terms", "")),
+                    pairs=md_cell(summary.get("residual_pairs", "")),
+                    ocr=md_cell(summary.get("ocr_matched_terms", "")),
+                    zero_250=md_cell(summary.get("zero_base_skip_250_terms", "")),
+                    zero_highcap=md_cell(
+                        summary.get("zero_highcap_appellation_terms", "")
+                    ),
+                    both_zero=md_cell(
+                        summary.get("both_sides_zero_highcap_pairs", "")
+                    ),
+                    read=md_cell(summary.get("read", "")),
+                ),
+            ]
+        )
     if dw_formula_sensitivity_rows:
         lines.extend(
             [

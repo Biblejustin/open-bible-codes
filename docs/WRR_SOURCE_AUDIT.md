@@ -185,6 +185,10 @@ be reviewed once against primary row evidence before source edits.
 action terms: 3 page-image near-match targets and 11 method/pair-universe
 targets. It preserves the no-correction boundary until page-image, method, or
 pair-universe evidence is locked.
+`docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` now isolates the 11
+OCR-matched method-lane terms: all have zero skip-250 appellation counts and
+zero high-cap appellation ordinary hits, while 2 pairs have zero ordinary hits
+on both sides.
 
 The ANU/McKay data page provides plain-text WRR lists in a modified
 Michigan-Claremont transliteration. User decision on 2026-05-21: use this

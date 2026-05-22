@@ -657,6 +657,11 @@ WRR remaining-lane evidence packets:
 `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md`.
 They cover the remaining 14 page-image/method residual terms without choosing
 source corrections, method changes, or pair exclusions.
+WRR method/pair-universe evidence packet:
+`docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md`.
+It isolates the 11 OCR-matched method-lane terms: all have zero skip-250
+appellation hits and zero high-cap appellation ordinary hits, with 2 pairs zero
+on both sides.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.

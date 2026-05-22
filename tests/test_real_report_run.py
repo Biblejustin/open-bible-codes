@@ -89,6 +89,10 @@ class RealReportRunTests(unittest.TestCase):
             "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md",
             steps_by_id["preflight"]["inputs"],
         )
+        self.assertIn(
+            "docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("docs/WRR_SOURCE_REVIEW_QUEUE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn(
             "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md",
@@ -126,6 +130,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/build_wrr_remaining_lane_evidence_packets.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_wrr_method_pair_universe_evidence_packet.py",
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
@@ -173,6 +181,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
+            "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_source_policy_evidence_summary.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
@@ -182,6 +194,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
@@ -218,6 +234,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_remaining_lane_evidence_packets_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_method_pair_universe_evidence_packet_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -566,6 +586,18 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_remaining_lane_evidence_packets_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/build_wrr_method_pair_universe_evidence_packet.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_method_pair_universe_evidence_packet_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -1187,6 +1219,30 @@ class RealReportRunTests(unittest.TestCase):
                 payload["failures"],
             )
 
+    def test_preflight_fails_on_wrr_method_pair_universe_evidence_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_method_pair_universe_evidence_packet_doc,
+                "validate_method_pair_universe_evidence_packet_doc",
+                return_value=[
+                    "docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md missing boundary"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_method_pair_universe_evidence_packet_doc_failures"],
+                ["docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md missing boundary"],
+            )
+            self.assertIn(
+                "WRR method/pair-universe evidence packet failures: "
+                "docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md missing boundary",
+                payload["failures"],
+            )
+
     def test_preflight_fails_on_wrr_cross_pair_grid_doc_failure(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / "preflight.json"
@@ -1677,6 +1733,17 @@ class RealReportRunTests(unittest.TestCase):
             ],
             [
                 {
+                    "action_terms": "11",
+                    "residual_pairs": "11",
+                    "ocr_matched_terms": "11",
+                    "zero_base_skip_250_terms": "11",
+                    "zero_highcap_appellation_terms": "11",
+                    "both_sides_zero_highcap_pairs": "2",
+                    "read": "OCR matched all method-lane terms",
+                }
+            ],
+            [
+                {
                     "scope": "all_lanes_cap1000",
                     "row_count": "182",
                     "printed_defined_corrected_distances": "72",
@@ -1722,6 +1789,11 @@ class RealReportRunTests(unittest.TestCase):
             "| method_or_pair_universe_review | 11 | 11 | 2 | OCR matched imported term |",
             text,
         )
+        self.assertIn("Method/pair-universe evidence packet status", text)
+        self.assertIn(
+            "| 11 | 11 | 11 | 11 | 11 | 2 | OCR matched all method-lane terms |",
+            text,
+        )
         self.assertIn(
             "| wrr2_27_app_02 | ZKWTA | wnp_disputed_zacut_appellation | 2 | 163 | 0 | single-term exclusion closes >=5 count gap |",
             text,
@@ -1734,6 +1806,7 @@ class RealReportRunTests(unittest.TestCase):
             summary.wrr_audit_section(
                 {"status": "success", "duration_seconds": 12.3},
                 {"downloads": [{"label": "wrr_1994_paper", "sha256": "paperhash"}]},
+                [],
                 [],
                 [],
                 [],

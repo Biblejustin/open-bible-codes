@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 339
+Documents indexed: 340
 
 ## Controls
 
@@ -103,6 +103,7 @@ Documents indexed: 339
 | WRR D(w) Formula Sensitivity | `WRR_DW_FORMULA_SENSITIVITY.md` |
 | WRR Lock Options | `WRR_LOCK_OPTIONS.md` |
 | WRR Methodology Gaps | `WRR_METHODOLOGY_GAPS.md` |
+| WRR Method/Pair-Universe Evidence Packet | `WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` |
 | WRR Method Status | `WRR_METHOD_STATUS.md` |
 | WRR Remaining-Lane Evidence Packets | `WRR_REMAINING_LANE_EVIDENCE_PACKETS.md` |
 | WRR 1994 Replication Plan | `WRR_REPLICATION_PLAN.md` |
