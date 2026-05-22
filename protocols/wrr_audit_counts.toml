@@ -1,5 +1,5 @@
 name = "wrr_audit_counts"
-description = "WRR2 imported-term count and same-record pair smoke on Koren Genesis; not the WRR statistic."
+description = "WRR2 imported-term count, same-record pair smoke, and current repo-defined diagnostic status on Koren Genesis."
 manifest_out = "reports/wrr_1994/audit_counts_protocol.manifest.json"
 max_parallel = 1
 progress_interval_seconds = 15

@@ -31,8 +31,9 @@ python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
 ```
 
 This runs preflight checks, refreshes locked STEP_TAHOT and Greek exact-center
-final gates with resume, refreshes the WRR source-audit smoke track, builds the
-generated report index, and writes `reports/real_report_run/summary.md`.
+final gates with resume, refreshes WRR source/import audit state, reads the
+current WRR repo-defined diagnostic status, builds the generated report index,
+and writes `reports/real_report_run/summary.md`.
 Tracked plan: `docs/REAL_REPORT_RUN.md`.
 
 Run one step:
@@ -114,7 +115,9 @@ source-locks the primary Table 2 row labels and Table 3 published rank rows,
 bridges Table 2 row labels to secondary WRR2 record counts, runs a
 probe-only Hebrew OCR check against those secondary terms, and emits a pair-table
 reconciliation for the current imported-pair count versus the source-cited
-163-distance WRR second-list sample. It is not a WRR reproduction.
+163-distance WRR second-list sample. It also reads the current repo-defined
+999,999 date-label permutation diagnostic into the WRR method-status matrix.
+It is not an exact WRR reproduction.
 
 Hebrew MT-family version comparison:
 

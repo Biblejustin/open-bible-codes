@@ -124,8 +124,9 @@ No current row should be written as a public claim.
   remain absent or effectively absent in the observed Hebrew and Greek screens.
 - The LXX apocrypha bridge boundary did not stand out from shuffled insertion
   controls.
-- WRR 1994 has not been reproduced; the project has source/import/count smoke
-  work, but not the full corrected-distance and permutation statistic.
+- WRR 1994 has not been reproduced exactly; the project has source/import
+  work and a repo-defined 999,999 date-label permutation diagnostic with
+  Bonferroni `rho0 = 0.00086`.
 - Source-audit additions are not findings. They are queued source families,
   term lists, and methodology constraints.
 
@@ -314,13 +315,18 @@ meaning or post-hoc cluster selection.
 
 ### WRR 1994 Status
 
-The WRR work is not yet a claim-grade reproduction. The current work imports
-source files, audits source shape, counts terms in Koren Genesis, and records
-methodology gaps. It does not yet implement the full corrected distance
-`c(w,w')`, locked pair eligibility path, term-specific skip caps, or
-permutation-rank procedure needed for a full WRR reproduction.
+The WRR work is not yet an exact claim-grade reproduction. The current work
+imports source files, audits source shape, counts terms in Koren Genesis,
+records methodology gaps, computes corrected-distance diagnostics, and runs a
+repo-defined 999,999 date-label permutation diagnostic.
 
-Current status: `under_specified`.
+Current working status: repo-defined diagnostic accepted for local evidence,
+not exact WRR reproduction. The accepted diagnostic uses the current cap-250
+`corrected_distance` field, excludes WNP-dispute-flagged rows, shuffles date
+labels across 30 concepts, and reports Bonferroni `rho0 = 0.00086` from 174
+observed rows and 48 defined `c(w,w')` values.
+
+Current exact-reproduction status: `under_specified`.
 
 ## Negative And Weak Results
 

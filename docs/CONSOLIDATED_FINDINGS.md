@@ -784,14 +784,17 @@ The first formal report assembly plan is now tracked in
 STEP_TAHOT and Greek exact-center final gates, refreshes the locked doxa
 four-source follow-up, expanded Greek surface queue, length-4 Greek surface
 follow-up, generated length-4 vocabulary controls, relaxed all-codes follow-up
-audits, all-codes compound-extension controls, and the WRR source-audit smoke
-track. It then builds a generated report index and writes
-`reports/real_report_run/summary.md`. It does not expand declared screening
-lists, widen skip ranges, or promote rows to claims.
+audits, all-codes compound-extension controls, WRR source/import audit state,
+and current WRR repo-defined diagnostic status. It then builds a generated
+report index and writes `reports/real_report_run/summary.md`. It does not
+expand declared screening lists, widen skip ranges, or promote rows to claims.
 
-WRR claim readiness is explicitly gated in `docs/WRR_CLAIM_READINESS.md`; it is
-blocked until the pair universe, `D(w)` formula, full corrected-distance run,
-and aggregate/permutation procedure are locked.
+WRR now has a repo-defined 999,999 date-label permutation diagnostic using the
+current cap-250 corrected-distance field and excluding WNP-dispute-flagged rows:
+174 observed rows, 48 defined `c(w,w')` values, and Bonferroni `rho0 = 0.00086`.
+Exact WRR claim readiness is still explicitly gated in
+`docs/WRR_CLAIM_READINESS.md`; it remains blocked until the source-locked pair
+universe and source-locked `D(w)` formula are resolved.
 
 ## Best Next Work
 

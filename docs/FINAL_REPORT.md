@@ -365,12 +365,20 @@ post-hoc cluster selection.
 
 ### WRR 1994
 
-WRR 1994 has not yet been reproduced. The current repo imports source files,
-audits source shape, counts terms in Koren Genesis, and documents methodology
-gaps. It does not yet implement the full corrected distance `c(w,w')`, the
-locked pair eligibility path, term-specific skip caps, or the permutation-rank
-procedure needed for a claim-grade WRR reproduction. The current claim-readiness
-gate remains blocked for those method-lock reasons.
+WRR 1994 has not yet been reproduced exactly. The current repo imports source
+files, audits source shape, counts terms in Koren Genesis, computes
+corrected-distance diagnostics, and now has a repo-defined 999,999 date-label
+permutation diagnostic over the current cross-pair matrix.
+
+For the current working position, the repo-defined diagnostic uses the current
+cap-250 `corrected_distance` field, excludes WNP-dispute-flagged rows, shuffles
+date labels across 30 concepts, and writes summary-only output. It observed 174
+source rows, 48 defined `c(w,w')` values, and Bonferroni `rho0 = 0.00086`.
+
+That is meaningful local evidence for the repo-defined protocol, but it is not
+exact WRR reproduction language. The current claim-readiness gate remains
+blocked for exact reproduction because the source-locked pair universe and
+source-locked `D(w)` rule are still unresolved.
 
 Source artifacts:
 
@@ -378,6 +386,8 @@ Source artifacts:
 - `docs/WRR_REPLICATION_PLAN.md`
 - `docs/WRR_METHODOLOGY_GAPS.md`
 - `docs/WRR_CORRECTED_DISTANCE_NOTES.md`
+- `docs/WRR_CROSS_PAIR_GRID.md`
+- `docs/WRR_METHOD_STATUS.md`
 - `docs/WRR_CLAIM_READINESS.md`
 
 ## Current Status Labels

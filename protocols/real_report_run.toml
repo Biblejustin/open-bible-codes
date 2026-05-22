@@ -543,7 +543,7 @@ outputs = ["reports/greek_surface_length4_vocab_controls/protocol_run.manifest.j
 
 [[steps]]
 id = "wrr_audit_counts"
-description = "Refresh WRR2 source/import/count smoke audit; not the WRR statistic."
+description = "Refresh WRR2 source/import audit and method status; reads current repo-defined diagnostic if present."
 argv = ["-m", "scripts.run_protocol", "protocols/wrr_audit_counts.toml", "--resume"]
 inputs = [
   "protocols/wrr_audit_counts.toml",

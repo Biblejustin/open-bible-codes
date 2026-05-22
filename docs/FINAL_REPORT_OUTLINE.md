@@ -94,7 +94,7 @@ Use the categories already present in `reports/real_report_run/summary.md`:
 - broader Hebrew screening controls;
 - all-codes follow-up and compound-extension controls;
 - centered occurrence index;
-- WRR source/import/count smoke audit.
+- WRR repo-defined 999,999 permutation diagnostic.
 
 ### 5. Occurrence-First Findings
 
@@ -150,18 +150,21 @@ State these visibly:
 
 Use cautious language:
 
-- current WRR work is source/import/count smoke work;
+- current WRR work is repo-defined diagnostic work, not exact WRR
+  reproduction;
 - corrected-distance smoke exists; current 5..8 direct-search term-printed,
   term-program, and fixed-250 variants each produce 28 defined corrected
   distances at cap 250, and the high-cap 1000 split produces 46 defined
   diagnostic distances;
 - all-lane direct diagnostic over 182 imported same-record WRR2 pairs produces
   72 defined diagnostic distances at cap 1000, not the source-cited 163;
-- full corrected-distance run and permutation statistic are not implemented as
-  a claim-grade reproduction;
-- WRR remains under-specified in this project until the locked pair table,
-  final `D(w)` decision, and permutation procedure are complete;
-- current readiness gate: `docs/WRR_CLAIM_READINESS.md`, blocked.
+- current accepted repo-defined 999,999 date-label permutation diagnostic
+  excludes WNP-dispute-flagged rows, uses the current cap-250
+  `corrected_distance` field, observes 174 rows and 48 defined `c(w,w')`
+  values, and reports Bonferroni `rho0 = 0.00086`;
+- exact WRR reproduction remains under-specified until the source-locked pair
+  table and final `D(w)` decision are complete;
+- exact-reproduction readiness gate: `docs/WRR_CLAIM_READINESS.md`, blocked.
 
 ### 9. Claim-Language Boundary
 

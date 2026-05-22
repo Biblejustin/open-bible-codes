@@ -533,7 +533,8 @@ class RealReportRunTests(unittest.TestCase):
         text = "\n".join(lines)
 
         self.assertIn("## WRR 1994 Source Audit", text)
-        self.assertIn("WRR remains `under_specified`", text)
+        self.assertIn("repo-defined diagnostic evidence", text)
+        self.assertIn("reproduction remains `under_specified`", text)
         self.assertIn("| WRR 1994 paper PDF | `paperhash` |", text)
         self.assertIn("| WRR/Nations MC page | `nationsmc` |", text)
         self.assertIn("| WRR/Nations Hebrew page | `nationsgir` |", text)
