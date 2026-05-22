@@ -195,6 +195,10 @@ Already implemented:
   the all-lane corrected-distance outputs back to pair-lane, review-status, and
   WNP-Zacut labels. Current tracked output is
   `docs/WRR_DEFINED_PAIR_SET_AUDIT.md`.
+- defined-gap reason audit in `scripts/analyze_wrr_defined_gap_reasons.py`,
+  classifying the best current cap-1000 gap as zero-ordinary-hit failures
+  rather than under-minimum perturbation failures. Current tracked output is
+  `docs/WRR_DEFINED_GAP_REASON_AUDIT.md`.
 - cross-pair date-label permutation diagnostic in
   `protocols/wrr_cross_pair_grid.toml`. Current cap-250 output crosses 168
   imported appellations against 31 imported date rows, defines 1,423 corrected

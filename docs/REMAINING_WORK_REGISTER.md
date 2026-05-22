@@ -279,6 +279,11 @@ runs the cap-1000 reported-program `D(w)` formula sensitivity check; it changes
 candidate-lane, review-status, and WNP-Zacut labels: best current direct run
 defines 72 of 163, leaving a 91-distance gap, with ordinary-not-valid rows as
 the dominant missing mass.
+`docs/WRR_DEFINED_GAP_REASON_AUDIT.md` now classifies that missing mass: in the
+best cap-1000 run, 83 rows lack appellation ordinary hits, 12 lack date
+ordinary hits, 15 lack both, and 0 are under-minimum perturbation cases. The
+next WRR work is therefore source/term/pair-rule reconciliation before any
+claim-grade permutation language.
 
 ### 2. Source-Basis Audit Queue
 

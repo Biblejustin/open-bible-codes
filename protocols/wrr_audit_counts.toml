@@ -740,6 +740,36 @@ outputs = [
 ]
 
 [[steps]]
+id = "analyze_wrr_defined_gap_reasons"
+description = "Classify why current WRR working pairs remain below the source-cited defined-distance count."
+argv = [
+  "-m", "scripts.analyze_wrr_defined_gap_reasons",
+  "--pair-summary", "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "--pair-table", "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "--run", "all_lanes_cap250=reports/wrr_1994/direct_all/wrr2_corrected_distance_all_lanes_250.csv",
+  "--run", "all_lanes_cap1000=reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.csv",
+  "--run", "all_lanes_cap1000_program=reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv",
+  "--out", "reports/wrr_1994/wrr_defined_gap_reasons.csv",
+  "--term-out", "reports/wrr_1994/wrr_defined_gap_term_burden.csv",
+  "--markdown-out", "docs/WRR_DEFINED_GAP_REASON_AUDIT.md",
+  "--manifest-out", "reports/wrr_1994/wrr_defined_gap_reason_audit.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_defined_gap_reasons.py",
+  "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "reports/wrr_1994/direct_all/wrr2_corrected_distance_all_lanes_250.csv",
+  "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.csv",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_defined_gap_reasons.csv",
+  "reports/wrr_1994/wrr_defined_gap_term_burden.csv",
+  "docs/WRR_DEFINED_GAP_REASON_AUDIT.md",
+  "reports/wrr_1994/wrr_defined_gap_reason_audit.manifest.json",
+]
+
+[[steps]]
 id = "build_wrr_method_status"
 description = "Summarize current WRR locks, open method decisions, and next actions."
 argv = [
@@ -747,6 +777,7 @@ argv = [
   "--text-source", "reports/wrr_1994/koren_genesis_text_source.csv",
   "--pair-summary", "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
   "--defined-pair-summary", "reports/wrr_1994/wrr_defined_pair_set_audit_summary.csv",
+  "--defined-gap-reasons", "reports/wrr_1994/wrr_defined_gap_reasons.csv",
   "--table2-bridge-summary", "reports/wrr_1994/wrr_table2_source_bridge_summary.csv",
   "--table2-ocr-summary", "reports/wrr_1994/wrr_primary_table2_ocr_probe_summary.csv",
   "--table2-row-ocr-summary", "reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv",
@@ -765,6 +796,7 @@ inputs = [
   "reports/wrr_1994/koren_genesis_text_source.csv",
   "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
   "reports/wrr_1994/wrr_defined_pair_set_audit_summary.csv",
+  "reports/wrr_1994/wrr_defined_gap_reasons.csv",
   "reports/wrr_1994/wrr_table2_source_bridge_summary.csv",
   "reports/wrr_1994/wrr_primary_table2_ocr_probe_summary.csv",
   "reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv",

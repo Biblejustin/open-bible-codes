@@ -111,6 +111,12 @@ Already implemented:
   records the best current direct run as 72 defined values against the
   source-cited 163-distance count, leaving a 91-distance gap; see
   `docs/WRR_DEFINED_PAIR_SET_AUDIT.md`.
+- WRR defined-gap reason audit in
+  `scripts/analyze_wrr_defined_gap_reasons.py`, wired into
+  `protocols/wrr_audit_counts.toml`, classifying the best current gap as 83
+  rows with no appellation ordinary hits, 12 with no date ordinary hits, 15
+  with neither term ordinary-hit valid, and 0 under-minimum rows; see
+  `docs/WRR_DEFINED_GAP_REASON_AUDIT.md`.
 - WRR2 cross-pair grid in `scripts/build_wrr_cross_pair_grid.py` and
   `protocols/wrr_cross_pair_grid.toml`, crossing every imported appellation
   with every imported date for future date-label permutation diagnostics.

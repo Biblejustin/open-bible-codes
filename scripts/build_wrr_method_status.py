@@ -16,6 +16,7 @@ from els import __version__
 DEFAULT_TEXT_SOURCE = Path("reports/wrr_1994/koren_genesis_text_source.csv")
 DEFAULT_PAIR_SUMMARY = Path("reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv")
 DEFAULT_DEFINED_PAIR_SUMMARY = Path("reports/wrr_1994/wrr_defined_pair_set_audit_summary.csv")
+DEFAULT_DEFINED_GAP_REASONS = Path("reports/wrr_1994/wrr_defined_gap_reasons.csv")
 DEFAULT_TABLE2_BRIDGE_SUMMARY = Path("reports/wrr_1994/wrr_table2_source_bridge_summary.csv")
 DEFAULT_TABLE2_OCR_SUMMARY = Path("reports/wrr_1994/wrr_primary_table2_ocr_probe_summary.csv")
 DEFAULT_TABLE2_ROW_OCR_SUMMARY = Path("reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv")
@@ -89,6 +90,7 @@ def main(argv: list[str] | None = None) -> int:
     text_row = read_one_row(args.text_source)
     pair_row = read_one_row(args.pair_summary)
     defined_pair_rows = read_rows(args.defined_pair_summary) if args.defined_pair_summary.exists() else []
+    defined_gap_reason_rows = read_rows(args.defined_gap_reasons) if args.defined_gap_reasons.exists() else []
     table2_bridge_row = read_one_row(args.table2_bridge_summary)
     table2_ocr_row = read_one_row(args.table2_ocr_summary)
     table2_row_ocr_row = read_one_row(args.table2_row_ocr_summary) if args.table2_row_ocr_summary.exists() else None
@@ -111,6 +113,7 @@ def main(argv: list[str] | None = None) -> int:
         text_row,
         pair_row,
         defined_pair_rows,
+        defined_gap_reason_rows,
         skip_row,
         variant_rows,
         primary_result_rows,
@@ -138,6 +141,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--text-source", type=Path, default=DEFAULT_TEXT_SOURCE)
     parser.add_argument("--pair-summary", type=Path, default=DEFAULT_PAIR_SUMMARY)
     parser.add_argument("--defined-pair-summary", type=Path, default=DEFAULT_DEFINED_PAIR_SUMMARY)
+    parser.add_argument("--defined-gap-reasons", type=Path, default=DEFAULT_DEFINED_GAP_REASONS)
     parser.add_argument("--table2-bridge-summary", type=Path, default=DEFAULT_TABLE2_BRIDGE_SUMMARY)
     parser.add_argument("--table2-ocr-summary", type=Path, default=DEFAULT_TABLE2_OCR_SUMMARY)
     parser.add_argument("--table2-row-ocr-summary", type=Path, default=DEFAULT_TABLE2_ROW_OCR_SUMMARY)
@@ -198,6 +202,7 @@ def build_status_rows(
     text_row: dict[str, str],
     pair_row: dict[str, str],
     defined_pair_rows: list[dict[str, str]] | None,
+    defined_gap_reason_rows: list[dict[str, str]] | None,
     skip_row: dict[str, str],
     variant_rows: list[dict[str, str]],
     primary_result_rows: list[dict[str, str]] | None = None,
@@ -245,7 +250,11 @@ def build_status_rows(
             "decision_area": "Pair universe",
             "status": "open",
             "current_read": "The 163 count is best treated as defined-distance output, not raw pair count.",
-            "evidence": pair_universe_evidence(pair_row, defined_pair_rows or []),
+            "evidence": pair_universe_evidence(
+                pair_row,
+                defined_pair_rows or [],
+                defined_gap_reason_rows or [],
+            ),
             "next_action": "Derive final pair set from source-backed corrected-distance eligibility, not raw counts alone.",
         },
         {
@@ -275,7 +284,11 @@ def build_status_rows(
     ]
 
 
-def pair_universe_evidence(pair_row: dict[str, str], defined_pair_rows: list[dict[str, str]]) -> str:
+def pair_universe_evidence(
+    pair_row: dict[str, str],
+    defined_pair_rows: list[dict[str, str]],
+    defined_gap_reason_rows: list[dict[str, str]],
+) -> str:
     parts = [
         f"{pair_row.get('source_same_record_pairs', '')} raw same-record pairs",
         (
@@ -297,11 +310,40 @@ def pair_universe_evidence(pair_row: dict[str, str], defined_pair_rows: list[dic
             f"gap {best.get('defined_gap_to_source_cited', '')}, "
             f"{best.get('ordinary_not_valid', '')} ordinary-not-valid"
         )
+    gap_read = best_gap_reason_evidence(defined_gap_reason_rows)
+    if gap_read:
+        parts.append(gap_read)
     return "; ".join(parts)
 
 
 def best_defined_pair_summary(rows: list[dict[str, str]]) -> dict[str, str] | None:
     return max(rows, key=lambda row: int_value(row.get("defined", "")), default=None)
+
+
+def best_gap_reason_evidence(rows: list[dict[str, str]]) -> str:
+    if not rows:
+        return ""
+    best_label = ""
+    best_defined = -1
+    for row in rows:
+        defined = int_value(row.get("run_defined", ""))
+        if defined > best_defined:
+            best_defined = defined
+            best_label = row.get("run_label", "")
+    best_rows = {row.get("reason", ""): row for row in rows if row.get("run_label", "") == best_label}
+    if not best_rows:
+        return ""
+    return (
+        f"gap-reason audit best run {best_label}: "
+        f"{pairs_for_reason(best_rows, 'ordinary_missing_appellation_hits')} no-appellation ordinary hits, "
+        f"{pairs_for_reason(best_rows, 'ordinary_missing_date_hits')} no-date ordinary hits, "
+        f"{pairs_for_reason(best_rows, 'ordinary_missing_both_terms')} neither-term ordinary hits, "
+        f"{pairs_for_reason(best_rows, 'under_minimum_valid_perturbations')} under-minimum"
+    )
+
+
+def pairs_for_reason(rows_by_reason: dict[str, dict[str, str]], reason: str) -> int:
+    return int_value(rows_by_reason.get(reason, {}).get("pairs", ""))
 
 
 def corrected_distance_status(
@@ -531,6 +573,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             f"--text-source {args.text_source} "
             f"--pair-summary {args.pair_summary} "
             f"--defined-pair-summary {args.defined_pair_summary} "
+            f"--defined-gap-reasons {args.defined_gap_reasons} "
             f"--table2-bridge-summary {args.table2_bridge_summary} "
             f"--table2-ocr-summary {args.table2_ocr_summary} "
             f"--table2-row-ocr-summary {getattr(args, 'table2_row_ocr_summary', '')} "
@@ -649,6 +692,7 @@ def write_manifest(args: argparse.Namespace, rows: list[dict[str, str]], started
             "text_source": str(args.text_source),
             "pair_summary": str(args.pair_summary),
             "defined_pair_summary": str(args.defined_pair_summary),
+            "defined_gap_reasons": str(args.defined_gap_reasons),
             "table2_bridge_summary": str(args.table2_bridge_summary),
             "table2_ocr_summary": str(args.table2_ocr_summary),
             "table2_row_ocr_summary": str(args.table2_row_ocr_summary),

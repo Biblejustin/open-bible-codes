@@ -36,6 +36,32 @@ class WrrMethodStatusTests(unittest.TestCase):
                     "ordinary_not_valid": "110",
                 }
             ],
+            defined_gap_reason_rows=[
+                {
+                    "run_label": "all_lanes_cap1000",
+                    "reason": "defined",
+                    "pairs": "72",
+                    "run_defined": "72",
+                },
+                {
+                    "run_label": "all_lanes_cap1000",
+                    "reason": "ordinary_missing_appellation_hits",
+                    "pairs": "83",
+                    "run_defined": "72",
+                },
+                {
+                    "run_label": "all_lanes_cap1000",
+                    "reason": "ordinary_missing_date_hits",
+                    "pairs": "12",
+                    "run_defined": "72",
+                },
+                {
+                    "run_label": "all_lanes_cap1000",
+                    "reason": "ordinary_missing_both_terms",
+                    "pairs": "15",
+                    "run_defined": "72",
+                },
+            ],
             skip_row={
                 "rows": "120",
                 "program_cap_lt_printed": "13",
@@ -143,6 +169,7 @@ class WrrMethodStatusTests(unittest.TestCase):
         self.assertIn("163 cited second-list distances", by_area["Pair universe"]["evidence"])
         self.assertIn("defined pair-set audit best run all_lanes_cap1000", by_area["Pair universe"]["evidence"])
         self.assertIn("gap 91", by_area["Pair universe"]["evidence"])
+        self.assertIn("83 no-appellation ordinary hits", by_area["Pair universe"]["evidence"])
         self.assertEqual(by_area["D(w) skip-cap formula"]["status"], "open")
         self.assertIn("13 program caps below printed", by_area["D(w) skip-cap formula"]["evidence"])
         self.assertEqual(by_area["Corrected distance c(w,w')"]["status"], "smoke_only")
@@ -180,6 +207,7 @@ class WrrMethodStatusTests(unittest.TestCase):
                 "expected_published_pairs": "163",
             },
             defined_pair_rows=[],
+            defined_gap_reason_rows=[],
             skip_row={
                 "rows": "120",
                 "program_cap_lt_printed": "13",
@@ -212,6 +240,7 @@ class WrrMethodStatusTests(unittest.TestCase):
                     "text_source": Path("text.csv"),
                     "pair_summary": Path("pairs.csv"),
                     "defined_pair_summary": Path("defined_pairs.csv"),
+                    "defined_gap_reasons": Path("gap_reasons.csv"),
                     "table2_bridge_summary": Path("bridge_summary.csv"),
                     "table2_ocr_summary": Path("ocr_summary.csv"),
                     "skip_summary": Path("skip.csv"),
@@ -255,6 +284,7 @@ class WrrMethodStatusTests(unittest.TestCase):
             text_source = root / "text.csv"
             pair_summary = root / "pairs.csv"
             defined_pair_summary = root / "defined_pairs.csv"
+            defined_gap_reasons = root / "defined_gap_reasons.csv"
             bridge_summary = root / "bridge_summary.csv"
             ocr_summary = root / "ocr_summary.csv"
             row_ocr_summary = root / "row_ocr_summary.csv"
@@ -307,6 +337,17 @@ class WrrMethodStatusTests(unittest.TestCase):
                         "source_cited_defined_distances": "163",
                         "defined_gap_to_source_cited": "91",
                         "ordinary_not_valid": "110",
+                    }
+                ],
+            )
+            write_dict_rows(
+                defined_gap_reasons,
+                [
+                    {
+                        "run_label": "all_lanes_cap1000",
+                        "reason": "ordinary_missing_appellation_hits",
+                        "pairs": "83",
+                        "run_defined": "72",
                     }
                 ],
             )
@@ -404,6 +445,8 @@ class WrrMethodStatusTests(unittest.TestCase):
                     str(pair_summary),
                     "--defined-pair-summary",
                     str(defined_pair_summary),
+                    "--defined-gap-reasons",
+                    str(defined_gap_reasons),
                     "--table2-bridge-summary",
                     str(bridge_summary),
                     "--table2-ocr-summary",

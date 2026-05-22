@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 321
+Documents indexed: 322
 
 ## Controls
 
@@ -95,6 +95,7 @@ Documents indexed: 321
 | WRR Claim Readiness | `WRR_CLAIM_READINESS.md` |
 | WRR Corrected Distance Notes | `WRR_CORRECTED_DISTANCE_NOTES.md` |
 | WRR Cross-Pair Grid | `WRR_CROSS_PAIR_GRID.md` |
+| WRR Defined Gap Reason Audit | `WRR_DEFINED_GAP_REASON_AUDIT.md` |
 | WRR Defined Pair-Set Audit | `WRR_DEFINED_PAIR_SET_AUDIT.md` |
 | WRR Direct All-Lane Corrected-Distance Diagnostic | `WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md` |
 | WRR Lock Options | `WRR_LOCK_OPTIONS.md` |

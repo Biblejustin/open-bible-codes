@@ -112,6 +112,13 @@ still defines only 72 of the source-cited 163 distances, leaving a 91-distance
 gap. The remaining missing mass is ordinary-not-valid, not an
 under-minimum-valid edge case.
 
+`docs/WRR_DEFINED_GAP_REASON_AUDIT.md` further classifies that gap. In the
+best current cap-1000 run, ordinary-not-valid rows are all zero-ordinary-hit
+failures in the current imported term forms: 83 rows lack appellation ordinary
+hits, 12 lack date ordinary hits, and 15 lack both. That points the next
+source-reconciliation work toward term normalization, source row boundaries,
+and the final pair-universe rule before permutation language.
+
 The WNP/McKay-Bar-Natan source critique confirms the 5-8 appellation-length
 restriction and disputes several Rabbi II-27 Moshe Zacut variants
 (`ZKWT)`, `ZKWTW`, `M$H ZKWT)`, `M$H ZKWTW`). Since Rabbi II-27 has two date
@@ -216,6 +223,10 @@ formula in this diagnostic.
 The defined pair-set audit in `scripts/analyze_wrr_defined_pair_set.py` joins
 those outputs to pair-lane and review-status labels; current tracked output is
 `docs/WRR_DEFINED_PAIR_SET_AUDIT.md`.
+The defined-gap reason audit in
+`scripts/analyze_wrr_defined_gap_reasons.py` classifies why the best current
+run remains short of 163; current tracked output is
+`docs/WRR_DEFINED_GAP_REASON_AUDIT.md`.
 Implementation notes are now tracked in
 `docs/WRR_CORRECTED_DISTANCE_NOTES.md`.
 
