@@ -68,6 +68,7 @@ WRR_CROSS_PAIR_RECOMMENDED_PERMUTATION_SUMMARY = Path(
     "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv"
 )
 WRR_SOURCE_POLICY_SCENARIOS = Path("reports/wrr_1994/wrr_source_policy_scenarios.csv")
+WRR_DW_FORMULA_SENSITIVITY = Path("reports/wrr_1994/wrr_dw_formula_sensitivity.csv")
 HEBREW_THEOLOGY_ALL_CODES_TRIAGE_MANIFEST = Path(
     "reports/hebrew_theology_all_codes/triage.manifest.json"
 )
@@ -224,6 +225,7 @@ def main(argv: list[str] | None = None) -> int:
         args.wrr_cross_pair_recommended_permutation_summary
     )
     wrr_source_policy_scenario_rows = read_rows(args.wrr_source_policy_scenarios)
+    wrr_dw_formula_sensitivity_rows = read_rows(args.wrr_dw_formula_sensitivity)
     hebrew_theology_all_codes_triage_manifest = read_json(
         args.hebrew_theology_all_codes_triage_manifest
     )
@@ -364,6 +366,7 @@ def main(argv: list[str] | None = None) -> int:
             wrr_cross_pair_recommended_permutation_rows
         ),
         wrr_source_policy_scenario_rows=wrr_source_policy_scenario_rows,
+        wrr_dw_formula_sensitivity_rows=wrr_dw_formula_sensitivity_rows,
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
         hebrew_screening_all_codes_triage_manifest=hebrew_screening_all_codes_triage_manifest,
         greek_screening_all_codes_triage_manifest=greek_screening_all_codes_triage_manifest,
@@ -460,6 +463,7 @@ def main(argv: list[str] | None = None) -> int:
             wrr_cross_pair_recommended_permutation_rows
         ),
         wrr_source_policy_scenario_rows=wrr_source_policy_scenario_rows,
+        wrr_dw_formula_sensitivity_rows=wrr_dw_formula_sensitivity_rows,
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
         hebrew_screening_all_codes_triage_manifest=hebrew_screening_all_codes_triage_manifest,
         greek_screening_all_codes_triage_manifest=greek_screening_all_codes_triage_manifest,
@@ -653,6 +657,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--wrr-source-policy-scenarios",
         type=Path,
         default=WRR_SOURCE_POLICY_SCENARIOS,
+    )
+    parser.add_argument(
+        "--wrr-dw-formula-sensitivity",
+        type=Path,
+        default=WRR_DW_FORMULA_SENSITIVITY,
     )
     parser.add_argument(
         "--hebrew-theology-all-codes-triage-manifest",
@@ -921,6 +930,7 @@ def write_summary(
     wrr_perturbation_summary_rows: list[dict[str, str]],
     wrr_cross_pair_recommended_permutation_rows: list[dict[str, str]],
     wrr_source_policy_scenario_rows: list[dict[str, str]],
+    wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
     greek_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1221,6 +1231,7 @@ def write_summary(
             wrr_perturbation_summary_rows,
             wrr_cross_pair_recommended_permutation_rows,
             wrr_source_policy_scenario_rows,
+            wrr_dw_formula_sensitivity_rows,
         )
     )
     lines.extend(
@@ -1491,6 +1502,7 @@ def write_manifest(
     wrr_perturbation_summary_rows: list[dict[str, str]],
     wrr_cross_pair_recommended_permutation_rows: list[dict[str, str]],
     wrr_source_policy_scenario_rows: list[dict[str, str]],
+    wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
     greek_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1593,6 +1605,7 @@ def write_manifest(
                 args.wrr_cross_pair_recommended_permutation_summary
             ),
             "wrr_source_policy_scenarios": str(args.wrr_source_policy_scenarios),
+            "wrr_dw_formula_sensitivity": str(args.wrr_dw_formula_sensitivity),
             "hebrew_theology_all_codes_triage_manifest": str(
                 args.hebrew_theology_all_codes_triage_manifest
             ),
@@ -1757,6 +1770,7 @@ def write_manifest(
             wrr_cross_pair_recommended_permutation_rows
         ),
         "wrr_source_policy_scenario_rows": len(wrr_source_policy_scenario_rows),
+        "wrr_dw_formula_sensitivity_rows": len(wrr_dw_formula_sensitivity_rows),
         "hebrew_theology_all_codes_triage_rows": hebrew_theology_all_codes_triage_manifest.get(
             "queue_rows", 0
         ),
@@ -3322,6 +3336,7 @@ def wrr_audit_section(
     perturbation_rows: list[dict[str, str]],
     cross_pair_recommended_permutation_rows: list[dict[str, str]],
     source_policy_scenario_rows: list[dict[str, str]],
+    dw_formula_sensitivity_rows: list[dict[str, str]],
 ) -> list[str]:
     source_hashes = {
         download["label"]: download.get("sha256", "")
@@ -3521,6 +3536,24 @@ def wrr_audit_section(
                     remaining_len=md_cell(row.get("remaining_length_filtered_pairs", "")),
                 )
             )
+    if dw_formula_sensitivity_rows:
+        lines.extend(
+            [
+                "",
+                "| D(w) formula scope | Rows | Printed defined | Program defined | Changed pairs |",
+                "| --- | ---: | ---: | ---: | ---: |",
+            ]
+        )
+        for row in dw_formula_sensitivity_rows:
+            lines.append(
+                "| {scope} | {rows} | {printed} | {program} | {changed} |".format(
+                    scope=md_cell(row.get("scope", "")),
+                    rows=md_cell(row.get("row_count", "")),
+                    printed=md_cell(row.get("printed_defined_corrected_distances", "")),
+                    program=md_cell(row.get("program_defined_corrected_distances", "")),
+                    changed=md_cell(row.get("changed_pairs", "")),
+                )
+            )
     lines.extend(
         [
             "",
@@ -3535,7 +3568,8 @@ def wrr_audit_section(
             "language is possible. The claim-blocker packet gathers the current",
             "readiness blockers, lock options, and WNP/context source-review flags.",
             "The source-policy scenario report counts diagnostic exclusion/review",
-            "impacts without selecting a policy.",
+            "impacts without selecting a policy. The D(w) sensitivity packet",
+            "compares printed/program formulas without selecting a formula.",
         ]
     )
     return lines
