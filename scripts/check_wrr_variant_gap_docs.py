@@ -10,6 +10,7 @@ from pathlib import Path
 
 DEFAULT_ZERO_HIT_DOC = Path("docs/WRR_ZERO_HIT_VARIANT_PROBE.md")
 DEFAULT_VARIANT_GAP_DOC = Path("docs/WRR_VARIANT_GAP_IMPACT.md")
+DEFAULT_UPPER_BOUND_DOC = Path("docs/WRR_VARIANT_GAP_UPPER_BOUND.md")
 
 ZERO_HIT_REQUIRED_PHRASES = (
     "# WRR Zero-Hit Variant Probe",
@@ -33,18 +34,32 @@ VARIANT_GAP_REQUIRED_PHRASES = (
     "Claim-grade work still needs source transcription and pair-rule locks.",
 )
 
+UPPER_BOUND_REQUIRED_PHRASES = (
+    "# WRR Variant Gap Upper Bound",
+    "Status: diagnostic-only upper bound.",
+    "| all_lanes_cap1000 | 72 | 91 | 51 | 9 | 50 | 123 | 40 | 56.04 |",
+    "Simple one-edit variant leads cover all blockers for at most 51 blocked pairs.",
+    "Residual gap after that upper bound: 40.",
+    "simple one-edit variants alone cannot explain the full 163-distance count gap",
+    "accepting any variant still requires a citable source rule",
+)
+
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     failures = validate_variant_gap_docs(
         zero_hit_doc=args.zero_hit_doc,
         variant_gap_doc=args.variant_gap_doc,
+        upper_bound_doc=args.upper_bound_doc,
     )
     if failures:
         for failure in failures:
             print(f"WRR variant-gap doc failure: {failure}", file=sys.stderr)
         return 1
-    print(f"WRR variant-gap docs ok: {args.zero_hit_doc}, {args.variant_gap_doc}")
+    print(
+        "WRR variant-gap docs ok: "
+        f"{args.zero_hit_doc}, {args.variant_gap_doc}, {args.upper_bound_doc}"
+    )
     return 0
 
 
@@ -52,6 +67,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--zero-hit-doc", type=Path, default=DEFAULT_ZERO_HIT_DOC)
     parser.add_argument("--variant-gap-doc", type=Path, default=DEFAULT_VARIANT_GAP_DOC)
+    parser.add_argument("--upper-bound-doc", type=Path, default=DEFAULT_UPPER_BOUND_DOC)
     return parser
 
 
@@ -59,10 +75,12 @@ def validate_variant_gap_docs(
     *,
     zero_hit_doc: Path = DEFAULT_ZERO_HIT_DOC,
     variant_gap_doc: Path = DEFAULT_VARIANT_GAP_DOC,
+    upper_bound_doc: Path = DEFAULT_UPPER_BOUND_DOC,
 ) -> list[str]:
     return [
         *validate_doc(zero_hit_doc, ZERO_HIT_REQUIRED_PHRASES),
         *validate_doc(variant_gap_doc, VARIANT_GAP_REQUIRED_PHRASES),
+        *validate_doc(upper_bound_doc, UPPER_BOUND_REQUIRED_PHRASES),
     ]
 
 

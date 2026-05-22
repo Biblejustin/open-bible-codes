@@ -25,6 +25,16 @@ def test_missing_variant_gap_doc_fails(tmp_path: Path) -> None:
     assert failures == [f"{tmp_path / 'missing_gap.md'} is missing"]
 
 
+def test_missing_upper_bound_doc_fails(tmp_path: Path) -> None:
+    failures = check.validate_variant_gap_docs(
+        zero_hit_doc=check.DEFAULT_ZERO_HIT_DOC,
+        variant_gap_doc=check.DEFAULT_VARIANT_GAP_DOC,
+        upper_bound_doc=tmp_path / "missing_upper.md",
+    )
+
+    assert failures == [f"{tmp_path / 'missing_upper.md'} is missing"]
+
+
 def test_missing_zero_hit_summary_fails(tmp_path: Path) -> None:
     doc = tmp_path / "WRR_ZERO_HIT_VARIANT_PROBE.md"
     doc.write_text("\n".join(check.ZERO_HIT_REQUIRED_PHRASES[:-2]) + "\n", encoding="utf-8")
@@ -41,6 +51,15 @@ def test_missing_variant_gap_summary_fails(tmp_path: Path) -> None:
     failures = check.validate_doc(doc, check.VARIANT_GAP_REQUIRED_PHRASES)
 
     assert any("all_blocking_terms_have_variant_hit" in failure for failure in failures)
+
+
+def test_missing_upper_bound_summary_fails(tmp_path: Path) -> None:
+    doc = tmp_path / "WRR_VARIANT_GAP_UPPER_BOUND.md"
+    doc.write_text("\n".join(check.UPPER_BOUND_REQUIRED_PHRASES[:-2]) + "\n", encoding="utf-8")
+
+    failures = check.validate_doc(doc, check.UPPER_BOUND_REQUIRED_PHRASES)
+
+    assert any("163-distance" in failure for failure in failures)
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:

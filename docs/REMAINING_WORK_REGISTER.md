@@ -424,8 +424,12 @@ ordinary hits, 15 lack both, and 0 are under-minimum perturbation cases. The
 method-status matrix now also surfaces the variant-gap impact over those
 blocked pairs: in the best cap-1000 run, 51 blocked pairs have all blocking
 terms with simple variant leads, 9 have partial variant leads, and 50 have no
-simple variant lead. The next WRR work is therefore source/term/pair-rule
-reconciliation before any claim-grade permutation language.
+simple variant lead. `docs/WRR_VARIANT_GAP_UPPER_BOUND.md` now records the
+simple-variant upper bound: even if every fully covered simple variant lead
+were valid source evidence, the best current run would rise only from 72 to
+123 defined distances, leaving a residual gap of 40 to the source-cited 163.
+The next WRR work is therefore source/term/pair-rule reconciliation before any
+exact published reproduction language.
 
 ### 2. Source-Basis Audit Queue
 

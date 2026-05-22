@@ -853,6 +853,28 @@ outputs = [
 ]
 
 [[steps]]
+id = "analyze_wrr_variant_gap_upper_bound"
+description = "Bound how much simple one-edit variant leads could close the WRR defined-distance gap."
+argv = [
+  "-m", "scripts.analyze_wrr_variant_gap_upper_bound",
+  "--defined-pair-summary", "reports/wrr_1994/wrr_defined_pair_set_audit_summary.csv",
+  "--variant-gap-summary", "reports/wrr_1994/wrr_variant_gap_impact_summary.csv",
+  "--out", "reports/wrr_1994/wrr_variant_gap_upper_bound.csv",
+  "--markdown-out", "docs/WRR_VARIANT_GAP_UPPER_BOUND.md",
+  "--manifest-out", "reports/wrr_1994/wrr_variant_gap_upper_bound.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_variant_gap_upper_bound.py",
+  "reports/wrr_1994/wrr_defined_pair_set_audit_summary.csv",
+  "reports/wrr_1994/wrr_variant_gap_impact_summary.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_variant_gap_upper_bound.csv",
+  "docs/WRR_VARIANT_GAP_UPPER_BOUND.md",
+  "reports/wrr_1994/wrr_variant_gap_upper_bound.manifest.json",
+]
+
+[[steps]]
 id = "analyze_wrr_source_policy_scenarios"
 description = "Count diagnostic source-policy scenario impacts without selecting a policy."
 argv = [

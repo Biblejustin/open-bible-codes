@@ -125,6 +125,7 @@ inputs = [
   "docs/WRR_DEFINED_GAP_REASON_AUDIT.md",
   "docs/WRR_ZERO_HIT_VARIANT_PROBE.md",
   "docs/WRR_VARIANT_GAP_IMPACT.md",
+  "docs/WRR_VARIANT_GAP_UPPER_BOUND.md",
   "docs/WRR_SOURCE_REVIEW_QUEUE.md",
   "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md",
   "docs/WRR_METHODOLOGY_GAPS.md",
@@ -325,6 +326,7 @@ inputs = [
   "scripts/analyze_wrr_defined_pair_set.py",
   "scripts/analyze_wrr_defined_gap_reasons.py",
   "scripts/analyze_wrr_variant_gap_impact.py",
+  "scripts/analyze_wrr_variant_gap_upper_bound.py",
   "scripts/build_wrr_source_review_queue.py",
   "scripts/check_wrr_source_review_queue_doc.py",
   "scripts/check_wrr_source_visual_review_notes_doc.py",
@@ -678,6 +680,7 @@ inputs = [
   "scripts/analyze_wrr_perturbation_diagnostics.py",
   "scripts/analyze_wrr_source_policy_scenarios.py",
   "scripts/analyze_wrr_dw_formula_sensitivity.py",
+  "scripts/analyze_wrr_variant_gap_upper_bound.py",
   "scripts/analyze_gog_magog_pairs.py",
   "configs/example_koren_genesis.toml",
   "els/wrr.py",
@@ -690,6 +693,7 @@ outputs = [
   "reports/wrr_1994/wrr_source_policy_scenarios.csv",
   "reports/wrr_1994/wrr_source_policy_term_impacts.csv",
   "reports/wrr_1994/wrr_dw_formula_sensitivity.csv",
+  "reports/wrr_1994/wrr_variant_gap_upper_bound.csv",
 ]
 
 [[steps]]

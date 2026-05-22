@@ -64,6 +64,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_CLAIM_BLOCKER_PACKET.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_ZERO_HIT_VARIANT_PROBE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_VARIANT_GAP_IMPACT.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn("docs/WRR_VARIANT_GAP_UPPER_BOUND.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_SOURCE_REVIEW_QUEUE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn(
             "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md",
@@ -74,6 +75,14 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn(
             "scripts/check_wrr_source_review_queue_doc.py",
             steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/analyze_wrr_variant_gap_upper_bound.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_variant_gap_upper_bound.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
             "scripts/check_wrr_source_visual_review_notes_doc.py",
@@ -322,6 +331,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_CLAIM_BLOCKER_PACKET.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_ZERO_HIT_VARIANT_PROBE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_VARIANT_GAP_IMPACT.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/WRR_VARIANT_GAP_UPPER_BOUND.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_SOURCE_REVIEW_QUEUE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn(
             "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md",
