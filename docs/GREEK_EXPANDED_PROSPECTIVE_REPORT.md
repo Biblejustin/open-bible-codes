@@ -92,12 +92,13 @@ This is a useful negative result. It means the stricter phrase-extension
 gate is selective when applied to 291 new Greek terms, and the previous
 `δοξα` (doxa; English: glory) row was not trivially reproduced by a larger nearby term list.
 
-## Next Step
+## Follow-Up Boundary
 
-The next defensible move is to choose one of two locked paths:
+No controls are needed for this phrase-extension screen because the locked
+pattern matrix produced zero rows. A separate exact-center surface prospective
+study was later run under its own preregistration and stayed negative under the
+registered length >= 5 primary rule.
 
-- run controls only if a future rerun changes the pattern matrix;
-- define a separate prospective study for exact-center surface hits without
-  requiring same-skip phrase extension.
-
-Do not promote raw exact-center surface hits from this run as claims.
+Do not promote raw exact-center surface hits from this run as claims. Any new
+result-producing surface study needs a fresh term/source target set and a clean
+prospective lock.

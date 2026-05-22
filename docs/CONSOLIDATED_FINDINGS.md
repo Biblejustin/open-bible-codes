@@ -828,9 +828,10 @@ The Greek surface public-claim standard is now written in
 `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`. Use it before launching a
 new result-producing surface study.
 
-Recommended next target if continuing analysis: choose one of the still-open
-lanes in `docs/PROSPECTIVE_STUDY_READINESS.md` and lock it before running.
-Avoid more raw count expansion until the claim standard is fixed in advance.
+Current next target status: `docs/PROSPECTIVE_STUDY_READINESS.md` now reports
+no remaining `ready_for_preflight` lane. Any further result-producing work
+needs a genuinely new term/source target set and a fresh lock before running.
+Avoid more raw count expansion unless the claim standard is fixed in advance.
 
 That post-discovery follow-up design is now frozen in
 `docs/DOXA_FOLLOWUP_PREREGISTRATION.md`. The first locked follow-up run is
@@ -915,9 +916,9 @@ all-source patterns with normalized term length >= 5. That leaves three review
 rows: `ανομια` (anomia; English: lawlessness) at Matthew 7:23, `ισαακ` (Isaak;
 English: Isaac) at Hebrews 11:9, and `τερασ` (teras; English: wonder)
 at Hebrews 9:11. It deliberately excludes the dense length-4 bucket, including
-`αμην` (amen; English: amen), without making a term-specific judgment. The next fair control design
-must compare against real Greek terms matched by length and surface frequency,
-not random strings that cannot satisfy surface context.
+`αμην` (amen; English: amen), without making a term-specific judgment. The
+subsequent control design compares against real Greek terms matched by length
+and surface frequency, not random strings that cannot satisfy surface context.
 
 The selected-row letter-path audit is tracked in
 `docs/GREEK_EXPANDED_SURFACE_LETTER_PATHS.md`. It reconstructs every selected
