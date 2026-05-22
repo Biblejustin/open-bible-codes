@@ -363,7 +363,8 @@ def write_markdown(
             "  not establish a source-locked pair rule.",
             "- Visual-review notes do not change pair inclusion until an explicit",
             "  source policy is selected.",
-            "- Claim language stays blocked by `docs/WRR_CLAIM_READINESS.md`.",
+            "- Local locked-method language is governed by `docs/WRR_CLAIM_READINESS.md`;",
+            "  exact published reproduction remains caveated by the 163-distance gap.",
         ]
     )
     path.parent.mkdir(parents=True, exist_ok=True)

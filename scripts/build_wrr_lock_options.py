@@ -277,7 +277,7 @@ def build_option_rows(
             "status": "recommended_working_interpretation",
             "evidence": defined_distance_evidence,
             "recommendation": defined_distance_recommendation,
-            "claim_boundary": "full local run available; exact WRR reproduction still blocked",
+            "claim_boundary": "full local run available; exact WRR reproduction still caveated",
         },
         {
             "area": "D(w) skip-cap formula",

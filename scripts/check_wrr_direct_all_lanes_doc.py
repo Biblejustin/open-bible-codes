@@ -23,7 +23,7 @@ REQUIRED_PHRASES = (
     "| all lanes, cap 1000, program formula | 0 |",
     "direct all-lane cap 1000 defines 72 values, not 163.",
     "The 14 defined rows in `excluded_by_appellation_min_length` are diagnostic only",
-    "Claim language remains blocked by `docs/WRR_CLAIM_READINESS.md`.",
+    "Local locked-method language is governed by `docs/WRR_CLAIM_READINESS.md`; exact published reproduction remains caveated.",
 )
 
 

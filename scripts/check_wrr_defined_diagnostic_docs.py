@@ -17,7 +17,8 @@ PAIR_SET_REQUIRED_PHRASES = (
     "| all_lanes_cap1000 | 182 | 72 | 91 | 110 | 0 | 0 |",
     "Best current run: `all_lanes_cap1000` defines 72 of 163.",
     "Visual-review notes do not change pair inclusion until an explicit source policy is selected.",
-    "Claim language stays blocked by `docs/WRR_CLAIM_READINESS.md`.",
+    "Local locked-method language is governed by `docs/WRR_CLAIM_READINESS.md`",
+    "exact published reproduction remains caveated by the 163-distance gap.",
 )
 
 GAP_REASON_REQUIRED_PHRASES = (

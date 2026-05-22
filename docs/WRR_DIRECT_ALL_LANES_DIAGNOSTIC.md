@@ -65,7 +65,8 @@ The all-lane run is useful for source-shape pressure testing:
   only; they should not be promoted into the candidate set without a citable
   pair-universe rule.
 
-Claim language remains blocked by `docs/WRR_CLAIM_READINESS.md`.
+Local locked-method language is governed by `docs/WRR_CLAIM_READINESS.md`;
+exact published reproduction remains caveated.
 
 For a pair-lane/review-status join over these same outputs, see
 `docs/WRR_DEFINED_PAIR_SET_AUDIT.md`.

@@ -12,7 +12,7 @@ DEFAULT_DOC = Path("docs/WRR_METHOD_STATUS.md")
 
 REQUIRED_PHRASES = (
     "# WRR Method Status",
-    "Status: current audit matrix; not a WRR reproduction.",
+    "Status: current audit matrix; not an exact published WRR reproduction.",
     "still needs source or implementation work before any reproduction claim",
     "| Genesis text stream | `locally_locked` |",
     "| WRR2 term source | `working_source_locked` |",

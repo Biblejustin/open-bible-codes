@@ -66,4 +66,5 @@ python3 -m scripts.analyze_wrr_defined_pair_set --pair-summary reports/wrr_1994/
   not establish a source-locked pair rule.
 - Visual-review notes do not change pair inclusion until an explicit
   source policy is selected.
-- Claim language stays blocked by `docs/WRR_CLAIM_READINESS.md`.
+- Local locked-method language is governed by `docs/WRR_CLAIM_READINESS.md`;
+  exact published reproduction remains caveated by the 163-distance gap.

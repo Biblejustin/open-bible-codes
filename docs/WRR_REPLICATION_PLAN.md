@@ -1,6 +1,7 @@
 # WRR 1994 Replication Plan
 
-Status: planned, not yet reproduced.
+Status: local locked-method run complete; exact published WRR reproduction
+remains caveated.
 
 Target paper:
 
