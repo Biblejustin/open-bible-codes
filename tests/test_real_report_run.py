@@ -69,6 +69,10 @@ class RealReportRunTests(unittest.TestCase):
             "docs/WRR_VARIANT_RESIDUAL_REVIEW_PACKET.md",
             steps_by_id["preflight"]["inputs"],
         )
+        self.assertIn(
+            "docs/WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("docs/WRR_SOURCE_REVIEW_QUEUE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn(
             "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md",
@@ -89,6 +93,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
+            "scripts/build_wrr_residual_term_reconciliation_queue.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
             "scripts/build_wrr_claim_blocker_packet.py",
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
@@ -102,6 +110,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/wrr_1994/wrr_variant_residual_review_summary.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
@@ -410,6 +426,18 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/build_wrr_variant_residual_review_packet.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "docs/WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/build_wrr_residual_term_reconciliation_queue.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_residual_term_reconciliation_queue_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(

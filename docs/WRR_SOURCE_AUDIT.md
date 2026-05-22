@@ -166,6 +166,10 @@ defines 46, so a full reproduction driver must still choose paper formula
 versus program formula before final `D(w)` calculations. A direct all-lane
 diagnostic over all 182 imported same-record pairs defines 72 values at cap
 1000, still not the source-cited 163 second-list distances.
+The residual term reconciliation queue now collapses the remaining 59
+pair-level residual blockers into 58 unique unresolved appellation terms:
+43 source-transcription/row-alignment targets, 11 method/pair-universe
+targets, 3 page-image near-match targets, and 1 source-policy/pair-rule target.
 
 The ANU/McKay data page provides plain-text WRR lists in a modified
 Michigan-Claremont transliteration. User decision on 2026-05-21: use this

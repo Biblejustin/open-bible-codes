@@ -637,6 +637,10 @@ Run with:
 It checks archived Torah-code research pages in
 `reports/wrr_wayback_source_recovery_probe/`; current recovery finds 5 usable
 archived concepts and 4 missing level-2/3 geometric or ELS model concepts.
+WRR residual term reconciliation queue:
+`docs/WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md`.
+It collapses the residual pair packet into 58 unique unresolved appellation
+terms, preserving the 59 residual pair links and 40 minimum-frontier links.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.

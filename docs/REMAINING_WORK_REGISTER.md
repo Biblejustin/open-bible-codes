@@ -456,6 +456,13 @@ partial-simple-variant rows. The residual unresolved-term burden is entirely
 on appellation terms in this pass: 45 not-matched/no-variant-lead rows, 11
 matched/no-variant-lead rows, 3 near-match/no-variant-lead rows, and one
 `wnp_chelm_spelling_context` flag.
+`docs/WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md` now collapses that pair-level
+packet into 58 unique unresolved appellation terms, preserving 59 residual pair
+links and 40 minimum-frontier links. The unique-term reconciliation queue
+classifies 43 terms as source-transcription/row-alignment review, 11 as
+method-or-pair-universe review, 3 as page-image near-match review, and 1 as
+source-policy/pair-rule review (`wrr2_32_app_05`, `$LMHMX@LMA`,
+`wnp_chelm_spelling_context`).
 The next WRR work is therefore source/term/pair-rule reconciliation before any
 exact published reproduction language.
 
@@ -611,9 +618,10 @@ guarding, WRR source-recovery probing, WRR source-recovery probe guarding, and
 guarding, WRR defined-distance diagnostic doc guarding, and WRR variant-gap
 doc guarding, WRR variant-gap method-status evidence propagation, and WRR
 residual burden summary/blocker propagation, and WRR Wayback source-recovery
-probing/guarding:
+probing/guarding, and residual unique-term reconciliation queue guarding:
 
-- `python3 -m pytest -q` passed: 1263 tests and 13961 subtests.
+- `python3 -m pytest -q` passed: 1268 tests and 13961 subtests.
+- `python3 -m pytest tests/test_build_wrr_residual_term_reconciliation_queue.py tests/test_check_wrr_residual_term_reconciliation_queue_doc.py tests/test_real_report_run.py -q` passed: 51 tests.
 - `python3 -m pytest tests/test_build_wrr_wayback_source_recovery_probe.py tests/test_check_wrr_wayback_source_recovery_probe_doc.py tests/test_real_report_run.py -q` passed: 52 tests.
 - `python3 -m pytest tests/test_download_wrr_sources.py tests/test_build_wrr_source_recovery_probe.py tests/test_check_wrr_source_recovery_probe_doc.py tests/test_real_report_run.py -q` passed: 50 tests and 42 subtests.
 - `python3 -m pytest tests/test_analyze_hypothesis_testing_source.py tests/test_download_wrr_sources.py -q` passed: 9 tests and 46 subtests.
@@ -646,9 +654,11 @@ probing/guarding:
 - `python3 -m scripts.check_wrr_variant_gap_docs` passed.
 - `python3 -m scripts.run_protocol protocols/wrr_source_recovery_probe.toml --resume` passed.
 - `python3 -m scripts.run_protocol protocols/wrr_wayback_source_recovery_probe.toml --resume` passed.
+- `python3 -m scripts.run_protocol protocols/wrr_audit_counts.toml --resume` passed.
 - `python3 -m scripts.run_protocol protocols/hypothesis_testing_source_audit.toml --resume` passed.
 - `python3 -m scripts.check_wrr_source_recovery_probe_doc` passed.
 - `python3 -m scripts.check_wrr_wayback_source_recovery_probe_doc` passed.
+- `python3 -m scripts.check_wrr_residual_term_reconciliation_queue_doc` passed.
 - `python3 -m scripts.check_hypothesis_testing_source_audit_doc` passed.
 - `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_claim_catalog.py tests/test_wrr_claim_readiness.py -q` passed: 32 tests and 60 subtests.
@@ -674,6 +684,7 @@ probing/guarding:
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_variant_gap_method_status_cross_pair.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_residual_burden.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wayback_source_probe.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_residual_term_queue.json` passed.
 - `python3 -m scripts.check_prospective_study_lanes` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.

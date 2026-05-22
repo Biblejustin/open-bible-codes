@@ -240,7 +240,10 @@ This counts the imported WRR2 appellation/date rows in Koren Genesis, emits a
 same-record appellation/date pair audit, and control-screens the top raw pair
 rows. It also repeats the pair audit/control screen with the WRR
 appendix-compatible `5..8` length filter, audits expected-count skip caps, and
-samples WRR-style perturbation boundary and exact-match validity, then joins
+now collapses the residual pair packet into
+`docs/WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md` for unique unresolved-term
+review after the simple-variant upper-bound diagnostic.
+It also samples WRR-style perturbation boundary and exact-match validity, then joins
 that diagnostic back to the lock-prep pair table. It now also emits a
 corrected-distance smoke table from generated perturbed rows for the 5..8
 candidate lane, plus a variant comparison for term-printed, term-program, and

@@ -903,6 +903,30 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_residual_term_reconciliation_queue"
+description = "Collapse residual WRR pair blockers into unique unresolved term targets."
+argv = [
+  "-m", "scripts.build_wrr_residual_term_reconciliation_queue",
+  "--residual-packet", "reports/wrr_1994/wrr_variant_residual_review_packet.csv",
+  "--source-queue", "reports/wrr_1994/wrr_source_review_queue.csv",
+  "--out", "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv",
+  "--summary-out", "reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv",
+  "--markdown-out", "docs/WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md",
+  "--manifest-out", "reports/wrr_1994/wrr_residual_term_reconciliation_queue.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_residual_term_reconciliation_queue.py",
+  "reports/wrr_1994/wrr_variant_residual_review_packet.csv",
+  "reports/wrr_1994/wrr_source_review_queue.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv",
+  "reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv",
+  "docs/WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md",
+  "reports/wrr_1994/wrr_residual_term_reconciliation_queue.manifest.json",
+]
+
+[[steps]]
 id = "analyze_wrr_source_policy_scenarios"
 description = "Count diagnostic source-policy scenario impacts without selecting a policy."
 argv = [

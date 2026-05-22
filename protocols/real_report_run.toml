@@ -129,6 +129,7 @@ inputs = [
   "docs/WRR_VARIANT_GAP_IMPACT.md",
   "docs/WRR_VARIANT_GAP_UPPER_BOUND.md",
   "docs/WRR_VARIANT_RESIDUAL_REVIEW_PACKET.md",
+  "docs/WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md",
   "docs/WRR_SOURCE_REVIEW_QUEUE.md",
   "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md",
   "docs/WRR_METHODOLOGY_GAPS.md",
@@ -331,6 +332,7 @@ inputs = [
   "scripts/analyze_wrr_variant_gap_impact.py",
   "scripts/analyze_wrr_variant_gap_upper_bound.py",
   "scripts/build_wrr_variant_residual_review_packet.py",
+  "scripts/build_wrr_residual_term_reconciliation_queue.py",
   "scripts/build_wrr_source_review_queue.py",
   "scripts/check_wrr_source_review_queue_doc.py",
   "scripts/check_wrr_source_visual_review_notes_doc.py",
@@ -345,6 +347,7 @@ inputs = [
   "scripts/check_wrr_defined_diagnostic_docs.py",
   "scripts/check_wrr_lock_options_doc.py",
   "scripts/check_wrr_method_status_doc.py",
+  "scripts/check_wrr_residual_term_reconciliation_queue_doc.py",
   "scripts/check_wrr_source_recovery_probe_doc.py",
   "scripts/build_wrr_wayback_source_recovery_probe.py",
   "scripts/check_wrr_wayback_source_recovery_probe_doc.py",
@@ -689,6 +692,7 @@ inputs = [
   "scripts/analyze_wrr_dw_formula_sensitivity.py",
   "scripts/analyze_wrr_variant_gap_upper_bound.py",
   "scripts/build_wrr_variant_residual_review_packet.py",
+  "scripts/build_wrr_residual_term_reconciliation_queue.py",
   "scripts/build_wrr_claim_blocker_packet.py",
   "scripts/analyze_gog_magog_pairs.py",
   "configs/example_koren_genesis.toml",
@@ -705,6 +709,8 @@ outputs = [
   "reports/wrr_1994/wrr_variant_gap_upper_bound.csv",
   "reports/wrr_1994/wrr_variant_residual_review_packet.csv",
   "reports/wrr_1994/wrr_variant_residual_review_summary.csv",
+  "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv",
+  "reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv",
 ]
 
 [[steps]]

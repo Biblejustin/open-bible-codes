@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 334
+Documents indexed: 335
 
 ## Controls
 
@@ -105,6 +105,7 @@ Documents indexed: 334
 | WRR Methodology Gaps | `WRR_METHODOLOGY_GAPS.md` |
 | WRR Method Status | `WRR_METHOD_STATUS.md` |
 | WRR 1994 Replication Plan | `WRR_REPLICATION_PLAN.md` |
+| WRR Residual Term Reconciliation Queue | `WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md` |
 | WRR Source Audit | `WRR_SOURCE_AUDIT.md` |
 | WRR Source Policy Scenario Impact | `WRR_SOURCE_POLICY_SCENARIOS.md` |
 | WRR Source Recovery Probe | `WRR_SOURCE_RECOVERY_PROBE.md` |
