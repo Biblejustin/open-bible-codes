@@ -19,7 +19,7 @@ def test_missing_no_input_status_fails(tmp_path: Path) -> None:
 
     failures = check.validate_blocker_packet_doc(doc)
 
-    assert any("no-input diagnostics exhausted" in failure for failure in failures)
+    assert any("working locks selected" in failure for failure in failures)
 
 
 def test_missing_visual_boundary_fails(tmp_path: Path) -> None:
@@ -28,7 +28,7 @@ def test_missing_visual_boundary_fails(tmp_path: Path) -> None:
         phrase
         for phrase in check.REQUIRED_PHRASES
         if phrase
-        != "No visual-review note excludes a pair automatically; pair exclusion still requires source-policy lock."
+        != "No visual-review note excludes a pair automatically; pair exclusion would require an explicit source-policy change."
     )
     doc.write_text(text + "\n", encoding="utf-8")
 

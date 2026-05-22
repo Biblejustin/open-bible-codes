@@ -41,24 +41,23 @@ FIELDNAMES = [
 
 
 INPUT_NEEDED = {
-    "Pair universe": "select pair-universe/source-review policy",
-    "D(w) skip-cap formula": "select printed WRR formula or reported WRR-program formula",
-    "Corrected distance c(w,w')": "requires locked pair universe and D(w) formula first",
-    "Aggregate statistic and permutation": "requires locked pair universe, D(w), and full corrected-distance run first",
+    "Pair universe": "source policy selected: keep_all_working_source",
+    "D(w) skip-cap formula": "formula selected: printed WRR formula main; program sensitivity",
+    "Corrected distance c(w,w')": "run full corrected-distance over keep_all_working_source with printed D(w)",
+    "Aggregate statistic and permutation": "requires full corrected-distance output before claim-grade lock",
 }
 
 NO_INPUT_NEXT = {
     "Pair universe": (
-        "diagnostic review can continue, but claim-grade reproduction must not "
-        "promote a pair universe without source policy"
+        "continue with all imported same-record pairs; source-review and visual "
+        "flags remain review notes only"
     ),
     "D(w) skip-cap formula": (
-        "keep printed/program sensitivity visible; do not pick final formula "
-        "without source policy"
+        "use printed D(w) as the main formula and keep reported-program D(w) "
+        "visible as sensitivity"
     ),
     "Corrected distance c(w,w')": (
-        "diagnostic full-lane runs can continue only as diagnostics until upstream "
-        "locks exist"
+        "run full-lane corrected-distance work under the selected source and D(w) locks"
     ),
     "Aggregate statistic and permutation": (
         "keep date-label permutation diagnostics separate from WRR reproduction "
@@ -208,10 +207,10 @@ def write_markdown(
     lines = [
         "# WRR Claim Blocker Packet",
         "",
-        "Status: no-input diagnostics exhausted for claim-grade WRR reproduction.",
+        "Status: working locks selected; corrected-distance/permutation still not claim-grade.",
         "",
-        "This packet does not choose disputed WRR method policy. It gathers the",
-        "claim-readiness blockers, current lock options, WNP/context source",
+        "This packet records the selected WRR working policy and gathers the",
+        "remaining claim-readiness blockers, current lock options, WNP/context source",
         "queue flags, and visual triage notes into one handoff artifact.",
         "",
         "## Reproduce",
@@ -406,9 +405,9 @@ def write_markdown(
             "## Interpretation",
             "",
             "- This is a decision packet, not a reproduction result.",
-            "- Further diagnostics can stay useful, but claim-grade wording requires a source policy.",
-            "- No pair exclusion or D(w) formula is chosen here.",
-            "- No visual-review note excludes a pair automatically; pair exclusion still requires source-policy lock.",
+            "- Pair universe lock: keep_all_working_source; WNP/context and visual-review flags do not exclude pairs automatically.",
+            "- D(w) lock: printed WRR formula main; reported-program formula remains sensitivity output.",
+            "- No visual-review note excludes a pair automatically; pair exclusion would require an explicit source-policy change.",
             "",
         ]
     )

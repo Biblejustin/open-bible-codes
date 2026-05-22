@@ -207,7 +207,8 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             self.assertIn("D(w) Formula Sensitivity", text)
             self.assertIn("exclude_wnp_zacut_only", text)
             self.assertIn("all_lanes_cap1000", text)
-            self.assertIn("No pair exclusion or D(w) formula is chosen here", text)
+            self.assertIn("Pair universe lock: keep_all_working_source", text)
+            self.assertIn("D(w) lock: printed WRR formula main", text)
             self.assertTrue(manifest.exists())
 
 

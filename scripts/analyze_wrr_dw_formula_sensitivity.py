@@ -140,7 +140,7 @@ def build_summary_rows(
             "program_cap_gt_printed": skip_row.get("program_cap_gt_printed", ""),
             "target_unreached_rows": skip_row.get("target_unreached_rows", ""),
             "program_target_unreached_rows": skip_row.get("program_target_unreached_rows", ""),
-            "diagnostic_read": "profile only; final D(w) formula not selected",
+            "diagnostic_read": "profile only; printed D(w) selected as main",
         },
         {
             "scope": "smoke_length_5_8_cap250",
@@ -164,7 +164,7 @@ def build_summary_rows(
             "program_under_minimum_valid_pairs": smoke_program.get(
                 "under_minimum_valid_pairs", ""
             ),
-            "diagnostic_read": "smoke lane sensitivity; no D(w) formula selected",
+            "diagnostic_read": "smoke lane sensitivity; printed D(w) main, program sensitivity",
         },
         {
             "scope": "all_lanes_cap1000",
@@ -190,7 +190,7 @@ def build_summary_rows(
                 "under_minimum_valid_pairs", ""
             ),
             "changed_pairs": len(changed_rows),
-            "diagnostic_read": "row-level printed/program comparison; no D(w) formula selected",
+            "diagnostic_read": "row-level printed/program comparison; printed D(w) main, program sensitivity",
         },
     ]
 
@@ -248,7 +248,7 @@ def write_markdown(
     lines = [
         "# WRR D(w) Formula Sensitivity",
         "",
-        "Status: diagnostic-only sensitivity packet. No `D(w)` formula is selected.",
+        "Status: sensitivity packet for the selected printed `D(w)` main rule.",
         "",
         "This compares the printed WRR skip-cap formula and the reported WRR-program",
         "formula across existing corrected-distance outputs.",
@@ -331,9 +331,9 @@ def write_markdown(
             "",
             "## Interpretation",
             "",
-            "- The formula choice remains open for claim-grade WRR reproduction.",
+            "- Printed `D(w)` is the selected main rule for current WRR diagnostics.",
             "- Current all-lane cap-1000 diagnostics show no row-level printed/program difference.",
-            "- This packet lowers diagnostic risk; it does not lock `D(w)`.",
+            "- Reported-program `D(w)` remains required sensitivity output.",
             "",
         ]
     )

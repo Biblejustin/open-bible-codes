@@ -3620,14 +3620,15 @@ def wrr_audit_section(
             "not a raw pair table.",
             "",
             "Current read: WRR has repo-defined diagnostic evidence, but exact WRR",
-            "reproduction remains `under_specified`. Exact reproduction still needs a",
-            "source-locked pair set and source-locked `D(w)` before claim-grade WRR",
-            "language is possible. The claim-blocker packet gathers the current",
+            "reproduction remains `under_specified`. The working source policy is",
+            "`keep_all_working_source`, and printed `D(w)` is the main rule; claim-grade WRR",
+            "language still needs full corrected distances and a locked aggregate/permutation procedure.",
+            "The claim-blocker packet gathers the current",
             "readiness blockers, lock options, WNP/context source-review flags,",
             "and visual triage notes.",
-            "The source-policy scenario report counts diagnostic exclusion/review",
-            "impacts without selecting a policy. The D(w) sensitivity packet",
-            "compares printed/program formulas without selecting a formula.",
+            "The source-policy scenario report keeps exclusion/review impacts",
+            "diagnostic. The D(w) sensitivity packet compares printed/program formulas",
+            "while retaining printed D(w) as the selected main rule.",
         ]
     )
     return lines

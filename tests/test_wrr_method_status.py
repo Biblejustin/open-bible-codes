@@ -238,7 +238,8 @@ class WrrMethodStatusTests(unittest.TestCase):
         self.assertEqual(by_area["WRR2 term source"]["status"], "working_source_locked")
         self.assertIn("User authorized ANU/McKay WRR2", by_area["WRR2 term source"]["current_read"])
         self.assertIn("working corrected-distance runs", by_area["WRR2 term source"]["next_action"])
-        self.assertEqual(by_area["Pair universe"]["status"], "open")
+        self.assertEqual(by_area["Pair universe"]["status"], "source_locked")
+        self.assertIn("keep_all_working_source", by_area["Pair universe"]["current_read"])
         self.assertIn("182 raw same-record pairs", by_area["Pair universe"]["evidence"])
         self.assertIn("163 cited second-list distances", by_area["Pair universe"]["evidence"])
         self.assertIn("defined pair-set audit best run all_lanes_cap1000", by_area["Pair universe"]["evidence"])
@@ -250,14 +251,20 @@ class WrrMethodStatusTests(unittest.TestCase):
             "Visual triage notes do not exclude pairs automatically",
             by_area["Pair universe"]["evidence"],
         )
+        self.assertIn(
+            "source policy selected: keep_all_working_source",
+            by_area["Pair universe"]["evidence"],
+        )
         self.assertIn("single-term source-policy impacts", by_area["Pair universe"]["evidence"])
         self.assertIn("ZKWTA", by_area["Pair universe"]["evidence"])
         self.assertIn("variant-gap impact best run all_lanes_cap1000", by_area["Pair universe"]["evidence"])
         self.assertIn("51 blocked pairs have all blocking terms with variant leads", by_area["Pair universe"]["evidence"])
-        self.assertEqual(by_area["D(w) skip-cap formula"]["status"], "open")
+        self.assertEqual(by_area["D(w) skip-cap formula"]["status"], "source_locked")
+        self.assertIn("printed WRR formula", by_area["D(w) skip-cap formula"]["current_read"])
         self.assertIn("13 program caps below printed", by_area["D(w) skip-cap formula"]["evidence"])
         self.assertIn("all-lane cap1000 printed/program defined 72/72", by_area["D(w) skip-cap formula"]["evidence"])
         self.assertIn("0 changed pairs", by_area["D(w) skip-cap formula"]["evidence"])
+        self.assertIn("printed formula selected as main", by_area["D(w) skip-cap formula"]["evidence"])
         self.assertEqual(by_area["Corrected distance c(w,w')"]["status"], "smoke_only")
         self.assertIn("maximum valid perturbation count 4", by_area["Corrected distance c(w,w')"]["evidence"])
         self.assertIn("high-cap 1000 split: 0 defined over 86 pairs", by_area["Corrected distance c(w,w')"]["evidence"])
@@ -312,8 +319,9 @@ class WrrMethodStatusTests(unittest.TestCase):
 
         self.assertEqual(corrected["status"], "smoke_only")
         self.assertIn("produces defined corrected distances", corrected["current_read"])
+        self.assertIn("keep_all_working_source universe", corrected["current_read"])
         self.assertIn("total defined 56", corrected["evidence"])
-        self.assertIn("Extend direct perturbed search", corrected["next_action"])
+        self.assertIn("printed D(w) as main", corrected["next_action"])
 
     def test_markdown_cell_escapes_pipes(self) -> None:
         self.assertEqual(markdown_cell("a|b\nc"), "a\\|b c")

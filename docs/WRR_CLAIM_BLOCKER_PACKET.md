@@ -1,9 +1,9 @@
 # WRR Claim Blocker Packet
 
-Status: no-input diagnostics exhausted for claim-grade WRR reproduction.
+Status: working locks selected; corrected-distance/permutation still not claim-grade.
 
-This packet does not choose disputed WRR method policy. It gathers the
-claim-readiness blockers, current lock options, WNP/context source
+This packet records the selected WRR working policy and gathers the
+remaining claim-readiness blockers, current lock options, WNP/context source
 queue flags, and visual triage notes into one handoff artifact.
 
 ## Reproduce
@@ -16,18 +16,14 @@ python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/w
 
 | Area | Status | Blocker | Input needed |
 | --- | --- | --- | --- |
-| Pair universe | `open` | Pair universe: status open is not claim-ready; requires one of locked,source_locked | select pair-universe/source-review policy |
-| D(w) skip-cap formula | `open` | D(w) skip-cap formula: status open is not claim-ready; requires one of locked,source_locked | select printed WRR formula or reported WRR-program formula |
-| Corrected distance c(w,w') | `smoke_only` | Corrected distance c(w,w'): status smoke_only is not claim-ready; requires one of defined_full_run,full_run_locked | requires locked pair universe and D(w) formula first |
-| Aggregate statistic and permutation | `diagnostic_not_claim_grade` | Aggregate statistic and permutation: status diagnostic_not_claim_grade is not claim-ready; requires one of claim_grade_ready,permutation_locked | requires locked pair universe, D(w), and full corrected-distance run first |
+| Corrected distance c(w,w') | `smoke_only` | Corrected distance c(w,w'): status smoke_only is not claim-ready; requires one of defined_full_run,full_run_locked | run full corrected-distance over keep_all_working_source with printed D(w) |
+| Aggregate statistic and permutation | `diagnostic_not_claim_grade` | Aggregate statistic and permutation: status diagnostic_not_claim_grade is not claim-ready; requires one of claim_grade_ready,permutation_locked | requires full corrected-distance output before claim-grade lock |
 
 ## No-Input Boundary
 
 | Area | Current read | Available options | No-input next |
 | --- | --- | --- | --- |
-| Pair universe | The 163 count is best treated as defined-distance output, not raw pair count. | all imported WRR2 same-record pairs [candidate_input_only]; appellation length >= 5 rows [near_count_not_lock]; single Zacut appellation exclusion [diagnostic_only]; WNP/context flagged source-review queue [diagnostic_source_review_context]; source-policy scenario impact [diagnostic_scenario_only]; defined-distance output interpretation [recommended_working_interpretation] | diagnostic review can continue, but claim-grade reproduction must not promote a pair universe without source policy |
-| D(w) skip-cap formula | Printed and reported-program formulas are both implemented; final choice remains source decision. | printed WRR formula [primary_text_default]; reported WRR-program formula [sensitivity_variant] | keep printed/program sensitivity visible; do not pick final formula without source policy |
-| Corrected distance c(w,w') | Direct perturbed-letter smoke driver now produces defined corrected distances in the current candidate lane, but this remains diagnostic until the pair universe and D(w) formula are locked. |  | diagnostic full-lane runs can continue only as diagnostics until upstream locks exist |
+| Corrected distance c(w,w') | Direct perturbed-letter smoke driver now produces defined corrected distances in the current candidate lane, but this remains diagnostic until the full selected keep_all_working_source universe has defined corrected-distance output. |  | run full-lane corrected-distance work under the selected source and D(w) locks |
 | Aggregate statistic and permutation | Published Table 3 ranks are source-audited; local diagnostic P1..P4 and date-permutation runs exist, including a repo-defined 999,999 run, but this is not an exact WRR reproduction. |  | keep date-label permutation diagnostics separate from WRR reproduction language |
 
 ## Source Policy Scenario Impact
@@ -53,9 +49,9 @@ python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/w
 
 | Scope | Rows | Printed defined | Program defined | Changed pairs | Read |
 | --- | ---: | ---: | ---: | ---: | --- |
-| skip_cap_profile | 120 |  |  |  | profile only; final D(w) formula not selected |
-| smoke_length_5_8_cap250 | 86 | 28 | 28 |  | smoke lane sensitivity; no D(w) formula selected |
-| all_lanes_cap1000 | 182 | 72 | 72 | 0 | row-level printed/program comparison; no D(w) formula selected |
+| skip_cap_profile | 120 |  |  |  | profile only; printed D(w) selected as main |
+| smoke_length_5_8_cap250 | 86 | 28 | 28 |  | smoke lane sensitivity; printed D(w) main, program sensitivity |
+| all_lanes_cap1000 | 182 | 72 | 72 | 0 | row-level printed/program comparison; printed D(w) main, program sensitivity |
 
 ## Visual Triage Highlights
 
@@ -82,6 +78,6 @@ python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/w
 ## Interpretation
 
 - This is a decision packet, not a reproduction result.
-- Further diagnostics can stay useful, but claim-grade wording requires a source policy.
-- No pair exclusion or D(w) formula is chosen here.
-- No visual-review note excludes a pair automatically; pair exclusion still requires source-policy lock.
+- Pair universe lock: keep_all_working_source; WNP/context and visual-review flags do not exclude pairs automatically.
+- D(w) lock: printed WRR formula main; reported-program formula remains sensitivity output.
+- No visual-review note excludes a pair automatically; pair exclusion would require an explicit source-policy change.

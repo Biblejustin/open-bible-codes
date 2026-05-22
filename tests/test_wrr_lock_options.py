@@ -74,6 +74,14 @@ class WrrLockOptionsTests(unittest.TestCase):
 
         by_option = {row["option"]: row for row in rows}
         self.assertEqual(
+            by_option["all imported WRR2 same-record pairs"]["status"],
+            "selected_working_source_policy",
+        )
+        self.assertIn(
+            "keep_all_working_source",
+            by_option["all imported WRR2 same-record pairs"]["recommendation"],
+        )
+        self.assertEqual(
             by_option["defined-distance output interpretation"]["status"],
             "recommended_working_interpretation",
         )
@@ -96,7 +104,7 @@ class WrrLockOptionsTests(unittest.TestCase):
         )
         self.assertEqual(
             by_option["source-policy scenario impact"]["status"],
-            "diagnostic_scenario_only",
+            "policy_selected_keep_all_working_source",
         )
         self.assertIn(
             "exclude WNP Zacut: 157 >=5 pairs",
@@ -108,8 +116,20 @@ class WrrLockOptionsTests(unittest.TestCase):
         )
         self.assertIn("ZKWTA", by_option["source-policy scenario impact"]["evidence"])
         self.assertIn(
+            "source policy selected: keep_all_working_source",
+            by_option["source-policy scenario impact"]["evidence"],
+        )
+        self.assertEqual(
+            by_option["printed WRR formula"]["status"],
+            "source_locked_primary_formula",
+        )
+        self.assertIn(
             "printed/program/fixed250 = 28/28/28",
             by_option["reported WRR-program formula"]["evidence"],
+        )
+        self.assertEqual(
+            by_option["reported WRR-program formula"]["status"],
+            "required_sensitivity_variant",
         )
         self.assertIn(
             "changes 0 pair rows versus printed",

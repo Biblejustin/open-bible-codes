@@ -213,15 +213,15 @@ def build_option_rows(
         {
             "area": "Pair universe",
             "option": "all imported WRR2 same-record pairs",
-            "status": "candidate_input_only",
+            "status": "selected_working_source_policy",
             "evidence": (
                 f"{imported_pairs} imported same-record pairs; source-cited second-list "
                 f"defined distances = {expected_pairs}; raw imported count does not equal the cited distance count."
             ),
             "recommendation": (
-                "Use as the broad working input for diagnostics, not as the final claimed WRR pair universe."
+                "Use as the broad working input under keep_all_working_source; do not apply WNP/context or visual-review exclusions automatically."
             ),
-            "claim_boundary": "not claim-ready",
+            "claim_boundary": "source policy locked; corrected distance still pending",
         },
         {
             "area": "Pair universe",
@@ -263,13 +263,12 @@ def build_option_rows(
         {
             "area": "Pair universe",
             "option": "source-policy scenario impact",
-            "status": "diagnostic_scenario_only",
+            "status": "policy_selected_keep_all_working_source",
             "evidence": source_policy_scenario_text,
             "recommendation": (
-                "Use this to frame the source-policy decision; do not promote any "
-                "scenario automatically."
+                "Treat keep_all_working_source as the working source policy; keep exclusion scenarios as diagnostics only."
             ),
-            "claim_boundary": "diagnostic only",
+            "claim_boundary": "working source policy selected",
         },
         {
             "area": "Pair universe",
@@ -282,23 +281,23 @@ def build_option_rows(
         {
             "area": "D(w) skip-cap formula",
             "option": "printed WRR formula",
-            "status": "primary_text_default",
+            "status": "source_locked_primary_formula",
             "evidence": (
                 f"{skip_row.get('rows', '')} skip-cap rows; printed formula currently selected in the audit; "
                 f"{skip_row.get('target_unreached_rows', '')} rows do not reach the expected-hit target."
             ),
-            "recommendation": "Keep as the source-facing default because it is the printed WRR formula.",
-            "claim_boundary": "not claim-ready without final pair lock",
+            "recommendation": "Use as the main source-facing D(w) formula because it is the printed WRR formula.",
+            "claim_boundary": "formula locked; corrected distance still pending",
         },
         {
             "area": "D(w) skip-cap formula",
             "option": "reported WRR-program formula",
-            "status": "sensitivity_variant",
+            "status": "required_sensitivity_variant",
             "evidence": program_evidence,
             "recommendation": (
                 "Carry as a required sensitivity run because MBBK reports the WRR programs used this formula."
             ),
-            "claim_boundary": "not claim-ready without source decision",
+            "claim_boundary": "sensitivity only",
         },
         {
             "area": "Permutation",
@@ -350,7 +349,7 @@ def source_policy_scenario_evidence(rows: list[dict[str, str]]) -> str:
     scenario_parts = [part for part in parts if part]
     if not scenario_parts:
         return "Source-policy scenario summary has no recognized scenario rows."
-    return "; ".join(scenario_parts) + "; no source policy selected."
+    return "; ".join(scenario_parts) + "; source policy selected: keep_all_working_source."
 
 
 def source_policy_term_impact_evidence(rows: list[dict[str, str]]) -> str:
@@ -470,9 +469,9 @@ def write_markdown(
         "",
         "Status: decision aid, not a WRR reproduction.",
         "",
-        "This report does not lock disputed WRR method choices. It separates",
-        "current source-backed options from diagnostic shortcuts so the next",
-        "run can proceed without silently promoting an open decision.",
+        "This report records the selected working locks and keeps diagnostic",
+        "alternatives separate so later runs do not silently promote review flags",
+        "or sensitivity variants into source policy.",
         "",
         "## Options",
         "",
@@ -499,7 +498,8 @@ def write_markdown(
     lines.extend(
         [
             "Proceeding no-input work has now wired the broad imported same-record",
-            "WRR2 pair input, kept the printed formula as the source-facing default,",
+            "WRR2 pair input as keep_all_working_source, kept the printed formula",
+            "as the source-facing main D(w),",
             "carried the reported-program formula as a sensitivity variant, and",
             "treated the WNP-excluded 999,999 date-label permutation as diagnostic",
             "evidence only.",
@@ -513,7 +513,7 @@ def write_markdown(
                 "sensitivity run changes "
                 f"{direct_all_lanes_program_changed_pairs} pair rows versus the printed-formula run.",
                 "This lowers the current diagnostic risk from the printed-vs-program",
-                "formula choice, but it does not lock the WRR source method.",
+                "formula choice while preserving the program formula as sensitivity output.",
                 "",
             ]
         )
@@ -521,14 +521,13 @@ def write_markdown(
         [
             "Recommended no-input working posture:",
             "",
-            "- Broad same-record WRR2 rows remain working diagnostic input only.",
+            "- Broad same-record WRR2 rows are the selected working source policy.",
             "- No source-review flag or visual-review note excludes a pair automatically.",
-            "- Printed `D(w)` remains the source-facing default; reported-program `D(w)` remains sensitivity output.",
-            "- Date-label permutation output remains diagnostic until the pair universe, `D(w)`, corrected distances, and aggregate rule are source-locked.",
+            "- Printed `D(w)` is the main source-facing rule; reported-program `D(w)` remains sensitivity output.",
+            "- Date-label permutation output remains diagnostic until corrected distances and the aggregate rule are source-locked.",
             "",
-            "Claim-grade language still requires a source-locked pair universe, a",
-            "source-locked `D(w)` formula decision, full corrected distances over that",
-            "locked universe, and a locked aggregate/permutation procedure.",
+            "Claim-grade language still requires full corrected distances over the",
+            "locked working universe and a locked aggregate/permutation procedure.",
         ]
     )
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

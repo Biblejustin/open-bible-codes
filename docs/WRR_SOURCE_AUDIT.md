@@ -698,8 +698,9 @@ a source rule for pre-filtering the candidate set.
 
 The separate source-policy scenario packet keeps that distinction explicit:
 baseline keeps 165 appellation-length pairs, excluding WNP Zacut leaves 157,
-and excluding all source-review flags leaves 154. No source policy is selected
-from those diagnostics. Visual triage notes separate OCR misses from title-prefix
+and excluding all source-review flags leaves 154. The selected working policy is
+keep_all_working_source, so those exclusion scenarios remain diagnostics only.
+Visual triage notes separate OCR misses from title-prefix
 and Chelm source-rule questions, but do not exclude pairs automatically.
 
 ## Count Smoke

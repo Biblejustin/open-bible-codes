@@ -286,8 +286,13 @@ def build_status_rows(
         },
         {
             "decision_area": "Pair universe",
-            "status": "open",
-            "current_read": "The 163 count is best treated as defined-distance output, not raw pair count.",
+            "status": "source_locked",
+            "current_read": (
+                "User selected keep_all_working_source: all imported WRR2 same-record "
+                "pairs remain the working candidate universe; visual/source-review "
+                "flags do not exclude pairs automatically, and 163 remains a "
+                "defined-distance output target rather than a raw pair count."
+            ),
             "evidence": pair_universe_evidence(
                 pair_row,
                 defined_pair_rows or [],
@@ -296,12 +301,18 @@ def build_status_rows(
                 source_policy_term_impact_rows or [],
                 variant_gap_rows or [],
             ),
-            "next_action": "Derive final pair set from source-backed corrected-distance eligibility, not raw counts alone.",
+            "next_action": (
+                "Run source-locked corrected-distance diagnostics over the broad "
+                "candidate universe with printed D(w) as main and program D(w) as sensitivity."
+            ),
         },
         {
             "decision_area": "D(w) skip-cap formula",
-            "status": "open",
-            "current_read": "Printed and reported-program formulas are both implemented; final choice remains source decision.",
+            "status": "source_locked",
+            "current_read": (
+                "User selected the printed WRR formula as the main skip-cap rule; "
+                "the reported WRR-program formula remains required sensitivity output."
+            ),
             "evidence": (
                 f"{skip_row.get('rows', '')} length-filtered rows; "
                 f"{skip_row.get('program_cap_lt_printed', '')} program caps below printed; "
@@ -309,7 +320,10 @@ def build_status_rows(
                 f"{skip_row.get('target_unreached_rows', '')} rows do not reach target expected hits"
                 + optional_evidence(dw_formula_sensitivity_evidence(dw_formula_rows or []))
             ),
-            "next_action": "Choose printed-paper formula or reported-program formula before final corrected-distance run.",
+            "next_action": (
+                "Use printed-paper D(w) for main corrected-distance runs and keep "
+                "reported-program D(w) side-by-side as sensitivity evidence."
+            ),
         },
         corrected_distance_status(
             variant_rows,
@@ -418,7 +432,10 @@ def source_policy_evidence(rows: list[dict[str, str]]) -> str:
     return (
         "source-policy scenarios: "
         + "; ".join(scenario_parts)
-        + "; no source policy selected; Visual triage notes do not exclude pairs automatically"
+        + (
+            "; source policy selected: keep_all_working_source; Visual triage "
+            "notes do not exclude pairs automatically"
+        )
     )
 
 
@@ -508,7 +525,11 @@ def dw_formula_sensitivity_evidence(rows: list[dict[str, str]]) -> str:
         )
     if not parts:
         return ""
-    return "D(w) sensitivity: " + "; ".join(parts) + "; no formula selected"
+    return (
+        "D(w) sensitivity: "
+        + "; ".join(parts)
+        + "; printed formula selected as main; program formula retained as sensitivity"
+    )
 
 
 def zero_hit_variant_evidence(rows: list[dict[str, str]]) -> str:
@@ -567,7 +588,10 @@ def corrected_distance_status(
         "status": "smoke_only",
         "current_read": corrected_distance_current_read(total_defined),
         "evidence": "; ".join(evidence_parts),
-        "next_action": "Extend direct perturbed search over final pair universe after D(w) and source rows are locked.",
+        "next_action": (
+            "Extend direct perturbed search over the selected keep_all_working_source "
+            "universe using printed D(w) as main and program D(w) as sensitivity."
+        ),
     }
 
 
@@ -575,8 +599,8 @@ def corrected_distance_current_read(total_defined: int) -> str:
     if total_defined:
         return (
             "Direct perturbed-letter smoke driver now produces defined corrected distances in the "
-            "current candidate lane, but this remains diagnostic until the pair universe and D(w) "
-            "formula are locked."
+            "current candidate lane, but this remains diagnostic until the full selected "
+            "keep_all_working_source universe has defined corrected-distance output."
         )
     return "Smoke driver exists, but current candidate lane produces no defined corrected distances."
 
@@ -643,7 +667,7 @@ def aggregate_status(
         else "Published Table 3 ranks are source-audited; local P1..P4 aggregate diagnostics exist, but the date-permutation runner is not built."
     )
     next_action = (
-        "Use the repo-defined 999,999 diagnostic for local evidence; source-lock pair universe and D(w) before exact WRR reproduction language."
+        "Use the repo-defined 999,999 diagnostic for local evidence; build full corrected distances over the selected working locks before exact WRR reproduction language."
         if has_permutation
         else "Implement only after final pair universe and corrected-distance values are locked."
     )

@@ -327,7 +327,7 @@ def build_term_impact_rows(
                 "diagnostic_read": (
                     "single-term exclusion closes >=5 count gap"
                     if closes_gap
-                    else "single-term diagnostic only; no source policy selected"
+                    else "single-term diagnostic only; keep_all_working_source remains selected"
                 ),
             }
         )
@@ -475,11 +475,11 @@ def write_markdown(
     lines = [
         "# WRR Source Policy Scenario Impact",
         "",
-        "Status: diagnostic-only scenario impact. No source policy is selected.",
+        "Status: scenario impact for selected keep_all_working_source policy.",
         "",
         "This report counts what would happen to the current WRR2 pair-eligibility",
-        "table under several named source-review policies. It does not apply any",
-        "policy to the repo outputs and is not claim-grade reproduction evidence.",
+        "table under several named source-review policies. The selected working",
+        "policy keeps all imported WRR2 same-record pairs; exclusion scenarios are not applied.",
         "Visual-review notes remain triage only and do not exclude pairs automatically.",
         "",
         "## Reproduce",
@@ -585,11 +585,11 @@ def write_markdown(
             "",
             "## Interpretation",
             "",
-            "- `keep_all_working_source` is the current diagnostic baseline.",
+            "- `keep_all_working_source` is the selected working source policy.",
             "- Exclusion scenarios show count impact only; they are not selected policies.",
             "- `review_chelm_spelling_only` keeps pair counts stable and records review scope.",
             "- Visual-review notes remain triage only and do not exclude pairs automatically.",
-            "- Claim-grade WRR language still needs an explicit source policy and D(w) lock.",
+            "- Claim-grade WRR language still needs full corrected distances and aggregate/permutation lock.",
             "",
         ]
     )

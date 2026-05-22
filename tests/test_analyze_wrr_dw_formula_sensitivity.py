@@ -24,7 +24,7 @@ class WrrDwFormulaSensitivityTests(unittest.TestCase):
         self.assertIn("corrected_distance_status", changed[0]["changed_fields"])
         self.assertIn("missing_from_printed", changed[1]["changed_fields"])
 
-    def test_build_summary_rows_keeps_formula_unselected(self) -> None:
+    def test_build_summary_rows_marks_printed_formula_selected(self) -> None:
         summary = sensitivity.build_summary_rows(
             skip_row={
                 "rows": "120",
@@ -52,7 +52,7 @@ class WrrDwFormulaSensitivityTests(unittest.TestCase):
             "28",
         )
         self.assertEqual(by_scope["all_lanes_cap1000"]["changed_pairs"], 0)
-        self.assertIn("no D(w) formula selected", by_scope["all_lanes_cap1000"]["diagnostic_read"])
+        self.assertIn("printed D(w) main", by_scope["all_lanes_cap1000"]["diagnostic_read"])
 
     def test_main_writes_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -124,6 +124,7 @@ class WrrDwFormulaSensitivityTests(unittest.TestCase):
             self.assertEqual(len(list(csv.DictReader(changed.open(encoding="utf-8")))), 0)
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("WRR D(w) Formula Sensitivity", text)
+            self.assertIn("selected printed `D(w)` main rule", text)
             self.assertIn("No pair rows changed", text)
             self.assertTrue(manifest.exists())
 

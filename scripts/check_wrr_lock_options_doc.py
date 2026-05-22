@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate WRR lock-options doc keeps method choices explicitly unlocked."""
+"""Validate WRR lock-options doc keeps selected working locks explicit."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ DEFAULT_DOC = Path("docs/WRR_LOCK_OPTIONS.md")
 REQUIRED_PHRASES = (
     "# WRR Lock Options",
     "Status: decision aid, not a WRR reproduction.",
-    "This report does not lock disputed WRR method choices.",
+    "This report records the selected working locks",
     "Pair universe",
     "D(w) skip-cap formula",
     "Permutation",
@@ -21,11 +21,11 @@ REQUIRED_PHRASES = (
     "diagnostic only",
     "Current No-Input Path",
     "Recommended no-input working posture:",
-    "Broad same-record WRR2 rows remain working diagnostic input only.",
+    "Broad same-record WRR2 rows are the selected working source policy.",
     "No source-review flag or visual-review note excludes a pair automatically.",
-    "Printed `D(w)` remains the source-facing default; reported-program `D(w)` remains sensitivity output.",
-    "Date-label permutation output remains diagnostic until the pair universe, `D(w)`, corrected distances, and aggregate rule are source-locked.",
-    "Claim-grade language still requires a source-locked pair universe",
+    "Printed `D(w)` is the main source-facing rule; reported-program `D(w)` remains sensitivity output.",
+    "Date-label permutation output remains diagnostic until corrected distances and the aggregate rule are source-locked.",
+    "Claim-grade language still requires full corrected distances",
 )
 
 

@@ -12,7 +12,7 @@ DEFAULT_DOC = Path("docs/WRR_DW_FORMULA_SENSITIVITY.md")
 
 REQUIRED_PHRASES = (
     "# WRR D(w) Formula Sensitivity",
-    "Status: diagnostic-only sensitivity packet. No `D(w)` formula is selected.",
+    "Status: sensitivity packet for the selected printed `D(w)` main rule.",
     "printed WRR skip-cap formula",
     "reported WRR-program",
     "| skip_cap_profile | 120 |",
@@ -21,8 +21,8 @@ REQUIRED_PHRASES = (
     "| Program cap below printed | 13 |",
     "| Program cap equal printed | 107 |",
     "No pair rows changed between all-lane cap-1000 printed and program formula outputs.",
-    "The formula choice remains open for claim-grade WRR reproduction.",
-    "This packet lowers diagnostic risk; it does not lock `D(w)`.",
+    "Printed `D(w)` is the selected main rule for current WRR diagnostics.",
+    "Reported-program `D(w)` remains required sensitivity output.",
 )
 
 

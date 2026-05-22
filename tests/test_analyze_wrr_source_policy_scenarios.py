@@ -102,7 +102,7 @@ class WrrSourcePolicyScenarioTests(unittest.TestCase):
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("WRR Source Policy Scenario Impact", text)
             self.assertIn("Single-Term Impact", text)
-            self.assertIn("No source policy is selected", text)
+            self.assertIn("selected keep_all_working_source policy", text)
             self.assertIn("Visual-review notes remain triage only", text)
             self.assertTrue(manifest.exists())
 

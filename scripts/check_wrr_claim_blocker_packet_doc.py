@@ -12,21 +12,20 @@ DEFAULT_DOC = Path("docs/WRR_CLAIM_BLOCKER_PACKET.md")
 
 REQUIRED_PHRASES = (
     "# WRR Claim Blocker Packet",
-    "Status: no-input diagnostics exhausted for claim-grade WRR reproduction.",
-    "| Pair universe | `open` |",
-    "| D(w) skip-cap formula | `open` |",
+    "Status: working locks selected; corrected-distance/permutation still not claim-grade.",
     "| Corrected distance c(w,w') | `smoke_only` |",
     "| Aggregate statistic and permutation | `diagnostic_not_claim_grade` |",
-    "select pair-universe/source-review policy",
-    "select printed WRR formula or reported WRR-program formula",
+    "run full corrected-distance over keep_all_working_source with printed D(w)",
+    "requires full corrected-distance output before claim-grade lock",
     "source/title-prefix rule review; visual notes show title text without visible B@L prefix",
     "source/pair-rule review; visual notes show English of-Chelm label but primary Hebrew cell only supports RBY$LMH in this pass",
     "## Visual Triage Highlights",
     "primary page row visibly contains Yaakov Ha-Levi wording; row OCR missed it",
     "treat as visual OCR miss until a locked transcription says otherwise",
     "This is a decision packet, not a reproduction result.",
-    "No pair exclusion or D(w) formula is chosen here.",
-    "No visual-review note excludes a pair automatically; pair exclusion still requires source-policy lock.",
+    "Pair universe lock: keep_all_working_source",
+    "D(w) lock: printed WRR formula main",
+    "No visual-review note excludes a pair automatically; pair exclusion would require an explicit source-policy change.",
 )
 
 

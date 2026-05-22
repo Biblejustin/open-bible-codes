@@ -12,8 +12,8 @@ DEFAULT_DOC = Path("docs/WRR_SOURCE_POLICY_SCENARIOS.md")
 
 REQUIRED_PHRASES = (
     "# WRR Source Policy Scenario Impact",
-    "Status: diagnostic-only scenario impact. No source policy is selected.",
-    "It does not apply any policy to the repo outputs and is not claim-grade reproduction evidence.",
+    "Status: scenario impact for selected keep_all_working_source policy.",
+    "The selected working policy keeps all imported WRR2 same-record pairs; exclusion scenarios are not applied.",
     "Visual-review notes remain triage only and do not exclude pairs automatically.",
     "| keep_all_working_source | `baseline` | 0 | 0 | 165 | 86 | -2 | 77 |",
     "| exclude_wnp_zacut_only | `diagnostic_exclusion` | 8 | 0 | 157 | 78 | 6 | 85 |",
@@ -23,7 +23,7 @@ REQUIRED_PHRASES = (
     "## Single-Term Impact",
     "| `wrr2_27_app_02` | `ZKWTA` | `wnp_disputed_zacut_appellation` | 2 | 163 | 0 | single-term exclusion closes >=5 count gap |",
     "`review_chelm_spelling_only` keeps pair counts stable and records review scope.",
-    "Claim-grade WRR language still needs an explicit source policy and D(w) lock.",
+    "Claim-grade WRR language still needs full corrected distances and aggregate/permutation lock.",
 )
 
 
