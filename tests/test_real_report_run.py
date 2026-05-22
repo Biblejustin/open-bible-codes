@@ -81,6 +81,10 @@ class RealReportRunTests(unittest.TestCase):
             "docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md",
             steps_by_id["preflight"]["inputs"],
         )
+        self.assertIn(
+            "docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("docs/WRR_SOURCE_REVIEW_QUEUE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn(
             "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md",
@@ -110,6 +114,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/build_wrr_source_policy_evidence_packet.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_wrr_source_transcription_evidence_packet.py",
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
@@ -149,7 +157,15 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
+            "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_source_policy_evidence_summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
@@ -178,6 +194,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_source_policy_evidence_packet_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_source_transcription_evidence_packet_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -1087,6 +1107,30 @@ class RealReportRunTests(unittest.TestCase):
                 payload["failures"],
             )
 
+    def test_preflight_fails_on_wrr_source_transcription_evidence_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_source_transcription_evidence_packet_doc,
+                "validate_source_transcription_evidence_packet_doc",
+                return_value=[
+                    "docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md missing boundary"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_source_transcription_evidence_packet_doc_failures"],
+                ["docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md missing boundary"],
+            )
+            self.assertIn(
+                "WRR source-transcription evidence packet failures: "
+                "docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md missing boundary",
+                payload["failures"],
+            )
+
     def test_preflight_fails_on_wrr_cross_pair_grid_doc_failure(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / "preflight.json"
@@ -1551,6 +1595,16 @@ class RealReportRunTests(unittest.TestCase):
             ],
             [
                 {
+                    "row_number": "06",
+                    "concept": "WRR2 06",
+                    "action_terms": "4",
+                    "residual_pairs": "4",
+                    "frontier_pairs": "4",
+                    "read": "multi-term row cluster",
+                }
+            ],
+            [
+                {
                     "scope": "all_lanes_cap1000",
                     "row_count": "182",
                     "printed_defined_corrected_distances": "72",
@@ -1584,6 +1638,9 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("Single-term source-policy impacts", text)
         self.assertIn("Source-policy evidence packet status", text)
         self.assertIn("| 1 | 2 | 4 | 3 | source-policy residual", text)
+        self.assertIn("Source-transcription evidence packet status", text)
+        self.assertIn("- Source-transcription action terms: 4.", text)
+        self.assertIn("| 06 | WRR2 06 | 4 | 4 | 4 | multi-term row cluster |", text)
         self.assertIn(
             "| wrr2_27_app_02 | ZKWTA | wnp_disputed_zacut_appellation | 2 | 163 | 0 | single-term exclusion closes >=5 count gap |",
             text,
@@ -1596,6 +1653,7 @@ class RealReportRunTests(unittest.TestCase):
             summary.wrr_audit_section(
                 {"status": "success", "duration_seconds": 12.3},
                 {"downloads": [{"label": "wrr_1994_paper", "sha256": "paperhash"}]},
+                [],
                 [],
                 [],
                 [],

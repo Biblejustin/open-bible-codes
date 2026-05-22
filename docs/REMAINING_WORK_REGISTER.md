@@ -476,6 +476,10 @@ until citable row, policy, or method evidence is locked.
 `docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md` now handles the source-policy lane
 for Chełm: 1 priority term, 2 related source-review rows, 4 scenario-pair rows,
 and 3 WNP context blocks, with no automatic correction or exclusion.
+`docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md` now handles the main
+source-transcription lane: 43 action terms, 44 residual pair links, 35
+minimum-frontier links, and 22 row clusters, with row 06 first at 4 frontier
+terms.
 The next WRR work is therefore source/term/pair-rule reconciliation before any
 exact published reproduction language.
 

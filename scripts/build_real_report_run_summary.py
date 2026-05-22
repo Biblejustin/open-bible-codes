@@ -72,6 +72,9 @@ WRR_SOURCE_POLICY_TERM_IMPACTS = Path("reports/wrr_1994/wrr_source_policy_term_i
 WRR_SOURCE_POLICY_EVIDENCE_SUMMARY = Path(
     "reports/wrr_1994/wrr_source_policy_evidence_summary.csv"
 )
+WRR_SOURCE_TRANSCRIPTION_EVIDENCE_ROW_SUMMARY = Path(
+    "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv"
+)
 WRR_DW_FORMULA_SENSITIVITY = Path("reports/wrr_1994/wrr_dw_formula_sensitivity.csv")
 HEBREW_THEOLOGY_ALL_CODES_TRIAGE_MANIFEST = Path(
     "reports/hebrew_theology_all_codes/triage.manifest.json"
@@ -233,6 +236,9 @@ def main(argv: list[str] | None = None) -> int:
     wrr_source_policy_evidence_summary_rows = read_rows(
         args.wrr_source_policy_evidence_summary
     )
+    wrr_source_transcription_evidence_row_summary_rows = read_rows(
+        args.wrr_source_transcription_evidence_row_summary
+    )
     wrr_dw_formula_sensitivity_rows = read_rows(args.wrr_dw_formula_sensitivity)
     hebrew_theology_all_codes_triage_manifest = read_json(
         args.hebrew_theology_all_codes_triage_manifest
@@ -378,6 +384,9 @@ def main(argv: list[str] | None = None) -> int:
         wrr_source_policy_evidence_summary_rows=(
             wrr_source_policy_evidence_summary_rows
         ),
+        wrr_source_transcription_evidence_row_summary_rows=(
+            wrr_source_transcription_evidence_row_summary_rows
+        ),
         wrr_dw_formula_sensitivity_rows=wrr_dw_formula_sensitivity_rows,
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
         hebrew_screening_all_codes_triage_manifest=hebrew_screening_all_codes_triage_manifest,
@@ -478,6 +487,9 @@ def main(argv: list[str] | None = None) -> int:
         wrr_source_policy_term_impact_rows=wrr_source_policy_term_impact_rows,
         wrr_source_policy_evidence_summary_rows=(
             wrr_source_policy_evidence_summary_rows
+        ),
+        wrr_source_transcription_evidence_row_summary_rows=(
+            wrr_source_transcription_evidence_row_summary_rows
         ),
         wrr_dw_formula_sensitivity_rows=wrr_dw_formula_sensitivity_rows,
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
@@ -683,6 +695,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--wrr-source-policy-evidence-summary",
         type=Path,
         default=WRR_SOURCE_POLICY_EVIDENCE_SUMMARY,
+    )
+    parser.add_argument(
+        "--wrr-source-transcription-evidence-row-summary",
+        type=Path,
+        default=WRR_SOURCE_TRANSCRIPTION_EVIDENCE_ROW_SUMMARY,
     )
     parser.add_argument(
         "--wrr-dw-formula-sensitivity",
@@ -958,6 +975,7 @@ def write_summary(
     wrr_source_policy_scenario_rows: list[dict[str, str]],
     wrr_source_policy_term_impact_rows: list[dict[str, str]],
     wrr_source_policy_evidence_summary_rows: list[dict[str, str]],
+    wrr_source_transcription_evidence_row_summary_rows: list[dict[str, str]],
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1262,6 +1280,7 @@ def write_summary(
             wrr_source_policy_scenario_rows,
             wrr_source_policy_term_impact_rows,
             wrr_source_policy_evidence_summary_rows,
+            wrr_source_transcription_evidence_row_summary_rows,
             wrr_dw_formula_sensitivity_rows,
         )
     )
@@ -1536,6 +1555,7 @@ def write_manifest(
     wrr_source_policy_scenario_rows: list[dict[str, str]],
     wrr_source_policy_term_impact_rows: list[dict[str, str]],
     wrr_source_policy_evidence_summary_rows: list[dict[str, str]],
+    wrr_source_transcription_evidence_row_summary_rows: list[dict[str, str]],
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1644,6 +1664,9 @@ def write_manifest(
             ),
             "wrr_source_policy_evidence_summary": str(
                 args.wrr_source_policy_evidence_summary
+            ),
+            "wrr_source_transcription_evidence_row_summary": str(
+                args.wrr_source_transcription_evidence_row_summary
             ),
             "wrr_dw_formula_sensitivity": str(args.wrr_dw_formula_sensitivity),
             "hebrew_theology_all_codes_triage_manifest": str(
@@ -1813,6 +1836,9 @@ def write_manifest(
         "wrr_source_policy_term_impact_rows": len(wrr_source_policy_term_impact_rows),
         "wrr_source_policy_evidence_summary_rows": len(
             wrr_source_policy_evidence_summary_rows
+        ),
+        "wrr_source_transcription_evidence_row_summary_rows": len(
+            wrr_source_transcription_evidence_row_summary_rows
         ),
         "wrr_dw_formula_sensitivity_rows": len(wrr_dw_formula_sensitivity_rows),
         "hebrew_theology_all_codes_triage_rows": hebrew_theology_all_codes_triage_manifest.get(
@@ -3382,6 +3408,7 @@ def wrr_audit_section(
     source_policy_scenario_rows: list[dict[str, str]],
     source_policy_term_impact_rows: list[dict[str, str]],
     source_policy_evidence_summary_rows: list[dict[str, str]],
+    source_transcription_evidence_row_summary_rows: list[dict[str, str]],
     dw_formula_sensitivity_rows: list[dict[str, str]],
 ) -> list[str]:
     source_hashes = {
@@ -3649,6 +3676,42 @@ def wrr_audit_section(
                 "choosing a correction or exclusion.",
             ]
         )
+    if source_transcription_evidence_row_summary_rows:
+        total_terms = sum(
+            int_values(source_transcription_evidence_row_summary_rows, "action_terms")
+        )
+        total_pairs = sum(
+            int_values(source_transcription_evidence_row_summary_rows, "residual_pairs")
+        )
+        total_frontier = sum(
+            int_values(source_transcription_evidence_row_summary_rows, "frontier_pairs")
+        )
+        first_rows = source_transcription_evidence_row_summary_rows[:5]
+        lines.extend(
+            [
+                "",
+                "Source-transcription evidence packet status:",
+                "",
+                f"- Source-transcription action terms: {total_terms:,}.",
+                f"- Residual pair links: {total_pairs:,}.",
+                f"- Minimum-frontier pair links: {total_frontier:,}.",
+                f"- Row clusters: {len(source_transcription_evidence_row_summary_rows):,}.",
+                "",
+                "| Row | Concept | Terms | Pairs | Frontier | Read |",
+                "| --- | --- | ---: | ---: | ---: | --- |",
+            ]
+        )
+        for row in first_rows:
+            lines.append(
+                "| {row_number} | {concept} | {terms} | {pairs} | {frontier} | {read} |".format(
+                    row_number=md_cell(row.get("row_number", "")),
+                    concept=md_cell(row.get("concept", "")),
+                    terms=md_cell(row.get("action_terms", "")),
+                    pairs=md_cell(row.get("residual_pairs", "")),
+                    frontier=md_cell(row.get("frontier_pairs", "")),
+                    read=md_cell(row.get("read", "")),
+                )
+            )
     if dw_formula_sensitivity_rows:
         lines.extend(
             [

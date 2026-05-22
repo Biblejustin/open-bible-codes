@@ -178,6 +178,9 @@ and OCR-matched rows move to method/pair-universe review before source edits.
 `docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md` now carries the single Chełm
 source-policy residual forward with local WNP context, row OCR context, and
 scenario-pair status, while leaving the working source unchanged.
+`docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md` groups the 43 remaining
+source-transcription/row-alignment terms into 22 row clusters so each row can
+be reviewed once against primary row evidence before source edits.
 
 The ANU/McKay data page provides plain-text WRR lists in a modified
 Michigan-Claremont transliteration. User decision on 2026-05-21: use this

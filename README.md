@@ -649,6 +649,10 @@ WRR source-policy evidence packet:
 `docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md`.
 It ties the Chełm source-policy residual to local WNP context, row OCR, and
 scenario status without choosing a correction or exclusion.
+WRR source-transcription evidence packet:
+`docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md`.
+It groups 43 row-transcription residual terms into 22 row clusters for
+primary row or row-alignment review, without choosing corrections.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.
