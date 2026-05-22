@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import time
+from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from urllib.request import Request, urlopen
@@ -113,23 +114,38 @@ DEFAULT_SOURCES = {
 REQUIRED_MANIFEST_LABELS = tuple(DEFAULT_SOURCES)
 
 
+@dataclass(frozen=True)
+class FetchResult:
+    data: bytes
+    final_url: str
+    http_status: int | None
+
+
 def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(argv)
     args.out_dir.mkdir(parents=True, exist_ok=True)
     downloads = []
-    for label, url in DEFAULT_SOURCES.items():
+    source_items = selected_sources(args.label)
+    for label, url in source_items:
         target = args.out_dir / source_filename(label, url)
         if target.exists() and not args.refresh:
             status = "cached"
+            final_url = ""
+            http_status = None
         else:
-            data = fetch_url(url)
-            target.write_bytes(data)
+            result = fetch_url(url)
+            target.write_bytes(result.data)
             status = "downloaded"
+            final_url = result.final_url
+            http_status = result.http_status
         downloads.append(
             {
                 "label": label,
                 "url": url,
+                "final_url": final_url,
+                "redirected": bool(final_url and final_url != url),
+                "http_status": http_status,
                 "path": str(target),
                 "status": status,
                 "bytes": target.stat().st_size,
@@ -148,7 +164,22 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR)
     parser.add_argument("--manifest-out", type=Path, default=DEFAULT_OUT_DIR / "sources.manifest.json")
     parser.add_argument("--refresh", action="store_true")
+    parser.add_argument(
+        "--label",
+        action="append",
+        default=[],
+        help="Download only a specific source label. May be repeated.",
+    )
     return parser
+
+
+def selected_sources(labels: list[str]) -> list[tuple[str, str]]:
+    if not labels:
+        return list(DEFAULT_SOURCES.items())
+    unknown = [label for label in labels if label not in DEFAULT_SOURCES]
+    if unknown:
+        raise SystemExit("unknown source labels: " + ", ".join(unknown))
+    return [(label, DEFAULT_SOURCES[label]) for label in labels]
 
 
 def source_filename(label: str, url: str) -> str:
@@ -250,10 +281,14 @@ def source_filename(label: str, url: str) -> str:
     return f"{label}{suffix}"
 
 
-def fetch_url(url: str) -> bytes:
+def fetch_url(url: str) -> FetchResult:
     request = Request(url, headers={"User-Agent": "Mozilla/5.0 EDLS source audit"})
     with urlopen(request, timeout=30) as response:
-        return response.read()
+        return FetchResult(
+            data=response.read(),
+            final_url=response.geturl(),
+            http_status=getattr(response, "status", None),
+        )
 
 
 def sha256_file(path: Path) -> str:

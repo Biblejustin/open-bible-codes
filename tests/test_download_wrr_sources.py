@@ -1,10 +1,16 @@
 import tempfile
 import unittest
+import json
 from pathlib import Path
+from unittest.mock import patch
 
 from scripts.download_wrr_sources import (
     DEFAULT_SOURCES,
+    FetchResult,
     REQUIRED_MANIFEST_LABELS,
+    fetch_url,
+    main,
+    selected_sources,
     sha256_file,
     source_filename,
 )
@@ -206,6 +212,85 @@ class DownloadWrrSourcesTests(unittest.TestCase):
         self.assertIn("torah_code_research_els_model_level_3", REQUIRED_MANIFEST_LABELS)
         self.assertIn("wrr_nations_mc", REQUIRED_MANIFEST_LABELS)
         self.assertIn("wrr_nations_gir", REQUIRED_MANIFEST_LABELS)
+
+    def test_selected_sources_filters_requested_labels(self) -> None:
+        selected = selected_sources(
+            ["torah_code_research_program_1", "torah_code_research_model_overview"]
+        )
+
+        self.assertEqual(
+            selected,
+            [
+                (
+                    "torah_code_research_program_1",
+                    DEFAULT_SOURCES["torah_code_research_program_1"],
+                ),
+                (
+                    "torah_code_research_model_overview",
+                    DEFAULT_SOURCES["torah_code_research_model_overview"],
+                ),
+            ],
+        )
+
+    def test_selected_sources_rejects_unknown_label(self) -> None:
+        with self.assertRaises(SystemExit):
+            selected_sources(["missing"])
+
+    def test_fetch_url_records_final_url_and_status(self) -> None:
+        class FakeResponse:
+            status = 200
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, tb) -> None:
+                return None
+
+            def read(self) -> bytes:
+                return b"payload"
+
+            def geturl(self) -> str:
+                return "https://example.test/final.html"
+
+        with patch("scripts.download_wrr_sources.urlopen", return_value=FakeResponse()):
+            result = fetch_url("https://example.test/start.html")
+
+        self.assertEqual(result.data, b"payload")
+        self.assertEqual(result.final_url, "https://example.test/final.html")
+        self.assertEqual(result.http_status, 200)
+
+    def test_main_can_refresh_selected_labels(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            manifest = root / "manifest.json"
+            with patch(
+                "scripts.download_wrr_sources.fetch_url",
+                return_value=FetchResult(
+                    data=b"payload",
+                    final_url="https://example.test/final.html",
+                    http_status=200,
+                ),
+            ):
+                code = main(
+                    [
+                        "--out-dir",
+                        str(root),
+                        "--manifest-out",
+                        str(manifest),
+                        "--refresh",
+                        "--label",
+                        "torah_code_research_model_overview",
+                    ]
+                )
+
+            self.assertEqual(code, 0)
+            payload = json.loads(manifest.read_text(encoding="utf-8"))
+            self.assertEqual(len(payload["downloads"]), 1)
+            download = payload["downloads"][0]
+            self.assertEqual(download["label"], "torah_code_research_model_overview")
+            self.assertEqual(download["final_url"], "https://example.test/final.html")
+            self.assertTrue(download["redirected"])
+            self.assertEqual(download["http_status"], 200)
 
 
 if __name__ == "__main__":
