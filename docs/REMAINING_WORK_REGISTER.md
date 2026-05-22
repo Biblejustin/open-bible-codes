@@ -301,6 +301,10 @@ level-2/3 geometric and ELS model pages currently download as root-canonical
 pages with unrelated slot/gambling content, no expected model labels, and zero
 usable model pages. The adjacent level-1 geometric and ELS model pages are
 usable source context, but they do not supply the missing level-2/3 rules.
+The WRR source downloader now supports targeted `--label` refreshes and records
+requested URL, final URL, redirect status, HTTP status, bytes, and hash in the
+source manifest. A local targeted refresh can check source recovery without
+overwriting the whole ignored source bundle.
 These lanes stay non-result-bearing. The
 research-program ELS harness now includes a split-fit Fisher order-statistic
 row plus two transparent row-width modes: strict shared-intersection

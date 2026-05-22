@@ -202,6 +202,9 @@ This records that the linked Torah-code.org level-2/3 geometric and ELS model
 pages currently download as root-canonical pages with unrelated slot/gambling
 content and no expected model labels. Tracked audit:
 `docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md`.
+For targeted recovery probes without refreshing the entire source bundle, use
+`scripts.download_wrr_sources --refresh --label <source_label>`; the manifest
+records both requested URL and final URL so root redirects are visible.
 
 WRR imported-term Genesis count and pair smoke:
 

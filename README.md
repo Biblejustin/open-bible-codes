@@ -616,6 +616,10 @@ Under-construction experiment source audit:
 `docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md`.
 Research missing model pages audit:
 `docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md`.
+Targeted recovery probes can refresh individual WRR/Torah-code source labels:
+`python3 -m scripts.download_wrr_sources --refresh --label torah_code_research_model_overview`.
+The source manifest records requested URLs, final URLs, redirect status, HTTP
+status, bytes, and hashes.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.
