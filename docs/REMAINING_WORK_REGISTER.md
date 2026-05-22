@@ -159,6 +159,7 @@ Current pushed commits for this cleanup:
 - `b02bb8e` Guard WRR no-input lock posture.
 - `80583a7` Guard WRR visual notes as non exclusions.
 - `de37840` Surface WRR visual triage in blockers.
+- `c336717` Refresh WRR visual triage run summary.
 
 ### Formal Real Report Rerun
 

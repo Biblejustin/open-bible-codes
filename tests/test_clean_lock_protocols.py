@@ -120,6 +120,8 @@ def test_final_report_tracks_wrr_single_term_source_policy_impacts() -> None:
         assert "`M$HZKWTW`" in text
         assert "163 >=5 pairs" in text
         assert "gap 0" in text
+        assert "visual triage" in text.lower()
+        assert "do not exclude pairs automatically" in text
 
 
 def test_wrr_support_docs_track_single_term_source_policy_impacts() -> None:
@@ -135,6 +137,9 @@ def test_wrr_support_docs_track_single_term_source_policy_impacts() -> None:
         assert "`M$HZKWTW`" in text
         assert "163 >=5 pairs" in text
         assert "gap 0" in text
+        if path.name == "CONSOLIDATED_FINDINGS.md":
+            assert "Visual triage" in text
+            assert "do not exclude pairs automatically" in text
 
 
 def test_consolidated_findings_include_clean_lock_closeout() -> None:

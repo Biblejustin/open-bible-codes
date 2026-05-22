@@ -800,6 +800,8 @@ exclude all source-review flags 154. The single-term Zacut diagnostic narrows
 the count gap further: `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and `M$HZKWTW` each
 individually leave 163 >=5 pairs with gap 0 if excluded, but no source policy is
 selected from that count alone.
+Visual triage now separates OCR misses from title-prefix and Chelm source-rule
+questions, but those notes do not exclude pairs automatically.
 
 ## Best Next Work
 

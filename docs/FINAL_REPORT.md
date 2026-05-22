@@ -387,6 +387,9 @@ settling it: `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and `M$HZKWTW` each individually
 leave 163 >=5 pairs with gap 0 if excluded. That is diagnostic count evidence,
 not an automatic source-policy choice.
 
+Visual triage notes now separate OCR misses from title-prefix and Chelm
+source-rule questions, but those notes do not exclude pairs automatically.
+
 Source artifacts:
 
 - `docs/WRR_SOURCE_AUDIT.md`
@@ -398,6 +401,7 @@ Source artifacts:
 - `docs/WRR_LOCK_OPTIONS.md`
 - `docs/WRR_CLAIM_READINESS.md`
 - `docs/WRR_CLAIM_BLOCKER_PACKET.md`
+- `docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md`
 - `docs/WRR_SOURCE_POLICY_SCENARIOS.md`
 - `docs/WRR_DW_FORMULA_SENSITIVITY.md`
 

@@ -334,6 +334,9 @@ Single-term Zacut diagnostics identify `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and
 gap 0. That closes the raw count gap diagnostically, but it does not resolve
 the source-policy lock or source-locked `D(w)` rule.
 
+Visual triage notes now separate OCR misses from title-prefix and Chelm
+source-rule questions, but those notes do not exclude pairs automatically.
+
 ## Negative And Weak Results
 
 The most important weak-result pattern is that many rows become less

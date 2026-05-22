@@ -163,6 +163,8 @@ Use cautious language:
 - single-term Zacut diagnostics identify `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and
   `M$HZKWTW` as individual rows whose exclusion would leave 163 >=5 pairs
   with gap 0, but this is diagnostic only and does not select a source policy;
+- visual triage notes separate OCR misses from title-prefix and Chelm
+  source-rule questions, but those notes do not exclude pairs automatically;
 - current accepted repo-defined 999,999 date-label permutation diagnostic
   excludes WNP-dispute-flagged rows, uses the current cap-250
   `corrected_distance` field, observes 174 rows and 48 defined `c(w,w')`
