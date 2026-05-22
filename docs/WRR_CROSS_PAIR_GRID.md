@@ -72,8 +72,9 @@ Cap-250 diagnostic aggregate:
 
 ## Date-Permutation Diagnostic
 
-This diagnostic shuffles date-concept labels over the cross-pair matrix. It is
-not the WRR claim-grade 999,999-permutation run.
+This diagnostic shuffles date-concept labels over the cross-pair matrix. These
+runs are repo-defined diagnostics over the current cap-250 corrected-distance
+field, not exact WRR reproductions.
 
 | Item | Value |
 | --- | ---: |
@@ -113,12 +114,36 @@ WNP-dispute-flagged rows excluded, same seed and sample count:
 | rho P4 | 0.001998001998 |
 | Bonferroni rho0 | 0.003996003996 |
 
+Recommended repo-defined 999,999-permutation run:
+
+| Item | Value |
+| --- | ---: |
+| pair universe | WNP-dispute-flagged rows excluded |
+| corrected-distance input | current cap-250 `corrected_distance` field |
+| permutation rule | date-label shuffle across 30 concepts |
+| permutations | 999999 |
+| seed | 1994 |
+| sample rows written | 1 |
+| observed source rows | 174 |
+| observed defined `c(w,w')` values | 48 |
+| observed P1 | 0.003809014117 |
+| observed P2 | 0.000200641225415 |
+| observed P3 | 0.0102141568845 |
+| observed P4 | 0.00054397278983 |
+| rho P1 | 0.0011565 |
+| rho P2 | 0.000215 |
+| rho P3 | 0.0069545 |
+| rho P4 | 0.000926 |
+| Bonferroni rho0 | 0.00086 |
+| permutation row range | 165..177 |
+| permutation defined-value range | 25..59 |
+| identity permutations | 0 |
+
 ## Read
 
 - Same-record rows preserve the imported WRR2 source pairing.
 - Cross-record rows are generated permutation-prep rows.
 - WNP Zacut rows are flagged because the WNP critique disputes those records;
-  that flag is not yet an exclusion rule.
+  the recommended repo-defined run excludes that flag.
 - Corrected-distance and date-permutation output from this grid is diagnostic
-  until the final pair universe, `D(w)` rule, and permutation procedure are
-  locked.
+  for the current repo protocol, not exact WRR reproduction language.

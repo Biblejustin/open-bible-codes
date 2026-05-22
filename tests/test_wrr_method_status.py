@@ -90,6 +90,17 @@ class WrrMethodStatusTests(unittest.TestCase):
                 "rho_p4": "0.000999000999001",
                 "rho0_bonferroni": "0.003996003996",
             },
+            cross_pair_recommended_permutation_row={
+                "permutations": "999999",
+                "seed": "1994",
+                "observed_defined_corrected_distances": "48",
+                "observed_rows": "174",
+                "rho_p1": "0.0011565",
+                "rho_p2": "0.000215",
+                "rho_p3": "0.0069545",
+                "rho_p4": "0.000926",
+                "rho0_bonferroni": "0.00086",
+            },
             highcap_corrected_distance_row={
                 "search_max_skip": "1000",
                 "pairs": "86",
@@ -134,6 +145,8 @@ class WrrMethodStatusTests(unittest.TestCase):
         self.assertIn("0 defined c-values from 86 rows", by_area["Aggregate statistic and permutation"]["evidence"])
         self.assertIn("cross-pair date permutation diagnostic", by_area["Aggregate statistic and permutation"]["evidence"])
         self.assertIn("rho0=0.003996003996", by_area["Aggregate statistic and permutation"]["evidence"])
+        self.assertIn("WNP-excluded repo-defined 999999", by_area["Aggregate statistic and permutation"]["evidence"])
+        self.assertIn("rho0=0.00086", by_area["Aggregate statistic and permutation"]["evidence"])
 
     def test_corrected_distance_status_summarizes_defined_smoke_rows(self) -> None:
         rows = build_status_rows(
@@ -192,6 +205,7 @@ class WrrMethodStatusTests(unittest.TestCase):
                     "corrected_distance_variants": Path("variants.csv"),
                     "corrected_distance_aggregate": Path("aggregate.csv"),
                     "cross_pair_permutation_summary": Path("missing_permutations.csv"),
+                    "cross_pair_recommended_permutation_summary": Path("missing_recommended_permutations.csv"),
                     "highcap_corrected_distance_summary": Path("highcap_corrected.csv"),
                     "highcap_perturbation_summary": Path("highcap_perturbation.csv"),
                     "highcap_pair_readiness_summary": Path("highcap_pair_readiness.csv"),
@@ -237,6 +251,7 @@ class WrrMethodStatusTests(unittest.TestCase):
             highcap_perturbation = root / "missing_highcap_perturbation.csv"
             highcap_pair_readiness = root / "missing_highcap_pair_readiness.csv"
             cross_pair_permutations = root / "missing_cross_pair_permutations.csv"
+            cross_pair_recommended_permutations = root / "missing_cross_pair_recommended_permutations.csv"
             primary_results = root / "primary.csv"
             out = root / "status.csv"
             markdown = root / "status.md"
@@ -375,6 +390,8 @@ class WrrMethodStatusTests(unittest.TestCase):
                     str(aggregate),
                     "--cross-pair-permutation-summary",
                     str(cross_pair_permutations),
+                    "--cross-pair-recommended-permutation-summary",
+                    str(cross_pair_recommended_permutations),
                     "--highcap-corrected-distance-summary",
                     str(highcap_corrected),
                     "--highcap-perturbation-summary",

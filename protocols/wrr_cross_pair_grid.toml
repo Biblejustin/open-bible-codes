@@ -115,3 +115,31 @@ outputs = [
   "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000.md",
   "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000.manifest.json",
 ]
+
+[[steps]]
+id = "run_wrr2_cross_pair_date_permutations_no_wnp_999999"
+description = "Run the repo-defined 999,999 date-label permutation diagnostic excluding WNP-dispute-flagged rows."
+argv = [
+  "-m", "scripts.analyze_wrr_cross_pair_permutations",
+  "--input", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250.csv",
+  "--permutations", "999999",
+  "--seed", "1994",
+  "--p1-threshold", "0.2",
+  "--exclude-pair-review-status", "diagnostic_exclusion_candidate_not_locked",
+  "--sample-output-limit", "0",
+  "--out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_observed_only.csv",
+  "--summary-out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv",
+  "--markdown-out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999.md",
+  "--manifest-out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_cross_pair_permutations.py",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250.csv",
+  "els/wrr.py",
+]
+outputs = [
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_observed_only.csv",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999.md",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999.manifest.json",
+]

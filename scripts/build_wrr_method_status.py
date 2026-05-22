@@ -24,6 +24,9 @@ DEFAULT_AGGREGATE = Path("reports/wrr_1994/wrr2_corrected_distance_aggregate.csv
 DEFAULT_CROSS_PAIR_PERMUTATION_SUMMARY = Path(
     "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000_summary.csv"
 )
+DEFAULT_CROSS_PAIR_RECOMMENDED_PERMUTATION_SUMMARY = Path(
+    "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv"
+)
 DEFAULT_HIGHCAP_CORRECTED_DISTANCE_SUMMARY = Path(
     "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_merged_summary.csv"
 )
@@ -93,6 +96,9 @@ def main(argv: list[str] | None = None) -> int:
     cross_pair_permutation_row = read_optional_one_row(
         args.cross_pair_permutation_summary
     )
+    cross_pair_recommended_permutation_row = read_optional_one_row(
+        args.cross_pair_recommended_permutation_summary
+    )
     highcap_corrected_distance_row = read_optional_one_row(
         args.highcap_corrected_distance_summary
     )
@@ -110,6 +116,7 @@ def main(argv: list[str] | None = None) -> int:
         table2_row_ocr_row,
         aggregate_row,
         cross_pair_permutation_row,
+        cross_pair_recommended_permutation_row,
         highcap_corrected_distance_row,
         highcap_perturbation_row,
         highcap_pair_readiness_row,
@@ -137,6 +144,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--cross-pair-permutation-summary",
         type=Path,
         default=DEFAULT_CROSS_PAIR_PERMUTATION_SUMMARY,
+    )
+    parser.add_argument(
+        "--cross-pair-recommended-permutation-summary",
+        type=Path,
+        default=DEFAULT_CROSS_PAIR_RECOMMENDED_PERMUTATION_SUMMARY,
     )
     parser.add_argument(
         "--highcap-corrected-distance-summary",
@@ -189,6 +201,7 @@ def build_status_rows(
     table2_row_ocr_row: dict[str, str] | None = None,
     corrected_distance_aggregate_row: dict[str, str] | None = None,
     cross_pair_permutation_row: dict[str, str] | None = None,
+    cross_pair_recommended_permutation_row: dict[str, str] | None = None,
     highcap_corrected_distance_row: dict[str, str] | None = None,
     highcap_perturbation_row: dict[str, str] | None = None,
     highcap_pair_readiness_row: dict[str, str] | None = None,
@@ -260,6 +273,7 @@ def build_status_rows(
             primary_result_rows or [],
             corrected_distance_aggregate_row,
             cross_pair_permutation_row,
+            cross_pair_recommended_permutation_row,
         ),
     ]
 
@@ -349,24 +363,35 @@ def aggregate_status(
     primary_result_rows: list[dict[str, str]],
     corrected_distance_aggregate_row: dict[str, str] | None = None,
     cross_pair_permutation_row: dict[str, str] | None = None,
+    cross_pair_recommended_permutation_row: dict[str, str] | None = None,
 ) -> dict[str, str]:
     local_evidence = aggregate_evidence(corrected_distance_aggregate_row)
-    permutation_evidence = cross_pair_permutation_evidence(cross_pair_permutation_row)
+    permutation_evidence = cross_pair_permutation_evidence(
+        cross_pair_permutation_row,
+        "cross-pair date permutation diagnostic",
+    )
+    recommended_permutation_evidence = cross_pair_permutation_evidence(
+        cross_pair_recommended_permutation_row,
+        "WNP-excluded repo-defined 999999 date permutation diagnostic",
+    )
+    has_permutation = bool(
+        cross_pair_permutation_row or cross_pair_recommended_permutation_row
+    )
     status = (
         "diagnostic_not_claim_grade"
-        if cross_pair_permutation_row
+        if has_permutation
         else "source_locked_not_built"
     )
     current_read = (
         "Published Table 3 ranks are source-audited; local diagnostic P1..P4 "
-        "and date-permutation runs exist, but the pair universe, D(w), and "
-        "permutation rule are not claim-locked."
-        if cross_pair_permutation_row
+        "and date-permutation runs exist, including a repo-defined 999,999 "
+        "run, but this is not an exact WRR reproduction."
+        if has_permutation
         else "Published Table 3 ranks are source-audited; local P1..P4 aggregate diagnostics exist, but the date-permutation runner is not built."
     )
     next_action = (
-        "Lock pair universe, D(w), and source permutation rule before claim-grade 999,999-permutation run."
-        if cross_pair_permutation_row
+        "Use the repo-defined 999,999 diagnostic for local evidence; source-lock pair universe and D(w) before exact WRR reproduction language."
+        if has_permutation
         else "Implement only after final pair universe and corrected-distance values are locked."
     )
     genesis = next(
@@ -384,6 +409,7 @@ def aggregate_status(
                     "No primary Table 3 source-result row was supplied",
                     local_evidence,
                     permutation_evidence,
+                    recommended_permutation_evidence,
                 ]
                 if part
             ),
@@ -408,6 +434,7 @@ def aggregate_status(
                 f"controls: {control_summary}",
                 local_evidence,
                 permutation_evidence,
+                recommended_permutation_evidence,
             ]
             if part
         ),
@@ -415,11 +442,11 @@ def aggregate_status(
     }
 
 
-def cross_pair_permutation_evidence(row: dict[str, str] | None) -> str:
+def cross_pair_permutation_evidence(row: dict[str, str] | None, label: str) -> str:
     if not row:
         return ""
     return (
-        "cross-pair date permutation diagnostic: "
+        f"{label}: "
         f"{row.get('permutations', '')} permutations, seed {row.get('seed', '')}, "
         f"{row.get('observed_defined_corrected_distances', '')} observed defined c-values "
         f"over {row.get('observed_rows', '')} rows; "
@@ -484,6 +511,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             f"--corrected-distance-variants {args.corrected_distance_variants} "
             f"--corrected-distance-aggregate {args.corrected_distance_aggregate} "
             f"--cross-pair-permutation-summary {args.cross_pair_permutation_summary} "
+            f"--cross-pair-recommended-permutation-summary {args.cross_pair_recommended_permutation_summary} "
             f"--highcap-corrected-distance-summary {args.highcap_corrected_distance_summary} "
             f"--highcap-perturbation-summary {args.highcap_perturbation_summary} "
             f"--highcap-pair-readiness-summary {args.highcap_pair_readiness_summary} "
@@ -599,6 +627,10 @@ def write_manifest(args: argparse.Namespace, rows: list[dict[str, str]], started
             "skip_summary": str(args.skip_summary),
             "corrected_distance_variants": str(args.corrected_distance_variants),
             "corrected_distance_aggregate": str(args.corrected_distance_aggregate),
+            "cross_pair_permutation_summary": str(args.cross_pair_permutation_summary),
+            "cross_pair_recommended_permutation_summary": str(
+                args.cross_pair_recommended_permutation_summary
+            ),
             "highcap_corrected_distance_summary": str(
                 args.highcap_corrected_distance_summary
             ),
