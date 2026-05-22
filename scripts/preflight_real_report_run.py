@@ -267,6 +267,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/analyze_wrr_corrected_distance.py",
     "scripts/analyze_wrr_corrected_distance_aggregate.py",
     "scripts/analyze_wrr_cross_pair_permutations.py",
+    "scripts/build_wrr_method_status.py",
+    "scripts/check_wrr_claim_readiness.py",
     "scripts/build_matrix_cluster_candidates.py",
     "scripts/summarize_matrix_cluster_controls.py",
     "scripts/analyze_notable_passage_gaps.py",

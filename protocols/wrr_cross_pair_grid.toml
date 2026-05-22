@@ -143,3 +143,63 @@ outputs = [
   "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999.md",
   "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999.manifest.json",
 ]
+
+[[steps]]
+id = "build_wrr_method_status_after_cross_pair"
+description = "Refresh WRR method-status docs after cross-pair permutation outputs are current."
+argv = [
+  "-m", "scripts.build_wrr_method_status",
+  "--text-source", "reports/wrr_1994/koren_genesis_text_source.csv",
+  "--pair-summary", "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "--table2-bridge-summary", "reports/wrr_1994/wrr_table2_source_bridge_summary.csv",
+  "--table2-ocr-summary", "reports/wrr_1994/wrr_primary_table2_ocr_probe_summary.csv",
+  "--table2-row-ocr-summary", "reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv",
+  "--skip-summary", "reports/wrr_1994/wrr2_skip_caps_summary.csv",
+  "--corrected-distance-variants", "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
+  "--corrected-distance-aggregate", "reports/wrr_1994/wrr2_corrected_distance_aggregate.csv",
+  "--cross-pair-permutation-summary", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000_summary.csv",
+  "--cross-pair-recommended-permutation-summary", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv",
+  "--primary-result-table", "reports/wrr_1994/wrr_primary_result_table.csv",
+  "--out", "reports/wrr_1994/wrr_method_status.csv",
+  "--markdown-out", "docs/WRR_METHOD_STATUS.md",
+  "--manifest-out", "reports/wrr_1994/wrr_method_status.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_method_status.py",
+  "reports/wrr_1994/koren_genesis_text_source.csv",
+  "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "reports/wrr_1994/wrr_table2_source_bridge_summary.csv",
+  "reports/wrr_1994/wrr_primary_table2_ocr_probe_summary.csv",
+  "reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv",
+  "reports/wrr_1994/wrr2_skip_caps_summary.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_aggregate.csv",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000_summary.csv",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv",
+  "reports/wrr_1994/wrr_primary_result_table.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_method_status.csv",
+  "docs/WRR_METHOD_STATUS.md",
+  "reports/wrr_1994/wrr_method_status.manifest.json",
+]
+
+[[steps]]
+id = "check_wrr_claim_readiness_after_cross_pair"
+description = "Refresh the WRR claim-readiness gate after method status is current."
+argv = [
+  "-m", "scripts.check_wrr_claim_readiness",
+  "--status", "reports/wrr_1994/wrr_method_status.csv",
+  "--out", "reports/wrr_1994/wrr_claim_readiness.csv",
+  "--markdown-out", "docs/WRR_CLAIM_READINESS.md",
+  "--manifest-out", "reports/wrr_1994/wrr_claim_readiness.manifest.json",
+]
+inputs = [
+  "scripts/check_wrr_claim_readiness.py",
+  "reports/wrr_1994/wrr_method_status.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_claim_readiness.csv",
+  "docs/WRR_CLAIM_READINESS.md",
+  "reports/wrr_1994/wrr_claim_readiness.manifest.json",
+]
