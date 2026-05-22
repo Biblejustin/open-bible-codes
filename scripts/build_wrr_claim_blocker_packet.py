@@ -8,6 +8,7 @@ import csv
 import json
 import time
 from collections import Counter
+from collections.abc import Iterable
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -37,6 +38,9 @@ DEFAULT_RESIDUAL_TERM_QUEUE = Path(
 )
 DEFAULT_METHOD_PAIR_UNIVERSE_SUMMARY = Path(
     "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv"
+)
+DEFAULT_SOURCE_TRANSCRIPTION_ROW_SUMMARY = Path(
+    "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv"
 )
 DEFAULT_OUT = Path("reports/wrr_1994/wrr_claim_blocker_packet.csv")
 DEFAULT_MD = Path("docs/WRR_CLAIM_BLOCKER_PACKET.md")
@@ -95,6 +99,7 @@ def main(argv: list[str] | None = None) -> int:
     residual_term_summary_rows = read_optional_rows(args.residual_term_summary)
     residual_term_queue_rows = read_optional_rows(args.residual_term_queue)
     method_pair_universe_rows = read_optional_rows(args.method_pair_universe_summary)
+    source_transcription_rows = read_optional_rows(args.source_transcription_row_summary)
     packet_rows = build_packet_rows(readiness_rows, lock_rows, source_rows, method_rows)
     write_csv(args.out, packet_rows)
     write_markdown(
@@ -109,6 +114,7 @@ def main(argv: list[str] | None = None) -> int:
         residual_term_summary_rows,
         residual_term_queue_rows,
         method_pair_universe_rows,
+        source_transcription_rows,
         args,
     )
     write_manifest(
@@ -123,6 +129,7 @@ def main(argv: list[str] | None = None) -> int:
         residual_term_summary_rows,
         residual_term_queue_rows,
         method_pair_universe_rows,
+        source_transcription_rows,
         started,
     )
     print(args.out)
@@ -176,6 +183,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--method-pair-universe-summary",
         type=Path,
         default=DEFAULT_METHOD_PAIR_UNIVERSE_SUMMARY,
+    )
+    parser.add_argument(
+        "--source-transcription-row-summary",
+        type=Path,
+        default=DEFAULT_SOURCE_TRANSCRIPTION_ROW_SUMMARY,
     )
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
@@ -289,6 +301,12 @@ def top_residual_term_rows(rows: list[dict[str, str]], limit: int = 10) -> list[
     return sorted(rows, key=lambda row: int_or_zero(row.get("priority_rank", "")))[:limit]
 
 
+def top_source_transcription_rows(
+    rows: list[dict[str, str]], limit: int = 5
+) -> list[dict[str, str]]:
+    return sorted(rows, key=lambda row: int_or_zero(row.get("row_rank", "")))[:limit]
+
+
 def write_markdown(
     path: Path,
     packet_rows: list[dict[str, str]],
@@ -301,6 +319,7 @@ def write_markdown(
     residual_term_summary_rows: list[dict[str, str]],
     residual_term_queue_rows: list[dict[str, str]],
     method_pair_universe_rows: list[dict[str, str]],
+    source_transcription_rows: list[dict[str, str]],
     args: argparse.Namespace,
 ) -> None:
     status_line = (
@@ -334,6 +353,7 @@ def write_markdown(
             f"--residual-term-summary {args.residual_term_summary} "
             f"--residual-term-queue {args.residual_term_queue} "
             f"--method-pair-universe-summary {args.method_pair_universe_summary} "
+            f"--source-transcription-row-summary {args.source_transcription_row_summary} "
             f"--out {args.out} "
             f"--markdown-out {args.markdown_out} "
             f"--manifest-out {args.manifest_out}"
@@ -478,6 +498,59 @@ def write_markdown(
                     frontier=markdown_cell(row.get("frontier_pairs", "")),
                     buckets=markdown_cell(row.get("review_buckets", "")),
                     flags=markdown_code_or_blank(row.get("source_flags", "")),
+                )
+            )
+    if source_transcription_rows:
+        action_terms = sum_int(
+            row.get("action_terms", "") for row in source_transcription_rows
+        )
+        residual_pairs = sum_int(
+            row.get("residual_pairs", "") for row in source_transcription_rows
+        )
+        frontier_pairs = sum_int(
+            row.get("frontier_pairs", "") for row in source_transcription_rows
+        )
+        top_rows = top_source_transcription_rows(source_transcription_rows)
+        top_row = top_rows[0] if top_rows else {}
+        lines.extend(
+            [
+                "",
+                "### Source-Transcription Row Evidence Summary",
+                "",
+                "| Row clusters | Action terms | Residual pairs | Frontier pairs | Top row | Read |",
+                "| ---: | ---: | ---: | ---: | --- | --- |",
+                (
+                    "| {clusters} | {terms} | {pairs} | {frontier} | `{top}` | "
+                    "review multi-term rows once by row before term edits |"
+                ).format(
+                    clusters=markdown_cell(len(source_transcription_rows)),
+                    terms=markdown_cell(action_terms),
+                    pairs=markdown_cell(residual_pairs),
+                    frontier=markdown_cell(frontier_pairs),
+                    top=markdown_cell(top_row.get("row_number", "")),
+                ),
+                "",
+                "### Source-Transcription Priority Rows",
+                "",
+                "| Rank | Row | Concept | Terms | Pairs | Frontier | Action terms not matched |",
+                "| ---: | --- | --- | ---: | ---: | ---: | --- |",
+            ]
+        )
+        for row in top_rows:
+            lines.append(
+                (
+                    "| {rank} | `{row_number}` | `{concept}` | {terms} | "
+                    "{pairs} | {frontier} | {not_matched} |"
+                ).format(
+                    rank=markdown_cell(row.get("row_rank", "")),
+                    row_number=markdown_cell(row.get("row_number", "")),
+                    concept=markdown_cell(row.get("concept", "")),
+                    terms=markdown_cell(row.get("action_terms", "")),
+                    pairs=markdown_cell(row.get("residual_pairs", "")),
+                    frontier=markdown_cell(row.get("frontier_pairs", "")),
+                    not_matched=markdown_cell(
+                        row.get("row_action_not_matched_terms", "")
+                    ),
                 )
             )
     if method_pair_universe_rows:
@@ -693,6 +766,7 @@ def write_manifest(
     residual_term_summary_rows: list[dict[str, str]],
     residual_term_queue_rows: list[dict[str, str]],
     method_pair_universe_rows: list[dict[str, str]],
+    source_transcription_rows: list[dict[str, str]],
     started: float,
 ) -> None:
     payload = {
@@ -709,6 +783,7 @@ def write_manifest(
         "residual_term_summary_rows": len(residual_term_summary_rows),
         "residual_term_queue_rows": len(residual_term_queue_rows),
         "method_pair_universe_summary_rows": len(method_pair_universe_rows),
+        "source_transcription_row_summary_rows": len(source_transcription_rows),
         "inputs": {
             "readiness": str(args.readiness),
             "lock_options": str(args.lock_options),
@@ -722,6 +797,7 @@ def write_manifest(
             "residual_term_summary": str(args.residual_term_summary),
             "residual_term_queue": str(args.residual_term_queue),
             "method_pair_universe_summary": str(args.method_pair_universe_summary),
+            "source_transcription_row_summary": str(args.source_transcription_row_summary),
         },
         "outputs": {
             "out": str(args.out),
@@ -750,6 +826,10 @@ def int_or_zero(value: str) -> int:
         return int(value)
     except ValueError:
         return 0
+
+
+def sum_int(values: Iterable[object]) -> int:
+    return sum(int_or_zero(str(value)) for value in values)
 
 
 if __name__ == "__main__":

@@ -81,6 +81,7 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             residual_term_summary = root / "residual_term_summary.csv"
             residual_term_queue = root / "residual_term_queue.csv"
             method_pair_universe_summary = root / "method_pair_universe_summary.csv"
+            source_transcription_summary = root / "source_transcription_summary.csv"
             out = root / "packet.csv"
             markdown = root / "packet.md"
             manifest = root / "manifest.json"
@@ -285,6 +286,41 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                     }
                 ],
             )
+            write_csv(
+                source_transcription_summary,
+                [
+                    {
+                        "run_label": "all_lanes_cap1000",
+                        "row_rank": "1",
+                        "row_number": "06",
+                        "concept": "WRR2 06",
+                        "action_terms": "4",
+                        "residual_pairs": "4",
+                        "frontier_pairs": "4",
+                        "action_term_ids": (
+                            "wrr2_06_app_03;wrr2_06_app_04;"
+                            "wrr2_06_app_05;wrr2_06_app_06"
+                        ),
+                        "action_terms_display": (
+                            "wrr2_06_app_03 B@LM@$YH$M;"
+                            "wrr2_06_app_04 B@LM@$YYHWH;"
+                            "wrr2_06_app_05 ALY@ZRA$KNZY;"
+                            "wrr2_06_app_06 RBYALY@ZR"
+                        ),
+                        "row_matched_terms": "wrr2_06_app_01 M@$YH$M",
+                        "row_action_not_matched_terms": (
+                            "wrr2_06_app_03 B@LM@$YH$M;"
+                            "wrr2_06_app_04 B@LM@$YYHWH"
+                        ),
+                        "row_ocr_name_texts": "מעשיהשממעשייהוה",
+                        "row_ocr_date_texts": "כבכסלובכבכסלו",
+                        "table2_bridge_read": "row aligned; Hebrew cells not verified",
+                        "evidence_required": "primary Table 2 row transcription",
+                        "no_input_boundary": "No automatic source correction",
+                        "read": "multi-term row cluster; review row image once",
+                    }
+                ],
+            )
 
             rc = packet.main(
                 [
@@ -312,6 +348,8 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                     str(residual_term_queue),
                     "--method-pair-universe-summary",
                     str(method_pair_universe_summary),
+                    "--source-transcription-row-summary",
+                    str(source_transcription_summary),
                     "--out",
                     str(out),
                     "--markdown-out",
@@ -339,6 +377,10 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             self.assertIn("wrr2_27_app_13__wrr2_27_date_01", text)
             self.assertIn("Residual Term Queue", text)
             self.assertIn("Top Residual Term Targets", text)
+            self.assertIn("Source-Transcription Row Evidence Summary", text)
+            self.assertIn("Source-Transcription Priority Rows", text)
+            self.assertIn("review multi-term rows once by row before term edits", text)
+            self.assertIn("wrr2_06_app_03 B@LM@$YH$M", text)
             self.assertIn("Method/Pair-Universe Evidence Summary", text)
             self.assertIn(
                 "| 11 | 11 | 11 | 11 | 11 | 2 | OCR matched all method-lane terms |",
@@ -356,6 +398,7 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             self.assertEqual(manifest_payload["residual_term_summary_rows"], 2)
             self.assertEqual(manifest_payload["residual_term_queue_rows"], 1)
             self.assertEqual(manifest_payload["method_pair_universe_summary_rows"], 1)
+            self.assertEqual(manifest_payload["source_transcription_row_summary_rows"], 1)
 
 
 def write_csv(path: Path, rows: list[dict[str, str]]) -> None:

@@ -9,7 +9,7 @@ queue flags, and visual triage notes into one handoff artifact.
 ## Reproduce
 
 ```bash
-python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --source-policy-term-impacts reports/wrr_1994/wrr_source_policy_term_impacts.csv --dw-formula-sensitivity reports/wrr_1994/wrr_dw_formula_sensitivity.csv --variant-residual-summary reports/wrr_1994/wrr_variant_residual_review_summary.csv --variant-residual-packet reports/wrr_1994/wrr_variant_residual_review_packet.csv --residual-term-summary reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv --residual-term-queue reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv --method-pair-universe-summary reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
+python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --source-policy-term-impacts reports/wrr_1994/wrr_source_policy_term_impacts.csv --dw-formula-sensitivity reports/wrr_1994/wrr_dw_formula_sensitivity.csv --variant-residual-summary reports/wrr_1994/wrr_variant_residual_review_summary.csv --variant-residual-packet reports/wrr_1994/wrr_variant_residual_review_packet.csv --residual-term-summary reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv --residual-term-queue reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv --method-pair-universe-summary reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv --source-transcription-row-summary reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
 ```
 
 ## Blockers
@@ -96,6 +96,22 @@ The queue compresses repeated residual pair blockers into unique unresolved term
 | 8 | `wrr2_05_app_02` | `AHRNHGDWLMQRLYN` | `source_transcription_or_row_alignment` | 1 | 1 | `ocr_not_matched_no_variant_lead` |  |
 | 9 | `wrr2_06_app_03` | `B@LM@$YH$M` | `source_transcription_or_row_alignment` | 1 | 1 | `ocr_not_matched_no_variant_lead` |  |
 | 10 | `wrr2_06_app_04` | `B@LM@$YYHWH` | `source_transcription_or_row_alignment` | 1 | 1 | `ocr_not_matched_no_variant_lead` |  |
+
+### Source-Transcription Row Evidence Summary
+
+| Row clusters | Action terms | Residual pairs | Frontier pairs | Top row | Read |
+| ---: | ---: | ---: | ---: | --- | --- |
+| 22 | 43 | 44 | 35 | `06` | review multi-term rows once by row before term edits |
+
+### Source-Transcription Priority Rows
+
+| Rank | Row | Concept | Terms | Pairs | Frontier | Action terms not matched |
+| ---: | --- | --- | ---: | ---: | ---: | --- |
+| 1 | `06` | `WRR2 06` | 4 | 4 | 4 | wrr2_06_app_03 B@LM@$YH$M;wrr2_06_app_04 B@LM@$YYHWH;wrr2_06_app_05 ALY@ZRA$KNZY;wrr2_06_app_06 RBYALY@ZR |
+| 2 | `14` | `WRR2 14` | 3 | 3 | 3 | wrr2_14_app_02 B@LXWTYAYR;wrr2_14_app_03 YAYRXYYMBKRK;wrr2_14_app_05 RBYYAYRXYYM |
+| 3 | `24` | `WRR2 24` | 3 | 3 | 3 | wrr2_24_app_06 Y@QBY$RAL@MDN;wrr2_24_app_07 Y@QBY$RAL@MDYN;wrr2_24_app_09 RBYY@QBY$RAL |
+| 4 | `01` | `WRR2 01` | 2 | 2 | 2 | wrr2_01_app_06 B@LHA$KWL;wrr2_01_app_08 HRBABBYTDYN |
+| 5 | `03` | `WRR2 03` | 2 | 2 | 2 | wrr2_03_app_03 XSDLABRHM;wrr2_03_app_04 B@LXSDLABRHM |
 
 ### Method/Pair-Universe Evidence Summary
 

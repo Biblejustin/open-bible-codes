@@ -766,6 +766,8 @@ inputs = [
   "reports/wrr_1994/wrr_variant_residual_review_packet.csv",
   "reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv",
   "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv",
+  "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
+  "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv",
   "reports/wrr_1994/wrr2_terms.csv",
   "reports/wrr_1994/wrr2_genesis_counts.csv",
   "reports/wrr_1994/wrr2_skip_caps.csv",
