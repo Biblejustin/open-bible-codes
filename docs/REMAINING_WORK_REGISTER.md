@@ -232,14 +232,15 @@ level-2/3 geometric and ELS model pages currently download as root-canonical
 pages with unrelated slot/gambling content, no expected model labels, and zero
 usable model pages. These lanes stay non-result-bearing. The
 research-program ELS harness now includes a split-fit Fisher order-statistic
-row. Next research-program upgrade: replace the current transparent resonant
-row-width proxy with a fuller source-method reconstruction, recover
-source-published Fisher weights if a citable source becomes available, and only
-then consider real Torah-code source data, communities compactness runs,
-American-presidents transliteration experiments, or Witztum birth-date
-ELS/SL-proximity tests. Do not run an Israeli prime-ministers result protocol
-until the missing detail-page coverage is resolved or explicitly scoped out in a
-new preregistration. Do not import Cities city-name rows until the wrapped or
+row plus two transparent row-width modes: strict shared-intersection
+candidates and broader combined WRR-series candidates. Next research-program
+upgrade: recover a citable fuller source-method reconstruction and
+source-published Fisher weights if available; only then consider real
+Torah-code source data, communities compactness runs, American-presidents
+transliteration experiments, or Witztum birth-date ELS/SL-proximity tests. Do
+not run an Israeli prime-ministers result protocol until the missing
+detail-page coverage is resolved or explicitly scoped out in a new
+preregistration. Do not import Cities city-name rows until the wrapped or
 missing PDF sources are recovered, or the usable HTML-only source boundary is
 explicitly locked. Do not promote the event/object pages beyond source-shape
 status until each lane has its own preregistered term normalization and

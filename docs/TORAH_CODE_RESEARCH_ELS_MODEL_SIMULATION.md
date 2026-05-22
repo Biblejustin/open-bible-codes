@@ -13,9 +13,12 @@ alternative, a declared fraction of the second set is repositioned
 toward its best resonant-cylinder meeting in the first set.
 
 The implementation uses the repo's WRR row-width helper as a transparent
-resonance proxy: candidate cylinder sizes are the intersection of the
-first row widths derived from each ELS skip. Pair distance is the best
-symmetric Hausdorff letter distance across those shared cylinder sizes.
+row-width proxy. It compares two explicit modes: `shared_intersection`,
+where candidate cylinder sizes are only the shared first row widths
+derived from both ELS skips, and `combined_wrr_series`, where candidates
+are the combined first WRR row-width series from both skips.
+Pair distance is the best symmetric Hausdorff letter distance across
+the candidate cylinder sizes for that mode.
 For moved ELSs, the script identifies the best target ELS and row width,
 projects the moving start position along the shortest cylinder path, and
 then searches nearby valid starts for a distance closest to `a*d`.
@@ -39,23 +42,24 @@ python3 -m scripts.simulate_torah_code_research_els_model
 - text length: `5000`
 - max skip: `120`
 - row-width count: `10`
+- row-width modes: `shared_intersection, combined_wrr_series`
 
 ## Strongest Settings
 
-| N | moved fraction | factor | statistic | null mean | alternative mean | power | read |
-| ---: | ---: | ---: | --- | ---: | ---: | ---: | --- |
-| 10 | 0.5 | 0.25 | harmonic_mean | 18.5355 | 11.3893 | 0.555 | moderate_power_for_declared_model |
-| 10 | 0.5 | 0.25 | fisher_order_split | 60.1061 | 38.3847 | 0.47 | low_power_for_declared_model |
-| 10 | 0.5 | 0.25 | geometric_mean | 25.4167 | 17.4211 | 0.41 | low_power_for_declared_model |
-| 10 | 0.5 | 0.5 | fisher_order_split | 31.5248 | 23.0422 | 0.24 | low_power_for_declared_model |
-| 10 | 0.5 | 0.5 | harmonic_mean | 18.7506 | 13.8274 | 0.21 | low_power_for_declared_model |
-| 10 | 0.5 | 0.25 | arithmetic_mean | 53.8513 | 46.9175 | 0.17 | low_power_for_declared_model |
-| 10 | 0.5 | 0.25 | order_trimmed_mean | 56.2816 | 49.1586 | 0.17 | low_power_for_declared_model |
-| 10 | 0.5 | 0.5 | geometric_mean | 25.927 | 19.8876 | 0.165 | low_power_for_declared_model |
-| 10 | 0.5 | 0.75 | arithmetic_mean | 56.8993 | 50.1789 | 0.155 | low_power_for_declared_model |
-| 10 | 0.5 | 0.75 | order_trimmed_mean | 59.4635 | 52.4779 | 0.155 | low_power_for_declared_model |
-| 10 | 0.25 | 0.25 | harmonic_mean | 18.4633 | 14.7401 | 0.145 | low_power_for_declared_model |
-| 10 | 0.5 | 0.75 | geometric_mean | 26.5721 | 22.901 | 0.145 | low_power_for_declared_model |
+| N | width mode | moved fraction | factor | statistic | null mean | alternative mean | power | read |
+| ---: | --- | ---: | ---: | --- | ---: | ---: | ---: | --- |
+| 10 | shared_intersection | 0.5 | 0.25 | harmonic_mean | 18.5355 | 11.3893 | 0.555 | moderate_power_for_declared_model |
+| 10 | combined_wrr_series | 0.5 | 0.25 | geometric_mean | 11.6815 | 9.22629 | 0.535 | moderate_power_for_declared_model |
+| 10 | combined_wrr_series | 0.5 | 0.25 | harmonic_mean | 10.6492 | 8.04212 | 0.525 | moderate_power_for_declared_model |
+| 10 | combined_wrr_series | 0.5 | 0.25 | fisher_order_split | 134.27 | 105.516 | 0.51 | moderate_power_for_declared_model |
+| 10 | combined_wrr_series | 0.5 | 0.5 | fisher_order_split | 92.3204 | 75.8265 | 0.51 | moderate_power_for_declared_model |
+| 10 | shared_intersection | 0.5 | 0.25 | fisher_order_split | 60.1061 | 38.3847 | 0.47 | low_power_for_declared_model |
+| 10 | combined_wrr_series | 0.5 | 0.25 | arithmetic_mean | 12.7867 | 10.5487 | 0.465 | low_power_for_declared_model |
+| 10 | combined_wrr_series | 0.5 | 0.25 | order_trimmed_mean | 13.1496 | 10.8932 | 0.46 | low_power_for_declared_model |
+| 10 | combined_wrr_series | 0.5 | 0.5 | geometric_mean | 11.7731 | 9.68244 | 0.46 | low_power_for_declared_model |
+| 10 | combined_wrr_series | 0.5 | 0.5 | arithmetic_mean | 12.8278 | 10.8602 | 0.45 | low_power_for_declared_model |
+| 10 | combined_wrr_series | 0.5 | 0.5 | order_trimmed_mean | 13.1931 | 11.1995 | 0.45 | low_power_for_declared_model |
+| 10 | shared_intersection | 0.5 | 0.25 | geometric_mean | 25.4167 | 17.4211 | 0.41 | low_power_for_declared_model |
 
 ## Caveats
 
@@ -67,5 +71,5 @@ python3 -m scripts.simulate_torah_code_research_els_model
   not an exhaustive global optimizer.
 - The Fisher row is data-driven simulation scaffolding; it is not a
   source-published set of weights.
-- The resonant-cylinder definition is explicit and reproducible but
-  narrower than a complete source-method reconstruction.
+- The row-width definitions are explicit and reproducible, but neither
+  mode is a complete source-method reconstruction.

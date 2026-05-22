@@ -383,9 +383,11 @@ research-program geometric level-1 model into a reproducible simulation harness.
 It is intentionally a model-design/power sanity check, not a Torah-code result.
 
 `scripts/simulate_torah_code_research_els_model.py` adds a matching ELS/cylinder
-analogue. It uses shared WRR row-width helpers as a transparent resonant
-cylinder proxy and compares arithmetic, geometric, harmonic, and trimmed
-order-statistic means over generated ELS-meeting distances.
+analogue. It uses shared WRR row-width helpers as transparent row-width
+proxies, comparing strict shared-intersection candidates with a broader
+combined WRR-series candidate set. It compares arithmetic, geometric, harmonic,
+trimmed order-statistic, and split-fit Fisher scores over generated
+ELS-meeting distances.
 
 `scripts/analyze_wrr_corrected_distance.py` runs a real-corpus corrected-distance
 smoke over the current length-5..8 candidate lane. It generates exact perturbed

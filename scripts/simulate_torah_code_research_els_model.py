@@ -36,6 +36,10 @@ STATISTICS = (
     "harmonic_mean",
     "order_trimmed_mean",
 )
+ROW_WIDTH_MODES = (
+    "shared_intersection",
+    "combined_wrr_series",
+)
 FIELDNAMES = [
     "els_count",
     "left_word_length",
@@ -43,6 +47,7 @@ FIELDNAMES = [
     "text_length",
     "max_skip",
     "row_width_count",
+    "row_width_mode",
     "moved_fraction",
     "compactness_factor",
     "statistic",
@@ -104,6 +109,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--text-length", type=int, default=5000)
     parser.add_argument("--max-skip", type=int, default=120)
     parser.add_argument("--row-width-count", type=int, default=10)
+    parser.add_argument("--row-width-mode", choices=ROW_WIDTH_MODES, action="append", default=[])
     parser.add_argument("--moved-fraction", type=float, action="append", default=[])
     parser.add_argument("--compactness-factor", type=float, action="append", default=[])
     parser.add_argument("--replicates", type=int, default=200)
@@ -133,32 +139,36 @@ def validate_args(args: argparse.Namespace) -> None:
 def run_grid(args: argparse.Namespace) -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
     els_counts = args.els_count or [10]
+    row_width_modes = args.row_width_mode or list(ROW_WIDTH_MODES)
     moved_fractions = args.moved_fraction or [0.25, 0.50]
     compactness_factors = args.compactness_factor or [0.25, 0.50, 0.75]
     for els_count in els_counts:
-        for moved_fraction in moved_fractions:
-            for compactness_factor in compactness_factors:
-                rows.extend(
-                    summarize_setting(
-                        els_count=els_count,
-                        left_word_length=args.left_word_length,
-                        right_word_length=args.right_word_length,
-                        text_length=args.text_length,
-                        max_skip=args.max_skip,
-                        row_width_count=args.row_width_count,
-                        moved_fraction=moved_fraction,
-                        compactness_factor=compactness_factor,
-                        replicates=args.replicates,
-                        alpha=args.alpha,
-                        seed=setting_seed(
-                            args.seed,
-                            els_count,
-                            moved_fraction,
-                            compactness_factor,
-                            args.max_skip,
-                        ),
+        for row_width_mode in row_width_modes:
+            for moved_fraction in moved_fractions:
+                for compactness_factor in compactness_factors:
+                    rows.extend(
+                        summarize_setting(
+                            els_count=els_count,
+                            left_word_length=args.left_word_length,
+                            right_word_length=args.right_word_length,
+                            text_length=args.text_length,
+                            max_skip=args.max_skip,
+                            row_width_count=args.row_width_count,
+                            row_width_mode=row_width_mode,
+                            moved_fraction=moved_fraction,
+                            compactness_factor=compactness_factor,
+                            replicates=args.replicates,
+                            alpha=args.alpha,
+                            seed=setting_seed(
+                                args.seed,
+                                els_count,
+                                moved_fraction,
+                                compactness_factor,
+                                args.max_skip,
+                                row_width_mode,
+                            ),
+                        )
                     )
-                )
     return rows
 
 
@@ -168,9 +178,12 @@ def setting_seed(
     moved_fraction: float,
     compactness_factor: float,
     max_skip: int,
+    row_width_mode: str = "shared_intersection",
 ) -> int:
+    mode_offset = ROW_WIDTH_MODES.index(row_width_mode) * 10_000_000
     return (
         int(base_seed)
+        + mode_offset
         + els_count * 100_000
         + max_skip * 1_000
         + int(round(moved_fraction * 1_000)) * 10
@@ -186,6 +199,7 @@ def summarize_setting(
     text_length: int,
     max_skip: int,
     row_width_count: int,
+    row_width_mode: str = "shared_intersection",
     moved_fraction: float,
     compactness_factor: float,
     replicates: int,
@@ -216,7 +230,14 @@ def summarize_setting(
             text_length=text_length,
             max_skip=max_skip,
         )
-        null_runs.append(meeting_statistics(left, right, row_width_count=row_width_count))
+        null_runs.append(
+            meeting_statistics(
+                left,
+                right,
+                row_width_count=row_width_count,
+                row_width_mode=row_width_mode,
+            )
+        )
 
         alt_left = random_els_set(
             rng,
@@ -242,9 +263,11 @@ def summarize_setting(
                     compactness_factor=compactness_factor,
                     text_length=text_length,
                     row_width_count=row_width_count,
+                    row_width_mode=row_width_mode,
                     rng=rng,
                 ),
                 row_width_count=row_width_count,
+                row_width_mode=row_width_mode,
             )
         )
     rows = [
@@ -258,6 +281,7 @@ def summarize_setting(
             text_length=text_length,
             max_skip=max_skip,
             row_width_count=row_width_count,
+            row_width_mode=row_width_mode,
             moved_fraction=moved_fraction,
             compactness_factor=compactness_factor,
             replicates=replicates,
@@ -275,6 +299,7 @@ def summarize_setting(
         text_length=text_length,
         max_skip=max_skip,
         row_width_count=row_width_count,
+        row_width_mode=row_width_mode,
         moved_fraction=moved_fraction,
         compactness_factor=compactness_factor,
         replicates=replicates,
@@ -348,10 +373,15 @@ def resonant_row_widths(
     right_skip: int,
     *,
     row_width_count: int,
+    row_width_mode: str = "shared_intersection",
 ) -> tuple[int, ...]:
-    left = set(wrr_row_widths(left_skip, count=row_width_count))
-    right = set(wrr_row_widths(right_skip, count=row_width_count))
-    return tuple(sorted(left & right))
+    left = wrr_row_widths(left_skip, count=row_width_count)
+    right = wrr_row_widths(right_skip, count=row_width_count)
+    if row_width_mode == "shared_intersection":
+        return tuple(sorted(set(left) & set(right)))
+    if row_width_mode == "combined_wrr_series":
+        return tuple(sorted(set(left) | set(right)))
+    raise ValueError(f"unknown row_width_mode: {row_width_mode}")
 
 
 def els_pair_distance(
@@ -359,8 +389,14 @@ def els_pair_distance(
     right: ElsOccurrence,
     *,
     row_width_count: int,
+    row_width_mode: str = "shared_intersection",
 ) -> float | None:
-    widths = resonant_row_widths(left.skip, right.skip, row_width_count=row_width_count)
+    widths = resonant_row_widths(
+        left.skip,
+        right.skip,
+        row_width_count=row_width_count,
+        row_width_mode=row_width_mode,
+    )
     if not widths:
         return None
     left_offsets = left.offsets()
@@ -401,14 +437,25 @@ def nearest_meeting_distances(
     right: tuple[ElsOccurrence, ...],
     *,
     row_width_count: int,
+    row_width_mode: str = "shared_intersection",
 ) -> list[float]:
     distances = []
     for occurrence in left:
-        distance = nearest_pair_distance(occurrence, right, row_width_count=row_width_count)
+        distance = nearest_pair_distance(
+            occurrence,
+            right,
+            row_width_count=row_width_count,
+            row_width_mode=row_width_mode,
+        )
         if distance is not None:
             distances.append(distance)
     for occurrence in right:
-        distance = nearest_pair_distance(occurrence, left, row_width_count=row_width_count)
+        distance = nearest_pair_distance(
+            occurrence,
+            left,
+            row_width_count=row_width_count,
+            row_width_mode=row_width_mode,
+        )
         if distance is not None:
             distances.append(distance)
     return distances
@@ -419,11 +466,20 @@ def nearest_pair_distance(
     candidates: tuple[ElsOccurrence, ...],
     *,
     row_width_count: int,
+    row_width_mode: str = "shared_intersection",
 ) -> float | None:
     distances = [
         distance
         for candidate in candidates
-        if (distance := els_pair_distance(occurrence, candidate, row_width_count=row_width_count)) is not None
+        if (
+            distance := els_pair_distance(
+                occurrence,
+                candidate,
+                row_width_count=row_width_count,
+                row_width_mode=row_width_mode,
+            )
+        )
+        is not None
     ]
     return min(distances) if distances else None
 
@@ -436,6 +492,7 @@ def move_toward_best_meetings(
     compactness_factor: float,
     text_length: int,
     row_width_count: int,
+    row_width_mode: str = "shared_intersection",
     rng: random.Random,
 ) -> tuple[ElsOccurrence, ...]:
     move_count = round(len(moving) * moved_fraction)
@@ -445,7 +502,12 @@ def move_toward_best_meetings(
         if index not in selected:
             moved.append(occurrence)
             continue
-        best = best_meeting_choice(occurrence, fixed, row_width_count=row_width_count)
+        best = best_meeting_choice(
+            occurrence,
+            fixed,
+            row_width_count=row_width_count,
+            row_width_mode=row_width_mode,
+        )
         moved.append(
             move_els_toward_meeting(
                 occurrence,
@@ -464,8 +526,14 @@ def best_meeting(
     candidates: tuple[ElsOccurrence, ...],
     *,
     row_width_count: int,
+    row_width_mode: str = "shared_intersection",
 ) -> ElsOccurrence | None:
-    choice = best_meeting_choice(occurrence, candidates, row_width_count=row_width_count)
+    choice = best_meeting_choice(
+        occurrence,
+        candidates,
+        row_width_count=row_width_count,
+        row_width_mode=row_width_mode,
+    )
     return choice.target if choice is not None else None
 
 
@@ -474,10 +542,16 @@ def best_meeting_choice(
     candidates: tuple[ElsOccurrence, ...],
     *,
     row_width_count: int,
+    row_width_mode: str = "shared_intersection",
 ) -> MeetingChoice | None:
     best: MeetingChoice | None = None
     for candidate in candidates:
-        choice = best_width_for_pair(occurrence, candidate, row_width_count=row_width_count)
+        choice = best_width_for_pair(
+            occurrence,
+            candidate,
+            row_width_count=row_width_count,
+            row_width_mode=row_width_mode,
+        )
         if choice is None:
             continue
         if best is None or choice.distance < best.distance:
@@ -490,8 +564,14 @@ def best_width_for_pair(
     candidate: ElsOccurrence,
     *,
     row_width_count: int,
+    row_width_mode: str = "shared_intersection",
 ) -> MeetingChoice | None:
-    widths = resonant_row_widths(occurrence.skip, candidate.skip, row_width_count=row_width_count)
+    widths = resonant_row_widths(
+        occurrence.skip,
+        candidate.skip,
+        row_width_count=row_width_count,
+        row_width_mode=row_width_mode,
+    )
     if not widths:
         return None
     left_offsets = occurrence.offsets()
@@ -630,8 +710,14 @@ def meeting_statistics(
     right: tuple[ElsOccurrence, ...],
     *,
     row_width_count: int,
+    row_width_mode: str = "shared_intersection",
 ) -> dict[str, float | int | tuple[float, ...] | None]:
-    distances = nearest_meeting_distances(left, right, row_width_count=row_width_count)
+    distances = nearest_meeting_distances(
+        left,
+        right,
+        row_width_count=row_width_count,
+        row_width_mode=row_width_mode,
+    )
     stats: dict[str, float | int | tuple[float, ...] | None] = {
         "comparable_distances": len(distances),
         "order_vector": order_statistic_vector(distances),
@@ -669,6 +755,7 @@ def summarize_statistic(
     text_length: int,
     max_skip: int,
     row_width_count: int,
+    row_width_mode: str,
     moved_fraction: float,
     compactness_factor: float,
     replicates: int,
@@ -692,6 +779,7 @@ def summarize_statistic(
         "text_length": str(text_length),
         "max_skip": str(max_skip),
         "row_width_count": str(row_width_count),
+        "row_width_mode": row_width_mode,
         "moved_fraction": format_float(moved_fraction),
         "compactness_factor": format_float(compactness_factor),
         "statistic": statistic,
@@ -724,6 +812,7 @@ def summarize_fisher_order_statistic(
     text_length: int,
     max_skip: int,
     row_width_count: int,
+    row_width_mode: str,
     moved_fraction: float,
     compactness_factor: float,
     replicates: int,
@@ -760,6 +849,7 @@ def summarize_fisher_order_statistic(
         "text_length": str(text_length),
         "max_skip": str(max_skip),
         "row_width_count": str(row_width_count),
+        "row_width_mode": row_width_mode,
         "moved_fraction": format_float(moved_fraction),
         "compactness_factor": format_float(compactness_factor),
         "statistic": "fisher_order_split",
@@ -862,9 +952,12 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
         "toward its best resonant-cylinder meeting in the first set.",
         "",
         "The implementation uses the repo's WRR row-width helper as a transparent",
-        "resonance proxy: candidate cylinder sizes are the intersection of the",
-        "first row widths derived from each ELS skip. Pair distance is the best",
-        "symmetric Hausdorff letter distance across those shared cylinder sizes.",
+        "row-width proxy. It compares two explicit modes: `shared_intersection`,",
+        "where candidate cylinder sizes are only the shared first row widths",
+        "derived from both ELS skips, and `combined_wrr_series`, where candidates",
+        "are the combined first WRR row-width series from both skips.",
+        "Pair distance is the best symmetric Hausdorff letter distance across",
+        "the candidate cylinder sizes for that mode.",
         "For moved ELSs, the script identifies the best target ELS and row width,",
         "projects the moving start position along the shortest cylinder path, and",
         "then searches nearby valid starts for a distance closest to `a*d`.",
@@ -888,15 +981,16 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
         f"- text length: `{args.text_length}`",
         f"- max skip: `{args.max_skip}`",
         f"- row-width count: `{args.row_width_count}`",
+        f"- row-width modes: `{', '.join(args.row_width_mode or ROW_WIDTH_MODES)}`",
         "",
         "## Strongest Settings",
         "",
-        "| N | moved fraction | factor | statistic | null mean | alternative mean | power | read |",
-        "| ---: | ---: | ---: | --- | ---: | ---: | ---: | --- |",
+        "| N | width mode | moved fraction | factor | statistic | null mean | alternative mean | power | read |",
+        "| ---: | --- | ---: | ---: | --- | ---: | ---: | ---: | --- |",
     ]
     for row in strongest:
         lines.append(
-            "| {els_count} | {moved_fraction} | {compactness_factor} | {statistic} | "
+            "| {els_count} | {row_width_mode} | {moved_fraction} | {compactness_factor} | {statistic} | "
             "{null_mean} | {alternative_mean} | {power_p_le_alpha} | {interpretation} |".format(
                 **row
             )
@@ -914,8 +1008,8 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             "  not an exhaustive global optimizer.",
             "- The Fisher row is data-driven simulation scaffolding; it is not a",
             "  source-published set of weights.",
-            "- The resonant-cylinder definition is explicit and reproducible but",
-            "  narrower than a complete source-method reconstruction.",
+            "- The row-width definitions are explicit and reproducible, but neither",
+            "  mode is a complete source-method reconstruction.",
         ]
     )
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -941,6 +1035,7 @@ def write_manifest(
             "text_length": args.text_length,
             "max_skip": args.max_skip,
             "row_width_count": args.row_width_count,
+            "row_width_mode": args.row_width_mode or list(ROW_WIDTH_MODES),
             "moved_fraction": args.moved_fraction,
             "compactness_factor": args.compactness_factor,
             "replicates": args.replicates,

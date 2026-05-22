@@ -23,6 +23,17 @@ class TorahCodeResearchElsModelTests(unittest.TestCase):
             (10,),
         )
 
+    def test_combined_width_mode_uses_both_wrr_series(self) -> None:
+        self.assertEqual(
+            model.resonant_row_widths(
+                10,
+                20,
+                row_width_count=2,
+                row_width_mode="combined_wrr_series",
+            ),
+            (5, 10, 20),
+        )
+
     def test_pair_distance_zero_for_identical_occurrences(self) -> None:
         occurrence = model.ElsOccurrence(start=10, skip=5, word_length=3)
 
@@ -127,6 +138,7 @@ class TorahCodeResearchElsModelTests(unittest.TestCase):
 
         arithmetic = next(row for row in rows if row["statistic"] == "arithmetic_mean")
         fisher = next(row for row in rows if row["statistic"] == "fisher_order_split")
+        self.assertEqual(arithmetic["row_width_mode"], "shared_intersection")
         self.assertGreater(float(arithmetic["null_mean"]), float(arithmetic["alternative_mean"]))
         self.assertGreater(float(arithmetic["power_p_le_alpha"]), 0.7)
         self.assertGreater(float(fisher["null_mean"]), float(fisher["alternative_mean"]))
@@ -169,6 +181,8 @@ class TorahCodeResearchElsModelTests(unittest.TestCase):
 
             self.assertEqual(rc, 0)
             self.assertTrue((root / "out.csv").exists())
+            self.assertIn("row_width_mode", (root / "out.csv").read_text(encoding="utf-8"))
+            self.assertIn("combined_wrr_series", (root / "out.csv").read_text(encoding="utf-8"))
             self.assertIn("level-1 ELS analogue", (root / "out.md").read_text(encoding="utf-8"))
             self.assertIn(
                 "simulate_torah_code_research_els_model.py",
