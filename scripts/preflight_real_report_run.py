@@ -31,6 +31,7 @@ from scripts import (
     check_wrr_claim_readiness_doc,
     check_wrr_cross_pair_grid_doc,
     check_wrr_defined_diagnostic_docs,
+    check_wrr_direct_all_lanes_doc,
     check_wrr_dw_formula_sensitivity_doc,
     check_wrr_lock_options_doc,
     check_wrr_method_status_doc,
@@ -172,6 +173,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_METHODOLOGY_GAPS.md",
     "docs/WRR_CORRECTED_DISTANCE_NOTES.md",
     "docs/WRR_CROSS_PAIR_GRID.md",
+    "docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md",
     "docs/WRR_CLAIM_READINESS.md",
     "docs/WRR_CLAIM_BLOCKER_PACKET.md",
     "docs/WRR_SOURCE_POLICY_SCENARIOS.md",
@@ -362,6 +364,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/analyze_wrr_corrected_distance_aggregate.py",
     "scripts/analyze_wrr_cross_pair_permutations.py",
     "scripts/check_wrr_cross_pair_grid_doc.py",
+    "scripts/check_wrr_direct_all_lanes_doc.py",
     "scripts/analyze_wrr_defined_pair_set.py",
     "scripts/analyze_wrr_defined_gap_reasons.py",
     "scripts/analyze_wrr_variant_gap_impact.py",
@@ -607,6 +610,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_cross_pair_grid_doc_failures)
         )
 
+    wrr_direct_all_lanes_doc_failures = (
+        check_wrr_direct_all_lanes_doc.validate_direct_all_lanes_doc(
+            check_wrr_direct_all_lanes_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_direct_all_lanes_doc_failures:
+        failures.append(
+            "WRR direct all-lane doc failures: "
+            + "; ".join(wrr_direct_all_lanes_doc_failures)
+        )
+
     wrr_lock_options_doc_failures = (
         check_wrr_lock_options_doc.validate_lock_options_doc(
             check_wrr_lock_options_doc.DEFAULT_DOC
@@ -694,6 +708,7 @@ def main(argv: list[str] | None = None) -> int:
             wrr_source_policy_scenarios_doc_failures
         ),
         "wrr_cross_pair_grid_doc_failures": wrr_cross_pair_grid_doc_failures,
+        "wrr_direct_all_lanes_doc_failures": wrr_direct_all_lanes_doc_failures,
         "wrr_lock_options_doc_failures": wrr_lock_options_doc_failures,
         "wrr_method_status_doc_failures": wrr_method_status_doc_failures,
         "wrr_source_recovery_probe_doc_failures": wrr_source_recovery_probe_doc_failures,

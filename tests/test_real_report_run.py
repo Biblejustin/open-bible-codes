@@ -56,6 +56,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_METHOD_STATUS.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_LOCK_OPTIONS.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_CROSS_PAIR_GRID.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn(
+            "docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("docs/WRR_CLAIM_READINESS.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_CLAIM_BLOCKER_PACKET.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_ZERO_HIT_VARIANT_PROBE.md", steps_by_id["preflight"]["inputs"])
@@ -69,6 +73,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_cross_pair_grid_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_direct_all_lanes_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -298,6 +306,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_METHOD_STATUS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_LOCK_OPTIONS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_CROSS_PAIR_GRID.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn(
+            "docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
         self.assertIn("docs/WRR_CLAIM_READINESS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_CLAIM_BLOCKER_PACKET.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_ZERO_HIT_VARIANT_PROBE.md", preflight.DEFAULT_REQUIRED_PATHS)
@@ -330,6 +342,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_cross_pair_grid_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_direct_all_lanes_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -882,6 +898,30 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "WRR cross-pair grid doc failures: "
                 "docs/WRR_CROSS_PAIR_GRID.md missing diagnostic status",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_direct_all_lanes_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_direct_all_lanes_doc,
+                "validate_direct_all_lanes_doc",
+                return_value=[
+                    "docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md missing diagnostic status"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_direct_all_lanes_doc_failures"],
+                ["docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md missing diagnostic status"],
+            )
+            self.assertIn(
+                "WRR direct all-lane doc failures: "
+                "docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md missing diagnostic status",
                 payload["failures"],
             )
 
