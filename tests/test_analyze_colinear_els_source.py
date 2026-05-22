@@ -133,6 +133,15 @@ class ColinearElsSourceAuditTests(unittest.TestCase):
             {"rows": 108, "duplicate_row_indexes": 0, "missing_row_indexes": ""},
             {"rows": 143, "duplicate_row_indexes": 0, "missing_row_indexes": ""},
         ]
+        appendix_text = (
+            "מטרת המחקר מדידת הנטייה לקרבה "
+            "כל מילה בצמד המילים היא בת 5אותיות לפחות בטווח שבין +2ל+1000- "
+            "7,237מילים 6,060צמדי מילים 52,000,000 "
+            "מילים הזהות למילים שבצמד המילים דומים או מתאימים במשמעותם "
+            "שורש משותף 12,694פסוקים "
+            "1,698זוגות 796צמדים מילה מתאימה "
+            'כללי לשון וכללי התאמת משמעות צמד מילים הוא"ביטוי"'
+        )
         row = {
             "label": "all_1698",
             "expected_rows": 1698,
@@ -160,6 +169,7 @@ class ColinearElsSourceAuditTests(unittest.TestCase):
             roots_summary,
             all_1698_summary,
             review_set_summary,
+            appendix_text,
         )
 
         by_anchor = {anchor["anchor"]: anchor["status"] for anchor in anchors}
@@ -169,6 +179,8 @@ class ColinearElsSourceAuditTests(unittest.TestCase):
         self.assertEqual(by_anchor["all_1698_rows_observed"], "found")
         self.assertEqual(by_anchor["review_sets_502_rows_observed"], "found")
         self.assertEqual(by_anchor["review_sets_502_machine_rows"], "found")
+        self.assertEqual(by_anchor["att_heb_1698_tested_population"], "found")
+        self.assertEqual(by_anchor["att_heb_language_matching_rules"], "found")
 
 
 if __name__ == "__main__":

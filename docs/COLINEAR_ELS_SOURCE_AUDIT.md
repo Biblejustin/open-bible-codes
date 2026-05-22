@@ -38,7 +38,7 @@ statistical test, and not a claim-ready co-linear ELS reproduction.
 
 ## Protocol Anchors
 
-Found anchors: 14 of 14.
+Found anchors: 21 of 21.
 
 | Source | Anchor | Status | Diagnostic |
 | --- | --- | --- | --- |
@@ -56,6 +56,13 @@ Found anchors: 14 of 14.
 | attachments | `all_1698_rows_observed` | found | all_1698 attachment exposes 1,698 source rows |
 | attachments | `review_sets_502_rows_observed` | found | four reviewed subset attachments expose 502 rows |
 | review_sets | `review_sets_502_machine_rows` | found | four reviewed subset PDFs extracted to 502 raw rows |
+| att_heb | `att_heb_research_goal` | found | Hebrew appendix states the research goal |
+| att_heb | `att_heb_pair_population_rules` | found | Hebrew appendix states word-pair population rules |
+| att_heb | `att_heb_pair_population_counts` | found | Hebrew appendix states source word and PLS pair counts |
+| att_heb | `att_heb_identical_word_screen` | found | Hebrew appendix explains the identical-word verse screen |
+| att_heb | `att_heb_root_relaxation_screen` | found | Hebrew appendix explains the shared-root relaxation screen |
+| att_heb | `att_heb_1698_tested_population` | found | Hebrew appendix states the 1,698 tested pair/verse population |
+| att_heb | `att_heb_language_matching_rules` | found | Hebrew appendix introduces phrase and meaning-match rules |
 
 ## Use Boundary
 
@@ -64,4 +71,5 @@ future co-linear ELS/verse protocol. This audit only records file coverage,
 protocol anchors, table row counts, raw PLS pair rows, raw roots rows,
 raw all_1698 phrase/verse rows, and raw reviewed subset rows. It does
 not normalize Hebrew terms, select roots, compute ELSs, score verse
-links, or evaluate controls.
+links, or evaluate controls. The att_heb appendix anchors document
+method statements only.

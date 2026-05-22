@@ -223,6 +223,7 @@ def main(argv: list[str] | None = None) -> int:
     all_1698_summary = summarize_all_1698_rows(all_1698_rows)
     review_set_rows = parse_review_set_rows(attachments)
     review_set_summary = summarize_review_set_rows(review_set_rows)
+    appendix_text = extract_pdf_text(att_heb_attachment_path(attachments))
     summary = build_summary(
         args,
         paper_text,
@@ -241,6 +242,7 @@ def main(argv: list[str] | None = None) -> int:
         roots_summary,
         all_1698_summary,
         review_set_summary,
+        appendix_text,
     )
     write_csv(args.out, ATTACHMENT_FIELDNAMES, rows)
     write_csv(args.pls_pairs_out, PLS_FIELDNAMES, pls_pairs)
@@ -357,6 +359,13 @@ def all_1698_attachment_path(paths: list[Path]) -> Path:
         if attachment_label(path) == "all_1698":
             return path
     raise ValueError("missing all_1698 attachment PDF")
+
+
+def att_heb_attachment_path(paths: list[Path]) -> Path:
+    for path in paths:
+        if attachment_label(path) == "att_heb":
+            return path
+    raise ValueError("missing att_heb attachment PDF")
 
 
 def parse_pls_pairs(path: Path) -> list[dict[str, object]]:
@@ -683,8 +692,11 @@ def protocol_anchors(
     roots_summary: dict[str, object],
     all_1698_summary: dict[str, object],
     review_set_summary: list[dict[str, object]],
+    appendix_text: str,
 ) -> list[dict[str, str]]:
     paper = normalize_space(clean_text(paper_text))
+    appendix = normalize_space(clean_text(appendix_text))
+    appendix_compact = appendix.replace(" ", "")
     by_label = {str(row["label"]): row for row in rows}
     checks = [
         (
@@ -782,6 +794,72 @@ def protocol_anchors(
             and all(not row["missing_row_indexes"] for row in review_set_summary),
             "four reviewed subset PDFs extracted to 502 raw rows",
         ),
+        (
+            "att_heb",
+            "att_heb_research_goal",
+            all(
+                needle in appendix_compact
+                for needle in ("מטרתהמחקר", "מדידתהנטייהלקרבה")
+            ),
+            "Hebrew appendix states the research goal",
+        ),
+        (
+            "att_heb",
+            "att_heb_pair_population_rules",
+            all(
+                needle in appendix_compact
+                for needle in (
+                    "כלמילהבצמדהמיליםהיאבת5אותיותלפחות",
+                    "בטווחשבין+2ל+1000-",
+                )
+            ),
+            "Hebrew appendix states word-pair population rules",
+        ),
+        (
+            "att_heb",
+            "att_heb_pair_population_counts",
+            all(
+                needle in appendix_compact
+                for needle in ("7,237מילים", "6,060צמדימילים", "52,000,000")
+            ),
+            "Hebrew appendix states source word and PLS pair counts",
+        ),
+        (
+            "att_heb",
+            "att_heb_identical_word_screen",
+            all(
+                needle in appendix_compact
+                for needle in (
+                    "מיליםהזהותלמיליםשבצמדהמילים",
+                    "דומיםאומתאימיםבמשמעותם",
+                )
+            ),
+            "Hebrew appendix explains the identical-word verse screen",
+        ),
+        (
+            "att_heb",
+            "att_heb_root_relaxation_screen",
+            all(needle in appendix_compact for needle in ("שורשמשותף", "12,694פסוקים")),
+            "Hebrew appendix explains the shared-root relaxation screen",
+        ),
+        (
+            "att_heb",
+            "att_heb_1698_tested_population",
+            all(
+                needle in appendix_compact
+                for needle in ("1,698זוגות", "796צמדים", "מילהמתאימה")
+            ),
+            "Hebrew appendix states the 1,698 tested pair/verse population",
+        ),
+        (
+            "att_heb",
+            "att_heb_language_matching_rules",
+            all(
+                needle in appendix_compact
+                for needle in ("כללילשוןוכלליהתאמתמשמעות", 'צמדמיליםהוא"ביטוי"')
+            ),
+            "Hebrew appendix introduces phrase and meaning-match rules",
+        ),
     ]
     return [
         {
@@ -863,7 +941,8 @@ def write_markdown(
             "protocol anchors, table row counts, raw PLS pair rows, raw roots rows,",
             "raw all_1698 phrase/verse rows, and raw reviewed subset rows. It does",
             "not normalize Hebrew terms, select roots, compute ELSs, score verse",
-            "links, or evaluate controls.",
+            "links, or evaluate controls. The att_heb appendix anchors document",
+            "method statements only.",
         ]
     )
     path.parent.mkdir(parents=True, exist_ok=True)
