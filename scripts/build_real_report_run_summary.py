@@ -1346,6 +1346,7 @@ def write_summary(
             "- `docs/WRR_LOCK_OPTIONS.md`",
             "- `docs/WRR_CLAIM_READINESS.md`",
             "- `docs/WRR_CLAIM_BLOCKER_PACKET.md`",
+            "- `docs/WRR_SOURCE_POLICY_SCENARIOS.md`",
             "- `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`",
             "- `docs/STUDY_LOCK_MANIFESTS.md`",
             "- `docs/PROSPECTIVE_STUDY_PREREGISTRATION_TEMPLATE.md`",
@@ -3492,6 +3493,8 @@ def wrr_audit_section(
         "source-locked pair set and source-locked `D(w)` before claim-grade WRR",
         "language is possible. The claim-blocker packet gathers the current",
         "readiness blockers, lock options, and WNP/context source-review flags.",
+        "The source-policy scenario report counts diagnostic exclusion/review",
+        "impacts without selecting a policy.",
     ]
     return lines
 

@@ -853,6 +853,30 @@ outputs = [
 ]
 
 [[steps]]
+id = "analyze_wrr_source_policy_scenarios"
+description = "Count diagnostic source-policy scenario impacts without selecting a policy."
+argv = [
+  "-m", "scripts.analyze_wrr_source_policy_scenarios",
+  "--pair-table", "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "--source-queue", "reports/wrr_1994/wrr_source_review_queue.csv",
+  "--out", "reports/wrr_1994/wrr_source_policy_scenarios.csv",
+  "--pair-out", "reports/wrr_1994/wrr_source_policy_scenario_pairs.csv",
+  "--markdown-out", "docs/WRR_SOURCE_POLICY_SCENARIOS.md",
+  "--manifest-out", "reports/wrr_1994/wrr_source_policy_scenarios.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_source_policy_scenarios.py",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "reports/wrr_1994/wrr_source_review_queue.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_source_policy_scenarios.csv",
+  "reports/wrr_1994/wrr_source_policy_scenario_pairs.csv",
+  "docs/WRR_SOURCE_POLICY_SCENARIOS.md",
+  "reports/wrr_1994/wrr_source_policy_scenarios.manifest.json",
+]
+
+[[steps]]
 id = "build_wrr_method_status"
 description = "Summarize current WRR locks, open method decisions, and next actions."
 argv = [

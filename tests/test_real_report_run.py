@@ -34,6 +34,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertTrue(steps_by_id["real_report_summary"]["always_run"])
         self.assertIn("wrr_audit_counts", steps_by_id)
         self.assertIn("wrr_cross_pair_grid", steps_by_id)
+        self.assertIn(
+            "scripts/analyze_wrr_source_policy_scenarios.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
         self.assertIn("scripts/release_hygiene.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_public_release_hygiene.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_REPLICATION_PLAN.md", steps_by_id["preflight"]["inputs"])
@@ -42,6 +46,11 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_CROSS_PAIR_GRID.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_CLAIM_READINESS.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_CLAIM_BLOCKER_PACKET.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn("docs/WRR_SOURCE_POLICY_SCENARIOS.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn(
+            "scripts/analyze_wrr_source_policy_scenarios.py",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("claims/claim_catalog.csv", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/CLAIM_CATALOG.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("configs/prospective_study_lanes.json", steps_by_id["preflight"]["inputs"])
@@ -176,6 +185,11 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_CROSS_PAIR_GRID.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_CLAIM_READINESS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_CLAIM_BLOCKER_PACKET.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/WRR_SOURCE_POLICY_SCENARIOS.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn(
+            "scripts/analyze_wrr_source_policy_scenarios.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
         self.assertIn("scripts/release_hygiene.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_public_release_hygiene.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("claims/claim_catalog.csv", preflight.DEFAULT_REQUIRED_PATHS)
