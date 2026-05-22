@@ -710,8 +710,8 @@ The preflight now also validates source-basis metadata, expanded-strata tooling
 references, future study-mapping CSV schemas, and concrete preregistration
 placeholder cleanup, plus the locked CRD relevance-dictionary basis before
 summary assembly. It also checks the manual-review queue guardrails and
-evidence links, plus the WRR lock-options, readiness, and blocker-packet
-wording.
+evidence links, plus the WRR method-status, lock-options, readiness, and
+blocker-packet wording.
 
 Resume without rerunning completed outputs:
 

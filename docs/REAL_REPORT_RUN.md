@@ -138,6 +138,8 @@ It requires:
 - CRD relevance dictionary, term coverage, reviewer metadata, and protocol
   hash lock are still consistent with the centered-relevance protocol;
 - manual-review queue keeps required non-claim guardrails and evidence links;
+- WRR method-status doc keeps local locks separated from open blockers and
+  diagnostic-only rows;
 - WRR lock-options doc remains a decision aid rather than a method lock;
 - WRR claim-readiness doc still carries blocked status and all four blocker
   areas until source/method locks change;

@@ -12,7 +12,8 @@ queue validation, source-basis validation documentation, and formal preflight
 metadata-check documentation, study-tooling preflight coverage, and
 preregistration placeholder guarding, CRD relevance-lock guarding,
 manual-review queue preflight guarding, WRR readiness-doc guarding, WRR
-blocker-packet preflight guarding, and WRR lock-options preflight guarding.
+blocker-packet preflight guarding, WRR lock-options preflight guarding, and
+WRR method-status preflight guarding.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -118,6 +119,8 @@ Current pushed commits for this cleanup:
 - `d1aacc2` Refresh WRR blocker packet guard status.
 - `123ca07` Guard WRR lock options in preflight.
 - `71c6465` Document WRR lock options guard.
+- `9c28769` Refresh WRR lock options guard status.
+- `c9b1cf3` Guard WRR method status in preflight.
 
 ### Formal Real Report Rerun
 
@@ -498,12 +501,14 @@ source-basis validation documentation, plus formal preflight metadata-check
 documentation, study-tooling preflight coverage, and preregistration
 placeholder guarding, CRD relevance-lock guarding, manual-review queue
 preflight guarding, WRR readiness-doc guarding, WRR blocker-packet preflight
-guarding, and WRR lock-options preflight guarding:
+guarding, WRR lock-options preflight guarding, and WRR method-status preflight
+guarding:
 
-- `python3 -m pytest -q` passed: 1175 tests and 13951 subtests.
+- `python3 -m pytest -q` passed: 1180 tests and 13951 subtests.
 - `python3 -m pytest tests/test_check_wrr_claim_readiness_doc.py tests/test_real_report_run.py -q` passed: 38 tests.
 - `python3 -m pytest tests/test_check_wrr_claim_blocker_packet_doc.py tests/test_real_report_run.py -q` passed: 39 tests.
 - `python3 -m pytest tests/test_check_wrr_lock_options_doc.py tests/test_real_report_run.py -q` passed: 40 tests.
+- `python3 -m pytest tests/test_check_wrr_method_status_doc.py tests/test_real_report_run.py -q` passed: 41 tests.
 - `python3 -m pytest tests/test_check_manual_review_queue.py tests/test_real_report_run.py -q` passed: 37 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_crd_dictionary_tools.py -q` passed: 40 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_check_preregistration_placeholders.py -q` passed: 36 tests.
@@ -519,6 +524,7 @@ guarding, and WRR lock-options preflight guarding:
 - `python3 -m scripts.check_wrr_claim_readiness_doc` passed.
 - `python3 -m scripts.check_wrr_claim_blocker_packet_doc` passed.
 - `python3 -m scripts.check_wrr_lock_options_doc` passed.
+- `python3 -m scripts.check_wrr_method_status_doc` passed.
 - `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_claim_catalog.py tests/test_wrr_claim_readiness.py -q` passed: 32 tests and 60 subtests.
 - `python3 -m pytest tests/test_real_report_run.py -q` passed: 25 tests.
@@ -535,6 +541,7 @@ guarding, and WRR lock-options preflight guarding:
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wrr_readiness_doc.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wrr_blocker_packet_doc.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wrr_lock_options_doc.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wrr_method_status_doc.json` passed.
 - `python3 -m scripts.check_prospective_study_lanes` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
