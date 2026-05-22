@@ -31,6 +31,16 @@ edition documentation.
 | BibleGateway English versions | 64 | 0 | 64 |
 | eBible English controls | 37 | 0 | 37 |
 
+## Validation
+
+```bash
+python3 -m scripts.check_source_basis_audit_queue
+```
+
+The formal report preflight also runs this check and fails if manifest counts
+drift from this document, source metadata is malformed, or `needs_audit` rows
+return without explicitly changing the validation policy.
+
 ## BibleGateway Rows Needing Audit
 
 None after this pass.

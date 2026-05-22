@@ -85,6 +85,12 @@ introductions before being used in public argumentation. For ELS work they are
 mainly grouping fields: for example KJV/TR-family, modern critical, Vulgate,
 Catholic critical, Byzantine/Majority, paraphrase, or NT-only.
 
+Validate current source-basis metadata and queue counts with:
+
+```bash
+python3 -m scripts.check_source_basis_audit_queue
+```
+
 ## Local File Layout
 
 Expected files:
