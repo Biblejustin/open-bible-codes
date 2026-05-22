@@ -10,7 +10,12 @@ class WrrClaimReadinessTests(unittest.TestCase):
     def test_readiness_rows_flags_current_open_statuses(self) -> None:
         rows = check.readiness_rows(
             [
-                {"decision_area": "Pair universe", "status": "open"},
+                {
+                    "decision_area": "Pair universe",
+                    "status": "open",
+                    "current_read": "pair universe open",
+                    "evidence": "source-policy evidence",
+                },
                 {"decision_area": "D(w) skip-cap formula", "status": "open"},
                 {"decision_area": "Corrected distance c(w,w')", "status": "smoke_only"},
                 {
@@ -23,6 +28,8 @@ class WrrClaimReadinessTests(unittest.TestCase):
         self.assertFalse(check.all_ready(rows))
         self.assertEqual([row["ready"] for row in rows], ["false"] * 4)
         self.assertIn("status open is not claim-ready", rows[0]["blocker"])
+        self.assertEqual(rows[0]["current_read"], "pair universe open")
+        self.assertEqual(rows[0]["evidence"], "source-policy evidence")
 
     def test_readiness_rows_accepts_locked_statuses(self) -> None:
         rows = check.readiness_rows(
@@ -88,12 +95,16 @@ class WrrClaimReadinessTests(unittest.TestCase):
 
             self.assertEqual(rc, 0)
             self.assertEqual(fail_rc, 1)
-            self.assertIn("Status: blocked", markdown.read_text(encoding="utf-8"))
+            text = markdown.read_text(encoding="utf-8")
+            self.assertIn("Status: blocked", text)
+            self.assertIn("Current read", text)
+            self.assertIn("Pair universe: status open is not claim-ready", text)
 
 
 def write_status_rows(path: Path, rows: list[dict[str, str]]) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["decision_area", "status"])
+        fieldnames = sorted({field for row in rows for field in row})
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(rows)
 

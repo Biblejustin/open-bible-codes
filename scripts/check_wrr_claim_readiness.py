@@ -30,6 +30,8 @@ FIELDNAMES = [
     "status",
     "required_statuses",
     "ready",
+    "current_read",
+    "evidence",
     "blocker",
 ]
 
@@ -78,7 +80,8 @@ def readiness_rows(status_rows: list[dict[str, str]]) -> list[dict[str, str]]:
     by_area = {row.get("decision_area", ""): row for row in status_rows}
     rows: list[dict[str, str]] = []
     for area, allowed_statuses in REQUIRED_AREAS.items():
-        status = by_area.get(area, {}).get("status", "")
+        status_row = by_area.get(area, {})
+        status = status_row.get("status", "")
         ready = status in allowed_statuses
         required = ",".join(sorted(allowed_statuses))
         rows.append(
@@ -87,6 +90,8 @@ def readiness_rows(status_rows: list[dict[str, str]]) -> list[dict[str, str]]:
                 "status": status,
                 "required_statuses": required,
                 "ready": str(ready).lower(),
+                "current_read": status_row.get("current_read", ""),
+                "evidence": status_row.get("evidence", ""),
                 "blocker": "" if ready else blocker_text(area, status, required),
             }
         )
@@ -135,8 +140,8 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
         "",
         "## Gate",
         "",
-        "| Area | Current status | Required status | Ready | Blocker |",
-        "| --- | --- | --- | --- | --- |",
+        "| Area | Current status | Required status | Ready | Current read | Evidence | Blocker |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
     ]
     for row in rows:
         lines.append(
@@ -147,6 +152,8 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
                     f"`{markdown_cell(row['status'])}`",
                     f"`{markdown_cell(row['required_statuses'])}`",
                     f"`{row['ready']}`",
+                    markdown_cell(row["current_read"]),
+                    markdown_cell(row["evidence"]),
                     markdown_cell(row["blocker"]),
                 ]
             )
