@@ -36,8 +36,9 @@ current WRR repo-defined diagnostic status, validates prospective-lane and
 English source-basis metadata, validates expanded-strata tooling docs, future
 study-mapping CSV schemas, and concrete preregistration placeholder cleanup,
 checks the locked CRD relevance dictionary basis, verifies manual-review queue
-guardrails, keeps WRR claim-readiness blocker wording visible, builds the
-generated report index, and writes `reports/real_report_run/summary.md`.
+guardrails, keeps WRR claim-readiness and blocker-packet wording visible,
+builds the generated report index, and writes
+`reports/real_report_run/summary.md`.
 Tracked plan: `docs/REAL_REPORT_RUN.md`.
 
 Run one step:

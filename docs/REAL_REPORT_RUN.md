@@ -140,6 +140,8 @@ It requires:
 - manual-review queue keeps required non-claim guardrails and evidence links;
 - WRR claim-readiness doc still carries blocked status and all four blocker
   areas until source/method locks change;
+- WRR claim-blocker packet still states no-input limits, open method decisions,
+  and no pair-exclusion or `D(w)` formula choice;
 - checked-in `docs/INDEX.md` and `protocols/INDEX.md` freshness;
 - existing generated inputs needed by the final gates.
 
