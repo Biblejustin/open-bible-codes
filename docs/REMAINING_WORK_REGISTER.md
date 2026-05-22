@@ -58,6 +58,9 @@ Current pushed commits for this cleanup:
 - `fc07423` Link WRR readiness gate in reports.
 - `59cce62` Gate WRR claim catalog on readiness.
 - `cb24ceb` Require WRR readiness in report preflight.
+- `4b792d4` Surface WRR diagnostic in real report run.
+- `d23b87d` Refresh WRR status after cross-pair diagnostics.
+- `ac86fb5` Refresh all-codes reports with Hebrew theology DB.
 
 ### Formal Real Report Rerun
 
@@ -70,8 +73,8 @@ python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
 Current summary:
 
 - `reports/real_report_run/summary.md`
-- generated UTC: `2026-05-19T19:20:50.699053+00:00`
-- report commit recorded by the protocol: `b637bd5`
+- generated UTC: `2026-05-22T02:10:57.999252+00:00`
+- report commit recorded by the protocol: `ac86fb5`
 
 ### Reader Report Refresh
 
@@ -164,10 +167,12 @@ WRR aggregate work now has a diagnostic P1..P4 bridge:
 Current read: the length-5..8 direct-search corrected-distance smoke output has
 28 defined `c(w,w')` values at cap 250 and 46 defined values in the cap-1000
 split diagnostic, so P1..P4 diagnostic rows now populate. The cross-pair
-cap-250 matrix now also supports a 1,000-sample date-label permutation
-diagnostic with observed same-record rho0 `0.003996003996`. The readiness gate
-still stays blocked until pair universe, `D(w)`, full corrected distance, and
-claim-grade permutation/aggregate statuses are locked.
+cap-250 matrix now also supports two date-label permutation diagnostics: the
+older 1,000-sample all-row diagnostic and the current repo-defined
+WNP-excluded 999,999-permutation diagnostic. The current repo-defined run has
+174 observed rows, 48 defined `c(w,w')` values, and Bonferroni rho0 `0.00086`.
+The readiness gate still stays blocked until pair universe, `D(w)`, full
+corrected distance, and claim-grade permutation/aggregate statuses are locked.
 
 All-lane diagnostic follow-up now exists:
 `protocols/wrr_corrected_distance_direct_all_lanes.toml` and

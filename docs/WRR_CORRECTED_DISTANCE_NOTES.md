@@ -196,8 +196,10 @@ Already implemented:
   imported appellations against 31 imported date rows, defines 1,423 corrected
   distances over 5,208 generated rows, and ranks the 50 defined observed
   same-record distances against 1,000 sampled date-label permutations with
-  diagnostic rho0 `0.003996003996`. This is not the claim-grade WRR
-  999,999-permutation run; see `docs/WRR_CROSS_PAIR_GRID.md`.
+  diagnostic rho0 `0.003996003996`. The current repo-defined WNP-excluded
+  999,999-permutation diagnostic ranks 48 defined observed c-values over 174
+  observed rows at Bonferroni rho0 `0.00086`. Both are still diagnostic-only;
+  see `docs/WRR_CROSS_PAIR_GRID.md`.
 - exploratory all-lane corrected-distance diagnostics over all 182 imported
   same-record pairs were run before direct perturbed-letter search and should be
   treated as obsolete historical diagnostics until rerun with the current

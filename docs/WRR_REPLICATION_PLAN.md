@@ -109,7 +109,9 @@ Already implemented:
   Current cap-250 diagnostic output defines 1,423 corrected distances over
   5,208 generated rows. The 1,000-sample date-label permutation diagnostic
   ranks the 50 defined observed same-record distances at Bonferroni rho0
-  `0.003996003996`; see `docs/WRR_CROSS_PAIR_GRID.md`.
+  `0.003996003996`. The current repo-defined WNP-excluded 999,999-permutation
+  diagnostic ranks 48 defined observed c-values over 174 observed rows at
+  Bonferroni rho0 `0.00086`; see `docs/WRR_CROSS_PAIR_GRID.md`.
 - WRR claim-readiness gate in `scripts/check_wrr_claim_readiness.py`, wired
   into `protocols/wrr_audit_counts.toml`, keeping reproduction language blocked
   until pair universe, `D(w)`, full corrected distance, and permutation/aggregate

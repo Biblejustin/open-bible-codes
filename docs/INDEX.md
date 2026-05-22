@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 303
+Documents indexed: 306
 
 ## Controls
 
@@ -92,10 +92,13 @@ Documents indexed: 303
 | ELS Hypothesis Analysis Framework | `HYPOTHESIS_ANALYSIS_FRAMEWORK.md` |
 | WRR Claim Readiness | `WRR_CLAIM_READINESS.md` |
 | WRR Corrected Distance Notes | `WRR_CORRECTED_DISTANCE_NOTES.md` |
+| WRR Cross-Pair Grid | `WRR_CROSS_PAIR_GRID.md` |
+| WRR Direct All-Lane Corrected-Distance Diagnostic | `WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md` |
 | WRR Methodology Gaps | `WRR_METHODOLOGY_GAPS.md` |
 | WRR Method Status | `WRR_METHOD_STATUS.md` |
 | WRR 1994 Replication Plan | `WRR_REPLICATION_PLAN.md` |
 | WRR Source Audit | `WRR_SOURCE_AUDIT.md` |
+| WRR Windows Split Run | `WRR_WINDOWS_SPLIT.md` |
 
 ## Preregistrations
 
