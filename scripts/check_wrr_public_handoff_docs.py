@@ -14,7 +14,9 @@ REQUIRED_PHRASES_BY_DOC = {
         "WRR source-policy review checklist:",
         "WRR source-transcription row review checklist:",
         "WRR remaining-lane review checklist:",
+        "WRR manual decision register:",
         "Chełm source-policy/pair-rule target in pending manual lock state",
+        "37 pending manual-lock rows representing 58 action terms, 59 residual pair links, and 40 minimum-frontier pair links",
         "pending manual source-lock state and required decision-record fields",
         "pending manual lock state with required decision-record fields",
         "source-transcription row clusters, page-image near-match terms, and method/pair-universe counts",
@@ -26,6 +28,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "WRR source-policy checklist keeps the Chełm source-policy/pair-rule target in pending manual lock state",
         "WRR source-transcription row checklist keeps the 22 row clusters in pending manual source-lock state",
         "WRR remaining-lane checklist keeps 3 page-image terms and 11 method/pair-universe terms in pending manual lock states",
+        "WRR manual decision register consolidates 37 pending manual-lock rows",
         "no-input handoff with term targets, source-transcription row clusters, page-image near matches, and method/pair-universe counts",
     ),
     Path("docs/FINAL_REPORT.md"): (
@@ -35,6 +38,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "source-policy checklist keeps the Chełm source-policy/pair-rule target in pending manual lock state",
         "row-review checklist keeps the 22 source-transcription row clusters in pending manual source-lock state",
         "remaining-lane checklist keeps the 3 page-image near-match terms and 11 method/pair-universe terms in pending manual lock state",
+        "manual decision register consolidates 37 pending manual-lock rows representing 58 action terms, 59 residual pair links, and 40 minimum-frontier pair links",
     ),
     Path("docs/FINAL_REPORT_DRAFT.md"): (
         "The residual handoff is packetized without selecting corrections",
@@ -43,6 +47,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "source-policy checklist keeps the Chełm source-policy/pair-rule target in pending manual lock state",
         "row-review checklist keeps the 22 source-transcription row clusters in pending manual source-lock state",
         "remaining-lane checklist keeps the 3 page-image near-match terms and 11 method/pair-universe terms in pending manual lock state",
+        "manual decision register consolidates 37 pending manual-lock rows representing 58 action terms, 59 residual pair links, and 40 minimum-frontier pair links",
     ),
     Path("docs/FINAL_REPORT_OUTLINE.md"): (
         "43 source-transcription terms, 3 page-image near-match terms, and 11 method/pair-universe terms",
@@ -50,6 +55,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "source-policy checklist keeps the Chełm source-policy/pair-rule target in pending manual lock state",
         "row-review checklist keeps 22 row clusters in pending manual source-lock state",
         "remaining-lane checklist keeps 3 page-image terms and 11 method/pair-universe terms in pending manual lock state",
+        "manual decision register consolidates 37 pending manual-lock rows representing 58 action terms",
         "exact published WRR reproduction remains caveated by source-transcription limits and the 163-distance gap",
     ),
     Path("docs/CONSOLIDATED_FINDINGS.md"): (
@@ -59,6 +65,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "source-policy checklist keeps the Chełm source-policy/pair-rule target in pending manual lock state",
         "row-review checklist keeps the 22 source-transcription row clusters in pending manual source-lock state",
         "remaining-lane checklist keeps the 3 page-image near-match terms and 11 method/pair-universe terms in pending manual lock state",
+        "manual decision register consolidates 37 pending manual-lock rows representing 58 action terms, 59 residual pair links, and 40 minimum-frontier pair links",
     ),
     Path("docs/REMAINING_WORK_REGISTER.md"): (
         "source-transcription row cluster summary, page-image near-match lane, and method/pair-universe summary",
@@ -66,6 +73,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "Chełm source-policy/pair-rule target in pending manual lock state",
         "22 row clusters in pending manual source-lock state",
         "14 remaining-lane terms in pending page-image and method/pair-universe lock state",
+        "37 pending manual-lock rows",
         "row-level review order, and page-image review boundary",
     ),
 }

@@ -504,6 +504,12 @@ pair-universe evidence is locked.
 terms in pending page-image and method/pair-universe lock state, preserving
 required decision-record fields without selecting source edits, method
 changes, or pair exclusions.
+`docs/WRR_MANUAL_DECISION_REGISTER.md` consolidates all 37 pending manual-lock
+rows: 1 source-policy/pair-rule row, 22 source-transcription row clusters, 3
+page-image near-match rows, and 11 method/pair-universe rows. It represents 58
+action terms, 59 residual pair links, and 40 minimum-frontier pair links
+without selecting source edits, row transcriptions, method changes, or pair
+exclusions.
 `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` now splits out the 11
 method-lane terms: all are OCR-matched, all have zero skip-250 appellation
 counts, all have zero high-cap appellation ordinary hits, and 2 pairs have zero

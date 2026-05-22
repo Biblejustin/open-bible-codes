@@ -347,7 +347,9 @@ with required decision-record fields. The row-review checklist keeps the 22
 source-transcription row clusters in pending manual source-lock state with
 required decision-record fields. The remaining-lane checklist keeps the 3
 page-image near-match terms and 11 method/pair-universe terms in pending manual
-lock state with required decision-record fields.
+lock state with required decision-record fields. The manual decision register
+consolidates 37 pending manual-lock rows representing 58 action terms, 59
+residual pair links, and 40 minimum-frontier pair links.
 
 ## Negative And Weak Results
 

@@ -1129,6 +1129,32 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_manual_decision_register"
+description = "Build consolidated no-input register for WRR manual-lock decisions."
+argv = [
+  "-m", "scripts.build_wrr_manual_decision_register",
+  "--source-policy", "reports/wrr_1994/wrr_source_policy_review_checklist.csv",
+  "--row-checklist", "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv",
+  "--remaining", "reports/wrr_1994/wrr_remaining_lane_review_checklist.csv",
+  "--out", "reports/wrr_1994/wrr_manual_decision_register.csv",
+  "--summary-out", "reports/wrr_1994/wrr_manual_decision_register_summary.csv",
+  "--markdown-out", "docs/WRR_MANUAL_DECISION_REGISTER.md",
+  "--manifest-out", "reports/wrr_1994/wrr_manual_decision_register.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_manual_decision_register.py",
+  "reports/wrr_1994/wrr_source_policy_review_checklist.csv",
+  "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv",
+  "reports/wrr_1994/wrr_remaining_lane_review_checklist.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_manual_decision_register.csv",
+  "reports/wrr_1994/wrr_manual_decision_register_summary.csv",
+  "docs/WRR_MANUAL_DECISION_REGISTER.md",
+  "reports/wrr_1994/wrr_manual_decision_register.manifest.json",
+]
+
+[[steps]]
 id = "build_wrr_method_pair_universe_evidence_packet"
 description = "Build diagnostic evidence packet for WRR OCR-matched method/pair-universe residuals."
 argv = [

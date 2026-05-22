@@ -34,6 +34,7 @@ from scripts import (
     check_wrr_direct_all_lanes_doc,
     check_wrr_dw_formula_sensitivity_doc,
     check_wrr_lock_options_doc,
+    check_wrr_manual_decision_register_doc,
     check_wrr_method_status_doc,
     check_wrr_public_handoff_docs,
     check_wrr_residual_reconciliation_action_plan_doc,
@@ -205,6 +206,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md",
     "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md",
     "docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md",
+    "docs/WRR_MANUAL_DECISION_REGISTER.md",
     "docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md",
     "docs/WRR_SOURCE_POLICY_SCENARIOS.md",
     "docs/WRR_DW_FORMULA_SENSITIVITY.md",
@@ -418,6 +420,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_remaining_lane_evidence_packets_doc.py",
     "scripts/build_wrr_remaining_lane_review_checklist.py",
     "scripts/check_wrr_remaining_lane_review_checklist_doc.py",
+    "scripts/build_wrr_manual_decision_register.py",
+    "scripts/check_wrr_manual_decision_register_doc.py",
     "scripts/build_wrr_method_pair_universe_evidence_packet.py",
     "scripts/check_wrr_method_pair_universe_evidence_packet_doc.py",
     "scripts/check_wrr_source_policy_scenarios_doc.py",
@@ -740,6 +744,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_remaining_lane_review_checklist_doc_failures)
         )
 
+    wrr_manual_decision_register_doc_failures = (
+        check_wrr_manual_decision_register_doc.validate_manual_decision_register_doc(
+            check_wrr_manual_decision_register_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_manual_decision_register_doc_failures:
+        failures.append(
+            "WRR manual decision register failures: "
+            + "; ".join(wrr_manual_decision_register_doc_failures)
+        )
+
     wrr_method_pair_universe_evidence_packet_doc_failures = (
         check_wrr_method_pair_universe_evidence_packet_doc.validate_method_pair_universe_evidence_packet_doc(
             check_wrr_method_pair_universe_evidence_packet_doc.DEFAULT_DOC
@@ -913,6 +928,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "wrr_remaining_lane_review_checklist_doc_failures": (
             wrr_remaining_lane_review_checklist_doc_failures
+        ),
+        "wrr_manual_decision_register_doc_failures": (
+            wrr_manual_decision_register_doc_failures
         ),
         "wrr_method_pair_universe_evidence_packet_doc_failures": (
             wrr_method_pair_universe_evidence_packet_doc_failures

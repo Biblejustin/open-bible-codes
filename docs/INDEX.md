@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 343
+Documents indexed: 344
 
 ## Controls
 
@@ -102,6 +102,7 @@ Documents indexed: 343
 | WRR Direct All-Lane Corrected-Distance Diagnostic | `WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md` |
 | WRR D(w) Formula Sensitivity | `WRR_DW_FORMULA_SENSITIVITY.md` |
 | WRR Lock Options | `WRR_LOCK_OPTIONS.md` |
+| WRR Manual Decision Register | `WRR_MANUAL_DECISION_REGISTER.md` |
 | WRR Methodology Gaps | `WRR_METHODOLOGY_GAPS.md` |
 | WRR Method/Pair-Universe Evidence Packet | `WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` |
 | WRR Method Status | `WRR_METHOD_STATUS.md` |

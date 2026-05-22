@@ -173,7 +173,9 @@ Use cautious language:
   target in pending manual lock state, and the row-review checklist keeps 22
   row clusters in pending manual source-lock state; the remaining-lane
   checklist keeps 3 page-image terms and 11 method/pair-universe terms in
-  pending manual lock state;
+  pending manual lock state; the manual decision register consolidates 37
+  pending manual-lock rows representing 58 action terms, 59 residual pair
+  links, and 40 minimum-frontier pair links;
 - current accepted repo-defined 999,999 date-label permutation result keeps the
   selected full source universe, uses the cap-1000 corrected-distance field,
   observes 182 rows and 72 defined `c(w,w')` values, and reports Bonferroni

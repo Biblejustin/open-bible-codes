@@ -669,6 +669,11 @@ WRR remaining-lane review checklist:
 `docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md`.
 It keeps 3 page-image terms and 11 method/pair-universe terms in pending
 manual lock state with required decision-record fields.
+WRR manual decision register:
+`docs/WRR_MANUAL_DECISION_REGISTER.md`.
+It consolidates 37 pending manual-lock rows representing 58 action terms, 59
+residual pair links, and 40 minimum-frontier pair links without choosing
+corrections or exclusions.
 WRR method/pair-universe evidence packet:
 `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md`.
 It isolates the 11 OCR-matched method-lane terms: all have zero skip-250

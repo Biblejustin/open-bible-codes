@@ -105,6 +105,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "docs/WRR_MANUAL_DECISION_REGISTER.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md",
             steps_by_id["preflight"]["inputs"],
         )
@@ -157,6 +161,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/build_wrr_remaining_lane_review_checklist.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_wrr_manual_decision_register.py",
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
@@ -220,6 +228,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
+            "reports/wrr_1994/wrr_manual_decision_register_summary.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
@@ -233,6 +245,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_manual_decision_register_summary.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
@@ -285,6 +301,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_remaining_lane_review_checklist_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_manual_decision_register_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -668,6 +688,18 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "docs/WRR_MANUAL_DECISION_REGISTER.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/build_wrr_manual_decision_register.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_manual_decision_register_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -885,6 +917,7 @@ class RealReportRunTests(unittest.TestCase):
             )
             self.assertIn("wrr_source_policy_review_checklist_doc_failures", payload)
             self.assertIn("wrr_remaining_lane_review_checklist_doc_failures", payload)
+            self.assertIn("wrr_manual_decision_register_doc_failures", payload)
             self.assertIn("wrr_lock_options_doc_failures", payload)
             self.assertIn("wrr_method_status_doc_failures", payload)
             self.assertIn("stale_generated_indexes", payload)
@@ -1411,6 +1444,28 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "WRR remaining-lane checklist failures: "
                 "docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md missing boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_manual_decision_register_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_manual_decision_register_doc,
+                "validate_manual_decision_register_doc",
+                return_value=["docs/WRR_MANUAL_DECISION_REGISTER.md missing boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_manual_decision_register_doc_failures"],
+                ["docs/WRR_MANUAL_DECISION_REGISTER.md missing boundary"],
+            )
+            self.assertIn(
+                "WRR manual decision register failures: "
+                "docs/WRR_MANUAL_DECISION_REGISTER.md missing boundary",
                 payload["failures"],
             )
 
