@@ -24,6 +24,9 @@ DEFAULT_TABLE2_ROW_OCR_SUMMARY = Path("reports/wrr_1994/wrr_primary_table2_row_o
 DEFAULT_SKIP_SUMMARY = Path("reports/wrr_1994/wrr2_skip_caps_summary.csv")
 DEFAULT_VARIANTS = Path("reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv")
 DEFAULT_SOURCE_POLICY_SCENARIOS = Path("reports/wrr_1994/wrr_source_policy_scenarios.csv")
+DEFAULT_SOURCE_POLICY_TERM_IMPACTS = Path(
+    "reports/wrr_1994/wrr_source_policy_term_impacts.csv"
+)
 DEFAULT_DW_FORMULA_SENSITIVITY = Path("reports/wrr_1994/wrr_dw_formula_sensitivity.csv")
 DEFAULT_AGGREGATE = Path("reports/wrr_1994/wrr2_corrected_distance_aggregate.csv")
 DEFAULT_CROSS_PAIR_PERMUTATION_SUMMARY = Path(
@@ -101,6 +104,7 @@ def main(argv: list[str] | None = None) -> int:
     skip_row = read_one_row(args.skip_summary)
     variant_rows = read_rows(args.corrected_distance_variants)
     source_policy_rows = read_optional_rows(args.source_policy_scenarios)
+    source_policy_term_impact_rows = read_optional_rows(args.source_policy_term_impacts)
     dw_formula_rows = read_optional_rows(args.dw_formula_sensitivity)
     aggregate_row = read_one_row(args.corrected_distance_aggregate) if args.corrected_distance_aggregate.exists() else None
     cross_pair_permutation_row = read_optional_one_row(
@@ -124,6 +128,7 @@ def main(argv: list[str] | None = None) -> int:
         skip_row,
         variant_rows,
         source_policy_rows,
+        source_policy_term_impact_rows,
         dw_formula_rows,
         primary_result_rows,
         table2_bridge_row,
@@ -158,6 +163,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--skip-summary", type=Path, default=DEFAULT_SKIP_SUMMARY)
     parser.add_argument("--corrected-distance-variants", type=Path, default=DEFAULT_VARIANTS)
     parser.add_argument("--source-policy-scenarios", type=Path, default=DEFAULT_SOURCE_POLICY_SCENARIOS)
+    parser.add_argument(
+        "--source-policy-term-impacts",
+        type=Path,
+        default=DEFAULT_SOURCE_POLICY_TERM_IMPACTS,
+    )
     parser.add_argument("--dw-formula-sensitivity", type=Path, default=DEFAULT_DW_FORMULA_SENSITIVITY)
     parser.add_argument("--corrected-distance-aggregate", type=Path, default=DEFAULT_AGGREGATE)
     parser.add_argument(
@@ -225,6 +235,7 @@ def build_status_rows(
     skip_row: dict[str, str],
     variant_rows: list[dict[str, str]],
     source_policy_rows: list[dict[str, str]] | None = None,
+    source_policy_term_impact_rows: list[dict[str, str]] | None = None,
     dw_formula_rows: list[dict[str, str]] | None = None,
     primary_result_rows: list[dict[str, str]] | None = None,
     table2_bridge_row: dict[str, str] | None = None,
@@ -277,6 +288,7 @@ def build_status_rows(
                 defined_pair_rows or [],
                 defined_gap_reason_rows or [],
                 source_policy_rows or [],
+                source_policy_term_impact_rows or [],
             ),
             "next_action": "Derive final pair set from source-backed corrected-distance eligibility, not raw counts alone.",
         },
@@ -313,6 +325,7 @@ def pair_universe_evidence(
     defined_pair_rows: list[dict[str, str]],
     defined_gap_reason_rows: list[dict[str, str]],
     source_policy_rows: list[dict[str, str]],
+    source_policy_term_impact_rows: list[dict[str, str]],
 ) -> str:
     parts = [
         f"{pair_row.get('source_same_record_pairs', '')} raw same-record pairs",
@@ -341,6 +354,9 @@ def pair_universe_evidence(
     source_policy_read = source_policy_evidence(source_policy_rows)
     if source_policy_read:
         parts.append(source_policy_read)
+    term_impact_read = source_policy_term_impact_evidence(source_policy_term_impact_rows)
+    if term_impact_read:
+        parts.append(term_impact_read)
     return "; ".join(parts)
 
 
@@ -403,6 +419,26 @@ def scenario_evidence(rows: list[dict[str, str]], scenario: str, label: str) -> 
     return (
         f"{label} >=5 {row.get('remaining_appellation_min_length_pairs', '')} "
         f"(gap {row.get('gap_to_source_cited_163_after_appellation_min_length', '')})"
+    )
+
+
+def source_policy_term_impact_evidence(rows: list[dict[str, str]]) -> str:
+    closing_rows = [
+        row
+        for row in rows
+        if row.get("closes_appellation_min_length_gap_to_163", "").lower() == "true"
+    ]
+    if not closing_rows:
+        return ""
+    first = closing_rows[0]
+    terms = ", ".join(row.get("term", "") for row in closing_rows[:4] if row.get("term"))
+    example_text = f"; examples {terms}" if terms else ""
+    return (
+        "single-term source-policy impacts: "
+        f"{len(closing_rows)} term(s) individually leave >=5 "
+        f"{first.get('remaining_appellation_min_length_pairs_if_excluded', '')} "
+        f"(gap {first.get('gap_to_source_cited_163_after_appellation_min_length_if_excluded', '')})"
+        f"{example_text}; diagnostic only"
     )
 
 
@@ -686,6 +722,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             f"--skip-summary {args.skip_summary} "
             f"--corrected-distance-variants {args.corrected_distance_variants} "
             f"--source-policy-scenarios {args.source_policy_scenarios} "
+            f"--source-policy-term-impacts {args.source_policy_term_impacts} "
             f"--dw-formula-sensitivity {args.dw_formula_sensitivity} "
             f"--corrected-distance-aggregate {args.corrected_distance_aggregate} "
             f"--cross-pair-permutation-summary {args.cross_pair_permutation_summary} "
@@ -808,6 +845,7 @@ def write_manifest(args: argparse.Namespace, rows: list[dict[str, str]], started
             "skip_summary": str(args.skip_summary),
             "corrected_distance_variants": str(args.corrected_distance_variants),
             "source_policy_scenarios": str(args.source_policy_scenarios),
+            "source_policy_term_impacts": str(args.source_policy_term_impacts),
             "dw_formula_sensitivity": str(args.dw_formula_sensitivity),
             "corrected_distance_aggregate": str(args.corrected_distance_aggregate),
             "cross_pair_permutation_summary": str(args.cross_pair_permutation_summary),

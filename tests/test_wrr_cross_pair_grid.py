@@ -81,10 +81,15 @@ class WrrCrossPairGridTests(unittest.TestCase):
             method_status["inputs"],
         )
         self.assertIn(
+            "reports/wrr_1994/wrr_source_policy_term_impacts.csv",
+            method_status["inputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_dw_formula_sensitivity.csv",
             method_status["inputs"],
         )
         self.assertIn("--source-policy-scenarios", method_status["argv"])
+        self.assertIn("--source-policy-term-impacts", method_status["argv"])
         self.assertIn("--dw-formula-sensitivity", method_status["argv"])
 
 

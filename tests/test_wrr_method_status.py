@@ -105,6 +105,14 @@ class WrrMethodStatusTests(unittest.TestCase):
                     "gap_to_source_cited_163_after_appellation_min_length": "9",
                 },
             ],
+            source_policy_term_impact_rows=[
+                {
+                    "term": "ZKWTA",
+                    "remaining_appellation_min_length_pairs_if_excluded": "163",
+                    "gap_to_source_cited_163_after_appellation_min_length_if_excluded": "0",
+                    "closes_appellation_min_length_gap_to_163": "true",
+                }
+            ],
             dw_formula_rows=[
                 {
                     "scope": "smoke_length_5_8_cap250",
@@ -221,6 +229,8 @@ class WrrMethodStatusTests(unittest.TestCase):
         self.assertIn("83 no-appellation ordinary hits", by_area["Pair universe"]["evidence"])
         self.assertIn("source-policy scenarios", by_area["Pair universe"]["evidence"])
         self.assertIn("exclude WNP Zacut >=5 157", by_area["Pair universe"]["evidence"])
+        self.assertIn("single-term source-policy impacts", by_area["Pair universe"]["evidence"])
+        self.assertIn("ZKWTA", by_area["Pair universe"]["evidence"])
         self.assertEqual(by_area["D(w) skip-cap formula"]["status"], "open")
         self.assertIn("13 program caps below printed", by_area["D(w) skip-cap formula"]["evidence"])
         self.assertIn("all-lane cap1000 printed/program defined 72/72", by_area["D(w) skip-cap formula"]["evidence"])
@@ -301,6 +311,7 @@ class WrrMethodStatusTests(unittest.TestCase):
                     "skip_summary": Path("skip.csv"),
                     "corrected_distance_variants": Path("variants.csv"),
                     "source_policy_scenarios": Path("source_policy.csv"),
+                    "source_policy_term_impacts": Path("source_policy_terms.csv"),
                     "dw_formula_sensitivity": Path("dw_formula.csv"),
                     "corrected_distance_aggregate": Path("aggregate.csv"),
                     "cross_pair_permutation_summary": Path("missing_permutations.csv"),
@@ -349,6 +360,7 @@ class WrrMethodStatusTests(unittest.TestCase):
             skip_summary = root / "skip.csv"
             variants = root / "variants.csv"
             source_policy = root / "missing_source_policy.csv"
+            source_policy_term_impacts = root / "missing_source_policy_term_impacts.csv"
             dw_formula = root / "missing_dw_formula.csv"
             aggregate = root / "aggregate.csv"
             highcap_corrected = root / "missing_highcap_corrected.csv"
@@ -533,6 +545,8 @@ class WrrMethodStatusTests(unittest.TestCase):
                     str(variants),
                     "--source-policy-scenarios",
                     str(source_policy),
+                    "--source-policy-term-impacts",
+                    str(source_policy_term_impacts),
                     "--dw-formula-sensitivity",
                     str(dw_formula),
                     "--corrected-distance-aggregate",

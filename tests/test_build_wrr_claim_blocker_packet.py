@@ -73,6 +73,7 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             source_queue = root / "source_queue.csv"
             method_status = root / "method_status.csv"
             source_policy_scenarios = root / "source_policy_scenarios.csv"
+            source_policy_term_impacts = root / "source_policy_term_impacts.csv"
             dw_formula_sensitivity = root / "dw_formula_sensitivity.csv"
             out = root / "packet.csv"
             markdown = root / "packet.md"
@@ -136,6 +137,21 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                 ],
             )
             write_csv(
+                source_policy_term_impacts,
+                [
+                    {
+                        "term_id": "wrr2_27_app_02",
+                        "term": "ZKWTA",
+                        "flags": "wnp_disputed_zacut_appellation",
+                        "affected_appellation_min_length_pairs": "2",
+                        "remaining_appellation_min_length_pairs_if_excluded": "163",
+                        "gap_to_source_cited_163_after_appellation_min_length_if_excluded": "0",
+                        "closes_appellation_min_length_gap_to_163": "true",
+                        "diagnostic_read": "single-term exclusion closes >=5 count gap",
+                    }
+                ],
+            )
+            write_csv(
                 dw_formula_sensitivity,
                 [
                     {
@@ -161,6 +177,8 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                     str(method_status),
                     "--source-policy-scenarios",
                     str(source_policy_scenarios),
+                    "--source-policy-term-impacts",
+                    str(source_policy_term_impacts),
                     "--dw-formula-sensitivity",
                     str(dw_formula_sensitivity),
                     "--out",
@@ -179,6 +197,8 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             self.assertIn("WRR Claim Blocker Packet", text)
             self.assertIn("Flagged Source-Review Rows", text)
             self.assertIn("Source Policy Scenario Impact", text)
+            self.assertIn("Single-Term Source Policy Impact", text)
+            self.assertIn("wrr2_27_app_02", text)
             self.assertIn("D(w) Formula Sensitivity", text)
             self.assertIn("exclude_wnp_zacut_only", text)
             self.assertIn("all_lanes_cap1000", text)

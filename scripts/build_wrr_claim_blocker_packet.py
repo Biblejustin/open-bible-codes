@@ -19,6 +19,9 @@ DEFAULT_LOCK_OPTIONS = Path("reports/wrr_1994/wrr_lock_options.csv")
 DEFAULT_SOURCE_QUEUE = Path("reports/wrr_1994/wrr_source_review_queue.csv")
 DEFAULT_METHOD_STATUS = Path("reports/wrr_1994/wrr_method_status.csv")
 DEFAULT_SOURCE_POLICY_SCENARIOS = Path("reports/wrr_1994/wrr_source_policy_scenarios.csv")
+DEFAULT_SOURCE_POLICY_TERM_IMPACTS = Path(
+    "reports/wrr_1994/wrr_source_policy_term_impacts.csv"
+)
 DEFAULT_DW_FORMULA_SENSITIVITY = Path("reports/wrr_1994/wrr_dw_formula_sensitivity.csv")
 DEFAULT_OUT = Path("reports/wrr_1994/wrr_claim_blocker_packet.csv")
 DEFAULT_MD = Path("docs/WRR_CLAIM_BLOCKER_PACKET.md")
@@ -72,6 +75,7 @@ def main(argv: list[str] | None = None) -> int:
     source_rows = read_rows(args.source_queue)
     method_rows = read_rows(args.method_status)
     source_policy_rows = read_optional_rows(args.source_policy_scenarios)
+    source_policy_term_rows = read_optional_rows(args.source_policy_term_impacts)
     dw_formula_rows = read_optional_rows(args.dw_formula_sensitivity)
     packet_rows = build_packet_rows(readiness_rows, lock_rows, source_rows, method_rows)
     write_csv(args.out, packet_rows)
@@ -80,6 +84,7 @@ def main(argv: list[str] | None = None) -> int:
         packet_rows,
         source_rows,
         source_policy_rows,
+        source_policy_term_rows,
         dw_formula_rows,
         args,
     )
@@ -88,6 +93,7 @@ def main(argv: list[str] | None = None) -> int:
         args,
         packet_rows,
         source_policy_rows,
+        source_policy_term_rows,
         dw_formula_rows,
         started,
     )
@@ -107,6 +113,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--source-policy-scenarios",
         type=Path,
         default=DEFAULT_SOURCE_POLICY_SCENARIOS,
+    )
+    parser.add_argument(
+        "--source-policy-term-impacts",
+        type=Path,
+        default=DEFAULT_SOURCE_POLICY_TERM_IMPACTS,
     )
     parser.add_argument(
         "--dw-formula-sensitivity",
@@ -185,6 +196,7 @@ def write_markdown(
     packet_rows: list[dict[str, str]],
     source_rows: list[dict[str, str]],
     source_policy_rows: list[dict[str, str]],
+    source_policy_term_rows: list[dict[str, str]],
     dw_formula_rows: list[dict[str, str]],
     args: argparse.Namespace,
 ) -> None:
@@ -207,6 +219,7 @@ def write_markdown(
             f"--source-queue {args.source_queue} "
             f"--method-status {args.method_status} "
             f"--source-policy-scenarios {args.source_policy_scenarios} "
+            f"--source-policy-term-impacts {args.source_policy_term_impacts} "
             f"--dw-formula-sensitivity {args.dw_formula_sensitivity} "
             f"--out {args.out} "
             f"--markdown-out {args.markdown_out} "
@@ -272,6 +285,48 @@ def write_markdown(
                         row.get("gap_to_source_cited_163_after_appellation_min_length", "")
                     ),
                     remaining_len=markdown_cell(row.get("remaining_length_filtered_pairs", "")),
+                )
+            )
+    closing_term_rows = [
+        row
+        for row in source_policy_term_rows
+        if row.get("closes_appellation_min_length_gap_to_163", "").lower() == "true"
+    ]
+    if closing_term_rows:
+        lines.extend(
+            [
+                "",
+                "## Single-Term Source Policy Impact",
+                "",
+                "| Term id | Term | Flags | Affected >=5 pairs | Remaining >=5 | Gap >=5 vs 163 | Read |",
+                "| --- | --- | --- | ---: | ---: | ---: | --- |",
+            ]
+        )
+        for row in closing_term_rows:
+            lines.append(
+                (
+                    "| {term_id} | {term} | {flags} | {affected_app} | "
+                    "{remaining_app} | {gap_app} | {read} |"
+                ).format(
+                    term_id=markdown_cell(row.get("term_id", "")),
+                    term=markdown_cell(row.get("term", "")),
+                    flags=markdown_cell(row.get("flags", "")),
+                    affected_app=markdown_cell(
+                        row.get("affected_appellation_min_length_pairs", "")
+                    ),
+                    remaining_app=markdown_cell(
+                        row.get(
+                            "remaining_appellation_min_length_pairs_if_excluded",
+                            "",
+                        )
+                    ),
+                    gap_app=markdown_cell(
+                        row.get(
+                            "gap_to_source_cited_163_after_appellation_min_length_if_excluded",
+                            "",
+                        )
+                    ),
+                    read=markdown_cell(row.get("diagnostic_read", "")),
                 )
             )
     if dw_formula_rows:
@@ -359,6 +414,7 @@ def write_manifest(
     args: argparse.Namespace,
     rows: list[dict[str, str]],
     source_policy_rows: list[dict[str, str]],
+    source_policy_term_rows: list[dict[str, str]],
     dw_formula_rows: list[dict[str, str]],
     started: float,
 ) -> None:
@@ -369,6 +425,7 @@ def write_manifest(
         "duration_seconds": round(time.perf_counter() - started, 6),
         "blocker_rows": len(rows),
         "source_policy_scenario_rows": len(source_policy_rows),
+        "source_policy_term_impact_rows": len(source_policy_term_rows),
         "dw_formula_sensitivity_rows": len(dw_formula_rows),
         "inputs": {
             "readiness": str(args.readiness),
@@ -376,6 +433,7 @@ def write_manifest(
             "source_queue": str(args.source_queue),
             "method_status": str(args.method_status),
             "source_policy_scenarios": str(args.source_policy_scenarios),
+            "source_policy_term_impacts": str(args.source_policy_term_impacts),
             "dw_formula_sensitivity": str(args.dw_formula_sensitivity),
         },
         "outputs": {

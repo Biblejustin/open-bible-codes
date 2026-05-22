@@ -21,6 +21,9 @@ DEFAULT_RECOMMENDED_PERMUTATION = Path(
 )
 DEFAULT_SOURCE_REVIEW_SUMMARY = Path("reports/wrr_1994/wrr_source_review_queue_summary.csv")
 DEFAULT_SOURCE_POLICY_SCENARIOS = Path("reports/wrr_1994/wrr_source_policy_scenarios.csv")
+DEFAULT_SOURCE_POLICY_TERM_IMPACTS = Path(
+    "reports/wrr_1994/wrr_source_policy_term_impacts.csv"
+)
 DEFAULT_DIRECT_ALL_LANES_250_SUMMARY = Path(
     "reports/wrr_1994/direct_all/wrr2_corrected_distance_all_lanes_250_summary.csv"
 )
@@ -59,6 +62,7 @@ def main(argv: list[str] | None = None) -> int:
     permutation_row = read_one_row(args.recommended_permutation)
     source_review_summary = read_optional_rows(args.source_review_summary)
     source_policy_scenarios = read_optional_rows(args.source_policy_scenarios)
+    source_policy_term_impacts = read_optional_rows(args.source_policy_term_impacts)
     direct_all_lanes_250 = read_optional_one_row(args.direct_all_lanes_250_summary)
     direct_all_lanes_1000 = read_optional_one_row(args.direct_all_lanes_1000_summary)
     direct_all_lanes_1000_program = read_optional_one_row(
@@ -75,6 +79,7 @@ def main(argv: list[str] | None = None) -> int:
         permutation_row,
         source_review_summary=source_review_summary,
         source_policy_scenarios=source_policy_scenarios,
+        source_policy_term_impacts=source_policy_term_impacts,
         direct_all_lanes_250=direct_all_lanes_250,
         direct_all_lanes_1000=direct_all_lanes_1000,
         direct_all_lanes_1000_program=direct_all_lanes_1000_program,
@@ -101,6 +106,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--recommended-permutation", type=Path, default=DEFAULT_RECOMMENDED_PERMUTATION)
     parser.add_argument("--source-review-summary", type=Path, default=DEFAULT_SOURCE_REVIEW_SUMMARY)
     parser.add_argument("--source-policy-scenarios", type=Path, default=DEFAULT_SOURCE_POLICY_SCENARIOS)
+    parser.add_argument(
+        "--source-policy-term-impacts",
+        type=Path,
+        default=DEFAULT_SOURCE_POLICY_TERM_IMPACTS,
+    )
     parser.add_argument(
         "--direct-all-lanes-250-summary",
         type=Path,
@@ -140,6 +150,7 @@ def build_option_rows(
     *,
     source_review_summary: list[dict[str, str]] | None = None,
     source_policy_scenarios: list[dict[str, str]] | None = None,
+    source_policy_term_impacts: list[dict[str, str]] | None = None,
     direct_all_lanes_250: dict[str, str] | None = None,
     direct_all_lanes_1000: dict[str, str] | None = None,
     direct_all_lanes_1000_program: dict[str, str] | None = None,
@@ -155,6 +166,13 @@ def build_option_rows(
     source_policy_scenario_text = source_policy_scenario_evidence(
         source_policy_scenarios or []
     )
+    source_policy_term_impact_text = source_policy_term_impact_evidence(
+        source_policy_term_impacts or []
+    )
+    if source_policy_term_impact_text:
+        source_policy_scenario_text = (
+            f"{source_policy_scenario_text} {source_policy_term_impact_text}"
+        )
     printed_defined = variant_value(variant_rows, "term_printed", "defined_corrected_distances")
     program_defined = variant_value(variant_rows, "term_program", "defined_corrected_distances")
     fixed_defined = variant_value(variant_rows, "fixed_250", "defined_corrected_distances")
@@ -335,6 +353,26 @@ def source_policy_scenario_evidence(rows: list[dict[str, str]]) -> str:
     return "; ".join(scenario_parts) + "; no source policy selected."
 
 
+def source_policy_term_impact_evidence(rows: list[dict[str, str]]) -> str:
+    closing_rows = [
+        row
+        for row in rows
+        if row.get("closes_appellation_min_length_gap_to_163", "").lower() == "true"
+    ]
+    if not closing_rows:
+        return ""
+    first = closing_rows[0]
+    examples = ", ".join(row.get("term", "") for row in closing_rows[:4] if row.get("term"))
+    examples_text = f"; examples {examples}" if examples else ""
+    return (
+        "Single-term impact: "
+        f"{len(closing_rows)} term(s) individually leave "
+        f"{first.get('remaining_appellation_min_length_pairs_if_excluded', '')} >=5 pairs "
+        f"(gap {first.get('gap_to_source_cited_163_after_appellation_min_length_if_excluded', '')})"
+        f"{examples_text}; diagnostic only."
+    )
+
+
 def scenario_evidence(rows: list[dict[str, str]], scenario: str, label: str) -> str:
     row = next((item for item in rows if item.get("scenario") == scenario), None)
     if not row:
@@ -511,6 +549,7 @@ def write_manifest(
             "recommended_permutation": str(args.recommended_permutation),
             "source_review_summary": str(args.source_review_summary),
             "source_policy_scenarios": str(args.source_policy_scenarios),
+            "source_policy_term_impacts": str(args.source_policy_term_impacts),
             "direct_all_lanes_250_summary": str(args.direct_all_lanes_250_summary),
             "direct_all_lanes_1000_summary": str(args.direct_all_lanes_1000_summary),
             "direct_all_lanes_1000_program_summary": str(

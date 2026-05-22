@@ -58,6 +58,14 @@ class WrrLockOptionsTests(unittest.TestCase):
                     "remaining_length_filtered_pairs": "78",
                 },
             ],
+            source_policy_term_impacts=[
+                {
+                    "term": "ZKWTA",
+                    "remaining_appellation_min_length_pairs_if_excluded": "163",
+                    "gap_to_source_cited_163_after_appellation_min_length_if_excluded": "0",
+                    "closes_appellation_min_length_gap_to_163": "true",
+                }
+            ],
             direct_all_lanes_250={"defined_corrected_distances": "50"},
             direct_all_lanes_1000={"defined_corrected_distances": "72"},
             direct_all_lanes_1000_program={"defined_corrected_distances": "72"},
@@ -94,6 +102,11 @@ class WrrLockOptionsTests(unittest.TestCase):
             "exclude WNP Zacut: 157 >=5 pairs",
             by_option["source-policy scenario impact"]["evidence"],
         )
+        self.assertIn(
+            "Single-term impact",
+            by_option["source-policy scenario impact"]["evidence"],
+        )
+        self.assertIn("ZKWTA", by_option["source-policy scenario impact"]["evidence"])
         self.assertIn(
             "printed/program/fixed250 = 28/28/28",
             by_option["reported WRR-program formula"]["evidence"],
@@ -154,6 +167,7 @@ class WrrLockOptionsTests(unittest.TestCase):
             permutation = root / "perm.csv"
             source_review_summary = root / "source_review_summary.csv"
             source_policy_scenarios = root / "source_policy_scenarios.csv"
+            source_policy_term_impacts = root / "source_policy_term_impacts.csv"
             direct_250 = root / "direct_250.csv"
             direct_1000 = root / "direct_1000.csv"
             direct_1000_program = root / "direct_1000_program.csv"
@@ -223,6 +237,17 @@ class WrrLockOptionsTests(unittest.TestCase):
                     }
                 ],
             )
+            write_csv(
+                source_policy_term_impacts,
+                [
+                    {
+                        "term": "ZKWTA",
+                        "remaining_appellation_min_length_pairs_if_excluded": "163",
+                        "gap_to_source_cited_163_after_appellation_min_length_if_excluded": "0",
+                        "closes_appellation_min_length_gap_to_163": "true",
+                    }
+                ],
+            )
             write_csv(direct_250, [{"defined_corrected_distances": "50"}])
             write_csv(direct_1000, [{"defined_corrected_distances": "72"}])
             write_csv(direct_1000_program, [{"defined_corrected_distances": "72"}])
@@ -251,6 +276,8 @@ class WrrLockOptionsTests(unittest.TestCase):
                     str(source_review_summary),
                     "--source-policy-scenarios",
                     str(source_policy_scenarios),
+                    "--source-policy-term-impacts",
+                    str(source_policy_term_impacts),
                     "--direct-all-lanes-250-summary",
                     str(direct_250),
                     "--direct-all-lanes-1000-summary",
@@ -277,6 +304,7 @@ class WrrLockOptionsTests(unittest.TestCase):
             self.assertIn("Current No-Input Path", text)
             self.assertIn("WNP/context queued terms", text)
             self.assertIn("source-policy scenario impact", text)
+            self.assertIn("Single-term impact", text)
             self.assertIn("changes 0 pair rows", text)
             self.assertTrue(manifest.exists())
 

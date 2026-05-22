@@ -9,7 +9,7 @@ queue flags into one handoff artifact.
 ## Reproduce
 
 ```bash
-python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --dw-formula-sensitivity reports/wrr_1994/wrr_dw_formula_sensitivity.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
+python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --source-policy-term-impacts reports/wrr_1994/wrr_source_policy_term_impacts.csv --dw-formula-sensitivity reports/wrr_1994/wrr_dw_formula_sensitivity.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
 ```
 
 ## Blockers
@@ -39,6 +39,15 @@ python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/w
 | exclude_book_title_only | `diagnostic_exclusion` | 1 | 164 | -1 | 86 |
 | review_chelm_spelling_only | `review_only` | 0 | 165 | -2 | 86 |
 | exclude_all_source_review_flags | `diagnostic_exclusion` | 11 | 154 | 9 | 78 |
+
+## Single-Term Source Policy Impact
+
+| Term id | Term | Flags | Affected >=5 pairs | Remaining >=5 | Gap >=5 vs 163 | Read |
+| --- | --- | --- | ---: | ---: | ---: | --- |
+| wrr2_27_app_02 | ZKWTA | wnp_disputed_zacut_appellation | 2 | 163 | 0 | single-term exclusion closes >=5 count gap |
+| wrr2_27_app_03 | ZKWTW | wnp_disputed_zacut_appellation | 2 | 163 | 0 | single-term exclusion closes >=5 count gap |
+| wrr2_27_app_05 | M$HZKWTA | wnp_disputed_zacut_appellation | 2 | 163 | 0 | single-term exclusion closes >=5 count gap |
+| wrr2_27_app_06 | M$HZKWTW | wnp_disputed_zacut_appellation | 2 | 163 | 0 | single-term exclusion closes >=5 count gap |
 
 ## D(w) Formula Sensitivity
 
