@@ -21,8 +21,10 @@ statistical test, and not a claim-ready replication.
 | PDF row index maximum | 12 |
 | PDF prime-minister phrase keyword rows | 6 |
 | PDF name-keyword rows | 37 |
+| machine PDF keyword rows extracted | 43 |
 | HTML detail pages found | 8 |
 | HTML detail pages with keyword labels | 8 |
+| machine HTML detail rows extracted | 8 |
 | detail-page gap against PDF rows | 4 |
 
 ## Protocol Anchors
@@ -40,10 +42,11 @@ Found anchors: 6 of 6.
 
 ## Use Boundary
 
-This audit verifies source shape and exposes a source-coverage gap: the PDF
-lists 12 prime-minister rows, while the downloaded detail-page sequence has
-keyword labels for 8 pages. This should be treated as missing detail-source
-coverage, not inferred data.
+This audit verifies source shape and exports PDF keyword rows plus HTML
+detail-page keyword labels. It also exposes a source-coverage gap: the
+PDF lists 12 prime-minister rows, while the downloaded detail-page
+sequence has keyword labels for 8 pages. This should be treated as
+missing detail-source coverage, not inferred data.
 
 No term normalization, ELS search, compactness calculation, random-placement
 control, or p-level verification is performed here.

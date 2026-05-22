@@ -217,8 +217,9 @@ These are source leads, not claim-ready evidence.
 - Israeli prime ministers: useful as a small modern-person/entity protocol with
   linked keyword pages. The source-shape audit in
   `docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md` now confirms 12 PDF rows and
-  8 downloaded detail pages with keyword labels. The 4-page gap should be
-  treated as missing detail-source coverage, not inferred rows.
+  43 machine-readable PDF keyword rows, plus 8 downloaded detail pages with
+  keyword labels. The 4-page gap should be treated as missing detail-source
+  coverage, not inferred rows.
 - Cities/Aumann/Simon-McKay: useful for a source-chain and replication-failure
   lane because the pages separate Gans/Inbal rule-based city spellings, Aumann
   committee expert data, and Simon/McKay/Margolioth variants. The source-chain
@@ -346,9 +347,11 @@ or rerank permutations.
 
 `scripts/analyze_israeli_prime_ministers_source.py` parses the Israeli
 prime-ministers main page, keyword PDF, and downloaded detail pages into ignored
-source-shape CSVs and a tracked audit summary. It verifies the PDF row count,
-main-page protocol anchors, and the current detail-page coverage gap, but does
-not normalize terms, run ELS hits, or verify the reported p-level.
+source-shape CSVs, PDF keyword-row CSVs, detail-page CSVs, and a tracked audit
+summary. It verifies the PDF row count, exports 43 PDF keyword rows and 8 detail
+page rows, checks main-page protocol anchors, and preserves the current
+detail-page coverage gap, but does not normalize terms, run ELS hits, or verify
+the reported p-level.
 
 `scripts/analyze_cities_source_chain.py` classifies the Cities/Aumann/
 Simon-McKay HTML pages and PDF-shaped downloads into ignored source-chain CSVs

@@ -601,7 +601,8 @@ American presidents source-shape audit:
 Witztum birth-date source-shape audit:
 `docs/WITZTUM_BIRTH_DATES_SOURCE_AUDIT.md`.
 Israeli prime-ministers source-shape audit:
-`docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md`.
+`docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md` (12 PDF rows, 43 PDF keyword
+rows, 8 detail rows).
 Cities source-chain audit:
 `docs/CITIES_SOURCE_CHAIN_AUDIT.md`.
 Event/object experiment source audit:

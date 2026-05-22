@@ -216,9 +216,9 @@ communities audit confirms 66 data records and 210 machine-readable pre-filter
 community rows. The presidents audit confirms 42 data records and 279
 machine-readable spelling rows. The birth-date audit confirms two S1/S2
 tables, 14 rows per table, and 51 date forms per table. The Israeli
-prime-ministers audit confirms 12 PDF
-rows but only 8 downloaded detail pages with keyword labels, leaving a 4-page
-detail-source coverage gap. The Cities audit confirms 13 source-chain files,
+prime-ministers audit confirms 12 PDF rows, 43 machine-readable PDF keyword
+rows, and 8 downloaded detail-page rows, leaving a 4-page detail-source coverage
+gap. The Cities audit confirms 13 source-chain files,
 6 `.pdf`-named HTML wrappers, 1 parse-error PDF, 1 no-text PDF, and 7/7 source
 anchors. The event/object audit confirms 8 source files, 20 Pumbedita rows, 32
 Auschwitz rows, a 57-page Ark tutorial PDF, one reported significant follow-up

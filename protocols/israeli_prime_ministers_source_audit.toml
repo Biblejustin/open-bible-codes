@@ -32,6 +32,8 @@ argv = [
   "--pdf", "reports/wrr_1994/torah_code_experiment_israeli_prime_ministers.pdf",
   "--keyword-page-glob", "reports/wrr_1994/torah_code_experiment_israeli_prime_ministers_*.html",
   "--out", "reports/wrr_1994/israeli_prime_ministers_source_records.csv",
+  "--pdf-keywords-out", "reports/wrr_1994/israeli_prime_ministers_pdf_keyword_rows.csv",
+  "--detail-pages-out", "reports/wrr_1994/israeli_prime_ministers_detail_pages.csv",
   "--summary-out", "reports/wrr_1994/israeli_prime_ministers_source_summary.csv",
   "--anchors-out", "reports/wrr_1994/israeli_prime_ministers_protocol_anchors.csv",
   "--markdown-out", "docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md",
@@ -46,6 +48,8 @@ inputs = [
 ]
 outputs = [
   "reports/wrr_1994/israeli_prime_ministers_source_records.csv",
+  "reports/wrr_1994/israeli_prime_ministers_pdf_keyword_rows.csv",
+  "reports/wrr_1994/israeli_prime_ministers_detail_pages.csv",
   "reports/wrr_1994/israeli_prime_ministers_source_summary.csv",
   "reports/wrr_1994/israeli_prime_ministers_protocol_anchors.csv",
   "docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md",

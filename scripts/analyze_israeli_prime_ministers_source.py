@@ -24,6 +24,8 @@ DEFAULT_MAIN_HTML = Path("reports/wrr_1994/torah_code_experiment_israeli_prime_m
 DEFAULT_PDF = Path("reports/wrr_1994/torah_code_experiment_israeli_prime_ministers.pdf")
 DEFAULT_PAGE_GLOB = "reports/wrr_1994/torah_code_experiment_israeli_prime_ministers_*.html"
 DEFAULT_OUT = Path("reports/wrr_1994/israeli_prime_ministers_source_records.csv")
+DEFAULT_PDF_KEYWORDS_OUT = Path("reports/wrr_1994/israeli_prime_ministers_pdf_keyword_rows.csv")
+DEFAULT_DETAIL_PAGES_OUT = Path("reports/wrr_1994/israeli_prime_ministers_detail_pages.csv")
 DEFAULT_SUMMARY_OUT = Path("reports/wrr_1994/israeli_prime_ministers_source_summary.csv")
 DEFAULT_ANCHORS_OUT = Path("reports/wrr_1994/israeli_prime_ministers_protocol_anchors.csv")
 DEFAULT_MD = Path("docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md")
@@ -34,6 +36,25 @@ FIELDNAMES = [
     "record_index",
     "line_count",
     "hebrew_keyword_rows",
+]
+PDF_KEYWORD_FIELDNAMES = [
+    "source_table",
+    "record_index",
+    "keyword_row_index",
+    "english_label",
+    "hebrew_keyword",
+    "raw_line",
+]
+DETAIL_PAGE_FIELDNAMES = [
+    "page_index",
+    "path",
+    "sha256",
+    "bytes",
+    "title",
+    "keyword_text",
+    "keyword_token_count",
+    "has_previous",
+    "has_next",
 ]
 SUMMARY_FIELDNAMES = [
     "main_html",
@@ -48,8 +69,10 @@ SUMMARY_FIELDNAMES = [
     "pdf_prime_minister_max",
     "pdf_keyword_phrase_rows",
     "pdf_name_keyword_rows",
+    "machine_pdf_keyword_rows",
     "html_detail_pages_found",
     "html_detail_pages_with_keywords",
+    "machine_html_detail_rows",
     "html_detail_page_gap_against_pdf_rows",
     "claim_status",
 ]
@@ -97,14 +120,28 @@ def main(argv: list[str] | None = None) -> int:
     detail_pages = [parse_detail_page(path) for path in page_paths]
     records = parse_pdf_records(pdf_text)
     rows = [record.as_row() for record in records]
-    summary = build_summary(args, main_html, pdf_text, records, detail_pages)
+    pdf_keyword_rows = pdf_keyword_rows_from_source(pdf_text, records)
+    detail_rows = detail_page_rows(detail_pages)
+    summary = build_summary(
+        args,
+        main_html,
+        pdf_text,
+        records,
+        detail_pages,
+        pdf_keyword_rows,
+        detail_rows,
+    )
     anchors = protocol_anchors(main_html, pdf_text, detail_pages)
     write_csv(args.out, FIELDNAMES, rows)
+    write_csv(args.pdf_keywords_out, PDF_KEYWORD_FIELDNAMES, pdf_keyword_rows)
+    write_csv(args.detail_pages_out, DETAIL_PAGE_FIELDNAMES, detail_rows)
     write_csv(args.summary_out, SUMMARY_FIELDNAMES, [summary])
     write_csv(args.anchors_out, ANCHOR_FIELDNAMES, anchors)
     write_markdown(args.markdown_out, summary, anchors)
     write_manifest(args.manifest_out, args, summary, anchors, len(rows), started)
     print(args.out)
+    print(args.pdf_keywords_out)
+    print(args.detail_pages_out)
     print(args.summary_out)
     print(args.anchors_out)
     print(args.markdown_out)
@@ -118,6 +155,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--pdf", type=Path, default=DEFAULT_PDF)
     parser.add_argument("--keyword-page-glob", default=DEFAULT_PAGE_GLOB)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
+    parser.add_argument("--pdf-keywords-out", type=Path, default=DEFAULT_PDF_KEYWORDS_OUT)
+    parser.add_argument("--detail-pages-out", type=Path, default=DEFAULT_DETAIL_PAGES_OUT)
     parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
     parser.add_argument("--anchors-out", type=Path, default=DEFAULT_ANCHORS_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
@@ -170,17 +209,72 @@ def keyword_field(line: str) -> str:
     return line[35:].strip()
 
 
+def english_name_field(line: str) -> str:
+    if not PM_ROW_RE.match(line):
+        return ""
+    parts = re.split(r"\s{2,}", line.strip())
+    if len(parts) >= 3:
+        return parts[1].strip()
+    return ""
+
+
 def pdf_keyword_phrase_rows(text: str) -> int:
-    count = 0
+    return len(phrase_keyword_rows_from_pdf(text))
+
+
+def phrase_keyword_rows_from_pdf(text: str) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
     for line in text.splitlines():
         if "English Name" in line:
             break
         stripped = line.strip()
         if not stripped or stripped == "Israeli Prime Ministers":
             continue
-        if len(line) > 25 and line[25:].strip():
-            count += 1
-    return count
+        parts = re.split(r"\s{2,}", stripped)
+        if len(parts) < 2:
+            continue
+        rows.append(
+            {
+                "source_table": "prime_minister_phrase_keywords",
+                "record_index": "",
+                "keyword_row_index": len(rows) + 1,
+                "english_label": parts[0].strip(),
+                "hebrew_keyword": parts[-1].strip(),
+                "raw_line": stripped,
+            }
+        )
+    return rows
+
+
+def name_keyword_rows_from_records(
+    records: list[PrimeMinisterRecord],
+) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for record in records:
+        keyword_row_index = 0
+        for line in record.lines:
+            keyword = keyword_field(line)
+            if not keyword:
+                continue
+            keyword_row_index += 1
+            rows.append(
+                {
+                    "source_table": "prime_minister_name_keywords",
+                    "record_index": record.record_index,
+                    "keyword_row_index": keyword_row_index,
+                    "english_label": english_name_field(line),
+                    "hebrew_keyword": keyword,
+                    "raw_line": line.strip(),
+                }
+            )
+    return rows
+
+
+def pdf_keyword_rows_from_source(
+    pdf_text: str,
+    records: list[PrimeMinisterRecord],
+) -> list[dict[str, object]]:
+    return phrase_keyword_rows_from_pdf(pdf_text) + name_keyword_rows_from_records(records)
 
 
 def parse_detail_page(path: Path) -> dict[str, object]:
@@ -197,6 +291,7 @@ def parse_detail_page(path: Path) -> dict[str, object]:
         "sha256": sha256(path),
         "bytes": path.stat().st_size,
         "title": title,
+        "keyword_text": keyword_text,
         "has_key_words": bool(keyword_text),
         "keyword_token_count": len(keyword_text.replace(",", " ").split()),
         "has_previous": "&lt; Previous &gt;" in html,
@@ -205,12 +300,35 @@ def parse_detail_page(path: Path) -> dict[str, object]:
     }
 
 
+def detail_page_rows(detail_pages: list[dict[str, object]]) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for page in detail_pages:
+        path = str(page["path"])
+        match = re.search(r"_(\d+)\.html$", path)
+        rows.append(
+            {
+                "page_index": int(match.group(1)) if match else "",
+                "path": path,
+                "sha256": page["sha256"],
+                "bytes": page["bytes"],
+                "title": page["title"],
+                "keyword_text": page["keyword_text"],
+                "keyword_token_count": page["keyword_token_count"],
+                "has_previous": int(bool(page["has_previous"])),
+                "has_next": int(bool(page["has_next"])),
+            }
+        )
+    return rows
+
+
 def build_summary(
     args: argparse.Namespace,
     main_html: str,
     pdf_text: str,
     records: list[PrimeMinisterRecord],
     detail_pages: list[dict[str, object]],
+    pdf_keyword_rows: list[dict[str, object]],
+    detail_rows: list[dict[str, object]],
 ) -> dict[str, object]:
     record_rows = [record.as_row() for record in records]
     indexes = [record.record_index for record in records]
@@ -228,8 +346,10 @@ def build_summary(
         "pdf_prime_minister_max": max(indexes, default=""),
         "pdf_keyword_phrase_rows": pdf_keyword_phrase_rows(pdf_text),
         "pdf_name_keyword_rows": sum(int(row["hebrew_keyword_rows"]) for row in record_rows),
+        "machine_pdf_keyword_rows": len(pdf_keyword_rows),
         "html_detail_pages_found": len(detail_pages),
         "html_detail_pages_with_keywords": detail_with_keywords,
+        "machine_html_detail_rows": len(detail_rows),
         "html_detail_page_gap_against_pdf_rows": max(0, len(records) - detail_with_keywords),
         "claim_status": "source_shape_only_not_result_bearing",
     }
@@ -335,8 +455,10 @@ def write_markdown(
         f"| PDF row index maximum | {summary['pdf_prime_minister_max']} |",
         f"| PDF prime-minister phrase keyword rows | {summary['pdf_keyword_phrase_rows']} |",
         f"| PDF name-keyword rows | {summary['pdf_name_keyword_rows']} |",
+        f"| machine PDF keyword rows extracted | {summary['machine_pdf_keyword_rows']} |",
         f"| HTML detail pages found | {summary['html_detail_pages_found']} |",
         f"| HTML detail pages with keyword labels | {summary['html_detail_pages_with_keywords']} |",
+        f"| machine HTML detail rows extracted | {summary['machine_html_detail_rows']} |",
         f"| detail-page gap against PDF rows | {summary['html_detail_page_gap_against_pdf_rows']} |",
         "",
         "## Protocol Anchors",
@@ -355,10 +477,11 @@ def write_markdown(
             "",
             "## Use Boundary",
             "",
-            "This audit verifies source shape and exposes a source-coverage gap: the PDF",
-            "lists 12 prime-minister rows, while the downloaded detail-page sequence has",
-            "keyword labels for 8 pages. This should be treated as missing detail-source",
-            "coverage, not inferred data.",
+            "This audit verifies source shape and exports PDF keyword rows plus HTML",
+            "detail-page keyword labels. It also exposes a source-coverage gap: the",
+            "PDF lists 12 prime-minister rows, while the downloaded detail-page",
+            "sequence has keyword labels for 8 pages. This should be treated as",
+            "missing detail-source coverage, not inferred data.",
             "",
             "No term normalization, ELS search, compactness calculation, random-placement",
             "control, or p-level verification is performed here.",
@@ -399,6 +522,8 @@ def write_manifest(
         "rows": rows,
         "outputs": {
             "records": str(args.out),
+            "pdf_keywords": str(args.pdf_keywords_out),
+            "detail_pages": str(args.detail_pages_out),
             "summary": str(args.summary_out),
             "anchors": str(args.anchors_out),
             "markdown": str(args.markdown_out),
