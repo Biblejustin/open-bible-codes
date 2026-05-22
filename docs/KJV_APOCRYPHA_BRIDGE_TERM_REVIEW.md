@@ -21,7 +21,7 @@ python3 -m scripts.summarize_kjv_apocrypha_bridge_terms --candidates reports/kjv
 - terms above all same-length non-Bible term controls: 71
 - terms with any center/span context bucket beyond hidden_path_only: 72
 - 250-sample shuffled total rows: observed 535; shuffled min/mean/max 149 / 185.604 / 236; p_ge 0.003984
-- 1000-sample term-level shuffled controls: 41 of 114 terms above every shuffled sample; 58 terms with unadjusted p_ge <= 0.05; 53 terms with BH q_ge <= 0.05
+- 1000-sample term-level shuffled controls: 41 of 968 terms above every shuffled sample; 58 terms with unadjusted p_ge <= 0.05; 42 terms with BH q_ge <= 0.05
 
 ## Top Terms
 

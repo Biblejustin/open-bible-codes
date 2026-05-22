@@ -463,6 +463,8 @@ def main(argv: list[str] | None = None) -> int:
         centered_occurrence_manifest=centered_occurrence_manifest,
         kjva_apocrypha_bridge_confirmatory_rows=kjva_apocrypha_bridge_confirmatory_rows,
         kjva_apocrypha_bridge_confirmatory_manifest=kjva_apocrypha_bridge_confirmatory_manifest,
+        kjva_apocrypha_bridge_prospective_rows=kjva_apocrypha_bridge_prospective_rows,
+        kjva_apocrypha_bridge_prospective_manifest=kjva_apocrypha_bridge_prospective_manifest,
         external_claim_counts_rows=external_claim_counts_rows,
         external_claim_counts_manifest=external_claim_counts_manifest,
         external_claim_all_codes_rows=external_claim_all_codes_rows,
@@ -2172,7 +2174,8 @@ def kjva_apocrypha_bridge_confirmatory_section(
             "Current read: all registered confirmatory terms pass BH `q_ge <= 0.01`,",
             "and three terms exceed every shuffled sample. This raises follow-up",
             "priority for KJVA bridge rows, but the row family remains post-screen",
-            "and should not be promoted as a claim without a new prospective study.",
+            "and should not be promoted as a claim without successful prospective",
+            "replication and non-Bible insertion controls.",
         ]
     )
     return lines

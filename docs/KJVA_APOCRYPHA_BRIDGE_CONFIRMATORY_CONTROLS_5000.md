@@ -4,7 +4,7 @@ Status: term-level shuffled-insertion controls. This is not a claim report.
 
 This control keeps the canonical prefix and apocrypha/deuterocanon block
 length fixed, shuffles the block letters, and records bridge rows per
-observed bridge term.
+registered term.
 
 ## Reproduce
 
@@ -48,5 +48,5 @@ python3 -m scripts.analyze_apocrypha_bridge_term_shuffled_controls --canonical-l
 - This is a post-screen calibration over already observed bridge terms.
 - `p_ge` is add-one empirical tail probability for the term count under
   shuffled insertion blocks.
-- `q_ge` is Benjamini-Hochberg correction across the emitted bridge terms.
+- `q_ge` is Benjamini-Hochberg correction across the registered terms.
 - It should guide follow-up priority, not convert bridge terms into claims.
