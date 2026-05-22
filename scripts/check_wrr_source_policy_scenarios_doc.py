@@ -23,7 +23,7 @@ REQUIRED_PHRASES = (
     "## Single-Term Impact",
     "| `wrr2_27_app_02` | `ZKWTA` | `wnp_disputed_zacut_appellation` | 2 | 163 | 0 | single-term exclusion closes >=5 count gap |",
     "`review_chelm_spelling_only` keeps pair counts stable and records review scope.",
-    "Claim-grade WRR language still needs full corrected distances and aggregate/permutation lock.",
+    "Locked local WRR evidence now uses keep_all_working_source, printed D(w), full cap1000 corrected distances, and a keep-all 999,999 date-label permutation",
 )
 
 

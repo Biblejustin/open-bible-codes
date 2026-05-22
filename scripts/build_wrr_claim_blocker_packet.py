@@ -60,8 +60,7 @@ NO_INPUT_NEXT = {
         "run full-lane corrected-distance work under the selected source and D(w) locks"
     ),
     "Aggregate statistic and permutation": (
-        "keep date-label permutation diagnostics separate from WRR reproduction "
-        "language"
+        "report locked local aggregate/permutation evidence with exact-WRR caveats"
     ),
 }
 
@@ -204,10 +203,15 @@ def write_markdown(
     dw_formula_rows: list[dict[str, str]],
     args: argparse.Namespace,
 ) -> None:
+    status_line = (
+        "Status: no current claim-readiness blockers under selected local WRR lock policy."
+        if not packet_rows
+        else "Status: current claim-readiness blockers remain."
+    )
     lines = [
         "# WRR Claim Blocker Packet",
         "",
-        "Status: full corrected-distance run selected; aggregate/permutation still not claim-grade.",
+        status_line,
         "",
         "This packet records the selected WRR working policy and gathers the",
         "remaining claim-readiness blockers, current lock options, WNP/context source",
@@ -236,14 +240,19 @@ def write_markdown(
         "| Area | Status | Blocker | Input needed |",
         "| --- | --- | --- | --- |",
     ]
-    for row in packet_rows:
-        lines.append(
-            "| {area} | `{status}` | {blocker} | {input_needed} |".format(
-                area=markdown_cell(row["decision_area"]),
-                status=markdown_cell(row["current_status"]),
-                blocker=markdown_cell(row["blocker"]),
-                input_needed=markdown_cell(row["input_needed"]),
+    if packet_rows:
+        for row in packet_rows:
+            lines.append(
+                "| {area} | `{status}` | {blocker} | {input_needed} |".format(
+                    area=markdown_cell(row["decision_area"]),
+                    status=markdown_cell(row["current_status"]),
+                    blocker=markdown_cell(row["blocker"]),
+                    input_needed=markdown_cell(row["input_needed"]),
+                )
             )
+    else:
+        lines.append(
+            "| None | `ready` | Current method-status rows satisfy the claim-readiness gate. | none |"
         )
     lines.extend(
         [
@@ -262,6 +271,10 @@ def write_markdown(
                 options=markdown_cell(row["available_options"]),
                 no_input_next=markdown_cell(row["no_input_next"]),
             )
+        )
+    if not packet_rows:
+        lines.append(
+            "| None | All required areas are ready under the selected local lock policy. |  | continue reporting exact-WRR caveats explicitly |"
         )
     if source_policy_rows:
         lines.extend(
@@ -407,6 +420,7 @@ def write_markdown(
             "- This is a decision packet, not a reproduction result.",
             "- Pair universe lock: keep_all_working_source; WNP/context and visual-review flags do not exclude pairs automatically.",
             "- D(w) lock: printed WRR formula main; reported-program formula remains sensitivity output.",
+            "- Aggregate/permutation lock: keep-all cap1000 999,999 date-label permutation over the full selected-universe corrected-distance output.",
             "- No visual-review note excludes a pair automatically; pair exclusion would require an explicit source-policy change.",
             "",
         ]

@@ -206,15 +206,18 @@ Already implemented:
   classifying the best current cap-1000 gap as zero-ordinary-hit failures
   rather than under-minimum perturbation failures. Current tracked output is
   `docs/WRR_DEFINED_GAP_REASON_AUDIT.md`.
-- cross-pair date-label permutation diagnostic in
-  `protocols/wrr_cross_pair_grid.toml`. Current cap-250 output crosses 168
+- cross-pair date-label permutation in
+  `protocols/wrr_cross_pair_grid.toml`. The legacy cap-250 output crosses 168
   imported appellations against 31 imported date rows, defines 1,423 corrected
   distances over 5,208 generated rows, and ranks the 50 defined observed
   same-record distances against 1,000 sampled date-label permutations with
-  diagnostic rho0 `0.003996003996`. The current repo-defined WNP-excluded
-  999,999-permutation diagnostic ranks 48 defined observed c-values over 174
-  observed rows at Bonferroni rho0 `0.00086`. Both are still diagnostic-only;
-  see `docs/WRR_CROSS_PAIR_GRID.md`.
+  diagnostic rho0 `0.003996003996`. The locked local cap-1000 output defines
+  2,013 corrected distances over the same 5,208 rows; its 999,999-permutation
+  keep-all run ranks 72 defined observed c-values over 182 observed rows at
+  Bonferroni rho0 `0.000404`. This is locked local evidence under the selected
+  repo policy, while exact published WRR reproduction remains caveated by the
+  163-distance gap and source-transcription limits; see
+  `docs/WRR_CROSS_PAIR_GRID.md`.
 - exploratory all-lane corrected-distance diagnostics over all 182 imported
   same-record pairs were run before direct perturbed-letter search and should be
   treated as obsolete historical diagnostics until rerun with the current
@@ -222,10 +225,10 @@ Already implemented:
 
 Not yet implemented:
 
-- an optimized full-run real-corpus corrected-distance driver over the final
-  locked pair universe and source-selected `D(w)` formula;
-- claim-grade P1..P4 and permutation driver over the locked personality/date
-  pair table.
+- exact published WRR reproduction over independently locked source
+  transcriptions and the source-selected `D(w)` formula;
+- published-method equivalence proof for the repo-defined permutation against
+  the original WRR procedure.
 
 ## Ambiguities To Pin Before Code
 

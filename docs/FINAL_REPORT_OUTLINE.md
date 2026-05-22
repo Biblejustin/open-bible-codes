@@ -165,13 +165,14 @@ Use cautious language:
   with gap 0, but this is diagnostic only and does not select a source policy;
 - visual triage notes separate OCR misses from title-prefix and Chelm
   source-rule questions, but those notes do not exclude pairs automatically;
-- current accepted repo-defined 999,999 date-label permutation diagnostic
-  excludes WNP-dispute-flagged rows, uses the current cap-250
-  `corrected_distance` field, observes 174 rows and 48 defined `c(w,w')`
-  values, and reports Bonferroni `rho0 = 0.00086`;
-- exact WRR reproduction remains under-specified until the source-locked pair
-  table and final `D(w)` decision are complete;
-- exact-reproduction readiness gate: `docs/WRR_CLAIM_READINESS.md`, blocked.
+- current accepted repo-defined 999,999 date-label permutation result keeps the
+  selected full source universe, uses the cap-1000 corrected-distance field,
+  observes 182 rows and 72 defined `c(w,w')` values, and reports Bonferroni
+  `rho0 = 0.000404`;
+- exact published WRR reproduction remains caveated by source-transcription
+  limits and the 163-distance gap;
+- locked local readiness gate: `docs/WRR_CLAIM_READINESS.md`, ready for
+  repo-defined locked-method language.
 
 ### 9. Claim-Language Boundary
 

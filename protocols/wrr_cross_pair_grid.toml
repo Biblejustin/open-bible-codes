@@ -1,5 +1,5 @@
 name = "wrr_cross_pair_grid"
-description = "Build the WRR2 appellation/date cross-pair grid and run cap-250 corrected-distance diagnostics."
+description = "Build the WRR2 appellation/date cross-pair grid and run cap-250 plus cap-1000 corrected-distance diagnostics."
 manifest_out = "reports/wrr_1994/cross_pair_grid/protocol.manifest.json"
 max_parallel = 1
 progress_interval_seconds = 15
@@ -145,6 +145,118 @@ outputs = [
 ]
 
 [[steps]]
+id = "compute_wrr2_cross_pair_corrected_distance_1000"
+description = "Run cap-1000 corrected-distance diagnostics over the generated cross-pair grid."
+argv = [
+  "-m", "scripts.analyze_wrr_corrected_distance",
+  "--pair-table", "reports/wrr_1994/wrr2_cross_pair_grid.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--candidate-lane", "all",
+  "--min-skip", "2",
+  "--search-max-skip", "1000",
+  "--direction", "both",
+  "--jobs", "0",
+  "--row-width-count", "10",
+  "--minimum-valid", "10",
+  "--skip-cap-mode", "term",
+  "--skip-cap-formula", "printed",
+  "--out", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000.csv",
+  "--summary-out", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000_summary.csv",
+  "--markdown-out", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000.md",
+  "--manifest-out", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_corrected_distance.py",
+  "reports/wrr_1994/wrr2_cross_pair_grid.csv",
+  "configs/example_koren_genesis.toml",
+  "els/wrr.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000.csv",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000_summary.csv",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000.md",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000.manifest.json",
+]
+
+[[steps]]
+id = "aggregate_wrr2_cross_pair_corrected_distance_1000"
+description = "Aggregate cap-1000 cross-pair corrected-distance diagnostics into P1..P4."
+argv = [
+  "-m", "scripts.analyze_wrr_corrected_distance_aggregate",
+  "--input", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000.csv",
+  "--p1-threshold", "0.2",
+  "--out", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000_aggregate.csv",
+  "--markdown-out", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000_aggregate.md",
+  "--manifest-out", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000_aggregate.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_corrected_distance_aggregate.py",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000.csv",
+  "els/wrr.py",
+]
+outputs = [
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000_aggregate.csv",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000_aggregate.md",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000_aggregate.manifest.json",
+]
+
+[[steps]]
+id = "run_wrr2_cross_pair_date_permutations_1000_highcap"
+description = "Run a 1000-sample date-label permutation diagnostic over the cap-1000 cross-pair matrix."
+argv = [
+  "-m", "scripts.analyze_wrr_cross_pair_permutations",
+  "--input", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000.csv",
+  "--permutations", "1000",
+  "--seed", "1994",
+  "--p1-threshold", "0.2",
+  "--sample-output-limit", "0",
+  "--out", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_1000_observed_only.csv",
+  "--summary-out", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_1000_summary.csv",
+  "--markdown-out", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_1000.md",
+  "--manifest-out", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_1000.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_cross_pair_permutations.py",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000.csv",
+  "els/wrr.py",
+]
+outputs = [
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_1000_observed_only.csv",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_1000_summary.csv",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_1000.md",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_1000.manifest.json",
+]
+
+[[steps]]
+id = "run_wrr2_cross_pair_date_permutations_999999_highcap"
+description = "Run the locked keep-all 999,999 date-label permutation over the cap-1000 cross-pair matrix."
+argv = [
+  "-m", "scripts.analyze_wrr_cross_pair_permutations",
+  "--input", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000.csv",
+  "--permutations", "999999",
+  "--seed", "1994",
+  "--p1-threshold", "0.2",
+  "--sample-output-limit", "0",
+  "--out", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999_observed_only.csv",
+  "--summary-out", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999_summary.csv",
+  "--markdown-out", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999.md",
+  "--manifest-out", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_cross_pair_permutations.py",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000.csv",
+  "els/wrr.py",
+]
+outputs = [
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999_observed_only.csv",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999_summary.csv",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999.md",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999.manifest.json",
+]
+
+[[steps]]
 id = "build_wrr_method_status_after_cross_pair"
 description = "Refresh WRR method-status docs after cross-pair permutation outputs are current."
 argv = [
@@ -165,8 +277,8 @@ argv = [
   "--dw-formula-sensitivity", "reports/wrr_1994/wrr_dw_formula_sensitivity.csv",
   "--corrected-distance-aggregate", "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_aggregate.csv",
   "--highcap-corrected-distance-summary", "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged_summary.csv",
-  "--cross-pair-permutation-summary", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000_summary.csv",
-  "--cross-pair-recommended-permutation-summary", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv",
+  "--cross-pair-permutation-summary", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_1000_summary.csv",
+  "--cross-pair-recommended-permutation-summary", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999_summary.csv",
   "--primary-result-table", "reports/wrr_1994/wrr_primary_result_table.csv",
   "--out", "reports/wrr_1994/wrr_method_status.csv",
   "--markdown-out", "docs/WRR_METHOD_STATUS.md",
@@ -190,8 +302,8 @@ inputs = [
   "reports/wrr_1994/wrr_dw_formula_sensitivity.csv",
   "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_aggregate.csv",
   "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged_summary.csv",
-  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000_summary.csv",
-  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_1000_summary.csv",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999_summary.csv",
   "reports/wrr_1994/wrr_primary_result_table.csv",
 ]
 outputs = [
@@ -218,4 +330,78 @@ outputs = [
   "reports/wrr_1994/wrr_claim_readiness.csv",
   "docs/WRR_CLAIM_READINESS.md",
   "reports/wrr_1994/wrr_claim_readiness.manifest.json",
+]
+
+[[steps]]
+id = "build_wrr_lock_options_after_cross_pair"
+description = "Refresh WRR lock options after cap-1000 permutation output is current."
+argv = [
+  "-m", "scripts.build_wrr_lock_options",
+  "--pair-summary", "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "--skip-summary", "reports/wrr_1994/wrr2_skip_caps_summary.csv",
+  "--variants", "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
+  "--recommended-permutation", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999_summary.csv",
+  "--source-review-summary", "reports/wrr_1994/wrr_source_review_queue_summary.csv",
+  "--source-policy-scenarios", "reports/wrr_1994/wrr_source_policy_scenarios.csv",
+  "--source-policy-term-impacts", "reports/wrr_1994/wrr_source_policy_term_impacts.csv",
+  "--direct-all-lanes-250-summary", "reports/wrr_1994/direct_all/wrr2_corrected_distance_all_lanes_250_summary.csv",
+  "--direct-all-lanes-1000-summary", "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged_summary.csv",
+  "--direct-all-lanes-1000-program-summary", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged_summary.csv",
+  "--direct-all-lanes-1000", "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.csv",
+  "--direct-all-lanes-1000-program", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv",
+  "--out", "reports/wrr_1994/wrr_lock_options.csv",
+  "--markdown-out", "docs/WRR_LOCK_OPTIONS.md",
+  "--manifest-out", "reports/wrr_1994/wrr_lock_options.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_lock_options.py",
+  "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "reports/wrr_1994/wrr2_skip_caps_summary.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999_summary.csv",
+  "reports/wrr_1994/wrr_source_review_queue_summary.csv",
+  "reports/wrr_1994/wrr_source_policy_scenarios.csv",
+  "reports/wrr_1994/wrr_source_policy_term_impacts.csv",
+  "reports/wrr_1994/direct_all/wrr2_corrected_distance_all_lanes_250_summary.csv",
+  "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged_summary.csv",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged_summary.csv",
+  "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.csv",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_lock_options.csv",
+  "docs/WRR_LOCK_OPTIONS.md",
+  "reports/wrr_1994/wrr_lock_options.manifest.json",
+]
+
+[[steps]]
+id = "build_wrr_claim_blocker_packet_after_cross_pair"
+description = "Refresh WRR blocker packet after claim-readiness and lock options are current."
+argv = [
+  "-m", "scripts.build_wrr_claim_blocker_packet",
+  "--readiness", "reports/wrr_1994/wrr_claim_readiness.csv",
+  "--lock-options", "reports/wrr_1994/wrr_lock_options.csv",
+  "--source-queue", "reports/wrr_1994/wrr_source_review_queue.csv",
+  "--method-status", "reports/wrr_1994/wrr_method_status.csv",
+  "--source-policy-scenarios", "reports/wrr_1994/wrr_source_policy_scenarios.csv",
+  "--source-policy-term-impacts", "reports/wrr_1994/wrr_source_policy_term_impacts.csv",
+  "--dw-formula-sensitivity", "reports/wrr_1994/wrr_dw_formula_sensitivity.csv",
+  "--out", "reports/wrr_1994/wrr_claim_blocker_packet.csv",
+  "--markdown-out", "docs/WRR_CLAIM_BLOCKER_PACKET.md",
+  "--manifest-out", "reports/wrr_1994/wrr_claim_blocker_packet.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_claim_blocker_packet.py",
+  "reports/wrr_1994/wrr_claim_readiness.csv",
+  "reports/wrr_1994/wrr_lock_options.csv",
+  "reports/wrr_1994/wrr_source_review_queue.csv",
+  "reports/wrr_1994/wrr_method_status.csv",
+  "reports/wrr_1994/wrr_source_policy_scenarios.csv",
+  "reports/wrr_1994/wrr_source_policy_term_impacts.csv",
+  "reports/wrr_1994/wrr_dw_formula_sensitivity.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_claim_blocker_packet.csv",
+  "docs/WRR_CLAIM_BLOCKER_PACKET.md",
+  "reports/wrr_1994/wrr_claim_blocker_packet.manifest.json",
 ]

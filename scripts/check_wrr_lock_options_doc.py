@@ -24,8 +24,8 @@ REQUIRED_PHRASES = (
     "Broad same-record WRR2 rows are the selected working source policy.",
     "No source-review flag or visual-review note excludes a pair automatically.",
     "Printed `D(w)` is the main source-facing rule; reported-program `D(w)` remains sensitivity output.",
-    "Date-label permutation output remains diagnostic until corrected distances and the aggregate rule are source-locked.",
-    "Claim-grade language still requires a locked aggregate/permutation",
+    "Date-label permutation output is locked for the repo-defined keep_all_working_source cap1000 run.",
+    "Exact published WRR reproduction language remains caveated",
 )
 
 

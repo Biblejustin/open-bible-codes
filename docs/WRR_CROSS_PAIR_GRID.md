@@ -1,6 +1,6 @@
 # WRR Cross-Pair Grid
 
-Status: diagnostic-only, not a WRR reproduction.
+Status: locked local permutation evidence; exact published WRR reproduction remains caveated.
 
 The WRR corrected-distance permutation test needs distances for generated
 appellation/date pairings, not only the same-record source pairs. This grid
@@ -33,7 +33,7 @@ python3 -m scripts.run_protocol protocols/wrr_cross_pair_grid.toml --resume
 | zero-hit pairs at count-smoke cap | 3696 |
 | pairs with skip-cap target unreached | 2233 |
 
-## Cap-250 Corrected-Distance Diagnostic
+## Legacy Cap-250 Corrected-Distance Diagnostic
 
 | Item | Count |
 | --- | ---: |
@@ -70,10 +70,10 @@ Cap-250 diagnostic aggregate:
 | P3 | 0.174975735761 |
 | P4 | 0.137608477166 |
 
-## Date-Permutation Diagnostic
+## Legacy Cap-250 Date-Permutation Diagnostic
 
 This diagnostic shuffles date-concept labels over the cross-pair matrix. These
-runs are repo-defined diagnostics over the current cap-250 corrected-distance
+runs are legacy repo-defined diagnostics over the cap-250 corrected-distance
 field, not exact WRR reproductions.
 
 | Item | Value |
@@ -114,7 +114,7 @@ WNP-dispute-flagged rows excluded, same seed and sample count:
 | rho P4 | 0.001998001998 |
 | Bonferroni rho0 | 0.003996003996 |
 
-Recommended repo-defined 999,999-permutation run:
+Legacy repo-defined 999,999-permutation run:
 
 | Item | Value |
 | --- | ---: |
@@ -139,13 +139,96 @@ Recommended repo-defined 999,999-permutation run:
 | permutation defined-value range | 25..59 |
 | identity permutations | 0 |
 
+## Cap-1000 Corrected-Distance Matrix
+
+This matrix uses the selected full WRR2 source universe, the printed `D(w)` cap
+formula, and direct all-lane corrected-distance search up to skip 1000.
+
+| Item | Count |
+| --- | ---: |
+| selected grid rows | 5208 |
+| defined `c(w,w')` rows | 2013 |
+| ordinary-not-valid rows | 3183 |
+| under-minimum-valid rows | 12 |
+| minimum corrected distance | 0.008 |
+| maximum valid perturbations for one pair | 125 |
+
+Cap-1000 aggregate:
+
+| Metric | Value |
+| --- | ---: |
+| defined `c(w,w')` values | 2013 |
+| P1 | 6.65545084562e-07 |
+| P2 | 7.6208422043e-09 |
+| P3 | 0.00137172653677 |
+| P4 | 0.00474912112167 |
+
+## Locked Cap-1000 Date-Permutation Run
+
+This locked local run keeps all selected WRR2 source rows, uses the cap-1000
+corrected-distance matrix, and shuffles date-concept labels across 30 concepts.
+It is claim-grade for the repo-defined local lock policy, while exact published
+WRR reproduction remains caveated by the 163-distance gap and source
+transcription limits.
+
+Cap-1000 1,000-permutation diagnostic:
+
+| Item | Value |
+| --- | ---: |
+| permutations | 1000 |
+| seed | 1994 |
+| sample rows written | 1001 |
+| concepts shuffled | 30 |
+| observed source rows | 182 |
+| observed defined `c(w,w')` values | 72 |
+| observed P1 | 0.00252257011468 |
+| observed P2 | 1.16472976875e-05 |
+| observed P3 | 0.0184584022574 |
+| observed P4 | 0.000274264355592 |
+| rho P1 | 0.013986013986 |
+| rho P2 | 0.000999000999001 |
+| rho P3 | 0.0474525474525 |
+| rho P4 | 0.000999000999001 |
+| Bonferroni rho0 | 0.003996003996 |
+| permutation row range | 169..182 |
+| permutation defined-value range | 53..75 |
+| identity permutations | 0 |
+
+Locked cap-1000 999,999-permutation run:
+
+| Item | Value |
+| --- | ---: |
+| pair universe | selected full WRR2 source universe |
+| corrected-distance input | cap-1000 `corrected_distance` field |
+| permutation rule | date-label shuffle across 30 concepts |
+| permutations | 999999 |
+| seed | 1994 |
+| sample rows written | 1 |
+| observed source rows | 182 |
+| observed defined `c(w,w')` values | 72 |
+| observed P1 | 0.00252257011468 |
+| observed P2 | 1.16472976875e-05 |
+| observed P3 | 0.0184584022574 |
+| observed P4 | 0.000274264355592 |
+| rho P1 | 0.019722 |
+| rho P2 | 0.000101 |
+| rho P3 | 0.0506065 |
+| rho P4 | 0.000535 |
+| Bonferroni rho0 | 0.000404 |
+| permutation row range | 169..182 |
+| permutation defined-value range | 50..75 |
+| identity permutations | 0 |
+
 ## Read
 
 - Same-record rows preserve the imported WRR2 source pairing.
 - Cross-record rows are generated permutation-prep rows.
 - WNP Zacut rows are flagged because the WNP critique disputes those records;
-  the recommended repo-defined run excludes that flag.
+  the legacy cap-250 comparison excludes that flag, while the locked cap-1000
+  local run keeps all selected source rows.
 - Visual-review notes do not change pair inclusion until an explicit source
   policy is selected.
-- Corrected-distance and date-permutation output from this grid is diagnostic
-  for the current repo protocol, not exact WRR reproduction language.
+- Cap-1000 corrected-distance and date-permutation output from this grid is the
+  locked local evidence path for repo-defined WRR language; exact published WRR
+  reproduction remains caveated by the 163-distance gap and source
+  transcription limits.

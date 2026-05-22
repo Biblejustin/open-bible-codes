@@ -17,7 +17,8 @@ DEFAULT_PAIR_SUMMARY = Path("reports/wrr_1994/wrr2_pair_table_reconciliation_sum
 DEFAULT_SKIP_SUMMARY = Path("reports/wrr_1994/wrr2_skip_caps_summary.csv")
 DEFAULT_VARIANTS = Path("reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv")
 DEFAULT_RECOMMENDED_PERMUTATION = Path(
-    "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv"
+    "reports/wrr_1994/cross_pair_grid/highcap_1000/"
+    "wrr2_cross_pair_permutations_999999_summary.csv"
 )
 DEFAULT_SOURCE_REVIEW_SUMMARY = Path("reports/wrr_1994/wrr_source_review_queue_summary.csv")
 DEFAULT_SOURCE_POLICY_SCENARIOS = Path("reports/wrr_1994/wrr_source_policy_scenarios.csv")
@@ -301,8 +302,8 @@ def build_option_rows(
         },
         {
             "area": "Permutation",
-            "option": "repo-defined WNP-excluded 999,999 date-label diagnostic",
-            "status": "best_current_diagnostic_not_reproduction",
+            "option": "repo-defined keep-all cap1000 999,999 date-label permutation",
+            "status": "locked_local_permutation",
             "evidence": (
                 f"{permutation_row.get('permutations', '')} permutations; "
                 f"{permutation_row.get('observed_rows', '')} observed rows; "
@@ -310,9 +311,9 @@ def build_option_rows(
                 f"rho0={permutation_row.get('rho0_bonferroni', '')}."
             ),
             "recommendation": (
-                "Use for local diagnostic evidence while keeping exact WRR reproduction blocked."
+                "Use as the locked repo-defined aggregate/permutation result under keep_all_working_source and printed D(w)."
             ),
-            "claim_boundary": "diagnostic only",
+            "claim_boundary": "locked local evidence; exact published reproduction still caveated",
         },
     ]
 
@@ -501,8 +502,8 @@ def write_markdown(
             "WRR2 pair input as keep_all_working_source, kept the printed formula",
             "as the source-facing main D(w),",
             "carried the reported-program formula as a sensitivity variant, and",
-            "treated the WNP-excluded 999,999 date-label permutation as diagnostic",
-            "evidence only.",
+            "locked the keep-all cap1000 999,999 date-label permutation as local",
+            "evidence under the selected policy.",
             "",
         ]
     )
@@ -524,10 +525,10 @@ def write_markdown(
             "- Broad same-record WRR2 rows are the selected working source policy.",
             "- No source-review flag or visual-review note excludes a pair automatically.",
             "- Printed `D(w)` is the main source-facing rule; reported-program `D(w)` remains sensitivity output.",
-            "- Date-label permutation output remains diagnostic until corrected distances and the aggregate rule are source-locked.",
+            "- Date-label permutation output is locked for the repo-defined keep_all_working_source cap1000 run.",
             "",
-            "Claim-grade language still requires a locked aggregate/permutation",
-            "procedure over the full selected-universe corrected-distance output.",
+            "Exact published WRR reproduction language remains caveated by the",
+            "source-defined 163-distance gap and primary-source transcription limits.",
         ]
     )
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

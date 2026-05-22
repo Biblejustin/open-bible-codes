@@ -367,20 +367,21 @@ post-hoc cluster selection.
 
 WRR 1994 has not yet been reproduced exactly. The current repo imports source
 files, audits source shape, counts terms in Koren Genesis, computes
-corrected-distance diagnostics, and now has a repo-defined 999,999 date-label
-permutation diagnostic over the current cross-pair matrix.
+corrected-distance diagnostics, and now has a locked local cap-1000 keep-all
+999,999 date-label permutation result over the current cross-pair matrix.
 
-For the current working position, the repo-defined diagnostic uses the current
-cap-250 `corrected_distance` field, excludes WNP-dispute-flagged rows, shuffles
-date labels across 30 concepts, and writes summary-only output. It observed 174
-source rows, 48 defined `c(w,w')` values, and Bonferroni `rho0 = 0.00086`.
+For the current working position, the repo-defined locked result uses the
+cap-1000 corrected-distance matrix, keeps the selected full source universe,
+shuffles date labels across 30 concepts, and writes summary-only output. It
+observed 182 source rows, 72 defined `c(w,w')` values, and Bonferroni
+`rho0 = 0.000404`.
 
-That is meaningful local evidence for the repo-defined protocol, but it is not
-exact WRR reproduction language. The current claim-readiness gate remains
-blocked for exact reproduction because the source-locked pair universe and
-source-locked `D(w)` rule are still unresolved. The source-policy scenarios are
-diagnostic only: baseline 165 >=5 pairs, exclude WNP Zacut 157, and exclude all
-source-review flags 154; no source policy is selected.
+That is locked local evidence for the repo-defined protocol, but it is not
+exact published WRR reproduction language. Exact published reproduction remains
+caveated by source-transcription limits and the 163-distance gap. The
+source-policy scenarios are diagnostic only: baseline 165 >=5 pairs, exclude
+WNP Zacut 157, and exclude all source-review flags 154; no source policy is
+selected.
 
 The newer single-term Zacut diagnostics narrow the source-policy issue without
 settling it: `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and `M$HZKWTW` each individually

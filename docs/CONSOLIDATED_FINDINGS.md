@@ -789,17 +789,16 @@ and current WRR repo-defined diagnostic status. It then builds a generated
 report index and writes `reports/real_report_run/summary.md`. It does not
 expand declared screening lists, widen skip ranges, or promote rows to claims.
 
-WRR now has a repo-defined 999,999 date-label permutation diagnostic using the
-current cap-250 corrected-distance field and excluding WNP-dispute-flagged rows:
-174 observed rows, 48 defined `c(w,w')` values, and Bonferroni `rho0 = 0.00086`.
-Exact WRR claim readiness is still explicitly gated in
-`docs/WRR_CLAIM_READINESS.md`; it remains blocked until the source-locked pair
-universe and source-locked `D(w)` formula are resolved. Current source-policy
-scenarios remain diagnostic: baseline 165 >=5 pairs, exclude WNP Zacut 157, and
-exclude all source-review flags 154. The single-term Zacut diagnostic narrows
-the count gap further: `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and `M$HZKWTW` each
-individually leave 163 >=5 pairs with gap 0 if excluded, but no source policy is
-selected from that count alone.
+WRR now has locked local evidence: the cap-1000 keep-all 999,999 date-label
+permutation run uses the selected full source universe, observes 182 rows with
+72 defined `c(w,w')` values, and reports Bonferroni `rho0 = 0.000404`. Exact
+published WRR reproduction remains caveated by source-transcription limits and
+the 163-distance gap. Current source-policy scenarios remain diagnostic:
+baseline 165 >=5 pairs, exclude WNP Zacut 157, and exclude all source-review
+flags 154. The single-term Zacut diagnostic narrows the count gap further:
+`ZKWTA`, `ZKWTW`, `M$HZKWTA`, and `M$HZKWTW` each individually leave
+163 >=5 pairs with gap 0 if excluded, but no source policy is selected from
+that count alone.
 Visual triage now separates OCR misses from title-prefix and Chelm source-rule
 questions, but those notes do not exclude pairs automatically.
 

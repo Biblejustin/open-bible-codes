@@ -144,17 +144,16 @@ Already implemented:
   triage only, not locked transcription, and do not exclude pairs automatically.
 - WRR2 cross-pair grid in `scripts/build_wrr_cross_pair_grid.py` and
   `protocols/wrr_cross_pair_grid.toml`, crossing every imported appellation
-  with every imported date for future date-label permutation diagnostics.
-  Current cap-250 diagnostic output defines 1,423 corrected distances over
-  5,208 generated rows. The 1,000-sample date-label permutation diagnostic
-  ranks the 50 defined observed same-record distances at Bonferroni rho0
-  `0.003996003996`. The current repo-defined WNP-excluded 999,999-permutation
-  diagnostic ranks 48 defined observed c-values over 174 observed rows at
-  Bonferroni rho0 `0.00086`; see `docs/WRR_CROSS_PAIR_GRID.md`.
+  with every imported date for date-label permutation. Legacy cap-250 output
+  defines 1,423 corrected distances over 5,208 generated rows. The locked local
+  cap-1000 output defines 2,013 corrected distances over the same grid, and
+  the keep-all 999,999-permutation run ranks 72 defined observed c-values over
+  182 observed rows at Bonferroni rho0 `0.000404`; see
+  `docs/WRR_CROSS_PAIR_GRID.md`.
 - WRR claim-readiness gate in `scripts/check_wrr_claim_readiness.py`, wired
-  into `protocols/wrr_audit_counts.toml`, keeping reproduction language blocked
-  until pair universe, `D(w)`, full corrected distance, and permutation/aggregate
-  statuses are locked.
+  into `protocols/wrr_audit_counts.toml`, marking the selected repo-defined
+  local lock policy ready while keeping exact published WRR reproduction
+  caveated by source and methodology limits.
 
 Source audit:
 

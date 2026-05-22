@@ -65,7 +65,7 @@ WRR_SKIP_CAPS_SUMMARY = Path("reports/wrr_1994/wrr2_skip_caps_summary.csv")
 WRR_PAIR_TABLE_RECONCILIATION = Path("reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv")
 WRR_PERTURBATION_SUMMARY = Path("reports/wrr_1994/wrr2_perturbation_diagnostics_summary.csv")
 WRR_CROSS_PAIR_RECOMMENDED_PERMUTATION_SUMMARY = Path(
-    "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv"
+    "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999_summary.csv"
 )
 WRR_SOURCE_POLICY_SCENARIOS = Path("reports/wrr_1994/wrr_source_policy_scenarios.csv")
 WRR_SOURCE_POLICY_TERM_IMPACTS = Path("reports/wrr_1994/wrr_source_policy_term_impacts.csv")
@@ -3619,10 +3619,11 @@ def wrr_audit_section(
             "source review treats `163` as a defined corrected-distance output count,",
             "not a raw pair table.",
             "",
-            "Current read: WRR has repo-defined diagnostic evidence, but exact WRR",
-            "reproduction remains `under_specified`. The working source policy is",
-            "`keep_all_working_source`, and printed `D(w)` is the main rule; claim-grade WRR",
-            "language still needs a locked aggregate/permutation procedure over the full selected-universe corrected-distance output.",
+            "Current read: WRR has locked repo-defined local evidence under",
+            "`keep_all_working_source`, printed `D(w)`, full cap1000 corrected",
+            "distances, and a 999,999 date-label permutation. Exact published WRR",
+            "reproduction remains caveated by the source-defined 163-distance gap",
+            "and primary-source transcription limits.",
             "The claim-blocker packet gathers the current",
             "readiness blockers, lock options, WNP/context source-review flags,",
             "and visual triage notes.",

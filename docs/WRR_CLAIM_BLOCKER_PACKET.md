@@ -1,6 +1,6 @@
 # WRR Claim Blocker Packet
 
-Status: full corrected-distance run selected; aggregate/permutation still not claim-grade.
+Status: no current claim-readiness blockers under selected local WRR lock policy.
 
 This packet records the selected WRR working policy and gathers the
 remaining claim-readiness blockers, current lock options, WNP/context source
@@ -16,13 +16,13 @@ python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/w
 
 | Area | Status | Blocker | Input needed |
 | --- | --- | --- | --- |
-| Aggregate statistic and permutation | `diagnostic_not_claim_grade` | Aggregate statistic and permutation: status diagnostic_not_claim_grade is not claim-ready; requires one of claim_grade_ready,permutation_locked | lock aggregate/permutation procedure over full corrected-distance output |
+| None | `ready` | Current method-status rows satisfy the claim-readiness gate. | none |
 
 ## No-Input Boundary
 
 | Area | Current read | Available options | No-input next |
 | --- | --- | --- | --- |
-| Aggregate statistic and permutation | Published Table 3 ranks are source-audited; local diagnostic P1..P4 and date-permutation runs exist, including a repo-defined 999,999 run, but this is not an exact WRR reproduction. |  | keep date-label permutation diagnostics separate from WRR reproduction language |
+| None | All required areas are ready under the selected local lock policy. |  | continue reporting exact-WRR caveats explicitly |
 
 ## Source Policy Scenario Impact
 
@@ -78,4 +78,5 @@ python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/w
 - This is a decision packet, not a reproduction result.
 - Pair universe lock: keep_all_working_source; WNP/context and visual-review flags do not exclude pairs automatically.
 - D(w) lock: printed WRR formula main; reported-program formula remains sensitivity output.
+- Aggregate/permutation lock: keep-all cap1000 999,999 date-label permutation over the full selected-universe corrected-distance output.
 - No visual-review note excludes a pair automatically; pair exclusion would require an explicit source-policy change.

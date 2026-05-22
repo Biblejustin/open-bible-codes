@@ -15,11 +15,19 @@ def test_missing_doc_fails(tmp_path: Path) -> None:
 
 def test_missing_permutation_summary_fails(tmp_path: Path) -> None:
     doc = tmp_path / "WRR_CROSS_PAIR_GRID.md"
-    doc.write_text("\n".join(check.REQUIRED_PHRASES[:-5]) + "\n", encoding="utf-8")
+    doc.write_text(
+        "\n".join(
+            phrase
+            for phrase in check.REQUIRED_PHRASES
+            if phrase != "| rho P1 | 0.019722 |"
+        )
+        + "\n",
+        encoding="utf-8",
+    )
 
     failures = check.validate_cross_pair_grid_doc(doc)
 
-    assert any("999999" in failure for failure in failures)
+    assert any("0.019722" in failure for failure in failures)
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:

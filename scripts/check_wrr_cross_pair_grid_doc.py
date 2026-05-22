@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate WRR cross-pair grid doc stays diagnostic."""
+"""Validate WRR cross-pair grid doc stays aligned with locked local evidence."""
 
 from __future__ import annotations
 
@@ -12,22 +12,35 @@ DEFAULT_DOC = Path("docs/WRR_CROSS_PAIR_GRID.md")
 
 REQUIRED_PHRASES = (
     "# WRR Cross-Pair Grid",
-    "Status: diagnostic-only, not a WRR reproduction.",
+    "Status: locked local permutation evidence; exact published WRR reproduction remains caveated.",
     "| pairs | 5208 |",
     "| same-record source pairs | 182 |",
     "| cross-record permutation pairs | 5026 |",
     "| defined `c(w,w')` rows | 1423 |",
     "| P1 | 0.321861824814 |",
-    "repo-defined diagnostics over the current cap-250 corrected-distance field, not exact WRR reproductions.",
+    "legacy repo-defined diagnostics over the cap-250 corrected-distance field, not exact WRR reproductions.",
     "| permutations | 1000 |",
     "| observed defined `c(w,w')` values | 50 |",
     "| Bonferroni rho0 | 0.003996003996 |",
-    "Recommended repo-defined 999,999-permutation run:",
+    "Legacy repo-defined 999,999-permutation run:",
     "| permutations | 999999 |",
     "| observed defined `c(w,w')` values | 48 |",
     "| Bonferroni rho0 | 0.00086 |",
+    "## Cap-1000 Corrected-Distance Matrix",
+    "| defined `c(w,w')` rows | 2013 |",
+    "| P1 | 6.65545084562e-07 |",
+    "| P2 | 7.6208422043e-09 |",
+    "## Locked Cap-1000 Date-Permutation Run",
+    "claim-grade for the repo-defined local lock policy",
+    "| pair universe | selected full WRR2 source universe |",
+    "| corrected-distance input | cap-1000 `corrected_distance` field |",
+    "| observed source rows | 182 |",
+    "| observed defined `c(w,w')` values | 72 |",
+    "| rho P1 | 0.019722 |",
+    "| rho P2 | 0.000101 |",
+    "| Bonferroni rho0 | 0.000404 |",
     "Visual-review notes do not change pair inclusion until an explicit source policy is selected.",
-    "Corrected-distance and date-permutation output from this grid is diagnostic",
+    "Cap-1000 corrected-distance and date-permutation output from this grid is the locked local evidence path",
 )
 
 

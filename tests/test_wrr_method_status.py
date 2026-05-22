@@ -191,24 +191,26 @@ class WrrMethodStatusTests(unittest.TestCase):
             cross_pair_permutation_row={
                 "permutations": "1000",
                 "seed": "1994",
-                "observed_defined_corrected_distances": "50",
+                "source": "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000.csv",
+                "observed_defined_corrected_distances": "72",
                 "observed_rows": "182",
-                "rho_p1": "0.000999000999001",
+                "rho_p1": "0.013986013986",
                 "rho_p2": "0.000999000999001",
-                "rho_p3": "0.0044955044955",
+                "rho_p3": "0.0474525474525",
                 "rho_p4": "0.000999000999001",
                 "rho0_bonferroni": "0.003996003996",
             },
             cross_pair_recommended_permutation_row={
                 "permutations": "999999",
                 "seed": "1994",
-                "observed_defined_corrected_distances": "48",
-                "observed_rows": "174",
-                "rho_p1": "0.0011565",
-                "rho_p2": "0.000215",
-                "rho_p3": "0.0069545",
-                "rho_p4": "0.000926",
-                "rho0_bonferroni": "0.00086",
+                "source": "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000.csv",
+                "observed_defined_corrected_distances": "72",
+                "observed_rows": "182",
+                "rho_p1": "0.019722",
+                "rho_p2": "0.000101",
+                "rho_p3": "0.0506065",
+                "rho_p4": "0.000535",
+                "rho0_bonferroni": "0.000404",
             },
             highcap_corrected_distance_row={
                 "selected_pairs": "182",
@@ -281,13 +283,13 @@ class WrrMethodStatusTests(unittest.TestCase):
         self.assertIn("legacy ordinary-hit perturbation diagnostic: 80/120 rows with hits", by_area["Corrected distance c(w,w')"]["evidence"])
         self.assertIn("max row-min exact 12", by_area["Corrected distance c(w,w')"]["evidence"])
         self.assertIn("legacy ordinary-hit pair readiness: 0 ready, 40 missing hits, 46 under exact", by_area["Corrected distance c(w,w')"]["evidence"])
-        self.assertEqual(by_area["Aggregate statistic and permutation"]["status"], "diagnostic_not_claim_grade")
+        self.assertEqual(by_area["Aggregate statistic and permutation"]["status"], "permutation_locked")
         self.assertIn("G min P4 rank 4", by_area["Aggregate statistic and permutation"]["evidence"])
         self.assertIn("72 defined c-values from 182 rows", by_area["Aggregate statistic and permutation"]["evidence"])
-        self.assertIn("cross-pair date permutation diagnostic", by_area["Aggregate statistic and permutation"]["evidence"])
+        self.assertIn("cap1000 1000-sample date-label diagnostic", by_area["Aggregate statistic and permutation"]["evidence"])
         self.assertIn("rho0=0.003996003996", by_area["Aggregate statistic and permutation"]["evidence"])
-        self.assertIn("WNP-excluded repo-defined 999999", by_area["Aggregate statistic and permutation"]["evidence"])
-        self.assertIn("rho0=0.00086", by_area["Aggregate statistic and permutation"]["evidence"])
+        self.assertIn("locked keep-all cap1000 999999", by_area["Aggregate statistic and permutation"]["evidence"])
+        self.assertIn("rho0=0.000404", by_area["Aggregate statistic and permutation"]["evidence"])
 
     def test_corrected_distance_status_summarizes_defined_smoke_rows(self) -> None:
         rows = build_status_rows(

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check whether WRR work is ready for claim-grade reproduction language."""
+"""Check whether WRR work is ready for locked-method claim language."""
 
 from __future__ import annotations
 
@@ -121,7 +121,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
     lines = [
         "# WRR Claim Readiness",
         "",
-        f"Status: {'ready' if ready else 'blocked'} for claim-grade WRR reproduction language.",
+        f"Status: {'ready' if ready else 'blocked'} for claim-grade WRR locked-method language.",
         "",
         "This gate does not decide disputed WRR method questions. It only records",
         "whether the method-status matrix has the required locked statuses.",

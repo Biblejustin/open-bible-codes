@@ -18,7 +18,7 @@ or sensitivity variants into source policy.
 | Pair universe | defined-distance output interpretation | recommended_working_interpretation | The cited 163 is best treated as a corrected-distance output count, not a raw table count. Broad all-lane diagnostics now define 50 distances at cap 250 and 72 at cap 1000. | Use the defined set as diagnostic pressure only; it still does not reproduce the source-cited 163 distances. | full local run available; exact WRR reproduction still blocked |
 | D(w) skip-cap formula | printed WRR formula | source_locked_primary_formula | 120 skip-cap rows; printed formula currently selected in the audit; 55 rows do not reach the expected-hit target. | Use as the main source-facing D(w) formula because it is the printed WRR formula. | formula locked; full local corrected-distance run available |
 | D(w) skip-cap formula | reported WRR-program formula | required_sensitivity_variant | 13 program caps below printed; 107 equal; defined smoke rows printed/program/fixed250 = 28/28/28. All-lane cap-1000 program formula defines 72 rows and changes 0 pair rows versus printed. | Carry as a required sensitivity run because MBBK reports the WRR programs used this formula. | sensitivity only |
-| Permutation | repo-defined WNP-excluded 999,999 date-label diagnostic | best_current_diagnostic_not_reproduction | 999999 permutations; 174 observed rows; 48 defined c-values; rho0=0.00086. | Use for local diagnostic evidence while keeping exact WRR reproduction blocked. | diagnostic only |
+| Permutation | repo-defined keep-all cap1000 999,999 date-label permutation | locked_local_permutation | 999999 permutations; 182 observed rows; 72 defined c-values; rho0=0.000404. | Use as the locked repo-defined aggregate/permutation result under keep_all_working_source and printed D(w). | locked local evidence; exact published reproduction still caveated |
 
 ## Current No-Input Path
 
@@ -26,8 +26,8 @@ Proceeding no-input work has now wired the broad imported same-record
 WRR2 pair input as keep_all_working_source, kept the printed formula
 as the source-facing main D(w),
 carried the reported-program formula as a sensitivity variant, and
-treated the WNP-excluded 999,999 date-label permutation as diagnostic
-evidence only.
+locked the keep-all cap1000 999,999 date-label permutation as local
+evidence under the selected policy.
 
 Current broad-input result: the all-lane cap-1000 program-formula
 sensitivity run changes 0 pair rows versus the printed-formula run.
@@ -39,7 +39,7 @@ Recommended no-input working posture:
 - Broad same-record WRR2 rows are the selected working source policy.
 - No source-review flag or visual-review note excludes a pair automatically.
 - Printed `D(w)` is the main source-facing rule; reported-program `D(w)` remains sensitivity output.
-- Date-label permutation output remains diagnostic until corrected distances and the aggregate rule are source-locked.
+- Date-label permutation output is locked for the repo-defined keep_all_working_source cap1000 run.
 
-Claim-grade language still requires a locked aggregate/permutation
-procedure over the full selected-universe corrected-distance output.
+Exact published WRR reproduction language remains caveated by the
+source-defined 163-distance gap and primary-source transcription limits.

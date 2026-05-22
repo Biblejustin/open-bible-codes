@@ -34,10 +34,12 @@ DEFAULT_AGGREGATE = Path(
     "wrr2_corrected_distance_all_lanes_aggregate.csv"
 )
 DEFAULT_CROSS_PAIR_PERMUTATION_SUMMARY = Path(
-    "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000_summary.csv"
+    "reports/wrr_1994/cross_pair_grid/highcap_1000/"
+    "wrr2_cross_pair_permutations_1000_summary.csv"
 )
 DEFAULT_CROSS_PAIR_RECOMMENDED_PERMUTATION_SUMMARY = Path(
-    "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv"
+    "reports/wrr_1994/cross_pair_grid/highcap_1000/"
+    "wrr2_cross_pair_permutations_999999_summary.csv"
 )
 DEFAULT_HIGHCAP_CORRECTED_DISTANCE_SUMMARY = Path(
     "reports/wrr_1994/direct_all/highcap_1000/"
@@ -687,31 +689,43 @@ def aggregate_status(
     cross_pair_recommended_permutation_row: dict[str, str] | None = None,
 ) -> dict[str, str]:
     local_evidence = aggregate_evidence(corrected_distance_aggregate_row)
+    permutation_locked = is_full_universe_permutation_lock(
+        corrected_distance_aggregate_row,
+        cross_pair_recommended_permutation_row,
+    )
     permutation_evidence = cross_pair_permutation_evidence(
         cross_pair_permutation_row,
-        "cross-pair date permutation diagnostic",
+        "cap1000 1000-sample date-label diagnostic",
     )
     recommended_permutation_evidence = cross_pair_permutation_evidence(
         cross_pair_recommended_permutation_row,
-        "WNP-excluded repo-defined 999999 date permutation diagnostic",
+        "locked keep-all cap1000 999999 date-label permutation",
     )
     has_permutation = bool(
         cross_pair_permutation_row or cross_pair_recommended_permutation_row
     )
-    status = (
-        "diagnostic_not_claim_grade"
-        if has_permutation
-        else "source_locked_not_built"
-    )
+    if permutation_locked:
+        status = "permutation_locked"
+    elif has_permutation:
+        status = "diagnostic_not_claim_grade"
+    else:
+        status = "source_locked_not_built"
     current_read = (
-        "Published Table 3 ranks are source-audited; local diagnostic P1..P4 "
+        "Full selected-universe cap1000 aggregate/permutation is locked under "
+        "the repo policy: keep_all_working_source, printed D(w), and 999,999 "
+        "date-label shuffles. This supports locked-method local evidence, not "
+        "an exact published WRR reproduction claim."
+        if permutation_locked
+        else "Published Table 3 ranks are source-audited; local diagnostic P1..P4 "
         "and date-permutation runs exist, including a repo-defined 999,999 "
         "run, but this is not an exact WRR reproduction."
         if has_permutation
         else "Published Table 3 ranks are source-audited; local P1..P4 aggregate diagnostics exist, but the date-permutation runner is not built."
     )
     next_action = (
-        "Use the full selected-universe corrected-distance output and repo-defined 999,999 diagnostic for local evidence; lock aggregate/permutation before exact WRR reproduction language."
+        "Use the locked-method result with caveats: the local selected-policy run is complete, while exact published-WRR reproduction remains unsupported by the current source-defined 163-distance gap."
+        if permutation_locked
+        else "Use the full selected-universe corrected-distance output and repo-defined 999,999 diagnostic for local evidence; lock aggregate/permutation before exact WRR reproduction language."
         if has_permutation
         else "Implement only after final pair universe and corrected-distance values are locked."
     )
@@ -774,6 +788,22 @@ def cross_pair_permutation_evidence(row: dict[str, str] | None, label: str) -> s
         f"rho P1={row.get('rho_p1', '')}, P2={row.get('rho_p2', '')}, "
         f"P3={row.get('rho_p3', '')}, P4={row.get('rho_p4', '')}, "
         f"rho0={row.get('rho0_bonferroni', '')}"
+    )
+
+
+def is_full_universe_permutation_lock(
+    aggregate_row: dict[str, str] | None,
+    permutation_row: dict[str, str] | None,
+) -> bool:
+    if not aggregate_row or not permutation_row:
+        return False
+    return (
+        int_value(permutation_row.get("permutations", "")) == 999999
+        and int_value(permutation_row.get("observed_rows", ""))
+        == int_value(aggregate_row.get("rows", ""))
+        and int_value(permutation_row.get("observed_defined_corrected_distances", ""))
+        == int_value(aggregate_row.get("defined_corrected_distances", ""))
+        and "highcap_1000" in permutation_row.get("source", "")
     )
 
 

@@ -83,7 +83,7 @@ refutation of the WRR paper.
 | Exclusions | Every excluded appellation/date row has a citable rule | Not locked; one of four Zacut-appellation exclusions would close 165 to 163, but that is only a diagnostic hypothesis. The source-policy scenario packet does not select any exclusion rule. |
 | Skip caps | Term-specific WRR `D(w)` windows applied for each accepted term | Not locked; helpers now support both the printed WRR formula and the reported WRR-program formula. The skip-cap audit keeps printed selected while reporting program caps side by side. D(w) sensitivity currently shows cap-1000 all-lane printed/program defined 72/72 with 0 changed pair rows. |
 | Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Helpers now include conservative supplied-row domain labeling, real-corpus WRR2 domain diagnostics with undefined-reason labels, defined-domain-only ordinary `Q(w,w')` diagnostics, exact perturbed-ELS match checks, domain-weighted `Q(w,w')` summation for domain-labeled ELS rows, a tested pair-level corrected-distance arithmetic bridge for already-domain-labeled perturbation sets, a smoke real-corpus perturbed-row/domain driver, and the source-count WRR `v/m` rank step. Undefined `c(w,w')` conditions are source-backed; optimized full-run corrected distances over the final pair universe are still missing. |
-| Aggregate statistic | `P1`, `P2`, `P3`, `P4`, rank handling, and `rho0` run over the locked pair set | P1..P4 diagnostic aggregation now exists for defined corrected-distance rows; P3/P4 use the smaller non-Rabbi-title sample. Current direct-search smoke output has 28 defined values at cap 250 and 46 defined values at cap 1000. Cross-pair date-label permutation diagnostics now include a 1,000-sample all-row run and a repo-defined WNP-excluded 999,999-permutation run, but no reproduction driver can run until the pair set, `D(w)` formula, and permutation procedure are locked. |
+| Aggregate statistic | `P1`, `P2`, `P3`, `P4`, rank handling, and `rho0` run over the locked pair set | P1..P4 aggregation exists for defined corrected-distance rows; P3/P4 use the smaller non-Rabbi-title sample. Current direct-search smoke output has 28 defined values at cap 250 and 46 defined values at cap 1000. Cross-pair date-label permutation diagnostics include legacy cap-250 runs plus the locked local cap-1000 keep-all 999,999-permutation run. Exact published reproduction still needs independent source transcription and method-equivalence closure. |
 | Permutation test | Date/rabbi pairings shuffled under the declared WRR rule with recorded seeds/counts | Diagnostic date-label shuffles exist; claim-grade permutation remains blocked by pair-universe and `D(w)` locks. |
 | Report label | Result can be marked reproduction, failed reproduction, or under-specified | Current label must remain `under_specified`; `docs/WRR_CLAIM_READINESS.md` keeps the claim gate blocked. |
 
@@ -271,17 +271,17 @@ has 46 defined c-values and diagnostic P1 `0.00220968684352`, P2
 `6.37334076429e-06`, P3 `0.0108669973844`, and P4 `8.66346313541e-05`.
 Current cross-pair cap-250 permutation output uses 1,000 date-label shuffles
 over 30 concepts; the observed same-record rows have 50 defined c-values and
-diagnostic rho0 `0.003996003996`. The current recommended repo-defined
-WNP-excluded 999,999-permutation run uses the same cap-250 field over 174
-observed rows with 48 defined c-values and Bonferroni rho0 `0.00086`. These are
-still diagnostic-only. The repo still needs a claim-grade driver that:
+diagnostic rho0 `0.003996003996`. The locked local cap-1000 keep-all
+999,999-permutation run uses the selected full source universe over 182
+observed rows with 72 defined c-values and Bonferroni rho0 `0.000404`. That
+locks the repo-defined local evidence path. The repo still needs exact
+published-reproduction closure that:
 
-- computes corrected distances for the locked pair set;
-- computes `P1`, `P2`, `P3`, and `P4` over that locked set;
-- shuffles date/rabbi pairings under the declared WRR rule;
-- records random seeds, permutation count, ties, and manifests;
-- reports whether the run reproduces, fails to reproduce, or remains
-  under-specified.
+- verifies independent source transcriptions;
+- proves the selected `D(w)` and permutation procedure match the published WRR
+  procedure or states the mismatch;
+- records whether the run reproduces, fails to reproduce, or remains
+  under-specified against the published claim.
 
 ## Review Rule
 

@@ -13,13 +13,13 @@ def test_missing_doc_fails(tmp_path: Path) -> None:
     assert failures == [f"{tmp_path / 'missing.md'} is missing"]
 
 
-def test_missing_blocked_status_fails(tmp_path: Path) -> None:
+def test_missing_ready_status_fails(tmp_path: Path) -> None:
     doc = tmp_path / "WRR_CLAIM_READINESS.md"
     doc.write_text("\n".join(check.REQUIRED_PHRASES[1:]) + "\n", encoding="utf-8")
 
     failures = check.validate_readiness_doc(doc)
 
-    assert any("Status: blocked" in failure for failure in failures)
+    assert any("Status: ready" in failure for failure in failures)
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:

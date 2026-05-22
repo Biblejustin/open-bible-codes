@@ -124,9 +124,9 @@ No current row should be written as a public claim.
   remain absent or effectively absent in the observed Hebrew and Greek screens.
 - The LXX apocrypha bridge boundary did not stand out from shuffled insertion
   controls.
-- WRR 1994 has not been reproduced exactly; the project has source/import
-  work and a repo-defined 999,999 date-label permutation diagnostic with
-  Bonferroni `rho0 = 0.00086`.
+- WRR 1994 has not been reproduced exactly; the project has source/import work
+  and a locked local cap-1000 keep-all 999,999 date-label permutation result
+  with Bonferroni `rho0 = 0.000404`.
 - Source-audit additions are not findings. They are queued source families,
   term lists, and methodology constraints.
 
@@ -320,11 +320,12 @@ imports source files, audits source shape, counts terms in Koren Genesis,
 records methodology gaps, computes corrected-distance diagnostics, and runs a
 repo-defined 999,999 date-label permutation diagnostic.
 
-Current working status: repo-defined diagnostic accepted for local evidence,
-not exact WRR reproduction. The accepted diagnostic uses the current cap-250
-`corrected_distance` field, excludes WNP-dispute-flagged rows, shuffles date
-labels across 30 concepts, and reports Bonferroni `rho0 = 0.00086` from 174
-observed rows and 48 defined `c(w,w')` values.
+Current working status: locked local evidence accepted for repo-defined
+locked-method language, not exact published WRR reproduction. The accepted
+result uses the cap-1000 corrected-distance matrix, keeps the selected full
+source universe, shuffles date labels across 30 concepts, and reports
+Bonferroni `rho0 = 0.000404` from 182 observed rows and 72 defined `c(w,w')`
+values.
 
 Current exact-reproduction status: `under_specified`. The source-policy
 scenario packet is diagnostic only: baseline 165 >=5 pairs, exclude WNP Zacut

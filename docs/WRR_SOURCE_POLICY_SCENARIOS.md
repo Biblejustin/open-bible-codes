@@ -80,4 +80,4 @@ python3 -m scripts.analyze_wrr_source_policy_scenarios --pair-table reports/wrr_
 - Exclusion scenarios show count impact only; they are not selected policies.
 - `review_chelm_spelling_only` keeps pair counts stable and records review scope.
 - Visual-review notes remain triage only and do not exclude pairs automatically.
-- Claim-grade WRR language still needs full corrected distances and aggregate/permutation lock.
+- Locked local WRR evidence now uses keep_all_working_source, printed D(w), full cap1000 corrected distances, and a keep-all 999,999 date-label permutation; exact published reproduction remains caveated by the 163-distance gap.

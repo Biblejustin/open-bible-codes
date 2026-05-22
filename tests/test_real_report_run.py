@@ -232,7 +232,7 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
-            "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv",
+            "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999_summary.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
@@ -1318,13 +1318,13 @@ class RealReportRunTests(unittest.TestCase):
             [
                 {
                     "permutations": "999999",
-                    "observed_rows": "174",
-                    "observed_defined_corrected_distances": "48",
-                    "rho_p1": "0.0011565",
-                    "rho_p2": "0.000215",
-                    "rho_p3": "0.0069545",
-                    "rho_p4": "0.000926",
-                    "rho0_bonferroni": "0.00086",
+                    "observed_rows": "182",
+                    "observed_defined_corrected_distances": "72",
+                    "rho_p1": "0.019722",
+                    "rho_p2": "0.000101",
+                    "rho_p3": "0.0506065",
+                    "rho_p4": "0.000535",
+                    "rho0_bonferroni": "0.000404",
                 }
             ],
             [
@@ -1361,8 +1361,8 @@ class RealReportRunTests(unittest.TestCase):
         text = "\n".join(lines)
 
         self.assertIn("## WRR 1994 Source Audit", text)
-        self.assertIn("repo-defined diagnostic evidence", text)
-        self.assertIn("reproduction remains `under_specified`", text)
+        self.assertIn("locked repo-defined local evidence", text)
+        self.assertIn("Exact published WRR", text)
         self.assertIn("| WRR 1994 paper PDF | `paperhash` |", text)
         self.assertIn("| WRR/Nations MC page | `nationsmc` |", text)
         self.assertIn("| WRR/Nations Hebrew page | `nationsgir` |", text)
@@ -1378,7 +1378,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("| Gap to source-cited 163 distances after length filter | 77 |", text)
         self.assertIn("| Perturbation diagnostic rows | 120 |", text)
         self.assertIn("| Repo-defined date-label permutations | 999,999 |", text)
-        self.assertIn("| Repo-defined Bonferroni rho0 | 0.00086 |", text)
+        self.assertIn("| Repo-defined Bonferroni rho0 | 0.000404 |", text)
         self.assertIn("| exclude_wnp_zacut_only | 8 | 157 | 6 | 78 |", text)
         self.assertIn("Single-term source-policy impacts", text)
         self.assertIn(

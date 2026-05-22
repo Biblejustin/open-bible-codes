@@ -232,14 +232,14 @@ The report-run summary should currently say:
 - The generated length-4 vocabulary-control follow-up weakens that signal:
   200 matched controls are available per target, controls overlap every target,
   and no target survives study-level q <= 0.05.
-- WRR now has repo-defined diagnostic evidence: the accepted 999,999
-  date-label permutation run excludes WNP-dispute-flagged rows and reports
-  Bonferroni `rho0 = 0.00086`. Exact WRR reproduction remains under-specified
-  until the source-locked pair table and `D(w)` decision are resolved. The
-  explicit readiness gate is tracked in `docs/WRR_CLAIM_READINESS.md` and
-  remains blocked; `docs/WRR_CLAIM_BLOCKER_PACKET.md` gathers the current
-  blockers, lock options, WNP/context source-review flags, source-policy
-  scenarios, visual triage notes, and D(w) formula sensitivity.
+- WRR now has locked local evidence: the accepted cap-1000 keep-all 999,999
+  date-label permutation run reports Bonferroni `rho0 = 0.000404` over 182
+  observed rows and 72 defined `c(w,w')` values. Exact published WRR
+  reproduction remains caveated by source-transcription limits and the
+  163-distance gap. The explicit readiness gate is tracked in
+  `docs/WRR_CLAIM_READINESS.md`; `docs/WRR_CLAIM_BLOCKER_PACKET.md` records
+  that no current claim-readiness blockers remain under the selected local lock
+  policy.
 - `υιοσ` (huios; English: son) and `αιμα` (haima; English: blood) remain weaker hidden-path candidates because their exact
   patterns are missing from one or more compared Greek NT sources.
 - no row is claim-grade yet.

@@ -11,13 +11,13 @@ from pathlib import Path
 DEFAULT_DOC = Path("docs/WRR_CLAIM_READINESS.md")
 
 REQUIRED_PHRASES = (
-    "Status: blocked for claim-grade WRR reproduction language.",
+    "Status: ready for claim-grade WRR locked-method language.",
     "Pair universe",
     "D(w) skip-cap formula",
     "Corrected distance c(w,w')",
     "Aggregate statistic and permutation",
     "variant-gap impact best run",
-    "not claim-ready",
+    "`permutation_locked`",
 )
 
 

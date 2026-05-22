@@ -30,9 +30,9 @@ class WrrLockOptionsTests(unittest.TestCase):
             ],
             permutation_row={
                 "permutations": "999999",
-                "observed_rows": "174",
-                "observed_defined_corrected_distances": "48",
-                "rho0_bonferroni": "0.00086",
+                "observed_rows": "182",
+                "observed_defined_corrected_distances": "72",
+                "rho0_bonferroni": "0.000404",
             },
             source_review_summary=[
                 {"source_review_flags": "2 wnp_disputed_zacut_appellation"},
@@ -95,8 +95,8 @@ class WrrLockOptionsTests(unittest.TestCase):
         )
         self.assertEqual(by_option["single Zacut appellation exclusion"]["status"], "diagnostic_only")
         self.assertEqual(
-            by_option["repo-defined WNP-excluded 999,999 date-label diagnostic"]["claim_boundary"],
-            "diagnostic only",
+            by_option["repo-defined keep-all cap1000 999,999 date-label permutation"]["claim_boundary"],
+            "locked local evidence; exact published reproduction still caveated",
         )
         self.assertIn(
             "3 WNP/context queued terms",
@@ -233,9 +233,9 @@ class WrrLockOptionsTests(unittest.TestCase):
                 [
                     {
                         "permutations": "999999",
-                        "observed_rows": "174",
-                        "observed_defined_corrected_distances": "48",
-                        "rho0_bonferroni": "0.00086",
+                        "observed_rows": "182",
+                        "observed_defined_corrected_distances": "72",
+                        "rho0_bonferroni": "0.000404",
                     }
                 ],
             )

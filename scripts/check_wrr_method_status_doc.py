@@ -19,7 +19,7 @@ REQUIRED_PHRASES = (
     "| Pair universe | `source_locked` |",
     "| D(w) skip-cap formula | `source_locked` |",
     "| Corrected distance c(w,w') | `defined_full_run` |",
-    "| Aggregate statistic and permutation | `diagnostic_not_claim_grade` |",
+    "| Aggregate statistic and permutation | `permutation_locked` |",
     "variant-gap impact best run",
     "Source Anchors",
 )
