@@ -312,9 +312,9 @@ The isolated WRR source recovery probe now refreshes selected Torah-code
 research labels into `reports/wrr_source_recovery_probe/` and writes
 `docs/WRR_SOURCE_RECOVERY_PROBE.md`, so live recovery checks no longer risk
 overwriting cached `reports/wrr_1994/` source files. The current live probe
-finds 9/9 selected research URLs redirecting to the Torah-code root, 9/9 root
-canonical rows, 9/9 unrelated slot/gambling-marker rows, and zero usable
-current source rows.
+finds 15/15 selected research URLs, including stale-indexed `.shtml`
+alternates, redirecting to the Torah-code root, 15/15 root canonical rows,
+15/15 unrelated slot/gambling-marker rows, and zero usable current source rows.
 These lanes stay non-result-bearing. The
 research-program ELS harness now includes a split-fit Fisher order-statistic
 row plus two transparent row-width modes: strict shared-intersection

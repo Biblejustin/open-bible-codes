@@ -8,13 +8,13 @@ claim-ready source decisions.
 
 | Item | Count |
 | --- | ---: |
-| downloads probed | 9 |
-| rows with expected labels configured | 9 |
+| downloads probed | 15 |
+| rows with expected labels configured | 15 |
 | rows where expected label appeared | 0 |
-| redirected rows | 9 |
-| final URL is Torah-code root | 9 |
-| canonical URL is Torah-code root | 9 |
-| unrelated slot/gambling markers | 9 |
+| redirected rows | 15 |
+| final URL is Torah-code root | 15 |
+| canonical URL is Torah-code root | 15 |
+| unrelated slot/gambling markers | 15 |
 | usable current source rows | 0 |
 
 Current recovery status: `no_live_sources_recovered`.
@@ -26,12 +26,18 @@ Current recovery status: `no_live_sources_recovered`.
 | torah_code_research_program_1 | 200 | True | True | False | True | 629155 | `d60a59519b55bcff` | unusable_current_download |
 | torah_code_research_program_2 | 200 | True | True | False | True | 629155 | `d60a59519b55bcff` | unusable_current_download |
 | torah_code_research_model_overview | 200 | True | True | False | True | 629155 | `d60a59519b55bcff` | unusable_current_download |
+| torah_code_research_model_overview_shtml | 200 | True | True | False | True | 629155 | `d60a59519b55bcff` | unusable_current_download |
 | torah_code_research_geometric_model_level_1 | 200 | True | True | False | True | 629155 | `d60a59519b55bcff` | unusable_current_download |
 | torah_code_research_geometric_model_level_2 | 200 | True | True | False | True | 629155 | `d60a59519b55bcff` | unusable_current_download |
+| torah_code_research_geometric_model_level_2_shtml | 200 | True | True | False | True | 629155 | `d60a59519b55bcff` | unusable_current_download |
 | torah_code_research_geometric_model_level_3 | 200 | True | True | False | True | 629155 | `d60a59519b55bcff` | unusable_current_download |
+| torah_code_research_geometric_model_level_3_shtml | 200 | True | True | False | True | 629155 | `d60a59519b55bcff` | unusable_current_download |
 | torah_code_research_els_model_level_1 | 200 | True | True | False | True | 629155 | `d60a59519b55bcff` | unusable_current_download |
+| torah_code_research_els_model_level_1_shtml | 200 | True | True | False | True | 629155 | `d60a59519b55bcff` | unusable_current_download |
 | torah_code_research_els_model_level_2 | 200 | True | True | False | True | 629155 | `d60a59519b55bcff` | unusable_current_download |
+| torah_code_research_els_model_level_2_shtml | 200 | True | True | False | True | 629155 | `d60a59519b55bcff` | unusable_current_download |
 | torah_code_research_els_model_level_3 | 200 | True | True | False | True | 629155 | `d60a59519b55bcff` | unusable_current_download |
+| torah_code_research_els_model_level_3_shtml | 200 | True | True | False | True | 629155 | `d60a59519b55bcff` | unusable_current_download |
 
 ## Source Boundary
 

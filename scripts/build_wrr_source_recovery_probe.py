@@ -29,12 +29,18 @@ EXPECTED_LABELS = {
     "torah_code_research_program_1": "Research Program",
     "torah_code_research_program_2": "Research Program",
     "torah_code_research_model_overview": "The Model",
+    "torah_code_research_model_overview_shtml": "The Model",
     "torah_code_research_geometric_model_level_1": "The Geometric Model",
     "torah_code_research_geometric_model_level_2": "Geometric Model Level 2",
+    "torah_code_research_geometric_model_level_2_shtml": "Geometric Model Level 2",
     "torah_code_research_geometric_model_level_3": "Geometric Model Level 3",
+    "torah_code_research_geometric_model_level_3_shtml": "Geometric Model Level 3",
     "torah_code_research_els_model_level_1": "ELS Model Level 1",
+    "torah_code_research_els_model_level_1_shtml": "ELS Model Level 1",
     "torah_code_research_els_model_level_2": "ELS Model Level 2",
+    "torah_code_research_els_model_level_2_shtml": "ELS Model Level 2",
     "torah_code_research_els_model_level_3": "ELS Model Level 3",
+    "torah_code_research_els_model_level_3_shtml": "ELS Model Level 3",
 }
 SPAM_MARKERS = ("slot bet", "deposit pulsa", "rtp slot")
 ROOT_URL = "https://www.torah-code.org"
