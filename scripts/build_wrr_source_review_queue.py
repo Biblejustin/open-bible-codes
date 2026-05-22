@@ -41,6 +41,7 @@ QUEUE_FIELDNAMES = [
     "row_ocr_status",
     "row_ocr_column",
     "row_ocr_match_basis",
+    "row_ocr_text_normalized",
     "blocking_pairs",
     "blocking_reasons",
     "best_variant_hit_count",
@@ -209,6 +210,7 @@ def build_queue_rows(
                 "row_ocr_status": ocr_status,
                 "row_ocr_column": ocr.get("column", ""),
                 "row_ocr_match_basis": ocr.get("match_basis", ""),
+                "row_ocr_text_normalized": ocr.get("row_ocr_text_normalized", ""),
                 "blocking_pairs": len(pair_ids),
                 "blocking_reasons": format_counter(reasons),
                 "best_variant_hit_count": best_hits,
@@ -348,6 +350,22 @@ def write_markdown(
     lines.extend(
         [
             "",
+            "## OCR Context For Top Targets",
+            "",
+            "| Rank | Term id | Normalized term | Row OCR normalized text |",
+            "| ---: | --- | --- | --- |",
+        ]
+    )
+    for row in queue_rows[:12]:
+        lines.append(
+            "| {priority_rank} | `{term_id}` | `{normalized}` | `{row_ocr_text}` |".format(
+                row_ocr_text=truncate_text(str(row.get("row_ocr_text_normalized", "")), 80),
+                **row,
+            )
+        )
+    lines.extend(
+        [
+            "",
             "## Interpretation",
             "",
             "- Review queue ranks source-transcription and normalization checks.",
@@ -424,6 +442,12 @@ def cast_counter(value: object) -> Counter[str]:
 
 def format_counter(counter: Counter[str]) -> str:
     return ", ".join(f"{counter[key]} {key}" for key in sorted(counter) if key)
+
+
+def truncate_text(value: str, limit: int) -> str:
+    if len(value) <= limit:
+        return value
+    return value[: limit - 3] + "..."
 
 
 def int_or_zero(value: str | None) -> int:

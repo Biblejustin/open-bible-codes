@@ -48,6 +48,23 @@ python3 -m scripts.build_wrr_source_review_queue --blocked-pairs reports/wrr_199
 | 19 | `wrr2_26_app_01` | `appellation` | `RBYMNXM` | `matched` | 1 | 10 | `delete_one@6:RBYMNM` | OCR matched imported term and a simple variant has Genesis hits; check normalization/rule assumptions without changing source text |
 | 20 | `wrr2_19_app_01` | `appellation` | `RBYYWSP` | `matched` | 1 | 9 | `delete_one@6:RBYYWP` | OCR matched imported term and a simple variant has Genesis hits; check normalization/rule assumptions without changing source text |
 
+## OCR Context For Top Targets
+
+| Rank | Term id | Normalized term | Row OCR normalized text |
+| ---: | --- | --- | --- |
+| 1 | `wrr2_27_date_01` | `+ZT$RY` | `כותשריבטזתשרקטזבתשרייותשריביותשרירבתשרי` |
+| 2 | `wrr2_27_app_06` | `M$HZKWTW` | `רבימשהזכותאזכותומשהזכותמשהזכותאמשהזכותמהרמזכותהרמיצ` |
+| 3 | `wrr2_23_app_04` | `Y(QBHLWY` | `טלזלילולבכבבברכהרלתפולמלרילללהסכריל` |
+| 4 | `wrr2_30_app_05` | `B(LY$RLBB` | `אחהערישרלבב` |
+| 5 | `wrr2_23_app_05` | `MHRYSGL` | `טלזלילולבכבבברכהרלתפולמלרילללהסכריל` |
+| 6 | `wrr2_28_app_04` | `B(LPNYM$H` | `מהרמזהמהרמזהמזליינקולרבימשהמרגליתפנימשה` |
+| 7 | `wrr2_32_app_04` | `$LMHMXLM)` | `רבישלמהה` |
+| 8 | `wrr2_06_date_01` | `KBKSLW` | `כבכסלובכבכסלוכבבכסלו` |
+| 9 | `wrr2_02_date_01` | `YGSYWN` | `ייגסיונביייגסיוניגבסיונ` |
+| 10 | `wrr2_05_date_01` | `Y+NYSN` | `יטניסנביטניסניטבניסנ` |
+| 11 | `wrr2_27_app_04` | `M$HZKWT` | `רבימשהזכותאזכותומשהזכותמשהזכותאמשהזכותמהרמזכותהרמיצ` |
+| 12 | `wrr2_27_app_05` | `M$HZKWT)` | `רבימשהזכותאזכותומשהזכותמשהזכותאמשהזכותמהרמזכותהרמיצ` |
+
 ## Interpretation
 
 - Review queue ranks source-transcription and normalization checks.

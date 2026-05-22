@@ -76,12 +76,14 @@ class WrrSourceReviewQueueTests(unittest.TestCase):
                 "row_ocr_status": "not_matched",
                 "column": "name",
                 "match_basis": "probe",
+                "row_ocr_text_normalized": "APP OCR",
             },
             "date1": {
                 "row_number": "01",
                 "row_ocr_status": "matched",
                 "column": "date",
                 "match_basis": "probe",
+                "row_ocr_text_normalized": "DATE OCR",
             },
         }
 
@@ -90,6 +92,7 @@ class WrrSourceReviewQueueTests(unittest.TestCase):
 
         self.assertEqual(by_term["app1"]["blocking_pairs"], 2)
         self.assertEqual(by_term["app1"]["best_variant_hit_count"], 8)
+        self.assertEqual(by_term["app1"]["row_ocr_text_normalized"], "APP OCR")
         self.assertEqual(
             by_term["app1"]["review_bucket"],
             "ocr_not_matched_with_variant_lead",
@@ -145,6 +148,7 @@ class WrrSourceReviewQueueTests(unittest.TestCase):
                         "row_ocr_status": "not_matched",
                         "column": "name",
                         "match_basis": "probe",
+                        "row_ocr_text_normalized": "APP OCR",
                     }
                 ],
             )
@@ -176,6 +180,8 @@ class WrrSourceReviewQueueTests(unittest.TestCase):
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("WRR Source Review Queue", text)
             self.assertIn("not a source correction", text)
+            self.assertIn("OCR Context For Top Targets", text)
+            self.assertIn("APP OCR", text)
             self.assertTrue(manifest.exists())
 
 
