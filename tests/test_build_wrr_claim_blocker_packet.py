@@ -75,6 +75,8 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             source_policy_scenarios = root / "source_policy_scenarios.csv"
             source_policy_term_impacts = root / "source_policy_term_impacts.csv"
             dw_formula_sensitivity = root / "dw_formula_sensitivity.csv"
+            variant_residual_summary = root / "variant_residual_summary.csv"
+            variant_residual_packet = root / "variant_residual_packet.csv"
             out = root / "packet.csv"
             markdown = root / "packet.md"
             manifest = root / "manifest.json"
@@ -166,6 +168,46 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                     }
                 ],
             )
+            write_csv(
+                variant_residual_summary,
+                [
+                    {
+                        "run_label": "all_lanes_cap1000",
+                        "group": "residual_pool",
+                        "value": "candidate_pairs_not_closed_by_all-blocker_simple_variants",
+                        "pairs": "59",
+                        "residual_needed": "40",
+                        "candidate_pool_pairs": "59",
+                        "residual_slack_pairs": "19",
+                        "read": "at least residual_needed rows from this pool need source-rule or method resolution",
+                    },
+                    {
+                        "run_label": "all_lanes_cap1000",
+                        "group": "review_frontier",
+                        "value": "minimum_residual_frontier",
+                        "pairs": "40",
+                        "residual_needed": "40",
+                        "candidate_pool_pairs": "59",
+                        "residual_slack_pairs": "19",
+                        "read": "frontier is a deterministic review priority",
+                    },
+                ],
+            )
+            write_csv(
+                variant_residual_packet,
+                [
+                    {
+                        "review_rank": "1",
+                        "within_minimum_residual_frontier": "true",
+                        "pair_id": "wrr2_27_app_13__wrr2_27_date_01",
+                        "concept": "WRR2 27",
+                        "impact_status": "some_blocking_terms_have_variant_hit",
+                        "row_ocr_pair_status": "both_not_matched",
+                        "unresolved_terms": "B@LQWLHRMZ",
+                        "unresolved_source_flags": "",
+                    }
+                ],
+            )
 
             rc = packet.main(
                 [
@@ -183,6 +225,10 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                     str(source_policy_term_impacts),
                     "--dw-formula-sensitivity",
                     str(dw_formula_sensitivity),
+                    "--variant-residual-summary",
+                    str(variant_residual_summary),
+                    "--variant-residual-packet",
+                    str(variant_residual_packet),
                     "--out",
                     str(out),
                     "--markdown-out",
@@ -205,6 +251,9 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             self.assertIn("Single-Term Source Policy Impact", text)
             self.assertIn("wrr2_27_app_02", text)
             self.assertIn("D(w) Formula Sensitivity", text)
+            self.assertIn("Exact-WRR Residual Caveat", text)
+            self.assertIn("Residual Frontier Sample", text)
+            self.assertIn("wrr2_27_app_13__wrr2_27_date_01", text)
             self.assertIn("exclude_wnp_zacut_only", text)
             self.assertIn("all_lanes_cap1000", text)
             self.assertIn("Pair universe lock: keep_all_working_source", text)

@@ -23,6 +23,12 @@ DEFAULT_SOURCE_POLICY_TERM_IMPACTS = Path(
     "reports/wrr_1994/wrr_source_policy_term_impacts.csv"
 )
 DEFAULT_DW_FORMULA_SENSITIVITY = Path("reports/wrr_1994/wrr_dw_formula_sensitivity.csv")
+DEFAULT_VARIANT_RESIDUAL_SUMMARY = Path(
+    "reports/wrr_1994/wrr_variant_residual_review_summary.csv"
+)
+DEFAULT_VARIANT_RESIDUAL_PACKET = Path(
+    "reports/wrr_1994/wrr_variant_residual_review_packet.csv"
+)
 DEFAULT_OUT = Path("reports/wrr_1994/wrr_claim_blocker_packet.csv")
 DEFAULT_MD = Path("docs/WRR_CLAIM_BLOCKER_PACKET.md")
 DEFAULT_MANIFEST = Path("reports/wrr_1994/wrr_claim_blocker_packet.manifest.json")
@@ -75,6 +81,8 @@ def main(argv: list[str] | None = None) -> int:
     source_policy_rows = read_optional_rows(args.source_policy_scenarios)
     source_policy_term_rows = read_optional_rows(args.source_policy_term_impacts)
     dw_formula_rows = read_optional_rows(args.dw_formula_sensitivity)
+    variant_residual_rows = read_optional_rows(args.variant_residual_summary)
+    variant_residual_packet_rows = read_optional_rows(args.variant_residual_packet)
     packet_rows = build_packet_rows(readiness_rows, lock_rows, source_rows, method_rows)
     write_csv(args.out, packet_rows)
     write_markdown(
@@ -84,6 +92,8 @@ def main(argv: list[str] | None = None) -> int:
         source_policy_rows,
         source_policy_term_rows,
         dw_formula_rows,
+        variant_residual_rows,
+        variant_residual_packet_rows,
         args,
     )
     write_manifest(
@@ -93,6 +103,8 @@ def main(argv: list[str] | None = None) -> int:
         source_policy_rows,
         source_policy_term_rows,
         dw_formula_rows,
+        variant_residual_rows,
+        variant_residual_packet_rows,
         started,
     )
     print(args.out)
@@ -121,6 +133,16 @@ def build_parser() -> argparse.ArgumentParser:
         "--dw-formula-sensitivity",
         type=Path,
         default=DEFAULT_DW_FORMULA_SENSITIVITY,
+    )
+    parser.add_argument(
+        "--variant-residual-summary",
+        type=Path,
+        default=DEFAULT_VARIANT_RESIDUAL_SUMMARY,
+    )
+    parser.add_argument(
+        "--variant-residual-packet",
+        type=Path,
+        default=DEFAULT_VARIANT_RESIDUAL_PACKET,
     )
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
@@ -194,6 +216,20 @@ def visual_source_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
     return sorted(visual, key=lambda row: int_or_zero(row.get("priority_rank", "")))
 
 
+def residual_summary_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    wanted = {"residual_pool", "review_frontier", "impact_status", "row_ocr_pair_status"}
+    return [row for row in rows if row.get("group") in wanted]
+
+
+def residual_frontier_rows(rows: list[dict[str, str]], limit: int = 10) -> list[dict[str, str]]:
+    frontier = [
+        row
+        for row in rows
+        if row.get("within_minimum_residual_frontier", "").lower() == "true"
+    ]
+    return sorted(frontier, key=lambda row: int_or_zero(row.get("review_rank", "")))[:limit]
+
+
 def write_markdown(
     path: Path,
     packet_rows: list[dict[str, str]],
@@ -201,6 +237,8 @@ def write_markdown(
     source_policy_rows: list[dict[str, str]],
     source_policy_term_rows: list[dict[str, str]],
     dw_formula_rows: list[dict[str, str]],
+    variant_residual_rows: list[dict[str, str]],
+    variant_residual_packet_rows: list[dict[str, str]],
     args: argparse.Namespace,
 ) -> None:
     status_line = (
@@ -229,6 +267,8 @@ def write_markdown(
             f"--source-policy-scenarios {args.source_policy_scenarios} "
             f"--source-policy-term-impacts {args.source_policy_term_impacts} "
             f"--dw-formula-sensitivity {args.dw_formula_sensitivity} "
+            f"--variant-residual-summary {args.variant_residual_summary} "
+            f"--variant-residual-packet {args.variant_residual_packet} "
             f"--out {args.out} "
             f"--markdown-out {args.markdown_out} "
             f"--manifest-out {args.manifest_out}"
@@ -276,6 +316,54 @@ def write_markdown(
         lines.append(
             "| None | All required areas are ready under the selected local lock policy. |  | continue reporting exact-WRR caveats explicitly |"
         )
+    residual_rows = residual_summary_rows(variant_residual_rows)
+    if residual_rows:
+        lines.extend(
+            [
+                "",
+                "## Exact-WRR Residual Caveat",
+                "",
+                "The local lock policy is claim-ready for repo-defined reporting, but exact published WRR reproduction still has a residual source/method gap after the generous simple-variant upper bound.",
+                "",
+                "| Group | Value | Pairs | Read |",
+                "| --- | --- | ---: | --- |",
+            ]
+        )
+        for row in residual_rows:
+            lines.append(
+                "| `{group}` | `{value}` | {pairs} | {read} |".format(
+                    group=markdown_cell(row.get("group", "")),
+                    value=markdown_cell(row.get("value", "")),
+                    pairs=markdown_cell(row.get("pairs", "")),
+                    read=markdown_cell(row.get("read", "")),
+                )
+            )
+    frontier_rows = residual_frontier_rows(variant_residual_packet_rows)
+    if frontier_rows:
+        lines.extend(
+            [
+                "",
+                "### Residual Frontier Sample",
+                "",
+                "| Rank | Pair | Concept | Impact | Row OCR | Unresolved terms | Flags |",
+                "| ---: | --- | --- | --- | --- | --- | --- |",
+            ]
+        )
+        for row in frontier_rows:
+            lines.append(
+                (
+                    "| {rank} | `{pair}` | `{concept}` | `{impact}` | `{ocr}` | "
+                    "`{terms}` | {flags} |"
+                ).format(
+                    rank=markdown_cell(row.get("review_rank", "")),
+                    pair=markdown_cell(row.get("pair_id", "")),
+                    concept=markdown_cell(row.get("concept", "")),
+                    impact=markdown_cell(row.get("impact_status", "")),
+                    ocr=markdown_cell(row.get("row_ocr_pair_status", "")),
+                    terms=markdown_cell(row.get("unresolved_terms", "")),
+                    flags=markdown_code_or_blank(row.get("unresolved_source_flags", "")),
+                )
+            )
     if source_policy_rows:
         lines.extend(
             [
@@ -419,6 +507,7 @@ def write_markdown(
             "",
             "- This is a decision packet, not a reproduction result.",
             "- Pair universe lock: keep_all_working_source; WNP/context and visual-review flags do not exclude pairs automatically.",
+            "- Exact published WRR reproduction remains caveated by the residual source/method gap after the simple-variant upper bound.",
             "- D(w) lock: printed WRR formula main; reported-program formula remains sensitivity output.",
             "- Aggregate/permutation lock: keep-all cap1000 999,999 date-label permutation over the full selected-universe corrected-distance output.",
             "- No visual-review note excludes a pair automatically; pair exclusion would require an explicit source-policy change.",
@@ -455,6 +544,8 @@ def write_manifest(
     source_policy_rows: list[dict[str, str]],
     source_policy_term_rows: list[dict[str, str]],
     dw_formula_rows: list[dict[str, str]],
+    variant_residual_rows: list[dict[str, str]],
+    variant_residual_packet_rows: list[dict[str, str]],
     started: float,
 ) -> None:
     payload = {
@@ -466,6 +557,8 @@ def write_manifest(
         "source_policy_scenario_rows": len(source_policy_rows),
         "source_policy_term_impact_rows": len(source_policy_term_rows),
         "dw_formula_sensitivity_rows": len(dw_formula_rows),
+        "variant_residual_summary_rows": len(variant_residual_rows),
+        "variant_residual_packet_rows": len(variant_residual_packet_rows),
         "inputs": {
             "readiness": str(args.readiness),
             "lock_options": str(args.lock_options),
@@ -474,6 +567,8 @@ def write_manifest(
             "source_policy_scenarios": str(args.source_policy_scenarios),
             "source_policy_term_impacts": str(args.source_policy_term_impacts),
             "dw_formula_sensitivity": str(args.dw_formula_sensitivity),
+            "variant_residual_summary": str(args.variant_residual_summary),
+            "variant_residual_packet": str(args.variant_residual_packet),
         },
         "outputs": {
             "out": str(args.out),
@@ -490,6 +585,11 @@ def write_manifest(
 
 def markdown_cell(value: object) -> str:
     return str(value).replace("|", "\\|").replace("\n", " ").strip()
+
+
+def markdown_code_or_blank(value: object) -> str:
+    text = markdown_cell(value)
+    return f"`{text}`" if text else ""
 
 
 def int_or_zero(value: str) -> int:

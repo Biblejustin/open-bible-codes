@@ -89,6 +89,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
+            "scripts/build_wrr_claim_blocker_packet.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_variant_gap_upper_bound.csv",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
@@ -99,6 +103,14 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn(
             "reports/wrr_1994/wrr_variant_residual_review_summary.csv",
             steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_variant_residual_review_summary.csv",
+            steps_by_id["wrr_cross_pair_grid"]["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_variant_residual_review_packet.csv",
+            steps_by_id["wrr_cross_pair_grid"]["inputs"],
         )
         self.assertIn(
             "scripts/check_wrr_source_visual_review_notes_doc.py",

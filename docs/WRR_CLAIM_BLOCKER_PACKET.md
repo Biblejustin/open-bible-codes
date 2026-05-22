@@ -9,7 +9,7 @@ queue flags, and visual triage notes into one handoff artifact.
 ## Reproduce
 
 ```bash
-python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --source-policy-term-impacts reports/wrr_1994/wrr_source_policy_term_impacts.csv --dw-formula-sensitivity reports/wrr_1994/wrr_dw_formula_sensitivity.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
+python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --source-policy-term-impacts reports/wrr_1994/wrr_source_policy_term_impacts.csv --dw-formula-sensitivity reports/wrr_1994/wrr_dw_formula_sensitivity.csv --variant-residual-summary reports/wrr_1994/wrr_variant_residual_review_summary.csv --variant-residual-packet reports/wrr_1994/wrr_variant_residual_review_packet.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
 ```
 
 ## Blockers
@@ -23,6 +23,35 @@ python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/w
 | Area | Current read | Available options | No-input next |
 | --- | --- | --- | --- |
 | None | All required areas are ready under the selected local lock policy. |  | continue reporting exact-WRR caveats explicitly |
+
+## Exact-WRR Residual Caveat
+
+The local lock policy is claim-ready for repo-defined reporting, but exact published WRR reproduction still has a residual source/method gap after the generous simple-variant upper bound.
+
+| Group | Value | Pairs | Read |
+| --- | --- | ---: | --- |
+| `residual_pool` | `candidate_pairs_not_closed_by_all-blocker_simple_variants` | 59 | at least residual_needed rows from this pool need source-rule or method resolution to reach the source-cited count |
+| `review_frontier` | `minimum_residual_frontier` | 40 | frontier is a deterministic review priority, not a selected correction set |
+| `impact_status` | `no_blocking_term_variant_hit` | 50 | residual-pool breakdown; diagnostic only |
+| `impact_status` | `some_blocking_terms_have_variant_hit` | 9 | residual-pool breakdown; diagnostic only |
+| `row_ocr_pair_status` | `both_matched` | 11 | residual-pool breakdown; diagnostic only |
+| `row_ocr_pair_status` | `both_not_matched` | 3 | residual-pool breakdown; diagnostic only |
+| `row_ocr_pair_status` | `mixed` | 45 | residual-pool breakdown; diagnostic only |
+
+### Residual Frontier Sample
+
+| Rank | Pair | Concept | Impact | Row OCR | Unresolved terms | Flags |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | `wrr2_27_app_13__wrr2_27_date_01` | `WRR2 27` | `some_blocking_terms_have_variant_hit` | `both_not_matched` | `B@LQWLHRMZ` |  |
+| 2 | `wrr2_02_app_04__wrr2_02_date_01` | `WRR2 02` | `some_blocking_terms_have_variant_hit` | `mixed` | `B@LZR@ABRHM` |  |
+| 3 | `wrr2_05_app_02__wrr2_05_date_01` | `WRR2 05` | `some_blocking_terms_have_variant_hit` | `mixed` | `AHRNHGDWLMQRLYN` |  |
+| 4 | `wrr2_06_app_03__wrr2_06_date_01` | `WRR2 06` | `some_blocking_terms_have_variant_hit` | `mixed` | `B@LM@$YH$M` |  |
+| 5 | `wrr2_06_app_04__wrr2_06_date_01` | `WRR2 06` | `some_blocking_terms_have_variant_hit` | `mixed` | `B@LM@$YYHWH` |  |
+| 6 | `wrr2_06_app_05__wrr2_06_date_01` | `WRR2 06` | `some_blocking_terms_have_variant_hit` | `mixed` | `ALY@ZRA$KNZY` |  |
+| 7 | `wrr2_06_app_06__wrr2_06_date_01` | `WRR2 06` | `some_blocking_terms_have_variant_hit` | `mixed` | `RBYALY@ZR` |  |
+| 8 | `wrr2_02_app_03__wrr2_02_date_01` | `WRR2 02` | `some_blocking_terms_have_variant_hit` | `both_matched` | `ZR@ABRHM` |  |
+| 9 | `wrr2_02_app_05__wrr2_02_date_01` | `WRR2 02` | `some_blocking_terms_have_variant_hit` | `both_matched` | `ABRHMYCXQY` |  |
+| 10 | `wrr2_32_app_05__wrr2_32_date_01` | `WRR2 32` | `no_blocking_term_variant_hit` | `mixed` | `$LMHMX@LMA` | `wnp_chelm_spelling_context` |
 
 ## Source Policy Scenario Impact
 
@@ -77,6 +106,7 @@ python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/w
 
 - This is a decision packet, not a reproduction result.
 - Pair universe lock: keep_all_working_source; WNP/context and visual-review flags do not exclude pairs automatically.
+- Exact published WRR reproduction remains caveated by the residual source/method gap after the simple-variant upper bound.
 - D(w) lock: printed WRR formula main; reported-program formula remains sensitivity output.
 - Aggregate/permutation lock: keep-all cap1000 999,999 date-label permutation over the full selected-universe corrected-distance output.
 - No visual-review note excludes a pair automatically; pair exclusion would require an explicit source-policy change.
