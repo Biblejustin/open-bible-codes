@@ -165,6 +165,11 @@ Use cautious language:
   with gap 0, but this is diagnostic only and does not select a source policy;
 - visual triage notes separate OCR misses from title-prefix and Chelm
   source-rule questions, but those notes do not exclude pairs automatically;
+- residual lanes are packetized without selecting corrections: 1 source-policy
+  term, 43 source-transcription terms, 3 page-image near-match terms, and 11
+  method/pair-universe terms; the claim-blocker packet mirrors top term
+  targets, row clusters, page-image near matches, and method/pair-universe
+  counts;
 - current accepted repo-defined 999,999 date-label permutation result keeps the
   selected full source universe, uses the cap-1000 corrected-distance field,
   observes 182 rows and 72 defined `c(w,w')` values, and reports Bonferroni
