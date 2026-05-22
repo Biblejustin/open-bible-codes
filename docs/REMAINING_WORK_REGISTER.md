@@ -181,6 +181,8 @@ Current pushed commits for this cleanup:
 - `470971e` Surface WRR residual caveat in blocker packet.
 - `725e251` Add WRR residual burden summary.
 - `48fe253` Refresh WRR residual work register.
+- `e0aab3c` Add WRR Wayback source recovery probe.
+- `2d1bb1d` Add WRR residual term reconciliation queue.
 
 ### Formal Real Report Rerun
 
