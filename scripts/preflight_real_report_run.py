@@ -18,6 +18,7 @@ from els.project_index import (
     write_docs_index,
     write_protocol_index,
 )
+from scripts import check_prospective_study_lanes
 from scripts.release_hygiene import (
     FORBIDDEN_ACCOUNT_TERMS,
     forbidden_hits,
@@ -381,6 +382,15 @@ def main(argv: list[str] | None = None) -> int:
     if missing_paths:
         failures.append("missing required paths: " + ", ".join(missing_paths))
 
+    prospective_lane_failures = check_prospective_study_lanes.validate_profiles(
+        root / check_prospective_study_lanes.DEFAULT_PROFILE_FILE
+    )
+    if prospective_lane_failures:
+        failures.append(
+            "prospective lane validation failures: "
+            + "; ".join(prospective_lane_failures)
+        )
+
     stale_indexes = stale_generated_indexes(root)
     if stale_indexes:
         failures.append("stale generated indexes: " + ", ".join(stale_indexes))
@@ -400,6 +410,7 @@ def main(argv: list[str] | None = None) -> int:
         "risky_tracked_paths": risky_paths,
         "required_paths": required_paths(args),
         "missing_paths": missing_paths,
+        "prospective_lane_failures": prospective_lane_failures,
         "stale_generated_indexes": stale_indexes,
         "forbidden_account_terms": FORBIDDEN_ACCOUNT_TERMS,
         "forbidden_repo_hits": forbidden_repo_hits,

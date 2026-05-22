@@ -2,6 +2,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from els.protocol_runner import load_protocol
 from scripts import build_real_report_run_summary as summary
@@ -368,7 +369,29 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("git_commit", payload)
             self.assertIn("risky_tracked_paths", payload)
             self.assertIn("secret_pattern_hits", payload)
+            self.assertIn("prospective_lane_failures", payload)
             self.assertIn("stale_generated_indexes", payload)
+
+    def test_preflight_fails_on_prospective_lane_validation_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_prospective_study_lanes,
+                "validate_profiles",
+                return_value=["demo_lane: unknown status: ready"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["prospective_lane_failures"],
+                ["demo_lane: unknown status: ready"],
+            )
+            self.assertIn(
+                "prospective lane validation failures: demo_lane: unknown status: ready",
+                payload["failures"],
+            )
 
     def test_preflight_detects_stale_generated_indexes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
