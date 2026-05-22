@@ -116,6 +116,10 @@ class RealReportRunTests(unittest.TestCase):
             "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
+        self.assertIn(
+            "reports/wrr_1994/wrr_source_policy_scenarios.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
         for step_id in [
             "boundary_alignment",
             "chapter_position_bias",
@@ -612,6 +616,15 @@ class RealReportRunTests(unittest.TestCase):
                     "rho0_bonferroni": "0.00086",
                 }
             ],
+            [
+                {
+                    "scenario": "exclude_wnp_zacut_only",
+                    "excluded_pairs": "8",
+                    "remaining_appellation_min_length_pairs": "157",
+                    "gap_to_source_cited_163_after_appellation_min_length": "6",
+                    "remaining_length_filtered_pairs": "78",
+                }
+            ],
         )
         text = "\n".join(lines)
 
@@ -634,12 +647,14 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("| Perturbation diagnostic rows | 120 |", text)
         self.assertIn("| Repo-defined date-label permutations | 999,999 |", text)
         self.assertIn("| Repo-defined Bonferroni rho0 | 0.00086 |", text)
+        self.assertIn("| exclude_wnp_zacut_only | 8 | 157 | 6 | 78 |", text)
 
     def test_wrr_audit_section_requires_all_source_hashes(self) -> None:
         with self.assertRaisesRegex(ValueError, "wrr_nations_mc"):
             summary.wrr_audit_section(
                 {"status": "success", "duration_seconds": 12.3},
                 {"downloads": [{"label": "wrr_1994_paper", "sha256": "paperhash"}]},
+                [],
                 [],
                 [],
                 [],

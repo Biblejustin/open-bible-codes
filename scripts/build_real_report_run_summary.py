@@ -67,6 +67,7 @@ WRR_PERTURBATION_SUMMARY = Path("reports/wrr_1994/wrr2_perturbation_diagnostics_
 WRR_CROSS_PAIR_RECOMMENDED_PERMUTATION_SUMMARY = Path(
     "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv"
 )
+WRR_SOURCE_POLICY_SCENARIOS = Path("reports/wrr_1994/wrr_source_policy_scenarios.csv")
 HEBREW_THEOLOGY_ALL_CODES_TRIAGE_MANIFEST = Path(
     "reports/hebrew_theology_all_codes/triage.manifest.json"
 )
@@ -222,6 +223,7 @@ def main(argv: list[str] | None = None) -> int:
     wrr_cross_pair_recommended_permutation_rows = read_rows(
         args.wrr_cross_pair_recommended_permutation_summary
     )
+    wrr_source_policy_scenario_rows = read_rows(args.wrr_source_policy_scenarios)
     hebrew_theology_all_codes_triage_manifest = read_json(
         args.hebrew_theology_all_codes_triage_manifest
     )
@@ -361,6 +363,7 @@ def main(argv: list[str] | None = None) -> int:
         wrr_cross_pair_recommended_permutation_rows=(
             wrr_cross_pair_recommended_permutation_rows
         ),
+        wrr_source_policy_scenario_rows=wrr_source_policy_scenario_rows,
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
         hebrew_screening_all_codes_triage_manifest=hebrew_screening_all_codes_triage_manifest,
         greek_screening_all_codes_triage_manifest=greek_screening_all_codes_triage_manifest,
@@ -456,6 +459,7 @@ def main(argv: list[str] | None = None) -> int:
         wrr_cross_pair_recommended_permutation_rows=(
             wrr_cross_pair_recommended_permutation_rows
         ),
+        wrr_source_policy_scenario_rows=wrr_source_policy_scenario_rows,
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
         hebrew_screening_all_codes_triage_manifest=hebrew_screening_all_codes_triage_manifest,
         greek_screening_all_codes_triage_manifest=greek_screening_all_codes_triage_manifest,
@@ -644,6 +648,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--wrr-cross-pair-recommended-permutation-summary",
         type=Path,
         default=WRR_CROSS_PAIR_RECOMMENDED_PERMUTATION_SUMMARY,
+    )
+    parser.add_argument(
+        "--wrr-source-policy-scenarios",
+        type=Path,
+        default=WRR_SOURCE_POLICY_SCENARIOS,
     )
     parser.add_argument(
         "--hebrew-theology-all-codes-triage-manifest",
@@ -911,6 +920,7 @@ def write_summary(
     wrr_pair_table_reconciliation_rows: list[dict[str, str]],
     wrr_perturbation_summary_rows: list[dict[str, str]],
     wrr_cross_pair_recommended_permutation_rows: list[dict[str, str]],
+    wrr_source_policy_scenario_rows: list[dict[str, str]],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
     greek_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1210,6 +1220,7 @@ def write_summary(
             wrr_pair_table_reconciliation_rows,
             wrr_perturbation_summary_rows,
             wrr_cross_pair_recommended_permutation_rows,
+            wrr_source_policy_scenario_rows,
         )
     )
     lines.extend(
@@ -1478,6 +1489,7 @@ def write_manifest(
     wrr_pair_table_reconciliation_rows: list[dict[str, str]],
     wrr_perturbation_summary_rows: list[dict[str, str]],
     wrr_cross_pair_recommended_permutation_rows: list[dict[str, str]],
+    wrr_source_policy_scenario_rows: list[dict[str, str]],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
     greek_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1579,6 +1591,7 @@ def write_manifest(
             "wrr_cross_pair_recommended_permutation_summary": str(
                 args.wrr_cross_pair_recommended_permutation_summary
             ),
+            "wrr_source_policy_scenarios": str(args.wrr_source_policy_scenarios),
             "hebrew_theology_all_codes_triage_manifest": str(
                 args.hebrew_theology_all_codes_triage_manifest
             ),
@@ -1742,6 +1755,7 @@ def write_manifest(
         "wrr_cross_pair_recommended_permutation_rows": len(
             wrr_cross_pair_recommended_permutation_rows
         ),
+        "wrr_source_policy_scenario_rows": len(wrr_source_policy_scenario_rows),
         "hebrew_theology_all_codes_triage_rows": hebrew_theology_all_codes_triage_manifest.get(
             "queue_rows", 0
         ),
@@ -3306,6 +3320,7 @@ def wrr_audit_section(
     reconciliation_rows: list[dict[str, str]],
     perturbation_rows: list[dict[str, str]],
     cross_pair_recommended_permutation_rows: list[dict[str, str]],
+    source_policy_scenario_rows: list[dict[str, str]],
 ) -> list[str]:
     source_hashes = {
         download["label"]: download.get("sha256", "")
@@ -3482,20 +3497,46 @@ def wrr_audit_section(
         f"| Repo-defined rho P3 | {cross_pair_permutation.get('rho_p3', '')} |",
         f"| Repo-defined rho P4 | {cross_pair_permutation.get('rho_p4', '')} |",
         f"| Repo-defined Bonferroni rho0 | {cross_pair_permutation.get('rho0_bonferroni', '')} |",
-        "",
-        "The WRR 1994 paper's 298 second-list word pairs and the later WRR/Nations",
-        "163-distance statement are treated here as distinct quantities. Current",
-        "source review treats `163` as a defined corrected-distance output count,",
-        "not a raw pair table.",
-        "",
-        "Current read: WRR has repo-defined diagnostic evidence, but exact WRR",
-        "reproduction remains `under_specified`. Exact reproduction still needs a",
-        "source-locked pair set and source-locked `D(w)` before claim-grade WRR",
-        "language is possible. The claim-blocker packet gathers the current",
-        "readiness blockers, lock options, and WNP/context source-review flags.",
-        "The source-policy scenario report counts diagnostic exclusion/review",
-        "impacts without selecting a policy.",
     ]
+    if source_policy_scenario_rows:
+        lines.extend(
+            [
+                "",
+                "| Source-policy scenario | Excluded pairs | Remaining >=5 | Gap >=5 vs 163 | Remaining 5..8 |",
+                "| --- | ---: | ---: | ---: | ---: |",
+            ]
+        )
+        for row in source_policy_scenario_rows:
+            lines.append(
+                "| {scenario} | {excluded} | {remaining_app} | {gap_app} | {remaining_len} |".format(
+                    scenario=md_cell(row.get("scenario", "")),
+                    excluded=md_cell(row.get("excluded_pairs", "")),
+                    remaining_app=md_cell(
+                        row.get("remaining_appellation_min_length_pairs", "")
+                    ),
+                    gap_app=md_cell(
+                        row.get("gap_to_source_cited_163_after_appellation_min_length", "")
+                    ),
+                    remaining_len=md_cell(row.get("remaining_length_filtered_pairs", "")),
+                )
+            )
+    lines.extend(
+        [
+            "",
+            "The WRR 1994 paper's 298 second-list word pairs and the later WRR/Nations",
+            "163-distance statement are treated here as distinct quantities. Current",
+            "source review treats `163` as a defined corrected-distance output count,",
+            "not a raw pair table.",
+            "",
+            "Current read: WRR has repo-defined diagnostic evidence, but exact WRR",
+            "reproduction remains `under_specified`. Exact reproduction still needs a",
+            "source-locked pair set and source-locked `D(w)` before claim-grade WRR",
+            "language is possible. The claim-blocker packet gathers the current",
+            "readiness blockers, lock options, and WNP/context source-review flags.",
+            "The source-policy scenario report counts diagnostic exclusion/review",
+            "impacts without selecting a policy.",
+        ]
+    )
     return lines
 
 
