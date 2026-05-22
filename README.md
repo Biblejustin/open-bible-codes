@@ -653,6 +653,10 @@ WRR source-transcription evidence packet:
 `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md`.
 It groups 43 row-transcription residual terms into 22 row clusters for
 primary row or row-alignment review, without choosing corrections.
+WRR remaining-lane evidence packets:
+`docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md`.
+They cover the remaining 14 page-image/method residual terms without choosing
+source corrections, method changes, or pair exclusions.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.

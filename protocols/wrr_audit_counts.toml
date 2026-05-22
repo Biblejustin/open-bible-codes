@@ -1037,6 +1037,32 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_remaining_lane_evidence_packets"
+description = "Build diagnostic evidence packet for remaining WRR page-image and method lanes."
+argv = [
+  "-m", "scripts.build_wrr_remaining_lane_evidence_packets",
+  "--action-plan", "reports/wrr_1994/wrr_residual_reconciliation_action_plan.csv",
+  "--source-queue", "reports/wrr_1994/wrr_source_review_queue.csv",
+  "--row-ocr", "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv",
+  "--out", "reports/wrr_1994/wrr_remaining_lane_evidence_packet.csv",
+  "--summary-out", "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
+  "--markdown-out", "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md",
+  "--manifest-out", "reports/wrr_1994/wrr_remaining_lane_evidence_packets.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_remaining_lane_evidence_packets.py",
+  "reports/wrr_1994/wrr_residual_reconciliation_action_plan.csv",
+  "reports/wrr_1994/wrr_source_review_queue.csv",
+  "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_remaining_lane_evidence_packet.csv",
+  "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
+  "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md",
+  "reports/wrr_1994/wrr_remaining_lane_evidence_packets.manifest.json",
+]
+
+[[steps]]
 id = "analyze_wrr_dw_formula_sensitivity"
 description = "Compare printed and reported-program D(w) formula diagnostics without selecting a formula."
 argv = [

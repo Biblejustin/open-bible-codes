@@ -390,6 +390,10 @@ not an automatic source-policy choice.
 
 Visual triage notes now separate OCR misses from title-prefix and Chelm
 source-rule questions, but those notes do not exclude pairs automatically.
+The evidence packet layer now covers all residual action lanes: 1
+source-policy term, 43 source-transcription terms, and 14 remaining page-image
+or method/pair-universe terms. These packets organize review evidence without
+choosing corrections, method changes, or exclusions.
 
 Source artifacts:
 
@@ -406,6 +410,7 @@ Source artifacts:
 - `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md`
 - `docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md`
 - `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md`
+- `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md`
 - `docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md`
 - `docs/WRR_SOURCE_POLICY_SCENARIOS.md`
 - `docs/WRR_DW_FORMULA_SENSITIVITY.md`

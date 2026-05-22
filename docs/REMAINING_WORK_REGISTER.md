@@ -480,6 +480,10 @@ and 3 WNP context blocks, with no automatic correction or exclusion.
 source-transcription lane: 43 action terms, 44 residual pair links, 35
 minimum-frontier links, and 22 row clusters, with row 06 first at 4 frontier
 terms.
+`docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md` now handles the two remaining
+residual lanes: 3 page-image near-match terms and 11 method/pair-universe
+terms, preserving the no-correction boundary until page-image, method, or
+pair-universe evidence is locked.
 The next WRR work is therefore source/term/pair-rule reconciliation before any
 exact published reproduction language.
 

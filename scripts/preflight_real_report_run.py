@@ -41,6 +41,7 @@ from scripts import (
     check_wrr_wayback_source_recovery_probe_doc,
     check_wrr_source_policy_evidence_packet_doc,
     check_wrr_source_transcription_evidence_packet_doc,
+    check_wrr_remaining_lane_evidence_packets_doc,
     check_wrr_source_policy_scenarios_doc,
     check_wrr_source_review_queue_doc,
     check_wrr_source_visual_review_notes_doc,
@@ -192,6 +193,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_CLAIM_BLOCKER_PACKET.md",
     "docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md",
     "docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md",
+    "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md",
     "docs/WRR_SOURCE_POLICY_SCENARIOS.md",
     "docs/WRR_DW_FORMULA_SENSITIVITY.md",
     "docs/CRD_FRAMEWORK.md",
@@ -396,6 +398,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_source_policy_evidence_packet_doc.py",
     "scripts/build_wrr_source_transcription_evidence_packet.py",
     "scripts/check_wrr_source_transcription_evidence_packet_doc.py",
+    "scripts/build_wrr_remaining_lane_evidence_packets.py",
+    "scripts/check_wrr_remaining_lane_evidence_packets_doc.py",
     "scripts/check_wrr_source_policy_scenarios_doc.py",
     "scripts/analyze_wrr_dw_formula_sensitivity.py",
     "scripts/check_wrr_dw_formula_sensitivity_doc.py",
@@ -662,6 +666,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_source_transcription_evidence_packet_doc_failures)
         )
 
+    wrr_remaining_lane_evidence_packets_doc_failures = (
+        check_wrr_remaining_lane_evidence_packets_doc.validate_remaining_lane_evidence_packets_doc(
+            check_wrr_remaining_lane_evidence_packets_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_remaining_lane_evidence_packets_doc_failures:
+        failures.append(
+            "WRR remaining-lane evidence packet failures: "
+            + "; ".join(wrr_remaining_lane_evidence_packets_doc_failures)
+        )
+
     wrr_dw_formula_sensitivity_doc_failures = (
         check_wrr_dw_formula_sensitivity_doc.validate_dw_formula_sensitivity_doc(
             check_wrr_dw_formula_sensitivity_doc.DEFAULT_DOC
@@ -811,6 +826,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "wrr_source_transcription_evidence_packet_doc_failures": (
             wrr_source_transcription_evidence_packet_doc_failures
+        ),
+        "wrr_remaining_lane_evidence_packets_doc_failures": (
+            wrr_remaining_lane_evidence_packets_doc_failures
         ),
         "wrr_dw_formula_sensitivity_doc_failures": (
             wrr_dw_formula_sensitivity_doc_failures

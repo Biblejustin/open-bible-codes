@@ -85,6 +85,10 @@ class RealReportRunTests(unittest.TestCase):
             "docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md",
             steps_by_id["preflight"]["inputs"],
         )
+        self.assertIn(
+            "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("docs/WRR_SOURCE_REVIEW_QUEUE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn(
             "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md",
@@ -118,6 +122,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/build_wrr_source_transcription_evidence_packet.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_wrr_remaining_lane_evidence_packets.py",
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
@@ -161,11 +169,19 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
+            "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_source_policy_evidence_summary.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
             "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
@@ -198,6 +214,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_source_transcription_evidence_packet_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_remaining_lane_evidence_packets_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -534,6 +554,18 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_source_policy_scenarios_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/build_wrr_remaining_lane_evidence_packets.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_remaining_lane_evidence_packets_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -1131,6 +1163,30 @@ class RealReportRunTests(unittest.TestCase):
                 payload["failures"],
             )
 
+    def test_preflight_fails_on_wrr_remaining_lane_evidence_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_remaining_lane_evidence_packets_doc,
+                "validate_remaining_lane_evidence_packets_doc",
+                return_value=[
+                    "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md missing boundary"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_remaining_lane_evidence_packets_doc_failures"],
+                ["docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md missing boundary"],
+            )
+            self.assertIn(
+                "WRR remaining-lane evidence packet failures: "
+                "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md missing boundary",
+                payload["failures"],
+            )
+
     def test_preflight_fails_on_wrr_cross_pair_grid_doc_failure(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / "preflight.json"
@@ -1605,6 +1661,22 @@ class RealReportRunTests(unittest.TestCase):
             ],
             [
                 {
+                    "action_lane": "page_image_near_match_review",
+                    "action_terms": "3",
+                    "residual_pairs": "3",
+                    "frontier_pairs": "2",
+                    "read": "near OCR exists",
+                },
+                {
+                    "action_lane": "method_or_pair_universe_review",
+                    "action_terms": "11",
+                    "residual_pairs": "11",
+                    "frontier_pairs": "2",
+                    "read": "OCR matched imported term",
+                },
+            ],
+            [
+                {
                     "scope": "all_lanes_cap1000",
                     "row_count": "182",
                     "printed_defined_corrected_distances": "72",
@@ -1641,6 +1713,15 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("Source-transcription evidence packet status", text)
         self.assertIn("- Source-transcription action terms: 4.", text)
         self.assertIn("| 06 | WRR2 06 | 4 | 4 | 4 | multi-term row cluster |", text)
+        self.assertIn("Remaining-lane evidence packet status", text)
+        self.assertIn(
+            "| page_image_near_match_review | 3 | 3 | 2 | near OCR exists |",
+            text,
+        )
+        self.assertIn(
+            "| method_or_pair_universe_review | 11 | 11 | 2 | OCR matched imported term |",
+            text,
+        )
         self.assertIn(
             "| wrr2_27_app_02 | ZKWTA | wnp_disputed_zacut_appellation | 2 | 163 | 0 | single-term exclusion closes >=5 count gap |",
             text,
@@ -1653,6 +1734,7 @@ class RealReportRunTests(unittest.TestCase):
             summary.wrr_audit_section(
                 {"status": "success", "duration_seconds": 12.3},
                 {"downloads": [{"label": "wrr_1994_paper", "sha256": "paperhash"}]},
+                [],
                 [],
                 [],
                 [],

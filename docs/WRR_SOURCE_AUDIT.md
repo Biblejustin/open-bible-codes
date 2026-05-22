@@ -181,6 +181,10 @@ scenario-pair status, while leaving the working source unchanged.
 `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md` groups the 43 remaining
 source-transcription/row-alignment terms into 22 row clusters so each row can
 be reviewed once against primary row evidence before source edits.
+`docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md` covers the other 14 residual
+action terms: 3 page-image near-match targets and 11 method/pair-universe
+targets. It preserves the no-correction boundary until page-image, method, or
+pair-universe evidence is locked.
 
 The ANU/McKay data page provides plain-text WRR lists in a modified
 Michigan-Claremont transliteration. User decision on 2026-05-21: use this
