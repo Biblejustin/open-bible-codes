@@ -34,6 +34,10 @@ class WrrLockOptionsTests(unittest.TestCase):
                 "observed_defined_corrected_distances": "48",
                 "rho0_bonferroni": "0.00086",
             },
+            direct_all_lanes_250={"defined_corrected_distances": "50"},
+            direct_all_lanes_1000={"defined_corrected_distances": "72"},
+            direct_all_lanes_1000_program={"defined_corrected_distances": "72"},
+            direct_all_lanes_program_changed_pairs=0,
         )
 
         by_option = {row["option"]: row for row in rows}
@@ -45,6 +49,10 @@ class WrrLockOptionsTests(unittest.TestCase):
             "not a raw table count",
             by_option["defined-distance output interpretation"]["evidence"],
         )
+        self.assertIn(
+            "50 distances at cap 250 and 72 at cap 1000",
+            by_option["defined-distance output interpretation"]["evidence"],
+        )
         self.assertEqual(by_option["single Zacut appellation exclusion"]["status"], "diagnostic_only")
         self.assertEqual(
             by_option["repo-defined WNP-excluded 999,999 date-label diagnostic"]["claim_boundary"],
@@ -54,6 +62,52 @@ class WrrLockOptionsTests(unittest.TestCase):
             "printed/program/fixed250 = 28/28/28",
             by_option["reported WRR-program formula"]["evidence"],
         )
+        self.assertIn(
+            "changes 0 pair rows versus printed",
+            by_option["reported WRR-program formula"]["evidence"],
+        )
+
+    def test_compare_corrected_distance_changes_counts_pair_differences(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            left = root / "left.csv"
+            right = root / "right.csv"
+            write_csv(
+                left,
+                [
+                    {
+                        "pair_id": "a",
+                        "corrected_distance": "0.1",
+                        "corrected_distance_status": "defined",
+                        "pair_valid_perturbations": "10",
+                    },
+                    {
+                        "pair_id": "b",
+                        "corrected_distance": "",
+                        "corrected_distance_status": "ordinary_not_valid",
+                        "pair_valid_perturbations": "0",
+                    },
+                ],
+            )
+            write_csv(
+                right,
+                [
+                    {
+                        "pair_id": "a",
+                        "corrected_distance": "0.1",
+                        "corrected_distance_status": "defined",
+                        "pair_valid_perturbations": "10",
+                    },
+                    {
+                        "pair_id": "b",
+                        "corrected_distance": "0.2",
+                        "corrected_distance_status": "defined",
+                        "pair_valid_perturbations": "11",
+                    },
+                ],
+            )
+
+            self.assertEqual(lock_options.compare_corrected_distance_changes(left, right), 1)
 
     def test_main_writes_csv_markdown_and_manifest(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -62,6 +116,11 @@ class WrrLockOptionsTests(unittest.TestCase):
             skip = root / "skip.csv"
             variants = root / "variants.csv"
             permutation = root / "perm.csv"
+            direct_250 = root / "direct_250.csv"
+            direct_1000 = root / "direct_1000.csv"
+            direct_1000_program = root / "direct_1000_program.csv"
+            direct_rows = root / "direct_rows.csv"
+            direct_program_rows = root / "direct_program_rows.csv"
             out = root / "out.csv"
             markdown = root / "out.md"
             manifest = root / "manifest.json"
@@ -108,6 +167,19 @@ class WrrLockOptionsTests(unittest.TestCase):
                     }
                 ],
             )
+            write_csv(direct_250, [{"defined_corrected_distances": "50"}])
+            write_csv(direct_1000, [{"defined_corrected_distances": "72"}])
+            write_csv(direct_1000_program, [{"defined_corrected_distances": "72"}])
+            direct_row_payload = [
+                {
+                    "pair_id": "a",
+                    "corrected_distance": "0.1",
+                    "corrected_distance_status": "defined",
+                    "pair_valid_perturbations": "10",
+                }
+            ]
+            write_csv(direct_rows, direct_row_payload)
+            write_csv(direct_program_rows, direct_row_payload)
 
             rc = lock_options.main(
                 [
@@ -119,6 +191,16 @@ class WrrLockOptionsTests(unittest.TestCase):
                     str(variants),
                     "--recommended-permutation",
                     str(permutation),
+                    "--direct-all-lanes-250-summary",
+                    str(direct_250),
+                    "--direct-all-lanes-1000-summary",
+                    str(direct_1000),
+                    "--direct-all-lanes-1000-program-summary",
+                    str(direct_1000_program),
+                    "--direct-all-lanes-1000",
+                    str(direct_rows),
+                    "--direct-all-lanes-1000-program",
+                    str(direct_program_rows),
                     "--out",
                     str(out),
                     "--markdown-out",
@@ -133,6 +215,7 @@ class WrrLockOptionsTests(unittest.TestCase):
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("Status: decision aid, not a WRR reproduction.", text)
             self.assertIn("Current No-Input Path", text)
+            self.assertIn("changes 0 pair rows", text)
             self.assertTrue(manifest.exists())
 
 

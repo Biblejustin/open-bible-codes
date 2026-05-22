@@ -127,7 +127,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--terms", type=Path, default=DEFAULT_TERMS)
     parser.add_argument("--page", type=int, default=6)
     parser.add_argument("--dpi", type=int, default=300)
-    parser.add_argument("--psm", default="6")
+    parser.add_argument("--psm", default="4")
     parser.add_argument("--tessdata-dir", type=Path, default=DEFAULT_TESSDATA_DIR)
     parser.add_argument("--render-prefix", type=Path, default=DEFAULT_RENDER_PREFIX)
     parser.add_argument("--tsv-base", type=Path, default=DEFAULT_TSV_BASE)

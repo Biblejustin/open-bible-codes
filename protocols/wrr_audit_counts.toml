@@ -165,6 +165,8 @@ argv = [
   "--source", "reports/wrr_1994/wrr_1994_paper.pdf",
   "--source-records", "reports/wrr_1994/WRR2.txt",
   "--tessdata-dir", "reports/wrr_1994/tessdata",
+  "--psm", "4",
+  "--refresh-ocr",
   "--out", "reports/wrr_1994/wrr_primary_table2_ocr_probe.csv",
   "--summary-out", "reports/wrr_1994/wrr_primary_table2_ocr_probe_summary.csv",
   "--markdown-out", "reports/wrr_1994/wrr_primary_table2_ocr_probe.md",
@@ -175,6 +177,7 @@ inputs = [
   "scripts/import_wrr_terms.py",
   "reports/wrr_1994/wrr_1994_paper.pdf",
   "reports/wrr_1994/WRR2.txt",
+  "reports/wrr_1994/tessdata/heb.traineddata",
 ]
 outputs = [
   "reports/wrr_1994/wrr_primary_table2_ocr_probe.csv",
@@ -191,6 +194,8 @@ argv = [
   "--source", "reports/wrr_1994/wrr_1994_paper.pdf",
   "--source-records", "reports/wrr_1994/WRR2.txt",
   "--tessdata-dir", "reports/wrr_1994/tessdata",
+  "--psm", "4",
+  "--refresh-ocr",
   "--out", "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv",
   "--summary-out", "reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv",
   "--markdown-out", "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.md",
@@ -202,6 +207,7 @@ inputs = [
   "scripts/import_wrr_terms.py",
   "reports/wrr_1994/wrr_1994_paper.pdf",
   "reports/wrr_1994/WRR2.txt",
+  "reports/wrr_1994/tessdata/heb.traineddata",
 ]
 outputs = [
   "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv",
@@ -752,6 +758,11 @@ argv = [
   "--skip-summary", "reports/wrr_1994/wrr2_skip_caps_summary.csv",
   "--variants", "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
   "--recommended-permutation", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv",
+  "--direct-all-lanes-250-summary", "reports/wrr_1994/direct_all/wrr2_corrected_distance_all_lanes_250_summary.csv",
+  "--direct-all-lanes-1000-summary", "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged_summary.csv",
+  "--direct-all-lanes-1000-program-summary", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged_summary.csv",
+  "--direct-all-lanes-1000", "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.csv",
+  "--direct-all-lanes-1000-program", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv",
   "--out", "reports/wrr_1994/wrr_lock_options.csv",
   "--markdown-out", "docs/WRR_LOCK_OPTIONS.md",
   "--manifest-out", "reports/wrr_1994/wrr_lock_options.manifest.json",
@@ -762,6 +773,11 @@ inputs = [
   "reports/wrr_1994/wrr2_skip_caps_summary.csv",
   "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
   "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv",
+  "reports/wrr_1994/direct_all/wrr2_corrected_distance_all_lanes_250_summary.csv",
+  "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged_summary.csv",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged_summary.csv",
+  "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.csv",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv",
 ]
 outputs = [
   "reports/wrr_1994/wrr_lock_options.csv",

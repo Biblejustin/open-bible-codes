@@ -19,6 +19,21 @@ DEFAULT_VARIANTS = Path("reports/wrr_1994/wrr2_corrected_distance_variant_compar
 DEFAULT_RECOMMENDED_PERMUTATION = Path(
     "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv"
 )
+DEFAULT_DIRECT_ALL_LANES_250_SUMMARY = Path(
+    "reports/wrr_1994/direct_all/wrr2_corrected_distance_all_lanes_250_summary.csv"
+)
+DEFAULT_DIRECT_ALL_LANES_1000_SUMMARY = Path(
+    "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged_summary.csv"
+)
+DEFAULT_DIRECT_ALL_LANES_1000_PROGRAM_SUMMARY = Path(
+    "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged_summary.csv"
+)
+DEFAULT_DIRECT_ALL_LANES_1000 = Path(
+    "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.csv"
+)
+DEFAULT_DIRECT_ALL_LANES_1000_PROGRAM = Path(
+    "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv"
+)
 DEFAULT_OUT = Path("reports/wrr_1994/wrr_lock_options.csv")
 DEFAULT_MD = Path("docs/WRR_LOCK_OPTIONS.md")
 DEFAULT_MANIFEST = Path("reports/wrr_1994/wrr_lock_options.manifest.json")
@@ -40,9 +55,31 @@ def main(argv: list[str] | None = None) -> int:
     skip_row = read_one_row(args.skip_summary)
     variant_rows = read_rows(args.variants)
     permutation_row = read_one_row(args.recommended_permutation)
-    rows = build_option_rows(pair_row, skip_row, variant_rows, permutation_row)
+    direct_all_lanes_250 = read_optional_one_row(args.direct_all_lanes_250_summary)
+    direct_all_lanes_1000 = read_optional_one_row(args.direct_all_lanes_1000_summary)
+    direct_all_lanes_1000_program = read_optional_one_row(
+        args.direct_all_lanes_1000_program_summary
+    )
+    direct_all_lanes_program_changed_pairs = compare_corrected_distance_changes(
+        args.direct_all_lanes_1000,
+        args.direct_all_lanes_1000_program,
+    )
+    rows = build_option_rows(
+        pair_row,
+        skip_row,
+        variant_rows,
+        permutation_row,
+        direct_all_lanes_250=direct_all_lanes_250,
+        direct_all_lanes_1000=direct_all_lanes_1000,
+        direct_all_lanes_1000_program=direct_all_lanes_1000_program,
+        direct_all_lanes_program_changed_pairs=direct_all_lanes_program_changed_pairs,
+    )
     write_csv(args.out, rows)
-    write_markdown(args.markdown_out, rows)
+    write_markdown(
+        args.markdown_out,
+        rows,
+        direct_all_lanes_program_changed_pairs=direct_all_lanes_program_changed_pairs,
+    )
     write_manifest(args.manifest_out, args, rows, started)
     print(args.out)
     print(args.markdown_out)
@@ -56,6 +93,31 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--skip-summary", type=Path, default=DEFAULT_SKIP_SUMMARY)
     parser.add_argument("--variants", type=Path, default=DEFAULT_VARIANTS)
     parser.add_argument("--recommended-permutation", type=Path, default=DEFAULT_RECOMMENDED_PERMUTATION)
+    parser.add_argument(
+        "--direct-all-lanes-250-summary",
+        type=Path,
+        default=DEFAULT_DIRECT_ALL_LANES_250_SUMMARY,
+    )
+    parser.add_argument(
+        "--direct-all-lanes-1000-summary",
+        type=Path,
+        default=DEFAULT_DIRECT_ALL_LANES_1000_SUMMARY,
+    )
+    parser.add_argument(
+        "--direct-all-lanes-1000-program-summary",
+        type=Path,
+        default=DEFAULT_DIRECT_ALL_LANES_1000_PROGRAM_SUMMARY,
+    )
+    parser.add_argument(
+        "--direct-all-lanes-1000",
+        type=Path,
+        default=DEFAULT_DIRECT_ALL_LANES_1000,
+    )
+    parser.add_argument(
+        "--direct-all-lanes-1000-program",
+        type=Path,
+        default=DEFAULT_DIRECT_ALL_LANES_1000_PROGRAM,
+    )
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
     parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST)
@@ -67,6 +129,11 @@ def build_option_rows(
     skip_row: dict[str, str],
     variant_rows: list[dict[str, str]],
     permutation_row: dict[str, str],
+    *,
+    direct_all_lanes_250: dict[str, str] | None = None,
+    direct_all_lanes_1000: dict[str, str] | None = None,
+    direct_all_lanes_1000_program: dict[str, str] | None = None,
+    direct_all_lanes_program_changed_pairs: int | None = None,
 ) -> list[dict[str, str]]:
     imported_pairs = pair_row.get("imported_same_record_pairs", "")
     appellation_min_pairs = pair_row.get("appellation_min_length_same_record_pairs", "")
@@ -77,6 +144,39 @@ def build_option_rows(
     printed_defined = variant_value(variant_rows, "term_printed", "defined_corrected_distances")
     program_defined = variant_value(variant_rows, "term_program", "defined_corrected_distances")
     fixed_defined = variant_value(variant_rows, "fixed_250", "defined_corrected_distances")
+    all_lane_250_defined = optional_value(direct_all_lanes_250, "defined_corrected_distances")
+    all_lane_1000_defined = optional_value(direct_all_lanes_1000, "defined_corrected_distances")
+    all_lane_program_defined = optional_value(
+        direct_all_lanes_1000_program, "defined_corrected_distances"
+    )
+    defined_distance_evidence = (
+        f"The cited {expected_pairs} is best treated as a corrected-distance output count, "
+        "not a raw table count."
+    )
+    defined_distance_recommendation = (
+        "Next no-input path: compute corrected distances over the broad working input "
+        "and report the defined set."
+    )
+    if all_lane_250_defined and all_lane_1000_defined:
+        defined_distance_evidence = (
+            f"{defined_distance_evidence} Broad all-lane diagnostics now define "
+            f"{all_lane_250_defined} distances at cap 250 and {all_lane_1000_defined} at cap 1000."
+        )
+        defined_distance_recommendation = (
+            "Use the defined set as diagnostic pressure only; it still does not reproduce "
+            f"the source-cited {expected_pairs} distances."
+        )
+    program_evidence = (
+        f"{skip_row.get('program_cap_lt_printed', '')} program caps below printed; "
+        f"{skip_row.get('program_cap_eq_printed', '')} equal; "
+        f"defined smoke rows printed/program/fixed250 = {printed_defined}/{program_defined}/{fixed_defined}."
+    )
+    if all_lane_program_defined and direct_all_lanes_program_changed_pairs is not None:
+        program_evidence = (
+            f"{program_evidence} All-lane cap-1000 program formula defines "
+            f"{all_lane_program_defined} rows and changes {direct_all_lanes_program_changed_pairs} "
+            "pair rows versus printed."
+        )
     return [
         {
             "area": "Pair universe",
@@ -121,13 +221,8 @@ def build_option_rows(
             "area": "Pair universe",
             "option": "defined-distance output interpretation",
             "status": "recommended_working_interpretation",
-            "evidence": (
-                f"The cited {expected_pairs} is best treated as a corrected-distance output count, "
-                "not a raw table count."
-            ),
-            "recommendation": (
-                "Next no-input path: compute corrected distances over the broad working input and report the defined set."
-            ),
+            "evidence": defined_distance_evidence,
+            "recommendation": defined_distance_recommendation,
             "claim_boundary": "still blocked until source and formula locks",
         },
         {
@@ -145,11 +240,7 @@ def build_option_rows(
             "area": "D(w) skip-cap formula",
             "option": "reported WRR-program formula",
             "status": "sensitivity_variant",
-            "evidence": (
-                f"{skip_row.get('program_cap_lt_printed', '')} program caps below printed; "
-                f"{skip_row.get('program_cap_eq_printed', '')} equal; "
-                f"defined smoke rows printed/program/fixed250 = {printed_defined}/{program_defined}/{fixed_defined}."
-            ),
+            "evidence": program_evidence,
             "recommendation": (
                 "Carry as a required sensitivity run because MBBK reports the WRR programs used this formula."
             ),
@@ -192,6 +283,38 @@ def read_one_row(path: Path) -> dict[str, str]:
     return rows[0]
 
 
+def read_optional_one_row(path: Path) -> dict[str, str] | None:
+    if not path.exists():
+        return None
+    return read_one_row(path)
+
+
+def optional_value(row: dict[str, str] | None, field: str) -> str:
+    if not row:
+        return ""
+    return row.get(field, "")
+
+
+def compare_corrected_distance_changes(left: Path, right: Path) -> int | None:
+    if not left.exists() or not right.exists():
+        return None
+    left_rows = keyed_corrected_distance_rows(left)
+    right_rows = keyed_corrected_distance_rows(right)
+    pair_ids = set(left_rows) | set(right_rows)
+    return sum(1 for pair_id in pair_ids if left_rows.get(pair_id) != right_rows.get(pair_id))
+
+
+def keyed_corrected_distance_rows(path: Path) -> dict[str, tuple[str, str, str]]:
+    rows = {}
+    for row in read_rows(path):
+        rows[row.get("pair_id", "")] = (
+            row.get("corrected_distance", ""),
+            row.get("corrected_distance_status", ""),
+            row.get("pair_valid_perturbations", ""),
+        )
+    return rows
+
+
 def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
@@ -200,7 +323,12 @@ def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
         writer.writerows(rows)
 
 
-def write_markdown(path: Path, rows: list[dict[str, str]]) -> None:
+def write_markdown(
+    path: Path,
+    rows: list[dict[str, str]],
+    *,
+    direct_all_lanes_program_changed_pairs: int | None = None,
+) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     lines = [
         "# WRR Lock Options",
@@ -232,16 +360,30 @@ def write_markdown(path: Path, rows: list[dict[str, str]]) -> None:
             )
             + " |"
         )
+    lines.extend(["", "## Current No-Input Path", ""])
     lines.extend(
         [
+            "Proceeding no-input work has now wired the broad imported same-record",
+            "WRR2 pair input, kept the printed formula as the source-facing default,",
+            "carried the reported-program formula as a sensitivity variant, and",
+            "treated the WNP-excluded 999,999 date-label permutation as diagnostic",
+            "evidence only.",
             "",
-            "## Current No-Input Path",
-            "",
-            "Proceed with the broad imported same-record WRR2 pair input, keep the",
-            "printed formula as the source-facing default, carry the reported-program",
-            "formula as a sensitivity variant, and treat the WNP-excluded 999,999",
-            "date-label permutation as diagnostic evidence only.",
-            "",
+        ]
+    )
+    if direct_all_lanes_program_changed_pairs is not None:
+        lines.extend(
+            [
+                "Current broad-input result: the all-lane cap-1000 program-formula",
+                "sensitivity run changes "
+                f"{direct_all_lanes_program_changed_pairs} pair rows versus the printed-formula run.",
+                "This lowers the current diagnostic risk from the printed-vs-program",
+                "formula choice, but it does not lock the WRR source method.",
+                "",
+            ]
+        )
+    lines.extend(
+        [
             "Claim-grade language still requires a source-locked pair universe, a",
             "source-locked `D(w)` formula decision, full corrected distances over that",
             "locked universe, and a locked aggregate/permutation procedure.",
@@ -270,6 +412,13 @@ def write_manifest(
             "skip_summary": str(args.skip_summary),
             "variants": str(args.variants),
             "recommended_permutation": str(args.recommended_permutation),
+            "direct_all_lanes_250_summary": str(args.direct_all_lanes_250_summary),
+            "direct_all_lanes_1000_summary": str(args.direct_all_lanes_1000_summary),
+            "direct_all_lanes_1000_program_summary": str(
+                args.direct_all_lanes_1000_program_summary
+            ),
+            "direct_all_lanes_1000": str(args.direct_all_lanes_1000),
+            "direct_all_lanes_1000_program": str(args.direct_all_lanes_1000_program),
         },
         "outputs": {
             "out": str(args.out),
