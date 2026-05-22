@@ -605,6 +605,8 @@ Event/object experiment source audit:
 `docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md`.
 Under-construction experiment source audit:
 `docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md`.
+Research missing model pages audit:
+`docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md`.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.

@@ -210,7 +210,10 @@ Auschwitz rows, a 57-page Ark tutorial PDF, one reported significant follow-up
 page, two reported non-significant pages, and one under-construction page.
 The under-construction audit confirms six placeholder pages, no PDF data links,
 four copied-title mismatches, and the Katrina page mislabeled as Tsunami.
-These lanes stay non-result-bearing. The
+The missing-model-pages audit confirms that four linked Torah-code.org
+level-2/3 geometric and ELS model pages currently download as root-canonical
+pages with unrelated slot/gambling content, no expected model labels, and zero
+usable model pages. These lanes stay non-result-bearing. The
 research-program ELS harness now includes a split-fit Fisher order-statistic
 row. Next research-program upgrade: replace the current transparent resonant
 row-width proxy with a fuller source-method reconstruction, recover
@@ -224,7 +227,9 @@ missing PDF sources are recovered, or the usable HTML-only source boundary is
 explicitly locked. Do not promote the event/object pages beyond source-shape
 status until each lane has its own preregistered term normalization and
 control design. Do not use under-construction placeholder pages as data-bearing
-protocols unless future source recovery finds real data pages.
+protocols unless future source recovery finds real data pages. Do not use the
+four level-2/3 research model downloads as method sources unless clean
+Torah-code pages are recovered and checksummed.
 
 WRR aggregate work now has a diagnostic P1..P4 bridge:
 

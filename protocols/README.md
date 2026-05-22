@@ -171,6 +171,17 @@ Katrina, Great Rabbis, and Son Rabbis experiment pages. It also records copied
 title/heading anomalies so those pages are not treated as data-bearing sources.
 Tracked audit: `docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md`.
 
+Research missing model pages audit:
+
+```bash
+python3 -m scripts.run_protocol protocols/research_missing_model_pages_audit.toml --resume
+```
+
+This records that the linked Torah-code.org level-2/3 geometric and ELS model
+pages currently download as root-canonical pages with unrelated slot/gambling
+content and no expected model labels. Tracked audit:
+`docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md`.
+
 WRR imported-term Genesis count and pair smoke:
 
 ```bash

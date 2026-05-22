@@ -129,7 +129,11 @@ class DownloadWrrSourcesTests(unittest.TestCase):
             "torah_code_research_program_2": "torah_code_research_program_2.html",
             "torah_code_research_model_overview": "torah_code_research_model_overview.html",
             "torah_code_research_geometric_model_level_1": "torah_code_research_geometric_model_level_1.html",
+            "torah_code_research_geometric_model_level_2": "torah_code_research_geometric_model_level_2.html",
+            "torah_code_research_geometric_model_level_3": "torah_code_research_geometric_model_level_3.html",
             "torah_code_research_els_model_level_1": "torah_code_research_els_model_level_1.html",
+            "torah_code_research_els_model_level_2": "torah_code_research_els_model_level_2.html",
+            "torah_code_research_els_model_level_3": "torah_code_research_els_model_level_3.html",
         }
         for label, expected in research_names.items():
             with self.subTest(label=label):
@@ -183,6 +187,8 @@ class DownloadWrrSourcesTests(unittest.TestCase):
         self.assertIn("torah_code_research_program_1", REQUIRED_MANIFEST_LABELS)
         self.assertIn("torah_code_research_model_overview", REQUIRED_MANIFEST_LABELS)
         self.assertIn("torah_code_research_els_model_level_1", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_research_geometric_model_level_2", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_research_els_model_level_3", REQUIRED_MANIFEST_LABELS)
         self.assertIn("wrr_nations_mc", REQUIRED_MANIFEST_LABELS)
         self.assertIn("wrr_nations_gir", REQUIRED_MANIFEST_LABELS)
 

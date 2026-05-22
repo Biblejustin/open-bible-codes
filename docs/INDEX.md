@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 318
+Documents indexed: 319
 
 ## Controls
 
@@ -307,6 +307,7 @@ Documents indexed: 318
 | Remaining Work Register | `REMAINING_WORK_REGISTER.md` |
 | Report Database | `REPORT_DATABASE.md` |
 | Requested Term Expansion Coverage | `REQUESTED_TERM_EXPANSION_COVERAGE.md` |
+| Research Missing Model Pages Audit | `RESEARCH_MISSING_MODEL_PAGES_AUDIT.md` |
 | Review Flag Summary | `REVIEW_FLAG_SUMMARY.md` |
 | Skip Planning | `SKIP_PLANNING.md` |
 | Source-Basis Audit Queue | `SOURCE_BASIS_AUDIT_QUEUE.md` |

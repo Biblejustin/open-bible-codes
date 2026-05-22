@@ -91,7 +91,11 @@ but no claim-grade WRR reproduction yet.
   `https://www.torah-code.org/research/research_2.html`
   `https://www.torah-code.org/research/research_2a.html`
   `https://www.torah-code.org/research/research_3.html`
+  `https://www.torah-code.org/research/research_3a.html`
+  `https://www.torah-code.org/research/research_3b.html`
   `https://www.torah-code.org/research/research_3c.html`
+  `https://www.torah-code.org/research/research_3d.html`
+  `https://www.torah-code.org/research/research_3e.html`
 - WRR/Nations discussion page citing 163 famous-rabbi second-list distances:
   `https://www.math.utoronto.ca/drorbn/Codes/Nations/main_gir.html`
 - WRR/Nations discussion page in modified Michigan-Claremont notation:
@@ -228,8 +232,12 @@ These are source leads, not claim-ready evidence.
   compact resonant-cylinder meetings. This is a lead for simulation harnesses
   and power tests, not a claim-ready Torah-code result.
 - Linked research pages `research_3a.html`, `research_3b.html`,
-  `research_3d.html`, and `research_3e.html` returned 404 wrapper pages during
-  this crawl. Treat them as missing source material until live content appears.
+  `research_3d.html`, and `research_3e.html` are linked from the model
+  overview, but the current downloads are root-canonical pages with unrelated
+  slot/gambling content and no expected model labels. The source-status audit
+  in `docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md` treats them as missing or
+  unusable source material until clean Torah-code research pages are recovered
+  and checksummed.
 
 The browser app appears in search/cache results as an Apache-2.0 repository with
 a WRR replication interface. In the current audit check, however, cloning the
@@ -330,6 +338,12 @@ Towers, Tsunami, Katrina, Great Rabbis, and Son Rabbis placeholder pages into
 ignored source-status CSVs and a tracked audit summary. It verifies
 under-construction status and title/heading anomalies, but does not treat these
 pages as term or result sources.
+
+`scripts/analyze_research_missing_model_pages.py` audits the linked
+Torah-code.org level-2/3 geometric and ELS model pages. It verifies current
+download status, root-canonical declarations, unrelated slot/gambling markers,
+and absence of expected model labels. It does not treat the downloads as usable
+model sources.
 
 `scripts/simulate_torah_code_research_model.py` turns the Torah-code.org
 research-program geometric level-1 model into a reproducible simulation harness.
@@ -457,7 +471,11 @@ Latest protocol smoke output:
 - `reports/wrr_1994/torah_code_research_program_2.html`
 - `reports/wrr_1994/torah_code_research_model_overview.html`
 - `reports/wrr_1994/torah_code_research_geometric_model_level_1.html`
+- `reports/wrr_1994/torah_code_research_geometric_model_level_2.html`
+- `reports/wrr_1994/torah_code_research_geometric_model_level_3.html`
 - `reports/wrr_1994/torah_code_research_els_model_level_1.html`
+- `reports/wrr_1994/torah_code_research_els_model_level_2.html`
+- `reports/wrr_1994/torah_code_research_els_model_level_3.html`
 - `reports/wrr_1994/WRR1.txt`
 - `reports/wrr_1994/WRR2.txt`
 - `reports/wrr_1994/SE2a.txt`
@@ -551,7 +569,11 @@ Latest source hashes:
 | `torah_code_research_program_2.html` | 9,360 | `64065269d11e6a4e4abd6bfc690d96101656ccdb85a0d0413fe33e146b17f0fb` |
 | `torah_code_research_model_overview.html` | 10,737 | `dd3f10c3f773f179d88e7ae4f5bc0c0385d1f7b983dd52135073468e4a08eb7a` |
 | `torah_code_research_geometric_model_level_1.html` | 9,866 | `429a3383f545284f74dbb6e243d67849331f71b0a89014a1e06d23f97d430fe8` |
+| `torah_code_research_geometric_model_level_2.html` | 629,155 | `d60a59519b55bcff8b6a287eab9c7b06113e0967e95b362cfccaeb66d9cb84f4` |
+| `torah_code_research_geometric_model_level_3.html` | 629,155 | `d60a59519b55bcff8b6a287eab9c7b06113e0967e95b362cfccaeb66d9cb84f4` |
 | `torah_code_research_els_model_level_1.html` | 10,552 | `cb32e52f89a80921f35cb0ee6171eacddc44f6619c649cbe817a9fc10ba9673e` |
+| `torah_code_research_els_model_level_2.html` | 629,155 | `d60a59519b55bcff8b6a287eab9c7b06113e0967e95b362cfccaeb66d9cb84f4` |
+| `torah_code_research_els_model_level_3.html` | 629,155 | `d60a59519b55bcff8b6a287eab9c7b06113e0967e95b362cfccaeb66d9cb84f4` |
 | `WRR1.txt` | 2,016 | `7879343bb78ced3b20db0d232579762ed76bd7bd2b1ec198a2eef9871dde69fb` |
 | `WRR2.txt` | 2,038 | `927c133d6d3a57aa06d57518f8a89137292654056b51433a08a0480c7d245be5` |
 | `SE2a.txt` | 1,776 | `89ba88172d2d9c127b5f19549b04d8913de3431c4a5879854af2849b7f1d69b2` |

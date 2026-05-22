@@ -1,0 +1,53 @@
+name = "research_missing_model_pages_audit"
+description = "Audit linked Torah-code research model level-2/3 pages that currently resolve to unusable root content."
+manifest_out = "reports/wrr_1994/research_missing_model_pages_audit_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "download_wrr_sources"
+description = "Download Torah-code.org research source pages into ignored reports output."
+argv = [
+  "-m", "scripts.download_wrr_sources",
+  "--out-dir", "reports/wrr_1994",
+  "--manifest-out", "reports/wrr_1994/sources.manifest.json",
+]
+inputs = [
+  "scripts/download_wrr_sources.py",
+]
+outputs = [
+  "reports/wrr_1994/torah_code_research_model_overview.html",
+  "reports/wrr_1994/torah_code_research_geometric_model_level_2.html",
+  "reports/wrr_1994/torah_code_research_geometric_model_level_3.html",
+  "reports/wrr_1994/torah_code_research_els_model_level_2.html",
+  "reports/wrr_1994/torah_code_research_els_model_level_3.html",
+  "reports/wrr_1994/sources.manifest.json",
+]
+
+[[steps]]
+id = "audit_research_missing_model_pages"
+description = "Classify linked level-2/3 model pages as usable model pages or root/unrelated content."
+argv = [
+  "-m", "scripts.analyze_research_missing_model_pages",
+  "--overview", "reports/wrr_1994/torah_code_research_model_overview.html",
+  "--out", "reports/wrr_1994/research_missing_model_pages.csv",
+  "--summary-out", "reports/wrr_1994/research_missing_model_pages_summary.csv",
+  "--anchors-out", "reports/wrr_1994/research_missing_model_pages_anchors.csv",
+  "--markdown-out", "docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md",
+  "--manifest-out", "reports/wrr_1994/research_missing_model_pages.manifest.json",
+]
+inputs = [
+  "scripts/analyze_research_missing_model_pages.py",
+  "reports/wrr_1994/torah_code_research_model_overview.html",
+  "reports/wrr_1994/torah_code_research_geometric_model_level_2.html",
+  "reports/wrr_1994/torah_code_research_geometric_model_level_3.html",
+  "reports/wrr_1994/torah_code_research_els_model_level_2.html",
+  "reports/wrr_1994/torah_code_research_els_model_level_3.html",
+]
+outputs = [
+  "reports/wrr_1994/research_missing_model_pages.csv",
+  "reports/wrr_1994/research_missing_model_pages_summary.csv",
+  "reports/wrr_1994/research_missing_model_pages_anchors.csv",
+  "docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md",
+  "reports/wrr_1994/research_missing_model_pages.manifest.json",
+]
