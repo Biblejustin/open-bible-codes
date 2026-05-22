@@ -21,6 +21,9 @@ DEFAULT_TABLE2_ROW_OCR_SUMMARY = Path("reports/wrr_1994/wrr_primary_table2_row_o
 DEFAULT_SKIP_SUMMARY = Path("reports/wrr_1994/wrr2_skip_caps_summary.csv")
 DEFAULT_VARIANTS = Path("reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv")
 DEFAULT_AGGREGATE = Path("reports/wrr_1994/wrr2_corrected_distance_aggregate.csv")
+DEFAULT_CROSS_PAIR_PERMUTATION_SUMMARY = Path(
+    "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000_summary.csv"
+)
 DEFAULT_HIGHCAP_CORRECTED_DISTANCE_SUMMARY = Path(
     "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_merged_summary.csv"
 )
@@ -87,6 +90,9 @@ def main(argv: list[str] | None = None) -> int:
     skip_row = read_one_row(args.skip_summary)
     variant_rows = read_rows(args.corrected_distance_variants)
     aggregate_row = read_one_row(args.corrected_distance_aggregate) if args.corrected_distance_aggregate.exists() else None
+    cross_pair_permutation_row = read_optional_one_row(
+        args.cross_pair_permutation_summary
+    )
     highcap_corrected_distance_row = read_optional_one_row(
         args.highcap_corrected_distance_summary
     )
@@ -103,6 +109,7 @@ def main(argv: list[str] | None = None) -> int:
         table2_ocr_row,
         table2_row_ocr_row,
         aggregate_row,
+        cross_pair_permutation_row,
         highcap_corrected_distance_row,
         highcap_perturbation_row,
         highcap_pair_readiness_row,
@@ -126,6 +133,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--skip-summary", type=Path, default=DEFAULT_SKIP_SUMMARY)
     parser.add_argument("--corrected-distance-variants", type=Path, default=DEFAULT_VARIANTS)
     parser.add_argument("--corrected-distance-aggregate", type=Path, default=DEFAULT_AGGREGATE)
+    parser.add_argument(
+        "--cross-pair-permutation-summary",
+        type=Path,
+        default=DEFAULT_CROSS_PAIR_PERMUTATION_SUMMARY,
+    )
     parser.add_argument(
         "--highcap-corrected-distance-summary",
         type=Path,
@@ -176,6 +188,7 @@ def build_status_rows(
     table2_ocr_row: dict[str, str] | None = None,
     table2_row_ocr_row: dict[str, str] | None = None,
     corrected_distance_aggregate_row: dict[str, str] | None = None,
+    cross_pair_permutation_row: dict[str, str] | None = None,
     highcap_corrected_distance_row: dict[str, str] | None = None,
     highcap_perturbation_row: dict[str, str] | None = None,
     highcap_pair_readiness_row: dict[str, str] | None = None,
@@ -243,7 +256,11 @@ def build_status_rows(
             highcap_perturbation_row,
             highcap_pair_readiness_row,
         ),
-        aggregate_status(primary_result_rows or [], corrected_distance_aggregate_row),
+        aggregate_status(
+            primary_result_rows or [],
+            corrected_distance_aggregate_row,
+            cross_pair_permutation_row,
+        ),
     ]
 
 
@@ -331,8 +348,27 @@ def highcap_evidence(
 def aggregate_status(
     primary_result_rows: list[dict[str, str]],
     corrected_distance_aggregate_row: dict[str, str] | None = None,
+    cross_pair_permutation_row: dict[str, str] | None = None,
 ) -> dict[str, str]:
     local_evidence = aggregate_evidence(corrected_distance_aggregate_row)
+    permutation_evidence = cross_pair_permutation_evidence(cross_pair_permutation_row)
+    status = (
+        "diagnostic_not_claim_grade"
+        if cross_pair_permutation_row
+        else "source_locked_not_built"
+    )
+    current_read = (
+        "Published Table 3 ranks are source-audited; local diagnostic P1..P4 "
+        "and date-permutation runs exist, but the pair universe, D(w), and "
+        "permutation rule are not claim-locked."
+        if cross_pair_permutation_row
+        else "Published Table 3 ranks are source-audited; local P1..P4 aggregate diagnostics exist, but the date-permutation runner is not built."
+    )
+    next_action = (
+        "Lock pair universe, D(w), and source permutation rule before claim-grade 999,999-permutation run."
+        if cross_pair_permutation_row
+        else "Implement only after final pair universe and corrected-distance values are locked."
+    )
     genesis = next(
         (row for row in primary_result_rows if row.get("label") == "G" and row.get("status") == "found"),
         None,
@@ -340,10 +376,18 @@ def aggregate_status(
     if genesis is None:
         return {
             "decision_area": "Aggregate statistic and permutation",
-            "status": "not_built",
-            "current_read": "P1..P4 arithmetic diagnostics over corrected-distance rows exist, but no date-permutation runner exists.",
-            "evidence": f"No primary Table 3 source-result row was supplied; {local_evidence}",
-            "next_action": "Implement only after final pair universe and corrected-distance values are locked.",
+            "status": status if cross_pair_permutation_row else "not_built",
+            "current_read": current_read,
+            "evidence": "; ".join(
+                part
+                for part in [
+                    "No primary Table 3 source-result row was supplied",
+                    local_evidence,
+                    permutation_evidence,
+                ]
+                if part
+            ),
+            "next_action": next_action,
         }
     control_summary = ", ".join(
         f"{row.get('label', '')} p0={row.get('bonferroni_p0', '')}"
@@ -352,15 +396,37 @@ def aggregate_status(
     )
     return {
         "decision_area": "Aggregate statistic and permutation",
-        "status": "source_locked_not_built",
-        "current_read": "Published Table 3 ranks are source-audited; local P1..P4 aggregate diagnostics exist, but the date-permutation runner is not built.",
-        "evidence": (
-            f"Source Table 3: G min {genesis.get('min_statistic', '')} rank "
-            f"{genesis.get('min_rank', '')}, p0={genesis.get('bonferroni_p0', '')}; "
-            f"controls: {control_summary}; {local_evidence}"
+        "status": status,
+        "current_read": current_read,
+        "evidence": "; ".join(
+            part
+            for part in [
+                (
+                    f"Source Table 3: G min {genesis.get('min_statistic', '')} rank "
+                    f"{genesis.get('min_rank', '')}, p0={genesis.get('bonferroni_p0', '')}"
+                ),
+                f"controls: {control_summary}",
+                local_evidence,
+                permutation_evidence,
+            ]
+            if part
         ),
-        "next_action": "Implement only after final pair universe and corrected-distance values are locked.",
+        "next_action": next_action,
     }
+
+
+def cross_pair_permutation_evidence(row: dict[str, str] | None) -> str:
+    if not row:
+        return ""
+    return (
+        "cross-pair date permutation diagnostic: "
+        f"{row.get('permutations', '')} permutations, seed {row.get('seed', '')}, "
+        f"{row.get('observed_defined_corrected_distances', '')} observed defined c-values "
+        f"over {row.get('observed_rows', '')} rows; "
+        f"rho P1={row.get('rho_p1', '')}, P2={row.get('rho_p2', '')}, "
+        f"P3={row.get('rho_p3', '')}, P4={row.get('rho_p4', '')}, "
+        f"rho0={row.get('rho0_bonferroni', '')}"
+    )
 
 
 def aggregate_evidence(row: dict[str, str] | None) -> str:
@@ -417,6 +483,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             f"--skip-summary {args.skip_summary} "
             f"--corrected-distance-variants {args.corrected_distance_variants} "
             f"--corrected-distance-aggregate {args.corrected_distance_aggregate} "
+            f"--cross-pair-permutation-summary {args.cross_pair_permutation_summary} "
             f"--highcap-corrected-distance-summary {args.highcap_corrected_distance_summary} "
             f"--highcap-perturbation-summary {args.highcap_perturbation_summary} "
             f"--highcap-pair-readiness-summary {args.highcap_pair_readiness_summary} "

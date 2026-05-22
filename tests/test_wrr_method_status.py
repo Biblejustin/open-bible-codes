@@ -79,6 +79,17 @@ class WrrMethodStatusTests(unittest.TestCase):
                 "p1": "",
                 "p2": "",
             },
+            cross_pair_permutation_row={
+                "permutations": "1000",
+                "seed": "1994",
+                "observed_defined_corrected_distances": "50",
+                "observed_rows": "182",
+                "rho_p1": "0.000999000999001",
+                "rho_p2": "0.000999000999001",
+                "rho_p3": "0.0044955044955",
+                "rho_p4": "0.000999000999001",
+                "rho0_bonferroni": "0.003996003996",
+            },
             highcap_corrected_distance_row={
                 "search_max_skip": "1000",
                 "pairs": "86",
@@ -118,9 +129,11 @@ class WrrMethodStatusTests(unittest.TestCase):
         self.assertIn("legacy ordinary-hit perturbation diagnostic: 80/120 rows with hits", by_area["Corrected distance c(w,w')"]["evidence"])
         self.assertIn("max row-min exact 12", by_area["Corrected distance c(w,w')"]["evidence"])
         self.assertIn("legacy ordinary-hit pair readiness: 0 ready, 40 missing hits, 46 under exact", by_area["Corrected distance c(w,w')"]["evidence"])
-        self.assertEqual(by_area["Aggregate statistic and permutation"]["status"], "source_locked_not_built")
+        self.assertEqual(by_area["Aggregate statistic and permutation"]["status"], "diagnostic_not_claim_grade")
         self.assertIn("G min P4 rank 4", by_area["Aggregate statistic and permutation"]["evidence"])
         self.assertIn("0 defined c-values from 86 rows", by_area["Aggregate statistic and permutation"]["evidence"])
+        self.assertIn("cross-pair date permutation diagnostic", by_area["Aggregate statistic and permutation"]["evidence"])
+        self.assertIn("rho0=0.003996003996", by_area["Aggregate statistic and permutation"]["evidence"])
 
     def test_corrected_distance_status_summarizes_defined_smoke_rows(self) -> None:
         rows = build_status_rows(
@@ -178,6 +191,7 @@ class WrrMethodStatusTests(unittest.TestCase):
                     "skip_summary": Path("skip.csv"),
                     "corrected_distance_variants": Path("variants.csv"),
                     "corrected_distance_aggregate": Path("aggregate.csv"),
+                    "cross_pair_permutation_summary": Path("missing_permutations.csv"),
                     "highcap_corrected_distance_summary": Path("highcap_corrected.csv"),
                     "highcap_perturbation_summary": Path("highcap_perturbation.csv"),
                     "highcap_pair_readiness_summary": Path("highcap_pair_readiness.csv"),
@@ -222,6 +236,7 @@ class WrrMethodStatusTests(unittest.TestCase):
             highcap_corrected = root / "missing_highcap_corrected.csv"
             highcap_perturbation = root / "missing_highcap_perturbation.csv"
             highcap_pair_readiness = root / "missing_highcap_pair_readiness.csv"
+            cross_pair_permutations = root / "missing_cross_pair_permutations.csv"
             primary_results = root / "primary.csv"
             out = root / "status.csv"
             markdown = root / "status.md"
@@ -358,6 +373,8 @@ class WrrMethodStatusTests(unittest.TestCase):
                     str(variants),
                     "--corrected-distance-aggregate",
                     str(aggregate),
+                    "--cross-pair-permutation-summary",
+                    str(cross_pair_permutations),
                     "--highcap-corrected-distance-summary",
                     str(highcap_corrected),
                     "--highcap-perturbation-summary",

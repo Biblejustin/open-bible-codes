@@ -70,11 +70,37 @@ Cap-250 diagnostic aggregate:
 | P3 | 0.174975735761 |
 | P4 | 0.137608477166 |
 
+## Date-Permutation Diagnostic
+
+This diagnostic shuffles date-concept labels over the cross-pair matrix. It is
+not the WRR claim-grade 999,999-permutation run.
+
+| Item | Value |
+| --- | ---: |
+| permutations | 1000 |
+| seed | 1994 |
+| concepts shuffled | 30 |
+| observed source rows | 182 |
+| observed defined `c(w,w')` values | 50 |
+| observed P1 | 0.000932436489421 |
+| observed P2 | 6.00241826131e-05 |
+| observed P3 | 0.00255008244378 |
+| observed P4 | 0.000160565289519 |
+| rho P1 | 0.000999000999001 |
+| rho P2 | 0.000999000999001 |
+| rho P3 | 0.0044955044955 |
+| rho P4 | 0.000999000999001 |
+| Bonferroni rho0 | 0.003996003996 |
+| permutation row range | 169..182 |
+| permutation defined-value range | 33..59 |
+| identity permutations | 0 |
+
 ## Read
 
 - Same-record rows preserve the imported WRR2 source pairing.
 - Cross-record rows are generated permutation-prep rows.
 - WNP Zacut rows are flagged because the WNP critique disputes those records;
   that flag is not yet an exclusion rule.
-- Corrected-distance output from this grid is diagnostic until the final pair
-  universe, `D(w)` rule, and permutation procedure are locked.
+- Corrected-distance and date-permutation output from this grid is diagnostic
+  until the final pair universe, `D(w)` rule, and permutation procedure are
+  locked.

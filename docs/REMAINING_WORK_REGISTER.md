@@ -163,10 +163,11 @@ WRR aggregate work now has a diagnostic P1..P4 bridge:
 
 Current read: the length-5..8 direct-search corrected-distance smoke output has
 28 defined `c(w,w')` values at cap 250 and 46 defined values in the cap-1000
-split diagnostic, so P1..P4 diagnostic rows now populate. The readiness gate
+split diagnostic, so P1..P4 diagnostic rows now populate. The cross-pair
+cap-250 matrix now also supports a 1,000-sample date-label permutation
+diagnostic with observed same-record rho0 `0.003996003996`. The readiness gate
 still stays blocked until pair universe, `D(w)`, full corrected distance, and
-permutation/aggregate statuses are locked. This is not yet the claim-grade
-P1..P4/permutation driver.
+claim-grade permutation/aggregate statuses are locked.
 
 All-lane diagnostic follow-up now exists:
 `protocols/wrr_corrected_distance_direct_all_lanes.toml` and

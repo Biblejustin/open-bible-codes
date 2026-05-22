@@ -88,3 +88,29 @@ outputs = [
   "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250_aggregate.md",
   "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250_aggregate.manifest.json",
 ]
+
+[[steps]]
+id = "run_wrr2_cross_pair_date_permutations_1000"
+description = "Run a 1000-sample date-label permutation diagnostic over the cap-250 cross-pair matrix."
+argv = [
+  "-m", "scripts.analyze_wrr_cross_pair_permutations",
+  "--input", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250.csv",
+  "--permutations", "1000",
+  "--seed", "1994",
+  "--p1-threshold", "0.2",
+  "--out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000.csv",
+  "--summary-out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000_summary.csv",
+  "--markdown-out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000.md",
+  "--manifest-out", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_cross_pair_permutations.py",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_corrected_distance_250.csv",
+  "els/wrr.py",
+]
+outputs = [
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000.csv",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000_summary.csv",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000.md",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000.manifest.json",
+]

@@ -83,7 +83,7 @@ refutation of the WRR paper.
 | Exclusions | Every excluded appellation/date row has a citable rule | Not locked; one Zacut-appellation exclusion would close 165 to 163, but that is only a diagnostic hypothesis. |
 | Skip caps | Term-specific WRR `D(w)` windows applied for each accepted term | Not locked; helpers now support both the printed WRR formula and the reported WRR-program formula. The skip-cap audit keeps printed selected while reporting program caps side by side. Current pair/control screens still use broad fixed caps for smoke tests. |
 | Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Helpers now include conservative supplied-row domain labeling, real-corpus WRR2 domain diagnostics with undefined-reason labels, defined-domain-only ordinary `Q(w,w')` diagnostics, exact perturbed-ELS match checks, domain-weighted `Q(w,w')` summation for domain-labeled ELS rows, a tested pair-level corrected-distance arithmetic bridge for already-domain-labeled perturbation sets, a smoke real-corpus perturbed-row/domain driver, and the source-count WRR `v/m` rank step. Undefined `c(w,w')` conditions are source-backed; optimized full-run corrected distances over the final pair universe are still missing. |
-| Aggregate statistic | `P1`, `P2`, `P3`, `P4`, rank handling, and `rho0` run over the locked pair set | P1..P4 diagnostic aggregation now exists for defined corrected-distance rows; P3/P4 use the smaller non-Rabbi-title sample. Current direct-search smoke output has 28 defined values at cap 250 and 46 defined values at cap 1000. No reproduction driver can run until the pair set, `D(w)` formula, and permutation procedure are locked. |
+| Aggregate statistic | `P1`, `P2`, `P3`, `P4`, rank handling, and `rho0` run over the locked pair set | P1..P4 diagnostic aggregation now exists for defined corrected-distance rows; P3/P4 use the smaller non-Rabbi-title sample. Current direct-search smoke output has 28 defined values at cap 250 and 46 defined values at cap 1000. A 1,000-sample cross-pair date-label permutation diagnostic now exists, but no reproduction driver can run until the pair set, `D(w)` formula, and permutation procedure are locked. |
 | Permutation test | Date/rabbi pairings shuffled under the declared WRR rule with recorded seeds/counts | Not built. |
 | Report label | Result can be marked reproduction, failed reproduction, or under-specified | Current label must remain `under_specified`; `docs/WRR_CLAIM_READINESS.md` keeps the claim gate blocked. |
 
@@ -247,8 +247,11 @@ corrected-distance rows. Current cap-250 smoke output has 28 defined c-values
 and diagnostic P1 `0.000373062903552`, P2 `5.981029379e-05`, P3
 `0.000349191888979`, and P4 `7.69538206457e-05`. Current cap-1000 split output
 has 46 defined c-values and diagnostic P1 `0.00220968684352`, P2
-`6.37334076429e-06`, P3 `0.0108669973844`, and P4 `8.66346313541e-05`. These
-are still diagnostic-only. The repo still needs a claim-grade driver that:
+`6.37334076429e-06`, P3 `0.0108669973844`, and P4 `8.66346313541e-05`.
+Current cross-pair cap-250 permutation output uses 1,000 date-label shuffles
+over 30 concepts; the observed same-record rows have 50 defined c-values and
+diagnostic rho0 `0.003996003996`. These are still diagnostic-only. The repo
+still needs a claim-grade driver that:
 
 - computes corrected distances for the locked pair set;
 - computes `P1`, `P2`, `P3`, and `P4` over that locked set;
