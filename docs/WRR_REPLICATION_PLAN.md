@@ -101,7 +101,9 @@ Already implemented:
 - Direct all-lane corrected-distance diagnostic in
   `protocols/wrr_corrected_distance_direct_all_lanes.toml`, testing all 182
   imported same-record WRR2 pairs. Current output defines 50 diagnostic
-  corrected distances at cap 250 and 72 at cap 1000; see
+  corrected distances at cap 250 and 72 at cap 1000. The same protocol now
+  includes a cap-1000 reported-program `D(w)` sensitivity run, which changes 0
+  pair rows versus the printed-formula diagnostic; see
   `docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md`.
 - WRR2 cross-pair grid in `scripts/build_wrr_cross_pair_grid.py` and
   `protocols/wrr_cross_pair_grid.toml`, crossing every imported appellation

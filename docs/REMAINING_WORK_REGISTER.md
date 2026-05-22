@@ -181,7 +181,9 @@ All-lane diagnostic follow-up now exists:
 `protocols/wrr_corrected_distance_direct_all_lanes.toml` and
 `docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md`. It defines 50 values at cap 250 and
 72 at cap 1000 over all 182 imported same-record pairs, still far below the
-source-cited 163 defined second-list distances.
+source-cited 163 defined second-list distances. The tracked protocol now also
+runs the cap-1000 reported-program `D(w)` formula sensitivity check; it changes
+0 pair rows versus the printed-formula diagnostic.
 
 ### 2. Source-Basis Audit Queue
 
