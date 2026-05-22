@@ -19,6 +19,9 @@ DEFAULT_DEFINED_PAIR_SUMMARY = Path("reports/wrr_1994/wrr_defined_pair_set_audit
 DEFAULT_DEFINED_GAP_REASONS = Path("reports/wrr_1994/wrr_defined_gap_reasons.csv")
 DEFAULT_ZERO_HIT_VARIANT_SUMMARY = Path("reports/wrr_1994/wrr_zero_hit_variant_probe_summary.csv")
 DEFAULT_VARIANT_GAP_SUMMARY = Path("reports/wrr_1994/wrr_variant_gap_impact_summary.csv")
+DEFAULT_VARIANT_RESIDUAL_SUMMARY = Path(
+    "reports/wrr_1994/wrr_variant_residual_review_summary.csv"
+)
 DEFAULT_TABLE2_BRIDGE_SUMMARY = Path("reports/wrr_1994/wrr_table2_source_bridge_summary.csv")
 DEFAULT_TABLE2_OCR_SUMMARY = Path("reports/wrr_1994/wrr_primary_table2_ocr_probe_summary.csv")
 DEFAULT_TABLE2_ROW_OCR_SUMMARY = Path("reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv")
@@ -106,6 +109,7 @@ def main(argv: list[str] | None = None) -> int:
     defined_gap_reason_rows = read_rows(args.defined_gap_reasons) if args.defined_gap_reasons.exists() else []
     zero_hit_variant_rows = read_rows(args.zero_hit_variant_summary) if args.zero_hit_variant_summary.exists() else []
     variant_gap_rows = read_rows(args.variant_gap_summary) if args.variant_gap_summary.exists() else []
+    variant_residual_rows = read_optional_rows(args.variant_residual_summary)
     table2_bridge_row = read_one_row(args.table2_bridge_summary)
     table2_ocr_row = read_one_row(args.table2_ocr_summary)
     table2_row_ocr_row = read_one_row(args.table2_row_ocr_summary) if args.table2_row_ocr_summary.exists() else None
@@ -134,6 +138,7 @@ def main(argv: list[str] | None = None) -> int:
         defined_gap_reason_rows,
         zero_hit_variant_rows,
         variant_gap_rows,
+        variant_residual_rows,
         skip_row,
         variant_rows,
         source_policy_rows,
@@ -167,6 +172,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--defined-gap-reasons", type=Path, default=DEFAULT_DEFINED_GAP_REASONS)
     parser.add_argument("--zero-hit-variant-summary", type=Path, default=DEFAULT_ZERO_HIT_VARIANT_SUMMARY)
     parser.add_argument("--variant-gap-summary", type=Path, default=DEFAULT_VARIANT_GAP_SUMMARY)
+    parser.add_argument("--variant-residual-summary", type=Path, default=DEFAULT_VARIANT_RESIDUAL_SUMMARY)
     parser.add_argument("--table2-bridge-summary", type=Path, default=DEFAULT_TABLE2_BRIDGE_SUMMARY)
     parser.add_argument("--table2-ocr-summary", type=Path, default=DEFAULT_TABLE2_OCR_SUMMARY)
     parser.add_argument("--table2-row-ocr-summary", type=Path, default=DEFAULT_TABLE2_ROW_OCR_SUMMARY)
@@ -243,6 +249,7 @@ def build_status_rows(
     defined_gap_reason_rows: list[dict[str, str]] | None,
     zero_hit_variant_rows: list[dict[str, str]] | None,
     variant_gap_rows: list[dict[str, str]] | None,
+    variant_residual_rows: list[dict[str, str]] | None,
     skip_row: dict[str, str],
     variant_rows: list[dict[str, str]],
     source_policy_rows: list[dict[str, str]] | None = None,
@@ -306,6 +313,7 @@ def build_status_rows(
                 source_policy_rows or [],
                 source_policy_term_impact_rows or [],
                 variant_gap_rows or [],
+                variant_residual_rows or [],
             ),
             "next_action": (
                 "Use the source-locked keep_all_working_source universe for local "
@@ -354,6 +362,7 @@ def pair_universe_evidence(
     source_policy_rows: list[dict[str, str]],
     source_policy_term_impact_rows: list[dict[str, str]],
     variant_gap_rows: list[dict[str, str]],
+    variant_residual_rows: list[dict[str, str]],
 ) -> str:
     parts = [
         f"{pair_row.get('source_same_record_pairs', '')} raw same-record pairs",
@@ -388,6 +397,9 @@ def pair_universe_evidence(
     variant_gap_read = variant_gap_evidence(variant_gap_rows)
     if variant_gap_read:
         parts.append(variant_gap_read)
+    variant_residual_read = variant_residual_evidence(variant_residual_rows)
+    if variant_residual_read:
+        parts.append(variant_residual_read)
     return "; ".join(parts)
 
 
@@ -495,6 +507,27 @@ def variant_gap_evidence(rows: list[dict[str, str]]) -> str:
         f"{all_hits} blocked pairs have all blocking terms with variant leads, "
         f"{some_hits} have partial variant leads, {no_hits} have no simple variant lead; "
         "diagnostic only"
+    )
+
+
+def variant_residual_evidence(rows: list[dict[str, str]]) -> str:
+    if not rows:
+        return ""
+    pool = next((row for row in rows if row.get("group") == "residual_pool"), None)
+    frontier = next((row for row in rows if row.get("group") == "review_frontier"), None)
+    if not pool:
+        return ""
+    return (
+        f"variant residual review best run {pool.get('run_label', '')}: "
+        f"{pool.get('candidate_pool_pairs', '')} residual candidate pairs, "
+        f"{pool.get('residual_needed', '')} needed after the simple-variant upper bound, "
+        f"{pool.get('residual_slack_pairs', '')} slack pairs"
+        + (
+            f"; priority frontier {frontier.get('pairs', '')} rows"
+            if frontier
+            else ""
+        )
+        + "; diagnostic only"
     )
 
 
@@ -861,6 +894,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             f"--defined-gap-reasons {args.defined_gap_reasons} "
             f"--zero-hit-variant-summary {args.zero_hit_variant_summary} "
             f"--variant-gap-summary {args.variant_gap_summary} "
+            f"--variant-residual-summary {args.variant_residual_summary} "
             f"--table2-bridge-summary {args.table2_bridge_summary} "
             f"--table2-ocr-summary {args.table2_ocr_summary} "
             f"--table2-row-ocr-summary {getattr(args, 'table2_row_ocr_summary', '')} "
@@ -985,6 +1019,7 @@ def write_manifest(args: argparse.Namespace, rows: list[dict[str, str]], started
             "defined_gap_reasons": str(args.defined_gap_reasons),
             "zero_hit_variant_summary": str(args.zero_hit_variant_summary),
             "variant_gap_summary": str(args.variant_gap_summary),
+            "variant_residual_summary": str(args.variant_residual_summary),
             "table2_bridge_summary": str(args.table2_bridge_summary),
             "table2_ocr_summary": str(args.table2_ocr_summary),
             "table2_row_ocr_summary": str(args.table2_row_ocr_summary),

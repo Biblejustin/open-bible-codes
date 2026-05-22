@@ -95,6 +95,26 @@ class WrrMethodStatusTests(unittest.TestCase):
                     "pairs": "50",
                 },
             ],
+            variant_residual_rows=[
+                {
+                    "run_label": "all_lanes_cap1000",
+                    "group": "residual_pool",
+                    "value": "candidate_pairs_not_closed_by_all-blocker_simple_variants",
+                    "pairs": "59",
+                    "residual_needed": "40",
+                    "candidate_pool_pairs": "59",
+                    "residual_slack_pairs": "19",
+                },
+                {
+                    "run_label": "all_lanes_cap1000",
+                    "group": "review_frontier",
+                    "value": "minimum_residual_frontier",
+                    "pairs": "40",
+                    "residual_needed": "40",
+                    "candidate_pool_pairs": "59",
+                    "residual_slack_pairs": "19",
+                },
+            ],
             skip_row={
                 "rows": "120",
                 "program_cap_lt_printed": "13",
@@ -269,6 +289,9 @@ class WrrMethodStatusTests(unittest.TestCase):
         self.assertIn("ZKWTA", by_area["Pair universe"]["evidence"])
         self.assertIn("variant-gap impact best run all_lanes_cap1000", by_area["Pair universe"]["evidence"])
         self.assertIn("51 blocked pairs have all blocking terms with variant leads", by_area["Pair universe"]["evidence"])
+        self.assertIn("variant residual review best run all_lanes_cap1000", by_area["Pair universe"]["evidence"])
+        self.assertIn("59 residual candidate pairs", by_area["Pair universe"]["evidence"])
+        self.assertIn("40 needed after the simple-variant upper bound", by_area["Pair universe"]["evidence"])
         self.assertEqual(by_area["D(w) skip-cap formula"]["status"], "source_locked")
         self.assertIn("printed WRR formula", by_area["D(w) skip-cap formula"]["current_read"])
         self.assertIn("13 program caps below printed", by_area["D(w) skip-cap formula"]["evidence"])
@@ -315,6 +338,7 @@ class WrrMethodStatusTests(unittest.TestCase):
             defined_gap_reason_rows=[],
             zero_hit_variant_rows=[],
             variant_gap_rows=[],
+            variant_residual_rows=[],
             skip_row={
                 "rows": "120",
                 "program_cap_lt_printed": "13",
@@ -351,6 +375,7 @@ class WrrMethodStatusTests(unittest.TestCase):
                     "defined_gap_reasons": Path("gap_reasons.csv"),
                     "zero_hit_variant_summary": Path("zero_hit_variants.csv"),
                     "variant_gap_summary": Path("variant_gap.csv"),
+                    "variant_residual_summary": Path("variant_residual.csv"),
                     "table2_bridge_summary": Path("bridge_summary.csv"),
                     "table2_ocr_summary": Path("ocr_summary.csv"),
                     "skip_summary": Path("skip.csv"),
@@ -400,6 +425,7 @@ class WrrMethodStatusTests(unittest.TestCase):
             defined_gap_reasons = root / "defined_gap_reasons.csv"
             zero_hit_variants = root / "zero_hit_variants.csv"
             variant_gap = root / "variant_gap.csv"
+            variant_residual = root / "missing_variant_residual.csv"
             bridge_summary = root / "bridge_summary.csv"
             ocr_summary = root / "ocr_summary.csv"
             row_ocr_summary = root / "row_ocr_summary.csv"
@@ -591,6 +617,8 @@ class WrrMethodStatusTests(unittest.TestCase):
                     str(zero_hit_variants),
                     "--variant-gap-summary",
                     str(variant_gap),
+                    "--variant-residual-summary",
+                    str(variant_residual),
                     "--table2-bridge-summary",
                     str(bridge_summary),
                     "--table2-ocr-summary",

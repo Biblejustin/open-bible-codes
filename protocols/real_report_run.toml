@@ -698,6 +698,7 @@ outputs = [
   "reports/wrr_1994/wrr_dw_formula_sensitivity.csv",
   "reports/wrr_1994/wrr_variant_gap_upper_bound.csv",
   "reports/wrr_1994/wrr_variant_residual_review_packet.csv",
+  "reports/wrr_1994/wrr_variant_residual_review_summary.csv",
 ]
 
 [[steps]]

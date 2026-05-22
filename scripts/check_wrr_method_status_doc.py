@@ -21,6 +21,7 @@ REQUIRED_PHRASES = (
     "| Corrected distance c(w,w') | `defined_full_run` |",
     "| Aggregate statistic and permutation | `permutation_locked` |",
     "variant-gap impact best run",
+    "variant residual review best run",
     "Source Anchors",
 )
 

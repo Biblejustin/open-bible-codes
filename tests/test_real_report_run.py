@@ -97,6 +97,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
+            "reports/wrr_1994/wrr_variant_residual_review_summary.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
             "scripts/check_wrr_source_visual_review_notes_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
