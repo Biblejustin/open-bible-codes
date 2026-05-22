@@ -85,6 +85,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_wrr_source_recovery_probe_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/analyze_wrr_source_policy_scenarios.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -268,6 +272,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_DW_FORMULA_SENSITIVITY.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("protocols/wrr_source_recovery_probe.toml", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/build_wrr_source_recovery_probe.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/check_wrr_source_recovery_probe_doc.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn(
             "scripts/analyze_wrr_source_policy_scenarios.py",
             preflight.DEFAULT_REQUIRED_PATHS,
