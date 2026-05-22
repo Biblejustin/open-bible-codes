@@ -38,7 +38,27 @@ class ColinearElsSourceAuditTests(unittest.TestCase):
 
         self.assertEqual(audit.numeric_row_prefix(text, 10), 2)
 
+    def test_parse_pls_pairs_from_text_extracts_raw_pair_rows(self) -> None:
+        rows = audit.parse_pls_pairs_from_text(
+            "\u202a\u05d5\u05ea\u05d1\u05d0\u05d5\u202c "
+            "\u202a\u05ea\u05de\u05d5\u05e0\u05ea\u202c \u202a1\u202c\n"
+            "\u05d0\u05e4\u05d3\u05ea\u05d5 \u05de\u05d4\u05db\u05d5\u05ea 2\n"
+        )
+        summary = audit.summarize_pls_pairs(rows)
+
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(rows[0]["row_index"], 1)
+        self.assertEqual(rows[0]["word_b"], "\u05d5\u05ea\u05d1\u05d0\u05d5")
+        self.assertEqual(rows[0]["word_a"], "\u05ea\u05de\u05d5\u05e0\u05ea")
+        self.assertEqual(summary["missing_row_indexes"], "")
+        self.assertEqual(summary["duplicate_row_indexes"], 0)
+
     def test_hash_markers_can_complete_all_1698_count(self) -> None:
+        pls_summary = {
+            "rows": 6060,
+            "duplicate_row_indexes": 0,
+            "missing_row_indexes": "",
+        }
         row = {
             "label": "all_1698",
             "expected_rows": 1698,
@@ -62,9 +82,11 @@ class ColinearElsSourceAuditTests(unittest.TestCase):
                 {"label": "roots", "observed_source_rows": "", "bytes": 1},
                 {"label": "att_heb", "observed_source_rows": "", "bytes": 1},
             ],
+            pls_summary,
         )
 
         by_anchor = {anchor["anchor"]: anchor["status"] for anchor in anchors}
+        self.assertEqual(by_anchor["pls_pairs_6060_machine_rows"], "found")
         self.assertEqual(by_anchor["all_1698_rows_observed"], "found")
         self.assertEqual(by_anchor["review_sets_502_rows_observed"], "found")
 

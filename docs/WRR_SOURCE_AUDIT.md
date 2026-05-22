@@ -180,8 +180,9 @@ These are source leads, not claim-ready evidence.
   and released attachment tables. The source-shape audit in
   `docs/COLINEAR_ELS_SOURCE_AUDIT.md` now confirms the paper PDF, 8 linked
   attachment PDFs, 515 attachment pages, 6 attachments with explicit row-count
-  expectations, 8,260 expected source rows, and 10/10 protocol anchors before
-  any Hebrew normalization, ELS computation, verse scoring, or controls.
+  expectations, 8,260 expected source rows, 6,060 raw PLS pair rows extracted
+  from the PLS PDF, and 11/11 protocol anchors before any Hebrew normalization,
+  ELS computation, verse scoring, or controls.
 - Genesis ELS-pair/community test: the Gans/Inbal/Bombach paper plus data file
   provide another fixed data set for pair compactness checks, independent from
   the WRR famous-rabbis table. The source-shape audit in
@@ -279,7 +280,8 @@ source files so the 163-distance mismatch is visible before any metric work.
 paper, attachment index, and linked PDF tables into ignored source-shape CSVs
 and a tracked audit summary. It verifies source coverage, protocol anchors, and
 row-count shape, but does not normalize Hebrew terms, compute ELSs, score verse
-links, or evaluate controls.
+links, or evaluate controls. It also emits ignored raw PLS pair rows from the
+PLS attachment for future locked import work.
 
 `scripts/analyze_wrr_primary_pdf_anchors.py` checks that key WRR 1994
 method/count anchors are reachable in extracted PDF text, including the 298

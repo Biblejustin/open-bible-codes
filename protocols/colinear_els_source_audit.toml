@@ -37,6 +37,8 @@ argv = [
   "--paper", "reports/wrr_1994/torah_code_colinear_paper.pdf",
   "--attachments-page", "reports/wrr_1994/torah_code_colinear_attachments.html",
   "--out", "reports/wrr_1994/colinear_els_attachment_sources.csv",
+  "--pls-pairs-out", "reports/wrr_1994/colinear_els_pls_pairs.csv",
+  "--pls-summary-out", "reports/wrr_1994/colinear_els_pls_pairs_summary.csv",
   "--summary-out", "reports/wrr_1994/colinear_els_source_summary.csv",
   "--anchors-out", "reports/wrr_1994/colinear_els_protocol_anchors.csv",
   "--markdown-out", "docs/COLINEAR_ELS_SOURCE_AUDIT.md",
@@ -57,6 +59,8 @@ inputs = [
 ]
 outputs = [
   "reports/wrr_1994/colinear_els_attachment_sources.csv",
+  "reports/wrr_1994/colinear_els_pls_pairs.csv",
+  "reports/wrr_1994/colinear_els_pls_pairs_summary.csv",
   "reports/wrr_1994/colinear_els_source_summary.csv",
   "reports/wrr_1994/colinear_els_protocol_anchors.csv",
   "docs/COLINEAR_ELS_SOURCE_AUDIT.md",

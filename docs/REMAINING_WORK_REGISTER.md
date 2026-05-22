@@ -207,7 +207,8 @@ source-shape audit:
 
 The co-linear ELS source audit confirms the paper PDF, 8 linked attachment
 PDFs, 515 attachment pages, 6 attachments with explicit row-count expectations,
-8,260 expected and observed source rows, and 10/10 protocol anchors. The
+8,260 expected and observed source rows, 6,060 raw PLS pair rows extracted from
+the PLS PDF, and 11/11 protocol anchors. The
 communities audit confirms 66 data records and 210 pre-filter community
 rows. The presidents audit confirms 42 data records and 292 pre-test spelling
 rows. The birth-date audit confirms two S1/S2 tables, 14 rows per table, and

@@ -35,6 +35,8 @@ DEFAULT_ATTACHMENT_PDFS = [
     Path("reports/wrr_1994/torah_code_colinear_attachment_att_heb.pdf"),
 ]
 DEFAULT_OUT = Path("reports/wrr_1994/colinear_els_attachment_sources.csv")
+DEFAULT_PLS_PAIRS_OUT = Path("reports/wrr_1994/colinear_els_pls_pairs.csv")
+DEFAULT_PLS_SUMMARY_OUT = Path("reports/wrr_1994/colinear_els_pls_pairs_summary.csv")
 DEFAULT_SUMMARY_OUT = Path("reports/wrr_1994/colinear_els_source_summary.csv")
 DEFAULT_ANCHORS_OUT = Path("reports/wrr_1994/colinear_els_protocol_anchors.csv")
 DEFAULT_MD = Path("docs/COLINEAR_ELS_SOURCE_AUDIT.md")
@@ -70,6 +72,18 @@ ATTACHMENT_FIELDNAMES = [
     "observed_source_rows",
     "claim_status",
 ]
+PLS_FIELDNAMES = ["row_index", "word_b", "word_a", "raw_line"]
+PLS_SUMMARY_FIELDNAMES = [
+    "rows",
+    "row_index_min",
+    "row_index_max",
+    "missing_row_indexes",
+    "duplicate_row_indexes",
+    "unique_word_a",
+    "unique_word_b",
+    "unique_pairs",
+    "claim_status",
+]
 SUMMARY_FIELDNAMES = [
     "paper_pdf",
     "paper_sha256",
@@ -84,6 +98,8 @@ SUMMARY_FIELDNAMES = [
     "attachments_with_expected_rows",
     "expected_rows_total",
     "observed_rows_total",
+    "pls_pair_rows",
+    "pls_pair_missing_rows",
     "claim_status",
 ]
 ANCHOR_FIELDNAMES = ["source", "anchor", "status", "diagnostic"]
@@ -137,9 +153,13 @@ def main(argv: list[str] | None = None) -> int:
     paper_text = extract_pdf_text(args.paper)
     page_info = parse_attachments_page(args.attachments_page)
     rows = [analyze_attachment_pdf(path) for path in attachments]
-    summary = build_summary(args, paper_text, page_info, rows)
-    anchors = protocol_anchors(paper_text, page_info, rows)
+    pls_pairs = parse_pls_pairs(pls_attachment_path(attachments))
+    pls_summary = summarize_pls_pairs(pls_pairs)
+    summary = build_summary(args, paper_text, page_info, rows, pls_summary)
+    anchors = protocol_anchors(paper_text, page_info, rows, pls_summary)
     write_csv(args.out, ATTACHMENT_FIELDNAMES, rows)
+    write_csv(args.pls_pairs_out, PLS_FIELDNAMES, pls_pairs)
+    write_csv(args.pls_summary_out, PLS_SUMMARY_FIELDNAMES, [pls_summary])
     write_csv(args.summary_out, SUMMARY_FIELDNAMES, [summary])
     write_csv(args.anchors_out, ANCHOR_FIELDNAMES, anchors)
     write_markdown(args.markdown_out, summary, rows, anchors)
@@ -158,6 +178,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--attachments-page", type=Path, default=DEFAULT_ATTACHMENTS_PAGE)
     parser.add_argument("--attachment-pdf", action="append", type=Path, default=[])
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
+    parser.add_argument("--pls-pairs-out", type=Path, default=DEFAULT_PLS_PAIRS_OUT)
+    parser.add_argument("--pls-summary-out", type=Path, default=DEFAULT_PLS_SUMMARY_OUT)
     parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
     parser.add_argument("--anchors-out", type=Path, default=DEFAULT_ANCHORS_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
@@ -219,6 +241,60 @@ def attachment_label(path: Path) -> str:
     return name.removesuffix(".pdf")
 
 
+def pls_attachment_path(paths: list[Path]) -> Path:
+    for path in paths:
+        if attachment_label(path) == "pls":
+            return path
+    raise ValueError("missing PLS attachment PDF")
+
+
+def parse_pls_pairs(path: Path) -> list[dict[str, object]]:
+    return parse_pls_pairs_from_text(extract_pdf_text(path))
+
+
+def parse_pls_pairs_from_text(text: str) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for raw_line in text.splitlines():
+        line = clean_text(raw_line).strip()
+        if not line:
+            continue
+        numbers = [int(match) for match in re.findall(r"(?<!\d)(\d{1,4})(?!\d)", line)]
+        hebrew_tokens = re.findall(r"[\u0590-\u05ff]+", line)
+        if not numbers or len(hebrew_tokens) < 2:
+            continue
+        rows.append(
+            {
+                "row_index": numbers[-1],
+                "word_b": hebrew_tokens[0],
+                "word_a": hebrew_tokens[1],
+                "raw_line": line,
+            }
+        )
+    return rows
+
+
+def summarize_pls_pairs(rows: list[dict[str, object]]) -> dict[str, object]:
+    indexes = [int(row["row_index"]) for row in rows]
+    missing = []
+    duplicate_count = 0
+    if indexes:
+        expected = set(range(min(indexes), max(indexes) + 1))
+        observed = set(indexes)
+        missing = sorted(expected.difference(observed))
+        duplicate_count = len(indexes) - len(observed)
+    return {
+        "rows": len(rows),
+        "row_index_min": min(indexes, default=""),
+        "row_index_max": max(indexes, default=""),
+        "missing_row_indexes": " ".join(str(index) for index in missing),
+        "duplicate_row_indexes": duplicate_count,
+        "unique_word_a": len({str(row["word_a"]) for row in rows}),
+        "unique_word_b": len({str(row["word_b"]) for row in rows}),
+        "unique_pairs": len({(str(row["word_a"]), str(row["word_b"])) for row in rows}),
+        "claim_status": "source_row_extraction_only_not_result_bearing",
+    }
+
+
 def numeric_row_prefix(text: str, expected_rows: int) -> int:
     if expected_rows <= 0:
         return 0
@@ -238,6 +314,7 @@ def build_summary(
     paper_text: str,
     page_info: dict[str, object],
     rows: list[dict[str, object]],
+    pls_summary: dict[str, object],
 ) -> dict[str, object]:
     expected_rows = [row for row in rows if row["expected_rows"] != ""]
     return {
@@ -258,6 +335,10 @@ def build_summary(
             for row in expected_rows
             if row["observed_source_rows"] != ""
         ),
+        "pls_pair_rows": pls_summary["rows"],
+        "pls_pair_missing_rows": len(str(pls_summary["missing_row_indexes"]).split())
+        if pls_summary["missing_row_indexes"]
+        else 0,
         "claim_status": "source_shape_only_not_result_bearing",
     }
 
@@ -266,6 +347,7 @@ def protocol_anchors(
     paper_text: str,
     page_info: dict[str, object],
     rows: list[dict[str, object]],
+    pls_summary: dict[str, object],
 ) -> list[dict[str, str]]:
     paper = normalize_space(clean_text(paper_text))
     by_label = {str(row["label"]): row for row in rows}
@@ -320,6 +402,14 @@ def protocol_anchors(
             "PLS attachment exposes 6,060 source rows",
         ),
         (
+            "pls_pairs",
+            "pls_pairs_6060_machine_rows",
+            int(pls_summary["rows"]) == 6060
+            and int(pls_summary["duplicate_row_indexes"]) == 0
+            and not pls_summary["missing_row_indexes"],
+            "PLS PDF extracted to 6,060 machine-readable pair rows",
+        ),
+        (
             "attachments",
             "all_1698_rows_observed",
             int(by_label.get("all_1698", {}).get("observed_source_rows", 0)) == 1698,
@@ -371,6 +461,8 @@ def write_markdown(
         f"| attachments with expected row counts | {summary['attachments_with_expected_rows']} |",
         f"| expected rows in counted attachments | {summary['expected_rows_total']} |",
         f"| observed rows in counted attachments | {summary['observed_rows_total']} |",
+        f"| PLS pair rows extracted | {summary['pls_pair_rows']} |",
+        f"| PLS missing row indexes | {summary['pls_pair_missing_rows']} |",
         "",
         "## Attachment PDFs",
         "",
@@ -405,8 +497,9 @@ def write_markdown(
             "",
             "The paper and attachment files are usable as source-shape material for a",
             "future co-linear ELS/verse protocol. This audit only records file coverage,",
-            "protocol anchors, and table row counts. It does not normalize Hebrew terms,",
-            "select roots, compute ELSs, score verse links, or evaluate controls.",
+            "protocol anchors, table row counts, and raw PLS pair rows. It does not",
+            "normalize Hebrew terms, select roots, compute ELSs, score verse links, or",
+            "evaluate controls.",
         ]
     )
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -484,6 +577,8 @@ def write_manifest(
         "rows": rows,
         "outputs": {
             "attachments": str(args.out),
+            "pls_pairs": str(args.pls_pairs_out),
+            "pls_summary": str(args.pls_summary_out),
             "summary": str(args.summary_out),
             "anchors": str(args.anchors_out),
             "markdown": str(args.markdown_out),
