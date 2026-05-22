@@ -106,6 +106,12 @@ defined values come from rows currently marked
 `excluded_by_appellation_min_length`, which is useful diagnostic pressure but
 not a source rule.
 
+`docs/WRR_DEFINED_PAIR_SET_AUDIT.md` now joins those direct all-lane runs back
+to pair-lane, review-status, and WNP-Zacut labels. The best current direct run
+still defines only 72 of the source-cited 163 distances, leaving a 91-distance
+gap. The remaining missing mass is ordinary-not-valid, not an
+under-minimum-valid edge case.
+
 The WNP/McKay-Bar-Natan source critique confirms the 5-8 appellation-length
 restriction and disputes several Rabbi II-27 Moshe Zacut variants
 (`ZKWT)`, `ZKWTW`, `M$H ZKWT)`, `M$H ZKWTW`). Since Rabbi II-27 has two date
@@ -207,6 +213,9 @@ tracked in `docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md` and
 `protocols/wrr_corrected_distance_direct_all_lanes.toml`. A cap-1000
 reported-program formula rerun produced 0 changed pair rows versus the printed
 formula in this diagnostic.
+The defined pair-set audit in `scripts/analyze_wrr_defined_pair_set.py` joins
+those outputs to pair-lane and review-status labels; current tracked output is
+`docs/WRR_DEFINED_PAIR_SET_AUDIT.md`.
 Implementation notes are now tracked in
 `docs/WRR_CORRECTED_DISTANCE_NOTES.md`.
 

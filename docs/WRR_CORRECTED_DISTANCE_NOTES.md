@@ -191,6 +191,10 @@ Already implemented:
   the appellation-min-length lane, and 14 rows currently marked
   `excluded_by_appellation_min_length`. This remains pair-universe diagnostic
   evidence only; see `docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md`.
+- defined pair-set audit in `scripts/analyze_wrr_defined_pair_set.py`, joining
+  the all-lane corrected-distance outputs back to pair-lane, review-status, and
+  WNP-Zacut labels. Current tracked output is
+  `docs/WRR_DEFINED_PAIR_SET_AUDIT.md`.
 - cross-pair date-label permutation diagnostic in
   `protocols/wrr_cross_pair_grid.toml`. Current cap-250 output crosses 168
   imported appellations against 31 imported date rows, defines 1,423 corrected

@@ -66,3 +66,6 @@ The all-lane run is useful for source-shape pressure testing:
   pair-universe rule.
 
 Claim language remains blocked by `docs/WRR_CLAIM_READINESS.md`.
+
+For a pair-lane/review-status join over these same outputs, see
+`docs/WRR_DEFINED_PAIR_SET_AUDIT.md`.

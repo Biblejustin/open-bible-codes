@@ -275,6 +275,10 @@ All-lane diagnostic follow-up now exists:
 source-cited 163 defined second-list distances. The tracked protocol now also
 runs the cap-1000 reported-program `D(w)` formula sensitivity check; it changes
 0 pair rows versus the printed-formula diagnostic.
+`docs/WRR_DEFINED_PAIR_SET_AUDIT.md` now joins those outputs back to
+candidate-lane, review-status, and WNP-Zacut labels: best current direct run
+defines 72 of 163, leaving a 91-distance gap, with ordinary-not-valid rows as
+the dominant missing mass.
 
 ### 2. Source-Basis Audit Queue
 

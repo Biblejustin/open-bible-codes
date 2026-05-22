@@ -105,6 +105,12 @@ Already implemented:
   includes a cap-1000 reported-program `D(w)` sensitivity run, which changes 0
   pair rows versus the printed-formula diagnostic; see
   `docs/WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md`.
+- WRR defined pair-set audit in `scripts/analyze_wrr_defined_pair_set.py`,
+  wired into `protocols/wrr_audit_counts.toml`, joining current all-lane
+  corrected-distance outputs back to pair-lane and review-status labels. It
+  records the best current direct run as 72 defined values against the
+  source-cited 163-distance count, leaving a 91-distance gap; see
+  `docs/WRR_DEFINED_PAIR_SET_AUDIT.md`.
 - WRR2 cross-pair grid in `scripts/build_wrr_cross_pair_grid.py` and
   `protocols/wrr_cross_pair_grid.toml`, crossing every imported appellation
   with every imported date for future date-label permutation diagnostics.
