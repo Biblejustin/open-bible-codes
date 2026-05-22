@@ -6,8 +6,8 @@ hygiene, locked-report reruns, volatility cleanup, WRR single-term
 source-policy propagation, Torah-code research-model source-status cleanup,
 Greek follow-up status refreshes, and Hebrew MT/STEP_TAHOT source-status
 cleanup, prospective-lane validator tightening, source-audit preflight guard
-coverage, prospective-lane validation in report preflight, and source-basis
-audit queue guarding.
+coverage, prospective-lane validation in report preflight, source-basis audit
+queue guarding, and English source-basis preflight inputs.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -90,6 +90,7 @@ Current pushed commits for this cleanup:
 - `1198262` Guard source audit docs in report preflight.
 - `2250b7a` Run prospective lane validation in report preflight.
 - `980cfb6` Guard completed source basis audit queue.
+- `946e76d` Guard English source basis inputs in preflight.
 
 ### Formal Real Report Rerun
 
@@ -464,7 +465,8 @@ single-term source-policy propagation, missing-model adjacent-source audit,
 preflight guard pass, Greek follow-up status refresh, Hebrew MT/STEP_TAHOT
 status refresh, KJVA bridge lock-basis clarification, prospective-lane
 validator tightening, source-audit preflight guard coverage, prospective-lane
-validation in report preflight, and source-basis audit queue guarding:
+validation in report preflight, source-basis audit queue guarding, and English
+source-basis preflight inputs:
 
 - `python3 -m pytest -q` passed: 1145 tests and 13951 subtests.
 - `python3 -m pytest tests/test_import_bolls_translation.py tests/test_english_version_manifests.py -q` passed: 12 tests and 117 subtests.
@@ -475,6 +477,7 @@ validation in report preflight, and source-basis audit queue guarding:
 - `python3 -m pytest tests/test_check_prospective_study_lanes.py tests/test_build_prospective_lane_status.py -q` passed: 10 tests.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_check.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_source_audit_guard.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_english_source_basis.json` passed.
 - `python3 -m scripts.check_prospective_study_lanes` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
