@@ -11,6 +11,9 @@ from els.project_index import (
 )
 
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+
 class ProjectIndexTests(unittest.TestCase):
     def test_docs_index_groups_markdown_by_category(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -32,6 +35,18 @@ class ProjectIndexTests(unittest.TestCase):
 
     def test_doc_category_prefers_preregistration_suffix(self) -> None:
         self.assertEqual(doc_category("GREEK_CONTROL_PREREGISTRATION.md"), "Preregistrations")
+
+    def test_checked_in_docs_index_is_current(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "INDEX.md"
+            docs_root = REPO_ROOT / "docs"
+
+            write_docs_index(scan_markdown_docs(docs_root), out, docs_root=Path("docs"))
+
+            self.assertEqual(
+                out.read_text(encoding="utf-8"),
+                (docs_root / "INDEX.md").read_text(encoding="utf-8"),
+            )
 
     def test_protocol_index_extracts_terms_and_output_roots(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -66,6 +81,22 @@ class ProjectIndexTests(unittest.TestCase):
         )
         self.assertIn("Protocols indexed: 1", text)
         self.assertIn("sample_control", text)
+
+    def test_checked_in_protocol_index_is_current(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "INDEX.md"
+            protocols_root = REPO_ROOT / "protocols"
+
+            write_protocol_index(
+                scan_protocols(protocols_root),
+                out,
+                protocols_root=Path("protocols"),
+            )
+
+            self.assertEqual(
+                out.read_text(encoding="utf-8"),
+                (protocols_root / "INDEX.md").read_text(encoding="utf-8"),
+            )
 
 
 if __name__ == "__main__":
