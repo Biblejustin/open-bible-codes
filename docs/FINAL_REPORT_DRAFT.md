@@ -329,6 +329,10 @@ observed rows and 48 defined `c(w,w')` values.
 Current exact-reproduction status: `under_specified`. The source-policy
 scenario packet is diagnostic only: baseline 165 >=5 pairs, exclude WNP Zacut
 157, and exclude all source-review flags 154; no source policy is selected.
+Single-term Zacut diagnostics identify `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and
+`M$HZKWTW` as individual rows whose exclusion would leave 163 >=5 pairs with
+gap 0. That closes the raw count gap diagnostically, but it does not resolve
+the source-policy lock or source-locked `D(w)` rule.
 
 ## Negative And Weak Results
 

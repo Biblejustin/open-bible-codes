@@ -160,6 +160,9 @@ Use cautious language:
   72 defined diagnostic distances at cap 1000, not the source-cited 163;
 - source-policy scenarios are diagnostic only: baseline 165 >=5 pairs, exclude
   WNP Zacut 157, and exclude all source-review flags 154;
+- single-term Zacut diagnostics identify `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and
+  `M$HZKWTW` as individual rows whose exclusion would leave 163 >=5 pairs
+  with gap 0, but this is diagnostic only and does not select a source policy;
 - current accepted repo-defined 999,999 date-label permutation diagnostic
   excludes WNP-dispute-flagged rows, uses the current cap-250
   `corrected_distance` field, observes 174 rows and 48 defined `c(w,w')`

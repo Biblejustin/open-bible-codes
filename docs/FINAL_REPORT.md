@@ -382,6 +382,11 @@ source-locked `D(w)` rule are still unresolved. The source-policy scenarios are
 diagnostic only: baseline 165 >=5 pairs, exclude WNP Zacut 157, and exclude all
 source-review flags 154; no source policy is selected.
 
+The newer single-term Zacut diagnostics narrow the source-policy issue without
+settling it: `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and `M$HZKWTW` each individually
+leave 163 >=5 pairs with gap 0 if excluded. That is diagnostic count evidence,
+not an automatic source-policy choice.
+
 Source artifacts:
 
 - `docs/WRR_SOURCE_AUDIT.md`

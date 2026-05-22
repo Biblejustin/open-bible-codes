@@ -105,6 +105,21 @@ def test_final_report_includes_clean_lock_closeout() -> None:
     assert "`docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`" in outline
 
 
+def test_final_report_tracks_wrr_single_term_source_policy_impacts() -> None:
+    report_paths = [
+        Path("docs/FINAL_REPORT.md"),
+        Path("docs/FINAL_REPORT_DRAFT.md"),
+        Path("docs/FINAL_REPORT_OUTLINE.md"),
+    ]
+
+    for path in report_paths:
+        text = path.read_text(encoding="utf-8")
+        assert "Single-term Zacut" in text or "single-term Zacut" in text
+        assert "`M$HZKWTW`" in text
+        assert "163 >=5 pairs" in text
+        assert "gap 0" in text
+
+
 def test_consolidated_findings_include_clean_lock_closeout() -> None:
     text = Path("docs/CONSOLIDATED_FINDINGS.md").read_text(encoding="utf-8")
 
