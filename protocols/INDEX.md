@@ -142,7 +142,7 @@ Protocols indexed: 116
 | Name | Description | Steps | Terms | Output Roots | Path |
 | --- | --- | ---: | --- | --- | --- |
 | wrr_audit_counts | WRR2 imported-term count, same-record pair smoke, and current repo-defined diagnostic s... | 31 |  | reports/wrr_1994 | `wrr_audit_counts.toml` |
-| wrr_corrected_distance_direct_all_lanes | Direct perturbed-letter WRR corrected-distance diagnostics over all imported same-recor... | 5 |  | reports/wrr_1994 | `wrr_corrected_distance_direct_all_lanes.toml` |
+| wrr_corrected_distance_direct_all_lanes | Direct perturbed-letter WRR corrected-distance diagnostics over all imported same-recor... | 9 |  | reports/wrr_1994 | `wrr_corrected_distance_direct_all_lanes.toml` |
 | wrr_corrected_distance_highcap_1000_split_2 | Two-shard WRR corrected-distance diagnostic at search cap 1000, plus high-cap perturbat... | 6 |  | reports/wrr_1994 | `wrr_corrected_distance_highcap_1000_split_2.toml` |
 | wrr_corrected_distance_split_2 | Two-shard WRR corrected-distance diagnostic run and merge; local/Windows split compatible. | 4 |  | reports/wrr_1994 | `wrr_corrected_distance_split_2.toml` |
 | wrr_cross_pair_grid | Build the WRR2 appellation/date cross-pair grid and run cap-250 corrected-distance diag... | 7 |  | reports/wrr_1994 | `wrr_cross_pair_grid.toml` |

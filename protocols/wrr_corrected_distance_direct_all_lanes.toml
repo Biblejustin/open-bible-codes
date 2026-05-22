@@ -168,3 +168,132 @@ outputs = [
   "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_aggregate.md",
   "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_aggregate.manifest.json",
 ]
+
+[[steps]]
+id = "compute_wrr2_direct_all_lanes_1000_program_shard_0_of_2"
+description = "Run all-lane high-cap direct corrected-distance program-formula shard 0 of 2."
+parallel_group = "wrr_direct_all_lanes_1000_program_shards"
+argv = [
+  "-m", "scripts.analyze_wrr_corrected_distance",
+  "--pair-table", "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--candidate-lane", "all",
+  "--min-skip", "2",
+  "--search-max-skip", "1000",
+  "--direction", "both",
+  "--jobs", "1",
+  "--row-width-count", "10",
+  "--minimum-valid", "10",
+  "--skip-cap-mode", "term",
+  "--skip-cap-formula", "program",
+  "--shard-index", "0",
+  "--shard-count", "2",
+  "--out", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s00of02.csv",
+  "--summary-out", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s00of02_summary.csv",
+  "--markdown-out", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s00of02.md",
+  "--manifest-out", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s00of02.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_corrected_distance.py",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "configs/example_koren_genesis.toml",
+  "els/wrr.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s00of02.csv",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s00of02_summary.csv",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s00of02.md",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s00of02.manifest.json",
+]
+
+[[steps]]
+id = "compute_wrr2_direct_all_lanes_1000_program_shard_1_of_2"
+description = "Run all-lane high-cap direct corrected-distance program-formula shard 1 of 2."
+parallel_group = "wrr_direct_all_lanes_1000_program_shards"
+argv = [
+  "-m", "scripts.analyze_wrr_corrected_distance",
+  "--pair-table", "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--candidate-lane", "all",
+  "--min-skip", "2",
+  "--search-max-skip", "1000",
+  "--direction", "both",
+  "--jobs", "1",
+  "--row-width-count", "10",
+  "--minimum-valid", "10",
+  "--skip-cap-mode", "term",
+  "--skip-cap-formula", "program",
+  "--shard-index", "1",
+  "--shard-count", "2",
+  "--out", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s01of02.csv",
+  "--summary-out", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s01of02_summary.csv",
+  "--markdown-out", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s01of02.md",
+  "--manifest-out", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s01of02.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_corrected_distance.py",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "configs/example_koren_genesis.toml",
+  "els/wrr.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s01of02.csv",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s01of02_summary.csv",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s01of02.md",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s01of02.manifest.json",
+]
+
+[[steps]]
+id = "merge_wrr2_direct_all_lanes_1000_program"
+description = "Merge all-lane high-cap direct corrected-distance program-formula shards."
+argv = [
+  "-m", "scripts.merge_wrr_corrected_distance_shards",
+  "--expected-shard-count", "2",
+  "--shard", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s00of02.csv",
+  "--shard", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s01of02.csv",
+  "--shard-summary", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s00of02_summary.csv",
+  "--shard-summary", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s01of02_summary.csv",
+  "--out", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv",
+  "--summary-out", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged_summary.csv",
+  "--markdown-out", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.md",
+  "--manifest-out", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.manifest.json",
+]
+inputs = [
+  "scripts/merge_wrr_corrected_distance_shards.py",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s00of02.csv",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s01of02.csv",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s00of02_summary.csv",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_s01of02_summary.csv",
+]
+outputs = [
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged_summary.csv",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.md",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.manifest.json",
+]
+
+[[steps]]
+id = "aggregate_wrr2_direct_all_lanes_1000_program"
+description = "Aggregate all-lane high-cap direct corrected-distance program-formula diagnostics into P1..P4."
+argv = [
+  "-m", "scripts.analyze_wrr_corrected_distance_aggregate",
+  "--input", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv",
+  "--p1-threshold", "0.2",
+  "--out", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_aggregate.csv",
+  "--markdown-out", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_aggregate.md",
+  "--manifest-out", "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_aggregate.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_corrected_distance_aggregate.py",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv",
+  "els/wrr.py",
+]
+outputs = [
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_aggregate.csv",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_aggregate.md",
+  "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_aggregate.manifest.json",
+]
