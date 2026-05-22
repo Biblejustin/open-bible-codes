@@ -991,6 +991,32 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_claim_blocker_packet"
+description = "Gather WRR claim blockers, lock options, and source-review flags into one decision packet."
+argv = [
+  "-m", "scripts.build_wrr_claim_blocker_packet",
+  "--readiness", "reports/wrr_1994/wrr_claim_readiness.csv",
+  "--lock-options", "reports/wrr_1994/wrr_lock_options.csv",
+  "--source-queue", "reports/wrr_1994/wrr_source_review_queue.csv",
+  "--method-status", "reports/wrr_1994/wrr_method_status.csv",
+  "--out", "reports/wrr_1994/wrr_claim_blocker_packet.csv",
+  "--markdown-out", "docs/WRR_CLAIM_BLOCKER_PACKET.md",
+  "--manifest-out", "reports/wrr_1994/wrr_claim_blocker_packet.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_claim_blocker_packet.py",
+  "reports/wrr_1994/wrr_claim_readiness.csv",
+  "reports/wrr_1994/wrr_lock_options.csv",
+  "reports/wrr_1994/wrr_source_review_queue.csv",
+  "reports/wrr_1994/wrr_method_status.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_claim_blocker_packet.csv",
+  "docs/WRR_CLAIM_BLOCKER_PACKET.md",
+  "reports/wrr_1994/wrr_claim_blocker_packet.manifest.json",
+]
+
+[[steps]]
 id = "audit_wrr2_genesis_pairs_len_5_8"
 description = "Audit WRR appendix-compatible 5..8-letter same-record pair rows."
 argv = [
