@@ -53,11 +53,34 @@ class ColinearElsSourceAuditTests(unittest.TestCase):
         self.assertEqual(summary["missing_row_indexes"], "")
         self.assertEqual(summary["duplicate_row_indexes"], 0)
 
+    def test_parse_roots_rows_from_text_extracts_raw_root_tokens(self) -> None:
+        rows = audit.parse_roots_rows_from_text(
+            "root4 root3 root2 root1 word\n"
+            "\u05d0\u05e8\u05e8          \u05d0\u05d0\u05e8\n"
+            "\u05d0\u05d1\u05d3\u05d4      \u05d0\u05d1\u05d3        \u05d0\u05d1\u05d3\u05d4\n"
+            "\u05d5\u05d1\u05de\u05e9\u05d0\u05e8\u05d5\u05ea\u05d9\u05db\u05de\u05e9\u05d0\u05e8\u05ea\n"
+        )
+        summary = audit.summarize_roots_rows(rows)
+
+        self.assertEqual(len(rows), 3)
+        self.assertEqual(rows[0]["word"], "\u05d0\u05d0\u05e8")
+        self.assertEqual(rows[0]["root_tokens"], "\u05d0\u05e8\u05e8")
+        self.assertEqual(rows[1]["word"], "\u05d0\u05d1\u05d3\u05d4")
+        self.assertEqual(rows[1]["root_tokens"], "\u05d0\u05d1\u05d3\u05d4 \u05d0\u05d1\u05d3")
+        self.assertEqual(rows[2]["parse_status"], "single_token_unparsed")
+        self.assertEqual(summary["rows"], 3)
+        self.assertEqual(summary["parsed_rows"], 2)
+        self.assertEqual(summary["single_token_rows"], 1)
+
     def test_hash_markers_can_complete_all_1698_count(self) -> None:
         pls_summary = {
             "rows": 6060,
             "duplicate_row_indexes": 0,
             "missing_row_indexes": "",
+        }
+        roots_summary = {
+            "rows": 12830,
+            "parsed_rows": 12828,
         }
         row = {
             "label": "all_1698",
@@ -83,10 +106,12 @@ class ColinearElsSourceAuditTests(unittest.TestCase):
                 {"label": "att_heb", "observed_source_rows": "", "bytes": 1},
             ],
             pls_summary,
+            roots_summary,
         )
 
         by_anchor = {anchor["anchor"]: anchor["status"] for anchor in anchors}
         self.assertEqual(by_anchor["pls_pairs_6060_machine_rows"], "found")
+        self.assertEqual(by_anchor["roots_rows_machine_extracted"], "found")
         self.assertEqual(by_anchor["all_1698_rows_observed"], "found")
         self.assertEqual(by_anchor["review_sets_502_rows_observed"], "found")
 

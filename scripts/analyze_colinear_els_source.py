@@ -37,6 +37,8 @@ DEFAULT_ATTACHMENT_PDFS = [
 DEFAULT_OUT = Path("reports/wrr_1994/colinear_els_attachment_sources.csv")
 DEFAULT_PLS_PAIRS_OUT = Path("reports/wrr_1994/colinear_els_pls_pairs.csv")
 DEFAULT_PLS_SUMMARY_OUT = Path("reports/wrr_1994/colinear_els_pls_pairs_summary.csv")
+DEFAULT_ROOTS_ROWS_OUT = Path("reports/wrr_1994/colinear_els_roots_rows.csv")
+DEFAULT_ROOTS_SUMMARY_OUT = Path("reports/wrr_1994/colinear_els_roots_rows_summary.csv")
 DEFAULT_SUMMARY_OUT = Path("reports/wrr_1994/colinear_els_source_summary.csv")
 DEFAULT_ANCHORS_OUT = Path("reports/wrr_1994/colinear_els_protocol_anchors.csv")
 DEFAULT_MD = Path("docs/COLINEAR_ELS_SOURCE_AUDIT.md")
@@ -73,6 +75,7 @@ ATTACHMENT_FIELDNAMES = [
     "claim_status",
 ]
 PLS_FIELDNAMES = ["row_index", "word_b", "word_a", "raw_line"]
+ROOTS_FIELDNAMES = ["row_index", "word", "root_tokens", "token_count", "parse_status", "raw_line"]
 PLS_SUMMARY_FIELDNAMES = [
     "rows",
     "row_index_min",
@@ -82,6 +85,15 @@ PLS_SUMMARY_FIELDNAMES = [
     "unique_word_a",
     "unique_word_b",
     "unique_pairs",
+    "claim_status",
+]
+ROOTS_SUMMARY_FIELDNAMES = [
+    "rows",
+    "parsed_rows",
+    "single_token_rows",
+    "unique_words",
+    "unique_root_tokens",
+    "max_roots_per_word",
     "claim_status",
 ]
 SUMMARY_FIELDNAMES = [
@@ -100,6 +112,8 @@ SUMMARY_FIELDNAMES = [
     "observed_rows_total",
     "pls_pair_rows",
     "pls_pair_missing_rows",
+    "roots_rows",
+    "roots_single_token_rows",
     "claim_status",
 ]
 ANCHOR_FIELDNAMES = ["source", "anchor", "status", "diagnostic"]
@@ -155,11 +169,15 @@ def main(argv: list[str] | None = None) -> int:
     rows = [analyze_attachment_pdf(path) for path in attachments]
     pls_pairs = parse_pls_pairs(pls_attachment_path(attachments))
     pls_summary = summarize_pls_pairs(pls_pairs)
-    summary = build_summary(args, paper_text, page_info, rows, pls_summary)
-    anchors = protocol_anchors(paper_text, page_info, rows, pls_summary)
+    roots_rows = parse_roots_rows(roots_attachment_path(attachments))
+    roots_summary = summarize_roots_rows(roots_rows)
+    summary = build_summary(args, paper_text, page_info, rows, pls_summary, roots_summary)
+    anchors = protocol_anchors(paper_text, page_info, rows, pls_summary, roots_summary)
     write_csv(args.out, ATTACHMENT_FIELDNAMES, rows)
     write_csv(args.pls_pairs_out, PLS_FIELDNAMES, pls_pairs)
     write_csv(args.pls_summary_out, PLS_SUMMARY_FIELDNAMES, [pls_summary])
+    write_csv(args.roots_rows_out, ROOTS_FIELDNAMES, roots_rows)
+    write_csv(args.roots_summary_out, ROOTS_SUMMARY_FIELDNAMES, [roots_summary])
     write_csv(args.summary_out, SUMMARY_FIELDNAMES, [summary])
     write_csv(args.anchors_out, ANCHOR_FIELDNAMES, anchors)
     write_markdown(args.markdown_out, summary, rows, anchors)
@@ -180,6 +198,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--pls-pairs-out", type=Path, default=DEFAULT_PLS_PAIRS_OUT)
     parser.add_argument("--pls-summary-out", type=Path, default=DEFAULT_PLS_SUMMARY_OUT)
+    parser.add_argument("--roots-rows-out", type=Path, default=DEFAULT_ROOTS_ROWS_OUT)
+    parser.add_argument("--roots-summary-out", type=Path, default=DEFAULT_ROOTS_SUMMARY_OUT)
     parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
     parser.add_argument("--anchors-out", type=Path, default=DEFAULT_ANCHORS_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
@@ -248,6 +268,13 @@ def pls_attachment_path(paths: list[Path]) -> Path:
     raise ValueError("missing PLS attachment PDF")
 
 
+def roots_attachment_path(paths: list[Path]) -> Path:
+    for path in paths:
+        if attachment_label(path) == "roots":
+            return path
+    raise ValueError("missing roots attachment PDF")
+
+
 def parse_pls_pairs(path: Path) -> list[dict[str, object]]:
     return parse_pls_pairs_from_text(extract_pdf_text(path))
 
@@ -295,6 +322,47 @@ def summarize_pls_pairs(rows: list[dict[str, object]]) -> dict[str, object]:
     }
 
 
+def parse_roots_rows(path: Path) -> list[dict[str, object]]:
+    return parse_roots_rows_from_text(extract_pdf_text(path))
+
+
+def parse_roots_rows_from_text(text: str) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for raw_line in text.splitlines():
+        line = clean_text(raw_line).strip()
+        if not line or "root" in line.lower() or line.isdigit():
+            continue
+        tokens = re.findall(r"[\u0590-\u05ff]+", line)
+        if not tokens:
+            continue
+        parsed = len(tokens) >= 2
+        rows.append(
+            {
+                "row_index": len(rows) + 1,
+                "word": tokens[-1] if parsed else "",
+                "root_tokens": " ".join(tokens[:-1]) if parsed else "",
+                "token_count": len(tokens),
+                "parse_status": "parsed" if parsed else "single_token_unparsed",
+                "raw_line": line,
+            }
+        )
+    return rows
+
+
+def summarize_roots_rows(rows: list[dict[str, object]]) -> dict[str, object]:
+    parsed = [row for row in rows if row["parse_status"] == "parsed"]
+    root_token_sets = [str(row["root_tokens"]).split() for row in parsed]
+    return {
+        "rows": len(rows),
+        "parsed_rows": len(parsed),
+        "single_token_rows": sum(1 for row in rows if row["parse_status"] != "parsed"),
+        "unique_words": len({str(row["word"]) for row in parsed}),
+        "unique_root_tokens": len({root for roots in root_token_sets for root in roots}),
+        "max_roots_per_word": max((len(roots) for roots in root_token_sets), default=0),
+        "claim_status": "source_row_extraction_only_not_result_bearing",
+    }
+
+
 def numeric_row_prefix(text: str, expected_rows: int) -> int:
     if expected_rows <= 0:
         return 0
@@ -315,6 +383,7 @@ def build_summary(
     page_info: dict[str, object],
     rows: list[dict[str, object]],
     pls_summary: dict[str, object],
+    roots_summary: dict[str, object],
 ) -> dict[str, object]:
     expected_rows = [row for row in rows if row["expected_rows"] != ""]
     return {
@@ -339,6 +408,8 @@ def build_summary(
         "pls_pair_missing_rows": len(str(pls_summary["missing_row_indexes"]).split())
         if pls_summary["missing_row_indexes"]
         else 0,
+        "roots_rows": roots_summary["rows"],
+        "roots_single_token_rows": roots_summary["single_token_rows"],
         "claim_status": "source_shape_only_not_result_bearing",
     }
 
@@ -348,6 +419,7 @@ def protocol_anchors(
     page_info: dict[str, object],
     rows: list[dict[str, object]],
     pls_summary: dict[str, object],
+    roots_summary: dict[str, object],
 ) -> list[dict[str, str]]:
     paper = normalize_space(clean_text(paper_text))
     by_label = {str(row["label"]): row for row in rows}
@@ -410,6 +482,12 @@ def protocol_anchors(
             "PLS PDF extracted to 6,060 machine-readable pair rows",
         ),
         (
+            "roots",
+            "roots_rows_machine_extracted",
+            int(roots_summary["rows"]) == 12830 and int(roots_summary["parsed_rows"]) == 12828,
+            "roots PDF extracted to raw rows with parsed root tokens",
+        ),
+        (
             "attachments",
             "all_1698_rows_observed",
             int(by_label.get("all_1698", {}).get("observed_source_rows", 0)) == 1698,
@@ -463,6 +541,8 @@ def write_markdown(
         f"| observed rows in counted attachments | {summary['observed_rows_total']} |",
         f"| PLS pair rows extracted | {summary['pls_pair_rows']} |",
         f"| PLS missing row indexes | {summary['pls_pair_missing_rows']} |",
+        f"| roots rows extracted | {summary['roots_rows']} |",
+        f"| roots single-token rows | {summary['roots_single_token_rows']} |",
         "",
         "## Attachment PDFs",
         "",
@@ -497,9 +577,9 @@ def write_markdown(
             "",
             "The paper and attachment files are usable as source-shape material for a",
             "future co-linear ELS/verse protocol. This audit only records file coverage,",
-            "protocol anchors, table row counts, and raw PLS pair rows. It does not",
-            "normalize Hebrew terms, select roots, compute ELSs, score verse links, or",
-            "evaluate controls.",
+            "protocol anchors, table row counts, raw PLS pair rows, and raw roots rows.",
+            "It does not normalize Hebrew terms, select roots, compute ELSs, score",
+            "verse links, or evaluate controls.",
         ]
     )
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -579,6 +659,8 @@ def write_manifest(
             "attachments": str(args.out),
             "pls_pairs": str(args.pls_pairs_out),
             "pls_summary": str(args.pls_summary_out),
+            "roots_rows": str(args.roots_rows_out),
+            "roots_summary": str(args.roots_summary_out),
             "summary": str(args.summary_out),
             "anchors": str(args.anchors_out),
             "markdown": str(args.markdown_out),
