@@ -103,6 +103,7 @@ Current pushed commits for this cleanup:
 - `3f60f7c` Document preregistration preflight guard.
 - `8a6139f` Guard CRD relevance lock in preflight.
 - `f70b9c6` Document CRD preflight lock guard.
+- `021d7f9` List CRD findings in real report scope.
 
 ### Formal Real Report Rerun
 
