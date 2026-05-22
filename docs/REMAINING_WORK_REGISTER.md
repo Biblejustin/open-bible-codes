@@ -10,7 +10,8 @@ coverage, prospective-lane validation in report preflight, source-basis audit
 queue guarding, English source-basis preflight inputs, formal source-basis
 queue validation, source-basis validation documentation, and formal preflight
 metadata-check documentation, study-tooling preflight coverage, and
-preregistration placeholder guarding, plus CRD relevance-lock guarding.
+preregistration placeholder guarding, CRD relevance-lock guarding, and
+manual-review queue preflight guarding.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -104,6 +105,8 @@ Current pushed commits for this cleanup:
 - `8a6139f` Guard CRD relevance lock in preflight.
 - `f70b9c6` Document CRD preflight lock guard.
 - `021d7f9` List CRD findings in real report scope.
+- `d2b3a4e` Refresh CRD report scope status.
+- `c8f69b3` Guard manual review queue in preflight.
 
 ### Formal Real Report Rerun
 
@@ -482,9 +485,11 @@ validation in report preflight, source-basis audit queue guarding, and English
 source-basis preflight inputs, formal source-basis queue validation, and
 source-basis validation documentation, plus formal preflight metadata-check
 documentation, study-tooling preflight coverage, and preregistration
-placeholder guarding, plus CRD relevance-lock guarding:
+placeholder guarding, CRD relevance-lock guarding, and manual-review queue
+preflight guarding:
 
-- `python3 -m pytest -q` passed: 1155 tests and 13951 subtests.
+- `python3 -m pytest -q` passed: 1160 tests and 13951 subtests.
+- `python3 -m pytest tests/test_check_manual_review_queue.py tests/test_real_report_run.py -q` passed: 37 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_crd_dictionary_tools.py -q` passed: 40 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_check_preregistration_placeholders.py -q` passed: 36 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_check_expanded_strata_tooling.py tests/test_validate_study_mapping_schemas.py -q` passed: 38 tests.
@@ -495,6 +500,7 @@ placeholder guarding, plus CRD relevance-lock guarding:
 - `python3 -m scripts.check_expanded_strata_tooling --report /tmp/edls_expanded_tooling_after_patch.json` passed.
 - `python3 -m scripts.validate_study_mapping_schemas` passed.
 - `python3 -m scripts.check_crd_relevance_dictionary --dictionary terms/relevance_dictionary.toml --term-file terms/gog_magog_pair_prospective_terms.csv --expected-sha256 a6406048b9953ca50715d99100994b9065394d9db31b35867666d365a3bd0f99 --require-reviewed` passed.
+- `python3 -m scripts.check_manual_review_queue` passed.
 - `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_claim_catalog.py tests/test_wrr_claim_readiness.py -q` passed: 32 tests and 60 subtests.
 - `python3 -m pytest tests/test_real_report_run.py -q` passed: 25 tests.
@@ -507,6 +513,7 @@ placeholder guarding, plus CRD relevance-lock guarding:
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_expanded_mapping_fullgate.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_prereg_placeholders.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_crd_lock.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_manual_queue.json` passed.
 - `python3 -m scripts.check_prospective_study_lanes` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.

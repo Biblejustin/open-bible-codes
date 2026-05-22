@@ -709,7 +709,8 @@ Tracked plan: `docs/REAL_REPORT_RUN.md`.
 The preflight now also validates source-basis metadata, expanded-strata tooling
 references, future study-mapping CSV schemas, and concrete preregistration
 placeholder cleanup, plus the locked CRD relevance-dictionary basis before
-summary assembly.
+summary assembly. It also checks the manual-review queue guardrails and
+evidence links.
 
 Resume without rerunning completed outputs:
 

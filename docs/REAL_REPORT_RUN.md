@@ -137,6 +137,7 @@ It requires:
   while the prospective-study template remains available as a template;
 - CRD relevance dictionary, term coverage, reviewer metadata, and protocol
   hash lock are still consistent with the centered-relevance protocol;
+- manual-review queue keeps required non-claim guardrails and evidence links;
 - checked-in `docs/INDEX.md` and `protocols/INDEX.md` freshness;
 - existing generated inputs needed by the final gates.
 
