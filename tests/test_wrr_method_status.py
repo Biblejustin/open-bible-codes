@@ -62,6 +62,22 @@ class WrrMethodStatusTests(unittest.TestCase):
                     "run_defined": "72",
                 },
             ],
+            zero_hit_variant_rows=[
+                {
+                    "category": "wrr_appellation",
+                    "zero_terms": "105",
+                    "terms_with_variant_hit": "48",
+                    "terms_without_variant_hit": "57",
+                    "best_variant_total_hits": "2981",
+                },
+                {
+                    "category": "wrr_date",
+                    "zero_terms": "7",
+                    "terms_with_variant_hit": "7",
+                    "terms_without_variant_hit": "0",
+                    "best_variant_total_hits": "1358",
+                },
+            ],
             skip_row={
                 "rows": "120",
                 "program_cap_lt_printed": "13",
@@ -161,6 +177,8 @@ class WrrMethodStatusTests(unittest.TestCase):
         self.assertIn("OCR probe matched 135/205", by_area["WRR2 term source"]["evidence"])
         self.assertIn("row OCR probe matched 132/205", by_area["WRR2 term source"]["evidence"])
         self.assertIn("31 detected row markers", by_area["WRR2 term source"]["evidence"])
+        self.assertIn("55/112 zero-hit terms", by_area["WRR2 term source"]["evidence"])
+        self.assertIn("diagnostic_only_not_source_correction", by_area["WRR2 term source"]["evidence"])
         self.assertEqual(by_area["WRR2 term source"]["status"], "working_source_locked")
         self.assertIn("User authorized ANU/McKay WRR2", by_area["WRR2 term source"]["current_read"])
         self.assertIn("working corrected-distance runs", by_area["WRR2 term source"]["next_action"])
@@ -208,6 +226,7 @@ class WrrMethodStatusTests(unittest.TestCase):
             },
             defined_pair_rows=[],
             defined_gap_reason_rows=[],
+            zero_hit_variant_rows=[],
             skip_row={
                 "rows": "120",
                 "program_cap_lt_printed": "13",
@@ -241,6 +260,7 @@ class WrrMethodStatusTests(unittest.TestCase):
                     "pair_summary": Path("pairs.csv"),
                     "defined_pair_summary": Path("defined_pairs.csv"),
                     "defined_gap_reasons": Path("gap_reasons.csv"),
+                    "zero_hit_variant_summary": Path("zero_hit_variants.csv"),
                     "table2_bridge_summary": Path("bridge_summary.csv"),
                     "table2_ocr_summary": Path("ocr_summary.csv"),
                     "skip_summary": Path("skip.csv"),
@@ -285,6 +305,7 @@ class WrrMethodStatusTests(unittest.TestCase):
             pair_summary = root / "pairs.csv"
             defined_pair_summary = root / "defined_pairs.csv"
             defined_gap_reasons = root / "defined_gap_reasons.csv"
+            zero_hit_variants = root / "zero_hit_variants.csv"
             bridge_summary = root / "bridge_summary.csv"
             ocr_summary = root / "ocr_summary.csv"
             row_ocr_summary = root / "row_ocr_summary.csv"
@@ -348,6 +369,18 @@ class WrrMethodStatusTests(unittest.TestCase):
                         "reason": "ordinary_missing_appellation_hits",
                         "pairs": "83",
                         "run_defined": "72",
+                    }
+                ],
+            )
+            write_dict_rows(
+                zero_hit_variants,
+                [
+                    {
+                        "category": "wrr_appellation",
+                        "zero_terms": "105",
+                        "terms_with_variant_hit": "48",
+                        "terms_without_variant_hit": "57",
+                        "best_variant_total_hits": "2981",
                     }
                 ],
             )
@@ -447,6 +480,8 @@ class WrrMethodStatusTests(unittest.TestCase):
                     str(defined_pair_summary),
                     "--defined-gap-reasons",
                     str(defined_gap_reasons),
+                    "--zero-hit-variant-summary",
+                    str(zero_hit_variants),
                     "--table2-bridge-summary",
                     str(bridge_summary),
                     "--table2-ocr-summary",

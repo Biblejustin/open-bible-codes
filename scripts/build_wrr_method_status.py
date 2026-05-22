@@ -17,6 +17,7 @@ DEFAULT_TEXT_SOURCE = Path("reports/wrr_1994/koren_genesis_text_source.csv")
 DEFAULT_PAIR_SUMMARY = Path("reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv")
 DEFAULT_DEFINED_PAIR_SUMMARY = Path("reports/wrr_1994/wrr_defined_pair_set_audit_summary.csv")
 DEFAULT_DEFINED_GAP_REASONS = Path("reports/wrr_1994/wrr_defined_gap_reasons.csv")
+DEFAULT_ZERO_HIT_VARIANT_SUMMARY = Path("reports/wrr_1994/wrr_zero_hit_variant_probe_summary.csv")
 DEFAULT_TABLE2_BRIDGE_SUMMARY = Path("reports/wrr_1994/wrr_table2_source_bridge_summary.csv")
 DEFAULT_TABLE2_OCR_SUMMARY = Path("reports/wrr_1994/wrr_primary_table2_ocr_probe_summary.csv")
 DEFAULT_TABLE2_ROW_OCR_SUMMARY = Path("reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv")
@@ -91,6 +92,7 @@ def main(argv: list[str] | None = None) -> int:
     pair_row = read_one_row(args.pair_summary)
     defined_pair_rows = read_rows(args.defined_pair_summary) if args.defined_pair_summary.exists() else []
     defined_gap_reason_rows = read_rows(args.defined_gap_reasons) if args.defined_gap_reasons.exists() else []
+    zero_hit_variant_rows = read_rows(args.zero_hit_variant_summary) if args.zero_hit_variant_summary.exists() else []
     table2_bridge_row = read_one_row(args.table2_bridge_summary)
     table2_ocr_row = read_one_row(args.table2_ocr_summary)
     table2_row_ocr_row = read_one_row(args.table2_row_ocr_summary) if args.table2_row_ocr_summary.exists() else None
@@ -114,6 +116,7 @@ def main(argv: list[str] | None = None) -> int:
         pair_row,
         defined_pair_rows,
         defined_gap_reason_rows,
+        zero_hit_variant_rows,
         skip_row,
         variant_rows,
         primary_result_rows,
@@ -142,6 +145,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--pair-summary", type=Path, default=DEFAULT_PAIR_SUMMARY)
     parser.add_argument("--defined-pair-summary", type=Path, default=DEFAULT_DEFINED_PAIR_SUMMARY)
     parser.add_argument("--defined-gap-reasons", type=Path, default=DEFAULT_DEFINED_GAP_REASONS)
+    parser.add_argument("--zero-hit-variant-summary", type=Path, default=DEFAULT_ZERO_HIT_VARIANT_SUMMARY)
     parser.add_argument("--table2-bridge-summary", type=Path, default=DEFAULT_TABLE2_BRIDGE_SUMMARY)
     parser.add_argument("--table2-ocr-summary", type=Path, default=DEFAULT_TABLE2_OCR_SUMMARY)
     parser.add_argument("--table2-row-ocr-summary", type=Path, default=DEFAULT_TABLE2_ROW_OCR_SUMMARY)
@@ -203,6 +207,7 @@ def build_status_rows(
     pair_row: dict[str, str],
     defined_pair_rows: list[dict[str, str]] | None,
     defined_gap_reason_rows: list[dict[str, str]] | None,
+    zero_hit_variant_rows: list[dict[str, str]] | None,
     skip_row: dict[str, str],
     variant_rows: list[dict[str, str]],
     primary_result_rows: list[dict[str, str]] | None = None,
@@ -238,6 +243,7 @@ def build_status_rows(
                 + table2_ocr_evidence(table2_ocr_row)
                 + "; "
                 + table2_row_ocr_evidence(table2_row_ocr_row)
+                + optional_evidence(zero_hit_variant_evidence(zero_hit_variant_rows or []))
                 + "; "
                 f"{pair_row.get('source_records', '')} source records; "
                 f"{pair_row.get('source_appellations', '')} appellations; "
@@ -344,6 +350,30 @@ def best_gap_reason_evidence(rows: list[dict[str, str]]) -> str:
 
 def pairs_for_reason(rows_by_reason: dict[str, dict[str, str]], reason: str) -> int:
     return int_value(rows_by_reason.get(reason, {}).get("pairs", ""))
+
+
+def optional_evidence(value: str) -> str:
+    return f"; {value}" if value else ""
+
+
+def zero_hit_variant_evidence(rows: list[dict[str, str]]) -> str:
+    if not rows:
+        return ""
+    zero_terms = sum(int_value(row.get("zero_terms", "")) for row in rows)
+    with_hit = sum(int_value(row.get("terms_with_variant_hit", "")) for row in rows)
+    variant_hits = sum(int_value(row.get("best_variant_total_hits", "")) for row in rows)
+    details = ", ".join(
+        (
+            f"{row.get('category', '')} "
+            f"{row.get('terms_with_variant_hit', '')}/{row.get('zero_terms', '')}"
+        )
+        for row in rows
+    )
+    return (
+        "zero-hit variant probe found simple one-edit raw ELS variants for "
+        f"{with_hit}/{zero_terms} zero-hit terms ({details}), total variant hits "
+        f"{variant_hits}; diagnostic_only_not_source_correction"
+    )
 
 
 def corrected_distance_status(
@@ -574,6 +604,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             f"--pair-summary {args.pair_summary} "
             f"--defined-pair-summary {args.defined_pair_summary} "
             f"--defined-gap-reasons {args.defined_gap_reasons} "
+            f"--zero-hit-variant-summary {args.zero_hit_variant_summary} "
             f"--table2-bridge-summary {args.table2_bridge_summary} "
             f"--table2-ocr-summary {args.table2_ocr_summary} "
             f"--table2-row-ocr-summary {getattr(args, 'table2_row_ocr_summary', '')} "
@@ -693,6 +724,7 @@ def write_manifest(args: argparse.Namespace, rows: list[dict[str, str]], started
             "pair_summary": str(args.pair_summary),
             "defined_pair_summary": str(args.defined_pair_summary),
             "defined_gap_reasons": str(args.defined_gap_reasons),
+            "zero_hit_variant_summary": str(args.zero_hit_variant_summary),
             "table2_bridge_summary": str(args.table2_bridge_summary),
             "table2_ocr_summary": str(args.table2_ocr_summary),
             "table2_row_ocr_summary": str(args.table2_row_ocr_summary),
