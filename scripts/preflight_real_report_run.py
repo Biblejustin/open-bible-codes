@@ -115,6 +115,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_SOURCE_AUDIT.md",
     "docs/WRR_REPLICATION_PLAN.md",
     "docs/WRR_METHOD_STATUS.md",
+    "docs/WRR_LOCK_OPTIONS.md",
     "docs/WRR_METHODOLOGY_GAPS.md",
     "docs/WRR_CORRECTED_DISTANCE_NOTES.md",
     "docs/WRR_CROSS_PAIR_GRID.md",

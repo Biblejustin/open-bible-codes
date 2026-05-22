@@ -69,8 +69,8 @@ This assembly run includes:
 - WRR 1994 source/import/text-lock/count/pair-table/perturbation-boundary audit
   plus repo-defined cross-pair permutation diagnostic:
   `docs/WRR_SOURCE_AUDIT.md`, `docs/WRR_METHODOLOGY_GAPS.md`,
-  `docs/WRR_CORRECTED_DISTANCE_NOTES.md`, and
-  `docs/WRR_CROSS_PAIR_GRID.md`
+  `docs/WRR_CORRECTED_DISTANCE_NOTES.md`, `docs/WRR_CROSS_PAIR_GRID.md`, and
+  `docs/WRR_LOCK_OPTIONS.md`
 - broader search/current findings writeup:
   `docs/BROADER_SEARCH_FINDINGS.md`
 - broad Hebrew modern/geopolitical version-distribution run:

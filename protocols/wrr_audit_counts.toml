@@ -744,6 +744,32 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_lock_options"
+description = "Summarize current WRR lock options and the safe no-input diagnostic path."
+argv = [
+  "-m", "scripts.build_wrr_lock_options",
+  "--pair-summary", "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "--skip-summary", "reports/wrr_1994/wrr2_skip_caps_summary.csv",
+  "--variants", "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
+  "--recommended-permutation", "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv",
+  "--out", "reports/wrr_1994/wrr_lock_options.csv",
+  "--markdown-out", "docs/WRR_LOCK_OPTIONS.md",
+  "--manifest-out", "reports/wrr_1994/wrr_lock_options.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_lock_options.py",
+  "reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv",
+  "reports/wrr_1994/wrr2_skip_caps_summary.csv",
+  "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
+  "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_lock_options.csv",
+  "docs/WRR_LOCK_OPTIONS.md",
+  "reports/wrr_1994/wrr_lock_options.manifest.json",
+]
+
+[[steps]]
 id = "control_wrr2_genesis_top_pairs"
 description = "Control-screen the top raw WRR2 same-record pair rows."
 argv = [

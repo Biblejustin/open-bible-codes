@@ -1278,6 +1278,7 @@ def write_summary(
             "- `docs/WRR_CORRECTED_DISTANCE_NOTES.md`",
             "- `docs/WRR_CROSS_PAIR_GRID.md`",
             "- `docs/WRR_METHOD_STATUS.md`",
+            "- `docs/WRR_LOCK_OPTIONS.md`",
             "- `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`",
             "- `docs/STUDY_LOCK_MANIFESTS.md`",
             "- `docs/PROSPECTIVE_STUDY_PREREGISTRATION_TEMPLATE.md`",
