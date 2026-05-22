@@ -1358,6 +1358,7 @@ def write_summary(
             "- `docs/WRR_CLAIM_READINESS.md`",
             "- `docs/WRR_CLAIM_BLOCKER_PACKET.md`",
             "- `docs/WRR_SOURCE_POLICY_SCENARIOS.md`",
+            "- `docs/WRR_DW_FORMULA_SENSITIVITY.md`",
             "- `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`",
             "- `docs/STUDY_LOCK_MANIFESTS.md`",
             "- `docs/PROSPECTIVE_STUDY_PREREGISTRATION_TEMPLATE.md`",
