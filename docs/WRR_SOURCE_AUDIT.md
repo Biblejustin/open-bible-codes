@@ -194,9 +194,10 @@ These are source leads, not claim-ready evidence.
   separate protocol from WRR because the alternative hypothesis and
   transliteration generation are different.
 - Israeli prime ministers: useful as a small modern-person/entity protocol with
-  linked keyword pages. The current crawl found keyword pages 1..8; later
-  missing or unpublished pages should be treated as missing source material, not
-  inferred rows.
+  linked keyword pages. The source-shape audit in
+  `docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md` now confirms 12 PDF rows and
+  8 downloaded detail pages with keyword labels. The 4-page gap should be
+  treated as missing detail-source coverage, not inferred rows.
 - Cities/Aumann/Simon-McKay: useful for a source-chain and replication-failure
   lane because the pages separate Gans/Inbal rule-based city spellings, Aumann
   committee expert data, and Simon/McKay/Margolioth variants.
@@ -294,6 +295,12 @@ birth-date paper and data PDFs into ignored source-shape CSVs and a tracked
 audit summary. It verifies the S1/S2 sample-table shape and protocol anchors,
 but does not normalize terms into repo search rows, compute ELS/SL proximity,
 or rerank permutations.
+
+`scripts/analyze_israeli_prime_ministers_source.py` parses the Israeli
+prime-ministers main page, keyword PDF, and downloaded detail pages into ignored
+source-shape CSVs and a tracked audit summary. It verifies the PDF row count,
+main-page protocol anchors, and the current detail-page coverage gap, but does
+not normalize terms, run ELS hits, or verify the reported p-level.
 
 `scripts/simulate_torah_code_research_model.py` turns the Torah-code.org
 research-program geometric level-1 model into a reproducible simulation harness.

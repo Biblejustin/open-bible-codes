@@ -172,17 +172,27 @@ The Witztum Genesis birth-date source has a source-shape audit:
 - `protocols/witztum_birth_dates_source_audit.toml`
 - `docs/WITZTUM_BIRTH_DATES_SOURCE_AUDIT.md`
 
+The Israeli prime-ministers source has a source-shape audit:
+
+- `scripts/analyze_israeli_prime_ministers_source.py`
+- `protocols/israeli_prime_ministers_source_audit.toml`
+- `docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md`
+
 The communities audit confirms 66 data records and 210 pre-filter community
 rows. The presidents audit confirms 42 data records and 292 pre-test spelling
 rows. The birth-date audit confirms two S1/S2 tables, 14 rows per table, and
-51 date forms per table. These lanes stay non-result-bearing. The
+51 date forms per table. The Israeli prime-ministers audit confirms 12 PDF
+rows but only 8 downloaded detail pages with keyword labels, leaving a 4-page
+detail-source coverage gap. These lanes stay non-result-bearing. The
 research-program ELS harness now includes a split-fit Fisher order-statistic
 row. Next research-program upgrade: replace the current transparent resonant
 row-width proxy with a fuller source-method reconstruction, recover
 source-published Fisher weights if a citable source becomes available, and only
 then consider real Torah-code source data, communities compactness runs,
 American-presidents transliteration experiments, or Witztum birth-date
-ELS/SL-proximity tests.
+ELS/SL-proximity tests. Do not run an Israeli prime-ministers result protocol
+until the missing detail-page coverage is resolved or explicitly scoped out in a
+new preregistration.
 
 WRR aggregate work now has a diagnostic P1..P4 bridge:
 

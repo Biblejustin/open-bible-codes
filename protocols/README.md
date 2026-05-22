@@ -127,6 +127,17 @@ source-shape outputs for the S1/S2 sample tables. It does not normalize terms,
 run ELS/SL proximity, or rerank permutations. Tracked audit:
 `docs/WITZTUM_BIRTH_DATES_SOURCE_AUDIT.md`.
 
+Israeli prime-ministers source-shape audit:
+
+```bash
+python3 -m scripts.run_protocol protocols/israeli_prime_ministers_source_audit.toml --resume
+```
+
+This parses the Torah-code.org Israeli prime-ministers main page, keyword PDF,
+and downloaded detail pages. It records source-shape counts and the current
+detail-page coverage gap without normalizing terms or testing ELS results.
+Tracked audit: `docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md`.
+
 WRR imported-term Genesis count and pair smoke:
 
 ```bash
