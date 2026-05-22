@@ -2,8 +2,10 @@
 
 Status: operational register after the 34-version English-source refresh, the
 empty English seed survivor gate, the English source-basis audit, reader-report
-hygiene, locked-report reruns, and volatility cleanup. This file tracks work
-that remains outside the missing copyrighted/private English CSVs.
+hygiene, locked-report reruns, volatility cleanup, WRR single-term
+source-policy propagation, and Torah-code research-model source-status cleanup.
+This file tracks work that remains outside the missing copyrighted/private
+English CSVs.
 
 ## Blocked
 
@@ -19,6 +21,12 @@ reports/biblegateway_english_versions/missing_versions.csv
 AMPC, NLT, MSG, TPT, and NIV local hooks exist and their private CSVs are
 ignored under `data/private/english/`. TPT is wired in the private protocol but
 is not part of the BibleGateway manifest.
+
+Bolls currently adds no further missing BibleGateway labels beyond sources
+already mapped separately. The Bolls `NASB` package remains tracked as
+`NASB1995`; do not silently use it for the current BibleGateway `NASB` row. The
+local NASB EPUB is PDF-derived/two-column and is not safe for verse-level CSV
+import without a dedicated parser.
 
 ## Completed This Pass
 
@@ -61,6 +69,10 @@ Current pushed commits for this cleanup:
 - `4b792d4` Surface WRR diagnostic in real report run.
 - `d23b87d` Refresh WRR status after cross-pair diagnostics.
 - `ac86fb5` Refresh all-codes reports with Hebrew theology DB.
+- `883458d` Add WRR readiness evidence context.
+- `4abb554` Add WRR single-term evidence to final reports.
+- `d97f505` Propagate WRR single-term impacts to support docs.
+- `097a5e0` Record adjacent Torah-code model sources.
 
 ### Formal Real Report Rerun
 
@@ -123,11 +135,16 @@ workflow names.
 
 ### 1. WRR Reproduction Upgrade
 
-Current status: smoke/source/import work plus a lock-prep pair eligibility
-table. Remaining claim-grade pieces:
+Current status: source/import work, corrected-distance diagnostics, a
+lock-prep pair eligibility table, source-policy scenario diagnostics, and a
+claim-readiness gate. Remaining claim-grade pieces:
 
 - candidate pair source/reconciliation, with `163` treated as the
   source-defined corrected-distance output count rather than a raw pair table;
+- source-policy lock for WNP/context rows. Single-term Zacut diagnostics now
+  show `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and `M$HZKWTW` each individually leave
+  163 >=5 pairs with gap 0 if excluded, but that remains diagnostic count
+  evidence only;
 - printed-formula vs WRR-program `D(w)` choice, now side-by-side audited but
   not locked;
 - real-pair perturbed `Q` and corrected distance `c(w,w')`, enforcing
@@ -142,7 +159,10 @@ Tracked references:
 - `docs/WRR_METHODOLOGY_GAPS.md`
 - `docs/WRR_CORRECTED_DISTANCE_NOTES.md`
 - `docs/WRR_CLAIM_READINESS.md`
+- `docs/WRR_CLAIM_BLOCKER_PACKET.md`
+- `docs/WRR_LOCK_OPTIONS.md`
 - `reports/wrr_1994/wrr2_pair_eligibility_table.csv`
+- `reports/wrr_1994/wrr_source_policy_term_impacts.csv`
 - `tests/test_wrr_stats.py`
 
 Recent source-audit follow-up added a Torah-code.org geometric level-1
@@ -230,7 +250,9 @@ four copied-title mismatches, and the Katrina page mislabeled as Tsunami.
 The missing-model-pages audit confirms that four linked Torah-code.org
 level-2/3 geometric and ELS model pages currently download as root-canonical
 pages with unrelated slot/gambling content, no expected model labels, and zero
-usable model pages. These lanes stay non-result-bearing. The
+usable model pages. The adjacent level-1 geometric and ELS model pages are
+usable source context, but they do not supply the missing level-2/3 rules.
+These lanes stay non-result-bearing. The
 research-program ELS harness now includes a split-fit Fisher order-statistic
 row plus two transparent row-width modes: strict shared-intersection
 candidates and broader combined WRR-series candidates. Next research-program
@@ -370,9 +392,10 @@ block also produced 1 `tobit` bridge row.
 The lane is now recorded in `configs/prospective_study_lanes.json` and
 `docs/PROSPECTIVE_LANE_STATUS.md` as a completed negative controlled result.
 
-Current next no-input step: look for independent replication designs or other
-locked prospective lanes; no KJVA prospective bridge claim language is
-supported by the current controls.
+Current next step: look for independent replication designs or define a new
+locked prospective lane. No KJVA prospective bridge claim language is supported
+by the current controls, and there is no remaining `ready_for_preflight` lane in
+`configs/prospective_study_lanes.json`.
 
 Covered by the prospective lock:
 
@@ -413,13 +436,15 @@ python3 -m scripts.build_protocol_index --protocols-dir protocols --out protocol
 python3 -m scripts.check_public_release_hygiene --allow-dirty
 ```
 
-Current observed result after the WRR gap-reason audit, readiness gate, and
+Current observed result after the WRR gap-reason audit, readiness gate,
+single-term source-policy propagation, missing-model adjacent-source audit, and
 preflight guard pass:
 
-- `python3 -m pytest -q` passed: 1118 tests and 13951 subtests.
+- `python3 -m pytest -q` passed: 1140 tests and 13951 subtests.
 - `python3 -m pytest tests/test_import_bolls_translation.py tests/test_english_version_manifests.py -q` passed: 11 tests and 117 subtests.
 - `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_claim_catalog.py tests/test_wrr_claim_readiness.py -q` passed: 32 tests and 60 subtests.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_check.json` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
+- `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume` passed clean after each tracked WRR/report update.
