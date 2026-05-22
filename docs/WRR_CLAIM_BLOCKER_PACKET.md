@@ -9,7 +9,7 @@ queue flags, and visual triage notes into one handoff artifact.
 ## Reproduce
 
 ```bash
-python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --source-policy-term-impacts reports/wrr_1994/wrr_source_policy_term_impacts.csv --dw-formula-sensitivity reports/wrr_1994/wrr_dw_formula_sensitivity.csv --variant-residual-summary reports/wrr_1994/wrr_variant_residual_review_summary.csv --variant-residual-packet reports/wrr_1994/wrr_variant_residual_review_packet.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
+python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --source-policy-term-impacts reports/wrr_1994/wrr_source_policy_term_impacts.csv --dw-formula-sensitivity reports/wrr_1994/wrr_dw_formula_sensitivity.csv --variant-residual-summary reports/wrr_1994/wrr_variant_residual_review_summary.csv --variant-residual-packet reports/wrr_1994/wrr_variant_residual_review_packet.csv --residual-term-summary reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv --residual-term-queue reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
 ```
 
 ## Blockers
@@ -62,6 +62,40 @@ The local lock policy is claim-ready for repo-defined reporting, but exact publi
 | 8 | `wrr2_02_app_03__wrr2_02_date_01` | `WRR2 02` | `some_blocking_terms_have_variant_hit` | `both_matched` | `ZR@ABRHM` |  |
 | 9 | `wrr2_02_app_05__wrr2_02_date_01` | `WRR2 02` | `some_blocking_terms_have_variant_hit` | `both_matched` | `ABRHMYCXQY` |  |
 | 10 | `wrr2_32_app_05__wrr2_32_date_01` | `WRR2 32` | `no_blocking_term_variant_hit` | `mixed` | `$LMHMX@LMA` | `wnp_chelm_spelling_context` |
+
+### Residual Term Queue
+
+The queue compresses repeated residual pair blockers into unique unresolved terms. It is a diagnostic review order, not a correction set or exclusion policy.
+
+| Group | Value | Terms | Residual pairs | Frontier pairs | Read |
+| --- | --- | ---: | ---: | ---: | --- |
+| `residual_terms` | `unique_unresolved_terms` | 58 | 59 | 40 | unique unresolved term targets collapsed from residual pair rows |
+| `term_side` | `appellation` | 58 | 59 | 40 | residual term queue breakdown; diagnostic only |
+| `review_bucket` | `ocr_matched_no_variant_lead` | 11 | 11 | 2 | residual term queue breakdown; diagnostic only |
+| `review_bucket` | `ocr_near_match_no_variant_lead` | 3 | 3 | 2 | residual term queue breakdown; diagnostic only |
+| `review_bucket` | `ocr_not_matched_no_variant_lead` | 44 | 45 | 36 | residual term queue breakdown; diagnostic only |
+| `term_ocr_status` | `matched` | 11 | 11 | 2 | residual term queue breakdown; diagnostic only |
+| `term_ocr_status` | `not_matched` | 47 | 48 | 38 | residual term queue breakdown; diagnostic only |
+| `source_flag` | `wnp_chelm_spelling_context` | 1 | 1 | 1 | residual term queue breakdown; diagnostic only |
+| `reconciliation_need` | `method_or_pair_universe_review` | 11 | 11 | 2 | residual term queue breakdown; diagnostic only |
+| `reconciliation_need` | `page_image_near_match_review` | 3 | 3 | 2 | residual term queue breakdown; diagnostic only |
+| `reconciliation_need` | `source_policy_or_pair_rule_review` | 1 | 1 | 1 | residual term queue breakdown; diagnostic only |
+| `reconciliation_need` | `source_transcription_or_row_alignment` | 43 | 44 | 35 | residual term queue breakdown; diagnostic only |
+
+### Top Residual Term Targets
+
+| Rank | Term id | Term | Need | Pairs | Frontier | Buckets | Source flags |
+| ---: | --- | --- | --- | ---: | ---: | --- | --- |
+| 1 | `wrr2_32_app_05` | `$LMHMX@LMA` | `source_policy_or_pair_rule_review` | 1 | 1 | `ocr_not_matched_no_variant_lead` | `wnp_chelm_spelling_context` |
+| 2 | `wrr2_27_app_13` | `B@LQWLHRMZ` | `source_transcription_or_row_alignment` | 2 | 1 | `ocr_not_matched_no_variant_lead` |  |
+| 3 | `wrr2_01_app_06` | `B@LHA$KWL` | `source_transcription_or_row_alignment` | 1 | 1 | `ocr_not_matched_no_variant_lead` |  |
+| 4 | `wrr2_01_app_08` | `HRBABBYTDYN` | `source_transcription_or_row_alignment` | 1 | 1 | `ocr_not_matched_no_variant_lead` |  |
+| 5 | `wrr2_02_app_04` | `B@LZR@ABRHM` | `source_transcription_or_row_alignment` | 1 | 1 | `ocr_not_matched_no_variant_lead` |  |
+| 6 | `wrr2_03_app_03` | `XSDLABRHM` | `source_transcription_or_row_alignment` | 1 | 1 | `ocr_not_matched_no_variant_lead` |  |
+| 7 | `wrr2_03_app_04` | `B@LXSDLABRHM` | `source_transcription_or_row_alignment` | 1 | 1 | `ocr_not_matched_no_variant_lead` |  |
+| 8 | `wrr2_05_app_02` | `AHRNHGDWLMQRLYN` | `source_transcription_or_row_alignment` | 1 | 1 | `ocr_not_matched_no_variant_lead` |  |
+| 9 | `wrr2_06_app_03` | `B@LM@$YH$M` | `source_transcription_or_row_alignment` | 1 | 1 | `ocr_not_matched_no_variant_lead` |  |
+| 10 | `wrr2_06_app_04` | `B@LM@$YYHWH` | `source_transcription_or_row_alignment` | 1 | 1 | `ocr_not_matched_no_variant_lead` |  |
 
 ## Source Policy Scenario Impact
 
@@ -117,6 +151,7 @@ The local lock policy is claim-ready for repo-defined reporting, but exact publi
 - This is a decision packet, not a reproduction result.
 - Pair universe lock: keep_all_working_source; WNP/context and visual-review flags do not exclude pairs automatically.
 - Exact published WRR reproduction remains caveated by the residual source/method gap after the simple-variant upper bound.
+- Residual term priority is a review order, not a correction set or pair-exclusion list.
 - D(w) lock: printed WRR formula main; reported-program formula remains sensitivity output.
 - Aggregate/permutation lock: keep-all cap1000 999,999 date-label permutation over the full selected-universe corrected-distance output.
 - No visual-review note excludes a pair automatically; pair exclusion would require an explicit source-policy change.

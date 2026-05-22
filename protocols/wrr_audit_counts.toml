@@ -1152,6 +1152,8 @@ argv = [
   "--dw-formula-sensitivity", "reports/wrr_1994/wrr_dw_formula_sensitivity.csv",
   "--variant-residual-summary", "reports/wrr_1994/wrr_variant_residual_review_summary.csv",
   "--variant-residual-packet", "reports/wrr_1994/wrr_variant_residual_review_packet.csv",
+  "--residual-term-summary", "reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv",
+  "--residual-term-queue", "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv",
   "--out", "reports/wrr_1994/wrr_claim_blocker_packet.csv",
   "--markdown-out", "docs/WRR_CLAIM_BLOCKER_PACKET.md",
   "--manifest-out", "reports/wrr_1994/wrr_claim_blocker_packet.manifest.json",
@@ -1167,6 +1169,8 @@ inputs = [
   "reports/wrr_1994/wrr_dw_formula_sensitivity.csv",
   "reports/wrr_1994/wrr_variant_residual_review_summary.csv",
   "reports/wrr_1994/wrr_variant_residual_review_packet.csv",
+  "reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv",
+  "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv",
 ]
 outputs = [
   "reports/wrr_1994/wrr_claim_blocker_packet.csv",

@@ -75,6 +75,7 @@ class WrrCrossPairGridTests(unittest.TestCase):
         protocol = load_protocol("protocols/wrr_cross_pair_grid.toml")
         steps_by_id = {step["id"]: step for step in protocol["steps"]}
         method_status = steps_by_id["build_wrr_method_status_after_cross_pair"]
+        blocker_packet = steps_by_id["build_wrr_claim_blocker_packet_after_cross_pair"]
 
         self.assertIn(
             "reports/wrr_1994/wrr_source_policy_scenarios.csv",
@@ -101,6 +102,16 @@ class WrrCrossPairGridTests(unittest.TestCase):
         self.assertIn("--source-policy-term-impacts", method_status["argv"])
         self.assertIn("--dw-formula-sensitivity", method_status["argv"])
         self.assertIn("--variant-gap-summary", method_status["argv"])
+        self.assertIn("--residual-term-summary", blocker_packet["argv"])
+        self.assertIn("--residual-term-queue", blocker_packet["argv"])
+        self.assertIn(
+            "reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv",
+            blocker_packet["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv",
+            blocker_packet["inputs"],
+        )
 
 
 def count_row(normalized: str, length: int, hits: int) -> dict[str, str]:

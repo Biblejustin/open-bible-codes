@@ -1,4 +1,5 @@
 import csv
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -77,6 +78,8 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             dw_formula_sensitivity = root / "dw_formula_sensitivity.csv"
             variant_residual_summary = root / "variant_residual_summary.csv"
             variant_residual_packet = root / "variant_residual_packet.csv"
+            residual_term_summary = root / "residual_term_summary.csv"
+            residual_term_queue = root / "residual_term_queue.csv"
             out = root / "packet.csv"
             markdown = root / "packet.md"
             manifest = root / "manifest.json"
@@ -208,6 +211,62 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                     }
                 ],
             )
+            write_csv(
+                residual_term_summary,
+                [
+                    {
+                        "run_label": "all_lanes_cap1000",
+                        "group": "residual_terms",
+                        "value": "unique_unresolved_terms",
+                        "terms": "58",
+                        "residual_pairs": "59",
+                        "frontier_pairs": "40",
+                        "read": "unique unresolved term targets collapsed from residual pair rows",
+                    },
+                    {
+                        "run_label": "all_lanes_cap1000",
+                        "group": "reconciliation_need",
+                        "value": "source_policy_or_pair_rule_review",
+                        "terms": "1",
+                        "residual_pairs": "1",
+                        "frontier_pairs": "1",
+                        "read": "residual term queue breakdown; diagnostic only",
+                    },
+                ],
+            )
+            write_csv(
+                residual_term_queue,
+                [
+                    {
+                        "run_label": "all_lanes_cap1000",
+                        "priority_rank": "1",
+                        "term_id": "wrr2_32_app_05",
+                        "term": "$LMHMX@LMA",
+                        "term_side": "appellation",
+                        "residual_pairs": "1",
+                        "frontier_pairs": "1",
+                        "concepts": "WRR2 32",
+                        "impact_statuses": "1 no_blocking_term_variant_hit",
+                        "row_ocr_pair_statuses": "1 mixed",
+                        "review_buckets": "ocr_not_matched_no_variant_lead",
+                        "term_ocr_statuses": "not_matched",
+                        "source_flags": "wnp_chelm_spelling_context",
+                        "source_review_action": "source/pair-rule review",
+                        "visual_review_action": "",
+                        "source_queue_rank": "83",
+                        "source_queue_bucket": "ocr_not_matched_no_variant_lead",
+                        "source_queue_ocr_status": "not_matched",
+                        "source_queue_row_ocr_basis": "row OCR",
+                        "source_queue_best_variant_hits": "0",
+                        "source_queue_best_variant_rule": "none",
+                        "source_queue_best_variant_normalized": "",
+                        "source_queue_pair_ids": "wrr2_32_app_05__wrr2_32_date_01",
+                        "pair_ids": "wrr2_32_app_05__wrr2_32_date_01",
+                        "reconciliation_need": "source_policy_or_pair_rule_review",
+                        "read": "term carries source-policy context",
+                    }
+                ],
+            )
 
             rc = packet.main(
                 [
@@ -229,6 +288,10 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                     str(variant_residual_summary),
                     "--variant-residual-packet",
                     str(variant_residual_packet),
+                    "--residual-term-summary",
+                    str(residual_term_summary),
+                    "--residual-term-queue",
+                    str(residual_term_queue),
                     "--out",
                     str(out),
                     "--markdown-out",
@@ -254,11 +317,19 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             self.assertIn("Exact-WRR Residual Caveat", text)
             self.assertIn("Residual Frontier Sample", text)
             self.assertIn("wrr2_27_app_13__wrr2_27_date_01", text)
+            self.assertIn("Residual Term Queue", text)
+            self.assertIn("Top Residual Term Targets", text)
+            self.assertIn("wrr2_32_app_05", text)
+            self.assertIn("source_policy_or_pair_rule_review", text)
+            self.assertIn("wnp_chelm_spelling_context", text)
             self.assertIn("exclude_wnp_zacut_only", text)
             self.assertIn("all_lanes_cap1000", text)
             self.assertIn("Pair universe lock: keep_all_working_source", text)
             self.assertIn("D(w) lock: printed WRR formula main", text)
             self.assertTrue(manifest.exists())
+            manifest_payload = json.loads(manifest.read_text(encoding="utf-8"))
+            self.assertEqual(manifest_payload["residual_term_summary_rows"], 2)
+            self.assertEqual(manifest_payload["residual_term_queue_rows"], 1)
 
 
 def write_csv(path: Path, rows: list[dict[str, str]]) -> None:

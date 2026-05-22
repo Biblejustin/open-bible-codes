@@ -29,6 +29,12 @@ DEFAULT_VARIANT_RESIDUAL_SUMMARY = Path(
 DEFAULT_VARIANT_RESIDUAL_PACKET = Path(
     "reports/wrr_1994/wrr_variant_residual_review_packet.csv"
 )
+DEFAULT_RESIDUAL_TERM_SUMMARY = Path(
+    "reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv"
+)
+DEFAULT_RESIDUAL_TERM_QUEUE = Path(
+    "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv"
+)
 DEFAULT_OUT = Path("reports/wrr_1994/wrr_claim_blocker_packet.csv")
 DEFAULT_MD = Path("docs/WRR_CLAIM_BLOCKER_PACKET.md")
 DEFAULT_MANIFEST = Path("reports/wrr_1994/wrr_claim_blocker_packet.manifest.json")
@@ -83,6 +89,8 @@ def main(argv: list[str] | None = None) -> int:
     dw_formula_rows = read_optional_rows(args.dw_formula_sensitivity)
     variant_residual_rows = read_optional_rows(args.variant_residual_summary)
     variant_residual_packet_rows = read_optional_rows(args.variant_residual_packet)
+    residual_term_summary_rows = read_optional_rows(args.residual_term_summary)
+    residual_term_queue_rows = read_optional_rows(args.residual_term_queue)
     packet_rows = build_packet_rows(readiness_rows, lock_rows, source_rows, method_rows)
     write_csv(args.out, packet_rows)
     write_markdown(
@@ -94,6 +102,8 @@ def main(argv: list[str] | None = None) -> int:
         dw_formula_rows,
         variant_residual_rows,
         variant_residual_packet_rows,
+        residual_term_summary_rows,
+        residual_term_queue_rows,
         args,
     )
     write_manifest(
@@ -105,6 +115,8 @@ def main(argv: list[str] | None = None) -> int:
         dw_formula_rows,
         variant_residual_rows,
         variant_residual_packet_rows,
+        residual_term_summary_rows,
+        residual_term_queue_rows,
         started,
     )
     print(args.out)
@@ -143,6 +155,16 @@ def build_parser() -> argparse.ArgumentParser:
         "--variant-residual-packet",
         type=Path,
         default=DEFAULT_VARIANT_RESIDUAL_PACKET,
+    )
+    parser.add_argument(
+        "--residual-term-summary",
+        type=Path,
+        default=DEFAULT_RESIDUAL_TERM_SUMMARY,
+    )
+    parser.add_argument(
+        "--residual-term-queue",
+        type=Path,
+        default=DEFAULT_RESIDUAL_TERM_QUEUE,
     )
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
@@ -240,6 +262,22 @@ def residual_frontier_rows(rows: list[dict[str, str]], limit: int = 10) -> list[
     return sorted(frontier, key=lambda row: int_or_zero(row.get("review_rank", "")))[:limit]
 
 
+def residual_term_summary_display_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    wanted = {
+        "residual_terms",
+        "term_side",
+        "review_bucket",
+        "term_ocr_status",
+        "source_flag",
+        "reconciliation_need",
+    }
+    return [row for row in rows if row.get("group") in wanted]
+
+
+def top_residual_term_rows(rows: list[dict[str, str]], limit: int = 10) -> list[dict[str, str]]:
+    return sorted(rows, key=lambda row: int_or_zero(row.get("priority_rank", "")))[:limit]
+
+
 def write_markdown(
     path: Path,
     packet_rows: list[dict[str, str]],
@@ -249,6 +287,8 @@ def write_markdown(
     dw_formula_rows: list[dict[str, str]],
     variant_residual_rows: list[dict[str, str]],
     variant_residual_packet_rows: list[dict[str, str]],
+    residual_term_summary_rows: list[dict[str, str]],
+    residual_term_queue_rows: list[dict[str, str]],
     args: argparse.Namespace,
 ) -> None:
     status_line = (
@@ -279,6 +319,8 @@ def write_markdown(
             f"--dw-formula-sensitivity {args.dw_formula_sensitivity} "
             f"--variant-residual-summary {args.variant_residual_summary} "
             f"--variant-residual-packet {args.variant_residual_packet} "
+            f"--residual-term-summary {args.residual_term_summary} "
+            f"--residual-term-queue {args.residual_term_queue} "
             f"--out {args.out} "
             f"--markdown-out {args.markdown_out} "
             f"--manifest-out {args.manifest_out}"
@@ -372,6 +414,57 @@ def write_markdown(
                     ocr=markdown_cell(row.get("row_ocr_pair_status", "")),
                     terms=markdown_cell(row.get("unresolved_terms", "")),
                     flags=markdown_code_or_blank(row.get("unresolved_source_flags", "")),
+                )
+            )
+    term_summary_rows = residual_term_summary_display_rows(residual_term_summary_rows)
+    if term_summary_rows:
+        lines.extend(
+            [
+                "",
+                "### Residual Term Queue",
+                "",
+                "The queue compresses repeated residual pair blockers into unique unresolved terms. It is a diagnostic review order, not a correction set or exclusion policy.",
+                "",
+                "| Group | Value | Terms | Residual pairs | Frontier pairs | Read |",
+                "| --- | --- | ---: | ---: | ---: | --- |",
+            ]
+        )
+        for row in term_summary_rows:
+            lines.append(
+                "| `{group}` | `{value}` | {terms} | {residual_pairs} | {frontier_pairs} | {read} |".format(
+                    group=markdown_cell(row.get("group", "")),
+                    value=markdown_cell(row.get("value", "")),
+                    terms=markdown_cell(row.get("terms", "")),
+                    residual_pairs=markdown_cell(row.get("residual_pairs", "")),
+                    frontier_pairs=markdown_cell(row.get("frontier_pairs", "")),
+                    read=markdown_cell(row.get("read", "")),
+                )
+            )
+    top_term_rows = top_residual_term_rows(residual_term_queue_rows)
+    if top_term_rows:
+        lines.extend(
+            [
+                "",
+                "### Top Residual Term Targets",
+                "",
+                "| Rank | Term id | Term | Need | Pairs | Frontier | Buckets | Source flags |",
+                "| ---: | --- | --- | --- | ---: | ---: | --- | --- |",
+            ]
+        )
+        for row in top_term_rows:
+            lines.append(
+                (
+                    "| {rank} | `{term_id}` | `{term}` | `{need}` | {pairs} | "
+                    "{frontier} | `{buckets}` | {flags} |"
+                ).format(
+                    rank=markdown_cell(row.get("priority_rank", "")),
+                    term_id=markdown_cell(row.get("term_id", "")),
+                    term=markdown_cell(row.get("term", "")),
+                    need=markdown_cell(row.get("reconciliation_need", "")),
+                    pairs=markdown_cell(row.get("residual_pairs", "")),
+                    frontier=markdown_cell(row.get("frontier_pairs", "")),
+                    buckets=markdown_cell(row.get("review_buckets", "")),
+                    flags=markdown_code_or_blank(row.get("source_flags", "")),
                 )
             )
     if source_policy_rows:
@@ -518,6 +611,7 @@ def write_markdown(
             "- This is a decision packet, not a reproduction result.",
             "- Pair universe lock: keep_all_working_source; WNP/context and visual-review flags do not exclude pairs automatically.",
             "- Exact published WRR reproduction remains caveated by the residual source/method gap after the simple-variant upper bound.",
+            "- Residual term priority is a review order, not a correction set or pair-exclusion list.",
             "- D(w) lock: printed WRR formula main; reported-program formula remains sensitivity output.",
             "- Aggregate/permutation lock: keep-all cap1000 999,999 date-label permutation over the full selected-universe corrected-distance output.",
             "- No visual-review note excludes a pair automatically; pair exclusion would require an explicit source-policy change.",
@@ -556,6 +650,8 @@ def write_manifest(
     dw_formula_rows: list[dict[str, str]],
     variant_residual_rows: list[dict[str, str]],
     variant_residual_packet_rows: list[dict[str, str]],
+    residual_term_summary_rows: list[dict[str, str]],
+    residual_term_queue_rows: list[dict[str, str]],
     started: float,
 ) -> None:
     payload = {
@@ -569,6 +665,8 @@ def write_manifest(
         "dw_formula_sensitivity_rows": len(dw_formula_rows),
         "variant_residual_summary_rows": len(variant_residual_rows),
         "variant_residual_packet_rows": len(variant_residual_packet_rows),
+        "residual_term_summary_rows": len(residual_term_summary_rows),
+        "residual_term_queue_rows": len(residual_term_queue_rows),
         "inputs": {
             "readiness": str(args.readiness),
             "lock_options": str(args.lock_options),
@@ -579,6 +677,8 @@ def write_manifest(
             "dw_formula_sensitivity": str(args.dw_formula_sensitivity),
             "variant_residual_summary": str(args.variant_residual_summary),
             "variant_residual_packet": str(args.variant_residual_packet),
+            "residual_term_summary": str(args.residual_term_summary),
+            "residual_term_queue": str(args.residual_term_queue),
         },
         "outputs": {
             "out": str(args.out),

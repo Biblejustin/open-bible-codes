@@ -58,6 +58,10 @@ def test_wrr_claim_blocker_step_mentions_visual_triage() -> None:
     )
 
     assert "visual triage notes" in step["description"]
+    assert "--residual-term-summary" in step["argv"]
+    assert "--residual-term-queue" in step["argv"]
+    assert "reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv" in step["inputs"]
+    assert "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv" in step["inputs"]
 
 
 def test_greek_new_terms_report_step_uses_specific_title() -> None:
