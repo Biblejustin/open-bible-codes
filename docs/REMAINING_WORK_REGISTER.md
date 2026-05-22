@@ -102,6 +102,7 @@ Current pushed commits for this cleanup:
 - `06e77b4` Guard preregistration placeholders in preflight.
 - `3f60f7c` Document preregistration preflight guard.
 - `8a6139f` Guard CRD relevance lock in preflight.
+- `f70b9c6` Document CRD preflight lock guard.
 
 ### Formal Real Report Rerun
 
