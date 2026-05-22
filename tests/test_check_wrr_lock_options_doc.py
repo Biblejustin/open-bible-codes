@@ -22,6 +22,20 @@ def test_missing_decision_aid_status_fails(tmp_path: Path) -> None:
     assert any("decision aid" in failure for failure in failures)
 
 
+def test_missing_no_input_posture_fails(tmp_path: Path) -> None:
+    doc = tmp_path / "WRR_LOCK_OPTIONS.md"
+    text = "\n".join(
+        phrase
+        for phrase in check.REQUIRED_PHRASES
+        if phrase != "No source-review flag or visual-review note excludes a pair automatically."
+    )
+    doc.write_text(text + "\n", encoding="utf-8")
+
+    failures = check.validate_lock_options_doc(doc)
+
+    assert any("visual-review note excludes" in failure for failure in failures)
+
+
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
     missing = tmp_path / "missing.md"
 

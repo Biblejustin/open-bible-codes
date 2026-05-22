@@ -519,6 +519,13 @@ def write_markdown(
         )
     lines.extend(
         [
+            "Recommended no-input working posture:",
+            "",
+            "- Broad same-record WRR2 rows remain working diagnostic input only.",
+            "- No source-review flag or visual-review note excludes a pair automatically.",
+            "- Printed `D(w)` remains the source-facing default; reported-program `D(w)` remains sensitivity output.",
+            "- Date-label permutation output remains diagnostic until the pair universe, `D(w)`, corrected distances, and aggregate rule are source-locked.",
+            "",
             "Claim-grade language still requires a source-locked pair universe, a",
             "source-locked `D(w)` formula decision, full corrected distances over that",
             "locked universe, and a locked aggregate/permutation procedure.",

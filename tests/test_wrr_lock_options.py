@@ -306,6 +306,11 @@ class WrrLockOptionsTests(unittest.TestCase):
             self.assertIn("source-policy scenario impact", text)
             self.assertIn("Single-term impact", text)
             self.assertIn("changes 0 pair rows", text)
+            self.assertIn("Recommended no-input working posture:", text)
+            self.assertIn(
+                "No source-review flag or visual-review note excludes a pair automatically.",
+                text,
+            )
             self.assertTrue(manifest.exists())
 
 

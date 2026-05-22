@@ -20,6 +20,11 @@ REQUIRED_PHRASES = (
     "not claim-ready",
     "diagnostic only",
     "Current No-Input Path",
+    "Recommended no-input working posture:",
+    "Broad same-record WRR2 rows remain working diagnostic input only.",
+    "No source-review flag or visual-review note excludes a pair automatically.",
+    "Printed `D(w)` remains the source-facing default; reported-program `D(w)` remains sensitivity output.",
+    "Date-label permutation output remains diagnostic until the pair universe, `D(w)`, corrected distances, and aggregate rule are source-locked.",
     "Claim-grade language still requires a source-locked pair universe",
 )
 
