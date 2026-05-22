@@ -392,6 +392,7 @@ argv = [
   "--variant-residual-packet", "reports/wrr_1994/wrr_variant_residual_review_packet.csv",
   "--residual-term-summary", "reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv",
   "--residual-term-queue", "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv",
+  "--method-pair-universe-summary", "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
   "--out", "reports/wrr_1994/wrr_claim_blocker_packet.csv",
   "--markdown-out", "docs/WRR_CLAIM_BLOCKER_PACKET.md",
   "--manifest-out", "reports/wrr_1994/wrr_claim_blocker_packet.manifest.json",
@@ -409,6 +410,7 @@ inputs = [
   "reports/wrr_1994/wrr_variant_residual_review_packet.csv",
   "reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv",
   "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv",
+  "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
 ]
 outputs = [
   "reports/wrr_1994/wrr_claim_blocker_packet.csv",

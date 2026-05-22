@@ -21,6 +21,8 @@ REQUIRED_PHRASES = (
     "Residual Frontier Sample",
     "Residual Term Queue",
     "Top Residual Term Targets",
+    "Method/Pair-Universe Evidence Summary",
+    "OCR matched all method-lane terms",
     "unique_unresolved_terms",
     "source_policy_or_pair_rule_review",
     "wnp_chelm_spelling_context",

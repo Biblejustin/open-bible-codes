@@ -9,7 +9,7 @@ queue flags, and visual triage notes into one handoff artifact.
 ## Reproduce
 
 ```bash
-python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --source-policy-term-impacts reports/wrr_1994/wrr_source_policy_term_impacts.csv --dw-formula-sensitivity reports/wrr_1994/wrr_dw_formula_sensitivity.csv --variant-residual-summary reports/wrr_1994/wrr_variant_residual_review_summary.csv --variant-residual-packet reports/wrr_1994/wrr_variant_residual_review_packet.csv --residual-term-summary reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv --residual-term-queue reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
+python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --source-policy-term-impacts reports/wrr_1994/wrr_source_policy_term_impacts.csv --dw-formula-sensitivity reports/wrr_1994/wrr_dw_formula_sensitivity.csv --variant-residual-summary reports/wrr_1994/wrr_variant_residual_review_summary.csv --variant-residual-packet reports/wrr_1994/wrr_variant_residual_review_packet.csv --residual-term-summary reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv --residual-term-queue reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv --method-pair-universe-summary reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
 ```
 
 ## Blockers
@@ -96,6 +96,12 @@ The queue compresses repeated residual pair blockers into unique unresolved term
 | 8 | `wrr2_05_app_02` | `AHRNHGDWLMQRLYN` | `source_transcription_or_row_alignment` | 1 | 1 | `ocr_not_matched_no_variant_lead` |  |
 | 9 | `wrr2_06_app_03` | `B@LM@$YH$M` | `source_transcription_or_row_alignment` | 1 | 1 | `ocr_not_matched_no_variant_lead` |  |
 | 10 | `wrr2_06_app_04` | `B@LM@$YYHWH` | `source_transcription_or_row_alignment` | 1 | 1 | `ocr_not_matched_no_variant_lead` |  |
+
+### Method/Pair-Universe Evidence Summary
+
+| Terms | Pairs | OCR matched | Zero skip-250 | Zero high-cap | Both sides zero | Read |
+| ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| 11 | 11 | 11 | 11 | 11 | 2 | OCR matched all method-lane terms, but current Koren Genesis ordinary-hit search still leaves them undefined. |
 
 ## Source Policy Scenario Impact
 

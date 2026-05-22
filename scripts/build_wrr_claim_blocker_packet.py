@@ -35,6 +35,9 @@ DEFAULT_RESIDUAL_TERM_SUMMARY = Path(
 DEFAULT_RESIDUAL_TERM_QUEUE = Path(
     "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv"
 )
+DEFAULT_METHOD_PAIR_UNIVERSE_SUMMARY = Path(
+    "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv"
+)
 DEFAULT_OUT = Path("reports/wrr_1994/wrr_claim_blocker_packet.csv")
 DEFAULT_MD = Path("docs/WRR_CLAIM_BLOCKER_PACKET.md")
 DEFAULT_MANIFEST = Path("reports/wrr_1994/wrr_claim_blocker_packet.manifest.json")
@@ -91,6 +94,7 @@ def main(argv: list[str] | None = None) -> int:
     variant_residual_packet_rows = read_optional_rows(args.variant_residual_packet)
     residual_term_summary_rows = read_optional_rows(args.residual_term_summary)
     residual_term_queue_rows = read_optional_rows(args.residual_term_queue)
+    method_pair_universe_rows = read_optional_rows(args.method_pair_universe_summary)
     packet_rows = build_packet_rows(readiness_rows, lock_rows, source_rows, method_rows)
     write_csv(args.out, packet_rows)
     write_markdown(
@@ -104,6 +108,7 @@ def main(argv: list[str] | None = None) -> int:
         variant_residual_packet_rows,
         residual_term_summary_rows,
         residual_term_queue_rows,
+        method_pair_universe_rows,
         args,
     )
     write_manifest(
@@ -117,6 +122,7 @@ def main(argv: list[str] | None = None) -> int:
         variant_residual_packet_rows,
         residual_term_summary_rows,
         residual_term_queue_rows,
+        method_pair_universe_rows,
         started,
     )
     print(args.out)
@@ -165,6 +171,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--residual-term-queue",
         type=Path,
         default=DEFAULT_RESIDUAL_TERM_QUEUE,
+    )
+    parser.add_argument(
+        "--method-pair-universe-summary",
+        type=Path,
+        default=DEFAULT_METHOD_PAIR_UNIVERSE_SUMMARY,
     )
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
@@ -289,6 +300,7 @@ def write_markdown(
     variant_residual_packet_rows: list[dict[str, str]],
     residual_term_summary_rows: list[dict[str, str]],
     residual_term_queue_rows: list[dict[str, str]],
+    method_pair_universe_rows: list[dict[str, str]],
     args: argparse.Namespace,
 ) -> None:
     status_line = (
@@ -321,6 +333,7 @@ def write_markdown(
             f"--variant-residual-packet {args.variant_residual_packet} "
             f"--residual-term-summary {args.residual_term_summary} "
             f"--residual-term-queue {args.residual_term_queue} "
+            f"--method-pair-universe-summary {args.method_pair_universe_summary} "
             f"--out {args.out} "
             f"--markdown-out {args.markdown_out} "
             f"--manifest-out {args.manifest_out}"
@@ -467,6 +480,33 @@ def write_markdown(
                     flags=markdown_code_or_blank(row.get("source_flags", "")),
                 )
             )
+    if method_pair_universe_rows:
+        summary = method_pair_universe_rows[0]
+        lines.extend(
+            [
+                "",
+                "### Method/Pair-Universe Evidence Summary",
+                "",
+                "| Terms | Pairs | OCR matched | Zero skip-250 | Zero high-cap | Both sides zero | Read |",
+                "| ---: | ---: | ---: | ---: | ---: | ---: | --- |",
+                (
+                    "| {terms} | {pairs} | {ocr} | {zero_250} | {zero_highcap} | "
+                    "{both_zero} | {read} |"
+                ).format(
+                    terms=markdown_cell(summary.get("action_terms", "")),
+                    pairs=markdown_cell(summary.get("residual_pairs", "")),
+                    ocr=markdown_cell(summary.get("ocr_matched_terms", "")),
+                    zero_250=markdown_cell(summary.get("zero_base_skip_250_terms", "")),
+                    zero_highcap=markdown_cell(
+                        summary.get("zero_highcap_appellation_terms", "")
+                    ),
+                    both_zero=markdown_cell(
+                        summary.get("both_sides_zero_highcap_pairs", "")
+                    ),
+                    read=markdown_cell(summary.get("read", "")),
+                ),
+            ]
+        )
     if source_policy_rows:
         lines.extend(
             [
@@ -652,6 +692,7 @@ def write_manifest(
     variant_residual_packet_rows: list[dict[str, str]],
     residual_term_summary_rows: list[dict[str, str]],
     residual_term_queue_rows: list[dict[str, str]],
+    method_pair_universe_rows: list[dict[str, str]],
     started: float,
 ) -> None:
     payload = {
@@ -667,6 +708,7 @@ def write_manifest(
         "variant_residual_packet_rows": len(variant_residual_packet_rows),
         "residual_term_summary_rows": len(residual_term_summary_rows),
         "residual_term_queue_rows": len(residual_term_queue_rows),
+        "method_pair_universe_summary_rows": len(method_pair_universe_rows),
         "inputs": {
             "readiness": str(args.readiness),
             "lock_options": str(args.lock_options),
@@ -679,6 +721,7 @@ def write_manifest(
             "variant_residual_packet": str(args.variant_residual_packet),
             "residual_term_summary": str(args.residual_term_summary),
             "residual_term_queue": str(args.residual_term_queue),
+            "method_pair_universe_summary": str(args.method_pair_universe_summary),
         },
         "outputs": {
             "out": str(args.out),

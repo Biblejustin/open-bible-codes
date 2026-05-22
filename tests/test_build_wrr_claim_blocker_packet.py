@@ -80,6 +80,7 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             variant_residual_packet = root / "variant_residual_packet.csv"
             residual_term_summary = root / "residual_term_summary.csv"
             residual_term_queue = root / "residual_term_queue.csv"
+            method_pair_universe_summary = root / "method_pair_universe_summary.csv"
             out = root / "packet.csv"
             markdown = root / "packet.md"
             manifest = root / "manifest.json"
@@ -267,6 +268,23 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                     }
                 ],
             )
+            write_csv(
+                method_pair_universe_summary,
+                [
+                    {
+                        "run_label": "all_lanes_cap1000",
+                        "action_terms": "11",
+                        "residual_pairs": "11",
+                        "frontier_pairs": "1",
+                        "ocr_matched_terms": "11",
+                        "zero_base_skip_250_terms": "11",
+                        "zero_highcap_appellation_terms": "11",
+                        "both_sides_zero_highcap_pairs": "2",
+                        "no_variant_lead_terms": "11",
+                        "read": "OCR matched all method-lane terms",
+                    }
+                ],
+            )
 
             rc = packet.main(
                 [
@@ -292,6 +310,8 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                     str(residual_term_summary),
                     "--residual-term-queue",
                     str(residual_term_queue),
+                    "--method-pair-universe-summary",
+                    str(method_pair_universe_summary),
                     "--out",
                     str(out),
                     "--markdown-out",
@@ -319,6 +339,11 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             self.assertIn("wrr2_27_app_13__wrr2_27_date_01", text)
             self.assertIn("Residual Term Queue", text)
             self.assertIn("Top Residual Term Targets", text)
+            self.assertIn("Method/Pair-Universe Evidence Summary", text)
+            self.assertIn(
+                "| 11 | 11 | 11 | 11 | 11 | 2 | OCR matched all method-lane terms |",
+                text,
+            )
             self.assertIn("wrr2_32_app_05", text)
             self.assertIn("source_policy_or_pair_rule_review", text)
             self.assertIn("wnp_chelm_spelling_context", text)
@@ -330,6 +355,7 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             manifest_payload = json.loads(manifest.read_text(encoding="utf-8"))
             self.assertEqual(manifest_payload["residual_term_summary_rows"], 2)
             self.assertEqual(manifest_payload["residual_term_queue_rows"], 1)
+            self.assertEqual(manifest_payload["method_pair_universe_summary_rows"], 1)
 
 
 def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
