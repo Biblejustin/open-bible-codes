@@ -110,6 +110,7 @@ Current pushed commits for this cleanup:
 - `7709397` Document manual review queue guard.
 - `4b5d5d5` Refresh manual queue guard status.
 - `cd27c3e` Guard WRR readiness doc in preflight.
+- `3a4fecc` Document WRR readiness doc guard.
 
 ### Formal Real Report Rerun
 
