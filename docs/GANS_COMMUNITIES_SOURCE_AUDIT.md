@@ -23,6 +23,7 @@ compactness calculation, and not a claim-ready replication.
 | explicit community rows | 128 |
 | reused community rows | 82 |
 | total community rows | 210 |
+| machine community rows extracted | 210 |
 | records with no personality marker | 2 |
 | records with malformed trace line | 0 |
 

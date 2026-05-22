@@ -191,7 +191,8 @@ These are source leads, not claim-ready evidence.
   provide another fixed data set for pair compactness checks, independent from
   the WRR famous-rabbis table. The source-shape audit in
   `docs/GANS_COMMUNITIES_SOURCE_AUDIT.md` now confirms 66 data records,
-  210 community rows before experiment filters, and the key protocol anchors.
+  210 machine-readable community rows before experiment filters, and the key
+  protocol anchors.
 - Haralick protocol tests: the papers describe cleaner a priori protocol design,
   word-permuted or chapter-word-permuted Genesis controls, expected-hit skip
   caps of 5 or 10, and simpler 1D/2D compactness measures that can be tested as
@@ -327,9 +328,9 @@ transcription.
 
 `scripts/analyze_gans_communities_source.py` parses the Gans/Inbal/Bombach
 communities data PDF into ignored source-shape CSVs and a tracked audit
-summary. It verifies the 66-record data table shape and protocol anchors, but
-does not normalize spellings, apply experiment filters, run ELS hits, or test
-compactness.
+summary. It verifies the 66-record data table shape, exports 210 raw community
+rows, and checks protocol anchors, but does not normalize spellings, apply
+experiment filters, run ELS hits, or test compactness.
 
 `scripts/analyze_american_presidents_source.py` parses the American presidents
 data PDF and linked English-to-Hebrew transliteration-rule PDF into ignored

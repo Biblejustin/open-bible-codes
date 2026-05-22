@@ -594,7 +594,8 @@ External claim/source retained all-codes collection and triage:
 Co-linear ELS source audit:
 `docs/COLINEAR_ELS_SOURCE_AUDIT.md`.
 Gans communities source-shape audit:
-`docs/GANS_COMMUNITIES_SOURCE_AUDIT.md`.
+`docs/GANS_COMMUNITIES_SOURCE_AUDIT.md` (66 records and 210 raw pre-filter
+community rows).
 American presidents source-shape audit:
 `docs/AMERICAN_PRESIDENTS_SOURCE_AUDIT.md`.
 Witztum birth-date source-shape audit:

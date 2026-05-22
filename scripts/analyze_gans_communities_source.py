@@ -20,6 +20,7 @@ from els import __version__
 
 DEFAULT_SOURCE = Path("reports/wrr_1994/gans_communities_data.pdf")
 DEFAULT_OUT = Path("reports/wrr_1994/gans_communities_source_records.csv")
+DEFAULT_COMMUNITIES_OUT = Path("reports/wrr_1994/gans_communities_source_communities.csv")
 DEFAULT_SUMMARY_OUT = Path("reports/wrr_1994/gans_communities_source_summary.csv")
 DEFAULT_ANCHORS_OUT = Path("reports/wrr_1994/gans_communities_protocol_anchors.csv")
 DEFAULT_MD = Path("docs/GANS_COMMUNITIES_SOURCE_AUDIT.md")
@@ -42,6 +43,17 @@ RECORD_FIELDNAMES = [
     "has_malformed_trace_line",
 ]
 
+COMMUNITY_FIELDNAMES = [
+    "record_index",
+    "community_row_index",
+    "row_type",
+    "trace_code",
+    "reuse_prefix",
+    "reuse_record_index",
+    "community",
+    "raw_line",
+]
+
 SUMMARY_FIELDNAMES = [
     "source_pdf",
     "source_sha256",
@@ -56,6 +68,7 @@ SUMMARY_FIELDNAMES = [
     "explicit_community_rows",
     "reused_community_rows",
     "total_community_rows",
+    "machine_community_rows",
     "records_with_no_personality_marker",
     "records_with_malformed_trace_line",
     "claim_status",
@@ -109,9 +122,11 @@ def main(argv: list[str] | None = None) -> int:
     text = extract_pdf_text(args.source)
     records = parse_records(text)
     record_rows = [record.as_row() for record in records]
+    community_rows = community_rows_from_records(records)
     summary = build_summary(args.source, text, records)
     anchors = protocol_anchors(text)
     write_csv(args.out, RECORD_FIELDNAMES, record_rows)
+    write_csv(args.communities_out, COMMUNITY_FIELDNAMES, community_rows)
     write_csv(args.summary_out, SUMMARY_FIELDNAMES, [summary])
     write_csv(args.anchors_out, ANCHOR_FIELDNAMES, anchors)
     write_markdown(args.markdown_out, summary, anchors)
@@ -128,6 +143,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", type=Path, default=DEFAULT_SOURCE)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
+    parser.add_argument("--communities-out", type=Path, default=DEFAULT_COMMUNITIES_OUT)
     parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
     parser.add_argument("--anchors-out", type=Path, default=DEFAULT_ANCHORS_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
@@ -193,6 +209,43 @@ def build_record(index: int, lines: list[str]) -> SourceRecord:
     return SourceRecord(index, trace1, trace2, tuple(lines))
 
 
+def community_rows_from_records(records: list[SourceRecord]) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for record in records:
+        row_index = 0
+        for line in record.lines:
+            stripped = line.strip()
+            for match in COMMUNITY_TRACE_RE.finditer(line):
+                row_index += 1
+                rows.append(
+                    {
+                        "record_index": record.record_index,
+                        "community_row_index": row_index,
+                        "row_type": "explicit",
+                        "trace_code": match.group(1),
+                        "reuse_prefix": "",
+                        "reuse_record_index": "",
+                        "community": line[match.end() :].strip(),
+                        "raw_line": stripped,
+                    }
+                )
+            for match in COMMUNITY_REUSE_RE.finditer(line):
+                row_index += 1
+                rows.append(
+                    {
+                        "record_index": record.record_index,
+                        "community_row_index": row_index,
+                        "row_type": "reuse",
+                        "trace_code": "",
+                        "reuse_prefix": match.group(1),
+                        "reuse_record_index": match.group(2),
+                        "community": line[match.end() :].strip(),
+                        "raw_line": stripped,
+                    }
+                )
+    return rows
+
+
 def trace_like_tokens(lines: list[str]) -> list[str]:
     tokens: list[str] = []
     for line in lines[:4]:
@@ -226,6 +279,7 @@ def build_summary(source: Path, text: str, records: list[SourceRecord]) -> dict[
         "explicit_community_rows": explicit,
         "reused_community_rows": reused,
         "total_community_rows": explicit + reused,
+        "machine_community_rows": len(community_rows_from_records(records)),
         "records_with_no_personality_marker": sum(
             1 for record in records if record.has_no_personality_marker
         ),
@@ -306,6 +360,7 @@ def write_markdown(
         f"| explicit community rows | {summary['explicit_community_rows']} |",
         f"| reused community rows | {summary['reused_community_rows']} |",
         f"| total community rows | {summary['total_community_rows']} |",
+        f"| machine community rows extracted | {summary['machine_community_rows']} |",
         f"| records with no personality marker | {summary['records_with_no_personality_marker']} |",
         f"| records with malformed trace line | {summary['records_with_malformed_trace_line']} |",
         "",
@@ -366,6 +421,7 @@ def write_manifest(
         "rows": rows,
         "outputs": {
             "records": str(args.out),
+            "communities": str(args.communities_out),
             "summary": str(args.summary_out),
             "anchors": str(args.anchors_out),
             "markdown": str(args.markdown_out),

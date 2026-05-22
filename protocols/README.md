@@ -114,8 +114,8 @@ python3 -m scripts.run_protocol protocols/gans_communities_source_audit.toml --r
 ```
 
 This parses the Gans/Inbal/Bombach communities data PDF into ignored record
-shape outputs and writes a tracked source-boundary summary. It does not run
-ELS hits or compactness statistics. Tracked audit:
+and community-row source outputs and writes a tracked source-boundary summary.
+It does not run ELS hits or compactness statistics. Tracked audit:
 `docs/GANS_COMMUNITIES_SOURCE_AUDIT.md`.
 
 American presidents source-shape audit:

@@ -27,6 +27,7 @@ argv = [
   "-m", "scripts.analyze_gans_communities_source",
   "--source", "reports/wrr_1994/gans_communities_data.pdf",
   "--out", "reports/wrr_1994/gans_communities_source_records.csv",
+  "--communities-out", "reports/wrr_1994/gans_communities_source_communities.csv",
   "--summary-out", "reports/wrr_1994/gans_communities_source_summary.csv",
   "--anchors-out", "reports/wrr_1994/gans_communities_protocol_anchors.csv",
   "--markdown-out", "docs/GANS_COMMUNITIES_SOURCE_AUDIT.md",
@@ -38,6 +39,7 @@ inputs = [
 ]
 outputs = [
   "reports/wrr_1994/gans_communities_source_records.csv",
+  "reports/wrr_1994/gans_communities_source_communities.csv",
   "reports/wrr_1994/gans_communities_source_summary.csv",
   "reports/wrr_1994/gans_communities_protocol_anchors.csv",
   "docs/GANS_COMMUNITIES_SOURCE_AUDIT.md",

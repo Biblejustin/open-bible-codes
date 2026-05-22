@@ -28,6 +28,7 @@ Trace word 3 is defined for each community.
 class GansCommunitiesSourceTests(unittest.TestCase):
     def test_parse_records_counts_explicit_and_reused_rows(self) -> None:
         records = gans.parse_records(SAMPLE_TEXT)
+        community_rows = gans.community_rows_from_records(records)
 
         self.assertEqual([record.record_index for record in records], [1, 2])
         self.assertEqual(records[0].trace1, "e0032e0044")
@@ -35,6 +36,13 @@ class GansCommunitiesSourceTests(unittest.TestCase):
         self.assertEqual(records[0].explicit_community_rows, 2)
         self.assertEqual(records[1].reused_community_rows, 1)
         self.assertTrue(records[1].has_no_personality_marker)
+        self.assertEqual(len(community_rows), 3)
+        self.assertEqual(community_rows[0]["row_type"], "explicit")
+        self.assertEqual(community_rows[0]["trace_code"], "bf0351u000000n")
+        self.assertEqual(community_rows[0]["community"], "towna")
+        self.assertEqual(community_rows[2]["row_type"], "reuse")
+        self.assertEqual(community_rows[2]["reuse_prefix"], "d")
+        self.assertEqual(community_rows[2]["reuse_record_index"], "1")
 
     def test_protocol_anchors_find_declared_rules(self) -> None:
         anchors = gans.protocol_anchors(SAMPLE_TEXT)
@@ -56,6 +64,8 @@ class GansCommunitiesSourceTests(unittest.TestCase):
                         str(source),
                         "--out",
                         str(root / "records.csv"),
+                        "--communities-out",
+                        str(root / "communities.csv"),
                         "--summary-out",
                         str(root / "summary.csv"),
                         "--anchors-out",
@@ -73,7 +83,9 @@ class GansCommunitiesSourceTests(unittest.TestCase):
             markdown = (root / "audit.md").read_text(encoding="utf-8")
             self.assertIn("source-shape audit only", markdown)
             self.assertIn("data records | 2", markdown)
+            self.assertIn("machine community rows extracted | 3", markdown)
             self.assertIn("not a claim-ready replication", markdown)
+            self.assertTrue((root / "communities.csv").exists())
             self.assertTrue((root / "manifest.json").exists())
 
 
