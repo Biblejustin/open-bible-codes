@@ -496,6 +496,10 @@ corrections, exclusions, or method changes.
 residual lanes: 3 page-image near-match terms and 11 method/pair-universe
 terms, preserving the no-correction boundary until page-image, method, or
 pair-universe evidence is locked.
+`docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md` keeps those 14 remaining-lane
+terms in pending page-image and method/pair-universe lock state, preserving
+required decision-record fields without selecting source edits, method
+changes, or pair exclusions.
 `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` now splits out the 11
 method-lane terms: all are OCR-matched, all have zero skip-250 appellation
 counts, all have zero high-cap appellation ordinary hits, and 2 pairs have zero

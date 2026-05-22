@@ -97,6 +97,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md",
             steps_by_id["preflight"]["inputs"],
         )
@@ -141,6 +145,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/build_wrr_remaining_lane_evidence_packets.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_wrr_remaining_lane_review_checklist.py",
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
@@ -193,6 +201,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_remaining_lane_review_checklist.csv",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
@@ -253,6 +265,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_remaining_lane_evidence_packets_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_remaining_lane_review_checklist_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -604,11 +620,23 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/build_wrr_remaining_lane_evidence_packets.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
             "scripts/check_wrr_remaining_lane_evidence_packets_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/build_wrr_remaining_lane_review_checklist.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_remaining_lane_review_checklist_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -827,6 +855,7 @@ class RealReportRunTests(unittest.TestCase):
                 "wrr_source_transcription_row_review_checklist_doc_failures",
                 payload,
             )
+            self.assertIn("wrr_remaining_lane_review_checklist_doc_failures", payload)
             self.assertIn("wrr_lock_options_doc_failures", payload)
             self.assertIn("wrr_method_status_doc_failures", payload)
             self.assertIn("stale_generated_indexes", payload)
@@ -1309,6 +1338,28 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "WRR remaining-lane evidence packet failures: "
                 "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md missing boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_remaining_lane_checklist_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_remaining_lane_review_checklist_doc,
+                "validate_remaining_lane_review_checklist_doc",
+                return_value=["docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md missing boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_remaining_lane_review_checklist_doc_failures"],
+                ["docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md missing boundary"],
+            )
+            self.assertIn(
+                "WRR remaining-lane checklist failures: "
+                "docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md missing boundary",
                 payload["failures"],
             )
 

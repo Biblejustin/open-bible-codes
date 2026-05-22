@@ -12,7 +12,9 @@ REQUIRED_PHRASES_BY_DOC = {
     Path("README.md"): (
         "WRR claim-blocker packet:",
         "WRR source-transcription row review checklist:",
+        "WRR remaining-lane review checklist:",
         "pending manual source-lock state and required decision-record fields",
+        "pending manual lock state with required decision-record fields",
         "source-transcription row clusters, page-image near-match terms, and method/pair-universe counts",
         "without choosing corrections or exclusions",
     ),
@@ -20,6 +22,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "WRR claim-readiness doc records selected local-lock readiness",
         "summarizes the residual term, row, page-image, and method/pair-universe review lanes",
         "WRR source-transcription row checklist keeps the 22 row clusters in pending manual source-lock state",
+        "WRR remaining-lane checklist keeps 3 page-image terms and 11 method/pair-universe terms in pending manual lock states",
         "no-input handoff with term targets, source-transcription row clusters, page-image near matches, and method/pair-universe counts",
     ),
     Path("docs/FINAL_REPORT.md"): (
@@ -27,17 +30,20 @@ REQUIRED_PHRASES_BY_DOC = {
         "source-policy term, 43 source-transcription terms, 3 page-image near-match terms, and 11 method/pair-universe terms",
         "row-cluster priorities, page-image near matches, and method/pair-universe counts",
         "row-review checklist keeps the 22 source-transcription row clusters in pending manual source-lock state",
+        "remaining-lane checklist keeps the 3 page-image near-match terms and 11 method/pair-universe terms in pending manual lock state",
     ),
     Path("docs/FINAL_REPORT_DRAFT.md"): (
         "The residual handoff is packetized without selecting corrections",
         "source-policy term, 43 source-transcription terms, 3 page-image near-match terms, and 11 method/pair-universe terms",
         "method/pair-universe counts for no-input review",
         "row-review checklist keeps the 22 source-transcription row clusters in pending manual source-lock state",
+        "remaining-lane checklist keeps the 3 page-image near-match terms and 11 method/pair-universe terms in pending manual lock state",
     ),
     Path("docs/FINAL_REPORT_OUTLINE.md"): (
         "43 source-transcription terms, 3 page-image near-match terms, and 11 method/pair-universe terms",
         "claim-blocker packet mirrors top term targets, row clusters, page-image near matches, and method/pair-universe",
         "row-review checklist keeps 22 row clusters in pending manual source-lock state",
+        "remaining-lane checklist keeps 3 page-image terms and 11 method/pair-universe terms in pending manual lock state",
         "exact published WRR reproduction remains caveated by source-transcription limits and the 163-distance gap",
     ),
     Path("docs/CONSOLIDATED_FINDINGS.md"): (
@@ -45,11 +51,13 @@ REQUIRED_PHRASES_BY_DOC = {
         "source-policy term, 43 source-transcription terms, 3 page-image near-match terms, and 11 method/pair-universe terms",
         "claim-blocker packet mirroring top term targets, row clusters, page-image near matches, and method/pair-universe counts",
         "row-review checklist keeps the 22 source-transcription row clusters in pending manual source-lock state",
+        "remaining-lane checklist keeps the 3 page-image near-match terms and 11 method/pair-universe terms in pending manual lock state",
     ),
     Path("docs/REMAINING_WORK_REGISTER.md"): (
         "source-transcription row cluster summary, page-image near-match lane, and method/pair-universe summary",
         "source-transcription/row-alignment targets, 3 page-image near-match targets, and 11 method/pair-universe targets",
         "22 row clusters in pending manual source-lock state",
+        "14 remaining-lane terms in pending page-image and method/pair-universe lock state",
         "row-level review order, and page-image review boundary",
     ),
 }

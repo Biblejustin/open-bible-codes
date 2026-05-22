@@ -75,6 +75,7 @@ This assembly run includes:
   `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md`,
   `docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md`,
   `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md`,
+  `docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md`,
   `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md`,
   `docs/WRR_DW_FORMULA_SENSITIVITY.md`, `docs/WRR_CLAIM_READINESS.md`, and
   `docs/WRR_CLAIM_BLOCKER_PACKET.md`, plus
@@ -155,6 +156,9 @@ It requires:
   page-image, and method/pair-universe review lanes;
 - WRR source-transcription row checklist keeps the 22 row clusters in
   pending manual source-lock state with required decision-record fields;
+- WRR remaining-lane checklist keeps 3 page-image terms and 11
+  method/pair-universe terms in pending manual lock states with required
+  decision-record fields;
 - checked-in `docs/INDEX.md` and `protocols/INDEX.md` freshness;
 - existing generated inputs needed by the final gates.
 
@@ -261,7 +265,9 @@ The report-run summary should currently say:
   `docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md` keeps those 22 row
   clusters in pending manual source-lock state;
   `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md` covers the 14 remaining
-  page-image and method/pair-universe terms without selecting source edits; and
+  page-image and method/pair-universe terms without selecting source edits;
+  `docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md` keeps those terms in pending
+  page-image and method/pair-universe lock state; and
   `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` isolates the 11
   OCR-matched method-lane terms with zero current appellation hits.
 - `υιοσ` (huios; English: son) and `αιμα` (haima; English: blood) remain weaker hidden-path candidates because their exact

@@ -45,6 +45,7 @@ from scripts import (
     check_wrr_source_transcription_evidence_packet_doc,
     check_wrr_source_transcription_row_review_checklist_doc,
     check_wrr_remaining_lane_evidence_packets_doc,
+    check_wrr_remaining_lane_review_checklist_doc,
     check_wrr_source_policy_scenarios_doc,
     check_wrr_source_review_queue_doc,
     check_wrr_source_visual_review_notes_doc,
@@ -201,6 +202,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md",
     "docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md",
     "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md",
+    "docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md",
     "docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md",
     "docs/WRR_SOURCE_POLICY_SCENARIOS.md",
     "docs/WRR_DW_FORMULA_SENSITIVITY.md",
@@ -410,6 +412,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_source_transcription_row_review_checklist_doc.py",
     "scripts/build_wrr_remaining_lane_evidence_packets.py",
     "scripts/check_wrr_remaining_lane_evidence_packets_doc.py",
+    "scripts/build_wrr_remaining_lane_review_checklist.py",
+    "scripts/check_wrr_remaining_lane_review_checklist_doc.py",
     "scripts/build_wrr_method_pair_universe_evidence_packet.py",
     "scripts/check_wrr_method_pair_universe_evidence_packet_doc.py",
     "scripts/check_wrr_source_policy_scenarios_doc.py",
@@ -710,6 +714,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_remaining_lane_evidence_packets_doc_failures)
         )
 
+    wrr_remaining_lane_review_checklist_doc_failures = (
+        check_wrr_remaining_lane_review_checklist_doc.validate_remaining_lane_review_checklist_doc(
+            check_wrr_remaining_lane_review_checklist_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_remaining_lane_review_checklist_doc_failures:
+        failures.append(
+            "WRR remaining-lane checklist failures: "
+            + "; ".join(wrr_remaining_lane_review_checklist_doc_failures)
+        )
+
     wrr_method_pair_universe_evidence_packet_doc_failures = (
         check_wrr_method_pair_universe_evidence_packet_doc.validate_method_pair_universe_evidence_packet_doc(
             check_wrr_method_pair_universe_evidence_packet_doc.DEFAULT_DOC
@@ -877,6 +892,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "wrr_remaining_lane_evidence_packets_doc_failures": (
             wrr_remaining_lane_evidence_packets_doc_failures
+        ),
+        "wrr_remaining_lane_review_checklist_doc_failures": (
+            wrr_remaining_lane_review_checklist_doc_failures
         ),
         "wrr_method_pair_universe_evidence_packet_doc_failures": (
             wrr_method_pair_universe_evidence_packet_doc_failures

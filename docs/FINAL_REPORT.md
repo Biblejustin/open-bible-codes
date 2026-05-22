@@ -398,8 +398,10 @@ claim-blocker packet mirrors the same no-input handoff with term targets,
 row-cluster priorities, page-image near matches, and method/pair-universe
 counts. The row-review checklist keeps the 22 source-transcription row
 clusters in pending manual source-lock state with required decision-record
-fields. These packets organize review evidence without choosing corrections,
-method changes, or exclusions.
+fields. The remaining-lane checklist keeps the 3 page-image near-match terms
+and 11 method/pair-universe terms in pending manual lock state with required
+decision-record fields. These packets organize review evidence without
+choosing corrections, method changes, or exclusions.
 
 Source artifacts:
 
@@ -417,6 +419,7 @@ Source artifacts:
 - `docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md`
 - `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md`
 - `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md`
+- `docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md`
 - `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md`
 - `docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md`
 - `docs/WRR_SOURCE_POLICY_SCENARIOS.md`

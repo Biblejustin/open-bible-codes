@@ -661,6 +661,10 @@ WRR remaining-lane evidence packets:
 `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md`.
 They cover the remaining 14 page-image/method residual terms without choosing
 source corrections, method changes, or pair exclusions.
+WRR remaining-lane review checklist:
+`docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md`.
+It keeps 3 page-image terms and 11 method/pair-universe terms in pending
+manual lock state with required decision-record fields.
 WRR method/pair-universe evidence packet:
 `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md`.
 It isolates the 11 OCR-matched method-lane terms: all have zero skip-250
