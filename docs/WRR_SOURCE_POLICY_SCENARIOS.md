@@ -9,7 +9,7 @@ policy to the repo outputs and is not claim-grade reproduction evidence.
 ## Reproduce
 
 ```bash
-python3 -m scripts.analyze_wrr_source_policy_scenarios --pair-table reports/wrr_1994/wrr2_pair_eligibility_table.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --expected-published-pairs 163 --out reports/wrr_1994/wrr_source_policy_scenarios.csv --pair-out reports/wrr_1994/wrr_source_policy_scenario_pairs.csv --markdown-out docs/WRR_SOURCE_POLICY_SCENARIOS.md --manifest-out reports/wrr_1994/wrr_source_policy_scenarios.manifest.json
+python3 -m scripts.analyze_wrr_source_policy_scenarios --pair-table reports/wrr_1994/wrr2_pair_eligibility_table.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --expected-published-pairs 163 --out reports/wrr_1994/wrr_source_policy_scenarios.csv --pair-out reports/wrr_1994/wrr_source_policy_scenario_pairs.csv --term-impact-out reports/wrr_1994/wrr_source_policy_term_impacts.csv --markdown-out docs/WRR_SOURCE_POLICY_SCENARIOS.md --manifest-out reports/wrr_1994/wrr_source_policy_scenarios.manifest.json
 ```
 
 ## Summary
@@ -33,6 +33,18 @@ python3 -m scripts.analyze_wrr_source_policy_scenarios --pair-table reports/wrr_
 | `wrr2_30_app_05` | `B@LY$RLBB` | `appellation` | `wnp_book_title_appellation_dispute` | `source_queue` | source/title-prefix rule review before source correction |
 | `wrr2_32_app_04` | `$LMHMXLMA` | `appellation` | `wnp_chelm_spelling_context` | `source_queue` | source/pair-rule review; do not decide from OCR crop alone |
 | `wrr2_32_app_05` | `$LMHMX@LMA` | `appellation` | `wnp_chelm_spelling_context` | `source_queue` | source/pair-rule review; do not decide from OCR crop alone |
+
+## Single-Term Impact
+
+| Term id | Term | Flags | Affected pairs | Remain >=5 if excluded | Gap vs 163 | Read |
+| --- | --- | --- | ---: | ---: | ---: | --- |
+| `wrr2_27_app_02` | `ZKWTA` | `wnp_disputed_zacut_appellation` | 2 | 163 | 0 | single-term exclusion closes >=5 count gap |
+| `wrr2_27_app_03` | `ZKWTW` | `wnp_disputed_zacut_appellation` | 2 | 163 | 0 | single-term exclusion closes >=5 count gap |
+| `wrr2_27_app_05` | `M$HZKWTA` | `wnp_disputed_zacut_appellation` | 2 | 163 | 0 | single-term exclusion closes >=5 count gap |
+| `wrr2_27_app_06` | `M$HZKWTW` | `wnp_disputed_zacut_appellation` | 2 | 163 | 0 | single-term exclusion closes >=5 count gap |
+| `wrr2_30_app_05` | `B@LY$RLBB` | `wnp_book_title_appellation_dispute` | 1 | 164 | -1 | single-term diagnostic only; no source policy selected |
+| `wrr2_32_app_04` | `$LMHMXLMA` | `wnp_chelm_spelling_context` | 1 | 164 | -1 | single-term diagnostic only; no source policy selected |
+| `wrr2_32_app_05` | `$LMHMX@LMA` | `wnp_chelm_spelling_context` | 1 | 164 | -1 | single-term diagnostic only; no source policy selected |
 
 ## Impact Rows
 

@@ -861,6 +861,7 @@ argv = [
   "--source-queue", "reports/wrr_1994/wrr_source_review_queue.csv",
   "--out", "reports/wrr_1994/wrr_source_policy_scenarios.csv",
   "--pair-out", "reports/wrr_1994/wrr_source_policy_scenario_pairs.csv",
+  "--term-impact-out", "reports/wrr_1994/wrr_source_policy_term_impacts.csv",
   "--markdown-out", "docs/WRR_SOURCE_POLICY_SCENARIOS.md",
   "--manifest-out", "reports/wrr_1994/wrr_source_policy_scenarios.manifest.json",
 ]
@@ -872,6 +873,7 @@ inputs = [
 outputs = [
   "reports/wrr_1994/wrr_source_policy_scenarios.csv",
   "reports/wrr_1994/wrr_source_policy_scenario_pairs.csv",
+  "reports/wrr_1994/wrr_source_policy_term_impacts.csv",
   "docs/WRR_SOURCE_POLICY_SCENARIOS.md",
   "reports/wrr_1994/wrr_source_policy_scenarios.manifest.json",
 ]

@@ -18,6 +18,7 @@ DEFAULT_PAIR_TABLE = Path("reports/wrr_1994/wrr2_pair_eligibility_table.csv")
 DEFAULT_SOURCE_QUEUE = Path("reports/wrr_1994/wrr_source_review_queue.csv")
 DEFAULT_OUT = Path("reports/wrr_1994/wrr_source_policy_scenarios.csv")
 DEFAULT_PAIR_OUT = Path("reports/wrr_1994/wrr_source_policy_scenario_pairs.csv")
+DEFAULT_TERM_IMPACT_OUT = Path("reports/wrr_1994/wrr_source_policy_term_impacts.csv")
 DEFAULT_MD = Path("docs/WRR_SOURCE_POLICY_SCENARIOS.md")
 DEFAULT_MANIFEST = Path("reports/wrr_1994/wrr_source_policy_scenarios.manifest.json")
 
@@ -60,6 +61,26 @@ PAIR_FIELDNAMES = [
     "length_filtered_pair_ok",
     "pair_review_status",
 ]
+
+TERM_IMPACT_FIELDNAMES = [
+    "term_id",
+    "term",
+    "term_side",
+    "concepts",
+    "flags",
+    "basis",
+    "source_review_action",
+    "affected_pairs",
+    "affected_appellation_min_length_pairs",
+    "affected_length_filtered_pairs",
+    "remaining_pairs_if_excluded",
+    "remaining_appellation_min_length_pairs_if_excluded",
+    "remaining_length_filtered_pairs_if_excluded",
+    "gap_to_source_cited_163_after_appellation_min_length_if_excluded",
+    "closes_appellation_min_length_gap_to_163",
+    "diagnostic_read",
+]
+
 
 @dataclass(frozen=True)
 class Scenario:
@@ -126,12 +147,34 @@ def main(argv: list[str] | None = None) -> int:
         term_index,
         expected_pairs=args.expected_published_pairs,
     )
+    term_impact_rows = build_term_impact_rows(
+        pair_rows,
+        term_index,
+        expected_pairs=args.expected_published_pairs,
+    )
     write_csv(args.out, SUMMARY_FIELDNAMES, summary_rows)
     write_csv(args.pair_out, PAIR_FIELDNAMES, pair_detail_rows)
-    write_markdown(args.markdown_out, summary_rows, pair_detail_rows, term_index, args)
-    write_manifest(args.manifest_out, args, summary_rows, pair_detail_rows, term_index, started)
+    write_csv(args.term_impact_out, TERM_IMPACT_FIELDNAMES, term_impact_rows)
+    write_markdown(
+        args.markdown_out,
+        summary_rows,
+        pair_detail_rows,
+        term_impact_rows,
+        term_index,
+        args,
+    )
+    write_manifest(
+        args.manifest_out,
+        args,
+        summary_rows,
+        pair_detail_rows,
+        term_impact_rows,
+        term_index,
+        started,
+    )
     print(args.out)
     print(args.pair_out)
+    print(args.term_impact_out)
     print(args.markdown_out)
     print(args.manifest_out)
     return 0
@@ -144,6 +187,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--expected-published-pairs", type=int, default=163)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--pair-out", type=Path, default=DEFAULT_PAIR_OUT)
+    parser.add_argument("--term-impact-out", type=Path, default=DEFAULT_TERM_IMPACT_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
     parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST)
     return parser
@@ -225,6 +269,69 @@ def analyze_scenarios(
             }
         )
     return summary_rows, pair_detail_rows
+
+
+def build_term_impact_rows(
+    pair_rows: list[dict[str, str]],
+    term_index: dict[str, dict[str, object]],
+    *,
+    expected_pairs: int,
+) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    flagged_terms = sorted(
+        (
+            term
+            for term in term_index.values()
+            if cast_set(term.get("flags", set()))
+        ),
+        key=lambda term: str(term.get("term_id", "")),
+    )
+    for term in flagged_terms:
+        term_id = str(term.get("term_id", ""))
+        affected = [
+            row
+            for row in pair_rows
+            if term_id in {row.get("appellation_term_id", ""), row.get("date_term_id", "")}
+        ]
+        affected_ids = {row.get("pair_id", "") for row in affected}
+        remaining = [row for row in pair_rows if row.get("pair_id", "") not in affected_ids]
+        app_min_remaining = count_truthy(remaining, "appellation_min_length_ok")
+        gap = expected_pairs - app_min_remaining
+        closes_gap = app_min_remaining == expected_pairs
+        rows.append(
+            {
+                "term_id": term_id,
+                "term": term.get("term", ""),
+                "term_side": term.get("term_side", ""),
+                "concepts": ";".join(sorted(cast_set(term.get("concepts", set())))),
+                "flags": ";".join(sorted(cast_set(term.get("flags", set())))),
+                "basis": ";".join(sorted(cast_set(term.get("basis", set())))),
+                "source_review_action": term.get("source_review_action", ""),
+                "affected_pairs": len(affected),
+                "affected_appellation_min_length_pairs": count_truthy(
+                    affected,
+                    "appellation_min_length_ok",
+                ),
+                "affected_length_filtered_pairs": count_truthy(
+                    affected,
+                    "length_filtered_pair_ok",
+                ),
+                "remaining_pairs_if_excluded": len(remaining),
+                "remaining_appellation_min_length_pairs_if_excluded": app_min_remaining,
+                "remaining_length_filtered_pairs_if_excluded": count_truthy(
+                    remaining,
+                    "length_filtered_pair_ok",
+                ),
+                "gap_to_source_cited_163_after_appellation_min_length_if_excluded": gap,
+                "closes_appellation_min_length_gap_to_163": str(closes_gap).lower(),
+                "diagnostic_read": (
+                    "single-term exclusion closes >=5 count gap"
+                    if closes_gap
+                    else "single-term diagnostic only; no source policy selected"
+                ),
+            }
+        )
+    return rows
 
 
 def build_flagged_term_index(
@@ -353,6 +460,7 @@ def write_markdown(
     path: Path,
     summary_rows: list[dict[str, object]],
     pair_detail_rows: list[dict[str, object]],
+    term_impact_rows: list[dict[str, object]],
     term_index: dict[str, dict[str, object]],
     args: argparse.Namespace,
 ) -> None:
@@ -383,6 +491,7 @@ def write_markdown(
             f"--expected-published-pairs {args.expected_published_pairs} "
             f"--out {args.out} "
             f"--pair-out {args.pair_out} "
+            f"--term-impact-out {args.term_impact_out} "
             f"--markdown-out {args.markdown_out} "
             f"--manifest-out {args.manifest_out}"
         ),
@@ -430,6 +539,27 @@ def write_markdown(
     lines.extend(
         [
             "",
+            "## Single-Term Impact",
+            "",
+            "| Term id | Term | Flags | Affected pairs | Remain >=5 if excluded | Gap vs 163 | Read |",
+            "| --- | --- | --- | ---: | ---: | ---: | --- |",
+        ]
+    )
+    for row in term_impact_rows:
+        lines.append(
+            "| `{term_id}` | `{term}` | `{flags}` | {affected} | {remaining} | {gap} | {read} |".format(
+                term_id=markdown_cell(row["term_id"]),
+                term=markdown_cell(row["term"]),
+                flags=markdown_cell(row["flags"]),
+                affected=row["affected_pairs"],
+                remaining=row["remaining_appellation_min_length_pairs_if_excluded"],
+                gap=row["gap_to_source_cited_163_after_appellation_min_length_if_excluded"],
+                read=markdown_cell(row["diagnostic_read"]),
+            )
+        )
+    lines.extend(
+        [
+            "",
             "## Impact Rows",
             "",
             "| Scenario | Action | Pair | Concept | Flags | Lane |",
@@ -470,6 +600,7 @@ def write_manifest(
     args: argparse.Namespace,
     summary_rows: list[dict[str, object]],
     pair_detail_rows: list[dict[str, object]],
+    term_impact_rows: list[dict[str, object]],
     term_index: dict[str, dict[str, object]],
     started: float,
 ) -> None:
@@ -488,9 +619,11 @@ def write_manifest(
             1 for term in term_index.values() if cast_set(term.get("flags", set()))
         ),
         "impact_rows": len(pair_detail_rows),
+        "term_impact_rows": len(term_impact_rows),
         "outputs": {
             "csv": str(args.out),
             "pair_csv": str(args.pair_out),
+            "term_impact_csv": str(args.term_impact_out),
             "markdown": str(args.markdown_out),
             "manifest": str(args.manifest_out),
         },

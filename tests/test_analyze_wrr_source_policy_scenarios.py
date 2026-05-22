@@ -16,6 +16,11 @@ class WrrSourcePolicyScenarioTests(unittest.TestCase):
             term_index,
             expected_pairs=3,
         )
+        term_impact_rows = scenarios.build_term_impact_rows(
+            pair_rows,
+            term_index,
+            expected_pairs=3,
+        )
 
         by_name = {row["scenario"]: row for row in summary_rows}
         self.assertEqual(by_name["keep_all_working_source"]["excluded_pairs"], 0)
@@ -44,6 +49,14 @@ class WrrSourcePolicyScenarioTests(unittest.TestCase):
             and row["scenario_action"] == "excluded"
         ]
         self.assertEqual({row["pair_id"] for row in excluded}, {"p2", "p3", "p4"})
+        by_term = {row["term_id"]: row for row in term_impact_rows}
+        self.assertEqual(by_term["wrr2_27_app_05"]["affected_pairs"], 1)
+        self.assertEqual(
+            by_term["wrr2_27_app_05"][
+                "remaining_appellation_min_length_pairs_if_excluded"
+            ],
+            2,
+        )
 
     def test_main_writes_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -52,6 +65,7 @@ class WrrSourcePolicyScenarioTests(unittest.TestCase):
             source_queue = root / "source_queue.csv"
             out = root / "summary.csv"
             pair_out = root / "pairs_out.csv"
+            term_impact_out = root / "term_impacts.csv"
             markdown = root / "scenarios.md"
             manifest = root / "manifest.json"
             write_csv(pair_table, sample_pair_rows())
@@ -69,6 +83,8 @@ class WrrSourcePolicyScenarioTests(unittest.TestCase):
                     str(out),
                     "--pair-out",
                     str(pair_out),
+                    "--term-impact-out",
+                    str(term_impact_out),
                     "--markdown-out",
                     str(markdown),
                     "--manifest-out",
@@ -81,8 +97,11 @@ class WrrSourcePolicyScenarioTests(unittest.TestCase):
             self.assertEqual(len(summary), 5)
             detail = list(csv.DictReader(pair_out.open(encoding="utf-8")))
             self.assertTrue(any(row["scenario_action"] == "review_only_no_exclusion" for row in detail))
+            impacts = list(csv.DictReader(term_impact_out.open(encoding="utf-8")))
+            self.assertEqual(len(impacts), 3)
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("WRR Source Policy Scenario Impact", text)
+            self.assertIn("Single-Term Impact", text)
             self.assertIn("No source policy is selected", text)
             self.assertTrue(manifest.exists())
 
