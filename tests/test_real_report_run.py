@@ -59,6 +59,21 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_CLAIM_BLOCKER_PACKET.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_SOURCE_POLICY_SCENARIOS.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_DW_FORMULA_SENSITIVITY.md", steps_by_id["preflight"]["inputs"])
+        for source_audit_doc in [
+            "docs/TORAH_CODE_RESEARCH_MODEL_SIMULATION.md",
+            "docs/TORAH_CODE_RESEARCH_ELS_MODEL_SIMULATION.md",
+            "docs/GANS_COMMUNITIES_SOURCE_AUDIT.md",
+            "docs/AMERICAN_PRESIDENTS_SOURCE_AUDIT.md",
+            "docs/WITZTUM_BIRTH_DATES_SOURCE_AUDIT.md",
+            "docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md",
+            "docs/COLINEAR_ELS_SOURCE_AUDIT.md",
+            "docs/CITIES_SOURCE_CHAIN_AUDIT.md",
+            "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
+            "docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md",
+            "docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md",
+        ]:
+            self.assertIn(source_audit_doc, steps_by_id["preflight"]["inputs"])
+            self.assertIn(source_audit_doc, preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn(
             "scripts/analyze_wrr_source_policy_scenarios.py",
             steps_by_id["preflight"]["inputs"],
