@@ -29,6 +29,7 @@ from scripts import (
     check_wrr_claim_blocker_packet_doc,
     check_wrr_claim_readiness_doc,
     check_wrr_lock_options_doc,
+    check_wrr_method_status_doc,
     validate_study_mapping_schemas,
 )
 from scripts.release_hygiene import (
@@ -356,6 +357,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_claim_readiness_doc.py",
     "scripts/check_wrr_claim_blocker_packet_doc.py",
     "scripts/check_wrr_lock_options_doc.py",
+    "scripts/check_wrr_method_status_doc.py",
     "scripts/build_wrr_claim_blocker_packet.py",
     "scripts/build_matrix_cluster_candidates.py",
     "scripts/summarize_matrix_cluster_controls.py",
@@ -532,6 +534,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_lock_options_doc_failures)
         )
 
+    wrr_method_status_doc_failures = (
+        check_wrr_method_status_doc.validate_method_status_doc(
+            check_wrr_method_status_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_method_status_doc_failures:
+        failures.append(
+            "WRR method-status doc failures: "
+            + "; ".join(wrr_method_status_doc_failures)
+        )
+
     stale_indexes = stale_generated_indexes(root)
     if stale_indexes:
         failures.append("stale generated indexes: " + ", ".join(stale_indexes))
@@ -566,6 +579,7 @@ def main(argv: list[str] | None = None) -> int:
             wrr_claim_blocker_packet_doc_failures
         ),
         "wrr_lock_options_doc_failures": wrr_lock_options_doc_failures,
+        "wrr_method_status_doc_failures": wrr_method_status_doc_failures,
         "stale_generated_indexes": stale_indexes,
         "forbidden_account_terms": FORBIDDEN_ACCOUNT_TERMS,
         "forbidden_repo_hits": forbidden_repo_hits,

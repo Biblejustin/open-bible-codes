@@ -102,6 +102,10 @@ class RealReportRunTests(unittest.TestCase):
             "scripts/check_wrr_lock_options_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
+        self.assertIn(
+            "scripts/check_wrr_method_status_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("docs/EXPANDED_STRATA_TOOLING.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/STUDY_MAPPING_SCHEMAS.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/CRD_PREREGISTRATION.md", steps_by_id["preflight"]["inputs"])
@@ -285,6 +289,10 @@ class RealReportRunTests(unittest.TestCase):
             "scripts/check_wrr_lock_options_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
+        self.assertIn(
+            "scripts/check_wrr_method_status_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
         self.assertIn("docs/EXPANDED_STRATA_TOOLING.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/STUDY_MAPPING_SCHEMAS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/CRD_PREREGISTRATION.md", preflight.DEFAULT_REQUIRED_PATHS)
@@ -430,6 +438,7 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("wrr_claim_readiness_doc_failures", payload)
             self.assertIn("wrr_claim_blocker_packet_doc_failures", payload)
             self.assertIn("wrr_lock_options_doc_failures", payload)
+            self.assertIn("wrr_method_status_doc_failures", payload)
             self.assertIn("stale_generated_indexes", payload)
 
     def test_preflight_fails_on_prospective_lane_validation_failure(self) -> None:
@@ -662,6 +671,28 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "WRR lock-options doc failures: "
                 "docs/WRR_LOCK_OPTIONS.md missing decision aid status",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_method_status_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_method_status_doc,
+                "validate_method_status_doc",
+                return_value=["docs/WRR_METHOD_STATUS.md missing blocked status"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_method_status_doc_failures"],
+                ["docs/WRR_METHOD_STATUS.md missing blocked status"],
+            )
+            self.assertIn(
+                "WRR method-status doc failures: "
+                "docs/WRR_METHOD_STATUS.md missing blocked status",
                 payload["failures"],
             )
 
