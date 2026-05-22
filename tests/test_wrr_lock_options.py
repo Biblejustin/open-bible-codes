@@ -38,6 +38,26 @@ class WrrLockOptionsTests(unittest.TestCase):
                 {"source_review_flags": "2 wnp_disputed_zacut_appellation"},
                 {"source_review_flags": "1 wnp_book_title_appellation_dispute"},
             ],
+            source_policy_scenarios=[
+                {
+                    "scenario": "keep_all_working_source",
+                    "remaining_appellation_min_length_pairs": "165",
+                    "gap_to_source_cited_163_after_appellation_min_length": "-2",
+                    "remaining_length_filtered_pairs": "86",
+                },
+                {
+                    "scenario": "exclude_wnp_zacut_only",
+                    "remaining_appellation_min_length_pairs": "157",
+                    "gap_to_source_cited_163_after_appellation_min_length": "6",
+                    "remaining_length_filtered_pairs": "78",
+                },
+                {
+                    "scenario": "exclude_all_source_review_flags",
+                    "remaining_appellation_min_length_pairs": "154",
+                    "gap_to_source_cited_163_after_appellation_min_length": "9",
+                    "remaining_length_filtered_pairs": "78",
+                },
+            ],
             direct_all_lanes_250={"defined_corrected_distances": "50"},
             direct_all_lanes_1000={"defined_corrected_distances": "72"},
             direct_all_lanes_1000_program={"defined_corrected_distances": "72"},
@@ -65,6 +85,14 @@ class WrrLockOptionsTests(unittest.TestCase):
         self.assertIn(
             "3 WNP/context queued terms",
             by_option["WNP/context flagged source-review queue"]["evidence"],
+        )
+        self.assertEqual(
+            by_option["source-policy scenario impact"]["status"],
+            "diagnostic_scenario_only",
+        )
+        self.assertIn(
+            "exclude WNP Zacut: 157 >=5 pairs",
+            by_option["source-policy scenario impact"]["evidence"],
         )
         self.assertIn(
             "printed/program/fixed250 = 28/28/28",
@@ -125,6 +153,7 @@ class WrrLockOptionsTests(unittest.TestCase):
             variants = root / "variants.csv"
             permutation = root / "perm.csv"
             source_review_summary = root / "source_review_summary.csv"
+            source_policy_scenarios = root / "source_policy_scenarios.csv"
             direct_250 = root / "direct_250.csv"
             direct_1000 = root / "direct_1000.csv"
             direct_1000_program = root / "direct_1000_program.csv"
@@ -183,6 +212,17 @@ class WrrLockOptionsTests(unittest.TestCase):
                     {"source_review_flags": "1 wnp_book_title_appellation_dispute"},
                 ],
             )
+            write_csv(
+                source_policy_scenarios,
+                [
+                    {
+                        "scenario": "exclude_wnp_zacut_only",
+                        "remaining_appellation_min_length_pairs": "157",
+                        "gap_to_source_cited_163_after_appellation_min_length": "6",
+                        "remaining_length_filtered_pairs": "78",
+                    }
+                ],
+            )
             write_csv(direct_250, [{"defined_corrected_distances": "50"}])
             write_csv(direct_1000, [{"defined_corrected_distances": "72"}])
             write_csv(direct_1000_program, [{"defined_corrected_distances": "72"}])
@@ -209,6 +249,8 @@ class WrrLockOptionsTests(unittest.TestCase):
                     str(permutation),
                     "--source-review-summary",
                     str(source_review_summary),
+                    "--source-policy-scenarios",
+                    str(source_policy_scenarios),
                     "--direct-all-lanes-250-summary",
                     str(direct_250),
                     "--direct-all-lanes-1000-summary",
@@ -229,11 +271,12 @@ class WrrLockOptionsTests(unittest.TestCase):
             )
 
             self.assertEqual(rc, 0)
-            self.assertEqual(len(list(csv.DictReader(out.open(encoding="utf-8")))), 8)
+            self.assertEqual(len(list(csv.DictReader(out.open(encoding="utf-8")))), 9)
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("Status: decision aid, not a WRR reproduction.", text)
             self.assertIn("Current No-Input Path", text)
             self.assertIn("WNP/context queued terms", text)
+            self.assertIn("source-policy scenario impact", text)
             self.assertIn("changes 0 pair rows", text)
             self.assertTrue(manifest.exists())
 

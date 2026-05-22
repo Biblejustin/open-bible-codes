@@ -20,6 +20,7 @@ DEFAULT_RECOMMENDED_PERMUTATION = Path(
     "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv"
 )
 DEFAULT_SOURCE_REVIEW_SUMMARY = Path("reports/wrr_1994/wrr_source_review_queue_summary.csv")
+DEFAULT_SOURCE_POLICY_SCENARIOS = Path("reports/wrr_1994/wrr_source_policy_scenarios.csv")
 DEFAULT_DIRECT_ALL_LANES_250_SUMMARY = Path(
     "reports/wrr_1994/direct_all/wrr2_corrected_distance_all_lanes_250_summary.csv"
 )
@@ -57,6 +58,7 @@ def main(argv: list[str] | None = None) -> int:
     variant_rows = read_rows(args.variants)
     permutation_row = read_one_row(args.recommended_permutation)
     source_review_summary = read_optional_rows(args.source_review_summary)
+    source_policy_scenarios = read_optional_rows(args.source_policy_scenarios)
     direct_all_lanes_250 = read_optional_one_row(args.direct_all_lanes_250_summary)
     direct_all_lanes_1000 = read_optional_one_row(args.direct_all_lanes_1000_summary)
     direct_all_lanes_1000_program = read_optional_one_row(
@@ -72,6 +74,7 @@ def main(argv: list[str] | None = None) -> int:
         variant_rows,
         permutation_row,
         source_review_summary=source_review_summary,
+        source_policy_scenarios=source_policy_scenarios,
         direct_all_lanes_250=direct_all_lanes_250,
         direct_all_lanes_1000=direct_all_lanes_1000,
         direct_all_lanes_1000_program=direct_all_lanes_1000_program,
@@ -97,6 +100,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--variants", type=Path, default=DEFAULT_VARIANTS)
     parser.add_argument("--recommended-permutation", type=Path, default=DEFAULT_RECOMMENDED_PERMUTATION)
     parser.add_argument("--source-review-summary", type=Path, default=DEFAULT_SOURCE_REVIEW_SUMMARY)
+    parser.add_argument("--source-policy-scenarios", type=Path, default=DEFAULT_SOURCE_POLICY_SCENARIOS)
     parser.add_argument(
         "--direct-all-lanes-250-summary",
         type=Path,
@@ -135,6 +139,7 @@ def build_option_rows(
     permutation_row: dict[str, str],
     *,
     source_review_summary: list[dict[str, str]] | None = None,
+    source_policy_scenarios: list[dict[str, str]] | None = None,
     direct_all_lanes_250: dict[str, str] | None = None,
     direct_all_lanes_1000: dict[str, str] | None = None,
     direct_all_lanes_1000_program: dict[str, str] | None = None,
@@ -147,6 +152,9 @@ def build_option_rows(
     length_filtered_pairs = pair_row.get("length_filtered_same_record_pairs", "")
     wnp_delta = pair_row.get("wnp_disputed_zacut_appellation_min_length_pair_delta", "")
     source_review_flag_text = source_review_flag_evidence(source_review_summary or [])
+    source_policy_scenario_text = source_policy_scenario_evidence(
+        source_policy_scenarios or []
+    )
     printed_defined = variant_value(variant_rows, "term_printed", "defined_corrected_distances")
     program_defined = variant_value(variant_rows, "term_program", "defined_corrected_distances")
     fixed_defined = variant_value(variant_rows, "fixed_250", "defined_corrected_distances")
@@ -236,6 +244,17 @@ def build_option_rows(
         },
         {
             "area": "Pair universe",
+            "option": "source-policy scenario impact",
+            "status": "diagnostic_scenario_only",
+            "evidence": source_policy_scenario_text,
+            "recommendation": (
+                "Use this to frame the source-policy decision; do not promote any "
+                "scenario automatically."
+            ),
+            "claim_boundary": "diagnostic only",
+        },
+        {
+            "area": "Pair universe",
             "option": "defined-distance output interpretation",
             "status": "recommended_working_interpretation",
             "evidence": defined_distance_evidence,
@@ -300,6 +319,31 @@ def source_review_flag_evidence(rows: list[dict[str, str]]) -> str:
     total = sum(counts.values())
     parts = ", ".join(f"{counts[flag]} {flag}" for flag in sorted(counts))
     return f"Source-review queue flags {total} WNP/context queued terms: {parts}."
+
+
+def source_policy_scenario_evidence(rows: list[dict[str, str]]) -> str:
+    if not rows:
+        return "No source-policy scenario summary was available."
+    parts = [
+        scenario_evidence(rows, "keep_all_working_source", "baseline"),
+        scenario_evidence(rows, "exclude_wnp_zacut_only", "exclude WNP Zacut"),
+        scenario_evidence(rows, "exclude_all_source_review_flags", "exclude all flags"),
+    ]
+    scenario_parts = [part for part in parts if part]
+    if not scenario_parts:
+        return "Source-policy scenario summary has no recognized scenario rows."
+    return "; ".join(scenario_parts) + "; no source policy selected."
+
+
+def scenario_evidence(rows: list[dict[str, str]], scenario: str, label: str) -> str:
+    row = next((item for item in rows if item.get("scenario") == scenario), None)
+    if not row:
+        return ""
+    return (
+        f"{label}: {row.get('remaining_appellation_min_length_pairs', '')} >=5 pairs "
+        f"(gap {row.get('gap_to_source_cited_163_after_appellation_min_length', '')}), "
+        f"{row.get('remaining_length_filtered_pairs', '')} in 5..8 lane"
+    )
 
 
 def parse_flag_counts(value: str) -> list[tuple[int, str]]:
@@ -466,6 +510,7 @@ def write_manifest(
             "variants": str(args.variants),
             "recommended_permutation": str(args.recommended_permutation),
             "source_review_summary": str(args.source_review_summary),
+            "source_policy_scenarios": str(args.source_policy_scenarios),
             "direct_all_lanes_250_summary": str(args.direct_all_lanes_250_summary),
             "direct_all_lanes_1000_summary": str(args.direct_all_lanes_1000_summary),
             "direct_all_lanes_1000_program_summary": str(
