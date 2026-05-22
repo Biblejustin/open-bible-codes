@@ -19,7 +19,6 @@ ROOT_SPAM = """<html><head>
 <link href="https://www.torah-code.org/" rel="canonical" />
 </head><body>slot bet deposit pulsa rtp slot</body></html>"""
 
-
 class ResearchMissingModelPagesTests(unittest.TestCase):
     def test_main_writes_missing_model_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -34,12 +33,23 @@ class ResearchMissingModelPagesTests(unittest.TestCase):
             args = []
             for path in paths:
                 args.extend(["--source", str(path)])
+            adjacent_args = []
+            for name in audit.ADJACENT_EXPECTED:
+                expected_label = audit.ADJACENT_EXPECTED[name][1]
+                path = root / name
+                path.write_text(
+                    f"<html><head><title>{expected_label}</title></head>"
+                    f"<body>{expected_label} model source text</body></html>",
+                    encoding="utf-8",
+                )
+                adjacent_args.extend(["--adjacent-source", str(path)])
 
             rc = audit.main(
                 [
                     "--overview",
                     str(overview),
                     *args,
+                    *adjacent_args,
                     "--out",
                     str(root / "pages.csv"),
                     "--summary-out",
@@ -58,11 +68,15 @@ class ResearchMissingModelPagesTests(unittest.TestCase):
             self.assertEqual(summary_rows[0]["overview_expected_level23_links"], "4")
             self.assertEqual(summary_rows[0]["expected_label_present_files"], "0")
             self.assertEqual(summary_rows[0]["usable_model_pages"], "0")
+            self.assertEqual(summary_rows[0]["adjacent_source_files"], "2")
+            self.assertEqual(summary_rows[0]["adjacent_usable_model_pages"], "2")
             markdown = (root / "audit.md").read_text(encoding="utf-8")
             self.assertIn("source-status audit only", markdown)
-            self.assertIn("Found anchors: 6 of 6", markdown)
+            self.assertIn("Adjacent Level-1 Pages", markdown)
+            self.assertIn("Found anchors: 8 of 8", markdown)
             manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
             self.assertEqual(len(manifest["sources"]), 4)
+            self.assertEqual(len(manifest["adjacent_sources"]), 2)
 
 
 if __name__ == "__main__":

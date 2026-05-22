@@ -17,8 +17,10 @@ inputs = [
 ]
 outputs = [
   "reports/wrr_1994/torah_code_research_model_overview.html",
+  "reports/wrr_1994/torah_code_research_geometric_model_level_1.html",
   "reports/wrr_1994/torah_code_research_geometric_model_level_2.html",
   "reports/wrr_1994/torah_code_research_geometric_model_level_3.html",
+  "reports/wrr_1994/torah_code_research_els_model_level_1.html",
   "reports/wrr_1994/torah_code_research_els_model_level_2.html",
   "reports/wrr_1994/torah_code_research_els_model_level_3.html",
   "reports/wrr_1994/sources.manifest.json",
@@ -30,6 +32,8 @@ description = "Classify linked level-2/3 model pages as usable model pages or ro
 argv = [
   "-m", "scripts.analyze_research_missing_model_pages",
   "--overview", "reports/wrr_1994/torah_code_research_model_overview.html",
+  "--adjacent-source", "reports/wrr_1994/torah_code_research_geometric_model_level_1.html",
+  "--adjacent-source", "reports/wrr_1994/torah_code_research_els_model_level_1.html",
   "--out", "reports/wrr_1994/research_missing_model_pages.csv",
   "--summary-out", "reports/wrr_1994/research_missing_model_pages_summary.csv",
   "--anchors-out", "reports/wrr_1994/research_missing_model_pages_anchors.csv",
@@ -39,8 +43,10 @@ argv = [
 inputs = [
   "scripts/analyze_research_missing_model_pages.py",
   "reports/wrr_1994/torah_code_research_model_overview.html",
+  "reports/wrr_1994/torah_code_research_geometric_model_level_1.html",
   "reports/wrr_1994/torah_code_research_geometric_model_level_2.html",
   "reports/wrr_1994/torah_code_research_geometric_model_level_3.html",
+  "reports/wrr_1994/torah_code_research_els_model_level_1.html",
   "reports/wrr_1994/torah_code_research_els_model_level_2.html",
   "reports/wrr_1994/torah_code_research_els_model_level_3.html",
 ]

@@ -25,6 +25,18 @@ DEFAULT_SOURCES = [
     Path("reports/wrr_1994/torah_code_research_els_model_level_2.html"),
     Path("reports/wrr_1994/torah_code_research_els_model_level_3.html"),
 ]
+ADJACENT_EXPECTED = {
+    "torah_code_research_geometric_model_level_1.html": (
+        "geometric_model_level_1",
+        "The Geometric Model",
+        "https://www.torah-code.org/research/research_3.html",
+    ),
+    "torah_code_research_els_model_level_1.html": (
+        "els_model_level_1",
+        "ELS Model Level 1",
+        "https://www.torah-code.org/research/research_3c.html",
+    ),
+}
 EXPECTED = {
     "torah_code_research_geometric_model_level_2.html": (
         "geometric_model_level_2",
@@ -74,6 +86,10 @@ SUMMARY_FIELDNAMES = [
     "root_canonical_files",
     "spam_marker_files",
     "usable_model_pages",
+    "adjacent_source_files",
+    "adjacent_expected_label_present_files",
+    "adjacent_spam_marker_files",
+    "adjacent_usable_model_pages",
     "claim_status",
 ]
 ANCHOR_FIELDNAMES = ["source", "anchor", "status", "diagnostic"]
@@ -114,15 +130,16 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     sources = args.source or DEFAULT_SOURCES
     args.source = sources
-    rows = [analyze_file(path) for path in sources]
+    rows = [analyze_file(path, EXPECTED) for path in sources]
+    adjacent_rows = [analyze_file(path, ADJACENT_EXPECTED) for path in args.adjacent_source]
     overview_links = count_overview_level23_links(args.overview)
-    summary = build_summary(rows, overview_links)
-    anchors = protocol_anchors(rows, summary)
+    summary = build_summary(rows, adjacent_rows, overview_links)
+    anchors = protocol_anchors(rows, adjacent_rows, summary)
     write_csv(args.out, ROW_FIELDNAMES, rows)
     write_csv(args.summary_out, SUMMARY_FIELDNAMES, [summary])
     write_csv(args.anchors_out, ANCHOR_FIELDNAMES, anchors)
-    write_markdown(args.markdown_out, summary, rows, anchors)
-    write_manifest(args.manifest_out, args, summary, anchors, len(rows), started)
+    write_markdown(args.markdown_out, summary, rows, adjacent_rows, anchors)
+    write_manifest(args.manifest_out, args, summary, anchors, len(rows), len(adjacent_rows), started)
     print(args.out)
     print(args.summary_out)
     print(args.anchors_out)
@@ -135,6 +152,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--overview", type=Path, default=DEFAULT_OVERVIEW)
     parser.add_argument("--source", action="append", type=Path, default=[])
+    parser.add_argument("--adjacent-source", action="append", type=Path, default=[])
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
     parser.add_argument("--anchors-out", type=Path, default=DEFAULT_ANCHORS_OUT)
@@ -143,12 +161,12 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def analyze_file(path: Path) -> dict[str, object]:
+def analyze_file(path: Path, expected: dict[str, tuple[str, str, str]]) -> dict[str, object]:
     raw = path.read_bytes()
     text = raw.decode("utf-8", errors="replace")
     parser = HtmlMetadataParser()
     parser.feed(text)
-    model_page, expected_label, requested_url = EXPECTED[path.name]
+    model_page, expected_label, requested_url = expected[path.name]
     lower_text = text.lower()
     expected_present = expected_label.lower() in lower_text
     root_canonical = parser.canonical.rstrip("/") == "https://www.torah-code.org"
@@ -179,7 +197,11 @@ def count_overview_level23_links(path: Path) -> int:
     )
 
 
-def build_summary(rows: list[dict[str, object]], overview_links: int) -> dict[str, object]:
+def build_summary(
+    rows: list[dict[str, object]],
+    adjacent_rows: list[dict[str, object]],
+    overview_links: int,
+) -> dict[str, object]:
     return {
         "source_files": len(rows),
         "overview_expected_level23_links": overview_links,
@@ -187,12 +209,21 @@ def build_summary(rows: list[dict[str, object]], overview_links: int) -> dict[st
         "root_canonical_files": sum(1 for row in rows if row["canonical_is_root"]),
         "spam_marker_files": sum(1 for row in rows if row["spam_marker_present"]),
         "usable_model_pages": sum(1 for row in rows if row["usable_status"] == "usable_model_page"),
+        "adjacent_source_files": len(adjacent_rows),
+        "adjacent_expected_label_present_files": sum(
+            1 for row in adjacent_rows if row["expected_label_present"]
+        ),
+        "adjacent_spam_marker_files": sum(1 for row in adjacent_rows if row["spam_marker_present"]),
+        "adjacent_usable_model_pages": sum(
+            1 for row in adjacent_rows if row["usable_status"] == "usable_model_page"
+        ),
         "claim_status": "source_status_only_not_data_bearing",
     }
 
 
 def protocol_anchors(
     rows: list[dict[str, object]],
+    adjacent_rows: list[dict[str, object]],
     summary: dict[str, object],
 ) -> list[dict[str, str]]:
     checks = [
@@ -232,6 +263,20 @@ def protocol_anchors(
             int(summary["usable_model_pages"]) == 0,
             "no linked level-2/3 model page is usable source material",
         ),
+        (
+            "adjacent",
+            "adjacent_level1_sources_present",
+            int(summary["adjacent_source_files"]) == 0
+            or int(summary["adjacent_source_files"]) == 2,
+            "adjacent level-1 model pages are absent or both provided",
+        ),
+        (
+            "adjacent",
+            "adjacent_level1_sources_are_usable_when_present",
+            not adjacent_rows
+            or int(summary["adjacent_usable_model_pages"]) == int(summary["adjacent_source_files"]),
+            "provided adjacent level-1 model pages are usable source material",
+        ),
     ]
     return [
         {
@@ -248,6 +293,7 @@ def write_markdown(
     path: Path,
     summary: dict[str, object],
     rows: list[dict[str, object]],
+    adjacent_rows: list[dict[str, object]],
     anchors: list[dict[str, str]],
 ) -> None:
     anchor_counts = Counter(anchor["status"] for anchor in anchors)
@@ -267,6 +313,8 @@ def write_markdown(
         f"| files declaring root canonical URL | {summary['root_canonical_files']} |",
         f"| files with unrelated slot/gambling markers | {summary['spam_marker_files']} |",
         f"| usable level-2/3 model pages | {summary['usable_model_pages']} |",
+        f"| adjacent level-1 source files | {summary['adjacent_source_files']} |",
+        f"| usable adjacent level-1 model pages | {summary['adjacent_usable_model_pages']} |",
         "",
         "## Page Status",
         "",
@@ -279,6 +327,22 @@ def write_markdown(
             f"{row['canonical_is_root']} | {row['spam_marker_present']} | "
             f"{row['usable_status']} |"
         )
+    if adjacent_rows:
+        lines.extend(
+            [
+                "",
+                "## Adjacent Level-1 Pages",
+                "",
+                "| Model Page | Expected Label Present | Canonical Is Root | Unrelated Marker | Status |",
+                "| --- | --- | --- | --- | --- |",
+            ]
+        )
+        for row in adjacent_rows:
+            lines.append(
+                f"| {row['model_page']} | {row['expected_label_present']} | "
+                f"{row['canonical_is_root']} | {row['spam_marker_present']} | "
+                f"{row['usable_status']} |"
+            )
     lines.extend(
         [
             "",
@@ -302,7 +366,9 @@ def write_markdown(
             "The overview links level-2/3 geometric and ELS model pages, but the current",
             "downloads are root-canonical pages with unrelated slot/gambling content and",
             "no expected model labels. Treat these four levels as missing source material",
-            "until clean Torah-code research pages are recovered and checksummed.",
+            "until clean Torah-code research pages are recovered and checksummed. Adjacent",
+            "level-1 model pages can remain useful source context, but they do not supply",
+            "the missing level-2/3 model rules.",
         ]
     )
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -323,6 +389,7 @@ def write_manifest(
     summary: dict[str, object],
     anchors: list[dict[str, str]],
     rows: int,
+    adjacent_rows: int,
     started: float,
 ) -> None:
     payload = {
@@ -332,9 +399,11 @@ def write_manifest(
         "duration_seconds": round(time.perf_counter() - started, 6),
         "overview": str(args.overview),
         "sources": [str(path) for path in args.source],
+        "adjacent_sources": [str(path) for path in args.adjacent_source],
         "summary": summary,
         "anchor_status_counts": dict(Counter(anchor["status"] for anchor in anchors)),
         "rows": rows,
+        "adjacent_rows": adjacent_rows,
         "outputs": {
             "pages": str(args.out),
             "summary": str(args.summary_out),
