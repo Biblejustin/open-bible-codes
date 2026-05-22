@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 127
+Protocols indexed: 128
 
 ## Analysis
 
@@ -158,6 +158,7 @@ Protocols indexed: 127
 | wrr_corrected_distance_split_2 | Two-shard WRR corrected-distance diagnostic run and merge; local/Windows split compatible. | 4 |  | reports/wrr_1994 | `wrr_corrected_distance_split_2.toml` |
 | wrr_cross_pair_grid | Build the WRR2 appellation/date cross-pair grid and run cap-250 corrected-distance diag... | 7 |  | reports/wrr_1994 | `wrr_cross_pair_grid.toml` |
 | wrr_source_import | Download external WRR audit files and convert WRR2 into repo term rows. | 3 |  | reports/wrr_1994 | `wrr_source_import.toml` |
+| wrr_source_recovery_probe | Live-refresh selected Torah-code research source labels into an isolated recovery-probe... | 2 |  | reports/wrr_source_recovery_probe | `wrr_source_recovery_probe.toml` |
 
 ## Screening
 

@@ -72,9 +72,18 @@ class RealReportRunTests(unittest.TestCase):
             "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
             "docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md",
             "docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md",
+            "docs/WRR_SOURCE_RECOVERY_PROBE.md",
         ]:
             self.assertIn(source_audit_doc, steps_by_id["preflight"]["inputs"])
             self.assertIn(source_audit_doc, preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn(
+            "protocols/wrr_source_recovery_probe.toml",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_wrr_source_recovery_probe.py",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn(
             "scripts/analyze_wrr_source_policy_scenarios.py",
             steps_by_id["preflight"]["inputs"],
@@ -257,6 +266,8 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_CLAIM_BLOCKER_PACKET.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_SOURCE_POLICY_SCENARIOS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_DW_FORMULA_SENSITIVITY.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("protocols/wrr_source_recovery_probe.toml", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/build_wrr_source_recovery_probe.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn(
             "scripts/analyze_wrr_source_policy_scenarios.py",
             preflight.DEFAULT_REQUIRED_PATHS,

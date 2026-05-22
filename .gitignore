@@ -29,6 +29,8 @@ reports/**/*.csv
 reports/**/*.csv.gz
 reports/**/*.json
 reports/**/*.md
+reports/**/*.html
+reports/**/*.pdf
 reports/**/*.toml
 reports/**/*.tsv
 reports/**/*.zip

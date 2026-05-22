@@ -620,6 +620,13 @@ Targeted recovery probes can refresh individual WRR/Torah-code source labels:
 `python3 -m scripts.download_wrr_sources --refresh --label torah_code_research_model_overview`.
 The source manifest records requested URLs, final URLs, redirect status, HTTP
 status, bytes, and hashes.
+Repeatable isolated recovery probe:
+`docs/WRR_SOURCE_RECOVERY_PROBE.md`.
+Run with:
+`python3 -m scripts.run_protocol protocols/wrr_source_recovery_probe.toml --resume`.
+It refreshes selected Torah-code research labels into
+`reports/wrr_source_recovery_probe/`, leaving the cached `reports/wrr_1994/`
+bundle untouched.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.

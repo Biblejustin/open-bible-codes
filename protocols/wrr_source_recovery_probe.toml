@@ -1,0 +1,71 @@
+name = "wrr_source_recovery_probe"
+description = "Live-refresh selected Torah-code research source labels into an isolated recovery-probe bundle."
+manifest_out = "reports/wrr_source_recovery_probe/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "download_research_recovery_probe"
+description = "Refresh selected Torah-code research pages into a separate ignored probe directory."
+always_run = true
+argv = [
+  "-m", "scripts.download_wrr_sources",
+  "--out-dir", "reports/wrr_source_recovery_probe",
+  "--manifest-out", "reports/wrr_source_recovery_probe/sources.manifest.json",
+  "--refresh",
+  "--label", "torah_code_research_program_1",
+  "--label", "torah_code_research_program_2",
+  "--label", "torah_code_research_model_overview",
+  "--label", "torah_code_research_geometric_model_level_1",
+  "--label", "torah_code_research_geometric_model_level_2",
+  "--label", "torah_code_research_geometric_model_level_3",
+  "--label", "torah_code_research_els_model_level_1",
+  "--label", "torah_code_research_els_model_level_2",
+  "--label", "torah_code_research_els_model_level_3",
+]
+inputs = [
+  "scripts/download_wrr_sources.py",
+]
+outputs = [
+  "reports/wrr_source_recovery_probe/torah_code_research_program_1.html",
+  "reports/wrr_source_recovery_probe/torah_code_research_program_2.html",
+  "reports/wrr_source_recovery_probe/torah_code_research_model_overview.html",
+  "reports/wrr_source_recovery_probe/torah_code_research_geometric_model_level_1.html",
+  "reports/wrr_source_recovery_probe/torah_code_research_geometric_model_level_2.html",
+  "reports/wrr_source_recovery_probe/torah_code_research_geometric_model_level_3.html",
+  "reports/wrr_source_recovery_probe/torah_code_research_els_model_level_1.html",
+  "reports/wrr_source_recovery_probe/torah_code_research_els_model_level_2.html",
+  "reports/wrr_source_recovery_probe/torah_code_research_els_model_level_3.html",
+  "reports/wrr_source_recovery_probe/sources.manifest.json",
+]
+
+[[steps]]
+id = "summarize_research_recovery_probe"
+description = "Summarize live redirect, hash, expected-label, and spam-marker status for probe rows."
+argv = [
+  "-m", "scripts.build_wrr_source_recovery_probe",
+  "--manifest", "reports/wrr_source_recovery_probe/sources.manifest.json",
+  "--out", "reports/wrr_source_recovery_probe/source_recovery_probe.csv",
+  "--summary-out", "reports/wrr_source_recovery_probe/source_recovery_probe_summary.csv",
+  "--markdown-out", "docs/WRR_SOURCE_RECOVERY_PROBE.md",
+  "--manifest-out", "reports/wrr_source_recovery_probe/source_recovery_probe.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_source_recovery_probe.py",
+  "reports/wrr_source_recovery_probe/sources.manifest.json",
+  "reports/wrr_source_recovery_probe/torah_code_research_program_1.html",
+  "reports/wrr_source_recovery_probe/torah_code_research_program_2.html",
+  "reports/wrr_source_recovery_probe/torah_code_research_model_overview.html",
+  "reports/wrr_source_recovery_probe/torah_code_research_geometric_model_level_1.html",
+  "reports/wrr_source_recovery_probe/torah_code_research_geometric_model_level_2.html",
+  "reports/wrr_source_recovery_probe/torah_code_research_geometric_model_level_3.html",
+  "reports/wrr_source_recovery_probe/torah_code_research_els_model_level_1.html",
+  "reports/wrr_source_recovery_probe/torah_code_research_els_model_level_2.html",
+  "reports/wrr_source_recovery_probe/torah_code_research_els_model_level_3.html",
+]
+outputs = [
+  "reports/wrr_source_recovery_probe/source_recovery_probe.csv",
+  "reports/wrr_source_recovery_probe/source_recovery_probe_summary.csv",
+  "docs/WRR_SOURCE_RECOVERY_PROBE.md",
+  "reports/wrr_source_recovery_probe/source_recovery_probe.manifest.json",
+]
