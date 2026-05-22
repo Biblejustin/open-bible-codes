@@ -78,6 +78,23 @@ class WrrMethodStatusTests(unittest.TestCase):
                     "best_variant_total_hits": "1358",
                 },
             ],
+            variant_gap_rows=[
+                {
+                    "run_label": "all_lanes_cap1000",
+                    "impact_status": "all_blocking_terms_have_variant_hit",
+                    "pairs": "51",
+                },
+                {
+                    "run_label": "all_lanes_cap1000",
+                    "impact_status": "some_blocking_terms_have_variant_hit",
+                    "pairs": "9",
+                },
+                {
+                    "run_label": "all_lanes_cap1000",
+                    "impact_status": "no_blocking_term_variant_hit",
+                    "pairs": "50",
+                },
+            ],
             skip_row={
                 "rows": "120",
                 "program_cap_lt_printed": "13",
@@ -231,6 +248,8 @@ class WrrMethodStatusTests(unittest.TestCase):
         self.assertIn("exclude WNP Zacut >=5 157", by_area["Pair universe"]["evidence"])
         self.assertIn("single-term source-policy impacts", by_area["Pair universe"]["evidence"])
         self.assertIn("ZKWTA", by_area["Pair universe"]["evidence"])
+        self.assertIn("variant-gap impact best run all_lanes_cap1000", by_area["Pair universe"]["evidence"])
+        self.assertIn("51 blocked pairs have all blocking terms with variant leads", by_area["Pair universe"]["evidence"])
         self.assertEqual(by_area["D(w) skip-cap formula"]["status"], "open")
         self.assertIn("13 program caps below printed", by_area["D(w) skip-cap formula"]["evidence"])
         self.assertIn("all-lane cap1000 printed/program defined 72/72", by_area["D(w) skip-cap formula"]["evidence"])
@@ -272,6 +291,7 @@ class WrrMethodStatusTests(unittest.TestCase):
             defined_pair_rows=[],
             defined_gap_reason_rows=[],
             zero_hit_variant_rows=[],
+            variant_gap_rows=[],
             skip_row={
                 "rows": "120",
                 "program_cap_lt_printed": "13",
@@ -306,6 +326,7 @@ class WrrMethodStatusTests(unittest.TestCase):
                     "defined_pair_summary": Path("defined_pairs.csv"),
                     "defined_gap_reasons": Path("gap_reasons.csv"),
                     "zero_hit_variant_summary": Path("zero_hit_variants.csv"),
+                    "variant_gap_summary": Path("variant_gap.csv"),
                     "table2_bridge_summary": Path("bridge_summary.csv"),
                     "table2_ocr_summary": Path("ocr_summary.csv"),
                     "skip_summary": Path("skip.csv"),
@@ -354,6 +375,7 @@ class WrrMethodStatusTests(unittest.TestCase):
             defined_pair_summary = root / "defined_pairs.csv"
             defined_gap_reasons = root / "defined_gap_reasons.csv"
             zero_hit_variants = root / "zero_hit_variants.csv"
+            variant_gap = root / "variant_gap.csv"
             bridge_summary = root / "bridge_summary.csv"
             ocr_summary = root / "ocr_summary.csv"
             row_ocr_summary = root / "row_ocr_summary.csv"
@@ -432,6 +454,16 @@ class WrrMethodStatusTests(unittest.TestCase):
                         "terms_with_variant_hit": "48",
                         "terms_without_variant_hit": "57",
                         "best_variant_total_hits": "2981",
+                    }
+                ],
+            )
+            write_dict_rows(
+                variant_gap,
+                [
+                    {
+                        "run_label": "all_lanes_cap1000",
+                        "impact_status": "all_blocking_terms_have_variant_hit",
+                        "pairs": "51",
                     }
                 ],
             )
@@ -533,6 +565,8 @@ class WrrMethodStatusTests(unittest.TestCase):
                     str(defined_gap_reasons),
                     "--zero-hit-variant-summary",
                     str(zero_hit_variants),
+                    "--variant-gap-summary",
+                    str(variant_gap),
                     "--table2-bridge-summary",
                     str(bridge_summary),
                     "--table2-ocr-summary",

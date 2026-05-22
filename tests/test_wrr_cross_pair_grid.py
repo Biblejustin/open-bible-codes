@@ -88,9 +88,14 @@ class WrrCrossPairGridTests(unittest.TestCase):
             "reports/wrr_1994/wrr_dw_formula_sensitivity.csv",
             method_status["inputs"],
         )
+        self.assertIn(
+            "reports/wrr_1994/wrr_variant_gap_impact_summary.csv",
+            method_status["inputs"],
+        )
         self.assertIn("--source-policy-scenarios", method_status["argv"])
         self.assertIn("--source-policy-term-impacts", method_status["argv"])
         self.assertIn("--dw-formula-sensitivity", method_status["argv"])
+        self.assertIn("--variant-gap-summary", method_status["argv"])
 
 
 def count_row(normalized: str, length: int, hits: int) -> dict[str, str]:

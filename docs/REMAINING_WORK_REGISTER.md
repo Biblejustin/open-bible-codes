@@ -16,7 +16,8 @@ blocker-packet preflight guarding, WRR lock-options preflight guarding, and
 WRR method-status preflight guarding, WRR source-recovery probing, WRR
 source-recovery probe guarding, `.shtml` research-source alternate probing,
 and hypothesis-testing source-status auditing/guarding, plus WRR
-defined-distance diagnostic doc guarding and WRR variant-gap doc guarding.
+defined-distance diagnostic doc guarding, WRR variant-gap doc guarding, and
+WRR variant-gap method-status evidence propagation.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -388,8 +389,11 @@ the dominant missing mass.
 `docs/WRR_DEFINED_GAP_REASON_AUDIT.md` now classifies that missing mass: in the
 best cap-1000 run, 83 rows lack appellation ordinary hits, 12 lack date
 ordinary hits, 15 lack both, and 0 are under-minimum perturbation cases. The
-next WRR work is therefore source/term/pair-rule reconciliation before any
-claim-grade permutation language.
+method-status matrix now also surfaces the variant-gap impact over those
+blocked pairs: in the best cap-1000 run, 51 blocked pairs have all blocking
+terms with simple variant leads, 9 have partial variant leads, and 50 have no
+simple variant lead. The next WRR work is therefore source/term/pair-rule
+reconciliation before any claim-grade permutation language.
 
 ### 2. Source-Basis Audit Queue
 
@@ -541,7 +545,7 @@ guarding, WRR lock-options preflight guarding, and WRR method-status preflight
 guarding, WRR source-recovery probing, WRR source-recovery probe guarding, and
 `.shtml` research-source alternate probing, hypothesis-testing source-status
 guarding, WRR defined-distance diagnostic doc guarding, and WRR variant-gap
-doc guarding:
+doc guarding, and WRR variant-gap method-status evidence propagation:
 
 - `python3 -m pytest -q` passed: 1211 tests and 13961 subtests.
 - `python3 -m pytest tests/test_download_wrr_sources.py tests/test_build_wrr_source_recovery_probe.py tests/test_check_wrr_source_recovery_probe_doc.py tests/test_real_report_run.py -q` passed: 50 tests and 42 subtests.
@@ -549,6 +553,7 @@ doc guarding:
 - `python3 -m pytest tests/test_check_hypothesis_testing_source_audit_doc.py tests/test_real_report_run.py -q` passed: 42 tests.
 - `python3 -m pytest tests/test_check_wrr_defined_diagnostic_docs.py tests/test_real_report_run.py -q` passed: 45 tests.
 - `python3 -m pytest tests/test_check_wrr_variant_gap_docs.py tests/test_real_report_run.py -q` passed: 46 tests.
+- `python3 -m pytest tests/test_wrr_method_status.py tests/test_wrr_cross_pair_grid.py tests/test_check_wrr_method_status_doc.py tests/test_check_wrr_claim_readiness_doc.py -q` passed: 15 tests.
 - `python3 -m pytest tests/test_check_wrr_claim_readiness_doc.py tests/test_real_report_run.py -q` passed: 38 tests.
 - `python3 -m pytest tests/test_check_wrr_claim_blocker_packet_doc.py tests/test_real_report_run.py -q` passed: 39 tests.
 - `python3 -m pytest tests/test_check_wrr_lock_options_doc.py tests/test_real_report_run.py -q` passed: 40 tests.
@@ -595,6 +600,8 @@ doc guarding:
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_hypothesis_source_guard.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wrr_defined_diag_docs.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wrr_variant_gap_docs.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_variant_gap_method_status.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_variant_gap_method_status_cross_pair.json` passed.
 - `python3 -m scripts.check_prospective_study_lanes` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.

@@ -16,6 +16,7 @@ REQUIRED_PHRASES = (
     "D(w) skip-cap formula",
     "Corrected distance c(w,w')",
     "Aggregate statistic and permutation",
+    "variant-gap impact best run",
     "not claim-ready",
 )
 

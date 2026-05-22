@@ -20,6 +20,7 @@ REQUIRED_PHRASES = (
     "| D(w) skip-cap formula | `open` |",
     "| Corrected distance c(w,w') | `smoke_only` |",
     "| Aggregate statistic and permutation | `diagnostic_not_claim_grade` |",
+    "variant-gap impact best run",
     "Source Anchors",
 )
 
