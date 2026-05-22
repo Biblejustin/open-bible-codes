@@ -97,6 +97,7 @@ Current pushed commits for this cleanup:
 - `381bcfb` Document source basis queue validation.
 - `53c51b8` Document formal preflight metadata checks.
 - `34ecc61` Wire study tooling checks into report preflight.
+- `5782725` Document study tooling preflight coverage.
 
 ### Formal Real Report Rerun
 
