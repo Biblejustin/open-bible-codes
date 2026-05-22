@@ -18,6 +18,7 @@ DEFAULT_READINESS = Path("reports/wrr_1994/wrr_claim_readiness.csv")
 DEFAULT_LOCK_OPTIONS = Path("reports/wrr_1994/wrr_lock_options.csv")
 DEFAULT_SOURCE_QUEUE = Path("reports/wrr_1994/wrr_source_review_queue.csv")
 DEFAULT_METHOD_STATUS = Path("reports/wrr_1994/wrr_method_status.csv")
+DEFAULT_SOURCE_POLICY_SCENARIOS = Path("reports/wrr_1994/wrr_source_policy_scenarios.csv")
 DEFAULT_OUT = Path("reports/wrr_1994/wrr_claim_blocker_packet.csv")
 DEFAULT_MD = Path("docs/WRR_CLAIM_BLOCKER_PACKET.md")
 DEFAULT_MANIFEST = Path("reports/wrr_1994/wrr_claim_blocker_packet.manifest.json")
@@ -69,10 +70,11 @@ def main(argv: list[str] | None = None) -> int:
     lock_rows = read_rows(args.lock_options)
     source_rows = read_rows(args.source_queue)
     method_rows = read_rows(args.method_status)
+    source_policy_rows = read_optional_rows(args.source_policy_scenarios)
     packet_rows = build_packet_rows(readiness_rows, lock_rows, source_rows, method_rows)
     write_csv(args.out, packet_rows)
-    write_markdown(args.markdown_out, packet_rows, source_rows, args)
-    write_manifest(args.manifest_out, args, packet_rows, started)
+    write_markdown(args.markdown_out, packet_rows, source_rows, source_policy_rows, args)
+    write_manifest(args.manifest_out, args, packet_rows, source_policy_rows, started)
     print(args.out)
     print(args.markdown_out)
     print(args.manifest_out)
@@ -85,6 +87,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--lock-options", type=Path, default=DEFAULT_LOCK_OPTIONS)
     parser.add_argument("--source-queue", type=Path, default=DEFAULT_SOURCE_QUEUE)
     parser.add_argument("--method-status", type=Path, default=DEFAULT_METHOD_STATUS)
+    parser.add_argument(
+        "--source-policy-scenarios",
+        type=Path,
+        default=DEFAULT_SOURCE_POLICY_SCENARIOS,
+    )
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
     parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST)
@@ -156,6 +163,7 @@ def write_markdown(
     path: Path,
     packet_rows: list[dict[str, str]],
     source_rows: list[dict[str, str]],
+    source_policy_rows: list[dict[str, str]],
     args: argparse.Namespace,
 ) -> None:
     lines = [
@@ -176,6 +184,7 @@ def write_markdown(
             f"--lock-options {args.lock_options} "
             f"--source-queue {args.source_queue} "
             f"--method-status {args.method_status} "
+            f"--source-policy-scenarios {args.source_policy_scenarios} "
             f"--out {args.out} "
             f"--markdown-out {args.markdown_out} "
             f"--manifest-out {args.manifest_out}"
@@ -214,6 +223,34 @@ def write_markdown(
                 no_input_next=markdown_cell(row["no_input_next"]),
             )
         )
+    if source_policy_rows:
+        lines.extend(
+            [
+                "",
+                "## Source Policy Scenario Impact",
+                "",
+                "| Scenario | Type | Excluded pairs | Remaining >=5 | Gap >=5 vs 163 | Remaining 5..8 |",
+                "| --- | --- | ---: | ---: | ---: | ---: |",
+            ]
+        )
+        for row in source_policy_rows:
+            lines.append(
+                (
+                    "| {scenario} | `{policy_type}` | {excluded} | "
+                    "{remaining_app} | {gap_app} | {remaining_len} |"
+                ).format(
+                    scenario=markdown_cell(row.get("scenario", "")),
+                    policy_type=markdown_cell(row.get("policy_type", "")),
+                    excluded=markdown_cell(row.get("excluded_pairs", "")),
+                    remaining_app=markdown_cell(
+                        row.get("remaining_appellation_min_length_pairs", "")
+                    ),
+                    gap_app=markdown_cell(
+                        row.get("gap_to_source_cited_163_after_appellation_min_length", "")
+                    ),
+                    remaining_len=markdown_cell(row.get("remaining_length_filtered_pairs", "")),
+                )
+            )
     flagged_rows = flagged_source_rows(source_rows)
     if flagged_rows:
         lines.extend(
@@ -256,6 +293,12 @@ def read_rows(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+def read_optional_rows(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    return read_rows(path)
+
+
 def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
@@ -268,6 +311,7 @@ def write_manifest(
     path: Path,
     args: argparse.Namespace,
     rows: list[dict[str, str]],
+    source_policy_rows: list[dict[str, str]],
     started: float,
 ) -> None:
     payload = {
@@ -276,11 +320,13 @@ def write_manifest(
         "generated_at": datetime.now(UTC).isoformat(),
         "duration_seconds": round(time.perf_counter() - started, 6),
         "blocker_rows": len(rows),
+        "source_policy_scenario_rows": len(source_policy_rows),
         "inputs": {
             "readiness": str(args.readiness),
             "lock_options": str(args.lock_options),
             "source_queue": str(args.source_queue),
             "method_status": str(args.method_status),
+            "source_policy_scenarios": str(args.source_policy_scenarios),
         },
         "outputs": {
             "out": str(args.out),

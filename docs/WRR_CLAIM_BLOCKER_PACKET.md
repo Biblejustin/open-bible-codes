@@ -9,7 +9,7 @@ queue flags into one handoff artifact.
 ## Reproduce
 
 ```bash
-python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
+python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
 ```
 
 ## Blockers
@@ -29,6 +29,16 @@ python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/w
 | D(w) skip-cap formula | Printed and reported-program formulas are both implemented; final choice remains source decision. | printed WRR formula [primary_text_default]; reported WRR-program formula [sensitivity_variant] | keep printed/program sensitivity visible; do not pick final formula without source policy |
 | Corrected distance c(w,w') | Direct perturbed-letter smoke driver now produces defined corrected distances in the current candidate lane, but this remains diagnostic until the pair universe and D(w) formula are locked. |  | diagnostic full-lane runs can continue only as diagnostics until upstream locks exist |
 | Aggregate statistic and permutation | Published Table 3 ranks are source-audited; local diagnostic P1..P4 and date-permutation runs exist, including a repo-defined 999,999 run, but this is not an exact WRR reproduction. |  | keep date-label permutation diagnostics separate from WRR reproduction language |
+
+## Source Policy Scenario Impact
+
+| Scenario | Type | Excluded pairs | Remaining >=5 | Gap >=5 vs 163 | Remaining 5..8 |
+| --- | --- | ---: | ---: | ---: | ---: |
+| keep_all_working_source | `baseline` | 0 | 165 | -2 | 86 |
+| exclude_wnp_zacut_only | `diagnostic_exclusion` | 8 | 157 | 6 | 78 |
+| exclude_book_title_only | `diagnostic_exclusion` | 1 | 164 | -1 | 86 |
+| review_chelm_spelling_only | `review_only` | 0 | 165 | -2 | 86 |
+| exclude_all_source_review_flags | `diagnostic_exclusion` | 11 | 154 | 9 | 78 |
 
 ## Flagged Source-Review Rows
 

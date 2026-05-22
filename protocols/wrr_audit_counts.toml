@@ -1023,6 +1023,7 @@ argv = [
   "--lock-options", "reports/wrr_1994/wrr_lock_options.csv",
   "--source-queue", "reports/wrr_1994/wrr_source_review_queue.csv",
   "--method-status", "reports/wrr_1994/wrr_method_status.csv",
+  "--source-policy-scenarios", "reports/wrr_1994/wrr_source_policy_scenarios.csv",
   "--out", "reports/wrr_1994/wrr_claim_blocker_packet.csv",
   "--markdown-out", "docs/WRR_CLAIM_BLOCKER_PACKET.md",
   "--manifest-out", "reports/wrr_1994/wrr_claim_blocker_packet.manifest.json",
@@ -1033,6 +1034,7 @@ inputs = [
   "reports/wrr_1994/wrr_lock_options.csv",
   "reports/wrr_1994/wrr_source_review_queue.csv",
   "reports/wrr_1994/wrr_method_status.csv",
+  "reports/wrr_1994/wrr_source_policy_scenarios.csv",
 ]
 outputs = [
   "reports/wrr_1994/wrr_claim_blocker_packet.csv",

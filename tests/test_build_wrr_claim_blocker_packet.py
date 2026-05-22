@@ -72,6 +72,7 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             lock_options = root / "lock_options.csv"
             source_queue = root / "source_queue.csv"
             method_status = root / "method_status.csv"
+            source_policy_scenarios = root / "source_policy_scenarios.csv"
             out = root / "packet.csv"
             markdown = root / "packet.md"
             manifest = root / "manifest.json"
@@ -120,6 +121,19 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                     }
                 ],
             )
+            write_csv(
+                source_policy_scenarios,
+                [
+                    {
+                        "scenario": "exclude_wnp_zacut_only",
+                        "policy_type": "diagnostic_exclusion",
+                        "excluded_pairs": "8",
+                        "remaining_appellation_min_length_pairs": "157",
+                        "gap_to_source_cited_163_after_appellation_min_length": "6",
+                        "remaining_length_filtered_pairs": "78",
+                    }
+                ],
+            )
 
             rc = packet.main(
                 [
@@ -131,6 +145,8 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                     str(source_queue),
                     "--method-status",
                     str(method_status),
+                    "--source-policy-scenarios",
+                    str(source_policy_scenarios),
                     "--out",
                     str(out),
                     "--markdown-out",
@@ -146,6 +162,8 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("WRR Claim Blocker Packet", text)
             self.assertIn("Flagged Source-Review Rows", text)
+            self.assertIn("Source Policy Scenario Impact", text)
+            self.assertIn("exclude_wnp_zacut_only", text)
             self.assertIn("No pair exclusion or D(w) formula is chosen here", text)
             self.assertTrue(manifest.exists())
 
