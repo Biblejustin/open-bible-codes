@@ -1,6 +1,6 @@
 # Hebrew MT Source Candidates
 
-Last reviewed: 2026-05-05.
+Last reviewed: 2026-05-22.
 
 This note answers the practical question: "Are there different Hebrew MT
 versions we can pull in?" The current repo already has several MT-family streams
@@ -44,9 +44,12 @@ BY 4.0 and includes `TAHOT`, a Leningrad-codex-based Hebrew OT stream with tags
 and corrections. The selected TAHOT files also carry `CC BY` in the filenames
 and header.
 
-Decision: optional importer added in `scripts/download_step_tahot.py`. Keep it
-out of baseline version-presence reports until a standalone alignment audit is
-reviewed. TAHOT's header says the selected text may follow qere, restore missing
+Decision: optional importer added in `scripts/download_step_tahot.py`. The
+standalone alignment audit and version-presence follow-ups are now complete; see
+`docs/STEP_TAHOT_SOURCE_AUDIT.md`, `docs/STEP_TAHOT_VERSION_PRESENCE_REVIEW.md`,
+`docs/STEP_TAHOT_SCREENING_VERSION_PRESENCE.md`, and
+`docs/STEP_TAHOT_FINAL_GATE.md`. Keep it out of baseline Leningrad-family
+reports. TAHOT's header says the selected text may follow qere, restore missing
 text, and include LXX-preserved additions converted to Hebrew from BHS/BHK
 apparatus. That makes it useful as a translator-selected MT-adjacent stream, but
 not as a pure Leningrad ketiv stream.
@@ -112,16 +115,24 @@ permit the intended reuse and redistribution.
 
 Decision: do not ingest for distributable data without separate permission.
 
-## Recommended Next Step
+## Current Admission Boundary
 
-Do not add another Hebrew corpus immediately. The version-presence runs already
-show that the important next question is not simply "more sources"; it is "which
-patterns survive across which source families?"
+Do not add another Hebrew corpus immediately. The current STEP_TAHOT audits
+already answer the previous source-admission question:
 
-Next Hebrew source work should be a standalone `STEP_TAHOT` alignment audit:
-compare verse counts, normalized lengths, and verse-level differences against
-`MT_WLC`, `UXLC`, `MAM`, `EBIBLE_WLC`, and `UHB`. Only after that should it enter
-version-presence protocols.
+- `STEP_TAHOT` loads as 39 books, 23,261 verses, and 1,197,732 normalized
+  letters.
+- Against `MT_WLC`, 23,011 refs align; 20,037 are equal and 2,974 differ.
+- In broader Hebrew screening, 379 rows were `STEP_TAHOT`-only.
+- The final gate found real screening rows were `STEP_TAHOT`-only at 2.449%
+  while null/frequency controls were `STEP_TAHOT`-only at 2.388%.
+- All `STEP_TAHOT`-only rows remain held as selected-reading policy paths or
+  source-specific L-only paths, not claim rows.
+
+Future Hebrew source work should be a new source-admission audit only if it adds
+textual independence, packaging/versification coverage that changes a concrete
+question, or licensing value. Do not treat `STEP_TAHOT` as a plain MT duplicate
+or as claim-strengthening evidence.
 
 ## Source Admission Checklist
 
