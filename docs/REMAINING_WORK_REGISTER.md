@@ -100,6 +100,7 @@ Current pushed commits for this cleanup:
 - `34ecc61` Wire study tooling checks into report preflight.
 - `5782725` Document study tooling preflight coverage.
 - `06e77b4` Guard preregistration placeholders in preflight.
+- `3f60f7c` Document preregistration preflight guard.
 
 ### Formal Real Report Rerun
 
