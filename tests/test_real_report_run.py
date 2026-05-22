@@ -71,6 +71,7 @@ class RealReportRunTests(unittest.TestCase):
             "docs/CITIES_SOURCE_CHAIN_AUDIT.md",
             "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
             "docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md",
+            "docs/HYPOTHESIS_TESTING_SOURCE_AUDIT.md",
             "docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md",
             "docs/WRR_SOURCE_RECOVERY_PROBE.md",
         ]:
@@ -86,6 +87,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_source_recovery_probe_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_hypothesis_testing_source_audit_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -273,6 +278,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("protocols/wrr_source_recovery_probe.toml", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/build_wrr_source_recovery_probe.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_wrr_source_recovery_probe_doc.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn(
+            "scripts/check_hypothesis_testing_source_audit_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
         self.assertIn(
             "scripts/analyze_wrr_source_policy_scenarios.py",
             preflight.DEFAULT_REQUIRED_PATHS,
@@ -709,6 +718,32 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "WRR method-status doc failures: "
                 "docs/WRR_METHOD_STATUS.md missing blocked status",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_hypothesis_testing_source_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_hypothesis_testing_source_audit_doc,
+                "validate_hypothesis_testing_source_audit_doc",
+                return_value=[
+                    "docs/HYPOTHESIS_TESTING_SOURCE_AUDIT.md missing usable method pages"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["hypothesis_testing_source_audit_doc_failures"],
+                [
+                    "docs/HYPOTHESIS_TESTING_SOURCE_AUDIT.md missing usable method pages"
+                ],
+            )
+            self.assertIn(
+                "hypothesis-testing source audit doc failures: "
+                "docs/HYPOTHESIS_TESTING_SOURCE_AUDIT.md missing usable method pages",
                 payload["failures"],
             )
 

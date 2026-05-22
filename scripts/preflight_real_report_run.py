@@ -22,6 +22,7 @@ from els.project_index import (
 from scripts import (
     check_crd_relevance_dictionary,
     check_expanded_strata_tooling,
+    check_hypothesis_testing_source_audit_doc,
     check_manual_review_queue,
     check_preregistration_placeholders,
     check_prospective_study_lanes,
@@ -151,6 +152,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/CITIES_SOURCE_CHAIN_AUDIT.md",
     "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
     "docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md",
+    "docs/HYPOTHESIS_TESTING_SOURCE_AUDIT.md",
     "docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md",
     "docs/WRR_SOURCE_RECOVERY_PROBE.md",
     "docs/WRR_REPLICATION_PLAN.md",
@@ -363,6 +365,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_lock_options_doc.py",
     "scripts/check_wrr_method_status_doc.py",
     "scripts/check_wrr_source_recovery_probe_doc.py",
+    "scripts/check_hypothesis_testing_source_audit_doc.py",
     "scripts/build_wrr_claim_blocker_packet.py",
     "scripts/build_matrix_cluster_candidates.py",
     "scripts/summarize_matrix_cluster_controls.py",
@@ -562,6 +565,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_source_recovery_probe_doc_failures)
         )
 
+    hypothesis_testing_source_audit_doc_failures = (
+        check_hypothesis_testing_source_audit_doc.validate_hypothesis_testing_source_audit_doc(
+            check_hypothesis_testing_source_audit_doc.DEFAULT_DOC
+        )
+    )
+    if hypothesis_testing_source_audit_doc_failures:
+        failures.append(
+            "hypothesis-testing source audit doc failures: "
+            + "; ".join(hypothesis_testing_source_audit_doc_failures)
+        )
+
     stale_indexes = stale_generated_indexes(root)
     if stale_indexes:
         failures.append("stale generated indexes: " + ", ".join(stale_indexes))
@@ -597,6 +611,8 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "wrr_lock_options_doc_failures": wrr_lock_options_doc_failures,
         "wrr_method_status_doc_failures": wrr_method_status_doc_failures,
+        "wrr_source_recovery_probe_doc_failures": wrr_source_recovery_probe_doc_failures,
+        "hypothesis_testing_source_audit_doc_failures": hypothesis_testing_source_audit_doc_failures,
         "stale_generated_indexes": stale_indexes,
         "forbidden_account_terms": FORBIDDEN_ACCOUNT_TERMS,
         "forbidden_repo_hits": forbidden_repo_hits,
