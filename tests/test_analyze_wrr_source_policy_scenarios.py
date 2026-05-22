@@ -103,6 +103,7 @@ class WrrSourcePolicyScenarioTests(unittest.TestCase):
             self.assertIn("WRR Source Policy Scenario Impact", text)
             self.assertIn("Single-Term Impact", text)
             self.assertIn("No source policy is selected", text)
+            self.assertIn("Visual-review notes remain triage only", text)
             self.assertTrue(manifest.exists())
 
 

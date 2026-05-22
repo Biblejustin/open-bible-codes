@@ -480,6 +480,7 @@ def write_markdown(
         "This report counts what would happen to the current WRR2 pair-eligibility",
         "table under several named source-review policies. It does not apply any",
         "policy to the repo outputs and is not claim-grade reproduction evidence.",
+        "Visual-review notes remain triage only and do not exclude pairs automatically.",
         "",
         "## Reproduce",
         "",
@@ -587,6 +588,7 @@ def write_markdown(
             "- `keep_all_working_source` is the current diagnostic baseline.",
             "- Exclusion scenarios show count impact only; they are not selected policies.",
             "- `review_chelm_spelling_only` keeps pair counts stable and records review scope.",
+            "- Visual-review notes remain triage only and do not exclude pairs automatically.",
             "- Claim-grade WRR language still needs an explicit source policy and D(w) lock.",
             "",
         ]

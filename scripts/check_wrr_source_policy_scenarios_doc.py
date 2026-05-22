@@ -14,6 +14,7 @@ REQUIRED_PHRASES = (
     "# WRR Source Policy Scenario Impact",
     "Status: diagnostic-only scenario impact. No source policy is selected.",
     "It does not apply any policy to the repo outputs and is not claim-grade reproduction evidence.",
+    "Visual-review notes remain triage only and do not exclude pairs automatically.",
     "| keep_all_working_source | `baseline` | 0 | 0 | 165 | 86 | -2 | 77 |",
     "| exclude_wnp_zacut_only | `diagnostic_exclusion` | 8 | 0 | 157 | 78 | 6 | 85 |",
     "| exclude_all_source_review_flags | `diagnostic_exclusion` | 11 | 0 | 154 | 78 | 9 | 85 |",
