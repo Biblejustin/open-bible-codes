@@ -378,7 +378,9 @@ source rows, 48 defined `c(w,w')` values, and Bonferroni `rho0 = 0.00086`.
 That is meaningful local evidence for the repo-defined protocol, but it is not
 exact WRR reproduction language. The current claim-readiness gate remains
 blocked for exact reproduction because the source-locked pair universe and
-source-locked `D(w)` rule are still unresolved.
+source-locked `D(w)` rule are still unresolved. The source-policy scenarios are
+diagnostic only: baseline 165 >=5 pairs, exclude WNP Zacut 157, and exclude all
+source-review flags 154; no source policy is selected.
 
 Source artifacts:
 

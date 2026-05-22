@@ -158,6 +158,8 @@ Use cautious language:
   diagnostic distances;
 - all-lane direct diagnostic over 182 imported same-record WRR2 pairs produces
   72 defined diagnostic distances at cap 1000, not the source-cited 163;
+- source-policy scenarios are diagnostic only: baseline 165 >=5 pairs, exclude
+  WNP Zacut 157, and exclude all source-review flags 154;
 - current accepted repo-defined 999,999 date-label permutation diagnostic
   excludes WNP-dispute-flagged rows, uses the current cap-250
   `corrected_distance` field, observes 174 rows and 48 defined `c(w,w')`

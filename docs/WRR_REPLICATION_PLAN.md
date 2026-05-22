@@ -117,6 +117,11 @@ Already implemented:
   rows with no appellation ordinary hits, 12 with no date ordinary hits, 15
   with neither term ordinary-hit valid, and 0 under-minimum rows; see
   `docs/WRR_DEFINED_GAP_REASON_AUDIT.md`.
+- WRR source-policy scenario audit in
+  `scripts/analyze_wrr_source_policy_scenarios.py`, wired into
+  `protocols/wrr_audit_counts.toml`, showing diagnostic pair-universe movement
+  without selecting a policy: baseline 165 >=5 pairs, exclude WNP Zacut 157, and
+  exclude all source-review flags 154.
 - WRR zero-hit variant probe in
   `scripts/analyze_wrr_zero_hit_variant_probe.py`, wired into
   `protocols/wrr_audit_counts.toml`, checking simple one-edit variants for
@@ -167,6 +172,7 @@ Still needed:
 - candidate pair-set reconciliation against the paper's declared sample; the
   current eligibility table is lock prep, and `163` is treated as the
   source-defined corrected-distance output count rather than a raw pair table;
+- source-policy selection for WNP/context-reviewed rows;
 - replication-grade generated or reviewed future file `terms/[wrr_1994_rabbis].csv`;
 - replication-grade generated or reviewed future file `terms/[wrr_1994_dates].csv`;
 - final `D(w)` formula decision between the printed WRR formula and the WRR

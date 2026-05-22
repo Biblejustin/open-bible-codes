@@ -794,7 +794,9 @@ current cap-250 corrected-distance field and excluding WNP-dispute-flagged rows:
 174 observed rows, 48 defined `c(w,w')` values, and Bonferroni `rho0 = 0.00086`.
 Exact WRR claim readiness is still explicitly gated in
 `docs/WRR_CLAIM_READINESS.md`; it remains blocked until the source-locked pair
-universe and source-locked `D(w)` formula are resolved.
+universe and source-locked `D(w)` formula are resolved. Current source-policy
+scenarios remain diagnostic: baseline 165 >=5 pairs, exclude WNP Zacut 157, and
+exclude all source-review flags 154.
 
 ## Best Next Work
 

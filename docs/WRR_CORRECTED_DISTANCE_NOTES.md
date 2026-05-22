@@ -139,6 +139,9 @@ Already implemented:
   appellation would close the 165-to-163 count gap, while excluding all four
   disputed Zacut rows would overshoot. These pages are not treated as a source
   rule for pre-filtering the candidate set.
+- source-policy scenario diagnostics now keep the policy impact visible without
+  selecting a policy: baseline 165 >=5 pairs, exclude WNP Zacut 157, and exclude
+  all source-review flags 154.
 - legacy perturbation boundary/exact-match diagnostic over ordinary imported
   length 5..8 ELS hits. Current output checks all 959 smoke-cap ordinary hits
   across 64 rows with hits: every ordinary hit keeps all 125 triples in bounds,
@@ -255,14 +258,17 @@ Not yet implemented:
    screen. Current read: `163` is a defined-distance output count, not a raw
    same-record pair table. Before aggregate statistics, derive that count by
    applying the source-backed `c(w,w')` eligibility rules over the candidate set.
+   The source-policy scenarios are decision aids only: they show how WNP/context
+   exclusions move the raw >=5 count, but do not select the final pair universe.
 
 ## Proposed Implementation Order
 
-1. Decide whether `D(w)` uses the printed WRR count formula or the program
+1. Select the source policy for candidate pair inclusion.
+2. Decide whether `D(w)` uses the printed WRR count formula or the program
    formula documented by MBBK; current audit rows expose both.
-2. Extend the smoke corrected-distance driver into an optimized full run over
+3. Extend the smoke corrected-distance driver into an optimized full run over
    the final locked pair universe.
-3. Feed defined `c(w,w')` rows into the aggregate `P1`..`P4` diagnostic and
+4. Feed defined `c(w,w')` rows into the aggregate `P1`..`P4` diagnostic and
    then into claim-grade permutation tests.
 
 ## Current Read

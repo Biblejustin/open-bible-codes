@@ -696,6 +696,11 @@ diagnostic clue. The project does not currently apply any Zacut-specific
 exclusion because the WNP page is a critical alternative-source discussion, not
 a source rule for pre-filtering the candidate set.
 
+The separate source-policy scenario packet keeps that distinction explicit:
+baseline keeps 165 appellation-length pairs, excluding WNP Zacut leaves 157,
+and excluding all source-review flags leaves 154. No source policy is selected
+from those diagnostics.
+
 ## Count Smoke
 
 The imported list can be counted against Koren Genesis with:
@@ -870,6 +875,11 @@ the 163-distance count must be derived by the corrected-distance eligibility
 screen, not by raw pair-count reconciliation. The Zacut diagnostic now shows why
 a single length-eligible Zacut appellation exclusion would close the numeric
 gap, while excluding every WNP-disputed Zacut row would not.
+
+Source-policy scenario impact is tracked separately from that raw reconciliation:
+`keep_all_working_source` remains at 165 >=5 pairs, `exclude_wnp_zacut_only`
+leaves 157, and `exclude_all_source_review_flags` leaves 154. These rows are
+decision aids only; they do not promote a pair universe.
 
 WRR pair-eligibility lock-prep table:
 

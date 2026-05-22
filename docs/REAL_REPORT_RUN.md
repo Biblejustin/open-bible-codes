@@ -213,7 +213,8 @@ The report-run summary should currently say:
   until the source-locked pair table and `D(w)` decision are resolved. The
   explicit readiness gate is tracked in `docs/WRR_CLAIM_READINESS.md` and
   remains blocked; `docs/WRR_CLAIM_BLOCKER_PACKET.md` gathers the current
-  blockers, lock options, and WNP/context source-review flags.
+  blockers, lock options, WNP/context source-review flags, source-policy
+  scenarios, and D(w) formula sensitivity.
 - `υιοσ` (huios; English: son) and `αιμα` (haima; English: blood) remain weaker hidden-path candidates because their exact
   patterns are missing from one or more compared Greek NT sources.
 - no row is claim-grade yet.

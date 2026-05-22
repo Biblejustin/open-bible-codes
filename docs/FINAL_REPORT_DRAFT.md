@@ -326,7 +326,9 @@ not exact WRR reproduction. The accepted diagnostic uses the current cap-250
 labels across 30 concepts, and reports Bonferroni `rho0 = 0.00086` from 174
 observed rows and 48 defined `c(w,w')` values.
 
-Current exact-reproduction status: `under_specified`.
+Current exact-reproduction status: `under_specified`. The source-policy
+scenario packet is diagnostic only: baseline 165 >=5 pairs, exclude WNP Zacut
+157, and exclude all source-review flags 154; no source policy is selected.
 
 ## Negative And Weak Results
 
