@@ -85,6 +85,18 @@ python3 -m scripts.build_wrr_source_review_queue --blocked-pairs reports/wrr_199
 | 11 | `wrr2_27_app_04` | 0 | `משהזכות` |
 | 12 | `wrr2_27_app_05` | 0 | `משהזכותא` |
 
+## Visual Triage Notes For Queued Terms
+
+| Rank | Term id | Note | Action |
+| ---: | --- | --- | --- |
+| 1 | `wrr2_23_app_04` | primary page row visibly contains Yaakov Ha-Levi wording; row OCR missed it | treat as visual OCR miss until a locked transcription says otherwise |
+| 2 | `wrr2_30_app_05` | primary Hebrew name cell visibly contains Yosher Levav text without visible B@L prefix | review title-prefix/appellation rule before any source correction |
+| 3 | `wrr2_23_app_05` | primary page row visibly contains Maharil Segal wording; row OCR missed it | treat as visual OCR miss until a locked transcription says otherwise |
+| 4 | `wrr2_28_app_04` | primary Hebrew name cell visibly contains Pnei Moshe text without visible B@L prefix | review title-prefix/appellation rule before any source correction |
+| 5 | `wrr2_32_app_04` | English label says of-Chelm; visible primary Hebrew cell supports Rabbi Shelomo only in this pass | review source/pair rule before using this as a Hebrew-cell match |
+| 6 | `wrr2_27_date_01` | primary page row visibly contains 16 Tishri date forms; row OCR has near match | check page image before treating as source difference |
+| 7 | `wrr2_27_app_06` | primary page row visibly contains Moshe/Zacut forms; row OCR has near match | check WNP Zacut dispute and page image before treating as source difference |
+
 ## WNP Context For Queued Terms
 
 | Rank | Term id | Flags | Note | Action |

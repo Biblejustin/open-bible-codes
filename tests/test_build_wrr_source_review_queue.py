@@ -53,6 +53,12 @@ class WrrSourceReviewQueueTests(unittest.TestCase):
         self.assertIn("CLMA/CILMA", note)
         self.assertIn("visual notes show English of-Chelm label", action)
 
+    def test_visual_review_context_keeps_notes_out_of_source_flags(self) -> None:
+        note, action = queue.visual_review_context("wrr2_23_app_04")
+
+        self.assertIn("row OCR missed it", note)
+        self.assertIn("visual OCR miss", action)
+
     def test_build_queue_rows_groups_blocking_terms_for_best_run(self) -> None:
         blocked = [
             {
@@ -128,6 +134,7 @@ class WrrSourceReviewQueueTests(unittest.TestCase):
         self.assertEqual(by_term["app1"]["best_variant_hit_count"], 8)
         self.assertEqual(by_term["app1"]["row_ocr_text_normalized"], "AXP OCR")
         self.assertEqual(by_term["app1"]["row_ocr_hebrew_normalized"], "APP")
+        self.assertEqual(by_term["app1"]["visual_review_note"], "")
         self.assertEqual(by_term["app1"]["row_ocr_near_match_distance"], 1)
         self.assertEqual(by_term["app1"]["row_ocr_near_match_text"], "AXP")
         self.assertEqual(

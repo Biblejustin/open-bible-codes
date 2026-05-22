@@ -53,6 +53,8 @@ QUEUE_FIELDNAMES = [
     "source_review_flags",
     "source_review_note",
     "source_review_action",
+    "visual_review_note",
+    "visual_review_action",
     "pair_ids",
     "read",
 ]
@@ -107,6 +109,37 @@ WNP_CONTEXT = {
         "wnp_chelm_spelling_context",
         "WNP discusses CLMA/CILMA spelling variants and $LMH CLMA forms.",
         "source/pair-rule review; visual notes show English of-Chelm label but primary Hebrew cell only supports RBY$LMH in this pass",
+    ),
+}
+
+VISUAL_CONTEXT_BY_TERM_ID = {
+    "wrr2_23_app_04": (
+        "primary page row visibly contains Yaakov Ha-Levi wording; row OCR missed it",
+        "treat as visual OCR miss until a locked transcription says otherwise",
+    ),
+    "wrr2_23_app_05": (
+        "primary page row visibly contains Maharil Segal wording; row OCR missed it",
+        "treat as visual OCR miss until a locked transcription says otherwise",
+    ),
+    "wrr2_30_app_05": (
+        "primary Hebrew name cell visibly contains Yosher Levav text without visible B@L prefix",
+        "review title-prefix/appellation rule before any source correction",
+    ),
+    "wrr2_28_app_04": (
+        "primary Hebrew name cell visibly contains Pnei Moshe text without visible B@L prefix",
+        "review title-prefix/appellation rule before any source correction",
+    ),
+    "wrr2_32_app_04": (
+        "English label says of-Chelm; visible primary Hebrew cell supports Rabbi Shelomo only in this pass",
+        "review source/pair rule before using this as a Hebrew-cell match",
+    ),
+    "wrr2_27_date_01": (
+        "primary page row visibly contains 16 Tishri date forms; row OCR has near match",
+        "check page image before treating as source difference",
+    ),
+    "wrr2_27_app_06": (
+        "primary page row visibly contains Moshe/Zacut forms; row OCR has near match",
+        "check WNP Zacut dispute and page image before treating as source difference",
     ),
 }
 
@@ -264,6 +297,7 @@ def build_queue_rows(
             str(item["term_side"]),
             str(item["term"]),
         )
+        visual_note, visual_action = visual_review_context(term_id)
         out.append(
             {
                 "run_label": run_label,
@@ -290,6 +324,8 @@ def build_queue_rows(
                 "source_review_flags": flags,
                 "source_review_note": note,
                 "source_review_action": action,
+                "visual_review_note": visual_note,
+                "visual_review_action": visual_action,
                 "pair_ids": ";".join(pair_ids),
                 "read": BUCKET_READS[bucket],
             }
@@ -394,6 +430,10 @@ def source_review_context(
     return ";".join(flags), " ".join(notes), " ".join(actions)
 
 
+def visual_review_context(term_id: str) -> tuple[str, str]:
+    return VISUAL_CONTEXT_BY_TERM_ID.get(term_id, ("", ""))
+
+
 def write_markdown(
     path: Path,
     queue_rows: list[dict[str, object]],
@@ -488,6 +528,22 @@ def write_markdown(
             "| {priority_rank} | `{term_id}` | {row_ocr_near_match_distance} | "
             "`{row_ocr_near_match_text}` |".format(**row)
         )
+    visual_rows = [row for row in queue_rows if row.get("visual_review_note")]
+    if visual_rows:
+        lines.extend(
+            [
+                "",
+                "## Visual Triage Notes For Queued Terms",
+                "",
+                "| Rank | Term id | Note | Action |",
+                "| ---: | --- | --- | --- |",
+            ]
+        )
+        for row in visual_rows:
+            lines.append(
+                "| {priority_rank} | `{term_id}` | {visual_review_note} | "
+                "{visual_review_action} |".format(**row)
+            )
     flagged_rows = [row for row in queue_rows if row.get("source_review_flags")]
     if flagged_rows:
         lines.extend(
