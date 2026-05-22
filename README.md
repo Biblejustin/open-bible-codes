@@ -606,7 +606,7 @@ rows, 8 detail rows).
 Cities source-chain audit:
 `docs/CITIES_SOURCE_CHAIN_AUDIT.md`.
 Event/object experiment source audit:
-`docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md`.
+`docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md` (65 machine-readable source rows).
 Under-construction experiment source audit:
 `docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md`.
 Research missing model pages audit:

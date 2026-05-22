@@ -12,6 +12,9 @@ The results were not statistically significant.
 </body></html>"""
 
 SONS_DATA = """<html><body>
+Key Word List
+\u05d9\u05d2\u05d1 \u05d0\u05d3\u05e8 \u05e4\u05d5\u05e8\u05d9\u05dd
+\u05e4\u05e8\u05e9\u05e0\u05d3\u05ea\u05d0
 Experimental Protocol
 Text The Five Books of Moses; the Chumash
 Skip Specification Expected Number of ELS = 10
@@ -40,8 +43,8 @@ ARK_HTML = """<html><body>
 <a href="../experiments/ark_code_1.pdf">tutorial</a>
 </body></html>"""
 
-PUMBEDITA_PDF_TEXT = "\n".join(f"{i} Name{i} hebrew{i}" for i in range(1, 21))
-AUSCHWITZ_PDF_TEXT = "\n".join(f"{i} Camp{i} hebrew{i}" for i in range(1, 33))
+PUMBEDITA_PDF_TEXT = "\n".join(f"{i} Name{i} hebrew" for i in range(1, 21))
+AUSCHWITZ_PDF_TEXT = "\n".join(f"{i} Camp{i} hebrew" for i in range(1, 33))
 ARK_PDF_TEXT = "Ark Code tutorial"
 
 
@@ -57,6 +60,18 @@ class EventObjectExperimentSourceTests(unittest.TestCase):
         ]
 
         self.assertEqual(audit.count_numbered_pdf_rows(texts, "pumbedita"), 20)
+
+    def test_event_object_data_rows_extract_keywords_and_pdf_rows(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            rows, texts = self.build_sample_sources(Path(tmp))
+            del rows
+            data_rows = audit.event_object_data_rows(texts)
+
+        self.assertEqual(len(data_rows), 54)
+        self.assertEqual(data_rows[0]["experiment"], "sons_of_haman")
+        self.assertEqual(data_rows[0]["source_table"], "sons_of_haman_keyword_list")
+        self.assertEqual(data_rows[2]["source_table"], "pumbedita_amoraim")
+        self.assertEqual(data_rows[-1]["source_table"], "auschwitz_subcamp_keywords")
 
     def test_protocol_anchors_find_expected_declared_status(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -87,6 +102,8 @@ class EventObjectExperimentSourceTests(unittest.TestCase):
                         str(root / "files.csv"),
                         "--status-out",
                         str(root / "status.csv"),
+                        "--data-rows-out",
+                        str(root / "data_rows.csv"),
                         "--summary-out",
                         str(root / "summary.csv"),
                         "--anchors-out",
@@ -104,11 +121,15 @@ class EventObjectExperimentSourceTests(unittest.TestCase):
             self.assertEqual(rc, 0)
             summary_rows = list(csv.DictReader((root / "summary.csv").open(encoding="utf-8")))
             self.assertEqual(summary_rows[0]["source_files"], "8")
+            self.assertEqual(summary_rows[0]["sons_of_haman_keyword_rows"], "2")
             self.assertEqual(summary_rows[0]["pumbedita_rows"], "20")
             self.assertEqual(summary_rows[0]["auschwitz_rows"], "32")
+            self.assertEqual(summary_rows[0]["machine_data_rows"], "54")
             markdown = (root / "audit.md").read_text(encoding="utf-8")
             self.assertIn("source-shape audit only", markdown)
+            self.assertIn("machine data rows extracted | 54", markdown)
             self.assertIn("Found anchors: 10 of 10", markdown)
+            self.assertTrue((root / "data_rows.csv").exists())
             manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
             self.assertEqual(len(manifest["sources"]), 8)
 

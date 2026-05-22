@@ -170,8 +170,9 @@ python3 -m scripts.run_protocol protocols/event_object_experiments_source_audit.
 ```
 
 This parses the Sons of Haman, Pumbedita, Auschwitz, and Ark source pages plus
-linked data/tutorial PDFs. It records declared status and source rows without
-normalizing spellings or testing ELS results. Tracked audit:
+linked data/tutorial PDFs into ignored source-shape and source-row outputs. It
+records declared status and 65 machine-readable source rows without normalizing
+spellings or testing ELS results. Tracked audit:
 `docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md`.
 
 Under-construction experiment source audit:

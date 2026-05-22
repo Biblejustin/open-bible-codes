@@ -229,9 +229,9 @@ These are source leads, not claim-ready evidence.
 - Sons of Haman, Pumbedita, Auschwitz, and Ark: useful as post-WRR event/object
   claim leads. The source-shape audit in
   `docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md` now confirms 8 source files,
-  20 Pumbedita rows, 32 Auschwitz rows, a 57-page Ark tutorial PDF, one
-  reported significant follow-up page, two reported non-significant pages, and
-  one under-construction page. These should require stricter preregistration
+  65 machine-readable source rows, a 57-page Ark tutorial PDF, one reported
+  significant follow-up page, two reported non-significant pages, and one
+  under-construction page. These should require stricter preregistration
   flags before any statistical interpretation because several are visibly
   post-hoc, replication-style, or incomplete experiments.
 - Chumash, Twin Towers, Tsunami, Katrina, Great Rabbis, and Son Rabbis pages
@@ -361,9 +361,9 @@ reported p-levels.
 
 `scripts/analyze_event_object_experiments_source.py` parses the Sons of Haman,
 Pumbedita, Auschwitz, and Ark source pages plus linked data/tutorial PDFs into
-ignored source-shape CSVs and a tracked audit summary. It verifies declared
-status, small source-row counts, and protocol anchors, but does not normalize
-spellings, run ELS hits, or verify reported p-values.
+ignored source-shape CSVs, source-row CSVs, and a tracked audit summary. It
+verifies declared status, 65 machine-readable source rows, and protocol anchors,
+but does not normalize spellings, run ELS hits, or verify reported p-values.
 
 `scripts/analyze_under_construction_experiments_source.py` audits Chumash, Twin
 Towers, Tsunami, Katrina, Great Rabbis, and Son Rabbis placeholder pages into

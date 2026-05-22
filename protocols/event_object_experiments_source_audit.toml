@@ -34,6 +34,7 @@ argv = [
   "-m", "scripts.analyze_event_object_experiments_source",
   "--out", "reports/wrr_1994/event_object_experiment_source_files.csv",
   "--status-out", "reports/wrr_1994/event_object_experiment_status.csv",
+  "--data-rows-out", "reports/wrr_1994/event_object_experiment_data_rows.csv",
   "--summary-out", "reports/wrr_1994/event_object_experiment_summary.csv",
   "--anchors-out", "reports/wrr_1994/event_object_experiment_anchors.csv",
   "--markdown-out", "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
@@ -53,6 +54,7 @@ inputs = [
 outputs = [
   "reports/wrr_1994/event_object_experiment_source_files.csv",
   "reports/wrr_1994/event_object_experiment_status.csv",
+  "reports/wrr_1994/event_object_experiment_data_rows.csv",
   "reports/wrr_1994/event_object_experiment_summary.csv",
   "reports/wrr_1994/event_object_experiment_anchors.csv",
   "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",

@@ -31,6 +31,7 @@ DEFAULT_SOURCES = [
 ]
 DEFAULT_OUT = Path("reports/wrr_1994/event_object_experiment_source_files.csv")
 DEFAULT_STATUS_OUT = Path("reports/wrr_1994/event_object_experiment_status.csv")
+DEFAULT_DATA_ROWS_OUT = Path("reports/wrr_1994/event_object_experiment_data_rows.csv")
 DEFAULT_SUMMARY_OUT = Path("reports/wrr_1994/event_object_experiment_summary.csv")
 DEFAULT_ANCHORS_OUT = Path("reports/wrr_1994/event_object_experiment_anchors.csv")
 DEFAULT_MD = Path("docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md")
@@ -58,6 +59,14 @@ STATUS_FIELDNAMES = [
     "protocol_table_present",
     "notes",
 ]
+DATA_ROW_FIELDNAMES = [
+    "experiment",
+    "source_table",
+    "row_index",
+    "english_label",
+    "hebrew_keyword",
+    "raw_line",
+]
 SUMMARY_FIELDNAMES = [
     "source_files",
     "html_files",
@@ -68,8 +77,11 @@ SUMMARY_FIELDNAMES = [
     "reported_significant_pages",
     "reported_non_significant_pages",
     "under_construction_pages",
+    "sons_of_haman_keyword_rows",
     "pumbedita_rows",
     "auschwitz_rows",
+    "auschwitz_topic_keyword_rows",
+    "machine_data_rows",
     "ark_pdf_pages",
     "claim_status",
 ]
@@ -127,17 +139,20 @@ def main(argv: list[str] | None = None) -> int:
     source_paths = args.source or DEFAULT_SOURCES
     args.source = source_paths
     file_rows, texts = analyze_sources(source_paths)
-    status_rows = build_status_rows(file_rows, texts)
-    summary = build_summary(file_rows, status_rows)
+    data_rows = event_object_data_rows(texts)
+    status_rows = build_status_rows(file_rows, texts, data_rows)
+    summary = build_summary(file_rows, status_rows, data_rows)
     anchors = protocol_anchors(texts, status_rows, summary)
     write_csv(args.out, FILE_FIELDNAMES, file_rows)
     write_csv(args.status_out, STATUS_FIELDNAMES, status_rows)
+    write_csv(args.data_rows_out, DATA_ROW_FIELDNAMES, data_rows)
     write_csv(args.summary_out, SUMMARY_FIELDNAMES, [summary])
     write_csv(args.anchors_out, ANCHOR_FIELDNAMES, anchors)
     write_markdown(args.markdown_out, summary, status_rows, anchors)
     write_manifest(args.manifest_out, args, summary, anchors, len(file_rows), started)
     print(args.out)
     print(args.status_out)
+    print(args.data_rows_out)
     print(args.summary_out)
     print(args.anchors_out)
     print(args.markdown_out)
@@ -150,6 +165,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--source", action="append", type=Path, default=[])
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--status-out", type=Path, default=DEFAULT_STATUS_OUT)
+    parser.add_argument("--data-rows-out", type=Path, default=DEFAULT_DATA_ROWS_OUT)
     parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
     parser.add_argument("--anchors-out", type=Path, default=DEFAULT_ANCHORS_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
@@ -248,7 +264,9 @@ def experiment_for_path(path: Path) -> str:
 def build_status_rows(
     file_rows: list[dict[str, object]],
     texts: list[SourceText],
+    data_rows: list[dict[str, object]] | None = None,
 ) -> list[dict[str, object]]:
+    data_rows = event_object_data_rows(texts) if data_rows is None else data_rows
     rows_by_experiment: dict[str, list[dict[str, object]]] = {}
     text_by_experiment: dict[str, str] = {}
     for row in file_rows:
@@ -261,14 +279,15 @@ def build_status_rows(
         )
     pumbedita_rows = count_numbered_pdf_rows(texts, "pumbedita")
     auschwitz_rows = count_numbered_pdf_rows(texts, "auschwitz")
+    sons_rows = sum(1 for row in data_rows if row["experiment"] == "sons_of_haman")
     status = [
         {
             "experiment": "sons_of_haman",
             "source_files": len(rows_by_experiment.get("sons_of_haman", [])),
-            "data_rows": "",
+            "data_rows": sons_rows,
             "declared_status": "reported_significant_followup_after_non_significant_original",
             "protocol_table_present": has_protocol_table(text_by_experiment.get("sons_of_haman", "")),
-            "notes": "main page says original test was not significant; data page reports p-value 16.5/10000 for follow-up",
+            "notes": "main page says original test was not significant; data page lists Hebrew keywords and reports p-value 16.5/10000 for follow-up",
         },
         {
             "experiment": "pumbedita",
@@ -301,7 +320,9 @@ def build_status_rows(
 def build_summary(
     file_rows: list[dict[str, object]],
     status_rows: list[dict[str, object]],
+    data_rows: list[dict[str, object]] | None = None,
 ) -> dict[str, object]:
+    data_rows = [] if data_rows is None else data_rows
     page_total = sum(int(row["pdf_pages"] or 0) for row in file_rows)
     status_counts = Counter(str(row["declared_status"]) for row in status_rows)
     return {
@@ -321,8 +342,18 @@ def build_summary(
             + status_counts["reported_non_significant_replication"]
         ),
         "under_construction_pages": status_counts["under_construction"],
+        "sons_of_haman_keyword_rows": sum(
+            1 for row in data_rows if row["experiment"] == "sons_of_haman"
+        ),
         "pumbedita_rows": data_rows_for(status_rows, "pumbedita"),
         "auschwitz_rows": data_rows_for(status_rows, "auschwitz"),
+        "auschwitz_topic_keyword_rows": sum(
+            1
+            for row in data_rows
+            if row["experiment"] == "auschwitz"
+            and row["source_table"] == "auschwitz_topic_keyword"
+        ),
+        "machine_data_rows": len(data_rows),
         "ark_pdf_pages": ark_pdf_pages(file_rows),
         "claim_status": "source_shape_only_not_result_bearing",
     }
@@ -422,6 +453,134 @@ def protocol_anchors(
     ]
 
 
+def event_object_data_rows(texts: list[SourceText]) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for source_text in texts:
+        if source_text.experiment == "sons_of_haman" and source_text.path.suffix == ".html":
+            rows.extend(sons_of_haman_keyword_rows(source_text))
+        if source_text.experiment == "pumbedita" and source_text.path.suffix.lower() == ".pdf":
+            rows.extend(numbered_pdf_data_rows(source_text, "pumbedita_amoraim"))
+        if source_text.experiment == "auschwitz" and source_text.path.suffix.lower() == ".pdf":
+            rows.extend(numbered_pdf_data_rows(source_text, "auschwitz"))
+    return rows
+
+
+def sons_of_haman_keyword_rows(source_text: SourceText) -> list[dict[str, object]]:
+    extractor = TextExtractor()
+    extractor.feed(source_text.raw_text)
+    rows: list[dict[str, object]] = []
+    in_keyword_list = False
+    for part in extractor.parts:
+        for line in [line.strip() for line in part.splitlines() if line.strip()]:
+            if line == "Key Word List":
+                in_keyword_list = True
+                continue
+            if in_keyword_list and line in {"Sons of Haman", "Experimental Protocol"}:
+                return rows
+            if not in_keyword_list or not re.search(r"[\u0590-\u05ff]", line):
+                continue
+            keyword = line
+            rows.append(
+                {
+                    "experiment": "sons_of_haman",
+                    "source_table": "sons_of_haman_keyword_list",
+                    "row_index": len(rows) + 1,
+                    "english_label": "",
+                    "hebrew_keyword": keyword,
+                    "raw_line": keyword,
+                }
+            )
+    return rows
+
+
+def numbered_pdf_data_rows(source_text: SourceText, source_table: str) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    last_by_column: dict[str, dict[str, object]] = {}
+    for raw_line in source_text.plain_text.splitlines():
+        line = raw_line.rstrip()
+        matches = list(re.finditer(r"(?<!\S)(\d{1,2})\s+[A-Z]", line))
+        if matches:
+            for offset, match in enumerate(matches):
+                end = matches[offset + 1].start() if offset + 1 < len(matches) else len(line)
+                segment = line[match.start() : end].rstrip()
+                row = parse_numbered_segment(source_text.experiment, source_table, segment)
+                if not row:
+                    continue
+                if source_table == "auschwitz" and row["english_label"] == "Of Auschwitz":
+                    row["source_table"] = "auschwitz_topic_keyword"
+                elif source_table == "auschwitz":
+                    row["source_table"] = "auschwitz_subcamp_keywords"
+                rows.append(row)
+                column = "left" if match.start() < 35 else "right"
+                last_by_column[column] = row
+            continue
+        continuation = parse_continuation_segment(line)
+        if not continuation:
+            continue
+        first_nonspace = len(line) - len(line.lstrip())
+        column = "left" if first_nonspace < 35 else "right"
+        previous = last_by_column.get(column)
+        if previous is None:
+            continue
+        previous["english_label"] = f"{previous['english_label']} {continuation[0]}".strip()
+        previous["hebrew_keyword"] = f"{previous['hebrew_keyword']} {continuation[1]}".strip()
+        previous["raw_line"] = f"{previous['raw_line']} / {line.strip()}"
+    table_order = {
+        "auschwitz_topic_keyword": 0,
+        "auschwitz_subcamp_keywords": 1,
+    }
+    return sorted(
+        rows,
+        key=lambda row: (
+            table_order.get(str(row["source_table"]), 0),
+            int(row["row_index"]),
+        ),
+    )
+
+
+def parse_numbered_segment(
+    experiment: str,
+    source_table: str,
+    segment: str,
+) -> dict[str, object] | None:
+    tokens = segment.strip().split()
+    if len(tokens) < 3 or not tokens[0].isdigit():
+        return None
+    first_hebrew = first_hebrew_token(tokens[1:])
+    if first_hebrew is None:
+        return None
+    hebrew_index = first_hebrew + 1
+    english_tokens = tokens[1:hebrew_index]
+    hebrew_tokens = tokens[hebrew_index:]
+    return {
+        "experiment": experiment,
+        "source_table": source_table,
+        "row_index": int(tokens[0]),
+        "english_label": " ".join(english_tokens),
+        "hebrew_keyword": " ".join(hebrew_tokens),
+        "raw_line": segment.strip(),
+    }
+
+
+def first_hebrew_token(tokens: list[str]) -> int | None:
+    for index, token in enumerate(tokens):
+        if re.fullmatch(r"[`a-z]+", token):
+            return index
+    return None
+
+
+def parse_continuation_segment(line: str) -> tuple[str, str] | None:
+    tokens = line.strip().split()
+    if len(tokens) < 2 or tokens[0].isdigit():
+        return None
+    first_hebrew = first_hebrew_token(tokens)
+    if first_hebrew is None or first_hebrew == 0:
+        return None
+    english = " ".join(tokens[:first_hebrew])
+    hebrew = " ".join(tokens[first_hebrew:])
+    return english, hebrew
+
+
 def count_numbered_pdf_rows(texts: list[SourceText], experiment: str) -> int:
     total = 0
     for source_text in texts:
@@ -516,8 +675,11 @@ def write_markdown(
         f"| reported significant follow-up pages | {summary['reported_significant_pages']} |",
         f"| reported non-significant pages | {summary['reported_non_significant_pages']} |",
         f"| under-construction pages | {summary['under_construction_pages']} |",
+        f"| Sons of Haman keyword rows | {summary['sons_of_haman_keyword_rows']} |",
         f"| Pumbedita numbered source rows | {summary['pumbedita_rows']} |",
         f"| Auschwitz numbered source rows | {summary['auschwitz_rows']} |",
+        f"| Auschwitz topic keyword rows | {summary['auschwitz_topic_keyword_rows']} |",
+        f"| machine data rows extracted | {summary['machine_data_rows']} |",
         f"| Ark tutorial PDF pages | {summary['ark_pdf_pages']} |",
         "",
         "## Declared Status",
@@ -551,9 +713,10 @@ def write_markdown(
             "## Use Boundary",
             "",
             "This audit records source availability, source shape, row counts, and",
-            "declared status for event/object experiment pages. It does not normalize",
-            "Hebrew spellings, choose variants, run ELS hits, evaluate controls, or",
-            "verify any reported p-value.",
+            "declared status for event/object experiment pages. It also exports",
+            "machine-readable source rows from the available keyword lists and data",
+            "PDFs. It does not normalize Hebrew spellings, choose variants, run ELS",
+            "hits, evaluate controls, or verify any reported p-value.",
         ]
     )
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -588,6 +751,7 @@ def write_manifest(
         "outputs": {
             "files": str(args.out),
             "status": str(args.status_out),
+            "data_rows": str(args.data_rows_out),
             "summary": str(args.summary_out),
             "anchors": str(args.anchors_out),
             "markdown": str(args.markdown_out),

@@ -16,15 +16,18 @@ statistical test, and not a claim-ready replication.
 | reported significant follow-up pages | 1 |
 | reported non-significant pages | 2 |
 | under-construction pages | 1 |
+| Sons of Haman keyword rows | 12 |
 | Pumbedita numbered source rows | 20 |
 | Auschwitz numbered source rows | 32 |
+| Auschwitz topic keyword rows | 1 |
+| machine data rows extracted | 65 |
 | Ark tutorial PDF pages | 57 |
 
 ## Declared Status
 
 | Experiment | Source Files | Data Rows | Declared Status | Notes |
 | --- | ---: | ---: | --- | --- |
-| sons_of_haman | 2 |  | reported_significant_followup_after_non_significant_original | main page says original test was not significant; data page reports p-value 16.5/10000 for follow-up |
+| sons_of_haman | 2 | 12 | reported_significant_followup_after_non_significant_original | main page says original test was not significant; data page lists Hebrew keywords and reports p-value 16.5/10000 for follow-up |
 | pumbedita | 2 | 20 | reported_non_significant | source page reports failed significance test; PDF has Amoraim spelling rows |
 | auschwitz | 2 | 32 | reported_non_significant_replication | source page cites Witztum probability but reports local replication not significant |
 | ark | 2 |  | under_construction | source page is under construction and links a tutorial PDF, not a completed experiment data sheet |
@@ -49,6 +52,7 @@ Found anchors: 10 of 10.
 ## Use Boundary
 
 This audit records source availability, source shape, row counts, and
-declared status for event/object experiment pages. It does not normalize
-Hebrew spellings, choose variants, run ELS hits, evaluate controls, or
-verify any reported p-value.
+declared status for event/object experiment pages. It also exports
+machine-readable source rows from the available keyword lists and data
+PDFs. It does not normalize Hebrew spellings, choose variants, run ELS
+hits, evaluate controls, or verify any reported p-value.

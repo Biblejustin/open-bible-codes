@@ -221,8 +221,10 @@ rows, and 8 downloaded detail-page rows, leaving a 4-page detail-source coverage
 gap. The Cities audit confirms 13 source-chain files,
 6 `.pdf`-named HTML wrappers, 1 parse-error PDF, 1 no-text PDF, and 7/7 source
 anchors. The event/object audit confirms 8 source files, 20 Pumbedita rows, 32
-Auschwitz rows, a 57-page Ark tutorial PDF, one reported significant follow-up
-page, two reported non-significant pages, and one under-construction page.
+Auschwitz rows, 12 Sons-of-Haman keyword rows, 1 Auschwitz topic row, 65
+machine-readable source rows, a 57-page Ark tutorial PDF, one reported
+significant follow-up page, two reported non-significant pages, and one
+under-construction page.
 The under-construction audit confirms six placeholder pages, no PDF data links,
 four copied-title mismatches, and the Katrina page mislabeled as Tsunami.
 The missing-model-pages audit confirms that four linked Torah-code.org
