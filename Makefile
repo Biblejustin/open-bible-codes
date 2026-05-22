@@ -42,6 +42,7 @@ public-release-check:
 
 study-mapping-schemas:
 	python3 -m scripts.validate_study_mapping_schemas
+	python3 -m scripts.check_wrr_manual_decision_records
 
 expanded-strata-tooling-check:
 	python3 -m scripts.check_expanded_strata_tooling

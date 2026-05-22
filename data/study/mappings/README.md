@@ -13,6 +13,7 @@ templates for future work. Populated files must pass:
 
 ```bash
 python3 -m scripts.validate_study_mapping_schemas
+python3 -m scripts.check_wrr_manual_decision_records
 ```
 
 Before a populated mapping is used for claim-level language, lock it with the

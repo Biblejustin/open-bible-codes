@@ -36,6 +36,7 @@ Run:
 
 ```bash
 python3 -m scripts.validate_study_mapping_schemas
+python3 -m scripts.check_wrr_manual_decision_records
 ```
 
 or:
@@ -48,6 +49,11 @@ Header-only files pass so planning can remain public without implying content.
 Once rows are added, the validator checks required columns, non-empty lock
 fields, unique `mapping_id` values, supported language labels, and ordered
 chapter ranges.
+
+For `wrr_manual_decision_records.csv`, the row-level checker also requires each
+populated decision row to match the current WRR manual decision register by
+rank, lane, state, target, and checklist, with non-placeholder evidence and an
+ISO lock date.
 
 ## Lock Rule
 

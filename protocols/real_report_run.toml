@@ -364,6 +364,7 @@ inputs = [
   "scripts/build_wrr_remaining_lane_review_checklist.py",
   "scripts/check_wrr_remaining_lane_review_checklist_doc.py",
   "scripts/build_wrr_manual_decision_register.py",
+  "scripts/check_wrr_manual_decision_records.py",
   "scripts/check_wrr_manual_decision_register_doc.py",
   "scripts/build_wrr_method_pair_universe_evidence_packet.py",
   "scripts/check_wrr_method_pair_universe_evidence_packet_doc.py",

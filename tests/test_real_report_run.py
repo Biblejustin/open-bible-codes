@@ -308,6 +308,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_wrr_manual_decision_records.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_wrr_method_pair_universe_evidence_packet_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -770,6 +774,10 @@ class RealReportRunTests(unittest.TestCase):
             "scripts/check_wrr_method_status_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
+        self.assertIn(
+            "scripts/check_wrr_manual_decision_records.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
         self.assertIn("docs/EXPANDED_STRATA_TOOLING.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/STUDY_MAPPING_SCHEMAS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/CRD_PREREGISTRATION.md", preflight.DEFAULT_REQUIRED_PATHS)
@@ -926,6 +934,7 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("wrr_source_policy_review_checklist_doc_failures", payload)
             self.assertIn("wrr_remaining_lane_review_checklist_doc_failures", payload)
             self.assertIn("wrr_manual_decision_register_doc_failures", payload)
+            self.assertIn("wrr_manual_decision_record_failures", payload)
             self.assertIn("wrr_lock_options_doc_failures", payload)
             self.assertIn("wrr_method_status_doc_failures", payload)
             self.assertIn("stale_generated_indexes", payload)
@@ -1474,6 +1483,28 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "WRR manual decision register failures: "
                 "docs/WRR_MANUAL_DECISION_REGISTER.md missing boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_manual_decision_record_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_manual_decision_records,
+                "validate_decision_records",
+                return_value=["data/study/mappings/wrr_manual_decision_records.csv bad row"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_manual_decision_record_failures"],
+                ["data/study/mappings/wrr_manual_decision_records.csv bad row"],
+            )
+            self.assertIn(
+                "WRR manual decision record failures: "
+                "data/study/mappings/wrr_manual_decision_records.csv bad row",
                 payload["failures"],
             )
 
