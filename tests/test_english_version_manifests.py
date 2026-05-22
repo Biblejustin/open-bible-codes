@@ -77,6 +77,14 @@ class EnglishVersionManifestTests(unittest.TestCase):
 
         self.assertEqual(observed, expected)
 
+    def test_source_basis_audit_queue_has_no_current_needs_audit_rows(self) -> None:
+        rows = [*read_rows(BIBLEGATEWAY_MANIFEST), *read_rows(EBIBLE_CONTROLS)]
+
+        self.assertEqual(
+            [row["label"] for row in rows if row["basis_status"] == "needs_audit"],
+            [],
+        )
+
     def test_known_ebible_license_overrides_remain_tracked(self) -> None:
         rows = {row["label"]: row for row in read_rows(EBIBLE_CONTROLS)}
 
