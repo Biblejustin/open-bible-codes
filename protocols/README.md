@@ -105,6 +105,17 @@ shape outputs and writes a tracked source-boundary summary. It does not run
 ELS hits or compactness statistics. Tracked audit:
 `docs/GANS_COMMUNITIES_SOURCE_AUDIT.md`.
 
+American presidents source-shape audit:
+
+```bash
+python3 -m scripts.run_protocol protocols/american_presidents_source_audit.toml --resume
+```
+
+This parses the Torah-code.org American presidents data PDF and linked
+transliteration-rule PDF into ignored source-shape outputs. It does not choose
+variants, run ELS hits, or evaluate controls. Tracked audit:
+`docs/AMERICAN_PRESIDENTS_SOURCE_AUDIT.md`.
+
 WRR imported-term Genesis count and pair smoke:
 
 ```bash

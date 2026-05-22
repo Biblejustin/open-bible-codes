@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 312
+Documents indexed: 313
 
 ## Controls
 
@@ -175,6 +175,7 @@ Documents indexed: 312
 | All-Codes Follow-Up Review | `ALL_CODES_FOLLOWUP_REVIEW.md` |
 | All-Codes Follow-Up Selection | `ALL_CODES_FOLLOWUP_SELECTION.md` |
 | Amandasaurus Biblecode Prior-Art Audit | `AMANDASAURUS_BIBLECODE_PRIOR_ART_AUDIT.md` |
+| American Presidents Source Audit | `AMERICAN_PRESIDENTS_SOURCE_AUDIT.md` |
 | LXX Apocrypha Bridge Candidates | `APOCRYPHA_BRIDGE_CANDIDATES.md` |
 | Apocrypha Bridge Completion Review | `APOCRYPHA_BRIDGE_COMPLETION_REVIEW.md` |
 | LXX Apocrypha Bridge Context | `APOCRYPHA_BRIDGE_CONTEXT.md` |

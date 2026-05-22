@@ -185,8 +185,11 @@ These are source leads, not claim-ready evidence.
   successful, non-significant, under-construction, or critique/replication.
 - American presidents: useful as a non-rabbinic proper-name transliteration
   test because the page supplies rule-based English-to-Hebrew spelling rules
-  and input data. It should be a separate protocol from WRR because the
-  alternative hypothesis and transliteration generation are different.
+  and input data. The source-shape audit in
+  `docs/AMERICAN_PRESIDENTS_SOURCE_AUDIT.md` now confirms 42 data records and
+  292 spelling rows before any variant-choice or ELS test. It should be a
+  separate protocol from WRR because the alternative hypothesis and
+  transliteration generation are different.
 - Israeli prime ministers: useful as a small modern-person/entity protocol with
   linked keyword pages. The current crawl found keyword pages 1..8; later
   missing or unpublished pages should be treated as missing source material, not
@@ -276,6 +279,12 @@ communities data PDF into ignored source-shape CSVs and a tracked audit
 summary. It verifies the 66-record data table shape and protocol anchors, but
 does not normalize spellings, apply experiment filters, run ELS hits, or test
 compactness.
+
+`scripts/analyze_american_presidents_source.py` parses the American presidents
+data PDF and linked English-to-Hebrew transliteration-rule PDF into ignored
+source-shape CSVs and a tracked audit summary. It verifies the 42-record data
+table shape and rule anchors, but does not choose variants, run ELS hits, or
+evaluate controls.
 
 `scripts/simulate_torah_code_research_model.py` turns the Torah-code.org
 research-program geometric level-1 model into a reproducible simulation harness.
