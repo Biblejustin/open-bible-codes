@@ -73,6 +73,7 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             source_queue = root / "source_queue.csv"
             method_status = root / "method_status.csv"
             source_policy_scenarios = root / "source_policy_scenarios.csv"
+            dw_formula_sensitivity = root / "dw_formula_sensitivity.csv"
             out = root / "packet.csv"
             markdown = root / "packet.md"
             manifest = root / "manifest.json"
@@ -134,6 +135,19 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                     }
                 ],
             )
+            write_csv(
+                dw_formula_sensitivity,
+                [
+                    {
+                        "scope": "all_lanes_cap1000",
+                        "row_count": "182",
+                        "printed_defined_corrected_distances": "72",
+                        "program_defined_corrected_distances": "72",
+                        "changed_pairs": "0",
+                        "diagnostic_read": "row-level printed/program comparison",
+                    }
+                ],
+            )
 
             rc = packet.main(
                 [
@@ -147,6 +161,8 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                     str(method_status),
                     "--source-policy-scenarios",
                     str(source_policy_scenarios),
+                    "--dw-formula-sensitivity",
+                    str(dw_formula_sensitivity),
                     "--out",
                     str(out),
                     "--markdown-out",
@@ -163,7 +179,9 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             self.assertIn("WRR Claim Blocker Packet", text)
             self.assertIn("Flagged Source-Review Rows", text)
             self.assertIn("Source Policy Scenario Impact", text)
+            self.assertIn("D(w) Formula Sensitivity", text)
             self.assertIn("exclude_wnp_zacut_only", text)
+            self.assertIn("all_lanes_cap1000", text)
             self.assertIn("No pair exclusion or D(w) formula is chosen here", text)
             self.assertTrue(manifest.exists())
 

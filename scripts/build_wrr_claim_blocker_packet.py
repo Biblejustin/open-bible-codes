@@ -19,6 +19,7 @@ DEFAULT_LOCK_OPTIONS = Path("reports/wrr_1994/wrr_lock_options.csv")
 DEFAULT_SOURCE_QUEUE = Path("reports/wrr_1994/wrr_source_review_queue.csv")
 DEFAULT_METHOD_STATUS = Path("reports/wrr_1994/wrr_method_status.csv")
 DEFAULT_SOURCE_POLICY_SCENARIOS = Path("reports/wrr_1994/wrr_source_policy_scenarios.csv")
+DEFAULT_DW_FORMULA_SENSITIVITY = Path("reports/wrr_1994/wrr_dw_formula_sensitivity.csv")
 DEFAULT_OUT = Path("reports/wrr_1994/wrr_claim_blocker_packet.csv")
 DEFAULT_MD = Path("docs/WRR_CLAIM_BLOCKER_PACKET.md")
 DEFAULT_MANIFEST = Path("reports/wrr_1994/wrr_claim_blocker_packet.manifest.json")
@@ -71,10 +72,25 @@ def main(argv: list[str] | None = None) -> int:
     source_rows = read_rows(args.source_queue)
     method_rows = read_rows(args.method_status)
     source_policy_rows = read_optional_rows(args.source_policy_scenarios)
+    dw_formula_rows = read_optional_rows(args.dw_formula_sensitivity)
     packet_rows = build_packet_rows(readiness_rows, lock_rows, source_rows, method_rows)
     write_csv(args.out, packet_rows)
-    write_markdown(args.markdown_out, packet_rows, source_rows, source_policy_rows, args)
-    write_manifest(args.manifest_out, args, packet_rows, source_policy_rows, started)
+    write_markdown(
+        args.markdown_out,
+        packet_rows,
+        source_rows,
+        source_policy_rows,
+        dw_formula_rows,
+        args,
+    )
+    write_manifest(
+        args.manifest_out,
+        args,
+        packet_rows,
+        source_policy_rows,
+        dw_formula_rows,
+        started,
+    )
     print(args.out)
     print(args.markdown_out)
     print(args.manifest_out)
@@ -91,6 +107,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--source-policy-scenarios",
         type=Path,
         default=DEFAULT_SOURCE_POLICY_SCENARIOS,
+    )
+    parser.add_argument(
+        "--dw-formula-sensitivity",
+        type=Path,
+        default=DEFAULT_DW_FORMULA_SENSITIVITY,
     )
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
@@ -164,6 +185,7 @@ def write_markdown(
     packet_rows: list[dict[str, str]],
     source_rows: list[dict[str, str]],
     source_policy_rows: list[dict[str, str]],
+    dw_formula_rows: list[dict[str, str]],
     args: argparse.Namespace,
 ) -> None:
     lines = [
@@ -185,6 +207,7 @@ def write_markdown(
             f"--source-queue {args.source_queue} "
             f"--method-status {args.method_status} "
             f"--source-policy-scenarios {args.source_policy_scenarios} "
+            f"--dw-formula-sensitivity {args.dw_formula_sensitivity} "
             f"--out {args.out} "
             f"--markdown-out {args.markdown_out} "
             f"--manifest-out {args.manifest_out}"
@@ -251,6 +274,30 @@ def write_markdown(
                     remaining_len=markdown_cell(row.get("remaining_length_filtered_pairs", "")),
                 )
             )
+    if dw_formula_rows:
+        lines.extend(
+            [
+                "",
+                "## D(w) Formula Sensitivity",
+                "",
+                "| Scope | Rows | Printed defined | Program defined | Changed pairs | Read |",
+                "| --- | ---: | ---: | ---: | ---: | --- |",
+            ]
+        )
+        for row in dw_formula_rows:
+            lines.append(
+                (
+                    "| {scope} | {rows} | {printed} | "
+                    "{program} | {changed} | {read} |"
+                ).format(
+                    scope=markdown_cell(row.get("scope", "")),
+                    rows=markdown_cell(row.get("row_count", "")),
+                    printed=markdown_cell(row.get("printed_defined_corrected_distances", "")),
+                    program=markdown_cell(row.get("program_defined_corrected_distances", "")),
+                    changed=markdown_cell(row.get("changed_pairs", "")),
+                    read=markdown_cell(row.get("diagnostic_read", "")),
+                )
+            )
     flagged_rows = flagged_source_rows(source_rows)
     if flagged_rows:
         lines.extend(
@@ -312,6 +359,7 @@ def write_manifest(
     args: argparse.Namespace,
     rows: list[dict[str, str]],
     source_policy_rows: list[dict[str, str]],
+    dw_formula_rows: list[dict[str, str]],
     started: float,
 ) -> None:
     payload = {
@@ -321,12 +369,14 @@ def write_manifest(
         "duration_seconds": round(time.perf_counter() - started, 6),
         "blocker_rows": len(rows),
         "source_policy_scenario_rows": len(source_policy_rows),
+        "dw_formula_sensitivity_rows": len(dw_formula_rows),
         "inputs": {
             "readiness": str(args.readiness),
             "lock_options": str(args.lock_options),
             "source_queue": str(args.source_queue),
             "method_status": str(args.method_status),
             "source_policy_scenarios": str(args.source_policy_scenarios),
+            "dw_formula_sensitivity": str(args.dw_formula_sensitivity),
         },
         "outputs": {
             "out": str(args.out),
@@ -335,7 +385,10 @@ def write_manifest(
         },
     }
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
 
 
 def markdown_cell(value: object) -> str:

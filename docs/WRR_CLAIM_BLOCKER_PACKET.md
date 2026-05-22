@@ -9,7 +9,7 @@ queue flags into one handoff artifact.
 ## Reproduce
 
 ```bash
-python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
+python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --dw-formula-sensitivity reports/wrr_1994/wrr_dw_formula_sensitivity.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
 ```
 
 ## Blockers
@@ -39,6 +39,14 @@ python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/w
 | exclude_book_title_only | `diagnostic_exclusion` | 1 | 164 | -1 | 86 |
 | review_chelm_spelling_only | `review_only` | 0 | 165 | -2 | 86 |
 | exclude_all_source_review_flags | `diagnostic_exclusion` | 11 | 154 | 9 | 78 |
+
+## D(w) Formula Sensitivity
+
+| Scope | Rows | Printed defined | Program defined | Changed pairs | Read |
+| --- | ---: | ---: | ---: | ---: | --- |
+| skip_cap_profile | 120 |  |  |  | profile only; final D(w) formula not selected |
+| smoke_length_5_8_cap250 | 86 | 28 | 28 |  | smoke lane sensitivity; no D(w) formula selected |
+| all_lanes_cap1000 | 182 | 72 | 72 | 0 | row-level printed/program comparison; no D(w) formula selected |
 
 ## Flagged Source-Review Rows
 
