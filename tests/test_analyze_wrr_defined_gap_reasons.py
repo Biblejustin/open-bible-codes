@@ -84,6 +84,8 @@ class WrrDefinedGapReasonTests(unittest.TestCase):
                 [
                     {
                         "pair_id": "p1",
+                        "concept": "WRR2 01",
+                        "candidate_lane": "sample_lane",
                         "appellation_term_id": "app1",
                         "appellation_term": "APP",
                         "appellation_normalized": "APP",
@@ -93,6 +95,8 @@ class WrrDefinedGapReasonTests(unittest.TestCase):
                     },
                     {
                         "pair_id": "p2",
+                        "concept": "WRR2 02",
+                        "candidate_lane": "sample_lane",
                         "appellation_term_id": "app2",
                         "appellation_term": "APP2",
                         "appellation_normalized": "APP2",
@@ -156,6 +160,9 @@ class WrrDefinedGapReasonTests(unittest.TestCase):
             self.assertEqual(by_reason[audit.REASON_ORDINARY_NO_APPELLATION]["pairs"], "1")
             term_rows = list(csv.DictReader(term_out.open(encoding="utf-8")))
             self.assertEqual(term_rows[0]["term_id"], "app2")
+            self.assertEqual(term_rows[0]["concepts"], "WRR2 02")
+            self.assertEqual(term_rows[0]["candidate_lanes"], "sample_lane")
+            self.assertEqual(term_rows[0]["pair_ids"], "p2")
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("WRR Defined Gap Reason Audit", text)
             self.assertIn("Gap to the source-cited count remains 2", text)

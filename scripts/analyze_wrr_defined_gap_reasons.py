@@ -87,6 +87,9 @@ TERM_FIELDNAMES = [
     "defined_perturbed_rows",
     "triples_with_defined_rows",
     "ordinary_not_valid_pairs",
+    "concepts",
+    "candidate_lanes",
+    "pair_ids",
     "reasons",
 ]
 
@@ -238,6 +241,9 @@ def reason_for_row(row: dict[str, str]) -> str:
 def term_burden_rows(run: RunSpec, rows: list[dict[str, str]]) -> list[dict[str, object]]:
     buckets: dict[tuple[str, str], dict[str, object]] = {}
     reasons: dict[tuple[str, str], set[str]] = defaultdict(set)
+    contexts: dict[tuple[str, str], dict[str, set[str]]] = defaultdict(
+        lambda: {"concepts": set(), "candidate_lanes": set(), "pair_ids": set()}
+    )
     counts: Counter[tuple[str, str]] = Counter()
     for row in rows:
         reason = reason_for_row(row)
@@ -247,6 +253,9 @@ def term_burden_rows(run: RunSpec, rows: list[dict[str, str]]) -> list[dict[str,
             key = (side, row[f"{side}_term_id"])
             counts[key] += 1
             reasons[key].add(reason)
+            contexts[key]["concepts"].add(row.get("concept", ""))
+            contexts[key]["candidate_lanes"].add(row.get("candidate_lane", ""))
+            contexts[key]["pair_ids"].add(row.get("pair_id", ""))
             buckets[key] = {
                 "run_label": run.label,
                 "term_side": side,
@@ -261,6 +270,9 @@ def term_burden_rows(run: RunSpec, rows: list[dict[str, str]]) -> list[dict[str,
     for key, count in counts.items():
         row = dict(buckets[key])
         row["ordinary_not_valid_pairs"] = count
+        row["concepts"] = joined_context(contexts[key]["concepts"])
+        row["candidate_lanes"] = joined_context(contexts[key]["candidate_lanes"])
+        row["pair_ids"] = joined_context(contexts[key]["pair_ids"])
         row["reasons"] = ";".join(sorted(reasons[key], key=reason_sort_key))
         out.append(row)
     return sorted(
@@ -284,6 +296,10 @@ def contributing_sides(row: dict[str, str], reason: str) -> tuple[str, ...]:
     if reason in (REASON_ORDINARY_NO_SHARED_DEFINED, REASON_ORDINARY_TRIPLE_ONLY):
         return ("appellation", "date")
     return ()
+
+
+def joined_context(values: set[str]) -> str:
+    return ";".join(sorted(value for value in values if value))
 
 
 def write_markdown(
@@ -344,13 +360,13 @@ def write_markdown(
                 "",
                 "## Top Ordinary-Missing Terms In Best Run",
                 "",
-                "| Side | Term id | Term | Normalized | Ordinary hits | Defined rows | Pairs blocked | Reasons |",
-                "| --- | --- | --- | --- | ---: | ---: | ---: | --- |",
+                "| Side | Term id | Concepts | Term | Normalized | Ordinary hits | Defined rows | Pairs blocked | Reasons |",
+                "| --- | --- | --- | --- | --- | ---: | ---: | ---: | --- |",
             ]
         )
         for row in best_terms:
             lines.append(
-                "| {term_side} | `{term_id}` | `{term}` | `{normalized}` | "
+                "| {term_side} | `{term_id}` | `{concepts}` | `{term}` | `{normalized}` | "
                 "{ordinary_hits} | {defined_perturbed_rows} | "
                 "{ordinary_not_valid_pairs} | `{reasons}` |".format(**row)
             )

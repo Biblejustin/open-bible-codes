@@ -39,20 +39,20 @@ python3 -m scripts.analyze_wrr_defined_gap_reasons --pair-summary reports/wrr_19
 
 ## Top Ordinary-Missing Terms In Best Run
 
-| Side | Term id | Term | Normalized | Ordinary hits | Defined rows | Pairs blocked | Reasons |
-| --- | --- | --- | --- | ---: | ---: | ---: | --- |
-| date | `wrr2_27_date_01` | `/+Z/T$RY` | `+ZT$RY` | 0 | 8 | 14 | `ordinary_missing_date_hits;ordinary_missing_both_terms` |
-| date | `wrr2_06_date_01` | `/KB/KSLW` | `KBKSLW` | 0 | 41 | 6 | `ordinary_missing_date_hits;ordinary_missing_both_terms` |
-| date | `wrr2_02_date_01` | `/YG/SYWN` | `YGSYWN` | 0 | 45 | 5 | `ordinary_missing_date_hits;ordinary_missing_both_terms` |
-| appellation | `wrr2_27_app_04` | `M$HZKWT` | `M$HZKWT` | 0 | 6 | 2 | `ordinary_missing_appellation_hits;ordinary_missing_both_terms` |
-| appellation | `wrr2_27_app_05` | `M$HZKWTA` | `M$HZKWT)` | 0 | 0 | 2 | `ordinary_missing_appellation_hits;ordinary_missing_both_terms` |
-| appellation | `wrr2_27_app_06` | `M$HZKWTW` | `M$HZKWTW` | 0 | 1 | 2 | `ordinary_missing_appellation_hits;ordinary_missing_both_terms` |
-| appellation | `wrr2_27_app_07` | `MHRMZKWT` | `MHRMZKWT` | 0 | 1 | 2 | `ordinary_missing_appellation_hits;ordinary_missing_both_terms` |
-| appellation | `wrr2_27_app_13` | `B@LQWLHRMZ` | `B(LQWLHRMZ` | 0 | 0 | 2 | `ordinary_missing_appellation_hits;ordinary_missing_both_terms` |
-| date | `wrr2_05_date_01` | `/Y+/NYSN` | `Y+NYSN` | 0 | 28 | 2 | `ordinary_missing_date_hits;ordinary_missing_both_terms` |
-| appellation | `wrr2_01_app_01` | `RBYABRHM` | `RBY)BRHM` | 0 | 6 | 1 | `ordinary_missing_appellation_hits` |
-| appellation | `wrr2_01_app_06` | `B@LHA$KWL` | `B(LH)$KWL` | 0 | 0 | 1 | `ordinary_missing_appellation_hits` |
-| appellation | `wrr2_01_app_08` | `HRBABBYTDYN` | `HRB)BBYTDYN` | 0 | 0 | 1 | `ordinary_missing_appellation_hits` |
+| Side | Term id | Concepts | Term | Normalized | Ordinary hits | Defined rows | Pairs blocked | Reasons |
+| --- | --- | --- | --- | --- | ---: | ---: | ---: | --- |
+| date | `wrr2_27_date_01` | `WRR2 27` | `/+Z/T$RY` | `+ZT$RY` | 0 | 8 | 14 | `ordinary_missing_date_hits;ordinary_missing_both_terms` |
+| date | `wrr2_06_date_01` | `WRR2 06` | `/KB/KSLW` | `KBKSLW` | 0 | 41 | 6 | `ordinary_missing_date_hits;ordinary_missing_both_terms` |
+| date | `wrr2_02_date_01` | `WRR2 02` | `/YG/SYWN` | `YGSYWN` | 0 | 45 | 5 | `ordinary_missing_date_hits;ordinary_missing_both_terms` |
+| appellation | `wrr2_27_app_04` | `WRR2 27` | `M$HZKWT` | `M$HZKWT` | 0 | 6 | 2 | `ordinary_missing_appellation_hits;ordinary_missing_both_terms` |
+| appellation | `wrr2_27_app_05` | `WRR2 27` | `M$HZKWTA` | `M$HZKWT)` | 0 | 0 | 2 | `ordinary_missing_appellation_hits;ordinary_missing_both_terms` |
+| appellation | `wrr2_27_app_06` | `WRR2 27` | `M$HZKWTW` | `M$HZKWTW` | 0 | 1 | 2 | `ordinary_missing_appellation_hits;ordinary_missing_both_terms` |
+| appellation | `wrr2_27_app_07` | `WRR2 27` | `MHRMZKWT` | `MHRMZKWT` | 0 | 1 | 2 | `ordinary_missing_appellation_hits;ordinary_missing_both_terms` |
+| appellation | `wrr2_27_app_13` | `WRR2 27` | `B@LQWLHRMZ` | `B(LQWLHRMZ` | 0 | 0 | 2 | `ordinary_missing_appellation_hits;ordinary_missing_both_terms` |
+| date | `wrr2_05_date_01` | `WRR2 05` | `/Y+/NYSN` | `Y+NYSN` | 0 | 28 | 2 | `ordinary_missing_date_hits;ordinary_missing_both_terms` |
+| appellation | `wrr2_01_app_01` | `WRR2 01` | `RBYABRHM` | `RBY)BRHM` | 0 | 6 | 1 | `ordinary_missing_appellation_hits` |
+| appellation | `wrr2_01_app_06` | `WRR2 01` | `B@LHA$KWL` | `B(LH)$KWL` | 0 | 0 | 1 | `ordinary_missing_appellation_hits` |
+| appellation | `wrr2_01_app_08` | `WRR2 01` | `HRBABBYTDYN` | `HRB)BBYTDYN` | 0 | 0 | 1 | `ordinary_missing_appellation_hits` |
 
 ## Interpretation
 
