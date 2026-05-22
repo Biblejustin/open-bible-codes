@@ -178,7 +178,10 @@ These are source leads, not claim-ready evidence.
   transparent alternatives before implementing full WRR corrected distance.
 - Witztum Genesis birth-date data: the paper/data file provide another declared
   personality/date-style data set to import after the WRR path has a fixed
-  parser and claim-safe report structure.
+  parser and claim-safe report structure. The source-shape audit in
+  `docs/WITZTUM_BIRTH_DATES_SOURCE_AUDIT.md` now confirms two S1/S2 sample
+  tables, 14 rows per table, 18 S1 name variants, 15 S2 name variants, and
+  51 date forms per table before any ELS/SL proximity computation.
 - Torah-code experiments index: the site explicitly presents a mixed list of
   successful and failed experiments. Treat this as a guard against cherry-picked
   source intake; source pages should be tagged by declared outcome, whether
@@ -285,6 +288,12 @@ data PDF and linked English-to-Hebrew transliteration-rule PDF into ignored
 source-shape CSVs and a tracked audit summary. It verifies the 42-record data
 table shape and rule anchors, but does not choose variants, run ELS hits, or
 evaluate controls.
+
+`scripts/analyze_witztum_birth_dates_source.py` parses the Witztum Genesis
+birth-date paper and data PDFs into ignored source-shape CSVs and a tracked
+audit summary. It verifies the S1/S2 sample-table shape and protocol anchors,
+but does not normalize terms into repo search rows, compute ELS/SL proximity,
+or rerank permutations.
 
 `scripts/simulate_torah_code_research_model.py` turns the Torah-code.org
 research-program geometric level-1 model into a reproducible simulation harness.

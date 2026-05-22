@@ -116,6 +116,17 @@ transliteration-rule PDF into ignored source-shape outputs. It does not choose
 variants, run ELS hits, or evaluate controls. Tracked audit:
 `docs/AMERICAN_PRESIDENTS_SOURCE_AUDIT.md`.
 
+Witztum birth-date source-shape audit:
+
+```bash
+python3 -m scripts.run_protocol protocols/witztum_birth_dates_source_audit.toml --resume
+```
+
+This parses the Witztum Genesis birth-date paper and data PDFs into ignored
+source-shape outputs for the S1/S2 sample tables. It does not normalize terms,
+run ELS/SL proximity, or rerank permutations. Tracked audit:
+`docs/WITZTUM_BIRTH_DATES_SOURCE_AUDIT.md`.
+
 WRR imported-term Genesis count and pair smoke:
 
 ```bash
