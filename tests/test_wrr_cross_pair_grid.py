@@ -1,5 +1,6 @@
 import unittest
 
+from els.protocol_runner import load_protocol
 from scripts.build_wrr_cross_pair_grid import build_grid_rows, summarize
 
 
@@ -69,6 +70,22 @@ class WrrCrossPairGridTests(unittest.TestCase):
         self.assertFalse(cross["same_record_pair"])
         self.assertEqual(cross["pair_review_status"], "cross_record_permutation_pair")
         self.assertEqual(cross["candidate_lane"], "length_5_8_permutation_candidate")
+
+    def test_method_status_refresh_declares_scenario_inputs(self) -> None:
+        protocol = load_protocol("protocols/wrr_cross_pair_grid.toml")
+        steps_by_id = {step["id"]: step for step in protocol["steps"]}
+        method_status = steps_by_id["build_wrr_method_status_after_cross_pair"]
+
+        self.assertIn(
+            "reports/wrr_1994/wrr_source_policy_scenarios.csv",
+            method_status["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_dw_formula_sensitivity.csv",
+            method_status["inputs"],
+        )
+        self.assertIn("--source-policy-scenarios", method_status["argv"])
+        self.assertIn("--dw-formula-sensitivity", method_status["argv"])
 
 
 def count_row(normalized: str, length: int, hits: int) -> dict[str, str]:
