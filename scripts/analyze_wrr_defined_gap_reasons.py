@@ -38,6 +38,7 @@ DEFAULT_RUNS = (
 )
 DEFAULT_OUT = Path("reports/wrr_1994/wrr_defined_gap_reasons.csv")
 DEFAULT_TERM_OUT = Path("reports/wrr_1994/wrr_defined_gap_term_burden.csv")
+DEFAULT_PAIR_OUT = Path("reports/wrr_1994/wrr_defined_gap_blocked_pairs.csv")
 DEFAULT_MD = Path("docs/WRR_DEFINED_GAP_REASON_AUDIT.md")
 DEFAULT_MANIFEST = Path("reports/wrr_1994/wrr_defined_gap_reason_audit.manifest.json")
 
@@ -97,6 +98,30 @@ TERM_FIELDNAMES = [
     "reasons",
 ]
 
+PAIR_FIELDNAMES = [
+    "run_label",
+    "pair_id",
+    "concept",
+    "candidate_lane",
+    "reason",
+    "corrected_distance_status",
+    "pair_valid_perturbations",
+    "row_ocr_pair_status",
+    "appellation_term_id",
+    "appellation_term",
+    "appellation_normalized",
+    "appellation_ordinary_hits",
+    "appellation_defined_perturbed_rows",
+    "appellation_row_ocr_status",
+    "date_term_id",
+    "date_term",
+    "date_normalized",
+    "date_ordinary_hits",
+    "date_defined_perturbed_rows",
+    "date_row_ocr_status",
+    "read",
+]
+
 
 @dataclass(frozen=True)
 class RunSpec:
@@ -113,16 +138,20 @@ def main(argv: list[str] | None = None) -> int:
     run_specs = parse_run_specs(args.run)
     summary_rows: list[dict[str, object]] = []
     term_rows: list[dict[str, object]] = []
+    pair_rows_out: list[dict[str, object]] = []
     for run in run_specs:
         rows = enrich_corrected_rows(read_rows(run.path), pair_rows)
         summary_rows.extend(summarize_run(run, rows, expected_defined))
         term_rows.extend(term_burden_rows(run, rows, row_ocr_rows))
+        pair_rows_out.extend(pair_blocker_rows(run, rows, row_ocr_rows))
     write_csv(args.out, SUMMARY_FIELDNAMES, summary_rows)
     write_csv(args.term_out, TERM_FIELDNAMES, term_rows)
-    write_markdown(args.markdown_out, summary_rows, term_rows, args)
-    write_manifest(args.manifest_out, args, run_specs, summary_rows, term_rows, started)
+    write_csv(args.pair_out, PAIR_FIELDNAMES, pair_rows_out)
+    write_markdown(args.markdown_out, summary_rows, term_rows, pair_rows_out, args)
+    write_manifest(args.manifest_out, args, run_specs, summary_rows, term_rows, pair_rows_out, started)
     print(args.out)
     print(args.term_out)
+    print(args.pair_out)
     print(args.markdown_out)
     print(args.manifest_out)
     return 0
@@ -141,6 +170,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--term-out", type=Path, default=DEFAULT_TERM_OUT)
+    parser.add_argument("--pair-out", type=Path, default=DEFAULT_PAIR_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
     parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST)
     return parser
@@ -316,10 +346,82 @@ def joined_context(values: set[str]) -> str:
     return ";".join(sorted(value for value in values if value))
 
 
+def pair_blocker_rows(
+    run: RunSpec,
+    rows: list[dict[str, str]],
+    row_ocr_rows: dict[str, dict[str, str]] | None = None,
+) -> list[dict[str, object]]:
+    out: list[dict[str, object]] = []
+    for row in rows:
+        reason = reason_for_row(row)
+        if reason == REASON_DEFINED:
+            continue
+        app_ocr = row_ocr_status(row_ocr_rows, row.get("appellation_term_id", ""))
+        date_ocr = row_ocr_status(row_ocr_rows, row.get("date_term_id", ""))
+        out.append(
+            {
+                "run_label": run.label,
+                "pair_id": row.get("pair_id", ""),
+                "concept": row.get("concept", ""),
+                "candidate_lane": row.get("candidate_lane", ""),
+                "reason": reason,
+                "corrected_distance_status": row.get("corrected_distance_status", ""),
+                "pair_valid_perturbations": row.get("pair_valid_perturbations", ""),
+                "row_ocr_pair_status": pair_ocr_status(app_ocr, date_ocr),
+                "appellation_term_id": row.get("appellation_term_id", ""),
+                "appellation_term": row.get("appellation_term", ""),
+                "appellation_normalized": row.get("appellation_normalized", ""),
+                "appellation_ordinary_hits": row.get("appellation_ordinary_hits", ""),
+                "appellation_defined_perturbed_rows": row.get(
+                    "appellation_defined_perturbed_rows", ""
+                ),
+                "appellation_row_ocr_status": app_ocr,
+                "date_term_id": row.get("date_term_id", ""),
+                "date_term": row.get("date_term", ""),
+                "date_normalized": row.get("date_normalized", ""),
+                "date_ordinary_hits": row.get("date_ordinary_hits", ""),
+                "date_defined_perturbed_rows": row.get("date_defined_perturbed_rows", ""),
+                "date_row_ocr_status": date_ocr,
+                "read": REASON_READS.get(reason, REASON_READS[REASON_OTHER]),
+            }
+        )
+    return sorted(
+        out,
+        key=lambda row: (
+            str(row["run_label"]),
+            reason_sort_key(str(row["reason"])),
+            str(row["concept"]),
+            str(row["pair_id"]),
+        ),
+    )
+
+
+def row_ocr_status(
+    row_ocr_rows: dict[str, dict[str, str]] | None,
+    term_id: str,
+) -> str:
+    if not term_id:
+        return "missing"
+    status = (row_ocr_rows or {}).get(term_id, {}).get("row_ocr_status", "")
+    return status or "missing"
+
+
+def pair_ocr_status(appellation_status: str, date_status: str) -> str:
+    statuses = {appellation_status or "missing", date_status or "missing"}
+    if statuses == {"matched"}:
+        return "both_matched"
+    if statuses == {"not_matched"}:
+        return "both_not_matched"
+    if "missing" in statuses:
+        return "has_missing"
+    return "mixed"
+
+
 def write_markdown(
     path: Path,
     summary_rows: list[dict[str, object]],
     term_rows: list[dict[str, object]],
+    pair_rows: list[dict[str, object]],
     args: argparse.Namespace,
 ) -> None:
     best = best_run(summary_rows)
@@ -343,6 +445,7 @@ def write_markdown(
             f"--row-ocr {args.row_ocr} "
             f"--out {args.out} "
             f"--term-out {args.term_out} "
+            f"--pair-out {args.pair_out} "
             f"--markdown-out {args.markdown_out} "
             f"--manifest-out {args.manifest_out}"
         ),
@@ -361,6 +464,7 @@ def write_markdown(
     if best:
         best_label = str(best["run_label"])
         best_terms = [row for row in term_rows if row["run_label"] == best_label][:12]
+        best_concepts = concept_blocker_rows(pair_rows, best_label)[:10]
         lines.extend(
             [
                 "",
@@ -373,6 +477,7 @@ def write_markdown(
                 f"- Gap to the source-cited count remains {best['run_gap_to_source_cited']}.",
                 best_read(summary_rows, best_label),
                 row_ocr_burden_read(term_rows, best_label),
+                pair_ocr_burden_read(pair_rows, best_label),
                 "",
                 "## Top Ordinary-Missing Terms In Best Run",
                 "",
@@ -385,6 +490,21 @@ def write_markdown(
                 "| {term_side} | `{term_id}` | `{concepts}` | `{term}` | `{row_ocr_status}` | "
                 "{ordinary_hits} | {defined_perturbed_rows} | "
                 "{ordinary_not_valid_pairs} | `{reasons}` |".format(**row)
+            )
+        lines.extend(
+            [
+                "",
+                "## Top Blocked Concepts In Best Run",
+                "",
+                "| Concept | Blocked pairs | Reasons | Row OCR pair statuses |",
+                "| --- | ---: | --- | --- |",
+            ]
+        )
+        for row in best_concepts:
+            lines.append(
+                "| `{concept}` | {blocked_pairs} | `{reasons}` | `{row_ocr_pair_statuses}` |".format(
+                    **row
+                )
             )
     lines.extend(
         [
@@ -449,6 +569,41 @@ def row_ocr_burden_read(term_rows: list[dict[str, object]], run_label: str) -> s
     )
 
 
+def pair_ocr_burden_read(pair_rows: list[dict[str, object]], run_label: str) -> str:
+    rows = [row for row in pair_rows if row["run_label"] == run_label]
+    if not rows:
+        return "- Pair Row-OCR burden summary unavailable."
+    counter: Counter[str] = Counter(str(row["row_ocr_pair_status"]) for row in rows)
+    return f"- Pair Row-OCR blockers: {format_counter(counter)}."
+
+
+def concept_blocker_rows(
+    pair_rows: list[dict[str, object]],
+    run_label: str,
+) -> list[dict[str, object]]:
+    counts: Counter[str] = Counter()
+    reasons: dict[str, Counter[str]] = defaultdict(Counter)
+    ocr_statuses: dict[str, Counter[str]] = defaultdict(Counter)
+    for row in pair_rows:
+        if row["run_label"] != run_label:
+            continue
+        concept = str(row.get("concept", ""))
+        counts[concept] += 1
+        reasons[concept][str(row.get("reason", ""))] += 1
+        ocr_statuses[concept][str(row.get("row_ocr_pair_status", ""))] += 1
+    out = []
+    for concept, count in counts.items():
+        out.append(
+            {
+                "concept": concept,
+                "blocked_pairs": count,
+                "reasons": format_counter(reasons[concept]),
+                "row_ocr_pair_statuses": format_counter(ocr_statuses[concept]),
+            }
+        )
+    return sorted(out, key=lambda row: (-int(row["blocked_pairs"]), str(row["concept"])))
+
+
 def format_counter(counter: Counter[str]) -> str:
     return ", ".join(f"{counter[key]} {key}" for key in sorted(counter))
 
@@ -497,6 +652,7 @@ def write_manifest(
     runs: list[RunSpec],
     summary_rows: list[dict[str, object]],
     term_rows: list[dict[str, object]],
+    pair_rows: list[dict[str, object]],
     started: float,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -514,11 +670,13 @@ def write_manifest(
         "outputs": {
             "out": str(args.out),
             "term_out": str(args.term_out),
+            "pair_out": str(args.pair_out),
             "markdown_out": str(args.markdown_out),
             "manifest_out": str(args.manifest_out),
         },
         "summary_rows": len(summary_rows),
         "term_rows": len(term_rows),
+        "pair_rows": len(pair_rows),
     }
     path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 

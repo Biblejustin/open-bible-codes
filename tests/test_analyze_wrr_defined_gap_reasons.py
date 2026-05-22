@@ -77,6 +77,7 @@ class WrrDefinedGapReasonTests(unittest.TestCase):
             corrected = root / "corrected.csv"
             out = root / "out.csv"
             term_out = root / "terms.csv"
+            pair_out = root / "pairs.csv"
             markdown = root / "out.md"
             manifest = root / "manifest.json"
             write_csv(pair_summary, [{"expected_published_pairs": "3"}])
@@ -142,6 +143,12 @@ class WrrDefinedGapReasonTests(unittest.TestCase):
                         "row_ocr_status": "matched",
                         "column": "name",
                         "match_basis": "row_exact",
+                    },
+                    {
+                        "term_id": "date2",
+                        "row_ocr_status": "not_matched",
+                        "column": "date",
+                        "match_basis": "row_exact",
                     }
                 ],
             )
@@ -160,6 +167,8 @@ class WrrDefinedGapReasonTests(unittest.TestCase):
                     str(out),
                     "--term-out",
                     str(term_out),
+                    "--pair-out",
+                    str(pair_out),
                     "--markdown-out",
                     str(markdown),
                     "--manifest-out",
@@ -180,10 +189,17 @@ class WrrDefinedGapReasonTests(unittest.TestCase):
             self.assertEqual(term_rows[0]["row_ocr_status"], "matched")
             self.assertEqual(term_rows[0]["row_ocr_column"], "name")
             self.assertEqual(term_rows[0]["row_ocr_match_basis"], "row_exact")
+            pair_rows = list(csv.DictReader(pair_out.open(encoding="utf-8")))
+            self.assertEqual(pair_rows[0]["pair_id"], "p2")
+            self.assertEqual(pair_rows[0]["row_ocr_pair_status"], "mixed")
+            self.assertEqual(pair_rows[0]["appellation_row_ocr_status"], "matched")
+            self.assertEqual(pair_rows[0]["date_row_ocr_status"], "not_matched")
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("WRR Defined Gap Reason Audit", text)
             self.assertIn("Gap to the source-cited count remains 2", text)
             self.assertIn("Row-OCR term burden", text)
+            self.assertIn("Pair Row-OCR blockers", text)
+            self.assertIn("Top Blocked Concepts", text)
             self.assertTrue(manifest.exists())
 
 

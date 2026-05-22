@@ -10,7 +10,7 @@ new ELS search.
 Reproduce:
 
 ```bash
-python3 -m scripts.analyze_wrr_defined_gap_reasons --pair-summary reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv --pair-table reports/wrr_1994/wrr2_pair_eligibility_table.csv --row-ocr reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv --out reports/wrr_1994/wrr_defined_gap_reasons.csv --term-out reports/wrr_1994/wrr_defined_gap_term_burden.csv --markdown-out docs/WRR_DEFINED_GAP_REASON_AUDIT.md --manifest-out reports/wrr_1994/wrr_defined_gap_reason_audit.manifest.json
+python3 -m scripts.analyze_wrr_defined_gap_reasons --pair-summary reports/wrr_1994/wrr2_pair_table_reconciliation_summary.csv --pair-table reports/wrr_1994/wrr2_pair_eligibility_table.csv --row-ocr reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv --out reports/wrr_1994/wrr_defined_gap_reasons.csv --term-out reports/wrr_1994/wrr_defined_gap_term_burden.csv --pair-out reports/wrr_1994/wrr_defined_gap_blocked_pairs.csv --markdown-out docs/WRR_DEFINED_GAP_REASON_AUDIT.md --manifest-out reports/wrr_1994/wrr_defined_gap_reason_audit.manifest.json
 ```
 
 ## Reason Counts
@@ -37,6 +37,7 @@ python3 -m scripts.analyze_wrr_defined_gap_reasons --pair-summary reports/wrr_19
 - Gap to the source-cited count remains 91.
 - Ordinary-missing rows total 110; under-minimum rows total 0.
 - Row-OCR term burden: 43 matched, 54 not_matched contributing terms; 56 matched, 69 not_matched blocked-pair contributions.
+- Pair Row-OCR blockers: 42 both_matched, 8 both_not_matched, 60 mixed.
 
 ## Top Ordinary-Missing Terms In Best Run
 
@@ -54,6 +55,21 @@ python3 -m scripts.analyze_wrr_defined_gap_reasons --pair-summary reports/wrr_19
 | appellation | `wrr2_01_app_01` | `WRR2 01` | `RBYABRHM` | `matched` | 0 | 6 | 1 | `ordinary_missing_appellation_hits` |
 | appellation | `wrr2_01_app_06` | `WRR2 01` | `B@LHA$KWL` | `not_matched` | 0 | 0 | 1 | `ordinary_missing_appellation_hits` |
 | appellation | `wrr2_01_app_08` | `WRR2 01` | `HRBABBYTDYN` | `not_matched` | 0 | 0 | 1 | `ordinary_missing_appellation_hits` |
+
+## Top Blocked Concepts In Best Run
+
+| Concept | Blocked pairs | Reasons | Row OCR pair statuses |
+| --- | ---: | --- | --- |
+| `WRR2 27` | 19 | `5 ordinary_missing_appellation_hits, 5 ordinary_missing_both_terms, 9 ordinary_missing_date_hits` | `3 both_matched, 6 both_not_matched, 10 mixed` |
+| `WRR2 19` | 7 | `7 ordinary_missing_appellation_hits` | `5 both_matched, 2 mixed` |
+| `WRR2 06` | 6 | `5 ordinary_missing_both_terms, 1 ordinary_missing_date_hits` | `2 both_matched, 4 mixed` |
+| `WRR2 02` | 5 | `4 ordinary_missing_both_terms, 1 ordinary_missing_date_hits` | `4 both_matched, 1 mixed` |
+| `WRR2 24` | 5 | `5 ordinary_missing_appellation_hits` | `2 both_matched, 3 mixed` |
+| `WRR2 26` | 5 | `5 ordinary_missing_appellation_hits` | `3 both_matched, 2 mixed` |
+| `WRR2 30` | 5 | `5 ordinary_missing_appellation_hits` | `5 mixed` |
+| `WRR2 32` | 5 | `5 ordinary_missing_appellation_hits` | `1 both_matched, 4 mixed` |
+| `WRR2 20` | 4 | `4 ordinary_missing_appellation_hits` | `3 both_matched, 1 mixed` |
+| `WRR2 23` | 4 | `4 ordinary_missing_appellation_hits` | `4 mixed` |
 
 ## Interpretation
 

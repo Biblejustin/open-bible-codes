@@ -752,6 +752,7 @@ argv = [
   "--run", "all_lanes_cap1000_program=reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv",
   "--out", "reports/wrr_1994/wrr_defined_gap_reasons.csv",
   "--term-out", "reports/wrr_1994/wrr_defined_gap_term_burden.csv",
+  "--pair-out", "reports/wrr_1994/wrr_defined_gap_blocked_pairs.csv",
   "--markdown-out", "docs/WRR_DEFINED_GAP_REASON_AUDIT.md",
   "--manifest-out", "reports/wrr_1994/wrr_defined_gap_reason_audit.manifest.json",
 ]
@@ -767,6 +768,7 @@ inputs = [
 outputs = [
   "reports/wrr_1994/wrr_defined_gap_reasons.csv",
   "reports/wrr_1994/wrr_defined_gap_term_burden.csv",
+  "reports/wrr_1994/wrr_defined_gap_blocked_pairs.csv",
   "docs/WRR_DEFINED_GAP_REASON_AUDIT.md",
   "reports/wrr_1994/wrr_defined_gap_reason_audit.manifest.json",
 ]
