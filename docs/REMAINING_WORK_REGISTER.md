@@ -107,6 +107,7 @@ Current pushed commits for this cleanup:
 - `021d7f9` List CRD findings in real report scope.
 - `d2b3a4e` Refresh CRD report scope status.
 - `c8f69b3` Guard manual review queue in preflight.
+- `7709397` Document manual review queue guard.
 
 ### Formal Real Report Rerun
 
