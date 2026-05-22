@@ -82,6 +82,8 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             residual_term_queue = root / "residual_term_queue.csv"
             method_pair_universe_summary = root / "method_pair_universe_summary.csv"
             source_transcription_summary = root / "source_transcription_summary.csv"
+            remaining_lane_summary = root / "remaining_lane_summary.csv"
+            remaining_lane_packet = root / "remaining_lane_packet.csv"
             out = root / "packet.csv"
             markdown = root / "packet.md"
             manifest = root / "manifest.json"
@@ -321,6 +323,51 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                     }
                 ],
             )
+            write_csv(
+                remaining_lane_summary,
+                [
+                    {
+                        "run_label": "all_lanes_cap1000",
+                        "action_lane": "page_image_near_match_review",
+                        "action_terms": "3",
+                        "residual_pairs": "3",
+                        "frontier_pairs": "2",
+                        "concepts": "2",
+                        "evidence_required": "page-image inspection against near-match OCR",
+                        "no_input_boundary": "No automatic source correction",
+                        "read": "near OCR exists, but page image must decide",
+                    }
+                ],
+            )
+            write_csv(
+                remaining_lane_packet,
+                [
+                    {
+                        "run_label": "all_lanes_cap1000",
+                        "evidence_rank": "1",
+                        "action_rank": "45",
+                        "action_lane": "page_image_near_match_review",
+                        "term_id": "wrr2_19_app_11",
+                        "term": "YWSP+RANY",
+                        "concept": "WRR2 19",
+                        "row_number": "19",
+                        "residual_pairs": "1",
+                        "frontier_pairs": "1",
+                        "review_buckets": "ocr_near_match_no_variant_lead",
+                        "row_ocr_status": "not_matched",
+                        "row_ocr_near_match_distance": "1",
+                        "row_ocr_near_match_text": "יוספטרני",
+                        "row_ocr_text_normalized": "רבייוספמטרני",
+                        "visual_review_note": "row OCR has one-edit near match",
+                        "visual_review_action": "keep as page-image near-match",
+                        "best_variant_hit_count": "0",
+                        "best_variant_rule": "none",
+                        "evidence_required": "page-image inspection",
+                        "no_input_boundary": "No automatic source correction",
+                        "evidence_read": "near OCR exists",
+                    }
+                ],
+            )
 
             rc = packet.main(
                 [
@@ -350,6 +397,10 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                     str(method_pair_universe_summary),
                     "--source-transcription-row-summary",
                     str(source_transcription_summary),
+                    "--remaining-lane-summary",
+                    str(remaining_lane_summary),
+                    "--remaining-lane-packet",
+                    str(remaining_lane_packet),
                     "--out",
                     str(out),
                     "--markdown-out",
@@ -381,6 +432,10 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             self.assertIn("Source-Transcription Priority Rows", text)
             self.assertIn("review multi-term rows once by row before term edits", text)
             self.assertIn("wrr2_06_app_03 B@LM@$YH$M", text)
+            self.assertIn("Page-Image Near-Match Evidence Summary", text)
+            self.assertIn("Page-Image Near-Match Terms", text)
+            self.assertIn("wrr2_19_app_11", text)
+            self.assertIn("near OCR exists, but page image must decide", text)
             self.assertIn("Method/Pair-Universe Evidence Summary", text)
             self.assertIn(
                 "| 11 | 11 | 11 | 11 | 11 | 2 | OCR matched all method-lane terms |",
@@ -399,6 +454,8 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             self.assertEqual(manifest_payload["residual_term_queue_rows"], 1)
             self.assertEqual(manifest_payload["method_pair_universe_summary_rows"], 1)
             self.assertEqual(manifest_payload["source_transcription_row_summary_rows"], 1)
+            self.assertEqual(manifest_payload["remaining_lane_summary_rows"], 1)
+            self.assertEqual(manifest_payload["remaining_lane_packet_rows"], 1)
 
 
 def write_csv(path: Path, rows: list[dict[str, str]]) -> None:

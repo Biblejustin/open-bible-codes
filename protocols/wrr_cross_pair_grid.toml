@@ -394,6 +394,8 @@ argv = [
   "--residual-term-queue", "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv",
   "--method-pair-universe-summary", "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
   "--source-transcription-row-summary", "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv",
+  "--remaining-lane-summary", "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
+  "--remaining-lane-packet", "reports/wrr_1994/wrr_remaining_lane_evidence_packet.csv",
   "--out", "reports/wrr_1994/wrr_claim_blocker_packet.csv",
   "--markdown-out", "docs/WRR_CLAIM_BLOCKER_PACKET.md",
   "--manifest-out", "reports/wrr_1994/wrr_claim_blocker_packet.manifest.json",
@@ -413,6 +415,8 @@ inputs = [
   "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv",
   "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
   "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv",
+  "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
+  "reports/wrr_1994/wrr_remaining_lane_evidence_packet.csv",
 ]
 outputs = [
   "reports/wrr_1994/wrr_claim_blocker_packet.csv",

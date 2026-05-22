@@ -9,7 +9,7 @@ queue flags, and visual triage notes into one handoff artifact.
 ## Reproduce
 
 ```bash
-python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --source-policy-term-impacts reports/wrr_1994/wrr_source_policy_term_impacts.csv --dw-formula-sensitivity reports/wrr_1994/wrr_dw_formula_sensitivity.csv --variant-residual-summary reports/wrr_1994/wrr_variant_residual_review_summary.csv --variant-residual-packet reports/wrr_1994/wrr_variant_residual_review_packet.csv --residual-term-summary reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv --residual-term-queue reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv --method-pair-universe-summary reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv --source-transcription-row-summary reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
+python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --source-policy-term-impacts reports/wrr_1994/wrr_source_policy_term_impacts.csv --dw-formula-sensitivity reports/wrr_1994/wrr_dw_formula_sensitivity.csv --variant-residual-summary reports/wrr_1994/wrr_variant_residual_review_summary.csv --variant-residual-packet reports/wrr_1994/wrr_variant_residual_review_packet.csv --residual-term-summary reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv --residual-term-queue reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv --method-pair-universe-summary reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv --source-transcription-row-summary reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv --remaining-lane-summary reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv --remaining-lane-packet reports/wrr_1994/wrr_remaining_lane_evidence_packet.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
 ```
 
 ## Blockers
@@ -112,6 +112,20 @@ The queue compresses repeated residual pair blockers into unique unresolved term
 | 3 | `24` | `WRR2 24` | 3 | 3 | 3 | wrr2_24_app_06 Y@QBY$RAL@MDN;wrr2_24_app_07 Y@QBY$RAL@MDYN;wrr2_24_app_09 RBYY@QBY$RAL |
 | 4 | `01` | `WRR2 01` | 2 | 2 | 2 | wrr2_01_app_06 B@LHA$KWL;wrr2_01_app_08 HRBABBYTDYN |
 | 5 | `03` | `WRR2 03` | 2 | 2 | 2 | wrr2_03_app_03 XSDLABRHM;wrr2_03_app_04 B@LXSDLABRHM |
+
+### Page-Image Near-Match Evidence Summary
+
+| Terms | Residual pairs | Frontier pairs | Concepts | Read |
+| ---: | ---: | ---: | ---: | --- |
+| 3 | 3 | 2 | 2 | near OCR exists, but page image must decide whether it is source evidence |
+
+### Page-Image Near-Match Terms
+
+| Rank | Term id | Term | Row | Near match | Visual note |
+| ---: | --- | --- | --- | --- | --- |
+| 1 | `wrr2_19_app_11` | `YWSP+RANY` | `19` | `d=1 יוספטרני` | primary page row visibly contains Maharit/Trani forms including Yosef Trani; row OCR has one-edit near match |
+| 2 | `wrr2_19_app_12` | `YWSPM+RANY` | `19` | `d=1 יוספמטרני` | primary page row visibly contains Maharit/Trani forms including Matrani/Mitrani variants; row OCR has one-edit near match |
+| 3 | `wrr2_31_app_07` | `$M$` | `31` | `d=1 שרש` | primary page row visibly contains Rabbi Shalom Sharabi forms including Sar Shalom and MaharaSHaSH; exact SMSh form is not settled by this crop |
 
 ### Method/Pair-Universe Evidence Summary
 

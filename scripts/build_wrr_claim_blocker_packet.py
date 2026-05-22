@@ -42,6 +42,12 @@ DEFAULT_METHOD_PAIR_UNIVERSE_SUMMARY = Path(
 DEFAULT_SOURCE_TRANSCRIPTION_ROW_SUMMARY = Path(
     "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv"
 )
+DEFAULT_REMAINING_LANE_SUMMARY = Path(
+    "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv"
+)
+DEFAULT_REMAINING_LANE_PACKET = Path(
+    "reports/wrr_1994/wrr_remaining_lane_evidence_packet.csv"
+)
 DEFAULT_OUT = Path("reports/wrr_1994/wrr_claim_blocker_packet.csv")
 DEFAULT_MD = Path("docs/WRR_CLAIM_BLOCKER_PACKET.md")
 DEFAULT_MANIFEST = Path("reports/wrr_1994/wrr_claim_blocker_packet.manifest.json")
@@ -100,6 +106,8 @@ def main(argv: list[str] | None = None) -> int:
     residual_term_queue_rows = read_optional_rows(args.residual_term_queue)
     method_pair_universe_rows = read_optional_rows(args.method_pair_universe_summary)
     source_transcription_rows = read_optional_rows(args.source_transcription_row_summary)
+    remaining_lane_summary_rows = read_optional_rows(args.remaining_lane_summary)
+    remaining_lane_packet_rows = read_optional_rows(args.remaining_lane_packet)
     packet_rows = build_packet_rows(readiness_rows, lock_rows, source_rows, method_rows)
     write_csv(args.out, packet_rows)
     write_markdown(
@@ -115,6 +123,8 @@ def main(argv: list[str] | None = None) -> int:
         residual_term_queue_rows,
         method_pair_universe_rows,
         source_transcription_rows,
+        remaining_lane_summary_rows,
+        remaining_lane_packet_rows,
         args,
     )
     write_manifest(
@@ -130,6 +140,8 @@ def main(argv: list[str] | None = None) -> int:
         residual_term_queue_rows,
         method_pair_universe_rows,
         source_transcription_rows,
+        remaining_lane_summary_rows,
+        remaining_lane_packet_rows,
         started,
     )
     print(args.out)
@@ -188,6 +200,16 @@ def build_parser() -> argparse.ArgumentParser:
         "--source-transcription-row-summary",
         type=Path,
         default=DEFAULT_SOURCE_TRANSCRIPTION_ROW_SUMMARY,
+    )
+    parser.add_argument(
+        "--remaining-lane-summary",
+        type=Path,
+        default=DEFAULT_REMAINING_LANE_SUMMARY,
+    )
+    parser.add_argument(
+        "--remaining-lane-packet",
+        type=Path,
+        default=DEFAULT_REMAINING_LANE_PACKET,
     )
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
@@ -307,6 +329,20 @@ def top_source_transcription_rows(
     return sorted(rows, key=lambda row: int_or_zero(row.get("row_rank", "")))[:limit]
 
 
+def page_image_near_match_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    filtered = [
+        row for row in rows if row.get("action_lane") == "page_image_near_match_review"
+    ]
+    return sorted(filtered, key=lambda row: int_or_zero(row.get("evidence_rank", "")))
+
+
+def page_image_summary_row(rows: list[dict[str, str]]) -> dict[str, str]:
+    for row in rows:
+        if row.get("action_lane") == "page_image_near_match_review":
+            return row
+    return {}
+
+
 def write_markdown(
     path: Path,
     packet_rows: list[dict[str, str]],
@@ -320,6 +356,8 @@ def write_markdown(
     residual_term_queue_rows: list[dict[str, str]],
     method_pair_universe_rows: list[dict[str, str]],
     source_transcription_rows: list[dict[str, str]],
+    remaining_lane_summary_rows: list[dict[str, str]],
+    remaining_lane_packet_rows: list[dict[str, str]],
     args: argparse.Namespace,
 ) -> None:
     status_line = (
@@ -354,6 +392,8 @@ def write_markdown(
             f"--residual-term-queue {args.residual_term_queue} "
             f"--method-pair-universe-summary {args.method_pair_universe_summary} "
             f"--source-transcription-row-summary {args.source_transcription_row_summary} "
+            f"--remaining-lane-summary {args.remaining_lane_summary} "
+            f"--remaining-lane-packet {args.remaining_lane_packet} "
             f"--out {args.out} "
             f"--markdown-out {args.markdown_out} "
             f"--manifest-out {args.manifest_out}"
@@ -551,6 +591,50 @@ def write_markdown(
                     not_matched=markdown_cell(
                         row.get("row_action_not_matched_terms", "")
                     ),
+                )
+            )
+    near_match_summary = page_image_summary_row(remaining_lane_summary_rows)
+    near_match_rows = page_image_near_match_rows(remaining_lane_packet_rows)
+    if near_match_summary:
+        lines.extend(
+            [
+                "",
+                "### Page-Image Near-Match Evidence Summary",
+                "",
+                "| Terms | Residual pairs | Frontier pairs | Concepts | Read |",
+                "| ---: | ---: | ---: | ---: | --- |",
+                "| {terms} | {pairs} | {frontier} | {concepts} | {read} |".format(
+                    terms=markdown_cell(near_match_summary.get("action_terms", "")),
+                    pairs=markdown_cell(near_match_summary.get("residual_pairs", "")),
+                    frontier=markdown_cell(near_match_summary.get("frontier_pairs", "")),
+                    concepts=markdown_cell(near_match_summary.get("concepts", "")),
+                    read=markdown_cell(near_match_summary.get("read", "")),
+                ),
+            ]
+        )
+    if near_match_rows:
+        lines.extend(
+            [
+                "",
+                "### Page-Image Near-Match Terms",
+                "",
+                "| Rank | Term id | Term | Row | Near match | Visual note |",
+                "| ---: | --- | --- | --- | --- | --- |",
+            ]
+        )
+        for row in near_match_rows:
+            near_match = (
+                f"d={row.get('row_ocr_near_match_distance', '')} "
+                f"{row.get('row_ocr_near_match_text', '')}"
+            )
+            lines.append(
+                "| {rank} | `{term_id}` | `{term}` | `{row_number}` | `{near}` | {note} |".format(
+                    rank=markdown_cell(row.get("evidence_rank", "")),
+                    term_id=markdown_cell(row.get("term_id", "")),
+                    term=markdown_cell(row.get("term", "")),
+                    row_number=markdown_cell(row.get("row_number", "")),
+                    near=markdown_cell(near_match),
+                    note=markdown_cell(row.get("visual_review_note", "")),
                 )
             )
     if method_pair_universe_rows:
@@ -767,6 +851,8 @@ def write_manifest(
     residual_term_queue_rows: list[dict[str, str]],
     method_pair_universe_rows: list[dict[str, str]],
     source_transcription_rows: list[dict[str, str]],
+    remaining_lane_summary_rows: list[dict[str, str]],
+    remaining_lane_packet_rows: list[dict[str, str]],
     started: float,
 ) -> None:
     payload = {
@@ -784,6 +870,8 @@ def write_manifest(
         "residual_term_queue_rows": len(residual_term_queue_rows),
         "method_pair_universe_summary_rows": len(method_pair_universe_rows),
         "source_transcription_row_summary_rows": len(source_transcription_rows),
+        "remaining_lane_summary_rows": len(remaining_lane_summary_rows),
+        "remaining_lane_packet_rows": len(remaining_lane_packet_rows),
         "inputs": {
             "readiness": str(args.readiness),
             "lock_options": str(args.lock_options),
@@ -798,6 +886,8 @@ def write_manifest(
             "residual_term_queue": str(args.residual_term_queue),
             "method_pair_universe_summary": str(args.method_pair_universe_summary),
             "source_transcription_row_summary": str(args.source_transcription_row_summary),
+            "remaining_lane_summary": str(args.remaining_lane_summary),
+            "remaining_lane_packet": str(args.remaining_lane_packet),
         },
         "outputs": {
             "out": str(args.out),
