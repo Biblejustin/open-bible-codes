@@ -138,6 +138,8 @@ It requires:
 - CRD relevance dictionary, term coverage, reviewer metadata, and protocol
   hash lock are still consistent with the centered-relevance protocol;
 - manual-review queue keeps required non-claim guardrails and evidence links;
+- WRR claim-readiness doc still carries blocked status and all four blocker
+  areas until source/method locks change;
 - checked-in `docs/INDEX.md` and `protocols/INDEX.md` freshness;
 - existing generated inputs needed by the final gates.
 
