@@ -176,6 +176,9 @@ inputs = [
   "docs/KJV_APOCRYPHA_BRIDGE_TERM_SHUFFLED_CONTROLS_1000.md",
   "docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_PREREGISTRATION.md",
   "docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md",
+  "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md",
+  "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md",
+  "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md",
   "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md",
   "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md",
   "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md",
@@ -191,6 +194,7 @@ inputs = [
   "terms/religions_wiki_scriptural_codes_terms.csv",
   "terms/gog_magog_pair_prospective_terms.csv",
   "terms/hebrew_modern_geopolitical_prospective_terms.csv",
+  "terms/kjv_apocrypha_bridge_prospective_terms.csv",
   "configs/example_ebible_engkjv_apocrypha.toml",
   "configs/prospective_study_lanes.json",
   "protocols/apocrypha_bridge_study.toml",
@@ -198,6 +202,7 @@ inputs = [
   "protocols/kjv_apocrypha_bridge_term_review.toml",
   "protocols/kjv_apocrypha_bridge_term_shuffled_controls_1000.toml",
   "protocols/kjv_apocrypha_bridge_confirmatory_controls_5000.toml",
+  "protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml",
   "protocols/external_claim_source_counts.toml",
   "protocols/external_claim_source_all_codes_collection.toml",
   "docs/EXTERNAL_CLAIM_SOURCE_COUNTS.md",
@@ -1026,6 +1031,22 @@ inputs = [
 outputs = ["reports/kjv_apocrypha_bridge_confirmatory_controls_5000/protocol_run.manifest.json"]
 
 [[steps]]
+id = "kjv_apocrypha_bridge_prospective_controls"
+description = "Run locked 5000-sample KJVA bridge prospective controls."
+argv = ["-m", "scripts.run_protocol", "protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml", "--resume"]
+inputs = [
+  "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md",
+  "protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml",
+  "terms/kjv_apocrypha_bridge_prospective_terms.csv",
+  "scripts/analyze_apocrypha_bridge_candidates.py",
+  "scripts/analyze_apocrypha_bridge_term_shuffled_controls.py",
+  "els/term_display.py",
+  "scripts/analyze_apocrypha_bridge_shuffled_controls.py",
+  "configs/example_ebible_engkjv_apocrypha.toml",
+]
+outputs = ["reports/kjv_apocrypha_bridge_prospective/protocol_run.manifest.json"]
+
+[[steps]]
 id = "external_claim_source_counts"
 description = "Refresh external-source claim and critique count baselines."
 argv = ["-m", "scripts.run_protocol", "protocols/external_claim_source_counts.toml", "--resume"]
@@ -1269,6 +1290,11 @@ inputs = [
   "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/manifest.json",
   "docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_PREREGISTRATION.md",
   "docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md",
+  "reports/kjv_apocrypha_bridge_prospective/term_summary.csv",
+  "reports/kjv_apocrypha_bridge_prospective/manifest.json",
+  "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md",
+  "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md",
+  "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md",
   "reports/external_claim_source_counts/summary.csv",
   "reports/external_claim_source_counts/summary.manifest.json",
   "reports/external_claim_source_all_codes/surface_all_codes_summary.csv",

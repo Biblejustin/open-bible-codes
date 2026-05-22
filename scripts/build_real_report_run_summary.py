@@ -114,6 +114,12 @@ KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_TERM_SUMMARY = Path(
 KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_MANIFEST = Path(
     "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/manifest.json"
 )
+KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_TERM_SUMMARY = Path(
+    "reports/kjv_apocrypha_bridge_prospective/term_summary.csv"
+)
+KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_MANIFEST = Path(
+    "reports/kjv_apocrypha_bridge_prospective/manifest.json"
+)
 EXTERNAL_CLAIM_COUNTS_SUMMARY = Path("reports/external_claim_source_counts/summary.csv")
 EXTERNAL_CLAIM_COUNTS_MANIFEST = Path(
     "reports/external_claim_source_counts/summary.manifest.json"
@@ -253,6 +259,12 @@ def main(argv: list[str] | None = None) -> int:
     kjva_apocrypha_bridge_confirmatory_manifest = read_json(
         args.kjva_apocrypha_bridge_confirmatory_manifest
     )
+    kjva_apocrypha_bridge_prospective_rows = read_rows(
+        args.kjva_apocrypha_bridge_prospective_term_summary
+    )
+    kjva_apocrypha_bridge_prospective_manifest = read_json(
+        args.kjva_apocrypha_bridge_prospective_manifest
+    )
     external_claim_counts_rows = read_rows(args.external_claim_counts_summary)
     external_claim_counts_manifest = read_json(args.external_claim_counts_manifest)
     external_claim_all_codes_rows = read_rows(args.external_claim_all_codes_summary)
@@ -358,6 +370,8 @@ def main(argv: list[str] | None = None) -> int:
         centered_occurrence_manifest=centered_occurrence_manifest,
         kjva_apocrypha_bridge_confirmatory_rows=kjva_apocrypha_bridge_confirmatory_rows,
         kjva_apocrypha_bridge_confirmatory_manifest=kjva_apocrypha_bridge_confirmatory_manifest,
+        kjva_apocrypha_bridge_prospective_rows=kjva_apocrypha_bridge_prospective_rows,
+        kjva_apocrypha_bridge_prospective_manifest=kjva_apocrypha_bridge_prospective_manifest,
         external_claim_counts_rows=external_claim_counts_rows,
         external_claim_counts_manifest=external_claim_counts_manifest,
         external_claim_all_codes_rows=external_claim_all_codes_rows,
@@ -719,6 +733,16 @@ def build_parser() -> argparse.ArgumentParser:
         default=KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_MANIFEST,
     )
     parser.add_argument(
+        "--kjva-apocrypha-bridge-prospective-term-summary",
+        type=Path,
+        default=KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_TERM_SUMMARY,
+    )
+    parser.add_argument(
+        "--kjva-apocrypha-bridge-prospective-manifest",
+        type=Path,
+        default=KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_MANIFEST,
+    )
+    parser.add_argument(
         "--external-claim-counts-summary",
         type=Path,
         default=EXTERNAL_CLAIM_COUNTS_SUMMARY,
@@ -880,6 +904,8 @@ def write_summary(
     centered_occurrence_manifest: dict[str, Any],
     kjva_apocrypha_bridge_confirmatory_rows: list[dict[str, str]],
     kjva_apocrypha_bridge_confirmatory_manifest: dict[str, Any],
+    kjva_apocrypha_bridge_prospective_rows: list[dict[str, str]],
+    kjva_apocrypha_bridge_prospective_manifest: dict[str, Any],
     external_claim_counts_rows: list[dict[str, str]],
     external_claim_counts_manifest: dict[str, Any],
     external_claim_all_codes_rows: list[dict[str, str]],
@@ -1200,6 +1226,12 @@ def write_summary(
         )
     )
     lines.extend(
+        kjva_apocrypha_bridge_prospective_section(
+            kjva_apocrypha_bridge_prospective_rows,
+            kjva_apocrypha_bridge_prospective_manifest,
+        )
+    )
+    lines.extend(
         external_claim_source_section(
             external_claim_counts_rows,
             external_claim_counts_manifest,
@@ -1335,6 +1367,9 @@ def write_summary(
             "- `docs/KJV_APOCRYPHA_BRIDGE_TERM_SHUFFLED_CONTROLS_1000.md`",
             "- `docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_PREREGISTRATION.md`",
             "- `docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md`",
+            "- `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md`",
+            "- `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md`",
+            "- `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md`",
             "- `docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md`",
             "- `docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md`",
             "- `docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md`",
@@ -1342,15 +1377,16 @@ def write_summary(
             "- `protocols/kjv_apocrypha_bridge_term_review.toml`",
             "- `protocols/kjv_apocrypha_bridge_term_shuffled_controls_1000.toml`",
             "- `protocols/kjv_apocrypha_bridge_confirmatory_controls_5000.toml`",
+            "- `protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml`",
             "- `docs/VERSION_DISTRIBUTION_INDEX.md`",
             "- `claims/claim_catalog.csv`",
             "",
             "## Next Formal Step",
             "",
-            "Before moving from review candidates to claims, freeze a narrower",
-            "prospective study with a fixed term list, fixed skip range, fixed controls,",
-            f"and study-level correction across all tested rows. The {display_term('δοξα', english='glory')} run is a",
-            "post-discovery follow-up, so it does not satisfy that stronger standard.",
+            "Before moving from review candidates to claims, add non-Bible",
+            "insertion controls and an independent replication design. The fresh",
+            "KJVA prospective bridge run is locked and negative under the registered",
+            "control rule, so it does not supply claim-grade support.",
         ]
     )
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -1425,6 +1461,8 @@ def write_manifest(
     centered_occurrence_manifest: dict[str, Any],
     kjva_apocrypha_bridge_confirmatory_rows: list[dict[str, str]],
     kjva_apocrypha_bridge_confirmatory_manifest: dict[str, Any],
+    kjva_apocrypha_bridge_prospective_rows: list[dict[str, str]],
+    kjva_apocrypha_bridge_prospective_manifest: dict[str, Any],
     external_claim_counts_rows: list[dict[str, str]],
     external_claim_counts_manifest: dict[str, Any],
     external_claim_all_codes_rows: list[dict[str, str]],
@@ -1559,6 +1597,12 @@ def write_manifest(
             ),
             "kjva_apocrypha_bridge_confirmatory_manifest": str(
                 args.kjva_apocrypha_bridge_confirmatory_manifest
+            ),
+            "kjva_apocrypha_bridge_prospective_term_summary": str(
+                args.kjva_apocrypha_bridge_prospective_term_summary
+            ),
+            "kjva_apocrypha_bridge_prospective_manifest": str(
+                args.kjva_apocrypha_bridge_prospective_manifest
             ),
             "external_claim_counts_summary": str(args.external_claim_counts_summary),
             "external_claim_counts_manifest": str(args.external_claim_counts_manifest),
@@ -1755,6 +1799,18 @@ def write_manifest(
             "terms_observed_gt_sample_max", 0
         ),
         "kjva_apocrypha_bridge_confirmatory_terms_q_le_0_05": kjva_apocrypha_bridge_confirmatory_manifest.get(
+            "terms_q_le_0_05", 0
+        ),
+        "kjva_apocrypha_bridge_prospective_rows": len(
+            kjva_apocrypha_bridge_prospective_rows
+        ),
+        "kjva_apocrypha_bridge_prospective_samples": kjva_apocrypha_bridge_prospective_manifest.get(
+            "samples", 0
+        ),
+        "kjva_apocrypha_bridge_prospective_terms_above_all_samples": kjva_apocrypha_bridge_prospective_manifest.get(
+            "terms_observed_gt_sample_max", 0
+        ),
+        "kjva_apocrypha_bridge_prospective_terms_q_le_0_05": kjva_apocrypha_bridge_prospective_manifest.get(
             "terms_q_le_0_05", 0
         ),
         "external_claim_count_summary_rows": len(external_claim_counts_rows),
@@ -2119,6 +2175,65 @@ def kjva_apocrypha_bridge_confirmatory_section(
             "and should not be promoted as a claim without a new prospective study.",
         ]
     )
+    return lines
+
+
+def kjva_apocrypha_bridge_prospective_section(
+    rows: list[dict[str, str]],
+    manifest: dict[str, Any],
+) -> list[str]:
+    rows_above_all = [row for row in rows if row.get("observed_gt_sample_max") == "True"]
+    rows_q_le_01 = [
+        row for row in rows if row.get("q_ge") and float(row.get("q_ge", "1")) <= 0.01
+    ]
+    rows_q_le_05 = [
+        row for row in rows if row.get("q_ge") and float(row.get("q_ge", "1")) <= 0.05
+    ]
+    top_rows = sorted(
+        rows,
+        key=lambda row: (
+            float(row.get("q_ge", "1")),
+            -int_value(row, "observed_bridge_rows"),
+            row.get("normalized_term", ""),
+        ),
+    )
+    lines = [
+        "",
+        "## KJVA Apocrypha Bridge Prospective Controls",
+        "",
+        "This is the fresh prospective KJVA bridge run over 7 fixed",
+        "apocrypha/deuterocanon proper names. The observed scan found one bridge",
+        "row, for `tobit`, and the 5000-sample shuffled-insertion control did not",
+        "produce a prospective review candidate.",
+        "",
+        "| Metric | Count |",
+        "| --- | ---: |",
+        f"| Registered terms reviewed | {len(rows):,} |",
+        f"| Shuffled samples | {int_value(manifest, 'samples'):,} |",
+        f"| Terms with q_ge <= 0.01 | {len(rows_q_le_01):,} |",
+        f"| Terms with q_ge <= 0.05 | {len(rows_q_le_05):,} |",
+        f"| Terms above every shuffled sample | {len(rows_above_all):,} |",
+        f"| Corpus letters | {int_value(manifest, 'corpus_letters'):,} |",
+        "",
+        "| Rank | Term | Observed | Shuffled max | p_ge | q_ge | Delta |",
+        "| ---: | --- | ---: | ---: | ---: | ---: | ---: |",
+    ]
+    for index, row in enumerate(top_rows[:10], start=1):
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    str(index),
+                    display_term(row.get("normalized_term", "")),
+                    f"{int_value(row, 'observed_bridge_rows'):,}",
+                    f"{int_value(row, 'sample_max'):,}",
+                    row.get("p_ge", ""),
+                    row.get("q_ge", ""),
+                    f"{int_value(row, 'observed_minus_sample_max'):,}",
+                ]
+            )
+            + " |"
+        )
     return lines
 
 

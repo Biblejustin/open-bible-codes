@@ -95,6 +95,26 @@ class ApocryphaBridgeTermShuffledControlsTests(unittest.TestCase):
 
         self.assertEqual([row["normalized_term"] for row in rows], ["alpha"])
 
+    def test_summarize_terms_includes_registered_terms_with_zero_observed_rows(self) -> None:
+        observed = [{"normalized_term": "alpha"}]
+        term_samples = [
+            {"sample": 1, "normalized_term": "alpha", "bridge_rows": 1},
+            {"sample": 1, "normalized_term": "beta", "bridge_rows": 0},
+            {"sample": 2, "normalized_term": "beta", "bridge_rows": 1},
+        ]
+        term_records = {
+            "alpha": [{"term_id": "eng_alpha", "concept": "Alpha", "category": "test"}],
+            "beta": [{"term_id": "eng_beta", "concept": "Beta", "category": "test"}],
+        }
+
+        rows = summarize_terms(observed, term_samples, term_records, samples=2)
+        by_term = {row["normalized_term"]: row for row in rows}
+
+        self.assertEqual(set(by_term), {"alpha", "beta"})
+        self.assertEqual(by_term["beta"]["observed_bridge_rows"], 0)
+        self.assertEqual(by_term["beta"]["samples_ge_observed"], 2)
+        self.assertEqual(by_term["beta"]["p_ge"], 1.0)
+
     def test_run_samples_resumes_zero_term_sample_without_term_rows(self) -> None:
         cached_sample = {
             "sample": 1,

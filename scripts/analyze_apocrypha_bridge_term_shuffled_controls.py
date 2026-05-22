@@ -326,7 +326,7 @@ def summarize_terms(
         for row in observed_rows
         if row["normalized_term"] in term_records
     )
-    sample_counts_by_term: dict[str, list[int]] = {term: [0] * samples for term in observed_counts}
+    sample_counts_by_term: dict[str, list[int]] = {term: [0] * samples for term in term_records}
     for row in term_sample_rows:
         term = str(row["normalized_term"])
         if term not in sample_counts_by_term:
@@ -336,7 +336,8 @@ def summarize_terms(
             sample_counts_by_term[term][sample_index] = int(row["bridge_rows"])
 
     rows: list[dict[str, object]] = []
-    for term, observed in observed_counts.items():
+    for term in term_records:
+        observed = observed_counts[term]
         counts = sample_counts_by_term[term]
         samples_ge = sum(1 for count in counts if count >= observed)
         sample_max = max(counts) if counts else 0
@@ -437,7 +438,7 @@ def write_markdown(
         "",
         "This control keeps the canonical prefix and apocrypha/deuterocanon block",
         "length fixed, shuffles the block letters, and records bridge rows per",
-        "observed bridge term.",
+        "registered term.",
         "",
         "## Reproduce",
         "",
@@ -485,15 +486,21 @@ def write_markdown(
             "",
             "## Read",
             "",
-            "- This is a post-screen calibration over already observed bridge terms.",
+            read_scope_line(args.canonical_label),
             "- `p_ge` is add-one empirical tail probability for the term count under",
             "  shuffled insertion blocks.",
-            "- `q_ge` is Benjamini-Hochberg correction across the emitted bridge terms.",
+            "- `q_ge` is Benjamini-Hochberg correction across the registered terms.",
             "- It should guide follow-up priority, not convert bridge terms into claims.",
         ]
     )
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+
+def read_scope_line(label: str) -> str:
+    if "prospective" in label.lower():
+        return "- This is a prospective control run over registered terms."
+    return "- This is a post-screen calibration over already observed bridge terms."
 
 
 def display_summary_term(row: dict[str, object]) -> str:

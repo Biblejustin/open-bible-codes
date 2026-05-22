@@ -250,6 +250,8 @@ outputs:
 - `terms/kjv_apocrypha_bridge_prospective_terms.csv`
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md`
 - `protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml`
+- `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md`
+- `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md`
 
 Candidate inputs:
 
@@ -257,8 +259,12 @@ Candidate inputs:
 - `docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md`
 - `terms/kjv_apocrypha_bridge_confirmatory_terms.csv`
 
-Current next no-input step after this lock is committed: run the prospective
-protocol and report the result as review material only.
+Prospective result: 7 registered terms, 1 observed bridge row (`tobit`), 0
+terms with Benjamini-Hochberg `q_ge <= 0.05`, and 0 terms above every shuffled
+sample. This is negative under the registered control rule.
+
+Current next no-input step: add non-Bible insertion controls for the KJVA
+boundary model before any stronger apocrypha/deuterocanon claim language.
 
 Covered by the prospective lock:
 

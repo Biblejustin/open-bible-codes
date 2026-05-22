@@ -626,6 +626,10 @@ KJV + Apocrypha bridge confirmatory shuffled controls:
 `docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md`.
 KJV + Apocrypha bridge prospective preregistration:
 `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md`.
+KJV + Apocrypha bridge prospective candidates:
+`docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md`.
+KJV + Apocrypha bridge prospective shuffled controls:
+`docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md`.
 KJV + Apocrypha bridge prospective shuffled-control protocol:
 `protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml`.
 KJV + Apocrypha bridge shuffled controls:
@@ -657,7 +661,9 @@ sample. This is a stronger follow-up signal, but it remains post-screen
 confirmatory calibration rather than original prospective claim evidence.
 Fresh prospective KJVA bridge lock: fixed 7 English apocrypha/deuterocanon
 proper names before any observed/control outputs under
-`protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml`.
+`protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml`. The locked
+run found 1 observed bridge row (`tobit`), 0 terms with
+Benjamini-Hochberg `q_ge <= 0.05`, and 0 terms above every shuffled sample.
 
 Formal report assembly run:
 

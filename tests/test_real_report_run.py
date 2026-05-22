@@ -70,6 +70,11 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/APOCRYPHA_ONLY_COUNTS.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/APOCRYPHA_BRIDGE_CONTEXT.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/KJV_APOCRYPHA_BRIDGE_CONTEXT.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn(
+            "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn("kjv_apocrypha_bridge_prospective_controls", steps_by_id)
         self.assertIn("all_codes_followup_letter_paths", steps_by_id)
         self.assertIn("all_codes_followup_context", steps_by_id)
         self.assertIn("all_codes_followup_extensions", steps_by_id)
@@ -140,6 +145,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
+            "reports/kjv_apocrypha_bridge_prospective/term_summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
             "docs/ALL_CODES_FOLLOWUP_LETTER_PATHS.md",
             steps_by_id["preflight"]["inputs"],
         )
@@ -195,6 +204,26 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/KJV_APOCRYPHA_BRIDGE_CONTEXT.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/KJV_APOCRYPHA_BRIDGE_CONTROLS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn(
+            "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "terms/kjv_apocrypha_bridge_prospective_terms.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
         self.assertIn("docs/EXTERNAL_CLAIM_SOURCE_COUNTS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn(
             "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_COLLECTION.md",

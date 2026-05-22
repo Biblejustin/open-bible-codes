@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 308
+Documents indexed: 310
 
 ## Controls
 
@@ -45,6 +45,7 @@ Documents indexed: 308
 | Hebrew Modern Geopolitical Controlled Review | `HEBREW_MODERN_GEOPOLITICAL_CONTROLLED_REVIEW.md` |
 | Hebrew Screening Controlled Review | `HEBREW_SCREENING_CONTROLLED_REVIEW.md` |
 | KJVA Confirmatory Apocrypha Bridge Term Shuffled Controls (5000 Samples) | `KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md` |
+| KJVA Prospective Apocrypha Bridge Term Shuffled Controls (5000 Samples) | `KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md` |
 | KJVA Apocrypha Bridge Controls | `KJV_APOCRYPHA_BRIDGE_CONTROLS.md` |
 | KJVA Apocrypha Bridge Shuffled Controls (5 Samples) | `KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md` |
 | KJVA Apocrypha Bridge Shuffled Controls (100 Samples) | `KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md` |
@@ -270,6 +271,7 @@ Documents indexed: 308
 | Hebrew Screening All-Codes Triage | `HEBREW_SCREENING_ALL_CODES_TRIAGE.md` |
 | Hebrew Theology All-Codes Collection | `HEBREW_THEOLOGY_ALL_CODES_COLLECTION.md` |
 | Hebrew Theology All-Codes Triage | `HEBREW_THEOLOGY_ALL_CODES_TRIAGE.md` |
+| KJVA Prospective Apocrypha Bridge Candidates | `KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md` |
 | KJVA Apocrypha Bridge Candidates | `KJV_APOCRYPHA_BRIDGE_CANDIDATES.md` |
 | KJVA Apocrypha Bridge Context | `KJV_APOCRYPHA_BRIDGE_CONTEXT.md` |
 | KJVA Apocrypha Bridge Term Review | `KJV_APOCRYPHA_BRIDGE_TERM_REVIEW.md` |
