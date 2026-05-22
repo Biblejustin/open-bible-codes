@@ -18,6 +18,16 @@ render `reports/wrr_1994/wrr_primary_table2_page-06.png`.
 | `wrr2_27_date_01` `/+Z/T$RY` | 27 | Row visibly contains `ט"ז תשרי` forms. | OCR-near-match case; page image should be checked before treating as source difference. |
 | `wrr2_27_app_06` `M$HZKWTW` | 27 | Row visibly contains Moses/Zechut forms; OCR near match is one edit from imported term. | OCR-near-match case; page image should be checked before treating as source difference. |
 
+## Local WNP Critique Context
+
+Source reviewed: `reports/wrr_1994/wnp_en.html`.
+
+| Topic | Local source context | Triage read |
+| --- | --- | --- |
+| Rabbi II-27 Zacut forms | WNP argues the primary last-name form is `zkvt`, and removes `zkvta`, `zkvtv`, `mwh zkvta`, and `mwh zkvtv`. | The row-27 `M$HZKWTW` blocker is not just OCR noise; it is also a known disputed appellation-form issue. |
+| Rabbi II-30 Yosher-Levav | WNP argues `ywr lbb` is a book title, not a valid appellation of Ricchi, and removes it. | The `B@LY$RLBB` blocker should be treated as a title/appellation-rule issue, not a simple OCR miss. |
+| Rabbi II-32 Chelma | WNP argues `clma`/`cilma` spellings and `wlmh clma` forms are plausible appellations, while noting length-filter effects. | The `$LMHMXLMA` blocker needs source/pair-rule review, not dismissal from the cropped primary row alone. |
+
 ## Implication
 
 - The current `ocr_not_matched_with_variant_lead` bucket is mixed.
