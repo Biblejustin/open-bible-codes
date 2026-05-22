@@ -1063,6 +1063,26 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_source_transcription_row_review_checklist"
+description = "Build no-input row-level checklist for WRR source-transcription review."
+argv = [
+  "-m", "scripts.build_wrr_source_transcription_row_review_checklist",
+  "--row-summary", "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv",
+  "--out", "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv",
+  "--markdown-out", "docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md",
+  "--manifest-out", "reports/wrr_1994/wrr_source_transcription_row_review_checklist.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_source_transcription_row_review_checklist.py",
+  "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv",
+  "docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md",
+  "reports/wrr_1994/wrr_source_transcription_row_review_checklist.manifest.json",
+]
+
+[[steps]]
 id = "build_wrr_method_pair_universe_evidence_packet"
 description = "Build diagnostic evidence packet for WRR OCR-matched method/pair-universe residuals."
 argv = [

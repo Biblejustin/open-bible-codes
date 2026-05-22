@@ -43,6 +43,7 @@ from scripts import (
     check_wrr_method_pair_universe_evidence_packet_doc,
     check_wrr_source_policy_evidence_packet_doc,
     check_wrr_source_transcription_evidence_packet_doc,
+    check_wrr_source_transcription_row_review_checklist_doc,
     check_wrr_remaining_lane_evidence_packets_doc,
     check_wrr_source_policy_scenarios_doc,
     check_wrr_source_review_queue_doc,
@@ -198,6 +199,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_CLAIM_BLOCKER_PACKET.md",
     "docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md",
     "docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md",
+    "docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md",
     "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md",
     "docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md",
     "docs/WRR_SOURCE_POLICY_SCENARIOS.md",
@@ -404,6 +406,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_source_policy_evidence_packet_doc.py",
     "scripts/build_wrr_source_transcription_evidence_packet.py",
     "scripts/check_wrr_source_transcription_evidence_packet_doc.py",
+    "scripts/build_wrr_source_transcription_row_review_checklist.py",
+    "scripts/check_wrr_source_transcription_row_review_checklist_doc.py",
     "scripts/build_wrr_remaining_lane_evidence_packets.py",
     "scripts/check_wrr_remaining_lane_evidence_packets_doc.py",
     "scripts/build_wrr_method_pair_universe_evidence_packet.py",
@@ -684,6 +688,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_source_transcription_evidence_packet_doc_failures)
         )
 
+    wrr_source_transcription_row_review_checklist_doc_failures = (
+        check_wrr_source_transcription_row_review_checklist_doc.validate_row_review_checklist_doc(
+            check_wrr_source_transcription_row_review_checklist_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_source_transcription_row_review_checklist_doc_failures:
+        failures.append(
+            "WRR source-transcription row checklist failures: "
+            + "; ".join(wrr_source_transcription_row_review_checklist_doc_failures)
+        )
+
     wrr_remaining_lane_evidence_packets_doc_failures = (
         check_wrr_remaining_lane_evidence_packets_doc.validate_remaining_lane_evidence_packets_doc(
             check_wrr_remaining_lane_evidence_packets_doc.DEFAULT_DOC
@@ -856,6 +871,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "wrr_source_transcription_evidence_packet_doc_failures": (
             wrr_source_transcription_evidence_packet_doc_failures
+        ),
+        "wrr_source_transcription_row_review_checklist_doc_failures": (
+            wrr_source_transcription_row_review_checklist_doc_failures
         ),
         "wrr_remaining_lane_evidence_packets_doc_failures": (
             wrr_remaining_lane_evidence_packets_doc_failures
