@@ -132,6 +132,8 @@ It requires:
   values, and supported language markers;
 - concrete preregistration docs contain no unresolved bracketed placeholders
   while the prospective-study template remains available as a template;
+- CRD relevance dictionary, term coverage, reviewer metadata, and protocol
+  hash lock are still consistent with the centered-relevance protocol;
 - checked-in `docs/INDEX.md` and `protocols/INDEX.md` freshness;
 - existing generated inputs needed by the final gates.
 
