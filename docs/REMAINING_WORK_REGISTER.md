@@ -186,6 +186,7 @@ Current pushed commits for this cleanup:
 - `d7023d9` Add WRR method pair universe evidence packet.
 - `0e994ff` Surface WRR method pair packet in blockers.
 - `221a848` Surface WRR source transcription clusters in blockers.
+- `f5e167f` Surface WRR near match lane in blockers.
 
 ### Formal Real Report Rerun
 
@@ -462,9 +463,9 @@ on appellation terms in this pass: 45 not-matched/no-variant-lead rows, 11
 matched/no-variant-lead rows, 3 near-match/no-variant-lead rows, and one
 `wnp_chelm_spelling_context` flag. The blocker packet now also embeds the
 residual unique-term queue summary, top term targets, source-transcription row
-cluster summary, and method/pair-universe summary, so the no-input handoff
-carries the pair-level residual caveat, term-level review frontier, and
-row-level review order.
+cluster summary, page-image near-match lane, and method/pair-universe summary,
+so the no-input handoff carries the pair-level residual caveat, term-level
+review frontier, row-level review order, and page-image review boundary.
 `docs/WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md` now collapses that pair-level
 packet into 58 unique unresolved appellation terms, preserving 59 residual pair
 links and 40 minimum-frontier links. The unique-term reconciliation queue
