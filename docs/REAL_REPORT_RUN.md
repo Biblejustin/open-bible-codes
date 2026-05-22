@@ -71,6 +71,7 @@ This assembly run includes:
   `docs/WRR_SOURCE_AUDIT.md`, `docs/WRR_METHODOLOGY_GAPS.md`,
   `docs/WRR_CORRECTED_DISTANCE_NOTES.md`, `docs/WRR_CROSS_PAIR_GRID.md`, and
   `docs/WRR_LOCK_OPTIONS.md`, plus `docs/WRR_SOURCE_POLICY_SCENARIOS.md`,
+  `docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md`,
   `docs/WRR_DW_FORMULA_SENSITIVITY.md`, `docs/WRR_CLAIM_READINESS.md`, and
   `docs/WRR_CLAIM_BLOCKER_PACKET.md`, plus
   `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md`
@@ -241,7 +242,10 @@ The report-run summary should currently say:
   `docs/WRR_CLAIM_READINESS.md`; `docs/WRR_CLAIM_BLOCKER_PACKET.md` records
   that no current claim-readiness blockers remain under the selected local lock
   policy; `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md` keeps the residual
-  source/term/method evidence lanes visible without selecting corrections.
+  source/term/method evidence lanes visible without selecting corrections;
+  `docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md` ties the Chełm source-policy
+  residual to WNP context, row OCR, and scenario status without changing the
+  source lock.
 - `υιοσ` (huios; English: son) and `αιμα` (haima; English: blood) remain weaker hidden-path candidates because their exact
   patterns are missing from one or more compared Greek NT sources.
 - no row is claim-grade yet.

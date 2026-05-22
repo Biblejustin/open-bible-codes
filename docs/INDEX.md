@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 336
+Documents indexed: 337
 
 ## Controls
 
@@ -108,6 +108,7 @@ Documents indexed: 336
 | WRR Residual Reconciliation Action Plan | `WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md` |
 | WRR Residual Term Reconciliation Queue | `WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md` |
 | WRR Source Audit | `WRR_SOURCE_AUDIT.md` |
+| WRR Source-Policy Evidence Packet | `WRR_SOURCE_POLICY_EVIDENCE_PACKET.md` |
 | WRR Source Policy Scenario Impact | `WRR_SOURCE_POLICY_SCENARIOS.md` |
 | WRR Source Recovery Probe | `WRR_SOURCE_RECOVERY_PROBE.md` |
 | WRR Source Review Queue | `WRR_SOURCE_REVIEW_QUEUE.md` |

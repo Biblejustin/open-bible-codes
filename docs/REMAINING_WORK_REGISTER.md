@@ -473,6 +473,9 @@ into no-input evidence lanes: 1 source-policy/pair-rule target, 43
 source-transcription/row-alignment targets, 3 page-image near-match targets,
 and 11 method/pair-universe targets. It keeps all terms in the working source
 until citable row, policy, or method evidence is locked.
+`docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md` now handles the source-policy lane
+for Chełm: 1 priority term, 2 related source-review rows, 4 scenario-pair rows,
+and 3 WNP context blocks, with no automatic correction or exclusion.
 The next WRR work is therefore source/term/pair-rule reconciliation before any
 exact published reproduction language.
 

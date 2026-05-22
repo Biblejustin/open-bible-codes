@@ -645,6 +645,10 @@ WRR residual reconciliation action plan:
 `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md`.
 It converts those unique-term rows into no-input evidence lanes without
 selecting source corrections or pair exclusions.
+WRR source-policy evidence packet:
+`docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md`.
+It ties the Chełm source-policy residual to local WNP context, row OCR, and
+scenario status without choosing a correction or exclusion.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.

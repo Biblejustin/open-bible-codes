@@ -69,6 +69,9 @@ WRR_CROSS_PAIR_RECOMMENDED_PERMUTATION_SUMMARY = Path(
 )
 WRR_SOURCE_POLICY_SCENARIOS = Path("reports/wrr_1994/wrr_source_policy_scenarios.csv")
 WRR_SOURCE_POLICY_TERM_IMPACTS = Path("reports/wrr_1994/wrr_source_policy_term_impacts.csv")
+WRR_SOURCE_POLICY_EVIDENCE_SUMMARY = Path(
+    "reports/wrr_1994/wrr_source_policy_evidence_summary.csv"
+)
 WRR_DW_FORMULA_SENSITIVITY = Path("reports/wrr_1994/wrr_dw_formula_sensitivity.csv")
 HEBREW_THEOLOGY_ALL_CODES_TRIAGE_MANIFEST = Path(
     "reports/hebrew_theology_all_codes/triage.manifest.json"
@@ -227,6 +230,9 @@ def main(argv: list[str] | None = None) -> int:
     )
     wrr_source_policy_scenario_rows = read_rows(args.wrr_source_policy_scenarios)
     wrr_source_policy_term_impact_rows = read_rows(args.wrr_source_policy_term_impacts)
+    wrr_source_policy_evidence_summary_rows = read_rows(
+        args.wrr_source_policy_evidence_summary
+    )
     wrr_dw_formula_sensitivity_rows = read_rows(args.wrr_dw_formula_sensitivity)
     hebrew_theology_all_codes_triage_manifest = read_json(
         args.hebrew_theology_all_codes_triage_manifest
@@ -369,6 +375,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         wrr_source_policy_scenario_rows=wrr_source_policy_scenario_rows,
         wrr_source_policy_term_impact_rows=wrr_source_policy_term_impact_rows,
+        wrr_source_policy_evidence_summary_rows=(
+            wrr_source_policy_evidence_summary_rows
+        ),
         wrr_dw_formula_sensitivity_rows=wrr_dw_formula_sensitivity_rows,
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
         hebrew_screening_all_codes_triage_manifest=hebrew_screening_all_codes_triage_manifest,
@@ -467,6 +476,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         wrr_source_policy_scenario_rows=wrr_source_policy_scenario_rows,
         wrr_source_policy_term_impact_rows=wrr_source_policy_term_impact_rows,
+        wrr_source_policy_evidence_summary_rows=(
+            wrr_source_policy_evidence_summary_rows
+        ),
         wrr_dw_formula_sensitivity_rows=wrr_dw_formula_sensitivity_rows,
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
         hebrew_screening_all_codes_triage_manifest=hebrew_screening_all_codes_triage_manifest,
@@ -666,6 +678,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--wrr-source-policy-term-impacts",
         type=Path,
         default=WRR_SOURCE_POLICY_TERM_IMPACTS,
+    )
+    parser.add_argument(
+        "--wrr-source-policy-evidence-summary",
+        type=Path,
+        default=WRR_SOURCE_POLICY_EVIDENCE_SUMMARY,
     )
     parser.add_argument(
         "--wrr-dw-formula-sensitivity",
@@ -940,6 +957,7 @@ def write_summary(
     wrr_cross_pair_recommended_permutation_rows: list[dict[str, str]],
     wrr_source_policy_scenario_rows: list[dict[str, str]],
     wrr_source_policy_term_impact_rows: list[dict[str, str]],
+    wrr_source_policy_evidence_summary_rows: list[dict[str, str]],
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1243,6 +1261,7 @@ def write_summary(
             wrr_cross_pair_recommended_permutation_rows,
             wrr_source_policy_scenario_rows,
             wrr_source_policy_term_impact_rows,
+            wrr_source_policy_evidence_summary_rows,
             wrr_dw_formula_sensitivity_rows,
         )
     )
@@ -1516,6 +1535,7 @@ def write_manifest(
     wrr_cross_pair_recommended_permutation_rows: list[dict[str, str]],
     wrr_source_policy_scenario_rows: list[dict[str, str]],
     wrr_source_policy_term_impact_rows: list[dict[str, str]],
+    wrr_source_policy_evidence_summary_rows: list[dict[str, str]],
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1621,6 +1641,9 @@ def write_manifest(
             "wrr_source_policy_scenarios": str(args.wrr_source_policy_scenarios),
             "wrr_source_policy_term_impacts": str(
                 args.wrr_source_policy_term_impacts
+            ),
+            "wrr_source_policy_evidence_summary": str(
+                args.wrr_source_policy_evidence_summary
             ),
             "wrr_dw_formula_sensitivity": str(args.wrr_dw_formula_sensitivity),
             "hebrew_theology_all_codes_triage_manifest": str(
@@ -1788,6 +1811,9 @@ def write_manifest(
         ),
         "wrr_source_policy_scenario_rows": len(wrr_source_policy_scenario_rows),
         "wrr_source_policy_term_impact_rows": len(wrr_source_policy_term_impact_rows),
+        "wrr_source_policy_evidence_summary_rows": len(
+            wrr_source_policy_evidence_summary_rows
+        ),
         "wrr_dw_formula_sensitivity_rows": len(wrr_dw_formula_sensitivity_rows),
         "hebrew_theology_all_codes_triage_rows": hebrew_theology_all_codes_triage_manifest.get(
             "queue_rows", 0
@@ -3355,6 +3381,7 @@ def wrr_audit_section(
     cross_pair_recommended_permutation_rows: list[dict[str, str]],
     source_policy_scenario_rows: list[dict[str, str]],
     source_policy_term_impact_rows: list[dict[str, str]],
+    source_policy_evidence_summary_rows: list[dict[str, str]],
     dw_formula_sensitivity_rows: list[dict[str, str]],
 ) -> list[str]:
     source_hashes = {
@@ -3594,6 +3621,34 @@ def wrr_audit_section(
                     read=md_cell(row.get("diagnostic_read", "")),
                 )
             )
+    if source_policy_evidence_summary_rows:
+        summary = source_policy_evidence_summary_rows[0]
+        lines.extend(
+            [
+                "",
+                "Source-policy evidence packet status:",
+                "",
+                "| Priority terms | Related source-review rows | Related scenario pairs | WNP context blocks | Read |",
+                "| ---: | ---: | ---: | ---: | --- |",
+                (
+                    "| {priority} | {source_rows} | {scenario_rows} | {wnp_blocks} | {read} |"
+                ).format(
+                    priority=md_cell(
+                        summary.get("priority_source_policy_terms", "")
+                    ),
+                    source_rows=md_cell(summary.get("related_source_review_rows", "")),
+                    scenario_rows=md_cell(
+                        summary.get("related_scenario_pair_rows", "")
+                    ),
+                    wnp_blocks=md_cell(summary.get("wnp_context_blocks", "")),
+                    read=md_cell(summary.get("read", "")),
+                ),
+                "",
+                "The source-policy evidence packet keeps the Chełm residual diagnostic:",
+                "it ties WNP context, row OCR, and scenario status together without",
+                "choosing a correction or exclusion.",
+            ]
+        )
     if dw_formula_sensitivity_rows:
         lines.extend(
             [

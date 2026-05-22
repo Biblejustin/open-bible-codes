@@ -975,6 +975,40 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_source_policy_evidence_packet"
+description = "Build diagnostic source-policy evidence packet for residual WRR action targets."
+argv = [
+  "-m", "scripts.build_wrr_source_policy_evidence_packet",
+  "--action-plan", "reports/wrr_1994/wrr_residual_reconciliation_action_plan.csv",
+  "--source-queue", "reports/wrr_1994/wrr_source_review_queue.csv",
+  "--row-ocr", "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv",
+  "--scenario-pairs", "reports/wrr_1994/wrr_source_policy_scenario_pairs.csv",
+  "--table2-bridge", "reports/wrr_1994/wrr_table2_source_bridge.csv",
+  "--wnp-html", "reports/wrr_1994/wnp_en.html",
+  "--out", "reports/wrr_1994/wrr_source_policy_evidence_packet.csv",
+  "--source-context-out", "reports/wrr_1994/wrr_source_policy_evidence_context.csv",
+  "--summary-out", "reports/wrr_1994/wrr_source_policy_evidence_summary.csv",
+  "--markdown-out", "docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md",
+  "--manifest-out", "reports/wrr_1994/wrr_source_policy_evidence_packet.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_source_policy_evidence_packet.py",
+  "reports/wrr_1994/wrr_residual_reconciliation_action_plan.csv",
+  "reports/wrr_1994/wrr_source_review_queue.csv",
+  "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv",
+  "reports/wrr_1994/wrr_source_policy_scenario_pairs.csv",
+  "reports/wrr_1994/wrr_table2_source_bridge.csv",
+  "reports/wrr_1994/wnp_en.html",
+]
+outputs = [
+  "reports/wrr_1994/wrr_source_policy_evidence_packet.csv",
+  "reports/wrr_1994/wrr_source_policy_evidence_context.csv",
+  "reports/wrr_1994/wrr_source_policy_evidence_summary.csv",
+  "docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md",
+  "reports/wrr_1994/wrr_source_policy_evidence_packet.manifest.json",
+]
+
+[[steps]]
 id = "analyze_wrr_dw_formula_sensitivity"
 description = "Compare printed and reported-program D(w) formula diagnostics without selecting a formula."
 argv = [

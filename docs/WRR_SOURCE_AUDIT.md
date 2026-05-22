@@ -175,6 +175,9 @@ into evidence-action lanes while preserving the no-correction boundary:
 source-policy rows need citable pair-rule evidence, transcription rows need
 primary row or row-alignment evidence, near-match rows need page-image review,
 and OCR-matched rows move to method/pair-universe review before source edits.
+`docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md` now carries the single Chełm
+source-policy residual forward with local WNP context, row OCR context, and
+scenario-pair status, while leaving the working source unchanged.
 
 The ANU/McKay data page provides plain-text WRR lists in a modified
 Michigan-Claremont transliteration. User decision on 2026-05-21: use this

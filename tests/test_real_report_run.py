@@ -77,6 +77,10 @@ class RealReportRunTests(unittest.TestCase):
             "docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md",
             steps_by_id["preflight"]["inputs"],
         )
+        self.assertIn(
+            "docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("docs/WRR_SOURCE_REVIEW_QUEUE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn(
             "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md",
@@ -102,6 +106,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/build_wrr_residual_reconciliation_action_plan.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_wrr_source_policy_evidence_packet.py",
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
@@ -137,6 +145,14 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
+            "reports/wrr_1994/wrr_source_policy_evidence_summary.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_source_policy_evidence_summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_variant_residual_review_summary.csv",
             steps_by_id["wrr_cross_pair_grid"]["inputs"],
         )
@@ -158,6 +174,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_source_policy_scenarios_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_source_policy_evidence_packet_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -1023,6 +1043,28 @@ class RealReportRunTests(unittest.TestCase):
                 payload["failures"],
             )
 
+    def test_preflight_fails_on_wrr_source_policy_evidence_packet_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_source_policy_evidence_packet_doc,
+                "validate_source_policy_evidence_packet_doc",
+                return_value=["docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md missing boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_source_policy_evidence_packet_doc_failures"],
+                ["docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md missing boundary"],
+            )
+            self.assertIn(
+                "WRR source-policy evidence packet failures: "
+                "docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md missing boundary",
+                payload["failures"],
+            )
+
     def test_preflight_fails_on_wrr_source_policy_scenarios_doc_failure(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / "preflight.json"
@@ -1500,6 +1542,15 @@ class RealReportRunTests(unittest.TestCase):
             ],
             [
                 {
+                    "priority_source_policy_terms": "1",
+                    "related_source_review_rows": "2",
+                    "related_scenario_pair_rows": "4",
+                    "wnp_context_blocks": "3",
+                    "read": "source-policy residual is now tied to local WNP context",
+                }
+            ],
+            [
+                {
                     "scope": "all_lanes_cap1000",
                     "row_count": "182",
                     "printed_defined_corrected_distances": "72",
@@ -1531,6 +1582,8 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("| Repo-defined Bonferroni rho0 | 0.000404 |", text)
         self.assertIn("| exclude_wnp_zacut_only | 8 | 157 | 6 | 78 |", text)
         self.assertIn("Single-term source-policy impacts", text)
+        self.assertIn("Source-policy evidence packet status", text)
+        self.assertIn("| 1 | 2 | 4 | 3 | source-policy residual", text)
         self.assertIn(
             "| wrr2_27_app_02 | ZKWTA | wnp_disputed_zacut_appellation | 2 | 163 | 0 | single-term exclusion closes >=5 count gap |",
             text,
@@ -1543,6 +1596,7 @@ class RealReportRunTests(unittest.TestCase):
             summary.wrr_audit_section(
                 {"status": "success", "duration_seconds": 12.3},
                 {"downloads": [{"label": "wrr_1994_paper", "sha256": "paperhash"}]},
+                [],
                 [],
                 [],
                 [],
