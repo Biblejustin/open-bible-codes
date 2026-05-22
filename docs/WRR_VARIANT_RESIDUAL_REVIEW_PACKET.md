@@ -23,13 +23,23 @@ python3 -m scripts.build_wrr_variant_residual_review_packet --blocked-pairs repo
 
 | Group | Value | Pairs | Read |
 | --- | --- | ---: | --- |
-| `residual_pool` | `candidate_pairs_not_closed_by_all-blocker_simple_variants` | 59 | at least residual_needed rows from this pool need source-rule or method resolution to reach the source-cited count |
+| `residual_pool` | `candidate_pairs_not_closed_by_all-blocker_simple_variants` | 59 | at least 40 rows from this pool need source-rule or method resolution to reach the source-cited count |
 | `review_frontier` | `minimum_residual_frontier` | 40 | frontier is a deterministic review priority, not a selected correction set |
 | `impact_status` | `no_blocking_term_variant_hit` | 50 | residual-pool breakdown; diagnostic only |
 | `impact_status` | `some_blocking_terms_have_variant_hit` | 9 | residual-pool breakdown; diagnostic only |
 | `row_ocr_pair_status` | `both_matched` | 11 | residual-pool breakdown; diagnostic only |
 | `row_ocr_pair_status` | `both_not_matched` | 3 | residual-pool breakdown; diagnostic only |
 | `row_ocr_pair_status` | `mixed` | 45 | residual-pool breakdown; diagnostic only |
+| `frontier_impact_status` | `no_blocking_term_variant_hit` | 31 | minimum-frontier breakdown; diagnostic only |
+| `frontier_impact_status` | `some_blocking_terms_have_variant_hit` | 9 | minimum-frontier breakdown; diagnostic only |
+| `frontier_row_ocr_pair_status` | `both_matched` | 2 | minimum-frontier breakdown; diagnostic only |
+| `frontier_row_ocr_pair_status` | `both_not_matched` | 3 | minimum-frontier breakdown; diagnostic only |
+| `frontier_row_ocr_pair_status` | `mixed` | 35 | minimum-frontier breakdown; diagnostic only |
+| `unresolved_term_side` | `appellation` | 59 | unresolved-term breakdown; diagnostic only |
+| `unresolved_term_bucket` | `ocr_matched_no_variant_lead` | 11 | unresolved-term breakdown; diagnostic only |
+| `unresolved_term_bucket` | `ocr_near_match_no_variant_lead` | 3 | unresolved-term breakdown; diagnostic only |
+| `unresolved_term_bucket` | `ocr_not_matched_no_variant_lead` | 45 | unresolved-term breakdown; diagnostic only |
+| `unresolved_source_flag` | `wnp_chelm_spelling_context` | 1 | unresolved-term breakdown; diagnostic only |
 
 ## Priority Frontier
 

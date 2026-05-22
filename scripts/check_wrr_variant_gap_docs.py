@@ -56,6 +56,9 @@ RESIDUAL_PACKET_REQUIRED_PHRASES = (
     "| `review_frontier` | `minimum_residual_frontier` | 40 |",
     "| `impact_status` | `no_blocking_term_variant_hit` | 50 |",
     "| `impact_status` | `some_blocking_terms_have_variant_hit` | 9 |",
+    "| `frontier_impact_status` | `no_blocking_term_variant_hit` | 31 |",
+    "| `unresolved_term_side` | `appellation` | 59 |",
+    "| `unresolved_term_bucket` | `ocr_not_matched_no_variant_lead` | 45 |",
     "The frontier is deterministic triage, not a correction set.",
 )
 

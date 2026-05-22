@@ -217,7 +217,17 @@ def visual_source_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
 
 
 def residual_summary_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
-    wanted = {"residual_pool", "review_frontier", "impact_status", "row_ocr_pair_status"}
+    wanted = {
+        "residual_pool",
+        "review_frontier",
+        "impact_status",
+        "row_ocr_pair_status",
+        "frontier_impact_status",
+        "frontier_row_ocr_pair_status",
+        "unresolved_term_side",
+        "unresolved_term_bucket",
+        "unresolved_source_flag",
+    }
     return [row for row in rows if row.get("group") in wanted]
 
 

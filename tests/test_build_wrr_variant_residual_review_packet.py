@@ -109,10 +109,10 @@ class WrrVariantResidualReviewPacketTests(unittest.TestCase):
                         "pair_id": "p1",
                         "candidate_lane": "length_5_8_smoke_candidate",
                         "pair_review_status": "needs_primary_source_pair_rule",
-                        "appellation_term_id": "app1",
+                        "appellation_term_id": "wrr2_01_app_01",
                         "appellation_term": "APP",
                         "appellation_ordinary_hits": "0",
-                        "date_term_id": "date1",
+                        "date_term_id": "wrr2_01_date_01",
                         "date_term": "DATE",
                         "date_ordinary_hits": "0",
                     }
@@ -128,7 +128,7 @@ class WrrVariantResidualReviewPacketTests(unittest.TestCase):
                         "reason": "ordinary_missing_both_terms",
                         "row_ocr_pair_status": "mixed",
                         "impact_status": "no_blocking_term_variant_hit",
-                        "blocking_term_ids": "app1;date1",
+                        "blocking_term_ids": "wrr2_01_app_01;wrr2_01_date_01",
                         "blocking_terms": "APP;DATE",
                         "blocking_term_variant_hits": "0;0",
                         "blocking_term_variant_rules": "none;none",
@@ -139,14 +139,14 @@ class WrrVariantResidualReviewPacketTests(unittest.TestCase):
                 source_queue,
                 [
                     {
-                        "term_id": "app1",
+                        "term_id": "wrr2_01_app_01",
                         "review_bucket": "ocr_matched_no_variant_lead",
                         "row_ocr_status": "matched",
                         "source_review_flags": "",
                         "visual_review_action": "",
                     },
                     {
-                        "term_id": "date1",
+                        "term_id": "wrr2_01_date_01",
                         "review_bucket": "ocr_not_matched_no_variant_lead",
                         "row_ocr_status": "not_matched",
                         "source_review_flags": "",
@@ -193,6 +193,14 @@ class WrrVariantResidualReviewPacketTests(unittest.TestCase):
             self.assertEqual(rows[0]["candidate_pool_pairs"], "1")
             summary_rows = list(csv.DictReader(summary.open(encoding="utf-8")))
             self.assertEqual(summary_rows[0]["residual_needed"], "1")
+            summary_groups = {(row["group"], row["value"]) for row in summary_rows}
+            self.assertIn(("frontier_impact_status", "no_blocking_term_variant_hit"), summary_groups)
+            self.assertIn(("unresolved_term_side", "appellation"), summary_groups)
+            self.assertIn(("unresolved_term_side", "date"), summary_groups)
+            self.assertIn(
+                ("unresolved_term_bucket", "ocr_not_matched_no_variant_lead"),
+                summary_groups,
+            )
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("WRR Variant Residual Review Packet", text)
             self.assertTrue(manifest.exists())

@@ -223,7 +223,7 @@ def build_summary_rows(
             "residual_needed": residual_needed,
             "candidate_pool_pairs": candidate_pool,
             "residual_slack_pairs": residual_slack,
-            "read": "at least residual_needed rows from this pool need source-rule or method resolution to reach the source-cited count",
+            "read": f"at least {residual_needed} rows from this pool need source-rule or method resolution to reach the source-cited count",
         },
         {
             "run_label": run_label,
@@ -238,6 +238,55 @@ def build_summary_rows(
     ]
     out.extend(counter_summary(detail_rows, "impact_status", upper))
     out.extend(counter_summary(detail_rows, "row_ocr_pair_status", upper))
+    frontier_rows = [
+        row
+        for row in detail_rows
+        if str(row.get("within_minimum_residual_frontier", "")).lower() == "true"
+    ]
+    out.extend(
+        counter_summary(
+            frontier_rows,
+            "impact_status",
+            upper,
+            group="frontier_impact_status",
+            read="minimum-frontier breakdown; diagnostic only",
+            candidate_pool_size=candidate_pool,
+        )
+    )
+    out.extend(
+        counter_summary(
+            frontier_rows,
+            "row_ocr_pair_status",
+            upper,
+            group="frontier_row_ocr_pair_status",
+            read="minimum-frontier breakdown; diagnostic only",
+            candidate_pool_size=candidate_pool,
+        )
+    )
+    out.extend(
+        multi_value_counter_summary(
+            detail_rows,
+            "unresolved_term_sides",
+            upper,
+            group="unresolved_term_side",
+        )
+    )
+    out.extend(
+        multi_value_counter_summary(
+            detail_rows,
+            "unresolved_term_buckets",
+            upper,
+            group="unresolved_term_bucket",
+        )
+    )
+    out.extend(
+        multi_value_counter_summary(
+            detail_rows,
+            "unresolved_source_flags",
+            upper,
+            group="unresolved_source_flag",
+        )
+    )
     return out
 
 
@@ -245,8 +294,44 @@ def counter_summary(
     rows: list[dict[str, object]],
     field: str,
     upper: dict[str, str],
+    *,
+    group: str | None = None,
+    read: str = "residual-pool breakdown; diagnostic only",
+    candidate_pool_size: int | None = None,
 ) -> list[dict[str, object]]:
     counter = Counter(str(row.get(field, "")) for row in rows)
+    residual_needed = int_or_zero(
+        upper.get("residual_gap_after_simple_variant_upper_bound", "")
+    )
+    candidate_pool = len(rows) if candidate_pool_size is None else candidate_pool_size
+    residual_slack = max(0, candidate_pool - residual_needed)
+    return [
+        {
+            "run_label": upper["run_label"],
+            "group": group or field,
+            "value": value,
+            "pairs": count,
+            "residual_needed": residual_needed,
+            "candidate_pool_pairs": candidate_pool,
+            "residual_slack_pairs": residual_slack,
+            "read": read,
+        }
+        for value, count in sorted(counter.items())
+        if value
+    ]
+
+
+def multi_value_counter_summary(
+    rows: list[dict[str, object]],
+    field: str,
+    upper: dict[str, str],
+    *,
+    group: str,
+) -> list[dict[str, object]]:
+    counter: Counter[str] = Counter()
+    for row in rows:
+        values = {value for value in str(row.get(field, "")).split(";") if value}
+        counter.update(values)
     residual_needed = int_or_zero(
         upper.get("residual_gap_after_simple_variant_upper_bound", "")
     )
@@ -255,13 +340,13 @@ def counter_summary(
     return [
         {
             "run_label": upper["run_label"],
-            "group": field,
+            "group": group,
             "value": value,
             "pairs": count,
             "residual_needed": residual_needed,
             "candidate_pool_pairs": candidate_pool,
             "residual_slack_pairs": residual_slack,
-            "read": "residual-pool breakdown; diagnostic only",
+            "read": "unresolved-term breakdown; diagnostic only",
         }
         for value, count in sorted(counter.items())
     ]
