@@ -339,6 +339,27 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("git_commit", payload)
             self.assertIn("risky_tracked_paths", payload)
             self.assertIn("secret_pattern_hits", payload)
+            self.assertIn("stale_generated_indexes", payload)
+
+    def test_preflight_detects_stale_generated_indexes(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            docs = root / "docs"
+            protocols = root / "protocols"
+            docs.mkdir()
+            protocols.mkdir()
+            (docs / "INDEX.md").write_text("# stale\n", encoding="utf-8")
+            (docs / "ALPHA_REPORT.md").write_text("# Alpha Report\n", encoding="utf-8")
+            (protocols / "INDEX.md").write_text("# stale\n", encoding="utf-8")
+            (protocols / "sample.toml").write_text(
+                'name = "sample"\ndescription = "Demo."\n',
+                encoding="utf-8",
+            )
+
+            self.assertEqual(
+                preflight.stale_generated_indexes(root),
+                ["docs/INDEX.md", "protocols/INDEX.md"],
+            )
 
     def test_summary_percent_formats_rates(self) -> None:
         self.assertEqual(summary.percent(0.0244863), "2.449%")

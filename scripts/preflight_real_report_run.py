@@ -6,11 +6,18 @@ from __future__ import annotations
 import argparse
 import json
 import subprocess
+import tempfile
 import time
 from datetime import UTC, datetime
 from pathlib import Path
 
 from els import __version__
+from els.project_index import (
+    scan_markdown_docs,
+    scan_protocols,
+    write_docs_index,
+    write_protocol_index,
+)
 from scripts.release_hygiene import (
     FORBIDDEN_ACCOUNT_TERMS,
     forbidden_hits,
@@ -365,6 +372,10 @@ def main(argv: list[str] | None = None) -> int:
     if missing_paths:
         failures.append("missing required paths: " + ", ".join(missing_paths))
 
+    stale_indexes = stale_generated_indexes(root)
+    if stale_indexes:
+        failures.append("stale generated indexes: " + ", ".join(stale_indexes))
+
     payload = {
         "tool": "preflight_real_report_run",
         "edls_version": __version__,
@@ -380,6 +391,7 @@ def main(argv: list[str] | None = None) -> int:
         "risky_tracked_paths": risky_paths,
         "required_paths": required_paths(args),
         "missing_paths": missing_paths,
+        "stale_generated_indexes": stale_indexes,
         "forbidden_account_terms": FORBIDDEN_ACCOUNT_TERMS,
         "forbidden_repo_hits": forbidden_repo_hits,
         "forbidden_tracked_hits": forbidden_tracked_hits,
@@ -409,6 +421,42 @@ def build_parser() -> argparse.ArgumentParser:
 
 def required_paths(args: argparse.Namespace) -> list[str]:
     return [*DEFAULT_REQUIRED_PATHS, *args.required_path]
+
+
+def stale_generated_indexes(root: Path) -> list[str]:
+    stale: list[str] = []
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_root = Path(tmp)
+        docs_out = tmp_root / "docs_INDEX.md"
+        docs_root = root / "docs"
+        docs_index = docs_root / "INDEX.md"
+        if docs_root.exists() and docs_index.exists():
+            write_docs_index(
+                scan_markdown_docs(docs_root),
+                docs_out,
+                docs_root=Path("docs"),
+            )
+            if (
+                docs_out.read_text(encoding="utf-8")
+                != docs_index.read_text(encoding="utf-8")
+            ):
+                stale.append("docs/INDEX.md")
+
+        protocols_out = tmp_root / "protocols_INDEX.md"
+        protocols_root = root / "protocols"
+        protocols_index = protocols_root / "INDEX.md"
+        if protocols_root.exists() and protocols_index.exists():
+            write_protocol_index(
+                scan_protocols(protocols_root),
+                protocols_out,
+                protocols_root=Path("protocols"),
+            )
+            if (
+                protocols_out.read_text(encoding="utf-8")
+                != protocols_index.read_text(encoding="utf-8")
+            ):
+                stale.append("protocols/INDEX.md")
+    return stale
 
 
 def git_status_short(root: Path) -> list[str]:
