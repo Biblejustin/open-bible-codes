@@ -440,7 +440,7 @@ Current observed result after the WRR gap-reason audit, readiness gate,
 single-term source-policy propagation, missing-model adjacent-source audit, and
 preflight guard pass:
 
-- `python3 -m pytest -q` passed: 1140 tests and 13951 subtests.
+- `python3 -m pytest -q` passed: 1141 tests and 13951 subtests.
 - `python3 -m pytest tests/test_import_bolls_translation.py tests/test_english_version_manifests.py -q` passed: 11 tests and 117 subtests.
 - `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_claim_catalog.py tests/test_wrr_claim_readiness.py -q` passed: 32 tests and 60 subtests.

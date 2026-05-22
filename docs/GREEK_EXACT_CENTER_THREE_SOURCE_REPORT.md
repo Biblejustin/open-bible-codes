@@ -183,8 +183,8 @@ Current status:
 - `υιοσ` (huios; English: son): BYZ/SBLGNT controlled review candidate
 - `αιμα` (haima; English: blood): source-only hold
 
-The next useful step is manual review and stronger baseline framing for these
-two keys, not broader unregistered term expansion.
+The useful follow-up is manual review under the stronger baseline framing below,
+not broader unregistered term expansion.
 
 ## Follow-Up Baseline
 

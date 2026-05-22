@@ -162,12 +162,19 @@ Current status:
 - `αιμα` (haima; English: blood): source-only hold
 - `υιος` (huios; English: son): source-only hold
 
-## Next Step
+## Follow-Up Status
 
-The next useful work is not more Greek exact-center screening. Better options:
+Later follow-ups completed the immediate open items from this cohort:
 
-- add independent Greek NT sources before rerunning the same locked cohort;
-- build a source-only SBLGNT study for `αιμα` (haima; English: blood) and `υιος` (huios; English: son), explicitly registered
-  as source-specific before controls;
-- for future reports, use `--require-control-row` with the context-review script
-  when the review sheet should include only rows present in the control summary.
+- source-only SBLGNT rows for `αιμα` (haima; English: blood) and `υιος` (huios; English: son) are locked and summarized in
+  `docs/SBLGNT_SOURCE_ONLY_EXACT_CENTER_REPORT.md`;
+- a BYZ_NT source-only row for `υιοσ|-46|backward|before_plus_term` (huios; English: son) is locked and summarized in
+  `docs/BYZ_SOURCE_ONLY_EXACT_CENTER_REPORT.md`;
+- independent-source Greek follow-ups are summarized in
+  `docs/GREEK_EXACT_CENTER_THREE_SOURCE_REPORT.md` and
+  `docs/GREEK_EXACT_CENTER_FOUR_SOURCE_REPORT.md`.
+
+No further exact-center rerun is useful without either a genuinely new
+independent Greek source or a new prospective lock. For future reports, use
+`--require-control-row` with the context-review script when the review sheet
+should include only rows present in the control summary.

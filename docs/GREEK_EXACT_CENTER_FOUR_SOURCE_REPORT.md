@@ -184,5 +184,17 @@ Current status:
 - `υιοσ` (huios; English: son): prior BYZ/SBLGNT candidate only; no TCG-overlap promotion here
 - `αιμα` (haima; English: blood): source-only hold
 
-The next useful step is either a broader Greek screening run using the expanded
-term lists or a stricter surface-phrase gate for this one `δοξα` (doxa; English: glory) key.
+## Follow-Up Status
+
+Both immediate follow-up paths from this report have since been run:
+
+- the stricter single-row `δοξα` (doxa; English: glory) follow-ups are summarized in
+  `docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md` and
+  `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`;
+- the expanded Greek prospective screen is summarized in
+  `docs/GREEK_EXPANDED_PROSPECTIVE_REPORT.md`, with the broader surface queue
+  tracked in `docs/GREEK_EXPANDED_SURFACE_QUEUE.md` and
+  `docs/GREEK_EXPANDED_SURFACE_TRIAGE.md`.
+
+No new row is promoted here. Further result-producing Greek work needs a fresh
+term/source target set and a new prospective lock.
