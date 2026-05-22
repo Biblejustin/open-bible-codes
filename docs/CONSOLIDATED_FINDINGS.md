@@ -801,6 +801,11 @@ flags 154. The single-term Zacut diagnostic narrows the count gap further:
 that count alone.
 Visual triage now separates OCR misses from title-prefix and Chelm source-rule
 questions, but those notes do not exclude pairs automatically.
+The residual handoff is now packetized without selecting corrections: 1
+source-policy term, 43 source-transcription terms, 3 page-image near-match
+terms, and 11 method/pair-universe terms, with the claim-blocker packet
+mirroring top term targets, row clusters, page-image near matches, and
+method/pair-universe counts.
 
 ## Best Next Work
 

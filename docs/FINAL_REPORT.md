@@ -393,9 +393,11 @@ source-rule questions, but those notes do not exclude pairs automatically.
 The evidence packet layer now covers all residual action lanes: 1
 source-policy term, 43 source-transcription terms, 3 page-image near-match
 terms, and 11 method/pair-universe terms. The method/pair-universe packet
-isolates OCR-matched terms that still have zero current appellation hits. These
-packets organize review evidence without choosing corrections, method changes,
-or exclusions.
+isolates OCR-matched terms that still have zero current appellation hits. The
+claim-blocker packet mirrors the same no-input handoff with term targets,
+row-cluster priorities, page-image near matches, and method/pair-universe
+counts. These packets organize review evidence without choosing corrections,
+method changes, or exclusions.
 
 Source artifacts:
 

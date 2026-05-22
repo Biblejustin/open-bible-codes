@@ -146,10 +146,12 @@ It requires:
 - WRR method-status doc keeps local locks separated from open blockers and
   diagnostic-only rows;
 - WRR lock-options doc remains a decision aid rather than a method lock;
-- WRR claim-readiness doc still carries blocked status and all four blocker
-  areas until source/method locks change;
-- WRR claim-blocker packet still states no-input limits, open method decisions,
-  and no pair-exclusion or `D(w)` formula choice;
+- WRR claim-readiness doc records selected local-lock readiness while exact
+  published WRR reproduction remains caveated by the residual source/method
+  gap;
+- WRR claim-blocker packet states no-input limits, keeps no-correction and
+  no-exclusion boundaries visible, and summarizes the residual term, row,
+  page-image, and method/pair-universe review lanes;
 - checked-in `docs/INDEX.md` and `protocols/INDEX.md` freshness;
 - existing generated inputs needed by the final gates.
 
@@ -246,6 +248,9 @@ The report-run summary should currently say:
   that no current claim-readiness blockers remain under the selected local lock
   policy; `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md` keeps the residual
   source/term/method evidence lanes visible without selecting corrections;
+  `docs/WRR_CLAIM_BLOCKER_PACKET.md` mirrors those residual lanes as a compact
+  no-input handoff with term targets, source-transcription row clusters,
+  page-image near matches, and method/pair-universe counts;
   `docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md` ties the Chełm source-policy
   residual to WNP context, row OCR, and scenario status without changing the
   source lock; `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md` groups the

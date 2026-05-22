@@ -662,6 +662,11 @@ WRR method/pair-universe evidence packet:
 It isolates the 11 OCR-matched method-lane terms: all have zero skip-250
 appellation hits and zero high-cap appellation ordinary hits, with 2 pairs zero
 on both sides.
+WRR claim-blocker packet:
+`docs/WRR_CLAIM_BLOCKER_PACKET.md`.
+It mirrors the residual no-input handoff: top term targets,
+source-transcription row clusters, page-image near-match terms, and
+method/pair-universe counts, without choosing corrections or exclusions.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.
@@ -757,7 +762,7 @@ references, future study-mapping CSV schemas, and concrete preregistration
 placeholder cleanup, plus the locked CRD relevance-dictionary basis before
 summary assembly. It also checks the manual-review queue guardrails and
 evidence links, plus the WRR method-status, lock-options, readiness, and
-blocker-packet wording.
+blocker-packet residual-lane wording.
 
 Resume without rerunning completed outputs:
 
