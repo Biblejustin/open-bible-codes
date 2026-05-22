@@ -31,6 +31,17 @@ class WrrSourceReviewQueueTests(unittest.TestCase):
         self.assertEqual(distance, 1)
         self.assertEqual(text, "טזתשרק")
 
+    def test_source_review_context_flags_local_wnp_disputes(self) -> None:
+        flags, note, action = queue.source_review_context(
+            ["WRR2 27"],
+            "appellation",
+            "M$HZKWTW",
+        )
+
+        self.assertEqual(flags, "wnp_disputed_zacut_appellation")
+        self.assertIn("primary Zacut form", note)
+        self.assertIn("diagnostic flag only", action)
+
     def test_build_queue_rows_groups_blocking_terms_for_best_run(self) -> None:
         blocked = [
             {
@@ -112,6 +123,7 @@ class WrrSourceReviewQueueTests(unittest.TestCase):
             by_term["app1"]["review_bucket"],
             "ocr_near_match_with_variant_lead",
         )
+        self.assertEqual(by_term["app1"]["source_review_flags"], "")
         self.assertEqual(by_term["app1"]["pair_ids"], "p1;p2")
         self.assertEqual(by_term["date1"]["blocking_pairs"], 1)
         self.assertNotIn("app2", by_term)

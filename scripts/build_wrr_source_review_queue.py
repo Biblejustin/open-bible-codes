@@ -50,6 +50,9 @@ QUEUE_FIELDNAMES = [
     "best_variant_hit_count",
     "best_variant_rule",
     "best_variant_normalized",
+    "source_review_flags",
+    "source_review_note",
+    "source_review_action",
     "pair_ids",
     "read",
 ]
@@ -61,7 +64,51 @@ SUMMARY_FIELDNAMES = [
     "blocking_pairs",
     "variant_hit_total",
     "row_ocr_statuses",
+    "source_review_flags",
 ]
+
+WNP_CONTEXT = {
+    ("WRR2 27", "appellation", "ZKWTA"): (
+        "wnp_disputed_zacut_appellation",
+        "WNP argues primary Zacut form is ZKWT and removes ZKWTA/ZKWTW-derived forms.",
+        "diagnostic flag only; do not exclude without source-lock policy",
+    ),
+    ("WRR2 27", "appellation", "ZKWTW"): (
+        "wnp_disputed_zacut_appellation",
+        "WNP argues primary Zacut form is ZKWT and removes ZKWTA/ZKWTW-derived forms.",
+        "diagnostic flag only; do not exclude without source-lock policy",
+    ),
+    ("WRR2 27", "appellation", "M$HZKWTA"): (
+        "wnp_disputed_zacut_appellation",
+        "WNP argues primary Zacut form is ZKWT and removes M$HZKWTA/M$HZKWTW.",
+        "diagnostic flag only; do not exclude without source-lock policy",
+    ),
+    ("WRR2 27", "appellation", "M$HZKWTW"): (
+        "wnp_disputed_zacut_appellation",
+        "WNP argues primary Zacut form is ZKWT and removes M$HZKWTA/M$HZKWTW.",
+        "diagnostic flag only; do not exclude without source-lock policy",
+    ),
+    ("WRR2 30", "appellation", "Y$RLBB"): (
+        "wnp_book_title_appellation_dispute",
+        "WNP argues Y$RLBB is a book title, not a valid Ricchi appellation.",
+        "source/title-prefix rule review before source correction",
+    ),
+    ("WRR2 30", "appellation", "B@LY$RLBB"): (
+        "wnp_book_title_appellation_dispute",
+        "WNP argues Y$RLBB is a book title, not a valid Ricchi appellation.",
+        "source/title-prefix rule review before source correction",
+    ),
+    ("WRR2 32", "appellation", "$LMHMXLMA"): (
+        "wnp_chelm_spelling_context",
+        "WNP discusses CLMA/CILMA spelling variants and $LMH CLMA forms.",
+        "source/pair-rule review; do not decide from OCR crop alone",
+    ),
+    ("WRR2 32", "appellation", "$LMHMX@LMA"): (
+        "wnp_chelm_spelling_context",
+        "WNP discusses CLMA/CILMA spelling variants and $LMH CLMA forms.",
+        "source/pair-rule review; do not decide from OCR crop alone",
+    ),
+}
 
 BUCKET_READS = {
     "ocr_not_matched_with_variant_lead": (
@@ -212,6 +259,11 @@ def build_queue_rows(
         pair_ids = sorted(cast_set(item["pair_ids"]))
         concepts = sorted(cast_set(item["concepts"]))
         reasons = cast_counter(item["blocking_reasons"])
+        flags, note, action = source_review_context(
+            concepts,
+            str(item["term_side"]),
+            str(item["term"]),
+        )
         out.append(
             {
                 "run_label": run_label,
@@ -235,6 +287,9 @@ def build_queue_rows(
                 "best_variant_hit_count": best_hits,
                 "best_variant_rule": best_variant.get("variant_rule", "none"),
                 "best_variant_normalized": best_variant.get("variant_normalized", ""),
+                "source_review_flags": flags,
+                "source_review_note": note,
+                "source_review_action": action,
                 "pair_ids": ";".join(pair_ids),
                 "read": BUCKET_READS[bucket],
             }
@@ -301,6 +356,12 @@ def build_summary_rows(queue_rows: list[dict[str, object]]) -> list[dict[str, ob
     out = []
     for (run_label, bucket), rows in sorted(grouped.items(), key=lambda item: (item[0][0], BUCKET_ORDER.get(item[0][1], 99))):
         statuses = Counter(str(row["row_ocr_status"]) for row in rows)
+        flags = Counter(
+            flag
+            for row in rows
+            for flag in str(row.get("source_review_flags", "")).split(";")
+            if flag
+        )
         out.append(
             {
                 "run_label": run_label,
@@ -309,9 +370,28 @@ def build_summary_rows(queue_rows: list[dict[str, object]]) -> list[dict[str, ob
                 "blocking_pairs": sum(int(row["blocking_pairs"]) for row in rows),
                 "variant_hit_total": sum(int(row["best_variant_hit_count"]) for row in rows),
                 "row_ocr_statuses": format_counter(statuses),
+                "source_review_flags": format_counter(flags),
             }
         )
     return out
+
+
+def source_review_context(
+    concepts: list[str],
+    term_side: str,
+    term: str,
+) -> tuple[str, str, str]:
+    matches = [
+        WNP_CONTEXT[(concept, term_side, term)]
+        for concept in concepts
+        if (concept, term_side, term) in WNP_CONTEXT
+    ]
+    if not matches:
+        return "", "", ""
+    flags = sorted({flag for flag, _note, _action in matches})
+    notes = sorted({note for _flag, note, _action in matches})
+    actions = sorted({action for _flag, _note, action in matches})
+    return ";".join(flags), " ".join(notes), " ".join(actions)
 
 
 def write_markdown(
@@ -326,8 +406,9 @@ def write_markdown(
         "",
         "Status: diagnostic-only source-review triage from current blocked",
         "WRR pair rows, row-aligned OCR probe output, and zero-hit one-edit",
-        "variant leads. It is not a source correction, not a term replacement,",
-        "and not a WRR reproduction.",
+        "variant leads, with local WNP critique flags where applicable. It is",
+        "not a source correction, not a term replacement, and not a WRR",
+        "reproduction.",
         "",
         "Reproduce:",
         "",
@@ -350,13 +431,16 @@ def write_markdown(
         f"- Run label: `{run_label}`.",
         f"- Terms queued: {len(queue_rows)}.",
         "",
-        "| Bucket | Terms | Blocking pairs | Variant hit total | Row OCR statuses |",
-        "| --- | ---: | ---: | ---: | --- |",
+        "| Bucket | Terms | Blocking pairs | Variant hit total | Row OCR statuses | Source flags |",
+        "| --- | ---: | ---: | ---: | --- | --- |",
     ]
     for row in summary_rows:
         lines.append(
             "| `{review_bucket}` | {terms} | {blocking_pairs} | {variant_hit_total} | "
-            "`{row_ocr_statuses}` |".format(**row)
+            "`{row_ocr_statuses}` | {source_flags} |".format(
+                source_flags=markdown_code_or_blank(str(row.get("source_review_flags", ""))),
+                **row,
+            )
         )
     lines.extend(
         [
@@ -404,6 +488,22 @@ def write_markdown(
             "| {priority_rank} | `{term_id}` | {row_ocr_near_match_distance} | "
             "`{row_ocr_near_match_text}` |".format(**row)
         )
+    flagged_rows = [row for row in queue_rows if row.get("source_review_flags")]
+    if flagged_rows:
+        lines.extend(
+            [
+                "",
+                "## WNP Context For Queued Terms",
+                "",
+                "| Rank | Term id | Flags | Note | Action |",
+                "| ---: | --- | --- | --- | --- |",
+            ]
+        )
+        for row in flagged_rows:
+            lines.append(
+                "| {priority_rank} | `{term_id}` | `{source_review_flags}` | "
+                "{source_review_note} | {source_review_action} |".format(**row)
+            )
     lines.extend(
         [
             "",
@@ -411,6 +511,7 @@ def write_markdown(
             "",
             "- Review queue ranks source-transcription and normalization checks.",
             "- Variant leads do not validate the original blocked pairs.",
+            "- WNP flags are diagnostic context only, not exclusion rules.",
             "- OCR matches are probe evidence only, not claim-grade primary transcription.",
             "- Locked source rows and pair rules are still required before reproduction language.",
             "",
@@ -489,6 +590,10 @@ def truncate_text(value: str, limit: int) -> str:
     if len(value) <= limit:
         return value
     return value[: limit - 3] + "..."
+
+
+def markdown_code_or_blank(value: str) -> str:
+    return f"`{value}`" if value else ""
 
 
 def best_near_match(needle: str, haystack: str, max_distance: int = 2) -> tuple[int | None, str]:

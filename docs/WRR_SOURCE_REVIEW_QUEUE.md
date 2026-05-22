@@ -2,8 +2,9 @@
 
 Status: diagnostic-only source-review triage from current blocked
 WRR pair rows, row-aligned OCR probe output, and zero-hit one-edit
-variant leads. It is not a source correction, not a term replacement,
-and not a WRR reproduction.
+variant leads, with local WNP critique flags where applicable. It is
+not a source correction, not a term replacement, and not a WRR
+reproduction.
 
 Reproduce:
 
@@ -16,14 +17,14 @@ python3 -m scripts.build_wrr_source_review_queue --blocked-pairs reports/wrr_199
 - Run label: `all_lanes_cap1000`.
 - Terms queued: 97.
 
-| Bucket | Terms | Blocking pairs | Variant hit total | Row OCR statuses |
-| --- | ---: | ---: | ---: | --- |
-| `ocr_not_matched_with_variant_lead` | 5 | 5 | 7 | `5 not_matched` |
-| `ocr_near_match_with_variant_lead` | 2 | 16 | 13 | `2 not_matched` |
-| `ocr_matched_with_variant_lead` | 32 | 45 | 948 | `32 matched` |
-| `ocr_not_matched_no_variant_lead` | 44 | 45 | 0 | `44 not_matched` |
-| `ocr_near_match_no_variant_lead` | 3 | 3 | 0 | `3 not_matched` |
-| `ocr_matched_no_variant_lead` | 11 | 11 | 0 | `11 matched` |
+| Bucket | Terms | Blocking pairs | Variant hit total | Row OCR statuses | Source flags |
+| --- | ---: | ---: | ---: | --- | --- |
+| `ocr_not_matched_with_variant_lead` | 5 | 5 | 7 | `5 not_matched` | `1 wnp_book_title_appellation_dispute, 1 wnp_chelm_spelling_context` |
+| `ocr_near_match_with_variant_lead` | 2 | 16 | 13 | `2 not_matched` | `1 wnp_disputed_zacut_appellation` |
+| `ocr_matched_with_variant_lead` | 32 | 45 | 948 | `32 matched` | `1 wnp_disputed_zacut_appellation` |
+| `ocr_not_matched_no_variant_lead` | 44 | 45 | 0 | `44 not_matched` | `1 wnp_chelm_spelling_context` |
+| `ocr_near_match_no_variant_lead` | 3 | 3 | 0 | `3 not_matched` |  |
+| `ocr_matched_no_variant_lead` | 11 | 11 | 0 | `11 matched` |  |
 
 ## Top Review Targets
 
@@ -84,9 +85,20 @@ python3 -m scripts.build_wrr_source_review_queue --blocked-pairs reports/wrr_199
 | 11 | `wrr2_27_app_04` | 0 | `משהזכות` |
 | 12 | `wrr2_27_app_05` | 0 | `משהזכותא` |
 
+## WNP Context For Queued Terms
+
+| Rank | Term id | Flags | Note | Action |
+| ---: | --- | --- | --- | --- |
+| 2 | `wrr2_30_app_05` | `wnp_book_title_appellation_dispute` | WNP argues Y$RLBB is a book title, not a valid Ricchi appellation. | source/title-prefix rule review before source correction |
+| 5 | `wrr2_32_app_04` | `wnp_chelm_spelling_context` | WNP discusses CLMA/CILMA spelling variants and $LMH CLMA forms. | source/pair-rule review; do not decide from OCR crop alone |
+| 7 | `wrr2_27_app_06` | `wnp_disputed_zacut_appellation` | WNP argues primary Zacut form is ZKWT and removes M$HZKWTA/M$HZKWTW. | diagnostic flag only; do not exclude without source-lock policy |
+| 12 | `wrr2_27_app_05` | `wnp_disputed_zacut_appellation` | WNP argues primary Zacut form is ZKWT and removes M$HZKWTA/M$HZKWTW. | diagnostic flag only; do not exclude without source-lock policy |
+| 83 | `wrr2_32_app_05` | `wnp_chelm_spelling_context` | WNP discusses CLMA/CILMA spelling variants and $LMH CLMA forms. | source/pair-rule review; do not decide from OCR crop alone |
+
 ## Interpretation
 
 - Review queue ranks source-transcription and normalization checks.
 - Variant leads do not validate the original blocked pairs.
+- WNP flags are diagnostic context only, not exclusion rules.
 - OCR matches are probe evidence only, not claim-grade primary transcription.
 - Locked source rows and pair rules are still required before reproduction language.
