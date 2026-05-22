@@ -19,6 +19,7 @@ DEFAULT_VARIANTS = Path("reports/wrr_1994/wrr2_corrected_distance_variant_compar
 DEFAULT_RECOMMENDED_PERMUTATION = Path(
     "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv"
 )
+DEFAULT_SOURCE_REVIEW_SUMMARY = Path("reports/wrr_1994/wrr_source_review_queue_summary.csv")
 DEFAULT_DIRECT_ALL_LANES_250_SUMMARY = Path(
     "reports/wrr_1994/direct_all/wrr2_corrected_distance_all_lanes_250_summary.csv"
 )
@@ -55,6 +56,7 @@ def main(argv: list[str] | None = None) -> int:
     skip_row = read_one_row(args.skip_summary)
     variant_rows = read_rows(args.variants)
     permutation_row = read_one_row(args.recommended_permutation)
+    source_review_summary = read_optional_rows(args.source_review_summary)
     direct_all_lanes_250 = read_optional_one_row(args.direct_all_lanes_250_summary)
     direct_all_lanes_1000 = read_optional_one_row(args.direct_all_lanes_1000_summary)
     direct_all_lanes_1000_program = read_optional_one_row(
@@ -69,6 +71,7 @@ def main(argv: list[str] | None = None) -> int:
         skip_row,
         variant_rows,
         permutation_row,
+        source_review_summary=source_review_summary,
         direct_all_lanes_250=direct_all_lanes_250,
         direct_all_lanes_1000=direct_all_lanes_1000,
         direct_all_lanes_1000_program=direct_all_lanes_1000_program,
@@ -93,6 +96,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--skip-summary", type=Path, default=DEFAULT_SKIP_SUMMARY)
     parser.add_argument("--variants", type=Path, default=DEFAULT_VARIANTS)
     parser.add_argument("--recommended-permutation", type=Path, default=DEFAULT_RECOMMENDED_PERMUTATION)
+    parser.add_argument("--source-review-summary", type=Path, default=DEFAULT_SOURCE_REVIEW_SUMMARY)
     parser.add_argument(
         "--direct-all-lanes-250-summary",
         type=Path,
@@ -130,6 +134,7 @@ def build_option_rows(
     variant_rows: list[dict[str, str]],
     permutation_row: dict[str, str],
     *,
+    source_review_summary: list[dict[str, str]] | None = None,
     direct_all_lanes_250: dict[str, str] | None = None,
     direct_all_lanes_1000: dict[str, str] | None = None,
     direct_all_lanes_1000_program: dict[str, str] | None = None,
@@ -141,6 +146,7 @@ def build_option_rows(
     expected_pairs = pair_row.get("expected_published_pairs", "")
     length_filtered_pairs = pair_row.get("length_filtered_same_record_pairs", "")
     wnp_delta = pair_row.get("wnp_disputed_zacut_appellation_min_length_pair_delta", "")
+    source_review_flag_text = source_review_flag_evidence(source_review_summary or [])
     printed_defined = variant_value(variant_rows, "term_printed", "defined_corrected_distances")
     program_defined = variant_value(variant_rows, "term_program", "defined_corrected_distances")
     fixed_defined = variant_value(variant_rows, "fixed_250", "defined_corrected_distances")
@@ -219,6 +225,17 @@ def build_option_rows(
         },
         {
             "area": "Pair universe",
+            "option": "WNP/context flagged source-review queue",
+            "status": "diagnostic_source_review_context",
+            "evidence": source_review_flag_text,
+            "recommendation": (
+                "Use these flags to prioritize source-lock review; do not change "
+                "the pair universe automatically."
+            ),
+            "claim_boundary": "diagnostic only",
+        },
+        {
+            "area": "Pair universe",
             "option": "defined-distance output interpretation",
             "status": "recommended_working_interpretation",
             "evidence": defined_distance_evidence,
@@ -271,9 +288,45 @@ def variant_value(rows: list[dict[str, str]], variant: str, field: str) -> str:
     return ""
 
 
+def source_review_flag_evidence(rows: list[dict[str, str]]) -> str:
+    if not rows:
+        return "No source-review queue summary was available."
+    counts: dict[str, int] = {}
+    for row in rows:
+        for count, flag in parse_flag_counts(row.get("source_review_flags", "")):
+            counts[flag] = counts.get(flag, 0) + count
+    if not counts:
+        return "Source-review queue has no WNP/context flags in the current run."
+    total = sum(counts.values())
+    parts = ", ".join(f"{counts[flag]} {flag}" for flag in sorted(counts))
+    return f"Source-review queue flags {total} WNP/context queued terms: {parts}."
+
+
+def parse_flag_counts(value: str) -> list[tuple[int, str]]:
+    out = []
+    for part in value.split(","):
+        chunk = part.strip()
+        if not chunk:
+            continue
+        count_text, _, flag = chunk.partition(" ")
+        if not flag:
+            continue
+        try:
+            out.append((int(count_text), flag.strip()))
+        except ValueError:
+            continue
+    return out
+
+
 def read_rows(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8", newline="") as handle:
         return list(csv.DictReader(handle))
+
+
+def read_optional_rows(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    return read_rows(path)
 
 
 def read_one_row(path: Path) -> dict[str, str]:
@@ -412,6 +465,7 @@ def write_manifest(
             "skip_summary": str(args.skip_summary),
             "variants": str(args.variants),
             "recommended_permutation": str(args.recommended_permutation),
+            "source_review_summary": str(args.source_review_summary),
             "direct_all_lanes_250_summary": str(args.direct_all_lanes_250_summary),
             "direct_all_lanes_1000_summary": str(args.direct_all_lanes_1000_summary),
             "direct_all_lanes_1000_program_summary": str(

@@ -34,6 +34,10 @@ class WrrLockOptionsTests(unittest.TestCase):
                 "observed_defined_corrected_distances": "48",
                 "rho0_bonferroni": "0.00086",
             },
+            source_review_summary=[
+                {"source_review_flags": "2 wnp_disputed_zacut_appellation"},
+                {"source_review_flags": "1 wnp_book_title_appellation_dispute"},
+            ],
             direct_all_lanes_250={"defined_corrected_distances": "50"},
             direct_all_lanes_1000={"defined_corrected_distances": "72"},
             direct_all_lanes_1000_program={"defined_corrected_distances": "72"},
@@ -57,6 +61,10 @@ class WrrLockOptionsTests(unittest.TestCase):
         self.assertEqual(
             by_option["repo-defined WNP-excluded 999,999 date-label diagnostic"]["claim_boundary"],
             "diagnostic only",
+        )
+        self.assertIn(
+            "3 WNP/context queued terms",
+            by_option["WNP/context flagged source-review queue"]["evidence"],
         )
         self.assertIn(
             "printed/program/fixed250 = 28/28/28",
@@ -116,6 +124,7 @@ class WrrLockOptionsTests(unittest.TestCase):
             skip = root / "skip.csv"
             variants = root / "variants.csv"
             permutation = root / "perm.csv"
+            source_review_summary = root / "source_review_summary.csv"
             direct_250 = root / "direct_250.csv"
             direct_1000 = root / "direct_1000.csv"
             direct_1000_program = root / "direct_1000_program.csv"
@@ -167,6 +176,13 @@ class WrrLockOptionsTests(unittest.TestCase):
                     }
                 ],
             )
+            write_csv(
+                source_review_summary,
+                [
+                    {"source_review_flags": "2 wnp_disputed_zacut_appellation"},
+                    {"source_review_flags": "1 wnp_book_title_appellation_dispute"},
+                ],
+            )
             write_csv(direct_250, [{"defined_corrected_distances": "50"}])
             write_csv(direct_1000, [{"defined_corrected_distances": "72"}])
             write_csv(direct_1000_program, [{"defined_corrected_distances": "72"}])
@@ -191,6 +207,8 @@ class WrrLockOptionsTests(unittest.TestCase):
                     str(variants),
                     "--recommended-permutation",
                     str(permutation),
+                    "--source-review-summary",
+                    str(source_review_summary),
                     "--direct-all-lanes-250-summary",
                     str(direct_250),
                     "--direct-all-lanes-1000-summary",
@@ -211,10 +229,11 @@ class WrrLockOptionsTests(unittest.TestCase):
             )
 
             self.assertEqual(rc, 0)
-            self.assertEqual(len(list(csv.DictReader(out.open(encoding="utf-8")))), 7)
+            self.assertEqual(len(list(csv.DictReader(out.open(encoding="utf-8")))), 8)
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("Status: decision aid, not a WRR reproduction.", text)
             self.assertIn("Current No-Input Path", text)
+            self.assertIn("WNP/context queued terms", text)
             self.assertIn("changes 0 pair rows", text)
             self.assertTrue(manifest.exists())
 
