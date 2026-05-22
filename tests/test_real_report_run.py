@@ -393,6 +393,8 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("source_basis_failures", payload)
             self.assertIn("expanded_strata_tooling_failures", payload)
             self.assertIn("study_mapping_schema_failures", payload)
+            self.assertIn("preregistration_placeholder_paths", payload)
+            self.assertIn("preregistration_placeholder_failures", payload)
             self.assertIn("stale_generated_indexes", payload)
 
     def test_preflight_fails_on_prospective_lane_validation_failure(self) -> None:
@@ -479,6 +481,44 @@ class RealReportRunTests(unittest.TestCase):
                 "study mapping schema failures: "
                 "data/study/mappings/demo.csv missing required columns: locked_at",
                 payload["failures"],
+            )
+
+    def test_preflight_fails_on_preregistration_placeholder_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight,
+                "find_preregistration_placeholder_failures",
+                return_value=["docs/STUDY_PREREGISTRATION.md:12:5: [name]"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["preregistration_placeholder_failures"],
+                ["docs/STUDY_PREREGISTRATION.md:12:5: [name]"],
+            )
+            self.assertIn(
+                "preregistration placeholder failures: "
+                "docs/STUDY_PREREGISTRATION.md:12:5: [name]",
+                payload["failures"],
+            )
+
+    def test_concrete_preregistration_paths_skip_template(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            docs = root / "docs"
+            docs.mkdir()
+            (docs / "ALPHA_PREREGISTRATION.md").write_text("# Alpha\n", encoding="utf-8")
+            (docs / "PROSPECTIVE_STUDY_PREREGISTRATION_TEMPLATE.md").write_text(
+                "# Template\n",
+                encoding="utf-8",
+            )
+
+            self.assertEqual(
+                preflight.concrete_preregistration_paths(root),
+                [Path("docs/ALPHA_PREREGISTRATION.md")],
             )
 
     def test_preflight_detects_stale_generated_indexes(self) -> None:

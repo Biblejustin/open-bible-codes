@@ -20,6 +20,7 @@ from els.project_index import (
 )
 from scripts import (
     check_expanded_strata_tooling,
+    check_preregistration_placeholders,
     check_prospective_study_lanes,
     check_source_basis_audit_queue,
     validate_study_mapping_schemas,
@@ -449,6 +450,16 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(study_mapping_schema_failures)
         )
 
+    preregistration_placeholder_paths = concrete_preregistration_paths(root)
+    preregistration_placeholder_failures = find_preregistration_placeholder_failures(
+        preregistration_placeholder_paths
+    )
+    if preregistration_placeholder_failures:
+        failures.append(
+            "preregistration placeholder failures: "
+            + "; ".join(preregistration_placeholder_failures)
+        )
+
     stale_indexes = stale_generated_indexes(root)
     if stale_indexes:
         failures.append("stale generated indexes: " + ", ".join(stale_indexes))
@@ -472,6 +483,10 @@ def main(argv: list[str] | None = None) -> int:
         "source_basis_failures": source_basis_failures,
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,
         "study_mapping_schema_failures": study_mapping_schema_failures,
+        "preregistration_placeholder_paths": [
+            str(path) for path in preregistration_placeholder_paths
+        ],
+        "preregistration_placeholder_failures": preregistration_placeholder_failures,
         "stale_generated_indexes": stale_indexes,
         "forbidden_account_terms": FORBIDDEN_ACCOUNT_TERMS,
         "forbidden_repo_hits": forbidden_repo_hits,
@@ -538,6 +553,29 @@ def stale_generated_indexes(root: Path) -> list[str]:
             ):
                 stale.append("protocols/INDEX.md")
     return stale
+
+
+def concrete_preregistration_paths(root: Path) -> list[Path]:
+    template = Path("docs/PROSPECTIVE_STUDY_PREREGISTRATION_TEMPLATE.md")
+    docs_root = root / "docs"
+    return [
+        Path("docs") / path.name
+        for path in sorted(docs_root.glob("*PREREG*.md"))
+        if Path("docs") / path.name != template
+    ]
+
+
+def find_preregistration_placeholder_failures(paths: list[Path]) -> list[str]:
+    failures: list[str] = []
+    for path in paths:
+        for hit in check_preregistration_placeholders.find_placeholders(
+            path,
+            allowed=set(),
+        ):
+            failures.append(
+                f"{hit.path}:{hit.line_number}:{hit.column_number}: {hit.placeholder}"
+            )
+    return failures
 
 
 def git_status_short(root: Path) -> list[str]:
