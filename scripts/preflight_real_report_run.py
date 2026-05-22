@@ -272,6 +272,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/import_wrr_terms.py",
     "scripts/analyze_wrr_source_shapes.py",
     "scripts/analyze_wrr_audit_counts.py",
+    "scripts/analyze_wrr_zero_hit_variant_probe.py",
     "scripts/analyze_wrr_text_source.py",
     "scripts/analyze_wrr_pair_audit.py",
     "scripts/analyze_wrr_pair_controls.py",

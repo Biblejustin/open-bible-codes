@@ -117,6 +117,11 @@ Already implemented:
   rows with no appellation ordinary hits, 12 with no date ordinary hits, 15
   with neither term ordinary-hit valid, and 0 under-minimum rows; see
   `docs/WRR_DEFINED_GAP_REASON_AUDIT.md`.
+- WRR zero-hit variant probe in
+  `scripts/analyze_wrr_zero_hit_variant_probe.py`, wired into
+  `protocols/wrr_audit_counts.toml`, checking simple one-edit variants for
+  imported WRR2 terms with zero Genesis count-smoke hits. It is source-review
+  triage only; see `docs/WRR_ZERO_HIT_VARIANT_PROBE.md`.
 - WRR2 cross-pair grid in `scripts/build_wrr_cross_pair_grid.py` and
   `protocols/wrr_cross_pair_grid.toml`, crossing every imported appellation
   with every imported date for future date-label permutation diagnostics.

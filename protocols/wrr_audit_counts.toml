@@ -289,6 +289,35 @@ outputs = [
 ]
 
 [[steps]]
+id = "probe_wrr_zero_hit_variants"
+description = "Probe simple one-edit variants for imported WRR2 terms with zero Genesis count hits."
+argv = [
+  "-m", "scripts.analyze_wrr_zero_hit_variant_probe",
+  "--config", "configs/example_koren_genesis.toml",
+  "--counts", "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "--row-ocr", "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv",
+  "--min-skip", "2",
+  "--max-skip", "1000",
+  "--direction", "both",
+  "--out", "reports/wrr_1994/wrr_zero_hit_variant_probe.csv",
+  "--summary-out", "reports/wrr_1994/wrr_zero_hit_variant_probe_summary.csv",
+  "--markdown-out", "docs/WRR_ZERO_HIT_VARIANT_PROBE.md",
+  "--manifest-out", "reports/wrr_1994/wrr_zero_hit_variant_probe.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_zero_hit_variant_probe.py",
+  "configs/example_koren_genesis.toml",
+  "reports/wrr_1994/wrr2_genesis_counts.csv",
+  "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_zero_hit_variant_probe.csv",
+  "reports/wrr_1994/wrr_zero_hit_variant_probe_summary.csv",
+  "docs/WRR_ZERO_HIT_VARIANT_PROBE.md",
+  "reports/wrr_1994/wrr_zero_hit_variant_probe.manifest.json",
+]
+
+[[steps]]
 id = "label_wrr2_genesis_domains"
 description = "Label imported WRR2 Genesis ELS hits with conservative domains of minimality."
 argv = [
