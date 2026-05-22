@@ -92,6 +92,7 @@ class ClaimCatalogTests(unittest.TestCase):
         self.assertEqual(row["evidence"], "docs/WRR_CLAIM_READINESS.md")
         self.assertIn("readiness gate", row["notes"])
         self.assertIn("docs/WRR_SOURCE_AUDIT.md", row["notes"])
+        self.assertIn("visual triage notes do not exclude pairs automatically", row["notes"])
 
 
 if __name__ == "__main__":

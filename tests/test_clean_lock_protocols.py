@@ -150,6 +150,18 @@ def test_wrr_support_docs_track_single_term_source_policy_impacts() -> None:
         assert "do not exclude pairs automatically" in text
 
 
+def test_wrr_catalog_and_source_audit_track_visual_non_exclusion() -> None:
+    report_paths = [
+        Path("docs/WRR_SOURCE_AUDIT.md"),
+        Path("docs/CLAIM_CATALOG.md"),
+    ]
+
+    for path in report_paths:
+        text = path.read_text(encoding="utf-8")
+        assert "Visual triage" in text
+        assert "do not exclude pairs automatically" in text
+
+
 def test_consolidated_findings_include_clean_lock_closeout() -> None:
     text = Path("docs/CONSOLIDATED_FINDINGS.md").read_text(encoding="utf-8")
 

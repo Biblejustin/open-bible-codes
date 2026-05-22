@@ -699,7 +699,8 @@ a source rule for pre-filtering the candidate set.
 The separate source-policy scenario packet keeps that distinction explicit:
 baseline keeps 165 appellation-length pairs, excluding WNP Zacut leaves 157,
 and excluding all source-review flags leaves 154. No source policy is selected
-from those diagnostics.
+from those diagnostics. Visual triage notes separate OCR misses from title-prefix
+and Chelm source-rule questions, but do not exclude pairs automatically.
 
 ## Count Smoke
 
@@ -879,7 +880,8 @@ gap, while excluding every WNP-disputed Zacut row would not.
 Source-policy scenario impact is tracked separately from that raw reconciliation:
 `keep_all_working_source` remains at 165 >=5 pairs, `exclude_wnp_zacut_only`
 leaves 157, and `exclude_all_source_review_flags` leaves 154. These rows are
-decision aids only; they do not promote a pair universe.
+decision aids only; they do not promote a pair universe. Visual triage remains
+non-exclusionary until an explicit source policy is selected.
 
 WRR pair-eligibility lock-prep table:
 
