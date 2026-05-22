@@ -1041,6 +1041,7 @@ def write_summary(
         "- all-codes compound-extension confirmatory controls",
         "- all-codes follow-up manual-review packet",
         "- centered occurrence index",
+        "- CRD exact center-word broad-screen findings",
         "- apocrypha/deuterocanon bridge study with expanded shuffled controls",
         "- KJVA apocrypha/deuterocanon bridge term-level review",
         "- KJVA apocrypha/deuterocanon bridge term-level shuffled controls",

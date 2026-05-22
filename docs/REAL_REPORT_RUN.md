@@ -98,6 +98,9 @@ This assembly run includes:
   `docs/ALL_CODES_FOLLOWUP_REVIEW.md`
 - centered occurrence index:
   `docs/CENTERED_OCCURRENCE_INDEX.md`
+- CRD exact center-word broad-screen findings:
+  `docs/CRD_CENTER_WORD_SELF_VS_CONCEPT_FINDINGS.md` and
+  `docs/CRD_CENTER_WORD_VERSION_PRESENCE_FINDINGS.md`
 - prospective study readiness matrix:
   `docs/PROSPECTIVE_STUDY_READINESS.md`
 - prospective term-leakage audit workflow:
