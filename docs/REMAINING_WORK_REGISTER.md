@@ -160,6 +160,7 @@ Current pushed commits for this cleanup:
 - `80583a7` Guard WRR visual notes as non exclusions.
 - `de37840` Surface WRR visual triage in blockers.
 - `c336717` Refresh WRR visual triage run summary.
+- `c34290b` Sync final reports with WRR visual triage.
 
 ### Formal Real Report Rerun
 

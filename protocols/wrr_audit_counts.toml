@@ -1062,7 +1062,7 @@ outputs = [
 
 [[steps]]
 id = "build_wrr_claim_blocker_packet"
-description = "Gather WRR claim blockers, lock options, and source-review flags into one decision packet."
+description = "Gather WRR claim blockers, lock options, source-review flags, and visual triage notes into one decision packet."
 argv = [
   "-m", "scripts.build_wrr_claim_blocker_packet",
   "--readiness", "reports/wrr_1994/wrr_claim_readiness.csv",

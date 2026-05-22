@@ -242,7 +242,7 @@ reconciliation for the current imported-pair count versus the source-cited
 163-distance WRR second-list sample. It also reads the current repo-defined
 999,999 date-label permutation diagnostic into the WRR method-status matrix,
 emits source-policy scenario impact, emits D(w) formula sensitivity, and gathers
-lock options plus the claim-blocker packet.
+lock options plus the claim-blocker packet, including visual triage notes.
 It is not an exact WRR reproduction.
 
 Hebrew MT-family version comparison:
