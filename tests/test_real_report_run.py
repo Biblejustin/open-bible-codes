@@ -73,6 +73,10 @@ class RealReportRunTests(unittest.TestCase):
             "docs/WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md",
             steps_by_id["preflight"]["inputs"],
         )
+        self.assertIn(
+            "docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("docs/WRR_SOURCE_REVIEW_QUEUE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn(
             "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md",
@@ -97,6 +101,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
+            "scripts/build_wrr_residual_reconciliation_action_plan.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
             "scripts/build_wrr_claim_blocker_packet.py",
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
@@ -118,6 +126,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_residual_reconciliation_action_plan.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_residual_reconciliation_action_summary.csv",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
@@ -433,11 +449,23 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/build_wrr_residual_term_reconciliation_queue.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/build_wrr_residual_reconciliation_action_plan.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/check_wrr_residual_term_reconciliation_queue_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_residual_reconciliation_action_plan_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -904,6 +932,28 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "WRR variant-gap doc failures: "
                 "docs/WRR_VARIANT_GAP_IMPACT.md missing diagnostic status",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_residual_action_plan_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_residual_reconciliation_action_plan_doc,
+                "validate_residual_reconciliation_action_plan_doc",
+                return_value=["docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md missing boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_residual_reconciliation_action_plan_doc_failures"],
+                ["docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md missing boundary"],
+            )
+            self.assertIn(
+                "WRR residual reconciliation action-plan failures: "
+                "docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md missing boundary",
                 payload["failures"],
             )
 

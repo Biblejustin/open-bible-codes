@@ -641,6 +641,10 @@ WRR residual term reconciliation queue:
 `docs/WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md`.
 It collapses the residual pair packet into 58 unique unresolved appellation
 terms, preserving the 59 residual pair links and 40 minimum-frontier links.
+WRR residual reconciliation action plan:
+`docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md`.
+It converts those unique-term rows into no-input evidence lanes without
+selecting source corrections or pair exclusions.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.

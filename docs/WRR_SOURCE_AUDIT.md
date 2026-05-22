@@ -170,6 +170,11 @@ The residual term reconciliation queue now collapses the remaining 59
 pair-level residual blockers into 58 unique unresolved appellation terms:
 43 source-transcription/row-alignment targets, 11 method/pair-universe
 targets, 3 page-image near-match targets, and 1 source-policy/pair-rule target.
+`docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md` now turns those same rows
+into evidence-action lanes while preserving the no-correction boundary:
+source-policy rows need citable pair-rule evidence, transcription rows need
+primary row or row-alignment evidence, near-match rows need page-image review,
+and OCR-matched rows move to method/pair-universe review before source edits.
 
 The ANU/McKay data page provides plain-text WRR lists in a modified
 Michigan-Claremont transliteration. User decision on 2026-05-21: use this

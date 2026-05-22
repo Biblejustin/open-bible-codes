@@ -1380,6 +1380,7 @@ def write_summary(
             "- `docs/WRR_LOCK_OPTIONS.md`",
             "- `docs/WRR_CLAIM_READINESS.md`",
             "- `docs/WRR_CLAIM_BLOCKER_PACKET.md`",
+            "- `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md`",
             "- `docs/WRR_SOURCE_POLICY_SCENARIOS.md`",
             "- `docs/WRR_DW_FORMULA_SENSITIVITY.md`",
             "- `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`",

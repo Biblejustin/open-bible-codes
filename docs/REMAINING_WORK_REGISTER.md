@@ -468,6 +468,11 @@ classifies 43 terms as source-transcription/row-alignment review, 11 as
 method-or-pair-universe review, 3 as page-image near-match review, and 1 as
 source-policy/pair-rule review (`wrr2_32_app_05`, `$LMHMX@LMA`,
 `wnp_chelm_spelling_context`).
+`docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md` now converts those classes
+into no-input evidence lanes: 1 source-policy/pair-rule target, 43
+source-transcription/row-alignment targets, 3 page-image near-match targets,
+and 11 method/pair-universe targets. It keeps all terms in the working source
+until citable row, policy, or method evidence is locked.
 The next WRR work is therefore source/term/pair-rule reconciliation before any
 exact published reproduction language.
 
@@ -624,9 +629,12 @@ guarding, WRR defined-distance diagnostic doc guarding, and WRR variant-gap
 doc guarding, WRR variant-gap method-status evidence propagation, and WRR
 residual burden summary/blocker propagation, and WRR Wayback source-recovery
 probing/guarding, residual unique-term reconciliation queue guarding, and
-residual term blocker-packet propagation:
+residual term blocker-packet propagation, and residual reconciliation action
+plan guarding:
 
-- `python3 -m pytest -q` passed: 1268 tests and 13961 subtests.
+- `python3 -m pytest -q` passed: 1275 tests and 13961 subtests.
+- `python3 -m pytest tests/test_build_wrr_residual_reconciliation_action_plan.py tests/test_check_wrr_residual_reconciliation_action_plan_doc.py -q` passed: 6 tests.
+- `python3 -m pytest tests/test_real_report_run.py tests/test_clean_lock_protocols.py tests/test_build_wrr_residual_reconciliation_action_plan.py tests/test_check_wrr_residual_reconciliation_action_plan_doc.py -q` passed: 69 tests.
 - `python3 -m pytest tests/test_build_wrr_claim_blocker_packet.py tests/test_check_wrr_claim_blocker_packet_doc.py tests/test_clean_lock_protocols.py tests/test_wrr_cross_pair_grid.py tests/test_real_report_run.py -q` passed: 71 tests.
 - `python3 -m pytest tests/test_build_wrr_residual_term_reconciliation_queue.py tests/test_check_wrr_residual_term_reconciliation_queue_doc.py tests/test_real_report_run.py -q` passed: 51 tests.
 - `python3 -m pytest tests/test_build_wrr_wayback_source_recovery_probe.py tests/test_check_wrr_wayback_source_recovery_probe_doc.py tests/test_real_report_run.py -q` passed: 52 tests.
@@ -667,6 +675,7 @@ residual term blocker-packet propagation:
 - `python3 -m scripts.check_wrr_source_recovery_probe_doc` passed.
 - `python3 -m scripts.check_wrr_wayback_source_recovery_probe_doc` passed.
 - `python3 -m scripts.check_wrr_residual_term_reconciliation_queue_doc` passed.
+- `python3 -m scripts.check_wrr_residual_reconciliation_action_plan_doc` passed.
 - `python3 -m scripts.check_hypothesis_testing_source_audit_doc` passed.
 - `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_claim_catalog.py tests/test_wrr_claim_readiness.py -q` passed: 32 tests and 60 subtests.
@@ -694,6 +703,7 @@ residual term blocker-packet propagation:
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wayback_source_probe.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_residual_term_queue.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_residual_term_blocker.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_residual_action_plan.json` passed.
 - `python3 -m scripts.check_prospective_study_lanes` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.

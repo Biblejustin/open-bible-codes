@@ -72,7 +72,8 @@ This assembly run includes:
   `docs/WRR_CORRECTED_DISTANCE_NOTES.md`, `docs/WRR_CROSS_PAIR_GRID.md`, and
   `docs/WRR_LOCK_OPTIONS.md`, plus `docs/WRR_SOURCE_POLICY_SCENARIOS.md`,
   `docs/WRR_DW_FORMULA_SENSITIVITY.md`, `docs/WRR_CLAIM_READINESS.md`, and
-  `docs/WRR_CLAIM_BLOCKER_PACKET.md`
+  `docs/WRR_CLAIM_BLOCKER_PACKET.md`, plus
+  `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md`
 - broader search/current findings writeup:
   `docs/BROADER_SEARCH_FINDINGS.md`
 - broad Hebrew modern/geopolitical version-distribution run:
@@ -239,7 +240,8 @@ The report-run summary should currently say:
   163-distance gap. The explicit readiness gate is tracked in
   `docs/WRR_CLAIM_READINESS.md`; `docs/WRR_CLAIM_BLOCKER_PACKET.md` records
   that no current claim-readiness blockers remain under the selected local lock
-  policy.
+  policy; `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md` keeps the residual
+  source/term/method evidence lanes visible without selecting corrections.
 - `υιοσ` (huios; English: son) and `αιμα` (haima; English: blood) remain weaker hidden-path candidates because their exact
   patterns are missing from one or more compared Greek NT sources.
 - no row is claim-grade yet.

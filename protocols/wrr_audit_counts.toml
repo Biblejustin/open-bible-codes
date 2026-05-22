@@ -927,6 +927,28 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_residual_reconciliation_action_plan"
+description = "Convert residual WRR term targets into diagnostic evidence-action lanes."
+argv = [
+  "-m", "scripts.build_wrr_residual_reconciliation_action_plan",
+  "--residual-term-queue", "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv",
+  "--out", "reports/wrr_1994/wrr_residual_reconciliation_action_plan.csv",
+  "--summary-out", "reports/wrr_1994/wrr_residual_reconciliation_action_summary.csv",
+  "--markdown-out", "docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md",
+  "--manifest-out", "reports/wrr_1994/wrr_residual_reconciliation_action_plan.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_residual_reconciliation_action_plan.py",
+  "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_residual_reconciliation_action_plan.csv",
+  "reports/wrr_1994/wrr_residual_reconciliation_action_summary.csv",
+  "docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md",
+  "reports/wrr_1994/wrr_residual_reconciliation_action_plan.manifest.json",
+]
+
+[[steps]]
 id = "analyze_wrr_source_policy_scenarios"
 description = "Count diagnostic source-policy scenario impacts without selecting a policy."
 argv = [

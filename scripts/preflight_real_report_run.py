@@ -35,6 +35,7 @@ from scripts import (
     check_wrr_dw_formula_sensitivity_doc,
     check_wrr_lock_options_doc,
     check_wrr_method_status_doc,
+    check_wrr_residual_reconciliation_action_plan_doc,
     check_wrr_residual_term_reconciliation_queue_doc,
     check_wrr_source_recovery_probe_doc,
     check_wrr_wayback_source_recovery_probe_doc,
@@ -178,6 +179,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_VARIANT_GAP_UPPER_BOUND.md",
     "docs/WRR_VARIANT_RESIDUAL_REVIEW_PACKET.md",
     "docs/WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md",
+    "docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md",
     "docs/WRR_SOURCE_REVIEW_QUEUE.md",
     "docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md",
     "docs/WRR_METHODOLOGY_GAPS.md",
@@ -381,6 +383,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/analyze_wrr_variant_gap_upper_bound.py",
     "scripts/build_wrr_variant_residual_review_packet.py",
     "scripts/build_wrr_residual_term_reconciliation_queue.py",
+    "scripts/build_wrr_residual_reconciliation_action_plan.py",
     "scripts/build_wrr_source_review_queue.py",
     "scripts/check_wrr_source_review_queue_doc.py",
     "scripts/check_wrr_source_visual_review_notes_doc.py",
@@ -396,6 +399,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_lock_options_doc.py",
     "scripts/check_wrr_method_status_doc.py",
     "scripts/check_wrr_residual_term_reconciliation_queue_doc.py",
+    "scripts/check_wrr_residual_reconciliation_action_plan_doc.py",
     "scripts/check_wrr_source_recovery_probe_doc.py",
     "scripts/build_wrr_wayback_source_recovery_probe.py",
     "scripts/check_wrr_wayback_source_recovery_probe_doc.py",
@@ -595,6 +599,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_residual_term_reconciliation_doc_failures)
         )
 
+    wrr_residual_reconciliation_action_plan_doc_failures = (
+        check_wrr_residual_reconciliation_action_plan_doc.validate_residual_reconciliation_action_plan_doc(
+            check_wrr_residual_reconciliation_action_plan_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_residual_reconciliation_action_plan_doc_failures:
+        failures.append(
+            "WRR residual reconciliation action-plan failures: "
+            + "; ".join(wrr_residual_reconciliation_action_plan_doc_failures)
+        )
+
     wrr_source_review_queue_doc_failures = (
         check_wrr_source_review_queue_doc.validate_source_review_queue_doc(
             check_wrr_source_review_queue_doc.DEFAULT_DOC
@@ -753,6 +768,9 @@ def main(argv: list[str] | None = None) -> int:
         "wrr_variant_gap_doc_failures": wrr_variant_gap_doc_failures,
         "wrr_residual_term_reconciliation_doc_failures": (
             wrr_residual_term_reconciliation_doc_failures
+        ),
+        "wrr_residual_reconciliation_action_plan_doc_failures": (
+            wrr_residual_reconciliation_action_plan_doc_failures
         ),
         "wrr_source_review_queue_doc_failures": wrr_source_review_queue_doc_failures,
         "wrr_source_visual_review_notes_doc_failures": (
