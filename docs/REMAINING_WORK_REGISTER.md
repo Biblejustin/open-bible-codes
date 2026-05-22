@@ -73,8 +73,11 @@ python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
 Current summary:
 
 - `reports/real_report_run/summary.md`
-- generated UTC: `2026-05-22T02:10:57.999252+00:00`
-- report commit recorded by the protocol: `ac86fb5`
+- local generated report files under `reports/real_report_run/` are ignored by
+  Git and record the commit active when the protocol last ran.
+- after tracked planning-doc commits, rerun
+  `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
+  if exact local manifest-to-HEAD alignment matters.
 
 ### Reader Report Refresh
 
