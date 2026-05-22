@@ -7,7 +7,8 @@ source-policy propagation, Torah-code research-model source-status cleanup,
 Greek follow-up status refreshes, and Hebrew MT/STEP_TAHOT source-status
 cleanup, prospective-lane validator tightening, source-audit preflight guard
 coverage, prospective-lane validation in report preflight, source-basis audit
-queue guarding, and English source-basis preflight inputs.
+queue guarding, English source-basis preflight inputs, and formal source-basis
+queue validation.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -91,6 +92,7 @@ Current pushed commits for this cleanup:
 - `2250b7a` Run prospective lane validation in report preflight.
 - `980cfb6` Guard completed source basis audit queue.
 - `946e76d` Guard English source basis inputs in preflight.
+- `dd777bc` Validate source basis audit queue in preflight.
 
 ### Formal Real Report Rerun
 
@@ -466,11 +468,13 @@ preflight guard pass, Greek follow-up status refresh, Hebrew MT/STEP_TAHOT
 status refresh, KJVA bridge lock-basis clarification, prospective-lane
 validator tightening, source-audit preflight guard coverage, prospective-lane
 validation in report preflight, source-basis audit queue guarding, and English
-source-basis preflight inputs:
+source-basis preflight inputs, and formal source-basis queue validation:
 
-- `python3 -m pytest -q` passed: 1145 tests and 13951 subtests.
+- `python3 -m pytest -q` passed: 1150 tests and 13951 subtests.
 - `python3 -m pytest tests/test_import_bolls_translation.py tests/test_english_version_manifests.py -q` passed: 12 tests and 117 subtests.
 - `python3 -m pytest tests/test_english_version_manifests.py -q` passed: 8 tests and 117 subtests.
+- `python3 -m pytest tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py tests/test_real_report_run.py -q` passed: 39 tests and 117 subtests.
+- `python3 -m scripts.check_source_basis_audit_queue` passed.
 - `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_claim_catalog.py tests/test_wrr_claim_readiness.py -q` passed: 32 tests and 60 subtests.
 - `python3 -m pytest tests/test_real_report_run.py -q` passed: 25 tests.
