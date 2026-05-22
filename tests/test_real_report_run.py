@@ -92,6 +92,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/validate_study_mapping_schemas.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_crd_relevance_dictionary.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/classify_centered_relevance.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn("scripts/check_manual_review_queue.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/EXPANDED_STRATA_TOOLING.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/STUDY_MAPPING_SCHEMAS.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/CRD_PREREGISTRATION.md", steps_by_id["preflight"]["inputs"])
@@ -265,6 +266,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/validate_study_mapping_schemas.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_crd_relevance_dictionary.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/classify_centered_relevance.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/check_manual_review_queue.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/EXPANDED_STRATA_TOOLING.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/STUDY_MAPPING_SCHEMAS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/CRD_PREREGISTRATION.md", preflight.DEFAULT_REQUIRED_PATHS)
@@ -406,6 +408,7 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("preregistration_placeholder_paths", payload)
             self.assertIn("preregistration_placeholder_failures", payload)
             self.assertIn("crd_relevance_dictionary_failures", payload)
+            self.assertIn("manual_review_queue_failures", payload)
             self.assertIn("stale_generated_indexes", payload)
 
     def test_preflight_fails_on_prospective_lane_validation_failure(self) -> None:
@@ -550,6 +553,28 @@ class RealReportRunTests(unittest.TestCase):
             )
             self.assertIn(
                 "CRD relevance dictionary failures: dictionary sha256 mismatch",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_manual_review_queue_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_manual_review_queue,
+                "validate_manual_review_queue",
+                return_value=["docs/MANUAL_REVIEW_QUEUE.md missing guard phrase"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["manual_review_queue_failures"],
+                ["docs/MANUAL_REVIEW_QUEUE.md missing guard phrase"],
+            )
+            self.assertIn(
+                "manual review queue failures: "
+                "docs/MANUAL_REVIEW_QUEUE.md missing guard phrase",
                 payload["failures"],
             )
 

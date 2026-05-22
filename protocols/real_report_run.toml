@@ -283,6 +283,7 @@ inputs = [
   "scripts/build_match_strata_index.py",
   "scripts/check_crd_relevance_dictionary.py",
   "scripts/check_expanded_strata_tooling.py",
+  "scripts/check_manual_review_queue.py",
   "scripts/validate_study_mapping_schemas.py",
   "scripts/run_crd_density.py",
   "scripts/classify_centered_relevance.py",

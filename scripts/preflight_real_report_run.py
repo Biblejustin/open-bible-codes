@@ -22,6 +22,7 @@ from els.project_index import (
 from scripts import (
     check_crd_relevance_dictionary,
     check_expanded_strata_tooling,
+    check_manual_review_queue,
     check_preregistration_placeholders,
     check_prospective_study_lanes,
     check_source_basis_audit_queue,
@@ -314,6 +315,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_match_strata_index.py",
     "scripts/check_crd_relevance_dictionary.py",
     "scripts/check_expanded_strata_tooling.py",
+    "scripts/check_manual_review_queue.py",
     "scripts/validate_study_mapping_schemas.py",
     "scripts/run_crd_density.py",
     "scripts/classify_centered_relevance.py",
@@ -482,6 +484,15 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(crd_relevance_dictionary_failures)
         )
 
+    manual_review_queue_failures = check_manual_review_queue.validate_manual_review_queue(
+        check_manual_review_queue.DEFAULT_DOC
+    )
+    if manual_review_queue_failures:
+        failures.append(
+            "manual review queue failures: "
+            + "; ".join(manual_review_queue_failures)
+        )
+
     stale_indexes = stale_generated_indexes(root)
     if stale_indexes:
         failures.append("stale generated indexes: " + ", ".join(stale_indexes))
@@ -510,6 +521,7 @@ def main(argv: list[str] | None = None) -> int:
         ],
         "preregistration_placeholder_failures": preregistration_placeholder_failures,
         "crd_relevance_dictionary_failures": crd_relevance_dictionary_failures,
+        "manual_review_queue_failures": manual_review_queue_failures,
         "stale_generated_indexes": stale_indexes,
         "forbidden_account_terms": FORBIDDEN_ACCOUNT_TERMS,
         "forbidden_repo_hits": forbidden_repo_hits,
