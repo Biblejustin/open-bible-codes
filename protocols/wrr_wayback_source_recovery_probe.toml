@@ -1,0 +1,28 @@
+name = "wrr_wayback_source_recovery_probe"
+description = "Probe Wayback snapshots for missing Torah-code research source pages into an isolated recovery bundle."
+manifest_out = "reports/wrr_wayback_source_recovery_probe/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_wayback_recovery_probe"
+description = "Check selected Torah-code research URLs against Wayback closest snapshots."
+always_run = true
+argv = [
+  "-m", "scripts.build_wrr_wayback_source_recovery_probe",
+  "--refresh",
+  "--out", "reports/wrr_wayback_source_recovery_probe/wayback_source_recovery_probe.csv",
+  "--summary-out", "reports/wrr_wayback_source_recovery_probe/wayback_source_recovery_probe_summary.csv",
+  "--markdown-out", "docs/WRR_WAYBACK_SOURCE_RECOVERY_PROBE.md",
+  "--manifest-out", "reports/wrr_wayback_source_recovery_probe/wayback_source_recovery_probe.manifest.json",
+  "--snapshot-dir", "reports/wrr_wayback_source_recovery_probe/snapshots",
+]
+inputs = [
+  "scripts/build_wrr_wayback_source_recovery_probe.py",
+]
+outputs = [
+  "reports/wrr_wayback_source_recovery_probe/wayback_source_recovery_probe.csv",
+  "reports/wrr_wayback_source_recovery_probe/wayback_source_recovery_probe_summary.csv",
+  "docs/WRR_WAYBACK_SOURCE_RECOVERY_PROBE.md",
+  "reports/wrr_wayback_source_recovery_probe/wayback_source_recovery_probe.manifest.json",
+]

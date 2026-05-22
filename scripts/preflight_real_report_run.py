@@ -36,6 +36,7 @@ from scripts import (
     check_wrr_lock_options_doc,
     check_wrr_method_status_doc,
     check_wrr_source_recovery_probe_doc,
+    check_wrr_wayback_source_recovery_probe_doc,
     check_wrr_source_policy_scenarios_doc,
     check_wrr_source_review_queue_doc,
     check_wrr_source_visual_review_notes_doc,
@@ -97,6 +98,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/wrr_cross_pair_grid.toml",
     "protocols/wrr_corrected_distance_direct_all_lanes.toml",
     "protocols/wrr_source_recovery_probe.toml",
+    "protocols/wrr_wayback_source_recovery_probe.toml",
     "protocols/centered_relevance_density.toml",
     "protocols/matrix_cluster_candidates.toml",
     "protocols/matrix_cluster_control_summary.toml",
@@ -164,6 +166,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/HYPOTHESIS_TESTING_SOURCE_AUDIT.md",
     "docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md",
     "docs/WRR_SOURCE_RECOVERY_PROBE.md",
+    "docs/WRR_WAYBACK_SOURCE_RECOVERY_PROBE.md",
     "docs/WRR_REPLICATION_PLAN.md",
     "docs/WRR_METHOD_STATUS.md",
     "docs/WRR_LOCK_OPTIONS.md",
@@ -390,6 +393,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_lock_options_doc.py",
     "scripts/check_wrr_method_status_doc.py",
     "scripts/check_wrr_source_recovery_probe_doc.py",
+    "scripts/build_wrr_wayback_source_recovery_probe.py",
+    "scripts/check_wrr_wayback_source_recovery_probe_doc.py",
     "scripts/check_hypothesis_testing_source_audit_doc.py",
     "scripts/check_wrr_variant_gap_docs.py",
     "scripts/build_wrr_claim_blocker_packet.py",
@@ -411,6 +416,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/greek_screening_all_codes_collection.toml",
     "protocols/wrr_audit_counts.toml",
     "protocols/wrr_source_recovery_probe.toml",
+    "protocols/wrr_wayback_source_recovery_probe.toml",
     "terms/relevance_dictionary.toml",
     "prompts/crd_classifier_v1/system.md",
     "prompts/crd_classifier_v1/user_template.md",
@@ -673,6 +679,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_source_recovery_probe_doc_failures)
         )
 
+    wrr_wayback_source_recovery_probe_doc_failures = (
+        check_wrr_wayback_source_recovery_probe_doc.validate_wayback_source_recovery_probe_doc(
+            check_wrr_wayback_source_recovery_probe_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_wayback_source_recovery_probe_doc_failures:
+        failures.append(
+            "WRR Wayback source-recovery probe doc failures: "
+            + "; ".join(wrr_wayback_source_recovery_probe_doc_failures)
+        )
+
     hypothesis_testing_source_audit_doc_failures = (
         check_hypothesis_testing_source_audit_doc.validate_hypothesis_testing_source_audit_doc(
             check_hypothesis_testing_source_audit_doc.DEFAULT_DOC
@@ -734,6 +751,9 @@ def main(argv: list[str] | None = None) -> int:
         "wrr_lock_options_doc_failures": wrr_lock_options_doc_failures,
         "wrr_method_status_doc_failures": wrr_method_status_doc_failures,
         "wrr_source_recovery_probe_doc_failures": wrr_source_recovery_probe_doc_failures,
+        "wrr_wayback_source_recovery_probe_doc_failures": (
+            wrr_wayback_source_recovery_probe_doc_failures
+        ),
         "hypothesis_testing_source_audit_doc_failures": hypothesis_testing_source_audit_doc_failures,
         "stale_generated_indexes": stale_indexes,
         "forbidden_account_terms": FORBIDDEN_ACCOUNT_TERMS,

@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 129
+Protocols indexed: 130
 
 ## Analysis
 
@@ -160,6 +160,7 @@ Protocols indexed: 129
 | wrr_cross_pair_grid | Build the WRR2 appellation/date cross-pair grid and run cap-250 plus cap-1000 corrected... | 13 |  | reports/wrr_1994 | `wrr_cross_pair_grid.toml` |
 | wrr_source_import | Download external WRR audit files and convert WRR2 into repo term rows. | 3 |  | reports/wrr_1994 | `wrr_source_import.toml` |
 | wrr_source_recovery_probe | Live-refresh selected Torah-code research source labels into an isolated recovery-probe... | 2 |  | reports/wrr_source_recovery_probe | `wrr_source_recovery_probe.toml` |
+| wrr_wayback_source_recovery_probe | Probe Wayback snapshots for missing Torah-code research source pages into an isolated r... | 1 |  | reports/wrr_wayback_source_recovery_probe | `wrr_wayback_source_recovery_probe.toml` |
 
 ## Screening
 

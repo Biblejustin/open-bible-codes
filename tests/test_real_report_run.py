@@ -146,6 +146,7 @@ class RealReportRunTests(unittest.TestCase):
             "docs/HYPOTHESIS_TESTING_SOURCE_AUDIT.md",
             "docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md",
             "docs/WRR_SOURCE_RECOVERY_PROBE.md",
+            "docs/WRR_WAYBACK_SOURCE_RECOVERY_PROBE.md",
         ]:
             self.assertIn(source_audit_doc, steps_by_id["preflight"]["inputs"])
             self.assertIn(source_audit_doc, preflight.DEFAULT_REQUIRED_PATHS)
@@ -159,6 +160,18 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_source_recovery_probe_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "protocols/wrr_wayback_source_recovery_probe.toml",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_wrr_wayback_source_recovery_probe.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_wayback_source_recovery_probe_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -374,6 +387,19 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("protocols/wrr_source_recovery_probe.toml", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/build_wrr_source_recovery_probe.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_wrr_source_recovery_probe_doc.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/WRR_WAYBACK_SOURCE_RECOVERY_PROBE.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn(
+            "protocols/wrr_wayback_source_recovery_probe.toml",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/build_wrr_wayback_source_recovery_probe.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_wayback_source_recovery_probe_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
         self.assertIn(
             "scripts/check_hypothesis_testing_source_audit_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,

@@ -630,6 +630,13 @@ It refreshes selected Torah-code research labels into
 `reports/wrr_source_recovery_probe/`, leaving the cached `reports/wrr_1994/`
 bundle untouched. The probe includes `.html` labels and stale-indexed `.shtml`
 alternates.
+Wayback recovery probe:
+`docs/WRR_WAYBACK_SOURCE_RECOVERY_PROBE.md`.
+Run with:
+`python3 -m scripts.run_protocol protocols/wrr_wayback_source_recovery_probe.toml --resume`.
+It checks archived Torah-code research pages in
+`reports/wrr_wayback_source_recovery_probe/`; current recovery finds 5 usable
+archived concepts and 4 missing level-2/3 geometric or ELS model concepts.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.

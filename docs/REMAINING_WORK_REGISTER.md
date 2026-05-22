@@ -28,7 +28,8 @@ triage fields in the WRR source-review queue, WRR support docs, WRR source
 audit, claim catalog, WRR method-status evidence, WRR source-policy scenario
 docs, WRR defined pair-set diagnostic docs, WRR cross-pair diagnostics, and
 WRR variant residual review-packet guarding, plus WRR residual method-status,
-blocker-packet, and unresolved-term burden propagation.
+blocker-packet, and unresolved-term burden propagation, and WRR Wayback
+source-recovery probing/guarding.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -179,6 +180,7 @@ Current pushed commits for this cleanup:
 - `e2cdd1a` Surface WRR residual packet in method status.
 - `470971e` Surface WRR residual caveat in blocker packet.
 - `725e251` Add WRR residual burden summary.
+- `48fe253` Refresh WRR residual work register.
 
 ### Formal Real Report Rerun
 
@@ -380,6 +382,14 @@ overwriting cached `reports/wrr_1994/` source files. The current live probe
 finds 15/15 selected research URLs, including stale-indexed `.shtml`
 alternates, redirecting to the Torah-code root, 15/15 root canonical rows,
 15/15 unrelated slot/gambling-marker rows, and zero usable current source rows.
+The WRR Wayback source recovery probe now checks archived Torah-code research
+snapshots in `reports/wrr_wayback_source_recovery_probe/` and writes
+`docs/WRR_WAYBACK_SOURCE_RECOVERY_PROBE.md`. The current archive probe checks
+18 URL variants across 9 research concepts, recovers 5 usable archived concepts
+(`research_program_1`, `research_program_2`, `model_overview`,
+`geometric_model_level_1`, and `els_model_level_1`), and leaves 4 concepts
+missing (`geometric_model_level_2`, `geometric_model_level_3`,
+`els_model_level_2`, and `els_model_level_3`).
 These lanes stay non-result-bearing. The
 research-program ELS harness now includes a split-fit Fisher order-statistic
 row plus two transparent row-width modes: strict shared-intersection
@@ -600,9 +610,11 @@ guarding, WRR source-recovery probing, WRR source-recovery probe guarding, and
 `.shtml` research-source alternate probing, hypothesis-testing source-status
 guarding, WRR defined-distance diagnostic doc guarding, and WRR variant-gap
 doc guarding, WRR variant-gap method-status evidence propagation, and WRR
-residual burden summary/blocker propagation:
+residual burden summary/blocker propagation, and WRR Wayback source-recovery
+probing/guarding:
 
-- `python3 -m pytest -q` passed: 1257 tests and 13961 subtests.
+- `python3 -m pytest -q` passed: 1263 tests and 13961 subtests.
+- `python3 -m pytest tests/test_build_wrr_wayback_source_recovery_probe.py tests/test_check_wrr_wayback_source_recovery_probe_doc.py tests/test_real_report_run.py -q` passed: 52 tests.
 - `python3 -m pytest tests/test_download_wrr_sources.py tests/test_build_wrr_source_recovery_probe.py tests/test_check_wrr_source_recovery_probe_doc.py tests/test_real_report_run.py -q` passed: 50 tests and 42 subtests.
 - `python3 -m pytest tests/test_analyze_hypothesis_testing_source.py tests/test_download_wrr_sources.py -q` passed: 9 tests and 46 subtests.
 - `python3 -m pytest tests/test_check_hypothesis_testing_source_audit_doc.py tests/test_real_report_run.py -q` passed: 42 tests.
@@ -633,8 +645,10 @@ residual burden summary/blocker propagation:
 - `python3 -m scripts.check_wrr_defined_diagnostic_docs` passed.
 - `python3 -m scripts.check_wrr_variant_gap_docs` passed.
 - `python3 -m scripts.run_protocol protocols/wrr_source_recovery_probe.toml --resume` passed.
+- `python3 -m scripts.run_protocol protocols/wrr_wayback_source_recovery_probe.toml --resume` passed.
 - `python3 -m scripts.run_protocol protocols/hypothesis_testing_source_audit.toml --resume` passed.
 - `python3 -m scripts.check_wrr_source_recovery_probe_doc` passed.
+- `python3 -m scripts.check_wrr_wayback_source_recovery_probe_doc` passed.
 - `python3 -m scripts.check_hypothesis_testing_source_audit_doc` passed.
 - `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_claim_catalog.py tests/test_wrr_claim_readiness.py -q` passed: 32 tests and 60 subtests.
@@ -659,6 +673,7 @@ residual burden summary/blocker propagation:
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_variant_gap_method_status.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_variant_gap_method_status_cross_pair.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_residual_burden.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wayback_source_probe.json` passed.
 - `python3 -m scripts.check_prospective_study_lanes` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.

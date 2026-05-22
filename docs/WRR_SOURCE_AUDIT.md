@@ -104,6 +104,12 @@ but no claim-grade WRR reproduction yet.
   `https://www.torah-code.org/research/research_3c.html`
   `https://www.torah-code.org/research/research_3d.html`
   `https://www.torah-code.org/research/research_3e.html`
+- Wayback-recovered Torah-code research-program/model pages:
+  `https://web.archive.org/web/20220921212759id_/http://www.torah-code.org/research/research_1.shtml`
+  `https://web.archive.org/web/20160613171849id_/http://www.torah-code.org:80/research/research_2.shtml`
+  `https://web.archive.org/web/20160615070555id_/http://www.torah-code.org:80/research/research_2a.shtml`
+  `https://web.archive.org/web/20150728045249id_/http://www.torah-code.org:80/research/research_3.shtml`
+  `https://web.archive.org/web/20150728045254id_/http://www.torah-code.org:80/research/research_3c.shtml`
 - WRR/Nations discussion page citing 163 famous-rabbi second-list distances:
   `https://www.math.utoronto.ca/drorbn/Codes/Nations/main_gir.html`
 - WRR/Nations discussion page in modified Michigan-Claremont notation:
@@ -172,6 +178,12 @@ The Torah-code.org papers page adds possible future test leads: co-linear ELS
 pairs linked to verses, Genesis ELS-pair/community data, protocol papers about
 word-permuted controls and expected-hit skip caps, and Witztum birth-date data.
 These are source leads, not claim-ready evidence.
+
+The Wayback source-recovery probe adds usable archived context for the
+research-program pages, the model overview, geometric model level 1, and ELS
+model level 1. It still does not recover geometric model levels 2/3 or ELS
+model levels 2/3, so those missing model rules remain unavailable for
+claim-grade source reconstruction.
 
 ## Additional Test Leads From Torah-Code.org
 
@@ -255,8 +267,9 @@ These are source leads, not claim-ready evidence.
   overview, but the current downloads are root-canonical pages with unrelated
   slot/gambling content and no expected model labels. The source-status audit
   in `docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md` treats them as missing or
-  unusable source material until clean Torah-code research pages are recovered
-  and checksummed.
+  unusable source material. `docs/WRR_WAYBACK_SOURCE_RECOVERY_PROBE.md`
+  confirms the Wayback probe recovers five adjacent concepts, but not these
+  level-2/3 geometric or ELS model pages.
 
 The browser app appears in search/cache results as an Apache-2.0 repository with
 a WRR replication interface. In the current audit check, however, cloning the

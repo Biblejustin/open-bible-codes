@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 333
+Documents indexed: 334
 
 ## Controls
 
@@ -113,6 +113,7 @@ Documents indexed: 333
 | WRR Variant Gap Impact | `WRR_VARIANT_GAP_IMPACT.md` |
 | WRR Variant Gap Upper Bound | `WRR_VARIANT_GAP_UPPER_BOUND.md` |
 | WRR Variant Residual Review Packet | `WRR_VARIANT_RESIDUAL_REVIEW_PACKET.md` |
+| WRR Wayback Source Recovery Probe | `WRR_WAYBACK_SOURCE_RECOVERY_PROBE.md` |
 | WRR Windows Split Run | `WRR_WINDOWS_SPLIT.md` |
 | WRR Zero-Hit Variant Probe | `WRR_ZERO_HIT_VARIANT_PROBE.md` |
 

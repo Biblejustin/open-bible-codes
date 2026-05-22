@@ -218,6 +218,18 @@ ignored `reports/wrr_source_recovery_probe/` directory and writes
 `reports/wrr_1994/` source files. It includes `.html` labels and
 stale-indexed `.shtml` alternates.
 
+WRR Wayback source recovery probe:
+
+```bash
+python3 -m scripts.run_protocol protocols/wrr_wayback_source_recovery_probe.toml --resume
+```
+
+This probes archived Torah-code research snapshots into the isolated ignored
+`reports/wrr_wayback_source_recovery_probe/` directory and writes
+`docs/WRR_WAYBACK_SOURCE_RECOVERY_PROBE.md`. It currently recovers five usable
+archived research/model concepts while leaving level-2/3 geometric and ELS
+model pages missing.
+
 WRR imported-term Genesis count and pair smoke:
 
 ```bash
