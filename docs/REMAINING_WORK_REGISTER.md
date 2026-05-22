@@ -5,7 +5,7 @@ empty English seed survivor gate, the English source-basis audit, reader-report
 hygiene, locked-report reruns, volatility cleanup, WRR single-term
 source-policy propagation, Torah-code research-model source-status cleanup,
 Greek follow-up status refreshes, and Hebrew MT/STEP_TAHOT source-status
-cleanup.
+cleanup, plus prospective-lane validator tightening.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -83,6 +83,8 @@ Current pushed commits for this cleanup:
 - `09ee224` Fix prospective preregistration checker command.
 - `45c4ff6` Refresh SBLGNT source-only follow-up status.
 - `7e4f9d6` Refresh Hebrew MT source candidate status.
+- `abb499b` Clarify KJVA bridge lock basis.
+- `f49521a` Tighten prospective lane validation.
 
 ### Formal Real Report Rerun
 
@@ -454,14 +456,17 @@ python3 -m scripts.check_public_release_hygiene --allow-dirty
 
 Current observed result after the WRR gap-reason audit, readiness gate,
 single-term source-policy propagation, missing-model adjacent-source audit,
-preflight guard pass, Greek follow-up status refresh, and Hebrew MT/STEP_TAHOT
-status refresh:
+preflight guard pass, Greek follow-up status refresh, Hebrew MT/STEP_TAHOT
+status refresh, KJVA bridge lock-basis clarification, and prospective-lane
+validator tightening:
 
-- `python3 -m pytest -q` passed: 1141 tests and 13951 subtests.
+- `python3 -m pytest -q` passed: 1143 tests and 13951 subtests.
 - `python3 -m pytest tests/test_import_bolls_translation.py tests/test_english_version_manifests.py -q` passed: 11 tests and 117 subtests.
 - `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_claim_catalog.py tests/test_wrr_claim_readiness.py -q` passed: 32 tests and 60 subtests.
+- `python3 -m pytest tests/test_check_prospective_study_lanes.py tests/test_build_prospective_lane_status.py -q` passed: 10 tests.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_check.json` passed.
+- `python3 -m scripts.check_prospective_study_lanes` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume` passed clean after each tracked WRR/report update.
