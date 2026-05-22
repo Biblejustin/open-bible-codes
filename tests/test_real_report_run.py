@@ -68,6 +68,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_wrr_source_policy_scenarios_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_wrr_dw_formula_sensitivity_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -318,6 +322,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/analyze_wrr_dw_formula_sensitivity.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_source_policy_scenarios_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -822,6 +830,28 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "WRR D(w) formula sensitivity doc failures: "
                 "docs/WRR_DW_FORMULA_SENSITIVITY.md missing unlocked status",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_source_policy_scenarios_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_source_policy_scenarios_doc,
+                "validate_source_policy_scenarios_doc",
+                return_value=["docs/WRR_SOURCE_POLICY_SCENARIOS.md missing diagnostic status"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_source_policy_scenarios_doc_failures"],
+                ["docs/WRR_SOURCE_POLICY_SCENARIOS.md missing diagnostic status"],
+            )
+            self.assertIn(
+                "WRR source-policy scenarios doc failures: "
+                "docs/WRR_SOURCE_POLICY_SCENARIOS.md missing diagnostic status",
                 payload["failures"],
             )
 

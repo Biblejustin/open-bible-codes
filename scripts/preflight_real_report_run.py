@@ -34,6 +34,7 @@ from scripts import (
     check_wrr_lock_options_doc,
     check_wrr_method_status_doc,
     check_wrr_source_recovery_probe_doc,
+    check_wrr_source_policy_scenarios_doc,
     check_wrr_source_review_queue_doc,
     check_wrr_variant_gap_docs,
     validate_study_mapping_schemas,
@@ -365,6 +366,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_wrr_source_review_queue.py",
     "scripts/check_wrr_source_review_queue_doc.py",
     "scripts/analyze_wrr_source_policy_scenarios.py",
+    "scripts/check_wrr_source_policy_scenarios_doc.py",
     "scripts/analyze_wrr_dw_formula_sensitivity.py",
     "scripts/check_wrr_dw_formula_sensitivity_doc.py",
     "scripts/build_wrr_method_status.py",
@@ -581,6 +583,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_dw_formula_sensitivity_doc_failures)
         )
 
+    wrr_source_policy_scenarios_doc_failures = (
+        check_wrr_source_policy_scenarios_doc.validate_source_policy_scenarios_doc(
+            check_wrr_source_policy_scenarios_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_source_policy_scenarios_doc_failures:
+        failures.append(
+            "WRR source-policy scenarios doc failures: "
+            + "; ".join(wrr_source_policy_scenarios_doc_failures)
+        )
+
     wrr_lock_options_doc_failures = (
         check_wrr_lock_options_doc.validate_lock_options_doc(
             check_wrr_lock_options_doc.DEFAULT_DOC
@@ -663,6 +676,9 @@ def main(argv: list[str] | None = None) -> int:
         "wrr_source_review_queue_doc_failures": wrr_source_review_queue_doc_failures,
         "wrr_dw_formula_sensitivity_doc_failures": (
             wrr_dw_formula_sensitivity_doc_failures
+        ),
+        "wrr_source_policy_scenarios_doc_failures": (
+            wrr_source_policy_scenarios_doc_failures
         ),
         "wrr_lock_options_doc_failures": wrr_lock_options_doc_failures,
         "wrr_method_status_doc_failures": wrr_method_status_doc_failures,
