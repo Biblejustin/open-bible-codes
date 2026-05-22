@@ -18,22 +18,24 @@ python3 -m scripts.build_wrr_source_review_queue --blocked-pairs reports/wrr_199
 
 | Bucket | Terms | Blocking pairs | Variant hit total | Row OCR statuses |
 | --- | ---: | ---: | ---: | --- |
-| `ocr_not_matched_with_variant_lead` | 7 | 21 | 20 | `7 not_matched` |
+| `ocr_not_matched_with_variant_lead` | 5 | 5 | 7 | `5 not_matched` |
+| `ocr_near_match_with_variant_lead` | 2 | 16 | 13 | `2 not_matched` |
 | `ocr_matched_with_variant_lead` | 32 | 45 | 948 | `32 matched` |
-| `ocr_not_matched_no_variant_lead` | 47 | 48 | 0 | `47 not_matched` |
+| `ocr_not_matched_no_variant_lead` | 44 | 45 | 0 | `44 not_matched` |
+| `ocr_near_match_no_variant_lead` | 3 | 3 | 0 | `3 not_matched` |
 | `ocr_matched_no_variant_lead` | 11 | 11 | 0 | `11 matched` |
 
 ## Top Review Targets
 
 | Rank | Term id | Side | Term | Row OCR | Blocking pairs | Variant hits | Best variant | Read |
 | ---: | --- | --- | --- | --- | ---: | ---: | --- | --- |
-| 1 | `wrr2_27_date_01` | `date` | `/+Z/T$RY` | `not_matched` | 14 | 12 | `delete_one@1:ZT$RY` | OCR did not match imported term and a simple variant has Genesis hits; check source transcription first |
-| 2 | `wrr2_27_app_06` | `appellation` | `M$HZKWTW` | `not_matched` | 2 | 1 | `delete_one@2:MHZKWTW` | OCR did not match imported term and a simple variant has Genesis hits; check source transcription first |
-| 3 | `wrr2_23_app_04` | `appellation` | `Y@QBHLWY` | `not_matched` | 1 | 2 | `delete_one@2:YQBHLWY` | OCR did not match imported term and a simple variant has Genesis hits; check source transcription first |
-| 4 | `wrr2_30_app_05` | `appellation` | `B@LY$RLBB` | `not_matched` | 1 | 2 | `delete_one@8:B(LY$RLB` | OCR did not match imported term and a simple variant has Genesis hits; check source transcription first |
-| 5 | `wrr2_23_app_05` | `appellation` | `MHRYSGL` | `not_matched` | 1 | 1 | `delete_one@1:HRYSGL` | OCR did not match imported term and a simple variant has Genesis hits; check source transcription first |
-| 6 | `wrr2_28_app_04` | `appellation` | `B@LPNYM$H` | `not_matched` | 1 | 1 | `delete_one@5:B(LPYM$H` | OCR did not match imported term and a simple variant has Genesis hits; check source transcription first |
-| 7 | `wrr2_32_app_04` | `appellation` | `$LMHMXLMA` | `not_matched` | 1 | 1 | `delete_one@1:LMHMXLM)` | OCR did not match imported term and a simple variant has Genesis hits; check source transcription first |
+| 1 | `wrr2_23_app_04` | `appellation` | `Y@QBHLWY` | `not_matched` | 1 | 2 | `delete_one@2:YQBHLWY` | OCR did not match imported term and a simple variant has Genesis hits; check source transcription first |
+| 2 | `wrr2_30_app_05` | `appellation` | `B@LY$RLBB` | `not_matched` | 1 | 2 | `delete_one@8:B(LY$RLB` | OCR did not match imported term and a simple variant has Genesis hits; check source transcription first |
+| 3 | `wrr2_23_app_05` | `appellation` | `MHRYSGL` | `not_matched` | 1 | 1 | `delete_one@1:HRYSGL` | OCR did not match imported term and a simple variant has Genesis hits; check source transcription first |
+| 4 | `wrr2_28_app_04` | `appellation` | `B@LPNYM$H` | `not_matched` | 1 | 1 | `delete_one@5:B(LPYM$H` | OCR did not match imported term and a simple variant has Genesis hits; check source transcription first |
+| 5 | `wrr2_32_app_04` | `appellation` | `$LMHMXLMA` | `not_matched` | 1 | 1 | `delete_one@1:LMHMXLM)` | OCR did not match imported term and a simple variant has Genesis hits; check source transcription first |
+| 6 | `wrr2_27_date_01` | `date` | `/+Z/T$RY` | `not_matched` | 14 | 12 | `delete_one@1:ZT$RY` | OCR has a one-edit near match and a simple variant has Genesis hits; check the page image before treating this as a source difference |
+| 7 | `wrr2_27_app_06` | `appellation` | `M$HZKWTW` | `not_matched` | 2 | 1 | `delete_one@2:MHZKWTW` | OCR has a one-edit near match and a simple variant has Genesis hits; check the page image before treating this as a source difference |
 | 8 | `wrr2_06_date_01` | `date` | `/KB/KSLW` | `matched` | 6 | 73 | `delete_one@4:KBKLW` | OCR matched imported term and a simple variant has Genesis hits; check normalization/rule assumptions without changing source text |
 | 9 | `wrr2_02_date_01` | `date` | `/YG/SYWN` | `matched` | 5 | 68 | `delete_one@2:YSYWN` | OCR matched imported term and a simple variant has Genesis hits; check normalization/rule assumptions without changing source text |
 | 10 | `wrr2_05_date_01` | `date` | `/Y+/NYSN` | `matched` | 2 | 28 | `delete_one@2:YNYSN` | OCR matched imported term and a simple variant has Genesis hits; check normalization/rule assumptions without changing source text |
@@ -50,20 +52,37 @@ python3 -m scripts.build_wrr_source_review_queue --blocked-pairs reports/wrr_199
 
 ## OCR Context For Top Targets
 
-| Rank | Term id | Normalized term | Row OCR normalized text |
+| Rank | Term id | Hebrew-normalized term | Row OCR normalized text |
 | ---: | --- | --- | --- |
-| 1 | `wrr2_27_date_01` | `+ZT$RY` | `כותשריבטזתשרקטזבתשרייותשריביותשרירבתשרי` |
-| 2 | `wrr2_27_app_06` | `M$HZKWTW` | `רבימשהזכותאזכותומשהזכותמשהזכותאמשהזכותמהרמזכותהרמיצ` |
-| 3 | `wrr2_23_app_04` | `Y(QBHLWY` | `טלזלילולבכבבברכהרלתפולמלרילללהסכריל` |
-| 4 | `wrr2_30_app_05` | `B(LY$RLBB` | `אחהערישרלבב` |
-| 5 | `wrr2_23_app_05` | `MHRYSGL` | `טלזלילולבכבבברכהרלתפולמלרילללהסכריל` |
-| 6 | `wrr2_28_app_04` | `B(LPNYM$H` | `מהרמזהמהרמזהמזליינקולרבימשהמרגליתפנימשה` |
-| 7 | `wrr2_32_app_04` | `$LMHMXLM)` | `רבישלמהה` |
-| 8 | `wrr2_06_date_01` | `KBKSLW` | `כבכסלובכבכסלוכבבכסלו` |
-| 9 | `wrr2_02_date_01` | `YGSYWN` | `ייגסיונביייגסיוניגבסיונ` |
-| 10 | `wrr2_05_date_01` | `Y+NYSN` | `יטניסנביטניסניטבניסנ` |
-| 11 | `wrr2_27_app_04` | `M$HZKWT` | `רבימשהזכותאזכותומשהזכותמשהזכותאמשהזכותמהרמזכותהרמיצ` |
-| 12 | `wrr2_27_app_05` | `M$HZKWT)` | `רבימשהזכותאזכותומשהזכותמשהזכותאמשהזכותמהרמזכותהרמיצ` |
+| 1 | `wrr2_23_app_04` | `יעקבהלוי` | `טלזלילולבכבבברכהרלתפולמלרילללהסכריל` |
+| 2 | `wrr2_30_app_05` | `בעלישרלבב` | `אחהערישרלבב` |
+| 3 | `wrr2_23_app_05` | `מהריסגל` | `טלזלילולבכבבברכהרלתפולמלרילללהסכריל` |
+| 4 | `wrr2_28_app_04` | `בעלפנימשה` | `מהרמזהמהרמזהמזליינקולרבימשהמרגליתפנימשה` |
+| 5 | `wrr2_32_app_04` | `שלמהמחלמא` | `רבישלמהה` |
+| 6 | `wrr2_27_date_01` | `טזתשרי` | `כותשריבטזתשרקטזבתשרייותשריביותשרירבתשרי` |
+| 7 | `wrr2_27_app_06` | `משהזכותו` | `רבימשהזכותאזכותומשהזכותמשהזכותאמשהזכותמהרמזכותהרמיצ` |
+| 8 | `wrr2_06_date_01` | `כבכסלו` | `כבכסלובכבכסלוכבבכסלו` |
+| 9 | `wrr2_02_date_01` | `יגסיונ` | `ייגסיונביייגסיוניגבסיונ` |
+| 10 | `wrr2_05_date_01` | `יטניסנ` | `יטניסנביטניסניטבניסנ` |
+| 11 | `wrr2_27_app_04` | `משהזכות` | `רבימשהזכותאזכותומשהזכותמשהזכותאמשהזכותמהרמזכותהרמיצ` |
+| 12 | `wrr2_27_app_05` | `משהזכותא` | `רבימשהזכותאזכותומשהזכותמשהזכותאמשהזכותמהרמזכותהרמיצ` |
+
+## OCR Near Matches For Top Targets
+
+| Rank | Term id | Distance | Near OCR text |
+| ---: | --- | ---: | --- |
+| 1 | `wrr2_23_app_04` |  | `` |
+| 2 | `wrr2_30_app_05` | 2 | `הערישרלבב` |
+| 3 | `wrr2_23_app_05` |  | `` |
+| 4 | `wrr2_28_app_04` |  | `` |
+| 5 | `wrr2_32_app_04` |  | `` |
+| 6 | `wrr2_27_date_01` | 1 | `טזתשרק` |
+| 7 | `wrr2_27_app_06` | 1 | `משהזכותא` |
+| 8 | `wrr2_06_date_01` | 0 | `כבכסלו` |
+| 9 | `wrr2_02_date_01` | 0 | `יגסיונ` |
+| 10 | `wrr2_05_date_01` | 0 | `יטניסנ` |
+| 11 | `wrr2_27_app_04` | 0 | `משהזכות` |
+| 12 | `wrr2_27_app_05` | 0 | `משהזכותא` |
 
 ## Interpretation
 

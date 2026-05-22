@@ -36,12 +36,15 @@ QUEUE_FIELDNAMES = [
     "term_id",
     "term",
     "normalized",
+    "row_ocr_hebrew_normalized",
     "concepts",
     "row_numbers",
     "row_ocr_status",
     "row_ocr_column",
     "row_ocr_match_basis",
     "row_ocr_text_normalized",
+    "row_ocr_near_match_distance",
+    "row_ocr_near_match_text",
     "blocking_pairs",
     "blocking_reasons",
     "best_variant_hit_count",
@@ -65,6 +68,10 @@ BUCKET_READS = {
         "OCR did not match imported term and a simple variant has Genesis hits; "
         "check source transcription first"
     ),
+    "ocr_near_match_with_variant_lead": (
+        "OCR has a one-edit near match and a simple variant has Genesis hits; "
+        "check the page image before treating this as a source difference"
+    ),
     "ocr_matched_with_variant_lead": (
         "OCR matched imported term and a simple variant has Genesis hits; "
         "check normalization/rule assumptions without changing source text"
@@ -72,6 +79,10 @@ BUCKET_READS = {
     "ocr_not_matched_no_variant_lead": (
         "OCR did not match imported term and no simple variant lead exists; "
         "check source transcription or row alignment"
+    ),
+    "ocr_near_match_no_variant_lead": (
+        "OCR has a one-edit near match but no simple variant lead exists; "
+        "check the page image before deeper method work"
     ),
     "ocr_matched_no_variant_lead": (
         "OCR matched imported term but no simple variant lead exists; likely "
@@ -89,11 +100,13 @@ BUCKET_READS = {
 
 BUCKET_ORDER = {
     "ocr_not_matched_with_variant_lead": 0,
-    "ocr_matched_with_variant_lead": 1,
-    "ocr_not_matched_no_variant_lead": 2,
-    "ocr_unknown_with_variant_lead": 3,
-    "ocr_matched_no_variant_lead": 4,
-    "ocr_unknown_no_variant_lead": 5,
+    "ocr_near_match_with_variant_lead": 1,
+    "ocr_matched_with_variant_lead": 2,
+    "ocr_not_matched_no_variant_lead": 3,
+    "ocr_near_match_no_variant_lead": 4,
+    "ocr_unknown_with_variant_lead": 5,
+    "ocr_matched_no_variant_lead": 6,
+    "ocr_unknown_no_variant_lead": 7,
 }
 
 
@@ -192,7 +205,10 @@ def build_queue_rows(
         best_variant = variants[0] if variants else {}
         best_hits = int_or_zero(best_variant.get("variant_hit_count", ""))
         ocr_status = ocr.get("row_ocr_status", "unknown") or "unknown"
-        bucket = review_bucket(ocr_status, best_hits)
+        ocr_text = ocr.get("row_ocr_text_normalized", "")
+        hebrew_normalized = ocr.get("hebrew_normalized", "")
+        near_distance, near_text = best_near_match(hebrew_normalized, ocr_text)
+        bucket = review_bucket(ocr_status, best_hits, near_distance)
         pair_ids = sorted(cast_set(item["pair_ids"]))
         concepts = sorted(cast_set(item["concepts"]))
         reasons = cast_counter(item["blocking_reasons"])
@@ -205,12 +221,15 @@ def build_queue_rows(
                 "term_id": term_id,
                 "term": item["term"],
                 "normalized": item["normalized"],
+                "row_ocr_hebrew_normalized": hebrew_normalized,
                 "concepts": ";".join(concepts),
                 "row_numbers": ocr.get("row_number", ""),
                 "row_ocr_status": ocr_status,
                 "row_ocr_column": ocr.get("column", ""),
                 "row_ocr_match_basis": ocr.get("match_basis", ""),
-                "row_ocr_text_normalized": ocr.get("row_ocr_text_normalized", ""),
+                "row_ocr_text_normalized": ocr_text,
+                "row_ocr_near_match_distance": "" if near_distance is None else near_distance,
+                "row_ocr_near_match_text": near_text,
                 "blocking_pairs": len(pair_ids),
                 "blocking_reasons": format_counter(reasons),
                 "best_variant_hit_count": best_hits,
@@ -250,9 +269,16 @@ def blocking_terms(row: dict[str, str]) -> list[tuple[str, str, str, str]]:
     return [(side, term_id, term, normalized) for side, term_id, term, normalized in blockers if term_id]
 
 
-def review_bucket(row_ocr_status: str, best_variant_hit_count: int) -> str:
+def review_bucket(
+    row_ocr_status: str,
+    best_variant_hit_count: int,
+    near_match_distance: int | None = None,
+) -> str:
     has_variant = best_variant_hit_count > 0
+    near_match = near_match_distance is not None and 0 < near_match_distance <= 1
     if row_ocr_status == "not_matched":
+        if near_match:
+            return "ocr_near_match_with_variant_lead" if has_variant else "ocr_near_match_no_variant_lead"
         return "ocr_not_matched_with_variant_lead" if has_variant else "ocr_not_matched_no_variant_lead"
     if row_ocr_status == "matched":
         return "ocr_matched_with_variant_lead" if has_variant else "ocr_matched_no_variant_lead"
@@ -352,16 +378,31 @@ def write_markdown(
             "",
             "## OCR Context For Top Targets",
             "",
-            "| Rank | Term id | Normalized term | Row OCR normalized text |",
+            "| Rank | Term id | Hebrew-normalized term | Row OCR normalized text |",
             "| ---: | --- | --- | --- |",
         ]
     )
     for row in queue_rows[:12]:
         lines.append(
-            "| {priority_rank} | `{term_id}` | `{normalized}` | `{row_ocr_text}` |".format(
+            "| {priority_rank} | `{term_id}` | `{row_ocr_hebrew_normalized}` | "
+            "`{row_ocr_text}` |".format(
                 row_ocr_text=truncate_text(str(row.get("row_ocr_text_normalized", "")), 80),
                 **row,
             )
+        )
+    lines.extend(
+        [
+            "",
+            "## OCR Near Matches For Top Targets",
+            "",
+            "| Rank | Term id | Distance | Near OCR text |",
+            "| ---: | --- | ---: | --- |",
+        ]
+    )
+    for row in queue_rows[:12]:
+        lines.append(
+            "| {priority_rank} | `{term_id}` | {row_ocr_near_match_distance} | "
+            "`{row_ocr_near_match_text}` |".format(**row)
         )
     lines.extend(
         [
@@ -448,6 +489,58 @@ def truncate_text(value: str, limit: int) -> str:
     if len(value) <= limit:
         return value
     return value[: limit - 3] + "..."
+
+
+def best_near_match(needle: str, haystack: str, max_distance: int = 2) -> tuple[int | None, str]:
+    if not needle or not haystack:
+        return None, ""
+    if needle in haystack:
+        return 0, needle
+    best_distance: int | None = None
+    best_text = ""
+    best_length_delta: int | None = None
+    min_len = max(1, len(needle) - max_distance)
+    max_len = min(len(haystack), len(needle) + max_distance)
+    for size in range(min_len, max_len + 1):
+        for start in range(0, len(haystack) - size + 1):
+            candidate = haystack[start : start + size]
+            distance = levenshtein_distance(needle, candidate, max_distance=max_distance)
+            if distance is None:
+                continue
+            length_delta = abs(len(candidate) - len(needle))
+            if (
+                best_distance is None
+                or distance < best_distance
+                or (distance == best_distance and length_delta < int(best_length_delta or 0))
+            ):
+                best_distance = distance
+                best_length_delta = length_delta
+                best_text = candidate
+                if distance == 0:
+                    return best_distance, best_text
+    return best_distance, best_text
+
+
+def levenshtein_distance(a: str, b: str, max_distance: int) -> int | None:
+    previous = list(range(len(b) + 1))
+    for index_a, char_a in enumerate(a, start=1):
+        current = [index_a]
+        row_min = current[0]
+        for index_b, char_b in enumerate(b, start=1):
+            cost = 0 if char_a == char_b else 1
+            current.append(
+                min(
+                    previous[index_b] + 1,
+                    current[index_b - 1] + 1,
+                    previous[index_b - 1] + cost,
+                )
+            )
+            row_min = min(row_min, current[-1])
+        if row_min > max_distance:
+            return None
+        previous = current
+    distance = previous[-1]
+    return distance if distance <= max_distance else None
 
 
 def int_or_zero(value: str | None) -> int:

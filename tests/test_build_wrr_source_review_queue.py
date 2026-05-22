@@ -13,6 +13,10 @@ class WrrSourceReviewQueueTests(unittest.TestCase):
             "ocr_not_matched_with_variant_lead",
         )
         self.assertEqual(
+            queue.review_bucket("not_matched", 5, near_match_distance=1),
+            "ocr_near_match_with_variant_lead",
+        )
+        self.assertEqual(
             queue.review_bucket("matched", 0),
             "ocr_matched_no_variant_lead",
         )
@@ -20,6 +24,12 @@ class WrrSourceReviewQueueTests(unittest.TestCase):
             queue.review_bucket("unknown", 3),
             "ocr_unknown_with_variant_lead",
         )
+
+    def test_best_near_match_finds_one_edit_ocr_context(self) -> None:
+        distance, text = queue.best_near_match("טזתשרי", "כותשריבטזתשרקטזבתשרי")
+
+        self.assertEqual(distance, 1)
+        self.assertEqual(text, "טזתשרק")
 
     def test_build_queue_rows_groups_blocking_terms_for_best_run(self) -> None:
         blocked = [
@@ -76,13 +86,15 @@ class WrrSourceReviewQueueTests(unittest.TestCase):
                 "row_ocr_status": "not_matched",
                 "column": "name",
                 "match_basis": "probe",
-                "row_ocr_text_normalized": "APP OCR",
+                "hebrew_normalized": "APP",
+                "row_ocr_text_normalized": "AXP OCR",
             },
             "date1": {
                 "row_number": "01",
                 "row_ocr_status": "matched",
                 "column": "date",
                 "match_basis": "probe",
+                "hebrew_normalized": "DATE",
                 "row_ocr_text_normalized": "DATE OCR",
             },
         }
@@ -92,10 +104,13 @@ class WrrSourceReviewQueueTests(unittest.TestCase):
 
         self.assertEqual(by_term["app1"]["blocking_pairs"], 2)
         self.assertEqual(by_term["app1"]["best_variant_hit_count"], 8)
-        self.assertEqual(by_term["app1"]["row_ocr_text_normalized"], "APP OCR")
+        self.assertEqual(by_term["app1"]["row_ocr_text_normalized"], "AXP OCR")
+        self.assertEqual(by_term["app1"]["row_ocr_hebrew_normalized"], "APP")
+        self.assertEqual(by_term["app1"]["row_ocr_near_match_distance"], 1)
+        self.assertEqual(by_term["app1"]["row_ocr_near_match_text"], "AXP")
         self.assertEqual(
             by_term["app1"]["review_bucket"],
-            "ocr_not_matched_with_variant_lead",
+            "ocr_near_match_with_variant_lead",
         )
         self.assertEqual(by_term["app1"]["pair_ids"], "p1;p2")
         self.assertEqual(by_term["date1"]["blocking_pairs"], 1)
@@ -148,7 +163,8 @@ class WrrSourceReviewQueueTests(unittest.TestCase):
                         "row_ocr_status": "not_matched",
                         "column": "name",
                         "match_basis": "probe",
-                        "row_ocr_text_normalized": "APP OCR",
+                        "hebrew_normalized": "APP",
+                        "row_ocr_text_normalized": "AXP OCR",
                     }
                 ],
             )
@@ -174,14 +190,15 @@ class WrrSourceReviewQueueTests(unittest.TestCase):
 
             self.assertEqual(rc, 0)
             rows = list(csv.DictReader(out.open(encoding="utf-8")))
-            self.assertEqual(rows[0]["review_bucket"], "ocr_not_matched_with_variant_lead")
+            self.assertEqual(rows[0]["review_bucket"], "ocr_near_match_with_variant_lead")
             summary_rows = list(csv.DictReader(summary.open(encoding="utf-8")))
             self.assertEqual(summary_rows[0]["terms"], "1")
             text = markdown.read_text(encoding="utf-8")
             self.assertIn("WRR Source Review Queue", text)
             self.assertIn("not a source correction", text)
             self.assertIn("OCR Context For Top Targets", text)
-            self.assertIn("APP OCR", text)
+            self.assertIn("OCR Near Matches For Top Targets", text)
+            self.assertIn("AXP OCR", text)
             self.assertTrue(manifest.exists())
 
 
