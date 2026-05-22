@@ -29,7 +29,10 @@ DEFAULT_SOURCE_POLICY_TERM_IMPACTS = Path(
     "reports/wrr_1994/wrr_source_policy_term_impacts.csv"
 )
 DEFAULT_DW_FORMULA_SENSITIVITY = Path("reports/wrr_1994/wrr_dw_formula_sensitivity.csv")
-DEFAULT_AGGREGATE = Path("reports/wrr_1994/wrr2_corrected_distance_aggregate.csv")
+DEFAULT_AGGREGATE = Path(
+    "reports/wrr_1994/direct_all/highcap_1000/"
+    "wrr2_corrected_distance_all_lanes_aggregate.csv"
+)
 DEFAULT_CROSS_PAIR_PERMUTATION_SUMMARY = Path(
     "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_1000_summary.csv"
 )
@@ -37,7 +40,8 @@ DEFAULT_CROSS_PAIR_RECOMMENDED_PERMUTATION_SUMMARY = Path(
     "reports/wrr_1994/cross_pair_grid/wrr2_cross_pair_permutations_no_wnp_999999_summary.csv"
 )
 DEFAULT_HIGHCAP_CORRECTED_DISTANCE_SUMMARY = Path(
-    "reports/wrr_1994/highcap_1000/wrr2_corrected_distance_merged_summary.csv"
+    "reports/wrr_1994/direct_all/highcap_1000/"
+    "wrr2_corrected_distance_all_lanes_merged_summary.csv"
 )
 DEFAULT_HIGHCAP_PERTURBATION_SUMMARY = Path(
     "reports/wrr_1994/highcap_1000/wrr2_perturbation_diagnostics_summary.csv"
@@ -581,21 +585,37 @@ def corrected_distance_status(
         highcap_perturbation_row,
         highcap_pair_readiness_row,
     )
+    full_run = is_full_corrected_distance_run(highcap_corrected_distance_row)
     if highcap:
         evidence_parts.append(highcap)
     return {
         "decision_area": "Corrected distance c(w,w')",
-        "status": "smoke_only",
-        "current_read": corrected_distance_current_read(total_defined),
+        "status": "defined_full_run" if full_run else "smoke_only",
+        "current_read": corrected_distance_current_read(total_defined, full_run),
         "evidence": "; ".join(evidence_parts),
-        "next_action": (
-            "Extend direct perturbed search over the selected keep_all_working_source "
-            "universe using printed D(w) as main and program D(w) as sensitivity."
-        ),
+        "next_action": corrected_distance_next_action(full_run),
     }
 
 
-def corrected_distance_current_read(total_defined: int) -> str:
+def is_full_corrected_distance_run(row: dict[str, str] | None) -> bool:
+    if not row:
+        return False
+    pairs = int_value(row.get("pairs", ""))
+    return (
+        row.get("candidate_lane") == "all"
+        and pairs > 0
+        and pairs == int_value(row.get("selected_pairs", ""))
+        and row.get("skip_cap_formula") == "printed"
+    )
+
+
+def corrected_distance_current_read(total_defined: int, full_run: bool) -> str:
+    if full_run:
+        return (
+            "Full selected keep_all_working_source corrected-distance output exists "
+            "for all imported same-record pairs using printed D(w); undefined rows "
+            "remain ordinary-not-valid rather than missing work."
+        )
     if total_defined:
         return (
             "Direct perturbed-letter smoke driver now produces defined corrected distances in the "
@@ -605,6 +625,18 @@ def corrected_distance_current_read(total_defined: int) -> str:
     return "Smoke driver exists, but current candidate lane produces no defined corrected distances."
 
 
+def corrected_distance_next_action(full_run: bool) -> str:
+    if full_run:
+        return (
+            "Use the full selected-universe corrected-distance output for aggregate/permutation "
+            "locking while keeping exact-WRR reproduction caveats visible."
+        )
+    return (
+        "Extend direct perturbed search over the selected keep_all_working_source "
+        "universe using printed D(w) as main and program D(w) as sensitivity."
+    )
+
+
 def highcap_evidence(
     corrected_distance_row: dict[str, str] | None,
     perturbation_row: dict[str, str] | None,
@@ -612,13 +644,25 @@ def highcap_evidence(
 ) -> str:
     parts: list[str] = []
     if corrected_distance_row:
-        parts.append(
-            "high-cap "
-            f"{corrected_distance_row.get('search_max_skip', '')} split: "
-            f"{corrected_distance_row.get('defined_corrected_distances', '')} defined over "
-            f"{corrected_distance_row.get('pairs', '')} pairs, max valid "
-            f"{corrected_distance_row.get('max_pair_valid_perturbations', '')}"
-        )
+        if is_full_corrected_distance_run(corrected_distance_row):
+            parts.append(
+                "full all-lane cap "
+                f"{corrected_distance_row.get('search_max_skip', '')} run: "
+                f"{corrected_distance_row.get('defined_corrected_distances', '')} defined over "
+                f"{corrected_distance_row.get('pairs', '')} selected pairs, "
+                f"{corrected_distance_row.get('ordinary_not_valid_pairs', '')} ordinary-not-valid, "
+                f"{corrected_distance_row.get('under_minimum_valid_pairs', '')} under-minimum, "
+                f"max valid {corrected_distance_row.get('max_pair_valid_perturbations', '')}; "
+                f"status {corrected_distance_row.get('status', '')}"
+            )
+        else:
+            parts.append(
+                "high-cap "
+                f"{corrected_distance_row.get('search_max_skip', '')} split: "
+                f"{corrected_distance_row.get('defined_corrected_distances', '')} defined over "
+                f"{corrected_distance_row.get('pairs', '')} pairs, max valid "
+                f"{corrected_distance_row.get('max_pair_valid_perturbations', '')}"
+            )
     if perturbation_row:
         parts.append(
             "legacy ordinary-hit perturbation diagnostic: "
@@ -667,7 +711,7 @@ def aggregate_status(
         else "Published Table 3 ranks are source-audited; local P1..P4 aggregate diagnostics exist, but the date-permutation runner is not built."
     )
     next_action = (
-        "Use the repo-defined 999,999 diagnostic for local evidence; build full corrected distances over the selected working locks before exact WRR reproduction language."
+        "Use the full selected-universe corrected-distance output and repo-defined 999,999 diagnostic for local evidence; lock aggregate/permutation before exact WRR reproduction language."
         if has_permutation
         else "Implement only after final pair universe and corrected-distance values are locked."
     )
@@ -745,7 +789,8 @@ def aggregate_evidence(row: dict[str, str] | None) -> str:
     return (
         f"local P1={row.get('p1', '')}, P2={row.get('p2', '')}, "
         f"P3={row.get('p3', '')}, P4={row.get('p4', '')} from "
-        f"{defined} defined c-values; P3/P4 smaller sample has "
+        f"{defined} defined c-values from {row.get('rows', '')} rows; "
+        "P3/P4 smaller sample has "
         f"{row.get('p3_p4_sample_defined_corrected_distances', '')} defined c-values"
     )
 

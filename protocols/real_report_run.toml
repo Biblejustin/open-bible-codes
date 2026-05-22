@@ -48,6 +48,7 @@ inputs = [
   "protocols/all_codes_followup_review.toml",
   "protocols/gog_magog_pair_prospective.toml",
   "protocols/wrr_audit_counts.toml",
+  "protocols/wrr_corrected_distance_direct_all_lanes.toml",
   "protocols/wrr_cross_pair_grid.toml",
   "protocols/wrr_source_recovery_probe.toml",
   "protocols/centered_relevance_density.toml",
@@ -640,6 +641,23 @@ inputs = [
   "terms/greek_surface_prospective_terms.csv",
 ]
 outputs = ["reports/greek_surface_length4_vocab_controls/protocol_run.manifest.json"]
+
+[[steps]]
+id = "wrr_corrected_distance_direct_all_lanes"
+description = "Refresh selected-universe WRR corrected-distance output used by the readiness gate."
+argv = ["-m", "scripts.run_protocol", "protocols/wrr_corrected_distance_direct_all_lanes.toml", "--resume"]
+inputs = [
+  "protocols/wrr_corrected_distance_direct_all_lanes.toml",
+  "scripts/analyze_wrr_corrected_distance.py",
+  "scripts/merge_wrr_corrected_distance_shards.py",
+  "scripts/analyze_wrr_corrected_distance_aggregate.py",
+  "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+  "configs/example_koren_genesis.toml",
+  "els/wrr.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = ["reports/wrr_1994/direct_all/protocol.manifest.json"]
 
 [[steps]]
 id = "wrr_audit_counts"

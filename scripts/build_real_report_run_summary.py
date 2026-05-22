@@ -3622,7 +3622,7 @@ def wrr_audit_section(
             "Current read: WRR has repo-defined diagnostic evidence, but exact WRR",
             "reproduction remains `under_specified`. The working source policy is",
             "`keep_all_working_source`, and printed `D(w)` is the main rule; claim-grade WRR",
-            "language still needs full corrected distances and a locked aggregate/permutation procedure.",
+            "language still needs a locked aggregate/permutation procedure over the full selected-universe corrected-distance output.",
             "The claim-blocker packet gathers the current",
             "readiness blockers, lock options, WNP/context source-review flags,",
             "and visual triage notes.",

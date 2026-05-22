@@ -221,7 +221,7 @@ def build_option_rows(
             "recommendation": (
                 "Use as the broad working input under keep_all_working_source; do not apply WNP/context or visual-review exclusions automatically."
             ),
-            "claim_boundary": "source policy locked; corrected distance still pending",
+            "claim_boundary": "source policy locked; full local corrected-distance run available",
         },
         {
             "area": "Pair universe",
@@ -276,7 +276,7 @@ def build_option_rows(
             "status": "recommended_working_interpretation",
             "evidence": defined_distance_evidence,
             "recommendation": defined_distance_recommendation,
-            "claim_boundary": "still blocked until source and formula locks",
+            "claim_boundary": "full local run available; exact WRR reproduction still blocked",
         },
         {
             "area": "D(w) skip-cap formula",
@@ -287,7 +287,7 @@ def build_option_rows(
                 f"{skip_row.get('target_unreached_rows', '')} rows do not reach the expected-hit target."
             ),
             "recommendation": "Use as the main source-facing D(w) formula because it is the printed WRR formula.",
-            "claim_boundary": "formula locked; corrected distance still pending",
+            "claim_boundary": "formula locked; full local corrected-distance run available",
         },
         {
             "area": "D(w) skip-cap formula",
@@ -526,8 +526,8 @@ def write_markdown(
             "- Printed `D(w)` is the main source-facing rule; reported-program `D(w)` remains sensitivity output.",
             "- Date-label permutation output remains diagnostic until corrected distances and the aggregate rule are source-locked.",
             "",
-            "Claim-grade language still requires full corrected distances over the",
-            "locked working universe and a locked aggregate/permutation procedure.",
+            "Claim-grade language still requires a locked aggregate/permutation",
+            "procedure over the full selected-universe corrected-distance output.",
         ]
     )
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

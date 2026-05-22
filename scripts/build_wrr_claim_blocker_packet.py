@@ -44,7 +44,7 @@ INPUT_NEEDED = {
     "Pair universe": "source policy selected: keep_all_working_source",
     "D(w) skip-cap formula": "formula selected: printed WRR formula main; program sensitivity",
     "Corrected distance c(w,w')": "run full corrected-distance over keep_all_working_source with printed D(w)",
-    "Aggregate statistic and permutation": "requires full corrected-distance output before claim-grade lock",
+    "Aggregate statistic and permutation": "lock aggregate/permutation procedure over full corrected-distance output",
 }
 
 NO_INPUT_NEXT = {
@@ -207,7 +207,7 @@ def write_markdown(
     lines = [
         "# WRR Claim Blocker Packet",
         "",
-        "Status: working locks selected; corrected-distance/permutation still not claim-grade.",
+        "Status: full corrected-distance run selected; aggregate/permutation still not claim-grade.",
         "",
         "This packet records the selected WRR working policy and gathers the",
         "remaining claim-readiness blockers, current lock options, WNP/context source",

@@ -95,6 +95,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/gog_magog_pair_prospective.toml",
     "protocols/wrr_audit_counts.toml",
     "protocols/wrr_cross_pair_grid.toml",
+    "protocols/wrr_corrected_distance_direct_all_lanes.toml",
     "protocols/wrr_source_recovery_probe.toml",
     "protocols/centered_relevance_density.toml",
     "protocols/matrix_cluster_candidates.toml",

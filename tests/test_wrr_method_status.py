@@ -181,10 +181,12 @@ class WrrMethodStatusTests(unittest.TestCase):
                 "status": "row_ocr_probe_not_verification",
             },
             corrected_distance_aggregate_row={
-                "rows": "86",
-                "defined_corrected_distances": "0",
-                "p1": "",
-                "p2": "",
+                "rows": "182",
+                "defined_corrected_distances": "72",
+                "p1": "0.00252257011468",
+                "p2": "1.16472976875e-05",
+                "p3": "0.0184584022574",
+                "p4": "0.000274264355592",
             },
             cross_pair_permutation_row={
                 "permutations": "1000",
@@ -209,10 +211,16 @@ class WrrMethodStatusTests(unittest.TestCase):
                 "rho0_bonferroni": "0.00086",
             },
             highcap_corrected_distance_row={
+                "selected_pairs": "182",
+                "candidate_lane": "all",
                 "search_max_skip": "1000",
-                "pairs": "86",
-                "defined_corrected_distances": "0",
-                "max_pair_valid_perturbations": "4",
+                "skip_cap_formula": "printed",
+                "pairs": "182",
+                "defined_corrected_distances": "72",
+                "ordinary_not_valid_pairs": "110",
+                "under_minimum_valid_pairs": "0",
+                "max_pair_valid_perturbations": "125",
+                "status": "diagnostic_only_not_wrr_reproduction",
             },
             highcap_perturbation_row={
                 "rows": "120",
@@ -265,15 +273,17 @@ class WrrMethodStatusTests(unittest.TestCase):
         self.assertIn("all-lane cap1000 printed/program defined 72/72", by_area["D(w) skip-cap formula"]["evidence"])
         self.assertIn("0 changed pairs", by_area["D(w) skip-cap formula"]["evidence"])
         self.assertIn("printed formula selected as main", by_area["D(w) skip-cap formula"]["evidence"])
-        self.assertEqual(by_area["Corrected distance c(w,w')"]["status"], "smoke_only")
+        self.assertEqual(by_area["Corrected distance c(w,w')"]["status"], "defined_full_run")
         self.assertIn("maximum valid perturbation count 4", by_area["Corrected distance c(w,w')"]["evidence"])
-        self.assertIn("high-cap 1000 split: 0 defined over 86 pairs", by_area["Corrected distance c(w,w')"]["evidence"])
+        self.assertIn("full all-lane cap 1000 run: 72 defined over 182 selected pairs", by_area["Corrected distance c(w,w')"]["evidence"])
+        self.assertIn("max valid 125", by_area["Corrected distance c(w,w')"]["evidence"])
+        self.assertIn("110 ordinary-not-valid", by_area["Corrected distance c(w,w')"]["evidence"])
         self.assertIn("legacy ordinary-hit perturbation diagnostic: 80/120 rows with hits", by_area["Corrected distance c(w,w')"]["evidence"])
         self.assertIn("max row-min exact 12", by_area["Corrected distance c(w,w')"]["evidence"])
         self.assertIn("legacy ordinary-hit pair readiness: 0 ready, 40 missing hits, 46 under exact", by_area["Corrected distance c(w,w')"]["evidence"])
         self.assertEqual(by_area["Aggregate statistic and permutation"]["status"], "diagnostic_not_claim_grade")
         self.assertIn("G min P4 rank 4", by_area["Aggregate statistic and permutation"]["evidence"])
-        self.assertIn("0 defined c-values from 86 rows", by_area["Aggregate statistic and permutation"]["evidence"])
+        self.assertIn("72 defined c-values from 182 rows", by_area["Aggregate statistic and permutation"]["evidence"])
         self.assertIn("cross-pair date permutation diagnostic", by_area["Aggregate statistic and permutation"]["evidence"])
         self.assertIn("rho0=0.003996003996", by_area["Aggregate statistic and permutation"]["evidence"])
         self.assertIn("WNP-excluded repo-defined 999999", by_area["Aggregate statistic and permutation"]["evidence"])

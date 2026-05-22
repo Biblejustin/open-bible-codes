@@ -25,7 +25,7 @@ REQUIRED_PHRASES = (
     "No source-review flag or visual-review note excludes a pair automatically.",
     "Printed `D(w)` is the main source-facing rule; reported-program `D(w)` remains sensitivity output.",
     "Date-label permutation output remains diagnostic until corrected distances and the aggregate rule are source-locked.",
-    "Claim-grade language still requires full corrected distances",
+    "Claim-grade language still requires a locked aggregate/permutation",
 )
 
 

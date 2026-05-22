@@ -18,7 +18,7 @@ REQUIRED_PHRASES = (
     "| WRR2 term source | `working_source_locked` |",
     "| Pair universe | `source_locked` |",
     "| D(w) skip-cap formula | `source_locked` |",
-    "| Corrected distance c(w,w') | `smoke_only` |",
+    "| Corrected distance c(w,w') | `defined_full_run` |",
     "| Aggregate statistic and permutation | `diagnostic_not_claim_grade` |",
     "variant-gap impact best run",
     "Source Anchors",

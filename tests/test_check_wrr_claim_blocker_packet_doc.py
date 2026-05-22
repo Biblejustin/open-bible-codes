@@ -19,7 +19,7 @@ def test_missing_no_input_status_fails(tmp_path: Path) -> None:
 
     failures = check.validate_blocker_packet_doc(doc)
 
-    assert any("working locks selected" in failure for failure in failures)
+    assert any("full corrected-distance run selected" in failure for failure in failures)
 
 
 def test_missing_visual_boundary_fails(tmp_path: Path) -> None:

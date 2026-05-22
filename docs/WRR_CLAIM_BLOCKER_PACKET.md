@@ -1,6 +1,6 @@
 # WRR Claim Blocker Packet
 
-Status: working locks selected; corrected-distance/permutation still not claim-grade.
+Status: full corrected-distance run selected; aggregate/permutation still not claim-grade.
 
 This packet records the selected WRR working policy and gathers the
 remaining claim-readiness blockers, current lock options, WNP/context source
@@ -16,14 +16,12 @@ python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/w
 
 | Area | Status | Blocker | Input needed |
 | --- | --- | --- | --- |
-| Corrected distance c(w,w') | `smoke_only` | Corrected distance c(w,w'): status smoke_only is not claim-ready; requires one of defined_full_run,full_run_locked | run full corrected-distance over keep_all_working_source with printed D(w) |
-| Aggregate statistic and permutation | `diagnostic_not_claim_grade` | Aggregate statistic and permutation: status diagnostic_not_claim_grade is not claim-ready; requires one of claim_grade_ready,permutation_locked | requires full corrected-distance output before claim-grade lock |
+| Aggregate statistic and permutation | `diagnostic_not_claim_grade` | Aggregate statistic and permutation: status diagnostic_not_claim_grade is not claim-ready; requires one of claim_grade_ready,permutation_locked | lock aggregate/permutation procedure over full corrected-distance output |
 
 ## No-Input Boundary
 
 | Area | Current read | Available options | No-input next |
 | --- | --- | --- | --- |
-| Corrected distance c(w,w') | Direct perturbed-letter smoke driver now produces defined corrected distances in the current candidate lane, but this remains diagnostic until the full selected keep_all_working_source universe has defined corrected-distance output. |  | run full-lane corrected-distance work under the selected source and D(w) locks |
 | Aggregate statistic and permutation | Published Table 3 ranks are source-audited; local diagnostic P1..P4 and date-permutation runs exist, including a repo-defined 999,999 run, but this is not an exact WRR reproduction. |  | keep date-label permutation diagnostics separate from WRR reproduction language |
 
 ## Source Policy Scenario Impact

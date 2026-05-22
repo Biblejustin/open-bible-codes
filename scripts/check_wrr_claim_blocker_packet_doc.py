@@ -12,11 +12,9 @@ DEFAULT_DOC = Path("docs/WRR_CLAIM_BLOCKER_PACKET.md")
 
 REQUIRED_PHRASES = (
     "# WRR Claim Blocker Packet",
-    "Status: working locks selected; corrected-distance/permutation still not claim-grade.",
-    "| Corrected distance c(w,w') | `smoke_only` |",
+    "Status: full corrected-distance run selected; aggregate/permutation still not claim-grade.",
     "| Aggregate statistic and permutation | `diagnostic_not_claim_grade` |",
-    "run full corrected-distance over keep_all_working_source with printed D(w)",
-    "requires full corrected-distance output before claim-grade lock",
+    "lock aggregate/permutation procedure over full corrected-distance output",
     "source/title-prefix rule review; visual notes show title text without visible B@L prefix",
     "source/pair-rule review; visual notes show English of-Chelm label but primary Hebrew cell only supports RBY$LMH in this pass",
     "## Visual Triage Highlights",
