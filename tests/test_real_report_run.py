@@ -50,6 +50,9 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/release_hygiene.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_public_release_hygiene.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("els/project_index.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn("README.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn("docs/REAL_REPORT_RUN.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn("docs/REMAINING_WORK_REGISTER.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/INDEX.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("protocols/INDEX.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_REPLICATION_PLAN.md", steps_by_id["preflight"]["inputs"])
@@ -238,6 +241,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_method_pair_universe_evidence_packet_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_public_handoff_docs.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -601,12 +608,19 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/check_wrr_public_handoff_docs.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/check_wrr_dw_formula_sensitivity_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn("scripts/release_hygiene.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_public_release_hygiene.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("els/project_index.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("README.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/REAL_REPORT_RUN.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/REMAINING_WORK_REGISTER.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/INDEX.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("protocols/INDEX.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("claims/claim_catalog.csv", preflight.DEFAULT_REQUIRED_PATHS)
@@ -780,6 +794,7 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("manual_review_queue_failures", payload)
             self.assertIn("wrr_claim_readiness_doc_failures", payload)
             self.assertIn("wrr_claim_blocker_packet_doc_failures", payload)
+            self.assertIn("wrr_public_handoff_doc_failures", payload)
             self.assertIn("wrr_lock_options_doc_failures", payload)
             self.assertIn("wrr_method_status_doc_failures", payload)
             self.assertIn("stale_generated_indexes", payload)
@@ -992,6 +1007,28 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "WRR claim-blocker packet failures: "
                 "docs/WRR_CLAIM_BLOCKER_PACKET.md missing no-input status",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_public_handoff_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_public_handoff_docs,
+                "validate_public_handoff_docs",
+                return_value=["README.md missing phrase: WRR claim-blocker packet:"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_public_handoff_doc_failures"],
+                ["README.md missing phrase: WRR claim-blocker packet:"],
+            )
+            self.assertIn(
+                "WRR public handoff doc failures: "
+                "README.md missing phrase: WRR claim-blocker packet:",
                 payload["failures"],
             )
 

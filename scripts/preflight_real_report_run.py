@@ -35,6 +35,7 @@ from scripts import (
     check_wrr_dw_formula_sensitivity_doc,
     check_wrr_lock_options_doc,
     check_wrr_method_status_doc,
+    check_wrr_public_handoff_docs,
     check_wrr_residual_reconciliation_action_plan_doc,
     check_wrr_residual_term_reconciliation_queue_doc,
     check_wrr_source_recovery_probe_doc,
@@ -68,6 +69,9 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_public_release_hygiene.py",
     "els/project_index.py",
     "Makefile",
+    "README.md",
+    "docs/REAL_REPORT_RUN.md",
+    "docs/REMAINING_WORK_REGISTER.md",
     "protocols/real_report_run.toml",
     "protocols/INDEX.md",
     "protocols/step_tahot_final_gate.toml",
@@ -411,6 +415,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_claim_readiness.py",
     "scripts/check_wrr_claim_readiness_doc.py",
     "scripts/check_wrr_claim_blocker_packet_doc.py",
+    "scripts/check_wrr_public_handoff_docs.py",
     "scripts/check_wrr_defined_diagnostic_docs.py",
     "scripts/check_wrr_lock_options_doc.py",
     "scripts/check_wrr_method_status_doc.py",
@@ -586,6 +591,15 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "WRR claim-blocker packet failures: "
             + "; ".join(wrr_claim_blocker_packet_doc_failures)
+        )
+
+    wrr_public_handoff_doc_failures = (
+        check_wrr_public_handoff_docs.validate_public_handoff_docs()
+    )
+    if wrr_public_handoff_doc_failures:
+        failures.append(
+            "WRR public handoff doc failures: "
+            + "; ".join(wrr_public_handoff_doc_failures)
         )
 
     wrr_defined_diagnostic_doc_failures = (
@@ -824,6 +838,7 @@ def main(argv: list[str] | None = None) -> int:
         "wrr_claim_blocker_packet_doc_failures": (
             wrr_claim_blocker_packet_doc_failures
         ),
+        "wrr_public_handoff_doc_failures": wrr_public_handoff_doc_failures,
         "wrr_defined_diagnostic_doc_failures": wrr_defined_diagnostic_doc_failures,
         "wrr_variant_gap_doc_failures": wrr_variant_gap_doc_failures,
         "wrr_residual_term_reconciliation_doc_failures": (
