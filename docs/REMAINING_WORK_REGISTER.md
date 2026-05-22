@@ -187,6 +187,7 @@ Current pushed commits for this cleanup:
 - `0e994ff` Surface WRR method pair packet in blockers.
 - `221a848` Surface WRR source transcription clusters in blockers.
 - `f5e167f` Surface WRR near match lane in blockers.
+- `222f231` Sync WRR public handoff docs.
 
 ### Formal Real Report Rerun
 
