@@ -88,6 +88,11 @@ Door43 open English controls are tracked separately in
 texts remain local under ignored `data/raw/door43/` and
 `data/processed/door43/`.
 
+Open English Translation controls are tracked separately in
+`configs/oet_english_controls.csv` for OET-LV and OET-RV. Their raw and
+processed texts remain local under ignored `data/raw/oet/` and
+`data/processed/oet/`.
+
 The manifest also tracks broad source-basis metadata:
 
 - `ot_basis`

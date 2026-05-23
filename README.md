@@ -169,14 +169,19 @@ Source-basis metadata queue:
 `docs/SOURCE_BASIS_AUDIT_QUEUE.md`. Validate it with
 `python3 -m scripts.check_source_basis_audit_queue`.
 
-Additional open/CC eBible English control corpora:
+Additional open/CC English control corpora:
 
 ```bash
 python3 -m scripts.download_ebible_english_controls --skip-existing
 python3 -m scripts.run_protocol protocols/ebible_english_controls.toml --resume
+python3 -m scripts.download_door43_english_controls --skip-existing
+python3 -m scripts.run_protocol protocols/door43_english_controls.toml --resume
+python3 -m scripts.download_oet_english_controls --skip-existing
+python3 -m scripts.run_protocol protocols/oet_english_controls.toml --resume
 ```
 
-Control manifest: `configs/ebible_english_controls.csv`.
+Control manifests: `configs/ebible_english_controls.csv`,
+`configs/door43_english_controls.csv`, and `configs/oet_english_controls.csv`.
 
 Compare the BibleGateway-overlap set against those controls and inspect the
 strongest seed-term contexts:

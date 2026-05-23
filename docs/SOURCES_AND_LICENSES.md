@@ -99,6 +99,24 @@ python3 -m scripts.download_door43_english_controls --skip-existing
 python3 -m scripts.run_protocol protocols/door43_english_controls.toml --resume
 ```
 
+Open English Translation controls:
+
+- `configs/oet_english_controls.csv`
+- `scripts/download_oet_english_controls.py`
+- `protocols/oet_english_controls.toml`
+
+These controls use the OET cleaned USFM files from the public OET repository.
+The OET license page and repository README identify the Bible text as CC BY-SA
+4.0. Raw and processed source text stays under ignored `data/raw/` and
+`data/processed/`; generated reports stay under ignored `reports/`.
+
+Use:
+
+```bash
+python3 -m scripts.download_oet_english_controls --skip-existing
+python3 -m scripts.run_protocol protocols/oet_english_controls.toml --resume
+```
+
 Generic eBible USFM import:
 
 ```bash

@@ -126,14 +126,19 @@ python3 -m scripts.run_protocol protocols/biblegateway_english_versions.toml --r
 The manifest is `configs/biblegateway_english_versions.csv`. Missing local CSVs
 are reported locally under `reports/biblegateway_english_versions/`.
 
-For additional open/CC eBible English controls, use:
+For additional open/CC English controls, use:
 
 ```bash
 python3 -m scripts.download_ebible_english_controls --skip-existing
 python3 -m scripts.run_protocol protocols/ebible_english_controls.toml --resume
+python3 -m scripts.download_door43_english_controls --skip-existing
+python3 -m scripts.run_protocol protocols/door43_english_controls.toml --resume
+python3 -m scripts.download_oet_english_controls --skip-existing
+python3 -m scripts.run_protocol protocols/oet_english_controls.toml --resume
 ```
 
-The control manifest is `configs/ebible_english_controls.csv`.
+Control manifests are `configs/ebible_english_controls.csv`,
+`configs/door43_english_controls.csv`, and `configs/oet_english_controls.csv`.
 
 Then compare the BibleGateway-overlap set against those controls:
 

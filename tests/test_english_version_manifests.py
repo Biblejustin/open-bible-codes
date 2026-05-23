@@ -6,6 +6,8 @@ from pathlib import Path
 
 BIBLEGATEWAY_MANIFEST = Path("configs/biblegateway_english_versions.csv")
 EBIBLE_CONTROLS = Path("configs/ebible_english_controls.csv")
+DOOR43_CONTROLS = Path("configs/door43_english_controls.csv")
+OET_CONTROLS = Path("configs/oet_english_controls.csv")
 PRIVATE_PROTOCOL = Path("protocols/private_english_versions.toml")
 SOURCE_BASIS_AUDIT_QUEUE = Path("docs/SOURCE_BASIS_AUDIT_QUEUE.md")
 
@@ -72,13 +74,20 @@ class EnglishVersionManifestTests(unittest.TestCase):
         expected = {
             "BibleGateway English versions": count_basis_rows(read_rows(BIBLEGATEWAY_MANIFEST)),
             "eBible English controls": count_basis_rows(read_rows(EBIBLE_CONTROLS)),
+            "Door43 English controls": count_basis_rows(read_rows(DOOR43_CONTROLS)),
+            "OET English controls": count_basis_rows(read_rows(OET_CONTROLS)),
         }
         observed = read_audit_queue_counts(SOURCE_BASIS_AUDIT_QUEUE)
 
         self.assertEqual(observed, expected)
 
     def test_source_basis_audit_queue_has_no_current_needs_audit_rows(self) -> None:
-        rows = [*read_rows(BIBLEGATEWAY_MANIFEST), *read_rows(EBIBLE_CONTROLS)]
+        rows = [
+            *read_rows(BIBLEGATEWAY_MANIFEST),
+            *read_rows(EBIBLE_CONTROLS),
+            *read_rows(DOOR43_CONTROLS),
+            *read_rows(OET_CONTROLS),
+        ]
 
         self.assertEqual(
             [row["label"] for row in rows if row["basis_status"] == "needs_audit"],

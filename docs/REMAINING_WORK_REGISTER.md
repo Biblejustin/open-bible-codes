@@ -564,6 +564,8 @@ Current queue after the BibleGateway/eBible audit pass:
 
 - BibleGateway English versions: 0 `needs_audit`, 64 `broad_tradition`.
 - eBible English controls: 0 `needs_audit`, 44 `broad_tradition`.
+- Door43 English controls: 0 `needs_audit`, 2 `broad_tradition`.
+- OET English controls: 0 `needs_audit`, 2 `broad_tradition`.
 - eBible rows moved to broad grouping: `ASVBT`, `BSB`, `E2T`, `FBV`, `F35`,
   `LSV`, `MSB`, `OURB`, `OEBCW`, `OEB`, `BBE`, `NOY`, `PEV`, `T4T`, `ULB`,
   and `OJB`.
@@ -581,6 +583,9 @@ Current queue after the BibleGateway/eBible audit pass:
   custom non-open permission statement, or non-redistributable status. Examples
   include `engaoi`, `engbarkly`, `engemtv`, `eng-glw`, `engnna`,
   `engwyc2017`, `engwyc2018`, `engerv`, `enggw`, and `engnet`.
+- OET-LV and OET-RV are tracked as separate CC BY-SA 4.0 open controls using
+  the OET cleaned USFM repository files. Keep both as broad controls, not
+  edition-level manuscript witnesses.
 - `BBE` and `NOY` moved to broad grouping only. `BBE` has broad Hebrew/Greek
   source evidence; `NOY` NT title metadata identifies Tischendorf's Greek text.
 - No English source-basis rows remain in `needs_audit`.

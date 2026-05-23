@@ -10,6 +10,8 @@ Inputs:
 
 - `configs/biblegateway_english_versions.csv`
 - `configs/ebible_english_controls.csv`
+- `configs/door43_english_controls.csv`
+- `configs/oet_english_controls.csv`
 
 Fields already tracked:
 
@@ -30,6 +32,8 @@ edition documentation.
 | --- | ---: | ---: | ---: |
 | BibleGateway English versions | 64 | 0 | 64 |
 | eBible English controls | 44 | 0 | 44 |
+| Door43 English controls | 2 | 0 | 2 |
+| OET English controls | 2 | 0 | 2 |
 
 ## Validation
 
@@ -63,6 +67,10 @@ None after this pass.
 
 None after this pass.
 
+## Door43/OET Control Rows Needing Audit
+
+None after this pass.
+
 ## eBible Rows Audited This Pass
 
 | Label | Basis status | Source evidence |
@@ -83,6 +91,15 @@ None after this pass.
 | T4T | `broad_tradition` | eBible Translation for Translators page supplies a CC BY-SA 4.0 source package; treat as implied-information translator-help control: <https://ebible.org/find/show.php?id=eng-t4t> |
 | ULB | `broad_tradition` | eBible Unlocked Literal Bible page supplies a CC BY-SA 4.0 source package and describes a close original-language ASV-family update: <https://ebible.org/find/show.php?id=engULB> |
 | OJB | `broad_tradition` | Local eBible source package identifies Tanakh and Orthodox Jewish Brit Chadasha presentation; exact textual editions are not stated: `data/raw/ebible/engojb_usfm.zip` |
+
+## Door43/OET Rows Audited This Pass
+
+| Label | Basis status | Source evidence |
+| --- | --- | --- |
+| ULT | `broad_tradition` | Door43 manifest identifies ULT as an ASV-based open literal translation with UHB/UGNT source relations: <https://git.door43.org/unfoldingWord/en_ult> |
+| UST | `broad_tradition` | Door43 manifest identifies UST as an open functional translation with T4T/UHB/UGNT source relations: <https://git.door43.org/unfoldingWord/en_ust> |
+| OET-LV | `broad_tradition` | OET source-text page identifies OSHB/WLC for Hebrew and SRGNT/CNTR for Greek; OET license page identifies CC BY-SA 4.0: <https://OpenEnglishTranslation.Bible/Design/SourceTexts> and <https://OpenEnglishTranslation.Bible/About/Licence> |
+| OET-RV | `broad_tradition` | Same OET source-basis and license evidence as OET-LV; RV cleaned USFM includes draft deuterocanon/apocrypha files: <https://github.com/Freely-Given-org/OpenEnglishTranslation--OET/tree/main/exportedFiles/cleanedUSFM/ReadersVersion> |
 
 ## Checked But Still Queued
 

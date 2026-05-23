@@ -11,6 +11,7 @@ def test_current_source_basis_queue_passes() -> None:
 def test_validate_source_basis_queue_rejects_stale_doc_counts(tmp_path) -> None:
     biblegateway = tmp_path / "biblegateway.csv"
     ebible = tmp_path / "ebible.csv"
+    door43, oet = write_empty_control_manifests(tmp_path)
     audit_queue = tmp_path / "queue.md"
     write_manifest(
         biblegateway,
@@ -58,6 +59,8 @@ def test_validate_source_basis_queue_rejects_stale_doc_counts(tmp_path) -> None:
     failures = check.validate_source_basis_queue(
         biblegateway_manifest=biblegateway,
         ebible_controls=ebible,
+        door43_controls=door43,
+        oet_controls=oet,
         audit_queue=audit_queue,
     )
 
@@ -68,6 +71,7 @@ def test_validate_source_basis_queue_rejects_stale_doc_counts(tmp_path) -> None:
 def test_validate_source_basis_queue_rejects_needs_audit_rows(tmp_path) -> None:
     biblegateway = tmp_path / "biblegateway.csv"
     ebible = tmp_path / "ebible.csv"
+    door43, oet = write_empty_control_manifests(tmp_path)
     audit_queue = tmp_path / "queue.md"
     write_manifest(
         biblegateway,
@@ -90,6 +94,8 @@ def test_validate_source_basis_queue_rejects_needs_audit_rows(tmp_path) -> None:
                 "| --- | ---: | ---: | ---: |",
                 "| BibleGateway English versions | 1 | 1 | 0 |",
                 "| eBible English controls | 0 | 0 | 0 |",
+                "| Door43 English controls | 0 | 0 | 0 |",
+                "| OET English controls | 0 | 0 | 0 |",
             ]
         )
         + "\n",
@@ -99,6 +105,8 @@ def test_validate_source_basis_queue_rejects_needs_audit_rows(tmp_path) -> None:
     failures = check.validate_source_basis_queue(
         biblegateway_manifest=biblegateway,
         ebible_controls=ebible,
+        door43_controls=door43,
+        oet_controls=oet,
         audit_queue=audit_queue,
     )
 
@@ -107,6 +115,8 @@ def test_validate_source_basis_queue_rejects_needs_audit_rows(tmp_path) -> None:
         check.validate_source_basis_queue(
             biblegateway_manifest=biblegateway,
             ebible_controls=ebible,
+            door43_controls=door43,
+            oet_controls=oet,
             audit_queue=audit_queue,
             allow_needs_audit=True,
         )
@@ -117,6 +127,7 @@ def test_validate_source_basis_queue_rejects_needs_audit_rows(tmp_path) -> None:
 def test_validate_source_basis_queue_rejects_bad_ebible_metadata(tmp_path) -> None:
     biblegateway = tmp_path / "biblegateway.csv"
     ebible = tmp_path / "ebible.csv"
+    door43, oet = write_empty_control_manifests(tmp_path)
     audit_queue = tmp_path / "queue.md"
     write_manifest(biblegateway, [])
     write_manifest(
@@ -143,6 +154,8 @@ def test_validate_source_basis_queue_rejects_bad_ebible_metadata(tmp_path) -> No
                 "| --- | ---: | ---: | ---: |",
                 "| BibleGateway English versions | 0 | 0 | 0 |",
                 "| eBible English controls | 1 | 0 | 1 |",
+                "| Door43 English controls | 0 | 0 | 0 |",
+                "| OET English controls | 0 | 0 | 0 |",
             ]
         )
         + "\n",
@@ -152,6 +165,8 @@ def test_validate_source_basis_queue_rejects_bad_ebible_metadata(tmp_path) -> No
     failures = check.validate_source_basis_queue(
         biblegateway_manifest=biblegateway,
         ebible_controls=ebible,
+        door43_controls=door43,
+        oet_controls=oet,
         audit_queue=audit_queue,
     )
 
@@ -180,3 +195,11 @@ def write_manifest(path: Path, rows: list[dict[str, str]]) -> None:
         writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
+
+
+def write_empty_control_manifests(tmp_path: Path) -> tuple[Path, Path]:
+    door43 = tmp_path / "door43.csv"
+    oet = tmp_path / "oet.csv"
+    write_manifest(door43, [])
+    write_manifest(oet, [])
+    return door43, oet
