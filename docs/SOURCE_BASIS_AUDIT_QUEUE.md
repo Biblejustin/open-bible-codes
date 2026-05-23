@@ -84,7 +84,7 @@ None after this pass.
 | ASVBT | `broad_tradition` | eBible page identifies ASV conformed to Byzantine Text NT: <https://ebible.org/find/show.php?id=engasvbt> |
 | BSB | `broad_tradition` | eBible/Berean pages support broad modern critical grouping: <https://ebible.org/find/show.php?id=engbsb> and <https://bereanbibles.com/about-berean-study-bible/greek-and-hebrew-sources/> |
 | E2T | `broad_tradition` | eBible Easy to Translate English Jonah page supplies a CC BY-SA 4.0 source package; treat as Jonah-only easy-translation control: <https://ebible.org/find/show.php?id=enge2t> |
-| FBV | `broad_tradition` | eBible Free Bible Version page supplies a CC BY-SA 4.0 source package; treat as partial NT/Psalms free-translation control: <https://ebible.org/find/show.php?id=engfbv> |
+| FBV | `broad_tradition` | eBible Free Bible Version page supplies a CC BY-SA 4.0 source package; current local USFM import contains 66 books, so treat as a full free-translation control: <https://ebible.org/find/show.php?id=engfbv> |
 | F35 | `broad_tradition` | eBible Family 35 NT page supplies a CC BY-SA 4.0 source package and identifies the Family 35 Greek NT basis: <https://ebible.org/find/show.php?id=engf35> |
 | LSV | `broad_tradition` | eBible Literal Standard Version page supplies a CC BY-SA 4.0 source package; exact textual editions are not stated: <https://ebible.org/find/show.php?id=englsv> |
 | MSB | `broad_tradition` | MajorityBible identifies BSB OT plus Robinson-Pierpont Byzantine Majority Text NT: <https://majoritybible.com/> |
@@ -108,7 +108,7 @@ None after this pass.
 | OET-RV | `broad_tradition` | Same OET source-basis and license evidence as OET-LV; RV cleaned USFM includes draft deuterocanon/apocrypha files: <https://github.com/Freely-Given-org/OpenEnglishTranslation--OET/tree/main/exportedFiles/cleanedUSFM/ReadersVersion> |
 | OTB | `broad_tradition` | OTB repository README and license identify CC BY-SA 4.0 and provide verse-level `lang/en-GB` JSON, but the upstream manuscript/source-text basis is not stated; use as a surface English control only: <https://github.com/OpenTranslationBible/open-bible> |
 | AFINT-EXP-AE, AFINT-EXP-BE | `broad_tradition` | Open.Bible AFINT explanatory paraphrase pages identify English New Testament USFM downloads and CC BY-SA license, but do not state the Greek source/manuscript basis; use as surface English controls only: <https://www.open.bible/bibles/69a307e295245b14e244c7a0> and <https://www.open.bible/bibles/69a307df95245b14e244c797> |
-| AFINT-LIT-AE, AFINT-LIT-BE | `broad_tradition` | Open.Bible AFINT literal pages identify English New Testament USFM downloads and CC BY-SA license, but do not state the Greek source/manuscript basis; use as surface English controls only: <https://www.open.bible/bibles/69a307e695245b14e244c7a8> and <https://www.open.bible/bibles/69a307e995245b14e244c7b0> |
+| AFINT-LIT-AE, AFINT-LIT-BE | `broad_tradition` | Open.Bible AFINT literal pages identify English New Testament USFM downloads and CC BY-SA license, but do not state the Greek source/manuscript basis; use as surface English controls only: <https://www.open.bible/bibles/69a307e995245b14e244c7b0> and <https://www.open.bible/bibles/69a307e695245b14e244c7a8> |
 
 ## Checked But Still Queued
 

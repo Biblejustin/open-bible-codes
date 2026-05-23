@@ -106,6 +106,8 @@ class EnglishVersionManifestTests(unittest.TestCase):
         self.assertIn("CC BY-SA 4.0", rows["PEV"]["license_label"])
         self.assertIn("CC BY-SA 4.0", rows["E2T"]["license_label"])
         self.assertIn("CC BY-SA 4.0", rows["FBV"]["license_label"])
+        self.assertEqual(rows["FBV"]["coverage"], "full")
+        self.assertIn("66 books", rows["FBV"]["notes"])
         self.assertIn("CC BY-SA 4.0", rows["F35"]["license_label"])
         self.assertIn("CC BY-SA 4.0", rows["LSV"]["license_label"])
         self.assertIn("CC BY-SA 4.0", rows["OURB"]["license_label"])

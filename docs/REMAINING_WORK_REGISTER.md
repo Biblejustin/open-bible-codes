@@ -579,12 +579,15 @@ Current queue after the BibleGateway/eBible audit pass:
   the translation used Hebrew and Greek language study aids but not exact
   editions. `E2T`, `FBV`, `F35`, `LSV`, `OURB`, `T4T`, and `ULB` were added
   as CC BY-SA 4.0 eBible controls; keep exact source-edition claims coarse
-  unless publisher notes state more.
+  unless publisher notes state more. `FBV` now imports as a 66-book local USFM
+  package, so it is tracked as a full English control rather than NT/Psalms
+  partial.
 - Remaining downloadable English-ish eBible rows checked in this pass were not
   added as open controls when their eBible details page used NC/ND, ND-only, a
-  custom non-open permission statement, or non-redistributable status. Examples
-  include `engaoi`, `engbarkly`, `engemtv`, `eng-glw`, `engnna`,
-  `engwyc2017`, `engwyc2018`, `engerv`, `enggw`, and `engnet`.
+  custom non-open permission statement, non-redistributable status, or a
+  non-English language code. Examples include `engaoi`, `engbarkly`,
+  `engbarkley`, `engemtv`, `eng-glw`, `engnna`, `engwyc2017`, `engwyc2018`,
+  `engerv`, `enggw`, `engnet`, and `ubu-nopenge`.
 - OET-LV and OET-RV are tracked as separate CC BY-SA 4.0 open controls using
   the OET cleaned USFM repository files. Keep both as broad controls, not
   edition-level manuscript witnesses.
@@ -594,6 +597,10 @@ Current queue after the BibleGateway/eBible audit pass:
 - Open.Bible AFINT English NT controls are tracked as CC BY-SA open controls
   using product-page USFM downloads. Upstream does not state the Greek
   manuscript/source-text basis, so use them as English surface controls only.
+- Open.Bible English API search was rechecked after AFINT import. The remaining
+  text rows are either already represented by eBible controls, marked NC/ND or
+  ND, a non-meaningful DBL test version, or mixed-license enough to leave out
+  for now.
 - `BBE` and `NOY` moved to broad grouping only. `BBE` has broad Hebrew/Greek
   source evidence; `NOY` NT title metadata identifies Tischendorf's Greek text.
 - No English source-basis rows remain in `needs_audit`.

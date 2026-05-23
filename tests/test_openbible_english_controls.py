@@ -20,6 +20,14 @@ class OpenBibleEnglishControlTests(unittest.TestCase):
             sorted(rows),
             ["AFINT-EXP-AE", "AFINT-EXP-BE", "AFINT-LIT-AE", "AFINT-LIT-BE"],
         )
+        self.assertEqual(
+            rows["AFINT-LIT-AE"]["details_url"],
+            "https://www.open.bible/bibles/69a307e995245b14e244c7b0",
+        )
+        self.assertEqual(
+            rows["AFINT-LIT-BE"]["details_url"],
+            "https://www.open.bible/bibles/69a307e695245b14e244c7a8",
+        )
         for label, row in rows.items():
             with self.subTest(label=label):
                 self.assertTrue(row["source_id"].startswith("afint-"))
