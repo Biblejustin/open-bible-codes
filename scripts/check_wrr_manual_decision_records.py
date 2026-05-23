@@ -189,6 +189,12 @@ def validate_row(
     elif expected is not None:
         failures.extend(validate_register_match(records, row_number, row, expected))
 
+    source_checklist = clean(row.get("source_checklist"))
+    if source_checklist and not Path(source_checklist).exists():
+        failures.append(
+            f"{records}:{row_number} source_checklist is missing: {source_checklist}"
+        )
+
     for column in (
         "decision_status",
         "selected_action",

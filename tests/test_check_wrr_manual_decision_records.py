@@ -88,6 +88,44 @@ class WrrManualDecisionRecordsTests(unittest.TestCase):
             self.assertIn(f"{path}:2 evidence_summary is too short", failures)
             self.assertIn(f"{path}:2 locked_at must be ISO date", failures)
 
+    def test_populated_record_rejects_missing_checklist_path(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "records.csv"
+            write_records(
+                path,
+                [
+                    {
+                        "decision_id": "wrr_decision_002",
+                        "register_decision_rank": "2",
+                        "decision_lane": "source_transcription_row_cluster",
+                        "review_state": "pending_manual_source_lock",
+                        "decision_target": "row 06",
+                        "source_checklist": "docs/MISSING_WRR_CHECKLIST.md",
+                        "decision_status": "accepted_keep",
+                        "selected_action": "no_source_change",
+                        "evidence_citation": "source scan page 6 row image",
+                        "evidence_summary": (
+                            "Reviewed row image and kept working-source row unchanged."
+                        ),
+                        "locked_by": "reviewer",
+                        "locked_at": "2026-05-22",
+                        "notes": "test row",
+                    }
+                ],
+            )
+
+            failures = check.validate_decision_records(path, check.DEFAULT_REGISTER_DOC)
+
+            self.assertIn(
+                f"{path}:2 source_checklist must match register: "
+                "docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md",
+                failures,
+            )
+            self.assertIn(
+                f"{path}:2 source_checklist is missing: docs/MISSING_WRR_CHECKLIST.md",
+                failures,
+            )
+
 
 def write_records(path: Path, rows: list[dict[str, str]]) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
