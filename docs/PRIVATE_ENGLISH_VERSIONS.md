@@ -99,6 +99,12 @@ under ignored `data/raw/otb/` and `data/processed/otb/`. Upstream does not
 state the manuscript/source-text basis, so this is a surface English control,
 not a manuscript-tradition witness.
 
+Open.Bible AFINT English New Testament controls are tracked separately in
+`configs/openbible_english_controls.csv`. Their raw and processed texts remain
+local under ignored `data/raw/openbible/` and `data/processed/openbible/`.
+Upstream product pages identify CC BY-SA downloads, but do not state a Greek
+source/manuscript basis, so these are surface English controls only.
+
 The manifest also tracks broad source-basis metadata:
 
 - `ot_basis`

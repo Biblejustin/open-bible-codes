@@ -567,6 +567,7 @@ Current queue after the BibleGateway/eBible audit pass:
 - Door43 English controls: 0 `needs_audit`, 2 `broad_tradition`.
 - OET English controls: 0 `needs_audit`, 2 `broad_tradition`.
 - OTB English controls: 0 `needs_audit`, 1 `broad_tradition`.
+- Open.Bible English controls: 0 `needs_audit`, 4 `broad_tradition`.
 - eBible rows moved to broad grouping: `ASVBT`, `BSB`, `E2T`, `FBV`, `F35`,
   `LSV`, `MSB`, `OURB`, `OEBCW`, `OEB`, `BBE`, `NOY`, `PEV`, `T4T`, `ULB`,
   and `OJB`.
@@ -590,6 +591,9 @@ Current queue after the BibleGateway/eBible audit pass:
 - OTB English UK is tracked as a CC BY-SA 4.0 open control using the
   repository `lang/en-GB` JSON files. Upstream does not state the
   manuscript/source-text basis, so use it as an English surface control only.
+- Open.Bible AFINT English NT controls are tracked as CC BY-SA open controls
+  using product-page USFM downloads. Upstream does not state the Greek
+  manuscript/source-text basis, so use them as English surface controls only.
 - `BBE` and `NOY` moved to broad grouping only. `BBE` has broad Hebrew/Greek
   source evidence; `NOY` NT title metadata identifies Tischendorf's Greek text.
 - No English source-basis rows remain in `needs_audit`.
@@ -597,7 +601,7 @@ Current queue after the BibleGateway/eBible audit pass:
 Suggested local queue command:
 
 ```bash
-awk -F, 'NR == 1 || /needs_audit/' configs/biblegateway_english_versions.csv configs/ebible_english_controls.csv configs/door43_english_controls.csv configs/oet_english_controls.csv configs/otb_english_controls.csv
+awk -F, 'NR == 1 || /needs_audit/' configs/biblegateway_english_versions.csv configs/ebible_english_controls.csv configs/door43_english_controls.csv configs/oet_english_controls.csv configs/otb_english_controls.csv configs/openbible_english_controls.csv
 ```
 
 ### 3. English Seed Survivor Gate
@@ -767,14 +771,22 @@ worksheet guarding:
   chapter JSON files. `python3 -m scripts.run_protocol
   protocols/otb_english_controls.toml --resume` passed with 1 included
   control, zero missing controls, and 1,303 count rows.
+- Open.Bible AFINT English NT controls are tracked in
+  `configs/openbible_english_controls.csv`; current import wrote 4 controls
+  with 7,938-7,940 verses each. `python3 -m scripts.run_protocol
+  protocols/openbible_english_controls.toml --resume` passed with 4 included
+  controls, zero missing controls, and 5,212 count rows.
 - `python3 -m scripts.run_protocol protocols/english_version_control_triage.toml --resume`
-  now compares BibleGateway-overlap English rows against 49 merged open
-  controls from eBible, Door43, OET, and OTB; context review promoted no seed
-  terms.
+  now compares BibleGateway-overlap English rows against 53 merged open
+  controls from eBible, Door43, OET, OTB, and Open.Bible; context review
+  promoted no seed terms.
 - `python3 -m pytest tests/test_otb_english_controls.py tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py tests/test_real_report_run.py -q` passed: 75 tests and 124 subtests.
+- `python3 -m pytest tests/test_openbible_english_controls.py tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py tests/test_real_report_run.py -q` passed: 73 tests and 128 subtests.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_otb_controls.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_openbible_controls.json` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
 - `python3 -m pytest -q` passed: 1357 tests and 13972 subtests.
+- `python3 -m pytest -q` passed: 1359 tests and 13976 subtests after adding Open.Bible AFINT controls.
 - `python3 -m scripts.check_expanded_strata_tooling --report /tmp/edls_expanded_tooling_after_patch.json` passed.
 - `python3 -m scripts.validate_study_mapping_schemas` passed.
 - `python3 -m scripts.check_crd_relevance_dictionary --dictionary terms/relevance_dictionary.toml --term-file terms/gog_magog_pair_prospective_terms.csv --expected-sha256 a6406048b9953ca50715d99100994b9065394d9db31b35867666d365a3bd0f99 --require-reviewed` passed.

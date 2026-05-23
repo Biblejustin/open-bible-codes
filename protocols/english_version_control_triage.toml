@@ -16,11 +16,13 @@ inputs = [
   "reports/door43_english_controls/version_presence.csv",
   "reports/oet_english_controls/version_presence.csv",
   "reports/otb_english_controls/version_presence.csv",
+  "reports/openbible_english_controls/version_presence.csv",
   "reports/biblegateway_english_versions/included_versions.csv",
   "reports/ebible_english_controls/included_versions.csv",
   "reports/door43_english_controls/included_versions.csv",
   "reports/oet_english_controls/included_versions.csv",
   "reports/otb_english_controls/included_versions.csv",
+  "reports/openbible_english_controls/included_versions.csv",
   "scripts/triage_english_version_controls.py",
 ]
 outputs = [

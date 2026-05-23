@@ -137,6 +137,26 @@ python3 -m scripts.download_otb_english_controls --skip-existing
 python3 -m scripts.run_protocol protocols/otb_english_controls.toml --resume
 ```
 
+Open.Bible English controls:
+
+- `configs/openbible_english_controls.csv`
+- `scripts/download_openbible_english_controls.py`
+- `protocols/openbible_english_controls.toml`
+
+These controls use Open.Bible AFINT New Testament USFM downloads. The product
+pages identify the downloads as English New Testament resources under CC BY-SA.
+The upstream manuscript/source-text basis is not stated, so these are English
+surface controls only, not manuscript-tradition witnesses. Raw and processed
+source text stays under ignored `data/raw/` and `data/processed/`; generated
+reports stay under ignored `reports/`.
+
+Use:
+
+```bash
+python3 -m scripts.download_openbible_english_controls --skip-existing
+python3 -m scripts.run_protocol protocols/openbible_english_controls.toml --resume
+```
+
 Generic eBible USFM import:
 
 ```bash

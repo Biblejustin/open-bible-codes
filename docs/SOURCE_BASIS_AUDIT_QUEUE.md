@@ -13,6 +13,7 @@ Inputs:
 - `configs/door43_english_controls.csv`
 - `configs/oet_english_controls.csv`
 - `configs/otb_english_controls.csv`
+- `configs/openbible_english_controls.csv`
 
 Fields already tracked:
 
@@ -38,6 +39,7 @@ stated are usable only as English surface controls, not manuscript witnesses.
 | Door43 English controls | 2 | 0 | 2 |
 | OET English controls | 2 | 0 | 2 |
 | OTB English controls | 1 | 0 | 1 |
+| Open.Bible English controls | 4 | 0 | 4 |
 
 ## Validation
 
@@ -71,7 +73,7 @@ None after this pass.
 
 None after this pass.
 
-## Door43/OET/OTB Control Rows Needing Audit
+## Door43/OET/OTB/Open.Bible Control Rows Needing Audit
 
 None after this pass.
 
@@ -96,7 +98,7 @@ None after this pass.
 | ULB | `broad_tradition` | eBible Unlocked Literal Bible page supplies a CC BY-SA 4.0 source package and describes a close original-language ASV-family update: <https://ebible.org/find/show.php?id=engULB> |
 | OJB | `broad_tradition` | Local eBible source package identifies Tanakh and Orthodox Jewish Brit Chadasha presentation; exact textual editions are not stated: `data/raw/ebible/engojb_usfm.zip` |
 
-## Door43/OET/OTB Rows Audited This Pass
+## Door43/OET/OTB/Open.Bible Rows Audited This Pass
 
 | Label | Basis status | Source evidence |
 | --- | --- | --- |
@@ -105,6 +107,8 @@ None after this pass.
 | OET-LV | `broad_tradition` | OET source-text page identifies OSHB/WLC for Hebrew and SRGNT/CNTR for Greek; OET license page identifies CC BY-SA 4.0: <https://OpenEnglishTranslation.Bible/Design/SourceTexts> and <https://OpenEnglishTranslation.Bible/About/Licence> |
 | OET-RV | `broad_tradition` | Same OET source-basis and license evidence as OET-LV; RV cleaned USFM includes draft deuterocanon/apocrypha files: <https://github.com/Freely-Given-org/OpenEnglishTranslation--OET/tree/main/exportedFiles/cleanedUSFM/ReadersVersion> |
 | OTB | `broad_tradition` | OTB repository README and license identify CC BY-SA 4.0 and provide verse-level `lang/en-GB` JSON, but the upstream manuscript/source-text basis is not stated; use as a surface English control only: <https://github.com/OpenTranslationBible/open-bible> |
+| AFINT-EXP-AE, AFINT-EXP-BE | `broad_tradition` | Open.Bible AFINT explanatory paraphrase pages identify English New Testament USFM downloads and CC BY-SA license, but do not state the Greek source/manuscript basis; use as surface English controls only: <https://www.open.bible/bibles/69a307e295245b14e244c7a0> and <https://www.open.bible/bibles/69a307df95245b14e244c797> |
+| AFINT-LIT-AE, AFINT-LIT-BE | `broad_tradition` | Open.Bible AFINT literal pages identify English New Testament USFM downloads and CC BY-SA license, but do not state the Greek source/manuscript basis; use as surface English controls only: <https://www.open.bible/bibles/69a307e695245b14e244c7a8> and <https://www.open.bible/bibles/69a307e995245b14e244c7b0> |
 
 ## Checked But Still Queued
 
