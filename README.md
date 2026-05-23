@@ -787,11 +787,11 @@ python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
 
 Tracked plan: `docs/REAL_REPORT_RUN.md`.
 The preflight now also validates source-basis metadata, expanded-strata tooling
-references, future study-mapping CSV schemas, and concrete preregistration
-placeholder cleanup, plus the locked CRD relevance-dictionary basis before
-summary assembly. It also checks the manual-review queue guardrails and
-evidence links, plus the WRR method-status, lock-options, readiness, and
-blocker-packet residual-lane wording.
+references, English corpus deferred-source policy, future study-mapping CSV
+schemas, and concrete preregistration placeholder cleanup, plus the locked CRD
+relevance-dictionary basis before summary assembly. It also checks the
+manual-review queue guardrails and evidence links, plus the WRR method-status,
+lock-options, readiness, and blocker-packet residual-lane wording.
 
 Resume without rerunning completed outputs:
 

@@ -29,7 +29,8 @@ audit, claim catalog, WRR method-status evidence, WRR source-policy scenario
 docs, WRR defined pair-set diagnostic docs, WRR cross-pair diagnostics, and
 WRR variant residual review-packet guarding, plus WRR residual method-status,
 blocker-packet, and unresolved-term burden propagation, and WRR Wayback
-source-recovery probing/guarding, WRR public handoff doc guarding, WRR
+source-recovery probing/guarding, English corpus deferred-policy guarding, WRR
+public handoff doc guarding, WRR
 remaining-lane/source-policy/manual-decision checklist consolidation, and WRR
 manual decision-record template/checker guarding.
 This file tracks work that remains outside the deferred copyrighted/private
@@ -687,9 +688,10 @@ preflight guard pass, Greek follow-up status refresh, Hebrew MT/STEP_TAHOT
 status refresh, KJVA bridge lock-basis clarification, prospective-lane
 validator tightening, source-audit preflight guard coverage, prospective-lane
 validation in report preflight, source-basis audit queue guarding, and English
-source-basis preflight inputs, formal source-basis queue validation, and
-source-basis validation documentation, plus formal preflight metadata-check
-documentation, study-tooling preflight coverage, and preregistration
+source-basis preflight inputs, formal source-basis queue validation,
+source-basis validation documentation, and English corpus deferred-policy
+guarding, plus formal preflight metadata-check documentation, study-tooling
+preflight coverage, and preregistration
 placeholder guarding, CRD relevance-lock guarding, manual-review queue
 preflight guarding, WRR readiness-doc guarding, WRR blocker-packet preflight
 guarding, WRR lock-options preflight guarding, and WRR method-status preflight
@@ -730,6 +732,7 @@ worksheet guarding:
 - `python3 -m pytest tests/test_english_version_manifests.py -q` passed: 8 tests and 117 subtests.
 - `python3 -m pytest tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py tests/test_real_report_run.py -q` passed: 39 tests and 117 subtests.
 - `python3 -m scripts.check_source_basis_audit_queue` passed.
+- `python3 -m scripts.check_english_corpus_policy_docs` passed.
 - `python3 -m scripts.check_expanded_strata_tooling --report /tmp/edls_expanded_tooling_after_patch.json` passed.
 - `python3 -m scripts.validate_study_mapping_schemas` passed.
 - `python3 -m scripts.check_crd_relevance_dictionary --dictionary terms/relevance_dictionary.toml --term-file terms/gog_magog_pair_prospective_terms.csv --expected-sha256 a6406048b9953ca50715d99100994b9065394d9db31b35867666d365a3bd0f99 --require-reviewed` passed.
@@ -758,6 +761,7 @@ worksheet guarding:
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_check.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_source_audit_guard.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_english_source_basis.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_english_corpus_policy_guard.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_source_basis_docs.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_run_docs_source_basis.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_expanded_mapping_fullgate.json` passed.

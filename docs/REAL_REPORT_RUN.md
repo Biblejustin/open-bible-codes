@@ -139,6 +139,8 @@ It requires:
   present;
 - English source-basis manifests and audit-queue counts valid, with no current
   `needs_audit` rows unless the policy is explicitly changed;
+- English corpus policy docs keep missing BibleGateway rows deferred unless a
+  lawful local text or source package with clear permission is available;
 - expanded-strata operator docs point at live scripts, protocol files, and
   Make targets;
 - future study-mapping CSV schemas retain required columns, required locked
