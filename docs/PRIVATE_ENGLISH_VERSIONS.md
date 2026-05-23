@@ -21,12 +21,14 @@ baseline and local CSV hooks for every other listed English version.
 
 The manifest also wires public-domain eBible sources for these BibleGateway
 labels when available, and official eBible local-only sources where eBible
-publishes downloadable source packages:
+publishes downloadable source packages. Examples include:
 
 - `ASV`
+- `BSB`
 - `DARBY`
 - `DRA`
 - `ERV`
+- `FBV`
 - `GNV`
 - `GW`
 - `KJV`
