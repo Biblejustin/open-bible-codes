@@ -1566,23 +1566,33 @@ def process_surface_terms(
     chunks = chunk_indexes(len(corpus_terms), jobs)
     options = surface_options(args)
     options["bulk_terms"] = False
-    with ProcessPoolExecutor(
-        max_workers=jobs,
-        mp_context=process_context(),
-        initializer=initialize_surface_worker,
-        initargs=(
-            corpus_label,
-            corpus,
-            corpus_terms,
-            context_index,
-            options,
-        ),
-    ) as executor:
-        return [
-            result
-            for chunk_results in executor.map(process_surface_term_indexes, chunks)
-            for result in chunk_results
-        ]
+    initargs = (
+        corpus_label,
+        corpus,
+        corpus_terms,
+        context_index,
+        options,
+    )
+    try:
+        with ProcessPoolExecutor(
+            max_workers=jobs,
+            mp_context=process_context(),
+            initializer=initialize_surface_worker,
+            initargs=initargs,
+        ) as executor:
+            return [
+                result
+                for chunk_results in executor.map(process_surface_term_indexes, chunks)
+                for result in chunk_results
+            ]
+    except PermissionError:
+        initialize_surface_worker(*initargs)
+        with ThreadPoolExecutor(max_workers=jobs) as executor:
+            return [
+                result
+                for chunk_results in executor.map(process_surface_term_indexes, chunks)
+                for result in chunk_results
+            ]
 
 
 def chunk_indexes(item_count: int, jobs: int) -> list[tuple[int, ...]]:

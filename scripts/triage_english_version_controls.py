@@ -21,6 +21,7 @@ DEFAULT_CONTROL_PRESENCE = [
     Path("reports/otb_english_controls/version_presence.csv"),
     Path("reports/openbible_english_controls/version_presence.csv"),
     Path("reports/odr_english_controls/version_presence.csv"),
+    Path("reports/supplemental_english_controls/version_presence.csv"),
 ]
 DEFAULT_TARGET_VERSIONS = Path("reports/biblegateway_english_versions/included_versions.csv")
 DEFAULT_CONTROL_VERSIONS = [
@@ -30,6 +31,7 @@ DEFAULT_CONTROL_VERSIONS = [
     Path("reports/otb_english_controls/included_versions.csv"),
     Path("reports/openbible_english_controls/included_versions.csv"),
     Path("reports/odr_english_controls/included_versions.csv"),
+    Path("reports/supplemental_english_controls/included_versions.csv"),
 ]
 DEFAULT_OUT_DIR = Path("reports/english_version_control_triage")
 

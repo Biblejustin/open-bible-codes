@@ -1,0 +1,36 @@
+name = "supplemental_english_controls"
+description = "Supplemental lawful open English control-corpus screening for generated English terms."
+manifest_out = "reports/supplemental_english_controls/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "supplemental_english_control_presence"
+description = "Count generated English terms in supplemental open English control CSVs and summarize version presence."
+argv = [
+  "-m", "scripts.run_biblegateway_english_versions",
+  "--versions", "configs/supplemental_english_controls.csv",
+  "--terms", "terms/english_search_terms.csv",
+  "--out-dir", "reports/supplemental_english_controls",
+  "--corpus-jobs", "1",
+]
+inputs = [
+  "configs/supplemental_english_controls.csv",
+  "terms/english_search_terms.csv",
+  "scripts/run_biblegateway_english_versions.py",
+  "scripts/analyze_broad_version_presence.py",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/supplemental_english_controls/included_versions.csv",
+  "reports/supplemental_english_controls/missing_versions.csv",
+  "reports/supplemental_english_controls/english_search_terms_counts.csv",
+  "reports/supplemental_english_controls/english_search_terms_counts.manifest.json",
+  "reports/supplemental_english_controls/biblegateway_english_versions.manifest.json",
+  "reports/supplemental_english_controls/version_presence.csv",
+  "reports/supplemental_english_controls/version_presence.md",
+  "reports/supplemental_english_controls/version_presence.manifest.json",
+  "reports/supplemental_english_controls/run_biblegateway_english_versions.manifest.json",
+]

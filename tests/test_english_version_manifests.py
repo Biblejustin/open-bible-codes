@@ -11,6 +11,7 @@ OET_CONTROLS = Path("configs/oet_english_controls.csv")
 OTB_CONTROLS = Path("configs/otb_english_controls.csv")
 OPENBIBLE_CONTROLS = Path("configs/openbible_english_controls.csv")
 ODR_CONTROLS = Path("configs/odr_english_controls.csv")
+SUPPLEMENTAL_CONTROLS = Path("configs/supplemental_english_controls.csv")
 PRIVATE_PROTOCOL = Path("protocols/private_english_versions.toml")
 SOURCE_BASIS_AUDIT_QUEUE = Path("docs/SOURCE_BASIS_AUDIT_QUEUE.md")
 
@@ -82,6 +83,7 @@ class EnglishVersionManifestTests(unittest.TestCase):
             "OTB English controls": count_basis_rows(read_rows(OTB_CONTROLS)),
             "Open.Bible English controls": count_basis_rows(read_rows(OPENBIBLE_CONTROLS)),
             "Original Douay-Rheims English controls": count_basis_rows(read_rows(ODR_CONTROLS)),
+            "Supplemental open English controls": count_basis_rows(read_rows(SUPPLEMENTAL_CONTROLS)),
         }
         observed = read_audit_queue_counts(SOURCE_BASIS_AUDIT_QUEUE)
 
@@ -96,6 +98,7 @@ class EnglishVersionManifestTests(unittest.TestCase):
             *read_rows(OTB_CONTROLS),
             *read_rows(OPENBIBLE_CONTROLS),
             *read_rows(ODR_CONTROLS),
+            *read_rows(SUPPLEMENTAL_CONTROLS),
         ]
 
         self.assertEqual(

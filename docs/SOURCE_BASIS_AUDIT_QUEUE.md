@@ -15,6 +15,7 @@ Inputs:
 - `configs/otb_english_controls.csv`
 - `configs/openbible_english_controls.csv`
 - `configs/odr_english_controls.csv`
+- `configs/supplemental_english_controls.csv`
 
 Fields already tracked:
 
@@ -42,6 +43,7 @@ stated are usable only as English surface controls, not manuscript witnesses.
 | OTB English controls | 1 | 0 | 1 |
 | Open.Bible English controls | 4 | 0 | 4 |
 | Original Douay-Rheims English controls | 1 | 0 | 1 |
+| Supplemental open English controls | 2 | 0 | 2 |
 
 ## Validation
 
@@ -75,7 +77,7 @@ None after this pass.
 
 None after this pass.
 
-## Door43/OET/OTB/Open.Bible/ODR Control Rows Needing Audit
+## Door43/OET/OTB/Open.Bible/ODR/Supplemental Control Rows Needing Audit
 
 None after this pass.
 
@@ -100,7 +102,7 @@ None after this pass.
 | ULB | `broad_tradition` | eBible Unlocked Literal Bible page supplies a CC BY-SA 4.0 source package and describes a close original-language ASV-family update: <https://ebible.org/find/show.php?id=engULB> |
 | OJB | `broad_tradition` | Local eBible source package identifies Tanakh and Orthodox Jewish Brit Chadasha presentation; exact textual editions are not stated: `data/raw/ebible/engojb_usfm.zip` |
 
-## Door43/OET/OTB/Open.Bible/ODR Rows Audited This Pass
+## Door43/OET/OTB/Open.Bible/ODR/Supplemental Rows Audited This Pass
 
 | Label | Basis status | Source evidence |
 | --- | --- | --- |
@@ -112,6 +114,8 @@ None after this pass.
 | AFINT-EXP-AE, AFINT-EXP-BE | `broad_tradition` | Open.Bible AFINT explanatory paraphrase pages identify English New Testament USFM downloads and CC BY-SA license, but do not state the Greek source/manuscript basis; use as surface English controls only: <https://www.open.bible/bibles/69a307e295245b14e244c7a0> and <https://www.open.bible/bibles/69a307df95245b14e244c797> |
 | AFINT-LIT-AE, AFINT-LIT-BE | `broad_tradition` | Open.Bible AFINT literal pages identify English New Testament USFM downloads and CC BY-SA license, but do not state the Greek source/manuscript basis; use as surface English controls only: <https://www.open.bible/bibles/69a307e995245b14e244c7b0> and <https://www.open.bible/bibles/69a307e695245b14e244c7a8> |
 | ODR | `broad_tradition` | Original Douay-Rheims repository identifies a CC0 1.0 USFM/JSON dataset for the unmodified 1609 Old Testament and 1582 New Testament; use as a historical Latin Vulgate-line English control: <https://github.com/janvier-s/original-douay-rheims> |
+| AKJV | `broad_tradition` | Official AKJV page identifies the version as a simple word-for-word KJV English update, placed in the public domain on November 8, 1999: <https://akjv.us/> |
+| CPDV | `broad_tradition` | CrossWire CPDV module identifies the translation as public domain and based on Sixtine-Clementine Latin Vulgate editions; use as a modern Vulgate-line English control: <https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=CPDV> |
 
 ## Checked But Still Queued
 

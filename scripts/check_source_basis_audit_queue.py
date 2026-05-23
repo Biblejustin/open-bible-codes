@@ -15,6 +15,7 @@ DEFAULT_OET_CONTROLS = Path("configs/oet_english_controls.csv")
 DEFAULT_OTB_CONTROLS = Path("configs/otb_english_controls.csv")
 DEFAULT_OPENBIBLE_CONTROLS = Path("configs/openbible_english_controls.csv")
 DEFAULT_ODR_CONTROLS = Path("configs/odr_english_controls.csv")
+DEFAULT_SUPPLEMENTAL_CONTROLS = Path("configs/supplemental_english_controls.csv")
 DEFAULT_AUDIT_QUEUE = Path("docs/SOURCE_BASIS_AUDIT_QUEUE.md")
 ALLOWED_BASIS_STATUSES = {"broad_tradition", "needs_audit"}
 MANIFEST_LABELS = {
@@ -25,6 +26,7 @@ MANIFEST_LABELS = {
     "otb": "OTB English controls",
     "openbible": "Open.Bible English controls",
     "odr": "Original Douay-Rheims English controls",
+    "supplemental": "Supplemental open English controls",
 }
 
 
@@ -38,6 +40,7 @@ def main(argv: list[str] | None = None) -> int:
         otb_controls=args.otb_controls,
         openbible_controls=args.openbible_controls,
         odr_controls=args.odr_controls,
+        supplemental_controls=args.supplemental_controls,
         audit_queue=args.audit_queue,
         allow_needs_audit=args.allow_needs_audit,
     )
@@ -58,6 +61,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--otb-controls", type=Path, default=DEFAULT_OTB_CONTROLS)
     parser.add_argument("--openbible-controls", type=Path, default=DEFAULT_OPENBIBLE_CONTROLS)
     parser.add_argument("--odr-controls", type=Path, default=DEFAULT_ODR_CONTROLS)
+    parser.add_argument("--supplemental-controls", type=Path, default=DEFAULT_SUPPLEMENTAL_CONTROLS)
     parser.add_argument("--audit-queue", type=Path, default=DEFAULT_AUDIT_QUEUE)
     parser.add_argument(
         "--allow-needs-audit",
@@ -76,6 +80,7 @@ def validate_source_basis_queue(
     otb_controls: Path = DEFAULT_OTB_CONTROLS,
     openbible_controls: Path = DEFAULT_OPENBIBLE_CONTROLS,
     odr_controls: Path = DEFAULT_ODR_CONTROLS,
+    supplemental_controls: Path = DEFAULT_SUPPLEMENTAL_CONTROLS,
     audit_queue: Path = DEFAULT_AUDIT_QUEUE,
     allow_needs_audit: bool = False,
 ) -> list[str]:
@@ -88,6 +93,7 @@ def validate_source_basis_queue(
         otb_rows = read_rows(otb_controls)
         openbible_rows = read_rows(openbible_controls)
         odr_rows = read_rows(odr_controls)
+        supplemental_rows = read_rows(supplemental_controls)
         observed_counts = read_audit_queue_counts(audit_queue)
     except (OSError, csv.Error) as exc:
         return [f"could not read source-basis inputs: {exc}"]
@@ -100,6 +106,7 @@ def validate_source_basis_queue(
         "otb": otb_rows,
         "openbible": openbible_rows,
         "odr": odr_rows,
+        "supplemental": supplemental_rows,
     }
     for manifest_key, rows in manifests.items():
         failures.extend(validate_manifest_rows(manifest_key, rows))
@@ -112,6 +119,7 @@ def validate_source_basis_queue(
         MANIFEST_LABELS["otb"]: count_basis_rows(otb_rows),
         MANIFEST_LABELS["openbible"]: count_basis_rows(openbible_rows),
         MANIFEST_LABELS["odr"]: count_basis_rows(odr_rows),
+        MANIFEST_LABELS["supplemental"]: count_basis_rows(supplemental_rows),
     }
     if observed_counts != expected_counts:
         failures.append(
@@ -160,6 +168,8 @@ def validate_manifest_rows(manifest_key: str, rows: list[dict[str, str]]) -> lis
             failures.extend(validate_openbible_row(row, row_id))
         elif manifest_key == "odr":
             failures.extend(validate_odr_row(row, row_id))
+        elif manifest_key == "supplemental":
+            failures.extend(validate_supplemental_row(row, row_id))
     return failures
 
 
@@ -258,6 +268,40 @@ def validate_odr_row(row: dict[str, str], row_id: str) -> list[str]:
         failures.append(f"{row_id}: missing CC0 1.0 license_label")
     if row.get("source_path_prefix", "") != "usfm/":
         failures.append(f"{row_id}: invalid source_path_prefix")
+    return failures
+
+
+def validate_supplemental_row(row: dict[str, str], row_id: str) -> list[str]:
+    failures: list[str] = []
+    source_id = row.get("source_id", "")
+    if source_id not in {"akjv", "cpdv"}:
+        failures.append(f"{row_id}: invalid source_id")
+    source_url = row.get("source_url", "")
+    details_url = row.get("details_url", "")
+    license_label = row.get("license_label", "")
+    source_format = row.get("source_format", "")
+    if source_id == "akjv":
+        if source_url != "https://cdn.akjv.us/akj.zip":
+            failures.append(f"{row_id}: invalid source_url")
+        if details_url != "https://akjv.us/":
+            failures.append(f"{row_id}: invalid details_url")
+        if "Public domain" not in license_label:
+            failures.append(f"{row_id}: missing Public domain license_label")
+        if row.get("source_path_prefix", "") != "akj-02.txt":
+            failures.append(f"{row_id}: invalid source_path_prefix")
+        if source_format != "akjv_text_zip":
+            failures.append(f"{row_id}: invalid source_format")
+    elif source_id == "cpdv":
+        if not source_url.startswith("https://gitlab.com/crosswire-bible-society/cpdv/"):
+            failures.append(f"{row_id}: invalid source_url")
+        if details_url != "https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=CPDV":
+            failures.append(f"{row_id}: invalid details_url")
+        if "Public domain" not in license_label:
+            failures.append(f"{row_id}: missing Public domain license_label")
+        if row.get("source_path_prefix", "") != "usfm/":
+            failures.append(f"{row_id}: invalid source_path_prefix")
+        if source_format != "crosswire_gitlab_usfm_zip":
+            failures.append(f"{row_id}: invalid source_format")
     return failures
 
 

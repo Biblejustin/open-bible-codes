@@ -310,6 +310,7 @@ DEFAULT_REQUIRED_PATHS = [
     "configs/otb_english_controls.csv",
     "configs/openbible_english_controls.csv",
     "configs/odr_english_controls.csv",
+    "configs/supplemental_english_controls.csv",
     "protocols/biblegateway_english_versions.toml",
     "protocols/ebible_english_controls.toml",
     "protocols/door43_english_controls.toml",
@@ -317,6 +318,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/otb_english_controls.toml",
     "protocols/openbible_english_controls.toml",
     "protocols/odr_english_controls.toml",
+    "protocols/supplemental_english_controls.toml",
     "claims/claim_catalog.csv",
     "terms/bible_code_digest_claim_terms.csv",
     "terms/cri_els_critique_terms.csv",
@@ -554,6 +556,7 @@ def main(argv: list[str] | None = None) -> int:
         otb_controls=root / check_source_basis_audit_queue.DEFAULT_OTB_CONTROLS,
         openbible_controls=root / check_source_basis_audit_queue.DEFAULT_OPENBIBLE_CONTROLS,
         odr_controls=root / check_source_basis_audit_queue.DEFAULT_ODR_CONTROLS,
+        supplemental_controls=root / check_source_basis_audit_queue.DEFAULT_SUPPLEMENTAL_CONTROLS,
         audit_queue=root / check_source_basis_audit_queue.DEFAULT_AUDIT_QUEUE,
     )
     if source_basis_failures:

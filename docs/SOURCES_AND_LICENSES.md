@@ -177,6 +177,26 @@ python3 -m scripts.download_odr_english_controls --skip-existing
 python3 -m scripts.run_protocol protocols/odr_english_controls.toml --resume
 ```
 
+Supplemental open English controls:
+
+- `configs/supplemental_english_controls.csv`
+- `scripts/download_supplemental_english_controls.py`
+- `protocols/supplemental_english_controls.toml`
+
+These controls currently add AKJV from the official AKJV text ZIP and CPDV
+from the CrossWire CPDV source archive. The official AKJV page identifies the
+AKJV as public domain and based on the KJV; the CrossWire CPDV module page
+identifies CPDV as public domain and translated from Latin Vulgate editions.
+Raw and processed source text stays under ignored `data/raw/` and
+`data/processed/`; generated reports stay under ignored `reports/`.
+
+Use:
+
+```bash
+python3 -m scripts.download_supplemental_english_controls --skip-existing
+python3 -m scripts.run_protocol protocols/supplemental_english_controls.toml --resume
+```
+
 Generic eBible USFM import:
 
 ```bash

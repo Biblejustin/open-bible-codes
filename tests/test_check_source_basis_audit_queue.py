@@ -11,7 +11,7 @@ def test_current_source_basis_queue_passes() -> None:
 def test_validate_source_basis_queue_rejects_stale_doc_counts(tmp_path) -> None:
     biblegateway = tmp_path / "biblegateway.csv"
     ebible = tmp_path / "ebible.csv"
-    door43, oet, otb, openbible, odr = write_empty_control_manifests(tmp_path)
+    door43, oet, otb, openbible, odr, supplemental = write_empty_control_manifests(tmp_path)
     audit_queue = tmp_path / "queue.md"
     write_manifest(
         biblegateway,
@@ -55,6 +55,7 @@ def test_validate_source_basis_queue_rejects_stale_doc_counts(tmp_path) -> None:
                 "| OTB English controls | 0 | 0 | 0 |",
                 "| Open.Bible English controls | 0 | 0 | 0 |",
                 "| Original Douay-Rheims English controls | 0 | 0 | 0 |",
+                "| Supplemental open English controls | 0 | 0 | 0 |",
             ]
         )
         + "\n",
@@ -69,6 +70,7 @@ def test_validate_source_basis_queue_rejects_stale_doc_counts(tmp_path) -> None:
         otb_controls=otb,
         openbible_controls=openbible,
         odr_controls=odr,
+        supplemental_controls=supplemental,
         audit_queue=audit_queue,
     )
 
@@ -79,7 +81,7 @@ def test_validate_source_basis_queue_rejects_stale_doc_counts(tmp_path) -> None:
 def test_validate_source_basis_queue_rejects_needs_audit_rows(tmp_path) -> None:
     biblegateway = tmp_path / "biblegateway.csv"
     ebible = tmp_path / "ebible.csv"
-    door43, oet, otb, openbible, odr = write_empty_control_manifests(tmp_path)
+    door43, oet, otb, openbible, odr, supplemental = write_empty_control_manifests(tmp_path)
     audit_queue = tmp_path / "queue.md"
     write_manifest(
         biblegateway,
@@ -107,6 +109,7 @@ def test_validate_source_basis_queue_rejects_needs_audit_rows(tmp_path) -> None:
                 "| OTB English controls | 0 | 0 | 0 |",
                 "| Open.Bible English controls | 0 | 0 | 0 |",
                 "| Original Douay-Rheims English controls | 0 | 0 | 0 |",
+                "| Supplemental open English controls | 0 | 0 | 0 |",
             ]
         )
         + "\n",
@@ -121,6 +124,7 @@ def test_validate_source_basis_queue_rejects_needs_audit_rows(tmp_path) -> None:
         otb_controls=otb,
         openbible_controls=openbible,
         odr_controls=odr,
+        supplemental_controls=supplemental,
         audit_queue=audit_queue,
     )
 
@@ -134,6 +138,7 @@ def test_validate_source_basis_queue_rejects_needs_audit_rows(tmp_path) -> None:
             otb_controls=otb,
             openbible_controls=openbible,
             odr_controls=odr,
+            supplemental_controls=supplemental,
             audit_queue=audit_queue,
             allow_needs_audit=True,
         )
@@ -144,7 +149,7 @@ def test_validate_source_basis_queue_rejects_needs_audit_rows(tmp_path) -> None:
 def test_validate_source_basis_queue_rejects_bad_ebible_metadata(tmp_path) -> None:
     biblegateway = tmp_path / "biblegateway.csv"
     ebible = tmp_path / "ebible.csv"
-    door43, oet, otb, openbible, odr = write_empty_control_manifests(tmp_path)
+    door43, oet, otb, openbible, odr, supplemental = write_empty_control_manifests(tmp_path)
     audit_queue = tmp_path / "queue.md"
     write_manifest(biblegateway, [])
     write_manifest(
@@ -176,6 +181,7 @@ def test_validate_source_basis_queue_rejects_bad_ebible_metadata(tmp_path) -> No
                 "| OTB English controls | 0 | 0 | 0 |",
                 "| Open.Bible English controls | 0 | 0 | 0 |",
                 "| Original Douay-Rheims English controls | 0 | 0 | 0 |",
+                "| Supplemental open English controls | 0 | 0 | 0 |",
             ]
         )
         + "\n",
@@ -190,6 +196,7 @@ def test_validate_source_basis_queue_rejects_bad_ebible_metadata(tmp_path) -> No
         otb_controls=otb,
         openbible_controls=openbible,
         odr_controls=odr,
+        supplemental_controls=supplemental,
         audit_queue=audit_queue,
     )
 
@@ -220,15 +227,17 @@ def write_manifest(path: Path, rows: list[dict[str, str]]) -> None:
         writer.writerows(rows)
 
 
-def write_empty_control_manifests(tmp_path: Path) -> tuple[Path, Path, Path, Path, Path]:
+def write_empty_control_manifests(tmp_path: Path) -> tuple[Path, Path, Path, Path, Path, Path]:
     door43 = tmp_path / "door43.csv"
     oet = tmp_path / "oet.csv"
     otb = tmp_path / "otb.csv"
     openbible = tmp_path / "openbible.csv"
     odr = tmp_path / "odr.csv"
+    supplemental = tmp_path / "supplemental.csv"
     write_manifest(door43, [])
     write_manifest(oet, [])
     write_manifest(otb, [])
     write_manifest(openbible, [])
     write_manifest(odr, [])
-    return door43, oet, otb, openbible, odr
+    write_manifest(supplemental, [])
+    return door43, oet, otb, openbible, odr, supplemental

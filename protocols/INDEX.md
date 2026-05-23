@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 135
+Protocols indexed: 136
 
 ## Analysis
 
@@ -113,6 +113,7 @@ Protocols indexed: 135
 | step_tahot_control_policy_hits | Audit STEP_TAHOT-only control rows against TAHOT source-type policy. | 2 |  | reports/step_tahot_control_policy_hits, reports/step_tahot_control_version_presence | `step_tahot_control_policy_hits.toml` |
 | step_tahot_control_version_presence | Capped exact ELS hit-pattern presence for Hebrew null/frequency controls across MT-fami... | 1 | terms/frequency_anchors.csv, terms/null_controls.csv | reports/step_tahot_control_version_presence | `step_tahot_control_version_presence.toml` |
 | step_tahot_final_gate | Consolidate STEP_TAHOT source-only real-term rows, source-policy audits, and control co... | 1 |  | reports/step_tahot_final_gate | `step_tahot_final_gate.toml` |
+| supplemental_english_controls | Supplemental lawful open English control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/supplemental_english_controls | `supplemental_english_controls.toml` |
 | targeted_version_presence | Join requested modern/geopolitical/local exact version-presence rows with available con... | 3 | terms/modern_names_dates.csv, terms/prophetic_terms.csv | reports | `targeted_version_presence.toml` |
 | wide_focus_paired_controls | Representative paired controls for nonzero wide-focus count rows. | 1 |  | reports | `wide_focus_paired_controls.toml` |
 
