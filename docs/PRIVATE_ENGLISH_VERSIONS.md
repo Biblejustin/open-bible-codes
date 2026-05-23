@@ -112,9 +112,9 @@ repository identifies CC0 1.0 USFM/JSON data; use it as a historical Latin
 Vulgate-line English control.
 
 Supplemental open controls are tracked separately in
-`configs/supplemental_english_controls.csv`. Current rows are AKJV from the
-official AKJV public-domain text ZIP and CPDV from the CrossWire source
-archive. Raw and processed texts remain local under ignored
+`configs/supplemental_english_controls.csv`. Current rows are AKJV, CPDV,
+Anderson 1864, Dynamic English Bible 2020 Draft, and Plain English
+Translation New Testament. Raw and processed texts remain local under ignored
 `data/raw/supplemental/` and `data/processed/supplemental/`.
 
 The manifest also tracks broad source-basis metadata:

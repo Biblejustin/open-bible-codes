@@ -3,6 +3,7 @@ import unittest
 from pathlib import Path
 
 from scripts.download_supplemental_english_controls import (
+    parse_usfm_archive,
     parse_akjv_text,
     scrub_structural_lines,
 )
@@ -15,7 +16,7 @@ class SupplementalEnglishControlTests(unittest.TestCase):
     def test_supplemental_controls_have_source_and_license_metadata(self) -> None:
         rows = {row["label"]: row for row in read_rows(SUPPLEMENTAL_CONTROLS)}
 
-        self.assertEqual(sorted(rows), ["AKJV", "CPDV"])
+        self.assertEqual(sorted(rows), ["AKJV", "ANDERSON", "CPDV", "DEB", "PET"])
         self.assertEqual(rows["AKJV"]["source_format"], "akjv_text_zip")
         self.assertEqual(rows["AKJV"]["source_url"], "https://cdn.akjv.us/akj.zip")
         self.assertEqual(rows["AKJV"]["details_url"], "https://akjv.us/")
@@ -32,6 +33,21 @@ class SupplementalEnglishControlTests(unittest.TestCase):
         self.assertIn("Public domain", rows["CPDV"]["license_label"])
         self.assertIn("Latin Vulgate", rows["CPDV"]["ot_basis"])
         self.assertIn("Latin Vulgate", rows["CPDV"]["nt_basis"])
+
+        self.assertEqual(rows["ANDERSON"]["source_format"], "biblecorps_usfm_zip")
+        self.assertEqual(rows["ANDERSON"]["coverage"], "nt")
+        self.assertIn("Public domain", rows["ANDERSON"]["license_label"])
+        self.assertIn("Greek NT", rows["ANDERSON"]["nt_basis"])
+
+        self.assertEqual(rows["DEB"]["source_format"], "biblecorps_usfm_zip")
+        self.assertEqual(rows["DEB"]["coverage"], "full_draft")
+        self.assertIn("CC BY-SA 4.0", rows["DEB"]["license_label"])
+        self.assertIn("checking/not ready", rows["DEB"]["notes"])
+
+        self.assertEqual(rows["PET"]["source_format"], "biblecorps_usfm_zip")
+        self.assertEqual(rows["PET"]["coverage"], "nt")
+        self.assertIn("CC BY-SA 4.0", rows["PET"]["license_label"])
+        self.assertEqual(rows["PET"]["source_path_prefix"], "")
 
     def test_parse_akjv_text_maps_books_and_verses(self) -> None:
         raw = """
@@ -54,6 +70,23 @@ class SupplementalEnglishControlTests(unittest.TestCase):
             scrub_structural_lines(raw),
             "\\id GEN demo\n\\c 1\n\\v 1 Verse text.\n\\q1 continuation",
         )
+
+    def test_parse_usfm_archive_allows_empty_prefix_for_root_files(self) -> None:
+        import tempfile
+        import zipfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "root-usfm.zip"
+            with zipfile.ZipFile(path, "w") as archive:
+                archive.writestr(
+                    "demo-master/01-GEN.sfm",
+                    "\\id GEN\n\\c 1\n\\v 1 Beginning.",
+                )
+
+            verses = parse_usfm_archive(path, "")
+
+        self.assertEqual([verse.ref for verse in verses], ["GEN 1:1"])
+        self.assertEqual(verses[0].text, "Beginning.")
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:

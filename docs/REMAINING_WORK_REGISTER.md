@@ -570,7 +570,7 @@ Current queue after the BibleGateway/eBible audit pass:
 - Open.Bible English controls: 0 `needs_audit`, 4 `broad_tradition`.
 - Original Douay-Rheims English controls: 0 `needs_audit`, 1
   `broad_tradition`.
-- Supplemental open English controls: 0 `needs_audit`, 2 `broad_tradition`.
+- Supplemental open English controls: 0 `needs_audit`, 5 `broad_tradition`.
 - eBible rows moved to broad grouping: `ASVBT`, `BSB`, `E2T`, `FBV`, `F35`,
   `LSV`, `MSB`, `OURB`, `OEBCW`, `OEB`, `BBE`, `NOY`, `PEV`, `T4T`, `ULB`,
   and `OJB`.
@@ -604,7 +604,9 @@ Current queue after the BibleGateway/eBible audit pass:
   the GitHub repository's USFM files. Use it as a historical Latin Vulgate-line
   English control, not as a Greek/Hebrew manuscript witness.
 - Supplemental open controls track AKJV from the official public-domain text
-  ZIP and CPDV from CrossWire's public-domain source archive.
+  ZIP, CPDV from CrossWire's public-domain source archive, Anderson 1864 from
+  BibleCorps public-domain source text, and DEB/PET from BibleCorps CC BY-SA
+  source archives.
 - Open.Bible English API search was rechecked after AFINT import. The remaining
   text rows are either already represented by eBible controls, marked NC/ND or
   ND, a non-meaningful DBL test version, or mixed-license enough to leave out
@@ -797,25 +799,26 @@ worksheet guarding:
   `python3 -m scripts.run_protocol protocols/odr_english_controls.toml --resume`
   passed with 1 included control, zero missing controls, and 1,303 count rows.
 - Supplemental open controls are tracked in
-  `configs/supplemental_english_controls.csv` for AKJV and CPDV. Raw and
-  processed source files stay under ignored `data/raw/supplemental/` and
-  `data/processed/supplemental/`; current import wrote 31,102 AKJV verses and
-  35,809 CPDV verses. `python3 -m scripts.run_protocol
-  protocols/supplemental_english_controls.toml --resume` passed with 2
-  included controls, zero missing controls, and 2,606 count rows.
+  `configs/supplemental_english_controls.csv` for AKJV, ANDERSON, CPDV, DEB,
+  and PET. Raw and processed source files stay under ignored
+  `data/raw/supplemental/` and `data/processed/supplemental/`; current import
+  wrote 31,102 AKJV verses, 7,946 ANDERSON verses, 35,809 CPDV verses, 30,794
+  DEB verses, and 7,753 PET verses. `python3 -m scripts.run_protocol
+  protocols/supplemental_english_controls.toml --resume` passed with 5
+  included controls, zero missing controls, and 6,515 count rows.
 - `python3 -m scripts.run_protocol protocols/english_version_control_triage.toml --resume`
-  now compares BibleGateway-overlap English rows against 56 merged open
+  now compares BibleGateway-overlap English rows against 59 merged open
   controls from eBible, Door43, OET, OTB, Open.Bible, ODR, and supplemental
   sources; context review
   promoted no seed terms.
 - `python3 -m pytest tests/test_otb_english_controls.py tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py tests/test_real_report_run.py -q` passed: 75 tests and 124 subtests.
 - `python3 -m pytest tests/test_openbible_english_controls.py tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py tests/test_real_report_run.py -q` passed: 73 tests and 128 subtests.
-- `python3 -m pytest tests/test_supplemental_english_controls.py tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py tests/test_real_report_run.py -q` passed: 74 tests and 124 subtests.
+- `python3 -m pytest tests/test_supplemental_english_controls.py tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py tests/test_real_report_run.py -q` passed: 75 tests and 124 subtests.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_supplemental_controls.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_otb_controls.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_openbible_controls.json` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
-- `python3 -m pytest -q` passed: 1365 tests and 13976 subtests.
+- `python3 -m pytest -q` passed: 1366 tests and 13976 subtests.
 - `python3 -m pytest -q` passed: 1359 tests and 13976 subtests after adding Open.Bible AFINT controls.
 - `python3 -m scripts.check_expanded_strata_tooling --report /tmp/edls_expanded_tooling_after_patch.json` passed.
 - `python3 -m scripts.validate_study_mapping_schemas` passed.

@@ -274,7 +274,7 @@ def validate_odr_row(row: dict[str, str], row_id: str) -> list[str]:
 def validate_supplemental_row(row: dict[str, str], row_id: str) -> list[str]:
     failures: list[str] = []
     source_id = row.get("source_id", "")
-    if source_id not in {"akjv", "cpdv"}:
+    if source_id not in {"akjv", "anderson1864", "cpdv", "deb2020", "pet2016"}:
         failures.append(f"{row_id}: invalid source_id")
     source_url = row.get("source_url", "")
     details_url = row.get("details_url", "")
@@ -291,6 +291,17 @@ def validate_supplemental_row(row: dict[str, str], row_id: str) -> list[str]:
             failures.append(f"{row_id}: invalid source_path_prefix")
         if source_format != "akjv_text_zip":
             failures.append(f"{row_id}: invalid source_format")
+    elif source_id == "anderson1864":
+        if source_url != "https://github.com/BibleCorps/ENG-B1-Anderson1864-pd-USFM/archive/refs/heads/master.zip":
+            failures.append(f"{row_id}: invalid source_url")
+        if details_url != "https://github.com/BibleCorps/ENG-B1-Anderson1864-pd-USFM":
+            failures.append(f"{row_id}: invalid details_url")
+        if "Public domain" not in license_label:
+            failures.append(f"{row_id}: missing Public domain license_label")
+        if row.get("source_path_prefix", "") != "USFM/":
+            failures.append(f"{row_id}: invalid source_path_prefix")
+        if source_format != "biblecorps_usfm_zip":
+            failures.append(f"{row_id}: invalid source_format")
     elif source_id == "cpdv":
         if not source_url.startswith("https://gitlab.com/crosswire-bible-society/cpdv/"):
             failures.append(f"{row_id}: invalid source_url")
@@ -301,6 +312,28 @@ def validate_supplemental_row(row: dict[str, str], row_id: str) -> list[str]:
         if row.get("source_path_prefix", "") != "usfm/":
             failures.append(f"{row_id}: invalid source_path_prefix")
         if source_format != "crosswire_gitlab_usfm_zip":
+            failures.append(f"{row_id}: invalid source_format")
+    elif source_id == "deb2020":
+        if source_url != "https://github.com/BibleCorps/ENG-B-DEB2020-cc-PSFM/archive/refs/heads/master.zip":
+            failures.append(f"{row_id}: invalid source_url")
+        if details_url != "https://github.com/BibleCorps/ENG-B-DEB2020-cc-PSFM":
+            failures.append(f"{row_id}: invalid details_url")
+        if "CC BY-SA 4.0" not in license_label:
+            failures.append(f"{row_id}: missing CC BY-SA 4.0 license_label")
+        if row.get("source_path_prefix", "") != "USFM/":
+            failures.append(f"{row_id}: invalid source_path_prefix")
+        if source_format != "biblecorps_usfm_zip":
+            failures.append(f"{row_id}: invalid source_format")
+    elif source_id == "pet2016":
+        if source_url != "https://github.com/BibleCorps/ENG-B1-PET2016-cc-PSFM/archive/refs/heads/master.zip":
+            failures.append(f"{row_id}: invalid source_url")
+        if details_url != "https://github.com/BibleCorps/ENG-B1-PET2016-cc-PSFM":
+            failures.append(f"{row_id}: invalid details_url")
+        if "CC BY-SA 4.0" not in license_label:
+            failures.append(f"{row_id}: missing CC BY-SA 4.0 license_label")
+        if row.get("source_path_prefix", "") != "":
+            failures.append(f"{row_id}: invalid source_path_prefix")
+        if source_format != "biblecorps_usfm_zip":
             failures.append(f"{row_id}: invalid source_format")
     return failures
 

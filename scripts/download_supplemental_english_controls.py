@@ -205,6 +205,8 @@ def parse_archive(path: Path, row: dict[str, str]) -> list[UsfmVerse]:
     source_format = row["source_format"]
     if source_format == "crosswire_gitlab_usfm_zip":
         return parse_usfm_archive(path, row["source_path_prefix"])
+    if source_format == "biblecorps_usfm_zip":
+        return parse_usfm_archive(path, row["source_path_prefix"])
     if source_format == "akjv_text_zip":
         return parse_akjv_text_zip(path, row["source_path_prefix"])
     raise SystemExit(f"{row['label']}: unknown source_format {source_format}")
@@ -212,12 +214,13 @@ def parse_archive(path: Path, row: dict[str, str]) -> list[UsfmVerse]:
 
 def parse_usfm_archive(path: Path, source_path_prefix: str) -> list[UsfmVerse]:
     verses: list[UsfmVerse] = []
-    wanted = f"/{source_path_prefix.strip('/')}/"
+    clean_prefix = source_path_prefix.strip("/")
+    wanted = f"/{clean_prefix}/" if clean_prefix else ""
     with zipfile.ZipFile(path) as archive:
         names = [
             name
             for name in archive.namelist()
-            if wanted in name
+            if (not wanted or wanted in name)
             and "/intro/" not in name
             and name.lower().endswith(USFM_SUFFIXES)
         ]
