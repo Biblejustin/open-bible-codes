@@ -166,6 +166,8 @@ It requires:
 - WRR manual decision register consolidates 37 pending manual-lock rows,
   representing 58 action terms, 59 residual pair links, and 40
   minimum-frontier pair links without selecting corrections or exclusions;
+- WRR manual decision-record checker keeps the header-only decision template
+  aligned to the current register before any row can become a lock record;
 - checked-in `docs/INDEX.md` and `protocols/INDEX.md` freshness;
 - existing generated inputs needed by the final gates.
 

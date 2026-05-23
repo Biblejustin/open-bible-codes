@@ -29,7 +29,9 @@ audit, claim catalog, WRR method-status evidence, WRR source-policy scenario
 docs, WRR defined pair-set diagnostic docs, WRR cross-pair diagnostics, and
 WRR variant residual review-packet guarding, plus WRR residual method-status,
 blocker-packet, and unresolved-term burden propagation, and WRR Wayback
-source-recovery probing/guarding, and WRR public handoff doc guarding.
+source-recovery probing/guarding, WRR public handoff doc guarding, WRR
+remaining-lane/source-policy/manual-decision checklist consolidation, and WRR
+manual decision-record template/checker guarding.
 This file tracks work that remains outside the missing copyrighted/private
 English CSVs.
 
@@ -190,6 +192,11 @@ Current pushed commits for this cleanup:
 - `222f231` Sync WRR public handoff docs.
 - `90fa1e4` Sync WRR final outline handoff.
 - `604b215` Guard WRR public handoff docs.
+- `7ffd2fb` Add WRR remaining lane checklist.
+- `2e214d0` Add WRR source policy checklist.
+- `a085cb9` Add WRR manual decision register.
+- `03fa42b` Add WRR decision record template.
+- `e8db884` Add WRR manual decision record checker.
 
 ### Formal Real Report Rerun
 
@@ -510,6 +517,13 @@ page-image near-match rows, and 11 method/pair-universe rows. It represents 58
 action terms, 59 residual pair links, and 40 minimum-frontier pair links
 without selecting source edits, row transcriptions, method changes, or pair
 exclusions.
+`data/study/mappings/wrr_manual_decision_records.csv` is now a header-only
+template for future manual-lock records.
+`scripts/check_wrr_manual_decision_records.py` keeps any populated row aligned
+to the current manual decision register by rank, lane, state, target, and
+checklist, and requires non-placeholder evidence plus an ISO lock date.
+Header-only status means no correction, transcription, method change,
+replacement lock, or pair exclusion has been selected.
 `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` now splits out the 11
 method-lane terms: all are OCR-matched, all have zero skip-250 appellation
 counts, all have zero high-cap appellation ordinary hits, and 2 pairs have zero
