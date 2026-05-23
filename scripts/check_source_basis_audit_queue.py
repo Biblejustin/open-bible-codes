@@ -12,6 +12,7 @@ DEFAULT_BIBLEGATEWAY_MANIFEST = Path("configs/biblegateway_english_versions.csv"
 DEFAULT_EBIBLE_CONTROLS = Path("configs/ebible_english_controls.csv")
 DEFAULT_DOOR43_CONTROLS = Path("configs/door43_english_controls.csv")
 DEFAULT_OET_CONTROLS = Path("configs/oet_english_controls.csv")
+DEFAULT_OTB_CONTROLS = Path("configs/otb_english_controls.csv")
 DEFAULT_AUDIT_QUEUE = Path("docs/SOURCE_BASIS_AUDIT_QUEUE.md")
 ALLOWED_BASIS_STATUSES = {"broad_tradition", "needs_audit"}
 MANIFEST_LABELS = {
@@ -19,6 +20,7 @@ MANIFEST_LABELS = {
     "ebible": "eBible English controls",
     "door43": "Door43 English controls",
     "oet": "OET English controls",
+    "otb": "OTB English controls",
 }
 
 
@@ -29,6 +31,7 @@ def main(argv: list[str] | None = None) -> int:
         ebible_controls=args.ebible_controls,
         door43_controls=args.door43_controls,
         oet_controls=args.oet_controls,
+        otb_controls=args.otb_controls,
         audit_queue=args.audit_queue,
         allow_needs_audit=args.allow_needs_audit,
     )
@@ -46,6 +49,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--ebible-controls", type=Path, default=DEFAULT_EBIBLE_CONTROLS)
     parser.add_argument("--door43-controls", type=Path, default=DEFAULT_DOOR43_CONTROLS)
     parser.add_argument("--oet-controls", type=Path, default=DEFAULT_OET_CONTROLS)
+    parser.add_argument("--otb-controls", type=Path, default=DEFAULT_OTB_CONTROLS)
     parser.add_argument("--audit-queue", type=Path, default=DEFAULT_AUDIT_QUEUE)
     parser.add_argument(
         "--allow-needs-audit",
@@ -61,6 +65,7 @@ def validate_source_basis_queue(
     ebible_controls: Path = DEFAULT_EBIBLE_CONTROLS,
     door43_controls: Path = DEFAULT_DOOR43_CONTROLS,
     oet_controls: Path = DEFAULT_OET_CONTROLS,
+    otb_controls: Path = DEFAULT_OTB_CONTROLS,
     audit_queue: Path = DEFAULT_AUDIT_QUEUE,
     allow_needs_audit: bool = False,
 ) -> list[str]:
@@ -70,6 +75,7 @@ def validate_source_basis_queue(
         ebible_rows = read_rows(ebible_controls)
         door43_rows = read_rows(door43_controls)
         oet_rows = read_rows(oet_controls)
+        otb_rows = read_rows(otb_controls)
         observed_counts = read_audit_queue_counts(audit_queue)
     except (OSError, csv.Error) as exc:
         return [f"could not read source-basis inputs: {exc}"]
@@ -79,6 +85,7 @@ def validate_source_basis_queue(
         "ebible": ebible_rows,
         "door43": door43_rows,
         "oet": oet_rows,
+        "otb": otb_rows,
     }
     for manifest_key, rows in manifests.items():
         failures.extend(validate_manifest_rows(manifest_key, rows))
@@ -88,6 +95,7 @@ def validate_source_basis_queue(
         MANIFEST_LABELS["ebible"]: count_basis_rows(ebible_rows),
         MANIFEST_LABELS["door43"]: count_basis_rows(door43_rows),
         MANIFEST_LABELS["oet"]: count_basis_rows(oet_rows),
+        MANIFEST_LABELS["otb"]: count_basis_rows(otb_rows),
     }
     if observed_counts != expected_counts:
         failures.append(
@@ -130,6 +138,8 @@ def validate_manifest_rows(manifest_key: str, rows: list[dict[str, str]]) -> lis
             failures.extend(validate_door43_row(row, row_id))
         elif manifest_key == "oet":
             failures.extend(validate_oet_row(row, row_id))
+        elif manifest_key == "otb":
+            failures.extend(validate_otb_row(row, row_id))
     return failures
 
 
@@ -176,6 +186,23 @@ def validate_oet_row(row: dict[str, str], row_id: str) -> list[str]:
     if "CC BY-SA 4.0" not in row.get("license_label", ""):
         failures.append(f"{row_id}: missing CC BY-SA 4.0 license_label")
     if not row.get("source_path_prefix", "").startswith("exportedFiles/cleanedUSFM/"):
+        failures.append(f"{row_id}: invalid source_path_prefix")
+    return failures
+
+
+def validate_otb_row(row: dict[str, str], row_id: str) -> list[str]:
+    failures: list[str] = []
+    if not row.get("source_id", "").strip():
+        failures.append(f"{row_id}: missing source_id")
+    source_url = row.get("source_url", "")
+    if not source_url.startswith("https://github.com/OpenTranslationBible/"):
+        failures.append(f"{row_id}: invalid source_url")
+    details_url = row.get("details_url", "")
+    if not details_url.startswith("https://github.com/OpenTranslationBible/"):
+        failures.append(f"{row_id}: invalid details_url")
+    if "CC BY-SA 4.0" not in row.get("license_label", ""):
+        failures.append(f"{row_id}: missing CC BY-SA 4.0 license_label")
+    if row.get("source_path_prefix", "") != "lang/en-GB/":
         failures.append(f"{row_id}: invalid source_path_prefix")
     return failures
 

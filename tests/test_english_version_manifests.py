@@ -8,6 +8,7 @@ BIBLEGATEWAY_MANIFEST = Path("configs/biblegateway_english_versions.csv")
 EBIBLE_CONTROLS = Path("configs/ebible_english_controls.csv")
 DOOR43_CONTROLS = Path("configs/door43_english_controls.csv")
 OET_CONTROLS = Path("configs/oet_english_controls.csv")
+OTB_CONTROLS = Path("configs/otb_english_controls.csv")
 PRIVATE_PROTOCOL = Path("protocols/private_english_versions.toml")
 SOURCE_BASIS_AUDIT_QUEUE = Path("docs/SOURCE_BASIS_AUDIT_QUEUE.md")
 
@@ -76,6 +77,7 @@ class EnglishVersionManifestTests(unittest.TestCase):
             "eBible English controls": count_basis_rows(read_rows(EBIBLE_CONTROLS)),
             "Door43 English controls": count_basis_rows(read_rows(DOOR43_CONTROLS)),
             "OET English controls": count_basis_rows(read_rows(OET_CONTROLS)),
+            "OTB English controls": count_basis_rows(read_rows(OTB_CONTROLS)),
         }
         observed = read_audit_queue_counts(SOURCE_BASIS_AUDIT_QUEUE)
 
@@ -87,6 +89,7 @@ class EnglishVersionManifestTests(unittest.TestCase):
             *read_rows(EBIBLE_CONTROLS),
             *read_rows(DOOR43_CONTROLS),
             *read_rows(OET_CONTROLS),
+            *read_rows(OTB_CONTROLS),
         ]
 
         self.assertEqual(

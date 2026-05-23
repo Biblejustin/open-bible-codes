@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 132
+Protocols indexed: 133
 
 ## Analysis
 
@@ -80,7 +80,7 @@ Protocols indexed: 132
 | english_seed_paired_controls_1000 | Conditional 1000-sample term-shuffle and corpus-random paired controls for English seed... | 2 |  | reports/english_seed_paired_controls_1000, reports/english_seed_survivor_targets | `english_seed_paired_controls_1000.toml` |
 | english_seed_survivor_audit | Conditional letter-path and metadata audit for English seed rows surviving count-contro... | 1 |  | reports/english_seed_survivor_audit | `english_seed_survivor_audit.toml` |
 | english_seed_term_shuffle_1000 | Conditional 1000-sample same-letter term-shuffle controls for English seed rows survivi... | 1 | terms/english_seed_followup_survivors.csv | reports/english_seed_term_shuffle_1000 | `english_seed_term_shuffle_1000.toml` |
-| english_version_control_triage | Compare BibleGateway-overlap English versions against eBible controls and inspect stron... | 3 |  | reports/english_version_control_triage | `english_version_control_triage.toml` |
+| english_version_control_triage | Compare BibleGateway-overlap English versions against merged open English controls and ... | 3 |  | reports/english_version_control_triage | `english_version_control_triage.toml` |
 | extension_deep_controls | Slow 1000/1000 paired-control follow-up for the exact-center cross-text Greek NT extens... | 1 |  | reports | `extension_deep_controls.toml` |
 | external_claim_source_all_codes_collection | Relaxed all-codes collection for external-source claim and critique term lists across B... | 4 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports/external_claim_source_all_codes | `external_claim_source_all_codes_collection.toml` |
 | external_claim_source_counts | Count external-source claim and critique term lists across Bible corpora and language-m... | 2 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports/external_claim_source_counts | `external_claim_source_counts.toml` |
@@ -105,6 +105,7 @@ Protocols indexed: 132
 | matrix_cluster_control_summary | Relation-specific Bible-vs-secular-control summary for matrix cluster candidates. | 1 |  | reports/matrix_clusters | `matrix_cluster_control_summary.toml` |
 | nonbible_control_counts | Skip 2..100 screening counts against large non-Bible Hebrew, Greek, and English control... | 1 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_tribes.csv, t... | reports/nonbible_controls | `nonbible_control_counts.toml` |
 | oet_english_controls | Open English Translation OET-LV/OET-RV control-corpus screening for generated English t... | 1 | terms/english_search_terms.csv | reports/oet_english_controls | `oet_english_controls.toml` |
+| otb_english_controls | Open Translation Bible English UK control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/otb_english_controls | `otb_english_controls.toml` |
 | real_report_run | Formal report assembly run over locked STEP_TAHOT, Greek exact-center, doxa follow-ups,... | 52 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports, reports/all_codes_compound_extension_confirmatory, reports/all_codes_compound_... | `real_report_run.toml` |
 | sblgnt_source_only_exact_center | Post-discovery 1000/1000 controls for SBLGNT source-only exact-center extension rows. | 2 |  | reports/sblgnt_source_only_exact_center | `sblgnt_source_only_exact_center.toml` |
 | step_tahot_control_policy_hits | Audit STEP_TAHOT-only control rows against TAHOT source-type policy. | 2 |  | reports/step_tahot_control_policy_hits, reports/step_tahot_control_version_presence | `step_tahot_control_policy_hits.toml` |

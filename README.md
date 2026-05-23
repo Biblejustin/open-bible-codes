@@ -178,10 +178,13 @@ python3 -m scripts.download_door43_english_controls --skip-existing
 python3 -m scripts.run_protocol protocols/door43_english_controls.toml --resume
 python3 -m scripts.download_oet_english_controls --skip-existing
 python3 -m scripts.run_protocol protocols/oet_english_controls.toml --resume
+python3 -m scripts.download_otb_english_controls --skip-existing
+python3 -m scripts.run_protocol protocols/otb_english_controls.toml --resume
 ```
 
 Control manifests: `configs/ebible_english_controls.csv`,
-`configs/door43_english_controls.csv`, and `configs/oet_english_controls.csv`.
+`configs/door43_english_controls.csv`, `configs/oet_english_controls.csv`,
+and `configs/otb_english_controls.csv`.
 
 Compare the BibleGateway-overlap set against those controls and inspect the
 strongest seed-term contexts:

@@ -566,6 +566,7 @@ Current queue after the BibleGateway/eBible audit pass:
 - eBible English controls: 0 `needs_audit`, 44 `broad_tradition`.
 - Door43 English controls: 0 `needs_audit`, 2 `broad_tradition`.
 - OET English controls: 0 `needs_audit`, 2 `broad_tradition`.
+- OTB English controls: 0 `needs_audit`, 1 `broad_tradition`.
 - eBible rows moved to broad grouping: `ASVBT`, `BSB`, `E2T`, `FBV`, `F35`,
   `LSV`, `MSB`, `OURB`, `OEBCW`, `OEB`, `BBE`, `NOY`, `PEV`, `T4T`, `ULB`,
   and `OJB`.
@@ -586,6 +587,9 @@ Current queue after the BibleGateway/eBible audit pass:
 - OET-LV and OET-RV are tracked as separate CC BY-SA 4.0 open controls using
   the OET cleaned USFM repository files. Keep both as broad controls, not
   edition-level manuscript witnesses.
+- OTB English UK is tracked as a CC BY-SA 4.0 open control using the
+  repository `lang/en-GB` JSON files. Upstream does not state the
+  manuscript/source-text basis, so use it as an English surface control only.
 - `BBE` and `NOY` moved to broad grouping only. `BBE` has broad Hebrew/Greek
   source evidence; `NOY` NT title metadata identifies Tischendorf's Greek text.
 - No English source-basis rows remain in `needs_audit`.
@@ -593,7 +597,7 @@ Current queue after the BibleGateway/eBible audit pass:
 Suggested local queue command:
 
 ```bash
-awk -F, 'NR == 1 || /needs_audit/' configs/biblegateway_english_versions.csv configs/ebible_english_controls.csv
+awk -F, 'NR == 1 || /needs_audit/' configs/biblegateway_english_versions.csv configs/ebible_english_controls.csv configs/door43_english_controls.csv configs/oet_english_controls.csv configs/otb_english_controls.csv
 ```
 
 ### 3. English Seed Survivor Gate
@@ -755,6 +759,22 @@ worksheet guarding:
   `python3 -m scripts.run_protocol protocols/door43_english_controls.toml --resume`
   to refresh their local ignored corpus outputs. Current run passed with 2
   included controls, zero missing controls, and 2,607 count rows.
+- OET-LV/OET-RV open English controls are tracked in
+  `configs/oet_english_controls.csv`; current run passed with 2 included
+  controls, zero missing controls, and 2,606 count rows.
+- OTB English UK is tracked in `configs/otb_english_controls.csv`; current
+  import wrote 66 books, 31,101 verses, and 3,045,463 letters from 1,189
+  chapter JSON files. `python3 -m scripts.run_protocol
+  protocols/otb_english_controls.toml --resume` passed with 1 included
+  control, zero missing controls, and 1,303 count rows.
+- `python3 -m scripts.run_protocol protocols/english_version_control_triage.toml --resume`
+  now compares BibleGateway-overlap English rows against 49 merged open
+  controls from eBible, Door43, OET, and OTB; context review promoted no seed
+  terms.
+- `python3 -m pytest tests/test_otb_english_controls.py tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py tests/test_real_report_run.py -q` passed: 75 tests and 124 subtests.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_otb_controls.json` passed.
+- `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
+- `python3 -m pytest -q` passed: 1357 tests and 13972 subtests.
 - `python3 -m scripts.check_expanded_strata_tooling --report /tmp/edls_expanded_tooling_after_patch.json` passed.
 - `python3 -m scripts.validate_study_mapping_schemas` passed.
 - `python3 -m scripts.check_crd_relevance_dictionary --dictionary terms/relevance_dictionary.toml --term-file terms/gog_magog_pair_prospective_terms.csv --expected-sha256 a6406048b9953ca50715d99100994b9065394d9db31b35867666d365a3bd0f99 --require-reviewed` passed.

@@ -117,6 +117,26 @@ python3 -m scripts.download_oet_english_controls --skip-existing
 python3 -m scripts.run_protocol protocols/oet_english_controls.toml --resume
 ```
 
+Open Translation Bible English control:
+
+- `configs/otb_english_controls.csv`
+- `scripts/download_otb_english_controls.py`
+- `protocols/otb_english_controls.toml`
+
+This control uses the OTB English `lang/en-GB` chapter JSON from the public
+OTB repository. The repository README and `LICENCE.md` identify the text as
+CC BY-SA 4.0. The upstream manuscript/source-text basis is not stated, so this
+is an English surface control only, not a manuscript-tradition witness. Raw and
+processed source text stays under ignored `data/raw/` and `data/processed/`;
+generated reports stay under ignored `reports/`.
+
+Use:
+
+```bash
+python3 -m scripts.download_otb_english_controls --skip-existing
+python3 -m scripts.run_protocol protocols/otb_english_controls.toml --resume
+```
+
 Generic eBible USFM import:
 
 ```bash

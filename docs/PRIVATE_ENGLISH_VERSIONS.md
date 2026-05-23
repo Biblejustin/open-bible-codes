@@ -93,6 +93,12 @@ Open English Translation controls are tracked separately in
 processed texts remain local under ignored `data/raw/oet/` and
 `data/processed/oet/`.
 
+Open Translation Bible English UK is tracked separately in
+`configs/otb_english_controls.csv`. Its raw and processed texts remain local
+under ignored `data/raw/otb/` and `data/processed/otb/`. Upstream does not
+state the manuscript/source-text basis, so this is a surface English control,
+not a manuscript-tradition witness.
+
 The manifest also tracks broad source-basis metadata:
 
 - `ot_basis`

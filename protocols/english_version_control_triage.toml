@@ -1,20 +1,26 @@
 name = "english_version_control_triage"
-description = "Compare BibleGateway-overlap English versions against eBible controls and inspect strongest contexts."
+description = "Compare BibleGateway-overlap English versions against merged open English controls and inspect strongest contexts."
 manifest_out = "reports/english_version_control_triage/protocol_run.manifest.json"
 max_parallel = 1
 progress_interval_seconds = 15
 
 [[steps]]
 id = "triage"
-description = "Rank target-vs-control English term presence."
+description = "Rank target-vs-merged-control English term presence."
 argv = [
   "-m", "scripts.triage_english_version_controls",
 ]
 inputs = [
   "reports/biblegateway_english_versions/version_presence.csv",
   "reports/ebible_english_controls/version_presence.csv",
+  "reports/door43_english_controls/version_presence.csv",
+  "reports/oet_english_controls/version_presence.csv",
+  "reports/otb_english_controls/version_presence.csv",
   "reports/biblegateway_english_versions/included_versions.csv",
   "reports/ebible_english_controls/included_versions.csv",
+  "reports/door43_english_controls/included_versions.csv",
+  "reports/oet_english_controls/included_versions.csv",
+  "reports/otb_english_controls/included_versions.csv",
   "scripts/triage_english_version_controls.py",
 ]
 outputs = [

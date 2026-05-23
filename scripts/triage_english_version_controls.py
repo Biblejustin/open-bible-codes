@@ -14,9 +14,19 @@ from pathlib import Path
 
 
 DEFAULT_TARGET_PRESENCE = Path("reports/biblegateway_english_versions/version_presence.csv")
-DEFAULT_CONTROL_PRESENCE = Path("reports/ebible_english_controls/version_presence.csv")
+DEFAULT_CONTROL_PRESENCE = [
+    Path("reports/ebible_english_controls/version_presence.csv"),
+    Path("reports/door43_english_controls/version_presence.csv"),
+    Path("reports/oet_english_controls/version_presence.csv"),
+    Path("reports/otb_english_controls/version_presence.csv"),
+]
 DEFAULT_TARGET_VERSIONS = Path("reports/biblegateway_english_versions/included_versions.csv")
-DEFAULT_CONTROL_VERSIONS = Path("reports/ebible_english_controls/included_versions.csv")
+DEFAULT_CONTROL_VERSIONS = [
+    Path("reports/ebible_english_controls/included_versions.csv"),
+    Path("reports/door43_english_controls/included_versions.csv"),
+    Path("reports/oet_english_controls/included_versions.csv"),
+    Path("reports/otb_english_controls/included_versions.csv"),
+]
 DEFAULT_OUT_DIR = Path("reports/english_version_control_triage")
 
 FIELDNAMES = [
@@ -62,10 +72,12 @@ TOP_TERMS_FIELDNAMES = ["term_id", "concept", "category", "language", "term", "n
 def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(argv)
+    control_presence_paths = args.control_presence or DEFAULT_CONTROL_PRESENCE
+    control_version_paths = args.control_versions or DEFAULT_CONTROL_VERSIONS
     target_rows = read_keyed_rows(args.target_presence)
-    control_rows = read_keyed_rows(args.control_presence)
+    control_rows = read_merged_keyed_rows(control_presence_paths)
     target_versions = read_versions(args.target_versions)
-    control_versions = read_versions(args.control_versions)
+    control_versions = read_merged_versions(control_version_paths)
     triage_rows = build_triage_rows(
         target_rows,
         control_rows,
@@ -97,9 +109,9 @@ def main(argv: list[str] | None = None) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
     parser.add_argument("--target-presence", type=Path, default=DEFAULT_TARGET_PRESENCE)
-    parser.add_argument("--control-presence", type=Path, default=DEFAULT_CONTROL_PRESENCE)
+    parser.add_argument("--control-presence", type=Path, action="append", default=[])
     parser.add_argument("--target-versions", type=Path, default=DEFAULT_TARGET_VERSIONS)
-    parser.add_argument("--control-versions", type=Path, default=DEFAULT_CONTROL_VERSIONS)
+    parser.add_argument("--control-versions", type=Path, action="append", default=[])
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT_DIR / "triage.csv")
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_OUT_DIR / "triage.md")
     parser.add_argument("--terms-out", type=Path, default=DEFAULT_OUT_DIR / "context_seed_terms.csv")
@@ -116,9 +128,64 @@ def read_keyed_rows(path: Path) -> dict[str, dict[str, str]]:
         return {row["term_id"]: dict(row) for row in csv.DictReader(handle)}
 
 
+def read_merged_keyed_rows(paths: list[Path]) -> dict[str, dict[str, str]]:
+    grouped: dict[str, list[dict[str, str]]] = {}
+    for path in paths:
+        with path.open("r", encoding="utf-8", newline="") as handle:
+            for row in csv.DictReader(handle):
+                grouped.setdefault(row["term_id"], []).append(dict(row))
+    return {term_id: merge_presence_rows(rows) for term_id, rows in grouped.items()}
+
+
+def merge_presence_rows(rows: list[dict[str, str]]) -> dict[str, str]:
+    base = dict(rows[0])
+    observed = unique_ordered(
+        corpus
+        for row in rows
+        for corpus in parse_corpora(row.get("observed_corpora", ""))
+    )
+    present = unique_ordered(
+        corpus
+        for row in rows
+        for corpus in parse_corpora(row.get("present_corpora", ""))
+    )
+    present_set = set(present)
+    absent = [corpus for corpus in observed if corpus not in present_set]
+    hit_counts = {}
+    for row in rows:
+        hit_counts.update(parse_hit_counts(row.get("hit_counts_by_corpus", "")))
+    max_corpus = ""
+    max_hit_count = 0
+    if hit_counts:
+        max_corpus, max_hit_count = max(hit_counts.items(), key=lambda item: item[1])
+    base.update(
+        {
+            "observed_corpora": ",".join(observed),
+            "observed_corpus_count": str(len(observed)),
+            "present_corpora": ",".join(present),
+            "absent_corpora": ",".join(absent),
+            "presence_scope": merged_presence_scope(len(present), len(observed)),
+            "total_hits": str(sum(hit_counts.values())),
+            "max_hit_count": str(max_hit_count),
+            "max_corpus": max_corpus,
+            "hit_counts_by_corpus": "; ".join(
+                f"{corpus}:{hit_counts[corpus]}" for corpus in observed if corpus in hit_counts
+            ),
+        }
+    )
+    return base
+
+
 def read_versions(path: Path) -> dict[str, dict[str, str]]:
     with path.open("r", encoding="utf-8", newline="") as handle:
         return {row["label"]: dict(row) for row in csv.DictReader(handle)}
+
+
+def read_merged_versions(paths: list[Path]) -> dict[str, dict[str, str]]:
+    versions: dict[str, dict[str, str]] = {}
+    for path in paths:
+        versions.update(read_versions(path))
+    return versions
 
 
 def build_triage_rows(
@@ -221,6 +288,34 @@ def empty_control_row(target: dict[str, str]) -> dict[str, str]:
 
 def parse_corpora(value: str) -> list[str]:
     return [item for item in value.split(",") if item]
+
+
+def parse_hit_counts(value: str) -> dict[str, int]:
+    counts = {}
+    for item in value.split(";"):
+        if ":" not in item:
+            continue
+        label, raw_count = item.split(":", 1)
+        counts[label.strip()] = int_value(raw_count.strip())
+    return counts
+
+
+def unique_ordered(values: object) -> list[str]:
+    seen = set()
+    ordered = []
+    for value in values:
+        if value and value not in seen:
+            seen.add(value)
+            ordered.append(value)
+    return ordered
+
+
+def merged_presence_scope(present_count: int, observed_count: int) -> str:
+    if observed_count <= 0 or present_count <= 0:
+        return "absent_all_observed_sources"
+    if present_count == observed_count:
+        return "present_all_observed_sources"
+    return "source_specific"
 
 
 def int_value(value: object) -> int:
@@ -407,13 +502,13 @@ def write_markdown(
         "# English Version Control Triage",
         "",
         "This report compares the available BibleGateway-overlap English versions",
-        "against the open/CC eBible English control set. It is a triage report,",
+        "against the merged open/CC English control set. It is a triage report,",
         "not a statistical claim.",
         "",
         "## Inputs",
         "",
         f"- Target presence: `{args.target_presence}`",
-        f"- Control presence: `{args.control_presence}`",
+        f"- Control presence: `{', '.join(str(path) for path in (args.control_presence or DEFAULT_CONTROL_PRESENCE))}`",
         f"- Target versions: {len(target_versions)}",
         f"- Control versions: {len(control_versions)}",
         "",
@@ -522,9 +617,9 @@ def write_manifest(
         "tool": "triage_english_version_controls",
         "created_utc": datetime.now(UTC).isoformat(),
         "target_presence": str(args.target_presence.resolve()),
-        "control_presence": str(args.control_presence.resolve()),
+        "control_presence": [str(path.resolve()) for path in (args.control_presence or DEFAULT_CONTROL_PRESENCE)],
         "target_versions": str(args.target_versions.resolve()),
-        "control_versions": str(args.control_versions.resolve()),
+        "control_versions": [str(path.resolve()) for path in (args.control_versions or DEFAULT_CONTROL_VERSIONS)],
         "rows": len(rows),
         "context_seed_terms": len(top_terms),
         "seconds": round(time.perf_counter() - started, 3),
