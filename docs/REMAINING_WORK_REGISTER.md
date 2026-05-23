@@ -197,6 +197,9 @@ Current pushed commits for this cleanup:
 - `a085cb9` Add WRR manual decision register.
 - `03fa42b` Add WRR decision record template.
 - `e8db884` Add WRR manual decision record checker.
+- `57488b3` Refresh WRR decision record handoff docs.
+- `981e5f6` Guard WRR decision record checklist paths.
+- `dbe95db` Add WRR decision record worksheet.
 
 ### Formal Real Report Rerun
 
@@ -692,9 +695,11 @@ doc guarding, WRR variant-gap method-status evidence propagation, and WRR
 residual burden summary/blocker propagation, and WRR Wayback source-recovery
 probing/guarding, residual unique-term reconciliation queue guarding, and
 residual term blocker-packet propagation, and residual reconciliation action
-plan guarding, and WRR public handoff doc guarding:
+plan guarding, WRR public handoff doc guarding, and WRR manual decision-record
+worksheet guarding:
 
-- `python3 -m pytest -q` passed: 1302 tests and 13961 subtests.
+- `python3 -m pytest -q` passed: 1344 tests and 13961 subtests.
+- `python3 -m pytest tests/test_build_wrr_manual_decision_record_worksheet.py tests/test_check_wrr_manual_decision_record_worksheet_doc.py tests/test_check_wrr_public_handoff_docs.py tests/test_real_report_run.py tests/test_clean_lock_protocols.py -q` passed: 85 tests.
 - `python3 -m pytest tests/test_check_wrr_public_handoff_docs.py tests/test_real_report_run.py -q` passed: 57 tests.
 - `python3 -m pytest tests/test_build_wrr_residual_reconciliation_action_plan.py tests/test_check_wrr_residual_reconciliation_action_plan_doc.py -q` passed: 6 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_clean_lock_protocols.py tests/test_build_wrr_residual_reconciliation_action_plan.py tests/test_check_wrr_residual_reconciliation_action_plan_doc.py -q` passed: 69 tests.
@@ -739,6 +744,7 @@ plan guarding, and WRR public handoff doc guarding:
 - `python3 -m scripts.check_wrr_wayback_source_recovery_probe_doc` passed.
 - `python3 -m scripts.check_wrr_residual_term_reconciliation_queue_doc` passed.
 - `python3 -m scripts.check_wrr_residual_reconciliation_action_plan_doc` passed.
+- `python3 -m scripts.check_wrr_manual_decision_record_worksheet_doc` passed.
 - `python3 -m scripts.check_hypothesis_testing_source_audit_doc` passed.
 - `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_claim_catalog.py tests/test_wrr_claim_readiness.py -q` passed: 32 tests and 60 subtests.
@@ -769,6 +775,7 @@ plan guarding, and WRR public handoff doc guarding:
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_residual_action_plan.json` passed.
 - `python3 -m scripts.check_wrr_public_handoff_docs` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_public_handoff_guard.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wrr_manual_decision_record_worksheet.json` passed.
 - `python3 -m scripts.check_prospective_study_lanes` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
