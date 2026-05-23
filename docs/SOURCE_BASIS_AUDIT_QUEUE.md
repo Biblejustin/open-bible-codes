@@ -29,7 +29,7 @@ edition documentation.
 | Manifest | Rows | `needs_audit` | `broad_tradition` |
 | --- | ---: | ---: | ---: |
 | BibleGateway English versions | 64 | 0 | 64 |
-| eBible English controls | 43 | 0 | 43 |
+| eBible English controls | 44 | 0 | 44 |
 
 ## Validation
 
@@ -69,6 +69,7 @@ None after this pass.
 | --- | --- | --- |
 | ASVBT | `broad_tradition` | eBible page identifies ASV conformed to Byzantine Text NT: <https://ebible.org/find/show.php?id=engasvbt> |
 | BSB | `broad_tradition` | eBible/Berean pages support broad modern critical grouping: <https://ebible.org/find/show.php?id=engbsb> and <https://bereanbibles.com/about-berean-study-bible/greek-and-hebrew-sources/> |
+| E2T | `broad_tradition` | eBible Easy to Translate English Jonah page supplies a CC BY-SA 4.0 source package; treat as Jonah-only easy-translation control: <https://ebible.org/find/show.php?id=enge2t> |
 | FBV | `broad_tradition` | eBible Free Bible Version page supplies a CC BY-SA 4.0 source package; treat as partial NT/Psalms free-translation control: <https://ebible.org/find/show.php?id=engfbv> |
 | F35 | `broad_tradition` | eBible Family 35 NT page supplies a CC BY-SA 4.0 source package and identifies the Family 35 Greek NT basis: <https://ebible.org/find/show.php?id=engf35> |
 | LSV | `broad_tradition` | eBible Literal Standard Version page supplies a CC BY-SA 4.0 source package; exact textual editions are not stated: <https://ebible.org/find/show.php?id=englsv> |

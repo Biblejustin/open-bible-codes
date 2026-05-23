@@ -89,6 +89,7 @@ class EnglishVersionManifestTests(unittest.TestCase):
         rows = {row["label"]: row for row in read_rows(EBIBLE_CONTROLS)}
 
         self.assertIn("CC BY-SA 4.0", rows["PEV"]["license_label"])
+        self.assertIn("CC BY-SA 4.0", rows["E2T"]["license_label"])
         self.assertIn("CC BY-SA 4.0", rows["FBV"]["license_label"])
         self.assertIn("CC BY-SA 4.0", rows["F35"]["license_label"])
         self.assertIn("CC BY-SA 4.0", rows["LSV"]["license_label"])

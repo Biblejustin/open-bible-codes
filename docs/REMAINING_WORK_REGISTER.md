@@ -563,19 +563,24 @@ edition-level textual-critical claims from memory.
 Current queue after the BibleGateway/eBible audit pass:
 
 - BibleGateway English versions: 0 `needs_audit`, 64 `broad_tradition`.
-- eBible English controls: 0 `needs_audit`, 43 `broad_tradition`.
-- eBible rows moved to broad grouping: `ASVBT`, `BSB`, `FBV`, `F35`, `LSV`,
-  `MSB`, `OURB`, `OEBCW`, `OEB`, `BBE`, `NOY`, `PEV`, `T4T`, `ULB`, and
-  `OJB`.
+- eBible English controls: 0 `needs_audit`, 44 `broad_tradition`.
+- eBible rows moved to broad grouping: `ASVBT`, `BSB`, `E2T`, `FBV`, `F35`,
+  `LSV`, `MSB`, `OURB`, `OEBCW`, `OEB`, `BBE`, `NOY`, `PEV`, `T4T`, `ULB`,
+  and `OJB`.
 - BibleGateway rows moved to broad grouping in the second audit pass include
   `AMP`, `AMPC`, `CJB`, `CEV`, `DLNT`, `ERV`, `EASY`, `EXB`, `GW`, `ICB`,
   `ISV`, `JUB`, `PHILLIPS`, `MSG`, `MOUNCE`, `NOG`, `NCB`, `NCV`, `NLV`,
   `NTFE`, `VOICE`, and `WE`.
 - `PEV` license metadata corrected to CC BY-SA 4.0; local source package says
   the translation used Hebrew and Greek language study aids but not exact
-  editions. `FBV`, `F35`, `LSV`, `OURB`, `T4T`, and `ULB` were added as CC
-  BY-SA 4.0 eBible controls; keep exact source-edition claims coarse unless
-  publisher notes state more.
+  editions. `E2T`, `FBV`, `F35`, `LSV`, `OURB`, `T4T`, and `ULB` were added
+  as CC BY-SA 4.0 eBible controls; keep exact source-edition claims coarse
+  unless publisher notes state more.
+- Remaining downloadable English-ish eBible rows checked in this pass were not
+  added as open controls when their eBible details page used NC/ND, ND-only, a
+  custom non-open permission statement, or non-redistributable status. Examples
+  include `engaoi`, `engbarkly`, `engemtv`, `eng-glw`, `engnna`,
+  `engwyc2017`, `engwyc2018`, `engerv`, `enggw`, and `engnet`.
 - `BBE` and `NOY` moved to broad grouping only. `BBE` has broad Hebrew/Greek
   source evidence; `NOY` NT title metadata identifies Tischendorf's Greek text.
 - No English source-basis rows remain in `needs_audit`.
@@ -708,7 +713,7 @@ residual term blocker-packet propagation, and residual reconciliation action
 plan guarding, WRR public handoff doc guarding, and WRR manual decision-record
 worksheet guarding:
 
-- `python3 -m pytest -q` passed: 1348 tests and 13967 subtests after adding the new CC BY-SA eBible controls.
+- `python3 -m pytest -q` passed: 1348 tests and 13968 subtests after adding the new CC BY-SA eBible controls.
 - `python3 -m pytest tests/test_build_wrr_manual_decision_record_worksheet.py tests/test_check_wrr_manual_decision_record_worksheet_doc.py tests/test_check_wrr_public_handoff_docs.py tests/test_real_report_run.py tests/test_clean_lock_protocols.py -q` passed: 85 tests.
 - `python3 -m pytest tests/test_check_wrr_public_handoff_docs.py tests/test_real_report_run.py -q` passed: 57 tests.
 - `python3 -m pytest tests/test_build_wrr_residual_reconciliation_action_plan.py tests/test_check_wrr_residual_reconciliation_action_plan_doc.py -q` passed: 6 tests.
@@ -733,11 +738,11 @@ worksheet guarding:
 - `python3 -m pytest tests/test_real_report_run.py tests/test_check_expanded_strata_tooling.py tests/test_validate_study_mapping_schemas.py -q` passed: 38 tests.
 - `python3 -m pytest tests/test_import_bolls_translation.py tests/test_english_version_manifests.py -q` passed: 12 tests and 117 subtests.
 - `python3 -m pytest tests/test_english_version_manifests.py -q` passed: 8 tests and 117 subtests.
-- `python3 -m pytest tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py -q` passed: 12 tests and 123 subtests after adding the new CC BY-SA eBible controls.
+- `python3 -m pytest tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py -q` passed: 12 tests and 124 subtests after adding the new CC BY-SA eBible controls.
 - `python3 -m pytest tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py tests/test_real_report_run.py -q` passed: 39 tests and 117 subtests.
 - `python3 -m scripts.check_source_basis_audit_queue` passed.
 - `python3 -m scripts.check_english_corpus_policy_docs` passed.
-- `python3 -m scripts.run_protocol protocols/ebible_english_controls.toml --resume` passed with 43 included controls, zero missing controls, and 56,030 count rows.
+- `python3 -m scripts.run_protocol protocols/ebible_english_controls.toml --resume` passed with 44 included controls, zero missing controls, and 57,333 count rows.
 - `python3 -m scripts.check_expanded_strata_tooling --report /tmp/edls_expanded_tooling_after_patch.json` passed.
 - `python3 -m scripts.validate_study_mapping_schemas` passed.
 - `python3 -m scripts.check_crd_relevance_dictionary --dictionary terms/relevance_dictionary.toml --term-file terms/gog_magog_pair_prospective_terms.csv --expected-sha256 a6406048b9953ca50715d99100994b9065394d9db31b35867666d365a3bd0f99 --require-reviewed` passed.

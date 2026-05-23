@@ -27,6 +27,7 @@ publishes downloadable source packages. Examples include:
 - `BSB`
 - `DARBY`
 - `DRA`
+- `E2T`
 - `ERV`
 - `FBV`
 - `F35`
