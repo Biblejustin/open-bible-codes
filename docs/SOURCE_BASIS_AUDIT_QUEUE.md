@@ -94,5 +94,5 @@ None after this pass.
 
 ## Suggested Next Pass
 
-1. Leave missing private-only BibleGateway rows as metadata-only until lawful
-   local texts are available.
+1. Leave missing private-only BibleGateway rows as metadata-only unless a lawful
+   local text or source package with clear permission is available.

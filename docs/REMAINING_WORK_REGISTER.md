@@ -32,12 +32,12 @@ blocker-packet, and unresolved-term burden propagation, and WRR Wayback
 source-recovery probing/guarding, WRR public handoff doc guarding, WRR
 remaining-lane/source-policy/manual-decision checklist consolidation, and WRR
 manual decision-record template/checker guarding.
-This file tracks work that remains outside the missing copyrighted/private
+This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
-## Blocked
+## Deferred Inputs
 
-### Remaining BibleGateway English Corpora
+### BibleGateway English Corpora Without Lawful Local Text
 
 The current BibleGateway refresh has 34 available English versions and skips
 30 missing local CSVs. Missing rows are listed in:
@@ -49,6 +49,11 @@ reports/biblegateway_english_versions/missing_versions.csv
 AMPC, NLT, MSG, TPT, and NIV local hooks exist and their private CSVs are
 ignored under `data/private/english/`. TPT is wired in the private protocol but
 is not part of the BibleGateway manifest.
+
+Current policy: what we have is the working set. Do not treat the 30 missing
+BibleGateway rows as an active blocker. Only add a missing version when a
+lawful source package or user-supplied text with clear permission is available;
+do not scrape BibleGateway text to fill these rows.
 
 Bolls currently adds no further missing BibleGateway labels beyond sources
 already mapped separately. The Bolls `NASB` package remains tracked as

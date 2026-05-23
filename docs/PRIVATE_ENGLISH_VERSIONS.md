@@ -69,8 +69,11 @@ Copyrighted eBible-sourced versions are still treated as local-only corpora:
 the source text remains under ignored `data/raw/` and `data/processed/`, and
 public outputs must follow the upstream permission limits. Copyrighted
 BibleGateway versions without an available lawful source package remain
-private-only CSV hooks. Bolls-sourced ZIPs, extracted CSVs, and manifests stay
-under ignored `data/private/`.
+private-only CSV hooks and are not active blockers. The working English corpus
+set is whatever is already available locally or from a lawful source package
+with clear permission; do not scrape BibleGateway text to fill missing rows.
+Bolls-sourced ZIPs, extracted CSVs, and manifests stay under ignored
+`data/private/`.
 
 The manifest also tracks broad source-basis metadata:
 

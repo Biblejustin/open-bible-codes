@@ -161,6 +161,9 @@ Version manifest: `configs/biblegateway_english_versions.csv`.
 Current broad refresh has 34 available BibleGateway-overlap English versions
 and skips 30 missing local CSVs. Missing rows are listed in
 `reports/biblegateway_english_versions/missing_versions.csv`.
+That is the accepted working set unless a lawful source package with clear
+reuse permission is found; do not treat the missing BibleGateway rows as an
+active blocker or scrape BibleGateway text to fill them.
 
 Source-basis metadata queue:
 `docs/SOURCE_BASIS_AUDIT_QUEUE.md`. Validate it with
