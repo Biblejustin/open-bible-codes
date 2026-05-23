@@ -522,6 +522,9 @@ template for future manual-lock records.
 `scripts/check_wrr_manual_decision_records.py` keeps any populated row aligned
 to the current manual decision register by rank, lane, state, target, and
 checklist, and requires non-placeholder evidence plus an ISO lock date.
+`docs/WRR_MANUAL_DECISION_RECORD_WORKSHEET.md` now gives the exact `decision_id`,
+rank, lane, state, target, checklist, and evidence prompt for all 37 future lock
+rows without filling the lock CSV.
 Header-only status means no correction, transcription, method change,
 replacement lock, or pair exclusion has been selected.
 `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` now splits out the 11

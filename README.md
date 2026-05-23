@@ -679,6 +679,10 @@ WRR manual decision records template:
 It stays header-only until cited evidence, selected actions, and reviewer lock
 fields are populated; `scripts/check_wrr_manual_decision_records.py` checks any
 future rows against the current register.
+WRR manual decision record worksheet:
+`docs/WRR_MANUAL_DECISION_RECORD_WORKSHEET.md`.
+It gives the exact `decision_id`, rank, lane, state, target, checklist, and
+evidence prompt for all 37 future lock rows without filling the lock CSV.
 WRR method/pair-universe evidence packet:
 `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md`.
 It isolates the 11 OCR-matched method-lane terms: all have zero skip-250

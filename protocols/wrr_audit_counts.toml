@@ -1155,6 +1155,28 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_manual_decision_record_worksheet"
+description = "Build no-input worksheet for future WRR manual-decision records."
+argv = [
+  "-m", "scripts.build_wrr_manual_decision_record_worksheet",
+  "--register", "reports/wrr_1994/wrr_manual_decision_register.csv",
+  "--records-template", "data/study/mappings/wrr_manual_decision_records.csv",
+  "--out", "reports/wrr_1994/wrr_manual_decision_record_worksheet.csv",
+  "--markdown-out", "docs/WRR_MANUAL_DECISION_RECORD_WORKSHEET.md",
+  "--manifest-out", "reports/wrr_1994/wrr_manual_decision_record_worksheet.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_manual_decision_record_worksheet.py",
+  "reports/wrr_1994/wrr_manual_decision_register.csv",
+  "data/study/mappings/wrr_manual_decision_records.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_manual_decision_record_worksheet.csv",
+  "docs/WRR_MANUAL_DECISION_RECORD_WORKSHEET.md",
+  "reports/wrr_1994/wrr_manual_decision_record_worksheet.manifest.json",
+]
+
+[[steps]]
 id = "build_wrr_method_pair_universe_evidence_packet"
 description = "Build diagnostic evidence packet for WRR OCR-matched method/pair-universe residuals."
 argv = [

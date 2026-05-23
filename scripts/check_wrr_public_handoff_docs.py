@@ -16,9 +16,11 @@ REQUIRED_PHRASES_BY_DOC = {
         "WRR remaining-lane review checklist:",
         "WRR manual decision register:",
         "WRR manual decision records template:",
+        "WRR manual decision record worksheet:",
         "Chełm source-policy/pair-rule target in pending manual lock state",
         "37 pending manual-lock rows representing 58 action terms, 59 residual pair links, and 40 minimum-frontier pair links",
         "future rows against the current register",
+        "evidence prompt for all 37 future lock rows without filling the lock CSV",
         "pending manual source-lock state and required decision-record fields",
         "pending manual lock state with required decision-record fields",
         "source-transcription row clusters, page-image near-match terms, and method/pair-universe counts",
@@ -32,6 +34,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "WRR remaining-lane checklist keeps 3 page-image terms and 11 method/pair-universe terms in pending manual lock states",
         "WRR manual decision register consolidates 37 pending manual-lock rows",
         "WRR manual decision-record checker keeps the header-only decision template aligned to the current register",
+        "WRR manual decision-record worksheet lists the exact rank/lane/target fields",
         "no-input handoff with term targets, source-transcription row clusters, page-image near matches, and method/pair-universe counts",
     ),
     Path("docs/FINAL_REPORT.md"): (
@@ -78,6 +81,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "14 remaining-lane terms in pending page-image and method/pair-universe lock state",
         "37 pending manual-lock rows",
         "manual decision-record template/checker guarding",
+        "evidence prompt for all 37 future lock rows without filling the lock CSV",
         "row-level review order, and page-image review boundary",
     ),
 }

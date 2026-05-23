@@ -78,6 +78,7 @@ This assembly run includes:
   `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md`,
   `docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md`,
   `docs/WRR_MANUAL_DECISION_REGISTER.md`,
+  `docs/WRR_MANUAL_DECISION_RECORD_WORKSHEET.md`,
   `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md`,
   `docs/WRR_DW_FORMULA_SENSITIVITY.md`, `docs/WRR_CLAIM_READINESS.md`, and
   `docs/WRR_CLAIM_BLOCKER_PACKET.md`, plus
@@ -168,6 +169,8 @@ It requires:
   minimum-frontier pair links without selecting corrections or exclusions;
 - WRR manual decision-record checker keeps the header-only decision template
   aligned to the current register before any row can become a lock record;
+- WRR manual decision-record worksheet lists the exact rank/lane/target fields
+  and evidence prompt for all 37 future lock rows without filling the lock CSV;
 - checked-in `docs/INDEX.md` and `protocols/INDEX.md` freshness;
 - existing generated inputs needed by the final gates.
 
