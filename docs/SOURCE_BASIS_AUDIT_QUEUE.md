@@ -29,7 +29,7 @@ edition documentation.
 | Manifest | Rows | `needs_audit` | `broad_tradition` |
 | --- | ---: | ---: | ---: |
 | BibleGateway English versions | 64 | 0 | 64 |
-| eBible English controls | 38 | 0 | 38 |
+| eBible English controls | 43 | 0 | 43 |
 
 ## Validation
 
@@ -70,12 +70,17 @@ None after this pass.
 | ASVBT | `broad_tradition` | eBible page identifies ASV conformed to Byzantine Text NT: <https://ebible.org/find/show.php?id=engasvbt> |
 | BSB | `broad_tradition` | eBible/Berean pages support broad modern critical grouping: <https://ebible.org/find/show.php?id=engbsb> and <https://bereanbibles.com/about-berean-study-bible/greek-and-hebrew-sources/> |
 | FBV | `broad_tradition` | eBible Free Bible Version page supplies a CC BY-SA 4.0 source package; treat as partial NT/Psalms free-translation control: <https://ebible.org/find/show.php?id=engfbv> |
+| F35 | `broad_tradition` | eBible Family 35 NT page supplies a CC BY-SA 4.0 source package and identifies the Family 35 Greek NT basis: <https://ebible.org/find/show.php?id=engf35> |
+| LSV | `broad_tradition` | eBible Literal Standard Version page supplies a CC BY-SA 4.0 source package; exact textual editions are not stated: <https://ebible.org/find/show.php?id=englsv> |
 | MSB | `broad_tradition` | MajorityBible identifies BSB OT plus Robinson-Pierpont Byzantine Majority Text NT: <https://majoritybible.com/> |
 | OEBCW | `broad_tradition` | OEB FAQ identifies public-domain English bases, WLC/Leningrad OT, and W&H/TCNT NT: <https://openenglishbible.org/faq/> |
 | OEB | `broad_tradition` | Same source-basis evidence as OEBCW; U.S. spelling edition: <https://openenglishbible.org/faq/> |
+| OURB | `broad_tradition` | eBible One Unity Resource Bible page supplies a CC BY-SA 4.0 source package; exact textual editions are not stated: <https://ebible.org/find/show.php?id=engourb> |
 | BBE | `broad_tradition` | Local eBible source package identifies the Bible in Basic English; 1965 introduction says the translation was made from Hebrew and Greek: `data/raw/ebible/engBBE_usfm.zip` and <https://www.bible-researcher.com/basic.html> |
 | NOY | `broad_tradition` | Local eBible source package identifies George Noyes Bible portions; Google Books title metadata identifies Noyes' NT as translated from Tischendorf's Greek text: `data/raw/ebible/engnoy_usfm.zip` and <https://books.google.com/books/about/The_New_Testament_Translated_from_the_Gr.html?id=lOJUAAAAcAAJ> |
 | PEV | `broad_tradition` | Local eBible source package front matter says the PEV used Hebrew and Greek language study aids; exact editions are not stated: `data/raw/ebible/engPEV_usfm.zip` |
+| T4T | `broad_tradition` | eBible Translation for Translators page supplies a CC BY-SA 4.0 source package; treat as implied-information translator-help control: <https://ebible.org/find/show.php?id=eng-t4t> |
+| ULB | `broad_tradition` | eBible Unlocked Literal Bible page supplies a CC BY-SA 4.0 source package and describes a close original-language ASV-family update: <https://ebible.org/find/show.php?id=engULB> |
 | OJB | `broad_tradition` | Local eBible source package identifies Tanakh and Orthodox Jewish Brit Chadasha presentation; exact textual editions are not stated: `data/raw/ebible/engojb_usfm.zip` |
 
 ## Checked But Still Queued

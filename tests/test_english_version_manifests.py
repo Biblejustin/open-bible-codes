@@ -90,6 +90,11 @@ class EnglishVersionManifestTests(unittest.TestCase):
 
         self.assertIn("CC BY-SA 4.0", rows["PEV"]["license_label"])
         self.assertIn("CC BY-SA 4.0", rows["FBV"]["license_label"])
+        self.assertIn("CC BY-SA 4.0", rows["F35"]["license_label"])
+        self.assertIn("CC BY-SA 4.0", rows["LSV"]["license_label"])
+        self.assertIn("CC BY-SA 4.0", rows["OURB"]["license_label"])
+        self.assertIn("CC BY-SA 4.0", rows["T4T"]["license_label"])
+        self.assertIn("CC BY-SA 4.0", rows["ULB"]["license_label"])
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:
