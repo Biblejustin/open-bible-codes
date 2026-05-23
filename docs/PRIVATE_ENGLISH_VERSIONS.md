@@ -113,9 +113,10 @@ Vulgate-line English control.
 
 Supplemental open controls are tracked separately in
 `configs/supplemental_english_controls.csv`. Current rows are AKJV, CPDV,
-Anderson 1864, Dynamic English Bible 2020 Draft, and Plain English
-Translation New Testament. Raw and processed texts remain local under ignored
-`data/raw/supplemental/` and `data/processed/supplemental/`.
+Anderson 1864, AV1611, Douay-Rheims Challoner 1750, Dynamic English Bible
+2020 Draft, and Plain English Translation New Testament. Raw and processed
+texts remain local under ignored `data/raw/supplemental/` and
+`data/processed/supplemental/`.
 
 The manifest also tracks broad source-basis metadata:
 

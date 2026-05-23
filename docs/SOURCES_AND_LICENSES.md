@@ -184,15 +184,15 @@ Supplemental open English controls:
 - `protocols/supplemental_english_controls.toml`
 
 These controls currently add AKJV from the official AKJV text ZIP, CPDV from
-the CrossWire CPDV source archive, and three BibleCorps source archives:
-Anderson 1864, Dynamic English Bible 2020 Draft, and Plain English
-Translation New Testament. The official AKJV page identifies the AKJV as
-public domain and based on the KJV; the CrossWire CPDV module page identifies
-CPDV as public domain and translated from Latin Vulgate editions. BibleCorps
-metadata identifies Anderson as public-domain source text, and DEB/PET as CC
-BY-SA 4.0 sources. Raw and processed source text stays under ignored
-`data/raw/` and `data/processed/`; generated reports stay under ignored
-`reports/`.
+the CrossWire CPDV source archive, and five BibleCorps source archives:
+Anderson 1864, AV1611, Douay-Rheims Challoner 1750, Dynamic English Bible 2020
+Draft, and Plain English Translation New Testament. The official AKJV page
+identifies the AKJV as public domain and based on the KJV; the CrossWire CPDV
+module page identifies CPDV as public domain and translated from Latin Vulgate
+editions. BibleCorps metadata identifies Anderson, AV1611, and DRC1750 as
+public-domain source text, and DEB/PET as CC BY-SA 4.0 sources. Raw and
+processed source text stays under ignored `data/raw/` and `data/processed/`;
+generated reports stay under ignored `reports/`.
 
 Use:
 

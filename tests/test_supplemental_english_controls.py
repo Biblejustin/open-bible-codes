@@ -16,7 +16,7 @@ class SupplementalEnglishControlTests(unittest.TestCase):
     def test_supplemental_controls_have_source_and_license_metadata(self) -> None:
         rows = {row["label"]: row for row in read_rows(SUPPLEMENTAL_CONTROLS)}
 
-        self.assertEqual(sorted(rows), ["AKJV", "ANDERSON", "CPDV", "DEB", "PET"])
+        self.assertEqual(sorted(rows), ["AKJV", "ANDERSON", "AV1611", "CPDV", "DEB", "DRC1750", "PET"])
         self.assertEqual(rows["AKJV"]["source_format"], "akjv_text_zip")
         self.assertEqual(rows["AKJV"]["source_url"], "https://cdn.akjv.us/akj.zip")
         self.assertEqual(rows["AKJV"]["details_url"], "https://akjv.us/")
@@ -39,10 +39,20 @@ class SupplementalEnglishControlTests(unittest.TestCase):
         self.assertIn("Public domain", rows["ANDERSON"]["license_label"])
         self.assertIn("Greek NT", rows["ANDERSON"]["nt_basis"])
 
+        self.assertEqual(rows["AV1611"]["source_format"], "biblecorps_usfm_zip")
+        self.assertEqual(rows["AV1611"]["coverage"], "with_apocrypha")
+        self.assertIn("Public domain", rows["AV1611"]["license_label"])
+        self.assertEqual(rows["AV1611"]["source_path_prefix"], "PSFM/")
+
         self.assertEqual(rows["DEB"]["source_format"], "biblecorps_usfm_zip")
         self.assertEqual(rows["DEB"]["coverage"], "full_draft")
         self.assertIn("CC BY-SA 4.0", rows["DEB"]["license_label"])
         self.assertIn("checking/not ready", rows["DEB"]["notes"])
+
+        self.assertEqual(rows["DRC1750"]["source_format"], "biblecorps_usfm_zip")
+        self.assertEqual(rows["DRC1750"]["coverage"], "with_apocrypha")
+        self.assertIn("Public domain", rows["DRC1750"]["license_label"])
+        self.assertIn("Latin Vulgate", rows["DRC1750"]["ot_basis"])
 
         self.assertEqual(rows["PET"]["source_format"], "biblecorps_usfm_zip")
         self.assertEqual(rows["PET"]["coverage"], "nt")
