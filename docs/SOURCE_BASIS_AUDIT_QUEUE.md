@@ -14,6 +14,7 @@ Inputs:
 - `configs/oet_english_controls.csv`
 - `configs/otb_english_controls.csv`
 - `configs/openbible_english_controls.csv`
+- `configs/odr_english_controls.csv`
 
 Fields already tracked:
 
@@ -40,6 +41,7 @@ stated are usable only as English surface controls, not manuscript witnesses.
 | OET English controls | 2 | 0 | 2 |
 | OTB English controls | 1 | 0 | 1 |
 | Open.Bible English controls | 4 | 0 | 4 |
+| Original Douay-Rheims English controls | 1 | 0 | 1 |
 
 ## Validation
 
@@ -73,7 +75,7 @@ None after this pass.
 
 None after this pass.
 
-## Door43/OET/OTB/Open.Bible Control Rows Needing Audit
+## Door43/OET/OTB/Open.Bible/ODR Control Rows Needing Audit
 
 None after this pass.
 
@@ -98,7 +100,7 @@ None after this pass.
 | ULB | `broad_tradition` | eBible Unlocked Literal Bible page supplies a CC BY-SA 4.0 source package and describes a close original-language ASV-family update: <https://ebible.org/find/show.php?id=engULB> |
 | OJB | `broad_tradition` | Local eBible source package identifies Tanakh and Orthodox Jewish Brit Chadasha presentation; exact textual editions are not stated: `data/raw/ebible/engojb_usfm.zip` |
 
-## Door43/OET/OTB/Open.Bible Rows Audited This Pass
+## Door43/OET/OTB/Open.Bible/ODR Rows Audited This Pass
 
 | Label | Basis status | Source evidence |
 | --- | --- | --- |
@@ -109,6 +111,7 @@ None after this pass.
 | OTB | `broad_tradition` | OTB repository README and license identify CC BY-SA 4.0 and provide verse-level `lang/en-GB` JSON, but the upstream manuscript/source-text basis is not stated; use as a surface English control only: <https://github.com/OpenTranslationBible/open-bible> |
 | AFINT-EXP-AE, AFINT-EXP-BE | `broad_tradition` | Open.Bible AFINT explanatory paraphrase pages identify English New Testament USFM downloads and CC BY-SA license, but do not state the Greek source/manuscript basis; use as surface English controls only: <https://www.open.bible/bibles/69a307e295245b14e244c7a0> and <https://www.open.bible/bibles/69a307df95245b14e244c797> |
 | AFINT-LIT-AE, AFINT-LIT-BE | `broad_tradition` | Open.Bible AFINT literal pages identify English New Testament USFM downloads and CC BY-SA license, but do not state the Greek source/manuscript basis; use as surface English controls only: <https://www.open.bible/bibles/69a307e995245b14e244c7b0> and <https://www.open.bible/bibles/69a307e695245b14e244c7a8> |
+| ODR | `broad_tradition` | Original Douay-Rheims repository identifies a CC0 1.0 USFM/JSON dataset for the unmodified 1609 Old Testament and 1582 New Testament; use as a historical Latin Vulgate-line English control: <https://github.com/janvier-s/original-douay-rheims> |
 
 ## Checked But Still Queued
 

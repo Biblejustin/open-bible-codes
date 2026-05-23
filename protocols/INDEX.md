@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 134
+Protocols indexed: 135
 
 ## Analysis
 
@@ -104,6 +104,7 @@ Protocols indexed: 134
 | matrix_cluster_candidates | Opt-in matrix-neighborhood candidate extraction over CRD raw centered ELS hit rows with... | 1 |  | reports/matrix_clusters | `matrix_cluster_candidates.toml` |
 | matrix_cluster_control_summary | Relation-specific Bible-vs-secular-control summary for matrix cluster candidates. | 1 |  | reports/matrix_clusters | `matrix_cluster_control_summary.toml` |
 | nonbible_control_counts | Skip 2..100 screening counts against large non-Bible Hebrew, Greek, and English control... | 1 | terms/biblical_calendar.csv, terms/biblical_festivals.csv, terms/biblical_tribes.csv, t... | reports/nonbible_controls | `nonbible_control_counts.toml` |
+| odr_english_controls | Original Douay-Rheims CC0 English control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/odr_english_controls | `odr_english_controls.toml` |
 | oet_english_controls | Open English Translation OET-LV/OET-RV control-corpus screening for generated English t... | 1 | terms/english_search_terms.csv | reports/oet_english_controls | `oet_english_controls.toml` |
 | openbible_english_controls | Open.Bible English NT control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/openbible_english_controls | `openbible_english_controls.toml` |
 | otb_english_controls | Open Translation Bible English UK control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/otb_english_controls | `otb_english_controls.toml` |

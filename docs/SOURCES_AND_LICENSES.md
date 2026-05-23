@@ -157,6 +157,26 @@ python3 -m scripts.download_openbible_english_controls --skip-existing
 python3 -m scripts.run_protocol protocols/openbible_english_controls.toml --resume
 ```
 
+Original Douay-Rheims English control:
+
+- `configs/odr_english_controls.csv`
+- `scripts/download_odr_english_controls.py`
+- `protocols/odr_english_controls.toml`
+
+This control uses the Original Douay-Rheims repository's USFM files. The
+repository README and `LICENSE` identify the dataset as CC0 1.0 Universal. The
+source is a historical Latin Vulgate-line English control, not a Greek/Hebrew
+manuscript witness. Raw and processed source text stays under ignored
+`data/raw/` and `data/processed/`; generated reports stay under ignored
+`reports/`.
+
+Use:
+
+```bash
+python3 -m scripts.download_odr_english_controls --skip-existing
+python3 -m scripts.run_protocol protocols/odr_english_controls.toml --resume
+```
+
 Generic eBible USFM import:
 
 ```bash

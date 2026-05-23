@@ -105,6 +105,12 @@ local under ignored `data/raw/openbible/` and `data/processed/openbible/`.
 Upstream product pages identify CC BY-SA downloads, but do not state a Greek
 source/manuscript basis, so these are surface English controls only.
 
+Original Douay-Rheims 1609/1582 is tracked separately in
+`configs/odr_english_controls.csv`. Its raw and processed texts remain local
+under ignored `data/raw/odr/` and `data/processed/odr/`. The upstream
+repository identifies CC0 1.0 USFM/JSON data; use it as a historical Latin
+Vulgate-line English control.
+
 The manifest also tracks broad source-basis metadata:
 
 - `ot_basis`

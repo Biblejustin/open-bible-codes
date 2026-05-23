@@ -568,6 +568,8 @@ Current queue after the BibleGateway/eBible audit pass:
 - OET English controls: 0 `needs_audit`, 2 `broad_tradition`.
 - OTB English controls: 0 `needs_audit`, 1 `broad_tradition`.
 - Open.Bible English controls: 0 `needs_audit`, 4 `broad_tradition`.
+- Original Douay-Rheims English controls: 0 `needs_audit`, 1
+  `broad_tradition`.
 - eBible rows moved to broad grouping: `ASVBT`, `BSB`, `E2T`, `FBV`, `F35`,
   `LSV`, `MSB`, `OURB`, `OEBCW`, `OEB`, `BBE`, `NOY`, `PEV`, `T4T`, `ULB`,
   and `OJB`.
@@ -597,6 +599,9 @@ Current queue after the BibleGateway/eBible audit pass:
 - Open.Bible AFINT English NT controls are tracked as CC BY-SA open controls
   using product-page USFM downloads. Upstream does not state the Greek
   manuscript/source-text basis, so use them as English surface controls only.
+- Original Douay-Rheims 1609/1582 is tracked as a CC0 English control using
+  the GitHub repository's USFM files. Use it as a historical Latin Vulgate-line
+  English control, not as a Greek/Hebrew manuscript witness.
 - Open.Bible English API search was rechecked after AFINT import. The remaining
   text rows are either already represented by eBible controls, marked NC/ND or
   ND, a non-meaningful DBL test version, or mixed-license enough to leave out
@@ -608,7 +613,7 @@ Current queue after the BibleGateway/eBible audit pass:
 Suggested local queue command:
 
 ```bash
-awk -F, 'NR == 1 || /needs_audit/' configs/biblegateway_english_versions.csv configs/ebible_english_controls.csv configs/door43_english_controls.csv configs/oet_english_controls.csv configs/otb_english_controls.csv configs/openbible_english_controls.csv
+awk -F, 'NR == 1 || /needs_audit/' configs/biblegateway_english_versions.csv configs/ebible_english_controls.csv configs/door43_english_controls.csv configs/oet_english_controls.csv configs/otb_english_controls.csv configs/openbible_english_controls.csv configs/odr_english_controls.csv
 ```
 
 ### 3. English Seed Survivor Gate
@@ -783,9 +788,14 @@ worksheet guarding:
   with 7,938-7,940 verses each. `python3 -m scripts.run_protocol
   protocols/openbible_english_controls.toml --resume` passed with 4 included
   controls, zero missing controls, and 5,212 count rows.
+- Original Douay-Rheims 1609/1582 is tracked in
+  `configs/odr_english_controls.csv`; current import wrote 76 book IDs and
+  37,131 rows after merging/skipping 16 duplicate refs from the upstream USFM.
+  `python3 -m scripts.run_protocol protocols/odr_english_controls.toml --resume`
+  passed with 1 included control, zero missing controls, and 1,303 count rows.
 - `python3 -m scripts.run_protocol protocols/english_version_control_triage.toml --resume`
-  now compares BibleGateway-overlap English rows against 53 merged open
-  controls from eBible, Door43, OET, OTB, and Open.Bible; context review
+  now compares BibleGateway-overlap English rows against 54 merged open
+  controls from eBible, Door43, OET, OTB, Open.Bible, and ODR; context review
   promoted no seed terms.
 - `python3 -m pytest tests/test_otb_english_controls.py tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py tests/test_real_report_run.py -q` passed: 75 tests and 124 subtests.
 - `python3 -m pytest tests/test_openbible_english_controls.py tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py tests/test_real_report_run.py -q` passed: 73 tests and 128 subtests.
