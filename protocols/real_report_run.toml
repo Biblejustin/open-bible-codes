@@ -295,6 +295,7 @@ inputs = [
   "scripts/preflight_prospective_study.py",
   "scripts/scaffold_prospective_study.py",
   "scripts/check_prospective_study_lanes.py",
+  "scripts/check_english_corpus_policy_docs.py",
   "scripts/check_source_basis_audit_queue.py",
   "scripts/build_prospective_lane_status.py",
   "scripts/build_greek_surface_prospective_report.py",

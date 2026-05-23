@@ -409,6 +409,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/CLAIM_CATALOG.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("configs/prospective_study_lanes.json", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_prospective_study_lanes.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn("scripts/check_english_corpus_policy_docs.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_source_basis_audit_queue.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_expanded_strata_tooling.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/validate_study_mapping_schemas.py", steps_by_id["preflight"]["inputs"])
@@ -954,6 +955,7 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("secret_pattern_hits", payload)
             self.assertIn("prospective_lane_failures", payload)
             self.assertIn("source_basis_failures", payload)
+            self.assertIn("english_corpus_policy_failures", payload)
             self.assertIn("expanded_strata_tooling_failures", payload)
             self.assertIn("study_mapping_schema_failures", payload)
             self.assertIn("preregistration_placeholder_paths", payload)
@@ -1016,6 +1018,27 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "source-basis validation failures: needs_audit rows remain: "
                 "BibleGateway English versions:DEMO",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_english_corpus_policy_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_english_corpus_policy_docs,
+                "validate_policy_docs",
+                return_value=["README.md missing deferred policy"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["english_corpus_policy_failures"],
+                ["README.md missing deferred policy"],
+            )
+            self.assertIn(
+                "English corpus policy failures: README.md missing deferred policy",
                 payload["failures"],
             )
 

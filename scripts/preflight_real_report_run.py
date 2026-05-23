@@ -21,6 +21,7 @@ from els.project_index import (
 )
 from scripts import (
     check_crd_relevance_dictionary,
+    check_english_corpus_policy_docs,
     check_expanded_strata_tooling,
     check_hypothesis_testing_source_audit_doc,
     check_manual_review_queue,
@@ -355,6 +356,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/preflight_prospective_study.py",
     "scripts/scaffold_prospective_study.py",
     "scripts/check_prospective_study_lanes.py",
+    "scripts/check_english_corpus_policy_docs.py",
     "scripts/check_source_basis_audit_queue.py",
     "scripts/build_prospective_lane_status.py",
     "scripts/build_greek_surface_prospective_report.py",
@@ -543,6 +545,15 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "source-basis validation failures: "
             + "; ".join(source_basis_failures)
+        )
+
+    english_corpus_policy_failures = (
+        check_english_corpus_policy_docs.validate_policy_docs(root)
+    )
+    if english_corpus_policy_failures:
+        failures.append(
+            "English corpus policy failures: "
+            + "; ".join(english_corpus_policy_failures)
         )
 
     expanded_strata_tooling_result = check_expanded_strata_tooling.check_tooling(
@@ -916,6 +927,7 @@ def main(argv: list[str] | None = None) -> int:
         "missing_paths": missing_paths,
         "prospective_lane_failures": prospective_lane_failures,
         "source_basis_failures": source_basis_failures,
+        "english_corpus_policy_failures": english_corpus_policy_failures,
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,
         "study_mapping_schema_failures": study_mapping_schema_failures,
         "preregistration_placeholder_paths": [
