@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 130
+Protocols indexed: 131
 
 ## Analysis
 
@@ -75,6 +75,7 @@ Protocols indexed: 130
 | apocrypha_bridge_shuffled_controls_50 | Run 50-sample shuffled apocrypha/deuterocanon bridge controls for LXX and KJVA bridge c... | 2 | terms/english_search_terms.csv, terms/greek_nt_claim_terms.csv, terms/prophetic_terms.c... | reports/apocrypha_bridge_shuffled_controls_50, reports/kjv_apocrypha_bridge_shuffled_co... | `apocrypha_bridge_shuffled_controls_50.toml` |
 | apocrypha_bridge_study | Run the apocrypha/deuterocanon coverage audit, bounded bridge scan, surface-context rev... | 14 | terms/english_search_terms.csv, terms/greek_nt_claim_terms.csv, terms/prophetic_terms.c... | reports/apocrypha_bridge_candidates, reports/apocrypha_bridge_completion_review, report... | `apocrypha_bridge_study.toml` |
 | byz_source_only_exact_center | Post-discovery 1000/1000 controls for BYZ_NT source-only exact-center extension row. | 2 |  | reports/byz_source_only_exact_center | `byz_source_only_exact_center.toml` |
+| door43_english_controls | Open Door43 English ULT/UST control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/door43_english_controls | `door43_english_controls.toml` |
 | ebible_english_controls | Open and CC eBible English control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/ebible_english_controls | `ebible_english_controls.toml` |
 | english_seed_paired_controls_1000 | Conditional 1000-sample term-shuffle and corpus-random paired controls for English seed... | 2 |  | reports/english_seed_paired_controls_1000, reports/english_seed_survivor_targets | `english_seed_paired_controls_1000.toml` |
 | english_seed_survivor_audit | Conditional letter-path and metadata audit for English seed rows surviving count-contro... | 1 |  | reports/english_seed_survivor_audit | `english_seed_survivor_audit.toml` |

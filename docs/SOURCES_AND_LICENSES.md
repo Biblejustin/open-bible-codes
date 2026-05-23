@@ -82,6 +82,23 @@ python3 -m scripts.run_protocol protocols/ebible_english_controls.toml --resume
 python3 -m scripts.run_protocol protocols/english_version_control_triage.toml --resume
 ```
 
+Open Door43 English controls:
+
+- `configs/door43_english_controls.csv`
+- `scripts/download_door43_english_controls.py`
+- `protocols/door43_english_controls.toml`
+
+These controls use unfoldingWord ULT and UST source packages under CC BY-SA
+4.0. Raw and processed source text stays under ignored `data/raw/` and
+`data/processed/`; generated reports stay under ignored `reports/`.
+
+Use:
+
+```bash
+python3 -m scripts.download_door43_english_controls --skip-existing
+python3 -m scripts.run_protocol protocols/door43_english_controls.toml --resume
+```
+
 Generic eBible USFM import:
 
 ```bash

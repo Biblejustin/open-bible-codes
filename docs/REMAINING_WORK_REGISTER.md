@@ -713,7 +713,7 @@ residual term blocker-packet propagation, and residual reconciliation action
 plan guarding, WRR public handoff doc guarding, and WRR manual decision-record
 worksheet guarding:
 
-- `python3 -m pytest -q` passed: 1348 tests and 13968 subtests after adding the new CC BY-SA eBible controls.
+- `python3 -m pytest -q` passed: 1349 tests and 13970 subtests after adding the Door43 ULT/UST controls.
 - `python3 -m pytest tests/test_build_wrr_manual_decision_record_worksheet.py tests/test_check_wrr_manual_decision_record_worksheet_doc.py tests/test_check_wrr_public_handoff_docs.py tests/test_real_report_run.py tests/test_clean_lock_protocols.py -q` passed: 85 tests.
 - `python3 -m pytest tests/test_check_wrr_public_handoff_docs.py tests/test_real_report_run.py -q` passed: 57 tests.
 - `python3 -m pytest tests/test_build_wrr_residual_reconciliation_action_plan.py tests/test_check_wrr_residual_reconciliation_action_plan_doc.py -q` passed: 6 tests.
@@ -739,10 +739,17 @@ worksheet guarding:
 - `python3 -m pytest tests/test_import_bolls_translation.py tests/test_english_version_manifests.py -q` passed: 12 tests and 117 subtests.
 - `python3 -m pytest tests/test_english_version_manifests.py -q` passed: 8 tests and 117 subtests.
 - `python3 -m pytest tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py -q` passed: 12 tests and 124 subtests after adding the new CC BY-SA eBible controls.
+- `python3 -m pytest tests/test_door43_english_controls.py tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py -q` passed: 13 tests and 126 subtests.
 - `python3 -m pytest tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py tests/test_real_report_run.py -q` passed: 39 tests and 117 subtests.
 - `python3 -m scripts.check_source_basis_audit_queue` passed.
 - `python3 -m scripts.check_english_corpus_policy_docs` passed.
 - `python3 -m scripts.run_protocol protocols/ebible_english_controls.toml --resume` passed with 44 included controls, zero missing controls, and 57,333 count rows.
+- Door43 ULT/UST open English controls are now tracked separately from eBible
+  in `configs/door43_english_controls.csv`; run
+  `python3 -m scripts.download_door43_english_controls --skip-existing` and
+  `python3 -m scripts.run_protocol protocols/door43_english_controls.toml --resume`
+  to refresh their local ignored corpus outputs. Current run passed with 2
+  included controls, zero missing controls, and 2,607 count rows.
 - `python3 -m scripts.check_expanded_strata_tooling --report /tmp/edls_expanded_tooling_after_patch.json` passed.
 - `python3 -m scripts.validate_study_mapping_schemas` passed.
 - `python3 -m scripts.check_crd_relevance_dictionary --dictionary terms/relevance_dictionary.toml --term-file terms/gog_magog_pair_prospective_terms.csv --expected-sha256 a6406048b9953ca50715d99100994b9065394d9db31b35867666d365a3bd0f99 --require-reviewed` passed.

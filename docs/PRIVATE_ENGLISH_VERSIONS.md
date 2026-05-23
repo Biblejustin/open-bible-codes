@@ -83,6 +83,11 @@ with clear permission; do not scrape BibleGateway text to fill missing rows.
 Bolls-sourced ZIPs, extracted CSVs, and manifests stay under ignored
 `data/private/`.
 
+Door43 open English controls are tracked separately in
+`configs/door43_english_controls.csv` for ULT and UST. Their raw and processed
+texts remain local under ignored `data/raw/door43/` and
+`data/processed/door43/`.
+
 The manifest also tracks broad source-basis metadata:
 
 - `ot_basis`
