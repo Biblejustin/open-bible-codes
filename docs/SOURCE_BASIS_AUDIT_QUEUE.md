@@ -43,7 +43,7 @@ stated are usable only as English surface controls, not manuscript witnesses.
 | OTB English controls | 1 | 0 | 1 |
 | Open.Bible English controls | 4 | 0 | 4 |
 | Original Douay-Rheims English controls | 1 | 0 | 1 |
-| Supplemental open English controls | 7 | 0 | 7 |
+| Supplemental open English controls | 11 | 0 | 11 |
 
 ## Validation
 
@@ -121,6 +121,8 @@ None after this pass.
 | DEB | `broad_tradition` | BibleCorps Dynamic English Bible README marks the text as checking/not ready; Door43 YAML metadata identifies CC BY-SA 4.0 and source relations, so use as a draft surface English control: <https://github.com/BibleCorps/ENG-B-DEB2020-cc-PSFM> |
 | DRC1750 | `broad_tradition` | DRC1750 front matter identifies the electronic edition as public domain and translated from the Latin Vulgate, revised according to the Clementine edition; use as a historical Vulgate-line English control: <https://github.com/BibleCorps/ENG-B-DRC1750-pd-PSFM> |
 | PET | `broad_tradition` | PET front matter identifies CC BY-SA 4.0 and describes PET as an English translation of the Indonesian Simple Translation Bible; use as a surface English NT control: <https://github.com/BibleCorps/ENG-B1-PET2016-cc-PSFM> |
+| KENT, MCFADYEN, TCNT | `broad_tradition` | OpenEnglishBible's USFM base-text repository marks the files freely distributable; the OEB FAQ identifies Kent, McFadyen, and TCNT 1904 as public-domain English bases, with TCNT tied to the Westcott-Hort NT tradition: <https://github.com/openenglishbible/usfm-bibles> and <https://openenglishbible.org/faq/> |
+| MOFFATT | `broad_tradition` | OpenEnglishBible's USFM base-text repository marks the available Moffatt OT-portion files freely distributable; use as partial OT surface controls only because exact source-text edition details are not stated: <https://github.com/openenglishbible/usfm-bibles> |
 
 ## Checked But Still Queued
 

@@ -21,6 +21,7 @@ class UsfmVerse:
 
 
 CHAPTER_RE = re.compile(r"^\\c\s+(\S+)")
+CHAPTER_INLINE_RE = re.compile(r"(?:^|\s)\\c\s+(\S+)")
 ID_RE = re.compile(r"^\\id\s+(\S+)")
 VERSE_RE = re.compile(r"(?:^|\s)\\v\s+(\S+)\s*(.*)$")
 NOTE_RE = re.compile(r"\\[fx]\b.*?\\[fx]\*", re.DOTALL)
@@ -93,6 +94,10 @@ def parse_usfm(text: str, *, default_book: str = "") -> list[UsfmVerse]:
         verse_match = VERSE_RE.search(line)
         if verse_match:
             flush_current()
+            chapter_prefix = line[: verse_match.start()]
+            inline_chapter_match = CHAPTER_INLINE_RE.search(chapter_prefix)
+            if inline_chapter_match:
+                chapter = inline_chapter_match.group(1)
             current_verse = verse_match.group(1)
             current_parts = [verse_match.group(2)]
             continue

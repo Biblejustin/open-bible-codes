@@ -19,7 +19,7 @@ from els.ebible_usfm import UsfmVerse, parse_usfm
 DEFAULT_MANIFEST = Path("configs/supplemental_english_controls.csv")
 DEFAULT_RAW_DIR = Path("data/raw/supplemental")
 USER_AGENT = "Open Bible Codes supplemental source importer"
-USFM_SUFFIXES = (".usfm", ".sfm", ".p.sfm")
+USFM_SUFFIXES = (".usfm", ".sfm", ".p.sfm", ".ufsm")
 
 AKJV_BOOK_CODES = {
     "Gen": "GEN",
@@ -119,6 +119,77 @@ STRUCTURAL_MARKERS = (
     "\\toc3",
 )
 
+FILENAME_BOOK_CODES = {
+    "GENESIS": "GEN",
+    "EXODUS": "EXO",
+    "LEVITICUS": "LEV",
+    "NUMBERS": "NUM",
+    "DEUTERONOMY": "DEU",
+    "JOSHUA": "JOS",
+    "JUDGES": "JDG",
+    "RUTH": "RUT",
+    "1SAMUEL": "1SA",
+    "2SAMUEL": "2SA",
+    "1KINGS": "1KI",
+    "2KINGS": "2KI",
+    "1CHRONICLES": "1CH",
+    "2CHRONICLES": "2CH",
+    "EZRA": "EZR",
+    "NEHEMIAH": "NEH",
+    "ESTHER": "EST",
+    "JOB": "JOB",
+    "PSALM": "PSA",
+    "PSALMS": "PSA",
+    "PROVERBS": "PRO",
+    "ECCLESIASTES": "ECC",
+    "SONG": "SNG",
+    "SONGOFSONGS": "SNG",
+    "ISAIAH": "ISA",
+    "JEREMIAH": "JER",
+    "LAMENTATIONS": "LAM",
+    "EZEKIEL": "EZK",
+    "DANIEL": "DAN",
+    "HOSEA": "HOS",
+    "JOEL": "JOL",
+    "AMOS": "AMO",
+    "OBADIAH": "OBA",
+    "JONAH": "JON",
+    "MICAH": "MIC",
+    "NAHUM": "NAM",
+    "HABAKKUK": "HAB",
+    "ZEPHANIAH": "ZEP",
+    "HAGGAI": "HAG",
+    "ZECHARIAH": "ZEC",
+    "MALACHI": "MAL",
+    "MATTHEW": "MAT",
+    "MARK": "MRK",
+    "LUKE": "LUK",
+    "JOHN": "JHN",
+    "ACTS": "ACT",
+    "ROMANS": "ROM",
+    "1CORINTHIANS": "1CO",
+    "2CORINTHIANS": "2CO",
+    "GALATIANS": "GAL",
+    "EPHESIANS": "EPH",
+    "PHILIPPIANS": "PHP",
+    "COLOSSIANS": "COL",
+    "1THESSALONIANS": "1TH",
+    "2THESSALONIANS": "2TH",
+    "1TIMOTHY": "1TI",
+    "2TIMOTHY": "2TI",
+    "TITUS": "TIT",
+    "PHILEMON": "PHM",
+    "HEBREWS": "HEB",
+    "JAMES": "JAS",
+    "1PETER": "1PE",
+    "2PETER": "2PE",
+    "1JOHN": "1JN",
+    "2JOHN": "2JN",
+    "3JOHN": "3JN",
+    "JUDE": "JUD",
+    "REVELATION": "REV",
+}
+
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
@@ -207,6 +278,8 @@ def parse_archive(path: Path, row: dict[str, str]) -> list[UsfmVerse]:
         return parse_usfm_archive(path, row["source_path_prefix"])
     if source_format == "biblecorps_usfm_zip":
         return parse_usfm_archive(path, row["source_path_prefix"])
+    if source_format == "openenglishbible_usfm_zip":
+        return parse_usfm_archive(path, row["source_path_prefix"])
     if source_format == "akjv_text_zip":
         return parse_akjv_text_zip(path, row["source_path_prefix"])
     raise SystemExit(f"{row['label']}: unknown source_format {source_format}")
@@ -226,7 +299,7 @@ def parse_usfm_archive(path: Path, source_path_prefix: str) -> list[UsfmVerse]:
         ]
         for name in sorted(names, key=archive_sort_key):
             raw = archive.read(name).decode("utf-8-sig")
-            verses.extend(parse_usfm(scrub_structural_lines(raw)))
+            verses.extend(parse_usfm(scrub_structural_lines(raw), default_book=book_from_filename(name)))
     return verses
 
 
@@ -285,6 +358,21 @@ def archive_sort_key(name: str) -> tuple[int, str]:
     if match:
         return (int(match.group(1)), name)
     return (999, name)
+
+
+def book_from_filename(name: str) -> str:
+    stem = Path(name).stem
+    match = re.match(r"^\d+-(.+)$", stem)
+    if not match:
+        return ""
+    raw_book = match.group(1)
+    compact = re.sub(r"[^0-9A-Za-z]", "", raw_book).upper()
+    if compact in FILENAME_BOOK_CODES:
+        return FILENAME_BOOK_CODES[compact]
+    code_match = re.match(r"^([1-3]?[A-Z]{2,3})$", compact)
+    if code_match:
+        return code_match.group(1)
+    return ""
 
 
 def write_csv(path: Path, verses: list[UsfmVerse]) -> None:

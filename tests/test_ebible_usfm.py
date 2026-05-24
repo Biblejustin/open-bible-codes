@@ -38,6 +38,11 @@ class EbibleUsfmTests(unittest.TestCase):
         self.assertEqual(verses[0].text, "וַיְהִי עֶרֶב׃")
         self.assertEqual(verses[1].text, "רָקִיעַ׃")
 
+    def test_parse_usfm_reads_inline_chapter_before_verse(self) -> None:
+        verses = parse_usfm("\\id PSA\n\\q1 \\c 1 \\v 1 Happy.\n\\q1 \\c 2 \\v 1 Why rage?")
+
+        self.assertEqual([verse.ref for verse in verses], ["PSA 1:1", "PSA 2:1"])
+
     def test_parse_usfm_zip_uses_archive_book_order(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "sample.zip"

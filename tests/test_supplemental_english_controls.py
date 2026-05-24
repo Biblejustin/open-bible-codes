@@ -16,7 +16,22 @@ class SupplementalEnglishControlTests(unittest.TestCase):
     def test_supplemental_controls_have_source_and_license_metadata(self) -> None:
         rows = {row["label"]: row for row in read_rows(SUPPLEMENTAL_CONTROLS)}
 
-        self.assertEqual(sorted(rows), ["AKJV", "ANDERSON", "AV1611", "CPDV", "DEB", "DRC1750", "PET"])
+        self.assertEqual(
+            sorted(rows),
+            [
+                "AKJV",
+                "ANDERSON",
+                "AV1611",
+                "CPDV",
+                "DEB",
+                "DRC1750",
+                "KENT",
+                "MCFADYEN",
+                "MOFFATT",
+                "PET",
+                "TCNT",
+            ],
+        )
         self.assertEqual(rows["AKJV"]["source_format"], "akjv_text_zip")
         self.assertEqual(rows["AKJV"]["source_url"], "https://cdn.akjv.us/akj.zip")
         self.assertEqual(rows["AKJV"]["details_url"], "https://akjv.us/")
@@ -59,6 +74,18 @@ class SupplementalEnglishControlTests(unittest.TestCase):
         self.assertIn("CC BY-SA 4.0", rows["PET"]["license_label"])
         self.assertEqual(rows["PET"]["source_path_prefix"], "")
 
+        for label in ["KENT", "MCFADYEN", "MOFFATT", "TCNT"]:
+            self.assertEqual(rows[label]["source_format"], "openenglishbible_usfm_zip")
+            self.assertEqual(
+                rows[label]["source_url"],
+                "https://github.com/openenglishbible/usfm-bibles/archive/refs/heads/master.zip",
+            )
+            self.assertIn("Freely distributable", rows[label]["license_label"])
+            self.assertIn("OEB", rows[label]["source_family"])
+        self.assertEqual(rows["TCNT"]["coverage"], "nt")
+        self.assertIn("Westcott-Hort", rows["TCNT"]["nt_basis"])
+        self.assertEqual(rows["MOFFATT"]["source_path_prefix"], "Moffat/")
+
     def test_parse_akjv_text_maps_books_and_verses(self) -> None:
         raw = """
         [Gen] The First Book of Moses
@@ -97,6 +124,26 @@ class SupplementalEnglishControlTests(unittest.TestCase):
 
         self.assertEqual([verse.ref for verse in verses], ["GEN 1:1"])
         self.assertEqual(verses[0].text, "Beginning.")
+
+    def test_parse_usfm_archive_uses_filename_book_fallback_and_ufsm_suffix(self) -> None:
+        import tempfile
+        import zipfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "oeb-style.zip"
+            with zipfile.ZipFile(path, "w") as archive:
+                archive.writestr(
+                    "demo-master/Moffat/19-Psalms.usfm",
+                    "\\c 75\n\\v 1 We offer thanks.",
+                )
+                archive.writestr(
+                    "demo-master/Moffat/32-Jonah.ufsm",
+                    "\\id JON\n\\c 1\n\\v 1 This message came.",
+                )
+
+            verses = parse_usfm_archive(path, "Moffat/")
+
+        self.assertEqual([verse.ref for verse in verses], ["PSA 75:1", "JON 1:1"])
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:

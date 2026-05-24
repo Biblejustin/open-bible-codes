@@ -18,6 +18,19 @@ DEFAULT_ODR_CONTROLS = Path("configs/odr_english_controls.csv")
 DEFAULT_SUPPLEMENTAL_CONTROLS = Path("configs/supplemental_english_controls.csv")
 DEFAULT_AUDIT_QUEUE = Path("docs/SOURCE_BASIS_AUDIT_QUEUE.md")
 ALLOWED_BASIS_STATUSES = {"broad_tradition", "needs_audit"}
+SUPPLEMENTAL_BIBLECORPS_SOURCE_IDS = {
+    "anderson1864",
+    "av1611",
+    "deb2020",
+    "drc1750",
+    "pet2016",
+}
+SUPPLEMENTAL_OEB_PREFIXES = {
+    "kent_students_hosea": "Kent Students/",
+    "mcfadyen_ot_portions": "McFadyen/",
+    "moffatt_ot_portions": "Moffat/",
+    "tcnt1904": "Twentieth Century New Testament/",
+}
 MANIFEST_LABELS = {
     "biblegateway": "BibleGateway English versions",
     "ebible": "eBible English controls",
@@ -274,7 +287,7 @@ def validate_odr_row(row: dict[str, str], row_id: str) -> list[str]:
 def validate_supplemental_row(row: dict[str, str], row_id: str) -> list[str]:
     failures: list[str] = []
     source_id = row.get("source_id", "")
-    if source_id not in {"akjv", "anderson1864", "av1611", "cpdv", "deb2020", "drc1750", "pet2016"}:
+    if source_id not in {"akjv", "cpdv", *SUPPLEMENTAL_BIBLECORPS_SOURCE_IDS, *SUPPLEMENTAL_OEB_PREFIXES}:
         failures.append(f"{row_id}: invalid source_id")
     source_url = row.get("source_url", "")
     details_url = row.get("details_url", "")
@@ -356,6 +369,20 @@ def validate_supplemental_row(row: dict[str, str], row_id: str) -> list[str]:
         if row.get("source_path_prefix", "") != "":
             failures.append(f"{row_id}: invalid source_path_prefix")
         if source_format != "biblecorps_usfm_zip":
+            failures.append(f"{row_id}: invalid source_format")
+    elif source_id in SUPPLEMENTAL_OEB_PREFIXES:
+        if source_url != "https://github.com/openenglishbible/usfm-bibles/archive/refs/heads/master.zip":
+            failures.append(f"{row_id}: invalid source_url")
+        if details_url not in {
+            "https://github.com/openenglishbible/usfm-bibles",
+            "https://openenglishbible.org/faq/",
+        }:
+            failures.append(f"{row_id}: invalid details_url")
+        if "Freely distributable" not in license_label:
+            failures.append(f"{row_id}: missing Freely distributable license_label")
+        if row.get("source_path_prefix", "") != SUPPLEMENTAL_OEB_PREFIXES[source_id]:
+            failures.append(f"{row_id}: invalid source_path_prefix")
+        if source_format != "openenglishbible_usfm_zip":
             failures.append(f"{row_id}: invalid source_format")
     return failures
 
