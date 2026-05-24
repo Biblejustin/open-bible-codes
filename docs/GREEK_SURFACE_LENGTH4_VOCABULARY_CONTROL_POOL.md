@@ -128,7 +128,7 @@ Selected target terms are excluded from the control candidate pool.
 | `αμην` (amen; English: Amen) | `καλω` (kalo) | Surface vocabulary καλω | 74/74/74/74 | 299 | 299 |
 | `αμην` (amen; English: Amen) | `μενε` (mene) | Surface vocabulary μενε | 227/227/225/221 | 305 | 305 |
 | `αμην` (amen; English: Amen) | `μενη` (mene) | Surface vocabulary μενη | 226/225/225/225 | 306 | 306 |
-| `αμην` (amen; English: Amen) | `γυνη` (gune) | Surface vocabulary γυνη | 73/72/72/71 | 307 | 307 |
+| `αμην` (amen; English: Amen) | `γυνη` (gune; English: Woman) | Surface vocabulary γυνη | 73/72/72/71 | 307 | 307 |
 | `αμην` (amen; English: Amen) | `αρχη` (arche) | Surface vocabulary αρχη | 69/70/70/75 | 311 | 311 |
 | `αμην` (amen; English: Amen) | `δοθη` (dothe) | Surface vocabulary δοθη | 70/71/71/71 | 312 | 312 |
 | `αμην` (amen; English: Amen) | `δοξη` (doxe) | Surface vocabulary δοξη | 69/69/69/69 | 319 | 319 |

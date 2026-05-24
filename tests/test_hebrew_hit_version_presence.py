@@ -2,15 +2,18 @@ import tempfile
 import unittest
 from argparse import Namespace
 from pathlib import Path
+from unittest.mock import patch
 
 from els.corpus import Corpus, VerseSpan, WordSpan
 from els.protocol_runner import load_protocol
+from scripts import analyze_hebrew_hit_version_presence as presence
 from scripts.analyze_hebrew_hit_version_presence import (
     CorpusHitResult,
     CorpusMetadata,
     TermRow,
     canonical_ref,
     collect_hits,
+    collect_hits_from_sources,
     current_read_lines,
     merge_corpus_hit_results,
     presence_scope,
@@ -171,6 +174,41 @@ class HebrewHitVersionPresenceTests(unittest.TestCase):
         self.assertEqual(resolve_corpus_jobs(0, 3), 3)
         self.assertEqual(resolve_corpus_jobs(8, 3), 3)
         self.assertEqual(resolve_corpus_jobs(1, 3), 1)
+
+    def test_collect_hits_from_sources_falls_back_when_process_pool_denied(self) -> None:
+        terms = [TermRow("alpha_beta_g", "Alpha Beta", "test", "αβ")]
+        args = Namespace(
+            corpus_jobs=2,
+            min_skip=1,
+            max_skip=2,
+            direction="both",
+            min_term_length=2,
+            max_hits_per_term=1,
+        )
+        sources = [
+            presence.CorpusSource("FIRST", Path("first.toml")),
+            presence.CorpusSource("SECOND", Path("second.toml")),
+        ]
+
+        with (
+            patch.object(presence, "ProcessPoolExecutor", side_effect=PermissionError("denied")),
+            patch.object(
+                presence,
+                "load_labeled_corpus_sources",
+                return_value={"FIRST": sample_corpus(), "SECOND": sample_corpus()},
+            ),
+        ):
+            records, observed, term_lookup, normalized, metadata = collect_hits_from_sources(
+                sources,
+                terms,
+                args,
+            )
+
+        self.assertEqual(observed, {"alpha_beta_g": {"FIRST", "SECOND"}})
+        self.assertEqual(term_lookup["alpha_beta_g"].concept, "Alpha Beta")
+        self.assertEqual(normalized, {"alpha_beta_g": "αβ"})
+        self.assertEqual(sorted(metadata), ["FIRST", "SECOND"])
+        self.assertEqual(len(records), 2)
 
     def test_current_read_lines_summarizes_scope_and_absences(self) -> None:
         lines = current_read_lines(

@@ -455,27 +455,46 @@ def collect_hits_from_sources(
 ]:
     jobs = resolve_corpus_jobs(args.corpus_jobs, len(sources))
     if jobs == 1:
-        corpora = load_labeled_corpus_sources(sources)
-        records, observed, term_lookup, normalized_by_term = collect_hits(
-            corpora,
-            terms,
-            args,
-        )
-        return (
-            records,
-            observed,
-            term_lookup,
-            normalized_by_term,
-            corpus_metadata_from_corpora(corpora),
-        )
+        return collect_hits_from_sources_sequential(sources, terms, args)
 
     results: list[CorpusHitResult] = []
-    with ProcessPoolExecutor(max_workers=jobs, mp_context=process_context()) as executor:
+    try:
+        executor = ProcessPoolExecutor(max_workers=jobs, mp_context=process_context())
+    except PermissionError:
+        return collect_hits_from_sources_sequential(sources, terms, args)
+
+    with executor:
         payloads = [(source, terms, args) for source in sources]
         for result in executor.map(collect_hits_for_source_worker, payloads):
             results.append(result)
     records, observed, normalized_by_term, corpus_metadata = merge_corpus_hit_results(results)
     return records, observed, {term.term_id: term for term in terms}, normalized_by_term, corpus_metadata
+
+
+def collect_hits_from_sources_sequential(
+    sources: list[CorpusSource],
+    terms: list[TermRow],
+    args: argparse.Namespace,
+) -> tuple[
+    list[HitRecord],
+    dict[str, set[str]],
+    dict[str, TermRow],
+    dict[str, str],
+    dict[str, CorpusMetadata],
+]:
+    corpora = load_labeled_corpus_sources(sources)
+    records, observed, term_lookup, normalized_by_term = collect_hits(
+        corpora,
+        terms,
+        args,
+    )
+    return (
+        records,
+        observed,
+        term_lookup,
+        normalized_by_term,
+        corpus_metadata_from_corpora(corpora),
+    )
 
 
 def collect_hits_for_source_worker(
