@@ -36,10 +36,10 @@ Locked rule: Hebrew `גוג` (Gog; English: Gog) / `מגוג` (Magog; English: M
 
 | Corpus | Target | Target close | Synthetic close mean | Synthetic >= target | p_ge | Read |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
-| MT_WLC | Gog/Magog | 193 | 1621.46 | 73 | 0.732673 | synthetic samples can match or exceed target density |
-| MT_WLC | Beast/Dragon | 715 | 1621.46 | 48 | 0.485149 | synthetic samples can match or exceed target density |
-| UHB | Gog/Magog | 198 | 1618.89 | 73 | 0.732673 | synthetic samples can match or exceed target density |
-| UHB | Beast/Dragon | 726 | 1618.89 | 47 | 0.475248 | synthetic samples can match or exceed target density |
+| MT_WLC | Gog/Magog | 193 | 1621.47 | 73 | 0.732673 | synthetic samples can match or exceed target density |
+| MT_WLC | Beast/Dragon | 715 | 1621.47 | 48 | 0.485149 | synthetic samples can match or exceed target density |
+| UHB | Gog/Magog | 198 | 1618.87 | 73 | 0.732673 | synthetic samples can match or exceed target density |
+| UHB | Beast/Dragon | 726 | 1618.87 | 47 | 0.475248 | synthetic samples can match or exceed target density |
 
 ## Read Standard
 
