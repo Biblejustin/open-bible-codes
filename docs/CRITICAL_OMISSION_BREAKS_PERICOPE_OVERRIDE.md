@@ -33,9 +33,9 @@ The generic four Greek term lists are run together with
 Current run:
 
 - Term rows: 471.
-- Deleted blocks used: 47.
-- Deleted letters used: 3,607.
-- Broken example rows: 1,251.
+- Deleted blocks used: 48.
+- Deleted letters used: 3,656.
+- Broken example rows: 1,273.
 
 Per-passage summaries are recomputed against each passage block set, so each
 summary total matches its companion examples file:
@@ -43,6 +43,7 @@ summary total matches its companion examples file:
 - Pericope Adulterae: 35 term rows, 267 broken hits.
 - Longer Ending of Mark: 36 term rows, 258 broken hits.
 - Gethsemane angel and bloody sweat: 17 term rows, 56 broken hits.
+- Father forgive them: 10 term rows, 22 broken hits.
 - Comma Johanneum: 8 term rows, 24 broken hits.
 
 The inverse Pericope check confirms the documented John 8:6 centered Jesus hit:
@@ -53,7 +54,7 @@ The inverse Pericope check confirms the documented John 8:6 centered Jesus hit:
 Control run:
 
 - Term rows: 518.
-- Broken example rows: 1,257.
+- Broken example rows: 1,279.
 - Pericope Adulterae passage summary: 36 term rows, 268 broken hits.
 - Longer Ending of Mark passage summary: 38 term rows, 260 broken hits.
 - Frequency-control rows: 60.
@@ -73,12 +74,12 @@ The same override file also includes:
 
 - Longer Ending of Mark: Mark 16:9-20.
 - Gethsemane angel and bloody sweat: Luke 22:43-44.
-- Father forgive them: Luke 23:34a, kept as partial and skipped until sub-verse handling is explicit.
+- Father forgive them: Luke 23:34a, treated as a 49-letter normalized subspan inside Luke 23:34.
 - Comma Johanneum: 1 John 5:7.
 
 ## Cautions
 
 - Raw break counts are not significance tests.
 - Treat-as-deleted rows are a study override, not a claim that every listed passage has identical textual status.
-- Luke 23:34a is partial-verse and is not treated as a full deletion block by the current CLI.
+- Luke 23:34a is partial-verse; the CLI treats only its explicit normalized subspan as deleted.
 - The thematic Pericope cohort and matched controls are exploratory; they are not confirmatory claim language.

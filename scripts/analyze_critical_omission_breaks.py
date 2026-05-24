@@ -48,12 +48,13 @@ def main() -> int:
     args = build_parser().parse_args()
     tr = load_corpus(args.tr_config)
     critical = load_corpus(args.critical_config)
-    extra_deleted_refs, passage_refs = read_treat_as_deleted_refs(args.treat_as_deleted)
+    extra_deleted_refs, passage_refs, partial_deleted_refs = read_treat_as_deleted_refs(args.treat_as_deleted)
     omitted_blocks = classify_missing_verses(
         tr,
         critical,
         extra_deleted_refs=extra_deleted_refs,
     )
+    omitted_blocks.extend(build_partial_deleted_blocks(tr, partial_deleted_refs))
     deleted_blocks = [block for block in omitted_blocks if block.used_as_deletion]
     term_paths = TERM_PATHS + args.extra_terms
     terms = read_greek_terms(term_paths, tr)
@@ -177,21 +178,65 @@ def output_paths_for_suffix(suffix: str) -> dict[str, Path]:
     }
 
 
-def read_treat_as_deleted_refs(path: Path | None) -> tuple[set[str] | None, dict[str, set[str]]]:
+def read_treat_as_deleted_refs(
+    path: Path | None,
+) -> tuple[set[str] | None, dict[str, set[str]], list[dict[str, str]]]:
     if path is None:
-        return None, {}
+        return None, {}, []
     refs: set[str] = set()
     passage_refs: dict[str, set[str]] = {}
+    partial_refs: list[dict[str, str]] = []
     with path.open("r", encoding="utf-8", newline="") as handle:
         for row in csv.DictReader(handle):
             ref = row.get("ref", "").strip()
-            if not ref or ref.endswith("a"):
+            if not ref:
                 continue
             normalized_ref = normalize_ref_label(ref)
-            refs.add(normalized_ref)
             passage = row.get("passage", "").strip() or "override"
+            if row.get("normalized_subspan", "").strip():
+                partial_refs.append(
+                    {
+                        "ref": normalized_ref,
+                        "base_ref": normalize_ref_label(partial_ref_base(ref)),
+                        "passage": passage,
+                        "normalized_subspan": row["normalized_subspan"].strip(),
+                    }
+                )
+            else:
+                refs.add(normalized_ref)
             passage_refs.setdefault(passage, set()).add(normalized_ref)
-    return refs, passage_refs
+    return refs, passage_refs, partial_refs
+
+
+def build_partial_deleted_blocks(corpus: Corpus, partial_refs: list[dict[str, str]]) -> list[OmittedBlock]:
+    verses_by_ref = {verse.ref: verse for verse in corpus.verses}
+    blocks: list[OmittedBlock] = []
+    for spec in partial_refs:
+        verse = verses_by_ref.get(spec["base_ref"])
+        if verse is None:
+            raise RuntimeError(f"partial override base ref not found: {spec['base_ref']}")
+        normalized_verse = normalize_for_corpus(corpus, verse.raw_text)
+        subspan = spec["normalized_subspan"]
+        start_local = normalized_verse.find(subspan)
+        if start_local < 0:
+            raise RuntimeError(f"partial override subspan not found: {spec['ref']}")
+        start = verse.norm_start + start_local
+        end = start + len(subspan) - 1
+        blocks.append(
+            OmittedBlock(
+                ref=spec["ref"],
+                start=start,
+                end=end,
+                length=len(subspan),
+                status="explicit_deleted_partial_ref",
+                used_as_deletion=True,
+            )
+        )
+    return blocks
+
+
+def partial_ref_base(ref: str) -> str:
+    return ref.rstrip("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
 
 def normalize_ref_label(ref: str) -> str:
