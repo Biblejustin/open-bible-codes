@@ -42,6 +42,55 @@ MANIFEST_OUT = Path("reports/critical_omission_breaks.manifest.json")
 MIN_SKIP = 2
 MAX_SKIP = 50
 MIN_TERM_LENGTH = 3
+SUMMARY_FIELDNAMES = [
+    "term_source",
+    "term_id",
+    "concept",
+    "category",
+    "term",
+    "normalized_term",
+    "normalized_length",
+    "tr_hits",
+    "span_intersect_hits",
+    "broken_removed_letter_hits",
+    "broken_spacing_hits",
+    "broken_total_hits",
+    "preserved_across_omission_hits",
+    "status",
+]
+EXAMPLE_FIELDNAMES = [
+    "term_source",
+    "term_id",
+    "concept",
+    "category",
+    "term",
+    "normalized_term",
+    "skip",
+    "direction",
+    "start_offset",
+    "end_offset",
+    "span_letters",
+    "start_ref",
+    "end_ref",
+    "center_ref",
+    "center_word_index",
+    "center_word",
+    "center_normalized_word",
+    "break_type",
+    "omitted_refs_in_span",
+    "omitted_refs_with_sequence_letters",
+]
+BY_VERSE_FIELDNAMES = [
+    "omitted_ref",
+    "norm_start",
+    "norm_end",
+    "norm_length",
+    "span_intersect_hits",
+    "broken_removed_letter_hits",
+    "broken_spacing_hits",
+    "broken_total_hits",
+]
+MISSING_FIELDNAMES = ["ref", "start", "end", "length", "status", "used_as_deletion"]
 
 
 def main() -> int:
@@ -62,7 +111,7 @@ def main() -> int:
         terms = terms[: args.max_terms]
     output_paths = output_paths_for_suffix(args.out_suffix)
 
-    write_rows(output_paths["missing"], [block.__dict__ for block in omitted_blocks])
+    write_rows(output_paths["missing"], [block.__dict__ for block in omitted_blocks], MISSING_FIELDNAMES)
 
     by_verse = {
         block.ref: {
@@ -116,9 +165,9 @@ def main() -> int:
         record.as_row()
         for record in sorted(broken_hit_records, key=broken_hit_sort_key)
     ]
-    write_rows(output_paths["summary"], summary_rows)
-    write_rows(output_paths["examples"], example_rows)
-    write_rows(output_paths["by_verse"], list(by_verse.values()))
+    write_rows(output_paths["summary"], summary_rows, SUMMARY_FIELDNAMES)
+    write_rows(output_paths["examples"], example_rows, EXAMPLE_FIELDNAMES)
+    write_rows(output_paths["by_verse"], list(by_verse.values()), BY_VERSE_FIELDNAMES)
     write_manifest(
         output_paths["manifest"],
         tr,
@@ -390,9 +439,9 @@ def write_passage_outputs(
         ]
         passage_summary = passage_summary_rows_for_blocks(corpus, stats_by_query, passage_blocks, matches)
         passage_by_verse = [row for ref, row in by_verse.items() if ref in refs]
-        write_rows(prefix.with_name(prefix.name + "_summary.csv"), passage_summary)
-        write_rows(prefix.with_name(prefix.name + "_examples.csv"), passage_examples)
-        write_rows(prefix.with_name(prefix.name + "_by_verse.csv"), passage_by_verse)
+        write_rows(prefix.with_name(prefix.name + "_summary.csv"), passage_summary, SUMMARY_FIELDNAMES)
+        write_rows(prefix.with_name(prefix.name + "_examples.csv"), passage_examples, EXAMPLE_FIELDNAMES)
+        write_rows(prefix.with_name(prefix.name + "_by_verse.csv"), passage_by_verse, BY_VERSE_FIELDNAMES)
 
 
 def passage_summary_rows_for_blocks(
@@ -520,9 +569,9 @@ def example_row(
     }
 
 
-def write_rows(path: Path, rows: list[dict[str, object]]) -> None:
+def write_rows(path: Path, rows: list[dict[str, object]], fieldnames: list[str] | None = None) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    fieldnames = list(rows[0].keys()) if rows else []
+    fieldnames = fieldnames if fieldnames is not None else list(rows[0].keys()) if rows else []
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()

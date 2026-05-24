@@ -1,11 +1,17 @@
 import unittest
+import tempfile
 from array import array
 from pathlib import Path
 from types import SimpleNamespace
 
 from els.corpus import Corpus, VerseSpan
 from els.critical import OmittedBlock, TermBreakStats
-from scripts.analyze_critical_omission_breaks import TERM_PATHS, passage_summary_rows_for_blocks, term_paths_for_args
+from scripts.analyze_critical_omission_breaks import (
+    TERM_PATHS,
+    passage_summary_rows_for_blocks,
+    term_paths_for_args,
+    write_rows,
+)
 
 
 class PassageSummaryRowsTests(unittest.TestCase):
@@ -74,6 +80,16 @@ class TermPathSelectionTests(unittest.TestCase):
         paths = term_paths_for_args(args)
 
         self.assertEqual(paths, [Path("terms/extra.csv")])
+
+
+class WriteRowsTests(unittest.TestCase):
+    def test_empty_rows_keep_explicit_header(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "empty.csv"
+
+            write_rows(path, [], ["alpha", "beta"])
+
+            self.assertEqual(path.read_text(encoding="utf-8"), "alpha,beta\n")
 
 
 def _corpus(text: str) -> Corpus:
