@@ -5,10 +5,13 @@ from array import array
 from pathlib import Path
 
 from els.corpus import (
+    Corpus,
+    VerseSpan,
     _normalize_ref_number,
     _split_osis_ref,
     load_corpus,
     source_files_for_cache,
+    splice_verses_into_corpus,
 )
 
 
@@ -93,6 +96,55 @@ class CorpusTests(unittest.TestCase):
             self.assertEqual(first.text, "ιησουσ")
             self.assertEqual(second.text, "χριστοσ")
             self.assertEqual(len(list(cache_dir.glob("*.pickle"))), 2)
+
+    def test_splice_verses_inserts_donor_refs_in_donor_order(self) -> None:
+        base = _toy_corpus(
+            "base",
+            [
+                ("B", "MAT 1:1", "MAT", "1", "1", "αα"),
+                ("B", "MAT 1:3", "MAT", "1", "3", "γγ"),
+            ],
+        )
+        donor = _toy_corpus(
+            "donor",
+            [
+                ("D", "MAT 1:1", "MAT", "1", "1", "xx"),
+                ("D", "MAT 1:2", "MAT", "1", "2", "ββ"),
+                ("D", "MAT 1:3", "MAT", "1", "3", "yy"),
+            ],
+        )
+
+        spliced = splice_verses_into_corpus(base, donor, ["MAT 1:2"])
+
+        self.assertEqual(spliced.text, "ααββγγ")
+        self.assertEqual([verse.ref for verse in spliced.verses], ["MAT 1:1", "MAT 1:2", "MAT 1:3"])
+        self.assertEqual([verse.source for verse in spliced.verses], ["B", "D", "B"])
+        self.assertEqual(
+            [spliced.ref_at(i) for i in range(len(spliced.text))],
+            ["MAT 1:1"] * 2 + ["MAT 1:2"] * 2 + ["MAT 1:3"] * 2,
+        )
+
+    def test_splice_verses_maps_sbl_book_codes_to_ebible_donor_order(self) -> None:
+        base = _toy_corpus(
+            "sbl",
+            [
+                ("B", "Matt 1:1", "Matt", "1", "1", "αα"),
+                ("B", "Matt 1:3", "Matt", "1", "3", "γγ"),
+            ],
+        )
+        donor = _toy_corpus(
+            "tr",
+            [
+                ("D", "MAT 1:1", "MAT", "1", "1", "xx"),
+                ("D", "MAT 1:2", "MAT", "1", "2", "ββ"),
+                ("D", "MAT 1:3", "MAT", "1", "3", "yy"),
+            ],
+        )
+
+        spliced = splice_verses_into_corpus(base, donor, ["MAT 1:2"])
+
+        self.assertEqual(spliced.text, "ααββγγ")
+        self.assertEqual([verse.ref for verse in spliced.verses], ["Matt 1:1", "MAT 1:2", "Matt 1:3"])
 
     def test_uxlc_loader_uses_ketiv_by_default(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -326,6 +378,38 @@ class CorpusTests(unittest.TestCase):
                 [path.name for path in source_files_for_cache(root, "mam_html_dir")],
                 ["A1-Genesis.html"],
             )
+
+
+def _toy_corpus(name: str, rows: list[tuple[str, str, str, str, str, str]]) -> Corpus:
+    verses: list[VerseSpan] = []
+    letters: list[str] = []
+    position_to_verse: list[int] = []
+    for source, ref, book, chapter, verse_num, text in rows:
+        start = len(letters)
+        verse_index = len(verses)
+        letters.extend(text)
+        position_to_verse.extend([verse_index] * len(text))
+        verses.append(
+            VerseSpan(
+                source,
+                ref,
+                book,
+                chapter,
+                verse_num,
+                text,
+                start,
+                len(letters) - 1,
+                len(text),
+            )
+        )
+    return Corpus(
+        name=name,
+        language="greek",
+        keep_hebrew_final_forms=False,
+        text="".join(letters),
+        verses=tuple(verses),
+        position_to_verse=array("i", position_to_verse),
+    )
 
 
 if __name__ == "__main__":
