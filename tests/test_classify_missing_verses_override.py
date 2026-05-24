@@ -61,6 +61,54 @@ class ClassifyMissingVersesOverrideTests(unittest.TestCase):
         self.assertEqual([block.ref for block in omitted], ["MAT 1:2"])
         self.assertEqual(omitted[0].status, "deleted_block")
 
+    def test_adjacent_merge_allows_single_movable_nu_difference(self) -> None:
+        tr, sbl = _corpora(
+            [("ACT 19:41", "ACT", "19", "41", "και ταυτα ειπων απελυσε την εκκλησιαν")],
+            [
+                (
+                    "Acts 19:40",
+                    "Acts",
+                    "19",
+                    "40",
+                    "περι της συστροφης ταυτης και ταυτα ειπων απελυσεν την εκκλησιαν",
+                )
+            ],
+        )
+
+        omitted = classify_missing_verses(tr, sbl)
+
+        self.assertEqual([block.ref for block in omitted], ["ACT 19:41"])
+        self.assertEqual(omitted[0].status, "adjacent_merge")
+        self.assertFalse(omitted[0].used_as_deletion)
+
+    def test_renumbered_subscription_is_not_deletion(self) -> None:
+        tr, sbl = _corpora(
+            [
+                (
+                    "2CO 13:14",
+                    "2CO",
+                    "13",
+                    "14",
+                    "η χαρις του κυριου ιησου χριστου και η αγαπη του θεου και η κοινωνια του αγιου πνευματος μετα παντων υμων αμην προς κορινθιους δευτερα εγραφη",
+                )
+            ],
+            [
+                (
+                    "2Cor 13:13",
+                    "2Cor",
+                    "13",
+                    "13",
+                    "η χαρις του κυριου ιησου χριστου και η αγαπη του θεου και η κοινωνια του αγιου πνευματος μετα παντων υμων",
+                )
+            ],
+        )
+
+        omitted = classify_missing_verses(tr, sbl)
+
+        self.assertEqual([block.ref for block in omitted], ["2CO 13:14"])
+        self.assertEqual(omitted[0].status, "renumbered_minus_amen_subscription")
+        self.assertFalse(omitted[0].used_as_deletion)
+
 
 def _corpora(tr_rows, sbl_rows):
     with tempfile.TemporaryDirectory() as tmp:

@@ -29,8 +29,8 @@ inserted back into the text.
 
 Current run:
 
-- Spliced blocks: 20.
-- Broken example rows: 276.
+- Spliced blocks: 18.
+- Broken example rows: 237.
 - Break type: spacing only, because insertion does not remove SBLGNT letters.
 
 ## Cautions

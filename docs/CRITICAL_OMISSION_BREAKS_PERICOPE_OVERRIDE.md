@@ -35,9 +35,9 @@ be read separately.
 Current run:
 
 - Term rows: 471.
-- Deleted blocks used: 48.
-- Deleted letters used: 3,656.
-- Broken example rows: 1,273.
+- Deleted blocks used: 46.
+- Deleted letters used: 3,467.
+- Broken example rows: 1,185.
 
 Per-passage summaries are recomputed against each passage block set, so each
 summary total matches its companion examples file:
@@ -50,9 +50,9 @@ summary total matches its companion examples file:
 
 Separate cohort runs:
 
-- Generic-only run: 458 term rows, 1,271 broken example rows.
+- Generic-only run: 458 term rows, 1,184 broken example rows.
 - Generic-only Pericope Adulterae passage summary: 34 term rows, 266 broken hits.
-- Pericope-thematic-only run: 13 term rows, 2 broken example rows.
+- Pericope-thematic-only run: 13 term rows, 1 broken example row.
 - Pericope-thematic-only Pericope Adulterae passage summary: 1 term row, 1 broken hit.
 
 The inverse Pericope check confirms the documented John 8:6 centered Jesus hit:
@@ -63,7 +63,7 @@ The inverse Pericope check confirms the documented John 8:6 centered Jesus hit:
 Control run:
 
 - Term rows: 518.
-- Broken example rows: 1,279.
+- Broken example rows: 1,192.
 - Pericope Adulterae passage summary: 36 term rows, 268 broken hits.
 - Longer Ending of Mark passage summary: 38 term rows, 260 broken hits.
 - Frequency-control rows: 60.

@@ -29,10 +29,10 @@ refs. It currently matches verse count, not letter count.
 
 Current 1000-shuffle protocol run:
 
-- Observed breaks: 645.
-- Null min/median/max: 556 / 727 / 913.
-- Greater-or-equal tail: 0.9710.
-- Lesser-or-equal tail: 0.0300.
+- Observed breaks: 558.
+- Null min/median/max: 525 / 657 / 807.
+- Greater-or-equal tail: 0.9910.
+- Lesser-or-equal tail: 0.0100.
 - Per-block exploratory p-values and BH q-values are in
   `reports/critical_omission_breaks_null/null_per_block.csv`.
 

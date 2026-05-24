@@ -159,17 +159,11 @@ def classify_missing_verses(
         normalized = normalize_for_corpus(tr, verse.raw_text)
         status = "explicit_deleted_ref" if explicit_deletion else "deleted_block"
         used_as_deletion = True
-        if not explicit_deletion and is_adjacent_merge(normalized, verse, critical_book, critical_verses):
-            status = "adjacent_merge"
-            used_as_deletion = False
-        elif not explicit_deletion and normalized.endswith("αμην") and is_adjacent_merge(
-            normalized[:-4],
-            verse,
-            critical_book,
-            critical_verses,
-        ):
-            status = "renumbered_minus_amen"
-            used_as_deletion = False
+        if not explicit_deletion:
+            merge_status = adjacent_merge_status(normalized, verse, critical_book, critical_verses)
+            if merge_status is not None:
+                status = merge_status
+                used_as_deletion = False
         blocks.append(
             OmittedBlock(
                 ref=verse.ref,
@@ -439,12 +433,22 @@ def is_adjacent_merge(
     critical_book: str,
     critical_verses: list[VerseSpan],
 ) -> bool:
+    return adjacent_merge_status(normalized, verse, critical_book, critical_verses) is not None
+
+
+def adjacent_merge_status(
+    normalized: str,
+    verse: VerseSpan,
+    critical_book: str,
+    critical_verses: list[VerseSpan],
+) -> str | None:
     if not normalized:
-        return False
+        return None
     try:
         tr_verse_num = int(verse.verse)
     except ValueError:
-        return False
+        return None
+    variants = adjacent_merge_variants(normalized)
     for critical_verse in critical_verses:
         if critical_verse.book != critical_book or critical_verse.chapter != verse.chapter:
             continue
@@ -455,6 +459,86 @@ def is_adjacent_merge(
         if abs(critical_verse_num - tr_verse_num) > 1:
             continue
         critical_normalized = normalize_text(critical_verse.raw_text, "greek")
-        if normalized in critical_normalized:
-            return True
+        for candidate, status in variants:
+            if adjacent_text_matches(candidate, critical_normalized):
+                return status
+    return None
+
+
+def adjacent_merge_variants(normalized: str) -> list[tuple[str, str]]:
+    variants = [(normalized, "adjacent_merge")]
+    if normalized.endswith("αμην"):
+        variants.append((normalized[:-4], "renumbered_minus_amen"))
+    without_subscription = strip_trailing_greek_subscription(normalized)
+    if without_subscription != normalized:
+        variants.append((without_subscription, "renumbered_minus_amen_subscription"))
+        if without_subscription.endswith("αμην"):
+            variants.append((without_subscription[:-4], "renumbered_minus_amen_subscription"))
+    return [(candidate, status) for candidate, status in variants if candidate]
+
+
+def strip_trailing_greek_subscription(normalized: str) -> str:
+    marker = "αμηνπροσ"
+    index = normalized.find(marker, len(normalized) // 2)
+    if index == -1:
+        return normalized
+    return normalized[:index]
+
+
+def adjacent_text_matches(needle: str, haystack: str) -> bool:
+    if needle in haystack:
+        return True
+    if len(needle) < 20:
+        return False
+    return near_substring_one_edit(needle, haystack)
+
+
+def near_substring_one_edit(needle: str, haystack: str) -> bool:
+    for size in range(max(1, len(needle) - 1), len(needle) + 2):
+        if size > len(haystack):
+            continue
+        for start in range(0, len(haystack) - size + 1):
+            candidate = haystack[start : start + size]
+            if within_one_edit(needle, candidate) and (
+                common_prefix_len(needle, candidate) >= 8 or common_suffix_len(needle, candidate) >= 8
+            ):
+                return True
     return False
+
+
+def within_one_edit(left: str, right: str) -> bool:
+    if abs(len(left) - len(right)) > 1:
+        return False
+    if len(left) == len(right):
+        return sum(1 for a, b in zip(left, right) if a != b) <= 1
+    if len(left) > len(right):
+        left, right = right, left
+    i = j = edits = 0
+    while i < len(left) and j < len(right):
+        if left[i] == right[j]:
+            i += 1
+            j += 1
+            continue
+        edits += 1
+        if edits > 1:
+            return False
+        j += 1
+    return True
+
+
+def common_prefix_len(left: str, right: str) -> int:
+    count = 0
+    for a, b in zip(left, right):
+        if a != b:
+            break
+        count += 1
+    return count
+
+
+def common_suffix_len(left: str, right: str) -> int:
+    count = 0
+    for a, b in zip(reversed(left), reversed(right)):
+        if a != b:
+            break
+        count += 1
+    return count

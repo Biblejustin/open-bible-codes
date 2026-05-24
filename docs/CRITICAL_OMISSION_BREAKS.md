@@ -35,31 +35,30 @@ Current input stats:
 - Greek term rows checked: 458.
 - TR hits checked: 172,752.
 - Ref-missing verses: 20.
-- Deleted blocks used: 20.
-- Deleted letters used: 1,479.
+- Deleted blocks used: 18.
+- Deleted letters used: 1,290.
 
 Broken hits:
 
-- Broken total: 645.
-- Broken by removed ELS letter: 637.
-- Broken by spacing only: 8.
+- Broken total: 558.
+- Broken by removed ELS letter: 554.
+- Broken by spacing only: 4.
 - Preserved across deleted block: 0.
 
 Top broken terms:
 
-- Eve: `ευα`, 151.
-- United Nations: `οηε`, 86.
-- Ur: `ουρ`, 55.
-- Noah: `νωε`, 46.
-- Hul: `ουλ`, 37.
-- USA: `ηπα`, 29.
-- Temple: `ναοσ`, 21.
-- NATO: `νατο`, 20.
+- Eve: `ευα`, 135.
+- United Nations: `οηε`, 74.
+- Noah: `νωε`, 45.
+- Ur: `ουρ`, 45.
+- Hul: `ουλ`, 32.
+- USA: `ηπα`, 20.
+- NATO: `νατο`, 18.
+- Temple: `ναοσ`, 17.
 
 Top deleted blocks:
 
-- 2 Corinthians 13:14: 60 broken hits.
-- Romans 16:25: 56.
+- Romans 16:25: 56 broken hits.
 - Mark 11:26: 47.
 - Romans 16:27: 44.
 - Romans 16:26: 42.
@@ -69,7 +68,7 @@ Top deleted blocks:
 
 ## Follow-Ups
 
-The follow-up protocol keeps all break counts on the same engine path:
+The follow-up protocol keeps break counts on the same shared break-stat helpers:
 
 - Reverse insertion survival: `docs/CRITICAL_OMISSION_BREAKS_REVERSE.md`.
 - Cross-tradition status in BYZ_NT and TCG_NT: `docs/CRITICAL_OMISSION_BREAKS_CROSS_TRADITION.md`.
@@ -77,7 +76,7 @@ The follow-up protocol keeps all break counts on the same engine path:
 - Length-stratified read: `docs/CRITICAL_OMISSION_BREAKS_LENGTH_STRATIFIED.md`.
 - Disputed-passage override and Pericope checks: `docs/CRITICAL_OMISSION_BREAKS_PERICOPE_OVERRIDE.md`.
 
-Latest null run: observed 645 breaks, p_ge 0.9710, null median 727.
+Latest null run: observed 558 breaks, p_ge 0.9910, null median 657.
 
 ## Cautions
 
