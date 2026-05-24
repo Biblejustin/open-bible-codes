@@ -1,20 +1,8 @@
 # Critical Omission Breaks
 
-Question:
+## Setup
 
-- Do TR ELS hits break when verse blocks absent from SBLGNT are removed?
-
-Method:
-
-- Base text: local TR Greek NT.
-- Critical text: SBLGNT.
-- Missing refs detected by TR ref vs SBLGNT ref.
-- Adjacent merge and renumber cases are not counted as deleted blocks.
-- ELS scope: Greek terms from theological, modern-name/date, and Table-of-Nations lists.
-- Skip range: 2..50, both directions.
-- Break rule: a TR hit breaks if one or more ELS letters fall inside a deleted block, or if the deleted block changes equal spacing between retained letters.
-
-Command:
+Question: do TR ELS hits break when verse blocks absent from SBLGNT are removed?
 
 ```bash
 python3 -m scripts.analyze_critical_omission_breaks
@@ -28,7 +16,19 @@ Outputs:
 - `reports/critical_omission_breaks_by_verse.csv`
 - `reports/critical_omission_breaks.manifest.json`
 
-Current Input Stats:
+## Method
+
+- Base text: local TR Greek NT.
+- Critical text: SBLGNT.
+- Missing refs detected by TR ref vs SBLGNT ref.
+- Adjacent merge and renumber cases are not counted as deleted blocks.
+- ELS scope: Greek terms from theological, modern-name/date, Table-of-Nations, and prophetic lists.
+- Skip range: 2..50, both directions.
+- Break rule: a TR hit breaks if one or more ELS letters fall inside a deleted block, or if the deleted block changes equal spacing between retained letters.
+
+## Results
+
+Current input stats:
 
 - TR Greek NT: 690,831 normalized letters; 7,957 verses.
 - SBLGNT: 679,879 normalized letters; 7,939 verses.
@@ -38,14 +38,14 @@ Current Input Stats:
 - Deleted blocks used: 20.
 - Deleted letters used: 1,479.
 
-Broken Hits:
+Broken hits:
 
 - Broken total: 645.
 - Broken by removed ELS letter: 637.
 - Broken by spacing only: 8.
 - Preserved across deleted block: 0.
 
-Top Broken Terms:
+Top broken terms:
 
 - Eve: `ευα`, 151.
 - United Nations: `οηε`, 86.
@@ -56,7 +56,7 @@ Top Broken Terms:
 - Temple: `ναοσ`, 21.
 - NATO: `νατο`, 20.
 
-Top Deleted Blocks:
+Top deleted blocks:
 
 - 2 Corinthians 13:14: 60 broken hits.
 - Romans 16:25: 56.
@@ -67,7 +67,7 @@ Top Deleted Blocks:
 - John 5:4: 36.
 - Mark 9:44: 34.
 
-Cautions:
+## Cautions
 
 - This isolates verse-block removal only.
 - It does not measure all TR vs critical textual variants.

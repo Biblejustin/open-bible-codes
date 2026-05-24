@@ -3,7 +3,7 @@ import unittest
 from pathlib import Path
 
 from els.corpus import load_corpus
-from els.critical import OmittedBlock, classify_missing_verses
+from els.critical import BlockPlacement, OmittedBlock, classify_missing_verses
 
 
 class ClassifyMissingVersesOverrideTests(unittest.TestCase):
@@ -31,6 +31,17 @@ class ClassifyMissingVersesOverrideTests(unittest.TestCase):
             [("Matt 1:1", "Matt", "1", "1", "αβγ")],
         )
         override = [OmittedBlock("manual", 0, 2, 3, "manual", True)]
+
+        omitted = classify_missing_verses(tr, sbl, deleted_blocks_override=override)
+
+        self.assertIs(omitted, override)
+
+    def test_deleted_blocks_override_accepts_block_placements(self) -> None:
+        tr, sbl = _corpora(
+            [("MAT 1:1", "MAT", "1", "1", "αβγ")],
+            [("Matt 1:1", "Matt", "1", "1", "αβγ")],
+        )
+        override = [BlockPlacement("manual", 0, 2, 3, 1)]
 
         omitted = classify_missing_verses(tr, sbl, deleted_blocks_override=override)
 

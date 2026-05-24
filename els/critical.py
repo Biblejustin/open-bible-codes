@@ -142,8 +142,9 @@ def classify_missing_verses(
     critical: Corpus,
     *,
     extra_deleted_refs: set[str] | None = None,
-    deleted_blocks_override: list[OmittedBlock] | None = None,
-) -> list[OmittedBlock]:
+    deleted_blocks_override: list[OmittedBlock | BlockPlacement] | None = None,
+) -> list[OmittedBlock | BlockPlacement]:
+    """Return blocks to treat as deletions for omission-break analysis."""
     if deleted_blocks_override is not None:
         return deleted_blocks_override
     critical_refs = {(verse.book, verse.chapter, verse.verse) for verse in critical.verses}
@@ -194,6 +195,7 @@ def count_breaks_for_blocks(
     update_stats: bool = True,
     collect_broken_hits: bool = True,
 ) -> tuple[int, list[int], list[BrokenHit]]:
+    """Count hits broken by deleting verse-aligned blocks from a corpus."""
     deleted_blocks = [block for block in blocks if block.used_as_deletion]
     per_block_breaks = [0 for _block in deleted_blocks]
     block_index = {block.ref: index for index, block in enumerate(deleted_blocks)}
@@ -285,6 +287,7 @@ def count_insertion_breaks_for_blocks(
     max_skip: int,
     direction: str = "both",
 ) -> tuple[int, list[int], list[BrokenHit]]:
+    """Count base-corpus hits whose spacing breaks when blocks are inserted."""
     inserted_blocks = [block for block in blocks if block.used_as_deletion]
     per_block_breaks = [0 for _block in inserted_blocks]
     block_index = {block.ref: index for index, block in enumerate(inserted_blocks)}
