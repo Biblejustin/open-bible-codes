@@ -184,17 +184,17 @@ Supplemental open English controls:
 - `protocols/supplemental_english_controls.toml`
 
 These controls currently add AKJV from the official AKJV text ZIP, CPDV from
-the CrossWire CPDV source archive, five BibleCorps source archives, and four
+the CrossWire CPDV source archive, six BibleCorps source archives, and four
 OpenEnglishBible base-text folders. The official AKJV page identifies the AKJV
 as public domain and based on the KJV; the CrossWire CPDV module page
 identifies CPDV as public domain and translated from Latin Vulgate editions.
-BibleCorps metadata identifies Anderson, AV1611, and DRC1750 as public-domain
-source text, and DEB/PET as CC BY-SA 4.0 sources. OpenEnglishBible's USFM
-repository marks the Kent, McFadyen, Moffatt, and TCNT base files freely
-distributable; the OEB FAQ identifies TCNT 1904, Kent, and McFadyen as
-public-domain OEB base texts and TCNT as Westcott-Hort NT tradition. Raw and
-processed source text stays under ignored `data/raw/` and `data/processed/`;
-generated reports stay under ignored `reports/`.
+BibleCorps metadata identifies Anderson, AV1611, AV1811, and DRC1750 as
+public-domain source text, and DEB/PET as CC BY-SA 4.0 sources.
+OpenEnglishBible's USFM repository marks the Kent, McFadyen, Moffatt, and TCNT
+base files freely distributable; the OEB FAQ identifies TCNT 1904, Kent, and
+McFadyen as public-domain OEB base texts and TCNT as Westcott-Hort NT
+tradition. Raw and processed source text stays under ignored `data/raw/` and
+`data/processed/`; generated reports stay under ignored `reports/`.
 
 Use:
 

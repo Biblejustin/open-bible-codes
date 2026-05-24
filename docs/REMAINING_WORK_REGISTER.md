@@ -570,7 +570,7 @@ Current queue after the BibleGateway/eBible audit pass:
 - Open.Bible English controls: 0 `needs_audit`, 4 `broad_tradition`.
 - Original Douay-Rheims English controls: 0 `needs_audit`, 1
   `broad_tradition`.
-- Supplemental open English controls: 0 `needs_audit`, 11 `broad_tradition`.
+- Supplemental open English controls: 0 `needs_audit`, 12 `broad_tradition`.
 - eBible rows moved to broad grouping: `ASVBT`, `BSB`, `E2T`, `FBV`, `F35`,
   `LSV`, `MSB`, `OURB`, `OEBCW`, `OEB`, `BBE`, `NOY`, `PEV`, `T4T`, `ULB`,
   and `OJB`.
@@ -605,12 +605,16 @@ Current queue after the BibleGateway/eBible audit pass:
   English control, not as a Greek/Hebrew manuscript witness.
 - Supplemental open controls track AKJV from the official public-domain text
   ZIP, CPDV from CrossWire's public-domain source archive, Anderson 1864 from
-  BibleCorps public-domain source text, AV1611 and DRC1750 from BibleCorps
+  BibleCorps public-domain source text, AV1611, AV1811, and DRC1750 from BibleCorps
   public-domain source archives, and DEB/PET from BibleCorps CC BY-SA source
   archives. They also track OpenEnglishBible base-text USFM rows for Kent
   Hosea, McFadyen Psalms/Proverbs, Moffatt OT portions, and TCNT 1904. The OEB
   repository marks these files freely distributable; keep them as broad surface
   controls, not edition-level manuscript witnesses.
+- Additional BibleCorps sources checked but left out for now: GTP front matter
+  identifies CC BY-ND 4.0 despite the repository name, LEB has custom
+  distribution/reporting restrictions, and AV2023 is a duplicate Gutenberg KJV
+  package with non-biblical trailing text in the final imported verse.
 - Open.Bible English API search was rechecked after AFINT import. The remaining
   text rows are either already represented by eBible controls, marked NC/ND or
   ND, a non-meaningful DBL test version, or mixed-license enough to leave out
@@ -804,26 +808,28 @@ worksheet guarding:
   passed with 1 included control, zero missing controls, and 1,303 count rows.
 - Supplemental open controls are tracked in
   `configs/supplemental_english_controls.csv` for AKJV, ANDERSON, AV1611,
-  CPDV, DEB, DRC1750, PET, KENT, MCFADYEN, MOFFATT, and TCNT. Raw and processed
+  AV1811, CPDV, DEB, DRC1750, PET, KENT, MCFADYEN, MOFFATT, and TCNT. Raw and processed
   source files stay under ignored `data/raw/supplemental/` and
   `data/processed/supplemental/`; current import wrote 31,102 AKJV verses,
-  7,946 ANDERSON verses, 36,680 AV1611 verses, 35,809 CPDV verses, 30,794 DEB
-  verses, 35,813 DRC1750 verses, 7,753 PET verses, 197 KENT verses, 3,183
-  MCFADYEN verses, 2,575 MOFFATT verses, and 7,940 TCNT verses. `python3 -m
+  7,946 ANDERSON verses, 36,680 AV1611 verses, 31,102 AV1811 verses, 35,809
+  CPDV verses, 30,794 DEB verses, 35,813 DRC1750 verses, 7,753 PET verses, 197
+  KENT verses, 3,183 MCFADYEN verses, 2,575 MOFFATT verses, and 7,940 TCNT verses. `python3 -m
   scripts.run_protocol protocols/supplemental_english_controls.toml --resume`
-  passed with 11 included controls, zero missing controls, and 14,333 count
+  passed with 12 included controls, zero missing controls, and 15,636 count
   rows.
 - `python3 -m scripts.run_protocol protocols/english_version_control_triage.toml --resume`
-  now compares BibleGateway-overlap English rows against 65 merged open
+  now compares BibleGateway-overlap English rows against 66 merged open
   controls from eBible, Door43, OET, OTB, Open.Bible, ODR, and supplemental
   sources; context review
   promoted no seed terms.
 - `python3 -m pytest tests/test_otb_english_controls.py tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py tests/test_real_report_run.py -q` passed: 75 tests and 124 subtests.
 - `python3 -m pytest tests/test_openbible_english_controls.py tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py tests/test_real_report_run.py -q` passed: 73 tests and 128 subtests.
 - `python3 -m pytest tests/test_supplemental_english_controls.py tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py tests/test_real_report_run.py -q` passed: 75 tests and 124 subtests.
+- `python3 -m pytest tests/test_supplemental_english_controls.py tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py tests/test_real_report_run.py -q` passed: 76 tests and 124 subtests after adding AV1811.
 - `python3 -m pytest tests/test_ebible_usfm.py tests/test_supplemental_english_controls.py tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py -q` passed: 27 tests and 124 subtests after adding OpenEnglishBible base controls.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_supplemental_controls.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_oeb_supplemental_controls.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_av1811_controls.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_otb_controls.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_openbible_controls.json` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.

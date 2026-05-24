@@ -22,6 +22,7 @@ class SupplementalEnglishControlTests(unittest.TestCase):
                 "AKJV",
                 "ANDERSON",
                 "AV1611",
+                "AV1811",
                 "CPDV",
                 "DEB",
                 "DRC1750",
@@ -58,6 +59,12 @@ class SupplementalEnglishControlTests(unittest.TestCase):
         self.assertEqual(rows["AV1611"]["coverage"], "with_apocrypha")
         self.assertIn("Public domain", rows["AV1611"]["license_label"])
         self.assertEqual(rows["AV1611"]["source_path_prefix"], "PSFM/")
+
+        self.assertEqual(rows["AV1811"]["source_format"], "biblecorps_usfm_zip")
+        self.assertEqual(rows["AV1811"]["coverage"], "full")
+        self.assertIn("Public domain", rows["AV1811"]["license_label"])
+        self.assertEqual(rows["AV1811"]["source_path_prefix"], "")
+        self.assertIn("KJV", rows["AV1811"]["source_family"])
 
         self.assertEqual(rows["DEB"]["source_format"], "biblecorps_usfm_zip")
         self.assertEqual(rows["DEB"]["coverage"], "full_draft")

@@ -43,7 +43,7 @@ stated are usable only as English surface controls, not manuscript witnesses.
 | OTB English controls | 1 | 0 | 1 |
 | Open.Bible English controls | 4 | 0 | 4 |
 | Original Douay-Rheims English controls | 1 | 0 | 1 |
-| Supplemental open English controls | 11 | 0 | 11 |
+| Supplemental open English controls | 12 | 0 | 12 |
 
 ## Validation
 
@@ -118,6 +118,7 @@ None after this pass.
 | CPDV | `broad_tradition` | CrossWire CPDV module identifies the translation as public domain and based on Sixtine-Clementine Latin Vulgate editions; use as a modern Vulgate-line English control: <https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=CPDV> |
 | ANDERSON | `broad_tradition` | BibleCorps Anderson README identifies the public-domain 1864 Anderson New Testament source and Internet Archive facsimile; use as a historical Greek-NT English control: <https://github.com/BibleCorps/ENG-B1-Anderson1864-pd-USFM> |
 | AV1611 | `broad_tradition` | BibleCorps AV1611 source preserves the 1611 Authorized Version wording and front matter; use as a historical KJV-line English control: <https://github.com/BibleCorps/ENG-B-AV1611-pd-PSFM> |
+| AV1811 | `broad_tradition` | BibleCorps AV1811 source identifies the Paragraph Bible source as an 1838 public-domain Authorized Version edition; use as a historical KJV-line paragraphing control: <https://github.com/BibleCorps/ENG-B-AV1811-pd-Cambridge-Paragraph-Bible-PSFM> |
 | DEB | `broad_tradition` | BibleCorps Dynamic English Bible README marks the text as checking/not ready; Door43 YAML metadata identifies CC BY-SA 4.0 and source relations, so use as a draft surface English control: <https://github.com/BibleCorps/ENG-B-DEB2020-cc-PSFM> |
 | DRC1750 | `broad_tradition` | DRC1750 front matter identifies the electronic edition as public domain and translated from the Latin Vulgate, revised according to the Clementine edition; use as a historical Vulgate-line English control: <https://github.com/BibleCorps/ENG-B-DRC1750-pd-PSFM> |
 | PET | `broad_tradition` | PET front matter identifies CC BY-SA 4.0 and describes PET as an English translation of the Indonesian Simple Translation Bible; use as a surface English NT control: <https://github.com/BibleCorps/ENG-B1-PET2016-cc-PSFM> |

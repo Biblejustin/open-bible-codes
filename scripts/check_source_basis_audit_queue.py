@@ -21,6 +21,7 @@ ALLOWED_BASIS_STATUSES = {"broad_tradition", "needs_audit"}
 SUPPLEMENTAL_BIBLECORPS_SOURCE_IDS = {
     "anderson1864",
     "av1611",
+    "av1811",
     "deb2020",
     "drc1750",
     "pet2016",
@@ -323,6 +324,17 @@ def validate_supplemental_row(row: dict[str, str], row_id: str) -> list[str]:
         if "Public domain" not in license_label:
             failures.append(f"{row_id}: missing Public domain license_label")
         if row.get("source_path_prefix", "") != "PSFM/":
+            failures.append(f"{row_id}: invalid source_path_prefix")
+        if source_format != "biblecorps_usfm_zip":
+            failures.append(f"{row_id}: invalid source_format")
+    elif source_id == "av1811":
+        if source_url != "https://github.com/BibleCorps/ENG-B-AV1811-pd-Cambridge-Paragraph-Bible-PSFM/archive/refs/heads/master.zip":
+            failures.append(f"{row_id}: invalid source_url")
+        if details_url != "https://github.com/BibleCorps/ENG-B-AV1811-pd-Cambridge-Paragraph-Bible-PSFM":
+            failures.append(f"{row_id}: invalid details_url")
+        if "Public domain" not in license_label:
+            failures.append(f"{row_id}: missing Public domain license_label")
+        if row.get("source_path_prefix", "") != "":
             failures.append(f"{row_id}: invalid source_path_prefix")
         if source_format != "biblecorps_usfm_zip":
             failures.append(f"{row_id}: invalid source_format")

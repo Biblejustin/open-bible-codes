@@ -113,8 +113,9 @@ Vulgate-line English control.
 
 Supplemental open controls are tracked separately in
 `configs/supplemental_english_controls.csv`. Current rows are AKJV, CPDV,
-Anderson 1864, AV1611, Douay-Rheims Challoner 1750, Dynamic English Bible
-2020 Draft, Plain English Translation New Testament, and four
+Anderson 1864, AV1611, AV1811 Cambridge Paragraph Bible, Douay-Rheims
+Challoner 1750, Dynamic English Bible 2020 Draft, Plain English Translation
+New Testament, and four
 OpenEnglishBible base-text controls: Kent Hosea, McFadyen Psalms/Proverbs,
 Moffatt OT portions, and TCNT 1904. Raw and processed texts remain local under
 ignored `data/raw/supplemental/` and `data/processed/supplemental/`.
