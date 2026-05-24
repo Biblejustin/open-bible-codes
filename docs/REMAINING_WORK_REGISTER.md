@@ -224,6 +224,33 @@ Current summary:
   `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
   if exact local manifest-to-HEAD alignment matters.
 
+### Process-Pool Fallback Hardening
+
+Codex sandbox runs exposed macOS/Python process-pool initialization failures on
+`os.sysconf("SC_SEM_NSEMS_MAX")`. The affected scripts now fall back to the
+same sequential code path when `ProcessPoolExecutor` cannot initialize:
+
+- `scripts/analyze_hebrew_hit_version_presence.py`
+- `scripts/analyze_extension_paired_controls.py`
+- `scripts/analyze_gog_magog_pairs.py`
+- `scripts/analyze_pair_baselines.py`
+- `scripts/analyze_apocrypha_bridge_term_shuffled_controls.py`
+
+Current pushed commits for the hardening:
+
+- `f9a0e8d` Fallback when process pool is unavailable.
+- `87f8a28` Fallback extension controls without process pool.
+- `a1e7d56` Fallback remaining process pools sequentially.
+- `ef1db58` Refresh Gog Magog prospective report.
+
+Validation after the fallback work:
+
+- `python3 -m pytest -q` passed: 1407 tests, 2 skipped, and 14117 subtests.
+- `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
+- `python3 -m scripts.run_protocol protocols/gog_magog_pair_prospective.toml --resume` passed.
+- `python3 -m scripts.run_protocol protocols/kjv_apocrypha_bridge_term_shuffled_controls_1000.toml --resume` passed.
+- `python3 -m scripts.preflight_real_report_run` passed at commit `ef1db58`.
+
 ### Reader Report Refresh
 
 Current tracked files:
@@ -760,9 +787,10 @@ residual burden summary/blocker propagation, and WRR Wayback source-recovery
 probing/guarding, residual unique-term reconciliation queue guarding, and
 residual term blocker-packet propagation, and residual reconciliation action
 plan guarding, WRR public handoff doc guarding, and WRR manual decision-record
-worksheet guarding:
+worksheet guarding, critical-omission follow-up implementation, real-report
+reruns, empty-report header preservation, and process-pool fallback hardening:
 
-- `python3 -m pytest -q` passed: 1349 tests and 13970 subtests after adding the Door43 ULT/UST controls.
+- `python3 -m pytest -q` passed: 1407 tests, 2 skipped, and 14117 subtests after process-pool fallback hardening.
 - `python3 -m pytest tests/test_build_wrr_manual_decision_record_worksheet.py tests/test_check_wrr_manual_decision_record_worksheet_doc.py tests/test_check_wrr_public_handoff_docs.py tests/test_real_report_run.py tests/test_clean_lock_protocols.py -q` passed: 85 tests.
 - `python3 -m pytest tests/test_check_wrr_public_handoff_docs.py tests/test_real_report_run.py -q` passed: 57 tests.
 - `python3 -m pytest tests/test_build_wrr_residual_reconciliation_action_plan.py tests/test_check_wrr_residual_reconciliation_action_plan_doc.py -q` passed: 6 tests.
