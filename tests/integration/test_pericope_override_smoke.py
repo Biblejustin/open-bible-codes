@@ -1,4 +1,5 @@
 import csv
+import glob
 import os
 import subprocess
 import sys
@@ -36,3 +37,11 @@ def test_pericope_override_smoke(tmp_path):
         rows = list(csv.DictReader(handle))
     pericope_rows = [row for row in rows if row["ref"].startswith("JHN 7:") or row["ref"].startswith("JHN 8:")]
     assert len(pericope_rows) == 12
+    for summary_path in glob.glob(f"reports/critical_omission_breaks_treat_as_deleted_*{suffix}_summary.csv"):
+        examples_path = summary_path.replace("_summary.csv", "_examples.csv")
+        with open(summary_path, newline="") as handle:
+            summary_rows = list(csv.DictReader(handle))
+        with open(examples_path, newline="") as handle:
+            example_rows = list(csv.DictReader(handle))
+        summary_total = sum(int(row["broken_total_hits"]) for row in summary_rows)
+        assert summary_total == len(example_rows)
