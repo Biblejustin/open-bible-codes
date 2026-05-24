@@ -66,6 +66,14 @@ class ShuffleTests(unittest.TestCase):
         b = [OmittedBlock("v5", 150, 179, 30, "d", True)]
         self.assertNotEqual(shuffled_block_placement(c, b, seed=0)[0].start, 150)
 
+    def test_empty_exclude_refs_allows_actual_blocks(self):
+        c = _toy_corpus([(f"v{i}", 30) for i in range(2)])
+        b = [OmittedBlock("v1", 30, 59, 30, "d", True)]
+
+        placement = shuffled_block_placement(c, b, exclude_refs=set(), seed=0)
+
+        self.assertEqual(placement[0].start, 30)
+
     def test_verse_boundary_alignment(self):
         c = _toy_corpus([(f"v{i}", 30) for i in range(20)])
         b = [OmittedBlock("v0", 0, 29, 30, "d", True)]

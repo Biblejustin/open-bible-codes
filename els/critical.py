@@ -356,7 +356,7 @@ def shuffled_block_placement(
     seed: int,
 ) -> list[BlockPlacement]:
     rng = random.Random(seed)
-    excluded = set(exclude_refs or {block.ref for block in actual_blocks})
+    excluded = set({block.ref for block in actual_blocks} if exclude_refs is None else exclude_refs)
     eligible = [index for index, verse in enumerate(corpus.verses) if verse.ref not in excluded]
     block_verse_counts = [_actual_block_verse_count(block, corpus) for block in actual_blocks]
 
