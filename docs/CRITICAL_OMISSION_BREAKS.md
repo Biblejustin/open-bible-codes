@@ -67,6 +67,18 @@ Top deleted blocks:
 - John 5:4: 36.
 - Mark 9:44: 34.
 
+## Follow-Ups
+
+The follow-up protocol keeps all break counts on the same engine path:
+
+- Reverse insertion survival: `docs/CRITICAL_OMISSION_BREAKS_REVERSE.md`.
+- Cross-tradition status in BYZ_NT and TCG_NT: `docs/CRITICAL_OMISSION_BREAKS_CROSS_TRADITION.md`.
+- 1000-shuffle null model: `docs/CRITICAL_OMISSION_BREAKS_NULL.md`.
+- Length-stratified read: `docs/CRITICAL_OMISSION_BREAKS_LENGTH_STRATIFIED.md`.
+- Disputed-passage override and Pericope checks: `docs/CRITICAL_OMISSION_BREAKS_PERICOPE_OVERRIDE.md`.
+
+Latest null run: observed 645 breaks, p_ge 0.9710, null median 727.
+
 ## Cautions
 
 - This isolates verse-block removal only.
