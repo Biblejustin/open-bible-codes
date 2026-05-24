@@ -63,7 +63,6 @@ def main() -> int:
 
     write_rows(output_paths["missing"], [block.__dict__ for block in omitted_blocks])
 
-    summary_rows: list[dict[str, object]] = []
     by_verse = {
         block.ref: {
             "omitted_ref": block.ref,
@@ -79,7 +78,16 @@ def main() -> int:
     }
 
     term_stats, stats_by_query = build_stats_by_query(tr, terms)
-    span_intersects = count_span_intersects_by_block(tr, stats_by_query, deleted_blocks)
+    matches = list(
+        iter_els_query_matches_by_lanes(
+            tr.text,
+            stats_by_query,
+            min_skip=MIN_SKIP,
+            max_skip=MAX_SKIP,
+            direction="both",
+        )
+    )
+    span_intersects = count_span_intersects_by_block(tr, stats_by_query, deleted_blocks, matches=matches)
     for block in deleted_blocks:
         by_verse[block.ref]["span_intersect_hits"] = span_intersects.get(block.ref, 0)
     _total_breaks, _per_block_breaks, broken_hit_records = count_breaks_for_blocks(
@@ -89,6 +97,7 @@ def main() -> int:
         min_skip=MIN_SKIP,
         max_skip=MAX_SKIP,
         direction="both",
+        matches=matches,
     )
     for record in broken_hit_records:
         if record.break_type == "broken_removed_letter":
@@ -100,19 +109,7 @@ def main() -> int:
                 by_verse[block.ref]["broken_spacing_hits"] += 1
                 by_verse[block.ref]["broken_total_hits"] += 1
 
-    for stats in term_stats:
-        summary_rows.append(
-            summary_row(
-                stats.term_row,
-                stats.normalized,
-                stats.total_hits,
-                stats.span_intersect_hits,
-                stats.broken_removed_letter_hits,
-                stats.broken_spacing_hits,
-                stats.preserved_across_omission_hits,
-                stats.status,
-            )
-        )
+    summary_rows = summary_rows_from_stats(term_stats)
 
     example_rows = [
         record.as_row()
@@ -132,7 +129,16 @@ def main() -> int:
         args,
     )
     if passage_refs:
-        write_passage_outputs(output_paths, passage_refs, summary_rows, example_rows, by_verse)
+        write_passage_outputs(
+            output_paths,
+            passage_refs,
+            example_rows,
+            by_verse,
+            tr,
+            deleted_blocks,
+            stats_by_query,
+            matches,
+        )
 
     print(output_paths["summary"])
     print(output_paths["examples"])
@@ -282,15 +288,22 @@ def count_span_intersects_by_block(
     corpus: Corpus,
     stats_by_query: dict[str, list[TermBreakStats]],
     blocks: list[OmittedBlock],
+    *,
+    matches: list[tuple[str, int, int, int]] | None = None,
 ) -> dict[str, int]:
     counts = {block.ref: 0 for block in blocks}
-    for normalized, _skip, start, end in iter_els_query_matches_by_lanes(
-        corpus.text,
-        stats_by_query,
-        min_skip=MIN_SKIP,
-        max_skip=MAX_SKIP,
-        direction="both",
-    ):
+    match_iter = matches
+    if match_iter is None:
+        match_iter = list(
+            iter_els_query_matches_by_lanes(
+                corpus.text,
+                stats_by_query,
+                min_skip=MIN_SKIP,
+                max_skip=MAX_SKIP,
+                direction="both",
+            )
+        )
+    for normalized, _skip, start, end in match_iter:
         multiplier = len(stats_by_query[normalized])
         for block in blocks_in_offsets(start, end, blocks):
             counts[block.ref] += multiplier
@@ -307,29 +320,90 @@ def broken_hit_sort_key(record: BrokenHit) -> tuple[int, int, int, int, int]:
 def write_passage_outputs(
     output_paths: dict[str, Path],
     passage_refs: dict[str, set[str]],
-    summary_rows: list[dict[str, object]],
     example_rows: list[dict[str, object]],
     by_verse: dict[str, dict[str, object]],
+    corpus: Corpus,
+    deleted_blocks: list[OmittedBlock],
+    stats_by_query: dict[str, list[TermBreakStats]],
+    matches: list[tuple[str, int, int, int]],
 ) -> None:
     suffix_base = output_paths["summary"].name.removeprefix("critical_omission_breaks").removesuffix("_summary.csv")
     for passage, refs in passage_refs.items():
         slug = passage_slug(passage)
         prefix = Path("reports") / f"critical_omission_breaks_treat_as_deleted_{slug}{suffix_base}"
+        passage_blocks = [block for block in deleted_blocks if block.ref in refs]
         passage_examples = [
             row
             for row in example_rows
             if refs & set(str(row.get("omitted_refs_in_span", "")).split(";"))
         ]
-        broken_term_ids = {row.get("term_id", "") for row in passage_examples}
-        passage_summary = [
-            row
-            for row in summary_rows
-            if row.get("term_id", "") in broken_term_ids or row.get("broken_total_hits", 0)
-        ]
+        passage_summary = passage_summary_rows_for_blocks(corpus, stats_by_query, passage_blocks, matches)
         passage_by_verse = [row for ref, row in by_verse.items() if ref in refs]
         write_rows(prefix.with_name(prefix.name + "_summary.csv"), passage_summary)
         write_rows(prefix.with_name(prefix.name + "_examples.csv"), passage_examples)
         write_rows(prefix.with_name(prefix.name + "_by_verse.csv"), passage_by_verse)
+
+
+def passage_summary_rows_for_blocks(
+    corpus: Corpus,
+    stats_by_query: dict[str, list[TermBreakStats]],
+    blocks: list[OmittedBlock],
+    matches: list[tuple[str, int, int, int]],
+) -> list[dict[str, object]]:
+    term_stats, scoped_stats_by_query = clone_stats_by_query(stats_by_query)
+    count_breaks_for_blocks(
+        corpus,
+        scoped_stats_by_query,
+        blocks,
+        min_skip=MIN_SKIP,
+        max_skip=MAX_SKIP,
+        direction="both",
+        matches=matches,
+        collect_broken_hits=False,
+    )
+    return summary_rows_from_stats(term_stats, broken_only=True)
+
+
+def clone_stats_by_query(
+    stats_by_query: dict[str, list[TermBreakStats]],
+) -> tuple[list[TermBreakStats], dict[str, list[TermBreakStats]]]:
+    term_stats: list[TermBreakStats] = []
+    cloned_by_query: dict[str, list[TermBreakStats]] = {}
+    for normalized, stats_list in stats_by_query.items():
+        for stats in stats_list:
+            cloned = TermBreakStats(
+                order=stats.order,
+                term_row=stats.term_row,
+                normalized=stats.normalized,
+                status=stats.status,
+            )
+            term_stats.append(cloned)
+            cloned_by_query.setdefault(normalized, []).append(cloned)
+    return sorted(term_stats, key=lambda stats: stats.order), cloned_by_query
+
+
+def summary_rows_from_stats(
+    term_stats: list[TermBreakStats],
+    *,
+    broken_only: bool = False,
+) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for stats in term_stats:
+        if broken_only and not (stats.broken_removed_letter_hits or stats.broken_spacing_hits):
+            continue
+        rows.append(
+            summary_row(
+                stats.term_row,
+                stats.normalized,
+                stats.total_hits,
+                stats.span_intersect_hits,
+                stats.broken_removed_letter_hits,
+                stats.broken_spacing_hits,
+                stats.preserved_across_omission_hits,
+                stats.status,
+            )
+        )
+    return rows
 
 
 def passage_slug(value: str) -> str:
