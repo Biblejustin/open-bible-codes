@@ -131,17 +131,17 @@ outputs = [
 parallel_group = "followups"
 
 [[steps]]
-id = "critical_omission_breaks_pericope_length_controls"
-description = "Disputed-passages override with Pericope length-control terms."
+id = "critical_omission_breaks_pericope_frequency_controls"
+description = "Disputed-passages override with Pericope length-and-frequency control terms."
 argv = [
   "-m",
   "scripts.analyze_critical_omission_breaks",
   "--treat-as-deleted",
   "protocols/treat_as_deleted/critical_consensus.csv",
   "--extra-terms",
-  "terms/pericope_adulterae_length_controls.csv",
+  "terms/pericope_adulterae_frequency_controls.csv",
   "--out-suffix",
-  "_pericope_length_controls",
+  "_pericope_frequency_controls",
 ]
 inputs = [
   "configs/example_ebible_grctr.toml",
@@ -151,12 +151,12 @@ inputs = [
   "terms/modern_names_dates.csv",
   "terms/table_of_nations.csv",
   "terms/prophetic_terms.csv",
-  "terms/pericope_adulterae_length_controls.csv",
+  "terms/pericope_adulterae_frequency_controls.csv",
 ]
 outputs = [
-  "reports/critical_omission_breaks_pericope_length_controls_summary.csv",
-  "reports/critical_omission_breaks_pericope_length_controls_examples.csv",
-  "reports/critical_omission_breaks_pericope_length_controls_by_verse.csv",
-  "reports/critical_omission_breaks_pericope_length_controls.manifest.json",
+  "reports/critical_omission_breaks_pericope_frequency_controls_summary.csv",
+  "reports/critical_omission_breaks_pericope_frequency_controls_examples.csv",
+  "reports/critical_omission_breaks_pericope_frequency_controls_by_verse.csv",
+  "reports/critical_omission_breaks_pericope_frequency_controls.manifest.json",
 ]
 parallel_group = "followups"

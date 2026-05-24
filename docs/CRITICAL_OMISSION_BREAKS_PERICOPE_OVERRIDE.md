@@ -42,11 +42,20 @@ The inverse Pericope check confirms the documented John 8:6 centered Jesus hit:
 - SBLGNT: 1 documented hit, destroyed after Pericope removal.
 - BYZ_NT: 1 documented hit, destroyed after Pericope removal.
 
-Length-control run:
+Control run:
 
-- Term rows: 523.
-- Broken example rows: 1,261.
-- Control file: `terms/pericope_adulterae_length_controls.csv`.
+- Term rows: 518.
+- Broken example rows: 1,257.
+- Frequency-control rows: 60.
+- Frequency-control broken hits: 8.
+- Pericope thematic broken hits: 0.
+- Control file: `terms/pericope_adulterae_frequency_controls.csv`.
+- Controls are exact normalized-length matches chosen from existing non-Pericope
+  Greek term rows by nearest TR hit frequency.
+- `γῆ` has no useful frequency-control cohort because its normalized length is
+  2 and the omission-break scripts skip terms below length 3.
+- The older synthetic length-only file remains available at
+  `terms/pericope_adulterae_length_controls.csv`.
 
 ## Other Disputed Passages
 
@@ -62,5 +71,4 @@ The same override file also includes:
 - Raw break counts are not significance tests.
 - Treat-as-deleted rows are a study override, not a claim that every listed passage has identical textual status.
 - Luke 23:34a is partial-verse and is not treated as a full deletion block by the current CLI.
-- The thematic Pericope cohort is exploratory and needs length/frequency-matched controls before claim language.
-- The current control cohort is length-matched only; frequency matching remains future tightening.
+- The thematic Pericope cohort and matched controls are exploratory; they are not confirmatory claim language.
