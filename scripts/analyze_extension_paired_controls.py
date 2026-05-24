@@ -434,11 +434,16 @@ def analyze_target_corpora(
     if effective_jobs <= 1:
         results = [analyze_corpus_task(task) for task in tasks]
     else:
-        with ProcessPoolExecutor(
-            max_workers=effective_jobs,
-            mp_context=process_context(),
-        ) as executor:
-            results = list(executor.map(analyze_corpus_task, tasks))
+        try:
+            executor = ProcessPoolExecutor(
+                max_workers=effective_jobs,
+                mp_context=process_context(),
+            )
+        except PermissionError:
+            results = [analyze_corpus_task(task) for task in tasks]
+        else:
+            with executor:
+                results = list(executor.map(analyze_corpus_task, tasks))
 
     rows: list[ExtensionControlRow] = []
     corpus_manifests = []

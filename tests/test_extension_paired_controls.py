@@ -3,14 +3,17 @@ import tempfile
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import patch
 
 from els.corpus import Corpus, VerseSpan, WordSpan
 from els.extensions import build_extension_lexicon, extensions_for_hit
 from els.search import build_hit
+from scripts import analyze_extension_paired_controls as extension_controls
 from scripts.analyze_extension_paired_controls import (
     ControlScores,
     ExtensionTarget,
     all_controls_band,
+    analyze_target_corpora,
     extension_band,
     extension_score,
     normalize_target_row,
@@ -89,6 +92,30 @@ class ExtensionPairedControlsTests(unittest.TestCase):
     def test_stable_seed_is_repeatable(self) -> None:
         self.assertEqual(stable_seed(1, "TR_NT", "row"), stable_seed(1, "TR_NT", "row"))
         self.assertNotEqual(stable_seed(1, "TR_NT", "row"), stable_seed(1, "SBLGNT", "row"))
+
+    def test_analyze_target_corpora_falls_back_when_process_pool_denied(self) -> None:
+        targets = [
+            target("MT_WLC", "אב", "2", "אבא"),
+            target("UHB", "אב", "2", "אבא"),
+        ]
+        args = SimpleNamespace(jobs=2)
+
+        def fake_task(task):
+            label = task[0]
+            return [], {"label": label}
+
+        with (
+            patch.object(
+                extension_controls,
+                "ProcessPoolExecutor",
+                side_effect=PermissionError("denied"),
+            ),
+            patch.object(extension_controls, "analyze_corpus_task", side_effect=fake_task),
+        ):
+            rows, manifests = analyze_target_corpora(targets, args)
+
+        self.assertEqual(rows, [])
+        self.assertEqual([manifest["label"] for manifest in manifests], ["MT_WLC", "UHB"])
 
     def test_normalize_target_row_accepts_audit_corpus_exports(self) -> None:
         row = normalize_target_row({"audit_corpus": "MT_WLC", "normalized_term": "יהוה"})
