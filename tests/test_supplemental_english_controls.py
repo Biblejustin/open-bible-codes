@@ -28,13 +28,17 @@ class SupplementalEnglishControlTests(unittest.TestCase):
                 "CPDV",
                 "DEB",
                 "DRC1750",
+                "ETHERIDGE",
                 "KENT",
                 "MCFADYEN",
                 "MOFFATT",
+                "MONTGOMERY",
                 "NHEB",
                 "PET",
                 "ROTHERHAM",
                 "TCNT",
+                "TYNDALE",
+                "WEYMOUTH",
             ],
         )
         self.assertEqual(rows["AKJV"]["source_format"], "akjv_text_zip")
@@ -85,12 +89,17 @@ class SupplementalEnglishControlTests(unittest.TestCase):
         self.assertIn("CC BY-SA 4.0", rows["PET"]["license_label"])
         self.assertEqual(rows["PET"]["source_path_prefix"], "")
 
-        for label in ["ACV", "NHEB", "ROTHERHAM"]:
+        for label in ["ACV", "NHEB", "ROTHERHAM", "MONTGOMERY", "ETHERIDGE", "WEYMOUTH", "TYNDALE"]:
             self.assertEqual(rows[label]["source_format"], "zefania_xml_zip")
             self.assertIn("sourceforge.net/projects/zefania-sharp", rows[label]["source_url"])
             self.assertTrue(rows[label]["details_url"].startswith("https://crosswire.org/"))
             self.assertIn("Public domain", rows[label]["license_label"])
-            self.assertEqual(rows[label]["coverage"], "full")
+        self.assertEqual(rows["ACV"]["coverage"], "full")
+        self.assertEqual(rows["NHEB"]["coverage"], "full")
+        self.assertEqual(rows["ROTHERHAM"]["coverage"], "full")
+        self.assertEqual(rows["TYNDALE"]["coverage"], "partial")
+        for label in ["MONTGOMERY", "ETHERIDGE", "WEYMOUTH"]:
+            self.assertEqual(rows[label]["coverage"], "nt")
 
         for label in ["KENT", "MCFADYEN", "MOFFATT", "TCNT"]:
             self.assertEqual(rows[label]["source_format"], "openenglishbible_usfm_zip")
@@ -184,6 +193,11 @@ class SupplementalEnglishControlTests(unittest.TestCase):
               <VERS vnumber="1">David was old.</VERS>
             </CHAPTER>
           </BIBLEBOOK>
+          <BIBLEBOOK bnumber="57" bsname="Phi" bname="Philemon">
+            <CHAPTER cnumber="1">
+              <VERS vnumber="1">Paul writes.</VERS>
+            </CHAPTER>
+          </BIBLEBOOK>
         </XMLBIBLE>
         """
         with tempfile.TemporaryDirectory() as tmp:
@@ -193,7 +207,7 @@ class SupplementalEnglishControlTests(unittest.TestCase):
 
             verses = parse_zefania_xml_zip(path)
 
-        self.assertEqual([verse.ref for verse in verses], ["GEN 1:1", "MAT 2:3", "1KI 1:1"])
+        self.assertEqual([verse.ref for verse in verses], ["GEN 1:1", "MAT 2:3", "1KI 1:1", "PHM 1:1"])
         self.assertEqual(verses[0].text, "Beginning text.")
 
 

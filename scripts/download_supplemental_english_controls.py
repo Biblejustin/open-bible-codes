@@ -328,6 +328,7 @@ ZEFANIA_BOOK_SHORT_CODES = {
     "TIT": "TIT",
     "PHLM": "PHM",
     "PHILE": "PHM",
+    "PHILEMON": "PHM",
     "HEB": "HEB",
     "JAS": "JAS",
     "1PET": "1PE",
@@ -489,10 +490,18 @@ def parse_zefania_xml_zip(path: Path) -> list[UsfmVerse]:
 
 def zefania_book_code(book: ElementTree.Element) -> str | None:
     number_code = ZEFANIA_BOOK_CODES.get(int(book.attrib["bnumber"]))
-    for attr in ("bsname", "bname"):
-        short_code = zefania_book_short_code(book.attrib.get(attr, ""))
-        if short_code and short_code != number_code:
-            return short_code
+    short_codes = [
+        short_code
+        for attr in ("bsname", "bname")
+        if (short_code := zefania_book_short_code(book.attrib.get(attr, "")))
+    ]
+    if number_code and number_code in short_codes:
+        return number_code
+    unique_short_codes = sorted(set(short_codes))
+    if len(unique_short_codes) == 1 and unique_short_codes[0] != number_code:
+        return unique_short_codes[0]
+    if not number_code and unique_short_codes:
+        return unique_short_codes[0]
     return number_code
 
 

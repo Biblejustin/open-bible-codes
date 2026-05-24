@@ -45,6 +45,22 @@ SUPPLEMENTAL_ZEFANIA_SOURCES = {
         "https://sourceforge.net/projects/zefania-sharp/files/Bibles/ENG/Rotherham%20Version/SF_2009-01-22_ENG_ROTH_%28ROTHERHAM%20VERSION%29.zip/download",
         "https://crosswire.org/sword/modules/ModInfo.jsp?modName=Rotherham",
     ),
+    "montgomery": (
+        "https://sourceforge.net/projects/zefania-sharp/files/Bibles/ENG/Montgomery%20New%20Testament/SF_2009-01-20_ENG_MONT_%28MONTGOMERY%20NEW%20TESTAMENT%29.zip/download",
+        "https://crosswire.org/sword/modules/ModInfo.jsp?modName=Montgomery",
+    ),
+    "etheridge": (
+        "https://sourceforge.net/projects/zefania-sharp/files/Bibles/ENG/Etheridge/SF_2010-02-21_ENG_ETHERIDGE_%28THE%20PESCHITO%20SYRIAC%20NEW%20TESTAMENT%29.zip/download",
+        "https://crosswire.org/sword/modules/ModInfo.jsp?modName=Etheridge",
+    ),
+    "weymouth": (
+        "https://sourceforge.net/projects/zefania-sharp/files/Bibles/ENG/Weymouth%20NT/SF_2009-01-20_ENG_WMTH_%28WEYMOUTH%20NT%29.zip/download",
+        "https://crosswire.org/sword/modules/ModInfo.jsp?modName=Weymouth",
+    ),
+    "tyndale": (
+        "https://sourceforge.net/projects/zefania-sharp/files/Bibles/ENG/Willam%20Tyndale%20Bible/SF_2009-01-20_ENG_BIBLE_TYNDALE_%28WILLAM%20TYNDALE%20BIBLE%29.zip/download",
+        "https://crosswire.org/sword/modules/ModInfo.jsp?modName=Tyndale",
+    ),
 }
 MANIFEST_LABELS = {
     "biblegateway": "BibleGateway English versions",

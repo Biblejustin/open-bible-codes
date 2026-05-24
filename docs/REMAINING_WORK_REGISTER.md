@@ -570,7 +570,7 @@ Current queue after the BibleGateway/eBible audit pass:
 - Open.Bible English controls: 0 `needs_audit`, 4 `broad_tradition`.
 - Original Douay-Rheims English controls: 0 `needs_audit`, 1
   `broad_tradition`.
-- Supplemental open English controls: 0 `needs_audit`, 15 `broad_tradition`.
+- Supplemental open English controls: 0 `needs_audit`, 19 `broad_tradition`.
 - eBible rows moved to broad grouping: `ASVBT`, `BSB`, `E2T`, `FBV`, `F35`,
   `LSV`, `MSB`, `OURB`, `OEBCW`, `OEB`, `BBE`, `NOY`, `PEV`, `T4T`, `ULB`,
   and `OJB`.
@@ -611,12 +611,16 @@ Current queue after the BibleGateway/eBible audit pass:
   Hosea, McFadyen Psalms/Proverbs, Moffatt OT portions, and TCNT 1904. The OEB
   repository marks these files freely distributable; keep them as broad surface
   controls, not edition-level manuscript witnesses.
-- Zefania/CrossWire public-domain supplemental controls now add ACV, NHEB, and
-  Rotherham. CrossWire module pages identify these modules as public-domain
-  English texts; keep them as broad English surface controls unless exact
-  source-edition details are stated by the module page. The NHEB Zefania source
+- Zefania/CrossWire public-domain supplemental controls now add ACV, NHEB,
+  Rotherham, Montgomery, Etheridge, Weymouth, and Tyndale. CrossWire module
+  pages identify these modules as public-domain English texts; keep them as
+  broad English surface controls unless exact source-edition details are stated
+  by the module page. Etheridge is a Syriac/Peshitta-line English NT control,
+  and Tyndale is a partial historical English control. The NHEB Zefania source
   tags 1 Kings with a bad `bnumber`; the importer uses `bsname=1Ki` to recover
-  the canonical book code.
+  the canonical book code. The Montgomery source uses `Phi` for Philemon, so
+  the importer prefers numeric book codes when source short/name metadata
+  agrees with the numeric code.
 - Additional BibleCorps sources checked but left out for now: GTP front matter
   identifies CC BY-ND 4.0 despite the repository name, LEB has custom
   distribution/reporting restrictions, and AV2023 is a duplicate Gutenberg KJV
@@ -814,19 +818,22 @@ worksheet guarding:
   passed with 1 included control, zero missing controls, and 1,303 count rows.
 - Supplemental open controls are tracked in
   `configs/supplemental_english_controls.csv` for AKJV, ANDERSON, AV1611,
-  AV1811, CPDV, DEB, DRC1750, PET, ACV, NHEB, ROTHERHAM, KENT, MCFADYEN,
-  MOFFATT, and TCNT. Raw and processed
+  AV1811, CPDV, DEB, DRC1750, PET, ACV, NHEB, ROTHERHAM, MONTGOMERY,
+  ETHERIDGE, WEYMOUTH, TYNDALE, KENT, MCFADYEN, MOFFATT, and TCNT. Raw and
+  processed
   source files stay under ignored `data/raw/supplemental/` and
   `data/processed/supplemental/`; current import wrote 31,102 AKJV verses,
   7,946 ANDERSON verses, 36,680 AV1611 verses, 31,102 AV1811 verses, 35,809
   CPDV verses, 30,794 DEB verses, 35,813 DRC1750 verses, 7,753 PET verses, 197
   KENT verses, 3,183 MCFADYEN verses, 2,575 MOFFATT verses, 7,940 TCNT verses,
-  31,102 ACV verses, 30,974 NHEB verses, and 31,090 ROTHERHAM verses. `python3 -m
+  31,102 ACV verses, 30,974 NHEB verses, 31,090 ROTHERHAM verses, 7,935
+  MONTGOMERY verses, 7,940 ETHERIDGE verses, 7,958 WEYMOUTH verses, and 13,844
+  TYNDALE verses. `python3 -m
   scripts.run_protocol protocols/supplemental_english_controls.toml --resume`
-  passed with 15 included controls, zero missing controls, and 19,545 count
+  passed with 19 included controls, zero missing controls, and 24,757 count
   rows.
 - `python3 -m scripts.run_protocol protocols/english_version_control_triage.toml --resume`
-  now compares BibleGateway-overlap English rows against 69 merged open
+  now compares BibleGateway-overlap English rows against 73 merged open
   controls from eBible, Door43, OET, OTB, Open.Bible, ODR, and supplemental
   sources; context review
   promoted no seed terms.
