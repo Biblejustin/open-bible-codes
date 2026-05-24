@@ -358,6 +358,8 @@ def shuffled_block_placement(
     rng = random.Random(seed)
     excluded = set({block.ref for block in actual_blocks} if exclude_refs is None else exclude_refs)
     eligible = [index for index, verse in enumerate(corpus.verses) if verse.ref not in excluded]
+    if not eligible and actual_blocks:
+        raise RuntimeError("could not place shuffle blocks: no eligible verses")
     block_verse_counts = [_actual_block_verse_count(block, corpus) for block in actual_blocks]
 
     placements: list[BlockPlacement] = []

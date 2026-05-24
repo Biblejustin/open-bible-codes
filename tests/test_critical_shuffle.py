@@ -87,6 +87,12 @@ class ShuffleTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             shuffled_block_placement(c, b, seed=0)
 
+    def test_raises_when_no_eligible_verses(self):
+        c = _toy_corpus([(f"v{i}", 30) for i in range(2)])
+        b = [OmittedBlock("v0", 0, 29, 30, "d", True)]
+        with self.assertRaises(RuntimeError):
+            shuffled_block_placement(c, b, exclude_refs={"v0", "v1"}, seed=0)
+
 
 if __name__ == "__main__":
     unittest.main()
