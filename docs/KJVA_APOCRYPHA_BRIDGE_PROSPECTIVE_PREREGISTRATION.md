@@ -103,7 +103,7 @@ They may not be described as:
 - `confirmed_code`
 - `conclusive evidence`
 - `prophecy`
-- `proof`
+- `certainty language`
 
 ## Failure Criteria
 

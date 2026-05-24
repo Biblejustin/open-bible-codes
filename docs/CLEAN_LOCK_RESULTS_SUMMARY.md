@@ -39,7 +39,7 @@ current manifest/preflight workflow before producing new result-bearing output.
 
 ## Read
 
-The new clean-lock work produced review queues, not proof claims.
+The new clean-lock work produced review queues, not conclusive claims.
 
 The two Hebrew exact-version lanes had many exact-version rows, but neither lane
 produced adjusted representative-control support. The Hebrew concordance full

@@ -227,8 +227,8 @@ Not yet implemented:
 
 - exact published WRR reproduction over independently locked source
   transcriptions and the source-selected `D(w)` formula;
-- published-method equivalence proof for the repo-defined permutation against
-  the original WRR procedure.
+- published-method equivalence demonstration for the repo-defined permutation
+  against the original WRR procedure.
 
 ## Ambiguities To Pin Before Code
 
