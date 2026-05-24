@@ -2,7 +2,12 @@ import unittest
 from array import array
 
 from els.corpus import Corpus, VerseSpan
-from els.critical import OmittedBlock, TermBreakStats, count_breaks_for_blocks
+from els.critical import (
+    OmittedBlock,
+    TermBreakStats,
+    count_breaks_for_blocks,
+    count_insertion_breaks_for_blocks,
+)
 
 
 class CountBreaksForBlocksTests(unittest.TestCase):
@@ -50,6 +55,27 @@ class CountBreaksForBlocksTests(unittest.TestCase):
         self.assertEqual(per_block, [0])
         self.assertEqual(broken, [])
 
+    def test_counts_inserted_block_spacing_break(self) -> None:
+        base = _two_verse_corpus()
+        augmented = _augmented_two_verse_corpus()
+        stats_by_query = {"ace": [TermBreakStats(0, {"term": "ace"}, "ace")]}
+        blocks = [OmittedBlock("inserted", 2, 3, 2, "spliced_tr_only_block", True)]
+
+        total, per_block, broken = count_insertion_breaks_for_blocks(
+            base,
+            augmented,
+            stats_by_query,
+            blocks,
+            min_skip=2,
+            max_skip=2,
+            direction="forward",
+        )
+
+        self.assertEqual(total, 1)
+        self.assertEqual(per_block, [1])
+        self.assertEqual([record.break_type for record in broken], ["broken_spacing"])
+        self.assertEqual(stats_by_query["ace"][0].broken_spacing_hits, 1)
+
 
 def _corpus(text: str) -> Corpus:
     verses = (
@@ -62,6 +88,35 @@ def _corpus(text: str) -> Corpus:
         text=text,
         verses=verses,
         position_to_verse=array("i", [0] * len(text)),
+    )
+
+
+def _two_verse_corpus() -> Corpus:
+    return Corpus(
+        name="toy",
+        language="greek",
+        keep_hebrew_final_forms=False,
+        text="abcde",
+        verses=(
+            VerseSpan("S", "v1", "X", "1", "1", "ab", 0, 1, 2),
+            VerseSpan("S", "v2", "X", "1", "2", "cde", 2, 4, 3),
+        ),
+        position_to_verse=array("i", [0, 0, 1, 1, 1]),
+    )
+
+
+def _augmented_two_verse_corpus() -> Corpus:
+    return Corpus(
+        name="toy-augmented",
+        language="greek",
+        keep_hebrew_final_forms=False,
+        text="abxxcde",
+        verses=(
+            VerseSpan("S", "v1", "X", "1", "1", "ab", 0, 1, 2),
+            VerseSpan("S", "inserted", "X", "1", "1a", "xx", 2, 3, 2),
+            VerseSpan("S", "v2", "X", "1", "2", "cde", 4, 6, 3),
+        ),
+        position_to_verse=array("i", [0, 0, 1, 1, 2, 2, 2]),
     )
 
 

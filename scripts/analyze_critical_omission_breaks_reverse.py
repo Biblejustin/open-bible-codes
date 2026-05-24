@@ -9,7 +9,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from els.corpus import load_corpus, splice_verses_into_corpus
-from els.critical import OmittedBlock, classify_missing_verses, count_breaks_for_blocks
+from els.critical import OmittedBlock, classify_missing_verses, count_insertion_breaks_for_blocks
 from scripts.analyze_critical_omission_breaks import (
     CRITICAL_CONFIG,
     MAX_SKIP,
@@ -46,9 +46,10 @@ def main() -> int:
         for verse in augmented.verses
         if verse.ref in set(donor_refs)
     ]
-    terms = read_greek_terms(TERM_PATHS, augmented)
-    term_stats, stats_by_query = build_stats_by_query(augmented, [dict(row) for row in terms])
-    _total, per_block, broken = count_breaks_for_blocks(
+    terms = read_greek_terms(TERM_PATHS, critical)
+    term_stats, stats_by_query = build_stats_by_query(critical, [dict(row) for row in terms])
+    _total, per_block, broken = count_insertion_breaks_for_blocks(
+        critical,
         augmented,
         stats_by_query,
         inserted_blocks,
@@ -94,6 +95,7 @@ def main() -> int:
                 "spliced_refs": donor_refs,
                 "spliced_blocks": len(inserted_blocks),
                 "broken_example_rows": len(example_rows),
+                "method": "sblgnt_hits_mapped_into_augmented_splice_coordinates",
             },
             ensure_ascii=False,
             indent=2,
