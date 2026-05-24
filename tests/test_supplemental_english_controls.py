@@ -5,6 +5,7 @@ from pathlib import Path
 from scripts.download_supplemental_english_controls import (
     parse_usfm_archive,
     parse_akjv_text,
+    parse_zefania_xml_zip,
     scrub_structural_lines,
 )
 
@@ -19,6 +20,7 @@ class SupplementalEnglishControlTests(unittest.TestCase):
         self.assertEqual(
             sorted(rows),
             [
+                "ACV",
                 "AKJV",
                 "ANDERSON",
                 "AV1611",
@@ -29,7 +31,9 @@ class SupplementalEnglishControlTests(unittest.TestCase):
                 "KENT",
                 "MCFADYEN",
                 "MOFFATT",
+                "NHEB",
                 "PET",
+                "ROTHERHAM",
                 "TCNT",
             ],
         )
@@ -80,6 +84,13 @@ class SupplementalEnglishControlTests(unittest.TestCase):
         self.assertEqual(rows["PET"]["coverage"], "nt")
         self.assertIn("CC BY-SA 4.0", rows["PET"]["license_label"])
         self.assertEqual(rows["PET"]["source_path_prefix"], "")
+
+        for label in ["ACV", "NHEB", "ROTHERHAM"]:
+            self.assertEqual(rows[label]["source_format"], "zefania_xml_zip")
+            self.assertIn("sourceforge.net/projects/zefania-sharp", rows[label]["source_url"])
+            self.assertTrue(rows[label]["details_url"].startswith("https://crosswire.org/"))
+            self.assertIn("Public domain", rows[label]["license_label"])
+            self.assertEqual(rows[label]["coverage"], "full")
 
         for label in ["KENT", "MCFADYEN", "MOFFATT", "TCNT"]:
             self.assertEqual(rows[label]["source_format"], "openenglishbible_usfm_zip")
@@ -151,6 +162,39 @@ class SupplementalEnglishControlTests(unittest.TestCase):
             verses = parse_usfm_archive(path, "Moffat/")
 
         self.assertEqual([verse.ref for verse in verses], ["PSA 75:1", "JON 1:1"])
+
+    def test_parse_zefania_xml_zip_maps_books_and_skips_notes(self) -> None:
+        import tempfile
+        import zipfile
+
+        raw = """<?xml version="1.0" encoding="utf-8"?>
+        <XMLBIBLE>
+          <BIBLEBOOK bnumber="1">
+            <CHAPTER cnumber="1">
+              <VERS vnumber="1">Beginning <NOTE>not part</NOTE>text.</VERS>
+            </CHAPTER>
+          </BIBLEBOOK>
+          <BIBLEBOOK bnumber="40">
+            <CHAPTER cnumber="2">
+              <VERS vnumber="3">Magi arrived.</VERS>
+            </CHAPTER>
+          </BIBLEBOOK>
+          <BIBLEBOOK bnumber="22" bsname="1Ki">
+            <CHAPTER cnumber="1">
+              <VERS vnumber="1">David was old.</VERS>
+            </CHAPTER>
+          </BIBLEBOOK>
+        </XMLBIBLE>
+        """
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "zefania.zip"
+            with zipfile.ZipFile(path, "w") as archive:
+                archive.writestr("demo.xml", raw)
+
+            verses = parse_zefania_xml_zip(path)
+
+        self.assertEqual([verse.ref for verse in verses], ["GEN 1:1", "MAT 2:3", "1KI 1:1"])
+        self.assertEqual(verses[0].text, "Beginning text.")
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:

@@ -12,6 +12,7 @@ import urllib.request
 import zipfile
 from datetime import UTC, datetime
 from pathlib import Path
+from xml.etree import ElementTree
 
 from els.ebible_usfm import UsfmVerse, parse_usfm
 
@@ -190,6 +191,154 @@ FILENAME_BOOK_CODES = {
     "REVELATION": "REV",
 }
 
+ZEFANIA_BOOK_CODES = {
+    1: "GEN",
+    2: "EXO",
+    3: "LEV",
+    4: "NUM",
+    5: "DEU",
+    6: "JOS",
+    7: "JDG",
+    8: "RUT",
+    9: "1SA",
+    10: "2SA",
+    11: "1KI",
+    12: "2KI",
+    13: "1CH",
+    14: "2CH",
+    15: "EZR",
+    16: "NEH",
+    17: "EST",
+    18: "JOB",
+    19: "PSA",
+    20: "PRO",
+    21: "ECC",
+    22: "SNG",
+    23: "ISA",
+    24: "JER",
+    25: "LAM",
+    26: "EZK",
+    27: "DAN",
+    28: "HOS",
+    29: "JOL",
+    30: "AMO",
+    31: "OBA",
+    32: "JON",
+    33: "MIC",
+    34: "NAM",
+    35: "HAB",
+    36: "ZEP",
+    37: "HAG",
+    38: "ZEC",
+    39: "MAL",
+    40: "MAT",
+    41: "MRK",
+    42: "LUK",
+    43: "JHN",
+    44: "ACT",
+    45: "ROM",
+    46: "1CO",
+    47: "2CO",
+    48: "GAL",
+    49: "EPH",
+    50: "PHP",
+    51: "COL",
+    52: "1TH",
+    53: "2TH",
+    54: "1TI",
+    55: "2TI",
+    56: "TIT",
+    57: "PHM",
+    58: "HEB",
+    59: "JAS",
+    60: "1PE",
+    61: "2PE",
+    62: "1JN",
+    63: "2JN",
+    64: "3JN",
+    65: "JUD",
+    66: "REV",
+}
+
+ZEFANIA_BOOK_SHORT_CODES = {
+    "GEN": "GEN",
+    "EXO": "EXO",
+    "LEV": "LEV",
+    "NUM": "NUM",
+    "DEU": "DEU",
+    "JOSH": "JOS",
+    "JUDG": "JDG",
+    "RUTH": "RUT",
+    "1SA": "1SA",
+    "2SA": "2SA",
+    "1KI": "1KI",
+    "2KI": "2KI",
+    "1CHR": "1CH",
+    "2CHR": "2CH",
+    "EZRA": "EZR",
+    "NEH": "NEH",
+    "ESTH": "EST",
+    "EST": "EST",
+    "JOB": "JOB",
+    "PS": "PSA",
+    "PROV": "PRO",
+    "ECCL": "ECC",
+    "SOL": "SNG",
+    "SONG": "SNG",
+    "ISA": "ISA",
+    "JER": "JER",
+    "LAM": "LAM",
+    "EZ": "EZK",
+    "EZEK": "EZK",
+    "DAN": "DAN",
+    "HOS": "HOS",
+    "JOEL": "JOL",
+    "AMOS": "AMO",
+    "OBAD": "OBA",
+    "JONAH": "JON",
+    "JON": "JON",
+    "MIC": "MIC",
+    "NAH": "NAM",
+    "HAB": "HAB",
+    "ZEPH": "ZEP",
+    "HAG": "HAG",
+    "ZECH": "ZEC",
+    "MAL": "MAL",
+    "MATT": "MAT",
+    "MAT": "MAT",
+    "MARK": "MRK",
+    "MRK": "MRK",
+    "LUKE": "LUK",
+    "LUK": "LUK",
+    "JOHN": "JHN",
+    "JHN": "JHN",
+    "ACTS": "ACT",
+    "ROM": "ROM",
+    "1COR": "1CO",
+    "2COR": "2CO",
+    "GAL": "GAL",
+    "EPH": "EPH",
+    "PHI": "PHP",
+    "PHIL": "PHP",
+    "COL": "COL",
+    "1THESS": "1TH",
+    "2THESS": "2TH",
+    "1TI": "1TI",
+    "2TI": "2TI",
+    "TIT": "TIT",
+    "PHLM": "PHM",
+    "PHILE": "PHM",
+    "HEB": "HEB",
+    "JAS": "JAS",
+    "1PET": "1PE",
+    "2PET": "2PE",
+    "1JOHN": "1JN",
+    "2JOHN": "2JN",
+    "3JOHN": "3JN",
+    "JUDE": "JUD",
+    "REV": "REV",
+}
+
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
@@ -280,6 +429,8 @@ def parse_archive(path: Path, row: dict[str, str]) -> list[UsfmVerse]:
         return parse_usfm_archive(path, row["source_path_prefix"])
     if source_format == "openenglishbible_usfm_zip":
         return parse_usfm_archive(path, row["source_path_prefix"])
+    if source_format == "zefania_xml_zip":
+        return parse_zefania_xml_zip(path)
     if source_format == "akjv_text_zip":
         return parse_akjv_text_zip(path, row["source_path_prefix"])
     raise SystemExit(f"{row['label']}: unknown source_format {source_format}")
@@ -307,6 +458,64 @@ def parse_akjv_text_zip(path: Path, source_path: str) -> list[UsfmVerse]:
     with zipfile.ZipFile(path) as archive:
         raw = archive.read(source_path).decode("utf-8-sig")
     return parse_akjv_text(raw)
+
+
+def parse_zefania_xml_zip(path: Path) -> list[UsfmVerse]:
+    with zipfile.ZipFile(path) as archive:
+        names = [name for name in archive.namelist() if name.lower().endswith(".xml")]
+        if len(names) != 1:
+            raise ValueError(f"expected one Zefania XML file in {path}, found {len(names)}")
+        root = ElementTree.fromstring(archive.read(names[0]))
+    verses: list[UsfmVerse] = []
+    for book in root.findall("BIBLEBOOK"):
+        book_code = zefania_book_code(book)
+        if not book_code:
+            continue
+        for chapter in book.findall("CHAPTER"):
+            chapter_number = chapter.attrib["cnumber"]
+            for verse in chapter.findall("VERS"):
+                text = zefania_verse_text(verse)
+                if text:
+                    verses.append(
+                        UsfmVerse(
+                            book=book_code,
+                            chapter=chapter_number,
+                            verse=verse.attrib["vnumber"],
+                            text=text,
+                        )
+                    )
+    return verses
+
+
+def zefania_book_code(book: ElementTree.Element) -> str | None:
+    number_code = ZEFANIA_BOOK_CODES.get(int(book.attrib["bnumber"]))
+    for attr in ("bsname", "bname"):
+        short_code = zefania_book_short_code(book.attrib.get(attr, ""))
+        if short_code and short_code != number_code:
+            return short_code
+    return number_code
+
+
+def zefania_book_short_code(value: str) -> str | None:
+    key = re.sub(r"[^0-9A-Za-z]", "", value).upper()
+    return ZEFANIA_BOOK_SHORT_CODES.get(key)
+
+
+def zefania_verse_text(element: ElementTree.Element) -> str:
+    parts: list[str] = []
+    append_zefania_text(element, parts)
+    return " ".join("".join(parts).split())
+
+
+def append_zefania_text(element: ElementTree.Element, parts: list[str]) -> None:
+    if element.tag.upper() == "NOTE":
+        return
+    if element.text:
+        parts.append(element.text)
+    for child in element:
+        append_zefania_text(child, parts)
+        if child.tail:
+            parts.append(child.tail)
 
 
 def parse_akjv_text(raw: str) -> list[UsfmVerse]:

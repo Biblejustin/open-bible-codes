@@ -32,6 +32,20 @@ SUPPLEMENTAL_OEB_PREFIXES = {
     "moffatt_ot_portions": "Moffat/",
     "tcnt1904": "Twentieth Century New Testament/",
 }
+SUPPLEMENTAL_ZEFANIA_SOURCES = {
+    "acv": (
+        "https://sourceforge.net/projects/zefania-sharp/files/Bibles/ENG/A%20Conservative%20Version/SF_2009-01-20_ENG_ACV_%28A%20CONSERVATIVE%20VERSION%29.zip/download",
+        "https://crosswire.org/sword/modules/ModInfo.jsp?modName=ACV",
+    ),
+    "nheb": (
+        "https://sourceforge.net/projects/zefania-sharp/files/Bibles/ENG/New%20Heart%20English%20Bible/SF_2015-08-15_ENG_NHEB_%28NEW%20HEART%20ENGLISH%20BIBLE%29.zip/download",
+        "https://crosswire.org/sword/modules/ModInfo.jsp?modName=NHEB",
+    ),
+    "rotherham": (
+        "https://sourceforge.net/projects/zefania-sharp/files/Bibles/ENG/Rotherham%20Version/SF_2009-01-22_ENG_ROTH_%28ROTHERHAM%20VERSION%29.zip/download",
+        "https://crosswire.org/sword/modules/ModInfo.jsp?modName=Rotherham",
+    ),
+}
 MANIFEST_LABELS = {
     "biblegateway": "BibleGateway English versions",
     "ebible": "eBible English controls",
@@ -288,7 +302,7 @@ def validate_odr_row(row: dict[str, str], row_id: str) -> list[str]:
 def validate_supplemental_row(row: dict[str, str], row_id: str) -> list[str]:
     failures: list[str] = []
     source_id = row.get("source_id", "")
-    if source_id not in {"akjv", "cpdv", *SUPPLEMENTAL_BIBLECORPS_SOURCE_IDS, *SUPPLEMENTAL_OEB_PREFIXES}:
+    if source_id not in {"akjv", "cpdv", *SUPPLEMENTAL_BIBLECORPS_SOURCE_IDS, *SUPPLEMENTAL_OEB_PREFIXES, *SUPPLEMENTAL_ZEFANIA_SOURCES}:
         failures.append(f"{row_id}: invalid source_id")
     source_url = row.get("source_url", "")
     details_url = row.get("details_url", "")
@@ -395,6 +409,18 @@ def validate_supplemental_row(row: dict[str, str], row_id: str) -> list[str]:
         if row.get("source_path_prefix", "") != SUPPLEMENTAL_OEB_PREFIXES[source_id]:
             failures.append(f"{row_id}: invalid source_path_prefix")
         if source_format != "openenglishbible_usfm_zip":
+            failures.append(f"{row_id}: invalid source_format")
+    elif source_id in SUPPLEMENTAL_ZEFANIA_SOURCES:
+        expected_source_url, expected_details_url = SUPPLEMENTAL_ZEFANIA_SOURCES[source_id]
+        if source_url != expected_source_url:
+            failures.append(f"{row_id}: invalid source_url")
+        if details_url != expected_details_url:
+            failures.append(f"{row_id}: invalid details_url")
+        if "Public domain" not in license_label:
+            failures.append(f"{row_id}: missing Public domain license_label")
+        if row.get("source_path_prefix", "") != "":
+            failures.append(f"{row_id}: invalid source_path_prefix")
+        if source_format != "zefania_xml_zip":
             failures.append(f"{row_id}: invalid source_format")
     return failures
 
