@@ -37,6 +37,14 @@ Current run:
 - Deleted letters used: 3,607.
 - Broken example rows: 1,251.
 
+Per-passage summaries are recomputed against each passage block set, so each
+summary total matches its companion examples file:
+
+- Pericope Adulterae: 35 term rows, 267 broken hits.
+- Longer Ending of Mark: 36 term rows, 258 broken hits.
+- Gethsemane angel and bloody sweat: 17 term rows, 56 broken hits.
+- Comma Johanneum: 8 term rows, 24 broken hits.
+
 The inverse Pericope check confirms the documented John 8:6 centered Jesus hit:
 
 - SBLGNT: 1 documented hit, destroyed after Pericope removal.
@@ -46,6 +54,8 @@ Control run:
 
 - Term rows: 518.
 - Broken example rows: 1,257.
+- Pericope Adulterae passage summary: 36 term rows, 268 broken hits.
+- Longer Ending of Mark passage summary: 38 term rows, 260 broken hits.
 - Frequency-control rows: 60.
 - Frequency-control broken hits: 8.
 - Pericope thematic broken hits: 0.
