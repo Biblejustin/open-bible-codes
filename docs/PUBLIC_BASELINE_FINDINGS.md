@@ -5,7 +5,7 @@ Run:
 - Protocol: `protocols/public_baseline.toml`
 - Command: `python3 -m scripts.run_protocol protocols/public_baseline.toml --resume`
 - Status: success
-- Wall time: 141.413s
+- Wall time: 405.642s
 - Generated index: `reports/INDEX.md`
 - Run manifest: `reports/protocols/public_baseline/protocol_run.manifest.json`
 
@@ -13,47 +13,47 @@ Run:
 
 | Step | Time | Note |
 | --- | ---: | --- |
-| `els_controls` | 38.239s | shuffled-letter and shuffled-term controls |
-| `gog_magog_pairs` | 22.635s | Gog/Magog proximity controls |
-| `surface_context_nt` | 18.909s | NT hit center/span context screen |
-| `gog_magog_strict_pairs` | 12.281s | same-chapter and same-signed-skip Gog/Magog controls |
-| `batch_term_sets` | 11.161s | one scan per corpus for declared term sets |
-| `targeted_paired_controls` | 10.806s | focused modern/geopolitical paired controls |
-| `critical_omission_breaks` | 9.751s | TR hits affected by SBLGNT omitted verses |
-| `pair_baselines` | 9.708s | strict observed unrelated pair baselines |
-| `related_name_pairs` | 9.000s | related modern-name proximity |
-| `extension_paired_controls` | 8.464s | filtered extension paired controls |
-| `synthetic_pair_baselines` | 5.460s | length-matched synthetic Hebrew pair baselines |
-| `surface_extensions_tr_nt` | 5.087s | same-skip extension scan |
-| `surface_extensions_sblgnt` | 5.051s | same-skip extension scan |
-| `report_index` | 4.901s | report index rebuild |
-| `beast_dragon_strict_controls` | 4.477s | full controls for Hebrew Beast/Dragon baseline |
-| `synthetic_extension_baselines` | 4.217s | same-length synthetic Greek extension baselines |
-| `extension_exact_center_cohort_controls` | 4.088s | broader exact-center extension cohort controls |
-| `extension_overlap_controls` | 3.987s | strict TR/SBLGNT overlap extension controls |
-| `extension_exact_center_controls` | 3.583s | deeper exact-center extension controls |
-| `extension_exact_center_cohort_review` | 0.831s | exact-center cohort context and letter-path review |
-| `extension_context_review` | 0.798s | manual context review for strict extension overlaps |
-| `extension_exact_center_cross_text` | 0.556s | exact-center cross-text key check |
-| `synthetic_extension_match_review` | 0.471s | context review for synthetic extension match rows |
-| `targeted_terms_report` | 0.384s | compact target-term join report |
-| `surface_extension_summary_tr_nt` | 0.292s | filtered TR extension summary |
-| `surface_extension_summary_sblgnt` | 0.292s | filtered SBLGNT extension summary |
-| `word_counts` | 0.079s | cached lexical/morphology-style count reports |
-| `extension_exact_center_final_gate` | 0.047s | final exact-center promotion gate |
-| `bootstrap_public_sources` | 0.018s | cached source bootstrap and corpus stats |
-| `critical_surface_variants` | 0.005s | cached critical-text surface variant rows |
+| `els_controls` | 118.569s | shuffled-letter and shuffled-term controls |
+| `gog_magog_pairs` | 61.330s | Gog/Magog proximity controls |
+| `surface_context_nt` | 56.460s | NT hit center/span context screen |
+| `gog_magog_strict_pairs` | 51.209s | same-chapter and same-signed-skip Gog/Magog controls |
+| `pair_baselines` | 46.789s | strict observed unrelated pair baselines |
+| `targeted_paired_controls` | 35.058s | focused modern/geopolitical paired controls |
+| `batch_term_sets` | 27.246s | one scan per corpus for declared term sets |
+| `report_index` | 14.764s | report index rebuild |
+| `synthetic_pair_baselines` | 14.641s | length-matched synthetic Hebrew pair baselines |
+| `beast_dragon_strict_controls` | 13.759s | full controls for Hebrew Beast/Dragon baseline |
+| `word_counts` | 11.230s | cached lexical/morphology-style count reports |
+| `related_name_pairs` | 8.279s | related modern-name proximity |
+| `extension_paired_controls` | 7.682s | filtered extension paired controls |
+| `critical_omission_breaks` | 7.269s | TR hits affected by SBLGNT omitted verses |
+| `surface_extensions_sblgnt` | 6.246s | same-skip extension scan |
+| `surface_extensions_tr_nt` | 6.234s | same-skip extension scan |
+| `synthetic_extension_baselines` | 5.807s | same-length synthetic Greek extension baselines |
+| `extension_exact_center_cohort_controls` | 5.125s | broader exact-center extension cohort controls |
+| `extension_overlap_controls` | 4.987s | strict TR/SBLGNT overlap extension controls |
+| `extension_exact_center_controls` | 4.415s | deeper exact-center extension controls |
+| `critical_surface_variants` | 0.949s | critical-text surface variant rows |
+| `extension_context_review` | 0.922s | manual context review for strict extension overlaps |
+| `extension_exact_center_cohort_review` | 0.914s | exact-center cohort context and letter-path review |
+| `extension_exact_center_cross_text` | 0.642s | exact-center cross-text key check |
+| `targeted_terms_report` | 0.550s | compact target-term join report |
+| `synthetic_extension_match_review` | 0.541s | context review for synthetic extension match rows |
+| `surface_extension_summary_tr_nt` | 0.312s | filtered TR extension summary |
+| `surface_extension_summary_sblgnt` | 0.312s | filtered SBLGNT extension summary |
+| `bootstrap_public_sources` | 0.090s | cached source bootstrap and corpus stats |
+| `extension_exact_center_final_gate` | 0.055s | final exact-center promotion gate |
 
 Key output sizes:
 
 | Output | Rows |
 | --- | ---: |
-| `reports/protocols/public_baseline/surface_context_hits.csv` | 56,654 |
-| `reports/protocols/public_baseline/surface_context_summary.csv` | 766 |
+| `reports/protocols/public_baseline/surface_context_hits.csv` | 56,682 |
+| `reports/protocols/public_baseline/surface_context_summary.csv` | 916 |
 | `reports/protocols/public_baseline/surface_context_extensions_tr_nt_top.csv` | 11 |
 | `reports/protocols/public_baseline/surface_context_extensions_sblgnt_top.csv` | 21 |
-| `reports/els_controls_summary.csv` | 1,560 |
-| `reports/critical_omission_breaks_summary.csv` | 383 |
+| `reports/els_controls_summary.csv` | 1,865 |
+| `reports/critical_omission_breaks_summary.csv` | 458 |
 | `reports/related_name_pairs_summary.csv` | 85 |
 | `reports/targeted_terms_summary.csv` | 41 |
 | `reports/targeted_paired_controls_summary.csv` | 41 |
