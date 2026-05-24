@@ -30,10 +30,21 @@ Current output rows: 645, one per TR broken example row.
 
 Classes:
 
-- `preserved_by_byz_and_tcg`
-- `preserved_by_byz`
-- `preserved_by_tcg`
-- `tr_specific_under_equivalent_offsets`
+- `preserved_by_byz_and_tcg`: 193.
+- `preserved_by_byz`: 0.
+- `preserved_by_tcg`: 165.
+- `tr_specific_under_equivalent_offsets`: 287.
+
+Comparison status counts:
+
+- BYZ_NT preserved equivalent offsets: 193.
+- BYZ_NT ref missing: 192.
+- BYZ_NT coordinate mismatch: 175.
+- BYZ_NT not preserved equivalent offsets: 85.
+- TCG_NT preserved equivalent offsets: 358.
+- TCG_NT ref missing: 192.
+- TCG_NT coordinate mismatch: 66.
+- TCG_NT not preserved equivalent offsets: 29.
 
 ## Cautions
 
