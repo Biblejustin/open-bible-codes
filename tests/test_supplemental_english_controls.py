@@ -36,6 +36,7 @@ class SupplementalEnglishControlTests(unittest.TestCase):
                 "NHEB",
                 "PET",
                 "ROTHERHAM",
+                "RWEBSTER",
                 "TCNT",
                 "TYNDALE",
                 "WEYMOUTH",
@@ -89,7 +90,7 @@ class SupplementalEnglishControlTests(unittest.TestCase):
         self.assertIn("CC BY-SA 4.0", rows["PET"]["license_label"])
         self.assertEqual(rows["PET"]["source_path_prefix"], "")
 
-        for label in ["ACV", "NHEB", "ROTHERHAM", "MONTGOMERY", "ETHERIDGE", "WEYMOUTH", "TYNDALE"]:
+        for label in ["ACV", "NHEB", "ROTHERHAM", "MONTGOMERY", "ETHERIDGE", "WEYMOUTH", "TYNDALE", "RWEBSTER"]:
             self.assertEqual(rows[label]["source_format"], "zefania_xml_zip")
             self.assertIn("sourceforge.net/projects/zefania-sharp", rows[label]["source_url"])
             self.assertTrue(rows[label]["details_url"].startswith("https://crosswire.org/"))
@@ -97,6 +98,7 @@ class SupplementalEnglishControlTests(unittest.TestCase):
         self.assertEqual(rows["ACV"]["coverage"], "full")
         self.assertEqual(rows["NHEB"]["coverage"], "full")
         self.assertEqual(rows["ROTHERHAM"]["coverage"], "full")
+        self.assertEqual(rows["RWEBSTER"]["coverage"], "full")
         self.assertEqual(rows["TYNDALE"]["coverage"], "partial")
         for label in ["MONTGOMERY", "ETHERIDGE", "WEYMOUTH"]:
             self.assertEqual(rows[label]["coverage"], "nt")

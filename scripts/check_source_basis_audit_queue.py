@@ -61,6 +61,10 @@ SUPPLEMENTAL_ZEFANIA_SOURCES = {
         "https://sourceforge.net/projects/zefania-sharp/files/Bibles/ENG/Willam%20Tyndale%20Bible/SF_2009-01-20_ENG_BIBLE_TYNDALE_%28WILLAM%20TYNDALE%20BIBLE%29.zip/download",
         "https://crosswire.org/sword/modules/ModInfo.jsp?modName=Tyndale",
     ),
+    "rwebster": (
+        "https://sourceforge.net/projects/zefania-sharp/files/Bibles/ENG/Revised%201833%20Webster%20Version/SF_2009-01-20_ENG_RWEBSTER_%28REVISED%201833%20WEBSTER%20VERSION%29.zip/download",
+        "https://crosswire.org/sword/modules/ModInfo.jsp?modName=RWebster",
+    ),
 }
 MANIFEST_LABELS = {
     "biblegateway": "BibleGateway English versions",

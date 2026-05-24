@@ -184,15 +184,16 @@ Supplemental open English controls:
 - `protocols/supplemental_english_controls.toml`
 
 These controls currently add AKJV from the official AKJV text ZIP, CPDV from
-the CrossWire CPDV source archive, six BibleCorps source archives, seven
+the CrossWire CPDV source archive, six BibleCorps source archives, eight
 Zefania/CrossWire public-domain modules, and four OpenEnglishBible base-text
 folders. The official AKJV page identifies the AKJV as public domain and based
 on the KJV; the CrossWire CPDV, ACV, NHEB, Rotherham, Montgomery, Etheridge,
-Weymouth, and Tyndale module pages identify those modules as public-domain
-source texts. CPDV is translated from Latin Vulgate editions; Etheridge is a
-Syriac/Peshitta-line English NT; Tyndale is a partial historical English
-control. ACV, NHEB, Rotherham, Montgomery, and Weymouth stay broad English
-surface controls unless their module pages state exact source-edition details.
+Weymouth, Tyndale, and RWebster module pages identify those modules as
+public-domain source texts. CPDV is translated from Latin Vulgate editions;
+Etheridge is a Syriac/Peshitta-line English NT; Tyndale is a partial
+historical English control; RWebster is a KJV/Webster-line revision. ACV,
+NHEB, Rotherham, Montgomery, and Weymouth stay broad English surface controls
+unless their module pages state exact source-edition details.
 BibleCorps metadata identifies Anderson, AV1611, AV1811, and DRC1750 as
 public-domain source text, and DEB/PET as CC BY-SA 4.0 sources.
 OpenEnglishBible's USFM repository marks the Kent, McFadyen, Moffatt, and TCNT

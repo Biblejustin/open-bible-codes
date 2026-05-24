@@ -43,7 +43,7 @@ stated are usable only as English surface controls, not manuscript witnesses.
 | OTB English controls | 1 | 0 | 1 |
 | Open.Bible English controls | 4 | 0 | 4 |
 | Original Douay-Rheims English controls | 1 | 0 | 1 |
-| Supplemental open English controls | 19 | 0 | 19 |
+| Supplemental open English controls | 20 | 0 | 20 |
 
 ## Validation
 
@@ -116,7 +116,7 @@ None after this pass.
 | ODR | `broad_tradition` | Original Douay-Rheims repository identifies a CC0 1.0 USFM/JSON dataset for the unmodified 1609 Old Testament and 1582 New Testament; use as a historical Latin Vulgate-line English control: <https://github.com/janvier-s/original-douay-rheims> |
 | AKJV | `broad_tradition` | Official AKJV page identifies the version as a simple word-for-word KJV English update, placed in the public domain on November 8, 1999: <https://akjv.us/> |
 | CPDV | `broad_tradition` | CrossWire CPDV module identifies the translation as public domain and based on Sixtine-Clementine Latin Vulgate editions; use as a modern Vulgate-line English control: <https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=CPDV> |
-| ACV, NHEB, ROTHERHAM, MONTGOMERY, ETHERIDGE, WEYMOUTH, TYNDALE | `broad_tradition` | CrossWire module pages identify these texts as public-domain English Bible modules; import uses the corresponding Zefania XML packages and keeps exact source-edition claims broad unless stated by the module page: <https://crosswire.org/sword/modules/ModInfo.jsp?modName=ACV>, <https://crosswire.org/sword/modules/ModInfo.jsp?modName=NHEB>, <https://crosswire.org/sword/modules/ModInfo.jsp?modName=Rotherham>, <https://crosswire.org/sword/modules/ModInfo.jsp?modName=Montgomery>, <https://crosswire.org/sword/modules/ModInfo.jsp?modName=Etheridge>, <https://crosswire.org/sword/modules/ModInfo.jsp?modName=Weymouth>, and <https://crosswire.org/sword/modules/ModInfo.jsp?modName=Tyndale> |
+| ACV, NHEB, ROTHERHAM, MONTGOMERY, ETHERIDGE, WEYMOUTH, TYNDALE, RWEBSTER | `broad_tradition` | CrossWire module pages identify these texts as public-domain English Bible modules; import uses the corresponding Zefania XML packages and keeps exact source-edition claims broad unless stated by the module page: <https://crosswire.org/sword/modules/ModInfo.jsp?modName=ACV>, <https://crosswire.org/sword/modules/ModInfo.jsp?modName=NHEB>, <https://crosswire.org/sword/modules/ModInfo.jsp?modName=Rotherham>, <https://crosswire.org/sword/modules/ModInfo.jsp?modName=Montgomery>, <https://crosswire.org/sword/modules/ModInfo.jsp?modName=Etheridge>, <https://crosswire.org/sword/modules/ModInfo.jsp?modName=Weymouth>, <https://crosswire.org/sword/modules/ModInfo.jsp?modName=Tyndale>, and <https://crosswire.org/sword/modules/ModInfo.jsp?modName=RWebster> |
 | ANDERSON | `broad_tradition` | BibleCorps Anderson README identifies the public-domain 1864 Anderson New Testament source and Internet Archive facsimile; use as a historical Greek-NT English control: <https://github.com/BibleCorps/ENG-B1-Anderson1864-pd-USFM> |
 | AV1611 | `broad_tradition` | BibleCorps AV1611 source preserves the 1611 Authorized Version wording and front matter; use as a historical KJV-line English control: <https://github.com/BibleCorps/ENG-B-AV1611-pd-PSFM> |
 | AV1811 | `broad_tradition` | BibleCorps AV1811 source identifies the Paragraph Bible source as an 1838 public-domain Authorized Version edition; use as a historical KJV-line paragraphing control: <https://github.com/BibleCorps/ENG-B-AV1811-pd-Cambridge-Paragraph-Bible-PSFM> |
