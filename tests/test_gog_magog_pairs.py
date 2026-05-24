@@ -1,8 +1,11 @@
 import random
 import unittest
+from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import patch
 
 from els.corpus import Corpus, VerseSpan
+from scripts import analyze_gog_magog_pairs as gog_magog
 from scripts.analyze_gog_magog_pairs import (
     ControlSample,
     HitLite,
@@ -14,6 +17,7 @@ from scripts.analyze_gog_magog_pairs import (
     p_value_ge,
     p_value_le,
     resolve_corpus_jobs,
+    run_corpus_analyses,
     score_control_samples,
     score_pair,
     span_gap,
@@ -85,6 +89,18 @@ class GogMagogPairsTests(unittest.TestCase):
         self.assertGreaterEqual(resolve_corpus_jobs(0, 4), 1)
         with self.assertRaises(ValueError):
             resolve_corpus_jobs(-1, 4)
+
+    def test_run_corpus_analyses_falls_back_when_process_pool_denied(self) -> None:
+        tasks = [
+            ("FIRST", Path("first.toml"), {}, SimpleNamespace()),
+            ("SECOND", Path("second.toml"), {}, SimpleNamespace()),
+        ]
+
+        with (
+            patch.object(gog_magog, "ProcessPoolExecutor", side_effect=PermissionError("denied")),
+            patch.object(gog_magog, "analyze_corpus_task", side_effect=lambda task: task[0]),
+        ):
+            self.assertEqual(run_corpus_analyses(tasks, jobs=2), ["FIRST", "SECOND"])
 
     def test_collect_hits_by_query_parallel_matches_serial(self) -> None:
         corpus = Corpus(

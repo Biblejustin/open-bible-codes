@@ -3,7 +3,9 @@ import unittest
 from collections import Counter
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
+from scripts import analyze_apocrypha_bridge_term_shuffled_controls as term_controls
 from scripts.analyze_apocrypha_bridge_term_shuffled_controls import (
     manifest_args,
     run_samples,
@@ -146,6 +148,35 @@ class ApocryphaBridgeTermShuffledControlsTests(unittest.TestCase):
         )
 
         self.assertEqual(sample_rows, [cached_sample])
+        self.assertEqual(term_rows, [])
+
+    def test_run_samples_falls_back_when_process_pool_denied(self) -> None:
+        args = argparse.Namespace(
+            samples=2,
+            seed=123,
+            min_skip=2,
+            max_skip=4,
+            direction="both",
+            jobs=2,
+            resume_samples=False,
+        )
+
+        with patch.object(
+            term_controls,
+            "ProcessPoolExecutor",
+            side_effect=PermissionError("denied"),
+        ):
+            sample_rows, term_rows = run_samples(
+                "abc",
+                "def",
+                {},
+                {"canonical_prefix_letters": 3},
+                args,
+            )
+
+        self.assertEqual([row["sample"] for row in sample_rows], [1, 2])
+        self.assertEqual([row["seed"] for row in sample_rows], [123, 124])
+        self.assertEqual([row["bridge_rows"] for row in sample_rows], [0, 0])
         self.assertEqual(term_rows, [])
 
     def test_manifest_args_converts_terms_paths(self) -> None:

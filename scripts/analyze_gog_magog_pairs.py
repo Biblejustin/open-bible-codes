@@ -279,7 +279,11 @@ def run_corpus_analyses(
 ) -> list[CorpusAnalysis]:
     if jobs <= 1:
         return [analyze_corpus_task(task) for task in tasks]
-    with ProcessPoolExecutor(max_workers=jobs, mp_context=process_context()) as executor:
+    try:
+        executor = ProcessPoolExecutor(max_workers=jobs, mp_context=process_context())
+    except PermissionError:
+        return [analyze_corpus_task(task) for task in tasks]
+    with executor:
         return list(executor.map(analyze_corpus_task, tasks))
 
 

@@ -172,20 +172,25 @@ def run_samples(
     worker_options = sample_worker_options(args)
     effective_jobs = resolve_count_jobs(args.jobs, len(missing_samples)) if missing_samples else 1
     if effective_jobs > 1:
-        with ProcessPoolExecutor(
-            max_workers=effective_jobs,
-            mp_context=process_context(),
-            initializer=initialize_sample_worker,
-            initargs=(canonical_prefix, apocrypha_block, term_records, boundary, worker_options),
-        ) as executor:
-            for sample_row, term_rows in executor.map(count_sample_worker, missing_samples):
-                key = (int(sample_row["sample"]), int(sample_row["seed"]))
-                sample_rows_by_key[key] = sample_row
-                term_sample_rows_by_key[key] = term_rows
-                if args.resume_samples:
-                    write_csv(args.sample_out, ordered_sample_rows(sample_rows_by_key), SAMPLE_FIELDNAMES)
-                    write_csv(args.term_sample_out, ordered_term_sample_rows(term_sample_rows_by_key), TERM_SAMPLE_FIELDNAMES)
-    else:
+        try:
+            executor = ProcessPoolExecutor(
+                max_workers=effective_jobs,
+                mp_context=process_context(),
+                initializer=initialize_sample_worker,
+                initargs=(canonical_prefix, apocrypha_block, term_records, boundary, worker_options),
+            )
+        except PermissionError:
+            effective_jobs = 1
+        else:
+            with executor:
+                for sample_row, term_rows in executor.map(count_sample_worker, missing_samples):
+                    key = (int(sample_row["sample"]), int(sample_row["seed"]))
+                    sample_rows_by_key[key] = sample_row
+                    term_sample_rows_by_key[key] = term_rows
+                    if args.resume_samples:
+                        write_csv(args.sample_out, ordered_sample_rows(sample_rows_by_key), SAMPLE_FIELDNAMES)
+                        write_csv(args.term_sample_out, ordered_term_sample_rows(term_sample_rows_by_key), TERM_SAMPLE_FIELDNAMES)
+    if effective_jobs <= 1:
         worker_args = argparse.Namespace(**worker_options)
         for sample, seed in missing_samples:
             sample_row, term_rows = count_sample(
