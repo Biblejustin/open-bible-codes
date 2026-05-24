@@ -86,6 +86,9 @@ class TermDisplayTests(unittest.TestCase):
         self.assertEqual(display_term("קאובוי"), "`קאובוי` (qwbwy; English: Cowboy)")
         self.assertEqual(display_term("καρχηδων"), "`καρχηδων` (karchedon; English: Carthage)")
 
+    def test_synthetic_controls_do_not_become_fallback_glosses(self) -> None:
+        self.assertEqual(display_term("γδ"), "`γδ` (gd)")
+
     def test_ignores_script_text_as_english_override(self) -> None:
         self.assertEqual(
             display_term("ονομα", english="ὄνομα"),

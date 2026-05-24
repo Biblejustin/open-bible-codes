@@ -16,3 +16,6 @@ open-bible-codes = "els.cli:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = [
+  "integration: slower real-corpus smoke tests",
+]

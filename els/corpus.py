@@ -119,6 +119,91 @@ def load_corpus(config_path: str | Path, *, use_cache: bool | None = None) -> Co
     return build_corpus(config_file, config)
 
 
+def splice_verses_into_corpus(
+    base: Corpus,
+    donor: Corpus,
+    donor_refs: list[str],
+) -> Corpus:
+    """Return a corpus with donor verses inserted in donor canonical order."""
+
+    donor_ref_set = set(donor_refs)
+    base_by_key = {
+        (_canonical_nt_book(verse.book), verse.chapter, verse.verse): verse
+        for verse in base.verses
+    }
+    letters: list[str] = []
+    verses: list[VerseSpan] = []
+    position_to_verse: list[int] = []
+    for donor_verse in donor.verses:
+        verse = donor_verse if donor_verse.ref in donor_ref_set else base_by_key.get(
+            (_canonical_nt_book(donor_verse.book), donor_verse.chapter, donor_verse.verse)
+        )
+        if verse is None:
+            continue
+        start = len(letters)
+        normalized = normalize_text(
+            verse.raw_text,
+            base.language,
+            keep_hebrew_final_forms=base.keep_hebrew_final_forms,
+        )
+        verse_index = len(verses)
+        letters.extend(normalized)
+        position_to_verse.extend([verse_index] * len(normalized))
+        verses.append(
+            VerseSpan(
+                source=verse.source,
+                ref=verse.ref,
+                book=verse.book,
+                chapter=verse.chapter,
+                verse=verse.verse,
+                raw_text=verse.raw_text,
+                norm_start=start,
+                norm_end=len(letters) - 1,
+                norm_length=len(normalized),
+            )
+        )
+    return Corpus(
+        name=f"{base.name}+spliced",
+        language=base.language,
+        keep_hebrew_final_forms=base.keep_hebrew_final_forms,
+        text="".join(letters),
+        verses=tuple(verses),
+        position_to_verse=array("i", position_to_verse),
+    )
+
+
+def _canonical_nt_book(book: str) -> str:
+    return {
+        "Matt": "MAT",
+        "Mark": "MRK",
+        "Luke": "LUK",
+        "John": "JHN",
+        "Acts": "ACT",
+        "Rom": "ROM",
+        "1Cor": "1CO",
+        "2Cor": "2CO",
+        "Gal": "GAL",
+        "Eph": "EPH",
+        "Phil": "PHP",
+        "Col": "COL",
+        "1Thess": "1TH",
+        "2Thess": "2TH",
+        "1Tim": "1TI",
+        "2Tim": "2TI",
+        "Titus": "TIT",
+        "Phlm": "PHM",
+        "Heb": "HEB",
+        "Jas": "JAS",
+        "1Pet": "1PE",
+        "2Pet": "2PE",
+        "1John": "1JN",
+        "2John": "2JN",
+        "3John": "3JN",
+        "Jude": "JUD",
+        "Rev": "REV",
+    }.get(book, book)
+
+
 def build_corpus(config_file: Path, config: dict[str, Any]) -> Corpus:
     language = config["language"]
     keep_hebrew_final_forms = bool(config.get("keep_hebrew_final_forms", False))

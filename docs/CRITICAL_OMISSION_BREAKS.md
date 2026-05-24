@@ -28,48 +28,44 @@ Outputs:
 - `reports/critical_omission_breaks_by_verse.csv`
 - `reports/critical_omission_breaks.manifest.json`
 
-Input Stats:
+Current Input Stats:
 
-- TR Greek NT: 692,948 normalized letters; 7,957 verses.
+- TR Greek NT: 690,831 normalized letters; 7,957 verses.
 - SBLGNT: 679,879 normalized letters; 7,939 verses.
-- Greek term rows checked: 160.
-- TR hits checked: 60,381.
+- Greek term rows checked: 458.
+- TR hits checked: 172,752.
 - Ref-missing verses: 20.
-- Deleted blocks used: 18.
-- Deleted letters used: 1,223.
-
-Ref-Missing But Not Counted As Deleted:
-
-- Acts 19:41: adjacent merge into SBLGNT Acts 19:40.
-- 2 Corinthians 13:14: content renumbered as SBLGNT 2 Corinthians 13:13, minus final `αμην` (amen; English: amen).
+- Deleted blocks used: 20.
+- Deleted letters used: 1,479.
 
 Broken Hits:
 
-- Broken total: 202.
-- Broken by removed ELS letter: 197.
-- Broken by spacing only: 5.
+- Broken total: 645.
+- Broken by removed ELS letter: 637.
+- Broken by spacing only: 8.
 - Preserved across deleted block: 0.
 
 Top Broken Terms:
 
-- Noah: `νωε` (Noe; English: Noah), 49.
-- Hul: `ουλ` (Oul; English: Hul), 41.
-- Temple: `ναος` (naos; English: temple), 18.
-- Son: `υιος` (huios; English: son), 13.
-- Iran: `ιραν` (iran; English: Iran), 8.
-- Blood: `αιμα` (haima; English: blood), 7.
-- Shem: `σημ` (Sem; English: Shem), 7.
-- Ham: `χαμ` (Cham; English: Ham), 7.
+- Eve: `ευα`, 151.
+- United Nations: `οηε`, 86.
+- Ur: `ουρ`, 55.
+- Noah: `νωε`, 46.
+- Hul: `ουλ`, 37.
+- USA: `ηπα`, 29.
+- Temple: `ναοσ`, 21.
+- NATO: `νατο`, 20.
 
 Top Deleted Blocks:
 
-- Romans 16:25: 22 broken hits.
-- Mark 9:44: 19.
-- John 5:4: 19.
-- Mark 11:26: 18.
-- Mark 9:46: 16.
-- Matthew 23:14: 13.
-- Romans 16:26: 13.
+- 2 Corinthians 13:14: 60 broken hits.
+- Romans 16:25: 56.
+- Mark 11:26: 47.
+- Romans 16:27: 44.
+- Romans 16:26: 42.
+- Acts 28:29: 41.
+- John 5:4: 36.
+- Mark 9:44: 34.
 
 Cautions:
 

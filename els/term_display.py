@@ -478,6 +478,8 @@ def csv_known_terms() -> dict[str, tuple[str, str]]:
         try:
             with path.open(newline="", encoding="utf-8") as handle:
                 for row in csv.DictReader(handle):
+                    if not _allows_fallback_gloss(row):
+                        continue
                     term = row.get("term", "").strip()
                     concept = row.get("concept", "").strip()
                     if not term or not concept:
@@ -493,6 +495,20 @@ def csv_known_terms() -> dict[str, tuple[str, str]]:
             continue
 
     return {key: ("", sorted(concepts)[0]) for key, concepts in concepts_by_key.items() if len(concepts) == 1}
+
+
+def _allows_fallback_gloss(row: dict[str, str]) -> bool:
+    """Keep synthetic controls out of generic display gloss lookup."""
+    category = row.get("category", "").strip().lower()
+    concept = row.get("concept", "").strip().lower()
+    term_id = row.get("term_id", "").strip().lower()
+    if "control" in category or category in {"random_letters", "scrambled"}:
+        return False
+    if concept.startswith(("length control", "nonsense", "scrambled")):
+        return False
+    if "_lc" in term_id or term_id.startswith(("nonsense_", "scrambled_")):
+        return False
+    return True
 
 
 def display_center(ref: str, center_word: str) -> str:

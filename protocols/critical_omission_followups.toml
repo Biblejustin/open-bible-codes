@@ -1,0 +1,162 @@
+name = "critical_omission_followups"
+description = "Follow-up analyses on TR-vs-SBLGNT omission breaks."
+manifest_out = "reports/protocols/critical_omission_followups/protocol_run.manifest.json"
+max_parallel = 3
+progress_interval_seconds = 30
+
+[[steps]]
+id = "critical_omission_breaks_reverse"
+description = "Spliced TR-only blocks checked through the shared break engine."
+argv = ["-m", "scripts.analyze_critical_omission_breaks_reverse"]
+inputs = [
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "terms/theological_terms.csv",
+  "terms/modern_names_dates.csv",
+  "terms/table_of_nations.csv",
+  "terms/prophetic_terms.csv",
+]
+outputs = [
+  "reports/critical_omission_breaks_reverse_summary.csv",
+  "reports/critical_omission_breaks_reverse_examples.csv",
+  "reports/critical_omission_breaks_reverse_by_verse.csv",
+  "reports/critical_omission_breaks_reverse.manifest.json",
+]
+parallel_group = "followups"
+
+[[steps]]
+id = "critical_omission_breaks_cross_tradition"
+description = "TR broken hits status in Majority/BYZ and TCG NT corpora."
+argv = ["-m", "scripts.analyze_critical_omission_breaks_cross_tradition"]
+inputs = [
+  "reports/critical_omission_breaks_examples.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+]
+outputs = [
+  "reports/critical_omission_breaks_cross_tradition.csv",
+  "reports/critical_omission_breaks_cross_tradition.manifest.json",
+]
+parallel_group = "followups"
+
+[[steps]]
+id = "critical_omission_breaks_null"
+description = "1000-shuffle null distribution for actual omitted blocks."
+argv = [
+  "-m",
+  "scripts.analyze_critical_omission_breaks_null",
+  "--shuffles",
+  "1000",
+  "--seed",
+  "1",
+]
+inputs = [
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "terms/theological_terms.csv",
+  "terms/modern_names_dates.csv",
+  "terms/table_of_nations.csv",
+  "terms/prophetic_terms.csv",
+]
+outputs = [
+  "reports/critical_omission_breaks_null/null_distribution.csv",
+  "reports/critical_omission_breaks_null/null_per_block.csv",
+  "reports/critical_omission_breaks_null/summary.csv",
+  "reports/critical_omission_breaks_null/manifest.json",
+]
+
+[[steps]]
+id = "critical_omission_breaks_length_stratified"
+description = "Per-term break rate normalized by total TR hits."
+argv = ["-m", "scripts.analyze_critical_omission_breaks_length_stratified"]
+inputs = [
+  "reports/critical_omission_breaks_summary.csv",
+  "configs/example_ebible_grctr.toml",
+  "terms/theological_terms.csv",
+  "terms/modern_names_dates.csv",
+  "terms/table_of_nations.csv",
+  "terms/prophetic_terms.csv",
+]
+outputs = [
+  "reports/critical_omission_breaks_length_stratified.csv",
+  "reports/critical_omission_breaks_length_stratified.manifest.json",
+]
+parallel_group = "followups"
+
+[[steps]]
+id = "critical_omission_breaks_pericope_override"
+description = "Disputed-passages override with generic plus Pericope thematic terms."
+argv = [
+  "-m",
+  "scripts.analyze_critical_omission_breaks",
+  "--treat-as-deleted",
+  "protocols/treat_as_deleted/critical_consensus.csv",
+  "--extra-terms",
+  "terms/pericope_adulterae_terms.csv",
+  "--out-suffix",
+  "_pericope_override",
+]
+inputs = [
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "protocols/treat_as_deleted/critical_consensus.csv",
+  "terms/theological_terms.csv",
+  "terms/modern_names_dates.csv",
+  "terms/table_of_nations.csv",
+  "terms/prophetic_terms.csv",
+  "terms/pericope_adulterae_terms.csv",
+]
+outputs = [
+  "reports/critical_omission_breaks_pericope_override_summary.csv",
+  "reports/critical_omission_breaks_pericope_override_examples.csv",
+  "reports/critical_omission_breaks_pericope_override_by_verse.csv",
+  "reports/critical_omission_breaks_pericope_override.manifest.json",
+]
+parallel_group = "followups"
+
+[[steps]]
+id = "critical_omission_breaks_pericope_inverse"
+description = "John 8:6 Jesus exact-center hit destroyed by Pericope removal."
+argv = ["-m", "scripts.analyze_pericope_inverse_check"]
+inputs = [
+  "configs/example_sblgnt.toml",
+  "configs/example_ebible_grcmt.toml",
+  "protocols/treat_as_deleted/critical_consensus.csv",
+]
+outputs = [
+  "reports/critical_omission_breaks_pericope_inverse.csv",
+  "reports/critical_omission_breaks_pericope_inverse.manifest.json",
+]
+parallel_group = "followups"
+
+[[steps]]
+id = "critical_omission_breaks_pericope_length_controls"
+description = "Disputed-passages override with Pericope length-control terms."
+argv = [
+  "-m",
+  "scripts.analyze_critical_omission_breaks",
+  "--treat-as-deleted",
+  "protocols/treat_as_deleted/critical_consensus.csv",
+  "--extra-terms",
+  "terms/pericope_adulterae_length_controls.csv",
+  "--out-suffix",
+  "_pericope_length_controls",
+]
+inputs = [
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "protocols/treat_as_deleted/critical_consensus.csv",
+  "terms/theological_terms.csv",
+  "terms/modern_names_dates.csv",
+  "terms/table_of_nations.csv",
+  "terms/prophetic_terms.csv",
+  "terms/pericope_adulterae_length_controls.csv",
+]
+outputs = [
+  "reports/critical_omission_breaks_pericope_length_controls_summary.csv",
+  "reports/critical_omission_breaks_pericope_length_controls_examples.csv",
+  "reports/critical_omission_breaks_pericope_length_controls_by_verse.csv",
+  "reports/critical_omission_breaks_pericope_length_controls.manifest.json",
+]
+parallel_group = "followups"

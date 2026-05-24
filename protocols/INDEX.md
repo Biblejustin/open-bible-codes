@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 136
+Protocols indexed: 137
 
 ## Analysis
 
@@ -126,6 +126,7 @@ Protocols indexed: 136
 | all_codes_followup_letter_paths | Letter-path audit sheet for selected Hebrew, Greek, and English all-codes follow-up rows. | 1 |  | reports/all_codes_followup_letter_paths | `all_codes_followup_letter_paths.toml` |
 | all_codes_followup_review | Compact manual-review packet for selected Hebrew and Greek all-codes rows. | 1 |  | reports/all_codes_followup_review | `all_codes_followup_review.toml` |
 | all_codes_followup_selection | Compact manual-review follow-up selection from relaxed all-codes triage queues. | 1 |  | reports/all_codes_followup_selection | `all_codes_followup_selection.toml` |
+| critical_omission_followups | Follow-up analyses on TR-vs-SBLGNT omission breaks. | 7 | terms/modern_names_dates.csv, terms/pericope_adulterae_length_controls.csv, terms/peric... | reports, reports/critical_omission_breaks_null | `critical_omission_followups.toml` |
 | doxa_four_source_claim_followup | Locked 5000/5000 four-source follow-up for the strongest Greek exact-center doxa extens... | 2 |  | reports/doxa_four_source_claim_followup | `doxa_four_source_claim_followup.toml` |
 | doxa_four_source_confirmatory_followup | Locked 20000/20000 confirmatory follow-up for the strongest Greek exact-center doxa ext... | 2 |  | reports/doxa_four_source_confirmatory_followup | `doxa_four_source_confirmatory_followup.toml` |
 | english_seed_shuffle_followup_100 | 100-sample shuffled-letter follow-up for English seed rows that reached the exploratory... | 1 |  | reports/english_seed_shuffle_followup_100 | `english_seed_shuffle_followup_100.toml` |

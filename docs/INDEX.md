@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 345
+Documents indexed: 350
 
 ## Controls
 
@@ -227,6 +227,11 @@ Documents indexed: 345
 | Centered-Relevance Density Framework | `CRD_FRAMEWORK.md` |
 | CRD Review Workflow | `CRD_REVIEW_WORKFLOW.md` |
 | Critical Omission Breaks | `CRITICAL_OMISSION_BREAKS.md` |
+| Critical Omission Breaks Cross Tradition | `CRITICAL_OMISSION_BREAKS_CROSS_TRADITION.md` |
+| Critical Omission Breaks Length Stratified | `CRITICAL_OMISSION_BREAKS_LENGTH_STRATIFIED.md` |
+| Critical Omission Breaks Null | `CRITICAL_OMISSION_BREAKS_NULL.md` |
+| Critical Omission Breaks Pericope Override | `CRITICAL_OMISSION_BREAKS_PERICOPE_OVERRIDE.md` |
+| Critical Omission Breaks Reverse | `CRITICAL_OMISSION_BREAKS_REVERSE.md` |
 | Critical Surface Variants | `CRITICAL_SURFACE_VARIANTS.md` |
 | CRI ELS Critique Audit | `CRI_ELS_CRITIQUE_AUDIT.md` |
 | Cross-Skip Summary | `CROSS_SKIP_SUMMARY.md` |

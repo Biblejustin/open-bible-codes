@@ -1,0 +1,14 @@
+term_id,concept,category,language,term,notes
+moichalis_g,Adulteress,pericope_thematic,greek,μοιχαλίς,Pericope John 8:3 key noun
+moicheuo_g,Commit Adultery,pericope_thematic,greek,μοιχεύω,Pericope verb
+kategoros_g,Accuser,pericope_thematic,greek,κατήγορος,Pericope John 8:10 noun
+katigoreo_g,Accuse,pericope_thematic,greek,κατηγορέω,Pericope John 8:6 verb
+lithos_g,Stone,pericope_thematic,greek,λίθος,Pericope John 8:7 noun
+lithazo_g,Stone Verb,pericope_thematic,greek,λιθάζω,Pericope John 8:5 verb
+grapho_g,Write,pericope_thematic,greek,γράφω,"Pericope John 8:6,8; Jesus writing"
+daktylos_g,Finger,pericope_thematic,greek,δάκτυλος,Pericope John 8:6 noun
+ge_g,Earth,pericope_thematic,greek,γῆ,Pericope John 8:6 ground/earth
+hamartia_g,Sin,pericope_thematic,greek,ἁμαρτία,Pericope John 8:7 noun
+anamartetos_g,Sinless,pericope_thematic,greek,ἀναμάρτητος,Pericope John 8:7 without sin
+iesous_g,Jesus,pericope_thematic,greek,Ἰησοῦς,name centered at John 8:6 skip -192 in SBLGNT+BYZ
+gyne_g,Woman,pericope_thematic,greek,γυνή,"Pericope John 8:3,4,9,10 noun"
