@@ -1,9 +1,11 @@
 import unittest
 from array import array
+from pathlib import Path
+from types import SimpleNamespace
 
 from els.corpus import Corpus, VerseSpan
 from els.critical import OmittedBlock, TermBreakStats
-from scripts.analyze_critical_omission_breaks import passage_summary_rows_for_blocks
+from scripts.analyze_critical_omission_breaks import TERM_PATHS, passage_summary_rows_for_blocks, term_paths_for_args
 
 
 class PassageSummaryRowsTests(unittest.TestCase):
@@ -56,6 +58,22 @@ class PassageSummaryRowsTests(unittest.TestCase):
         rows = passage_summary_rows_for_blocks(corpus, stats_by_query, blocks, matches)
 
         self.assertEqual(rows, [])
+
+
+class TermPathSelectionTests(unittest.TestCase):
+    def test_default_terms_are_used_unless_disabled(self) -> None:
+        args = SimpleNamespace(no_default_terms=False, extra_terms=[Path("terms/extra.csv")])
+
+        paths = term_paths_for_args(args)
+
+        self.assertEqual(paths, TERM_PATHS + [Path("terms/extra.csv")])
+
+    def test_no_default_terms_uses_only_extra_terms(self) -> None:
+        args = SimpleNamespace(no_default_terms=True, extra_terms=[Path("terms/extra.csv")])
+
+        paths = term_paths_for_args(args)
+
+        self.assertEqual(paths, [Path("terms/extra.csv")])
 
 
 def _corpus(text: str) -> Corpus:

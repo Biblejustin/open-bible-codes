@@ -56,7 +56,7 @@ def main() -> int:
     )
     omitted_blocks.extend(build_partial_deleted_blocks(tr, partial_deleted_refs))
     deleted_blocks = [block for block in omitted_blocks if block.used_as_deletion]
-    term_paths = TERM_PATHS + args.extra_terms
+    term_paths = term_paths_for_args(args)
     terms = read_greek_terms(term_paths, tr)
     if args.max_terms is not None:
         terms = terms[: args.max_terms]
@@ -154,10 +154,16 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--tr-config", type=Path, default=TR_CONFIG)
     parser.add_argument("--critical-config", type=Path, default=CRITICAL_CONFIG)
     parser.add_argument("--treat-as-deleted", type=Path)
+    parser.add_argument("--no-default-terms", action="store_true")
     parser.add_argument("--extra-terms", type=Path, action="append", default=[])
     parser.add_argument("--out-suffix", default="")
     parser.add_argument("--max-terms", type=int, help="Test helper: limit term rows before building queries.")
     return parser
+
+
+def term_paths_for_args(args: argparse.Namespace) -> list[Path]:
+    paths = [] if args.no_default_terms else list(TERM_PATHS)
+    return paths + list(args.extra_terms)
 
 
 def output_paths_for_suffix(suffix: str) -> dict[str, Path]:
@@ -545,6 +551,7 @@ def write_manifest(
                 "tr_corpus": tr.summary(),
                 "critical_corpus": critical.summary(),
                 "term_paths": [str(term_path.resolve()) for term_path in term_paths],
+                "default_terms_enabled": not args.no_default_terms,
                 "treat_as_deleted": str(args.treat_as_deleted.resolve()) if args.treat_as_deleted else "",
                 "out_suffix": args.out_suffix,
                 "term_rows": len(terms),

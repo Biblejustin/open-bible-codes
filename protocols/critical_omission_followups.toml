@@ -85,6 +85,94 @@ outputs = [
 parallel_group = "followups"
 
 [[steps]]
+id = "critical_omission_breaks_pericope_generic"
+description = "Disputed-passages override with only generic Greek term lists."
+argv = [
+  "-m",
+  "scripts.analyze_critical_omission_breaks",
+  "--treat-as-deleted",
+  "protocols/treat_as_deleted/critical_consensus.csv",
+  "--out-suffix",
+  "_pericope_generic",
+]
+inputs = [
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "protocols/treat_as_deleted/critical_consensus.csv",
+  "terms/theological_terms.csv",
+  "terms/modern_names_dates.csv",
+  "terms/table_of_nations.csv",
+  "terms/prophetic_terms.csv",
+]
+outputs = [
+  "reports/critical_omission_breaks_pericope_generic_summary.csv",
+  "reports/critical_omission_breaks_pericope_generic_examples.csv",
+  "reports/critical_omission_breaks_pericope_generic_by_verse.csv",
+  "reports/critical_omission_missing_verses_pericope_generic.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_pericope_adulterae_pericope_generic_summary.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_pericope_adulterae_pericope_generic_examples.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_pericope_adulterae_pericope_generic_by_verse.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_longer_ending_of_mark_pericope_generic_summary.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_longer_ending_of_mark_pericope_generic_examples.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_longer_ending_of_mark_pericope_generic_by_verse.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_gethsemane_angel_and_bloody_sweat_pericope_generic_summary.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_gethsemane_angel_and_bloody_sweat_pericope_generic_examples.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_gethsemane_angel_and_bloody_sweat_pericope_generic_by_verse.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_father_forgive_them_pericope_generic_summary.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_father_forgive_them_pericope_generic_examples.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_father_forgive_them_pericope_generic_by_verse.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_comma_johanneum_pericope_generic_summary.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_comma_johanneum_pericope_generic_examples.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_comma_johanneum_pericope_generic_by_verse.csv",
+  "reports/critical_omission_breaks_pericope_generic.manifest.json",
+]
+parallel_group = "followups"
+
+[[steps]]
+id = "critical_omission_breaks_pericope_thematic"
+description = "Disputed-passages override with only Pericope thematic terms."
+argv = [
+  "-m",
+  "scripts.analyze_critical_omission_breaks",
+  "--treat-as-deleted",
+  "protocols/treat_as_deleted/critical_consensus.csv",
+  "--no-default-terms",
+  "--extra-terms",
+  "terms/pericope_adulterae_terms.csv",
+  "--out-suffix",
+  "_pericope_thematic",
+]
+inputs = [
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "protocols/treat_as_deleted/critical_consensus.csv",
+  "terms/pericope_adulterae_terms.csv",
+]
+outputs = [
+  "reports/critical_omission_breaks_pericope_thematic_summary.csv",
+  "reports/critical_omission_breaks_pericope_thematic_examples.csv",
+  "reports/critical_omission_breaks_pericope_thematic_by_verse.csv",
+  "reports/critical_omission_missing_verses_pericope_thematic.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_pericope_adulterae_pericope_thematic_summary.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_pericope_adulterae_pericope_thematic_examples.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_pericope_adulterae_pericope_thematic_by_verse.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_longer_ending_of_mark_pericope_thematic_summary.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_longer_ending_of_mark_pericope_thematic_examples.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_longer_ending_of_mark_pericope_thematic_by_verse.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_gethsemane_angel_and_bloody_sweat_pericope_thematic_summary.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_gethsemane_angel_and_bloody_sweat_pericope_thematic_examples.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_gethsemane_angel_and_bloody_sweat_pericope_thematic_by_verse.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_father_forgive_them_pericope_thematic_summary.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_father_forgive_them_pericope_thematic_examples.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_father_forgive_them_pericope_thematic_by_verse.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_comma_johanneum_pericope_thematic_summary.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_comma_johanneum_pericope_thematic_examples.csv",
+  "reports/critical_omission_breaks_treat_as_deleted_comma_johanneum_pericope_thematic_by_verse.csv",
+  "reports/critical_omission_breaks_pericope_thematic.manifest.json",
+]
+parallel_group = "followups"
+
+[[steps]]
 id = "critical_omission_breaks_pericope_override"
 description = "Disputed-passages override with generic plus Pericope thematic terms."
 argv = [

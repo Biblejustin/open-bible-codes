@@ -26,7 +26,9 @@ them. The same shared break engine then counts removed-letter and spacing
 breaks.
 
 The generic four Greek term lists are run together with
-`terms/pericope_adulterae_terms.csv`.
+`terms/pericope_adulterae_terms.csv` for the aggregate run. The protocol also
+writes generic-only and Pericope-thematic-only runs so the targeted cohort can
+be read separately.
 
 ## Results
 
@@ -46,6 +48,13 @@ summary total matches its companion examples file:
 - Father forgive them: 10 term rows, 22 broken hits.
 - Comma Johanneum: 8 term rows, 24 broken hits.
 
+Separate cohort runs:
+
+- Generic-only run: 458 term rows, 1,271 broken example rows.
+- Generic-only Pericope Adulterae passage summary: 34 term rows, 266 broken hits.
+- Pericope-thematic-only run: 13 term rows, 2 broken example rows.
+- Pericope-thematic-only Pericope Adulterae passage summary: 1 term row, 1 broken hit.
+
 The inverse Pericope check confirms the documented John 8:6 centered Jesus hit:
 
 - SBLGNT: 1 documented hit, destroyed after Pericope removal.
@@ -59,7 +68,6 @@ Control run:
 - Longer Ending of Mark passage summary: 38 term rows, 260 broken hits.
 - Frequency-control rows: 60.
 - Frequency-control broken hits: 8.
-- Pericope thematic broken hits: 0.
 - Control file: `terms/pericope_adulterae_frequency_controls.csv`.
 - Controls are exact normalized-length matches chosen from existing non-Pericope
   Greek term rows by nearest TR hit frequency.
