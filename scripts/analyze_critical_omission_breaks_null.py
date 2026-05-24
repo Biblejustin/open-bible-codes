@@ -15,6 +15,7 @@ from els.critical import (
     count_breaks_for_blocks,
     shuffled_block_placement,
 )
+from els.search import iter_els_query_matches_by_lanes
 from els.statistics import benjamini_hochberg_q_values, tail_p_value_ge, tail_p_value_le
 from scripts.analyze_critical_omission_breaks import (
     CRITICAL_CONFIG,
@@ -45,6 +46,15 @@ def main() -> int:
         terms = terms[: args.max_terms]
 
     observed_stats, observed_queries = build_stats_by_query(tr, [dict(row) for row in terms])
+    matches = list(
+        iter_els_query_matches_by_lanes(
+            tr.text,
+            observed_queries,
+            min_skip=MIN_SKIP,
+            max_skip=MAX_SKIP,
+            direction="both",
+        )
+    )
     observed_total, observed_per_block, _broken = count_breaks_for_blocks(
         tr,
         observed_queries,
@@ -52,6 +62,7 @@ def main() -> int:
         min_skip=MIN_SKIP,
         max_skip=MAX_SKIP,
         direction="both",
+        matches=matches,
     )
 
     null_totals: list[int] = []
@@ -65,6 +76,9 @@ def main() -> int:
             min_skip=MIN_SKIP,
             max_skip=MAX_SKIP,
             direction="both",
+            matches=matches,
+            update_stats=False,
+            collect_broken_hits=False,
         )
         null_totals.append(total)
         null_per_block.append(per_block)

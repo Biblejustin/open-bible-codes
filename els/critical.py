@@ -190,66 +190,89 @@ def count_breaks_for_blocks(
     min_skip: int,
     max_skip: int,
     direction: str = "both",
+    matches: Iterable[tuple[str, int, int, int]] | None = None,
+    update_stats: bool = True,
+    collect_broken_hits: bool = True,
 ) -> tuple[int, list[int], list[BrokenHit]]:
     deleted_blocks = [block for block in blocks if block.used_as_deletion]
     per_block_breaks = [0 for _block in deleted_blocks]
     block_index = {block.ref: index for index, block in enumerate(deleted_blocks)}
+    total_breaks = 0
     broken_hits: list[BrokenHit] = []
 
-    for normalized, skip, start, end in iter_els_query_matches_by_lanes(
-        corpus.text,
-        stats_by_query,
-        min_skip=min_skip,
-        max_skip=max_skip,
-        direction=direction,
-    ):
-        for stats in stats_by_query[normalized]:
-            stats.total_hits += 1
-            span_blocks = blocks_in_offsets(start, end, deleted_blocks)
-            if not span_blocks:
-                continue
+    match_iter = matches
+    if match_iter is None:
+        match_iter = iter_els_query_matches_by_lanes(
+            corpus.text,
+            stats_by_query,
+            min_skip=min_skip,
+            max_skip=max_skip,
+            direction=direction,
+        )
 
-            hit = build_hit(corpus, stats.term_row["term"], normalized, skip, start, end)
-            stats.span_intersect_hits += 1
-            sequence_positions = hit_sequence_positions(hit)
-            removed_blocks = blocks_with_sequence_letters(sequence_positions, span_blocks)
-            if removed_blocks:
-                stats.broken_removed_letter_hits += 1
+    for normalized, skip, start, end in match_iter:
+        stats_for_query = stats_by_query[normalized]
+        if update_stats:
+            for stats in stats_for_query:
+                stats.total_hits += 1
+        span_blocks = blocks_in_offsets(start, end, deleted_blocks)
+        if not span_blocks:
+            continue
+
+        sequence_positions = [start + index * skip for index in range(len(normalized))]
+        removed_blocks = blocks_with_sequence_letters(sequence_positions, span_blocks)
+        if removed_blocks:
+            for stats in stats_for_query:
+                if update_stats:
+                    stats.span_intersect_hits += 1
+                    stats.broken_removed_letter_hits += 1
+                total_breaks += 1
                 for block in removed_blocks:
                     per_block_breaks[block_index[block.ref]] += 1
+                if collect_broken_hits:
+                    hit = build_hit(corpus, stats.term_row["term"], normalized, skip, start, end)
+                    broken_hits.append(
+                        BrokenHit(
+                            term_row=stats.term_row,
+                            hit=hit,
+                            break_type="broken_removed_letter",
+                            span_blocks=tuple(span_blocks),
+                            removed_blocks=tuple(removed_blocks),
+                        )
+                    )
+            continue
+
+        mapped_positions = [
+            map_old_to_deleted_text(position, deleted_blocks)
+            for position in sequence_positions
+        ]
+        if keeps_same_skip(mapped_positions, skip):
+            if update_stats:
+                for stats in stats_for_query:
+                    stats.span_intersect_hits += 1
+                    stats.preserved_across_omission_hits += 1
+            continue
+
+        for stats in stats_for_query:
+            if update_stats:
+                stats.span_intersect_hits += 1
+                stats.broken_spacing_hits += 1
+            total_breaks += 1
+            for block in span_blocks:
+                per_block_breaks[block_index[block.ref]] += 1
+            if collect_broken_hits:
+                hit = build_hit(corpus, stats.term_row["term"], normalized, skip, start, end)
                 broken_hits.append(
                     BrokenHit(
                         term_row=stats.term_row,
                         hit=hit,
-                        break_type="broken_removed_letter",
+                        break_type="broken_spacing",
                         span_blocks=tuple(span_blocks),
-                        removed_blocks=tuple(removed_blocks),
+                        removed_blocks=(),
                     )
                 )
-                continue
 
-            mapped_positions = [
-                map_old_to_deleted_text(position, deleted_blocks)
-                for position in sequence_positions
-            ]
-            if keeps_same_skip(mapped_positions, hit.skip):
-                stats.preserved_across_omission_hits += 1
-                continue
-
-            stats.broken_spacing_hits += 1
-            for block in span_blocks:
-                per_block_breaks[block_index[block.ref]] += 1
-            broken_hits.append(
-                BrokenHit(
-                    term_row=stats.term_row,
-                    hit=hit,
-                    break_type="broken_spacing",
-                    span_blocks=tuple(span_blocks),
-                    removed_blocks=(),
-                )
-            )
-
-    return len(broken_hits), per_block_breaks, broken_hits
+    return total_breaks, per_block_breaks, broken_hits
 
 
 def shuffled_block_placement(

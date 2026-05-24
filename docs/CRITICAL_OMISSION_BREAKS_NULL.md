@@ -27,21 +27,21 @@ refs. It currently matches verse count, not letter count.
 
 ## Results
 
-Current smoke run:
+Current 1000-shuffle protocol run:
 
-- Shuffles: 5.
 - Observed breaks: 645.
-- Null min/median/max: 745 / 768 / 807.
-- Greater-or-equal tail: 1.0.
-- Lesser-or-equal tail: 0.1667.
+- Null min/median/max: 556 / 727 / 913.
+- Greater-or-equal tail: 0.9710.
+- Lesser-or-equal tail: 0.0300.
+- Per-block exploratory p-values and BH q-values are in
+  `reports/critical_omission_breaks_null/null_per_block.csv`.
 
-The protocol file keeps the intended 1000-shuffle run:
+The protocol manifest is at:
 
-- `protocols/critical_omission_followups.toml`
+- `reports/protocols/critical_omission_followups/protocol_run.manifest.json`
 
 ## Cautions
 
-- The 5-shuffle smoke run is a plumbing check, not a final significance result.
 - Raw break counts are not significance tests.
 - The default null matches verse count only; letter-count matching would answer a different question.
 - Per-block p-values are exploratory and use BH q-values across blocks.
