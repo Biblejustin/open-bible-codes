@@ -98,7 +98,10 @@ class ApocryphaCoverageTests(unittest.TestCase):
             with out.open(encoding="utf-8", newline="") as handle:
                 rows = list(csv.DictReader(handle))
             self.assertTrue(any(row["book"] == "TOB" and row["present"] == "yes" for row in rows))
-            self.assertIn("Apocrypha Source Coverage", markdown.read_text(encoding="utf-8"))
+            markdown_text = markdown.read_text(encoding="utf-8")
+            self.assertIn("Apocrypha Source Coverage", markdown_text)
+            self.assertIn("completed apocrypha/deuterocanon", markdown_text)
+            self.assertNotIn("planned apocrypha/deuterocanon", markdown_text)
             self.assertIn("audit_apocrypha_coverage", manifest.read_text(encoding="utf-8"))
 
     def test_main_renders_dynamic_corpus_columns(self) -> None:

@@ -166,8 +166,8 @@ def write_markdown(
     lines = [
         "# Apocrypha Source Coverage",
         "",
-        "Status: source-coverage audit for the planned apocrypha/deuterocanon",
-        "follow-on study. This is not an ELS result.",
+        "Status: source-coverage audit for completed apocrypha/deuterocanon",
+        "bridge review layers. This is not an ELS result.",
         "",
         "## Reproduce",
         "",
