@@ -802,13 +802,15 @@ supposed to fail if tracked files are dirty.
 
 Latest validation snapshot after the release-ready make target:
 
-- `make release-ready` passed, including `python3 -m pytest -q`: 1469 tests,
+- `make release-ready` passed, including `python3 -m pytest -q`: 1470 tests,
   2 skipped, and 29195 subtests.
 - `python3 -m scripts.check_expanded_strata_tooling` passed inside
   `make fast-validate`.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.
+- `python3 -m scripts.check_doc_command_references` passed inside
+  `make public-release-check` and the real-report preflight.
 - `make local-data-doc-check` passed on the current local ignored `data/raw/`
   and `data/processed/` caches.
 - `make public-release-check` passed from the committed tree.
