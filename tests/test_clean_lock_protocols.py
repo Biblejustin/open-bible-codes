@@ -149,12 +149,16 @@ def test_strict_followup_gate_summary_has_zero_claim_ready_rows() -> None:
 
 def test_final_report_includes_clean_lock_closeout() -> None:
     text = Path("docs/FINAL_REPORT.md").read_text(encoding="utf-8")
+    normalized_text = " ".join(text.split())
 
     assert "## Clean-Lock Close-Out" in text
     assert "0 Hebrew concordance rows and 0 Greek surface rows" in text
     assert "0 all-source extension keys" in text
     assert "`docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_REPORT.md`" in text
     assert "`docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`" in text
+    assert "genuinely new clean source or source-family question" in normalized_text
+    assert "exclusion gates, and controls frozen" in normalized_text
+    assert "proper next step is a narrower locked prospective study" not in normalized_text
 
     draft = Path("docs/FINAL_REPORT_DRAFT.md").read_text(encoding="utf-8")
     outline = Path("docs/FINAL_REPORT_OUTLINE.md").read_text(encoding="utf-8")

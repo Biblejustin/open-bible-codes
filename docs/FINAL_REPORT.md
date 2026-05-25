@@ -553,7 +553,8 @@ meaningful. It is that the toolkit can collect the rows, preserve their
 source/version/context details, run controls, and keep occurrence findings
 separate from claim language.
 
-At this point, no current row should be presented as a public claim. The proper
-next step is a narrower locked prospective study with fixed terms, fixed
-corpora, fixed skip rules, fixed center/extension rules, and fixed controls
-before seeing new result-producing output.
+At this point, no current row should be presented as a public claim. Any future
+result-bearing work should start from a genuinely new clean source or
+source-family question, with terms, corpora, skip rules, center/extension rules,
+exclusion gates, and controls frozen before any new result-producing output is
+inspected.
