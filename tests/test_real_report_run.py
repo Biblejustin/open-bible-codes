@@ -27,6 +27,14 @@ class RealReportRunTests(unittest.TestCase):
             (root / "ok.md").write_text("Biblejustin only", encoding="utf-8")
             self.assertEqual(preflight.scan_forbidden_terms(root), [])
 
+    def test_real_report_summary_uses_completed_kjva_status(self) -> None:
+        source = Path("scripts/build_real_report_run_summary.py").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn("completed KJVA prospective", source)
+        self.assertNotIn("fresh KJVA prospective", source)
+
     def test_real_report_preflight_and_summary_are_not_resume_cached(self) -> None:
         protocol = load_protocol("protocols/real_report_run.toml")
         steps_by_id = {step["id"]: step for step in protocol["steps"]}

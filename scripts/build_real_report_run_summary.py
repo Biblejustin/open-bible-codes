@@ -1538,7 +1538,7 @@ def write_summary(
             "",
             "Before moving from review candidates to claims, require independent",
             "replication or a new locked prospective design that survives both",
-            "shuffled and non-Bible insertion controls. The fresh KJVA prospective",
+            "shuffled and non-Bible insertion controls. The completed KJVA prospective",
             "bridge run is negative under both control families.",
         ]
     )
