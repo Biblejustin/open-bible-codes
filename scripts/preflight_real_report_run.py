@@ -650,6 +650,13 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(real_report_doc_reference_failures)
         )
 
+    preflight_protocol_input_failures = find_preflight_protocol_input_failures(root)
+    if preflight_protocol_input_failures:
+        failures.append(
+            "preflight protocol input failures: "
+            + "; ".join(preflight_protocol_input_failures)
+        )
+
     prospective_lane_failures = check_prospective_study_lanes.validate_profiles(
         root / check_prospective_study_lanes.DEFAULT_PROFILE_FILE
     )
@@ -1095,6 +1102,7 @@ def main(argv: list[str] | None = None) -> int:
         "required_paths": required,
         "missing_paths": missing_paths,
         "real_report_doc_reference_failures": real_report_doc_reference_failures,
+        "preflight_protocol_input_failures": preflight_protocol_input_failures,
         "prospective_lane_failures": prospective_lane_failures,
         "source_basis_failures": source_basis_failures,
         "english_corpus_policy_failures": english_corpus_policy_failures,
@@ -1221,6 +1229,38 @@ def find_unrequired_doc_references(root: Path, required: set[str]) -> list[str]:
                 failures.append(
                     f"{source} references {ref} but it is not in required paths"
                 )
+    return failures
+
+
+def find_preflight_protocol_input_failures(root: Path) -> list[str]:
+    protocol_path = root / "protocols/real_report_run.toml"
+    if not protocol_path.exists():
+        return []
+
+    protocol = tomllib.loads(protocol_path.read_text(encoding="utf-8"))
+    steps = {
+        step.get("id"): step
+        for step in protocol.get("steps", [])
+        if isinstance(step, dict)
+    }
+    preflight_step = steps.get("preflight")
+    if not preflight_step:
+        return ["protocols/real_report_run.toml missing preflight step"]
+
+    expected = set(DEFAULT_REQUIRED_PATHS)
+    actual = set(preflight_step.get("inputs", []))
+    failures: list[str] = []
+    missing = sorted(expected - actual)
+    extra = sorted(actual - expected)
+    if missing:
+        failures.append(
+            "protocol preflight inputs missing required paths: " + ", ".join(missing)
+        )
+    if extra:
+        failures.append(
+            "protocol preflight inputs not in DEFAULT_REQUIRED_PATHS: "
+            + ", ".join(extra)
+        )
     return failures
 
 

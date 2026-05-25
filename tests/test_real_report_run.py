@@ -1096,6 +1096,33 @@ class RealReportRunTests(unittest.TestCase):
             set(preflight.DEFAULT_REQUIRED_PATHS),
             set(preflight_step["inputs"]),
         )
+        self.assertEqual(preflight.find_preflight_protocol_input_failures(Path(".")), [])
+
+    def test_preflight_protocol_input_guard_reports_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "protocols").mkdir()
+            (root / "protocols" / "real_report_run.toml").write_text(
+                """
+name = "real_report_run"
+
+[[steps]]
+id = "preflight"
+inputs = ["docs/A.md", "docs/C.md"]
+""",
+                encoding="utf-8",
+            )
+
+            with patch.object(preflight, "DEFAULT_REQUIRED_PATHS", ["docs/A.md", "docs/B.md"]):
+                failures = preflight.find_preflight_protocol_input_failures(root)
+
+        self.assertEqual(
+            failures,
+            [
+                "protocol preflight inputs missing required paths: docs/B.md",
+                "protocol preflight inputs not in DEFAULT_REQUIRED_PATHS: docs/C.md",
+            ],
+        )
 
     def test_preflight_payload_records_output_path(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -1116,6 +1143,8 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("expanded_strata_tooling_failures", payload)
             self.assertIn("public_claim_language_failures", payload)
             self.assertIn("doc_command_reference_failures", payload)
+            self.assertIn("preflight_protocol_input_failures", payload)
+            self.assertIn("real_report_doc_reference_failures", payload)
             self.assertIn("study_mapping_schema_failures", payload)
             self.assertIn("preregistration_placeholder_paths", payload)
             self.assertIn("preregistration_placeholder_failures", payload)
