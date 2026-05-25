@@ -1,7 +1,8 @@
 # Greek Lexicon Prospective Source
 
-Status: source packet for a future result-producing study. No ELS result search
-is run by this document.
+Status: historical source packet for the completed Greek lexicon extension
+lane. No ELS result search is run by this document; the completed result report
+is `docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_REPORT.md`.
 
 ## Source
 
@@ -100,14 +101,14 @@ Current audit result:
 
 ## Cautions
 
-This is a term-source lock, not evidence. Strong's headwords are a large
-dictionary-like pool, so any future result search must use predeclared controls
-and correction before any row is promoted.
+This is a term-source lock, not evidence by itself. Strong's headwords are a
+large dictionary-like pool, so the completed result search needed predeclared
+controls and correction before any row could even become review material.
 
 The source list is lexicon-derived, not a morphology-tagged frequency list.
 Some headwords may be rare, proper names, spelling variants, or dictionary forms
 that do not surface often in every Greek New Testament corpus.
 
 The clean filter removes direct and substring reuse from registered prior
-evidence. It does not guarantee that a future hit is meaningful; it only avoids
+evidence. It does not guarantee that a hit is meaningful; it only avoids
 reusing already seen terms or local text strings as a new prospective claim.
