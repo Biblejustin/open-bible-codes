@@ -81,7 +81,8 @@ This assembly run includes:
   `docs/WRR_MANUAL_DECISION_RECORD_WORKSHEET.md`,
   `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md`,
   `docs/WRR_DW_FORMULA_SENSITIVITY.md`, `docs/WRR_CLAIM_READINESS.md`, and
-  `docs/WRR_CLAIM_BLOCKER_PACKET.md`, plus
+  `docs/WRR_CLAIM_BLOCKER_PACKET.md`,
+  `docs/WRR_LOCKED_METHOD_REPORT.md`, plus
   `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md`
 - broader search/current findings writeup:
   `docs/BROADER_SEARCH_FINDINGS.md`
@@ -159,6 +160,8 @@ It requires:
 - WRR claim-blocker packet states no-input limits, keeps no-correction and
   no-exclusion boundaries visible, and summarizes the residual term, row,
   page-image, and method/pair-universe review lanes;
+- WRR locked-method report gives the compact reader-facing selected local
+  lock result while preserving exact-published-reproduction caveats;
 - WRR source-policy checklist keeps the Chełm source-policy/pair-rule target
   as a review lane with required decision-record fields;
 - WRR source-transcription row checklist keeps the 22 row clusters in review
@@ -266,9 +269,10 @@ The report-run summary should currently say:
   observed rows and 72 defined `c(w,w')` values. Exact published WRR
   reproduction remains caveated by source-transcription limits and the
   163-distance gap. The explicit readiness gate is tracked in
-  `docs/WRR_CLAIM_READINESS.md`; `docs/WRR_CLAIM_BLOCKER_PACKET.md` records
-  that no current claim-readiness blockers remain under the selected local lock
-  policy; `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md` keeps the residual
+  `docs/WRR_CLAIM_READINESS.md`; `docs/WRR_LOCKED_METHOD_REPORT.md` is the
+  compact locked local method summary; `docs/WRR_CLAIM_BLOCKER_PACKET.md`
+  records that no current claim-readiness blockers remain under the selected
+  local lock policy; `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md` keeps the residual
   source/term/method evidence lanes visible without selecting corrections;
   `docs/WRR_CLAIM_BLOCKER_PACKET.md` mirrors those residual lanes as a compact
   no-input handoff with term targets, source-transcription row clusters,

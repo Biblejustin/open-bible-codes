@@ -374,7 +374,8 @@ For the current working position, the repo-defined locked result uses the
 cap-1000 corrected-distance matrix, keeps the selected full source universe,
 shuffles date labels across 30 concepts, and writes summary-only output. It
 observed 182 source rows, 72 defined `c(w,w')` values, and Bonferroni
-`rho0 = 0.000404`.
+`rho0 = 0.000404`. `docs/WRR_LOCKED_METHOD_REPORT.md` is now the compact
+reader-facing artifact for this selected local lock path.
 
 That is locked local evidence for the repo-defined protocol, but it is not
 exact published WRR reproduction language. Exact published reproduction remains
@@ -419,6 +420,7 @@ Source artifacts:
 - `docs/WRR_LOCK_OPTIONS.md`
 - `docs/WRR_CLAIM_READINESS.md`
 - `docs/WRR_CLAIM_BLOCKER_PACKET.md`
+- `docs/WRR_LOCKED_METHOD_REPORT.md`
 - `docs/WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md`
 - `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md`
 - `docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md`

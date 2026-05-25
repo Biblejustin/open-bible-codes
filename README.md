@@ -82,8 +82,9 @@ This runs a synthetic Aho/goto-table count benchmark plus real corpus load, find
 
 Observed optimization results are summarized in `docs/PERFORMANCE.md`.
 WRR-style reproduction requirements are tracked in
-`docs/WRR_REPLICATION_PLAN.md` and current blockers in
-`docs/WRR_METHODOLOGY_GAPS.md`.
+`docs/WRR_REPLICATION_PLAN.md`, current blockers in
+`docs/WRR_METHODOLOGY_GAPS.md`, and the selected local lock summary in
+`docs/WRR_LOCKED_METHOD_REPORT.md`.
 
 Parallel batch-count benchmark:
 
@@ -713,6 +714,10 @@ WRR claim-blocker packet:
 It mirrors the residual no-input handoff: top term targets,
 source-transcription row clusters, page-image near-match terms, and
 method/pair-universe counts, without choosing corrections or exclusions.
+WRR locked-method report:
+`docs/WRR_LOCKED_METHOD_REPORT.md`.
+It is the compact reader-facing summary for the selected local WRR lock path,
+and it keeps exact published reproduction caveats attached to the result.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.

@@ -1439,6 +1439,42 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_locked_method_report"
+description = "Write the compact WRR locked-method report with exact-reproduction caveats."
+argv = [
+  "-m", "scripts.build_wrr_locked_method_report",
+  "--method-status", "reports/wrr_1994/wrr_method_status.csv",
+  "--readiness", "reports/wrr_1994/wrr_claim_readiness.csv",
+  "--lock-options", "reports/wrr_1994/wrr_lock_options.csv",
+  "--manual-worksheet", "reports/wrr_1994/wrr_manual_decision_record_worksheet.csv",
+  "--corrected-distance-summary", "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged_summary.csv",
+  "--corrected-distance-aggregate", "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_aggregate.csv",
+  "--permutation-summary", "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999_summary.csv",
+  "--primary-result-table", "reports/wrr_1994/wrr_primary_result_table.csv",
+  "--defined-pair-summary", "reports/wrr_1994/wrr_defined_pair_set_audit_summary.csv",
+  "--out", "reports/wrr_1994/wrr_locked_method_report.csv",
+  "--markdown-out", "docs/WRR_LOCKED_METHOD_REPORT.md",
+  "--manifest-out", "reports/wrr_1994/wrr_locked_method_report.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_locked_method_report.py",
+  "reports/wrr_1994/wrr_method_status.csv",
+  "reports/wrr_1994/wrr_claim_readiness.csv",
+  "reports/wrr_1994/wrr_lock_options.csv",
+  "reports/wrr_1994/wrr_manual_decision_record_worksheet.csv",
+  "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged_summary.csv",
+  "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_aggregate.csv",
+  "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999_summary.csv",
+  "reports/wrr_1994/wrr_primary_result_table.csv",
+  "reports/wrr_1994/wrr_defined_pair_set_audit_summary.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_locked_method_report.csv",
+  "docs/WRR_LOCKED_METHOD_REPORT.md",
+  "reports/wrr_1994/wrr_locked_method_report.manifest.json",
+]
+
+[[steps]]
 id = "audit_wrr2_genesis_pairs_len_5_8"
 description = "Audit WRR appendix-compatible 5..8-letter same-record pair rows."
 argv = [

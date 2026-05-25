@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 350
+Documents indexed: 351
 
 ## Controls
 
@@ -188,6 +188,7 @@ Documents indexed: 350
 | Hebrew Theology Prospective Report | `HEBREW_THEOLOGY_PROSPECTIVE_REPORT.md` |
 | Local Terms Negative Appendix Report | `LOCAL_TERMS_APPENDIX_REPORT.md` |
 | SBLGNT Source-Only Exact-Center Report | `SBLGNT_SOURCE_ONLY_EXACT_CENTER_REPORT.md` |
+| WRR Locked Method Report | `WRR_LOCKED_METHOD_REPORT.md` |
 
 ## Studies
 
