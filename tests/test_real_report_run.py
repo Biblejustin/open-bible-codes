@@ -522,6 +522,14 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/CLAIM_CATALOG.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("configs/prospective_study_lanes.json", steps_by_id["preflight"]["inputs"])
         self.assertIn(
+            "docs/GREEK_SURFACE_SECOND_COHORT_READINESS.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_greek_surface_second_cohort_readiness_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_study_lock_manifests_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -921,6 +929,14 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/CLAIM_CATALOG.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("configs/prospective_study_lanes.json", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn(
+            "docs/GREEK_SURFACE_SECOND_COHORT_READINESS.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_greek_surface_second_cohort_readiness_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/check_study_lock_manifests_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -1172,6 +1188,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn("prospective_next_lock_doc_failures", payload)
             self.assertIn("prospective_readiness_doc_failures", payload)
             self.assertIn("study_lock_manifests_doc_failures", payload)
+            self.assertIn("greek_second_cohort_readiness_doc_failures", payload)
             self.assertIn("study_mapping_schema_failures", payload)
             self.assertIn("preregistration_placeholder_paths", payload)
             self.assertIn("preregistration_placeholder_failures", payload)
@@ -1495,6 +1512,28 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "study-lock manifests doc failures: "
                 "docs/STUDY_LOCK_MANIFESTS.md missing guard",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_greek_second_cohort_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_greek_surface_second_cohort_readiness_doc,
+                "validate_second_cohort_doc",
+                return_value=["docs/GREEK_SURFACE_SECOND_COHORT_READINESS.md stale"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["greek_second_cohort_readiness_doc_failures"],
+                ["docs/GREEK_SURFACE_SECOND_COHORT_READINESS.md stale"],
+            )
+            self.assertIn(
+                "Greek second-cohort readiness doc failures: "
+                "docs/GREEK_SURFACE_SECOND_COHORT_READINESS.md stale",
                 payload["failures"],
             )
 

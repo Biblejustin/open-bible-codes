@@ -25,6 +25,7 @@ from scripts import (
     check_doc_command_references,
     check_english_corpus_policy_docs,
     check_expanded_strata_tooling,
+    check_greek_surface_second_cohort_readiness_doc,
     check_hypothesis_testing_source_audit_doc,
     check_manual_review_queue,
     check_preregistration_placeholders,
@@ -244,6 +245,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/CRD_CENTER_WORD_SELF_VS_CONCEPT_FINDINGS.md",
     "docs/CRD_CENTER_WORD_VERSION_PRESENCE_FINDINGS.md",
     "docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md",
+    "docs/GREEK_SURFACE_SECOND_COHORT_READINESS.md",
     "docs/STUDY_LOCK_MANIFESTS.md",
     "docs/EXPANDED_STRATA_TOOLING.md",
     "docs/STUDY_MAPPING_SCHEMAS.md",
@@ -460,6 +462,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_study_lock_manifest.py",
     "scripts/check_study_lock_manifest.py",
     "scripts/check_study_lock_manifests_doc.py",
+    "scripts/check_greek_surface_second_cohort_readiness_doc.py",
     "scripts/check_preregistration_placeholders.py",
     "scripts/audit_prospective_terms.py",
     "scripts/filter_prospective_terms.py",
@@ -706,6 +709,18 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "study-lock manifests doc failures: "
             + "; ".join(study_lock_manifests_doc_failures)
+        )
+
+    greek_second_cohort_readiness_doc_failures = (
+        check_greek_surface_second_cohort_readiness_doc.validate_second_cohort_doc(
+            root / check_greek_surface_second_cohort_readiness_doc.DEFAULT_DOC,
+            root / check_greek_surface_second_cohort_readiness_doc.DEFAULT_PROFILES,
+        )
+    )
+    if greek_second_cohort_readiness_doc_failures:
+        failures.append(
+            "Greek second-cohort readiness doc failures: "
+            + "; ".join(greek_second_cohort_readiness_doc_failures)
         )
 
     source_basis_failures = check_source_basis_audit_queue.validate_source_basis_queue(
@@ -1149,6 +1164,9 @@ def main(argv: list[str] | None = None) -> int:
         "prospective_readiness_doc_failures": prospective_readiness_doc_failures,
         "prospective_next_lock_doc_failures": prospective_next_lock_doc_failures,
         "study_lock_manifests_doc_failures": study_lock_manifests_doc_failures,
+        "greek_second_cohort_readiness_doc_failures": (
+            greek_second_cohort_readiness_doc_failures
+        ),
         "source_basis_failures": source_basis_failures,
         "english_corpus_policy_failures": english_corpus_policy_failures,
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,

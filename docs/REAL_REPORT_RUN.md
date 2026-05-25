@@ -148,6 +148,8 @@ It requires:
 - prospective lane profiles valid, with registered term/protocol/report paths
   present, and the readiness, next-lock, and study-lock workflow docs agree
   with current lane state;
+- Greek surface second-cohort readiness keeps the existing-pool rerun boundary
+  visible;
 - English source-basis manifests and audit-queue counts valid, with no current
   `needs_audit` rows unless the policy is explicitly changed;
 - English corpus policy docs keep missing BibleGateway rows deferred unless a
