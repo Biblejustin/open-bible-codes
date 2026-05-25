@@ -18,6 +18,7 @@ inputs = [
   "scripts/check_consolidated_findings_doc.py",
   "scripts/check_prospective_lane_status_doc.py",
   "scripts/check_final_report_assembly_docs.py",
+  "scripts/check_final_report_highlights_doc.py",
   "els/project_index.py",
   "Makefile",
   "README.md",

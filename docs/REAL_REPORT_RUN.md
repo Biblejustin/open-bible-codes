@@ -147,6 +147,7 @@ It requires:
   script's required-path list, so the runnable protocol and script do not drift;
 - final report, draft, outline, and highlights keep their source-artifact and
   no-public-claim assembly boundary;
+- final report highlights markdown matches the deterministic builder output;
 - prospective lane profiles valid, with registered term/protocol/report paths
   present, and the readiness, next-lock, and study-lock workflow docs agree
   with current lane state;

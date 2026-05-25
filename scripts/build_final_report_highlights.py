@@ -217,6 +217,15 @@ def write_markdown(
     claim_rows: list[dict[str, str]],
     args: argparse.Namespace,
 ) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(render_markdown(highlights, claim_rows, args), encoding="utf-8")
+
+
+def render_markdown(
+    highlights: list[dict[str, object]],
+    claim_rows: list[dict[str, str]],
+    args: argparse.Namespace,
+) -> str:
     status_counts: dict[str, int] = {}
     for row in highlights:
         status = str(row["status"])
@@ -315,8 +324,7 @@ def write_markdown(
             "- Frequency and control reads should be carried into any public writeup beside the occurrence.",
         ]
     )
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+    return "\n".join(lines).rstrip() + "\n"
 
 
 def write_manifest(

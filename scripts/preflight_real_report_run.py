@@ -27,6 +27,7 @@ from scripts import (
     check_english_corpus_policy_docs,
     check_expanded_strata_tooling,
     check_final_report_assembly_docs,
+    check_final_report_highlights_doc,
     check_greek_surface_second_cohort_readiness_doc,
     check_hypothesis_testing_source_audit_doc,
     check_manual_review_queue,
@@ -100,6 +101,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_consolidated_findings_doc.py",
     "scripts/check_prospective_lane_status_doc.py",
     "scripts/check_final_report_assembly_docs.py",
+    "scripts/check_final_report_highlights_doc.py",
     "els/project_index.py",
     "Makefile",
     "README.md",
@@ -762,6 +764,15 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(final_report_assembly_doc_failures)
         )
 
+    final_report_highlights_doc_failures = (
+        check_final_report_highlights_doc.validate_highlights_doc()
+    )
+    if final_report_highlights_doc_failures:
+        failures.append(
+            "final-report highlights doc failures: "
+            + "; ".join(final_report_highlights_doc_failures)
+        )
+
     source_basis_failures = check_source_basis_audit_queue.validate_source_basis_queue(
         biblegateway_manifest=root / check_source_basis_audit_queue.DEFAULT_BIBLEGATEWAY_MANIFEST,
         ebible_controls=root / check_source_basis_audit_queue.DEFAULT_EBIBLE_CONTROLS,
@@ -1209,6 +1220,7 @@ def main(argv: list[str] | None = None) -> int:
         "consolidated_findings_doc_failures": consolidated_findings_doc_failures,
         "prospective_lane_status_doc_failures": prospective_lane_status_doc_failures,
         "final_report_assembly_doc_failures": final_report_assembly_doc_failures,
+        "final_report_highlights_doc_failures": final_report_highlights_doc_failures,
         "source_basis_failures": source_basis_failures,
         "english_corpus_policy_failures": english_corpus_policy_failures,
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,
