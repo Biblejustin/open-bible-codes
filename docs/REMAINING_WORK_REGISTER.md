@@ -531,40 +531,39 @@ until citable row, policy, or method evidence is locked.
 for Chełm: 1 priority term, 2 related source-review rows, 4 scenario-pair rows,
 and 3 WNP context blocks, with no automatic correction or exclusion.
 `docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md` keeps that Chełm
-source-policy/pair-rule target in pending manual lock state, preserving
-required decision-record fields without selecting source edits, method changes,
-or pair exclusions.
+source-policy/pair-rule target as a review lane, preserving required
+decision-record fields without selecting source edits, method changes, or pair
+exclusions.
 `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md` now handles the main
 source-transcription lane: 43 action terms, 44 residual pair links, 35
 minimum-frontier links, and 22 row clusters, with row 06 first at 4 frontier
 terms.
 `docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md` keeps those 22 row
-clusters in pending manual source-lock state, preserving review order and
-required decision-record fields without selecting row transcriptions,
-corrections, exclusions, or method changes.
+clusters in review order, preserving required decision-record fields without
+selecting row transcriptions, corrections, exclusions, or method changes.
 `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md` now handles the two remaining
 residual lanes: 3 page-image near-match terms and 11 method/pair-universe
 terms, preserving the no-correction boundary until page-image, method, or
 pair-universe evidence is locked.
 `docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md` keeps those 14 remaining-lane
-terms in pending page-image and method/pair-universe lock state, preserving
-required decision-record fields without selecting source edits, method
-changes, or pair exclusions.
-`docs/WRR_MANUAL_DECISION_REGISTER.md` consolidates all 37 pending manual-lock
-rows: 1 source-policy/pair-rule row, 22 source-transcription row clusters, 3
-page-image near-match rows, and 11 method/pair-universe rows. It represents 58
-action terms, 59 residual pair links, and 40 minimum-frontier pair links
-without selecting source edits, row transcriptions, method changes, or pair
+terms in page-image and method/pair-universe review lanes, preserving required
+decision-record fields without selecting source edits, method changes, or pair
 exclusions.
-`data/study/mappings/wrr_manual_decision_records.csv` is now a header-only
-template for future manual-lock records.
-`scripts/check_wrr_manual_decision_records.py` keeps any populated row aligned
+`docs/WRR_MANUAL_DECISION_REGISTER.md` consolidates all 37 manual-decision
+inventory rows: 1 source-policy/pair-rule row, 22 source-transcription row
+clusters, 3 page-image near-match rows, and 11 method/pair-universe rows. It
+represents 58 action terms, 59 residual pair links, and 40 minimum-frontier
+pair links without selecting source edits, row transcriptions, method changes,
+or pair exclusions.
+`data/study/mappings/wrr_manual_decision_records.csv` now records all 37
+current locks: 26 `no_source_change` rows and 11 `method_lock` rows.
+`scripts/check_wrr_manual_decision_records.py` keeps each populated row aligned
 to the current manual decision register by rank, lane, state, target, and
 checklist, and requires non-placeholder evidence plus an ISO lock date.
 `docs/WRR_MANUAL_DECISION_RECORD_WORKSHEET.md` now gives the exact `decision_id`,
-rank, lane, state, target, checklist, and evidence prompt for all 37 future lock
-rows without filling the lock CSV.
-Header-only status means no correction, transcription, method change,
+rank, lane, state, target, checklist, current record status, selected action,
+and evidence prompt for all 37 lock rows.
+The locked record status still means no source correction, row transcription,
 replacement lock, or pair exclusion has been selected.
 `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` now splits out the 11
 method-lane terms: all are OCR-matched, all have zero skip-250 appellation

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate WRR manual-decision register stays no-input."""
+"""Validate WRR manual-decision register remains a lane inventory."""
 
 from __future__ import annotations
 
@@ -12,7 +12,8 @@ DEFAULT_DOC = Path("docs/WRR_MANUAL_DECISION_REGISTER.md")
 
 REQUIRED_PHRASES = (
     "# WRR Manual Decision Register",
-    "Status: consolidated no-input register for WRR manual-lock decisions.",
+    "Status: consolidated lane register for WRR manual-decision records.",
+    "It defines decision ranks, lanes, targets, and evidence requirements; current lock status lives in `data/study/mappings/wrr_manual_decision_records.csv`.",
     "It does not choose source corrections, row transcriptions, pair exclusions, replacement locks, or method changes.",
     "- Manual decision rows: 37.",
     "- Action terms represented: 58.",
@@ -35,6 +36,8 @@ REQUIRED_PHRASES = (
     "Source-transcription row clusters need cited row image or source-list transcription plus row/column alignment evidence.",
     "Page-image rows need cited page-image transcription evidence.",
     "Method/pair-universe rows need an explicit explanation for zero ordinary hits.",
+    "Use `data/study/mappings/wrr_manual_decision_records.csv` for current lock status.",
+    "This register remains the rank/lane/target inventory for those records.",
 )
 
 FORBIDDEN_PHRASES = (

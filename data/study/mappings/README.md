@@ -19,6 +19,6 @@ python3 -m scripts.check_wrr_manual_decision_records
 Before a populated mapping is used for claim-level language, lock it with the
 study manifest workflow and include it in the relevant preregistration.
 
-`wrr_manual_decision_records.csv` is a header-only template for future WRR
-manual-lock decisions. It is not a decision log until populated with cited
-evidence, reviewer lock fields, and selected actions.
+`wrr_manual_decision_records.csv` is now the populated WRR decision log for the
+current manual locks. It records cited evidence, reviewer lock fields, and
+selected actions for 26 `no_source_change` rows and 11 `method_lock` rows.

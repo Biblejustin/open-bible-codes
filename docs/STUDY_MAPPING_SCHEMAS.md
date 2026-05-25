@@ -7,7 +7,7 @@ assignments.
 
 ## Files
 
-Header-only templates live under `data/study/mappings/`:
+Study mapping files live under `data/study/mappings/`:
 
 - `thematic_chapters.csv`: term-to-chapter windows for
   `canonical_first_in_thematic_chapter` and
@@ -23,12 +23,12 @@ Header-only templates live under `data/study/mappings/`:
 - `hebrew_root_policy.csv`: locked surface-form to root assignments for
   `root_only_match`. This is a policy file, not a root analyzer; it records
   which analyzer/source and root scheme the matcher is allowed to use.
-- `wrr_manual_decision_records.csv`: header-only template for future WRR
-  manual-lock decisions. It records decision rank, lane, target, source
-  checklist, selected action, evidence citation, evidence summary, and lock
-  fields when populated. Header-only status means no WRR source correction,
-  row transcription, method change, replacement lock, or pair exclusion has
-  been selected.
+- `wrr_manual_decision_records.csv`: populated lock ledger for current WRR
+  manual decisions. It records decision rank, lane, target, source checklist,
+  selected action, evidence citation, evidence summary, and reviewer lock
+  fields. Current rows lock 26 `no_source_change` decisions and 11
+  `method_lock` decisions without selecting source correction, row
+  transcription, replacement lock, or pair exclusion.
 
 ## Validation
 
@@ -46,9 +46,9 @@ make study-mapping-schemas
 ```
 
 Header-only files pass so planning can remain public without implying content.
-Once rows are added, the validator checks required columns, non-empty lock
-fields, unique `mapping_id` values, supported language labels, and ordered
-chapter ranges.
+Populated files must also pass required-column and non-empty lock-field checks,
+unique `mapping_id` values where applicable, supported language labels, and
+ordered chapter ranges.
 
 For `wrr_manual_decision_records.csv`, the row-level checker also requires each
 populated decision row to match the current WRR manual decision register by

@@ -670,38 +670,39 @@ It ties the Chełm source-policy residual to local WNP context, row OCR, and
 scenario status without choosing a correction or exclusion.
 WRR source-policy review checklist:
 `docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md`.
-It keeps the Chełm source-policy/pair-rule target in pending manual lock state
-with required decision-record fields.
+It preserves the Chełm source-policy/pair-rule target as a review lane with
+required decision-record fields.
 WRR source-transcription evidence packet:
 `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md`.
 It groups 43 row-transcription residual terms into 22 row clusters for
 primary row or row-alignment review, without choosing corrections.
 WRR source-transcription row review checklist:
 `docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md`.
-It keeps those 22 row clusters in review order with pending manual source-lock
-state and required decision-record fields.
+It keeps those 22 row clusters in review order with required decision-record
+fields.
 WRR remaining-lane evidence packets:
 `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md`.
 They cover the remaining 14 page-image/method residual terms without choosing
 source corrections, method changes, or pair exclusions.
 WRR remaining-lane review checklist:
 `docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md`.
-It keeps 3 page-image terms and 11 method/pair-universe terms in pending
-manual lock state with required decision-record fields.
+It keeps 3 page-image terms and 11 method/pair-universe terms in review lanes
+with required decision-record fields.
 WRR manual decision register:
 `docs/WRR_MANUAL_DECISION_REGISTER.md`.
-It consolidates 37 pending manual-lock rows representing 58 action terms, 59
-residual pair links, and 40 minimum-frontier pair links without choosing
+It consolidates 37 manual-decision inventory rows representing 58 action terms,
+59 residual pair links, and 40 minimum-frontier pair links without choosing
 corrections or exclusions.
-WRR manual decision records template:
+WRR manual decision records:
 `data/study/mappings/wrr_manual_decision_records.csv`.
-It stays header-only until cited evidence, selected actions, and reviewer lock
-fields are populated; `scripts/check_wrr_manual_decision_records.py` checks any
-future rows against the current register.
+It now records all 37 current locks: 26 `no_source_change` rows and 11
+`method_lock` rows. `scripts/check_wrr_manual_decision_records.py` checks those
+rows against the current register and requires non-placeholder evidence plus an
+ISO lock date.
 WRR manual decision record worksheet:
 `docs/WRR_MANUAL_DECISION_RECORD_WORKSHEET.md`.
-It gives the exact `decision_id`, rank, lane, state, target, checklist, and
-evidence prompt for all 37 future lock rows without filling the lock CSV.
+It gives the exact `decision_id`, rank, lane, state, target, checklist, current
+record status, selected action, and evidence prompt for all 37 lock rows.
 WRR method/pair-universe evidence packet:
 `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md`.
 It isolates the 11 OCR-matched method-lane terms: all have zero skip-250

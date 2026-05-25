@@ -1,6 +1,7 @@
 # WRR Manual Decision Register
 
-Status: consolidated no-input register for WRR manual-lock decisions.
+Status: consolidated lane register for WRR manual-decision records.
+It defines decision ranks, lanes, targets, and evidence requirements; current lock status lives in `data/study/mappings/wrr_manual_decision_records.csv`.
 It does not choose source corrections, row transcriptions, pair exclusions, replacement locks, or method changes.
 
 Reproduce:
@@ -78,4 +79,5 @@ python3 -m scripts.build_wrr_manual_decision_register --source-policy reports/wr
 - Source-transcription row clusters need cited row image or source-list transcription plus row/column alignment evidence.
 - Page-image rows need cited page-image transcription evidence.
 - Method/pair-universe rows need an explicit explanation for zero ordinary hits.
-- Preserve the working source until those decision records exist.
+- Use `data/study/mappings/wrr_manual_decision_records.csv` for current lock status.
+- This register remains the rank/lane/target inventory for those records.
