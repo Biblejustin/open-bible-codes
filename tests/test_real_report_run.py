@@ -1,3 +1,4 @@
+import ast
 import json
 import tempfile
 import unittest
@@ -54,6 +55,23 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(path, steps_by_id["real_report_summary"]["inputs"])
             self.assertIn(path, preflight.DEFAULT_REQUIRED_PATHS)
             self.assertIn(path, summary_source)
+
+    def test_preflight_required_paths_include_imported_check_scripts(self) -> None:
+        source_path = Path("scripts/preflight_real_report_run.py")
+        tree = ast.parse(source_path.read_text(encoding="utf-8"))
+        imported_check_scripts = {
+            f"scripts/{alias.name}.py"
+            for node in ast.walk(tree)
+            if isinstance(node, ast.ImportFrom) and node.module == "scripts"
+            for alias in node.names
+            if alias.name.startswith("check_")
+        }
+
+        self.assertGreater(len(imported_check_scripts), 0)
+        self.assertEqual(
+            sorted(imported_check_scripts - set(preflight.DEFAULT_REQUIRED_PATHS)),
+            [],
+        )
 
     def test_final_report_doc_refs_are_preflight_required(self) -> None:
         failures = preflight.find_unrequired_doc_references(
