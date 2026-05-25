@@ -40,6 +40,7 @@ from scripts import (
     check_prospective_study_lanes,
     check_public_claim_language,
     check_source_basis_audit_queue,
+    check_real_report_run_doc,
     check_strongest_candidate_deep_dive_doc,
     check_study_lock_manifests_doc,
     check_wrr_claim_blocker_packet_doc,
@@ -105,6 +106,10 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_prospective_lane_status_doc.py",
     "scripts/check_final_report_assembly_docs.py",
     "scripts/check_final_report_highlights_doc.py",
+    "scripts/check_centered_occurrence_index_doc.py",
+    "scripts/check_claim_catalog_doc.py",
+    "scripts/check_real_report_run_doc.py",
+    "scripts/check_strongest_candidate_deep_dive_doc.py",
     "els/project_index.py",
     "Makefile",
     "README.md",
@@ -765,6 +770,15 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "final-report assembly doc failures: "
             + "; ".join(final_report_assembly_doc_failures)
+        )
+
+    real_report_run_doc_failures = check_real_report_run_doc.validate_real_report_run_doc(
+        root / check_real_report_run_doc.DEFAULT_DOC
+    )
+    if real_report_run_doc_failures:
+        failures.append(
+            "real-report run doc failures: "
+            + "; ".join(real_report_run_doc_failures)
         )
 
     claim_catalog_doc_failures = check_claim_catalog_doc.validate_claim_catalog_doc(
