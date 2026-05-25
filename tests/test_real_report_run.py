@@ -463,6 +463,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_wrr_support_docs_local_lock.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_wrr_dw_formula_sensitivity_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -951,6 +955,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_public_handoff_docs.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_support_docs_local_lock.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -1795,6 +1803,28 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "WRR public handoff doc failures: "
                 "README.md missing phrase: WRR claim-blocker packet:",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_support_docs_local_lock_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_support_docs_local_lock,
+                "validate_support_docs",
+                return_value=["docs/WRR_REPLICATION_PLAN.md missing local lock"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_support_docs_local_lock_failures"],
+                ["docs/WRR_REPLICATION_PLAN.md missing local lock"],
+            )
+            self.assertIn(
+                "WRR support-doc local-lock failures: "
+                "docs/WRR_REPLICATION_PLAN.md missing local lock",
                 payload["failures"],
             )
 

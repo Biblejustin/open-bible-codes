@@ -181,7 +181,8 @@ Already implemented:
   length-5..8 smoke output has 28 defined values; the diagnostic aggregate is
   P1 `0.000373062903552`, P2 `5.981029379e-05`, P3
   `0.000349191888979`, and P4 `7.69538206457e-05`. This remains
-  diagnostic-only because the pair universe and `D(w)` formula are not locked.
+  diagnostic-only because it is the older length-5..8 smoke lane, not the
+  selected full keep_all_working_source cap-1000 local lock.
 - high-cap local diagnostic protocol in
   `protocols/wrr_corrected_distance_highcap_1000_split_2.toml`. Current
   ignored output at `search-max-skip=1000` has 46 defined corrected distances

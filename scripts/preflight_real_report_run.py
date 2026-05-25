@@ -74,6 +74,7 @@ from scripts import (
     check_wrr_source_policy_scenarios_doc,
     check_wrr_source_review_queue_doc,
     check_wrr_source_visual_review_notes_doc,
+    check_wrr_support_docs_local_lock,
     check_wrr_variant_gap_docs,
     validate_study_mapping_schemas,
 )
@@ -594,6 +595,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_research_missing_model_pages_audit_doc.py",
     "scripts/check_wrr_adjacent_source_audit_docs.py",
     "scripts/check_wrr_variant_gap_docs.py",
+    "scripts/check_wrr_support_docs_local_lock.py",
     "scripts/build_wrr_claim_blocker_packet.py",
     "scripts/build_matrix_cluster_candidates.py",
     "scripts/summarize_matrix_cluster_controls.py",
@@ -979,6 +981,15 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_public_handoff_doc_failures)
         )
 
+    wrr_support_docs_local_lock_failures = (
+        check_wrr_support_docs_local_lock.validate_support_docs()
+    )
+    if wrr_support_docs_local_lock_failures:
+        failures.append(
+            "WRR support-doc local-lock failures: "
+            + "; ".join(wrr_support_docs_local_lock_failures)
+        )
+
     wrr_defined_diagnostic_doc_failures = (
         check_wrr_defined_diagnostic_docs.validate_defined_diagnostic_docs()
     )
@@ -1325,6 +1336,9 @@ def main(argv: list[str] | None = None) -> int:
             wrr_exact_reproduction_gap_dashboard_doc_failures
         ),
         "wrr_public_handoff_doc_failures": wrr_public_handoff_doc_failures,
+        "wrr_support_docs_local_lock_failures": (
+            wrr_support_docs_local_lock_failures
+        ),
         "wrr_defined_diagnostic_doc_failures": wrr_defined_diagnostic_doc_failures,
         "wrr_variant_gap_doc_failures": wrr_variant_gap_doc_failures,
         "wrr_residual_term_reconciliation_doc_failures": (
