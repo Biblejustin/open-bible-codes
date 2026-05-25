@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+"""Validate generated strongest-candidate deep-dive markdown freshness."""
+
+from __future__ import annotations
+
+import argparse
+import sys
+from pathlib import Path
+
+from scripts import build_strongest_candidate_deep_dive as builder
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = build_parser().parse_args(argv)
+    failures = validate_strongest_candidate_deep_dive_doc(args)
+    if failures:
+        for failure in failures:
+            print(f"strongest-candidate deep-dive doc failure: {failure}", file=sys.stderr)
+        return 1
+    print(f"strongest-candidate deep-dive doc ok: {args.markdown_out}")
+    return 0
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--claim-catalog", type=Path, default=builder.DEFAULT_CLAIM_CATALOG)
+    parser.add_argument("--doxa-paired", type=Path, default=builder.DEFAULT_DOXA_PAIRED)
+    parser.add_argument("--doxa-context", type=Path, default=builder.DEFAULT_DOXA_CONTEXT)
+    parser.add_argument("--compound-summary", type=Path, default=builder.DEFAULT_COMPOUND_SUMMARY)
+    parser.add_argument("--gog-occurrences", type=Path, default=builder.DEFAULT_GOG_OCCURRENCES)
+    parser.add_argument(
+        "--greek-expanded-controls",
+        type=Path,
+        default=builder.DEFAULT_GREEK_EXPANDED_CONTROLS,
+    )
+    parser.add_argument(
+        "--greek-expanded-selected",
+        type=Path,
+        default=builder.DEFAULT_GREEK_EXPANDED_SELECTED,
+    )
+    parser.add_argument("--kjva-confirmatory", type=Path, default=builder.DEFAULT_KJVA_CONFIRMATORY)
+    parser.add_argument("--kjva-prospective", type=Path, default=builder.DEFAULT_KJVA_PROSPECTIVE)
+    parser.add_argument(
+        "--kjva-prospective-bridge",
+        type=Path,
+        default=builder.DEFAULT_KJVA_PROSPECTIVE_BRIDGE,
+    )
+    parser.add_argument("--out", type=Path, default=builder.DEFAULT_OUT)
+    parser.add_argument("--markdown-out", type=Path, default=builder.DEFAULT_MARKDOWN)
+    parser.add_argument("--manifest-out", type=Path, default=builder.DEFAULT_MANIFEST)
+    return parser
+
+
+def validate_strongest_candidate_deep_dive_doc(
+    args: argparse.Namespace | None = None,
+) -> list[str]:
+    args = args or build_parser().parse_args([])
+    inputs = [
+        args.claim_catalog,
+        args.doxa_paired,
+        args.doxa_context,
+        args.compound_summary,
+        args.gog_occurrences,
+        args.greek_expanded_controls,
+        args.greek_expanded_selected,
+        args.kjva_confirmatory,
+        args.kjva_prospective,
+        args.kjva_prospective_bridge,
+        args.markdown_out,
+    ]
+    for path in inputs:
+        if not path.exists():
+            return [f"{path} is missing"]
+    candidates = builder.build_candidates(args)
+    expected = builder.render_markdown(candidates, args)
+    actual = args.markdown_out.read_text(encoding="utf-8")
+    if actual != expected:
+        return [
+            f"{args.markdown_out} is stale; rerun python3 -m scripts.build_strongest_candidate_deep_dive"
+        ]
+    return []
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

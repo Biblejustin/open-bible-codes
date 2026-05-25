@@ -327,6 +327,11 @@ def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
 
 
 def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namespace) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(render_markdown(rows, args), encoding="utf-8")
+
+
+def render_markdown(rows: list[dict[str, str]], args: argparse.Namespace) -> str:
     lines = [
         "# Strongest Candidate Deep Dive",
         "",
@@ -401,8 +406,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             "- Short terms, hidden-path-only extensions, translation-boundary effects, and source-family dependence remain separate risks.",
         ]
     )
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+    return "\n".join(lines).rstrip() + "\n"
 
 
 def write_manifest(path: Path, rows: list[dict[str, str]], args: argparse.Namespace, started: float) -> None:

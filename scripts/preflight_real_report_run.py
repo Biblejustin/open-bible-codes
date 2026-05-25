@@ -39,6 +39,7 @@ from scripts import (
     check_prospective_study_lanes,
     check_public_claim_language,
     check_source_basis_audit_queue,
+    check_strongest_candidate_deep_dive_doc,
     check_study_lock_manifests_doc,
     check_wrr_claim_blocker_packet_doc,
     check_wrr_claim_readiness_doc,
@@ -781,6 +782,15 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "centered-occurrence index doc failures: "
             + "; ".join(centered_occurrence_index_doc_failures)
+        )
+
+    strongest_candidate_deep_dive_doc_failures = (
+        check_strongest_candidate_deep_dive_doc.validate_strongest_candidate_deep_dive_doc()
+    )
+    if strongest_candidate_deep_dive_doc_failures:
+        failures.append(
+            "strongest-candidate deep-dive doc failures: "
+            + "; ".join(strongest_candidate_deep_dive_doc_failures)
         )
 
     source_basis_failures = check_source_basis_audit_queue.validate_source_basis_queue(
