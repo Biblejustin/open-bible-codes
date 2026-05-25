@@ -91,6 +91,16 @@ REQUIRED_PHRASES_BY_DOC = {
         "current record status, selected action, and evidence prompt for all 37 lock rows",
         "row-level review order, and page-image review boundary",
     ),
+    Path("protocols/README.md"): (
+        "WRR source audit:",
+        "163-distance mismatch stays visible alongside the locked local method reports",
+        "`docs/WRR_LOCKED_METHOD_REPORT.md`",
+        "`docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`",
+        "full selected-universe cap-1000 corrected-distance output",
+        "current locks, exact-published-reproduction caveats, and next actions",
+        "999,999 date-label permutation diagnostic",
+        "It is locked local evidence, not an exact WRR reproduction.",
+    ),
 }
 
 FORBIDDEN_PHRASES_BY_DOC = {
@@ -121,6 +131,11 @@ FORBIDDEN_PHRASES_BY_DOC = {
         "header-only template for future manual-lock records",
         "Header-only status means no correction",
         "future lock rows without filling the lock CSV",
+    ),
+    Path("protocols/README.md"): (
+        "before metric work",
+        "open method decisions",
+        "It is not an exact WRR reproduction.",
     ),
 }
 

@@ -96,8 +96,10 @@ python3 -m scripts.run_protocol protocols/wrr_source_import.toml --resume
 This downloads external WRR audit files into ignored reports output and converts
 the WRR2 plain-text list into repo term rows without committing third-party
 data. It also summarizes the raw ANU famous-rabbis source-list shapes so the
-163-distance mismatch is visible before metric work. Tracked audit:
-`docs/WRR_SOURCE_AUDIT.md`.
+163-distance mismatch stays visible alongside the locked local method reports.
+Tracked audit: `docs/WRR_SOURCE_AUDIT.md`; selected local summary:
+`docs/WRR_LOCKED_METHOD_REPORT.md`; exact-reproduction gap map:
+`docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`.
 
 Co-linear ELS source audit:
 
@@ -247,9 +249,10 @@ review after the simple-variant upper-bound diagnostic.
 It also samples WRR-style perturbation boundary and exact-match validity, then joins
 that diagnostic back to the lock-prep pair table. It now also emits a
 corrected-distance smoke table from generated perturbed rows for the 5..8
-candidate lane, plus a variant comparison for term-printed, term-program, and
-fixed-250 skip settings. It also writes `docs/WRR_METHOD_STATUS.md`, a compact
-matrix of current locks, open method decisions, and next actions. It
+candidate lane, a full selected-universe cap-1000 corrected-distance output,
+and a variant comparison for term-printed, term-program, and fixed-250 skip
+settings. It also writes `docs/WRR_METHOD_STATUS.md`, a compact matrix of
+current locks, exact-published-reproduction caveats, and next actions. It
 fingerprints the Koren Genesis source stream, checks primary-PDF method anchors,
 source-locks the primary Table 2 row labels and Table 3 published rank rows,
 bridges Table 2 row labels to secondary WRR2 record counts, runs a
@@ -259,7 +262,7 @@ reconciliation for the current imported-pair count versus the source-cited
 999,999 date-label permutation diagnostic into the WRR method-status matrix,
 emits source-policy scenario impact, emits D(w) formula sensitivity, and gathers
 lock options plus the claim-blocker packet, including visual triage notes.
-It is not an exact WRR reproduction.
+It is locked local evidence, not an exact WRR reproduction.
 
 Hebrew MT-family version comparison:
 

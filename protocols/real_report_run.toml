@@ -28,6 +28,7 @@ inputs = [
   "README.md",
   "docs/REAL_REPORT_RUN.md",
   "docs/REMAINING_WORK_REGISTER.md",
+  "protocols/README.md",
   "protocols/real_report_run.toml",
   "protocols/INDEX.md",
   "protocols/step_tahot_final_gate.toml",
