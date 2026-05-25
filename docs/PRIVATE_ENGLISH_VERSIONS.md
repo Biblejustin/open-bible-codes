@@ -240,7 +240,7 @@ Publisher permission pages:
 ## Interpretation Cautions
 
 This protocol reports whether the same normalized English search term has ELS
-hits in each observed English version at skip `2..100`. It does not prove that
+hits in each observed English version at skip `2..100`. It does not establish that
 the same source-language pattern exists across translations. Absence can also
 reflect different wording, missing coverage, or partial local corpora such as
 TPT editions that do not contain the full Bible.

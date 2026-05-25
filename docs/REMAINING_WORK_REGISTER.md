@@ -286,12 +286,11 @@ Goal: keep every public-facing file aligned with current status:
 Hygiene command:
 
 ```bash
-rg -n "\\bprov[e]d\\b|\\bpro[o]f\\b|statistically[ -]impossible|prophecy[ -]confirmed|validation of inspirat[i]on|claim[- ]level" docs README.md claims protocols scripts tests
+python3 -m scripts.check_public_claim_language
 ```
 
-Expected result: no public-facing reader-doc hits except historical filenames or
-implementation/test identifiers that explicitly encode legacy claim-follow-up
-workflow names.
+Expected result: no unsupported public-facing reader-doc hits. Fenced code
+examples are ignored by the checker.
 
 ## Highest-Value Non-Blocked Work
 
@@ -787,10 +786,12 @@ supposed to fail if tracked files are dirty.
 
 Latest validation snapshot after the release-ready make target:
 
-- `make release-ready` passed, including `python3 -m pytest -q`: 1463 tests,
+- `make release-ready` passed, including `python3 -m pytest -q`: 1468 tests,
   2 skipped, and 29195 subtests.
 - `python3 -m scripts.check_expanded_strata_tooling` passed inside
   `make fast-validate`.
+- `python3 -m scripts.check_public_claim_language` passed inside
+  `make fast-validate` and `make public-release-check`.
 - `make local-data-doc-check` passed on the current local ignored `data/raw/`
   and `data/processed/` caches.
 - `make public-release-check` passed from the committed tree.

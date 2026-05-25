@@ -203,9 +203,11 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "git diff --check" in makefile
     assert "scripts.check_public_release_hygiene --allow-dirty" in makefile
     assert "scripts.check_expanded_strata_tooling" in makefile
+    assert "scripts.check_public_claim_language" in makefile
     assert "$(MAKE) local-data-doc-check" in makefile
     assert "make fast-validate" in readme
     assert "expanded-strata operator tooling" in readme
+    assert "checks public claim language" in readme
 
 
 def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
@@ -224,12 +226,13 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     text = Path("docs/REMAINING_WORK_REGISTER.md").read_text(encoding="utf-8")
 
     assert "Latest validation snapshot after the release-ready make target" in text
-    assert "1463 tests" in text
+    assert "1468 tests" in text
     assert "2 skipped, and 29195 subtests" in text
     assert "make release-ready" in text
     assert "committed tree" in text
     assert "make fast-validate" in text
     assert "scripts.check_expanded_strata_tooling" in text
+    assert "scripts.check_public_claim_language" in text
     assert "make local-data-doc-check" in text
     assert "`make public-release-check` passed" in text
     assert "Earlier WRR/source-recovery validation snapshot" in text

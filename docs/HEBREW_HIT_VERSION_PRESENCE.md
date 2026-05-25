@@ -77,6 +77,6 @@ Longer phrase/local rows remain absent in this capped scan:
 ## Caution
 
 This is a capped hit-presence matrix, not a significance test. The cap can hide
-later hits for dense terms, and exact ref-key agreement does not prove textual
+later hits for dense terms, and exact ref-key agreement does not establish textual
 identity or interpretive meaning. Use the CSVs to pick stable review rows, then
 apply controls before making any claim.

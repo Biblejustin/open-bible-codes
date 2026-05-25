@@ -104,7 +104,7 @@ Selected Greek examples:
 
 ## Caution
 
-This report is capped at 200 hits per term per corpus. It can prove absence
+This report is capped at 200 hits per term per corpus. It can establish absence
 for terms with zero hits under the configured search, but for dense terms it
 only gives representative exact-hit distribution. Statistical interpretation
 still requires matched controls.

@@ -67,6 +67,6 @@ only and keep substring-overlap rows for manual follow-up, pass
 
 ## Interpretation
 
-A match does not prove a result is invalid. It means the row is not cleanly new
+A match does not establish a result is invalid. It means the row is not cleanly new
 for prospective discovery language. It can still be used for a confirmatory
 follow-up, a known-pattern replication, or a transparent post-discovery review.

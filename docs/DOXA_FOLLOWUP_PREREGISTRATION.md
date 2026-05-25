@@ -145,7 +145,7 @@ Every follow-up report must include:
 - warning flags;
 - explicit statement that this is post-discovery;
 - explicit statement that `δόξαν ὡς` (doxan hos; English: glory as) is not surface text in the 2 Thessalonians
-  hit passage unless a future audit proves otherwise.
+  hit passage unless a future audit establishes otherwise.
 
 The first locked follow-up report is tracked in
 `docs/DOXA_FOLLOWUP_REPORT.md`.
@@ -153,7 +153,7 @@ The first locked follow-up report is tracked in
 ## Interpretation Boundary
 
 This study can show whether the already-discovered `δοξα` (doxa; English: glory) row remains stable
-under locked, deeper controls. It cannot prove theological meaning by itself.
+under locked, deeper controls. It cannot establish theological meaning by itself.
 
 Any stronger claim requires a new prospective study with either:
 

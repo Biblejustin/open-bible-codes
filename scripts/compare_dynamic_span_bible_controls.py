@@ -247,7 +247,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
             "- A favorable row should still be checked for all-hit context,",
             "  version/source distribution, same-skip extensions, and matched",
             "  shuffled or real-word controls.",
-            "- A non-Bible match does not disprove the hypothesis by itself, but it",
+            "- A non-Bible match does not refute the hypothesis by itself, but it",
             "  raises the background rate that a Bible pattern must exceed.",
             "",
         ]

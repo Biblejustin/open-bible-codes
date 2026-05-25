@@ -38,6 +38,6 @@ python3 -m els batch \
 
 Cautions:
 
-- Controls do not prove or disprove claims by themselves.
+- Controls do not establish or refute claims by themselves.
 - Compare fixed claim lists against fixed control lists before looking at results.
 - Very short controls are noisy and may be skipped by default settings.

@@ -600,7 +600,7 @@ def write_markdown(
             "`alignment_broken_*` means the center locus could not be compared cleanly",
             "because the counterpart corpus lacks that exact verse or chapter key.",
             "",
-            "Use this report to identify reciprocal review candidates. Claim-level",
+            "Use this report to identify reciprocal review candidates. Claim-grade",
             "language still requires locked terms, locked alignment rules, matched",
             "controls, and multiple-comparison correction.",
         ]

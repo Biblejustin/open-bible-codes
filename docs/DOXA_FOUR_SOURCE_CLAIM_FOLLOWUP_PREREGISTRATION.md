@@ -157,6 +157,6 @@ The follow-up report must include:
 ## Interpretation Boundary
 
 This study can show whether the already-discovered four-source `δοξα` (doxa; English: glory) row
-survives a stricter locked control run. It cannot prove theological meaning by
+survives a stricter locked control run. It cannot establish theological meaning by
 itself. A stronger claim would require an additional prospective study with the
 candidate list and claim standard fixed before discovery.

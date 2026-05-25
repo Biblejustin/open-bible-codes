@@ -49,7 +49,7 @@ python3 -m scripts.build_wrr_exact_reproduction_gap_dashboard --locked-report re
 | Lock | Status | Action | Evidence read |
 | --- | --- | --- | --- |
 | Chelm source-policy/pair-rule target | locked | no_source_change | Kept working source unchanged because WNP Chełm context supports review scope while local row OCR does not lock the Chełm forms as source-cell text |
-| row 06 | locked | no_source_change | Kept working source unchanged for row 06 because row-aligned OCR/probe evidence is not claim-grade proof for source correction and secondary WRR2 row alignment remains the working source |
+| row 06 | locked | no_source_change | Kept working source unchanged for row 06 because row-aligned OCR/probe evidence is not sufficient evidence for source correction and secondary WRR2 row alignment remains the working source |
 | wrr2_19_app_11 | locked | no_source_change | Kept working source unchanged because WRR ASCII A is treated as aleph not a vowel point and the page/OCR near-match does not justify correcting the imported aleph spelling |
 | wrr2_02_app_03 | locked | method_lock | Locked current method result because OCR matched the imported term but both appellation and date have zero high-cap ordinary hits so the pair remains ordinary_not_valid under current rules |
 

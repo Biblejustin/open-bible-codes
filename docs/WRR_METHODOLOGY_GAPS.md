@@ -278,7 +278,7 @@ locks the repo-defined local evidence path. The repo still needs exact
 published-reproduction closure that:
 
 - verifies independent source transcriptions;
-- proves the selected `D(w)` and permutation procedure match the published WRR
+- verifies the selected `D(w)` and permutation procedure against the published WRR
   procedure or states the mismatch;
 - records whether the run reproduces, fails to reproduce, or remains
   under-specified against the published claim.

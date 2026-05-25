@@ -114,5 +114,5 @@ Every lane should lock:
 ## Non-Negotiable Boundary
 
 Do not call a row a claim because it is hidden, version-stable, or visually
-interesting. Claim-level language requires a study that was locked before the
+interesting. Claim-grade language requires a study that was locked before the
 result-producing run and survived the registered controls.

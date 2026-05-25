@@ -883,7 +883,7 @@ def write_markdown(
             "",
             "## Caution",
             "",
-            "This is exact ref-key presence in a capped hit scan. It does not prove",
+            "This is exact ref-key presence in a capped hit scan. It does not establish",
             "textual identity, and it can miss later hits once the per-term cap is",
             "reached. Use it to find stable review rows, not to score significance.",
         ]

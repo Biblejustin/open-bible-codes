@@ -50,7 +50,7 @@ This source reinforces several project rules:
 - negative and nonsensical phrases should be tracked as controls;
 - source/version distribution is not optional for letter-level claims;
 - ELS, acrostic, cryptogram, and gematria methods need separate pipelines;
-- a method that can "prove" contradictory phrases needs controls before
+- a method that can "validate" contradictory phrases needs controls before
   interpretive language.
 
 ## Reproduction Requirements

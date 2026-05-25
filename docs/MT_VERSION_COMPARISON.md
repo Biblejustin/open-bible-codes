@@ -126,7 +126,7 @@ For Hebrew ELS findings, report version distribution explicitly:
 - present in UHB but absent in one or more other Hebrew streams;
 - absent from all observed Hebrew MT-family streams.
 
-The comparison does not prove or disprove a pattern. It tells us where textual
+The comparison does not establish or refute a pattern. It tells us where textual
 variation can plausibly create, move, or break a hit.
 
 ## Cautions

@@ -57,7 +57,8 @@ make public-release-check
 
 This verifies the Git remote points at `Biblejustin/open-bible-codes`, rejects
 tracked report/database/raw-source artifacts, scans tracked files for the
-forbidden GitHub account text, and checks high-confidence secret-token patterns.
+forbidden GitHub account text, checks high-confidence secret-token patterns,
+and rejects unsupported public claim language.
 
 Current fast validation before a handoff:
 
@@ -67,8 +68,8 @@ make fast-validate
 
 This runs the unit suite, regenerates documentation/protocol indexes, checks
 diff whitespace, runs dirty-tree-safe release hygiene, validates
-expanded-strata operator tooling, and verifies local data doc references
-against the current ignored source caches.
+expanded-strata operator tooling, checks public claim language, and verifies
+local data doc references against the current ignored source caches.
 
 Full clean-tree pre-push validation after committing:
 

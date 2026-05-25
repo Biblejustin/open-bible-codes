@@ -40,6 +40,7 @@ fast-validate: test indexes
 	git diff --check
 	python3 -m scripts.check_public_release_hygiene --allow-dirty
 	python3 -m scripts.check_expanded_strata_tooling
+	python3 -m scripts.check_public_claim_language
 	$(MAKE) local-data-doc-check
 
 release-ready: fast-validate public-release-check
@@ -48,6 +49,7 @@ public-release-check:
 	python3 -m scripts.check_public_release_hygiene
 	python3 -m scripts.check_expanded_strata_tooling
 	python3 -m scripts.check_doc_command_references
+	python3 -m scripts.check_public_claim_language
 
 local-data-doc-check:
 	python3 -m scripts.check_doc_command_references --check-local-data

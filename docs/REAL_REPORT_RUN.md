@@ -314,7 +314,7 @@ The report-run summary should currently say:
   all five MT-family sources at conservative all-control q = 0.004799. It is a
   post-discovery review candidate, not a claim.
 
-## Before Claim-Level Reporting
+## Before Claim-Grade Reporting
 
 A claim-grade report needs a narrower predeclared study:
 

@@ -396,7 +396,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
         [
             "## Cautions",
             "",
-            "- Strongest here means strongest current review candidate inside this repo, not proof of design.",
+            "- Strongest here means strongest current review candidate inside this repo, not evidence of design.",
             "- Post-discovery control support is useful for triage, but prospective locks carry more evidential weight.",
             "- Short terms, hidden-path-only extensions, translation-boundary effects, and source-family dependence remain separate risks.",
         ]

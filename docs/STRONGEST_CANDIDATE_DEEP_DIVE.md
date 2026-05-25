@@ -94,6 +94,6 @@ python3 -m scripts.build_strongest_candidate_deep_dive --claim-catalog claims/cl
 
 ## Cautions
 
-- Strongest here means strongest current review candidate inside this repo, not proof of design.
+- Strongest here means strongest current review candidate inside this repo, not evidence of design.
 - Post-discovery control support is useful for triage, but prospective locks carry more evidential weight.
 - Short terms, hidden-path-only extensions, translation-boundary effects, and source-family dependence remain separate risks.
