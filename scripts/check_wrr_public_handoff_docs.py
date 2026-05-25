@@ -25,6 +25,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "review lanes with required decision-record fields",
         "source-transcription row clusters, page-image near-match terms, and method/pair-universe counts",
         "without choosing corrections or exclusions",
+        "post-lock reporting boundary without selecting source changes",
     ),
     Path("docs/REAL_REPORT_RUN.md"): (
         "WRR claim-readiness doc records selected local-lock readiness",
@@ -93,6 +94,9 @@ REQUIRED_PHRASES_BY_DOC = {
 }
 
 FORBIDDEN_PHRASES_BY_DOC = {
+    Path("README.md"): (
+        "next review order without selecting source changes",
+    ),
     Path("docs/REAL_REPORT_RUN.md"): (
         "still carries blocked status",
         "open method decisions",

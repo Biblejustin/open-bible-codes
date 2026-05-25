@@ -36,6 +36,18 @@ def test_forbidden_stale_phrase_fails(tmp_path: Path) -> None:
     assert failures == [f"docs/FINAL_REPORT.md contains stale phrase: {stale}"]
 
 
+def test_readme_forbidden_stale_phrase_fails(tmp_path: Path) -> None:
+    stale = "next review order without selecting source changes"
+    write_valid_docs(tmp_path)
+    doc = tmp_path / "README.md"
+    with doc.open("a", encoding="utf-8") as handle:
+        handle.write(f"\n{stale}\n")
+
+    failures = check.validate_public_handoff_docs(tmp_path)
+
+    assert failures == [f"README.md contains stale phrase: {stale}"]
+
+
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
     code = check.main(["--root", str(tmp_path)])
 

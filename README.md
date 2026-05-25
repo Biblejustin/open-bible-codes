@@ -723,7 +723,8 @@ and it keeps exact published reproduction caveats attached to the result.
 WRR exact-reproduction gap dashboard:
 `docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`.
 It consolidates the 163 vs 72 defined-distance gap, simple-variant upper bound,
-manual review lanes, and next review order without selecting source changes.
+manual decision locks, and post-lock reporting boundary without selecting
+source changes.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.
