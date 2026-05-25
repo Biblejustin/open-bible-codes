@@ -216,7 +216,9 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     normalized_readme = " ".join(readme.split())
 
     assert "release-ready: fast-validate public-release-check" in makefile
+    assert "scripts.check_doc_command_references" in makefile
     assert "make release-ready" in readme
+    assert "validates documented script/source-path references" in normalized_readme
     assert "after committing" in readme
     assert "clean public-release gate" in readme
     assert "intentionally fails while tracked files are dirty" in normalized_readme

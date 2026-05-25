@@ -58,7 +58,8 @@ make public-release-check
 This verifies the Git remote points at `Biblejustin/open-bible-codes`, rejects
 tracked report/database/raw-source artifacts, scans tracked files for the
 forbidden GitHub account text, checks high-confidence secret-token patterns,
-and rejects unsupported public claim language.
+validates documented script/source-path references, and rejects unsupported
+public claim language.
 
 Current fast validation before a handoff:
 
