@@ -167,23 +167,25 @@ response, its data page, the Chance article, the Torah-code papers page,
 Bombach/Gans/Haralick/Levitt/Rips/Schwartzman/Witztum papers, and their
 available data/attachment files.
 
-## Not Yet Built
+## Remaining Exact-Published Reproduction Gaps
 
-Still needed:
+The local locked-method path is now built for the selected repo policy:
+keep_all_working_source, printed `D(w)` as main, reported-program `D(w)` as
+sensitivity, full cap-1000 corrected distances over 182 observed rows, and a
+999,999 date-label permutation. It is not an exact published WRR reproduction.
+
+Still needed before exact-published reproduction language:
 
 - candidate pair-set reconciliation against the paper's declared sample; the
   current eligibility table is lock prep, and `163` is treated as the
   source-defined corrected-distance output count rather than a raw pair table;
-- source-policy selection for WNP/context-reviewed rows;
+- citable source-policy or pair-rule evidence for WNP/context-reviewed rows;
 - replication-grade generated or reviewed future file `terms/[wrr_1994_rabbis].csv`;
 - replication-grade generated or reviewed future file `terms/[wrr_1994_dates].csv`;
-- final `D(w)` formula decision between the printed WRR formula and the WRR
-  program formula documented by MBBK;
-- optimized full corrected-distance run over the final locked pair universe;
-- WRR claim-grade aggregate runner for `P1`, `P2`, `P3`, and `P4` over all
-  declared pairs once `c(w,w')` exists;
-- claim-grade permutation driver that shuffles date/rabbi pairings under the
-  declared rule, using the cross-pair corrected-distance matrix once locked;
+- exact method-equivalence statement for printed `D(w)` versus the WRR program
+  formula documented by MBBK;
+- explanation or independent reproduction of the source-cited 163 defined
+  distances rather than the current 72 defined values;
 - report that labels each run as reproduction, failed reproduction, or
   under-specified.
 

@@ -45,8 +45,9 @@ freshness guarding, centered-occurrence index freshness guarding, strongest
 candidate deep-dive freshness guarding, claim-catalog summary guarding,
 real-report run doc guarding, imported preflight check-script input guarding,
 research missing model pages audit doc guarding, WRR-adjacent source audit
-family doc guarding, real-report source-audit preflight documentation, and
-critical-omission follow-up doc guarding.
+family doc guarding, real-report source-audit preflight documentation,
+critical-omission follow-up doc guarding, and WRR support-doc local-lock
+boundary cleanup.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -236,6 +237,8 @@ Current pushed commits for this cleanup:
 - `64cfdf8` Refresh register after source audit guard docs.
 - `f870742` Guard critical omission followup docs.
 - `9305d12` Document critical omission doc guard.
+- `feb53ee` Refresh register for critical omission guards.
+- `6c8d39a` Refresh WRR support docs for locked local method.
 
 ### Formal Real Report Rerun
 
@@ -836,9 +839,9 @@ supposed to fail if tracked files are dirty.
 
 Latest validation snapshot after the release-ready make target:
 
-- `make fast-validate` passed, including `python3 -m pytest -q`: 1559 tests,
+- `make fast-validate` passed, including `python3 -m pytest -q`: 1560 tests,
   2 skipped, and 29195 subtests.
-- `make release-ready` passed, including `python3 -m pytest -q`: 1559 tests,
+- `make release-ready` passed, including `python3 -m pytest -q`: 1560 tests,
   2 skipped, and 29195 subtests.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
   passed after the latest pushed guard updates.

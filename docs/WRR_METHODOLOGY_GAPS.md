@@ -81,8 +81,8 @@ refutation of the WRR paper.
 | Source pages | Cited paper/list context downloaded and hash-stamped | Paper, ANU files, WRR/Nations pages, MC key, WNP critique pages, MBBK 1999 response, Chance article, Torah-code papers page, and Bombach/Gans/Haralick/Levitt/Rips/Schwartzman/Witztum papers/data are tracked in the source manifest. |
 | Pair universe | Declared second-list candidate set yields 163 source-defined distances after the corrected-distance eligibility rule | Lock-prep table exists at `reports/wrr_1994/wrr2_pair_eligibility_table.csv`; imported `WRR2.txt` yields 182 raw same-record pairs, 165 after appellation length >= 5, and 86 under the current 5..8 both-side screen. The `163` count is now treated as a defined-distance output count, not a raw pair table. Source-policy scenarios are diagnostic only: baseline 165 >=5 pairs, exclude WNP Zacut 157, exclude all source-review flags 154. Single-term Zacut diagnostics identify `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and `M$HZKWTW` as individual exclusions that leave 163 >=5 pairs with gap 0. Visual triage notes separate OCR misses from title-prefix and Chelm source-rule questions, but do not exclude pairs automatically. |
 | Exclusions | Every excluded appellation/date row has a citable rule | Not locked; one of four Zacut-appellation exclusions would close 165 to 163, but that is only a diagnostic hypothesis. The source-policy scenario packet does not select any exclusion rule. |
-| Skip caps | Term-specific WRR `D(w)` windows applied for each accepted term | Not locked; helpers now support both the printed WRR formula and the reported WRR-program formula. The skip-cap audit keeps printed selected while reporting program caps side by side. D(w) sensitivity currently shows cap-1000 all-lane printed/program defined 72/72 with 0 changed pair rows. |
-| Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Helpers now include conservative supplied-row domain labeling, real-corpus WRR2 domain diagnostics with undefined-reason labels, defined-domain-only ordinary `Q(w,w')` diagnostics, exact perturbed-ELS match checks, domain-weighted `Q(w,w')` summation for domain-labeled ELS rows, a tested pair-level corrected-distance arithmetic bridge for already-domain-labeled perturbation sets, a smoke real-corpus perturbed-row/domain driver, and the source-count WRR `v/m` rank step. Undefined `c(w,w')` conditions are source-backed; optimized full-run corrected distances over the final pair universe are still missing. |
+| Skip caps | Term-specific WRR `D(w)` windows applied for each accepted term | Locally locked for the repo-defined run: printed WRR formula main, reported-program formula required sensitivity. D(w) sensitivity currently shows cap-1000 all-lane printed/program defined 72/72 with 0 changed pair rows. Exact published reproduction still needs a method-equivalence statement because MBBK reports a program-formula mismatch. |
+| Corrected distance | Per-pair `c(w,w')` implemented and fixture-tested | Full selected-universe cap-1000 corrected-distance output exists for all 182 imported same-record pairs under keep_all_working_source and printed `D(w)`: 72 defined, 110 ordinary-not-valid, 0 under-minimum. Undefined `c(w,w')` conditions are source-backed; exact published reproduction still needs the source-defined 163-distance gap explained. |
 | Aggregate statistic | `P1`, `P2`, `P3`, `P4`, rank handling, and `rho0` run over the locked pair set | P1..P4 aggregation exists for defined corrected-distance rows; P3/P4 use the smaller non-Rabbi-title sample. Current direct-search smoke output has 28 defined values at cap 250 and 46 defined values at cap 1000. Cross-pair date-label permutation diagnostics include legacy cap-250 runs plus the locked local cap-1000 keep-all 999,999-permutation run. Exact published reproduction still needs independent source transcription and method-equivalence closure. |
 | Permutation test | Date/rabbi pairings shuffled under the declared WRR rule with recorded seeds/counts | Legacy diagnostic date-label shuffles exist, and the selected local lock now has a keep-all cap-1000 999,999-permutation run. Exact published reproduction remains caveated by the source-defined 163-distance gap with current manual source records locked unchanged. |
 | Report label | Result can be marked reproduction, failed reproduction, or under-specified | Current exact-publication label remains `under_specified`; `docs/WRR_CLAIM_READINESS.md` marks the selected repo-defined local lock ready for locked-method language. |
@@ -230,20 +230,20 @@ run remains short of 163; current tracked output is
 Implementation notes are now tracked in
 `docs/WRR_CORRECTED_DISTANCE_NOTES.md`.
 
-Needed next:
+Needed next for exact published reproduction:
 
-- select the source policy for WNP/context-reviewed rows;
-- lock the final pair universe;
-- lock whether `D(w)` uses the printed WRR count formula or the WRR program
-  formula documented by MBBK;
-- extend the smoke corrected-distance driver into the full locked run;
-- output defined per-pair `c(w,w')` rows before aggregate statistics are
-  attempted.
+- recover citable source-policy or pair-rule evidence for WNP/context-reviewed rows;
+- explain the 163 source-cited defined-distance count from an independently
+  locked source/method chain;
+- state exact method equivalence or mismatch for printed `D(w)` versus the WRR
+  program formula documented by MBBK;
+- keep the current local cap-1000 corrected-distance/permutation run labeled
+  as locked local evidence, not exact published reproduction.
 
 ### 4. Term-Specific Skip Caps
 
-The audit currently uses fixed broad search caps for pair/control screens. WRR
-uses term-specific skip windows tied to expected ELS counts.
+Older pair/control screens used fixed broad search caps. WRR uses term-specific
+skip windows tied to expected ELS counts.
 
 Current length 5..8 skip-cap smoke:
 
@@ -257,8 +257,9 @@ Current length 5..8 skip-cap smoke:
 | rows not reaching expected 10 by word-max skip | 55 |
 | rows with zero observed hits at max skip 250 | 56 |
 
-This means fixed `max_skip=250` is not a reproduction setting, and the printed
-formula versus reported-program formula choice remains a method lock item.
+Fixed `max_skip=250` remains smoke/audit evidence only. The selected local
+locked-method run uses term-specific `D(w)` under the printed WRR formula as
+the main rule and carries the reported-program formula as sensitivity output.
 
 ### 5. Aggregate Statistic And Permutations
 
@@ -285,6 +286,7 @@ published-reproduction closure that:
 
 ## Review Rule
 
-Treat current WRR outputs as source-audit and smoke-test evidence only. Move to
-claim language only after source policy, pair set, D(w), corrected distance, and
-permutation procedure are all locked before looking at final results.
+Treat the selected keep-all cap-1000 output as locked local evidence only. Move
+to exact published WRR reproduction language only after the source policy, pair
+set, method-equivalence statement, 163 defined-distance explanation, and
+permutation procedure are independently locked.

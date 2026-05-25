@@ -56,8 +56,9 @@ The paper's Appendix A.1 and A.2 define these pieces:
   WRR formula uses `(D - 1)(2L - (k - 1)(D + 2))`, while the WRR programs used
   `(D - 1)(2L - (k - 1)D)`. The helper can now compute either formula; the
   current skip-cap audit keeps the printed formula selected while reporting
-  program-formula caps side by side. A reproduction driver must explicitly
-  choose one before final `D(w)` runs.
+  program-formula caps side by side. The selected local locked-method run uses
+  printed `D(w)` as main and keeps reported-program `D(w)` as required
+  sensitivity output.
 
 ## Current Repo Coverage
 
@@ -271,15 +272,17 @@ Not yet implemented:
    final pair universe. Visual triage notes stay non-exclusionary until a
    source-lock policy is selected.
 
-## Proposed Implementation Order
+## Proposed Exact-Reproduction Work Order
 
-1. Select the source policy for candidate pair inclusion.
-2. Decide whether `D(w)` uses the printed WRR count formula or the program
-   formula documented by MBBK; current audit rows expose both.
-3. Extend the smoke corrected-distance driver into an optimized full run over
-   the final locked pair universe.
-4. Feed defined `c(w,w')` rows into the aggregate `P1`..`P4` diagnostic and
-   then into claim-grade permutation tests.
+1. Recover or cite a source-policy/pair-rule chain that explains the
+   source-cited 163 defined distances.
+2. Reconcile the 72 local defined c-values against that 163-distance source
+   count without applying post-hoc source corrections.
+3. State exact method equivalence or mismatch for printed `D(w)` versus the
+   program formula documented by MBBK.
+4. Keep the current keep-all cap-1000 corrected-distance and 999,999 date-label
+   permutation output as locked local evidence, not exact published
+   reproduction.
 
 ## Current Read
 

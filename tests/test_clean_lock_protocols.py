@@ -287,7 +287,7 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     text = Path("docs/REMAINING_WORK_REGISTER.md").read_text(encoding="utf-8")
 
     assert "Latest validation snapshot after the release-ready make target" in text
-    assert "1559 tests" in text
+    assert "1560 tests" in text
     assert "2 skipped, and 29195 subtests" in text
     assert "make release-ready" in text
     assert "committed tree" in text
@@ -335,6 +335,24 @@ def test_wrr_support_docs_track_single_term_source_policy_impacts() -> None:
         assert "gap 0" in text
         assert "Visual triage" in text
         assert "do not exclude pairs automatically" in text
+
+
+def test_wrr_support_docs_track_locked_local_method_boundary() -> None:
+    replication = Path("docs/WRR_REPLICATION_PLAN.md").read_text(encoding="utf-8")
+    methodology = Path("docs/WRR_METHODOLOGY_GAPS.md").read_text(encoding="utf-8")
+    corrected = Path("docs/WRR_CORRECTED_DISTANCE_NOTES.md").read_text(
+        encoding="utf-8"
+    )
+
+    combined = "\n".join([replication, methodology, corrected])
+    assert "full cap-1000 corrected distances over 182 observed rows" in replication
+    assert "999,999 date-label permutation" in replication
+    assert "72 defined, 110 ordinary-not-valid, 0 under-minimum" in methodology
+    assert "printed `D(w)` as main" in corrected
+    assert "locked local evidence, not exact published reproduction" in combined
+    assert "final `D(w)` formula decision" not in combined
+    assert "optimized full corrected-distance run over the final locked pair universe" not in combined
+    assert "choose one before final `D(w)` runs" not in combined
 
 
 def test_wrr_catalog_and_source_audit_track_visual_non_exclusion() -> None:
