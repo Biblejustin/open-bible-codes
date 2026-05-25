@@ -525,6 +525,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_research_missing_model_pages_audit_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_wrr_variant_gap_docs.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -1255,6 +1259,7 @@ inputs = ["docs/A.md", "docs/C.md"]
                 "wrr_exact_reproduction_gap_dashboard_doc_failures",
                 payload,
             )
+            self.assertIn("research_missing_model_pages_audit_doc_failures", payload)
             self.assertIn("wrr_public_handoff_doc_failures", payload)
             self.assertIn(
                 "wrr_source_transcription_row_review_checklist_doc_failures",
@@ -2285,6 +2290,32 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "hypothesis-testing source audit doc failures: "
                 "docs/HYPOTHESIS_TESTING_SOURCE_AUDIT.md missing usable method pages",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_research_missing_model_pages_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_research_missing_model_pages_audit_doc,
+                "validate_research_missing_model_pages_audit_doc",
+                return_value=[
+                    "docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md missing source boundary"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["research_missing_model_pages_audit_doc_failures"],
+                [
+                    "docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md missing source boundary"
+                ],
+            )
+            self.assertIn(
+                "research missing model pages audit doc failures: "
+                "docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md missing source boundary",
                 payload["failures"],
             )
 
