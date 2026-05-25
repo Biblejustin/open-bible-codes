@@ -1,4 +1,5 @@
 import json
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -54,6 +55,21 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(path, steps_by_id["real_report_summary"]["inputs"])
             self.assertIn(path, preflight.DEFAULT_REQUIRED_PATHS)
             self.assertIn(path, summary_source)
+
+    def test_final_report_doc_refs_are_preflight_required(self) -> None:
+        required = set(preflight.DEFAULT_REQUIRED_PATHS)
+        for doc in [
+            Path("docs/FINAL_REPORT.md"),
+            Path("docs/FINAL_REPORT_DRAFT.md"),
+            Path("docs/FINAL_REPORT_OUTLINE.md"),
+            Path("docs/FINAL_REPORT_HIGHLIGHTS.md"),
+        ]:
+            refs = sorted(
+                set(re.findall(r"`(docs/[^`]+?\\.md)`", doc.read_text(encoding="utf-8")))
+            )
+            missing = [ref for ref in refs if Path(ref).exists() and ref not in required]
+
+            self.assertEqual(missing, [], f"{doc} refs missing from real-report preflight")
 
     def test_real_report_preflight_and_summary_are_not_resume_cached(self) -> None:
         protocol = load_protocol("protocols/real_report_run.toml")
