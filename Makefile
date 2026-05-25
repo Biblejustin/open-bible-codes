@@ -39,6 +39,7 @@ lint:
 public-release-check:
 	python3 -m scripts.check_public_release_hygiene
 	python3 -m scripts.check_expanded_strata_tooling
+	python3 -m scripts.check_doc_command_references
 
 study-mapping-schemas:
 	python3 -m scripts.validate_study_mapping_schemas

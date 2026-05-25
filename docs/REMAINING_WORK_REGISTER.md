@@ -789,7 +789,7 @@ python3 -m scripts.check_public_release_hygiene --allow-dirty
 Latest validation snapshot after the critical-omission/final-report public
 wording synchronization:
 
-- `python3 -m pytest -q` passed: 1442 tests, 2 skipped, and 29195 subtests.
+- `python3 -m pytest -q` passed: 1446 tests, 2 skipped, and 29195 subtests.
 - `git diff --check` passed.
 - `make public-release-check` passed from the committed tree.
 
