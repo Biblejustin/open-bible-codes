@@ -244,7 +244,8 @@ Current pushed commits for the hardening:
 - `a1e7d56` Fallback remaining process pools sequentially.
 - `ef1db58` Refresh Gog Magog prospective report.
 
-Validation after the fallback work:
+Historical validation after the fallback work, superseded by the latest
+validation snapshot under `Validation Commands`:
 
 - `python3 -m pytest -q` passed: 1407 tests, 2 skipped, and 14117 subtests.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
@@ -966,7 +967,7 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - `597b1a0` Reflect WRR manual decision locks in worksheet.
 - `af38937` Align WRR handoff docs with decision locks.
 - `c35f6e6` Update WRR checklist lock boundary wording.
-- `python3 -m pytest -q` passed after the lock-status documentation updates:
+- Historical `python3 -m pytest -q` result after the lock-status documentation updates:
   1409 passed, 2 skipped, 14120 subtests passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wrr_public_locks.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wrr_checklist_locks.json` passed.

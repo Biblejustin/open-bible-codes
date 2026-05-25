@@ -193,6 +193,8 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     assert "`git diff --check` passed" in text
     assert "`make public-release-check` passed" in text
     assert "Earlier WRR/source-recovery validation snapshot" in text
+    assert "Historical validation after the fallback work" in text
+    assert "Historical `python3 -m pytest -q` result after the lock-status" in text
 
 
 def test_final_report_tracks_wrr_single_term_source_policy_impacts() -> None:
