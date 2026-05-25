@@ -94,6 +94,21 @@ class ClaimCatalogTests(unittest.TestCase):
         self.assertIn("docs/WRR_SOURCE_AUDIT.md", row["notes"])
         self.assertIn("visual triage notes do not exclude pairs automatically", row["notes"])
 
+    def test_critical_omission_catalog_keeps_null_read_visible(self) -> None:
+        with CATALOG_PATH.open("r", encoding="utf-8", newline="") as handle:
+            rows = {row["claim_id"]: row for row in csv.DictReader(handle)}
+
+        row = rows["critical_omission_breakage"]
+        self.assertEqual(row["status"], "partially_reproducible")
+        self.assertIn("558 broken TR hits", row["current_reproduction"])
+        self.assertIn("p_ge 0.9910", row["current_reproduction"])
+        self.assertIn("null median 657", row["current_reproduction"])
+
+        doc = Path("docs/CLAIM_CATALOG.md").read_text(encoding="utf-8")
+        normalized_doc = " ".join(doc.split())
+        self.assertIn("558 observed broken TR hits versus null median 657", normalized_doc)
+        self.assertIn("`p_ge=0.9910`", doc)
+
 
 if __name__ == "__main__":
     unittest.main()
