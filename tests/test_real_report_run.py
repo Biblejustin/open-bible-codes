@@ -529,6 +529,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_wrr_adjacent_source_audit_docs.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_wrr_variant_gap_docs.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -1260,6 +1264,7 @@ inputs = ["docs/A.md", "docs/C.md"]
                 payload,
             )
             self.assertIn("research_missing_model_pages_audit_doc_failures", payload)
+            self.assertIn("wrr_adjacent_source_audit_doc_failures", payload)
             self.assertIn("wrr_public_handoff_doc_failures", payload)
             self.assertIn(
                 "wrr_source_transcription_row_review_checklist_doc_failures",
@@ -2316,6 +2321,28 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "research missing model pages audit doc failures: "
                 "docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md missing source boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_adjacent_source_audit_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_adjacent_source_audit_docs,
+                "validate_adjacent_source_audit_docs",
+                return_value=["docs/CITIES_SOURCE_CHAIN_AUDIT.md missing boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_adjacent_source_audit_doc_failures"],
+                ["docs/CITIES_SOURCE_CHAIN_AUDIT.md missing boundary"],
+            )
+            self.assertIn(
+                "WRR adjacent source audit doc failures: "
+                "docs/CITIES_SOURCE_CHAIN_AUDIT.md missing boundary",
                 payload["failures"],
             )
 

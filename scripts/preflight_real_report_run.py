@@ -46,6 +46,7 @@ from scripts import (
     check_study_lock_manifests_doc,
     check_wrr_claim_blocker_packet_doc,
     check_wrr_claim_readiness_doc,
+    check_wrr_adjacent_source_audit_docs,
     check_wrr_cross_pair_grid_doc,
     check_wrr_defined_diagnostic_docs,
     check_wrr_direct_all_lanes_doc,
@@ -589,6 +590,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_wayback_source_recovery_probe_doc.py",
     "scripts/check_hypothesis_testing_source_audit_doc.py",
     "scripts/check_research_missing_model_pages_audit_doc.py",
+    "scripts/check_wrr_adjacent_source_audit_docs.py",
     "scripts/check_wrr_variant_gap_docs.py",
     "scripts/build_wrr_claim_blocker_packet.py",
     "scripts/build_matrix_cluster_candidates.py",
@@ -1247,6 +1249,15 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(research_missing_model_pages_audit_doc_failures)
         )
 
+    wrr_adjacent_source_audit_doc_failures = (
+        check_wrr_adjacent_source_audit_docs.validate_adjacent_source_audit_docs(root)
+    )
+    if wrr_adjacent_source_audit_doc_failures:
+        failures.append(
+            "WRR adjacent source audit doc failures: "
+            + "; ".join(wrr_adjacent_source_audit_doc_failures)
+        )
+
     stale_indexes = stale_generated_indexes(root)
     if stale_indexes:
         failures.append("stale generated indexes: " + ", ".join(stale_indexes))
@@ -1359,6 +1370,9 @@ def main(argv: list[str] | None = None) -> int:
         "hypothesis_testing_source_audit_doc_failures": hypothesis_testing_source_audit_doc_failures,
         "research_missing_model_pages_audit_doc_failures": (
             research_missing_model_pages_audit_doc_failures
+        ),
+        "wrr_adjacent_source_audit_doc_failures": (
+            wrr_adjacent_source_audit_doc_failures
         ),
         "stale_generated_indexes": stale_indexes,
         "forbidden_account_terms": FORBIDDEN_ACCOUNT_TERMS,
