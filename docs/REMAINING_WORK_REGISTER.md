@@ -38,8 +38,9 @@ doc-command reference preflight guarding, final-report support-doc reference
 guarding, real-report preflight input drift guarding, a clean real-report
 protocol rerun/cache check at commit `7d09fca`, and manual-review packet-shape
 drift guarding, plus prospective-readiness, next-lock, and study-lock workflow
-doc guard coverage, Greek second-cohort readiness guarding, and consolidated
-findings prospective-boundary guarding.
+doc guard coverage, Greek second-cohort readiness guarding, consolidated
+findings prospective-boundary guarding, and generated lane-status freshness
+guarding.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -815,7 +816,7 @@ supposed to fail if tracked files are dirty.
 
 Latest validation snapshot after the release-ready make target:
 
-- `make release-ready` passed, including `python3 -m pytest -q`: 1509 tests,
+- `make release-ready` passed, including `python3 -m pytest -q`: 1515 tests,
   2 skipped, and 29195 subtests.
 - `python3 -m scripts.check_expanded_strata_tooling` passed inside
   `make fast-validate`.

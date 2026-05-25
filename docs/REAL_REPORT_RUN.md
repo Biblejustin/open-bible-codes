@@ -150,6 +150,8 @@ It requires:
   with current lane state;
 - consolidated findings keep the current prospective-lane boundary tied to
   live profile state;
+- prospective lane-status doc matches its generated output from the live lane
+  profile JSON;
 - Greek surface second-cohort readiness keeps the existing-pool rerun boundary
   visible;
 - English source-basis manifests and audit-queue counts valid, with no current

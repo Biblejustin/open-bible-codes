@@ -30,6 +30,7 @@ from scripts import (
     check_hypothesis_testing_source_audit_doc,
     check_manual_review_queue,
     check_preregistration_placeholders,
+    check_prospective_lane_status_doc,
     check_prospective_study_next_lock_doc,
     check_prospective_study_readiness_doc,
     check_prospective_study_lanes,
@@ -96,6 +97,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_public_claim_language.py",
     "scripts/check_doc_command_references.py",
     "scripts/check_consolidated_findings_doc.py",
+    "scripts/check_prospective_lane_status_doc.py",
     "els/project_index.py",
     "Makefile",
     "README.md",
@@ -737,6 +739,18 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(consolidated_findings_doc_failures)
         )
 
+    prospective_lane_status_doc_failures = (
+        check_prospective_lane_status_doc.validate_lane_status_doc(
+            root / check_prospective_lane_status_doc.DEFAULT_DOC,
+            root / check_prospective_lane_status_doc.DEFAULT_PROFILES,
+        )
+    )
+    if prospective_lane_status_doc_failures:
+        failures.append(
+            "prospective lane-status doc failures: "
+            + "; ".join(prospective_lane_status_doc_failures)
+        )
+
     source_basis_failures = check_source_basis_audit_queue.validate_source_basis_queue(
         biblegateway_manifest=root / check_source_basis_audit_queue.DEFAULT_BIBLEGATEWAY_MANIFEST,
         ebible_controls=root / check_source_basis_audit_queue.DEFAULT_EBIBLE_CONTROLS,
@@ -1182,6 +1196,7 @@ def main(argv: list[str] | None = None) -> int:
             greek_second_cohort_readiness_doc_failures
         ),
         "consolidated_findings_doc_failures": consolidated_findings_doc_failures,
+        "prospective_lane_status_doc_failures": prospective_lane_status_doc_failures,
         "source_basis_failures": source_basis_failures,
         "english_corpus_policy_failures": english_corpus_policy_failures,
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,
