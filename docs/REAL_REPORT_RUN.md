@@ -146,7 +146,7 @@ It requires:
 - `protocols/real_report_run.toml` preflight inputs match the preflight
   script's required-path list, so the runnable protocol and script do not drift;
 - prospective lane profiles valid, with registered term/protocol/report paths
-  present, and the readiness doc agrees with current ready/blocked lane state;
+  present, and the readiness and next-lock docs agree with current lane state;
 - English source-basis manifests and audit-queue counts valid, with no current
   `needs_audit` rows unless the policy is explicitly changed;
 - English corpus policy docs keep missing BibleGateway rows deferred unless a

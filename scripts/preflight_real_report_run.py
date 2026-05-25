@@ -28,6 +28,7 @@ from scripts import (
     check_hypothesis_testing_source_audit_doc,
     check_manual_review_queue,
     check_preregistration_placeholders,
+    check_prospective_study_next_lock_doc,
     check_prospective_study_readiness_doc,
     check_prospective_study_lanes,
     check_public_claim_language,
@@ -462,6 +463,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/filter_prospective_terms.py",
     "scripts/preflight_prospective_study.py",
     "scripts/scaffold_prospective_study.py",
+    "scripts/check_prospective_study_next_lock_doc.py",
     "scripts/check_prospective_study_readiness_doc.py",
     "scripts/check_prospective_study_lanes.py",
     "scripts/check_english_corpus_policy_docs.py",
@@ -678,6 +680,18 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "prospective readiness doc failures: "
             + "; ".join(prospective_readiness_doc_failures)
+        )
+
+    prospective_next_lock_doc_failures = (
+        check_prospective_study_next_lock_doc.validate_next_lock_doc(
+            root / check_prospective_study_next_lock_doc.DEFAULT_DOC,
+            root / check_prospective_study_next_lock_doc.DEFAULT_PROFILES,
+        )
+    )
+    if prospective_next_lock_doc_failures:
+        failures.append(
+            "prospective next-lock doc failures: "
+            + "; ".join(prospective_next_lock_doc_failures)
         )
 
     source_basis_failures = check_source_basis_audit_queue.validate_source_basis_queue(
@@ -1119,6 +1133,7 @@ def main(argv: list[str] | None = None) -> int:
         "preflight_protocol_input_failures": preflight_protocol_input_failures,
         "prospective_lane_failures": prospective_lane_failures,
         "prospective_readiness_doc_failures": prospective_readiness_doc_failures,
+        "prospective_next_lock_doc_failures": prospective_next_lock_doc_failures,
         "source_basis_failures": source_basis_failures,
         "english_corpus_policy_failures": english_corpus_policy_failures,
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,
