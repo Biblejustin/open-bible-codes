@@ -17,19 +17,25 @@ def test_build_dashboard_rows_summarizes_gap_and_review_lanes(tmp_path: Path) ->
     assert by_key[("manual_locks", "manual_decision_inventory")]["value"] == (
         "37 rows; 58 action terms; 40 frontier pair links"
     )
+    assert by_key[("manual_locks", "manual_decision_records")]["value"] == (
+        "37 locked; 0 unlocked; method_lock=11; no_source_change=26"
+    )
+    assert by_key[("manual_locks", "source_policy_pair_rule_lock")]["value"] == (
+        "wrr_decision_001 no_source_change"
+    )
     assert by_key[("review_lane", "source_policy_or_pair_rule_review")]["value"] == (
         "1 terms; 1 residual pairs; 1 frontier pairs"
     )
     assert by_key[("review_lane", "source_transcription_or_row_alignment")]["value"] == (
         "43 terms; 44 residual pairs; 35 frontier pairs"
     )
-    assert by_key[
-        ("recommended_next", "source-policy/pair-rule: wrr2_32_app_05 $LMHMX@LMA")
-    ]["status"] == "no_source_change"
+    assert by_key[("recommended_next", "post-lock reporting boundary")]["status"] == (
+        "no_source_change"
+    )
     assert by_key[
         (
             "recommended_next",
-            "source-transcription row clusters: row 06, row 14, row 24, row 01, row 03",
+            "exact-published gap language",
         )
     ]["value"] == "organize_evidence_only"
 
@@ -54,6 +60,8 @@ def test_main_writes_csv_markdown_and_manifest(tmp_path: Path) -> None:
             str(paths["action"]),
             "--manual-register-summary",
             str(paths["manual"]),
+            "--manual-decision-records",
+            str(paths["records"]),
             "--source-policy-checklist",
             str(paths["source_policy"]),
             "--row-checklist",
@@ -76,8 +84,11 @@ def test_main_writes_csv_markdown_and_manifest(tmp_path: Path) -> None:
     text = markdown.read_text(encoding="utf-8")
     assert "Status: exact published WRR reproduction is not closed." in text
     assert "Remaining 163-distance gap | 91" in text
+    assert "Locked manual decision records | 37" in text
+    assert "Unlocked manual decision records | 0" in text
+    assert "method_lock=11; no_source_change=26" in text
     assert "| `source_policy_or_pair_rule_review` | 1 | 1 | 1 |" in text
-    assert "source-transcription row clusters: row 06, row 14, row 24, row 01, row 03" in text
+    assert "post-lock reporting boundary" in text
     assert "This dashboard is a review map, not a reproduction result." in text
     payload = json.loads(manifest.read_text(encoding="utf-8"))
     assert payload["tool"] == "build_wrr_exact_reproduction_gap_dashboard"
@@ -98,6 +109,8 @@ def _argv(tmp_path: Path) -> list[str]:
         str(tmp_path / "action.csv"),
         "--manual-register-summary",
         str(tmp_path / "manual.csv"),
+        "--manual-decision-records",
+        str(tmp_path / "records.csv"),
         "--source-policy-checklist",
         str(tmp_path / "source.csv"),
         "--row-checklist",
@@ -167,6 +180,40 @@ def _inputs() -> dashboard.LoadedInputs:
                 "frontier_pairs": "40",
             }
         ],
+        manual_decision_records=(
+            [
+                {
+                    "decision_id": "wrr_decision_001",
+                    "decision_lane": "source_policy_pair_rule",
+                    "decision_target": "Chelm source-policy/pair-rule target",
+                    "decision_status": "locked",
+                    "selected_action": "no_source_change",
+                    "evidence_summary": "kept working source unchanged",
+                }
+            ]
+            + [
+                {
+                    "decision_id": f"wrr_decision_{index:03d}",
+                    "decision_lane": "source_transcription_row_cluster",
+                    "decision_target": f"row {index:02d}",
+                    "decision_status": "locked",
+                    "selected_action": "no_source_change",
+                    "evidence_summary": "kept working source unchanged",
+                }
+                for index in range(2, 27)
+            ]
+            + [
+                {
+                    "decision_id": f"wrr_decision_{index:03d}",
+                    "decision_lane": "method_pair_universe",
+                    "decision_target": f"method {index:02d}",
+                    "decision_status": "locked",
+                    "selected_action": "method_lock",
+                    "evidence_summary": "locked current method result",
+                }
+                for index in range(27, 38)
+            ]
+        ),
         source_policy_checklist=[
             {
                 "term_id": "wrr2_32_app_05",
@@ -204,6 +251,7 @@ def _write_inputs(tmp_path: Path) -> dict[str, Path]:
         "upper_bound": tmp_path / "upper.csv",
         "action": tmp_path / "action.csv",
         "manual": tmp_path / "manual.csv",
+        "records": tmp_path / "records.csv",
         "source_policy": tmp_path / "source.csv",
         "rows": tmp_path / "rows.csv",
         "remaining": tmp_path / "remaining.csv",
@@ -215,6 +263,7 @@ def _write_inputs(tmp_path: Path) -> dict[str, Path]:
     _write(paths["upper_bound"], inputs.variant_upper_bound)
     _write(paths["action"], inputs.action_summary)
     _write(paths["manual"], inputs.manual_register_summary)
+    _write(paths["records"], inputs.manual_decision_records)
     _write(paths["source_policy"], inputs.source_policy_checklist)
     _write(paths["rows"], inputs.row_checklist)
     _write(paths["remaining"], inputs.remaining_checklist)

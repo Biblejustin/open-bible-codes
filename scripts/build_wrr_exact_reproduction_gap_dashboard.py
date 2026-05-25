@@ -26,6 +26,9 @@ DEFAULT_ACTION_SUMMARY = Path(
 DEFAULT_MANUAL_REGISTER_SUMMARY = Path(
     "reports/wrr_1994/wrr_manual_decision_register_summary.csv"
 )
+DEFAULT_MANUAL_DECISION_RECORDS = Path(
+    "data/study/mappings/wrr_manual_decision_records.csv"
+)
 DEFAULT_SOURCE_POLICY_CHECKLIST = Path(
     "reports/wrr_1994/wrr_source_policy_review_checklist.csv"
 )
@@ -54,6 +57,7 @@ def main(argv: list[str] | None = None) -> int:
         variant_upper_bound=read_rows(args.variant_upper_bound),
         action_summary=read_rows(args.action_summary),
         manual_register_summary=read_rows(args.manual_register_summary),
+        manual_decision_records=read_rows(args.manual_decision_records),
         source_policy_checklist=read_rows(args.source_policy_checklist),
         row_checklist=read_rows(args.row_checklist),
         remaining_checklist=read_rows(args.remaining_checklist),
@@ -78,6 +82,7 @@ class LoadedInputs:
         variant_upper_bound: list[dict[str, str]],
         action_summary: list[dict[str, str]],
         manual_register_summary: list[dict[str, str]],
+        manual_decision_records: list[dict[str, str]],
         source_policy_checklist: list[dict[str, str]],
         row_checklist: list[dict[str, str]],
         remaining_checklist: list[dict[str, str]],
@@ -88,6 +93,7 @@ class LoadedInputs:
         self.variant_upper_bound = variant_upper_bound
         self.action_summary = action_summary
         self.manual_register_summary = manual_register_summary
+        self.manual_decision_records = manual_decision_records
         self.source_policy_checklist = source_policy_checklist
         self.row_checklist = row_checklist
         self.remaining_checklist = remaining_checklist
@@ -108,6 +114,9 @@ def build_parser() -> argparse.ArgumentParser:
         "--manual-register-summary", type=Path, default=DEFAULT_MANUAL_REGISTER_SUMMARY
     )
     parser.add_argument(
+        "--manual-decision-records", type=Path, default=DEFAULT_MANUAL_DECISION_RECORDS
+    )
+    parser.add_argument(
         "--source-policy-checklist", type=Path, default=DEFAULT_SOURCE_POLICY_CHECKLIST
     )
     parser.add_argument("--row-checklist", type=Path, default=DEFAULT_ROW_CHECKLIST)
@@ -126,6 +135,7 @@ def build_dashboard_rows(
     defined = all_lanes_cap1000(inputs.defined_pair_summary)
     upper_bound = all_lanes_cap1000(inputs.variant_upper_bound)
     manual_totals = manual_summary(inputs.manual_register_summary)
+    manual_record_totals = manual_record_summary(inputs.manual_decision_records)
     locked_status = lookup_locked_value(inputs.locked_report, "status", "report_status")
     rows = [
         row(
@@ -188,7 +198,36 @@ def build_dashboard_rows(
             "Manual locks organize review state; they do not select corrections, replacements, or exclusions.",
             str(args.manual_register_summary),
         ),
+        row(
+            "manual_locks",
+            "manual_decision_records",
+            (
+                f"{manual_record_totals['locked']} locked; "
+                f"{manual_record_totals['unlocked']} unlocked; "
+                f"{format_counts(manual_record_totals['selected_actions'])}"
+            ),
+            "all_current_manual_reviews_locked"
+            if manual_record_totals["unlocked"] == 0
+            else "manual_reviews_unlocked",
+            "Decision records set current lock status; source corrections require selected_action to name a source change.",
+            str(args.manual_decision_records),
+        ),
     ]
+    source_lock = source_policy_lock(inputs.manual_decision_records)
+    if source_lock:
+        rows.append(
+            row(
+                "manual_locks",
+                "source_policy_pair_rule_lock",
+                (
+                    f"{source_lock.get('decision_id', '')} "
+                    f"{source_lock.get('selected_action', '')}"
+                ).strip(),
+                source_lock.get("decision_status", ""),
+                source_lock.get("evidence_summary", ""),
+                str(args.manual_decision_records),
+            )
+        )
     for reason_row in selected_gap_reasons(inputs.gap_reasons):
         rows.append(
             row(
@@ -238,6 +277,7 @@ def write_markdown(
     defined = all_lanes_cap1000(inputs.defined_pair_summary)
     upper_bound = all_lanes_cap1000(inputs.variant_upper_bound)
     manual_totals = manual_summary(inputs.manual_register_summary)
+    manual_record_totals = manual_record_summary(inputs.manual_decision_records)
     action_rows = inputs.action_summary
     gap_reasons = selected_gap_reasons(inputs.gap_reasons)
     recommended = recommended_next_items(inputs)
@@ -261,6 +301,7 @@ def write_markdown(
             f"--variant-upper-bound {args.variant_upper_bound} "
             f"--action-summary {args.action_summary} "
             f"--manual-register-summary {args.manual_register_summary} "
+            f"--manual-decision-records {args.manual_decision_records} "
             f"--source-policy-checklist {args.source_policy_checklist} "
             f"--row-checklist {args.row_checklist} "
             f"--remaining-checklist {args.remaining_checklist} "
@@ -281,6 +322,9 @@ def write_markdown(
         f"| Manual decision rows | {manual_totals['decision_rows']} |",
         f"| Manual action terms | {manual_totals['action_terms']} |",
         f"| Manual frontier pair links | {manual_totals['frontier_pairs']} |",
+        f"| Locked manual decision records | {manual_record_totals['locked']} |",
+        f"| Unlocked manual decision records | {manual_record_totals['unlocked']} |",
+        f"| Recorded selected actions | {cell(format_counts(manual_record_totals['selected_actions']))} |",
         "",
         "## Gap Reasons",
         "",
@@ -317,6 +361,24 @@ def write_markdown(
     lines.extend(
         [
             "",
+            "## Manual Lock Status",
+            "",
+            "| Lock | Status | Action | Evidence read |",
+            "| --- | --- | --- | --- |",
+        ]
+    )
+    for lock_row in manual_lock_rows(inputs.manual_decision_records):
+        lines.append(
+            "| {target} | {status} | {action} | {evidence} |".format(
+                target=cell(lock_row.get("decision_target", "")),
+                status=cell(lock_row.get("decision_status", "")),
+                action=cell(lock_row.get("selected_action", "")),
+                evidence=cell(lock_row.get("evidence_summary", "")),
+            )
+        )
+    lines.extend(
+        [
+            "",
             "## Recommended Next Items",
             "",
             "| Rank | Item | Action |",
@@ -343,6 +405,8 @@ def write_markdown(
 
 def recommended_next_items(inputs: LoadedInputs) -> list[tuple[str, str]]:
     source = first(inputs.source_policy_checklist)
+    manual_record_totals = manual_record_summary(inputs.manual_decision_records)
+    unlocked = int(manual_record_totals["unlocked"])
     row_frontier = sorted(
         [
             row
@@ -360,7 +424,14 @@ def recommended_next_items(inputs: LoadedInputs) -> list[tuple[str, str]]:
         key=lambda row: int_or_zero(row.get("checklist_rank", "")),
     )
     items: list[tuple[str, str]] = []
-    if source:
+    if unlocked == 0:
+        items.append(
+            (
+                "post-lock reporting boundary",
+                "all current manual review rows are locked; keep source unchanged and describe the residual gap as exact-reproduction work, not pending source edits",
+            )
+        )
+    if source and unlocked > 0:
         items.append(
             (
                 f"source-policy/pair-rule: {source.get('term_id', '')} {source.get('term', '')}",
@@ -368,7 +439,7 @@ def recommended_next_items(inputs: LoadedInputs) -> list[tuple[str, str]]:
                 or "cite source/pair-rule evidence before changing working source",
             )
         )
-    if row_frontier:
+    if row_frontier and unlocked > 0:
         top_rows = ", ".join(
             f"row {row.get('row_number', '')}" for row in row_frontier[:5]
         )
@@ -382,7 +453,7 @@ def recommended_next_items(inputs: LoadedInputs) -> list[tuple[str, str]]:
     page_rows = [
         row for row in remaining_frontier if row.get("action_lane") == "page_image_near_match_review"
     ]
-    if page_rows:
+    if page_rows and unlocked > 0:
         items.append(
             (
                 "page-image near-match terms",
@@ -392,7 +463,7 @@ def recommended_next_items(inputs: LoadedInputs) -> list[tuple[str, str]]:
     method_rows = [
         row for row in remaining_frontier if row.get("action_lane") == "method_or_pair_universe_review"
     ]
-    if method_rows:
+    if method_rows and unlocked > 0:
         items.append(
             (
                 "method/pair-universe zero ordinary-hit terms",
@@ -401,7 +472,7 @@ def recommended_next_items(inputs: LoadedInputs) -> list[tuple[str, str]]:
         )
     items.append(
         (
-            "report language",
+            "exact-published gap language",
             "keep exact-published reproduction caveat attached until the 163-distance gap is explained",
         )
     )
@@ -434,6 +505,57 @@ def manual_summary(rows: list[dict[str, str]]) -> dict[str, int]:
         "residual_pairs": totals["residual_pairs"],
         "frontier_pairs": totals["frontier_pairs"],
     }
+
+
+def manual_record_summary(rows: list[dict[str, str]]) -> dict[str, object]:
+    selected: Counter[str] = Counter()
+    locked = 0
+    unlocked = 0
+    for row in rows:
+        if row.get("decision_status") == "locked":
+            locked += 1
+        else:
+            unlocked += 1
+        action = row.get("selected_action", "")
+        if action:
+            selected[action] += 1
+    return {
+        "locked": locked,
+        "unlocked": unlocked,
+        "selected_actions": dict(sorted(selected.items())),
+    }
+
+
+def source_policy_lock(rows: list[dict[str, str]]) -> dict[str, str]:
+    return first(
+        [
+            row
+            for row in rows
+            if row.get("decision_lane") == "source_policy_pair_rule"
+        ]
+    )
+
+
+def manual_lock_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    lanes = [
+        "source_policy_pair_rule",
+        "source_transcription_row_cluster",
+        "page_image_near_match",
+        "method_pair_universe",
+    ]
+    selected: list[dict[str, str]] = []
+    for lane in lanes:
+        for row in rows:
+            if row.get("decision_lane") == lane:
+                selected.append(row)
+                break
+    return selected
+
+
+def format_counts(counts: object) -> str:
+    if not isinstance(counts, dict):
+        return ""
+    return "; ".join(f"{key}={value}" for key, value in sorted(counts.items()))
 
 
 def lookup_locked_value(
@@ -480,6 +602,7 @@ def write_manifest(
             "variant_upper_bound": str(args.variant_upper_bound),
             "action_summary": str(args.action_summary),
             "manual_register_summary": str(args.manual_register_summary),
+            "manual_decision_records": str(args.manual_decision_records),
             "source_policy_checklist": str(args.source_policy_checklist),
             "row_checklist": str(args.row_checklist),
             "remaining_checklist": str(args.remaining_checklist),
