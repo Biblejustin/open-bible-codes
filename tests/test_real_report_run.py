@@ -530,6 +530,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_consolidated_findings_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_study_lock_manifests_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -937,6 +941,10 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/check_consolidated_findings_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/check_study_lock_manifests_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -1189,6 +1197,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn("prospective_readiness_doc_failures", payload)
             self.assertIn("study_lock_manifests_doc_failures", payload)
             self.assertIn("greek_second_cohort_readiness_doc_failures", payload)
+            self.assertIn("consolidated_findings_doc_failures", payload)
             self.assertIn("study_mapping_schema_failures", payload)
             self.assertIn("preregistration_placeholder_paths", payload)
             self.assertIn("preregistration_placeholder_failures", payload)
@@ -1534,6 +1543,28 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "Greek second-cohort readiness doc failures: "
                 "docs/GREEK_SURFACE_SECOND_COHORT_READINESS.md stale",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_consolidated_findings_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_consolidated_findings_doc,
+                "validate_consolidated_findings_doc",
+                return_value=["docs/CONSOLIDATED_FINDINGS.md stale"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["consolidated_findings_doc_failures"],
+                ["docs/CONSOLIDATED_FINDINGS.md stale"],
+            )
+            self.assertIn(
+                "consolidated findings doc failures: "
+                "docs/CONSOLIDATED_FINDINGS.md stale",
                 payload["failures"],
             )
 

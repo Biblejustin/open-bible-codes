@@ -15,6 +15,7 @@ inputs = [
   "scripts/check_public_release_hygiene.py",
   "scripts/check_public_claim_language.py",
   "scripts/check_doc_command_references.py",
+  "scripts/check_consolidated_findings_doc.py",
   "els/project_index.py",
   "Makefile",
   "README.md",

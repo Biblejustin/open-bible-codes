@@ -848,9 +848,11 @@ The Greek surface public-claim standard is now written in
 new result-producing surface study.
 
 Current next target status: `docs/PROSPECTIVE_STUDY_READINESS.md` now reports
-no remaining `ready_for_preflight` lane. Any further result-producing work
-needs a genuinely new term/source target set and a fresh lock before running.
-Avoid more raw count expansion unless the claim standard is fixed in advance.
+no remaining `ready_for_preflight` lane, matching
+`configs/prospective_study_lanes.json` and `docs/PROSPECTIVE_LANE_STATUS.md`.
+Any further result-producing work needs a genuinely new term/source target set
+and a fresh lock before running. Avoid more raw count expansion unless the
+claim standard is fixed in advance.
 
 That post-discovery follow-up design is now frozen in
 `docs/DOXA_FOLLOWUP_PREREGISTRATION.md`. The first locked follow-up run is

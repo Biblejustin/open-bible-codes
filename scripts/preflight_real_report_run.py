@@ -22,6 +22,7 @@ from els.project_index import (
 )
 from scripts import (
     check_crd_relevance_dictionary,
+    check_consolidated_findings_doc,
     check_doc_command_references,
     check_english_corpus_policy_docs,
     check_expanded_strata_tooling,
@@ -94,6 +95,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_public_release_hygiene.py",
     "scripts/check_public_claim_language.py",
     "scripts/check_doc_command_references.py",
+    "scripts/check_consolidated_findings_doc.py",
     "els/project_index.py",
     "Makefile",
     "README.md",
@@ -723,6 +725,18 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(greek_second_cohort_readiness_doc_failures)
         )
 
+    consolidated_findings_doc_failures = (
+        check_consolidated_findings_doc.validate_consolidated_findings_doc(
+            root / check_consolidated_findings_doc.DEFAULT_DOC,
+            root / check_consolidated_findings_doc.DEFAULT_PROFILES,
+        )
+    )
+    if consolidated_findings_doc_failures:
+        failures.append(
+            "consolidated findings doc failures: "
+            + "; ".join(consolidated_findings_doc_failures)
+        )
+
     source_basis_failures = check_source_basis_audit_queue.validate_source_basis_queue(
         biblegateway_manifest=root / check_source_basis_audit_queue.DEFAULT_BIBLEGATEWAY_MANIFEST,
         ebible_controls=root / check_source_basis_audit_queue.DEFAULT_EBIBLE_CONTROLS,
@@ -1167,6 +1181,7 @@ def main(argv: list[str] | None = None) -> int:
         "greek_second_cohort_readiness_doc_failures": (
             greek_second_cohort_readiness_doc_failures
         ),
+        "consolidated_findings_doc_failures": consolidated_findings_doc_failures,
         "source_basis_failures": source_basis_failures,
         "english_corpus_policy_failures": english_corpus_policy_failures,
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,
