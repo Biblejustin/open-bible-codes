@@ -55,6 +55,45 @@ def test_reports_missing_term_file(tmp_path: Path) -> None:
     ]
 
 
+def test_reports_missing_claim_file(tmp_path: Path) -> None:
+    write_minimal_repo(tmp_path)
+    (tmp_path / "docs" / "CLAIMS.md").write_text(
+        "Claim catalog: `claims/missing_claims.csv`.\n",
+        encoding="utf-8",
+    )
+
+    assert validate_doc_command_references(tmp_path) == [
+        "docs/CLAIMS.md:1: missing claim file claims/missing_claims.csv"
+    ]
+
+
+def test_reports_missing_mapping_file(tmp_path: Path) -> None:
+    write_minimal_repo(tmp_path)
+    (tmp_path / "docs" / "MAPPING.md").write_text(
+        "Mapping: `data/study/mappings/missing_mapping.csv`.\n",
+        encoding="utf-8",
+    )
+
+    assert validate_doc_command_references(tmp_path) == [
+        "docs/MAPPING.md:1: missing mapping file data/study/mappings/missing_mapping.csv"
+    ]
+
+
+def test_reports_missing_treat_as_deleted_file(tmp_path: Path) -> None:
+    write_minimal_repo(tmp_path)
+    (tmp_path / "docs" / "OVERRIDE.md").write_text(
+        "Override: `protocols/treat_as_deleted/missing_override.csv`.\n",
+        encoding="utf-8",
+    )
+
+    assert validate_doc_command_references(tmp_path) == [
+        (
+            "docs/OVERRIDE.md:1: missing treat-as-deleted file "
+            "protocols/treat_as_deleted/missing_override.csv"
+        )
+    ]
+
+
 def test_ignores_protocol_placeholders(tmp_path: Path) -> None:
     write_minimal_repo(tmp_path)
     (tmp_path / "docs" / "TEMPLATE.md").write_text(

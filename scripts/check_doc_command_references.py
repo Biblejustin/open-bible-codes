@@ -13,6 +13,13 @@ SCRIPT_MODULE_RE = re.compile(r"python3\s+-m\s+scripts\.([A-Za-z0-9_]+)")
 PROTOCOL_RE = re.compile(r"protocols/[A-Za-z0-9_./\[\]{}-]+\.toml")
 CONFIG_RE = re.compile(r"(?<![A-Za-z0-9_./-])configs/[A-Za-z0-9_./\[\]{}-]+\.toml")
 TERM_RE = re.compile(r"(?<![A-Za-z0-9_./-])terms/[A-Za-z0-9_./\[\]{}-]+\.csv")
+CLAIM_CSV_RE = re.compile(r"(?<![A-Za-z0-9_./-])claims/[A-Za-z0-9_./\[\]{}-]+\.csv")
+MAPPING_CSV_RE = re.compile(
+    r"(?<![A-Za-z0-9_./-])data/study/mappings/[A-Za-z0-9_./\[\]{}-]+\.csv"
+)
+TREAT_AS_DELETED_CSV_RE = re.compile(
+    r"(?<![A-Za-z0-9_./-])protocols/treat_as_deleted/[A-Za-z0-9_./\[\]{}-]+\.csv"
+)
 DEFAULT_DOCS = (Path("README.md"), Path("docs"))
 
 
@@ -77,6 +84,32 @@ def validate_doc_command_references(root: Path = Path("."), docs: list[Path] | N
             if not term_path.exists():
                 line = line_number(text, match.start())
                 failures.append(f"{relative_doc}:{line}: missing term file {term_file}")
+        for match in CLAIM_CSV_RE.finditer(text):
+            claim_csv = match.group(0)
+            if is_placeholder(claim_csv):
+                continue
+            claim_path = root / claim_csv
+            if not claim_path.exists():
+                line = line_number(text, match.start())
+                failures.append(f"{relative_doc}:{line}: missing claim file {claim_csv}")
+        for match in MAPPING_CSV_RE.finditer(text):
+            mapping_csv = match.group(0)
+            if is_placeholder(mapping_csv):
+                continue
+            mapping_path = root / mapping_csv
+            if not mapping_path.exists():
+                line = line_number(text, match.start())
+                failures.append(f"{relative_doc}:{line}: missing mapping file {mapping_csv}")
+        for match in TREAT_AS_DELETED_CSV_RE.finditer(text):
+            treat_csv = match.group(0)
+            if is_placeholder(treat_csv):
+                continue
+            treat_path = root / treat_csv
+            if not treat_path.exists():
+                line = line_number(text, match.start())
+                failures.append(
+                    f"{relative_doc}:{line}: missing treat-as-deleted file {treat_csv}"
+                )
     return failures
 
 
