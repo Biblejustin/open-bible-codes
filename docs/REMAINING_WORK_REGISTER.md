@@ -248,6 +248,7 @@ Current pushed commits for this cleanup:
 - `75c1948` Guard WRR source audit local lock boundary.
 - `bb2abdf` Refresh register for WRR source audit guard.
 - `07a5731` Guard protocol README WRR handoff status.
+- `83414a0` Add WRR exact gap priority packet.
 
 ### Formal Real Report Rerun
 
@@ -856,9 +857,8 @@ Latest validation snapshot after the release-ready make target:
 
 - `make fast-validate` passed, including `python3 -m pytest -q`: 1577 tests,
   2 skipped, and 29195 subtests.
-- `make release-ready` last passed before the exact-gap priority-packet test
-  additions: 1572 tests, 2 skipped, and 29195 subtests. Rerun from committed
-  tree before pushing this packet.
+- `make release-ready` passed from the committed tree, including
+  `python3 -m pytest -q`: 1577 tests, 2 skipped, and 29195 subtests.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
   passed after the latest pushed guard updates.
 - `python3 -m scripts.run_protocol protocols/wrr_audit_counts.toml --resume`
@@ -886,7 +886,7 @@ Latest validation snapshot after the release-ready make target:
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out
   /tmp/edls_preflight_protocols_readme_wrr_lock.json` passed.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
-  passed from the committed tree at `07a5731`.
+  passed from the committed tree at `83414a0`.
 
 Earlier WRR/source-recovery validation snapshot after the WRR gap-reason audit,
 readiness gate,
