@@ -28,6 +28,7 @@ ALLOWED_STATUSES = {
     "license_blocked",
 }
 ALLOWED_LANGUAGES = {"hebrew", "greek", "english", "michigan", "hebrew/greek", "hebrew/greek/english"}
+HIGHLIGHT_CATALOG_STATUSES = {"controlled_review_candidate", "partially_reproducible"}
 
 
 class ClaimCatalogTests(unittest.TestCase):
@@ -125,6 +126,54 @@ class ClaimCatalogTests(unittest.TestCase):
             "actual omitted blocks do not break more TR ELS hits than matched random verse blocks",
             normalized_highlights,
         )
+
+    def test_final_report_highlights_catalog_rows_match_claim_catalog(self) -> None:
+        with CATALOG_PATH.open("r", encoding="utf-8", newline="") as handle:
+            expected = {
+                row["claim_id"]: row
+                for row in csv.DictReader(handle)
+                if row["status"] in HIGHLIGHT_CATALOG_STATUSES
+            }
+
+        actual = parse_final_report_highlight_catalog_rows(
+            Path("docs/FINAL_REPORT_HIGHLIGHTS.md").read_text(encoding="utf-8")
+        )
+
+        self.assertEqual(set(actual), set(expected))
+        for claim_id, row in expected.items():
+            with self.subTest(claim_id=claim_id):
+                self.assertEqual(actual[claim_id]["status"], row["status"])
+                self.assertEqual(actual[claim_id]["current_reproduction"], row["current_reproduction"])
+                self.assertEqual(actual[claim_id]["evidence"], row["evidence"])
+
+
+def parse_final_report_highlight_catalog_rows(text: str) -> dict[str, dict[str, str]]:
+    rows: dict[str, dict[str, str]] = {}
+    in_catalog = False
+    for line in text.splitlines():
+        if line == "## Catalog Rows To Keep Beside The Highlights":
+            in_catalog = True
+            continue
+        if in_catalog and line.startswith("## "):
+            break
+        if not in_catalog or not line.startswith("| `"):
+            continue
+        parts = [part.strip() for part in line.strip().strip("|").split(" | ")]
+        if len(parts) != 4:
+            raise AssertionError(f"unexpected highlights catalog row shape: {line}")
+        claim_id, status, current_reproduction, evidence = parts
+        rows[unquote_code(claim_id)] = {
+            "status": unquote_code(status),
+            "current_reproduction": current_reproduction.replace("\\|", "|"),
+            "evidence": unquote_code(evidence),
+        }
+    return rows
+
+
+def unquote_code(value: str) -> str:
+    if value.startswith("`") and value.endswith("`"):
+        return value[1:-1]
+    return value
 
 
 if __name__ == "__main__":
