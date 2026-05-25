@@ -146,7 +146,7 @@ It requires:
 - `protocols/real_report_run.toml` preflight inputs match the preflight
   script's required-path list, so the runnable protocol and script do not drift;
 - prospective lane profiles valid, with registered term/protocol/report paths
-  present;
+  present, and the readiness doc agrees with current ready/blocked lane state;
 - English source-basis manifests and audit-queue counts valid, with no current
   `needs_audit` rows unless the policy is explicitly changed;
 - English corpus policy docs keep missing BibleGateway rows deferred unless a
@@ -159,7 +159,8 @@ It requires:
   while the prospective-study template remains available as a template;
 - CRD relevance dictionary, term coverage, reviewer metadata, and protocol
   hash lock are still consistent with the centered-relevance protocol;
-- manual-review queue keeps required non-claim guardrails and evidence links;
+- manual-review queue keeps required non-claim guardrails, evidence links, and
+  live packet-shape counts;
 - WRR method-status doc keeps local locks separated from open blockers and
   diagnostic-only rows;
 - WRR lock-options doc remains a decision aid rather than a method lock;

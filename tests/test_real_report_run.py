@@ -521,6 +521,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("claims/claim_catalog.csv", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/CLAIM_CATALOG.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("configs/prospective_study_lanes.json", steps_by_id["preflight"]["inputs"])
+        self.assertIn(
+            "scripts/check_prospective_study_readiness_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("scripts/check_prospective_study_lanes.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_english_corpus_policy_docs.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_source_basis_audit_queue.py", steps_by_id["preflight"]["inputs"])
@@ -908,6 +912,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("claims/claim_catalog.csv", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/CLAIM_CATALOG.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("configs/prospective_study_lanes.json", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn(
+            "scripts/check_prospective_study_readiness_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
         self.assertIn("scripts/check_prospective_study_lanes.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_source_basis_audit_queue.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_expanded_strata_tooling.py", preflight.DEFAULT_REQUIRED_PATHS)
@@ -1145,6 +1153,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn("doc_command_reference_failures", payload)
             self.assertIn("preflight_protocol_input_failures", payload)
             self.assertIn("real_report_doc_reference_failures", payload)
+            self.assertIn("prospective_readiness_doc_failures", payload)
             self.assertIn("study_mapping_schema_failures", payload)
             self.assertIn("preregistration_placeholder_paths", payload)
             self.assertIn("preregistration_placeholder_failures", payload)
@@ -1402,6 +1411,28 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "manual review queue failures: "
                 "docs/MANUAL_REVIEW_QUEUE.md missing guard phrase",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_prospective_readiness_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_prospective_study_readiness_doc,
+                "validate_readiness_doc",
+                return_value=["docs/PROSPECTIVE_STUDY_READINESS.md says no ready lanes"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["prospective_readiness_doc_failures"],
+                ["docs/PROSPECTIVE_STUDY_READINESS.md says no ready lanes"],
+            )
+            self.assertIn(
+                "prospective readiness doc failures: "
+                "docs/PROSPECTIVE_STUDY_READINESS.md says no ready lanes",
                 payload["failures"],
             )
 

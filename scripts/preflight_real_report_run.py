@@ -28,6 +28,7 @@ from scripts import (
     check_hypothesis_testing_source_audit_doc,
     check_manual_review_queue,
     check_preregistration_placeholders,
+    check_prospective_study_readiness_doc,
     check_prospective_study_lanes,
     check_public_claim_language,
     check_source_basis_audit_queue,
@@ -461,6 +462,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/filter_prospective_terms.py",
     "scripts/preflight_prospective_study.py",
     "scripts/scaffold_prospective_study.py",
+    "scripts/check_prospective_study_readiness_doc.py",
     "scripts/check_prospective_study_lanes.py",
     "scripts/check_english_corpus_policy_docs.py",
     "scripts/check_source_basis_audit_queue.py",
@@ -664,6 +666,18 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "prospective lane validation failures: "
             + "; ".join(prospective_lane_failures)
+        )
+
+    prospective_readiness_doc_failures = (
+        check_prospective_study_readiness_doc.validate_readiness_doc(
+            root / check_prospective_study_readiness_doc.DEFAULT_DOC,
+            root / check_prospective_study_readiness_doc.DEFAULT_PROFILES,
+        )
+    )
+    if prospective_readiness_doc_failures:
+        failures.append(
+            "prospective readiness doc failures: "
+            + "; ".join(prospective_readiness_doc_failures)
         )
 
     source_basis_failures = check_source_basis_audit_queue.validate_source_basis_queue(
@@ -1104,6 +1118,7 @@ def main(argv: list[str] | None = None) -> int:
         "real_report_doc_reference_failures": real_report_doc_reference_failures,
         "preflight_protocol_input_failures": preflight_protocol_input_failures,
         "prospective_lane_failures": prospective_lane_failures,
+        "prospective_readiness_doc_failures": prospective_readiness_doc_failures,
         "source_basis_failures": source_basis_failures,
         "english_corpus_policy_failures": english_corpus_policy_failures,
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,

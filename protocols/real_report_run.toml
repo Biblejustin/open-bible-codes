@@ -386,6 +386,7 @@ inputs = [
   "scripts/filter_prospective_terms.py",
   "scripts/preflight_prospective_study.py",
   "scripts/scaffold_prospective_study.py",
+  "scripts/check_prospective_study_readiness_doc.py",
   "scripts/check_prospective_study_lanes.py",
   "scripts/check_english_corpus_policy_docs.py",
   "scripts/check_source_basis_audit_queue.py",
