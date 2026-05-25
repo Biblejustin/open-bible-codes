@@ -1,0 +1,100 @@
+name = "greek_lexicon_extension_stage_a_controls"
+description = "Stage A 5000/5000 controls for all-source Greek lexicon extension screen rows."
+manifest_out = "reports/greek_lexicon_extension_stage_a_controls/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 30
+
+[[steps]]
+id = "paired_controls"
+description = "Run Stage A controls for all-source exact-center lexicon extension rows."
+argv = [
+  "-m", "scripts.analyze_extension_paired_controls",
+  "--top-file", "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt_top.csv",
+  "--top-file", "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt_top.csv",
+  "--top-file", "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt_top.csv",
+  "--top-file", "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt_top.csv",
+  "--surface-context-hits", "reports/greek_lexicon_extension_stage_a_screen/surface_context_hits.csv",
+  "--require-center-exact",
+  "--require-overlap-corpus", "TR_NT",
+  "--require-overlap-corpus", "BYZ_NT",
+  "--require-overlap-corpus", "TCG_NT",
+  "--require-overlap-corpus", "SBLGNT",
+  "--dedupe-targets",
+  "--term-control-samples", "5000",
+  "--random-control-samples", "5000",
+  "--jobs", "0",
+  "--max-examples", "200",
+  "--title", "Greek Lexicon Extension Stage A Controls",
+  "--lead", "Stage A controls for all-source exact-center same-skip extension rows from the locked Strong's Greek lexicon screen.",
+  "--caution", "This is the registered Stage A control screen. Rows must still pass Stage B 20000/20000 confirmation before any claim-grade reading.",
+  "--summary-out", "reports/greek_lexicon_extension_stage_a_controls/paired_controls_summary.csv",
+  "--examples-out", "reports/greek_lexicon_extension_stage_a_controls/paired_controls_examples.csv",
+  "--markdown-out", "reports/greek_lexicon_extension_stage_a_controls/paired_controls.md",
+  "--manifest-out", "reports/greek_lexicon_extension_stage_a_controls/paired_controls.manifest.json",
+]
+inputs = [
+  "docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_PREREGISTRATION.md",
+  "scripts/analyze_extension_paired_controls.py",
+  "reports/greek_lexicon_extension_stage_a_screen/surface_context_hits.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt_top.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt_top.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt_top.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt_top.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/greek_lexicon_extension_stage_a_controls/paired_controls_summary.csv",
+  "reports/greek_lexicon_extension_stage_a_controls/paired_controls_examples.csv",
+  "reports/greek_lexicon_extension_stage_a_controls/paired_controls.md",
+  "reports/greek_lexicon_extension_stage_a_controls/paired_controls.manifest.json",
+]
+
+[[steps]]
+id = "context_review"
+description = "Build context and letter-path review for Stage A controlled rows."
+argv = [
+  "-m", "scripts.analyze_extension_context_review",
+  "--top-file", "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt_top.csv",
+  "--top-file", "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt_top.csv",
+  "--top-file", "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt_top.csv",
+  "--top-file", "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt_top.csv",
+  "--controls", "reports/greek_lexicon_extension_stage_a_controls/paired_controls_summary.csv",
+  "--surface-context-hits", "reports/greek_lexicon_extension_stage_a_screen/surface_context_hits.csv",
+  "--require-center-exact",
+  "--require-control-row",
+  "--dedupe-targets",
+  "--title", "Greek Lexicon Extension Stage A Context Review",
+  "--description", "Context and letter-path review for all-source Stage A controlled rows from the locked Strong's Greek lexicon screen.",
+  "--summary-out", "reports/greek_lexicon_extension_stage_a_controls/context_review_summary.csv",
+  "--markdown-out", "reports/greek_lexicon_extension_stage_a_controls/context_review.md",
+  "--letter-paths-out", "reports/greek_lexicon_extension_stage_a_controls/letter_paths.md",
+  "--manifest-out", "reports/greek_lexicon_extension_stage_a_controls/context_review.manifest.json",
+]
+inputs = [
+  "scripts/analyze_extension_context_review.py",
+  "reports/greek_lexicon_extension_stage_a_screen/surface_context_hits.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt_top.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt_top.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt_top.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt_top.csv",
+  "reports/greek_lexicon_extension_stage_a_controls/paired_controls_summary.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/normalization.py",
+]
+outputs = [
+  "reports/greek_lexicon_extension_stage_a_controls/context_review_summary.csv",
+  "reports/greek_lexicon_extension_stage_a_controls/context_review.md",
+  "reports/greek_lexicon_extension_stage_a_controls/letter_paths.md",
+  "reports/greek_lexicon_extension_stage_a_controls/context_review.manifest.json",
+]

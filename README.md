@@ -465,6 +465,10 @@ This locks a CC0 Strong's Greek Dictionary headword pool before any
 result-producing search. Source/audit details are in
 `docs/GREEK_LEXICON_PROSPECTIVE_SOURCE.md` and the future extension study is
 predeclared in `docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_PREREGISTRATION.md`.
+The completed Stage B read is tracked in
+`docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_REPORT.md`: two all-source `αυτου`
+extension families survived numeric controls, but both remain
+common-pronoun/surface-context review material rather than claim evidence.
 
 Centered-Relevance Density scaffold:
 

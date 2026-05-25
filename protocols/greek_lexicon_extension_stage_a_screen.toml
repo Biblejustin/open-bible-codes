@@ -1,0 +1,297 @@
+name = "greek_lexicon_extension_stage_a_screen"
+description = "Stage A screen for locked Strong's Greek lexicon exact-center extension candidates."
+manifest_out = "reports/greek_lexicon_extension_stage_a_screen/protocol_run.manifest.json"
+max_parallel = 4
+progress_interval_seconds = 30
+
+[[steps]]
+id = "surface_context"
+description = "Find Greek NT ELS hits whose center/span surface text discusses locked lexicon terms."
+argv = [
+  "-m", "els", "surface-context",
+  "--terms", "terms/greek_lexicon_extension_terms_clean_lock.csv",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "BYZ_NT=configs/example_ebible_grcmt.toml",
+  "--corpus", "TCG_NT=configs/example_ebible_grctcgnt.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--min-skip", "2",
+  "--max-skip", "50",
+  "--direction", "both",
+  "--min-term-length", "5",
+  "--jobs", "0",
+  "--out", "reports/greek_lexicon_extension_stage_a_screen/surface_context_hits.csv",
+  "--summary-out", "reports/greek_lexicon_extension_stage_a_screen/surface_context_summary.csv",
+  "--manifest-out", "reports/greek_lexicon_extension_stage_a_screen/surface_context.manifest.json",
+]
+inputs = [
+  "terms/greek_lexicon_extension_terms_clean_lock.csv",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/search.py",
+  "els/surface.py",
+]
+outputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/surface_context_hits.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/surface_context_summary.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/surface_context.manifest.json",
+]
+
+[[steps]]
+id = "extensions_tr_nt"
+description = "Check same-skip phrase extensions for TR NT lexicon surface-context hits."
+parallel_group = "extensions"
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_ebible_grctr.toml",
+  "--hits", "reports/greek_lexicon_extension_stage_a_screen/surface_context_hits.csv",
+  "--corpus-label", "TR_NT",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt.csv",
+  "--manifest-out", "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt.manifest.json",
+]
+inputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/surface_context_hits.csv",
+  "configs/example_ebible_grctr.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt.manifest.json",
+]
+
+[[steps]]
+id = "extensions_byz_nt"
+description = "Check same-skip phrase extensions for Byzantine NT lexicon surface-context hits."
+parallel_group = "extensions"
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_ebible_grcmt.toml",
+  "--hits", "reports/greek_lexicon_extension_stage_a_screen/surface_context_hits.csv",
+  "--corpus-label", "BYZ_NT",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt.csv",
+  "--manifest-out", "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt.manifest.json",
+]
+inputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/surface_context_hits.csv",
+  "configs/example_ebible_grcmt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt.manifest.json",
+]
+
+[[steps]]
+id = "extensions_tcg_nt"
+description = "Check same-skip phrase extensions for Text-Critical Greek NT lexicon surface-context hits."
+parallel_group = "extensions"
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_ebible_grctcgnt.toml",
+  "--hits", "reports/greek_lexicon_extension_stage_a_screen/surface_context_hits.csv",
+  "--corpus-label", "TCG_NT",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt.csv",
+  "--manifest-out", "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt.manifest.json",
+]
+inputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/surface_context_hits.csv",
+  "configs/example_ebible_grctcgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt.manifest.json",
+]
+
+[[steps]]
+id = "extensions_sblgnt"
+description = "Check same-skip phrase extensions for SBLGNT lexicon surface-context hits."
+parallel_group = "extensions"
+argv = [
+  "-m", "els", "extensions",
+  "--config", "configs/example_sblgnt.toml",
+  "--hits", "reports/greek_lexicon_extension_stage_a_screen/surface_context_hits.csv",
+  "--corpus-label", "SBLGNT",
+  "--max-before", "12",
+  "--max-after", "12",
+  "--phrase-words", "4",
+  "--include-both-sided",
+  "--max-extensions-per-hit", "20",
+  "--out", "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt.csv",
+  "--manifest-out", "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt.manifest.json",
+]
+inputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/surface_context_hits.csv",
+  "configs/example_sblgnt.toml",
+  "els/cli.py",
+  "els/corpus.py",
+  "els/extensions.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt.manifest.json",
+]
+
+[[steps]]
+id = "extension_summary_tr_nt"
+description = "Summarize strongest TR NT phrase-extension rows for the lexicon cohort."
+parallel_group = "summaries"
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "5",
+  "--match-kind-prefix", "phrase_",
+  "--top", "20000",
+  "--out", "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt_summary.csv",
+  "--top-out", "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt_top.csv",
+  "--manifest-out", "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt_summary.manifest.json",
+]
+inputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt_summary.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt_top.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt_summary.manifest.json",
+]
+
+[[steps]]
+id = "extension_summary_byz_nt"
+description = "Summarize strongest Byzantine NT phrase-extension rows for the lexicon cohort."
+parallel_group = "summaries"
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "5",
+  "--match-kind-prefix", "phrase_",
+  "--top", "20000",
+  "--out", "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt_summary.csv",
+  "--top-out", "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt_top.csv",
+  "--manifest-out", "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt_summary.manifest.json",
+]
+inputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt_summary.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt_top.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt_summary.manifest.json",
+]
+
+[[steps]]
+id = "extension_summary_tcg_nt"
+description = "Summarize strongest Text-Critical Greek NT phrase-extension rows for the lexicon cohort."
+parallel_group = "summaries"
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "5",
+  "--match-kind-prefix", "phrase_",
+  "--top", "20000",
+  "--out", "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt_summary.csv",
+  "--top-out", "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt_top.csv",
+  "--manifest-out", "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt_summary.manifest.json",
+]
+inputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt_summary.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt_top.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt_summary.manifest.json",
+]
+
+[[steps]]
+id = "extension_summary_sblgnt"
+description = "Summarize strongest SBLGNT phrase-extension rows for the lexicon cohort."
+parallel_group = "summaries"
+argv = [
+  "-m", "els", "extension-summary",
+  "--extensions", "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt.csv",
+  "--min-extension-length", "3",
+  "--min-term-length", "5",
+  "--match-kind-prefix", "phrase_",
+  "--top", "20000",
+  "--out", "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt_summary.csv",
+  "--top-out", "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt_top.csv",
+  "--manifest-out", "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt_summary.manifest.json",
+]
+inputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt.csv",
+  "els/cli.py",
+]
+outputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt_summary.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt_top.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt_summary.manifest.json",
+]
+
+[[steps]]
+id = "pattern_presence"
+description = "Summarize exact extension-key presence by Greek NT source for Stage A screen rows."
+argv = [
+  "-m", "scripts.analyze_extension_presence",
+  "--top-file", "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt_top.csv",
+  "--top-file", "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt_top.csv",
+  "--top-file", "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt_top.csv",
+  "--top-file", "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt_top.csv",
+  "--surface-context-hits", "reports/greek_lexicon_extension_stage_a_screen/surface_context_hits.csv",
+  "--require-center-exact",
+  "--dedupe-rows",
+  "--corpus", "TR_NT",
+  "--corpus", "BYZ_NT",
+  "--corpus", "TCG_NT",
+  "--corpus", "SBLGNT",
+  "--title", "Greek Lexicon Extension Stage A Screen Pattern Presence",
+  "--description", "Exact extension-key presence by Greek NT source for the locked Strong's Greek lexicon Stage A screen. This is not the Stage A control result.",
+  "--summary-out", "reports/greek_lexicon_extension_stage_a_screen/pattern_presence.csv",
+  "--markdown-out", "reports/greek_lexicon_extension_stage_a_screen/pattern_presence.md",
+  "--manifest-out", "reports/greek_lexicon_extension_stage_a_screen/pattern_presence.manifest.json",
+]
+inputs = [
+  "scripts/analyze_extension_presence.py",
+  "reports/greek_lexicon_extension_stage_a_screen/surface_context_hits.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tr_nt_top.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_byz_nt_top.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_tcg_nt_top.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/extensions_sblgnt_top.csv",
+]
+outputs = [
+  "reports/greek_lexicon_extension_stage_a_screen/pattern_presence.csv",
+  "reports/greek_lexicon_extension_stage_a_screen/pattern_presence.md",
+  "reports/greek_lexicon_extension_stage_a_screen/pattern_presence.manifest.json",
+]

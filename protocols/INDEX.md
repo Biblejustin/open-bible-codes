@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 139
+Protocols indexed: 142
 
 ## Analysis
 
@@ -16,6 +16,8 @@ Protocols indexed: 139
 | greek_exact_center_four_source | Locked Greek exact-center extension cohort with added text-critical Greek NT source. | 12 | terms/greek_exact_center_cohort_terms.csv | reports/greek_exact_center_four_source | `greek_exact_center_four_source.toml` |
 | greek_exact_center_three_source | Locked Greek exact-center extension cohort with independent Byzantine NT source. | 10 | terms/greek_exact_center_cohort_terms.csv | reports/greek_exact_center_three_source | `greek_exact_center_three_source.toml` |
 | greek_expanded_surface_triage | Post-screen triage for expanded Greek exact-center surface rows. | 1 | terms/greek_expanded_prospective_terms.csv | reports/greek_expanded_surface_triage | `greek_expanded_surface_triage.toml` |
+| greek_lexicon_extension_stage_a_screen | Stage A screen for locked Strong's Greek lexicon exact-center extension candidates. | 10 | terms/greek_lexicon_extension_terms_clean_lock.csv | reports/greek_lexicon_extension_stage_a_screen | `greek_lexicon_extension_stage_a_screen.toml` |
+| greek_lexicon_extension_stage_b_confirmation | Stage B 20000/20000 confirmation for Greek lexicon Stage A survivors. | 2 |  | reports/greek_lexicon_extension_stage_b_confirmation | `greek_lexicon_extension_stage_b_confirmation.toml` |
 | greek_nt_claim_version_presence | Capped exact ELS hit-pattern presence for Greek NT claim terms across Greek NT corpora. | 1 | terms/greek_nt_claim_terms.csv | reports/greek_nt_claim_version_presence | `greek_nt_claim_version_presence.toml` |
 | greek_surface_new_terms | Locked Greek surface new-terms exact-center screen for the clean user-requested term lock. | 7 | terms/greek_surface_new_terms_clean_lock.csv | reports/greek_surface_new_terms | `greek_surface_new_terms.toml` |
 | hebrew_claim_version_presence | Capped exact ELS hit-pattern presence for declared Hebrew claim terms across MT-family ... | 1 | terms/hebrew_claim_terms.csv | reports/hebrew_claim_version_presence | `hebrew_claim_version_presence.toml` |
@@ -90,6 +92,7 @@ Protocols indexed: 139
 | greek_expanded_surface_available_control_evaluation | Exploratory all-available real-word matched-control evaluation for tightened Greek surf... | 2 | terms/greek_expanded_prospective_terms.csv | reports/greek_expanded_surface_available_control_evaluation, reports/greek_expanded_sur... | `greek_expanded_surface_available_control_evaluation.toml` |
 | greek_expanded_surface_control_evaluation | Exploratory matched-control evaluation for tightened Greek surface rows. | 1 |  | reports/greek_expanded_surface_control_evaluation | `greek_expanded_surface_control_evaluation.toml` |
 | greek_expanded_surface_control_pool | Real-word surface-frequency control pool for tightened expanded Greek surface rows. | 1 | terms/greek_expanded_prospective_terms.csv | reports/greek_expanded_surface_control_pool | `greek_expanded_surface_control_pool.toml` |
+| greek_lexicon_extension_stage_a_controls | Stage A 5000/5000 controls for all-source Greek lexicon extension screen rows. | 2 |  | reports/greek_lexicon_extension_stage_a_controls | `greek_lexicon_extension_stage_a_controls.toml` |
 | greek_pattern_versions | Consolidate Greek exact-center pattern presence and source-specific control status. | 1 |  | reports/greek_pattern_versions | `greek_pattern_versions.toml` |
 | greek_surface_length4_vocabulary_controls | Post-discovery length-4 Greek surface follow-up against generated real surface-vocabula... | 6 | terms/greek_surface_prospective_terms.csv | reports/greek_surface_length4_vocab_controls | `greek_surface_length4_vocabulary_controls.toml` |
 | hebrew_concordance_words_control_pilot | Deterministic 200-row representative-control pilot for the Hebrew concordance clean-loc... | 3 |  | reports/hebrew_concordance_words_control_pilot | `hebrew_concordance_words_control_pilot.toml` |

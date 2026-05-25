@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 355
+Documents indexed: 356
 
 ## Controls
 
@@ -182,6 +182,7 @@ Documents indexed: 355
 | Greek Exact-Center Three-Source Report | `GREEK_EXACT_CENTER_THREE_SOURCE_REPORT.md` |
 | Greek Expanded Prospective Report | `GREEK_EXPANDED_PROSPECTIVE_REPORT.md` |
 | Greek Expanded Surface Follow-Up Report | `GREEK_EXPANDED_SURFACE_FOLLOWUP_REPORT.md` |
+| Greek Lexicon Extension Prospective Report | `GREEK_LEXICON_EXTENSION_PROSPECTIVE_REPORT.md` |
 | Greek Surface New Terms Prospective Report | `GREEK_SURFACE_NEW_TERMS_REPORT.md` |
 | Greek Surface Prospective Report | `GREEK_SURFACE_PROSPECTIVE_REPORT.md` |
 | Hebrew Concordance Words Control Pilot Report | `HEBREW_CONCORDANCE_WORDS_CONTROL_PILOT_REPORT.md` |
