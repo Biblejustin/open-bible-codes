@@ -34,7 +34,8 @@ public handoff doc guarding, WRR
 remaining-lane/source-policy/manual-decision checklist consolidation, and WRR
 manual decision-record lock propagation, public-handoff lock-status cleanup,
 checklist boundary wording cleanup, public claim-language preflight guarding,
-and doc-command reference preflight guarding.
+doc-command reference preflight guarding, final-report support-doc reference
+guarding, and real-report preflight input drift guarding.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -208,6 +209,8 @@ Current pushed commits for this cleanup:
 - `57488b3` Refresh WRR decision record handoff docs.
 - `981e5f6` Guard WRR decision record checklist paths.
 - `dbe95db` Add WRR decision record worksheet.
+- `1bbd2f0` Enforce real report doc reference preflight.
+- `057168a` Check real report preflight input drift.
 
 ### Formal Real Report Rerun
 

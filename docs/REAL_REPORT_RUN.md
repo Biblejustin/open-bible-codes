@@ -141,6 +141,10 @@ It requires:
 - no tracked report/database/raw-source artifacts beyond allowed placeholders;
 - no high-confidence secret-token patterns in tracked files;
 - required protocols, docs, and term files present;
+- final report, draft, outline, highlights, consolidated findings, and
+  clean-lock summary support-doc references point at required local docs;
+- `protocols/real_report_run.toml` preflight inputs match the preflight
+  script's required-path list, so the runnable protocol and script do not drift;
 - prospective lane profiles valid, with registered term/protocol/report paths
   present;
 - English source-basis manifests and audit-queue counts valid, with no current
