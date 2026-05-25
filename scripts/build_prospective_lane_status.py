@@ -48,7 +48,7 @@ def render_markdown(profiles: list[dict[str, Any]], profile_path: Path) -> str:
         "Status: planning index, not a result report.",
         "",
         "This page is generated from `configs/prospective_study_lanes.json`.",
-        "It lists which lanes are completed, blocked, or waiting on a new lock.",
+        "It lists which lanes are completed, blocked, or ready for a new lock.",
         "",
         "## Lanes",
         "",
@@ -92,6 +92,37 @@ def render_markdown(profiles: list[dict[str, Any]], profile_path: Path) -> str:
             )
             + " |"
         )
+    if not blocked_profiles(profiles):
+        lines.append(
+            "| _None_ | _No blocked lanes currently tracked._ | "
+            "_All tracked profiles are completed or ready._ |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Ready Lanes",
+            "",
+            "| Lane | Needed input | Boundary |",
+            "| --- | --- | --- |",
+        ]
+    )
+    for profile in ready_profiles(profiles):
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    f"`{profile['id']}`",
+                    str(profile["source_term_files"]),
+                    str(profile["excluded_prior"]),
+                ]
+            )
+            + " |"
+        )
+    if not ready_profiles(profiles):
+        lines.append(
+            "| _None_ | _No lane is currently `ready_for_preflight`._ | "
+            "_New result-producing work needs a fresh term/source target set._ |"
+        )
     lines.extend(
         [
             "",
@@ -122,6 +153,14 @@ def blocked_profiles(profiles: list[dict[str, Any]]) -> list[dict[str, Any]]:
         for profile in profiles
         if str(profile.get("status", "")).startswith("blocked")
         or str(profile.get("status", "")).startswith("needs_")
+    ]
+
+
+def ready_profiles(profiles: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [
+        profile
+        for profile in profiles
+        if str(profile.get("status", "")) == "ready_for_preflight"
     ]
 
 

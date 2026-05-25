@@ -14,6 +14,15 @@ def test_render_markdown_lists_blocked_lanes() -> None:
             "excluded_prior": "old rows excluded",
         },
         {
+            "id": "ready_lane",
+            "status": "ready_for_preflight",
+            "term_file": "terms/ready.csv",
+            "protocol": "protocols/ready.toml",
+            "report_doc": "docs/READY.md",
+            "source_term_files": "locked term source",
+            "excluded_prior": "audit passed",
+        },
+        {
             "id": "completed_lane",
             "status": "completed_negative_controlled_result",
             "term_file": "terms/done.csv",
@@ -27,9 +36,11 @@ def test_render_markdown_lists_blocked_lanes() -> None:
     text = status.render_markdown(profiles, status.DEFAULT_PROFILES)
 
     assert "`blocked_lane`" in text
+    assert "`ready_lane`" in text
     assert "`completed_lane`" in text
     assert "blocked; needs predeclared term list" in text
     assert "| `blocked_lane` | new term source | old rows excluded |" in text
+    assert "| `ready_lane` | locked term source | audit passed |" in text
     assert "| `completed_lane` | fixed | none |" not in text
 
 
@@ -42,6 +53,36 @@ def test_blocked_profiles_accepts_blocked_and_needs_statuses() -> None:
     ]
 
     assert [profile["id"] for profile in status.blocked_profiles(profiles)] == ["a", "b", "c"]
+
+
+def test_ready_profiles_accepts_only_ready_for_preflight() -> None:
+    profiles = [
+        {"id": "a", "status": "blocked_until_new_term_source"},
+        {"id": "b", "status": "ready_for_preflight"},
+        {"id": "c", "status": "needs_clean_prospective_lock"},
+        {"id": "d", "status": "completed_negative_controlled_result"},
+    ]
+
+    assert [profile["id"] for profile in status.ready_profiles(profiles)] == ["b"]
+
+
+def test_render_markdown_marks_no_ready_lanes() -> None:
+    profiles = [
+        {
+            "id": "completed_lane",
+            "status": "completed_negative_controlled_result",
+            "term_file": "terms/done.csv",
+            "protocol": "protocols/done.toml",
+            "report_doc": "docs/DONE.md",
+            "source_term_files": "fixed",
+            "excluded_prior": "none",
+        },
+    ]
+
+    text = status.render_markdown(profiles, status.DEFAULT_PROFILES)
+
+    assert "| _None_ | _No lane is currently `ready_for_preflight`._ |" in text
+    assert "fresh term/source target set" in text
 
 
 def test_tracked_lane_status_doc_matches_profiles() -> None:

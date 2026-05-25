@@ -228,7 +228,7 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     text = Path("docs/REMAINING_WORK_REGISTER.md").read_text(encoding="utf-8")
 
     assert "Latest validation snapshot after the release-ready make target" in text
-    assert "1470 tests" in text
+    assert "1472 tests" in text
     assert "2 skipped, and 29195 subtests" in text
     assert "make release-ready" in text
     assert "committed tree" in text

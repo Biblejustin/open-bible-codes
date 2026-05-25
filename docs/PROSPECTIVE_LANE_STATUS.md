@@ -3,7 +3,7 @@
 Status: planning index, not a result report.
 
 This page is generated from `configs/prospective_study_lanes.json`.
-It lists which lanes are completed, blocked, or waiting on a new lock.
+It lists which lanes are completed, blocked, or ready for a new lock.
 
 ## Lanes
 
@@ -22,6 +22,13 @@ It lists which lanes are completed, blocked, or waiting on a new lock.
 
 | Lane | Needed input | Boundary |
 | --- | --- | --- |
+| _None_ | _No blocked lanes currently tracked._ | _All tracked profiles are completed or ready._ |
+
+## Ready Lanes
+
+| Lane | Needed input | Boundary |
+| --- | --- | --- |
+| _None_ | _No lane is currently `ready_for_preflight`._ | _New result-producing work needs a fresh term/source target set._ |
 
 ## Safe Commands
 
