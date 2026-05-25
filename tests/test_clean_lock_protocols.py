@@ -149,6 +149,19 @@ def test_final_report_includes_critical_omission_null_read() -> None:
     assert "TR-vs-SBLGNT omission breakage" in outline
 
 
+def test_readme_tracks_public_final_report_read() -> None:
+    text = Path("README.md").read_text(encoding="utf-8")
+    normalized_text = " ".join(text.split())
+
+    assert "Current public read:" in text
+    assert "no current row should be presented as a public claim" in normalized_text
+    assert "TR-vs-SBLGNT critical-omission breakage is a source-variation screen" in normalized_text
+    assert "observed broken TR hits are 558" in normalized_text
+    assert "1000-shuffle null median is 657" in normalized_text
+    assert "`p_ge=0.9910`" in text
+    assert "protocols/critical_omission_followups.toml" in text
+
+
 def test_final_report_tracks_wrr_single_term_source_policy_impacts() -> None:
     report_paths = [
         Path("docs/FINAL_REPORT.md"),

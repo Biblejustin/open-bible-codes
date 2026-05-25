@@ -748,6 +748,16 @@ Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.
 Compact final-report highlight table: `docs/FINAL_REPORT_HIGHLIGHTS.md`.
+
+Current public read:
+
+- no current row should be presented as a public claim;
+- strongest rows are review candidates and occurrence findings with controls
+  attached;
+- TR-vs-SBLGNT critical-omission breakage is a source-variation screen, not a
+  positive result: observed broken TR hits are 558, the 1000-shuffle null median
+  is 657, and `p_ge=0.9910`.
+
 Strongest-candidate deep-dive packet: `docs/STRONGEST_CANDIDATE_DEEP_DIVE.md`.
 Completed Gog/Magog prospective pair-control report:
 `docs/GOG_MAGOG_PAIR_PROSPECTIVE_REPORT.md`. Result: target rows occurred in
@@ -1208,6 +1218,17 @@ python3 -m scripts.analyze_critical_surface_variants
 ```
 
 This compares TR NT and SBLGNT content-word counts across common refs and flags multiple-pattern changes.
+
+Critical omission follow-ups:
+
+```bash
+python3 -m scripts.run_protocol protocols/critical_omission_followups.toml --resume
+```
+
+These run the shared omission-break engine through reverse, null,
+cross-tradition, length-stratified, and disputed-passage override checks. The
+current null read is cautionary: 558 observed broken TR hits versus null median
+657, with `p_ge=0.9910`.
 
 Theological batch counts:
 
