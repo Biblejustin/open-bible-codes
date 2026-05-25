@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 356
+Documents indexed: 357
 
 ## Controls
 
@@ -101,6 +101,7 @@ Documents indexed: 356
 | WRR Defined Pair-Set Audit | `WRR_DEFINED_PAIR_SET_AUDIT.md` |
 | WRR Direct All-Lane Corrected-Distance Diagnostic | `WRR_DIRECT_ALL_LANES_DIAGNOSTIC.md` |
 | WRR D(w) Formula Sensitivity | `WRR_DW_FORMULA_SENSITIVITY.md` |
+| WRR Exact Gap Priority Packet | `WRR_EXACT_GAP_PRIORITY_PACKET.md` |
 | WRR Exact Reproduction Gap Dashboard | `WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md` |
 | WRR Lock Options | `WRR_LOCK_OPTIONS.md` |
 | WRR Manual Decision Record Worksheet | `WRR_MANUAL_DECISION_RECORD_WORKSHEET.md` |

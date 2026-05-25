@@ -48,8 +48,9 @@ research missing model pages audit doc guarding, WRR-adjacent source audit
 family doc guarding, real-report source-audit preflight documentation,
 critical-omission follow-up doc guarding, WRR support-doc local-lock
 boundary cleanup plus formal preflight guarding, and WRR source-audit
-local-lock boundary guarding, WRR source-audit register refresh, and
-protocol README WRR handoff-status guarding.
+local-lock boundary guarding, WRR source-audit register refresh,
+protocol README WRR handoff-status guarding, and WRR exact-gap priority-packet
+guarding.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -643,6 +644,12 @@ summary: keep_all_working_source, printed `D(w)` main, reported-program
 gap: 163 source-cited defined distances vs 72 current defined distances, simple
 variant residual gap 40, and post-lock reporting boundary without selecting
 source changes.
+`docs/WRR_EXACT_GAP_PRIORITY_PACKET.md` now ranks the current no-input
+evidence lanes for that 91-distance gap: 1 source-policy/pair-rule term, 43
+source-transcription/row-alignment terms across 22 row clusters, 3 page-image
+near-match terms, and 11 method/pair-universe terms. It is guarded in
+real-report preflight and does not select source corrections, pair exclusions,
+replacement spellings, or method changes.
 `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` now splits out the 11
 method-lane terms: all are OCR-matched, all have zero skip-250 appellation
 counts, all have zero high-cap appellation ordinary hits, and 2 pairs have zero
@@ -847,12 +854,21 @@ supposed to fail if tracked files are dirty.
 
 Latest validation snapshot after the release-ready make target:
 
-- `make fast-validate` passed, including `python3 -m pytest -q`: 1572 tests,
+- `make fast-validate` passed, including `python3 -m pytest -q`: 1577 tests,
   2 skipped, and 29195 subtests.
-- `make release-ready` passed, including `python3 -m pytest -q`: 1572 tests,
-  2 skipped, and 29195 subtests.
+- `make release-ready` last passed before the exact-gap priority-packet test
+  additions: 1572 tests, 2 skipped, and 29195 subtests. Rerun from committed
+  tree before pushing this packet.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
   passed after the latest pushed guard updates.
+- `python3 -m scripts.run_protocol protocols/wrr_audit_counts.toml --resume`
+  passed after adding the exact-gap priority-packet step.
+- `python3 -m scripts.run_protocol protocols/wrr_cross_pair_grid.toml --resume`
+  passed after adding the exact-gap priority-packet refresh step.
+- `python3 -m scripts.check_wrr_exact_gap_priority_packet_doc` passed.
+- `python3 -m pytest tests/test_real_report_run.py
+  tests/test_build_wrr_exact_gap_priority_packet.py
+  tests/test_check_wrr_exact_gap_priority_packet_doc.py -q` passed: 87 tests.
 - `python3 -m scripts.check_expanded_strata_tooling` passed inside
   `make fast-validate`.
 - `python3 -m scripts.check_public_claim_language` passed inside

@@ -153,6 +153,10 @@ class RealReportRunTests(unittest.TestCase):
             "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md",
             steps_by_id["preflight"]["inputs"],
         )
+        self.assertIn(
+            "docs/WRR_EXACT_GAP_PRIORITY_PACKET.md",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("docs/WRR_ZERO_HIT_VARIANT_PROBE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_VARIANT_GAP_IMPACT.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_VARIANT_GAP_UPPER_BOUND.md", steps_by_id["preflight"]["inputs"])
@@ -280,6 +284,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
+            "scripts/build_wrr_exact_gap_priority_packet.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_variant_gap_upper_bound.csv",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
@@ -321,6 +329,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
+            "docs/WRR_EXACT_GAP_PRIORITY_PACKET.md",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
@@ -389,6 +401,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_exact_gap_priority_packet_summary.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
@@ -485,6 +501,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_exact_reproduction_gap_dashboard_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_wrr_exact_gap_priority_packet.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_exact_gap_priority_packet_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         for source_audit_doc in [
@@ -788,6 +812,10 @@ class RealReportRunTests(unittest.TestCase):
             "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
+        self.assertIn(
+            "docs/WRR_EXACT_GAP_PRIORITY_PACKET.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
         self.assertIn("docs/WRR_ZERO_HIT_VARIANT_PROBE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_VARIANT_GAP_IMPACT.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_VARIANT_GAP_UPPER_BOUND.md", preflight.DEFAULT_REQUIRED_PATHS)
@@ -1053,6 +1081,14 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/build_wrr_exact_gap_priority_packet.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_exact_gap_priority_packet_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/check_wrr_defined_diagnostic_docs.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -1281,6 +1317,7 @@ inputs = ["docs/A.md", "docs/C.md"]
                 "wrr_exact_reproduction_gap_dashboard_doc_failures",
                 payload,
             )
+            self.assertIn("wrr_exact_gap_priority_packet_doc_failures", payload)
             self.assertIn("research_missing_model_pages_audit_doc_failures", payload)
             self.assertIn("wrr_adjacent_source_audit_doc_failures", payload)
             self.assertIn("wrr_public_handoff_doc_failures", payload)
@@ -1791,6 +1828,28 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "WRR exact-reproduction gap dashboard failures: "
                 "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md missing caveat",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_exact_gap_priority_packet_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_exact_gap_priority_packet_doc,
+                "validate_priority_packet_doc",
+                return_value=["docs/WRR_EXACT_GAP_PRIORITY_PACKET.md missing boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_exact_gap_priority_packet_doc_failures"],
+                ["docs/WRR_EXACT_GAP_PRIORITY_PACKET.md missing boundary"],
+            )
+            self.assertIn(
+                "WRR exact-gap priority packet failures: "
+                "docs/WRR_EXACT_GAP_PRIORITY_PACKET.md missing boundary",
                 payload["failures"],
             )
 

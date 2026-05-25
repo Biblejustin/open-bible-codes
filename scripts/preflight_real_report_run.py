@@ -55,6 +55,7 @@ from scripts import (
     check_wrr_lock_options_doc,
     check_wrr_locked_method_report_doc,
     check_wrr_exact_reproduction_gap_dashboard_doc,
+    check_wrr_exact_gap_priority_packet_doc,
     check_wrr_manual_decision_record_worksheet_doc,
     check_wrr_manual_decision_records,
     check_wrr_manual_decision_register_doc,
@@ -251,6 +252,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_CLAIM_BLOCKER_PACKET.md",
     "docs/WRR_LOCKED_METHOD_REPORT.md",
     "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md",
+    "docs/WRR_EXACT_GAP_PRIORITY_PACKET.md",
     "docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md",
     "docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md",
     "docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md",
@@ -584,6 +586,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_locked_method_report_doc.py",
     "scripts/build_wrr_exact_reproduction_gap_dashboard.py",
     "scripts/check_wrr_exact_reproduction_gap_dashboard_doc.py",
+    "scripts/build_wrr_exact_gap_priority_packet.py",
+    "scripts/check_wrr_exact_gap_priority_packet_doc.py",
     "scripts/check_wrr_public_handoff_docs.py",
     "scripts/check_wrr_defined_diagnostic_docs.py",
     "scripts/check_wrr_lock_options_doc.py",
@@ -975,6 +979,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_exact_reproduction_gap_dashboard_doc_failures)
         )
 
+    wrr_exact_gap_priority_packet_doc_failures = (
+        check_wrr_exact_gap_priority_packet_doc.validate_priority_packet_doc(
+            check_wrr_exact_gap_priority_packet_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_exact_gap_priority_packet_doc_failures:
+        failures.append(
+            "WRR exact-gap priority packet failures: "
+            + "; ".join(wrr_exact_gap_priority_packet_doc_failures)
+        )
+
     wrr_public_handoff_doc_failures = (
         check_wrr_public_handoff_docs.validate_public_handoff_docs()
     )
@@ -1348,6 +1363,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "wrr_exact_reproduction_gap_dashboard_doc_failures": (
             wrr_exact_reproduction_gap_dashboard_doc_failures
+        ),
+        "wrr_exact_gap_priority_packet_doc_failures": (
+            wrr_exact_gap_priority_packet_doc_failures
         ),
         "wrr_public_handoff_doc_failures": wrr_public_handoff_doc_failures,
         "wrr_source_audit_doc_failures": wrr_source_audit_doc_failures,

@@ -497,3 +497,35 @@ outputs = [
   "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md",
   "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.manifest.json",
 ]
+
+[[steps]]
+id = "build_wrr_exact_gap_priority_packet_after_cross_pair"
+description = "Refresh the no-input exact-gap priority packet after cross-pair outputs are current."
+argv = [
+  "-m", "scripts.build_wrr_exact_gap_priority_packet",
+  "--dashboard", "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.csv",
+  "--action-summary", "reports/wrr_1994/wrr_residual_reconciliation_action_summary.csv",
+  "--row-summary", "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv",
+  "--remaining-summary", "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
+  "--method-summary", "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
+  "--gap-reasons", "reports/wrr_1994/wrr_defined_gap_reasons.csv",
+  "--out", "reports/wrr_1994/wrr_exact_gap_priority_packet.csv",
+  "--summary-out", "reports/wrr_1994/wrr_exact_gap_priority_packet_summary.csv",
+  "--markdown-out", "docs/WRR_EXACT_GAP_PRIORITY_PACKET.md",
+  "--manifest-out", "reports/wrr_1994/wrr_exact_gap_priority_packet.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_exact_gap_priority_packet.py",
+  "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.csv",
+  "reports/wrr_1994/wrr_residual_reconciliation_action_summary.csv",
+  "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv",
+  "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
+  "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
+  "reports/wrr_1994/wrr_defined_gap_reasons.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_exact_gap_priority_packet.csv",
+  "reports/wrr_1994/wrr_exact_gap_priority_packet_summary.csv",
+  "docs/WRR_EXACT_GAP_PRIORITY_PACKET.md",
+  "reports/wrr_1994/wrr_exact_gap_priority_packet.manifest.json",
+]
