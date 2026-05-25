@@ -1,14 +1,15 @@
 # Greek Lexicon Extension Prospective Preregistration
 
-Status: ready for lock manifest and preflight. No result-producing extension
-search has been run for this lane.
+Status: historical preregistration for a completed lane. The result-producing
+extension run finished and is now context-cautioned review material, not claim
+evidence.
 
 ## Study Identity
 
 | Field | Value |
 | --- | --- |
 | Study name | `greek_lexicon_extension_prospective` |
-| Study status | prospective lock packet; result run not started |
+| Study status | completed context-cautioned review material |
 | Source packet | `docs/GREEK_LEXICON_PROSPECTIVE_SOURCE.md` |
 | Source term file | `terms/greek_lexicon_prospective_terms.csv` |
 | Clean locked term file | `terms/greek_lexicon_extension_terms_clean_lock.csv` |
@@ -114,7 +115,7 @@ python3 -m scripts.run_protocol \
   protocols/greek_lexicon_extension_prospective_lock.toml --resume
 ```
 
-Then preflight before any result-producing run:
+Preflight command used before the result-producing run:
 
 ```bash
 python3 -m scripts.preflight_prospective_study \
@@ -124,19 +125,20 @@ python3 -m scripts.preflight_prospective_study \
   --clean-term-audit reports/study_locks/greek_lexicon_extension_clean_audit.csv.summary.json
 ```
 
-The preflight may be run only after the lock files are committed, because it
+The preflight was required after the lock files were committed, because it
 requires a clean git working tree.
 
-## Future Result Run
+## Completed Result Run
 
-The next result-producing protocol should reuse
-`scripts.analyze_extension_paired_controls` and the same break/control family as
-the existing exact-center extension studies, but with
+The registered result-producing protocols reused
+`scripts.analyze_extension_paired_controls` and the same extension/control
+family as the existing exact-center extension studies, but with
 `terms/greek_lexicon_extension_terms_clean_lock.csv` as the locked target pool.
 
-Stage A may be used to keep compute bounded. Stage B exists so any apparent
-Stage A survivor is confirmed with a larger fixed control budget before being
-called a review candidate.
+Stage A kept compute bounded. Stage B confirmed apparent Stage A survivors with
+a larger fixed control budget before any row could be called a review
+candidate. The completed report is
+`docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_REPORT.md`.
 
 ## Primary Outcome
 

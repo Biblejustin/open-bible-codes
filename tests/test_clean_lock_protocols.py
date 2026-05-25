@@ -96,6 +96,19 @@ def test_clean_lock_results_summary_tracks_completed_lanes() -> None:
     assert "current manifest/preflight workflow" in text
 
 
+def test_greek_lexicon_preregistration_is_historical_not_future_run() -> None:
+    text = Path("docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_PREREGISTRATION.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert "historical preregistration for a completed lane" in text
+    assert "completed context-cautioned review material" in text
+    assert "## Completed Result Run" in text
+    assert "## Future Result Run" not in text
+    assert "result run not started" not in text
+    assert "ready for lock manifest and preflight" not in text
+
+
 def test_greek_surface_context_review_tracks_manual_read() -> None:
     text = Path("docs/GREEK_SURFACE_NEW_TERMS_CONTEXT_REVIEW.md").read_text(encoding="utf-8")
 
@@ -228,7 +241,7 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     text = Path("docs/REMAINING_WORK_REGISTER.md").read_text(encoding="utf-8")
 
     assert "Latest validation snapshot after the release-ready make target" in text
-    assert "1472 tests" in text
+    assert "1473 tests" in text
     assert "2 skipped, and 29195 subtests" in text
     assert "make release-ready" in text
     assert "committed tree" in text
