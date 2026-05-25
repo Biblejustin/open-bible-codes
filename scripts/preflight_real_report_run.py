@@ -22,6 +22,7 @@ from els.project_index import (
 )
 from scripts import (
     check_centered_occurrence_index_doc,
+    check_claim_catalog_doc,
     check_crd_relevance_dictionary,
     check_consolidated_findings_doc,
     check_doc_command_references,
@@ -764,6 +765,16 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "final-report assembly doc failures: "
             + "; ".join(final_report_assembly_doc_failures)
+        )
+
+    claim_catalog_doc_failures = check_claim_catalog_doc.validate_claim_catalog_doc(
+        root / check_claim_catalog_doc.DEFAULT_CATALOG,
+        root / check_claim_catalog_doc.DEFAULT_DOC,
+    )
+    if claim_catalog_doc_failures:
+        failures.append(
+            "claim-catalog doc failures: "
+            + "; ".join(claim_catalog_doc_failures)
         )
 
     final_report_highlights_doc_failures = (
