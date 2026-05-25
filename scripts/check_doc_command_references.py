@@ -21,6 +21,11 @@ MAPPING_CSV_RE = re.compile(
 TREAT_AS_DELETED_CSV_RE = re.compile(
     r"(?<![A-Za-z0-9_./-])protocols/treat_as_deleted/[A-Za-z0-9_./\[\]{}-]+\.csv"
 )
+DATA_LOCAL_SEGMENT = r"[A-Za-z0-9_\[\]{}-]+(?:\.[A-Za-z0-9_\[\]{}-]+)*"
+DATA_LOCAL_RE = re.compile(
+    rf"(?<![A-Za-z0-9_./-])data/(?:raw|processed)/{DATA_LOCAL_SEGMENT}"
+    rf"(?:/{DATA_LOCAL_SEGMENT})*/?"
+)
 REPORT_RE = re.compile(r"(?<![A-Za-z0-9_./-])reports/[A-Za-z0-9_./\[\]{}-]+\.(?:csv|json|md)")
 DEFAULT_DOCS = (Path("README.md"), Path("docs"))
 MISSING_REPORT_CONTEXT_MARKERS = (
@@ -55,11 +60,18 @@ EXISTING_PATH_RULES = (
     ExistingPathRule(MAPPING_CSV_RE, "mapping file"),
     ExistingPathRule(TREAT_AS_DELETED_CSV_RE, "treat-as-deleted file"),
 )
+LOCAL_DATA_PATH_RULES = (
+    ExistingPathRule(DATA_LOCAL_RE, "local data path"),
+)
 
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    failures = validate_doc_command_references(args.root, args.doc)
+    failures = validate_doc_command_references(
+        args.root,
+        args.doc,
+        check_local_data=args.check_local_data,
+    )
     if failures:
         for failure in failures:
             print(f"doc command reference failure: {failure}", file=sys.stderr)
@@ -78,10 +90,23 @@ def build_parser() -> argparse.ArgumentParser:
         default=[],
         help="Doc file or directory to scan. Defaults to README.md and docs/.",
     )
+    parser.add_argument(
+        "--check-local-data",
+        action="store_true",
+        help=(
+            "Also require documented data/raw and data/processed paths to exist locally. "
+            "These paths are ignored by git, so this is not enabled by default."
+        ),
+    )
     return parser
 
 
-def validate_doc_command_references(root: Path = Path("."), docs: list[Path] | None = None) -> list[str]:
+def validate_doc_command_references(
+    root: Path = Path("."),
+    docs: list[Path] | None = None,
+    *,
+    check_local_data: bool = False,
+) -> list[str]:
     failures: list[str] = []
     for doc in iter_doc_paths(root, docs or list(DEFAULT_DOCS)):
         text = doc.read_text(encoding="utf-8")
@@ -96,7 +121,18 @@ def validate_doc_command_references(root: Path = Path("."), docs: list[Path] | N
                 failures.append(
                     f"{relative_doc}:{line}: missing script module scripts.{module_name}"
                 )
-        failures.extend(validate_existing_path_rules(root, relative_doc, text))
+        failures.extend(validate_existing_path_rules(root, relative_doc, text, EXISTING_PATH_RULES))
+        if check_local_data:
+            failures.extend(
+                validate_existing_path_rules(
+                    root,
+                    relative_doc,
+                    text,
+                    LOCAL_DATA_PATH_RULES,
+                    fenced_lines=fenced_lines,
+                    ignore_missing_in_fenced=True,
+                )
+            )
         for match in REPORT_RE.finditer(text):
             report = match.group(0)
             if is_placeholder(report):
@@ -114,9 +150,18 @@ def validate_doc_command_references(root: Path = Path("."), docs: list[Path] | N
     return failures
 
 
-def validate_existing_path_rules(root: Path, relative_doc: Path, text: str) -> list[str]:
+def validate_existing_path_rules(
+    root: Path,
+    relative_doc: Path,
+    text: str,
+    rules: tuple[ExistingPathRule, ...],
+    *,
+    fenced_lines: set[int] | None = None,
+    ignore_missing_in_fenced: bool = False,
+) -> list[str]:
     failures: list[str] = []
-    for rule in EXISTING_PATH_RULES:
+    fenced_lines = fenced_lines or set()
+    for rule in rules:
         for match in rule.regex.finditer(text):
             reference = match.group(0)
             if is_placeholder(reference):
@@ -124,6 +169,8 @@ def validate_existing_path_rules(root: Path, relative_doc: Path, text: str) -> l
             if (root / reference).exists():
                 continue
             line = line_number(text, match.start())
+            if ignore_missing_in_fenced and line in fenced_lines:
+                continue
             failures.append(f"{relative_doc}:{line}: missing {rule.label} {reference}")
     return failures
 

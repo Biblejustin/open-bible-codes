@@ -188,8 +188,9 @@ def test_public_baseline_tracks_critical_omission_null_read() -> None:
 def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     text = Path("docs/REMAINING_WORK_REGISTER.md").read_text(encoding="utf-8")
 
-    assert "Latest validation snapshot after the critical-omission/final-report public" in text
-    assert "1455 tests, 2 skipped, and 29195 subtests" in text
+    assert "Latest validation snapshot after the optional local-data doc-reference checker" in text
+    assert "1460 tests, 2 skipped, and 29195 subtests" in text
+    assert "scripts.check_doc_command_references --check-local-data" in text
     assert "`git diff --check` passed" in text
     assert "`make public-release-check` passed" in text
     assert "Earlier WRR/source-recovery validation snapshot" in text

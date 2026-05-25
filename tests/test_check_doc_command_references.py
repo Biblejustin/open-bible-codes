@@ -94,6 +94,69 @@ def test_reports_missing_treat_as_deleted_file(tmp_path: Path) -> None:
     ]
 
 
+def test_default_does_not_require_ignored_local_data_paths(tmp_path: Path) -> None:
+    write_minimal_repo(tmp_path)
+    (tmp_path / "docs" / "SOURCES.md").write_text(
+        "Raw source: `data/raw/missing_source.csv`.\n"
+        "Processed source: `data/processed/missing_source.csv`.\n",
+        encoding="utf-8",
+    )
+
+    assert validate_doc_command_references(tmp_path) == []
+
+
+def test_check_local_data_reports_missing_raw_and_processed_paths(tmp_path: Path) -> None:
+    write_minimal_repo(tmp_path)
+    (tmp_path / "docs" / "SOURCES.md").write_text(
+        "Raw source: `data/raw/missing_source.csv`.\n"
+        "Processed source dir: `data/processed/missing_source/`.\n",
+        encoding="utf-8",
+    )
+
+    assert validate_doc_command_references(tmp_path, check_local_data=True) == [
+        "docs/SOURCES.md:1: missing local data path data/raw/missing_source.csv",
+        "docs/SOURCES.md:2: missing local data path data/processed/missing_source/",
+    ]
+
+
+def test_check_local_data_accepts_existing_raw_and_processed_paths(tmp_path: Path) -> None:
+    write_minimal_repo(tmp_path)
+    (tmp_path / "data" / "raw" / "source").mkdir(parents=True)
+    (tmp_path / "data" / "raw" / "source" / "text.xml").write_text("", encoding="utf-8")
+    (tmp_path / "data" / "processed" / "source").mkdir(parents=True)
+    (tmp_path / "docs" / "SOURCES.md").write_text(
+        "Raw source: `data/raw/source/text.xml`.\n"
+        "Processed source dir: `data/processed/source/`.\n",
+        encoding="utf-8",
+    )
+
+    assert validate_doc_command_references(tmp_path, check_local_data=True) == []
+
+
+def test_check_local_data_ignores_setup_examples_in_fenced_blocks(tmp_path: Path) -> None:
+    write_minimal_repo(tmp_path)
+    (tmp_path / "README.md").write_text(
+        "```bash\n"
+        "mkdir -p data/raw\n"
+        "# Put Greek CSV at data/raw/greek.csv.\n"
+        "```\n",
+        encoding="utf-8",
+    )
+
+    assert validate_doc_command_references(tmp_path, check_local_data=True) == []
+
+
+def test_check_local_data_ignores_placeholders(tmp_path: Path) -> None:
+    write_minimal_repo(tmp_path)
+    (tmp_path / "docs" / "SOURCES.md").write_text(
+        "Raw source: `data/raw/[source].csv`.\n"
+        "Processed source: `data/processed/{source}.csv`.\n",
+        encoding="utf-8",
+    )
+
+    assert validate_doc_command_references(tmp_path, check_local_data=True) == []
+
+
 def test_reports_unmarked_missing_report_output(tmp_path: Path) -> None:
     write_minimal_repo(tmp_path)
     (tmp_path / "docs" / "REPORT.md").write_text(

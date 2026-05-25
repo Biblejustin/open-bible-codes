@@ -784,13 +784,15 @@ git diff --check
 python3 -m scripts.build_docs_index --docs-dir docs --out docs/INDEX.md
 python3 -m scripts.build_protocol_index --protocols-dir protocols --out protocols/INDEX.md
 python3 -m scripts.check_public_release_hygiene --allow-dirty
+python3 -m scripts.check_doc_command_references --check-local-data
 ```
 
-Latest validation snapshot after the critical-omission/final-report public
-wording synchronization:
+Latest validation snapshot after the optional local-data doc-reference checker:
 
-- `python3 -m pytest -q` passed: 1455 tests, 2 skipped, and 29195 subtests.
+- `python3 -m pytest -q` passed: 1460 tests, 2 skipped, and 29195 subtests.
 - `git diff --check` passed.
+- `python3 -m scripts.check_doc_command_references --check-local-data` passed
+  on the current local ignored `data/raw/` and `data/processed/` caches.
 - `make public-release-check` passed from the committed tree.
 
 Earlier WRR/source-recovery validation snapshot after the WRR gap-reason audit,
