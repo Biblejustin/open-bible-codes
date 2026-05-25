@@ -37,6 +37,14 @@ class TermDisplayTests(unittest.TestCase):
         self.assertEqual(display_term("Καίσαρος"), "`Καίσαρος` (kaisaros; English: Caesar)")
         self.assertEqual(display_term("ἔργα"), "`ἔργα` (erga; English: works)")
         self.assertEqual(display_term("οἴδαμεν"), "`οἴδαμεν` (oidamen; English: we know)")
+        self.assertEqual(display_term("Παῦλος"), "`Παῦλος` (paulos; English: Paul)")
+        self.assertEqual(display_term("ωσαννα"), "`ωσαννα` (osanna; English: Hosanna)")
+        self.assertEqual(display_term("βασιλεια"), "`βασιλεια` (basileia; English: Kingdom)")
+        self.assertEqual(display_term("σημειον"), "`σημειον` (semeion; English: Sign)")
+        self.assertEqual(display_term("ιακωβ"), "`ιακωβ` (iakob; English: Jacob)")
+        self.assertEqual(display_term("ζαβουλων"), "`ζαβουλων` (zaboulon; English: Zebulun)")
+        self.assertEqual(display_term("θλιψισ"), "`θλιψισ` (thlipsis; English: Tribulation)")
+        self.assertEqual(display_term("ημερα"), "`ημερα` (emera; English: Day)")
 
     def test_displays_common_hebrew_report_term_with_gloss(self) -> None:
         self.assertEqual(display_term("בבל"), "`בבל` (Bavel; English: Babylon)")

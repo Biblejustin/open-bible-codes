@@ -6,7 +6,7 @@ This report keeps every length-4+ hidden-path ELS row from supplemental external
 
 - Hits: `reports/external_claim_source_all_codes/surface_all_codes.csv`
 - Summary: `reports/external_claim_source_all_codes/surface_all_codes_summary.csv`
-- Report DB: `not used`
+- Report DB: `reports/db/open_bible_codes.duckdb`
 - Corpora: `BYZ_NT, EBIBLE_WLC, ENG_MOBY_DICK, ENG_SHAKESPEARE, ENG_WAR_AND_PEACE, GRK_HERODOTUS, GRK_ILIAD, GRK_ODYSSEY, HEB_AHAD_HAAM, HEB_BIALIK, HEB_BRENNER, KJV, KJVA, LXX, MAM, MT_WLC, SBLGNT, TCG_NT, TR_NT, UHB, UXLC`
 
 ## Collection Counts

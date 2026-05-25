@@ -141,7 +141,7 @@ It is a triage aid, not a claim-grade filter.
 | 2 | all_source | `iran_g` `ιραν` (iran; English: Iran) | Iran | -4 | 13 | Mark 14:48 | `αποκριθεισ` (apokritheis; English: having answered) | not_run |
 | 3 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 7 | 22 | 1Cor 1:27 | `μωρα` (mora; English: foolish things) | not_run |
 | 4 | all_source | `nato_g` `νατο` (nato; English: NATO) | NATO | 7 | 22 | Matt 27:33 | `ελθοντεσ` (elthontes; English: having come) | not_run |
-| 5 | all_source | `narrative_leah_g` `λεια` (leia; English: Leah) | Leah | 8 | 25 | Eph 5:4 | `ευχαριστια` (eucharistia) | not_run |
+| 5 | all_source | `narrative_leah_g` `λεια` (leia; English: Leah) | Leah | 8 | 25 | Eph 5:4 | `ευχαριστια` (eucharistia; English: gratitude; actively, grateful language (to God, as an act of worship)) | not_run |
 | 6 | all_source | `narrative_leah_g` `λεια` (leia; English: Leah) | Leah | 8 | 25 | Luke 11:21 | `οταν` (otan) | not_run |
 | 7 | all_source | `narrative_leah_g` `λεια` (leia; English: Leah) | Leah | -9 | 28 | 1Cor 14:1 | `προφητευητε` (propheteuete) | not_run |
 | 8 | all_source | `amen_g` `αμην` (amen; English: Amen) | Amen | -9 | 28 | 1John 1:1 | `ακηκοαμεν` (akekoamen; English: we have heard) | not_run |
