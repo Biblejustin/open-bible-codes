@@ -36,7 +36,7 @@ manual decision-record lock propagation, public-handoff lock-status cleanup,
 checklist boundary wording cleanup, public claim-language preflight guarding,
 doc-command reference preflight guarding, final-report support-doc reference
 guarding, real-report preflight input drift guarding, a clean real-report
-protocol rerun/cache check at commit `75c1948`, and manual-review packet-shape
+protocol rerun/cache check at commit `07a5731`, and manual-review packet-shape
 drift guarding, plus prospective-readiness, next-lock, and study-lock workflow
 doc guard coverage, Greek second-cohort readiness guarding, consolidated
 findings prospective-boundary guarding, generated lane-status freshness
@@ -48,7 +48,8 @@ research missing model pages audit doc guarding, WRR-adjacent source audit
 family doc guarding, real-report source-audit preflight documentation,
 critical-omission follow-up doc guarding, WRR support-doc local-lock
 boundary cleanup plus formal preflight guarding, and WRR source-audit
-local-lock boundary guarding.
+local-lock boundary guarding, WRR source-audit register refresh, and
+protocol README WRR handoff-status guarding.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -244,10 +245,12 @@ Current pushed commits for this cleanup:
 - `51fcee2` Guard WRR support local lock docs.
 - `1791867` Refresh register for WRR support guard.
 - `75c1948` Guard WRR source audit local lock boundary.
+- `bb2abdf` Refresh register for WRR source audit guard.
+- `07a5731` Guard protocol README WRR handoff status.
 
 ### Formal Real Report Rerun
 
-Command completed successfully from the clean committed tree at `75c1948`:
+Command completed successfully from the clean committed tree at `07a5731`:
 
 ```bash
 python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
@@ -256,7 +259,7 @@ python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
 Current summary:
 
 - `reports/real_report_run/summary.md`
-- summary commit: `75c1948`
+- summary commit: `07a5731`
 - preflight status: passed; support-doc reference failures: 0; protocol input
   drift failures: 0.
 - local generated report files under `reports/real_report_run/` are ignored by
@@ -860,8 +863,14 @@ Latest validation snapshot after the release-ready make target:
 - `make local-data-doc-check` passed on the current local ignored `data/raw/`
   and `data/processed/` caches.
 - `make public-release-check` passed from the committed tree.
+- `python3 -m scripts.check_wrr_public_handoff_docs` passed after the
+  protocol README handoff-status guard.
+- Focused pytest for the public-handoff checker and real-report preflight
+  wiring passed: 9 tests.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out
+  /tmp/edls_preflight_protocols_readme_wrr_lock.json` passed.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
-  passed from the committed tree at `75c1948`.
+  passed from the committed tree at `07a5731`.
 
 Earlier WRR/source-recovery validation snapshot after the WRR gap-reason audit,
 readiness gate,
