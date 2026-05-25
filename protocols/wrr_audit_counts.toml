@@ -1129,6 +1129,30 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_source_row_coverage_packet"
+description = "Build no-input visual-triage coverage packet for WRR source-row review."
+argv = [
+  "-m", "scripts.build_wrr_source_row_coverage_packet",
+  "--row-checklist", "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv",
+  "--source-queue", "reports/wrr_1994/wrr_source_review_queue.csv",
+  "--out", "reports/wrr_1994/wrr_source_row_coverage_packet.csv",
+  "--summary-out", "reports/wrr_1994/wrr_source_row_coverage_packet_summary.csv",
+  "--markdown-out", "docs/WRR_SOURCE_ROW_COVERAGE_PACKET.md",
+  "--manifest-out", "reports/wrr_1994/wrr_source_row_coverage_packet.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_source_row_coverage_packet.py",
+  "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv",
+  "reports/wrr_1994/wrr_source_review_queue.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_source_row_coverage_packet.csv",
+  "reports/wrr_1994/wrr_source_row_coverage_packet_summary.csv",
+  "docs/WRR_SOURCE_ROW_COVERAGE_PACKET.md",
+  "reports/wrr_1994/wrr_source_row_coverage_packet.manifest.json",
+]
+
+[[steps]]
 id = "build_wrr_manual_decision_register"
 description = "Build consolidated lane register for WRR manual-decision records."
 argv = [

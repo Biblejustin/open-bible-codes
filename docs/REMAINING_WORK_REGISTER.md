@@ -49,8 +49,8 @@ family doc guarding, real-report source-audit preflight documentation,
 critical-omission follow-up doc guarding, WRR support-doc local-lock
 boundary cleanup plus formal preflight guarding, and WRR source-audit
 local-lock boundary guarding, WRR source-audit register refresh,
-protocol README WRR handoff-status guarding, and WRR exact-gap priority-packet
-guarding.
+protocol README WRR handoff-status guarding, WRR exact-gap priority-packet
+guarding, and WRR source-row coverage packet guarding.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -613,6 +613,12 @@ terms.
 `docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md` keeps those 22 row
 clusters in review order, preserving required decision-record fields without
 selecting row transcriptions, corrections, exclusions, or method changes.
+`docs/WRR_SOURCE_ROW_COVERAGE_PACKET.md` now joins that row checklist to
+current source-queue visual notes: the current source-transcription action
+terms have 0 direct visual-note coverage, 4 rows have related row-level visual
+triage only, and 18 rows have no related visual triage. It keeps the boundary
+that related visual notes cannot be transferred to action terms and no source
+change is selected.
 `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md` now handles the two remaining
 residual lanes: 3 page-image near-match terms and 11 method/pair-universe
 terms, preserving the no-correction boundary until page-image, method, or
