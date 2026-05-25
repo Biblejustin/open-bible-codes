@@ -238,7 +238,7 @@ Current pushed commits for this cleanup:
 - `f870742` Guard critical omission followup docs.
 - `9305d12` Document critical omission doc guard.
 - `feb53ee` Refresh register for critical omission guards.
-- `6c8d39a` Refresh WRR support docs for locked local method.
+- `11a0938` Refresh WRR support docs for locked local method.
 
 ### Formal Real Report Rerun
 
