@@ -66,6 +66,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_CLAIM_READINESS.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_CLAIM_BLOCKER_PACKET.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_LOCKED_METHOD_REPORT.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn(
+            "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("docs/WRR_ZERO_HIT_VARIANT_PROBE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_VARIANT_GAP_IMPACT.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_VARIANT_GAP_UPPER_BOUND.md", steps_by_id["preflight"]["inputs"])
@@ -189,6 +193,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
+            "scripts/build_wrr_exact_reproduction_gap_dashboard.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_variant_gap_upper_bound.csv",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
@@ -222,6 +230,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "docs/WRR_LOCKED_METHOD_REPORT.md",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
+            "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
@@ -286,6 +302,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/wrr_1994/wrr_locked_method_report.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
@@ -366,6 +386,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_locked_method_report_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_wrr_exact_reproduction_gap_dashboard.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_exact_reproduction_gap_dashboard_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         for source_audit_doc in [
@@ -620,6 +648,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/WRR_CLAIM_READINESS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_CLAIM_BLOCKER_PACKET.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_LOCKED_METHOD_REPORT.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn(
+            "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
         self.assertIn("docs/WRR_ZERO_HIT_VARIANT_PROBE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_VARIANT_GAP_IMPACT.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_VARIANT_GAP_UPPER_BOUND.md", preflight.DEFAULT_REQUIRED_PATHS)
@@ -830,6 +862,14 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/build_wrr_exact_reproduction_gap_dashboard.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_exact_reproduction_gap_dashboard_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/check_wrr_defined_diagnostic_docs.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -1015,6 +1055,10 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("wrr_claim_readiness_doc_failures", payload)
             self.assertIn("wrr_claim_blocker_packet_doc_failures", payload)
             self.assertIn("wrr_locked_method_report_doc_failures", payload)
+            self.assertIn(
+                "wrr_exact_reproduction_gap_dashboard_doc_failures",
+                payload,
+            )
             self.assertIn("wrr_public_handoff_doc_failures", payload)
             self.assertIn(
                 "wrr_source_transcription_row_review_checklist_doc_failures",
@@ -1280,6 +1324,28 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "WRR locked-method report failures: "
                 "docs/WRR_LOCKED_METHOD_REPORT.md missing caveat",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_exact_gap_dashboard_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_exact_reproduction_gap_dashboard_doc,
+                "validate_gap_dashboard_doc",
+                return_value=["docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md missing caveat"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_exact_reproduction_gap_dashboard_doc_failures"],
+                ["docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md missing caveat"],
+            )
+            self.assertIn(
+                "WRR exact-reproduction gap dashboard failures: "
+                "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md missing caveat",
                 payload["failures"],
             )
 

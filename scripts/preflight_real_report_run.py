@@ -36,6 +36,7 @@ from scripts import (
     check_wrr_dw_formula_sensitivity_doc,
     check_wrr_lock_options_doc,
     check_wrr_locked_method_report_doc,
+    check_wrr_exact_reproduction_gap_dashboard_doc,
     check_wrr_manual_decision_record_worksheet_doc,
     check_wrr_manual_decision_records,
     check_wrr_manual_decision_register_doc,
@@ -205,6 +206,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_CLAIM_READINESS.md",
     "docs/WRR_CLAIM_BLOCKER_PACKET.md",
     "docs/WRR_LOCKED_METHOD_REPORT.md",
+    "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md",
     "docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md",
     "docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md",
     "docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md",
@@ -456,6 +458,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_claim_blocker_packet_doc.py",
     "scripts/build_wrr_locked_method_report.py",
     "scripts/check_wrr_locked_method_report_doc.py",
+    "scripts/build_wrr_exact_reproduction_gap_dashboard.py",
+    "scripts/check_wrr_exact_reproduction_gap_dashboard_doc.py",
     "scripts/check_wrr_public_handoff_docs.py",
     "scripts/check_wrr_defined_diagnostic_docs.py",
     "scripts/check_wrr_lock_options_doc.py",
@@ -658,6 +662,17 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "WRR locked-method report failures: "
             + "; ".join(wrr_locked_method_report_doc_failures)
+        )
+
+    wrr_exact_reproduction_gap_dashboard_doc_failures = (
+        check_wrr_exact_reproduction_gap_dashboard_doc.validate_gap_dashboard_doc(
+            check_wrr_exact_reproduction_gap_dashboard_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_exact_reproduction_gap_dashboard_doc_failures:
+        failures.append(
+            "WRR exact-reproduction gap dashboard failures: "
+            + "; ".join(wrr_exact_reproduction_gap_dashboard_doc_failures)
         )
 
     wrr_public_handoff_doc_failures = (
@@ -975,6 +990,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "wrr_locked_method_report_doc_failures": (
             wrr_locked_method_report_doc_failures
+        ),
+        "wrr_exact_reproduction_gap_dashboard_doc_failures": (
+            wrr_exact_reproduction_gap_dashboard_doc_failures
         ),
         "wrr_public_handoff_doc_failures": wrr_public_handoff_doc_failures,
         "wrr_defined_diagnostic_doc_failures": wrr_defined_diagnostic_doc_failures,

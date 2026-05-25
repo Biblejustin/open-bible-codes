@@ -1456,6 +1456,8 @@ def write_summary(
             "- `docs/WRR_LOCK_OPTIONS.md`",
             "- `docs/WRR_CLAIM_READINESS.md`",
             "- `docs/WRR_CLAIM_BLOCKER_PACKET.md`",
+            "- `docs/WRR_LOCKED_METHOD_REPORT.md`",
+            "- `docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`",
             "- `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md`",
             "- `docs/WRR_SOURCE_POLICY_SCENARIOS.md`",
             "- `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md`",

@@ -27,7 +27,7 @@ Purpose:
 | Group | Status | Entries | Current read |
 | --- | --- | ---: | --- |
 | Common Torah skip-50 examples | `reproducible` | 5 | Engine sanity checks pass on Koren Torah files. |
-| WRR 1994 rabbis | `under_specified` | 1 | Source audit exists, and the working locks are now keep_all_working_source plus printed D(w) main plus full selected-universe corrected-distance output plus a keep-all cap1000 999,999 permutation. `docs/WRR_LOCKED_METHOD_REPORT.md` is the compact local locked-method summary. Exact published WRR reproduction remains caveated by the 163-distance gap and primary-source transcription limits. Readiness gate now supports local locked-method wording but not exact published reproduction. `docs/WRR_SOURCE_AUDIT.md` keeps the source audit trail. Visual triage notes do not exclude pairs automatically. |
+| WRR 1994 rabbis | `under_specified` | 1 | Source audit exists, and the working locks are now keep_all_working_source plus printed D(w) main plus full selected-universe corrected-distance output plus a keep-all cap1000 999,999 permutation. `docs/WRR_LOCKED_METHOD_REPORT.md` is the compact local locked-method summary. `docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md` maps the 163 vs 72 defined-distance gap and next evidence-review lanes. Exact published WRR reproduction remains caveated by the 163-distance gap and primary-source transcription limits. Readiness gate now supports local locked-method wording but not exact published reproduction. `docs/WRR_SOURCE_AUDIT.md` keeps the source audit trail. Visual triage notes do not exclude pairs automatically. |
 | Greek `δοξα` (doxa; English: glory) extension follow-up | `controlled_review_candidate` | 1 | Four-source 5000/5000 and 20000/20000 follow-ups passed their registered review gates; still post-discovery and not a claim. |
 | Greek `γωγ` (Gog; English: Gog) centered occurrence | `controlled_review_candidate` | 1 | Hidden `γωγ` (Gog; English: Gog) centers on open `Gog` at Rev 20:8 across four Greek NT source labels; length-3 controls make it contextual rather than frequency-promoted. |
 | Greek expanded surface follow-up | `controlled_review_candidate` | 1 | `ανομια` (anomia; English: lawlessness), `ισαακ` (Isaak; English: Isaac), and `τερασ` (teras; English: wonder) pass letter-path and all-available real-word control review; still post-screen and not a claim. |
@@ -68,7 +68,8 @@ WRR-specific requirements are tracked in `docs/WRR_REPLICATION_PLAN.md`,
 `docs/WRR_SOURCE_AUDIT.md`, `docs/WRR_METHODOLOGY_GAPS.md`,
 `docs/WRR_CORRECTED_DISTANCE_NOTES.md`, and
 `docs/WRR_CLAIM_READINESS.md`, with the selected local summary in
-`docs/WRR_LOCKED_METHOD_REPORT.md` and decision packets in
+`docs/WRR_LOCKED_METHOD_REPORT.md`, the exact-reproduction gap map in
+`docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`, and decision packets in
 `docs/WRR_CLAIM_BLOCKER_PACKET.md` and `docs/WRR_LOCK_OPTIONS.md`.
 Greek surface claim-grade requirements are tracked in
 `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`.

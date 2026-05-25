@@ -143,6 +143,7 @@ inputs = [
   "docs/WRR_CLAIM_READINESS.md",
   "docs/WRR_CLAIM_BLOCKER_PACKET.md",
   "docs/WRR_LOCKED_METHOD_REPORT.md",
+  "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md",
   "docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md",
   "docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md",
   "docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md",
@@ -394,6 +395,8 @@ inputs = [
   "scripts/check_wrr_claim_blocker_packet_doc.py",
   "scripts/build_wrr_locked_method_report.py",
   "scripts/check_wrr_locked_method_report_doc.py",
+  "scripts/build_wrr_exact_reproduction_gap_dashboard.py",
+  "scripts/check_wrr_exact_reproduction_gap_dashboard_doc.py",
   "scripts/check_wrr_public_handoff_docs.py",
   "scripts/check_wrr_defined_diagnostic_docs.py",
   "scripts/check_wrr_lock_options_doc.py",
@@ -757,6 +760,7 @@ inputs = [
   "scripts/build_wrr_residual_reconciliation_action_plan.py",
   "scripts/build_wrr_claim_blocker_packet.py",
   "scripts/build_wrr_locked_method_report.py",
+  "scripts/build_wrr_exact_reproduction_gap_dashboard.py",
   "scripts/analyze_gog_magog_pairs.py",
   "configs/example_koren_genesis.toml",
   "els/wrr.py",
@@ -794,6 +798,9 @@ outputs = [
   "reports/wrr_1994/wrr_residual_reconciliation_action_summary.csv",
   "reports/wrr_1994/wrr_locked_method_report.csv",
   "docs/WRR_LOCKED_METHOD_REPORT.md",
+  "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.csv",
+  "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md",
+  "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.manifest.json",
 ]
 
 [[steps]]
@@ -814,6 +821,7 @@ inputs = [
   "scripts/build_wrr_lock_options.py",
   "scripts/build_wrr_claim_blocker_packet.py",
   "scripts/build_wrr_locked_method_report.py",
+  "scripts/build_wrr_exact_reproduction_gap_dashboard.py",
   "scripts/check_wrr_claim_readiness.py",
   "reports/wrr_1994/wrr_variant_residual_review_summary.csv",
   "reports/wrr_1994/wrr_variant_residual_review_packet.csv",
@@ -831,7 +839,12 @@ inputs = [
   "els/corpus.py",
   "els/search.py",
 ]
-outputs = ["reports/wrr_1994/cross_pair_grid/protocol.manifest.json"]
+outputs = [
+  "reports/wrr_1994/cross_pair_grid/protocol.manifest.json",
+  "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.csv",
+  "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md",
+  "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.manifest.json",
+]
 
 [[steps]]
 id = "hebrew_modern_geopolitical_controlled_review"
@@ -1504,6 +1517,7 @@ inputs = [
   "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
   "reports/wrr_1994/wrr_dw_formula_sensitivity.csv",
   "reports/wrr_1994/wrr_locked_method_report.csv",
+  "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.csv",
   "reports/hebrew_modern_geopolitical_controlled_review/controlled.manifest.json",
   "reports/hebrew_modern_geopolitical_prospective/protocol_run.manifest.json",
   "reports/hebrew_modern_geopolitical_prospective/controlled_report.manifest.json",

@@ -327,6 +327,7 @@ Tracked references:
 - `docs/WRR_CLAIM_READINESS.md`
 - `docs/WRR_CLAIM_BLOCKER_PACKET.md`
 - `docs/WRR_LOCKED_METHOD_REPORT.md`
+- `docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`
 - `docs/WRR_LOCK_OPTIONS.md`
 - `reports/wrr_1994/wrr2_pair_eligibility_table.csv`
 - `reports/wrr_1994/wrr_source_policy_term_impacts.csv`
@@ -576,6 +577,10 @@ replacement lock, or pair exclusion has been selected.
 summary: keep_all_working_source, printed `D(w)` main, reported-program
 `D(w)` sensitivity, 182 observed rows, 72 defined `c(w,w')` values, and
 `rho0 = 0.000404`, with exact published reproduction caveats attached.
+`docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md` now maps the exact-published
+gap: 163 source-cited defined distances vs 72 current defined distances, simple
+variant residual gap 40, and recommended review order without selecting source
+changes.
 `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` now splits out the 11
 method-lane terms: all are OCR-matched, all have zero skip-250 appellation
 counts, all have zero high-cap appellation ordinary hits, and 2 pairs have zero

@@ -375,7 +375,9 @@ cap-1000 corrected-distance matrix, keeps the selected full source universe,
 shuffles date labels across 30 concepts, and writes summary-only output. It
 observed 182 source rows, 72 defined `c(w,w')` values, and Bonferroni
 `rho0 = 0.000404`. `docs/WRR_LOCKED_METHOD_REPORT.md` is now the compact
-reader-facing artifact for this selected local lock path.
+reader-facing artifact for this selected local lock path, and
+`docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md` keeps the exact-published gap
+and review order visible.
 
 That is locked local evidence for the repo-defined protocol, but it is not
 exact published WRR reproduction language. Exact published reproduction remains
@@ -408,6 +410,11 @@ pair links, and 40 minimum-frontier pair links. The populated decision-record
 CSV locks all 37 rows as 26 `no_source_change` decisions and 11 `method_lock`
 decisions. These packets organize review evidence without choosing corrections,
 method changes, or exclusions.
+The exact-reproduction gap dashboard consolidates the current 163 vs 72
+defined-distance gap, the residual gap 40 after simple-variant upper bound, and
+the review order: one source-policy/pair-rule item, five leading
+source-transcription row clusters, page-image near matches, then method/pair
+universe terms.
 
 Source artifacts:
 
@@ -421,6 +428,7 @@ Source artifacts:
 - `docs/WRR_CLAIM_READINESS.md`
 - `docs/WRR_CLAIM_BLOCKER_PACKET.md`
 - `docs/WRR_LOCKED_METHOD_REPORT.md`
+- `docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`
 - `docs/WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md`
 - `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md`
 - `docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md`

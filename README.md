@@ -84,7 +84,9 @@ Observed optimization results are summarized in `docs/PERFORMANCE.md`.
 WRR-style reproduction requirements are tracked in
 `docs/WRR_REPLICATION_PLAN.md`, current blockers in
 `docs/WRR_METHODOLOGY_GAPS.md`, and the selected local lock summary in
-`docs/WRR_LOCKED_METHOD_REPORT.md`.
+`docs/WRR_LOCKED_METHOD_REPORT.md`. The exact-published reproduction gap and
+recommended review order are tracked in
+`docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`.
 
 Parallel batch-count benchmark:
 
@@ -718,6 +720,10 @@ WRR locked-method report:
 `docs/WRR_LOCKED_METHOD_REPORT.md`.
 It is the compact reader-facing summary for the selected local WRR lock path,
 and it keeps exact published reproduction caveats attached to the result.
+WRR exact-reproduction gap dashboard:
+`docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`.
+It consolidates the 163 vs 72 defined-distance gap, simple-variant upper bound,
+manual review lanes, and next review order without selecting source changes.
 Reader-facing final report scaffold: `docs/FINAL_REPORT_OUTLINE.md`.
 Reader-facing final report draft: `docs/FINAL_REPORT_DRAFT.md`.
 Reader-facing final report: `docs/FINAL_REPORT.md`.

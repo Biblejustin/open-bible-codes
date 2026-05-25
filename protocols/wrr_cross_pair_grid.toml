@@ -459,3 +459,39 @@ outputs = [
   "docs/WRR_LOCKED_METHOD_REPORT.md",
   "reports/wrr_1994/wrr_locked_method_report.manifest.json",
 ]
+
+[[steps]]
+id = "build_wrr_exact_reproduction_gap_dashboard_after_cross_pair"
+description = "Refresh the exact-published WRR reproduction gap dashboard after cross-pair outputs are current."
+argv = [
+  "-m", "scripts.build_wrr_exact_reproduction_gap_dashboard",
+  "--locked-report", "reports/wrr_1994/wrr_locked_method_report.csv",
+  "--defined-pair-summary", "reports/wrr_1994/wrr_defined_pair_set_audit_summary.csv",
+  "--gap-reasons", "reports/wrr_1994/wrr_defined_gap_reasons.csv",
+  "--variant-upper-bound", "reports/wrr_1994/wrr_variant_gap_upper_bound.csv",
+  "--action-summary", "reports/wrr_1994/wrr_residual_reconciliation_action_summary.csv",
+  "--manual-register-summary", "reports/wrr_1994/wrr_manual_decision_register_summary.csv",
+  "--source-policy-checklist", "reports/wrr_1994/wrr_source_policy_review_checklist.csv",
+  "--row-checklist", "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv",
+  "--remaining-checklist", "reports/wrr_1994/wrr_remaining_lane_review_checklist.csv",
+  "--out", "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.csv",
+  "--markdown-out", "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md",
+  "--manifest-out", "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_exact_reproduction_gap_dashboard.py",
+  "reports/wrr_1994/wrr_locked_method_report.csv",
+  "reports/wrr_1994/wrr_defined_pair_set_audit_summary.csv",
+  "reports/wrr_1994/wrr_defined_gap_reasons.csv",
+  "reports/wrr_1994/wrr_variant_gap_upper_bound.csv",
+  "reports/wrr_1994/wrr_residual_reconciliation_action_summary.csv",
+  "reports/wrr_1994/wrr_manual_decision_register_summary.csv",
+  "reports/wrr_1994/wrr_source_policy_review_checklist.csv",
+  "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv",
+  "reports/wrr_1994/wrr_remaining_lane_review_checklist.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.csv",
+  "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md",
+  "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.manifest.json",
+]
