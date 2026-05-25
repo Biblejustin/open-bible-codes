@@ -324,6 +324,36 @@ Source artifacts:
 - `docs/HEBREW_MODERN_GEOPOLITICAL_PROSPECTIVE_FINDINGS.md`
 - `docs/LOCAL_TERMS_APPENDIX_REPORT.md`
 
+### Critical Omission Breakage
+
+The TR-vs-SBLGNT omission-break lane is now useful as a source-variation
+screen, not as a positive claim. The shared break engine counts a hidden path
+as broken when a treated-as-deleted block removes one of its letters or changes
+the required spacing after deletion.
+
+In the current term set, the base TR-vs-SBLGNT omission run records 558 broken
+TR hits after excluding adjacent-merge and renumbered-subscription rows. The
+1000-shuffle null model places the same number of verse-aligned deletion
+blocks at random matched verse counts. That null distribution has median 657,
+with `p_ge=0.9910` for observing at least 558 breaks. In plain terms, the
+actual omitted SBLGNT blocks do not break more TR ELS hits than matched random
+verse blocks in this run; they break fewer than the null median.
+
+Follow-up reports also check the reverse direction, BYZ_NT and TCG_NT
+cross-tradition status, per-term length normalization, and disputed-passage
+overrides such as the Pericope Adulterae. Those reports are good audit
+material for textual-source sensitivity. They should not be used as
+significance language for raw break counts.
+
+Source artifacts:
+
+- `docs/CRITICAL_OMISSION_BREAKS.md`
+- `docs/CRITICAL_OMISSION_BREAKS_NULL.md`
+- `docs/CRITICAL_OMISSION_BREAKS_REVERSE.md`
+- `docs/CRITICAL_OMISSION_BREAKS_CROSS_TRADITION.md`
+- `docs/CRITICAL_OMISSION_BREAKS_LENGTH_STRATIFIED.md`
+- `docs/CRITICAL_OMISSION_BREAKS_PERICOPE_OVERRIDE.md`
+
 ### Notable Passage Gap Ledger
 
 The notable-passage gap ledger records places where declared terms are absent
@@ -512,6 +542,8 @@ Primary tracked summary artifacts:
 - `docs/MATRIX_CLUSTER_CONTROL_SUMMARY.md`
 - `docs/NOTABLE_PASSAGE_GAPS.md`
 - `docs/THEMATIC_CHAPTER_ABSENCE.md`
+- `docs/CRITICAL_OMISSION_BREAKS.md`
+- `docs/CRITICAL_OMISSION_BREAKS_NULL.md`
 
 ## Bottom Line
 

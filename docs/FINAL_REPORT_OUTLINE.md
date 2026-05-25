@@ -148,6 +148,9 @@ State these visibly:
 - short abbreviations and short forms are dense and should not be over-read;
 - widening skip ranges increases raw counts predictably;
 - non-Bible controls often match or exceed Bible raw-rate backgrounds.
+- TR-vs-SBLGNT omission breakage belongs here as source-variation evidence:
+  current output has 558 broken TR hits, but the 1000-shuffle null median is
+  657 with `p_ge=0.9910`, so raw break counts should not be promoted.
 
 ### 8. WRR Status
 

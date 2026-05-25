@@ -378,6 +378,10 @@ Visible weak results:
   controls;
 - long modern phrases are absent or effectively absent in observed Hebrew and
   Greek screens;
+- critical-omission breakage is reproducible as a source-variation screen, but
+  the 1000-shuffle null has median 657 against 558 observed broken TR hits and
+  `p_ge=0.9910`, so the actual omitted SBLGNT blocks do not break more TR ELS
+  hits than matched random verse blocks;
 - source-specific rows should not be collapsed into all-source claims;
 - short abbreviations and short names require stronger controls than long
   phrases;
@@ -491,6 +495,8 @@ Primary sources for this draft:
 - `docs/KJV_APOCRYPHA_BRIDGE_TERM_SHUFFLED_CONTROLS_1000.md`
 - `docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_PREREGISTRATION.md`
 - `docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md`
+- `docs/CRITICAL_OMISSION_BREAKS.md`
+- `docs/CRITICAL_OMISSION_BREAKS_NULL.md`
 - `docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md`
 - `docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md`
 - `docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md`

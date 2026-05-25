@@ -131,6 +131,24 @@ def test_final_report_includes_clean_lock_closeout() -> None:
     assert "`docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`" in outline
 
 
+def test_final_report_includes_critical_omission_null_read() -> None:
+    text = Path("docs/FINAL_REPORT.md").read_text(encoding="utf-8")
+    normalized_text = " ".join(text.split())
+
+    assert "### Critical Omission Breakage" in text
+    assert "558 broken TR hits" in normalized_text
+    assert "null distribution has median 657" in normalized_text
+    assert "`p_ge=0.9910`" in text
+    assert "do not break more TR ELS hits than matched random verse blocks" in normalized_text
+    assert "`docs/CRITICAL_OMISSION_BREAKS_NULL.md`" in text
+
+    draft = Path("docs/FINAL_REPORT_DRAFT.md").read_text(encoding="utf-8")
+    outline = Path("docs/FINAL_REPORT_OUTLINE.md").read_text(encoding="utf-8")
+    assert "critical-omission breakage" in draft
+    assert "`p_ge=0.9910`" in draft
+    assert "TR-vs-SBLGNT omission breakage" in outline
+
+
 def test_final_report_tracks_wrr_single_term_source_policy_impacts() -> None:
     report_paths = [
         Path("docs/FINAL_REPORT.md"),
