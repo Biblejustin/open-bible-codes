@@ -120,11 +120,14 @@ def test_final_report_includes_clean_lock_closeout() -> None:
 
     assert "## Clean-Lock Close-Out" in text
     assert "0 Hebrew concordance rows and 0 Greek surface rows" in text
+    assert "0 all-source extension keys" in text
+    assert "`docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_REPORT.md`" in text
     assert "`docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`" in text
 
     draft = Path("docs/FINAL_REPORT_DRAFT.md").read_text(encoding="utf-8")
     outline = Path("docs/FINAL_REPORT_OUTLINE.md").read_text(encoding="utf-8")
     assert "0 Hebrew concordance" in draft
+    assert "0 all-source extension keys" in draft
     assert "`docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`" in outline
 
 
@@ -181,6 +184,7 @@ def test_consolidated_findings_include_clean_lock_closeout() -> None:
     assert "87" in text
     assert "uncorrected-only representative-control prompts" in text
     assert "0 Hebrew concordance rows and 0 Greek surface rows" in text
+    assert "0 all-source extension keys" in text
 
 
 def test_next_lock_tracks_completed_clean_lock_expansion() -> None:

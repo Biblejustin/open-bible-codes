@@ -25,6 +25,7 @@ Primary summary artifacts:
 - `docs/CLAIM_CATALOG.md`
 - `docs/CLEAN_LOCK_RESULTS_SUMMARY.md`
 - `docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`
+- `docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_REPORT.md`
 - `reports/INDEX.md`
 
 Methodology artifacts:
@@ -53,6 +54,8 @@ State plainly:
 - matched controls explain many high-count rows;
 - no current result should be called a public claim.
 - clean-lock follow-up queues add 0 claim-ready rows under strict gates.
+- Greek lexicon extension follow-up rows become common-pronoun review material
+  after the strict stopword gate leaves 0 all-source extension keys.
 
 ### 2. Hypothesis And Scope
 

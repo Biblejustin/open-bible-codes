@@ -40,8 +40,12 @@ The latest clean-lock follow-up lanes do not add claim-ready rows. Hebrew
 concordance words produced 87 uncorrected-only representative-control prompts
 and 0 adjusted-support terms. Greek surface new terms produced 5 controlled
 rows with `q <= 0.05`, but manual context review found local surface-context
-or self-lexeme effects. The strict follow-up gate leaves 0 Hebrew concordance
-rows and 0 Greek surface rows claim-ready from these clean-lock queues.
+or self-lexeme effects. The Greek lexicon extension lane produced two
+all-source `αυτου` (autou; English: his/of him) pronoun-extension families under
+the clean lock, but the strict Greek stopword rerun removed seven common
+function-word rows and left 0 all-source extension keys. The strict follow-up
+gate leaves 0 Hebrew concordance rows and 0 Greek surface rows claim-ready from
+these clean-lock queues.
 
 ## Hypothesis And Scope
 
@@ -190,6 +194,11 @@ selected after earlier screening, so it is not a prospective discovery.
 The expanded Greek exact-center surface track found all-source rows including
 `ισαακ` (Isaak; English: Isaac), `τερασ` (teras; English: wonder), and `ανομια` (anomia; English: lawlessness). These pass letter-path audit and all-available
 real-word control review, but they remain post-screen review rows.
+
+The Greek lexicon extension prospective follow-up is weaker. Its two all-source
+clean-lock survivors were `αυτου` (autou; English: his/of him) common-pronoun
+extension rows. After the strict Greek stopword gate, 0 all-source extension
+keys remained. This keeps the lane in common-word review-material status.
 
 The length-4 Greek surface bucket looked stronger under a small declared-term
 control pool, but generated vocabulary controls weakened it. With 572 generated
@@ -450,6 +459,7 @@ Primary sources for this draft:
 - `docs/CONSOLIDATED_FINDINGS.md`
 - `docs/CENTERED_OCCURRENCE_INDEX.md`
 - `docs/FINAL_REPORT_HIGHLIGHTS.md`
+- `docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_REPORT.md`
 - `docs/PROSPECTIVE_STUDY_NEXT_LOCK.md`
 - `docs/CLAIM_CATALOG.md`
 - `docs/BIBLE_CODE_DIGEST_AUDIT.md`

@@ -41,6 +41,12 @@ control-artifact prompt.
 Greek surface new terms produced 5 controlled rows with `q <= 0.05`, but manual
 context review found visible local surface-context or direct self-lexeme effects.
 
+The Greek lexicon extension prospective lane is also closed as review material.
+Its original clean lock produced two all-source `αυτου` (autou; English: his/of
+him) pronoun-extension families that passed Stage A and Stage B numeric
+controls. The strict Greek stopword follow-up removed seven common function-word
+rows and left 0 all-source extension keys.
+
 Strict follow-up gate result: 0 Hebrew concordance rows and 0 Greek surface rows
 are claim-ready from these clean-lock queues.
 
@@ -49,6 +55,7 @@ Source artifacts:
 - `docs/CLEAN_LOCK_RESULTS_SUMMARY.md`
 - `docs/HEBREW_CONCORDANCE_UNCORRECTED_SCREENING_AUDIT.md`
 - `docs/GREEK_SURFACE_NEW_TERMS_CONTEXT_REVIEW.md`
+- `docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_REPORT.md`
 - `docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`
 
 ## Hypothesis Scope
@@ -221,6 +228,23 @@ Source artifacts:
 
 - `docs/DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_REPORT.md`
 - `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`
+
+### Greek Lexicon Extension Follow-Up
+
+The Strong's Greek lexicon prospective extension run is now classified as
+common-pronoun review material, not claim evidence. The original clean lock
+produced two all-source `αυτου` (autou; English: his/of him) rows at skip 8
+forward, extending to `καταυτου` (katautou; English: against him) and
+`αυτουσοι` (autou soi; English: his/to you). Both survived numeric controls,
+but both were common-pronoun/surface-context rows.
+
+The strict Greek function-word rerun used
+`terms/greek_lexicon_extension_terms_strict_lock.csv`, dropped seven stopword
+rows including `αυτου` (autou; English: his/of him) and `αυτοσ` (autos;
+English: he/self), and left 0 all-source extension keys. The remaining strict
+screen rows were source-only.
+
+Source artifact: `docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_REPORT.md`.
 
 ### Hebrew `יום יהוה` (yom YHWH; English: day of YHWH) Compound Extension
 

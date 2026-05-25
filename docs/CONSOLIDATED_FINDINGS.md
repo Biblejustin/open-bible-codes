@@ -70,9 +70,12 @@ The audit buckets those prompts as 38 ordinary lexical prompts, 33
 proper-name/gloss prompts, 10 high-volume short-string/common-letter prompts, 5
 sparse all-source prompts, and 1 control-artifact prompt. Greek surface new
 terms produced 5 controlled rows with `q <= 0.05`, but manual context review
-found visible local surface-context or direct self-lexeme effects. The strict
-follow-up gate leaves 0 Hebrew concordance rows and 0 Greek surface rows as
-claim-ready from these clean-lock queues.
+found visible local surface-context or direct self-lexeme effects. The Greek
+lexicon extension lane produced two all-source `αυτου` (autou; English: his/of
+him) pronoun-extension families under the clean lock, but the strict Greek
+stopword rerun removed seven common function-word rows and left 0 all-source
+extension keys. The strict follow-up gate leaves 0 Hebrew concordance rows and 0 Greek surface rows as claim-ready from these clean-lock queues.
+Strict Greek lexicon result: 0 all-source extension keys.
 
 ## What Looks Weak
 
