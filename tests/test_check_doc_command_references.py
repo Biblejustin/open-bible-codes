@@ -94,6 +94,38 @@ def test_reports_missing_treat_as_deleted_file(tmp_path: Path) -> None:
     ]
 
 
+def test_reports_unmarked_missing_report_output(tmp_path: Path) -> None:
+    write_minimal_repo(tmp_path)
+    (tmp_path / "docs" / "REPORT.md").write_text(
+        "Use `reports/missing_output.csv` for review.\n",
+        encoding="utf-8",
+    )
+
+    assert validate_doc_command_references(tmp_path) == [
+        "docs/REPORT.md:1: unmarked missing report output reports/missing_output.csv"
+    ]
+
+
+def test_allows_missing_report_output_in_command_block(tmp_path: Path) -> None:
+    write_minimal_repo(tmp_path)
+    (tmp_path / "docs" / "REPORT.md").write_text(
+        "```bash\npython3 -m els search --out reports/generated_output.csv\n```\n",
+        encoding="utf-8",
+    )
+
+    assert validate_doc_command_references(tmp_path) == []
+
+
+def test_allows_marked_generated_missing_report_output(tmp_path: Path) -> None:
+    write_minimal_repo(tmp_path)
+    (tmp_path / "docs" / "REPORT.md").write_text(
+        "Generated output: `reports/generated_output.csv`.\n",
+        encoding="utf-8",
+    )
+
+    assert validate_doc_command_references(tmp_path) == []
+
+
 def test_ignores_protocol_placeholders(tmp_path: Path) -> None:
     write_minimal_repo(tmp_path)
     (tmp_path / "docs" / "TEMPLATE.md").write_text(
@@ -109,7 +141,7 @@ def test_ignores_protocol_placeholders(tmp_path: Path) -> None:
 def test_does_not_match_embedded_terms_path_fragment(tmp_path: Path) -> None:
     write_minimal_repo(tmp_path)
     (tmp_path / "docs" / "REPORT.md").write_text(
-        "Report: `reports/greek_surface_new_terms/term_summary.csv`.\n",
+        "Generated report: `reports/greek_surface_new_terms/term_summary.csv`.\n",
         encoding="utf-8",
     )
 

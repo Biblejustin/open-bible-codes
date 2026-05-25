@@ -20,7 +20,24 @@ MAPPING_CSV_RE = re.compile(
 TREAT_AS_DELETED_CSV_RE = re.compile(
     r"(?<![A-Za-z0-9_./-])protocols/treat_as_deleted/[A-Za-z0-9_./\[\]{}-]+\.csv"
 )
+REPORT_RE = re.compile(r"(?<![A-Za-z0-9_./-])reports/[A-Za-z0-9_./\[\]{}-]+\.(?:csv|json|md)")
 DEFAULT_DOCS = (Path("README.md"), Path("docs"))
+MISSING_REPORT_CONTEXT_MARKERS = (
+    "example",
+    "future",
+    "generated",
+    "ignored",
+    "local",
+    "new_prospective",
+    "output",
+    "outputs",
+    "placeholder",
+    "prior",
+    "study.",
+    "study_name",
+    "such as",
+    "template",
+)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -51,6 +68,8 @@ def validate_doc_command_references(root: Path = Path("."), docs: list[Path] | N
     failures: list[str] = []
     for doc in iter_doc_paths(root, docs or list(DEFAULT_DOCS)):
         text = doc.read_text(encoding="utf-8")
+        lines = text.splitlines()
+        fenced_lines = fenced_code_lines(lines)
         relative_doc = doc.relative_to(root)
         for match in SCRIPT_MODULE_RE.finditer(text):
             module_name = match.group(1)
@@ -110,6 +129,20 @@ def validate_doc_command_references(root: Path = Path("."), docs: list[Path] | N
                 failures.append(
                     f"{relative_doc}:{line}: missing treat-as-deleted file {treat_csv}"
                 )
+        for match in REPORT_RE.finditer(text):
+            report = match.group(0)
+            if is_placeholder(report):
+                continue
+            report_path = root / report
+            if report_path.exists():
+                continue
+            line = line_number(text, match.start())
+            if line in fenced_lines:
+                continue
+            context = surrounding_text(lines, line).replace(report, "").lower()
+            if any(marker in context for marker in MISSING_REPORT_CONTEXT_MARKERS):
+                continue
+            failures.append(f"{relative_doc}:{line}: unmarked missing report output {report}")
     return failures
 
 
@@ -132,6 +165,25 @@ def is_placeholder(value: str) -> bool:
 
 def line_number(text: str, offset: int) -> int:
     return text.count("\n", 0, offset) + 1
+
+
+def fenced_code_lines(lines: list[str]) -> set[int]:
+    inside = False
+    fenced: set[int] = set()
+    for index, line in enumerate(lines, start=1):
+        if line.strip().startswith("```"):
+            inside = not inside
+            fenced.add(index)
+            continue
+        if inside:
+            fenced.add(index)
+    return fenced
+
+
+def surrounding_text(lines: list[str], line_number_: int, *, radius: int = 2) -> str:
+    start = max(0, line_number_ - radius - 1)
+    end = min(len(lines), line_number_ + radius)
+    return " ".join(lines[start:end])
 
 
 if __name__ == "__main__":
