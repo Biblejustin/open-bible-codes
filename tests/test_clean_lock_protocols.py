@@ -185,12 +185,22 @@ def test_public_baseline_tracks_critical_omission_null_read() -> None:
     assert "`docs/CRITICAL_OMISSION_BREAKS_PERICOPE_OVERRIDE.md`" in text
 
 
+def test_local_data_doc_check_make_target_is_documented() -> None:
+    makefile = Path("Makefile").read_text(encoding="utf-8")
+    readme = Path("README.md").read_text(encoding="utf-8")
+
+    assert "local-data-doc-check:" in makefile
+    assert "scripts.check_doc_command_references --check-local-data" in makefile
+    assert "make local-data-doc-check" in readme
+    assert "separate from `make public-release-check`" in readme
+
+
 def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     text = Path("docs/REMAINING_WORK_REGISTER.md").read_text(encoding="utf-8")
 
-    assert "Latest validation snapshot after the optional local-data doc-reference checker" in text
-    assert "1460 tests, 2 skipped, and 29195 subtests" in text
-    assert "scripts.check_doc_command_references --check-local-data" in text
+    assert "Latest validation snapshot after the optional local-data doc-reference make target" in text
+    assert "1461 tests, 2 skipped, and 29195 subtests" in text
+    assert "make local-data-doc-check" in text
     assert "`git diff --check` passed" in text
     assert "`make public-release-check` passed" in text
     assert "Earlier WRR/source-recovery validation snapshot" in text

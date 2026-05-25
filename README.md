@@ -59,6 +59,16 @@ This verifies the Git remote points at `Biblejustin/open-bible-codes`, rejects
 tracked report/database/raw-source artifacts, scans tracked files for the
 forbidden GitHub account text, and checks high-confidence secret-token patterns.
 
+Optional local data doc check, after bootstrapping ignored source caches:
+
+```bash
+make local-data-doc-check
+```
+
+This verifies documented `data/raw/` and `data/processed/` paths exist in the
+current working tree. It is separate from `make public-release-check` because
+those local source/cache paths are intentionally ignored by git.
+
 Full public source bootstrap:
 
 ```bash
