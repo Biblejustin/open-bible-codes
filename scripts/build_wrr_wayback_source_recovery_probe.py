@@ -29,6 +29,7 @@ DEFAULT_MD = Path("docs/WRR_WAYBACK_SOURCE_RECOVERY_PROBE.md")
 DEFAULT_MANIFEST_OUT = DEFAULT_OUT_DIR / "wayback_source_recovery_probe.manifest.json"
 
 WAYBACK_AVAILABLE_ENDPOINT = "https://archive.org/wayback/available?url="
+WAYBACK_CDX_ENDPOINT = "https://web.archive.org/cdx?url="
 SPAM_MARKERS = ("slot bet", "deposit pulsa", "rtp slot")
 
 
@@ -183,6 +184,9 @@ ROW_FIELDNAMES = [
     "closest_status",
     "closest_timestamp",
     "closest_url",
+    "snapshot_source",
+    "cdx_status",
+    "cdx_candidate_count",
     "archive_raw_url",
     "archive_fetch_status",
     "path",
@@ -198,6 +202,9 @@ SUMMARY_FIELDNAMES = [
     "probe_rows",
     "unique_concepts",
     "availability_available_rows",
+    "cdx_checked_rows",
+    "cdx_candidate_rows",
+    "cdx_fallback_rows",
     "archive_downloaded_rows",
     "expected_label_present_rows",
     "spam_marker_rows",
@@ -285,6 +292,9 @@ def probe_source(
 ) -> dict[str, object]:
     availability_status = "availability_checked"
     closest: dict[str, Any] = {}
+    snapshot_source = ""
+    cdx_status = "not_checked"
+    cdx_candidate_count = 0
     availability_url = wayback_availability_url(source.url)
     try:
         availability = fetch_json(availability_url)
@@ -292,6 +302,19 @@ def probe_source(
     except Exception as exc:  # pragma: no cover - exact network failures vary.
         availability_status = f"availability_error:{type(exc).__name__}"
     closest_available = bool(closest.get("available"))
+    if closest_available:
+        snapshot_source = "availability_closest"
+    else:
+        try:
+            cdx_candidates = cdx_snapshots(source.url)
+            cdx_candidate_count = len(cdx_candidates)
+            cdx_status = "cdx_checked"
+            closest = select_cdx_snapshot(cdx_candidates)
+            if closest.get("available"):
+                snapshot_source = "cdx_fallback"
+                closest_available = True
+        except Exception as exc:  # pragma: no cover - exact network failures vary.
+            cdx_status = f"cdx_error:{type(exc).__name__}"
     closest_url = str(closest.get("url") or "")
     archive_raw_url = wayback_raw_snapshot_url(closest_url)
     target = snapshot_dir / f"{source.label}.html"
@@ -316,6 +339,9 @@ def probe_source(
         closest=closest,
         archive_raw_url=archive_raw_url,
         archive_fetch_status=archive_fetch_status,
+        snapshot_source=snapshot_source,
+        cdx_status=cdx_status,
+        cdx_candidate_count=cdx_candidate_count,
         path=target if raw else None,
         raw=raw,
     )
@@ -328,6 +354,9 @@ def analyze_snapshot(
     closest: dict[str, Any],
     archive_raw_url: str,
     archive_fetch_status: str,
+    snapshot_source: str,
+    cdx_status: str,
+    cdx_candidate_count: int,
     path: Path | None,
     raw: bytes,
 ) -> dict[str, object]:
@@ -358,6 +387,9 @@ def analyze_snapshot(
         "closest_status": closest.get("status", ""),
         "closest_timestamp": closest.get("timestamp", ""),
         "closest_url": closest.get("url", ""),
+        "snapshot_source": snapshot_source,
+        "cdx_status": cdx_status,
+        "cdx_candidate_count": cdx_candidate_count,
         "archive_raw_url": archive_raw_url,
         "archive_fetch_status": archive_fetch_status,
         "path": str(path or ""),
@@ -385,6 +417,15 @@ def build_summary(rows: list[dict[str, object]]) -> dict[str, object]:
         "availability_available_rows": sum(
             1 for row in rows if row["closest_available"]
         ),
+        "cdx_checked_rows": sum(
+            1 for row in rows if str(row["cdx_status"]).startswith("cdx_")
+        ),
+        "cdx_candidate_rows": sum(
+            1 for row in rows if int(row["cdx_candidate_count"]) > 0
+        ),
+        "cdx_fallback_rows": sum(
+            1 for row in rows if row["snapshot_source"] == "cdx_fallback"
+        ),
         "archive_downloaded_rows": sum(
             1 for row in rows if row["archive_fetch_status"] in {"downloaded", "cached"}
         ),
@@ -407,8 +448,54 @@ def wayback_availability_url(url: str) -> str:
     return WAYBACK_AVAILABLE_ENDPOINT + quote(url, safe="")
 
 
-def closest_snapshot(payload: dict[str, Any]) -> dict[str, Any]:
+def wayback_cdx_url(url: str) -> str:
+    params = (
+        "&output=json"
+        "&fl=timestamp,statuscode,mimetype,digest,original"
+        "&filter=statuscode:200"
+        "&collapse=digest"
+        "&limit=20"
+    )
+    return WAYBACK_CDX_ENDPOINT + quote(url, safe="") + params
+
+
+def closest_snapshot(payload: Any) -> dict[str, Any]:
+    if not isinstance(payload, dict):
+        return {}
     return dict(payload.get("archived_snapshots", {}).get("closest", {}))
+
+
+def cdx_snapshots(url: str) -> list[dict[str, str]]:
+    payload = fetch_json(wayback_cdx_url(url))
+    if not isinstance(payload, list) or len(payload) <= 1:
+        return []
+    header = [str(value) for value in payload[0]]
+    rows: list[dict[str, str]] = []
+    for raw_row in payload[1:]:
+        if not isinstance(raw_row, list):
+            continue
+        row = {
+            header[index]: str(value)
+            for index, value in enumerate(raw_row)
+            if index < len(header)
+        }
+        if row.get("timestamp") and row.get("original"):
+            rows.append(row)
+    return rows
+
+
+def select_cdx_snapshot(rows: list[dict[str, str]]) -> dict[str, Any]:
+    if not rows:
+        return {}
+    row = rows[-1]
+    timestamp = row["timestamp"]
+    original = row["original"]
+    return {
+        "available": True,
+        "status": row.get("statuscode", ""),
+        "timestamp": timestamp,
+        "url": f"https://web.archive.org/web/{timestamp}/{original}",
+    }
 
 
 def wayback_raw_snapshot_url(snapshot_url: str) -> str:
@@ -421,7 +508,7 @@ def wayback_raw_snapshot_url(snapshot_url: str) -> str:
     return f"https://web.archive.org/web/{timestamp}id_/{original_url}"
 
 
-def fetch_json(url: str) -> dict[str, Any]:
+def fetch_json(url: str) -> Any:
     request = Request(url, headers={"User-Agent": "Mozilla/5.0 EDLS source audit"})
     with urlopen(request, timeout=30) as response:
         return json.loads(response.read().decode("utf-8", errors="replace"))
@@ -459,6 +546,9 @@ def write_markdown(
         f"| Wayback URLs probed | {summary['probe_rows']} |",
         f"| unique research concepts probed | {summary['unique_concepts']} |",
         f"| rows with archived snapshot | {summary['availability_available_rows']} |",
+        f"| rows checked with CDX fallback | {summary['cdx_checked_rows']} |",
+        f"| rows with CDX exact-URL candidates | {summary['cdx_candidate_rows']} |",
+        f"| rows recovered through CDX fallback | {summary['cdx_fallback_rows']} |",
         f"| archived files downloaded or cached | {summary['archive_downloaded_rows']} |",
         f"| rows where expected label appeared | {summary['expected_label_present_rows']} |",
         f"| unrelated slot/gambling markers | {summary['spam_marker_rows']} |",
@@ -505,8 +595,8 @@ def write_markdown(
             "",
             "## Probe Rows",
             "",
-            "| Label | Available | Timestamp | Expected Text | Spam Marker | Bytes | SHA-256 | Status |",
-            "| --- | --- | --- | --- | --- | ---: | --- | --- |",
+            "| Label | Available | Source | Timestamp | CDX candidates | Expected Text | Spam Marker | Bytes | SHA-256 | Status |",
+            "| --- | --- | --- | --- | ---: | --- | --- | ---: | --- | --- |",
         ]
     )
     for row in rows:
@@ -516,7 +606,9 @@ def write_markdown(
                 [
                     markdown_cell(row["label"]),
                     markdown_cell(row["closest_available"]),
+                    markdown_cell(row["snapshot_source"]),
                     markdown_cell(row["closest_timestamp"]),
+                    markdown_cell(row["cdx_candidate_count"]),
                     markdown_cell(row["expected_label_present"]),
                     markdown_cell(row["spam_marker_present"]),
                     markdown_cell(row["bytes"]),
@@ -532,9 +624,12 @@ def write_markdown(
             "## Source Boundary",
             "",
             "This archive probe recovers research-program and model-context pages when",
-            "Wayback has a clean snapshot. It does not recover the missing level-2/3",
-            "geometric-model or ELS-model pages, and it does not resolve WRR residual",
-            "appellation normalization or pair-rule questions.",
+            "Wayback has a clean snapshot. It first checks the Wayback closest-snapshot",
+            "endpoint and then falls back to CDX exact-URL 200-capture rows when the",
+            "closest endpoint returns no archived snapshot. The CDX fallback did not",
+            "recover the missing level-2/3 geometric-model or ELS-model pages in this",
+            "run, and it does not resolve WRR residual appellation normalization or",
+            "pair-rule questions.",
         ]
     )
     path.parent.mkdir(parents=True, exist_ok=True)

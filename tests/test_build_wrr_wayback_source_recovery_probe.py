@@ -44,6 +44,9 @@ class WrrWaybackSourceRecoveryProbeTests(unittest.TestCase):
             },
             archive_raw_url="https://web.archive.org/web/20160615070555id_/source",
             archive_fetch_status="downloaded",
+            snapshot_source="availability_closest",
+            cdx_status="not_checked",
+            cdx_candidate_count=0,
             path=Path("snapshot.html"),
             raw=GOOD_HTML.encode("utf-8"),
         )
@@ -53,6 +56,9 @@ class WrrWaybackSourceRecoveryProbeTests(unittest.TestCase):
             closest={},
             archive_raw_url="",
             archive_fetch_status="not_available",
+            snapshot_source="",
+            cdx_status="cdx_checked",
+            cdx_candidate_count=0,
             path=None,
             raw=b"",
         )
@@ -62,6 +68,9 @@ class WrrWaybackSourceRecoveryProbeTests(unittest.TestCase):
             closest={"available": True, "status": "200"},
             archive_raw_url="https://web.archive.org/web/20160615070555id_/source",
             archive_fetch_status="downloaded",
+            snapshot_source="availability_closest",
+            cdx_status="not_checked",
+            cdx_candidate_count=0,
             path=Path("snapshot.html"),
             raw=SPAM_HTML.encode("utf-8"),
         )
@@ -131,14 +140,63 @@ class WrrWaybackSourceRecoveryProbeTests(unittest.TestCase):
             self.assertEqual(summary["probe_rows"], "2")
             self.assertEqual(summary["usable_archived_source_rows"], "1")
             self.assertEqual(summary["missing_archived_concepts"], "1")
+            self.assertEqual(summary["cdx_checked_rows"], "1")
+            self.assertEqual(summary["cdx_candidate_rows"], "0")
+            self.assertEqual(summary["cdx_fallback_rows"], "0")
             markdown = (root / "probe.md").read_text(encoding="utf-8")
             self.assertIn("WRR Wayback Source Recovery Probe", markdown)
             self.assertIn("does not update the cached `reports/wrr_1994/` bundle", markdown)
+            self.assertIn("rows checked with CDX fallback", markdown)
             manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
             self.assertEqual(
                 manifest["summary"]["current_archive_recovery_status"],
                 "partial_archived_sources_recovered",
             )
+
+    def test_cdx_fallback_recovers_when_closest_missing(self) -> None:
+        missing_payload = {"archived_snapshots": {}}
+        cdx_payload = [
+            ["timestamp", "statuscode", "mimetype", "digest", "original"],
+            [
+                "20150728045249",
+                "200",
+                "text/html",
+                "abc",
+                "http://www.torah-code.org:80/research/research_3.shtml",
+            ],
+        ]
+
+        def fake_fetch_json(url: str):
+            if "web.archive.org/cdx" in url:
+                return cdx_payload
+            return missing_payload
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            with patch.object(
+                probe,
+                "fetch_json",
+                side_effect=fake_fetch_json,
+            ), patch.object(
+                probe,
+                "fetch_bytes",
+                return_value=(
+                    "<html><head><title>Torah Codes -- The Geometric Model</title>"
+                    "</head><body>The Geometric Model</body></html>"
+                ).encode("utf-8"),
+            ):
+                row = probe.probe_source(
+                    probe.SOURCE_BY_LABEL[
+                        "torah_code_research_geometric_model_level_1_shtml"
+                    ],
+                    root / "snapshots",
+                    refresh=True,
+                )
+
+        self.assertEqual(row["usable_status"], "usable_archived_source")
+        self.assertEqual(row["snapshot_source"], "cdx_fallback")
+        self.assertEqual(row["cdx_status"], "cdx_checked")
+        self.assertEqual(row["cdx_candidate_count"], 1)
 
 
 if __name__ == "__main__":

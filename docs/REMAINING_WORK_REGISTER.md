@@ -437,11 +437,13 @@ alternates, redirecting to the Torah-code root, 15/15 root canonical rows,
 The WRR Wayback source recovery probe now checks archived Torah-code research
 snapshots in `reports/wrr_wayback_source_recovery_probe/` and writes
 `docs/WRR_WAYBACK_SOURCE_RECOVERY_PROBE.md`. The current archive probe checks
-18 URL variants across 9 research concepts, recovers 5 usable archived concepts
-(`research_program_1`, `research_program_2`, `model_overview`,
-`geometric_model_level_1`, and `els_model_level_1`), and leaves 4 concepts
-missing (`geometric_model_level_2`, `geometric_model_level_3`,
-`els_model_level_2`, and `els_model_level_3`).
+18 URL variants across 9 research concepts, checks 14 rows with an exact-URL
+CDX fallback when the closest-snapshot endpoint has no row, finds one CDX
+candidate row, recovers one source through that fallback, recovers 5 usable
+archived concepts total (`research_program_1`, `research_program_2`,
+`model_overview`, `geometric_model_level_1`, and `els_model_level_1`), and
+leaves 4 concepts missing (`geometric_model_level_2`,
+`geometric_model_level_3`, `els_model_level_2`, and `els_model_level_3`).
 These lanes stay non-result-bearing. The
 research-program ELS harness now includes a split-fit Fisher order-statistic
 row plus two transparent row-width modes: strict shared-intersection
@@ -788,16 +790,17 @@ probing/guarding, residual unique-term reconciliation queue guarding, and
 residual term blocker-packet propagation, and residual reconciliation action
 plan guarding, WRR public handoff doc guarding, and WRR manual decision-record
 worksheet guarding, critical-omission follow-up implementation, real-report
-reruns, empty-report header preservation, and process-pool fallback hardening:
+reruns, empty-report header preservation, process-pool fallback hardening, and
+WRR Wayback CDX fallback probing:
 
-- `python3 -m pytest -q` passed: 1407 tests, 2 skipped, and 14117 subtests after process-pool fallback hardening.
+- `python3 -m pytest -q` passed: 1408 tests, 2 skipped, and 14117 subtests after WRR Wayback CDX fallback probing.
 - `python3 -m pytest tests/test_build_wrr_manual_decision_record_worksheet.py tests/test_check_wrr_manual_decision_record_worksheet_doc.py tests/test_check_wrr_public_handoff_docs.py tests/test_real_report_run.py tests/test_clean_lock_protocols.py -q` passed: 85 tests.
 - `python3 -m pytest tests/test_check_wrr_public_handoff_docs.py tests/test_real_report_run.py -q` passed: 57 tests.
 - `python3 -m pytest tests/test_build_wrr_residual_reconciliation_action_plan.py tests/test_check_wrr_residual_reconciliation_action_plan_doc.py -q` passed: 6 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_clean_lock_protocols.py tests/test_build_wrr_residual_reconciliation_action_plan.py tests/test_check_wrr_residual_reconciliation_action_plan_doc.py -q` passed: 69 tests.
 - `python3 -m pytest tests/test_build_wrr_claim_blocker_packet.py tests/test_check_wrr_claim_blocker_packet_doc.py tests/test_clean_lock_protocols.py tests/test_wrr_cross_pair_grid.py tests/test_real_report_run.py -q` passed: 71 tests.
 - `python3 -m pytest tests/test_build_wrr_residual_term_reconciliation_queue.py tests/test_check_wrr_residual_term_reconciliation_queue_doc.py tests/test_real_report_run.py -q` passed: 51 tests.
-- `python3 -m pytest tests/test_build_wrr_wayback_source_recovery_probe.py tests/test_check_wrr_wayback_source_recovery_probe_doc.py tests/test_real_report_run.py -q` passed: 52 tests.
+- `python3 -m pytest tests/test_build_wrr_wayback_source_recovery_probe.py tests/test_check_wrr_wayback_source_recovery_probe_doc.py tests/test_real_report_run.py -q` passed: 66 tests.
 - `python3 -m pytest tests/test_download_wrr_sources.py tests/test_build_wrr_source_recovery_probe.py tests/test_check_wrr_source_recovery_probe_doc.py tests/test_real_report_run.py -q` passed: 50 tests and 42 subtests.
 - `python3 -m pytest tests/test_analyze_hypothesis_testing_source.py tests/test_download_wrr_sources.py -q` passed: 9 tests and 46 subtests.
 - `python3 -m pytest tests/test_check_hypothesis_testing_source_audit_doc.py tests/test_real_report_run.py -q` passed: 42 tests.
