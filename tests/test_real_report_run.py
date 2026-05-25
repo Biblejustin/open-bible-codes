@@ -522,6 +522,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/CLAIM_CATALOG.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("configs/prospective_study_lanes.json", steps_by_id["preflight"]["inputs"])
         self.assertIn(
+            "scripts/check_study_lock_manifests_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_prospective_study_next_lock_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -917,6 +921,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/CLAIM_CATALOG.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("configs/prospective_study_lanes.json", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn(
+            "scripts/check_study_lock_manifests_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/check_prospective_study_next_lock_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -1163,6 +1171,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn("real_report_doc_reference_failures", payload)
             self.assertIn("prospective_next_lock_doc_failures", payload)
             self.assertIn("prospective_readiness_doc_failures", payload)
+            self.assertIn("study_lock_manifests_doc_failures", payload)
             self.assertIn("study_mapping_schema_failures", payload)
             self.assertIn("preregistration_placeholder_paths", payload)
             self.assertIn("preregistration_placeholder_failures", payload)
@@ -1464,6 +1473,28 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "prospective next-lock doc failures: "
                 "docs/PROSPECTIVE_STUDY_NEXT_LOCK.md says no ready lanes",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_study_lock_manifests_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_study_lock_manifests_doc,
+                "validate_study_lock_doc",
+                return_value=["docs/STUDY_LOCK_MANIFESTS.md missing guard"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["study_lock_manifests_doc_failures"],
+                ["docs/STUDY_LOCK_MANIFESTS.md missing guard"],
+            )
+            self.assertIn(
+                "study-lock manifests doc failures: "
+                "docs/STUDY_LOCK_MANIFESTS.md missing guard",
                 payload["failures"],
             )
 

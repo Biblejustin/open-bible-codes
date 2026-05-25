@@ -381,6 +381,7 @@ inputs = [
   "scripts/download_ebible_engkjv_apocrypha.py",
   "scripts/build_study_lock_manifest.py",
   "scripts/check_study_lock_manifest.py",
+  "scripts/check_study_lock_manifests_doc.py",
   "scripts/check_preregistration_placeholders.py",
   "scripts/audit_prospective_terms.py",
   "scripts/filter_prospective_terms.py",

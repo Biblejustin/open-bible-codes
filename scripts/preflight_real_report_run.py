@@ -33,6 +33,7 @@ from scripts import (
     check_prospective_study_lanes,
     check_public_claim_language,
     check_source_basis_audit_queue,
+    check_study_lock_manifests_doc,
     check_wrr_claim_blocker_packet_doc,
     check_wrr_claim_readiness_doc,
     check_wrr_cross_pair_grid_doc,
@@ -458,6 +459,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/download_ebible_engkjv_apocrypha.py",
     "scripts/build_study_lock_manifest.py",
     "scripts/check_study_lock_manifest.py",
+    "scripts/check_study_lock_manifests_doc.py",
     "scripts/check_preregistration_placeholders.py",
     "scripts/audit_prospective_terms.py",
     "scripts/filter_prospective_terms.py",
@@ -692,6 +694,18 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "prospective next-lock doc failures: "
             + "; ".join(prospective_next_lock_doc_failures)
+        )
+
+    study_lock_manifests_doc_failures = (
+        check_study_lock_manifests_doc.validate_study_lock_doc(
+            root / check_study_lock_manifests_doc.DEFAULT_DOC,
+            root / check_study_lock_manifests_doc.DEFAULT_PROFILES,
+        )
+    )
+    if study_lock_manifests_doc_failures:
+        failures.append(
+            "study-lock manifests doc failures: "
+            + "; ".join(study_lock_manifests_doc_failures)
         )
 
     source_basis_failures = check_source_basis_audit_queue.validate_source_basis_queue(
@@ -1134,6 +1148,7 @@ def main(argv: list[str] | None = None) -> int:
         "prospective_lane_failures": prospective_lane_failures,
         "prospective_readiness_doc_failures": prospective_readiness_doc_failures,
         "prospective_next_lock_doc_failures": prospective_next_lock_doc_failures,
+        "study_lock_manifests_doc_failures": study_lock_manifests_doc_failures,
         "source_basis_failures": source_basis_failures,
         "english_corpus_policy_failures": english_corpus_policy_failures,
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,
