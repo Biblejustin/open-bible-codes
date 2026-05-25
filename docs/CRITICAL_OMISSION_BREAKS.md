@@ -76,7 +76,9 @@ The follow-up protocol keeps break counts on the same shared break-stat helpers:
 - Length-stratified read: `docs/CRITICAL_OMISSION_BREAKS_LENGTH_STRATIFIED.md`.
 - Disputed-passage override and Pericope checks: `docs/CRITICAL_OMISSION_BREAKS_PERICOPE_OVERRIDE.md`.
 
-Latest null run: observed 558 breaks, p_ge 0.9910, null median 657.
+Latest null run: observed 558 breaks, `p_ge=0.9910`, null median 657. The
+actual SBLGNT-omitted blocks do not break more TR ELS hits than matched random
+verse blocks in this run; the observed break count is below the null median.
 
 ## Cautions
 

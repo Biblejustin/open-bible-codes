@@ -149,6 +149,17 @@ def test_final_report_includes_critical_omission_null_read() -> None:
     assert "TR-vs-SBLGNT omission breakage" in outline
 
 
+def test_critical_omission_root_doc_keeps_null_interpretation_visible() -> None:
+    text = Path("docs/CRITICAL_OMISSION_BREAKS.md").read_text(encoding="utf-8")
+    normalized_text = " ".join(text.split())
+
+    assert "`p_ge=0.9910`" in text
+    assert "null median 657" in normalized_text
+    assert "do not break more TR ELS hits than matched random verse blocks" in normalized_text
+    assert "below the null median" in normalized_text
+    assert "Raw break counts are not significance tests" in text
+
+
 def test_readme_tracks_public_final_report_read() -> None:
     text = Path("README.md").read_text(encoding="utf-8")
     normalized_text = " ".join(text.split())
