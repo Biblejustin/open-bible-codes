@@ -59,6 +59,16 @@ This verifies the Git remote points at `Biblejustin/open-bible-codes`, rejects
 tracked report/database/raw-source artifacts, scans tracked files for the
 forbidden GitHub account text, and checks high-confidence secret-token patterns.
 
+Current fast validation before a handoff:
+
+```bash
+make fast-validate
+```
+
+This runs the unit suite, regenerates documentation/protocol indexes, checks
+diff whitespace, runs dirty-tree-safe release hygiene, and verifies local data
+doc references against the current ignored source caches.
+
 Optional local data doc check, after bootstrapping ignored source caches:
 
 ```bash
