@@ -297,22 +297,27 @@ workflow names.
 ### 1. WRR Reproduction Upgrade
 
 Current status: source/import work, corrected-distance diagnostics, a
-lock-prep pair eligibility table, source-policy scenario diagnostics, and a
-claim-readiness gate. Remaining claim-grade pieces:
+pair eligibility table, source-policy scenario diagnostics, populated manual
+decision records, a claim-readiness gate, and a locked local reporting path.
+The selected repo-defined path keeps all imported same-record pairs, uses the
+printed WRR `D(w)` formula as the main rule, carries the reported-program
+formula as sensitivity output, treats undefined corrected-distance rows as
+ordinary-not-valid, and locks the cap-1000 999,999 date-label permutation.
 
-- candidate pair source/reconciliation, with `163` treated as the
-  source-defined corrected-distance output count rather than a raw pair table;
-- source-policy lock for WNP/context rows. Single-term Zacut diagnostics now
-  show `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and `M$HZKWTW` each individually leave
-  163 >=5 pairs with gap 0 if excluded, but that remains diagnostic count
-  evidence only;
-- printed-formula vs WRR-program `D(w)` choice, now side-by-side audited but
-  not locked;
-- real-pair perturbed `Q` and corrected distance `c(w,w')`, enforcing
-  source-backed undefined conditions;
-- term-specific skip-cap logic;
-- permutation-rank procedure;
-- study-level report over fixed terms and sources.
+Remaining exact-published-reproduction pieces:
+
+- source-defined 163-distance reconciliation remains caveated; the repo treats
+  `163` as a cited corrected-distance output count rather than a raw pair
+  table;
+- primary-source transcription limits remain visible even though current manual
+  records selected 26 `no_source_change` rows and 11 `method_lock` rows;
+- single-term Zacut diagnostics show `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and
+  `M$HZKWTW` each individually leave 163 >=5 pairs with gap 0 if excluded, but
+  that remains diagnostic count evidence only;
+- exact published `Q`, corrected-distance, and permutation procedure matching
+  remains separate from the repo-defined locked local run;
+- study-level report language must keep exact-WRR reproduction caveats attached
+  to fixed terms and sources.
 
 Tracked references:
 
