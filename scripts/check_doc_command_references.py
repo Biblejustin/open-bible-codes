@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate documented script and protocol references still exist."""
+"""Validate documented command and source-file references still exist."""
 
 from __future__ import annotations
 
@@ -11,6 +11,8 @@ from pathlib import Path
 
 SCRIPT_MODULE_RE = re.compile(r"python3\s+-m\s+scripts\.([A-Za-z0-9_]+)")
 PROTOCOL_RE = re.compile(r"protocols/[A-Za-z0-9_./\[\]{}-]+\.toml")
+CONFIG_RE = re.compile(r"(?<![A-Za-z0-9_./-])configs/[A-Za-z0-9_./\[\]{}-]+\.toml")
+TERM_RE = re.compile(r"(?<![A-Za-z0-9_./-])terms/[A-Za-z0-9_./\[\]{}-]+\.csv")
 DEFAULT_DOCS = (Path("README.md"), Path("docs"))
 
 
@@ -59,6 +61,22 @@ def validate_doc_command_references(root: Path = Path("."), docs: list[Path] | N
             if not protocol_path.exists():
                 line = line_number(text, match.start())
                 failures.append(f"{relative_doc}:{line}: missing protocol {protocol}")
+        for match in CONFIG_RE.finditer(text):
+            config = match.group(0)
+            if is_placeholder(config):
+                continue
+            config_path = root / config
+            if not config_path.exists():
+                line = line_number(text, match.start())
+                failures.append(f"{relative_doc}:{line}: missing config {config}")
+        for match in TERM_RE.finditer(text):
+            term_file = match.group(0)
+            if is_placeholder(term_file):
+                continue
+            term_path = root / term_file
+            if not term_path.exists():
+                line = line_number(text, match.start())
+                failures.append(f"{relative_doc}:{line}: missing term file {term_file}")
     return failures
 
 

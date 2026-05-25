@@ -189,7 +189,7 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     text = Path("docs/REMAINING_WORK_REGISTER.md").read_text(encoding="utf-8")
 
     assert "Latest validation snapshot after the critical-omission/final-report public" in text
-    assert "1446 tests, 2 skipped, and 29195 subtests" in text
+    assert "1449 tests, 2 skipped, and 29195 subtests" in text
     assert "`git diff --check` passed" in text
     assert "`make public-release-check` passed" in text
     assert "Earlier WRR/source-recovery validation snapshot" in text

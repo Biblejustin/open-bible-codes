@@ -31,10 +31,46 @@ def test_reports_missing_protocol(tmp_path: Path) -> None:
     ]
 
 
+def test_reports_missing_config(tmp_path: Path) -> None:
+    write_minimal_repo(tmp_path)
+    (tmp_path / "README.md").write_text(
+        "Stats: `python3 -m els stats --config configs/missing.toml`.\n",
+        encoding="utf-8",
+    )
+
+    assert validate_doc_command_references(tmp_path) == [
+        "README.md:1: missing config configs/missing.toml"
+    ]
+
+
+def test_reports_missing_term_file(tmp_path: Path) -> None:
+    write_minimal_repo(tmp_path)
+    (tmp_path / "docs" / "TERMS.md").write_text(
+        "Terms: `terms/missing_terms.csv`.\n",
+        encoding="utf-8",
+    )
+
+    assert validate_doc_command_references(tmp_path) == [
+        "docs/TERMS.md:1: missing term file terms/missing_terms.csv"
+    ]
+
+
 def test_ignores_protocol_placeholders(tmp_path: Path) -> None:
     write_minimal_repo(tmp_path)
     (tmp_path / "docs" / "TEMPLATE.md").write_text(
-        "Protocol: `protocols/[protocol].toml`\n",
+        "Protocol: `protocols/[protocol].toml`\n"
+        "Config: `configs/[config].toml`\n"
+        "Terms: `terms/[term_file].csv`\n",
+        encoding="utf-8",
+    )
+
+    assert validate_doc_command_references(tmp_path) == []
+
+
+def test_does_not_match_embedded_terms_path_fragment(tmp_path: Path) -> None:
+    write_minimal_repo(tmp_path)
+    (tmp_path / "docs" / "REPORT.md").write_text(
+        "Report: `reports/greek_surface_new_terms/term_summary.csv`.\n",
         encoding="utf-8",
     )
 
