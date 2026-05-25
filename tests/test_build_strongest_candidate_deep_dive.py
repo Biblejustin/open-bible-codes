@@ -23,6 +23,9 @@ class StrongestCandidateDeepDiveTests(unittest.TestCase):
             ])
             self.assertIn("2 sources", rows[0]["control_read"])
             self.assertIn("max all-control q 0.04", rows[0]["control_read"])
+            self.assertEqual(rows[0]["decision"], "hold_after_clean_lock_extension_followup")
+            self.assertIn("post-discovery review material", rows[0]["next_action"])
+            self.assertIn("stricter function-word and context gates", rows[0]["next_action"])
             self.assertIn("4 exact-center paths", rows[2]["context_read"])
             self.assertIn("Prospective lock: 1 bridge row, 0/2 terms", rows[4]["control_read"])
 
@@ -67,7 +70,10 @@ class StrongestCandidateDeepDiveTests(unittest.TestCase):
 
             self.assertEqual(code, 0)
             self.assertIn("doxa_exact_center_extension", out.read_text(encoding="utf-8"))
-            self.assertIn("Strongest Candidate Deep Dive", markdown.read_text(encoding="utf-8"))
+            markdown_text = markdown.read_text(encoding="utf-8")
+            self.assertIn("Strongest Candidate Deep Dive", markdown_text)
+            self.assertIn("use a new clean source and stricter gates", markdown_text)
+            self.assertNotIn("lock the next prospective doxa-style", markdown_text)
             self.assertIn("build_strongest_candidate_deep_dive", manifest.read_text(encoding="utf-8"))
 
 

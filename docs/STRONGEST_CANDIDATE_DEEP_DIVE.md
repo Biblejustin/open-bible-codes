@@ -12,14 +12,14 @@ python3 -m scripts.build_strongest_candidate_deep_dive --claim-catalog claims/cl
 ## Summary
 
 - candidate rows: 5
-- recommended first move: lock the next prospective doxa-style Greek extension study before inspecting new candidates
+- recommended first move: keep the doxa row in post-discovery review status; use a new clean source and stricter gates for any new Greek extension work
 - main caution: all rows below are post-discovery or occurrence-review rows except where explicitly marked as prospective
 
 ## Ranked Candidates
 
 | Rank | Candidate | Decision | Control read | Limit | Next action |
 | ---: | --- | --- | --- | --- | --- |
-| 1 | `doxa_exact_center_extension` | `advance_to_next_prospective_lock` | 4 sources; 20000 term controls and 20000 random controls per source; max combined q 0.0009; max all-control q 0.042998. | Post-discovery follow-up; full extension phrase is hidden-path only and not surface text in the hit passage. | Lock a prospective Greek extension study before inspecting new rows; reuse same four Greek NT sources, same metric, same term/random control families. |
+| 1 | `doxa_exact_center_extension` | `hold_after_clean_lock_extension_followup` | 4 sources; 20000 term controls and 20000 random controls per source; max combined q 0.0009; max all-control q 0.042998. | Post-discovery follow-up; full extension phrase is hidden-path only and not surface text in the hit passage. | Keep as post-discovery review material. Any new Greek extension work should start from a genuinely new clean term source with stricter function-word and context gates before search. |
 | 2 | `all_codes_yom_yhwh_compound_extension` | `advance_after_doxa_or_pair_with_hebrew_lock` | 5 MT-family sources; 5000 term controls and 5000 random controls per source; max combined q 0.0002; max all-control q 0.004799. | Post-discovery follow-up from broad all-codes queue; review candidate not claim. | Lock a Hebrew compound-extension prospective cohort with the same source-family rule before adding or ranking new Hebrew extension rows. |
 | 3 | `gog_rev_20_8_centered_occurrence` | `hold_as_context_occurrence_not_claim` | length-3 matched-control rank desc 25/asc 1; controls above target 24; not frequency-promoted | Occurrence-first review row; preserve in final occurrence list but do not promote as a claim. | Keep in final occurrence list; any stronger promotion needs a longer Gog/Magog paired metric with declared controls. |
 | 4 | `greek_expanded_surface_followup` | `secondary_candidate_needs_prospective_surface_lock` | 3 selected terms; max observed all-source patterns 1; max all-source q 0.032258 under all-available real-word controls. | Post-screen follow-up from previously observed surface queue; not prospective discovery or claim. | Fold into next Greek prospective design only if terms, surface rule, and same-length control pool are frozen before observing candidates. |
@@ -36,7 +36,7 @@ python3 -m scripts.build_strongest_candidate_deep_dive --claim-catalog claims/cl
 - Control read: 4 sources; 20000 term controls and 20000 random controls per source; max combined q 0.0009; max all-control q 0.042998.
 - Context read: Exact-center context at 2TH 3:1 around κυριου; base surface appears in center verse; full extension phrase is hidden-path-only.
 - Limit: Post-discovery follow-up; full extension phrase is hidden-path only and not surface text in the hit passage.
-- Next action: Lock a prospective Greek extension study before inspecting new rows; reuse same four Greek NT sources, same metric, same term/random control families.
+- Next action: Keep as post-discovery review material. Any new Greek extension work should start from a genuinely new clean term source with stricter function-word and context gates before search.
 - Primary artifact: `docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md`
 - Supporting artifacts: `reports/doxa_four_source_confirmatory_followup/paired_controls_summary.csv; reports/doxa_four_source_confirmatory_followup/context_review_summary.csv; reports/doxa_four_source_confirmatory_followup/report.manifest.json`
 

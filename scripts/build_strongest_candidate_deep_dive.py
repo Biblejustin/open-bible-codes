@@ -143,10 +143,10 @@ def build_doxa_row(claims: dict[str, dict[str, str]], args: argparse.Namespace) 
         "doxa_exact_center_extension",
         label="Greek doxa four-source exact-center extension",
         language="greek",
-        decision="advance_to_next_prospective_lock",
+        decision="hold_after_clean_lock_extension_followup",
         next_action=(
-            "Lock a prospective Greek extension study before inspecting new rows; reuse same four Greek NT sources, "
-            "same metric, same term/random control families."
+            "Keep as post-discovery review material. Any new Greek extension work should start from a genuinely "
+            "new clean term source with stricter function-word and context gates before search."
         ),
         primary_artifact="docs/DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_REPORT.md",
         supporting_artifacts=[
@@ -348,7 +348,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
         "## Summary",
         "",
         f"- candidate rows: {len(rows)}",
-        "- recommended first move: lock the next prospective doxa-style Greek extension study before inspecting new candidates",
+        "- recommended first move: keep the doxa row in post-discovery review status; use a new clean source and stricter gates for any new Greek extension work",
         "- main caution: all rows below are post-discovery or occurrence-review rows except where explicitly marked as prospective",
         "",
         "## Ranked Candidates",
