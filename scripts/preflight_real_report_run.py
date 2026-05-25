@@ -27,6 +27,7 @@ from scripts import (
     check_manual_review_queue,
     check_preregistration_placeholders,
     check_prospective_study_lanes,
+    check_public_claim_language,
     check_source_basis_audit_queue,
     check_wrr_claim_blocker_packet_doc,
     check_wrr_claim_readiness_doc,
@@ -76,6 +77,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/preflight_real_report_run.py",
     "scripts/release_hygiene.py",
     "scripts/check_public_release_hygiene.py",
+    "scripts/check_public_claim_language.py",
     "els/project_index.py",
     "Makefile",
     "README.md",
@@ -598,6 +600,15 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(expanded_strata_tooling_failures)
         )
 
+    public_claim_language_failures = (
+        check_public_claim_language.validate_public_claim_language()
+    )
+    if public_claim_language_failures:
+        failures.append(
+            "public claim-language failures: "
+            + "; ".join(public_claim_language_failures)
+        )
+
     study_mapping_schema_failures = validate_study_mapping_schemas.validate_mapping_dir(
         validate_study_mapping_schemas.MAPPINGS_DIR
     )
@@ -979,6 +990,7 @@ def main(argv: list[str] | None = None) -> int:
         "source_basis_failures": source_basis_failures,
         "english_corpus_policy_failures": english_corpus_policy_failures,
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,
+        "public_claim_language_failures": public_claim_language_failures,
         "study_mapping_schema_failures": study_mapping_schema_failures,
         "preregistration_placeholder_paths": [
             str(path) for path in preregistration_placeholder_paths

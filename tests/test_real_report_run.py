@@ -49,6 +49,7 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn("scripts/release_hygiene.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_public_release_hygiene.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn("scripts/check_public_claim_language.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("els/project_index.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("README.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/REAL_REPORT_RUN.md", steps_by_id["preflight"]["inputs"])
@@ -461,6 +462,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/check_english_corpus_policy_docs.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_source_basis_audit_queue.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_expanded_strata_tooling.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn("scripts/check_public_claim_language.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/validate_study_mapping_schemas.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_crd_relevance_dictionary.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/classify_centered_relevance.py", steps_by_id["preflight"]["inputs"])
@@ -832,6 +834,7 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn("scripts/release_hygiene.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_public_release_hygiene.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/check_public_claim_language.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("els/project_index.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("README.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/REAL_REPORT_RUN.md", preflight.DEFAULT_REQUIRED_PATHS)
@@ -1047,6 +1050,7 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("source_basis_failures", payload)
             self.assertIn("english_corpus_policy_failures", payload)
             self.assertIn("expanded_strata_tooling_failures", payload)
+            self.assertIn("public_claim_language_failures", payload)
             self.assertIn("study_mapping_schema_failures", payload)
             self.assertIn("preregistration_placeholder_paths", payload)
             self.assertIn("preregistration_placeholder_failures", payload)
@@ -1155,6 +1159,28 @@ class RealReportRunTests(unittest.TestCase):
             )
             self.assertIn(
                 "expanded-strata tooling failures: docs/EXPANDED_STRATA_TOOLING.md:make demo",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_public_claim_language_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_public_claim_language,
+                "validate_public_claim_language",
+                return_value=["docs/FINAL_REPORT.md:10: unsupported claim language `proves`"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["public_claim_language_failures"],
+                ["docs/FINAL_REPORT.md:10: unsupported claim language `proves`"],
+            )
+            self.assertIn(
+                "public claim-language failures: "
+                "docs/FINAL_REPORT.md:10: unsupported claim language `proves`",
                 payload["failures"],
             )
 
