@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a no-input worksheet for future WRR manual-decision records."""
+"""Build a WRR manual-decision worksheet with current record status."""
 
 from __future__ import annotations
 
@@ -32,6 +32,12 @@ FIELDNAMES = [
     "suggested_decision_status_values",
     "suggested_selected_action_values",
     "allowed_without_input",
+    "record_decision_status",
+    "record_selected_action",
+    "record_locked_by",
+    "record_locked_at",
+    "record_evidence_citation",
+    "record_evidence_summary",
 ]
 
 RECORD_FIELDS = [
@@ -50,16 +56,17 @@ RECORD_FIELDS = [
     "notes",
 ]
 
-NO_INPUT_BOUNDARY = (
-    "Header-only current status means no correction, transcription, method change, "
-    "replacement lock, or pair exclusion has been selected."
+NO_MUTATION_BOUNDARY = (
+    "Record rows document manual locks; this worksheet does not mutate source rows, "
+    "method rules, replacement choices, or pair membership."
 )
 
 
 def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(argv)
-    rows = build_worksheet_rows(read_rows(args.register))
+    record_by_id = records_by_decision_id(read_rows_if_exists(args.records_template))
+    rows = build_worksheet_rows(read_rows(args.register), record_by_id)
     write_csv(args.out, rows)
     write_markdown(args.markdown_out, rows, args)
     write_manifest(args.manifest_out, args, rows, started)
@@ -84,15 +91,34 @@ def read_rows(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
-def build_worksheet_rows(register_rows: list[dict[str, str]]) -> list[dict[str, str]]:
-    return [worksheet_row(row) for row in register_rows]
+def read_rows_if_exists(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    return read_rows(path)
 
 
-def worksheet_row(row: dict[str, str]) -> dict[str, str]:
+def records_by_decision_id(record_rows: list[dict[str, str]]) -> dict[str, dict[str, str]]:
+    return {row["decision_id"]: row for row in record_rows if row.get("decision_id")}
+
+
+def build_worksheet_rows(
+    register_rows: list[dict[str, str]],
+    record_by_id: dict[str, dict[str, str]] | None = None,
+) -> list[dict[str, str]]:
+    records = record_by_id or {}
+    return [worksheet_row(row, records) for row in register_rows]
+
+
+def worksheet_row(
+    row: dict[str, str],
+    record_by_id: dict[str, dict[str, str]],
+) -> dict[str, str]:
     lane = row.get("decision_lane", "")
     rank = int(row.get("decision_rank", "0"))
+    decision_id = f"wrr_decision_{rank:03d}"
+    record = record_by_id.get(decision_id, {})
     return {
-        "decision_id": f"wrr_decision_{rank:03d}",
+        "decision_id": decision_id,
         "register_decision_rank": str(rank),
         "decision_lane": lane,
         "review_state": row.get("review_state", ""),
@@ -103,6 +129,12 @@ def worksheet_row(row: dict[str, str]) -> dict[str, str]:
         "suggested_decision_status_values": suggested_status_values(),
         "suggested_selected_action_values": suggested_action_values(lane),
         "allowed_without_input": row.get("allowed_without_input", ""),
+        "record_decision_status": record.get("decision_status", "").strip() or "unrecorded",
+        "record_selected_action": record.get("selected_action", ""),
+        "record_locked_by": record.get("locked_by", ""),
+        "record_locked_at": record.get("locked_at", ""),
+        "record_evidence_citation": record.get("evidence_citation", ""),
+        "record_evidence_summary": record.get("evidence_summary", ""),
     }
 
 
@@ -175,12 +207,16 @@ def write_markdown(
     args: argparse.Namespace,
 ) -> None:
     lane_counts = Counter(row["decision_lane"] for row in rows)
+    record_status_counts = Counter(row["record_decision_status"] for row in rows)
+    action_counts = Counter(row["record_selected_action"] for row in rows if row["record_selected_action"])
+    recorded_count = sum(1 for row in rows if row["record_decision_status"] != "unrecorded")
+    locked_count = record_status_counts["locked"]
     lines = [
         "# WRR Manual Decision Record Worksheet",
         "",
-        "Status: no-input worksheet for future WRR manual decision records.",
-        "It does not populate `data/study/mappings/wrr_manual_decision_records.csv`.",
-        NO_INPUT_BOUNDARY,
+        "Status: worksheet plus current WRR manual decision-record status.",
+        "It reads `data/study/mappings/wrr_manual_decision_records.csv` but does not update it.",
+        NO_MUTATION_BOUNDARY,
         "",
         "Reproduce:",
         "",
@@ -203,23 +239,30 @@ def write_markdown(
         f"- Page-image rows: {lane_counts['page_image_near_match']}.",
         f"- Method/pair-universe rows: {lane_counts['method_pair_universe']}.",
         f"- Target records file: `{args.records_template}`.",
+        f"- Recorded decision rows: {recorded_count}.",
+        f"- Locked decision rows: {locked_count}.",
+        f"- Unrecorded decision rows: {len(rows) - recorded_count}.",
+        f"- Recorded selected actions: {format_counts(action_counts)}.",
         "",
         "## Lock Row Fields",
         "",
         "`" + ",".join(RECORD_FIELDS) + "`",
         "",
-        "The worksheet gives exact `decision_id` and register fields. Evidence, selected action, reviewer, and lock date still require manual input.",
+        "The worksheet gives exact `decision_id`, register fields, and current record fields when a lock row exists.",
+        "Locked rows are evidence records. Working-source changes, replacement locks, and pair exclusions remain absent unless `selected_action` names them.",
         "",
         "## Worksheet",
         "",
-        "| Decision id | Rank | Lane | State | Target | Checklist | Evidence prompt | Suggested actions |",
-        "| --- | ---: | --- | --- | --- | --- | --- | --- |",
+        "| Decision id | Rank | Lane | State | Target | Checklist | Record status | Recorded action | Locked by | Locked at | Evidence prompt | Suggested actions |",
+        "| --- | ---: | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for row in rows:
         lines.append(
             "| `{decision_id}` | {register_decision_rank} | `{decision_lane}` | "
             "`{review_state}` | `{decision_target}` | `{source_checklist}` | "
-            "{evidence_prompt} | `{suggested_selected_action_values}` |".format(
+            "`{record_decision_status}` | `{record_selected_action}` | "
+            "{record_locked_by} | {record_locked_at} | {evidence_prompt} | "
+            "`{suggested_selected_action_values}` |".format(
                 **markdown_row(row)
             )
         )
@@ -235,6 +278,9 @@ def write_manifest(
     started: float,
 ) -> None:
     lane_counts = Counter(row["decision_lane"] for row in rows)
+    record_status_counts = Counter(row["record_decision_status"] for row in rows)
+    action_counts = Counter(row["record_selected_action"] for row in rows if row["record_selected_action"])
+    recorded_count = sum(1 for row in rows if row["record_decision_status"] != "unrecorded")
     payload = {
         "tool": "build_wrr_manual_decision_record_worksheet",
         "edls_version": __version__,
@@ -242,6 +288,11 @@ def write_manifest(
         "duration_seconds": round(time.perf_counter() - started, 6),
         "rows": len(rows),
         "lane_counts": dict(sorted(lane_counts.items())),
+        "recorded_rows": recorded_count,
+        "locked_rows": record_status_counts["locked"],
+        "unrecorded_rows": len(rows) - recorded_count,
+        "record_status_counts": dict(sorted(record_status_counts.items())),
+        "recorded_action_counts": dict(sorted(action_counts.items())),
         "inputs": {
             "register": str(args.register),
             "records_template": str(args.records_template),
@@ -265,6 +316,12 @@ def markdown_row(row: dict[str, str]) -> dict[str, str]:
 
 def markdown_cell(value: object) -> str:
     return str(value).replace("|", "\\|")
+
+
+def format_counts(counts: Counter[str]) -> str:
+    if not counts:
+        return "none"
+    return "; ".join(f"{key}={value}" for key, value in sorted(counts.items()))
 
 
 if __name__ == "__main__":
