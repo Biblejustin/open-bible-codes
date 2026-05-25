@@ -828,9 +828,9 @@ supposed to fail if tracked files are dirty.
 
 Latest validation snapshot after the release-ready make target:
 
-- `make fast-validate` passed, including `python3 -m pytest -q`: 1543 tests,
+- `make fast-validate` passed, including `python3 -m pytest -q`: 1553 tests,
   2 skipped, and 29195 subtests.
-- `make release-ready` passed, including `python3 -m pytest -q`: 1543 tests,
+- `make release-ready` passed, including `python3 -m pytest -q`: 1553 tests,
   2 skipped, and 29195 subtests.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
   passed after the latest pushed guard updates.
