@@ -39,7 +39,8 @@ REQUIRED_PHRASES_BY_DOC = {
         "locks them as 26 `no_source_change` rows and 11 `method_lock` rows",
     ),
     Path("docs/FINAL_REPORT.md"): (
-        "Exact published reproduction remains caveated by source-transcription limits and the 163-distance gap",
+        "Exact published reproduction remains caveated by the 163-distance gap, not by pending source-edit choices",
+        "current manual decision records lock 26 `no_source_change` rows and 11 `method_lock` rows",
         "source-policy term, 43 source-transcription terms, 3 page-image near-match terms, and 11 method/pair-universe terms",
         "row-cluster priorities, page-image near matches, and method/pair-universe counts",
         "source-policy checklist keeps the Chełm source-policy/pair-rule target as a review lane",
@@ -66,7 +67,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "remaining-lane checklist keeps 3 page-image terms and 11 method/pair-universe terms in review lanes",
         "manual decision register consolidates 37 manual-decision inventory rows representing 58 action terms",
         "populated decision-record CSV locks all 37 rows as 26 `no_source_change` decisions and 11 `method_lock` decisions",
-        "exact published WRR reproduction remains caveated by source-transcription limits and the 163-distance gap",
+        "exact published WRR reproduction remains caveated by the 163-distance gap, not pending source-edit choices",
     ),
     Path("docs/CONSOLIDATED_FINDINGS.md"): (
         "The residual handoff is now packetized without selecting corrections",
@@ -99,15 +100,18 @@ FORBIDDEN_PHRASES_BY_DOC = {
     ),
     Path("docs/FINAL_REPORT.md"): (
         "all four blocker areas until source/method locks change",
+        "source-transcription limits and the 163-distance gap",
     ),
     Path("docs/FINAL_REPORT_DRAFT.md"): (
         "all four blocker areas until source/method locks change",
     ),
     Path("docs/FINAL_REPORT_OUTLINE.md"): (
         "all four blocker areas until source/method locks change",
+        "source-transcription limits and the 163-distance gap",
     ),
     Path("docs/CONSOLIDATED_FINDINGS.md"): (
         "all four blocker areas until source/method locks change",
+        "source-transcription limits and the 163-distance gap",
     ),
     Path("docs/REMAINING_WORK_REGISTER.md"): (
         "header-only template for future manual-lock records",

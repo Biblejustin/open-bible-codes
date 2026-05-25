@@ -23,7 +23,8 @@ REQUIRED_PHRASES = (
     "rho0 | 0.000404",
     "Exact published WRR reproduction remains caveated",
     "source-defined 163-distance gap",
-    "primary-source transcription limits",
+    "current manual decision records keep the working source unchanged",
+    "lock method-lane rows",
     "Do not describe this as an exact published WRR reproduction.",
     "source correction selected",
 )

@@ -309,8 +309,8 @@ Remaining exact-published-reproduction pieces:
 - source-defined 163-distance reconciliation remains caveated; the repo treats
   `163` as a cited corrected-distance output count rather than a raw pair
   table;
-- primary-source transcription limits remain visible even though current manual
-  records selected 26 `no_source_change` rows and 11 `method_lock` rows;
+- current manual records selected 26 `no_source_change` rows and 11
+  `method_lock` rows, so source edits are not pending under current evidence;
 - single-term Zacut diagnostics show `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and
   `M$HZKWTW` each individually leave 163 >=5 pairs with gap 0 if excluded, but
   that remains diagnostic count evidence only;
@@ -488,7 +488,8 @@ now has legacy cap-250 diagnostics plus a locked local cap-1000 keep-all
 999,999-permutation run. The locked local run has 182 observed rows, 72 defined
 `c(w,w')` values, and Bonferroni rho0 `0.000404`. The readiness gate now allows
 repo-defined locked-method language while exact published WRR reproduction
-remains caveated by source-transcription limits and the 163-distance gap.
+remains caveated by the source-defined 163-distance gap with current manual
+source records locked unchanged.
 
 All-lane diagnostic follow-up now exists:
 `protocols/wrr_corrected_distance_direct_all_lanes.toml` and
@@ -579,8 +580,8 @@ summary: keep_all_working_source, printed `D(w)` main, reported-program
 `rho0 = 0.000404`, with exact published reproduction caveats attached.
 `docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md` now maps the exact-published
 gap: 163 source-cited defined distances vs 72 current defined distances, simple
-variant residual gap 40, and recommended review order without selecting source
-changes.
+variant residual gap 40, and post-lock reporting boundary without selecting
+source changes.
 `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` now splits out the 11
 method-lane terms: all are OCR-matched, all have zero skip-250 appellation
 counts, all have zero high-cap appellation ordinary hits, and 2 pairs have zero

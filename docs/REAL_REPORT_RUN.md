@@ -268,12 +268,13 @@ The report-run summary should currently say:
 - WRR now has locked local evidence: the accepted cap-1000 keep-all 999,999
   date-label permutation run reports Bonferroni `rho0 = 0.000404` over 182
   observed rows and 72 defined `c(w,w')` values. Exact published WRR
-  reproduction remains caveated by source-transcription limits and the
-  163-distance gap. The explicit readiness gate is tracked in
+  reproduction remains caveated by the source-defined 163-distance gap; current
+  manual decision records keep the working source unchanged and lock
+  method-lane rows. The explicit readiness gate is tracked in
   `docs/WRR_CLAIM_READINESS.md`; `docs/WRR_LOCKED_METHOD_REPORT.md` is the
   compact locked local method summary; `docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`
-  maps the exact-published 163 vs 72 defined-distance gap and recommended
-  review order; `docs/WRR_CLAIM_BLOCKER_PACKET.md`
+  maps the exact-published 163 vs 72 defined-distance gap and post-lock report
+  boundary; `docs/WRR_CLAIM_BLOCKER_PACKET.md`
   records that no current claim-readiness blockers remain under the selected
   local lock policy; `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md` keeps the residual
   source/term/method evidence lanes visible without selecting corrections;

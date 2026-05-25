@@ -168,8 +168,8 @@ Cap-1000 aggregate:
 This locked local run keeps all selected WRR2 source rows, uses the cap-1000
 corrected-distance matrix, and shuffles date-concept labels across 30 concepts.
 It is claim-grade for the repo-defined local lock policy, while exact published
-WRR reproduction remains caveated by the 163-distance gap and source
-transcription limits.
+WRR reproduction remains caveated by the 163-distance gap; current manual
+source records keep the working source unchanged.
 
 Cap-1000 1,000-permutation diagnostic:
 
@@ -230,5 +230,5 @@ Locked cap-1000 999,999-permutation run:
   policy is selected.
 - Cap-1000 corrected-distance and date-permutation output from this grid is the
   locked local evidence path for repo-defined WRR language; exact published WRR
-  reproduction remains caveated by the 163-distance gap and source
-  transcription limits.
+  reproduction remains caveated by the 163-distance gap with current manual
+  source records locked unchanged.

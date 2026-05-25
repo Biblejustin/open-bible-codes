@@ -381,8 +381,9 @@ and review order visible.
 
 That is locked local evidence for the repo-defined protocol, but it is not
 exact published WRR reproduction language. Exact published reproduction remains
-caveated by source-transcription limits and the 163-distance gap. The
-source-policy scenarios are diagnostic only: baseline 165 >=5 pairs, exclude
+caveated by the 163-distance gap, not by pending source-edit choices: current
+manual decision records lock 26 `no_source_change` rows and 11 `method_lock`
+rows. The source-policy scenarios are diagnostic only: baseline 165 >=5 pairs, exclude
 WNP Zacut 157, and exclude all source-review flags 154; no source policy is
 selected.
 

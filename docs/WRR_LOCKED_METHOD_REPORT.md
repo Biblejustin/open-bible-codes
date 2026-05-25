@@ -46,7 +46,7 @@ python3 -m scripts.build_wrr_locked_method_report --method-status reports/wrr_19
 
 ## Exact Published WRR Boundary
 
-- Exact published WRR reproduction remains caveated by the source-defined 163-distance gap and primary-source transcription limits.
+- Exact published WRR reproduction remains caveated by the source-defined 163-distance gap; current manual decision records keep the working source unchanged and lock method-lane rows.
 - Current source-defined gap: defined 72 of 163; gap 91.
 - Source-review and visual-review flags remain diagnostic unless a separate manual source-policy record changes them.
 - Do not describe this as an exact published WRR reproduction.

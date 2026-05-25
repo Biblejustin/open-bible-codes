@@ -792,8 +792,9 @@ expand declared screening lists, widen skip ranges, or promote rows to claims.
 WRR now has locked local evidence: the cap-1000 keep-all 999,999 date-label
 permutation run uses the selected full source universe, observes 182 rows with
 72 defined `c(w,w')` values, and reports Bonferroni `rho0 = 0.000404`. Exact
-published WRR reproduction remains caveated by source-transcription limits and
-the 163-distance gap. Current source-policy scenarios remain diagnostic:
+published WRR reproduction remains caveated by the source-defined
+163-distance gap; current manual decision records keep the working source
+unchanged and lock method-lane rows. Current source-policy scenarios remain diagnostic:
 baseline 165 >=5 pairs, exclude WNP Zacut 157, and exclude all source-review
 flags 154. The single-term Zacut diagnostic narrows the count gap further:
 `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and `M$HZKWTW` each individually leave

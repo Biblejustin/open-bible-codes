@@ -318,7 +318,7 @@ def build_status_rows(
             "next_action": (
                 "Use the source-locked keep_all_working_source universe for local "
                 "locked-method reporting, while keeping the 163-distance gap and "
-                "source-transcription caveats visible for exact published reproduction."
+                "manual no-source-change locks visible for exact published reproduction."
             ),
         },
         {
@@ -881,7 +881,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], args: argparse.Namesp
         "Status: current audit matrix; not an exact published WRR reproduction.",
         "",
         "This file summarizes what the current local WRR work has locked and what",
-        "still needs source or implementation work before any reproduction claim.",
+        "still has a 163-distance gap; current manual records do not authorize source edits.",
         "",
         "## Reproduce",
         "",

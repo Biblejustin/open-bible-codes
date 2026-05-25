@@ -528,7 +528,8 @@ def write_markdown(
             "- Date-label permutation output is locked for the repo-defined keep_all_working_source cap1000 run.",
             "",
             "Exact published WRR reproduction language remains caveated by the",
-            "source-defined 163-distance gap and primary-source transcription limits.",
+            "source-defined 163-distance gap; current manual decision records "
+            "keep the working source unchanged and lock method-lane rows.",
         ]
     )
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

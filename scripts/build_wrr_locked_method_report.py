@@ -403,7 +403,7 @@ def write_markdown(
         "",
         "## Exact Published WRR Boundary",
         "",
-        "- Exact published WRR reproduction remains caveated by the source-defined 163-distance gap and primary-source transcription limits.",
+        "- Exact published WRR reproduction remains caveated by the source-defined 163-distance gap; current manual decision records keep the working source unchanged and lock method-lane rows.",
         f"- Current source-defined gap: {boundary['value']}.",
         "- Source-review and visual-review flags remain diagnostic unless a separate manual source-policy record changes them.",
         "- Do not describe this as an exact published WRR reproduction.",

@@ -181,8 +181,8 @@ Use cautious language:
   selected full source universe, uses the cap-1000 corrected-distance field,
   observes 182 rows and 72 defined `c(w,w')` values, and reports Bonferroni
   `rho0 = 0.000404`;
-- exact published WRR reproduction remains caveated by source-transcription
-  limits and the 163-distance gap;
+- exact published WRR reproduction remains caveated by the 163-distance gap,
+  not pending source-edit choices;
 - locked local readiness gate: `docs/WRR_CLAIM_READINESS.md`, ready for
   repo-defined locked-method language.
 

@@ -216,7 +216,7 @@ Already implemented:
   keep-all run ranks 72 defined observed c-values over 182 observed rows at
   Bonferroni rho0 `0.000404`. This is locked local evidence under the selected
   repo policy, while exact published WRR reproduction remains caveated by the
-  163-distance gap and source-transcription limits; see
+  163-distance gap with current manual source records locked unchanged; see
   `docs/WRR_CROSS_PAIR_GRID.md`.
 - exploratory all-lane corrected-distance diagnostics over all 182 imported
   same-record pairs were run before direct perturbed-letter search and should be

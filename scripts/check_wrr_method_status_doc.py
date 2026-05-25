@@ -13,7 +13,7 @@ DEFAULT_DOC = Path("docs/WRR_METHOD_STATUS.md")
 REQUIRED_PHRASES = (
     "# WRR Method Status",
     "Status: current audit matrix; not an exact published WRR reproduction.",
-    "still needs source or implementation work before any reproduction claim",
+    "still has a 163-distance gap; current manual records do not authorize source edits",
     "| Genesis text stream | `locally_locked` |",
     "| WRR2 term source | `working_source_locked` |",
     "| Pair universe | `source_locked` |",
@@ -22,6 +22,7 @@ REQUIRED_PHRASES = (
     "| Aggregate statistic and permutation | `permutation_locked` |",
     "variant-gap impact best run",
     "variant residual review best run",
+    "manual no-source-change locks visible",
     "Source Anchors",
 )
 
