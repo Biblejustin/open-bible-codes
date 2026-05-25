@@ -72,6 +72,7 @@ from scripts import (
     check_wrr_remaining_lane_evidence_packets_doc,
     check_wrr_remaining_lane_review_checklist_doc,
     check_wrr_source_policy_scenarios_doc,
+    check_wrr_source_audit_doc,
     check_wrr_source_review_queue_doc,
     check_wrr_source_visual_review_notes_doc,
     check_wrr_support_docs_local_lock,
@@ -594,6 +595,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_hypothesis_testing_source_audit_doc.py",
     "scripts/check_research_missing_model_pages_audit_doc.py",
     "scripts/check_wrr_adjacent_source_audit_docs.py",
+    "scripts/check_wrr_source_audit_doc.py",
     "scripts/check_wrr_variant_gap_docs.py",
     "scripts/check_wrr_support_docs_local_lock.py",
     "scripts/build_wrr_claim_blocker_packet.py",
@@ -981,6 +983,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_public_handoff_doc_failures)
         )
 
+    wrr_source_audit_doc_failures = (
+        check_wrr_source_audit_doc.validate_source_audit_doc(
+            check_wrr_source_audit_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_source_audit_doc_failures:
+        failures.append(
+            "WRR source-audit doc failures: "
+            + "; ".join(wrr_source_audit_doc_failures)
+        )
+
     wrr_support_docs_local_lock_failures = (
         check_wrr_support_docs_local_lock.validate_support_docs()
     )
@@ -1336,6 +1349,7 @@ def main(argv: list[str] | None = None) -> int:
             wrr_exact_reproduction_gap_dashboard_doc_failures
         ),
         "wrr_public_handoff_doc_failures": wrr_public_handoff_doc_failures,
+        "wrr_source_audit_doc_failures": wrr_source_audit_doc_failures,
         "wrr_support_docs_local_lock_failures": (
             wrr_support_docs_local_lock_failures
         ),

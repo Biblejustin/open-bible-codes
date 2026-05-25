@@ -1,7 +1,7 @@
 # WRR Source Audit
 
-Status: secondary source path identified; corrected-distance smoke driver built,
-but no claim-grade WRR reproduction yet.
+Status: source audit trail for WRR; local locked-method evidence exists, but
+exact published WRR reproduction remains caveated.
 
 ## Sources Found
 
@@ -1005,20 +1005,26 @@ corrected distance:
   source-count WRR `v/m` rank and the tie-aware methodology-page diagnostic
   rank.
 
-These helpers are tested, but they still need real `c(w,w')` values from a
-future corrected-distance implementation before they can produce WRR `P1..P4`.
-Source-backed implementation notes for that missing corrected-distance layer
-are tracked in `docs/WRR_CORRECTED_DISTANCE_NOTES.md`.
+These helpers are tested and feed the current local locked-method run. The
+selected cap-1000 keep-all run defines 72 `c(w,w')` values over 182 observed
+same-record rows and reports Bonferroni `rho0 = 0.000404`; exact published
+WRR reproduction remains caveated by the source-cited 163-distance gap. Current
+implementation and caveat details are tracked in
+`docs/WRR_CORRECTED_DISTANCE_NOTES.md`.
 
 By default, records with no date rows are skipped because they cannot form a
 rabbi/date pair. Use `--include-undated` only for source auditing.
 
-## Not Yet Claim-Ready
+## Exact Published Reproduction Caveat
 
-Do not move WRR from `under_specified` until:
+The repo now has a locked local reporting path: keep_all_working_source,
+printed `D(w)` as the main rule, reported-program `D(w)` as sensitivity
+output, full selected-universe cap-1000 corrected-distance output, and a
+keep-all cap-1000 999,999 date-label permutation. `docs/WRR_LOCKED_METHOD_REPORT.md`
+is the compact local summary.
 
-- the imported plain-text list is cross-checked against the primary paper table
-  or another citable transcription;
-- the WRR distance metric is implemented and tested against toy fixtures;
-- the permutation procedure is implemented with saved seeds and manifests;
-- the output report labels disagreements with the published result.
+Do not describe that local run as exact published WRR reproduction. The
+source-cited 163 defined distances still do not match the current 72 defined
+`c(w,w')` values, and current manual decision records keep the working source
+unchanged while locking method-lane rows. `docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`
+tracks that residual 163-distance gap and post-lock reporting boundary.

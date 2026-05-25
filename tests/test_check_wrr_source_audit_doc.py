@@ -1,0 +1,47 @@
+from pathlib import Path
+
+from scripts import check_wrr_source_audit_doc as check
+
+
+def test_current_wrr_source_audit_doc_passes() -> None:
+    assert check.validate_source_audit_doc(check.DEFAULT_DOC) == []
+
+
+def test_missing_doc_fails(tmp_path: Path) -> None:
+    failures = check.validate_source_audit_doc(tmp_path / "missing.md")
+
+    assert failures == [f"{tmp_path / 'missing.md'} is missing"]
+
+
+def test_missing_local_lock_boundary_fails(tmp_path: Path) -> None:
+    doc = tmp_path / "WRR_SOURCE_AUDIT.md"
+    text = "\n".join(
+        phrase
+        for phrase in check.REQUIRED_PHRASES
+        if "keep_all_working_source" not in phrase
+    )
+    doc.write_text(text + "\n", encoding="utf-8")
+
+    failures = check.validate_source_audit_doc(doc)
+
+    assert any("keep_all_working_source" in failure for failure in failures)
+
+
+def test_stale_missing_implementation_language_fails(tmp_path: Path) -> None:
+    doc = tmp_path / "WRR_SOURCE_AUDIT.md"
+    doc.write_text(
+        "\n".join(check.REQUIRED_PHRASES)
+        + "\nfuture corrected-distance implementation\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_source_audit_doc(doc)
+
+    assert any("stale phrase" in failure for failure in failures)
+
+
+def test_main_reports_failure(tmp_path: Path, capsys) -> None:
+    code = check.main(["--doc", str(tmp_path / "missing.md")])
+
+    assert code == 1
+    assert "WRR source-audit doc failure" in capsys.readouterr().err
