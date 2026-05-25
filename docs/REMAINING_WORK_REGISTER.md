@@ -35,7 +35,8 @@ remaining-lane/source-policy/manual-decision checklist consolidation, and WRR
 manual decision-record lock propagation, public-handoff lock-status cleanup,
 checklist boundary wording cleanup, public claim-language preflight guarding,
 doc-command reference preflight guarding, final-report support-doc reference
-guarding, and real-report preflight input drift guarding.
+guarding, real-report preflight input drift guarding, and a clean real-report
+protocol rerun/cache check at commit `7d09fca`.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -214,7 +215,7 @@ Current pushed commits for this cleanup:
 
 ### Formal Real Report Rerun
 
-Command completed successfully after the worktree was cleaned:
+Command completed successfully from the clean committed tree at `7d09fca`:
 
 ```bash
 python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
@@ -223,8 +224,14 @@ python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
 Current summary:
 
 - `reports/real_report_run/summary.md`
+- summary commit: `7d09fca`
+- preflight status: passed; support-doc reference failures: 0; protocol input
+  drift failures: 0.
 - local generated report files under `reports/real_report_run/` are ignored by
   Git and record the commit active when the protocol last ran.
+- the slowest step in the clean rerun was `wrr_cross_pair_grid` at 2117.338s;
+  an immediate targeted cache check for that top-level step returned cached in
+  0.007s.
 - after tracked planning-doc commits, rerun
   `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
   if exact local manifest-to-HEAD alignment matters.
@@ -805,7 +812,7 @@ supposed to fail if tracked files are dirty.
 
 Latest validation snapshot after the release-ready make target:
 
-- `make release-ready` passed, including `python3 -m pytest -q`: 1473 tests,
+- `make release-ready` passed, including `python3 -m pytest -q`: 1479 tests,
   2 skipped, and 29195 subtests.
 - `python3 -m scripts.check_expanded_strata_tooling` passed inside
   `make fast-validate`.
@@ -817,6 +824,8 @@ Latest validation snapshot after the release-ready make target:
 - `make local-data-doc-check` passed on the current local ignored `data/raw/`
   and `data/processed/` caches.
 - `make public-release-check` passed from the committed tree.
+- `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
+  passed from the committed tree at `7d09fca`.
 
 Earlier WRR/source-recovery validation snapshot after the WRR gap-reason audit,
 readiness gate,
