@@ -25,6 +25,7 @@ from scripts import (
     check_claim_catalog_doc,
     check_crd_relevance_dictionary,
     check_consolidated_findings_doc,
+    check_critical_omission_followup_docs,
     check_doc_command_references,
     check_english_corpus_policy_docs,
     check_expanded_strata_tooling,
@@ -111,6 +112,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_centered_occurrence_index_doc.py",
     "scripts/check_claim_catalog_doc.py",
     "scripts/check_real_report_run_doc.py",
+    "scripts/check_critical_omission_followup_docs.py",
     "scripts/check_strongest_candidate_deep_dive_doc.py",
     "els/project_index.py",
     "Makefile",
@@ -795,6 +797,15 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(claim_catalog_doc_failures)
         )
 
+    critical_omission_doc_failures = (
+        check_critical_omission_followup_docs.validate_critical_omission_docs(root)
+    )
+    if critical_omission_doc_failures:
+        failures.append(
+            "critical-omission doc failures: "
+            + "; ".join(critical_omission_doc_failures)
+        )
+
     final_report_highlights_doc_failures = (
         check_final_report_highlights_doc.validate_highlights_doc()
     )
@@ -1290,6 +1301,7 @@ def main(argv: list[str] | None = None) -> int:
         "prospective_lane_status_doc_failures": prospective_lane_status_doc_failures,
         "final_report_assembly_doc_failures": final_report_assembly_doc_failures,
         "final_report_highlights_doc_failures": final_report_highlights_doc_failures,
+        "critical_omission_doc_failures": critical_omission_doc_failures,
         "source_basis_failures": source_basis_failures,
         "english_corpus_policy_failures": english_corpus_policy_failures,
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,

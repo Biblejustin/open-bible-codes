@@ -2298,6 +2298,30 @@ inputs = ["docs/A.md", "docs/C.md"]
                 payload["failures"],
             )
 
+    def test_preflight_fails_on_critical_omission_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_critical_omission_followup_docs,
+                "validate_critical_omission_docs",
+                return_value=[
+                    "docs/CRITICAL_OMISSION_BREAKS_NULL.md missing Cautions"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["critical_omission_doc_failures"],
+                ["docs/CRITICAL_OMISSION_BREAKS_NULL.md missing Cautions"],
+            )
+            self.assertIn(
+                "critical-omission doc failures: "
+                "docs/CRITICAL_OMISSION_BREAKS_NULL.md missing Cautions",
+                payload["failures"],
+            )
+
     def test_preflight_fails_on_research_missing_model_pages_doc_failure(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / "preflight.json"

@@ -502,6 +502,7 @@ inputs = [
   "scripts/check_hypothesis_testing_source_audit_doc.py",
   "scripts/check_research_missing_model_pages_audit_doc.py",
   "scripts/check_wrr_adjacent_source_audit_docs.py",
+  "scripts/check_critical_omission_followup_docs.py",
   "scripts/check_wrr_variant_gap_docs.py",
   "scripts/build_wrr_claim_blocker_packet.py",
   "scripts/build_matrix_cluster_candidates.py",
