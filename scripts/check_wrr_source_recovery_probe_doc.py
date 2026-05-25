@@ -10,6 +10,27 @@ from pathlib import Path
 
 DEFAULT_DOC = Path("docs/WRR_SOURCE_RECOVERY_PROBE.md")
 
+EXPECTED_PROBE_LABELS = (
+    "torah_code_research_program_1",
+    "torah_code_research_program_1_shtml",
+    "torah_code_research_program_2",
+    "torah_code_research_program_2_shtml",
+    "torah_code_research_model_overview",
+    "torah_code_research_model_overview_shtml",
+    "torah_code_research_geometric_model_level_1",
+    "torah_code_research_geometric_model_level_1_shtml",
+    "torah_code_research_geometric_model_level_2",
+    "torah_code_research_geometric_model_level_2_shtml",
+    "torah_code_research_geometric_model_level_3",
+    "torah_code_research_geometric_model_level_3_shtml",
+    "torah_code_research_els_model_level_1",
+    "torah_code_research_els_model_level_1_shtml",
+    "torah_code_research_els_model_level_2",
+    "torah_code_research_els_model_level_2_shtml",
+    "torah_code_research_els_model_level_3",
+    "torah_code_research_els_model_level_3_shtml",
+)
+
 REQUIRED_PHRASES = (
     "# WRR Source Recovery Probe",
     "Status: live-source recovery probe only.",
@@ -47,11 +68,27 @@ def validate_source_recovery_probe_doc(doc: Path) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
     text = doc.read_text(encoding="utf-8")
-    return [
+    failures = [
         f"{doc} missing phrase: {phrase}"
         for phrase in REQUIRED_PHRASES
         if phrase not in text
     ]
+    present_labels = probe_labels(text)
+    missing_labels = sorted(set(EXPECTED_PROBE_LABELS) - present_labels)
+    if missing_labels:
+        failures.append(
+            f"{doc} missing probe labels: " + ", ".join(missing_labels)
+        )
+    return failures
+
+
+def probe_labels(text: str) -> set[str]:
+    labels: set[str] = set()
+    for line in text.splitlines():
+        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+        if len(cells) >= 9 and cells[0].startswith("torah_code_research_"):
+            labels.add(cells[0])
+    return labels
 
 
 if __name__ == "__main__":

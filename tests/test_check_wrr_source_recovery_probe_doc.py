@@ -22,6 +22,19 @@ def test_missing_probe_only_status_fails(tmp_path: Path) -> None:
     assert any("live-source recovery probe only" in failure for failure in failures)
 
 
+def test_missing_probe_label_fails(tmp_path: Path) -> None:
+    doc = tmp_path / "WRR_SOURCE_RECOVERY_PROBE.md"
+    text = check.DEFAULT_DOC.read_text(encoding="utf-8").replace(
+        "| torah_code_research_program_1_shtml |",
+        "| missing_program_1_shtml |",
+    )
+    doc.write_text(text, encoding="utf-8")
+
+    failures = check.validate_source_recovery_probe_doc(doc)
+
+    assert any("torah_code_research_program_1_shtml" in failure for failure in failures)
+
+
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
     missing = tmp_path / "missing.md"
 
