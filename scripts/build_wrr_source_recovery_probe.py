@@ -27,10 +27,13 @@ DEFAULT_MANIFEST_OUT = Path("reports/wrr_source_recovery_probe/source_recovery_p
 
 EXPECTED_LABELS = {
     "torah_code_research_program_1": "Research Program",
+    "torah_code_research_program_1_shtml": "Research Program",
     "torah_code_research_program_2": "Research Program",
+    "torah_code_research_program_2_shtml": "Research Program",
     "torah_code_research_model_overview": "The Model",
     "torah_code_research_model_overview_shtml": "The Model",
     "torah_code_research_geometric_model_level_1": "The Geometric Model",
+    "torah_code_research_geometric_model_level_1_shtml": "The Geometric Model",
     "torah_code_research_geometric_model_level_2": "Geometric Model Level 2",
     "torah_code_research_geometric_model_level_2_shtml": "Geometric Model Level 2",
     "torah_code_research_geometric_model_level_3": "Geometric Model Level 3",

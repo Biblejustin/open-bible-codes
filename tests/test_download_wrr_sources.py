@@ -149,10 +149,13 @@ class DownloadWrrSourcesTests(unittest.TestCase):
                 self.assertEqual(source_filename(label, "https://example.test/source.bin"), expected)
         research_names = {
             "torah_code_research_program_1": "torah_code_research_program_1.html",
+            "torah_code_research_program_1_shtml": "torah_code_research_program_1_shtml.html",
             "torah_code_research_program_2": "torah_code_research_program_2.html",
+            "torah_code_research_program_2_shtml": "torah_code_research_program_2_shtml.html",
             "torah_code_research_model_overview": "torah_code_research_model_overview.html",
             "torah_code_research_model_overview_shtml": "torah_code_research_model_overview_shtml.html",
             "torah_code_research_geometric_model_level_1": "torah_code_research_geometric_model_level_1.html",
+            "torah_code_research_geometric_model_level_1_shtml": "torah_code_research_geometric_model_level_1_shtml.html",
             "torah_code_research_geometric_model_level_2": "torah_code_research_geometric_model_level_2.html",
             "torah_code_research_geometric_model_level_2_shtml": "torah_code_research_geometric_model_level_2_shtml.html",
             "torah_code_research_geometric_model_level_3": "torah_code_research_geometric_model_level_3.html",
@@ -216,9 +219,12 @@ class DownloadWrrSourcesTests(unittest.TestCase):
         self.assertIn("torah_code_experiment_sons_of_haman_data", REQUIRED_MANIFEST_LABELS)
         self.assertIn("torah_code_experiment_ark_code", REQUIRED_MANIFEST_LABELS)
         self.assertIn("torah_code_research_program_1", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_research_program_1_shtml", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_research_program_2_shtml", REQUIRED_MANIFEST_LABELS)
         self.assertIn("torah_code_research_model_overview", REQUIRED_MANIFEST_LABELS)
         self.assertIn("torah_code_research_model_overview_shtml", REQUIRED_MANIFEST_LABELS)
         self.assertIn("torah_code_research_els_model_level_1", REQUIRED_MANIFEST_LABELS)
+        self.assertIn("torah_code_research_geometric_model_level_1_shtml", REQUIRED_MANIFEST_LABELS)
         self.assertIn("torah_code_research_geometric_model_level_2", REQUIRED_MANIFEST_LABELS)
         self.assertIn("torah_code_research_geometric_model_level_2_shtml", REQUIRED_MANIFEST_LABELS)
         self.assertIn("torah_code_research_els_model_level_3", REQUIRED_MANIFEST_LABELS)

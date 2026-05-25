@@ -215,8 +215,9 @@ python3 -m scripts.run_protocol protocols/wrr_source_recovery_probe.toml --resum
 This live-refreshes selected Torah-code research labels into the isolated
 ignored `reports/wrr_source_recovery_probe/` directory and writes
 `docs/WRR_SOURCE_RECOVERY_PROBE.md`. It does not overwrite cached
-`reports/wrr_1994/` source files. It includes `.html` labels and
-stale-indexed `.shtml` alternates.
+`reports/wrr_1994/` source files. It checks the same 18 research URL variants
+used by the Wayback probe, including `.html` labels and stale-indexed `.shtml`
+alternates.
 
 WRR Wayback source recovery probe:
 
