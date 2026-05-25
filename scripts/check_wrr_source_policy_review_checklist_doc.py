@@ -25,6 +25,7 @@ REQUIRED_PHRASES = (
     "`reports/wrr_1994/wnp_en.html:608-619`",
     "Citable primary source/pair-rule evidence is required before changing the working source.",
     "The record must say whether Chełm forms belong in the Hebrew source cell, a source-policy note, or neither.",
+    "Preserve the working source unless a decision record selects a change.",
 )
 
 FORBIDDEN_PHRASES = (

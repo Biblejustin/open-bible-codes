@@ -48,4 +48,4 @@ python3 -m scripts.build_wrr_remaining_lane_review_checklist --packet reports/wr
 
 - Page-image near-match rows need cited page-image transcription evidence.
 - Method rows need an explicit method or pair-universe explanation for zero ordinary hits.
-- Preserve the working source until that decision record exists.
+- Preserve the working source unless a decision record selects a change.

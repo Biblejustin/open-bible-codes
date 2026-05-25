@@ -200,7 +200,7 @@ def write_markdown(
             "",
             "- Citable primary source/pair-rule evidence is required before changing the working source.",
             "- The record must say whether Chełm forms belong in the Hebrew source cell, a source-policy note, or neither.",
-            "- Preserve the working source until that decision record exists.",
+            "- Preserve the working source unless a decision record selects a change.",
             "",
         ]
     )

@@ -26,6 +26,7 @@ REQUIRED_PHRASES = (
     "| 4 | `method_or_pair_universe_review` | `pending_method_pair_universe_lock` | `wrr2_02_app_03` |",
     "Page-image near-match rows need cited page-image transcription evidence.",
     "Method rows need an explicit method or pair-universe explanation for zero ordinary hits.",
+    "Preserve the working source unless a decision record selects a change.",
 )
 
 FORBIDDEN_PHRASES = (

@@ -25,6 +25,7 @@ REQUIRED_PHRASES = (
     "review row image once before individual term decisions",
     "Cite the primary row image or source-list row transcription used.",
     "Record keep, correct, exclude, or method/pair-universe decision outside this checklist.",
+    "Preserve the working source unless a decision record selects a change.",
 )
 
 FORBIDDEN_PHRASES = (

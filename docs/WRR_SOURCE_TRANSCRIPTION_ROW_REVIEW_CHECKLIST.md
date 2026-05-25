@@ -50,4 +50,4 @@ python3 -m scripts.build_wrr_source_transcription_row_review_checklist --row-sum
 - Cite the primary row image or source-list row transcription used.
 - State row and column alignment evidence.
 - Record keep, correct, exclude, or method/pair-universe decision outside this checklist.
-- Preserve the working source until that decision record exists.
+- Preserve the working source unless a decision record selects a change.
