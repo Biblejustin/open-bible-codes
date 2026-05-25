@@ -109,5 +109,8 @@ before lock:
   correction method;
 - preregistration, lock manifest, and preflight before any result-producing run.
 
-Until that exists, the next result-producing work should use another lane from
-`docs/PROSPECTIVE_STUDY_READINESS.md`.
+Until that exists, do not run another Greek surface result-producing study from
+the existing expanded pool. `docs/PROSPECTIVE_STUDY_READINESS.md` currently
+records that no tracked lane remains `ready_for_preflight`; new
+result-producing work needs a fresh term/source target set and a clean
+prospective lock.

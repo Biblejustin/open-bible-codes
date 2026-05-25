@@ -323,11 +323,17 @@ def test_next_lock_tracks_completed_clean_lock_expansion() -> None:
 
 def test_prospective_readiness_marks_current_profiles_closed() -> None:
     readiness = Path("docs/PROSPECTIVE_STUDY_READINESS.md").read_text(encoding="utf-8")
+    second_cohort = Path("docs/GREEK_SURFACE_SECOND_COHORT_READINESS.md").read_text(
+        encoding="utf-8"
+    )
     manifests = Path("docs/STUDY_LOCK_MANIFESTS.md").read_text(encoding="utf-8")
 
     assert "There is no remaining `ready_for_preflight`" in readiness
     assert "lane" in readiness
     assert "Do not rerun a completed profile as a claim lane" in readiness
+    assert "no tracked lane remains `ready_for_preflight`" in second_cohort
+    assert "fresh term/source target set and a clean" in second_cohort
+    assert "use another lane" not in second_cohort
     assert "historical/status records" in manifests
 
 
