@@ -1,5 +1,5 @@
 name = "greek_lexicon_extension_prospective_lock"
-description = "Non-result lock packet for fresh Strong's Greek lexicon extension study."
+description = "Historical non-result lock packet for the completed Strong's Greek lexicon extension study."
 manifest_out = "reports/study_locks/greek_lexicon_extension_prospective_lock.protocol_run.json"
 max_parallel = 1
 progress_interval_seconds = 15
@@ -137,7 +137,7 @@ outputs = [
 
 [[steps]]
 id = "lock_manifest"
-description = "Build preregistration lock manifest for the future result-producing run."
+description = "Build historical preregistration lock manifest for the completed result run."
 argv = [
   "-m", "scripts.build_study_lock_manifest",
   "--name", "greek_lexicon_extension_prospective",

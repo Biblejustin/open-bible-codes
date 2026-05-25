@@ -116,6 +116,8 @@ def test_greek_lexicon_preregistration_is_historical_not_future_run() -> None:
         encoding="utf-8"
     )
     source = Path("docs/GREEK_LEXICON_PROSPECTIVE_SOURCE.md").read_text(encoding="utf-8")
+    protocol = load_protocol("protocols/greek_lexicon_extension_prospective_lock.toml")
+    lock_step = next(step for step in protocol["steps"] if step["id"] == "lock_manifest")
 
     assert "historical preregistration for a completed lane" in text
     assert "completed context-cautioned review material" in text
@@ -126,6 +128,9 @@ def test_greek_lexicon_preregistration_is_historical_not_future_run() -> None:
     assert "historical source packet for the completed Greek lexicon extension" in source
     assert "completed result report" in source
     assert "future result-producing study" not in source
+    assert "completed Strong's Greek lexicon extension study" in protocol["description"]
+    assert "completed result run" in lock_step["description"]
+    assert "future result-producing run" not in lock_step["description"]
 
 
 def test_greek_surface_context_review_tracks_manual_read() -> None:
