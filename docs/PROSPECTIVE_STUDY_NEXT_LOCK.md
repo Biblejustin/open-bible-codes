@@ -1,7 +1,7 @@
 # Next Prospective Study Lock
 
-Status: planning lock for the next result-producing phase. This document does
-not run a search and does not promote any result to a claim.
+Status: historical planning lock and closeout map. This document does not run
+a search and does not promote any result to a claim.
 
 Initial planning lock recorded after report assembly commit: `ce39e9a`.
 Current lane status is generated from `configs/prospective_study_lanes.json`
@@ -9,15 +9,15 @@ in `docs/PROSPECTIVE_LANE_STATUS.md`.
 
 ## Purpose
 
-The current report has enough source-audit material. The next useful step is
-not another broad source expansion. It is a small locked candidate bundle with
-fixed sources, fixed rules, and explicit labels separating:
+The current report has enough source-audit material. This document records the
+candidate bundle and its completed follow-up lanes, with fixed sources, fixed
+rules, and explicit labels separating:
 
 1. occurrence-first findings that should be listed because they happened;
 2. post-discovery review candidates that can be stress-tested but cannot become
    original prospective discoveries;
-3. one future prospective lane that must be locked before it produces new
-   results.
+3. completed prospective lanes that must not be rebranded as new discoveries;
+4. the current boundary that no tracked lane remains `ready_for_preflight`.
 
 ## Non-Negotiable Boundaries
 
@@ -29,6 +29,8 @@ fixed sources, fixed rules, and explicit labels separating:
 - Source-version absence is data, not automatic failure.
 - Post-discovery rows may become review candidates, not original discoveries.
 - Source-audit pages define future tests; they are not findings.
+- New result-producing work now needs a fresh term/source target set and a
+  clean prospective lock.
 
 ## Track 1: Occurrence-First Findings
 

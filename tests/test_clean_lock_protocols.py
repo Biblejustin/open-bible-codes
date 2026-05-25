@@ -316,9 +316,13 @@ def test_consolidated_findings_include_clean_lock_closeout() -> None:
 def test_next_lock_tracks_completed_clean_lock_expansion() -> None:
     text = Path("docs/PROSPECTIVE_STUDY_NEXT_LOCK.md").read_text(encoding="utf-8")
 
+    assert "historical planning lock and closeout map" in text
+    assert "no tracked lane remains `ready_for_preflight`" in text
+    assert "fresh term/source target set and a" in text
     assert "## Track 4: Completed Clean-Lock Expansion" in text
     assert "0 Greek surface rows and 0 Hebrew concordance rows" in text
     assert "`prospective_controlled_review_candidate`" in text
+    assert "one future prospective lane" not in text
 
 
 def test_prospective_readiness_marks_current_profiles_closed() -> None:
