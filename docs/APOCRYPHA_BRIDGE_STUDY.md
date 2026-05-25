@@ -1,13 +1,13 @@
 # Apocrypha Bridge-Completion Study
 
-Status: planned follow-on study after the current formal report run is finished
-and frozen.
+Status: completed bridge-completion review layer over declared
+apocrypha/deuterocanon source paths. This is review material, not claim
+evidence.
 
 ## Purpose
 
-The current report set should remain a baseline over the already-declared
-corpora. After that baseline is frozen, the next apocrypha/deuterocanon study
-should ask two separate questions:
+The current report set treats this as a tracked review layer over the
+already-declared corpora. It keeps two separate questions apart:
 
 1. Which ordinary ELS, centered, surface-context, and extension patterns appear
    inside apocrypha/deuterocanon witnesses?
@@ -165,7 +165,7 @@ For each candidate, preserve letter-level provenance:
 
 ## Required Outputs
 
-The bridge study should produce:
+The bridge study records these output classes:
 
 - expanded-source manifest with source checksums and insertion order;
 - full ordinary ELS hit counts for apocrypha witnesses;

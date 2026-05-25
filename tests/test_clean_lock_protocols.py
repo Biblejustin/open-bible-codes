@@ -191,6 +191,18 @@ def test_final_report_includes_critical_omission_null_read() -> None:
     assert "TR-vs-SBLGNT omission breakage" in outline
 
 
+def test_apocrypha_bridge_study_is_current_review_layer() -> None:
+    text = Path("docs/APOCRYPHA_BRIDGE_STUDY.md").read_text(encoding="utf-8")
+    normalized_text = " ".join(text.split())
+
+    assert "completed bridge-completion review layer" in normalized_text
+    assert "already-declared corpora" in normalized_text
+    assert "The bridge study records these output classes" in normalized_text
+    assert "planned follow-on study" not in normalized_text
+    assert "After that baseline is frozen" not in normalized_text
+    assert "The bridge study should produce" not in normalized_text
+
+
 def test_critical_omission_root_doc_keeps_null_interpretation_visible() -> None:
     text = Path("docs/CRITICAL_OMISSION_BREAKS.md").read_text(encoding="utf-8")
     normalized_text = " ".join(text.split())
