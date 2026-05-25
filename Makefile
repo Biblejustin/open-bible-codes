@@ -39,6 +39,7 @@ lint:
 fast-validate: test indexes
 	git diff --check
 	python3 -m scripts.check_public_release_hygiene --allow-dirty
+	python3 -m scripts.check_expanded_strata_tooling
 	$(MAKE) local-data-doc-check
 
 public-release-check:

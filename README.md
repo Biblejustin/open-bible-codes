@@ -66,8 +66,9 @@ make fast-validate
 ```
 
 This runs the unit suite, regenerates documentation/protocol indexes, checks
-diff whitespace, runs dirty-tree-safe release hygiene, and verifies local data
-doc references against the current ignored source caches.
+diff whitespace, runs dirty-tree-safe release hygiene, validates
+expanded-strata operator tooling, and verifies local data doc references
+against the current ignored source caches.
 
 Optional local data doc check, after bootstrapping ignored source caches:
 

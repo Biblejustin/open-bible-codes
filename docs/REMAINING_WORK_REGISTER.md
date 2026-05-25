@@ -786,6 +786,8 @@ Latest validation snapshot after the fast-validation make target:
 
 - `make fast-validate` passed, including `python3 -m pytest -q`: 1462 tests,
   2 skipped, and 29195 subtests.
+- `python3 -m scripts.check_expanded_strata_tooling` passed inside
+  `make fast-validate`.
 - `make local-data-doc-check` passed on the current local ignored `data/raw/`
   and `data/processed/` caches.
 - `make public-release-check` passed from the committed tree.
