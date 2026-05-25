@@ -36,16 +36,16 @@ manual decision-record lock propagation, public-handoff lock-status cleanup,
 checklist boundary wording cleanup, public claim-language preflight guarding,
 doc-command reference preflight guarding, final-report support-doc reference
 guarding, real-report preflight input drift guarding, a clean real-report
-protocol rerun/cache check at commit `7d09fca`, and manual-review packet-shape
+protocol rerun/cache check at commit `4d9f2c0`, and manual-review packet-shape
 drift guarding, plus prospective-readiness, next-lock, and study-lock workflow
 doc guard coverage, Greek second-cohort readiness guarding, consolidated
 findings prospective-boundary guarding, generated lane-status freshness
 guarding, final-report assembly-boundary guarding, final-report highlights
 freshness guarding, centered-occurrence index freshness guarding, strongest
 candidate deep-dive freshness guarding, claim-catalog summary guarding,
-real-report run doc guarding, and imported preflight check-script input
-guarding, plus research missing model pages audit doc guarding and WRR-adjacent
-source audit family doc guarding.
+real-report run doc guarding, imported preflight check-script input guarding,
+research missing model pages audit doc guarding, WRR-adjacent source audit
+family doc guarding, and real-report source-audit preflight documentation.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -227,11 +227,15 @@ Current pushed commits for this cleanup:
 - `ae73a38` Guard real report run doc.
 - `8b8655b` Guard preflight check script inputs.
 - `d7fd47e` Guard research missing model audit doc.
+- `18a8ee1` Refresh register for missing model guard.
 - `205028f` Guard adjacent source audit docs.
+- `4637e44` Refresh register for source audit guards.
+- `f0dbc31` Refresh validation snapshot count.
+- `4d9f2c0` Document source audit preflight guards.
 
 ### Formal Real Report Rerun
 
-Command completed successfully from the clean committed tree at `7d09fca`:
+Command completed successfully from the clean committed tree at `4d9f2c0`:
 
 ```bash
 python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
@@ -240,14 +244,14 @@ python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
 Current summary:
 
 - `reports/real_report_run/summary.md`
-- summary commit: `7d09fca`
+- summary commit: `4d9f2c0`
 - preflight status: passed; support-doc reference failures: 0; protocol input
   drift failures: 0.
 - local generated report files under `reports/real_report_run/` are ignored by
   Git and record the commit active when the protocol last ran.
-- the slowest step in the clean rerun was `wrr_cross_pair_grid` at 2117.338s;
-  an immediate targeted cache check for that top-level step returned cached in
-  0.007s.
+- the committed-tree resume reused cached upstream reports and regenerated the
+  final summary; slowest top-level steps were preflight, `wrr_audit_counts`,
+  `real_report_summary`, and `wrr_cross_pair_grid`, all under 4 seconds.
 - after tracked planning-doc commits, rerun
   `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
   if exact local manifest-to-HEAD alignment matters.
@@ -845,7 +849,7 @@ Latest validation snapshot after the release-ready make target:
   and `data/processed/` caches.
 - `make public-release-check` passed from the committed tree.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
-  passed from the committed tree at `7d09fca`.
+  passed from the committed tree at `4d9f2c0`.
 
 Earlier WRR/source-recovery validation snapshot after the WRR gap-reason audit,
 readiness gate,
