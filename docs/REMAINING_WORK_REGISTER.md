@@ -36,7 +36,7 @@ manual decision-record lock propagation, public-handoff lock-status cleanup,
 checklist boundary wording cleanup, public claim-language preflight guarding,
 doc-command reference preflight guarding, final-report support-doc reference
 guarding, real-report preflight input drift guarding, a clean real-report
-protocol rerun/cache check at commit `51fcee2`, and manual-review packet-shape
+protocol rerun/cache check at commit `75c1948`, and manual-review packet-shape
 drift guarding, plus prospective-readiness, next-lock, and study-lock workflow
 doc guard coverage, Greek second-cohort readiness guarding, consolidated
 findings prospective-boundary guarding, generated lane-status freshness
@@ -242,10 +242,12 @@ Current pushed commits for this cleanup:
 - `11a0938` Refresh WRR support docs for locked local method.
 - `cd781fa` Refresh register for WRR support docs.
 - `51fcee2` Guard WRR support local lock docs.
+- `1791867` Refresh register for WRR support guard.
+- `75c1948` Guard WRR source audit local lock boundary.
 
 ### Formal Real Report Rerun
 
-Command completed successfully from the clean committed tree at `51fcee2`:
+Command completed successfully from the clean committed tree at `75c1948`:
 
 ```bash
 python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
@@ -254,7 +256,7 @@ python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
 Current summary:
 
 - `reports/real_report_run/summary.md`
-- summary commit: `51fcee2`
+- summary commit: `75c1948`
 - preflight status: passed; support-doc reference failures: 0; protocol input
   drift failures: 0.
 - local generated report files under `reports/real_report_run/` are ignored by
@@ -859,7 +861,7 @@ Latest validation snapshot after the release-ready make target:
   and `data/processed/` caches.
 - `make public-release-check` passed from the committed tree.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
-  passed from the committed tree at `51fcee2`.
+  passed from the committed tree at `75c1948`.
 
 Earlier WRR/source-recovery validation snapshot after the WRR gap-reason audit,
 readiness gate,
