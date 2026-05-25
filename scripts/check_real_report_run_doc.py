@@ -19,6 +19,9 @@ REQUIRED_PHRASES = (
     "final report highlights markdown matches the deterministic builder output",
     "centered occurrence index markdown matches the deterministic builder output",
     "strongest candidate deep-dive markdown matches the deterministic builder output",
+    "hypothesis-testing source audit doc keeps the source-status/no-result boundary visible",
+    "research missing model pages audit doc keeps the missing level-2/3 model page boundary visible",
+    "WRR adjacent source audit and simulation docs keep source-shape and simulation-only boundaries visible",
 )
 
 

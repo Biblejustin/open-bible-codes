@@ -193,6 +193,12 @@ It requires:
 - WRR remaining-lane checklist keeps 3 page-image terms and 11
   method/pair-universe terms in review lanes with required decision-record
   fields;
+- hypothesis-testing source audit doc keeps the source-status/no-result
+  boundary visible;
+- research missing model pages audit doc keeps the missing level-2/3 model page
+  boundary visible;
+- WRR adjacent source audit and simulation docs keep source-shape and
+  simulation-only boundaries visible;
 - WRR manual decision register consolidates 37 manual-decision inventory rows,
   representing 58 action terms, 59 residual pair links, and 40
   minimum-frontier pair links without selecting corrections or exclusions;
