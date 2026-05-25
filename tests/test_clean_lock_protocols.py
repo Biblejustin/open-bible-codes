@@ -162,6 +162,18 @@ def test_readme_tracks_public_final_report_read() -> None:
     assert "protocols/critical_omission_followups.toml" in text
 
 
+def test_public_baseline_tracks_critical_omission_null_read() -> None:
+    text = Path("docs/PUBLIC_BASELINE_FINDINGS.md").read_text(encoding="utf-8")
+    normalized_text = " ".join(text.split())
+
+    assert "## Critical Omission Follow-Up Read" in text
+    assert "558 observed broken TR hits" in normalized_text
+    assert "1000-shuffle null median 657" in normalized_text
+    assert "`p_ge=0.9910`" in text
+    assert "not break more TR ELS hits than matched random verse blocks" in normalized_text
+    assert "`docs/CRITICAL_OMISSION_BREAKS_PERICOPE_OVERRIDE.md`" in text
+
+
 def test_final_report_tracks_wrr_single_term_source_policy_impacts() -> None:
     report_paths = [
         Path("docs/FINAL_REPORT.md"),

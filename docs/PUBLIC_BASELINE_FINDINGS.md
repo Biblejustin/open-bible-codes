@@ -26,7 +26,7 @@ Run:
 | `word_counts` | 11.230s | cached lexical/morphology-style count reports |
 | `related_name_pairs` | 8.279s | related modern-name proximity |
 | `extension_paired_controls` | 7.682s | filtered extension paired controls |
-| `critical_omission_breaks` | 7.269s | TR hits affected by SBLGNT omitted verses |
+| `critical_omission_breaks` | 7.269s | TR hits affected by SBLGNT omitted verses; interpret with follow-up null caution |
 | `surface_extensions_sblgnt` | 6.246s | same-skip extension scan |
 | `surface_extensions_tr_nt` | 6.234s | same-skip extension scan |
 | `synthetic_extension_baselines` | 5.807s | same-length synthetic Greek extension baselines |
@@ -85,6 +85,9 @@ Practical interpretation:
 - Abbreviations such as United Nations acronym forms produce very large counts.
 - Longer phrases mostly produce zero hits at the current skip range.
 - Filtered extension tops are manageable and readable; the `δοξα` (doxa; English: glory) exact-center overlap remains one strong review row, and the broader exact-center cohort adds `αιμα` (haima; English: blood) and `υιος` (huios; English: son) screens.
+- Critical-omission breakage is reproducible as source-variation material, but
+  follow-up controls make the raw count weak: 558 observed broken TR hits
+  against a 1000-shuffle null median of 657, with `p_ge=0.9910`.
 - No current result should be promoted as a claim without a stronger null test.
 
 ## Modern And Geopolitical Terms
@@ -241,6 +244,27 @@ Read:
 - No row should be treated as robustly significant from the current controls.
 - The best p-values are screening artifacts from small control counts and large search space.
 - Increase controls before making any external claim.
+
+## Critical Omission Follow-Up Read
+
+The public-baseline `critical_omission_breaks` step is retained as a
+source-variation screen. Its later follow-up protocol runs the same
+break-detection engine through reverse, cross-tradition, length-stratified,
+null, and disputed-passage override checks.
+
+Current null result: 558 observed broken TR hits versus 1000-shuffle null
+median 657, with `p_ge=0.9910`. That means the actual SBLGNT-omitted blocks do
+not break more TR ELS hits than matched random verse blocks in this run. Treat
+raw omission-break counts as audit material, not significance evidence.
+
+Tracked reports:
+
+- `docs/CRITICAL_OMISSION_BREAKS.md`
+- `docs/CRITICAL_OMISSION_BREAKS_NULL.md`
+- `docs/CRITICAL_OMISSION_BREAKS_REVERSE.md`
+- `docs/CRITICAL_OMISSION_BREAKS_CROSS_TRADITION.md`
+- `docs/CRITICAL_OMISSION_BREAKS_LENGTH_STRATIFIED.md`
+- `docs/CRITICAL_OMISSION_BREAKS_PERICOPE_OVERRIDE.md`
 
 ## Best Next Targets
 
