@@ -33,7 +33,8 @@ source-recovery probing/guarding, English corpus deferred-policy guarding, WRR
 public handoff doc guarding, WRR
 remaining-lane/source-policy/manual-decision checklist consolidation, and WRR
 manual decision-record lock propagation, public-handoff lock-status cleanup,
-and checklist boundary wording cleanup.
+checklist boundary wording cleanup, public claim-language preflight guarding,
+and doc-command reference preflight guarding.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -291,6 +292,21 @@ python3 -m scripts.check_public_claim_language
 
 Expected result: no unsupported public-facing reader-doc hits. Fenced code
 examples are ignored by the checker.
+
+### Doc Command Reference Hygiene
+
+Goal: keep documented commands and source-path references executable from the
+public checkout.
+
+Hygiene command:
+
+```bash
+python3 -m scripts.check_doc_command_references
+```
+
+Expected result: no missing documented script modules, protocol/config/term
+files, mapping CSVs, or unmarked report references. This check now runs inside
+the formal real-report preflight.
 
 ## Highest-Value Non-Blocked Work
 

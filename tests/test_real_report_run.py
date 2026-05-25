@@ -50,6 +50,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/release_hygiene.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_public_release_hygiene.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_public_claim_language.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn("scripts/check_doc_command_references.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("els/project_index.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("README.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/REAL_REPORT_RUN.md", steps_by_id["preflight"]["inputs"])
@@ -835,6 +836,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/release_hygiene.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_public_release_hygiene.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_public_claim_language.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/check_doc_command_references.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("els/project_index.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("README.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/REAL_REPORT_RUN.md", preflight.DEFAULT_REQUIRED_PATHS)
@@ -1051,6 +1053,7 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn("english_corpus_policy_failures", payload)
             self.assertIn("expanded_strata_tooling_failures", payload)
             self.assertIn("public_claim_language_failures", payload)
+            self.assertIn("doc_command_reference_failures", payload)
             self.assertIn("study_mapping_schema_failures", payload)
             self.assertIn("preregistration_placeholder_paths", payload)
             self.assertIn("preregistration_placeholder_failures", payload)
@@ -1181,6 +1184,30 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(
                 "public claim-language failures: "
                 "docs/FINAL_REPORT.md:10: unsupported claim language `proves`",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_doc_command_reference_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_doc_command_references,
+                "validate_doc_command_references",
+                return_value=[
+                    "docs/REAL_REPORT_RUN.md:10: missing script module scripts.demo"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["doc_command_reference_failures"],
+                ["docs/REAL_REPORT_RUN.md:10: missing script module scripts.demo"],
+            )
+            self.assertIn(
+                "doc command-reference failures: "
+                "docs/REAL_REPORT_RUN.md:10: missing script module scripts.demo",
                 payload["failures"],
             )
 

@@ -21,6 +21,7 @@ from els.project_index import (
 )
 from scripts import (
     check_crd_relevance_dictionary,
+    check_doc_command_references,
     check_english_corpus_policy_docs,
     check_expanded_strata_tooling,
     check_hypothesis_testing_source_audit_doc,
@@ -78,6 +79,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/release_hygiene.py",
     "scripts/check_public_release_hygiene.py",
     "scripts/check_public_claim_language.py",
+    "scripts/check_doc_command_references.py",
     "els/project_index.py",
     "Makefile",
     "README.md",
@@ -609,6 +611,15 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(public_claim_language_failures)
         )
 
+    doc_command_reference_failures = (
+        check_doc_command_references.validate_doc_command_references(root)
+    )
+    if doc_command_reference_failures:
+        failures.append(
+            "doc command-reference failures: "
+            + "; ".join(doc_command_reference_failures)
+        )
+
     study_mapping_schema_failures = validate_study_mapping_schemas.validate_mapping_dir(
         validate_study_mapping_schemas.MAPPINGS_DIR
     )
@@ -991,6 +1002,7 @@ def main(argv: list[str] | None = None) -> int:
         "english_corpus_policy_failures": english_corpus_policy_failures,
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,
         "public_claim_language_failures": public_claim_language_failures,
+        "doc_command_reference_failures": doc_command_reference_failures,
         "study_mapping_schema_failures": study_mapping_schema_failures,
         "preregistration_placeholder_paths": [
             str(path) for path in preregistration_placeholder_paths
