@@ -454,6 +454,18 @@ The existing expanded Greek surface pool cannot support a second clean
 length >= 5 prospective cohort; see
 `docs/GREEK_SURFACE_SECOND_COHORT_READINESS.md`.
 
+Fresh Greek lexicon prospective source:
+
+```bash
+python3 -m scripts.build_greek_lexicon_prospective_terms --download
+python3 -m scripts.run_protocol protocols/greek_lexicon_extension_prospective_lock.toml --resume
+```
+
+This locks a CC0 Strong's Greek Dictionary headword pool before any
+result-producing search. Source/audit details are in
+`docs/GREEK_LEXICON_PROSPECTIVE_SOURCE.md` and the future extension study is
+predeclared in `docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_PREREGISTRATION.md`.
+
 Centered-Relevance Density scaffold:
 
 ```bash

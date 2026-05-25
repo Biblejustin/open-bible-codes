@@ -64,6 +64,7 @@ KNOWN_TERMS: dict[str, tuple[str, str]] = {
     "ναοσ": ("naos", "temple"),
     "θεοσ": ("theos", "God"),
     "σιων": ("Sion", "Zion"),
+    "ονομα": ("onoma", "Name"),
     "φωσ": ("phos", "light"),
     "νομοσ": ("nomos", "law"),
     "αμνοσ": ("amnos", "lamb"),

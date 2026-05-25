@@ -1,0 +1,191 @@
+name = "greek_lexicon_extension_prospective_lock"
+description = "Non-result lock packet for fresh Strong's Greek lexicon extension study."
+manifest_out = "reports/study_locks/greek_lexicon_extension_prospective_lock.protocol_run.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_source_terms"
+description = "Build deterministic Greek lexicon prospective term source from CC0 Strong's XML."
+argv = [
+  "-m", "scripts.build_greek_lexicon_prospective_terms",
+  "--source-xml", "data/raw/morphgnt/strongs-dictionary-xml/strongsgreek.xml",
+  "--out", "terms/greek_lexicon_prospective_terms.csv",
+  "--summary-out", "reports/study_locks/greek_lexicon_prospective_terms.summary.json",
+  "--min-normalized-length", "5",
+]
+inputs = [
+  "scripts/build_greek_lexicon_prospective_terms.py",
+]
+outputs = [
+  "terms/greek_lexicon_prospective_terms.csv",
+  "reports/study_locks/greek_lexicon_prospective_terms.summary.json",
+]
+
+[[steps]]
+id = "prior_evidence_audit"
+description = "Audit lexicon terms against prior Greek extension and surface evidence."
+argv = [
+  "-m", "scripts.audit_prospective_terms",
+  "--candidate", "terms/greek_lexicon_prospective_terms.csv",
+  "--evidence", "reports/greek_exact_center_four_source/extensions_tr_nt_top.csv",
+  "--evidence", "reports/greek_exact_center_four_source/extensions_byz_nt_top.csv",
+  "--evidence", "reports/greek_exact_center_four_source/extensions_tcg_nt_top.csv",
+  "--evidence", "reports/greek_exact_center_four_source/extensions_sblgnt_top.csv",
+  "--evidence", "reports/greek_expanded_prospective_exact_center/extensions_tr_nt_top.csv",
+  "--evidence", "reports/greek_expanded_prospective_exact_center/extensions_byz_nt_top.csv",
+  "--evidence", "reports/greek_expanded_prospective_exact_center/extensions_tcg_nt_top.csv",
+  "--evidence", "reports/greek_expanded_prospective_exact_center/extensions_sblgnt_top.csv",
+  "--evidence", "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "--evidence", "reports/greek_surface_new_terms/selected_patterns.csv",
+  "--evidence", "reports/greek_surface_prospective/selected_patterns.csv",
+  "--evidence", "reports/extension_exact_center_deep_controls_summary.csv",
+  "--evidence", "reports/extension_exact_center_final_gate_summary.csv",
+  "--min-normalized-length", "5",
+  "--out", "reports/study_locks/greek_lexicon_extension_prior_evidence_audit.csv",
+  "--summary-out", "reports/study_locks/greek_lexicon_extension_prior_evidence_audit.csv.summary.json",
+]
+inputs = [
+  "scripts/audit_prospective_terms.py",
+  "terms/greek_lexicon_prospective_terms.csv",
+  "reports/greek_exact_center_four_source/extensions_tr_nt_top.csv",
+  "reports/greek_exact_center_four_source/extensions_byz_nt_top.csv",
+  "reports/greek_exact_center_four_source/extensions_tcg_nt_top.csv",
+  "reports/greek_exact_center_four_source/extensions_sblgnt_top.csv",
+  "reports/greek_expanded_prospective_exact_center/extensions_tr_nt_top.csv",
+  "reports/greek_expanded_prospective_exact_center/extensions_byz_nt_top.csv",
+  "reports/greek_expanded_prospective_exact_center/extensions_tcg_nt_top.csv",
+  "reports/greek_expanded_prospective_exact_center/extensions_sblgnt_top.csv",
+  "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "reports/greek_surface_new_terms/selected_patterns.csv",
+  "reports/greek_surface_prospective/selected_patterns.csv",
+  "reports/extension_exact_center_deep_controls_summary.csv",
+  "reports/extension_exact_center_final_gate_summary.csv",
+]
+outputs = [
+  "reports/study_locks/greek_lexicon_extension_prior_evidence_audit.csv",
+  "reports/study_locks/greek_lexicon_extension_prior_evidence_audit.csv.summary.json",
+]
+
+[[steps]]
+id = "filter_clean_lock"
+description = "Drop exact and substring prior-evidence overlap terms."
+argv = [
+  "-m", "scripts.filter_prospective_terms",
+  "--candidate", "terms/greek_lexicon_prospective_terms.csv",
+  "--audit", "reports/study_locks/greek_lexicon_extension_prior_evidence_audit.csv",
+  "--out", "terms/greek_lexicon_extension_terms_clean_lock.csv",
+  "--summary-out", "reports/study_locks/greek_lexicon_extension_terms_clean_lock.summary.json",
+  "--min-normalized-length", "5",
+  "--min-remaining", "1000",
+]
+inputs = [
+  "scripts/filter_prospective_terms.py",
+  "terms/greek_lexicon_prospective_terms.csv",
+  "reports/study_locks/greek_lexicon_extension_prior_evidence_audit.csv",
+]
+outputs = [
+  "terms/greek_lexicon_extension_terms_clean_lock.csv",
+  "reports/study_locks/greek_lexicon_extension_terms_clean_lock.summary.json",
+]
+
+[[steps]]
+id = "clean_audit"
+description = "Confirm clean lock no longer overlaps registered prior evidence."
+argv = [
+  "-m", "scripts.audit_prospective_terms",
+  "--candidate", "terms/greek_lexicon_extension_terms_clean_lock.csv",
+  "--evidence", "reports/greek_exact_center_four_source/extensions_tr_nt_top.csv",
+  "--evidence", "reports/greek_exact_center_four_source/extensions_byz_nt_top.csv",
+  "--evidence", "reports/greek_exact_center_four_source/extensions_tcg_nt_top.csv",
+  "--evidence", "reports/greek_exact_center_four_source/extensions_sblgnt_top.csv",
+  "--evidence", "reports/greek_expanded_prospective_exact_center/extensions_tr_nt_top.csv",
+  "--evidence", "reports/greek_expanded_prospective_exact_center/extensions_byz_nt_top.csv",
+  "--evidence", "reports/greek_expanded_prospective_exact_center/extensions_tcg_nt_top.csv",
+  "--evidence", "reports/greek_expanded_prospective_exact_center/extensions_sblgnt_top.csv",
+  "--evidence", "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "--evidence", "reports/greek_surface_new_terms/selected_patterns.csv",
+  "--evidence", "reports/greek_surface_prospective/selected_patterns.csv",
+  "--evidence", "reports/extension_exact_center_deep_controls_summary.csv",
+  "--evidence", "reports/extension_exact_center_final_gate_summary.csv",
+  "--min-normalized-length", "5",
+  "--out", "reports/study_locks/greek_lexicon_extension_clean_audit.csv",
+  "--summary-out", "reports/study_locks/greek_lexicon_extension_clean_audit.csv.summary.json",
+  "--fail-on-match",
+]
+inputs = [
+  "scripts/audit_prospective_terms.py",
+  "terms/greek_lexicon_extension_terms_clean_lock.csv",
+  "reports/greek_exact_center_four_source/extensions_tr_nt_top.csv",
+  "reports/greek_exact_center_four_source/extensions_byz_nt_top.csv",
+  "reports/greek_exact_center_four_source/extensions_tcg_nt_top.csv",
+  "reports/greek_exact_center_four_source/extensions_sblgnt_top.csv",
+  "reports/greek_expanded_prospective_exact_center/extensions_tr_nt_top.csv",
+  "reports/greek_expanded_prospective_exact_center/extensions_byz_nt_top.csv",
+  "reports/greek_expanded_prospective_exact_center/extensions_tcg_nt_top.csv",
+  "reports/greek_expanded_prospective_exact_center/extensions_sblgnt_top.csv",
+  "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "reports/greek_surface_new_terms/selected_patterns.csv",
+  "reports/greek_surface_prospective/selected_patterns.csv",
+  "reports/extension_exact_center_deep_controls_summary.csv",
+  "reports/extension_exact_center_final_gate_summary.csv",
+]
+outputs = [
+  "reports/study_locks/greek_lexicon_extension_clean_audit.csv",
+  "reports/study_locks/greek_lexicon_extension_clean_audit.csv.summary.json",
+]
+
+[[steps]]
+id = "lock_manifest"
+description = "Build preregistration lock manifest for the future result-producing run."
+argv = [
+  "-m", "scripts.build_study_lock_manifest",
+  "--name", "greek_lexicon_extension_prospective",
+  "--path", "docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_PREREGISTRATION.md",
+  "--path", "docs/GREEK_LEXICON_PROSPECTIVE_SOURCE.md",
+  "--path", "scripts/build_greek_lexicon_prospective_terms.py",
+  "--path", "terms/greek_lexicon_prospective_terms.csv",
+  "--path", "terms/greek_lexicon_extension_terms_clean_lock.csv",
+  "--path", "protocols/greek_lexicon_extension_prospective_lock.toml",
+  "--path", "configs/example_ebible_grctr.toml",
+  "--path", "configs/example_ebible_grcmt.toml",
+  "--path", "configs/example_ebible_grctcgnt.toml",
+  "--path", "configs/example_sblgnt.toml",
+  "--path", "reports/study_locks/greek_lexicon_prospective_terms.summary.json",
+  "--path", "reports/study_locks/greek_lexicon_extension_prior_evidence_audit.csv",
+  "--path", "reports/study_locks/greek_lexicon_extension_prior_evidence_audit.csv.summary.json",
+  "--path", "reports/study_locks/greek_lexicon_extension_terms_clean_lock.summary.json",
+  "--path", "reports/study_locks/greek_lexicon_extension_clean_audit.csv",
+  "--path", "reports/study_locks/greek_lexicon_extension_clean_audit.csv.summary.json",
+  "--setting", "skip_range=2..50",
+  "--setting", "direction=both",
+  "--setting", "min_normalized_length=5",
+  "--setting", "controls=stage_a_5000_term_controls_and_5000_random_controls_then_stage_b_20000_confirmatory_controls_for_survivors",
+  "--setting", "correction=benjamini_hochberg",
+  "--setting", "source_set=TR_NT,BYZ_NT,TCG_NT,SBLGNT",
+  "--setting", "selection_rule=all_source_exact_center_same_skip_extension_min_length_5",
+  "--setting", "prior_evidence_exclusion=exact_and_substring_overlap_against_registered_greek_prior_evidence",
+  "--out", "reports/study_locks/greek_lexicon_extension_prospective.manifest.json",
+]
+inputs = [
+  "scripts/build_study_lock_manifest.py",
+  "docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_PREREGISTRATION.md",
+  "docs/GREEK_LEXICON_PROSPECTIVE_SOURCE.md",
+  "scripts/build_greek_lexicon_prospective_terms.py",
+  "terms/greek_lexicon_prospective_terms.csv",
+  "terms/greek_lexicon_extension_terms_clean_lock.csv",
+  "protocols/greek_lexicon_extension_prospective_lock.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "reports/study_locks/greek_lexicon_prospective_terms.summary.json",
+  "reports/study_locks/greek_lexicon_extension_prior_evidence_audit.csv",
+  "reports/study_locks/greek_lexicon_extension_prior_evidence_audit.csv.summary.json",
+  "reports/study_locks/greek_lexicon_extension_terms_clean_lock.summary.json",
+  "reports/study_locks/greek_lexicon_extension_clean_audit.csv",
+  "reports/study_locks/greek_lexicon_extension_clean_audit.csv.summary.json",
+]
+outputs = [
+  "reports/study_locks/greek_lexicon_extension_prospective.manifest.json",
+]

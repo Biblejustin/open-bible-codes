@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 353
+Documents indexed: 355
 
 ## Controls
 
@@ -145,6 +145,7 @@ Documents indexed: 353
 | Greek Exact-Center Four-Source Preregistration | `GREEK_EXACT_CENTER_FOUR_SOURCE_PREREGISTRATION.md` |
 | Greek Exact-Center Three-Source Preregistration | `GREEK_EXACT_CENTER_THREE_SOURCE_PREREGISTRATION.md` |
 | Greek Expanded Prospective Exact-Center Preregistration | `GREEK_EXPANDED_PROSPECTIVE_PREREGISTRATION.md` |
+| Greek Lexicon Extension Prospective Preregistration | `GREEK_LEXICON_EXTENSION_PROSPECTIVE_PREREGISTRATION.md` |
 | Prospective Study Preregistration Template | `GREEK_SURFACE_NEW_TERMS_PREREGISTRATION.md` |
 | Greek Surface Prospective Preregistration | `GREEK_SURFACE_PROSPECTIVE_PREREGISTRATION.md` |
 | Prospective Study Preregistration Template | `HEBREW_CONCORDANCE_WORDS_PROSPECTIVE_PREREGISTRATION.md` |
@@ -282,6 +283,7 @@ Documents indexed: 353
 | Greek Expanded Surface Letter Paths | `GREEK_EXPANDED_SURFACE_LETTER_PATHS.md` |
 | Greek Expanded Surface Queue | `GREEK_EXPANDED_SURFACE_QUEUE.md` |
 | Greek Expanded Surface Triage | `GREEK_EXPANDED_SURFACE_TRIAGE.md` |
+| Greek Lexicon Prospective Source | `GREEK_LEXICON_PROSPECTIVE_SOURCE.md` |
 | Greek LXX / NT Corpus Presence | `GREEK_LXX_NT_CORPUS_PRESENCE.md` |
 | Greek NT Claim Terms | `GREEK_NT_CLAIM_TERMS.md` |
 | Greek Screening All-Codes Collection | `GREEK_SCREENING_ALL_CODES_COLLECTION.md` |

@@ -39,6 +39,19 @@ Required metadata for distributable corpora:
 - File checksum.
 - Normalization choices.
 
+## Lexicons And Term Sources
+
+Strong's Greek Dictionary XML:
+
+- `scripts/build_greek_lexicon_prospective_terms.py`
+- `terms/greek_lexicon_prospective_terms.csv`
+- `terms/greek_lexicon_extension_terms_clean_lock.csv`
+
+This source uses `morphgnt/strongs-dictionary-xml`. The upstream README states
+that the XML release is under the Creative Commons CC0 waiver. Raw XML stays
+under ignored `data/raw/`; the tracked term CSVs contain deduped Greek
+headwords and source metadata for prospective study locking.
+
 Bootstrap all current public source paths:
 
 ```bash

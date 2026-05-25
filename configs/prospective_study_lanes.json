@@ -29,6 +29,34 @@
       "primary_study_outcome": "BH q <= 0.05 across all tested selected rows"
     },
     {
+      "id": "greek_lexicon_extension_prospective",
+      "title": "Greek Lexicon Extension Prospective",
+      "status": "ready_for_preflight",
+      "language": "greek",
+      "term_file": "terms/greek_lexicon_extension_terms_clean_lock.csv",
+      "protocol": "protocols/greek_lexicon_extension_prospective_lock.toml",
+      "report_doc": "docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_PREREGISTRATION.md",
+      "sources": [
+        {"label": "TR_NT", "path": "configs/example_ebible_grctr.toml"},
+        {"label": "BYZ_NT", "path": "configs/example_ebible_grcmt.toml"},
+        {"label": "TCG_NT", "path": "configs/example_ebible_grctcgnt.toml"},
+        {"label": "SBLGNT", "path": "configs/example_sblgnt.toml"}
+      ],
+      "skip_range": "2..50",
+      "direction": "both",
+      "min_normalized_length": "5",
+      "candidate_type": "fresh Strong's Greek lexicon exact-center same-skip extension rows",
+      "context_rule": "extension row must retain exact-center target placement",
+      "controls": "stage A 5000 matched term controls and 5000 random controls; stage B 20000/20000 confirmation for survivors",
+      "correction": "benjamini_hochberg_across_registered_extension_rows",
+      "source_term_files": "morphgnt/strongs-dictionary-xml Strong's Greek Dictionary XML CC0 headwords",
+      "dedupe_rule": "language + normalized Greek headword, lowest Strong number kept as row id",
+      "excluded_prior": "exact and substring overlap against registered Greek extension and surface prior evidence",
+      "candidate_rule": "all four Greek NT sources preserve the exact-center same-skip extension row",
+      "primary_row_outcome": "Stage B corrected q value <= 0.05 after all-source exact-center extension rule",
+      "primary_study_outcome": "at least one registered row survives all-source rule and BH correction after Stage B"
+    },
+    {
       "id": "hebrew_modern_geopolitical_presence",
       "title": "Hebrew Modern Geopolitical Version Presence",
       "status": "completed_negative_controlled_result",
