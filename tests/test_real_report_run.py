@@ -63,6 +63,8 @@ class RealReportRunTests(unittest.TestCase):
             Path("docs/FINAL_REPORT_DRAFT.md"),
             Path("docs/FINAL_REPORT_OUTLINE.md"),
             Path("docs/FINAL_REPORT_HIGHLIGHTS.md"),
+            Path("docs/CONSOLIDATED_FINDINGS.md"),
+            Path("docs/CLEAN_LOCK_RESULTS_SUMMARY.md"),
         ]:
             refs = sorted(
                 set(re.findall(r"`(docs/[^`]+?\\.md)`", doc.read_text(encoding="utf-8")))
