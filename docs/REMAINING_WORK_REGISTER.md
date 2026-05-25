@@ -779,12 +779,15 @@ Navigation aid:
 Current fast validation:
 
 ```bash
-make fast-validate
+make release-ready
 ```
 
-Latest validation snapshot after the fast-validation make target:
+Run `make release-ready` from a committed tree; the final public-release gate is
+supposed to fail if tracked files are dirty.
 
-- `make fast-validate` passed, including `python3 -m pytest -q`: 1462 tests,
+Latest validation snapshot after the release-ready make target:
+
+- `make release-ready` passed, including `python3 -m pytest -q`: 1463 tests,
   2 skipped, and 29195 subtests.
 - `python3 -m scripts.check_expanded_strata_tooling` passed inside
   `make fast-validate`.

@@ -208,12 +208,26 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "expanded-strata operator tooling" in readme
 
 
+def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
+    makefile = Path("Makefile").read_text(encoding="utf-8")
+    readme = Path("README.md").read_text(encoding="utf-8")
+    normalized_readme = " ".join(readme.split())
+
+    assert "release-ready: fast-validate public-release-check" in makefile
+    assert "make release-ready" in readme
+    assert "after committing" in readme
+    assert "clean public-release gate" in readme
+    assert "intentionally fails while tracked files are dirty" in normalized_readme
+
+
 def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     text = Path("docs/REMAINING_WORK_REGISTER.md").read_text(encoding="utf-8")
 
-    assert "Latest validation snapshot after the fast-validation make target" in text
-    assert "1462 tests" in text
+    assert "Latest validation snapshot after the release-ready make target" in text
+    assert "1463 tests" in text
     assert "2 skipped, and 29195 subtests" in text
+    assert "make release-ready" in text
+    assert "committed tree" in text
     assert "make fast-validate" in text
     assert "scripts.check_expanded_strata_tooling" in text
     assert "make local-data-doc-check" in text

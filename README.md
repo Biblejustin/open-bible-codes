@@ -70,6 +70,16 @@ diff whitespace, runs dirty-tree-safe release hygiene, validates
 expanded-strata operator tooling, and verifies local data doc references
 against the current ignored source caches.
 
+Full clean-tree pre-push validation after committing:
+
+```bash
+make release-ready
+```
+
+This runs `make fast-validate`, then reruns the clean public-release gate. Run
+it from a committed tree; the public-release gate intentionally fails while
+tracked files are dirty.
+
 Optional local data doc check, after bootstrapping ignored source caches:
 
 ```bash
