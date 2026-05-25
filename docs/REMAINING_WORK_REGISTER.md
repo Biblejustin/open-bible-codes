@@ -785,7 +785,15 @@ python3 -m scripts.build_protocol_index --protocols-dir protocols --out protocol
 python3 -m scripts.check_public_release_hygiene --allow-dirty
 ```
 
-Current observed result after the WRR gap-reason audit, readiness gate,
+Latest validation snapshot after the critical-omission/final-report public
+wording synchronization:
+
+- `python3 -m pytest -q` passed: 1441 tests, 2 skipped, and 29182 subtests.
+- `git diff --check` passed.
+- `make public-release-check` passed from the committed tree.
+
+Earlier WRR/source-recovery validation snapshot after the WRR gap-reason audit,
+readiness gate,
 single-term source-policy propagation, missing-model adjacent-source audit,
 preflight guard pass, Greek follow-up status refresh, Hebrew MT/STEP_TAHOT
 status refresh, KJVA bridge lock-basis clarification, prospective-lane

@@ -185,6 +185,16 @@ def test_public_baseline_tracks_critical_omission_null_read() -> None:
     assert "`docs/CRITICAL_OMISSION_BREAKS_PERICOPE_OVERRIDE.md`" in text
 
 
+def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
+    text = Path("docs/REMAINING_WORK_REGISTER.md").read_text(encoding="utf-8")
+
+    assert "Latest validation snapshot after the critical-omission/final-report public" in text
+    assert "1441 tests, 2 skipped, and 29182 subtests" in text
+    assert "`git diff --check` passed" in text
+    assert "`make public-release-check` passed" in text
+    assert "Earlier WRR/source-recovery validation snapshot" in text
+
+
 def test_final_report_tracks_wrr_single_term_source_policy_impacts() -> None:
     report_paths = [
         Path("docs/FINAL_REPORT.md"),
