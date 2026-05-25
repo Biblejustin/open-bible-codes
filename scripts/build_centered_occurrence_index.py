@@ -564,6 +564,15 @@ def write_markdown(
     summary_rows: list[dict[str, object]],
     args: argparse.Namespace,
 ) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(render_markdown(rows, summary_rows, args), encoding="utf-8")
+
+
+def render_markdown(
+    rows: list[dict[str, object]],
+    summary_rows: list[dict[str, object]],
+    args: argparse.Namespace,
+) -> str:
     source_counts = Counter(str(row["source_family"]) for row in rows)
     type_counts = Counter(str(row["occurrence_type"]) for row in rows)
     class_counts = Counter(str(row["corpus_class"]) for row in rows)
@@ -634,8 +643,7 @@ def write_markdown(
             "",
         ]
     )
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return "\n".join(lines) + "\n"
 
 
 def summary_markdown_row(row: dict[str, object]) -> str:

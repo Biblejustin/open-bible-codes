@@ -21,6 +21,7 @@ from els.project_index import (
     write_protocol_index,
 )
 from scripts import (
+    check_centered_occurrence_index_doc,
     check_crd_relevance_dictionary,
     check_consolidated_findings_doc,
     check_doc_command_references,
@@ -771,6 +772,15 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "final-report highlights doc failures: "
             + "; ".join(final_report_highlights_doc_failures)
+        )
+
+    centered_occurrence_index_doc_failures = (
+        check_centered_occurrence_index_doc.validate_centered_occurrence_index_doc()
+    )
+    if centered_occurrence_index_doc_failures:
+        failures.append(
+            "centered-occurrence index doc failures: "
+            + "; ".join(centered_occurrence_index_doc_failures)
         )
 
     source_basis_failures = check_source_basis_audit_queue.validate_source_basis_queue(
