@@ -17,6 +17,7 @@ current manifest/preflight workflow before producing new result-bearing output.
 | Lane | Terms | Primary result | Controls | Conservative read |
 | --- | ---: | --- | --- | --- |
 | Greek surface new terms | 236 | 9 selected all-source length-5 surface rows | 5 control rows reached `q <= 0.05` | Controlled review material; manual review required before any claim |
+| Greek lexicon extension | 5,009 | 2 all-source common-pronoun extension keys | Stage B survived numeric controls; strict function-word rerun left 0 all-source keys | Common-pronoun/surface-context review material, not claim evidence |
 | Hebrew Gospel/genealogy | 27 | 21 rows with all-source exact patterns | 22 rows with representative controls; 3 uncorrected-only; 0 adjusted support | No adjusted representative-control support |
 | Hebrew concordance words | 3,577 | 3,372 rows with all-source exact patterns | 3,398 terms with representative controls; 87 uncorrected-only; 0 adjusted support | No adjusted representative-control support |
 | KJVA apocrypha bridge prospective | 7 | 1 observed bridge row (`tobit`) | 0 terms with BH `q_ge <= 0.05`; 1 of 3 non-Bible controls matched observed total | Negative under shuffled and non-Bible controls |
@@ -28,6 +29,7 @@ current manifest/preflight workflow before producing new result-bearing output.
 | Greek surface new terms | `docs/GREEK_SURFACE_NEW_TERMS_REPORT.md` |
 | Greek surface new terms controls | `docs/GREEK_SURFACE_NEW_TERMS_CONTROL_EVALUATION.md` |
 | Greek surface new terms context review | `docs/GREEK_SURFACE_NEW_TERMS_CONTEXT_REVIEW.md` |
+| Greek lexicon extension | `docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_REPORT.md` |
 | Hebrew Gospel/genealogy | `docs/COMPOUND_EXTENSION_PROSPECTIVE_REPORT.md` |
 | Hebrew concordance words | `docs/HEBREW_CONCORDANCE_WORDS_PROSPECTIVE_REPORT.md` |
 | Hebrew concordance control pilot | `docs/HEBREW_CONCORDANCE_WORDS_CONTROL_PILOT_REPORT.md` |
@@ -57,6 +59,12 @@ met the registered `q <= 0.05` threshold. Manual context review found ordinary
 local surface-context/self-lexeme effects, so the result stays in the
 review-material category and not a theological, prophetic, historical, or
 statistical claim.
+
+The Greek lexicon extension lane also stays in review-material status. Its
+clean lock produced two all-source `αυτου` (autou; English: his/of him)
+extension keys that survived numeric controls, but both were common-pronoun
+rows with surface-context support. The strict function-word rerun removed those
+common rows before screening and left 0 all-source extension keys.
 
 The KJVA apocrypha bridge prospective lane is also negative. Its fixed
 seven-term run found one `tobit` bridge row, but no registered term survived

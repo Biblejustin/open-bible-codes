@@ -90,6 +90,9 @@ def test_clean_lock_results_summary_tracks_completed_lanes() -> None:
     )
 
     assert "| Greek surface new terms | 236 |" in text
+    assert "| Greek lexicon extension | 5,009 |" in text
+    assert "2 all-source common-pronoun extension keys" in text
+    assert "strict function-word rerun left 0 all-source keys" in text
     assert "| Hebrew Gospel/genealogy | 27 |" in text
     assert "| Hebrew concordance words | 3,577 |" in text
     assert "0 adjusted-support terms" in text
@@ -98,6 +101,8 @@ def test_clean_lock_results_summary_tracks_completed_lanes() -> None:
     assert "high-volume short-string/common-letter prompts" in text
     assert "ordinary" in text
     assert "local surface-context/self-lexeme effects" in text
+    assert "common-pronoun" in text
+    assert "rows with surface-context support" in text
     assert "KJVA apocrypha bridge prospective lane used a committed" in text
     assert "current manifest/preflight workflow" in text
     assert "completed prospective protocols" in user_terms
