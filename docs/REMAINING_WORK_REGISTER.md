@@ -32,7 +32,8 @@ blocker-packet, and unresolved-term burden propagation, and WRR Wayback
 source-recovery probing/guarding, English corpus deferred-policy guarding, WRR
 public handoff doc guarding, WRR
 remaining-lane/source-policy/manual-decision checklist consolidation, and WRR
-manual decision-record template/checker guarding.
+manual decision-record lock propagation, public-handoff lock-status cleanup,
+and checklist boundary wording cleanup.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -938,6 +939,14 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - `python3 -m scripts.check_wrr_public_handoff_docs` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_public_handoff_guard.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wrr_manual_decision_record_worksheet.json` passed.
+- `597b1a0` Reflect WRR manual decision locks in worksheet.
+- `af38937` Align WRR handoff docs with decision locks.
+- `c35f6e6` Update WRR checklist lock boundary wording.
+- `python3 -m pytest -q` passed after the lock-status documentation updates:
+  1409 passed, 2 skipped, 14120 subtests passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wrr_public_locks.json` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_wrr_checklist_locks.json` passed.
+- `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume` passed clean from committed state after each pushed update.
 - `python3 -m scripts.check_prospective_study_lanes` passed.
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
