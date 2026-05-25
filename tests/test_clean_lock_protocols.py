@@ -162,9 +162,15 @@ def test_final_report_includes_clean_lock_closeout() -> None:
 
     draft = Path("docs/FINAL_REPORT_DRAFT.md").read_text(encoding="utf-8")
     outline = Path("docs/FINAL_REPORT_OUTLINE.md").read_text(encoding="utf-8")
+    normalized_draft = " ".join(draft.split())
+    normalized_outline = " ".join(outline.split())
     assert "0 Hebrew concordance" in draft
     assert "0 all-source extension keys" in draft
     assert "`docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`" in outline
+    assert "apocrypha/deuterocanon bridge comparison is now present" in normalized_draft
+    assert "apocrypha/deuterocanon bridge study and KJVA bridge controls are now completed" in normalized_outline
+    assert "After the current report baseline is frozen" not in normalized_draft
+    assert "finish any remaining locked reports" not in normalized_outline
 
 
 def test_final_report_includes_critical_omission_null_read() -> None:

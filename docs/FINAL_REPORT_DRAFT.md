@@ -405,18 +405,18 @@ locked prospective study actually earns that status under predeclared controls.
 
 ## Future Work
 
-The next formal step is not broader exploration. It is a narrower prospective
-study with fixed term list, fixed corpus set, fixed skip range, fixed center
-and extension rules, fixed controls, and study-level correction across all
-tested rows.
+Future work is not broader exploration. Any new result-bearing work should
+begin from a genuinely new clean source or source-family question, with the
+term list, corpus set, skip range, center/extension rules, exclusion gates,
+controls, and study-level correction frozen before result inspection.
 
-After the current report baseline is frozen, the apocrypha/deuterocanon study
-can be run as a separate source-family analysis. That study should distinguish
-ordinary apocrypha-only hits from bridge-completion rows where a partial
-canonical ELS path becomes complete only when declared apocrypha/deuterocanon
-material is inserted. Comparable non-Bible insertion controls are required
-before interpreting bridge rows. The current source-coverage audit shows that
-the existing eBible GRCLXX stream already contains a substantial Greek
+The apocrypha/deuterocanon bridge comparison is now present as a tracked
+review layer, not a pending setup task. It distinguishes ordinary
+apocrypha-only hits from bridge-completion rows where a partial canonical ELS
+path becomes complete only when declared apocrypha/deuterocanon material is
+inserted, and it includes comparable non-Bible insertion controls. The current
+source-coverage audit shows that the existing eBible GRCLXX stream already
+contains a substantial Greek
 deuterocanon/apocrypha block, while the current eBible KJV stream is 66-book
 only. A separate eBible KJV + Apocrypha corpus path is now available for
 English apocrypha/deuterocanon follow-up work, with 14 present books, 5,720

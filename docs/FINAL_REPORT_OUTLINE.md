@@ -210,11 +210,13 @@ locked prospective study earns that status under predeclared controls.
 
 Keep future work separate from the current report:
 
-- finish any remaining locked reports before expanding source sets;
-- then run the apocrypha/deuterocanon comparison as a new source-family study;
-- include bridge-completion checks where partial canonical ELS paths become
-  complete only after declared apocrypha/deuterocanon insertions;
-- run comparable non-Bible insertion controls before interpreting bridge rows.
+- the apocrypha/deuterocanon bridge study and KJVA bridge controls are now
+  completed review layers, not pending setup tasks;
+- any new source expansion should begin from a genuinely new clean
+  source-family question and a locked protocol before result inspection;
+- bridge-row promotion would require independent replication or a new locked
+  prospective design that survives both shuffled and non-Bible insertion
+  controls.
 
 ## Report Rule
 
