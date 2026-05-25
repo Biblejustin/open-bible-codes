@@ -337,6 +337,8 @@ inputs = [
   "els/term_display.py",
   "terms/meaningful_constants.csv",
   "scripts/build_final_report_highlights.py",
+  "scripts/build_strongest_candidate_deep_dive.py",
+  "protocols/strongest_candidate_deep_dive.toml",
   "scripts/build_gog_magog_pair_prospective_report.py",
   "scripts/download_wrr_sources.py",
   "scripts/build_wrr_source_recovery_probe.py",
@@ -1378,6 +1380,29 @@ outputs = [
 ]
 
 [[steps]]
+id = "strongest_candidate_deep_dive"
+description = "Build ranked strongest-candidate deep-dive packet from locked artifacts."
+argv = ["-m", "scripts.build_strongest_candidate_deep_dive"]
+inputs = [
+  "scripts/build_strongest_candidate_deep_dive.py",
+  "claims/claim_catalog.csv",
+  "reports/doxa_four_source_confirmatory_followup/paired_controls_summary.csv",
+  "reports/doxa_four_source_confirmatory_followup/context_review_summary.csv",
+  "reports/all_codes_compound_extension_confirmatory/summary.csv",
+  "reports/centered_occurrence_index/centered_occurrences.csv",
+  "reports/greek_expanded_surface_available_control_evaluation/summary.csv",
+  "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/term_summary.csv",
+  "reports/kjv_apocrypha_bridge_prospective/term_summary.csv",
+  "reports/kjv_apocrypha_bridge_prospective/bridge_summary.csv",
+]
+outputs = [
+  "reports/strongest_candidate_deep_dive/candidates.csv",
+  "reports/strongest_candidate_deep_dive/manifest.json",
+  "docs/STRONGEST_CANDIDATE_DEEP_DIVE.md",
+]
+
+[[steps]]
 id = "report_index"
 description = "Build generated report index for local CSV/JSON/Markdown outputs."
 argv = ["-m", "scripts.build_report_index", "--out", "reports/INDEX.md", "--json-out", "reports/index.json"]
@@ -1451,6 +1476,7 @@ inputs = [
   "reports/external_claim_source_all_codes/triage.manifest.json",
   "reports/external_claim_source_all_codes/findings.manifest.json",
   "reports/final_report_highlights/manifest.json",
+  "reports/strongest_candidate_deep_dive/manifest.json",
 ]
 outputs = [
   "reports/INDEX.md",

@@ -275,7 +275,7 @@ span context, and same-skip before/after extensions.
 The compound-extension confirmatory run selected five locked `יום יהוה` (yom YHWH; English: day of YHWH) ->
 `היומיהוה` (hayom YHWH; English: the day of YHWH) rows across EBIBLE_WLC, MAM, MT_WLC, UHB, and UXLC. Each row used
 5000 term controls and 5000 random controls. The conservative all-control q
-range was 0.005199 in the formal report summary. This remains a strong
+range was 0.004799 in the formal report summary. This remains a strong
 post-discovery review candidate, not claim evidence.
 
 ### Modern, Geopolitical, And Local Terms

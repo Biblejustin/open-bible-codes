@@ -1,0 +1,28 @@
+name = "strongest_candidate_deep_dive"
+description = "Deep-dive packet for strongest current review candidates."
+manifest_out = "reports/strongest_candidate_deep_dive/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "strongest_candidate_deep_dive"
+description = "Assemble ranked strongest-candidate packet from locked report artifacts."
+argv = ["-m", "scripts.build_strongest_candidate_deep_dive"]
+inputs = [
+  "scripts/build_strongest_candidate_deep_dive.py",
+  "claims/claim_catalog.csv",
+  "reports/doxa_four_source_confirmatory_followup/paired_controls_summary.csv",
+  "reports/doxa_four_source_confirmatory_followup/context_review_summary.csv",
+  "reports/all_codes_compound_extension_confirmatory/summary.csv",
+  "reports/centered_occurrence_index/centered_occurrences.csv",
+  "reports/greek_expanded_surface_available_control_evaluation/summary.csv",
+  "reports/greek_expanded_surface_triage/selected_patterns.csv",
+  "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/term_summary.csv",
+  "reports/kjv_apocrypha_bridge_prospective/term_summary.csv",
+  "reports/kjv_apocrypha_bridge_prospective/bridge_summary.csv",
+]
+outputs = [
+  "reports/strongest_candidate_deep_dive/candidates.csv",
+  "docs/STRONGEST_CANDIDATE_DEEP_DIVE.md",
+  "reports/strongest_candidate_deep_dive/manifest.json",
+]

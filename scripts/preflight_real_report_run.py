@@ -400,6 +400,8 @@ DEFAULT_REQUIRED_PATHS = [
     "els/term_display.py",
     "terms/meaningful_constants.csv",
     "scripts/build_final_report_highlights.py",
+    "scripts/build_strongest_candidate_deep_dive.py",
+    "protocols/strongest_candidate_deep_dive.toml",
     "scripts/build_gog_magog_pair_prospective_report.py",
     "scripts/download_wrr_sources.py",
     "scripts/build_wrr_source_recovery_probe.py",

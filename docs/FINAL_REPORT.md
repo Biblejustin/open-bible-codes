@@ -233,7 +233,7 @@ The strongest all-codes compound-extension row is the selected `יום יהוה`
 - sources: EBIBLE_WLC, MAM, MT_WLC, UHB, UXLC
 
 The locked 5000/5000 post-discovery confirmatory controls kept all five
-MT-family rows at conservative all-control q = 0.005199. This is a strong
+MT-family rows at conservative all-control q = 0.004799. This is a strong
 post-discovery review candidate, not prospective claim evidence.
 
 Source artifact: `docs/ALL_CODES_COMPOUND_EXTENSION_CONFIRMATORY_CONTROLS.md`.

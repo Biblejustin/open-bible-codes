@@ -399,7 +399,7 @@ extensions:
   day of YHWH) -> `היומיהוה` (hayom YHWH; English: the day of YHWH)
   same-skip extension key across EBIBLE_WLC, MAM, MT_WLC, UHB, and UXLC with
   5000 term controls and 5000 random controls per row; all five have
-  conservative all-control q = 0.003599.
+  conservative all-control q = 0.004799.
 
 Current all-codes read: the extension and context exports are useful review
 filters, especially for compound rows such as `עדיהוה` (ad YHWH; English:

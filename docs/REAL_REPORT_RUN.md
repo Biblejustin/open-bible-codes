@@ -311,7 +311,7 @@ The report-run summary should currently say:
 - The relaxed all-codes follow-up keeps hidden-path-only rows and separately
   ranks surface-near rows. The locked 5000/5000 compound-extension
   confirmatory controls keep the selected `יום יהוה` (yom YHWH; English: day of YHWH) -> `היומיהוה` (hayom YHWH; English: the day of YHWH) key across
-  all five MT-family sources at conservative all-control q = 0.003599. It is a
+  all five MT-family sources at conservative all-control q = 0.004799. It is a
   post-discovery review candidate, not a claim.
 
 ## Before Claim-Level Reporting
