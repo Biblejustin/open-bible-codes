@@ -36,7 +36,7 @@ manual decision-record lock propagation, public-handoff lock-status cleanup,
 checklist boundary wording cleanup, public claim-language preflight guarding,
 doc-command reference preflight guarding, final-report support-doc reference
 guarding, real-report preflight input drift guarding, a clean real-report
-protocol rerun/cache check at commit `4d9f2c0`, and manual-review packet-shape
+protocol rerun/cache check at commit `9305d12`, and manual-review packet-shape
 drift guarding, plus prospective-readiness, next-lock, and study-lock workflow
 doc guard coverage, Greek second-cohort readiness guarding, consolidated
 findings prospective-boundary guarding, generated lane-status freshness
@@ -234,11 +234,12 @@ Current pushed commits for this cleanup:
 - `f0dbc31` Refresh validation snapshot count.
 - `4d9f2c0` Document source audit preflight guards.
 - `64cfdf8` Refresh register after source audit guard docs.
-- `ca63766` Guard critical omission followup docs.
+- `f870742` Guard critical omission followup docs.
+- `9305d12` Document critical omission doc guard.
 
 ### Formal Real Report Rerun
 
-Command completed successfully from the clean committed tree at `4d9f2c0`:
+Command completed successfully from the clean committed tree at `9305d12`:
 
 ```bash
 python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
@@ -247,7 +248,7 @@ python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
 Current summary:
 
 - `reports/real_report_run/summary.md`
-- summary commit: `4d9f2c0`
+- summary commit: `9305d12`
 - preflight status: passed; support-doc reference failures: 0; protocol input
   drift failures: 0.
 - local generated report files under `reports/real_report_run/` are ignored by
@@ -852,7 +853,7 @@ Latest validation snapshot after the release-ready make target:
   and `data/processed/` caches.
 - `make public-release-check` passed from the committed tree.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
-  passed from the committed tree at `4d9f2c0`.
+  passed from the committed tree at `9305d12`.
 
 Earlier WRR/source-recovery validation snapshot after the WRR gap-reason audit,
 readiness gate,
