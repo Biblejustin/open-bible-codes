@@ -100,14 +100,31 @@ class ClaimCatalogTests(unittest.TestCase):
 
         row = rows["critical_omission_breakage"]
         self.assertEqual(row["status"], "partially_reproducible")
-        self.assertIn("558 broken TR hits", row["current_reproduction"])
-        self.assertIn("p_ge 0.9910", row["current_reproduction"])
+        self.assertIn("558 observed broken TR hits", row["current_reproduction"])
+        self.assertIn("p_ge=0.9910", row["current_reproduction"])
         self.assertIn("null median 657", row["current_reproduction"])
+        self.assertIn(
+            "do not break more TR ELS hits than matched random verse blocks",
+            row["current_reproduction"],
+        )
 
         doc = Path("docs/CLAIM_CATALOG.md").read_text(encoding="utf-8")
         normalized_doc = " ".join(doc.split())
         self.assertIn("558 observed broken TR hits versus null median 657", normalized_doc)
         self.assertIn("`p_ge=0.9910`", doc)
+        self.assertIn(
+            "actual omitted blocks do not break more TR ELS hits than matched random verse blocks",
+            normalized_doc,
+        )
+
+        highlights = Path("docs/FINAL_REPORT_HIGHLIGHTS.md").read_text(encoding="utf-8")
+        normalized_highlights = " ".join(highlights.split())
+        self.assertIn("558 observed broken TR hits versus null median 657", normalized_highlights)
+        self.assertIn("p_ge=0.9910", normalized_highlights)
+        self.assertIn(
+            "actual omitted blocks do not break more TR ELS hits than matched random verse blocks",
+            normalized_highlights,
+        )
 
 
 if __name__ == "__main__":

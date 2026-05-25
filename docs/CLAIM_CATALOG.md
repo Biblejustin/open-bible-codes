@@ -49,7 +49,7 @@ Purpose:
 | Amandasaurus/Rory Biblecode implementation prior art | `under_specified` | 1 | Public Rust implementation audit exists; useful for KJV/Gutenberg normalization, signed-skip discovery, and matrix-style display cautions. |
 | Bible-codes.org pictogram/source families | `under_specified` | 5 | Source audit and term list exist; useful for KJV matrix demos, pictogram clusters, prediction claims, and source-defined authenticity criteria. |
 | Public media-style Hebrew claims | `under_specified` | 3 | Terms exist, but claim geometry has not been locked. |
-| Critical omissions / word multiples | `partially_reproducible` | 2 | Critical-omission followups now share one break engine and include null, reverse, cross-tradition, length-stratified, and disputed-passage override reports. Current omission null read is cautionary: 558 observed broken TR hits versus null median 657, with `p_ge=0.9910`; word-multiple artifacts remain initial screening work. |
+| Critical omissions / word multiples | `partially_reproducible` | 2 | Critical-omission followups now share one break engine and include null, reverse, cross-tradition, length-stratified, and disputed-passage override reports. Current omission null read is cautionary: 558 observed broken TR hits versus null median 657, with `p_ge=0.9910`; actual omitted blocks do not break more TR ELS hits than matched random verse blocks. Word-multiple artifacts remain initial screening work. |
 
 ## Use
 
