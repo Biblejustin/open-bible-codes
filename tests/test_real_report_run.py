@@ -1,5 +1,4 @@
 import json
-import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -57,21 +56,38 @@ class RealReportRunTests(unittest.TestCase):
             self.assertIn(path, summary_source)
 
     def test_final_report_doc_refs_are_preflight_required(self) -> None:
-        required = set(preflight.DEFAULT_REQUIRED_PATHS)
-        for doc in [
-            Path("docs/FINAL_REPORT.md"),
-            Path("docs/FINAL_REPORT_DRAFT.md"),
-            Path("docs/FINAL_REPORT_OUTLINE.md"),
-            Path("docs/FINAL_REPORT_HIGHLIGHTS.md"),
-            Path("docs/CONSOLIDATED_FINDINGS.md"),
-            Path("docs/CLEAN_LOCK_RESULTS_SUMMARY.md"),
-        ]:
-            refs = sorted(
-                set(re.findall(r"`(docs/[^`]+?\\.md)`", doc.read_text(encoding="utf-8")))
-            )
-            missing = [ref for ref in refs if Path(ref).exists() and ref not in required]
+        failures = preflight.find_unrequired_doc_references(
+            Path("."),
+            set(preflight.DEFAULT_REQUIRED_PATHS),
+        )
 
-            self.assertEqual(missing, [], f"{doc} refs missing from real-report preflight")
+        self.assertEqual(failures, [])
+
+    def test_final_report_doc_ref_guard_reports_unrequired_existing_docs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "docs").mkdir()
+            (root / "docs" / "FINAL_REPORT.md").write_text(
+                "`docs/UNTRACKED_SUPPORT_DOC.md`\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "UNTRACKED_SUPPORT_DOC.md").write_text(
+                "support\n",
+                encoding="utf-8",
+            )
+
+            failures = preflight.find_unrequired_doc_references(
+                root,
+                {"docs/FINAL_REPORT.md"},
+            )
+
+        self.assertEqual(
+            failures,
+            [
+                "docs/FINAL_REPORT.md references docs/UNTRACKED_SUPPORT_DOC.md "
+                "but it is not in required paths"
+            ],
+        )
 
     def test_real_report_preflight_and_summary_are_not_resume_cached(self) -> None:
         protocol = load_protocol("protocols/real_report_run.toml")

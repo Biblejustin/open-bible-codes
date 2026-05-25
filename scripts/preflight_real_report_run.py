@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import tempfile
 import time
@@ -74,6 +75,15 @@ from scripts.release_hygiene import (
 
 
 OUT = Path("reports/real_report_run/preflight.json")
+DOC_REFERENCE_RE = re.compile(r"`(docs/[^`]+?\.md)`")
+REAL_REPORT_REFERENCE_ROOTS = [
+    "docs/FINAL_REPORT.md",
+    "docs/FINAL_REPORT_DRAFT.md",
+    "docs/FINAL_REPORT_OUTLINE.md",
+    "docs/FINAL_REPORT_HIGHLIGHTS.md",
+    "docs/CONSOLIDATED_FINDINGS.md",
+    "docs/CLEAN_LOCK_RESULTS_SUMMARY.md",
+]
 DEFAULT_REQUIRED_PATHS = [
     "scripts/preflight_real_report_run.py",
     "scripts/release_hygiene.py",
@@ -625,9 +635,20 @@ def main(argv: list[str] | None = None) -> int:
             + ", ".join(format_finding(hit) for hit in secret_hits[:10])
         )
 
-    missing_paths = [path for path in required_paths(args) if not (root / path).exists()]
+    required = required_paths(args)
+    missing_paths = [path for path in required if not (root / path).exists()]
     if missing_paths:
         failures.append("missing required paths: " + ", ".join(missing_paths))
+
+    real_report_doc_reference_failures = find_unrequired_doc_references(
+        root,
+        set(required),
+    )
+    if real_report_doc_reference_failures:
+        failures.append(
+            "real-report doc reference failures: "
+            + "; ".join(real_report_doc_reference_failures)
+        )
 
     prospective_lane_failures = check_prospective_study_lanes.validate_profiles(
         root / check_prospective_study_lanes.DEFAULT_PROFILE_FILE
@@ -1071,8 +1092,9 @@ def main(argv: list[str] | None = None) -> int:
         "git_remotes": remotes,
         "tracked_path_count": len(tracked_paths),
         "risky_tracked_paths": risky_paths,
-        "required_paths": required_paths(args),
+        "required_paths": required,
         "missing_paths": missing_paths,
+        "real_report_doc_reference_failures": real_report_doc_reference_failures,
         "prospective_lane_failures": prospective_lane_failures,
         "source_basis_failures": source_basis_failures,
         "english_corpus_policy_failures": english_corpus_policy_failures,
@@ -1182,6 +1204,24 @@ def build_parser() -> argparse.ArgumentParser:
 
 def required_paths(args: argparse.Namespace) -> list[str]:
     return [*DEFAULT_REQUIRED_PATHS, *args.required_path]
+
+
+def find_unrequired_doc_references(root: Path, required: set[str]) -> list[str]:
+    failures: list[str] = []
+    for source in REAL_REPORT_REFERENCE_ROOTS:
+        source_path = root / source
+        if not source_path.exists():
+            continue
+
+        refs = sorted(
+            set(DOC_REFERENCE_RE.findall(source_path.read_text(encoding="utf-8")))
+        )
+        for ref in refs:
+            if (root / ref).exists() and ref not in required:
+                failures.append(
+                    f"{source} references {ref} but it is not in required paths"
+                )
+    return failures
 
 
 def stale_generated_indexes(root: Path) -> list[str]:
