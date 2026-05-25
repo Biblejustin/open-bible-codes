@@ -35,6 +35,26 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("completed KJVA prospective", source)
         self.assertNotIn("fresh KJVA prospective", source)
 
+    def test_real_report_tracks_clean_lock_closeout_docs(self) -> None:
+        protocol = load_protocol("protocols/real_report_run.toml")
+        steps_by_id = {step["id"]: step for step in protocol["steps"]}
+        real_report = Path("docs/REAL_REPORT_RUN.md").read_text(encoding="utf-8")
+        summary_source = Path("scripts/build_real_report_run_summary.py").read_text(
+            encoding="utf-8"
+        )
+        paths = [
+            "docs/CLEAN_LOCK_RESULTS_SUMMARY.md",
+            "docs/STRICT_FOLLOWUP_GATE_SUMMARY.md",
+            "docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_REPORT.md",
+        ]
+
+        self.assertIn("clean-lock close-out", real_report)
+        for path in paths:
+            self.assertIn(path, steps_by_id["preflight"]["inputs"])
+            self.assertIn(path, steps_by_id["real_report_summary"]["inputs"])
+            self.assertIn(path, preflight.DEFAULT_REQUIRED_PATHS)
+            self.assertIn(path, summary_source)
+
     def test_real_report_preflight_and_summary_are_not_resume_cached(self) -> None:
         protocol = load_protocol("protocols/real_report_run.toml")
         steps_by_id = {step["id"]: step for step in protocol["steps"]}

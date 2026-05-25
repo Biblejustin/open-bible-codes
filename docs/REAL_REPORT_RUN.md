@@ -57,6 +57,10 @@ This assembly run includes:
 - locked Greek surface prospective run:
   `docs/GREEK_SURFACE_PROSPECTIVE_PREREGISTRATION.md` and
   `docs/GREEK_SURFACE_PROSPECTIVE_REPORT.md`
+- clean-lock close-out and strict follow-up summary:
+  `docs/CLEAN_LOCK_RESULTS_SUMMARY.md`,
+  `docs/STRICT_FOLLOWUP_GATE_SUMMARY.md`, and
+  `docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_REPORT.md`
 - post-discovery Greek surface length-4 follow-up:
   `docs/GREEK_SURFACE_LENGTH4_FOLLOWUP_TRIAGE.md`,
   `docs/GREEK_SURFACE_LENGTH4_CONTROL_POOL.md`,
