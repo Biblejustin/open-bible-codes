@@ -54,7 +54,7 @@
       "excluded_prior": "exact and substring overlap against registered Greek extension and surface prior evidence",
       "candidate_rule": "all four Greek NT sources preserve the exact-center same-skip extension row",
       "primary_row_outcome": "Stage B corrected q value <= 0.05 after all-source exact-center extension rule, then context-cautioned manual review",
-      "primary_study_outcome": "numeric Stage B survivor rows were all common-pronoun αυτου patterns with surface-context risk; review material only"
+      "primary_study_outcome": "numeric Stage B survivor rows were all common-pronoun αυτου patterns with surface-context risk; strict Greek stopword follow-up left zero all-source extension keys; review material only"
     },
     {
       "id": "hebrew_modern_geopolitical_presence",

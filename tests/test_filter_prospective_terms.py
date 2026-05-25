@@ -116,6 +116,40 @@ def test_filter_can_drop_rows_below_min_normalized_length(tmp_path: Path) -> Non
     assert payload["short_dropped_term_ids"] == ["short"]
 
 
+def test_filter_can_drop_language_stopwords(tmp_path: Path) -> None:
+    candidate = tmp_path / "candidate.csv"
+    audit = tmp_path / "audit.csv"
+    out = tmp_path / "filtered.csv"
+    write_csv(
+        candidate,
+        ["term_id", "concept", "category", "language", "term"],
+        [
+            ["drop_stopword", "Common Pronoun", "screen", "greek", "αὐτοῦ"],
+            ["keep_content", "Truth", "screen", "greek", "ἀλήθεια"],
+        ],
+    )
+    write_csv(audit, ["severity", "candidate_file", "candidate_term_id"], [])
+
+    code = filt.main(
+        [
+            "--candidate",
+            str(candidate),
+            "--audit",
+            str(audit),
+            "--out",
+            str(out),
+            "--drop-language-stopwords",
+            "greek",
+        ]
+    )
+
+    assert code == 0
+    assert [row["term_id"] for row in read_rows(out)] == ["keep_content"]
+    payload = json.loads((tmp_path / "filtered.csv.summary.json").read_text(encoding="utf-8"))
+    assert payload["stopword_dropped_term_ids"] == ["drop_stopword"]
+    assert payload["drop_language_stopwords"] == ["greek"]
+
+
 def test_filter_ignores_audit_rows_for_other_candidate_file(tmp_path: Path) -> None:
     candidate = tmp_path / "candidate.csv"
     other = tmp_path / "other.csv"

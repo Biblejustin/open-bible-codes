@@ -95,6 +95,24 @@ Stage B row family:
 | `αυτου` + `καταυτου` at skip 8 forward | 4 | 0.017749 | base string appears in the center verse surface text |
 | `αυτου` + `αυτουσοι` at skip 8 forward | 4 | 0.017749 | base string appears in the center verse surface text |
 
+Strict function-word follow-up:
+
+| Metric | Value |
+| --- | ---: |
+| Clean lock rows before strict gate | 5009 |
+| Strict lock rows after Greek stopword gate | 5002 |
+| Dropped stopword rows | 7 |
+| Strict Stage A exact extension keys | 2 |
+| Strict Stage A all-source keys | 0 |
+| Strict Stage A source-only keys | 2 |
+
+The strict follow-up used
+`terms/greek_lexicon_extension_terms_strict_lock.csv` and
+`protocols/greek_lexicon_extension_strict_stage_a_screen.toml`. It removed the
+common `αυτου`/`αυτοσ` function-word rows before rerunning the Stage A screen.
+No all-source exact-center extension key remained. The only strict rows were
+source-specific: `ειναιτον` in BYZ_NT and `ημεισσυν` in SBLGNT.
+
 ## Interpretation
 
 The numeric result survived Stage B controls. It is not discarded.
@@ -104,6 +122,11 @@ The interpretive read is still weak. Both all-source rows are based on
 contain the base normalized string in the surface verse. That means the rows are
 best treated as common-pronoun, surface-context review material rather than as
 claim-grade evidence.
+
+The strict function-word follow-up strengthens that caution. Once common Greek
+function words are excluded, the cross-source survivor set drops from two
+all-source rows to zero. That does not erase the original numeric run; it
+classifies it as a common-word artifact that should not be promoted.
 
 ## Outputs
 
@@ -116,6 +139,8 @@ Ignored report artifacts:
 - `reports/greek_lexicon_extension_stage_b_confirmation/paired_controls_summary.csv`;
 - `reports/greek_lexicon_extension_stage_b_confirmation/context_review.md`;
 - `reports/greek_lexicon_extension_stage_b_confirmation/letter_paths.md`.
+- `reports/greek_lexicon_extension_strict_stage_a_screen/pattern_presence.csv`;
+- `reports/greek_lexicon_extension_strict_stage_a_screen/pattern_presence.md`.
 
 ## Cautions
 

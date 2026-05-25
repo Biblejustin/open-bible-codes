@@ -120,3 +120,16 @@ def test_tracked_greek_lexicon_clean_lock_count() -> None:
 
     assert len(rows) == 5009
     assert len(normalized) == len(set(normalized))
+
+
+def test_tracked_greek_lexicon_strict_lock_drops_common_function_words() -> None:
+    path = Path("terms/greek_lexicon_extension_terms_strict_lock.csv")
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+
+    normalized = [normalize_text(row["term"], "greek") for row in rows]
+
+    assert len(rows) == 5002
+    assert len(normalized) == len(set(normalized))
+    assert "αυτου" not in normalized
+    assert "αυτοσ" not in normalized

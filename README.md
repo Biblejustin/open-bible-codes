@@ -469,6 +469,9 @@ The completed Stage B read is tracked in
 `docs/GREEK_LEXICON_EXTENSION_PROSPECTIVE_REPORT.md`: two all-source `αυτου`
 extension families survived numeric controls, but both remain
 common-pronoun/surface-context review material rather than claim evidence.
+A strict Greek function-word follow-up reran Stage A with
+`terms/greek_lexicon_extension_terms_strict_lock.csv`; after dropping seven
+common stopword rows, no all-source extension keys remained.
 
 Centered-Relevance Density scaffold:
 

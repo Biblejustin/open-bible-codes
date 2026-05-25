@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 142
+Protocols indexed: 143
 
 ## Analysis
 
@@ -18,6 +18,7 @@ Protocols indexed: 142
 | greek_expanded_surface_triage | Post-screen triage for expanded Greek exact-center surface rows. | 1 | terms/greek_expanded_prospective_terms.csv | reports/greek_expanded_surface_triage | `greek_expanded_surface_triage.toml` |
 | greek_lexicon_extension_stage_a_screen | Stage A screen for locked Strong's Greek lexicon exact-center extension candidates. | 10 | terms/greek_lexicon_extension_terms_clean_lock.csv | reports/greek_lexicon_extension_stage_a_screen | `greek_lexicon_extension_stage_a_screen.toml` |
 | greek_lexicon_extension_stage_b_confirmation | Stage B 20000/20000 confirmation for Greek lexicon Stage A survivors. | 2 |  | reports/greek_lexicon_extension_stage_b_confirmation | `greek_lexicon_extension_stage_b_confirmation.toml` |
+| greek_lexicon_extension_strict_stage_a_screen | Stage A screen for strict Greek lexicon exact-center extension candidates with function... | 10 | terms/greek_lexicon_extension_terms_strict_lock.csv | reports/greek_lexicon_extension_strict_stage_a_screen | `greek_lexicon_extension_strict_stage_a_screen.toml` |
 | greek_nt_claim_version_presence | Capped exact ELS hit-pattern presence for Greek NT claim terms across Greek NT corpora. | 1 | terms/greek_nt_claim_terms.csv | reports/greek_nt_claim_version_presence | `greek_nt_claim_version_presence.toml` |
 | greek_surface_new_terms | Locked Greek surface new-terms exact-center screen for the clean user-requested term lock. | 7 | terms/greek_surface_new_terms_clean_lock.csv | reports/greek_surface_new_terms | `greek_surface_new_terms.toml` |
 | hebrew_claim_version_presence | Capped exact ELS hit-pattern presence for declared Hebrew claim terms across MT-family ... | 1 | terms/hebrew_claim_terms.csv | reports/hebrew_claim_version_presence | `hebrew_claim_version_presence.toml` |

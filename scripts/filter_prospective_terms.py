@@ -14,6 +14,7 @@ from typing import Any
 
 from els import __version__
 from els.normalization import normalize_text
+from els.word_counts import STOPWORDS_BY_LANGUAGE
 
 
 DEFAULT_DROP_SEVERITIES = ("block", "review")
@@ -32,7 +33,11 @@ def main(argv: list[str] | None = None) -> int:
         drop_severities=drop_severities,
     )
     short_ids = short_term_ids(rows, min_normalized_length=args.min_normalized_length)
-    all_drop_ids = drop_ids | short_ids
+    stopword_ids = language_stopword_term_ids(
+        rows,
+        languages=set(args.drop_language_stopwords),
+    )
+    all_drop_ids = drop_ids | short_ids | stopword_ids
     kept_rows = [row for row in rows if row.get("term_id", "") not in all_drop_ids]
     dropped_rows = [row for row in rows if row.get("term_id", "") in all_drop_ids]
     write_candidate_rows(args.out, fieldnames, kept_rows)
@@ -56,6 +61,8 @@ def main(argv: list[str] | None = None) -> int:
             "dropped_term_ids": sorted(all_drop_ids),
             "audit_dropped_term_ids": sorted(drop_ids),
             "short_dropped_term_ids": sorted(short_ids),
+            "stopword_dropped_term_ids": sorted(stopword_ids),
+            "drop_language_stopwords": sorted(set(args.drop_language_stopwords)),
             "audit_severity_counts": dict(Counter(row.get("severity", "") for row in audit_rows)),
             "min_normalized_length": args.min_normalized_length,
             "min_remaining": args.min_remaining,
@@ -86,6 +93,13 @@ def build_parser() -> argparse.ArgumentParser:
         help="Audit severity to remove. Defaults to block and review.",
     )
     parser.add_argument("--min-remaining", type=int, default=1)
+    parser.add_argument(
+        "--drop-language-stopwords",
+        action="append",
+        default=[],
+        choices=sorted(STOPWORDS_BY_LANGUAGE),
+        help="Drop candidate rows whose normalized term is in the built-in language stopword set.",
+    )
     return parser
 
 
@@ -100,6 +114,28 @@ def short_term_ids(rows: list[dict[str, str]], *, min_normalized_length: int) ->
         if len(normalize_text(term, language)) < min_normalized_length:
             short_ids.add(term_id)
     return short_ids
+
+
+def language_stopword_term_ids(
+    rows: list[dict[str, str]],
+    *,
+    languages: set[str],
+) -> set[str]:
+    if not languages:
+        return set()
+    stopword_ids: set[str] = set()
+    for row in rows:
+        term_id = row.get("term_id", "")
+        language = row.get("language", "")
+        if language not in languages:
+            continue
+        stopwords = STOPWORDS_BY_LANGUAGE.get(language, set())
+        if not stopwords:
+            continue
+        normalized = normalize_text(row.get("term", ""), language)
+        if normalized in stopwords and term_id:
+            stopword_ids.add(term_id)
+    return stopword_ids
 
 
 def read_candidate_rows(path: Path) -> tuple[list[dict[str, str]], list[str]]:
