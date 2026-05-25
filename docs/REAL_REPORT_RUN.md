@@ -145,6 +145,8 @@ It requires:
   clean-lock summary support-doc references point at required local docs;
 - `protocols/real_report_run.toml` preflight inputs match the preflight
   script's required-path list, so the runnable protocol and script do not drift;
+- final report, draft, outline, and highlights keep their source-artifact and
+  no-public-claim assembly boundary;
 - prospective lane profiles valid, with registered term/protocol/report paths
   present, and the readiness, next-lock, and study-lock workflow docs agree
   with current lane state;

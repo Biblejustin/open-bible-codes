@@ -538,6 +538,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_final_report_assembly_docs.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_study_lock_manifests_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -953,6 +957,10 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/check_final_report_assembly_docs.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/check_study_lock_manifests_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -1207,6 +1215,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn("greek_second_cohort_readiness_doc_failures", payload)
             self.assertIn("consolidated_findings_doc_failures", payload)
             self.assertIn("prospective_lane_status_doc_failures", payload)
+            self.assertIn("final_report_assembly_doc_failures", payload)
             self.assertIn("study_mapping_schema_failures", payload)
             self.assertIn("preregistration_placeholder_paths", payload)
             self.assertIn("preregistration_placeholder_failures", payload)
@@ -1596,6 +1605,27 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "prospective lane-status doc failures: "
                 "docs/PROSPECTIVE_LANE_STATUS.md stale",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_final_report_assembly_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_final_report_assembly_docs,
+                "validate_final_report_assembly_docs",
+                return_value=["docs/FINAL_REPORT.md stale"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["final_report_assembly_doc_failures"],
+                ["docs/FINAL_REPORT.md stale"],
+            )
+            self.assertIn(
+                "final-report assembly doc failures: docs/FINAL_REPORT.md stale",
                 payload["failures"],
             )
 
