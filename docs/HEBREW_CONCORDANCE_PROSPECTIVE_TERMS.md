@@ -2,7 +2,8 @@
 
 Status: term-source registration and screening note, not a result report.
 
-On 2026-05-21, an open Hebrew concordance/lexicon source lane was added for future prospective work.
+On 2026-05-21, an open Hebrew concordance/lexicon source lane was added,
+clean-locked, and later run as a completed negative controlled result.
 
 ## Sources
 

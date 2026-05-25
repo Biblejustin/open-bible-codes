@@ -2,7 +2,9 @@
 
 Status: term-source registration and screening note, not a result report.
 
-On 2026-05-21, a user-requested Gospel and Greek surface term source was added for future prospective work. The raw tracked term files are:
+On 2026-05-21, a user-requested Gospel and Greek surface term source was added,
+clean-locked, and later run through completed prospective protocols. The raw
+tracked term files are:
 
 - `terms/greek_surface_new_terms.csv`
 - `terms/compound_extension_prospective_terms.csv`

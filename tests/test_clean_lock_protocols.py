@@ -82,6 +82,12 @@ def test_greek_new_terms_report_step_uses_specific_title() -> None:
 
 def test_clean_lock_results_summary_tracks_completed_lanes() -> None:
     text = Path("docs/CLEAN_LOCK_RESULTS_SUMMARY.md").read_text(encoding="utf-8")
+    user_terms = Path("docs/USER_REQUESTED_PROSPECTIVE_TERMS.md").read_text(
+        encoding="utf-8"
+    )
+    concordance_terms = Path("docs/HEBREW_CONCORDANCE_PROSPECTIVE_TERMS.md").read_text(
+        encoding="utf-8"
+    )
 
     assert "| Greek surface new terms | 236 |" in text
     assert "| Hebrew Gospel/genealogy | 27 |" in text
@@ -94,6 +100,10 @@ def test_clean_lock_results_summary_tracks_completed_lanes() -> None:
     assert "local surface-context/self-lexeme effects" in text
     assert "KJVA apocrypha bridge prospective lane used a committed" in text
     assert "current manifest/preflight workflow" in text
+    assert "completed prospective protocols" in user_terms
+    assert "completed negative controlled result" in concordance_terms
+    assert "future prospective work" not in user_terms
+    assert "future prospective work" not in concordance_terms
 
 
 def test_greek_lexicon_preregistration_is_historical_not_future_run() -> None:
