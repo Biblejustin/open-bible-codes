@@ -40,8 +40,11 @@ protocol rerun/cache check at commit `7d09fca`, and manual-review packet-shape
 drift guarding, plus prospective-readiness, next-lock, and study-lock workflow
 doc guard coverage, Greek second-cohort readiness guarding, consolidated
 findings prospective-boundary guarding, generated lane-status freshness
-guarding, final-report assembly-boundary guarding, and final-report highlights
-freshness guarding.
+guarding, final-report assembly-boundary guarding, final-report highlights
+freshness guarding, centered-occurrence index freshness guarding, strongest
+candidate deep-dive freshness guarding, claim-catalog summary guarding,
+real-report run doc guarding, and imported preflight check-script input
+guarding.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -217,6 +220,11 @@ Current pushed commits for this cleanup:
 - `dbe95db` Add WRR decision record worksheet.
 - `1bbd2f0` Enforce real report doc reference preflight.
 - `057168a` Check real report preflight input drift.
+- `3b80047` Guard centered occurrence index doc.
+- `259efa3` Guard strongest candidate deep dive doc.
+- `94a7622` Guard claim catalog summary doc.
+- `ae73a38` Guard real report run doc.
+- `8b8655b` Guard preflight check script inputs.
 
 ### Formal Real Report Rerun
 
@@ -817,8 +825,12 @@ supposed to fail if tracked files are dirty.
 
 Latest validation snapshot after the release-ready make target:
 
-- `make release-ready` passed, including `python3 -m pytest -q`: 1525 tests,
+- `make fast-validate` passed, including `python3 -m pytest -q`: 1543 tests,
   2 skipped, and 29195 subtests.
+- `make release-ready` passed, including `python3 -m pytest -q`: 1543 tests,
+  2 skipped, and 29195 subtests.
+- `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
+  passed after the latest pushed guard updates.
 - `python3 -m scripts.check_expanded_strata_tooling` passed inside
   `make fast-validate`.
 - `python3 -m scripts.check_public_claim_language` passed inside
