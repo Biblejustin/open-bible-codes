@@ -44,7 +44,7 @@ guarding, final-report assembly-boundary guarding, final-report highlights
 freshness guarding, centered-occurrence index freshness guarding, strongest
 candidate deep-dive freshness guarding, claim-catalog summary guarding,
 real-report run doc guarding, and imported preflight check-script input
-guarding.
+guarding, plus research missing model pages audit doc guarding.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -225,6 +225,7 @@ Current pushed commits for this cleanup:
 - `94a7622` Guard claim catalog summary doc.
 - `ae73a38` Guard real report run doc.
 - `8b8655b` Guard preflight check script inputs.
+- `d7fd47e` Guard research missing model audit doc.
 
 ### Formal Real Report Rerun
 
