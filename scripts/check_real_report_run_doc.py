@@ -22,6 +22,7 @@ REQUIRED_PHRASES = (
     "hypothesis-testing source audit doc keeps the source-status/no-result boundary visible",
     "research missing model pages audit doc keeps the missing level-2/3 model page boundary visible",
     "WRR adjacent source audit and simulation docs keep source-shape and simulation-only boundaries visible",
+    "critical-omission follow-up docs keep Setup, Method, Results, and Cautions sections plus current headline counts visible",
 )
 
 

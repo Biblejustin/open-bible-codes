@@ -199,6 +199,8 @@ It requires:
   boundary visible;
 - WRR adjacent source audit and simulation docs keep source-shape and
   simulation-only boundaries visible;
+- critical-omission follow-up docs keep Setup, Method, Results, and Cautions
+  sections plus current headline counts visible;
 - WRR manual decision register consolidates 37 manual-decision inventory rows,
   representing 58 action terms, 59 residual pair links, and 40
   minimum-frontier pair links without selecting corrections or exclusions;
