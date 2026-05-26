@@ -60,6 +60,9 @@ packet, plus source-row crop packet, contact-sheet image, and OCR word packet.
 The Cities source-row lock evidence packet doc is now CSV/manifest-guarded
 against builder row output, summary rows, manifest metadata, no-source-row-use
 locks, and source-script leakage.
+The Cities unreadable-PDF review doc is now CSV/manifest-guarded against
+builder row output, summary rows, manifest metadata, route/next-action drift,
+and source-script leakage.
 The WRR cross-pair grid doc is now CSV-guarded against grid-shape,
 corrected-distance, aggregate, and permutation-summary drift.
 The WRR direct all-lane diagnostic doc is now CSV-guarded against
@@ -131,14 +134,16 @@ by the Gans communities source-shape audit with 66 source records and 210
 community rows, without source-row import or result-bearing work. The
 unreadable-PDF review now routes the remaining 7 recovered unreadable PDFs into
 4 OCR/image-only rows and 3 encoding-or-OCR candidates, covering 41 pages
-without running OCR. The OCR feasibility probe then attempts those 41 pages
-with local English OCR and records text signal in all 7 rows and 39 pages,
-without storing OCR text in tracked files. The page-image review labels all 41
-pages, the source-row lock queue isolates 14 candidate pages across three
-labels, the worksheet assigns 14 lock decision ids, and the evidence packet
-joins those ids to PDF metadata/checksums/page-image paths without OCR body text
-or source-row import; the evidence-packet checker now locks those rows,
-summary metrics, and manifest boundaries back to builder output.
+without running OCR; the unreadable-review checker locks those rows, route
+metadata, summary metrics, and manifest boundaries back to builder output. The
+OCR feasibility probe then attempts those 41 pages with local English OCR and
+records text signal in all 7 rows and 39 pages, without storing OCR text in
+tracked files. The page-image review labels all 41 pages, the source-row lock
+queue isolates 14 candidate pages across three labels, the worksheet assigns 14
+lock decision ids, and the evidence packet joins those ids to PDF
+metadata/checksums/page-image paths without OCR body text or source-row import;
+the evidence-packet checker now locks those rows, summary metrics, and manifest
+boundaries back to builder output.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -265,6 +270,9 @@ Current result:
 - Pages needing review: 41.
 - Boundary: this does not run OCR, repair text, import source rows, normalize
   city names, run ELS searches, compute compactness, or verify p-levels.
+- Guard: `scripts/check_cities_unreadable_pdf_review_doc.py` now compares the
+  review CSV, summary CSV, and manifest to builder-derived output and fails on
+  source-script text or route/next-action drift.
 
 ### Cities Unreadable PDF OCR Feasibility
 
