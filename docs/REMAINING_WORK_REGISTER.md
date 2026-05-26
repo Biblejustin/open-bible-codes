@@ -70,6 +70,8 @@ The WRR source-review queue doc is now CSV-guarded against queue row,
 summary-bucket, source-flag, and visual-triage drift.
 The WRR source-recovery probe doc is now CSV/manifest-guarded against
 live-probe row, summary, source-manifest, and report-manifest drift.
+The WRR Wayback source-recovery probe doc is now CSV/manifest-guarded
+against archived probe row, summary, and report-manifest drift.
 The source-row review bundle, source-transcription evidence packet,
 source-transcription row-review checklist, and remaining-lane review checklist
 are now CSV-guarded as well. The source-policy review checklist is also
@@ -1228,8 +1230,10 @@ supposed to fail if tracked files are dirty.
 Latest validation snapshot after the release-ready make target, with current
 dirty-tree fast validation above it:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1822
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1827
   tests, 2 skipped, and 29196 subtests.
+- `python3 -m scripts.check_wrr_wayback_source_recovery_probe_doc` passed with
+  CSV-backed archived row/summary locks plus report-manifest locks.
 - `python3 -m scripts.check_wrr_source_recovery_probe_doc` passed with
   CSV-backed row/summary locks plus source-manifest and report-manifest locks.
 - `python3 -m scripts.check_wrr_source_review_queue_doc` passed with
