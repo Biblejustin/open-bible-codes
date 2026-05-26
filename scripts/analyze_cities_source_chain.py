@@ -388,6 +388,8 @@ def write_markdown(
             "buckets without OCR or result-bearing ELS work.",
             "`docs/CITIES_SOURCE_REVIEW_QUEUE.md` then merges recovered and unrecovered",
             "PDF rows into source-review action lanes for planning only.",
+            "`docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md` further separates readable PDFs",
+            "by source-review role without importing city rows.",
             "",
             "No city-name rows are normalized, no ELS search is run, and no p-level is",
             "verified here.",

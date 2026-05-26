@@ -1,0 +1,31 @@
+name = "cities_extractable_text_review"
+description = "Classify extractable Cities PDFs by source-review role without importing source rows."
+manifest_out = "reports/cities_pdf_recovery_probe/extractable_text_review_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_extractable_text_review"
+description = "Separate extractable Cities PDFs into data-table, method-context, and commentary/critique roles."
+argv = [
+  "-m", "scripts.build_cities_extractable_text_review",
+  "--queue", "reports/cities_pdf_recovery_probe/cities_source_review_queue.csv",
+  "--text-audit", "reports/cities_pdf_recovery_probe/cities_recovered_pdf_text_audit.csv",
+  "--anchors", "reports/cities_pdf_recovery_probe/cities_recovered_pdf_text_anchors.csv",
+  "--out", "reports/cities_pdf_recovery_probe/cities_extractable_text_review.csv",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_extractable_text_review_summary.csv",
+  "--markdown-out", "docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_extractable_text_review.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_extractable_text_review.py",
+  "reports/cities_pdf_recovery_probe/cities_source_review_queue.csv",
+  "reports/cities_pdf_recovery_probe/cities_recovered_pdf_text_audit.csv",
+  "reports/cities_pdf_recovery_probe/cities_recovered_pdf_text_anchors.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_extractable_text_review.csv",
+  "reports/cities_pdf_recovery_probe/cities_extractable_text_review_summary.csv",
+  "docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md",
+  "reports/cities_pdf_recovery_probe/cities_extractable_text_review.manifest.json",
+]

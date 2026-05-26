@@ -62,3 +62,7 @@ This queue is planning metadata. It does not decide source admissibility,
 does not create city-name rows, and does not make any result-bearing claim.
 Any later result protocol must separately lock source rows, normalization,
 filters, Genesis text, skip caps, compactness metric, and controls.
+
+The extractable-text role review in `docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md`
+separates the five readable PDFs into data-table, method-context, and
+commentary/critique lanes without changing this queue's boundary.

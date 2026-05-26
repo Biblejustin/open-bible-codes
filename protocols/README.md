@@ -218,6 +218,17 @@ encoding-or-OCR candidate, and missing-PDF recovery. It does not decide source
 admissibility or run result-bearing work. Tracked queue:
 `docs/CITIES_SOURCE_REVIEW_QUEUE.md`.
 
+Cities extractable-text role review:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_extractable_text_review.toml --resume
+```
+
+This classifies the five extractable Cities PDFs into data-table,
+method-context, and commentary/critique source-review roles. It does not import
+source rows, normalize city names, or run result-bearing work. Tracked review:
+`docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md`.
+
 Event/object experiment source audit:
 
 ```bash

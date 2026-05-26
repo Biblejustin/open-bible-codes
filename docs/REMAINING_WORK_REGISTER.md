@@ -60,7 +60,9 @@ PDF URLs in an isolated ignored bundle and records 12 usable archived PDFs plus
 PDFs into 5 extractable rows, 4 zero-text rows, and 3 garbled/non-Latin rows.
 The Cities source-review queue now turns all 35 PDF rows into next-action lanes:
 5 extractable-text review rows, 4 OCR/image-only rows, 3 encoding-or-OCR rows,
-and 23 missing-PDF recovery rows.
+and 23 missing-PDF recovery rows. The extractable-text role review separates the
+five readable PDFs into 1 data-bearing candidate, 1 method-context candidate,
+and 3 commentary/critique rows.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -147,6 +149,24 @@ Current result:
 - Boundary: this is planning metadata only; it does not decide source
   admissibility, create city-name rows, run ELS searches, compute compactness, or
   verify p-levels.
+
+### Cities Extractable Text Review
+
+Completed extractable-text role review:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_extractable_text_review.toml --resume
+```
+
+Current result:
+
+- Extractable rows reviewed: 5.
+- Anchors found: 5 of 5.
+- Data-bearing candidates: 1.
+- Method-context candidates: 1.
+- Commentary/critique rows: 3.
+- Boundary: this does not import source rows, decide admissibility, normalize
+  city names, run ELS searches, compute compactness, or verify p-levels.
 
 ### Locked Report Rerun And Volatility Cleanup
 

@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 366
+Documents indexed: 367
 
 ## Controls
 
@@ -227,6 +227,7 @@ Documents indexed: 366
 | Canonical First Summary | `CANONICAL_FIRST_SUMMARY.md` |
 | Centered Occurrence Index | `CENTERED_OCCURRENCE_INDEX.md` |
 | Chapter Position Bias | `CHAPTER_POSITION_BIAS.md` |
+| Cities Extractable Text Review | `CITIES_EXTRACTABLE_TEXT_REVIEW.md` |
 | Cities PDF Recovery Probe | `CITIES_PDF_RECOVERY_PROBE.md` |
 | Cities Recovered PDF Text Audit | `CITIES_RECOVERED_PDF_TEXT_AUDIT.md` |
 | Cities Source Chain Audit | `CITIES_SOURCE_CHAIN_AUDIT.md` |

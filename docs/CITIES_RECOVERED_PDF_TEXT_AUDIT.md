@@ -55,4 +55,5 @@ skip caps, compactness metric, and controls before ELS work.
 
 The follow-up queue in `docs/CITIES_SOURCE_REVIEW_QUEUE.md` turns these
 text-shape statuses into review lanes without changing this source-shape
-boundary.
+boundary. `docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md` further separates the five
+readable PDFs by source-review role.
