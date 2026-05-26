@@ -1,4 +1,6 @@
 import csv
+import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -13,20 +15,12 @@ class CitiesSourceRowLockEvidencePacketDocTests(unittest.TestCase):
     def test_flags_source_script_text_in_rows(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            doc = root / "packet.md"
-            rows = root / "rows.csv"
-            summary = root / "summary.csv"
-            doc.write_text(valid_doc_text(), encoding="utf-8")
-            row = valid_row("cities_source_row_lock_001")
-            row["evidence_required"] = "Hebrew source: אבג"
-            write_csv(rows, [row])
-            write_csv(summary, valid_summary("1"))
+            paths = copy_current_outputs(root)
+            fieldnames, rows = read_csv(paths["rows"])
+            rows[0]["evidence_required"] = "Hebrew source: אבג"
+            write_csv(paths["rows"], fieldnames, rows)
 
-            failures = check.validate_cities_source_row_lock_evidence_packet_doc(
-                doc,
-                rows,
-                summary,
-            )
+            failures = validate_tmp(paths)
 
             self.assertTrue(
                 any("source-script body text" in failure for failure in failures)
@@ -35,90 +29,87 @@ class CitiesSourceRowLockEvidencePacketDocTests(unittest.TestCase):
     def test_flags_source_row_import(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            doc = root / "packet.md"
-            rows = root / "rows.csv"
-            summary = root / "summary.csv"
-            doc.write_text(valid_doc_text(), encoding="utf-8")
-            row = valid_row("cities_source_row_lock_001")
-            row["current_decision"] = "source_row_import"
-            write_csv(rows, [row])
-            write_csv(summary, valid_summary("1"))
+            paths = copy_current_outputs(root)
+            fieldnames, rows = read_csv(paths["rows"])
+            rows[0]["current_decision"] = "source_row_import"
+            write_csv(paths["rows"], fieldnames, rows)
 
-            failures = check.validate_cities_source_row_lock_evidence_packet_doc(
-                doc,
-                rows,
-                summary,
-            )
+            failures = validate_tmp(paths)
 
             self.assertTrue(any("imports source row" in failure for failure in failures))
 
+    def test_flags_rows_fieldname_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            paths = copy_current_outputs(root)
+            fieldnames, rows = read_csv(paths["rows"])
+            fieldnames.remove("claim_boundary")
+            write_csv(paths["rows"], fieldnames, rows)
 
-def valid_doc_text() -> str:
-    return """# Cities Source Row Lock Evidence Packet
+            failures = validate_tmp(paths)
 
-Status: diagnostic evidence packet for Cities source-row lock candidates.
-It joins decision ids to PDF/source metadata and page-image paths.
-It does not transcribe rows. No OCR body text or source-script body text appears.
+            self.assertTrue(any("fieldnames drifted" in failure for failure in failures))
 
-- Evidence rows: 1.
-- Unique labels: 1.
-- Table-bearing candidate pages: 1.
-- Source-list candidate pages: 0.
-- Exception-note candidate pages: 0.
-- Recorded decision rows: 0.
-- Source-row imports: 0.
-- ELS runs: 0.
-- Compactness runs: 0.
+    def test_flags_summary_row_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            paths = copy_current_outputs(root)
+            fieldnames, rows = read_csv(paths["summary"])
+            rows[0]["value"] = "99"
+            write_csv(paths["summary"], fieldnames, rows)
 
-cities_source_row_lock_001 cities_source_row_lock_014
-This packet collects evidence locations only.
-does not copy their body text
-"""
+            failures = validate_tmp(paths)
+
+            self.assertTrue(any("summary rows drifted" in failure for failure in failures))
+
+    def test_flags_manifest_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            paths = copy_current_outputs(root)
+            manifest = json.loads(paths["manifest"].read_text(encoding="utf-8"))
+            manifest["rows"] = 99
+            paths["manifest"].write_text(
+                json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+
+            failures = validate_tmp(paths)
+
+            self.assertTrue(any("rows drifted" in failure for failure in failures))
 
 
-def valid_row(decision_id: str) -> dict[str, str]:
-    return {
-        "evidence_rank": "1",
-        "decision_id": decision_id,
-        "queue_lock_rank": "1",
-        "label": "cities_pdf_dp365a_p5_11",
-        "page_number": "1",
-        "family": "aumann_committee",
-        "page_class": "table_candidate_page",
-        "visual_page_role": "source_table_page",
-        "source_url": "https://example.test/source.pdf",
-        "selected_source": "archive",
-        "selected_path": "reports/source.pdf",
-        "source_sha256": "abc123",
-        "pdf_pages": "7",
-        "page_image_path": "reports/page.png",
-        "record_decision_status": "unrecorded",
-        "record_selected_action": "",
-        "evidence_prompt": "cite page evidence",
-        "evidence_required": "verify page evidence",
-        "source_row_use": "no_source_row_use",
-        "current_decision": "no_source_row_import",
-        "claim_boundary": "diagnostic evidence packet only",
+def copy_current_outputs(root: Path) -> dict[str, Path]:
+    paths = {
+        "doc": root / "packet.md",
+        "rows": root / "rows.csv",
+        "summary": root / "summary.csv",
+        "manifest": root / "manifest.json",
     }
+    shutil.copy2(check.DEFAULT_DOC, paths["doc"])
+    shutil.copy2(check.DEFAULT_ROWS, paths["rows"])
+    shutil.copy2(check.DEFAULT_SUMMARY, paths["summary"])
+    shutil.copy2(check.DEFAULT_MANIFEST, paths["manifest"])
+    return paths
 
 
-def valid_summary(rows: str) -> list[dict[str, str]]:
-    return [
-        {"metric": "evidence_rows", "value": rows},
-        {"metric": "unique_labels", "value": "1"},
-        {"metric": "table_candidate_pages", "value": "1"},
-        {"metric": "source_list_candidate_pages", "value": "0"},
-        {"metric": "exception_note_candidate_pages", "value": "0"},
-        {"metric": "recorded_decision_rows", "value": "0"},
-        {"metric": "source_row_imports", "value": "0"},
-        {"metric": "els_runs", "value": "0"},
-        {"metric": "compactness_runs", "value": "0"},
-    ]
+def validate_tmp(paths: dict[str, Path]) -> list[str]:
+    return check.validate_cities_source_row_lock_evidence_packet_doc(
+        paths["doc"],
+        paths["rows"],
+        paths["summary"],
+        paths["manifest"],
+    )
 
 
-def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
+def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
+    with path.open(encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        return list(reader.fieldnames or []), list(reader)
+
+
+def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, str]]) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
 

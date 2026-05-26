@@ -57,6 +57,9 @@ public-doc synchronization, exact-gap review-rank wording cleanup, and
 CSV-backed locks for the WRR exact-gap priority packet, method/pair-universe
 evidence packet, remaining-lane evidence packet, and source-row coverage
 packet, plus source-row crop packet, contact-sheet image, and OCR word packet.
+The Cities source-row lock evidence packet doc is now CSV/manifest-guarded
+against builder row output, summary rows, manifest metadata, no-source-row-use
+locks, and source-script leakage.
 The WRR cross-pair grid doc is now CSV-guarded against grid-shape,
 corrected-distance, aggregate, and permutation-summary drift.
 The WRR direct all-lane diagnostic doc is now CSV-guarded against
@@ -134,7 +137,8 @@ without storing OCR text in tracked files. The page-image review labels all 41
 pages, the source-row lock queue isolates 14 candidate pages across three
 labels, the worksheet assigns 14 lock decision ids, and the evidence packet
 joins those ids to PDF metadata/checksums/page-image paths without OCR body text
-or source-row import.
+or source-row import; the evidence-packet checker now locks those rows,
+summary metrics, and manifest boundaries back to builder output.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -406,6 +410,9 @@ Current result:
   page-image paths only. It does not copy OCR body text, transcribe source rows,
   import source text, normalize city names, run ELS searches, compute
   compactness, or verify p-levels.
+- Guard: `scripts/check_cities_source_row_lock_evidence_packet_doc.py` now
+  compares the packet CSV, summary CSV, and manifest to builder-derived output
+  and fails on source-script text or source-row imports.
 
 ### Cities Source Row Lock Decision Record Guard
 
