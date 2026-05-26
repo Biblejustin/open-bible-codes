@@ -1255,10 +1255,12 @@ supposed to fail if tracked files are dirty.
 Latest validation snapshot after the release-ready make target, with current
 dirty-tree fast validation above it:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1870
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1874
   tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_prospective_lane_status_doc` passed with JSON-backed
   lane id/status/path and status-count locks.
+- `python3 -m scripts.check_real_report_run_doc` passed with TOML-backed
+  protocol step/output locks plus Make target and generated-output path locks.
 - `python3 -m scripts.check_strongest_candidate_deep_dive_doc` passed with
   CSV-backed candidate-row locks plus manifest candidate-id/input/path metadata
   locks.
