@@ -66,6 +66,9 @@ and source-script leakage.
 The Cities unreadable-PDF OCR feasibility doc is now CSV/manifest-guarded
 against row schema, OCR parameter drift, recomputed summary totals, manifest
 metadata, and source-script leakage.
+The Cities unreadable-PDF OCR review packet doc is now CSV/manifest-guarded
+against packet schema, OCR sidecar path scope, recomputed summary totals,
+manifest metadata, and source-script leakage.
 The WRR cross-pair grid doc is now CSV-guarded against grid-shape,
 corrected-distance, aggregate, and permutation-summary drift.
 The WRR direct all-lane diagnostic doc is now CSV-guarded against
@@ -142,12 +145,15 @@ metadata, summary metrics, and manifest boundaries back to builder output. The
 OCR feasibility probe then attempts those 41 pages with local English OCR and
 records text signal in all 7 rows and 39 pages, without storing OCR text in
 tracked files; the OCR-feasibility checker locks the row schema, OCR parameters,
-recomputed summary totals, and manifest metadata. The page-image review labels
-all 41 pages, the source-row lock queue isolates 14 candidate pages across three
-labels, the worksheet assigns 14 lock decision ids, and the evidence packet
-joins those ids to PDF metadata/checksums/page-image paths without OCR body text
-or source-row import; the evidence-packet checker now locks those rows, summary
-metrics, and manifest boundaries back to builder output.
+recomputed summary totals, and manifest metadata. The OCR review packet records
+41 page rows with local sidecar paths and counts; the packet checker locks the
+schema, sidecar path scope, recomputed summary totals, and manifest metadata.
+The page-image review labels all 41 pages, the source-row lock queue isolates
+14 candidate pages across three labels, the worksheet assigns 14 lock decision
+ids, and the evidence packet joins those ids to PDF metadata, checksums, and
+page-image paths without OCR body text or source-row import; the evidence
+packet checker now locks those rows, summary metrics, and manifest boundaries
+back to builder output.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -322,6 +328,9 @@ Current result:
   images are ignored local review aids; this does not repair text, import
   source rows, normalize city names, run ELS searches, compute compactness, or
   verify p-levels.
+- Guard: `scripts/check_cities_unreadable_pdf_ocr_review_packet_doc.py` now
+  compares the packet CSV schema, sidecar path scope, recomputed summary rows,
+  and manifest parameters to tracked output and fails on source-script text.
 
 ### Cities Unreadable PDF OCR Review Checklist
 
