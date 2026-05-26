@@ -41,3 +41,6 @@ work.
 Follow-up review packet: `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md`
 creates ignored local page-image and OCR-text sidecars for those 41 pages
 and tracks only paths/counts/status.
+Follow-up checklist: `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md`
+groups those sidecars into review order and creates ignored local contact
+sheets.

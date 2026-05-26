@@ -1,0 +1,30 @@
+name = "cities_unreadable_pdf_ocr_review_checklist"
+description = "Build no-input review checklist and local contact sheets for Cities unreadable-PDF OCR sidecars."
+manifest_out = "reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review_checklist_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_unreadable_pdf_ocr_review_checklist"
+description = "Group OCR page sidecars into review order and render ignored local contact sheets."
+argv = [
+  "-m", "scripts.build_cities_unreadable_pdf_ocr_review_checklist",
+  "--packet", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_review_packet.csv",
+  "--contact-sheet-out", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_contact_sheet.png",
+  "--contact-sheet-dir", "reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/contact_sheets",
+  "--out", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_review_checklist.csv",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_review_checklist_summary.csv",
+  "--markdown-out", "docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_review_checklist.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_unreadable_pdf_ocr_review_checklist.py",
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_review_packet.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_review_checklist.csv",
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_review_checklist_summary.csv",
+  "docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md",
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_contact_sheet.png",
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_review_checklist.manifest.json",
+]

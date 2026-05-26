@@ -77,3 +77,7 @@ python3 -m scripts.build_cities_unreadable_pdf_ocr_review_packet --review report
 - OCR text must be checked against page images before any source-row use.
 - This packet does not decide source admissibility or create city-name rows.
 - Any later transcription decisions need separate citable decision records.
+
+Follow-up checklist: `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md`
+groups these page sidecars into review order and creates ignored local contact
+sheets.

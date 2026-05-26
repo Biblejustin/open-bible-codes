@@ -64,3 +64,5 @@ without running OCR.
 counts for those seven rows without storing OCR text in tracked files.
 `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md` creates ignored local
 page-image and OCR-text sidecars and tracks only review paths/counts/status.
+`docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md` groups those sidecars into
+review order and creates ignored local contact sheets.

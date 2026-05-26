@@ -60,6 +60,8 @@ running OCR.
 feasibility for those lanes without tracking OCR text.
 `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md` then builds ignored local
 page-image and OCR-text sidecars while tracking only paths/counts/status.
+`docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md` groups those sidecars into
+review order and contact sheets without source-row decisions.
 
 No city-name rows are normalized, no ELS search is run, and no p-level is
 verified here.

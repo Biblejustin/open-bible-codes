@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 151
+Protocols indexed: 152
 
 ## Analysis
 
@@ -14,6 +14,7 @@ Protocols indexed: 151
 | cities_pdf_recovery_probe | Probe live and archived Torah-code.org Cities PDF links into an isolated recovery bundle. | 1 |  | reports/cities_pdf_recovery_probe | `cities_pdf_recovery_probe.toml` |
 | cities_source_review_queue | Queue Cities recovered and unrecovered PDF source-review actions without result-bearing... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_review_queue.toml` |
 | cities_unreadable_pdf_ocr_feasibility | Probe OCR feasibility for recovered unreadable Cities PDFs without storing OCR text in ... | 1 |  | reports/cities_pdf_recovery_probe | `cities_unreadable_pdf_ocr_feasibility.toml` |
+| cities_unreadable_pdf_ocr_review_checklist | Build no-input review checklist and local contact sheets for Cities unreadable-PDF OCR ... | 1 |  | reports/cities_pdf_recovery_probe | `cities_unreadable_pdf_ocr_review_checklist.toml` |
 | cities_unreadable_pdf_ocr_review_packet | Build local page-image and OCR-text sidecars for recovered unreadable Cities PDFs witho... | 1 |  | reports/cities_pdf_recovery_probe | `cities_unreadable_pdf_ocr_review_packet.toml` |
 | cities_unreadable_pdf_review | Classify recovered but unreadable Cities PDFs into OCR and encoding review routes witho... | 1 |  | reports/cities_pdf_recovery_probe | `cities_unreadable_pdf_review.toml` |
 | cross_skip_summary | Summarize cross-skip pair strata from the match-strata index. | 1 |  | reports/cross_skip_summary | `cross_skip_summary.toml` |
