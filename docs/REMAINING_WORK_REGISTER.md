@@ -93,6 +93,8 @@ source-download metadata.
 The Israeli prime-ministers detail recovery probe doc is now CSV/manifest-guarded
 against detail-page rows, summary counts, snapshot bytes/checksums, and the
 live-source-recovery-only boundary.
+The strongest-candidate deep-dive doc is now CSV/manifest-guarded against
+candidate row order, candidate ids, source inputs, and report path metadata.
 The source-row review bundle, source-transcription evidence packet,
 source-transcription row-review checklist, and remaining-lane review checklist
 are now CSV-guarded as well. The source-policy review checklist is also
@@ -1251,8 +1253,11 @@ supposed to fail if tracked files are dirty.
 Latest validation snapshot after the release-ready make target, with current
 dirty-tree fast validation above it:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1861
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1864
   tests, 2 skipped, and 29196 subtests.
+- `python3 -m scripts.check_strongest_candidate_deep_dive_doc` passed with
+  CSV-backed candidate-row locks plus manifest candidate-id/input/path metadata
+  locks.
 - `python3 -m scripts.check_israeli_prime_ministers_detail_recovery_probe_doc`
   passed with CSV-backed detail-row and summary locks plus snapshot checksum and
   report-manifest boundary locks.
