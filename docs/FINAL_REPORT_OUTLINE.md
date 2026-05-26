@@ -177,7 +177,9 @@ Use cautious language:
   targets, row clusters, page-image near matches, and method/pair-universe
   counts; the source-policy checklist keeps the Chełm source-policy/pair-rule
   target as a review lane; the row-review checklist keeps 22 row clusters in
-  review order; the remaining-lane checklist keeps 3 page-image terms and 11
+  review order; the source-row review bundle joins those rows to generated crop
+  paths, the contact sheet, and OCR word evidence as a review aid only; the
+  remaining-lane checklist keeps 3 page-image terms and 11
   method/pair-universe terms in review lanes; the manual decision register
   consolidates 37 manual-decision inventory rows representing 58 action terms,
   59 residual pair links, and 40 minimum-frontier pair links; the populated

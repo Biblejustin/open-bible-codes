@@ -190,6 +190,8 @@ It requires:
   as a review lane with required decision-record fields;
 - WRR source-transcription row checklist keeps the 22 row clusters in review
   order with required decision-record fields;
+- WRR source-row review bundle joins those 22 row clusters to generated crop
+  paths, the contact sheet, and OCR word evidence as a review aid only;
 - WRR remaining-lane checklist keeps 3 page-image terms and 11
   method/pair-universe terms in review lanes with required decision-record
   fields;
@@ -320,6 +322,8 @@ The report-run summary should currently say:
   43 transcription/alignment terms into 22 row clusters for primary row review;
   `docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md` keeps those 22 row
   clusters in review order with required decision-record fields;
+  `docs/WRR_SOURCE_ROW_REVIEW_BUNDLE.md` joins the row checklist, generated
+  crop paths, contact sheet, and OCR word evidence as a review aid only;
   `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md` covers the 14 remaining
   page-image and method/pair-universe terms without selecting source edits;
   `docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md` keeps those terms in

@@ -354,13 +354,15 @@ method/pair-universe counts for no-input review. The source-policy checklist
 keeps the Chełm source-policy/pair-rule target as a review lane with required
 decision-record fields. The row-review checklist keeps the 22
 source-transcription row clusters in review order with required
-decision-record fields. The remaining-lane checklist keeps the 3 page-image
-near-match terms and 11 method/pair-universe terms in review lanes with
-required decision-record fields. The manual decision register consolidates 37
-manual-decision inventory rows representing 58 action terms, 59 residual pair
-links, and 40 minimum-frontier pair links. The populated decision-record CSV
-locks all 37 rows as 26 `no_source_change` decisions and 11 `method_lock`
-decisions.
+decision-record fields. The source-row review bundle joins those rows to
+generated crop paths, the contact sheet, and OCR word evidence; it is a review
+aid only and does not select source changes. The remaining-lane checklist keeps
+the 3 page-image near-match terms and 11 method/pair-universe terms in review
+lanes with required decision-record fields. The manual decision register
+consolidates 37 manual-decision inventory rows representing 58 action terms,
+59 residual pair links, and 40 minimum-frontier pair links. The populated
+decision-record CSV locks all 37 rows as 26 `no_source_change` decisions and
+11 `method_lock` decisions.
 
 ## Negative And Weak Results
 
