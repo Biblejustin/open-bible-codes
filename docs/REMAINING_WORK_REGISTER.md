@@ -56,7 +56,7 @@ packet guarding, WRR source-row review bundle guarding, WRR source-row bundle
 public-doc synchronization, exact-gap review-rank wording cleanup, and
 CSV-backed locks for the WRR exact-gap priority packet, method/pair-universe
 evidence packet, remaining-lane evidence packet, and source-row coverage
-packet, plus source-row crop packet and contact-sheet image.
+packet, plus source-row crop packet, contact-sheet image, and OCR word packet.
 Cities source-row lock queueing, worksheet generation, evidence-packet
 assembly, and decision-record preflight guarding now keep Cities source-row
 candidate pages out of result-bearing work until citable lock records exist.
@@ -992,6 +992,10 @@ no-input boundary before real-report preflight can pass.
 The source-row crop contact-sheet checker now validates the tracked doc plus
 the local PNG header/dimensions (`1930 x 1742`) so stale or missing visual aids
 fail preflight instead of only prose drift.
+The source-row OCR word checker now validates its CSV summary and packet rows:
+22 rows with tokens, 19 frontier rows, 337 OCR words, 972 normalized Hebrew OCR
+letters, 78 low-confidence words, crop path scope, and no-input boundary before
+real-report preflight can pass.
 `scripts/check_wrr_public_handoff_docs.py` now guards the README, report-run
 doc, final report files, consolidated findings, outline, and remaining-work
 register against stale WRR blocker wording. It is wired into report preflight
@@ -1193,7 +1197,7 @@ supposed to fail if tracked files are dirty.
 Latest validation snapshot after the release-ready make target, with current
 dirty-tree fast validation above it:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1750
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1753
   tests, 2 skipped, and 29196 subtests.
 - Cities public handoff docs checker passed and is wired into real-report
   preflight.
