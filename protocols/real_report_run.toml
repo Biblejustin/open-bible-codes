@@ -21,6 +21,7 @@ inputs = [
   "scripts/check_final_report_highlights_doc.py",
   "scripts/check_centered_occurrence_index_doc.py",
   "scripts/check_claim_catalog_doc.py",
+  "scripts/check_cities_public_handoff_docs.py",
   "scripts/check_real_report_run_doc.py",
   "scripts/check_strongest_candidate_deep_dive_doc.py",
   "els/project_index.py",

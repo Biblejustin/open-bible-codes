@@ -684,6 +684,14 @@ rows, 8 detail rows).
 Cities source-chain audit:
 `docs/CITIES_SOURCE_CHAIN_AUDIT.md` (6 PDF-named wrappers, 5 Wayback job
 failures).
+Cities source-row lock handoff:
+`docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md`,
+`docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md`,
+`docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md`, and
+`data/study/mappings/cities_source_row_lock_decisions.csv`. Current boundary:
+14 source-row lock candidate pages, 0 populated lock rows, no source rows
+imported, and no city-name normalization, ELS searches, compactness runs, or
+p-levels.
 Event/object experiment source audit:
 `docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md` (65 machine-readable source rows).
 Under-construction experiment source audit:

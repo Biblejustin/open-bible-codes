@@ -552,6 +552,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_cities_public_handoff_docs.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_wrr_source_audit_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -2365,6 +2369,30 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "WRR public handoff doc failures: "
                 "README.md missing phrase: WRR claim-blocker packet:",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_cities_public_handoff_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_cities_public_handoff_docs,
+                "validate_public_handoff_docs",
+                return_value=[
+                    "README.md missing phrase: Cities source-row lock handoff:"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["cities_public_handoff_doc_failures"],
+                ["README.md missing phrase: Cities source-row lock handoff:"],
+            )
+            self.assertIn(
+                "Cities public handoff doc failures: "
+                "README.md missing phrase: Cities source-row lock handoff:",
                 payload["failures"],
             )
 

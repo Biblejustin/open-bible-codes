@@ -41,6 +41,12 @@ Post-baseline follow-on artifact:
 
 - `docs/APOCRYPHA_BRIDGE_STUDY.md`
 
+Source-review handoff artifact:
+
+- Cities source-row lock handoff: 14 source-row lock candidate pages, 0
+  populated lock rows, no source rows imported, and no city-name normalization,
+  ELS searches, compactness runs, or p-levels.
+
 ## Recommended Report Shape
 
 ### 1. Executive Summary
@@ -185,6 +191,9 @@ Use cautious language:
   59 residual pair links, and 40 minimum-frontier pair links; the populated
   decision-record CSV locks all 37 rows as 26 `no_source_change` decisions and
   11 `method_lock` decisions;
+- Cities source-row lock handoff remains source-review only: 14 source-row lock
+  candidate pages, 0 populated lock rows, no source rows imported, and no
+  city-name normalization, ELS searches, compactness runs, or p-levels;
 - current accepted repo-defined 999,999 date-label permutation result keeps the
   selected full source universe, uses the cap-1000 corrected-distance field,
   observes 182 rows and 72 defined `c(w,w')` values, and reports Bonferroni

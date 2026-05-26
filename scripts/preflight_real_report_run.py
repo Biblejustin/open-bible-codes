@@ -24,6 +24,7 @@ from scripts import (
     check_centered_occurrence_index_doc,
     check_claim_catalog_doc,
     check_cities_extractable_text_review_doc,
+    check_cities_public_handoff_docs,
     check_crd_relevance_dictionary,
     check_cities_pdf_recovery_probe_doc,
     check_cities_recovered_pdf_text_audit_doc,
@@ -656,6 +657,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_wrr_wayback_source_recovery_probe.py",
     "scripts/check_wrr_wayback_source_recovery_probe_doc.py",
     "scripts/build_cities_pdf_recovery_probe.py",
+    "scripts/check_cities_public_handoff_docs.py",
     "scripts/check_cities_pdf_recovery_probe_doc.py",
     "scripts/analyze_cities_recovered_pdf_text.py",
     "scripts/check_cities_recovered_pdf_text_audit_doc.py",
@@ -1088,6 +1090,15 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "WRR public handoff doc failures: "
             + "; ".join(wrr_public_handoff_doc_failures)
+        )
+
+    cities_public_handoff_doc_failures = (
+        check_cities_public_handoff_docs.validate_public_handoff_docs()
+    )
+    if cities_public_handoff_doc_failures:
+        failures.append(
+            "Cities public handoff doc failures: "
+            + "; ".join(cities_public_handoff_doc_failures)
         )
 
     wrr_source_audit_doc_failures = (
@@ -1658,6 +1669,7 @@ def main(argv: list[str] | None = None) -> int:
             wrr_exact_gap_priority_packet_doc_failures
         ),
         "wrr_public_handoff_doc_failures": wrr_public_handoff_doc_failures,
+        "cities_public_handoff_doc_failures": cities_public_handoff_doc_failures,
         "wrr_source_audit_doc_failures": wrr_source_audit_doc_failures,
         "wrr_support_docs_local_lock_failures": (
             wrr_support_docs_local_lock_failures

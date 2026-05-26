@@ -57,6 +57,9 @@ public-doc synchronization, and exact-gap review-rank wording cleanup.
 Cities source-row lock queueing, worksheet generation, evidence-packet
 assembly, and decision-record preflight guarding now keep Cities source-row
 candidate pages out of result-bearing work until citable lock records exist.
+Cities source-row lock handoff: 14 source-row lock candidate pages, 0 populated
+lock rows, no source rows imported, and no city-name normalization, ELS
+searches, compactness runs, or p-levels.
 The Cities PDF recovery probe now checks the 35 linked Cities/Aumann/Simon-McKay
 PDF URLs in an isolated ignored bundle and records 12 usable archived PDFs plus
 23 unrecovered links; the follow-up recovered-PDF text audit classifies those 12
@@ -1169,10 +1172,13 @@ make release-ready
 Run `make release-ready` from a committed tree; the final public-release gate is
 supposed to fail if tracked files are dirty.
 
-Latest validation snapshot:
+Latest validation snapshot after the release-ready make target, with current
+dirty-tree fast validation above it:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1720
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1726
   tests, 2 skipped, and 29195 subtests.
+- Cities public handoff docs checker passed and is wired into real-report
+  preflight.
 - Focused Cities decision-record/preflight pytest passed:
   `tests/test_real_report_run.py`,
   `tests/test_check_cities_source_row_lock_decision_records.py`, and

@@ -93,6 +93,10 @@ This assembly run includes:
   `docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md`,
   `docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md`, and
   `docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md`
+  plus `data/study/mappings/cities_source_row_lock_decisions.csv`. Cities
+  source-row lock handoff: 14 source-row lock candidate pages, 0 populated
+  lock rows, no source rows imported, and no city-name normalization, ELS
+  searches, compactness runs, or p-levels.
 - broader search/current findings writeup:
   `docs/BROADER_SEARCH_FINDINGS.md`
 - broad Hebrew modern/geopolitical version-distribution run:
@@ -209,6 +213,9 @@ It requires:
   sections plus current headline counts visible;
 - Cities source-row lock decision records stay aligned to the 14-row evidence
   packet before any populated source-row lock can pass preflight;
+- Cities source-row lock handoff stays source-review only: 14 source-row lock
+  candidate pages, 0 populated lock rows, no source rows imported, and no
+  city-name normalization, ELS searches, compactness runs, or p-levels;
 - WRR manual decision register consolidates 37 manual-decision inventory rows,
   representing 58 action terms, 59 residual pair links, and 40
   minimum-frontier pair links without selecting corrections or exclusions;

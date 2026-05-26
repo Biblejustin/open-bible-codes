@@ -467,6 +467,15 @@ consolidates 37 manual-decision inventory rows representing 58 action terms,
 decision-record CSV locks all 37 rows as 26 `no_source_change` decisions and
 11 `method_lock` decisions. These packets organize review evidence without
 choosing corrections, method changes, or exclusions.
+
+Cities source-row lock handoff: 14 source-row lock candidate pages, 0 populated
+lock rows, no source rows imported, and no city-name normalization, ELS
+searches, compactness runs, or p-levels. The handoff is source-review only and
+is tracked in `docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md`,
+`docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md`,
+`docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md`, and
+`data/study/mappings/cities_source_row_lock_decisions.csv`.
+
 The exact-reproduction gap dashboard consolidates the current 163 vs 72
 defined-distance gap, the residual gap 40 after simple-variant upper bound, and
 the review order: one source-policy/pair-rule item, five leading
