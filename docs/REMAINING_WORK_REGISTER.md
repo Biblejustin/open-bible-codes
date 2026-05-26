@@ -63,6 +63,9 @@ locks, and source-script leakage.
 The Cities unreadable-PDF review doc is now CSV/manifest-guarded against
 builder row output, summary rows, manifest metadata, route/next-action drift,
 and source-script leakage.
+The Cities unreadable-PDF OCR feasibility doc is now CSV/manifest-guarded
+against row schema, OCR parameter drift, recomputed summary totals, manifest
+metadata, and source-script leakage.
 The WRR cross-pair grid doc is now CSV-guarded against grid-shape,
 corrected-distance, aggregate, and permutation-summary drift.
 The WRR direct all-lane diagnostic doc is now CSV-guarded against
@@ -138,12 +141,13 @@ without running OCR; the unreadable-review checker locks those rows, route
 metadata, summary metrics, and manifest boundaries back to builder output. The
 OCR feasibility probe then attempts those 41 pages with local English OCR and
 records text signal in all 7 rows and 39 pages, without storing OCR text in
-tracked files. The page-image review labels all 41 pages, the source-row lock
-queue isolates 14 candidate pages across three labels, the worksheet assigns 14
-lock decision ids, and the evidence packet joins those ids to PDF
-metadata/checksums/page-image paths without OCR body text or source-row import;
-the evidence-packet checker now locks those rows, summary metrics, and manifest
-boundaries back to builder output.
+tracked files; the OCR-feasibility checker locks the row schema, OCR parameters,
+recomputed summary totals, and manifest metadata. The page-image review labels
+all 41 pages, the source-row lock queue isolates 14 candidate pages across three
+labels, the worksheet assigns 14 lock decision ids, and the evidence packet
+joins those ids to PDF metadata/checksums/page-image paths without OCR body text
+or source-row import; the evidence-packet checker now locks those rows, summary
+metrics, and manifest boundaries back to builder output.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -293,6 +297,9 @@ Current result:
 - Boundary: this does not store OCR text in tracked files, repair text, import
   source rows, normalize city names, run ELS searches, compute compactness, or
   verify p-levels.
+- Guard: `scripts/check_cities_unreadable_pdf_ocr_feasibility_doc.py` now
+  compares the feasibility CSV schema, recomputed summary rows, and manifest
+  parameters to tracked output and fails on source-script text.
 
 ### Cities Unreadable PDF OCR Review Packet
 
