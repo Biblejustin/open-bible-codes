@@ -180,6 +180,7 @@ inputs = [
   "reports/wrr_1994/tessdata/heb.traineddata",
 ]
 outputs = [
+  "reports/wrr_1994/wrr_primary_table2_page-06.png",
   "reports/wrr_1994/wrr_primary_table2_ocr_probe.csv",
   "reports/wrr_1994/wrr_primary_table2_ocr_probe_summary.csv",
   "reports/wrr_1994/wrr_primary_table2_ocr_probe.md",
@@ -210,6 +211,7 @@ inputs = [
   "reports/wrr_1994/tessdata/heb.traineddata",
 ]
 outputs = [
+  "reports/wrr_1994/wrr_primary_table2_row_ocr.tsv",
   "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv",
   "reports/wrr_1994/wrr_primary_table2_row_ocr_probe_summary.csv",
   "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.md",
@@ -1150,6 +1152,34 @@ outputs = [
   "reports/wrr_1994/wrr_source_row_coverage_packet_summary.csv",
   "docs/WRR_SOURCE_ROW_COVERAGE_PACKET.md",
   "reports/wrr_1994/wrr_source_row_coverage_packet.manifest.json",
+]
+
+[[steps]]
+id = "build_wrr_source_row_crop_packet"
+description = "Build no-input row-crop packet for WRR source-row review."
+argv = [
+  "-m", "scripts.build_wrr_source_row_crop_packet",
+  "--row-checklist", "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv",
+  "--tsv", "reports/wrr_1994/wrr_primary_table2_row_ocr.tsv",
+  "--image", "reports/wrr_1994/wrr_primary_table2_page-06.png",
+  "--crop-dir", "reports/wrr_1994/source_review_crops_auto",
+  "--manual-crop-dir", "reports/wrr_1994/source_review_crops",
+  "--out", "reports/wrr_1994/wrr_source_row_crop_packet.csv",
+  "--summary-out", "reports/wrr_1994/wrr_source_row_crop_packet_summary.csv",
+  "--markdown-out", "docs/WRR_SOURCE_ROW_CROP_PACKET.md",
+  "--manifest-out", "reports/wrr_1994/wrr_source_row_crop_packet.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_source_row_crop_packet.py",
+  "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv",
+  "reports/wrr_1994/wrr_primary_table2_row_ocr.tsv",
+  "reports/wrr_1994/wrr_primary_table2_page-06.png",
+]
+outputs = [
+  "reports/wrr_1994/wrr_source_row_crop_packet.csv",
+  "reports/wrr_1994/wrr_source_row_crop_packet_summary.csv",
+  "docs/WRR_SOURCE_ROW_CROP_PACKET.md",
+  "reports/wrr_1994/wrr_source_row_crop_packet.manifest.json",
 ]
 
 [[steps]]

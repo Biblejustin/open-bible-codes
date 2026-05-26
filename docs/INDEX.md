@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 358
+Documents indexed: 359
 
 ## Controls
 
@@ -121,6 +121,7 @@ Documents indexed: 358
 | WRR Source Recovery Probe | `WRR_SOURCE_RECOVERY_PROBE.md` |
 | WRR Source Review Queue | `WRR_SOURCE_REVIEW_QUEUE.md` |
 | WRR Source Row Coverage Packet | `WRR_SOURCE_ROW_COVERAGE_PACKET.md` |
+| WRR Source Row Crop Packet | `WRR_SOURCE_ROW_CROP_PACKET.md` |
 | WRR Source-Transcription Evidence Packet | `WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md` |
 | WRR Source-Transcription Row Review Checklist | `WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md` |
 | WRR Source Visual Review Notes | `WRR_SOURCE_VISUAL_REVIEW_NOTES.md` |
