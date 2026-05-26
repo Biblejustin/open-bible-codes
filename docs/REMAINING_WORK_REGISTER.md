@@ -87,6 +87,9 @@ The centered occurrence index doc is now CSV/manifest-guarded against generated
 occurrence rows, presence-summary rows, source/type counts, and path metadata.
 The final-report highlights doc is now CSV/manifest-guarded against generated
 highlight rows, claim-catalog row counts, and report path metadata.
+The hypothesis-testing source audit doc is now CSV/manifest-guarded against
+page rows, summary counts, protocol anchors, report-manifest boundaries, and
+source-download metadata.
 The source-row review bundle, source-transcription evidence packet,
 source-transcription row-review checklist, and remaining-lane review checklist
 are now CSV-guarded as well. The source-policy review checklist is also
@@ -1245,8 +1248,11 @@ supposed to fail if tracked files are dirty.
 Latest validation snapshot after the release-ready make target, with current
 dirty-tree fast validation above it:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1851
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1857
   tests, 2 skipped, and 29196 subtests.
+- `python3 -m scripts.check_hypothesis_testing_source_audit_doc` passed with
+  CSV-backed page, summary, and anchor locks plus report/source-manifest
+  boundary locks.
 - `python3 -m scripts.check_final_report_highlights_doc` passed with
   CSV-backed highlight-row locks plus manifest claim-catalog count and path
   metadata locks.
