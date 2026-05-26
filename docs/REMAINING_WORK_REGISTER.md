@@ -72,6 +72,9 @@ manifest metadata, and source-script leakage.
 The Cities unreadable-PDF OCR review checklist doc is now CSV/manifest-guarded
 against checklist schema, contact-sheet path scope, recomputed summary totals,
 manifest contact-summary metadata, and source-script leakage.
+The Cities unreadable-PDF OCR page-review doc is now CSV/manifest-guarded
+against builder-derived decision rows, summary rows, manifest inputs,
+no-source-row-use locks, and source-script leakage.
 The WRR cross-pair grid doc is now CSV-guarded against grid-shape,
 corrected-distance, aggregate, and permutation-summary drift.
 The WRR direct all-lane diagnostic doc is now CSV-guarded against
@@ -154,11 +157,13 @@ schema, sidecar path scope, recomputed summary totals, and manifest metadata.
 The OCR review checklist groups the 7 PDFs into local contact-sheet review
 rows; the checklist checker locks contact-sheet path scope, recomputed summary
 totals, and manifest contact-summary metadata. The page-image review labels all
-41 pages, the source-row lock queue isolates 14 candidate pages across three
-labels, the worksheet assigns 14 lock decision ids, and the evidence packet
-joins those ids to PDF metadata, checksums, and page-image paths without OCR
-body text or source-row import; the evidence packet checker now locks those
-rows, summary metrics, and manifest boundaries back to builder output.
+41 pages; the page-review checker locks builder-derived decision rows, summary
+rows, manifest inputs, and no-source-row-use boundaries. The source-row lock
+queue isolates 14 candidate pages across three labels, the worksheet assigns 14
+lock decision ids, and the evidence packet joins those ids to PDF metadata,
+checksums, and page-image paths without OCR body text or source-row import; the
+evidence packet checker now locks those rows, summary metrics, and manifest
+boundaries back to builder output.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -383,6 +388,9 @@ Current result:
 - Boundary: this records page-image review labels only; no OCR body text,
   repaired text, source-row import, city-name normalization, ELS search,
   compactness calculation, or p-level verification is performed.
+- Guard: `scripts/check_cities_unreadable_pdf_ocr_page_review_doc.py` now
+  compares page-review rows, summary rows, and manifest inputs to
+  builder-derived output and fails on source-script text or source-row use.
 
 ### Cities Source Row Lock Queue
 
