@@ -556,6 +556,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_cities_claim_catalog_boundary.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_wrr_source_audit_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -2393,6 +2397,30 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "Cities public handoff doc failures: "
                 "README.md missing phrase: Cities source-row lock handoff:",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_cities_claim_catalog_boundary_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_cities_claim_catalog_boundary,
+                "validate_cities_claim_catalog_boundary",
+                return_value=[
+                    "claims/claim_catalog.csv cities row promoted"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["cities_claim_catalog_boundary_failures"],
+                ["claims/claim_catalog.csv cities row promoted"],
+            )
+            self.assertIn(
+                "Cities claim-catalog boundary failures: "
+                "claims/claim_catalog.csv cities row promoted",
                 payload["failures"],
             )
 

@@ -23,6 +23,7 @@ from els.project_index import (
 from scripts import (
     check_centered_occurrence_index_doc,
     check_claim_catalog_doc,
+    check_cities_claim_catalog_boundary,
     check_cities_extractable_text_review_doc,
     check_cities_public_handoff_docs,
     check_crd_relevance_dictionary,
@@ -133,6 +134,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_final_report_highlights_doc.py",
     "scripts/check_centered_occurrence_index_doc.py",
     "scripts/check_claim_catalog_doc.py",
+    "scripts/check_cities_claim_catalog_boundary.py",
     "scripts/check_real_report_run_doc.py",
     "scripts/check_critical_omission_followup_docs.py",
     "scripts/check_strongest_candidate_deep_dive_doc.py",
@@ -899,6 +901,19 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(claim_catalog_doc_failures)
         )
 
+    cities_claim_catalog_boundary_failures = (
+        check_cities_claim_catalog_boundary.validate_cities_claim_catalog_boundary(
+            root / check_cities_claim_catalog_boundary.DEFAULT_CATALOG,
+            root / check_cities_claim_catalog_boundary.DEFAULT_DOC,
+            root / check_cities_claim_catalog_boundary.DEFAULT_RECORDS,
+        )
+    )
+    if cities_claim_catalog_boundary_failures:
+        failures.append(
+            "Cities claim-catalog boundary failures: "
+            + "; ".join(cities_claim_catalog_boundary_failures)
+        )
+
     critical_omission_doc_failures = (
         check_critical_omission_followup_docs.validate_critical_omission_docs(root)
     )
@@ -1642,6 +1657,9 @@ def main(argv: list[str] | None = None) -> int:
         "prospective_lane_status_doc_failures": prospective_lane_status_doc_failures,
         "final_report_assembly_doc_failures": final_report_assembly_doc_failures,
         "final_report_highlights_doc_failures": final_report_highlights_doc_failures,
+        "cities_claim_catalog_boundary_failures": (
+            cities_claim_catalog_boundary_failures
+        ),
         "critical_omission_doc_failures": critical_omission_doc_failures,
         "source_basis_failures": source_basis_failures,
         "english_corpus_policy_failures": english_corpus_policy_failures,

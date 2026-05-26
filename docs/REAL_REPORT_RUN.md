@@ -156,6 +156,8 @@ It requires:
 - final report, draft, outline, and highlights keep their source-artifact and
   no-public-claim assembly boundary;
 - claim-catalog summary table stays aligned with `claims/claim_catalog.csv`;
+- Cities claim-catalog row stays `under_specified`, source-review only, and
+  aligned with the header-only Cities source-row lock decision records;
 - final report highlights markdown matches the deterministic builder output;
 - centered occurrence index markdown matches the deterministic builder output;
 - strongest candidate deep-dive markdown matches the deterministic builder
