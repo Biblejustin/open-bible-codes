@@ -64,6 +64,8 @@ cap-250/cap-1000 corrected-distance, aggregate, program-formula, and D(w)
 sensitivity drift.
 The WRR D(w) formula sensitivity doc is now CSV-guarded against sensitivity
 summary and changed-pair drift.
+The WRR source-policy scenario doc is now CSV-guarded against scenario,
+term-impact, and scenario-pair drift.
 The source-row review bundle, source-transcription evidence packet,
 source-transcription row-review checklist, and remaining-lane review checklist
 are now CSV-guarded as well. The source-policy review checklist is also
@@ -1222,8 +1224,10 @@ supposed to fail if tracked files are dirty.
 Latest validation snapshot after the release-ready make target, with current
 dirty-tree fast validation above it:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1810
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1814
   tests, 2 skipped, and 29196 subtests.
+- `python3 -m scripts.check_wrr_source_policy_scenarios_doc` passed with
+  CSV-backed scenario, term-impact, and scenario-pair locks.
 - `python3 -m scripts.check_wrr_dw_formula_sensitivity_doc` passed with
   CSV-backed sensitivity summary and changed-pair locks.
 - `python3 -m scripts.check_wrr_direct_all_lanes_doc` passed with CSV-backed
