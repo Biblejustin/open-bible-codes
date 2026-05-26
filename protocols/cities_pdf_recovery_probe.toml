@@ -1,0 +1,34 @@
+name = "cities_pdf_recovery_probe"
+description = "Probe live and archived Torah-code.org Cities PDF links into an isolated recovery bundle."
+manifest_out = "reports/cities_pdf_recovery_probe/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_pdf_recovery_probe"
+description = "Fetch and classify Cities/Aumann/Simon-McKay PDF links without running ELS results."
+always_run = true
+argv = [
+  "-m", "scripts.build_cities_pdf_recovery_probe",
+  "--refresh",
+  "--source-glob", "reports/wrr_1994/torah_code_experiment_cities*.html",
+  "--snapshot-dir", "reports/cities_pdf_recovery_probe/snapshots",
+  "--out", "reports/cities_pdf_recovery_probe/cities_pdf_recovery_probe.csv",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_pdf_recovery_probe_summary.csv",
+  "--markdown-out", "docs/CITIES_PDF_RECOVERY_PROBE.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_pdf_recovery_probe.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_pdf_recovery_probe.py",
+  "reports/wrr_1994/torah_code_experiment_cities.html",
+  "reports/wrr_1994/torah_code_experiment_cities_gans.html",
+  "reports/wrr_1994/torah_code_experiment_cities_aumann.html",
+  "reports/wrr_1994/torah_code_experiment_cities_simon_mckay.html",
+  "reports/wrr_1994/torah_code_experiment_cities_haralick.html",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_pdf_recovery_probe.csv",
+  "reports/cities_pdf_recovery_probe/cities_pdf_recovery_probe_summary.csv",
+  "docs/CITIES_PDF_RECOVERY_PROBE.md",
+  "reports/cities_pdf_recovery_probe/cities_pdf_recovery_probe.manifest.json",
+]

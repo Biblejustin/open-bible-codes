@@ -54,6 +54,9 @@ guarding, WRR source-row coverage packet guarding, WRR source-row crop packet
 guarding, WRR source-row crop contact-sheet guarding, WRR source-row OCR word
 packet guarding, WRR source-row review bundle guarding, WRR source-row bundle
 public-doc synchronization, and exact-gap review-rank wording cleanup.
+The Cities PDF recovery probe now checks the 35 linked Cities/Aumann/Simon-McKay
+PDF URLs in an isolated ignored bundle and records 12 usable archived PDFs plus
+23 unrecovered links.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -84,6 +87,24 @@ local NASB EPUB is PDF-derived/two-column and is not safe for verse-level CSV
 import without a dedicated parser.
 
 ## Completed This Pass
+
+### Cities PDF Recovery Probe
+
+Completed isolated live/archive probe:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_pdf_recovery_probe.toml --resume
+```
+
+Current result:
+
+- PDF URLs probed: 35.
+- Live PDF rows: 0.
+- Usable archived PDF rows: 12.
+- Unrecovered PDF rows: 23.
+- Boundary: recovered PDF bytes are source-shape inputs only; no OCR,
+  city-name normalization, ELS search, compactness calculation, or p-level
+  verification is performed.
 
 ### Locked Report Rerun And Volatility Cleanup
 

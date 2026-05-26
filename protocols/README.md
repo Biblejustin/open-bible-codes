@@ -182,6 +182,19 @@ status, parse status, and source anchors without normalizing city names or
 testing ELS results. Tracked audit:
 `docs/CITIES_SOURCE_CHAIN_AUDIT.md`.
 
+Cities PDF recovery probe:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_pdf_recovery_probe.toml --resume
+```
+
+This live/archive probe checks the 35 PDF links found on the Cities, Aumann,
+and Simon-McKay source pages in an isolated ignored output directory. It
+currently recovers 12 archived PDFs and leaves 23 links unrecovered. It does
+not overwrite the cached `reports/wrr_1994/` bundle, perform OCR, normalize
+city names, or run ELS results. Tracked probe:
+`docs/CITIES_PDF_RECOVERY_PROBE.md`.
+
 Event/object experiment source audit:
 
 ```bash

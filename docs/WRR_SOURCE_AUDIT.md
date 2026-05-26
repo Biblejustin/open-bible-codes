@@ -110,6 +110,9 @@ exact published WRR reproduction remains caveated.
   `https://web.archive.org/web/20160615070555id_/http://www.torah-code.org:80/research/research_2a.shtml`
   `https://web.archive.org/web/20150728045249id_/http://www.torah-code.org:80/research/research_3.shtml`
   `https://web.archive.org/web/20150728045254id_/http://www.torah-code.org:80/research/research_3c.shtml`
+- Wayback-recovered Cities/Aumann/Simon-McKay PDF links:
+  `docs/CITIES_PDF_RECOVERY_PROBE.md` records 35 linked PDF URLs probed, 0
+  live PDF rows, 12 usable archived PDF rows, and 23 unrecovered PDF rows.
 - WRR/Nations discussion page citing 163 famous-rabbi second-list distances:
   `https://www.math.utoronto.ca/drorbn/Codes/Nations/main_gir.html`
 - WRR/Nations discussion page in modified Michigan-Claremont notation:

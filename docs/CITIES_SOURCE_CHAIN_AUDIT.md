@@ -42,5 +42,10 @@ pages, not PDFs; the local wrapper pages report failed Wayback save jobs.
 Those files must not be treated as source data unless the underlying PDFs
 are recovered and checksummed.
 
+The isolated recovery probe in `docs/CITIES_PDF_RECOVERY_PROBE.md` checks the
+35 linked Cities/Aumann/Simon-McKay PDF URLs against the live site and exact-URL
+Wayback snapshots. It currently recovers 12 archived PDFs and leaves 23 PDF
+links unrecovered; those recovered files are still source-shape inputs only.
+
 No city-name rows are normalized, no ELS search is run, and no p-level is
 verified here.
