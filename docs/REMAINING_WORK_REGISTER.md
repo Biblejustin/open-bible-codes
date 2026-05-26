@@ -59,6 +59,9 @@ evidence packet, remaining-lane evidence packet, and source-row coverage
 packet, plus source-row crop packet, contact-sheet image, and OCR word packet.
 The WRR cross-pair grid doc is now CSV-guarded against grid-shape,
 corrected-distance, aggregate, and permutation-summary drift.
+The WRR direct all-lane diagnostic doc is now CSV-guarded against
+cap-250/cap-1000 corrected-distance, aggregate, program-formula, and D(w)
+sensitivity drift.
 The source-row review bundle, source-transcription evidence packet,
 source-transcription row-review checklist, and remaining-lane review checklist
 are now CSV-guarded as well. The source-policy review checklist is also
@@ -1217,8 +1220,10 @@ supposed to fail if tracked files are dirty.
 Latest validation snapshot after the release-ready make target, with current
 dirty-tree fast validation above it:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1804
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1807
   tests, 2 skipped, and 29196 subtests.
+- `python3 -m scripts.check_wrr_direct_all_lanes_doc` passed with CSV-backed
+  corrected-distance, aggregate, program-formula, and D(w) sensitivity locks.
 - `python3 -m scripts.check_wrr_cross_pair_grid_doc` passed with CSV-backed
   grid-shape, corrected-distance, aggregate, and permutation-summary locks.
 - `python3 -m scripts.check_wrr_claim_blocker_packet_doc` passed with
