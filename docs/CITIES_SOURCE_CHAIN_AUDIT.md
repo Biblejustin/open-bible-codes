@@ -56,6 +56,8 @@ by source-review role without importing city rows.
 `docs/CITIES_UNREADABLE_PDF_REVIEW.md` separately routes the recovered
 unreadable PDFs into OCR/image-only and encoding-or-OCR planning lanes without
 running OCR.
+`docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md` records OCR count/status
+feasibility for those lanes without tracking OCR text.
 
 No city-name rows are normalized, no ELS search is run, and no p-level is
 verified here.

@@ -73,3 +73,6 @@ source-row import.
 The unreadable-PDF review in `docs/CITIES_UNREADABLE_PDF_REVIEW.md` separates
 the seven recovered but unreadable PDFs into OCR/image-only and
 encoding-or-OCR routes without running OCR or repairing text.
+The OCR feasibility probe in `docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md`
+records OCR count/status metrics for those same seven rows without tracking
+OCR text.

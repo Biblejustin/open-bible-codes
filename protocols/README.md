@@ -230,6 +230,17 @@ OCR/image-only and encoding-or-OCR planning routes. It does not run OCR, repair
 text, import source rows, normalize city names, or run result-bearing work.
 Tracked review: `docs/CITIES_UNREADABLE_PDF_REVIEW.md`.
 
+Cities unreadable-PDF OCR feasibility:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_ocr_feasibility.toml --resume
+```
+
+This runs local English OCR against the seven recovered unreadable PDFs and
+records counts/status only. It does not track OCR text, repair text, import
+source rows, normalize city names, or run result-bearing work. Tracked review:
+`docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md`.
+
 Cities extractable-text role review:
 
 ```bash

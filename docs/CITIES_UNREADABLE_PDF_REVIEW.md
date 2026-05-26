@@ -34,3 +34,7 @@ Cities PDFs. It does not repair the PDFs, create OCR text, decide source
 admissibility, create city-name rows, or make a result-bearing claim.
 Any later OCR output must be reviewed and locked before source-row
 normalization or ELS work.
+
+Follow-up feasibility probe: `docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md`
+records that local English OCR produced text signals for all seven rows
+without committing OCR text or repairing source rows.

@@ -415,6 +415,9 @@ unrecovered-link probe into source-review lanes for planning only.
 `scripts/build_cities_unreadable_pdf_review.py` routes the seven recovered
 unreadable PDFs into OCR/image-only and encoding-or-OCR planning lanes without
 running OCR or repairing text.
+`scripts/build_cities_unreadable_pdf_ocr_feasibility.py` then probes local OCR
+feasibility for those seven rows and records count/status metrics only, with no
+tracked OCR text.
 `scripts/build_cities_extractable_text_review.py` marks the five extractable
 PDFs as one data-table candidate, one method-context candidate, and three
 commentary/critique context rows. The data-table candidate is linked to the

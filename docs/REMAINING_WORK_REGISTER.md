@@ -67,7 +67,9 @@ by the Gans communities source-shape audit with 66 source records and 210
 community rows, without source-row import or result-bearing work. The
 unreadable-PDF review now routes the remaining 7 recovered unreadable PDFs into
 4 OCR/image-only rows and 3 encoding-or-OCR candidates, covering 41 pages
-without running OCR.
+without running OCR. The OCR feasibility probe then attempts those 41 pages
+with local English OCR and records text signal in all 7 rows and 39 pages,
+without storing OCR text in tracked files.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -194,6 +196,26 @@ Current result:
 - Pages needing review: 41.
 - Boundary: this does not run OCR, repair text, import source rows, normalize
   city names, run ELS searches, compute compactness, or verify p-levels.
+
+### Cities Unreadable PDF OCR Feasibility
+
+Completed OCR feasibility probe:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_ocr_feasibility.toml --resume
+```
+
+Current result:
+
+- Rows reviewed: 7.
+- Rows with OCR text: 7.
+- Pages attempted: 41.
+- Pages with OCR text: 39.
+- OCR text signal chars: 54324.
+- OCR text detected rows: 7.
+- Boundary: this does not store OCR text in tracked files, repair text, import
+  source rows, normalize city names, run ELS searches, compute compactness, or
+  verify p-levels.
 
 ### Locked Report Rerun And Volatility Cleanup
 

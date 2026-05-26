@@ -60,3 +60,5 @@ readable PDFs by source-review role.
 `docs/CITIES_UNREADABLE_PDF_REVIEW.md` separately routes the seven recovered
 but unreadable PDFs into OCR/image-only or encoding-or-OCR planning lanes
 without running OCR.
+`docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md` then records OCR feasibility
+counts for those seven rows without storing OCR text in tracked files.

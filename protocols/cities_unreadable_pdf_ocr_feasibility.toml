@@ -1,0 +1,30 @@
+name = "cities_unreadable_pdf_ocr_feasibility"
+description = "Probe OCR feasibility for recovered unreadable Cities PDFs without storing OCR text in tracked files."
+manifest_out = "reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_feasibility_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_unreadable_pdf_ocr_feasibility"
+description = "Run local OCR on unreadable recovered Cities PDFs and record counts/status only."
+argv = [
+  "-m", "scripts.build_cities_unreadable_pdf_ocr_feasibility",
+  "--review", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_review.csv",
+  "--language", "eng",
+  "--dpi", "200",
+  "--psm", "6",
+  "--out", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_feasibility.csv",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_feasibility_summary.csv",
+  "--markdown-out", "docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_feasibility.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_unreadable_pdf_ocr_feasibility.py",
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_review.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_feasibility.csv",
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_feasibility_summary.csv",
+  "docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md",
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_feasibility.manifest.json",
+]
