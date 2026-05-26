@@ -1,3 +1,4 @@
+import csv
 import tempfile
 import unittest
 from pathlib import Path
@@ -33,7 +34,15 @@ class WrrSourcePolicyEvidencePacketDocTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            self.assertEqual(check.validate_source_policy_evidence_packet_doc(path), [])
+            self.assertEqual(
+                check.validate_source_policy_evidence_packet_doc(
+                    path,
+                    packet=None,
+                    context=None,
+                    summary=None,
+                ),
+                [],
+            )
 
     def test_validate_packet_doc_reports_missing_required_phrase(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -44,6 +53,138 @@ class WrrSourcePolicyEvidencePacketDocTests(unittest.TestCase):
 
             self.assertTrue(failures)
             self.assertIn("missing phrase", failures[0])
+
+    def test_validate_packet_doc_accepts_matching_csvs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            doc = _required_doc(root)
+
+            self.assertEqual(
+                check.validate_source_policy_evidence_packet_doc(
+                    doc,
+                    packet=_packet_csv(root),
+                    context=_context_csv(root),
+                    summary=_summary_csv(root),
+                ),
+                [],
+            )
+
+    def test_validate_packet_doc_rejects_packet_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            doc = _required_doc(root)
+
+            failures = check.validate_source_policy_evidence_packet_doc(
+                doc,
+                packet=_packet_csv(root, bad_term=True),
+                context=_context_csv(root),
+                summary=_summary_csv(root),
+            )
+
+            self.assertTrue(any("term drifted" in failure for failure in failures))
+
+    def test_validate_packet_doc_rejects_context_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            doc = _required_doc(root)
+
+            failures = check.validate_source_policy_evidence_packet_doc(
+                doc,
+                packet=_packet_csv(root),
+                context=_context_csv(root, bad_ref=True),
+                summary=_summary_csv(root),
+            )
+
+            self.assertTrue(any("context refs" in failure for failure in failures))
+
+    def test_validate_packet_doc_rejects_summary_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            doc = _required_doc(root)
+
+            failures = check.validate_source_policy_evidence_packet_doc(
+                doc,
+                packet=_packet_csv(root),
+                context=_context_csv(root),
+                summary=_summary_csv(root, bad_count=True),
+            )
+
+            self.assertTrue(any("wnp_context_blocks" in failure for failure in failures))
+
+
+def _required_doc(root: Path) -> Path:
+    path = root / "packet.md"
+    path.write_text("\n".join(check.REQUIRED_PHRASES), encoding="utf-8")
+    return path
+
+
+def _packet_csv(root: Path, *, bad_term: bool = False) -> Path:
+    path = root / "packet.csv"
+    fieldnames = list(check.EXPECTED_PACKET_ROW) + [
+        "scenario_pair_statuses",
+        "evidence_read",
+    ]
+    row = dict(check.EXPECTED_PACKET_ROW)
+    if bad_term:
+        row["term"] = "drifted"
+    row["scenario_pair_statuses"] = (
+        "review_chelm_spelling_only:review_only_no_exclusion:"
+        "wrr2_32_app_04__wrr2_32_date_01:needs_primary_source_pair_rule;"
+        "review_chelm_spelling_only:review_only_no_exclusion:"
+        "wrr2_32_app_05__wrr2_32_date_01:needs_primary_source_pair_rule;"
+        "exclude_all_source_review_flags:excluded:"
+        "wrr2_32_app_04__wrr2_32_date_01:needs_primary_source_pair_rule;"
+        "exclude_all_source_review_flags:excluded:"
+        "wrr2_32_app_05__wrr2_32_date_01:needs_primary_source_pair_rule"
+    )
+    row["evidence_read"] = "wrr2_32_app_05 is a Chełm spelling-context target"
+    _write_one_row(path, fieldnames, row)
+    return path
+
+
+def _context_csv(root: Path, *, bad_ref: bool = False) -> Path:
+    path = root / "context.csv"
+    fieldnames = [
+        "context_id",
+        "source_flag",
+        "source_ref",
+        "source_terms",
+        "read",
+        "decision_boundary",
+    ]
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        for context_id, source_ref in check.EXPECTED_CONTEXT.items():
+            writer.writerow(
+                {
+                    "context_id": context_id,
+                    "source_flag": "wnp_chelm_spelling_context",
+                    "source_ref": "drifted" if bad_ref else source_ref,
+                    "source_terms": "terms",
+                    "read": "read",
+                    "decision_boundary": check.DECISION_BOUNDARY,
+                }
+            )
+    return path
+
+
+def _summary_csv(root: Path, *, bad_count: bool = False) -> Path:
+    path = root / "summary.csv"
+    fieldnames = list(check.EXPECTED_SUMMARY_ROW) + ["read"]
+    row = dict(check.EXPECTED_SUMMARY_ROW)
+    if bad_count:
+        row["wnp_context_blocks"] = "2"
+    row["read"] = "diagnostic packet without changing the working source"
+    _write_one_row(path, fieldnames, row)
+    return path
+
+
+def _write_one_row(path: Path, fieldnames: list[str], row: dict[str, str]) -> None:
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerow(row)
 
 
 if __name__ == "__main__":
