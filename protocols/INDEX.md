@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 148
+Protocols indexed: 149
 
 ## Analysis
 
@@ -13,6 +13,7 @@ Protocols indexed: 148
 | cities_extractable_text_review | Classify extractable Cities PDFs by source-review role without importing source rows. | 1 |  | reports/cities_pdf_recovery_probe | `cities_extractable_text_review.toml` |
 | cities_pdf_recovery_probe | Probe live and archived Torah-code.org Cities PDF links into an isolated recovery bundle. | 1 |  | reports/cities_pdf_recovery_probe | `cities_pdf_recovery_probe.toml` |
 | cities_source_review_queue | Queue Cities recovered and unrecovered PDF source-review actions without result-bearing... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_review_queue.toml` |
+| cities_unreadable_pdf_review | Classify recovered but unreadable Cities PDFs into OCR and encoding review routes witho... | 1 |  | reports/cities_pdf_recovery_probe | `cities_unreadable_pdf_review.toml` |
 | cross_skip_summary | Summarize cross-skip pair strata from the match-strata index. | 1 |  | reports/cross_skip_summary | `cross_skip_summary.toml` |
 | direction_asymmetry | Summarize forward/backward direction strata from the match-strata index. | 1 |  | reports/direction_asymmetry | `direction_asymmetry.toml` |
 | greek_exact_center_cohort | Locked Greek theological exact-center cross-text extension cohort. | 8 | terms/greek_exact_center_cohort_terms.csv | reports/greek_exact_center_cohort | `greek_exact_center_cohort.toml` |

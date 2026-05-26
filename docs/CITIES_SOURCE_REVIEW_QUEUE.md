@@ -69,3 +69,7 @@ commentary/critique lanes without changing this queue's boundary. The
 data-table lane now points at `docs/GANS_COMMUNITIES_SOURCE_AUDIT.md` for
 existing source-shape coverage only: 66 records and 210 community rows, with no
 source-row import.
+
+The unreadable-PDF review in `docs/CITIES_UNREADABLE_PDF_REVIEW.md` separates
+the seven recovered but unreadable PDFs into OCR/image-only and
+encoding-or-OCR routes without running OCR or repairing text.

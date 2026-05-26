@@ -219,6 +219,17 @@ encoding-or-OCR candidate, and missing-PDF recovery. It does not decide source
 admissibility or run result-bearing work. Tracked queue:
 `docs/CITIES_SOURCE_REVIEW_QUEUE.md`.
 
+Cities unreadable-PDF review:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_review.toml --resume
+```
+
+This classifies the seven recovered but unreadable Cities PDFs into
+OCR/image-only and encoding-or-OCR planning routes. It does not run OCR, repair
+text, import source rows, normalize city names, or run result-bearing work.
+Tracked review: `docs/CITIES_UNREADABLE_PDF_REVIEW.md`.
+
 Cities extractable-text role review:
 
 ```bash

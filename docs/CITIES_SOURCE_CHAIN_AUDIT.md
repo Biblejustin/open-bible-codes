@@ -53,6 +53,9 @@ buckets without OCR or result-bearing ELS work.
 PDF rows into source-review action lanes for planning only.
 `docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md` further separates readable PDFs
 by source-review role without importing city rows.
+`docs/CITIES_UNREADABLE_PDF_REVIEW.md` separately routes the recovered
+unreadable PDFs into OCR/image-only and encoding-or-OCR planning lanes without
+running OCR.
 
 No city-name rows are normalized, no ELS search is run, and no p-level is
 verified here.

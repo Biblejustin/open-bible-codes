@@ -28,6 +28,7 @@ from scripts import (
     check_cities_pdf_recovery_probe_doc,
     check_cities_recovered_pdf_text_audit_doc,
     check_cities_source_review_queue_doc,
+    check_cities_unreadable_pdf_review_doc,
     check_consolidated_findings_doc,
     check_critical_omission_followup_docs,
     check_doc_command_references,
@@ -172,6 +173,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/cities_pdf_recovery_probe.toml",
     "protocols/cities_recovered_pdf_text_audit.toml",
     "protocols/cities_source_review_queue.toml",
+    "protocols/cities_unreadable_pdf_review.toml",
     "protocols/cities_extractable_text_review.toml",
     "protocols/centered_relevance_density.toml",
     "protocols/matrix_cluster_candidates.toml",
@@ -241,6 +243,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/CITIES_PDF_RECOVERY_PROBE.md",
     "docs/CITIES_RECOVERED_PDF_TEXT_AUDIT.md",
     "docs/CITIES_SOURCE_REVIEW_QUEUE.md",
+    "docs/CITIES_UNREADABLE_PDF_REVIEW.md",
     "docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md",
     "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
     "docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md",
@@ -634,6 +637,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_cities_recovered_pdf_text_audit_doc.py",
     "scripts/build_cities_source_review_queue.py",
     "scripts/check_cities_source_review_queue_doc.py",
+    "scripts/build_cities_unreadable_pdf_review.py",
+    "scripts/check_cities_unreadable_pdf_review_doc.py",
     "scripts/build_cities_extractable_text_review.py",
     "scripts/check_cities_extractable_text_review_doc.py",
     "scripts/check_hypothesis_testing_source_audit_doc.py",
@@ -665,6 +670,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/cities_pdf_recovery_probe.toml",
     "protocols/cities_recovered_pdf_text_audit.toml",
     "protocols/cities_source_review_queue.toml",
+    "protocols/cities_unreadable_pdf_review.toml",
     "protocols/cities_extractable_text_review.toml",
     "terms/relevance_dictionary.toml",
     "prompts/crd_classifier_v1/system.md",
@@ -1409,6 +1415,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(cities_source_review_queue_doc_failures)
         )
 
+    cities_unreadable_pdf_review_doc_failures = (
+        check_cities_unreadable_pdf_review_doc.validate_cities_unreadable_pdf_review_doc(
+            check_cities_unreadable_pdf_review_doc.DEFAULT_DOC
+        )
+    )
+    if cities_unreadable_pdf_review_doc_failures:
+        failures.append(
+            "Cities unreadable-PDF review doc failures: "
+            + "; ".join(cities_unreadable_pdf_review_doc_failures)
+        )
+
     cities_extractable_text_review_doc_failures = (
         check_cities_extractable_text_review_doc.validate_cities_extractable_text_review_doc(
             check_cities_extractable_text_review_doc.DEFAULT_DOC
@@ -1590,6 +1607,9 @@ def main(argv: list[str] | None = None) -> int:
             cities_recovered_pdf_text_audit_doc_failures
         ),
         "cities_source_review_queue_doc_failures": cities_source_review_queue_doc_failures,
+        "cities_unreadable_pdf_review_doc_failures": (
+            cities_unreadable_pdf_review_doc_failures
+        ),
         "cities_extractable_text_review_doc_failures": (
             cities_extractable_text_review_doc_failures
         ),

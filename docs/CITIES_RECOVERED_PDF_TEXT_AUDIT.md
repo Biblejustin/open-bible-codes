@@ -57,3 +57,6 @@ The follow-up queue in `docs/CITIES_SOURCE_REVIEW_QUEUE.md` turns these
 text-shape statuses into review lanes without changing this source-shape
 boundary. `docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md` further separates the five
 readable PDFs by source-review role.
+`docs/CITIES_UNREADABLE_PDF_REVIEW.md` separately routes the seven recovered
+but unreadable PDFs into OCR/image-only or encoding-or-OCR planning lanes
+without running OCR.

@@ -64,7 +64,10 @@ and 23 missing-PDF recovery rows. The extractable-text role review separates the
 five readable PDFs into 1 data-bearing candidate, 1 method-context candidate,
 and 3 commentary/critique rows; the data-bearing candidate is already covered
 by the Gans communities source-shape audit with 66 source records and 210
-community rows, without source-row import or result-bearing work.
+community rows, without source-row import or result-bearing work. The
+unreadable-PDF review now routes the remaining 7 recovered unreadable PDFs into
+4 OCR/image-only rows and 3 encoding-or-OCR candidates, covering 41 pages
+without running OCR.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -171,6 +174,25 @@ Current result:
 - Method-context candidates: 1.
 - Commentary/critique rows: 3.
 - Boundary: this does not import source rows, decide admissibility, normalize
+  city names, run ELS searches, compute compactness, or verify p-levels.
+
+### Cities Unreadable PDF Review
+
+Completed unreadable-PDF review:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_review.toml --resume
+```
+
+Current result:
+
+- Unreadable rows reviewed: 7.
+- OCR/image-only rows: 4.
+- Encoding-or-OCR candidate rows: 3.
+- Aumann committee rows: 6.
+- Other-family rows: 1.
+- Pages needing review: 41.
+- Boundary: this does not run OCR, repair text, import source rows, normalize
   city names, run ELS searches, compute compactness, or verify p-levels.
 
 ### Locked Report Rerun And Volatility Cleanup

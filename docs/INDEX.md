@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 367
+Documents indexed: 368
 
 ## Controls
 
@@ -232,6 +232,7 @@ Documents indexed: 367
 | Cities Recovered PDF Text Audit | `CITIES_RECOVERED_PDF_TEXT_AUDIT.md` |
 | Cities Source Chain Audit | `CITIES_SOURCE_CHAIN_AUDIT.md` |
 | Cities Source Review Queue | `CITIES_SOURCE_REVIEW_QUEUE.md` |
+| Cities Unreadable PDF Review | `CITIES_UNREADABLE_PDF_REVIEW.md` |
 | Claim Catalog | `CLAIM_CATALOG.md` |
 | Clean-Lock Results Summary | `CLEAN_LOCK_RESULTS_SUMMARY.md` |
 | Cohort Cluster Density Audit | `COHORT_CLUSTER_DENSITY_AUDIT.md` |

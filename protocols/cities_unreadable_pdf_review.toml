@@ -1,0 +1,27 @@
+name = "cities_unreadable_pdf_review"
+description = "Classify recovered but unreadable Cities PDFs into OCR and encoding review routes without result-bearing work."
+manifest_out = "reports/cities_pdf_recovery_probe/unreadable_pdf_review_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_unreadable_pdf_review"
+description = "Separate image-only and garbled recovered Cities PDFs into OCR/encoding planning lanes."
+argv = [
+  "-m", "scripts.build_cities_unreadable_pdf_review",
+  "--queue", "reports/cities_pdf_recovery_probe/cities_source_review_queue.csv",
+  "--out", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_review.csv",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_review_summary.csv",
+  "--markdown-out", "docs/CITIES_UNREADABLE_PDF_REVIEW.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_review.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_unreadable_pdf_review.py",
+  "reports/cities_pdf_recovery_probe/cities_source_review_queue.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_review.csv",
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_review_summary.csv",
+  "docs/CITIES_UNREADABLE_PDF_REVIEW.md",
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_review.manifest.json",
+]
