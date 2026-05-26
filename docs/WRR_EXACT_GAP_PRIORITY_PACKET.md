@@ -31,9 +31,9 @@ python3 -m scripts.build_wrr_exact_gap_priority_packet
 
 ## Source-Row Clusters
 
-Full CSV includes 22 row clusters. Top clusters by action terms:
+Full CSV includes 22 row clusters. Top clusters by action terms; review rank is from the source-row checklist:
 
-| Rank | Row | Value | Read |
+| Review rank | Row | Value | Read |
 | ---: | --- | --- | --- |
 | 1 | row 06 WRR2 06 | 4 action terms; 4 residual pairs; 4 frontier pairs | multi-term row cluster; review row image/alignment once before term edits |
 | 20 | row 30 WRR2 30 | 4 action terms; 4 residual pairs; 0 frontier pairs | multi-term row cluster; review row image/alignment once before term edits |

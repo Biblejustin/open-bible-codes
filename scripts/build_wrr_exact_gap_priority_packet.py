@@ -377,9 +377,12 @@ def write_markdown(
             "",
             "## Source-Row Clusters",
             "",
-            f"Full CSV includes {len(row_clusters)} row clusters. Top clusters by action terms:",
+            (
+                f"Full CSV includes {len(row_clusters)} row clusters. Top clusters by "
+                "action terms; review rank is from the source-row checklist:"
+            ),
             "",
-            "| Rank | Row | Value | Read |",
+            "| Review rank | Row | Value | Read |",
             "| ---: | --- | --- | --- |",
         ]
     )

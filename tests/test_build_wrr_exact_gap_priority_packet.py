@@ -70,6 +70,8 @@ def test_main_writes_csv_summary_markdown_and_manifest(tmp_path: Path) -> None:
     assert "Status: no-input priority packet" in text
     assert "Remaining 163-distance gap | 91" in text
     assert "Full CSV includes 1 row clusters." in text
+    assert "review rank is from the source-row checklist" in text
+    assert "| Review rank | Row | Value | Read |" in text
     assert "not an exact published WRR reproduction result" in text
     payload = json.loads(manifest.read_text(encoding="utf-8"))
     assert payload["tool"] == "build_wrr_exact_gap_priority_packet"
