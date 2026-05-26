@@ -97,7 +97,8 @@ against crop-packet row order, summary, manifest, and contact-sheet dimensions.
 The WRR source audit doc is now CSV-guarded against locked-method, method-status,
 and manual-decision summary drift.
 The Cities PDF recovery probe doc is now CSV/manifest-guarded against recovery
-rows, summary counts, usable/unrecovered labels, and recovery boundary drift.
+rows, summary counts, usable/unrecovered labels, manifest tool/source/output
+metadata, and recovery boundary drift.
 The research missing model pages audit doc is now CSV/manifest-guarded against
 unusable level-2/3 model-page rows, summary counts, anchor counts, and the
 source-status-only claim boundary.
@@ -212,6 +213,9 @@ Current result:
 - Boundary: recovered PDF bytes are source-shape inputs only; no OCR,
   city-name normalization, ELS search, compactness calculation, or p-level
   verification is performed.
+- Guard: `scripts/check_cities_pdf_recovery_probe_doc.py` now locks the
+  manifest tool, source glob, output paths, summary values, and recovery
+  boundary in addition to key usable/unrecovered rows.
 
 ### Cities Recovered PDF Text Audit
 

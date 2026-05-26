@@ -133,10 +133,18 @@ def _manifest(tmp_path, *, bad_claim=False):
     path.write_text(
         json.dumps(
             {
+                "tool": "build_cities_pdf_recovery_probe.py",
+                "source_globs": ["reports/wrr_1994/torah_code_experiment_cities*.html"],
                 "rows": int(check.EXPECTED_SUMMARY["pdf_urls_probed"]),
                 "summary": {
                     key: int(value) if value.isdigit() else value
                     for key, value in check.EXPECTED_SUMMARY.items()
+                },
+                "outputs": {
+                    "csv": str(check.DEFAULT_ROWS),
+                    "summary": str(check.DEFAULT_SUMMARY),
+                    "markdown": str(check.DEFAULT_DOC),
+                    "manifest": str(check.DEFAULT_MANIFEST),
                 },
                 "claim_boundary": (
                     "changed" if bad_claim else check.EXPECTED_CLAIM_BOUNDARY

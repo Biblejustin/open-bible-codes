@@ -10,42 +10,15 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from scripts import build_cities_pdf_recovery_probe as builder
 
-DEFAULT_DOC = Path("docs/CITIES_PDF_RECOVERY_PROBE.md")
-DEFAULT_ROWS = Path("reports/cities_pdf_recovery_probe/cities_pdf_recovery_probe.csv")
-DEFAULT_SUMMARY = Path(
-    "reports/cities_pdf_recovery_probe/cities_pdf_recovery_probe_summary.csv"
-)
-DEFAULT_MANIFEST = Path(
-    "reports/cities_pdf_recovery_probe/cities_pdf_recovery_probe.manifest.json"
-)
 
-EXPECTED_ROW_FIELDNAMES = [
-    "label",
-    "source_pages",
-    "url",
-    "live_final_url",
-    "live_http_status",
-    "live_status",
-    "live_kind",
-    "live_bytes",
-    "live_sha256",
-    "archive_probe_url",
-    "archive_status",
-    "archive_snapshot_source",
-    "archive_timestamp",
-    "archive_cdx_checked",
-    "archive_cdx_candidate_count",
-    "archive_raw_url",
-    "archive_kind",
-    "archive_bytes",
-    "archive_sha256",
-    "selected_source",
-    "selected_path",
-    "pdf_pages",
-    "pdf_text_chars",
-    "usable_status",
-]
+DEFAULT_DOC = builder.DEFAULT_MD
+DEFAULT_ROWS = builder.DEFAULT_OUT
+DEFAULT_SUMMARY = builder.DEFAULT_SUMMARY_OUT
+DEFAULT_MANIFEST = builder.DEFAULT_MANIFEST
+
+EXPECTED_ROW_FIELDNAMES = builder.ROW_FIELDNAMES
 EXPECTED_SUMMARY = {
     "pdf_urls_probed": "35",
     "live_pdf_rows": "0",
@@ -237,6 +210,19 @@ def validate_manifest(path: Path) -> list[str]:
     if isinstance(data, str):
         return [data]
     failures: list[str] = []
+    expected = {
+        "tool": "build_cities_pdf_recovery_probe.py",
+        "source_globs": [builder.DEFAULT_HTML_GLOB],
+        "outputs": {
+            "csv": str(DEFAULT_ROWS),
+            "summary": str(DEFAULT_SUMMARY),
+            "markdown": str(DEFAULT_DOC),
+            "manifest": str(DEFAULT_MANIFEST),
+        },
+    }
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{path} {key} drifted")
     if data.get("rows") != int(EXPECTED_SUMMARY["pdf_urls_probed"]):
         failures.append(f"{path} rows drifted")
     if data.get("claim_boundary") != EXPECTED_CLAIM_BOUNDARY:
