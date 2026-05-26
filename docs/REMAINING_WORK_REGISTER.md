@@ -1176,7 +1176,7 @@ Latest validation snapshot after the release-ready make target, with current
 dirty-tree fast validation above it:
 
 - Current `make fast-validate` passed, including `python3 -m pytest -q`: 1726
-  tests, 2 skipped, and 29195 subtests.
+  tests, 2 skipped, and 29196 subtests.
 - Cities public handoff docs checker passed and is wired into real-report
   preflight.
 - Focused Cities decision-record/preflight pytest passed:

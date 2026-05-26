@@ -352,7 +352,7 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
 
     assert "Latest validation snapshot after the release-ready make target" in text
     assert "1577 tests" in text
-    assert "2 skipped, and 29195 subtests" in text
+    assert "2 skipped, and 29196 subtests" in text
     assert "make release-ready" in text
     assert "committed tree" in text
     assert "make fast-validate" in text

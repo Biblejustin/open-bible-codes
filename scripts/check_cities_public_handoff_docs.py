@@ -38,6 +38,13 @@ REQUIRED_PHRASES_BY_DOC = {
         "14 source-row lock candidate pages, 0 populated lock rows, no source rows imported",
         "no city-name normalization, ELS searches, compactness runs, or p-levels",
     ),
+    Path("docs/CLAIM_CATALOG.md"): (
+        "Torah-code.org Cities/Aumann/Simon-McKay source chain",
+        "Cities source-row lock handoff",
+        "14 source-row lock candidate pages, 0 populated lock rows, no source rows imported",
+        "no city-name normalization, ELS searches, compactness runs, or p-levels",
+        "data/study/mappings/cities_source_row_lock_decisions.csv",
+    ),
     Path("docs/CONSOLIDATED_FINDINGS.md"): (
         "Cities source-row lock handoff:",
         "14 source-row lock candidate pages, 0 populated lock rows, no source rows imported",
@@ -70,6 +77,10 @@ FORBIDDEN_PHRASES_BY_DOC = {
         "Cities ELS run is ready",
     ),
     Path("docs/FINAL_REPORT_OUTLINE.md"): (
+        "Cities city-name rows are imported",
+        "Cities ELS run is ready",
+    ),
+    Path("docs/CLAIM_CATALOG.md"): (
         "Cities city-name rows are imported",
         "Cities ELS run is ready",
     ),
