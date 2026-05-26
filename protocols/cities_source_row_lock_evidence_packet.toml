@@ -1,0 +1,29 @@
+name = "cities_source_row_lock_evidence_packet"
+description = "Build a diagnostic evidence packet for Cities source-row lock candidate pages without importing source text."
+manifest_out = "reports/cities_pdf_recovery_probe/source_row_lock_evidence_packet_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_source_row_lock_evidence_packet"
+description = "Join source-row lock worksheet rows to recovered PDF metadata and page-image paths without OCR body text."
+argv = [
+  "-m", "scripts.build_cities_source_row_lock_evidence_packet",
+  "--worksheet", "reports/cities_pdf_recovery_probe/cities_source_row_lock_worksheet.csv",
+  "--source-queue", "reports/cities_pdf_recovery_probe/cities_source_review_queue.csv",
+  "--out", "reports/cities_pdf_recovery_probe/cities_source_row_lock_evidence_packet.csv",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_source_row_lock_evidence_summary.csv",
+  "--markdown-out", "docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_source_row_lock_evidence_packet.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_source_row_lock_evidence_packet.py",
+  "reports/cities_pdf_recovery_probe/cities_source_row_lock_worksheet.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_review_queue.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_source_row_lock_evidence_packet.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_row_lock_evidence_summary.csv",
+  "docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
+  "reports/cities_pdf_recovery_probe/cities_source_row_lock_evidence_packet.manifest.json",
+]

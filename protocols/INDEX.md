@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 155
+Protocols indexed: 156
 
 ## Analysis
 
@@ -13,6 +13,7 @@ Protocols indexed: 155
 | cities_extractable_text_review | Classify extractable Cities PDFs by source-review role without importing source rows. | 1 |  | reports/cities_pdf_recovery_probe | `cities_extractable_text_review.toml` |
 | cities_pdf_recovery_probe | Probe live and archived Torah-code.org Cities PDF links into an isolated recovery bundle. | 1 |  | reports/cities_pdf_recovery_probe | `cities_pdf_recovery_probe.toml` |
 | cities_source_review_queue | Queue Cities recovered and unrecovered PDF source-review actions without result-bearing... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_review_queue.toml` |
+| cities_source_row_lock_evidence_packet | Build a diagnostic evidence packet for Cities source-row lock candidate pages without i... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_row_lock_evidence_packet.toml` |
 | cities_source_row_lock_queue | Queue Cities source-bearing OCR-reviewed pages for future citable source-row locks with... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_row_lock_queue.toml` |
 | cities_source_row_lock_worksheet | Build a Cities source-row lock decision worksheet from queued candidate pages without i... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_row_lock_worksheet.toml` |
 | cities_unreadable_pdf_ocr_feasibility | Probe OCR feasibility for recovered unreadable Cities PDFs without storing OCR text in ... | 1 |  | reports/cities_pdf_recovery_probe | `cities_unreadable_pdf_ocr_feasibility.toml` |

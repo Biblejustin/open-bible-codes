@@ -34,6 +34,8 @@ REQUIRED_PHRASES = (
     "`cities_source_row_lock_001`",
     "`cities_source_row_lock_014`",
     "never imports or transcribes source rows",
+    "CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
+    "recovered PDF metadata and page-image paths",
 )
 
 EXPECTED_IDS = tuple(f"cities_source_row_lock_{index:03d}" for index in range(1, 15))

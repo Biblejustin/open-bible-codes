@@ -296,6 +296,17 @@ lock candidates. It does not transcribe rows, import source text, normalize
 city names, or run result-bearing work. Tracked worksheet:
 `docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md`.
 
+Cities source-row lock evidence packet:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_row_lock_evidence_packet.toml --resume
+```
+
+This joins the 14 source-row lock worksheet rows to recovered PDF metadata,
+checksums, and page-image paths. It does not copy OCR text, transcribe rows,
+import source text, normalize city names, or run result-bearing work. Tracked
+packet: `docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md`.
+
 Cities extractable-text role review:
 
 ```bash

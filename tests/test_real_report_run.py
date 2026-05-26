@@ -596,6 +596,7 @@ class RealReportRunTests(unittest.TestCase):
             "docs/CITIES_RECOVERED_PDF_TEXT_AUDIT.md",
             "docs/CITIES_SOURCE_REVIEW_QUEUE.md",
             "docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md",
+            "docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
             "docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md",
             "docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md",
             "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
@@ -720,6 +721,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "protocols/cities_source_row_lock_evidence_packet.toml",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "data/study/mappings/cities_source_row_lock_decisions.csv",
             steps_by_id["preflight"]["inputs"],
         )
@@ -749,6 +754,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_cities_source_row_lock_queue_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_cities_source_row_lock_evidence_packet.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_cities_source_row_lock_evidence_packet_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -1114,6 +1127,10 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -1159,6 +1176,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "protocols/cities_source_row_lock_worksheet.toml",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "protocols/cities_source_row_lock_evidence_packet.toml",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -1243,6 +1264,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_cities_source_row_lock_queue_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/build_cities_source_row_lock_evidence_packet.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_cities_source_row_lock_evidence_packet_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -3228,6 +3257,32 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "Cities source-row lock queue doc failures: "
                 "docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md missing source boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_cities_source_row_lock_evidence_packet_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_cities_source_row_lock_evidence_packet_doc,
+                "validate_cities_source_row_lock_evidence_packet_doc",
+                return_value=[
+                    "docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md missing source boundary"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["cities_source_row_lock_evidence_packet_doc_failures"],
+                [
+                    "docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md missing source boundary"
+                ],
+            )
+            self.assertIn(
+                "Cities source-row lock evidence packet doc failures: "
+                "docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md missing source boundary",
                 payload["failures"],
             )
 

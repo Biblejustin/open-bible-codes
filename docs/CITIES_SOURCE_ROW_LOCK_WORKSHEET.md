@@ -32,6 +32,7 @@ python3 -m scripts.build_cities_source_row_lock_worksheet --queue reports/cities
 
 The worksheet gives exact `decision_id`, queue fields, evidence prompts, and current record fields when a lock row exists.
 A future lock row may mark a page ready for source-row work, but this worksheet itself never imports or transcribes source rows.
+`docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md` joins these decision ids to recovered PDF metadata and page-image paths without source text.
 
 ## Worksheet
 
