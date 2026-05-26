@@ -74,6 +74,8 @@ The WRR Wayback source-recovery probe doc is now CSV/manifest-guarded
 against archived probe row, summary, and report-manifest drift.
 The WRR source visual-review notes doc is now CSV-guarded against the
 source-review queue visual rows and non-exclusion actions.
+The WRR source-row crop contact sheet doc is now CSV/manifest-guarded
+against crop-packet row order, summary, manifest, and contact-sheet dimensions.
 The source-row review bundle, source-transcription evidence packet,
 source-transcription row-review checklist, and remaining-lane review checklist
 are now CSV-guarded as well. The source-policy review checklist is also
@@ -1232,8 +1234,10 @@ supposed to fail if tracked files are dirty.
 Latest validation snapshot after the release-ready make target, with current
 dirty-tree fast validation above it:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1831
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1834
   tests, 2 skipped, and 29196 subtests.
+- `python3 -m scripts.check_wrr_source_row_crop_contact_sheet_doc` passed
+  with CSV-backed crop-row, summary, manifest, and PNG dimension locks.
 - `python3 -m scripts.check_wrr_source_visual_review_notes_doc` passed with
   CSV-backed source-review queue visual-row and non-exclusion action locks.
 - `python3 -m scripts.check_wrr_wayback_source_recovery_probe_doc` passed with
