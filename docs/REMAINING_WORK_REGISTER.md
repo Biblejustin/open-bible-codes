@@ -1255,7 +1255,7 @@ supposed to fail if tracked files are dirty.
 Latest validation snapshot after the release-ready make target, with current
 dirty-tree fast validation above it:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1880
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1883
   tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_prospective_lane_status_doc` passed with JSON-backed
   lane id/status/path and status-count locks.
@@ -1288,6 +1288,9 @@ dirty-tree fast validation above it:
   CSV-backed source-role row and summary locks plus manifest boundary locks.
 - `python3 -m scripts.check_cities_source_review_queue_doc` passed with
   builder-derived queue and summary locks plus manifest lane-count locks.
+- `python3 -m scripts.check_cities_source_row_lock_queue_doc` passed with
+  builder-derived source-row lock queue and summary locks plus manifest
+  no-import boundary locks.
 - `python3 -m scripts.check_wrr_source_audit_doc` passed with CSV-backed
   locked-method, method-status, and manual-decision summary locks.
 - `python3 -m scripts.check_wrr_source_row_crop_contact_sheet_doc` passed

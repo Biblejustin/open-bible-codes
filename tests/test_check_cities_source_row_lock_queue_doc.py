@@ -1,4 +1,6 @@
 import csv
+import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -13,19 +15,16 @@ class CitiesSourceRowLockQueueDocTests(unittest.TestCase):
     def test_flags_source_script_text_in_rows(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            doc = root / "queue.md"
-            rows = root / "rows.csv"
-            summary = root / "summary.csv"
-            doc.write_text(valid_doc_text(), encoding="utf-8")
-            row = valid_row("cities_pdf_dp365a_p5_11", "4", "source_table_page")
-            row["next_action"] = "Hebrew source: אבג"
-            write_csv(rows, [row])
-            write_csv(summary, valid_summary("1"))
+            doc, rows, summary, manifest = copy_current_outputs(root)
+            fieldnames, row_data = read_csv(rows)
+            row_data[0]["next_action"] = "Hebrew source: אבג"
+            write_csv(rows, fieldnames, row_data)
 
             failures = check.validate_cities_source_row_lock_queue_doc(
                 doc,
                 rows,
                 summary,
+                manifest,
             )
 
             self.assertTrue(
@@ -35,82 +34,96 @@ class CitiesSourceRowLockQueueDocTests(unittest.TestCase):
     def test_flags_source_row_import(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            doc = root / "queue.md"
-            rows = root / "rows.csv"
-            summary = root / "summary.csv"
-            doc.write_text(valid_doc_text(), encoding="utf-8")
-            row = valid_row("cities_pdf_dp365a_p5_11", "4", "source_table_page")
-            row["current_decision"] = "source_row_import"
-            write_csv(rows, [row])
-            write_csv(summary, valid_summary("1"))
+            doc, rows, summary, manifest = copy_current_outputs(root)
+            fieldnames, row_data = read_csv(rows)
+            row_data[0]["current_decision"] = "source_row_import"
+            write_csv(rows, fieldnames, row_data)
 
             failures = check.validate_cities_source_row_lock_queue_doc(
                 doc,
                 rows,
                 summary,
+                manifest,
             )
 
             self.assertTrue(any("imports source row" in failure for failure in failures))
 
+    def test_flags_fieldname_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            doc, rows, summary, manifest = copy_current_outputs(root)
+            fieldnames, row_data = read_csv(rows)
+            write_csv(
+                rows,
+                fieldnames[:-1],
+                [{k: v for k, v in row.items() if k != "claim_boundary"} for row in row_data],
+            )
 
-def valid_doc_text() -> str:
-    return """# Cities Source Row Lock Queue
+            failures = check.validate_cities_source_row_lock_queue_doc(
+                doc,
+                rows,
+                summary,
+                manifest,
+            )
 
-Status: source-row lock planning record.
-This does not import source rows. No OCR body text or source-script body text appears.
+            self.assertTrue(any("fieldnames drifted" in failure for failure in failures))
 
-- Queue rows: 1.
-- Unique labels: 1.
-- Table-bearing candidate pages: 1.
-- Source-list candidate pages: 0.
-- Exception-note candidate pages: 0.
-- Source-row imports: 0.
-- ELS runs: 0.
-- Compactness runs: 0.
+    def test_flags_summary_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            doc, rows, summary, manifest = copy_current_outputs(root)
+            fieldnames, summary_rows = read_csv(summary)
+            summary_rows[0]["value"] = "99"
+            write_csv(summary, fieldnames, summary_rows)
 
-cities_pdf_dp365a_p5_11 source_table_page table_candidate_page
-needs_citable_source_row_lock
-This queue names page locations only.
-"""
+            failures = check.validate_cities_source_row_lock_queue_doc(
+                doc,
+                rows,
+                summary,
+                manifest,
+            )
 
+            self.assertTrue(any("summary rows drifted" in failure for failure in failures))
 
-def valid_row(label: str, page: str, role: str) -> dict[str, str]:
-    return {
-        "lock_rank": "1",
-        "label": label,
-        "page_number": page,
-        "family": "aumann_committee",
-        "lane": "encoding_or_ocr_candidate",
-        "visual_page_role": role,
-        "page_class": "table_candidate_page",
-        "packet_ocr_status": "page_ocr_text_detected",
-        "packet_ocr_text_signal_chars": "900",
-        "page_image_path": "reports/pages/page.png",
-        "source_row_use": "no_source_row_use",
-        "current_decision": "no_source_row_import",
-        "lock_status": "needs_citable_source_row_lock",
-        "next_action": "needs citable source-row lock",
-        "claim_boundary": "source-row lock planning only",
-    }
+    def test_flags_manifest_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            doc, rows, summary, manifest = copy_current_outputs(root)
+            payload = json.loads(manifest.read_text(encoding="utf-8"))
+            payload["rows"] = 99
+            manifest.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
+            failures = check.validate_cities_source_row_lock_queue_doc(
+                doc,
+                rows,
+                summary,
+                manifest,
+            )
 
-def valid_summary(queue_rows: str) -> list[dict[str, str]]:
-    return [
-        {"metric": "queue_rows", "value": queue_rows},
-        {"metric": "unique_labels", "value": "1"},
-        {"metric": "table_candidate_pages", "value": "1"},
-        {"metric": "source_list_candidate_pages", "value": "0"},
-        {"metric": "exception_note_candidate_pages", "value": "0"},
-        {"metric": "source_row_imports", "value": "0"},
-        {"metric": "els_runs", "value": "0"},
-        {"metric": "compactness_runs", "value": "0"},
-    ]
+            self.assertTrue(any("rows drifted" in failure for failure in failures))
 
 
-def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
-    fieldnames = list(rows[0])
+def copy_current_outputs(root: Path) -> tuple[Path, Path, Path, Path]:
+    doc = root / "queue.md"
+    rows = root / "rows.csv"
+    summary = root / "summary.csv"
+    manifest = root / "manifest.json"
+    shutil.copyfile(check.DEFAULT_DOC, doc)
+    shutil.copyfile(check.DEFAULT_ROWS, rows)
+    shutil.copyfile(check.DEFAULT_SUMMARY, summary)
+    shutil.copyfile(check.DEFAULT_MANIFEST, manifest)
+    return doc, rows, summary, manifest
+
+
+def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
+    with path.open(encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, str]]) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
 
