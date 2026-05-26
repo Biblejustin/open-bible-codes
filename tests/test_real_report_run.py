@@ -706,11 +706,27 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "protocols/cities_unreadable_pdf_ocr_page_review.toml",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "data/study/mappings/cities_ocr_page_review_decisions.csv",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/build_cities_unreadable_pdf_ocr_review_checklist.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
             "scripts/check_cities_unreadable_pdf_ocr_review_checklist_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_cities_unreadable_pdf_ocr_page_review.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_cities_unreadable_pdf_ocr_page_review_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -1092,6 +1108,14 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "protocols/cities_unreadable_pdf_ocr_page_review.toml",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "data/study/mappings/cities_ocr_page_review_decisions.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "protocols/cities_extractable_text_review.toml",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -1149,6 +1173,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_cities_unreadable_pdf_ocr_review_checklist_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/build_cities_unreadable_pdf_ocr_page_review.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_cities_unreadable_pdf_ocr_page_review_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -3074,6 +3106,32 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "Cities unreadable-PDF OCR review checklist doc failures: "
                 "docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md missing source boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_cities_unreadable_pdf_ocr_page_review_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_cities_unreadable_pdf_ocr_page_review_doc,
+                "validate_cities_unreadable_pdf_ocr_page_review_doc",
+                return_value=[
+                    "docs/CITIES_UNREADABLE_PDF_OCR_PAGE_REVIEW.md missing source boundary"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["cities_unreadable_pdf_ocr_page_review_doc_failures"],
+                [
+                    "docs/CITIES_UNREADABLE_PDF_OCR_PAGE_REVIEW.md missing source boundary"
+                ],
+            )
+            self.assertIn(
+                "Cities unreadable-PDF OCR page-review doc failures: "
+                "docs/CITIES_UNREADABLE_PDF_OCR_PAGE_REVIEW.md missing source boundary",
                 payload["failures"],
             )
 

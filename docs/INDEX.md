@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 371
+Documents indexed: 372
 
 ## Controls
 
@@ -233,6 +233,7 @@ Documents indexed: 371
 | Cities Source Chain Audit | `CITIES_SOURCE_CHAIN_AUDIT.md` |
 | Cities Source Review Queue | `CITIES_SOURCE_REVIEW_QUEUE.md` |
 | Cities Unreadable PDF OCR Feasibility | `CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md` |
+| Cities Unreadable PDF OCR Page Review | `CITIES_UNREADABLE_PDF_OCR_PAGE_REVIEW.md` |
 | Cities Unreadable PDF OCR Review Checklist | `CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md` |
 | Cities Unreadable PDF OCR Review Packet | `CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md` |
 | Cities Unreadable PDF Review | `CITIES_UNREADABLE_PDF_REVIEW.md` |

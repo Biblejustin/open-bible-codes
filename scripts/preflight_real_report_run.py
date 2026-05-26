@@ -30,6 +30,7 @@ from scripts import (
     check_cities_source_review_queue_doc,
     check_cities_unreadable_pdf_ocr_feasibility_doc,
     check_cities_unreadable_pdf_ocr_review_checklist_doc,
+    check_cities_unreadable_pdf_ocr_page_review_doc,
     check_cities_unreadable_pdf_ocr_review_packet_doc,
     check_cities_unreadable_pdf_review_doc,
     check_consolidated_findings_doc,
@@ -180,6 +181,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/cities_unreadable_pdf_ocr_feasibility.toml",
     "protocols/cities_unreadable_pdf_ocr_review_packet.toml",
     "protocols/cities_unreadable_pdf_ocr_review_checklist.toml",
+    "protocols/cities_unreadable_pdf_ocr_page_review.toml",
     "protocols/cities_extractable_text_review.toml",
     "protocols/centered_relevance_density.toml",
     "protocols/matrix_cluster_candidates.toml",
@@ -253,6 +255,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md",
     "docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md",
     "docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md",
+    "docs/CITIES_UNREADABLE_PDF_OCR_PAGE_REVIEW.md",
     "docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md",
     "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
     "docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md",
@@ -497,6 +500,7 @@ DEFAULT_REQUIRED_PATHS = [
     "data/study/mappings/ot_in_nt_quotations.csv",
     "data/study/mappings/protagonist_narrative_mapping.csv",
     "data/study/mappings/thematic_chapters.csv",
+    "data/study/mappings/cities_ocr_page_review_decisions.csv",
     "data/study/mappings/wrr_manual_decision_records.csv",
     "protocols/apocrypha_bridge_study.toml",
     "protocols/kjv_apocrypha_bridge_shuffled_controls_250.toml",
@@ -654,6 +658,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_cities_unreadable_pdf_ocr_review_packet_doc.py",
     "scripts/build_cities_unreadable_pdf_ocr_review_checklist.py",
     "scripts/check_cities_unreadable_pdf_ocr_review_checklist_doc.py",
+    "scripts/build_cities_unreadable_pdf_ocr_page_review.py",
+    "scripts/check_cities_unreadable_pdf_ocr_page_review_doc.py",
     "scripts/build_cities_extractable_text_review.py",
     "scripts/check_cities_extractable_text_review_doc.py",
     "scripts/check_hypothesis_testing_source_audit_doc.py",
@@ -1477,6 +1483,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(cities_unreadable_pdf_ocr_review_checklist_doc_failures)
         )
 
+    cities_unreadable_pdf_ocr_page_review_doc_failures = (
+        check_cities_unreadable_pdf_ocr_page_review_doc.validate_cities_unreadable_pdf_ocr_page_review_doc(
+            check_cities_unreadable_pdf_ocr_page_review_doc.DEFAULT_DOC
+        )
+    )
+    if cities_unreadable_pdf_ocr_page_review_doc_failures:
+        failures.append(
+            "Cities unreadable-PDF OCR page-review doc failures: "
+            + "; ".join(cities_unreadable_pdf_ocr_page_review_doc_failures)
+        )
+
     cities_extractable_text_review_doc_failures = (
         check_cities_extractable_text_review_doc.validate_cities_extractable_text_review_doc(
             check_cities_extractable_text_review_doc.DEFAULT_DOC
@@ -1669,6 +1686,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "cities_unreadable_pdf_ocr_review_checklist_doc_failures": (
             cities_unreadable_pdf_ocr_review_checklist_doc_failures
+        ),
+        "cities_unreadable_pdf_ocr_page_review_doc_failures": (
+            cities_unreadable_pdf_ocr_page_review_doc_failures
         ),
         "cities_extractable_text_review_doc_failures": (
             cities_extractable_text_review_doc_failures

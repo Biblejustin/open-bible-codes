@@ -1,0 +1,29 @@
+name = "cities_unreadable_pdf_ocr_page_review"
+description = "Build manual page-image review records for priority Cities unreadable-PDF OCR pages."
+manifest_out = "reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_page_review_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_unreadable_pdf_ocr_page_review"
+description = "Join reviewer page-image decisions to OCR packet metadata without tracking OCR body text."
+argv = [
+  "-m", "scripts.build_cities_unreadable_pdf_ocr_page_review",
+  "--packet", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_review_packet.csv",
+  "--decisions", "data/study/mappings/cities_ocr_page_review_decisions.csv",
+  "--out", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_page_review.csv",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_page_review_summary.csv",
+  "--markdown-out", "docs/CITIES_UNREADABLE_PDF_OCR_PAGE_REVIEW.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_page_review.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_unreadable_pdf_ocr_page_review.py",
+  "data/study/mappings/cities_ocr_page_review_decisions.csv",
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_review_packet.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_page_review.csv",
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_page_review_summary.csv",
+  "docs/CITIES_UNREADABLE_PDF_OCR_PAGE_REVIEW.md",
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_page_review.manifest.json",
+]
