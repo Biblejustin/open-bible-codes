@@ -36,7 +36,7 @@ manual decision-record lock propagation, public-handoff lock-status cleanup,
 checklist boundary wording cleanup, public claim-language preflight guarding,
 doc-command reference preflight guarding, final-report support-doc reference
 guarding, real-report preflight input drift guarding, a clean real-report
-protocol rerun/cache check at commit `07a5731`, and manual-review packet-shape
+protocol rerun/cache check at commit `253b104`, and manual-review packet-shape
 drift guarding, plus prospective-readiness, next-lock, and study-lock workflow
 doc guard coverage, Greek second-cohort readiness guarding, consolidated
 findings prospective-boundary guarding, generated lane-status freshness
@@ -51,8 +51,9 @@ boundary cleanup plus formal preflight guarding, and WRR source-audit
 local-lock boundary guarding, WRR source-audit register refresh,
 protocol README WRR handoff-status guarding, WRR exact-gap priority-packet
 guarding, WRR source-row coverage packet guarding, WRR source-row crop packet
-guarding, WRR source-row crop contact-sheet guarding, and WRR source-row OCR
-word packet guarding, and WRR source-row review bundle guarding.
+guarding, WRR source-row crop contact-sheet guarding, WRR source-row OCR word
+packet guarding, WRR source-row review bundle guarding, WRR source-row bundle
+public-doc synchronization, and exact-gap review-rank wording cleanup.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -251,10 +252,19 @@ Current pushed commits for this cleanup:
 - `bb2abdf` Refresh register for WRR source audit guard.
 - `07a5731` Guard protocol README WRR handoff status.
 - `83414a0` Add WRR exact gap priority packet.
+- `293c3c6` Refresh register for exact gap priority packet.
+- `2993acc` Add WRR source row coverage packet.
+- `931af3b` Add WRR source row crop packet.
+- `76edd71` Add WRR source row crop contact sheet.
+- `44fd9af` Add WRR source row OCR word packet.
+- `c9bf709` Add WRR source row review bundle.
+- `1ed9651` Surface WRR row review bundle in report summary.
+- `2dc325c` Sync WRR row review bundle docs.
+- `253b104` Clarify WRR gap packet row rank.
 
 ### Formal Real Report Rerun
 
-Command completed successfully from the clean committed tree at `07a5731`:
+Command completed successfully from the clean committed tree at `253b104`:
 
 ```bash
 python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
@@ -263,7 +273,7 @@ python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
 Current summary:
 
 - `reports/real_report_run/summary.md`
-- summary commit: `07a5731`
+- summary commit: `253b104`
 - preflight status: passed; support-doc reference failures: 0; protocol input
   drift failures: 0.
 - local generated report files under `reports/real_report_run/` are ignored by
