@@ -47,6 +47,9 @@ detail-page keyword labels. It also exposes a source-coverage gap: the
 PDF lists 12 prime-minister rows, while the downloaded detail-page
 sequence has keyword labels for 8 pages. This should be treated as
 missing detail-source coverage, not inferred data.
+The isolated detail-page recovery probe checks current live `_9`
+through `_12` URLs and records whether the missing pages have become
+usable again: `docs/ISRAELI_PRIME_MINISTERS_DETAIL_RECOVERY_PROBE.md`.
 
 No term normalization, ELS search, compactness calculation, random-placement
 control, or p-level verification is performed here.

@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 143
+Protocols indexed: 144
 
 ## Analysis
 
@@ -25,6 +25,7 @@ Protocols indexed: 143
 | hebrew_hit_version_presence | Capped exact ELS hit-pattern presence across Hebrew MT-family corpora. | 1 | terms/modern_names_dates.csv | reports/hebrew_hit_version_presence | `hebrew_hit_version_presence.toml` |
 | hebrew_modern_geopolitical_version_presence | Broad Hebrew modern/geopolitical/local/date exact ELS hit-pattern presence across MT-fa... | 1 | terms/modern_names_dates.csv | reports/hebrew_modern_geopolitical_version_presence | `hebrew_modern_geopolitical_version_presence.toml` |
 | hebrew_theology_all_codes_collection | Relaxed all-codes collection for the Hebrew theology cohort with center-word surface fl... | 4 | terms/hebrew_theology_prospective_terms.csv | reports/db, reports/hebrew_theology_all_codes | `hebrew_theology_all_codes_collection.toml` |
+| israeli_prime_ministers_detail_recovery_probe | Probe live Torah-code.org Israeli prime-minister detail pages 9-12 without running ELS ... | 1 |  | reports/israeli_prime_ministers_detail_recovery_probe | `israeli_prime_ministers_detail_recovery_probe.toml` |
 | local_terms_appendix | Negative/curiosity appendix for fixed local pastor-business and church-location terms. | 5 | terms/local_terms_appendix.csv | reports/local_terms_appendix | `local_terms_appendix.toml` |
 | match_strata_index | Annotate centered occurrences with extended post-search strata that do not widen search... | 1 | terms/meaningful_constants.csv | reports/match_strata_index | `match_strata_index.toml` |
 | modern_focus_extensions | Capped same-skip extension screen for modern names, places, and local terms. | 11 | terms/modern_names_dates.csv | reports/modern_extension_screen | `modern_focus_extensions.toml` |

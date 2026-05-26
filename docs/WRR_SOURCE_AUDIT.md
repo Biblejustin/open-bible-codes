@@ -254,7 +254,10 @@ claim-grade source reconstruction.
   `docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md` now confirms 12 PDF rows and
   43 machine-readable PDF keyword rows, plus 8 downloaded detail pages with
   keyword labels. The 4-page gap should be treated as missing detail-source
-  coverage, not inferred rows.
+  coverage, not inferred rows. The detail recovery probe in
+  `docs/ISRAELI_PRIME_MINISTERS_DETAIL_RECOVERY_PROBE.md` confirms current
+  live `_9` through `_12` URLs still redirect to the Torah-code root and are not
+  usable detail pages.
 - Cities/Aumann/Simon-McKay: useful for a source-chain and replication-failure
   lane because the pages separate Gans/Inbal rule-based city spellings, Aumann
   committee expert data, and Simon/McKay/Margolioth variants. The source-chain
@@ -389,6 +392,9 @@ summary. It verifies the PDF row count, exports 43 PDF keyword rows and 8 detail
 page rows, checks main-page protocol anchors, and preserves the current
 detail-page coverage gap, but does not normalize terms, run ELS hits, or verify
 the reported p-level.
+`scripts/build_israeli_prime_ministers_detail_recovery_probe.py` checks current
+live `_9` through `_12` URLs in an isolated ignored output directory and keeps
+those rows source-shape only unless usable detail pages are actually recovered.
 
 `scripts/analyze_cities_source_chain.py` classifies the Cities/Aumann/
 Simon-McKay HTML pages and PDF-shaped downloads into ignored source-chain CSVs

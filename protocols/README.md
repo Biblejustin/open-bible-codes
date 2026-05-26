@@ -159,6 +159,17 @@ detail-page outputs. It records the current detail-page coverage gap without
 normalizing terms or testing ELS results. Tracked audit:
 `docs/ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md`.
 
+Israeli prime-ministers detail-page recovery probe:
+
+```bash
+python3 -m scripts.run_protocol protocols/israeli_prime_ministers_detail_recovery_probe.toml --resume
+```
+
+This live-checks the missing `_9` through `_12` detail-page URLs in an isolated
+ignored directory and writes
+`docs/ISRAELI_PRIME_MINISTERS_DETAIL_RECOVERY_PROBE.md`. It does not infer
+missing detail-page data or run result-bearing ELS work.
+
 Cities source-chain audit:
 
 ```bash

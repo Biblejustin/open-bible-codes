@@ -1,0 +1,31 @@
+name = "israeli_prime_ministers_detail_recovery_probe"
+description = "Probe live Torah-code.org Israeli prime-minister detail pages 9-12 without running ELS results."
+manifest_out = "reports/israeli_prime_ministers_detail_recovery_probe/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "probe_israeli_prime_ministers_missing_detail_pages"
+description = "Fetch and classify missing Israeli prime-minister detail pages 9-12."
+always_run = true
+argv = [
+  "-m", "scripts.build_israeli_prime_ministers_detail_recovery_probe",
+  "--out-dir", "reports/israeli_prime_ministers_detail_recovery_probe/snapshots",
+  "--out", "reports/israeli_prime_ministers_detail_recovery_probe/detail_recovery_probe.csv",
+  "--summary-out", "reports/israeli_prime_ministers_detail_recovery_probe/detail_recovery_probe_summary.csv",
+  "--markdown-out", "docs/ISRAELI_PRIME_MINISTERS_DETAIL_RECOVERY_PROBE.md",
+  "--manifest-out", "reports/israeli_prime_ministers_detail_recovery_probe/detail_recovery_probe.manifest.json",
+]
+inputs = [
+  "scripts/build_israeli_prime_ministers_detail_recovery_probe.py",
+]
+outputs = [
+  "reports/israeli_prime_ministers_detail_recovery_probe/snapshots/israeli_prime_ministers_9.html",
+  "reports/israeli_prime_ministers_detail_recovery_probe/snapshots/israeli_prime_ministers_10.html",
+  "reports/israeli_prime_ministers_detail_recovery_probe/snapshots/israeli_prime_ministers_11.html",
+  "reports/israeli_prime_ministers_detail_recovery_probe/snapshots/israeli_prime_ministers_12.html",
+  "reports/israeli_prime_ministers_detail_recovery_probe/detail_recovery_probe.csv",
+  "reports/israeli_prime_ministers_detail_recovery_probe/detail_recovery_probe_summary.csv",
+  "docs/ISRAELI_PRIME_MINISTERS_DETAIL_RECOVERY_PROBE.md",
+  "reports/israeli_prime_ministers_detail_recovery_probe/detail_recovery_probe.manifest.json",
+]

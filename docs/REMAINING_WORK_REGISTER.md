@@ -488,7 +488,10 @@ machine-readable spelling rows. The birth-date audit confirms two S1/S2
 tables, 14 rows per table, and 51 date forms per table. The Israeli
 prime-ministers audit confirms 12 PDF rows, 43 machine-readable PDF keyword
 rows, and 8 downloaded detail-page rows, leaving a 4-page detail-source coverage
-gap. The Cities audit confirms 13 source-chain files,
+gap. The isolated Israeli prime-ministers detail-page recovery probe checks the
+current live `_9` through `_12` URLs and confirms 0 usable recovered detail
+pages because all four redirect to the Torah-code root with spam-root markers.
+The Cities audit confirms 13 source-chain files,
 6 `.pdf`-named HTML wrappers, 5 Wayback job-failed wrappers, 1 parse-error PDF,
 1 no-text PDF, and 7/7 source anchors. The event/object audit confirms 8 source
 files, 20 Pumbedita rows, 32 Auschwitz rows, 12 Sons-of-Haman keyword rows, 1
@@ -537,8 +540,8 @@ source-published Fisher weights if available; only then consider real
 Torah-code source data, communities compactness runs, American-presidents
 transliteration experiments, or Witztum birth-date ELS/SL-proximity tests. Do
 not run an Israeli prime-ministers result protocol until the missing
-detail-page coverage is resolved or explicitly scoped out in a new
-preregistration. Do not import Cities city-name rows until the wrapped or
+detail-page coverage is resolved from usable source pages or explicitly scoped
+out in a new preregistration. Do not import Cities city-name rows until the wrapped or
 missing PDF sources are recovered, or the usable HTML-only source boundary is
 explicitly locked. Do not promote the event/object pages beyond source-shape
 status until each lane has its own preregistered term normalization and
