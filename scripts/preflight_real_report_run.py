@@ -29,6 +29,7 @@ from scripts import (
     check_cities_recovered_pdf_text_audit_doc,
     check_cities_source_review_queue_doc,
     check_cities_source_row_lock_queue_doc,
+    check_cities_source_row_lock_decision_records,
     check_cities_source_row_lock_evidence_packet_doc,
     check_cities_source_row_lock_worksheet_doc,
     check_cities_unreadable_pdf_ocr_feasibility_doc,
@@ -672,6 +673,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_cities_unreadable_pdf_ocr_page_review_doc.py",
     "scripts/build_cities_source_row_lock_queue.py",
     "scripts/check_cities_source_row_lock_queue_doc.py",
+    "scripts/check_cities_source_row_lock_decision_records.py",
     "scripts/build_cities_source_row_lock_evidence_packet.py",
     "scripts/check_cities_source_row_lock_evidence_packet_doc.py",
     "scripts/build_cities_source_row_lock_worksheet.py",
@@ -1532,6 +1534,18 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(cities_source_row_lock_evidence_packet_doc_failures)
         )
 
+    cities_source_row_lock_decision_record_failures = (
+        check_cities_source_row_lock_decision_records.validate_decision_records(
+            check_cities_source_row_lock_decision_records.DEFAULT_RECORDS,
+            check_cities_source_row_lock_decision_records.DEFAULT_EVIDENCE_PACKET,
+        )
+    )
+    if cities_source_row_lock_decision_record_failures:
+        failures.append(
+            "Cities source-row lock decision record failures: "
+            + "; ".join(cities_source_row_lock_decision_record_failures)
+        )
+
     cities_source_row_lock_worksheet_doc_failures = (
         check_cities_source_row_lock_worksheet_doc.validate_cities_source_row_lock_worksheet_doc(
             check_cities_source_row_lock_worksheet_doc.DEFAULT_DOC
@@ -1744,6 +1758,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "cities_source_row_lock_evidence_packet_doc_failures": (
             cities_source_row_lock_evidence_packet_doc_failures
+        ),
+        "cities_source_row_lock_decision_record_failures": (
+            cities_source_row_lock_decision_record_failures
         ),
         "cities_source_row_lock_worksheet_doc_failures": (
             cities_source_row_lock_worksheet_doc_failures

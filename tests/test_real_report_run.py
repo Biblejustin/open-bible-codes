@@ -757,6 +757,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_cities_source_row_lock_decision_records.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/build_cities_source_row_lock_evidence_packet.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -1264,6 +1268,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_cities_source_row_lock_queue_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_cities_source_row_lock_decision_records.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -3283,6 +3291,32 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "Cities source-row lock evidence packet doc failures: "
                 "docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md missing source boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_cities_source_row_lock_decision_record_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_cities_source_row_lock_decision_records,
+                "validate_decision_records",
+                return_value=[
+                    "data/study/mappings/cities_source_row_lock_decisions.csv bad row"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["cities_source_row_lock_decision_record_failures"],
+                [
+                    "data/study/mappings/cities_source_row_lock_decisions.csv bad row"
+                ],
+            )
+            self.assertIn(
+                "Cities source-row lock decision record failures: "
+                "data/study/mappings/cities_source_row_lock_decisions.csv bad row",
                 payload["failures"],
             )
 

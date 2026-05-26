@@ -54,6 +54,9 @@ guarding, WRR source-row coverage packet guarding, WRR source-row crop packet
 guarding, WRR source-row crop contact-sheet guarding, WRR source-row OCR word
 packet guarding, WRR source-row review bundle guarding, WRR source-row bundle
 public-doc synchronization, and exact-gap review-rank wording cleanup.
+Cities source-row lock queueing, worksheet generation, evidence-packet
+assembly, and decision-record preflight guarding now keep Cities source-row
+candidate pages out of result-bearing work until citable lock records exist.
 The Cities PDF recovery probe now checks the 35 linked Cities/Aumann/Simon-McKay
 PDF URLs in an isolated ignored bundle and records 12 usable archived PDFs plus
 23 unrecovered links; the follow-up recovered-PDF text audit classifies those 12
@@ -69,7 +72,11 @@ unreadable-PDF review now routes the remaining 7 recovered unreadable PDFs into
 4 OCR/image-only rows and 3 encoding-or-OCR candidates, covering 41 pages
 without running OCR. The OCR feasibility probe then attempts those 41 pages
 with local English OCR and records text signal in all 7 rows and 39 pages,
-without storing OCR text in tracked files.
+without storing OCR text in tracked files. The page-image review labels all 41
+pages, the source-row lock queue isolates 14 candidate pages across three
+labels, the worksheet assigns 14 lock decision ids, and the evidence packet
+joins those ids to PDF metadata/checksums/page-image paths without OCR body text
+or source-row import.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -261,6 +268,103 @@ Current result:
 - Boundary: this creates ignored local contact sheets and review-order rows
   only. It does not track OCR text, repair text, import source rows, normalize
   city names, run ELS searches, compute compactness, or verify p-levels.
+
+### Cities Unreadable PDF OCR Page Review
+
+Completed page-image review:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_ocr_page_review.toml --resume
+```
+
+Current result:
+
+- Review rows: 41.
+- Reviewed pages: 41.
+- OCR-empty pages reviewed: 2.
+- Low-signal pages reviewed: 3.
+- Visual-text-present pages: 40.
+- Source-row imports: 0.
+- Boundary: this records page-image review labels only; no OCR body text,
+  repaired text, source-row import, city-name normalization, ELS search,
+  compactness calculation, or p-level verification is performed.
+
+### Cities Source Row Lock Queue
+
+Completed source-row lock queue:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_row_lock_queue.toml --resume
+```
+
+Current result:
+
+- Queue rows: 14.
+- Unique labels: 3.
+- Table-bearing candidate pages: 4.
+- Source-list candidate pages: 5.
+- Exception-note candidate pages: 5.
+- Source-row imports: 0.
+- Boundary: this names page locations only and requires a later citable
+  source-row lock before any source data can be used.
+
+### Cities Source Row Lock Worksheet
+
+Completed decision worksheet:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_row_lock_worksheet.toml --resume
+```
+
+Current result:
+
+- Worksheet rows: 14.
+- Recorded decision rows: 0.
+- Locked decision rows: 0.
+- Unrecorded decision rows: 14.
+- Source-row imports: 0.
+- Boundary: this assigns decision ids and evidence prompts only; it does not
+  transcribe rows, import source rows, normalize city names, run ELS searches,
+  compute compactness, or verify p-levels.
+
+### Cities Source Row Lock Evidence Packet
+
+Completed evidence packet:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_row_lock_evidence_packet.toml --resume
+```
+
+Current result:
+
+- Evidence rows: 14.
+- Unique labels: 3.
+- Table-bearing candidate pages: 4.
+- Source-list candidate pages: 5.
+- Exception-note candidate pages: 5.
+- Recorded decision rows: 0.
+- Source-row imports: 0.
+- Boundary: this joins decision ids to recovered PDF metadata, checksums, and
+  page-image paths only. It does not copy OCR body text, transcribe source rows,
+  import source text, normalize city names, run ELS searches, compute
+  compactness, or verify p-levels.
+
+### Cities Source Row Lock Decision Record Guard
+
+Completed decision-record preflight guard:
+
+```bash
+python3 -m scripts.check_cities_source_row_lock_decision_records
+```
+
+Current result:
+
+- Current records file: header only.
+- Populated record rows: 0.
+- Guarded evidence rows: 14.
+- Boundary: future populated lock rows must match the evidence packet, use
+  supported status/action values, cite evidence, avoid source-script text, and
+  carry ISO lock dates before formal report preflight passes.
 
 ### Locked Report Rerun And Volatility Cleanup
 
@@ -1065,11 +1169,18 @@ make release-ready
 Run `make release-ready` from a committed tree; the final public-release gate is
 supposed to fail if tracked files are dirty.
 
-Latest validation snapshot after the release-ready make target:
+Latest validation snapshot:
 
-- `make fast-validate` passed, including `python3 -m pytest -q`: 1577 tests,
-  2 skipped, and 29195 subtests.
-- `make release-ready` passed from the committed tree, including
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1720
+  tests, 2 skipped, and 29195 subtests.
+- Focused Cities decision-record/preflight pytest passed:
+  `tests/test_real_report_run.py`,
+  `tests/test_check_cities_source_row_lock_decision_records.py`, and
+  `tests/test_check_real_report_run_doc.py`: 111 tests.
+- `python3 -m scripts.check_cities_source_row_lock_decision_records` passed.
+- `python3 -m scripts.preflight_real_report_run --allow-dirty` passed.
+- `python3 -m scripts.check_doc_command_references --check-local-data` passed.
+- Previous `make release-ready` passed from the committed tree, including
   `python3 -m pytest -q`: 1577 tests, 2 skipped, and 29195 subtests.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
   passed after the latest pushed guard updates.

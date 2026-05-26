@@ -203,6 +203,8 @@ It requires:
   simulation-only boundaries visible;
 - critical-omission follow-up docs keep Setup, Method, Results, and Cautions
   sections plus current headline counts visible;
+- Cities source-row lock decision records stay aligned to the 14-row evidence
+  packet before any populated source-row lock can pass preflight;
 - WRR manual decision register consolidates 37 manual-decision inventory rows,
   representing 58 action terms, 59 residual pair links, and 40
   minimum-frontier pair links without selecting corrections or exclusions;

@@ -562,6 +562,7 @@ inputs = [
   "scripts/check_cities_unreadable_pdf_ocr_page_review_doc.py",
   "scripts/build_cities_source_row_lock_queue.py",
   "scripts/check_cities_source_row_lock_queue_doc.py",
+  "scripts/check_cities_source_row_lock_decision_records.py",
   "scripts/build_cities_source_row_lock_evidence_packet.py",
   "scripts/check_cities_source_row_lock_evidence_packet_doc.py",
   "scripts/build_cities_source_row_lock_worksheet.py",
