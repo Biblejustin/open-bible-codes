@@ -1688,6 +1688,7 @@ inputs = [
   "reports/wrr_1994/wrr_source_policy_term_impacts.csv",
   "reports/wrr_1994/wrr_source_policy_evidence_summary.csv",
   "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv",
+  "reports/wrr_1994/wrr_source_row_review_bundle_summary.csv",
   "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
   "reports/wrr_1994/wrr_manual_decision_register_summary.csv",
   "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",

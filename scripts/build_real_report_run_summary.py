@@ -75,6 +75,9 @@ WRR_SOURCE_POLICY_EVIDENCE_SUMMARY = Path(
 WRR_SOURCE_TRANSCRIPTION_EVIDENCE_ROW_SUMMARY = Path(
     "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv"
 )
+WRR_SOURCE_ROW_REVIEW_BUNDLE_SUMMARY = Path(
+    "reports/wrr_1994/wrr_source_row_review_bundle_summary.csv"
+)
 WRR_REMAINING_LANE_EVIDENCE_SUMMARY = Path(
     "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv"
 )
@@ -245,6 +248,9 @@ def main(argv: list[str] | None = None) -> int:
     wrr_source_transcription_evidence_row_summary_rows = read_rows(
         args.wrr_source_transcription_evidence_row_summary
     )
+    wrr_source_row_review_bundle_summary_rows = read_rows(
+        args.wrr_source_row_review_bundle_summary
+    )
     wrr_remaining_lane_evidence_summary_rows = read_rows(
         args.wrr_remaining_lane_evidence_summary
     )
@@ -399,6 +405,9 @@ def main(argv: list[str] | None = None) -> int:
         wrr_source_transcription_evidence_row_summary_rows=(
             wrr_source_transcription_evidence_row_summary_rows
         ),
+        wrr_source_row_review_bundle_summary_rows=(
+            wrr_source_row_review_bundle_summary_rows
+        ),
         wrr_remaining_lane_evidence_summary_rows=(
             wrr_remaining_lane_evidence_summary_rows
         ),
@@ -508,6 +517,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         wrr_source_transcription_evidence_row_summary_rows=(
             wrr_source_transcription_evidence_row_summary_rows
+        ),
+        wrr_source_row_review_bundle_summary_rows=(
+            wrr_source_row_review_bundle_summary_rows
         ),
         wrr_remaining_lane_evidence_summary_rows=(
             wrr_remaining_lane_evidence_summary_rows
@@ -724,6 +736,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--wrr-source-transcription-evidence-row-summary",
         type=Path,
         default=WRR_SOURCE_TRANSCRIPTION_EVIDENCE_ROW_SUMMARY,
+    )
+    parser.add_argument(
+        "--wrr-source-row-review-bundle-summary",
+        type=Path,
+        default=WRR_SOURCE_ROW_REVIEW_BUNDLE_SUMMARY,
     )
     parser.add_argument(
         "--wrr-remaining-lane-evidence-summary",
@@ -1010,6 +1027,7 @@ def write_summary(
     wrr_source_policy_term_impact_rows: list[dict[str, str]],
     wrr_source_policy_evidence_summary_rows: list[dict[str, str]],
     wrr_source_transcription_evidence_row_summary_rows: list[dict[str, str]],
+    wrr_source_row_review_bundle_summary_rows: list[dict[str, str]],
     wrr_remaining_lane_evidence_summary_rows: list[dict[str, str]],
     wrr_method_pair_universe_evidence_summary_rows: list[dict[str, str]],
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
@@ -1317,6 +1335,7 @@ def write_summary(
             wrr_source_policy_term_impact_rows,
             wrr_source_policy_evidence_summary_rows,
             wrr_source_transcription_evidence_row_summary_rows,
+            wrr_source_row_review_bundle_summary_rows,
             wrr_remaining_lane_evidence_summary_rows,
             wrr_method_pair_universe_evidence_summary_rows,
             wrr_dw_formula_sensitivity_rows,
@@ -1601,6 +1620,7 @@ def write_manifest(
     wrr_source_policy_term_impact_rows: list[dict[str, str]],
     wrr_source_policy_evidence_summary_rows: list[dict[str, str]],
     wrr_source_transcription_evidence_row_summary_rows: list[dict[str, str]],
+    wrr_source_row_review_bundle_summary_rows: list[dict[str, str]],
     wrr_remaining_lane_evidence_summary_rows: list[dict[str, str]],
     wrr_method_pair_universe_evidence_summary_rows: list[dict[str, str]],
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
@@ -1714,6 +1734,9 @@ def write_manifest(
             ),
             "wrr_source_transcription_evidence_row_summary": str(
                 args.wrr_source_transcription_evidence_row_summary
+            ),
+            "wrr_source_row_review_bundle_summary": str(
+                args.wrr_source_row_review_bundle_summary
             ),
             "wrr_remaining_lane_evidence_summary": str(
                 args.wrr_remaining_lane_evidence_summary
@@ -1892,6 +1915,9 @@ def write_manifest(
         ),
         "wrr_source_transcription_evidence_row_summary_rows": len(
             wrr_source_transcription_evidence_row_summary_rows
+        ),
+        "wrr_source_row_review_bundle_summary_rows": len(
+            wrr_source_row_review_bundle_summary_rows
         ),
         "wrr_remaining_lane_evidence_summary_rows": len(
             wrr_remaining_lane_evidence_summary_rows
@@ -3468,6 +3494,7 @@ def wrr_audit_section(
     source_policy_term_impact_rows: list[dict[str, str]],
     source_policy_evidence_summary_rows: list[dict[str, str]],
     source_transcription_evidence_row_summary_rows: list[dict[str, str]],
+    source_row_review_bundle_summary_rows: list[dict[str, str]],
     remaining_lane_evidence_summary_rows: list[dict[str, str]],
     method_pair_universe_evidence_summary_rows: list[dict[str, str]],
     dw_formula_sensitivity_rows: list[dict[str, str]],
@@ -3773,6 +3800,45 @@ def wrr_audit_section(
                     read=md_cell(row.get("read", "")),
                 )
             )
+    if source_row_review_bundle_summary_rows:
+        bundle_summary = {
+            row.get("metric", ""): row for row in source_row_review_bundle_summary_rows
+        }
+        lines.extend(
+            [
+                "",
+                "Source-row review bundle status:",
+                "",
+                "| Metric | Value | Read |",
+                "| --- | ---: | --- |",
+            ]
+        )
+        for metric_name in [
+            "row_review_clusters",
+            "frontier_rows",
+            "rows_with_generated_crops",
+            "rows_with_ocr_words",
+            "total_ocr_words",
+            "low_confidence_ocr_words",
+        ]:
+            row = bundle_summary.get(metric_name)
+            if not row:
+                continue
+            lines.append(
+                "| {metric} | {value} | {read} |".format(
+                    metric=md_cell(metric_name),
+                    value=md_cell(row.get("value", "")),
+                    read=md_cell(row.get("read", "")),
+                )
+            )
+        lines.extend(
+            [
+                "",
+                "The source-row review bundle is a handoff aid only: it joins the",
+                "row checklist, generated crop paths, and OCR words without selecting",
+                "any row transcription, source correction, method change, or pair exclusion.",
+            ]
+        )
     if remaining_lane_evidence_summary_rows:
         lines.extend(
             [
@@ -3854,8 +3920,8 @@ def wrr_audit_section(
             "and lock method-lane rows.",
             "The claim-blocker packet gathers the current",
             "readiness blockers, lock options, WNP/context source-review flags,",
-            "visual triage notes, the source-row coverage packet, row crops,",
-            "the row-crop contact sheet, and OCR row words for review.",
+            "visual triage notes, and the source-row review bundle that joins",
+            "coverage, row crops, the contact sheet, and OCR row words for review.",
             "The source-policy scenario report keeps exclusion/review impacts",
             "diagnostic. The D(w) sensitivity packet compares printed/program formulas",
             "while retaining printed D(w) as the selected main rule.",

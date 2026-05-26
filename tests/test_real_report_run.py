@@ -432,6 +432,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
+            "reports/wrr_1994/wrr_source_row_review_bundle_summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
@@ -3094,6 +3098,38 @@ inputs = ["docs/A.md", "docs/C.md"]
             ],
             [
                 {
+                    "metric": "row_review_clusters",
+                    "value": "22",
+                    "read": "source-row review bundle rows",
+                },
+                {
+                    "metric": "frontier_rows",
+                    "value": "19",
+                    "read": "rows with minimum-frontier pair links",
+                },
+                {
+                    "metric": "rows_with_generated_crops",
+                    "value": "22",
+                    "read": "rows with generated crop paths",
+                },
+                {
+                    "metric": "rows_with_ocr_words",
+                    "value": "22",
+                    "read": "rows with OCR words in the row band",
+                },
+                {
+                    "metric": "total_ocr_words",
+                    "value": "337",
+                    "read": "OCR words in bundled rows",
+                },
+                {
+                    "metric": "low_confidence_ocr_words",
+                    "value": "78",
+                    "read": "OCR words below the packet confidence threshold",
+                },
+            ],
+            [
+                {
                     "action_lane": "page_image_near_match_review",
                     "action_terms": "3",
                     "residual_pairs": "3",
@@ -3157,6 +3193,10 @@ inputs = ["docs/A.md", "docs/C.md"]
         self.assertIn("Source-transcription evidence packet status", text)
         self.assertIn("- Source-transcription action terms: 4.", text)
         self.assertIn("| 06 | WRR2 06 | 4 | 4 | 4 | multi-term row cluster |", text)
+        self.assertIn("Source-row review bundle status", text)
+        self.assertIn("| rows_with_generated_crops | 22 | rows with generated crop paths |", text)
+        self.assertIn("| low_confidence_ocr_words | 78 | OCR words below the packet confidence threshold |", text)
+        self.assertIn("without selecting", text)
         self.assertIn("Remaining-lane evidence packet status", text)
         self.assertIn(
             "| page_image_near_match_review | 3 | 3 | 2 | near OCR exists |",
@@ -3176,20 +3216,15 @@ inputs = ["docs/A.md", "docs/C.md"]
             text,
         )
         self.assertIn("| all_lanes_cap1000 | 182 | 72 | 72 | 0 |", text)
-        self.assertIn(
-            "visual triage notes, the source-row coverage packet, row crops,",
-            text,
-        )
-        self.assertIn(
-            "the row-crop contact sheet, and OCR row words for review",
-            text,
-        )
+        self.assertIn("visual triage notes, and the source-row review bundle", text)
+        self.assertIn("coverage, row crops, the contact sheet, and OCR row words", text)
 
     def test_wrr_audit_section_requires_all_source_hashes(self) -> None:
         with self.assertRaisesRegex(ValueError, "wrr_nations_mc"):
             summary.wrr_audit_section(
                 {"status": "success", "duration_seconds": 12.3},
                 {"downloads": [{"label": "wrr_1994_paper", "sha256": "paperhash"}]},
+                [],
                 [],
                 [],
                 [],
