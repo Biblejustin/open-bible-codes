@@ -90,6 +90,9 @@ highlight rows, claim-catalog row counts, and report path metadata.
 The hypothesis-testing source audit doc is now CSV/manifest-guarded against
 page rows, summary counts, protocol anchors, report-manifest boundaries, and
 source-download metadata.
+The Israeli prime-ministers detail recovery probe doc is now CSV/manifest-guarded
+against detail-page rows, summary counts, snapshot bytes/checksums, and the
+live-source-recovery-only boundary.
 The source-row review bundle, source-transcription evidence packet,
 source-transcription row-review checklist, and remaining-lane review checklist
 are now CSV-guarded as well. The source-policy review checklist is also
@@ -1248,8 +1251,11 @@ supposed to fail if tracked files are dirty.
 Latest validation snapshot after the release-ready make target, with current
 dirty-tree fast validation above it:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1857
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1861
   tests, 2 skipped, and 29196 subtests.
+- `python3 -m scripts.check_israeli_prime_ministers_detail_recovery_probe_doc`
+  passed with CSV-backed detail-row and summary locks plus snapshot checksum and
+  report-manifest boundary locks.
 - `python3 -m scripts.check_hypothesis_testing_source_audit_doc` passed with
   CSV-backed page, summary, and anchor locks plus report/source-manifest
   boundary locks.
