@@ -62,7 +62,7 @@ source-transcription row-review checklist, and remaining-lane review checklist
 are now CSV-guarded as well. The source-policy review checklist is also
 CSV-guarded, along with the source-policy evidence packet/context/summary and
 the manual decision register/summary, manual decision-record worksheet, and
-exact reproduction gap dashboard.
+exact reproduction gap dashboard. The locked-method report is CSV-guarded too.
 Cities source-row lock queueing, worksheet generation, evidence-packet
 assembly, and decision-record preflight guarding now keep Cities source-row
 candidate pages out of result-bearing work until citable lock records exist.
@@ -1209,7 +1209,7 @@ supposed to fail if tracked files are dirty.
 Latest validation snapshot after the release-ready make target, with current
 dirty-tree fast validation above it:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1781
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1783
   tests, 2 skipped, and 29196 subtests.
 - Cities public handoff docs checker passed and is wired into real-report
   preflight.
