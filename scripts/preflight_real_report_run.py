@@ -72,6 +72,7 @@ from scripts import (
     check_wrr_source_transcription_row_review_checklist_doc,
     check_wrr_source_row_coverage_packet_doc,
     check_wrr_source_row_crop_packet_doc,
+    check_wrr_source_row_crop_contact_sheet_doc,
     check_wrr_remaining_lane_evidence_packets_doc,
     check_wrr_remaining_lane_review_checklist_doc,
     check_wrr_source_policy_scenarios_doc,
@@ -261,6 +262,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md",
     "docs/WRR_SOURCE_ROW_COVERAGE_PACKET.md",
     "docs/WRR_SOURCE_ROW_CROP_PACKET.md",
+    "docs/WRR_SOURCE_ROW_CROP_CONTACT_SHEET.md",
     "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md",
     "docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md",
     "docs/WRR_MANUAL_DECISION_REGISTER.md",
@@ -572,6 +574,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_source_row_coverage_packet_doc.py",
     "scripts/build_wrr_source_row_crop_packet.py",
     "scripts/check_wrr_source_row_crop_packet_doc.py",
+    "scripts/check_wrr_source_row_crop_contact_sheet_doc.py",
     "scripts/build_wrr_remaining_lane_evidence_packets.py",
     "scripts/check_wrr_remaining_lane_evidence_packets_doc.py",
     "scripts/build_wrr_remaining_lane_review_checklist.py",
@@ -1153,6 +1156,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_source_row_crop_packet_doc_failures)
         )
 
+    wrr_source_row_crop_contact_sheet_doc_failures = (
+        check_wrr_source_row_crop_contact_sheet_doc.validate_source_row_crop_contact_sheet_doc(
+            check_wrr_source_row_crop_contact_sheet_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_source_row_crop_contact_sheet_doc_failures:
+        failures.append(
+            "WRR source row crop contact sheet failures: "
+            + "; ".join(wrr_source_row_crop_contact_sheet_doc_failures)
+        )
+
     wrr_remaining_lane_evidence_packets_doc_failures = (
         check_wrr_remaining_lane_evidence_packets_doc.validate_remaining_lane_evidence_packets_doc(
             check_wrr_remaining_lane_evidence_packets_doc.DEFAULT_DOC
@@ -1431,6 +1445,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "wrr_source_row_crop_packet_doc_failures": (
             wrr_source_row_crop_packet_doc_failures
+        ),
+        "wrr_source_row_crop_contact_sheet_doc_failures": (
+            wrr_source_row_crop_contact_sheet_doc_failures
         ),
         "wrr_remaining_lane_evidence_packets_doc_failures": (
             wrr_remaining_lane_evidence_packets_doc_failures

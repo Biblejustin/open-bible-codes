@@ -50,8 +50,8 @@ critical-omission follow-up doc guarding, WRR support-doc local-lock
 boundary cleanup plus formal preflight guarding, and WRR source-audit
 local-lock boundary guarding, WRR source-audit register refresh,
 protocol README WRR handoff-status guarding, WRR exact-gap priority-packet
-guarding, WRR source-row coverage packet guarding, and WRR source-row crop
-packet guarding.
+guarding, WRR source-row coverage packet guarding, WRR source-row crop packet
+guarding, and WRR source-row crop contact-sheet guarding.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -625,6 +625,10 @@ for all 22 source-transcription rows from the Table 2 page render: 22 auto row
 crops are available, 4 checklist rows also had existing manual crop files, and
 the packet keeps crop availability separate from transcription verification or
 source decisions.
+`docs/WRR_SOURCE_ROW_CROP_CONTACT_SHEET.md` now generates one ignored local
+contact-sheet image with all 22 source-row crops in review order, so manual
+inspection can use one file while the repo still records that the sheet is only
+a visual aid and not transcription verification.
 `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md` now handles the two remaining
 residual lanes: 3 page-image near-match terms and 11 method/pair-universe
 terms, preserving the no-correction boundary until page-image, method, or

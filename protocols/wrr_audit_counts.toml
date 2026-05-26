@@ -1167,6 +1167,8 @@ argv = [
   "--out", "reports/wrr_1994/wrr_source_row_crop_packet.csv",
   "--summary-out", "reports/wrr_1994/wrr_source_row_crop_packet_summary.csv",
   "--markdown-out", "docs/WRR_SOURCE_ROW_CROP_PACKET.md",
+  "--contact-sheet-out", "reports/wrr_1994/wrr_source_row_crop_contact_sheet.png",
+  "--contact-sheet-markdown-out", "docs/WRR_SOURCE_ROW_CROP_CONTACT_SHEET.md",
   "--manifest-out", "reports/wrr_1994/wrr_source_row_crop_packet.manifest.json",
 ]
 inputs = [
@@ -1179,6 +1181,8 @@ outputs = [
   "reports/wrr_1994/wrr_source_row_crop_packet.csv",
   "reports/wrr_1994/wrr_source_row_crop_packet_summary.csv",
   "docs/WRR_SOURCE_ROW_CROP_PACKET.md",
+  "reports/wrr_1994/wrr_source_row_crop_contact_sheet.png",
+  "docs/WRR_SOURCE_ROW_CROP_CONTACT_SHEET.md",
   "reports/wrr_1994/wrr_source_row_crop_packet.manifest.json",
 ]
 

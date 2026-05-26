@@ -6,13 +6,14 @@ It writes local review crops only; it does not choose row transcriptions, source
 Reproduce:
 
 ```bash
-python3 -m scripts.build_wrr_source_row_crop_packet --row-checklist reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv --tsv reports/wrr_1994/wrr_primary_table2_row_ocr.tsv --image reports/wrr_1994/wrr_primary_table2_page-06.png --crop-dir reports/wrr_1994/source_review_crops_auto --manual-crop-dir reports/wrr_1994/source_review_crops --out reports/wrr_1994/wrr_source_row_crop_packet.csv --summary-out reports/wrr_1994/wrr_source_row_crop_packet_summary.csv --markdown-out docs/WRR_SOURCE_ROW_CROP_PACKET.md --manifest-out reports/wrr_1994/wrr_source_row_crop_packet.manifest.json
+python3 -m scripts.build_wrr_source_row_crop_packet --row-checklist reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv --tsv reports/wrr_1994/wrr_primary_table2_row_ocr.tsv --image reports/wrr_1994/wrr_primary_table2_page-06.png --crop-dir reports/wrr_1994/source_review_crops_auto --manual-crop-dir reports/wrr_1994/source_review_crops --out reports/wrr_1994/wrr_source_row_crop_packet.csv --summary-out reports/wrr_1994/wrr_source_row_crop_packet_summary.csv --markdown-out docs/WRR_SOURCE_ROW_CROP_PACKET.md --contact-sheet-out reports/wrr_1994/wrr_source_row_crop_contact_sheet.png --contact-sheet-markdown-out docs/WRR_SOURCE_ROW_CROP_CONTACT_SHEET.md --manifest-out reports/wrr_1994/wrr_source_row_crop_packet.manifest.json
 ```
 
 ## Current Read
 
 - Source rows: 22.
 - Auto row crops available: 22.
+- Contact sheet available: true at `reports/wrr_1994/wrr_source_row_crop_contact_sheet.png`.
 - Existing manual crop rows in checklist: 4.
 - Action terms: 43.
 - Frontier pairs: 35.

@@ -29,6 +29,8 @@ DEFAULT_MANUAL_CROP_DIR = Path("reports/wrr_1994/source_review_crops")
 DEFAULT_OUT = Path("reports/wrr_1994/wrr_source_row_crop_packet.csv")
 DEFAULT_SUMMARY_OUT = Path("reports/wrr_1994/wrr_source_row_crop_packet_summary.csv")
 DEFAULT_MD = Path("docs/WRR_SOURCE_ROW_CROP_PACKET.md")
+DEFAULT_CONTACT_SHEET = Path("reports/wrr_1994/wrr_source_row_crop_contact_sheet.png")
+DEFAULT_CONTACT_MD = Path("docs/WRR_SOURCE_ROW_CROP_CONTACT_SHEET.md")
 DEFAULT_MANIFEST = Path("reports/wrr_1994/wrr_source_row_crop_packet.manifest.json")
 
 NO_INPUT_BOUNDARY = (
@@ -72,14 +74,20 @@ def main(argv: list[str] | None = None) -> int:
     bands = row_bands(centers)
     packet_rows = build_packet_rows(checklist_rows, bands, args)
     write_crops(packet_rows, args)
-    summary_rows = build_summary_rows(packet_rows, detected_rows, args)
+    contact_summary = write_contact_sheet(packet_rows, args)
+    summary_rows = build_summary_rows(packet_rows, detected_rows, args, contact_summary)
     write_csv(args.out, packet_rows, FIELDNAMES)
     write_csv(args.summary_out, summary_rows, SUMMARY_FIELDNAMES)
     write_markdown(args.markdown_out, packet_rows, summary_rows, args)
-    write_manifest(args.manifest_out, args, packet_rows, summary_rows, started)
+    write_contact_sheet_markdown(
+        args.contact_sheet_markdown_out, packet_rows, summary_rows, args, contact_summary
+    )
+    write_manifest(args.manifest_out, args, packet_rows, summary_rows, contact_summary, started)
     print(args.out)
     print(args.summary_out)
     print(args.markdown_out)
+    print(args.contact_sheet_out)
+    print(args.contact_sheet_markdown_out)
     print(args.manifest_out)
     return 0
 
@@ -97,6 +105,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
+    parser.add_argument("--contact-sheet-out", type=Path, default=DEFAULT_CONTACT_SHEET)
+    parser.add_argument("--contact-sheet-markdown-out", type=Path, default=DEFAULT_CONTACT_MD)
     parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
@@ -175,15 +185,80 @@ def load_image(path: Path):
     return Image.open(path)
 
 
+def write_contact_sheet(
+    rows: list[dict[str, object]], args: argparse.Namespace
+) -> dict[str, object]:
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+    except ImportError as exc:  # pragma: no cover - local dependency guard
+        raise RuntimeError("Pillow is required to write row contact sheet") from exc
+
+    label_width = 330
+    padding = 18
+    row_gap = 12
+    crop_gap = 14
+    font = ImageFont.load_default()
+    opened_rows: list[tuple[dict[str, object], object]] = []
+    for row in rows:
+        crop_path = Path(str(row["crop_path"]))
+        image = Image.open(crop_path).convert("RGB")
+        opened_rows.append((row, image))
+
+    max_crop_width = max((image.width for _row, image in opened_rows), default=1)
+    total_height = padding
+    for _row, image in opened_rows:
+        total_height += image.height + row_gap
+    total_height += padding
+    width = padding + label_width + crop_gap + max_crop_width + padding
+    sheet = Image.new("RGB", (width, max(total_height, 1)), "white")
+    draw = ImageDraw.Draw(sheet)
+    y = padding
+    for row, image in opened_rows:
+        label = (
+            f"rank {row['row_rank']} | row {row['row_number']} | "
+            f"terms {row['action_terms']} | frontier {row['frontier_pairs']}"
+        )
+        draw.text((padding, y + 6), label, fill="black", font=font)
+        crop_x = padding + label_width + crop_gap
+        sheet.paste(image, (crop_x, y))
+        draw.rectangle(
+            (crop_x, y, crop_x + image.width - 1, y + image.height - 1),
+            outline="black",
+            width=1,
+        )
+        y += image.height + row_gap
+
+    args.contact_sheet_out.parent.mkdir(parents=True, exist_ok=True)
+    sheet.save(args.contact_sheet_out)
+    return {
+        "contact_sheet_path": str(args.contact_sheet_out),
+        "contact_sheet_exists": args.contact_sheet_out.exists(),
+        "contact_sheet_width": sheet.width,
+        "contact_sheet_height": sheet.height,
+        "contact_sheet_rows": len(opened_rows),
+    }
+
+
 def build_summary_rows(
     rows: list[dict[str, object]],
     detected_rows: set[int],
     args: argparse.Namespace,
+    contact_summary: dict[str, object],
 ) -> list[dict[str, object]]:
     manual_rows = sum(1 for row in rows if int(row.get("manual_crop_count", 0)) > 0)
     return [
         metric("source_rows", len(rows), "source-transcription rows with crop entries"),
         metric("auto_crops_available", count_value(rows, "crop_exists", "true"), str(args.crop_dir)),
+        metric(
+            "contact_sheet_available",
+            str(contact_summary["contact_sheet_exists"]).lower(),
+            str(args.contact_sheet_out),
+        ),
+        metric(
+            "contact_sheet_rows",
+            contact_summary["contact_sheet_rows"],
+            "rows rendered into local contact sheet",
+        ),
         metric(
             "existing_manual_crop_rows_in_checklist",
             manual_rows,
@@ -222,6 +297,8 @@ def write_markdown(
             f"--out {args.out} "
             f"--summary-out {args.summary_out} "
             f"--markdown-out {args.markdown_out} "
+            f"--contact-sheet-out {args.contact_sheet_out} "
+            f"--contact-sheet-markdown-out {args.contact_sheet_markdown_out} "
             f"--manifest-out {args.manifest_out}"
         ),
         "```",
@@ -230,6 +307,7 @@ def write_markdown(
         "",
         f"- Source rows: {summary['source_rows']['value']}.",
         f"- Auto row crops available: {summary['auto_crops_available']['value']}.",
+        f"- Contact sheet available: {summary['contact_sheet_available']['value']} at `{args.contact_sheet_out}`.",
         f"- Existing manual crop rows in checklist: {summary['existing_manual_crop_rows_in_checklist']['value']}.",
         f"- Action terms: {summary['action_terms']['value']}.",
         f"- Frontier pairs: {summary['frontier_pairs']['value']}.",
@@ -263,11 +341,83 @@ def write_markdown(
     path.write_text("\n".join(lines), encoding="utf-8")
 
 
+def write_contact_sheet_markdown(
+    path: Path,
+    rows: list[dict[str, object]],
+    summary_rows: list[dict[str, object]],
+    args: argparse.Namespace,
+    contact_summary: dict[str, object],
+) -> None:
+    summary = {str(row["metric"]): row for row in summary_rows}
+    lines = [
+        "# WRR Source Row Crop Contact Sheet",
+        "",
+        "Status: local visual contact sheet for WRR source-row review.",
+        "It is a review aid only; it is not transcription verification and does not choose row transcriptions, source corrections, method changes, or pair exclusions.",
+        "",
+        "Reproduce:",
+        "",
+        "```bash",
+        (
+            "python3 -m scripts.build_wrr_source_row_crop_packet "
+            f"--row-checklist {args.row_checklist} "
+            f"--tsv {args.tsv} "
+            f"--image {args.image} "
+            f"--crop-dir {args.crop_dir} "
+            f"--manual-crop-dir {args.manual_crop_dir} "
+            f"--out {args.out} "
+            f"--summary-out {args.summary_out} "
+            f"--markdown-out {args.markdown_out} "
+            f"--contact-sheet-out {args.contact_sheet_out} "
+            f"--contact-sheet-markdown-out {args.contact_sheet_markdown_out} "
+            f"--manifest-out {args.manifest_out}"
+        ),
+        "```",
+        "",
+        "## Current Read",
+        "",
+        f"- Source rows: {summary['source_rows']['value']}.",
+        f"- Contact sheet rows: {contact_summary['contact_sheet_rows']}.",
+        f"- Contact sheet image: `{args.contact_sheet_out}`.",
+        f"- Contact sheet dimensions: {contact_summary['contact_sheet_width']} x {contact_summary['contact_sheet_height']}.",
+        f"- Boundary: {NO_INPUT_BOUNDARY}",
+        "",
+        "## Local Image",
+        "",
+        f"![WRR source row crop contact sheet](../{args.contact_sheet_out})",
+        "",
+        "## Row Order",
+        "",
+        "| Rank | Row | Terms | Frontier | Auto crop |",
+        "| ---: | --- | ---: | ---: | --- |",
+    ]
+    for row in rows:
+        lines.append(
+            "| {row_rank} | `{row_number}` | {action_terms} | {frontier_pairs} | "
+            "`{crop_path}` |".format(**markdown_row(row))
+        )
+    lines.extend(
+        [
+            "",
+            "## Boundary",
+            "",
+            "- The contact sheet is generated from local crop images under `reports/`.",
+            "- Crop availability is not transcription verification.",
+            "- Manual visual notes remain triage notes unless a separate decision record cites source evidence.",
+            "- No row here changes the working WRR source or excludes a pair automatically.",
+            "",
+        ]
+    )
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines), encoding="utf-8")
+
+
 def write_manifest(
     path: Path,
     args: argparse.Namespace,
     rows: list[dict[str, object]],
     summary_rows: list[dict[str, object]],
+    contact_summary: dict[str, object],
     started: float,
 ) -> None:
     payload = {
@@ -277,6 +427,7 @@ def write_manifest(
         "duration_seconds": round(time.perf_counter() - started, 6),
         "rows": len(rows),
         "summary": {row["metric"]: row["value"] for row in summary_rows},
+        "contact_sheet": contact_summary,
         "inputs": {
             "row_checklist": str(args.row_checklist),
             "tsv": str(args.tsv),
@@ -288,6 +439,8 @@ def write_manifest(
             "out": str(args.out),
             "summary_out": str(args.summary_out),
             "markdown_out": str(args.markdown_out),
+            "contact_sheet_out": str(args.contact_sheet_out),
+            "contact_sheet_markdown_out": str(args.contact_sheet_markdown_out),
             "manifest_out": str(args.manifest_out),
         },
     }

@@ -96,10 +96,12 @@ def test_wrr_source_row_crop_step_is_no_input_packet() -> None:
     assert "row-crop packet" in step["description"]
     assert "--row-checklist" in step["argv"]
     assert "--crop-dir" in step["argv"]
+    assert "--contact-sheet-out" in step["argv"]
     assert "scripts/build_wrr_source_row_crop_packet.py" in step["inputs"]
     assert "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv" in step["inputs"]
     assert "reports/wrr_1994/wrr_primary_table2_row_ocr.tsv" in step["inputs"]
     assert "docs/WRR_SOURCE_ROW_CROP_PACKET.md" in step["outputs"]
+    assert "docs/WRR_SOURCE_ROW_CROP_CONTACT_SHEET.md" in step["outputs"]
 
 
 def test_greek_new_terms_report_step_uses_specific_title() -> None:

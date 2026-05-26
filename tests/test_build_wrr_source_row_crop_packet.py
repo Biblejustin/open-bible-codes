@@ -47,6 +47,26 @@ class WrrSourceRowCropPacketTests(unittest.TestCase):
             self.assertEqual(rows[0]["crop_status"], "written_review_aid_only")
             self.assertEqual(Image.open(crop).size, (100, 80))
 
+    def test_write_contact_sheet_builds_local_review_image(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            image = root / "page.png"
+            Image.new("RGB", (100, 80), "white").save(image)
+            args = args_for(root, image=image, x_min=0, x_max=100, padding_y=4)
+            rows = packet.build_packet_rows(
+                [row_checklist("1", "01", "1", "1")],
+                {1: (20.0, 40.0)},
+                args,
+            )
+            packet.write_crops(rows, args)
+
+            summary = packet.write_contact_sheet(rows, args)
+
+            self.assertTrue(args.contact_sheet_out.exists())
+            self.assertEqual(summary["contact_sheet_rows"], 1)
+            self.assertGreater(summary["contact_sheet_width"], 100)
+            self.assertGreater(summary["contact_sheet_height"], 20)
+
     def test_main_writes_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -56,6 +76,8 @@ class WrrSourceRowCropPacketTests(unittest.TestCase):
             out = root / "packet.csv"
             summary = root / "summary.csv"
             md = root / "packet.md"
+            contact_sheet = root / "contact.png"
+            contact_md = root / "contact.md"
             manifest = root / "manifest.json"
             Image.new("RGB", (120, 120), "white").save(image)
             write_csv(checklist, [row_checklist("1", "01", "1", "1")])
@@ -83,6 +105,10 @@ class WrrSourceRowCropPacketTests(unittest.TestCase):
                     str(summary),
                     "--markdown-out",
                     str(md),
+                    "--contact-sheet-out",
+                    str(contact_sheet),
+                    "--contact-sheet-markdown-out",
+                    str(contact_md),
                     "--manifest-out",
                     str(manifest),
                 ]
@@ -91,9 +117,15 @@ class WrrSourceRowCropPacketTests(unittest.TestCase):
             self.assertEqual(rc, 0)
             self.assertEqual(len(list(csv.DictReader(out.open(encoding="utf-8")))), 1)
             self.assertIn("WRR Source Row Crop Packet", md.read_text(encoding="utf-8"))
+            self.assertTrue(contact_sheet.exists())
+            self.assertIn(
+                "WRR Source Row Crop Contact Sheet",
+                contact_md.read_text(encoding="utf-8"),
+            )
             payload = json.loads(manifest.read_text(encoding="utf-8"))
             self.assertEqual(payload["rows"], 1)
             self.assertEqual(payload["summary"]["auto_crops_available"], 1)
+            self.assertEqual(payload["contact_sheet"]["contact_sheet_rows"], 1)
 
 
 def args_for(
@@ -112,6 +144,7 @@ def args_for(
             "image": image or (root / "page.png"),
             "crop_dir": root / "crops",
             "manual_crop_dir": manual_crop_dir or (root / "manual"),
+            "contact_sheet_out": root / "contact.png",
             "x_min": x_min,
             "x_max": x_max,
             "padding_y": padding_y,
