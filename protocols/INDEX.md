@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 153
+Protocols indexed: 154
 
 ## Analysis
 
@@ -13,6 +13,7 @@ Protocols indexed: 153
 | cities_extractable_text_review | Classify extractable Cities PDFs by source-review role without importing source rows. | 1 |  | reports/cities_pdf_recovery_probe | `cities_extractable_text_review.toml` |
 | cities_pdf_recovery_probe | Probe live and archived Torah-code.org Cities PDF links into an isolated recovery bundle. | 1 |  | reports/cities_pdf_recovery_probe | `cities_pdf_recovery_probe.toml` |
 | cities_source_review_queue | Queue Cities recovered and unrecovered PDF source-review actions without result-bearing... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_review_queue.toml` |
+| cities_source_row_lock_queue | Queue Cities source-bearing OCR-reviewed pages for future citable source-row locks with... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_row_lock_queue.toml` |
 | cities_unreadable_pdf_ocr_feasibility | Probe OCR feasibility for recovered unreadable Cities PDFs without storing OCR text in ... | 1 |  | reports/cities_pdf_recovery_probe | `cities_unreadable_pdf_ocr_feasibility.toml` |
 | cities_unreadable_pdf_ocr_page_review | Build manual page-image review records for priority Cities unreadable-PDF OCR pages. | 1 |  | reports/cities_pdf_recovery_probe | `cities_unreadable_pdf_ocr_page_review.toml` |
 | cities_unreadable_pdf_ocr_review_checklist | Build no-input review checklist and local contact sheets for Cities unreadable-PDF OCR ... | 1 |  | reports/cities_pdf_recovery_probe | `cities_unreadable_pdf_ocr_review_checklist.toml` |

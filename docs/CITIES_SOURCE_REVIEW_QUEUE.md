@@ -84,3 +84,6 @@ orders those sidecars for page-image comparison and contact-sheet review.
 The OCR page review in `docs/CITIES_UNREADABLE_PDF_OCR_PAGE_REVIEW.md`
 records visual page-role decisions for all 41 OCR-packet pages while keeping
 source-row imports at zero.
+The source-row lock queue in `docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md`
+then filters those reviewed page roles to 14 table/list/exception-note
+candidate pages that need separate citable source-row locks before use.

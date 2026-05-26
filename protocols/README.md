@@ -263,6 +263,28 @@ It does not track OCR text, repair text, import source rows, normalize city
 names, or run result-bearing work. Tracked review:
 `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md`.
 
+Cities unreadable-PDF OCR page review:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_ocr_page_review.toml --resume
+```
+
+This records visual page-role decisions for all 41 OCR packet pages. It does
+not track OCR body text, repair text, import source rows, normalize city names,
+or run result-bearing work. Tracked review:
+`docs/CITIES_UNREADABLE_PDF_OCR_PAGE_REVIEW.md`.
+
+Cities source-row lock queue:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_row_lock_queue.toml --resume
+```
+
+This filters reviewed OCR page roles into 14 table/list/exception-note
+candidate pages that need separate citable source-row locks before any data
+use. It does not import source rows, normalize city names, or run
+result-bearing work. Tracked queue: `docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md`.
+
 Cities extractable-text role review:
 
 ```bash

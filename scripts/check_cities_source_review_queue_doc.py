@@ -28,6 +28,9 @@ REQUIRED_PHRASES = (
     "CITIES_UNREADABLE_PDF_OCR_PAGE_REVIEW.md",
     "records visual page-role decisions for all 41 OCR-packet pages",
     "source-row imports at zero",
+    "CITIES_SOURCE_ROW_LOCK_QUEUE.md",
+    "14 table/list/exception-note",
+    "separate citable source-row locks",
 )
 
 EXPECTED_LANES = (

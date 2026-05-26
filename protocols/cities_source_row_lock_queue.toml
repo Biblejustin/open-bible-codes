@@ -1,0 +1,27 @@
+name = "cities_source_row_lock_queue"
+description = "Queue Cities source-bearing OCR-reviewed pages for future citable source-row locks without importing source text."
+manifest_out = "reports/cities_pdf_recovery_probe/source_row_lock_queue_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_source_row_lock_queue"
+description = "Filter reviewed OCR page roles into table/list/exception pages that need citable source-row locks."
+argv = [
+  "-m", "scripts.build_cities_source_row_lock_queue",
+  "--page-review", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_page_review.csv",
+  "--out", "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue.csv",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue_summary.csv",
+  "--markdown-out", "docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_source_row_lock_queue.py",
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_page_review.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue_summary.csv",
+  "docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md",
+  "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue.manifest.json",
+]
