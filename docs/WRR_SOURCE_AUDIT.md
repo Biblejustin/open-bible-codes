@@ -408,6 +408,8 @@ does not normalize city names, run ELS hits, or verify reported p-levels.
 Cities PDFs into extractable, zero-text, and garbled/non-Latin buckets, again
 without OCR, city normalization, ELS searches, compactness calculations, or
 p-level verification.
+`scripts/build_cities_source_review_queue.py` merges those rows with the
+unrecovered-link probe into source-review lanes for planning only.
 
 `scripts/analyze_event_object_experiments_source.py` parses the Sons of Haman,
 Pumbedita, Auschwitz, and Ark source pages plus linked data/tutorial PDFs into

@@ -58,6 +58,9 @@ The Cities PDF recovery probe now checks the 35 linked Cities/Aumann/Simon-McKay
 PDF URLs in an isolated ignored bundle and records 12 usable archived PDFs plus
 23 unrecovered links; the follow-up recovered-PDF text audit classifies those 12
 PDFs into 5 extractable rows, 4 zero-text rows, and 3 garbled/non-Latin rows.
+The Cities source-review queue now turns all 35 PDF rows into next-action lanes:
+5 extractable-text review rows, 4 OCR/image-only rows, 3 encoding-or-OCR rows,
+and 23 missing-PDF recovery rows.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -125,6 +128,25 @@ Current result:
 - Boundary: this separates source-review shapes only; no OCR, city-name
   normalization, ELS search, compactness calculation, or p-level verification is
   performed.
+
+### Cities Source Review Queue
+
+Completed source-review queue:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_review_queue.toml --resume
+```
+
+Current result:
+
+- Rows queued: 35.
+- Extractable-text review rows: 5.
+- OCR/image-only rows: 4.
+- Encoding-or-OCR candidate rows: 3.
+- Missing-PDF recovery rows: 23.
+- Boundary: this is planning metadata only; it does not decide source
+  admissibility, create city-name rows, run ELS searches, compute compactness, or
+  verify p-levels.
 
 ### Locked Report Rerun And Volatility Cleanup
 

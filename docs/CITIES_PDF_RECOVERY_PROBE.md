@@ -76,4 +76,6 @@ verification.
 Follow-up source-shape text classification lives in
 `docs/CITIES_RECOVERED_PDF_TEXT_AUDIT.md`; that audit separates recovered PDFs
 into extractable, zero-text, and garbled/non-Latin buckets without changing this
-probe's recovery-only boundary.
+probe's recovery-only boundary. The source-review queue in
+`docs/CITIES_SOURCE_REVIEW_QUEUE.md` combines recovered and unrecovered rows
+into next-action lanes without making source-admissibility decisions.

@@ -52,3 +52,7 @@ PDFs for future source-review planning. This audit does not decide which
 texts are admissible for a result-bearing protocol. Any later protocol
 must separately lock source rows, normalization, filters, Genesis text,
 skip caps, compactness metric, and controls before ELS work.
+
+The follow-up queue in `docs/CITIES_SOURCE_REVIEW_QUEUE.md` turns these
+text-shape statuses into review lanes without changing this source-shape
+boundary.

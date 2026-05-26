@@ -386,6 +386,8 @@ def write_markdown(
             "The follow-up text audit in `docs/CITIES_RECOVERED_PDF_TEXT_AUDIT.md`",
             "separates the recovered PDFs into extractable, zero-text, and garbled/non-Latin",
             "buckets without OCR or result-bearing ELS work.",
+            "`docs/CITIES_SOURCE_REVIEW_QUEUE.md` then merges recovered and unrecovered",
+            "PDF rows into source-review action lanes for planning only.",
             "",
             "No city-name rows are normalized, no ELS search is run, and no p-level is",
             "verified here.",

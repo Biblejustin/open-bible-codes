@@ -1,0 +1,29 @@
+name = "cities_source_review_queue"
+description = "Queue Cities recovered and unrecovered PDF source-review actions without result-bearing ELS work."
+manifest_out = "reports/cities_pdf_recovery_probe/source_review_queue_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_source_review_queue"
+description = "Merge Cities PDF recovery and text-shape audit rows into source-review action lanes."
+argv = [
+  "-m", "scripts.build_cities_source_review_queue",
+  "--recovery", "reports/cities_pdf_recovery_probe/cities_pdf_recovery_probe.csv",
+  "--text-audit", "reports/cities_pdf_recovery_probe/cities_recovered_pdf_text_audit.csv",
+  "--out", "reports/cities_pdf_recovery_probe/cities_source_review_queue.csv",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_source_review_queue_summary.csv",
+  "--markdown-out", "docs/CITIES_SOURCE_REVIEW_QUEUE.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_source_review_queue.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_source_review_queue.py",
+  "reports/cities_pdf_recovery_probe/cities_pdf_recovery_probe.csv",
+  "reports/cities_pdf_recovery_probe/cities_recovered_pdf_text_audit.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_source_review_queue.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_review_queue_summary.csv",
+  "docs/CITIES_SOURCE_REVIEW_QUEUE.md",
+  "reports/cities_pdf_recovery_probe/cities_source_review_queue.manifest.json",
+]

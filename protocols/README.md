@@ -206,6 +206,18 @@ shape and checks five title/protocol anchors. It does not run OCR, normalize
 city names, run ELS results, compute compactness, or verify p-levels. Tracked
 audit: `docs/CITIES_RECOVERED_PDF_TEXT_AUDIT.md`.
 
+Cities source-review queue:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_review_queue.toml --resume
+```
+
+This joins the 35-row recovery probe and 12-row recovered-PDF text audit into
+next-action lanes: extractable-text review, OCR/image-only review,
+encoding-or-OCR candidate, and missing-PDF recovery. It does not decide source
+admissibility or run result-bearing work. Tracked queue:
+`docs/CITIES_SOURCE_REVIEW_QUEUE.md`.
+
 Event/object experiment source audit:
 
 ```bash
