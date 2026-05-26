@@ -1,0 +1,31 @@
+name = "cities_unreadable_pdf_ocr_review_packet"
+description = "Build local page-image and OCR-text sidecars for recovered unreadable Cities PDFs without tracking OCR text."
+manifest_out = "reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review_packet_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_unreadable_pdf_ocr_review_packet"
+description = "Render local page images and OCR text sidecars, then record review paths/counts only."
+argv = [
+  "-m", "scripts.build_cities_unreadable_pdf_ocr_review_packet",
+  "--review", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_review.csv",
+  "--base-dir", "reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review",
+  "--language", "eng",
+  "--dpi", "200",
+  "--psm", "6",
+  "--out", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_review_packet.csv",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_review_packet_summary.csv",
+  "--markdown-out", "docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_review_packet.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_unreadable_pdf_ocr_review_packet.py",
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_review.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_review_packet.csv",
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_review_packet_summary.csv",
+  "docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md",
+  "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_review_packet.manifest.json",
+]

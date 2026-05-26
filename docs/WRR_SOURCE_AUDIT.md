@@ -418,6 +418,9 @@ running OCR or repairing text.
 `scripts/build_cities_unreadable_pdf_ocr_feasibility.py` then probes local OCR
 feasibility for those seven rows and records count/status metrics only, with no
 tracked OCR text.
+`scripts/build_cities_unreadable_pdf_ocr_review_packet.py` creates ignored
+local page-image and OCR-text sidecars for those 41 pages and records only
+paths/counts/status before any source-row use.
 `scripts/build_cities_extractable_text_review.py` marks the five extractable
 PDFs as one data-table candidate, one method-context candidate, and three
 commentary/critique context rows. The data-table candidate is linked to the

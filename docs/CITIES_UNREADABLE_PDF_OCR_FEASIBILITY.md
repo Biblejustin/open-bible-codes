@@ -37,3 +37,7 @@ text, repair text, decide source admissibility, create city-name rows,
 or make a result-bearing claim. Any OCR text used later must be reviewed
 against page images and locked before source-row normalization or ELS
 work.
+
+Follow-up review packet: `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md`
+creates ignored local page-image and OCR-text sidecars for those 41 pages
+and tracks only paths/counts/status.

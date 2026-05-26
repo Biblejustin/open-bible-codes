@@ -76,3 +76,6 @@ encoding-or-OCR routes without running OCR or repairing text.
 The OCR feasibility probe in `docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md`
 records OCR count/status metrics for those same seven rows without tracking
 OCR text.
+The OCR review packet in `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md`
+adds ignored local page-image and OCR-text sidecars and tracks only
+paths/counts/status before any source-row use.

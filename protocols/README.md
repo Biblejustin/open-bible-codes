@@ -241,6 +241,17 @@ records counts/status only. It does not track OCR text, repair text, import
 source rows, normalize city names, or run result-bearing work. Tracked review:
 `docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md`.
 
+Cities unreadable-PDF OCR review packet:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_ocr_review_packet.toml --resume
+```
+
+This renders ignored local page-image and OCR-text sidecars for the same 41
+pages and records paths/counts/status only. It does not track OCR text, repair
+text, import source rows, normalize city names, or run result-bearing work.
+Tracked review: `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md`.
+
 Cities extractable-text role review:
 
 ```bash

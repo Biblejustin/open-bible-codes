@@ -217,6 +217,28 @@ Current result:
   source rows, normalize city names, run ELS searches, compute compactness, or
   verify p-levels.
 
+### Cities Unreadable PDF OCR Review Packet
+
+Completed OCR review packet:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_ocr_review_packet.toml --resume
+```
+
+Current result:
+
+- PDF rows: 7.
+- Page rows: 41.
+- Pages with OCR text: 39.
+- Pages without OCR text: 2.
+- OCR text signal chars: 54324.
+- OCR words: 15019.
+- OCR lines: 1563.
+- Boundary: this tracks paths/counts/status only. OCR text sidecars and page
+  images are ignored local review aids; this does not repair text, import
+  source rows, normalize city names, run ELS searches, compute compactness, or
+  verify p-levels.
+
 ### Locked Report Rerun And Volatility Cleanup
 
 Completed locked reruns:

@@ -58,6 +58,8 @@ unreadable PDFs into OCR/image-only and encoding-or-OCR planning lanes without
 running OCR.
 `docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md` records OCR count/status
 feasibility for those lanes without tracking OCR text.
+`docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md` then builds ignored local
+page-image and OCR-text sidecars while tracking only paths/counts/status.
 
 No city-name rows are normalized, no ELS search is run, and no p-level is
 verified here.

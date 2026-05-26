@@ -38,3 +38,6 @@ normalization or ELS work.
 Follow-up feasibility probe: `docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md`
 records that local English OCR produced text signals for all seven rows
 without committing OCR text or repairing source rows.
+Follow-up review packet: `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md`
+creates ignored local page-image and OCR-text sidecars for those 41 pages
+and tracks only paths/counts/status.
