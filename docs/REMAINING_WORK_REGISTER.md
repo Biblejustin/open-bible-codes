@@ -1081,10 +1081,11 @@ replacement spellings, or method changes.
 method-lane terms: all are OCR-matched, all have zero skip-250 appellation
 counts, all have zero high-cap appellation ordinary hits, and 2 pairs have zero
 ordinary hits on both sides.
-The exact-gap priority-packet checker now validates the CSV summary and review
-lane rows in addition to doc prose. The method/pair-universe and remaining-lane
-evidence checkers now validate their CSV summaries, expected term sets, zero
-variant leads, and no-input boundaries before real-report preflight can pass.
+The exact-gap priority-packet checker now validates CSV fieldnames, summary
+metrics, review lane rows, and manifest inputs/outputs in addition to doc
+prose. The method/pair-universe and remaining-lane evidence checkers now
+validate their CSV summaries, expected term sets, zero variant leads, and
+no-input boundaries before real-report preflight can pass.
 The source-row coverage checker now validates its CSV summary, 22-row rank
 sequence, 43 action-term total, 35 frontier-pair total, 0 direct visual-action
 terms, 4 related-only rows, 18 no-related rows, and no-input boundary before

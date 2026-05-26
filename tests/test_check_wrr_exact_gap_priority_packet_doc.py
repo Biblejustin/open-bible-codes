@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from scripts import check_wrr_exact_gap_priority_packet_doc as checker
@@ -165,3 +166,19 @@ def test_validate_priority_packet_doc_rejects_missing_lane(tmp_path: Path) -> No
         "missing review lane source_policy_or_pair_rule_review" in failure
         for failure in failures
     )
+
+
+def test_validate_priority_packet_doc_rejects_manifest_drift(tmp_path: Path) -> None:
+    manifest = tmp_path / "manifest.json"
+    data = json.loads(checker.DEFAULT_MANIFEST.read_text(encoding="utf-8"))
+    data["rows"] = 99
+    manifest.write_text(json.dumps(data) + "\n", encoding="utf-8")
+
+    failures = checker.validate_priority_packet_doc(
+        checker.DEFAULT_DOC,
+        packet=None,
+        summary=None,
+        manifest=manifest,
+    )
+
+    assert any("rows drifted" in failure for failure in failures)
