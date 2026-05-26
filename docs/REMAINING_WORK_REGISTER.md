@@ -83,6 +83,8 @@ rows, summary counts, usable/unrecovered labels, and recovery boundary drift.
 The research missing model pages audit doc is now CSV/manifest-guarded against
 unusable level-2/3 model-page rows, summary counts, anchor counts, and the
 source-status-only claim boundary.
+The centered occurrence index doc is now CSV/manifest-guarded against generated
+occurrence rows, presence-summary rows, source/type counts, and path metadata.
 The source-row review bundle, source-transcription evidence packet,
 source-transcription row-review checklist, and remaining-lane review checklist
 are now CSV-guarded as well. The source-policy review checklist is also
@@ -1241,8 +1243,11 @@ supposed to fail if tracked files are dirty.
 Latest validation snapshot after the release-ready make target, with current
 dirty-tree fast validation above it:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1846
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1848
   tests, 2 skipped, and 29196 subtests.
+- `python3 -m scripts.check_centered_occurrence_index_doc` passed with
+  CSV-backed occurrence-row and presence-summary locks plus manifest
+  source/type/path metadata locks.
 - `python3 -m scripts.check_research_missing_model_pages_audit_doc` passed with
   CSV-backed unusable level-2/3 model-page rows, source-status summary counts,
   anchor counts, and report-manifest boundary locks.

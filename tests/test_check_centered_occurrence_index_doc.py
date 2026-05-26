@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from scripts import check_centered_occurrence_index_doc as check
@@ -25,6 +26,26 @@ def test_stale_doc_fails(tmp_path: Path) -> None:
     assert failures == [
         f"{args.markdown_out} is stale; rerun python3 -m scripts.build_centered_occurrence_index"
     ]
+
+
+def test_stale_occurrences_csv_fails(tmp_path: Path) -> None:
+    args = make_args(tmp_path)
+    args.out.write_text("occurrence_rank\n999\n", encoding="utf-8")
+
+    failures = check.validate_centered_occurrence_index_doc(args)
+
+    assert any("centered occurrences rows drifted" in failure for failure in failures)
+
+
+def test_stale_manifest_fails(tmp_path: Path) -> None:
+    args = make_args(tmp_path)
+    payload = json.loads(args.manifest_out.read_text(encoding="utf-8"))
+    payload["rows"] = 999
+    args.manifest_out.write_text(json.dumps(payload) + "\n", encoding="utf-8")
+
+    failures = check.validate_centered_occurrence_index_doc(args)
+
+    assert any("manifest.json rows drifted" in failure for failure in failures)
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
@@ -84,9 +105,12 @@ def make_args(tmp_path: Path, *, markdown_exists: bool = True):
             str(tmp_path / "manifest.json"),
         ]
     )
+    rows = builder.build_occurrences(args)
+    summary_rows = builder.build_presence_summary(rows)
+    builder.write_csv(args.out, rows)
+    builder.write_csv(args.summary_out, summary_rows, fieldnames=builder.SUMMARY_FIELDNAMES)
+    builder.write_manifest(args.manifest_out, args, rows, summary_rows, 0.0)
     if markdown_exists:
-        rows = builder.build_occurrences(args)
-        summary_rows = builder.build_presence_summary(rows)
         markdown.write_text(builder.render_markdown(rows, summary_rows, args), encoding="utf-8")
     return args
 
