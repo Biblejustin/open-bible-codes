@@ -1211,6 +1211,32 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_source_row_review_bundle"
+description = "Build no-input row-review bundle joining WRR checklist, crops, and OCR words."
+argv = [
+  "-m", "scripts.build_wrr_source_row_review_bundle",
+  "--row-checklist", "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv",
+  "--crop-packet", "reports/wrr_1994/wrr_source_row_crop_packet.csv",
+  "--ocr-word-packet", "reports/wrr_1994/wrr_source_row_ocr_word_packet.csv",
+  "--out", "reports/wrr_1994/wrr_source_row_review_bundle.csv",
+  "--summary-out", "reports/wrr_1994/wrr_source_row_review_bundle_summary.csv",
+  "--markdown-out", "docs/WRR_SOURCE_ROW_REVIEW_BUNDLE.md",
+  "--manifest-out", "reports/wrr_1994/wrr_source_row_review_bundle.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_source_row_review_bundle.py",
+  "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv",
+  "reports/wrr_1994/wrr_source_row_crop_packet.csv",
+  "reports/wrr_1994/wrr_source_row_ocr_word_packet.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_source_row_review_bundle.csv",
+  "reports/wrr_1994/wrr_source_row_review_bundle_summary.csv",
+  "docs/WRR_SOURCE_ROW_REVIEW_BUNDLE.md",
+  "reports/wrr_1994/wrr_source_row_review_bundle.manifest.json",
+]
+
+[[steps]]
 id = "build_wrr_manual_decision_register"
 description = "Build consolidated lane register for WRR manual-decision records."
 argv = [

@@ -189,6 +189,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "docs/WRR_SOURCE_ROW_REVIEW_BUNDLE.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md",
             steps_by_id["preflight"]["inputs"],
         )
@@ -261,6 +265,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/build_wrr_source_row_ocr_word_packet.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_wrr_source_row_review_bundle.py",
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
@@ -384,6 +392,14 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
+            "docs/WRR_SOURCE_ROW_REVIEW_BUNDLE.md",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_source_row_review_bundle_summary.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
@@ -493,6 +509,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_source_row_ocr_word_packet_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_source_row_review_bundle_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -1075,6 +1095,14 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/build_wrr_source_row_review_bundle.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_source_row_review_bundle_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/check_wrr_method_pair_universe_evidence_packet_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -1421,6 +1449,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn("wrr_source_row_crop_packet_doc_failures", payload)
             self.assertIn("wrr_source_row_crop_contact_sheet_doc_failures", payload)
             self.assertIn("wrr_source_row_ocr_word_packet_doc_failures", payload)
+            self.assertIn("wrr_source_row_review_bundle_doc_failures", payload)
             self.assertIn("wrr_source_policy_review_checklist_doc_failures", payload)
             self.assertIn("wrr_remaining_lane_review_checklist_doc_failures", payload)
             self.assertIn("wrr_manual_decision_register_doc_failures", payload)
@@ -2356,6 +2385,30 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "WRR source row OCR word packet failures: "
                 "docs/WRR_SOURCE_ROW_OCR_WORD_PACKET.md missing boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_source_row_review_bundle_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_source_row_review_bundle_doc,
+                "validate_source_row_review_bundle_doc",
+                return_value=[
+                    "docs/WRR_SOURCE_ROW_REVIEW_BUNDLE.md missing boundary"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_source_row_review_bundle_doc_failures"],
+                ["docs/WRR_SOURCE_ROW_REVIEW_BUNDLE.md missing boundary"],
+            )
+            self.assertIn(
+                "WRR source row review bundle failures: "
+                "docs/WRR_SOURCE_ROW_REVIEW_BUNDLE.md missing boundary",
                 payload["failures"],
             )
 

@@ -119,6 +119,23 @@ def test_wrr_source_row_ocr_word_step_is_no_input_packet() -> None:
     assert "docs/WRR_SOURCE_ROW_OCR_WORD_PACKET.md" in step["outputs"]
 
 
+def test_wrr_source_row_review_bundle_step_is_no_input_packet() -> None:
+    protocol = load_protocol("protocols/wrr_audit_counts.toml")
+    step = next(
+        step for step in protocol["steps"] if step["id"] == "build_wrr_source_row_review_bundle"
+    )
+
+    assert "row-review bundle" in step["description"]
+    assert "--row-checklist" in step["argv"]
+    assert "--crop-packet" in step["argv"]
+    assert "--ocr-word-packet" in step["argv"]
+    assert "scripts/build_wrr_source_row_review_bundle.py" in step["inputs"]
+    assert "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv" in step["inputs"]
+    assert "reports/wrr_1994/wrr_source_row_crop_packet.csv" in step["inputs"]
+    assert "reports/wrr_1994/wrr_source_row_ocr_word_packet.csv" in step["inputs"]
+    assert "docs/WRR_SOURCE_ROW_REVIEW_BUNDLE.md" in step["outputs"]
+
+
 def test_greek_new_terms_report_step_uses_specific_title() -> None:
     protocol = load_protocol("protocols/greek_surface_new_terms.toml")
     step = next(step for step in protocol["steps"] if step["id"] == "prospective_report")

@@ -52,7 +52,7 @@ local-lock boundary guarding, WRR source-audit register refresh,
 protocol README WRR handoff-status guarding, WRR exact-gap priority-packet
 guarding, WRR source-row coverage packet guarding, WRR source-row crop packet
 guarding, WRR source-row crop contact-sheet guarding, and WRR source-row OCR
-word packet guarding.
+word packet guarding, and WRR source-row review bundle guarding.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
