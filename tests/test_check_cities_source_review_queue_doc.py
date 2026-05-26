@@ -1,4 +1,6 @@
 import csv
+import json
+import shutil
 from pathlib import Path
 
 from scripts import check_cities_source_review_queue_doc as check
@@ -9,48 +11,103 @@ def test_current_cities_source_review_queue_doc_passes() -> None:
 
 
 def test_detects_missing_boundary_phrase(tmp_path: Path) -> None:
-    queue = tmp_path / "queue.csv"
-    summary = tmp_path / "summary.csv"
+    _, queue, summary, manifest = copy_current_outputs(tmp_path)
     doc = tmp_path / "queue.md"
-    write_queue(queue)
-    write_summary(summary)
     doc.write_text("# Cities Source Review Queue\n", encoding="utf-8")
 
-    failures = check.validate_cities_source_review_queue_doc(doc, queue, summary)
+    failures = check.validate_cities_source_review_queue_doc(
+        doc,
+        queue,
+        summary,
+        manifest,
+    )
 
     assert any("missing phrase" in failure for failure in failures)
 
 
 def test_detects_lane_count_mismatch(tmp_path: Path) -> None:
+    doc, queue, summary, manifest = copy_current_outputs(tmp_path)
+    fieldnames, summary_rows = read_csv(summary)
+    summary_rows[0]["rows"] = "99"
+    write_csv(summary, fieldnames, summary_rows)
+
+    failures = check.validate_cities_source_review_queue_doc(
+        doc,
+        queue,
+        summary,
+        manifest,
+    )
+
+    assert any("summary rows drifted" in failure for failure in failures)
+
+
+def test_detects_queue_row_drift(tmp_path: Path) -> None:
+    doc, queue, summary, manifest = copy_current_outputs(tmp_path)
+    fieldnames, queue_rows = read_csv(queue)
+    queue_rows[0]["lane"] = "recover_missing_pdf"
+    write_csv(queue, fieldnames, queue_rows)
+
+    failures = check.validate_cities_source_review_queue_doc(
+        doc,
+        queue,
+        summary,
+        manifest,
+    )
+
+    assert any("queue rows drifted" in failure for failure in failures)
+
+
+def test_detects_queue_fieldname_drift(tmp_path: Path) -> None:
+    doc, queue, summary, manifest = copy_current_outputs(tmp_path)
+    fieldnames, queue_rows = read_csv(queue)
+    write_csv(queue, fieldnames[:-1], [{k: v for k, v in row.items() if k != "claim_boundary"} for row in queue_rows])
+
+    failures = check.validate_cities_source_review_queue_doc(
+        doc,
+        queue,
+        summary,
+        manifest,
+    )
+
+    assert any("fieldnames drifted" in failure for failure in failures)
+
+
+def test_detects_manifest_drift(tmp_path: Path) -> None:
+    doc, queue, summary, manifest = copy_current_outputs(tmp_path)
+    payload = json.loads(manifest.read_text(encoding="utf-8"))
+    payload["rows"]["queue"] = 99
+    manifest.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_cities_source_review_queue_doc(
+        doc,
+        queue,
+        summary,
+        manifest,
+    )
+
+    assert any("rows drifted" in failure for failure in failures)
+
+
+def copy_current_outputs(tmp_path: Path) -> tuple[Path, Path, Path, Path]:
+    doc = tmp_path / "queue.md"
     queue = tmp_path / "queue.csv"
     summary = tmp_path / "summary.csv"
-    doc = tmp_path / "queue.md"
-    write_queue(queue)
-    write_summary(summary, review_extractable_text="99")
-    doc.write_text(check.DEFAULT_DOC.read_text(encoding="utf-8"), encoding="utf-8")
-
-    failures = check.validate_cities_source_review_queue_doc(doc, queue, summary)
-
-    assert any("review_extractable_text=99" in failure for failure in failures)
+    manifest = tmp_path / "manifest.json"
+    shutil.copyfile(check.DEFAULT_DOC, doc)
+    shutil.copyfile(check.DEFAULT_QUEUE, queue)
+    shutil.copyfile(check.DEFAULT_SUMMARY, summary)
+    shutil.copyfile(check.DEFAULT_MANIFEST, manifest)
+    return doc, queue, summary, manifest
 
 
-def write_queue(path: Path) -> None:
+def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
+    with path.open(encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, str]]) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["lane"])
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
-        for lane in check.EXPECTED_LANES:
-            writer.writerow({"lane": lane})
-
-
-def write_summary(path: Path, *, review_extractable_text: str = "5") -> None:
-    counts = {
-        "review_extractable_text": review_extractable_text,
-        "ocr_image_only_pdf": "4",
-        "encoding_or_ocr_candidate": "3",
-        "recover_missing_pdf": "23",
-    }
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["lane", "rows"])
-        writer.writeheader()
-        for lane in check.EXPECTED_LANES:
-            writer.writerow({"lane": lane, "rows": counts[lane]})
+        writer.writerows(rows)
