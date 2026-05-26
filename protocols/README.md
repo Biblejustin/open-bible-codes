@@ -195,6 +195,17 @@ not overwrite the cached `reports/wrr_1994/` bundle, perform OCR, normalize
 city names, or run ELS results. Tracked probe:
 `docs/CITIES_PDF_RECOVERY_PROBE.md`.
 
+Cities recovered-PDF text audit:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_recovered_pdf_text_audit.toml --resume
+```
+
+This classifies the 12 recovered Cities/Aumann/Gans PDFs by extractable text
+shape and checks five title/protocol anchors. It does not run OCR, normalize
+city names, run ELS results, compute compactness, or verify p-levels. Tracked
+audit: `docs/CITIES_RECOVERED_PDF_TEXT_AUDIT.md`.
+
 Event/object experiment source audit:
 
 ```bash

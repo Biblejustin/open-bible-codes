@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 145
+Protocols indexed: 146
 
 ## Analysis
 
@@ -47,6 +47,7 @@ Protocols indexed: 145
 | --- | --- | ---: | --- | --- | --- |
 | american_presidents_source_audit | Audit Torah-code.org American presidents data and transliteration-rule source PDFs with... | 2 |  | reports/wrr_1994 | `american_presidents_source_audit.toml` |
 | churchages_statistics_audit | Compare published ChurchAges observed KJV ELS counts against letter-frequency expected ... | 1 |  | reports/churchages_statistics | `churchages_statistics_audit.toml` |
+| cities_recovered_pdf_text_audit | Classify extractable text and anchors from recovered Cities/Aumann/Gans PDF sources wit... | 1 |  | reports/cities_pdf_recovery_probe | `cities_recovered_pdf_text_audit.toml` |
 | cities_source_chain_audit | Audit Torah-code.org Cities source-chain HTML and PDF-shaped downloads without running ... | 2 |  | reports/wrr_1994 | `cities_source_chain_audit.toml` |
 | cohort_cluster_density_audit | Post-process centered occurrences for declared-cohort word-window density candidates. | 1 | terms/biblical_tribes.csv | reports/cohort_cluster_density | `cohort_cluster_density_audit.toml` |
 | colinear_els_source_audit | Audit co-linear ELS paper and attachment source shapes without running ELS results. | 2 |  | reports/wrr_1994 | `colinear_els_source_audit.toml` |

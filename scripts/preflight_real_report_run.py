@@ -25,6 +25,7 @@ from scripts import (
     check_claim_catalog_doc,
     check_crd_relevance_dictionary,
     check_cities_pdf_recovery_probe_doc,
+    check_cities_recovered_pdf_text_audit_doc,
     check_consolidated_findings_doc,
     check_critical_omission_followup_docs,
     check_doc_command_references,
@@ -167,6 +168,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/wrr_source_recovery_probe.toml",
     "protocols/wrr_wayback_source_recovery_probe.toml",
     "protocols/cities_pdf_recovery_probe.toml",
+    "protocols/cities_recovered_pdf_text_audit.toml",
     "protocols/centered_relevance_density.toml",
     "protocols/matrix_cluster_candidates.toml",
     "protocols/matrix_cluster_control_summary.toml",
@@ -233,6 +235,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/COLINEAR_ELS_SOURCE_AUDIT.md",
     "docs/CITIES_SOURCE_CHAIN_AUDIT.md",
     "docs/CITIES_PDF_RECOVERY_PROBE.md",
+    "docs/CITIES_RECOVERED_PDF_TEXT_AUDIT.md",
     "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
     "docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md",
     "docs/HYPOTHESIS_TESTING_SOURCE_AUDIT.md",
@@ -621,6 +624,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_wayback_source_recovery_probe_doc.py",
     "scripts/build_cities_pdf_recovery_probe.py",
     "scripts/check_cities_pdf_recovery_probe_doc.py",
+    "scripts/analyze_cities_recovered_pdf_text.py",
+    "scripts/check_cities_recovered_pdf_text_audit_doc.py",
     "scripts/check_hypothesis_testing_source_audit_doc.py",
     "scripts/check_research_missing_model_pages_audit_doc.py",
     "scripts/check_wrr_adjacent_source_audit_docs.py",
@@ -648,6 +653,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/wrr_source_recovery_probe.toml",
     "protocols/wrr_wayback_source_recovery_probe.toml",
     "protocols/cities_pdf_recovery_probe.toml",
+    "protocols/cities_recovered_pdf_text_audit.toml",
     "terms/relevance_dictionary.toml",
     "prompts/crd_classifier_v1/system.md",
     "prompts/crd_classifier_v1/user_template.md",
@@ -1369,6 +1375,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(cities_pdf_recovery_probe_doc_failures)
         )
 
+    cities_recovered_pdf_text_audit_doc_failures = (
+        check_cities_recovered_pdf_text_audit_doc.validate_cities_recovered_pdf_text_audit_doc(
+            check_cities_recovered_pdf_text_audit_doc.DEFAULT_DOC
+        )
+    )
+    if cities_recovered_pdf_text_audit_doc_failures:
+        failures.append(
+            "Cities recovered-PDF text audit doc failures: "
+            + "; ".join(cities_recovered_pdf_text_audit_doc_failures)
+        )
+
     hypothesis_testing_source_audit_doc_failures = (
         check_hypothesis_testing_source_audit_doc.validate_hypothesis_testing_source_audit_doc(
             check_hypothesis_testing_source_audit_doc.DEFAULT_DOC
@@ -1534,6 +1551,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "cities_pdf_recovery_probe_doc_failures": (
             cities_pdf_recovery_probe_doc_failures
+        ),
+        "cities_recovered_pdf_text_audit_doc_failures": (
+            cities_recovered_pdf_text_audit_doc_failures
         ),
         "hypothesis_testing_source_audit_doc_failures": hypothesis_testing_source_audit_doc_failures,
         "research_missing_model_pages_audit_doc_failures": (

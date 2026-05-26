@@ -404,6 +404,10 @@ Simon-McKay HTML pages and PDF-shaped downloads into ignored source-chain CSVs
 and a tracked audit summary. It verifies wrapper/parse/no-text status, flags
 Wayback save-job-failed wrapper downloads, and checks key source anchors, but
 does not normalize city names, run ELS hits, or verify reported p-levels.
+`scripts/analyze_cities_recovered_pdf_text.py` then classifies the recovered
+Cities PDFs into extractable, zero-text, and garbled/non-Latin buckets, again
+without OCR, city normalization, ELS searches, compactness calculations, or
+p-level verification.
 
 `scripts/analyze_event_object_experiments_source.py` parses the Sons of Haman,
 Pumbedita, Auschwitz, and Ark source pages plus linked data/tutorial PDFs into

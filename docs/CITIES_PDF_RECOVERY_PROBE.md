@@ -72,3 +72,8 @@ whether linked Cities/Aumann/Simon-McKay PDFs can be fetched live or
 through exact-URL Wayback snapshots. It does not perform OCR, city-name
 normalization, ELS searches, compactness calculations, or p-level
 verification.
+
+Follow-up source-shape text classification lives in
+`docs/CITIES_RECOVERED_PDF_TEXT_AUDIT.md`; that audit separates recovered PDFs
+into extractable, zero-text, and garbled/non-Latin buckets without changing this
+probe's recovery-only boundary.

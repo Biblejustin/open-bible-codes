@@ -56,7 +56,8 @@ packet guarding, WRR source-row review bundle guarding, WRR source-row bundle
 public-doc synchronization, and exact-gap review-rank wording cleanup.
 The Cities PDF recovery probe now checks the 35 linked Cities/Aumann/Simon-McKay
 PDF URLs in an isolated ignored bundle and records 12 usable archived PDFs plus
-23 unrecovered links.
+23 unrecovered links; the follow-up recovered-PDF text audit classifies those 12
+PDFs into 5 extractable rows, 4 zero-text rows, and 3 garbled/non-Latin rows.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -105,6 +106,25 @@ Current result:
 - Boundary: recovered PDF bytes are source-shape inputs only; no OCR,
   city-name normalization, ELS search, compactness calculation, or p-level
   verification is performed.
+
+### Cities Recovered PDF Text Audit
+
+Completed source-shape text classification:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_recovered_pdf_text_audit.toml --resume
+```
+
+Current result:
+
+- Recovered PDF rows audited: 12.
+- Extractable text rows: 5.
+- Zero-text rows: 4.
+- Garbled/non-Latin extract rows: 3.
+- Protocol anchors found: 5 of 5.
+- Boundary: this separates source-review shapes only; no OCR, city-name
+  normalization, ELS search, compactness calculation, or p-level verification is
+  performed.
 
 ### Locked Report Rerun And Volatility Cleanup
 

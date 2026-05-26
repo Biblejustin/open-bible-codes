@@ -1,0 +1,29 @@
+name = "cities_recovered_pdf_text_audit"
+description = "Classify extractable text and anchors from recovered Cities/Aumann/Gans PDF sources without ELS work."
+manifest_out = "reports/cities_pdf_recovery_probe/text_audit_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "audit_cities_recovered_pdf_text"
+description = "Summarize text extraction status for PDFs recovered by the Cities PDF recovery probe."
+argv = [
+  "-m", "scripts.analyze_cities_recovered_pdf_text",
+  "--recovery-csv", "reports/cities_pdf_recovery_probe/cities_pdf_recovery_probe.csv",
+  "--out", "reports/cities_pdf_recovery_probe/cities_recovered_pdf_text_audit.csv",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_recovered_pdf_text_audit_summary.csv",
+  "--anchors-out", "reports/cities_pdf_recovery_probe/cities_recovered_pdf_text_anchors.csv",
+  "--markdown-out", "docs/CITIES_RECOVERED_PDF_TEXT_AUDIT.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_recovered_pdf_text_audit.manifest.json",
+]
+inputs = [
+  "scripts/analyze_cities_recovered_pdf_text.py",
+  "reports/cities_pdf_recovery_probe/cities_pdf_recovery_probe.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_recovered_pdf_text_audit.csv",
+  "reports/cities_pdf_recovery_probe/cities_recovered_pdf_text_audit_summary.csv",
+  "reports/cities_pdf_recovery_probe/cities_recovered_pdf_text_anchors.csv",
+  "docs/CITIES_RECOVERED_PDF_TEXT_AUDIT.md",
+  "reports/cities_pdf_recovery_probe/cities_recovered_pdf_text_audit.manifest.json",
+]
