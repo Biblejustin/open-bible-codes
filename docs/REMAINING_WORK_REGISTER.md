@@ -64,6 +64,8 @@ CSV-guarded, along with the source-policy evidence packet/context/summary and
 the manual decision register/summary, manual decision-record worksheet, and
 exact reproduction gap dashboard. The locked-method report is CSV-guarded too.
 WRR claim readiness and lock options are CSV-guarded as well.
+WRR claim blocker packet readiness, source-queue, residual-summary, and
+remaining-lane inputs are CSV-guarded as well.
 WRR method status is CSV-guarded as well.
 WRR residual term reconciliation queue and summary are CSV-guarded as well.
 WRR residual reconciliation action plan and summary are CSV-guarded as well.
@@ -1213,8 +1215,11 @@ supposed to fail if tracked files are dirty.
 Latest validation snapshot after the release-ready make target, with current
 dirty-tree fast validation above it:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1796
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1801
   tests, 2 skipped, and 29196 subtests.
+- `python3 -m scripts.check_wrr_claim_blocker_packet_doc` passed with
+  CSV-backed readiness, source-queue, residual-summary, row-summary, and
+  remaining-lane locks.
 - `python3 -m scripts.check_wrr_residual_term_reconciliation_queue_doc` passed
   with CSV-backed queue and summary locks.
 - Cities public handoff docs checker passed and is wired into real-report
