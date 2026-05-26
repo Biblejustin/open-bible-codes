@@ -95,6 +95,8 @@ against detail-page rows, summary counts, snapshot bytes/checksums, and the
 live-source-recovery-only boundary.
 The strongest-candidate deep-dive doc is now CSV/manifest-guarded against
 candidate row order, candidate ids, source inputs, and report path metadata.
+The prospective lane-status doc is now JSON-guarded against tracked lane ids,
+statuses, term/protocol/report paths, and status-count drift.
 The source-row review bundle, source-transcription evidence packet,
 source-transcription row-review checklist, and remaining-lane review checklist
 are now CSV-guarded as well. The source-policy review checklist is also
@@ -1253,8 +1255,10 @@ supposed to fail if tracked files are dirty.
 Latest validation snapshot after the release-ready make target, with current
 dirty-tree fast validation above it:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1864
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1865
   tests, 2 skipped, and 29196 subtests.
+- `python3 -m scripts.check_prospective_lane_status_doc` passed with JSON-backed
+  lane id/status/path and status-count locks.
 - `python3 -m scripts.check_strongest_candidate_deep_dive_doc` passed with
   CSV-backed candidate-row locks plus manifest candidate-id/input/path metadata
   locks.

@@ -74,6 +74,28 @@ def test_generated_doc_with_same_profiles_passes(tmp_path: Path) -> None:
     assert check.validate_lane_status_doc(doc, profiles) == []
 
 
+def test_default_profile_lock_rejects_status_drift(tmp_path: Path) -> None:
+    profiles = [
+        {
+            "id": profile_id,
+            "status": "changed" if index == 0 else status,
+            "term_file": term_file,
+            "protocol": protocol,
+            "report_doc": report_doc,
+        }
+        for index, (profile_id, status, term_file, protocol, report_doc) in enumerate(
+            check.EXPECTED_PROFILE_ROWS
+        )
+    ]
+    path = tmp_path / "profiles.json"
+    path.write_text(json.dumps({"profiles": profiles}), encoding="utf-8")
+
+    failures = check.validate_default_profiles_json(path, profiles)
+
+    assert any("profile rows drifted" in failure for failure in failures)
+    assert any("status counts drifted" in failure for failure in failures)
+
+
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
     missing = tmp_path / "missing.md"
 
