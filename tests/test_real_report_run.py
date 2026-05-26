@@ -260,6 +260,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
+            "scripts/build_wrr_source_row_ocr_word_packet.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
             "scripts/build_wrr_remaining_lane_evidence_packets.py",
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
@@ -376,6 +380,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
+            "docs/WRR_SOURCE_ROW_OCR_WORD_PACKET.md",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
@@ -481,6 +489,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_source_row_crop_contact_sheet_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_source_row_ocr_word_packet_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -864,6 +876,10 @@ class RealReportRunTests(unittest.TestCase):
             "docs/WRR_SOURCE_ROW_CROP_CONTACT_SHEET.md",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
+        self.assertIn(
+            "docs/WRR_SOURCE_ROW_OCR_WORD_PACKET.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
         self.assertIn("docs/WRR_ZERO_HIT_VARIANT_PROBE.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_VARIANT_GAP_IMPACT.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/WRR_VARIANT_GAP_UPPER_BOUND.md", preflight.DEFAULT_REQUIRED_PATHS)
@@ -1048,6 +1064,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_source_row_crop_contact_sheet_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/build_wrr_source_row_ocr_word_packet.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_source_row_ocr_word_packet_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -1396,6 +1420,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn("wrr_source_row_coverage_packet_doc_failures", payload)
             self.assertIn("wrr_source_row_crop_packet_doc_failures", payload)
             self.assertIn("wrr_source_row_crop_contact_sheet_doc_failures", payload)
+            self.assertIn("wrr_source_row_ocr_word_packet_doc_failures", payload)
             self.assertIn("wrr_source_policy_review_checklist_doc_failures", payload)
             self.assertIn("wrr_remaining_lane_review_checklist_doc_failures", payload)
             self.assertIn("wrr_manual_decision_register_doc_failures", payload)
@@ -2308,6 +2333,32 @@ inputs = ["docs/A.md", "docs/C.md"]
                 payload["failures"],
             )
 
+    def test_preflight_fails_on_wrr_source_row_ocr_word_packet_failure(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_source_row_ocr_word_packet_doc,
+                "validate_source_row_ocr_word_packet_doc",
+                return_value=[
+                    "docs/WRR_SOURCE_ROW_OCR_WORD_PACKET.md missing boundary"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_source_row_ocr_word_packet_doc_failures"],
+                ["docs/WRR_SOURCE_ROW_OCR_WORD_PACKET.md missing boundary"],
+            )
+            self.assertIn(
+                "WRR source row OCR word packet failures: "
+                "docs/WRR_SOURCE_ROW_OCR_WORD_PACKET.md missing boundary",
+                payload["failures"],
+            )
+
     def test_preflight_fails_on_wrr_remaining_lane_evidence_doc_failure(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / "preflight.json"
@@ -3077,7 +3128,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             text,
         )
         self.assertIn(
-            "and the row-crop contact sheet for review",
+            "the row-crop contact sheet, and OCR row words for review",
             text,
         )
 

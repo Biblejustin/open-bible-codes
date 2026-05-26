@@ -3855,7 +3855,7 @@ def wrr_audit_section(
             "The claim-blocker packet gathers the current",
             "readiness blockers, lock options, WNP/context source-review flags,",
             "visual triage notes, the source-row coverage packet, row crops,",
-            "and the row-crop contact sheet for review.",
+            "the row-crop contact sheet, and OCR row words for review.",
             "The source-policy scenario report keeps exclusion/review impacts",
             "diagnostic. The D(w) sensitivity packet compares printed/program formulas",
             "while retaining printed D(w) as the selected main rule.",

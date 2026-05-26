@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 360
+Documents indexed: 361
 
 ## Controls
 
@@ -123,6 +123,7 @@ Documents indexed: 360
 | WRR Source Row Coverage Packet | `WRR_SOURCE_ROW_COVERAGE_PACKET.md` |
 | WRR Source Row Crop Contact Sheet | `WRR_SOURCE_ROW_CROP_CONTACT_SHEET.md` |
 | WRR Source Row Crop Packet | `WRR_SOURCE_ROW_CROP_PACKET.md` |
+| WRR Source Row OCR Word Packet | `WRR_SOURCE_ROW_OCR_WORD_PACKET.md` |
 | WRR Source-Transcription Evidence Packet | `WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md` |
 | WRR Source-Transcription Row Review Checklist | `WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md` |
 | WRR Source Visual Review Notes | `WRR_SOURCE_VISUAL_REVIEW_NOTES.md` |

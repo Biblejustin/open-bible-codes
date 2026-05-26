@@ -201,7 +201,7 @@ def tsv_header() -> str:
 def read_tsv_words(path: Path) -> list[TsvWord]:
     words: list[TsvWord] = []
     with path.open("r", encoding="utf-8", newline="") as handle:
-        reader = csv.DictReader(handle, delimiter="\t")
+        reader = csv.DictReader(handle, delimiter="\t", quoting=csv.QUOTE_NONE)
         for row in reader:
             text = (row.get("text") or "").strip()
             if not text:

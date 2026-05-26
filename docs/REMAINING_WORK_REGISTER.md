@@ -51,7 +51,8 @@ boundary cleanup plus formal preflight guarding, and WRR source-audit
 local-lock boundary guarding, WRR source-audit register refresh,
 protocol README WRR handoff-status guarding, WRR exact-gap priority-packet
 guarding, WRR source-row coverage packet guarding, WRR source-row crop packet
-guarding, and WRR source-row crop contact-sheet guarding.
+guarding, WRR source-row crop contact-sheet guarding, and WRR source-row OCR
+word packet guarding.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -629,6 +630,11 @@ source decisions.
 contact-sheet image with all 22 source-row crops in review order, so manual
 inspection can use one file while the repo still records that the sheet is only
 a visual aid and not transcription verification.
+`docs/WRR_SOURCE_ROW_OCR_WORD_PACKET.md` lists current Table 2 OCR words by
+source-row crop band and expected name/date column: 22 rows have OCR words,
+19 rows touch minimum-frontier pairs, and 76 words fall below the local
+confidence threshold. It keeps OCR words as review aids only, not source
+transcriptions or source decisions.
 `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md` now handles the two remaining
 residual lanes: 3 page-image near-match terms and 11 method/pair-universe
 terms, preserving the no-correction boundary until page-image, method, or
