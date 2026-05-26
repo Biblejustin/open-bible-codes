@@ -85,6 +85,7 @@ class GansCommunitiesSourceTests(unittest.TestCase):
             self.assertIn("data records | 2", markdown)
             self.assertIn("machine community rows extracted | 3", markdown)
             self.assertIn("not a claim-ready replication", markdown)
+            self.assertIn("CITIES_EXTRACTABLE_TEXT_REVIEW.md", markdown)
             self.assertTrue((root / "communities.csv").exists())
             self.assertTrue((root / "manifest.json").exists())
 

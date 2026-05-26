@@ -62,7 +62,9 @@ The Cities source-review queue now turns all 35 PDF rows into next-action lanes:
 5 extractable-text review rows, 4 OCR/image-only rows, 3 encoding-or-OCR rows,
 and 23 missing-PDF recovery rows. The extractable-text role review separates the
 five readable PDFs into 1 data-bearing candidate, 1 method-context candidate,
-and 3 commentary/critique rows.
+and 3 commentary/critique rows; the data-bearing candidate is already covered
+by the Gans communities source-shape audit with 66 source records and 210
+community rows, without source-row import or result-bearing work.
 This file tracks work that remains outside the deferred copyrighted/private
 English CSVs.
 
@@ -163,6 +165,9 @@ Current result:
 - Extractable rows reviewed: 5.
 - Anchors found: 5 of 5.
 - Data-bearing candidates: 1.
+- Data candidates with existing source-shape audit: 1.
+- Gans source-shape records: 66.
+- Gans community rows: 210.
 - Method-context candidates: 1.
 - Commentary/critique rows: 3.
 - Boundary: this does not import source rows, decide admissibility, normalize

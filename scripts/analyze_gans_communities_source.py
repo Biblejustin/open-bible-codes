@@ -383,6 +383,8 @@ def write_markdown(
             "This audit makes the source usable as a future locked-data intake target.",
             "It does not yet normalize Hebrew spellings, add community prefixes, apply",
             "the length/Rabbi-prefix filters, compute ELS hits, or test compactness.",
+            "It also satisfies the source-shape coverage lane for",
+            "`docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md` without importing source rows.",
             "",
             "Next result-bearing step, if chosen later: write a separate preregistered",
             "communities protocol that freezes source rows, normalization, filters,",

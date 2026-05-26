@@ -54,6 +54,9 @@ def write_summary(path: Path, *, extractable_rows_reviewed: str = "5") -> None:
         "extractable_rows_reviewed": extractable_rows_reviewed,
         "anchors_found": "5",
         "status_data_bearing_candidate": "1",
+        "data_candidates_with_existing_source_shape_audit": "1",
+        "gans_source_records": "66",
+        "gans_source_community_rows": "210",
         "status_method_context_candidate": "1",
     }
     with path.open("w", encoding="utf-8", newline="") as handle:

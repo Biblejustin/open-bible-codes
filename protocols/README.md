@@ -122,7 +122,8 @@ python3 -m scripts.run_protocol protocols/gans_communities_source_audit.toml --r
 
 This parses the Gans/Inbal/Bombach communities data PDF into ignored record
 and community-row source outputs and writes a tracked source-boundary summary.
-It does not run ELS hits or compactness statistics. Tracked audit:
+It also supplies existing source-shape coverage for the Cities extractable
+data-table lane. It does not run ELS hits or compactness statistics. Tracked audit:
 `docs/GANS_COMMUNITIES_SOURCE_AUDIT.md`.
 
 American presidents source-shape audit:
@@ -225,8 +226,10 @@ python3 -m scripts.run_protocol protocols/cities_extractable_text_review.toml --
 ```
 
 This classifies the five extractable Cities PDFs into data-table,
-method-context, and commentary/critique source-review roles. It does not import
-source rows, normalize city names, or run result-bearing work. Tracked review:
+method-context, and commentary/critique source-review roles. The data-table
+candidate is linked to the Gans communities source-shape audit with 66 records
+and 210 community rows. It does not import source rows, normalize city names,
+or run result-bearing work. Tracked review:
 `docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md`.
 
 Event/object experiment source audit:

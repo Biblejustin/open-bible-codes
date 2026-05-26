@@ -20,6 +20,7 @@ DEFAULT_TEXT_AUDIT = Path(
     "reports/cities_pdf_recovery_probe/cities_recovered_pdf_text_audit.csv"
 )
 DEFAULT_ANCHORS = Path("reports/cities_pdf_recovery_probe/cities_recovered_pdf_text_anchors.csv")
+DEFAULT_GANS_SUMMARY = Path("reports/wrr_1994/gans_communities_source_summary.csv")
 DEFAULT_OUT = Path("reports/cities_pdf_recovery_probe/cities_extractable_text_review.csv")
 DEFAULT_SUMMARY_OUT = Path(
     "reports/cities_pdf_recovery_probe/cities_extractable_text_review_summary.csv"
@@ -28,6 +29,8 @@ DEFAULT_MD = Path("docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md")
 DEFAULT_MANIFEST = Path(
     "reports/cities_pdf_recovery_probe/cities_extractable_text_review.manifest.json"
 )
+GANS_SOURCE_AUDIT_DOC = "docs/GANS_COMMUNITIES_SOURCE_AUDIT.md"
+GANS_SOURCE_AUDIT_STATUS = "source_shape_covered_not_result_bearing"
 
 FIELDNAMES = [
     "label",
@@ -39,6 +42,10 @@ FIELDNAMES = [
     "pdf_pages",
     "normalized_text_chars",
     "selected_path",
+    "existing_source_audit",
+    "existing_source_audit_status",
+    "existing_records",
+    "existing_community_rows",
     "url",
     "review_read",
     "next_action",
@@ -95,7 +102,8 @@ def main(argv: list[str] | None = None) -> int:
     queue_rows = read_csv(args.queue)
     text_rows = {row["label"]: row for row in read_csv(args.text_audit)}
     anchor_rows = read_csv(args.anchors)
-    review_rows = build_review_rows(queue_rows, text_rows, anchor_rows)
+    gans_summary = read_optional_gans_summary(args.gans_summary)
+    review_rows = build_review_rows(queue_rows, text_rows, anchor_rows, gans_summary)
     summary = build_summary(review_rows)
     write_csv(args.out, FIELDNAMES, review_rows)
     write_csv(args.summary_out, SUMMARY_FIELDNAMES, summary)
@@ -113,6 +121,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--queue", type=Path, default=DEFAULT_QUEUE)
     parser.add_argument("--text-audit", type=Path, default=DEFAULT_TEXT_AUDIT)
     parser.add_argument("--anchors", type=Path, default=DEFAULT_ANCHORS)
+    parser.add_argument("--gans-summary", type=Path, default=DEFAULT_GANS_SUMMARY)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
     parser.add_argument("--markdown-out", type=Path, default=DEFAULT_MD)
@@ -124,6 +133,7 @@ def build_review_rows(
     queue_rows: list[dict[str, str]],
     text_rows: dict[str, dict[str, str]],
     anchor_rows: list[dict[str, str]],
+    gans_summary: dict[str, str] | None = None,
 ) -> list[dict[str, str]]:
     anchor_by_label = {row["label"]: row for row in anchor_rows}
     rows: list[dict[str, str]] = []
@@ -134,6 +144,12 @@ def build_review_rows(
         role, status, read, action = classify_source_role(label)
         text = text_rows.get(label, {})
         anchor = anchor_by_label.get(label, {})
+        existing = existing_source_audit_fields(label, gans_summary or {})
+        if existing["existing_source_audit_status"]:
+            action = (
+                "covered by Gans communities source-shape audit; next result step "
+                "still needs locked preregistration"
+            )
         rows.append(
             {
                 "label": label,
@@ -145,6 +161,7 @@ def build_review_rows(
                 "pdf_pages": queue_row.get("pdf_pages", ""),
                 "normalized_text_chars": queue_row.get("normalized_text_chars", ""),
                 "selected_path": queue_row.get("selected_path", ""),
+                **existing,
                 "url": queue_row.get("url", ""),
                 "review_read": read,
                 "next_action": action,
@@ -166,13 +183,45 @@ def classify_source_role(label: str) -> tuple[str, str, str, str]:
     )
 
 
+def existing_source_audit_fields(label: str, gans_summary: dict[str, str]) -> dict[str, str]:
+    blank = {
+        "existing_source_audit": "",
+        "existing_source_audit_status": "",
+        "existing_records": "",
+        "existing_community_rows": "",
+    }
+    if label != "cities_pdf_communities_data" or not gans_summary:
+        return blank
+    return {
+        "existing_source_audit": GANS_SOURCE_AUDIT_DOC,
+        "existing_source_audit_status": GANS_SOURCE_AUDIT_STATUS,
+        "existing_records": gans_summary.get("data_records", ""),
+        "existing_community_rows": gans_summary.get("total_community_rows", ""),
+    }
+
+
 def build_summary(rows: list[dict[str, str]]) -> list[dict[str, str]]:
     status_counts = Counter(row["data_bearing_status"] for row in rows)
     role_counts = Counter(row["source_role"] for row in rows)
     found_anchors = sum(1 for row in rows if row["anchor_status"] == "found")
+    existing_audits = sum(1 for row in rows if row.get("existing_source_audit_status"))
+    gans_records = next(
+        (row["existing_records"] for row in rows if row.get("existing_records")),
+        "0",
+    )
+    gans_community_rows = next(
+        (row["existing_community_rows"] for row in rows if row.get("existing_community_rows")),
+        "0",
+    )
     summary = [
         {"metric": "extractable_rows_reviewed", "value": str(len(rows))},
         {"metric": "anchors_found", "value": str(found_anchors)},
+        {
+            "metric": "data_candidates_with_existing_source_shape_audit",
+            "value": str(existing_audits),
+        },
+        {"metric": "gans_source_records", "value": str(gans_records)},
+        {"metric": "gans_source_community_rows", "value": str(gans_community_rows)},
     ]
     for status in sorted(status_counts):
         summary.append({"metric": f"status_{status}", "value": str(status_counts[status])})
@@ -201,13 +250,18 @@ def write_markdown(
         f"- Extractable rows reviewed: {values['extractable_rows_reviewed']}.",
         f"- Anchors found: {values['anchors_found']} of {values['extractable_rows_reviewed']}.",
         f"- Data-bearing candidates: {values.get('status_data_bearing_candidate', '0')}.",
+        "- Data candidates with existing source-shape audit: "
+        f"{values.get('data_candidates_with_existing_source_shape_audit', '0')}.",
+        f"- Gans source-shape records: {values.get('gans_source_records', '0')}.",
+        f"- Gans community rows: {values.get('gans_source_community_rows', '0')}.",
         f"- Method-context candidates: {values.get('status_method_context_candidate', '0')}.",
         f"- Commentary/critique rows: {commentary_count(values)}.",
         "",
         "## Rows",
         "",
-        "| Label | Source role | Data-bearing status | Anchor | Pages | Text chars | Next action | URL |",
-        "| --- | --- | --- | --- | ---: | ---: | --- | --- |",
+        "| Label | Source role | Data-bearing status | Anchor | Pages | Text chars | "
+        "Existing audit | Existing status | Records | Community rows | Next action | URL |",
+        "| --- | --- | --- | --- | ---: | ---: | --- | --- | ---: | ---: | --- | --- |",
     ]
     for row in rows:
         lines.append(
@@ -220,6 +274,10 @@ def write_markdown(
                     markdown_cell(row["anchor_status"] or row["anchor"]),
                     markdown_cell(row["pdf_pages"]),
                     markdown_cell(row["normalized_text_chars"]),
+                    markdown_cell(row["existing_source_audit"]),
+                    markdown_cell(row["existing_source_audit_status"]),
+                    markdown_cell(row["existing_records"]),
+                    markdown_cell(row["existing_community_rows"]),
                     markdown_cell(row["next_action"]),
                     markdown_link("url", row["url"]),
                 ]
@@ -234,7 +292,9 @@ def write_markdown(
             "This review is planning metadata. It separates a likely data-table source",
             "candidate from method/context and commentary/critique texts. It does not",
             "decide admissibility, does not create city-name rows, and does not make a",
-            "result-bearing claim.",
+            "result-bearing claim. The existing Gans source-shape audit covers extracted",
+            "record/community-row shape only; it is not a source-row import and not a",
+            "result protocol.",
         ]
     )
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -263,6 +323,7 @@ def write_manifest(
             "queue": str(args.queue),
             "text_audit": str(args.text_audit),
             "anchors": str(args.anchors),
+            "gans_summary": str(args.gans_summary),
         },
         "rows": len(rows),
         "summary": {row["metric"]: row["value"] for row in summary},
@@ -281,6 +342,13 @@ def write_manifest(
 def read_csv(path: Path) -> list[dict[str, str]]:
     with path.open(encoding="utf-8", newline="") as handle:
         return list(csv.DictReader(handle))
+
+
+def read_optional_gans_summary(path: Path) -> dict[str, str]:
+    if not path.exists():
+        return {}
+    rows = read_csv(path)
+    return rows[0] if rows else {}
 
 
 def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, str]]) -> None:

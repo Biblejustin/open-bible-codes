@@ -46,6 +46,7 @@ DOC_RULES = (
             "| data records | 66 |",
             "This audit makes the source usable as a future locked-data intake target.",
             "It does not yet normalize Hebrew spellings",
+            "CITIES_EXTRACTABLE_TEXT_REVIEW.md",
             "Next result-bearing step, if chosen later",
         ),
     ),

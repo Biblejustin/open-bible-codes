@@ -25,10 +25,16 @@ REQUIRED_PHRASES = (
     "verify p-levels",
     "Extractable rows reviewed: 5.",
     "Data-bearing candidates: 1.",
+    "Data candidates with existing source-shape audit: 1.",
+    "Gans source-shape records: 66.",
+    "Gans community rows: 210.",
     "Method-context candidates: 1.",
     "Commentary/critique rows: 3.",
+    "docs/GANS_COMMUNITIES_SOURCE_AUDIT.md",
+    "source_shape_covered_not_result_bearing",
     "does not create city-name rows",
     "does not make a result-bearing claim",
+    "not a result protocol",
 )
 
 EXPECTED_LABELS = (
@@ -122,6 +128,12 @@ def validate_summary(
         "Extractable rows reviewed": summary.get("extractable_rows_reviewed", ""),
         "Anchors found": summary.get("anchors_found", ""),
         "Data-bearing candidates": summary.get("status_data_bearing_candidate", ""),
+        "Data candidates with existing source-shape audit": summary.get(
+            "data_candidates_with_existing_source_shape_audit",
+            "",
+        ),
+        "Gans source-shape records": summary.get("gans_source_records", ""),
+        "Gans community rows": summary.get("gans_source_community_rows", ""),
         "Method-context candidates": summary.get("status_method_context_candidate", ""),
     }
     failures: list[str] = []

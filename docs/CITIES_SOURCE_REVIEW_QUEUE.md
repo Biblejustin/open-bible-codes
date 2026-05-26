@@ -65,4 +65,7 @@ filters, Genesis text, skip caps, compactness metric, and controls.
 
 The extractable-text role review in `docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md`
 separates the five readable PDFs into data-table, method-context, and
-commentary/critique lanes without changing this queue's boundary.
+commentary/critique lanes without changing this queue's boundary. The
+data-table lane now points at `docs/GANS_COMMUNITIES_SOURCE_AUDIT.md` for
+existing source-shape coverage only: 66 records and 210 community rows, with no
+source-row import.

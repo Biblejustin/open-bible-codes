@@ -230,7 +230,9 @@ claim-grade source reconstruction.
   the WRR famous-rabbis table. The source-shape audit in
   `docs/GANS_COMMUNITIES_SOURCE_AUDIT.md` now confirms 66 data records,
   210 machine-readable community rows before experiment filters, and the key
-  protocol anchors.
+  protocol anchors. The Cities extractable-text review now links this same
+  audit as existing source-shape coverage for `cities_pdf_communities_data`,
+  while keeping source-row import and result protocols separate.
 - Haralick protocol tests: the papers describe cleaner a priori protocol design,
   word-permuted or chapter-word-permuted Genesis controls, expected-hit skip
   caps of 5 or 10, and simpler 1D/2D compactness measures that can be tested as
@@ -412,7 +414,9 @@ p-level verification.
 unrecovered-link probe into source-review lanes for planning only.
 `scripts/build_cities_extractable_text_review.py` marks the five extractable
 PDFs as one data-table candidate, one method-context candidate, and three
-commentary/critique context rows.
+commentary/critique context rows. The data-table candidate is linked to the
+existing Gans communities source-shape audit: 66 data records and 210
+community rows, still not imported into a result protocol.
 
 `scripts/analyze_event_object_experiments_source.py` parses the Sons of Haman,
 Pumbedita, Auschwitz, and Ark source pages plus linked data/tutorial PDFs into
