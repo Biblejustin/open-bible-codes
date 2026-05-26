@@ -285,6 +285,17 @@ candidate pages that need separate citable source-row locks before any data
 use. It does not import source rows, normalize city names, or run
 result-bearing work. Tracked queue: `docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md`.
 
+Cities source-row lock worksheet:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_row_lock_worksheet.toml --resume
+```
+
+This assigns stable decision ids and evidence prompts to the 14 source-row
+lock candidates. It does not transcribe rows, import source text, normalize
+city names, or run result-bearing work. Tracked worksheet:
+`docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md`.
+
 Cities extractable-text role review:
 
 ```bash

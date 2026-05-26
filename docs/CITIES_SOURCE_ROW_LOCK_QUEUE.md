@@ -46,4 +46,5 @@ python3 -m scripts.build_cities_source_row_lock_queue --page-review reports/citi
 - This queue names page locations only.
 - It does not transcribe city rows, names, dates, spellings, or OCR body text.
 - Candidate pages still need a separate citable source-row lock before any source data can be used.
+- `docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md` turns these pages into decision ids and evidence prompts without importing source text.
 - No row here creates a result-bearing corpus, term list, ELS run, compactness run, or p-level.

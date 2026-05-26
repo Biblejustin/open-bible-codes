@@ -33,6 +33,8 @@ REQUIRED_PHRASES = (
     "exception_note_candidate_page",
     "needs_citable_source_row_lock",
     "This queue names page locations only.",
+    "CITIES_SOURCE_ROW_LOCK_WORKSHEET.md",
+    "decision ids and evidence prompts",
 )
 
 EXPECTED_PAGES = (

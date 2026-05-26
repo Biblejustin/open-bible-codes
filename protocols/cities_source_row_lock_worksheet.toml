@@ -1,0 +1,26 @@
+name = "cities_source_row_lock_worksheet"
+description = "Build a Cities source-row lock decision worksheet from queued candidate pages without importing source text."
+manifest_out = "reports/cities_pdf_recovery_probe/source_row_lock_worksheet_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_source_row_lock_worksheet"
+description = "Create decision ids and evidence prompts for source-row lock candidates while keeping all rows pre-import."
+argv = [
+  "-m", "scripts.build_cities_source_row_lock_worksheet",
+  "--queue", "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue.csv",
+  "--records-template", "data/study/mappings/cities_source_row_lock_decisions.csv",
+  "--out", "reports/cities_pdf_recovery_probe/cities_source_row_lock_worksheet.csv",
+  "--markdown-out", "docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_source_row_lock_worksheet.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_source_row_lock_worksheet.py",
+  "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_source_row_lock_worksheet.csv",
+  "docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md",
+  "reports/cities_pdf_recovery_probe/cities_source_row_lock_worksheet.manifest.json",
+]
