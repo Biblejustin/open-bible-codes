@@ -81,3 +81,6 @@ adds ignored local page-image and OCR-text sidecars and tracks only
 paths/counts/status before any source-row use.
 The OCR review checklist in `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md`
 orders those sidecars for page-image comparison and contact-sheet review.
+The OCR page review in `docs/CITIES_UNREADABLE_PDF_OCR_PAGE_REVIEW.md`
+records visual page-role decisions for all 41 OCR-packet pages while keeping
+source-row imports at zero.

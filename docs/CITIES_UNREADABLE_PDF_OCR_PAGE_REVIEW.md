@@ -1,6 +1,6 @@
 # Cities Unreadable PDF OCR Page Review
 
-Status: manual page-image review record. This records reviewer labels for the first priority Cities OCR pages.
+Status: manual page-image review record. This records reviewer labels for all Cities OCR packet pages.
 It does not track OCR body text, repair text, import source rows, normalize city names, run ELS searches, compute compactness, or verify p-levels.
 No OCR body text appears in this doc, CSV, summary, or manifest.
 
@@ -12,11 +12,11 @@ python3 -m scripts.build_cities_unreadable_pdf_ocr_page_review --packet reports/
 
 ## Summary
 
-- Review rows: 3.
-- Reviewed pages: 3.
+- Review rows: 41.
+- Reviewed pages: 41.
 - OCR-empty pages reviewed: 2.
 - Low-signal pages reviewed: 3.
-- Visual-text-present pages: 2.
+- Visual-text-present pages: 40.
 - Source-row imports: 0.
 - ELS runs: 0.
 - Compactness runs: 0.
@@ -26,9 +26,47 @@ python3 -m scripts.build_cities_unreadable_pdf_ocr_page_review --packet reports/
 
 | Rank | Label | Page | OCR status | Signal chars | Visual role | OCR read status | Source-row use | Decision | Notes |
 | ---: | --- | ---: | --- | ---: | --- | --- | --- | --- | --- |
-| 1 | cities_pdf_dp365a_p1_4 | 3 | `page_ocr_empty` | 1 | `appendix_toc_or_index_page` | `ocr_empty_but_visual_text_present` | `no_source_row_use` | `no_source_row_import` | Short appendix or contents style page only; OCR empty does not block source table pages. |
-| 2 | cities_pdf_dp365a_p1_4 | 4 | `page_ocr_empty` | 0 | `blank_or_separator_page` | `ocr_empty_matches_near_blank_page` | `no_source_row_use` | `no_source_row_import` | Near blank separator page with only page marker; no source-row use. |
-| 3 | cities_pdf_dp365a_p5_11 | 1 | `page_ocr_text_detected` | 39 | `title_page` | `low_signal_ocr_matches_title_page` | `no_source_row_use` | `no_source_row_import` | Title page only; low OCR signal expected and not source-row-bearing. |
+| 1 | cities_pdf_dp365a_appendix_6 | 1 | `page_ocr_text_detected` | 942 | `appendix_prose_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Appendix prose page; no source-row import. |
+| 2 | cities_pdf_dp365a_appendix_6 | 2 | `page_ocr_text_detected` | 341 | `appendix_prose_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Appendix prose page; no source-row import. |
+| 3 | cities_pdf_dp365a_appendix_7 | 1 | `page_ocr_text_detected` | 288 | `source_list_page` | `ocr_signal_present_for_list_page` | `no_source_row_use` | `no_source_row_import` | Visual list page present; row import blocked pending separate citable source-row lock. |
+| 4 | cities_pdf_dp365a_appendix_7 | 2 | `page_ocr_text_detected` | 326 | `source_list_page` | `ocr_signal_present_for_list_page` | `no_source_row_use` | `no_source_row_import` | Visual list page present; row import blocked pending separate citable source-row lock. |
+| 5 | cities_pdf_dp365a_appendix_7 | 3 | `page_ocr_text_detected` | 284 | `source_list_page` | `ocr_signal_present_for_list_page` | `no_source_row_use` | `no_source_row_import` | Visual list page present; row import blocked pending separate citable source-row lock. |
+| 6 | cities_pdf_dp365a_appendix_7 | 4 | `page_ocr_text_detected` | 287 | `source_list_page` | `ocr_signal_present_for_list_page` | `no_source_row_use` | `no_source_row_import` | Visual list page present; row import blocked pending separate citable source-row lock. |
+| 7 | cities_pdf_dp365a_appendix_7 | 5 | `page_ocr_text_detected` | 197 | `source_list_page` | `ocr_signal_present_for_list_page` | `no_source_row_use` | `no_source_row_import` | Visual list page present; row import blocked pending separate citable source-row lock. |
+| 8 | cities_pdf_dp365a_p12_17 | 1 | `page_ocr_text_detected` | 1501 | `method_intro_prose_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Method-introduction prose page; no tabular source-row import. |
+| 9 | cities_pdf_dp365a_p12_17 | 2 | `page_ocr_text_detected` | 982 | `source_exception_notes_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Source-discrepancy examples page; requires separate citable row lock before any data use. |
+| 10 | cities_pdf_dp365a_p12_17 | 3 | `page_ocr_text_detected` | 1292 | `source_exception_notes_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Source-discrepancy examples page; requires separate citable row lock before any data use. |
+| 11 | cities_pdf_dp365a_p12_17 | 4 | `page_ocr_text_detected` | 1128 | `source_exception_notes_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Source-discrepancy examples page; requires separate citable row lock before any data use. |
+| 12 | cities_pdf_dp365a_p12_17 | 5 | `page_ocr_text_detected` | 1316 | `source_exception_notes_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Source-discrepancy examples page; requires separate citable row lock before any data use. |
+| 13 | cities_pdf_dp365a_p12_17 | 6 | `page_ocr_text_detected` | 1357 | `criteria_and_source_exception_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Criteria and source-discrepancy prose page; requires separate citable row lock before any data use. |
+| 14 | cities_pdf_dp365a_p1_4 | 1 | `page_ocr_text_detected` | 921 | `method_toc_and_prose_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Method table-of-contents and prose page; no source-row import. |
+| 15 | cities_pdf_dp365a_p1_4 | 2 | `page_ocr_text_detected` | 1201 | `method_toc_and_prose_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Method table-of-contents and prose page; no source-row import. |
+| 16 | cities_pdf_dp365a_p1_4 | 3 | `page_ocr_empty` | 1 | `appendix_toc_or_index_page` | `ocr_empty_but_visual_text_present` | `no_source_row_use` | `no_source_row_import` | Short appendix or contents style page only; OCR empty does not block source table pages. |
+| 17 | cities_pdf_dp365a_p1_4 | 4 | `page_ocr_empty` | 0 | `blank_or_separator_page` | `ocr_empty_matches_near_blank_page` | `no_source_row_use` | `no_source_row_import` | Near blank separator page with only page marker; no source-row use. |
+| 18 | cities_pdf_dp365a_p5_11 | 1 | `page_ocr_text_detected` | 39 | `title_page` | `low_signal_ocr_matches_title_page` | `no_source_row_use` | `no_source_row_import` | Title page only; low OCR signal expected and not source-row-bearing. |
+| 19 | cities_pdf_dp365a_p5_11 | 2 | `page_ocr_text_detected` | 899 | `method_prose_with_index_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Method prose with small index or outline; no source-row import. |
+| 20 | cities_pdf_dp365a_p5_11 | 3 | `page_ocr_text_detected` | 1111 | `prose_with_source_table_page` | `ocr_signal_present_for_table_page` | `no_source_row_use` | `no_source_row_import` | Visual table present; row import blocked pending separate citable source-row lock. |
+| 21 | cities_pdf_dp365a_p5_11 | 4 | `page_ocr_text_detected` | 883 | `source_table_page` | `ocr_signal_present_for_table_page` | `no_source_row_use` | `no_source_row_import` | Visual table present; row import blocked pending separate citable source-row lock. |
+| 22 | cities_pdf_dp365a_p5_11 | 5 | `page_ocr_text_detected` | 901 | `source_table_page` | `ocr_signal_present_for_table_page` | `no_source_row_use` | `no_source_row_import` | Visual table present; row import blocked pending separate citable source-row lock. |
+| 23 | cities_pdf_dp365a_p5_11 | 6 | `page_ocr_text_detected` | 372 | `source_table_and_notes_page` | `ocr_signal_present_for_table_page` | `no_source_row_use` | `no_source_row_import` | Visual table and notes present; row import blocked pending separate citable source-row lock. |
+| 24 | cities_pdf_dp365a_p5_11 | 7 | `page_ocr_text_detected` | 535 | `method_notes_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Method notes page; no source-row import. |
+| 25 | cities_pdf_dp365a_part_2_p105_111 | 1 | `page_ocr_text_detected` | 608 | `appendix_prose_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Appendix prose page; no source-row import. |
+| 26 | cities_pdf_dp365a_part_2_p105_111 | 2 | `page_ocr_text_detected` | 1026 | `appendix_prose_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Appendix prose page; no source-row import. |
+| 27 | cities_pdf_dp365a_part_2_p105_111 | 3 | `page_ocr_text_detected` | 1090 | `appendix_prose_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Appendix prose page; no source-row import. |
+| 28 | cities_pdf_dp365a_part_2_p105_111 | 4 | `page_ocr_text_detected` | 832 | `appendix_prose_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Appendix prose page; no source-row import. |
+| 29 | cities_pdf_dp365a_part_2_p105_111 | 5 | `page_ocr_text_detected` | 1192 | `appendix_prose_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Appendix prose page; no source-row import. |
+| 30 | cities_pdf_dp365a_part_2_p105_111 | 6 | `page_ocr_text_detected` | 987 | `appendix_prose_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Appendix prose page; no source-row import. |
+| 31 | cities_pdf_dp365a_part_2_p105_111 | 7 | `page_ocr_text_detected` | 293 | `appendix_prose_page` | `ocr_signal_present_for_prose_page` | `no_source_row_use` | `no_source_row_import` | Appendix prose page; no source-row import. |
+| 32 | cities_pdf_wrr | 1 | `page_ocr_text_detected` | 3279 | `context_paper_title_page` | `ocr_signal_present_for_context_page` | `no_source_row_use` | `no_source_row_import` | WRR context paper title page; not Cities source-row material. |
+| 33 | cities_pdf_wrr | 2 | `page_ocr_text_detected` | 3124 | `context_paper_figure_page` | `ocr_signal_present_for_context_page` | `no_source_row_use` | `no_source_row_import` | WRR context paper figure page; not Cities source-row material. |
+| 34 | cities_pdf_wrr | 3 | `page_ocr_text_detected` | 4235 | `context_paper_prose_page` | `ocr_signal_present_for_context_page` | `no_source_row_use` | `no_source_row_import` | WRR context paper prose page; not Cities source-row material. |
+| 35 | cities_pdf_wrr | 4 | `page_ocr_text_detected` | 2505 | `context_paper_table_page` | `ocr_signal_present_for_context_page` | `no_source_row_use` | `no_source_row_import` | WRR context paper table page; not Cities source-row material. |
+| 36 | cities_pdf_wrr | 5 | `page_ocr_text_detected` | 2886 | `context_paper_table_page` | `ocr_signal_present_for_context_page` | `no_source_row_use` | `no_source_row_import` | WRR context paper table page; not Cities source-row material. |
+| 37 | cities_pdf_wrr | 6 | `page_ocr_text_detected` | 3488 | `context_paper_prose_page` | `ocr_signal_present_for_context_page` | `no_source_row_use` | `no_source_row_import` | WRR context paper prose page; not Cities source-row material. |
+| 38 | cities_pdf_wrr | 7 | `page_ocr_text_detected` | 3668 | `context_paper_formula_page` | `ocr_signal_present_for_context_page` | `no_source_row_use` | `no_source_row_import` | WRR context paper formula page; not Cities source-row material. |
+| 39 | cities_pdf_wrr | 8 | `page_ocr_text_detected` | 3627 | `context_paper_formula_page` | `ocr_signal_present_for_context_page` | `no_source_row_use` | `no_source_row_import` | WRR context paper formula page; not Cities source-row material. |
+| 40 | cities_pdf_wrr | 9 | `page_ocr_text_detected` | 2818 | `context_paper_chart_page` | `ocr_signal_present_for_context_page` | `no_source_row_use` | `no_source_row_import` | WRR context paper chart page; not Cities source-row material. |
+| 41 | cities_pdf_wrr | 10 | `page_ocr_text_detected` | 1562 | `context_paper_reference_page` | `ocr_signal_present_for_context_page` | `no_source_row_use` | `no_source_row_import` | WRR context paper reference page; not Cities source-row material. |
 
 ## Boundary
 

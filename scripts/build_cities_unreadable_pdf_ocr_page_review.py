@@ -174,7 +174,7 @@ def write_markdown(
     lines = [
         "# Cities Unreadable PDF OCR Page Review",
         "",
-        "Status: manual page-image review record. This records reviewer labels for the first priority Cities OCR pages.",
+        "Status: manual page-image review record. This records reviewer labels for all Cities OCR packet pages.",
         "It does not track OCR body text, repair text, import source rows, normalize city names, run ELS searches, compute compactness, or verify p-levels.",
         "No OCR body text appears in this doc, CSV, summary, or manifest.",
         "",
