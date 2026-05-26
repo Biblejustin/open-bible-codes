@@ -53,7 +53,9 @@ protocol README WRR handoff-status guarding, WRR exact-gap priority-packet
 guarding, WRR source-row coverage packet guarding, WRR source-row crop packet
 guarding, WRR source-row crop contact-sheet guarding, WRR source-row OCR word
 packet guarding, WRR source-row review bundle guarding, WRR source-row bundle
-public-doc synchronization, and exact-gap review-rank wording cleanup.
+public-doc synchronization, exact-gap review-rank wording cleanup, and
+CSV-backed locks for the WRR exact-gap priority packet, method/pair-universe
+evidence packet, and remaining-lane evidence packet.
 Cities source-row lock queueing, worksheet generation, evidence-packet
 assembly, and decision-record preflight guarding now keep Cities source-row
 candidate pages out of result-bearing work until citable lock records exist.
@@ -974,6 +976,10 @@ replacement spellings, or method changes.
 method-lane terms: all are OCR-matched, all have zero skip-250 appellation
 counts, all have zero high-cap appellation ordinary hits, and 2 pairs have zero
 ordinary hits on both sides.
+The exact-gap priority-packet checker now validates the CSV summary and review
+lane rows in addition to doc prose. The method/pair-universe and remaining-lane
+evidence checkers now validate their CSV summaries, expected term sets, zero
+variant leads, and no-input boundaries before real-report preflight can pass.
 `scripts/check_wrr_public_handoff_docs.py` now guards the README, report-run
 doc, final report files, consolidated findings, outline, and remaining-work
 register against stale WRR blocker wording. It is wired into report preflight
