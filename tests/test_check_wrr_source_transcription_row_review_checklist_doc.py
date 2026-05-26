@@ -1,3 +1,4 @@
+import csv
 import tempfile
 import unittest
 from pathlib import Path
@@ -16,7 +17,10 @@ class WrrSourceTranscriptionRowReviewChecklistDocTests(unittest.TestCase):
             path = Path(tmp) / "checklist.md"
             path.write_text("\n".join(check.REQUIRED_PHRASES) + "\n", encoding="utf-8")
 
-            self.assertEqual(check.validate_row_review_checklist_doc(path), [])
+            self.assertEqual(
+                check.validate_row_review_checklist_doc(path, checklist=None),
+                [],
+            )
 
     def test_validate_doc_reports_missing_required_phrase(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -45,6 +49,122 @@ class WrrSourceTranscriptionRowReviewChecklistDocTests(unittest.TestCase):
                 failures,
                 [f"{path} contains forbidden phrase: selected correction"],
             )
+
+    def test_validate_doc_accepts_matching_checklist_csv(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            doc = _required_doc(root)
+
+            self.assertEqual(
+                check.validate_row_review_checklist_doc(
+                    doc,
+                    checklist=_checklist_csv(root),
+                ),
+                [],
+            )
+
+    def test_validate_doc_rejects_checklist_review_state_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            doc = _required_doc(root)
+
+            failures = check.validate_row_review_checklist_doc(
+                doc,
+                checklist=_checklist_csv(root, review_state_rank=1),
+            )
+
+            self.assertTrue(any("review state" in failure for failure in failures))
+
+    def test_validate_doc_rejects_checklist_boundary_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            doc = _required_doc(root)
+
+            failures = check.validate_row_review_checklist_doc(
+                doc,
+                checklist=_checklist_csv(root, bad_boundary_rank=1),
+            )
+
+            self.assertTrue(any("no-input boundary" in failure for failure in failures))
+
+
+def _required_doc(root: Path) -> Path:
+    path = root / "checklist.md"
+    path.write_text("\n".join(check.REQUIRED_PHRASES) + "\n", encoding="utf-8")
+    return path
+
+
+def _checklist_csv(
+    root: Path,
+    *,
+    review_state_rank: int | None = None,
+    bad_boundary_rank: int | None = None,
+) -> Path:
+    path = root / "checklist.csv"
+    fieldnames = [
+        "run_label",
+        "row_rank",
+        "row_number",
+        "concept",
+        "review_state",
+        "action_terms",
+        "residual_pairs",
+        "frontier_pairs",
+        "terms_to_verify",
+        "matched_row_terms",
+        "row_ocr_name_texts",
+        "row_ocr_date_texts",
+        "table2_bridge_read",
+        "required_source_evidence",
+        "required_alignment_evidence",
+        "required_decision_record",
+        "no_input_boundary",
+        "allowed_without_input",
+        "next_manual_action",
+    ]
+    action_counts = [4, 3, 3] + [2] * 10 + [1] * 6 + [4, 2, 1]
+    residual_counts = action_counts.copy()
+    residual_counts[13] = 2
+    frontier_counts = [4, 3, 3] + [2] * 9 + [1] * 7 + [0, 0, 0]
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        for index in range(1, 23):
+            action_terms = action_counts[index - 1]
+            writer.writerow(
+                {
+                    "run_label": "all_lanes_cap1000",
+                    "row_rank": str(index),
+                    "row_number": f"{index:02d}",
+                    "concept": f"WRR2 {index:02d}",
+                    "review_state": (
+                        "manual_source_locked"
+                        if review_state_rank == index
+                        else check.REVIEW_STATE
+                    ),
+                    "action_terms": str(action_terms),
+                    "residual_pairs": str(residual_counts[index - 1]),
+                    "frontier_pairs": str(frontier_counts[index - 1]),
+                    "terms_to_verify": ";".join(
+                        f"term_{index}_{offset}" for offset in range(action_terms)
+                    ),
+                    "matched_row_terms": "matched",
+                    "row_ocr_name_texts": "name",
+                    "row_ocr_date_texts": "date",
+                    "table2_bridge_read": "Hebrew cells are not verified.",
+                    "required_source_evidence": check.SOURCE_EVIDENCE,
+                    "required_alignment_evidence": check.ALIGNMENT_EVIDENCE,
+                    "required_decision_record": check.DECISION_RECORD,
+                    "no_input_boundary": (
+                        "bad"
+                        if bad_boundary_rank == index
+                        else check.NO_INPUT_BOUNDARY
+                    ),
+                    "allowed_without_input": check.ALLOWED_WITHOUT_INPUT,
+                    "next_manual_action": "review row image once before individual term decisions",
+                }
+            )
+    return path
 
 
 if __name__ == "__main__":
