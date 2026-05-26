@@ -85,6 +85,15 @@ WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_SUMMARY = Path(
     "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv"
 )
 WRR_DW_FORMULA_SENSITIVITY = Path("reports/wrr_1994/wrr_dw_formula_sensitivity.csv")
+CITIES_SOURCE_ROW_LOCK_QUEUE_SUMMARY = Path(
+    "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue_summary.csv"
+)
+CITIES_SOURCE_ROW_LOCK_EVIDENCE_SUMMARY = Path(
+    "reports/cities_pdf_recovery_probe/cities_source_row_lock_evidence_summary.csv"
+)
+CITIES_SOURCE_ROW_LOCK_DECISIONS = Path(
+    "data/study/mappings/cities_source_row_lock_decisions.csv"
+)
 HEBREW_THEOLOGY_ALL_CODES_TRIAGE_MANIFEST = Path(
     "reports/hebrew_theology_all_codes/triage.manifest.json"
 )
@@ -1145,6 +1154,7 @@ def write_summary(
         "- completed Gog/Magog prospective pair-control report",
         "- prospective-study lock/readiness documents",
         "- Torah-code co-linear ELS source-shape audit",
+        "- Cities source-row lock queue, evidence packet, and decision-record guard",
         "- Bible Code Digest source audit and term-list expansion",
         "- CRI ELS critique audit and control-design guardrails",
         "- TheWordNotes ELS PDF source audit and term-list expansion",
@@ -1341,6 +1351,7 @@ def write_summary(
             wrr_dw_formula_sensitivity_rows,
         )
     )
+    lines.extend(cities_source_row_lock_section())
     lines.extend(
         all_codes_triage_section(
             hebrew_theology_all_codes_triage_manifest,
@@ -2107,6 +2118,47 @@ def read_json(path: Path) -> dict[str, Any]:
 def read_rows(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8", newline="") as handle:
         return list(csv.DictReader(handle))
+
+
+def cities_source_row_lock_section() -> list[str]:
+    queue_summary = metric_dict(read_rows(CITIES_SOURCE_ROW_LOCK_QUEUE_SUMMARY))
+    evidence_summary = metric_dict(read_rows(CITIES_SOURCE_ROW_LOCK_EVIDENCE_SUMMARY))
+    decision_rows = read_rows(CITIES_SOURCE_ROW_LOCK_DECISIONS)
+    status_counts = Counter(row.get("decision_status", "") for row in decision_rows)
+    action_counts = Counter(row.get("selected_action", "") for row in decision_rows)
+    selected_action_count = sum(count for action, count in action_counts.items() if action)
+    return [
+        "",
+        "## Cities Source-Row Lock Status",
+        "",
+        "| Metric | Value |",
+        "| --- | ---: |",
+        f"| Queue rows | {queue_summary.get('queue_rows', '0')} |",
+        f"| Evidence rows | {evidence_summary.get('evidence_rows', '0')} |",
+        f"| Unique labels | {evidence_summary.get('unique_labels', '0')} |",
+        f"| Table-bearing candidate pages | {evidence_summary.get('table_candidate_pages', '0')} |",
+        f"| Source-list candidate pages | {evidence_summary.get('source_list_candidate_pages', '0')} |",
+        f"| Exception-note candidate pages | {evidence_summary.get('exception_note_candidate_pages', '0')} |",
+        f"| Populated decision records | {len(decision_rows)} |",
+        f"| Locked decision records | {status_counts.get('locked', 0)} |",
+        f"| Deferred decision records | {status_counts.get('deferred_no_lock', 0)} |",
+        f"| Selected actions | {selected_action_count} |",
+        f"| Source-row imports | {evidence_summary.get('source_row_imports', '0')} |",
+        f"| ELS runs | {evidence_summary.get('els_runs', '0')} |",
+        f"| Compactness runs | {evidence_summary.get('compactness_runs', '0')} |",
+        "",
+        "Current read: Cities source-row pages remain a source-review lane only.",
+        "The queue and evidence packet identify citable page locations, while",
+        "`data/study/mappings/cities_source_row_lock_decisions.csv` is still",
+        "header-only. Formal preflight now blocks any future populated row that",
+        "does not match the 14-row evidence packet or that contains source-script",
+        "text, unsupported status/action values, missing evidence, or non-ISO lock",
+        "dates.",
+    ]
+
+
+def metric_dict(rows: list[dict[str, str]]) -> dict[str, str]:
+    return {row.get("metric", ""): row.get("value", "") for row in rows}
 
 
 def all_codes_triage_section(

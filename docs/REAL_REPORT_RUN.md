@@ -89,6 +89,10 @@ This assembly run includes:
   `docs/WRR_LOCKED_METHOD_REPORT.md`,
   `docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`, plus
   `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md`
+- Cities source-row lock status:
+  `docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md`,
+  `docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md`, and
+  `docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md`
 - broader search/current findings writeup:
   `docs/BROADER_SEARCH_FINDINGS.md`
 - broad Hebrew modern/geopolitical version-distribution run:
