@@ -1,4 +1,6 @@
 import csv
+import json
+import shutil
 from pathlib import Path
 
 from scripts import check_cities_recovered_pdf_text_audit_doc as check
@@ -8,14 +10,23 @@ def test_current_cities_recovered_pdf_text_audit_doc_passes() -> None:
     assert check.validate_cities_recovered_pdf_text_audit_doc(check.DEFAULT_DOC) == []
 
 
+def test_matching_locked_outputs_pass(tmp_path: Path) -> None:
+    doc, rows, summary, anchors, manifest = copy_current_outputs(tmp_path)
+
+    failures = check.validate_cities_recovered_pdf_text_audit_doc(
+        doc,
+        rows,
+        summary,
+        anchors,
+        manifest,
+    )
+
+    assert failures == []
+
+
 def test_detects_missing_boundary_phrase(tmp_path: Path) -> None:
-    rows = tmp_path / "rows.csv"
-    summary = tmp_path / "summary.csv"
-    anchors = tmp_path / "anchors.csv"
+    _, rows, summary, anchors, manifest = copy_current_outputs(tmp_path)
     doc = tmp_path / "audit.md"
-    write_rows(rows)
-    write_summary(summary)
-    write_anchors(anchors)
     doc.write_text("# Cities Recovered PDF Text Audit\n", encoding="utf-8")
 
     failures = check.validate_cities_recovered_pdf_text_audit_doc(
@@ -23,85 +34,118 @@ def test_detects_missing_boundary_phrase(tmp_path: Path) -> None:
         rows,
         summary,
         anchors,
+        manifest,
     )
 
     assert any("missing phrase" in failure for failure in failures)
 
 
 def test_detects_summary_count_mismatch(tmp_path: Path) -> None:
-    rows = tmp_path / "rows.csv"
-    summary = tmp_path / "summary.csv"
-    anchors = tmp_path / "anchors.csv"
-    doc = tmp_path / "audit.md"
-    write_rows(rows)
-    write_summary(summary, recovered_pdf_rows="99")
-    write_anchors(anchors)
-    doc.write_text(check.DEFAULT_DOC.read_text(encoding="utf-8"), encoding="utf-8")
+    doc, rows, summary, anchors, manifest = copy_current_outputs(tmp_path)
+    fieldnames, summary_rows = read_csv(summary)
+    summary_rows[0]["recovered_pdf_rows"] = "99"
+    write_csv(summary, fieldnames, summary_rows)
 
     failures = check.validate_cities_recovered_pdf_text_audit_doc(
         doc,
         rows,
         summary,
         anchors,
+        manifest,
     )
 
-    assert any("recovered PDF rows audited=99" in failure for failure in failures)
+    assert any("summary row drifted" in failure for failure in failures)
 
 
-def write_rows(path: Path) -> None:
+def test_detects_row_data_drift(tmp_path: Path) -> None:
+    doc, rows, summary, anchors, manifest = copy_current_outputs(tmp_path)
+    fieldnames, row_data = read_csv(rows)
+    row_data[0]["sha256"] = "bad"
+    write_csv(rows, fieldnames, row_data)
+
+    failures = check.validate_cities_recovered_pdf_text_audit_doc(
+        doc,
+        rows,
+        summary,
+        anchors,
+        manifest,
+    )
+
+    assert any("row data drifted" in failure for failure in failures)
+
+
+def test_detects_row_fieldname_drift(tmp_path: Path) -> None:
+    doc, rows, summary, anchors, manifest = copy_current_outputs(tmp_path)
+    fieldnames, row_data = read_csv(rows)
+    write_csv(rows, fieldnames[:-1], [{k: v for k, v in row.items() if k != "title_guess"} for row in row_data])
+
+    failures = check.validate_cities_recovered_pdf_text_audit_doc(
+        doc,
+        rows,
+        summary,
+        anchors,
+        manifest,
+    )
+
+    assert any("fieldnames drifted" in failure for failure in failures)
+
+
+def test_detects_anchor_drift(tmp_path: Path) -> None:
+    doc, rows, summary, anchors, manifest = copy_current_outputs(tmp_path)
+    fieldnames, anchor_rows = read_csv(anchors)
+    anchor_rows[0]["status"] = "missing"
+    write_csv(anchors, fieldnames, anchor_rows)
+
+    failures = check.validate_cities_recovered_pdf_text_audit_doc(
+        doc,
+        rows,
+        summary,
+        anchors,
+        manifest,
+    )
+
+    assert any("anchor rows drifted" in failure for failure in failures)
+
+
+def test_detects_manifest_drift(tmp_path: Path) -> None:
+    doc, rows, summary, anchors, manifest = copy_current_outputs(tmp_path)
+    payload = json.loads(manifest.read_text(encoding="utf-8"))
+    payload["rows"] = 99
+    manifest.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_cities_recovered_pdf_text_audit_doc(
+        doc,
+        rows,
+        summary,
+        anchors,
+        manifest,
+    )
+
+    assert any("rows drifted" in failure for failure in failures)
+
+
+def copy_current_outputs(tmp_path: Path) -> tuple[Path, Path, Path, Path, Path]:
+    doc = tmp_path / "audit.md"
+    rows = tmp_path / "rows.csv"
+    summary = tmp_path / "summary.csv"
+    anchors = tmp_path / "anchors.csv"
+    manifest = tmp_path / "manifest.json"
+    shutil.copyfile(check.DEFAULT_DOC, doc)
+    shutil.copyfile(check.DEFAULT_ROWS, rows)
+    shutil.copyfile(check.DEFAULT_SUMMARY, summary)
+    shutil.copyfile(check.DEFAULT_ANCHORS, anchors)
+    shutil.copyfile(check.DEFAULT_MANIFEST, manifest)
+    return doc, rows, summary, anchors, manifest
+
+
+def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
+    with path.open(encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, str]]) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["label", "text_status"])
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
-        writer.writerows(
-            [
-                {"label": "cities_pdf_wrr", "text_status": "zero_extractable_text"},
-                {
-                    "label": "cities_pdf_dp365a_p1_4",
-                    "text_status": "extractable_but_garbled_or_nonlatin",
-                },
-                {"label": "cities_pdf_communities_data", "text_status": "extractable_text"},
-                {"label": "cities_pdf_gans", "text_status": "extractable_text"},
-            ]
-        )
-
-
-def write_summary(path: Path, *, recovered_pdf_rows: str = "12") -> None:
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(
-            handle,
-            fieldnames=[
-                "recovered_pdf_rows",
-                "extractable_text_rows",
-                "zero_text_rows",
-                "garbled_or_nonlatin_rows",
-                "gans_family_rows",
-                "aumann_family_rows",
-                "other_family_rows",
-            ],
-        )
-        writer.writeheader()
-        writer.writerow(
-            {
-                "recovered_pdf_rows": recovered_pdf_rows,
-                "extractable_text_rows": "5",
-                "zero_text_rows": "4",
-                "garbled_or_nonlatin_rows": "3",
-                "gans_family_rows": "2",
-                "aumann_family_rows": "9",
-                "other_family_rows": "1",
-            }
-        )
-
-
-def write_anchors(path: Path) -> None:
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["anchor", "label", "status"])
-        writer.writeheader()
-        for index in range(5):
-            writer.writerow(
-                {
-                    "anchor": f"anchor_{index}",
-                    "label": "cities_pdf_gans",
-                    "status": "found",
-                }
-            )
+        writer.writerows(rows)
