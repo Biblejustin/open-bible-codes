@@ -5,14 +5,20 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
+from collections import Counter
 from pathlib import Path
+from typing import Any
+
+from scripts import build_cities_source_row_lock_worksheet as builder
 
 
-DEFAULT_DOC = Path("docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md")
-DEFAULT_ROWS = Path(
-    "reports/cities_pdf_recovery_probe/cities_source_row_lock_worksheet.csv"
-)
+DEFAULT_DOC = builder.DEFAULT_MD
+DEFAULT_ROWS = builder.DEFAULT_OUT
+DEFAULT_MANIFEST = builder.DEFAULT_MANIFEST
+DEFAULT_QUEUE = builder.DEFAULT_QUEUE
+DEFAULT_RECORDS = builder.DEFAULT_RECORDS
 
 REQUIRED_PHRASES = (
     "# Cities Source Row Lock Worksheet",
@@ -43,7 +49,13 @@ EXPECTED_IDS = tuple(f"cities_source_row_lock_{index:03d}" for index in range(1,
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    failures = validate_cities_source_row_lock_worksheet_doc(args.doc, args.rows)
+    failures = validate_cities_source_row_lock_worksheet_doc(
+        args.doc,
+        args.rows,
+        args.manifest,
+        args.queue,
+        args.records,
+    )
     if failures:
         for failure in failures:
             print(
@@ -59,41 +71,130 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--doc", type=Path, default=DEFAULT_DOC)
     parser.add_argument("--rows", type=Path, default=DEFAULT_ROWS)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
+    parser.add_argument("--queue", type=Path, default=DEFAULT_QUEUE)
+    parser.add_argument("--records", type=Path, default=DEFAULT_RECORDS)
     return parser
 
 
 def validate_cities_source_row_lock_worksheet_doc(
     doc: Path,
     rows_csv: Path = DEFAULT_ROWS,
+    manifest_json: Path = DEFAULT_MANIFEST,
+    queue_csv: Path = DEFAULT_QUEUE,
+    records_csv: Path = DEFAULT_RECORDS,
 ) -> list[str]:
-    missing = [str(path) for path in (doc, rows_csv) if not path.exists()]
+    missing = [
+        str(path)
+        for path in (doc, rows_csv, manifest_json, queue_csv, records_csv)
+        if not path.exists()
+    ]
     if missing:
         return ["missing required files: " + ", ".join(missing)]
     text = doc.read_text(encoding="utf-8")
     rows_text = rows_csv.read_text(encoding="utf-8")
+    manifest_text = manifest_json.read_text(encoding="utf-8")
     normalized = normalize_space(text)
-    rows = read_csv(rows_csv)
+    rows_data = read_csv(rows_csv)
+    queue_data = read_csv(queue_csv)
+    records_data = read_csv(records_csv)
+    for data in (rows_data, queue_data, records_data):
+        if isinstance(data, str):
+            return [data]
+    _, rows = rows_data
+    _, queue_rows = queue_data
+    _, record_rows = records_data
+    expected_rows = builder.build_worksheet_rows(
+        queue_rows,
+        builder.records_by_decision_id(record_rows),
+    )
     failures = [
         f"{doc} missing phrase: {phrase}"
         for phrase in REQUIRED_PHRASES
         if normalize_space(phrase) not in normalized
     ]
-    failures.extend(validate_no_source_text(doc, text, rows_csv, rows_text))
+    failures.extend(
+        validate_no_source_text(
+            {
+                str(doc): text,
+                str(rows_csv): rows_text,
+                str(manifest_json): manifest_text,
+            }
+        )
+    )
+    failures.extend(validate_rows_csv(rows_csv, rows_data, expected_rows))
+    failures.extend(
+        validate_manifest(manifest_json, queue_csv, records_csv, expected_rows)
+    )
     failures.extend(validate_rows(doc, normalized, rows))
     return failures
 
 
-def validate_no_source_text(
-    doc: Path,
-    doc_text: str,
-    rows_csv: Path,
-    rows_text: str,
-) -> list[str]:
+def validate_no_source_text(text_by_name: dict[str, str]) -> list[str]:
     failures: list[str] = []
-    if contains_hebrew_or_greek(doc_text):
-        failures.append(f"{doc} appears to contain source-script body text")
-    if contains_hebrew_or_greek(rows_text):
-        failures.append(f"{rows_csv} appears to contain source-script body text")
+    for name, text in text_by_name.items():
+        if contains_hebrew_or_greek(text):
+            failures.append(f"{name} appears to contain source-script body text")
+    return failures
+
+
+def validate_rows_csv(
+    path: Path,
+    data: tuple[list[str], list[dict[str, str]]],
+    expected_rows: list[dict[str, str]],
+) -> list[str]:
+    fieldnames, rows = data
+    failures: list[str] = []
+    if fieldnames != builder.FIELDNAMES:
+        failures.append(f"{path} fieldnames drifted")
+    if rows != expected_rows:
+        failures.append(f"{path} row data drifted")
+    return failures
+
+
+def validate_manifest(
+    path: Path,
+    queue_csv: Path,
+    records_csv: Path,
+    expected_rows: list[dict[str, str]],
+) -> list[str]:
+    data = read_json(path)
+    if isinstance(data, str):
+        return [data]
+    status_counts = Counter(row["record_decision_status"] for row in expected_rows)
+    action_counts = Counter(
+        row["record_selected_action"]
+        for row in expected_rows
+        if row["record_selected_action"]
+    )
+    checks: dict[str, Any] = {
+        "tool": "build_cities_source_row_lock_worksheet.py",
+        "inputs": {
+            "queue": str(queue_csv),
+            "records_template": str(records_csv),
+        },
+        "outputs": {
+            "csv": str(DEFAULT_ROWS),
+            "markdown": str(DEFAULT_DOC),
+            "manifest": str(DEFAULT_MANIFEST),
+        },
+        "rows": len(expected_rows),
+        "class_counts": dict(Counter(row["page_class"] for row in expected_rows)),
+        "record_status_counts": dict(status_counts),
+        "recorded_action_counts": dict(action_counts),
+        "recorded_rows": sum(
+            1 for row in expected_rows if row["record_decision_status"] != "unrecorded"
+        ),
+        "locked_rows": status_counts["locked"],
+        "source_row_imports": builder.count_imports(expected_rows),
+        "els_runs": 0,
+        "compactness_runs": 0,
+        "claim_boundary": builder.CLAIM_BOUNDARY,
+    }
+    failures: list[str] = []
+    for key, expected in checks.items():
+        if data.get(key) != expected:
+            failures.append(f"{path} {key} drifted")
     return failures
 
 
@@ -129,9 +230,18 @@ def contains_hebrew_or_greek(text: str) -> bool:
     return False
 
 
-def read_csv(path: Path) -> list[dict[str, str]]:
+def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
+    if not path.exists():
+        return f"{path} is missing"
     with path.open(encoding="utf-8", newline="") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def normalize_space(text: str) -> str:
