@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 157
+Protocols indexed: 158
 
 ## Analysis
 
@@ -185,6 +185,7 @@ Protocols indexed: 157
 | wrr_corrected_distance_highcap_1000_split_2 | Two-shard WRR corrected-distance diagnostic at search cap 1000, plus high-cap perturbat... | 6 |  | reports/wrr_1994 | `wrr_corrected_distance_highcap_1000_split_2.toml` |
 | wrr_corrected_distance_split_2 | Two-shard WRR corrected-distance diagnostic run and merge; local/Windows split compatible. | 4 |  | reports/wrr_1994 | `wrr_corrected_distance_split_2.toml` |
 | wrr_cross_pair_grid | Build the WRR2 appellation/date cross-pair grid and run cap-250 plus cap-1000 corrected... | 16 |  | reports/wrr_1994 | `wrr_cross_pair_grid.toml` |
+| wrr_method_lane_wide_skip_probe | Probe OCR-matched WRR method-lane terms for ordinary Genesis ELS hits beyond the select... | 1 |  | reports/wrr_1994 | `wrr_method_lane_wide_skip_probe.toml` |
 | wrr_source_import | Download external WRR audit files and convert WRR2 into repo term rows. | 3 |  | reports/wrr_1994 | `wrr_source_import.toml` |
 | wrr_source_recovery_probe | Live-refresh selected Torah-code research source labels into an isolated recovery-probe... | 2 |  | reports/wrr_source_recovery_probe | `wrr_source_recovery_probe.toml` |
 | wrr_wayback_source_recovery_probe | Probe Wayback snapshots for missing Torah-code research source pages into an isolated r... | 1 |  | reports/wrr_wayback_source_recovery_probe | `wrr_wayback_source_recovery_probe.toml` |

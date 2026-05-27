@@ -1,0 +1,34 @@
+name = "wrr_method_lane_wide_skip_probe"
+description = "Probe OCR-matched WRR method-lane terms for ordinary Genesis ELS hits beyond the selected cap."
+manifest_out = "reports/wrr_1994/wrr_method_lane_wide_skip_probe_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "wrr_method_lane_wide_skip_probe"
+description = "Count method-lane terms through skip 5000 without selecting source or method changes."
+argv = [
+  "-m", "scripts.analyze_wrr_method_lane_wide_skip",
+  "--method-packet", "reports/wrr_1994/wrr_method_pair_universe_evidence_packet.csv",
+  "--config", "configs/example_koren_genesis.toml",
+  "--max-skip", "5000",
+  "--direction", "both",
+  "--jobs", "1",
+  "--out", "reports/wrr_1994/wrr_method_lane_wide_skip_probe.csv",
+  "--summary-out", "reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv",
+  "--markdown-out", "docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md",
+  "--manifest-out", "reports/wrr_1994/wrr_method_lane_wide_skip_probe.manifest.json",
+]
+inputs = [
+  "scripts/analyze_wrr_method_lane_wide_skip.py",
+  "reports/wrr_1994/wrr_method_pair_universe_evidence_packet.csv",
+  "configs/example_koren_genesis.toml",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr_method_lane_wide_skip_probe.csv",
+  "reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv",
+  "docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md",
+  "reports/wrr_1994/wrr_method_lane_wide_skip_probe.manifest.json",
+]

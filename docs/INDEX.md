@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 381
+Documents indexed: 382
 
 ## Controls
 
@@ -109,6 +109,7 @@ Documents indexed: 381
 | WRR Manual Decision Record Worksheet | `WRR_MANUAL_DECISION_RECORD_WORKSHEET.md` |
 | WRR Manual Decision Register | `WRR_MANUAL_DECISION_REGISTER.md` |
 | WRR Methodology Gaps | `WRR_METHODOLOGY_GAPS.md` |
+| WRR Method-Lane Wide-Skip Probe | `WRR_METHOD_LANE_WIDE_SKIP_PROBE.md` |
 | WRR Method/Pair-Universe Evidence Packet | `WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` |
 | WRR Method Status | `WRR_METHOD_STATUS.md` |
 | WRR Remaining-Lane Evidence Packets | `WRR_REMAINING_LANE_EVIDENCE_PACKETS.md` |

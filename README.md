@@ -794,6 +794,11 @@ WRR method/pair-universe evidence packet:
 It isolates the 11 OCR-matched method-lane terms: all have zero skip-250
 appellation hits and zero high-cap appellation ordinary hits, with 2 pairs zero
 on both sides.
+WRR method-lane wide-skip probe:
+`docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md`.
+It checks those 11 OCR-matched method-lane terms through skip 5000; current
+output finds 0 wider-skip ordinary Genesis hits, so the lane is not explained
+by a small cap extension.
 WRR claim-blocker packet:
 `docs/WRR_CLAIM_BLOCKER_PACKET.md`.
 It mirrors the residual no-input handoff: top term targets,
