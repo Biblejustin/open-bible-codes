@@ -9,7 +9,7 @@ queue flags, and visual triage notes into one handoff artifact.
 ## Reproduce
 
 ```bash
-python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --source-policy-term-impacts reports/wrr_1994/wrr_source_policy_term_impacts.csv --dw-formula-sensitivity reports/wrr_1994/wrr_dw_formula_sensitivity.csv --variant-residual-summary reports/wrr_1994/wrr_variant_residual_review_summary.csv --variant-residual-packet reports/wrr_1994/wrr_variant_residual_review_packet.csv --residual-term-summary reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv --residual-term-queue reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv --method-pair-universe-summary reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv --source-transcription-row-summary reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv --remaining-lane-summary reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv --remaining-lane-packet reports/wrr_1994/wrr_remaining_lane_evidence_packet.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
+python3 -m scripts.build_wrr_claim_blocker_packet --readiness reports/wrr_1994/wrr_claim_readiness.csv --lock-options reports/wrr_1994/wrr_lock_options.csv --source-queue reports/wrr_1994/wrr_source_review_queue.csv --method-status reports/wrr_1994/wrr_method_status.csv --source-policy-scenarios reports/wrr_1994/wrr_source_policy_scenarios.csv --source-policy-term-impacts reports/wrr_1994/wrr_source_policy_term_impacts.csv --dw-formula-sensitivity reports/wrr_1994/wrr_dw_formula_sensitivity.csv --variant-residual-summary reports/wrr_1994/wrr_variant_residual_review_summary.csv --variant-residual-packet reports/wrr_1994/wrr_variant_residual_review_packet.csv --residual-term-summary reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv --residual-term-queue reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv --method-pair-universe-summary reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv --method-lane-wide-skip-summary reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv --source-transcription-row-summary reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv --remaining-lane-summary reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv --remaining-lane-packet reports/wrr_1994/wrr_remaining_lane_evidence_packet.csv --out reports/wrr_1994/wrr_claim_blocker_packet.csv --markdown-out docs/WRR_CLAIM_BLOCKER_PACKET.md --manifest-out reports/wrr_1994/wrr_claim_blocker_packet.manifest.json
 ```
 
 ## Blockers
@@ -132,6 +132,14 @@ The queue compresses repeated residual pair blockers into unique unresolved term
 | Terms | Pairs | OCR matched | Zero skip-250 | Zero high-cap | Both sides zero | Read |
 | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 | 11 | 11 | 11 | 11 | 11 | 2 | OCR matched all method-lane terms, but current Koren Genesis ordinary-hit search still leaves them undefined. |
+
+### Method-Lane Wide-Skip Probe
+
+This extends the ordinary Genesis ELS probe for OCR-matched method-lane terms beyond the selected cap. It is diagnostic only; it does not change the locked pair universe.
+
+| Terms | Max skip | Direction | Any-hit terms | Zero-through-max terms | Total hits | Read |
+| ---: | ---: | --- | ---: | ---: | ---: | --- |
+| 11 | 5000 | `both` | 0 | 11 | 0 | All 11 OCR-matched method-lane terms remain absent through skip 5000; the method lane is not explained by a small cap extension. |
 
 ## Source Policy Scenario Impact
 

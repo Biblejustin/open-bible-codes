@@ -39,6 +39,9 @@ DEFAULT_RESIDUAL_TERM_QUEUE = Path(
 DEFAULT_METHOD_PAIR_UNIVERSE_SUMMARY = Path(
     "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv"
 )
+DEFAULT_METHOD_LANE_WIDE_SKIP_SUMMARY = Path(
+    "reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv"
+)
 DEFAULT_SOURCE_TRANSCRIPTION_ROW_SUMMARY = Path(
     "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv"
 )
@@ -105,6 +108,7 @@ def main(argv: list[str] | None = None) -> int:
     residual_term_summary_rows = read_optional_rows(args.residual_term_summary)
     residual_term_queue_rows = read_optional_rows(args.residual_term_queue)
     method_pair_universe_rows = read_optional_rows(args.method_pair_universe_summary)
+    method_lane_wide_skip_rows = read_optional_rows(args.method_lane_wide_skip_summary)
     source_transcription_rows = read_optional_rows(args.source_transcription_row_summary)
     remaining_lane_summary_rows = read_optional_rows(args.remaining_lane_summary)
     remaining_lane_packet_rows = read_optional_rows(args.remaining_lane_packet)
@@ -122,6 +126,7 @@ def main(argv: list[str] | None = None) -> int:
         residual_term_summary_rows,
         residual_term_queue_rows,
         method_pair_universe_rows,
+        method_lane_wide_skip_rows,
         source_transcription_rows,
         remaining_lane_summary_rows,
         remaining_lane_packet_rows,
@@ -139,6 +144,7 @@ def main(argv: list[str] | None = None) -> int:
         residual_term_summary_rows,
         residual_term_queue_rows,
         method_pair_universe_rows,
+        method_lane_wide_skip_rows,
         source_transcription_rows,
         remaining_lane_summary_rows,
         remaining_lane_packet_rows,
@@ -195,6 +201,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--method-pair-universe-summary",
         type=Path,
         default=DEFAULT_METHOD_PAIR_UNIVERSE_SUMMARY,
+    )
+    parser.add_argument(
+        "--method-lane-wide-skip-summary",
+        type=Path,
+        default=DEFAULT_METHOD_LANE_WIDE_SKIP_SUMMARY,
     )
     parser.add_argument(
         "--source-transcription-row-summary",
@@ -355,6 +366,7 @@ def write_markdown(
     residual_term_summary_rows: list[dict[str, str]],
     residual_term_queue_rows: list[dict[str, str]],
     method_pair_universe_rows: list[dict[str, str]],
+    method_lane_wide_skip_rows: list[dict[str, str]],
     source_transcription_rows: list[dict[str, str]],
     remaining_lane_summary_rows: list[dict[str, str]],
     remaining_lane_packet_rows: list[dict[str, str]],
@@ -391,6 +403,7 @@ def write_markdown(
             f"--residual-term-summary {args.residual_term_summary} "
             f"--residual-term-queue {args.residual_term_queue} "
             f"--method-pair-universe-summary {args.method_pair_universe_summary} "
+            f"--method-lane-wide-skip-summary {args.method_lane_wide_skip_summary} "
             f"--source-transcription-row-summary {args.source_transcription_row_summary} "
             f"--remaining-lane-summary {args.remaining_lane_summary} "
             f"--remaining-lane-packet {args.remaining_lane_packet} "
@@ -664,6 +677,31 @@ def write_markdown(
                 ),
             ]
         )
+    if method_lane_wide_skip_rows:
+        summary = method_lane_wide_skip_rows[0]
+        lines.extend(
+            [
+                "",
+                "### Method-Lane Wide-Skip Probe",
+                "",
+                "This extends the ordinary Genesis ELS probe for OCR-matched method-lane terms beyond the selected cap. It is diagnostic only; it does not change the locked pair universe.",
+                "",
+                "| Terms | Max skip | Direction | Any-hit terms | Zero-through-max terms | Total hits | Read |",
+                "| ---: | ---: | --- | ---: | ---: | ---: | --- |",
+                (
+                    "| {terms} | {max_skip} | `{direction}` | {any_hit} | "
+                    "{zero} | {hits} | {read} |"
+                ).format(
+                    terms=markdown_cell(summary.get("terms", "")),
+                    max_skip=markdown_cell(summary.get("max_skip", "")),
+                    direction=markdown_cell(summary.get("direction", "")),
+                    any_hit=markdown_cell(summary.get("terms_with_any_hit", "")),
+                    zero=markdown_cell(summary.get("terms_zero_through_max", "")),
+                    hits=markdown_cell(summary.get("total_hits_through_max", "")),
+                    read=markdown_cell(summary.get("read", "")),
+                ),
+            ]
+        )
     if source_policy_rows:
         lines.extend(
             [
@@ -850,6 +888,7 @@ def write_manifest(
     residual_term_summary_rows: list[dict[str, str]],
     residual_term_queue_rows: list[dict[str, str]],
     method_pair_universe_rows: list[dict[str, str]],
+    method_lane_wide_skip_rows: list[dict[str, str]],
     source_transcription_rows: list[dict[str, str]],
     remaining_lane_summary_rows: list[dict[str, str]],
     remaining_lane_packet_rows: list[dict[str, str]],
@@ -869,6 +908,7 @@ def write_manifest(
         "residual_term_summary_rows": len(residual_term_summary_rows),
         "residual_term_queue_rows": len(residual_term_queue_rows),
         "method_pair_universe_summary_rows": len(method_pair_universe_rows),
+        "method_lane_wide_skip_summary_rows": len(method_lane_wide_skip_rows),
         "source_transcription_row_summary_rows": len(source_transcription_rows),
         "remaining_lane_summary_rows": len(remaining_lane_summary_rows),
         "remaining_lane_packet_rows": len(remaining_lane_packet_rows),
@@ -885,6 +925,7 @@ def write_manifest(
             "residual_term_summary": str(args.residual_term_summary),
             "residual_term_queue": str(args.residual_term_queue),
             "method_pair_universe_summary": str(args.method_pair_universe_summary),
+            "method_lane_wide_skip_summary": str(args.method_lane_wide_skip_summary),
             "source_transcription_row_summary": str(args.source_transcription_row_summary),
             "remaining_lane_summary": str(args.remaining_lane_summary),
             "remaining_lane_packet": str(args.remaining_lane_packet),

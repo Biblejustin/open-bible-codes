@@ -81,6 +81,7 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             residual_term_summary = root / "residual_term_summary.csv"
             residual_term_queue = root / "residual_term_queue.csv"
             method_pair_universe_summary = root / "method_pair_universe_summary.csv"
+            method_lane_wide_skip_summary = root / "method_lane_wide_skip_summary.csv"
             source_transcription_summary = root / "source_transcription_summary.csv"
             remaining_lane_summary = root / "remaining_lane_summary.csv"
             remaining_lane_packet = root / "remaining_lane_packet.csv"
@@ -289,6 +290,26 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                 ],
             )
             write_csv(
+                method_lane_wide_skip_summary,
+                [
+                    {
+                        "terms": "11",
+                        "max_skip": "5000",
+                        "direction": "both",
+                        "profile_skips": "250;1000;2500;5000",
+                        "terms_with_any_hit": "0",
+                        "terms_zero_through_max": "11",
+                        "terms_with_first_hit_after_1000": "0",
+                        "total_hits_through_max": "0",
+                        "read": (
+                            "All 11 OCR-matched method-lane terms remain absent "
+                            "through skip 5000; the method lane is not explained "
+                            "by a small cap extension."
+                        ),
+                    }
+                ],
+            )
+            write_csv(
                 source_transcription_summary,
                 [
                     {
@@ -395,6 +416,8 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                     str(residual_term_queue),
                     "--method-pair-universe-summary",
                     str(method_pair_universe_summary),
+                    "--method-lane-wide-skip-summary",
+                    str(method_lane_wide_skip_summary),
                     "--source-transcription-row-summary",
                     str(source_transcription_summary),
                     "--remaining-lane-summary",
@@ -441,6 +464,11 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
                 "| 11 | 11 | 11 | 11 | 11 | 2 | OCR matched all method-lane terms |",
                 text,
             )
+            self.assertIn("Method-Lane Wide-Skip Probe", text)
+            self.assertIn(
+                "| 11 | 5000 | `both` | 0 | 11 | 0 | All 11 OCR-matched method-lane terms remain absent through skip 5000; the method lane is not explained by a small cap extension. |",
+                text,
+            )
             self.assertIn("wrr2_32_app_05", text)
             self.assertIn("source_policy_or_pair_rule_review", text)
             self.assertIn("wnp_chelm_spelling_context", text)
@@ -453,9 +481,14 @@ class WrrClaimBlockerPacketTests(unittest.TestCase):
             self.assertEqual(manifest_payload["residual_term_summary_rows"], 2)
             self.assertEqual(manifest_payload["residual_term_queue_rows"], 1)
             self.assertEqual(manifest_payload["method_pair_universe_summary_rows"], 1)
+            self.assertEqual(manifest_payload["method_lane_wide_skip_summary_rows"], 1)
             self.assertEqual(manifest_payload["source_transcription_row_summary_rows"], 1)
             self.assertEqual(manifest_payload["remaining_lane_summary_rows"], 1)
             self.assertEqual(manifest_payload["remaining_lane_packet_rows"], 1)
+            self.assertEqual(
+                manifest_payload["inputs"]["method_lane_wide_skip_summary"],
+                str(method_lane_wide_skip_summary),
+            )
 
 
 def write_csv(path: Path, rows: list[dict[str, str]]) -> None:

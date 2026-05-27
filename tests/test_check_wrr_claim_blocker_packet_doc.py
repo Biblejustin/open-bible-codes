@@ -49,6 +49,7 @@ def test_validate_blocker_packet_accepts_matching_csvs(tmp_path: Path) -> None:
         source_queue=_source_queue_csv(tmp_path),
         variant_residual_summary=_variant_summary_csv(tmp_path),
         residual_term_summary=_residual_term_summary_csv(tmp_path),
+        method_lane_wide_skip_summary=_method_lane_wide_skip_summary_csv(tmp_path),
         source_transcription_row_summary=_row_summary_csv(tmp_path),
         remaining_lane_summary=_remaining_lane_summary_csv(tmp_path),
     )
@@ -66,6 +67,7 @@ def test_validate_blocker_packet_rejects_packet_rows(tmp_path: Path) -> None:
         source_queue=_source_queue_csv(tmp_path),
         variant_residual_summary=_variant_summary_csv(tmp_path),
         residual_term_summary=_residual_term_summary_csv(tmp_path),
+        method_lane_wide_skip_summary=_method_lane_wide_skip_summary_csv(tmp_path),
         source_transcription_row_summary=_row_summary_csv(tmp_path),
         remaining_lane_summary=_remaining_lane_summary_csv(tmp_path),
     )
@@ -83,6 +85,7 @@ def test_validate_blocker_packet_rejects_readiness_drift(tmp_path: Path) -> None
         source_queue=_source_queue_csv(tmp_path),
         variant_residual_summary=_variant_summary_csv(tmp_path),
         residual_term_summary=_residual_term_summary_csv(tmp_path),
+        method_lane_wide_skip_summary=_method_lane_wide_skip_summary_csv(tmp_path),
         source_transcription_row_summary=_row_summary_csv(tmp_path),
         remaining_lane_summary=_remaining_lane_summary_csv(tmp_path),
     )
@@ -100,6 +103,7 @@ def test_validate_blocker_packet_rejects_source_queue_drift(tmp_path: Path) -> N
         source_queue=_source_queue_csv(tmp_path, bad_flags=True),
         variant_residual_summary=_variant_summary_csv(tmp_path),
         residual_term_summary=_residual_term_summary_csv(tmp_path),
+        method_lane_wide_skip_summary=_method_lane_wide_skip_summary_csv(tmp_path),
         source_transcription_row_summary=_row_summary_csv(tmp_path),
         remaining_lane_summary=_remaining_lane_summary_csv(tmp_path),
     )
@@ -120,11 +124,32 @@ def test_validate_blocker_packet_rejects_summary_drift(tmp_path: Path) -> None:
             bad_key=("review_frontier", "minimum_residual_frontier"),
         ),
         residual_term_summary=_residual_term_summary_csv(tmp_path),
+        method_lane_wide_skip_summary=_method_lane_wide_skip_summary_csv(tmp_path),
         source_transcription_row_summary=_row_summary_csv(tmp_path),
         remaining_lane_summary=_remaining_lane_summary_csv(tmp_path),
     )
 
     assert any("review_frontier minimum_residual_frontier" in failure for failure in failures)
+
+
+def test_validate_blocker_packet_rejects_wide_skip_summary_drift(tmp_path: Path) -> None:
+    doc = _doc(tmp_path)
+
+    failures = check.validate_blocker_packet_doc(
+        doc,
+        packet=_packet_csv(tmp_path),
+        readiness=_readiness_csv(tmp_path),
+        source_queue=_source_queue_csv(tmp_path),
+        variant_residual_summary=_variant_summary_csv(tmp_path),
+        residual_term_summary=_residual_term_summary_csv(tmp_path),
+        method_lane_wide_skip_summary=_method_lane_wide_skip_summary_csv(
+            tmp_path, bad_total_hits=True
+        ),
+        source_transcription_row_summary=_row_summary_csv(tmp_path),
+        remaining_lane_summary=_remaining_lane_summary_csv(tmp_path),
+    )
+
+    assert any("total_hits_through_max drifted" in failure for failure in failures)
 
 
 def test_validate_blocker_packet_rejects_manifest_drift(tmp_path: Path) -> None:
@@ -302,6 +327,44 @@ def _residual_term_summary_csv(tmp_path: Path) -> Path:
             "read",
         ],
         rows,
+    )
+
+
+def _method_lane_wide_skip_summary_csv(
+    tmp_path: Path,
+    *,
+    bad_total_hits: bool = False,
+) -> Path:
+    return _write_csv(
+        tmp_path / "method_lane_wide_skip_summary.csv",
+        [
+            "terms",
+            "max_skip",
+            "direction",
+            "profile_skips",
+            "terms_with_any_hit",
+            "terms_zero_through_max",
+            "terms_with_first_hit_after_1000",
+            "total_hits_through_max",
+            "read",
+        ],
+        [
+            {
+                "terms": "11",
+                "max_skip": "5000",
+                "direction": "both",
+                "profile_skips": "250;1000;2500;5000",
+                "terms_with_any_hit": "0",
+                "terms_zero_through_max": "11",
+                "terms_with_first_hit_after_1000": "0",
+                "total_hits_through_max": "1" if bad_total_hits else "0",
+                "read": (
+                    "All 11 OCR-matched method-lane terms remain absent through "
+                    "skip 5000; the method lane is not explained by a small cap "
+                    "extension."
+                ),
+            }
+        ],
     )
 
 

@@ -20,6 +20,7 @@ DEFAULT_READINESS = builder.DEFAULT_READINESS
 DEFAULT_SOURCE_QUEUE = builder.DEFAULT_SOURCE_QUEUE
 DEFAULT_VARIANT_RESIDUAL_SUMMARY = builder.DEFAULT_VARIANT_RESIDUAL_SUMMARY
 DEFAULT_RESIDUAL_TERM_SUMMARY = builder.DEFAULT_RESIDUAL_TERM_SUMMARY
+DEFAULT_METHOD_LANE_WIDE_SKIP_SUMMARY = builder.DEFAULT_METHOD_LANE_WIDE_SKIP_SUMMARY
 DEFAULT_SOURCE_TRANSCRIPTION_ROW_SUMMARY = builder.DEFAULT_SOURCE_TRANSCRIPTION_ROW_SUMMARY
 DEFAULT_REMAINING_LANE_SUMMARY = builder.DEFAULT_REMAINING_LANE_SUMMARY
 DEFAULT_MANIFEST = builder.DEFAULT_MANIFEST
@@ -107,6 +108,15 @@ EXPECTED_REMAINING_LANES = {
     "page_image_near_match_review": ("3", "3", "2"),
     "method_or_pair_universe_review": ("11", "11", "2"),
 }
+EXPECTED_METHOD_LANE_WIDE_SKIP = {
+    "terms": "11",
+    "max_skip": "5000",
+    "direction": "both",
+    "terms_with_any_hit": "0",
+    "terms_zero_through_max": "11",
+    "terms_with_first_hit_after_1000": "0",
+    "total_hits_through_max": "0",
+}
 
 REQUIRED_PHRASES = (
     "# WRR Claim Blocker Packet",
@@ -127,6 +137,8 @@ REQUIRED_PHRASES = (
     "near OCR exists, but page image must decide whether it is source evidence",
     "Method/Pair-Universe Evidence Summary",
     "OCR matched all method-lane terms",
+    "Method-Lane Wide-Skip Probe",
+    "All 11 OCR-matched method-lane terms remain absent through skip 5000",
     "unique_unresolved_terms",
     "source_policy_or_pair_rule_review",
     "wnp_chelm_spelling_context",
@@ -151,6 +163,7 @@ def main(argv: list[str] | None = None) -> int:
         args.source_queue,
         args.variant_residual_summary,
         args.residual_term_summary,
+        args.method_lane_wide_skip_summary,
         args.source_transcription_row_summary,
         args.remaining_lane_summary,
         args.manifest,
@@ -180,6 +193,11 @@ def build_parser() -> argparse.ArgumentParser:
         default=DEFAULT_RESIDUAL_TERM_SUMMARY,
     )
     parser.add_argument(
+        "--method-lane-wide-skip-summary",
+        type=Path,
+        default=DEFAULT_METHOD_LANE_WIDE_SKIP_SUMMARY,
+    )
+    parser.add_argument(
         "--source-transcription-row-summary",
         type=Path,
         default=DEFAULT_SOURCE_TRANSCRIPTION_ROW_SUMMARY,
@@ -200,6 +218,7 @@ def validate_blocker_packet_doc(
     source_queue: Path | None = DEFAULT_SOURCE_QUEUE,
     variant_residual_summary: Path | None = DEFAULT_VARIANT_RESIDUAL_SUMMARY,
     residual_term_summary: Path | None = DEFAULT_RESIDUAL_TERM_SUMMARY,
+    method_lane_wide_skip_summary: Path | None = DEFAULT_METHOD_LANE_WIDE_SKIP_SUMMARY,
     source_transcription_row_summary: Path | None = DEFAULT_SOURCE_TRANSCRIPTION_ROW_SUMMARY,
     remaining_lane_summary: Path | None = DEFAULT_REMAINING_LANE_SUMMARY,
     manifest: Path | None = DEFAULT_MANIFEST,
@@ -222,6 +241,10 @@ def validate_blocker_packet_doc(
         failures.extend(validate_variant_residual_summary_csv(variant_residual_summary))
     if residual_term_summary is not None:
         failures.extend(validate_residual_term_summary_csv(residual_term_summary))
+    if method_lane_wide_skip_summary is not None:
+        failures.extend(
+            validate_method_lane_wide_skip_summary_csv(method_lane_wide_skip_summary)
+        )
     if source_transcription_row_summary is not None:
         failures.extend(validate_source_transcription_row_summary_csv(source_transcription_row_summary))
     if remaining_lane_summary is not None:
@@ -259,6 +282,7 @@ def validate_manifest(manifest: Path) -> list[str]:
         "residual_term_summary_rows": len(EXPECTED_RESIDUAL_TERM_SUMMARY),
         "residual_term_queue_rows": 58,
         "method_pair_universe_summary_rows": 1,
+        "method_lane_wide_skip_summary_rows": 1,
         "source_transcription_row_summary_rows": SOURCE_TRANSCRIPTION_TOTALS["rows"],
         "remaining_lane_summary_rows": len(EXPECTED_REMAINING_LANES),
         "remaining_lane_packet_rows": 14,
@@ -275,6 +299,9 @@ def validate_manifest(manifest: Path) -> list[str]:
             "residual_term_summary": str(builder.DEFAULT_RESIDUAL_TERM_SUMMARY),
             "residual_term_queue": str(builder.DEFAULT_RESIDUAL_TERM_QUEUE),
             "method_pair_universe_summary": str(builder.DEFAULT_METHOD_PAIR_UNIVERSE_SUMMARY),
+            "method_lane_wide_skip_summary": str(
+                builder.DEFAULT_METHOD_LANE_WIDE_SKIP_SUMMARY
+            ),
             "source_transcription_row_summary": str(builder.DEFAULT_SOURCE_TRANSCRIPTION_ROW_SUMMARY),
             "remaining_lane_summary": str(builder.DEFAULT_REMAINING_LANE_SUMMARY),
             "remaining_lane_packet": str(builder.DEFAULT_REMAINING_LANE_PACKET),
@@ -402,6 +429,24 @@ def validate_residual_term_summary_csv(summary: Path) -> list[str]:
         ):
             if row.get(field) != expected:
                 failures.append(f"{summary} {key[0]} {key[1]} {field} drifted")
+    return failures
+
+
+def validate_method_lane_wide_skip_summary_csv(summary: Path) -> list[str]:
+    data = _read_csv(summary)
+    if isinstance(data, str):
+        return [data]
+    _, rows = data
+    failures: list[str] = []
+    if len(rows) != 1:
+        failures.append(f"{summary} has {len(rows)} rows")
+        return failures
+    row = rows[0]
+    for field, expected in EXPECTED_METHOD_LANE_WIDE_SKIP.items():
+        if row.get(field) != expected:
+            failures.append(f"{summary} {field} drifted")
+    if "not explained by a small cap extension" not in row.get("read", ""):
+        failures.append(f"{summary} read drifted")
     return failures
 
 

@@ -1026,6 +1026,26 @@ outputs = [
 ]
 
 [[steps]]
+id = "wrr_method_lane_wide_skip_probe"
+description = "Refresh WRR method-lane wide-skip diagnostic after audit-derived method-lane packet exists."
+argv = ["-m", "scripts.run_protocol", "protocols/wrr_method_lane_wide_skip_probe.toml", "--resume"]
+inputs = [
+  "protocols/wrr_method_lane_wide_skip_probe.toml",
+  "scripts/analyze_wrr_method_lane_wide_skip.py",
+  "reports/wrr_1994/wrr_method_pair_universe_evidence_packet.csv",
+  "configs/example_koren_genesis.toml",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/wrr_1994/wrr_method_lane_wide_skip_probe_protocol.manifest.json",
+  "reports/wrr_1994/wrr_method_lane_wide_skip_probe.csv",
+  "reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv",
+  "docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md",
+  "reports/wrr_1994/wrr_method_lane_wide_skip_probe.manifest.json",
+]
+
+[[steps]]
 id = "wrr_cross_pair_grid"
 description = "Refresh the WRR cross-pair repo-defined date-label permutation diagnostic."
 argv = ["-m", "scripts.run_protocol", "protocols/wrr_cross_pair_grid.toml", "--resume"]
@@ -1052,6 +1072,7 @@ inputs = [
   "reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv",
   "reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv",
   "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
+  "reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv",
   "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv",
   "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
   "reports/wrr_1994/wrr_remaining_lane_evidence_packet.csv",
@@ -1768,6 +1789,7 @@ inputs = [
   "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
   "reports/wrr_1994/wrr_manual_decision_register_summary.csv",
   "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
+  "reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv",
   "reports/wrr_1994/wrr_dw_formula_sensitivity.csv",
   "reports/wrr_1994/wrr_locked_method_report.csv",
   "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.csv",

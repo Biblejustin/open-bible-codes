@@ -105,6 +105,7 @@ class WrrCrossPairGridTests(unittest.TestCase):
         self.assertIn("--residual-term-summary", blocker_packet["argv"])
         self.assertIn("--residual-term-queue", blocker_packet["argv"])
         self.assertIn("--method-pair-universe-summary", blocker_packet["argv"])
+        self.assertIn("--method-lane-wide-skip-summary", blocker_packet["argv"])
         self.assertIn("--source-transcription-row-summary", blocker_packet["argv"])
         self.assertIn("--remaining-lane-summary", blocker_packet["argv"])
         self.assertIn("--remaining-lane-packet", blocker_packet["argv"])
@@ -118,6 +119,10 @@ class WrrCrossPairGridTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
+            blocker_packet["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv",
             blocker_packet["inputs"],
         )
         self.assertIn(

@@ -114,6 +114,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertTrue(steps_by_id["preflight"]["always_run"])
         self.assertTrue(steps_by_id["real_report_summary"]["always_run"])
         self.assertIn("wrr_audit_counts", steps_by_id)
+        self.assertIn("wrr_method_lane_wide_skip_probe", steps_by_id)
         self.assertIn("wrr_cross_pair_grid", steps_by_id)
         self.assertIn(
             "scripts/analyze_wrr_source_policy_scenarios.py",
@@ -425,6 +426,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
+            "reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv",
+            steps_by_id["wrr_method_lane_wide_skip_probe"]["outputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_source_policy_evidence_summary.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
@@ -449,6 +454,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
+            "reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_locked_method_report.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
@@ -466,6 +475,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/wrr_1994/wrr_variant_residual_review_packet.csv",
+            steps_by_id["wrr_cross_pair_grid"]["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv",
             steps_by_id["wrr_cross_pair_grid"]["inputs"],
         )
         self.assertIn(
