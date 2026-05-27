@@ -5,12 +5,18 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from pathlib import Path
+from typing import Any
 
+from scripts import check_wrr_claim_readiness as generator
 
-DEFAULT_DOC = Path("docs/WRR_CLAIM_READINESS.md")
-DEFAULT_READINESS = Path("reports/wrr_1994/wrr_claim_readiness.csv")
+DEFAULT_DOC = generator.DEFAULT_MD
+DEFAULT_READINESS = generator.DEFAULT_OUT
+DEFAULT_MANIFEST = generator.DEFAULT_MANIFEST
+
+FIELDNAMES = generator.FIELDNAMES
 
 EXPECTED_ROWS = {
     "Pair universe": ("source_locked", "locked,source_locked"),
@@ -38,7 +44,7 @@ REQUIRED_PHRASES = (
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    failures = validate_readiness_doc(args.doc, args.readiness)
+    failures = validate_readiness_doc(args.doc, args.readiness, args.manifest)
     if failures:
         for failure in failures:
             print(f"WRR claim-readiness doc failure: {failure}", file=sys.stderr)
@@ -51,12 +57,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--doc", type=Path, default=DEFAULT_DOC)
     parser.add_argument("--readiness", type=Path, default=DEFAULT_READINESS)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
 
 def validate_readiness_doc(
     doc: Path,
     readiness: Path | None = DEFAULT_READINESS,
+    manifest: Path | None = DEFAULT_MANIFEST,
 ) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
@@ -68,14 +76,19 @@ def validate_readiness_doc(
     ]
     if readiness is not None:
         failures.extend(validate_readiness_csv(readiness))
+    if manifest is not None:
+        failures.extend(validate_manifest(manifest))
     return failures
 
 
 def validate_readiness_csv(readiness: Path) -> list[str]:
-    rows = _read_csv(readiness)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(readiness)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != FIELDNAMES:
+        failures.append(f"{readiness} fieldnames drifted")
     if len(rows) != len(EXPECTED_ROWS):
         failures.append(f"{readiness} has {len(rows)} rows; expected {len(EXPECTED_ROWS)}")
     by_area = {row.get("decision_area", ""): row for row in rows}
@@ -98,11 +111,39 @@ def validate_readiness_csv(readiness: Path) -> list[str]:
     return failures
 
 
-def _read_csv(path: Path) -> list[dict[str, str]] | str:
+def validate_manifest(manifest: Path) -> list[str]:
+    data = _read_json(manifest)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "check_wrr_claim_readiness.py",
+        "status": "ready",
+        "input": str(generator.DEFAULT_STATUS),
+        "outputs": {
+            "csv": str(DEFAULT_READINESS),
+            "markdown": str(DEFAULT_DOC),
+            "manifest": str(DEFAULT_MANIFEST),
+        },
+    }
+    failures: list[str] = []
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{manifest} {key} drifted")
+    return failures
+
+
+def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
     if not path.exists():
         return f"{path} is missing"
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def _read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

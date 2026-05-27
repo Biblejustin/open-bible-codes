@@ -128,7 +128,8 @@ CSV schemas, and manifest input/output metadata are CSV/manifest-guarded. The
 manual decision register/summary/manifest, manual decision-record worksheet,
 and exact reproduction gap dashboard are CSV-guarded too. The locked-method
 report is CSV/manifest-guarded too.
-WRR claim readiness and lock options are CSV-guarded as well.
+WRR claim readiness is CSV/manifest-guarded as well.
+WRR lock options are CSV-guarded as well.
 WRR claim blocker packet readiness, source-queue, residual-summary,
 remaining-lane inputs, and manifest row-count/input/output metadata are
 CSV/manifest-guarded as well.
@@ -1509,6 +1510,8 @@ dirty-tree fast validation above it:
   lock update: 1924 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the method-status checker manifest lock
   update: 1925 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the claim-readiness checker manifest lock
+  update: 1926 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.

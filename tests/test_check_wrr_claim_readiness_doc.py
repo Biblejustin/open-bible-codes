@@ -1,4 +1,5 @@
 import csv
+import json
 from pathlib import Path
 
 from scripts import check_wrr_claim_readiness_doc as check
@@ -27,7 +28,11 @@ def test_validate_readiness_accepts_matching_csv(tmp_path: Path) -> None:
     doc = tmp_path / "WRR_CLAIM_READINESS.md"
     doc.write_text("\n".join(check.REQUIRED_PHRASES), encoding="utf-8")
 
-    failures = check.validate_readiness_doc(doc, readiness=_readiness_csv(tmp_path))
+    failures = check.validate_readiness_doc(
+        doc,
+        readiness=_readiness_csv(tmp_path),
+        manifest=None,
+    )
 
     assert failures == []
 
@@ -39,9 +44,41 @@ def test_validate_readiness_rejects_status_drift(tmp_path: Path) -> None:
     failures = check.validate_readiness_doc(
         doc,
         readiness=_readiness_csv(tmp_path, bad_area="Pair universe"),
+        manifest=None,
     )
 
     assert any("Pair universe status drifted" in failure for failure in failures)
+
+
+def test_validate_readiness_rejects_manifest_drift(tmp_path: Path) -> None:
+    doc = tmp_path / "WRR_CLAIM_READINESS.md"
+    doc.write_text("\n".join(check.REQUIRED_PHRASES), encoding="utf-8")
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(
+        json.dumps(
+            {
+                "tool": "check_wrr_claim_readiness.py",
+                "status": "blocked",
+                "input": "reports/wrr_1994/wrr_method_status.csv",
+                "outputs": {
+                    "csv": "reports/wrr_1994/wrr_claim_readiness.csv",
+                    "markdown": "docs/WRR_CLAIM_READINESS.md",
+                    "manifest": "reports/wrr_1994/wrr_claim_readiness.manifest.json",
+                },
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_readiness_doc(
+        doc,
+        readiness=_readiness_csv(tmp_path),
+        manifest=manifest,
+    )
+
+    assert any("status drifted" in failure for failure in failures)
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
@@ -55,15 +92,7 @@ def test_main_reports_failure(tmp_path: Path, capsys) -> None:
 
 def _readiness_csv(tmp_path: Path, *, bad_area: str | None = None) -> Path:
     path = tmp_path / "readiness.csv"
-    fieldnames = [
-        "decision_area",
-        "status",
-        "required_statuses",
-        "ready",
-        "current_read",
-        "evidence",
-        "blocker",
-    ]
+    fieldnames = check.FIELDNAMES
     with path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
