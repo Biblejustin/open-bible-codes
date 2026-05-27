@@ -5,12 +5,18 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from pathlib import Path
+from typing import Any
 
+from scripts import build_wrr_source_review_queue as builder
 
 DEFAULT_DOC = Path("docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md")
-DEFAULT_QUEUE = Path("reports/wrr_1994/wrr_source_review_queue.csv")
+DEFAULT_QUEUE = builder.DEFAULT_OUT
+DEFAULT_MANIFEST = builder.DEFAULT_MANIFEST
+
+QUEUE_FIELDNAMES = builder.QUEUE_FIELDNAMES
 
 EXPECTED_VISUAL_ROWS = {
     "wrr2_23_app_04": {
@@ -164,7 +170,11 @@ REQUIRED_PHRASES = (
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    failures = validate_source_visual_review_notes_doc(args.doc, queue=args.queue)
+    failures = validate_source_visual_review_notes_doc(
+        args.doc,
+        queue=args.queue,
+        manifest=args.manifest,
+    )
     if failures:
         for failure in failures:
             print(f"WRR source visual-review notes doc failure: {failure}", file=sys.stderr)
@@ -177,6 +187,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--doc", type=Path, default=DEFAULT_DOC)
     parser.add_argument("--queue", type=Path, default=DEFAULT_QUEUE)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
 
@@ -184,6 +195,7 @@ def validate_source_visual_review_notes_doc(
     doc: Path,
     *,
     queue: Path | None = DEFAULT_QUEUE,
+    manifest: Path | None = DEFAULT_MANIFEST,
 ) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
@@ -199,6 +211,8 @@ def validate_source_visual_review_notes_doc(
         failures.append(f"{doc} missing visual-review rows: " + ", ".join(missing_terms))
     if queue is not None:
         failures.extend(validate_queue_csv(queue))
+    if manifest is not None:
+        failures.extend(validate_manifest(manifest))
     return failures
 
 
@@ -213,10 +227,13 @@ def visual_doc_terms(text: str) -> set[str]:
 
 
 def validate_queue_csv(path: Path) -> list[str]:
-    rows = _read_csv(path)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(path)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != QUEUE_FIELDNAMES:
+        failures.append(f"{path} fieldnames drifted")
     visual_rows = [row for row in rows if row.get("visual_review_note")]
     if len(visual_rows) != len(EXPECTED_VISUAL_ROWS):
         failures.append(
@@ -241,11 +258,46 @@ def validate_queue_csv(path: Path) -> list[str]:
     return failures
 
 
-def _read_csv(path: Path) -> list[dict[str, str]] | str:
+def validate_manifest(manifest: Path) -> list[str]:
+    data = _read_json(manifest)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "build_wrr_source_review_queue",
+        "run_label": "all_lanes_cap1000",
+        "inputs": {
+            "blocked_pairs": str(builder.DEFAULT_BLOCKED_PAIRS),
+            "variants": str(builder.DEFAULT_VARIANTS),
+            "row_ocr": str(builder.DEFAULT_ROW_OCR),
+        },
+        "outputs": {
+            "out": str(DEFAULT_QUEUE),
+            "summary_out": str(builder.DEFAULT_SUMMARY_OUT),
+            "markdown_out": str(builder.DEFAULT_MD),
+            "manifest_out": str(DEFAULT_MANIFEST),
+        },
+        "queue_rows": 97,
+        "summary_rows": 6,
+    }
+    failures: list[str] = []
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{manifest} {key} drifted")
+    return failures
+
+
+def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
     if not path.exists():
         return f"{path} is missing"
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def _read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def normalize_space(text: str) -> str:

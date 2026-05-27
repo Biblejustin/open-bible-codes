@@ -56,6 +56,7 @@ def test_validate_source_visual_review_notes_accepts_matching_queue(
     failures = check.validate_source_visual_review_notes_doc(
         _doc(tmp_path),
         queue=_queue_csv(tmp_path),
+        manifest=None,
     )
 
     assert failures == []
@@ -67,6 +68,7 @@ def test_validate_source_visual_review_notes_rejects_queue_drift(
     failures = check.validate_source_visual_review_notes_doc(
         _doc(tmp_path),
         queue=_queue_csv(tmp_path, bad_term="wrr2_23_app_04"),
+        manifest=None,
     )
 
     assert any("wrr2_23_app_04 visual_review_action drifted" in failure for failure in failures)
@@ -78,9 +80,46 @@ def test_validate_source_visual_review_notes_rejects_missing_visual_row(
     failures = check.validate_source_visual_review_notes_doc(
         _doc(tmp_path),
         queue=_queue_csv(tmp_path, drop_term="wrr2_31_app_07"),
+        manifest=None,
     )
 
     assert any("expected 10" in failure for failure in failures)
+
+
+def test_validate_source_visual_review_notes_rejects_manifest_drift(
+    tmp_path: Path,
+) -> None:
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(
+        """
+{
+  "inputs": {
+    "blocked_pairs": "reports/wrr_1994/wrr_defined_gap_blocked_pairs.csv",
+    "row_ocr": "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv",
+    "variants": "reports/wrr_1994/wrr_zero_hit_variant_probe.csv"
+  },
+  "outputs": {
+    "manifest_out": "reports/wrr_1994/wrr_source_review_queue.manifest.json",
+    "markdown_out": "docs/WRR_SOURCE_REVIEW_QUEUE.md",
+    "out": "reports/wrr_1994/wrr_source_review_queue.csv",
+    "summary_out": "reports/wrr_1994/wrr_source_review_queue_summary.csv"
+  },
+  "queue_rows": 96,
+  "run_label": "all_lanes_cap1000",
+  "summary_rows": 6,
+  "tool": "build_wrr_source_review_queue"
+}
+""".lstrip(),
+        encoding="utf-8",
+    )
+
+    failures = check.validate_source_visual_review_notes_doc(
+        _doc(tmp_path),
+        queue=_queue_csv(tmp_path),
+        manifest=manifest,
+    )
+
+    assert any("queue_rows drifted" in failure for failure in failures)
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
@@ -111,20 +150,7 @@ def _queue_csv(
     drop_term: str | None = None,
 ) -> Path:
     path = tmp_path / "wrr_source_review_queue.csv"
-    fieldnames = [
-        "run_label",
-        "priority_rank",
-        "review_bucket",
-        "term_side",
-        "term_id",
-        "term",
-        "row_numbers",
-        "row_ocr_status",
-        "source_review_flags",
-        "source_review_action",
-        "visual_review_note",
-        "visual_review_action",
-    ]
+    fieldnames = check.QUEUE_FIELDNAMES
     rows = []
     for term_id, expected in check.EXPECTED_VISUAL_ROWS.items():
         if term_id == drop_term:

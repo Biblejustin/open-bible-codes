@@ -91,8 +91,9 @@ The WRR source-recovery probe doc is now CSV/manifest-guarded against
 live-probe row, summary, source-manifest, and report-manifest drift.
 The WRR Wayback source-recovery probe doc is now CSV/manifest-guarded
 against archived probe row, summary, and report-manifest drift.
-The WRR source visual-review notes doc is now CSV-guarded against the
-source-review queue visual rows and non-exclusion actions.
+The WRR source visual-review notes doc is now CSV/manifest-guarded against the
+source-review queue visual rows, non-exclusion actions, source queue manifest
+input/output, and count locks.
 The WRR source-row crop contact sheet doc is now CSV/manifest-guarded
 against crop-packet row order, summary, manifest, and contact-sheet dimensions.
 The WRR source audit doc is now CSV-guarded against locked-method, method-status,
@@ -1393,7 +1394,8 @@ dirty-tree fast validation above it:
 - `python3 -m scripts.check_wrr_source_row_crop_contact_sheet_doc` passed
   with CSV-backed crop-row, summary, manifest, and PNG dimension locks.
 - `python3 -m scripts.check_wrr_source_visual_review_notes_doc` passed with
-  CSV-backed source-review queue visual-row and non-exclusion action locks.
+  CSV-backed source-review queue visual-row and non-exclusion action locks plus
+  source queue manifest input/output and count locks.
 - `python3 -m scripts.check_wrr_wayback_source_recovery_probe_doc` passed with
   CSV-backed archived row/summary locks plus report-manifest locks.
 - `python3 -m scripts.check_wrr_source_recovery_probe_doc` passed with
@@ -1497,6 +1499,8 @@ dirty-tree fast validation above it:
   manifest lock update: 1920 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the source-review queue checker manifest
   lock update: 1921 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the source visual-review notes checker
+  source-queue manifest lock update: 1922 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.
