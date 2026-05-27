@@ -1,4 +1,5 @@
 import csv
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -36,6 +37,7 @@ class WrrSourceTranscriptionEvidencePacketDocTests(unittest.TestCase):
                     path,
                     packet=None,
                     row_summary=None,
+                    manifest=None,
                 ),
                 [],
             )
@@ -90,6 +92,27 @@ class WrrSourceTranscriptionEvidencePacketDocTests(unittest.TestCase):
 
             self.assertTrue(any("no-input boundary" in failure for failure in failures))
 
+    def test_validate_packet_doc_rejects_manifest_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest = Path(tmp) / "manifest.json"
+            payload = json.loads(check.DEFAULT_MANIFEST.read_text(encoding="utf-8"))
+            payload["packet_rows"] = 99
+            manifest.write_text(
+                json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+
+            failures = check.validate_source_transcription_evidence_packet_doc(
+                check.DEFAULT_DOC,
+                packet=None,
+                row_summary=None,
+                manifest=manifest,
+            )
+
+            self.assertTrue(
+                any("packet_rows drifted" in failure for failure in failures)
+            )
+
 
 def _required_doc(root: Path) -> Path:
     path = root / "packet.md"
@@ -99,28 +122,7 @@ def _required_doc(root: Path) -> Path:
 
 def _packet_csv(root: Path, *, variant_rank: int | None = None) -> Path:
     path = root / "packet.csv"
-    fieldnames = [
-        "run_label",
-        "evidence_rank",
-        "action_rank",
-        "term_id",
-        "term",
-        "concept",
-        "row_number",
-        "residual_pairs",
-        "frontier_pairs",
-        "review_buckets",
-        "row_ocr_status",
-        "row_ocr_text_normalized",
-        "best_variant_hit_count",
-        "best_variant_rule",
-        "row_matched_terms",
-        "row_action_not_matched_terms",
-        "table2_bridge_read",
-        "evidence_required",
-        "no_input_boundary",
-        "evidence_read",
-    ]
+    fieldnames = check.PACKET_FIELDNAMES
     with path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
@@ -154,25 +156,7 @@ def _packet_csv(root: Path, *, variant_rank: int | None = None) -> Path:
 
 def _row_summary_csv(root: Path, *, bad_boundary_rank: int | None = None) -> Path:
     path = root / "row_summary.csv"
-    fieldnames = [
-        "run_label",
-        "row_rank",
-        "row_number",
-        "concept",
-        "action_terms",
-        "residual_pairs",
-        "frontier_pairs",
-        "action_term_ids",
-        "action_terms_display",
-        "row_matched_terms",
-        "row_action_not_matched_terms",
-        "row_ocr_name_texts",
-        "row_ocr_date_texts",
-        "table2_bridge_read",
-        "evidence_required",
-        "no_input_boundary",
-        "read",
-    ]
+    fieldnames = check.ROW_SUMMARY_FIELDNAMES
     action_counts = [4, 3, 3] + [2] * 10 + [1] * 6 + [4, 2, 1]
     residual_counts = action_counts.copy()
     residual_counts[13] = 2

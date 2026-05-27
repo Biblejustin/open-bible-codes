@@ -118,7 +118,9 @@ The prospective lane-status doc is now JSON-guarded against tracked lane ids,
 statuses, term/protocol/report paths, and status-count drift.
 The source-row review bundle, source-transcription evidence packet,
 source-transcription row-review checklist, and remaining-lane review checklist
-are now CSV-guarded as well. The source-policy review checklist is also
+are now CSV-guarded as well, and the source-transcription evidence packet
+rows, row summaries, CSV schemas, and manifest input/output metadata are now
+CSV/manifest-guarded. The source-policy review checklist is also
 CSV-guarded, and the source-policy evidence packet/context/summary rows,
 CSV schemas, and manifest input/output metadata are CSV/manifest-guarded. The
 manual decision register/summary/manifest, manual decision-record worksheet,
@@ -1136,6 +1138,11 @@ rows, 337 OCR words, 78
 low-confidence OCR words, review-state locks, allowed no-input action, term
 counts, crop path scope, no-input boundary, and manifest inputs/outputs before
 real-report preflight can pass.
+The source-transcription evidence checker now validates packet and row-summary
+CSV fieldnames, rank sequences, 43 action terms, 44 residual links, 35
+frontier links, 22 row clusters, row-OCR nonmatches, zero variant leads,
+evidence/no-input boundaries, and manifest inputs/outputs before real-report
+preflight can pass.
 `scripts/check_wrr_public_handoff_docs.py` now guards the README, report-run
 doc, final report files, consolidated findings, outline, and remaining-work
 register against stale WRR blocker wording. It is wired into report preflight
@@ -1426,6 +1433,9 @@ dirty-tree fast validation above it:
 - `python3 -m scripts.check_wrr_source_row_review_bundle_doc` passed with CSV
   fieldname, summary, review-state, OCR/crop, boundary, and manifest
   input/output locks.
+- `python3 -m scripts.check_wrr_source_transcription_evidence_packet_doc`
+  passed with packet/row-summary CSV fieldname, rank, row-OCR, zero-variant,
+  boundary, and manifest input/output locks.
 - Cities public handoff docs checker passed and is wired into real-report
   preflight.
 - Focused Cities decision-record/preflight pytest passed:
@@ -1467,6 +1477,8 @@ dirty-tree fast validation above it:
   lock update: 1914 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the source-row review-bundle checker
   manifest lock update: 1915 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the source-transcription evidence packet
+  checker manifest lock update: 1916 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.
