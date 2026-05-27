@@ -80,8 +80,8 @@ corrected-distance, aggregate, and permutation-summary drift.
 The WRR direct all-lane diagnostic doc is now CSV-guarded against
 cap-250/cap-1000 corrected-distance, aggregate, program-formula, and D(w)
 sensitivity drift.
-The WRR D(w) formula sensitivity doc is now CSV-guarded against sensitivity
-summary and changed-pair drift.
+The WRR D(w) formula sensitivity doc is now CSV/manifest-guarded against
+sensitivity summary, changed-pair, manifest input/output, and count drift.
 The WRR source-policy scenario doc is now CSV/manifest-guarded against
 scenario, term-impact, scenario-pair, manifest input/output, and count drift.
 The WRR source-review queue doc is now CSV/manifest-guarded against queue row,
@@ -1518,6 +1518,8 @@ dirty-tree fast validation above it:
   lock update: 1928 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the manual decision-record worksheet
   checker manifest lock update: 1929 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the D(w) formula-sensitivity checker
+  manifest lock update: 1930 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.

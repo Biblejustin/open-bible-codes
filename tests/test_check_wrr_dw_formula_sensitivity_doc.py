@@ -1,4 +1,5 @@
 import csv
+import json
 from pathlib import Path
 
 from scripts import check_wrr_dw_formula_sensitivity_doc as check
@@ -30,6 +31,7 @@ def test_validate_dw_formula_sensitivity_accepts_matching_csvs(tmp_path: Path) -
         doc,
         sensitivity=_sensitivity_csv(tmp_path),
         changed_pairs=_changed_pairs_csv(tmp_path),
+        manifest=None,
     )
 
     assert failures == []
@@ -42,6 +44,7 @@ def test_validate_dw_formula_sensitivity_rejects_summary_drift(tmp_path: Path) -
         doc,
         sensitivity=_sensitivity_csv(tmp_path, bad_scope="all_lanes_cap1000"),
         changed_pairs=_changed_pairs_csv(tmp_path),
+        manifest=None,
     )
 
     assert any("all_lanes_cap1000 changed_pairs" in failure for failure in failures)
@@ -54,9 +57,50 @@ def test_validate_dw_formula_sensitivity_rejects_changed_pairs(tmp_path: Path) -
         doc,
         sensitivity=_sensitivity_csv(tmp_path),
         changed_pairs=_changed_pairs_csv(tmp_path, add_row=True),
+        manifest=None,
     )
 
     assert any("expected 0 changed pairs" in failure for failure in failures)
+
+
+def test_validate_dw_formula_sensitivity_rejects_manifest_drift(tmp_path: Path) -> None:
+    doc = _doc(tmp_path)
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(
+        json.dumps(
+            {
+                "tool": "analyze_wrr_dw_formula_sensitivity.py",
+                "changed_pairs": 1,
+                "summary_rows": 3,
+                "inputs": {
+                    "direct_printed": "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.csv",
+                    "direct_printed_summary": "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged_summary.csv",
+                    "direct_program": "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged.csv",
+                    "direct_program_summary": "reports/wrr_1994/direct_all/highcap_1000_program/wrr2_corrected_distance_all_lanes_merged_summary.csv",
+                    "skip_summary": "reports/wrr_1994/wrr2_skip_caps_summary.csv",
+                    "variants": "reports/wrr_1994/wrr2_corrected_distance_variant_comparison.csv",
+                },
+                "outputs": {
+                    "changed_out": "reports/wrr_1994/wrr_dw_formula_changed_pairs.csv",
+                    "manifest_out": "reports/wrr_1994/wrr_dw_formula_sensitivity.manifest.json",
+                    "markdown_out": "docs/WRR_DW_FORMULA_SENSITIVITY.md",
+                    "out": "reports/wrr_1994/wrr_dw_formula_sensitivity.csv",
+                },
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_dw_formula_sensitivity_doc(
+        doc,
+        sensitivity=_sensitivity_csv(tmp_path),
+        changed_pairs=_changed_pairs_csv(tmp_path),
+        manifest=manifest,
+    )
+
+    assert any("changed_pairs drifted" in failure for failure in failures)
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
@@ -76,26 +120,7 @@ def _doc(tmp_path: Path) -> Path:
 
 def _sensitivity_csv(tmp_path: Path, *, bad_scope: str | None = None) -> Path:
     path = tmp_path / "sensitivity.csv"
-    fieldnames = [
-        "scope",
-        "row_count",
-        "printed_formula",
-        "program_formula",
-        "printed_defined_corrected_distances",
-        "program_defined_corrected_distances",
-        "fixed_250_defined_corrected_distances",
-        "printed_ordinary_not_valid_pairs",
-        "program_ordinary_not_valid_pairs",
-        "printed_under_minimum_valid_pairs",
-        "program_under_minimum_valid_pairs",
-        "changed_pairs",
-        "program_cap_lt_printed",
-        "program_cap_eq_printed",
-        "program_cap_gt_printed",
-        "target_unreached_rows",
-        "program_target_unreached_rows",
-        "diagnostic_read",
-    ]
+    fieldnames = check.SUMMARY_FIELDNAMES
     with path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()

@@ -5,13 +5,20 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from pathlib import Path
+from typing import Any
 
+from scripts import analyze_wrr_dw_formula_sensitivity as analyzer
 
-DEFAULT_DOC = Path("docs/WRR_DW_FORMULA_SENSITIVITY.md")
-DEFAULT_SENSITIVITY = Path("reports/wrr_1994/wrr_dw_formula_sensitivity.csv")
-DEFAULT_CHANGED_PAIRS = Path("reports/wrr_1994/wrr_dw_formula_changed_pairs.csv")
+DEFAULT_DOC = analyzer.DEFAULT_MD
+DEFAULT_SENSITIVITY = analyzer.DEFAULT_OUT
+DEFAULT_CHANGED_PAIRS = analyzer.DEFAULT_CHANGED_OUT
+DEFAULT_MANIFEST = analyzer.DEFAULT_MANIFEST
+
+SUMMARY_FIELDNAMES = analyzer.SUMMARY_FIELDNAMES
+CHANGED_PAIR_FIELDNAMES = analyzer.CHANGED_FIELDNAMES
 
 EXPECTED_SCOPE_ROWS = {
     "skip_cap_profile": {
@@ -49,18 +56,6 @@ EXPECTED_SCOPE_ROWS = {
         "changed_pairs": "0",
     },
 }
-CHANGED_PAIR_FIELDNAMES = [
-    "pair_id",
-    "concept",
-    "printed_corrected_distance_status",
-    "program_corrected_distance_status",
-    "printed_corrected_distance",
-    "program_corrected_distance",
-    "printed_pair_valid_perturbations",
-    "program_pair_valid_perturbations",
-    "changed_fields",
-]
-
 REQUIRED_PHRASES = (
     "# WRR D(w) Formula Sensitivity",
     "Status: sensitivity packet for the selected printed `D(w)` main rule.",
@@ -83,6 +78,7 @@ def main(argv: list[str] | None = None) -> int:
         args.doc,
         args.sensitivity,
         args.changed_pairs,
+        args.manifest,
     )
     if failures:
         for failure in failures:
@@ -97,6 +93,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--doc", type=Path, default=DEFAULT_DOC)
     parser.add_argument("--sensitivity", type=Path, default=DEFAULT_SENSITIVITY)
     parser.add_argument("--changed-pairs", type=Path, default=DEFAULT_CHANGED_PAIRS)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
 
@@ -104,6 +101,7 @@ def validate_dw_formula_sensitivity_doc(
     doc: Path,
     sensitivity: Path | None = DEFAULT_SENSITIVITY,
     changed_pairs: Path | None = DEFAULT_CHANGED_PAIRS,
+    manifest: Path | None = DEFAULT_MANIFEST,
 ) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
@@ -118,6 +116,8 @@ def validate_dw_formula_sensitivity_doc(
         failures.extend(validate_sensitivity_csv(sensitivity))
     if changed_pairs is not None:
         failures.extend(validate_changed_pairs_csv(changed_pairs))
+    if manifest is not None:
+        failures.extend(validate_manifest(manifest))
     return failures
 
 
@@ -125,8 +125,10 @@ def validate_sensitivity_csv(path: Path) -> list[str]:
     data = _read_csv(path)
     if isinstance(data, str):
         return [data]
-    _, rows = data
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != SUMMARY_FIELDNAMES:
+        failures.append(f"{path} fieldnames drifted")
     by_scope = {row.get("scope", ""): row for row in rows}
     if set(by_scope) != set(EXPECTED_SCOPE_ROWS):
         failures.append(f"{path} scope set drifted")
@@ -155,12 +157,48 @@ def validate_changed_pairs_csv(path: Path) -> list[str]:
     return failures
 
 
+def validate_manifest(manifest: Path) -> list[str]:
+    data = _read_json(manifest)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "analyze_wrr_dw_formula_sensitivity.py",
+        "summary_rows": len(EXPECTED_SCOPE_ROWS),
+        "changed_pairs": 0,
+        "inputs": {
+            "skip_summary": str(analyzer.DEFAULT_SKIP_SUMMARY),
+            "variants": str(analyzer.DEFAULT_VARIANTS),
+            "direct_printed_summary": str(analyzer.DEFAULT_DIRECT_PRINTED_SUMMARY),
+            "direct_program_summary": str(analyzer.DEFAULT_DIRECT_PROGRAM_SUMMARY),
+            "direct_printed": str(analyzer.DEFAULT_DIRECT_PRINTED),
+            "direct_program": str(analyzer.DEFAULT_DIRECT_PROGRAM),
+        },
+        "outputs": {
+            "out": str(DEFAULT_SENSITIVITY),
+            "changed_out": str(DEFAULT_CHANGED_PAIRS),
+            "markdown_out": str(DEFAULT_DOC),
+            "manifest_out": str(DEFAULT_MANIFEST),
+        },
+    }
+    failures: list[str] = []
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{manifest} {key} drifted")
+    return failures
+
+
 def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
     if not path.exists():
         return f"{path} is missing"
     with path.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
         return reader.fieldnames or [], list(reader)
+
+
+def _read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def normalize_space(text: str) -> str:
