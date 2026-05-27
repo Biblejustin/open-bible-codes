@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from scripts import build_public_reader_package as package
+from scripts import check_project_findings_overview_doc as overview_check
 
 
 def _write(path: Path, text: str) -> None:
@@ -11,10 +12,31 @@ def _write(path: Path, text: str) -> None:
     path.write_text(text, encoding="utf-8")
 
 
+def _default_doc_text(path: Path) -> str:
+    if path == overview_check.DEFAULT_DOC:
+        lines = ["# Open Bible Codes Findings Overview", ""]
+        lines.extend(overview_check.REQUIRED_HEADINGS)
+        lines.extend(overview_check.REQUIRED_PHRASES)
+        lines.extend(f"`{reference}`" for reference in overview_check.REQUIRED_REFERENCES)
+        return "\n\n".join(lines) + "\n"
+    if path == overview_check.DEFAULT_README:
+        return (
+            "# README\n\n"
+            "whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`\n"
+        )
+    if path == overview_check.DEFAULT_START_HERE:
+        return (
+            "# Start Here\n\n"
+            "1. `docs/PROJECT_FINDINGS_OVERVIEW.md` for the whole-project findings summary.\n\n"
+            "no current row should be presented as a public claim\n"
+        )
+    return f"# {path.name}\n\nbody\n"
+
+
 def test_builds_reader_package_from_whitelisted_docs(tmp_path, monkeypatch) -> None:
     monkeypatch.chdir(tmp_path)
     for path in package.DEFAULT_DOC_PATHS:
-        _write(path, f"# {path.name}\n\nbody\n")
+        _write(path, _default_doc_text(path))
     for path in package.DEFAULT_REPORT_PATHS:
         _write(path, "# report\n\nbody\n" if path.suffix == ".md" else "{}\n")
 
@@ -38,6 +60,19 @@ def test_builds_reader_package_from_whitelisted_docs(tmp_path, monkeypatch) -> N
     ).read_text(encoding="utf-8")
     assert "Source: `docs/START_HERE.md`" in reader_package
     assert "Source: `docs/PROJECT_FINDINGS_OVERVIEW.md`" in reader_package
+
+
+def test_refuses_stale_project_findings_overview(tmp_path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    for path in package.DEFAULT_DOC_PATHS:
+        _write(path, _default_doc_text(path))
+    _write(overview_check.DEFAULT_DOC, "# Broken Overview\n\nbody\n")
+
+    with pytest.raises(ValueError) as excinfo:
+        package.build_public_reader_package(out_dir=Path("reports/public_reader_package"))
+
+    assert "reader package input validation failed" in str(excinfo.value)
+    assert "missing heading: ## Short Answer" in str(excinfo.value)
 
 
 def test_refuses_raw_source_paths(tmp_path, monkeypatch) -> None:

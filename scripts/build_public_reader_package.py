@@ -12,6 +12,8 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 
+from scripts import check_project_findings_overview_doc
+
 
 DEFAULT_OUT_DIR = Path("reports/public_reader_package")
 DEFAULT_DOC_PATHS = (
@@ -90,6 +92,7 @@ def build_public_reader_package(
     out_dir.mkdir(parents=True, exist_ok=True)
 
     doc_paths = [*DEFAULT_DOC_PATHS, *(extra_docs or [])]
+    validate_reader_package_inputs(doc_paths)
     report_paths = [path for path in DEFAULT_REPORT_PATHS if path.exists()]
     copied: list[CopiedFile] = []
     for source in doc_paths:
@@ -101,6 +104,22 @@ def build_public_reader_package(
     write_reader_package(out_dir, doc_paths, report_paths)
     write_manifest(out_dir, copied)
     return copied
+
+
+def validate_reader_package_inputs(doc_paths: list[Path]) -> None:
+    doc_set = set(doc_paths)
+    overview_inputs = {
+        check_project_findings_overview_doc.DEFAULT_DOC,
+        check_project_findings_overview_doc.DEFAULT_README,
+        check_project_findings_overview_doc.DEFAULT_START_HERE,
+    }
+    if not overview_inputs.issubset(doc_set):
+        return
+    failures = check_project_findings_overview_doc.validate_project_findings_overview()
+    if failures:
+        raise ValueError(
+            "reader package input validation failed: " + "; ".join(failures)
+        )
 
 
 def copy_checked_file(source: Path, destination: Path) -> CopiedFile:

@@ -92,6 +92,9 @@ For an ignored public reader package after report assembly:
 make public-reader-package
 ```
 
+This validates the general-reader findings overview and reader-path links before
+copying the whitelisted docs.
+
 ## What Remains
 
 Current result-producing prospective lanes are closed, negative, or

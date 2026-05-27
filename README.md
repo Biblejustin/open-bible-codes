@@ -105,7 +105,8 @@ make public-reader-package
 This writes `reports/public_reader_package/README.md`,
 `reports/public_reader_package/reader_package.md`, and
 `reports/public_reader_package/package_manifest.json` from whitelisted docs and
-the formal report summary. It does not include raw Bible source files.
+the formal report summary. It validates the general-reader findings overview and
+reader-path links before packaging. It does not include raw Bible source files.
 
 Optional local data doc check, after bootstrapping ignored source caches:
 
