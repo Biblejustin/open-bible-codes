@@ -24,6 +24,7 @@ class WrrRemainingLaneReviewChecklistDocTests(unittest.TestCase):
                 check.validate_remaining_lane_review_checklist_doc(
                     path,
                     checklist=None,
+                    manifest=None,
                 ),
                 [],
             )
@@ -65,6 +66,7 @@ class WrrRemainingLaneReviewChecklistDocTests(unittest.TestCase):
                 check.validate_remaining_lane_review_checklist_doc(
                     doc,
                     checklist=_checklist_csv(root),
+                    manifest=None,
                 ),
                 [],
             )
@@ -77,6 +79,7 @@ class WrrRemainingLaneReviewChecklistDocTests(unittest.TestCase):
             failures = check.validate_remaining_lane_review_checklist_doc(
                 doc,
                 checklist=_checklist_csv(root, drop_last=True),
+                manifest=None,
             )
 
             self.assertTrue(any("has 13 rows" in failure for failure in failures))
@@ -89,9 +92,45 @@ class WrrRemainingLaneReviewChecklistDocTests(unittest.TestCase):
             failures = check.validate_remaining_lane_review_checklist_doc(
                 doc,
                 checklist=_checklist_csv(root, bad_state_rank=1),
+                manifest=None,
             )
 
             self.assertTrue(any("review_state" in failure for failure in failures))
+
+    def test_validate_doc_rejects_manifest_count_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            doc = _required_doc(root)
+            manifest = root / "manifest.json"
+            manifest.write_text(
+                """
+{
+  "frontier_pairs": 4,
+  "inputs": {
+    "packet": "reports/wrr_1994/wrr_remaining_lane_evidence_packet.csv",
+    "summary": "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv"
+  },
+  "outputs": {
+    "manifest_out": "reports/wrr_1994/wrr_remaining_lane_review_checklist.manifest.json",
+    "markdown_out": "docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md",
+    "out": "reports/wrr_1994/wrr_remaining_lane_review_checklist.csv"
+  },
+  "residual_pairs": 13,
+  "rows": 14,
+  "summary_rows": 2,
+  "tool": "build_wrr_remaining_lane_review_checklist"
+}
+""".lstrip(),
+                encoding="utf-8",
+            )
+
+            failures = check.validate_remaining_lane_review_checklist_doc(
+                doc,
+                checklist=_checklist_csv(root),
+                manifest=manifest,
+            )
+
+            self.assertTrue(any("residual_pairs drifted" in failure for failure in failures))
 
 
 def _required_doc(root: Path) -> Path:
@@ -107,26 +146,7 @@ def _checklist_csv(
     bad_state_rank: int | None = None,
 ) -> Path:
     path = root / "checklist.csv"
-    fieldnames = [
-        "run_label",
-        "checklist_rank",
-        "action_lane",
-        "review_state",
-        "term_id",
-        "term",
-        "concept",
-        "row_number",
-        "residual_pairs",
-        "frontier_pairs",
-        "row_ocr_status",
-        "near_match",
-        "visual_review_note",
-        "evidence_required",
-        "required_decision_record",
-        "no_input_boundary",
-        "allowed_without_input",
-        "next_manual_action",
-    ]
+    fieldnames = check.FIELDNAMES
     rows = [
         _checklist_row(
             index,

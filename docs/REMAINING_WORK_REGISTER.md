@@ -1062,7 +1062,8 @@ pair-universe evidence is locked.
 `docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md` keeps those 14 remaining-lane
 terms in page-image and method/pair-universe review lanes, preserving required
 decision-record fields without selecting source edits, method changes, or pair
-exclusions.
+exclusions. Its checker now also locks CSV fieldnames plus manifest counts,
+inputs, and outputs.
 `docs/WRR_MANUAL_DECISION_REGISTER.md` consolidates all 37 manual-decision
 inventory rows: 1 source-policy/pair-rule row, 22 source-transcription row
 clusters, 3 page-image near-match rows, and 11 method/pair-universe rows. It
@@ -1484,6 +1485,8 @@ dirty-tree fast validation above it:
 - `make fast-validate` passed after the source-transcription row-review
   checklist checker manifest lock update: 1917 tests, 2 skipped, and 29196
   subtests.
+- `make fast-validate` passed after the remaining-lane review checklist
+  checker manifest lock update: 1918 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.
