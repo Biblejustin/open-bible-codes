@@ -5,15 +5,23 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from collections import Counter
 from pathlib import Path
+from typing import Any
 
+from scripts import analyze_wrr_source_policy_scenarios as analyzer
 
-DEFAULT_DOC = Path("docs/WRR_SOURCE_POLICY_SCENARIOS.md")
-DEFAULT_SCENARIOS = Path("reports/wrr_1994/wrr_source_policy_scenarios.csv")
-DEFAULT_TERM_IMPACTS = Path("reports/wrr_1994/wrr_source_policy_term_impacts.csv")
-DEFAULT_SCENARIO_PAIRS = Path("reports/wrr_1994/wrr_source_policy_scenario_pairs.csv")
+DEFAULT_DOC = analyzer.DEFAULT_MD
+DEFAULT_SCENARIOS = analyzer.DEFAULT_OUT
+DEFAULT_TERM_IMPACTS = analyzer.DEFAULT_TERM_IMPACT_OUT
+DEFAULT_SCENARIO_PAIRS = analyzer.DEFAULT_PAIR_OUT
+DEFAULT_MANIFEST = analyzer.DEFAULT_MANIFEST
+
+SCENARIO_FIELDNAMES = analyzer.SUMMARY_FIELDNAMES
+TERM_IMPACT_FIELDNAMES = analyzer.TERM_IMPACT_FIELDNAMES
+SCENARIO_PAIR_FIELDNAMES = analyzer.PAIR_FIELDNAMES
 
 EXPECTED_SCENARIOS = {
     "keep_all_working_source": {
@@ -117,6 +125,7 @@ def main(argv: list[str] | None = None) -> int:
         args.scenarios,
         args.term_impacts,
         args.scenario_pairs,
+        args.manifest,
     )
     if failures:
         for failure in failures:
@@ -132,6 +141,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--scenarios", type=Path, default=DEFAULT_SCENARIOS)
     parser.add_argument("--term-impacts", type=Path, default=DEFAULT_TERM_IMPACTS)
     parser.add_argument("--scenario-pairs", type=Path, default=DEFAULT_SCENARIO_PAIRS)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
 
@@ -140,6 +150,7 @@ def validate_source_policy_scenarios_doc(
     scenarios: Path | None = DEFAULT_SCENARIOS,
     term_impacts: Path | None = DEFAULT_TERM_IMPACTS,
     scenario_pairs: Path | None = DEFAULT_SCENARIO_PAIRS,
+    manifest: Path | None = DEFAULT_MANIFEST,
 ) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
@@ -156,14 +167,19 @@ def validate_source_policy_scenarios_doc(
         failures.extend(validate_term_impacts_csv(term_impacts))
     if scenario_pairs is not None:
         failures.extend(validate_scenario_pairs_csv(scenario_pairs))
+    if manifest is not None:
+        failures.extend(validate_manifest(manifest))
     return failures
 
 
 def validate_scenarios_csv(path: Path) -> list[str]:
-    rows = _read_csv(path)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(path)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != SCENARIO_FIELDNAMES:
+        failures.append(f"{path} fieldnames drifted")
     by_scenario = {row.get("scenario", ""): row for row in rows}
     if set(by_scenario) != set(EXPECTED_SCENARIOS):
         failures.append(f"{path} scenario set drifted")
@@ -182,10 +198,13 @@ def validate_scenarios_csv(path: Path) -> list[str]:
 
 
 def validate_term_impacts_csv(path: Path) -> list[str]:
-    rows = _read_csv(path)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(path)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != TERM_IMPACT_FIELDNAMES:
+        failures.append(f"{path} fieldnames drifted")
     by_term = {row.get("term_id", ""): row for row in rows}
     if set(by_term) != set(EXPECTED_TERM_IMPACTS):
         failures.append(f"{path} term set drifted")
@@ -211,10 +230,13 @@ def validate_term_impacts_csv(path: Path) -> list[str]:
 
 
 def validate_scenario_pairs_csv(path: Path) -> list[str]:
-    rows = _read_csv(path)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(path)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != SCENARIO_PAIR_FIELDNAMES:
+        failures.append(f"{path} fieldnames drifted")
     counter = Counter(
         (row.get("scenario", ""), row.get("scenario_action", "")) for row in rows
     )
@@ -233,11 +255,48 @@ def validate_scenario_pairs_csv(path: Path) -> list[str]:
     return failures
 
 
-def _read_csv(path: Path) -> list[dict[str, str]] | str:
+def validate_manifest(manifest: Path) -> list[str]:
+    data = _read_json(manifest)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "analyze_wrr_source_policy_scenarios.py",
+        "inputs": {
+            "pair_table": str(analyzer.DEFAULT_PAIR_TABLE),
+            "source_queue": str(analyzer.DEFAULT_SOURCE_QUEUE),
+        },
+        "expected_published_pairs": 163,
+        "scenarios": list(EXPECTED_SCENARIOS),
+        "flagged_terms": len(EXPECTED_TERM_IMPACTS),
+        "impact_rows": sum(EXPECTED_SCENARIO_PAIR_COUNTS.values()),
+        "term_impact_rows": len(EXPECTED_TERM_IMPACTS),
+        "outputs": {
+            "csv": str(DEFAULT_SCENARIOS),
+            "pair_csv": str(DEFAULT_SCENARIO_PAIRS),
+            "term_impact_csv": str(DEFAULT_TERM_IMPACTS),
+            "markdown": str(DEFAULT_DOC),
+            "manifest": str(DEFAULT_MANIFEST),
+        },
+    }
+    failures: list[str] = []
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{manifest} {key} drifted")
+    return failures
+
+
+def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
     if not path.exists():
         return f"{path} is missing"
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def _read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def normalize_space(text: str) -> str:

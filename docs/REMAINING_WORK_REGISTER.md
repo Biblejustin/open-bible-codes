@@ -82,8 +82,8 @@ cap-250/cap-1000 corrected-distance, aggregate, program-formula, and D(w)
 sensitivity drift.
 The WRR D(w) formula sensitivity doc is now CSV-guarded against sensitivity
 summary and changed-pair drift.
-The WRR source-policy scenario doc is now CSV-guarded against scenario,
-term-impact, and scenario-pair drift.
+The WRR source-policy scenario doc is now CSV/manifest-guarded against
+scenario, term-impact, scenario-pair, manifest input/output, and count drift.
 The WRR source-review queue doc is now CSV-guarded against queue row,
 summary-bucket, source-flag, and visual-triage drift.
 The WRR source-recovery probe doc is now CSV/manifest-guarded against
@@ -1400,7 +1400,8 @@ dirty-tree fast validation above it:
 - `python3 -m scripts.check_wrr_source_review_queue_doc` passed with
   CSV-backed queue, summary-bucket, source-flag, and visual-triage locks.
 - `python3 -m scripts.check_wrr_source_policy_scenarios_doc` passed with
-  CSV-backed scenario, term-impact, and scenario-pair locks.
+  CSV-backed scenario, term-impact, and scenario-pair locks plus manifest
+  input/output and count locks.
 - `python3 -m scripts.check_wrr_dw_formula_sensitivity_doc` passed with
   CSV-backed sensitivity summary and changed-pair locks.
 - `python3 -m scripts.check_wrr_direct_all_lanes_doc` passed with CSV-backed
@@ -1490,6 +1491,8 @@ dirty-tree fast validation above it:
   checker manifest lock update: 1918 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the source-policy review checklist checker
   manifest lock update: 1919 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the source-policy scenarios checker
+  manifest lock update: 1920 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.

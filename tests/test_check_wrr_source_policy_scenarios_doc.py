@@ -36,6 +36,7 @@ def test_validate_source_policy_scenarios_accepts_matching_csvs(tmp_path: Path) 
         scenarios=_scenarios_csv(tmp_path),
         term_impacts=_term_impacts_csv(tmp_path),
         scenario_pairs=_scenario_pairs_csv(tmp_path),
+        manifest=None,
     )
 
     assert failures == []
@@ -49,6 +50,7 @@ def test_validate_source_policy_scenarios_rejects_scenario_drift(tmp_path: Path)
         scenarios=_scenarios_csv(tmp_path, bad_scenario="exclude_all_source_review_flags"),
         term_impacts=_term_impacts_csv(tmp_path),
         scenario_pairs=_scenario_pairs_csv(tmp_path),
+        manifest=None,
     )
 
     assert any("exclude_all_source_review_flags excluded_pairs" in failure for failure in failures)
@@ -62,6 +64,7 @@ def test_validate_source_policy_scenarios_rejects_term_drift(tmp_path: Path) -> 
         scenarios=_scenarios_csv(tmp_path),
         term_impacts=_term_impacts_csv(tmp_path, bad_term="wrr2_27_app_02"),
         scenario_pairs=_scenario_pairs_csv(tmp_path),
+        manifest=None,
     )
 
     assert any("wrr2_27_app_02 affected_pairs" in failure for failure in failures)
@@ -75,9 +78,55 @@ def test_validate_source_policy_scenarios_rejects_pair_drift(tmp_path: Path) -> 
         scenarios=_scenarios_csv(tmp_path),
         term_impacts=_term_impacts_csv(tmp_path),
         scenario_pairs=_scenario_pairs_csv(tmp_path, drop_last=True),
+        manifest=None,
     )
 
     assert any("scenario/action counts drifted" in failure for failure in failures)
+
+
+def test_validate_source_policy_scenarios_rejects_manifest_drift(tmp_path: Path) -> None:
+    doc = _doc(tmp_path)
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(
+        """
+{
+  "expected_published_pairs": 162,
+  "flagged_terms": 7,
+  "impact_rows": 22,
+  "inputs": {
+    "pair_table": "reports/wrr_1994/wrr2_pair_eligibility_table.csv",
+    "source_queue": "reports/wrr_1994/wrr_source_review_queue.csv"
+  },
+  "outputs": {
+    "csv": "reports/wrr_1994/wrr_source_policy_scenarios.csv",
+    "manifest": "reports/wrr_1994/wrr_source_policy_scenarios.manifest.json",
+    "markdown": "docs/WRR_SOURCE_POLICY_SCENARIOS.md",
+    "pair_csv": "reports/wrr_1994/wrr_source_policy_scenario_pairs.csv",
+    "term_impact_csv": "reports/wrr_1994/wrr_source_policy_term_impacts.csv"
+  },
+  "scenarios": [
+    "keep_all_working_source",
+    "exclude_wnp_zacut_only",
+    "exclude_book_title_only",
+    "review_chelm_spelling_only",
+    "exclude_all_source_review_flags"
+  ],
+  "term_impact_rows": 7,
+  "tool": "analyze_wrr_source_policy_scenarios.py"
+}
+""".lstrip(),
+        encoding="utf-8",
+    )
+
+    failures = check.validate_source_policy_scenarios_doc(
+        doc,
+        scenarios=_scenarios_csv(tmp_path),
+        term_impacts=_term_impacts_csv(tmp_path),
+        scenario_pairs=_scenario_pairs_csv(tmp_path),
+        manifest=manifest,
+    )
+
+    assert any("expected_published_pairs drifted" in failure for failure in failures)
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
@@ -97,21 +146,7 @@ def _doc(tmp_path: Path) -> Path:
 
 def _scenarios_csv(tmp_path: Path, *, bad_scenario: str | None = None) -> Path:
     path = tmp_path / "scenarios.csv"
-    fieldnames = [
-        "scenario",
-        "policy_type",
-        "source_policy_selected",
-        "excluded_terms",
-        "excluded_pairs",
-        "review_only_terms",
-        "review_only_pairs",
-        "remaining_pairs",
-        "remaining_appellation_min_length_pairs",
-        "remaining_length_filtered_pairs",
-        "gap_to_source_cited_163_after_appellation_min_length",
-        "gap_to_source_cited_163_after_length_filtered",
-        "diagnostic_read",
-    ]
+    fieldnames = check.SCENARIO_FIELDNAMES
     rows = []
     for scenario, expected in check.EXPECTED_SCENARIOS.items():
         row = {field: "" for field in fieldnames}
@@ -127,16 +162,7 @@ def _scenarios_csv(tmp_path: Path, *, bad_scenario: str | None = None) -> Path:
 
 def _term_impacts_csv(tmp_path: Path, *, bad_term: str | None = None) -> Path:
     path = tmp_path / "term_impacts.csv"
-    fieldnames = [
-        "term_id",
-        "term",
-        "term_side",
-        "flags",
-        "affected_pairs",
-        "remaining_appellation_min_length_pairs_if_excluded",
-        "gap_to_source_cited_163_after_appellation_min_length_if_excluded",
-        "closes_appellation_min_length_gap_to_163",
-    ]
+    fieldnames = check.TERM_IMPACT_FIELDNAMES
     rows = []
     for term_id, expected in check.EXPECTED_TERM_IMPACTS.items():
         term, flags, affected, remaining, gap, closes = expected
@@ -157,14 +183,7 @@ def _term_impacts_csv(tmp_path: Path, *, bad_term: str | None = None) -> Path:
 
 def _scenario_pairs_csv(tmp_path: Path, *, drop_last: bool = False) -> Path:
     path = tmp_path / "scenario_pairs.csv"
-    fieldnames = [
-        "scenario",
-        "scenario_action",
-        "pair_id",
-        "source_review_flags",
-        "flagged_term_ids",
-        "pair_review_status",
-    ]
+    fieldnames = check.SCENARIO_PAIR_FIELDNAMES
     rows = []
     for (scenario, action), count in check.EXPECTED_SCENARIO_PAIR_COUNTS.items():
         for index in range(count):
