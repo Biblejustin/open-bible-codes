@@ -5,13 +5,21 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from pathlib import Path
+from typing import Any
+
+from scripts import build_wrr_residual_term_reconciliation_queue as builder
 
 
-DEFAULT_DOC = Path("docs/WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md")
-DEFAULT_QUEUE = Path("reports/wrr_1994/wrr_residual_term_reconciliation_queue.csv")
-DEFAULT_SUMMARY = Path("reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv")
+DEFAULT_DOC = builder.DEFAULT_MD
+DEFAULT_QUEUE = builder.DEFAULT_OUT
+DEFAULT_SUMMARY = builder.DEFAULT_SUMMARY_OUT
+DEFAULT_MANIFEST = builder.DEFAULT_MANIFEST
+
+QUEUE_FIELDNAMES = builder.TERM_FIELDNAMES
+SUMMARY_FIELDNAMES = builder.SUMMARY_FIELDNAMES
 
 EXPECTED_TOTALS = {"terms": 58, "residual_pairs": 59, "frontier_pairs": 40}
 EXPECTED_SUMMARY = {
@@ -88,6 +96,7 @@ def main(argv: list[str] | None = None) -> int:
         args.doc,
         args.queue,
         args.summary,
+        args.manifest,
     )
     if failures:
         for failure in failures:
@@ -105,6 +114,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--doc", type=Path, default=DEFAULT_DOC)
     parser.add_argument("--queue", type=Path, default=DEFAULT_QUEUE)
     parser.add_argument("--summary", type=Path, default=DEFAULT_SUMMARY)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
 
@@ -112,6 +122,7 @@ def validate_residual_term_reconciliation_queue_doc(
     doc: Path,
     queue: Path | None = DEFAULT_QUEUE,
     summary: Path | None = DEFAULT_SUMMARY,
+    manifest: Path | None = DEFAULT_MANIFEST,
 ) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
@@ -125,14 +136,19 @@ def validate_residual_term_reconciliation_queue_doc(
         failures.extend(validate_queue_csv(queue))
     if summary is not None:
         failures.extend(validate_summary_csv(summary))
+    if manifest is not None:
+        failures.extend(validate_manifest(manifest))
     return failures
 
 
 def validate_queue_csv(queue: Path) -> list[str]:
-    rows = _read_csv(queue)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(queue)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != QUEUE_FIELDNAMES:
+        failures.append(f"{queue} fieldnames drifted")
     expected_rows = EXPECTED_TOTALS["terms"]
     if len(rows) != expected_rows:
         failures.append(f"{queue} has {len(rows)} rows; expected {expected_rows}")
@@ -190,10 +206,13 @@ def _validate_need_rows(
 
 
 def validate_summary_csv(summary: Path) -> list[str]:
-    rows = _read_csv(summary)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(summary)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != SUMMARY_FIELDNAMES:
+        failures.append(f"{summary} fieldnames drifted")
     if len(rows) != len(EXPECTED_SUMMARY):
         failures.append(
             f"{summary} has {len(rows)} rows; expected {len(EXPECTED_SUMMARY)}"
@@ -217,11 +236,44 @@ def validate_summary_csv(summary: Path) -> list[str]:
     return failures
 
 
-def _read_csv(path: Path) -> list[dict[str, str]] | str:
+def validate_manifest(manifest: Path) -> list[str]:
+    data = _read_json(manifest)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "build_wrr_residual_term_reconciliation_queue",
+        "term_rows": EXPECTED_TOTALS["terms"],
+        "summary_rows": len(EXPECTED_SUMMARY),
+        "inputs": {
+            "residual_packet": str(builder.DEFAULT_RESIDUAL_PACKET),
+            "source_queue": str(builder.DEFAULT_SOURCE_QUEUE),
+        },
+        "outputs": {
+            "out": str(DEFAULT_QUEUE),
+            "summary_out": str(DEFAULT_SUMMARY),
+            "markdown_out": str(DEFAULT_DOC),
+            "manifest_out": str(DEFAULT_MANIFEST),
+        },
+    }
+    failures: list[str] = []
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{manifest} {key} drifted")
+    return failures
+
+
+def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
     if not path.exists():
         return f"{path} is missing"
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def _read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def _int(row: dict[str, str], key: str) -> int:

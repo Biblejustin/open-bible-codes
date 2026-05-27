@@ -128,7 +128,8 @@ WRR claim blocker packet readiness, source-queue, residual-summary,
 remaining-lane inputs, and manifest row-count/input/output metadata are
 CSV/manifest-guarded as well.
 WRR method status is CSV-guarded as well.
-WRR residual term reconciliation queue and summary are CSV-guarded as well.
+WRR residual term reconciliation queue rows, summary rows, CSV schemas, and
+manifest input/output metadata are CSV/manifest-guarded as well.
 WRR residual reconciliation action plan rows, summary rows, CSV schemas, and
 manifest input/output metadata are CSV/manifest-guarded as well.
 WRR method/pair-universe evidence packet rows, summary metrics, CSV schemas,
@@ -1116,6 +1117,10 @@ real-report preflight can pass.
 The residual reconciliation action-plan checker now validates CSV fieldnames,
 rank sequence, lane totals, zero variant leads, no-input boundaries, and
 manifest inputs/outputs before real-report preflight can pass.
+The residual term reconciliation queue checker now validates CSV fieldnames,
+priority sequence, summary key totals, reconciliation-need totals, priority-one
+source-policy row fields, zero variant leads, and manifest inputs/outputs
+before real-report preflight can pass.
 The source-row review-bundle checker now validates its CSV summary and packet
 rows: 22 review clusters, 19 frontier rows, 43 action terms, 44 residual links,
 35 frontier links, 22 generated crops, 22 OCR-word rows, 337 OCR words, 78
@@ -1392,7 +1397,8 @@ dirty-tree fast validation above it:
   with CSV fieldname, lane-summary, term-set, zero-hit, boundary, and manifest
   input/output locks.
 - `python3 -m scripts.check_wrr_residual_term_reconciliation_queue_doc` passed
-  with CSV-backed queue and summary locks.
+  with CSV fieldname, priority-sequence, summary-key, reconciliation-need,
+  priority-one, zero-variant, and manifest input/output locks.
 - `python3 -m scripts.check_wrr_residual_reconciliation_action_plan_doc`
   passed with CSV fieldname, rank-sequence, lane-total, zero-variant,
   boundary, and manifest input/output locks.
@@ -1425,6 +1431,8 @@ dirty-tree fast validation above it:
   manifest lock update: 1908 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the residual reconciliation action-plan
   checker manifest lock update: 1909 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the residual term reconciliation queue
+  checker manifest lock update: 1910 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.

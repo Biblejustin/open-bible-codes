@@ -1,4 +1,5 @@
 import csv
+import json
 from pathlib import Path
 
 from scripts import check_wrr_residual_term_reconciliation_queue_doc as check
@@ -70,6 +71,25 @@ def test_validate_residual_term_queue_rejects_summary_drift(tmp_path: Path) -> N
     )
 
     assert any("source_flag wnp_chelm_spelling_context terms" in failure for failure in failures)
+
+
+def test_validate_residual_term_queue_rejects_manifest_drift(tmp_path: Path) -> None:
+    manifest = tmp_path / "manifest.json"
+    payload = json.loads(check.DEFAULT_MANIFEST.read_text(encoding="utf-8"))
+    payload["term_rows"] = 99
+    manifest.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_residual_term_reconciliation_queue_doc(
+        check.DEFAULT_DOC,
+        queue=None,
+        summary=None,
+        manifest=manifest,
+    )
+
+    assert any("term_rows drifted" in failure for failure in failures)
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
