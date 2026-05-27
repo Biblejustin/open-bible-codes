@@ -13,12 +13,13 @@ public claim.
 
 Read the project in this order:
 
-1. `docs/FINAL_REPORT.md` for the main reader-facing narrative.
-2. `docs/FINAL_REPORT_HIGHLIGHTS.md` for compact occurrence rows.
-3. `docs/CLAIM_CATALOG.md` for current claim/reproduction status.
-4. `docs/CONSOLIDATED_FINDINGS.md` for the broader evidence read.
-5. `docs/REAL_REPORT_RUN.md` for what the formal report assembly checks.
-6. `docs/REMAINING_WORK_REGISTER.md` for unresolved work.
+1. `docs/PROJECT_FINDINGS_OVERVIEW.md` for the whole-project findings summary.
+2. `docs/FINAL_REPORT.md` for the main reader-facing narrative.
+3. `docs/FINAL_REPORT_HIGHLIGHTS.md` for compact occurrence rows.
+4. `docs/CLAIM_CATALOG.md` for current claim/reproduction status.
+5. `docs/CONSOLIDATED_FINDINGS.md` for the broader evidence read.
+6. `docs/REAL_REPORT_RUN.md` for what the formal report assembly checks.
+7. `docs/REMAINING_WORK_REGISTER.md` for unresolved work.
 
 ## Current Read
 
