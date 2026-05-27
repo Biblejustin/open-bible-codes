@@ -1,4 +1,5 @@
 import csv
+import json
 from pathlib import Path
 
 from scripts import check_wrr_source_row_ocr_word_packet_doc as check
@@ -20,6 +21,7 @@ def test_missing_boundary_fails(tmp_path: Path) -> None:
         doc,
         packet=None,
         summary=None,
+        manifest=None,
     )
     assert any("not transcription verification" in failure for failure in failures)
 
@@ -61,6 +63,25 @@ def test_packet_zero_word_row_fails(tmp_path: Path) -> None:
     assert any("has no OCR words" in failure for failure in failures)
 
 
+def test_manifest_drift_fails(tmp_path: Path) -> None:
+    manifest = tmp_path / "manifest.json"
+    payload = json.loads(check.DEFAULT_MANIFEST.read_text(encoding="utf-8"))
+    payload["rows"] = 99
+    manifest.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_source_row_ocr_word_packet_doc(
+        check.DEFAULT_DOC,
+        packet=None,
+        summary=None,
+        manifest=manifest,
+    )
+
+    assert any("rows drifted" in failure for failure in failures)
+
+
 def _required_doc(root: Path) -> Path:
     doc = root / "packet.md"
     doc.write_text("\n".join(check.REQUIRED_PHRASES), encoding="utf-8")
@@ -71,7 +92,7 @@ def _summary_csv(root: Path, *, total_words: str = "337") -> Path:
     path = root / "summary.csv"
     rows = {**check.EXPECTED_SUMMARY, "total_ocr_words": total_words}
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["metric", "value", "read"])
+        writer = csv.DictWriter(handle, fieldnames=check.SUMMARY_FIELDNAMES)
         writer.writeheader()
         for metric, value in rows.items():
             writer.writerow({"metric": metric, "value": value, "read": "test"})
@@ -80,29 +101,7 @@ def _summary_csv(root: Path, *, total_words: str = "337") -> Path:
 
 def _packet_csv(root: Path, *, zero_word_rank: int | None = None) -> Path:
     path = root / "packet.csv"
-    fieldnames = [
-        "run_label",
-        "row_rank",
-        "row_number",
-        "concept",
-        "frontier_pairs",
-        "row_band_top",
-        "row_band_bottom",
-        "crop_path",
-        "name_tokens_rtl",
-        "name_normalized",
-        "date_tokens_rtl",
-        "date_normalized",
-        "all_tokens_rtl",
-        "all_normalized",
-        "word_count",
-        "hebrew_letter_count",
-        "low_conf_word_count",
-        "min_conf",
-        "median_conf",
-        "no_input_boundary",
-        "next_manual_action",
-    ]
+    fieldnames = check.PACKET_FIELDNAMES
     word_counts = [15] * 21 + [22]
     letter_counts = [44] * 20 + [46, 46]
     low_conf_counts = [3] * 20 + [9, 9]

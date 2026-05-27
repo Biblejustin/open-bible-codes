@@ -1116,8 +1116,8 @@ the local PNG header/dimensions (`1930 x 1742`) so stale or missing visual aids
 fail preflight instead of only prose drift.
 The source-row OCR word checker now validates its CSV summary and packet rows:
 22 rows with tokens, 19 frontier rows, 337 OCR words, 972 normalized Hebrew OCR
-letters, 78 low-confidence words, crop path scope, and no-input boundary before
-real-report preflight can pass.
+letters, 78 low-confidence words, CSV fieldnames, crop path scope, no-input
+boundary, and manifest inputs/outputs before real-report preflight can pass.
 The residual reconciliation action-plan checker now validates CSV fieldnames,
 rank sequence, lane totals, zero variant leads, no-input boundaries, and
 manifest inputs/outputs before real-report preflight can pass.
@@ -1419,6 +1419,9 @@ dirty-tree fast validation above it:
 - `python3 -m scripts.check_wrr_source_row_crop_packet_doc` passed with CSV
   fieldname, summary, crop-path, contact-sheet, boundary, and manifest
   input/output locks.
+- `python3 -m scripts.check_wrr_source_row_ocr_word_packet_doc` passed with
+  CSV fieldname, summary, token-count, low-confidence, crop-path, boundary, and
+  manifest input/output locks.
 - Cities public handoff docs checker passed and is wired into real-report
   preflight.
 - Focused Cities decision-record/preflight pytest passed:
@@ -1456,6 +1459,8 @@ dirty-tree fast validation above it:
   lock update: 1912 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the source-row crop checker manifest lock
   update: 1913 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the source-row OCR word checker manifest
+  lock update: 1914 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.
