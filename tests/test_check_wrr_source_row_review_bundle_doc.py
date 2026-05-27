@@ -1,4 +1,5 @@
 import csv
+import json
 from pathlib import Path
 
 from scripts import check_wrr_source_row_review_bundle_doc as check
@@ -20,6 +21,7 @@ def test_missing_boundary_fails(tmp_path: Path) -> None:
         doc,
         packet=None,
         summary=None,
+        manifest=None,
     )
     assert any(
         "Crop and OCR availability is not transcription verification" in failure
@@ -64,6 +66,25 @@ def test_packet_review_state_drift_fails(tmp_path: Path) -> None:
     assert any("review state drifted" in failure for failure in failures)
 
 
+def test_manifest_drift_fails(tmp_path: Path) -> None:
+    manifest = tmp_path / "manifest.json"
+    payload = json.loads(check.DEFAULT_MANIFEST.read_text(encoding="utf-8"))
+    payload["rows"] = 99
+    manifest.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_source_row_review_bundle_doc(
+        check.DEFAULT_DOC,
+        packet=None,
+        summary=None,
+        manifest=manifest,
+    )
+
+    assert any("rows drifted" in failure for failure in failures)
+
+
 def _required_doc(root: Path) -> Path:
     doc = root / "packet.md"
     doc.write_text("\n".join(check.REQUIRED_PHRASES), encoding="utf-8")
@@ -74,7 +95,7 @@ def _summary_csv(root: Path, *, total_words: str = "337") -> Path:
     path = root / "summary.csv"
     rows = {**check.EXPECTED_SUMMARY, "total_ocr_words": total_words}
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["metric", "value", "read"])
+        writer = csv.DictWriter(handle, fieldnames=check.SUMMARY_FIELDNAMES)
         writer.writeheader()
         for metric, value in rows.items():
             writer.writerow({"metric": metric, "value": value, "read": "test"})
@@ -83,30 +104,7 @@ def _summary_csv(root: Path, *, total_words: str = "337") -> Path:
 
 def _packet_csv(root: Path, *, bad_state_rank: int | None = None) -> Path:
     path = root / "packet.csv"
-    fieldnames = [
-        "run_label",
-        "row_rank",
-        "row_number",
-        "concept",
-        "review_state",
-        "action_terms",
-        "residual_pairs",
-        "frontier_pairs",
-        "terms_to_verify",
-        "crop_path",
-        "crop_exists",
-        "word_count",
-        "hebrew_letter_count",
-        "low_conf_word_count",
-        "min_conf",
-        "median_conf",
-        "name_column_ocr",
-        "date_column_ocr",
-        "table2_bridge_read",
-        "no_input_boundary",
-        "allowed_without_input",
-        "next_manual_action",
-    ]
+    fieldnames = check.PACKET_FIELDNAMES
     action_counts = [4, 3, 3] + [2] * 10 + [1] * 6 + [4, 2, 1]
     residual_counts = action_counts.copy()
     residual_counts[13] = 2

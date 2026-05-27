@@ -1129,12 +1129,13 @@ The source-policy evidence packet checker now validates packet, context, and
 summary CSV fieldnames and rows, WNP context refs, scenario-pair counts,
 decision boundaries, and manifest inputs/outputs before real-report preflight
 can pass.
-The source-row review-bundle checker now validates its CSV summary and packet
-rows: 22 review clusters, 19 frontier rows, 43 action terms, 44 residual links,
-35 frontier links, 22 generated crops, 22 OCR-word rows, 337 OCR words, 78
+The source-row review-bundle checker now validates CSV fieldnames, summary
+metrics, and packet rows: 22 review clusters, 19 frontier rows, 43 action
+terms, 44 residual links, 35 frontier links, 22 generated crops, 22 OCR-word
+rows, 337 OCR words, 78
 low-confidence OCR words, review-state locks, allowed no-input action, term
-counts, crop path scope, and no-input boundary before real-report preflight can
-pass.
+counts, crop path scope, no-input boundary, and manifest inputs/outputs before
+real-report preflight can pass.
 `scripts/check_wrr_public_handoff_docs.py` now guards the README, report-run
 doc, final report files, consolidated findings, outline, and remaining-work
 register against stale WRR blocker wording. It is wired into report preflight
@@ -1422,6 +1423,9 @@ dirty-tree fast validation above it:
 - `python3 -m scripts.check_wrr_source_row_ocr_word_packet_doc` passed with
   CSV fieldname, summary, token-count, low-confidence, crop-path, boundary, and
   manifest input/output locks.
+- `python3 -m scripts.check_wrr_source_row_review_bundle_doc` passed with CSV
+  fieldname, summary, review-state, OCR/crop, boundary, and manifest
+  input/output locks.
 - Cities public handoff docs checker passed and is wired into real-report
   preflight.
 - Focused Cities decision-record/preflight pytest passed:
@@ -1461,6 +1465,8 @@ dirty-tree fast validation above it:
   update: 1913 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the source-row OCR word checker manifest
   lock update: 1914 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the source-row review-bundle checker
+  manifest lock update: 1915 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.
