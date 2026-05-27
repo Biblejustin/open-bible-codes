@@ -9,6 +9,8 @@ from pathlib import Path
 
 
 DEFAULT_DOC = Path("docs/PROJECT_FINDINGS_OVERVIEW.md")
+DEFAULT_README = Path("README.md")
+DEFAULT_START_HERE = Path("docs/START_HERE.md")
 
 REQUIRED_HEADINGS = (
     "## Short Answer",
@@ -43,6 +45,16 @@ REQUIRED_REFERENCES = (
     "docs/CONSOLIDATED_FINDINGS.md",
 )
 
+READER_PATH_REQUIREMENTS = {
+    DEFAULT_README: (
+        "whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`",
+    ),
+    DEFAULT_START_HERE: (
+        "1. `docs/PROJECT_FINDINGS_OVERVIEW.md` for the whole-project findings summary.",
+        "no current row should be presented as a public claim",
+    ),
+}
+
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
@@ -58,10 +70,16 @@ def main(argv: list[str] | None = None) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--doc", type=Path, default=DEFAULT_DOC)
+    parser.add_argument("--readme", type=Path, default=DEFAULT_README)
+    parser.add_argument("--start-here", type=Path, default=DEFAULT_START_HERE)
     return parser
 
 
-def validate_project_findings_overview(doc: Path = DEFAULT_DOC) -> list[str]:
+def validate_project_findings_overview(
+    doc: Path = DEFAULT_DOC,
+    readme: Path = DEFAULT_README,
+    start_here: Path = DEFAULT_START_HERE,
+) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
     text = doc.read_text(encoding="utf-8")
@@ -76,6 +94,21 @@ def validate_project_findings_overview(doc: Path = DEFAULT_DOC) -> list[str]:
     for reference in REQUIRED_REFERENCES:
         if f"`{reference}`" not in text:
             failures.append(f"{doc} missing reference: {reference}")
+    failures.extend(validate_reader_paths({DEFAULT_README: readme, DEFAULT_START_HERE: start_here}))
+    return failures
+
+
+def validate_reader_paths(path_by_default: dict[Path, Path]) -> list[str]:
+    failures: list[str] = []
+    for default_path, actual_path in path_by_default.items():
+        required_phrases = READER_PATH_REQUIREMENTS[default_path]
+        if not actual_path.exists():
+            failures.append(f"{actual_path} is missing")
+            continue
+        normalized = normalize_space(actual_path.read_text(encoding="utf-8"))
+        for phrase in required_phrases:
+            if normalize_space(phrase) not in normalized:
+                failures.append(f"{actual_path} missing phrase: {phrase}")
     return failures
 
 

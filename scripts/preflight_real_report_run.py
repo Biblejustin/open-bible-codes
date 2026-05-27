@@ -898,7 +898,9 @@ def main(argv: list[str] | None = None) -> int:
 
     project_findings_overview_doc_failures = (
         check_project_findings_overview_doc.validate_project_findings_overview(
-            root / check_project_findings_overview_doc.DEFAULT_DOC
+            root / check_project_findings_overview_doc.DEFAULT_DOC,
+            root / check_project_findings_overview_doc.DEFAULT_README,
+            root / check_project_findings_overview_doc.DEFAULT_START_HERE,
         )
     )
     if project_findings_overview_doc_failures:

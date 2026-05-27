@@ -52,6 +52,43 @@ def test_missing_reference_fails(tmp_path: Path) -> None:
     assert failures == [f"{doc} missing reference: docs/CLAIM_CATALOG.md"]
 
 
+def test_missing_readme_reader_path_fails(tmp_path: Path) -> None:
+    readme = tmp_path / "README.md"
+    start_here = tmp_path / "START_HERE.md"
+    readme.write_text("reader path missing\n", encoding="utf-8")
+    start_here.write_text(valid_start_here_text(), encoding="utf-8")
+
+    failures = check.validate_project_findings_overview(
+        check.DEFAULT_DOC,
+        readme,
+        start_here,
+    )
+
+    assert failures == [
+        f"{readme} missing phrase: "
+        "whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`"
+    ]
+
+
+def test_missing_start_here_reader_path_fails(tmp_path: Path) -> None:
+    readme = tmp_path / "README.md"
+    start_here = tmp_path / "START_HERE.md"
+    readme.write_text(valid_readme_text(), encoding="utf-8")
+    start_here.write_text("reader path missing\n", encoding="utf-8")
+
+    failures = check.validate_project_findings_overview(
+        check.DEFAULT_DOC,
+        readme,
+        start_here,
+    )
+
+    assert failures == [
+        f"{start_here} missing phrase: "
+        "1. `docs/PROJECT_FINDINGS_OVERVIEW.md` for the whole-project findings summary.",
+        f"{start_here} missing phrase: no current row should be presented as a public claim",
+    ]
+
+
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
     code = check.main(["--doc", str(tmp_path / "missing.md")])
 
@@ -61,3 +98,11 @@ def test_main_reports_failure(tmp_path: Path, capsys) -> None:
 
 def current_doc_text() -> str:
     return check.DEFAULT_DOC.read_text(encoding="utf-8")
+
+
+def valid_readme_text() -> str:
+    return "\n".join(check.READER_PATH_REQUIREMENTS[check.DEFAULT_README])
+
+
+def valid_start_here_text() -> str:
+    return "\n".join(check.READER_PATH_REQUIREMENTS[check.DEFAULT_START_HERE])
