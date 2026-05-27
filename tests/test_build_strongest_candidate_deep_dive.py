@@ -71,8 +71,8 @@ class StrongestCandidateDeepDiveTests(unittest.TestCase):
             self.assertEqual(code, 0)
             self.assertIn("doxa_exact_center_extension", out.read_text(encoding="utf-8"))
             markdown_text = markdown.read_text(encoding="utf-8")
-            self.assertIn("Strongest Candidate Deep Dive", markdown_text)
-            self.assertIn("use a new clean source and stricter gates", markdown_text)
+            self.assertIn("Strongest Candidate Review Packet", markdown_text)
+            self.assertIn("strongest current item: Greek doxa/glory extension", markdown_text)
             self.assertNotIn("lock the next prospective doxa-style", markdown_text)
             self.assertIn("build_strongest_candidate_deep_dive", manifest.read_text(encoding="utf-8"))
 

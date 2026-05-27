@@ -1,19 +1,17 @@
-# Strongest Candidate Deep Dive
+# Strongest Candidate Review Packet
 
-Status: deterministic review packet built from locked report artifacts.
-This is not a new ELS search and it does not upgrade any row to claim-grade evidence.
+Status: review packet over the strongest current rows. This page does not make any row a public claim.
 
-## Reproduce
-
-```bash
-python3 -m scripts.build_strongest_candidate_deep_dive --claim-catalog claims/claim_catalog.csv --out reports/strongest_candidate_deep_dive/candidates.csv --markdown-out docs/STRONGEST_CANDIDATE_DEEP_DIVE.md --manifest-out reports/strongest_candidate_deep_dive/manifest.json
-```
-
-## Summary
+## Plain Read
 
 - candidate rows: 5
-- recommended first move: keep the doxa row in post-discovery review status; use a new clean source and stricter gates for any new Greek extension work
-- main caution: all rows below are post-discovery or occurrence-review rows except where explicitly marked as prospective
+- strongest current item: Greek doxa/glory extension
+- strongest Hebrew item: day of YHWH compound extension
+- clearest occurrence item: Greek Gog centered on open Gog in Revelation 20:8
+- strongest English/apocrypha item: KJV with Apocrypha bridge rows
+- main caution: these are review candidates, not settled findings
+
+Read this page as a shortlist for careful review. It shows what looks most worth studying next, and why each row still needs caution.
 
 ## Ranked Candidates
 

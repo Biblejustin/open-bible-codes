@@ -29,10 +29,14 @@ def test_builds_reader_package_from_whitelisted_docs(tmp_path, monkeypatch) -> N
     assert manifest["file_count"] == len(copied)
     assert manifest["package_boundary"].startswith("whitelisted docs")
     assert Path("reports/public_reader_package/docs/START_HERE.md").exists()
+    assert Path("reports/public_reader_package/docs/PROJECT_FINDINGS_OVERVIEW.md").exists()
+    assert Path("reports/public_reader_package/docs/STRONGEST_CANDIDATE_DEEP_DIVE.md").exists()
     assert Path("reports/public_reader_package/reader_package.md").exists()
-    assert "Source: `docs/START_HERE.md`" in Path(
+    reader_package = Path(
         "reports/public_reader_package/reader_package.md"
     ).read_text(encoding="utf-8")
+    assert "Source: `docs/START_HERE.md`" in reader_package
+    assert "Source: `docs/PROJECT_FINDINGS_OVERVIEW.md`" in reader_package
 
 
 def test_refuses_raw_source_paths(tmp_path, monkeypatch) -> None:
