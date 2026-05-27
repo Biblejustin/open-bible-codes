@@ -137,6 +137,8 @@ WRR method/pair-universe evidence packet rows, summary metrics, CSV schemas,
 and manifest input/output metadata are CSV/manifest-guarded as well.
 WRR remaining-lane evidence packet rows, lane summaries, CSV schemas, and
 manifest input/output metadata are CSV/manifest-guarded as well.
+WRR source-row coverage packet rows, summary metrics, CSV schemas, and
+manifest input/output metadata are CSV/manifest-guarded as well.
 Cities source-row lock queueing, worksheet generation, evidence-packet
 assembly, and decision-record preflight guarding now keep Cities source-row
 candidate pages out of result-bearing work until citable lock records exist.
@@ -1100,10 +1102,10 @@ manifest inputs/outputs. The remaining-lane evidence checker now validates CSV
 fieldnames, lane summaries, expected term sets, zero variant leads,
 no-input boundaries, and manifest inputs/outputs before real-report preflight
 can pass.
-The source-row coverage checker now validates its CSV summary, 22-row rank
-sequence, 43 action-term total, 35 frontier-pair total, 0 direct visual-action
-terms, 4 related-only rows, 18 no-related rows, and no-input boundary before
-real-report preflight can pass.
+The source-row coverage checker now validates CSV fieldnames, summary metrics,
+22-row rank sequence, 43 action-term total, 35 frontier-pair total, 0 direct
+visual-action terms, 4 related-only rows, 18 no-related rows, no-input
+boundary, and manifest inputs/outputs before real-report preflight can pass.
 The source-row crop checker now validates its CSV summary, 22 available auto
 crops, contact-sheet availability, 4 manual-crop rows, 43 action terms, 35
 frontier pairs, crop-status rows, crop dimensions, crop path scope, and
@@ -1410,6 +1412,9 @@ dirty-tree fast validation above it:
 - `python3 -m scripts.check_wrr_source_policy_evidence_packet_doc` passed with
   packet/context/summary CSV fieldname, row, WNP-context, scenario-count,
   boundary, and manifest input/output locks.
+- `python3 -m scripts.check_wrr_source_row_coverage_packet_doc` passed with
+  CSV fieldname, summary, rank-sequence, visual-coverage, boundary, and
+  manifest input/output locks.
 - Cities public handoff docs checker passed and is wired into real-report
   preflight.
 - Focused Cities decision-record/preflight pytest passed:
@@ -1443,6 +1448,8 @@ dirty-tree fast validation above it:
   checker manifest lock update: 1910 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the source-policy evidence packet checker
   manifest lock update: 1911 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the source-row coverage checker manifest
+  lock update: 1912 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.
