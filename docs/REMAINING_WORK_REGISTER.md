@@ -1199,9 +1199,10 @@ frontier links, 22 row clusters, row-OCR nonmatches, zero variant leads,
 evidence/no-input boundaries, and manifest inputs/outputs before real-report
 preflight can pass.
 `scripts/check_wrr_public_handoff_docs.py` now guards the README, report-run
-doc, final report files, consolidated findings, outline, and remaining-work
-register against stale WRR blocker wording. It is wired into report preflight
-and treats public handoff drift as a formal preflight failure.
+doc, final report files, consolidated findings, claim catalog, start-here doc,
+outline, remaining-work register, and protocol README against stale WRR blocker
+or method-lane wide-skip wording. It is wired into report preflight and treats
+public handoff drift as a formal preflight failure.
 The next WRR work is therefore source/term/pair-rule reconciliation plus method
 and pair-universe decisions before any exact published reproduction language.
 
@@ -1397,14 +1398,14 @@ Run `make release-ready` from a committed tree; the final public-release gate is
 supposed to fail if tracked files are dirty.
 
 Latest validation snapshot after the release-ready make target, refreshed after
-the WRR method-lane wide-skip public-doc synchronization:
+the WRR method-lane wide-skip public-doc and handoff-guard synchronization:
 
 - Current `make fast-validate` passed, including `python3 -m pytest -q`: 1951
   tests, 2 skipped, and 29325 subtests.
 - `make public-reader-package` passed after the public WRR wide-skip wording
   refresh.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
-  passed clean after commit `223d914`.
+  passed clean after commit `86a7ef0`.
 - `python3 -m scripts.check_prospective_lane_status_doc` passed with JSON-backed
   lane id/status/path and status-count locks.
 - `python3 -m scripts.check_real_report_run_doc` passed with TOML-backed
