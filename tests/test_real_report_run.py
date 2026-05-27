@@ -2082,6 +2082,24 @@ inputs = ["docs/A.md", "docs/C.md"]
                 [Path("docs/ALPHA_PREREGISTRATION.md")],
             )
 
+    def test_preregistration_failures_include_stale_template_phrases(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            prereg = Path(tmp) / "STUDY_PREREGISTRATION.md"
+            prereg.write_text(
+                "Status: template; copy before use.\n",
+                encoding="utf-8",
+            )
+
+            failures = preflight.find_preregistration_placeholder_failures([prereg])
+
+            self.assertEqual(len(failures), 2)
+            self.assertTrue(
+                any("stale template phrase Status: template" in failure for failure in failures)
+            )
+            self.assertTrue(
+                any("stale template phrase copy before use" in failure for failure in failures)
+            )
+
     def test_preflight_fails_on_crd_relevance_dictionary_failure(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / "preflight.json"
