@@ -1,4 +1,5 @@
 import csv
+import json
 from pathlib import Path
 
 from scripts import check_wrr_claim_blocker_packet_doc as check
@@ -124,6 +125,27 @@ def test_validate_blocker_packet_rejects_summary_drift(tmp_path: Path) -> None:
     )
 
     assert any("review_frontier minimum_residual_frontier" in failure for failure in failures)
+
+
+def test_validate_blocker_packet_rejects_manifest_drift(tmp_path: Path) -> None:
+    manifest = tmp_path / "manifest.json"
+    payload = json.loads(check.DEFAULT_MANIFEST.read_text(encoding="utf-8"))
+    payload["blocker_rows"] = 99
+    manifest.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_blocker_packet_doc(
+        check.DEFAULT_DOC,
+        packet=None,
+        readiness=None,
+        source_queue=None,
+        variant_residual_summary=None,
+        residual_term_summary=None,
+        source_transcription_row_summary=None,
+        remaining_lane_summary=None,
+        manifest=manifest,
+    )
+
+    assert any("blocker_rows drifted" in failure for failure in failures)
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:

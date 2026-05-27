@@ -5,39 +5,26 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from collections import Counter
 from pathlib import Path
+from typing import Any
+
+from scripts import build_wrr_claim_blocker_packet as builder
 
 
-DEFAULT_DOC = Path("docs/WRR_CLAIM_BLOCKER_PACKET.md")
-DEFAULT_PACKET = Path("reports/wrr_1994/wrr_claim_blocker_packet.csv")
-DEFAULT_READINESS = Path("reports/wrr_1994/wrr_claim_readiness.csv")
-DEFAULT_SOURCE_QUEUE = Path("reports/wrr_1994/wrr_source_review_queue.csv")
-DEFAULT_VARIANT_RESIDUAL_SUMMARY = Path(
-    "reports/wrr_1994/wrr_variant_residual_review_summary.csv"
-)
-DEFAULT_RESIDUAL_TERM_SUMMARY = Path(
-    "reports/wrr_1994/wrr_residual_term_reconciliation_summary.csv"
-)
-DEFAULT_SOURCE_TRANSCRIPTION_ROW_SUMMARY = Path(
-    "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv"
-)
-DEFAULT_REMAINING_LANE_SUMMARY = Path(
-    "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv"
-)
+DEFAULT_DOC = builder.DEFAULT_MD
+DEFAULT_PACKET = builder.DEFAULT_OUT
+DEFAULT_READINESS = builder.DEFAULT_READINESS
+DEFAULT_SOURCE_QUEUE = builder.DEFAULT_SOURCE_QUEUE
+DEFAULT_VARIANT_RESIDUAL_SUMMARY = builder.DEFAULT_VARIANT_RESIDUAL_SUMMARY
+DEFAULT_RESIDUAL_TERM_SUMMARY = builder.DEFAULT_RESIDUAL_TERM_SUMMARY
+DEFAULT_SOURCE_TRANSCRIPTION_ROW_SUMMARY = builder.DEFAULT_SOURCE_TRANSCRIPTION_ROW_SUMMARY
+DEFAULT_REMAINING_LANE_SUMMARY = builder.DEFAULT_REMAINING_LANE_SUMMARY
+DEFAULT_MANIFEST = builder.DEFAULT_MANIFEST
 
-PACKET_FIELDNAMES = [
-    "decision_area",
-    "current_status",
-    "ready",
-    "blocker",
-    "current_read",
-    "available_options",
-    "source_review_flags",
-    "no_input_next",
-    "input_needed",
-]
+PACKET_FIELDNAMES = builder.FIELDNAMES
 EXPECTED_READINESS = {
     "Pair universe": "source_locked",
     "D(w) skip-cap formula": "source_locked",
@@ -166,6 +153,7 @@ def main(argv: list[str] | None = None) -> int:
         args.residual_term_summary,
         args.source_transcription_row_summary,
         args.remaining_lane_summary,
+        args.manifest,
     )
     if failures:
         for failure in failures:
@@ -201,6 +189,7 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=DEFAULT_REMAINING_LANE_SUMMARY,
     )
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
 
@@ -213,6 +202,7 @@ def validate_blocker_packet_doc(
     residual_term_summary: Path | None = DEFAULT_RESIDUAL_TERM_SUMMARY,
     source_transcription_row_summary: Path | None = DEFAULT_SOURCE_TRANSCRIPTION_ROW_SUMMARY,
     remaining_lane_summary: Path | None = DEFAULT_REMAINING_LANE_SUMMARY,
+    manifest: Path | None = DEFAULT_MANIFEST,
 ) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
@@ -236,6 +226,8 @@ def validate_blocker_packet_doc(
         failures.extend(validate_source_transcription_row_summary_csv(source_transcription_row_summary))
     if remaining_lane_summary is not None:
         failures.extend(validate_remaining_lane_summary_csv(remaining_lane_summary))
+    if manifest is not None:
+        failures.extend(validate_manifest(manifest))
     return failures
 
 
@@ -249,6 +241,54 @@ def validate_packet_csv(packet: Path) -> list[str]:
         failures.append(f"{packet} fieldnames drifted")
     if rows:
         failures.append(f"{packet} has {len(rows)} rows; expected 0 ready-state blockers")
+    return failures
+
+
+def validate_manifest(manifest: Path) -> list[str]:
+    data = _read_json(manifest)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "build_wrr_claim_blocker_packet",
+        "blocker_rows": 0,
+        "source_policy_scenario_rows": 5,
+        "source_policy_term_impact_rows": 7,
+        "dw_formula_sensitivity_rows": 3,
+        "variant_residual_summary_rows": len(EXPECTED_VARIANT_RESIDUAL),
+        "variant_residual_packet_rows": 59,
+        "residual_term_summary_rows": len(EXPECTED_RESIDUAL_TERM_SUMMARY),
+        "residual_term_queue_rows": 58,
+        "method_pair_universe_summary_rows": 1,
+        "source_transcription_row_summary_rows": SOURCE_TRANSCRIPTION_TOTALS["rows"],
+        "remaining_lane_summary_rows": len(EXPECTED_REMAINING_LANES),
+        "remaining_lane_packet_rows": 14,
+        "inputs": {
+            "readiness": str(builder.DEFAULT_READINESS),
+            "lock_options": str(builder.DEFAULT_LOCK_OPTIONS),
+            "source_queue": str(builder.DEFAULT_SOURCE_QUEUE),
+            "method_status": str(builder.DEFAULT_METHOD_STATUS),
+            "source_policy_scenarios": str(builder.DEFAULT_SOURCE_POLICY_SCENARIOS),
+            "source_policy_term_impacts": str(builder.DEFAULT_SOURCE_POLICY_TERM_IMPACTS),
+            "dw_formula_sensitivity": str(builder.DEFAULT_DW_FORMULA_SENSITIVITY),
+            "variant_residual_summary": str(builder.DEFAULT_VARIANT_RESIDUAL_SUMMARY),
+            "variant_residual_packet": str(builder.DEFAULT_VARIANT_RESIDUAL_PACKET),
+            "residual_term_summary": str(builder.DEFAULT_RESIDUAL_TERM_SUMMARY),
+            "residual_term_queue": str(builder.DEFAULT_RESIDUAL_TERM_QUEUE),
+            "method_pair_universe_summary": str(builder.DEFAULT_METHOD_PAIR_UNIVERSE_SUMMARY),
+            "source_transcription_row_summary": str(builder.DEFAULT_SOURCE_TRANSCRIPTION_ROW_SUMMARY),
+            "remaining_lane_summary": str(builder.DEFAULT_REMAINING_LANE_SUMMARY),
+            "remaining_lane_packet": str(builder.DEFAULT_REMAINING_LANE_PACKET),
+        },
+        "outputs": {
+            "out": str(DEFAULT_PACKET),
+            "markdown_out": str(DEFAULT_DOC),
+            "manifest_out": str(DEFAULT_MANIFEST),
+        },
+    }
+    failures: list[str] = []
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{manifest} {key} drifted")
     return failures
 
 
@@ -425,6 +465,12 @@ def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
     with path.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
         return reader.fieldnames or [], list(reader)
+
+
+def _read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def _int(row: dict[str, str], key: str) -> int:

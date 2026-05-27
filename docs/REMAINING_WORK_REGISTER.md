@@ -124,8 +124,9 @@ the manual decision register/summary/manifest, manual decision-record
 worksheet, and exact reproduction gap dashboard. The locked-method report is
 CSV-guarded too.
 WRR claim readiness and lock options are CSV-guarded as well.
-WRR claim blocker packet readiness, source-queue, residual-summary, and
-remaining-lane inputs are CSV-guarded as well.
+WRR claim blocker packet readiness, source-queue, residual-summary,
+remaining-lane inputs, and manifest row-count/input/output metadata are
+CSV/manifest-guarded as well.
 WRR method status is CSV-guarded as well.
 WRR residual term reconciliation queue and summary are CSV-guarded as well.
 WRR residual reconciliation action plan and summary are CSV-guarded as well.
@@ -993,7 +994,8 @@ matched/no-variant-lead rows, 3 near-match/no-variant-lead rows, and one
 residual unique-term queue summary, top term targets, source-transcription row
 cluster summary, page-image near-match lane, and method/pair-universe summary,
 so the no-input handoff carries the pair-level residual caveat, term-level
-review frontier, row-level review order, and page-image review boundary.
+review frontier, row-level review order, and page-image review boundary. Its
+checker now also locks manifest counts, inputs, and outputs.
 `docs/WRR_RESIDUAL_TERM_RECONCILIATION_QUEUE.md` now collapses that pair-level
 packet into 58 unique unresolved appellation terms, preserving 59 residual pair
 links and 40 minimum-frontier links. The unique-term reconciliation queue
