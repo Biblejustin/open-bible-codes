@@ -132,6 +132,8 @@ WRR residual term reconciliation queue and summary are CSV-guarded as well.
 WRR residual reconciliation action plan and summary are CSV-guarded as well.
 WRR method/pair-universe evidence packet rows, summary metrics, CSV schemas,
 and manifest input/output metadata are CSV/manifest-guarded as well.
+WRR remaining-lane evidence packet rows, lane summaries, CSV schemas, and
+manifest input/output metadata are CSV/manifest-guarded as well.
 Cities source-row lock queueing, worksheet generation, evidence-packet
 assembly, and decision-record preflight guarding now keep Cities source-row
 candidate pages out of result-bearing work until citable lock records exist.
@@ -1091,9 +1093,10 @@ The exact-gap priority-packet checker now validates CSV fieldnames, summary
 metrics, review lane rows, and manifest inputs/outputs in addition to doc
 prose. The method/pair-universe checker now validates CSV fieldnames, summary
 metrics, expected term sets, zero variant leads, no-input boundaries, and
-manifest inputs/outputs. The remaining-lane evidence checker validates its CSV
-summaries, expected term sets, zero variant leads, and no-input boundaries
-before real-report preflight can pass.
+manifest inputs/outputs. The remaining-lane evidence checker now validates CSV
+fieldnames, lane summaries, expected term sets, zero variant leads,
+no-input boundaries, and manifest inputs/outputs before real-report preflight
+can pass.
 The source-row coverage checker now validates its CSV summary, 22-row rank
 sequence, 43 action-term total, 35 frontier-pair total, 0 direct visual-action
 terms, 4 related-only rows, 18 no-related rows, and no-input boundary before
@@ -1381,6 +1384,9 @@ dirty-tree fast validation above it:
 - `python3 -m scripts.check_wrr_method_pair_universe_evidence_packet_doc`
   passed with CSV fieldname, summary metric, term-set, zero-hit, boundary, and
   manifest input/output locks.
+- `python3 -m scripts.check_wrr_remaining_lane_evidence_packets_doc` passed
+  with CSV fieldname, lane-summary, term-set, zero-hit, boundary, and manifest
+  input/output locks.
 - `python3 -m scripts.check_wrr_residual_term_reconciliation_queue_doc` passed
   with CSV-backed queue and summary locks.
 - Cities public handoff docs checker passed and is wired into real-report
@@ -1408,6 +1414,8 @@ dirty-tree fast validation above it:
   `make fast-validate`.
 - `make fast-validate` passed after the method/pair-universe evidence packet
   checker manifest lock update: 1907 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the remaining-lane evidence packet checker
+  manifest lock update: 1908 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.
