@@ -92,6 +92,17 @@ This runs `make fast-validate`, then reruns the clean public-release gate. Run
 it from a committed tree; the public-release gate intentionally fails while
 tracked files are dirty.
 
+Build ignored public reader package after `make real-report`:
+
+```bash
+make public-reader-package
+```
+
+This writes `reports/public_reader_package/README.md`,
+`reports/public_reader_package/reader_package.md`, and
+`reports/public_reader_package/package_manifest.json` from whitelisted docs and
+the formal report summary. It does not include raw Bible source files.
+
 Optional local data doc check, after bootstrapping ignored source caches:
 
 ```bash

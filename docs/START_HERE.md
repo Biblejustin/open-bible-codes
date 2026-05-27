@@ -82,6 +82,12 @@ For formal report assembly:
 make real-report
 ```
 
+For an ignored public reader package after report assembly:
+
+```bash
+make public-reader-package
+```
+
 ## What Remains
 
 Current result-producing prospective lanes are closed, negative, or
