@@ -126,6 +126,8 @@ probe doc checker, so the redirected-root/no-result boundary is gated before
 formal report assembly.
 The public-release hygiene CLI now has direct unit coverage for clean/dirty
 tree handling, expected GitHub owner/repo checks, and JSON failure payloads.
+The CRD relevance-dictionary CLI now has direct unit coverage for reviewed
+dictionary acceptance and expected-hash mismatch failures.
 The strongest-candidate deep-dive doc is now CSV/manifest-guarded against
 candidate row order, candidate ids, source inputs, and report path metadata.
 The prospective lane-status doc is now JSON-guarded against tracked lane ids,
@@ -1554,6 +1556,8 @@ dirty-tree fast validation above it:
   29196 subtests.
 - `make fast-validate` passed after adding public-release hygiene CLI tests:
   1940 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after adding CRD relevance-dictionary CLI tests:
+  1942 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.
