@@ -1108,8 +1108,9 @@ visual-action terms, 4 related-only rows, 18 no-related rows, no-input
 boundary, and manifest inputs/outputs before real-report preflight can pass.
 The source-row crop checker now validates its CSV summary, 22 available auto
 crops, contact-sheet availability, 4 manual-crop rows, 43 action terms, 35
-frontier pairs, crop-status rows, crop dimensions, crop path scope, and
-no-input boundary before real-report preflight can pass.
+frontier pairs, CSV fieldnames, crop-status rows, crop dimensions, crop path
+scope, no-input boundary, and manifest inputs/outputs plus contact-sheet
+dimensions before real-report preflight can pass.
 The source-row crop contact-sheet checker now validates the tracked doc plus
 the local PNG header/dimensions (`1930 x 1742`) so stale or missing visual aids
 fail preflight instead of only prose drift.
@@ -1415,6 +1416,9 @@ dirty-tree fast validation above it:
 - `python3 -m scripts.check_wrr_source_row_coverage_packet_doc` passed with
   CSV fieldname, summary, rank-sequence, visual-coverage, boundary, and
   manifest input/output locks.
+- `python3 -m scripts.check_wrr_source_row_crop_packet_doc` passed with CSV
+  fieldname, summary, crop-path, contact-sheet, boundary, and manifest
+  input/output locks.
 - Cities public handoff docs checker passed and is wired into real-report
   preflight.
 - Focused Cities decision-record/preflight pytest passed:
@@ -1450,6 +1454,8 @@ dirty-tree fast validation above it:
   manifest lock update: 1911 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the source-row coverage checker manifest
   lock update: 1912 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the source-row crop checker manifest lock
+  update: 1913 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.

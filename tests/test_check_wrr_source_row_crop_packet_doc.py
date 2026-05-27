@@ -1,4 +1,5 @@
 import csv
+import json
 from pathlib import Path
 
 from scripts import check_wrr_source_row_crop_packet_doc as check
@@ -20,6 +21,7 @@ def test_missing_boundary_fails(tmp_path: Path) -> None:
         doc,
         packet=None,
         summary=None,
+        manifest=None,
     )
     assert any(
         "Crop availability is not transcription verification" in failure
@@ -64,6 +66,25 @@ def test_packet_missing_crop_fails(tmp_path: Path) -> None:
     assert any("auto crops available=21" in failure for failure in failures)
 
 
+def test_manifest_drift_fails(tmp_path: Path) -> None:
+    manifest = tmp_path / "manifest.json"
+    payload = json.loads(check.DEFAULT_MANIFEST.read_text(encoding="utf-8"))
+    payload["rows"] = 99
+    manifest.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_source_row_crop_packet_doc(
+        check.DEFAULT_DOC,
+        packet=None,
+        summary=None,
+        manifest=manifest,
+    )
+
+    assert any("rows drifted" in failure for failure in failures)
+
+
 def _required_doc(root: Path) -> Path:
     doc = root / "packet.md"
     doc.write_text("\n".join(check.REQUIRED_PHRASES), encoding="utf-8")
@@ -74,7 +95,7 @@ def _summary_csv(root: Path, *, auto_crops: str = "22") -> Path:
     path = root / "summary.csv"
     rows = {**check.EXPECTED_SUMMARY, "auto_crops_available": auto_crops}
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["metric", "value", "read"])
+        writer = csv.DictWriter(handle, fieldnames=check.SUMMARY_FIELDNAMES)
         writer.writeheader()
         for metric, value in rows.items():
             writer.writerow({"metric": metric, "value": value, "read": "test"})
@@ -83,29 +104,7 @@ def _summary_csv(root: Path, *, auto_crops: str = "22") -> Path:
 
 def _packet_csv(root: Path, *, missing_crop_rank: int | None = None) -> Path:
     path = root / "packet.csv"
-    fieldnames = [
-        "run_label",
-        "row_rank",
-        "row_number",
-        "concept",
-        "action_terms",
-        "frontier_pairs",
-        "row_band_top",
-        "row_band_bottom",
-        "crop_left",
-        "crop_top",
-        "crop_right",
-        "crop_bottom",
-        "crop_width",
-        "crop_height",
-        "crop_path",
-        "crop_exists",
-        "crop_status",
-        "manual_crop_count",
-        "manual_crop_paths",
-        "no_input_boundary",
-        "next_manual_action",
-    ]
+    fieldnames = check.PACKET_FIELDNAMES
     action_counts = [4, 3, 3] + [2] * 10 + [1] * 6 + [4, 2, 1]
     frontier_counts = [4, 3, 3] + [2] * 9 + [1] * 7 + [0, 0, 0]
     manual_ranks = {11, 14, 20, 21}
