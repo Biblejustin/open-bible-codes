@@ -825,7 +825,10 @@ The residual handoff is now packetized without selecting corrections: 1
 source-policy term, 43 source-transcription terms, 3 page-image near-match
 terms, and 11 method/pair-universe terms, with the claim-blocker packet
 mirroring top term targets, row clusters, page-image near matches, and
-method/pair-universe counts. The source-policy checklist keeps the Chełm
+method/pair-universe counts. A wider method-lane check found 0 ordinary
+Genesis hits through skip 5000 for those 11 OCR-matched method-lane terms, so
+that lane is not explained by a small skip-cap extension. The source-policy
+checklist keeps the Chełm
 source-policy/pair-rule target as a review lane with required decision-record
 fields. The row-review checklist keeps the 22 source-transcription row clusters
 in review order with required decision-record fields. The remaining-lane
