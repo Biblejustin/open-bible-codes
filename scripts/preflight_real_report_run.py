@@ -142,6 +142,7 @@ DEFAULT_REQUIRED_PATHS = [
     "els/project_index.py",
     "Makefile",
     "README.md",
+    "docs/START_HERE.md",
     "docs/REAL_REPORT_RUN.md",
     "docs/REMAINING_WORK_REGISTER.md",
     "protocols/README.md",

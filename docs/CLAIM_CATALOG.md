@@ -11,6 +11,15 @@ Purpose:
 - separate term screening from claim reproduction;
 - record current reproduction status without promoting raw hits into claims.
 
+How to read this page:
+
+- status names describe current reproducibility, not theological importance;
+- `controlled_review_candidate` means worth review, not claim-ready;
+- `under_specified` usually means the source, spelling, skip, layout, or metric
+  is not locked enough;
+- source and license limits are treated as evidence boundaries, not gaps to
+  fill by inference.
+
 ## Status Values
 
 | Status | Meaning |

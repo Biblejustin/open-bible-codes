@@ -42,6 +42,16 @@ Tiny synthetic demo, no downloads required:
 make demo
 ```
 
+Reader path:
+
+- start here: `docs/START_HERE.md`
+- main reader report: `docs/FINAL_REPORT.md`
+- compact highlights: `docs/FINAL_REPORT_HIGHLIGHTS.md`
+- claim status table: `docs/CLAIM_CATALOG.md`
+- broader findings read: `docs/CONSOLIDATED_FINDINGS.md`
+- formal assembly/check plan: `docs/REAL_REPORT_RUN.md`
+- remaining work: `docs/REMAINING_WORK_REGISTER.md`
+
 Repository navigation:
 
 - documentation index: `docs/INDEX.md`

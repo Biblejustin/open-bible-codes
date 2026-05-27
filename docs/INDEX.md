@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 375
+Documents indexed: 376
 
 ## Controls
 
@@ -366,6 +366,7 @@ Documents indexed: 375
 | Review Flag Summary | `REVIEW_FLAG_SUMMARY.md` |
 | Skip Planning | `SKIP_PLANNING.md` |
 | Source-Basis Audit Queue | `SOURCE_BASIS_AUDIT_QUEUE.md` |
+| Start Here | `START_HERE.md` |
 | STEP TAHOT Final Gate | `STEP_TAHOT_FINAL_GATE.md` |
 | STEP TAHOT Policy Hit Audit | `STEP_TAHOT_POLICY_HIT_AUDIT.md` |
 | STEP TAHOT Source Audit | `STEP_TAHOT_SOURCE_AUDIT.md` |

@@ -6,6 +6,11 @@ This document defines the first non-exploratory report assembly run. It does not
 expand term lists or widen skip ranges. It refreshes locked outputs and produces
 one local run summary.
 
+Reader role: use this file to see what the report assembly is allowed to touch
+and which guardrails must pass before the reader-facing report is considered
+current. Use `docs/START_HERE.md` and `docs/FINAL_REPORT.md` for narrative
+reading; use this file for reproducibility and preflight scope.
+
 ## Command
 
 ```bash

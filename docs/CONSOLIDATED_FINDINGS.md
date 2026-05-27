@@ -2,6 +2,11 @@
 
 This is the current plain-English read across the public baseline, focused target reports, pair controls, extension review, synthetic controls, broad skip `2..100`, and wide focus skip `2..250` screening runs.
 
+For a shorter reader path, start with `docs/START_HERE.md`, then read
+`docs/FINAL_REPORT.md`, `docs/FINAL_REPORT_HIGHLIGHTS.md`, and
+`docs/CLAIM_CATALOG.md`. This page is the broader evidence ledger: it explains
+why many interesting rows stay below public-claim status.
+
 ## Bottom Line
 
 The toolkit is ready for serious screening work, but no current result should be treated as a public claim.
