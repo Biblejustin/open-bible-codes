@@ -75,6 +75,7 @@ from scripts import (
     check_wrr_manual_decision_record_worksheet_doc,
     check_wrr_manual_decision_records,
     check_wrr_manual_decision_register_doc,
+    check_wrr_method_lane_wide_skip_probe_doc,
     check_wrr_method_status_doc,
     check_wrr_public_handoff_docs,
     check_wrr_residual_reconciliation_action_plan_doc,
@@ -184,6 +185,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/wrr_corrected_distance_direct_all_lanes.toml",
     "protocols/wrr_source_recovery_probe.toml",
     "protocols/wrr_wayback_source_recovery_probe.toml",
+    "protocols/wrr_method_lane_wide_skip_probe.toml",
     "protocols/cities_pdf_recovery_probe.toml",
     "protocols/cities_recovered_pdf_text_audit.toml",
     "protocols/cities_source_review_queue.toml",
@@ -318,6 +320,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_MANUAL_DECISION_REGISTER.md",
     "docs/WRR_MANUAL_DECISION_RECORD_WORKSHEET.md",
     "docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md",
+    "docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md",
     "docs/WRR_SOURCE_POLICY_SCENARIOS.md",
     "docs/WRR_DW_FORMULA_SENSITIVITY.md",
     "docs/CRD_FRAMEWORK.md",
@@ -641,6 +644,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_manual_decision_register_doc.py",
     "scripts/build_wrr_method_pair_universe_evidence_packet.py",
     "scripts/check_wrr_method_pair_universe_evidence_packet_doc.py",
+    "scripts/analyze_wrr_method_lane_wide_skip.py",
+    "scripts/check_wrr_method_lane_wide_skip_probe_doc.py",
     "scripts/check_wrr_source_policy_scenarios_doc.py",
     "scripts/analyze_wrr_dw_formula_sensitivity.py",
     "scripts/check_wrr_dw_formula_sensitivity_doc.py",
@@ -716,6 +721,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/wrr_audit_counts.toml",
     "protocols/wrr_source_recovery_probe.toml",
     "protocols/wrr_wayback_source_recovery_probe.toml",
+    "protocols/wrr_method_lane_wide_skip_probe.toml",
     "protocols/cities_pdf_recovery_probe.toml",
     "protocols/cities_recovered_pdf_text_audit.toml",
     "protocols/cities_source_review_queue.toml",
@@ -1368,6 +1374,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_method_pair_universe_evidence_packet_doc_failures)
         )
 
+    wrr_method_lane_wide_skip_probe_doc_failures = (
+        check_wrr_method_lane_wide_skip_probe_doc.validate_wide_skip_probe_doc(
+            check_wrr_method_lane_wide_skip_probe_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_method_lane_wide_skip_probe_doc_failures:
+        failures.append(
+            "WRR method-lane wide-skip probe failures: "
+            + "; ".join(wrr_method_lane_wide_skip_probe_doc_failures)
+        )
+
     wrr_dw_formula_sensitivity_doc_failures = (
         check_wrr_dw_formula_sensitivity_doc.validate_dw_formula_sensitivity_doc(
             check_wrr_dw_formula_sensitivity_doc.DEFAULT_DOC
@@ -1763,6 +1780,9 @@ def main(argv: list[str] | None = None) -> int:
         "wrr_manual_decision_record_failures": wrr_manual_decision_record_failures,
         "wrr_method_pair_universe_evidence_packet_doc_failures": (
             wrr_method_pair_universe_evidence_packet_doc_failures
+        ),
+        "wrr_method_lane_wide_skip_probe_doc_failures": (
+            wrr_method_lane_wide_skip_probe_doc_failures
         ),
         "wrr_dw_formula_sensitivity_doc_failures": (
             wrr_dw_formula_sensitivity_doc_failures

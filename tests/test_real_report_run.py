@@ -1496,6 +1496,22 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/analyze_wrr_method_lane_wide_skip.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_method_lane_wide_skip_probe_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "protocols/wrr_method_lane_wide_skip_probe.toml",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/check_wrr_public_handoff_docs.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -1845,6 +1861,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn("wrr_manual_decision_register_doc_failures", payload)
             self.assertIn("wrr_manual_decision_record_worksheet_doc_failures", payload)
             self.assertIn("wrr_manual_decision_record_failures", payload)
+            self.assertIn("wrr_method_lane_wide_skip_probe_doc_failures", payload)
             self.assertIn("wrr_lock_options_doc_failures", payload)
             self.assertIn("wrr_method_status_doc_failures", payload)
             self.assertIn("stale_generated_indexes", payload)
@@ -2983,6 +3000,28 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "WRR method/pair-universe evidence packet failures: "
                 "docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md missing boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_method_lane_wide_skip_probe_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_method_lane_wide_skip_probe_doc,
+                "validate_wide_skip_probe_doc",
+                return_value=["docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md missing boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_method_lane_wide_skip_probe_doc_failures"],
+                ["docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md missing boundary"],
+            )
+            self.assertIn(
+                "WRR method-lane wide-skip probe failures: "
+                "docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md missing boundary",
                 payload["failures"],
             )
 
