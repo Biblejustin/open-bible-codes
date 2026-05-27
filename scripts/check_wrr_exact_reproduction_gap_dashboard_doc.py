@@ -5,12 +5,20 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from pathlib import Path
+from typing import Any
 
+from scripts import build_wrr_exact_reproduction_gap_dashboard as builder
 
-DEFAULT_DOC = Path("docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md")
-DEFAULT_DASHBOARD = Path("reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.csv")
+DEFAULT_DOC = builder.DEFAULT_MD
+DEFAULT_DASHBOARD = builder.DEFAULT_OUT
+DEFAULT_MANIFEST = builder.DEFAULT_MANIFEST
+
+FIELDNAMES = builder.FIELDNAMES
+EXPECTED_GAP_REASON_ROWS = 3
+EXPECTED_REVIEW_LANE_ROWS = 4
 
 EXPECTED_ROWS = {
     "exact_published_reproduction": (
@@ -123,7 +131,7 @@ FORBIDDEN_PHRASES = (
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    failures = validate_gap_dashboard_doc(args.doc, args.dashboard)
+    failures = validate_gap_dashboard_doc(args.doc, args.dashboard, args.manifest)
     if failures:
         for failure in failures:
             print(f"WRR exact gap dashboard failure: {failure}", file=sys.stderr)
@@ -136,12 +144,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--doc", type=Path, default=DEFAULT_DOC)
     parser.add_argument("--dashboard", type=Path, default=DEFAULT_DASHBOARD)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
 
 def validate_gap_dashboard_doc(
     doc: Path,
     dashboard: Path | None = DEFAULT_DASHBOARD,
+    manifest: Path | None = DEFAULT_MANIFEST,
 ) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
@@ -156,14 +166,19 @@ def validate_gap_dashboard_doc(
             failures.append(f"{doc} forbidden phrase outside boundary list: {phrase}")
     if dashboard is not None:
         failures.extend(validate_dashboard_csv(dashboard))
+    if manifest is not None:
+        failures.extend(validate_manifest(manifest))
     return failures
 
 
 def validate_dashboard_csv(dashboard: Path) -> list[str]:
-    rows = _read_csv(dashboard)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(dashboard)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != FIELDNAMES:
+        failures.append(f"{dashboard} fieldnames drifted")
     if len(rows) != len(EXPECTED_ROWS):
         failures.append(f"{dashboard} has {len(rows)} rows; expected {len(EXPECTED_ROWS)}")
     by_item = {row.get("item", ""): row for row in rows}
@@ -184,11 +199,52 @@ def validate_dashboard_csv(dashboard: Path) -> list[str]:
     return failures
 
 
-def _read_csv(path: Path) -> list[dict[str, str]] | str:
+def validate_manifest(manifest: Path) -> list[str]:
+    data = _read_json(manifest)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "build_wrr_exact_reproduction_gap_dashboard",
+        "dashboard_rows": len(EXPECTED_ROWS),
+        "gap_reason_rows": EXPECTED_GAP_REASON_ROWS,
+        "review_lane_rows": EXPECTED_REVIEW_LANE_ROWS,
+        "inputs": {
+            "locked_report": str(builder.DEFAULT_LOCKED_REPORT),
+            "defined_pair_summary": str(builder.DEFAULT_DEFINED_PAIR_SUMMARY),
+            "gap_reasons": str(builder.DEFAULT_GAP_REASONS),
+            "variant_upper_bound": str(builder.DEFAULT_VARIANT_UPPER_BOUND),
+            "action_summary": str(builder.DEFAULT_ACTION_SUMMARY),
+            "manual_register_summary": str(builder.DEFAULT_MANUAL_REGISTER_SUMMARY),
+            "manual_decision_records": str(builder.DEFAULT_MANUAL_DECISION_RECORDS),
+            "source_policy_checklist": str(builder.DEFAULT_SOURCE_POLICY_CHECKLIST),
+            "row_checklist": str(builder.DEFAULT_ROW_CHECKLIST),
+            "remaining_checklist": str(builder.DEFAULT_REMAINING_CHECKLIST),
+        },
+        "outputs": {
+            "out": str(DEFAULT_DASHBOARD),
+            "markdown_out": str(DEFAULT_DOC),
+            "manifest_out": str(DEFAULT_MANIFEST),
+        },
+    }
+    failures: list[str] = []
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{manifest} {key} drifted")
+    return failures
+
+
+def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
     if not path.exists():
         return f"{path} is missing"
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def _read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":
