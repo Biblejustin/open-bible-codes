@@ -1398,14 +1398,16 @@ Run `make release-ready` from a committed tree; the final public-release gate is
 supposed to fail if tracked files are dirty.
 
 Latest validation snapshot after the release-ready make target, refreshed after
-the WRR method-lane wide-skip public-doc and handoff-guard synchronization:
+the WRR method-lane wide-skip public-doc guard and preregistration stale-template
+guard synchronization:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1951
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1953
   tests, 2 skipped, and 29325 subtests.
 - `make public-reader-package` passed after the public WRR wide-skip wording
   refresh.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
-  passed clean from the committed tree after the handoff-guard/register sync.
+  passed clean from the committed tree after the preregistration
+  stale-template guard sync.
 - `python3 -m scripts.check_prospective_lane_status_doc` passed with JSON-backed
   lane id/status/path and status-count locks.
 - `python3 -m scripts.check_real_report_run_doc` passed with TOML-backed
