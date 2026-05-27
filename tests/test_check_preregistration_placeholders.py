@@ -40,6 +40,18 @@ def test_main_fails_for_unresolved_placeholders(tmp_path, capsys) -> None:
     assert "[protocol]" in capsys.readouterr().out
 
 
+def test_main_fails_for_stale_template_phrases(tmp_path, capsys) -> None:
+    prereg = tmp_path / "study.md"
+    prereg.write_text("Status: template; copy before use.\n", encoding="utf-8")
+
+    code = check.main([str(prereg)])
+
+    out = capsys.readouterr().out
+    assert code == 1
+    assert "stale preregistration template phrase" in out
+    assert "Status: template" in out
+
+
 def test_main_passes_without_placeholders(tmp_path, capsys) -> None:
     prereg = tmp_path / "study.md"
     prereg.write_text("Protocol: `protocols/fixed.toml`\n", encoding="utf-8")

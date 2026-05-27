@@ -1983,6 +1983,10 @@ def find_preregistration_placeholder_failures(paths: list[Path]) -> list[str]:
             failures.append(
                 f"{hit.path}:{hit.line_number}:{hit.column_number}: {hit.placeholder}"
             )
+        for hit in check_preregistration_placeholders.find_stale_template_phrases(path):
+            failures.append(
+                f"{hit.path}:{hit.line_number}:{hit.column_number}: stale template phrase {hit.phrase}"
+            )
     return failures
 
 
