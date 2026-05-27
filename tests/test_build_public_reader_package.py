@@ -31,6 +31,7 @@ def test_builds_reader_package_from_whitelisted_docs(tmp_path, monkeypatch) -> N
     assert Path("reports/public_reader_package/docs/START_HERE.md").exists()
     assert Path("reports/public_reader_package/docs/PROJECT_FINDINGS_OVERVIEW.md").exists()
     assert Path("reports/public_reader_package/docs/STRONGEST_CANDIDATE_DEEP_DIVE.md").exists()
+    assert Path("reports/public_reader_package/docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md").exists()
     assert Path("reports/public_reader_package/reader_package.md").exists()
     reader_package = Path(
         "reports/public_reader_package/reader_package.md"
