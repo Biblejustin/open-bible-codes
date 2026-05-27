@@ -58,6 +58,20 @@ def test_missing_required_phrase_fails(tmp_path: Path) -> None:
     ]
 
 
+def test_missing_report_artifacts_fail_after_docs_pass(tmp_path: Path) -> None:
+    for rule in check.DOC_RULES:
+        doc = tmp_path / rule.path
+        doc.parent.mkdir(parents=True, exist_ok=True)
+        doc.write_text(
+            "\n".join((*check.REQUIRED_SECTIONS, *rule.required_phrases)),
+            encoding="utf-8",
+        )
+
+    failures = check.validate_critical_omission_docs(tmp_path)
+
+    assert "reports/critical_omission_breaks_summary.csv is missing" in failures
+
+
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
     code = check.main(["--root", str(tmp_path)])
 

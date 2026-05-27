@@ -114,6 +114,10 @@ Current Entries group/status/count rows, and blank Current read cells.
 The hypothesis-testing source audit doc is now CSV/manifest-guarded against
 page rows, summary counts, protocol anchors, report-manifest boundaries, and
 source-download metadata.
+The critical-omission follow-up docs are now CSV/manifest-guarded against
+aggregate break totals, null distribution shape, cross-tradition class/status
+counts, length-stratified rows, disputed-passage passage/cohort counts, and
+Pericope inverse-check rows.
 The Israeli prime-ministers detail recovery probe doc is now CSV/manifest-guarded
 against detail-page rows, summary counts, snapshot bytes/checksums, and the
 live-source-recovery-only boundary.
@@ -1529,6 +1533,8 @@ dirty-tree fast validation above it:
   update: 1932 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the claim-catalog field/table lock update:
   1934 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the critical-omission follow-up artifact
+  lock update: 1935 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.
