@@ -5,12 +5,18 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from pathlib import Path
+from typing import Any
 
+from scripts import build_wrr_locked_method_report as builder
 
-DEFAULT_DOC = Path("docs/WRR_LOCKED_METHOD_REPORT.md")
-DEFAULT_REPORT = Path("reports/wrr_1994/wrr_locked_method_report.csv")
+DEFAULT_DOC = builder.DEFAULT_MD
+DEFAULT_REPORT = builder.DEFAULT_OUT
+DEFAULT_MANIFEST = builder.DEFAULT_MANIFEST
+
+FIELDNAMES = builder.FIELDNAMES
 
 EXPECTED_ROWS = {
     "report_status": (
@@ -117,7 +123,11 @@ FORBIDDEN_PHRASES = (
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    failures = validate_locked_method_report_doc(args.doc, args.report)
+    failures = validate_locked_method_report_doc(
+        args.doc,
+        args.report,
+        args.manifest,
+    )
     if failures:
         for failure in failures:
             print(f"WRR locked-method report failure: {failure}", file=sys.stderr)
@@ -130,12 +140,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--doc", type=Path, default=DEFAULT_DOC)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
 
 def validate_locked_method_report_doc(
     doc: Path,
     report: Path | None = DEFAULT_REPORT,
+    manifest: Path | None = DEFAULT_MANIFEST,
 ) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
@@ -150,14 +162,19 @@ def validate_locked_method_report_doc(
             failures.append(f"{doc} forbidden phrase outside forbidden-language list: {phrase}")
     if report is not None:
         failures.extend(validate_report_csv(report))
+    if manifest is not None:
+        failures.extend(validate_manifest(manifest))
     return failures
 
 
 def validate_report_csv(report: Path) -> list[str]:
-    rows = _read_csv(report)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(report)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != FIELDNAMES:
+        failures.append(f"{report} fieldnames drifted")
     expected_count = len(EXPECTED_ROWS) + len(EXPECTED_DUPLICATE_ITEMS)
     if len(rows) != expected_count:
         failures.append(f"{report} has {len(rows)} rows; expected {expected_count}")
@@ -207,11 +224,51 @@ def _validate_row(
     return failures
 
 
-def _read_csv(path: Path) -> list[dict[str, str]] | str:
+def validate_manifest(manifest: Path) -> list[str]:
+    data = _read_json(manifest)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "build_wrr_locked_method_report",
+        "inputs": {
+            "method_status": str(builder.DEFAULT_METHOD_STATUS),
+            "readiness": str(builder.DEFAULT_READINESS),
+            "lock_options": str(builder.DEFAULT_LOCK_OPTIONS),
+            "manual_worksheet": str(builder.DEFAULT_MANUAL_WORKSHEET),
+            "corrected_distance_summary": str(builder.DEFAULT_CORRECTED_DISTANCE_SUMMARY),
+            "corrected_distance_aggregate": str(builder.DEFAULT_CORRECTED_DISTANCE_AGGREGATE),
+            "permutation_summary": str(builder.DEFAULT_PERMUTATION_SUMMARY),
+            "primary_result_table": str(builder.DEFAULT_PRIMARY_RESULT_TABLE),
+            "defined_pair_summary": str(builder.DEFAULT_DEFINED_PAIR_SUMMARY),
+        },
+        "outputs": {
+            "out": str(DEFAULT_REPORT),
+            "markdown_out": str(DEFAULT_DOC),
+            "manifest_out": str(DEFAULT_MANIFEST),
+        },
+        "report_rows": len(EXPECTED_ROWS) + len(EXPECTED_DUPLICATE_ITEMS),
+        "method_status_rows": 6,
+        "manual_decision_rows": 37,
+    }
+    failures: list[str] = []
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{manifest} {key} drifted")
+    return failures
+
+
+def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
     if not path.exists():
         return f"{path} is missing"
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def _read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

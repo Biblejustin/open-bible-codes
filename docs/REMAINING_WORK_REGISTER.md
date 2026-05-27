@@ -127,7 +127,7 @@ CSV-guarded, and the source-policy evidence packet/context/summary rows,
 CSV schemas, and manifest input/output metadata are CSV/manifest-guarded. The
 manual decision register/summary/manifest, manual decision-record worksheet,
 and exact reproduction gap dashboard are CSV-guarded too. The locked-method
-report is CSV-guarded too.
+report is CSV/manifest-guarded too.
 WRR claim readiness and lock options are CSV-guarded as well.
 WRR claim blocker packet readiness, source-queue, residual-summary,
 remaining-lane inputs, and manifest row-count/input/output metadata are
@@ -1087,7 +1087,8 @@ replacement lock, or pair exclusion has been selected.
 `docs/WRR_LOCKED_METHOD_REPORT.md` is now the compact local locked-method
 summary: keep_all_working_source, printed `D(w)` main, reported-program
 `D(w)` sensitivity, 182 observed rows, 72 defined `c(w,w')` values, and
-`rho0 = 0.000404`, with exact published reproduction caveats attached.
+`rho0 = 0.000404`, with exact published reproduction caveats attached. Its
+checker now locks report CSV schema plus manifest inputs, outputs, and counts.
 `docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md` now maps the exact-published
 gap: 163 source-cited defined distances vs 72 current defined distances, simple
 variant residual gap 40, and post-lock reporting boundary without selecting
@@ -1504,6 +1505,8 @@ dirty-tree fast validation above it:
   source-queue manifest lock update: 1922 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the source-audit checker manifest lock
   update: 1923 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the locked-method report checker manifest
+  lock update: 1924 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.
