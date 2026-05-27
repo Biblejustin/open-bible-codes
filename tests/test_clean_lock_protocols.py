@@ -42,6 +42,27 @@ def test_clean_lock_preregistrations_have_no_placeholders() -> None:
         assert list(find_placeholders(prereg, allowed=set())) == []
 
 
+def test_clean_lock_preregistrations_are_registered_docs() -> None:
+    stale_template_phrases = (
+        "Status: template",
+        "copy before use",
+        "pending current preregistration commit",
+        "State the exact question",
+        "Example shape:",
+        "State whether the sources",
+    )
+    for _protocol_path, prereg, _term_file, name in PROFILES:
+        text = prereg.read_text(encoding="utf-8")
+
+        assert "Status: registered clean-lock candidate-discovery screen." in text
+        assert (
+            f"recorded by `reports/study_locks/{name}.manifest.json`"
+            in text
+        )
+        for phrase in stale_template_phrases:
+            assert phrase not in text
+
+
 def test_clean_lock_protocols_have_expected_first_steps() -> None:
     assert load_protocol("protocols/greek_surface_new_terms.toml")["steps"][0]["id"] == "surface_context"
     assert load_protocol("protocols/compound_extension_prospective.toml")["steps"][0]["id"] == "version_presence"
