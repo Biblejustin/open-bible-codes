@@ -132,7 +132,7 @@ WRR claim readiness and lock options are CSV-guarded as well.
 WRR claim blocker packet readiness, source-queue, residual-summary,
 remaining-lane inputs, and manifest row-count/input/output metadata are
 CSV/manifest-guarded as well.
-WRR method status is CSV-guarded as well.
+WRR method status is CSV/manifest-guarded as well.
 WRR residual term reconciliation queue rows, summary rows, CSV schemas, and
 manifest input/output metadata are CSV/manifest-guarded as well.
 WRR residual reconciliation action plan rows, summary rows, CSV schemas, and
@@ -1507,6 +1507,8 @@ dirty-tree fast validation above it:
   update: 1923 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the locked-method report checker manifest
   lock update: 1924 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the method-status checker manifest lock
+  update: 1925 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.
