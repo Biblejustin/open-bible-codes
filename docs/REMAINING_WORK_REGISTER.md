@@ -109,6 +109,8 @@ The centered occurrence index doc is now CSV/manifest-guarded against generated
 occurrence rows, presence-summary rows, source/type counts, and path metadata.
 The final-report highlights doc is now CSV/manifest-guarded against generated
 highlight rows, claim-catalog row counts, and report path metadata.
+The claim catalog summary doc is now CSV-guarded against catalog fieldnames,
+Current Entries group/status/count rows, and blank Current read cells.
 The hypothesis-testing source audit doc is now CSV/manifest-guarded against
 page rows, summary counts, protocol anchors, report-manifest boundaries, and
 source-download metadata.
@@ -1525,6 +1527,8 @@ dirty-tree fast validation above it:
   update: 1931 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the direct all-lane checker manifest lock
   update: 1932 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the claim-catalog field/table lock update:
+  1934 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.
