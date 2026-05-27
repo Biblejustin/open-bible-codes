@@ -1,4 +1,5 @@
 import csv
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -108,6 +109,26 @@ class WrrManualDecisionRegisterDocTests(unittest.TestCase):
             self.assertTrue(
                 any("method_pair_universe action_terms" in failure for failure in failures)
             )
+
+    def test_validate_doc_rejects_manifest_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            manifest = root / "manifest.json"
+            payload = json.loads(check.DEFAULT_MANIFEST.read_text(encoding="utf-8"))
+            payload["rows"] = 99
+            manifest.write_text(
+                json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+
+            failures = check.validate_manual_decision_register_doc(
+                check.DEFAULT_DOC,
+                register=None,
+                summary=None,
+                manifest=manifest,
+            )
+
+            self.assertTrue(any("rows drifted" in failure for failure in failures))
 
 
 def _required_doc(root: Path) -> Path:

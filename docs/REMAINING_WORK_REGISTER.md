@@ -120,8 +120,9 @@ The source-row review bundle, source-transcription evidence packet,
 source-transcription row-review checklist, and remaining-lane review checklist
 are now CSV-guarded as well. The source-policy review checklist is also
 CSV-guarded, along with the source-policy evidence packet/context/summary and
-the manual decision register/summary, manual decision-record worksheet, and
-exact reproduction gap dashboard. The locked-method report is CSV-guarded too.
+the manual decision register/summary/manifest, manual decision-record
+worksheet, and exact reproduction gap dashboard. The locked-method report is
+CSV-guarded too.
 WRR claim readiness and lock options are CSV-guarded as well.
 WRR claim blocker packet readiness, source-queue, residual-summary, and
 remaining-lane inputs are CSV-guarded as well.
@@ -1052,7 +1053,8 @@ inventory rows: 1 source-policy/pair-rule row, 22 source-transcription row
 clusters, 3 page-image near-match rows, and 11 method/pair-universe rows. It
 represents 58 action terms, 59 residual pair links, and 40 minimum-frontier
 pair links without selecting source edits, row transcriptions, method changes,
-or pair exclusions.
+or pair exclusions. Its checker now locks register/summary schemas plus
+manifest inputs, outputs, and aggregate counts.
 `data/study/mappings/wrr_manual_decision_records.csv` now records all 37
 current locks: 26 `no_source_change` rows and 11 `method_lock` rows.
 `scripts/check_wrr_manual_decision_records.py` keeps each populated row aligned

@@ -5,13 +5,18 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from pathlib import Path
+from typing import Any
+
+from scripts import build_wrr_manual_decision_register as builder
 
 
-DEFAULT_DOC = Path("docs/WRR_MANUAL_DECISION_REGISTER.md")
-DEFAULT_REGISTER = Path("reports/wrr_1994/wrr_manual_decision_register.csv")
-DEFAULT_SUMMARY = Path("reports/wrr_1994/wrr_manual_decision_register_summary.csv")
+DEFAULT_DOC = builder.DEFAULT_MD
+DEFAULT_REGISTER = builder.DEFAULT_OUT
+DEFAULT_SUMMARY = builder.DEFAULT_SUMMARY_OUT
+DEFAULT_MANIFEST = builder.DEFAULT_MANIFEST
 
 NO_INPUT_BOUNDARY = (
     "No source correction, row transcription, pair exclusion, replacement lock, "
@@ -120,6 +125,7 @@ def main(argv: list[str] | None = None) -> int:
         args.doc,
         args.register,
         args.summary,
+        args.manifest,
     )
     if failures:
         for failure in failures:
@@ -134,6 +140,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--doc", type=Path, default=DEFAULT_DOC)
     parser.add_argument("--register", type=Path, default=DEFAULT_REGISTER)
     parser.add_argument("--summary", type=Path, default=DEFAULT_SUMMARY)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
 
@@ -141,6 +148,7 @@ def validate_manual_decision_register_doc(
     doc: Path,
     register: Path | None = DEFAULT_REGISTER,
     summary: Path | None = DEFAULT_SUMMARY,
+    manifest: Path | None = DEFAULT_MANIFEST,
 ) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
@@ -160,14 +168,19 @@ def validate_manual_decision_register_doc(
         failures.extend(validate_register_csv(register))
     if summary is not None:
         failures.extend(validate_summary_csv(summary))
+    if manifest is not None:
+        failures.extend(validate_manifest(manifest))
     return failures
 
 
 def validate_register_csv(register: Path) -> list[str]:
-    rows = _read_csv(register)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(register)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != builder.FIELDNAMES:
+        failures.append(f"{register} fieldnames drifted")
     expected_rows = EXPECTED_TOTALS["decision_rows"]
     if len(rows) != expected_rows:
         failures.append(f"{register} has {len(rows)} rows; expected {expected_rows}")
@@ -225,10 +238,13 @@ def _validate_lane_rows(
 
 
 def validate_summary_csv(summary: Path) -> list[str]:
-    rows = _read_csv(summary)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(summary)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != builder.SUMMARY_FIELDNAMES:
+        failures.append(f"{summary} fieldnames drifted")
     if len(rows) != len(LANE_LOCKS):
         failures.append(f"{summary} has {len(rows)} rows; expected {len(LANE_LOCKS)}")
     lanes = {row.get("decision_lane", ""): row for row in rows}
@@ -251,11 +267,48 @@ def validate_summary_csv(summary: Path) -> list[str]:
     return failures
 
 
-def _read_csv(path: Path) -> list[dict[str, str]] | str:
+def validate_manifest(manifest: Path) -> list[str]:
+    data = _read_json(manifest)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "build_wrr_manual_decision_register",
+        "rows": EXPECTED_TOTALS["decision_rows"],
+        "summary_rows": len(LANE_LOCKS),
+        "action_terms": EXPECTED_TOTALS["action_terms"],
+        "residual_pairs": EXPECTED_TOTALS["residual_pairs"],
+        "frontier_pairs": EXPECTED_TOTALS["frontier_pairs"],
+        "inputs": {
+            "source_policy": str(builder.DEFAULT_SOURCE_POLICY),
+            "row_checklist": str(builder.DEFAULT_ROW_CHECKLIST),
+            "remaining": str(builder.DEFAULT_REMAINING),
+        },
+        "outputs": {
+            "out": str(DEFAULT_REGISTER),
+            "summary_out": str(DEFAULT_SUMMARY),
+            "markdown_out": str(DEFAULT_DOC),
+            "manifest_out": str(DEFAULT_MANIFEST),
+        },
+    }
+    failures: list[str] = []
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{manifest} {key} drifted")
+    return failures
+
+
+def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
     if not path.exists():
         return f"{path} is missing"
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        return list(reader.fieldnames or []), list(reader)
+
+
+def _read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def _int(row: dict[str, str], key: str) -> int:
