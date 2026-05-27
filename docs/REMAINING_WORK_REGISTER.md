@@ -119,10 +119,11 @@ statuses, term/protocol/report paths, and status-count drift.
 The source-row review bundle, source-transcription evidence packet,
 source-transcription row-review checklist, and remaining-lane review checklist
 are now CSV-guarded as well. The source-policy review checklist is also
-CSV-guarded, along with the source-policy evidence packet/context/summary and
-the manual decision register/summary/manifest, manual decision-record
-worksheet, and exact reproduction gap dashboard. The locked-method report is
-CSV-guarded too.
+CSV-guarded, and the source-policy evidence packet/context/summary rows,
+CSV schemas, and manifest input/output metadata are CSV/manifest-guarded. The
+manual decision register/summary/manifest, manual decision-record worksheet,
+and exact reproduction gap dashboard are CSV-guarded too. The locked-method
+report is CSV-guarded too.
 WRR claim readiness and lock options are CSV-guarded as well.
 WRR claim blocker packet readiness, source-queue, residual-summary,
 remaining-lane inputs, and manifest row-count/input/output metadata are
@@ -1121,6 +1122,10 @@ The residual term reconciliation queue checker now validates CSV fieldnames,
 priority sequence, summary key totals, reconciliation-need totals, priority-one
 source-policy row fields, zero variant leads, and manifest inputs/outputs
 before real-report preflight can pass.
+The source-policy evidence packet checker now validates packet, context, and
+summary CSV fieldnames and rows, WNP context refs, scenario-pair counts,
+decision boundaries, and manifest inputs/outputs before real-report preflight
+can pass.
 The source-row review-bundle checker now validates its CSV summary and packet
 rows: 22 review clusters, 19 frontier rows, 43 action terms, 44 residual links,
 35 frontier links, 22 generated crops, 22 OCR-word rows, 337 OCR words, 78
@@ -1402,6 +1407,9 @@ dirty-tree fast validation above it:
 - `python3 -m scripts.check_wrr_residual_reconciliation_action_plan_doc`
   passed with CSV fieldname, rank-sequence, lane-total, zero-variant,
   boundary, and manifest input/output locks.
+- `python3 -m scripts.check_wrr_source_policy_evidence_packet_doc` passed with
+  packet/context/summary CSV fieldname, row, WNP-context, scenario-count,
+  boundary, and manifest input/output locks.
 - Cities public handoff docs checker passed and is wired into real-report
   preflight.
 - Focused Cities decision-record/preflight pytest passed:
@@ -1433,6 +1441,8 @@ dirty-tree fast validation above it:
   checker manifest lock update: 1909 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the residual term reconciliation queue
   checker manifest lock update: 1910 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the source-policy evidence packet checker
+  manifest lock update: 1911 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.

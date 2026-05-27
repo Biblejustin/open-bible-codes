@@ -1,4 +1,5 @@
 import csv
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -40,6 +41,7 @@ class WrrSourcePolicyEvidencePacketDocTests(unittest.TestCase):
                     packet=None,
                     context=None,
                     summary=None,
+                    manifest=None,
                 ),
                 [],
             )
@@ -111,6 +113,28 @@ class WrrSourcePolicyEvidencePacketDocTests(unittest.TestCase):
 
             self.assertTrue(any("wnp_context_blocks" in failure for failure in failures))
 
+    def test_validate_packet_doc_rejects_manifest_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest = Path(tmp) / "manifest.json"
+            payload = json.loads(check.DEFAULT_MANIFEST.read_text(encoding="utf-8"))
+            payload["source_context_rows"] = 99
+            manifest.write_text(
+                json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+
+            failures = check.validate_source_policy_evidence_packet_doc(
+                check.DEFAULT_DOC,
+                packet=None,
+                context=None,
+                summary=None,
+                manifest=manifest,
+            )
+
+            self.assertTrue(
+                any("source_context_rows drifted" in failure for failure in failures)
+            )
+
 
 def _required_doc(root: Path) -> Path:
     path = root / "packet.md"
@@ -120,10 +144,7 @@ def _required_doc(root: Path) -> Path:
 
 def _packet_csv(root: Path, *, bad_term: bool = False) -> Path:
     path = root / "packet.csv"
-    fieldnames = list(check.EXPECTED_PACKET_ROW) + [
-        "scenario_pair_statuses",
-        "evidence_read",
-    ]
+    fieldnames = check.PACKET_FIELDNAMES
     row = dict(check.EXPECTED_PACKET_ROW)
     if bad_term:
         row["term"] = "drifted"
@@ -144,14 +165,7 @@ def _packet_csv(root: Path, *, bad_term: bool = False) -> Path:
 
 def _context_csv(root: Path, *, bad_ref: bool = False) -> Path:
     path = root / "context.csv"
-    fieldnames = [
-        "context_id",
-        "source_flag",
-        "source_ref",
-        "source_terms",
-        "read",
-        "decision_boundary",
-    ]
+    fieldnames = check.CONTEXT_FIELDNAMES
     with path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
@@ -171,7 +185,7 @@ def _context_csv(root: Path, *, bad_ref: bool = False) -> Path:
 
 def _summary_csv(root: Path, *, bad_count: bool = False) -> Path:
     path = root / "summary.csv"
-    fieldnames = list(check.EXPECTED_SUMMARY_ROW) + ["read"]
+    fieldnames = check.SUMMARY_FIELDNAMES
     row = dict(check.EXPECTED_SUMMARY_ROW)
     if bad_count:
         row["wnp_context_blocks"] = "2"

@@ -5,14 +5,23 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from pathlib import Path
+from typing import Any
+
+from scripts import build_wrr_source_policy_evidence_packet as builder
 
 
-DEFAULT_DOC = Path("docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md")
-DEFAULT_PACKET = Path("reports/wrr_1994/wrr_source_policy_evidence_packet.csv")
-DEFAULT_CONTEXT = Path("reports/wrr_1994/wrr_source_policy_evidence_context.csv")
-DEFAULT_SUMMARY = Path("reports/wrr_1994/wrr_source_policy_evidence_summary.csv")
+DEFAULT_DOC = builder.DEFAULT_MD
+DEFAULT_PACKET = builder.DEFAULT_OUT
+DEFAULT_CONTEXT = builder.DEFAULT_SOURCE_CONTEXT_OUT
+DEFAULT_SUMMARY = builder.DEFAULT_SUMMARY_OUT
+DEFAULT_MANIFEST = builder.DEFAULT_MANIFEST
+
+PACKET_FIELDNAMES = builder.EVIDENCE_FIELDNAMES
+CONTEXT_FIELDNAMES = builder.SOURCE_CONTEXT_FIELDNAMES
+SUMMARY_FIELDNAMES = builder.SUMMARY_FIELDNAMES
 
 DECISION_BOUNDARY = (
     "No automatic correction or exclusion; source-policy targets need citable "
@@ -89,6 +98,7 @@ def main(argv: list[str] | None = None) -> int:
         args.packet,
         args.context,
         args.summary,
+        args.manifest,
     )
     if failures:
         for failure in failures:
@@ -104,6 +114,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--packet", type=Path, default=DEFAULT_PACKET)
     parser.add_argument("--context", type=Path, default=DEFAULT_CONTEXT)
     parser.add_argument("--summary", type=Path, default=DEFAULT_SUMMARY)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
 
@@ -112,6 +123,7 @@ def validate_source_policy_evidence_packet_doc(
     packet: Path | None = DEFAULT_PACKET,
     context: Path | None = DEFAULT_CONTEXT,
     summary: Path | None = DEFAULT_SUMMARY,
+    manifest: Path | None = DEFAULT_MANIFEST,
 ) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
@@ -128,14 +140,19 @@ def validate_source_policy_evidence_packet_doc(
         failures.extend(validate_context_csv(context))
     if summary is not None:
         failures.extend(validate_summary_csv(summary))
+    if manifest is not None:
+        failures.extend(validate_manifest(manifest))
     return failures
 
 
 def validate_packet_csv(packet: Path) -> list[str]:
-    rows = _read_csv(packet)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(packet)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != PACKET_FIELDNAMES:
+        failures.append(f"{packet} fieldnames drifted")
     if len(rows) != 1:
         failures.append(f"{packet} has {len(rows)} rows; expected 1")
     if not rows:
@@ -155,10 +172,13 @@ def validate_packet_csv(packet: Path) -> list[str]:
 
 
 def validate_context_csv(context: Path) -> list[str]:
-    rows = _read_csv(context)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(context)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != CONTEXT_FIELDNAMES:
+        failures.append(f"{context} fieldnames drifted")
     if len(rows) != len(EXPECTED_CONTEXT):
         failures.append(f"{context} has {len(rows)} rows; expected {len(EXPECTED_CONTEXT)}")
     actual_refs = {row.get("context_id", ""): row.get("source_ref", "") for row in rows}
@@ -176,10 +196,13 @@ def validate_context_csv(context: Path) -> list[str]:
 
 
 def validate_summary_csv(summary: Path) -> list[str]:
-    rows = _read_csv(summary)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(summary)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != SUMMARY_FIELDNAMES:
+        failures.append(f"{summary} fieldnames drifted")
     if len(rows) != 1:
         failures.append(f"{summary} has {len(rows)} rows; expected 1")
     if not rows:
@@ -193,11 +216,50 @@ def validate_summary_csv(summary: Path) -> list[str]:
     return failures
 
 
-def _read_csv(path: Path) -> list[dict[str, str]] | str:
+def validate_manifest(manifest: Path) -> list[str]:
+    data = _read_json(manifest)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "build_wrr_source_policy_evidence_packet",
+        "evidence_rows": 1,
+        "source_context_rows": len(EXPECTED_CONTEXT),
+        "summary_rows": 1,
+        "inputs": {
+            "action_plan": str(builder.DEFAULT_ACTION_PLAN),
+            "source_queue": str(builder.DEFAULT_SOURCE_QUEUE),
+            "row_ocr": str(builder.DEFAULT_ROW_OCR),
+            "scenario_pairs": str(builder.DEFAULT_SCENARIO_PAIRS),
+            "table2_bridge": str(builder.DEFAULT_TABLE2_BRIDGE),
+            "wnp_html": str(builder.DEFAULT_WNP_HTML),
+        },
+        "outputs": {
+            "out": str(DEFAULT_PACKET),
+            "source_context_out": str(DEFAULT_CONTEXT),
+            "summary_out": str(DEFAULT_SUMMARY),
+            "markdown_out": str(DEFAULT_DOC),
+            "manifest_out": str(DEFAULT_MANIFEST),
+        },
+    }
+    failures: list[str] = []
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{manifest} {key} drifted")
+    return failures
+
+
+def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
     if not path.exists():
         return f"{path} is missing"
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def _read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def normalize_space(text: str) -> str:
