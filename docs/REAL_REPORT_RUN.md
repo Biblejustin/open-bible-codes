@@ -207,6 +207,8 @@ It requires:
   fields;
 - hypothesis-testing source audit doc keeps the source-status/no-result
   boundary visible;
+- Israeli prime-ministers detail recovery doc keeps the live-source recovery
+  boundary, redirected-root status, and no-result-bearing-work limit visible;
 - research missing model pages audit doc keeps the missing level-2/3 model page
   boundary visible;
 - WRR adjacent source audit and simulation docs keep source-shape and

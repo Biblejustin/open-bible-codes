@@ -801,6 +801,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_israeli_prime_ministers_detail_recovery_probe_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_research_missing_model_pages_audit_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -1308,6 +1312,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_hypothesis_testing_source_audit_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_israeli_prime_ministers_detail_recovery_probe_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "docs/ISRAELI_PRIME_MINISTERS_DETAIL_RECOVERY_PROBE.md",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -3087,6 +3099,35 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "hypothesis-testing source audit doc failures: "
                 "docs/HYPOTHESIS_TESTING_SOURCE_AUDIT.md missing usable method pages",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_israeli_pm_detail_recovery_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_israeli_prime_ministers_detail_recovery_probe_doc,
+                "validate_detail_recovery_doc",
+                return_value=[
+                    "docs/ISRAELI_PRIME_MINISTERS_DETAIL_RECOVERY_PROBE.md "
+                    "missing recovery boundary"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["israeli_prime_ministers_detail_recovery_doc_failures"],
+                [
+                    "docs/ISRAELI_PRIME_MINISTERS_DETAIL_RECOVERY_PROBE.md "
+                    "missing recovery boundary"
+                ],
+            )
+            self.assertIn(
+                "Israeli PM detail recovery doc failures: "
+                "docs/ISRAELI_PRIME_MINISTERS_DETAIL_RECOVERY_PROBE.md "
+                "missing recovery boundary",
                 payload["failures"],
             )
 

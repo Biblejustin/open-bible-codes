@@ -121,6 +121,9 @@ Pericope inverse-check rows.
 The Israeli prime-ministers detail recovery probe doc is now CSV/manifest-guarded
 against detail-page rows, summary counts, snapshot bytes/checksums, and the
 live-source-recovery-only boundary.
+Real-report preflight now runs the Israeli prime-ministers detail recovery
+probe doc checker, so the redirected-root/no-result boundary is gated before
+formal report assembly.
 The strongest-candidate deep-dive doc is now CSV/manifest-guarded against
 candidate row order, candidate ids, source inputs, and report path metadata.
 The prospective lane-status doc is now JSON-guarded against tracked lane ids,
@@ -1544,6 +1547,9 @@ dirty-tree fast validation above it:
 - `make fast-validate` passed after extending the profile-status snapshot lock
   to next-lock, consolidated-findings, and Greek second-cohort docs: 1936 tests,
   2 skipped, and 29196 subtests.
+- `make fast-validate` passed after wiring the Israeli prime-ministers detail
+  recovery probe doc into real-report preflight: 1937 tests, 2 skipped, and
+  29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.

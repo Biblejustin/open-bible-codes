@@ -48,6 +48,7 @@ from scripts import (
     check_final_report_highlights_doc,
     check_greek_surface_second_cohort_readiness_doc,
     check_hypothesis_testing_source_audit_doc,
+    check_israeli_prime_ministers_detail_recovery_probe_doc,
     check_manual_review_queue,
     check_preregistration_placeholders,
     check_prospective_lane_status_doc,
@@ -274,6 +275,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
     "docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md",
     "docs/HYPOTHESIS_TESTING_SOURCE_AUDIT.md",
+    "docs/ISRAELI_PRIME_MINISTERS_DETAIL_RECOVERY_PROBE.md",
     "docs/RESEARCH_MISSING_MODEL_PAGES_AUDIT.md",
     "docs/WRR_SOURCE_RECOVERY_PROBE.md",
     "docs/WRR_WAYBACK_SOURCE_RECOVERY_PROBE.md",
@@ -685,6 +687,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_cities_extractable_text_review.py",
     "scripts/check_cities_extractable_text_review_doc.py",
     "scripts/check_hypothesis_testing_source_audit_doc.py",
+    "scripts/check_israeli_prime_ministers_detail_recovery_probe_doc.py",
     "scripts/check_research_missing_model_pages_audit_doc.py",
     "scripts/check_wrr_adjacent_source_audit_docs.py",
     "scripts/check_wrr_source_audit_doc.py",
@@ -1605,6 +1608,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(hypothesis_testing_source_audit_doc_failures)
         )
 
+    israeli_prime_ministers_detail_recovery_doc_failures = (
+        check_israeli_prime_ministers_detail_recovery_probe_doc.validate_detail_recovery_doc(
+            check_israeli_prime_ministers_detail_recovery_probe_doc.DEFAULT_DOC
+        )
+    )
+    if israeli_prime_ministers_detail_recovery_doc_failures:
+        failures.append(
+            "Israeli PM detail recovery doc failures: "
+            + "; ".join(israeli_prime_ministers_detail_recovery_doc_failures)
+        )
+
     research_missing_model_pages_audit_doc_failures = (
         check_research_missing_model_pages_audit_doc.validate_research_missing_model_pages_audit_doc(
             check_research_missing_model_pages_audit_doc.DEFAULT_DOC
@@ -1799,6 +1813,9 @@ def main(argv: list[str] | None = None) -> int:
             cities_extractable_text_review_doc_failures
         ),
         "hypothesis_testing_source_audit_doc_failures": hypothesis_testing_source_audit_doc_failures,
+        "israeli_prime_ministers_detail_recovery_doc_failures": (
+            israeli_prime_ministers_detail_recovery_doc_failures
+        ),
         "research_missing_model_pages_audit_doc_failures": (
             research_missing_model_pages_audit_doc_failures
         ),
