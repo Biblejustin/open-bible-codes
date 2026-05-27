@@ -1399,8 +1399,8 @@ supposed to fail if tracked files are dirty.
 
 Latest validation snapshot after the release-ready make target, refreshed after
 the WRR method-lane wide-skip public-doc guard, preregistration stale-template
-guard synchronization, project findings overview guard, and reader-path
-overview link guard:
+guard synchronization, project findings overview guard, reader-path overview
+link guard, and direct Makefile public-release overview guard:
 
 - Current `make fast-validate` passed, including `python3 -m pytest -q`: 1962
   tests, 2 skipped, and 29325 subtests.
