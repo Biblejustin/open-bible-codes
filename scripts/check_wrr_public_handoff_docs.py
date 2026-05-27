@@ -26,6 +26,9 @@ REQUIRED_PHRASES_BY_DOC = {
         "source-transcription row clusters, page-image near-match terms, and method/pair-universe counts",
         "without choosing corrections or exclusions",
         "post-lock reporting boundary without selecting source changes",
+        "WRR method-lane wide-skip probe:",
+        "It checks those 11 OCR-matched method-lane terms through skip 5000",
+        "0 wider-skip ordinary Genesis hits",
     ),
     Path("docs/REAL_REPORT_RUN.md"): (
         "WRR claim-readiness doc records selected local-lock readiness",
@@ -38,6 +41,8 @@ REQUIRED_PHRASES_BY_DOC = {
         "WRR manual decision-record worksheet lists the exact rank/lane/target fields plus current record status",
         "no-input handoff with term targets, source-transcription row clusters, page-image near matches, and method/pair-universe counts",
         "locks them as 26 `no_source_change` rows and 11 `method_lock` rows",
+        "docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md",
+        "0 ordinary Genesis hits through skip 5000",
     ),
     Path("docs/FINAL_REPORT.md"): (
         "Exact published reproduction remains caveated by the 163-distance gap, not by pending source-edit choices",
@@ -49,6 +54,9 @@ REQUIRED_PHRASES_BY_DOC = {
         "remaining-lane checklist keeps the 3 page-image near-match terms and 11 method/pair-universe terms in review lanes",
         "manual decision register consolidates 37 manual-decision inventory rows representing 58 action terms, 59 residual pair links, and 40 minimum-frontier pair links",
         "populated decision-record CSV locks all 37 rows as 26 `no_source_change` decisions and 11 `method_lock` decisions",
+        "The 11 OCR-matched method-lane terms remain zero-hit",
+        "through skip 5000",
+        "not settle the exact-published WRR gap",
     ),
     Path("docs/FINAL_REPORT_DRAFT.md"): (
         "The residual handoff is packetized without selecting corrections",
@@ -74,11 +82,23 @@ REQUIRED_PHRASES_BY_DOC = {
         "The residual handoff is now packetized without selecting corrections",
         "source-policy term, 43 source-transcription terms, 3 page-image near-match terms, and 11 method/pair-universe terms",
         "claim-blocker packet mirroring top term targets, row clusters, page-image near matches, and method/pair-universe counts",
+        "A wider method-lane check found 0 ordinary Genesis hits through skip 5000",
+        "not explained by a small skip-cap extension",
         "source-policy checklist keeps the Chełm source-policy/pair-rule target as a review lane",
         "row-review checklist keeps the 22 source-transcription row clusters in review order",
         "remaining-lane checklist keeps the 3 page-image near-match terms and 11 method/pair-universe terms in review lanes",
         "manual decision register consolidates 37 manual-decision inventory rows representing 58 action terms, 59 residual pair links, and 40 minimum-frontier pair links",
         "decision-record CSV locks all 37 rows as 26 `no_source_change` decisions and 11 `method_lock` decisions",
+    ),
+    Path("docs/CLAIM_CATALOG.md"): (
+        "The method-lane wide-skip probe finds 0 ordinary Genesis hits through skip 5000 for 11 OCR-matched method-lane terms",
+        "not explained by a small cap extension",
+        "Readiness gate now supports local locked-method wording but not exact published reproduction",
+    ),
+    Path("docs/START_HERE.md"): (
+        "A wider method-lane check found 0 ordinary Genesis hits through skip 5000",
+        "not explained by a small skip-cap extension",
+        "exact published WRR reproduction remains caveated",
     ),
     Path("docs/REMAINING_WORK_REGISTER.md"): (
         "source-transcription row cluster summary, page-image near-match lane, and method/pair-universe summary",
@@ -90,6 +110,9 @@ REQUIRED_PHRASES_BY_DOC = {
         "current locks: 26 `no_source_change` rows and 11 `method_lock` rows",
         "current record status, selected action, and evidence prompt for all 37 lock rows",
         "row-level review order, and page-image review boundary",
+        "The WRR method-lane wide-skip probe is now guarded",
+        "0 total hits through skip 5000",
+        "not explained by a small skip-cap extension",
     ),
     Path("protocols/README.md"): (
         "WRR source audit:",
@@ -99,6 +122,8 @@ REQUIRED_PHRASES_BY_DOC = {
         "full selected-universe cap-1000 corrected-distance output",
         "current locks, exact-published-reproduction caveats, and next actions",
         "999,999 date-label permutation diagnostic",
+        "method-lane wide-skip probe",
+        "0 ordinary Genesis hits through skip 5000",
         "It is locked local evidence, not an exact WRR reproduction.",
     ),
 }

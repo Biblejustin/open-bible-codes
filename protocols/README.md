@@ -414,7 +414,10 @@ reconciliation for the current imported-pair count versus the source-cited
 163-distance WRR second-list sample. It also reads the current repo-defined
 999,999 date-label permutation diagnostic into the WRR method-status matrix,
 emits source-policy scenario impact, emits D(w) formula sensitivity, and gathers
-lock options plus the claim-blocker packet, including visual triage notes.
+lock options plus the claim-blocker packet, including visual triage notes. It
+also runs the method-lane wide-skip probe: the 11 OCR-matched method-lane terms
+have 0 ordinary Genesis hits through skip 5000, so that lane is not explained
+by a small cap extension.
 It is locked local evidence, not an exact WRR reproduction.
 
 Hebrew MT-family version comparison:
