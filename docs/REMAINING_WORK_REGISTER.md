@@ -1405,7 +1405,7 @@ the WRR method-lane wide-skip public-doc and handoff-guard synchronization:
 - `make public-reader-package` passed after the public WRR wide-skip wording
   refresh.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
-  passed clean after commit `86a7ef0`.
+  passed clean from the committed tree after the handoff-guard/register sync.
 - `python3 -m scripts.check_prospective_lane_status_doc` passed with JSON-backed
   lane id/status/path and status-count locks.
 - `python3 -m scripts.check_real_report_run_doc` passed with TOML-backed
