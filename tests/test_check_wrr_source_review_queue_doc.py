@@ -49,6 +49,7 @@ def test_validate_source_review_queue_accepts_matching_csvs(tmp_path: Path) -> N
         doc,
         queue=_queue_csv(tmp_path),
         summary=_summary_csv(tmp_path),
+        manifest=None,
     )
 
     assert failures == []
@@ -61,6 +62,7 @@ def test_validate_source_review_queue_rejects_queue_drift(tmp_path: Path) -> Non
         doc,
         queue=_queue_csv(tmp_path, drop_last=True),
         summary=_summary_csv(tmp_path),
+        manifest=None,
     )
 
     assert any("expected 97" in failure for failure in failures)
@@ -73,9 +75,46 @@ def test_validate_source_review_queue_rejects_summary_drift(tmp_path: Path) -> N
         doc,
         queue=_queue_csv(tmp_path),
         summary=_summary_csv(tmp_path, bad_bucket="ocr_not_matched_no_variant_lead"),
+        manifest=None,
     )
 
     assert any("ocr_not_matched_no_variant_lead terms" in failure for failure in failures)
+
+
+def test_validate_source_review_queue_rejects_manifest_drift(tmp_path: Path) -> None:
+    doc = _doc(tmp_path)
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(
+        """
+{
+  "inputs": {
+    "blocked_pairs": "reports/wrr_1994/wrr_defined_gap_blocked_pairs.csv",
+    "row_ocr": "reports/wrr_1994/wrr_primary_table2_row_ocr_probe.csv",
+    "variants": "reports/wrr_1994/wrr_zero_hit_variant_probe.csv"
+  },
+  "outputs": {
+    "manifest_out": "reports/wrr_1994/wrr_source_review_queue.manifest.json",
+    "markdown_out": "docs/WRR_SOURCE_REVIEW_QUEUE.md",
+    "out": "reports/wrr_1994/wrr_source_review_queue.csv",
+    "summary_out": "reports/wrr_1994/wrr_source_review_queue_summary.csv"
+  },
+  "queue_rows": 96,
+  "run_label": "all_lanes_cap1000",
+  "summary_rows": 6,
+  "tool": "build_wrr_source_review_queue"
+}
+""".lstrip(),
+        encoding="utf-8",
+    )
+
+    failures = check.validate_source_review_queue_doc(
+        doc,
+        queue=_queue_csv(tmp_path),
+        summary=_summary_csv(tmp_path),
+        manifest=manifest,
+    )
+
+    assert any("queue_rows drifted" in failure for failure in failures)
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
@@ -95,24 +134,7 @@ def _doc(tmp_path: Path) -> Path:
 
 def _queue_csv(tmp_path: Path, *, drop_last: bool = False) -> Path:
     path = tmp_path / "queue.csv"
-    fieldnames = [
-        "run_label",
-        "priority_rank",
-        "review_bucket",
-        "term_side",
-        "term_id",
-        "term",
-        "row_ocr_status",
-        "blocking_pairs",
-        "best_variant_hit_count",
-        "source_review_flags",
-        "source_review_note",
-        "source_review_action",
-        "visual_review_note",
-        "visual_review_action",
-        "pair_ids",
-        "read",
-    ]
+    fieldnames = check.QUEUE_FIELDNAMES
     rows: list[dict[str, str]] = []
     rank = 1
     for bucket, expected in check.EXPECTED_SUMMARY.items():
@@ -164,15 +186,7 @@ def _queue_csv(tmp_path: Path, *, drop_last: bool = False) -> Path:
 
 def _summary_csv(tmp_path: Path, *, bad_bucket: str | None = None) -> Path:
     path = tmp_path / "summary.csv"
-    fieldnames = [
-        "run_label",
-        "review_bucket",
-        "terms",
-        "blocking_pairs",
-        "variant_hit_total",
-        "row_ocr_statuses",
-        "source_review_flags",
-    ]
+    fieldnames = check.SUMMARY_FIELDNAMES
     rows = []
     for bucket, expected in check.EXPECTED_SUMMARY.items():
         terms, blocking_pairs, variant_hit_total, row_ocr_statuses = expected
