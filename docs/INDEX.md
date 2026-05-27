@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 377
+Documents indexed: 379
 
 ## Controls
 
@@ -184,6 +184,7 @@ Documents indexed: 377
 | English Seed Shuffle Follow-Up Report | `ENGLISH_SEED_SHUFFLE_FOLLOWUP_REPORT.md` |
 | Open Bible Codes Final Report | `FINAL_REPORT.md` |
 | Gog/Magog Pair Prospective Report | `GOG_MAGOG_PAIR_PROSPECTIVE_REPORT.md` |
+| Gospel People And Genealogy Prospective Report | `GOSPEL_PEOPLE_GENEALOGY_PROSPECTIVE_REPORT.md` |
 | Greek Exact-Center Cohort Report | `GREEK_EXACT_CENTER_COHORT_REPORT.md` |
 | Greek Exact-Center Four-Source Report | `GREEK_EXACT_CENTER_FOUR_SOURCE_REPORT.md` |
 | Greek Exact-Center Three-Source Report | `GREEK_EXACT_CENTER_THREE_SOURCE_REPORT.md` |
@@ -251,6 +252,7 @@ Documents indexed: 377
 | CRD Review Workflow | `CRD_REVIEW_WORKFLOW.md` |
 | Critical Omission Breaks | `CRITICAL_OMISSION_BREAKS.md` |
 | Critical Omission Breaks Cross Tradition | `CRITICAL_OMISSION_BREAKS_CROSS_TRADITION.md` |
+| Critical Omission Breaks: Gospel People And Genealogy | `CRITICAL_OMISSION_BREAKS_GOSPEL_PEOPLE_GENEALOGY.md` |
 | Critical Omission Breaks Length Stratified | `CRITICAL_OMISSION_BREAKS_LENGTH_STRATIFIED.md` |
 | Critical Omission Breaks Null | `CRITICAL_OMISSION_BREAKS_NULL.md` |
 | Critical Omission Breaks Pericope Override | `CRITICAL_OMISSION_BREAKS_PERICOPE_OVERRIDE.md` |

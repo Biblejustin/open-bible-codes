@@ -127,7 +127,11 @@ def main() -> int:
         for block in deleted_blocks
     }
 
-    term_stats, stats_by_query = build_stats_by_query(tr, terms)
+    term_stats, stats_by_query = build_stats_by_query(
+        tr,
+        terms,
+        min_term_length=args.min_term_length,
+    )
     matches = list(
         iter_els_query_matches_by_lanes(
             tr.text,
@@ -206,6 +210,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--no-default-terms", action="store_true")
     parser.add_argument("--extra-terms", type=Path, action="append", default=[])
     parser.add_argument("--out-suffix", default="")
+    parser.add_argument("--min-term-length", type=int, default=MIN_TERM_LENGTH)
     parser.add_argument("--max-terms", type=int, help="Test helper: limit term rows before building queries.")
     return parser
 
@@ -338,13 +343,15 @@ def normalize_ref_label(ref: str) -> str:
 def build_stats_by_query(
     corpus: Corpus,
     terms: list[dict[str, str]],
+    *,
+    min_term_length: int = MIN_TERM_LENGTH,
 ) -> tuple[list[TermBreakStats], dict[str, list[TermBreakStats]]]:
     term_stats: list[TermBreakStats] = []
     stats_by_query: dict[str, list[TermBreakStats]] = {}
     for term_row in terms:
         term_row["_order"] = str(len(term_stats))
         normalized = normalize_for_corpus(corpus, term_row["term"])
-        if len(normalized) < MIN_TERM_LENGTH:
+        if len(normalized) < min_term_length:
             term_stats.append(
                 TermBreakStats(
                     order=len(term_stats),
@@ -606,7 +613,7 @@ def write_manifest(
                 "term_rows": len(terms),
                 "min_skip": MIN_SKIP,
                 "max_skip": MAX_SKIP,
-                "min_term_length": MIN_TERM_LENGTH,
+                "min_term_length": args.min_term_length,
                 "ref_missing_verses": len(blocks),
                 "deleted_blocks_used": len(used_blocks),
                 "deleted_letters_used": sum(block.length for block in used_blocks),

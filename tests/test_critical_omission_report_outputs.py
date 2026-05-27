@@ -8,6 +8,7 @@ from els.corpus import Corpus, VerseSpan
 from els.critical import OmittedBlock, TermBreakStats
 from scripts.analyze_critical_omission_breaks import (
     TERM_PATHS,
+    build_stats_by_query,
     passage_summary_rows_for_blocks,
     term_paths_for_args,
     write_rows,
@@ -80,6 +81,29 @@ class TermPathSelectionTests(unittest.TestCase):
         paths = term_paths_for_args(args)
 
         self.assertEqual(paths, [Path("terms/extra.csv")])
+
+
+class BuildStatsByQueryTests(unittest.TestCase):
+    def test_min_term_length_can_be_overridden(self) -> None:
+        term = {"term": "αβγ", "term_id": "short"}
+
+        term_stats, stats_by_query = build_stats_by_query(
+            _corpus("αβγδε"),
+            [term],
+            min_term_length=4,
+        )
+
+        self.assertEqual(term_stats[0].status, "skipped_short_term")
+        self.assertEqual(stats_by_query, {})
+
+        term_stats, stats_by_query = build_stats_by_query(
+            _corpus("αβγδε"),
+            [term],
+            min_term_length=3,
+        )
+
+        self.assertEqual(term_stats[0].status, "counted")
+        self.assertIn("αβγ", stats_by_query)
 
 
 class WriteRowsTests(unittest.TestCase):
