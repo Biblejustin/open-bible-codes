@@ -1032,7 +1032,9 @@ minimum-frontier links, and 22 row clusters, with row 06 first at 4 frontier
 terms.
 `docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md` keeps those 22 row
 clusters in review order, preserving required decision-record fields without
-selecting row transcriptions, corrections, exclusions, or method changes.
+selecting row transcriptions, corrections, exclusions, or method changes. Its
+checker now also locks CSV fieldnames plus manifest counts, inputs, and
+outputs.
 `docs/WRR_SOURCE_ROW_COVERAGE_PACKET.md` now joins that row checklist to
 current source-queue visual notes: the current source-transcription action
 terms have 0 direct visual-note coverage, 4 rows have related row-level visual
@@ -1479,6 +1481,9 @@ dirty-tree fast validation above it:
   manifest lock update: 1915 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the source-transcription evidence packet
   checker manifest lock update: 1916 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the source-transcription row-review
+  checklist checker manifest lock update: 1917 tests, 2 skipped, and 29196
+  subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.

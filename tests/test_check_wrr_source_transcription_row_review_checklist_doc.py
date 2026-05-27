@@ -18,7 +18,11 @@ class WrrSourceTranscriptionRowReviewChecklistDocTests(unittest.TestCase):
             path.write_text("\n".join(check.REQUIRED_PHRASES) + "\n", encoding="utf-8")
 
             self.assertEqual(
-                check.validate_row_review_checklist_doc(path, checklist=None),
+                check.validate_row_review_checklist_doc(
+                    path,
+                    checklist=None,
+                    manifest=None,
+                ),
                 [],
             )
 
@@ -59,6 +63,7 @@ class WrrSourceTranscriptionRowReviewChecklistDocTests(unittest.TestCase):
                 check.validate_row_review_checklist_doc(
                     doc,
                     checklist=_checklist_csv(root),
+                    manifest=None,
                 ),
                 [],
             )
@@ -71,6 +76,7 @@ class WrrSourceTranscriptionRowReviewChecklistDocTests(unittest.TestCase):
             failures = check.validate_row_review_checklist_doc(
                 doc,
                 checklist=_checklist_csv(root, review_state_rank=1),
+                manifest=None,
             )
 
             self.assertTrue(any("review state" in failure for failure in failures))
@@ -83,9 +89,44 @@ class WrrSourceTranscriptionRowReviewChecklistDocTests(unittest.TestCase):
             failures = check.validate_row_review_checklist_doc(
                 doc,
                 checklist=_checklist_csv(root, bad_boundary_rank=1),
+                manifest=None,
             )
 
             self.assertTrue(any("no-input boundary" in failure for failure in failures))
+
+    def test_validate_doc_rejects_manifest_count_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            doc = _required_doc(root)
+            manifest = root / "manifest.json"
+            manifest.write_text(
+                """
+{
+  "action_terms": 42,
+  "frontier_pairs": 35,
+  "inputs": {
+    "row_summary": "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv"
+  },
+  "outputs": {
+    "manifest_out": "reports/wrr_1994/wrr_source_transcription_row_review_checklist.manifest.json",
+    "markdown_out": "docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md",
+    "out": "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv"
+  },
+  "residual_pairs": 44,
+  "rows": 22,
+  "tool": "build_wrr_source_transcription_row_review_checklist"
+}
+""".lstrip(),
+                encoding="utf-8",
+            )
+
+            failures = check.validate_row_review_checklist_doc(
+                doc,
+                checklist=_checklist_csv(root),
+                manifest=manifest,
+            )
+
+            self.assertTrue(any("action_terms drifted" in failure for failure in failures))
 
 
 def _required_doc(root: Path) -> Path:
@@ -101,27 +142,7 @@ def _checklist_csv(
     bad_boundary_rank: int | None = None,
 ) -> Path:
     path = root / "checklist.csv"
-    fieldnames = [
-        "run_label",
-        "row_rank",
-        "row_number",
-        "concept",
-        "review_state",
-        "action_terms",
-        "residual_pairs",
-        "frontier_pairs",
-        "terms_to_verify",
-        "matched_row_terms",
-        "row_ocr_name_texts",
-        "row_ocr_date_texts",
-        "table2_bridge_read",
-        "required_source_evidence",
-        "required_alignment_evidence",
-        "required_decision_record",
-        "no_input_boundary",
-        "allowed_without_input",
-        "next_manual_action",
-    ]
+    fieldnames = check.FIELDNAMES
     action_counts = [4, 3, 3] + [2] * 10 + [1] * 6 + [4, 2, 1]
     residual_counts = action_counts.copy()
     residual_counts[13] = 2

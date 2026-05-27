@@ -5,14 +5,18 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from pathlib import Path
+from typing import Any
 
+from scripts import build_wrr_source_transcription_row_review_checklist as builder
 
-DEFAULT_DOC = Path("docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md")
-DEFAULT_CHECKLIST = Path(
-    "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv"
-)
+DEFAULT_DOC = builder.DEFAULT_MD
+DEFAULT_CHECKLIST = builder.DEFAULT_OUT
+DEFAULT_MANIFEST = builder.DEFAULT_MANIFEST
+
+FIELDNAMES = builder.FIELDNAMES
 
 EXPECTED_TOTALS = {
     "row_clusters": "22",
@@ -72,7 +76,11 @@ FORBIDDEN_PHRASES = (
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    failures = validate_row_review_checklist_doc(args.doc, args.checklist)
+    failures = validate_row_review_checklist_doc(
+        args.doc,
+        args.checklist,
+        args.manifest,
+    )
     if failures:
         for failure in failures:
             print(
@@ -88,12 +96,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--doc", type=Path, default=DEFAULT_DOC)
     parser.add_argument("--checklist", type=Path, default=DEFAULT_CHECKLIST)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
 
 def validate_row_review_checklist_doc(
     doc: Path,
     checklist: Path | None = DEFAULT_CHECKLIST,
+    manifest: Path | None = DEFAULT_MANIFEST,
 ) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
@@ -111,14 +121,19 @@ def validate_row_review_checklist_doc(
     )
     if checklist is not None:
         failures.extend(validate_checklist_csv(checklist))
+    if manifest is not None:
+        failures.extend(validate_manifest(manifest))
     return failures
 
 
 def validate_checklist_csv(checklist: Path) -> list[str]:
-    rows = _read_csv(checklist)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(checklist)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != FIELDNAMES:
+        failures.append(f"{checklist} fieldnames drifted")
     expected_rows = int(EXPECTED_TOTALS["row_clusters"])
     if len(rows) != expected_rows:
         failures.append(f"{checklist} has {len(rows)} rows; expected {expected_rows}")
@@ -163,11 +178,42 @@ def validate_checklist_csv(checklist: Path) -> list[str]:
     return failures
 
 
-def _read_csv(path: Path) -> list[dict[str, str]] | str:
+def validate_manifest(manifest: Path) -> list[str]:
+    data = _read_json(manifest)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "build_wrr_source_transcription_row_review_checklist",
+        "rows": int(EXPECTED_TOTALS["row_clusters"]),
+        "action_terms": int(EXPECTED_TOTALS["action_terms"]),
+        "residual_pairs": int(EXPECTED_TOTALS["residual_pairs"]),
+        "frontier_pairs": int(EXPECTED_TOTALS["frontier_pairs"]),
+        "inputs": {"row_summary": str(builder.DEFAULT_ROW_SUMMARY)},
+        "outputs": {
+            "out": str(DEFAULT_CHECKLIST),
+            "markdown_out": str(DEFAULT_DOC),
+            "manifest_out": str(DEFAULT_MANIFEST),
+        },
+    }
+    failures: list[str] = []
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{manifest} {key} drifted")
+    return failures
+
+
+def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
     if not path.exists():
         return f"{path} is missing"
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def _read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def _int(row: dict[str, str], key: str) -> int:
