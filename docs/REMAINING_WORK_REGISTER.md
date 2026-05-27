@@ -127,6 +127,8 @@ The prospective lane-status doc is now JSON-guarded against tracked lane ids,
 statuses, term/protocol/report paths, and status-count drift.
 The prospective study-readiness doc is now JSON-guarded against tracked profile
 count/status drift in `configs/prospective_study_lanes.json`.
+The prospective next-lock, consolidated-findings, and Greek second-cohort
+readiness docs now share the same profile count/status snapshot guard.
 The source-row review bundle, source-transcription evidence packet,
 source-transcription row-review checklist, and remaining-lane review checklist
 are now CSV-guarded as well, and the source-transcription evidence packet
@@ -1539,6 +1541,9 @@ dirty-tree fast validation above it:
   lock update: 1935 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the prospective readiness profile-status
   snapshot lock update: 1936 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after extending the profile-status snapshot lock
+  to next-lock, consolidated-findings, and Greek second-cohort docs: 1936 tests,
+  2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.

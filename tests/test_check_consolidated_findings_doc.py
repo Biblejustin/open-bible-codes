@@ -24,9 +24,10 @@ def test_missing_doc_fails(tmp_path: Path) -> None:
 
 
 def test_ready_profile_rejects_no_ready_boundary(tmp_path: Path) -> None:
+    profile_rows = [{"id": "ready_lane", "status": "ready_for_preflight"}]
     profiles = tmp_path / "profiles.json"
     profiles.write_text(
-        json.dumps({"profiles": [{"id": "ready_lane", "status": "ready_for_preflight"}]}),
+        json.dumps({"profiles": profile_rows}),
         encoding="utf-8",
     )
     doc = tmp_path / "consolidated.md"
@@ -42,6 +43,7 @@ def test_ready_profile_rejects_no_ready_boundary(tmp_path: Path) -> None:
                 check.FRESH_TARGET_PHRASE,
                 check.NO_RERUN_PHRASE,
                 check.NO_RAW_COUNT_PHRASE,
+                *check.status_count_phrases(profile_rows),
             )
         ),
         encoding="utf-8",

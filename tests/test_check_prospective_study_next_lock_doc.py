@@ -15,9 +15,10 @@ def test_missing_doc_fails(tmp_path: Path) -> None:
 
 
 def test_no_ready_doc_fails_when_profile_is_ready(tmp_path: Path) -> None:
+    profile_rows = [{"id": "ready_lane", "status": "ready_for_preflight"}]
     profiles = tmp_path / "profiles.json"
     profiles.write_text(
-        json.dumps({"profiles": [{"id": "ready_lane", "status": "ready_for_preflight"}]}),
+        json.dumps({"profiles": profile_rows}),
         encoding="utf-8",
     )
     doc = tmp_path / "next_lock.md"
@@ -29,6 +30,7 @@ def test_no_ready_doc_fails_when_profile_is_ready(tmp_path: Path) -> None:
                 check.NO_READY_PHRASE,
                 check.FRESH_TARGET_PHRASE,
                 *check.NO_PROMOTION_PHRASES,
+                *check.status_count_phrases(profile_rows),
             )
         ),
         encoding="utf-8",

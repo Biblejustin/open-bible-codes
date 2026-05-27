@@ -3,6 +3,14 @@
 Status: blocked pending genuinely new terms. This is not a result-producing
 search.
 
+Current profile snapshot from `configs/prospective_study_lanes.json`:
+
+- Tracked profiles: 8.
+- `completed_context_cautioned_review_material`: 2.
+- `completed_negative_controlled_result`: 4.
+- `completed_negative_curiosity_appendix`: 1.
+- `completed_negative_weak_controlled_result`: 1.
+
 ## Purpose
 
 This note checks whether the existing expanded Greek prospective term pool can

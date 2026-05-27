@@ -5,11 +5,11 @@ from __future__ import annotations
 
 import argparse
 import sys
-from collections import Counter
 from pathlib import Path
 
 from scripts import build_prospective_lane_status as lane_status
 from scripts import scaffold_prospective_study as scaffold
+from scripts.prospective_profile_snapshot import status_count_phrases
 
 
 DEFAULT_DOC = Path("docs/PROSPECTIVE_STUDY_READINESS.md")
@@ -96,14 +96,6 @@ def normalize_whitespace(text: str) -> str:
 
 def contains_phrase(normalized_text: str, phrase: str) -> bool:
     return normalize_whitespace(phrase) in normalized_text
-
-
-def status_count_phrases(profiles: list[dict[str, object]]) -> tuple[str, ...]:
-    counts = Counter(str(profile.get("status", "")) for profile in profiles)
-    return (
-        f"Tracked profiles: {len(profiles)}.",
-        *(f"`{status}`: {counts[status]}." for status in sorted(counts)),
-    )
 
 
 def display_path(path: Path) -> str:

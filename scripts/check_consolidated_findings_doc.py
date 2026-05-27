@@ -9,6 +9,7 @@ from pathlib import Path
 
 from scripts import build_prospective_lane_status as lane_status
 from scripts import scaffold_prospective_study as scaffold
+from scripts.prospective_profile_snapshot import status_count_phrases
 
 
 DEFAULT_DOC = Path("docs/CONSOLIDATED_FINDINGS.md")
@@ -74,6 +75,9 @@ def validate_consolidated_findings_doc(doc: Path, profiles_path: Path) -> list[s
     ):
         if not contains_phrase(normalized_text, phrase):
             failures.append(f"{doc} missing guard phrase: {phrase}")
+    for phrase in status_count_phrases(profiles):
+        if not contains_phrase(normalized_text, phrase):
+            failures.append(f"{doc} missing status-count phrase: {phrase}")
 
     if ready:
         ready_ids = ", ".join(f"`{profile['id']}`" for profile in ready)

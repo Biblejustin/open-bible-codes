@@ -33,6 +33,17 @@ The occurrence-first artifact for this layer is
 `docs/CENTERED_OCCURRENCE_INDEX.md`; its CSV keeps frequency/control reads
 beside each occurrence instead of using them as a deletion filter.
 
+Current next target status is tracked in `configs/prospective_study_lanes.json`
+and `docs/PROSPECTIVE_LANE_STATUS.md`.
+
+Current profile snapshot:
+
+- Tracked profiles: 8.
+- `completed_context_cautioned_review_material`: 2.
+- `completed_negative_controlled_result`: 4.
+- `completed_negative_curiosity_appendix`: 1.
+- `completed_negative_weak_controlled_result`: 1.
+
 Current centered-occurrence snapshot:
 
 - 812 unique term-center presence rows.
