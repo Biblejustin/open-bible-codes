@@ -1,205 +1,175 @@
 # Open Bible Codes Findings Overview
 
-Status: reader summary over the whole project. This page does not run a new
-search and does not raise any result to a public claim.
+Status: findings summary for general readers. This page gives the plain read
+of the project so far.
 
-Main source pages:
+## Short Answer
 
-- `docs/START_HERE.md`
+The project has found real hidden-letter patterns in Bible texts.
+
+Some are interesting enough to keep studying.
+
+Many that look impressive at first become ordinary once they are compared with
+similar searches.
+
+At this point, no result should be presented as a settled public finding.
+
+The main lesson is simple: hidden-letter patterns are real, but real does not
+always mean rare, meaningful, or strong.
+
+## What Was Being Looked For
+
+The project searches Bible texts for words made by counting letters at a fixed
+distance.
+
+For example, a search might read every fifth letter. It can also read backward.
+If those letters spell a word, the project records where it starts, where it
+ends, and what word sits near the middle.
+
+This has been tested in Hebrew, Greek, and English Bible texts.
+
+The project also checks whether the same pattern appears in more than one Bible
+source, and whether similar searches produce similar results.
+
+## What We Can Say With Confidence
+
+Hidden-letter paths do appear in the Bible texts searched.
+
+Some hidden words land on or near open words that match the same idea.
+
+Some results appear across several Greek or Hebrew source texts.
+
+Some results stay interesting after comparison tests.
+
+But short words create many hits. Names with only three or four letters can
+appear often just because they are short.
+
+So the project does not treat a hit count by itself as strong evidence.
+
+## Best Occurrence Examples
+
+These are the rows that are easiest to explain without overstating them.
+
+| Hidden word | Where it centers | Plain read |
+| --- | --- | --- |
+| Greek `γωγ` (Gog) | Revelation 20:8, on the open word `Gog` | A hidden Gog lands on open Gog in the direct Gog/Magog passage across four Greek New Testament sources. It is interesting, but the word is only three letters. |
+| Hebrew `ישוע` (Yeshua/Jeshua) | Ezra 10:18, on open Yeshua | A real hidden Yeshua lands on open Yeshua. It is worth noting, but this name appears often enough to stay cautious. |
+| Hebrew `משיח` (Messiah/anointed one) | 2 Samuel 1:21, on open Messiah/anointed one | A real hidden Messiah/anointed one lands on the same open word. It is worth noting, but comparison pressure keeps it cautious. |
+| Greek `ιησουσ` (Jesus/Joshua) | Joshua 8:3 in the Greek Old Testament | A hidden Jesus/Joshua lands on open Jesus/Joshua. In that passage, the open name refers to Joshua. |
+| English `jesus` | Matthew 4:10 in KJV | A real English hidden Jesus lands on open Jesus. English translation results are secondary to Hebrew and Greek. |
+
+These are not final conclusions. They are examples worth preserving because the
+hidden word and the open text touch in a clear way.
+
+## Stronger Areas To Keep Studying
+
+Greek `δοξα` means glory. A hidden glory-related pattern showed up in four
+Greek New Testament sources. Large comparison checks kept it interesting. It
+should stay on the short list for review.
+
+Hebrew `יום יהוה` means day of YHWH. A related hidden pattern appeared across
+five Hebrew Bible sources. Large comparison checks also kept it interesting.
+This is another strong review item.
+
+The KJV with Apocrypha work found bridge patterns that stood above several
+comparison checks. This area deserves more review, but it came from earlier
+screening, so the wording should stay careful.
+
+Greek words such as lawlessness, Isaac, and wonder also produced rows worth a
+closer look. They are not settled findings.
+
+## Weaker Areas
+
+Modern names and world-politics terms are weak overall.
+
+Short forms such as Trump, Vance, Iran, USA, and NATO can show many hits
+because short strings are easy to find. Longer phrases such as United States,
+United Nations, European Union, and local business names were absent or nearly
+absent in the Hebrew and Greek searches.
+
+The Hebrew Gog/Magog pair study did not stand out after comparison. Gog and
+Magog are still important biblical terms, and the Greek Revelation 20:8 Gog row
+still belongs in the finding list. But the Hebrew pair study did not produce a
+strong result.
+
+The Gospel people and genealogy study also stayed cautious. It searched names
+from Christ's genealogy, disciples, Gospel women, and other Gospel figures. It
+found many paths, but none stayed strong after the main comparison checks.
+
+Very wide searches create huge numbers of hits. That is expected. When the
+search allows many more letter distances, the number of hits rises sharply.
+That does not make the hits stronger by itself.
+
+## Bible Text Differences
+
+The project also checked what happens when Bible source texts differ.
+
+Some Greek New Testament verses appear in the Textus Receptus but not in the
+SBL Greek New Testament. When those verses are treated as removed, some hidden
+letter paths break.
+
+That is a real text-sensitivity result. It shows that the exact Bible text used
+matters.
+
+But it does not show that those missing-verse areas are special by themselves.
+When compared with random matched verse blocks, the actual omitted blocks did
+not break more hidden paths than expected.
+
+The Gospel-name omission check found 50 Greek Textus Receptus paths that broke
+because they used letters inside omitted verse blocks. That is useful for
+source comparison, not for making a stronger meaning claim.
+
+## WRR Famous-Rabbis Study
+
+WRR is the famous-rabbis Bible-code study.
+
+The project has done serious work on it: source checking, term checking,
+distance checking, and local locked-method reports.
+
+But exact published WRR reproduction is still not complete.
+
+The main gap is that the published source trail points to 163 defined distance
+cases, while the current project count does not yet match that. The project now
+tracks that gap openly.
+
+Current read: there is useful local WRR evidence, but exact published
+reproduction remains unfinished.
+
+## What This Means
+
+The project has found real patterns.
+
+The project has also found that many patterns are easy to overread.
+
+Short words, wide searches, and after-the-fact choices can make ordinary
+results look stronger than they are.
+
+The safest way to read the findings is this:
+
+- real hidden-letter paths exist;
+- some land in meaningful-looking places;
+- a smaller group deserves more review;
+- many are explained by comparison searches;
+- no current row should be treated as settled public evidence.
+
+## Best Current Summary
+
+The strongest project finding is not "one code solves the question."
+
+The strongest finding is that the work now has a careful way to separate:
+
+- a real hidden-letter path;
+- a meaningful-looking location;
+- a result that stays interesting after comparison;
+- a result that should stay only in the review pile.
+
+That is where the project stands now.
+
+## Where To Read More
+
+For the fuller project story, read:
+
 - `docs/FINAL_REPORT.md`
 - `docs/FINAL_REPORT_HIGHLIGHTS.md`
 - `docs/CLAIM_CATALOG.md`
 - `docs/CONSOLIDATED_FINDINGS.md`
-
-## Bottom Line
-
-The project can find hidden letter paths in Bible texts and compare them across
-Hebrew, Greek, and English sources. It can also test whether those paths look
-unusual compared with control searches.
-
-The current answer is careful:
-
-- real hidden-letter paths exist;
-- some rows are worth review;
-- controls explain many rows that first look striking;
-- short words and names create many hits;
-- no current row should be presented as a public claim.
-
-The strongest result is not one single code. The strongest result is the
-method: the project now records the source text, spelling, skip, direction,
-center word, context, and control result instead of relying on raw hit counts.
-
-## Common Terms
-
-ELS means equidistant letter sequence. It means reading every same-numbered
-letter. A skip of `5` reads every fifth letter. A skip of `-5` reads backward
-every fifth letter.
-
-Corpus means the text being searched. Examples include a Hebrew Bible text, a
-Greek New Testament text, or an English Bible translation.
-
-Witness means a source text or textual tradition being compared. For example,
-two Greek New Testament witnesses may differ in wording or in which verses they
-include.
-
-Control means a comparison search. Controls ask whether similar or random
-terms produce the same kind of result. A result that looks special before
-controls may look ordinary after controls.
-
-Adjusted result means the project corrected for running many tests. This is
-important because a large search can create a few interesting-looking rows by
-volume alone.
-
-## What The Project Finds Reliably
-
-The search engine reliably finds and records hidden-letter paths. It also keeps
-the surrounding evidence:
-
-- where the path starts, centers, and ends;
-- which source text contains it;
-- which source texts do not contain it;
-- whether the center word is related to the hidden term;
-- whether the path survives controls;
-- whether the path depends on a text variant or omitted verse.
-
-That makes the project useful as a research ledger. It can separate "the path
-exists" from "the path is unusual."
-
-## Current Highlight Rows
-
-The final-report highlight table keeps five occurrence rows in view. These are
-not public claims. They are rows worth preserving because they have useful
-context.
-
-| Hidden term | Center | Main read |
-| --- | --- | --- |
-| Greek `γωγ` (Gog) | Rev 20:8 `Gog` | Centers on the open word `Gog` across four Greek New Testament sources, but length-3 controls keep it cautious. |
-| Hebrew `ישוע` (Yeshua/Jeshua) | Ezra 10:18 `Yeshua` | Real centered-self occurrence, with strong background caution. |
-| Hebrew `משיח` (Messiah/anointed one) | 2 Sam 1:21 `Messiah/anointed one` | Real centered-self occurrence, with background caution. |
-| Greek `ιησουσ` (Jesus/Joshua) | Josh 8:3 `Jesus/Joshua` in the LXX | Real centered-self occurrence; the passage refers to Joshua. |
-| English `jesus` | Matt 4:10 `Jesus` in KJV | Real English translation occurrence; secondary to original-language work. |
-
-The main point: these rows are worth listing, but they still carry control and
-context cautions.
-
-## Stronger Review Material
-
-Some rows have stronger follow-up support than ordinary raw hits.
-
-Greek `δοξα` (doxa; glory) has a four-source extension follow-up. The same key
-appears in TR_NT, BYZ_NT, TCG_NT, and SBLGNT. Large follow-up controls passed
-the registered review gates. This remains a controlled review candidate,
-because it came from earlier screening.
-
-Hebrew `יום יהוה` (yom YHWH; day of YHWH) has a compound-extension follow-up
-across five MT-family Hebrew sources. The locked 5000/5000 controls kept the
-selected row favorable. This is strong post-discovery review material, not a
-prospective public claim.
-
-The KJV with Apocrypha bridge study is also a stronger follow-up area. The
-KJVA bridge rows stood above several shuffled-control layers. This raises
-follow-up priority, but it is still post-screen work.
-
-Greek expanded surface rows such as `ανομια` (lawlessness), `ισαακ` (Isaac),
-and `τερασ` (wonder) passed some review filters. They remain review candidates,
-not public claims.
-
-## Results That Look Weak
-
-Several areas are useful because they tell us what not to overstate.
-
-Modern names and geopolitical terms are weak overall. Short forms like Trump,
-Vance, Iran, USA, and NATO can produce many hits because short strings are
-dense. Longer phrases such as United States, United Nations, European Union,
-Cowboy Catering, and similar local terms are absent or effectively absent in
-the observed Hebrew and Greek screens.
-
-The Hebrew Gog/Magog pair study was negative under its locked controls. Gog and
-Magog remain important biblical terms, and the Greek Rev 20:8 Gog occurrence
-is still worth listing. But the Hebrew pair-control lane did not produce a
-controlled review candidate.
-
-The Gospel people and genealogy study also stayed cautious. It screened names
-from Christ's genealogy, disciples, Gospel women, and other Gospel figures. It
-found many paths, but none survived adjusted representative controls.
-
-Broad skip searches and full-span searches create enormous hit counts. They
-are useful for building review queues, but raw volume grows quickly when the
-skip range gets wider. Raw volume by itself should not be treated as meaning.
-
-## Text-Variant And Omission Work
-
-The project also tests how source-text differences affect hidden-letter paths.
-
-The TR-vs-SBLGNT omission-break study asks whether hidden paths in the Textus
-Receptus break when verses absent from SBLGNT are removed. The shared engine
-does find broken paths, but the null model is cautionary: the actual omitted
-blocks did not break more TR hidden paths than matched random verse blocks in
-the current run.
-
-This makes the omission work useful as a source-sensitivity audit, not as a
-positive claim.
-
-The newer Gospel-name omission check found 50 broken Greek TR paths in the
-locked Gospel people/genealogy cohort at minimum length 4. All 50 broke
-because a used letter was inside an omitted TR verse block. This is a text
-sensitivity result, not a strength result.
-
-## WRR Status
-
-WRR means Witztum-Rips-Rosenberg, the famous-rabbis Bible-code study.
-
-The repository now has a serious local WRR workstream: source audits, term
-imports, corrected-distance diagnostics, locked local method reports, and
-decision packets. But exact published WRR reproduction is still not complete.
-
-The main blocker is the gap between the source-cited 163 defined-distance
-count and the current repo-defined count. The project now tracks that gap
-plainly instead of hiding it.
-
-Current read: local locked-method evidence exists, but exact published WRR
-reproduction remains caveated.
-
-## How To Read A Result
-
-Use three questions.
-
-First: does the hidden path exist in the stated source text?
-
-Second: what does it touch? Look at the center word, nearby words, passage, and
-source witnesses.
-
-Third: do controls make it unusual? If controls produce similar results, the
-row should stay in review status.
-
-Most mistakes happen when raw occurrence is treated as strength. This project
-keeps those separate.
-
-## Current Project Read
-
-The project has real occurrence findings and review candidates.
-
-It does not currently have a result that should be promoted as a public claim.
-
-That is still useful progress. The project can now:
-
-- reproduce simple sanity-check examples;
-- collect hidden-letter paths across many sources;
-- compare source traditions;
-- run matched and shuffled controls;
-- mark weak and negative results;
-- keep source, method, and license limits visible.
-
-## Best Next Steps
-
-The best next work is not to make the claims broader. It is to keep improving
-review quality:
-
-- inspect the strongest review candidates by context;
-- keep source locks and spelling locks strict;
-- avoid changing terms after seeing results;
-- use controls before promoting any row;
-- keep public wording conservative.
-
-For deeper detail, use `docs/FINAL_REPORT.md`, then
-`docs/CLAIM_CATALOG.md`, then `docs/CONSOLIDATED_FINDINGS.md`.
