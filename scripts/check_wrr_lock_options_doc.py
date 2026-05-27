@@ -5,12 +5,18 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from pathlib import Path
+from typing import Any
 
+from scripts import build_wrr_lock_options as builder
 
-DEFAULT_DOC = Path("docs/WRR_LOCK_OPTIONS.md")
-DEFAULT_OPTIONS = Path("reports/wrr_1994/wrr_lock_options.csv")
+DEFAULT_DOC = builder.DEFAULT_MD
+DEFAULT_OPTIONS = builder.DEFAULT_OUT
+DEFAULT_MANIFEST = builder.DEFAULT_MANIFEST
+
+FIELDNAMES = builder.FIELDNAMES
 
 EXPECTED_OPTIONS = {
     "all imported WRR2 same-record pairs": (
@@ -81,7 +87,7 @@ REQUIRED_PHRASES = (
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    failures = validate_lock_options_doc(args.doc, args.options)
+    failures = validate_lock_options_doc(args.doc, args.options, args.manifest)
     if failures:
         for failure in failures:
             print(f"WRR lock-options doc failure: {failure}", file=sys.stderr)
@@ -94,12 +100,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--doc", type=Path, default=DEFAULT_DOC)
     parser.add_argument("--options", type=Path, default=DEFAULT_OPTIONS)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
 
 def validate_lock_options_doc(
     doc: Path,
     options: Path | None = DEFAULT_OPTIONS,
+    manifest: Path | None = DEFAULT_MANIFEST,
 ) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
@@ -111,14 +119,19 @@ def validate_lock_options_doc(
     ]
     if options is not None:
         failures.extend(validate_options_csv(options))
+    if manifest is not None:
+        failures.extend(validate_manifest(manifest))
     return failures
 
 
 def validate_options_csv(options: Path) -> list[str]:
-    rows = _read_csv(options)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(options)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != FIELDNAMES:
+        failures.append(f"{options} fieldnames drifted")
     if len(rows) != len(EXPECTED_OPTIONS):
         failures.append(f"{options} has {len(rows)} rows; expected {len(EXPECTED_OPTIONS)}")
     by_option = {row.get("option", ""): row for row in rows}
@@ -139,11 +152,61 @@ def validate_options_csv(options: Path) -> list[str]:
     return failures
 
 
-def _read_csv(path: Path) -> list[dict[str, str]] | str:
+def validate_manifest(manifest: Path) -> list[str]:
+    data = _read_json(manifest)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "build_wrr_lock_options",
+        "inputs": {
+            "pair_summary": str(builder.DEFAULT_PAIR_SUMMARY),
+            "skip_summary": str(builder.DEFAULT_SKIP_SUMMARY),
+            "variants": str(builder.DEFAULT_VARIANTS),
+            "recommended_permutation": str(builder.DEFAULT_RECOMMENDED_PERMUTATION),
+            "source_review_summary": str(builder.DEFAULT_SOURCE_REVIEW_SUMMARY),
+            "source_policy_scenarios": str(builder.DEFAULT_SOURCE_POLICY_SCENARIOS),
+            "source_policy_term_impacts": str(
+                builder.DEFAULT_SOURCE_POLICY_TERM_IMPACTS
+            ),
+            "direct_all_lanes_250_summary": str(
+                builder.DEFAULT_DIRECT_ALL_LANES_250_SUMMARY
+            ),
+            "direct_all_lanes_1000_summary": str(
+                builder.DEFAULT_DIRECT_ALL_LANES_1000_SUMMARY
+            ),
+            "direct_all_lanes_1000_program_summary": str(
+                builder.DEFAULT_DIRECT_ALL_LANES_1000_PROGRAM_SUMMARY
+            ),
+            "direct_all_lanes_1000": str(builder.DEFAULT_DIRECT_ALL_LANES_1000),
+            "direct_all_lanes_1000_program": str(
+                builder.DEFAULT_DIRECT_ALL_LANES_1000_PROGRAM
+            ),
+        },
+        "outputs": {
+            "out": str(DEFAULT_OPTIONS),
+            "markdown_out": str(DEFAULT_DOC),
+        },
+        "rows": len(EXPECTED_OPTIONS),
+    }
+    failures: list[str] = []
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{manifest} {key} drifted")
+    return failures
+
+
+def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
     if not path.exists():
         return f"{path} is missing"
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def _read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":
