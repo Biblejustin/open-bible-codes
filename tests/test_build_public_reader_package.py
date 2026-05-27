@@ -50,6 +50,7 @@ def test_builds_reader_package_from_whitelisted_docs(tmp_path, monkeypatch) -> N
     assert len(copied) == len(package.DEFAULT_DOC_PATHS) + len(package.DEFAULT_REPORT_PATHS)
     assert manifest["file_count"] == len(copied)
     assert manifest["package_boundary"].startswith("whitelisted docs")
+    assert manifest["reader_path_guard"].startswith("project findings overview")
     assert Path("reports/public_reader_package/docs/START_HERE.md").exists()
     assert Path("reports/public_reader_package/docs/PROJECT_FINDINGS_OVERVIEW.md").exists()
     assert Path("reports/public_reader_package/docs/STRONGEST_CANDIDATE_DEEP_DIVE.md").exists()
@@ -60,6 +61,10 @@ def test_builds_reader_package_from_whitelisted_docs(tmp_path, monkeypatch) -> N
     ).read_text(encoding="utf-8")
     assert "Source: `docs/START_HERE.md`" in reader_package
     assert "Source: `docs/PROJECT_FINDINGS_OVERVIEW.md`" in reader_package
+    package_readme = Path("reports/public_reader_package/README.md").read_text(
+        encoding="utf-8"
+    )
+    assert "Reader-path guard: project findings overview" in package_readme
 
 
 def test_refuses_stale_project_findings_overview(tmp_path, monkeypatch) -> None:

@@ -1401,13 +1401,13 @@ Latest validation snapshot after the release-ready make target, refreshed after
 the WRR method-lane wide-skip public-doc guard, preregistration stale-template
 guard synchronization, project findings overview guard, reader-path overview
 link guard, direct Makefile public-release overview guard, and overview-checker
-CLI reader-path argument coverage, and public-reader package overview-input
-guard:
+CLI reader-path argument coverage, public-reader package overview-input guard,
+and public-reader package guard record in the package README/manifest:
 
 - Current `make fast-validate` passed, including `python3 -m pytest -q`: 1964
   tests, 2 skipped, and 29325 subtests.
 - `make public-reader-package` passed after adding the package-time
-  general-reader overview guard.
+  general-reader overview guard and package README/manifest guard record.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
   passed clean from the committed tree after the preregistration
   stale-template guard sync.

@@ -152,6 +152,7 @@ def write_package_readme(out_dir: Path, copied: list[CopiedFile]) -> None:
         "# Public Reader Package",
         "",
         "Status: generated package over whitelisted docs and formal report summary.",
+        "Reader-path guard: project findings overview and reader links validated before packaging.",
         "It contains no raw Bible source files and no local database artifacts.",
         "",
         "Start with:",
@@ -215,6 +216,9 @@ def write_manifest(out_dir: Path, copied: list[CopiedFile]) -> None:
         "generated_at": datetime.now(UTC).isoformat(),
         "git_head": git_head(),
         "package_boundary": "whitelisted docs and formal report summary only; no raw source texts",
+        "reader_path_guard": (
+            "project findings overview and README/START_HERE reader links validated before packaging"
+        ),
         "file_count": len(copied),
         "files": [
             {
