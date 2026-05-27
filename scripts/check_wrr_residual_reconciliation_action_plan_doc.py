@@ -5,13 +5,21 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from pathlib import Path
+from typing import Any
+
+from scripts import build_wrr_residual_reconciliation_action_plan as builder
 
 
-DEFAULT_DOC = Path("docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md")
-DEFAULT_PLAN = Path("reports/wrr_1994/wrr_residual_reconciliation_action_plan.csv")
-DEFAULT_SUMMARY = Path("reports/wrr_1994/wrr_residual_reconciliation_action_summary.csv")
+DEFAULT_DOC = builder.DEFAULT_MD
+DEFAULT_PLAN = builder.DEFAULT_OUT
+DEFAULT_SUMMARY = builder.DEFAULT_SUMMARY_OUT
+DEFAULT_MANIFEST = builder.DEFAULT_MANIFEST
+
+PLAN_FIELDNAMES = builder.ACTION_FIELDNAMES
+SUMMARY_FIELDNAMES = builder.SUMMARY_FIELDNAMES
 
 LANE_LOCKS = {
     "source_policy_or_pair_rule_review": {
@@ -91,6 +99,7 @@ def main(argv: list[str] | None = None) -> int:
         args.doc,
         args.plan,
         args.summary,
+        args.manifest,
     )
     if failures:
         for failure in failures:
@@ -108,6 +117,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--doc", type=Path, default=DEFAULT_DOC)
     parser.add_argument("--plan", type=Path, default=DEFAULT_PLAN)
     parser.add_argument("--summary", type=Path, default=DEFAULT_SUMMARY)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
 
@@ -115,6 +125,7 @@ def validate_residual_reconciliation_action_plan_doc(
     doc: Path,
     plan: Path | None = DEFAULT_PLAN,
     summary: Path | None = DEFAULT_SUMMARY,
+    manifest: Path | None = DEFAULT_MANIFEST,
 ) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
@@ -128,14 +139,19 @@ def validate_residual_reconciliation_action_plan_doc(
         failures.extend(validate_plan_csv(plan))
     if summary is not None:
         failures.extend(validate_summary_csv(summary))
+    if manifest is not None:
+        failures.extend(validate_manifest(manifest))
     return failures
 
 
 def validate_plan_csv(plan: Path) -> list[str]:
-    rows = _read_csv(plan)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(plan)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != PLAN_FIELDNAMES:
+        failures.append(f"{plan} fieldnames drifted")
     expected_rows = EXPECTED_TOTALS["terms"]
     if len(rows) != expected_rows:
         failures.append(f"{plan} has {len(rows)} rows; expected {expected_rows}")
@@ -186,10 +202,13 @@ def _validate_lane_rows(
 
 
 def validate_summary_csv(summary: Path) -> list[str]:
-    rows = _read_csv(summary)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(summary)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != SUMMARY_FIELDNAMES:
+        failures.append(f"{summary} fieldnames drifted")
     if len(rows) != len(LANE_LOCKS):
         failures.append(f"{summary} has {len(rows)} rows; expected {len(LANE_LOCKS)}")
     lanes = {row.get("action_lane", ""): row for row in rows}
@@ -212,11 +231,43 @@ def validate_summary_csv(summary: Path) -> list[str]:
     return failures
 
 
-def _read_csv(path: Path) -> list[dict[str, str]] | str:
+def validate_manifest(manifest: Path) -> list[str]:
+    data = _read_json(manifest)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "build_wrr_residual_reconciliation_action_plan",
+        "action_rows": EXPECTED_TOTALS["terms"],
+        "summary_rows": len(LANE_LOCKS),
+        "inputs": {
+            "residual_term_queue": str(builder.DEFAULT_QUEUE),
+        },
+        "outputs": {
+            "out": str(DEFAULT_PLAN),
+            "summary_out": str(DEFAULT_SUMMARY),
+            "markdown_out": str(DEFAULT_DOC),
+            "manifest_out": str(DEFAULT_MANIFEST),
+        },
+    }
+    failures: list[str] = []
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{manifest} {key} drifted")
+    return failures
+
+
+def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
     if not path.exists():
         return f"{path} is missing"
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def _read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def _int(row: dict[str, str], key: str) -> int:

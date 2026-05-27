@@ -1,4 +1,5 @@
 import csv
+import json
 from pathlib import Path
 
 from scripts import check_wrr_residual_reconciliation_action_plan_doc as check
@@ -66,6 +67,25 @@ def test_validate_action_plan_rejects_summary_drift(tmp_path: Path) -> None:
     )
 
     assert any("method_or_pair_universe_review terms" in failure for failure in failures)
+
+
+def test_validate_action_plan_rejects_manifest_drift(tmp_path: Path) -> None:
+    manifest = tmp_path / "manifest.json"
+    payload = json.loads(check.DEFAULT_MANIFEST.read_text(encoding="utf-8"))
+    payload["action_rows"] = 99
+    manifest.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_residual_reconciliation_action_plan_doc(
+        check.DEFAULT_DOC,
+        plan=None,
+        summary=None,
+        manifest=manifest,
+    )
+
+    assert any("action_rows drifted" in failure for failure in failures)
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
