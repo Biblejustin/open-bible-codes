@@ -1,4 +1,5 @@
 import csv
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -18,7 +19,7 @@ class WrrManualDecisionRecordWorksheetDocTests(unittest.TestCase):
             path.write_text("\n".join(check.REQUIRED_PHRASES) + "\n", encoding="utf-8")
 
             self.assertEqual(
-                check.validate_worksheet_doc(path, worksheet=None),
+                check.validate_worksheet_doc(path, worksheet=None, manifest=None),
                 [],
             )
 
@@ -53,7 +54,11 @@ class WrrManualDecisionRecordWorksheetDocTests(unittest.TestCase):
             doc = _required_doc(root)
 
             self.assertEqual(
-                check.validate_worksheet_doc(doc, worksheet=_worksheet_csv(root)),
+                check.validate_worksheet_doc(
+                    doc,
+                    worksheet=_worksheet_csv(root),
+                    manifest=None,
+                ),
                 [],
             )
 
@@ -65,6 +70,7 @@ class WrrManualDecisionRecordWorksheetDocTests(unittest.TestCase):
             failures = check.validate_worksheet_doc(
                 doc,
                 worksheet=_worksheet_csv(root, drop_last=True),
+                manifest=None,
             )
 
             self.assertTrue(any("has 36 rows" in failure for failure in failures))
@@ -77,9 +83,58 @@ class WrrManualDecisionRecordWorksheetDocTests(unittest.TestCase):
             failures = check.validate_worksheet_doc(
                 doc,
                 worksheet=_worksheet_csv(root, bad_action_rank=1),
+                manifest=None,
             )
 
             self.assertTrue(any("selected action" in failure for failure in failures))
+
+    def test_validate_doc_rejects_manifest_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            doc = _required_doc(root)
+            manifest = root / "manifest.json"
+            manifest.write_text(
+                json.dumps(
+                    {
+                        "tool": "build_wrr_manual_decision_record_worksheet",
+                        "inputs": {
+                            "records_template": "data/study/mappings/wrr_manual_decision_records.csv",
+                            "register": "reports/wrr_1994/wrr_manual_decision_register.csv",
+                        },
+                        "lane_counts": {
+                            "method_pair_universe": 11,
+                            "page_image_near_match": 3,
+                            "source_policy_pair_rule": 1,
+                            "source_transcription_row_cluster": 22,
+                        },
+                        "locked_rows": 37,
+                        "outputs": {
+                            "manifest_out": "reports/wrr_1994/wrr_manual_decision_record_worksheet.manifest.json",
+                            "markdown_out": "docs/WRR_MANUAL_DECISION_RECORD_WORKSHEET.md",
+                            "out": "reports/wrr_1994/wrr_manual_decision_record_worksheet.csv",
+                        },
+                        "record_status_counts": {"locked": 37},
+                        "recorded_action_counts": {
+                            "method_lock": 11,
+                            "no_source_change": 26,
+                        },
+                        "recorded_rows": 37,
+                        "rows": 36,
+                        "unrecorded_rows": 0,
+                    },
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            failures = check.validate_worksheet_doc(
+                doc,
+                worksheet=_worksheet_csv(root),
+                manifest=manifest,
+            )
+
+            self.assertTrue(any("rows drifted" in failure for failure in failures))
 
 
 def _required_doc(root: Path) -> Path:
@@ -95,25 +150,7 @@ def _worksheet_csv(
     bad_action_rank: int | None = None,
 ) -> Path:
     path = root / "worksheet.csv"
-    fieldnames = [
-        "decision_id",
-        "register_decision_rank",
-        "decision_lane",
-        "review_state",
-        "decision_target",
-        "source_checklist",
-        "required_decision_record",
-        "evidence_prompt",
-        "suggested_decision_status_values",
-        "suggested_selected_action_values",
-        "allowed_without_input",
-        "record_decision_status",
-        "record_selected_action",
-        "record_locked_by",
-        "record_locked_at",
-        "record_evidence_citation",
-        "record_evidence_summary",
-    ]
+    fieldnames = check.FIELDNAMES
     rows: list[dict[str, str]] = []
     rank = 1
     for lane, locks in check.LANE_LOCKS.items():

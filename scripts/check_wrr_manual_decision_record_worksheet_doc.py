@@ -5,12 +5,18 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from pathlib import Path
+from typing import Any
 
+from scripts import build_wrr_manual_decision_record_worksheet as builder
 
-DEFAULT_DOC = Path("docs/WRR_MANUAL_DECISION_RECORD_WORKSHEET.md")
-DEFAULT_WORKSHEET = Path("reports/wrr_1994/wrr_manual_decision_record_worksheet.csv")
+DEFAULT_DOC = builder.DEFAULT_MD
+DEFAULT_WORKSHEET = builder.DEFAULT_OUT
+DEFAULT_MANIFEST = builder.DEFAULT_MANIFEST
+
+FIELDNAMES = builder.FIELDNAMES
 
 ALLOWED_WITHOUT_INPUT = "organize evidence only"
 SUGGESTED_STATUS_VALUES = (
@@ -118,7 +124,7 @@ FORBIDDEN_PHRASES = (
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    failures = validate_worksheet_doc(args.doc, args.worksheet)
+    failures = validate_worksheet_doc(args.doc, args.worksheet, args.manifest)
     if failures:
         for failure in failures:
             print(f"WRR manual decision record worksheet failure: {failure}", file=sys.stderr)
@@ -131,12 +137,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--doc", type=Path, default=DEFAULT_DOC)
     parser.add_argument("--worksheet", type=Path, default=DEFAULT_WORKSHEET)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
 
 def validate_worksheet_doc(
     doc: Path,
     worksheet: Path | None = DEFAULT_WORKSHEET,
+    manifest: Path | None = DEFAULT_MANIFEST,
 ) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
@@ -154,14 +162,19 @@ def validate_worksheet_doc(
     )
     if worksheet is not None:
         failures.extend(validate_worksheet_csv(worksheet))
+    if manifest is not None:
+        failures.extend(validate_manifest(manifest))
     return failures
 
 
 def validate_worksheet_csv(worksheet: Path) -> list[str]:
-    rows = _read_csv(worksheet)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(worksheet)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != FIELDNAMES:
+        failures.append(f"{worksheet} fieldnames drifted")
     expected_rows = sum(int(locks["rows"]) for locks in LANE_LOCKS.values())
     if len(rows) != expected_rows:
         failures.append(f"{worksheet} has {len(rows)} rows; expected {expected_rows}")
@@ -203,6 +216,40 @@ def validate_worksheet_csv(worksheet: Path) -> list[str]:
     return failures
 
 
+def validate_manifest(manifest: Path) -> list[str]:
+    data = _read_json(manifest)
+    if isinstance(data, str):
+        return [data]
+    expected_rows = sum(int(locks["rows"]) for locks in LANE_LOCKS.values())
+    expected = {
+        "tool": "build_wrr_manual_decision_record_worksheet",
+        "rows": expected_rows,
+        "lane_counts": {
+            lane: int(locks["rows"])
+            for lane, locks in sorted(LANE_LOCKS.items())
+        },
+        "recorded_rows": expected_rows,
+        "locked_rows": expected_rows,
+        "unrecorded_rows": 0,
+        "record_status_counts": {"locked": expected_rows},
+        "recorded_action_counts": dict(sorted(EXPECTED_ACTION_COUNTS.items())),
+        "inputs": {
+            "register": str(builder.DEFAULT_REGISTER),
+            "records_template": str(builder.DEFAULT_RECORDS_TEMPLATE),
+        },
+        "outputs": {
+            "out": str(DEFAULT_WORKSHEET),
+            "markdown_out": str(DEFAULT_DOC),
+            "manifest_out": str(DEFAULT_MANIFEST),
+        },
+    }
+    failures: list[str] = []
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{manifest} {key} drifted")
+    return failures
+
+
 def _validate_lane_rows(
     worksheet: Path,
     lane: str,
@@ -229,11 +276,18 @@ def _validate_lane_rows(
     return failures
 
 
-def _read_csv(path: Path) -> list[dict[str, str]] | str:
+def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
     if not path.exists():
         return f"{path} is missing"
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def _read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def normalize_space(text: str) -> str:

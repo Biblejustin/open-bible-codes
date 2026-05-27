@@ -1516,6 +1516,8 @@ dirty-tree fast validation above it:
   update: 1927 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the exact-gap dashboard checker manifest
   lock update: 1928 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the manual decision-record worksheet
+  checker manifest lock update: 1929 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.
