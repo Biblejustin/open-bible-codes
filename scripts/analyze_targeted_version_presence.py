@@ -189,12 +189,17 @@ def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(argv)
     term_paths = args.terms or DEFAULT_TERMS
-    extension_summary_values = args.extension_summary or DEFAULT_EXTENSION_SUMMARIES
-    extension_top_values = args.extension_top or DEFAULT_EXTENSION_TOPS
+    extension_summary_values = (
+        [] if args.no_extensions else args.extension_summary or DEFAULT_EXTENSION_SUMMARIES
+    )
+    extension_top_values = (
+        [] if args.no_extensions else args.extension_top or DEFAULT_EXTENSION_TOPS
+    )
+    paired_controls_path = None if args.no_paired_controls else args.paired_controls
     exact_by_id = read_exact_summaries(args.hebrew_summary, args.greek_summary)
     selected_ids = selected_term_ids(args, exact_by_id)
     terms = read_selected_terms(term_paths, selected_ids)
-    controls_by_id = group_controls(args.paired_controls)
+    controls_by_id = group_controls(paired_controls_path)
     representative_controls_by_id = group_controls(args.representative_controls)
     extension_summaries = group_extension_summaries(extension_summary_values)
     extension_tops = group_extension_tops(extension_top_values)
@@ -229,6 +234,7 @@ def main(argv: list[str] | None = None) -> int:
         args,
         selected_ids,
         term_paths,
+        paired_controls_path,
         extension_summary_values,
         extension_top_values,
         summary_rows,
@@ -260,6 +266,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--greek-patterns", type=Path, default=DEFAULT_GREEK_PATTERNS)
     parser.add_argument("--paired-controls", type=Path, default=DEFAULT_CONTROLS)
     parser.add_argument(
+        "--no-paired-controls",
+        action="store_true",
+        help="Do not join the default paired-control summary.",
+    )
+    parser.add_argument(
         "--representative-controls",
         type=Path,
         default=DEFAULT_REPRESENTATIVE_CONTROLS,
@@ -276,6 +287,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="append",
         default=None,
         help="Labeled strong extension top file in LABEL=path form; repeatable.",
+    )
+    parser.add_argument(
+        "--no-extensions",
+        action="store_true",
+        help="Do not join default version-presence extension summaries.",
     )
     parser.add_argument("--max-examples-per-scope", type=int, default=2)
     parser.add_argument("--summary-out", type=Path, default=SUMMARY_OUT)
@@ -829,6 +845,7 @@ def write_manifest(
     args: argparse.Namespace,
     selected_ids: tuple[str, ...],
     term_paths: list[Path],
+    paired_controls_path: Path | None,
     extension_summary_values: list[str],
     extension_top_values: list[str],
     summary_rows: list[dict[str, object]],
@@ -852,7 +869,7 @@ def write_manifest(
             str(args.greek_summary),
             str(args.hebrew_patterns),
             str(args.greek_patterns),
-            str(args.paired_controls),
+            *((str(paired_controls_path),) if paired_controls_path else ()),
             *((str(args.representative_controls),) if args.representative_controls else ()),
             *extension_summary_values,
             *extension_top_values,
@@ -865,7 +882,10 @@ def write_manifest(
             "manifest": str(args.manifest_out),
         },
     }
-    args.manifest_out.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    args.manifest_out.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:

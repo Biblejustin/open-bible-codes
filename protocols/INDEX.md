@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 156
+Protocols indexed: 157
 
 ## Analysis
 
@@ -163,6 +163,7 @@ Protocols indexed: 156
 | centered_relevance_density | Locked deterministic Centered-Relevance Density run for the Gog/Magog prospective Hebre... | 2 | terms/gog_magog_pair_prospective_terms.csv | reports/crd | `centered_relevance_density.toml` |
 | compound_extension_prospective | Locked Hebrew Gospel/genealogy clean-lock exact-version and representative-control screen. | 4 | terms/compound_extension_prospective_terms_clean_lock.csv | reports/compound_extension_prospective | `compound_extension_prospective.toml` |
 | gog_magog_pair_prospective | Locked prospective Hebrew Gog/Magog same-chapter same-signed-skip pair-control study ov... | 5 | terms/gog_magog_pair_prospective_terms.csv | reports/gog_magog_pair_prospective | `gog_magog_pair_prospective.toml` |
+| gospel_people_genealogy_prospective | Locked Gospel people, disciples, women, and Christ-genealogy prospective version-presen... | 5 | terms/gospel_people_genealogy_prospective_terms.csv | reports/gospel_people_genealogy_prospective | `gospel_people_genealogy_prospective.toml` |
 | greek_expanded_prospective_exact_center | Prospective expanded Greek exact-center extension screen over new declared terms. | 10 | terms/greek_expanded_prospective_terms.csv | reports/greek_expanded_prospective_exact_center | `greek_expanded_prospective_exact_center.toml` |
 | greek_expanded_surface_queue | Post-screen exact-center surface queue from the expanded Greek prospective run. | 1 |  | reports/greek_expanded_surface_queue | `greek_expanded_surface_queue.toml` |
 | greek_lexicon_extension_prospective_lock | Historical non-result lock packet for the completed Strong's Greek lexicon extension st... | 5 | terms/greek_lexicon_extension_terms_clean_lock.csv, terms/greek_lexicon_prospective_ter... | reports/study_locks | `greek_lexicon_extension_prospective_lock.toml` |

@@ -1,0 +1,129 @@
+term_id,concept,category,language,term,notes
+gpg_abraham_g,Abraham,genealogy_greek,greek,αβρααμ,Matthew/Luke genealogy cohort; locked before result run
+gpg_isaac_g,Isaac,genealogy_greek,greek,ισαακ,Matthew/Luke genealogy cohort; locked before result run
+gpg_jacob_g,Jacob,genealogy_greek,greek,ιακωβ,Matthew genealogy cohort; locked before result run
+gpg_judah_g,Judah,genealogy_greek,greek,ιουδα,Matthew/Luke genealogy cohort; locked before result run
+gpg_phares_g,Perez,genealogy_greek,greek,φαρες,Matthew/Luke genealogy cohort; locked before result run
+gpg_zara_g,Zerah,genealogy_greek,greek,ζαρα,Matthew genealogy cohort; locked before result run
+gpg_esrom_g,Hezron,genealogy_greek,greek,εσρωμ,Matthew/Luke genealogy cohort; locked before result run
+gpg_aram_g,Ram Aram,genealogy_greek,greek,αραμ,Matthew/Luke genealogy cohort; locked before result run
+gpg_aminadab_g,Amminadab,genealogy_greek,greek,αμιναδαβ,Matthew/Luke genealogy cohort; locked before result run
+gpg_naasson_g,Nahshon,genealogy_greek,greek,ναασσων,Matthew/Luke genealogy cohort; locked before result run
+gpg_salmon_g,Salmon,genealogy_greek,greek,σαλμων,Matthew genealogy cohort; locked before result run
+gpg_booz_g,Boaz,genealogy_greek,greek,βοες,Matthew/Luke genealogy cohort; locked before result run
+gpg_iobed_g,Obed,genealogy_greek,greek,ιωβηδ,Matthew/Luke genealogy cohort; locked before result run
+gpg_jessai_g,Jesse,genealogy_greek,greek,ιεσσαι,Matthew/Luke genealogy cohort; locked before result run
+gpg_david_g,David,genealogy_greek,greek,δαυιδ,Matthew/Luke genealogy cohort; locked before result run
+gpg_solomon_g,Solomon,genealogy_greek,greek,σολομων,Matthew genealogy cohort; locked before result run
+gpg_roboam_g,Rehoboam,genealogy_greek,greek,ροβοαμ,Matthew genealogy cohort; locked before result run
+gpg_abia_g,Abijah,genealogy_greek,greek,αβια,Matthew genealogy cohort; locked before result run
+gpg_asa_g,Asa,genealogy_greek,greek,ασα,Matthew genealogy cohort; may fall below min length
+gpg_iosaphat_g,Jehoshaphat,genealogy_greek,greek,ιωσαφατ,Matthew genealogy cohort; locked before result run
+gpg_ioram_g,Joram,genealogy_greek,greek,ιωραμ,Matthew genealogy cohort; locked before result run
+gpg_ozias_g,Uzziah,genealogy_greek,greek,οζιας,Matthew genealogy cohort; locked before result run
+gpg_ioatham_g,Jotham,genealogy_greek,greek,ιωαθαμ,Matthew genealogy cohort; locked before result run
+gpg_achaz_g,Ahaz,genealogy_greek,greek,αχας,Matthew genealogy cohort; locked before result run
+gpg_ezekias_g,Hezekiah,genealogy_greek,greek,εζεκιας,Matthew genealogy cohort; locked before result run
+gpg_manasses_g,Manasseh,genealogy_greek,greek,μανασσης,Matthew genealogy cohort; locked before result run
+gpg_amos_g,Amos Amon,genealogy_greek,greek,αμων,Matthew genealogy cohort; locked before result run
+gpg_iosias_g,Josiah,genealogy_greek,greek,ιωσιας,Matthew genealogy cohort; locked before result run
+gpg_jechonias_g,Jeconiah,genealogy_greek,greek,ιεχονιας,Matthew genealogy cohort; locked before result run
+gpg_salathiel_g,Shealtiel,genealogy_greek,greek,σαλαθιηλ,Matthew/Luke genealogy cohort; locked before result run
+gpg_zorobabel_g,Zerubbabel,genealogy_greek,greek,ζοροβαβελ,Matthew/Luke genealogy cohort; locked before result run
+gpg_abioud_g,Abiud,genealogy_greek,greek,αβιουδ,Matthew genealogy cohort; locked before result run
+gpg_eliakim_g,Eliakim,genealogy_greek,greek,ελιακιμ,Matthew/Luke genealogy cohort; locked before result run
+gpg_azor_g,Azor,genealogy_greek,greek,αζωρ,Matthew genealogy cohort; locked before result run
+gpg_sadok_g,Zadok,genealogy_greek,greek,σαδωκ,Matthew genealogy cohort; locked before result run
+gpg_achim_g,Achim,genealogy_greek,greek,αχιμ,Matthew genealogy cohort; locked before result run
+gpg_elioud_g,Eliud,genealogy_greek,greek,ελιουδ,Matthew genealogy cohort; locked before result run
+gpg_eleazar_g,Eleazar,genealogy_greek,greek,ελεαζαρ,Matthew genealogy cohort; locked before result run
+gpg_matthan_g,Matthan,genealogy_greek,greek,ματθαν,Matthew genealogy cohort; locked before result run
+gpg_joseph_g,Joseph,genealogy_greek,greek,ιωσηφ,Matthew/Luke genealogy and Gospel people cohort; locked before result run
+gpg_mary_g,Mary,gospel_women_greek,greek,μαρια,Gospel women cohort; locked before result run
+gpg_jesus_g,Jesus,gospel_core_greek,greek,ιησους,Christ genealogy endpoint and Gospel core name; locked before result run
+gpg_adam_g,Adam,genealogy_greek,greek,αδαμ,Luke genealogy cohort; locked before result run
+gpg_seth_g,Seth,genealogy_greek,greek,σηθ,Luke genealogy cohort; may fall below min length
+gpg_enos_g,Enosh,genealogy_greek,greek,ενως,Luke genealogy cohort; locked before result run
+gpg_kainan_g,Cainan,genealogy_greek,greek,καιναν,Luke genealogy cohort; locked before result run
+gpg_maleleel_g,Mahalaleel,genealogy_greek,greek,μαλελεηλ,Luke genealogy cohort; locked before result run
+gpg_jared_g,Jared,genealogy_greek,greek,ιαρεδ,Luke genealogy cohort; locked before result run
+gpg_enoch_g,Enoch,genealogy_greek,greek,ενωχ,Luke genealogy cohort; locked before result run
+gpg_methuselah_g,Methuselah,genealogy_greek,greek,μαθουσαλα,Luke genealogy cohort; locked before result run
+gpg_lamech_g,Lamech,genealogy_greek,greek,λαμεχ,Luke genealogy cohort; locked before result run
+gpg_noah_g,Noah,genealogy_greek,greek,νωε,Luke genealogy cohort; may fall below min length
+gpg_shem_g,Shem,genealogy_greek,greek,σημ,Luke genealogy cohort; may fall below min length
+gpg_arphaxad_g,Arphaxad,genealogy_greek,greek,αρφαξαδ,Luke genealogy cohort; locked before result run
+gpg_eber_g,Eber,genealogy_greek,greek,εβερ,Luke genealogy cohort; locked before result run
+gpg_phalek_g,Peleg,genealogy_greek,greek,φαλεκ,Luke genealogy cohort; locked before result run
+gpg_ragau_g,Reu,genealogy_greek,greek,ραγαυ,Luke genealogy cohort; locked before result run
+gpg_serouch_g,Serug,genealogy_greek,greek,σερουχ,Luke genealogy cohort; locked before result run
+gpg_nachor_g,Nahor,genealogy_greek,greek,ναχωρ,Luke genealogy cohort; locked before result run
+gpg_thara_g,Terah,genealogy_greek,greek,θαρα,Luke genealogy cohort; locked before result run
+gpg_nathan_g,Nathan,genealogy_greek,greek,ναθαν,Luke genealogy cohort; locked before result run
+gpg_simon_g,Simon,apostles_greek,greek,σιμων,disciple and Gospel people cohort; locked before result run
+gpg_peter_g,Peter,apostles_greek,greek,πετρος,disciple cohort; locked before result run
+gpg_andrew_g,Andrew,apostles_greek,greek,ανδρεας,disciple cohort; locked before result run
+gpg_james_g,James,apostles_greek,greek,ιακωβος,disciple cohort; locked before result run
+gpg_john_g,John,apostles_greek,greek,ιωαννης,disciple and Gospel people cohort; locked before result run
+gpg_philip_g,Philip,apostles_greek,greek,φιλιππος,disciple cohort; locked before result run
+gpg_bartholomew_g,Bartholomew,apostles_greek,greek,βαρθολομαιος,disciple cohort; locked before result run
+gpg_thomas_g,Thomas,apostles_greek,greek,θωμας,disciple cohort; locked before result run
+gpg_matthew_g,Matthew,apostles_greek,greek,ματθαιος,disciple cohort; locked before result run
+gpg_alphaeus_g,Alphaeus,apostles_greek,greek,αλφαιος,disciple-associated name; locked before result run
+gpg_thaddaeus_g,Thaddaeus,apostles_greek,greek,θαδδαιος,disciple cohort; locked before result run
+gpg_judas_g,Judas,apostles_greek,greek,ιουδας,disciple and Gospel people cohort; locked before result run
+gpg_iscariot_g,Iscariot,apostles_greek,greek,ισκαριωτης,disciple cohort; locked before result run
+gpg_elizabeth_g,Elizabeth,gospel_women_greek,greek,ελισαβετ,Gospel women cohort; locked before result run
+gpg_anna_g,Anna,gospel_women_greek,greek,αννα,Gospel women cohort; locked before result run
+gpg_martha_g,Martha,gospel_women_greek,greek,μαρθα,Gospel women cohort; locked before result run
+gpg_magdalene_g,Magdalene,gospel_women_greek,greek,μαγδαληνη,Gospel women cohort; locked before result run
+gpg_mary_magdalene_g,Mary Magdalene,gospel_women_greek,greek,μαρια μαγδαληνη,Gospel women phrase; locked before result run
+gpg_joanna_g,Joanna,gospel_women_greek,greek,ιωαννα,Gospel women cohort; locked before result run
+gpg_susanna_g,Susanna,gospel_women_greek,greek,σουσαννα,Gospel women cohort; locked before result run
+gpg_salome_g,Salome,gospel_women_greek,greek,σαλωμη,Gospel women cohort; locked before result run
+gpg_herodias_g,Herodias,gospel_women_greek,greek,ηρωδιας,Gospel women cohort; locked before result run
+gpg_zechariah_g,Zechariah,gospel_people_greek,greek,ζαχαριας,Gospel people cohort; locked before result run
+gpg_herod_g,Herod,gospel_people_greek,greek,ηρωδης,Gospel people cohort; locked before result run
+gpg_pilate_g,Pilate,gospel_people_greek,greek,πιλατος,Gospel people cohort; locked before result run
+gpg_caiaphas_g,Caiaphas,gospel_people_greek,greek,καιαφας,Gospel people cohort; locked before result run
+gpg_annas_g,Annas,gospel_people_greek,greek,αννας,Gospel people cohort; locked before result run
+gpg_lazarus_g,Lazarus,gospel_people_greek,greek,λαζαρος,Gospel people cohort; locked before result run
+gpg_nicodemus_g,Nicodemus,gospel_people_greek,greek,νικοδημος,Gospel people cohort; locked before result run
+gpg_zacchaeus_g,Zacchaeus,gospel_people_greek,greek,ζακχαιος,Gospel people cohort; locked before result run
+gpg_barabbas_g,Barabbas,gospel_people_greek,greek,βαραββας,Gospel people cohort; locked before result run
+gpg_arimathea_g,Arimathea,gospel_people_greek,greek,αριμαθαιας,Gospel people cohort; locked before result run
+gpg_cleopas_g,Cleopas,gospel_people_greek,greek,κλεοπας,Gospel people cohort; locked before result run
+gpg_simeon_g,Simeon,gospel_people_greek,greek,συμεων,Gospel people cohort; locked before result run
+gpg_jairus_g,Jairus,gospel_people_greek,greek,ιαιρος,Gospel people cohort; locked before result run
+gpg_bartimaeus_g,Bartimaeus,gospel_people_greek,greek,βαρτιμαιος,Gospel people cohort; locked before result run
+gpg_malchus_g,Malchus,gospel_people_greek,greek,μαλχος,Gospel people cohort; locked before result run
+gpg_abraham_h,Abraham,genealogy_hebrew,hebrew,אברהם,Hebrew consonantal equivalent for genealogy cohort; locked before result run
+gpg_isaac_h,Isaac,genealogy_hebrew,hebrew,יצחק,Hebrew consonantal equivalent for genealogy cohort; locked before result run
+gpg_jacob_h,Jacob,genealogy_hebrew,hebrew,יעקב,Hebrew consonantal equivalent for genealogy cohort; locked before result run
+gpg_judah_h,Judah,genealogy_hebrew,hebrew,יהודה,Hebrew consonantal equivalent for genealogy cohort; locked before result run
+gpg_perez_h,Perez,genealogy_hebrew,hebrew,פרץ,Hebrew consonantal equivalent; may fall below min length
+gpg_zerah_h,Zerah,genealogy_hebrew,hebrew,זרח,Hebrew consonantal equivalent; may fall below min length
+gpg_hezron_h,Hezron,genealogy_hebrew,hebrew,חצרון,Hebrew consonantal equivalent for genealogy cohort; locked before result run
+gpg_ram_h,Ram,genealogy_hebrew,hebrew,רם,Hebrew consonantal equivalent; may fall below min length
+gpg_amminadab_h,Amminadab,genealogy_hebrew,hebrew,עמינדב,Hebrew consonantal equivalent for genealogy cohort; locked before result run
+gpg_nahshon_h,Nahshon,genealogy_hebrew,hebrew,נחשון,Hebrew consonantal equivalent for genealogy cohort; locked before result run
+gpg_salmon_h,Salmon,genealogy_hebrew,hebrew,שלמון,Hebrew consonantal equivalent for genealogy cohort; locked before result run
+gpg_boaz_h,Boaz,genealogy_hebrew,hebrew,בעז,Hebrew consonantal equivalent; may fall below min length
+gpg_obed_h,Obed,genealogy_hebrew,hebrew,עובד,Hebrew consonantal equivalent for genealogy cohort; locked before result run
+gpg_jesse_h,Jesse,genealogy_hebrew,hebrew,ישי,Hebrew consonantal equivalent; may fall below min length
+gpg_david_h,David,genealogy_hebrew,hebrew,דוד,Hebrew consonantal equivalent; may fall below min length
+gpg_solomon_h,Solomon,genealogy_hebrew,hebrew,שלמה,Hebrew consonantal equivalent for genealogy cohort; locked before result run
+gpg_joseph_h,Joseph,gospel_people_hebrew,hebrew,יוסף,Hebrew consonantal equivalent for Gospel people cohort; locked before result run
+gpg_mary_h,Mary,gospel_people_hebrew,hebrew,מרים,Hebrew consonantal equivalent for Gospel people cohort; locked before result run
+gpg_jesus_h,Jesus,gospel_core_hebrew,hebrew,ישוע,Hebrew consonantal Jesus/Yeshua form; locked before result run
+gpg_john_h,John,gospel_people_hebrew,hebrew,יוחנן,Hebrew consonantal equivalent for Gospel people cohort; locked before result run
+gpg_simon_h,Simon,gospel_people_hebrew,hebrew,שמעון,Hebrew consonantal equivalent for Gospel people cohort; locked before result run
+gpg_peter_h,Peter,gospel_people_hebrew,hebrew,כיפא,Aramaic/Hebrew Peter/Cephas form; locked before result run
+gpg_matthew_h,Matthew,gospel_people_hebrew,hebrew,מתתיהו,Hebrew consonantal equivalent for Gospel people cohort; locked before result run
+gpg_eleazar_h,Eleazar,genealogy_hebrew,hebrew,אלעזר,Hebrew consonantal equivalent for genealogy cohort; locked before result run
+gpg_nathan_h,Nathan,genealogy_hebrew,hebrew,נתן,Hebrew consonantal equivalent; may fall below min length
+gpg_adam_h,Adam,genealogy_hebrew,hebrew,אדם,Hebrew consonantal equivalent; may fall below min length
+gpg_noah_h,Noah,genealogy_hebrew,hebrew,נח,Hebrew consonantal equivalent; may fall below min length
+gpg_shem_h,Shem,genealogy_hebrew,hebrew,שם,Hebrew consonantal equivalent; may fall below min length
+gpg_zerubbabel_h,Zerubbabel,genealogy_hebrew,hebrew,זרבבל,Hebrew consonantal equivalent for genealogy cohort; locked before result run
+gpg_shealtiel_h,Shealtiel,genealogy_hebrew,hebrew,שאלתיאל,Hebrew consonantal equivalent for genealogy cohort; locked before result run

@@ -1,8 +1,10 @@
+import json
 import tempfile
 import unittest
 from pathlib import Path
 
 from scripts.analyze_targeted_version_presence import (
+    build_parser,
     build_control_target_rows,
     build_summary_rows,
     example_row,
@@ -12,6 +14,7 @@ from scripts.analyze_targeted_version_presence import (
     representative_current_read_lines,
     representative_read_counts,
     selected_term_ids,
+    write_manifest,
     write_markdown,
 )
 
@@ -281,6 +284,37 @@ class TargetedVersionPresenceTests(unittest.TestCase):
             text = path.read_text(encoding="utf-8")
 
         self.assertIn("`טראמפ` (trmp; English: Trump)", text)
+
+    def test_manifest_can_omit_default_joins(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest = Path(tmp) / "manifest.json"
+            args = build_parser().parse_args(
+                [
+                    "--manifest-out",
+                    str(manifest),
+                    "--no-paired-controls",
+                    "--no-extensions",
+                ]
+            )
+
+            write_manifest(
+                args,
+                ("trump_h",),
+                [Path("terms/test.csv")],
+                None,
+                [],
+                [],
+                [],
+                [],
+                [],
+                0.0,
+            )
+
+            inputs = json.loads(manifest.read_text(encoding="utf-8"))["inputs"]
+
+        self.assertIn("terms/test.csv", inputs)
+        self.assertFalse(any("paired_controls" in item for item in inputs))
+        self.assertFalse(any("extension" in item for item in inputs))
 
 
 if __name__ == "__main__":

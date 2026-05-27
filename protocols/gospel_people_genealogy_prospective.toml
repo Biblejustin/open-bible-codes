@@ -1,0 +1,217 @@
+name = "gospel_people_genealogy_prospective"
+description = "Locked Gospel people, disciples, women, and Christ-genealogy prospective version-presence and representative-control screen."
+manifest_out = "reports/gospel_people_genealogy_prospective/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "greek_version_presence"
+description = "Compare Greek Gospel people and genealogy terms across LXX and Greek NT witnesses."
+argv = [
+  "-m", "scripts.analyze_hit_version_presence",
+  "--language", "greek",
+  "--terms", "terms/gospel_people_genealogy_prospective_terms.csv",
+  "--all-concepts",
+  "--report-title", "Gospel People And Genealogy Greek Version Presence",
+  "--max-hits-per-term", "0",
+  "--min-term-length", "4",
+  "--min-skip", "2",
+  "--max-skip", "100",
+  "--direction", "both",
+  "--corpus-jobs", "0",
+  "--corpus", "LXX=configs/example_ebible_grclxx.toml",
+  "--corpus", "TR_NT=configs/example_ebible_grctr.toml",
+  "--corpus", "BYZ_NT=configs/example_ebible_grcmt.toml",
+  "--corpus", "TCG_NT=configs/example_ebible_grctcgnt.toml",
+  "--corpus", "SBLGNT=configs/example_sblgnt.toml",
+  "--stable-family-label", "TR_NT",
+  "--stable-family-label", "BYZ_NT",
+  "--stable-family-label", "TCG_NT",
+  "--stable-family-label", "SBLGNT",
+  "--stable-family-name", "Greek-NT-family",
+  "--patterns-out", "reports/gospel_people_genealogy_prospective/greek_hit_patterns.csv",
+  "--summary-out", "reports/gospel_people_genealogy_prospective/greek_term_summary.csv",
+  "--markdown-out", "reports/gospel_people_genealogy_prospective/greek_version_presence.md",
+  "--manifest-out", "reports/gospel_people_genealogy_prospective/greek_version_presence.manifest.json",
+]
+inputs = [
+  "scripts/analyze_hit_version_presence.py",
+  "scripts/analyze_hebrew_hit_version_presence.py",
+  "terms/gospel_people_genealogy_prospective_terms.csv",
+  "configs/example_ebible_grclxx.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_ebible_grcmt.toml",
+  "configs/example_ebible_grctcgnt.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/gospel_people_genealogy_prospective/greek_hit_patterns.csv",
+  "reports/gospel_people_genealogy_prospective/greek_term_summary.csv",
+  "reports/gospel_people_genealogy_prospective/greek_version_presence.md",
+  "reports/gospel_people_genealogy_prospective/greek_version_presence.manifest.json",
+]
+
+[[steps]]
+id = "hebrew_version_presence"
+description = "Compare Hebrew Gospel people and genealogy forms across MT-family witnesses."
+argv = [
+  "-m", "scripts.analyze_hit_version_presence",
+  "--language", "hebrew",
+  "--terms", "terms/gospel_people_genealogy_prospective_terms.csv",
+  "--all-concepts",
+  "--report-title", "Gospel People And Genealogy Hebrew Version Presence",
+  "--max-hits-per-term", "0",
+  "--min-term-length", "4",
+  "--min-skip", "2",
+  "--max-skip", "100",
+  "--direction", "both",
+  "--corpus-jobs", "0",
+  "--corpus", "MT_WLC=configs/example_oshb_wlc.toml",
+  "--corpus", "UXLC=configs/example_uxlc.toml",
+  "--corpus", "EBIBLE_WLC=configs/example_ebible_hebwlc.toml",
+  "--corpus", "MAM=configs/example_mam.toml",
+  "--corpus", "UHB=configs/example_uhb.toml",
+  "--patterns-out", "reports/gospel_people_genealogy_prospective/hebrew_hit_patterns.csv",
+  "--summary-out", "reports/gospel_people_genealogy_prospective/hebrew_term_summary.csv",
+  "--markdown-out", "reports/gospel_people_genealogy_prospective/hebrew_version_presence.md",
+  "--manifest-out", "reports/gospel_people_genealogy_prospective/hebrew_version_presence.manifest.json",
+]
+inputs = [
+  "scripts/analyze_hit_version_presence.py",
+  "scripts/analyze_hebrew_hit_version_presence.py",
+  "terms/gospel_people_genealogy_prospective_terms.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uxlc.toml",
+  "configs/example_ebible_hebwlc.toml",
+  "configs/example_mam.toml",
+  "configs/example_uhb.toml",
+  "els/corpus.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/gospel_people_genealogy_prospective/hebrew_hit_patterns.csv",
+  "reports/gospel_people_genealogy_prospective/hebrew_term_summary.csv",
+  "reports/gospel_people_genealogy_prospective/hebrew_version_presence.md",
+  "reports/gospel_people_genealogy_prospective/hebrew_version_presence.manifest.json",
+]
+
+[[steps]]
+id = "initial_review"
+description = "Join Greek and Hebrew version-presence rows and build representative control targets."
+argv = [
+  "-m", "scripts.analyze_targeted_version_presence",
+  "--all-exact-term-ids",
+  "--terms", "terms/gospel_people_genealogy_prospective_terms.csv",
+  "--hebrew-summary", "reports/gospel_people_genealogy_prospective/hebrew_term_summary.csv",
+  "--hebrew-patterns", "reports/gospel_people_genealogy_prospective/hebrew_hit_patterns.csv",
+  "--greek-summary", "reports/gospel_people_genealogy_prospective/greek_term_summary.csv",
+  "--greek-patterns", "reports/gospel_people_genealogy_prospective/greek_hit_patterns.csv",
+  "--no-paired-controls",
+  "--no-extensions",
+  "--summary-out", "reports/gospel_people_genealogy_prospective/initial_summary.csv",
+  "--examples-out", "reports/gospel_people_genealogy_prospective/initial_examples.csv",
+  "--control-targets-out", "reports/gospel_people_genealogy_prospective/control_targets.csv",
+  "--markdown-out", "reports/gospel_people_genealogy_prospective/initial_review.md",
+  "--markdown-title", "Gospel People And Genealogy Prospective Initial Review",
+  "--markdown-description", "This generated report joins exact version-presence rows for the locked Gospel people, disciples, women, and Christ-genealogy cohort before representative controls are run. It is review material, not conclusive evidence of meaning.",
+  "--manifest-out", "reports/gospel_people_genealogy_prospective/initial_review.manifest.json",
+]
+inputs = [
+  "scripts/analyze_targeted_version_presence.py",
+  "terms/gospel_people_genealogy_prospective_terms.csv",
+  "reports/gospel_people_genealogy_prospective/hebrew_term_summary.csv",
+  "reports/gospel_people_genealogy_prospective/hebrew_hit_patterns.csv",
+  "reports/gospel_people_genealogy_prospective/greek_term_summary.csv",
+  "reports/gospel_people_genealogy_prospective/greek_hit_patterns.csv",
+  "els/term_display.py",
+]
+outputs = [
+  "reports/gospel_people_genealogy_prospective/initial_summary.csv",
+  "reports/gospel_people_genealogy_prospective/initial_examples.csv",
+  "reports/gospel_people_genealogy_prospective/control_targets.csv",
+  "reports/gospel_people_genealogy_prospective/initial_review.md",
+  "reports/gospel_people_genealogy_prospective/initial_review.manifest.json",
+]
+
+[[steps]]
+id = "representative_controls"
+description = "Run 500+500 representative paired controls for nonzero MT_WLC, UHB, TR_NT, and SBLGNT rows."
+argv = [
+  "-m", "scripts.analyze_targeted_paired_controls",
+  "--target-summary", "reports/gospel_people_genealogy_prospective/control_targets.csv",
+  "--target-corpus", "MT_WLC",
+  "--target-corpus", "UHB",
+  "--target-corpus", "TR_NT",
+  "--target-corpus", "SBLGNT",
+  "--min-skip", "2",
+  "--max-skip", "100",
+  "--direction", "both",
+  "--term-shuffle-samples", "500",
+  "--random-samples", "500",
+  "--seed", "20260527",
+  "--jobs", "0",
+  "--summary-out", "reports/gospel_people_genealogy_prospective/paired_controls_summary.csv",
+  "--examples-out", "reports/gospel_people_genealogy_prospective/paired_controls_examples.csv",
+  "--markdown-out", "reports/gospel_people_genealogy_prospective/paired_controls.md",
+  "--manifest-out", "reports/gospel_people_genealogy_prospective/paired_controls.manifest.json",
+  "--title", "Gospel People And Genealogy Representative Paired Controls",
+]
+inputs = [
+  "scripts/analyze_targeted_paired_controls.py",
+  "reports/gospel_people_genealogy_prospective/control_targets.csv",
+  "configs/example_oshb_wlc.toml",
+  "configs/example_uhb.toml",
+  "configs/example_ebible_grctr.toml",
+  "configs/example_sblgnt.toml",
+  "els/corpus.py",
+  "els/search.py",
+  "els/statistics.py",
+]
+outputs = [
+  "reports/gospel_people_genealogy_prospective/paired_controls_summary.csv",
+  "reports/gospel_people_genealogy_prospective/paired_controls_examples.csv",
+  "reports/gospel_people_genealogy_prospective/paired_controls.md",
+  "reports/gospel_people_genealogy_prospective/paired_controls.manifest.json",
+]
+
+[[steps]]
+id = "controlled_report"
+description = "Assemble the prospective report with representative controls joined back in."
+argv = [
+  "-m", "scripts.analyze_targeted_version_presence",
+  "--all-exact-term-ids",
+  "--terms", "terms/gospel_people_genealogy_prospective_terms.csv",
+  "--hebrew-summary", "reports/gospel_people_genealogy_prospective/hebrew_term_summary.csv",
+  "--hebrew-patterns", "reports/gospel_people_genealogy_prospective/hebrew_hit_patterns.csv",
+  "--greek-summary", "reports/gospel_people_genealogy_prospective/greek_term_summary.csv",
+  "--greek-patterns", "reports/gospel_people_genealogy_prospective/greek_hit_patterns.csv",
+  "--no-paired-controls",
+  "--no-extensions",
+  "--representative-controls", "reports/gospel_people_genealogy_prospective/paired_controls_summary.csv",
+  "--summary-out", "reports/gospel_people_genealogy_prospective/controlled_summary.csv",
+  "--examples-out", "reports/gospel_people_genealogy_prospective/controlled_examples.csv",
+  "--control-targets-out", "reports/gospel_people_genealogy_prospective/controlled_control_targets.csv",
+  "--markdown-out", "docs/GOSPEL_PEOPLE_GENEALOGY_PROSPECTIVE_REPORT.md",
+  "--markdown-title", "Gospel People And Genealogy Prospective Report",
+  "--markdown-description", "This generated report joins exact version-presence rows and representative paired controls for the locked Gospel people, disciples, women, and Christ-genealogy cohort. It is review material, not conclusive evidence of meaning.",
+  "--manifest-out", "reports/gospel_people_genealogy_prospective/controlled_report.manifest.json",
+]
+inputs = [
+  "scripts/analyze_targeted_version_presence.py",
+  "terms/gospel_people_genealogy_prospective_terms.csv",
+  "reports/gospel_people_genealogy_prospective/hebrew_term_summary.csv",
+  "reports/gospel_people_genealogy_prospective/hebrew_hit_patterns.csv",
+  "reports/gospel_people_genealogy_prospective/greek_term_summary.csv",
+  "reports/gospel_people_genealogy_prospective/greek_hit_patterns.csv",
+  "reports/gospel_people_genealogy_prospective/paired_controls_summary.csv",
+  "els/term_display.py",
+]
+outputs = [
+  "reports/gospel_people_genealogy_prospective/controlled_summary.csv",
+  "reports/gospel_people_genealogy_prospective/controlled_examples.csv",
+  "reports/gospel_people_genealogy_prospective/controlled_control_targets.csv",
+  "docs/GOSPEL_PEOPLE_GENEALOGY_PROSPECTIVE_REPORT.md",
+  "reports/gospel_people_genealogy_prospective/controlled_report.manifest.json",
+]

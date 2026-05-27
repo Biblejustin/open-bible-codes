@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 376
+Documents indexed: 377
 
 ## Controls
 
@@ -147,6 +147,7 @@ Documents indexed: 376
 | Doxa Four-Source Claim Follow-Up Preregistration | `DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_PREREGISTRATION.md` |
 | Doxa Four-Source Confirmatory Follow-Up Preregistration | `DOXA_FOUR_SOURCE_CONFIRMATORY_FOLLOWUP_PREREGISTRATION.md` |
 | Gog/Magog Pair Prospective Preregistration | `GOG_MAGOG_PAIR_PROSPECTIVE_PREREGISTRATION.md` |
+| Gospel People And Genealogy Prospective Preregistration | `GOSPEL_PEOPLE_GENEALOGY_PROSPECTIVE_PREREGISTRATION.md` |
 | Greek Exact-Center Cohort Preregistration | `GREEK_EXACT_CENTER_COHORT_PREREGISTRATION.md` |
 | Greek Exact-Center Four-Source Preregistration | `GREEK_EXACT_CENTER_FOUR_SOURCE_PREREGISTRATION.md` |
 | Greek Exact-Center Three-Source Preregistration | `GREEK_EXACT_CENTER_THREE_SOURCE_PREREGISTRATION.md` |
