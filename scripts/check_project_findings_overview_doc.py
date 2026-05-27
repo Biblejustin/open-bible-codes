@@ -58,7 +58,11 @@ READER_PATH_REQUIREMENTS = {
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    failures = validate_project_findings_overview(args.doc)
+    failures = validate_project_findings_overview(
+        args.doc,
+        args.readme,
+        args.start_here,
+    )
     if failures:
         for failure in failures:
             print(f"project-findings overview failure: {failure}", file=sys.stderr)

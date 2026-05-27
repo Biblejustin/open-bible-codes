@@ -96,6 +96,27 @@ def test_main_reports_failure(tmp_path: Path, capsys) -> None:
     assert "project-findings overview failure" in capsys.readouterr().err
 
 
+def test_main_uses_reader_path_arguments(tmp_path: Path, capsys) -> None:
+    readme = tmp_path / "README.md"
+    start_here = tmp_path / "START_HERE.md"
+    readme.write_text(valid_readme_text(), encoding="utf-8")
+    start_here.write_text("reader path missing\n", encoding="utf-8")
+
+    code = check.main(
+        [
+            "--doc",
+            str(check.DEFAULT_DOC),
+            "--readme",
+            str(readme),
+            "--start-here",
+            str(start_here),
+        ]
+    )
+
+    assert code == 1
+    assert f"{start_here} missing phrase" in capsys.readouterr().err
+
+
 def current_doc_text() -> str:
     return check.DEFAULT_DOC.read_text(encoding="utf-8")
 
