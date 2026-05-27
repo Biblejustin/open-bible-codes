@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+from collections import Counter
 from pathlib import Path
 
 from scripts import build_prospective_lane_status as lane_status
@@ -59,6 +60,9 @@ def validate_readiness_doc(doc: Path, profiles_path: Path) -> list[str]:
         failures.append(f"{doc} missing lane-status link: {LANE_STATUS_DOC}")
     if not contains_phrase(normalized_text, NO_CLAIM_RERUN_PHRASE):
         failures.append(f"{doc} missing no-claim-rerun guard")
+    for phrase in status_count_phrases(profiles):
+        if not contains_phrase(normalized_text, phrase):
+            failures.append(f"{doc} missing status-count phrase: {phrase}")
 
     if ready:
         ready_ids = ", ".join(f"`{profile['id']}`" for profile in ready)
@@ -92,6 +96,14 @@ def normalize_whitespace(text: str) -> str:
 
 def contains_phrase(normalized_text: str, phrase: str) -> bool:
     return normalize_whitespace(phrase) in normalized_text
+
+
+def status_count_phrases(profiles: list[dict[str, object]]) -> tuple[str, ...]:
+    counts = Counter(str(profile.get("status", "")) for profile in profiles)
+    return (
+        f"Tracked profiles: {len(profiles)}.",
+        *(f"`{status}`: {counts[status]}." for status in sorted(counts)),
+    )
 
 
 def display_path(path: Path) -> str:

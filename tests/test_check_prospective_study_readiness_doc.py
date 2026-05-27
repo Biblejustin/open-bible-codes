@@ -15,9 +15,10 @@ def test_missing_doc_fails(tmp_path: Path) -> None:
 
 
 def test_no_ready_doc_fails_when_profile_is_ready(tmp_path: Path) -> None:
+    profile_rows = [{"id": "ready_lane", "status": "ready_for_preflight"}]
     profiles = tmp_path / "profiles.json"
     profiles.write_text(
-        json.dumps({"profiles": [{"id": "ready_lane", "status": "ready_for_preflight"}]}),
+        json.dumps({"profiles": profile_rows}),
         encoding="utf-8",
     )
     doc = tmp_path / "readiness.md"
@@ -30,6 +31,7 @@ def test_no_ready_doc_fails_when_profile_is_ready(tmp_path: Path) -> None:
                 check.NO_READY_PHRASE,
                 check.FRESH_TARGET_PHRASE,
                 check.NO_BLOCKED_PHRASE,
+                *check.status_count_phrases(profile_rows),
             )
         ),
         encoding="utf-8",
@@ -42,11 +44,10 @@ def test_no_ready_doc_fails_when_profile_is_ready(tmp_path: Path) -> None:
 
 
 def test_blocked_profile_requires_lane_id(tmp_path: Path) -> None:
+    profile_rows = [{"id": "blocked_lane", "status": "needs_predeclared_term_list"}]
     profiles = tmp_path / "profiles.json"
     profiles.write_text(
-        json.dumps(
-            {"profiles": [{"id": "blocked_lane", "status": "needs_predeclared_term_list"}]}
-        ),
+        json.dumps({"profiles": profile_rows}),
         encoding="utf-8",
     )
     doc = tmp_path / "readiness.md"
@@ -58,6 +59,7 @@ def test_blocked_profile_requires_lane_id(tmp_path: Path) -> None:
                 check.NO_CLAIM_RERUN_PHRASE,
                 check.NO_READY_PHRASE,
                 check.FRESH_TARGET_PHRASE,
+                *check.status_count_phrases(profile_rows),
             )
         ),
         encoding="utf-8",
@@ -66,6 +68,33 @@ def test_blocked_profile_requires_lane_id(tmp_path: Path) -> None:
     failures = check.validate_readiness_doc(doc, profiles)
 
     assert any("missing blocked lane id: `blocked_lane`" in f for f in failures)
+
+
+def test_status_snapshot_must_match_profiles(tmp_path: Path) -> None:
+    profiles = tmp_path / "profiles.json"
+    profiles.write_text(
+        json.dumps({"profiles": [{"id": "done", "status": "completed_negative_controlled_result"}]}),
+        encoding="utf-8",
+    )
+    doc = tmp_path / "readiness.md"
+    doc.write_text(
+        "\n".join(
+            (
+                f"`{profiles.as_posix()}`",
+                "`docs/PROSPECTIVE_LANE_STATUS.md`",
+                check.NO_CLAIM_RERUN_PHRASE,
+                check.NO_READY_PHRASE,
+                check.FRESH_TARGET_PHRASE,
+                check.NO_BLOCKED_PHRASE,
+                "Tracked profiles: 0.",
+            )
+        ),
+        encoding="utf-8",
+    )
+
+    failures = check.validate_readiness_doc(doc, profiles)
+
+    assert any("missing status-count phrase: Tracked profiles: 1." in f for f in failures)
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:

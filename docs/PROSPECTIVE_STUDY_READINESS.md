@@ -16,6 +16,14 @@ context-cautioned review material. There is no remaining `ready_for_preflight`
 lane in `configs/prospective_study_lanes.json`. A new result-producing study
 now needs a fresh term/source target set and a new clean prospective lock.
 
+Current profile snapshot:
+
+- Tracked profiles: 8.
+- `completed_context_cautioned_review_material`: 2.
+- `completed_negative_controlled_result`: 4.
+- `completed_negative_curiosity_appendix`: 1.
+- `completed_negative_weak_controlled_result`: 1.
+
 ## Preflight Command
 
 Before the lock, audit the candidate term list for reuse of prior evidence:
