@@ -57,6 +57,9 @@ public-doc synchronization, exact-gap review-rank wording cleanup, and
 CSV-backed locks for the WRR exact-gap priority packet, method/pair-universe
 evidence packet, remaining-lane evidence packet, and source-row coverage
 packet, plus source-row crop packet, contact-sheet image, and OCR word packet.
+The WRR method-lane wide-skip probe is now guarded, included in the real-report
+run, carried into the exact-gap/blocker packets, and mirrored in public
+reader-facing WRR wording.
 The Cities source-row lock evidence packet doc is now CSV/manifest-guarded
 against builder row output, summary rows, manifest metadata, no-source-row-use
 locks, and source-script leakage.
@@ -792,6 +795,28 @@ Expected result: no missing documented script modules, protocol/config/term
 files, mapping CSVs, or unmarked report references. This check now runs inside
 the formal real-report preflight.
 
+### WRR Method-Lane Wide-Skip Probe
+
+Current tracked files:
+
+- `scripts/analyze_wrr_method_lane_wide_skip.py`
+- `scripts/check_wrr_method_lane_wide_skip_probe_doc.py`
+- `protocols/wrr_method_lane_wide_skip_probe.toml`
+- `docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md`
+- `reports/wrr_1994/wrr_method_lane_wide_skip_probe.csv`
+- `reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv`
+
+Completed in this pass: probed the 11 OCR-matched WRR method/pair-universe
+terms through skip 5000 in ordinary Koren Genesis ELS search. The result is 0
+total hits through skip 5000; all 11 terms remain zero-hit. This is now carried
+into the claim-blocker packet, exact-gap priority packet, consolidated
+findings, claim catalog, final report, start-here doc, real-report run doc,
+public reader package, real-report protocol, and real-report preflight.
+
+Boundary: the wide-skip probe is diagnostic only. It does not choose source
+corrections, method changes, replacement spellings, or pair exclusions. Exact
+published WRR reproduction remains caveated by the 163-distance gap.
+
 ## Highest-Value Non-Blocked Work
 
 ### 1. WRR Reproduction Upgrade
@@ -827,6 +852,7 @@ Tracked references:
 - `docs/WRR_CLAIM_READINESS.md`
 - `docs/WRR_CLAIM_BLOCKER_PACKET.md`
 - `docs/WRR_LOCKED_METHOD_REPORT.md`
+- `docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md`
 - `docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`
 - `docs/WRR_LOCK_OPTIONS.md`
 - `reports/wrr_1994/wrr2_pair_eligibility_table.csv`
@@ -1122,6 +1148,9 @@ replacement spellings, or method changes.
 method-lane terms: all are OCR-matched, all have zero skip-250 appellation
 counts, all have zero high-cap appellation ordinary hits, and 2 pairs have zero
 ordinary hits on both sides.
+`docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md` now extends those 11 OCR-matched
+method-lane terms through skip 5000 and finds 0 ordinary Genesis hits, so the
+method lane is not explained by a small skip-cap extension.
 The exact-gap priority-packet checker now validates CSV fieldnames, summary
 metrics, review lane rows, and manifest inputs/outputs in addition to doc
 prose. The method/pair-universe checker now validates CSV fieldnames, summary
@@ -1367,11 +1396,15 @@ make release-ready
 Run `make release-ready` from a committed tree; the final public-release gate is
 supposed to fail if tracked files are dirty.
 
-Latest validation snapshot after the release-ready make target, with current
-dirty-tree fast validation above it:
+Latest validation snapshot after the WRR method-lane wide-skip public-doc
+synchronization:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1885
-  tests, 2 skipped, and 29196 subtests.
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1951
+  tests, 2 skipped, and 29325 subtests.
+- `make public-reader-package` passed after the public WRR wide-skip wording
+  refresh.
+- `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
+  passed clean after commit `223d914`.
 - `python3 -m scripts.check_prospective_lane_status_doc` passed with JSON-backed
   lane id/status/path and status-count locks.
 - `python3 -m scripts.check_real_report_run_doc` passed with TOML-backed
