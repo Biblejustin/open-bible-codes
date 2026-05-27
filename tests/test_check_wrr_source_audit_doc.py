@@ -47,6 +47,9 @@ def test_validate_source_audit_accepts_matching_csvs(tmp_path: Path) -> None:
         locked_method_report=_locked_method_report(tmp_path),
         method_status=_method_status(tmp_path),
         manual_summary=_manual_summary(tmp_path),
+        locked_method_manifest=None,
+        method_status_manifest=None,
+        manual_manifest=None,
     )
 
     assert failures == []
@@ -61,6 +64,9 @@ def test_validate_source_audit_rejects_locked_method_drift(tmp_path: Path) -> No
         ),
         method_status=_method_status(tmp_path),
         manual_summary=_manual_summary(tmp_path),
+        locked_method_manifest=None,
+        method_status_manifest=None,
+        manual_manifest=None,
     )
 
     assert any("('lock', 'Pair universe') value drifted" in failure for failure in failures)
@@ -72,6 +78,9 @@ def test_validate_source_audit_rejects_method_status_drift(tmp_path: Path) -> No
         locked_method_report=_locked_method_report(tmp_path),
         method_status=_method_status(tmp_path, bad_area="Pair universe"),
         manual_summary=_manual_summary(tmp_path),
+        locked_method_manifest=None,
+        method_status_manifest=None,
+        manual_manifest=None,
     )
 
     assert any("Pair universe status drifted" in failure for failure in failures)
@@ -83,9 +92,52 @@ def test_validate_source_audit_rejects_manual_summary_drift(tmp_path: Path) -> N
         locked_method_report=_locked_method_report(tmp_path),
         method_status=_method_status(tmp_path),
         manual_summary=_manual_summary(tmp_path, bad_lane="method_pair_universe"),
+        locked_method_manifest=None,
+        method_status_manifest=None,
+        manual_manifest=None,
     )
 
     assert any("method_pair_universe action_terms drifted" in failure for failure in failures)
+
+
+def test_validate_source_audit_rejects_manifest_drift(tmp_path: Path) -> None:
+    manifest = tmp_path / "wrr_manual_decision_register.manifest.json"
+    manifest.write_text(
+        """
+{
+  "action_terms": 57,
+  "frontier_pairs": 40,
+  "inputs": {
+    "remaining": "reports/wrr_1994/wrr_remaining_lane_review_checklist.csv",
+    "row_checklist": "reports/wrr_1994/wrr_source_transcription_row_review_checklist.csv",
+    "source_policy": "reports/wrr_1994/wrr_source_policy_review_checklist.csv"
+  },
+  "outputs": {
+    "manifest_out": "reports/wrr_1994/wrr_manual_decision_register.manifest.json",
+    "markdown_out": "docs/WRR_MANUAL_DECISION_REGISTER.md",
+    "out": "reports/wrr_1994/wrr_manual_decision_register.csv",
+    "summary_out": "reports/wrr_1994/wrr_manual_decision_register_summary.csv"
+  },
+  "residual_pairs": 59,
+  "rows": 37,
+  "summary_rows": 4,
+  "tool": "build_wrr_manual_decision_register"
+}
+""".lstrip(),
+        encoding="utf-8",
+    )
+
+    failures = check.validate_source_audit_doc(
+        _doc(tmp_path),
+        locked_method_report=_locked_method_report(tmp_path),
+        method_status=_method_status(tmp_path),
+        manual_summary=_manual_summary(tmp_path),
+        locked_method_manifest=None,
+        method_status_manifest=None,
+        manual_manifest=manifest,
+    )
+
+    assert any("action_terms drifted" in failure for failure in failures)
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
@@ -107,7 +159,7 @@ def _locked_method_report(
     bad_key: tuple[str, str] | None = None,
 ) -> Path:
     path = tmp_path / "wrr_locked_method_report.csv"
-    fieldnames = ["section", "item", "value", "status", "evidence", "source"]
+    fieldnames = check.LOCKED_METHOD_FIELDNAMES
     rows = []
     for key, (value, status) in check.EXPECTED_LOCKED_METHOD_ROWS.items():
         section, item = key
@@ -126,7 +178,7 @@ def _locked_method_report(
 
 def _method_status(tmp_path: Path, *, bad_area: str | None = None) -> Path:
     path = tmp_path / "wrr_method_status.csv"
-    fieldnames = ["decision_area", "status", "current_read", "evidence", "next_action"]
+    fieldnames = check.METHOD_STATUS_FIELDNAMES
     rows = []
     for area, status in check.EXPECTED_METHOD_STATUS.items():
         rows.append(
@@ -145,14 +197,7 @@ def _method_status(tmp_path: Path, *, bad_area: str | None = None) -> Path:
 
 def _manual_summary(tmp_path: Path, *, bad_lane: str | None = None) -> Path:
     path = tmp_path / "wrr_manual_decision_register_summary.csv"
-    fieldnames = [
-        "decision_lane",
-        "decision_rows",
-        "action_terms",
-        "residual_pairs",
-        "frontier_pairs",
-        "review_state",
-    ]
+    fieldnames = check.MANUAL_SUMMARY_FIELDNAMES
     rows = []
     for lane, expected in check.EXPECTED_MANUAL_SUMMARY.items():
         decision_rows, action_terms, residual_pairs, frontier_pairs, review_state = expected

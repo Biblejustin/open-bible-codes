@@ -5,14 +5,26 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from pathlib import Path
+from typing import Any
 
+from scripts import build_wrr_locked_method_report as locked_builder
+from scripts import build_wrr_manual_decision_register as manual_builder
+from scripts import build_wrr_method_status as method_builder
 
 DEFAULT_DOC = Path("docs/WRR_SOURCE_AUDIT.md")
-DEFAULT_LOCKED_METHOD_REPORT = Path("reports/wrr_1994/wrr_locked_method_report.csv")
-DEFAULT_METHOD_STATUS = Path("reports/wrr_1994/wrr_method_status.csv")
-DEFAULT_MANUAL_SUMMARY = Path("reports/wrr_1994/wrr_manual_decision_register_summary.csv")
+DEFAULT_LOCKED_METHOD_REPORT = locked_builder.DEFAULT_OUT
+DEFAULT_LOCKED_METHOD_MANIFEST = locked_builder.DEFAULT_MANIFEST
+DEFAULT_METHOD_STATUS = method_builder.DEFAULT_OUT
+DEFAULT_METHOD_STATUS_MANIFEST = method_builder.DEFAULT_MANIFEST
+DEFAULT_MANUAL_SUMMARY = manual_builder.DEFAULT_SUMMARY_OUT
+DEFAULT_MANUAL_MANIFEST = manual_builder.DEFAULT_MANIFEST
+
+LOCKED_METHOD_FIELDNAMES = locked_builder.FIELDNAMES
+METHOD_STATUS_FIELDNAMES = method_builder.FIELDNAMES
+MANUAL_SUMMARY_FIELDNAMES = manual_builder.SUMMARY_FIELDNAMES
 
 EXPECTED_LOCKED_METHOD_ROWS = {
     ("status", "report_status"): (
@@ -140,6 +152,9 @@ def main(argv: list[str] | None = None) -> int:
         locked_method_report=args.locked_method_report,
         method_status=args.method_status,
         manual_summary=args.manual_summary,
+        locked_method_manifest=args.locked_method_manifest,
+        method_status_manifest=args.method_status_manifest,
+        manual_manifest=args.manual_manifest,
     )
     if failures:
         for failure in failures:
@@ -159,6 +174,17 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--method-status", type=Path, default=DEFAULT_METHOD_STATUS)
     parser.add_argument("--manual-summary", type=Path, default=DEFAULT_MANUAL_SUMMARY)
+    parser.add_argument(
+        "--locked-method-manifest",
+        type=Path,
+        default=DEFAULT_LOCKED_METHOD_MANIFEST,
+    )
+    parser.add_argument(
+        "--method-status-manifest",
+        type=Path,
+        default=DEFAULT_METHOD_STATUS_MANIFEST,
+    )
+    parser.add_argument("--manual-manifest", type=Path, default=DEFAULT_MANUAL_MANIFEST)
     return parser
 
 
@@ -168,6 +194,9 @@ def validate_source_audit_doc(
     locked_method_report: Path | None = DEFAULT_LOCKED_METHOD_REPORT,
     method_status: Path | None = DEFAULT_METHOD_STATUS,
     manual_summary: Path | None = DEFAULT_MANUAL_SUMMARY,
+    locked_method_manifest: Path | None = DEFAULT_LOCKED_METHOD_MANIFEST,
+    method_status_manifest: Path | None = DEFAULT_METHOD_STATUS_MANIFEST,
+    manual_manifest: Path | None = DEFAULT_MANUAL_MANIFEST,
 ) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
@@ -187,14 +216,23 @@ def validate_source_audit_doc(
         failures.extend(validate_method_status(method_status))
     if manual_summary is not None:
         failures.extend(validate_manual_summary(manual_summary))
+    if locked_method_manifest is not None:
+        failures.extend(validate_locked_method_manifest(locked_method_manifest))
+    if method_status_manifest is not None:
+        failures.extend(validate_method_status_manifest(method_status_manifest))
+    if manual_manifest is not None:
+        failures.extend(validate_manual_manifest(manual_manifest))
     return failures
 
 
 def validate_locked_method_report(path: Path) -> list[str]:
-    rows = _read_csv(path)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(path)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != LOCKED_METHOD_FIELDNAMES:
+        failures.append(f"{path} fieldnames drifted")
     by_key = {(row.get("section", ""), row.get("item", "")): row for row in rows}
     for key, (value, status) in EXPECTED_LOCKED_METHOD_ROWS.items():
         row = by_key.get(key)
@@ -211,10 +249,13 @@ def validate_locked_method_report(path: Path) -> list[str]:
 
 
 def validate_method_status(path: Path) -> list[str]:
-    rows = _read_csv(path)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(path)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != METHOD_STATUS_FIELDNAMES:
+        failures.append(f"{path} fieldnames drifted")
     by_area = {row.get("decision_area", ""): row for row in rows}
     if set(by_area) != set(EXPECTED_METHOD_STATUS):
         failures.append(f"{path} decision-area set drifted")
@@ -233,10 +274,13 @@ def validate_method_status(path: Path) -> list[str]:
 
 
 def validate_manual_summary(path: Path) -> list[str]:
-    rows = _read_csv(path)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(path)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != MANUAL_SUMMARY_FIELDNAMES:
+        failures.append(f"{path} fieldnames drifted")
     by_lane = {row.get("decision_lane", ""): row for row in rows}
     if set(by_lane) != set(EXPECTED_MANUAL_SUMMARY):
         failures.append(f"{path} decision-lane set drifted")
@@ -257,11 +301,151 @@ def validate_manual_summary(path: Path) -> list[str]:
     return failures
 
 
-def _read_csv(path: Path) -> list[dict[str, str]] | str:
+def validate_locked_method_manifest(path: Path) -> list[str]:
+    data = _read_json(path)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "build_wrr_locked_method_report",
+        "inputs": {
+            "method_status": str(locked_builder.DEFAULT_METHOD_STATUS),
+            "readiness": str(locked_builder.DEFAULT_READINESS),
+            "lock_options": str(locked_builder.DEFAULT_LOCK_OPTIONS),
+            "manual_worksheet": str(locked_builder.DEFAULT_MANUAL_WORKSHEET),
+            "corrected_distance_summary": str(
+                locked_builder.DEFAULT_CORRECTED_DISTANCE_SUMMARY
+            ),
+            "corrected_distance_aggregate": str(
+                locked_builder.DEFAULT_CORRECTED_DISTANCE_AGGREGATE
+            ),
+            "permutation_summary": str(locked_builder.DEFAULT_PERMUTATION_SUMMARY),
+            "primary_result_table": str(locked_builder.DEFAULT_PRIMARY_RESULT_TABLE),
+            "defined_pair_summary": str(locked_builder.DEFAULT_DEFINED_PAIR_SUMMARY),
+        },
+        "outputs": {
+            "out": str(DEFAULT_LOCKED_METHOD_REPORT),
+            "markdown_out": str(locked_builder.DEFAULT_MD),
+            "manifest_out": str(DEFAULT_LOCKED_METHOD_MANIFEST),
+        },
+        "report_rows": 17,
+        "method_status_rows": len(EXPECTED_METHOD_STATUS),
+        "manual_decision_rows": 37,
+    }
+    return _validate_manifest_values(path, data, expected)
+
+
+def validate_method_status_manifest(path: Path) -> list[str]:
+    data = _read_json(path)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "build_wrr_method_status.py",
+        "inputs": {
+            "text_source": str(method_builder.DEFAULT_TEXT_SOURCE),
+            "pair_summary": str(method_builder.DEFAULT_PAIR_SUMMARY),
+            "defined_pair_summary": str(method_builder.DEFAULT_DEFINED_PAIR_SUMMARY),
+            "defined_gap_reasons": str(method_builder.DEFAULT_DEFINED_GAP_REASONS),
+            "zero_hit_variant_summary": str(
+                method_builder.DEFAULT_ZERO_HIT_VARIANT_SUMMARY
+            ),
+            "variant_gap_summary": str(method_builder.DEFAULT_VARIANT_GAP_SUMMARY),
+            "variant_residual_summary": str(
+                method_builder.DEFAULT_VARIANT_RESIDUAL_SUMMARY
+            ),
+            "table2_bridge_summary": str(method_builder.DEFAULT_TABLE2_BRIDGE_SUMMARY),
+            "table2_ocr_summary": str(method_builder.DEFAULT_TABLE2_OCR_SUMMARY),
+            "table2_row_ocr_summary": str(
+                method_builder.DEFAULT_TABLE2_ROW_OCR_SUMMARY
+            ),
+            "skip_summary": str(method_builder.DEFAULT_SKIP_SUMMARY),
+            "corrected_distance_variants": str(method_builder.DEFAULT_VARIANTS),
+            "source_policy_scenarios": str(
+                method_builder.DEFAULT_SOURCE_POLICY_SCENARIOS
+            ),
+            "source_policy_term_impacts": str(
+                method_builder.DEFAULT_SOURCE_POLICY_TERM_IMPACTS
+            ),
+            "dw_formula_sensitivity": str(
+                method_builder.DEFAULT_DW_FORMULA_SENSITIVITY
+            ),
+            "corrected_distance_aggregate": str(method_builder.DEFAULT_AGGREGATE),
+            "cross_pair_permutation_summary": str(
+                method_builder.DEFAULT_CROSS_PAIR_PERMUTATION_SUMMARY
+            ),
+            "cross_pair_recommended_permutation_summary": str(
+                method_builder.DEFAULT_CROSS_PAIR_RECOMMENDED_PERMUTATION_SUMMARY
+            ),
+            "highcap_corrected_distance_summary": str(
+                method_builder.DEFAULT_HIGHCAP_CORRECTED_DISTANCE_SUMMARY
+            ),
+            "highcap_perturbation_summary": str(
+                method_builder.DEFAULT_HIGHCAP_PERTURBATION_SUMMARY
+            ),
+            "highcap_pair_readiness_summary": str(
+                method_builder.DEFAULT_HIGHCAP_PAIR_READINESS_SUMMARY
+            ),
+            "primary_result_table": str(method_builder.DEFAULT_PRIMARY_RESULT_TABLE),
+        },
+        "outputs": {
+            "csv": str(DEFAULT_METHOD_STATUS),
+            "markdown": str(method_builder.DEFAULT_MD),
+            "manifest": str(DEFAULT_METHOD_STATUS_MANIFEST),
+        },
+        "rows": len(EXPECTED_METHOD_STATUS),
+    }
+    return _validate_manifest_values(path, data, expected)
+
+
+def validate_manual_manifest(path: Path) -> list[str]:
+    data = _read_json(path)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "build_wrr_manual_decision_register",
+        "inputs": {
+            "source_policy": str(manual_builder.DEFAULT_SOURCE_POLICY),
+            "row_checklist": str(manual_builder.DEFAULT_ROW_CHECKLIST),
+            "remaining": str(manual_builder.DEFAULT_REMAINING),
+        },
+        "outputs": {
+            "out": str(manual_builder.DEFAULT_OUT),
+            "summary_out": str(DEFAULT_MANUAL_SUMMARY),
+            "markdown_out": str(manual_builder.DEFAULT_MD),
+            "manifest_out": str(DEFAULT_MANUAL_MANIFEST),
+        },
+        "rows": 37,
+        "summary_rows": len(EXPECTED_MANUAL_SUMMARY),
+        "action_terms": 58,
+        "residual_pairs": 59,
+        "frontier_pairs": 40,
+    }
+    return _validate_manifest_values(path, data, expected)
+
+
+def _validate_manifest_values(
+    path: Path,
+    data: dict[str, Any],
+    expected: dict[str, Any],
+) -> list[str]:
+    failures: list[str] = []
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{path} {key} drifted")
+    return failures
+
+
+def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
     if not path.exists():
         return f"{path} is missing"
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def _read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def normalize_space(text: str) -> str:

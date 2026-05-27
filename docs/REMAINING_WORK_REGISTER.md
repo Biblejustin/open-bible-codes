@@ -96,8 +96,8 @@ source-review queue visual rows, non-exclusion actions, source queue manifest
 input/output, and count locks.
 The WRR source-row crop contact sheet doc is now CSV/manifest-guarded
 against crop-packet row order, summary, manifest, and contact-sheet dimensions.
-The WRR source audit doc is now CSV-guarded against locked-method, method-status,
-and manual-decision summary drift.
+The WRR source audit doc is now CSV/manifest-guarded against locked-method,
+method-status, manual-decision summary, manifest input/output, and count drift.
 The Cities PDF recovery probe doc is now CSV/manifest-guarded against recovery
 rows, summary counts, usable/unrecovered labels, manifest tool/source/output
 metadata, and recovery boundary drift.
@@ -1390,7 +1390,8 @@ dirty-tree fast validation above it:
   builder-derived worksheet row locks plus manifest decision-status and
   no-import boundary locks.
 - `python3 -m scripts.check_wrr_source_audit_doc` passed with CSV-backed
-  locked-method, method-status, and manual-decision summary locks.
+  locked-method, method-status, and manual-decision summary locks plus
+  manifest input/output and count locks.
 - `python3 -m scripts.check_wrr_source_row_crop_contact_sheet_doc` passed
   with CSV-backed crop-row, summary, manifest, and PNG dimension locks.
 - `python3 -m scripts.check_wrr_source_visual_review_notes_doc` passed with
@@ -1501,6 +1502,8 @@ dirty-tree fast validation above it:
   lock update: 1921 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the source visual-review notes checker
   source-queue manifest lock update: 1922 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the source-audit checker manifest lock
+  update: 1923 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.
