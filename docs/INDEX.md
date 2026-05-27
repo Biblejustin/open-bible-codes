@@ -144,7 +144,7 @@ Documents indexed: 382
 | --- | --- |
 | All-Codes Compound Extension Confirmatory Preregistration | `ALL_CODES_COMPOUND_EXTENSION_CONFIRMATORY_PREREGISTRATION.md` |
 | BYZ_NT Source-Only Exact-Center Preregistration | `BYZ_SOURCE_ONLY_EXACT_CENTER_PREREGISTRATION.md` |
-| Prospective Study Preregistration Template | `COMPOUND_EXTENSION_PROSPECTIVE_PREREGISTRATION.md` |
+| Compound Extension Prospective Preregistration | `COMPOUND_EXTENSION_PROSPECTIVE_PREREGISTRATION.md` |
 | CRD Preregistration | `CRD_PREREGISTRATION.md` |
 | Doxa Follow-Up Preregistration | `DOXA_FOLLOWUP_PREREGISTRATION.md` |
 | Doxa Four-Source Claim Follow-Up Preregistration | `DOXA_FOUR_SOURCE_CLAIM_FOLLOWUP_PREREGISTRATION.md` |
@@ -156,9 +156,9 @@ Documents indexed: 382
 | Greek Exact-Center Three-Source Preregistration | `GREEK_EXACT_CENTER_THREE_SOURCE_PREREGISTRATION.md` |
 | Greek Expanded Prospective Exact-Center Preregistration | `GREEK_EXPANDED_PROSPECTIVE_PREREGISTRATION.md` |
 | Greek Lexicon Extension Prospective Preregistration | `GREEK_LEXICON_EXTENSION_PROSPECTIVE_PREREGISTRATION.md` |
-| Prospective Study Preregistration Template | `GREEK_SURFACE_NEW_TERMS_PREREGISTRATION.md` |
+| Greek Surface New Terms Preregistration | `GREEK_SURFACE_NEW_TERMS_PREREGISTRATION.md` |
 | Greek Surface Prospective Preregistration | `GREEK_SURFACE_PROSPECTIVE_PREREGISTRATION.md` |
-| Prospective Study Preregistration Template | `HEBREW_CONCORDANCE_WORDS_PROSPECTIVE_PREREGISTRATION.md` |
+| Hebrew Concordance Words Prospective Preregistration | `HEBREW_CONCORDANCE_WORDS_PROSPECTIVE_PREREGISTRATION.md` |
 | Hebrew Modern Geopolitical Presence Preregistration | `HEBREW_MODERN_GEOPOLITICAL_PRESENCE_PREREGISTRATION.md` |
 | Hebrew Theology Prospective Preregistration | `HEBREW_THEOLOGY_PROSPECTIVE_PREREGISTRATION.md` |
 | KJVA Apocrypha Bridge Confirmatory Follow-Up Preregistration | `KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_PREREGISTRATION.md` |

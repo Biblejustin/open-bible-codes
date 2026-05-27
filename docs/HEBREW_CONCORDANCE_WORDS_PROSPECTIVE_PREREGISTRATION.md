@@ -1,10 +1,11 @@
-# Prospective Study Preregistration Template
+# Hebrew Concordance Words Prospective Preregistration
 
-Status: template; copy before use.
+Status: registered clean-lock candidate-discovery screen.
 
-Copy this file to a study-specific preregistration document before any
-result-producing run. Replace every bracketed placeholder, commit the
-preregistration, build a lock manifest, validate it, then run the protocol.
+This document freezes the Hebrew concordance headword clean-lock cohort before
+the result-producing protocol. The fixed value here is that the term list,
+source set, skip range, candidate rule, and representative-control rule were
+declared before this specific controlled report was run.
 
 ## Study Identity
 
@@ -12,15 +13,11 @@ preregistration, build a lock manifest, validate it, then run the protocol.
 | --- | --- |
 | Study name | `hebrew_concordance_words_prospective` |
 | Study status | prospective candidate-discovery screen |
-| Preregistration commit | `pending current preregistration commit` |
+| Preregistration commit | recorded by `reports/study_locks/hebrew_concordance_words_prospective.manifest.json` |
 | Lock manifest | `reports/study_locks/hebrew_concordance_words_prospective.manifest.json` |
 | Report document | `docs/HEBREW_CONCORDANCE_WORDS_PROSPECTIVE_REPORT.md` |
 
 ## Question
-
-State the exact question in one paragraph.
-
-Example shape:
 
 Do declared `hebrew` terms produce `open-concordance Hebrew headword rows` patterns
 under fixed `2..100`, `both`, `version-presence matrix; no surface-context promotion before clean lock`, and `representative MT_WLC and UHB shuffled-term/random controls after clean lock`
@@ -50,8 +47,8 @@ Corpus/source labels:
 - `MAM` from `configs/example_mam.toml`;
 - `UHB` from `configs/example_uhb.toml`.
 
-State whether the sources are aligned version-comparison sources or broad
-corpus-presence sources.
+These are MT-family Hebrew version-comparison sources for exact source-presence
+comparison, with `MT_WLC` and `UHB` used as representative control corpora.
 
 ## Locked Settings
 

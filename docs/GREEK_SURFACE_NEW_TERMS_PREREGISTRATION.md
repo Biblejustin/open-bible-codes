@@ -1,10 +1,11 @@
-# Prospective Study Preregistration Template
+# Greek Surface New Terms Preregistration
 
-Status: template; copy before use.
+Status: registered clean-lock candidate-discovery screen.
 
-Copy this file to a study-specific preregistration document before any
-result-producing run. Replace every bracketed placeholder, commit the
-preregistration, build a lock manifest, validate it, then run the protocol.
+This document freezes the Greek surface new-terms clean-lock cohort before the
+result-producing protocol. The fixed value here is that the term list, source
+set, skip range, candidate rule, and control rule were declared before this
+specific controlled report was run.
 
 ## Study Identity
 
@@ -12,15 +13,11 @@ preregistration, build a lock manifest, validate it, then run the protocol.
 | --- | --- |
 | Study name | `greek_surface_new_terms` |
 | Study status | prospective candidate-discovery screen |
-| Preregistration commit | `pending current preregistration commit` |
+| Preregistration commit | recorded by `reports/study_locks/greek_surface_new_terms.manifest.json` |
 | Lock manifest | `reports/study_locks/greek_surface_new_terms.manifest.json` |
 | Report document | `docs/GREEK_SURFACE_NEW_TERMS_REPORT.md` |
 
 ## Question
-
-State the exact question in one paragraph.
-
-Example shape:
 
 Do declared `greek` terms produce `all-source exact-center surface rows` patterns
 under fixed `2..50`, `both`, `ELS center verse contains normalized target as surface text`, and `all_available_same_length_real_word_controls`
@@ -49,8 +46,8 @@ Corpus/source labels:
 - `TCG_NT` from `configs/example_ebible_grctcgnt.toml`;
 - `SBLGNT` from `configs/example_sblgnt.toml`.
 
-State whether the sources are aligned version-comparison sources or broad
-corpus-presence sources.
+These are aligned Greek New Testament version-comparison sources for exact-center
+surface-pattern comparison.
 
 ## Locked Settings
 
