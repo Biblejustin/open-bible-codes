@@ -354,7 +354,10 @@ The report-run summary should currently say:
   inventory rows, and `data/study/mappings/wrr_manual_decision_records.csv`
   locks them as 26 `no_source_change` rows and 11 `method_lock` rows; and
   `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` isolates the 11
-  OCR-matched method-lane terms with zero current appellation hits.
+  OCR-matched method-lane terms with zero current appellation hits;
+  `docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md` shows that the same 11 terms still
+  have 0 ordinary Genesis hits through skip 5000, so the method lane is not a
+  near-cap miss.
 - `υιοσ` (huios; English: son) and `αιμα` (haima; English: blood) remain weaker hidden-path candidates because their exact
   patterns are missing from one or more compared Greek NT sources.
 - no row is claim-grade yet.

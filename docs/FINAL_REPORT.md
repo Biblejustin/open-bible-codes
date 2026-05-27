@@ -457,6 +457,11 @@ rows. The source-policy scenarios are diagnostic only: baseline 165 >=5 pairs, e
 WNP Zacut 157, and exclude all source-review flags 154; no source policy is
 selected.
 
+The 11 OCR-matched method-lane terms remain zero-hit in the wider ordinary
+Genesis ELS probe through skip 5000. That does not settle the exact-published
+WRR gap, but it does rule out the simple explanation that these method-lane
+rows were only just beyond the selected skip cap.
+
 The newer single-term Zacut diagnostics narrow the source-policy issue without
 settling it: `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and `M$HZKWTW` each individually
 leave 163 >=5 pairs with gap 0 if excluded. That is diagnostic count evidence,

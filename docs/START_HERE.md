@@ -47,7 +47,10 @@ license-blocked, depending on the catalog row.
 
 WRR means Witztum-Rips-Rosenberg. The repository has locked local WRR-style
 evidence and a compact local-method report, but exact published WRR
-reproduction remains caveated by the documented source/method gap.
+reproduction remains caveated by the documented source/method gap. A wider
+method-lane check found 0 ordinary Genesis hits through skip 5000 for the 11
+OCR-matched method-lane terms, so that lane is not explained by a small
+skip-cap extension.
 
 BibleGateway/private English versions are accepted only when lawful local text
 is available. Missing private or unsupported versions are deferred rather than
