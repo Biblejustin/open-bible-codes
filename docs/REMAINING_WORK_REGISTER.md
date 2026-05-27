@@ -1025,7 +1025,8 @@ and 3 WNP context blocks, with no automatic correction or exclusion.
 `docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md` keeps that Chełm
 source-policy/pair-rule target as a review lane, preserving required
 decision-record fields without selecting source edits, method changes, or pair
-exclusions.
+exclusions. Its checker now also locks CSV fieldnames plus manifest counts,
+inputs, and outputs.
 `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md` now handles the main
 source-transcription lane: 43 action terms, 44 residual pair links, 35
 minimum-frontier links, and 22 row clusters, with row 06 first at 4 frontier
@@ -1487,6 +1488,8 @@ dirty-tree fast validation above it:
   subtests.
 - `make fast-validate` passed after the remaining-lane review checklist
   checker manifest lock update: 1918 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the source-policy review checklist checker
+  manifest lock update: 1919 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.

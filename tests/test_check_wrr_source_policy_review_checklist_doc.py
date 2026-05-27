@@ -24,6 +24,7 @@ class WrrSourcePolicyReviewChecklistDocTests(unittest.TestCase):
                 check.validate_source_policy_review_checklist_doc(
                     path,
                     checklist=None,
+                    manifest=None,
                 ),
                 [],
             )
@@ -65,6 +66,7 @@ class WrrSourcePolicyReviewChecklistDocTests(unittest.TestCase):
                 check.validate_source_policy_review_checklist_doc(
                     doc,
                     checklist=_checklist_csv(root),
+                    manifest=None,
                 ),
                 [],
             )
@@ -77,6 +79,7 @@ class WrrSourcePolicyReviewChecklistDocTests(unittest.TestCase):
             failures = check.validate_source_policy_review_checklist_doc(
                 doc,
                 checklist=_checklist_csv(root, bad_term=True),
+                manifest=None,
             )
 
             self.assertTrue(any("term drifted" in failure for failure in failures))
@@ -89,9 +92,47 @@ class WrrSourcePolicyReviewChecklistDocTests(unittest.TestCase):
             failures = check.validate_source_policy_review_checklist_doc(
                 doc,
                 checklist=_checklist_csv(root, drop_ref=True),
+                manifest=None,
             )
 
             self.assertTrue(any("WNP evidence ref count" in failure for failure in failures))
+
+    def test_validate_doc_rejects_manifest_count_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            doc = _required_doc(root)
+            manifest = root / "manifest.json"
+            manifest.write_text(
+                """
+{
+  "context_rows": 3,
+  "frontier_pairs": 1,
+  "inputs": {
+    "context": "reports/wrr_1994/wrr_source_policy_evidence_context.csv",
+    "packet": "reports/wrr_1994/wrr_source_policy_evidence_packet.csv",
+    "summary": "reports/wrr_1994/wrr_source_policy_evidence_summary.csv"
+  },
+  "outputs": {
+    "manifest_out": "reports/wrr_1994/wrr_source_policy_review_checklist.manifest.json",
+    "markdown_out": "docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md",
+    "out": "reports/wrr_1994/wrr_source_policy_review_checklist.csv"
+  },
+  "residual_pairs": 0,
+  "rows": 1,
+  "summary_rows": 1,
+  "tool": "build_wrr_source_policy_review_checklist"
+}
+""".lstrip(),
+                encoding="utf-8",
+            )
+
+            failures = check.validate_source_policy_review_checklist_doc(
+                doc,
+                checklist=_checklist_csv(root),
+                manifest=manifest,
+            )
+
+            self.assertTrue(any("residual_pairs drifted" in failure for failure in failures))
 
 
 def _required_doc(root: Path) -> Path:
@@ -107,7 +148,7 @@ def _checklist_csv(
     drop_ref: bool = False,
 ) -> Path:
     path = root / "checklist.csv"
-    fieldnames = list(check.EXPECTED_ROW)
+    fieldnames = check.FIELDNAMES
     row = dict(check.EXPECTED_ROW)
     if bad_term:
         row["term"] = "drifted"
