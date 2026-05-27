@@ -76,6 +76,7 @@ class WrrCrossPairGridTests(unittest.TestCase):
         steps_by_id = {step["id"]: step for step in protocol["steps"]}
         method_status = steps_by_id["build_wrr_method_status_after_cross_pair"]
         blocker_packet = steps_by_id["build_wrr_claim_blocker_packet_after_cross_pair"]
+        exact_gap_packet = steps_by_id["build_wrr_exact_gap_priority_packet_after_cross_pair"]
 
         self.assertIn(
             "reports/wrr_1994/wrr_source_policy_scenarios.csv",
@@ -136,6 +137,11 @@ class WrrCrossPairGridTests(unittest.TestCase):
         self.assertIn(
             "reports/wrr_1994/wrr_remaining_lane_evidence_packet.csv",
             blocker_packet["inputs"],
+        )
+        self.assertIn("--method-wide-skip-summary", exact_gap_packet["argv"])
+        self.assertIn(
+            "reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv",
+            exact_gap_packet["inputs"],
         )
 
 

@@ -26,6 +26,9 @@ DEFAULT_REMAINING_SUMMARY = Path(
 DEFAULT_METHOD_SUMMARY = Path(
     "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv"
 )
+DEFAULT_METHOD_WIDE_SKIP_SUMMARY = Path(
+    "reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv"
+)
 DEFAULT_GAP_REASONS = Path("reports/wrr_1994/wrr_defined_gap_reasons.csv")
 DEFAULT_OUT = Path("reports/wrr_1994/wrr_exact_gap_priority_packet.csv")
 DEFAULT_SUMMARY_OUT = Path(
@@ -67,6 +70,7 @@ def main(argv: list[str] | None = None) -> int:
         row_summary=read_rows(args.row_summary),
         remaining_summary=read_rows(args.remaining_summary),
         method_summary=read_rows(args.method_summary),
+        method_wide_skip_summary=read_optional_rows(args.method_wide_skip_summary),
         gap_reasons=read_rows(args.gap_reasons),
     )
     rows = build_priority_rows(inputs, args)
@@ -91,6 +95,7 @@ class LoadedInputs:
         row_summary: list[dict[str, str]],
         remaining_summary: list[dict[str, str]],
         method_summary: list[dict[str, str]],
+        method_wide_skip_summary: list[dict[str, str]],
         gap_reasons: list[dict[str, str]],
     ) -> None:
         self.dashboard = dashboard
@@ -98,6 +103,7 @@ class LoadedInputs:
         self.row_summary = row_summary
         self.remaining_summary = remaining_summary
         self.method_summary = method_summary
+        self.method_wide_skip_summary = method_wide_skip_summary
         self.gap_reasons = gap_reasons
 
 
@@ -108,6 +114,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--row-summary", type=Path, default=DEFAULT_ROW_SUMMARY)
     parser.add_argument("--remaining-summary", type=Path, default=DEFAULT_REMAINING_SUMMARY)
     parser.add_argument("--method-summary", type=Path, default=DEFAULT_METHOD_SUMMARY)
+    parser.add_argument(
+        "--method-wide-skip-summary",
+        type=Path,
+        default=DEFAULT_METHOD_WIDE_SKIP_SUMMARY,
+    )
     parser.add_argument("--gap-reasons", type=Path, default=DEFAULT_GAP_REASONS)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY_OUT)
@@ -124,7 +135,13 @@ def build_priority_rows(
     rows.extend(lane_rows(inputs.action_summary, args))
     rows.extend(source_row_cluster_rows(inputs.row_summary, args))
     rows.extend(remaining_lane_rows(inputs.remaining_summary, args))
-    rows.extend(method_pair_rows(inputs.method_summary, args))
+    rows.extend(
+        method_pair_rows(
+            inputs.method_summary,
+            inputs.method_wide_skip_summary,
+            args,
+        )
+    )
     rows.extend(gap_reason_rows(inputs.gap_reasons, args))
     return rows
 
@@ -237,11 +254,16 @@ def remaining_lane_rows(
 
 
 def method_pair_rows(
-    method_summary: list[dict[str, str]], args: argparse.Namespace
+    method_summary: list[dict[str, str]],
+    method_wide_skip_summary: list[dict[str, str]],
+    args: argparse.Namespace,
 ) -> list[dict[str, object]]:
     if not method_summary:
         return []
     row = method_summary[0]
+    wide_skip = method_wide_skip_summary[0] if method_wide_skip_summary else {}
+    wide_skip_value = method_wide_skip_value(wide_skip)
+    wide_skip_read = method_wide_skip_read(wide_skip)
     return [
         packet_row(
             "method_pair_universe",
@@ -252,14 +274,34 @@ def method_pair_rows(
                 f"{row.get('zero_highcap_appellation_terms', '')} zero high-cap "
                 f"appellation-hit terms; "
                 f"{row.get('both_sides_zero_highcap_pairs', '')} both-side-zero pairs"
+                + wide_skip_value
             ),
             "method_or_pair_universe_review",
             "method or pair-universe explanation for OCR-matched missing ordinary hits",
             "do not treat OCR-matched missing ordinary hits as source corrections",
             args.method_summary,
-            row.get("read", ""),
+            row.get("read", "") + wide_skip_read,
         )
     ]
+
+
+def method_wide_skip_value(row: dict[str, str]) -> str:
+    if not row:
+        return ""
+    return (
+        f"; wide-skip probe: {row.get('total_hits_through_max', '')} total hits "
+        f"through skip {row.get('max_skip', '')}"
+    )
+
+
+def method_wide_skip_read(row: dict[str, str]) -> str:
+    if not row:
+        return ""
+    return (
+        f" Wide-skip probe: {row.get('terms_zero_through_max', '')}/"
+        f"{row.get('terms', '')} terms remain zero through skip "
+        f"{row.get('max_skip', '')}; diagnostic only."
+    )
 
 
 def gap_reason_rows(
@@ -449,6 +491,7 @@ def write_manifest(
             "row_summary": str(args.row_summary),
             "remaining_summary": str(args.remaining_summary),
             "method_summary": str(args.method_summary),
+            "method_wide_skip_summary": str(args.method_wide_skip_summary),
             "gap_reasons": str(args.gap_reasons),
         },
         "outputs": {
@@ -490,6 +533,12 @@ def packet_row(
 def read_rows(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8", newline="") as handle:
         return list(csv.DictReader(handle))
+
+
+def read_optional_rows(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    return read_rows(path)
 
 
 def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, object]]) -> None:

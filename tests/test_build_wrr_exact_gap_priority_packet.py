@@ -24,7 +24,13 @@ def test_build_priority_rows_summarizes_gap_and_lanes(tmp_path: Path) -> None:
     )
     assert by_key[("method_pair_universe", "ocr_matched_zero_ordinary_hits")][
         "value"
-    ] == "11 OCR-matched terms; 11 zero high-cap appellation-hit terms; 2 both-side-zero pairs"
+    ] == (
+        "11 OCR-matched terms; 11 zero high-cap appellation-hit terms; "
+        "2 both-side-zero pairs; wide-skip probe: 0 total hits through skip 5000"
+    )
+    assert "11/11 terms remain zero through skip 5000" in by_key[
+        ("method_pair_universe", "ocr_matched_zero_ordinary_hits")
+    ]["read"]
     assert by_key[("gap_reason", "ordinary_missing_appellation_hits")]["value"] == "83"
 
 
@@ -47,6 +53,8 @@ def test_main_writes_csv_summary_markdown_and_manifest(tmp_path: Path) -> None:
             str(paths["remaining"]),
             "--method-summary",
             str(paths["method"]),
+            "--method-wide-skip-summary",
+            str(paths["method_wide_skip"]),
             "--gap-reasons",
             str(paths["gap_reasons"]),
             "--out",
@@ -90,6 +98,8 @@ def _argv(tmp_path: Path) -> list[str]:
         str(tmp_path / "remaining.csv"),
         "--method-summary",
         str(tmp_path / "method.csv"),
+        "--method-wide-skip-summary",
+        str(tmp_path / "method_wide_skip.csv"),
         "--gap-reasons",
         str(tmp_path / "gap_reasons.csv"),
     ]
@@ -149,6 +159,22 @@ def _inputs() -> packet.LoadedInputs:
                 "read": "OCR matched all method-lane terms",
             }
         ],
+        method_wide_skip_summary=[
+            {
+                "terms": "11",
+                "max_skip": "5000",
+                "direction": "both",
+                "terms_with_any_hit": "0",
+                "terms_zero_through_max": "11",
+                "terms_with_first_hit_after_1000": "0",
+                "total_hits_through_max": "0",
+                "read": (
+                    "All 11 OCR-matched method-lane terms remain absent through "
+                    "skip 5000; the method lane is not explained by a small cap "
+                    "extension."
+                ),
+            }
+        ],
         gap_reasons=[
             {
                 "run_label": "all_lanes_cap1000",
@@ -173,6 +199,7 @@ def _write_inputs(tmp_path: Path) -> dict[str, Path]:
         "rows": tmp_path / "rows.csv",
         "remaining": tmp_path / "remaining.csv",
         "method": tmp_path / "method.csv",
+        "method_wide_skip": tmp_path / "method_wide_skip.csv",
         "gap_reasons": tmp_path / "gap_reasons.csv",
     }
     inputs = _inputs()
@@ -231,6 +258,20 @@ def _write_inputs(tmp_path: Path) -> dict[str, Path]:
             "read",
         ],
         inputs.method_summary,
+    )
+    _write(
+        paths["method_wide_skip"],
+        [
+            "terms",
+            "max_skip",
+            "direction",
+            "terms_with_any_hit",
+            "terms_zero_through_max",
+            "terms_with_first_hit_after_1000",
+            "total_hits_through_max",
+            "read",
+        ],
+        inputs.method_wide_skip_summary,
     )
     _write(paths["gap_reasons"], ["run_label", "reason", "pairs", "read"], inputs.gap_reasons)
     return paths

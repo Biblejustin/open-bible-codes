@@ -52,7 +52,7 @@ Full CSV includes 22 row clusters. Top clusters by action terms; review rank is 
 | --- | --- | --- | --- | --- |
 | remaining_lane | `page_image_near_match_review` | 3 terms; 3 residual pairs; 2 frontier pairs | No automatic source correction or method change; page-image, method, or pair-universe evidence must be locked first. | near OCR exists, but page image must decide whether it is source evidence |
 | remaining_lane | `method_or_pair_universe_review` | 11 terms; 11 residual pairs; 2 frontier pairs | No automatic source correction or method change; page-image, method, or pair-universe evidence must be locked first. | OCR matched the imported term; investigate method or pair universe before source edits |
-| method_pair_universe | `ocr_matched_zero_ordinary_hits` | 11 OCR-matched terms; 11 zero high-cap appellation-hit terms; 2 both-side-zero pairs | do not treat OCR-matched missing ordinary hits as source corrections | OCR matched all method-lane terms, but current Koren Genesis ordinary-hit search still leaves them undefined. |
+| method_pair_universe | `ocr_matched_zero_ordinary_hits` | 11 OCR-matched terms; 11 zero high-cap appellation-hit terms; 2 both-side-zero pairs; wide-skip probe: 0 total hits through skip 5000 | do not treat OCR-matched missing ordinary hits as source corrections | OCR matched all method-lane terms, but current Koren Genesis ordinary-hit search still leaves them undefined. Wide-skip probe: 11/11 terms remain zero through skip 5000; diagnostic only. |
 
 ## Gap Reasons
 

@@ -294,6 +294,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
+            "scripts/analyze_wrr_method_lane_wide_skip.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
             "scripts/build_wrr_claim_blocker_packet.py",
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
@@ -423,6 +427,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
+            "docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(

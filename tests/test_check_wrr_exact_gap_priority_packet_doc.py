@@ -19,6 +19,8 @@ def _required_doc(tmp_path: Path) -> Path:
                 "Full CSV includes 22 row clusters.",
                 "| remaining_lane | `method_or_pair_universe_review` | 11 terms; 11 residual pairs; 2 frontier pairs |",
                 "| method_pair_universe | `ocr_matched_zero_ordinary_hits` | 11 OCR-matched terms;",
+                "wide-skip probe: 0 total hits through skip 5000",
+                "11/11 terms remain zero through skip 5000",
                 "This is an evidence-priority packet, not an exact published WRR reproduction result.",
                 "Do not describe the local locked-method result as exact published reproduction.",
             ]
