@@ -5,13 +5,21 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from pathlib import Path
+from typing import Any
+
+from scripts import build_wrr_method_pair_universe_evidence_packet as builder
 
 
-DEFAULT_DOC = Path("docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md")
-DEFAULT_PACKET = Path("reports/wrr_1994/wrr_method_pair_universe_evidence_packet.csv")
-DEFAULT_SUMMARY = Path("reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv")
+DEFAULT_DOC = builder.DEFAULT_MD
+DEFAULT_PACKET = builder.DEFAULT_OUT
+DEFAULT_SUMMARY = builder.DEFAULT_SUMMARY_OUT
+DEFAULT_MANIFEST = builder.DEFAULT_MANIFEST
+
+PACKET_FIELDNAMES = builder.PACKET_FIELDNAMES
+SUMMARY_FIELDNAMES = builder.SUMMARY_FIELDNAMES
 
 EXPECTED_SUMMARY = {
     "action_terms": "11",
@@ -62,6 +70,7 @@ def main(argv: list[str] | None = None) -> int:
         args.doc,
         args.packet,
         args.summary,
+        args.manifest,
     )
     if failures:
         for failure in failures:
@@ -79,6 +88,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--doc", type=Path, default=DEFAULT_DOC)
     parser.add_argument("--packet", type=Path, default=DEFAULT_PACKET)
     parser.add_argument("--summary", type=Path, default=DEFAULT_SUMMARY)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     return parser
 
 
@@ -86,6 +96,7 @@ def validate_method_pair_universe_evidence_packet_doc(
     doc: Path,
     packet: Path | None = DEFAULT_PACKET,
     summary: Path | None = DEFAULT_SUMMARY,
+    manifest: Path | None = DEFAULT_MANIFEST,
 ) -> list[str]:
     if not doc.exists():
         return [f"{doc} is missing"]
@@ -100,17 +111,23 @@ def validate_method_pair_universe_evidence_packet_doc(
         failures.extend(validate_summary_csv(summary))
     if packet is not None:
         failures.extend(validate_packet_csv(packet))
+    if manifest is not None:
+        failures.extend(validate_manifest(manifest))
     return failures
 
 
 def validate_summary_csv(summary: Path) -> list[str]:
-    rows = _read_csv(summary)
-    if isinstance(rows, str):
-        return [rows]
-    if len(rows) != 1:
-        return [f"{summary} has {len(rows)} rows; expected 1"]
-    row = rows[0]
+    data = _read_csv(summary)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != SUMMARY_FIELDNAMES:
+        failures.append(f"{summary} fieldnames drifted")
+    if len(rows) != 1:
+        failures.append(f"{summary} has {len(rows)} rows; expected 1")
+        return failures
+    row = rows[0]
     for key, expected in EXPECTED_SUMMARY.items():
         actual = row.get(key)
         if actual != expected:
@@ -121,10 +138,13 @@ def validate_summary_csv(summary: Path) -> list[str]:
 
 
 def validate_packet_csv(packet: Path) -> list[str]:
-    rows = _read_csv(packet)
-    if isinstance(rows, str):
-        return [rows]
+    data = _read_csv(packet)
+    if isinstance(data, str):
+        return [data]
+    fieldnames, rows = data
     failures: list[str] = []
+    if fieldnames != PACKET_FIELDNAMES:
+        failures.append(f"{packet} fieldnames drifted")
     if len(rows) != int(EXPECTED_SUMMARY["action_terms"]):
         failures.append(f"{packet} has {len(rows)} rows; expected 11")
     actual_term_ids = {row.get("term_id", "") for row in rows}
@@ -151,11 +171,46 @@ def validate_packet_csv(packet: Path) -> list[str]:
     return failures
 
 
-def _read_csv(path: Path) -> list[dict[str, str]] | str:
+def validate_manifest(manifest: Path) -> list[str]:
+    data = _read_json(manifest)
+    if isinstance(data, str):
+        return [data]
+    expected = {
+        "tool": "build_wrr_method_pair_universe_evidence_packet",
+        "packet_rows": int(EXPECTED_SUMMARY["action_terms"]),
+        "summary_rows": 1,
+        "inputs": {
+            "remaining_packet": str(builder.DEFAULT_REMAINING_PACKET),
+            "source_queue": str(builder.DEFAULT_SOURCE_QUEUE),
+            "counts": str(builder.DEFAULT_COUNTS),
+            "corrected_distance": str(builder.DEFAULT_CORRECTED_DISTANCE),
+        },
+        "outputs": {
+            "out": str(DEFAULT_PACKET),
+            "summary_out": str(DEFAULT_SUMMARY),
+            "markdown_out": str(DEFAULT_DOC),
+            "manifest_out": str(DEFAULT_MANIFEST),
+        },
+    }
+    failures: list[str] = []
+    for key, value in expected.items():
+        if data.get(key) != value:
+            failures.append(f"{manifest} {key} drifted")
+    return failures
+
+
+def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
     if not path.exists():
         return f"{path} is missing"
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        return reader.fieldnames or [], list(reader)
+
+
+def _read_json(path: Path) -> dict[str, Any] | str:
+    if not path.exists():
+        return f"{path} is missing"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def normalize_space(text: str) -> str:

@@ -1,3 +1,4 @@
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -16,6 +17,7 @@ class WrrMethodPairUniverseEvidencePacketDocTests(unittest.TestCase):
                     path,
                     packet=None,
                     summary=None,
+                    manifest=None,
                 ),
                 [],
             )
@@ -73,6 +75,27 @@ class WrrMethodPairUniverseEvidencePacketDocTests(unittest.TestCase):
                     "missing method terms: wrr2_02_app_03" in failure
                     for failure in failures
                 )
+            )
+
+    def test_validate_packet_doc_rejects_manifest_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest = Path(tmp) / "manifest.json"
+            payload = json.loads(check.DEFAULT_MANIFEST.read_text(encoding="utf-8"))
+            payload["packet_rows"] = 99
+            manifest.write_text(
+                json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+
+            failures = check.validate_method_pair_universe_evidence_packet_doc(
+                check.DEFAULT_DOC,
+                packet=None,
+                summary=None,
+                manifest=manifest,
+            )
+
+            self.assertTrue(
+                any("packet_rows drifted" in failure for failure in failures)
             )
 
 
