@@ -1,4 +1,5 @@
 import csv
+import json
 from pathlib import Path
 
 from scripts import check_wrr_direct_all_lanes_doc as check
@@ -49,6 +50,38 @@ def test_validate_direct_all_lanes_rejects_dw_sensitivity_drift(tmp_path: Path) 
     assert any("all_lanes_cap1000 changed_pairs" in failure for failure in failures)
 
 
+def test_validate_direct_all_lanes_rejects_manifest_drift(tmp_path: Path) -> None:
+    doc = _doc(tmp_path)
+    paths = _csv_paths(tmp_path)
+    manifest = tmp_path / "cap1000.manifest.json"
+    manifest.write_text(
+        json.dumps(
+            {
+                "tool": "merge_wrr_corrected_distance_shards.py",
+                "rows": 182,
+                "summary": {
+                    **check.EXPECTED_CAP1000_SUMMARY,
+                    "defined_corrected_distances": "drifted",
+                },
+                "outputs": {
+                    "csv": "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.csv",
+                    "summary": "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged_summary.csv",
+                    "markdown": "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.md",
+                    "manifest": "reports/wrr_1994/direct_all/highcap_1000/wrr2_corrected_distance_all_lanes_merged.manifest.json",
+                },
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    paths["cap1000_manifest"] = manifest
+
+    failures = check.validate_direct_all_lanes_doc(doc, **paths)
+
+    assert any("cap-1000 merged manifest summary.defined_corrected_distances" in failure for failure in failures)
+
+
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
     missing = tmp_path / "missing.md"
 
@@ -89,6 +122,11 @@ def _csv_paths(
             check.EXPECTED_PROGRAM_SUMMARY,
         ),
         "dw_sensitivity": _dw_sensitivity_csv(tmp_path, bad_key=bad_dw_key),
+        "cap250_manifest": None,
+        "cap1000_manifest": None,
+        "cap1000_aggregate_manifest": None,
+        "program_manifest": None,
+        "dw_sensitivity_manifest": None,
     }
 
 
