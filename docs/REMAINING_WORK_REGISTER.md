@@ -75,8 +75,9 @@ manifest contact-summary metadata, and source-script leakage.
 The Cities unreadable-PDF OCR page-review doc is now CSV/manifest-guarded
 against builder-derived decision rows, summary rows, manifest inputs,
 no-source-row-use locks, and source-script leakage.
-The WRR cross-pair grid doc is now CSV-guarded against grid-shape,
-corrected-distance, aggregate, and permutation-summary drift.
+The WRR cross-pair grid doc is now CSV/manifest-guarded against grid-shape,
+corrected-distance, aggregate, permutation-summary, manifest input/output, and
+count drift.
 The WRR direct all-lane diagnostic doc is now CSV-guarded against
 cap-250/cap-1000 corrected-distance, aggregate, program-formula, and D(w)
 sensitivity drift.
@@ -1520,6 +1521,8 @@ dirty-tree fast validation above it:
   checker manifest lock update: 1929 tests, 2 skipped, and 29196 subtests.
 - `make fast-validate` passed after the D(w) formula-sensitivity checker
   manifest lock update: 1930 tests, 2 skipped, and 29196 subtests.
+- `make fast-validate` passed after the cross-pair grid checker manifest lock
+  update: 1931 tests, 2 skipped, and 29196 subtests.
 - `python3 -m scripts.check_public_claim_language` passed inside
   `make fast-validate`, `make public-release-check`, and the real-report
   preflight.

@@ -1,4 +1,5 @@
 import csv
+import json
 from pathlib import Path
 
 from scripts import check_wrr_cross_pair_grid_doc as check
@@ -58,6 +59,47 @@ def test_validate_cross_pair_grid_rejects_permutation_drift(tmp_path: Path) -> N
     failures = check.validate_cross_pair_grid_doc(doc, **paths)
 
     assert any("cap-1000 999999 permutation rho_p2 drifted" in failure for failure in failures)
+
+
+def test_validate_cross_pair_grid_rejects_manifest_drift(tmp_path: Path) -> None:
+    doc = _doc(tmp_path)
+    paths = _csv_paths(tmp_path)
+    manifest = tmp_path / "cap1000_999999.manifest.json"
+    manifest.write_text(
+        json.dumps(
+            {
+                "tool": "analyze_wrr_cross_pair_permutations.py",
+                "input": "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_corrected_distance_1000.csv",
+                "parameters": {
+                    "permutations": 999999,
+                    "seed": 1994,
+                    "p1_threshold": 0.2,
+                    "candidate_lane": [],
+                    "pair_review_status": [],
+                    "exclude_pair_review_status": [],
+                    "sample_output_limit": 0,
+                },
+                "summary": {
+                    **check.EXPECTED_CAP1000_999999,
+                    "rho_p2": "drifted",
+                },
+                "outputs": {
+                    "csv": "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999_observed_only.csv",
+                    "summary": "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999_summary.csv",
+                    "markdown": "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999.md",
+                    "manifest": "reports/wrr_1994/cross_pair_grid/highcap_1000/wrr2_cross_pair_permutations_999999.manifest.json",
+                },
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    paths["cap1000_999999_manifest"] = manifest
+
+    failures = check.validate_cross_pair_grid_doc(doc, **paths)
+
+    assert any("cap-1000 999999 manifest summary.rho_p2" in failure for failure in failures)
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
@@ -120,6 +162,15 @@ def _csv_paths(
             check.EXPECTED_CAP1000_999999,
             bad_key=bad_cap1000_999999_key,
         ),
+        "grid_manifest": None,
+        "cap250_summary_manifest": None,
+        "cap250_aggregate_manifest": None,
+        "cap250_permutation_manifest": None,
+        "cap250_no_wnp_999999_manifest": None,
+        "cap1000_summary_manifest": None,
+        "cap1000_aggregate_manifest": None,
+        "cap1000_permutation_manifest": None,
+        "cap1000_999999_manifest": None,
     }
 
 
