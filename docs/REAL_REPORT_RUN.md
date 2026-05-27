@@ -160,6 +160,8 @@ It requires:
   script's required-path list, so the runnable protocol and script do not drift;
 - final report, draft, outline, and highlights keep their source-artifact and
   no-public-claim assembly boundary;
+- project findings overview keeps its general-reader summary, caution language,
+  and links to the fuller report docs;
 - claim-catalog summary table stays aligned with `claims/claim_catalog.csv`;
 - Cities claim-catalog row stays `under_specified`, source-review only, and
   aligned with the header-only Cities source-row lock decision records;

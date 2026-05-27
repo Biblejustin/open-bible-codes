@@ -132,6 +132,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/check_public_release_hygiene.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_public_claim_language.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_doc_command_references.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn(
+            "scripts/check_project_findings_overview_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("els/project_index.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("README.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/START_HERE.md", steps_by_id["preflight"]["inputs"])

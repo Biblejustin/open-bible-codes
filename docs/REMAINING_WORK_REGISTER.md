@@ -1398,10 +1398,10 @@ Run `make release-ready` from a committed tree; the final public-release gate is
 supposed to fail if tracked files are dirty.
 
 Latest validation snapshot after the release-ready make target, refreshed after
-the WRR method-lane wide-skip public-doc guard and preregistration stale-template
-guard synchronization:
+the WRR method-lane wide-skip public-doc guard, preregistration stale-template
+guard synchronization, and project findings overview guard:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1954
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1960
   tests, 2 skipped, and 29325 subtests.
 - `make public-reader-package` passed after the public WRR wide-skip wording
   refresh.

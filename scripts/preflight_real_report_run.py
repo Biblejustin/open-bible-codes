@@ -51,6 +51,7 @@ from scripts import (
     check_israeli_prime_ministers_detail_recovery_probe_doc,
     check_manual_review_queue,
     check_preregistration_placeholders,
+    check_project_findings_overview_doc,
     check_prospective_lane_status_doc,
     check_prospective_study_next_lock_doc,
     check_prospective_study_readiness_doc,
@@ -134,6 +135,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_prospective_lane_status_doc.py",
     "scripts/check_final_report_assembly_docs.py",
     "scripts/check_final_report_highlights_doc.py",
+    "scripts/check_project_findings_overview_doc.py",
     "scripts/check_centered_occurrence_index_doc.py",
     "scripts/check_claim_catalog_doc.py",
     "scripts/check_cities_claim_catalog_boundary.py",
@@ -892,6 +894,17 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "final-report assembly doc failures: "
             + "; ".join(final_report_assembly_doc_failures)
+        )
+
+    project_findings_overview_doc_failures = (
+        check_project_findings_overview_doc.validate_project_findings_overview(
+            root / check_project_findings_overview_doc.DEFAULT_DOC
+        )
+    )
+    if project_findings_overview_doc_failures:
+        failures.append(
+            "project-findings overview doc failures: "
+            + "; ".join(project_findings_overview_doc_failures)
         )
 
     real_report_run_doc_failures = check_real_report_run_doc.validate_real_report_run_doc(

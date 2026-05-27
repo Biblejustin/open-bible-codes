@@ -19,6 +19,7 @@ inputs = [
   "scripts/check_prospective_lane_status_doc.py",
   "scripts/check_final_report_assembly_docs.py",
   "scripts/check_final_report_highlights_doc.py",
+  "scripts/check_project_findings_overview_doc.py",
   "scripts/check_centered_occurrence_index_doc.py",
   "scripts/check_claim_catalog_doc.py",
   "scripts/check_cities_claim_catalog_boundary.py",
