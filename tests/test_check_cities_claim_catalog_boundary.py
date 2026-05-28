@@ -48,7 +48,7 @@ def test_missing_expected_lock_record_fails(tmp_path: Path) -> None:
 
     failures = check.validate_cities_claim_catalog_boundary(catalog, doc, records)
 
-    assert failures == [f"{records} has 0 populated rows, expected 3"]
+    assert failures == [f"{records} has 0 populated rows, expected 14"]
 
 
 def test_missing_doc_boundary_phrase_fails(tmp_path: Path) -> None:
@@ -56,12 +56,12 @@ def test_missing_doc_boundary_phrase_fails(tmp_path: Path) -> None:
     doc = tmp_path / "CLAIM_CATALOG.md"
     records = tmp_path / "records.csv"
     write_catalog(catalog, [valid_row()])
-    write_doc(doc, omit="3 populated lock rows")
+    write_doc(doc, omit="14 populated lock rows")
     write_records(records, valid_records())
 
     failures = check.validate_cities_claim_catalog_boundary(catalog, doc, records)
 
-    assert failures == [f"{doc} missing phrase: 3 populated lock rows"]
+    assert failures == [f"{doc} missing phrase: 14 populated lock rows"]
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
@@ -86,7 +86,7 @@ def valid_row() -> dict[str, str]:
         "layout_or_metric": "compactness/proximity source rows",
         "current_reproduction": (
             "Source-chain audit and source-row lock handoff exist; current "
-            "decision records have 3 populated lock rows and no source rows imported"
+            "decision records have 14 populated lock rows and no source rows imported"
         ),
         "evidence": "docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
         "notes": (
@@ -124,7 +124,7 @@ def write_doc(path: Path, *, omit: str = "") -> None:
     phrases = [
         "Torah-code.org Cities/Aumann/Simon-McKay source chain",
         "Cities source-row lock handoff has 14 source-row lock candidate pages",
-        "3 populated lock rows",
+        "14 populated lock rows",
         "no source rows imported",
         "no city-name normalization, ELS searches, compactness runs, or p-levels",
         "data/study/mappings/cities_source_row_lock_decisions.csv",
@@ -138,20 +138,11 @@ def write_doc(path: Path, *, omit: str = "") -> None:
 def valid_records() -> list[dict[str, str]]:
     return [
         {
-            "decision_id": "cities_source_row_lock_001",
+            "decision_id": f"cities_source_row_lock_{index:03d}",
             "decision_status": "locked",
             "selected_action": "source_row_lock_ready",
-        },
-        {
-            "decision_id": "cities_source_row_lock_002",
-            "decision_status": "locked",
-            "selected_action": "source_row_lock_ready",
-        },
-        {
-            "decision_id": "cities_source_row_lock_003",
-            "decision_status": "locked",
-            "selected_action": "source_row_lock_ready",
-        },
+        }
+        for index in range(1, 15)
     ]
 
 

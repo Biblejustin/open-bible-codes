@@ -35,7 +35,7 @@ class CitiesSourceRowLockWorksheetDocTests(unittest.TestCase):
             root = Path(tmp)
             doc, rows, manifest = copy_current_outputs(root)
             fieldnames, row_data = read_csv(rows)
-            row_data[3]["record_selected_action"] = "source_row_lock_ready"
+            row_data[3]["record_selected_action"] = "exclude_page_from_source_rows"
             write_csv(rows, fieldnames, row_data)
 
             failures = check.validate_cities_source_row_lock_worksheet_doc(
@@ -44,7 +44,9 @@ class CitiesSourceRowLockWorksheetDocTests(unittest.TestCase):
                 manifest,
             )
 
-            self.assertTrue(any("selected action" in failure for failure in failures))
+            self.assertTrue(
+                any("action must be source_row_lock_ready" in failure for failure in failures)
+            )
 
     def test_flags_fieldname_drift(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

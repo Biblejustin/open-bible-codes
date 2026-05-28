@@ -715,7 +715,7 @@ Cities source-row lock handoff:
 `docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md`,
 `docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md`, and
 `data/study/mappings/cities_source_row_lock_decisions.csv`. Current boundary:
-14 source-row lock candidate pages, 3 populated lock rows, no source rows
+14 source-row lock candidate pages, 14 populated lock rows, no source rows
 imported, and no city-name normalization, ELS searches, compactness runs, or
 p-levels.
 Event/object experiment source audit:

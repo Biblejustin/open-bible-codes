@@ -364,7 +364,7 @@ consolidates 37 manual-decision inventory rows representing 58 action terms,
 decision-record CSV locks all 37 rows as 26 `no_source_change` decisions and
 11 `method_lock` decisions.
 
-Cities source-row lock handoff: 14 source-row lock candidate pages, 3 populated lock rows, no source rows imported, and no city-name normalization, ELS
+Cities source-row lock handoff: 14 source-row lock candidate pages, 14 populated lock rows, no source rows imported, and no city-name normalization, ELS
 searches, compactness runs, or p-levels. The handoff is source-review only and
 is tracked in `docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md`,
 `docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md`,
