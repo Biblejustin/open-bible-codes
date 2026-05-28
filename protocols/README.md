@@ -381,6 +381,18 @@ paths/counts/status and still contain no OCR body text, no source-script body
 text, no source-row import, no city-name normalization, and no result-bearing
 work. Tracked doc: `docs/CITIES_SOURCE_PAGE_LINE_CROP_PACKET.md`.
 
+Cities source-page line crop contact sheets:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_contact_sheet.toml --resume
+```
+
+This writes 4 ignored local contact-sheet images for the 203 line crops, one
+per table candidate page. The sheets support non-transcription visual review
+of crop order and row shape. Tracked files contain only paths/counts/status and
+still import no source rows. Tracked doc:
+`docs/CITIES_SOURCE_PAGE_LINE_CROP_CONTACT_SHEET.md`.
+
 Cities source-page line crop HTML review aid:
 
 ```bash

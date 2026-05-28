@@ -668,6 +668,34 @@ Current result:
   import source text, normalize city names, run ELS searches, compute
   compactness, or verify p-levels.
 
+### Cities Source Page Line Crop Contact Sheet
+
+Completed local line-crop contact sheets:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_contact_sheet.toml --resume
+```
+
+Current result:
+
+- Table pages: 4.
+- Line crop rows: 203.
+- Line crop images found: 203.
+- Contact sheets: 4.
+- Contact sheets available: 4.
+- OCR words represented by line boxes: 1,511.
+- OCR Hebrew letters represented by line boxes: 4,934.
+- Source-row imports: 0.
+- City-name normalization: 0.
+- ELS runs: 0.
+- Compactness runs: 0.
+- p-levels: 0.
+- Boundary: contact sheets are local ignored visual aids only. Tracked files
+  contain counts, paths, and status, but no OCR body text or source-script
+  body text. They do not verify source-row transcription, import source text,
+  normalize city names, run ELS searches, compute compactness, or verify
+  p-levels.
+
 ### Cities Source Page Line Crop Review HTML
 
 Completed local line-crop HTML review aid:

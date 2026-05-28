@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 166
+Protocols indexed: 167
 
 ## Analysis
 
@@ -13,6 +13,7 @@ Protocols indexed: 166
 | cities_extractable_text_review | Classify extractable Cities PDFs by source-review role without importing source rows. | 1 |  | reports/cities_pdf_recovery_probe | `cities_extractable_text_review.toml` |
 | cities_pdf_recovery_probe | Probe live and archived Torah-code.org Cities PDF links into an isolated recovery bundle. | 1 |  | reports/cities_pdf_recovery_probe | `cities_pdf_recovery_probe.toml` |
 | cities_source_page_contact_sheet | Build a local visual contact sheet for locked Cities source-page review. | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_contact_sheet.toml` |
+| cities_source_page_line_crop_contact_sheet | Build local visual contact sheets for Cities source-page line crops without transcripti... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_contact_sheet.toml` |
 | cities_source_page_line_crop_packet | Build local line crops for Cities table candidate page review without importing source ... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_packet.toml` |
 | cities_source_page_line_crop_review_html | Build ignored local HTML for Cities source-page line-crop review without importing sour... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_review_html.toml` |
 | cities_source_page_line_crop_review_worksheet | Build a no-input Cities worksheet for reviewing source-page line crops without transcri... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_review_worksheet.toml` |

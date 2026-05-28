@@ -1,0 +1,28 @@
+name = "cities_source_page_line_crop_contact_sheet"
+description = "Build local visual contact sheets for Cities source-page line crops without transcription or import."
+manifest_out = "reports/cities_pdf_recovery_probe/source_page_line_crop_contact_sheet_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_source_page_line_crop_contact_sheet"
+description = "Group source-page line crops into per-page local contact sheets for visual review."
+argv = [
+  "-m", "scripts.build_cities_source_page_line_crop_contact_sheet",
+  "--packet", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet.csv",
+  "--base-dir", "reports/cities_pdf_recovery_probe/source_page_line_crops/contact_sheets",
+  "--out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_contact_sheet.csv",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_contact_sheet_summary.csv",
+  "--markdown-out", "docs/CITIES_SOURCE_PAGE_LINE_CROP_CONTACT_SHEET.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_contact_sheet.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_source_page_line_crop_contact_sheet.py",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_contact_sheet.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_contact_sheet_summary.csv",
+  "docs/CITIES_SOURCE_PAGE_LINE_CROP_CONTACT_SHEET.md",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_contact_sheet.manifest.json",
+]

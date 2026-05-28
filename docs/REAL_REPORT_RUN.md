@@ -104,6 +104,7 @@ This assembly run includes:
   `docs/CITIES_SOURCE_PAGE_OCR_REVIEW_PACKET.md`,
   `docs/CITIES_SOURCE_PAGE_OCR_REVIEW_HTML.md`,
   `docs/CITIES_SOURCE_PAGE_LINE_CROP_PACKET.md`,
+  `docs/CITIES_SOURCE_PAGE_LINE_CROP_CONTACT_SHEET.md`,
   `docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_HTML.md`,
   `docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_WORKSHEET.md`,
   `data/study/mappings/cities_source_row_lock_decisions.csv`, and
@@ -111,8 +112,8 @@ This assembly run includes:
   source-row lock handoff: 14 source-row lock candidate pages, 14 populated
   lock rows, 14 pending transcription-review rows, 14 local Hebrew OCR
   sidecars, a local ignored image/OCR HTML review aid, and 203 local line
-  crops from the 4 table candidate pages plus a local ignored line-crop HTML
-  review aid and a 203-row line-crop review worksheet; no source rows
+  crops from the 4 table candidate pages plus 4 local line-crop contact
+  sheets, a local ignored line-crop HTML review aid, and a 203-row line-crop review worksheet; no source rows
   imported, and no city-name normalization, ELS searches, compactness runs, or
   p-levels.
 - broader search/current findings writeup:
