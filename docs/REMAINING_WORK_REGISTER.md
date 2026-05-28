@@ -560,6 +560,28 @@ Current result:
   source rows, normalize city names, run ELS searches, compute compactness, or
   verify p-levels.
 
+### Cities Source Page Contact Sheet
+
+Completed local contact sheet:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_contact_sheet.toml --resume
+```
+
+Current result:
+
+- Contact sheet pages: 14.
+- Page images found: 14.
+- Page images missing: 0.
+- Source-row imports: 0.
+- City-name normalization: 0.
+- ELS runs: 0.
+- Compactness runs: 0.
+- p-levels: 0.
+- Boundary: this renders local page images as a visual review aid. The contact
+  sheet is not transcription verification; tracked files contain no OCR body
+  text or source-script body text.
+
 ### Locked Report Rerun And Volatility Cleanup
 
 Completed locked reruns:

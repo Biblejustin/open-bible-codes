@@ -335,6 +335,17 @@ manual review. It does not run OCR, transcribe rows, import source text,
 normalize city names, or run result-bearing work. Tracked bundle:
 `docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md`.
 
+Cities source-page contact sheet:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_contact_sheet.toml --resume
+```
+
+This renders the 14 locked source-page images into a local contact sheet for
+manual review. The contact-sheet image stays in ignored reports output; tracked
+files contain no source-script body text and still import no source rows.
+Tracked doc: `docs/CITIES_SOURCE_PAGE_CONTACT_SHEET.md`.
+
 Cities extractable-text role review:
 
 ```bash

@@ -100,6 +100,7 @@ This assembly run includes:
   `docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md`
   plus `docs/CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md`,
   `docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md`,
+  `docs/CITIES_SOURCE_PAGE_CONTACT_SHEET.md`,
   `data/study/mappings/cities_source_row_lock_decisions.csv`, and
   `data/study/mappings/cities_source_transcription_decisions.csv`. Cities
   source-row lock handoff: 14 source-row lock candidate pages, 14 populated

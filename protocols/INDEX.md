@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 160
+Protocols indexed: 161
 
 ## Analysis
 
@@ -12,6 +12,7 @@ Protocols indexed: 160
 | chapter_position_bias | Summarize first/last chapter and book center-verse flags from the match-strata index. | 1 |  | reports/chapter_position_bias | `chapter_position_bias.toml` |
 | cities_extractable_text_review | Classify extractable Cities PDFs by source-review role without importing source rows. | 1 |  | reports/cities_pdf_recovery_probe | `cities_extractable_text_review.toml` |
 | cities_pdf_recovery_probe | Probe live and archived Torah-code.org Cities PDF links into an isolated recovery bundle. | 1 |  | reports/cities_pdf_recovery_probe | `cities_pdf_recovery_probe.toml` |
+| cities_source_page_contact_sheet | Build a local visual contact sheet for locked Cities source-page review. | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_contact_sheet.toml` |
 | cities_source_page_review_bundle | Build a no-input Cities page-image review bundle for locked source pages. | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_review_bundle.toml` |
 | cities_source_review_queue | Queue Cities recovered and unrecovered PDF source-review actions without result-bearing... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_review_queue.toml` |
 | cities_source_row_lock_evidence_packet | Build a diagnostic evidence packet for Cities source-row lock candidate pages without i... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_row_lock_evidence_packet.toml` |
