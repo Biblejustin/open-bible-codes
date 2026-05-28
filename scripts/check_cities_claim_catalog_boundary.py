@@ -13,12 +13,19 @@ DEFAULT_CATALOG = Path("claims/claim_catalog.csv")
 DEFAULT_DOC = Path("docs/CLAIM_CATALOG.md")
 DEFAULT_RECORDS = Path("data/study/mappings/cities_source_row_lock_decisions.csv")
 CLAIM_ID = "cities_aumann_simon_mckay_source_chain"
-EXPECTED_POPULATED_LOCK_ROWS = 1
-EXPECTED_LOCKED_DECISION = {
-    "decision_id": "cities_source_row_lock_001",
-    "decision_status": "locked",
-    "selected_action": "source_row_lock_ready",
-}
+EXPECTED_POPULATED_LOCK_ROWS = 2
+EXPECTED_LOCKED_DECISIONS = (
+    {
+        "decision_id": "cities_source_row_lock_001",
+        "decision_status": "locked",
+        "selected_action": "source_row_lock_ready",
+    },
+    {
+        "decision_id": "cities_source_row_lock_002",
+        "decision_status": "locked",
+        "selected_action": "source_row_lock_ready",
+    },
+)
 
 REQUIRED_ROW_VALUES = {
     "claim_group": "torah_code_cities_source",
@@ -31,7 +38,7 @@ REQUIRED_ROW_VALUES = {
 REQUIRED_ROW_PHRASES = {
     "current_reproduction": (
         "source-row lock handoff",
-        "1 populated lock row",
+        "2 populated lock rows",
         "no source rows imported",
     ),
     "notes": (
@@ -47,7 +54,7 @@ REQUIRED_ROW_PHRASES = {
 REQUIRED_DOC_PHRASES = (
     "Torah-code.org Cities/Aumann/Simon-McKay source chain",
     "Cities source-row lock handoff has 14 source-row lock candidate pages",
-    "1 populated lock row",
+    "2 populated lock rows",
     "no source rows imported",
     "no city-name normalization, ELS searches, compactness runs, or p-levels",
     "data/study/mappings/cities_source_row_lock_decisions.csv",
@@ -114,12 +121,15 @@ def validate_cities_claim_catalog_boundary(
         failures.append(
             f"{records} has {len(record_rows)} populated rows, expected {EXPECTED_POPULATED_LOCK_ROWS}"
         )
-    if record_rows:
-        for expected_field, expected_value in EXPECTED_LOCKED_DECISION.items():
-            actual = record_rows[0].get(expected_field, "")
+    for index, expected_row in enumerate(EXPECTED_LOCKED_DECISIONS):
+        if len(record_rows) <= index:
+            break
+        record = record_rows[index]
+        for expected_field, expected_value in expected_row.items():
+            actual = record.get(expected_field, "")
             if actual != expected_value:
                 failures.append(
-                    f"{records} first row {expected_field}={actual!r}, expected {expected_value!r}"
+                    f"{records} row {index + 1} {expected_field}={actual!r}, expected {expected_value!r}"
                 )
 
     doc_text = normalize_space(doc.read_text(encoding="utf-8"))

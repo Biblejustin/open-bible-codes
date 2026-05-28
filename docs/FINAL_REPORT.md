@@ -489,7 +489,7 @@ decision-record CSV locks all 37 rows as 26 `no_source_change` decisions and
 11 `method_lock` decisions. These packets organize review evidence without
 choosing corrections, method changes, or exclusions.
 
-Cities source-row lock handoff: 14 source-row lock candidate pages, 1 populated lock row, no source rows imported, and no city-name normalization, ELS
+Cities source-row lock handoff: 14 source-row lock candidate pages, 2 populated lock rows, no source rows imported, and no city-name normalization, ELS
 searches, compactness runs, or p-levels. The handoff is source-review only and
 is tracked in `docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md`,
 `docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md`,

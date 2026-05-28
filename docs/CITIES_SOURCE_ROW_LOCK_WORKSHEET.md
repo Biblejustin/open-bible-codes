@@ -18,13 +18,13 @@ python3 -m scripts.build_cities_source_row_lock_worksheet --queue reports/cities
 - Source-list candidate pages: 5.
 - Exception-note candidate pages: 5.
 - Target records file: `data/study/mappings/cities_source_row_lock_decisions.csv`.
-- Recorded decision rows: 1.
-- Locked decision rows: 1.
-- Unrecorded decision rows: 13.
+- Recorded decision rows: 2.
+- Locked decision rows: 2.
+- Unrecorded decision rows: 12.
 - Source-row imports: 0.
 - ELS runs: 0.
 - Compactness runs: 0.
-- Recorded selected actions: source_row_lock_ready=1.
+- Recorded selected actions: source_row_lock_ready=2.
 
 ## Lock Row Fields
 
@@ -46,7 +46,7 @@ A future lock row may mark a page ready for source-row work, but this worksheet 
 | Decision id | Rank | Label | Page | Class | Role | Record status | Recorded action | Evidence prompt | Suggested actions |
 | --- | ---: | --- | ---: | --- | --- | --- | --- | --- | --- |
 | `cities_source_row_lock_001` | 1 | cities_pdf_dp365a_p5_11 | 3 | `table_candidate_page` | `prose_with_source_table_page` | `locked` | `source_row_lock_ready` | cite PDF/archive checksum, page image, table scope, and row/column boundary method; do not transcribe row text here | `no_source_row_import;source_row_lock_ready;exclude_page_from_source_rows;deferred_no_lock` |
-| `cities_source_row_lock_002` | 2 | cities_pdf_dp365a_p5_11 | 4 | `table_candidate_page` | `source_table_page` | `unrecorded` | `` | cite PDF/archive checksum, page image, table scope, and row/column boundary method; do not transcribe row text here | `no_source_row_import;source_row_lock_ready;exclude_page_from_source_rows;deferred_no_lock` |
+| `cities_source_row_lock_002` | 2 | cities_pdf_dp365a_p5_11 | 4 | `table_candidate_page` | `source_table_page` | `locked` | `source_row_lock_ready` | cite PDF/archive checksum, page image, table scope, and row/column boundary method; do not transcribe row text here | `no_source_row_import;source_row_lock_ready;exclude_page_from_source_rows;deferred_no_lock` |
 | `cities_source_row_lock_003` | 3 | cities_pdf_dp365a_p5_11 | 5 | `table_candidate_page` | `source_table_page` | `unrecorded` | `` | cite PDF/archive checksum, page image, table scope, and row/column boundary method; do not transcribe row text here | `no_source_row_import;source_row_lock_ready;exclude_page_from_source_rows;deferred_no_lock` |
 | `cities_source_row_lock_004` | 4 | cities_pdf_dp365a_p5_11 | 6 | `table_candidate_page` | `source_table_and_notes_page` | `unrecorded` | `` | cite PDF/archive checksum, page image, table scope, and row/column boundary method; do not transcribe row text here | `no_source_row_import;source_row_lock_ready;exclude_page_from_source_rows;deferred_no_lock` |
 | `cities_source_row_lock_005` | 5 | cities_pdf_dp365a_appendix_7 | 1 | `source_list_candidate_page` | `source_list_page` | `unrecorded` | `` | cite PDF/archive checksum, page image, and list scope; do not transcribe list rows here | `no_source_row_import;source_row_lock_ready;exclude_page_from_source_rows;deferred_no_lock` |
