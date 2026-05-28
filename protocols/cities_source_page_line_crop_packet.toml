@@ -1,0 +1,32 @@
+name = "cities_source_page_line_crop_packet"
+description = "Build local line crops for Cities table candidate page review without importing source rows."
+manifest_out = "reports/cities_pdf_recovery_probe/source_page_line_crop_packet_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_source_page_line_crop_packet"
+description = "Run Hebrew OCR TSV on table candidate pages and crop detected text lines as local review aids."
+argv = [
+  "-m", "scripts.build_cities_source_page_line_crop_packet",
+  "--packet", "reports/cities_pdf_recovery_probe/cities_source_page_ocr_review_packet.csv",
+  "--base-dir", "reports/cities_pdf_recovery_probe/source_page_line_crops",
+  "--tessdata-dir", "reports/wrr_1994/tessdata",
+  "--language", "heb",
+  "--psm", "4",
+  "--out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet.csv",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet_summary.csv",
+  "--markdown-out", "docs/CITIES_SOURCE_PAGE_LINE_CROP_PACKET.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_source_page_line_crop_packet.py",
+  "reports/cities_pdf_recovery_probe/cities_source_page_ocr_review_packet.csv",
+  "reports/wrr_1994/tessdata/heb.traineddata",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet_summary.csv",
+  "docs/CITIES_SOURCE_PAGE_LINE_CROP_PACKET.md",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet.manifest.json",
+]

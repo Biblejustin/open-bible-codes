@@ -103,12 +103,14 @@ This assembly run includes:
   `docs/CITIES_SOURCE_PAGE_CONTACT_SHEET.md`,
   `docs/CITIES_SOURCE_PAGE_OCR_REVIEW_PACKET.md`,
   `docs/CITIES_SOURCE_PAGE_OCR_REVIEW_HTML.md`,
+  `docs/CITIES_SOURCE_PAGE_LINE_CROP_PACKET.md`,
   `data/study/mappings/cities_source_row_lock_decisions.csv`, and
   `data/study/mappings/cities_source_transcription_decisions.csv`. Cities
   source-row lock handoff: 14 source-row lock candidate pages, 14 populated
   lock rows, 14 pending transcription-review rows, 14 local Hebrew OCR
-  sidecars, and a local ignored image/OCR HTML review aid; no source rows imported,
-  and no city-name normalization, ELS searches, compactness runs, or p-levels.
+  sidecars, a local ignored image/OCR HTML review aid, and 203 local line
+  crops from the 4 table candidate pages; no source rows imported, and no
+  city-name normalization, ELS searches, compactness runs, or p-levels.
 - broader search/current findings writeup:
   `docs/BROADER_SEARCH_FINDINGS.md`
 - broad Hebrew modern/geopolitical version-distribution run:

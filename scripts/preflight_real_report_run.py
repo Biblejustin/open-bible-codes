@@ -31,6 +31,7 @@ from scripts import (
     check_cities_recovered_pdf_text_audit_doc,
     check_cities_source_review_queue_doc,
     check_cities_source_page_contact_sheet_doc,
+    check_cities_source_page_line_crop_packet_doc,
     check_cities_source_page_ocr_review_html_doc,
     check_cities_source_page_ocr_review_packet_doc,
     check_cities_source_page_review_bundle_doc,
@@ -209,6 +210,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/cities_source_page_contact_sheet.toml",
     "protocols/cities_source_page_ocr_review_packet.toml",
     "protocols/cities_source_page_ocr_review_html.toml",
+    "protocols/cities_source_page_line_crop_packet.toml",
     "protocols/cities_extractable_text_review.toml",
     "data/study/mappings/cities_source_row_lock_decisions.csv",
     "data/study/mappings/cities_source_transcription_decisions.csv",
@@ -294,6 +296,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/CITIES_SOURCE_PAGE_CONTACT_SHEET.md",
     "docs/CITIES_SOURCE_PAGE_OCR_REVIEW_PACKET.md",
     "docs/CITIES_SOURCE_PAGE_OCR_REVIEW_HTML.md",
+    "docs/CITIES_SOURCE_PAGE_LINE_CROP_PACKET.md",
     "docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md",
     "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
     "docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md",
@@ -720,6 +723,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_cities_source_page_ocr_review_packet_doc.py",
     "scripts/build_cities_source_page_ocr_review_html.py",
     "scripts/check_cities_source_page_ocr_review_html_doc.py",
+    "scripts/build_cities_source_page_line_crop_packet.py",
+    "scripts/check_cities_source_page_line_crop_packet_doc.py",
     "scripts/build_cities_extractable_text_review.py",
     "scripts/check_cities_extractable_text_review_doc.py",
     "scripts/check_hypothesis_testing_source_audit_doc.py",
@@ -757,6 +762,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/cities_unreadable_pdf_ocr_feasibility.toml",
     "protocols/cities_unreadable_pdf_ocr_review_packet.toml",
     "protocols/cities_unreadable_pdf_ocr_review_checklist.toml",
+    "protocols/cities_source_page_line_crop_packet.toml",
     "protocols/cities_extractable_text_review.toml",
     "terms/relevance_dictionary.toml",
     "prompts/crd_classifier_v1/system.md",
@@ -1702,6 +1708,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(cities_source_page_ocr_review_html_doc_failures)
         )
 
+    cities_source_page_line_crop_packet_doc_failures = (
+        check_cities_source_page_line_crop_packet_doc.validate_cities_source_page_line_crop_packet_doc(
+            check_cities_source_page_line_crop_packet_doc.DEFAULT_DOC
+        )
+    )
+    if cities_source_page_line_crop_packet_doc_failures:
+        failures.append(
+            "Cities source-page line crop packet doc failures: "
+            + "; ".join(cities_source_page_line_crop_packet_doc_failures)
+        )
+
     cities_extractable_text_review_doc_failures = (
         check_cities_extractable_text_review_doc.validate_cities_extractable_text_review_doc(
             check_cities_extractable_text_review_doc.DEFAULT_DOC
@@ -1942,6 +1959,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "cities_source_page_ocr_review_html_doc_failures": (
             cities_source_page_ocr_review_html_doc_failures
+        ),
+        "cities_source_page_line_crop_packet_doc_failures": (
+            cities_source_page_line_crop_packet_doc_failures
         ),
         "cities_extractable_text_review_doc_failures": (
             cities_extractable_text_review_doc_failures

@@ -369,6 +369,18 @@ image beside its OCR sidecar text. The HTML may contain OCR body text for local
 review, but tracked files contain only paths/counts/status and still import no
 source rows. Tracked doc: `docs/CITIES_SOURCE_PAGE_OCR_REVIEW_HTML.md`.
 
+Cities source-page line crop packet:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_packet.toml --resume
+```
+
+This runs local Hebrew OCR TSV against the 4 table candidate source pages and
+writes ignored crop images for detected text lines. Tracked files contain only
+paths/counts/status and still contain no OCR body text, no source-script body
+text, no source-row import, no city-name normalization, and no result-bearing
+work. Tracked doc: `docs/CITIES_SOURCE_PAGE_LINE_CROP_PACKET.md`.
+
 Cities extractable-text role review:
 
 ```bash
