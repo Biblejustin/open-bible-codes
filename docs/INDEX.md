@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 383
+Documents indexed: 384
 
 ## Controls
 
@@ -236,6 +236,7 @@ Documents indexed: 383
 | Cities PDF Recovery Probe | `CITIES_PDF_RECOVERY_PROBE.md` |
 | Cities Recovered PDF Text Audit | `CITIES_RECOVERED_PDF_TEXT_AUDIT.md` |
 | Cities Source Chain Audit | `CITIES_SOURCE_CHAIN_AUDIT.md` |
+| Cities Source Page Review Bundle | `CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md` |
 | Cities Source Review Queue | `CITIES_SOURCE_REVIEW_QUEUE.md` |
 | Cities Source Row Lock Evidence Packet | `CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md` |
 | Cities Source Row Lock Queue | `CITIES_SOURCE_ROW_LOCK_QUEUE.md` |

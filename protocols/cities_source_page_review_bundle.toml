@@ -1,0 +1,27 @@
+name = "cities_source_page_review_bundle"
+description = "Build a no-input Cities page-image review bundle for locked source pages."
+manifest_out = "reports/cities_pdf_recovery_probe/source_page_review_bundle_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_source_page_review_bundle"
+description = "Verify locked Cities source-page image paths and dimensions without OCR, transcription, or source-row import."
+argv = [
+  "-m", "scripts.build_cities_source_page_review_bundle",
+  "--worksheet", "reports/cities_pdf_recovery_probe/cities_source_transcription_review_worksheet.csv",
+  "--out", "reports/cities_pdf_recovery_probe/cities_source_page_review_bundle.csv",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_source_page_review_bundle_summary.csv",
+  "--markdown-out", "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_source_page_review_bundle.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_source_page_review_bundle.py",
+  "reports/cities_pdf_recovery_probe/cities_source_transcription_review_worksheet.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_source_page_review_bundle.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_review_bundle_summary.csv",
+  "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
+  "reports/cities_pdf_recovery_probe/cities_source_page_review_bundle.manifest.json",
+]

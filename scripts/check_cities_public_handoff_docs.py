@@ -18,6 +18,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "no city-name normalization, ELS searches, compactness runs, or p-levels",
         "data/study/mappings/cities_source_row_lock_decisions.csv",
         "data/study/mappings/cities_source_transcription_decisions.csv",
+        "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
     ),
     Path("docs/REAL_REPORT_RUN.md"): (
         "Cities source-row lock handoff:",
@@ -28,6 +29,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "no city-name normalization, ELS searches, compactness runs, or p-levels",
         "data/study/mappings/cities_source_row_lock_decisions.csv",
         "data/study/mappings/cities_source_transcription_decisions.csv",
+        "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
     ),
     Path("docs/FINAL_REPORT.md"): (
         "Cities source-row lock handoff:",
@@ -38,6 +40,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "no city-name normalization, ELS searches, compactness runs, or p-levels",
         "CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
         "CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md",
+        "CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
     ),
     Path("docs/FINAL_REPORT_DRAFT.md"): (
         "Cities source-row lock handoff:",
@@ -48,6 +51,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "no city-name normalization, ELS searches, compactness runs, or p-levels",
         "CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
         "CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md",
+        "CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
     ),
     Path("docs/FINAL_REPORT_OUTLINE.md"): (
         "Cities source-row lock handoff:",
@@ -67,6 +71,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "no city-name normalization, ELS searches, compactness runs, or p-levels",
         "data/study/mappings/cities_source_row_lock_decisions.csv",
         "data/study/mappings/cities_source_transcription_decisions.csv",
+        "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
     ),
     Path("docs/CONSOLIDATED_FINDINGS.md"): (
         "Cities source-row lock handoff:",
@@ -93,6 +98,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "no city-name normalization, ELS searches, compactness runs, or p-levels",
         "data/study/mappings/cities_source_row_lock_decisions.csv",
         "data/study/mappings/cities_source_transcription_decisions.csv",
+        "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
     ),
 }
 

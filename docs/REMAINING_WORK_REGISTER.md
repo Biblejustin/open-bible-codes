@@ -537,6 +537,29 @@ Current result:
   text, import source rows, normalize city names, run ELS searches, compute
   compactness, or verify p-levels.
 
+### Cities Source Page Review Bundle
+
+Completed page-image review bundle:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_review_bundle.toml --resume
+```
+
+Current result:
+
+- Bundle rows: 14.
+- Page images found: 14.
+- Page images missing: 0.
+- Source-row imports: 0.
+- City-name normalization: 0.
+- ELS runs: 0.
+- Compactness runs: 0.
+- p-levels: 0.
+- Boundary: this verifies page-image paths and dimensions for later manual
+  transcription review. It does not run OCR, copy source-script text, import
+  source rows, normalize city names, run ELS searches, compute compactness, or
+  verify p-levels.
+
 ### Locked Report Rerun And Volatility Cleanup
 
 Completed locked reruns:

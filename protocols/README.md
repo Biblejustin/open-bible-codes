@@ -324,6 +324,17 @@ row/column alignment review. It does not copy source-script text, import source
 text, normalize city names, or run result-bearing work. Tracked worksheet:
 `docs/CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md`.
 
+Cities source-page review bundle:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_review_bundle.toml --resume
+```
+
+This verifies the 14 locked source-page image paths and dimensions for later
+manual review. It does not run OCR, transcribe rows, import source text,
+normalize city names, or run result-bearing work. Tracked bundle:
+`docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md`.
+
 Cities extractable-text role review:
 
 ```bash

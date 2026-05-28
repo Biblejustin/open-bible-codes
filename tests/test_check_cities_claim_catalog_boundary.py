@@ -131,6 +131,7 @@ def write_doc(path: Path, *, omit: str = "") -> None:
         "no city-name normalization, ELS searches, compactness runs, or p-levels",
         "data/study/mappings/cities_source_row_lock_decisions.csv",
         "data/study/mappings/cities_source_transcription_decisions.csv",
+        "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
     ]
     path.write_text(
         "\n".join(phrase for phrase in phrases if phrase != omit),

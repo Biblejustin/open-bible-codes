@@ -637,6 +637,7 @@ class RealReportRunTests(unittest.TestCase):
             "docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
             "docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md",
             "docs/CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md",
+            "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
             "docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md",
             "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
             "docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md",
@@ -768,6 +769,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "protocols/cities_source_page_review_bundle.toml",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "data/study/mappings/cities_source_row_lock_decisions.csv",
             steps_by_id["preflight"]["inputs"],
         )
@@ -829,6 +834,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_cities_source_transcription_review_worksheet_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_cities_source_page_review_bundle.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_cities_source_page_review_bundle_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -1202,6 +1215,10 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -1251,6 +1268,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "protocols/cities_source_transcription_review_worksheet.toml",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "protocols/cities_source_page_review_bundle.toml",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -1367,6 +1388,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_cities_source_transcription_review_worksheet_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/build_cities_source_page_review_bundle.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_cities_source_page_review_bundle_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -3595,6 +3624,32 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "Cities source-transcription review worksheet doc failures: "
                 "docs/CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md missing boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_cities_source_page_review_bundle_doc_failure(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_cities_source_page_review_bundle_doc,
+                "validate_cities_source_page_review_bundle_doc",
+                return_value=[
+                    "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md missing boundary"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["cities_source_page_review_bundle_doc_failures"],
+                ["docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md missing boundary"],
+            )
+            self.assertIn(
+                "Cities source-page review bundle doc failures: "
+                "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md missing boundary",
                 payload["failures"],
             )
 
