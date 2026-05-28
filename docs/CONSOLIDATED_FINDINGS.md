@@ -840,8 +840,9 @@ decision-record CSV locks all 37 rows as 26 `no_source_change` decisions and 11
 `method_lock` decisions.
 
 Cities source-row lock handoff: 14 source-row lock candidate pages, 14 populated
-lock rows, and 14 pending transcription-review rows; no source rows imported,
-and no city-name normalization, ELS searches, compactness runs, or p-levels.
+lock rows, 14 pending transcription-review rows, and 203 line crops ranked for
+visual triage; no source rows imported, and no city-name normalization, ELS
+searches, compactness runs, or p-levels.
 This is source-review organization only; it does not create a Cities
 result-bearing corpus, compactness test, or public claim.
 

@@ -725,6 +725,34 @@ Current result:
   does not verify source-row transcription, import source text, normalize city
   names, run ELS searches, compute compactness, or verify p-levels.
 
+### Cities Source Page Line Crop Triage
+
+Completed no-input line-crop triage queue:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_triage.toml --resume
+```
+
+Current result:
+
+- Line-crop triage rows: 203.
+- Unique table pages: 4.
+- Crop images available: 203.
+- OCR words represented by line boxes: 1,511.
+- OCR Hebrew letters represented by line boxes: 4,934.
+- Dense-text priority rows: 120.
+- Medium-text priority rows: 71.
+- Short-text priority rows: 12.
+- No-text priority rows: 0.
+- Source-row imports: 0.
+- City-name normalization: 0.
+- ELS runs: 0.
+- Compactness runs: 0.
+- p-levels: 0.
+- Boundary: this ranks crop images by layout and OCR-count signal only. It
+  does not read Hebrew, transcribe rows, import source rows, normalize city
+  names, run ELS searches, compute compactness, or verify p-levels.
+
 ### Cities Source Page Line Crop Review Worksheet
 
 Completed no-input line-crop review worksheet:

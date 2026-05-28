@@ -405,6 +405,18 @@ and embeds no OCR text or source-script text. Tracked files contain only
 paths/counts/status and still import no source rows. Tracked doc:
 `docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_HTML.md`.
 
+Cities source-page line crop triage:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_triage.toml --resume
+```
+
+This writes a 203-row no-input triage queue for the table-candidate line
+crops. It ranks crops by layout and OCR-count signal only; it does not read
+Hebrew, transcribe rows, import source rows, normalize city names, or run
+result-bearing work. Tracked doc:
+`docs/CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE.md`.
+
 Cities source-page line crop review worksheet:
 
 ```bash

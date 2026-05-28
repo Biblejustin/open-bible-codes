@@ -34,6 +34,7 @@ from scripts import (
     check_cities_source_page_line_crop_contact_sheet_doc,
     check_cities_source_page_line_crop_packet_doc,
     check_cities_source_page_line_crop_review_html_doc,
+    check_cities_source_page_line_crop_triage_doc,
     check_cities_source_page_line_crop_review_worksheet_doc,
     check_cities_source_page_ocr_review_html_doc,
     check_cities_source_page_ocr_review_packet_doc,
@@ -216,6 +217,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/cities_source_page_line_crop_packet.toml",
     "protocols/cities_source_page_line_crop_contact_sheet.toml",
     "protocols/cities_source_page_line_crop_review_html.toml",
+    "protocols/cities_source_page_line_crop_triage.toml",
     "protocols/cities_source_page_line_crop_review_worksheet.toml",
     "protocols/cities_extractable_text_review.toml",
     "data/study/mappings/cities_source_row_lock_decisions.csv",
@@ -305,6 +307,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/CITIES_SOURCE_PAGE_LINE_CROP_PACKET.md",
     "docs/CITIES_SOURCE_PAGE_LINE_CROP_CONTACT_SHEET.md",
     "docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_HTML.md",
+    "docs/CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE.md",
     "docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_WORKSHEET.md",
     "docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md",
     "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
@@ -738,6 +741,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_cities_source_page_line_crop_contact_sheet_doc.py",
     "scripts/build_cities_source_page_line_crop_review_html.py",
     "scripts/check_cities_source_page_line_crop_review_html_doc.py",
+    "scripts/build_cities_source_page_line_crop_triage.py",
+    "scripts/check_cities_source_page_line_crop_triage_doc.py",
     "scripts/build_cities_source_page_line_crop_review_worksheet.py",
     "scripts/check_cities_source_page_line_crop_review_worksheet_doc.py",
     "scripts/build_cities_extractable_text_review.py",
@@ -780,6 +785,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/cities_source_page_line_crop_packet.toml",
     "protocols/cities_source_page_line_crop_contact_sheet.toml",
     "protocols/cities_source_page_line_crop_review_html.toml",
+    "protocols/cities_source_page_line_crop_triage.toml",
     "protocols/cities_source_page_line_crop_review_worksheet.toml",
     "protocols/cities_extractable_text_review.toml",
     "terms/relevance_dictionary.toml",
@@ -1759,6 +1765,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(cities_source_page_line_crop_review_html_doc_failures)
         )
 
+    cities_source_page_line_crop_triage_doc_failures = (
+        check_cities_source_page_line_crop_triage_doc.validate_cities_source_page_line_crop_triage_doc(
+            check_cities_source_page_line_crop_triage_doc.DEFAULT_DOC
+        )
+    )
+    if cities_source_page_line_crop_triage_doc_failures:
+        failures.append(
+            "Cities source-page line-crop triage doc failures: "
+            + "; ".join(cities_source_page_line_crop_triage_doc_failures)
+        )
+
     cities_source_page_line_crop_review_worksheet_doc_failures = (
         check_cities_source_page_line_crop_review_worksheet_doc.validate_cities_source_page_line_crop_review_worksheet_doc(
             check_cities_source_page_line_crop_review_worksheet_doc.DEFAULT_DOC
@@ -2019,6 +2036,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "cities_source_page_line_crop_review_html_doc_failures": (
             cities_source_page_line_crop_review_html_doc_failures
+        ),
+        "cities_source_page_line_crop_triage_doc_failures": (
+            cities_source_page_line_crop_triage_doc_failures
         ),
         "cities_source_page_line_crop_review_worksheet_doc_failures": (
             cities_source_page_line_crop_review_worksheet_doc_failures
