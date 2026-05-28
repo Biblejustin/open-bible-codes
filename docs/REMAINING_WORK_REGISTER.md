@@ -582,6 +582,36 @@ Current result:
   sheet is not transcription verification; tracked files contain no OCR body
   text or source-script body text.
 
+### Cities Source Page OCR Review Packet
+
+Completed local Hebrew OCR review packet:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_ocr_review_packet.toml --resume
+```
+
+Current result:
+
+- Source-page OCR rows: 14.
+- Page images found: 14.
+- Page images missing: 0.
+- OCR pages attempted: 14.
+- Pages with OCR text: 14.
+- OCR text sidecars: 14.
+- OCR Hebrew letters: 14,408.
+- OCR words: 3,939.
+- OCR lines: 596.
+- Source-row imports: 0.
+- City-name normalization: 0.
+- ELS runs: 0.
+- Compactness runs: 0.
+- p-levels: 0.
+- Boundary: this writes local ignored OCR sidecars for manual review only.
+  Tracked files contain counts, paths, and status, but no OCR body text or
+  source-script body text. It does not transcribe verified source rows, import
+  source text, normalize city names, run ELS searches, compute compactness, or
+  verify p-levels.
+
 ### Locked Report Rerun And Volatility Cleanup
 
 Completed locked reruns:

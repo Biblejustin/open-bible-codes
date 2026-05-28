@@ -94,6 +94,9 @@ CITIES_SOURCE_ROW_LOCK_EVIDENCE_SUMMARY = Path(
 CITIES_SOURCE_ROW_LOCK_DECISIONS = Path(
     "data/study/mappings/cities_source_row_lock_decisions.csv"
 )
+CITIES_SOURCE_PAGE_OCR_REVIEW_PACKET_SUMMARY = Path(
+    "reports/cities_pdf_recovery_probe/cities_source_page_ocr_review_packet_summary.csv"
+)
 HEBREW_THEOLOGY_ALL_CODES_TRIAGE_MANIFEST = Path(
     "reports/hebrew_theology_all_codes/triage.manifest.json"
 )
@@ -2123,6 +2126,7 @@ def read_rows(path: Path) -> list[dict[str, str]]:
 def cities_source_row_lock_section() -> list[str]:
     queue_summary = metric_dict(read_rows(CITIES_SOURCE_ROW_LOCK_QUEUE_SUMMARY))
     evidence_summary = metric_dict(read_rows(CITIES_SOURCE_ROW_LOCK_EVIDENCE_SUMMARY))
+    ocr_summary = metric_dict(read_rows(CITIES_SOURCE_PAGE_OCR_REVIEW_PACKET_SUMMARY))
     decision_rows = read_rows(CITIES_SOURCE_ROW_LOCK_DECISIONS)
     status_counts = Counter(row.get("decision_status", "") for row in decision_rows)
     action_counts = Counter(row.get("selected_action", "") for row in decision_rows)
@@ -2143,6 +2147,10 @@ def cities_source_row_lock_section() -> list[str]:
         f"| Locked decision records | {status_counts.get('locked', 0)} |",
         f"| Deferred decision records | {status_counts.get('deferred_no_lock', 0)} |",
         f"| Selected actions | {selected_action_count} |",
+        f"| Local OCR review rows | {ocr_summary.get('source_page_ocr_rows', '0')} |",
+        f"| Local OCR pages with text | {ocr_summary.get('pages_with_ocr_text', '0')} |",
+        f"| Local OCR sidecars | {ocr_summary.get('ocr_text_sidecars', '0')} |",
+        f"| Local OCR Hebrew letters | {ocr_summary.get('ocr_hebrew_letters', '0')} |",
         f"| Source-row imports | {evidence_summary.get('source_row_imports', '0')} |",
         f"| ELS runs | {evidence_summary.get('els_runs', '0')} |",
         f"| Compactness runs | {evidence_summary.get('compactness_runs', '0')} |",

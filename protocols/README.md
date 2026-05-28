@@ -346,6 +346,18 @@ manual review. The contact-sheet image stays in ignored reports output; tracked
 files contain no source-script body text and still import no source rows.
 Tracked doc: `docs/CITIES_SOURCE_PAGE_CONTACT_SHEET.md`.
 
+Cities source-page OCR review packet:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_ocr_review_packet.toml --resume
+```
+
+This runs local Hebrew OCR against the 14 locked source-page images and writes
+ignored OCR text sidecars for manual review. Tracked files contain counts,
+paths, and status only; they contain no OCR body text, no source-script body
+text, no source-row import, no city-name normalization, and no result-bearing
+work. Tracked doc: `docs/CITIES_SOURCE_PAGE_OCR_REVIEW_PACKET.md`.
+
 Cities extractable-text role review:
 
 ```bash

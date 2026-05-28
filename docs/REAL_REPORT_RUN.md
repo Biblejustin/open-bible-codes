@@ -101,10 +101,12 @@ This assembly run includes:
   plus `docs/CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md`,
   `docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md`,
   `docs/CITIES_SOURCE_PAGE_CONTACT_SHEET.md`,
+  `docs/CITIES_SOURCE_PAGE_OCR_REVIEW_PACKET.md`,
   `data/study/mappings/cities_source_row_lock_decisions.csv`, and
   `data/study/mappings/cities_source_transcription_decisions.csv`. Cities
   source-row lock handoff: 14 source-row lock candidate pages, 14 populated
-  lock rows, and 14 pending transcription-review rows; no source rows imported,
+  lock rows, 14 pending transcription-review rows, and 14 local Hebrew OCR
+  sidecars for review; no source rows imported,
   and no city-name normalization, ELS searches, compactness runs, or p-levels.
 - broader search/current findings writeup:
   `docs/BROADER_SEARCH_FINDINGS.md`
