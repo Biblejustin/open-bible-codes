@@ -165,6 +165,8 @@ It requires:
 - claim-catalog summary table stays aligned with `claims/claim_catalog.csv`;
 - Cities claim-catalog row stays `under_specified`, source-review only, and
   aligned with the header-only Cities source-row lock decision records;
+- Cities source-row lock evidence packet checks local recovered PDF and
+  page-image artifact paths before any lock row can pass preflight;
 - final report highlights markdown matches the deterministic builder output;
 - centered occurrence index markdown matches the deterministic builder output;
 - strongest candidate deep-dive markdown matches the deterministic builder

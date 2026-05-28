@@ -77,6 +77,20 @@ class CitiesSourceRowLockEvidencePacketDocTests(unittest.TestCase):
 
             self.assertTrue(any("rows drifted" in failure for failure in failures))
 
+    def test_flags_missing_page_image_path(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            paths = copy_current_outputs(root)
+            fieldnames, rows = read_csv(paths["rows"])
+            rows[0]["page_image_path"] = str(root / "missing_page.png")
+            write_csv(paths["rows"], fieldnames, rows)
+
+            failures = validate_tmp(paths)
+
+            self.assertTrue(
+                any("page_image_path not found" in failure for failure in failures)
+            )
+
 
 def copy_current_outputs(root: Path) -> dict[str, Path]:
     paths = {

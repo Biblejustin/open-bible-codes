@@ -175,6 +175,7 @@ def write_markdown(
         "It joins decision ids to PDF/source metadata and page-image paths without OCR body text.",
         "It does not transcribe rows, import source rows, normalize city names, run ELS searches, compute compactness, or verify p-levels.",
         "No OCR body text or source-script body text appears in this doc, CSV, summary, or manifest.",
+        "The local checker verifies every packet row points to an existing recovered PDF and page-image artifact.",
         "",
         "Reproduce:",
         "",

@@ -26,6 +26,7 @@ REQUIRED_PHRASES = (
     "joins decision ids to PDF/source metadata and page-image paths",
     "does not transcribe rows",
     "No OCR body text or source-script body text appears",
+    "checker verifies every packet row points to an existing recovered PDF and page-image artifact",
     "Evidence rows: 14.",
     "Unique labels: 3.",
     "Table-bearing candidate pages: 4.",
@@ -126,6 +127,7 @@ def validate_cities_source_row_lock_evidence_packet_doc(
     )
     failures.extend(validate_rows_csv(rows_fieldnames, rows, expected_rows))
     failures.extend(validate_rows(doc, normalized, rows))
+    failures.extend(validate_evidence_artifact_paths(rows_csv, rows))
     failures.extend(
         validate_summary_csv(
             summary_fieldnames,
@@ -144,6 +146,24 @@ def validate_cities_source_row_lock_evidence_packet_doc(
             source_queue_csv,
         )
     )
+    return failures
+
+
+def validate_evidence_artifact_paths(
+    rows_csv: Path,
+    rows: list[dict[str, str]],
+) -> list[str]:
+    failures: list[str] = []
+    for row in rows:
+        decision_id = row.get("decision_id", "")
+        for field in ("selected_path", "page_image_path"):
+            raw_value = row.get(field, "").strip()
+            if not raw_value:
+                failures.append(f"{rows_csv} {decision_id} missing {field}")
+                continue
+            path = Path(raw_value)
+            if not path.exists():
+                failures.append(f"{rows_csv} {decision_id} {field} not found: {path}")
     return failures
 
 

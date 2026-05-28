@@ -42,6 +42,11 @@ REQUIRED_PHRASES = (
     "never imports or transcribes source rows",
     "CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
     "recovered PDF metadata and page-image paths",
+    "## Decision Meanings",
+    "`source_row_lock_ready` means page evidence can support later source-row extraction",
+    "`no_source_row_import` means do not use this page for source-row extraction",
+    "`exclude_page_from_source_rows` means explicitly keep this page out",
+    "`deferred_no_lock` means no lock decision yet",
 )
 
 EXPECTED_IDS = tuple(f"cities_source_row_lock_{index:03d}" for index in range(1, 15))

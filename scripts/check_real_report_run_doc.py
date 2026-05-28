@@ -59,6 +59,7 @@ REQUIRED_PHRASES = (
     "research missing model pages audit doc keeps the missing level-2/3 model page boundary visible",
     "WRR adjacent source audit and simulation docs keep source-shape and simulation-only boundaries visible",
     "critical-omission follow-up docs keep Setup, Method, Results, and Cautions sections plus current headline counts visible",
+    "Cities source-row lock evidence packet checks local recovered PDF and page-image artifact paths before any lock row can pass preflight",
     "Cities source-row lock status",
     "Cities source-row lock decision records stay aligned to the 14-row evidence packet before any populated source-row lock can pass preflight",
 )

@@ -1402,12 +1402,18 @@ the WRR method-lane wide-skip public-doc guard, preregistration stale-template
 guard synchronization, project findings overview guard, reader-path overview
 link guard, direct Makefile public-release overview guard, and overview-checker
 CLI reader-path argument coverage, public-reader package overview-input guard,
-and public-reader package guard record in the package README/manifest:
+public-reader package guard record in the package README/manifest, Cities
+source-row lock artifact-path guard, and Cities lock worksheet decision
+meaning text:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1964
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1965
   tests, 2 skipped, and 29325 subtests.
 - `make public-reader-package` passed after adding the package-time
   general-reader overview guard and package README/manifest guard record.
+- `python3 -m scripts.run_protocol protocols/cities_source_row_lock_worksheet.toml --resume`
+  and `python3 -m scripts.run_protocol protocols/cities_source_row_lock_evidence_packet.toml --resume`
+  passed after adding plain decision meanings and local PDF/page-image path
+  checks.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
   passed clean from the committed tree after the preregistration
   stale-template guard sync.
