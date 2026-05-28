@@ -753,6 +753,34 @@ Current result:
   does not read Hebrew, transcribe rows, import source rows, normalize city
   names, run ELS searches, compute compactness, or verify p-levels.
 
+### Cities Source Page Line Crop Triage HTML
+
+Completed local line-crop triage HTML review aid:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_triage_html.toml --resume
+```
+
+Current result:
+
+- HTML rows: 203.
+- HTML line-crop image rows: 203.
+- HTML priority sections: 4.
+- Line-crop triage rows: 203.
+- Dense-text priority rows: 120.
+- Medium-text priority rows: 71.
+- Short-text priority rows: 12.
+- No-text priority rows: 0.
+- Source-row imports: 0.
+- City-name normalization: 0.
+- ELS runs: 0.
+- Compactness runs: 0.
+- p-levels: 0.
+- Boundary: the ignored local HTML file displays crop images in triage priority
+  order only. It embeds no OCR text or source-script text and does not read
+  Hebrew, transcribe rows, import source rows, normalize city names, run ELS
+  searches, compute compactness, or verify p-levels.
+
 ### Cities Source Page Line Crop Review Worksheet
 
 Completed no-input line-crop review worksheet:

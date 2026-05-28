@@ -417,6 +417,18 @@ Hebrew, transcribe rows, import source rows, normalize city names, or run
 result-bearing work. Tracked doc:
 `docs/CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE.md`.
 
+Cities source-page line crop triage HTML:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_triage_html.toml --resume
+```
+
+This writes an ignored local HTML gallery of the 203 source-page line-crop
+images in triage priority order. The HTML displays crop images only and embeds
+no OCR text or source-script text. Tracked files contain only
+paths/counts/status and still import no source rows. Tracked doc:
+`docs/CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE_HTML.md`.
+
 Cities source-page line crop review worksheet:
 
 ```bash

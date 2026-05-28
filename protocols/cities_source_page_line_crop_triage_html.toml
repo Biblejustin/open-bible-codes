@@ -1,0 +1,27 @@
+name = "cities_source_page_line_crop_triage_html"
+description = "Build ignored local HTML that displays Cities source-page line crops in triage priority order."
+manifest_out = "reports/cities_pdf_recovery_probe/source_page_line_crop_triage_html_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_source_page_line_crop_triage_html"
+description = "Display triaged line-crop images in priority order without source-row import."
+argv = [
+  "-m", "scripts.build_cities_source_page_line_crop_triage_html",
+  "--triage", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_triage.csv",
+  "--html-out", "reports/cities_pdf_recovery_probe/source_page_line_crops/line_crop_triage.html",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_triage_html_summary.csv",
+  "--markdown-out", "docs/CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE_HTML.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_triage_html.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_source_page_line_crop_triage_html.py",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_triage.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/source_page_line_crops/line_crop_triage.html",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_triage_html_summary.csv",
+  "docs/CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE_HTML.md",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_triage_html.manifest.json",
+]

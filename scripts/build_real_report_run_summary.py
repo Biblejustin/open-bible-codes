@@ -112,6 +112,9 @@ CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_HTML_SUMMARY = Path(
 CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE_SUMMARY = Path(
     "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_triage_summary.csv"
 )
+CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE_HTML_SUMMARY = Path(
+    "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_triage_html_summary.csv"
+)
 CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_WORKSHEET = Path(
     "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_review_worksheet.csv"
 )
@@ -2156,6 +2159,9 @@ def cities_source_row_lock_section() -> list[str]:
     line_crop_triage_summary = metric_dict(
         read_rows(CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE_SUMMARY)
     )
+    line_crop_triage_html_summary = metric_dict(
+        read_rows(CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE_HTML_SUMMARY)
+    )
     line_crop_worksheet_rows = read_rows(CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_WORKSHEET)
     decision_rows = read_rows(CITIES_SOURCE_ROW_LOCK_DECISIONS)
     status_counts = Counter(row.get("decision_status", "") for row in decision_rows)
@@ -2192,6 +2198,9 @@ def cities_source_row_lock_section() -> list[str]:
         f"| Local line crop triage rows | {line_crop_triage_summary.get('triage_rows', '0')} |",
         f"| Local line crop dense-text priority rows | {line_crop_triage_summary.get('priority_1_dense_text', '0')} |",
         f"| Local line crop medium-text priority rows | {line_crop_triage_summary.get('priority_2_medium_text', '0')} |",
+        f"| Local line crop triage HTML rows | {line_crop_triage_html_summary.get('html_rows', '0')} |",
+        f"| Local line crop triage HTML image rows | {line_crop_triage_html_summary.get('html_line_crop_image_rows', '0')} |",
+        f"| Local line crop triage HTML priority sections | {line_crop_triage_html_summary.get('html_priority_sections', '0')} |",
         f"| Local line crop worksheet rows | {len(line_crop_worksheet_rows)} |",
         f"| Source-row imports | {evidence_summary.get('source_row_imports', '0')} |",
         f"| ELS runs | {evidence_summary.get('els_runs', '0')} |",

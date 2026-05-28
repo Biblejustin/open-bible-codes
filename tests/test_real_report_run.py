@@ -4044,6 +4044,32 @@ inputs = ["docs/A.md", "docs/C.md"]
                 payload["failures"],
             )
 
+    def test_preflight_fails_on_cities_source_page_line_crop_triage_html_doc_failure(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_cities_source_page_line_crop_triage_html_doc,
+                "validate_cities_source_page_line_crop_triage_html_doc",
+                return_value=[
+                    "docs/CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE_HTML.md missing boundary"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["cities_source_page_line_crop_triage_html_doc_failures"],
+                ["docs/CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE_HTML.md missing boundary"],
+            )
+            self.assertIn(
+                "Cities source-page line-crop triage HTML doc failures: "
+                "docs/CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE_HTML.md missing boundary",
+                payload["failures"],
+            )
+
     def test_preflight_fails_on_cities_extractable_text_review_doc_failure(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / "preflight.json"
