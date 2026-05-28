@@ -1,0 +1,27 @@
+name = "cities_source_transcription_review_worksheet"
+description = "Build a no-input Cities worksheet for future source-row transcription review from locked source pages."
+manifest_out = "reports/cities_pdf_recovery_probe/source_transcription_review_worksheet_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_source_transcription_review_worksheet"
+description = "Organize locked Cities source pages for later readable transcription review without source-row import."
+argv = [
+  "-m", "scripts.build_cities_source_transcription_review_worksheet",
+  "--evidence-packet", "reports/cities_pdf_recovery_probe/cities_source_row_lock_evidence_packet.csv",
+  "--records-template", "data/study/mappings/cities_source_transcription_decisions.csv",
+  "--out", "reports/cities_pdf_recovery_probe/cities_source_transcription_review_worksheet.csv",
+  "--markdown-out", "docs/CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_source_transcription_review_worksheet.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_source_transcription_review_worksheet.py",
+  "reports/cities_pdf_recovery_probe/cities_source_row_lock_evidence_packet.csv",
+  "data/study/mappings/cities_source_transcription_decisions.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_source_transcription_review_worksheet.csv",
+  "docs/CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md",
+  "reports/cities_pdf_recovery_probe/cities_source_transcription_review_worksheet.manifest.json",
+]

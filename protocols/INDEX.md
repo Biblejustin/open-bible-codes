@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 158
+Protocols indexed: 159
 
 ## Analysis
 
@@ -16,6 +16,7 @@ Protocols indexed: 158
 | cities_source_row_lock_evidence_packet | Build a diagnostic evidence packet for Cities source-row lock candidate pages without i... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_row_lock_evidence_packet.toml` |
 | cities_source_row_lock_queue | Queue Cities source-bearing OCR-reviewed pages for future citable source-row locks with... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_row_lock_queue.toml` |
 | cities_source_row_lock_worksheet | Build a Cities source-row lock decision worksheet from queued candidate pages without i... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_row_lock_worksheet.toml` |
+| cities_source_transcription_review_worksheet | Build a no-input Cities worksheet for future source-row transcription review from locke... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_transcription_review_worksheet.toml` |
 | cities_unreadable_pdf_ocr_feasibility | Probe OCR feasibility for recovered unreadable Cities PDFs without storing OCR text in ... | 1 |  | reports/cities_pdf_recovery_probe | `cities_unreadable_pdf_ocr_feasibility.toml` |
 | cities_unreadable_pdf_ocr_page_review | Build manual page-image review records for priority Cities unreadable-PDF OCR pages. | 1 |  | reports/cities_pdf_recovery_probe | `cities_unreadable_pdf_ocr_page_review.toml` |
 | cities_unreadable_pdf_ocr_review_checklist | Build no-input review checklist and local contact sheets for Cities unreadable-PDF OCR ... | 1 |  | reports/cities_pdf_recovery_probe | `cities_unreadable_pdf_ocr_review_checklist.toml` |

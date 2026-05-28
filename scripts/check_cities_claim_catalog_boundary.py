@@ -35,6 +35,7 @@ REQUIRED_ROW_PHRASES = {
     "current_reproduction": (
         "source-row lock handoff",
         "14 populated lock rows",
+        "14 pending review rows",
         "no source rows imported",
     ),
     "notes": (
@@ -44,16 +45,18 @@ REQUIRED_ROW_PHRASES = {
         "ELS searches",
         "compactness runs",
         "p-levels",
-        "future lock rows must cite evidence and pass preflight",
+        "future transcription/import rows must cite evidence and pass preflight",
     ),
 }
 REQUIRED_DOC_PHRASES = (
     "Torah-code.org Cities/Aumann/Simon-McKay source chain",
     "Cities source-row lock handoff has 14 source-row lock candidate pages",
     "14 populated lock rows",
+    "14 pending transcription-review rows",
     "no source rows imported",
     "no city-name normalization, ELS searches, compactness runs, or p-levels",
     "data/study/mappings/cities_source_row_lock_decisions.csv",
+    "data/study/mappings/cities_source_transcription_decisions.csv",
 )
 
 

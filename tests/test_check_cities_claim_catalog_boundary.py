@@ -86,13 +86,14 @@ def valid_row() -> dict[str, str]:
         "layout_or_metric": "compactness/proximity source rows",
         "current_reproduction": (
             "Source-chain audit and source-row lock handoff exist; current "
-            "decision records have 14 populated lock rows and no source rows imported"
+            "decision records have 14 populated lock rows and the transcription "
+            "worksheet has 14 pending review rows with no source rows imported"
         ),
         "evidence": "docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
         "notes": (
             "14 candidate pages are source-review only; no city-name normalization "
-            "ELS searches compactness runs or p-levels; future lock rows must cite "
-            "evidence and pass preflight."
+            "ELS searches compactness runs or p-levels; future transcription/import "
+            "rows must cite evidence and pass preflight."
         ),
     }
 
@@ -125,9 +126,11 @@ def write_doc(path: Path, *, omit: str = "") -> None:
         "Torah-code.org Cities/Aumann/Simon-McKay source chain",
         "Cities source-row lock handoff has 14 source-row lock candidate pages",
         "14 populated lock rows",
+        "14 pending transcription-review rows",
         "no source rows imported",
         "no city-name normalization, ELS searches, compactness runs, or p-levels",
         "data/study/mappings/cities_source_row_lock_decisions.csv",
+        "data/study/mappings/cities_source_transcription_decisions.csv",
     ]
     path.write_text(
         "\n".join(phrase for phrase in phrases if phrase != omit),

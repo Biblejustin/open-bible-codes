@@ -34,6 +34,7 @@ from scripts import (
     check_cities_source_row_lock_decision_records,
     check_cities_source_row_lock_evidence_packet_doc,
     check_cities_source_row_lock_worksheet_doc,
+    check_cities_source_transcription_review_worksheet_doc,
     check_cities_unreadable_pdf_ocr_feasibility_doc,
     check_cities_unreadable_pdf_ocr_review_checklist_doc,
     check_cities_unreadable_pdf_ocr_page_review_doc,
@@ -199,8 +200,10 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/cities_source_row_lock_queue.toml",
     "protocols/cities_source_row_lock_worksheet.toml",
     "protocols/cities_source_row_lock_evidence_packet.toml",
+    "protocols/cities_source_transcription_review_worksheet.toml",
     "protocols/cities_extractable_text_review.toml",
     "data/study/mappings/cities_source_row_lock_decisions.csv",
+    "data/study/mappings/cities_source_transcription_decisions.csv",
     "protocols/centered_relevance_density.toml",
     "protocols/matrix_cluster_candidates.toml",
     "protocols/matrix_cluster_control_summary.toml",
@@ -278,6 +281,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md",
     "docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md",
     "docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
+    "docs/CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md",
     "docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md",
     "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
     "docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md",
@@ -694,6 +698,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_cities_source_row_lock_evidence_packet_doc.py",
     "scripts/build_cities_source_row_lock_worksheet.py",
     "scripts/check_cities_source_row_lock_worksheet_doc.py",
+    "scripts/build_cities_source_transcription_review_worksheet.py",
+    "scripts/check_cities_source_transcription_review_worksheet_doc.py",
     "scripts/build_cities_extractable_text_review.py",
     "scripts/check_cities_extractable_text_review_doc.py",
     "scripts/check_hypothesis_testing_source_audit_doc.py",
@@ -1621,6 +1627,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(cities_source_row_lock_worksheet_doc_failures)
         )
 
+    cities_source_transcription_review_worksheet_doc_failures = (
+        check_cities_source_transcription_review_worksheet_doc.validate_cities_source_transcription_review_worksheet_doc(
+            check_cities_source_transcription_review_worksheet_doc.DEFAULT_DOC
+        )
+    )
+    if cities_source_transcription_review_worksheet_doc_failures:
+        failures.append(
+            "Cities source-transcription review worksheet doc failures: "
+            + "; ".join(cities_source_transcription_review_worksheet_doc_failures)
+        )
+
     cities_extractable_text_review_doc_failures = (
         check_cities_extractable_text_review_doc.validate_cities_extractable_text_review_doc(
             check_cities_extractable_text_review_doc.DEFAULT_DOC
@@ -1846,6 +1863,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "cities_source_row_lock_worksheet_doc_failures": (
             cities_source_row_lock_worksheet_doc_failures
+        ),
+        "cities_source_transcription_review_worksheet_doc_failures": (
+            cities_source_transcription_review_worksheet_doc_failures
         ),
         "cities_extractable_text_review_doc_failures": (
             cities_extractable_text_review_doc_failures

@@ -636,6 +636,7 @@ class RealReportRunTests(unittest.TestCase):
             "docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md",
             "docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
             "docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md",
+            "docs/CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md",
             "docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md",
             "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
             "docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md",
@@ -763,7 +764,15 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "protocols/cities_source_transcription_review_worksheet.toml",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "data/study/mappings/cities_source_row_lock_decisions.csv",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "data/study/mappings/cities_source_transcription_decisions.csv",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -812,6 +821,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_cities_source_row_lock_worksheet_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_cities_source_transcription_review_worksheet.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_cities_source_transcription_review_worksheet_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -1181,6 +1198,10 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "docs/CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -1229,7 +1250,15 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "protocols/cities_source_transcription_review_worksheet.toml",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "data/study/mappings/cities_source_row_lock_decisions.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "data/study/mappings/cities_source_transcription_decisions.csv",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -1330,6 +1359,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_cities_source_row_lock_worksheet_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/build_cities_source_transcription_review_worksheet.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_cities_source_transcription_review_worksheet_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -3528,6 +3565,36 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "Cities source-row lock worksheet doc failures: "
                 "docs/CITIES_SOURCE_ROW_LOCK_WORKSHEET.md missing source boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_cities_source_transcription_review_worksheet_doc_failure(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_cities_source_transcription_review_worksheet_doc,
+                "validate_cities_source_transcription_review_worksheet_doc",
+                return_value=[
+                    "docs/CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md missing boundary"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload[
+                    "cities_source_transcription_review_worksheet_doc_failures"
+                ],
+                [
+                    "docs/CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md missing boundary"
+                ],
+            )
+            self.assertIn(
+                "Cities source-transcription review worksheet doc failures: "
+                "docs/CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md missing boundary",
                 payload["failures"],
             )
 

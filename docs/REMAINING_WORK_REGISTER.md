@@ -166,10 +166,12 @@ manifest input/output metadata are CSV/manifest-guarded as well.
 WRR source-row coverage packet rows, summary metrics, CSV schemas, and
 manifest input/output metadata are CSV/manifest-guarded as well.
 Cities source-row lock queueing, worksheet generation, evidence-packet
-assembly, and decision-record preflight guarding now keep Cities source-row
-candidate pages out of result-bearing work until citable lock records exist.
-Cities source-row lock handoff: 14 source-row lock candidate pages, 14 populated lock rows, no source rows imported, and no city-name normalization, ELS
-searches, compactness runs, or p-levels.
+assembly, decision-record preflight guarding, and transcription-review
+worksheet generation now keep Cities source-row candidate pages out of
+result-bearing work until readable transcription/import records exist.
+Cities source-row lock handoff: 14 source-row lock candidate pages, 14 populated
+lock rows, and 14 pending transcription-review rows; no source rows imported,
+and no city-name normalization, ELS searches, compactness runs, or p-levels.
 The Cities PDF recovery probe now checks the 35 linked Cities/Aumann/Simon-McKay
 PDF URLs in an isolated ignored bundle and records 12 usable archived PDFs plus
 23 unrecovered links; the follow-up recovered-PDF text audit classifies those 12
@@ -505,12 +507,35 @@ python3 -m scripts.check_cities_source_row_lock_decision_records
 
 Current result:
 
-- Current records file: header only.
-- Populated record rows: 0.
+- Current records file: `data/study/mappings/cities_source_row_lock_decisions.csv`.
+- Populated record rows: 14.
 - Guarded evidence rows: 14.
-- Boundary: future populated lock rows must match the evidence packet, use
-  supported status/action values, cite evidence, avoid source-script text, and
-  carry ISO lock dates before formal report preflight passes.
+- Boundary: populated lock rows must match the evidence packet, use supported
+  status/action values, cite evidence, avoid source-script text, and carry ISO
+  lock dates before formal report preflight passes.
+
+### Cities Source Transcription Review Worksheet
+
+Completed no-input transcription-review worksheet:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_transcription_review_worksheet.toml --resume
+```
+
+Current result:
+
+- Rows needing transcription review: 14.
+- Locked source pages: 14.
+- Transcription decision rows recorded: 0.
+- Source-row imports: 0.
+- City-name normalization: 0.
+- ELS runs: 0.
+- Compactness runs: 0.
+- p-levels: 0.
+- Boundary: this organizes locked source pages for future readable
+  transcription and row/column alignment review. It does not copy source-script
+  text, import source rows, normalize city names, run ELS searches, compute
+  compactness, or verify p-levels.
 
 ### Locked Report Rerun And Volatility Cleanup
 
