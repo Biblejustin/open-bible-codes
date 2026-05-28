@@ -393,6 +393,18 @@ and embeds no OCR text or source-script text. Tracked files contain only
 paths/counts/status and still import no source rows. Tracked doc:
 `docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_HTML.md`.
 
+Cities source-page line crop review worksheet:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_review_worksheet.toml --resume
+```
+
+This writes a 203-row worksheet for later human review of the table-candidate
+line crops. It records crop paths, dimensions, and review-state fields only;
+it does not transcribe rows, embed OCR text, import source rows, normalize city
+names, or run result-bearing work. Tracked doc:
+`docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_WORKSHEET.md`.
+
 Cities extractable-text role review:
 
 ```bash

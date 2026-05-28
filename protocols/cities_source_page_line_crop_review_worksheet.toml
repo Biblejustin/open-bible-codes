@@ -1,0 +1,27 @@
+name = "cities_source_page_line_crop_review_worksheet"
+description = "Build a no-input Cities worksheet for reviewing source-page line crops without transcription or import."
+manifest_out = "reports/cities_pdf_recovery_probe/source_page_line_crop_review_worksheet_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_source_page_line_crop_review_worksheet"
+description = "Organize source-page line crops for later visual review without source-row import."
+argv = [
+  "-m", "scripts.build_cities_source_page_line_crop_review_worksheet",
+  "--packet", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet.csv",
+  "--html-review-aid", "reports/cities_pdf_recovery_probe/source_page_line_crops/line_crop_review.html",
+  "--out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_review_worksheet.csv",
+  "--markdown-out", "docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_WORKSHEET.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_review_worksheet.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_source_page_line_crop_review_worksheet.py",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet.csv",
+  "reports/cities_pdf_recovery_probe/source_page_line_crops/line_crop_review.html",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_review_worksheet.csv",
+  "docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_WORKSHEET.md",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_review_worksheet.manifest.json",
+]

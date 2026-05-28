@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 389
+Documents indexed: 390
 
 ## Controls
 
@@ -239,6 +239,7 @@ Documents indexed: 389
 | Cities Source Page Contact Sheet | `CITIES_SOURCE_PAGE_CONTACT_SHEET.md` |
 | Cities Source Page Line Crop Packet | `CITIES_SOURCE_PAGE_LINE_CROP_PACKET.md` |
 | Cities Source Page Line Crop Review HTML | `CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_HTML.md` |
+| Cities Source Page Line Crop Review Worksheet | `CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_WORKSHEET.md` |
 | Cities Source Page OCR Review HTML | `CITIES_SOURCE_PAGE_OCR_REVIEW_HTML.md` |
 | Cities Source Page OCR Review Packet | `CITIES_SOURCE_PAGE_OCR_REVIEW_PACKET.md` |
 | Cities Source Page Review Bundle | `CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md` |
