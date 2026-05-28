@@ -164,7 +164,7 @@ It requires:
   and links to the fuller report docs;
 - claim-catalog summary table stays aligned with `claims/claim_catalog.csv`;
 - Cities claim-catalog row stays `under_specified`, source-review only, and
-  aligned with the header-only Cities source-row lock decision records;
+  aligned with the current Cities source-row lock decision records;
 - Cities source-row lock evidence packet checks local recovered PDF and
   page-image artifact paths before any lock row can pass preflight;
 - populated Cities source-row lock decision records must name the exact decision
@@ -229,7 +229,7 @@ It requires:
 - Cities source-row lock decision records stay aligned to the 14-row evidence
   packet before any populated source-row lock can pass preflight;
 - Cities source-row lock handoff stays source-review only: 14 source-row lock
-  candidate pages, 0 populated lock rows, no source rows imported, and no
+  candidate pages, 1 populated lock row, no source rows imported, and no
   city-name normalization, ELS searches, compactness runs, or p-levels;
 - WRR manual decision register consolidates 37 manual-decision inventory rows,
   representing 58 action terms, 59 residual pair links, and 40

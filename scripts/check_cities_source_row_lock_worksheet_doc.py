@@ -29,13 +29,13 @@ REQUIRED_PHRASES = (
     "Table-bearing candidate pages: 4.",
     "Source-list candidate pages: 5.",
     "Exception-note candidate pages: 5.",
-    "Recorded decision rows: 0.",
-    "Locked decision rows: 0.",
-    "Unrecorded decision rows: 14.",
+    "Recorded decision rows: 1.",
+    "Locked decision rows: 1.",
+    "Unrecorded decision rows: 13.",
     "Source-row imports: 0.",
     "ELS runs: 0.",
     "Compactness runs: 0.",
-    "Recorded selected actions: none.",
+    "Recorded selected actions: source_row_lock_ready=1.",
     "source_row_lock_ready",
     "`cities_source_row_lock_001`",
     "`cities_source_row_lock_014`",
@@ -50,6 +50,9 @@ REQUIRED_PHRASES = (
 )
 
 EXPECTED_IDS = tuple(f"cities_source_row_lock_{index:03d}" for index in range(1, 15))
+EXPECTED_LOCKED_DECISIONS = {
+    "cities_source_row_lock_001": "source_row_lock_ready",
+}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -218,10 +221,19 @@ def validate_rows(
             failures.append(f"rows CSV {decision_id} allows source-row use")
         if row.get("current_decision") != "no_source_row_import":
             failures.append(f"rows CSV {decision_id} imports source row")
-        if row.get("record_decision_status") != "unrecorded":
-            failures.append(f"rows CSV {decision_id} unexpectedly has a lock record")
-        if row.get("record_selected_action"):
-            failures.append(f"rows CSV {decision_id} unexpectedly has selected action")
+        expected_action = EXPECTED_LOCKED_DECISIONS.get(decision_id)
+        if expected_action:
+            if row.get("record_decision_status") != "locked":
+                failures.append(f"rows CSV {decision_id} must be locked")
+            if row.get("record_selected_action") != expected_action:
+                failures.append(
+                    f"rows CSV {decision_id} action must be {expected_action}"
+                )
+        else:
+            if row.get("record_decision_status") != "unrecorded":
+                failures.append(f"rows CSV {decision_id} unexpectedly has a lock record")
+            if row.get("record_selected_action"):
+                failures.append(f"rows CSV {decision_id} unexpectedly has selected action")
         if decision_id and decision_id not in normalized_doc:
             failures.append(f"{doc} missing decision id: {decision_id}")
     return failures

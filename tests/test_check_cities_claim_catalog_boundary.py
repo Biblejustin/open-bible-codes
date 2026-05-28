@@ -38,17 +38,17 @@ def test_promoted_claim_status_fails(tmp_path: Path) -> None:
     assert any("status='controlled_review_candidate'" in failure for failure in failures)
 
 
-def test_populated_lock_record_fails(tmp_path: Path) -> None:
+def test_missing_expected_lock_record_fails(tmp_path: Path) -> None:
     catalog = tmp_path / "claims.csv"
     doc = tmp_path / "CLAIM_CATALOG.md"
     records = tmp_path / "records.csv"
     write_catalog(catalog, [valid_row()])
     write_doc(doc)
-    write_records(records, [{"decision_id": "cities_source_row_lock_001"}])
+    write_records(records, [])
 
     failures = check.validate_cities_claim_catalog_boundary(catalog, doc, records)
 
-    assert failures == [f"{records} has 1 populated rows, expected 0"]
+    assert failures == [f"{records} has 0 populated rows, expected 1"]
 
 
 def test_missing_doc_boundary_phrase_fails(tmp_path: Path) -> None:
@@ -56,12 +56,12 @@ def test_missing_doc_boundary_phrase_fails(tmp_path: Path) -> None:
     doc = tmp_path / "CLAIM_CATALOG.md"
     records = tmp_path / "records.csv"
     write_catalog(catalog, [valid_row()])
-    write_doc(doc, omit="0 populated lock rows")
-    write_records(records, [])
+    write_doc(doc, omit="1 populated lock row")
+    write_records(records, [valid_record()])
 
     failures = check.validate_cities_claim_catalog_boundary(catalog, doc, records)
 
-    assert failures == [f"{doc} missing phrase: 0 populated lock rows"]
+    assert failures == [f"{doc} missing phrase: 1 populated lock row"]
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
@@ -86,7 +86,7 @@ def valid_row() -> dict[str, str]:
         "layout_or_metric": "compactness/proximity source rows",
         "current_reproduction": (
             "Source-chain audit and source-row lock handoff exist; current "
-            "decision records have 0 populated lock rows and no source rows imported"
+            "decision records have 1 populated lock row and no source rows imported"
         ),
         "evidence": "docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
         "notes": (
@@ -124,7 +124,7 @@ def write_doc(path: Path, *, omit: str = "") -> None:
     phrases = [
         "Torah-code.org Cities/Aumann/Simon-McKay source chain",
         "Cities source-row lock handoff has 14 source-row lock candidate pages",
-        "0 populated lock rows",
+        "1 populated lock row",
         "no source rows imported",
         "no city-name normalization, ELS searches, compactness runs, or p-levels",
         "data/study/mappings/cities_source_row_lock_decisions.csv",
@@ -135,8 +135,16 @@ def write_doc(path: Path, *, omit: str = "") -> None:
     )
 
 
+def valid_record() -> dict[str, str]:
+    return {
+        "decision_id": "cities_source_row_lock_001",
+        "decision_status": "locked",
+        "selected_action": "source_row_lock_ready",
+    }
+
+
 def write_records(path: Path, rows: list[dict[str, str]]) -> None:
-    fieldnames = ["decision_id"]
+    fieldnames = ["decision_id", "decision_status", "selected_action"]
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()

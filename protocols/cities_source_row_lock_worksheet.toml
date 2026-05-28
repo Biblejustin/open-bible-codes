@@ -18,6 +18,7 @@ argv = [
 inputs = [
   "scripts/build_cities_source_row_lock_worksheet.py",
   "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue.csv",
+  "data/study/mappings/cities_source_row_lock_decisions.csv",
 ]
 outputs = [
   "reports/cities_pdf_recovery_probe/cities_source_row_lock_worksheet.csv",

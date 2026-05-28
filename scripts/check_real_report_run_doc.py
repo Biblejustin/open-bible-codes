@@ -51,7 +51,7 @@ REQUIRED_PHRASES = (
     "`reports/real_report_run/summary.md`",
     "`reports/INDEX.md`",
     "claim-catalog summary table stays aligned with `claims/claim_catalog.csv`",
-    "Cities claim-catalog row stays `under_specified`, source-review only, and aligned with the header-only Cities source-row lock decision records",
+    "Cities claim-catalog row stays `under_specified`, source-review only, and aligned with the current Cities source-row lock decision records",
     "final report highlights markdown matches the deterministic builder output",
     "centered occurrence index markdown matches the deterministic builder output",
     "strongest candidate deep-dive markdown matches the deterministic builder output",

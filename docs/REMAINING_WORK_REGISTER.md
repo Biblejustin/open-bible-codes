@@ -168,8 +168,7 @@ manifest input/output metadata are CSV/manifest-guarded as well.
 Cities source-row lock queueing, worksheet generation, evidence-packet
 assembly, and decision-record preflight guarding now keep Cities source-row
 candidate pages out of result-bearing work until citable lock records exist.
-Cities source-row lock handoff: 14 source-row lock candidate pages, 0 populated
-lock rows, no source rows imported, and no city-name normalization, ELS
+Cities source-row lock handoff: 14 source-row lock candidate pages, 1 populated lock row, no source rows imported, and no city-name normalization, ELS
 searches, compactness runs, or p-levels.
 The Cities PDF recovery probe now checks the 35 linked Cities/Aumann/Simon-McKay
 PDF URLs in an isolated ignored bundle and records 12 usable archived PDFs plus
@@ -463,9 +462,9 @@ python3 -m scripts.run_protocol protocols/cities_source_row_lock_worksheet.toml 
 Current result:
 
 - Worksheet rows: 14.
-- Recorded decision rows: 0.
-- Locked decision rows: 0.
-- Unrecorded decision rows: 14.
+- Recorded decision rows: 1.
+- Locked decision rows: 1.
+- Unrecorded decision rows: 13.
 - Source-row imports: 0.
 - Boundary: this assigns decision ids and evidence prompts only; it does not
   transcribe rows, import source rows, normalize city names, run ELS searches,
@@ -486,7 +485,7 @@ Current result:
 - Table-bearing candidate pages: 4.
 - Source-list candidate pages: 5.
 - Exception-note candidate pages: 5.
-- Recorded decision rows: 0.
+- Recorded decision rows: 1.
 - Source-row imports: 0.
 - Boundary: this joins decision ids to recovered PDF metadata, checksums, and
   page-image paths only. It does not copy OCR body text, transcribe source rows,
@@ -1405,10 +1404,13 @@ CLI reader-path argument coverage, public-reader package overview-input guard,
 public-reader package guard record in the package README/manifest, Cities
 source-row lock artifact-path guard, and Cities lock worksheet decision
 meaning text, plus exact decision-id evidence guard for populated Cities lock
-records:
+records, and the first approved Cities source-page lock:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1966
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1967
   tests, 2 skipped, and 29325 subtests.
+- `cities_source_row_lock_001` is now locked as `source_row_lock_ready` for
+  later source-row extraction review only; source-row imports, city-name
+  normalization, ELS runs, compactness runs, and p-levels remain zero.
 - `make public-reader-package` passed after adding the package-time
   general-reader overview guard and package README/manifest guard record.
 - `python3 -m scripts.run_protocol protocols/cities_source_row_lock_worksheet.toml --resume`

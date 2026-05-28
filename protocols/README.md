@@ -306,8 +306,7 @@ This joins the 14 source-row lock worksheet rows to recovered PDF metadata,
 checksums, and page-image paths. It does not copy OCR text, transcribe rows,
 import source text, normalize city names, or run result-bearing work. Tracked
 packet: `docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md`.
-Cities source-row lock handoff: 14 source-row lock candidate pages, 0 populated
-lock rows, no source rows imported, and no city-name normalization, ELS
+Cities source-row lock handoff: 14 source-row lock candidate pages, 1 populated lock row, no source rows imported, and no city-name normalization, ELS
 searches, compactness runs, or p-levels. Current decision-record path:
 `data/study/mappings/cities_source_row_lock_decisions.csv`.
 

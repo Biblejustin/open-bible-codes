@@ -19,6 +19,9 @@ DEFAULT_SUMMARY = builder.DEFAULT_SUMMARY
 DEFAULT_MANIFEST = builder.DEFAULT_MANIFEST
 DEFAULT_WORKSHEET = builder.DEFAULT_WORKSHEET
 DEFAULT_SOURCE_QUEUE = builder.DEFAULT_SOURCE_QUEUE
+EXPECTED_LOCKED_DECISIONS = {
+    "cities_source_row_lock_001": "source_row_lock_ready",
+}
 
 REQUIRED_PHRASES = (
     "# Cities Source Row Lock Evidence Packet",
@@ -32,7 +35,7 @@ REQUIRED_PHRASES = (
     "Table-bearing candidate pages: 4.",
     "Source-list candidate pages: 5.",
     "Exception-note candidate pages: 5.",
-    "Recorded decision rows: 0.",
+    "Recorded decision rows: 1.",
     "Source-row imports: 0.",
     "ELS runs: 0.",
     "Compactness runs: 0.",
@@ -208,8 +211,15 @@ def validate_rows(
             failures.append(f"rows CSV {expected} allows source-row use")
         if row.get("current_decision") != "no_source_row_import":
             failures.append(f"rows CSV {expected} imports source row")
-        if row.get("record_decision_status") != "unrecorded":
-            failures.append(f"rows CSV {expected} unexpectedly has decision record")
+        expected_action = EXPECTED_LOCKED_DECISIONS.get(expected)
+        if expected_action:
+            if row.get("record_decision_status") != "locked":
+                failures.append(f"rows CSV {expected} must be locked")
+            if row.get("record_selected_action") != expected_action:
+                failures.append(f"rows CSV {expected} action must be {expected_action}")
+        else:
+            if row.get("record_decision_status") != "unrecorded":
+                failures.append(f"rows CSV {expected} unexpectedly has decision record")
         if expected not in normalized_doc:
             failures.append(f"{doc} missing decision id: {expected}")
     return failures

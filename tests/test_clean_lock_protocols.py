@@ -159,6 +159,17 @@ def test_wrr_source_row_review_bundle_step_is_no_input_packet() -> None:
     assert "docs/WRR_SOURCE_ROW_REVIEW_BUNDLE.md" in step["outputs"]
 
 
+def test_cities_source_row_lock_worksheet_tracks_decision_records_input() -> None:
+    protocol = load_protocol("protocols/cities_source_row_lock_worksheet.toml")
+    step = next(
+        step
+        for step in protocol["steps"]
+        if step["id"] == "build_cities_source_row_lock_worksheet"
+    )
+
+    assert "data/study/mappings/cities_source_row_lock_decisions.csv" in step["inputs"]
+
+
 def test_greek_new_terms_report_step_uses_specific_title() -> None:
     protocol = load_protocol("protocols/greek_surface_new_terms.toml")
     step = next(step for step in protocol["steps"] if step["id"] == "prospective_report")

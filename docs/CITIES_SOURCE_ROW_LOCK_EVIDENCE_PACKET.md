@@ -19,7 +19,7 @@ python3 -m scripts.build_cities_source_row_lock_evidence_packet --worksheet repo
 - Table-bearing candidate pages: 4.
 - Source-list candidate pages: 5.
 - Exception-note candidate pages: 5.
-- Recorded decision rows: 0.
+- Recorded decision rows: 1.
 - Source-row imports: 0.
 - ELS runs: 0.
 - Compactness runs: 0.
@@ -29,7 +29,7 @@ python3 -m scripts.build_cities_source_row_lock_evidence_packet --worksheet repo
 
 | Rank | Decision id | Label | Page | Class | Source | SHA256 | Page image | Record status | Evidence required |
 | ---: | --- | --- | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | `cities_source_row_lock_001` | cities_pdf_dp365a_p5_11 | 3 | `table_candidate_page` | archive | `e89e869d452f` | `reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_p5_11_p003.png` | `unrecorded` | verify archived PDF checksum, rendered page image, visual page role, and admissibility for cities_source_row_lock_001; do not transcribe body text |
+| 1 | `cities_source_row_lock_001` | cities_pdf_dp365a_p5_11 | 3 | `table_candidate_page` | archive | `e89e869d452f` | `reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_p5_11_p003.png` | `locked` | verify archived PDF checksum, rendered page image, visual page role, and admissibility for cities_source_row_lock_001; do not transcribe body text |
 | 2 | `cities_source_row_lock_002` | cities_pdf_dp365a_p5_11 | 4 | `table_candidate_page` | archive | `e89e869d452f` | `reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_p5_11_p004.png` | `unrecorded` | verify archived PDF checksum, rendered page image, visual page role, and admissibility for cities_source_row_lock_002; do not transcribe body text |
 | 3 | `cities_source_row_lock_003` | cities_pdf_dp365a_p5_11 | 5 | `table_candidate_page` | archive | `e89e869d452f` | `reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_p5_11_p005.png` | `unrecorded` | verify archived PDF checksum, rendered page image, visual page role, and admissibility for cities_source_row_lock_003; do not transcribe body text |
 | 4 | `cities_source_row_lock_004` | cities_pdf_dp365a_p5_11 | 6 | `table_candidate_page` | archive | `e89e869d452f` | `reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_p5_11_p006.png` | `unrecorded` | verify archived PDF checksum, rendered page image, visual page role, and admissibility for cities_source_row_lock_004; do not transcribe body text |
