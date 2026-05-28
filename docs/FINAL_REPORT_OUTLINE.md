@@ -192,7 +192,7 @@ Use cautious language:
   decision-record CSV locks all 37 rows as 26 `no_source_change` decisions and
   11 `method_lock` decisions;
 - Cities source-row lock handoff remains source-review only: 14 source-row lock
-  candidate pages, 2 populated lock rows, no source rows imported, and no
+  candidate pages, 3 populated lock rows, no source rows imported, and no
   city-name normalization, ELS searches, compactness runs, or p-levels;
 - current accepted repo-defined 999,999 date-label permutation result keeps the
   selected full source universe, uses the cap-1000 corrected-distance field,

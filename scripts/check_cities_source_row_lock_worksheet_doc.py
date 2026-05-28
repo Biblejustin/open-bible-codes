@@ -29,13 +29,13 @@ REQUIRED_PHRASES = (
     "Table-bearing candidate pages: 4.",
     "Source-list candidate pages: 5.",
     "Exception-note candidate pages: 5.",
-    "Recorded decision rows: 2.",
-    "Locked decision rows: 2.",
-    "Unrecorded decision rows: 12.",
+    "Recorded decision rows: 3.",
+    "Locked decision rows: 3.",
+    "Unrecorded decision rows: 11.",
     "Source-row imports: 0.",
     "ELS runs: 0.",
     "Compactness runs: 0.",
-    "Recorded selected actions: source_row_lock_ready=2.",
+    "Recorded selected actions: source_row_lock_ready=3.",
     "source_row_lock_ready",
     "`cities_source_row_lock_001`",
     "`cities_source_row_lock_014`",
@@ -53,6 +53,7 @@ EXPECTED_IDS = tuple(f"cities_source_row_lock_{index:03d}" for index in range(1,
 EXPECTED_LOCKED_DECISIONS = {
     "cities_source_row_lock_001": "source_row_lock_ready",
     "cities_source_row_lock_002": "source_row_lock_ready",
+    "cities_source_row_lock_003": "source_row_lock_ready",
 }
 
 

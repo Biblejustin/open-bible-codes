@@ -22,6 +22,7 @@ DEFAULT_SOURCE_QUEUE = builder.DEFAULT_SOURCE_QUEUE
 EXPECTED_LOCKED_DECISIONS = {
     "cities_source_row_lock_001": "source_row_lock_ready",
     "cities_source_row_lock_002": "source_row_lock_ready",
+    "cities_source_row_lock_003": "source_row_lock_ready",
 }
 
 REQUIRED_PHRASES = (
@@ -36,7 +37,7 @@ REQUIRED_PHRASES = (
     "Table-bearing candidate pages: 4.",
     "Source-list candidate pages: 5.",
     "Exception-note candidate pages: 5.",
-    "Recorded decision rows: 2.",
+    "Recorded decision rows: 3.",
     "Source-row imports: 0.",
     "ELS runs: 0.",
     "Compactness runs: 0.",

@@ -13,7 +13,7 @@ DEFAULT_CATALOG = Path("claims/claim_catalog.csv")
 DEFAULT_DOC = Path("docs/CLAIM_CATALOG.md")
 DEFAULT_RECORDS = Path("data/study/mappings/cities_source_row_lock_decisions.csv")
 CLAIM_ID = "cities_aumann_simon_mckay_source_chain"
-EXPECTED_POPULATED_LOCK_ROWS = 2
+EXPECTED_POPULATED_LOCK_ROWS = 3
 EXPECTED_LOCKED_DECISIONS = (
     {
         "decision_id": "cities_source_row_lock_001",
@@ -22,6 +22,11 @@ EXPECTED_LOCKED_DECISIONS = (
     },
     {
         "decision_id": "cities_source_row_lock_002",
+        "decision_status": "locked",
+        "selected_action": "source_row_lock_ready",
+    },
+    {
+        "decision_id": "cities_source_row_lock_003",
         "decision_status": "locked",
         "selected_action": "source_row_lock_ready",
     },
@@ -38,7 +43,7 @@ REQUIRED_ROW_VALUES = {
 REQUIRED_ROW_PHRASES = {
     "current_reproduction": (
         "source-row lock handoff",
-        "2 populated lock rows",
+        "3 populated lock rows",
         "no source rows imported",
     ),
     "notes": (
@@ -54,7 +59,7 @@ REQUIRED_ROW_PHRASES = {
 REQUIRED_DOC_PHRASES = (
     "Torah-code.org Cities/Aumann/Simon-McKay source chain",
     "Cities source-row lock handoff has 14 source-row lock candidate pages",
-    "2 populated lock rows",
+    "3 populated lock rows",
     "no source rows imported",
     "no city-name normalization, ELS searches, compactness runs, or p-levels",
     "data/study/mappings/cities_source_row_lock_decisions.csv",

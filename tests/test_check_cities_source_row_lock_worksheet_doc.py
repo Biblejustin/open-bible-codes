@@ -35,7 +35,7 @@ class CitiesSourceRowLockWorksheetDocTests(unittest.TestCase):
             root = Path(tmp)
             doc, rows, manifest = copy_current_outputs(root)
             fieldnames, row_data = read_csv(rows)
-            row_data[2]["record_selected_action"] = "source_row_lock_ready"
+            row_data[3]["record_selected_action"] = "source_row_lock_ready"
             write_csv(rows, fieldnames, row_data)
 
             failures = check.validate_cities_source_row_lock_worksheet_doc(
