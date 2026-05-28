@@ -358,6 +358,17 @@ paths, and status only; they contain no OCR body text, no source-script body
 text, no source-row import, no city-name normalization, and no result-bearing
 work. Tracked doc: `docs/CITIES_SOURCE_PAGE_OCR_REVIEW_PACKET.md`.
 
+Cities source-page OCR HTML review aid:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_ocr_review_html.toml --resume
+```
+
+This writes an ignored local HTML page that places each locked source-page
+image beside its OCR sidecar text. The HTML may contain OCR body text for local
+review, but tracked files contain only paths/counts/status and still import no
+source rows. Tracked doc: `docs/CITIES_SOURCE_PAGE_OCR_REVIEW_HTML.md`.
+
 Cities extractable-text role review:
 
 ```bash

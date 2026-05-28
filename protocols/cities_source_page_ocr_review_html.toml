@@ -1,0 +1,27 @@
+name = "cities_source_page_ocr_review_html"
+description = "Build ignored local HTML that pairs locked Cities source-page images with OCR sidecar text."
+manifest_out = "reports/cities_pdf_recovery_probe/source_page_ocr_review_html_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_source_page_ocr_review_html"
+description = "Render local image/OCR side-by-side HTML for manual review without tracking OCR text or importing source rows."
+argv = [
+  "-m", "scripts.build_cities_source_page_ocr_review_html",
+  "--packet", "reports/cities_pdf_recovery_probe/cities_source_page_ocr_review_packet.csv",
+  "--html-out", "reports/cities_pdf_recovery_probe/source_page_ocr_review/source_page_ocr_review.html",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_source_page_ocr_review_html_summary.csv",
+  "--markdown-out", "docs/CITIES_SOURCE_PAGE_OCR_REVIEW_HTML.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_source_page_ocr_review_html.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_source_page_ocr_review_html.py",
+  "reports/cities_pdf_recovery_probe/cities_source_page_ocr_review_packet.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/source_page_ocr_review/source_page_ocr_review.html",
+  "reports/cities_pdf_recovery_probe/cities_source_page_ocr_review_html_summary.csv",
+  "docs/CITIES_SOURCE_PAGE_OCR_REVIEW_HTML.md",
+  "reports/cities_pdf_recovery_probe/cities_source_page_ocr_review_html.manifest.json",
+]

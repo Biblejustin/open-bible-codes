@@ -612,6 +612,35 @@ Current result:
   source text, normalize city names, run ELS searches, compute compactness, or
   verify p-levels.
 
+### Cities Source Page OCR Review HTML
+
+Completed local image/OCR HTML review aid:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_ocr_review_html.toml --resume
+```
+
+Current result:
+
+- HTML rows: 14.
+- HTML embedded OCR text rows: 14.
+- Page images found: 14.
+- OCR text sidecars: 14.
+- Pages with OCR text: 14.
+- OCR Hebrew letters: 14,408.
+- OCR words: 3,939.
+- OCR lines: 596.
+- Source-row imports: 0.
+- City-name normalization: 0.
+- ELS runs: 0.
+- Compactness runs: 0.
+- p-levels: 0.
+- Boundary: the ignored local HTML file may display OCR text beside page
+  images for manual review. Tracked files contain no OCR body text or
+  source-script body text and still do not transcribe verified source rows,
+  import source text, normalize city names, run ELS searches, compute
+  compactness, or verify p-levels.
+
 ### Locked Report Rerun And Volatility Cleanup
 
 Completed locked reruns:
