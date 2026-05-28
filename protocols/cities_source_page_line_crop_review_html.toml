@@ -1,0 +1,27 @@
+name = "cities_source_page_line_crop_review_html"
+description = "Build ignored local HTML for Cities source-page line-crop review without importing source rows."
+manifest_out = "reports/cities_pdf_recovery_probe/source_page_line_crop_review_html_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_source_page_line_crop_review_html"
+description = "Build a local HTML gallery for source-page line crops as a review aid."
+argv = [
+  "-m", "scripts.build_cities_source_page_line_crop_review_html",
+  "--packet", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet.csv",
+  "--html-out", "reports/cities_pdf_recovery_probe/source_page_line_crops/line_crop_review.html",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_review_html_summary.csv",
+  "--markdown-out", "docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_HTML.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_review_html.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_source_page_line_crop_review_html.py",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/source_page_line_crops/line_crop_review.html",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_review_html_summary.csv",
+  "docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_HTML.md",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_review_html.manifest.json",
+]

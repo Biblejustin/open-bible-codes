@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 164
+Protocols indexed: 165
 
 ## Analysis
 
@@ -14,6 +14,7 @@ Protocols indexed: 164
 | cities_pdf_recovery_probe | Probe live and archived Torah-code.org Cities PDF links into an isolated recovery bundle. | 1 |  | reports/cities_pdf_recovery_probe | `cities_pdf_recovery_probe.toml` |
 | cities_source_page_contact_sheet | Build a local visual contact sheet for locked Cities source-page review. | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_contact_sheet.toml` |
 | cities_source_page_line_crop_packet | Build local line crops for Cities table candidate page review without importing source ... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_packet.toml` |
+| cities_source_page_line_crop_review_html | Build ignored local HTML for Cities source-page line-crop review without importing sour... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_review_html.toml` |
 | cities_source_page_ocr_review_html | Build ignored local HTML that pairs locked Cities source-page images with OCR sidecar t... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_ocr_review_html.toml` |
 | cities_source_page_ocr_review_packet | Build local Hebrew OCR review sidecars for locked Cities source pages without importing... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_ocr_review_packet.toml` |
 | cities_source_page_review_bundle | Build a no-input Cities page-image review bundle for locked source pages. | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_review_bundle.toml` |

@@ -103,6 +103,9 @@ CITIES_SOURCE_PAGE_OCR_REVIEW_HTML_SUMMARY = Path(
 CITIES_SOURCE_PAGE_LINE_CROP_PACKET_SUMMARY = Path(
     "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet_summary.csv"
 )
+CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_HTML_SUMMARY = Path(
+    "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_review_html_summary.csv"
+)
 HEBREW_THEOLOGY_ALL_CODES_TRIAGE_MANIFEST = Path(
     "reports/hebrew_theology_all_codes/triage.manifest.json"
 )
@@ -2135,6 +2138,9 @@ def cities_source_row_lock_section() -> list[str]:
     ocr_summary = metric_dict(read_rows(CITIES_SOURCE_PAGE_OCR_REVIEW_PACKET_SUMMARY))
     ocr_html_summary = metric_dict(read_rows(CITIES_SOURCE_PAGE_OCR_REVIEW_HTML_SUMMARY))
     line_crop_summary = metric_dict(read_rows(CITIES_SOURCE_PAGE_LINE_CROP_PACKET_SUMMARY))
+    line_crop_html_summary = metric_dict(
+        read_rows(CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_HTML_SUMMARY)
+    )
     decision_rows = read_rows(CITIES_SOURCE_ROW_LOCK_DECISIONS)
     status_counts = Counter(row.get("decision_status", "") for row in decision_rows)
     action_counts = Counter(row.get("selected_action", "") for row in decision_rows)
@@ -2164,6 +2170,8 @@ def cities_source_row_lock_section() -> list[str]:
         f"| Local line crop rows | {line_crop_summary.get('line_crop_rows', '0')} |",
         f"| Local line crops available | {line_crop_summary.get('line_crops_available', '0')} |",
         f"| Local line crop TSV sidecars | {line_crop_summary.get('tsv_sidecars', '0')} |",
+        f"| Local line crop HTML rows | {line_crop_html_summary.get('html_rows', '0')} |",
+        f"| Local line crop HTML image rows | {line_crop_html_summary.get('html_line_crop_image_rows', '0')} |",
         f"| Source-row imports | {evidence_summary.get('source_row_imports', '0')} |",
         f"| ELS runs | {evidence_summary.get('els_runs', '0')} |",
         f"| Compactness runs | {evidence_summary.get('compactness_runs', '0')} |",

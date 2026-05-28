@@ -490,6 +490,14 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
+            "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_review_html_summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
+            "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_review_html.manifest.json",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_locked_method_report.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
@@ -658,6 +666,7 @@ class RealReportRunTests(unittest.TestCase):
             "docs/CITIES_SOURCE_PAGE_OCR_REVIEW_PACKET.md",
             "docs/CITIES_SOURCE_PAGE_OCR_REVIEW_HTML.md",
             "docs/CITIES_SOURCE_PAGE_LINE_CROP_PACKET.md",
+            "docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_HTML.md",
             "docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md",
             "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
             "docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md",
@@ -1279,6 +1288,10 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_HTML.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -1348,6 +1361,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "protocols/cities_source_page_line_crop_packet.toml",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "protocols/cities_source_page_line_crop_review_html.toml",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -1504,6 +1521,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_cities_source_page_line_crop_packet_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/build_cities_source_page_line_crop_review_html.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_cities_source_page_line_crop_review_html_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -3862,6 +3887,32 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "Cities source-page line crop packet doc failures: "
                 "docs/CITIES_SOURCE_PAGE_LINE_CROP_PACKET.md missing boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_cities_source_page_line_crop_review_html_doc_failure(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_cities_source_page_line_crop_review_html_doc,
+                "validate_cities_source_page_line_crop_review_html_doc",
+                return_value=[
+                    "docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_HTML.md missing boundary"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["cities_source_page_line_crop_review_html_doc_failures"],
+                ["docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_HTML.md missing boundary"],
+            )
+            self.assertIn(
+                "Cities source-page line-crop HTML doc failures: "
+                "docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_HTML.md missing boundary",
                 payload["failures"],
             )
 
