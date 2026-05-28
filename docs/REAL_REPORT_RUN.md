@@ -167,6 +167,8 @@ It requires:
   aligned with the header-only Cities source-row lock decision records;
 - Cities source-row lock evidence packet checks local recovered PDF and
   page-image artifact paths before any lock row can pass preflight;
+- populated Cities source-row lock decision records must name the exact decision
+  id in their evidence citation or summary;
 - final report highlights markdown matches the deterministic builder output;
 - centered occurrence index markdown matches the deterministic builder output;
 - strongest candidate deep-dive markdown matches the deterministic builder

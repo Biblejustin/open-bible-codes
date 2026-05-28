@@ -186,7 +186,9 @@ def validate_row(
     if action not in ALLOWED_ACTIONS:
         failures.append(f"{records}:{row_number} unsupported selected_action: {action}")
 
-    failures.extend(validate_status_action(records, row_number, row, status, action))
+    failures.extend(
+        validate_status_action(records, row_number, row, status, action, decision_id)
+    )
     return failures
 
 
@@ -229,6 +231,7 @@ def validate_status_action(
     row: dict[str, str | None],
     status: str,
     action: str,
+    decision_id: str,
 ) -> list[str]:
     failures: list[str] = []
     if status == "unrecorded":
@@ -261,6 +264,10 @@ def validate_status_action(
     if citation and not cites_evidence_packet(citation):
         failures.append(
             f"{records}:{row_number} evidence_citation must cite evidence packet or page image"
+        )
+    if decision_id and decision_id not in " ".join((citation, evidence_summary)):
+        failures.append(
+            f"{records}:{row_number} evidence_citation or evidence_summary must name {decision_id}"
         )
 
     locked_at = clean(row.get("locked_at"))

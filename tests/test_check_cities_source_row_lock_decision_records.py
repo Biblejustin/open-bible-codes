@@ -148,6 +148,37 @@ class CitiesSourceRowLockDecisionRecordsTests(unittest.TestCase):
                 failures,
             )
 
+    def test_populated_record_must_name_decision_id_in_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            records = root / "records.csv"
+            evidence = root / "evidence.csv"
+            write_records(
+                records,
+                [
+                    record_row(
+                        "1",
+                        decision_status="locked",
+                        selected_action="source_row_lock_ready",
+                        evidence_citation="docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
+                        evidence_summary=(
+                            "Reviewed packet metadata and page-image evidence; "
+                            "source-row lock is ready without transcribing row text."
+                        ),
+                        locked_by="reviewer",
+                        locked_at="2026-05-26",
+                    )
+                ],
+            )
+            write_evidence(evidence, [evidence_row("1")])
+
+            failures = check.validate_decision_records(records, evidence)
+
+            self.assertIn(
+                f"{records}:2 evidence_citation or evidence_summary must name cities_source_row_lock_001",
+                failures,
+            )
+
 
 def record_row(
     rank: str,
