@@ -39,6 +39,30 @@ Use this order if KJVA bridge work resumes.
    must not be matched or exceeded by the non-Bible insertion controls before it
    can leave review status.
 
+## Source Candidate Scan
+
+Current local source inventory has only `configs/example_ebible_engkjv_apocrypha.toml`
+for KJVA/apocrypha bridge work. That source comes from eBible's public-domain
+King James Version + Apocrypha USFM family, so it is usable for reruns but is
+not an independent replication source.
+
+Online source candidates found for possible future audit:
+
+- [eBible King James Version + Apocrypha](https://ebible.org/details.php?id=eng-kjv):
+  public-domain KJV + Apocrypha source with USFM and other downloads. This is
+  the current source family, not an independent local witness.
+- [Wikisource 1911 Ballantyne printing](https://en.wikisource.org/wiki/The_Holy_Bible,_containing_the_Old_%26_New_Testament_%26_the_Apocrypha):
+  public-domain-in-US page for a KJV Bible with Apocrypha, stating the text
+  follows the standard 1769 version but without the repo's verse-numbered
+  import/collation.
+- [`seven1m/open-bibles` KJV OSIS](https://github.com/seven1m/open-bibles):
+  public-domain KJV OSIS listing, but no local verification here that the OSIS
+  file includes apocrypha/deuterocanon books.
+
+None of these candidates is locked for result-bearing replication until it has
+a source audit, checksum, verse mapping, book-order decision, and study-lock
+sidecar.
+
 ## Not Allowed
 
 - No reuse of the completed 7-term prospective lane as a fresh discovery.
