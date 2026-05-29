@@ -1,0 +1,20 @@
+name = "kjva_open_bibles_candidate_source_audit"
+description = "Audit seven1m/open-bibles metadata as a KJV-only, not KJVA, source candidate."
+manifest_out = "reports/kjva_open_bibles_candidate_source/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "kjva_open_bibles_candidate_source_audit"
+description = "Record GitHub metadata without importing or committing Bible text."
+argv = ["-m", "scripts.analyze_kjva_open_bibles_candidate_source"]
+inputs = [
+  "scripts/analyze_kjva_open_bibles_candidate_source.py",
+]
+outputs = [
+  "reports/kjva_open_bibles_candidate_source/source_status.csv",
+  "reports/kjva_open_bibles_candidate_source/summary.csv",
+  "reports/kjva_open_bibles_candidate_source/anchors.csv",
+  "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
+  "reports/kjva_open_bibles_candidate_source/manifest.json",
+]

@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 404
+Documents indexed: 405
 
 ## Controls
 
@@ -360,6 +360,7 @@ Documents indexed: 404
 | Israeli Prime Ministers Source Audit | `ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md` |
 | KJVA Apocrypha Bridge Next Replication Design | `KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md` |
 | KJVA Prospective Apocrypha Bridge Candidates | `KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md` |
+| KJVA Open-Bibles Candidate Source Audit | `KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md` |
 | KJVA Wikisource Candidate Source Audit | `KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md` |
 | KJVA Apocrypha Bridge Candidates | `KJV_APOCRYPHA_BRIDGE_CANDIDATES.md` |
 | KJVA Apocrypha Bridge Context | `KJV_APOCRYPHA_BRIDGE_CONTEXT.md` |

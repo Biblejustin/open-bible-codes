@@ -57,8 +57,9 @@ Online source candidates found for possible future audit:
   import/collation. Current tracked status audit:
   `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`.
 - [`seven1m/open-bibles` KJV OSIS](https://github.com/seven1m/open-bibles):
-  public-domain KJV OSIS listing, but no local verification here that the OSIS
-  file includes apocrypha/deuterocanon books.
+  public-domain KJV OSIS listing. Current tracked status audit found KJV OSIS
+  metadata but no apocrypha/deuterocanon path markers, so this remains KJV-only
+  for KJVA bridge purposes: `docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md`.
 
 None of these candidates is locked for result-bearing replication until it has
 a source audit, checksum, verse mapping, book-order decision, and study-lock
@@ -81,5 +82,6 @@ sidecar.
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md`
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md`
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md`
+- `docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md`
 - `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - `configs/prospective_study_lanes.json`

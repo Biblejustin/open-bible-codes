@@ -2354,3 +2354,17 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   sidecar before any result-bearing KJVA replication.
 - `make fast-validate` passed after wiring: 2162 passed, 2 skipped, and 29325
   subtests passed.
+
+## KJVA Open-Bibles Candidate Source Audit
+
+- Added `docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md` as a metadata-only
+  source-status audit for `seven1m/open-bibles`. It records GitHub repository
+  metadata, tree path counts, and README markers only.
+- Current metadata found one KJV OSIS path marker (`eng-kjv.osis.xml`) and zero
+  apocrypha/deuterocanon path markers, so this source is KJV-only for current
+  KJVA/apocrypha bridge purposes.
+- Added `protocols/kjva_open_bibles_candidate_source_audit.toml` and wired the
+  audit into `protocols/real_report_run.toml` plus
+  `scripts/preflight_real_report_run.py`.
+- `make fast-validate` passed after wiring: 2170 passed, 2 skipped, and 29325
+  subtests passed.

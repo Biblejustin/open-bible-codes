@@ -151,6 +151,8 @@ This assembly run includes:
   `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md`
 - KJVA Wikisource candidate source-status audit:
   `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
+- KJVA Open-Bibles candidate source-status audit:
+  `docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md`
 - broader Hebrew screening representative-control review:
   `docs/HEBREW_SCREENING_CONTROLLED_REVIEW.md`
 - relaxed all-codes follow-up:
@@ -221,6 +223,8 @@ It requires:
   result-bearing output;
 - KJVA Wikisource candidate source audit stays metadata-only, with no Bible
   text retained, no corpus import ready, and no result-bearing output;
+- KJVA Open-Bibles candidate source audit stays metadata-only and marks the
+  repository as KJV-only for current KJVA/apocrypha bridge purposes;
 - consolidated findings keep the current prospective-lane boundary tied to
   live profile state;
 - prospective lane-status doc matches its generated output from the live lane
