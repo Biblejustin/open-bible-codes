@@ -781,6 +781,36 @@ Current result:
   Hebrew, transcribe rows, import source rows, normalize city names, run ELS
   searches, compute compactness, or verify p-levels.
 
+### Cities Source Page Line Crop Priority Contact Sheets
+
+Completed local priority contact sheets:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_priority_contact_sheet.toml --resume
+```
+
+Current result:
+
+- Priority contact sheets: 4.
+- Priority contact sheets available: 4.
+- Line crop rows: 203.
+- Line crop images found: 203.
+- OCR words represented by line boxes: 1,511.
+- OCR Hebrew letters represented by line boxes: 4,934.
+- Dense-text priority rows: 120.
+- Medium-text priority rows: 71.
+- Short-text priority rows: 12.
+- No-text priority rows: 0.
+- Source-row imports: 0.
+- City-name normalization: 0.
+- ELS runs: 0.
+- Compactness runs: 0.
+- p-levels: 0.
+- Boundary: the ignored local PNG contact sheets group crop images by triage
+  priority only. They do not read Hebrew, transcribe rows, import source rows,
+  normalize city names, run ELS searches, compute compactness, or verify
+  p-levels.
+
 ### Cities Source Page Line Crop Review Worksheet
 
 Completed no-input line-crop review worksheet:
