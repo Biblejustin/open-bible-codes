@@ -33,6 +33,7 @@ from scripts import (
     check_cities_source_page_contact_sheet_doc,
     check_cities_source_page_line_crop_band_contact_sheet_doc,
     check_cities_source_page_line_crop_band_map_doc,
+    check_cities_source_page_line_crop_band_review_html_doc,
     check_cities_source_page_line_crop_band_review_worksheet_doc,
     check_cities_source_page_line_crop_contact_sheet_doc,
     check_cities_source_page_line_crop_packet_doc,
@@ -223,6 +224,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/cities_source_page_line_crop_packet.toml",
     "protocols/cities_source_page_line_crop_band_map.toml",
     "protocols/cities_source_page_line_crop_band_contact_sheet.toml",
+    "protocols/cities_source_page_line_crop_band_review_html.toml",
     "protocols/cities_source_page_line_crop_band_review_worksheet.toml",
     "protocols/cities_source_page_line_crop_contact_sheet.toml",
     "protocols/cities_source_page_line_crop_review_html.toml",
@@ -757,6 +759,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_cities_source_page_line_crop_band_map_doc.py",
     "scripts/build_cities_source_page_line_crop_band_contact_sheet.py",
     "scripts/check_cities_source_page_line_crop_band_contact_sheet_doc.py",
+    "scripts/build_cities_source_page_line_crop_band_review_html.py",
+    "scripts/check_cities_source_page_line_crop_band_review_html_doc.py",
     "scripts/build_cities_source_page_line_crop_band_review_worksheet.py",
     "scripts/check_cities_source_page_line_crop_band_review_worksheet_doc.py",
     "scripts/build_cities_source_page_line_crop_contact_sheet.py",
@@ -813,6 +817,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/cities_source_page_line_crop_packet.toml",
     "protocols/cities_source_page_line_crop_band_map.toml",
     "protocols/cities_source_page_line_crop_band_contact_sheet.toml",
+    "protocols/cities_source_page_line_crop_band_review_html.toml",
     "protocols/cities_source_page_line_crop_band_review_worksheet.toml",
     "protocols/cities_source_page_line_crop_contact_sheet.toml",
     "protocols/cities_source_page_line_crop_review_html.toml",
@@ -1799,6 +1804,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(cities_source_page_line_crop_band_contact_sheet_doc_failures)
         )
 
+    cities_source_page_line_crop_band_review_html_doc_failures = (
+        check_cities_source_page_line_crop_band_review_html_doc.validate_cities_source_page_line_crop_band_review_html_doc(
+            check_cities_source_page_line_crop_band_review_html_doc.DEFAULT_DOC
+        )
+    )
+    if cities_source_page_line_crop_band_review_html_doc_failures:
+        failures.append(
+            "Cities source-page line-crop band HTML doc failures: "
+            + "; ".join(cities_source_page_line_crop_band_review_html_doc_failures)
+        )
+
     cities_source_page_line_crop_band_review_worksheet_doc_failures = (
         check_cities_source_page_line_crop_band_review_worksheet_doc.validate_cities_source_page_line_crop_band_review_worksheet_doc(
             check_cities_source_page_line_crop_band_review_worksheet_doc.DEFAULT_DOC
@@ -2138,6 +2154,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "cities_source_page_line_crop_band_contact_sheet_doc_failures": (
             cities_source_page_line_crop_band_contact_sheet_doc_failures
+        ),
+        "cities_source_page_line_crop_band_review_html_doc_failures": (
+            cities_source_page_line_crop_band_review_html_doc_failures
         ),
         "cities_source_page_line_crop_band_review_worksheet_doc_failures": (
             cities_source_page_line_crop_band_review_worksheet_doc_failures

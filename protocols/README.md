@@ -449,6 +449,17 @@ bands. The tracked files contain only paths/counts/status and still import no
 source rows or source-script text. Tracked doc:
 `docs/CITIES_SOURCE_PAGE_LINE_CROP_BAND_CONTACT_SHEET.md`.
 
+Cities source-page line crop band HTML review aid:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_band_review_html.toml --resume
+```
+
+This writes an ignored local HTML gallery of the 16 band contact-sheet images.
+The HTML displays images only and embeds no OCR text or source-script text.
+Tracked files contain only paths/counts/status and still import no source rows.
+Tracked doc: `docs/CITIES_SOURCE_PAGE_LINE_CROP_BAND_REVIEW_HTML.md`.
+
 Cities source-page line crop triage HTML:
 
 ```bash

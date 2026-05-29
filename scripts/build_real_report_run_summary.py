@@ -112,6 +112,9 @@ CITIES_SOURCE_PAGE_LINE_CROP_BAND_REVIEW_WORKSHEET_SUMMARY = Path(
 CITIES_SOURCE_PAGE_LINE_CROP_BAND_CONTACT_SHEET_SUMMARY = Path(
     "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_contact_sheet_summary.csv"
 )
+CITIES_SOURCE_PAGE_LINE_CROP_BAND_REVIEW_HTML_SUMMARY = Path(
+    "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_review_html_summary.csv"
+)
 CITIES_SOURCE_PAGE_LINE_CROP_CONTACT_SHEET_SUMMARY = Path(
     "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_contact_sheet_summary.csv"
 )
@@ -2172,6 +2175,9 @@ def cities_source_row_lock_section() -> list[str]:
     line_crop_band_contact_summary = metric_dict(
         read_rows(CITIES_SOURCE_PAGE_LINE_CROP_BAND_CONTACT_SHEET_SUMMARY)
     )
+    line_crop_band_html_summary = metric_dict(
+        read_rows(CITIES_SOURCE_PAGE_LINE_CROP_BAND_REVIEW_HTML_SUMMARY)
+    )
     line_crop_contact_summary = metric_dict(
         read_rows(CITIES_SOURCE_PAGE_LINE_CROP_CONTACT_SHEET_SUMMARY)
     )
@@ -2224,6 +2230,8 @@ def cities_source_row_lock_section() -> list[str]:
         f"| Local line crop band worksheet rows | {line_crop_band_review_summary.get('band_review_rows', '0')} |",
         f"| Local line crop band contact sheets | {line_crop_band_contact_summary.get('band_contact_sheets', '0')} |",
         f"| Local line crop band contact sheets available | {line_crop_band_contact_summary.get('band_contact_sheets_available', '0')} |",
+        f"| Local line crop band HTML rows | {line_crop_band_html_summary.get('html_rows', '0')} |",
+        f"| Local line crop band HTML image rows | {line_crop_band_html_summary.get('html_band_image_rows', '0')} |",
         f"| Local line crop contact sheets | {line_crop_contact_summary.get('contact_sheets', '0')} |",
         f"| Local line crop HTML rows | {line_crop_html_summary.get('html_rows', '0')} |",
         f"| Local line crop HTML image rows | {line_crop_html_summary.get('html_line_crop_image_rows', '0')} |",
