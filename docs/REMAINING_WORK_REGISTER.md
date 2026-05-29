@@ -1832,6 +1832,11 @@ python3 -m scripts.run_protocol protocols/english_seed_survivor_audit.toml --res
 python3 -m scripts.run_protocol protocols/english_seed_paired_controls_1000.toml --resume
 ```
 
+Current guard: `scripts/check_english_seed_survivor_gate.py` now validates the
+empty survivor CSV, the non-surviving 100-sample follow-up p-value, and the
+idle downstream term-shuffle, survivor-audit, target-summary, and paired-control
+outputs before real-report preflight can pass.
+
 ### 4. Apocrypha/Deuterocanon Prospective Study
 
 KJVA bridge results are strong post-screen review material, not claims.

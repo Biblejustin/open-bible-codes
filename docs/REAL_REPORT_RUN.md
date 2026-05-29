@@ -218,6 +218,9 @@ It requires:
   visible;
 - English source-basis manifests and audit-queue counts valid, with no current
   `needs_audit` rows unless the policy is explicitly changed;
+- English seed survivor gate stays closed: the survivor term file is empty,
+  and downstream survivor reports remain idle until a row clears the shuffle
+  threshold;
 - English corpus policy docs keep missing BibleGateway rows deferred unless a
   lawful local text or source package with clear permission is available;
 - expanded-strata operator docs point at live scripts, protocol files, and

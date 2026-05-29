@@ -1096,6 +1096,7 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn("scripts/check_prospective_study_lanes.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_english_corpus_policy_docs.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn("scripts/check_english_seed_survivor_gate.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_source_basis_audit_queue.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_expanded_strata_tooling.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_public_claim_language.py", steps_by_id["preflight"]["inputs"])
@@ -2053,6 +2054,7 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn("scripts/check_prospective_study_lanes.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/check_english_seed_survivor_gate.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_source_basis_audit_queue.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_expanded_strata_tooling.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/validate_study_mapping_schemas.py", preflight.DEFAULT_REQUIRED_PATHS)
@@ -2206,6 +2208,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("protocols/cohort_cluster_density_audit.toml", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/PRIVATE_ENGLISH_VERSIONS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("docs/SOURCE_BASIS_AUDIT_QUEUE.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/ENGLISH_SEED_SHUFFLE_FOLLOWUP_REPORT.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/ENGLISH_SEED_SURVIVOR_AUDIT.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("docs/ENGLISH_SEED_PAIRED_CONTROLS_1000.md", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("terms/english_seed_followup_survivors.csv", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("configs/biblegateway_english_versions.csv", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("configs/ebible_english_controls.csv", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("configs/door43_english_controls.csv", preflight.DEFAULT_REQUIRED_PATHS)
@@ -2291,6 +2297,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn("secret_pattern_hits", payload)
             self.assertIn("prospective_lane_failures", payload)
             self.assertIn("source_basis_failures", payload)
+            self.assertIn("english_seed_survivor_gate_failures", payload)
             self.assertIn("english_corpus_policy_failures", payload)
             self.assertIn("expanded_strata_tooling_failures", payload)
             self.assertIn("public_claim_language_failures", payload)
@@ -2381,6 +2388,28 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "source-basis validation failures: needs_audit rows remain: "
                 "BibleGateway English versions:DEMO",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_english_seed_survivor_gate_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_english_seed_survivor_gate,
+                "validate_english_seed_survivor_gate",
+                return_value=["terms/english_seed_followup_survivors.csv has 1 survivor row"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["english_seed_survivor_gate_failures"],
+                ["terms/english_seed_followup_survivors.csv has 1 survivor row"],
+            )
+            self.assertIn(
+                "English seed survivor gate failures: "
+                "terms/english_seed_followup_survivors.csv has 1 survivor row",
                 payload["failures"],
             )
 

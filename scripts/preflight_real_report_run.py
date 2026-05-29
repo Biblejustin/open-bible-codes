@@ -60,6 +60,7 @@ from scripts import (
     check_consolidated_findings_doc,
     check_critical_omission_followup_docs,
     check_doc_command_references,
+    check_english_seed_survivor_gate,
     check_english_corpus_policy_docs,
     check_expanded_strata_tooling,
     check_final_report_assembly_docs,
@@ -151,6 +152,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_public_release_hygiene.py",
     "scripts/check_public_claim_language.py",
     "scripts/check_doc_command_references.py",
+    "scripts/check_english_seed_survivor_gate.py",
     "scripts/check_consolidated_findings_doc.py",
     "scripts/check_prospective_lane_status_doc.py",
     "scripts/check_final_report_assembly_docs.py",
@@ -544,6 +546,10 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/VERSION_DISTRIBUTION_INDEX.md",
     "docs/PRIVATE_ENGLISH_VERSIONS.md",
     "docs/SOURCE_BASIS_AUDIT_QUEUE.md",
+    "docs/ENGLISH_SEED_SHUFFLE_FOLLOWUP_REPORT.md",
+    "docs/ENGLISH_SEED_SURVIVOR_AUDIT.md",
+    "docs/ENGLISH_SEED_PAIRED_CONTROLS_1000.md",
+    "terms/english_seed_followup_survivors.csv",
     "configs/biblegateway_english_versions.csv",
     "configs/ebible_english_controls.csv",
     "configs/door43_english_controls.csv",
@@ -1101,6 +1107,31 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "source-basis validation failures: "
             + "; ".join(source_basis_failures)
+        )
+
+    english_seed_survivor_gate_failures = (
+        check_english_seed_survivor_gate.validate_english_seed_survivor_gate(
+            followup_summary=root / check_english_seed_survivor_gate.DEFAULT_FOLLOWUP_SUMMARY,
+            survivors=root / check_english_seed_survivor_gate.DEFAULT_SURVIVORS,
+            followup_doc=root / check_english_seed_survivor_gate.DEFAULT_FOLLOWUP_DOC,
+            term_shuffle_summary=root
+            / check_english_seed_survivor_gate.DEFAULT_TERM_SHUFFLE_SUMMARY,
+            survivor_audit_summary=root
+            / check_english_seed_survivor_gate.DEFAULT_SURVIVOR_AUDIT_SUMMARY,
+            survivor_audit_letter_paths=root
+            / check_english_seed_survivor_gate.DEFAULT_SURVIVOR_AUDIT_LETTER_PATHS,
+            survivor_audit_doc=root
+            / check_english_seed_survivor_gate.DEFAULT_SURVIVOR_AUDIT_DOC,
+            target_summary=root / check_english_seed_survivor_gate.DEFAULT_TARGET_SUMMARY,
+            paired_summary=root / check_english_seed_survivor_gate.DEFAULT_PAIRED_SUMMARY,
+            paired_examples=root / check_english_seed_survivor_gate.DEFAULT_PAIRED_EXAMPLES,
+            paired_doc=root / check_english_seed_survivor_gate.DEFAULT_PAIRED_DOC,
+        )
+    )
+    if english_seed_survivor_gate_failures:
+        failures.append(
+            "English seed survivor gate failures: "
+            + "; ".join(english_seed_survivor_gate_failures)
         )
 
     english_corpus_policy_failures = (
@@ -2042,6 +2073,7 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "critical_omission_doc_failures": critical_omission_doc_failures,
         "source_basis_failures": source_basis_failures,
+        "english_seed_survivor_gate_failures": english_seed_survivor_gate_failures,
         "english_corpus_policy_failures": english_corpus_policy_failures,
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,
         "public_claim_language_failures": public_claim_language_failures,
