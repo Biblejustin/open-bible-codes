@@ -438,6 +438,17 @@ It contains no OCR body text or source-script text and imports no source rows.
 Tracked doc:
 `docs/CITIES_SOURCE_PAGE_LINE_CROP_BAND_REVIEW_WORKSHEET.md`.
 
+Cities source-page line crop band contact sheets:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_band_contact_sheet.toml --resume
+```
+
+This writes ignored local PNG contact sheets grouped by the 16 coordinate
+bands. The tracked files contain only paths/counts/status and still import no
+source rows or source-script text. Tracked doc:
+`docs/CITIES_SOURCE_PAGE_LINE_CROP_BAND_CONTACT_SHEET.md`.
+
 Cities source-page line crop triage HTML:
 
 ```bash

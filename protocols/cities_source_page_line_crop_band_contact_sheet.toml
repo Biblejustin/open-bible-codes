@@ -1,0 +1,30 @@
+name = "cities_source_page_line_crop_band_contact_sheet"
+description = "Build local contact sheets for Cities source-page line-crop coordinate bands."
+manifest_out = "reports/cities_pdf_recovery_probe/source_page_line_crop_band_contact_sheet_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_source_page_line_crop_band_contact_sheet"
+description = "Build 16 coordinate-band contact sheets without source-row import."
+argv = [
+  "-m", "scripts.build_cities_source_page_line_crop_band_contact_sheet",
+  "--packet", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet.csv",
+  "--band-review", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_review_worksheet.csv",
+  "--base-dir", "reports/cities_pdf_recovery_probe/source_page_line_crops/band_contact_sheets",
+  "--out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_contact_sheet.csv",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_contact_sheet_summary.csv",
+  "--markdown-out", "docs/CITIES_SOURCE_PAGE_LINE_CROP_BAND_CONTACT_SHEET.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_contact_sheet.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_source_page_line_crop_band_contact_sheet.py",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_review_worksheet.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_contact_sheet.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_contact_sheet_summary.csv",
+  "docs/CITIES_SOURCE_PAGE_LINE_CROP_BAND_CONTACT_SHEET.md",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_contact_sheet.manifest.json",
+]

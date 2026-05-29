@@ -720,6 +720,34 @@ Current result:
   rows, import source rows, normalize city names, run ELS searches, compute
   compactness, or verify p-levels.
 
+### Cities Source Page Line Crop Band Contact Sheets
+
+Completed local coordinate-band contact sheets:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_band_contact_sheet.toml --resume
+```
+
+Current result:
+
+- Band contact sheets: 16.
+- Band contact sheets available: 16.
+- Band review rows: 16.
+- Line crop rows: 203.
+- Line crop images found: 203.
+- Unique table pages: 4.
+- OCR words represented by line boxes: 1,511.
+- OCR Hebrew letters represented by line boxes: 4,934.
+- Source-row imports: 0.
+- City-name normalization: 0.
+- ELS runs: 0.
+- Compactness runs: 0.
+- p-levels: 0.
+- Boundary: the ignored local PNG contact sheets group crop images by coordinate
+  band only. They do not read Hebrew, transcribe rows, import source rows,
+  normalize city names, run ELS searches, compute compactness, or verify
+  p-levels.
+
 ### Cities Source Page Line Crop Contact Sheet
 
 Completed local line-crop contact sheets:
