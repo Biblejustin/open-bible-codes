@@ -47,8 +47,8 @@ real-report run doc guarding, imported preflight check-script input guarding,
 research missing model pages audit doc guarding, WRR-adjacent source audit
 family doc guarding, real-report source-audit preflight documentation,
 critical-omission follow-up doc guarding, KJVA apocrypha prospective boundary
-guarding, WRR support-doc local-lock boundary cleanup plus formal preflight
-guarding, and WRR source-audit
+and next-replication planning guarding, WRR support-doc local-lock boundary
+cleanup plus formal preflight guarding, and WRR source-audit
 local-lock boundary guarding, WRR source-audit register refresh,
 protocol README WRR handoff-status guarding, WRR exact-gap priority-packet
 guarding, WRR source-row coverage packet guarding, WRR source-row crop packet
@@ -1878,6 +1878,11 @@ boundary directly: 7 registered terms, the single `tobit` candidate row, no
 term with BH `q_ge <= 0.05`, no term above every shuffled sample, 1 of 3
 non-Bible controls at or above the observed total, and no remaining
 `ready_for_preflight` lane.
+`docs/KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md` records the no-input
+next-replication design boundary: planning only, fresh term/source target set,
+study-lock manifest and preflight sidecar before any new result-bearing output,
+and no claim wording from the existing `tobit` row. It is guarded by
+`scripts/check_kjva_apocrypha_bridge_next_replication_doc.py`.
 
 Current next step: look for independent replication designs or define a new
 locked prospective lane. No KJVA prospective bridge claim language is supported
@@ -1922,9 +1927,10 @@ make release-ready
 Run `make release-ready` from a committed tree; the final public-release gate is
 supposed to fail if tracked files are dirty.
 
-Latest validation snapshot after the KJVA apocrypha prospective boundary guard:
+Latest validation snapshot after the release-ready make target, refreshed after
+the KJVA apocrypha prospective boundary and next-replication planning guards:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 2146
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 2153
   tests, 2 skipped, and 29325 subtests.
 - `make public-release-check` passed after the KJVA boundary guard.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`

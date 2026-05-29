@@ -214,6 +214,9 @@ It requires:
   negative controlled result: 7 registered terms, 1 `tobit` bridge row, 0 terms
   with BH `q_ge <= 0.05`, and 1 of 3 non-Bible controls at or above the
   observed total;
+- KJVA apocrypha/deuterocanon next-replication planning stays planning-only,
+  with fresh term/source lock and study-lock sidecar required before any new
+  result-bearing output;
 - consolidated findings keep the current prospective-lane boundary tied to
   live profile state;
 - prospective lane-status doc matches its generated output from the live lane

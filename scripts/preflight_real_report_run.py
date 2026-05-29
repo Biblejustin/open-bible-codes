@@ -68,6 +68,7 @@ from scripts import (
     check_greek_surface_second_cohort_readiness_doc,
     check_hypothesis_testing_source_audit_doc,
     check_israeli_prime_ministers_detail_recovery_probe_doc,
+    check_kjva_apocrypha_bridge_next_replication_doc,
     check_kjva_apocrypha_bridge_prospective_boundary,
     check_manual_review_queue,
     check_preregistration_placeholders,
@@ -155,6 +156,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_doc_command_references.py",
     "scripts/check_english_seed_survivor_gate.py",
     "scripts/check_consolidated_findings_doc.py",
+    "scripts/check_kjva_apocrypha_bridge_next_replication_doc.py",
     "scripts/check_kjva_apocrypha_bridge_prospective_boundary.py",
     "scripts/check_prospective_lane_status_doc.py",
     "scripts/check_final_report_assembly_docs.py",
@@ -541,6 +543,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md",
     "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md",
     "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md",
+    "docs/KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md",
     "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
     "reports/kjv_apocrypha_bridge_prospective/bridge_summary.csv",
     "reports/kjv_apocrypha_bridge_prospective/term_summary.csv",
@@ -1092,6 +1095,17 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "KJVA apocrypha bridge prospective boundary failures: "
             + "; ".join(kjva_apocrypha_bridge_prospective_failures)
+        )
+
+    kjva_apocrypha_bridge_next_replication_doc_failures = (
+        check_kjva_apocrypha_bridge_next_replication_doc.validate_next_replication_doc(
+            root / check_kjva_apocrypha_bridge_next_replication_doc.DEFAULT_DOC
+        )
+    )
+    if kjva_apocrypha_bridge_next_replication_doc_failures:
+        failures.append(
+            "KJVA apocrypha bridge next-replication doc failures: "
+            + "; ".join(kjva_apocrypha_bridge_next_replication_doc_failures)
         )
 
     final_report_highlights_doc_failures = (
@@ -2103,6 +2117,9 @@ def main(argv: list[str] | None = None) -> int:
         "critical_omission_doc_failures": critical_omission_doc_failures,
         "kjva_apocrypha_bridge_prospective_failures": (
             kjva_apocrypha_bridge_prospective_failures
+        ),
+        "kjva_apocrypha_bridge_next_replication_doc_failures": (
+            kjva_apocrypha_bridge_next_replication_doc_failures
         ),
         "source_basis_failures": source_basis_failures,
         "english_seed_survivor_gate_failures": english_seed_survivor_gate_failures,

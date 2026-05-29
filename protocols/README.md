@@ -33,8 +33,8 @@ python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
 This runs preflight checks, refreshes locked STEP_TAHOT and Greek exact-center
 final gates with resume, refreshes WRR source/import audit state and the
 current WRR repo-defined diagnostic status, validates prospective-lane,
-KJVA apocrypha prospective boundary, English source-basis, and English seed
-survivor-gate metadata, validates
+KJVA apocrypha prospective boundary and next-replication planning, English
+source-basis, and English seed survivor-gate metadata, validates
 expanded-strata tooling docs, future
 study-mapping CSV schemas, and concrete preregistration placeholder cleanup,
 checks the locked CRD relevance dictionary basis, verifies manual-review queue

@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 402
+Documents indexed: 403
 
 ## Controls
 
@@ -358,6 +358,7 @@ Documents indexed: 402
 | Hebrew Theology All-Codes Triage | `HEBREW_THEOLOGY_ALL_CODES_TRIAGE.md` |
 | Israeli Prime Ministers Detail Recovery Probe | `ISRAELI_PRIME_MINISTERS_DETAIL_RECOVERY_PROBE.md` |
 | Israeli Prime Ministers Source Audit | `ISRAELI_PRIME_MINISTERS_SOURCE_AUDIT.md` |
+| KJVA Apocrypha Bridge Next Replication Design | `KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md` |
 | KJVA Prospective Apocrypha Bridge Candidates | `KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md` |
 | KJVA Apocrypha Bridge Candidates | `KJV_APOCRYPHA_BRIDGE_CANDIDATES.md` |
 | KJVA Apocrypha Bridge Context | `KJV_APOCRYPHA_BRIDGE_CONTEXT.md` |

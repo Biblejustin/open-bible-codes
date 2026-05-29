@@ -1098,6 +1098,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/check_english_corpus_policy_docs.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_english_seed_survivor_gate.py", steps_by_id["preflight"]["inputs"])
         self.assertIn(
+            "scripts/check_kjva_apocrypha_bridge_next_replication_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_kjva_apocrypha_bridge_prospective_boundary.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -2191,6 +2195,14 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/check_kjva_apocrypha_bridge_next_replication_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "docs/KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -2327,6 +2339,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn("source_basis_failures", payload)
             self.assertIn("english_seed_survivor_gate_failures", payload)
             self.assertIn("kjva_apocrypha_bridge_prospective_failures", payload)
+            self.assertIn("kjva_apocrypha_bridge_next_replication_doc_failures", payload)
             self.assertIn("english_corpus_policy_failures", payload)
             self.assertIn("expanded_strata_tooling_failures", payload)
             self.assertIn("public_claim_language_failures", payload)
@@ -2416,6 +2429,27 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "KJVA apocrypha bridge prospective boundary failures: tobit q_ge crossed threshold",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_kjva_apocrypha_next_replication_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_kjva_apocrypha_bridge_next_replication_doc,
+                "validate_next_replication_doc",
+                return_value=["missing no-claim boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["kjva_apocrypha_bridge_next_replication_doc_failures"],
+                ["missing no-claim boundary"],
+            )
+            self.assertIn(
+                "KJVA apocrypha bridge next-replication doc failures: missing no-claim boundary",
                 payload["failures"],
             )
 
