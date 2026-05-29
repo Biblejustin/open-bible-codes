@@ -16,6 +16,14 @@ OVERCLAIM_RE = re.compile(
     r"prophecy[ -]confirmed|validation of inspiration|claim[- ]level",
     re.IGNORECASE,
 )
+WRR_EXACT_OVERCLAIM_RE = re.compile(
+    r"\bexact[- ]published WRR (?:has been |was |is )?reproduced\b|"
+    r"\bexact[- ]published WRR reproduction (?:is|was|has been) "
+    r"(?:closed|complete|finished|ready|reproduced)\b|"
+    r"\bexact WRR reproduction (?:is|was|has been) "
+    r"(?:closed|complete|finished|ready|reproduced)\b",
+    re.IGNORECASE,
+)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -52,10 +60,16 @@ def validate_public_claim_language(paths: list[Path] | None = None) -> list[str]
                 heading = line.strip("# ").lower()
             if line_no in fenced:
                 continue
-            if "forbidden language" in heading:
+            if "forbidden" in heading:
                 continue
             for match in OVERCLAIM_RE.finditer(line):
                 failures.append(f"{path}:{line_no}: unsupported claim language `{match.group(0)}`")
+            if "do not" in line.lower():
+                continue
+            for match in WRR_EXACT_OVERCLAIM_RE.finditer(line):
+                failures.append(
+                    f"{path}:{line_no}: unsupported WRR exact-published language `{match.group(0)}`"
+                )
     return failures
 
 

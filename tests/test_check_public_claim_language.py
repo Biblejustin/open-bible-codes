@@ -46,3 +46,42 @@ def test_ignores_forbidden_language_section(tmp_path: Path) -> None:
     )
 
     assert validate_public_claim_language([doc]) == []
+
+
+def test_reports_wrr_exact_published_reproduced(tmp_path: Path) -> None:
+    doc = tmp_path / "WRR.md"
+    doc.write_text("Exact published WRR reproduced.\n", encoding="utf-8")
+
+    assert validate_public_claim_language([doc]) == [
+        f"{doc}:1: unsupported WRR exact-published language `Exact published WRR reproduced`"
+    ]
+
+
+def test_reports_wrr_exact_reproduction_closed(tmp_path: Path) -> None:
+    doc = tmp_path / "WRR.md"
+    doc.write_text("Exact published WRR reproduction is closed.\n", encoding="utf-8")
+
+    assert validate_public_claim_language([doc]) == [
+        f"{doc}:1: unsupported WRR exact-published language `Exact published WRR reproduction is closed`"
+    ]
+
+
+def test_allows_wrr_exact_reproduction_caveat(tmp_path: Path) -> None:
+    doc = tmp_path / "WRR.md"
+    doc.write_text(
+        "Exact published WRR reproduction remains caveated by the 163-distance gap.\n",
+        encoding="utf-8",
+    )
+
+    assert validate_public_claim_language([doc]) == []
+
+
+def test_allows_forbidden_wrr_exact_language_section(tmp_path: Path) -> None:
+    doc = tmp_path / "WRR.md"
+    doc.write_text(
+        "## Forbidden Wording\n"
+        "- exact published WRR reproduced\n",
+        encoding="utf-8",
+    )
+
+    assert validate_public_claim_language([doc]) == []

@@ -1342,6 +1342,10 @@ Remaining exact-published-reproduction pieces:
 - study-level report language must keep exact-WRR reproduction caveats attached
   to fixed terms and sources.
 
+Current guard: `scripts/check_public_claim_language.py` now rejects public
+exact-published WRR overclaim phrases that assert reproduction or closure,
+while allowing caveated gap language and forbidden-wording lists.
+
 Tracked references:
 
 - `docs/WRR_REPLICATION_PLAN.md`
