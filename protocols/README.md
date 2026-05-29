@@ -440,6 +440,17 @@ tracked files contain only paths/counts/status and still import no source rows
 or source-script text. Tracked doc:
 `docs/CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_CONTACT_SHEET.md`.
 
+Cities source-page line crop priority review worksheet:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_priority_review_worksheet.toml --resume
+```
+
+This writes a 203-row priority-ordered worksheet joining triage rank, crop
+paths, and priority contact-sheet paths. It contains no OCR body text or
+source-script text and imports no source rows. Tracked doc:
+`docs/CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_REVIEW_WORKSHEET.md`.
+
 Cities source-page line crop review worksheet:
 
 ```bash

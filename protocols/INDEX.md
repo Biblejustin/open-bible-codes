@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 170
+Protocols indexed: 171
 
 ## Analysis
 
@@ -16,6 +16,7 @@ Protocols indexed: 170
 | cities_source_page_line_crop_contact_sheet | Build local visual contact sheets for Cities source-page line crops without transcripti... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_contact_sheet.toml` |
 | cities_source_page_line_crop_packet | Build local line crops for Cities table candidate page review without importing source ... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_packet.toml` |
 | cities_source_page_line_crop_priority_contact_sheet | Build local contact sheets grouped by Cities source-page line-crop triage priority. | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_priority_contact_sheet.toml` |
+| cities_source_page_line_crop_priority_review_worksheet | Build a priority-ordered Cities source-page line-crop review worksheet without transcri... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_priority_review_worksheet.toml` |
 | cities_source_page_line_crop_review_html | Build ignored local HTML for Cities source-page line-crop review without importing sour... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_review_html.toml` |
 | cities_source_page_line_crop_review_worksheet | Build a no-input Cities worksheet for reviewing source-page line crops without transcri... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_review_worksheet.toml` |
 | cities_source_page_line_crop_triage | Rank Cities source-page line crops for no-input visual review without transcription or ... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_triage.toml` |

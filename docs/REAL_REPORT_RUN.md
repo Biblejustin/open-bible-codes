@@ -109,6 +109,7 @@ This assembly run includes:
   `docs/CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE.md`,
   `docs/CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE_HTML.md`,
   `docs/CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_CONTACT_SHEET.md`,
+  `docs/CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_REVIEW_WORKSHEET.md`,
   `docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_WORKSHEET.md`,
   `data/study/mappings/cities_source_row_lock_decisions.csv`, and
   `data/study/mappings/cities_source_transcription_decisions.csv`. Cities
@@ -118,9 +119,9 @@ This assembly run includes:
   crops from the 4 table candidate pages plus 4 local line-crop contact
   sheets, a local ignored line-crop HTML review aid, a 203-row line-crop
   triage queue, a local ignored priority-order triage HTML aid, 4 local
-  priority contact sheets, and a 203-row line-crop review worksheet; no source
-  rows imported, and no city-name normalization, ELS searches, compactness
-  runs, or p-levels.
+  priority contact sheets, a 203-row priority line-crop worksheet, and a
+  203-row line-crop review worksheet; no source rows imported, and no
+  city-name normalization, ELS searches, compactness runs, or p-levels.
 - broader search/current findings writeup:
   `docs/BROADER_SEARCH_FINDINGS.md`
 - broad Hebrew modern/geopolitical version-distribution run:
