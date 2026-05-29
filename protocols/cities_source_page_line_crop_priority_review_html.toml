@@ -1,0 +1,27 @@
+name = "cities_source_page_line_crop_priority_review_html"
+description = "Build ignored local HTML for Cities source-page line-crop priority review."
+manifest_out = "reports/cities_pdf_recovery_probe/source_page_line_crop_priority_review_html_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_source_page_line_crop_priority_review_html"
+description = "Build a 4-priority local HTML review aid without source-row import."
+argv = [
+  "-m", "scripts.build_cities_source_page_line_crop_priority_review_html",
+  "--priority-contact", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_priority_contact_sheet.csv",
+  "--html-out", "reports/cities_pdf_recovery_probe/source_page_line_crops/priority_review.html",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_priority_review_html_summary.csv",
+  "--markdown-out", "docs/CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_REVIEW_HTML.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_priority_review_html.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_source_page_line_crop_priority_review_html.py",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_priority_contact_sheet.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/source_page_line_crops/priority_review.html",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_priority_review_html_summary.csv",
+  "docs/CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_REVIEW_HTML.md",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_priority_review_html.manifest.json",
+]

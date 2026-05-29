@@ -921,6 +921,39 @@ Current result:
   normalize city names, run ELS searches, compute compactness, or verify
   p-levels.
 
+### Cities Source Page Line Crop Priority Review HTML
+
+Completed local priority HTML review aid:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_priority_review_html.toml --resume
+```
+
+Current result:
+
+- HTML rows: 4.
+- HTML priority image rows: 4.
+- Priority contact-sheet rows: 4.
+- Priority contact sheets available: 4.
+- Line crop rows: 203.
+- Line crop images found: 203.
+- OCR words represented by line boxes: 1,511.
+- OCR Hebrew letters represented by line boxes: 4,934.
+- Dense-text priority rows: 120.
+- Medium-text priority rows: 71.
+- Short-text priority rows: 12.
+- No-text priority rows: 0.
+- Source-row imports: 0.
+- City-name normalization: 0.
+- ELS runs: 0.
+- Compactness runs: 0.
+- p-levels: 0.
+- Boundary: the ignored local HTML file displays priority contact-sheet images
+  only and embeds no OCR text or source-script text. Tracked files contain
+  counts, paths, and status only. This does not read Hebrew, transcribe rows,
+  import source rows, normalize city names, run ELS searches, compute
+  compactness, or verify p-levels.
+
 ### Cities Source Page Line Crop Priority Review Worksheet
 
 Completed no-input priority review worksheet:

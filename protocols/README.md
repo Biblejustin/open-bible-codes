@@ -483,6 +483,18 @@ tracked files contain only paths/counts/status and still import no source rows
 or source-script text. Tracked doc:
 `docs/CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_CONTACT_SHEET.md`.
 
+Cities source-page line crop priority HTML review aid:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_priority_review_html.toml --resume
+```
+
+This writes an ignored local HTML gallery of the 4 priority contact-sheet
+images. The HTML displays images only and embeds no OCR text or source-script
+text. Tracked files contain only paths/counts/status and still import no
+source rows. Tracked doc:
+`docs/CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_REVIEW_HTML.md`.
+
 Cities source-page line crop priority review worksheet:
 
 ```bash

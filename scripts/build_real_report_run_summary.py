@@ -130,6 +130,9 @@ CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE_HTML_SUMMARY = Path(
 CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_CONTACT_SHEET_SUMMARY = Path(
     "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_priority_contact_sheet_summary.csv"
 )
+CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_REVIEW_HTML_SUMMARY = Path(
+    "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_priority_review_html_summary.csv"
+)
 CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_REVIEW_WORKSHEET_SUMMARY = Path(
     "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_priority_review_worksheet_summary.csv"
 )
@@ -2193,6 +2196,9 @@ def cities_source_row_lock_section() -> list[str]:
     line_crop_priority_contact_summary = metric_dict(
         read_rows(CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_CONTACT_SHEET_SUMMARY)
     )
+    line_crop_priority_html_summary = metric_dict(
+        read_rows(CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_REVIEW_HTML_SUMMARY)
+    )
     line_crop_priority_review_summary = metric_dict(
         read_rows(CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_REVIEW_WORKSHEET_SUMMARY)
     )
@@ -2243,6 +2249,8 @@ def cities_source_row_lock_section() -> list[str]:
         f"| Local line crop triage HTML priority sections | {line_crop_triage_html_summary.get('html_priority_sections', '0')} |",
         f"| Local line crop priority contact sheets | {line_crop_priority_contact_summary.get('priority_sheets', '0')} |",
         f"| Local line crop priority contact sheets available | {line_crop_priority_contact_summary.get('priority_sheets_available', '0')} |",
+        f"| Local line crop priority HTML rows | {line_crop_priority_html_summary.get('html_rows', '0')} |",
+        f"| Local line crop priority HTML image rows | {line_crop_priority_html_summary.get('html_priority_image_rows', '0')} |",
         f"| Local line crop priority worksheet rows | {line_crop_priority_review_summary.get('priority_review_rows', '0')} |",
         f"| Local line crop worksheet rows | {len(line_crop_worksheet_rows)} |",
         f"| Source-row imports | {evidence_summary.get('source_row_imports', '0')} |",
