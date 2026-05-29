@@ -1097,6 +1097,10 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/check_prospective_study_lanes.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_english_corpus_policy_docs.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_english_seed_survivor_gate.py", steps_by_id["preflight"]["inputs"])
+        self.assertIn(
+            "scripts/check_kjva_apocrypha_bridge_prospective_boundary.py",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("scripts/check_source_basis_audit_queue.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_expanded_strata_tooling.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("scripts/check_public_claim_language.py", steps_by_id["preflight"]["inputs"])
@@ -2182,6 +2186,30 @@ class RealReportRunTests(unittest.TestCase):
             "terms/kjv_apocrypha_bridge_prospective_terms.csv",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
+        self.assertIn(
+            "scripts/check_kjva_apocrypha_bridge_prospective_boundary.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjv_apocrypha_bridge_prospective/bridge_summary.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjv_apocrypha_bridge_prospective/term_summary.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/control_summary.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/term_summary.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
         self.assertIn("docs/EXTERNAL_CLAIM_SOURCE_COUNTS.md", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn(
             "docs/EXTERNAL_CLAIM_SOURCE_ALL_CODES_COLLECTION.md",
@@ -2298,6 +2326,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn("prospective_lane_failures", payload)
             self.assertIn("source_basis_failures", payload)
             self.assertIn("english_seed_survivor_gate_failures", payload)
+            self.assertIn("kjva_apocrypha_bridge_prospective_failures", payload)
             self.assertIn("english_corpus_policy_failures", payload)
             self.assertIn("expanded_strata_tooling_failures", payload)
             self.assertIn("public_claim_language_failures", payload)
@@ -2366,6 +2395,27 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "prospective lane validation failures: demo_lane: unknown status: ready",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_kjva_apocrypha_boundary_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_kjva_apocrypha_bridge_prospective_boundary,
+                "validate_kjva_apocrypha_bridge_prospective_boundary",
+                return_value=["tobit q_ge crossed threshold"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["kjva_apocrypha_bridge_prospective_failures"],
+                ["tobit q_ge crossed threshold"],
+            )
+            self.assertIn(
+                "KJVA apocrypha bridge prospective boundary failures: tobit q_ge crossed threshold",
                 payload["failures"],
             )
 

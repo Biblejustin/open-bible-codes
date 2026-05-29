@@ -210,6 +210,10 @@ It requires:
 - prospective lane profiles valid, with registered term/protocol/report paths
   present, and the readiness, next-lock, and study-lock workflow docs agree
   with current lane state;
+- KJVA apocrypha/deuterocanon prospective bridge output remains locked as a
+  negative controlled result: 7 registered terms, 1 `tobit` bridge row, 0 terms
+  with BH `q_ge <= 0.05`, and 1 of 3 non-Bible controls at or above the
+  observed total;
 - consolidated findings keep the current prospective-lane boundary tied to
   live profile state;
 - prospective lane-status doc matches its generated output from the live lane

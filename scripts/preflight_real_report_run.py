@@ -68,6 +68,7 @@ from scripts import (
     check_greek_surface_second_cohort_readiness_doc,
     check_hypothesis_testing_source_audit_doc,
     check_israeli_prime_ministers_detail_recovery_probe_doc,
+    check_kjva_apocrypha_bridge_prospective_boundary,
     check_manual_review_queue,
     check_preregistration_placeholders,
     check_project_findings_overview_doc,
@@ -154,6 +155,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_doc_command_references.py",
     "scripts/check_english_seed_survivor_gate.py",
     "scripts/check_consolidated_findings_doc.py",
+    "scripts/check_kjva_apocrypha_bridge_prospective_boundary.py",
     "scripts/check_prospective_lane_status_doc.py",
     "scripts/check_final_report_assembly_docs.py",
     "scripts/check_final_report_highlights_doc.py",
@@ -539,6 +541,11 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md",
     "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md",
     "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md",
+    "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
+    "reports/kjv_apocrypha_bridge_prospective/bridge_summary.csv",
+    "reports/kjv_apocrypha_bridge_prospective/term_summary.csv",
+    "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/control_summary.csv",
+    "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/term_summary.csv",
     "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md",
     "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md",
     "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md",
@@ -1063,6 +1070,28 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "critical-omission doc failures: "
             + "; ".join(critical_omission_doc_failures)
+        )
+
+    kjva_boundary = check_kjva_apocrypha_bridge_prospective_boundary
+    kjva_apocrypha_bridge_prospective_failures = (
+        kjva_boundary.validate_kjva_apocrypha_bridge_prospective_boundary(
+            terms=root / kjva_boundary.DEFAULT_TERMS,
+            candidates=root / kjva_boundary.DEFAULT_CANDIDATES,
+            bridge_summary=root / kjva_boundary.DEFAULT_BRIDGE_SUMMARY,
+            term_summary=root / kjva_boundary.DEFAULT_TERM_SUMMARY,
+            nonbible_control_summary=root
+            / kjva_boundary.DEFAULT_NONBIBLE_CONTROL_SUMMARY,
+            nonbible_term_summary=root / kjva_boundary.DEFAULT_NONBIBLE_TERM_SUMMARY,
+            profiles=root / kjva_boundary.DEFAULT_PROFILES,
+            candidates_doc=root / kjva_boundary.DEFAULT_CANDIDATES_DOC,
+            controls_doc=root / kjva_boundary.DEFAULT_CONTROLS_DOC,
+            nonbible_doc=root / kjva_boundary.DEFAULT_NONBIBLE_DOC,
+        )
+    )
+    if kjva_apocrypha_bridge_prospective_failures:
+        failures.append(
+            "KJVA apocrypha bridge prospective boundary failures: "
+            + "; ".join(kjva_apocrypha_bridge_prospective_failures)
         )
 
     final_report_highlights_doc_failures = (
@@ -2072,6 +2101,9 @@ def main(argv: list[str] | None = None) -> int:
             cities_claim_catalog_boundary_failures
         ),
         "critical_omission_doc_failures": critical_omission_doc_failures,
+        "kjva_apocrypha_bridge_prospective_failures": (
+            kjva_apocrypha_bridge_prospective_failures
+        ),
         "source_basis_failures": source_basis_failures,
         "english_seed_survivor_gate_failures": english_seed_survivor_gate_failures,
         "english_corpus_policy_failures": english_corpus_policy_failures,

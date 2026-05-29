@@ -1871,6 +1871,12 @@ controls is at or above the observed total because the Moby Dick replacement
 block also produced 1 `tobit` bridge row.
 The lane is now recorded in `configs/prospective_study_lanes.json` and
 `docs/PROSPECTIVE_LANE_STATUS.md` as a completed negative controlled result.
+The real-report preflight now runs
+`scripts/check_kjva_apocrypha_bridge_prospective_boundary.py`, which locks this
+boundary directly: 7 registered terms, the single `tobit` candidate row, no
+term with BH `q_ge <= 0.05`, no term above every shuffled sample, 1 of 3
+non-Bible controls at or above the observed total, and no remaining
+`ready_for_preflight` lane.
 
 Current next step: look for independent replication designs or define a new
 locked prospective lane. No KJVA prospective bridge claim language is supported
