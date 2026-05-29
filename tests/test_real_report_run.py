@@ -163,6 +163,10 @@ class RealReportRunTests(unittest.TestCase):
             "docs/WRR_EXACT_GAP_PRIORITY_PACKET.md",
             steps_by_id["preflight"]["inputs"],
         )
+        self.assertIn(
+            "docs/WRR_POST_LOCK_REPORTING_BOUNDARY.md",
+            steps_by_id["preflight"]["inputs"],
+        )
         self.assertIn("docs/WRR_ZERO_HIT_VARIANT_PROBE.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_VARIANT_GAP_IMPACT.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_VARIANT_GAP_UPPER_BOUND.md", steps_by_id["preflight"]["inputs"])
@@ -318,6 +322,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["inputs"],
         )
         self.assertIn(
+            "scripts/build_wrr_post_lock_reporting_boundary.py",
+            steps_by_id["wrr_audit_counts"]["inputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_variant_gap_upper_bound.csv",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
@@ -363,6 +371,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "docs/WRR_EXACT_GAP_PRIORITY_PACKET.md",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
+            "docs/WRR_POST_LOCK_REPORTING_BOUNDARY.md",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
@@ -587,6 +599,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/wrr_1994/wrr_exact_gap_priority_packet_summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_post_lock_reporting_boundary.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
@@ -2862,6 +2878,30 @@ inputs = ["docs/A.md", "docs/C.md"]
                 payload["failures"],
             )
 
+    def test_preflight_fails_on_wrr_post_lock_reporting_boundary_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_post_lock_reporting_boundary_doc,
+                "validate_post_lock_reporting_boundary_doc",
+                return_value=[
+                    "docs/WRR_POST_LOCK_REPORTING_BOUNDARY.md missing boundary"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_post_lock_reporting_boundary_doc_failures"],
+                ["docs/WRR_POST_LOCK_REPORTING_BOUNDARY.md missing boundary"],
+            )
+            self.assertIn(
+                "WRR post-lock reporting boundary failures: "
+                "docs/WRR_POST_LOCK_REPORTING_BOUNDARY.md missing boundary",
+                payload["failures"],
+            )
+
     def test_preflight_fails_on_wrr_public_handoff_doc_failure(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / "preflight.json"
@@ -4992,6 +5032,32 @@ inputs = ["docs/A.md", "docs/C.md"]
             ],
             [
                 {
+                    "section": "allowed",
+                    "item": "local_locked_method_language",
+                    "status": "ready",
+                    "value": "4 readiness gates ready",
+                },
+                {
+                    "section": "not_allowed",
+                    "item": "exact_published_reproduction_language",
+                    "status": "forbidden",
+                    "value": "72 of 163 defined; gap 91",
+                },
+                {
+                    "section": "source_boundary",
+                    "item": "manual_decision_records",
+                    "status": "all_current_manual_reviews_locked",
+                    "value": "37 locked; 0 unlocked",
+                },
+                {
+                    "section": "residual_gap",
+                    "item": "remaining_163_distance_gap",
+                    "status": "open",
+                    "value": "91",
+                },
+            ],
+            [
+                {
                     "action_lane": "page_image_near_match_review",
                     "action_terms": "3",
                     "residual_pairs": "3",
@@ -5063,6 +5129,13 @@ inputs = ["docs/A.md", "docs/C.md"]
         self.assertIn("| HTML rows | 22 |", text)
         self.assertIn("| Row transcriptions | 0 |", text)
         self.assertIn("generated source-row crop images only", text)
+        self.assertIn("Post-lock reporting boundary", text)
+        self.assertIn("| Local locked-method result | ready | 4 readiness gates ready |", text)
+        self.assertIn(
+            "| Exact published WRR reproduction | forbidden | 72 of 163 defined; gap 91 |",
+            text,
+        )
+        self.assertIn("local locked-method wording is allowed with caveats", text)
         self.assertIn("Remaining-lane evidence packet status", text)
         self.assertIn(
             "| page_image_near_match_review | 3 | 3 | 2 | near OCR exists |",
@@ -5090,6 +5163,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             summary.wrr_audit_section(
                 {"status": "success", "duration_seconds": 12.3},
                 {"downloads": [{"label": "wrr_1994_paper", "sha256": "paperhash"}]},
+                [],
                 [],
                 [],
                 [],

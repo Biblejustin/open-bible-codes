@@ -91,6 +91,7 @@ from scripts import (
     check_wrr_locked_method_report_doc,
     check_wrr_exact_reproduction_gap_dashboard_doc,
     check_wrr_exact_gap_priority_packet_doc,
+    check_wrr_post_lock_reporting_boundary_doc,
     check_wrr_manual_decision_record_worksheet_doc,
     check_wrr_manual_decision_records,
     check_wrr_manual_decision_register_doc,
@@ -361,6 +362,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_LOCKED_METHOD_REPORT.md",
     "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md",
     "docs/WRR_EXACT_GAP_PRIORITY_PACKET.md",
+    "docs/WRR_POST_LOCK_REPORTING_BOUNDARY.md",
     "docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md",
     "docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md",
     "docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md",
@@ -717,6 +719,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_wrr_exact_reproduction_gap_dashboard_doc.py",
     "scripts/build_wrr_exact_gap_priority_packet.py",
     "scripts/check_wrr_exact_gap_priority_packet_doc.py",
+    "scripts/build_wrr_post_lock_reporting_boundary.py",
+    "scripts/check_wrr_post_lock_reporting_boundary_doc.py",
     "scripts/check_wrr_public_handoff_docs.py",
     "scripts/check_wrr_defined_diagnostic_docs.py",
     "scripts/check_wrr_lock_options_doc.py",
@@ -1228,6 +1232,17 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "WRR exact-gap priority packet failures: "
             + "; ".join(wrr_exact_gap_priority_packet_doc_failures)
+        )
+
+    wrr_post_lock_reporting_boundary_doc_failures = (
+        check_wrr_post_lock_reporting_boundary_doc.validate_post_lock_reporting_boundary_doc(
+            check_wrr_post_lock_reporting_boundary_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_post_lock_reporting_boundary_doc_failures:
+        failures.append(
+            "WRR post-lock reporting boundary failures: "
+            + "; ".join(wrr_post_lock_reporting_boundary_doc_failures)
         )
 
     wrr_public_handoff_doc_failures = (
@@ -2098,6 +2113,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "wrr_source_row_review_bundle_doc_failures": (
             wrr_source_row_review_bundle_doc_failures
+        ),
+        "wrr_post_lock_reporting_boundary_doc_failures": (
+            wrr_post_lock_reporting_boundary_doc_failures
         ),
         "wrr_remaining_lane_evidence_packets_doc_failures": (
             wrr_remaining_lane_evidence_packets_doc_failures

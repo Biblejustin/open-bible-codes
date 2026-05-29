@@ -1708,6 +1708,34 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_post_lock_reporting_boundary"
+description = "Write the post-lock WRR reporting boundary from current locks and exact-gap evidence."
+argv = [
+  "-m", "scripts.build_wrr_post_lock_reporting_boundary",
+  "--claim-readiness", "reports/wrr_1994/wrr_claim_readiness.csv",
+  "--locked-method-report", "reports/wrr_1994/wrr_locked_method_report.csv",
+  "--dashboard", "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.csv",
+  "--priority-packet", "reports/wrr_1994/wrr_exact_gap_priority_packet.csv",
+  "--manual-decision-records", "data/study/mappings/wrr_manual_decision_records.csv",
+  "--out", "reports/wrr_1994/wrr_post_lock_reporting_boundary.csv",
+  "--markdown-out", "docs/WRR_POST_LOCK_REPORTING_BOUNDARY.md",
+  "--manifest-out", "reports/wrr_1994/wrr_post_lock_reporting_boundary.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_post_lock_reporting_boundary.py",
+  "reports/wrr_1994/wrr_claim_readiness.csv",
+  "reports/wrr_1994/wrr_locked_method_report.csv",
+  "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.csv",
+  "reports/wrr_1994/wrr_exact_gap_priority_packet.csv",
+  "data/study/mappings/wrr_manual_decision_records.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_post_lock_reporting_boundary.csv",
+  "docs/WRR_POST_LOCK_REPORTING_BOUNDARY.md",
+  "reports/wrr_1994/wrr_post_lock_reporting_boundary.manifest.json",
+]
+
+[[steps]]
 id = "audit_wrr2_genesis_pairs_len_5_8"
 description = "Audit WRR appendix-compatible 5..8-letter same-record pair rows."
 argv = [

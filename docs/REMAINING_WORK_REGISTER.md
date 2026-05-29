@@ -1648,6 +1648,11 @@ source-transcription/row-alignment terms across 22 row clusters, 3 page-image
 near-match terms, and 11 method/pair-universe terms. It is guarded in
 real-report preflight and does not select source corrections, pair exclusions,
 replacement spellings, or method changes.
+`docs/WRR_POST_LOCK_REPORTING_BOUNDARY.md` now records the post-lock language
+boundary: local locked-method wording is allowed with caveats, exact published
+WRR reproduction wording remains forbidden, all 37 current manual records are
+locked, no source changes are selected, and the 91-distance gap remains
+exact-reproduction work rather than pending source-edit work.
 `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` now splits out the 11
 method-lane terms: all are OCR-matched, all have zero skip-250 appellation
 counts, all have zero high-cap appellation ordinary hits, and 2 pairs have zero

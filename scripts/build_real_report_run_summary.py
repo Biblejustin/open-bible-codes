@@ -81,6 +81,9 @@ WRR_SOURCE_ROW_REVIEW_BUNDLE_SUMMARY = Path(
 WRR_SOURCE_ROW_CROP_REVIEW_HTML_SUMMARY = Path(
     "reports/wrr_1994/wrr_source_row_crop_review_html_summary.csv"
 )
+WRR_POST_LOCK_REPORTING_BOUNDARY = Path(
+    "reports/wrr_1994/wrr_post_lock_reporting_boundary.csv"
+)
 WRR_REMAINING_LANE_EVIDENCE_SUMMARY = Path(
     "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv"
 )
@@ -311,6 +314,9 @@ def main(argv: list[str] | None = None) -> int:
     wrr_source_row_crop_review_html_summary_rows = read_rows(
         args.wrr_source_row_crop_review_html_summary
     )
+    wrr_post_lock_reporting_boundary_rows = read_rows(
+        args.wrr_post_lock_reporting_boundary
+    )
     wrr_remaining_lane_evidence_summary_rows = read_rows(
         args.wrr_remaining_lane_evidence_summary
     )
@@ -471,6 +477,9 @@ def main(argv: list[str] | None = None) -> int:
         wrr_source_row_crop_review_html_summary_rows=(
             wrr_source_row_crop_review_html_summary_rows
         ),
+        wrr_post_lock_reporting_boundary_rows=(
+            wrr_post_lock_reporting_boundary_rows
+        ),
         wrr_remaining_lane_evidence_summary_rows=(
             wrr_remaining_lane_evidence_summary_rows
         ),
@@ -586,6 +595,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         wrr_source_row_crop_review_html_summary_rows=(
             wrr_source_row_crop_review_html_summary_rows
+        ),
+        wrr_post_lock_reporting_boundary_rows=(
+            wrr_post_lock_reporting_boundary_rows
         ),
         wrr_remaining_lane_evidence_summary_rows=(
             wrr_remaining_lane_evidence_summary_rows
@@ -812,6 +824,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--wrr-source-row-crop-review-html-summary",
         type=Path,
         default=WRR_SOURCE_ROW_CROP_REVIEW_HTML_SUMMARY,
+    )
+    parser.add_argument(
+        "--wrr-post-lock-reporting-boundary",
+        type=Path,
+        default=WRR_POST_LOCK_REPORTING_BOUNDARY,
     )
     parser.add_argument(
         "--wrr-remaining-lane-evidence-summary",
@@ -1100,6 +1117,7 @@ def write_summary(
     wrr_source_transcription_evidence_row_summary_rows: list[dict[str, str]],
     wrr_source_row_review_bundle_summary_rows: list[dict[str, str]],
     wrr_source_row_crop_review_html_summary_rows: list[dict[str, str]],
+    wrr_post_lock_reporting_boundary_rows: list[dict[str, str]],
     wrr_remaining_lane_evidence_summary_rows: list[dict[str, str]],
     wrr_method_pair_universe_evidence_summary_rows: list[dict[str, str]],
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
@@ -1410,6 +1428,7 @@ def write_summary(
             wrr_source_transcription_evidence_row_summary_rows,
             wrr_source_row_review_bundle_summary_rows,
             wrr_source_row_crop_review_html_summary_rows,
+            wrr_post_lock_reporting_boundary_rows,
             wrr_remaining_lane_evidence_summary_rows,
             wrr_method_pair_universe_evidence_summary_rows,
             wrr_dw_formula_sensitivity_rows,
@@ -1697,6 +1716,7 @@ def write_manifest(
     wrr_source_transcription_evidence_row_summary_rows: list[dict[str, str]],
     wrr_source_row_review_bundle_summary_rows: list[dict[str, str]],
     wrr_source_row_crop_review_html_summary_rows: list[dict[str, str]],
+    wrr_post_lock_reporting_boundary_rows: list[dict[str, str]],
     wrr_remaining_lane_evidence_summary_rows: list[dict[str, str]],
     wrr_method_pair_universe_evidence_summary_rows: list[dict[str, str]],
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
@@ -1997,6 +2017,9 @@ def write_manifest(
         ),
         "wrr_source_row_crop_review_html_summary_rows": len(
             wrr_source_row_crop_review_html_summary_rows
+        ),
+        "wrr_post_lock_reporting_boundary_rows": len(
+            wrr_post_lock_reporting_boundary_rows
         ),
         "wrr_remaining_lane_evidence_summary_rows": len(
             wrr_remaining_lane_evidence_summary_rows
@@ -3681,6 +3704,7 @@ def wrr_audit_section(
     source_transcription_evidence_row_summary_rows: list[dict[str, str]],
     source_row_review_bundle_summary_rows: list[dict[str, str]],
     source_row_crop_review_html_summary_rows: list[dict[str, str]],
+    post_lock_reporting_boundary_rows: list[dict[str, str]],
     remaining_lane_evidence_summary_rows: list[dict[str, str]],
     method_pair_universe_evidence_summary_rows: list[dict[str, str]],
     dw_formula_sensitivity_rows: list[dict[str, str]],
@@ -4046,6 +4070,33 @@ def wrr_audit_section(
                 f"| Method changes | {md_cell(crop_html_summary.get('method_changes', {}).get('value', '0'))} |",
                 "",
                 "The ignored local HTML file displays generated source-row crop images only.",
+            ]
+        )
+    if post_lock_reporting_boundary_rows:
+        boundary = {
+            (row.get("section", ""), row.get("item", "")): row
+            for row in post_lock_reporting_boundary_rows
+        }
+        allowed = boundary.get(("allowed", "local_locked_method_language"), {})
+        forbidden = boundary.get(
+            ("not_allowed", "exact_published_reproduction_language"), {}
+        )
+        records = boundary.get(("source_boundary", "manual_decision_records"), {})
+        gap = boundary.get(("residual_gap", "remaining_163_distance_gap"), {})
+        lines.extend(
+            [
+                "",
+                "Post-lock reporting boundary:",
+                "",
+                "| Boundary | Status | Value |",
+                "| --- | --- | --- |",
+                f"| Local locked-method result | {md_cell(allowed.get('status', ''))} | {md_cell(allowed.get('value', ''))} |",
+                f"| Exact published WRR reproduction | {md_cell(forbidden.get('status', ''))} | {md_cell(forbidden.get('value', ''))} |",
+                f"| Manual decision records | {md_cell(records.get('status', ''))} | {md_cell(records.get('value', ''))} |",
+                f"| Remaining 163-distance gap | {md_cell(gap.get('status', ''))} | {md_cell(gap.get('value', ''))} |",
+                "",
+                "Current read: local locked-method wording is allowed with caveats;",
+                "exact published WRR reproduction language remains forbidden.",
             ]
         )
     if remaining_lane_evidence_summary_rows:

@@ -226,6 +226,7 @@ inputs = [
   "docs/WRR_LOCKED_METHOD_REPORT.md",
   "docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md",
   "docs/WRR_EXACT_GAP_PRIORITY_PACKET.md",
+  "docs/WRR_POST_LOCK_REPORTING_BOUNDARY.md",
   "docs/WRR_SOURCE_POLICY_EVIDENCE_PACKET.md",
   "docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md",
   "docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md",
@@ -582,6 +583,8 @@ inputs = [
   "scripts/check_wrr_exact_reproduction_gap_dashboard_doc.py",
   "scripts/build_wrr_exact_gap_priority_packet.py",
   "scripts/check_wrr_exact_gap_priority_packet_doc.py",
+  "scripts/build_wrr_post_lock_reporting_boundary.py",
+  "scripts/check_wrr_post_lock_reporting_boundary_doc.py",
   "scripts/check_wrr_public_handoff_docs.py",
   "scripts/check_wrr_support_docs_local_lock.py",
   "scripts/check_wrr_defined_diagnostic_docs.py",
@@ -1051,6 +1054,7 @@ inputs = [
   "scripts/build_wrr_locked_method_report.py",
   "scripts/build_wrr_exact_reproduction_gap_dashboard.py",
   "scripts/build_wrr_exact_gap_priority_packet.py",
+  "scripts/build_wrr_post_lock_reporting_boundary.py",
   "data/study/mappings/wrr_manual_decision_records.csv",
   "scripts/analyze_gog_magog_pairs.py",
   "configs/example_koren_genesis.toml",
@@ -1124,6 +1128,9 @@ outputs = [
   "reports/wrr_1994/wrr_exact_gap_priority_packet_summary.csv",
   "docs/WRR_EXACT_GAP_PRIORITY_PACKET.md",
   "reports/wrr_1994/wrr_exact_gap_priority_packet.manifest.json",
+  "reports/wrr_1994/wrr_post_lock_reporting_boundary.csv",
+  "docs/WRR_POST_LOCK_REPORTING_BOUNDARY.md",
+  "reports/wrr_1994/wrr_post_lock_reporting_boundary.manifest.json",
 ]
 
 [[steps]]
@@ -1896,6 +1903,7 @@ inputs = [
   "reports/wrr_1994/wrr_locked_method_report.csv",
   "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.csv",
   "reports/wrr_1994/wrr_exact_gap_priority_packet_summary.csv",
+  "reports/wrr_1994/wrr_post_lock_reporting_boundary.csv",
   "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue_summary.csv",
   "reports/cities_pdf_recovery_probe/cities_source_row_lock_evidence_summary.csv",
   "data/study/mappings/cities_source_row_lock_decisions.csv",

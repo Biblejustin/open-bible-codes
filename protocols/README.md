@@ -99,7 +99,8 @@ data. It also summarizes the raw ANU famous-rabbis source-list shapes so the
 163-distance mismatch stays visible alongside the locked local method reports.
 Tracked audit: `docs/WRR_SOURCE_AUDIT.md`; selected local summary:
 `docs/WRR_LOCKED_METHOD_REPORT.md`; exact-reproduction gap map:
-`docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`.
+`docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`; post-lock language boundary:
+`docs/WRR_POST_LOCK_REPORTING_BOUNDARY.md`.
 
 Co-linear ELS source audit:
 

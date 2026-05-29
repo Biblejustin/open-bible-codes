@@ -89,6 +89,7 @@ This assembly run includes:
   `docs/WRR_SOURCE_ROW_CROP_REVIEW_HTML.md`,
   `docs/WRR_SOURCE_ROW_OCR_WORD_PACKET.md`,
   `docs/WRR_SOURCE_ROW_REVIEW_BUNDLE.md`,
+  `docs/WRR_POST_LOCK_REPORTING_BOUNDARY.md`,
   `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md`,
   `docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md`,
   `docs/WRR_MANUAL_DECISION_REGISTER.md`,
@@ -370,7 +371,9 @@ The report-run summary should currently say:
   `docs/WRR_CLAIM_READINESS.md`; `docs/WRR_LOCKED_METHOD_REPORT.md` is the
   compact locked local method summary; `docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`
   maps the exact-published 163 vs 72 defined-distance gap and post-lock report
-  boundary; `docs/WRR_CLAIM_BLOCKER_PACKET.md`
+  boundary; `docs/WRR_POST_LOCK_REPORTING_BOUNDARY.md` locks allowed local
+  locked-method wording versus forbidden exact-published reproduction wording;
+  `docs/WRR_CLAIM_BLOCKER_PACKET.md`
   records that no current claim-readiness blockers remain under the selected
   local lock policy; `docs/WRR_RESIDUAL_RECONCILIATION_ACTION_PLAN.md` keeps the residual
   source/term/method evidence lanes visible without selecting corrections;
