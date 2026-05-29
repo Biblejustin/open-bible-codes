@@ -46,8 +46,9 @@ candidate deep-dive freshness guarding, claim-catalog summary guarding,
 real-report run doc guarding, imported preflight check-script input guarding,
 research missing model pages audit doc guarding, WRR-adjacent source audit
 family doc guarding, real-report source-audit preflight documentation,
-critical-omission follow-up doc guarding, WRR support-doc local-lock
-boundary cleanup plus formal preflight guarding, and WRR source-audit
+critical-omission follow-up doc guarding, KJVA apocrypha prospective boundary
+guarding, WRR support-doc local-lock boundary cleanup plus formal preflight
+guarding, and WRR source-audit
 local-lock boundary guarding, WRR source-audit register refresh,
 protocol README WRR handoff-status guarding, WRR exact-gap priority-packet
 guarding, WRR source-row coverage packet guarding, WRR source-row crop packet
@@ -1921,18 +1922,13 @@ make release-ready
 Run `make release-ready` from a committed tree; the final public-release gate is
 supposed to fail if tracked files are dirty.
 
-Latest validation snapshot after the release-ready make target, refreshed after
-the WRR method-lane wide-skip public-doc guard, preregistration stale-template
-guard synchronization, project findings overview guard, reader-path overview
-link guard, direct Makefile public-release overview guard, and overview-checker
-CLI reader-path argument coverage, public-reader package overview-input guard,
-public-reader package guard record in the package README/manifest, Cities
-source-row lock artifact-path guard, and Cities lock worksheet decision
-meaning text, plus exact decision-id evidence guard for populated Cities lock
-records, and all 14 approved Cities source-page locks:
+Latest validation snapshot after the KJVA apocrypha prospective boundary guard:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 1967
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 2146
   tests, 2 skipped, and 29325 subtests.
+- `make public-release-check` passed after the KJVA boundary guard.
+- `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
+  passed clean from the committed tree after the KJVA boundary guard.
 - `cities_source_row_lock_001` through `cities_source_row_lock_014` are now
   locked as `source_row_lock_ready` for later source-row extraction review only;
   source-row imports, city-name normalization, ELS runs, compactness runs, and
