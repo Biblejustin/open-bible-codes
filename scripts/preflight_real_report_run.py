@@ -109,6 +109,7 @@ from scripts import (
     check_wrr_source_row_coverage_packet_doc,
     check_wrr_source_row_crop_packet_doc,
     check_wrr_source_row_crop_contact_sheet_doc,
+    check_wrr_source_row_crop_review_html_doc,
     check_wrr_source_row_ocr_word_packet_doc,
     check_wrr_source_row_review_bundle_doc,
     check_wrr_remaining_lane_evidence_packets_doc,
@@ -367,6 +368,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/WRR_SOURCE_ROW_COVERAGE_PACKET.md",
     "docs/WRR_SOURCE_ROW_CROP_PACKET.md",
     "docs/WRR_SOURCE_ROW_CROP_CONTACT_SHEET.md",
+    "docs/WRR_SOURCE_ROW_CROP_REVIEW_HTML.md",
     "docs/WRR_SOURCE_ROW_OCR_WORD_PACKET.md",
     "docs/WRR_SOURCE_ROW_REVIEW_BUNDLE.md",
     "docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md",
@@ -683,6 +685,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_wrr_source_row_crop_packet.py",
     "scripts/check_wrr_source_row_crop_packet_doc.py",
     "scripts/check_wrr_source_row_crop_contact_sheet_doc.py",
+    "scripts/build_wrr_source_row_crop_review_html.py",
+    "scripts/check_wrr_source_row_crop_review_html_doc.py",
     "scripts/build_wrr_source_row_ocr_word_packet.py",
     "scripts/check_wrr_source_row_ocr_word_packet_doc.py",
     "scripts/build_wrr_source_row_review_bundle.py",
@@ -1401,6 +1405,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(wrr_source_row_crop_contact_sheet_doc_failures)
         )
 
+    wrr_source_row_crop_review_html_doc_failures = (
+        check_wrr_source_row_crop_review_html_doc.validate_source_row_crop_review_html_doc(
+            check_wrr_source_row_crop_review_html_doc.DEFAULT_DOC
+        )
+    )
+    if wrr_source_row_crop_review_html_doc_failures:
+        failures.append(
+            "WRR source row crop HTML doc failures: "
+            + "; ".join(wrr_source_row_crop_review_html_doc_failures)
+        )
+
     wrr_source_row_ocr_word_packet_doc_failures = (
         check_wrr_source_row_ocr_word_packet_doc.validate_source_row_ocr_word_packet_doc(
             check_wrr_source_row_ocr_word_packet_doc.DEFAULT_DOC
@@ -2074,6 +2089,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "wrr_source_row_crop_contact_sheet_doc_failures": (
             wrr_source_row_crop_contact_sheet_doc_failures
+        ),
+        "wrr_source_row_crop_review_html_doc_failures": (
+            wrr_source_row_crop_review_html_doc_failures
         ),
         "wrr_source_row_ocr_word_packet_doc_failures": (
             wrr_source_row_ocr_word_packet_doc_failures

@@ -84,6 +84,11 @@ This assembly run includes:
   `docs/WRR_SOURCE_POLICY_REVIEW_CHECKLIST.md`,
   `docs/WRR_SOURCE_TRANSCRIPTION_EVIDENCE_PACKET.md`,
   `docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md`,
+  `docs/WRR_SOURCE_ROW_CROP_PACKET.md`,
+  `docs/WRR_SOURCE_ROW_CROP_CONTACT_SHEET.md`,
+  `docs/WRR_SOURCE_ROW_CROP_REVIEW_HTML.md`,
+  `docs/WRR_SOURCE_ROW_OCR_WORD_PACKET.md`,
+  `docs/WRR_SOURCE_ROW_REVIEW_BUNDLE.md`,
   `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md`,
   `docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md`,
   `docs/WRR_MANUAL_DECISION_REGISTER.md`,
@@ -240,7 +245,8 @@ It requires:
 - WRR source-transcription row checklist keeps the 22 row clusters in review
   order with required decision-record fields;
 - WRR source-row review bundle joins those 22 row clusters to generated crop
-  paths, the contact sheet, and OCR word evidence as a review aid only;
+  paths, the contact sheet, ignored local row-crop HTML, and OCR word evidence
+  as review aids only;
 - WRR remaining-lane checklist keeps 3 page-image terms and 11
   method/pair-universe terms in review lanes with required decision-record
   fields;
@@ -380,7 +386,8 @@ The report-run summary should currently say:
   `docs/WRR_SOURCE_TRANSCRIPTION_ROW_REVIEW_CHECKLIST.md` keeps those 22 row
   clusters in review order with required decision-record fields;
   `docs/WRR_SOURCE_ROW_REVIEW_BUNDLE.md` joins the row checklist, generated
-  crop paths, contact sheet, and OCR word evidence as a review aid only;
+  crop paths, contact sheet, ignored local row-crop HTML, and OCR word evidence
+  as review aids only;
   `docs/WRR_REMAINING_LANE_EVIDENCE_PACKETS.md` covers the 14 remaining
   page-image and method/pair-universe terms without selecting source edits;
   `docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md` keeps those terms in

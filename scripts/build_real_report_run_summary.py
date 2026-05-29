@@ -78,6 +78,9 @@ WRR_SOURCE_TRANSCRIPTION_EVIDENCE_ROW_SUMMARY = Path(
 WRR_SOURCE_ROW_REVIEW_BUNDLE_SUMMARY = Path(
     "reports/wrr_1994/wrr_source_row_review_bundle_summary.csv"
 )
+WRR_SOURCE_ROW_CROP_REVIEW_HTML_SUMMARY = Path(
+    "reports/wrr_1994/wrr_source_row_crop_review_html_summary.csv"
+)
 WRR_REMAINING_LANE_EVIDENCE_SUMMARY = Path(
     "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv"
 )
@@ -305,6 +308,9 @@ def main(argv: list[str] | None = None) -> int:
     wrr_source_row_review_bundle_summary_rows = read_rows(
         args.wrr_source_row_review_bundle_summary
     )
+    wrr_source_row_crop_review_html_summary_rows = read_rows(
+        args.wrr_source_row_crop_review_html_summary
+    )
     wrr_remaining_lane_evidence_summary_rows = read_rows(
         args.wrr_remaining_lane_evidence_summary
     )
@@ -462,6 +468,9 @@ def main(argv: list[str] | None = None) -> int:
         wrr_source_row_review_bundle_summary_rows=(
             wrr_source_row_review_bundle_summary_rows
         ),
+        wrr_source_row_crop_review_html_summary_rows=(
+            wrr_source_row_crop_review_html_summary_rows
+        ),
         wrr_remaining_lane_evidence_summary_rows=(
             wrr_remaining_lane_evidence_summary_rows
         ),
@@ -574,6 +583,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         wrr_source_row_review_bundle_summary_rows=(
             wrr_source_row_review_bundle_summary_rows
+        ),
+        wrr_source_row_crop_review_html_summary_rows=(
+            wrr_source_row_crop_review_html_summary_rows
         ),
         wrr_remaining_lane_evidence_summary_rows=(
             wrr_remaining_lane_evidence_summary_rows
@@ -795,6 +807,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--wrr-source-row-review-bundle-summary",
         type=Path,
         default=WRR_SOURCE_ROW_REVIEW_BUNDLE_SUMMARY,
+    )
+    parser.add_argument(
+        "--wrr-source-row-crop-review-html-summary",
+        type=Path,
+        default=WRR_SOURCE_ROW_CROP_REVIEW_HTML_SUMMARY,
     )
     parser.add_argument(
         "--wrr-remaining-lane-evidence-summary",
@@ -1082,6 +1099,7 @@ def write_summary(
     wrr_source_policy_evidence_summary_rows: list[dict[str, str]],
     wrr_source_transcription_evidence_row_summary_rows: list[dict[str, str]],
     wrr_source_row_review_bundle_summary_rows: list[dict[str, str]],
+    wrr_source_row_crop_review_html_summary_rows: list[dict[str, str]],
     wrr_remaining_lane_evidence_summary_rows: list[dict[str, str]],
     wrr_method_pair_universe_evidence_summary_rows: list[dict[str, str]],
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
@@ -1391,6 +1409,7 @@ def write_summary(
             wrr_source_policy_evidence_summary_rows,
             wrr_source_transcription_evidence_row_summary_rows,
             wrr_source_row_review_bundle_summary_rows,
+            wrr_source_row_crop_review_html_summary_rows,
             wrr_remaining_lane_evidence_summary_rows,
             wrr_method_pair_universe_evidence_summary_rows,
             wrr_dw_formula_sensitivity_rows,
@@ -1677,6 +1696,7 @@ def write_manifest(
     wrr_source_policy_evidence_summary_rows: list[dict[str, str]],
     wrr_source_transcription_evidence_row_summary_rows: list[dict[str, str]],
     wrr_source_row_review_bundle_summary_rows: list[dict[str, str]],
+    wrr_source_row_crop_review_html_summary_rows: list[dict[str, str]],
     wrr_remaining_lane_evidence_summary_rows: list[dict[str, str]],
     wrr_method_pair_universe_evidence_summary_rows: list[dict[str, str]],
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
@@ -1974,6 +1994,9 @@ def write_manifest(
         ),
         "wrr_source_row_review_bundle_summary_rows": len(
             wrr_source_row_review_bundle_summary_rows
+        ),
+        "wrr_source_row_crop_review_html_summary_rows": len(
+            wrr_source_row_crop_review_html_summary_rows
         ),
         "wrr_remaining_lane_evidence_summary_rows": len(
             wrr_remaining_lane_evidence_summary_rows
@@ -3657,6 +3680,7 @@ def wrr_audit_section(
     source_policy_evidence_summary_rows: list[dict[str, str]],
     source_transcription_evidence_row_summary_rows: list[dict[str, str]],
     source_row_review_bundle_summary_rows: list[dict[str, str]],
+    source_row_crop_review_html_summary_rows: list[dict[str, str]],
     remaining_lane_evidence_summary_rows: list[dict[str, str]],
     method_pair_universe_evidence_summary_rows: list[dict[str, str]],
     dw_formula_sensitivity_rows: list[dict[str, str]],
@@ -3999,6 +4023,29 @@ def wrr_audit_section(
                 "The source-row review bundle is a handoff aid only: it joins the",
                 "row checklist, generated crop paths, and OCR words without selecting",
                 "any row transcription, source correction, method change, or pair exclusion.",
+            ]
+        )
+    if source_row_crop_review_html_summary_rows:
+        crop_html_summary = {
+            row.get("metric", ""): row
+            for row in source_row_crop_review_html_summary_rows
+        }
+        lines.extend(
+            [
+                "",
+                "Source-row crop HTML review aid:",
+                "",
+                "| Metric | Value |",
+                "| --- | ---: |",
+                f"| HTML rows | {md_cell(crop_html_summary.get('html_rows', {}).get('value', '0'))} |",
+                f"| HTML crop image rows | {md_cell(crop_html_summary.get('html_crop_image_rows', {}).get('value', '0'))} |",
+                f"| Source-row crop rows | {md_cell(crop_html_summary.get('source_row_crop_rows', {}).get('value', '0'))} |",
+                f"| Row transcriptions | {md_cell(crop_html_summary.get('row_transcriptions', {}).get('value', '0'))} |",
+                f"| Source corrections | {md_cell(crop_html_summary.get('source_corrections', {}).get('value', '0'))} |",
+                f"| Pair exclusions | {md_cell(crop_html_summary.get('pair_exclusions', {}).get('value', '0'))} |",
+                f"| Method changes | {md_cell(crop_html_summary.get('method_changes', {}).get('value', '0'))} |",
+                "",
+                "The ignored local HTML file displays generated source-row crop images only.",
             ]
         )
     if remaining_lane_evidence_summary_rows:

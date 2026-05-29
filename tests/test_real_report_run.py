@@ -398,6 +398,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
         self.assertIn(
+            "docs/WRR_SOURCE_ROW_CROP_REVIEW_HTML.md",
+            steps_by_id["wrr_audit_counts"]["outputs"],
+        )
+        self.assertIn(
             "docs/WRR_SOURCE_ROW_OCR_WORD_PACKET.md",
             steps_by_id["wrr_audit_counts"]["outputs"],
         )
@@ -455,6 +459,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/wrr_1994/wrr_source_row_review_bundle_summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_source_row_crop_review_html_summary.csv",
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
@@ -635,6 +643,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/check_wrr_source_row_crop_contact_sheet_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_source_row_crop_review_html_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -1279,6 +1291,10 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "docs/WRR_SOURCE_ROW_CROP_REVIEW_HTML.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "docs/WRR_SOURCE_ROW_OCR_WORD_PACKET.md",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -1910,6 +1926,14 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/build_wrr_source_row_crop_review_html.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_wrr_source_row_crop_review_html_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/build_wrr_source_row_ocr_word_packet.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -2288,6 +2312,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn("wrr_source_row_coverage_packet_doc_failures", payload)
             self.assertIn("wrr_source_row_crop_packet_doc_failures", payload)
             self.assertIn("wrr_source_row_crop_contact_sheet_doc_failures", payload)
+            self.assertIn("wrr_source_row_crop_review_html_doc_failures", payload)
             self.assertIn("wrr_source_row_ocr_word_packet_doc_failures", payload)
             self.assertIn("wrr_source_row_review_bundle_doc_failures", payload)
             self.assertIn("wrr_source_policy_review_checklist_doc_failures", payload)
@@ -3266,6 +3291,28 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "WRR source row crop contact sheet failures: "
                 "docs/WRR_SOURCE_ROW_CROP_CONTACT_SHEET.md missing boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_source_row_crop_review_html_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_source_row_crop_review_html_doc,
+                "validate_source_row_crop_review_html_doc",
+                return_value=["docs/WRR_SOURCE_ROW_CROP_REVIEW_HTML.md missing boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_source_row_crop_review_html_doc_failures"],
+                ["docs/WRR_SOURCE_ROW_CROP_REVIEW_HTML.md missing boundary"],
+            )
+            self.assertIn(
+                "WRR source row crop HTML doc failures: "
+                "docs/WRR_SOURCE_ROW_CROP_REVIEW_HTML.md missing boundary",
                 payload["failures"],
             )
 
@@ -4908,6 +4955,43 @@ inputs = ["docs/A.md", "docs/C.md"]
             ],
             [
                 {
+                    "metric": "html_rows",
+                    "value": "22",
+                    "read": "HTML row count",
+                },
+                {
+                    "metric": "html_crop_image_rows",
+                    "value": "22",
+                    "read": "HTML crop image rows",
+                },
+                {
+                    "metric": "source_row_crop_rows",
+                    "value": "22",
+                    "read": "source-row crop rows",
+                },
+                {
+                    "metric": "row_transcriptions",
+                    "value": "0",
+                    "read": "no row transcriptions",
+                },
+                {
+                    "metric": "source_corrections",
+                    "value": "0",
+                    "read": "no source corrections",
+                },
+                {
+                    "metric": "pair_exclusions",
+                    "value": "0",
+                    "read": "no pair exclusions",
+                },
+                {
+                    "metric": "method_changes",
+                    "value": "0",
+                    "read": "no method changes",
+                },
+            ],
+            [
+                {
                     "action_lane": "page_image_near_match_review",
                     "action_terms": "3",
                     "residual_pairs": "3",
@@ -4975,6 +5059,10 @@ inputs = ["docs/A.md", "docs/C.md"]
         self.assertIn("| rows_with_generated_crops | 22 | rows with generated crop paths |", text)
         self.assertIn("| low_confidence_ocr_words | 78 | OCR words below the packet confidence threshold |", text)
         self.assertIn("without selecting", text)
+        self.assertIn("Source-row crop HTML review aid", text)
+        self.assertIn("| HTML rows | 22 |", text)
+        self.assertIn("| Row transcriptions | 0 |", text)
+        self.assertIn("generated source-row crop images only", text)
         self.assertIn("Remaining-lane evidence packet status", text)
         self.assertIn(
             "| page_image_near_match_review | 3 | 3 | 2 | near OCR exists |",
@@ -5002,6 +5090,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             summary.wrr_audit_section(
                 {"status": "success", "duration_seconds": 12.3},
                 {"downloads": [{"label": "wrr_1994_paper", "sha256": "paperhash"}]},
+                [],
                 [],
                 [],
                 [],

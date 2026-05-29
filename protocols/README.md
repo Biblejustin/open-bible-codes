@@ -625,6 +625,10 @@ lock options plus the claim-blocker packet, including visual triage notes. It
 also runs the method-lane wide-skip probe: the 11 OCR-matched method-lane terms
 have 0 ordinary Genesis hits through skip 5000, so that lane is not explained
 by a small cap extension.
+It also writes `docs/WRR_SOURCE_ROW_CROP_REVIEW_HTML.md`, an ignored local
+HTML review aid that displays the 22 generated source-row crop images only,
+without OCR body text, source-script text, row transcription, source
+correction, pair exclusion, or method change.
 It is locked local evidence, not an exact WRR reproduction.
 
 Hebrew MT-family version comparison:

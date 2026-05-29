@@ -1187,6 +1187,28 @@ outputs = [
 ]
 
 [[steps]]
+id = "build_wrr_source_row_crop_review_html"
+description = "Build ignored local HTML for WRR source-row crop review."
+argv = [
+  "-m", "scripts.build_wrr_source_row_crop_review_html",
+  "--crop-packet", "reports/wrr_1994/wrr_source_row_crop_packet.csv",
+  "--html-out", "reports/wrr_1994/wrr_source_row_crop_review.html",
+  "--summary-out", "reports/wrr_1994/wrr_source_row_crop_review_html_summary.csv",
+  "--markdown-out", "docs/WRR_SOURCE_ROW_CROP_REVIEW_HTML.md",
+  "--manifest-out", "reports/wrr_1994/wrr_source_row_crop_review_html.manifest.json",
+]
+inputs = [
+  "scripts/build_wrr_source_row_crop_review_html.py",
+  "reports/wrr_1994/wrr_source_row_crop_packet.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_source_row_crop_review.html",
+  "reports/wrr_1994/wrr_source_row_crop_review_html_summary.csv",
+  "docs/WRR_SOURCE_ROW_CROP_REVIEW_HTML.md",
+  "reports/wrr_1994/wrr_source_row_crop_review_html.manifest.json",
+]
+
+[[steps]]
 id = "build_wrr_source_row_ocr_word_packet"
 description = "Build no-input OCR-word packet for WRR source-row review."
 argv = [

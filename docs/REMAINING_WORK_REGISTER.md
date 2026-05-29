@@ -1596,6 +1596,12 @@ source decisions.
 contact-sheet image with all 22 source-row crops in review order, so manual
 inspection can use one file while the repo still records that the sheet is only
 a visual aid and not transcription verification.
+`docs/WRR_SOURCE_ROW_CROP_REVIEW_HTML.md` now writes an ignored local HTML page
+for those 22 generated source-row crops. It displays crop images only and
+tracks 22 HTML rows, 22 image rows, 4 existing manual-crop rows, 43 action
+terms, and 35 frontier-pair links without embedding OCR body text or
+source-script text, and without selecting row transcriptions, source
+corrections, pair exclusions, or method changes.
 `docs/WRR_SOURCE_ROW_OCR_WORD_PACKET.md` lists current Table 2 OCR words by
 source-row crop band and expected name/date column: 22 rows have OCR words,
 19 rows touch minimum-frontier pairs, and 76 words fall below the local
