@@ -142,6 +142,27 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("docs/REAL_REPORT_RUN.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/REMAINING_WORK_REGISTER.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("protocols/README.md", steps_by_id["preflight"]["inputs"])
+        self.assertIn(
+            "scripts/analyze_kjva_wikisource_candidate_source.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_kjva_wikisource_candidate_source_audit_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "protocols/kjva_wikisource_candidate_source_audit.toml",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "reports/kjva_wikisource_candidate_source/summary.csv",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn("kjva_wikisource_candidate_source_audit", steps_by_id)
         self.assertIn("docs/INDEX.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("protocols/INDEX.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_REPLICATION_PLAN.md", steps_by_id["preflight"]["inputs"])
@@ -2203,6 +2224,38 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/analyze_kjva_wikisource_candidate_source.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_kjva_wikisource_candidate_source_audit_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "protocols/kjva_wikisource_candidate_source_audit.toml",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjva_wikisource_candidate_source/source_status.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjva_wikisource_candidate_source/summary.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjva_wikisource_candidate_source/anchors.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjva_wikisource_candidate_source/manifest.json",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -2340,6 +2393,10 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn("english_seed_survivor_gate_failures", payload)
             self.assertIn("kjva_apocrypha_bridge_prospective_failures", payload)
             self.assertIn("kjva_apocrypha_bridge_next_replication_doc_failures", payload)
+            self.assertIn(
+                "kjva_wikisource_candidate_source_audit_doc_failures",
+                payload,
+            )
             self.assertIn("english_corpus_policy_failures", payload)
             self.assertIn("expanded_strata_tooling_failures", payload)
             self.assertIn("public_claim_language_failures", payload)
@@ -2450,6 +2507,27 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "KJVA apocrypha bridge next-replication doc failures: missing no-claim boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_kjva_wikisource_source_audit_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_kjva_wikisource_candidate_source_audit_doc,
+                "validate_kjva_wikisource_candidate_source_audit_doc",
+                return_value=["missing metadata-only boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["kjva_wikisource_candidate_source_audit_doc_failures"],
+                ["missing metadata-only boundary"],
+            )
+            self.assertIn(
+                "KJVA Wikisource source audit doc failures: missing metadata-only boundary",
                 payload["failures"],
             )
 

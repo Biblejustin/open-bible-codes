@@ -2337,3 +2337,20 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - `git diff --check` passed.
 - `python3 -m scripts.check_public_release_hygiene --allow-dirty` passed.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume` passed clean after each tracked WRR/report update.
+
+## KJVA Wikisource Candidate Source Audit
+
+- Added `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md` as a metadata-only
+  source-status audit for the Wikisource 1911 Ballantyne KJV + Apocrypha
+  candidate. It records source markers and fetch metadata only; it does not
+  import Bible text, create a corpus, run ELS searches, or change KJVA bridge
+  result status.
+- Added `protocols/kjva_wikisource_candidate_source_audit.toml` and wired the
+  audit into `protocols/real_report_run.toml` plus
+  `scripts/preflight_real_report_run.py`.
+- The audit keeps the next-replication decision unchanged: the page can be a
+  future source candidate, but it still needs lawful text import, verse
+  mapping, book-order lock, collation, checksums, term lock, and study-lock
+  sidecar before any result-bearing KJVA replication.
+- `make fast-validate` passed after wiring: 2162 passed, 2 skipped, and 29325
+  subtests passed.

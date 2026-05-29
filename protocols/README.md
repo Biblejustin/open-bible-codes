@@ -34,7 +34,8 @@ This runs preflight checks, refreshes locked STEP_TAHOT and Greek exact-center
 final gates with resume, refreshes WRR source/import audit state and the
 current WRR repo-defined diagnostic status, validates prospective-lane,
 KJVA apocrypha prospective boundary and next-replication planning, English
-source-basis, and English seed survivor-gate metadata, validates
+source-basis, and English seed survivor-gate metadata, keeps the KJVA
+Wikisource source-candidate audit metadata-only, validates
 expanded-strata tooling docs, future
 study-mapping CSV schemas, and concrete preregistration placeholder cleanup,
 checks the locked CRD relevance dictionary basis, verifies manual-review queue

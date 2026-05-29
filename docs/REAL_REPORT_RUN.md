@@ -149,6 +149,8 @@ This assembly run includes:
   `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md`,
   `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md`, and
   `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md`
+- KJVA Wikisource candidate source-status audit:
+  `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - broader Hebrew screening representative-control review:
   `docs/HEBREW_SCREENING_CONTROLLED_REVIEW.md`
 - relaxed all-codes follow-up:
@@ -217,6 +219,8 @@ It requires:
 - KJVA apocrypha/deuterocanon next-replication planning stays planning-only,
   with fresh term/source lock and study-lock sidecar required before any new
   result-bearing output;
+- KJVA Wikisource candidate source audit stays metadata-only, with no Bible
+  text retained, no corpus import ready, and no result-bearing output;
 - consolidated findings keep the current prospective-lane boundary tied to
   live profile state;
 - prospective lane-status doc matches its generated output from the live lane

@@ -54,7 +54,8 @@ Online source candidates found for possible future audit:
 - [Wikisource 1911 Ballantyne printing](https://en.wikisource.org/wiki/The_Holy_Bible,_containing_the_Old_%26_New_Testament_%26_the_Apocrypha):
   public-domain-in-US page for a KJV Bible with Apocrypha, stating the text
   follows the standard 1769 version but without the repo's verse-numbered
-  import/collation.
+  import/collation. Current tracked status audit:
+  `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`.
 - [`seven1m/open-bibles` KJV OSIS](https://github.com/seven1m/open-bibles):
   public-domain KJV OSIS listing, but no local verification here that the OSIS
   file includes apocrypha/deuterocanon books.
@@ -80,4 +81,5 @@ sidecar.
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md`
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md`
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md`
+- `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - `configs/prospective_study_lanes.json`

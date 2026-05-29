@@ -70,6 +70,7 @@ from scripts import (
     check_israeli_prime_ministers_detail_recovery_probe_doc,
     check_kjva_apocrypha_bridge_next_replication_doc,
     check_kjva_apocrypha_bridge_prospective_boundary,
+    check_kjva_wikisource_candidate_source_audit_doc,
     check_manual_review_queue,
     check_preregistration_placeholders,
     check_project_findings_overview_doc,
@@ -158,6 +159,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_consolidated_findings_doc.py",
     "scripts/check_kjva_apocrypha_bridge_next_replication_doc.py",
     "scripts/check_kjva_apocrypha_bridge_prospective_boundary.py",
+    "scripts/analyze_kjva_wikisource_candidate_source.py",
+    "scripts/check_kjva_wikisource_candidate_source_audit_doc.py",
     "scripts/check_prospective_lane_status_doc.py",
     "scripts/check_final_report_assembly_docs.py",
     "scripts/check_final_report_highlights_doc.py",
@@ -544,11 +547,16 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md",
     "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md",
     "docs/KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md",
+    "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
     "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
     "reports/kjv_apocrypha_bridge_prospective/bridge_summary.csv",
     "reports/kjv_apocrypha_bridge_prospective/term_summary.csv",
     "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/control_summary.csv",
     "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/term_summary.csv",
+    "reports/kjva_wikisource_candidate_source/source_status.csv",
+    "reports/kjva_wikisource_candidate_source/summary.csv",
+    "reports/kjva_wikisource_candidate_source/anchors.csv",
+    "reports/kjva_wikisource_candidate_source/manifest.json",
     "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md",
     "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md",
     "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md",
@@ -605,6 +613,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/kjv_apocrypha_bridge_confirmatory_controls_5000.toml",
     "protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml",
     "protocols/kjv_apocrypha_bridge_prospective_nonbible_controls.toml",
+    "protocols/kjva_wikisource_candidate_source_audit.toml",
     "protocols/external_claim_source_counts.toml",
     "protocols/external_claim_source_all_codes_collection.toml",
     "docs/EXTERNAL_CLAIM_SOURCE_COUNTS.md",
@@ -1106,6 +1115,17 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "KJVA apocrypha bridge next-replication doc failures: "
             + "; ".join(kjva_apocrypha_bridge_next_replication_doc_failures)
+        )
+
+    kjva_wikisource_candidate_source_audit_doc_failures = (
+        check_kjva_wikisource_candidate_source_audit_doc.validate_kjva_wikisource_candidate_source_audit_doc(
+            root / check_kjva_wikisource_candidate_source_audit_doc.DEFAULT_DOC
+        )
+    )
+    if kjva_wikisource_candidate_source_audit_doc_failures:
+        failures.append(
+            "KJVA Wikisource source audit doc failures: "
+            + "; ".join(kjva_wikisource_candidate_source_audit_doc_failures)
         )
 
     final_report_highlights_doc_failures = (
@@ -2120,6 +2140,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "kjva_apocrypha_bridge_next_replication_doc_failures": (
             kjva_apocrypha_bridge_next_replication_doc_failures
+        ),
+        "kjva_wikisource_candidate_source_audit_doc_failures": (
+            kjva_wikisource_candidate_source_audit_doc_failures
         ),
         "source_basis_failures": source_basis_failures,
         "english_seed_survivor_gate_failures": english_seed_survivor_gate_failures,

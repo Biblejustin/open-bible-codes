@@ -19,6 +19,8 @@ inputs = [
   "scripts/check_consolidated_findings_doc.py",
   "scripts/check_kjva_apocrypha_bridge_next_replication_doc.py",
   "scripts/check_kjva_apocrypha_bridge_prospective_boundary.py",
+  "scripts/analyze_kjva_wikisource_candidate_source.py",
+  "scripts/check_kjva_wikisource_candidate_source_audit_doc.py",
   "scripts/check_prospective_lane_status_doc.py",
   "scripts/check_final_report_assembly_docs.py",
   "scripts/check_final_report_highlights_doc.py",
@@ -405,11 +407,16 @@ inputs = [
   "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md",
   "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md",
   "docs/KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md",
+  "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
   "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
   "reports/kjv_apocrypha_bridge_prospective/bridge_summary.csv",
   "reports/kjv_apocrypha_bridge_prospective/term_summary.csv",
   "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/control_summary.csv",
   "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/term_summary.csv",
+  "reports/kjva_wikisource_candidate_source/source_status.csv",
+  "reports/kjva_wikisource_candidate_source/summary.csv",
+  "reports/kjva_wikisource_candidate_source/anchors.csv",
+  "reports/kjva_wikisource_candidate_source/manifest.json",
   "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS.md",
   "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_50.md",
   "docs/KJV_APOCRYPHA_BRIDGE_SHUFFLED_CONTROLS_100.md",
@@ -466,6 +473,7 @@ inputs = [
   "protocols/kjv_apocrypha_bridge_confirmatory_controls_5000.toml",
   "protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml",
   "protocols/kjv_apocrypha_bridge_prospective_nonbible_controls.toml",
+  "protocols/kjva_wikisource_candidate_source_audit.toml",
   "protocols/external_claim_source_counts.toml",
   "protocols/external_claim_source_all_codes_collection.toml",
   "docs/EXTERNAL_CLAIM_SOURCE_COUNTS.md",
@@ -1679,6 +1687,21 @@ inputs = [
 outputs = ["reports/kjv_apocrypha_bridge_prospective_nonbible_controls/protocol_run.manifest.json"]
 
 [[steps]]
+id = "kjva_wikisource_candidate_source_audit"
+description = "Audit Wikisource Ballantyne KJV + Apocrypha as a metadata-only future KJVA source candidate."
+argv = ["-m", "scripts.analyze_kjva_wikisource_candidate_source"]
+inputs = [
+  "scripts/analyze_kjva_wikisource_candidate_source.py",
+]
+outputs = [
+  "reports/kjva_wikisource_candidate_source/source_status.csv",
+  "reports/kjva_wikisource_candidate_source/summary.csv",
+  "reports/kjva_wikisource_candidate_source/anchors.csv",
+  "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
+  "reports/kjva_wikisource_candidate_source/manifest.json",
+]
+
+[[steps]]
 id = "external_claim_source_counts"
 description = "Refresh external-source claim and critique count baselines."
 argv = ["-m", "scripts.run_protocol", "protocols/external_claim_source_counts.toml", "--resume"]
@@ -1835,6 +1858,7 @@ inputs = [
   "reports/kjv_apocrypha_bridge_term_shuffled_controls_1000/manifest.json",
   "reports/kjv_apocrypha_bridge_term_review/manifest.json",
   "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/manifest.json",
+  "reports/kjva_wikisource_candidate_source/manifest.json",
   "reports/external_claim_source_counts/protocol_run.manifest.json",
   "reports/external_claim_source_counts/summary.manifest.json",
   "reports/external_claim_source_all_codes/protocol_run.manifest.json",
