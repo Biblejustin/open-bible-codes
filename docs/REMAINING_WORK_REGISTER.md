@@ -2368,3 +2368,16 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/preflight_real_report_run.py`.
 - `make fast-validate` passed after wiring: 2170 passed, 2 skipped, and 29325
   subtests passed.
+
+## KJVA Source Candidate Status Rollup
+
+- Added `docs/KJVA_SOURCE_CANDIDATE_STATUS.md` as a single rollup for the
+  current KJVA/apocrypha source-candidate state.
+- Current rollup status: 0 ready independent KJVA replication sources, 0
+  result-ready sources, and 0 source-lock ready sources.
+- It keeps the source boundary explicit: current eBible KJV + Apocrypha remains
+  the rerun source family, Wikisource remains a metadata-level future source
+  candidate, and `seven1m/open-bibles` remains KJV-only for current
+  KJVA/apocrypha bridge purposes.
+- Added `scripts/check_kjva_source_candidate_status_doc.py` and wired it into
+  `scripts/preflight_real_report_run.py` plus `protocols/real_report_run.toml`.

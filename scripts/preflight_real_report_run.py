@@ -71,6 +71,7 @@ from scripts import (
     check_kjva_apocrypha_bridge_next_replication_doc,
     check_kjva_apocrypha_bridge_prospective_boundary,
     check_kjva_open_bibles_candidate_source_audit_doc,
+    check_kjva_source_candidate_status_doc,
     check_kjva_wikisource_candidate_source_audit_doc,
     check_manual_review_queue,
     check_preregistration_placeholders,
@@ -162,6 +163,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_kjva_apocrypha_bridge_prospective_boundary.py",
     "scripts/analyze_kjva_open_bibles_candidate_source.py",
     "scripts/check_kjva_open_bibles_candidate_source_audit_doc.py",
+    "scripts/check_kjva_source_candidate_status_doc.py",
     "scripts/analyze_kjva_wikisource_candidate_source.py",
     "scripts/check_kjva_wikisource_candidate_source_audit_doc.py",
     "scripts/check_prospective_lane_status_doc.py",
@@ -550,6 +552,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md",
     "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md",
     "docs/KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md",
+    "docs/KJVA_SOURCE_CANDIDATE_STATUS.md",
     "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
     "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
@@ -1124,6 +1127,17 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "KJVA apocrypha bridge next-replication doc failures: "
             + "; ".join(kjva_apocrypha_bridge_next_replication_doc_failures)
+        )
+
+    kjva_source_candidate_status_doc_failures = (
+        check_kjva_source_candidate_status_doc.validate_kjva_source_candidate_status_doc(
+            root / check_kjva_source_candidate_status_doc.DEFAULT_DOC
+        )
+    )
+    if kjva_source_candidate_status_doc_failures:
+        failures.append(
+            "KJVA source candidate status doc failures: "
+            + "; ".join(kjva_source_candidate_status_doc_failures)
         )
 
     kjva_open_bibles_candidate_source_audit_doc_failures = (
@@ -2160,6 +2174,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "kjva_apocrypha_bridge_next_replication_doc_failures": (
             kjva_apocrypha_bridge_next_replication_doc_failures
+        ),
+        "kjva_source_candidate_status_doc_failures": (
+            kjva_source_candidate_status_doc_failures
         ),
         "kjva_open_bibles_candidate_source_audit_doc_failures": (
             kjva_open_bibles_candidate_source_audit_doc_failures

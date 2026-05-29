@@ -41,6 +41,8 @@ Use this order if KJVA bridge work resumes.
 
 ## Source Candidate Scan
 
+Current rollup: `docs/KJVA_SOURCE_CANDIDATE_STATUS.md`.
+
 Current local source inventory has only `configs/example_ebible_engkjv_apocrypha.toml`
 for KJVA/apocrypha bridge work. That source comes from eBible's public-domain
 King James Version + Apocrypha USFM family, so it is usable for reruns but is
@@ -82,6 +84,7 @@ sidecar.
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md`
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md`
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md`
+- `docs/KJVA_SOURCE_CANDIDATE_STATUS.md`
 - `docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md`
 - `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - `configs/prospective_study_lanes.json`

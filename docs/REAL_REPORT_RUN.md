@@ -149,6 +149,8 @@ This assembly run includes:
   `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_PREREGISTRATION.md`,
   `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md`, and
   `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md`
+- KJVA source-candidate status rollup:
+  `docs/KJVA_SOURCE_CANDIDATE_STATUS.md`
 - KJVA Wikisource candidate source-status audit:
   `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - KJVA Open-Bibles candidate source-status audit:
@@ -221,6 +223,8 @@ It requires:
 - KJVA apocrypha/deuterocanon next-replication planning stays planning-only,
   with fresh term/source lock and study-lock sidecar required before any new
   result-bearing output;
+- KJVA source-candidate status rollup records 0 ready independent KJVA
+  replication sources, 0 result-ready sources, and 0 source-lock ready sources;
 - KJVA Wikisource candidate source audit stays metadata-only, with no Bible
   text retained, no corpus import ready, and no result-bearing output;
 - KJVA Open-Bibles candidate source audit stays metadata-only and marks the

@@ -35,8 +35,9 @@ final gates with resume, refreshes WRR source/import audit state and the
 current WRR repo-defined diagnostic status, validates prospective-lane,
 KJVA apocrypha prospective boundary and next-replication planning, English
 source-basis, and English seed survivor-gate metadata, keeps the KJVA
-Wikisource and Open-Bibles source-candidate audits metadata-only, validates
-expanded-strata tooling docs, future
+source-candidate status rollup at 0 ready independent replication sources,
+keeps the Wikisource and Open-Bibles source-candidate audits metadata-only,
+validates expanded-strata tooling docs, future
 study-mapping CSV schemas, and concrete preregistration placeholder cleanup,
 checks the locked CRD relevance dictionary basis, verifies manual-review queue
 guardrails, keeps WRR method-status, lock-options, claim-readiness, and

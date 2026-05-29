@@ -159,7 +159,15 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_kjva_source_candidate_status_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "docs/KJVA_SOURCE_CANDIDATE_STATUS.md",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -2606,6 +2614,27 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "KJVA Open-Bibles source audit doc failures: missing KJV-only boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_kjva_source_candidate_status_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_kjva_source_candidate_status_doc,
+                "validate_kjva_source_candidate_status_doc",
+                return_value=["missing source-ready boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["kjva_source_candidate_status_doc_failures"],
+                ["missing source-ready boundary"],
+            )
+            self.assertIn(
+                "KJVA source candidate status doc failures: missing source-ready boundary",
                 payload["failures"],
             )
 
