@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 172
+Protocols indexed: 173
 
 ## Analysis
 
@@ -14,6 +14,7 @@ Protocols indexed: 172
 | cities_pdf_recovery_probe | Probe live and archived Torah-code.org Cities PDF links into an isolated recovery bundle. | 1 |  | reports/cities_pdf_recovery_probe | `cities_pdf_recovery_probe.toml` |
 | cities_source_page_contact_sheet | Build a local visual contact sheet for locked Cities source-page review. | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_contact_sheet.toml` |
 | cities_source_page_line_crop_band_map | Build a coordinate-only band map for Cities source-page line crops. | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_band_map.toml` |
+| cities_source_page_line_crop_band_review_worksheet | Build a no-input Cities source-page line-crop band review worksheet. | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_band_review_worksheet.toml` |
 | cities_source_page_line_crop_contact_sheet | Build local visual contact sheets for Cities source-page line crops without transcripti... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_contact_sheet.toml` |
 | cities_source_page_line_crop_packet | Build local line crops for Cities table candidate page review without importing source ... | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_packet.toml` |
 | cities_source_page_line_crop_priority_contact_sheet | Build local contact sheets grouped by Cities source-page line-crop triage priority. | 1 |  | reports/cities_pdf_recovery_probe | `cities_source_page_line_crop_priority_contact_sheet.toml` |

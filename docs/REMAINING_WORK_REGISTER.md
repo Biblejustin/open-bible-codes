@@ -694,6 +694,32 @@ Current result:
   Hebrew, transcribe rows, import source rows, normalize city names, run ELS
   searches, compute compactness, or verify p-levels.
 
+### Cities Source Page Line Crop Band Review Worksheet
+
+Completed no-input coordinate-band review worksheet:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_band_review_worksheet.toml --resume
+```
+
+Current result:
+
+- Band review rows: 16.
+- Source line rows represented: 203.
+- Unique table pages: 4.
+- Crop images available: 203.
+- OCR words represented by line boxes: 1,511.
+- OCR Hebrew letters represented by line boxes: 4,934.
+- Source-row imports: 0.
+- City-name normalization: 0.
+- ELS runs: 0.
+- Compactness runs: 0.
+- p-levels: 0.
+- Boundary: this groups the 203 line crops into 16 coordinate-band review
+  rows for later visual checking only. It does not read Hebrew, transcribe
+  rows, import source rows, normalize city names, run ELS searches, compute
+  compactness, or verify p-levels.
+
 ### Cities Source Page Line Crop Contact Sheet
 
 Completed local line-crop contact sheets:

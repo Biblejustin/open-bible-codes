@@ -105,6 +105,7 @@ This assembly run includes:
   `docs/CITIES_SOURCE_PAGE_OCR_REVIEW_HTML.md`,
   `docs/CITIES_SOURCE_PAGE_LINE_CROP_PACKET.md`,
   `docs/CITIES_SOURCE_PAGE_LINE_CROP_BAND_MAP.md`,
+  `docs/CITIES_SOURCE_PAGE_LINE_CROP_BAND_REVIEW_WORKSHEET.md`,
   `docs/CITIES_SOURCE_PAGE_LINE_CROP_CONTACT_SHEET.md`,
   `docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_HTML.md`,
   `docs/CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE.md`,
@@ -118,9 +119,10 @@ This assembly run includes:
   lock rows, 14 pending transcription-review rows, 14 local Hebrew OCR
   sidecars, a local ignored image/OCR HTML review aid, and 203 local line
   crops from the 4 table candidate pages plus a 16-row coordinate band map,
-  4 local line-crop contact sheets, a local ignored line-crop HTML review aid,
-  a 203-row line-crop triage queue, a local ignored priority-order triage HTML
-  aid, 4 local priority contact sheets, a 203-row priority line-crop worksheet, and a
+  a 16-row band review worksheet, 4 local line-crop contact sheets, a local
+  ignored line-crop HTML review aid, a 203-row line-crop triage queue, a local
+  ignored priority-order triage HTML aid, 4 local priority contact sheets, a
+  203-row priority line-crop worksheet, and a
   203-row line-crop review worksheet; no source rows imported, and no
   city-name normalization, ELS searches, compactness runs, or p-levels.
 - broader search/current findings writeup:

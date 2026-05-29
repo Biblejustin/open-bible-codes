@@ -427,6 +427,17 @@ This writes a coordinate-only map grouping adjacent line crops by vertical
 gaps. It contains no OCR body text or source-script text and imports no source
 rows. Tracked doc: `docs/CITIES_SOURCE_PAGE_LINE_CROP_BAND_MAP.md`.
 
+Cities source-page line crop band review worksheet:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_band_review_worksheet.toml --resume
+```
+
+This writes a 16-row worksheet for later visual review of the coordinate bands.
+It contains no OCR body text or source-script text and imports no source rows.
+Tracked doc:
+`docs/CITIES_SOURCE_PAGE_LINE_CROP_BAND_REVIEW_WORKSHEET.md`.
+
 Cities source-page line crop triage HTML:
 
 ```bash
