@@ -1,0 +1,30 @@
+name = "cities_source_page_line_crop_band_map"
+description = "Build a coordinate-only band map for Cities source-page line crops."
+manifest_out = "reports/cities_pdf_recovery_probe/source_page_line_crop_band_map_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "build_cities_source_page_line_crop_band_map"
+description = "Group adjacent line crops by vertical coordinate gaps without source-row import."
+argv = [
+  "-m", "scripts.build_cities_source_page_line_crop_band_map",
+  "--packet", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet.csv",
+  "--triage", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_triage.csv",
+  "--gap-threshold", "40",
+  "--out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_map.csv",
+  "--summary-out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_map_summary.csv",
+  "--markdown-out", "docs/CITIES_SOURCE_PAGE_LINE_CROP_BAND_MAP.md",
+  "--manifest-out", "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_map.manifest.json",
+]
+inputs = [
+  "scripts/build_cities_source_page_line_crop_band_map.py",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_triage.csv",
+]
+outputs = [
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_map.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_map_summary.csv",
+  "docs/CITIES_SOURCE_PAGE_LINE_CROP_BAND_MAP.md",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_map.manifest.json",
+]

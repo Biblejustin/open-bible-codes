@@ -668,6 +668,32 @@ Current result:
   import source text, normalize city names, run ELS searches, compute
   compactness, or verify p-levels.
 
+### Cities Source Page Line Crop Band Map
+
+Completed coordinate-only line-crop band map:
+
+```bash
+python3 -m scripts.run_protocol protocols/cities_source_page_line_crop_band_map.toml --resume
+```
+
+Current result:
+
+- Gap threshold: 40 px.
+- Band rows: 16.
+- Source line rows: 203.
+- Unique table pages: 4.
+- Crop images available: 203.
+- OCR words represented by line boxes: 1,511.
+- OCR Hebrew letters represented by line boxes: 4,934.
+- Source-row imports: 0.
+- City-name normalization: 0.
+- ELS runs: 0.
+- Compactness runs: 0.
+- p-levels: 0.
+- Boundary: band grouping uses local crop coordinates only. It does not read
+  Hebrew, transcribe rows, import source rows, normalize city names, run ELS
+  searches, compute compactness, or verify p-levels.
+
 ### Cities Source Page Line Crop Contact Sheet
 
 Completed local line-crop contact sheets:

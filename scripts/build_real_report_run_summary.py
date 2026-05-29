@@ -103,6 +103,9 @@ CITIES_SOURCE_PAGE_OCR_REVIEW_HTML_SUMMARY = Path(
 CITIES_SOURCE_PAGE_LINE_CROP_PACKET_SUMMARY = Path(
     "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet_summary.csv"
 )
+CITIES_SOURCE_PAGE_LINE_CROP_BAND_MAP_SUMMARY = Path(
+    "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_band_map_summary.csv"
+)
 CITIES_SOURCE_PAGE_LINE_CROP_CONTACT_SHEET_SUMMARY = Path(
     "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_contact_sheet_summary.csv"
 )
@@ -2156,6 +2159,7 @@ def cities_source_row_lock_section() -> list[str]:
     ocr_summary = metric_dict(read_rows(CITIES_SOURCE_PAGE_OCR_REVIEW_PACKET_SUMMARY))
     ocr_html_summary = metric_dict(read_rows(CITIES_SOURCE_PAGE_OCR_REVIEW_HTML_SUMMARY))
     line_crop_summary = metric_dict(read_rows(CITIES_SOURCE_PAGE_LINE_CROP_PACKET_SUMMARY))
+    line_crop_band_summary = metric_dict(read_rows(CITIES_SOURCE_PAGE_LINE_CROP_BAND_MAP_SUMMARY))
     line_crop_contact_summary = metric_dict(
         read_rows(CITIES_SOURCE_PAGE_LINE_CROP_CONTACT_SHEET_SUMMARY)
     )
@@ -2204,6 +2208,7 @@ def cities_source_row_lock_section() -> list[str]:
         f"| Local line crop rows | {line_crop_summary.get('line_crop_rows', '0')} |",
         f"| Local line crops available | {line_crop_summary.get('line_crops_available', '0')} |",
         f"| Local line crop TSV sidecars | {line_crop_summary.get('tsv_sidecars', '0')} |",
+        f"| Local line crop coordinate bands | {line_crop_band_summary.get('band_rows', '0')} |",
         f"| Local line crop contact sheets | {line_crop_contact_summary.get('contact_sheets', '0')} |",
         f"| Local line crop HTML rows | {line_crop_html_summary.get('html_rows', '0')} |",
         f"| Local line crop HTML image rows | {line_crop_html_summary.get('html_line_crop_image_rows', '0')} |",

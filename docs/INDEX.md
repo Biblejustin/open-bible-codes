@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 395
+Documents indexed: 396
 
 ## Controls
 
@@ -237,6 +237,7 @@ Documents indexed: 395
 | Cities Recovered PDF Text Audit | `CITIES_RECOVERED_PDF_TEXT_AUDIT.md` |
 | Cities Source Chain Audit | `CITIES_SOURCE_CHAIN_AUDIT.md` |
 | Cities Source Page Contact Sheet | `CITIES_SOURCE_PAGE_CONTACT_SHEET.md` |
+| Cities Source Page Line Crop Band Map | `CITIES_SOURCE_PAGE_LINE_CROP_BAND_MAP.md` |
 | Cities Source Page Line Crop Contact Sheet | `CITIES_SOURCE_PAGE_LINE_CROP_CONTACT_SHEET.md` |
 | Cities Source Page Line Crop Packet | `CITIES_SOURCE_PAGE_LINE_CROP_PACKET.md` |
 | Cities Source Page Line Crop Priority Contact Sheet | `CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_CONTACT_SHEET.md` |
