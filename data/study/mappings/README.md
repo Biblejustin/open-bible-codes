@@ -13,6 +13,7 @@ templates for future work. Populated files must pass:
 
 ```bash
 python3 -m scripts.validate_study_mapping_schemas
+python3 -m scripts.check_study_mapping_term_ids
 python3 -m scripts.check_wrr_manual_decision_records
 python3 -m scripts.check_cities_ocr_page_review_decisions
 python3 -m scripts.check_cities_source_row_lock_decision_records
@@ -25,7 +26,8 @@ study manifest workflow and include it in the relevant preregistration.
 `wrr_manual_decision_records.csv` is now the populated WRR decision log for the
 current manual locks. It records cited evidence, reviewer lock fields, and
 selected actions for 26 `no_source_change` rows and 11 `method_lock` rows.
-The Cities mapping files have direct guards too: OCR page decisions must stay
-linked to the OCR review packet, source-row lock decisions must stay linked to
-the evidence packet, and transcription decisions must stay empty until readable
-source rows are deliberately locked.
+The mapping guard suite also checks that populated mapping term IDs point at
+tracked term rows. The Cities mapping files have direct guards too: OCR page
+decisions must stay linked to the OCR review packet, source-row lock decisions
+must stay linked to the evidence packet, and transcription decisions must stay
+empty until readable source rows are deliberately locked.

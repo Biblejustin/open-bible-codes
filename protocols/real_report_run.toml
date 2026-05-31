@@ -536,6 +536,7 @@ inputs = [
   "scripts/check_expanded_strata_tooling.py",
   "scripts/check_manual_review_queue.py",
   "scripts/validate_study_mapping_schemas.py",
+  "scripts/check_study_mapping_term_ids.py",
   "scripts/run_crd_density.py",
   "scripts/classify_centered_relevance.py",
   "scripts/build_crd_comparison.py",

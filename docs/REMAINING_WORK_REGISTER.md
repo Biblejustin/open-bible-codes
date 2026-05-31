@@ -104,6 +104,10 @@ CSV files instead of treating the mapping layer as future-only.
 The generic study-mapping validator now also checks author/protagonist scoped
 refs: start/end refs must parse, match the declared `book`, and stay in
 ascending order within that book.
+`scripts/check_study_mapping_term_ids.py` now guards populated
+thematic/author/protagonist mapping rows against orphaned term IDs, and the
+check is wired into `make study-mapping-schemas`, report preflight, and the
+real-report protocol inputs.
 The WRR cross-pair grid doc is now CSV/manifest-guarded against grid-shape,
 corrected-distance, aggregate, permutation-summary, manifest input/output, and
 count drift.

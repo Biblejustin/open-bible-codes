@@ -378,6 +378,7 @@ def test_study_mapping_make_target_runs_all_mapping_guards() -> None:
 
     expected = [
         "scripts.validate_study_mapping_schemas",
+        "scripts.check_study_mapping_term_ids",
         "scripts.check_wrr_manual_decision_records",
         "scripts.check_cities_ocr_page_review_decisions",
         "scripts.check_cities_source_row_lock_decision_records",

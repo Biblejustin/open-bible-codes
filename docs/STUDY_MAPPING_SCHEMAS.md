@@ -36,6 +36,7 @@ Run:
 
 ```bash
 python3 -m scripts.validate_study_mapping_schemas
+python3 -m scripts.check_study_mapping_term_ids
 python3 -m scripts.check_wrr_manual_decision_records
 python3 -m scripts.check_cities_ocr_page_review_decisions
 python3 -m scripts.check_cities_source_row_lock_decision_records
@@ -52,7 +53,7 @@ Header-only files pass so planning can remain public without implying content.
 Populated files must also pass exact-column and non-empty lock-field checks,
 unique `mapping_id` values where applicable, supported language labels, ordered
 chapter ranges, scoped refs that match the declared book, ordered scoped-ref
-ranges, and ISO `locked_at` dates.
+ranges, term IDs that point at tracked term rows, and ISO `locked_at` dates.
 
 For `wrr_manual_decision_records.csv`, the row-level checker also requires each
 populated decision row to match the current WRR manual decision register by

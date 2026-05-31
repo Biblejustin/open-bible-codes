@@ -2149,6 +2149,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/check_source_basis_audit_queue.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_expanded_strata_tooling.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/validate_study_mapping_schemas.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/check_study_mapping_term_ids.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_crd_relevance_dictionary.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/classify_centered_relevance.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_manual_review_queue.py", preflight.DEFAULT_REQUIRED_PATHS)
@@ -2843,6 +2844,28 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "study mapping schema failures: "
                 "data/study/mappings/demo.csv missing required columns: locked_at",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_study_mapping_term_id_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_study_mapping_term_ids,
+                "validate_mapping_term_ids",
+                return_value=["data/study/mappings/demo.csv:2 unknown term_id: missing_h"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["study_mapping_term_id_failures"],
+                ["data/study/mappings/demo.csv:2 unknown term_id: missing_h"],
+            )
+            self.assertIn(
+                "study mapping term-id failures: "
+                "data/study/mappings/demo.csv:2 unknown term_id: missing_h",
                 payload["failures"],
             )
 

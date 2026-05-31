@@ -88,6 +88,7 @@ from scripts import (
     check_source_basis_audit_queue,
     check_real_report_run_doc,
     check_strongest_candidate_deep_dive_doc,
+    check_study_mapping_term_ids,
     check_study_lock_manifests_doc,
     check_wrr_claim_blocker_packet_doc,
     check_wrr_claim_readiness_doc,
@@ -681,6 +682,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_expanded_strata_tooling.py",
     "scripts/check_manual_review_queue.py",
     "scripts/validate_study_mapping_schemas.py",
+    "scripts/check_study_mapping_term_ids.py",
     "scripts/run_crd_density.py",
     "scripts/classify_centered_relevance.py",
     "scripts/build_crd_comparison.py",
@@ -1303,6 +1305,13 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "study mapping schema failures: "
             + "; ".join(study_mapping_schema_failures)
+        )
+
+    study_mapping_term_id_failures = check_study_mapping_term_ids.validate_mapping_term_ids()
+    if study_mapping_term_id_failures:
+        failures.append(
+            "study mapping term-id failures: "
+            + "; ".join(study_mapping_term_id_failures)
         )
 
     preregistration_placeholder_paths = concrete_preregistration_paths(root)
@@ -2241,6 +2250,7 @@ def main(argv: list[str] | None = None) -> int:
         "public_claim_language_failures": public_claim_language_failures,
         "doc_command_reference_failures": doc_command_reference_failures,
         "study_mapping_schema_failures": study_mapping_schema_failures,
+        "study_mapping_term_id_failures": study_mapping_term_id_failures,
         "preregistration_placeholder_paths": [
             str(path) for path in preregistration_placeholder_paths
         ],
