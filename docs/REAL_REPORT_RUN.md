@@ -252,8 +252,8 @@ It requires:
 - expanded-strata operator docs point at live scripts, protocol files, and
   Make targets;
 - study-mapping CSV schemas retain exact columns, required locked values, ISO
-  `locked_at` dates, supported language markers, and row-level guard links
-  where direct guards exist;
+  `locked_at` dates, supported language markers, tracked term IDs, and row-level
+  guard links where direct guards exist;
 - concrete preregistration docs contain no unresolved bracketed placeholders
   while the prospective-study template remains available as a template;
 - CRD relevance dictionary, term coverage, reviewer metadata, and protocol

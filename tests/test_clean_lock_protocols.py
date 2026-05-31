@@ -406,6 +406,7 @@ def test_mapping_status_docs_track_seed_rows_and_guard_suite() -> None:
 
     assert "study-mapping CSV schemas retain exact columns" in real_report
     assert "ISO\n  `locked_at` dates" in real_report
+    assert "tracked term IDs" in real_report
 
 
 def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
