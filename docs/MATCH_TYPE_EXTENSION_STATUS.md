@@ -71,15 +71,15 @@ warnings and capped-row flags.
 ## Deferred Pending Declared Data
 
 No declared-data-only strata are currently waiting on schema support. Some
-implemented mapping files remain header-only templates until populated and
-locked for a specific study.
+implemented mapping files contain conservative seed rows; others remain
+header-only templates until populated and locked for a specific study.
 
 Mapping-dependent rows use the locked CSV files in `data/study/mappings/`.
 Some mapping files now contain conservative seed rows; others remain header-only
 templates. Before any populated mapping can drive promotion, run:
 
 ```bash
-python3 -m scripts.validate_study_mapping_schemas
+make study-mapping-schemas
 ```
 
 ## Current Caution

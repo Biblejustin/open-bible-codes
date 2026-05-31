@@ -185,10 +185,10 @@ computed.
 - `terms/gematria_schemes.toml`
 - `terms/cohorts/`
 
-Mapping files are header-only planning artifacts until populated. Populated
-mapping files must pass `python3 -m scripts.validate_study_mapping_schemas` and
-must be locked before the corresponding stratum is used for promotion or
-claim-grade language.
+Some mapping files now contain conservative seed rows, while others remain
+header-only planning artifacts. Populated mapping files must pass
+`make study-mapping-schemas` and must be locked before the corresponding
+stratum is used for promotion or claim-grade language.
 
 ## Full-Span Rule
 

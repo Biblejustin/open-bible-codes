@@ -391,6 +391,22 @@ def test_study_mapping_make_target_runs_all_mapping_guards() -> None:
         assert command in mappings_readme
 
 
+def test_mapping_status_docs_track_seed_rows_and_guard_suite() -> None:
+    hypothesis = Path("docs/HYPOTHESIS_ANALYSIS_FRAMEWORK.md").read_text(encoding="utf-8")
+    match_status = Path("docs/MATCH_TYPE_EXTENSION_STATUS.md").read_text(encoding="utf-8")
+    real_report = Path("docs/REAL_REPORT_RUN.md").read_text(encoding="utf-8")
+
+    assert "conservative seed rows" in hypothesis
+    assert "make study-mapping-schemas" in hypothesis
+    assert "Mapping files are header-only planning artifacts until populated" not in hypothesis
+
+    assert "conservative seed rows" in match_status
+    assert "make study-mapping-schemas" in match_status
+
+    assert "study-mapping CSV schemas retain exact columns" in real_report
+    assert "ISO\n  `locked_at` dates" in real_report
+
+
 def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     makefile = Path("Makefile").read_text(encoding="utf-8")
     readme = Path("README.md").read_text(encoding="utf-8")

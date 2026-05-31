@@ -95,6 +95,10 @@ handoff validation and clean release validation.
 `docs/EXPANDED_STRATA_TOOLING.md` now describes the current split between
 conservative seed rows and header-only mapping templates instead of implying
 all mapping-dependent strata remain empty.
+`docs/HYPOTHESIS_ANALYSIS_FRAMEWORK.md`, `docs/MATCH_TYPE_EXTENSION_STATUS.md`,
+and `docs/REAL_REPORT_RUN.md` now use the same study-mapping wording: some
+files contain conservative seed rows, others remain header-only, and the
+guarded entry point is `make study-mapping-schemas`.
 The WRR cross-pair grid doc is now CSV/manifest-guarded against grid-shape,
 corrected-distance, aggregate, permutation-summary, manifest input/output, and
 count drift.

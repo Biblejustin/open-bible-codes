@@ -63,6 +63,7 @@ REQUIRED_PHRASES = (
     "populated Cities source-row lock decision records must name the exact decision id in their evidence citation or summary",
     "Cities source-row lock status",
     "Cities source-row lock decision records stay aligned to the 14-row evidence packet before any populated source-row lock can pass preflight",
+    "study-mapping CSV schemas retain exact columns, required locked values, ISO `locked_at` dates, supported language markers",
 )
 
 
