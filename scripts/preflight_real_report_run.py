@@ -60,6 +60,7 @@ from scripts import (
     check_cities_unreadable_pdf_ocr_review_packet_doc,
     check_cities_unreadable_pdf_review_doc,
     check_consolidated_findings_doc,
+    check_corpus_configs,
     check_critical_omission_followup_docs,
     check_doc_command_references,
     check_english_seed_survivor_gate,
@@ -679,6 +680,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_all_codes_followup_report.py",
     "scripts/build_centered_occurrence_index.py",
     "scripts/build_match_strata_index.py",
+    "scripts/check_corpus_configs.py",
     "scripts/check_crd_relevance_dictionary.py",
     "scripts/check_expanded_strata_tooling.py",
     "scripts/check_manual_review_queue.py",
@@ -1298,6 +1300,12 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "doc command-reference failures: "
             + "; ".join(doc_command_reference_failures)
+        )
+
+    corpus_config_failures = check_corpus_configs.validate_corpus_configs()
+    if corpus_config_failures:
+        failures.append(
+            "corpus config failures: " + "; ".join(corpus_config_failures)
         )
 
     term_file_failures = check_term_files.validate_term_files()
@@ -2255,6 +2263,7 @@ def main(argv: list[str] | None = None) -> int:
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,
         "public_claim_language_failures": public_claim_language_failures,
         "doc_command_reference_failures": doc_command_reference_failures,
+        "corpus_config_failures": corpus_config_failures,
         "term_file_failures": term_file_failures,
         "study_mapping_schema_failures": study_mapping_schema_failures,
         "study_mapping_term_id_failures": study_mapping_term_id_failures,

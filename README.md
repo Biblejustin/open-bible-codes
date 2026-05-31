@@ -72,8 +72,8 @@ tracked report/database/raw-source artifacts, scans tracked files for the
 forbidden GitHub account text, checks high-confidence secret-token patterns,
 validates documented script/source-path references, and rejects unsupported
 public claim language. It also guards the general-reader findings overview and
-its README/Start Here links, validates term-file schema/normalization, and runs
-the study-mapping guard suite.
+its README/Start Here links, validates corpus config schemas and term-file
+schema/normalization, and runs the study-mapping guard suite.
 
 Current fast validation before a handoff:
 
@@ -84,9 +84,9 @@ make fast-validate
 This runs the unit suite, regenerates documentation/protocol indexes, checks
 diff whitespace, runs dirty-tree-safe release hygiene, validates
 expanded-strata operator tooling, checks public claim language, and verifies
-the general-reader findings overview, term-file schema/normalization, the
-study-mapping guard suite, and local data doc references against the current
-ignored source caches.
+the general-reader findings overview, corpus config schemas, term-file
+schema/normalization, the study-mapping guard suite, and local data doc
+references against the current ignored source caches.
 
 Full clean-tree pre-push validation after committing:
 
@@ -925,12 +925,13 @@ python3 -m scripts.run_protocol protocols/real_report_run.toml --resume
 
 Tracked plan: `docs/REAL_REPORT_RUN.md`.
 The preflight now also validates source-basis metadata, expanded-strata tooling
-references, English corpus deferred-source policy, term-file schema and
-normalization, guarded study-mapping CSV schemas and decision rows, and
-concrete preregistration placeholder cleanup, plus the locked CRD
-relevance-dictionary basis before summary assembly. It also checks the
-manual-review queue guardrails and evidence links, plus the WRR method-status,
-lock-options, readiness, and blocker-packet residual-lane wording.
+references, English corpus deferred-source policy, corpus config schemas,
+term-file schema and normalization, guarded study-mapping CSV schemas and
+decision rows, and concrete preregistration placeholder cleanup, plus the
+locked CRD relevance-dictionary basis before summary assembly. It also checks
+the manual-review queue guardrails and evidence links, plus the WRR
+method-status, lock-options, readiness, and blocker-packet residual-lane
+wording.
 
 Resume without rerunning completed outputs:
 

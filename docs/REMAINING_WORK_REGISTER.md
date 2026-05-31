@@ -113,6 +113,11 @@ out of tests alone and into release/report gates: it validates required term
 columns, per-file duplicate `term_id` values, supported languages,
 normalization-empty rows, meaningful constants, and implemented gematria
 schemes before public release or real-report assembly.
+`scripts/check_corpus_configs.py` now moves corpus-config TOML shape checks
+into release/report gates without requiring ignored/private source files to
+exist; it validates config name/language/source tables, supported source
+formats, and required CSV/text source fields before public release or
+real-report assembly.
 The WRR cross-pair grid doc is now CSV/manifest-guarded against grid-shape,
 corrected-distance, aggregate, permutation-summary, manifest input/output, and
 count drift.
