@@ -101,6 +101,9 @@ files contain conservative seed rows, others remain header-only, and the
 guarded entry point is `make study-mapping-schemas`.
 The README and validator docstring now describe current guarded study-mapping
 CSV files instead of treating the mapping layer as future-only.
+The generic study-mapping validator now also checks author/protagonist scoped
+refs: start/end refs must parse, match the declared `book`, and stay in
+ascending order within that book.
 The WRR cross-pair grid doc is now CSV/manifest-guarded against grid-shape,
 corrected-distance, aggregate, permutation-summary, manifest input/output, and
 count drift.

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import re
 import sys
 from dataclasses import dataclass
 from datetime import date
@@ -13,6 +14,7 @@ from pathlib import Path
 
 MAPPINGS_DIR = Path("data/study/mappings")
 LANGUAGES = {"hebrew", "greek", "english", "michigan"}
+REF_RE = re.compile(r"^(?P<book>[1-3]?[A-Za-z]+) (?P<chapter>[0-9]+):(?P<verse>[0-9]+)$")
 
 
 @dataclass(frozen=True)
@@ -323,6 +325,19 @@ def validate_row(
     chapter_end = clean(row.get("chapter_end"))
     if chapter_start or chapter_end:
         failures.extend(validate_chapter_range(path, row_number, chapter_start, chapter_end))
+    book = clean(row.get("book"))
+    scope_start_ref = clean(row.get("scope_start_ref"))
+    scope_end_ref = clean(row.get("scope_end_ref"))
+    if book and (scope_start_ref or scope_end_ref):
+        failures.extend(
+            validate_scope_ref_range(
+                path,
+                row_number,
+                book,
+                scope_start_ref,
+                scope_end_ref,
+            )
+        )
     locked_at = clean(row.get("locked_at"))
     if locked_at:
         failures.extend(validate_iso_date(path, row_number, "locked_at", locked_at))
@@ -357,6 +372,44 @@ def validate_iso_date(path: Path, row_number: int, column: str, value: str) -> l
     except ValueError:
         return [f"{path}:{row_number} {column} must be an ISO date"]
     return []
+
+
+def validate_scope_ref_range(
+    path: Path,
+    row_number: int,
+    book: str,
+    scope_start_ref: str,
+    scope_end_ref: str,
+) -> list[str]:
+    start = parse_ref(scope_start_ref)
+    end = parse_ref(scope_end_ref)
+    failures: list[str] = []
+    if start is None:
+        failures.append(f"{path}:{row_number} scope_start_ref must look like '<Book> <chapter>:<verse>'")
+    if end is None:
+        failures.append(f"{path}:{row_number} scope_end_ref must look like '<Book> <chapter>:<verse>'")
+    if start is None or end is None:
+        return failures
+    start_book, start_chapter, start_verse = start
+    end_book, end_chapter, end_verse = end
+    if start_book != book:
+        failures.append(f"{path}:{row_number} scope_start_ref book must match book: {book}")
+    if end_book != book:
+        failures.append(f"{path}:{row_number} scope_end_ref book must match book: {book}")
+    if start_book == end_book and (start_chapter, start_verse) > (end_chapter, end_verse):
+        failures.append(f"{path}:{row_number} scope_start_ref must be <= scope_end_ref")
+    return failures
+
+
+def parse_ref(value: str) -> tuple[str, int, int] | None:
+    match = REF_RE.match(value)
+    if not match:
+        return None
+    chapter = int(match.group("chapter"))
+    verse = int(match.group("verse"))
+    if chapter < 1 or verse < 1:
+        return None
+    return match.group("book"), chapter, verse
 
 
 if __name__ == "__main__":

@@ -94,6 +94,38 @@ def test_duplicate_mapping_ids_fail(tmp_path: Path) -> None:
     assert any("duplicate mapping_id: moses_narrative" in failure for failure in failures)
 
 
+def test_scope_refs_must_match_declared_book(tmp_path: Path) -> None:
+    write_all_headers(tmp_path)
+    path = tmp_path / "protagonist_narrative_mapping.csv"
+    path.write_text(
+        ",".join(mappings.SCHEMAS[2].required_columns)
+        + "\n"
+        + "moses_narrative,moses_h,Moses,hebrew,Exod,Exod 1:1,Deut 34:12,"
+        + "notes,reviewer,2026-05-12\n",
+        encoding="utf-8",
+    )
+
+    failures = mappings.validate_mapping_dir(tmp_path)
+
+    assert any("scope_end_ref book must match book: Exod" in failure for failure in failures)
+
+
+def test_scope_refs_must_be_ordered(tmp_path: Path) -> None:
+    write_all_headers(tmp_path)
+    path = tmp_path / "author_book_mapping.csv"
+    path.write_text(
+        ",".join(mappings.SCHEMAS[1].required_columns)
+        + "\n"
+        + "isaiah_author,isaiah_h,Isaiah,hebrew,Isa,Isa 66:24,Isa 1:1,"
+        + "traditional,notes,reviewer,2026-05-12\n",
+        encoding="utf-8",
+    )
+
+    failures = mappings.validate_mapping_dir(tmp_path)
+
+    assert any("scope_start_ref must be <= scope_end_ref" in failure for failure in failures)
+
+
 def test_thematic_chapter_range_must_be_ordered(tmp_path: Path) -> None:
     write_all_headers(tmp_path)
     path = tmp_path / "thematic_chapters.csv"
