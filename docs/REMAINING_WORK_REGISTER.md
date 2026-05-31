@@ -89,6 +89,9 @@ decision records.
 The generic study-mapping schema validator now rejects unexpected columns and
 non-ISO `locked_at` dates so populated mapping rows cannot silently drift
 outside the locked CSV shape.
+`make fast-validate` and `make public-release-check` now run
+`make study-mapping-schemas`, so the mapping guard suite is part of both dirty
+handoff validation and clean release validation.
 The WRR cross-pair grid doc is now CSV/manifest-guarded against grid-shape,
 corrected-distance, aggregate, permutation-summary, manifest input/output, and
 count drift.

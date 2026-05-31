@@ -42,6 +42,7 @@ fast-validate: test indexes
 	python3 -m scripts.check_expanded_strata_tooling
 	python3 -m scripts.check_project_findings_overview_doc
 	python3 -m scripts.check_public_claim_language
+	$(MAKE) study-mapping-schemas
 	$(MAKE) local-data-doc-check
 
 release-ready: fast-validate public-release-check
@@ -52,6 +53,7 @@ public-release-check:
 	python3 -m scripts.check_doc_command_references
 	python3 -m scripts.check_project_findings_overview_doc
 	python3 -m scripts.check_public_claim_language
+	$(MAKE) study-mapping-schemas
 
 local-data-doc-check:
 	python3 -m scripts.check_doc_command_references --check-local-data

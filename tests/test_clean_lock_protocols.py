@@ -362,11 +362,13 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "scripts.check_expanded_strata_tooling" in makefile
     assert "scripts.check_project_findings_overview_doc" in makefile
     assert "scripts.check_public_claim_language" in makefile
+    assert "$(MAKE) study-mapping-schemas" in makefile
     assert "$(MAKE) local-data-doc-check" in makefile
     assert "make fast-validate" in readme
     assert "expanded-strata operator tooling" in readme
     assert "general-reader findings overview" in readme
     assert "checks public claim language" in readme
+    assert "study-mapping guard suite" in readme
 
 
 def test_study_mapping_make_target_runs_all_mapping_guards() -> None:
@@ -397,9 +399,11 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "release-ready: fast-validate public-release-check" in makefile
     assert "scripts.check_doc_command_references" in makefile
     assert "scripts.check_project_findings_overview_doc" in makefile
+    assert "$(MAKE) study-mapping-schemas" in makefile
     assert "make release-ready" in readme
     assert "validates documented script/source-path references" in normalized_readme
     assert "guards the general-reader findings overview" in normalized_readme
+    assert "study-mapping guard suite" in normalized_readme
     assert "after committing" in readme
     assert "clean public-release gate" in readme
     assert "intentionally fails while tracked files are dirty" in normalized_readme
