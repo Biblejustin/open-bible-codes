@@ -240,11 +240,10 @@ It requires:
   with fresh term/source lock and study-lock sidecar required before any new
   result-bearing output;
 - KJVA source-candidate status rollup records 0 ready independent KJVA
-  replication sources, 1 possible independent KJVA metadata candidate, 1
-  public-domain KJV-complete candidate whose heading-level probe found no
-  Apocrypha/deuterocanon headings, 0 result-ready sources, 0 source-lock ready
-  sources, and identifies the current eBible KJVA source as a rerun source
-  with 14 apocrypha/deuterocanon books;
+  replication sources, 2 possible independent KJVA metadata candidates, 1
+  public-domain split KJV+Apocrypha coverage candidate needing collation, 0
+  result-ready sources, 0 source-lock ready sources, and identifies the current
+  eBible KJVA source as a rerun source with 14 apocrypha/deuterocanon books;
 - KJVA CrossWire candidate source audit stays metadata-only, with `kjva.osis.xml`
   and `kjvdc.xml` path names present, config-license/Crown-rights metadata
   captured, but no source-use clearance, corpus import, source lock, or
@@ -255,8 +254,10 @@ It requires:
   but no Apocrypha/deuterocanon coverage confirmation, corpus import, source
   lock, or result-bearing output;
 - KJVA Gutenberg book-coverage probe stays source-coverage only, with all 66
-  KJV book headings found, 0 Apocrypha/deuterocanon book headings found, and no
-  verse map, corpus import, source lock, or result-bearing output;
+  KJV book headings found in eBook 30, all 14 tracked Apocrypha/deuterocanon
+  coverage rows found in eBook 124, one extra Epistle of Jeremiah source
+  heading, and no verse map, corpus import, source lock, or result-bearing
+  output;
 - KJVA Wikisource candidate source audit stays metadata-only, with no Bible
   text retained, no corpus import ready, and no result-bearing output;
 - KJVA Wikisource book-coverage probe stays metadata-only, with 36 existing

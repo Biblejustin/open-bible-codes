@@ -2429,18 +2429,18 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 
 - Added `docs/KJVA_SOURCE_CANDIDATE_STATUS.md` as a single rollup for the
   current KJVA/apocrypha source-candidate state.
-- Current rollup status: 0 ready independent KJVA replication sources, 1
-  possible independent KJVA metadata candidate, 1 public-domain KJV-complete
-  candidate whose heading-level probe found no Apocrypha/deuterocanon headings,
-  0 result-ready sources, and 0 source-lock ready sources.
+- Current rollup status: 0 ready independent KJVA replication sources, 2
+  possible independent KJVA metadata candidates, 1 public-domain split
+  KJV+Apocrypha coverage candidate needing collation, 0 result-ready sources,
+  and 0 source-lock ready sources.
 - It keeps the source boundary explicit: current eBible KJV + Apocrypha remains
   the rerun source family with 14 apocrypha/deuterocanon books, 5720 verses,
   and 593090 normalized letters; CrossWire is a metadata-level future source
-  candidate with KJVA/KJVDC paths present; Project Gutenberg eBook 30 is a
-  public-domain-USA KJV-only control candidate after coverage probing;
-  Wikisource remains a metadata-level future source candidate; and
-  `seven1m/open-bibles` remains KJV-only for current KJVA/apocrypha bridge
-  purposes.
+  candidate with KJVA/KJVDC paths present; Project Gutenberg eBook 30 plus
+  eBook 124 is a public-domain-USA split KJV+Apocrypha coverage candidate
+  needing collation and a Baruch/Epistle handling decision; Wikisource remains
+  a metadata-level future source candidate; and `seven1m/open-bibles` remains
+  KJV-only for current KJVA/apocrypha bridge purposes.
 - Added `scripts/check_kjva_source_candidate_status_doc.py` and wired it into
   `scripts/preflight_real_report_run.py` plus `protocols/real_report_run.toml`.
 
@@ -2500,13 +2500,16 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 ## KJVA Gutenberg Book Coverage Probe
 
 - Added `docs/KJVA_GUTENBERG_BOOK_COVERAGE_PROBE.md` as a heading-level
-  source-coverage probe for Project Gutenberg eBook 30.
+  source-coverage probe for Project Gutenberg eBook 30 plus eBook 124.
 - Current plain-text heading marker status: 66 expected KJV books, 66 found KJV
   book headings, 0 missing KJV headings, 14 expected Apocrypha/deuterocanon
-  books, 0 found Apocrypha/deuterocanon book headings, and 14 missing
-  Apocrypha/deuterocanon headings.
-- This changes the Gutenberg read from coverage-unknown to public-domain
-  KJV-only control candidate for current KJVA/apocrypha bridge purposes.
+  books, 14 found Apocrypha/deuterocanon book headings, 0 missing
+  Apocrypha/deuterocanon headings, and one extra Epistle of Jeremiah source
+  heading.
+- This changes the Gutenberg read from KJV-only control candidate to possible
+  public-domain split KJV+Apocrypha coverage candidate needing collation,
+  source-use policy lock, and Baruch/Epistle handling decision before any
+  result-bearing KJVA bridge use.
 - No Bible text is committed, normalized, or imported by this probe; it does
   not change KJVA bridge result status.
 - Added `protocols/kjva_gutenberg_book_coverage_probe.toml`,

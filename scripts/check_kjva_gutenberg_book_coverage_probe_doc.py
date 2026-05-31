@@ -31,14 +31,17 @@ REQUIRED_PHRASES = (
     "KJV book headings found: 66.",
     "Missing KJV book headings: 0.",
     "Expected apocrypha/deuterocanon books checked: 14.",
-    "Apocrypha/deuterocanon book headings found: 0.",
-    "Missing apocrypha/deuterocanon book headings: 14.",
+    "Apocrypha/deuterocanon book headings found: 14.",
+    "Missing apocrypha/deuterocanon book headings: 0.",
+    "Extra Apocrypha/deuterocanon source headings: 1.",
     "Book-order lock ready: 0.",
     "Verse-numbered import ready: 0.",
     "Source-lock ready: 0.",
     "Result-ready sources: 0.",
-    "Project Gutenberg eBook 30 heading markers show all 66 KJV book headings and no Apocrypha/deuterocanon book headings.",
-    "public-domain KJV-only control candidate",
+    "Project Gutenberg eBook 30 heading markers show all 66 KJV book headings.",
+    "Project Gutenberg eBook 124 heading markers show all 14 tracked KJVA Apocrypha/deuterocanon coverage rows.",
+    "Epistle of Jeremiah as a separate heading",
+    "possible public-domain split KJV+Apocrypha source candidate",
     "does not change any KJVA bridge result status",
 )
 FORBIDDEN_OVERCLAIM_RE = re.compile(
@@ -127,8 +130,8 @@ def validate_rows_csv(path: Path) -> list[str]:
         failures.append(f"{path} expected 14 apocrypha rows, found {len(apocrypha_rows)}")
     if any(row.get("status") != "found" for row in kjv_rows):
         failures.append(f"{path} expected current KJV rows to be found")
-    if any(row.get("status") != "missing" for row in apocrypha_rows):
-        failures.append(f"{path} expected current apocrypha rows to remain missing")
+    if any(row.get("status") != "found" for row in apocrypha_rows):
+        failures.append(f"{path} expected current apocrypha rows to be found")
     return failures
 
 
@@ -144,13 +147,15 @@ def validate_summary_csv(path: Path) -> list[str]:
         failures.append(f"{path} expected 1 summary row, found {len(rows)}")
         return failures
     expected = {
-        "fetched_plain_text_pages": "1",
+        "source_pages": "2",
+        "fetched_plain_text_pages": "2",
         "expected_kjv_books": "66",
         "found_kjv_book_headings": "66",
         "missing_kjv_book_headings": "0",
         "expected_apocrypha_books": "14",
-        "found_apocrypha_book_headings": "0",
-        "missing_apocrypha_book_headings": "14",
+        "found_apocrypha_book_headings": "14",
+        "missing_apocrypha_book_headings": "0",
+        "extra_apocrypha_source_headings": "1",
         "book_order_lock_ready": "False",
         "verse_import_ready": "False",
         "source_lock_ready": "False",

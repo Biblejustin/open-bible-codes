@@ -20,12 +20,12 @@ Baruch the son of Neriah is a body-text name, not a book heading.
 
 
 def test_build_book_rows_matches_apocrypha_heading_alias() -> None:
-    raw = b"""
-Book 67 First Esdras
-Book 68 Prayer of Manasses
+    apocrypha = b"""
+The First Book of Esdras
+The Prayer of Manasses
 """
 
-    rows = probe.build_book_rows(raw)
+    rows = probe.build_book_rows(b"", apocrypha)
     by_book = {row["expected_book"]: row for row in rows}
 
     assert by_book["1 Esdras"]["status"] == "found"
@@ -33,14 +33,19 @@ Book 68 Prayer of Manasses
 
 
 def test_build_summary_keeps_probe_non_result_bearing() -> None:
-    fetched = probe.FetchedText(
+    kjv = probe.FetchedText(
         raw=b"Book 01 Genesis\nBook 40 Matthew\n",
-        final_url=probe.TXT_URL,
+        final_url=probe.KJV_TXT_URL,
         fetch_status="fetched",
     )
-    rows = probe.build_book_rows(fetched.raw)
+    apocrypha = probe.FetchedText(
+        raw=b"The First Book of Esdras\nThe Prayer of Manasses\n",
+        final_url=probe.APOCRYPHA_TXT_URL,
+        fetch_status="fetched",
+    )
+    rows = probe.build_book_rows(kjv.raw, apocrypha.raw)
 
-    summary = probe.build_summary(rows, fetched)
+    summary = probe.build_summary(rows, kjv, apocrypha)
 
     assert summary["expected_kjv_books"] == 66
     assert summary["expected_apocrypha_books"] == 14
