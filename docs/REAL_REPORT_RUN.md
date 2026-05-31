@@ -200,6 +200,8 @@ It requires:
 - corpus config TOML files pass required name/language/source schema checks;
 - term CSV files pass schema, language, normalization, constants, and gematria
   checks;
+- every `scripts/check_*.py` guard has a matching `tests/test_check_*.py`
+  test module;
 - final report, draft, outline, highlights, consolidated findings, and
   clean-lock summary support-doc references point at required local docs;
 - `protocols/real_report_run.toml` preflight inputs match the preflight

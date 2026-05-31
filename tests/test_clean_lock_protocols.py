@@ -366,6 +366,7 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "$(MAKE) protocol-files" in makefile
     assert "$(MAKE) corpus-configs" in makefile
     assert "$(MAKE) term-files" in makefile
+    assert "$(MAKE) check-script-tests" in makefile
     assert "$(MAKE) study-mapping-schemas" in makefile
     assert "$(MAKE) local-data-doc-check" in makefile
     assert "make fast-validate" in readme
@@ -375,6 +376,7 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "protocol TOML files" in readme
     assert "corpus config schemas" in normalized_readme
     assert "term-file schema/normalization" in normalized_readme
+    assert "check-script test coverage" in normalized_readme
     assert "study-mapping guard suite" in readme
 
 
@@ -434,6 +436,7 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "validates protocol TOML files" in normalized_readme
     assert "corpus config schemas" in normalized_readme
     assert "term-file schema/normalization" in normalized_readme
+    assert "check-script test coverage" in normalized_readme
     assert "study-mapping guard suite" in normalized_readme
     assert "after committing" in readme
     assert "clean public-release gate" in readme

@@ -61,6 +61,7 @@ from scripts import (
     check_cities_unreadable_pdf_review_doc,
     check_consolidated_findings_doc,
     check_corpus_configs,
+    check_check_script_tests,
     check_critical_omission_followup_docs,
     check_doc_command_references,
     check_english_seed_survivor_gate,
@@ -681,6 +682,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_all_codes_followup_report.py",
     "scripts/build_centered_occurrence_index.py",
     "scripts/build_match_strata_index.py",
+    "scripts/check_check_script_tests.py",
     "scripts/check_protocol_files.py",
     "scripts/check_corpus_configs.py",
     "scripts/check_crd_relevance_dictionary.py",
@@ -1317,6 +1319,12 @@ def main(argv: list[str] | None = None) -> int:
     term_file_failures = check_term_files.validate_term_files()
     if term_file_failures:
         failures.append("term file failures: " + "; ".join(term_file_failures))
+
+    check_script_test_failures = check_check_script_tests.validate_check_script_tests()
+    if check_script_test_failures:
+        failures.append(
+            "check-script test failures: " + "; ".join(check_script_test_failures)
+        )
 
     study_mapping_schema_failures = validate_study_mapping_schemas.validate_mapping_dir(
         validate_study_mapping_schemas.MAPPINGS_DIR
@@ -2245,6 +2253,7 @@ def main(argv: list[str] | None = None) -> int:
             cities_claim_catalog_boundary_failures
         ),
         "critical_omission_doc_failures": critical_omission_doc_failures,
+        "check_script_test_failures": check_script_test_failures,
         "kjva_apocrypha_bridge_prospective_failures": (
             kjva_apocrypha_bridge_prospective_failures
         ),

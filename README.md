@@ -928,8 +928,9 @@ Tracked plan: `docs/REAL_REPORT_RUN.md`.
 The preflight now also validates source-basis metadata, expanded-strata tooling
 references, English corpus deferred-source policy, protocol TOML files, corpus
 config schemas, term-file schema and normalization, guarded study-mapping CSV
-schemas and decision rows, and concrete preregistration placeholder cleanup,
-plus the locked CRD relevance-dictionary basis before summary assembly. It
+schemas and decision rows, check-script test coverage, and concrete
+preregistration placeholder cleanup, plus the locked CRD relevance-dictionary
+basis before summary assembly. It
 also checks the manual-review queue guardrails and evidence links, plus the WRR
 method-status, lock-options, readiness, and blocker-packet residual-lane
 wording.
