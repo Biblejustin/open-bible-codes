@@ -63,7 +63,12 @@ Online source candidates found for possible future audit:
   14 tracked KJVA Apocrypha/deuterocanon coverage rows in eBook 124, and one
   extra Epistle of Jeremiah source heading, while also recording mixed
   Apocrypha/deuterocanon verse-marker shapes that still need collation:
-  `docs/KJVA_GUTENBERG_BOOK_COVERAGE_PROBE.md`.
+  `docs/KJVA_GUTENBERG_BOOK_COVERAGE_PROBE.md`. Current source-lock prep found
+  exact verse-count agreement for all 66 KJV books and 12 of 14 tracked
+  Apocrypha/deuterocanon books after rolling the separate Epistle of Jeremiah
+  source section into Baruch; Sirach and Prayer of Manasseh still need
+  count-drift decisions before any source lock:
+  `docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md`.
 - [CrossWire GitLab KJV/KJVA](https://gitlab.com/crosswire-bible-society/kjv):
   possible independent metadata candidate because KJVA/KJVDC path names are
   present. Current tracked status audit:
@@ -104,6 +109,7 @@ sidecar.
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md`
 - `docs/KJVA_SOURCE_CANDIDATE_STATUS.md`
 - `docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md`
+- `docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md`
 - `docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md`
 - `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - `configs/prospective_study_lanes.json`

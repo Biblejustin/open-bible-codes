@@ -2521,3 +2521,24 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/check_kjva_gutenberg_book_coverage_probe_doc.py`, and wired the
   probe into `scripts/preflight_real_report_run.py` plus
   `protocols/real_report_run.toml`.
+
+## KJVA Gutenberg Source-Lock Prep
+
+- Added `docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md` as a count-only source-lock
+  prep comparison for Project Gutenberg eBook 30 plus eBook 124 against the
+  current local KJVA corpus.
+- Current count status: all 66 KJV books match the local KJVA counts exactly;
+  12 of 14 tracked Apocrypha/deuterocanon books match after rolling the
+  separate Epistle of Jeremiah source section into Baruch; Sirach is one source
+  marker short and Prayer of Manasseh has no body verse markers in eBook 124.
+- The prep records one extra Epistle of Jeremiah source section, 31102
+  Gutenberg KJV verse markers, and 5704 Gutenberg Apocrypha/deuterocanon
+  verse-like markers, but it still leaves source-use policy, verse mapping,
+  collation, checksum lock, and study-lock sidecar work open.
+- No Bible text is committed, normalized, or imported by this prep; it does
+  not change KJVA bridge result status.
+- Added `protocols/kjva_gutenberg_source_lock_prep.toml`,
+  `scripts/analyze_kjva_gutenberg_source_lock_prep.py`, and
+  `scripts/check_kjva_gutenberg_source_lock_prep_doc.py`, and wired the prep
+  into `scripts/preflight_real_report_run.py` plus
+  `protocols/real_report_run.toml`.

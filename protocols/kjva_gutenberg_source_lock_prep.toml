@@ -1,0 +1,22 @@
+name = "kjva_gutenberg_source_lock_prep"
+description = "Compare Project Gutenberg KJV + Apocrypha verse-marker counts to the current local KJVA corpus without importing Bible text."
+manifest_out = "reports/kjva_gutenberg_source_lock_prep/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "kjva_gutenberg_source_lock_prep"
+description = "Scan Project Gutenberg eBook 30 and eBook 124 verse-marker shapes against local KJVA counts."
+argv = ["-m", "scripts.analyze_kjva_gutenberg_source_lock_prep"]
+inputs = [
+  "scripts/analyze_kjva_gutenberg_source_lock_prep.py",
+  "scripts/analyze_kjva_gutenberg_book_coverage_probe.py",
+  "data/processed/ebible/eng-kjv.csv",
+]
+outputs = [
+  "reports/kjva_gutenberg_source_lock_prep/book_shape.csv",
+  "reports/kjva_gutenberg_source_lock_prep/summary.csv",
+  "reports/kjva_gutenberg_source_lock_prep/anchors.csv",
+  "docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md",
+  "reports/kjva_gutenberg_source_lock_prep/manifest.json",
+]
