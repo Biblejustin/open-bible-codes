@@ -651,6 +651,7 @@ inputs = [
   "scripts/build_cities_unreadable_pdf_ocr_review_checklist.py",
   "scripts/check_cities_unreadable_pdf_ocr_review_checklist_doc.py",
   "scripts/build_cities_unreadable_pdf_ocr_page_review.py",
+  "scripts/check_cities_ocr_page_review_decisions.py",
   "scripts/check_cities_unreadable_pdf_ocr_page_review_doc.py",
   "scripts/build_cities_source_row_lock_queue.py",
   "scripts/check_cities_source_row_lock_queue_doc.py",

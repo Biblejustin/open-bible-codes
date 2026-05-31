@@ -53,6 +53,7 @@ from scripts import (
     check_cities_source_row_lock_worksheet_doc,
     check_cities_source_transcription_decision_records,
     check_cities_source_transcription_review_worksheet_doc,
+    check_cities_ocr_page_review_decisions,
     check_cities_unreadable_pdf_ocr_feasibility_doc,
     check_cities_unreadable_pdf_ocr_review_checklist_doc,
     check_cities_unreadable_pdf_ocr_page_review_doc,
@@ -793,6 +794,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_cities_unreadable_pdf_ocr_review_checklist.py",
     "scripts/check_cities_unreadable_pdf_ocr_review_checklist_doc.py",
     "scripts/build_cities_unreadable_pdf_ocr_page_review.py",
+    "scripts/check_cities_ocr_page_review_decisions.py",
     "scripts/check_cities_unreadable_pdf_ocr_page_review_doc.py",
     "scripts/build_cities_source_row_lock_queue.py",
     "scripts/check_cities_source_row_lock_queue_doc.py",
@@ -1846,6 +1848,18 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(cities_unreadable_pdf_ocr_review_checklist_doc_failures)
         )
 
+    cities_ocr_page_review_decision_failures = (
+        check_cities_ocr_page_review_decisions.validate_decisions(
+            check_cities_ocr_page_review_decisions.DEFAULT_DECISIONS,
+            check_cities_ocr_page_review_decisions.DEFAULT_PACKET,
+        )
+    )
+    if cities_ocr_page_review_decision_failures:
+        failures.append(
+            "Cities OCR page-review decision failures: "
+            + "; ".join(cities_ocr_page_review_decision_failures)
+        )
+
     cities_unreadable_pdf_ocr_page_review_doc_failures = (
         check_cities_unreadable_pdf_ocr_page_review_doc.validate_cities_unreadable_pdf_ocr_page_review_doc(
             check_cities_unreadable_pdf_ocr_page_review_doc.DEFAULT_DOC
@@ -2348,6 +2362,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "cities_unreadable_pdf_ocr_review_checklist_doc_failures": (
             cities_unreadable_pdf_ocr_review_checklist_doc_failures
+        ),
+        "cities_ocr_page_review_decision_failures": (
+            cities_ocr_page_review_decision_failures
         ),
         "cities_unreadable_pdf_ocr_page_review_doc_failures": (
             cities_unreadable_pdf_ocr_page_review_doc_failures

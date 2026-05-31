@@ -1011,6 +1011,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_cities_ocr_page_review_decisions.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_cities_unreadable_pdf_ocr_page_review_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -1687,6 +1691,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/build_cities_unreadable_pdf_ocr_page_review.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_cities_ocr_page_review_decisions.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -4234,6 +4242,32 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "Cities unreadable-PDF OCR review checklist doc failures: "
                 "docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md missing source boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_cities_ocr_page_review_decision_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_cities_ocr_page_review_decisions,
+                "validate_decisions",
+                return_value=[
+                    "data/study/mappings/cities_ocr_page_review_decisions.csv bad row"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["cities_ocr_page_review_decision_failures"],
+                [
+                    "data/study/mappings/cities_ocr_page_review_decisions.csv bad row"
+                ],
+            )
+            self.assertIn(
+                "Cities OCR page-review decision failures: "
+                "data/study/mappings/cities_ocr_page_review_decisions.csv bad row",
                 payload["failures"],
             )
 

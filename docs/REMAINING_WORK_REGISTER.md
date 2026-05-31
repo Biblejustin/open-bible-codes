@@ -79,6 +79,9 @@ manifest contact-summary metadata, and source-script leakage.
 The Cities unreadable-PDF OCR page-review doc is now CSV/manifest-guarded
 against builder-derived decision rows, summary rows, manifest inputs,
 no-source-row-use locks, and source-script leakage.
+The Cities OCR page-review decision file is now directly guarded against
+schema drift, source-row-use drift, source-script text, and missing packet-page
+links before page-review output is rebuilt.
 The WRR cross-pair grid doc is now CSV/manifest-guarded against grid-shape,
 corrected-distance, aggregate, permutation-summary, manifest input/output, and
 count drift.
