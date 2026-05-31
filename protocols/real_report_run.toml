@@ -26,7 +26,9 @@ inputs = [
   "scripts/analyze_kjva_gutenberg_candidate_source.py",
   "scripts/check_kjva_gutenberg_candidate_source_audit_doc.py",
   "scripts/analyze_kjva_gutenberg_source_lock_prep.py",
+  "scripts/build_kjva_gutenberg_source_lock_blocker_packet.py",
   "scripts/build_kjva_gutenberg_source_lock_decision_packet.py",
+  "scripts/check_kjva_gutenberg_source_lock_blocker_packet_doc.py",
   "scripts/check_kjva_gutenberg_source_lock_decision_packet_doc.py",
   "scripts/check_kjva_gutenberg_source_lock_prep_doc.py",
   "scripts/analyze_kjva_open_bibles_candidate_source.py",
@@ -427,6 +429,7 @@ inputs = [
   "docs/KJVA_CROSSWIRE_CANDIDATE_SOURCE_AUDIT.md",
   "docs/KJVA_GUTENBERG_BOOK_COVERAGE_PROBE.md",
   "docs/KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md",
+  "docs/KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md",
   "docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md",
   "docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md",
   "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
@@ -453,6 +456,10 @@ inputs = [
   "reports/kjva_gutenberg_source_lock_prep/summary.csv",
   "reports/kjva_gutenberg_source_lock_prep/anchors.csv",
   "reports/kjva_gutenberg_source_lock_prep/manifest.json",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/marker_diff.csv",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/boundary_options.csv",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/summary.csv",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/manifest.json",
   "reports/kjva_gutenberg_source_lock_decision_packet/decisions.csv",
   "reports/kjva_gutenberg_source_lock_decision_packet/summary.csv",
   "reports/kjva_gutenberg_source_lock_decision_packet/manifest.json",
@@ -527,6 +534,7 @@ inputs = [
   "protocols/kjva_crosswire_candidate_source_audit.toml",
   "protocols/kjva_gutenberg_book_coverage_probe.toml",
   "protocols/kjva_gutenberg_candidate_source_audit.toml",
+  "protocols/kjva_gutenberg_source_lock_blocker_packet.toml",
   "protocols/kjva_gutenberg_source_lock_decision_packet.toml",
   "protocols/kjva_gutenberg_source_lock_prep.toml",
   "protocols/kjva_open_bibles_candidate_source_audit.toml",
@@ -1832,6 +1840,22 @@ outputs = [
 ]
 
 [[steps]]
+id = "kjva_gutenberg_source_lock_blocker_packet"
+description = "Locate remaining Gutenberg source-lock blockers from marker evidence only."
+argv = ["-m", "scripts.build_kjva_gutenberg_source_lock_blocker_packet"]
+inputs = [
+  "scripts/build_kjva_gutenberg_source_lock_blocker_packet.py",
+  "data/processed/ebible/eng-kjv.csv",
+]
+outputs = [
+  "reports/kjva_gutenberg_source_lock_blocker_packet/marker_diff.csv",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/boundary_options.csv",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/summary.csv",
+  "docs/KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/manifest.json",
+]
+
+[[steps]]
 id = "kjva_open_bibles_candidate_source_audit"
 description = "Audit seven1m/open-bibles as KJV-only metadata, not KJVA/apocrypha coverage."
 argv = ["-m", "scripts.analyze_kjva_open_bibles_candidate_source"]
@@ -2038,6 +2062,7 @@ inputs = [
   "reports/kjva_gutenberg_book_coverage_probe/manifest.json",
   "reports/kjva_gutenberg_candidate_source/manifest.json",
   "reports/kjva_gutenberg_source_lock_prep/manifest.json",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/manifest.json",
   "reports/kjva_gutenberg_source_lock_decision_packet/manifest.json",
   "reports/kjva_open_bibles_candidate_source/manifest.json",
   "reports/kjva_wikisource_candidate_source/manifest.json",

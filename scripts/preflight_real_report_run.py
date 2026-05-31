@@ -79,6 +79,7 @@ from scripts import (
     check_kjva_crosswire_candidate_source_audit_doc,
     check_kjva_gutenberg_book_coverage_probe_doc,
     check_kjva_gutenberg_candidate_source_audit_doc,
+    check_kjva_gutenberg_source_lock_blocker_packet_doc,
     check_kjva_gutenberg_source_lock_decision_packet_doc,
     check_kjva_gutenberg_source_lock_prep_doc,
     check_kjva_open_bibles_candidate_source_audit_doc,
@@ -183,7 +184,9 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/analyze_kjva_gutenberg_candidate_source.py",
     "scripts/check_kjva_gutenberg_candidate_source_audit_doc.py",
     "scripts/analyze_kjva_gutenberg_source_lock_prep.py",
+    "scripts/build_kjva_gutenberg_source_lock_blocker_packet.py",
     "scripts/build_kjva_gutenberg_source_lock_decision_packet.py",
+    "scripts/check_kjva_gutenberg_source_lock_blocker_packet_doc.py",
     "scripts/check_kjva_gutenberg_source_lock_decision_packet_doc.py",
     "scripts/check_kjva_gutenberg_source_lock_prep_doc.py",
     "scripts/analyze_kjva_open_bibles_candidate_source.py",
@@ -584,6 +587,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/KJVA_CROSSWIRE_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_GUTENBERG_BOOK_COVERAGE_PROBE.md",
     "docs/KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md",
+    "docs/KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md",
     "docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md",
     "docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md",
     "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
@@ -610,6 +614,10 @@ DEFAULT_REQUIRED_PATHS = [
     "reports/kjva_gutenberg_source_lock_prep/summary.csv",
     "reports/kjva_gutenberg_source_lock_prep/anchors.csv",
     "reports/kjva_gutenberg_source_lock_prep/manifest.json",
+    "reports/kjva_gutenberg_source_lock_blocker_packet/marker_diff.csv",
+    "reports/kjva_gutenberg_source_lock_blocker_packet/boundary_options.csv",
+    "reports/kjva_gutenberg_source_lock_blocker_packet/summary.csv",
+    "reports/kjva_gutenberg_source_lock_blocker_packet/manifest.json",
     "reports/kjva_gutenberg_source_lock_decision_packet/decisions.csv",
     "reports/kjva_gutenberg_source_lock_decision_packet/summary.csv",
     "reports/kjva_gutenberg_source_lock_decision_packet/manifest.json",
@@ -684,6 +692,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/kjva_crosswire_candidate_source_audit.toml",
     "protocols/kjva_gutenberg_book_coverage_probe.toml",
     "protocols/kjva_gutenberg_candidate_source_audit.toml",
+    "protocols/kjva_gutenberg_source_lock_blocker_packet.toml",
     "protocols/kjva_gutenberg_source_lock_decision_packet.toml",
     "protocols/kjva_gutenberg_source_lock_prep.toml",
     "protocols/kjva_open_bibles_candidate_source_audit.toml",
@@ -1264,6 +1273,17 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "KJVA Gutenberg source-lock decision packet failures: "
             + "; ".join(kjva_gutenberg_source_lock_decision_packet_doc_failures)
+        )
+
+    kjva_gutenberg_source_lock_blocker_packet_doc_failures = (
+        check_kjva_gutenberg_source_lock_blocker_packet_doc.validate_kjva_gutenberg_source_lock_blocker_packet_doc(
+            root / check_kjva_gutenberg_source_lock_blocker_packet_doc.DEFAULT_DOC
+        )
+    )
+    if kjva_gutenberg_source_lock_blocker_packet_doc_failures:
+        failures.append(
+            "KJVA Gutenberg source-lock blocker packet failures: "
+            + "; ".join(kjva_gutenberg_source_lock_blocker_packet_doc_failures)
         )
 
     kjva_open_bibles_candidate_source_audit_doc_failures = (
@@ -2396,6 +2416,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "kjva_gutenberg_source_lock_decision_packet_doc_failures": (
             kjva_gutenberg_source_lock_decision_packet_doc_failures
+        ),
+        "kjva_gutenberg_source_lock_blocker_packet_doc_failures": (
+            kjva_gutenberg_source_lock_blocker_packet_doc_failures
         ),
         "kjva_open_bibles_candidate_source_audit_doc_failures": (
             kjva_open_bibles_candidate_source_audit_doc_failures

@@ -1,0 +1,21 @@
+name = "kjva_gutenberg_source_lock_blocker_packet"
+description = "Build marker-only blocker evidence for remaining Project Gutenberg KJVA source-lock gaps without importing Bible text."
+manifest_out = "reports/kjva_gutenberg_source_lock_blocker_packet/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "kjva_gutenberg_source_lock_blocker_packet"
+description = "Locate Sirach and Prayer of Manasseh source-lock blockers from marker evidence only."
+argv = ["-m", "scripts.build_kjva_gutenberg_source_lock_blocker_packet"]
+inputs = [
+  "scripts/build_kjva_gutenberg_source_lock_blocker_packet.py",
+  "data/processed/ebible/eng-kjv.csv",
+]
+outputs = [
+  "reports/kjva_gutenberg_source_lock_blocker_packet/marker_diff.csv",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/boundary_options.csv",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/summary.csv",
+  "docs/KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/manifest.json",
+]

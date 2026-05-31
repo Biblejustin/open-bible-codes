@@ -157,6 +157,10 @@ This assembly run includes:
   `docs/KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md`
 - KJVA Gutenberg book-coverage probe:
   `docs/KJVA_GUTENBERG_BOOK_COVERAGE_PROBE.md`
+- KJVA Gutenberg source-lock prep, decision, and blocker packets:
+  `docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md`,
+  `docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md`, and
+  `docs/KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md`
 - KJVA Wikisource candidate source-status audit:
   `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - KJVA Wikisource book-coverage probe:
@@ -260,6 +264,10 @@ It requires:
   heading, 31102 KJV verse markers, 5704 Apocrypha/deuterocanon verse-like
   markers with mixed marker shapes, and no verse map, corpus import, source
   lock, or result-bearing output;
+- KJVA Gutenberg source-lock blocker packet stays marker-only, narrowing the
+  remaining blockers to Sirach `SIR 44:23` and Prayer of Manasseh having 0
+  body markers against 15 local markers, with no Bible text committed and no
+  source lock;
 - KJVA Wikisource candidate source audit stays metadata-only, with no Bible
   text retained, no corpus import ready, and no result-bearing output;
 - KJVA Wikisource book-coverage probe stays metadata-only, with 36 existing

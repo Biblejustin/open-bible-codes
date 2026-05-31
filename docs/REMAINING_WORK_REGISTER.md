@@ -2564,3 +2564,21 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/check_kjva_gutenberg_source_lock_decision_packet_doc.py`, and wired
   the packet into `scripts/preflight_real_report_run.py` plus
   `protocols/real_report_run.toml`.
+
+## KJVA Gutenberg Source-Lock Blocker Packet
+
+- Added `docs/KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md` as a marker-only
+  blocker packet for the two remaining Gutenberg KJVA source-lock blockers.
+- Current packet status: Sirach source markers 1392 vs local markers 1393,
+  with the marker-only gap narrowed to `SIR 44:23`; Prayer of Manasseh source
+  section detected with 0 body markers vs 15 local markers.
+- Recommended next boundary: do not auto-insert the Sirach marker, and do not
+  manually split Prayer of Manasseh before a citable marked source, exclusion
+  policy, or boundary rule is locked.
+- No Bible text is committed, normalized, split, or imported by this packet;
+  it does not change KJVA bridge result status.
+- Added `protocols/kjva_gutenberg_source_lock_blocker_packet.toml`,
+  `scripts/build_kjva_gutenberg_source_lock_blocker_packet.py`, and
+  `scripts/check_kjva_gutenberg_source_lock_blocker_packet_doc.py`, and wired
+  the packet into `scripts/preflight_real_report_run.py` plus
+  `protocols/real_report_run.toml`.

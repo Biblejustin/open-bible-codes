@@ -73,7 +73,11 @@ Online source candidates found for possible future audit:
   replication stream, rolling Epistle of Jeremiah into BAR for KJVA code
   compatibility, and blocking source lock until Sirach and Prayer of Manasseh
   have citable non-text collation decisions:
-  `docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md`.
+  `docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md`. Current blocker
+  packet narrows the remaining source-lock blockers to a Sirach marker-only
+  gap at `SIR 44:23` and a detected Prayer of Manasseh source section with 0
+  body markers against 15 local markers:
+  `docs/KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md`.
 - [CrossWire GitLab KJV/KJVA](https://gitlab.com/crosswire-bible-society/kjv):
   possible independent metadata candidate because KJVA/KJVDC path names are
   present. Current tracked status audit:
@@ -116,6 +120,7 @@ sidecar.
 - `docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md`
 - `docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md`
 - `docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md`
+- `docs/KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md`
 - `docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md`
 - `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - `configs/prospective_study_lanes.json`
