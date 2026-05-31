@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate future study-mapping CSV schemas without interpreting content."""
+"""Validate study-mapping CSV schemas without interpreting content."""
 
 from __future__ import annotations
 

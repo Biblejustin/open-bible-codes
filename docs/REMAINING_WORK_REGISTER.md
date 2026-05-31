@@ -99,6 +99,8 @@ all mapping-dependent strata remain empty.
 and `docs/REAL_REPORT_RUN.md` now use the same study-mapping wording: some
 files contain conservative seed rows, others remain header-only, and the
 guarded entry point is `make study-mapping-schemas`.
+The README and validator docstring now describe current guarded study-mapping
+CSV files instead of treating the mapping layer as future-only.
 The WRR cross-pair grid doc is now CSV/manifest-guarded against grid-shape,
 corrected-distance, aggregate, permutation-summary, manifest input/output, and
 count drift.
