@@ -1974,13 +1974,13 @@ Run `make release-ready` from a committed tree; the final public-release gate is
 supposed to fail if tracked files are dirty.
 
 Latest validation snapshot after the release-ready make target, refreshed after
-the check-script test and release-wiring guards:
+the script test-name alignment and exact-name anchor tests:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 2228
+- Current `make fast-validate` passed, including `python3 -m pytest -q`: 2242
   tests, 2 skipped, and 29325 subtests.
-- `make public-release-check` passed after the check-script wiring guard.
+- `make public-release-check` passed after the script test-name alignment work.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
-  passed clean from the committed tree after the check-script wiring guard.
+  passed clean from the committed tree after the script test-name alignment work.
 - `cities_source_row_lock_001` through `cities_source_row_lock_014` are now
   locked as `source_row_lock_ready` for later source-row extraction review only;
   source-row imports, city-name normalization, ELS runs, compactness runs, and

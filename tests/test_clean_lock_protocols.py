@@ -451,7 +451,7 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     normalized_text = " ".join(text.split())
 
     assert "Latest validation snapshot after the release-ready make target" in text
-    assert "2228 tests" in normalized_text
+    assert "2242 tests" in normalized_text
     assert "2 skipped, and 29325 subtests" in normalized_text
     assert "make release-ready" in text
     assert "committed tree" in text
