@@ -1,0 +1,19 @@
+name = "kjva_hakkaac_apocrypha_boundary_candidate"
+description = "Audit Hakkaac KJV Apocrypha pages as marker-only candidates for resolving KJVA source-lock blockers."
+manifest_out = "reports/kjva_hakkaac_apocrypha_boundary_candidate/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "kjva_hakkaac_apocrypha_boundary_candidate"
+description = "Scan Hakkaac Sirach 44 and Prayer of Manasseh pages for visible markers without importing Bible text."
+argv = ["-m", "scripts.analyze_kjva_hakkaac_apocrypha_boundary_candidate"]
+inputs = [
+  "scripts/analyze_kjva_hakkaac_apocrypha_boundary_candidate.py",
+]
+outputs = [
+  "reports/kjva_hakkaac_apocrypha_boundary_candidate/chapter_markers.csv",
+  "reports/kjva_hakkaac_apocrypha_boundary_candidate/summary.csv",
+  "docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md",
+  "reports/kjva_hakkaac_apocrypha_boundary_candidate/manifest.json",
+]

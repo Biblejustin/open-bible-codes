@@ -2582,3 +2582,17 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/check_kjva_gutenberg_source_lock_blocker_packet_doc.py`, and wired
   the packet into `scripts/preflight_real_report_run.py` plus
   `protocols/real_report_run.toml`.
+
+## KJVA Hakkaac Boundary Candidate
+
+- Added `docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md` as a marker-only
+  candidate audit for the two remaining Gutenberg KJVA source-lock blockers.
+- Current audit status: Hakkaac Sirach 44 exposes markers `1..23`, including
+  the missing `SIR 44:23` marker; Hakkaac Prayer of Manasseh exposes markers
+  `1..15`; both pages include a public-domain note.
+- This is candidate evidence only. It does not source-lock Hakkaac, import
+  Bible text, collate wording, choose source order, or authorize a
+  result-bearing run.
+- Added `protocols/kjva_hakkaac_apocrypha_boundary_candidate.toml`,
+  `scripts/analyze_kjva_hakkaac_apocrypha_boundary_candidate.py`, and
+  `scripts/check_kjva_hakkaac_apocrypha_boundary_candidate_doc.py`.

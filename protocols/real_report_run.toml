@@ -46,6 +46,8 @@ inputs = [
   "scripts/check_claim_catalog_doc.py",
   "scripts/check_cities_claim_catalog_boundary.py",
   "scripts/check_cities_public_handoff_docs.py",
+  "scripts/analyze_kjva_hakkaac_apocrypha_boundary_candidate.py",
+  "scripts/check_kjva_hakkaac_apocrypha_boundary_candidate_doc.py",
   "scripts/check_real_report_run_doc.py",
   "scripts/check_strongest_candidate_deep_dive_doc.py",
   "els/project_index.py",
@@ -432,6 +434,7 @@ inputs = [
   "docs/KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md",
   "docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md",
   "docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md",
+  "docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md",
   "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
   "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
   "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
@@ -463,6 +466,9 @@ inputs = [
   "reports/kjva_gutenberg_source_lock_decision_packet/decisions.csv",
   "reports/kjva_gutenberg_source_lock_decision_packet/summary.csv",
   "reports/kjva_gutenberg_source_lock_decision_packet/manifest.json",
+  "reports/kjva_hakkaac_apocrypha_boundary_candidate/chapter_markers.csv",
+  "reports/kjva_hakkaac_apocrypha_boundary_candidate/summary.csv",
+  "reports/kjva_hakkaac_apocrypha_boundary_candidate/manifest.json",
   "reports/kjva_open_bibles_candidate_source/source_status.csv",
   "reports/kjva_open_bibles_candidate_source/summary.csv",
   "reports/kjva_open_bibles_candidate_source/anchors.csv",
@@ -537,6 +543,7 @@ inputs = [
   "protocols/kjva_gutenberg_source_lock_blocker_packet.toml",
   "protocols/kjva_gutenberg_source_lock_decision_packet.toml",
   "protocols/kjva_gutenberg_source_lock_prep.toml",
+  "protocols/kjva_hakkaac_apocrypha_boundary_candidate.toml",
   "protocols/kjva_open_bibles_candidate_source_audit.toml",
   "protocols/kjva_wikisource_candidate_source_audit.toml",
   "protocols/external_claim_source_counts.toml",
@@ -1856,6 +1863,20 @@ outputs = [
 ]
 
 [[steps]]
+id = "kjva_hakkaac_apocrypha_boundary_candidate"
+description = "Audit Hakkaac KJV Apocrypha visible markers as boundary candidates without importing Bible text."
+argv = ["-m", "scripts.analyze_kjva_hakkaac_apocrypha_boundary_candidate"]
+inputs = [
+  "scripts/analyze_kjva_hakkaac_apocrypha_boundary_candidate.py",
+]
+outputs = [
+  "reports/kjva_hakkaac_apocrypha_boundary_candidate/chapter_markers.csv",
+  "reports/kjva_hakkaac_apocrypha_boundary_candidate/summary.csv",
+  "docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md",
+  "reports/kjva_hakkaac_apocrypha_boundary_candidate/manifest.json",
+]
+
+[[steps]]
 id = "kjva_open_bibles_candidate_source_audit"
 description = "Audit seven1m/open-bibles as KJV-only metadata, not KJVA/apocrypha coverage."
 argv = ["-m", "scripts.analyze_kjva_open_bibles_candidate_source"]
@@ -2064,6 +2085,7 @@ inputs = [
   "reports/kjva_gutenberg_source_lock_prep/manifest.json",
   "reports/kjva_gutenberg_source_lock_blocker_packet/manifest.json",
   "reports/kjva_gutenberg_source_lock_decision_packet/manifest.json",
+  "reports/kjva_hakkaac_apocrypha_boundary_candidate/manifest.json",
   "reports/kjva_open_bibles_candidate_source/manifest.json",
   "reports/kjva_wikisource_candidate_source/manifest.json",
   "reports/external_claim_source_counts/protocol_run.manifest.json",
