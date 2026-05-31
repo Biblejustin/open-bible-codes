@@ -2542,3 +2542,25 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/check_kjva_gutenberg_source_lock_prep_doc.py`, and wired the prep
   into `scripts/preflight_real_report_run.py` plus
   `protocols/real_report_run.toml`.
+
+## KJVA Gutenberg Source-Lock Decision Packet
+
+- Added `docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md` as a decision
+  packet built from the Gutenberg source-lock prep outputs.
+- Current packet status: 10 decision rows, 2 policy-ready rows, 3
+  recommended-but-not-locked rows, 4 blocked rows, and 1 candidate-not-locked
+  row. It recommends using Gutenberg source order for a future independent
+  Project Gutenberg replication stream, rolling Epistle of Jeremiah into BAR
+  for KJVA book-code compatibility, and keeping raw Gutenberg text ignored or
+  in memory only.
+- The packet explicitly blocks source lock on Sirach and Prayer of Manasseh:
+  Sirach is one source marker short and Prayer of Manasseh has no body verse
+  markers in eBook 124. Both need citable non-text collation decisions before
+  any source-lock sidecar can be written.
+- No Bible text is committed, normalized, or imported by this packet; it does
+  not change KJVA bridge result status.
+- Added `protocols/kjva_gutenberg_source_lock_decision_packet.toml`,
+  `scripts/build_kjva_gutenberg_source_lock_decision_packet.py`, and
+  `scripts/check_kjva_gutenberg_source_lock_decision_packet_doc.py`, and wired
+  the packet into `scripts/preflight_real_report_run.py` plus
+  `protocols/real_report_run.toml`.

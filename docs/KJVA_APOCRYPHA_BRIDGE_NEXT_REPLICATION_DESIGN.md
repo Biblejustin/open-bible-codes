@@ -68,7 +68,12 @@ Online source candidates found for possible future audit:
   Apocrypha/deuterocanon books after rolling the separate Epistle of Jeremiah
   source section into Baruch; Sirach and Prayer of Manasseh still need
   count-drift decisions before any source lock:
-  `docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md`.
+  `docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md`. Current decision packet
+  recommends Gutenberg source order for a future independent Project Gutenberg
+  replication stream, rolling Epistle of Jeremiah into BAR for KJVA code
+  compatibility, and blocking source lock until Sirach and Prayer of Manasseh
+  have citable non-text collation decisions:
+  `docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md`.
 - [CrossWire GitLab KJV/KJVA](https://gitlab.com/crosswire-bible-society/kjv):
   possible independent metadata candidate because KJVA/KJVDC path names are
   present. Current tracked status audit:
@@ -110,6 +115,7 @@ sidecar.
 - `docs/KJVA_SOURCE_CANDIDATE_STATUS.md`
 - `docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md`
 - `docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md`
+- `docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md`
 - `docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md`
 - `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - `configs/prospective_study_lanes.json`

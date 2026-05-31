@@ -1,0 +1,22 @@
+name = "kjva_gutenberg_source_lock_decision_packet"
+description = "Build a decision packet from Project Gutenberg KJVA source-lock prep evidence without importing Bible text."
+manifest_out = "reports/kjva_gutenberg_source_lock_decision_packet/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "kjva_gutenberg_source_lock_decision_packet"
+description = "Convert Gutenberg source-lock prep counts into source-lock recommendations and blockers."
+argv = ["-m", "scripts.build_kjva_gutenberg_source_lock_decision_packet"]
+inputs = [
+  "scripts/build_kjva_gutenberg_source_lock_decision_packet.py",
+  "reports/kjva_gutenberg_source_lock_prep/book_shape.csv",
+  "reports/kjva_gutenberg_source_lock_prep/summary.csv",
+  "data/processed/ebible/eng-kjv.csv",
+]
+outputs = [
+  "reports/kjva_gutenberg_source_lock_decision_packet/decisions.csv",
+  "reports/kjva_gutenberg_source_lock_decision_packet/summary.csv",
+  "docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md",
+  "reports/kjva_gutenberg_source_lock_decision_packet/manifest.json",
+]
