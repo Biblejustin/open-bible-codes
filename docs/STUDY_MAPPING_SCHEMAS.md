@@ -49,9 +49,9 @@ make study-mapping-schemas
 ```
 
 Header-only files pass so planning can remain public without implying content.
-Populated files must also pass required-column and non-empty lock-field checks,
-unique `mapping_id` values where applicable, supported language labels, and
-ordered chapter ranges.
+Populated files must also pass exact-column and non-empty lock-field checks,
+unique `mapping_id` values where applicable, supported language labels, ordered
+chapter ranges, and ISO `locked_at` dates.
 
 For `wrr_manual_decision_records.csv`, the row-level checker also requires each
 populated decision row to match the current WRR manual decision register by

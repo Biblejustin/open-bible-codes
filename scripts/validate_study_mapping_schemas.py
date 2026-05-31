@@ -7,6 +7,7 @@ import argparse
 import csv
 import sys
 from dataclasses import dataclass
+from datetime import date
 from pathlib import Path
 
 
@@ -280,6 +281,9 @@ def validate_mapping_file(
         missing = sorted(set(schema.required_columns) - set(fieldnames))
         if missing:
             return [f"{path} missing required columns: {', '.join(missing)}"]
+        extra = [field for field in fieldnames if field not in schema.required_columns]
+        if extra:
+            return [f"{path} has unexpected columns: {', '.join(extra)}"]
         rows = list(reader)
 
     if require_nonempty and not rows:
@@ -319,6 +323,9 @@ def validate_row(
     chapter_end = clean(row.get("chapter_end"))
     if chapter_start or chapter_end:
         failures.extend(validate_chapter_range(path, row_number, chapter_start, chapter_end))
+    locked_at = clean(row.get("locked_at"))
+    if locked_at:
+        failures.extend(validate_iso_date(path, row_number, "locked_at", locked_at))
     return failures
 
 
@@ -342,6 +349,14 @@ def validate_chapter_range(
 
 def clean(value: str | None) -> str:
     return (value or "").strip()
+
+
+def validate_iso_date(path: Path, row_number: int, column: str, value: str) -> list[str]:
+    try:
+        date.fromisoformat(value)
+    except ValueError:
+        return [f"{path}:{row_number} {column} must be an ISO date"]
+    return []
 
 
 if __name__ == "__main__":

@@ -86,6 +86,9 @@ links before page-review output is rebuilt.
 schema validation, WRR manual decision records, Cities OCR page-review
 decisions, Cities source-row lock decisions, and Cities source-transcription
 decision records.
+The generic study-mapping schema validator now rejects unexpected columns and
+non-ISO `locked_at` dates so populated mapping rows cannot silently drift
+outside the locked CSV shape.
 The WRR cross-pair grid doc is now CSV/manifest-guarded against grid-shape,
 corrected-distance, aggregate, permutation-summary, manifest input/output, and
 count drift.

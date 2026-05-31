@@ -33,6 +33,20 @@ def test_missing_required_column_fails(tmp_path: Path) -> None:
     assert any("missing required columns: chapter_end" in failure for failure in failures)
 
 
+def test_unexpected_column_fails(tmp_path: Path) -> None:
+    write_all_headers(tmp_path)
+    path = tmp_path / "thematic_chapters.csv"
+    path.write_text(
+        ",".join(mappings.SCHEMAS[0].required_columns)
+        + ",extra_notes\n",
+        encoding="utf-8",
+    )
+
+    failures = mappings.validate_mapping_dir(tmp_path)
+
+    assert any("unexpected columns: extra_notes" in failure for failure in failures)
+
+
 def test_populated_mapping_requires_locked_fields(tmp_path: Path) -> None:
     write_all_headers(tmp_path)
     path = tmp_path / "author_book_mapping.csv"
@@ -46,6 +60,22 @@ def test_populated_mapping_requires_locked_fields(tmp_path: Path) -> None:
     failures = mappings.validate_mapping_dir(tmp_path)
 
     assert any("missing value for tradition" in failure for failure in failures)
+
+
+def test_locked_at_must_be_iso_date(tmp_path: Path) -> None:
+    write_all_headers(tmp_path)
+    path = tmp_path / "author_book_mapping.csv"
+    path.write_text(
+        ",".join(mappings.SCHEMAS[1].required_columns)
+        + "\n"
+        + "isaiah_author,isaiah_h,Isaiah,hebrew,Isa,Isa 1:1,Isa 66:24,"
+        + "traditional,notes,reviewer,05/12/2026\n",
+        encoding="utf-8",
+    )
+
+    failures = mappings.validate_mapping_dir(tmp_path)
+
+    assert any("locked_at must be an ISO date" in failure for failure in failures)
 
 
 def test_duplicate_mapping_ids_fail(tmp_path: Path) -> None:
