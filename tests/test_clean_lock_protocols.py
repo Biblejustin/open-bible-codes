@@ -448,10 +448,11 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
 
 def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     text = Path("docs/REMAINING_WORK_REGISTER.md").read_text(encoding="utf-8")
+    normalized_text = " ".join(text.split())
 
     assert "Latest validation snapshot after the release-ready make target" in text
-    assert "1577 tests" in text
-    assert "2 skipped, and 29196 subtests" in text
+    assert "2228 tests" in normalized_text
+    assert "2 skipped, and 29325 subtests" in normalized_text
     assert "make release-ready" in text
     assert "committed tree" in text
     assert "make fast-validate" in text
