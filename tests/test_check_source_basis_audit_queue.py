@@ -13,16 +13,20 @@ def test_validate_source_basis_queue_rejects_stale_doc_counts(tmp_path) -> None:
     ebible = tmp_path / "ebible.csv"
     door43, oet, otb, openbible, odr, supplemental = write_empty_control_manifests(tmp_path)
     audit_queue = tmp_path / "queue.md"
-    write_manifest(
+    write_biblegateway_manifest(
         biblegateway,
         [
             {
                 "label": "KJV",
+                "name": "King James Version",
+                "config_path": "",
+                "local_csv": "data/private/english/kjv.csv",
                 "coverage": "full",
                 "ot_basis": "Masoretic/KJV lineage",
                 "nt_basis": "Textus Receptus/KJV lineage",
                 "source_family": "KJV/TR tradition",
                 "basis_status": "broad_tradition",
+                "notes": "metadata-only test row",
             }
         ],
     )
@@ -83,16 +87,20 @@ def test_validate_source_basis_queue_rejects_needs_audit_rows(tmp_path) -> None:
     ebible = tmp_path / "ebible.csv"
     door43, oet, otb, openbible, odr, supplemental = write_empty_control_manifests(tmp_path)
     audit_queue = tmp_path / "queue.md"
-    write_manifest(
+    write_biblegateway_manifest(
         biblegateway,
         [
             {
                 "label": "DEMO",
+                "name": "Demo Version",
+                "config_path": "",
+                "local_csv": "data/private/english/demo.csv",
                 "coverage": "full",
                 "ot_basis": "unknown",
                 "nt_basis": "unknown",
                 "source_family": "unknown",
                 "basis_status": "needs_audit",
+                "notes": "metadata-only test row",
             }
         ],
     )
@@ -144,6 +152,131 @@ def test_validate_source_basis_queue_rejects_needs_audit_rows(tmp_path) -> None:
         )
         == []
     )
+
+
+def test_validate_source_basis_queue_rejects_biblegateway_public_metadata_path(tmp_path) -> None:
+    biblegateway = tmp_path / "biblegateway.csv"
+    ebible = tmp_path / "ebible.csv"
+    door43, oet, otb, openbible, odr, supplemental = write_empty_control_manifests(tmp_path)
+    audit_queue = tmp_path / "queue.md"
+    write_biblegateway_manifest(
+        biblegateway,
+        [
+            {
+                "label": "DEMO",
+                "name": "Demo Version",
+                "config_path": "",
+                "local_csv": "data/raw/demo.csv",
+                "coverage": "full",
+                "ot_basis": "unknown",
+                "nt_basis": "unknown",
+                "source_family": "unknown",
+                "basis_status": "broad_tradition",
+                "notes": "metadata-only test row",
+            }
+        ],
+    )
+    write_manifest(ebible, [])
+    write_queue_counts(audit_queue, biblegateway=(1, 0, 1))
+
+    failures = check.validate_source_basis_queue(
+        biblegateway_manifest=biblegateway,
+        ebible_controls=ebible,
+        door43_controls=door43,
+        oet_controls=oet,
+        otb_controls=otb,
+        openbible_controls=openbible,
+        odr_controls=odr,
+        supplemental_controls=supplemental,
+        audit_queue=audit_queue,
+    )
+
+    assert failures == [
+        "BibleGateway English versions row 2: metadata-only row must keep "
+        "local_csv under data/private/english/"
+    ]
+
+
+def test_validate_source_basis_queue_rejects_biblegateway_metadata_overclaim(tmp_path) -> None:
+    biblegateway = tmp_path / "biblegateway.csv"
+    ebible = tmp_path / "ebible.csv"
+    door43, oet, otb, openbible, odr, supplemental = write_empty_control_manifests(tmp_path)
+    audit_queue = tmp_path / "queue.md"
+    write_biblegateway_manifest(
+        biblegateway,
+        [
+            {
+                "label": "DEMO",
+                "name": "Demo Version",
+                "config_path": "",
+                "local_csv": "data/private/english/demo.csv",
+                "coverage": "full",
+                "ot_basis": "unknown",
+                "nt_basis": "unknown",
+                "source_family": "unknown",
+                "basis_status": "broad_tradition",
+                "notes": "source-ready because local scrape exists",
+            }
+        ],
+    )
+    write_manifest(ebible, [])
+    write_queue_counts(audit_queue, biblegateway=(1, 0, 1))
+
+    failures = check.validate_source_basis_queue(
+        biblegateway_manifest=biblegateway,
+        ebible_controls=ebible,
+        door43_controls=door43,
+        oet_controls=oet,
+        otb_controls=otb,
+        openbible_controls=openbible,
+        odr_controls=odr,
+        supplemental_controls=supplemental,
+        audit_queue=audit_queue,
+    )
+
+    assert failures == [
+        "BibleGateway English versions row 2: metadata-only row overclaims source-ready"
+    ]
+
+
+def test_validate_source_basis_queue_rejects_bad_biblegateway_config_path(tmp_path) -> None:
+    biblegateway = tmp_path / "biblegateway.csv"
+    ebible = tmp_path / "ebible.csv"
+    door43, oet, otb, openbible, odr, supplemental = write_empty_control_manifests(tmp_path)
+    audit_queue = tmp_path / "queue.md"
+    write_biblegateway_manifest(
+        biblegateway,
+        [
+            {
+                "label": "DEMO",
+                "name": "Demo Version",
+                "config_path": "data/private/demo.csv",
+                "local_csv": "data/private/english/demo.csv",
+                "coverage": "full",
+                "ot_basis": "unknown",
+                "nt_basis": "unknown",
+                "source_family": "unknown",
+                "basis_status": "broad_tradition",
+                "notes": "configured test row",
+            }
+        ],
+    )
+    write_manifest(ebible, [])
+    write_queue_counts(audit_queue, biblegateway=(1, 0, 1))
+
+    failures = check.validate_source_basis_queue(
+        biblegateway_manifest=biblegateway,
+        ebible_controls=ebible,
+        door43_controls=door43,
+        oet_controls=oet,
+        otb_controls=otb,
+        openbible_controls=openbible,
+        odr_controls=odr,
+        supplemental_controls=supplemental,
+        audit_queue=audit_queue,
+    )
+
+    assert failures == ["BibleGateway English versions row 2: invalid config_path"]
 
 
 def test_validate_source_basis_queue_rejects_bad_ebible_metadata(tmp_path) -> None:
@@ -225,6 +358,52 @@ def write_manifest(path: Path, rows: list[dict[str, str]]) -> None:
         writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
+
+
+def write_biblegateway_manifest(path: Path, rows: list[dict[str, str]]) -> None:
+    fieldnames = [
+        "label",
+        "name",
+        "config_path",
+        "local_csv",
+        "coverage",
+        "ot_basis",
+        "nt_basis",
+        "source_family",
+        "basis_status",
+        "notes",
+    ]
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def write_queue_counts(
+    path: Path,
+    *,
+    biblegateway: tuple[int, int, int] = (0, 0, 0),
+    ebible: tuple[int, int, int] = (0, 0, 0),
+) -> None:
+    rows = [
+        ("BibleGateway English versions", biblegateway),
+        ("eBible English controls", ebible),
+        ("Door43 English controls", (0, 0, 0)),
+        ("OET English controls", (0, 0, 0)),
+        ("OTB English controls", (0, 0, 0)),
+        ("Open.Bible English controls", (0, 0, 0)),
+        ("Original Douay-Rheims English controls", (0, 0, 0)),
+        ("Supplemental open English controls", (0, 0, 0)),
+    ]
+    lines = [
+        "| Manifest | Rows | `needs_audit` | `broad_tradition` |",
+        "| --- | ---: | ---: | ---: |",
+    ]
+    lines.extend(
+        f"| {label} | {counts[0]} | {counts[1]} | {counts[2]} |"
+        for label, counts in rows
+    )
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def write_empty_control_manifests(tmp_path: Path) -> tuple[Path, Path, Path, Path, Path, Path]:

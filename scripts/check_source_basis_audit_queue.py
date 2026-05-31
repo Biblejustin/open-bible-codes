@@ -18,6 +18,23 @@ DEFAULT_ODR_CONTROLS = Path("configs/odr_english_controls.csv")
 DEFAULT_SUPPLEMENTAL_CONTROLS = Path("configs/supplemental_english_controls.csv")
 DEFAULT_AUDIT_QUEUE = Path("docs/SOURCE_BASIS_AUDIT_QUEUE.md")
 ALLOWED_BASIS_STATUSES = {"broad_tradition", "needs_audit"}
+BIBLEGATEWAY_PRIVATE_PREFIX = "data/private/english/"
+BIBLEGATEWAY_FORBIDDEN_METADATA_ONLY_CLAIMS = (
+    "source-ready",
+    "source ready",
+    "corpus-ready",
+    "corpus ready",
+    "claim-ready",
+    "claim ready",
+    "result-ready",
+    "result ready",
+    "results-ready",
+    "results ready",
+    "result-bearing",
+    "result bearing",
+    "results-bearing",
+    "results bearing",
+)
 SUPPLEMENTAL_BIBLECORPS_SOURCE_IDS = {
     "anderson1864",
     "av1611",
@@ -204,7 +221,9 @@ def validate_manifest_rows(manifest_key: str, rows: list[dict[str, str]]) -> lis
         status = row.get("basis_status", "")
         if status and status not in ALLOWED_BASIS_STATUSES:
             failures.append(f"{row_id}: unknown basis_status {status}")
-        if manifest_key == "ebible":
+        if manifest_key == "biblegateway":
+            failures.extend(validate_biblegateway_row(row, row_id))
+        elif manifest_key == "ebible":
             failures.extend(validate_ebible_row(row, row_id))
         elif manifest_key == "door43":
             failures.extend(validate_door43_row(row, row_id))
@@ -218,6 +237,33 @@ def validate_manifest_rows(manifest_key: str, rows: list[dict[str, str]]) -> lis
             failures.extend(validate_odr_row(row, row_id))
         elif manifest_key == "supplemental":
             failures.extend(validate_supplemental_row(row, row_id))
+    return failures
+
+
+def validate_biblegateway_row(row: dict[str, str], row_id: str) -> list[str]:
+    failures: list[str] = []
+    config_path = row.get("config_path", "").strip()
+    local_csv = row.get("local_csv", "").strip()
+    has_private_csv = local_csv.startswith(BIBLEGATEWAY_PRIVATE_PREFIX) and local_csv.endswith(
+        ".csv"
+    )
+    if config_path:
+        if not config_path.startswith("configs/") or not config_path.endswith(".toml"):
+            failures.append(f"{row_id}: invalid config_path")
+    else:
+        if not has_private_csv:
+            failures.append(
+                f"{row_id}: metadata-only row must keep local_csv under {BIBLEGATEWAY_PRIVATE_PREFIX}"
+            )
+        notes = row.get("notes", "").lower()
+        for forbidden in BIBLEGATEWAY_FORBIDDEN_METADATA_ONLY_CLAIMS:
+            if forbidden in notes:
+                failures.append(f"{row_id}: metadata-only row overclaims {forbidden}")
+                break
+    if config_path and local_csv and not has_private_csv:
+        failures.append(
+            f"{row_id}: local_csv must stay under {BIBLEGATEWAY_PRIVATE_PREFIX}"
+        )
     return failures
 
 

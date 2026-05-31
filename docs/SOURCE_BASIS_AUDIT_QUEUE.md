@@ -54,6 +54,9 @@ python3 -m scripts.check_source_basis_audit_queue
 The formal report preflight also runs this check and fails if manifest counts
 drift from this document, source metadata is malformed, or `needs_audit` rows
 return without explicitly changing the validation policy.
+BibleGateway rows without a `config_path` are guarded as metadata-only: their
+`local_csv` must stay under `data/private/english/*.csv`, and their notes must
+not use source-ready, corpus-ready, claim-ready, or result-ready wording.
 
 ## BibleGateway Rows Needing Audit
 
@@ -143,5 +146,6 @@ None after this pass.
 
 ## Suggested Next Pass
 
-1. Leave missing private-only BibleGateway rows as metadata-only unless a lawful
-   local text or source package with clear permission is available.
+1. Keep private-only BibleGateway rows metadata-only unless a lawful local text
+   or source package with clear permission is available, then add a real
+   `config_path` and source-basis evidence before using the row in results.
