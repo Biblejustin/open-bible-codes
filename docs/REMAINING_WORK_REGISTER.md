@@ -2232,7 +2232,7 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - `python3 -m pytest tests/test_check_wrr_public_handoff_docs.py tests/test_real_report_run.py -q` passed: 57 tests.
 - `python3 -m pytest tests/test_build_wrr_residual_reconciliation_action_plan.py tests/test_check_wrr_residual_reconciliation_action_plan_doc.py -q` passed: 6 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_clean_lock_protocols.py tests/test_build_wrr_residual_reconciliation_action_plan.py tests/test_check_wrr_residual_reconciliation_action_plan_doc.py -q` passed: 69 tests.
-- `python3 -m pytest tests/test_build_wrr_claim_blocker_packet.py tests/test_check_wrr_claim_blocker_packet_doc.py tests/test_clean_lock_protocols.py tests/test_wrr_cross_pair_grid.py tests/test_real_report_run.py -q` passed: 71 tests.
+- `python3 -m pytest tests/test_build_wrr_claim_blocker_packet.py tests/test_check_wrr_claim_blocker_packet_doc.py tests/test_clean_lock_protocols.py tests/test_build_wrr_cross_pair_grid.py tests/test_real_report_run.py -q` passed: 71 tests.
 - `python3 -m pytest tests/test_build_wrr_residual_term_reconciliation_queue.py tests/test_check_wrr_residual_term_reconciliation_queue_doc.py tests/test_real_report_run.py -q` passed: 51 tests.
 - `python3 -m pytest tests/test_build_wrr_wayback_source_recovery_probe.py tests/test_check_wrr_wayback_source_recovery_probe_doc.py tests/test_real_report_run.py -q` passed: 66 tests.
 - `python3 -m pytest tests/test_download_wrr_sources.py tests/test_build_wrr_source_recovery_probe.py tests/test_check_wrr_source_recovery_probe_doc.py tests/test_real_report_run.py -q` passed: 73 tests and 49 subtests.
@@ -2240,8 +2240,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - `python3 -m pytest tests/test_check_hypothesis_testing_source_audit_doc.py tests/test_real_report_run.py -q` passed: 42 tests.
 - `python3 -m pytest tests/test_check_wrr_defined_diagnostic_docs.py tests/test_real_report_run.py -q` passed: 45 tests.
 - `python3 -m pytest tests/test_check_wrr_variant_gap_docs.py tests/test_real_report_run.py -q` passed: 46 tests.
-- `python3 -m pytest tests/test_build_wrr_variant_residual_review_packet.py tests/test_check_wrr_variant_gap_docs.py tests/test_build_wrr_claim_blocker_packet.py tests/test_check_wrr_claim_blocker_packet_doc.py tests/test_wrr_method_status.py tests/test_real_report_run.py -q` passed: 70 tests.
-- `python3 -m pytest tests/test_wrr_method_status.py tests/test_wrr_cross_pair_grid.py tests/test_check_wrr_method_status_doc.py tests/test_check_wrr_claim_readiness_doc.py -q` passed: 15 tests.
+- `python3 -m pytest tests/test_build_wrr_variant_residual_review_packet.py tests/test_check_wrr_variant_gap_docs.py tests/test_build_wrr_claim_blocker_packet.py tests/test_check_wrr_claim_blocker_packet_doc.py tests/test_build_wrr_method_status.py tests/test_real_report_run.py -q` passed: 70 tests.
+- `python3 -m pytest tests/test_build_wrr_method_status.py tests/test_build_wrr_cross_pair_grid.py tests/test_check_wrr_method_status_doc.py tests/test_check_wrr_claim_readiness_doc.py -q` passed: 15 tests.
 - `python3 -m pytest tests/test_check_wrr_claim_readiness_doc.py tests/test_real_report_run.py -q` passed: 38 tests.
 - `python3 -m pytest tests/test_check_wrr_claim_blocker_packet_doc.py tests/test_real_report_run.py -q` passed: 39 tests.
 - `python3 -m pytest tests/test_check_wrr_lock_options_doc.py tests/test_real_report_run.py -q` passed: 40 tests.
@@ -2303,12 +2303,12 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   controls from eBible, Door43, OET, OTB, Open.Bible, ODR, and supplemental
   sources; context review
   promoted no seed terms.
-- `python3 -m pytest tests/test_otb_english_controls.py tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py tests/test_real_report_run.py -q` passed: 75 tests and 124 subtests.
-- `python3 -m pytest tests/test_openbible_english_controls.py tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py tests/test_real_report_run.py -q` passed: 73 tests and 128 subtests.
-- `python3 -m pytest tests/test_supplemental_english_controls.py tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py tests/test_real_report_run.py -q` passed: 75 tests and 124 subtests.
-- `python3 -m pytest tests/test_supplemental_english_controls.py tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py tests/test_real_report_run.py -q` passed: 76 tests and 124 subtests after adding AV1811.
-- `python3 -m pytest tests/test_supplemental_english_controls.py tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py tests/test_real_report_run.py -q` passed: 77 tests and 124 subtests after adding Zefania/CrossWire supplemental controls.
-- `python3 -m pytest tests/test_ebible_usfm.py tests/test_supplemental_english_controls.py tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py -q` passed: 27 tests and 124 subtests after adding OpenEnglishBible base controls.
+- `python3 -m pytest tests/test_download_otb_english_controls.py tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py tests/test_real_report_run.py -q` passed: 75 tests and 124 subtests.
+- `python3 -m pytest tests/test_download_openbible_english_controls.py tests/test_english_version_manifests.py tests/test_check_source_basis_audit_queue.py tests/test_real_report_run.py -q` passed: 73 tests and 128 subtests.
+- `python3 -m pytest tests/test_download_supplemental_english_controls.py tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py tests/test_real_report_run.py -q` passed: 75 tests and 124 subtests.
+- `python3 -m pytest tests/test_download_supplemental_english_controls.py tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py tests/test_real_report_run.py -q` passed: 76 tests and 124 subtests after adding AV1811.
+- `python3 -m pytest tests/test_download_supplemental_english_controls.py tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py tests/test_real_report_run.py -q` passed: 77 tests and 124 subtests after adding Zefania/CrossWire supplemental controls.
+- `python3 -m pytest tests/test_download_ebible_usfm.py tests/test_download_supplemental_english_controls.py tests/test_check_source_basis_audit_queue.py tests/test_english_version_manifests.py -q` passed: 27 tests and 124 subtests after adding OpenEnglishBible base controls.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_supplemental_controls.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_oeb_supplemental_controls.json` passed.
 - `python3 -m scripts.preflight_real_report_run --allow-dirty --out /tmp/edls_preflight_av1811_controls.json` passed.
@@ -2340,7 +2340,7 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - `python3 -m scripts.check_wrr_residual_reconciliation_action_plan_doc` passed.
 - `python3 -m scripts.check_wrr_manual_decision_record_worksheet_doc` passed.
 - `python3 -m scripts.check_hypothesis_testing_source_audit_doc` passed.
-- `python3 -m pytest tests/test_doxa_four_source_report.py tests/test_gog_magog_pair_prospective_report.py tests/test_wrr_method_status.py -q` passed: 13 tests.
+- `python3 -m pytest tests/test_build_doxa_four_source_claim_followup_report.py tests/test_build_gog_magog_pair_prospective_report.py tests/test_build_wrr_method_status.py -q` passed: 13 tests.
 - `python3 -m pytest tests/test_real_report_run.py tests/test_claim_catalog.py tests/test_wrr_claim_readiness.py -q` passed: 32 tests and 60 subtests.
 - `python3 -m pytest tests/test_real_report_run.py -q` passed: 25 tests.
 - `python3 -m pytest tests/test_check_prospective_study_lanes.py tests/test_build_prospective_lane_status.py -q` passed: 10 tests.
