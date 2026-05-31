@@ -1,3 +1,4 @@
+import csv
 from pathlib import Path
 
 from scripts import check_kjva_crosswire_candidate_source_audit_doc as check
@@ -36,17 +37,45 @@ def test_missing_required_phrase_fails(tmp_path: Path) -> None:
 
 def test_rows_status_drift_fails(tmp_path: Path) -> None:
     rows = tmp_path / "rows.csv"
-    rows.write_text(
-        ",".join(check.analyzer.ROW_FIELDNAMES)
-        + "\n"
-        + "crosswire_gitlab_kjva_osis,"
-        + check.analyzer.PROJECT_WEB_URL
-        + ",fetched,fetched,fetched,master,9,"
-        + "README.md;kjv.osis.xml;kjva.osis.xml;kjvdc.xml,"
-        + "True,False,True,True,True,True,sha,100,True,True,True,"
-        + "source_candidate_not_confirmed,False,not_source_lock_ready,not_result_ready\n",
-        encoding="utf-8",
+    row = {field: "" for field in check.analyzer.ROW_FIELDNAMES}
+    row.update(
+        {
+            "source_id": "crosswire_gitlab_kjva_osis",
+            "repo_url": check.analyzer.PROJECT_WEB_URL,
+            "project_fetch_status": "fetched",
+            "tree_fetch_status": "fetched",
+            "readme_fetch_status": "fetched",
+            "kjva_conf_fetch_status": "fetched",
+            "kjvdc_conf_fetch_status": "fetched",
+            "default_branch": "master",
+            "tree_path_count": "9",
+            "tree_paths": "README.md;kjv.osis.xml;kjva.osis.xml;kjvdc.xml",
+            "kjv_osis_path_present": "True",
+            "kjva_osis_path_present": "False",
+            "kjvdc_xml_path_present": "True",
+            "kjvdc_conf_path_present": "True",
+            "kjva_conf_path_present": "True",
+            "builder_script_present": "True",
+            "readme_sha": "sha",
+            "readme_size": "100",
+            "readme_public_domain_marker_present": "True",
+            "readme_kjvdc_marker_present": "True",
+            "readme_kjva_osis_marker_present": "True",
+            "kjva_distribution_license": "GPL",
+            "kjvdc_distribution_license": "General public license for distribution for any purpose",
+            "kjva_crown_rights_marker_present": "True",
+            "kjvdc_crown_rights_marker_present": "True",
+            "source_audit_status": "source_candidate_not_confirmed",
+            "source_use_status": "needs_rights_review",
+            "verse_numbered_import_ready": "False",
+            "source_lock_ready_status": "not_source_lock_ready",
+            "result_ready_status": "not_result_ready",
+        }
     )
+    with rows.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=check.analyzer.ROW_FIELDNAMES)
+        writer.writeheader()
+        writer.writerow(row)
 
     failures = check.validate_rows_csv(rows)
 

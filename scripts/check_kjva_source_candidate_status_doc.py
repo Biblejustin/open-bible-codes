@@ -36,6 +36,8 @@ REQUIRED_PHRASES = (
     "CrossWire GitLab KJV/KJVA",
     "possible independent metadata candidate",
     "`kjva.osis.xml` and `kjvdc.xml` path names",
+    "DistributionLicense=GPL",
+    "Crown rights language",
     "no local source import, verse mapping, collation, checksum lock, or source-use decision exists yet",
     "Wikisource Ballantyne 1911 KJV + Apocrypha",
     "metadata-level future source candidate",

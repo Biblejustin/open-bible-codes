@@ -36,6 +36,8 @@ ROW_FIELDNAMES = [
     "project_fetch_status",
     "tree_fetch_status",
     "readme_fetch_status",
+    "kjva_conf_fetch_status",
+    "kjvdc_conf_fetch_status",
     "default_branch",
     "tree_path_count",
     "tree_paths",
@@ -50,7 +52,12 @@ ROW_FIELDNAMES = [
     "readme_public_domain_marker_present",
     "readme_kjvdc_marker_present",
     "readme_kjva_osis_marker_present",
+    "kjva_distribution_license",
+    "kjvdc_distribution_license",
+    "kjva_crown_rights_marker_present",
+    "kjvdc_crown_rights_marker_present",
     "source_audit_status",
+    "source_use_status",
     "verse_numbered_import_ready",
     "source_lock_ready_status",
     "result_ready_status",
@@ -61,6 +68,7 @@ SUMMARY_FIELDNAMES = [
     "possible_independent_kjva_candidates",
     "kjva_osis_paths",
     "kjvdc_paths",
+    "source_use_ready_pages",
     "source_lock_ready_pages",
     "verse_import_ready_pages",
     "result_ready_pages",
@@ -86,7 +94,15 @@ def main(argv: list[str] | None = None) -> int:
         args.readme_api_template.format(path=quote("README.md", safe=""), branch=branch),
         timeout=args.timeout,
     )
-    rows = [analyze_metadata(args, project, tree, readme, branch)]
+    kjva_conf = fetch_json(
+        args.readme_api_template.format(path=quote("kjva.conf", safe=""), branch=branch),
+        timeout=args.timeout,
+    )
+    kjvdc_conf = fetch_json(
+        args.readme_api_template.format(path=quote("kjvdc.conf", safe=""), branch=branch),
+        timeout=args.timeout,
+    )
+    rows = [analyze_metadata(args, project, tree, readme, kjva_conf, kjvdc_conf, branch)]
     summary = build_summary(rows)
     anchors = build_anchors(rows, summary)
     write_csv(args.out, ROW_FIELDNAMES, rows)
@@ -138,6 +154,8 @@ def analyze_metadata(
     project: JsonFetch,
     tree: JsonFetch,
     readme: JsonFetch,
+    kjva_conf: JsonFetch,
+    kjvdc_conf: JsonFetch,
     branch: str,
 ) -> dict[str, object]:
     paths = sorted(
@@ -148,9 +166,13 @@ def analyze_metadata(
     path_set = set(paths)
     readme_text = decode_readme(readme.data)
     readme_lower = readme_text.lower()
+    kjva_conf_text = decode_readme(kjva_conf.data)
+    kjvdc_conf_text = decode_readme(kjvdc_conf.data)
+    kjva_license = conf_value(kjva_conf_text, "DistributionLicense")
+    kjvdc_license = conf_value(kjvdc_conf_text, "DistributionLicense")
     metadata_ok = all(
         status == "fetched"
-        for status in [project.status, tree.status, readme.status]
+        for status in [project.status, tree.status, readme.status, kjva_conf.status, kjvdc_conf.status]
     )
     has_kjva = "kjva.osis.xml" in path_set
     has_kjvdc = "kjvdc.xml" in path_set
@@ -162,6 +184,8 @@ def analyze_metadata(
         "project_fetch_status": project.status,
         "tree_fetch_status": tree.status,
         "readme_fetch_status": readme.status,
+        "kjva_conf_fetch_status": kjva_conf.status,
+        "kjvdc_conf_fetch_status": kjvdc_conf.status,
         "default_branch": branch,
         "tree_path_count": len(paths),
         "tree_paths": ";".join(paths),
@@ -176,11 +200,16 @@ def analyze_metadata(
         "readme_public_domain_marker_present": "public domain" in readme_lower,
         "readme_kjvdc_marker_present": "kjvdc.xml" in readme_lower,
         "readme_kjva_osis_marker_present": "kjva.osis.xml" in readme_lower,
+        "kjva_distribution_license": kjva_license,
+        "kjvdc_distribution_license": kjvdc_license,
+        "kjva_crown_rights_marker_present": "rights to the base text are held by the crown" in kjva_conf_text.lower(),
+        "kjvdc_crown_rights_marker_present": "rights to the base text are held by the crown" in kjvdc_conf_text.lower(),
         "source_audit_status": (
             "possible_independent_kjva_candidate_needs_text_audit"
             if possible_candidate
             else "source_candidate_not_confirmed"
         ),
+        "source_use_status": "needs_rights_review",
         "verse_numbered_import_ready": False,
         "source_lock_ready_status": "not_source_lock_ready",
         "result_ready_status": "not_result_ready",
@@ -194,6 +223,7 @@ def build_summary(rows: list[dict[str, object]]) -> dict[str, object]:
             1
             for row in rows
             if row["project_fetch_status"] == row["tree_fetch_status"] == row["readme_fetch_status"] == "fetched"
+            and row["kjva_conf_fetch_status"] == row["kjvdc_conf_fetch_status"] == "fetched"
         ),
         "possible_independent_kjva_candidates": sum(
             1
@@ -202,6 +232,9 @@ def build_summary(rows: list[dict[str, object]]) -> dict[str, object]:
         ),
         "kjva_osis_paths": sum(1 for row in rows if bool(row["kjva_osis_path_present"])),
         "kjvdc_paths": sum(1 for row in rows if bool(row["kjvdc_xml_path_present"])),
+        "source_use_ready_pages": sum(
+            1 for row in rows if row["source_use_status"] == "source_use_ready"
+        ),
         "source_lock_ready_pages": sum(
             1 for row in rows if row["source_lock_ready_status"] != "not_source_lock_ready"
         ),
@@ -238,6 +271,12 @@ def build_anchors(
             "kjvdc_xml_path_recorded",
             int(summary["kjvdc_paths"]) == 1,
             "kjvdc.xml path is present in tree metadata",
+        ),
+        (
+            "crosswire",
+            "source_use_not_ready",
+            int(summary["source_use_ready_pages"]) == 0,
+            "conf metadata requires rights review before local text import",
         ),
         (
             "crosswire",
@@ -285,6 +324,7 @@ def write_markdown(
         f"- Possible independent KJVA metadata candidates: {summary['possible_independent_kjva_candidates']}.",
         f"- KJVA OSIS paths: {summary['kjva_osis_paths']}.",
         f"- KJVDC XML paths: {summary['kjvdc_paths']}.",
+        f"- Source-use ready pages: {summary['source_use_ready_pages']}.",
         f"- Source-lock ready pages: {summary['source_lock_ready_pages']}.",
         f"- Verse-numbered import ready pages: {summary['verse_import_ready_pages']}.",
         f"- Result-ready pages: {summary['result_ready_pages']}.",
@@ -292,8 +332,8 @@ def write_markdown(
         "",
         "## Source Rows",
         "",
-        "| Source | Status | Branch | Tree paths | KJVA OSIS | KJVDC XML | Source lock | Result |",
-        "| --- | --- | --- | ---: | --- | --- | --- | --- |",
+        "| Source | Status | Branch | Tree paths | KJVA OSIS | KJVDC XML | Source use | Source lock | Result |",
+        "| --- | --- | --- | ---: | --- | --- | --- | --- | --- |",
     ]
     for row in rows:
         lines.append(
@@ -306,6 +346,7 @@ def write_markdown(
                     str(row["tree_path_count"]),
                     str(row["kjva_osis_path_present"]),
                     str(row["kjvdc_xml_path_present"]),
+                    f"`{row['source_use_status']}`",
                     f"`{row['source_lock_ready_status']}`",
                     f"`{row['result_ready_status']}`",
                 ]
@@ -333,6 +374,7 @@ def write_markdown(
             "## Boundary",
             "",
             "CrossWire metadata is a stronger future source candidate than the KJV-only Open-Bibles repository because it exposes both `kjva.osis.xml` and `kjvdc.xml` path names.",
+            "The configuration metadata records `DistributionLicense=GPL` for KJVA and `DistributionLicense=General public license for distribution for any purpose` for the DC-only file, while also noting Crown rights language; source-use review is still required before any local text import.",
             "It is still not source-lock ready: the project has not imported the text, mapped verses, checked book order, compared against current KJVA output, or frozen checksums in a study lock.",
             "It does not change any KJVA bridge result status.",
         ]
@@ -386,6 +428,14 @@ def decode_readme(data: dict[str, object]) -> str:
         return base64.b64decode(content, validate=False).decode("utf-8", errors="replace")
     except (ValueError, OSError):
         return ""
+
+
+def conf_value(text: str, key: str) -> str:
+    prefix = f"{key}="
+    for line in text.splitlines():
+        if line.startswith(prefix):
+            return line.removeprefix(prefix).strip()
+    return ""
 
 
 def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, object]]) -> None:

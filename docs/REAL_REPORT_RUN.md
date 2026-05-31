@@ -241,7 +241,8 @@ It requires:
   current eBible KJVA source as a rerun source with 14 apocrypha/deuterocanon
   books;
 - KJVA CrossWire candidate source audit stays metadata-only, with `kjva.osis.xml`
-  and `kjvdc.xml` path names present but no corpus import, source lock, or
+  and `kjvdc.xml` path names present, config-license/Crown-rights metadata
+  captured, but no source-use clearance, corpus import, source lock, or
   result-bearing output;
 - KJVA Wikisource candidate source audit stays metadata-only, with no Bible
   text retained, no corpus import ready, and no result-bearing output;

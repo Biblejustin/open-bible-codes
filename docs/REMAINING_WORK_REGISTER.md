@@ -1938,7 +1938,9 @@ by the current controls, and there is no remaining `ready_for_preflight` lane in
 `configs/prospective_study_lanes.json`.
 The CrossWire GitLab KJV/KJVA metadata audit now records one possible
 independent KJVA metadata candidate because `kjva.osis.xml` and `kjvdc.xml`
-path names are present. It is still not source-lock ready: no local text import,
+path names are present. Its config metadata also records KJVA GPL distribution
+license wording, DC-only general-public-distribution wording, and Crown-rights
+language. It is still not source-use or source-lock ready: no local text import,
 verse mapping, book-order lock, collation, checksum lock, source-use decision,
 term lock, or study-lock sidecar exists.
 
@@ -2460,9 +2462,11 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Added `docs/KJVA_CROSSWIRE_CANDIDATE_SOURCE_AUDIT.md` as a metadata-only
   source-status audit for the CrossWire Bible Society GitLab KJV repository.
 - Current metadata found 9 tree paths, including `kjva.osis.xml`, `kjvdc.xml`,
-  `kjva.conf`, `kjvdc.conf`, and `kjvfull2kjva.sh`.
+  `kjva.conf`, `kjvdc.conf`, and `kjvfull2kjva.sh`, and records config
+  license/rights markers without importing Bible text.
 - The audit records one possible independent KJVA metadata candidate, but 0
-  source-lock ready pages, 0 verse-import ready pages, and 0 result-ready pages.
+  source-use ready pages, 0 source-lock ready pages, 0 verse-import ready pages,
+  and 0 result-ready pages.
 - No Bible text is downloaded, retained, normalized, or committed by this
   audit; it does not change KJVA bridge result status.
 - Added `protocols/kjva_crosswire_candidate_source_audit.toml`,
