@@ -532,6 +532,7 @@ inputs = [
   "scripts/build_all_codes_followup_report.py",
   "scripts/build_centered_occurrence_index.py",
   "scripts/build_match_strata_index.py",
+  "scripts/check_script_tests.py",
   "scripts/check_check_script_tests.py",
   "scripts/check_check_script_wiring.py",
   "scripts/check_protocol_files.py",

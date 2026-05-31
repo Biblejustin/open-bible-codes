@@ -63,6 +63,7 @@ from scripts import (
     check_corpus_configs,
     check_check_script_tests,
     check_check_script_wiring,
+    check_script_tests,
     check_critical_omission_followup_docs,
     check_doc_command_references,
     check_english_seed_survivor_gate,
@@ -683,6 +684,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_all_codes_followup_report.py",
     "scripts/build_centered_occurrence_index.py",
     "scripts/build_match_strata_index.py",
+    "scripts/check_script_tests.py",
     "scripts/check_check_script_tests.py",
     "scripts/check_check_script_wiring.py",
     "scripts/check_protocol_files.py",
@@ -1326,6 +1328,12 @@ def main(argv: list[str] | None = None) -> int:
     if check_script_test_failures:
         failures.append(
             "check-script test failures: " + "; ".join(check_script_test_failures)
+        )
+
+    script_test_failures = check_script_tests.validate_script_tests()
+    if script_test_failures:
+        failures.append(
+            "script test failures: " + "; ".join(script_test_failures)
         )
 
     check_script_wiring_failures = (
