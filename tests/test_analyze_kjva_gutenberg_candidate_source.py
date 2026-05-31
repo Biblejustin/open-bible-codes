@@ -28,7 +28,7 @@ def test_analyze_rdf_marks_public_domain_candidate() -> None:
 
     row = analyzer.analyze_rdf(_args(), fetched)
 
-    assert row["source_audit_status"] == "public_domain_kjv_complete_metadata_needs_apocrypha_coverage_probe"
+    assert row["source_audit_status"] == "public_domain_kjv_complete_metadata_component"
     assert row["public_domain_usa_marker_present"] is True
     assert row["plain_text_utf8_url_present"] is True
     assert row["apocrypha_marker_present"] is False
@@ -36,11 +36,36 @@ def test_analyze_rdf_marks_public_domain_candidate() -> None:
     assert row["result_ready_status"] == "not_result_ready"
 
 
+def test_analyze_rdf_marks_apocrypha_metadata_component() -> None:
+    raw = b"""<?xml version="1.0"?>
+<rdf:RDF xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:pgterms="http://www.gutenberg.org/2009/pgterms/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <pgterms:ebook rdf:about="ebooks/124">
+    <dcterms:title>Deuterocanonical Books of the Bible
+Apocrypha</dcterms:title>
+    <dcterms:rights>Public domain in the USA.</dcterms:rights>
+    <dcterms:issued>1994-04-01</dcterms:issued>
+    <pgterms:downloads>1</pgterms:downloads>
+  </pgterms:ebook>
+  <pgterms:file rdf:about="https://www.gutenberg.org/ebooks/124.txt.utf-8" />
+</rdf:RDF>"""
+    fetched = analyzer.FetchedRdf(raw=raw, final_url=analyzer.APOCRYPHA_RDF_URL, fetch_status="fetched")
+
+    row = analyzer.analyze_rdf(_args(), fetched, source=analyzer.APOCRYPHA_SOURCE)
+
+    assert row["source_id"] == "gutenberg_ebook_124_deuterocanonical"
+    assert row["title"] == "Deuterocanonical Books of the Bible Apocrypha"
+    assert row["source_audit_status"] == "public_domain_apocrypha_metadata_component"
+    assert row["apocrypha_marker_present"] is True
+    assert row["plain_text_utf8_url_present"] is True
+
+
 def test_build_summary_keeps_non_result_boundary() -> None:
-    row = {
+    kjv_row = {
         "fetch_status": "fetched",
         "public_domain_usa_marker_present": True,
-        "source_audit_status": "public_domain_kjv_complete_metadata_needs_apocrypha_coverage_probe",
+        "source_audit_status": "public_domain_kjv_complete_metadata_component",
         "apocrypha_marker_present": False,
         "plain_text_utf8_url_present": True,
         "source_use_status": "needs_source_use_policy_lock",
@@ -48,11 +73,24 @@ def test_build_summary_keeps_non_result_boundary() -> None:
         "verse_numbered_import_ready": False,
         "result_ready_status": "not_result_ready",
     }
+    apocrypha_row = {
+        "fetch_status": "fetched",
+        "public_domain_usa_marker_present": True,
+        "source_audit_status": "public_domain_apocrypha_metadata_component",
+        "apocrypha_marker_present": True,
+        "plain_text_utf8_url_present": True,
+        "source_use_status": "needs_source_use_policy_lock",
+        "source_lock_ready_status": "not_source_lock_ready",
+        "verse_numbered_import_ready": False,
+        "result_ready_status": "not_result_ready",
+    }
 
-    summary = analyzer.build_summary([row])
+    summary = analyzer.build_summary([kjv_row, apocrypha_row])
 
-    assert summary["public_domain_usa_pages"] == 1
+    assert summary["public_domain_usa_pages"] == 2
     assert summary["kjv_complete_metadata_candidates"] == 1
-    assert summary["apocrypha_marker_pages"] == 0
+    assert summary["apocrypha_metadata_candidates"] == 1
+    assert summary["split_kjv_apocrypha_metadata_candidates"] == 1
+    assert summary["apocrypha_marker_pages"] == 1
     assert summary["source_lock_ready_pages"] == 0
     assert summary["result_ready_pages"] == 0

@@ -1,5 +1,5 @@
 name = "kjva_gutenberg_candidate_source_audit"
-description = "Audit Project Gutenberg eBook 30 RDF metadata as a public-domain KJV-complete source candidate."
+description = "Audit Project Gutenberg eBook 30 and eBook 124 RDF metadata as a public-domain split KJV+Apocrypha source candidate."
 manifest_out = "reports/kjva_gutenberg_candidate_source/protocol_run.manifest.json"
 max_parallel = 1
 progress_interval_seconds = 15

@@ -60,7 +60,7 @@ evidence packet, remaining-lane evidence packet, and source-row coverage
 packet, plus source-row crop packet, contact-sheet image, OCR word packet, and
 all-script exact-test and check-script wiring release guards, plus a
 metadata-only CrossWire KJVA source-candidate audit, Project Gutenberg
-KJV-complete metadata audit, Project Gutenberg heading-level coverage probe,
+split-source metadata audit, Project Gutenberg heading-level coverage probe,
 and source-status rollup refresh.
 The WRR method-lane wide-skip probe is now guarded, included in the real-report
 run, carried into the exact-gap/blocker packets, and mirrored in public
@@ -2482,13 +2482,15 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 ## KJVA Gutenberg Candidate Source Audit
 
 - Added `docs/KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md` as a metadata-only
-  source-status audit for Project Gutenberg eBook 30.
-- Current RDF metadata records `The Bible, King James Version, Complete`,
-  `Public domain in the USA.`, a plain-text UTF-8 format URL, and no RDF
-  Apocrypha marker.
-- The audit records one public-domain-USA KJV-complete metadata candidate, but
-  0 source-use ready pages, 0 source-lock ready pages, 0 verse-import ready
-  pages, and 0 result-ready pages.
+  source-status audit for Project Gutenberg eBook 30 plus eBook 124.
+- Current RDF metadata records `The Bible, King James Version, Complete` for
+  eBook 30 and `Deuterocanonical Books of the Bible Apocrypha` for eBook 124,
+  with `Public domain in the USA.` rights and plain-text UTF-8 format URLs for
+  both source components.
+- The audit records one public-domain-USA KJV-complete metadata component, one
+  public-domain-USA Apocrypha/deuterocanon metadata component, and one split
+  KJV+Apocrypha metadata candidate, but 0 source-use ready pages, 0 source-lock
+  ready pages, 0 verse-import ready pages, and 0 result-ready pages.
 - No Bible text is downloaded, retained, normalized, or committed by this
   audit; it does not change KJVA bridge result status.
 - Added `protocols/kjva_gutenberg_candidate_source_audit.toml`,

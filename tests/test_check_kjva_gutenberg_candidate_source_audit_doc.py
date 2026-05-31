@@ -1,3 +1,4 @@
+import csv
 from pathlib import Path
 
 from scripts import check_kjva_gutenberg_candidate_source_audit_doc as check
@@ -36,20 +37,66 @@ def test_missing_required_phrase_fails(tmp_path: Path) -> None:
 
 def test_rows_status_drift_fails(tmp_path: Path) -> None:
     rows = tmp_path / "rows.csv"
-    rows.write_text(
-        ",".join(check.analyzer.ROW_FIELDNAMES)
-        + "\n"
-        + "gutenberg_ebook_30_kjv_complete,"
-        + check.analyzer.RDF_URL
-        + ","
-        + check.analyzer.RDF_URL
-        + ",fetched,,10,sha,30,"
-        + check.analyzer.EBOOK_PAGE_URL
-        + ",The Bible, King James Version, Complete,Public domain in the USA.,1992-04-01,1,1,desc,"
-        + "False,True,True,False,True,source_candidate_not_confirmed,"
-        + "needs_source_use_policy_lock,False,not_source_lock_ready,not_result_ready\n",
-        encoding="utf-8",
-    )
+    data = [
+        {
+            "source_id": "gutenberg_ebook_30_kjv_complete",
+            "rdf_url": check.analyzer.KJV_RDF_URL,
+            "final_url": check.analyzer.KJV_RDF_URL,
+            "fetch_status": "fetched",
+            "error": "",
+            "bytes": "10",
+            "sha256": "sha",
+            "ebook_no": "30",
+            "ebook_page_url": check.analyzer.KJV_EBOOK_PAGE_URL,
+            "title": "The Bible, King James Version, Complete",
+            "rights": "Public domain in the USA.",
+            "issued": "1992-04-01",
+            "downloads": "1",
+            "description_count": "1",
+            "descriptions": "desc",
+            "plain_text_utf8_url_present": "False",
+            "html_url_present": "True",
+            "epub_url_present": "True",
+            "apocrypha_marker_present": "False",
+            "public_domain_usa_marker_present": "True",
+            "source_audit_status": "source_candidate_not_confirmed",
+            "source_use_status": "needs_source_use_policy_lock",
+            "verse_numbered_import_ready": "False",
+            "source_lock_ready_status": "not_source_lock_ready",
+            "result_ready_status": "not_result_ready",
+        },
+        {
+            "source_id": "gutenberg_ebook_124_deuterocanonical",
+            "rdf_url": check.analyzer.APOCRYPHA_RDF_URL,
+            "final_url": check.analyzer.APOCRYPHA_RDF_URL,
+            "fetch_status": "fetched",
+            "error": "",
+            "bytes": "10",
+            "sha256": "sha",
+            "ebook_no": "124",
+            "ebook_page_url": check.analyzer.APOCRYPHA_EBOOK_PAGE_URL,
+            "title": "Deuterocanonical Books of the Bible Apocrypha",
+            "rights": "Public domain in the USA.",
+            "issued": "1994-04-01",
+            "downloads": "1",
+            "description_count": "1",
+            "descriptions": "desc",
+            "plain_text_utf8_url_present": "True",
+            "html_url_present": "True",
+            "epub_url_present": "True",
+            "apocrypha_marker_present": "True",
+            "public_domain_usa_marker_present": "True",
+            "source_audit_status": "public_domain_apocrypha_metadata_component",
+            "source_use_status": "needs_source_use_policy_lock",
+            "verse_numbered_import_ready": "False",
+            "source_lock_ready_status": "not_source_lock_ready",
+            "result_ready_status": "not_result_ready",
+        },
+    ]
+    with rows.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=check.analyzer.ROW_FIELDNAMES)
+        writer.writeheader()
+        writer.writerows(data)
 
     failures = check.validate_rows_csv(rows)
 

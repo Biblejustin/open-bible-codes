@@ -1754,7 +1754,7 @@ outputs = [
 
 [[steps]]
 id = "kjva_gutenberg_candidate_source_audit"
-description = "Audit Project Gutenberg eBook 30 RDF metadata as a public-domain KJV-complete source candidate."
+description = "Audit Project Gutenberg eBook 30 and eBook 124 RDF metadata as a public-domain split KJV+Apocrypha source candidate."
 argv = ["-m", "scripts.analyze_kjva_gutenberg_candidate_source"]
 inputs = [
   "scripts/analyze_kjva_gutenberg_candidate_source.py",

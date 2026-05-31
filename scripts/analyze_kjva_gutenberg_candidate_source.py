@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit Project Gutenberg KJV metadata without importing Bible text."""
+"""Audit Project Gutenberg KJV + Apocrypha metadata without importing Bible text."""
 
 from __future__ import annotations
 
@@ -18,8 +18,12 @@ from urllib.request import Request, urlopen
 from els import __version__
 
 
-RDF_URL = "https://www.gutenberg.org/ebooks/30.rdf"
-EBOOK_PAGE_URL = "https://www.gutenberg.org/ebooks/30"
+KJV_RDF_URL = "https://www.gutenberg.org/ebooks/30.rdf"
+APOCRYPHA_RDF_URL = "https://www.gutenberg.org/ebooks/124.rdf"
+RDF_URL = KJV_RDF_URL
+KJV_EBOOK_PAGE_URL = "https://www.gutenberg.org/ebooks/30"
+APOCRYPHA_EBOOK_PAGE_URL = "https://www.gutenberg.org/ebooks/124"
+EBOOK_PAGE_URL = KJV_EBOOK_PAGE_URL
 DEFAULT_OUT_DIR = Path("reports/kjva_gutenberg_candidate_source")
 DEFAULT_ROWS = DEFAULT_OUT_DIR / "source_status.csv"
 DEFAULT_SUMMARY = DEFAULT_OUT_DIR / "summary.csv"
@@ -66,6 +70,8 @@ SUMMARY_FIELDNAMES = [
     "metadata_fetches_ok",
     "public_domain_usa_pages",
     "kjv_complete_metadata_candidates",
+    "apocrypha_metadata_candidates",
+    "split_kjv_apocrypha_metadata_candidates",
     "apocrypha_marker_pages",
     "plain_text_utf8_pages",
     "source_use_ready_pages",
@@ -85,11 +91,42 @@ class FetchedRdf:
     error: str = ""
 
 
+@dataclass(frozen=True)
+class GutenbergSource:
+    source_id: str
+    ebook_no: str
+    component: str
+    default_rdf_url: str
+    default_page_url: str
+
+
+KJV_SOURCE = GutenbergSource(
+    source_id="gutenberg_ebook_30_kjv_complete",
+    ebook_no="30",
+    component="kjv",
+    default_rdf_url=KJV_RDF_URL,
+    default_page_url=KJV_EBOOK_PAGE_URL,
+)
+APOCRYPHA_SOURCE = GutenbergSource(
+    source_id="gutenberg_ebook_124_deuterocanonical",
+    ebook_no="124",
+    component="apocrypha",
+    default_rdf_url=APOCRYPHA_RDF_URL,
+    default_page_url=APOCRYPHA_EBOOK_PAGE_URL,
+)
+
+
 def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(argv)
-    fetched = fetch_rdf(args.rdf_url, timeout=args.timeout)
-    rows = [analyze_rdf(args, fetched)]
+    sources = [
+        (KJV_SOURCE, args.rdf_url, args.ebook_page_url),
+        (APOCRYPHA_SOURCE, args.apocrypha_rdf_url, args.apocrypha_ebook_page_url),
+    ]
+    rows = []
+    for source, rdf_url, page_url in sources:
+        fetched = fetch_rdf(rdf_url, timeout=args.timeout)
+        rows.append(analyze_rdf(args, fetched, source=source, rdf_url=rdf_url, ebook_page_url=page_url))
     summary = build_summary(rows)
     anchors = build_anchors(rows, summary)
     write_csv(args.out, ROW_FIELDNAMES, rows)
@@ -107,8 +144,10 @@ def main(argv: list[str] | None = None) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--rdf-url", default=RDF_URL)
-    parser.add_argument("--ebook-page-url", default=EBOOK_PAGE_URL)
+    parser.add_argument("--rdf-url", default=KJV_RDF_URL)
+    parser.add_argument("--apocrypha-rdf-url", default=APOCRYPHA_RDF_URL)
+    parser.add_argument("--ebook-page-url", default=KJV_EBOOK_PAGE_URL)
+    parser.add_argument("--apocrypha-ebook-page-url", default=APOCRYPHA_EBOOK_PAGE_URL)
     parser.add_argument("--timeout", type=float, default=30.0)
     parser.add_argument("--out", type=Path, default=DEFAULT_ROWS)
     parser.add_argument("--summary-out", type=Path, default=DEFAULT_SUMMARY)
@@ -133,7 +172,14 @@ def fetch_rdf(url: str, *, timeout: float) -> FetchedRdf:
         return FetchedRdf(raw=b"", final_url=url, fetch_status="fetch_error", error=str(exc))
 
 
-def analyze_rdf(args: argparse.Namespace, fetched: FetchedRdf) -> dict[str, object]:
+def analyze_rdf(
+    args: argparse.Namespace,
+    fetched: FetchedRdf,
+    *,
+    source: GutenbergSource = KJV_SOURCE,
+    rdf_url: str | None = None,
+    ebook_page_url: str | None = None,
+) -> dict[str, object]:
     parsed = parse_rdf(fetched.raw) if fetched.raw else {}
     title = str(parsed.get("title", ""))
     rights = str(parsed.get("rights", ""))
@@ -142,18 +188,28 @@ def analyze_rdf(args: argparse.Namespace, fetched: FetchedRdf) -> dict[str, obje
     public_domain = "public domain in the usa" in rights.casefold()
     kjv_complete = "king james version, complete" in title.casefold()
     plain_text = any("txt.utf-8" in url for url in format_urls)
-    apocrypha_marker = any("apocrypha" in value.casefold() for value in [title, rights, *descriptions])
-    metadata_candidate = fetched.fetch_status == "fetched" and public_domain and kjv_complete and plain_text
+    apocrypha_marker = any(
+        marker in value.casefold()
+        for value in [title, rights, *descriptions]
+        for marker in ("apocrypha", "deuterocanonical")
+    )
+    metadata_candidate = fetched.fetch_status == "fetched" and public_domain and plain_text
+    if source.component == "kjv" and metadata_candidate and kjv_complete:
+        source_audit_status = "public_domain_kjv_complete_metadata_component"
+    elif source.component == "apocrypha" and metadata_candidate and apocrypha_marker:
+        source_audit_status = "public_domain_apocrypha_metadata_component"
+    else:
+        source_audit_status = "source_candidate_not_confirmed"
     return {
-        "source_id": "gutenberg_ebook_30_kjv_complete",
-        "rdf_url": args.rdf_url,
+        "source_id": source.source_id,
+        "rdf_url": rdf_url or getattr(args, "rdf_url", source.default_rdf_url),
         "final_url": fetched.final_url,
         "fetch_status": fetched.fetch_status,
         "error": fetched.error,
         "bytes": len(fetched.raw),
         "sha256": hashlib.sha256(fetched.raw).hexdigest() if fetched.raw else "",
-        "ebook_no": "30",
-        "ebook_page_url": args.ebook_page_url,
+        "ebook_no": source.ebook_no,
+        "ebook_page_url": ebook_page_url or getattr(args, "ebook_page_url", source.default_page_url),
         "title": title,
         "rights": rights,
         "issued": str(parsed.get("issued", "")),
@@ -165,11 +221,7 @@ def analyze_rdf(args: argparse.Namespace, fetched: FetchedRdf) -> dict[str, obje
         "epub_url_present": any("epub" in url for url in format_urls),
         "apocrypha_marker_present": apocrypha_marker,
         "public_domain_usa_marker_present": public_domain,
-        "source_audit_status": (
-            "public_domain_kjv_complete_metadata_needs_apocrypha_coverage_probe"
-            if metadata_candidate
-            else "source_candidate_not_confirmed"
-        ),
+        "source_audit_status": source_audit_status,
         "source_use_status": "needs_source_use_policy_lock",
         "verse_numbered_import_ready": False,
         "source_lock_ready_status": "not_source_lock_ready",
@@ -184,17 +236,29 @@ def parse_rdf(raw: bytes) -> dict[str, object]:
         str(node.attrib.get(f"{{{NS['rdf']}}}about", ""))
         for node in root.findall(".//pgterms:file", NS)
     ]
+    title_node = root.find(".//dcterms:title", NS)
+    rights_node = root.find(".//dcterms:rights", NS)
+    issued_node = root.find(".//dcterms:issued", NS)
+    downloads_node = root.find(".//pgterms:downloads", NS)
     return {
-        "title": root.findtext(".//dcterms:title", default="", namespaces=NS),
-        "rights": root.findtext(".//dcterms:rights", default="", namespaces=NS),
-        "issued": root.findtext(".//dcterms:issued", default="", namespaces=NS),
-        "downloads": root.findtext(".//pgterms:downloads", default="", namespaces=NS),
+        "title": node_text(title_node) if title_node is not None else "",
+        "rights": node_text(rights_node) if rights_node is not None else "",
+        "issued": node_text(issued_node) if issued_node is not None else "",
+        "downloads": node_text(downloads_node) if downloads_node is not None else "",
         "descriptions": descriptions,
         "format_urls": format_urls,
     }
 
 
 def build_summary(rows: list[dict[str, object]]) -> dict[str, object]:
+    kjv_candidate = any(
+        row["source_audit_status"] == "public_domain_kjv_complete_metadata_component"
+        for row in rows
+    )
+    apocrypha_candidate = any(
+        row["source_audit_status"] == "public_domain_apocrypha_metadata_component"
+        for row in rows
+    )
     return {
         "source_pages": len(rows),
         "metadata_fetches_ok": sum(1 for row in rows if row["fetch_status"] == "fetched"),
@@ -202,8 +266,14 @@ def build_summary(rows: list[dict[str, object]]) -> dict[str, object]:
         "kjv_complete_metadata_candidates": sum(
             1
             for row in rows
-            if row["source_audit_status"] == "public_domain_kjv_complete_metadata_needs_apocrypha_coverage_probe"
+            if row["source_audit_status"] == "public_domain_kjv_complete_metadata_component"
         ),
+        "apocrypha_metadata_candidates": sum(
+            1
+            for row in rows
+            if row["source_audit_status"] == "public_domain_apocrypha_metadata_component"
+        ),
+        "split_kjv_apocrypha_metadata_candidates": int(kjv_candidate and apocrypha_candidate),
         "apocrypha_marker_pages": sum(1 for row in rows if bool(row["apocrypha_marker_present"])),
         "plain_text_utf8_pages": sum(1 for row in rows if bool(row["plain_text_utf8_url_present"])),
         "source_use_ready_pages": sum(1 for row in rows if row["source_use_status"] == "source_use_ready"),
@@ -216,10 +286,11 @@ def build_summary(rows: list[dict[str, object]]) -> dict[str, object]:
 
 def build_anchors(rows: list[dict[str, object]], summary: dict[str, object]) -> list[dict[str, str]]:
     checks = [
-        ("gutenberg", "metadata_fetch_status_recorded", int(summary["metadata_fetches_ok"]) == 1, "Project Gutenberg RDF metadata fetched"),
-        ("gutenberg", "public_domain_usa_recorded", int(summary["public_domain_usa_pages"]) == 1, "RDF rights field says public domain in the USA"),
-        ("gutenberg", "plain_text_format_recorded", int(summary["plain_text_utf8_pages"]) == 1, "plain text UTF-8 format URL is recorded"),
-        ("gutenberg", "apocrypha_coverage_not_confirmed", int(summary["apocrypha_marker_pages"]) == 0, "RDF metadata does not itself confirm Apocrypha coverage"),
+        ("gutenberg", "metadata_fetch_status_recorded", int(summary["metadata_fetches_ok"]) == 2, "Project Gutenberg RDF metadata fetched for eBook 30 and eBook 124"),
+        ("gutenberg", "public_domain_usa_recorded", int(summary["public_domain_usa_pages"]) == 2, "RDF rights fields say public domain in the USA"),
+        ("gutenberg", "plain_text_format_recorded", int(summary["plain_text_utf8_pages"]) == 2, "plain text UTF-8 format URLs are recorded"),
+        ("gutenberg", "apocrypha_metadata_recorded", int(summary["apocrypha_metadata_candidates"]) == 1, "eBook 124 RDF metadata identifies the Apocrypha/deuterocanonical component"),
+        ("gutenberg", "split_metadata_components_recorded", int(summary["split_kjv_apocrypha_metadata_candidates"]) == 1, "eBook 30 plus eBook 124 form a split metadata candidate"),
         ("gutenberg", "source_lock_not_ready", int(summary["source_lock_ready_pages"]) == 0, "no source-lock-ready corpus import is declared"),
         ("gutenberg", "result_not_ready", int(summary["result_ready_pages"]) == 0, "no result-bearing replication is declared ready"),
     ]
@@ -242,7 +313,7 @@ def write_markdown(path: Path, summary: dict[str, object], rows: list[dict[str, 
         "Status: source-status audit only.",
         "",
         "This is not an ELS result, not a corpus import, and not a source lock.",
-        "It records Project Gutenberg RDF metadata only and does not download, retain, normalize, or commit Bible text.",
+        "It records Project Gutenberg eBook 30 and eBook 124 RDF metadata only and does not download, retain, normalize, or commit Bible text.",
         "",
         "## Summary",
         "",
@@ -250,6 +321,8 @@ def write_markdown(path: Path, summary: dict[str, object], rows: list[dict[str, 
         f"- Metadata fetches ok: {summary['metadata_fetches_ok']}.",
         f"- Public-domain-USA pages: {summary['public_domain_usa_pages']}.",
         f"- KJV-complete metadata candidates: {summary['kjv_complete_metadata_candidates']}.",
+        f"- Apocrypha/deuterocanon metadata candidates: {summary['apocrypha_metadata_candidates']}.",
+        f"- Split KJV+Apocrypha metadata candidates: {summary['split_kjv_apocrypha_metadata_candidates']}.",
         f"- Apocrypha marker pages in RDF: {summary['apocrypha_marker_pages']}.",
         f"- Plain-text UTF-8 format pages: {summary['plain_text_utf8_pages']}.",
         f"- Source-use ready pages: {summary['source_use_ready_pages']}.",
@@ -288,9 +361,9 @@ def write_markdown(path: Path, summary: dict[str, object], rows: list[dict[str, 
             "",
             "## Boundary",
             "",
-            "Project Gutenberg RDF metadata records eBook 30 as `The Bible, King James Version, Complete` with `Public domain in the USA.` rights and a plain-text UTF-8 format URL.",
-            "The RDF metadata does not itself confirm Apocrypha/deuterocanon coverage, so this audit does not declare source-lock readiness.",
-            "A future coverage probe may inspect the lawful source text in an ignored local cache, then separately lock verse mapping, book order, checksums, collation, terms, and controls before any result-bearing run.",
+            "Project Gutenberg RDF metadata records eBook 30 as `The Bible, King James Version, Complete` and eBook 124 as `Deuterocanonical Books of the Bible Apocrypha`, both with `Public domain in the USA.` rights and plain-text UTF-8 format URLs.",
+            "This metadata audit pairs with the separate heading-level coverage probe, but it does not declare source-lock readiness.",
+            "A future source-lock pass must still inspect lawful source text in an ignored local cache, then lock verse mapping, book order, Baruch/Epistle handling, checksums, collation, terms, and controls before any result-bearing run.",
             "It does not change any KJVA bridge result status.",
         ]
     )
@@ -303,7 +376,7 @@ def write_manifest(path: Path, args: argparse.Namespace, rows: list[dict[str, ob
         "generated_at": datetime.now(UTC).isoformat(),
         "els_version": __version__,
         "tool": "scripts.analyze_kjva_gutenberg_candidate_source",
-        "rdf_url": args.rdf_url,
+        "rdf_urls": [args.rdf_url, args.apocrypha_rdf_url],
         "claim_boundary": "source-status audit only; no ELS result",
         "text_retention": "metadata only; no Bible text retained",
         "row_count": len(rows),

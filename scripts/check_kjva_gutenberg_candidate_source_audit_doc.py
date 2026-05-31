@@ -26,13 +26,18 @@ REQUIRED_PHRASES = (
     "not a corpus import",
     "not a source lock",
     "does not download, retain, normalize, or commit Bible text",
-    "Public-domain-USA pages: 1.",
+    "Public-domain-USA pages: 2.",
     "KJV-complete metadata candidates: 1.",
-    "Apocrypha marker pages in RDF: 0.",
+    "Apocrypha/deuterocanon metadata candidates: 1.",
+    "Split KJV+Apocrypha metadata candidates: 1.",
+    "Apocrypha marker pages in RDF: 1.",
+    "Plain-text UTF-8 format pages: 2.",
     "Source-use ready pages: 0.",
     "Source-lock ready pages: 0.",
     "Verse-numbered import ready pages: 0.",
     "Result-ready pages: 0.",
+    "eBook 124 as `Deuterocanonical Books of the Bible Apocrypha`",
+    "Baruch/Epistle handling",
     "It does not change any KJVA bridge result status.",
 )
 FORBIDDEN_OVERCLAIM_RE = re.compile(
@@ -109,25 +114,44 @@ def validate_rows_csv(path: Path) -> list[str]:
     failures: list[str] = []
     if fieldnames != analyzer.ROW_FIELDNAMES:
         failures.append(f"{path} fieldnames drifted")
-    if len(rows) != 1:
-        failures.append(f"{path} expected 1 source row, found {len(rows)}")
+    if len(rows) != 2:
+        failures.append(f"{path} expected 2 source rows, found {len(rows)}")
         return failures
-    row = rows[0]
-    expected = {
-        "source_id": "gutenberg_ebook_30_kjv_complete",
-        "title": "The Bible, King James Version, Complete",
-        "rights": "Public domain in the USA.",
-        "plain_text_utf8_url_present": "True",
-        "public_domain_usa_marker_present": "True",
-        "source_audit_status": "public_domain_kjv_complete_metadata_needs_apocrypha_coverage_probe",
-        "source_use_status": "needs_source_use_policy_lock",
-        "verse_numbered_import_ready": "False",
-        "source_lock_ready_status": "not_source_lock_ready",
-        "result_ready_status": "not_result_ready",
+    by_source = {row.get("source_id", ""): row for row in rows}
+    expected_by_source = {
+        "gutenberg_ebook_30_kjv_complete": {
+            "title": "The Bible, King James Version, Complete",
+            "rights": "Public domain in the USA.",
+            "plain_text_utf8_url_present": "True",
+            "public_domain_usa_marker_present": "True",
+            "apocrypha_marker_present": "False",
+            "source_audit_status": "public_domain_kjv_complete_metadata_component",
+            "source_use_status": "needs_source_use_policy_lock",
+            "verse_numbered_import_ready": "False",
+            "source_lock_ready_status": "not_source_lock_ready",
+            "result_ready_status": "not_result_ready",
+        },
+        "gutenberg_ebook_124_deuterocanonical": {
+            "title": "Deuterocanonical Books of the Bible Apocrypha",
+            "rights": "Public domain in the USA.",
+            "plain_text_utf8_url_present": "True",
+            "public_domain_usa_marker_present": "True",
+            "apocrypha_marker_present": "True",
+            "source_audit_status": "public_domain_apocrypha_metadata_component",
+            "source_use_status": "needs_source_use_policy_lock",
+            "verse_numbered_import_ready": "False",
+            "source_lock_ready_status": "not_source_lock_ready",
+            "result_ready_status": "not_result_ready",
+        },
     }
-    for key, value in expected.items():
-        if row.get(key) != value:
-            failures.append(f"{path} {key} drifted: {row.get(key)!r}")
+    for source_id, expected in expected_by_source.items():
+        row = by_source.get(source_id)
+        if row is None:
+            failures.append(f"{path} missing source row: {source_id}")
+            continue
+        for key, value in expected.items():
+            if row.get(key) != value:
+                failures.append(f"{path} {source_id} {key} drifted: {row.get(key)!r}")
     return failures
 
 
@@ -144,12 +168,14 @@ def validate_summary_csv(path: Path) -> list[str]:
         return failures
     row = rows[0]
     expected = {
-        "source_pages": "1",
-        "metadata_fetches_ok": "1",
-        "public_domain_usa_pages": "1",
+        "source_pages": "2",
+        "metadata_fetches_ok": "2",
+        "public_domain_usa_pages": "2",
         "kjv_complete_metadata_candidates": "1",
-        "apocrypha_marker_pages": "0",
-        "plain_text_utf8_pages": "1",
+        "apocrypha_metadata_candidates": "1",
+        "split_kjv_apocrypha_metadata_candidates": "1",
+        "apocrypha_marker_pages": "1",
+        "plain_text_utf8_pages": "2",
         "source_use_ready_pages": "0",
         "source_lock_ready_pages": "0",
         "verse_import_ready_pages": "0",
@@ -175,7 +201,8 @@ def validate_anchors_csv(path: Path) -> list[str]:
         "metadata_fetch_status_recorded",
         "public_domain_usa_recorded",
         "plain_text_format_recorded",
-        "apocrypha_coverage_not_confirmed",
+        "apocrypha_metadata_recorded",
+        "split_metadata_components_recorded",
         "source_lock_not_ready",
         "result_not_ready",
     ]:

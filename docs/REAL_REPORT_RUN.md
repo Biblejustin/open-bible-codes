@@ -250,9 +250,10 @@ It requires:
   result-bearing output;
 - KJVA Gutenberg candidate source audit stays metadata-only, with Project
   Gutenberg eBook 30 RDF metadata recording `The Bible, King James Version,
-  Complete`, `Public domain in the USA.`, and a plain-text UTF-8 format URL,
-  but no Apocrypha/deuterocanon coverage confirmation, corpus import, source
-  lock, or result-bearing output;
+  Complete` and eBook 124 RDF metadata recording `Deuterocanonical Books of
+  the Bible Apocrypha`, both with `Public domain in the USA.` and plain-text
+  UTF-8 format URLs, but no corpus import, source lock, or result-bearing
+  output;
 - KJVA Gutenberg book-coverage probe stays source-coverage only, with all 66
   KJV book headings found in eBook 30, all 14 tracked Apocrypha/deuterocanon
   coverage rows found in eBook 124, one extra Epistle of Jeremiah source
