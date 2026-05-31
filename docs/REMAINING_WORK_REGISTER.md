@@ -108,6 +108,11 @@ ascending order within that book.
 thematic/author/protagonist mapping rows against orphaned term IDs, and the
 check is wired into `make study-mapping-schemas`, report preflight, and the
 real-report protocol inputs.
+`scripts/check_term_files.py` now moves term CSV/schema normalization checks
+out of tests alone and into release/report gates: it validates required term
+columns, per-file duplicate `term_id` values, supported languages,
+normalization-empty rows, meaningful constants, and implemented gematria
+schemes before public release or real-report assembly.
 The WRR cross-pair grid doc is now CSV/manifest-guarded against grid-shape,
 corrected-distance, aggregate, permutation-summary, manifest input/output, and
 count drift.

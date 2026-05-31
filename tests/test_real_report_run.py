@@ -2148,6 +2148,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/check_english_seed_survivor_gate.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_source_basis_audit_queue.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_expanded_strata_tooling.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/check_term_files.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/validate_study_mapping_schemas.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_study_mapping_term_ids.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_crd_relevance_dictionary.py", preflight.DEFAULT_REQUIRED_PATHS)
@@ -2844,6 +2845,27 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "study mapping schema failures: "
                 "data/study/mappings/demo.csv missing required columns: locked_at",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_term_file_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_term_files,
+                "validate_term_files",
+                return_value=["terms/demo.csv:2 unsupported language: latin"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["term_file_failures"],
+                ["terms/demo.csv:2 unsupported language: latin"],
+            )
+            self.assertIn(
+                "term file failures: terms/demo.csv:2 unsupported language: latin",
                 payload["failures"],
             )
 

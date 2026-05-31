@@ -88,6 +88,7 @@ from scripts import (
     check_source_basis_audit_queue,
     check_real_report_run_doc,
     check_strongest_candidate_deep_dive_doc,
+    check_term_files,
     check_study_mapping_term_ids,
     check_study_lock_manifests_doc,
     check_wrr_claim_blocker_packet_doc,
@@ -681,6 +682,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_crd_relevance_dictionary.py",
     "scripts/check_expanded_strata_tooling.py",
     "scripts/check_manual_review_queue.py",
+    "scripts/check_term_files.py",
     "scripts/validate_study_mapping_schemas.py",
     "scripts/check_study_mapping_term_ids.py",
     "scripts/run_crd_density.py",
@@ -1297,6 +1299,10 @@ def main(argv: list[str] | None = None) -> int:
             "doc command-reference failures: "
             + "; ".join(doc_command_reference_failures)
         )
+
+    term_file_failures = check_term_files.validate_term_files()
+    if term_file_failures:
+        failures.append("term file failures: " + "; ".join(term_file_failures))
 
     study_mapping_schema_failures = validate_study_mapping_schemas.validate_mapping_dir(
         validate_study_mapping_schemas.MAPPINGS_DIR
@@ -2249,6 +2255,7 @@ def main(argv: list[str] | None = None) -> int:
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,
         "public_claim_language_failures": public_claim_language_failures,
         "doc_command_reference_failures": doc_command_reference_failures,
+        "term_file_failures": term_file_failures,
         "study_mapping_schema_failures": study_mapping_schema_failures,
         "study_mapping_term_id_failures": study_mapping_term_id_failures,
         "preregistration_placeholder_paths": [

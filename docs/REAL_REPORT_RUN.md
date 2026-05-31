@@ -196,6 +196,8 @@ It requires:
 - no tracked report/database/raw-source artifacts beyond allowed placeholders;
 - no high-confidence secret-token patterns in tracked files;
 - required protocols, docs, and term files present;
+- term CSV files pass schema, language, normalization, constants, and gematria
+  checks;
 - final report, draft, outline, highlights, consolidated findings, and
   clean-lock summary support-doc references point at required local docs;
 - `protocols/real_report_run.toml` preflight inputs match the preflight
