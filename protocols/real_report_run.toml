@@ -22,6 +22,8 @@ inputs = [
   "scripts/analyze_kjva_open_bibles_candidate_source.py",
   "scripts/check_kjva_open_bibles_candidate_source_audit_doc.py",
   "scripts/check_kjva_source_candidate_status_doc.py",
+  "scripts/analyze_kjva_wikisource_book_coverage_probe.py",
+  "scripts/check_kjva_wikisource_book_coverage_probe_doc.py",
   "scripts/analyze_kjva_wikisource_candidate_source.py",
   "scripts/check_kjva_wikisource_candidate_source_audit_doc.py",
   "scripts/check_prospective_lane_status_doc.py",
@@ -43,6 +45,7 @@ inputs = [
   "docs/REMAINING_WORK_REGISTER.md",
   "protocols/README.md",
   "protocols/real_report_run.toml",
+  "protocols/kjva_wikisource_book_coverage_probe.toml",
   "protocols/INDEX.md",
   "protocols/step_tahot_final_gate.toml",
   "protocols/greek_pattern_versions.toml",
@@ -411,6 +414,7 @@ inputs = [
   "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md",
   "docs/KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md",
   "docs/KJVA_SOURCE_CANDIDATE_STATUS.md",
+  "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
   "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
   "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
   "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
@@ -422,6 +426,10 @@ inputs = [
   "reports/kjva_open_bibles_candidate_source/summary.csv",
   "reports/kjva_open_bibles_candidate_source/anchors.csv",
   "reports/kjva_open_bibles_candidate_source/manifest.json",
+  "reports/kjva_wikisource_book_coverage_probe/book_links.csv",
+  "reports/kjva_wikisource_book_coverage_probe/summary.csv",
+  "reports/kjva_wikisource_book_coverage_probe/anchors.csv",
+  "reports/kjva_wikisource_book_coverage_probe/manifest.json",
   "reports/kjva_wikisource_candidate_source/source_status.csv",
   "reports/kjva_wikisource_candidate_source/summary.csv",
   "reports/kjva_wikisource_candidate_source/anchors.csv",
@@ -1724,6 +1732,22 @@ outputs = [
   "reports/kjva_wikisource_candidate_source/anchors.csv",
   "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
   "reports/kjva_wikisource_candidate_source/manifest.json",
+]
+
+[[steps]]
+id = "kjva_wikisource_book_coverage_probe"
+description = "Probe Wikisource book-link coverage without importing Bible text."
+argv = ["-m", "scripts.analyze_kjva_wikisource_book_coverage_probe"]
+inputs = [
+  "scripts/analyze_kjva_wikisource_book_coverage_probe.py",
+  "scripts/analyze_kjva_wikisource_candidate_source.py",
+]
+outputs = [
+  "reports/kjva_wikisource_book_coverage_probe/book_links.csv",
+  "reports/kjva_wikisource_book_coverage_probe/summary.csv",
+  "reports/kjva_wikisource_book_coverage_probe/anchors.csv",
+  "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
+  "reports/kjva_wikisource_book_coverage_probe/manifest.json",
 ]
 
 [[steps]]

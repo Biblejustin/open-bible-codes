@@ -57,7 +57,10 @@ Online source candidates found for possible future audit:
   public-domain-in-US page for a KJV Bible with Apocrypha, stating the text
   follows the standard 1769 version but without the repo's verse-numbered
   import/collation. Current tracked status audit:
-  `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`.
+  `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`. Current book-coverage
+  probe found 36 existing KJV book links, 30 KJV redlinks, and 0
+  apocrypha/deuterocanon book links on the parsed main-page book table:
+  `docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md`.
 - [`seven1m/open-bibles` KJV OSIS](https://github.com/seven1m/open-bibles):
   public-domain KJV OSIS listing. Current tracked status audit found KJV OSIS
   metadata but no apocrypha/deuterocanon path markers, so this remains KJV-only
@@ -85,6 +88,7 @@ sidecar.
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CONTROLS_5000.md`
 - `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md`
 - `docs/KJVA_SOURCE_CANDIDATE_STATUS.md`
+- `docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md`
 - `docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md`
 - `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - `configs/prospective_study_lanes.json`

@@ -2381,3 +2381,20 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   KJVA/apocrypha bridge purposes.
 - Added `scripts/check_kjva_source_candidate_status_doc.py` and wired it into
   `scripts/preflight_real_report_run.py` plus `protocols/real_report_run.toml`.
+
+## KJVA Wikisource Book Coverage Probe
+
+- Added `docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md` as a metadata-only
+  book-link coverage probe for the Wikisource Ballantyne KJV + Apocrypha
+  candidate.
+- Current parsed main-page book-link status: 66 expected KJV books, 36 existing
+  KJV book links, 30 KJV redlinks, 0 missing KJV rows, 14 expected
+  apocrypha/deuterocanon books, and 0 visible apocrypha/deuterocanon book links.
+- This keeps Wikisource at coverage-probe status only: no child book text is
+  fetched, no Bible text is retained, no verse mapping exists, no book-order
+  lock is ready, and no KJVA result status changes.
+- Added `protocols/kjva_wikisource_book_coverage_probe.toml`,
+  `scripts/analyze_kjva_wikisource_book_coverage_probe.py`, and
+  `scripts/check_kjva_wikisource_book_coverage_probe_doc.py`, and wired the
+  probe into `scripts/preflight_real_report_run.py` plus
+  `protocols/real_report_run.toml`.

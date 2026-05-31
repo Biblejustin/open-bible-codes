@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 406
+Documents indexed: 407
 
 ## Controls
 
@@ -362,6 +362,7 @@ Documents indexed: 406
 | KJVA Prospective Apocrypha Bridge Candidates | `KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md` |
 | KJVA Open-Bibles Candidate Source Audit | `KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md` |
 | KJVA Source Candidate Status | `KJVA_SOURCE_CANDIDATE_STATUS.md` |
+| KJVA Wikisource Book Coverage Probe | `KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md` |
 | KJVA Wikisource Candidate Source Audit | `KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md` |
 | KJVA Apocrypha Bridge Candidates | `KJV_APOCRYPHA_BRIDGE_CANDIDATES.md` |
 | KJVA Apocrypha Bridge Context | `KJV_APOCRYPHA_BRIDGE_CONTEXT.md` |

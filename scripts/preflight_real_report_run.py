@@ -72,6 +72,7 @@ from scripts import (
     check_kjva_apocrypha_bridge_prospective_boundary,
     check_kjva_open_bibles_candidate_source_audit_doc,
     check_kjva_source_candidate_status_doc,
+    check_kjva_wikisource_book_coverage_probe_doc,
     check_kjva_wikisource_candidate_source_audit_doc,
     check_manual_review_queue,
     check_preregistration_placeholders,
@@ -164,6 +165,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/analyze_kjva_open_bibles_candidate_source.py",
     "scripts/check_kjva_open_bibles_candidate_source_audit_doc.py",
     "scripts/check_kjva_source_candidate_status_doc.py",
+    "scripts/analyze_kjva_wikisource_book_coverage_probe.py",
+    "scripts/check_kjva_wikisource_book_coverage_probe_doc.py",
     "scripts/analyze_kjva_wikisource_candidate_source.py",
     "scripts/check_kjva_wikisource_candidate_source_audit_doc.py",
     "scripts/check_prospective_lane_status_doc.py",
@@ -185,6 +188,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/REMAINING_WORK_REGISTER.md",
     "protocols/README.md",
     "protocols/real_report_run.toml",
+    "protocols/kjva_wikisource_book_coverage_probe.toml",
     "protocols/INDEX.md",
     "protocols/step_tahot_final_gate.toml",
     "protocols/greek_pattern_versions.toml",
@@ -553,6 +557,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md",
     "docs/KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md",
     "docs/KJVA_SOURCE_CANDIDATE_STATUS.md",
+    "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
     "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
     "reports/kjv_apocrypha_bridge_prospective/bridge_candidates.csv",
@@ -564,6 +569,10 @@ DEFAULT_REQUIRED_PATHS = [
     "reports/kjva_open_bibles_candidate_source/summary.csv",
     "reports/kjva_open_bibles_candidate_source/anchors.csv",
     "reports/kjva_open_bibles_candidate_source/manifest.json",
+    "reports/kjva_wikisource_book_coverage_probe/book_links.csv",
+    "reports/kjva_wikisource_book_coverage_probe/summary.csv",
+    "reports/kjva_wikisource_book_coverage_probe/anchors.csv",
+    "reports/kjva_wikisource_book_coverage_probe/manifest.json",
     "reports/kjva_wikisource_candidate_source/source_status.csv",
     "reports/kjva_wikisource_candidate_source/summary.csv",
     "reports/kjva_wikisource_candidate_source/anchors.csv",
@@ -1160,6 +1169,17 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "KJVA Wikisource source audit doc failures: "
             + "; ".join(kjva_wikisource_candidate_source_audit_doc_failures)
+        )
+
+    kjva_wikisource_book_coverage_probe_doc_failures = (
+        check_kjva_wikisource_book_coverage_probe_doc.validate_kjva_wikisource_book_coverage_probe_doc(
+            root / check_kjva_wikisource_book_coverage_probe_doc.DEFAULT_DOC
+        )
+    )
+    if kjva_wikisource_book_coverage_probe_doc_failures:
+        failures.append(
+            "KJVA Wikisource book coverage probe failures: "
+            + "; ".join(kjva_wikisource_book_coverage_probe_doc_failures)
         )
 
     final_report_highlights_doc_failures = (
@@ -2183,6 +2203,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "kjva_wikisource_candidate_source_audit_doc_failures": (
             kjva_wikisource_candidate_source_audit_doc_failures
+        ),
+        "kjva_wikisource_book_coverage_probe_doc_failures": (
+            kjva_wikisource_book_coverage_probe_doc_failures
         ),
         "source_basis_failures": source_basis_failures,
         "english_seed_survivor_gate_failures": english_seed_survivor_gate_failures,

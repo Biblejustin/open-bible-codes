@@ -13,6 +13,7 @@ DEFAULT_DOC = Path("docs/KJVA_SOURCE_CANDIDATE_STATUS.md")
 DEFAULT_LINKED_DOCS = (
     Path("docs/KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md"),
     Path("docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md"),
+    Path("docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md"),
     Path("docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md"),
 )
 
@@ -29,6 +30,8 @@ REQUIRED_PHRASES = (
     "current eBible KJV + Apocrypha source family",
     "Wikisource Ballantyne 1911 KJV + Apocrypha",
     "metadata-level future source candidate",
+    "36 existing KJV book links, 30 KJV redlinks",
+    "0 apocrypha/deuterocanon book links",
     "`seven1m/open-bibles`",
     "KJV-only metadata candidate",
     "not a KJVA/apocrypha source candidate",

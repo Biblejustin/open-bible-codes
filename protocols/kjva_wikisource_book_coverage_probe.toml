@@ -1,0 +1,21 @@
+name = "kjva_wikisource_book_coverage_probe"
+description = "Probe Wikisource Ballantyne KJV + Apocrypha book-link coverage without importing Bible text."
+manifest_out = "reports/kjva_wikisource_book_coverage_probe/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "kjva_wikisource_book_coverage_probe"
+description = "Record book-link coverage metadata only; do not import or commit Bible text."
+argv = ["-m", "scripts.analyze_kjva_wikisource_book_coverage_probe"]
+inputs = [
+  "scripts/analyze_kjva_wikisource_book_coverage_probe.py",
+  "scripts/analyze_kjva_wikisource_candidate_source.py",
+]
+outputs = [
+  "reports/kjva_wikisource_book_coverage_probe/book_links.csv",
+  "reports/kjva_wikisource_book_coverage_probe/summary.csv",
+  "reports/kjva_wikisource_book_coverage_probe/anchors.csv",
+  "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
+  "reports/kjva_wikisource_book_coverage_probe/manifest.json",
+]

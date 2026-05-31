@@ -153,6 +153,8 @@ This assembly run includes:
   `docs/KJVA_SOURCE_CANDIDATE_STATUS.md`
 - KJVA Wikisource candidate source-status audit:
   `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
+- KJVA Wikisource book-coverage probe:
+  `docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md`
 - KJVA Open-Bibles candidate source-status audit:
   `docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md`
 - broader Hebrew screening representative-control review:
@@ -227,6 +229,9 @@ It requires:
   replication sources, 0 result-ready sources, and 0 source-lock ready sources;
 - KJVA Wikisource candidate source audit stays metadata-only, with no Bible
   text retained, no corpus import ready, and no result-bearing output;
+- KJVA Wikisource book-coverage probe stays metadata-only, with 36 existing
+  KJV book links, 30 KJV redlinks, 0 apocrypha/deuterocanon book links, and no
+  source-lock readiness;
 - KJVA Open-Bibles candidate source audit stays metadata-only and marks the
   repository as KJV-only for current KJVA/apocrypha bridge purposes;
 - consolidated findings keep the current prospective-lane boundary tied to

@@ -163,6 +163,14 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/analyze_kjva_wikisource_book_coverage_probe.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_kjva_wikisource_book_coverage_probe_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
             steps_by_id["preflight"]["inputs"],
         )
@@ -171,7 +179,15 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "protocols/kjva_wikisource_book_coverage_probe.toml",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -192,6 +208,7 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn("kjva_open_bibles_candidate_source_audit", steps_by_id)
         self.assertIn("kjva_wikisource_candidate_source_audit", steps_by_id)
+        self.assertIn("kjva_wikisource_book_coverage_probe", steps_by_id)
         self.assertIn("docs/INDEX.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("protocols/INDEX.md", steps_by_id["preflight"]["inputs"])
         self.assertIn("docs/WRR_REPLICATION_PLAN.md", steps_by_id["preflight"]["inputs"])
@@ -2635,6 +2652,27 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "KJVA source candidate status doc failures: missing source-ready boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_kjva_wikisource_book_coverage_probe_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_kjva_wikisource_book_coverage_probe_doc,
+                "validate_kjva_wikisource_book_coverage_probe_doc",
+                return_value=["missing apocrypha coverage boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["kjva_wikisource_book_coverage_probe_doc_failures"],
+                ["missing apocrypha coverage boundary"],
+            )
+            self.assertIn(
+                "KJVA Wikisource book coverage probe failures: missing apocrypha coverage boundary",
                 payload["failures"],
             )
 

@@ -27,13 +27,14 @@ remains negative under its registered controls.
 | Source | Current status | Why it matters | Next need |
 | --- | --- | --- | --- |
 | current eBible KJV + Apocrypha source family | usable rerun source | This is the current local KJVA/apocrypha corpus family in `configs/example_ebible_engkjv_apocrypha.toml`. It can reproduce or rerun current KJVA work, but it is not an independent replication source. | Keep as current-source rerun lane only unless a new study lock says otherwise. |
-| Wikisource Ballantyne 1911 KJV + Apocrypha | metadata-level future source candidate | The audit found a public-domain KJV + Apocrypha page with source markers, but no verse-numbered import, collation, checksum, or book-order lock exists here. | Lawful import decision, verse mapping, book-order lock, collation against current eBible KJVA, checksums, term lock, and study-lock sidecar. |
+| Wikisource Ballantyne 1911 KJV + Apocrypha | metadata-level future source candidate | The source audit found a public-domain KJV + Apocrypha page with markers. The book-coverage probe found 36 existing KJV book links, 30 KJV redlinks, and 0 apocrypha/deuterocanon book links on the parsed main-page book table. No verse-numbered import, collation, checksum, or book-order lock exists here. | Lawful import decision, apocrypha/deuterocanon coverage source, verse mapping, book-order lock, collation against current eBible KJVA, checksums, term lock, and study-lock sidecar. |
 | `seven1m/open-bibles` | KJV-only metadata candidate | The audit found KJV OSIS metadata, but current tree metadata does not show apocrypha or deuterocanon coverage. It is not a KJVA/apocrypha source candidate for current bridge replication work. | No KJVA bridge use unless a separate lawful apocrypha source is found and audited. |
 
 ## Audit Links
 
 - `docs/KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md`
 - `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
+- `docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md`
 - `docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md`
 
 ## Required Before Any Future Result Run
