@@ -60,7 +60,8 @@ evidence packet, remaining-lane evidence packet, and source-row coverage
 packet, plus source-row crop packet, contact-sheet image, OCR word packet, and
 all-script exact-test and check-script wiring release guards, plus a
 metadata-only CrossWire KJVA source-candidate audit, Project Gutenberg
-KJV-complete metadata audit, and source-status rollup refresh.
+KJV-complete metadata audit, Project Gutenberg heading-level coverage probe,
+and source-status rollup refresh.
 The WRR method-lane wide-skip probe is now guarded, included in the real-report
 run, carried into the exact-gap/blocker packets, and mirrored in public
 reader-facing WRR wording.
@@ -2429,14 +2430,14 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Added `docs/KJVA_SOURCE_CANDIDATE_STATUS.md` as a single rollup for the
   current KJVA/apocrypha source-candidate state.
 - Current rollup status: 0 ready independent KJVA replication sources, 1
-  possible independent KJVA metadata candidate, 1 additional public-domain
-  KJV-complete metadata candidate needing Apocrypha/deuterocanon coverage
-  probe, 0 result-ready sources, and 0 source-lock ready sources.
+  possible independent KJVA metadata candidate, 1 public-domain KJV-complete
+  candidate whose heading-level probe found no Apocrypha/deuterocanon headings,
+  0 result-ready sources, and 0 source-lock ready sources.
 - It keeps the source boundary explicit: current eBible KJV + Apocrypha remains
   the rerun source family with 14 apocrypha/deuterocanon books, 5720 verses,
   and 593090 normalized letters; CrossWire is a metadata-level future source
-  candidate with KJVA/KJVDC paths present; Project Gutenberg eBook 30 remains
-  a public-domain-USA KJV-complete metadata candidate needing coverage probe;
+  candidate with KJVA/KJVDC paths present; Project Gutenberg eBook 30 is a
+  public-domain-USA KJV-only control candidate after coverage probing;
   Wikisource remains a metadata-level future source candidate; and
   `seven1m/open-bibles` remains KJV-only for current KJVA/apocrypha bridge
   purposes.
@@ -2494,4 +2495,22 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/analyze_kjva_gutenberg_candidate_source.py`, and
   `scripts/check_kjva_gutenberg_candidate_source_audit_doc.py`, and wired the
   audit into `scripts/preflight_real_report_run.py` plus
+  `protocols/real_report_run.toml`.
+
+## KJVA Gutenberg Book Coverage Probe
+
+- Added `docs/KJVA_GUTENBERG_BOOK_COVERAGE_PROBE.md` as a heading-level
+  source-coverage probe for Project Gutenberg eBook 30.
+- Current plain-text heading marker status: 66 expected KJV books, 66 found KJV
+  book headings, 0 missing KJV headings, 14 expected Apocrypha/deuterocanon
+  books, 0 found Apocrypha/deuterocanon book headings, and 14 missing
+  Apocrypha/deuterocanon headings.
+- This changes the Gutenberg read from coverage-unknown to public-domain
+  KJV-only control candidate for current KJVA/apocrypha bridge purposes.
+- No Bible text is committed, normalized, or imported by this probe; it does
+  not change KJVA bridge result status.
+- Added `protocols/kjva_gutenberg_book_coverage_probe.toml`,
+  `scripts/analyze_kjva_gutenberg_book_coverage_probe.py`, and
+  `scripts/check_kjva_gutenberg_book_coverage_probe_doc.py`, and wired the
+  probe into `scripts/preflight_real_report_run.py` plus
   `protocols/real_report_run.toml`.

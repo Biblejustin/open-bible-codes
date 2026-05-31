@@ -6,10 +6,9 @@ corpus import, not a source lock, and not a claim-ready replication.
 ## Setup
 
 This page collects the current KJVA/apocrypha source-candidate state in one
-place. It summarizes source status from the current local config and the three
-metadata-only source-candidate audits already tracked in this repository, plus
-one public-domain KJV-complete metadata candidate that still needs an
-Apocrypha/deuterocanon coverage probe.
+place. It summarizes source status from the current local config, the
+metadata-only source-candidate audits already tracked in this repository, and
+the heading-level Project Gutenberg coverage probe.
 
 This rollup does not import Bible text, normalize verses, run ELS searches,
 evaluate controls, or upgrade the completed KJVA bridge lane.
@@ -18,7 +17,7 @@ evaluate controls, or upgrade the completed KJVA bridge lane.
 
 - Ready independent KJVA replication sources: 0.
 - Possible independent KJVA metadata candidates: 1.
-- Additional public-domain KJV-complete metadata candidates needing Apocrypha coverage probe: 1.
+- Public-domain KJV-complete candidates with no Apocrypha headings found: 1.
 - Result-ready sources: 0.
 - source-lock ready sources: 0.
 
@@ -32,7 +31,7 @@ remains negative under its registered controls.
 | --- | --- | --- | --- |
 | current eBible KJV + Apocrypha source family | usable rerun source | This is the current local KJVA/apocrypha corpus family in `configs/example_ebible_engkjv_apocrypha.toml`. The source-coverage audit records 14 apocrypha/deuterocanon books, 5720 verses, and 593090 normalized letters for `KJVA`. It can reproduce or rerun current KJVA work, but it is not an independent replication source. | Keep as current-source rerun lane only unless a new study lock says otherwise. |
 | CrossWire GitLab KJV/KJVA | possible independent metadata candidate | The metadata audit found `kjva.osis.xml` and `kjvdc.xml` path names in the CrossWire GitLab KJV repository. Its config metadata records `DistributionLicense=GPL` for KJVA and general public distribution wording for the DC-only file, while also preserving Crown rights language. This makes it a stronger future source candidate than a KJV-only repository, but no local source import, verse mapping, collation, checksum lock, or source-use decision exists yet. | License/source-use decision, local ignored text import if allowed, verse mapping, book-order lock, collation against current eBible KJVA, checksums, term lock, and study-lock sidecar. |
-| Project Gutenberg eBook 30 | public-domain-USA KJV-complete metadata candidate | The RDF metadata records `The Bible, King James Version, Complete`, `Public domain in the USA.`, and a plain-text UTF-8 format URL. The RDF metadata does not itself confirm Apocrypha/deuterocanon coverage, so this is not KJVA source-lock ready and no local Bible text import exists. | Lawful ignored-cache coverage probe, verse mapping, book-order lock, collation against current eBible KJVA, checksum lock, term lock, source-use policy lock, and study-lock sidecar. |
+| Project Gutenberg eBook 30 | public-domain-USA KJV-only coverage outcome | The RDF metadata records `The Bible, King James Version, Complete`, `Public domain in the USA.`, and a plain-text UTF-8 format URL. The heading-level coverage probe found 66 KJV book headings and 0 Apocrypha/deuterocanon book headings, so this is useful as a public-domain KJV-only control candidate but not as an independent KJVA/apocrypha bridge source. | No KJVA bridge use unless a separate lawful apocrypha source is found and audited. |
 | Wikisource Ballantyne 1911 KJV + Apocrypha | metadata-level future source candidate | The source audit found a public-domain KJV + Apocrypha page with markers. The book-coverage probe found 36 existing KJV book links, 30 KJV redlinks, and 0 apocrypha/deuterocanon book links on the parsed main-page book table. No verse-numbered import, collation, checksum, or book-order lock exists here. | Lawful import decision, apocrypha/deuterocanon coverage source, verse mapping, book-order lock, collation against current eBible KJVA, checksums, term lock, and study-lock sidecar. |
 | `seven1m/open-bibles` | KJV-only metadata candidate | The audit found KJV OSIS metadata, but current tree metadata does not show apocrypha or deuterocanon coverage. It is not a KJVA/apocrypha source candidate for current bridge replication work. | No KJVA bridge use unless a separate lawful apocrypha source is found and audited. |
 
@@ -42,6 +41,7 @@ remains negative under its registered controls.
 - `docs/APOCRYPHA_SOURCE_COVERAGE.md`
 - `docs/KJVA_CROSSWIRE_CANDIDATE_SOURCE_AUDIT.md`
 - `docs/KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md`
+- `docs/KJVA_GUTENBERG_BOOK_COVERAGE_PROBE.md`
 - `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - `docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md`
 - `docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md`

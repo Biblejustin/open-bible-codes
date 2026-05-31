@@ -1,0 +1,20 @@
+name = "kjva_gutenberg_book_coverage_probe"
+description = "Probe Project Gutenberg eBook 30 plain-text book-heading coverage without importing Bible text."
+manifest_out = "reports/kjva_gutenberg_book_coverage_probe/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "kjva_gutenberg_book_coverage_probe"
+description = "Scan Project Gutenberg eBook 30 book-heading markers and report KJV vs Apocrypha coverage counts."
+argv = ["-m", "scripts.analyze_kjva_gutenberg_book_coverage_probe"]
+inputs = [
+  "scripts/analyze_kjva_gutenberg_book_coverage_probe.py",
+]
+outputs = [
+  "reports/kjva_gutenberg_book_coverage_probe/book_headings.csv",
+  "reports/kjva_gutenberg_book_coverage_probe/summary.csv",
+  "reports/kjva_gutenberg_book_coverage_probe/anchors.csv",
+  "docs/KJVA_GUTENBERG_BOOK_COVERAGE_PROBE.md",
+  "reports/kjva_gutenberg_book_coverage_probe/manifest.json",
+]
