@@ -429,16 +429,19 @@ only; cohort choice and window width are study-defining inputs.
 
 ## Mapping-Dependent Strata
 
-The following strata have schema support but no committed theological or
-interpretive assignments:
+The following strata have schema support. The thematic-chapter, author-book,
+and protagonist-narrative files currently contain conservative seed rows for
+implemented metadata; the quotation, MT/LXX divergence, and Hebrew-root policy
+files remain header-only planning templates.
 
 - canonical first occurrence in a thematic chapter
 - author in own book
 - protagonist in own narrative
 - OT-in-NT quotation anchors
 - MT/LXX semantic divergence
+- Hebrew root policy matches
 
-Header-only templates live under `data/study/mappings/`. Validate them with:
+Mapping files live under `data/study/mappings/`. Validate them with:
 
 ```bash
 python3 -m scripts.validate_study_mapping_schemas

@@ -10,6 +10,14 @@ def test_check_tooling_passes_for_current_repo() -> None:
     assert result["missing"] == []
 
 
+def test_mapping_section_tracks_seed_rows() -> None:
+    text = Path("docs/EXPANDED_STRATA_TOOLING.md").read_text(encoding="utf-8")
+
+    assert "conservative seed rows" in text
+    assert "remain header-only planning templates" in text
+    assert "no committed theological or interpretive assignments" not in text
+
+
 def test_check_tooling_flags_missing_doc_reference(tmp_path: Path) -> None:
     doc = tmp_path / "doc.md"
     makefile = tmp_path / "Makefile"
