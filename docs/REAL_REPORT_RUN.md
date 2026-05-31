@@ -226,7 +226,9 @@ It requires:
   with fresh term/source lock and study-lock sidecar required before any new
   result-bearing output;
 - KJVA source-candidate status rollup records 0 ready independent KJVA
-  replication sources, 0 result-ready sources, and 0 source-lock ready sources;
+  replication sources, 0 result-ready sources, 0 source-lock ready sources,
+  and identifies the current eBible KJVA source as a rerun source with 14
+  apocrypha/deuterocanon books;
 - KJVA Wikisource candidate source audit stays metadata-only, with no Bible
   text retained, no corpus import ready, and no result-bearing output;
 - KJVA Wikisource book-coverage probe stays metadata-only, with 36 existing

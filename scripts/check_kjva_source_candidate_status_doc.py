@@ -12,6 +12,7 @@ from pathlib import Path
 DEFAULT_DOC = Path("docs/KJVA_SOURCE_CANDIDATE_STATUS.md")
 DEFAULT_LINKED_DOCS = (
     Path("docs/KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md"),
+    Path("docs/APOCRYPHA_SOURCE_COVERAGE.md"),
     Path("docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md"),
     Path("docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md"),
     Path("docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md"),
@@ -28,6 +29,8 @@ REQUIRED_PHRASES = (
     "source-lock ready sources: 0.",
     "No result-bearing KJVA replication is source-ready yet.",
     "current eBible KJV + Apocrypha source family",
+    "14 apocrypha/deuterocanon books, 5720 verses, and 593090 normalized letters",
+    "not an independent replication source",
     "Wikisource Ballantyne 1911 KJV + Apocrypha",
     "metadata-level future source candidate",
     "36 existing KJV book links, 30 KJV redlinks",

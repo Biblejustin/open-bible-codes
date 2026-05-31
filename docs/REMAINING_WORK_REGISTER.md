@@ -2376,8 +2376,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Current rollup status: 0 ready independent KJVA replication sources, 0
   result-ready sources, and 0 source-lock ready sources.
 - It keeps the source boundary explicit: current eBible KJV + Apocrypha remains
-  the rerun source family, Wikisource remains a metadata-level future source
-  candidate, and `seven1m/open-bibles` remains KJV-only for current
+  the rerun source family with 14 apocrypha/deuterocanon books, 5720 verses,
+  and 593090 normalized letters; Wikisource remains a metadata-level future
+  source candidate, and `seven1m/open-bibles` remains KJV-only for current
   KJVA/apocrypha bridge purposes.
 - Added `scripts/check_kjva_source_candidate_status_doc.py` and wired it into
   `scripts/preflight_real_report_run.py` plus `protocols/real_report_run.toml`.
