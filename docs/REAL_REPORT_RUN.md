@@ -153,6 +153,8 @@ This assembly run includes:
   `docs/KJVA_SOURCE_CANDIDATE_STATUS.md`
 - KJVA CrossWire candidate source-status audit:
   `docs/KJVA_CROSSWIRE_CANDIDATE_SOURCE_AUDIT.md`
+- KJVA Gutenberg candidate source-status audit:
+  `docs/KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md`
 - KJVA Wikisource candidate source-status audit:
   `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - KJVA Wikisource book-coverage probe:
@@ -236,14 +238,20 @@ It requires:
   with fresh term/source lock and study-lock sidecar required before any new
   result-bearing output;
 - KJVA source-candidate status rollup records 0 ready independent KJVA
-  replication sources, 1 possible independent metadata candidate, 0
-  result-ready sources, 0 source-lock ready sources, and identifies the
-  current eBible KJVA source as a rerun source with 14 apocrypha/deuterocanon
-  books;
+  replication sources, 1 possible independent KJVA metadata candidate, 1
+  additional public-domain KJV-complete metadata candidate still needing an
+  Apocrypha/deuterocanon coverage probe, 0 result-ready sources, 0 source-lock
+  ready sources, and identifies the current eBible KJVA source as a rerun
+  source with 14 apocrypha/deuterocanon books;
 - KJVA CrossWire candidate source audit stays metadata-only, with `kjva.osis.xml`
   and `kjvdc.xml` path names present, config-license/Crown-rights metadata
   captured, but no source-use clearance, corpus import, source lock, or
   result-bearing output;
+- KJVA Gutenberg candidate source audit stays metadata-only, with Project
+  Gutenberg eBook 30 RDF metadata recording `The Bible, King James Version,
+  Complete`, `Public domain in the USA.`, and a plain-text UTF-8 format URL,
+  but no Apocrypha/deuterocanon coverage confirmation, corpus import, source
+  lock, or result-bearing output;
 - KJVA Wikisource candidate source audit stays metadata-only, with no Bible
   text retained, no corpus import ready, and no result-bearing output;
 - KJVA Wikisource book-coverage probe stays metadata-only, with 36 existing

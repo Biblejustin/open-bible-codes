@@ -163,6 +163,14 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/analyze_kjva_gutenberg_candidate_source.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_kjva_gutenberg_candidate_source_audit_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_kjva_open_bibles_candidate_source_audit_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -184,6 +192,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "docs/KJVA_CROSSWIRE_CANDIDATE_SOURCE_AUDIT.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "docs/KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
@@ -211,6 +223,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "protocols/kjva_gutenberg_candidate_source_audit.toml",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "protocols/kjva_wikisource_candidate_source_audit.toml",
             steps_by_id["preflight"]["inputs"],
         )
@@ -223,11 +239,16 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "reports/kjva_gutenberg_candidate_source/summary.csv",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "reports/kjva_wikisource_candidate_source/summary.csv",
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn("kjva_open_bibles_candidate_source_audit", steps_by_id)
         self.assertIn("kjva_crosswire_candidate_source_audit", steps_by_id)
+        self.assertIn("kjva_gutenberg_candidate_source_audit", steps_by_id)
         self.assertIn("kjva_wikisource_candidate_source_audit", steps_by_id)
         self.assertIn("kjva_wikisource_book_coverage_probe", steps_by_id)
         self.assertIn("docs/INDEX.md", steps_by_id["preflight"]["inputs"])
@@ -2334,6 +2355,14 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/analyze_kjva_gutenberg_candidate_source.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_kjva_gutenberg_candidate_source_audit_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/check_kjva_open_bibles_candidate_source_audit_doc.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -2346,6 +2375,10 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "docs/KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -2355,6 +2388,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "protocols/kjva_crosswire_candidate_source_audit.toml",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "protocols/kjva_gutenberg_candidate_source_audit.toml",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -2391,6 +2428,22 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/kjva_crosswire_candidate_source/manifest.json",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjva_gutenberg_candidate_source/source_status.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjva_gutenberg_candidate_source/summary.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjva_gutenberg_candidate_source/anchors.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjva_gutenberg_candidate_source/manifest.json",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -2553,6 +2606,10 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "kjva_crosswire_candidate_source_audit_doc_failures",
+                payload,
+            )
+            self.assertIn(
+                "kjva_gutenberg_candidate_source_audit_doc_failures",
                 payload,
             )
             self.assertIn(
@@ -2732,6 +2789,27 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "KJVA CrossWire source audit doc failures: missing metadata-only boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_kjva_gutenberg_source_audit_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_kjva_gutenberg_candidate_source_audit_doc,
+                "validate_kjva_gutenberg_candidate_source_audit_doc",
+                return_value=["missing metadata-only boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["kjva_gutenberg_candidate_source_audit_doc_failures"],
+                ["missing metadata-only boundary"],
+            )
+            self.assertIn(
+                "KJVA Gutenberg source audit doc failures: missing metadata-only boundary",
                 payload["failures"],
             )
 

@@ -36,8 +36,8 @@ current WRR repo-defined diagnostic status, validates prospective-lane,
 KJVA apocrypha prospective boundary and next-replication planning, English
 source-basis, and English seed survivor-gate metadata, keeps the KJVA
 source-candidate status rollup at 0 ready independent replication sources,
-keeps the CrossWire, Wikisource, and Open-Bibles source-candidate audits
-metadata-only, keeps the Wikisource book-coverage probe metadata-only,
+keeps the CrossWire, Gutenberg, Wikisource, and Open-Bibles source-candidate
+audits metadata-only, keeps the Wikisource book-coverage probe metadata-only,
 validates expanded-strata tooling docs, future
 study-mapping CSV schemas, all-script exact-test coverage, check-script wiring,
 and concrete preregistration placeholder cleanup, checks the locked CRD relevance dictionary

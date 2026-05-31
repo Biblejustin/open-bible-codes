@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 408
+Documents indexed: 409
 
 ## Controls
 
@@ -361,6 +361,7 @@ Documents indexed: 408
 | KJVA Apocrypha Bridge Next Replication Design | `KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md` |
 | KJVA Prospective Apocrypha Bridge Candidates | `KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md` |
 | KJVA CrossWire Candidate Source Audit | `KJVA_CROSSWIRE_CANDIDATE_SOURCE_AUDIT.md` |
+| KJVA Gutenberg Candidate Source Audit | `KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md` |
 | KJVA Open-Bibles Candidate Source Audit | `KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md` |
 | KJVA Source Candidate Status | `KJVA_SOURCE_CANDIDATE_STATUS.md` |
 | KJVA Wikisource Book Coverage Probe | `KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md` |

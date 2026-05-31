@@ -59,8 +59,8 @@ CSV-backed locks for the WRR exact-gap priority packet, method/pair-universe
 evidence packet, remaining-lane evidence packet, and source-row coverage
 packet, plus source-row crop packet, contact-sheet image, OCR word packet, and
 all-script exact-test and check-script wiring release guards, plus a
-metadata-only CrossWire KJVA source-candidate audit and source-status rollup
-refresh.
+metadata-only CrossWire KJVA source-candidate audit, Project Gutenberg
+KJV-complete metadata audit, and source-status rollup refresh.
 The WRR method-lane wide-skip probe is now guarded, included in the real-report
 run, carried into the exact-gap/blocker packets, and mirrored in public
 reader-facing WRR wording.
@@ -2429,14 +2429,17 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Added `docs/KJVA_SOURCE_CANDIDATE_STATUS.md` as a single rollup for the
   current KJVA/apocrypha source-candidate state.
 - Current rollup status: 0 ready independent KJVA replication sources, 1
-  possible independent KJVA metadata candidate, 0 result-ready sources, and 0
-  source-lock ready sources.
+  possible independent KJVA metadata candidate, 1 additional public-domain
+  KJV-complete metadata candidate needing Apocrypha/deuterocanon coverage
+  probe, 0 result-ready sources, and 0 source-lock ready sources.
 - It keeps the source boundary explicit: current eBible KJV + Apocrypha remains
   the rerun source family with 14 apocrypha/deuterocanon books, 5720 verses,
   and 593090 normalized letters; CrossWire is a metadata-level future source
-  candidate with KJVA/KJVDC paths present; Wikisource remains a metadata-level
-  future source candidate; and `seven1m/open-bibles` remains KJV-only for
-  current KJVA/apocrypha bridge purposes.
+  candidate with KJVA/KJVDC paths present; Project Gutenberg eBook 30 remains
+  a public-domain-USA KJV-complete metadata candidate needing coverage probe;
+  Wikisource remains a metadata-level future source candidate; and
+  `seven1m/open-bibles` remains KJV-only for current KJVA/apocrypha bridge
+  purposes.
 - Added `scripts/check_kjva_source_candidate_status_doc.py` and wired it into
   `scripts/preflight_real_report_run.py` plus `protocols/real_report_run.toml`.
 
@@ -2472,5 +2475,23 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Added `protocols/kjva_crosswire_candidate_source_audit.toml`,
   `scripts/analyze_kjva_crosswire_candidate_source.py`, and
   `scripts/check_kjva_crosswire_candidate_source_audit_doc.py`, and wired the
+  audit into `scripts/preflight_real_report_run.py` plus
+  `protocols/real_report_run.toml`.
+
+## KJVA Gutenberg Candidate Source Audit
+
+- Added `docs/KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md` as a metadata-only
+  source-status audit for Project Gutenberg eBook 30.
+- Current RDF metadata records `The Bible, King James Version, Complete`,
+  `Public domain in the USA.`, a plain-text UTF-8 format URL, and no RDF
+  Apocrypha marker.
+- The audit records one public-domain-USA KJV-complete metadata candidate, but
+  0 source-use ready pages, 0 source-lock ready pages, 0 verse-import ready
+  pages, and 0 result-ready pages.
+- No Bible text is downloaded, retained, normalized, or committed by this
+  audit; it does not change KJVA bridge result status.
+- Added `protocols/kjva_gutenberg_candidate_source_audit.toml`,
+  `scripts/analyze_kjva_gutenberg_candidate_source.py`, and
+  `scripts/check_kjva_gutenberg_candidate_source_audit_doc.py`, and wired the
   audit into `scripts/preflight_real_report_run.py` plus
   `protocols/real_report_run.toml`.

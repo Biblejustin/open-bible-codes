@@ -21,6 +21,8 @@ inputs = [
   "scripts/check_kjva_apocrypha_bridge_prospective_boundary.py",
   "scripts/analyze_kjva_crosswire_candidate_source.py",
   "scripts/check_kjva_crosswire_candidate_source_audit_doc.py",
+  "scripts/analyze_kjva_gutenberg_candidate_source.py",
+  "scripts/check_kjva_gutenberg_candidate_source_audit_doc.py",
   "scripts/analyze_kjva_open_bibles_candidate_source.py",
   "scripts/check_kjva_open_bibles_candidate_source_audit_doc.py",
   "scripts/check_kjva_source_candidate_status_doc.py",
@@ -417,6 +419,7 @@ inputs = [
   "docs/KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md",
   "docs/KJVA_SOURCE_CANDIDATE_STATUS.md",
   "docs/KJVA_CROSSWIRE_CANDIDATE_SOURCE_AUDIT.md",
+  "docs/KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md",
   "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
   "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
   "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
@@ -429,6 +432,10 @@ inputs = [
   "reports/kjva_crosswire_candidate_source/summary.csv",
   "reports/kjva_crosswire_candidate_source/anchors.csv",
   "reports/kjva_crosswire_candidate_source/manifest.json",
+  "reports/kjva_gutenberg_candidate_source/source_status.csv",
+  "reports/kjva_gutenberg_candidate_source/summary.csv",
+  "reports/kjva_gutenberg_candidate_source/anchors.csv",
+  "reports/kjva_gutenberg_candidate_source/manifest.json",
   "reports/kjva_open_bibles_candidate_source/source_status.csv",
   "reports/kjva_open_bibles_candidate_source/summary.csv",
   "reports/kjva_open_bibles_candidate_source/anchors.csv",
@@ -498,6 +505,7 @@ inputs = [
   "protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml",
   "protocols/kjv_apocrypha_bridge_prospective_nonbible_controls.toml",
   "protocols/kjva_crosswire_candidate_source_audit.toml",
+  "protocols/kjva_gutenberg_candidate_source_audit.toml",
   "protocols/kjva_open_bibles_candidate_source_audit.toml",
   "protocols/kjva_wikisource_candidate_source_audit.toml",
   "protocols/external_claim_source_counts.toml",
@@ -1737,6 +1745,21 @@ outputs = [
 ]
 
 [[steps]]
+id = "kjva_gutenberg_candidate_source_audit"
+description = "Audit Project Gutenberg eBook 30 RDF metadata as a public-domain KJV-complete source candidate."
+argv = ["-m", "scripts.analyze_kjva_gutenberg_candidate_source"]
+inputs = [
+  "scripts/analyze_kjva_gutenberg_candidate_source.py",
+]
+outputs = [
+  "reports/kjva_gutenberg_candidate_source/source_status.csv",
+  "reports/kjva_gutenberg_candidate_source/summary.csv",
+  "reports/kjva_gutenberg_candidate_source/anchors.csv",
+  "docs/KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md",
+  "reports/kjva_gutenberg_candidate_source/manifest.json",
+]
+
+[[steps]]
 id = "kjva_open_bibles_candidate_source_audit"
 description = "Audit seven1m/open-bibles as KJV-only metadata, not KJVA/apocrypha coverage."
 argv = ["-m", "scripts.analyze_kjva_open_bibles_candidate_source"]
@@ -1940,6 +1963,7 @@ inputs = [
   "reports/kjv_apocrypha_bridge_term_review/manifest.json",
   "reports/kjv_apocrypha_bridge_confirmatory_controls_5000/manifest.json",
   "reports/kjva_crosswire_candidate_source/manifest.json",
+  "reports/kjva_gutenberg_candidate_source/manifest.json",
   "reports/kjva_open_bibles_candidate_source/manifest.json",
   "reports/kjva_wikisource_candidate_source/manifest.json",
   "reports/external_claim_source_counts/protocol_run.manifest.json",

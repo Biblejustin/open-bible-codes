@@ -77,6 +77,7 @@ from scripts import (
     check_kjva_apocrypha_bridge_next_replication_doc,
     check_kjva_apocrypha_bridge_prospective_boundary,
     check_kjva_crosswire_candidate_source_audit_doc,
+    check_kjva_gutenberg_candidate_source_audit_doc,
     check_kjva_open_bibles_candidate_source_audit_doc,
     check_kjva_source_candidate_status_doc,
     check_kjva_wikisource_book_coverage_probe_doc,
@@ -174,6 +175,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_kjva_apocrypha_bridge_prospective_boundary.py",
     "scripts/analyze_kjva_crosswire_candidate_source.py",
     "scripts/check_kjva_crosswire_candidate_source_audit_doc.py",
+    "scripts/analyze_kjva_gutenberg_candidate_source.py",
+    "scripts/check_kjva_gutenberg_candidate_source_audit_doc.py",
     "scripts/analyze_kjva_open_bibles_candidate_source.py",
     "scripts/check_kjva_open_bibles_candidate_source_audit_doc.py",
     "scripts/check_kjva_source_candidate_status_doc.py",
@@ -570,6 +573,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md",
     "docs/KJVA_SOURCE_CANDIDATE_STATUS.md",
     "docs/KJVA_CROSSWIRE_CANDIDATE_SOURCE_AUDIT.md",
+    "docs/KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
     "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
@@ -582,6 +586,10 @@ DEFAULT_REQUIRED_PATHS = [
     "reports/kjva_crosswire_candidate_source/summary.csv",
     "reports/kjva_crosswire_candidate_source/anchors.csv",
     "reports/kjva_crosswire_candidate_source/manifest.json",
+    "reports/kjva_gutenberg_candidate_source/source_status.csv",
+    "reports/kjva_gutenberg_candidate_source/summary.csv",
+    "reports/kjva_gutenberg_candidate_source/anchors.csv",
+    "reports/kjva_gutenberg_candidate_source/manifest.json",
     "reports/kjva_open_bibles_candidate_source/source_status.csv",
     "reports/kjva_open_bibles_candidate_source/summary.csv",
     "reports/kjva_open_bibles_candidate_source/anchors.csv",
@@ -651,6 +659,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/kjv_apocrypha_bridge_prospective_controls_5000.toml",
     "protocols/kjv_apocrypha_bridge_prospective_nonbible_controls.toml",
     "protocols/kjva_crosswire_candidate_source_audit.toml",
+    "protocols/kjva_gutenberg_candidate_source_audit.toml",
     "protocols/kjva_open_bibles_candidate_source_audit.toml",
     "protocols/kjva_wikisource_candidate_source_audit.toml",
     "protocols/external_claim_source_counts.toml",
@@ -1185,6 +1194,17 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "KJVA CrossWire source audit doc failures: "
             + "; ".join(kjva_crosswire_candidate_source_audit_doc_failures)
+        )
+
+    kjva_gutenberg_candidate_source_audit_doc_failures = (
+        check_kjva_gutenberg_candidate_source_audit_doc.validate_kjva_gutenberg_candidate_source_audit_doc(
+            root / check_kjva_gutenberg_candidate_source_audit_doc.DEFAULT_DOC
+        )
+    )
+    if kjva_gutenberg_candidate_source_audit_doc_failures:
+        failures.append(
+            "KJVA Gutenberg source audit doc failures: "
+            + "; ".join(kjva_gutenberg_candidate_source_audit_doc_failures)
         )
 
     kjva_open_bibles_candidate_source_audit_doc_failures = (
@@ -2305,6 +2325,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "kjva_crosswire_candidate_source_audit_doc_failures": (
             kjva_crosswire_candidate_source_audit_doc_failures
+        ),
+        "kjva_gutenberg_candidate_source_audit_doc_failures": (
+            kjva_gutenberg_candidate_source_audit_doc_failures
         ),
         "kjva_open_bibles_candidate_source_audit_doc_failures": (
             kjva_open_bibles_candidate_source_audit_doc_failures
