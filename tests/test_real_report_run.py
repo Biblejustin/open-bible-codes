@@ -2151,6 +2151,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/check_protocol_files.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_corpus_configs.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_term_files.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/check_script_tests.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_check_script_tests.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_check_script_wiring.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/validate_study_mapping_schemas.py", preflight.DEFAULT_REQUIRED_PATHS)

@@ -39,8 +39,8 @@ source-candidate status rollup at 0 ready independent replication sources,
 keeps the Wikisource source-candidate audit and book-coverage probe
 metadata-only, keeps the Open-Bibles source-candidate audit metadata-only,
 validates expanded-strata tooling docs, future
-study-mapping CSV schemas, check-script test/wiring coverage, and concrete
-preregistration placeholder cleanup, checks the locked CRD relevance dictionary
+study-mapping CSV schemas, all-script exact-test coverage, check-script wiring,
+and concrete preregistration placeholder cleanup, checks the locked CRD relevance dictionary
 basis, verifies manual-review queue guardrails, keeps WRR method-status,
 lock-options, claim-readiness, and
 blocker-packet wording visible, builds the generated report index, and writes

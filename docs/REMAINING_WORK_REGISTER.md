@@ -58,7 +58,7 @@ public-doc synchronization, exact-gap review-rank wording cleanup, and
 CSV-backed locks for the WRR exact-gap priority packet, method/pair-universe
 evidence packet, remaining-lane evidence packet, and source-row coverage
 packet, plus source-row crop packet, contact-sheet image, OCR word packet, and
-check-script test/wiring release guards.
+all-script exact-test and check-script wiring release guards.
 The WRR method-lane wide-skip probe is now guarded, included in the real-report
 run, carried into the exact-gap/blocker packets, and mirrored in public
 reader-facing WRR wording.

@@ -73,8 +73,8 @@ forbidden GitHub account text, checks high-confidence secret-token patterns,
 validates documented script/source-path references, and rejects unsupported
 public claim language. It also guards the general-reader findings overview and
 its README/Start Here links, validates protocol TOML files, corpus config
-schemas, term-file schema/normalization, check-script test/wiring coverage,
-and the study-mapping guard suite.
+schemas, term-file schema/normalization, all-script exact-test coverage,
+check-script wiring coverage, and the study-mapping guard suite.
 
 Current fast validation before a handoff:
 
@@ -86,9 +86,9 @@ This runs the unit suite, regenerates documentation/protocol indexes, checks
 diff whitespace, runs dirty-tree-safe release hygiene, validates
 expanded-strata operator tooling, checks public claim language, and verifies
 the general-reader findings overview, protocol TOML files, corpus config
-schemas, term-file schema/normalization, check-script test/wiring coverage,
-the study-mapping guard suite, and local data doc references against the
-current ignored source caches.
+schemas, term-file schema/normalization, all-script exact-test coverage,
+check-script wiring coverage, the study-mapping guard suite, and local data
+doc references against the current ignored source caches.
 
 Full clean-tree pre-push validation after committing:
 
@@ -929,8 +929,8 @@ Tracked plan: `docs/REAL_REPORT_RUN.md`.
 The preflight now also validates source-basis metadata, expanded-strata tooling
 references, English corpus deferred-source policy, protocol TOML files, corpus
 config schemas, term-file schema and normalization, guarded study-mapping CSV
-schemas and decision rows, check-script test coverage, check-script wiring, and
-concrete preregistration placeholder cleanup, plus the locked CRD
+schemas and decision rows, all-script exact-test coverage, check-script wiring,
+and concrete preregistration placeholder cleanup, plus the locked CRD
 relevance-dictionary basis before summary assembly. It
 also checks the manual-review queue guardrails and evidence links, plus the WRR
 method-status, lock-options, readiness, and blocker-packet residual-lane
