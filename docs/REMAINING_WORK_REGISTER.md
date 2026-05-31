@@ -82,6 +82,10 @@ no-source-row-use locks, and source-script leakage.
 The Cities OCR page-review decision file is now directly guarded against
 schema drift, source-row-use drift, source-script text, and missing packet-page
 links before page-review output is rebuilt.
+`make study-mapping-schemas` now runs the full mapping guard set: generic
+schema validation, WRR manual decision records, Cities OCR page-review
+decisions, Cities source-row lock decisions, and Cities source-transcription
+decision records.
 The WRR cross-pair grid doc is now CSV/manifest-guarded against grid-shape,
 corrected-distance, aggregate, permutation-summary, manifest input/output, and
 count drift.

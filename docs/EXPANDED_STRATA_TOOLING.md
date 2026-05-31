@@ -442,6 +442,10 @@ Header-only templates live under `data/study/mappings/`. Validate them with:
 
 ```bash
 python3 -m scripts.validate_study_mapping_schemas
+python3 -m scripts.check_wrr_manual_decision_records
+python3 -m scripts.check_cities_ocr_page_review_decisions
+python3 -m scripts.check_cities_source_row_lock_decision_records
+python3 -m scripts.check_cities_source_transcription_decision_records
 ```
 
 or:

@@ -369,6 +369,26 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "checks public claim language" in readme
 
 
+def test_study_mapping_make_target_runs_all_mapping_guards() -> None:
+    makefile = Path("Makefile").read_text(encoding="utf-8")
+    study_mapping_doc = Path("docs/STUDY_MAPPING_SCHEMAS.md").read_text(encoding="utf-8")
+    mappings_readme = Path("data/study/mappings/README.md").read_text(encoding="utf-8")
+
+    expected = [
+        "scripts.validate_study_mapping_schemas",
+        "scripts.check_wrr_manual_decision_records",
+        "scripts.check_cities_ocr_page_review_decisions",
+        "scripts.check_cities_source_row_lock_decision_records",
+        "scripts.check_cities_source_transcription_decision_records",
+    ]
+
+    assert "study-mapping-schemas:" in makefile
+    for command in expected:
+        assert command in makefile
+        assert command in study_mapping_doc
+        assert command in mappings_readme
+
+
 def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     makefile = Path("Makefile").read_text(encoding="utf-8")
     readme = Path("README.md").read_text(encoding="utf-8")

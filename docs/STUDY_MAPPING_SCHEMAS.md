@@ -37,6 +37,9 @@ Run:
 ```bash
 python3 -m scripts.validate_study_mapping_schemas
 python3 -m scripts.check_wrr_manual_decision_records
+python3 -m scripts.check_cities_ocr_page_review_decisions
+python3 -m scripts.check_cities_source_row_lock_decision_records
+python3 -m scripts.check_cities_source_transcription_decision_records
 ```
 
 or:
@@ -54,6 +57,12 @@ For `wrr_manual_decision_records.csv`, the row-level checker also requires each
 populated decision row to match the current WRR manual decision register by
 rank, lane, state, target, and checklist, with non-placeholder evidence and an
 ISO lock date.
+
+For the Cities mapping files, the row-level checkers keep the current public
+boundary explicit. OCR page decisions must remain tied to the OCR review packet
+and must keep `no_source_row_import`; source-row lock decisions must remain tied
+to the evidence packet; transcription decisions must stay schema-only until a
+readable source row is deliberately locked.
 
 ## Lock Rule
 
