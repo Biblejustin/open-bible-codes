@@ -51,6 +51,7 @@ from scripts import (
     check_cities_source_row_lock_decision_records,
     check_cities_source_row_lock_evidence_packet_doc,
     check_cities_source_row_lock_worksheet_doc,
+    check_cities_source_transcription_decision_records,
     check_cities_source_transcription_review_worksheet_doc,
     check_cities_unreadable_pdf_ocr_feasibility_doc,
     check_cities_unreadable_pdf_ocr_review_checklist_doc,
@@ -801,6 +802,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_cities_source_row_lock_worksheet.py",
     "scripts/check_cities_source_row_lock_worksheet_doc.py",
     "scripts/build_cities_source_transcription_review_worksheet.py",
+    "scripts/check_cities_source_transcription_decision_records.py",
     "scripts/check_cities_source_transcription_review_worksheet_doc.py",
     "scripts/build_cities_source_page_review_bundle.py",
     "scripts/check_cities_source_page_review_bundle_doc.py",
@@ -1900,6 +1902,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(cities_source_row_lock_worksheet_doc_failures)
         )
 
+    cities_source_transcription_decision_record_failures = (
+        check_cities_source_transcription_decision_records.validate_decision_records(
+            check_cities_source_transcription_decision_records.DEFAULT_RECORDS
+        )
+    )
+    if cities_source_transcription_decision_record_failures:
+        failures.append(
+            "Cities source-transcription decision record failures: "
+            + "; ".join(cities_source_transcription_decision_record_failures)
+        )
+
     cities_source_transcription_review_worksheet_doc_failures = (
         check_cities_source_transcription_review_worksheet_doc.validate_cities_source_transcription_review_worksheet_doc(
             check_cities_source_transcription_review_worksheet_doc.DEFAULT_DOC
@@ -2350,6 +2363,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "cities_source_row_lock_worksheet_doc_failures": (
             cities_source_row_lock_worksheet_doc_failures
+        ),
+        "cities_source_transcription_decision_record_failures": (
+            cities_source_transcription_decision_record_failures
         ),
         "cities_source_transcription_review_worksheet_doc_failures": (
             cities_source_transcription_review_worksheet_doc_failures

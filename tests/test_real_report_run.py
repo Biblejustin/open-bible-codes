@@ -1047,6 +1047,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_cities_source_transcription_decision_records.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/check_cities_source_transcription_review_worksheet_doc.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -1719,6 +1723,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "scripts/build_cities_source_transcription_review_worksheet.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_cities_source_transcription_decision_records.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -4386,6 +4394,37 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "Cities source-transcription review worksheet doc failures: "
                 "docs/CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md missing boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_cities_source_transcription_decision_record_failure(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_cities_source_transcription_decision_records,
+                "validate_decision_records",
+                return_value=[
+                    "data/study/mappings/cities_source_transcription_decisions.csv "
+                    "has populated rows"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["cities_source_transcription_decision_record_failures"],
+                [
+                    "data/study/mappings/cities_source_transcription_decisions.csv "
+                    "has populated rows"
+                ],
+            )
+            self.assertIn(
+                "Cities source-transcription decision record failures: "
+                "data/study/mappings/cities_source_transcription_decisions.csv "
+                "has populated rows",
                 payload["failures"],
             )
 

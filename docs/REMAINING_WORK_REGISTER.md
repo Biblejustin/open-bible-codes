@@ -173,6 +173,8 @@ result-bearing work until readable transcription/import records exist.
 Cities source-row lock handoff: 14 source-row lock candidate pages, 14 populated
 lock rows, and 14 pending transcription-review rows; no source rows imported,
 and no city-name normalization, ELS searches, compactness runs, or p-levels.
+The Cities source-transcription decision-record file is now preflight-guarded
+as schema-only until readable transcription decisions are deliberately locked.
 The Cities PDF recovery probe now checks the 35 linked Cities/Aumann/Simon-McKay
 PDF URLs in an isolated ignored bundle and records 12 usable archived PDFs plus
 23 unrecovered links; the follow-up recovered-PDF text audit classifies those 12

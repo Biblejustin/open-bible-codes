@@ -660,6 +660,7 @@ inputs = [
   "scripts/build_cities_source_row_lock_worksheet.py",
   "scripts/check_cities_source_row_lock_worksheet_doc.py",
   "scripts/build_cities_source_transcription_review_worksheet.py",
+  "scripts/check_cities_source_transcription_decision_records.py",
   "scripts/check_cities_source_transcription_review_worksheet_doc.py",
   "scripts/build_cities_source_page_review_bundle.py",
   "scripts/check_cities_source_page_review_bundle_doc.py",
