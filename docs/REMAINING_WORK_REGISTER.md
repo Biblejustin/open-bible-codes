@@ -58,7 +58,9 @@ public-doc synchronization, exact-gap review-rank wording cleanup, and
 CSV-backed locks for the WRR exact-gap priority packet, method/pair-universe
 evidence packet, remaining-lane evidence packet, and source-row coverage
 packet, plus source-row crop packet, contact-sheet image, OCR word packet, and
-all-script exact-test and check-script wiring release guards.
+all-script exact-test and check-script wiring release guards, plus a
+metadata-only CrossWire KJVA source-candidate audit and source-status rollup
+refresh.
 The WRR method-lane wide-skip probe is now guarded, included in the real-report
 run, carried into the exact-gap/blocker packets, and mirrored in public
 reader-facing WRR wording.
@@ -1934,6 +1936,11 @@ Current next step: look for independent replication designs or define a new
 locked prospective lane. No KJVA prospective bridge claim language is supported
 by the current controls, and there is no remaining `ready_for_preflight` lane in
 `configs/prospective_study_lanes.json`.
+The CrossWire GitLab KJV/KJVA metadata audit now records one possible
+independent KJVA metadata candidate because `kjva.osis.xml` and `kjvdc.xml`
+path names are present. It is still not source-lock ready: no local text import,
+verse mapping, book-order lock, collation, checksum lock, source-use decision,
+term lock, or study-lock sidecar exists.
 
 Covered by the prospective lock:
 
@@ -2419,13 +2426,15 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 
 - Added `docs/KJVA_SOURCE_CANDIDATE_STATUS.md` as a single rollup for the
   current KJVA/apocrypha source-candidate state.
-- Current rollup status: 0 ready independent KJVA replication sources, 0
-  result-ready sources, and 0 source-lock ready sources.
+- Current rollup status: 0 ready independent KJVA replication sources, 1
+  possible independent KJVA metadata candidate, 0 result-ready sources, and 0
+  source-lock ready sources.
 - It keeps the source boundary explicit: current eBible KJV + Apocrypha remains
   the rerun source family with 14 apocrypha/deuterocanon books, 5720 verses,
-  and 593090 normalized letters; Wikisource remains a metadata-level future
-  source candidate, and `seven1m/open-bibles` remains KJV-only for current
-  KJVA/apocrypha bridge purposes.
+  and 593090 normalized letters; CrossWire is a metadata-level future source
+  candidate with KJVA/KJVDC paths present; Wikisource remains a metadata-level
+  future source candidate; and `seven1m/open-bibles` remains KJV-only for
+  current KJVA/apocrypha bridge purposes.
 - Added `scripts/check_kjva_source_candidate_status_doc.py` and wired it into
   `scripts/preflight_real_report_run.py` plus `protocols/real_report_run.toml`.
 
@@ -2444,4 +2453,20 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/analyze_kjva_wikisource_book_coverage_probe.py`, and
   `scripts/check_kjva_wikisource_book_coverage_probe_doc.py`, and wired the
   probe into `scripts/preflight_real_report_run.py` plus
+  `protocols/real_report_run.toml`.
+
+## KJVA CrossWire Candidate Source Audit
+
+- Added `docs/KJVA_CROSSWIRE_CANDIDATE_SOURCE_AUDIT.md` as a metadata-only
+  source-status audit for the CrossWire Bible Society GitLab KJV repository.
+- Current metadata found 9 tree paths, including `kjva.osis.xml`, `kjvdc.xml`,
+  `kjva.conf`, `kjvdc.conf`, and `kjvfull2kjva.sh`.
+- The audit records one possible independent KJVA metadata candidate, but 0
+  source-lock ready pages, 0 verse-import ready pages, and 0 result-ready pages.
+- No Bible text is downloaded, retained, normalized, or committed by this
+  audit; it does not change KJVA bridge result status.
+- Added `protocols/kjva_crosswire_candidate_source_audit.toml`,
+  `scripts/analyze_kjva_crosswire_candidate_source.py`, and
+  `scripts/check_kjva_crosswire_candidate_source_audit_doc.py`, and wired the
+  audit into `scripts/preflight_real_report_run.py` plus
   `protocols/real_report_run.toml`.
