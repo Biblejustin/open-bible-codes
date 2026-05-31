@@ -21,7 +21,7 @@ COHORT_CLUSTER_WINDOW_WORDS ?= 50
 COHORT_CLUSTER_MIN_DISTINCT ?= 2
 COHORT_CLUSTER_CORPUS_CONFIGS ?= --corpus-config MT_WLC=configs/example_oshb_wlc.toml --corpus-config UXLC=configs/example_uxlc.toml --corpus-config EBIBLE_WLC=configs/example_ebible_hebwlc.toml --corpus-config MAM=configs/example_mam.toml --corpus-config UHB=configs/example_uhb.toml --corpus-config LXX=configs/example_ebible_grclxx.toml --corpus-config KJV=configs/example_ebible_engkjv.toml --corpus-config KJVA=configs/example_ebible_engkjv_apocrypha.toml --corpus-config TR_NT=configs/example_ebible_grctr.toml --corpus-config SBLGNT=configs/example_sblgnt.toml --corpus-config BYZ_NT=configs/example_ebible_grcmt.toml --corpus-config TCG_NT=configs/example_ebible_grctcgnt.toml --corpus-config HEB_PBY_AHAD_HAAM=configs/nonbible_hebrew_pby_ahad_haam.toml --corpus-config HEB_PBY_BIALIK=configs/nonbible_hebrew_pby_bialik.toml --corpus-config HEB_PBY_BRENNER=configs/nonbible_hebrew_pby_brenner.toml --corpus-config ENG_PG_SHAKESPEARE=configs/nonbible_english_pg_shakespeare.toml
 
-.PHONY: demo indexes test lint fast-validate release-ready public-release-check local-data-doc-check protocol-files corpus-configs term-files check-script-tests study-mapping-schemas expanded-strata-tooling-check expanded-strata-postprocess real-report public-reader-package report-db dynamic-full-span-hit-findings notable-passage-gaps thematic-chapter-absence match-strata-index boundary-alignment chapter-position-bias direction-asymmetry canonical-first-summary cross-skip-summary review-flag-summary hebrew-atbash-audit hebrew-albam-audit word-edge-pattern-audit word-skip-term-audit matrix-cluster-candidates matrix-cluster-control-summary cipher-layered-plain-hits cipher-layered-pairs cohort-cluster-density crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-broad-screening-findings crd-center-word-findings crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-self-surface-queue crd-self-surface-center-word crd-self-surface-center-word-density crd-self-surface-center-word-queue crd-self-surface-center-word-packet crd-self-surface-center-word-presence crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density crd-concept-surface-center-word-queue crd-concept-surface-center-word-packet crd-concept-surface-center-word-presence
+.PHONY: demo indexes test lint fast-validate release-ready public-release-check local-data-doc-check protocol-files corpus-configs term-files check-script-tests check-script-wiring study-mapping-schemas expanded-strata-tooling-check expanded-strata-postprocess real-report public-reader-package report-db dynamic-full-span-hit-findings notable-passage-gaps thematic-chapter-absence match-strata-index boundary-alignment chapter-position-bias direction-asymmetry canonical-first-summary cross-skip-summary review-flag-summary hebrew-atbash-audit hebrew-albam-audit word-edge-pattern-audit word-skip-term-audit matrix-cluster-candidates matrix-cluster-control-summary cipher-layered-plain-hits cipher-layered-pairs cohort-cluster-density crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-broad-screening-findings crd-center-word-findings crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-self-surface-queue crd-self-surface-center-word crd-self-surface-center-word-density crd-self-surface-center-word-queue crd-self-surface-center-word-packet crd-self-surface-center-word-presence crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density crd-concept-surface-center-word-queue crd-concept-surface-center-word-packet crd-concept-surface-center-word-presence
 
 demo:
 	python3 -m els.demo
@@ -46,6 +46,7 @@ fast-validate: test indexes
 	$(MAKE) corpus-configs
 	$(MAKE) term-files
 	$(MAKE) check-script-tests
+	$(MAKE) check-script-wiring
 	$(MAKE) study-mapping-schemas
 	$(MAKE) local-data-doc-check
 
@@ -61,6 +62,7 @@ public-release-check:
 	$(MAKE) corpus-configs
 	$(MAKE) term-files
 	$(MAKE) check-script-tests
+	$(MAKE) check-script-wiring
 	$(MAKE) study-mapping-schemas
 
 local-data-doc-check:
@@ -77,6 +79,9 @@ term-files:
 
 check-script-tests:
 	python3 -m scripts.check_check_script_tests
+
+check-script-wiring:
+	python3 -m scripts.check_check_script_wiring
 
 study-mapping-schemas:
 	python3 -m scripts.validate_study_mapping_schemas

@@ -202,6 +202,8 @@ It requires:
   checks;
 - every `scripts/check_*.py` guard has a matching `tests/test_check_*.py`
   test module;
+- every `scripts/check_*.py` guard is wired through Make, preflight, or a
+  protocol input;
 - final report, draft, outline, highlights, consolidated findings, and
   clean-lock summary support-doc references point at required local docs;
 - `protocols/real_report_run.toml` preflight inputs match the preflight

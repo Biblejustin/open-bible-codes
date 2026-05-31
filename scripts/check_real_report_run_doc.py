@@ -54,6 +54,7 @@ REQUIRED_PHRASES = (
     "corpus config TOML files pass required name/language/source schema checks",
     "term CSV files pass schema, language, normalization, constants, and gematria checks",
     "every `scripts/check_*.py` guard has a matching `tests/test_check_*.py` test module",
+    "every `scripts/check_*.py` guard is wired through Make, preflight, or a protocol input",
     "claim-catalog summary table stays aligned with `claims/claim_catalog.csv`",
     "Cities claim-catalog row stays `under_specified`, source-review only, and aligned with the current Cities source-row lock decision records",
     "final report highlights markdown matches the deterministic builder output",

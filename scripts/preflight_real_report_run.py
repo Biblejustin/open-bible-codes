@@ -62,6 +62,7 @@ from scripts import (
     check_consolidated_findings_doc,
     check_corpus_configs,
     check_check_script_tests,
+    check_check_script_wiring,
     check_critical_omission_followup_docs,
     check_doc_command_references,
     check_english_seed_survivor_gate,
@@ -683,6 +684,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_centered_occurrence_index.py",
     "scripts/build_match_strata_index.py",
     "scripts/check_check_script_tests.py",
+    "scripts/check_check_script_wiring.py",
     "scripts/check_protocol_files.py",
     "scripts/check_corpus_configs.py",
     "scripts/check_crd_relevance_dictionary.py",
@@ -1324,6 +1326,15 @@ def main(argv: list[str] | None = None) -> int:
     if check_script_test_failures:
         failures.append(
             "check-script test failures: " + "; ".join(check_script_test_failures)
+        )
+
+    check_script_wiring_failures = (
+        check_check_script_wiring.validate_check_script_wiring()
+    )
+    if check_script_wiring_failures:
+        failures.append(
+            "check-script wiring failures: "
+            + "; ".join(check_script_wiring_failures)
         )
 
     study_mapping_schema_failures = validate_study_mapping_schemas.validate_mapping_dir(
@@ -2254,6 +2265,7 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "critical_omission_doc_failures": critical_omission_doc_failures,
         "check_script_test_failures": check_script_test_failures,
+        "check_script_wiring_failures": check_script_wiring_failures,
         "kjva_apocrypha_bridge_prospective_failures": (
             kjva_apocrypha_bridge_prospective_failures
         ),
