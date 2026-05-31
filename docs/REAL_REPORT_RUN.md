@@ -257,8 +257,9 @@ It requires:
 - KJVA Gutenberg book-coverage probe stays source-coverage only, with all 66
   KJV book headings found in eBook 30, all 14 tracked Apocrypha/deuterocanon
   coverage rows found in eBook 124, one extra Epistle of Jeremiah source
-  heading, and no verse map, corpus import, source lock, or result-bearing
-  output;
+  heading, 31102 KJV verse markers, 5704 Apocrypha/deuterocanon verse-like
+  markers with mixed marker shapes, and no verse map, corpus import, source
+  lock, or result-bearing output;
 - KJVA Wikisource candidate source audit stays metadata-only, with no Bible
   text retained, no corpus import ready, and no result-bearing output;
 - KJVA Wikisource book-coverage probe stays metadata-only, with 36 existing

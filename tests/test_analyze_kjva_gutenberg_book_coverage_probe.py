@@ -34,12 +34,12 @@ The Prayer of Manasses
 
 def test_build_summary_keeps_probe_non_result_bearing() -> None:
     kjv = probe.FetchedText(
-        raw=b"Book 01 Genesis\nBook 40 Matthew\n",
+        raw=b"Book 01 Genesis\nBook 40 Matthew\n01:001:001 In the beginning\n",
         final_url=probe.KJV_TXT_URL,
         fetch_status="fetched",
     )
     apocrypha = probe.FetchedText(
-        raw=b"The First Book of Esdras\nThe Prayer of Manasses\n",
+        raw=b"The First Book of Esdras\nThe Prayer of Manasses\n1:1 First verse\n1 Numbered verse\n",
         final_url=probe.APOCRYPHA_TXT_URL,
         fetch_status="fetched",
     )
@@ -49,6 +49,10 @@ def test_build_summary_keeps_probe_non_result_bearing() -> None:
 
     assert summary["expected_kjv_books"] == 66
     assert summary["expected_apocrypha_books"] == 14
+    assert summary["kjv_verse_markers"] == 1
+    assert summary["apocrypha_chapter_verse_markers"] == 1
+    assert summary["apocrypha_number_only_markers"] == 1
+    assert summary["apocrypha_total_verse_markers"] == 2
     assert summary["book_order_lock_ready"] is False
     assert summary["verse_import_ready"] is False
     assert summary["source_lock_ready"] is False

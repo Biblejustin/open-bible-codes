@@ -19,6 +19,10 @@ It does not commit Bible text, normalize Bible text, or create a local corpus.
 - Apocrypha/deuterocanon book headings found: 14.
 - Missing apocrypha/deuterocanon book headings: 0.
 - Extra Apocrypha/deuterocanon source headings: 1.
+- KJV verse markers: 31102.
+- Apocrypha/deuterocanon chapter:verse markers: 5636.
+- Apocrypha/deuterocanon number-only markers: 68.
+- Apocrypha/deuterocanon total verse-like markers: 5704.
 - Book-order lock ready: 0.
 - Verse-numbered import ready: 0.
 - Source-lock ready: 0.
@@ -31,6 +35,7 @@ Project Gutenberg eBook 30 heading markers show all 66 KJV book headings.
 Project Gutenberg eBook 124 heading markers show all 14 tracked KJVA Apocrypha/deuterocanon coverage rows.
 The source also exposes the Epistle of Jeremiah as a separate heading, while the current KJVA source-family rollup treats it with Baruch.
 Missing Apocrypha/deuterocanon heading rows: none.
+KJV verse markers use a book:chapter:verse shape. The Apocrypha/deuterocanon file uses mixed chapter:verse and number-only marker shapes, so verse mapping still needs a separate collation pass.
 
 ## Anchors
 

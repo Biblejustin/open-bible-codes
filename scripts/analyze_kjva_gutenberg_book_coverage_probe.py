@@ -30,6 +30,9 @@ DEFAULT_MANIFEST = DEFAULT_OUT_DIR / "manifest.json"
 DEFAULT_MD = Path("docs/KJVA_GUTENBERG_BOOK_COVERAGE_PROBE.md")
 USER_AGENT = "OpenBibleCodes-EDLS Gutenberg coverage probe/1.0"
 BOOK_HEADING_RE = re.compile(r"^Book\s+(?P<number>\d{2})\s+(?P<name>.+?)\s*$")
+KJV_VERSE_MARKER_RE = re.compile(r"^\d{2}:\d{3}:\d{3}\s+")
+APOCRYPHA_CHAPTER_VERSE_MARKER_RE = re.compile(r"^\d+:\d+\s+")
+APOCRYPHA_NUMBER_ONLY_MARKER_RE = re.compile(r"^\d+\s+")
 
 ROW_FIELDNAMES = [
     "source_id",
@@ -58,6 +61,10 @@ SUMMARY_FIELDNAMES = [
     "found_apocrypha_book_headings",
     "missing_apocrypha_book_headings",
     "extra_apocrypha_source_headings",
+    "kjv_verse_markers",
+    "apocrypha_chapter_verse_markers",
+    "apocrypha_number_only_markers",
+    "apocrypha_total_verse_markers",
     "book_order_lock_ready",
     "verse_import_ready",
     "source_lock_ready",
@@ -320,8 +327,10 @@ def build_summary(
     apocrypha_rows = [row for row in rows if row["section"] == "apocrypha"]
     found_kjv = sum(1 for row in kjv_rows if row["status"] == "found")
     found_apocrypha = sum(1 for row in apocrypha_rows if row["status"] == "found")
+    kjv_text = kjv.raw.decode("utf-8", errors="replace")
+    apocrypha_text = apocrypha.raw.decode("utf-8", errors="replace")
     apocrypha_headings = parse_title_headings(
-        apocrypha.raw.decode("utf-8", errors="replace"),
+        apocrypha_text,
         (*APOCRYPHA_BOOKS, *extra_heading_expectations()),
     )
     extra_source_headings = sum(
@@ -347,6 +356,20 @@ def build_summary(
         "found_apocrypha_book_headings": found_apocrypha,
         "missing_apocrypha_book_headings": len(apocrypha_rows) - found_apocrypha,
         "extra_apocrypha_source_headings": extra_source_headings,
+        "kjv_verse_markers": count_lines_matching(kjv_text, KJV_VERSE_MARKER_RE),
+        "apocrypha_chapter_verse_markers": count_lines_matching(
+            apocrypha_text,
+            APOCRYPHA_CHAPTER_VERSE_MARKER_RE,
+        ),
+        "apocrypha_number_only_markers": count_lines_matching(
+            apocrypha_text,
+            APOCRYPHA_NUMBER_ONLY_MARKER_RE,
+        ),
+        "apocrypha_total_verse_markers": count_lines_matching(
+            apocrypha_text,
+            APOCRYPHA_CHAPTER_VERSE_MARKER_RE,
+        )
+        + count_lines_matching(apocrypha_text, APOCRYPHA_NUMBER_ONLY_MARKER_RE),
         "book_order_lock_ready": False,
         "verse_import_ready": False,
         "source_lock_ready": False,
@@ -441,6 +464,10 @@ def write_markdown(
         f"- Apocrypha/deuterocanon book headings found: {summary['found_apocrypha_book_headings']}.",
         f"- Missing apocrypha/deuterocanon book headings: {summary['missing_apocrypha_book_headings']}.",
         f"- Extra Apocrypha/deuterocanon source headings: {summary['extra_apocrypha_source_headings']}.",
+        f"- KJV verse markers: {summary['kjv_verse_markers']}.",
+        f"- Apocrypha/deuterocanon chapter:verse markers: {summary['apocrypha_chapter_verse_markers']}.",
+        f"- Apocrypha/deuterocanon number-only markers: {summary['apocrypha_number_only_markers']}.",
+        f"- Apocrypha/deuterocanon total verse-like markers: {summary['apocrypha_total_verse_markers']}.",
         f"- Book-order lock ready: {int(bool(summary['book_order_lock_ready']))}.",
         f"- Verse-numbered import ready: {int(bool(summary['verse_import_ready']))}.",
         f"- Source-lock ready: {int(bool(summary['source_lock_ready']))}.",
@@ -453,6 +480,7 @@ def write_markdown(
         "Project Gutenberg eBook 124 heading markers show all 14 tracked KJVA Apocrypha/deuterocanon coverage rows.",
         "The source also exposes the Epistle of Jeremiah as a separate heading, while the current KJVA source-family rollup treats it with Baruch.",
         f"Missing Apocrypha/deuterocanon heading rows: {missing_read}.",
+        "KJV verse markers use a book:chapter:verse shape. The Apocrypha/deuterocanon file uses mixed chapter:verse and number-only marker shapes, so verse mapping still needs a separate collation pass.",
         "",
         "## Anchors",
         "",
@@ -525,6 +553,10 @@ def normalize_book_key(value: str) -> str:
 
 def normalize_space(text: str) -> str:
     return " ".join(text.split())
+
+
+def count_lines_matching(text: str, pattern: re.Pattern[str]) -> int:
+    return sum(1 for line in text.splitlines() if pattern.match(line))
 
 
 def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, object]]) -> None:

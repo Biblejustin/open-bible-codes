@@ -61,7 +61,8 @@ Online source candidates found for possible future audit:
   candidate: `docs/KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md`. Current
   heading-level coverage probe found all 66 KJV book headings in eBook 30, all
   14 tracked KJVA Apocrypha/deuterocanon coverage rows in eBook 124, and one
-  extra Epistle of Jeremiah source heading:
+  extra Epistle of Jeremiah source heading, while also recording mixed
+  Apocrypha/deuterocanon verse-marker shapes that still need collation:
   `docs/KJVA_GUTENBERG_BOOK_COVERAGE_PROBE.md`.
 - [CrossWire GitLab KJV/KJVA](https://gitlab.com/crosswire-bible-society/kjv):
   possible independent metadata candidate because KJVA/KJVDC path names are

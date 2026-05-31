@@ -2507,7 +2507,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   book headings, 0 missing KJV headings, 14 expected Apocrypha/deuterocanon
   books, 14 found Apocrypha/deuterocanon book headings, 0 missing
   Apocrypha/deuterocanon headings, and one extra Epistle of Jeremiah source
-  heading.
+  heading. Verse-shape status: 31102 KJV book:chapter:verse markers and 5704
+  Apocrypha/deuterocanon verse-like markers split between chapter:verse and
+  number-only marker shapes.
 - This changes the Gutenberg read from KJV-only control candidate to possible
   public-domain split KJV+Apocrypha coverage candidate needing collation,
   source-use policy lock, and Baruch/Epistle handling decision before any
