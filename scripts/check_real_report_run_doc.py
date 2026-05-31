@@ -50,6 +50,7 @@ REQUIRED_PHRASES = (
     "`reports/real_report_run/preflight.json`",
     "`reports/real_report_run/summary.md`",
     "`reports/INDEX.md`",
+    "protocol TOML files pass runner schema and duplicate-name checks",
     "corpus config TOML files pass required name/language/source schema checks",
     "term CSV files pass schema, language, normalization, constants, and gematria checks",
     "claim-catalog summary table stays aligned with `claims/claim_catalog.csv`",

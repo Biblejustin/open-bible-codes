@@ -2148,6 +2148,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("scripts/check_english_seed_survivor_gate.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_source_basis_audit_queue.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_expanded_strata_tooling.py", preflight.DEFAULT_REQUIRED_PATHS)
+        self.assertIn("scripts/check_protocol_files.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_corpus_configs.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/check_term_files.py", preflight.DEFAULT_REQUIRED_PATHS)
         self.assertIn("scripts/validate_study_mapping_schemas.py", preflight.DEFAULT_REQUIRED_PATHS)
@@ -2888,6 +2889,27 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "corpus config failures: configs/demo.toml unsupported language: latin",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_protocol_file_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_protocol_files,
+                "validate_protocol_files",
+                return_value=["protocols/demo.toml: step one needs argv string list"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["protocol_file_failures"],
+                ["protocols/demo.toml: step one needs argv string list"],
+            )
+            self.assertIn(
+                "protocol file failures: protocols/demo.toml: step one needs argv string list",
                 payload["failures"],
             )
 

@@ -196,6 +196,7 @@ It requires:
 - no tracked report/database/raw-source artifacts beyond allowed placeholders;
 - no high-confidence secret-token patterns in tracked files;
 - required protocols, docs, and term files present;
+- protocol TOML files pass runner schema and duplicate-name checks;
 - corpus config TOML files pass required name/language/source schema checks;
 - term CSV files pass schema, language, normalization, constants, and gematria
   checks;

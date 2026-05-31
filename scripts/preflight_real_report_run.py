@@ -79,6 +79,7 @@ from scripts import (
     check_kjva_wikisource_candidate_source_audit_doc,
     check_manual_review_queue,
     check_preregistration_placeholders,
+    check_protocol_files,
     check_project_findings_overview_doc,
     check_prospective_lane_status_doc,
     check_prospective_study_next_lock_doc,
@@ -680,6 +681,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/build_all_codes_followup_report.py",
     "scripts/build_centered_occurrence_index.py",
     "scripts/build_match_strata_index.py",
+    "scripts/check_protocol_files.py",
     "scripts/check_corpus_configs.py",
     "scripts/check_crd_relevance_dictionary.py",
     "scripts/check_expanded_strata_tooling.py",
@@ -1301,6 +1303,10 @@ def main(argv: list[str] | None = None) -> int:
             "doc command-reference failures: "
             + "; ".join(doc_command_reference_failures)
         )
+
+    protocol_file_failures = check_protocol_files.validate_protocol_files()
+    if protocol_file_failures:
+        failures.append("protocol file failures: " + "; ".join(protocol_file_failures))
 
     corpus_config_failures = check_corpus_configs.validate_corpus_configs()
     if corpus_config_failures:
@@ -2263,6 +2269,7 @@ def main(argv: list[str] | None = None) -> int:
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,
         "public_claim_language_failures": public_claim_language_failures,
         "doc_command_reference_failures": doc_command_reference_failures,
+        "protocol_file_failures": protocol_file_failures,
         "corpus_config_failures": corpus_config_failures,
         "term_file_failures": term_file_failures,
         "study_mapping_schema_failures": study_mapping_schema_failures,

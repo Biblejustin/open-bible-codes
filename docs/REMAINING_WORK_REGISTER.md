@@ -118,6 +118,10 @@ into release/report gates without requiring ignored/private source files to
 exist; it validates config name/language/source tables, supported source
 formats, and required CSV/text source fields before public release or
 real-report assembly.
+`scripts/check_protocol_files.py` now moves protocol TOML schema checks into
+release/report gates without running protocols; it loads every tracked protocol
+through `els.protocol_runner`, catching bad step shape and duplicate protocol
+names before public release or real-report assembly.
 The WRR cross-pair grid doc is now CSV/manifest-guarded against grid-shape,
 corrected-distance, aggregate, permutation-summary, manifest input/output, and
 count drift.

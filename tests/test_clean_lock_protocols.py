@@ -363,6 +363,7 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "scripts.check_expanded_strata_tooling" in makefile
     assert "scripts.check_project_findings_overview_doc" in makefile
     assert "scripts.check_public_claim_language" in makefile
+    assert "$(MAKE) protocol-files" in makefile
     assert "$(MAKE) corpus-configs" in makefile
     assert "$(MAKE) term-files" in makefile
     assert "$(MAKE) study-mapping-schemas" in makefile
@@ -371,7 +372,8 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "expanded-strata operator tooling" in readme
     assert "general-reader findings overview" in readme
     assert "checks public claim language" in readme
-    assert "corpus config schemas" in readme
+    assert "protocol TOML files" in readme
+    assert "corpus config schemas" in normalized_readme
     assert "term-file schema/normalization" in normalized_readme
     assert "study-mapping guard suite" in readme
 
@@ -422,13 +424,15 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "release-ready: fast-validate public-release-check" in makefile
     assert "scripts.check_doc_command_references" in makefile
     assert "scripts.check_project_findings_overview_doc" in makefile
+    assert "$(MAKE) protocol-files" in makefile
     assert "$(MAKE) corpus-configs" in makefile
     assert "$(MAKE) term-files" in makefile
     assert "$(MAKE) study-mapping-schemas" in makefile
     assert "make release-ready" in readme
     assert "validates documented script/source-path references" in normalized_readme
     assert "guards the general-reader findings overview" in normalized_readme
-    assert "validates corpus config schemas" in normalized_readme
+    assert "validates protocol TOML files" in normalized_readme
+    assert "corpus config schemas" in normalized_readme
     assert "term-file schema/normalization" in normalized_readme
     assert "study-mapping guard suite" in normalized_readme
     assert "after committing" in readme
