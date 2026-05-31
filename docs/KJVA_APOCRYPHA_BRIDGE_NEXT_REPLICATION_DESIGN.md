@@ -53,6 +53,20 @@ Online source candidates found for possible future audit:
 - [eBible King James Version + Apocrypha](https://ebible.org/details.php?id=eng-kjv):
   public-domain KJV + Apocrypha source with USFM and other downloads. This is
   the current source family, not an independent local witness.
+- [Project Gutenberg eBook 30](https://www.gutenberg.org/ebooks/30) plus
+  [Project Gutenberg eBook 124](https://www.gutenberg.org/ebooks/124):
+  public-domain-USA split KJV plus Apocrypha/deuterocanon candidate. Current
+  tracked metadata audit found one KJV-complete component, one
+  Apocrypha/deuterocanon component, and one split KJV+Apocrypha metadata
+  candidate: `docs/KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md`. Current
+  heading-level coverage probe found all 66 KJV book headings in eBook 30, all
+  14 tracked KJVA Apocrypha/deuterocanon coverage rows in eBook 124, and one
+  extra Epistle of Jeremiah source heading:
+  `docs/KJVA_GUTENBERG_BOOK_COVERAGE_PROBE.md`.
+- [CrossWire GitLab KJV/KJVA](https://gitlab.com/crosswire-bible-society/kjv):
+  possible independent metadata candidate because KJVA/KJVDC path names are
+  present. Current tracked status audit:
+  `docs/KJVA_CROSSWIRE_CANDIDATE_SOURCE_AUDIT.md`.
 - [Wikisource 1911 Ballantyne printing](https://en.wikisource.org/wiki/The_Holy_Bible,_containing_the_Old_%26_New_Testament_%26_the_Apocrypha):
   public-domain-in-US page for a KJV Bible with Apocrypha, stating the text
   follows the standard 1769 version but without the repo's verse-numbered
