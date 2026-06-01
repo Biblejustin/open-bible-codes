@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 415
+Documents indexed: 416
 
 ## Controls
 
@@ -367,6 +367,7 @@ Documents indexed: 415
 | KJVA Gutenberg Source-Lock Decision Packet | `KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md` |
 | KJVA Gutenberg Source-Lock Prep | `KJVA_GUTENBERG_SOURCE_LOCK_PREP.md` |
 | KJVA Hakkaac Apocrypha Boundary Candidate | `KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md` |
+| KJVA Hakkaac Apocrypha Collation Audit | `KJVA_HAKKAAC_APOCRYPHA_COLLATION_AUDIT.md` |
 | KJVA Hakkaac Apocrypha Marker Coverage | `KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md` |
 | KJVA Open-Bibles Candidate Source Audit | `KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md` |
 | KJVA Source Candidate Status | `KJVA_SOURCE_CANDIDATE_STATUS.md` |

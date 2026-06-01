@@ -165,6 +165,8 @@ This assembly run includes:
   `docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md`
 - KJVA Hakkaac full-marker coverage audit:
   `docs/KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md`
+- KJVA Hakkaac ignored-local collation audit:
+  `docs/KJVA_HAKKAAC_APOCRYPHA_COLLATION_AUDIT.md`
 - KJVA Wikisource candidate source-status audit:
   `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - KJVA Wikisource book-coverage probe:
@@ -279,6 +281,10 @@ It requires:
   marker-count agreement for all 14 tracked Apocrypha/deuterocanon books,
   5720 source markers, 5720 local markers, 173 chapter rows, and 0 chapter
   drift rows, but no source lock, corpus import, or result-bearing output;
+- KJVA Hakkaac ignored-local collation audit keeps raw verse text under
+  ignored `data/private/` only, finding 5719 of 5720 exact normalized verse
+  matches, one `SIR 19:1` one-letter normalized length drift, exact
+  `SIR 44:23` and `MAN 1:1..15` blocker rows, and no tracked Bible text;
 - KJVA Wikisource candidate source audit stays metadata-only, with no Bible
   text retained, no corpus import ready, and no result-bearing output;
 - KJVA Wikisource book-coverage probe stays metadata-only, with 36 existing

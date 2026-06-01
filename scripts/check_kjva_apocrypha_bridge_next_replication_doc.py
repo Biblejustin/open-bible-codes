@@ -23,6 +23,11 @@ REQUIRED_PHRASES = (
     "No significance wording from raw bridge counts alone.",
     "exact marker-count agreement for all 14 tracked Apocrypha/deuterocanon books",
     "5720 source markers, 5720 local markers, 173 chapter rows, and 0 chapter drift rows",
+    "5719 of 5720 exact normalized verse matches",
+    "one `SIR 19:1` one-letter normalized length drift",
+    "13 of 14 exact book-stream matches",
+    "exact `SIR 44:23` and `MAN 1:1..15` blocker rows",
+    "no tracked Bible text",
 )
 REQUIRED_LINKS = (
     "terms/kjv_apocrypha_bridge_prospective_terms.csv",
@@ -40,6 +45,7 @@ REQUIRED_LINKS = (
     "docs/KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md",
     "docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md",
     "docs/KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md",
+    "docs/KJVA_HAKKAAC_APOCRYPHA_COLLATION_AUDIT.md",
     "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",

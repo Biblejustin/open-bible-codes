@@ -74,6 +74,7 @@ from scripts import (
     check_greek_surface_second_cohort_readiness_doc,
     check_hypothesis_testing_source_audit_doc,
     check_israeli_prime_ministers_detail_recovery_probe_doc,
+    check_kjva_hakkaac_apocrypha_collation_doc,
     check_kjva_hakkaac_apocrypha_boundary_candidate_doc,
     check_kjva_hakkaac_apocrypha_marker_coverage_doc,
     check_kjva_apocrypha_bridge_next_replication_doc,
@@ -183,6 +184,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_kjva_hakkaac_apocrypha_boundary_candidate_doc.py",
     "scripts/analyze_kjva_hakkaac_apocrypha_marker_coverage.py",
     "scripts/check_kjva_hakkaac_apocrypha_marker_coverage_doc.py",
+    "scripts/analyze_kjva_hakkaac_apocrypha_collation.py",
+    "scripts/check_kjva_hakkaac_apocrypha_collation_doc.py",
     "scripts/analyze_kjva_crosswire_candidate_source.py",
     "scripts/check_kjva_crosswire_candidate_source_audit_doc.py",
     "scripts/analyze_kjva_gutenberg_book_coverage_probe.py",
@@ -598,6 +601,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md",
     "docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md",
     "docs/KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md",
+    "docs/KJVA_HAKKAAC_APOCRYPHA_COLLATION_AUDIT.md",
     "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
     "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
@@ -636,6 +640,11 @@ DEFAULT_REQUIRED_PATHS = [
     "reports/kjva_hakkaac_apocrypha_marker_coverage/chapter_marker_coverage.csv",
     "reports/kjva_hakkaac_apocrypha_marker_coverage/summary.csv",
     "reports/kjva_hakkaac_apocrypha_marker_coverage/manifest.json",
+    "reports/kjva_hakkaac_apocrypha_collation/verse_collation.csv",
+    "reports/kjva_hakkaac_apocrypha_collation/book_collation.csv",
+    "reports/kjva_hakkaac_apocrypha_collation/blocker_collation.csv",
+    "reports/kjva_hakkaac_apocrypha_collation/summary.csv",
+    "reports/kjva_hakkaac_apocrypha_collation/manifest.json",
     "reports/kjva_open_bibles_candidate_source/source_status.csv",
     "reports/kjva_open_bibles_candidate_source/summary.csv",
     "reports/kjva_open_bibles_candidate_source/anchors.csv",
@@ -712,6 +721,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/kjva_gutenberg_source_lock_prep.toml",
     "protocols/kjva_hakkaac_apocrypha_boundary_candidate.toml",
     "protocols/kjva_hakkaac_apocrypha_marker_coverage.toml",
+    "protocols/kjva_hakkaac_apocrypha_collation.toml",
     "protocols/kjva_open_bibles_candidate_source_audit.toml",
     "protocols/kjva_wikisource_candidate_source_audit.toml",
     "protocols/external_claim_source_counts.toml",
@@ -1323,6 +1333,17 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "KJVA Hakkaac marker coverage failures: "
             + "; ".join(kjva_hakkaac_apocrypha_marker_coverage_doc_failures)
+        )
+
+    kjva_hakkaac_apocrypha_collation_doc_failures = (
+        check_kjva_hakkaac_apocrypha_collation_doc.validate_kjva_hakkaac_apocrypha_collation_doc(
+            root / check_kjva_hakkaac_apocrypha_collation_doc.DEFAULT_DOC
+        )
+    )
+    if kjva_hakkaac_apocrypha_collation_doc_failures:
+        failures.append(
+            "KJVA Hakkaac collation failures: "
+            + "; ".join(kjva_hakkaac_apocrypha_collation_doc_failures)
         )
 
     kjva_open_bibles_candidate_source_audit_doc_failures = (
@@ -2464,6 +2485,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "kjva_hakkaac_apocrypha_marker_coverage_doc_failures": (
             kjva_hakkaac_apocrypha_marker_coverage_doc_failures
+        ),
+        "kjva_hakkaac_apocrypha_collation_doc_failures": (
+            kjva_hakkaac_apocrypha_collation_doc_failures
         ),
         "kjva_open_bibles_candidate_source_audit_doc_failures": (
             kjva_open_bibles_candidate_source_audit_doc_failures

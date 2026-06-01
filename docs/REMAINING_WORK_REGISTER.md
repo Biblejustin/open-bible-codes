@@ -2610,3 +2610,21 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Added `protocols/kjva_hakkaac_apocrypha_marker_coverage.toml`,
   `scripts/analyze_kjva_hakkaac_apocrypha_marker_coverage.py`, and
   `scripts/check_kjva_hakkaac_apocrypha_marker_coverage_doc.py`.
+
+## KJVA Hakkaac Apocrypha Collation Audit
+
+- Added `docs/KJVA_HAKKAAC_APOCRYPHA_COLLATION_AUDIT.md` as an ignored-local
+  collation audit for Hakkaac KJV Apocrypha against the current local KJVA
+  Apocrypha source.
+- Current audit status: raw Hakkaac verse text stays under ignored
+  `data/private/` output only; tracked outputs contain hashes, lengths, refs,
+  and status rows only.
+- Current collation result: 5719 of 5720 exact normalized verse matches, one
+  `SIR 19:1` one-letter normalized length drift, 13 of 14 exact book-stream
+  matches, exact `SIR 44:23` and `MAN 1:1..15` blocker rows, and 0 missing
+  refs.
+- This is collation evidence only. It does not source-lock Hakkaac, choose a
+  source-order rule, run ELS searches, or authorize a result-bearing run.
+- Added `protocols/kjva_hakkaac_apocrypha_collation.toml`,
+  `scripts/analyze_kjva_hakkaac_apocrypha_collation.py`, and
+  `scripts/check_kjva_hakkaac_apocrypha_collation_doc.py`.

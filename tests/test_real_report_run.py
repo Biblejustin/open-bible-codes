@@ -195,6 +195,14 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/analyze_kjva_hakkaac_apocrypha_collation.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_kjva_hakkaac_apocrypha_collation_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/build_kjva_gutenberg_source_lock_blocker_packet.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -247,6 +255,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "docs/KJVA_HAKKAAC_APOCRYPHA_COLLATION_AUDIT.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "docs/KJVA_SOURCE_CANDIDATE_STATUS.md",
             steps_by_id["preflight"]["inputs"],
         )
@@ -291,6 +303,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "protocols/kjva_hakkaac_apocrypha_collation.toml",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "protocols/kjva_wikisource_candidate_source_audit.toml",
             steps_by_id["preflight"]["inputs"],
         )
@@ -323,6 +339,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "reports/kjva_hakkaac_apocrypha_collation/summary.csv",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "reports/kjva_wikisource_candidate_source/summary.csv",
             steps_by_id["preflight"]["inputs"],
         )
@@ -333,6 +353,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("kjva_gutenberg_source_lock_blocker_packet", steps_by_id)
         self.assertIn("kjva_hakkaac_apocrypha_boundary_candidate", steps_by_id)
         self.assertIn("kjva_hakkaac_apocrypha_marker_coverage", steps_by_id)
+        self.assertIn("kjva_hakkaac_apocrypha_collation", steps_by_id)
         self.assertIn("kjva_wikisource_candidate_source_audit", steps_by_id)
         self.assertIn("kjva_wikisource_book_coverage_probe", steps_by_id)
         self.assertIn("docs/INDEX.md", steps_by_id["preflight"]["inputs"])
@@ -2463,6 +2484,14 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/analyze_kjva_hakkaac_apocrypha_collation.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_kjva_hakkaac_apocrypha_collation_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/build_kjva_gutenberg_source_lock_blocker_packet.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -2499,6 +2528,10 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "docs/KJVA_HAKKAAC_APOCRYPHA_COLLATION_AUDIT.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -2524,6 +2557,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "protocols/kjva_hakkaac_apocrypha_boundary_candidate.toml",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "protocols/kjva_hakkaac_apocrypha_collation.toml",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -2616,6 +2653,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/kjva_hakkaac_apocrypha_boundary_candidate/manifest.json",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjva_hakkaac_apocrypha_collation/summary.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjva_hakkaac_apocrypha_collation/manifest.json",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -2794,6 +2839,10 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "kjva_hakkaac_apocrypha_boundary_candidate_doc_failures",
+                payload,
+            )
+            self.assertIn(
+                "kjva_hakkaac_apocrypha_collation_doc_failures",
                 payload,
             )
             self.assertIn(
@@ -3057,6 +3106,27 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "KJVA Hakkaac boundary candidate failures: missing candidate boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_kjva_hakkaac_collation_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_kjva_hakkaac_apocrypha_collation_doc,
+                "validate_kjva_hakkaac_apocrypha_collation_doc",
+                return_value=["missing ignored-local boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["kjva_hakkaac_apocrypha_collation_doc_failures"],
+                ["missing ignored-local boundary"],
+            )
+            self.assertIn(
+                "KJVA Hakkaac collation failures: missing ignored-local boundary",
                 payload["failures"],
             )
 

@@ -1,0 +1,24 @@
+name = "kjva_hakkaac_apocrypha_collation"
+description = "Import Hakkaac KJV Apocrypha into ignored local files and write non-text collation evidence against local KJVA."
+manifest_out = "reports/kjva_hakkaac_apocrypha_collation/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "kjva_hakkaac_apocrypha_collation"
+description = "Collate Hakkaac KJV Apocrypha against local KJVA with raw text kept only under ignored data/private output."
+argv = ["-m", "scripts.analyze_kjva_hakkaac_apocrypha_collation"]
+inputs = [
+  "scripts/analyze_kjva_hakkaac_apocrypha_collation.py",
+  "scripts/analyze_kjva_hakkaac_apocrypha_marker_coverage.py",
+  "scripts/analyze_kjva_hakkaac_apocrypha_boundary_candidate.py",
+  "data/processed/ebible/eng-kjv.csv",
+]
+outputs = [
+  "reports/kjva_hakkaac_apocrypha_collation/verse_collation.csv",
+  "reports/kjva_hakkaac_apocrypha_collation/book_collation.csv",
+  "reports/kjva_hakkaac_apocrypha_collation/blocker_collation.csv",
+  "reports/kjva_hakkaac_apocrypha_collation/summary.csv",
+  "docs/KJVA_HAKKAAC_APOCRYPHA_COLLATION_AUDIT.md",
+  "reports/kjva_hakkaac_apocrypha_collation/manifest.json",
+]
