@@ -338,6 +338,8 @@ def main(argv: list[str] | None = None) -> int:
     wrr_dw_formula_sensitivity_rows = read_rows(args.wrr_dw_formula_sensitivity)
     wrr_no_input_handoff_rows = read_rows(args.wrr_no_input_handoff_summary)
     wrr_no_input_handoff_manifest = read_json(args.wrr_no_input_handoff_manifest)
+    cities_no_input_handoff_rows = read_rows(args.cities_no_input_handoff_summary)
+    cities_no_input_handoff_manifest = read_json(args.cities_no_input_handoff_manifest)
     hebrew_theology_all_codes_triage_manifest = read_json(
         args.hebrew_theology_all_codes_triage_manifest
     )
@@ -628,6 +630,8 @@ def main(argv: list[str] | None = None) -> int:
         wrr_dw_formula_sensitivity_rows=wrr_dw_formula_sensitivity_rows,
         wrr_no_input_handoff_rows=wrr_no_input_handoff_rows,
         wrr_no_input_handoff_manifest=wrr_no_input_handoff_manifest,
+        cities_no_input_handoff_rows=cities_no_input_handoff_rows,
+        cities_no_input_handoff_manifest=cities_no_input_handoff_manifest,
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
         hebrew_screening_all_codes_triage_manifest=hebrew_screening_all_codes_triage_manifest,
         greek_screening_all_codes_triage_manifest=greek_screening_all_codes_triage_manifest,
@@ -878,6 +882,16 @@ def build_parser() -> argparse.ArgumentParser:
         "--wrr-no-input-handoff-manifest",
         type=Path,
         default=WRR_NO_INPUT_HANDOFF_MANIFEST,
+    )
+    parser.add_argument(
+        "--cities-no-input-handoff-summary",
+        type=Path,
+        default=CITIES_NO_INPUT_HANDOFF_SUMMARY,
+    )
+    parser.add_argument(
+        "--cities-no-input-handoff-manifest",
+        type=Path,
+        default=CITIES_NO_INPUT_HANDOFF_MANIFEST,
     )
     parser.add_argument(
         "--hebrew-theology-all-codes-triage-manifest",
@@ -1784,6 +1798,8 @@ def write_manifest(
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
     wrr_no_input_handoff_rows: list[dict[str, str]],
     wrr_no_input_handoff_manifest: dict[str, Any],
+    cities_no_input_handoff_rows: list[dict[str, str]],
+    cities_no_input_handoff_manifest: dict[str, Any],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
     greek_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1842,6 +1858,11 @@ def write_manifest(
         wrr_no_input_handoff_rows[0]
         if wrr_no_input_handoff_rows
         else wrr_no_input_handoff_manifest.get("summary", {})
+    )
+    cities_no_input_handoff_summary = (
+        cities_no_input_handoff_rows[0]
+        if cities_no_input_handoff_rows
+        else cities_no_input_handoff_manifest.get("summary", {})
     )
     payload = {
         "tool": "build_real_report_run_summary",
@@ -1919,6 +1940,12 @@ def write_manifest(
             "wrr_dw_formula_sensitivity": str(args.wrr_dw_formula_sensitivity),
             "wrr_no_input_handoff_summary": str(args.wrr_no_input_handoff_summary),
             "wrr_no_input_handoff_manifest": str(args.wrr_no_input_handoff_manifest),
+            "cities_no_input_handoff_summary": str(
+                args.cities_no_input_handoff_summary
+            ),
+            "cities_no_input_handoff_manifest": str(
+                args.cities_no_input_handoff_manifest
+            ),
             "hebrew_theology_all_codes_triage_manifest": str(
                 args.hebrew_theology_all_codes_triage_manifest
             ),
@@ -2122,6 +2149,30 @@ def write_manifest(
         ),
         "wrr_no_input_handoff_claim_status": wrr_no_input_handoff_summary.get(
             "claim_boundary", ""
+        ),
+        "cities_no_input_handoff_status_rows": int_value(
+            cities_no_input_handoff_summary, "status_rows"
+        ),
+        "cities_no_input_handoff_manual_input_needed_rows": int_value(
+            cities_no_input_handoff_summary, "manual_input_needed_rows"
+        ),
+        "cities_no_input_handoff_ocr_packet_pages": int_value(
+            cities_no_input_handoff_summary, "ocr_packet_pages"
+        ),
+        "cities_no_input_handoff_reviewed_ocr_packet_pages": int_value(
+            cities_no_input_handoff_summary, "ocr_packet_pages_reviewed"
+        ),
+        "cities_no_input_handoff_unreviewed_ocr_packet_pages": int_value(
+            cities_no_input_handoff_summary, "ocr_packet_pages_unreviewed"
+        ),
+        "cities_no_input_handoff_source_row_imports": int_value(
+            cities_no_input_handoff_summary, "source_row_imports"
+        ),
+        "cities_no_input_handoff_result_allowed": bool_int_cell(
+            cities_no_input_handoff_summary, "result_allowed"
+        ),
+        "cities_no_input_handoff_claim_status": cities_no_input_handoff_summary.get(
+            "claim_status", ""
         ),
         "hebrew_theology_all_codes_triage_rows": hebrew_theology_all_codes_triage_manifest.get(
             "queue_rows", 0

@@ -1,3 +1,5 @@
+import json
+
 from scripts import build_real_report_run_summary as summary
 
 
@@ -6,6 +8,22 @@ def test_report_summary_cells_escape_markdown_and_ranges() -> None:
     assert summary.range_text(None, 10) == "none"
     assert summary.range_text(7, 7) == "7"
     assert summary.range_text(7, 12) == "7..12"
+
+
+def test_current_report_manifest_exposes_cities_no_input_boundary() -> None:
+    manifest = json.loads(summary.MANIFEST_OUT.read_text(encoding="utf-8"))
+
+    assert manifest["cities_no_input_handoff_status_rows"] == 8
+    assert manifest["cities_no_input_handoff_manual_input_needed_rows"] == 6
+    assert manifest["cities_no_input_handoff_ocr_packet_pages"] == 61
+    assert manifest["cities_no_input_handoff_reviewed_ocr_packet_pages"] == 41
+    assert manifest["cities_no_input_handoff_unreviewed_ocr_packet_pages"] == 20
+    assert manifest["cities_no_input_handoff_source_row_imports"] == 0
+    assert manifest["cities_no_input_handoff_result_allowed"] == "0"
+    assert (
+        manifest["cities_no_input_handoff_claim_status"]
+        == "cities_no_input_handoff_blocks_source_import_and_results"
+    )
 
 
 def test_kjva_no_input_handoff_status_section_keeps_result_closed() -> None:

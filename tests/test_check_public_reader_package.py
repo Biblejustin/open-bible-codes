@@ -103,6 +103,16 @@ def _default_report_text(path: Path) -> str:
                 "kjva_no_input_handoff_claim_status": (
                     "kjva_no_input_handoff_blocks_new_result"
                 ),
+                "cities_no_input_handoff_status_rows": 8,
+                "cities_no_input_handoff_manual_input_needed_rows": 6,
+                "cities_no_input_handoff_ocr_packet_pages": 61,
+                "cities_no_input_handoff_reviewed_ocr_packet_pages": 41,
+                "cities_no_input_handoff_unreviewed_ocr_packet_pages": 20,
+                "cities_no_input_handoff_source_row_imports": 0,
+                "cities_no_input_handoff_result_allowed": "0",
+                "cities_no_input_handoff_claim_status": (
+                    "cities_no_input_handoff_blocks_source_import_and_results"
+                ),
             },
             indent=2,
         ) + "\n"
@@ -239,6 +249,26 @@ def test_detects_packaged_real_report_manifest_result_boundary_drift(
 
     assert (
         f"{manifest_path} kjva_no_input_handoff_result_allowed drifted: 1 != 0"
+    ) in failures
+
+
+def test_detects_packaged_real_report_manifest_cities_boundary_drift(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    manifest_path = out_dir / "reports/real_report_run/manifest.json"
+    report_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    report_manifest["cities_no_input_handoff_result_allowed"] = "1"
+    manifest_path.write_text(
+        json.dumps(report_manifest, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert (
+        f"{manifest_path} cities_no_input_handoff_result_allowed drifted: 1 != 0"
     ) in failures
 
 

@@ -450,6 +450,16 @@ def validate_packaged_real_report_manifest(
             "kjva_no_input_handoff_source_policy_blocker_rows": 7,
             "kjva_no_input_handoff_result_allowed": "0",
             "kjva_no_input_handoff_claim_status": "kjva_no_input_handoff_blocks_new_result",
+            "cities_no_input_handoff_status_rows": 8,
+            "cities_no_input_handoff_manual_input_needed_rows": 6,
+            "cities_no_input_handoff_ocr_packet_pages": 61,
+            "cities_no_input_handoff_reviewed_ocr_packet_pages": 41,
+            "cities_no_input_handoff_unreviewed_ocr_packet_pages": 20,
+            "cities_no_input_handoff_source_row_imports": 0,
+            "cities_no_input_handoff_result_allowed": "0",
+            "cities_no_input_handoff_claim_status": (
+                "cities_no_input_handoff_blocks_source_import_and_results"
+            ),
         }
         for key, expected_value in checks.items():
             if report_manifest.get(key) != expected_value:
