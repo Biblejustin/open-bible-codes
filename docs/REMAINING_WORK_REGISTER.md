@@ -3006,7 +3006,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   symbolic link.
 - Added regular-file and destination-symlink guards for public-reader package
   copying, so package inputs cannot be directories and `--no-clean` output
-  trees cannot write through an existing symbolic-link destination.
+  trees cannot write through an existing symbolic-link destination, output
+  root, or package subdirectory.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 

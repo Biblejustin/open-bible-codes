@@ -122,9 +122,9 @@ def build_public_reader_package(
     validate_reader_package_inputs(doc_paths, report_paths)
     copied: list[CopiedFile] = []
     for source in doc_paths:
-        copied.append(copy_checked_file(source, out_dir / source))
+        copied.append(copy_checked_file(source, out_dir / source, package_root=out_dir))
     for source in report_paths:
-        copied.append(copy_checked_file(source, out_dir / source))
+        copied.append(copy_checked_file(source, out_dir / source, package_root=out_dir))
 
     write_package_readme(out_dir, copied)
     write_reader_package(out_dir, doc_paths, report_paths)
@@ -261,7 +261,12 @@ def extract_marked_section(text: str, marker: str) -> str:
     return "\n".join(section_lines)
 
 
-def copy_checked_file(source: Path, destination: Path) -> CopiedFile:
+def copy_checked_file(
+    source: Path,
+    destination: Path,
+    *,
+    package_root: Path | None = None,
+) -> CopiedFile:
     validate_package_source_path(source)
     if not source.exists():
         raise FileNotFoundError(f"missing package source: {source}")
@@ -271,9 +276,9 @@ def copy_checked_file(source: Path, destination: Path) -> CopiedFile:
         raise ValueError(f"refusing non-file package source: {source}")
     if is_forbidden_source(source):
         raise ValueError(f"refusing to package raw/source data path: {source}")
+    validate_package_destination_path(destination, package_root=package_root)
     destination.parent.mkdir(parents=True, exist_ok=True)
-    if destination.is_symlink():
-        raise ValueError(f"refusing symlink package destination: {destination}")
+    validate_package_destination_path(destination, package_root=package_root)
     shutil.copyfile(source, destination)
     data = destination.read_bytes()
     return CopiedFile(
@@ -291,6 +296,31 @@ def validate_package_source_path(path: Path) -> None:
         raise ValueError(f"refusing package source path with parent segment: {path}")
     if path.suffix.lower() not in {".md", ".json"}:
         raise ValueError(f"refusing unsupported package source suffix: {path}")
+
+
+def validate_package_destination_path(
+    destination: Path,
+    *,
+    package_root: Path | None = None,
+) -> None:
+    if destination.is_symlink():
+        raise ValueError(f"refusing symlink package destination: {destination}")
+    if package_root is None:
+        if destination.parent.is_symlink():
+            raise ValueError(
+                f"refusing symlink package destination ancestor: {destination.parent}"
+            )
+        return
+    if package_root.is_symlink():
+        raise ValueError(f"refusing symlink package output root: {package_root}")
+    relative = destination.relative_to(package_root)
+    current = package_root
+    for part in relative.parts[:-1]:
+        current = current / part
+        if current.is_symlink():
+            raise ValueError(
+                f"refusing symlink package destination ancestor: {current}"
+            )
 
 
 def is_forbidden_source(path: Path) -> bool:

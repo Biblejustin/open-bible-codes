@@ -483,3 +483,43 @@ def test_refuses_symlink_package_destination_paths(tmp_path, monkeypatch) -> Non
         package.copy_checked_file(Path("docs/source.md"), destination)
 
     assert "refusing symlink package destination:" in str(excinfo.value)
+
+
+def test_refuses_symlink_package_destination_ancestors(
+    tmp_path, monkeypatch
+) -> None:
+    monkeypatch.chdir(tmp_path)
+    _write(Path("docs/source.md"), "# Source\n")
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    package_root = Path("reports/public_reader_package")
+    package_root.mkdir(parents=True)
+    (package_root / "docs").symlink_to(outside, target_is_directory=True)
+
+    with pytest.raises(ValueError) as excinfo:
+        package.copy_checked_file(
+            Path("docs/source.md"),
+            package_root / "docs/source.md",
+            package_root=package_root,
+        )
+
+    assert "refusing symlink package destination ancestor:" in str(excinfo.value)
+
+
+def test_refuses_symlink_package_output_root(tmp_path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    _write(Path("docs/source.md"), "# Source\n")
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    package_root = Path("reports/public_reader_package")
+    package_root.parent.mkdir(parents=True)
+    package_root.symlink_to(outside, target_is_directory=True)
+
+    with pytest.raises(ValueError) as excinfo:
+        package.copy_checked_file(
+            Path("docs/source.md"),
+            package_root / "docs/source.md",
+            package_root=package_root,
+        )
+
+    assert "refusing symlink package output root:" in str(excinfo.value)
