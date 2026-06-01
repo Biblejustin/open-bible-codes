@@ -43,6 +43,7 @@ fast-validate: test indexes
 	python3 -m scripts.check_clean_lock_results_summary_doc
 	python3 -m scripts.check_project_findings_overview_doc
 	python3 -m scripts.check_real_report_run_doc
+	python3 -m scripts.check_final_report_assembly_docs
 	python3 -m scripts.check_public_claim_language
 	$(MAKE) protocol-files
 	$(MAKE) corpus-configs
@@ -63,6 +64,7 @@ public-release-check:
 	python3 -m scripts.check_clean_lock_results_summary_doc
 	python3 -m scripts.check_project_findings_overview_doc
 	python3 -m scripts.check_real_report_run_doc
+	python3 -m scripts.check_final_report_assembly_docs
 	python3 -m scripts.check_public_claim_language
 	$(MAKE) protocol-files
 	$(MAKE) corpus-configs
