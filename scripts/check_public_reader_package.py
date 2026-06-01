@@ -540,6 +540,16 @@ def validate_packaged_real_report_manifest(
                 "center_verse_relevant": 70,
                 "span_relevant": 196,
             },
+            "kjva_apocrypha_bridge_confirmatory_rows": 15,
+            "kjva_apocrypha_bridge_confirmatory_samples": 5000,
+            "kjva_apocrypha_bridge_confirmatory_terms_above_all_samples": 3,
+            "kjva_apocrypha_bridge_confirmatory_terms_q_le_0_05": 15,
+            "kjva_apocrypha_bridge_prospective_rows": 7,
+            "kjva_apocrypha_bridge_prospective_samples": 5000,
+            "kjva_apocrypha_bridge_prospective_terms_above_all_samples": 0,
+            "kjva_apocrypha_bridge_prospective_terms_q_le_0_05": 0,
+            "kjva_apocrypha_bridge_prospective_nonbible_controls": 3,
+            "kjva_apocrypha_bridge_prospective_nonbible_controls_ge_observed": 1,
         }
         for key, expected_value in checks.items():
             if report_manifest.get(key) != expected_value:

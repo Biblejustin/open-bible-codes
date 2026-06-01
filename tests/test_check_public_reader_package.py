@@ -181,6 +181,16 @@ def _default_report_text(path: Path) -> str:
                     "center_verse_relevant": 70,
                     "span_relevant": 196,
                 },
+                "kjva_apocrypha_bridge_confirmatory_rows": 15,
+                "kjva_apocrypha_bridge_confirmatory_samples": 5000,
+                "kjva_apocrypha_bridge_confirmatory_terms_above_all_samples": 3,
+                "kjva_apocrypha_bridge_confirmatory_terms_q_le_0_05": 15,
+                "kjva_apocrypha_bridge_prospective_rows": 7,
+                "kjva_apocrypha_bridge_prospective_samples": 5000,
+                "kjva_apocrypha_bridge_prospective_terms_above_all_samples": 0,
+                "kjva_apocrypha_bridge_prospective_terms_q_le_0_05": 0,
+                "kjva_apocrypha_bridge_prospective_nonbible_controls": 3,
+                "kjva_apocrypha_bridge_prospective_nonbible_controls_ge_observed": 1,
             },
             indent=2,
         ) + "\n"
@@ -446,6 +456,27 @@ def test_detects_packaged_real_report_manifest_centered_occurrence_drift(
 
     assert (
         f"{manifest_path} centered_occurrence_presence_rows drifted: 811 != 812"
+    ) in failures
+
+
+def test_detects_packaged_real_report_manifest_kjva_bridge_drift(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    manifest_path = out_dir / "reports/real_report_run/manifest.json"
+    report_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    report_manifest["kjva_apocrypha_bridge_prospective_terms_q_le_0_05"] = 1
+    manifest_path.write_text(
+        json.dumps(report_manifest, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert (
+        f"{manifest_path} kjva_apocrypha_bridge_prospective_terms_q_le_0_05 "
+        "drifted: 1 != 0"
     ) in failures
 
 
