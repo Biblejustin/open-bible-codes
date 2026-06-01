@@ -36,6 +36,10 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
         "`docs/WRR_NO_INPUT_HANDOFF_STATUS.md`",
         "`docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`",
         "`docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`",
+        "The KJV with Apocrypha work found bridge patterns that stood above several",
+        "comparison checks. This area deserves more review, but it came from earlier",
+        "candidate-source audit rows, but 0 candidate pages ready to import verses and",
+        "0 candidate pages ready for a result.",
     ),
     Path("docs/FINAL_REPORT.md"): (
         "`docs/REMAINING_WORK_REGISTER.md`",
@@ -61,6 +65,9 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
     ),
     Path("docs/CLAIM_CATALOG.md"): (
         "the consolidated no-input handoff keeps 8 handoff rows, 6 manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages, 41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority line-crop review rows, and no Cities result allowed.",
+        "Apocrypha bridge-completion study | `mixed` | 2",
+        "KJVA bridge rows stand above same-length controls at total and term-review layers plus 250-sample total shuffled controls",
+        "locked 5000-sample post-screen controls kept all 15 at q <= 0.01 with 3 above every shuffled sample.",
     ),
     Path("docs/CONSOLIDATED_FINDINGS.md"): (
         "Neither result is public-claim evidence.",

@@ -17,6 +17,7 @@ def _default_doc_text(path: Path) -> str:
         lines.extend(overview_check.REQUIRED_HEADINGS)
         lines.extend(overview_check.REQUIRED_PHRASES)
         lines.extend(f"`{reference}`" for reference in overview_check.REQUIRED_REFERENCES)
+        lines.extend(check.REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH[path])
         return "\n\n".join(lines) + "\n"
     if path == overview_check.DEFAULT_README:
         return (
