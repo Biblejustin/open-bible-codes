@@ -36,6 +36,20 @@ def test_forbidden_stale_phrase_fails(tmp_path: Path) -> None:
     assert failures == [f"docs/FINAL_REPORT.md contains stale phrase: {stale}"]
 
 
+def test_stale_handoff_summary_without_ocr_counts_fails(tmp_path: Path) -> None:
+    stale = "14 transcription review rows, 203 priority"
+    write_valid_docs(tmp_path)
+    doc = tmp_path / "docs/FINAL_REPORT_OUTLINE.md"
+    with doc.open("a", encoding="utf-8") as handle:
+        handle.write(f"\n{stale}\n")
+
+    failures = check.validate_public_handoff_docs(tmp_path)
+
+    assert failures == [
+        f"docs/FINAL_REPORT_OUTLINE.md contains stale phrase: {stale}"
+    ]
+
+
 def test_generated_summary_source_import_stale_phrase_fails(tmp_path: Path) -> None:
     stale = "| Source-row imports | 1 |"
     write_valid_docs(tmp_path)

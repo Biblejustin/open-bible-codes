@@ -185,40 +185,49 @@ FORBIDDEN_PHRASES_BY_DOC = {
     Path("README.md"): (
         "Cities city-name rows are imported",
         "Cities ELS run is ready",
+        "14 transcription review rows, 203 priority",
     ),
     Path("docs/FINAL_REPORT.md"): (
         "Cities city-name rows are imported",
         "Cities ELS run is ready",
+        "14 transcription review rows, 203 priority",
     ),
     Path("docs/FINAL_REPORT_DRAFT.md"): (
         "Cities city-name rows are imported",
         "Cities ELS run is ready",
+        "14 transcription review rows, 203 priority",
     ),
     Path("docs/FINAL_REPORT_OUTLINE.md"): (
         "Cities city-name rows are imported",
         "Cities ELS run is ready",
+        "14 transcription review rows, 203 priority",
     ),
     Path("docs/CLAIM_CATALOG.md"): (
         "Cities city-name rows are imported",
         "Cities ELS run is ready",
+        "14 transcription review rows, 203 priority",
     ),
     Path("docs/CONSOLIDATED_FINDINGS.md"): (
         "Cities city-name rows are imported",
         "Cities ELS run is ready",
+        "14 transcription review rows, 203 priority",
     ),
     Path("docs/REMAINING_WORK_REGISTER.md"): (
         "Cities city-name rows are imported",
         "Cities ELS run is ready",
+        "14 transcription review rows, 203 priority",
     ),
     Path("protocols/README.md"): (
         "Cities city-name rows are imported",
         "Cities ELS run is ready",
+        "14 transcription review rows, 203 priority",
     ),
     Path("reports/real_report_run/summary.md"): (
         "| Source-row imports | 1 |",
         "| ELS runs | 1 |",
         "| Compactness runs | 1 |",
         "Cities ELS run is ready",
+        "14 transcription review rows, 203 priority",
     ),
 }
 
