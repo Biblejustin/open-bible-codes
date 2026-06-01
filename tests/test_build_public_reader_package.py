@@ -69,9 +69,12 @@ def test_builds_reader_package_from_whitelisted_docs(tmp_path, monkeypatch) -> N
         encoding="utf-8"
     )
     assert "Reader-path guard: project findings overview" in package_readme
-    assert "7. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`" in package_readme
-    assert "8. `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`" in package_readme
-    assert "9. `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`" in package_readme
+    assert "6. `docs/CONSOLIDATED_FINDINGS.md`" in package_readme
+    assert "7. `docs/REAL_REPORT_RUN.md`" in package_readme
+    assert "8. `docs/REMAINING_WORK_REGISTER.md`" in package_readme
+    assert "10. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`" in package_readme
+    assert "11. `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`" in package_readme
+    assert "12. `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`" in package_readme
 
 
 def test_reader_package_includes_project_findings_references() -> None:
