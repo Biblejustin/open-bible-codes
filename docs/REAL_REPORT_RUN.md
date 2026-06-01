@@ -171,6 +171,8 @@ This assembly run includes:
   `docs/KJVA_HAKKAAC_APOCRYPHA_COLLATION_AUDIT.md`
 - KJVA Hakkaac source-lock decision packet:
   `docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md`
+- KJVA Gutenberg plus Hakkaac split-source role sidecar:
+  `docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md`
 - KJVA Wikisource candidate source-status audit:
   `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - KJVA Wikisource book-coverage probe:
@@ -297,8 +299,13 @@ It requires:
   `SIR 44:23` and `MAN 1:1..15` blocker rows, and no tracked Bible text;
 - KJVA Hakkaac source-lock decision packet keeps Hakkaac as candidate evidence
   only, keeps current eBible KJVA as the rerun baseline, names `SIR 19:1` as
-  the blocked drift row, blocks Project Gutenberg plus Hakkaac split-source
-  use without a sidecar, and keeps source-lock ready at 0;
+  the blocked drift row, names Project Gutenberg plus Hakkaac split-source
+  use as needing a sidecar, and keeps source-lock ready at 0;
+- KJVA Gutenberg plus Hakkaac split-source role sidecar writes the missing
+  role/order boundary as planning-only evidence, with Gutenberg as future
+  primary candidate stream, Hakkaac as marker/collation witness-only, current
+  eBible as rerun-only, 7 role rows, 6 unresolved blocker rows, source-lock
+  ready at 0, and result-ready at 0;
 - KJVA Wikisource candidate source audit stays metadata-only, with no Bible
   text retained, no corpus import ready, and no result-bearing output;
 - KJVA Wikisource book-coverage probe stays metadata-only, with 36 existing

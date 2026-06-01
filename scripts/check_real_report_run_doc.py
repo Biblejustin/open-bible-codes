@@ -69,6 +69,8 @@ REQUIRED_PHRASES = (
     "Cities source-row lock status",
     "Cities source-row lock decision records stay aligned to the 14-row evidence packet before any populated source-row lock can pass preflight",
     "study-mapping CSV schemas retain exact columns, required locked values, ISO `locked_at` dates, supported language markers, tracked term IDs",
+    "KJVA Gutenberg plus Hakkaac split-source role sidecar writes the missing role/order boundary as planning-only evidence",
+    "Hakkaac as marker/collation witness-only",
 )
 
 

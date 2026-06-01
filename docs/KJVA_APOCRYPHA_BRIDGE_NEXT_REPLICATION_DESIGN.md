@@ -100,7 +100,12 @@ Online source candidates found for possible future audit:
   current eBible KJVA as the rerun baseline, names `SIR 19:1` as the blocked
   drift decision, and blocks any Project Gutenberg plus Hakkaac split-source
   result stream without a source-order and source-role sidecar:
-  `docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md`.
+  `docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md`. Current Gutenberg plus
+  Hakkaac split-source role sidecar writes that role/order boundary as a
+  planning artifact only: Gutenberg remains the future primary candidate
+  stream, Hakkaac remains marker/collation witness-only, and source-use,
+  `SIR 19:1`, Prayer of Manasseh, term/control, and study-lock blockers remain
+  open: `docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md`.
 - [CrossWire GitLab KJV/KJVA](https://gitlab.com/crosswire-bible-society/kjv):
   possible independent metadata candidate because KJVA/KJVDC path names are
   present. Current tracked status audit:

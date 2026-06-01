@@ -1,0 +1,29 @@
+name = "kjva_gutenberg_hakkaac_split_source_role_sidecar"
+description = "Build a non-text source-role/order sidecar for the Gutenberg plus Hakkaac KJVA candidate path."
+manifest_out = "reports/kjva_gutenberg_hakkaac_split_source_role_sidecar/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "kjva_gutenberg_hakkaac_split_source_role_sidecar"
+description = "Write source roles, order boundary, and unresolved blockers without Bible text or result claims."
+argv = ["-m", "scripts.build_kjva_gutenberg_hakkaac_split_source_role_sidecar"]
+inputs = [
+  "scripts/build_kjva_gutenberg_hakkaac_split_source_role_sidecar.py",
+  "reports/kjva_current_source_lock_sidecar/summary.csv",
+  "reports/kjva_gutenberg_source_lock_decision_packet/decisions.csv",
+  "reports/kjva_gutenberg_source_lock_decision_packet/summary.csv",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/marker_diff.csv",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/boundary_options.csv",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/summary.csv",
+  "reports/kjva_hakkaac_source_lock_decision_packet/decisions.csv",
+  "reports/kjva_hakkaac_source_lock_decision_packet/drift_rows.csv",
+  "reports/kjva_hakkaac_source_lock_decision_packet/summary.csv",
+]
+outputs = [
+  "reports/kjva_gutenberg_hakkaac_split_source_role_sidecar/source_roles.csv",
+  "reports/kjva_gutenberg_hakkaac_split_source_role_sidecar/unresolved_blockers.csv",
+  "reports/kjva_gutenberg_hakkaac_split_source_role_sidecar/summary.csv",
+  "docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md",
+  "reports/kjva_gutenberg_hakkaac_split_source_role_sidecar/manifest.json",
+]

@@ -2673,3 +2673,27 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/check_kjva_current_source_lock_sidecar_doc.py`, and wired the
   sidecar into `scripts/preflight_real_report_run.py` plus
   `protocols/real_report_run.toml`.
+
+## KJVA Gutenberg Hakkaac Split-Source Role Sidecar
+
+- Added `docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md` as a
+  non-text source-role/order sidecar for the Project Gutenberg plus Hakkaac
+  candidate path.
+- Current sidecar status: 7 role rows, 6 unresolved blocker rows, 2
+  policy-ready role rows, 2 recommended-but-not-locked role rows, 2 blocked
+  role rows, and 1 candidate-not-locked role row.
+- Current role boundary: Project Gutenberg remains the future primary
+  candidate stream, Hakkaac remains marker/collation witness-only, and current
+  eBible KJVA remains the rerun-only baseline.
+- Current unresolved blockers: `SIR 44:23` Gutenberg marker gap, Prayer of
+  Manasseh unmarked Gutenberg section, `SIR 19:1` Hakkaac/local length drift,
+  Hakkaac source-use boundary, split-source result boundary, and Gutenberg
+  source-stream boundary.
+- This closes only the missing written role/order boundary. It does not close
+  source-use, drift, term/control, or study-lock blockers and does not change
+  KJVA bridge result status.
+- Added `protocols/kjva_gutenberg_hakkaac_split_source_role_sidecar.toml`,
+  `scripts/build_kjva_gutenberg_hakkaac_split_source_role_sidecar.py`, and
+  `scripts/check_kjva_gutenberg_hakkaac_split_source_role_sidecar_doc.py`, and
+  wired the sidecar into `scripts/preflight_real_report_run.py` plus
+  `protocols/real_report_run.toml`.

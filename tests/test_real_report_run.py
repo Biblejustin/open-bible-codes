@@ -219,6 +219,14 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/build_kjva_gutenberg_hakkaac_split_source_role_sidecar.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_kjva_gutenberg_hakkaac_split_source_role_sidecar_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/build_kjva_gutenberg_source_lock_blocker_packet.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -279,6 +287,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "docs/KJVA_CURRENT_SOURCE_LOCK_SIDECAR.md",
             steps_by_id["preflight"]["inputs"],
         )
@@ -335,6 +347,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "protocols/kjva_gutenberg_hakkaac_split_source_role_sidecar.toml",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "protocols/kjva_current_source_lock_sidecar.toml",
             steps_by_id["preflight"]["inputs"],
         )
@@ -379,6 +395,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "reports/kjva_gutenberg_hakkaac_split_source_role_sidecar/summary.csv",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "reports/kjva_current_source_lock_sidecar/summary.csv",
             steps_by_id["preflight"]["inputs"],
         )
@@ -395,6 +415,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("kjva_hakkaac_apocrypha_marker_coverage", steps_by_id)
         self.assertIn("kjva_hakkaac_apocrypha_collation", steps_by_id)
         self.assertIn("kjva_hakkaac_source_lock_decision_packet", steps_by_id)
+        self.assertIn("kjva_gutenberg_hakkaac_split_source_role_sidecar", steps_by_id)
         self.assertIn("kjva_current_source_lock_sidecar", steps_by_id)
         self.assertIn("kjva_wikisource_candidate_source_audit", steps_by_id)
         self.assertIn("kjva_wikisource_book_coverage_probe", steps_by_id)
@@ -2542,6 +2563,14 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/build_kjva_gutenberg_hakkaac_split_source_role_sidecar.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_kjva_gutenberg_hakkaac_split_source_role_sidecar_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/build_kjva_current_source_lock_sidecar.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -2594,6 +2623,10 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "docs/KJVA_CURRENT_SOURCE_LOCK_SIDECAR.md",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -2631,6 +2664,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "protocols/kjva_hakkaac_source_lock_decision_packet.toml",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "protocols/kjva_gutenberg_hakkaac_split_source_role_sidecar.toml",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -2743,6 +2780,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/kjva_hakkaac_source_lock_decision_packet/manifest.json",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjva_gutenberg_hakkaac_split_source_role_sidecar/summary.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjva_gutenberg_hakkaac_split_source_role_sidecar/manifest.json",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -2937,6 +2982,10 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "kjva_hakkaac_source_lock_decision_packet_doc_failures",
+                payload,
+            )
+            self.assertIn(
+                "kjva_gutenberg_hakkaac_split_source_role_sidecar_doc_failures",
                 payload,
             )
             self.assertIn(
@@ -3246,6 +3295,27 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "KJVA Hakkaac source-lock decision packet failures: missing source-lock decision boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_kjva_split_source_role_sidecar_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_kjva_gutenberg_hakkaac_split_source_role_sidecar_doc,
+                "validate_kjva_gutenberg_hakkaac_split_source_role_sidecar_doc",
+                return_value=["missing split-source role boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["kjva_gutenberg_hakkaac_split_source_role_sidecar_doc_failures"],
+                ["missing split-source role boundary"],
+            )
+            self.assertIn(
+                "KJVA Gutenberg Hakkaac split-source role sidecar failures: missing split-source role boundary",
                 payload["failures"],
             )
 
