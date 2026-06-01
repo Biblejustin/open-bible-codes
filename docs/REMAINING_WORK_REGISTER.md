@@ -2984,5 +2984,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   configured reader-link source set.
 - Updated README/package README wording so the release and package docs now
   refer to configured reader-link sources rather than only README/Start Here.
+- Added source-path guards to the public-reader package copier so package
+  sources must be relative `.md`/`.json` paths without `..` segments; absolute
+  and parent-traversal extra-doc inputs cannot escape the package tree.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.

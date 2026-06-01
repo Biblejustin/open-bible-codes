@@ -210,6 +210,7 @@ def extract_marked_section(text: str, marker: str) -> str:
 
 
 def copy_checked_file(source: Path, destination: Path) -> CopiedFile:
+    validate_package_source_path(source)
     if not source.exists():
         raise FileNotFoundError(f"missing package source: {source}")
     if is_forbidden_source(source):
@@ -223,6 +224,15 @@ def copy_checked_file(source: Path, destination: Path) -> CopiedFile:
         bytes=len(data),
         sha256=hashlib.sha256(data).hexdigest(),
     )
+
+
+def validate_package_source_path(path: Path) -> None:
+    if path.is_absolute():
+        raise ValueError(f"refusing absolute package source path: {path}")
+    if ".." in path.parts:
+        raise ValueError(f"refusing package source path with parent segment: {path}")
+    if path.suffix.lower() not in {".md", ".json"}:
+        raise ValueError(f"refusing unsupported package source suffix: {path}")
 
 
 def is_forbidden_source(path: Path) -> bool:

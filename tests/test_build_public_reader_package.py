@@ -298,3 +298,43 @@ def test_refuses_raw_source_paths(tmp_path, monkeypatch) -> None:
             Path("data/raw/private.txt"),
             Path("reports/public_reader_package/data/raw/private.txt"),
         )
+
+
+def test_refuses_absolute_package_source_paths(tmp_path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    absolute = tmp_path / "docs" / "absolute.md"
+    _write(absolute, "# Absolute\n")
+
+    with pytest.raises(ValueError) as excinfo:
+        package.copy_checked_file(
+            absolute,
+            Path("reports/public_reader_package/docs/absolute.md"),
+        )
+
+    assert "refusing absolute package source path" in str(excinfo.value)
+
+
+def test_refuses_parent_segment_package_source_paths(tmp_path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    _write(Path("outside.md"), "# Outside\n")
+
+    with pytest.raises(ValueError) as excinfo:
+        package.copy_checked_file(
+            Path("../outside.md"),
+            Path("reports/public_reader_package/outside.md"),
+        )
+
+    assert "refusing package source path with parent segment" in str(excinfo.value)
+
+
+def test_refuses_unsupported_package_source_suffix(tmp_path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    _write(Path("docs/notes.txt"), "notes\n")
+
+    with pytest.raises(ValueError) as excinfo:
+        package.copy_checked_file(
+            Path("docs/notes.txt"),
+            Path("reports/public_reader_package/docs/notes.txt"),
+        )
+
+    assert "refusing unsupported package source suffix" in str(excinfo.value)
