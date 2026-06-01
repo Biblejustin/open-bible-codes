@@ -94,6 +94,15 @@ def test_reader_package_includes_no_input_handoff_references() -> None:
             assert Path(reference) in package_docs
 
 
+def test_reader_package_includes_start_here_references() -> None:
+    package_paths = set(package.DEFAULT_DOC_PATHS) | set(package.DEFAULT_REPORT_PATHS)
+    text = Path("docs/START_HERE.md").read_text(encoding="utf-8")
+    references = sorted(set(package.PACKAGED_READER_LINK_RE.findall(text)))
+    assert references
+    for reference in references:
+        assert Path(reference) in package_paths
+
+
 def test_refuses_stale_project_findings_overview(tmp_path, monkeypatch) -> None:
     monkeypatch.chdir(tmp_path)
     for path in package.DEFAULT_DOC_PATHS:
@@ -105,6 +114,30 @@ def test_refuses_stale_project_findings_overview(tmp_path, monkeypatch) -> None:
 
     assert "reader package input validation failed" in str(excinfo.value)
     assert "missing heading: ## Short Answer" in str(excinfo.value)
+
+
+def test_refuses_unpackaged_start_here_reference(tmp_path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    for path in package.DEFAULT_DOC_PATHS:
+        _write(path, _default_doc_text(path))
+    for path in package.DEFAULT_REPORT_PATHS:
+        _write(path, "# report\n\nbody\n" if path.suffix == ".md" else "{}\n")
+    _write(
+        overview_check.DEFAULT_START_HERE,
+        "# Start Here\n\n"
+        "1. `docs/PROJECT_FINDINGS_OVERVIEW.md` for the whole-project findings summary.\n"
+        "2. `docs/NOT_IN_PACKAGE.md` for a missing package doc.\n\n"
+        "no current row should be presented as a public claim\n",
+    )
+
+    with pytest.raises(ValueError) as excinfo:
+        package.build_public_reader_package(out_dir=Path("reports/public_reader_package"))
+
+    assert "reader package input validation failed" in str(excinfo.value)
+    assert (
+        "docs/START_HERE.md references docs/NOT_IN_PACKAGE.md "
+        "but package does not include it"
+    ) in str(excinfo.value)
 
 
 def test_refuses_raw_source_paths(tmp_path, monkeypatch) -> None:

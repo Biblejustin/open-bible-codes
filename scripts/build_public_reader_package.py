@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import shutil
 import subprocess
 from dataclasses import dataclass
@@ -43,6 +44,8 @@ DEFAULT_REPORT_PATHS = (
     Path("reports/real_report_run/manifest.json"),
     Path("reports/real_report_run/protocol_run.manifest.json"),
 )
+READER_LINK_SOURCE_PATHS = (Path("docs/START_HERE.md"),)
+PACKAGED_READER_LINK_RE = re.compile(r"`((?:docs|reports)/[^`]+\.md)`")
 
 
 @dataclass(frozen=True)
@@ -95,8 +98,8 @@ def build_public_reader_package(
     out_dir.mkdir(parents=True, exist_ok=True)
 
     doc_paths = [*DEFAULT_DOC_PATHS, *(extra_docs or [])]
-    validate_reader_package_inputs(doc_paths)
     report_paths = [path for path in DEFAULT_REPORT_PATHS if path.exists()]
+    validate_reader_package_inputs(doc_paths, report_paths)
     copied: list[CopiedFile] = []
     for source in doc_paths:
         copied.append(copy_checked_file(source, out_dir / source))
@@ -109,20 +112,45 @@ def build_public_reader_package(
     return copied
 
 
-def validate_reader_package_inputs(doc_paths: list[Path]) -> None:
+def validate_reader_package_inputs(
+    doc_paths: list[Path],
+    report_paths: list[Path] | None = None,
+) -> None:
     doc_set = set(doc_paths)
+    report_set = set(report_paths or [])
+    failures: list[str] = []
     overview_inputs = {
         check_project_findings_overview_doc.DEFAULT_DOC,
         check_project_findings_overview_doc.DEFAULT_README,
         check_project_findings_overview_doc.DEFAULT_START_HERE,
     }
-    if not overview_inputs.issubset(doc_set):
-        return
-    failures = check_project_findings_overview_doc.validate_project_findings_overview()
+    if overview_inputs.issubset(doc_set):
+        failures.extend(
+            check_project_findings_overview_doc.validate_project_findings_overview()
+        )
+    failures.extend(validate_packaged_reader_links(doc_set | report_set))
     if failures:
         raise ValueError(
             "reader package input validation failed: " + "; ".join(failures)
         )
+
+
+def validate_packaged_reader_links(package_paths: set[Path]) -> list[str]:
+    failures: list[str] = []
+    for source in READER_LINK_SOURCE_PATHS:
+        if source not in package_paths:
+            continue
+        if not source.exists():
+            failures.append(f"{source} is missing")
+            continue
+        text = source.read_text(encoding="utf-8")
+        references = sorted(set(PACKAGED_READER_LINK_RE.findall(text)))
+        for reference in references:
+            if Path(reference) not in package_paths:
+                failures.append(
+                    f"{source} references {reference} but package does not include it"
+                )
+    return failures
 
 
 def copy_checked_file(source: Path, destination: Path) -> CopiedFile:
