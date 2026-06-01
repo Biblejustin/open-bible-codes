@@ -134,6 +134,39 @@ def _default_report_text(path: Path) -> str:
                     "span_same_category": 100,
                     "hidden_path_only": 100,
                 },
+                "all_codes_followup_selection_rows": 83,
+                "all_codes_followup_letter_path_rows": 310,
+                "all_codes_followup_letter_paths_manifest_rows": 310,
+                "all_codes_followup_letter_rows": 1394,
+                "all_codes_followup_letter_path_mismatches": 0,
+                "all_codes_followup_context_rows": 310,
+                "all_codes_followup_context_excerpt_rows": 310,
+                "all_codes_followup_context_center_contains_rows": 73,
+                "all_codes_followup_context_span_contains_rows": 100,
+                "all_codes_followup_extension_summary_rows": 83,
+                "all_codes_followup_extension_rows": 692,
+                "all_codes_followup_compound_extension_rows": 55,
+                "all_codes_followup_extension_selected_rows": 69,
+                "all_codes_followup_selected_rows_with_compound_extensions": 13,
+                "all_codes_followup_extension_max_length": 5,
+                "all_codes_compound_extension_control_rows": 46,
+                "all_codes_compound_extension_control_targets": 46,
+                "all_codes_compound_extension_control_term_samples": 250,
+                "all_codes_compound_extension_control_random_samples": 250,
+                "all_codes_compound_extension_confirmatory_rows": 5,
+                "all_codes_compound_extension_confirmatory_targets": 5,
+                "all_codes_compound_extension_confirmatory_term_samples": 5000,
+                "all_codes_compound_extension_confirmatory_random_samples": 5000,
+                "all_codes_compound_extension_confirmatory_protocol_status": "success",
+                "all_codes_followup_review_rows": 83,
+                "all_codes_followup_review_summary_rows": 83,
+                "all_codes_followup_review_status_counts": {
+                    "center_verse_context_review": 24,
+                    "hidden_path_review": 9,
+                    "related_center_word_review": 15,
+                    "span_context_review": 24,
+                    "strongest_manual_review": 11,
+                },
             },
             indent=2,
         ) + "\n"
@@ -359,6 +392,26 @@ def test_detects_packaged_real_report_manifest_external_claim_drift(
 
     assert (
         f"{manifest_path} external_claim_all_codes_triage_rows drifted: 925 != 926"
+    ) in failures
+
+
+def test_detects_packaged_real_report_manifest_all_codes_drift(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    manifest_path = out_dir / "reports/real_report_run/manifest.json"
+    report_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    report_manifest["all_codes_followup_letter_path_mismatches"] = 1
+    manifest_path.write_text(
+        json.dumps(report_manifest, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert (
+        f"{manifest_path} all_codes_followup_letter_path_mismatches drifted: 1 != 0"
     ) in failures
 
 
