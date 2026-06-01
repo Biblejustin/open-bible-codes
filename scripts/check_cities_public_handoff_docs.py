@@ -118,6 +118,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "Cities no-input handoff",
         "8 handoff rows",
         "6 manual-input-needed rows",
+        "61 packet pages, 41 reviewed packet pages, and 20 unreviewed packet pages",
         "no Cities result allowed",
     ),
     Path("protocols/README.md"): (

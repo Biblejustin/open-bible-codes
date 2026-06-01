@@ -251,8 +251,9 @@ recomputed summary totals, and manifest metadata. The OCR review packet records
 schema, sidecar path scope, recomputed summary totals, and manifest metadata.
 The OCR review checklist groups the 11 packet PDFs into local contact-sheet review
 rows; the checklist checker locks contact-sheet path scope, recomputed summary
-totals, and manifest contact-summary metadata. The page-image review labels all
-41 currently reviewed pages; the page-review checker locks builder-derived decision rows, summary
+totals, and manifest contact-summary metadata. The page-image review now
+records 61 packet pages, 41 reviewed packet pages, and 20 unreviewed packet
+pages; the page-review checker locks builder-derived decision rows, summary
 rows, manifest inputs, and no-source-row-use boundaries. The source-row lock
 queue isolates 14 candidate pages across three labels, the worksheet assigns 14
 lock decision ids, and the evidence packet joins those ids to PDF metadata,
@@ -321,9 +322,9 @@ python3 -m scripts.run_protocol protocols/cities_recovered_pdf_text_audit.toml -
 
 Current result:
 
-- Recovered PDF rows audited: 12.
+- Recovered PDF rows audited: 17.
 - Extractable text rows: 5.
-- Zero-text rows: 4.
+- Zero-text rows: 9.
 - Garbled/non-Latin extract rows: 3.
 - Protocol anchors found: 5 of 5.
 - Boundary: this separates source-review shapes only; no OCR, city-name
@@ -477,6 +478,9 @@ python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_ocr_page_review.
 
 Current result:
 
+- Packet pages: 61.
+- Reviewed packet pages: 41.
+- Unreviewed packet pages: 20.
 - Review rows: 41.
 - Reviewed pages: 41.
 - OCR-empty pages reviewed: 2.
