@@ -139,8 +139,12 @@ def _default_report_text(path: Path) -> str:
                         "return_code": 0,
                         "skipped": False,
                         "inputs": [
+                            "reports/wrr_1994/wrr_no_input_handoff_status_summary.csv",
+                            "reports/wrr_1994/wrr_no_input_handoff_status.manifest.json",
                             "reports/cities_no_input_handoff_status/summary.csv",
                             "reports/cities_no_input_handoff_status/manifest.json",
+                            "reports/kjva_no_input_handoff_status/summary.csv",
+                            "reports/kjva_no_input_handoff_status/manifest.json",
                         ],
                         "outputs": [
                             "reports/real_report_run/summary.md",
@@ -337,7 +341,10 @@ def test_detects_packaged_real_report_protocol_manifest_summary_input_drift(
 
     failures = check.validate_public_reader_package(out_dir)
 
-    assert f"{protocol_path} real_report_summary missing Cities inputs" in failures
+    assert (
+        f"{protocol_path} real_report_summary missing no-input handoff inputs"
+        in failures
+    )
 
 
 def test_detects_missing_required_manifest_source(tmp_path, monkeypatch) -> None:

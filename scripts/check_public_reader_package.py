@@ -554,11 +554,15 @@ def validate_packaged_real_report_protocol_manifest(
         summary,
         key="inputs",
         required=(
+            "reports/wrr_1994/wrr_no_input_handoff_status_summary.csv",
+            "reports/wrr_1994/wrr_no_input_handoff_status.manifest.json",
             "reports/cities_no_input_handoff_status/summary.csv",
             "reports/cities_no_input_handoff_status/manifest.json",
+            "reports/kjva_no_input_handoff_status/summary.csv",
+            "reports/kjva_no_input_handoff_status/manifest.json",
         ),
     ):
-        failures.append(f"{path} real_report_summary missing Cities inputs")
+        failures.append(f"{path} real_report_summary missing no-input handoff inputs")
     elif not protocol_step_contains_all(
         summary,
         key="outputs",
