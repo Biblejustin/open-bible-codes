@@ -131,6 +131,10 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
         "Exact published WRR reproduction | forbidden | 72 of 163 defined; gap 91",
         "Claim boundary: KJVA no-input handoff only; no new result.",
         "Current read: Cities source-row pages remain a source-review lane only.",
+        "Skip 2..100 count hits | 58,715,011",
+        "Hidden-path rows retained | 8,443,775",
+        "Triage queue rows | 926",
+        "reproducing any external claim still requires that source's exact spelling",
     ),
 }
 
@@ -460,6 +464,27 @@ def validate_packaged_real_report_manifest(
             "cities_no_input_handoff_claim_status": (
                 "cities_no_input_handoff_blocks_source_import_and_results"
             ),
+            "external_claim_count_summary_rows": 97,
+            "external_claim_count_term_sets": 8,
+            "external_claim_count_corpora": 21,
+            "external_claim_count_total_hits": 58715011,
+            "external_claim_count_manifest_rows": 3708,
+            "external_claim_all_codes_summary_rows": 3708,
+            "external_claim_all_codes_hit_rows": 8443775,
+            "external_claim_all_codes_context_hits": 7114738,
+            "external_claim_all_codes_triage_rows": 926,
+            "external_claim_all_codes_triage_bucket_counts": {
+                "center_word_exact": 100,
+                "center_word_same_concept": 26,
+                "center_word_same_category": 100,
+                "center_verse_exact": 100,
+                "center_verse_same_concept": 100,
+                "center_verse_same_category": 100,
+                "span_exact": 100,
+                "span_same_concept": 100,
+                "span_same_category": 100,
+                "hidden_path_only": 100,
+            },
         }
         for key, expected_value in checks.items():
             if report_manifest.get(key) != expected_value:

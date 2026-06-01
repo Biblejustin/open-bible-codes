@@ -113,6 +113,27 @@ def _default_report_text(path: Path) -> str:
                 "cities_no_input_handoff_claim_status": (
                     "cities_no_input_handoff_blocks_source_import_and_results"
                 ),
+                "external_claim_count_summary_rows": 97,
+                "external_claim_count_term_sets": 8,
+                "external_claim_count_corpora": 21,
+                "external_claim_count_total_hits": 58715011,
+                "external_claim_count_manifest_rows": 3708,
+                "external_claim_all_codes_summary_rows": 3708,
+                "external_claim_all_codes_hit_rows": 8443775,
+                "external_claim_all_codes_context_hits": 7114738,
+                "external_claim_all_codes_triage_rows": 926,
+                "external_claim_all_codes_triage_bucket_counts": {
+                    "center_word_exact": 100,
+                    "center_word_same_concept": 26,
+                    "center_word_same_category": 100,
+                    "center_verse_exact": 100,
+                    "center_verse_same_concept": 100,
+                    "center_verse_same_category": 100,
+                    "span_exact": 100,
+                    "span_same_concept": 100,
+                    "span_same_category": 100,
+                    "hidden_path_only": 100,
+                },
             },
             indent=2,
         ) + "\n"
@@ -291,6 +312,26 @@ def test_detects_packaged_real_report_manifest_cities_boundary_drift(
 
     assert (
         f"{manifest_path} cities_no_input_handoff_result_allowed drifted: 1 != 0"
+    ) in failures
+
+
+def test_detects_packaged_real_report_manifest_external_claim_drift(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    manifest_path = out_dir / "reports/real_report_run/manifest.json"
+    report_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    report_manifest["external_claim_all_codes_triage_rows"] = 925
+    manifest_path.write_text(
+        json.dumps(report_manifest, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert (
+        f"{manifest_path} external_claim_all_codes_triage_rows drifted: 925 != 926"
     ) in failures
 
 
