@@ -2628,3 +2628,27 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Added `protocols/kjva_hakkaac_apocrypha_collation.toml`,
   `scripts/analyze_kjva_hakkaac_apocrypha_collation.py`, and
   `scripts/check_kjva_hakkaac_apocrypha_collation_doc.py`.
+
+## KJVA Hakkaac Source-Lock Decision Packet
+
+- Added `docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md` as a non-text
+  decision packet over the Hakkaac marker-coverage and ignored-local collation
+  evidence.
+- Current packet status: 9 decision rows, 3 policy-ready rows, 2
+  recommended-but-not-locked rows, 3 blocked rows, and 1 candidate-not-locked
+  row.
+- Current recommendation: keep Hakkaac as candidate evidence only, keep
+  current eBible KJVA as the rerun baseline, do not patch either source
+  automatically for `SIR 19:1`, and do not combine Project Gutenberg plus
+  Hakkaac into a result-bearing split-source stream without a source-order and
+  source-role sidecar.
+- Current blockers: `SIR 19:1` remains a named normalized-letter drift, and
+  split-source use remains blocked until source roles and order are written
+  into a study-lock sidecar.
+- No Bible text is committed, normalized into a tracked corpus, or imported by
+  this packet; it does not change KJVA bridge result status.
+- Added `protocols/kjva_hakkaac_source_lock_decision_packet.toml`,
+  `scripts/build_kjva_hakkaac_source_lock_decision_packet.py`, and
+  `scripts/check_kjva_hakkaac_source_lock_decision_packet_doc.py`, and wired
+  the packet into `scripts/preflight_real_report_run.py` plus
+  `protocols/real_report_run.toml`.

@@ -28,6 +28,11 @@ REQUIRED_PHRASES = (
     "13 of 14 exact book-stream matches",
     "exact `SIR 44:23` and `MAN 1:1..15` blocker rows",
     "no tracked Bible text",
+    "source-lock decision packet keeps Hakkaac as candidate evidence only",
+    "keeps current eBible KJVA as the rerun baseline",
+    "names `SIR 19:1` as the blocked drift decision",
+    "blocks any Project Gutenberg plus Hakkaac split-source result stream",
+    "source-order and source-role sidecar",
 )
 REQUIRED_LINKS = (
     "terms/kjv_apocrypha_bridge_prospective_terms.csv",
@@ -46,6 +51,7 @@ REQUIRED_LINKS = (
     "docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md",
     "docs/KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md",
     "docs/KJVA_HAKKAAC_APOCRYPHA_COLLATION_AUDIT.md",
+    "docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md",
     "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",

@@ -203,6 +203,14 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/build_kjva_hakkaac_source_lock_decision_packet.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_kjva_hakkaac_source_lock_decision_packet_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/build_kjva_gutenberg_source_lock_blocker_packet.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -259,6 +267,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "docs/KJVA_SOURCE_CANDIDATE_STATUS.md",
             steps_by_id["preflight"]["inputs"],
         )
@@ -307,6 +319,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "protocols/kjva_hakkaac_source_lock_decision_packet.toml",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "protocols/kjva_wikisource_candidate_source_audit.toml",
             steps_by_id["preflight"]["inputs"],
         )
@@ -343,6 +359,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "reports/kjva_hakkaac_source_lock_decision_packet/summary.csv",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "reports/kjva_wikisource_candidate_source/summary.csv",
             steps_by_id["preflight"]["inputs"],
         )
@@ -354,6 +374,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("kjva_hakkaac_apocrypha_boundary_candidate", steps_by_id)
         self.assertIn("kjva_hakkaac_apocrypha_marker_coverage", steps_by_id)
         self.assertIn("kjva_hakkaac_apocrypha_collation", steps_by_id)
+        self.assertIn("kjva_hakkaac_source_lock_decision_packet", steps_by_id)
         self.assertIn("kjva_wikisource_candidate_source_audit", steps_by_id)
         self.assertIn("kjva_wikisource_book_coverage_probe", steps_by_id)
         self.assertIn("docs/INDEX.md", steps_by_id["preflight"]["inputs"])
@@ -2492,6 +2513,14 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/build_kjva_hakkaac_source_lock_decision_packet.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_kjva_hakkaac_source_lock_decision_packet_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/build_kjva_gutenberg_source_lock_blocker_packet.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -2532,6 +2561,10 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -2561,6 +2594,10 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "protocols/kjva_hakkaac_apocrypha_collation.toml",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "protocols/kjva_hakkaac_source_lock_decision_packet.toml",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -2661,6 +2698,14 @@ class RealReportRunTests(unittest.TestCase):
         )
         self.assertIn(
             "reports/kjva_hakkaac_apocrypha_collation/manifest.json",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjva_hakkaac_source_lock_decision_packet/summary.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjva_hakkaac_source_lock_decision_packet/manifest.json",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
@@ -2843,6 +2888,10 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "kjva_hakkaac_apocrypha_collation_doc_failures",
+                payload,
+            )
+            self.assertIn(
+                "kjva_hakkaac_source_lock_decision_packet_doc_failures",
                 payload,
             )
             self.assertIn(
@@ -3127,6 +3176,27 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "KJVA Hakkaac collation failures: missing ignored-local boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_kjva_hakkaac_source_lock_decision_packet_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_kjva_hakkaac_source_lock_decision_packet_doc,
+                "validate_kjva_hakkaac_source_lock_decision_packet_doc",
+                return_value=["missing source-lock decision boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["kjva_hakkaac_source_lock_decision_packet_doc_failures"],
+                ["missing source-lock decision boundary"],
+            )
+            self.assertIn(
+                "KJVA Hakkaac source-lock decision packet failures: missing source-lock decision boundary",
                 payload["failures"],
             )
 

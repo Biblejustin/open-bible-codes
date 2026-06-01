@@ -91,7 +91,12 @@ Online source candidates found for possible future audit:
   matches, one `SIR 19:1` one-letter normalized length drift, 13 of 14 exact
   book-stream matches, exact `SIR 44:23` and `MAN 1:1..15` blocker rows, and
   no tracked Bible text:
-  `docs/KJVA_HAKKAAC_APOCRYPHA_COLLATION_AUDIT.md`.
+  `docs/KJVA_HAKKAAC_APOCRYPHA_COLLATION_AUDIT.md`. Current Hakkaac
+  source-lock decision packet keeps Hakkaac as candidate evidence only, keeps
+  current eBible KJVA as the rerun baseline, names `SIR 19:1` as the blocked
+  drift decision, and blocks any Project Gutenberg plus Hakkaac split-source
+  result stream without a source-order and source-role sidecar:
+  `docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md`.
 - [CrossWire GitLab KJV/KJVA](https://gitlab.com/crosswire-bible-society/kjv):
   possible independent metadata candidate because KJVA/KJVDC path names are
   present. Current tracked status audit:

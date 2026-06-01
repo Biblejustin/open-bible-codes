@@ -1,0 +1,25 @@
+name = "kjva_hakkaac_source_lock_decision_packet"
+description = "Build a non-text Hakkaac KJVA Apocrypha source-lock decision packet from marker and collation evidence."
+manifest_out = "reports/kjva_hakkaac_source_lock_decision_packet/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "kjva_hakkaac_source_lock_decision_packet"
+description = "Convert Hakkaac marker/collation evidence into explicit source-lock blockers and recommendations."
+argv = ["-m", "scripts.build_kjva_hakkaac_source_lock_decision_packet"]
+inputs = [
+  "scripts/build_kjva_hakkaac_source_lock_decision_packet.py",
+  "reports/kjva_hakkaac_apocrypha_marker_coverage/summary.csv",
+  "reports/kjva_hakkaac_apocrypha_collation/summary.csv",
+  "reports/kjva_hakkaac_apocrypha_collation/book_collation.csv",
+  "reports/kjva_hakkaac_apocrypha_collation/blocker_collation.csv",
+  "reports/kjva_hakkaac_apocrypha_collation/verse_collation.csv",
+]
+outputs = [
+  "reports/kjva_hakkaac_source_lock_decision_packet/decisions.csv",
+  "reports/kjva_hakkaac_source_lock_decision_packet/drift_rows.csv",
+  "reports/kjva_hakkaac_source_lock_decision_packet/summary.csv",
+  "docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md",
+  "reports/kjva_hakkaac_source_lock_decision_packet/manifest.json",
+]
