@@ -201,8 +201,10 @@ Use cautious language:
   candidate pages, 14 populated lock rows, and 14 pending transcription-review
   rows; no source rows imported, and no city-name normalization, ELS searches,
   compactness runs, or p-levels; `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`
-  keeps 8 handoff rows, 61 OCR packet pages, 41 reviewed OCR packet pages,
-  20 unreviewed OCR packet pages, and no Cities result allowed;
+  keeps 8 handoff rows, 6 manual-input-needed rows, 14 transcription review
+  rows, 61 OCR packet pages, 41 reviewed OCR packet pages, 20 unreviewed OCR
+  packet pages, 203 priority line-crop review rows, and no Cities result
+  allowed;
 - current accepted repo-defined 999,999 date-label permutation result keeps the
   selected full source universe, uses the cap-1000 corrected-distance field,
   observes 182 rows and 72 defined `c(w,w')` values, and reports Bonferroni

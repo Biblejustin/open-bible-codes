@@ -45,6 +45,12 @@ REQUIRED_PHRASES_BY_DOC = {
     ),
 }
 
+FORBIDDEN_PHRASES_BY_DOC = {
+    Path("docs/FINAL_REPORT_OUTLINE.md"): (
+        "keeps 8 handoff rows, 61 OCR packet pages",
+    ),
+}
+
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
@@ -74,6 +80,9 @@ def validate_final_report_assembly_docs(root: Path = Path(".")) -> list[str]:
         for phrase in required_phrases:
             if normalize_space(phrase) not in normalized_text:
                 failures.append(f"{relative_path} missing phrase: {phrase}")
+        for phrase in FORBIDDEN_PHRASES_BY_DOC.get(relative_path, ()):
+            if normalize_space(phrase) in normalized_text:
+                failures.append(f"{relative_path} contains forbidden phrase: {phrase}")
     return failures
 
 
