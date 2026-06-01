@@ -194,6 +194,23 @@ def test_detects_missing_required_packaged_phrase_for_each_guarded_doc(
         package_path.write_text(original, encoding="utf-8")
 
 
+def test_detects_default_doc_without_packaged_phrase_guard(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    guarded = dict(check.REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH)
+    guarded.pop(Path("docs/CRITICAL_OMISSION_BREAKS_NULL.md"))
+    monkeypatch.setattr(check, "REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH", guarded)
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert (
+        "default package doc lacks required phrase guard: "
+        "docs/CRITICAL_OMISSION_BREAKS_NULL.md"
+    ) in failures
+
+
 def test_detects_missing_packaged_file(tmp_path, monkeypatch) -> None:
     out_dir = _build_package(tmp_path, monkeypatch)
     (out_dir / "docs/START_HERE.md").unlink()

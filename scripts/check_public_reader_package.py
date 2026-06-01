@@ -174,12 +174,28 @@ def validate_public_reader_package(
 
     failures.extend(validate_manifest_metadata(manifest, package_dir))
     failures.extend(validate_manifest_files(manifest, package_dir))
+    failures.extend(validate_required_packaged_phrase_guard_coverage())
     failures.extend(validate_required_packaged_phrases(package_dir))
     failures.extend(validate_packaged_real_report_summary(manifest, package_dir))
     failures.extend(validate_packaged_real_report_manifest(manifest, package_dir))
     failures.extend(validate_generated_package_readme(manifest, package_dir))
     failures.extend(validate_generated_reader_package(manifest, package_dir))
     failures.extend(validate_no_unmanifested_files(manifest, package_dir))
+    return failures
+
+
+def validate_required_packaged_phrase_guard_coverage() -> list[str]:
+    failures: list[str] = []
+    guarded_package_paths = set(REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH)
+    for source_path in builder.DEFAULT_DOC_PATHS:
+        package_path = builder.SOURCE_PACKAGE_PATH_OVERRIDES.get(
+            source_path,
+            source_path,
+        )
+        if package_path not in guarded_package_paths:
+            failures.append(
+                f"default package doc lacks required phrase guard: {package_path}"
+            )
     return failures
 
 
