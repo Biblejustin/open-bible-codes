@@ -72,6 +72,8 @@ REQUIRED_PHRASES = (
     "KJVA Gutenberg plus Hakkaac split-source role sidecar writes the missing role/order boundary as planning-only evidence",
     "Hakkaac as marker/collation witness-only",
     "KJVA Gutenberg candidate checksum sidecar records eBook 30 and eBook 124 RDF and plain-text SHA-256 identifiers",
+    "KJVA source-policy blocker packet",
+    "docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md",
 )
 
 

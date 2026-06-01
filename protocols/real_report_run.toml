@@ -60,6 +60,8 @@ inputs = [
   "scripts/check_kjva_hakkaac_source_lock_decision_packet_doc.py",
   "scripts/build_kjva_gutenberg_hakkaac_split_source_role_sidecar.py",
   "scripts/check_kjva_gutenberg_hakkaac_split_source_role_sidecar_doc.py",
+  "scripts/build_kjva_source_policy_blocker_packet.py",
+  "scripts/check_kjva_source_policy_blocker_packet_doc.py",
   "scripts/check_real_report_run_doc.py",
   "scripts/check_strongest_candidate_deep_dive_doc.py",
   "els/project_index.py",
@@ -453,6 +455,7 @@ inputs = [
   "docs/KJVA_HAKKAAC_APOCRYPHA_COLLATION_AUDIT.md",
   "docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md",
   "docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md",
+  "docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md",
   "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
   "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
   "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
@@ -510,6 +513,10 @@ inputs = [
   "reports/kjva_gutenberg_hakkaac_split_source_role_sidecar/unresolved_blockers.csv",
   "reports/kjva_gutenberg_hakkaac_split_source_role_sidecar/summary.csv",
   "reports/kjva_gutenberg_hakkaac_split_source_role_sidecar/manifest.json",
+  "reports/kjva_source_policy_blocker_packet/policy_options.csv",
+  "reports/kjva_source_policy_blocker_packet/blockers.csv",
+  "reports/kjva_source_policy_blocker_packet/summary.csv",
+  "reports/kjva_source_policy_blocker_packet/manifest.json",
   "reports/kjva_open_bibles_candidate_source/source_status.csv",
   "reports/kjva_open_bibles_candidate_source/summary.csv",
   "reports/kjva_open_bibles_candidate_source/anchors.csv",
@@ -591,6 +598,7 @@ inputs = [
   "protocols/kjva_hakkaac_apocrypha_collation.toml",
   "protocols/kjva_hakkaac_source_lock_decision_packet.toml",
   "protocols/kjva_gutenberg_hakkaac_split_source_role_sidecar.toml",
+  "protocols/kjva_source_policy_blocker_packet.toml",
   "protocols/kjva_open_bibles_candidate_source_audit.toml",
   "protocols/kjva_wikisource_candidate_source_audit.toml",
   "protocols/external_claim_source_counts.toml",
@@ -2034,6 +2042,26 @@ outputs = [
   "reports/kjva_gutenberg_hakkaac_split_source_role_sidecar/summary.csv",
   "docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md",
   "reports/kjva_gutenberg_hakkaac_split_source_role_sidecar/manifest.json",
+]
+
+[[steps]]
+id = "kjva_source_policy_blocker_packet"
+description = "Aggregate KJVA source-policy options and remaining blockers without importing Bible text."
+argv = ["-m", "scripts.build_kjva_source_policy_blocker_packet"]
+inputs = [
+  "scripts/build_kjva_source_policy_blocker_packet.py",
+  "reports/kjva_current_source_lock_sidecar/summary.csv",
+  "reports/kjva_gutenberg_candidate_checksum_sidecar/summary.csv",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/summary.csv",
+  "reports/kjva_hakkaac_source_lock_decision_packet/summary.csv",
+  "reports/kjva_gutenberg_hakkaac_split_source_role_sidecar/summary.csv",
+]
+outputs = [
+  "reports/kjva_source_policy_blocker_packet/policy_options.csv",
+  "reports/kjva_source_policy_blocker_packet/blockers.csv",
+  "reports/kjva_source_policy_blocker_packet/summary.csv",
+  "docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md",
+  "reports/kjva_source_policy_blocker_packet/manifest.json",
 ]
 
 [[steps]]

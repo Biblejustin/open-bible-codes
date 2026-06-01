@@ -42,6 +42,9 @@ REQUIRED_PHRASES = (
     "Current Gutenberg plus Hakkaac split-source role sidecar",
     "Hakkaac remains marker/collation witness-only",
     "source-use, `SIR 19:1`, Prayer of Manasseh, term/control, and study-lock blockers remain open",
+    "Current source-policy blocker packet aggregates 5 policy options and 7 blockers",
+    "only current eBible rerun and deferral of new KJVA result work are policy-ready",
+    "Project Gutenberg-only, Project Gutenberg plus Hakkaac, and Hakkaac-primary streams remain blocked",
 )
 REQUIRED_LINKS = (
     "terms/kjv_apocrypha_bridge_prospective_terms.csv",
@@ -64,6 +67,7 @@ REQUIRED_LINKS = (
     "docs/KJVA_HAKKAAC_APOCRYPHA_COLLATION_AUDIT.md",
     "docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md",
     "docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md",
+    "docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md",
     "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",

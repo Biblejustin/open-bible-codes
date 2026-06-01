@@ -2717,3 +2717,23 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/check_kjva_gutenberg_candidate_checksum_sidecar_doc.py`, and wired
   the sidecar into `scripts/preflight_real_report_run.py` plus
   `protocols/real_report_run.toml`.
+
+## KJVA Source Policy Blocker Packet
+
+- Added `docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md` as a non-text rollup of
+  current KJVA source-policy choices and blockers.
+- Current packet status: 5 policy option rows, 7 blocker rows, 2 policy-ready
+  options, 3 blocked options, 2 checksum records ready, 0 source-use ready
+  pages, `SIR 44:23` Gutenberg Sirach gap, 0/15 Gutenberg Prayer of Manasseh
+  body markers, and 1 Hakkaac length-drift verse.
+- Current policy-ready options: current eBible rerun only, and deferral of new
+  KJVA result-bearing work.
+- Current blocked options: Project Gutenberg-only candidate, Project Gutenberg
+  plus Hakkaac split candidate, and Hakkaac primary stream.
+- This packet does not add Bible text, approve source use, lock a source,
+  create an ELS result, or change KJVA bridge result status.
+- Added `protocols/kjva_source_policy_blocker_packet.toml`,
+  `scripts/build_kjva_source_policy_blocker_packet.py`, and
+  `scripts/check_kjva_source_policy_blocker_packet_doc.py`, and wired the
+  packet into `scripts/preflight_real_report_run.py` plus
+  `protocols/real_report_run.toml`.

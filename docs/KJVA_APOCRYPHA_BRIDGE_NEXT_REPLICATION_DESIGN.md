@@ -109,6 +109,11 @@ Online source candidates found for possible future audit:
   stream, Hakkaac remains marker/collation witness-only, and source-use,
   `SIR 19:1`, Prayer of Manasseh, term/control, and study-lock blockers remain
   open: `docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md`.
+  Current source-policy blocker packet aggregates 5 policy options and 7
+  blockers: only current eBible rerun and deferral of new KJVA result work are
+  policy-ready; Project Gutenberg-only, Project Gutenberg plus Hakkaac, and
+  Hakkaac-primary streams remain blocked with no source lock ready:
+  `docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md`.
 - [CrossWire GitLab KJV/KJVA](https://gitlab.com/crosswire-bible-society/kjv):
   possible independent metadata candidate because KJVA/KJVDC path names are
   present. Current tracked status audit:
@@ -155,6 +160,9 @@ sidecar.
 - `docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md`
 - `docs/KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md`
 - `docs/KJVA_HAKKAAC_APOCRYPHA_COLLATION_AUDIT.md`
+- `docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md`
+- `docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md`
+- `docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md`
 - `docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md`
 - `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - `configs/prospective_study_lanes.json`

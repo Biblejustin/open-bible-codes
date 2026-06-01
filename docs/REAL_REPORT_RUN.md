@@ -175,6 +175,8 @@ This assembly run includes:
   `docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md`
 - KJVA Gutenberg plus Hakkaac split-source role sidecar:
   `docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md`
+- KJVA source-policy blocker packet:
+  `docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md`
 - KJVA Wikisource candidate source-status audit:
   `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - KJVA Wikisource book-coverage probe:
