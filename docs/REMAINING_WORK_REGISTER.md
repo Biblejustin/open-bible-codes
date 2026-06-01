@@ -3136,6 +3136,16 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - This is a documentation/validation guard only. It does not change report
   conclusions, source policy, imported texts, ELS searches, or result status.
 
+## Default Check Coverage Guard
+
+- Added a Makefile coverage test requiring every default-safe
+  `scripts/check_*.py` module to be reachable through a Make validation target.
+- The only current exceptions are `check_preregistration_placeholders` and
+  `check_study_lock_manifest`, because both require explicit file/manifest
+  arguments and are validated through their contextual preflight/doc paths.
+- This is a validation guard only. It does not change report conclusions,
+  source policy, imported texts, ELS searches, or result status.
+
 ## KJVA Source-Doc Direct Gate
 
 - Added `make kjva-source-doc-checks` for the KJVA source-candidate,

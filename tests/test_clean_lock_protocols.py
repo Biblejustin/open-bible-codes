@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 
 from els.protocol_runner import load_protocol
@@ -442,6 +443,23 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "check-script wiring" in normalized_readme
     assert "study-mapping guard suite" in readme
     assert "temporary public-reader package build" in normalized_readme
+
+
+def test_default_safe_check_scripts_are_make_gated() -> None:
+    makefile = Path("Makefile").read_text(encoding="utf-8")
+    make_modules = set(
+        re.findall(r"python3 -m (scripts\.check_[A-Za-z0-9_]+)", makefile)
+    )
+    check_modules = {
+        path.with_suffix("").as_posix().replace("/", ".")
+        for path in Path("scripts").glob("check_*.py")
+    }
+
+    contextual_checks = {
+        "scripts.check_preregistration_placeholders",
+        "scripts.check_study_lock_manifest",
+    }
+    assert check_modules - make_modules == contextual_checks
 
 
 def test_study_mapping_make_target_runs_all_mapping_guards() -> None:
