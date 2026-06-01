@@ -2917,6 +2917,7 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Updated the package README ordering so the generated package points readers
   to the Cities no-input handoff before the formal real-report summary.
 - Extended `tests/test_build_public_reader_package.py` so package tests fail
-  if the exported reader package drops the Cities handoff file.
+  if the exported reader package drops the Cities handoff file or any required
+  project-findings overview reference.
 - This is a reader-export fix only. It does not import source rows, normalize
   city names, run ELS searches, compute compactness, or report p-levels.

@@ -68,6 +68,12 @@ def test_builds_reader_package_from_whitelisted_docs(tmp_path, monkeypatch) -> N
     assert "Reader-path guard: project findings overview" in package_readme
 
 
+def test_reader_package_includes_project_findings_references() -> None:
+    package_docs = set(package.DEFAULT_DOC_PATHS)
+    for reference in overview_check.REQUIRED_REFERENCES:
+        assert Path(reference) in package_docs
+
+
 def test_refuses_stale_project_findings_overview(tmp_path, monkeypatch) -> None:
     monkeypatch.chdir(tmp_path)
     for path in package.DEFAULT_DOC_PATHS:
