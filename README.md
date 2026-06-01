@@ -72,7 +72,7 @@ tracked report/database/raw-source artifacts, scans tracked files for the
 forbidden GitHub account text, checks high-confidence secret-token patterns,
 validates documented script/source-path references, and rejects unsupported
 public claim language. It also guards the general-reader findings overview and
-its README/Start Here links, validates protocol TOML files, corpus config
+configured reader-link sources, validates protocol TOML files, corpus config
 schemas, term-file schema/normalization, all-script exact-test coverage,
 check-script wiring coverage, the study-mapping guard suite, and a temporary
 public-reader package build from the whitelisted docs.

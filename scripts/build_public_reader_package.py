@@ -239,7 +239,7 @@ def write_package_readme(out_dir: Path, copied: list[CopiedFile]) -> None:
         "# Public Reader Package",
         "",
         "Status: generated package over whitelisted docs and formal report summary.",
-        "Reader-path guard: project findings overview and reader links validated before packaging.",
+        "Reader-path guard: project findings overview and configured reader-link sources validated before packaging.",
         "It contains no raw Bible source files and no local database artifacts.",
         "",
         "Start with:",

@@ -2982,5 +2982,7 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   guard surface was checked.
 - Updated the manifest's reader-path guard description to match the current
   configured reader-link source set.
+- Updated README/package README wording so the release and package docs now
+  refer to configured reader-link sources rather than only README/Start Here.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
