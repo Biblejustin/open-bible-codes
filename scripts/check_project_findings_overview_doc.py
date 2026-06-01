@@ -21,6 +21,7 @@ REQUIRED_HEADINGS = (
     "## Weaker Areas",
     "## Bible Text Differences",
     "## WRR Famous-Rabbis Study",
+    "## Cities Source-Row Study",
     "## What This Means",
     "## Best Current Summary",
     "## Where To Read More",
@@ -38,6 +39,13 @@ REQUIRED_PHRASES = (
     "0 candidate pages ready to import verses",
     "0 candidate pages ready for a result",
     "exact published reproduction remains unfinished",
+    "14 source-row lock candidate pages",
+    "14 populated source-row lock rows",
+    "8 handoff rows",
+    "6 manual-input-needed rows",
+    "203 priority line-crop review rows",
+    "no Cities result allowed",
+    "not produced source rows, city-name normalization, ELS searches, compactness runs, or p-levels",
     "no current row should be treated as settled public evidence",
 )
 
@@ -46,6 +54,7 @@ REQUIRED_REFERENCES = (
     "docs/FINAL_REPORT_HIGHLIGHTS.md",
     "docs/CLAIM_CATALOG.md",
     "docs/CONSOLIDATED_FINDINGS.md",
+    "docs/CITIES_NO_INPUT_HANDOFF_STATUS.md",
 )
 
 READER_PATH_REQUIREMENTS = {

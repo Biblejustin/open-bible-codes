@@ -138,6 +138,23 @@ tracks that gap openly.
 Current read: there is useful local WRR evidence, but exact published
 reproduction remains unfinished.
 
+## Cities Source-Row Study
+
+The Cities/Aumann/Simon-McKay material is not Bible text. It is source and
+method material for a separate Torah-code claim.
+
+The project found 14 source-row lock candidate pages and recorded 14 populated
+source-row lock rows. Those are page-level locks only. They do not import city
+names or run a Cities result.
+
+The current Cities no-input handoff has 8 handoff rows, 6
+manual-input-needed rows, 14 transcription review rows, 203 priority line-crop
+review rows, and no Cities result allowed.
+
+Current read: this work organizes source evidence for later review, but it has
+not produced source rows, city-name normalization, ELS searches, compactness
+runs, or p-levels.
+
 ## What This Means
 
 The project has found real patterns.
@@ -176,3 +193,4 @@ For the fuller project story, read:
 - `docs/FINAL_REPORT_HIGHLIGHTS.md`
 - `docs/CLAIM_CATALOG.md`
 - `docs/CONSOLIDATED_FINDINGS.md`
+- `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`
