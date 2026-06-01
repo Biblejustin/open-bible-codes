@@ -370,6 +370,7 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "$(MAKE) check-script-tests" in makefile
     assert "$(MAKE) check-script-wiring" in makefile
     assert "$(MAKE) study-mapping-schemas" in makefile
+    assert "$(MAKE) public-reader-package-check" in makefile
     assert "$(MAKE) local-data-doc-check" in makefile
     assert "make fast-validate" in readme
     assert "expanded-strata operator tooling" in readme
@@ -381,6 +382,7 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "all-script exact-test coverage" in normalized_readme
     assert "check-script wiring" in normalized_readme
     assert "study-mapping guard suite" in readme
+    assert "temporary public-reader package build" in normalized_readme
 
 
 def test_study_mapping_make_target_runs_all_mapping_guards() -> None:
@@ -433,6 +435,7 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "$(MAKE) corpus-configs" in makefile
     assert "$(MAKE) term-files" in makefile
     assert "$(MAKE) study-mapping-schemas" in makefile
+    assert "$(MAKE) public-reader-package-check" in makefile
     assert "make release-ready" in readme
     assert "validates documented script/source-path references" in normalized_readme
     assert "guards the general-reader findings overview" in normalized_readme
@@ -442,6 +445,7 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "all-script exact-test coverage" in normalized_readme
     assert "check-script wiring" in normalized_readme
     assert "study-mapping guard suite" in normalized_readme
+    assert "temporary public-reader package build" in normalized_readme
     assert "after committing" in readme
     assert "clean public-release gate" in readme
     assert "intentionally fails while tracked files are dirty" in normalized_readme

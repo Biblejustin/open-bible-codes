@@ -74,7 +74,8 @@ validates documented script/source-path references, and rejects unsupported
 public claim language. It also guards the general-reader findings overview and
 its README/Start Here links, validates protocol TOML files, corpus config
 schemas, term-file schema/normalization, all-script exact-test coverage,
-check-script wiring coverage, and the study-mapping guard suite.
+check-script wiring coverage, the study-mapping guard suite, and a temporary
+public-reader package build from the whitelisted docs.
 
 Current fast validation before a handoff:
 
@@ -87,8 +88,9 @@ diff whitespace, runs dirty-tree-safe release hygiene, validates
 expanded-strata operator tooling, checks public claim language, and verifies
 the general-reader findings overview, protocol TOML files, corpus config
 schemas, term-file schema/normalization, all-script exact-test coverage,
-check-script wiring coverage, the study-mapping guard suite, and local data
-doc references against the current ignored source caches.
+check-script wiring coverage, the study-mapping guard suite, a temporary
+public-reader package build, and local data doc references against the current
+ignored source caches.
 
 Full clean-tree pre-push validation after committing:
 

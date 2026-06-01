@@ -2922,3 +2922,15 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   project-findings overview reference.
 - This is a reader-export fix only. It does not import source rows, normalize
   city names, run ELS searches, compute compactness, or report p-levels.
+
+## Public Reader Package Release-Gate Check
+
+- Added `public-reader-package-check` to the Makefile and wired it into
+  `make fast-validate` and `make public-release-check` so handoff and clean
+  release gates now check that the whitelisted reader package can build to
+  `/tmp/edls_public_reader_package_check`.
+- Updated `README.md` and `tests/test_clean_lock_protocols.py` so the release
+  gate and fast-validation documentation and test coverage mention the
+  temporary public-reader package build.
+- This is a packaging guard only. It does not change the public package
+  contents beyond the already-committed Cities handoff inclusion.
