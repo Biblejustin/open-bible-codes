@@ -156,6 +156,26 @@ def _default_report_text(path: Path) -> str:
                         "skipped": True,
                     },
                     {
+                        "id": "wrr_no_input_handoff_status",
+                        "return_code": 0,
+                        "skipped": False,
+                    },
+                    {
+                        "id": "kjva_no_input_handoff_status",
+                        "return_code": 0,
+                        "skipped": True,
+                    },
+                    {
+                        "id": "external_claim_source_counts",
+                        "return_code": 0,
+                        "skipped": True,
+                    },
+                    {
+                        "id": "external_claim_source_all_codes_collection",
+                        "return_code": 0,
+                        "skipped": True,
+                    },
+                    {
                         "id": "real_report_summary",
                         "return_code": 0,
                         "skipped": False,
@@ -393,6 +413,24 @@ def test_detects_packaged_real_report_protocol_manifest_summary_input_drift(
         f"{protocol_path} real_report_summary missing no-input handoff inputs"
         in failures
     )
+
+
+def test_detects_packaged_real_report_protocol_manifest_lineage_step_drift(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    protocol_path = out_dir / "reports/real_report_run/protocol_run.manifest.json"
+    protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
+    for step in protocol["steps"]:
+        if step["id"] == "external_claim_source_counts":
+            step["return_code"] = 1
+            break
+    protocol_path.write_text(json.dumps(protocol, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert f"{protocol_path} external_claim_source_counts step failed" in failures
 
 
 def test_detects_packaged_real_report_protocol_manifest_external_claim_input_drift(

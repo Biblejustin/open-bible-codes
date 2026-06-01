@@ -570,6 +570,17 @@ def validate_packaged_real_report_protocol_manifest(
         failures.append(f"{path} missing cities_no_input_handoff_status step")
     elif cities_handoff.get("return_code") != 0:
         failures.append(f"{path} cities_no_input_handoff_status step failed")
+    for step_id in (
+        "wrr_no_input_handoff_status",
+        "kjva_no_input_handoff_status",
+        "external_claim_source_counts",
+        "external_claim_source_all_codes_collection",
+    ):
+        step = protocol_step(steps, step_id)
+        if not isinstance(step, dict):
+            failures.append(f"{path} missing {step_id} step")
+        elif step.get("return_code") != 0:
+            failures.append(f"{path} {step_id} step failed")
     summary = protocol_step(steps, "real_report_summary")
     if not isinstance(summary, dict):
         failures.append(f"{path} missing real_report_summary step")
