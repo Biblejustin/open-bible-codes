@@ -35,6 +35,8 @@ REQUIRED_PHRASES = (
     "Source-row imports: 0.",
     "ELS runs: 0.",
     "Compactness runs: 0.",
+    "## Unreviewed Packet Pages",
+    "do not feed the source-row lock queue",
     "appendix_toc_or_index_page",
     "blank_or_separator_page",
     "method_intro_prose_page",
@@ -168,6 +170,10 @@ def validate_cities_unreadable_pdf_ocr_page_review_doc(
     packet_rows = builder.read_csv(packet_csv)
     decision_rows = builder.read_csv(decisions_csv)
     expected_rows = builder.build_page_review_rows(packet_rows, decision_rows)
+    expected_unreviewed_rows = builder.build_unreviewed_packet_rows(
+        packet_rows,
+        expected_rows,
+    )
     expected_summary_rows = builder.build_summary_rows(expected_rows, packet_rows)
     summary = {row["metric"]: row["value"] for row in summary_rows}
     manifest = read_json(manifest_json)
@@ -188,6 +194,14 @@ def validate_cities_unreadable_pdf_ocr_page_review_doc(
     )
     failures.extend(validate_rows_csv(rows_fieldnames, rows, expected_rows))
     failures.extend(validate_rows(doc, normalized, rows))
+    failures.extend(
+        validate_unreviewed_rows(
+            doc,
+            normalized,
+            expected_unreviewed_rows,
+            summary,
+        )
+    )
     failures.extend(
         validate_summary_csv(
             summary_fieldnames,
@@ -254,6 +268,32 @@ def validate_rows(
             failures.append(f"{doc} missing label: {label}")
         if role not in normalized_doc:
             failures.append(f"{doc} missing role: {role}")
+    return failures
+
+
+def validate_unreviewed_rows(
+    doc: Path,
+    normalized_doc: str,
+    unreviewed_rows: list[dict[str, str]],
+    summary: dict[str, str],
+) -> list[str]:
+    failures: list[str] = []
+    expected_count = str(len(unreviewed_rows))
+    if summary.get("unreviewed_packet_pages") != expected_count:
+        failures.append(
+            "summary CSV unreviewed_packet_pages="
+            f"{summary.get('unreviewed_packet_pages')} does not match "
+            f"unreviewed packet pages={expected_count}"
+        )
+    for row in unreviewed_rows:
+        label = row.get("label", "")
+        page = row.get("page_number", "")
+        image_path = row.get("page_image_path", "")
+        row_prefix = normalize_space(f"| {label} | {page} |")
+        if row_prefix not in normalized_doc:
+            failures.append(f"{doc} missing unreviewed packet page: {label} p{page}")
+        if image_path and normalize_space(image_path) not in normalized_doc:
+            failures.append(f"{doc} missing unreviewed image path: {image_path}")
     return failures
 
 

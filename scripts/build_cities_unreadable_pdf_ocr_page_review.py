@@ -66,10 +66,17 @@ def main(argv: list[str] | None = None) -> int:
     packet_rows = read_csv(args.packet)
     decision_rows = read_csv(args.decisions)
     review_rows = build_page_review_rows(packet_rows, decision_rows)
+    unreviewed_rows = build_unreviewed_packet_rows(packet_rows, review_rows)
     summary_rows = build_summary_rows(review_rows, packet_rows)
     write_csv(args.out, FIELDNAMES, review_rows)
     write_csv(args.summary_out, SUMMARY_FIELDNAMES, summary_rows)
-    write_markdown(args.markdown_out, review_rows, summary_rows, args)
+    write_markdown(
+        args.markdown_out,
+        review_rows,
+        unreviewed_rows,
+        summary_rows,
+        args,
+    )
     write_manifest(args.manifest_out, args, review_rows, summary_rows, started)
     print(args.out)
     print(args.summary_out)
@@ -147,6 +154,41 @@ def decision_sort_key(row: dict[str, str]) -> tuple[str, int, str]:
     )
 
 
+def build_unreviewed_packet_rows(
+    packet_rows: list[dict[str, str]],
+    review_rows: list[dict[str, str]],
+) -> list[dict[str, str]]:
+    reviewed = {
+        (row.get("label", ""), row.get("page_number", "")) for row in review_rows
+    }
+    rows = []
+    for packet in packet_rows:
+        key = (packet.get("label", ""), packet.get("page_number", ""))
+        if key in reviewed:
+            continue
+        rows.append(
+            {
+                "label": key[0],
+                "page_number": key[1],
+                "family": packet.get("family", ""),
+                "lane": packet.get("lane", ""),
+                "packet_ocr_status": packet.get("ocr_status", ""),
+                "packet_ocr_text_signal_chars": packet.get(
+                    "ocr_text_signal_chars", ""
+                ),
+                "page_image_path": packet.get("image_path", ""),
+                "claim_boundary": CLAIM_BOUNDARY,
+            }
+        )
+    return sorted(
+        rows,
+        key=lambda row: (
+            row.get("label", ""),
+            int_or_zero(row.get("page_number", "")),
+        ),
+    )
+
+
 def build_summary_rows(
     rows: list[dict[str, str]],
     packet_rows: list[dict[str, str]] | None = None,
@@ -175,6 +217,7 @@ def build_summary_rows(
 def write_markdown(
     path: Path,
     rows: list[dict[str, str]],
+    unreviewed_rows: list[dict[str, str]],
     summary_rows: list[dict[str, str]],
     args: argparse.Namespace,
 ) -> None:
@@ -235,6 +278,32 @@ def write_markdown(
                     f"`{markdown_cell(row['source_row_use'])}`",
                     f"`{markdown_cell(row['decision'])}`",
                     markdown_cell(row["notes"]),
+                ]
+            )
+            + " |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Unreviewed Packet Pages",
+            "",
+            "These packet pages do not have page-image review decisions yet "
+            "and do not feed the source-row lock queue.",
+            "",
+            "| Label | Page | OCR status | Signal chars | Image path |",
+            "| --- | ---: | --- | ---: | --- |",
+        ]
+    )
+    for row in unreviewed_rows:
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    markdown_cell(row["label"]),
+                    markdown_cell(row["page_number"]),
+                    f"`{markdown_cell(row['packet_ocr_status'])}`",
+                    markdown_cell(row["packet_ocr_text_signal_chars"]),
+                    markdown_cell(row["page_image_path"]),
                 ]
             )
             + " |"

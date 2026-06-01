@@ -107,6 +107,38 @@ class CitiesUnreadablePdfOcrPageReviewTests(unittest.TestCase):
         self.assertEqual(summary["source_row_imports"], "0")
         self.assertEqual(summary["els_runs"], "0")
 
+    def test_unreviewed_packet_rows_list_pages_without_decisions(self) -> None:
+        packet_rows = [
+            packet_row("cities_pdf_dp365a_p1_4", "3", "page_ocr_empty", "0"),
+            packet_row(
+                "cities_pdf_dp364_short",
+                "1",
+                "page_ocr_text_detected",
+                "44",
+            ),
+        ]
+        rows = page_review.build_page_review_rows(
+            packet_rows,
+            [
+                decision_row(
+                    "d1",
+                    "cities_pdf_dp365a_p1_4",
+                    "3",
+                    "appendix_toc_or_index_page",
+                    "ocr_empty_but_visual_text_present",
+                ),
+            ],
+        )
+
+        unreviewed = page_review.build_unreviewed_packet_rows(packet_rows, rows)
+
+        self.assertEqual(len(unreviewed), 1)
+        self.assertEqual(unreviewed[0]["label"], "cities_pdf_dp364_short")
+        self.assertEqual(unreviewed[0]["page_number"], "1")
+        self.assertEqual(
+            unreviewed[0]["packet_ocr_status"], "page_ocr_text_detected"
+        )
+
     def test_main_writes_review_doc_and_manifest(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -120,6 +152,12 @@ class CitiesUnreadablePdfOcrPageReviewTests(unittest.TestCase):
                 packet,
                 [
                     packet_row("cities_pdf_dp365a_p1_4", "3", "page_ocr_empty", "0"),
+                    packet_row(
+                        "cities_pdf_dp364_short",
+                        "1",
+                        "page_ocr_text_detected",
+                        "44",
+                    ),
                 ],
             )
             write_csv(
@@ -153,7 +191,10 @@ class CitiesUnreadablePdfOcrPageReviewTests(unittest.TestCase):
             )
 
             self.assertEqual(rc, 0)
-            self.assertIn("No OCR body text appears", markdown.read_text(encoding="utf-8"))
+            doc = markdown.read_text(encoding="utf-8")
+            self.assertIn("No OCR body text appears", doc)
+            self.assertIn("## Unreviewed Packet Pages", doc)
+            self.assertIn("cities_pdf_dp364_short", doc)
             payload = json.loads(manifest.read_text(encoding="utf-8"))
             self.assertEqual(payload["rows"], 1)
 
