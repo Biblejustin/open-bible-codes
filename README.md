@@ -129,8 +129,8 @@ This runs the centered-occurrence, critical-omission follow-up, English corpus
 policy, English seed-survivor, Greek second-cohort, hypothesis/source audit,
 Israeli Prime Ministers detail-recovery, KJVA prospective boundary,
 manual-review, preregistration placeholder, prospective-lane, research
-missing-model, and source-basis guards shared by `make fast-validate` and
-`make public-release-check`.
+missing-model, source-basis, and study-lock manifest drift audit/guards shared
+by `make fast-validate` and `make public-release-check`.
 
 WRR method/source/support checks only:
 

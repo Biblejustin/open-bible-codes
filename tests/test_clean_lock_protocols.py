@@ -395,6 +395,8 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "scripts.check_preregistration_placeholders" in makefile
     assert "$(PREREGISTRATION_DOCS)" in makefile
     assert "scripts.check_source_basis_audit_queue" in makefile
+    assert "scripts.audit_study_lock_manifest_drift" in makefile
+    assert "scripts.check_study_lock_manifest_drift_audit_doc" in makefile
     assert "scripts.check_wrr_source_policy_evidence_packet_doc" in makefile
     assert "scripts.check_wrr_source_row_review_bundle_doc" in makefile
     assert "scripts.check_wrr_support_docs_local_lock" in makefile
@@ -539,6 +541,8 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "scripts.check_preregistration_placeholders" in makefile
     assert "$(PREREGISTRATION_DOCS)" in makefile
     assert "scripts.check_source_basis_audit_queue" in makefile
+    assert "scripts.audit_study_lock_manifest_drift" in makefile
+    assert "scripts.check_study_lock_manifest_drift_audit_doc" in makefile
     assert "scripts.check_wrr_source_policy_evidence_packet_doc" in makefile
     assert "scripts.check_wrr_source_row_review_bundle_doc" in makefile
     assert "scripts.check_wrr_support_docs_local_lock" in makefile

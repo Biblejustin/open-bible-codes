@@ -3127,7 +3127,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   follow-up, English corpus policy, English seed-survivor, Greek second-cohort,
   hypothesis/source audit, Israeli Prime Ministers detail recovery, KJVA
   prospective boundary, manual-review, preregistration placeholder,
-  prospective-lane, research missing-model, and source-basis guards.
+  prospective-lane, research missing-model, source-basis, and study-lock
+  manifest drift guards.
 - Wired the shared target into `make fast-validate` and
   `make public-release-check`, so non-lane support docs and planning guards are
   checked before both dirty-safe handoffs and clean releases.
@@ -3142,6 +3143,10 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/check_*.py` module to be reachable through a Make validation target.
 - The preregistration placeholder checker is now called through
   `make study-support-checks` against all concrete preregistration docs.
+- Historical study-lock manifest drift is now summarized in
+  `docs/STUDY_LOCK_MANIFEST_DRIFT_AUDIT.md`, regenerated locally during
+  `make study-support-checks`, and checked without tracking ignored
+  `reports/` artifacts.
 - The only current exception is `check_study_lock_manifest`, because historical
   lock manifests require explicit manifest paths/settings and many old
   fingerprints intentionally fail after later documentation/tooling edits.

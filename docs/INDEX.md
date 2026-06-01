@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 425
+Documents indexed: 426
 
 ## Controls
 
@@ -422,6 +422,7 @@ Documents indexed: 425
 | Strict Follow-Up Gate Summary | `STRICT_FOLLOWUP_GATE_SUMMARY.md` |
 | Strongest Candidate Review Packet | `STRONGEST_CANDIDATE_DEEP_DIVE.md` |
 | Study Lock Manifests | `STUDY_LOCK_MANIFESTS.md` |
+| Study Lock Manifest Drift Audit | `STUDY_LOCK_MANIFEST_DRIFT_AUDIT.md` |
 | Study Mapping Schemas | `STUDY_MAPPING_SCHEMAS.md` |
 | Surface Context Study | `SURFACE_CONTEXT_STUDY.md` |
 | Synthetic Extension Baselines | `SYNTHETIC_EXTENSION_BASELINES.md` |

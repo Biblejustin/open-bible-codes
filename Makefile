@@ -112,6 +112,8 @@ study-support-checks:
 	python3 -m scripts.check_prospective_study_lanes
 	python3 -m scripts.check_research_missing_model_pages_audit_doc
 	python3 -m scripts.check_source_basis_audit_queue
+	python3 -m scripts.audit_study_lock_manifest_drift
+	python3 -m scripts.check_study_lock_manifest_drift_audit_doc
 
 wrr-doc-checks:
 	python3 -m scripts.check_wrr_adjacent_source_audit_docs
