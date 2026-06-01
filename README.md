@@ -53,6 +53,9 @@ Reader path:
 - strongest candidate packet: `docs/STRONGEST_CANDIDATE_DEEP_DIVE.md`
 - formal assembly/check plan: `docs/REAL_REPORT_RUN.md`
 - remaining work: `docs/REMAINING_WORK_REGISTER.md`
+- WRR no-input handoff status: `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`
+- KJVA no-input handoff status: `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`
+- Cities no-input handoff status: `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`
 
 Repository navigation:
 

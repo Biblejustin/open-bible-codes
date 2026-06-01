@@ -23,10 +23,12 @@ def _default_doc_text(path: Path) -> str:
     if path == overview_check.DEFAULT_README:
         return (
             "# README\n\n"
-            "whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`\n\n"
             "Reader path:\n\n"
             "- start here: `docs/START_HERE.md`\n"
-            "- whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`\n"
+            + "\n".join(
+                f"- {phrase}" for phrase in overview_check.READER_PATH_REQUIREMENTS[path]
+            )
+            + "\n"
         )
     if path == overview_check.DEFAULT_START_HERE:
         return (

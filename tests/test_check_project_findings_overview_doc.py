@@ -66,7 +66,37 @@ def test_missing_readme_reader_path_fails(tmp_path: Path) -> None:
 
     assert failures == [
         f"{readme} missing phrase: "
-        "whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`"
+        "whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`",
+        f"{readme} missing phrase: "
+        "WRR no-input handoff status: `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`",
+        f"{readme} missing phrase: "
+        "KJVA no-input handoff status: `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`",
+        f"{readme} missing phrase: "
+        "Cities no-input handoff status: `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`",
+    ]
+
+
+def test_missing_readme_handoff_link_fails(tmp_path: Path) -> None:
+    readme = tmp_path / "README.md"
+    start_here = tmp_path / "START_HERE.md"
+    readme.write_text(
+        valid_readme_text().replace(
+            "WRR no-input handoff status: `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`",
+            "WRR no-input handoff status: `docs/MISSING.md`",
+        ),
+        encoding="utf-8",
+    )
+    start_here.write_text(valid_start_here_text(), encoding="utf-8")
+
+    failures = check.validate_project_findings_overview(
+        check.DEFAULT_DOC,
+        readme,
+        start_here,
+    )
+
+    assert failures == [
+        f"{readme} missing phrase: "
+        "WRR no-input handoff status: `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`"
     ]
 
 
