@@ -24,6 +24,9 @@ It exists so future work starts from one status file without treating local revi
 - OCR pages with text: 14.
 - OCR text sidecars: 14.
 - OCR Hebrew letters: 14408.
+- OCR packet pages: 61.
+- Reviewed OCR packet pages: 41.
+- Unreviewed OCR packet pages: 20.
 - Line crop rows: 203.
 - Line crops available: 203.
 - Line crop OCR words: 1511.
@@ -52,7 +55,7 @@ It exists so future work starts from one status file without treating local revi
 | `source_row_lock_decisions` | source-row lock decisions | `locked_page_level_evidence` | 14 decision rows; 14 locked | `no` | page lock is not row transcription or source-row import |
 | `transcription_review` | readable transcription review | `pending_manual_transcription` | 14 worksheet rows; 14 pending; 0 decision rows | `yes` | no verified source-row text is in tracked outputs |
 | `page_review_bundle` | page-image review bundle | `visual_review_aid_only` | 14 bundle rows; 14 page images found | `yes` | page images do not authorize city-name normalization or ELS |
-| `local_ocr_review_aids` | local OCR review aids | `ignored_local_review_aids` | 14 OCR rows; 14 pages with text; 14 ignored sidecars | `yes` | OCR body text is not tracked and is not source-row evidence by itself |
+| `local_ocr_review_aids` | local OCR review aids | `ignored_local_review_aids` | 14 OCR rows; 14 pages with text; 14 ignored sidecars; 41/61 packet pages reviewed; 20 unreviewed | `yes` | OCR body text is not tracked and is not source-row evidence by itself |
 | `line_crop_review_aids` | line-crop review aids | `ignored_local_review_aids` | 203 crop rows; 203 images; 1511 OCR words | `yes` | line crops do not verify source rows or permit ELS |
 | `priority_review_queue` | priority line-crop review | `pending_manual_review` | 203 priority rows; 120 dense; 71 medium; 12 short | `yes` | priority rank is a review order, not a source-use decision |
 | `result_boundary` | result boundary | `blocked` | source-row imports 0; city normalization 0; ELS runs 0; compactness 0; p-levels 0; result allowed 0 | `yes` | no Cities source-row import, ELS run, compactness run, or p-level exists |

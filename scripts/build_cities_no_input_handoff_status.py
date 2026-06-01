@@ -36,6 +36,9 @@ DEFAULT_PAGE_BUNDLE_SUMMARY = Path(
 DEFAULT_OCR_SUMMARY = Path(
     "reports/cities_pdf_recovery_probe/cities_source_page_ocr_review_packet_summary.csv"
 )
+DEFAULT_PAGE_REVIEW_SUMMARY = Path(
+    "reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_page_review_summary.csv"
+)
 DEFAULT_LINE_CROP_SUMMARY = Path(
     "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet_summary.csv"
 )
@@ -78,6 +81,9 @@ SUMMARY_FIELDNAMES = [
     "ocr_pages_with_text",
     "ocr_text_sidecars",
     "ocr_hebrew_letters",
+    "ocr_packet_pages",
+    "ocr_packet_pages_reviewed",
+    "ocr_packet_pages_unreviewed",
     "line_crop_rows",
     "line_crops_available",
     "line_crop_ocr_words",
@@ -113,6 +119,7 @@ class LoadedInputs:
         transcription_decisions: list[dict[str, str]],
         page_bundle_summary: list[dict[str, str]],
         ocr_summary: list[dict[str, str]],
+        page_review_summary: list[dict[str, str]],
         line_crop_summary: list[dict[str, str]],
         priority_contact_summary: list[dict[str, str]],
         priority_review_summary: list[dict[str, str]],
@@ -124,6 +131,7 @@ class LoadedInputs:
         self.transcription_decisions = transcription_decisions
         self.page_bundle_summary = page_bundle_summary
         self.ocr_summary = ocr_summary
+        self.page_review_summary = page_review_summary
         self.line_crop_summary = line_crop_summary
         self.priority_contact_summary = priority_contact_summary
         self.priority_review_summary = priority_review_summary
@@ -140,6 +148,7 @@ def main(argv: list[str] | None = None) -> int:
         transcription_decisions=read_rows(args.transcription_decisions),
         page_bundle_summary=read_rows(args.page_bundle_summary),
         ocr_summary=read_rows(args.ocr_summary),
+        page_review_summary=read_rows(args.page_review_summary),
         line_crop_summary=read_rows(args.line_crop_summary),
         priority_contact_summary=read_rows(args.priority_contact_summary),
         priority_review_summary=read_rows(args.priority_review_summary),
@@ -175,6 +184,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--ocr-summary", type=Path, default=DEFAULT_OCR_SUMMARY)
     parser.add_argument(
+        "--page-review-summary", type=Path, default=DEFAULT_PAGE_REVIEW_SUMMARY
+    )
+    parser.add_argument(
         "--line-crop-summary", type=Path, default=DEFAULT_LINE_CROP_SUMMARY
     )
     parser.add_argument(
@@ -199,6 +211,7 @@ def build_summary(inputs: LoadedInputs) -> dict[str, Any]:
     evidence = metric_dict(inputs.evidence_summary)
     bundle = metric_dict(inputs.page_bundle_summary)
     ocr = metric_dict(inputs.ocr_summary)
+    page_review = metric_dict(inputs.page_review_summary)
     line_crop = metric_dict(inputs.line_crop_summary)
     priority_contact = metric_dict(inputs.priority_contact_summary)
     priority_review = metric_dict(inputs.priority_review_summary)
@@ -226,6 +239,13 @@ def build_summary(inputs: LoadedInputs) -> dict[str, Any]:
         "ocr_pages_with_text": int_or_zero(ocr.get("pages_with_ocr_text")),
         "ocr_text_sidecars": int_or_zero(ocr.get("ocr_text_sidecars")),
         "ocr_hebrew_letters": int_or_zero(ocr.get("ocr_hebrew_letters")),
+        "ocr_packet_pages": int_or_zero(page_review.get("packet_pages")),
+        "ocr_packet_pages_reviewed": int_or_zero(
+            page_review.get("reviewed_packet_pages")
+        ),
+        "ocr_packet_pages_unreviewed": int_or_zero(
+            page_review.get("unreviewed_packet_pages")
+        ),
         "line_crop_rows": int_or_zero(line_crop.get("line_crop_rows")),
         "line_crops_available": int_or_zero(line_crop.get("line_crops_available")),
         "line_crop_ocr_words": int_or_zero(line_crop.get("ocr_words")),
@@ -328,7 +348,10 @@ def build_status_rows(
             (
                 f"{summary['ocr_review_rows']} OCR rows; "
                 f"{summary['ocr_pages_with_text']} pages with text; "
-                f"{summary['ocr_text_sidecars']} ignored sidecars"
+                f"{summary['ocr_text_sidecars']} ignored sidecars; "
+                f"{summary['ocr_packet_pages_reviewed']}/"
+                f"{summary['ocr_packet_pages']} packet pages reviewed; "
+                f"{summary['ocr_packet_pages_unreviewed']} unreviewed"
             ),
             "yes",
             "yes",
@@ -418,6 +441,9 @@ def write_markdown(
         f"- OCR pages with text: {summary['ocr_pages_with_text']}.",
         f"- OCR text sidecars: {summary['ocr_text_sidecars']}.",
         f"- OCR Hebrew letters: {summary['ocr_hebrew_letters']}.",
+        f"- OCR packet pages: {summary['ocr_packet_pages']}.",
+        f"- Reviewed OCR packet pages: {summary['ocr_packet_pages_reviewed']}.",
+        f"- Unreviewed OCR packet pages: {summary['ocr_packet_pages_unreviewed']}.",
         f"- Line crop rows: {summary['line_crop_rows']}.",
         f"- Line crops available: {summary['line_crops_available']}.",
         f"- Line crop OCR words: {summary['line_crop_ocr_words']}.",
@@ -492,6 +518,7 @@ def write_manifest(
             "transcription_decisions": str(args.transcription_decisions),
             "page_bundle_summary": str(args.page_bundle_summary),
             "ocr_summary": str(args.ocr_summary),
+            "page_review_summary": str(args.page_review_summary),
             "line_crop_summary": str(args.line_crop_summary),
             "priority_contact_summary": str(args.priority_contact_summary),
             "priority_review_summary": str(args.priority_review_summary),
