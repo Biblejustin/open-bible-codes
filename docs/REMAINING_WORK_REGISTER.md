@@ -2968,5 +2968,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Aligned the generated package README start list with the `START_HERE` reader
   order by including consolidated findings, real-report run, and remaining
   work before the handoff/status packet links.
+- Moved the generated package README start list into a single
+  `PACKAGE_START_PATHS` constant and added a guard that every start-list entry
+  is in the package whitelist, so numbering and package inclusion cannot drift
+  separately.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.

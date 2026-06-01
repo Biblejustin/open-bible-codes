@@ -69,12 +69,8 @@ def test_builds_reader_package_from_whitelisted_docs(tmp_path, monkeypatch) -> N
         encoding="utf-8"
     )
     assert "Reader-path guard: project findings overview" in package_readme
-    assert "6. `docs/CONSOLIDATED_FINDINGS.md`" in package_readme
-    assert "7. `docs/REAL_REPORT_RUN.md`" in package_readme
-    assert "8. `docs/REMAINING_WORK_REGISTER.md`" in package_readme
-    assert "10. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`" in package_readme
-    assert "11. `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`" in package_readme
-    assert "12. `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`" in package_readme
+    for index, path in enumerate(package.PACKAGE_START_PATHS, start=1):
+        assert f"{index}. `{path.as_posix()}`" in package_readme
 
 
 def test_reader_package_includes_project_findings_references() -> None:
@@ -93,8 +89,17 @@ def test_reader_package_includes_no_input_handoff_references() -> None:
     )
     for source in reader_sources:
         text = source.read_text(encoding="utf-8")
-        for reference in sorted(set(re.findall(r"`(docs/[^`]*NO_INPUT_HANDOFF[^`]*\.md)`", text))):
+        references = sorted(
+            set(re.findall(r"`(docs/[^`]*NO_INPUT_HANDOFF[^`]*\.md)`", text))
+        )
+        for reference in references:
             assert Path(reference) in package_docs
+
+
+def test_reader_package_start_paths_are_packaged() -> None:
+    package_paths = set(package.DEFAULT_DOC_PATHS) | set(package.DEFAULT_REPORT_PATHS)
+    for path in package.PACKAGE_START_PATHS:
+        assert path in package_paths
 
 
 def test_reader_package_includes_start_here_references() -> None:

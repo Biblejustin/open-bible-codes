@@ -44,6 +44,21 @@ DEFAULT_REPORT_PATHS = (
     Path("reports/real_report_run/manifest.json"),
     Path("reports/real_report_run/protocol_run.manifest.json"),
 )
+PACKAGE_START_PATHS = (
+    Path("docs/START_HERE.md"),
+    Path("docs/PROJECT_FINDINGS_OVERVIEW.md"),
+    Path("docs/FINAL_REPORT.md"),
+    Path("docs/FINAL_REPORT_HIGHLIGHTS.md"),
+    Path("docs/CLAIM_CATALOG.md"),
+    Path("docs/CONSOLIDATED_FINDINGS.md"),
+    Path("docs/REAL_REPORT_RUN.md"),
+    Path("docs/REMAINING_WORK_REGISTER.md"),
+    Path("docs/STRONGEST_CANDIDATE_DEEP_DIVE.md"),
+    Path("docs/WRR_NO_INPUT_HANDOFF_STATUS.md"),
+    Path("docs/KJVA_NO_INPUT_HANDOFF_STATUS.md"),
+    Path("docs/CITIES_NO_INPUT_HANDOFF_STATUS.md"),
+    Path("reports/real_report_run/summary.md"),
+)
 READER_LINK_SOURCE_PATHS = (Path("docs/START_HERE.md"),)
 READER_LINK_SECTION_MARKERS = {
     Path("README.md"): "Reader path:",
@@ -219,19 +234,10 @@ def write_package_readme(out_dir: Path, copied: list[CopiedFile]) -> None:
         "",
         "Start with:",
         "",
-        "1. `docs/START_HERE.md`",
-        "2. `docs/PROJECT_FINDINGS_OVERVIEW.md`",
-        "3. `docs/FINAL_REPORT.md`",
-        "4. `docs/FINAL_REPORT_HIGHLIGHTS.md`",
-        "5. `docs/CLAIM_CATALOG.md`",
-        "6. `docs/CONSOLIDATED_FINDINGS.md`",
-        "7. `docs/REAL_REPORT_RUN.md`",
-        "8. `docs/REMAINING_WORK_REGISTER.md`",
-        "9. `docs/STRONGEST_CANDIDATE_DEEP_DIVE.md`",
-        "10. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`",
-        "11. `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`",
-        "12. `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`",
-        "13. `reports/real_report_run/summary.md`",
+        *[
+            f"{index}. `{path.as_posix()}`"
+            for index, path in enumerate(PACKAGE_START_PATHS, start=1)
+        ],
         "",
         "Package files:",
         "",
