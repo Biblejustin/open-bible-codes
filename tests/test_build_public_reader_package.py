@@ -77,6 +77,7 @@ def test_builds_reader_package_from_whitelisted_docs(tmp_path, monkeypatch) -> N
         for path, marker in package.READER_LINK_SECTION_MARKERS.items()
     }
     assert Path("reports/public_reader_package/docs/START_HERE.md").exists()
+    assert Path("reports/public_reader_package/docs/REPOSITORY_README.md").exists()
     assert Path("reports/public_reader_package/docs/PROJECT_FINDINGS_OVERVIEW.md").exists()
     assert Path("reports/public_reader_package/docs/WRR_NO_INPUT_HANDOFF_STATUS.md").exists()
     assert Path("reports/public_reader_package/docs/KJVA_NO_INPUT_HANDOFF_STATUS.md").exists()
@@ -87,6 +88,7 @@ def test_builds_reader_package_from_whitelisted_docs(tmp_path, monkeypatch) -> N
     reader_package = Path(
         "reports/public_reader_package/reader_package.md"
     ).read_text(encoding="utf-8")
+    assert "Source: `README.md`" in reader_package
     assert "Source: `docs/START_HERE.md`" in reader_package
     assert "Source: `docs/PROJECT_FINDINGS_OVERVIEW.md`" in reader_package
     package_readme = Path("reports/public_reader_package/README.md").read_text(
@@ -95,6 +97,7 @@ def test_builds_reader_package_from_whitelisted_docs(tmp_path, monkeypatch) -> N
     assert "Reader-path guard: project findings overview, package start paths" in (
         package_readme
     )
+    assert "`README.md` | `docs/REPOSITORY_README.md`" in package_readme
     for index, path in enumerate(package.PACKAGE_START_PATHS, start=1):
         assert f"{index}. `{path.as_posix()}`" in package_readme
 

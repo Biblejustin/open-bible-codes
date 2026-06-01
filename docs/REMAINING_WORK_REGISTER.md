@@ -3008,6 +3008,13 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   copying, so package inputs cannot be directories and `--no-clean` output
   trees cannot write through an existing symbolic-link destination, output
   root, or package subdirectory.
+- Added an independent public-reader package manifest verifier and wired it
+  into `make public-reader-package-check`, so the temporary release package
+  must have its generated files, file count, source paths, package paths, byte
+  counts, and SHA-256 hashes match `package_manifest.json`.
+- The new verifier exposed and fixed the package-root README collision: the
+  repository `README.md` now lands at `docs/REPOSITORY_README.md`, leaving the
+  generated package `README.md` intact and hash-verifiable.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 

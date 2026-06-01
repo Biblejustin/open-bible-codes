@@ -66,6 +66,9 @@ READER_LINK_SECTION_MARKERS = {
     Path("docs/REAL_REPORT_RUN.md"): "Reader role:",
 }
 PACKAGED_READER_LINK_RE = re.compile(r"`((?:docs|reports)/[^`]+\.md)`")
+SOURCE_PACKAGE_PATH_OVERRIDES = {
+    Path("README.md"): Path("docs/REPOSITORY_README.md"),
+}
 
 
 @dataclass(frozen=True)
@@ -122,12 +125,24 @@ def build_public_reader_package(
     validate_reader_package_inputs(doc_paths, report_paths)
     copied: list[CopiedFile] = []
     for source in doc_paths:
-        copied.append(copy_checked_file(source, out_dir / source, package_root=out_dir))
+        copied.append(
+            copy_checked_file(
+                source,
+                package_destination_path(source, out_dir),
+                package_root=out_dir,
+            )
+        )
     for source in report_paths:
-        copied.append(copy_checked_file(source, out_dir / source, package_root=out_dir))
+        copied.append(
+            copy_checked_file(
+                source,
+                package_destination_path(source, out_dir),
+                package_root=out_dir,
+            )
+        )
 
     write_package_readme(out_dir, copied)
-    write_reader_package(out_dir, doc_paths, report_paths)
+    write_reader_package(out_dir, copied)
     write_manifest(out_dir, copied)
     return copied
 
@@ -289,6 +304,10 @@ def copy_checked_file(
     )
 
 
+def package_destination_path(source: Path, out_dir: Path) -> Path:
+    return out_dir / SOURCE_PACKAGE_PATH_OVERRIDES.get(source, source)
+
+
 def validate_package_source_path(path: Path) -> None:
     if path.is_absolute():
         raise ValueError(f"refusing absolute package source path: {path}")
@@ -361,19 +380,16 @@ def write_package_readme(out_dir: Path, copied: list[CopiedFile]) -> None:
     (out_dir / "README.md").write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
 
 
-def write_reader_package(
-    out_dir: Path,
-    doc_paths: list[Path],
-    report_paths: list[Path],
-) -> None:
+def write_reader_package(out_dir: Path, copied: list[CopiedFile]) -> None:
     lines = [
         "# Public Reader Package",
         "",
         "This concatenates the reader-path docs and formal report summary.",
         "",
     ]
-    for source in [*doc_paths, *report_paths]:
-        packaged = out_dir / source
+    for item in copied:
+        source = item.source
+        packaged = item.package_path
         if not packaged.exists() or packaged.suffix != ".md":
             continue
         lines.extend(

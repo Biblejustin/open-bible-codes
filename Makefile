@@ -102,6 +102,7 @@ study-mapping-schemas:
 
 public-reader-package-check:
 	python3 -m scripts.build_public_reader_package --out-dir /tmp/edls_public_reader_package_check
+	python3 -m scripts.check_public_reader_package --package-dir /tmp/edls_public_reader_package_check
 
 expanded-strata-tooling-check:
 	python3 -m scripts.check_expanded_strata_tooling

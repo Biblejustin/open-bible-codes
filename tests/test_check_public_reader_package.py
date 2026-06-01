@@ -1,0 +1,106 @@
+import json
+from pathlib import Path
+
+from scripts import build_public_reader_package as package
+from scripts import check_project_findings_overview_doc as overview_check
+from scripts import check_public_reader_package as check
+
+
+def _write(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="utf-8")
+
+
+def _default_doc_text(path: Path) -> str:
+    if path == overview_check.DEFAULT_DOC:
+        lines = ["# Open Bible Codes Findings Overview", ""]
+        lines.extend(overview_check.REQUIRED_HEADINGS)
+        lines.extend(overview_check.REQUIRED_PHRASES)
+        lines.extend(f"`{reference}`" for reference in overview_check.REQUIRED_REFERENCES)
+        return "\n\n".join(lines) + "\n"
+    if path == overview_check.DEFAULT_README:
+        return (
+            "# README\n\n"
+            "whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`\n\n"
+            "Reader path:\n\n"
+            "- start here: `docs/START_HERE.md`\n"
+            "- whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`\n"
+        )
+    if path == overview_check.DEFAULT_START_HERE:
+        return (
+            "# Start Here\n\n"
+            "1. `docs/PROJECT_FINDINGS_OVERVIEW.md` for the whole-project findings summary.\n\n"
+            "no current row should be presented as a public claim\n"
+        )
+    if path == Path("docs/FINAL_REPORT.md"):
+        return (
+            "# Final Report\n\n"
+            "## Reader Path\n\n"
+            "Read `docs/START_HERE.md`, then `docs/PROJECT_FINDINGS_OVERVIEW.md`.\n"
+        )
+    if path == Path("docs/REAL_REPORT_RUN.md"):
+        return (
+            "# Real Report Run\n\n"
+            "Reader role: use `docs/START_HERE.md` and `docs/FINAL_REPORT.md`.\n"
+        )
+    return f"# {path.name}\n\nbody\n"
+
+
+def _build_package(root: Path, monkeypatch) -> Path:
+    monkeypatch.chdir(root)
+    for path in package.DEFAULT_DOC_PATHS:
+        _write(path, _default_doc_text(path))
+    for path in package.DEFAULT_REPORT_PATHS:
+        _write(path, "# report\n\nbody\n" if path.suffix == ".md" else "{}\n")
+    out_dir = Path("reports/public_reader_package")
+    package.build_public_reader_package(out_dir=out_dir)
+    return out_dir
+
+
+def test_generated_public_reader_package_passes(tmp_path, monkeypatch) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+
+    assert check.validate_public_reader_package(out_dir) == []
+
+
+def test_detects_manifest_hash_drift(tmp_path, monkeypatch) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    (out_dir / "docs/START_HERE.md").write_text("# changed\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert any("sha256 drifted" in failure for failure in failures)
+    assert any("byte count drifted" in failure for failure in failures)
+
+
+def test_detects_manifest_file_count_drift(tmp_path, monkeypatch) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    manifest_path = out_dir / "package_manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["file_count"] = 999
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert any("file_count drifted" in failure for failure in failures)
+
+
+def test_detects_missing_packaged_file(tmp_path, monkeypatch) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    (out_dir / "docs/START_HERE.md").unlink()
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert any("docs/START_HERE.md is missing" in failure for failure in failures)
+
+
+def test_detects_unsafe_manifest_package_path(tmp_path, monkeypatch) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    manifest_path = out_dir / "package_manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["files"][0]["package_path"] = "../outside.md"
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert any("unsafe manifest package path: ../outside.md" in failure for failure in failures)
