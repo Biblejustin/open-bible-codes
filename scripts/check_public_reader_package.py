@@ -71,6 +71,8 @@ def validate_public_reader_package(
 
     failures.extend(validate_manifest_metadata(manifest, package_dir))
     failures.extend(validate_manifest_files(manifest, package_dir))
+    failures.extend(validate_generated_package_readme(manifest, package_dir))
+    failures.extend(validate_generated_reader_package(manifest, package_dir))
     failures.extend(validate_no_unmanifested_files(manifest, package_dir))
     return failures
 
@@ -168,6 +170,115 @@ def validate_no_unmanifested_files(
         if relative not in expected:
             failures.append(f"unexpected package file: {relative}")
     return failures
+
+
+def validate_generated_package_readme(
+    manifest: dict[str, Any],
+    package_dir: Path,
+) -> list[str]:
+    readme = package_dir / "README.md"
+    if not readme.exists() or readme.is_symlink() or not readme.is_file():
+        return []
+    actual = readme.read_text(encoding="utf-8")
+    expected = expected_package_readme_text(manifest)
+    if actual != expected:
+        return [f"{readme} content drifted from manifest"]
+    return []
+
+
+def expected_package_readme_text(manifest: dict[str, Any]) -> str:
+    lines = [
+        "# Public Reader Package",
+        "",
+        "Status: generated package over whitelisted docs and formal report summary.",
+        "Reader-path guard: project findings overview, package start paths, and configured reader-link sources validated before packaging.",
+        "It contains no raw Bible source files and no local database artifacts.",
+        "",
+        "Start with:",
+        "",
+        *[
+            f"{index}. `{path.as_posix()}`"
+            for index, path in enumerate(builder.PACKAGE_START_PATHS, start=1)
+        ],
+        "",
+        "Package files:",
+        "",
+        "| Source | Package path | Bytes | SHA-256 |",
+        "| --- | --- | ---: | --- |",
+    ]
+    files = manifest.get("files")
+    if isinstance(files, list):
+        for item in files:
+            if not isinstance(item, dict):
+                continue
+            lines.append(
+                f"| `{item.get('source', '')}` | `{item.get('package_path', '')}` | "
+                f"{item.get('bytes', '')} | `{item.get('sha256', '')}` |"
+            )
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def validate_generated_reader_package(
+    manifest: dict[str, Any],
+    package_dir: Path,
+) -> list[str]:
+    reader_package = package_dir / "reader_package.md"
+    if (
+        not reader_package.exists()
+        or reader_package.is_symlink()
+        or not reader_package.is_file()
+    ):
+        return []
+    failures: list[str] = []
+    expected = expected_reader_package_text(manifest, package_dir, failures)
+    if failures:
+        return failures
+    actual = reader_package.read_text(encoding="utf-8")
+    if actual != expected:
+        failures.append(f"{reader_package} content drifted from package files")
+    return failures
+
+
+def expected_reader_package_text(
+    manifest: dict[str, Any],
+    package_dir: Path,
+    failures: list[str],
+) -> str:
+    lines = [
+        "# Public Reader Package",
+        "",
+        "This concatenates the reader-path docs and formal report summary.",
+        "",
+    ]
+    files = manifest.get("files")
+    if not isinstance(files, list):
+        return "\n".join(lines).rstrip() + "\n"
+    for item in files:
+        if not isinstance(item, dict):
+            continue
+        source = str(item.get("source", ""))
+        package_path_text = str(item.get("package_path", ""))
+        if not package_path_text.endswith(".md"):
+            continue
+        package_path = Path(package_path_text)
+        if package_path.is_absolute() or ".." in package_path.parts:
+            continue
+        path = package_dir / package_path
+        if path.is_symlink() or not path.exists() or not path.is_file():
+            failures.append(f"cannot validate reader package source section: {path}")
+            continue
+        lines.extend(
+            [
+                "",
+                "---",
+                "",
+                f"Source: `{source}`",
+                "",
+                path.read_text(encoding="utf-8").rstrip(),
+                "",
+            ]
+        )
+    return "\n".join(lines).rstrip() + "\n"
 
 
 def validate_manifest_file_row_shape(

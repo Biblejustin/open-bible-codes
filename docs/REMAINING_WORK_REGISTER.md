@@ -3020,6 +3020,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   manifest-covered reader files.
 - Tightened the verifier so manifest `source` paths must also stay relative,
   supported, and outside raw/source-data locations.
+- Tightened the verifier so generated package `README.md` and
+  `reader_package.md` must be reproducible from the manifest and packaged
+  files, preventing stale or hand-edited package docs from passing hash checks.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 

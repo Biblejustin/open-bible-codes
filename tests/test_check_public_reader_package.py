@@ -137,3 +137,31 @@ def test_detects_forbidden_manifest_source_path(tmp_path, monkeypatch) -> None:
     failures = check.validate_public_reader_package(out_dir)
 
     assert "forbidden manifest source path: data/raw/source.md" in failures
+
+
+def test_detects_package_readme_drift(tmp_path, monkeypatch) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    readme = out_dir / "README.md"
+    text = readme.read_text(encoding="utf-8")
+    readme.write_text(
+        text.replace("Package files:", "Package file list:"),
+        encoding="utf-8",
+    )
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert f"{readme} content drifted from manifest" in failures
+
+
+def test_detects_reader_package_drift(tmp_path, monkeypatch) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    reader_package = out_dir / "reader_package.md"
+    text = reader_package.read_text(encoding="utf-8")
+    reader_package.write_text(
+        text.replace("Source: `docs/START_HERE.md`", "Source: `docs/MISSING.md`"),
+        encoding="utf-8",
+    )
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert f"{reader_package} content drifted from package files" in failures
