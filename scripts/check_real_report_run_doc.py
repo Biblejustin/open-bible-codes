@@ -74,6 +74,8 @@ REQUIRED_PHRASES = (
     "KJVA Gutenberg candidate checksum sidecar records eBook 30 and eBook 124 RDF and plain-text SHA-256 identifiers",
     "KJVA source-policy blocker packet",
     "docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md",
+    "KJVA next-result gate",
+    "docs/KJVA_NEXT_RESULT_GATE.md",
 )
 
 

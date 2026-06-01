@@ -177,6 +177,8 @@ This assembly run includes:
   `docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md`
 - KJVA source-policy blocker packet:
   `docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md`
+- KJVA next-result gate:
+  `docs/KJVA_NEXT_RESULT_GATE.md`
 - KJVA Wikisource candidate source-status audit:
   `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - KJVA Wikisource book-coverage probe:

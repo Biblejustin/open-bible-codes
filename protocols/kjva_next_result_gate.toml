@@ -1,0 +1,23 @@
+name = "kjva_next_result_gate"
+description = "Write the KJVA next-result gate without importing Bible text or producing results."
+manifest_out = "reports/kjva_next_result_gate/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "kjva_next_result_gate"
+description = "Record source, term, leakage, control, and study-lock gates before any future KJVA result."
+argv = ["-m", "scripts.build_kjva_next_result_gate"]
+inputs = [
+  "scripts/build_kjva_next_result_gate.py",
+  "reports/kjva_source_policy_blocker_packet/summary.csv",
+  "reports/kjva_source_policy_blocker_packet/blockers.csv",
+  "reports/kjv_apocrypha_bridge_prospective/term_summary.csv",
+  "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/control_summary.csv",
+]
+outputs = [
+  "reports/kjva_next_result_gate/gates.csv",
+  "reports/kjva_next_result_gate/summary.csv",
+  "docs/KJVA_NEXT_RESULT_GATE.md",
+  "reports/kjva_next_result_gate/manifest.json",
+]

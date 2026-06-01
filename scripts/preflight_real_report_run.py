@@ -80,6 +80,7 @@ from scripts import (
     check_kjva_hakkaac_apocrypha_marker_coverage_doc,
     check_kjva_hakkaac_source_lock_decision_packet_doc,
     check_kjva_apocrypha_bridge_next_replication_doc,
+    check_kjva_next_result_gate_doc,
     check_kjva_apocrypha_bridge_prospective_boundary,
     check_kjva_crosswire_candidate_source_audit_doc,
     check_kjva_gutenberg_book_coverage_probe_doc,
@@ -207,6 +208,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_kjva_gutenberg_hakkaac_split_source_role_sidecar_doc.py",
     "scripts/build_kjva_source_policy_blocker_packet.py",
     "scripts/check_kjva_source_policy_blocker_packet_doc.py",
+    "scripts/build_kjva_next_result_gate.py",
+    "scripts/check_kjva_next_result_gate_doc.py",
     "scripts/analyze_kjva_gutenberg_source_lock_prep.py",
     "scripts/build_kjva_gutenberg_source_lock_blocker_packet.py",
     "scripts/build_kjva_gutenberg_source_lock_decision_packet.py",
@@ -617,6 +620,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md",
     "docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md",
     "docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md",
+    "docs/KJVA_NEXT_RESULT_GATE.md",
     "docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md",
     "docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md",
     "docs/KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md",
@@ -667,6 +671,9 @@ DEFAULT_REQUIRED_PATHS = [
     "reports/kjva_source_policy_blocker_packet/blockers.csv",
     "reports/kjva_source_policy_blocker_packet/summary.csv",
     "reports/kjva_source_policy_blocker_packet/manifest.json",
+    "reports/kjva_next_result_gate/gates.csv",
+    "reports/kjva_next_result_gate/summary.csv",
+    "reports/kjva_next_result_gate/manifest.json",
     "reports/kjva_hakkaac_apocrypha_boundary_candidate/chapter_markers.csv",
     "reports/kjva_hakkaac_apocrypha_boundary_candidate/summary.csv",
     "reports/kjva_hakkaac_apocrypha_boundary_candidate/manifest.json",
@@ -760,6 +767,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/kjva_gutenberg_source_lock_decision_packet.toml",
     "protocols/kjva_gutenberg_hakkaac_split_source_role_sidecar.toml",
     "protocols/kjva_source_policy_blocker_packet.toml",
+    "protocols/kjva_next_result_gate.toml",
     "protocols/kjva_gutenberg_source_lock_prep.toml",
     "protocols/kjva_hakkaac_apocrypha_boundary_candidate.toml",
     "protocols/kjva_hakkaac_apocrypha_marker_coverage.toml",
@@ -1399,6 +1407,17 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "KJVA source-policy blocker packet failures: "
             + "; ".join(kjva_source_policy_blocker_packet_doc_failures)
+        )
+
+    kjva_next_result_gate_doc_failures = (
+        check_kjva_next_result_gate_doc.validate_kjva_next_result_gate_doc(
+            root / check_kjva_next_result_gate_doc.DEFAULT_DOC
+        )
+    )
+    if kjva_next_result_gate_doc_failures:
+        failures.append(
+            "KJVA next-result gate failures: "
+            + "; ".join(kjva_next_result_gate_doc_failures)
         )
 
     kjva_hakkaac_apocrypha_boundary_candidate_doc_failures = (
@@ -2590,6 +2609,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "kjva_source_policy_blocker_packet_doc_failures": (
             kjva_source_policy_blocker_packet_doc_failures
+        ),
+        "kjva_next_result_gate_doc_failures": (
+            kjva_next_result_gate_doc_failures
         ),
         "kjva_hakkaac_apocrypha_boundary_candidate_doc_failures": (
             kjva_hakkaac_apocrypha_boundary_candidate_doc_failures

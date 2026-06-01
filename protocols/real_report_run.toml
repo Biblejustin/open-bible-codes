@@ -62,6 +62,8 @@ inputs = [
   "scripts/check_kjva_gutenberg_hakkaac_split_source_role_sidecar_doc.py",
   "scripts/build_kjva_source_policy_blocker_packet.py",
   "scripts/check_kjva_source_policy_blocker_packet_doc.py",
+  "scripts/build_kjva_next_result_gate.py",
+  "scripts/check_kjva_next_result_gate_doc.py",
   "scripts/check_real_report_run_doc.py",
   "scripts/check_strongest_candidate_deep_dive_doc.py",
   "els/project_index.py",
@@ -456,6 +458,7 @@ inputs = [
   "docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md",
   "docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md",
   "docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md",
+  "docs/KJVA_NEXT_RESULT_GATE.md",
   "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
   "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
   "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
@@ -517,6 +520,9 @@ inputs = [
   "reports/kjva_source_policy_blocker_packet/blockers.csv",
   "reports/kjva_source_policy_blocker_packet/summary.csv",
   "reports/kjva_source_policy_blocker_packet/manifest.json",
+  "reports/kjva_next_result_gate/gates.csv",
+  "reports/kjva_next_result_gate/summary.csv",
+  "reports/kjva_next_result_gate/manifest.json",
   "reports/kjva_open_bibles_candidate_source/source_status.csv",
   "reports/kjva_open_bibles_candidate_source/summary.csv",
   "reports/kjva_open_bibles_candidate_source/anchors.csv",
@@ -599,6 +605,7 @@ inputs = [
   "protocols/kjva_hakkaac_source_lock_decision_packet.toml",
   "protocols/kjva_gutenberg_hakkaac_split_source_role_sidecar.toml",
   "protocols/kjva_source_policy_blocker_packet.toml",
+  "protocols/kjva_next_result_gate.toml",
   "protocols/kjva_open_bibles_candidate_source_audit.toml",
   "protocols/kjva_wikisource_candidate_source_audit.toml",
   "protocols/external_claim_source_counts.toml",
@@ -2062,6 +2069,24 @@ outputs = [
   "reports/kjva_source_policy_blocker_packet/summary.csv",
   "docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md",
   "reports/kjva_source_policy_blocker_packet/manifest.json",
+]
+
+[[steps]]
+id = "kjva_next_result_gate"
+description = "Record source, term, leakage, control, and study-lock gates before any future KJVA result."
+argv = ["-m", "scripts.build_kjva_next_result_gate"]
+inputs = [
+  "scripts/build_kjva_next_result_gate.py",
+  "reports/kjva_source_policy_blocker_packet/summary.csv",
+  "reports/kjva_source_policy_blocker_packet/blockers.csv",
+  "reports/kjv_apocrypha_bridge_prospective/term_summary.csv",
+  "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/control_summary.csv",
+]
+outputs = [
+  "reports/kjva_next_result_gate/gates.csv",
+  "reports/kjva_next_result_gate/summary.csv",
+  "docs/KJVA_NEXT_RESULT_GATE.md",
+  "reports/kjva_next_result_gate/manifest.json",
 ]
 
 [[steps]]

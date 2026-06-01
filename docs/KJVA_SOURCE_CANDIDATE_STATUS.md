@@ -14,7 +14,7 @@ source-lock prep count comparison, the source-lock decision packet, the
 source-lock blocker packet, the Hakkaac boundary-candidate audit, the
 Hakkaac full-marker coverage audit, the Hakkaac ignored-local collation
 audit, the Hakkaac source-lock decision packet, the split-source role sidecar,
-and the source-policy blocker packet.
+the source-policy blocker packet, and the next-result gate.
 
 This rollup does not import Bible text, normalize verses, run ELS searches,
 evaluate controls, or upgrade the completed KJVA bridge lane.
@@ -29,7 +29,9 @@ evaluate controls, or upgrade the completed KJVA bridge lane.
 
 No result-bearing KJVA replication is source-ready yet. Current KJVA bridge
 outputs remain review material, and the completed KJVA prospective bridge lane
-remains negative under its registered controls.
+remains negative under its registered controls. The next-result gate records
+11 gate rows: only current-source rerun reproducibility is ready, 10 gates are
+blocked, and new result-bearing KJVA output is not allowed.
 
 ## Source Matrix
 
@@ -59,6 +61,7 @@ remains negative under its registered controls.
 - `docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md`
 - `docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md`
 - `docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md`
+- `docs/KJVA_NEXT_RESULT_GATE.md`
 - `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - `docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md`
 - `docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md`
@@ -84,4 +87,7 @@ A future KJVA/apocrypha bridge replication needs these locks before output:
 This rollup is a guardrail document. It prevents the metadata-only source
 audits from being read as replication-ready work. It does not add a new
 corpus, does not add new terms, does not create candidates, and does not change
-any KJVA result status.
+any KJVA result status. It also points to the next-result gate, which blocks a
+new KJVA result until source policy, source text, verse map, collation,
+drift/boundary, fresh terms, leakage audit, fixed controls, and study lock all
+pass.

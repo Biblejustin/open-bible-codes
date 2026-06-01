@@ -27,6 +27,7 @@ DEFAULT_LINKED_DOCS = (
     Path("docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md"),
     Path("docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md"),
     Path("docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md"),
+    Path("docs/KJVA_NEXT_RESULT_GATE.md"),
     Path("docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md"),
     Path("docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md"),
     Path("docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md"),
@@ -44,6 +45,10 @@ REQUIRED_PHRASES = (
     "Result-ready sources: 0.",
     "source-lock ready sources: 0.",
     "No result-bearing KJVA replication is source-ready yet.",
+    "The next-result gate records 11 gate rows",
+    "only current-source rerun reproducibility is ready",
+    "10 gates are blocked",
+    "new result-bearing KJVA output is not allowed",
     "current eBible KJV + Apocrypha source family",
     "current eBible KJVA source-lock sidecar",
     "14 apocrypha/deuterocanon books, 5720 verses, and 593090 normalized letters",
@@ -124,6 +129,8 @@ REQUIRED_PHRASES = (
     "not a KJVA/apocrypha source candidate",
     "does not import Bible text, normalize verses, run ELS searches",
     "does not change any KJVA result status",
+    "next-result gate",
+    "source policy, source text, verse map, collation, drift/boundary, fresh terms, leakage audit, fixed controls, and study lock all pass",
 )
 FORBIDDEN_OVERCLAIM_RE = re.compile(
     r"\b(?:result-bearing replication is ready|source-ready replication|"

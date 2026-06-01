@@ -2737,3 +2737,22 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/check_kjva_source_policy_blocker_packet_doc.py`, and wired the
   packet into `scripts/preflight_real_report_run.py` plus
   `protocols/real_report_run.toml`.
+
+## KJVA Next Result Gate
+
+- Added `docs/KJVA_NEXT_RESULT_GATE.md` as a non-text gate for future KJVA
+  result-bearing work.
+- Current gate status: 11 gate rows, 1 rerun-only ready row, 10 blocked rows,
+  7 source-policy blocker rows, 7 completed-lane terms, 1 completed-lane
+  observed bridge row, 0 completed-lane significant terms, and 1 non-Bible
+  control at or above the observed total.
+- Current ready scope: current eBible KJVA rerun reproducibility only.
+- Current blocked scope: completed-lane claim use, source policy, source text,
+  verse map/collation, drift/boundary, fresh terms, leakage audit, fixed
+  controls, study-lock manifest, and final result permission.
+- This gate does not add Bible text, approve source use, lock terms, lock a
+  study, create an ELS result, or change KJVA bridge result status.
+- Added `protocols/kjva_next_result_gate.toml`,
+  `scripts/build_kjva_next_result_gate.py`, and
+  `scripts/check_kjva_next_result_gate_doc.py`, and wired the gate into
+  `scripts/preflight_real_report_run.py` plus `protocols/real_report_run.toml`.

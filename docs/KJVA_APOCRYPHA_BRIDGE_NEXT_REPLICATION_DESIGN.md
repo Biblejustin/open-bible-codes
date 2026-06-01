@@ -114,6 +114,10 @@ Online source candidates found for possible future audit:
   policy-ready; Project Gutenberg-only, Project Gutenberg plus Hakkaac, and
   Hakkaac-primary streams remain blocked with no source lock ready:
   `docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md`.
+  Current next-result gate records the final run permission state: 11 gate
+  rows, 1 rerun-only ready row, 10 blocked rows, 0 fresh-term/leakage/control/
+  study-lock gates ready, and 0 result permission:
+  `docs/KJVA_NEXT_RESULT_GATE.md`.
 - [CrossWire GitLab KJV/KJVA](https://gitlab.com/crosswire-bible-society/kjv):
   possible independent metadata candidate because KJVA/KJVDC path names are
   present. Current tracked status audit:
@@ -163,6 +167,7 @@ sidecar.
 - `docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md`
 - `docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md`
 - `docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md`
+- `docs/KJVA_NEXT_RESULT_GATE.md`
 - `docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md`
 - `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - `configs/prospective_study_lanes.json`

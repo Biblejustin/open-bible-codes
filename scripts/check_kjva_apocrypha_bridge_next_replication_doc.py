@@ -45,6 +45,10 @@ REQUIRED_PHRASES = (
     "Current source-policy blocker packet aggregates 5 policy options and 7 blockers",
     "only current eBible rerun and deferral of new KJVA result work are policy-ready",
     "Project Gutenberg-only, Project Gutenberg plus Hakkaac, and Hakkaac-primary streams remain blocked",
+    "Current next-result gate records the final run permission state",
+    "11 gate rows, 1 rerun-only ready row, 10 blocked rows",
+    "0 fresh-term/leakage/control/ study-lock gates ready",
+    "0 result permission",
 )
 REQUIRED_LINKS = (
     "terms/kjv_apocrypha_bridge_prospective_terms.csv",
@@ -68,6 +72,7 @@ REQUIRED_LINKS = (
     "docs/KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md",
     "docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md",
     "docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md",
+    "docs/KJVA_NEXT_RESULT_GATE.md",
     "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
