@@ -43,8 +43,9 @@ findings prospective-boundary guarding, generated lane-status freshness
 guarding, final-report assembly-boundary guarding, final-report highlights
 freshness guarding, centered-occurrence index freshness guarding, strongest
 candidate deep-dive freshness guarding, claim-catalog summary guarding,
-real-report run doc guarding, final-report assembly direct gating, imported
-preflight check-script input guarding,
+real-report run doc guarding, final-report assembly direct gating,
+top-reader summary doc direct gating, imported preflight check-script input
+guarding,
 research missing model pages audit doc guarding, WRR-adjacent source audit
 family doc guarding, real-report source-audit preflight documentation,
 critical-omission follow-up doc guarding, KJVA apocrypha prospective boundary
@@ -3061,6 +3062,19 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Updated README validation descriptions and Makefile guard tests so the
   final-report assembly docs remain visible in both dirty-safe and clean
   release checks.
+- This is a documentation guard only. It does not change report conclusions,
+  source policy, imported texts, ELS searches, or result status.
+
+## Top-Reader Summary Doc Direct Gate
+
+- Wired `scripts/check_consolidated_findings_doc.py`,
+  `scripts/check_claim_catalog_doc.py`,
+  `scripts/check_final_report_highlights_doc.py`, and
+  `scripts/check_strongest_candidate_deep_dive_doc.py` directly into `make
+  fast-validate` and `make public-release-check`.
+- Updated README validation descriptions and Makefile guard tests so the
+  reader-facing summary packet is checked in both dirty-safe and clean release
+  paths, not only during formal real-report preflight.
 - This is a documentation guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 
