@@ -361,6 +361,8 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "git diff --check" in makefile
     assert "scripts.check_public_release_hygiene --allow-dirty" in makefile
     assert "scripts.check_expanded_strata_tooling" in makefile
+    assert "$(MAKE) reader-doc-checks" in makefile
+    assert "reader-doc-checks:" in makefile
     assert "scripts.check_project_findings_overview_doc" in makefile
     assert "scripts.check_real_report_run_doc" in makefile
     assert "scripts.check_consolidated_findings_doc" in makefile
@@ -389,6 +391,7 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "$(MAKE) public-reader-package-check" in makefile
     assert "$(MAKE) local-data-doc-check" in makefile
     assert "make fast-validate" in readme
+    assert "make reader-doc-checks" in readme
     assert "expanded-strata operator tooling" in readme
     assert "general-reader findings overview" in readme
     assert "real-report run documentation" in readme
@@ -454,6 +457,8 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
 
     assert "release-ready: fast-validate public-release-check" in makefile
     assert "scripts.check_doc_command_references" in makefile
+    assert "$(MAKE) reader-doc-checks" in makefile
+    assert "reader-doc-checks:" in makefile
     assert "scripts.check_project_findings_overview_doc" in makefile
     assert "scripts.check_real_report_run_doc" in makefile
     assert "scripts.check_consolidated_findings_doc" in makefile
@@ -477,6 +482,7 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "$(MAKE) study-mapping-schemas" in makefile
     assert "$(MAKE) public-reader-package-check" in makefile
     assert "make release-ready" in readme
+    assert "make reader-doc-checks" in readme
     assert "validates documented script/source-path references" in normalized_readme
     assert "guards the general-reader findings overview" in normalized_readme
     assert "real-report run documentation" in normalized_readme

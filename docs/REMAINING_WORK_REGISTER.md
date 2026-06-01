@@ -46,7 +46,7 @@ candidate deep-dive freshness guarding, claim-catalog summary guarding,
 real-report run doc guarding, final-report assembly direct gating,
 top-reader summary doc direct gating, prospective workflow direct gating,
 public/no-input handoff doc direct gating, imported preflight check-script
-input guarding,
+input guarding, reader-doc check target consolidation,
 research missing model pages audit doc guarding, WRR-adjacent source audit
 family doc guarding, real-report source-audit preflight documentation,
 critical-omission follow-up doc guarding, KJVA apocrypha prospective boundary
@@ -3106,6 +3106,19 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   not only during formal real-report preflight.
 - This is a documentation guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
+
+## Reader-Doc Check Target Consolidation
+
+- Added `make reader-doc-checks` as the shared Make target for the
+  reader-facing documentation guard list.
+- Updated `make fast-validate` and `make public-release-check` to call the
+  shared target, so the long reader-doc checker list is maintained in one
+  place.
+- Updated README validation guidance and Makefile guard tests to keep the
+  shared target visible.
+- This is a Makefile/validation maintenance change only. It does not change
+  report conclusions, source policy, imported texts, ELS searches, or result
+  status.
 
 ## Clean-Lock Results Summary Guard
 

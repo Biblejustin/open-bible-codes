@@ -109,6 +109,15 @@ This runs `make fast-validate`, then reruns the clean public-release gate. Run
 it from a committed tree; the public-release gate intentionally fails while
 tracked files are dirty.
 
+Reader-document checks only:
+
+```bash
+make reader-doc-checks
+```
+
+This runs the reader-facing documentation guards shared by `make
+fast-validate` and `make public-release-check`.
+
 Build ignored public reader package after `make real-report`:
 
 ```bash
