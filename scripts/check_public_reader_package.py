@@ -535,15 +535,63 @@ def validate_packaged_real_report_protocol_manifest(
     if not isinstance(steps, list) or not steps:
         failures.append(f"{path} has no protocol steps")
         return failures
-    preflight = next(
-        (step for step in steps if isinstance(step, dict) and step.get("id") == "preflight"),
-        None,
-    )
+    preflight = protocol_step(steps, "preflight")
     if not isinstance(preflight, dict):
         failures.append(f"{path} missing preflight step")
     elif preflight.get("return_code") != 0 or preflight.get("skipped") is not False:
         failures.append(f"{path} preflight step did not run cleanly")
+    cities_handoff = protocol_step(steps, "cities_no_input_handoff_status")
+    if not isinstance(cities_handoff, dict):
+        failures.append(f"{path} missing cities_no_input_handoff_status step")
+    elif cities_handoff.get("return_code") != 0:
+        failures.append(f"{path} cities_no_input_handoff_status step failed")
+    summary = protocol_step(steps, "real_report_summary")
+    if not isinstance(summary, dict):
+        failures.append(f"{path} missing real_report_summary step")
+    elif summary.get("return_code") != 0 or summary.get("skipped") is not False:
+        failures.append(f"{path} real_report_summary step did not run cleanly")
+    elif not protocol_step_contains_all(
+        summary,
+        key="inputs",
+        required=(
+            "reports/cities_no_input_handoff_status/summary.csv",
+            "reports/cities_no_input_handoff_status/manifest.json",
+        ),
+    ):
+        failures.append(f"{path} real_report_summary missing Cities inputs")
+    elif not protocol_step_contains_all(
+        summary,
+        key="outputs",
+        required=(
+            "reports/real_report_run/summary.md",
+            "reports/real_report_run/manifest.json",
+        ),
+    ):
+        failures.append(f"{path} real_report_summary outputs drifted")
     return failures
+
+
+def protocol_step(steps: list[Any], step_id: str) -> dict[str, Any] | None:
+    return next(
+        (
+            step
+            for step in steps
+            if isinstance(step, dict) and step.get("id") == step_id
+        ),
+        None,
+    )
+
+
+def protocol_step_contains_all(
+    step: dict[str, Any],
+    *,
+    key: str,
+    required: tuple[str, ...],
+) -> bool:
+    values = step.get(key)
+    if not isinstance(values, list):
+        return False
+    return set(required).issubset({str(value) for value in values})
 
 
 def packaged_path_for_source(

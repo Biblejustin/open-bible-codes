@@ -128,6 +128,24 @@ def _default_report_text(path: Path) -> str:
                         "id": "preflight",
                         "return_code": 0,
                         "skipped": False,
+                    },
+                    {
+                        "id": "cities_no_input_handoff_status",
+                        "return_code": 0,
+                        "skipped": True,
+                    },
+                    {
+                        "id": "real_report_summary",
+                        "return_code": 0,
+                        "skipped": False,
+                        "inputs": [
+                            "reports/cities_no_input_handoff_status/summary.csv",
+                            "reports/cities_no_input_handoff_status/manifest.json",
+                        ],
+                        "outputs": [
+                            "reports/real_report_run/summary.md",
+                            "reports/real_report_run/manifest.json",
+                        ],
                     }
                 ],
             },
@@ -302,6 +320,24 @@ def test_detects_packaged_real_report_protocol_manifest_drift(
     failures = check.validate_public_reader_package(out_dir)
 
     assert f"{protocol_path} preflight step did not run cleanly" in failures
+
+
+def test_detects_packaged_real_report_protocol_manifest_summary_input_drift(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    protocol_path = out_dir / "reports/real_report_run/protocol_run.manifest.json"
+    protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
+    for step in protocol["steps"]:
+        if step["id"] == "real_report_summary":
+            step["inputs"] = []
+            break
+    protocol_path.write_text(json.dumps(protocol, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert f"{protocol_path} real_report_summary missing Cities inputs" in failures
 
 
 def test_detects_missing_required_manifest_source(tmp_path, monkeypatch) -> None:
