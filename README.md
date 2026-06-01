@@ -800,7 +800,8 @@ pending transcription-review rows, plus 203 line crops ranked for visual
 triage; no source rows imported, and no city-name normalization, ELS searches,
 compactness runs, or p-levels.
 The consolidated Cities no-input handoff keeps 8 handoff rows, 6
-manual-input-needed rows, 14 transcription review rows, 203 priority
+manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages,
+41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority
 line-crop review rows, and no Cities result allowed.
 Event/object experiment source audit:
 `docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md` (65 machine-readable source rows).

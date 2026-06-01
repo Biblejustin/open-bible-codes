@@ -518,7 +518,8 @@ The handoff is source-review only and is tracked in
 `data/study/mappings/cities_source_row_lock_decisions.csv`, and
 `data/study/mappings/cities_source_transcription_decisions.csv`.
 The consolidated Cities no-input handoff keeps 8 handoff rows, 6
-manual-input-needed rows, 14 transcription review rows, 203 priority
+manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages,
+41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority
 line-crop review rows, and no Cities result allowed.
 
 The exact-reproduction gap dashboard consolidates the current 163 vs 72

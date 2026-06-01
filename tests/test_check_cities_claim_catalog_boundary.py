@@ -87,7 +87,9 @@ def valid_row() -> dict[str, str]:
         "current_reproduction": (
             "Source-chain audit and source-row lock handoff exist; current "
             "decision records have 14 populated lock rows and the transcription "
-            "worksheet has 14 pending review rows with no source rows imported"
+            "worksheet has 14 pending review rows with no source rows imported; "
+            "OCR page review has 61 packet pages with 41 reviewed and "
+            "20 unreviewed"
         ),
         "evidence": "docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
         "notes": (
@@ -132,6 +134,9 @@ def write_doc(path: Path, *, omit: str = "") -> None:
         "data/study/mappings/cities_source_row_lock_decisions.csv",
         "data/study/mappings/cities_source_transcription_decisions.csv",
         "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
+        "61 OCR packet pages",
+        "41 reviewed OCR packet pages",
+        "20 unreviewed OCR packet pages",
     ]
     path.write_text(
         "\n".join(phrase for phrase in phrases if phrase != omit),

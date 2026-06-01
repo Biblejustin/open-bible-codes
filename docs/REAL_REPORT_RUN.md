@@ -140,8 +140,9 @@ This assembly run includes:
   city-name normalization, ELS searches, compactness runs, or p-levels.
   Cities no-input handoff status: `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`
   consolidates 8 handoff rows, 6 manual-input-needed rows, 14 transcription
-  review rows, 203 priority line-crop review rows, and the no-source-import /
-  no-Cities-result boundary, with no Cities result allowed.
+  review rows, 61 OCR packet pages, 41 reviewed OCR packet pages, 20
+  unreviewed OCR packet pages, 203 priority line-crop review rows, and the
+  no-source-import / no-Cities-result boundary, with no Cities result allowed.
 - broader search/current findings writeup:
   `docs/BROADER_SEARCH_FINDINGS.md`
 - broad Hebrew modern/geopolitical version-distribution run:
@@ -399,8 +400,10 @@ It requires:
   rows, no source rows imported, and no city-name normalization, ELS searches,
   compactness runs, or p-levels;
 - Cities no-input handoff status keeps 8 handoff rows, 6 manual-input-needed
-  rows, 14 transcription review rows, 203 priority line-crop review rows, and
-  the no-source-import/no-Cities-result boundary in one guarded packet;
+  rows, 14 transcription review rows, 61 OCR packet pages, 41 reviewed OCR
+  packet pages, 20 unreviewed OCR packet pages, 203 priority line-crop review
+  rows, and the no-source-import/no-Cities-result boundary in one guarded
+  packet;
 - WRR manual decision register consolidates 37 manual-decision inventory rows,
   representing 58 action terms, 59 residual pair links, and 40
   minimum-frontier pair links without selecting corrections or exclusions;

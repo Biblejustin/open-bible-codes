@@ -326,7 +326,9 @@ p-levels. Current decision-record paths:
 `data/study/mappings/cities_source_transcription_decisions.csv`.
 Consolidated no-input handoff: `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`
 keeps 8 handoff rows, 6 manual-input-needed rows, 14 transcription review
-rows, 203 priority line-crop review rows, and no Cities result allowed.
+rows, 61 OCR packet pages, 41 reviewed OCR packet pages, 20 unreviewed OCR
+packet pages, 203 priority line-crop review rows, and no Cities result
+allowed.
 
 Cities source-transcription review worksheet:
 

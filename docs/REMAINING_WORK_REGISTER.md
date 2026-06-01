@@ -253,8 +253,10 @@ The OCR review checklist groups the 11 packet PDFs into local contact-sheet revi
 rows; the checklist checker locks contact-sheet path scope, recomputed summary
 totals, and manifest contact-summary metadata. The page-image review now
 records 61 packet pages, 41 reviewed packet pages, and 20 unreviewed packet
-pages; the page-review checker locks builder-derived decision rows, summary
-rows, manifest inputs, and no-source-row-use boundaries. The source-row lock
+pages; the public handoff names the same coverage as 61 OCR packet pages, 41
+reviewed OCR packet pages, and 20 unreviewed OCR packet pages. The page-review
+checker locks builder-derived decision rows, summary rows, manifest inputs,
+and no-source-row-use boundaries. The source-row lock
 queue isolates 14 candidate pages across three labels, the worksheet assigns 14
 lock decision ids, and the evidence packet joins those ids to PDF metadata,
 checksums, and page-image paths without OCR body text or source-row import; the

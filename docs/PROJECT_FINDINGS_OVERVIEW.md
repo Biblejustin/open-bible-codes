@@ -151,8 +151,9 @@ In plain words, those are pages that may contain the city-name source list, not
 a verified city-name list ready for searching.
 
 The current Cities no-input handoff has 8 handoff rows, 6
-manual-input-needed rows, 14 transcription review rows, 203 priority line-crop
-review rows, and no Cities result allowed.
+manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages,
+41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority
+line-crop review rows, and no Cities result allowed.
 
 Current read: this work organizes source evidence for later review, but it has
 not produced source rows, city-name normalization, ELS searches, compactness

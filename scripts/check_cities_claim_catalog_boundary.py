@@ -58,6 +58,9 @@ REQUIRED_DOC_PHRASES = (
     "data/study/mappings/cities_source_row_lock_decisions.csv",
     "data/study/mappings/cities_source_transcription_decisions.csv",
     "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
+    "61 OCR packet pages",
+    "41 reviewed OCR packet pages",
+    "20 unreviewed OCR packet pages",
 )
 
 
