@@ -18,6 +18,15 @@ def test_kjva_no_input_handoff_status_section_keeps_result_closed() -> None:
                 "gate_rows": "11",
                 "blocked_gate_rows": "10",
                 "source_policy_blocker_rows": "7",
+                "candidate_source_audit_rows": "4",
+                "candidate_source_verse_import_ready_pages": "0",
+                "candidate_source_result_ready_pages": "0",
+                "crosswire_possible_independent_kjva_candidates": "1",
+                "gutenberg_split_kjv_apocrypha_metadata_candidates": "1",
+                "wikisource_source_candidate_pages": "1",
+                "open_bibles_kjv_paths": "1",
+                "open_bibles_apocrypha_paths": "0",
+                "open_bibles_deuterocanon_paths": "0",
                 "source_use_ready_pages": "0",
                 "source_lock_ready": "False",
                 "result_allowed": "False",
@@ -40,6 +49,8 @@ def test_kjva_no_input_handoff_status_section_keeps_result_closed() -> None:
     )
     text = "\n".join(lines)
     assert "## KJVA No-Input Handoff Status" in text
+    assert "| Candidate source audits | 4 |" in text
+    assert "| Candidate result-ready pages | 0 |" in text
     assert "| Result allowed | 0 |" in text
     assert "`kjva_no_input_handoff_blocks_new_result`" in text
     assert "- Current read: this is a work map, not a statistical result." in text

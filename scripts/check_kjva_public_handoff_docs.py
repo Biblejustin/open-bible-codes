@@ -36,6 +36,8 @@ REQUIRED_PHRASES_BY_DOC = {
     ),
     Path("reports/real_report_run/summary.md"): (
         "## KJVA No-Input Handoff Status",
+        "| Candidate source audits | 4 |",
+        "| Candidate result-ready pages | 0 |",
         "| Result allowed | 0 |",
         "Claim status: `kjva_no_input_handoff_blocks_new_result`",
         "Current read: this is a work map, not a statistical result.",

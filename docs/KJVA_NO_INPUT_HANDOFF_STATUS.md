@@ -20,6 +20,15 @@ It exists so the next work item starts from one status file without re-reading t
 - Blocked options: 3.
 - Checksum records ready: 2.
 - Current rerun locked: 1.
+- Candidate source audits: 4.
+- Candidate verse-import-ready pages: 0.
+- Candidate result-ready pages: 0.
+- CrossWire possible independent KJVA candidates: 1.
+- Gutenberg split KJV plus Apocrypha metadata candidates: 1.
+- Wikisource source-candidate pages: 1.
+- Open-Bibles KJV paths: 1.
+- Open-Bibles Apocrypha paths: 0.
+- Open-Bibles deuterocanon paths: 0.
 - Source-use ready pages: 0.
 - Source-lock ready: 0.
 - Result allowed: 0.
@@ -46,7 +55,7 @@ It exists so the next work item starts from one status file without re-reading t
 | `current_rerun_baseline` | current eBible KJVA rerun baseline | `rerun_only_ready` | current rerun locked 1; checksum records ready 2 | `no` | rerun baseline is not independent KJVA replication |
 | `completed_prospective_lane` | completed KJVA prospective bridge lane | `review_material_only` | 7 terms; observed bridge rows 1; significant terms 0; non-Bible controls at or above observed 1 | `yes` | completed negative lane cannot be reused as new claim evidence |
 | `source_policy_lock` | source policy | `blocked` | 5 options; 2 policy-ready; 3 blocked; 7 blocker rows | `yes` | source-use policy must authorize any result-bearing source |
-| `source_text_lock` | source text | `blocked` | source-use ready pages 0; source-lock ready 0 | `yes` | no independent KJVA source text is locked for result-bearing use |
+| `source_text_lock` | source text | `blocked` | source-use ready pages 0; source-lock ready 0; candidate audits 4; candidate result-ready pages 0 | `yes` | no independent KJVA source text is locked for result-bearing use |
 | `verse_map_collation_lock` | verse map and collation | `blocked` | Hakkaac exact verses 5719/5720; length-drift verses 1 | `yes` | candidate collation evidence is not a selected-source verse map |
 | `drift_boundary_lock` | drift and boundary | `blocked` | Sirach gap SIR 44:23; Prayer of Manasseh markers 0/15; Hakkaac drift verses 1 | `yes` | do not patch, exclude, or split without citable policy |
 | `fresh_terms_leakage_controls` | fresh terms, leakage audit, and fixed controls | `blocked` | fresh terms ready 0; leakage audit ready 0; fixed controls ready 0 | `yes` | new KJVA result needs terms and controls locked before seeing output |

@@ -90,6 +90,26 @@ def test_protocol_summary_kjva_handoff_input_drift_fails(tmp_path: Path) -> None
     )
 
 
+def test_protocol_kjva_handoff_order_drift_fails(tmp_path: Path) -> None:
+    doc, protocol, makefile = copy_current_inputs(tmp_path)
+    protocol.write_text(
+        move_step_before(
+            protocol.read_text(encoding="utf-8"),
+            step_id="kjva_no_input_handoff_status",
+            before_step_id="kjva_open_bibles_candidate_source_audit",
+        ),
+        encoding="utf-8",
+    )
+
+    failures = check.validate_real_report_run_doc(doc, protocol, makefile)
+
+    assert any(
+        "kjva_no_input_handoff_status must run after "
+        "kjva_open_bibles_candidate_source_audit" in failure
+        for failure in failures
+    )
+
+
 def test_make_target_drift_fails(tmp_path: Path) -> None:
     doc, protocol, makefile = copy_current_inputs(tmp_path)
     makefile.write_text(
@@ -117,3 +137,14 @@ def copy_current_inputs(tmp_path: Path) -> tuple[Path, Path, Path]:
     shutil.copyfile(check.DEFAULT_PROTOCOL, protocol)
     shutil.copyfile(check.DEFAULT_MAKEFILE, makefile)
     return doc, protocol, makefile
+
+
+def move_step_before(text: str, *, step_id: str, before_step_id: str) -> str:
+    step_marker = f'[[steps]]\nid = "{step_id}"'
+    before_marker = f'[[steps]]\nid = "{before_step_id}"'
+    start = text.index(step_marker)
+    next_start = text.index("\n[[steps]]", start + len(step_marker)) + 1
+    block = text[start:next_start]
+    without_block = text[:start] + text[next_start:]
+    insert_at = without_block.index(before_marker)
+    return without_block[:insert_at] + block + without_block[insert_at:]

@@ -2831,3 +2831,22 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/check_cities_public_handoff_docs.py`, plus their focused tests.
 - Commits: `82a6f78`, `c6d4809`, `7a9da6e`, `a061abd`, `45d4eba`, and
   `16f020c`.
+
+## KJVA Candidate-Source Handoff Metrics
+
+- Extended the KJVA no-input handoff summary to read the current metadata-only
+  candidate-source audits directly: CrossWire, Project Gutenberg, Wikisource,
+  and `seven1m/open-bibles`.
+- Current generated handoff read: 4 candidate-source audit rows, 0
+  verse-import-ready candidate pages, 0 result-ready candidate pages, 1
+  CrossWire possible independent KJVA metadata candidate, 1 Project Gutenberg
+  split KJV plus Apocrypha metadata candidate, 1 Wikisource source-candidate
+  page, and Open-Bibles at 1 KJV path but 0 Apocrypha/deuterocanon paths.
+- This closes only a summary/guarding gap. It does not approve source use,
+  import Bible text, source-lock a candidate, change KJVA result status, or
+  authorize a new KJVA run.
+- Added these candidate-source metrics to
+  `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md` and to the generated
+  `reports/real_report_run/summary.md` KJVA handoff table, with guard checks in
+  `scripts/check_kjva_no_input_handoff_status_doc.py` and
+  `scripts/check_kjva_public_handoff_docs.py`.

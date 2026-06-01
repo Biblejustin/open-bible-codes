@@ -23,6 +23,12 @@ DEFAULT_SOURCE_POLICY_BLOCKERS = Path(
     "reports/kjva_source_policy_blocker_packet/blockers.csv"
 )
 DEFAULT_CURRENT_SOURCE_SUMMARY = Path("reports/kjva_current_source_lock_sidecar/summary.csv")
+DEFAULT_CROSSWIRE_SUMMARY = Path("reports/kjva_crosswire_candidate_source/summary.csv")
+DEFAULT_GUTENBERG_CANDIDATE_SUMMARY = Path(
+    "reports/kjva_gutenberg_candidate_source/summary.csv"
+)
+DEFAULT_WIKISOURCE_SUMMARY = Path("reports/kjva_wikisource_candidate_source/summary.csv")
+DEFAULT_OPEN_BIBLES_SUMMARY = Path("reports/kjva_open_bibles_candidate_source/summary.csv")
 DEFAULT_GUTENBERG_BLOCKER_SUMMARY = Path(
     "reports/kjva_gutenberg_source_lock_blocker_packet/summary.csv"
 )
@@ -67,6 +73,15 @@ SUMMARY_FIELDNAMES = [
     "blocked_options",
     "checksum_records_ready",
     "current_rerun_locked",
+    "candidate_source_audit_rows",
+    "candidate_source_verse_import_ready_pages",
+    "candidate_source_result_ready_pages",
+    "crosswire_possible_independent_kjva_candidates",
+    "gutenberg_split_kjv_apocrypha_metadata_candidates",
+    "wikisource_source_candidate_pages",
+    "open_bibles_kjv_paths",
+    "open_bibles_apocrypha_paths",
+    "open_bibles_deuterocanon_paths",
     "source_use_ready_pages",
     "source_lock_ready",
     "result_allowed",
@@ -101,6 +116,10 @@ class LoadedInputs:
         source_policy_summary: list[dict[str, str]],
         source_policy_blockers: list[dict[str, str]],
         current_source_summary: list[dict[str, str]],
+        crosswire_summary: list[dict[str, str]],
+        gutenberg_candidate_summary: list[dict[str, str]],
+        wikisource_summary: list[dict[str, str]],
+        open_bibles_summary: list[dict[str, str]],
         gutenberg_blocker_summary: list[dict[str, str]],
         hakkaac_collation_summary: list[dict[str, str]],
         split_role_summary: list[dict[str, str]],
@@ -112,6 +131,10 @@ class LoadedInputs:
         self.source_policy_summary = source_policy_summary
         self.source_policy_blockers = source_policy_blockers
         self.current_source_summary = current_source_summary
+        self.crosswire_summary = crosswire_summary
+        self.gutenberg_candidate_summary = gutenberg_candidate_summary
+        self.wikisource_summary = wikisource_summary
+        self.open_bibles_summary = open_bibles_summary
         self.gutenberg_blocker_summary = gutenberg_blocker_summary
         self.hakkaac_collation_summary = hakkaac_collation_summary
         self.split_role_summary = split_role_summary
@@ -128,6 +151,10 @@ def main(argv: list[str] | None = None) -> int:
         source_policy_summary=read_rows(args.source_policy_summary),
         source_policy_blockers=read_rows(args.source_policy_blockers),
         current_source_summary=read_rows(args.current_source_summary),
+        crosswire_summary=read_rows(args.crosswire_summary),
+        gutenberg_candidate_summary=read_rows(args.gutenberg_candidate_summary),
+        wikisource_summary=read_rows(args.wikisource_summary),
+        open_bibles_summary=read_rows(args.open_bibles_summary),
         gutenberg_blocker_summary=read_rows(args.gutenberg_blocker_summary),
         hakkaac_collation_summary=read_rows(args.hakkaac_collation_summary),
         split_role_summary=read_rows(args.split_role_summary),
@@ -162,6 +189,16 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--current-source-summary", type=Path, default=DEFAULT_CURRENT_SOURCE_SUMMARY
     )
+    parser.add_argument("--crosswire-summary", type=Path, default=DEFAULT_CROSSWIRE_SUMMARY)
+    parser.add_argument(
+        "--gutenberg-candidate-summary",
+        type=Path,
+        default=DEFAULT_GUTENBERG_CANDIDATE_SUMMARY,
+    )
+    parser.add_argument("--wikisource-summary", type=Path, default=DEFAULT_WIKISOURCE_SUMMARY)
+    parser.add_argument(
+        "--open-bibles-summary", type=Path, default=DEFAULT_OPEN_BIBLES_SUMMARY
+    )
     parser.add_argument(
         "--gutenberg-blocker-summary",
         type=Path,
@@ -194,9 +231,21 @@ def build_summary(inputs: LoadedInputs) -> dict[str, Any]:
     next_result = first_row(inputs.next_result_summary)
     policy = first_row(inputs.source_policy_summary)
     current = first_row(inputs.current_source_summary)
+    crosswire = first_row(inputs.crosswire_summary)
+    gutenberg_candidate = first_row(inputs.gutenberg_candidate_summary)
+    wikisource = first_row(inputs.wikisource_summary)
+    open_bibles = first_row(inputs.open_bibles_summary)
     gutenberg = first_row(inputs.gutenberg_blocker_summary)
     hakkaac = first_row(inputs.hakkaac_collation_summary)
     split = first_row(inputs.split_role_summary)
+    candidate_result_ready_pages = sum(
+        int_or_zero(row.get("result_ready_pages"))
+        for row in (crosswire, gutenberg_candidate, wikisource, open_bibles)
+    )
+    candidate_verse_import_ready_pages = sum(
+        int_or_zero(row.get("verse_import_ready_pages"))
+        for row in (crosswire, gutenberg_candidate, wikisource, open_bibles)
+    )
     return {
         "status_rows": 9,
         "handoff_ready_rows": 9,
@@ -212,6 +261,27 @@ def build_summary(inputs: LoadedInputs) -> dict[str, Any]:
         "blocked_options": int_or_zero(policy.get("blocked_options")),
         "checksum_records_ready": int_or_zero(policy.get("checksum_records_ready")),
         "current_rerun_locked": truthy(current.get("rerun_baseline_locked")),
+        "candidate_source_audit_rows": sum(
+            1
+            for row in (crosswire, gutenberg_candidate, wikisource, open_bibles)
+            if row
+        ),
+        "candidate_source_verse_import_ready_pages": candidate_verse_import_ready_pages,
+        "candidate_source_result_ready_pages": candidate_result_ready_pages,
+        "crosswire_possible_independent_kjva_candidates": int_or_zero(
+            crosswire.get("possible_independent_kjva_candidates")
+        ),
+        "gutenberg_split_kjv_apocrypha_metadata_candidates": int_or_zero(
+            gutenberg_candidate.get("split_kjv_apocrypha_metadata_candidates")
+        ),
+        "wikisource_source_candidate_pages": int_or_zero(
+            wikisource.get("source_candidate_pages")
+        ),
+        "open_bibles_kjv_paths": int_or_zero(open_bibles.get("kjv_paths")),
+        "open_bibles_apocrypha_paths": int_or_zero(open_bibles.get("apocrypha_paths")),
+        "open_bibles_deuterocanon_paths": int_or_zero(
+            open_bibles.get("deuterocanon_paths")
+        ),
         "source_use_ready_pages": int_or_zero(policy.get("source_use_ready_pages")),
         "source_lock_ready": truthy(next_result.get("source_lock_ready")),
         "result_allowed": truthy(next_result.get("result_allowed")),
@@ -320,7 +390,10 @@ def build_status_rows(
             "blocked",
             (
                 f"source-use ready pages {summary['source_use_ready_pages']}; "
-                f"source-lock ready {int(bool(summary['source_lock_ready']))}"
+                f"source-lock ready {int(bool(summary['source_lock_ready']))}; "
+                f"candidate audits {summary['candidate_source_audit_rows']}; "
+                "candidate result-ready pages "
+                f"{summary['candidate_source_result_ready_pages']}"
             ),
             "yes",
             "yes",
@@ -443,6 +516,15 @@ def write_markdown(
         f"- Blocked options: {summary['blocked_options']}.",
         f"- Checksum records ready: {summary['checksum_records_ready']}.",
         f"- Current rerun locked: {int(bool(summary['current_rerun_locked']))}.",
+        f"- Candidate source audits: {summary['candidate_source_audit_rows']}.",
+        f"- Candidate verse-import-ready pages: {summary['candidate_source_verse_import_ready_pages']}.",
+        f"- Candidate result-ready pages: {summary['candidate_source_result_ready_pages']}.",
+        f"- CrossWire possible independent KJVA candidates: {summary['crosswire_possible_independent_kjva_candidates']}.",
+        f"- Gutenberg split KJV plus Apocrypha metadata candidates: {summary['gutenberg_split_kjv_apocrypha_metadata_candidates']}.",
+        f"- Wikisource source-candidate pages: {summary['wikisource_source_candidate_pages']}.",
+        f"- Open-Bibles KJV paths: {summary['open_bibles_kjv_paths']}.",
+        f"- Open-Bibles Apocrypha paths: {summary['open_bibles_apocrypha_paths']}.",
+        f"- Open-Bibles deuterocanon paths: {summary['open_bibles_deuterocanon_paths']}.",
         f"- Source-use ready pages: {summary['source_use_ready_pages']}.",
         f"- Source-lock ready: {int(bool(summary['source_lock_ready']))}.",
         f"- Result allowed: {int(bool(summary['result_allowed']))}.",
@@ -514,6 +596,10 @@ def write_manifest(
             "source_policy_summary": str(args.source_policy_summary),
             "source_policy_blockers": str(args.source_policy_blockers),
             "current_source_summary": str(args.current_source_summary),
+            "crosswire_summary": str(args.crosswire_summary),
+            "gutenberg_candidate_summary": str(args.gutenberg_candidate_summary),
+            "wikisource_summary": str(args.wikisource_summary),
+            "open_bibles_summary": str(args.open_bibles_summary),
             "gutenberg_blocker_summary": str(args.gutenberg_blocker_summary),
             "hakkaac_collation_summary": str(args.hakkaac_collation_summary),
             "split_role_summary": str(args.split_role_summary),

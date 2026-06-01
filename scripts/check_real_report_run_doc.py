@@ -47,6 +47,11 @@ EXPECTED_SUMMARY_OUTPUTS = (
     str(summary_builder.MANIFEST_OUT),
 )
 EXPECTED_MAKE_TARGET = f"real-report:\n\t{RUN_COMMAND}"
+EXPECTED_KJVA_HANDOFF_PREREQ_STEPS = (
+    "kjva_open_bibles_candidate_source_audit",
+    "kjva_wikisource_candidate_source_audit",
+    "kjva_wikisource_book_coverage_probe",
+)
 
 REQUIRED_PHRASES = (
     RUN_COMMAND,
@@ -137,11 +142,11 @@ def validate_protocol(path: Path) -> list[str]:
     data = read_toml(path)
     if isinstance(data, str):
         return [data]
-    steps = {
-        step.get("id"): step
-        for step in data.get("steps", [])
-        if isinstance(step, dict)
-    }
+    step_rows = [step for step in data.get("steps", []) if isinstance(step, dict)]
+    steps = {step.get("id"): step for step in step_rows}
+    ordered_step_ids = [
+        str(step.get("id", "")) for step in step_rows if step.get("id")
+    ]
     failures: list[str] = []
     if data.get("name") != "real_report_run":
         failures.append(f"{path} name drifted")
@@ -153,6 +158,36 @@ def validate_protocol(path: Path) -> list[str]:
         failures.append(f"{path} progress_interval_seconds drifted")
     failures.extend(validate_preflight_step(path, steps.get("preflight")))
     failures.extend(validate_summary_step(path, steps.get("real_report_summary")))
+    failures.extend(
+        validate_step_order(
+            path,
+            ordered_step_ids,
+            step_id="kjva_no_input_handoff_status",
+            must_follow=EXPECTED_KJVA_HANDOFF_PREREQ_STEPS,
+        )
+    )
+    return failures
+
+
+def validate_step_order(
+    path: Path,
+    ordered_step_ids: list[str],
+    *,
+    step_id: str,
+    must_follow: tuple[str, ...],
+) -> list[str]:
+    if step_id not in ordered_step_ids:
+        return [f"{path} missing step {step_id}"]
+    index = ordered_step_ids.index(step_id)
+    failures: list[str] = []
+    for prerequisite in must_follow:
+        if prerequisite not in ordered_step_ids:
+            failures.append(f"{path} missing prerequisite step {prerequisite}")
+            continue
+        if ordered_step_ids.index(prerequisite) > index:
+            failures.append(
+                f"{path} {step_id} must run after {prerequisite}"
+            )
     return failures
 
 

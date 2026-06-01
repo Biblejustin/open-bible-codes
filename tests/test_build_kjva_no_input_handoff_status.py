@@ -16,6 +16,15 @@ def test_build_summary_consolidates_current_kjva_blockers() -> None:
     assert summary["blocked_options"] == 3
     assert summary["checksum_records_ready"] == 2
     assert summary["current_rerun_locked"] is True
+    assert summary["candidate_source_audit_rows"] == 4
+    assert summary["candidate_source_verse_import_ready_pages"] == 0
+    assert summary["candidate_source_result_ready_pages"] == 0
+    assert summary["crosswire_possible_independent_kjva_candidates"] == 1
+    assert summary["gutenberg_split_kjv_apocrypha_metadata_candidates"] == 1
+    assert summary["wikisource_source_candidate_pages"] == 1
+    assert summary["open_bibles_kjv_paths"] == 1
+    assert summary["open_bibles_apocrypha_paths"] == 0
+    assert summary["open_bibles_deuterocanon_paths"] == 0
     assert summary["source_use_ready_pages"] == 0
     assert summary["source_lock_ready"] is False
     assert summary["result_allowed"] is False
@@ -66,6 +75,14 @@ def test_main_writes_csv_markdown_and_manifest(tmp_path: Path) -> None:
             str(paths["source_policy_blockers"]),
             "--current-source-summary",
             str(paths["current_source_summary"]),
+            "--crosswire-summary",
+            str(paths["crosswire_summary"]),
+            "--gutenberg-candidate-summary",
+            str(paths["gutenberg_candidate_summary"]),
+            "--wikisource-summary",
+            str(paths["wikisource_summary"]),
+            "--open-bibles-summary",
+            str(paths["open_bibles_summary"]),
             "--gutenberg-blocker-summary",
             str(paths["gutenberg_blocker_summary"]),
             "--hakkaac-collation-summary",
@@ -150,6 +167,38 @@ def _inputs() -> handoff.LoadedInputs:
             }
         ],
         current_source_summary=[{"rerun_baseline_locked": "True"}],
+        crosswire_summary=[
+            {
+                "possible_independent_kjva_candidates": "1",
+                "source_lock_ready_pages": "0",
+                "verse_import_ready_pages": "0",
+                "result_ready_pages": "0",
+            }
+        ],
+        gutenberg_candidate_summary=[
+            {
+                "split_kjv_apocrypha_metadata_candidates": "1",
+                "source_lock_ready_pages": "0",
+                "verse_import_ready_pages": "0",
+                "result_ready_pages": "0",
+            }
+        ],
+        wikisource_summary=[
+            {
+                "source_candidate_pages": "1",
+                "verse_import_ready_pages": "0",
+                "result_ready_pages": "0",
+            }
+        ],
+        open_bibles_summary=[
+            {
+                "kjv_paths": "1",
+                "apocrypha_paths": "0",
+                "deuterocanon_paths": "0",
+                "verse_import_ready_pages": "0",
+                "result_ready_pages": "0",
+            }
+        ],
         gutenberg_blocker_summary=[
             {
                 "sirach_gap_refs": "SIR 44:23",
@@ -186,6 +235,10 @@ def _write_inputs(tmp_path: Path) -> dict[str, Path]:
         "source_policy_summary": tmp_path / "source_policy_summary.csv",
         "source_policy_blockers": tmp_path / "source_policy_blockers.csv",
         "current_source_summary": tmp_path / "current_source_summary.csv",
+        "crosswire_summary": tmp_path / "crosswire_summary.csv",
+        "gutenberg_candidate_summary": tmp_path / "gutenberg_candidate_summary.csv",
+        "wikisource_summary": tmp_path / "wikisource_summary.csv",
+        "open_bibles_summary": tmp_path / "open_bibles_summary.csv",
         "gutenberg_blocker_summary": tmp_path / "gutenberg_blocker_summary.csv",
         "hakkaac_collation_summary": tmp_path / "hakkaac_collation_summary.csv",
         "split_role_summary": tmp_path / "split_role_summary.csv",
@@ -212,6 +265,26 @@ def _write_inputs(tmp_path: Path) -> dict[str, Path]:
         paths["current_source_summary"],
         list(inputs.current_source_summary[0]),
         inputs.current_source_summary,
+    )
+    _write_csv(
+        paths["crosswire_summary"],
+        list(inputs.crosswire_summary[0]),
+        inputs.crosswire_summary,
+    )
+    _write_csv(
+        paths["gutenberg_candidate_summary"],
+        list(inputs.gutenberg_candidate_summary[0]),
+        inputs.gutenberg_candidate_summary,
+    )
+    _write_csv(
+        paths["wikisource_summary"],
+        list(inputs.wikisource_summary[0]),
+        inputs.wikisource_summary,
+    )
+    _write_csv(
+        paths["open_bibles_summary"],
+        list(inputs.open_bibles_summary[0]),
+        inputs.open_bibles_summary,
     )
     _write_csv(
         paths["gutenberg_blocker_summary"],
