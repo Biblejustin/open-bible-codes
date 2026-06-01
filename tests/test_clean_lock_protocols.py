@@ -365,6 +365,8 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "reader-doc-checks:" in makefile
     assert "$(MAKE) wrr-doc-checks" in makefile
     assert "wrr-doc-checks:" in makefile
+    assert "$(MAKE) cities-doc-checks" in makefile
+    assert "cities-doc-checks:" in makefile
     assert "$(MAKE) kjva-source-doc-checks" in makefile
     assert "kjva-source-doc-checks:" in makefile
     assert "scripts.check_project_findings_overview_doc" in makefile
@@ -388,6 +390,10 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "scripts.check_wrr_source_row_review_bundle_doc" in makefile
     assert "scripts.check_wrr_support_docs_local_lock" in makefile
     assert "scripts.check_wrr_variant_gap_docs" in makefile
+    assert "scripts.check_cities_pdf_recovery_probe_doc" in makefile
+    assert "scripts.check_cities_source_page_line_crop_packet_doc" in makefile
+    assert "scripts.check_cities_source_row_lock_queue_doc" in makefile
+    assert "scripts.check_cities_unreadable_pdf_ocr_review_packet_doc" in makefile
     assert "scripts.check_kjva_current_source_lock_sidecar_doc" in makefile
     assert "scripts.check_kjva_gutenberg_source_lock_blocker_packet_doc" in makefile
     assert "scripts.check_kjva_source_candidate_status_doc" in makefile
@@ -405,6 +411,7 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "make fast-validate" in readme
     assert "make reader-doc-checks" in readme
     assert "make wrr-doc-checks" in readme
+    assert "make cities-doc-checks" in readme
     assert "make kjva-source-doc-checks" in readme
     assert "expanded-strata operator tooling" in readme
     assert "general-reader findings overview" in readme
@@ -417,6 +424,7 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "prospective workflow docs" in normalized_readme
     assert "public/no-input handoff docs" in normalized_readme
     assert "WRR method/source/support docs" in readme
+    assert "Cities source/recovery docs" in readme
     assert "KJVA source-policy docs" in readme
     assert "checks public claim language" in readme
     assert "protocol TOML files" in readme
@@ -477,6 +485,8 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "reader-doc-checks:" in makefile
     assert "$(MAKE) wrr-doc-checks" in makefile
     assert "wrr-doc-checks:" in makefile
+    assert "$(MAKE) cities-doc-checks" in makefile
+    assert "cities-doc-checks:" in makefile
     assert "$(MAKE) kjva-source-doc-checks" in makefile
     assert "kjva-source-doc-checks:" in makefile
     assert "scripts.check_project_findings_overview_doc" in makefile
@@ -500,6 +510,10 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "scripts.check_wrr_source_row_review_bundle_doc" in makefile
     assert "scripts.check_wrr_support_docs_local_lock" in makefile
     assert "scripts.check_wrr_variant_gap_docs" in makefile
+    assert "scripts.check_cities_pdf_recovery_probe_doc" in makefile
+    assert "scripts.check_cities_source_page_line_crop_packet_doc" in makefile
+    assert "scripts.check_cities_source_row_lock_queue_doc" in makefile
+    assert "scripts.check_cities_unreadable_pdf_ocr_review_packet_doc" in makefile
     assert "scripts.check_kjva_current_source_lock_sidecar_doc" in makefile
     assert "scripts.check_kjva_gutenberg_source_lock_blocker_packet_doc" in makefile
     assert "scripts.check_kjva_source_candidate_status_doc" in makefile
@@ -512,6 +526,7 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "make release-ready" in readme
     assert "make reader-doc-checks" in readme
     assert "make wrr-doc-checks" in readme
+    assert "make cities-doc-checks" in readme
     assert "make kjva-source-doc-checks" in readme
     assert "validates documented script/source-path references" in normalized_readme
     assert "guards the general-reader findings overview" in normalized_readme
@@ -524,6 +539,7 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "prospective workflow docs" in normalized_readme
     assert "public/no-input handoff docs" in normalized_readme
     assert "WRR method/source/support docs" in readme
+    assert "Cities source/recovery docs" in readme
     assert "KJVA source-policy docs" in readme
     assert "validates protocol TOML files" in normalized_readme
     assert "corpus config schemas" in normalized_readme

@@ -94,8 +94,8 @@ the general-reader findings overview, real-report run documentation,
 consolidated findings, claim catalog, final-report assembly docs, final-report
 highlights, strongest-candidate packet, prospective workflow docs,
 public/no-input handoff docs, WRR method/source/support docs,
-KJVA source-policy docs, protocol TOML files, corpus config schemas,
-term-file schema/normalization, all-script exact-test
+Cities source/recovery docs, KJVA source-policy docs, protocol TOML files,
+corpus config schemas, term-file schema/normalization, all-script exact-test
 coverage, check-script wiring coverage, the study-mapping guard suite, a
 temporary public-reader package build, and local data doc references against
 the current ignored source caches.
@@ -128,6 +128,17 @@ make wrr-doc-checks
 This runs the WRR method, source-policy, source-recovery, source-row,
 manual-decision, variant-gap, and local-lock support documentation guards
 shared by `make fast-validate` and `make public-release-check`.
+
+Cities source/recovery checks only:
+
+```bash
+make cities-doc-checks
+```
+
+This runs the Cities claim-boundary, PDF recovery, source-review, source-row,
+source-page OCR, line-crop, unreadable-PDF, decision-record, and no-input
+handoff documentation guards shared by `make fast-validate` and `make
+public-release-check`.
 
 KJVA source-policy checks only:
 

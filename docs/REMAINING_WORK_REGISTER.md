@@ -3147,6 +3147,19 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - This is a documentation/validation guard only. It does not change report
   conclusions, source policy, imported texts, ELS searches, or result status.
 
+## Cities Doc Direct Gate
+
+- Added `make cities-doc-checks` for the Cities claim-boundary, PDF recovery,
+  source-review, source-row, source-page OCR, line-crop, unreadable-PDF,
+  decision-record, and no-input handoff documentation guards.
+- Wired the shared target into `make fast-validate` and
+  `make public-release-check`, so Cities source/recovery support docs are
+  checked before both dirty-safe handoffs and clean releases.
+- Updated README validation guidance and Makefile guard tests to keep the
+  shared target visible.
+- This is a documentation/validation guard only. It does not change report
+  conclusions, source policy, imported texts, ELS searches, or result status.
+
 ## Clean-Lock Results Summary Guard
 
 - Added a dedicated guard for `docs/CLEAN_LOCK_RESULTS_SUMMARY.md` so the
