@@ -1671,6 +1671,14 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
+            "reports/kjva_no_input_handoff_status/summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
+            "reports/kjva_no_input_handoff_status/manifest.json",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
             "docs/ALL_CODES_FOLLOWUP_LETTER_PATHS.md",
             steps_by_id["preflight"]["inputs"],
         )

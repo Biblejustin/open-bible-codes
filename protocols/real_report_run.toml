@@ -2538,6 +2538,8 @@ inputs = [
   "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/control_summary.csv",
   "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/manifest.json",
   "docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md",
+  "reports/kjva_no_input_handoff_status/summary.csv",
+  "reports/kjva_no_input_handoff_status/manifest.json",
   "reports/external_claim_source_counts/summary.csv",
   "reports/external_claim_source_counts/summary.manifest.json",
   "reports/external_claim_source_all_codes/surface_all_codes_summary.csv",

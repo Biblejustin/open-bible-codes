@@ -204,6 +204,10 @@ KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_SUMMARY = Path(
 KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_MANIFEST = Path(
     "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/manifest.json"
 )
+KJVA_NO_INPUT_HANDOFF_SUMMARY = Path("reports/kjva_no_input_handoff_status/summary.csv")
+KJVA_NO_INPUT_HANDOFF_MANIFEST = Path(
+    "reports/kjva_no_input_handoff_status/manifest.json"
+)
 EXTERNAL_CLAIM_COUNTS_SUMMARY = Path("reports/external_claim_source_counts/summary.csv")
 EXTERNAL_CLAIM_COUNTS_MANIFEST = Path(
     "reports/external_claim_source_counts/summary.manifest.json"
@@ -379,6 +383,8 @@ def main(argv: list[str] | None = None) -> int:
     kjva_apocrypha_bridge_prospective_nonbible_manifest = read_json(
         args.kjva_apocrypha_bridge_prospective_nonbible_manifest
     )
+    kjva_no_input_handoff_rows = read_rows(args.kjva_no_input_handoff_summary)
+    kjva_no_input_handoff_manifest = read_json(args.kjva_no_input_handoff_manifest)
     external_claim_counts_rows = read_rows(args.external_claim_counts_summary)
     external_claim_counts_manifest = read_json(args.external_claim_counts_manifest)
     external_claim_all_codes_rows = read_rows(args.external_claim_all_codes_summary)
@@ -512,6 +518,8 @@ def main(argv: list[str] | None = None) -> int:
         kjva_apocrypha_bridge_prospective_manifest=kjva_apocrypha_bridge_prospective_manifest,
         kjva_apocrypha_bridge_prospective_nonbible_rows=kjva_apocrypha_bridge_prospective_nonbible_rows,
         kjva_apocrypha_bridge_prospective_nonbible_manifest=kjva_apocrypha_bridge_prospective_nonbible_manifest,
+        kjva_no_input_handoff_rows=kjva_no_input_handoff_rows,
+        kjva_no_input_handoff_manifest=kjva_no_input_handoff_manifest,
         external_claim_counts_rows=external_claim_counts_rows,
         external_claim_counts_manifest=external_claim_counts_manifest,
         external_claim_all_codes_rows=external_claim_all_codes_rows,
@@ -631,6 +639,8 @@ def main(argv: list[str] | None = None) -> int:
         kjva_apocrypha_bridge_prospective_manifest=kjva_apocrypha_bridge_prospective_manifest,
         kjva_apocrypha_bridge_prospective_nonbible_rows=kjva_apocrypha_bridge_prospective_nonbible_rows,
         kjva_apocrypha_bridge_prospective_nonbible_manifest=kjva_apocrypha_bridge_prospective_nonbible_manifest,
+        kjva_no_input_handoff_rows=kjva_no_input_handoff_rows,
+        kjva_no_input_handoff_manifest=kjva_no_input_handoff_manifest,
         external_claim_counts_rows=external_claim_counts_rows,
         external_claim_counts_manifest=external_claim_counts_manifest,
         external_claim_all_codes_rows=external_claim_all_codes_rows,
@@ -971,6 +981,16 @@ def build_parser() -> argparse.ArgumentParser:
         default=KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_MANIFEST,
     )
     parser.add_argument(
+        "--kjva-no-input-handoff-summary",
+        type=Path,
+        default=KJVA_NO_INPUT_HANDOFF_SUMMARY,
+    )
+    parser.add_argument(
+        "--kjva-no-input-handoff-manifest",
+        type=Path,
+        default=KJVA_NO_INPUT_HANDOFF_MANIFEST,
+    )
+    parser.add_argument(
         "--external-claim-counts-summary",
         type=Path,
         default=EXTERNAL_CLAIM_COUNTS_SUMMARY,
@@ -1146,6 +1166,8 @@ def write_summary(
     kjva_apocrypha_bridge_prospective_manifest: dict[str, Any],
     kjva_apocrypha_bridge_prospective_nonbible_rows: list[dict[str, str]],
     kjva_apocrypha_bridge_prospective_nonbible_manifest: dict[str, Any],
+    kjva_no_input_handoff_rows: list[dict[str, str]],
+    kjva_no_input_handoff_manifest: dict[str, Any],
     external_claim_counts_rows: list[dict[str, str]],
     external_claim_counts_manifest: dict[str, Any],
     external_claim_all_codes_rows: list[dict[str, str]],
@@ -1226,6 +1248,7 @@ def write_summary(
         "- KJVA apocrypha/deuterocanon bridge term-level review",
         "- KJVA apocrypha/deuterocanon bridge term-level shuffled controls",
         "- KJVA apocrypha/deuterocanon bridge 5000-sample confirmatory controls",
+        "- KJVA no-input handoff status",
         "- external claim/source count baseline across Bible and secular controls",
         "- external claim/source relaxed all-codes collection, triage queue, and findings layer",
         "- expanded post-search strata summaries",
@@ -1488,6 +1511,12 @@ def write_summary(
         )
     )
     lines.extend(
+        kjva_no_input_handoff_status_section(
+            kjva_no_input_handoff_rows,
+            kjva_no_input_handoff_manifest,
+        )
+    )
+    lines.extend(
         external_claim_source_section(
             external_claim_counts_rows,
             external_claim_counts_manifest,
@@ -1746,6 +1775,8 @@ def write_manifest(
     kjva_apocrypha_bridge_prospective_manifest: dict[str, Any],
     kjva_apocrypha_bridge_prospective_nonbible_rows: list[dict[str, str]],
     kjva_apocrypha_bridge_prospective_nonbible_manifest: dict[str, Any],
+    kjva_no_input_handoff_rows: list[dict[str, str]],
+    kjva_no_input_handoff_manifest: dict[str, Any],
     external_claim_counts_rows: list[dict[str, str]],
     external_claim_counts_manifest: dict[str, Any],
     external_claim_all_codes_rows: list[dict[str, str]],
@@ -1768,6 +1799,11 @@ def write_manifest(
     cohort_cluster_density_summary_rows: list[dict[str, str]],
     started: float,
 ) -> None:
+    kjva_no_input_handoff_summary = (
+        kjva_no_input_handoff_rows[0]
+        if kjva_no_input_handoff_rows
+        else kjva_no_input_handoff_manifest.get("summary", {})
+    )
     payload = {
         "tool": "build_real_report_run_summary",
         "edls_version": __version__,
@@ -1913,6 +1949,8 @@ def write_manifest(
             "kjva_apocrypha_bridge_prospective_nonbible_manifest": str(
                 args.kjva_apocrypha_bridge_prospective_nonbible_manifest
             ),
+            "kjva_no_input_handoff_summary": str(args.kjva_no_input_handoff_summary),
+            "kjva_no_input_handoff_manifest": str(args.kjva_no_input_handoff_manifest),
             "external_claim_counts_summary": str(args.external_claim_counts_summary),
             "external_claim_counts_manifest": str(args.external_claim_counts_manifest),
             "external_claim_all_codes_summary": str(args.external_claim_all_codes_summary),
@@ -2152,6 +2190,21 @@ def write_manifest(
         "kjva_apocrypha_bridge_prospective_nonbible_controls_ge_observed": sum(
             int_value(row, "bridge_rows") >= 1
             for row in kjva_apocrypha_bridge_prospective_nonbible_rows
+        ),
+        "kjva_no_input_handoff_status_rows": int_value(
+            kjva_no_input_handoff_summary, "status_rows"
+        ),
+        "kjva_no_input_handoff_manual_input_needed_rows": int_value(
+            kjva_no_input_handoff_summary, "manual_input_needed_rows"
+        ),
+        "kjva_no_input_handoff_source_policy_blocker_rows": int_value(
+            kjva_no_input_handoff_summary, "source_policy_blocker_rows"
+        ),
+        "kjva_no_input_handoff_result_allowed": bool_int_cell(
+            kjva_no_input_handoff_summary, "result_allowed"
+        ),
+        "kjva_no_input_handoff_claim_status": kjva_no_input_handoff_summary.get(
+            "claim_status", ""
         ),
         "external_claim_count_summary_rows": len(external_claim_counts_rows),
         "external_claim_count_term_sets": len(
@@ -2702,6 +2755,48 @@ def kjva_apocrypha_bridge_prospective_section(
             )
             + " |"
         )
+    return lines
+
+
+def kjva_no_input_handoff_status_section(
+    rows: list[dict[str, str]],
+    manifest: dict[str, Any],
+) -> list[str]:
+    summary = rows[0] if rows else manifest.get("summary", {})
+    lines = [
+        "",
+        "## KJVA No-Input Handoff Status",
+        "",
+        "This is the KJVA source-readiness handoff. It keeps the completed",
+        "KJVA lane as review material only, keeps the current eBible KJVA path",
+        "as rerun-only, and keeps new-result permission closed until source-use,",
+        "source-lock, term, leakage-audit, fixed-control, and study-lock gates",
+        "are independently closed.",
+        "",
+        "| Metric | Count |",
+        "| --- | ---: |",
+        f"| Status rows | {int_value(summary, 'status_rows'):,} |",
+        f"| Handoff-ready rows | {int_value(summary, 'handoff_ready_rows'):,} |",
+        f"| Manual-input-needed rows | {int_value(summary, 'manual_input_needed_rows'):,} |",
+        f"| Gate rows | {int_value(summary, 'gate_rows'):,} |",
+        f"| Blocked gate rows | {int_value(summary, 'blocked_gate_rows'):,} |",
+        f"| Source-policy blocker rows | {int_value(summary, 'source_policy_blocker_rows'):,} |",
+        f"| Source-use ready pages | {int_value(summary, 'source_use_ready_pages'):,} |",
+        f"| Source-lock ready | {bool_int_cell(summary, 'source_lock_ready')} |",
+        f"| Result allowed | {bool_int_cell(summary, 'result_allowed')} |",
+        f"| Completed lane terms | {int_value(summary, 'completed_lane_terms'):,} |",
+        f"| Completed lane observed bridge rows | {int_value(summary, 'completed_lane_observed_bridge_rows'):,} |",
+        f"| Non-Bible controls at/above observed | {int_value(summary, 'nonbible_controls_at_or_above_observed'):,} |",
+        f"| Gutenberg Prayer of Manasseh markers | {int_value(summary, 'gutenberg_manasseh_source_markers'):,}/{int_value(summary, 'gutenberg_manasseh_local_markers'):,} |",
+        f"| Hakkaac exact normalized verse matches | {int_value(summary, 'hakkaac_exact_normalized_verse_matches'):,}/{int_value(summary, 'hakkaac_total_verses'):,} |",
+        f"| Split-source blocker rows | {int_value(summary, 'split_source_blocker_rows'):,} |",
+        "",
+        f"- Claim status: `{md_cell(summary.get('claim_status', ''))}`.",
+        f"- Claim boundary: {md_cell(manifest.get('claim_boundary', 'KJVA no-input handoff only; no new result'))}.",
+        f"- Gutenberg Sirach gap refs: `{md_cell(summary.get('gutenberg_sirach_gap_refs', ''))}`.",
+        f"- Text retention: {md_cell(manifest.get('text_retention', 'no Bible text written to tracked outputs'))}.",
+        "- Current read: this is a work map, not a statistical result.",
+    ]
     return lines
 
 
@@ -4275,6 +4370,10 @@ def int_value(mapping: dict[str, Any], key: str) -> int:
         return int(value)
     except (TypeError, ValueError):
         return 0
+
+
+def bool_int_cell(mapping: dict[str, Any], key: str) -> str:
+    return "1" if str(mapping.get(key, "")).lower() == "true" else "0"
 
 
 def percent(value: Any) -> str:
