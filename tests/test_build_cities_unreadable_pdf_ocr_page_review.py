@@ -9,16 +9,17 @@ from scripts import build_cities_unreadable_pdf_ocr_page_review as page_review
 
 class CitiesUnreadablePdfOcrPageReviewTests(unittest.TestCase):
     def test_build_page_review_rows_joins_packet_and_decisions(self) -> None:
+        packet_rows = [
+            packet_row("cities_pdf_dp365a_p1_4", "3", "page_ocr_empty", "0"),
+            packet_row(
+                "cities_pdf_dp365a_p5_11",
+                "1",
+                "page_ocr_text_detected",
+                "55",
+            ),
+        ]
         rows = page_review.build_page_review_rows(
-            [
-                packet_row("cities_pdf_dp365a_p1_4", "3", "page_ocr_empty", "0"),
-                packet_row(
-                    "cities_pdf_dp365a_p5_11",
-                    "1",
-                    "page_ocr_text_detected",
-                    "55",
-                ),
-            ],
+            packet_rows,
             [
                 decision_row(
                     "d1",
@@ -58,16 +59,23 @@ class CitiesUnreadablePdfOcrPageReviewTests(unittest.TestCase):
             )
 
     def test_summary_keeps_source_and_search_counts_zero(self) -> None:
+        packet_rows = [
+            packet_row("cities_pdf_dp365a_p1_4", "3", "page_ocr_empty", "0"),
+            packet_row(
+                "cities_pdf_dp365a_p5_11",
+                "1",
+                "page_ocr_text_detected",
+                "55",
+            ),
+            packet_row(
+                "cities_pdf_dp364_short",
+                "1",
+                "page_ocr_text_detected",
+                "44",
+            ),
+        ]
         rows = page_review.build_page_review_rows(
-            [
-                packet_row("cities_pdf_dp365a_p1_4", "3", "page_ocr_empty", "0"),
-                packet_row(
-                    "cities_pdf_dp365a_p5_11",
-                    "1",
-                    "page_ocr_text_detected",
-                    "55",
-                ),
-            ],
+            packet_rows,
             [
                 decision_row(
                     "d1",
@@ -87,8 +95,12 @@ class CitiesUnreadablePdfOcrPageReviewTests(unittest.TestCase):
         )
 
         summary = {
-            row["metric"]: row["value"] for row in page_review.build_summary_rows(rows)
+            row["metric"]: row["value"]
+            for row in page_review.build_summary_rows(rows, packet_rows)
         }
+        self.assertEqual(summary["packet_pages"], "3")
+        self.assertEqual(summary["reviewed_packet_pages"], "2")
+        self.assertEqual(summary["unreviewed_packet_pages"], "1")
         self.assertEqual(summary["review_rows"], "2")
         self.assertEqual(summary["ocr_empty_pages_reviewed"], "1")
         self.assertEqual(summary["low_signal_pages_reviewed"], "2")

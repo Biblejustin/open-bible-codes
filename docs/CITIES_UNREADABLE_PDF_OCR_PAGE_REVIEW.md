@@ -1,6 +1,6 @@
 # Cities Unreadable PDF OCR Page Review
 
-Status: manual page-image review record. This records reviewer labels for all Cities OCR packet pages.
+Status: manual page-image review record. This records reviewer labels for reviewed Cities OCR packet pages.
 It does not track OCR body text, repair text, import source rows, normalize city names, run ELS searches, compute compactness, or verify p-levels.
 No OCR body text appears in this doc, CSV, summary, or manifest.
 
@@ -12,6 +12,9 @@ python3 -m scripts.build_cities_unreadable_pdf_ocr_page_review --packet reports/
 
 ## Summary
 
+- Packet pages: 61.
+- Reviewed packet pages: 41.
+- Unreviewed packet pages: 20.
 - Review rows: 41.
 - Reviewed pages: 41.
 - OCR-empty pages reviewed: 2.

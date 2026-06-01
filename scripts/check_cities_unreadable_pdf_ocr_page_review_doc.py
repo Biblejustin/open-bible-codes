@@ -25,6 +25,9 @@ REQUIRED_PHRASES = (
     "Status: manual page-image review record.",
     "does not track OCR body text",
     "No OCR body text appears",
+    "Packet pages: 61.",
+    "Reviewed packet pages: 41.",
+    "Unreviewed packet pages: 20.",
     "Review rows: 41.",
     "Reviewed pages: 41.",
     "OCR-empty pages reviewed: 2.",
@@ -165,7 +168,7 @@ def validate_cities_unreadable_pdf_ocr_page_review_doc(
     packet_rows = builder.read_csv(packet_csv)
     decision_rows = builder.read_csv(decisions_csv)
     expected_rows = builder.build_page_review_rows(packet_rows, decision_rows)
-    expected_summary_rows = builder.build_summary_rows(expected_rows)
+    expected_summary_rows = builder.build_summary_rows(expected_rows, packet_rows)
     summary = {row["metric"]: row["value"] for row in summary_rows}
     manifest = read_json(manifest_json)
     failures = [
@@ -261,6 +264,9 @@ def validate_summary(
     summary: dict[str, str],
 ) -> list[str]:
     expected = {
+        "Packet pages": summary.get("packet_pages", ""),
+        "Reviewed packet pages": summary.get("reviewed_packet_pages", ""),
+        "Unreviewed packet pages": summary.get("unreviewed_packet_pages", ""),
         "Review rows": summary.get("review_rows", ""),
         "Reviewed pages": summary.get("reviewed_pages", ""),
         "OCR-empty pages reviewed": summary.get("ocr_empty_pages_reviewed", ""),

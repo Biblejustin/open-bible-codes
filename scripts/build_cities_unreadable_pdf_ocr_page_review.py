@@ -66,7 +66,7 @@ def main(argv: list[str] | None = None) -> int:
     packet_rows = read_csv(args.packet)
     decision_rows = read_csv(args.decisions)
     review_rows = build_page_review_rows(packet_rows, decision_rows)
-    summary_rows = build_summary_rows(review_rows)
+    summary_rows = build_summary_rows(review_rows, packet_rows)
     write_csv(args.out, FIELDNAMES, review_rows)
     write_csv(args.summary_out, SUMMARY_FIELDNAMES, summary_rows)
     write_markdown(args.markdown_out, review_rows, summary_rows, args)
@@ -147,11 +147,19 @@ def decision_sort_key(row: dict[str, str]) -> tuple[str, int, str]:
     )
 
 
-def build_summary_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+def build_summary_rows(
+    rows: list[dict[str, str]],
+    packet_rows: list[dict[str, str]] | None = None,
+) -> list[dict[str, str]]:
     source_imports = [
         row for row in rows if row.get("source_row_use") != "no_source_row_use"
     ]
+    packet_page_count = len(packet_rows) if packet_rows is not None else len(rows)
+    unreviewed_packet_pages = max(packet_page_count - len(rows), 0)
     return [
+        metric("packet_pages", packet_page_count),
+        metric("reviewed_packet_pages", len(rows)),
+        metric("unreviewed_packet_pages", unreviewed_packet_pages),
         metric("review_rows", len(rows)),
         metric("reviewed_pages", count_eq(rows, "visual_review_status", "reviewed")),
         metric("ocr_empty_pages_reviewed", count_ocr_empty(rows)),
@@ -174,7 +182,7 @@ def write_markdown(
     lines = [
         "# Cities Unreadable PDF OCR Page Review",
         "",
-        "Status: manual page-image review record. This records reviewer labels for all Cities OCR packet pages.",
+        "Status: manual page-image review record. This records reviewer labels for reviewed Cities OCR packet pages.",
         "It does not track OCR body text, repair text, import source rows, normalize city names, run ELS searches, compute compactness, or verify p-levels.",
         "No OCR body text appears in this doc, CSV, summary, or manifest.",
         "",
@@ -194,6 +202,9 @@ def write_markdown(
         "",
         "## Summary",
         "",
+        f"- Packet pages: {summary['packet_pages']}.",
+        f"- Reviewed packet pages: {summary['reviewed_packet_pages']}.",
+        f"- Unreviewed packet pages: {summary['unreviewed_packet_pages']}.",
         f"- Review rows: {summary['review_rows']}.",
         f"- Reviewed pages: {summary['reviewed_pages']}.",
         f"- OCR-empty pages reviewed: {summary['ocr_empty_pages_reviewed']}.",
