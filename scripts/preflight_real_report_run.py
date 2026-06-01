@@ -60,6 +60,7 @@ from scripts import (
     check_cities_unreadable_pdf_ocr_page_review_doc,
     check_cities_unreadable_pdf_ocr_review_packet_doc,
     check_cities_unreadable_pdf_review_doc,
+    check_clean_lock_results_summary_doc,
     check_consolidated_findings_doc,
     check_corpus_configs,
     check_check_script_tests,
@@ -185,6 +186,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/release_hygiene.py",
     "scripts/check_public_release_hygiene.py",
     "scripts/check_public_claim_language.py",
+    "scripts/check_clean_lock_results_summary_doc.py",
     "scripts/check_doc_command_references.py",
     "scripts/check_english_seed_survivor_gate.py",
     "scripts/check_consolidated_findings_doc.py",
@@ -1220,6 +1222,17 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "final-report assembly doc failures: "
             + "; ".join(final_report_assembly_doc_failures)
+        )
+
+    clean_lock_results_summary_doc_failures = (
+        check_clean_lock_results_summary_doc.validate_clean_lock_results_summary_doc(
+            root / check_clean_lock_results_summary_doc.DEFAULT_DOC
+        )
+    )
+    if clean_lock_results_summary_doc_failures:
+        failures.append(
+            "clean-lock results summary doc failures: "
+            + "; ".join(clean_lock_results_summary_doc_failures)
         )
 
     project_findings_overview_doc_failures = (
@@ -2708,6 +2721,9 @@ def main(argv: list[str] | None = None) -> int:
         "english_seed_survivor_gate_failures": english_seed_survivor_gate_failures,
         "english_corpus_policy_failures": english_corpus_policy_failures,
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,
+        "clean_lock_results_summary_doc_failures": (
+            clean_lock_results_summary_doc_failures
+        ),
         "public_claim_language_failures": public_claim_language_failures,
         "doc_command_reference_failures": doc_command_reference_failures,
         "protocol_file_failures": protocol_file_failures,

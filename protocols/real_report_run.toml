@@ -14,6 +14,7 @@ inputs = [
   "scripts/release_hygiene.py",
   "scripts/check_public_release_hygiene.py",
   "scripts/check_public_claim_language.py",
+  "scripts/check_clean_lock_results_summary_doc.py",
   "scripts/check_doc_command_references.py",
   "scripts/check_english_seed_survivor_gate.py",
   "scripts/check_consolidated_findings_doc.py",

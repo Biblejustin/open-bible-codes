@@ -3006,3 +3006,15 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   symbolic link.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
+
+## Clean-Lock Results Summary Guard
+
+- Added a dedicated guard for `docs/CLEAN_LOCK_RESULTS_SUMMARY.md` so the
+  summary must retain its no-claim status, KJVA legacy-lock caveat, lane counts,
+  strict-gate reads, required report links, and local reference existence.
+- Wired the guard into real-report preflight, `make fast-validate`, and
+  `make public-release-check`, with unit tests covering the current document,
+  required phrase drift, required reference drift, and forbidden positive claim
+  language.
+- This is a documentation guard only. It does not change source policy,
+  imported texts, ELS searches, report conclusions, or result status.
