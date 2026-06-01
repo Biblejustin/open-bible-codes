@@ -36,6 +36,8 @@ EXPECTED_SUMMARY_INPUTS = (
     "reports/greek_exact_center_final_gate/summary.csv",
     "reports/wrr_1994/audit_counts_protocol.manifest.json",
     "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue_summary.csv",
+    "reports/kjva_no_input_handoff_status/summary.csv",
+    "reports/kjva_no_input_handoff_status/manifest.json",
     "reports/final_report_highlights/highlights.csv",
 )
 EXPECTED_SUMMARY_OUTPUTS = (
@@ -76,6 +78,9 @@ REQUIRED_PHRASES = (
     "docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md",
     "KJVA next-result gate",
     "docs/KJVA_NEXT_RESULT_GATE.md",
+    "KJVA no-input handoff status",
+    "docs/KJVA_NO_INPUT_HANDOFF_STATUS.md",
+    "no-new-KJVA-result boundary",
 )
 
 

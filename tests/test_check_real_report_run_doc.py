@@ -67,6 +67,29 @@ def test_protocol_summary_output_drift_fails(tmp_path: Path) -> None:
     assert any("real_report_summary outputs drifted" in failure for failure in failures)
 
 
+def test_protocol_summary_kjva_handoff_input_drift_fails(tmp_path: Path) -> None:
+    doc, protocol, makefile = copy_current_inputs(tmp_path)
+    protocol_text = protocol.read_text(encoding="utf-8")
+    before, separator, after = protocol_text.rpartition(
+        '"reports/kjva_no_input_handoff_status/summary.csv"'
+    )
+    assert separator
+    protocol.write_text(
+        before
+        + '"reports/kjva_no_input_handoff_status/renamed_summary.csv"'
+        + after,
+        encoding="utf-8",
+    )
+
+    failures = check.validate_real_report_run_doc(doc, protocol, makefile)
+
+    assert any(
+        "real_report_summary inputs missing: "
+        "reports/kjva_no_input_handoff_status/summary.csv" in failure
+        for failure in failures
+    )
+
+
 def test_make_target_drift_fails(tmp_path: Path) -> None:
     doc, protocol, makefile = copy_current_inputs(tmp_path)
     makefile.write_text(
