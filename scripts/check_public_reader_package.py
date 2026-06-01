@@ -71,6 +71,7 @@ def validate_public_reader_package(
 
     failures.extend(validate_manifest_metadata(manifest, package_dir))
     failures.extend(validate_manifest_files(manifest, package_dir))
+    failures.extend(validate_no_unmanifested_files(manifest, package_dir))
     return failures
 
 
@@ -142,6 +143,29 @@ def validate_manifest_files(
     for path in builder.PACKAGE_START_PATHS:
         if path.as_posix() not in source_set:
             failures.append(f"package start source missing from manifest: {path}")
+    return failures
+
+
+def validate_no_unmanifested_files(
+    manifest: dict[str, Any],
+    package_dir: Path,
+) -> list[str]:
+    files = manifest.get("files")
+    if not isinstance(files, list):
+        return []
+    expected = {path.as_posix() for path in REQUIRED_GENERATED_FILES}
+    for item in files:
+        if isinstance(item, dict):
+            package_path = item.get("package_path")
+            if isinstance(package_path, str):
+                expected.add(package_path)
+    failures: list[str] = []
+    for path in package_dir.rglob("*"):
+        if path.is_dir() and not path.is_symlink():
+            continue
+        relative = path.relative_to(package_dir).as_posix()
+        if relative not in expected:
+            failures.append(f"unexpected package file: {relative}")
     return failures
 
 

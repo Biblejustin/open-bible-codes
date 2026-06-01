@@ -104,3 +104,12 @@ def test_detects_unsafe_manifest_package_path(tmp_path, monkeypatch) -> None:
     failures = check.validate_public_reader_package(out_dir)
 
     assert any("unsafe manifest package path: ../outside.md" in failure for failure in failures)
+
+
+def test_detects_unmanifested_extra_file(tmp_path, monkeypatch) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    _write(out_dir / "stale_extra.md", "# stale\n")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert "unexpected package file: stale_extra.md" in failures

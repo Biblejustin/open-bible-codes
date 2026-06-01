@@ -3015,6 +3015,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - The new verifier exposed and fixed the package-root README collision: the
   repository `README.md` now lands at `docs/REPOSITORY_README.md`, leaving the
   generated package `README.md` intact and hash-verifiable.
+- Tightened the verifier so stale unmanifested files left in a package output
+  directory are rejected instead of being silently shipped alongside the
+  manifest-covered reader files.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 
