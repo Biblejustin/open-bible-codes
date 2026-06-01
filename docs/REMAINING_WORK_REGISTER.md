@@ -2996,5 +2996,7 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   must be present in the actual package input set after optional report files
   are filtered, preventing a package README from pointing at a missing formal
   report summary.
+- Added Git tracking validation for public-reader doc inputs, so `--extra-doc`
+  cannot package an untracked local Markdown file from the working tree.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.

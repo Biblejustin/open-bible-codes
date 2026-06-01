@@ -149,6 +149,7 @@ def validate_reader_package_inputs(
             check_project_findings_overview_doc.validate_project_findings_overview()
         )
     failures.extend(validate_doc_source_paths(doc_paths))
+    failures.extend(validate_tracked_doc_sources(doc_paths))
     failures.extend(validate_unique_package_sources([*doc_paths, *report_set]))
     failures.extend(validate_package_start_paths(doc_set | report_set))
     failures.extend(validate_packaged_reader_links(doc_set | report_set))
@@ -163,6 +164,16 @@ def validate_doc_source_paths(paths: list[Path]) -> list[str]:
     for path in paths:
         if path.suffix.lower() != ".md":
             failures.append(f"doc package source must be markdown: {path}")
+    return failures
+
+
+def validate_tracked_doc_sources(paths: list[Path]) -> list[str]:
+    if not is_inside_git_work_tree():
+        return []
+    failures: list[str] = []
+    for path in paths:
+        if not is_git_tracked(path):
+            failures.append(f"doc package source is not tracked by git: {path}")
     return failures
 
 
@@ -378,6 +389,28 @@ def git_head() -> str:
     if result.returncode != 0:
         return ""
     return result.stdout.strip()
+
+
+def is_inside_git_work_tree() -> bool:
+    result = subprocess.run(
+        ["git", "rev-parse", "--is-inside-work-tree"],
+        check=False,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        text=True,
+    )
+    return result.returncode == 0 and result.stdout.strip() == "true"
+
+
+def is_git_tracked(path: Path) -> bool:
+    result = subprocess.run(
+        ["git", "ls-files", "--error-unmatch", "--", path.as_posix()],
+        check=False,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        text=True,
+    )
+    return result.returncode == 0
 
 
 if __name__ == "__main__":
