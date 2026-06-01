@@ -2972,5 +2972,7 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `PACKAGE_START_PATHS` constant and added a guard that every start-list entry
   is in the package whitelist, so numbering and package inclusion cannot drift
   separately.
+- Tightened the package-input guard so `START_HERE` must contain packaged
+  reader links and the README must retain a non-empty `Reader path:` section.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.

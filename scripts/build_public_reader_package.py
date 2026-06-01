@@ -163,6 +163,8 @@ def validate_packaged_reader_links(package_paths: set[Path]) -> list[str]:
             continue
         text = source.read_text(encoding="utf-8")
         references = sorted(set(PACKAGED_READER_LINK_RE.findall(text)))
+        if not references:
+            failures.append(f"{source} has no packaged reader links")
         for reference in references:
             if Path(reference) not in package_paths:
                 failures.append(
@@ -174,8 +176,14 @@ def validate_packaged_reader_links(package_paths: set[Path]) -> list[str]:
         if not source.exists():
             failures.append(f"{source} is missing")
             continue
-        section = extract_marked_section(source.read_text(encoding="utf-8"), marker)
+        text = source.read_text(encoding="utf-8")
+        if marker not in text:
+            failures.append(f"{source} missing reader path marker: {marker}")
+            continue
+        section = extract_marked_section(text, marker)
         references = sorted(set(PACKAGED_READER_LINK_RE.findall(section)))
+        if not references:
+            failures.append(f"{source} reader path section has no packaged links")
         for reference in references:
             if Path(reference) not in package_paths:
                 failures.append(

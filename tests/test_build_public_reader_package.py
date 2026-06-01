@@ -23,7 +23,10 @@ def _default_doc_text(path: Path) -> str:
     if path == overview_check.DEFAULT_README:
         return (
             "# README\n\n"
-            "whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`\n"
+            "whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`\n\n"
+            "Reader path:\n\n"
+            "- start here: `docs/START_HERE.md`\n"
+            "- whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`\n"
         )
     if path == overview_check.DEFAULT_START_HERE:
         return (
@@ -158,6 +161,26 @@ def test_refuses_unpackaged_start_here_reference(tmp_path, monkeypatch) -> None:
     ) in str(excinfo.value)
 
 
+def test_refuses_start_here_without_reader_links(tmp_path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    for path in package.DEFAULT_DOC_PATHS:
+        _write(path, _default_doc_text(path))
+    for path in package.DEFAULT_REPORT_PATHS:
+        _write(path, "# report\n\nbody\n" if path.suffix == ".md" else "{}\n")
+    _write(
+        overview_check.DEFAULT_START_HERE,
+        "# Start Here\n\n"
+        "No package links here.\n\n"
+        "no current row should be presented as a public claim\n",
+    )
+
+    with pytest.raises(ValueError) as excinfo:
+        package.build_public_reader_package(out_dir=Path("reports/public_reader_package"))
+
+    assert "reader package input validation failed" in str(excinfo.value)
+    assert "docs/START_HERE.md has no packaged reader links" in str(excinfo.value)
+
+
 def test_refuses_unpackaged_readme_reader_path_reference(tmp_path, monkeypatch) -> None:
     monkeypatch.chdir(tmp_path)
     for path in package.DEFAULT_DOC_PATHS:
@@ -183,6 +206,46 @@ def test_refuses_unpackaged_readme_reader_path_reference(tmp_path, monkeypatch) 
         "README.md reader path references docs/NOT_IN_PACKAGE.md "
         "but package does not include it"
     ) in str(excinfo.value)
+
+
+def test_refuses_missing_readme_reader_path_marker(tmp_path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    for path in package.DEFAULT_DOC_PATHS:
+        _write(path, _default_doc_text(path))
+    for path in package.DEFAULT_REPORT_PATHS:
+        _write(path, "# report\n\nbody\n" if path.suffix == ".md" else "{}\n")
+    _write(
+        overview_check.DEFAULT_README,
+        "# README\n\n"
+        "whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`\n",
+    )
+
+    with pytest.raises(ValueError) as excinfo:
+        package.build_public_reader_package(out_dir=Path("reports/public_reader_package"))
+
+    assert "reader package input validation failed" in str(excinfo.value)
+    assert "README.md missing reader path marker: Reader path:" in str(excinfo.value)
+
+
+def test_refuses_readme_reader_path_without_links(tmp_path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    for path in package.DEFAULT_DOC_PATHS:
+        _write(path, _default_doc_text(path))
+    for path in package.DEFAULT_REPORT_PATHS:
+        _write(path, "# report\n\nbody\n" if path.suffix == ".md" else "{}\n")
+    _write(
+        overview_check.DEFAULT_README,
+        "# README\n\n"
+        "whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`\n\n"
+        "Reader path:\n\n"
+        "- no package links here\n",
+    )
+
+    with pytest.raises(ValueError) as excinfo:
+        package.build_public_reader_package(out_dir=Path("reports/public_reader_package"))
+
+    assert "reader package input validation failed" in str(excinfo.value)
+    assert "README.md reader path section has no packaged links" in str(excinfo.value)
 
 
 def test_refuses_raw_source_paths(tmp_path, monkeypatch) -> None:
