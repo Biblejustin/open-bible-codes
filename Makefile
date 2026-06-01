@@ -21,7 +21,7 @@ COHORT_CLUSTER_WINDOW_WORDS ?= 50
 COHORT_CLUSTER_MIN_DISTINCT ?= 2
 COHORT_CLUSTER_CORPUS_CONFIGS ?= --corpus-config MT_WLC=configs/example_oshb_wlc.toml --corpus-config UXLC=configs/example_uxlc.toml --corpus-config EBIBLE_WLC=configs/example_ebible_hebwlc.toml --corpus-config MAM=configs/example_mam.toml --corpus-config UHB=configs/example_uhb.toml --corpus-config LXX=configs/example_ebible_grclxx.toml --corpus-config KJV=configs/example_ebible_engkjv.toml --corpus-config KJVA=configs/example_ebible_engkjv_apocrypha.toml --corpus-config TR_NT=configs/example_ebible_grctr.toml --corpus-config SBLGNT=configs/example_sblgnt.toml --corpus-config BYZ_NT=configs/example_ebible_grcmt.toml --corpus-config TCG_NT=configs/example_ebible_grctcgnt.toml --corpus-config HEB_PBY_AHAD_HAAM=configs/nonbible_hebrew_pby_ahad_haam.toml --corpus-config HEB_PBY_BIALIK=configs/nonbible_hebrew_pby_bialik.toml --corpus-config HEB_PBY_BRENNER=configs/nonbible_hebrew_pby_brenner.toml --corpus-config ENG_PG_SHAKESPEARE=configs/nonbible_english_pg_shakespeare.toml
 
-.PHONY: demo indexes test lint fast-validate release-ready public-release-check reader-doc-checks wrr-doc-checks cities-doc-checks kjva-source-doc-checks local-data-doc-check protocol-files corpus-configs term-files script-tests check-script-tests check-script-wiring study-mapping-schemas public-reader-package-check expanded-strata-tooling-check expanded-strata-postprocess real-report public-reader-package report-db dynamic-full-span-hit-findings notable-passage-gaps thematic-chapter-absence match-strata-index boundary-alignment chapter-position-bias direction-asymmetry canonical-first-summary cross-skip-summary review-flag-summary hebrew-atbash-audit hebrew-albam-audit word-edge-pattern-audit word-skip-term-audit matrix-cluster-candidates matrix-cluster-control-summary cipher-layered-plain-hits cipher-layered-pairs cohort-cluster-density crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-broad-screening-findings crd-center-word-findings crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-self-surface-queue crd-self-surface-center-word crd-self-surface-center-word-density crd-self-surface-center-word-queue crd-self-surface-center-word-packet crd-self-surface-center-word-presence crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density crd-concept-surface-center-word-queue crd-concept-surface-center-word-packet crd-concept-surface-center-word-presence
+.PHONY: demo indexes test lint fast-validate release-ready public-release-check reader-doc-checks study-support-checks wrr-doc-checks cities-doc-checks kjva-source-doc-checks local-data-doc-check protocol-files corpus-configs term-files script-tests check-script-tests check-script-wiring study-mapping-schemas public-reader-package-check expanded-strata-tooling-check expanded-strata-postprocess real-report public-reader-package report-db dynamic-full-span-hit-findings notable-passage-gaps thematic-chapter-absence match-strata-index boundary-alignment chapter-position-bias direction-asymmetry canonical-first-summary cross-skip-summary review-flag-summary hebrew-atbash-audit hebrew-albam-audit word-edge-pattern-audit word-skip-term-audit matrix-cluster-candidates matrix-cluster-control-summary cipher-layered-plain-hits cipher-layered-pairs cohort-cluster-density crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-broad-screening-findings crd-center-word-findings crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-self-surface-queue crd-self-surface-center-word crd-self-surface-center-word-density crd-self-surface-center-word-queue crd-self-surface-center-word-packet crd-self-surface-center-word-presence crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density crd-concept-surface-center-word-queue crd-concept-surface-center-word-packet crd-concept-surface-center-word-presence
 
 demo:
 	python3 -m els.demo
@@ -41,6 +41,7 @@ fast-validate: test indexes
 	python3 -m scripts.check_public_release_hygiene --allow-dirty
 	python3 -m scripts.check_expanded_strata_tooling
 	$(MAKE) reader-doc-checks
+	$(MAKE) study-support-checks
 	$(MAKE) wrr-doc-checks
 	$(MAKE) cities-doc-checks
 	$(MAKE) kjva-source-doc-checks
@@ -62,6 +63,7 @@ public-release-check:
 	python3 -m scripts.check_expanded_strata_tooling
 	python3 -m scripts.check_doc_command_references
 	$(MAKE) reader-doc-checks
+	$(MAKE) study-support-checks
 	$(MAKE) wrr-doc-checks
 	$(MAKE) cities-doc-checks
 	$(MAKE) kjva-source-doc-checks
@@ -94,6 +96,20 @@ reader-doc-checks:
 	python3 -m scripts.check_wrr_no_input_handoff_status_doc
 	python3 -m scripts.check_cities_no_input_handoff_status_doc
 	python3 -m scripts.check_kjva_no_input_handoff_status_doc
+
+study-support-checks:
+	python3 -m scripts.check_centered_occurrence_index_doc
+	python3 -m scripts.check_critical_omission_followup_docs
+	python3 -m scripts.check_english_corpus_policy_docs
+	python3 -m scripts.check_english_seed_survivor_gate
+	python3 -m scripts.check_greek_surface_second_cohort_readiness_doc
+	python3 -m scripts.check_hypothesis_testing_source_audit_doc
+	python3 -m scripts.check_israeli_prime_ministers_detail_recovery_probe_doc
+	python3 -m scripts.check_kjva_apocrypha_bridge_prospective_boundary
+	python3 -m scripts.check_manual_review_queue
+	python3 -m scripts.check_prospective_study_lanes
+	python3 -m scripts.check_research_missing_model_pages_audit_doc
+	python3 -m scripts.check_source_basis_audit_queue
 
 wrr-doc-checks:
 	python3 -m scripts.check_wrr_adjacent_source_audit_docs

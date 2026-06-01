@@ -363,6 +363,8 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "scripts.check_expanded_strata_tooling" in makefile
     assert "$(MAKE) reader-doc-checks" in makefile
     assert "reader-doc-checks:" in makefile
+    assert "$(MAKE) study-support-checks" in makefile
+    assert "study-support-checks:" in makefile
     assert "$(MAKE) wrr-doc-checks" in makefile
     assert "wrr-doc-checks:" in makefile
     assert "$(MAKE) cities-doc-checks" in makefile
@@ -386,6 +388,10 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "scripts.check_wrr_no_input_handoff_status_doc" in makefile
     assert "scripts.check_cities_no_input_handoff_status_doc" in makefile
     assert "scripts.check_kjva_no_input_handoff_status_doc" in makefile
+    assert "scripts.check_critical_omission_followup_docs" in makefile
+    assert "scripts.check_english_corpus_policy_docs" in makefile
+    assert "scripts.check_hypothesis_testing_source_audit_doc" in makefile
+    assert "scripts.check_source_basis_audit_queue" in makefile
     assert "scripts.check_wrr_source_policy_evidence_packet_doc" in makefile
     assert "scripts.check_wrr_source_row_review_bundle_doc" in makefile
     assert "scripts.check_wrr_support_docs_local_lock" in makefile
@@ -410,6 +416,7 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "$(MAKE) local-data-doc-check" in makefile
     assert "make fast-validate" in readme
     assert "make reader-doc-checks" in readme
+    assert "make study-support-checks" in readme
     assert "make wrr-doc-checks" in readme
     assert "make cities-doc-checks" in readme
     assert "make kjva-source-doc-checks" in readme
@@ -423,6 +430,7 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "strongest-candidate packet" in normalized_readme
     assert "prospective workflow docs" in normalized_readme
     assert "public/no-input handoff docs" in normalized_readme
+    assert "study-support guard docs" in readme
     assert "WRR method/source/support docs" in readme
     assert "Cities source/recovery docs" in readme
     assert "KJVA source-policy docs" in readme
@@ -483,6 +491,8 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "scripts.check_doc_command_references" in makefile
     assert "$(MAKE) reader-doc-checks" in makefile
     assert "reader-doc-checks:" in makefile
+    assert "$(MAKE) study-support-checks" in makefile
+    assert "study-support-checks:" in makefile
     assert "$(MAKE) wrr-doc-checks" in makefile
     assert "wrr-doc-checks:" in makefile
     assert "$(MAKE) cities-doc-checks" in makefile
@@ -506,6 +516,10 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "scripts.check_wrr_no_input_handoff_status_doc" in makefile
     assert "scripts.check_cities_no_input_handoff_status_doc" in makefile
     assert "scripts.check_kjva_no_input_handoff_status_doc" in makefile
+    assert "scripts.check_critical_omission_followup_docs" in makefile
+    assert "scripts.check_english_corpus_policy_docs" in makefile
+    assert "scripts.check_hypothesis_testing_source_audit_doc" in makefile
+    assert "scripts.check_source_basis_audit_queue" in makefile
     assert "scripts.check_wrr_source_policy_evidence_packet_doc" in makefile
     assert "scripts.check_wrr_source_row_review_bundle_doc" in makefile
     assert "scripts.check_wrr_support_docs_local_lock" in makefile
@@ -525,6 +539,7 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "$(MAKE) public-reader-package-check" in makefile
     assert "make release-ready" in readme
     assert "make reader-doc-checks" in readme
+    assert "make study-support-checks" in readme
     assert "make wrr-doc-checks" in readme
     assert "make cities-doc-checks" in readme
     assert "make kjva-source-doc-checks" in readme
@@ -538,6 +553,7 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "strongest-candidate packet" in normalized_readme
     assert "prospective workflow docs" in normalized_readme
     assert "public/no-input handoff docs" in normalized_readme
+    assert "study-support guard docs" in readme
     assert "WRR method/source/support docs" in readme
     assert "Cities source/recovery docs" in readme
     assert "KJVA source-policy docs" in readme

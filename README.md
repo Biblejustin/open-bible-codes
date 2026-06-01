@@ -94,8 +94,8 @@ the general-reader findings overview, real-report run documentation,
 consolidated findings, claim catalog, final-report assembly docs, final-report
 highlights, strongest-candidate packet, prospective workflow docs,
 public/no-input handoff docs, WRR method/source/support docs,
-Cities source/recovery docs, KJVA source-policy docs, protocol TOML files,
-corpus config schemas, term-file schema/normalization, all-script exact-test
+study-support guard docs, Cities source/recovery docs, KJVA source-policy docs,
+protocol TOML files, corpus config schemas, term-file schema/normalization, all-script exact-test
 coverage, check-script wiring coverage, the study-mapping guard suite, a
 temporary public-reader package build, and local data doc references against
 the current ignored source caches.
@@ -118,6 +118,18 @@ make reader-doc-checks
 
 This runs the reader-facing documentation guards shared by `make
 fast-validate` and `make public-release-check`.
+
+Study-support checks only:
+
+```bash
+make study-support-checks
+```
+
+This runs the centered-occurrence, critical-omission follow-up, English corpus
+policy, English seed-survivor, Greek second-cohort, hypothesis/source audit,
+Israeli Prime Ministers detail-recovery, KJVA prospective boundary,
+manual-review, prospective-lane, research missing-model, and source-basis
+guards shared by `make fast-validate` and `make public-release-check`.
 
 WRR method/source/support checks only:
 

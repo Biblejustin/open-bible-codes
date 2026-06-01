@@ -3121,6 +3121,21 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   report conclusions, source policy, imported texts, ELS searches, or result
   status.
 
+## Study-Support Direct Gate
+
+- Added `make study-support-checks` for centered-occurrence, critical-omission
+  follow-up, English corpus policy, English seed-survivor, Greek second-cohort,
+  hypothesis/source audit, Israeli Prime Ministers detail recovery, KJVA
+  prospective boundary, manual-review, prospective-lane, research
+  missing-model, and source-basis guards.
+- Wired the shared target into `make fast-validate` and
+  `make public-release-check`, so non-lane support docs and planning guards are
+  checked before both dirty-safe handoffs and clean releases.
+- Updated README validation guidance and Makefile guard tests to keep the
+  shared target visible.
+- This is a documentation/validation guard only. It does not change report
+  conclusions, source policy, imported texts, ELS searches, or result status.
+
 ## KJVA Source-Doc Direct Gate
 
 - Added `make kjva-source-doc-checks` for the KJVA source-candidate,
