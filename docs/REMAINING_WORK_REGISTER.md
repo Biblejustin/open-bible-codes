@@ -2913,8 +2913,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   makes readers discover the Cities blocker only through the handoff packet.
 - Current overview wording now keeps the same no-result boundary visible: 14
   source-row lock candidate pages, 14 populated source-row lock rows, 8
-  handoff rows, 6 manual-input-needed rows, 203 priority line-crop review
-  rows, and no Cities result allowed.
+  handoff rows, 6 manual-input-needed rows, 61 OCR packet pages, 41 reviewed
+  OCR packet pages, 20 unreviewed OCR packet pages, 203 priority line-crop
+  review rows, and no Cities result allowed.
 - The overview also states that the Cities lane has not produced source rows,
   city-name normalization, ELS searches, compactness runs, or p-levels.
 - Extended `scripts/check_project_findings_overview_doc.py` so the
@@ -2922,6 +2923,23 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   current source-row blocker counts, plain-language page-vs-list explanation,
   and no-result boundary.
 - Commit: `a25e313`.
+
+## Cities OCR Packet Coverage Public Sync
+
+- Extended the consolidated Cities no-input handoff to read
+  `reports/cities_pdf_recovery_probe/cities_unreadable_pdf_ocr_page_review_summary.csv`,
+  so the handoff summary now carries 61 OCR packet pages, 41 reviewed OCR
+  packet pages, and 20 unreviewed OCR packet pages alongside the existing
+  source-row and line-crop blockers.
+- Synced that count into the public reader path: `README.md`,
+  `docs/PROJECT_FINDINGS_OVERVIEW.md`, `docs/CLAIM_CATALOG.md`,
+  `docs/CONSOLIDATED_FINDINGS.md`, `docs/FINAL_REPORT.md`,
+  `docs/FINAL_REPORT_DRAFT.md`, `docs/FINAL_REPORT_OUTLINE.md`,
+  `docs/REAL_REPORT_RUN.md`, and `protocols/README.md`.
+- Hardened `scripts/check_cities_public_handoff_docs.py` so public docs fail if
+  the older transcription-review-plus-priority-summary wording returns without
+  the OCR packet coverage counts.
+- Commits: `0128758`, `3f063fb`, `63ab308`, `feaad6f`.
 
 ## Public Reader Package Cities Handoff Sync
 
