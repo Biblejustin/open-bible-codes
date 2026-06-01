@@ -44,6 +44,11 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
         "`docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`",
         "812 unique term-center presence rows.",
         "809 Bible presence rows and 3 control presence rows.",
+        "The bridge pass found 350 boundary-spanning rows.",
+        "expanded 250-sample shuffled-insertion control produced 149 to 236 bridge rows",
+        "with no shuffled sample at or above the observed 350 (`p_ge=0.003984`).",
+        "confirmatory follow-up over those 15 terms found all 15 with `q_ge <= 0.01`",
+        "and 3 terms stood above every shuffled sample.",
     ),
     Path("docs/REAL_REPORT_RUN.md"): (
         "Git remotes pointing at `Biblejustin/open-bible-codes`;",
@@ -64,6 +69,9 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
         "839 Bible occurrence rows and 84 control occurrence rows.",
         "83 selected follow-up rows from English screening, Greek screening, Hebrew screening, and Hebrew theology queues",
         "46 deduped compound-extension rows with 250/250 row-local paired controls",
+        "149 to 236 shuffled rows against 350 observed rows (`p_ge=0.003984`).",
+        "The KJVA term-level bridge review found 48 of 81 bridge terms above all three",
+        "15 terms with Benjamini-Hochberg `q_ge <= 0.05`.",
     ),
     Path("docs/STRONGEST_CANDIDATE_DEEP_DIVE.md"): (
         "This page does not make any row a public claim.",
