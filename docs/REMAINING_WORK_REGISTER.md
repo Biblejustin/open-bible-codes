@@ -3029,6 +3029,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened the verifier so manifest package paths must match the package
   builder's source-to-output mapping, including the repository README override
   to `docs/REPOSITORY_README.md`.
+- Tightened the verifier so package `git_head` must match the current repo
+  HEAD, catching a stale ignored reader package after a new commit.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 

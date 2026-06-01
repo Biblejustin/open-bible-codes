@@ -82,6 +82,12 @@ def validate_manifest_metadata(
     package_dir: Path,
 ) -> list[str]:
     failures: list[str] = []
+    current_git_head = builder.git_head()
+    if manifest.get("git_head") != current_git_head:
+        failures.append(
+            f"{package_dir}/package_manifest.json git_head drifted: "
+            f"{manifest.get('git_head')} != {current_git_head}"
+        )
     if "no raw source texts" not in str(manifest.get("package_boundary", "")):
         failures.append(f"{package_dir}/package_manifest.json missing package boundary")
     if "validated before packaging" not in str(manifest.get("reader_path_guard", "")):
