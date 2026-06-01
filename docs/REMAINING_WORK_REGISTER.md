@@ -2652,3 +2652,24 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/check_kjva_hakkaac_source_lock_decision_packet_doc.py`, and wired
   the packet into `scripts/preflight_real_report_run.py` plus
   `protocols/real_report_run.toml`.
+
+## KJVA Current Source Lock Sidecar
+
+- Added `docs/KJVA_CURRENT_SOURCE_LOCK_SIDECAR.md` as a non-text checksum,
+  book-order, and count-shape sidecar for the current eBible KJV + Apocrypha
+  rerun baseline.
+- Current sidecar status: source id `eng-kjv`, CSV SHA-256
+  `f4f4549c7323de20a6cdd7aa74aeae32d184b2b6a1a51cd41390540efd710360`,
+  ZIP SHA-256
+  `0ec30ed796dbc1aea401c497359a9e115077c7d72bf19d3dbf93f20acd784f8b`,
+  80 books, 36822 verses, 14 apocrypha/deuterocanon books, 5720
+  apocrypha/deuterocanon verses, and 593090 apocrypha/deuterocanon normalized
+  letters.
+- This locks the current rerun baseline only. It does not make eBible an
+  independent replication source, does not choose Hakkaac or Project Gutenberg,
+  and does not authorize a result-bearing KJVA bridge run.
+- Added `protocols/kjva_current_source_lock_sidecar.toml`,
+  `scripts/build_kjva_current_source_lock_sidecar.py`, and
+  `scripts/check_kjva_current_source_lock_sidecar_doc.py`, and wired the
+  sidecar into `scripts/preflight_real_report_run.py` plus
+  `protocols/real_report_run.toml`.

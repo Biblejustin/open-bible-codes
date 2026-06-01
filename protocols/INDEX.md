@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 189
+Protocols indexed: 190
 
 ## Analysis
 
@@ -111,6 +111,7 @@ Protocols indexed: 189
 | Name | Description | Steps | Terms | Output Roots | Path |
 | --- | --- | ---: | --- | --- | --- |
 | english_seed_shuffle_baseline | Exploratory shuffled-letter null baseline for English triage seed-term hits. | 1 |  | reports/english_seed_shuffle_baseline | `english_seed_shuffle_baseline.toml` |
+| kjva_current_source_lock_sidecar | Build a non-text checksum/order sidecar for the current eBible KJV + Apocrypha rerun ba... | 1 |  | reports/kjva_current_source_lock_sidecar | `kjva_current_source_lock_sidecar.toml` |
 | public_baseline | Public-source baseline for MT WLC, LXX GRCLXX, TR GRCTR, and SBLGNT. | 30 | terms/modern_names_dates.csv, terms/prophetic_terms.csv, terms/table_of_nations.csv, te... | reports, reports/protocols/public_baseline | `public_baseline.toml` |
 
 ## Controls
@@ -157,7 +158,7 @@ Protocols indexed: 189
 | oet_english_controls | Open English Translation OET-LV/OET-RV control-corpus screening for generated English t... | 1 | terms/english_search_terms.csv | reports/oet_english_controls | `oet_english_controls.toml` |
 | openbible_english_controls | Open.Bible English NT control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/openbible_english_controls | `openbible_english_controls.toml` |
 | otb_english_controls | Open Translation Bible English UK control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/otb_english_controls | `otb_english_controls.toml` |
-| real_report_run | Formal report assembly run over locked STEP_TAHOT, Greek exact-center, doxa follow-ups,... | 67 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports, reports/all_codes_compound_extension_confirmatory, reports/all_codes_compound_... | `real_report_run.toml` |
+| real_report_run | Formal report assembly run over locked STEP_TAHOT, Greek exact-center, doxa follow-ups,... | 68 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports, reports/all_codes_compound_extension_confirmatory, reports/all_codes_compound_... | `real_report_run.toml` |
 | sblgnt_source_only_exact_center | Post-discovery 1000/1000 controls for SBLGNT source-only exact-center extension rows. | 2 |  | reports/sblgnt_source_only_exact_center | `sblgnt_source_only_exact_center.toml` |
 | step_tahot_control_policy_hits | Audit STEP_TAHOT-only control rows against TAHOT source-type policy. | 2 |  | reports/step_tahot_control_policy_hits, reports/step_tahot_control_version_presence | `step_tahot_control_policy_hits.toml` |
 | step_tahot_control_version_presence | Capped exact ELS hit-pattern presence for Hebrew null/frequency controls across MT-fami... | 1 | terms/frequency_anchors.csv, terms/null_controls.csv | reports/step_tahot_control_version_presence | `step_tahot_control_version_presence.toml` |

@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 417
+Documents indexed: 418
 
 ## Controls
 
@@ -361,6 +361,7 @@ Documents indexed: 417
 | KJVA Apocrypha Bridge Next Replication Design | `KJVA_APOCRYPHA_BRIDGE_NEXT_REPLICATION_DESIGN.md` |
 | KJVA Prospective Apocrypha Bridge Candidates | `KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_CANDIDATES.md` |
 | KJVA CrossWire Candidate Source Audit | `KJVA_CROSSWIRE_CANDIDATE_SOURCE_AUDIT.md` |
+| KJVA Current Source Lock Sidecar | `KJVA_CURRENT_SOURCE_LOCK_SIDECAR.md` |
 | KJVA Gutenberg Book Coverage Probe | `KJVA_GUTENBERG_BOOK_COVERAGE_PROBE.md` |
 | KJVA Gutenberg Candidate Source Audit | `KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md` |
 | KJVA Gutenberg Source-Lock Blocker Packet | `KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md` |

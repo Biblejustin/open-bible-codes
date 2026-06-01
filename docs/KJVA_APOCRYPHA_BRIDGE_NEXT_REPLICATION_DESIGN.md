@@ -46,7 +46,11 @@ Current rollup: `docs/KJVA_SOURCE_CANDIDATE_STATUS.md`.
 Current local source inventory has only `configs/example_ebible_engkjv_apocrypha.toml`
 for KJVA/apocrypha bridge work. That source comes from eBible's public-domain
 King James Version + Apocrypha USFM family, so it is usable for reruns but is
-not an independent replication source.
+not an independent replication source. The current eBible KJVA source-lock
+sidecar freezes that rerun baseline by CSV checksum, 80-book order, 36822
+verses, 14 apocrypha/deuterocanon books, 5720 apocrypha/deuterocanon verses,
+and 593090 apocrypha/deuterocanon normalized letters:
+`docs/KJVA_CURRENT_SOURCE_LOCK_SIDECAR.md`.
 
 Online source candidates found for possible future audit:
 

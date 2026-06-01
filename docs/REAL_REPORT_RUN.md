@@ -151,6 +151,8 @@ This assembly run includes:
   `docs/KJVA_APOCRYPHA_BRIDGE_PROSPECTIVE_NONBIBLE_CONTROLS.md`
 - KJVA source-candidate status rollup:
   `docs/KJVA_SOURCE_CANDIDATE_STATUS.md`
+- KJVA current eBible source-lock sidecar:
+  `docs/KJVA_CURRENT_SOURCE_LOCK_SIDECAR.md`
 - KJVA CrossWire candidate source-status audit:
   `docs/KJVA_CROSSWIRE_CANDIDATE_SOURCE_AUDIT.md`
 - KJVA Gutenberg candidate source-status audit:
@@ -256,6 +258,12 @@ It requires:
   public-domain split KJV+Apocrypha coverage candidate needing collation, 0
   result-ready sources, 0 source-lock ready sources, and identifies the current
   eBible KJVA source as a rerun source with 14 apocrypha/deuterocanon books;
+- KJVA current eBible source-lock sidecar keeps the current rerun baseline
+  checksum locked at CSV SHA-256
+  `f4f4549c7323de20a6cdd7aa74aeae32d184b2b6a1a51cd41390540efd710360`,
+  with 80 books, 36822 verses, 14 apocrypha/deuterocanon books, 5720
+  apocrypha/deuterocanon verses, and 593090 apocrypha/deuterocanon normalized
+  letters, while staying non-result-bearing and not independent-source-ready;
 - KJVA CrossWire candidate source audit stays metadata-only, with `kjva.osis.xml`
   and `kjvdc.xml` path names present, config-license/Crown-rights metadata
   captured, but no source-use clearance, corpus import, source lock, or
