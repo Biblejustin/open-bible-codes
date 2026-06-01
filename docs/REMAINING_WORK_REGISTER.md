@@ -2908,3 +2908,15 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   general-reader overview cannot keep a Cities section while dropping the
   current source-row blocker counts and no-result boundary.
 - Commit: `a25e313`.
+
+## Public Reader Package Cities Handoff Sync
+
+- Added `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md` to the public-reader package
+  whitelist because `docs/PROJECT_FINDINGS_OVERVIEW.md` now sends readers
+  there for the Cities source-row boundary.
+- Updated the package README ordering so the generated package points readers
+  to the Cities no-input handoff before the formal real-report summary.
+- Extended `tests/test_build_public_reader_package.py` so package tests fail
+  if the exported reader package drops the Cities handoff file.
+- This is a reader-export fix only. It does not import source rows, normalize
+  city names, run ELS searches, compute compactness, or report p-levels.
