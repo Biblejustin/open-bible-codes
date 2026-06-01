@@ -74,8 +74,9 @@ validates documented script/source-path references, and rejects unsupported
 public claim language. It also guards the general-reader findings overview,
 real-report run documentation, consolidated findings, claim catalog,
 final-report assembly docs, final-report highlights, strongest-candidate
-packet, and prospective workflow docs, validates configured reader-link
-sources, validates protocol TOML files, corpus config schemas, term-file
+packet, prospective workflow docs, and public/no-input handoff docs, validates
+configured reader-link sources, validates protocol TOML files, corpus config
+schemas, term-file
 schema/normalization, all-script exact-test coverage, check-script wiring
 coverage, the study-mapping guard suite, and a temporary public-reader package
 build from the whitelisted docs.
@@ -92,10 +93,11 @@ expanded-strata operator tooling, checks public claim language, and verifies
 the general-reader findings overview, real-report run documentation,
 consolidated findings, claim catalog, final-report assembly docs, final-report
 highlights, strongest-candidate packet, prospective workflow docs, protocol
-TOML files, corpus config schemas, term-file schema/normalization, all-script
-exact-test coverage, check-script wiring coverage, the study-mapping guard
-suite, a temporary public-reader package build, and local data doc references
-against the current ignored source caches.
+and public/no-input handoff docs, protocol TOML files, corpus config schemas,
+term-file schema/normalization, all-script exact-test coverage, check-script
+wiring coverage, the study-mapping guard suite, a temporary public-reader
+package build, and local data doc references against the current ignored source
+caches.
 
 Full clean-tree pre-push validation after committing:
 

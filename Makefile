@@ -52,6 +52,12 @@ fast-validate: test indexes
 	python3 -m scripts.check_study_lock_manifests_doc
 	python3 -m scripts.check_prospective_study_readiness_doc
 	python3 -m scripts.check_prospective_study_next_lock_doc
+	python3 -m scripts.check_wrr_public_handoff_docs
+	python3 -m scripts.check_cities_public_handoff_docs
+	python3 -m scripts.check_kjva_public_handoff_docs
+	python3 -m scripts.check_wrr_no_input_handoff_status_doc
+	python3 -m scripts.check_cities_no_input_handoff_status_doc
+	python3 -m scripts.check_kjva_no_input_handoff_status_doc
 	python3 -m scripts.check_public_claim_language
 	$(MAKE) protocol-files
 	$(MAKE) corpus-configs
@@ -81,6 +87,12 @@ public-release-check:
 	python3 -m scripts.check_study_lock_manifests_doc
 	python3 -m scripts.check_prospective_study_readiness_doc
 	python3 -m scripts.check_prospective_study_next_lock_doc
+	python3 -m scripts.check_wrr_public_handoff_docs
+	python3 -m scripts.check_cities_public_handoff_docs
+	python3 -m scripts.check_kjva_public_handoff_docs
+	python3 -m scripts.check_wrr_no_input_handoff_status_doc
+	python3 -m scripts.check_cities_no_input_handoff_status_doc
+	python3 -m scripts.check_kjva_no_input_handoff_status_doc
 	python3 -m scripts.check_public_claim_language
 	$(MAKE) protocol-files
 	$(MAKE) corpus-configs

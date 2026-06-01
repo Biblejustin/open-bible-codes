@@ -45,7 +45,8 @@ freshness guarding, centered-occurrence index freshness guarding, strongest
 candidate deep-dive freshness guarding, claim-catalog summary guarding,
 real-report run doc guarding, final-report assembly direct gating,
 top-reader summary doc direct gating, prospective workflow direct gating,
-imported preflight check-script input guarding,
+public/no-input handoff doc direct gating, imported preflight check-script
+input guarding,
 research missing model pages audit doc guarding, WRR-adjacent source audit
 family doc guarding, real-report source-audit preflight documentation,
 critical-omission follow-up doc guarding, KJVA apocrypha prospective boundary
@@ -3088,6 +3089,21 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Updated README validation descriptions and Makefile guard tests so the
   prospective workflow docs are checked in both dirty-safe and clean release
   paths, not only during formal real-report preflight.
+- This is a documentation guard only. It does not change report conclusions,
+  source policy, imported texts, ELS searches, or result status.
+
+## Public Handoff Doc Direct Gate
+
+- Wired `scripts/check_wrr_public_handoff_docs.py`,
+  `scripts/check_cities_public_handoff_docs.py`,
+  `scripts/check_kjva_public_handoff_docs.py`,
+  `scripts/check_wrr_no_input_handoff_status_doc.py`,
+  `scripts/check_cities_no_input_handoff_status_doc.py`, and
+  `scripts/check_kjva_no_input_handoff_status_doc.py` directly into `make
+  fast-validate` and `make public-release-check`.
+- Updated README validation descriptions and Makefile guard tests so public
+  handoff/no-input docs are checked in both dirty-safe and clean release paths,
+  not only during formal real-report preflight.
 - This is a documentation guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 
