@@ -2446,6 +2446,8 @@ inputs = [
   "reports/wrr_1994/wrr_exact_reproduction_gap_dashboard.csv",
   "reports/wrr_1994/wrr_exact_gap_priority_packet_summary.csv",
   "reports/wrr_1994/wrr_post_lock_reporting_boundary.csv",
+  "reports/wrr_1994/wrr_no_input_handoff_status_summary.csv",
+  "reports/wrr_1994/wrr_no_input_handoff_status.manifest.json",
   "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue_summary.csv",
   "reports/cities_pdf_recovery_probe/cities_source_row_lock_evidence_summary.csv",
   "data/study/mappings/cities_source_row_lock_decisions.csv",

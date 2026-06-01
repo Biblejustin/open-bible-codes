@@ -35,6 +35,8 @@ EXPECTED_SUMMARY_INPUTS = (
     "reports/step_tahot_final_gate/manifest.json",
     "reports/greek_exact_center_final_gate/summary.csv",
     "reports/wrr_1994/audit_counts_protocol.manifest.json",
+    "reports/wrr_1994/wrr_no_input_handoff_status_summary.csv",
+    "reports/wrr_1994/wrr_no_input_handoff_status.manifest.json",
     "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue_summary.csv",
     "reports/kjva_no_input_handoff_status/summary.csv",
     "reports/kjva_no_input_handoff_status/manifest.json",

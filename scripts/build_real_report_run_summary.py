@@ -91,6 +91,12 @@ WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_SUMMARY = Path(
     "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv"
 )
 WRR_DW_FORMULA_SENSITIVITY = Path("reports/wrr_1994/wrr_dw_formula_sensitivity.csv")
+WRR_NO_INPUT_HANDOFF_SUMMARY = Path(
+    "reports/wrr_1994/wrr_no_input_handoff_status_summary.csv"
+)
+WRR_NO_INPUT_HANDOFF_MANIFEST = Path(
+    "reports/wrr_1994/wrr_no_input_handoff_status.manifest.json"
+)
 CITIES_SOURCE_ROW_LOCK_QUEUE_SUMMARY = Path(
     "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue_summary.csv"
 )
@@ -328,6 +334,8 @@ def main(argv: list[str] | None = None) -> int:
         args.wrr_method_pair_universe_evidence_summary
     )
     wrr_dw_formula_sensitivity_rows = read_rows(args.wrr_dw_formula_sensitivity)
+    wrr_no_input_handoff_rows = read_rows(args.wrr_no_input_handoff_summary)
+    wrr_no_input_handoff_manifest = read_json(args.wrr_no_input_handoff_manifest)
     hebrew_theology_all_codes_triage_manifest = read_json(
         args.hebrew_theology_all_codes_triage_manifest
     )
@@ -493,6 +501,8 @@ def main(argv: list[str] | None = None) -> int:
             wrr_method_pair_universe_evidence_summary_rows
         ),
         wrr_dw_formula_sensitivity_rows=wrr_dw_formula_sensitivity_rows,
+        wrr_no_input_handoff_rows=wrr_no_input_handoff_rows,
+        wrr_no_input_handoff_manifest=wrr_no_input_handoff_manifest,
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
         hebrew_screening_all_codes_triage_manifest=hebrew_screening_all_codes_triage_manifest,
         greek_screening_all_codes_triage_manifest=greek_screening_all_codes_triage_manifest,
@@ -614,6 +624,8 @@ def main(argv: list[str] | None = None) -> int:
             wrr_method_pair_universe_evidence_summary_rows
         ),
         wrr_dw_formula_sensitivity_rows=wrr_dw_formula_sensitivity_rows,
+        wrr_no_input_handoff_rows=wrr_no_input_handoff_rows,
+        wrr_no_input_handoff_manifest=wrr_no_input_handoff_manifest,
         hebrew_theology_all_codes_triage_manifest=hebrew_theology_all_codes_triage_manifest,
         hebrew_screening_all_codes_triage_manifest=hebrew_screening_all_codes_triage_manifest,
         greek_screening_all_codes_triage_manifest=greek_screening_all_codes_triage_manifest,
@@ -854,6 +866,16 @@ def build_parser() -> argparse.ArgumentParser:
         "--wrr-dw-formula-sensitivity",
         type=Path,
         default=WRR_DW_FORMULA_SENSITIVITY,
+    )
+    parser.add_argument(
+        "--wrr-no-input-handoff-summary",
+        type=Path,
+        default=WRR_NO_INPUT_HANDOFF_SUMMARY,
+    )
+    parser.add_argument(
+        "--wrr-no-input-handoff-manifest",
+        type=Path,
+        default=WRR_NO_INPUT_HANDOFF_MANIFEST,
     )
     parser.add_argument(
         "--hebrew-theology-all-codes-triage-manifest",
@@ -1141,6 +1163,8 @@ def write_summary(
     wrr_remaining_lane_evidence_summary_rows: list[dict[str, str]],
     wrr_method_pair_universe_evidence_summary_rows: list[dict[str, str]],
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
+    wrr_no_input_handoff_rows: list[dict[str, str]],
+    wrr_no_input_handoff_manifest: dict[str, Any],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
     greek_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1457,6 +1481,12 @@ def write_summary(
             wrr_dw_formula_sensitivity_rows,
         )
     )
+    lines.extend(
+        wrr_no_input_handoff_status_section(
+            wrr_no_input_handoff_rows,
+            wrr_no_input_handoff_manifest,
+        )
+    )
     lines.extend(cities_source_row_lock_section())
     lines.extend(
         all_codes_triage_section(
@@ -1750,6 +1780,8 @@ def write_manifest(
     wrr_remaining_lane_evidence_summary_rows: list[dict[str, str]],
     wrr_method_pair_universe_evidence_summary_rows: list[dict[str, str]],
     wrr_dw_formula_sensitivity_rows: list[dict[str, str]],
+    wrr_no_input_handoff_rows: list[dict[str, str]],
+    wrr_no_input_handoff_manifest: dict[str, Any],
     hebrew_theology_all_codes_triage_manifest: dict[str, Any],
     hebrew_screening_all_codes_triage_manifest: dict[str, Any],
     greek_screening_all_codes_triage_manifest: dict[str, Any],
@@ -1803,6 +1835,11 @@ def write_manifest(
         kjva_no_input_handoff_rows[0]
         if kjva_no_input_handoff_rows
         else kjva_no_input_handoff_manifest.get("summary", {})
+    )
+    wrr_no_input_handoff_summary = (
+        wrr_no_input_handoff_rows[0]
+        if wrr_no_input_handoff_rows
+        else wrr_no_input_handoff_manifest.get("summary", {})
     )
     payload = {
         "tool": "build_real_report_run_summary",
@@ -1878,6 +1915,8 @@ def write_manifest(
                 args.wrr_method_pair_universe_evidence_summary
             ),
             "wrr_dw_formula_sensitivity": str(args.wrr_dw_formula_sensitivity),
+            "wrr_no_input_handoff_summary": str(args.wrr_no_input_handoff_summary),
+            "wrr_no_input_handoff_manifest": str(args.wrr_no_input_handoff_manifest),
             "hebrew_theology_all_codes_triage_manifest": str(
                 args.hebrew_theology_all_codes_triage_manifest
             ),
@@ -2067,6 +2106,21 @@ def write_manifest(
             wrr_method_pair_universe_evidence_summary_rows
         ),
         "wrr_dw_formula_sensitivity_rows": len(wrr_dw_formula_sensitivity_rows),
+        "wrr_no_input_handoff_status_rows": int_value(
+            wrr_no_input_handoff_summary, "status_rows"
+        ),
+        "wrr_no_input_handoff_manual_input_needed_rows": int_value(
+            wrr_no_input_handoff_summary, "manual_input_needed_rows"
+        ),
+        "wrr_no_input_handoff_new_result_allowed": bool_int_cell(
+            wrr_no_input_handoff_summary, "new_result_allowed"
+        ),
+        "wrr_no_input_handoff_exact_reproduction_ready": bool_int_cell(
+            wrr_no_input_handoff_summary, "exact_reproduction_ready"
+        ),
+        "wrr_no_input_handoff_claim_status": wrr_no_input_handoff_summary.get(
+            "claim_boundary", ""
+        ),
         "hebrew_theology_all_codes_triage_rows": hebrew_theology_all_codes_triage_manifest.get(
             "queue_rows", 0
         ),
@@ -4285,6 +4339,53 @@ def wrr_audit_section(
             "while retaining printed D(w) as the selected main rule.",
         ]
     )
+    return lines
+
+
+def wrr_no_input_handoff_status_section(
+    rows: list[dict[str, str]],
+    manifest: dict[str, Any],
+) -> list[str]:
+    summary = rows[0] if rows else manifest.get("summary", {})
+    lines = [
+        "",
+        "## WRR No-Input Handoff Status",
+        "",
+        "This section reads the consolidated WRR no-input handoff output. It is",
+        "a work map for remaining source/method review lanes, not a new WRR",
+        "result and not an exact published WRR reproduction.",
+        "",
+        "| Metric | Count |",
+        "| --- | ---: |",
+        f"| Status rows | {int_value(summary, 'status_rows'):,} |",
+        f"| Handoff-ready rows | {int_value(summary, 'handoff_ready_rows'):,} |",
+        f"| Manual-input-needed rows | {int_value(summary, 'manual_input_needed_rows'):,} |",
+        f"| Claim-readiness rows | {int_value(summary, 'claim_readiness_rows'):,} |",
+        f"| Claim-readiness ready rows | {int_value(summary, 'claim_readiness_ready_rows'):,} |",
+        f"| Claim-blocker rows | {int_value(summary, 'claim_blocker_rows'):,} |",
+        f"| Source-cited defined distances | {int_value(summary, 'source_cited_defined_distances'):,} |",
+        f"| Current defined distances | {int_value(summary, 'current_defined_distances'):,} |",
+        f"| Remaining defined-distance gap | {int_value(summary, 'remaining_gap'):,} |",
+        f"| Review lanes | {int_value(summary, 'review_lanes'):,} |",
+        f"| Residual action terms | {int_value(summary, 'residual_action_terms'):,} |",
+        f"| Residual pairs | {int_value(summary, 'residual_pairs'):,} |",
+        f"| Frontier pairs | {int_value(summary, 'frontier_pairs'):,} |",
+        f"| Manual decision rows | {int_value(summary, 'manual_decision_rows'):,} |",
+        f"| Source-transcription row clusters | {int_value(summary, 'source_transcription_row_clusters'):,} |",
+        f"| Source-transcription action terms | {int_value(summary, 'source_transcription_action_terms'):,} |",
+        f"| Page-image terms | {int_value(summary, 'page_image_terms'):,} |",
+        f"| Method/pair-universe terms | {int_value(summary, 'method_pair_universe_terms'):,} |",
+        f"| Wide-skip max | {int_value(summary, 'wide_skip_max'):,} |",
+        f"| Wide-skip total hits | {int_value(summary, 'wide_skip_total_hits'):,} |",
+        f"| New WRR result allowed | {bool_int_cell(summary, 'new_result_allowed')} |",
+        f"| Exact reproduction ready | {bool_int_cell(summary, 'exact_reproduction_ready')} |",
+        "",
+        f"- Claim status: `{md_cell(summary.get('claim_boundary', ''))}`.",
+        f"- Claim boundary: {md_cell(manifest.get('claim_boundary', 'WRR no-input handoff only; no new result'))}.",
+        f"- Text retention: {md_cell(manifest.get('text_retention', 'no Bible text written to tracked outputs'))}.",
+        "- The no-input handoff status packet consolidates the 9 current WRR",
+        "  handoff rows and keeps new-result permission closed.",
+    ]
     return lines
 
 

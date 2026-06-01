@@ -996,6 +996,14 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["real_report_summary"]["inputs"],
         )
         self.assertIn(
+            "reports/wrr_1994/wrr_no_input_handoff_status_summary.csv",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_no_input_handoff_status.manifest.json",
+            steps_by_id["real_report_summary"]["inputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_variant_residual_review_summary.csv",
             steps_by_id["wrr_cross_pair_grid"]["inputs"],
         )

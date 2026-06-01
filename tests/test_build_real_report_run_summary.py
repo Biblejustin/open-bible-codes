@@ -43,3 +43,44 @@ def test_kjva_no_input_handoff_status_section_keeps_result_closed() -> None:
     assert "| Result allowed | 0 |" in text
     assert "`kjva_no_input_handoff_blocks_new_result`" in text
     assert "- Current read: this is a work map, not a statistical result." in text
+
+
+def test_wrr_no_input_handoff_status_section_keeps_result_closed() -> None:
+    lines = summary.wrr_no_input_handoff_status_section(
+        [
+            {
+                "status_rows": "9",
+                "handoff_ready_rows": "9",
+                "manual_input_needed_rows": "8",
+                "claim_readiness_rows": "4",
+                "claim_readiness_ready_rows": "4",
+                "claim_blocker_rows": "0",
+                "source_cited_defined_distances": "163",
+                "current_defined_distances": "72",
+                "remaining_gap": "91",
+                "review_lanes": "4",
+                "residual_action_terms": "58",
+                "residual_pairs": "59",
+                "frontier_pairs": "40",
+                "manual_decision_rows": "37",
+                "source_transcription_row_clusters": "22",
+                "source_transcription_action_terms": "43",
+                "page_image_terms": "3",
+                "method_pair_universe_terms": "11",
+                "wide_skip_max": "5000",
+                "wide_skip_total_hits": "0",
+                "new_result_allowed": "False",
+                "exact_reproduction_ready": "False",
+                "claim_boundary": "local_locked_method_ready_exact_published_open",
+            }
+        ],
+        {
+            "claim_boundary": "WRR no-input handoff only; no new result",
+            "text_retention": "no Bible text written to tracked outputs",
+        },
+    )
+    text = "\n".join(lines)
+    assert "## WRR No-Input Handoff Status" in text
+    assert "| New WRR result allowed | 0 |" in text
+    assert "| Exact reproduction ready | 0 |" in text
+    assert "`local_locked_method_ready_exact_published_open`" in text
