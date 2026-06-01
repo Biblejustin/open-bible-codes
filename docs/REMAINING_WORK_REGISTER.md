@@ -2934,3 +2934,17 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   temporary public-reader package build.
 - This is a packaging guard only. It does not change the public package
   contents beyond the already-committed Cities handoff inclusion.
+
+## Public Reader Package WRR/KJVA Handoff Sync
+
+- Added `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` and
+  `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md` to the public-reader package
+  whitelist because the packaged README sends readers to both consolidated
+  handoff files.
+- Added both files to the general-reader findings overview "Where To Read
+  More" list and guarded those references in
+  `scripts/check_project_findings_overview_doc.py`.
+- Extended `tests/test_build_public_reader_package.py` so package tests fail
+  if either consolidated handoff drops out of the exported reader package.
+- This is a reader-export fix only. It does not change WRR, KJVA, or Cities
+  result status.

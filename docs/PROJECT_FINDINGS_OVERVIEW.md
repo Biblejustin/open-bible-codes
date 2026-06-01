@@ -196,4 +196,6 @@ For the fuller project story, read:
 - `docs/FINAL_REPORT_HIGHLIGHTS.md`
 - `docs/CLAIM_CATALOG.md`
 - `docs/CONSOLIDATED_FINDINGS.md`
+- `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`
+- `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`
 - `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`
