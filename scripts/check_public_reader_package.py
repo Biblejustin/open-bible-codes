@@ -21,6 +21,14 @@ REQUIRED_GENERATED_FILES = (
 )
 REAL_REPORT_SUMMARY_SOURCE = Path("reports/real_report_run/summary.md")
 REAL_REPORT_MANIFEST_SOURCE = Path("reports/real_report_run/manifest.json")
+REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
+    Path("docs/CLAIM_CATALOG.md"): (
+        "the consolidated no-input handoff keeps 8 handoff rows, 6 manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages, 41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority line-crop review rows, and no Cities result allowed.",
+    ),
+    Path("docs/REMAINING_WORK_REGISTER.md"): (
+        "Current overview wording now keeps the same no-result boundary visible: 14 source-row lock candidate pages, 14 populated source-row lock rows, 8 handoff rows, 6 manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages, 41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority line-crop review rows, and no Cities result allowed.",
+    ),
+}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -73,11 +81,25 @@ def validate_public_reader_package(
 
     failures.extend(validate_manifest_metadata(manifest, package_dir))
     failures.extend(validate_manifest_files(manifest, package_dir))
+    failures.extend(validate_required_packaged_phrases(package_dir))
     failures.extend(validate_packaged_real_report_summary(manifest, package_dir))
     failures.extend(validate_packaged_real_report_manifest(manifest, package_dir))
     failures.extend(validate_generated_package_readme(manifest, package_dir))
     failures.extend(validate_generated_reader_package(manifest, package_dir))
     failures.extend(validate_no_unmanifested_files(manifest, package_dir))
+    return failures
+
+
+def validate_required_packaged_phrases(package_dir: Path) -> list[str]:
+    failures: list[str] = []
+    for relative_path, required_phrases in REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH.items():
+        path = package_dir / relative_path
+        if not path.exists() or path.is_symlink() or not path.is_file():
+            continue
+        text = normalize_space(path.read_text(encoding="utf-8"))
+        for phrase in required_phrases:
+            if normalize_space(phrase) not in text:
+                failures.append(f"{path} missing packaged phrase: {phrase}")
     return failures
 
 
@@ -435,6 +457,10 @@ def validate_packaged_file(path: Path, item: dict[str, Any]) -> list[str]:
 
 def is_hex_sha256(value: str) -> bool:
     return len(value) == 64 and all(char in "0123456789abcdef" for char in value)
+
+
+def normalize_space(text: str) -> str:
+    return " ".join(text.split())
 
 
 if __name__ == "__main__":

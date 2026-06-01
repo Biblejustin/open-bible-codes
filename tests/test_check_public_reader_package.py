@@ -43,6 +43,12 @@ def _default_doc_text(path: Path) -> str:
             "# Real Report Run\n\n"
             "Reader role: use `docs/START_HERE.md` and `docs/FINAL_REPORT.md`.\n"
         )
+    if path in check.REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH:
+        return (
+            f"# {path.name}\n\n"
+            + "\n\n".join(check.REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH[path])
+            + "\n"
+        )
     return f"# {path.name}\n\nbody\n"
 
 
@@ -157,6 +163,21 @@ def test_detects_missing_required_manifest_source(tmp_path, monkeypatch) -> None
     assert (
         "required package source missing from manifest: docs/CLAIM_CATALOG.md"
         in failures
+    )
+
+
+def test_detects_missing_required_packaged_phrase(tmp_path, monkeypatch) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    claim_catalog = out_dir / "docs/CLAIM_CATALOG.md"
+    claim_catalog.write_text("# stale\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert any(
+        "docs/CLAIM_CATALOG.md missing packaged phrase: "
+        "the consolidated no-input handoff keeps 8 handoff rows"
+        in failure
+        for failure in failures
     )
 
 
