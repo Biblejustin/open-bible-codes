@@ -82,6 +82,7 @@ from scripts import (
     check_kjva_apocrypha_bridge_next_replication_doc,
     check_kjva_next_result_gate_doc,
     check_kjva_no_input_handoff_status_doc,
+    check_kjva_public_handoff_docs,
     check_kjva_apocrypha_bridge_prospective_boundary,
     check_kjva_crosswire_candidate_source_audit_doc,
     check_kjva_gutenberg_book_coverage_probe_doc,
@@ -214,6 +215,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_kjva_next_result_gate_doc.py",
     "scripts/build_kjva_no_input_handoff_status.py",
     "scripts/check_kjva_no_input_handoff_status_doc.py",
+    "scripts/check_kjva_public_handoff_docs.py",
     "scripts/analyze_kjva_gutenberg_source_lock_prep.py",
     "scripts/build_kjva_gutenberg_source_lock_blocker_packet.py",
     "scripts/build_kjva_gutenberg_source_lock_decision_packet.py",
@@ -1444,6 +1446,15 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(kjva_no_input_handoff_status_doc_failures)
         )
 
+    kjva_public_handoff_doc_failures = (
+        check_kjva_public_handoff_docs.validate_kjva_public_handoff_docs(root)
+    )
+    if kjva_public_handoff_doc_failures:
+        failures.append(
+            "KJVA public handoff doc failures: "
+            + "; ".join(kjva_public_handoff_doc_failures)
+        )
+
     kjva_hakkaac_apocrypha_boundary_candidate_doc_failures = (
         check_kjva_hakkaac_apocrypha_boundary_candidate_doc.validate_kjva_hakkaac_apocrypha_boundary_candidate_doc(
             root / check_kjva_hakkaac_apocrypha_boundary_candidate_doc.DEFAULT_DOC
@@ -2650,6 +2661,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "kjva_no_input_handoff_status_doc_failures": (
             kjva_no_input_handoff_status_doc_failures
+        ),
+        "kjva_public_handoff_doc_failures": (
+            kjva_public_handoff_doc_failures
         ),
         "kjva_hakkaac_apocrypha_boundary_candidate_doc_failures": (
             kjva_hakkaac_apocrypha_boundary_candidate_doc_failures

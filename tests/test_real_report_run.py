@@ -280,6 +280,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/check_kjva_public_handoff_docs.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/build_kjva_gutenberg_source_lock_blocker_packet.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -2712,6 +2716,10 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/check_kjva_public_handoff_docs.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/build_kjva_current_source_lock_sidecar.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -3202,6 +3210,10 @@ inputs = ["docs/A.md", "docs/C.md"]
                 payload,
             )
             self.assertIn(
+                "kjva_public_handoff_doc_failures",
+                payload,
+            )
+            self.assertIn(
                 "kjva_current_source_lock_sidecar_doc_failures",
                 payload,
             )
@@ -3614,6 +3626,27 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "KJVA no-input handoff status failures: missing KJVA no-input handoff boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_kjva_public_handoff_doc_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_kjva_public_handoff_docs,
+                "validate_kjva_public_handoff_docs",
+                return_value=["missing KJVA public handoff wording"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["kjva_public_handoff_doc_failures"],
+                ["missing KJVA public handoff wording"],
+            )
+            self.assertIn(
+                "KJVA public handoff doc failures: missing KJVA public handoff wording",
                 payload["failures"],
             )
 

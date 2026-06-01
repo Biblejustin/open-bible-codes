@@ -66,6 +66,7 @@ inputs = [
   "scripts/check_kjva_next_result_gate_doc.py",
   "scripts/build_kjva_no_input_handoff_status.py",
   "scripts/check_kjva_no_input_handoff_status_doc.py",
+  "scripts/check_kjva_public_handoff_docs.py",
   "scripts/check_real_report_run_doc.py",
   "scripts/check_strongest_candidate_deep_dive_doc.py",
   "els/project_index.py",
