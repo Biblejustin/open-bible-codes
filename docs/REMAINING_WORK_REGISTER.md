@@ -2977,5 +2977,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Extended the same packaged-reader-link guard to the final report's `Reader
   Path` section and the real-report run's `Reader role` paragraph, while still
   leaving their long support-doc inventories outside the public package.
+- Added public-reader package manifest metadata for package start paths and
+  reader-link source sections, so the generated package records what link
+  guard surface was checked.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.

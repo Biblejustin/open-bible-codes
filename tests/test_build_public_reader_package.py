@@ -66,6 +66,16 @@ def test_builds_reader_package_from_whitelisted_docs(tmp_path, monkeypatch) -> N
     assert manifest["file_count"] == len(copied)
     assert manifest["package_boundary"].startswith("whitelisted docs")
     assert manifest["reader_path_guard"].startswith("project findings overview")
+    assert manifest["package_start_paths"] == [
+        path.as_posix() for path in package.PACKAGE_START_PATHS
+    ]
+    assert manifest["reader_link_sources"]["full_doc"] == [
+        path.as_posix() for path in package.READER_LINK_SOURCE_PATHS
+    ]
+    assert manifest["reader_link_sources"]["marked_sections"] == {
+        path.as_posix(): marker
+        for path, marker in package.READER_LINK_SECTION_MARKERS.items()
+    }
     assert Path("reports/public_reader_package/docs/START_HERE.md").exists()
     assert Path("reports/public_reader_package/docs/PROJECT_FINDINGS_OVERVIEW.md").exists()
     assert Path("reports/public_reader_package/docs/WRR_NO_INPUT_HANDOFF_STATUS.md").exists()

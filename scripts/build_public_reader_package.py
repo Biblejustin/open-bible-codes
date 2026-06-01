@@ -303,6 +303,14 @@ def write_manifest(out_dir: Path, copied: list[CopiedFile]) -> None:
         "reader_path_guard": (
             "project findings overview and README/START_HERE reader links validated before packaging"
         ),
+        "package_start_paths": [path.as_posix() for path in PACKAGE_START_PATHS],
+        "reader_link_sources": {
+            "full_doc": [path.as_posix() for path in READER_LINK_SOURCE_PATHS],
+            "marked_sections": {
+                path.as_posix(): marker
+                for path, marker in READER_LINK_SECTION_MARKERS.items()
+            },
+        },
         "file_count": len(copied),
         "files": [
             {
