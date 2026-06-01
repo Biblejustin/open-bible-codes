@@ -51,6 +51,8 @@ def _default_doc_text(path: Path) -> str:
         return (
             "# Real Report Run\n\n"
             "Reader role: use `docs/START_HERE.md` and `docs/FINAL_REPORT.md`.\n"
+            + "\n\n".join(check.REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH[path])
+            + "\n"
         )
     if path in check.REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH:
         return (

@@ -39,6 +39,12 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
         "`docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`",
         "`docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`",
     ),
+    Path("docs/REAL_REPORT_RUN.md"): (
+        "Git remotes pointing at `Biblejustin/open-bible-codes`;",
+        "WRR no-input handoff status consolidates 9 handoff rows, 8 manual-input-needed rows, the 163 vs 72 defined-distance gap, 37 manual-decision rows, and the no-new-result boundary;",
+        "KJVA no-input handoff status consolidates 9 handoff rows, 8 manual-input-needed rows, 11 next-result gates, 7 source-policy blocker rows, the `SIR 44:23` Gutenberg gap, 0/15 Gutenberg Prayer of Manasseh markers, 5719/5720 Hakkaac exact normalized verse matches, 4 candidate-source audit rows, 0 result-ready candidate pages, and the no-new-KJVA-result boundary;",
+        "Cities source-row lock handoff stays source-review only: 14 source-row lock candidate pages, 14 populated lock rows, 14 pending transcription-review rows, no source rows imported, and no city-name normalization, ELS searches, compactness runs, or p-levels;",
+    ),
     Path("docs/FINAL_REPORT_HIGHLIGHTS.md"): (
         "actual omitted blocks do not break more TR ELS hits than matched random verse blocks",
     ),
@@ -80,6 +86,34 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
         "Unreviewed OCR packet pages: 20.",
         "Line crop rows: 203.",
         "Result allowed: 0.",
+    ),
+    Path("docs/PROSPECTIVE_STUDY_READINESS.md"): (
+        "There is no remaining `ready_for_preflight` lane in `configs/prospective_study_lanes.json`.",
+        "A new result-producing study now needs a fresh term/source target set and a new clean prospective lock.",
+        "Do not call a row a claim because it is hidden, version-stable, or visually interesting.",
+    ),
+    Path("docs/WRR_LOCKED_METHOD_REPORT.md"): (
+        "Status: locked local WRR method report; not an exact published WRR reproduction.",
+        "Current source-defined gap: defined 72 of 163; gap 91.",
+        "Do not describe this as an exact published WRR reproduction.",
+    ),
+    Path("docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md"): (
+        "Status: exact published WRR reproduction is not closed.",
+        "It does not select source corrections, pair exclusions, replacement spellings, or method changes.",
+        "Remaining 163-distance gap | 91",
+        "This dashboard is a review map, not a reproduction result.",
+    ),
+    Path("docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md"): (
+        "It does not choose source corrections, method changes, or pair exclusions.",
+        "terms still zero through max skip: 11.",
+        "total hits through max skip: 0.",
+        "Exact published reproduction remains caveated by the documented 163-distance gap.",
+    ),
+    Path("docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md"): (
+        "It does not transcribe rows, import source rows, normalize city names, run ELS searches, compute compactness, or verify p-levels.",
+        "Evidence rows: 14.",
+        "Source-row imports: 0.",
+        "No row here creates a result-bearing corpus, term list, ELS run, compactness run, or p-level.",
     ),
     Path("docs/CRITICAL_OMISSION_BREAKS_NULL.md"): (
         "Observed breaks: 558.",
