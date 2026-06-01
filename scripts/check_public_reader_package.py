@@ -39,8 +39,15 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
         "`docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`",
         "`docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`",
     ),
+    Path("docs/FINAL_REPORT_HIGHLIGHTS.md"): (
+        "actual omitted blocks do not break more TR ELS hits than matched random verse blocks",
+    ),
     Path("docs/CLAIM_CATALOG.md"): (
         "the consolidated no-input handoff keeps 8 handoff rows, 6 manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages, 41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority line-crop review rows, and no Cities result allowed.",
+    ),
+    Path("docs/CONSOLIDATED_FINDINGS.md"): (
+        "Neither result is public-claim evidence.",
+        "4 candidate-source audit rows, 0 candidate verse-import-ready pages, 0 candidate result-ready pages, and result allowed 0.",
     ),
     Path("docs/REMAINING_WORK_REGISTER.md"): (
         "Current overview wording now keeps the same no-result boundary visible: 14 source-row lock candidate pages, 14 populated source-row lock rows, 8 handoff rows, 6 manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages, 41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority line-crop review rows, and no Cities result allowed.",
@@ -68,6 +75,12 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
         "Unreviewed OCR packet pages: 20.",
         "Line crop rows: 203.",
         "Result allowed: 0.",
+    ),
+    Path("docs/CRITICAL_OMISSION_BREAKS_NULL.md"): (
+        "Observed breaks: 558.",
+        "Null min/median/max: 525 / 657 / 807.",
+        "Greater-or-equal tail: 0.9910.",
+        "Raw break counts are not significance tests.",
     ),
 }
 
