@@ -85,6 +85,26 @@ def test_detects_manifest_file_count_drift(tmp_path, monkeypatch) -> None:
     assert any("file_count drifted" in failure for failure in failures)
 
 
+def test_detects_missing_required_manifest_source(tmp_path, monkeypatch) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    manifest_path = out_dir / "package_manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["files"] = [
+        item
+        for item in manifest["files"]
+        if item["source"] != "docs/CLAIM_CATALOG.md"
+    ]
+    manifest["file_count"] = len(manifest["files"])
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert (
+        "required package source missing from manifest: docs/CLAIM_CATALOG.md"
+        in failures
+    )
+
+
 def test_detects_missing_packaged_file(tmp_path, monkeypatch) -> None:
     out_dir = _build_package(tmp_path, monkeypatch)
     (out_dir / "docs/START_HERE.md").unlink()

@@ -146,7 +146,16 @@ def validate_manifest_files(
     for path in builder.PACKAGE_START_PATHS:
         if path.as_posix() not in source_set:
             failures.append(f"package start source missing from manifest: {path}")
+    for source in required_manifest_sources():
+        if source not in source_set:
+            failures.append(f"required package source missing from manifest: {source}")
     return failures
+
+
+def required_manifest_sources() -> list[str]:
+    paths = [*builder.DEFAULT_DOC_PATHS]
+    paths.extend(path for path in builder.DEFAULT_REPORT_PATHS if path.exists())
+    return sorted(path.as_posix() for path in paths)
 
 
 def validate_no_unmanifested_files(
