@@ -1533,9 +1533,9 @@ slot/gambling-marker rows, and zero usable current source rows.
 The WRR Wayback source recovery probe now checks archived Torah-code research
 snapshots in `reports/wrr_wayback_source_recovery_probe/` and writes
 `docs/WRR_WAYBACK_SOURCE_RECOVERY_PROBE.md`. The current archive probe checks
-18 URL variants across 9 research concepts, checks 14 rows with an exact-URL
-CDX fallback when the closest-snapshot endpoint has no row, finds one CDX
-candidate row, recovers one source through that fallback, recovers 5 usable
+18 URL variants across 9 research concepts, checks 13 rows with an exact-URL
+CDX fallback when the closest-snapshot endpoint has no row, finds zero CDX
+candidate rows, recovers no sources through that fallback, recovers 5 usable
 archived concepts total (`research_program_1`, `research_program_2`,
 `model_overview`, `geometric_model_level_1`, and `els_model_level_1`), and
 leaves 4 concepts missing (`geometric_model_level_2`,
