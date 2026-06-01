@@ -406,17 +406,17 @@ It deliberately keeps hidden-path-only rows visible while also flagging rows
 with same-center-word, related surface context, and same-skip before/after
 extensions:
 
-- 59 selected follow-up rows from Hebrew theology, broader Hebrew screening,
-  and broader Greek screening queues;
-- 274 reconstructed path rows and 1,264 hidden-letter audit rows;
+- 83 selected follow-up rows from English screening, Greek screening,
+  Hebrew screening, and Hebrew theology queues;
+- 310 reconstructed path rows and 1,394 hidden-letter audit rows;
 - 0 reconstructed sequence mismatches;
-- 52 selected rows with at least one same-skip before/after surface extension;
-- 8 selected rows with compound same-skip extensions containing the hidden term
+- 69 selected rows with at least one same-skip before/after surface extension;
+- 13 selected rows with compound same-skip extensions containing the hidden term
   plus adjacent letters;
-- 43 deduped compound-extension rows with 250/250 row-local paired controls:
-  by min-q screen, 14 rows are q <= 0.05, 7 additional rows are q <= 0.10,
-  and 22 are not unusual; by conservative all-control q, 0 rows are q <= 0.05
-  and 2 rows are q <= 0.10.
+- 46 deduped compound-extension rows with 250/250 row-local paired controls:
+  by min-q band, 11 rows are q <= 0.05, 13 rows are q <= 0.10,
+  and 22 are not unusual; by conservative all-control band, 4 rows are
+  q <= 0.10, 1 row is uncorrected-p-only, and 41 are not unusual.
 - 5 locked confirmatory rows for the selected `יום יהוה` (yom YHWH; English:
   day of YHWH) -> `היומיהוה` (hayom YHWH; English: the day of YHWH)
   same-skip extension key across EBIBLE_WLC, MAM, MT_WLC, UHB, and UXLC with

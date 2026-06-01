@@ -58,6 +58,8 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
     Path("docs/CONSOLIDATED_FINDINGS.md"): (
         "Neither result is public-claim evidence.",
         "4 candidate-source audit rows, 0 candidate verse-import-ready pages, 0 candidate result-ready pages, and result allowed 0.",
+        "83 selected follow-up rows from English screening, Greek screening, Hebrew screening, and Hebrew theology queues",
+        "46 deduped compound-extension rows with 250/250 row-local paired controls",
     ),
     Path("docs/STRONGEST_CANDIDATE_DEEP_DIVE.md"): (
         "This page does not make any row a public claim.",
