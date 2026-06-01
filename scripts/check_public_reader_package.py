@@ -125,6 +125,7 @@ def validate_manifest_files(
         source = str(item.get("source", ""))
         package_path_text = str(item.get("package_path", ""))
         failures.extend(validate_manifest_file_row_shape(index, item))
+        failures.extend(validate_manifest_source_path(source))
         if source in seen_sources:
             failures.append(f"duplicate manifest source: {source}")
         seen_sources.add(source)
@@ -181,6 +182,20 @@ def validate_manifest_file_row_shape(
         failures.append(f"manifest file row {index} has invalid sha256")
     if "bytes" in item and not isinstance(item["bytes"], int):
         failures.append(f"manifest file row {index} bytes must be an integer")
+    return failures
+
+
+def validate_manifest_source_path(source: str) -> list[str]:
+    if not source:
+        return ["manifest file row has empty source"]
+    path = Path(source)
+    failures: list[str] = []
+    if path.is_absolute() or ".." in path.parts:
+        failures.append(f"unsafe manifest source path: {source}")
+    if path.suffix.lower() not in {".md", ".json"}:
+        failures.append(f"unsupported manifest source suffix: {source}")
+    if builder.is_forbidden_source(path):
+        failures.append(f"forbidden manifest source path: {source}")
     return failures
 
 

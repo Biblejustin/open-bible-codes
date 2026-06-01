@@ -3018,6 +3018,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened the verifier so stale unmanifested files left in a package output
   directory are rejected instead of being silently shipped alongside the
   manifest-covered reader files.
+- Tightened the verifier so manifest `source` paths must also stay relative,
+  supported, and outside raw/source-data locations.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 

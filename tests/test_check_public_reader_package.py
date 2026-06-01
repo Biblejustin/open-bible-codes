@@ -113,3 +113,27 @@ def test_detects_unmanifested_extra_file(tmp_path, monkeypatch) -> None:
     failures = check.validate_public_reader_package(out_dir)
 
     assert "unexpected package file: stale_extra.md" in failures
+
+
+def test_detects_unsafe_manifest_source_path(tmp_path, monkeypatch) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    manifest_path = out_dir / "package_manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["files"][0]["source"] = "../outside.md"
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert "unsafe manifest source path: ../outside.md" in failures
+
+
+def test_detects_forbidden_manifest_source_path(tmp_path, monkeypatch) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    manifest_path = out_dir / "package_manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["files"][0]["source"] = "data/raw/source.md"
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert "forbidden manifest source path: data/raw/source.md" in failures
