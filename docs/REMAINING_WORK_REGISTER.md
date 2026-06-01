@@ -2950,3 +2950,6 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   the package README start list.
 - This is a reader-export fix only. It does not change WRR, KJVA, or Cities
   result status.
+- Added a broader package guard so no-input handoff links in README,
+  project-findings overview, final report, or real-report docs must be present
+  in the public-reader package whitelist.

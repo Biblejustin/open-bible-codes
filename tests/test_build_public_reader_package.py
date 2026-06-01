@@ -1,4 +1,5 @@
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -77,6 +78,20 @@ def test_reader_package_includes_project_findings_references() -> None:
     package_docs = set(package.DEFAULT_DOC_PATHS)
     for reference in overview_check.REQUIRED_REFERENCES:
         assert Path(reference) in package_docs
+
+
+def test_reader_package_includes_no_input_handoff_references() -> None:
+    package_docs = set(package.DEFAULT_DOC_PATHS)
+    reader_sources = (
+        Path("README.md"),
+        Path("docs/PROJECT_FINDINGS_OVERVIEW.md"),
+        Path("docs/FINAL_REPORT.md"),
+        Path("docs/REAL_REPORT_RUN.md"),
+    )
+    for source in reader_sources:
+        text = source.read_text(encoding="utf-8")
+        for reference in sorted(set(re.findall(r"`(docs/[^`]*NO_INPUT_HANDOFF[^`]*\.md)`", text))):
+            assert Path(reference) in package_docs
 
 
 def test_refuses_stale_project_findings_overview(tmp_path, monkeypatch) -> None:
