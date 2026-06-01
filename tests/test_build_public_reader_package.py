@@ -257,6 +257,30 @@ def test_refuses_untracked_extra_doc_sources(tmp_path, monkeypatch) -> None:
     )
 
 
+def test_refuses_extra_docs_outside_reader_doc_locations(
+    tmp_path, monkeypatch
+) -> None:
+    monkeypatch.chdir(tmp_path)
+    for path in package.DEFAULT_DOC_PATHS:
+        _write(path, _default_doc_text(path))
+    for path in package.DEFAULT_REPORT_PATHS:
+        _write(path, "# report\n\nbody\n" if path.suffix == ".md" else "{}\n")
+    _write(Path("data/README.md"), "# Data Notes\n")
+    monkeypatch.setattr(package, "is_inside_git_work_tree", lambda: True)
+    monkeypatch.setattr(package, "is_git_tracked", lambda path: True)
+
+    with pytest.raises(ValueError) as excinfo:
+        package.build_public_reader_package(
+            out_dir=Path("reports/public_reader_package"),
+            extra_docs=[Path("data/README.md")],
+        )
+
+    assert "reader package input validation failed" in str(excinfo.value)
+    assert (
+        "doc package source must be README.md or docs/*.md: data/README.md"
+    ) in str(excinfo.value)
+
+
 def test_refuses_unpackaged_start_here_reference(tmp_path, monkeypatch) -> None:
     monkeypatch.chdir(tmp_path)
     for path in package.DEFAULT_DOC_PATHS:

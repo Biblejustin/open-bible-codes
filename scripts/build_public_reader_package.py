@@ -149,6 +149,7 @@ def validate_reader_package_inputs(
             check_project_findings_overview_doc.validate_project_findings_overview()
         )
     failures.extend(validate_doc_source_paths(doc_paths))
+    failures.extend(validate_reader_doc_locations(doc_paths))
     failures.extend(validate_tracked_doc_sources(doc_paths))
     failures.extend(validate_unique_package_sources([*doc_paths, *report_set]))
     failures.extend(validate_package_start_paths(doc_set | report_set))
@@ -164,6 +165,17 @@ def validate_doc_source_paths(paths: list[Path]) -> list[str]:
     for path in paths:
         if path.suffix.lower() != ".md":
             failures.append(f"doc package source must be markdown: {path}")
+    return failures
+
+
+def validate_reader_doc_locations(paths: list[Path]) -> list[str]:
+    failures: list[str] = []
+    for path in paths:
+        if path == Path("README.md"):
+            continue
+        if path.parts[:1] == ("docs",):
+            continue
+        failures.append(f"doc package source must be README.md or docs/*.md: {path}")
     return failures
 
 
