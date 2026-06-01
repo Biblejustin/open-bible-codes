@@ -2987,5 +2987,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Added source-path guards to the public-reader package copier so package
   sources must be relative `.md`/`.json` paths without `..` segments; absolute
   and parent-traversal extra-doc inputs cannot escape the package tree.
+- Added duplicate-source guarding so `--extra-doc` cannot repeat an already
+  whitelisted package source and produce duplicated manifest/reader-package
+  entries.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.

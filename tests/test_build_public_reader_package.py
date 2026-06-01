@@ -178,6 +178,23 @@ def test_refuses_stale_project_findings_overview(tmp_path, monkeypatch) -> None:
     assert "missing heading: ## Short Answer" in str(excinfo.value)
 
 
+def test_refuses_duplicate_package_sources(tmp_path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    for path in package.DEFAULT_DOC_PATHS:
+        _write(path, _default_doc_text(path))
+    for path in package.DEFAULT_REPORT_PATHS:
+        _write(path, "# report\n\nbody\n" if path.suffix == ".md" else "{}\n")
+
+    with pytest.raises(ValueError) as excinfo:
+        package.build_public_reader_package(
+            out_dir=Path("reports/public_reader_package"),
+            extra_docs=[Path("docs/START_HERE.md")],
+        )
+
+    assert "reader package input validation failed" in str(excinfo.value)
+    assert "duplicate package source: docs/START_HERE.md" in str(excinfo.value)
+
+
 def test_refuses_unpackaged_start_here_reference(tmp_path, monkeypatch) -> None:
     monkeypatch.chdir(tmp_path)
     for path in package.DEFAULT_DOC_PATHS:

@@ -148,11 +148,22 @@ def validate_reader_package_inputs(
         failures.extend(
             check_project_findings_overview_doc.validate_project_findings_overview()
         )
+    failures.extend(validate_unique_package_sources([*doc_paths, *report_set]))
     failures.extend(validate_packaged_reader_links(doc_set | report_set))
     if failures:
         raise ValueError(
             "reader package input validation failed: " + "; ".join(failures)
         )
+
+
+def validate_unique_package_sources(paths: list[Path]) -> list[str]:
+    seen: set[Path] = set()
+    failures: list[str] = []
+    for path in paths:
+        if path in seen:
+            failures.append(f"duplicate package source: {path}")
+        seen.add(path)
+    return failures
 
 
 def validate_packaged_reader_links(package_paths: set[Path]) -> list[str]:
