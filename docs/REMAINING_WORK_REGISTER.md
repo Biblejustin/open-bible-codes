@@ -3031,6 +3031,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   to `docs/REPOSITORY_README.md`.
 - Tightened the verifier so package `git_head` must match the current repo
   HEAD, catching a stale ignored reader package after a new commit.
+- Tightened the verifier so the packaged real-report summary's visible
+  `Commit:` line must match the package manifest HEAD, catching a package built
+  around a stale formal summary.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 

@@ -100,6 +100,26 @@ def test_detects_manifest_git_head_drift(tmp_path, monkeypatch) -> None:
     )
 
 
+def test_detects_packaged_real_report_summary_commit_drift(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    full_head = "abcdef0123456789abcdef0123456789abcdef01"
+    monkeypatch.setattr(check.builder, "git_head", lambda: full_head)
+    manifest_path = out_dir / "package_manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["git_head"] = full_head
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert (
+        f"{out_dir}/reports/real_report_run/summary.md commit stamp drifted: "
+        "expected Commit: `abcdef0`"
+    ) in failures
+
+
 def test_detects_missing_required_manifest_source(tmp_path, monkeypatch) -> None:
     out_dir = _build_package(tmp_path, monkeypatch)
     manifest_path = out_dir / "package_manifest.json"
