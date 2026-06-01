@@ -72,7 +72,10 @@ Online source candidates found for possible future audit:
   Apocrypha/deuterocanon books after rolling the separate Epistle of Jeremiah
   source section into Baruch; Sirach and Prayer of Manasseh still need
   count-drift decisions before any source lock:
-  `docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md`. Current decision packet
+  `docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md`. Current Gutenberg checksum
+  sidecar records candidate RDF and plain-text checksums for eBook 30 and
+  eBook 124 without source-use approval or source-lock readiness:
+  `docs/KJVA_GUTENBERG_CANDIDATE_CHECKSUM_SIDECAR.md`. Current decision packet
   recommends Gutenberg source order for a future independent Project Gutenberg
   replication stream, rolling Epistle of Jeremiah into BAR for KJVA code
   compatibility, and blocking source lock until Sirach and Prayer of Manasseh

@@ -83,6 +83,7 @@ from scripts import (
     check_kjva_apocrypha_bridge_prospective_boundary,
     check_kjva_crosswire_candidate_source_audit_doc,
     check_kjva_gutenberg_book_coverage_probe_doc,
+    check_kjva_gutenberg_candidate_checksum_sidecar_doc,
     check_kjva_gutenberg_candidate_source_audit_doc,
     check_kjva_gutenberg_hakkaac_split_source_role_sidecar_doc,
     check_kjva_gutenberg_source_lock_blocker_packet_doc,
@@ -197,6 +198,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_kjva_crosswire_candidate_source_audit_doc.py",
     "scripts/analyze_kjva_gutenberg_book_coverage_probe.py",
     "scripts/check_kjva_gutenberg_book_coverage_probe_doc.py",
+    "scripts/build_kjva_gutenberg_candidate_checksum_sidecar.py",
+    "scripts/check_kjva_gutenberg_candidate_checksum_sidecar_doc.py",
     "scripts/analyze_kjva_gutenberg_candidate_source.py",
     "scripts/check_kjva_gutenberg_candidate_source_audit_doc.py",
     "scripts/build_kjva_gutenberg_hakkaac_split_source_role_sidecar.py",
@@ -605,6 +608,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/KJVA_CURRENT_SOURCE_LOCK_SIDECAR.md",
     "docs/KJVA_CROSSWIRE_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_GUTENBERG_BOOK_COVERAGE_PROBE.md",
+    "docs/KJVA_GUTENBERG_CANDIDATE_CHECKSUM_SIDECAR.md",
     "docs/KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md",
     "docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md",
@@ -633,6 +637,9 @@ DEFAULT_REQUIRED_PATHS = [
     "reports/kjva_gutenberg_book_coverage_probe/summary.csv",
     "reports/kjva_gutenberg_book_coverage_probe/anchors.csv",
     "reports/kjva_gutenberg_book_coverage_probe/manifest.json",
+    "reports/kjva_gutenberg_candidate_checksum_sidecar/source_checksums.csv",
+    "reports/kjva_gutenberg_candidate_checksum_sidecar/summary.csv",
+    "reports/kjva_gutenberg_candidate_checksum_sidecar/manifest.json",
     "reports/kjva_gutenberg_candidate_source/source_status.csv",
     "reports/kjva_gutenberg_candidate_source/summary.csv",
     "reports/kjva_gutenberg_candidate_source/anchors.csv",
@@ -739,6 +746,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/kjva_current_source_lock_sidecar.toml",
     "protocols/kjva_crosswire_candidate_source_audit.toml",
     "protocols/kjva_gutenberg_book_coverage_probe.toml",
+    "protocols/kjva_gutenberg_candidate_checksum_sidecar.toml",
     "protocols/kjva_gutenberg_candidate_source_audit.toml",
     "protocols/kjva_gutenberg_source_lock_blocker_packet.toml",
     "protocols/kjva_gutenberg_source_lock_decision_packet.toml",
@@ -1315,6 +1323,17 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "KJVA Gutenberg book coverage probe failures: "
             + "; ".join(kjva_gutenberg_book_coverage_probe_doc_failures)
+        )
+
+    kjva_gutenberg_candidate_checksum_sidecar_doc_failures = (
+        check_kjva_gutenberg_candidate_checksum_sidecar_doc.validate_kjva_gutenberg_candidate_checksum_sidecar_doc(
+            root / check_kjva_gutenberg_candidate_checksum_sidecar_doc.DEFAULT_DOC
+        )
+    )
+    if kjva_gutenberg_candidate_checksum_sidecar_doc_failures:
+        failures.append(
+            "KJVA Gutenberg candidate checksum sidecar failures: "
+            + "; ".join(kjva_gutenberg_candidate_checksum_sidecar_doc_failures)
         )
 
     kjva_gutenberg_source_lock_prep_doc_failures = (
@@ -2533,6 +2552,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "kjva_gutenberg_book_coverage_probe_doc_failures": (
             kjva_gutenberg_book_coverage_probe_doc_failures
+        ),
+        "kjva_gutenberg_candidate_checksum_sidecar_doc_failures": (
+            kjva_gutenberg_candidate_checksum_sidecar_doc_failures
         ),
         "kjva_gutenberg_source_lock_prep_doc_failures": (
             kjva_gutenberg_source_lock_prep_doc_failures

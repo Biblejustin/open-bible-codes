@@ -71,6 +71,7 @@ REQUIRED_PHRASES = (
     "study-mapping CSV schemas retain exact columns, required locked values, ISO `locked_at` dates, supported language markers, tracked term IDs",
     "KJVA Gutenberg plus Hakkaac split-source role sidecar writes the missing role/order boundary as planning-only evidence",
     "Hakkaac as marker/collation witness-only",
+    "KJVA Gutenberg candidate checksum sidecar records eBook 30 and eBook 124 RDF and plain-text SHA-256 identifiers",
 )
 
 

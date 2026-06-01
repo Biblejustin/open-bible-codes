@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 419
+Documents indexed: 420
 
 ## Controls
 
@@ -363,6 +363,7 @@ Documents indexed: 419
 | KJVA CrossWire Candidate Source Audit | `KJVA_CROSSWIRE_CANDIDATE_SOURCE_AUDIT.md` |
 | KJVA Current Source Lock Sidecar | `KJVA_CURRENT_SOURCE_LOCK_SIDECAR.md` |
 | KJVA Gutenberg Book Coverage Probe | `KJVA_GUTENBERG_BOOK_COVERAGE_PROBE.md` |
+| KJVA Gutenberg Candidate Checksum Sidecar | `KJVA_GUTENBERG_CANDIDATE_CHECKSUM_SIDECAR.md` |
 | KJVA Gutenberg Candidate Source Audit | `KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md` |
 | KJVA Gutenberg Hakkaac Split-Source Role Sidecar | `KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md` |
 | KJVA Gutenberg Source-Lock Blocker Packet | `KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md` |

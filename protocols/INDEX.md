@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 191
+Protocols indexed: 192
 
 ## Analysis
 
@@ -56,6 +56,7 @@ Protocols indexed: 191
 | hebrew_theology_all_codes_collection | Relaxed all-codes collection for the Hebrew theology cohort with center-word surface fl... | 4 | terms/hebrew_theology_prospective_terms.csv | reports/db, reports/hebrew_theology_all_codes | `hebrew_theology_all_codes_collection.toml` |
 | israeli_prime_ministers_detail_recovery_probe | Probe live Torah-code.org Israeli prime-minister detail pages 9-12 without running ELS ... | 1 |  | reports/israeli_prime_ministers_detail_recovery_probe | `israeli_prime_ministers_detail_recovery_probe.toml` |
 | kjva_gutenberg_book_coverage_probe | Probe Project Gutenberg eBook 30 plain-text book-heading coverage without importing Bib... | 1 |  | reports/kjva_gutenberg_book_coverage_probe | `kjva_gutenberg_book_coverage_probe.toml` |
+| kjva_gutenberg_candidate_checksum_sidecar | Build a non-text checksum sidecar for Project Gutenberg eBook 30 and eBook 124 KJVA can... | 1 |  | reports/kjva_gutenberg_candidate_checksum_sidecar | `kjva_gutenberg_candidate_checksum_sidecar.toml` |
 | kjva_gutenberg_hakkaac_split_source_role_sidecar | Build a non-text source-role/order sidecar for the Gutenberg plus Hakkaac KJVA candidat... | 1 |  | reports/kjva_gutenberg_hakkaac_split_source_role_sidecar | `kjva_gutenberg_hakkaac_split_source_role_sidecar.toml` |
 | kjva_gutenberg_source_lock_blocker_packet | Build marker-only blocker evidence for remaining Project Gutenberg KJVA source-lock gap... | 1 |  | reports/kjva_gutenberg_source_lock_blocker_packet | `kjva_gutenberg_source_lock_blocker_packet.toml` |
 | kjva_gutenberg_source_lock_decision_packet | Build a decision packet from Project Gutenberg KJVA source-lock prep evidence without i... | 1 |  | reports/kjva_gutenberg_source_lock_decision_packet | `kjva_gutenberg_source_lock_decision_packet.toml` |
@@ -159,7 +160,7 @@ Protocols indexed: 191
 | oet_english_controls | Open English Translation OET-LV/OET-RV control-corpus screening for generated English t... | 1 | terms/english_search_terms.csv | reports/oet_english_controls | `oet_english_controls.toml` |
 | openbible_english_controls | Open.Bible English NT control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/openbible_english_controls | `openbible_english_controls.toml` |
 | otb_english_controls | Open Translation Bible English UK control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/otb_english_controls | `otb_english_controls.toml` |
-| real_report_run | Formal report assembly run over locked STEP_TAHOT, Greek exact-center, doxa follow-ups,... | 69 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports, reports/all_codes_compound_extension_confirmatory, reports/all_codes_compound_... | `real_report_run.toml` |
+| real_report_run | Formal report assembly run over locked STEP_TAHOT, Greek exact-center, doxa follow-ups,... | 70 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports, reports/all_codes_compound_extension_confirmatory, reports/all_codes_compound_... | `real_report_run.toml` |
 | sblgnt_source_only_exact_center | Post-discovery 1000/1000 controls for SBLGNT source-only exact-center extension rows. | 2 |  | reports/sblgnt_source_only_exact_center | `sblgnt_source_only_exact_center.toml` |
 | step_tahot_control_policy_hits | Audit STEP_TAHOT-only control rows against TAHOT source-type policy. | 2 |  | reports/step_tahot_control_policy_hits, reports/step_tahot_control_version_presence | `step_tahot_control_policy_hits.toml` |
 | step_tahot_control_version_presence | Capped exact ELS hit-pattern presence for Hebrew null/frequency controls across MT-fami... | 1 | terms/frequency_anchors.csv, terms/null_controls.csv | reports/step_tahot_control_version_presence | `step_tahot_control_version_presence.toml` |

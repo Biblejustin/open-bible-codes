@@ -2697,3 +2697,23 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/check_kjva_gutenberg_hakkaac_split_source_role_sidecar_doc.py`, and
   wired the sidecar into `scripts/preflight_real_report_run.py` plus
   `protocols/real_report_run.toml`.
+
+## KJVA Gutenberg Candidate Checksum Sidecar
+
+- Added `docs/KJVA_GUTENBERG_CANDIDATE_CHECKSUM_SIDECAR.md` as a non-text
+  checksum sidecar for Project Gutenberg eBook 30 and eBook 124 candidate
+  identifiers.
+- Current sidecar status: 2 source rows, 2 metadata fetches OK, 2
+  public-domain-USA rows, 2 plain-text checksum rows, and 2 checksum records
+  ready.
+- Current checksum boundary: eBook 30 and eBook 124 RDF SHA-256 values plus
+  plain-text SHA-256 values are recorded as candidate identifiers only.
+- This closes only the candidate checksum-record step. It does not close
+  source-use, verse mapping, collation, `SIR 44:23`, Prayer of Manasseh,
+  `SIR 19:1`, term/control, or study-lock blockers and does not change KJVA
+  bridge result status.
+- Added `protocols/kjva_gutenberg_candidate_checksum_sidecar.toml`,
+  `scripts/build_kjva_gutenberg_candidate_checksum_sidecar.py`, and
+  `scripts/check_kjva_gutenberg_candidate_checksum_sidecar_doc.py`, and wired
+  the sidecar into `scripts/preflight_real_report_run.py` plus
+  `protocols/real_report_run.toml`.

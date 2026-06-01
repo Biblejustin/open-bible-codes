@@ -1,0 +1,22 @@
+name = "kjva_gutenberg_candidate_checksum_sidecar"
+description = "Build a non-text checksum sidecar for Project Gutenberg eBook 30 and eBook 124 KJVA candidate identifiers."
+manifest_out = "reports/kjva_gutenberg_candidate_checksum_sidecar/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "kjva_gutenberg_candidate_checksum_sidecar"
+description = "Record Gutenberg RDF and plain-text checksums without source-use approval or result claims."
+argv = ["-m", "scripts.build_kjva_gutenberg_candidate_checksum_sidecar"]
+inputs = [
+  "scripts/build_kjva_gutenberg_candidate_checksum_sidecar.py",
+  "reports/kjva_gutenberg_candidate_source/source_status.csv",
+  "reports/kjva_gutenberg_candidate_source/summary.csv",
+  "reports/kjva_gutenberg_source_lock_prep/summary.csv",
+]
+outputs = [
+  "reports/kjva_gutenberg_candidate_checksum_sidecar/source_checksums.csv",
+  "reports/kjva_gutenberg_candidate_checksum_sidecar/summary.csv",
+  "docs/KJVA_GUTENBERG_CANDIDATE_CHECKSUM_SIDECAR.md",
+  "reports/kjva_gutenberg_candidate_checksum_sidecar/manifest.json",
+]

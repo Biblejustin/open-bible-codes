@@ -25,6 +25,8 @@ inputs = [
   "scripts/check_kjva_crosswire_candidate_source_audit_doc.py",
   "scripts/analyze_kjva_gutenberg_book_coverage_probe.py",
   "scripts/check_kjva_gutenberg_book_coverage_probe_doc.py",
+  "scripts/build_kjva_gutenberg_candidate_checksum_sidecar.py",
+  "scripts/check_kjva_gutenberg_candidate_checksum_sidecar_doc.py",
   "scripts/analyze_kjva_gutenberg_candidate_source.py",
   "scripts/check_kjva_gutenberg_candidate_source_audit_doc.py",
   "scripts/analyze_kjva_gutenberg_source_lock_prep.py",
@@ -441,6 +443,7 @@ inputs = [
   "docs/KJVA_CURRENT_SOURCE_LOCK_SIDECAR.md",
   "docs/KJVA_CROSSWIRE_CANDIDATE_SOURCE_AUDIT.md",
   "docs/KJVA_GUTENBERG_BOOK_COVERAGE_PROBE.md",
+  "docs/KJVA_GUTENBERG_CANDIDATE_CHECKSUM_SIDECAR.md",
   "docs/KJVA_GUTENBERG_CANDIDATE_SOURCE_AUDIT.md",
   "docs/KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md",
   "docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md",
@@ -469,6 +472,9 @@ inputs = [
   "reports/kjva_gutenberg_book_coverage_probe/summary.csv",
   "reports/kjva_gutenberg_book_coverage_probe/anchors.csv",
   "reports/kjva_gutenberg_book_coverage_probe/manifest.json",
+  "reports/kjva_gutenberg_candidate_checksum_sidecar/source_checksums.csv",
+  "reports/kjva_gutenberg_candidate_checksum_sidecar/summary.csv",
+  "reports/kjva_gutenberg_candidate_checksum_sidecar/manifest.json",
   "reports/kjva_gutenberg_candidate_source/source_status.csv",
   "reports/kjva_gutenberg_candidate_source/summary.csv",
   "reports/kjva_gutenberg_candidate_source/anchors.csv",
@@ -575,6 +581,7 @@ inputs = [
   "protocols/kjva_current_source_lock_sidecar.toml",
   "protocols/kjva_crosswire_candidate_source_audit.toml",
   "protocols/kjva_gutenberg_book_coverage_probe.toml",
+  "protocols/kjva_gutenberg_candidate_checksum_sidecar.toml",
   "protocols/kjva_gutenberg_candidate_source_audit.toml",
   "protocols/kjva_gutenberg_source_lock_blocker_packet.toml",
   "protocols/kjva_gutenberg_source_lock_decision_packet.toml",
@@ -1883,6 +1890,23 @@ outputs = [
   "reports/kjva_gutenberg_source_lock_prep/anchors.csv",
   "docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md",
   "reports/kjva_gutenberg_source_lock_prep/manifest.json",
+]
+
+[[steps]]
+id = "kjva_gutenberg_candidate_checksum_sidecar"
+description = "Record Project Gutenberg eBook 30 and eBook 124 checksums as candidate identifiers only."
+argv = ["-m", "scripts.build_kjva_gutenberg_candidate_checksum_sidecar"]
+inputs = [
+  "scripts/build_kjva_gutenberg_candidate_checksum_sidecar.py",
+  "reports/kjva_gutenberg_candidate_source/source_status.csv",
+  "reports/kjva_gutenberg_candidate_source/summary.csv",
+  "reports/kjva_gutenberg_source_lock_prep/summary.csv",
+]
+outputs = [
+  "reports/kjva_gutenberg_candidate_checksum_sidecar/source_checksums.csv",
+  "reports/kjva_gutenberg_candidate_checksum_sidecar/summary.csv",
+  "docs/KJVA_GUTENBERG_CANDIDATE_CHECKSUM_SIDECAR.md",
+  "reports/kjva_gutenberg_candidate_checksum_sidecar/manifest.json",
 ]
 
 [[steps]]
