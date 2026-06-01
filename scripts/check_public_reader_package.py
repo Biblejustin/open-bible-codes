@@ -121,6 +121,13 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
         "Greater-or-equal tail: 0.9910.",
         "Raw break counts are not significance tests.",
     ),
+    Path("reports/real_report_run/summary.md"): (
+        "No row is labeled as a claim in this report run.",
+        "It is not an exact WRR reproduction.",
+        "Exact published WRR reproduction | forbidden | 72 of 163 defined; gap 91",
+        "Claim boundary: KJVA no-input handoff only; no new result.",
+        "Current read: Cities source-row pages remain a source-review lane only.",
+    ),
 }
 
 

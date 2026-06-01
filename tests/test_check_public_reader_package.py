@@ -63,12 +63,24 @@ def _default_doc_text(path: Path) -> str:
     return f"# {path.name}\n\nbody\n"
 
 
+def _default_report_text(path: Path) -> str:
+    if path == Path("reports/real_report_run/summary.md"):
+        return (
+            "# report\n\n"
+            + "\n\n".join(check.REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH[path])
+            + "\n"
+        )
+    if path.suffix == ".md":
+        return "# report\n\nbody\n"
+    return "{}\n"
+
+
 def _build_package(root: Path, monkeypatch) -> Path:
     monkeypatch.chdir(root)
     for path in package.DEFAULT_DOC_PATHS:
         _write(path, _default_doc_text(path))
     for path in package.DEFAULT_REPORT_PATHS:
-        _write(path, "# report\n\nbody\n" if path.suffix == ".md" else "{}\n")
+        _write(path, _default_report_text(path))
     out_dir = Path("reports/public_reader_package")
     package.build_public_reader_package(out_dir=out_dir)
     return out_dir
