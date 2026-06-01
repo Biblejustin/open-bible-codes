@@ -166,6 +166,13 @@ def _default_report_text(path: Path) -> str:
                             "reports/cities_no_input_handoff_status/manifest.json",
                             "reports/kjva_no_input_handoff_status/summary.csv",
                             "reports/kjva_no_input_handoff_status/manifest.json",
+                            "reports/external_claim_source_counts/summary.csv",
+                            "reports/external_claim_source_counts/summary.manifest.json",
+                            "reports/external_claim_source_all_codes/surface_all_codes_summary.csv",
+                            "reports/external_claim_source_all_codes/summary.manifest.json",
+                            "reports/external_claim_source_all_codes/triage_queue.csv",
+                            "reports/external_claim_source_all_codes/triage.manifest.json",
+                            "reports/external_claim_source_all_codes/findings.manifest.json",
                         ],
                         "outputs": [
                             "reports/real_report_run/summary.md",
@@ -384,6 +391,31 @@ def test_detects_packaged_real_report_protocol_manifest_summary_input_drift(
 
     assert (
         f"{protocol_path} real_report_summary missing no-input handoff inputs"
+        in failures
+    )
+
+
+def test_detects_packaged_real_report_protocol_manifest_external_claim_input_drift(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    protocol_path = out_dir / "reports/real_report_run/protocol_run.manifest.json"
+    protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
+    for step in protocol["steps"]:
+        if step["id"] == "real_report_summary":
+            step["inputs"] = [
+                value
+                for value in step["inputs"]
+                if not str(value).startswith("reports/external_claim_source")
+            ]
+            break
+    protocol_path.write_text(json.dumps(protocol, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert (
+        f"{protocol_path} real_report_summary missing external-claim inputs"
         in failures
     )
 

@@ -590,6 +590,20 @@ def validate_packaged_real_report_protocol_manifest(
         failures.append(f"{path} real_report_summary missing no-input handoff inputs")
     elif not protocol_step_contains_all(
         summary,
+        key="inputs",
+        required=(
+            "reports/external_claim_source_counts/summary.csv",
+            "reports/external_claim_source_counts/summary.manifest.json",
+            "reports/external_claim_source_all_codes/surface_all_codes_summary.csv",
+            "reports/external_claim_source_all_codes/summary.manifest.json",
+            "reports/external_claim_source_all_codes/triage_queue.csv",
+            "reports/external_claim_source_all_codes/triage.manifest.json",
+            "reports/external_claim_source_all_codes/findings.manifest.json",
+        ),
+    ):
+        failures.append(f"{path} real_report_summary missing external-claim inputs")
+    elif not protocol_step_contains_all(
+        summary,
         key="outputs",
         required=(
             "reports/real_report_run/summary.md",
