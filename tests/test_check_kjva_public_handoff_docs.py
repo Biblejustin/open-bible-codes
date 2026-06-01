@@ -36,6 +36,20 @@ def test_forbidden_stale_phrase_fails(tmp_path: Path) -> None:
     assert failures == [f"docs/FINAL_REPORT.md contains stale phrase: {stale}"]
 
 
+def test_generated_summary_stale_result_allowed_fails(tmp_path: Path) -> None:
+    stale = "| Result allowed | 1 |"
+    write_valid_docs(tmp_path)
+    doc = tmp_path / "reports/real_report_run/summary.md"
+    with doc.open("a", encoding="utf-8") as handle:
+        handle.write(f"\n{stale}\n")
+
+    failures = check.validate_kjva_public_handoff_docs(tmp_path)
+
+    assert failures == [
+        f"reports/real_report_run/summary.md contains stale phrase: {stale}"
+    ]
+
+
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
     code = check.main(["--root", str(tmp_path)])
 

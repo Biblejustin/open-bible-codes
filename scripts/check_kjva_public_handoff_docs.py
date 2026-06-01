@@ -34,6 +34,12 @@ REQUIRED_PHRASES_BY_DOC = {
         "8 manual-input-needed rows",
         "result allowed 0",
     ),
+    Path("reports/real_report_run/summary.md"): (
+        "## KJVA No-Input Handoff Status",
+        "| Result allowed | 0 |",
+        "Claim status: `kjva_no_input_handoff_blocks_new_result`",
+        "Current read: this is a work map, not a statistical result.",
+    ),
 }
 FORBIDDEN_PHRASES_BY_DOC = {
     Path("README.md"): (
@@ -50,6 +56,10 @@ FORBIDDEN_PHRASES_BY_DOC = {
     ),
     Path("protocols/README.md"): (
         "KJVA source lock ready",
+    ),
+    Path("reports/real_report_run/summary.md"): (
+        "| Result allowed | 1 |",
+        "new KJVA result is ready",
     ),
 }
 
