@@ -368,6 +368,10 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "scripts.check_final_report_assembly_docs" in makefile
     assert "scripts.check_final_report_highlights_doc" in makefile
     assert "scripts.check_strongest_candidate_deep_dive_doc" in makefile
+    assert "scripts.check_prospective_lane_status_doc" in makefile
+    assert "scripts.check_study_lock_manifests_doc" in makefile
+    assert "scripts.check_prospective_study_readiness_doc" in makefile
+    assert "scripts.check_prospective_study_next_lock_doc" in makefile
     assert "scripts.check_public_claim_language" in makefile
     assert "$(MAKE) protocol-files" in makefile
     assert "$(MAKE) corpus-configs" in makefile
@@ -387,6 +391,7 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "final-report assembly docs" in readme
     assert "final-report highlights" in normalized_readme
     assert "strongest-candidate packet" in normalized_readme
+    assert "prospective workflow docs" in normalized_readme
     assert "checks public claim language" in readme
     assert "protocol TOML files" in readme
     assert "corpus config schemas" in normalized_readme
@@ -449,6 +454,10 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "scripts.check_final_report_assembly_docs" in makefile
     assert "scripts.check_final_report_highlights_doc" in makefile
     assert "scripts.check_strongest_candidate_deep_dive_doc" in makefile
+    assert "scripts.check_prospective_lane_status_doc" in makefile
+    assert "scripts.check_study_lock_manifests_doc" in makefile
+    assert "scripts.check_prospective_study_readiness_doc" in makefile
+    assert "scripts.check_prospective_study_next_lock_doc" in makefile
     assert "$(MAKE) protocol-files" in makefile
     assert "$(MAKE) corpus-configs" in makefile
     assert "$(MAKE) term-files" in makefile
@@ -463,6 +472,7 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "final-report assembly docs" in normalized_readme
     assert "final-report highlights" in normalized_readme
     assert "strongest-candidate packet" in normalized_readme
+    assert "prospective workflow docs" in normalized_readme
     assert "validates protocol TOML files" in normalized_readme
     assert "corpus config schemas" in normalized_readme
     assert "term-file schema/normalization" in normalized_readme

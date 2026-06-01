@@ -48,6 +48,10 @@ fast-validate: test indexes
 	python3 -m scripts.check_final_report_assembly_docs
 	python3 -m scripts.check_final_report_highlights_doc
 	python3 -m scripts.check_strongest_candidate_deep_dive_doc
+	python3 -m scripts.check_prospective_lane_status_doc
+	python3 -m scripts.check_study_lock_manifests_doc
+	python3 -m scripts.check_prospective_study_readiness_doc
+	python3 -m scripts.check_prospective_study_next_lock_doc
 	python3 -m scripts.check_public_claim_language
 	$(MAKE) protocol-files
 	$(MAKE) corpus-configs
@@ -73,6 +77,10 @@ public-release-check:
 	python3 -m scripts.check_final_report_assembly_docs
 	python3 -m scripts.check_final_report_highlights_doc
 	python3 -m scripts.check_strongest_candidate_deep_dive_doc
+	python3 -m scripts.check_prospective_lane_status_doc
+	python3 -m scripts.check_study_lock_manifests_doc
+	python3 -m scripts.check_prospective_study_readiness_doc
+	python3 -m scripts.check_prospective_study_next_lock_doc
 	python3 -m scripts.check_public_claim_language
 	$(MAKE) protocol-files
 	$(MAKE) corpus-configs

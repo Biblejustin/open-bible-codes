@@ -44,8 +44,8 @@ guarding, final-report assembly-boundary guarding, final-report highlights
 freshness guarding, centered-occurrence index freshness guarding, strongest
 candidate deep-dive freshness guarding, claim-catalog summary guarding,
 real-report run doc guarding, final-report assembly direct gating,
-top-reader summary doc direct gating, imported preflight check-script input
-guarding,
+top-reader summary doc direct gating, prospective workflow direct gating,
+imported preflight check-script input guarding,
 research missing model pages audit doc guarding, WRR-adjacent source audit
 family doc guarding, real-report source-audit preflight documentation,
 critical-omission follow-up doc guarding, KJVA apocrypha prospective boundary
@@ -3074,6 +3074,19 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   fast-validate` and `make public-release-check`.
 - Updated README validation descriptions and Makefile guard tests so the
   reader-facing summary packet is checked in both dirty-safe and clean release
+  paths, not only during formal real-report preflight.
+- This is a documentation guard only. It does not change report conclusions,
+  source policy, imported texts, ELS searches, or result status.
+
+## Prospective Workflow Doc Direct Gate
+
+- Wired `scripts/check_prospective_lane_status_doc.py`,
+  `scripts/check_study_lock_manifests_doc.py`,
+  `scripts/check_prospective_study_readiness_doc.py`, and
+  `scripts/check_prospective_study_next_lock_doc.py` directly into `make
+  fast-validate` and `make public-release-check`.
+- Updated README validation descriptions and Makefile guard tests so the
+  prospective workflow docs are checked in both dirty-safe and clean release
   paths, not only during formal real-report preflight.
 - This is a documentation guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
