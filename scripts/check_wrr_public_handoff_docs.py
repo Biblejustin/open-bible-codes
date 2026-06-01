@@ -137,6 +137,13 @@ REQUIRED_PHRASES_BY_DOC = {
         "no-new-result boundary",
         "It is locked local evidence, not an exact WRR reproduction.",
     ),
+    Path("reports/real_report_run/summary.md"): (
+        "## WRR 1994 Source Audit",
+        "| Exact published WRR reproduction | forbidden | 72 of 163 defined; gap 91 |",
+        "| Manual decision records | all_current_manual_reviews_locked | 37 locked; 0 unlocked; method_lock=11; no_source_change=26 |",
+        "The no-input handoff status packet consolidates the 9 current WRR",
+        "handoff rows and keeps new-result permission closed.",
+    ),
 }
 
 FORBIDDEN_PHRASES_BY_DOC = {
@@ -172,6 +179,11 @@ FORBIDDEN_PHRASES_BY_DOC = {
         "before metric work",
         "open method decisions",
         "It is not an exact WRR reproduction.",
+    ),
+    Path("reports/real_report_run/summary.md"): (
+        "| Exact published WRR reproduction | ready |",
+        "new WRR result allowed 1",
+        "new-result permission open",
     ),
 }
 

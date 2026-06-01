@@ -48,6 +48,20 @@ def test_readme_forbidden_stale_phrase_fails(tmp_path: Path) -> None:
     assert failures == [f"README.md contains stale phrase: {stale}"]
 
 
+def test_generated_summary_exact_reproduction_ready_fails(tmp_path: Path) -> None:
+    stale = "| Exact published WRR reproduction | ready |"
+    write_valid_docs(tmp_path)
+    doc = tmp_path / "reports/real_report_run/summary.md"
+    with doc.open("a", encoding="utf-8") as handle:
+        handle.write(f"\n{stale}\n")
+
+    failures = check.validate_public_handoff_docs(tmp_path)
+
+    assert failures == [
+        f"reports/real_report_run/summary.md contains stale phrase: {stale}"
+    ]
+
+
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
     code = check.main(["--root", str(tmp_path)])
 
