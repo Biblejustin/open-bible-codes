@@ -187,6 +187,14 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/analyze_kjva_hakkaac_apocrypha_marker_coverage.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_kjva_hakkaac_apocrypha_marker_coverage_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/build_kjva_gutenberg_source_lock_blocker_packet.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -235,6 +243,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "docs/KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "docs/KJVA_SOURCE_CANDIDATE_STATUS.md",
             steps_by_id["preflight"]["inputs"],
         )
@@ -275,6 +287,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "protocols/kjva_hakkaac_apocrypha_marker_coverage.toml",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "protocols/kjva_wikisource_candidate_source_audit.toml",
             steps_by_id["preflight"]["inputs"],
         )
@@ -303,6 +319,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "reports/kjva_hakkaac_apocrypha_marker_coverage/summary.csv",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "reports/kjva_wikisource_candidate_source/summary.csv",
             steps_by_id["preflight"]["inputs"],
         )
@@ -312,6 +332,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("kjva_gutenberg_candidate_source_audit", steps_by_id)
         self.assertIn("kjva_gutenberg_source_lock_blocker_packet", steps_by_id)
         self.assertIn("kjva_hakkaac_apocrypha_boundary_candidate", steps_by_id)
+        self.assertIn("kjva_hakkaac_apocrypha_marker_coverage", steps_by_id)
         self.assertIn("kjva_wikisource_candidate_source_audit", steps_by_id)
         self.assertIn("kjva_wikisource_book_coverage_probe", steps_by_id)
         self.assertIn("docs/INDEX.md", steps_by_id["preflight"]["inputs"])

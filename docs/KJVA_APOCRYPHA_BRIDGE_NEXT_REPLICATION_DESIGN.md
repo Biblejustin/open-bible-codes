@@ -81,7 +81,12 @@ Online source candidates found for possible future audit:
   boundary-candidate audit found visible markers for Sirach 44:23 and Prayer
   of Manasseh 1..15 with a public-domain note, but keeps that as candidate
   evidence only, not a source lock:
-  `docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md`.
+  `docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md`. Current Hakkaac
+  full-marker coverage audit found exact marker-count agreement for all 14
+  tracked Apocrypha/deuterocanon books, 5720 source markers, 5720 local
+  markers, 173 chapter rows, and 0 chapter drift rows, but keeps that as
+  marker-coverage evidence only, not a source lock:
+  `docs/KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md`.
 - [CrossWire GitLab KJV/KJVA](https://gitlab.com/crosswire-bible-society/kjv):
   possible independent metadata candidate because KJVA/KJVDC path names are
   present. Current tracked status audit:
@@ -126,6 +131,7 @@ sidecar.
 - `docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md`
 - `docs/KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md`
 - `docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md`
+- `docs/KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md`
 - `docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md`
 - `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - `configs/prospective_study_lanes.json`

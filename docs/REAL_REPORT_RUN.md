@@ -163,6 +163,8 @@ This assembly run includes:
   `docs/KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md`
 - KJVA Hakkaac boundary candidate audit:
   `docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md`
+- KJVA Hakkaac full-marker coverage audit:
+  `docs/KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md`
 - KJVA Wikisource candidate source-status audit:
   `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - KJVA Wikisource book-coverage probe:
@@ -273,6 +275,10 @@ It requires:
 - KJVA Hakkaac boundary candidate audit stays marker-only, finding visible
   markers for Sirach 44:23 and Prayer of Manasseh 1..15 with a public-domain
   note, but no source lock, corpus import, or result-bearing output;
+- KJVA Hakkaac full-marker coverage audit stays marker-only, finding exact
+  marker-count agreement for all 14 tracked Apocrypha/deuterocanon books,
+  5720 source markers, 5720 local markers, 173 chapter rows, and 0 chapter
+  drift rows, but no source lock, corpus import, or result-bearing output;
 - KJVA Wikisource candidate source audit stays metadata-only, with no Bible
   text retained, no corpus import ready, and no result-bearing output;
 - KJVA Wikisource book-coverage probe stays metadata-only, with 36 existing

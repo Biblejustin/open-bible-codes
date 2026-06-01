@@ -1,0 +1,22 @@
+name = "kjva_hakkaac_apocrypha_marker_coverage"
+description = "Audit all Hakkaac KJV Apocrypha pages as marker-only coverage candidates without importing Bible text."
+manifest_out = "reports/kjva_hakkaac_apocrypha_marker_coverage/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "kjva_hakkaac_apocrypha_marker_coverage"
+description = "Scan all 14 Hakkaac Apocrypha pages for visible chapter and verse markers without importing Bible text."
+argv = ["-m", "scripts.analyze_kjva_hakkaac_apocrypha_marker_coverage"]
+inputs = [
+  "scripts/analyze_kjva_hakkaac_apocrypha_marker_coverage.py",
+  "scripts/analyze_kjva_hakkaac_apocrypha_boundary_candidate.py",
+  "data/processed/ebible/eng-kjv.csv",
+]
+outputs = [
+  "reports/kjva_hakkaac_apocrypha_marker_coverage/book_marker_coverage.csv",
+  "reports/kjva_hakkaac_apocrypha_marker_coverage/chapter_marker_coverage.csv",
+  "reports/kjva_hakkaac_apocrypha_marker_coverage/summary.csv",
+  "docs/KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md",
+  "reports/kjva_hakkaac_apocrypha_marker_coverage/manifest.json",
+]

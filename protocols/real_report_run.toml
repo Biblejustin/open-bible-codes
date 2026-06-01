@@ -48,6 +48,8 @@ inputs = [
   "scripts/check_cities_public_handoff_docs.py",
   "scripts/analyze_kjva_hakkaac_apocrypha_boundary_candidate.py",
   "scripts/check_kjva_hakkaac_apocrypha_boundary_candidate_doc.py",
+  "scripts/analyze_kjva_hakkaac_apocrypha_marker_coverage.py",
+  "scripts/check_kjva_hakkaac_apocrypha_marker_coverage_doc.py",
   "scripts/check_real_report_run_doc.py",
   "scripts/check_strongest_candidate_deep_dive_doc.py",
   "els/project_index.py",
@@ -435,6 +437,7 @@ inputs = [
   "docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md",
   "docs/KJVA_GUTENBERG_SOURCE_LOCK_PREP.md",
   "docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md",
+  "docs/KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md",
   "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
   "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
   "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
@@ -469,6 +472,10 @@ inputs = [
   "reports/kjva_hakkaac_apocrypha_boundary_candidate/chapter_markers.csv",
   "reports/kjva_hakkaac_apocrypha_boundary_candidate/summary.csv",
   "reports/kjva_hakkaac_apocrypha_boundary_candidate/manifest.json",
+  "reports/kjva_hakkaac_apocrypha_marker_coverage/book_marker_coverage.csv",
+  "reports/kjva_hakkaac_apocrypha_marker_coverage/chapter_marker_coverage.csv",
+  "reports/kjva_hakkaac_apocrypha_marker_coverage/summary.csv",
+  "reports/kjva_hakkaac_apocrypha_marker_coverage/manifest.json",
   "reports/kjva_open_bibles_candidate_source/source_status.csv",
   "reports/kjva_open_bibles_candidate_source/summary.csv",
   "reports/kjva_open_bibles_candidate_source/anchors.csv",
@@ -544,6 +551,7 @@ inputs = [
   "protocols/kjva_gutenberg_source_lock_decision_packet.toml",
   "protocols/kjva_gutenberg_source_lock_prep.toml",
   "protocols/kjva_hakkaac_apocrypha_boundary_candidate.toml",
+  "protocols/kjva_hakkaac_apocrypha_marker_coverage.toml",
   "protocols/kjva_open_bibles_candidate_source_audit.toml",
   "protocols/kjva_wikisource_candidate_source_audit.toml",
   "protocols/external_claim_source_counts.toml",
@@ -1874,6 +1882,23 @@ outputs = [
   "reports/kjva_hakkaac_apocrypha_boundary_candidate/summary.csv",
   "docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md",
   "reports/kjva_hakkaac_apocrypha_boundary_candidate/manifest.json",
+]
+
+[[steps]]
+id = "kjva_hakkaac_apocrypha_marker_coverage"
+description = "Audit all Hakkaac KJV Apocrypha pages for visible marker coverage without importing Bible text."
+argv = ["-m", "scripts.analyze_kjva_hakkaac_apocrypha_marker_coverage"]
+inputs = [
+  "scripts/analyze_kjva_hakkaac_apocrypha_marker_coverage.py",
+  "scripts/analyze_kjva_hakkaac_apocrypha_boundary_candidate.py",
+  "data/processed/ebible/eng-kjv.csv",
+]
+outputs = [
+  "reports/kjva_hakkaac_apocrypha_marker_coverage/book_marker_coverage.csv",
+  "reports/kjva_hakkaac_apocrypha_marker_coverage/chapter_marker_coverage.csv",
+  "reports/kjva_hakkaac_apocrypha_marker_coverage/summary.csv",
+  "docs/KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md",
+  "reports/kjva_hakkaac_apocrypha_marker_coverage/manifest.json",
 ]
 
 [[steps]]

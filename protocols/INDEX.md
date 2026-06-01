@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 186
+Protocols indexed: 187
 
 ## Analysis
 
@@ -93,6 +93,7 @@ Protocols indexed: 186
 | kjva_crosswire_candidate_source_audit | Audit CrossWire GitLab KJV/KJVA metadata as a possible future KJVA source candidate. | 1 |  | reports/kjva_crosswire_candidate_source | `kjva_crosswire_candidate_source_audit.toml` |
 | kjva_gutenberg_candidate_source_audit | Audit Project Gutenberg eBook 30 and eBook 124 RDF metadata as a public-domain split KJ... | 1 |  | reports/kjva_gutenberg_candidate_source | `kjva_gutenberg_candidate_source_audit.toml` |
 | kjva_hakkaac_apocrypha_boundary_candidate | Audit Hakkaac KJV Apocrypha pages as marker-only candidates for resolving KJVA source-l... | 1 |  | reports/kjva_hakkaac_apocrypha_boundary_candidate | `kjva_hakkaac_apocrypha_boundary_candidate.toml` |
+| kjva_hakkaac_apocrypha_marker_coverage | Audit all Hakkaac KJV Apocrypha pages as marker-only coverage candidates without import... | 1 |  | reports/kjva_hakkaac_apocrypha_marker_coverage | `kjva_hakkaac_apocrypha_marker_coverage.toml` |
 | kjva_open_bibles_candidate_source_audit | Audit seven1m/open-bibles metadata as a KJV-only, not KJVA, source candidate. | 1 |  | reports/kjva_open_bibles_candidate_source | `kjva_open_bibles_candidate_source_audit.toml` |
 | kjva_wikisource_candidate_source_audit | Audit Wikisource Ballantyne KJV + Apocrypha as a metadata-only future KJVA source candi... | 1 |  | reports/kjva_wikisource_candidate_source | `kjva_wikisource_candidate_source_audit.toml` |
 | research_missing_model_pages_audit | Audit linked Torah-code research model level-2/3 pages that currently resolve to unusab... | 2 |  | reports/wrr_1994 | `research_missing_model_pages_audit.toml` |
@@ -154,7 +155,7 @@ Protocols indexed: 186
 | oet_english_controls | Open English Translation OET-LV/OET-RV control-corpus screening for generated English t... | 1 | terms/english_search_terms.csv | reports/oet_english_controls | `oet_english_controls.toml` |
 | openbible_english_controls | Open.Bible English NT control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/openbible_english_controls | `openbible_english_controls.toml` |
 | otb_english_controls | Open Translation Bible English UK control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/otb_english_controls | `otb_english_controls.toml` |
-| real_report_run | Formal report assembly run over locked STEP_TAHOT, Greek exact-center, doxa follow-ups,... | 64 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports, reports/all_codes_compound_extension_confirmatory, reports/all_codes_compound_... | `real_report_run.toml` |
+| real_report_run | Formal report assembly run over locked STEP_TAHOT, Greek exact-center, doxa follow-ups,... | 65 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports, reports/all_codes_compound_extension_confirmatory, reports/all_codes_compound_... | `real_report_run.toml` |
 | sblgnt_source_only_exact_center | Post-discovery 1000/1000 controls for SBLGNT source-only exact-center extension rows. | 2 |  | reports/sblgnt_source_only_exact_center | `sblgnt_source_only_exact_center.toml` |
 | step_tahot_control_policy_hits | Audit STEP_TAHOT-only control rows against TAHOT source-type policy. | 2 |  | reports/step_tahot_control_policy_hits, reports/step_tahot_control_version_presence | `step_tahot_control_policy_hits.toml` |
 | step_tahot_control_version_presence | Capped exact ELS hit-pattern presence for Hebrew null/frequency controls across MT-fami... | 1 | terms/frequency_anchors.csv, terms/null_controls.csv | reports/step_tahot_control_version_presence | `step_tahot_control_version_presence.toml` |

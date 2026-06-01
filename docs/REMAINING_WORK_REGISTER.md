@@ -2596,3 +2596,17 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Added `protocols/kjva_hakkaac_apocrypha_boundary_candidate.toml`,
   `scripts/analyze_kjva_hakkaac_apocrypha_boundary_candidate.py`, and
   `scripts/check_kjva_hakkaac_apocrypha_boundary_candidate_doc.py`.
+
+## KJVA Hakkaac Apocrypha Marker Coverage
+
+- Added `docs/KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md` as a full
+  marker-only coverage audit for all 14 Hakkaac KJV Apocrypha pages.
+- Current audit status: Hakkaac exposes exact marker-count agreement for all
+  14 tracked Apocrypha/deuterocanon books, with 5720 source markers, 5720
+  local markers, 173 chapter rows, and 0 chapter drift rows.
+- This is marker-coverage evidence only. It does not source-lock Hakkaac,
+  import Bible text, collate wording, choose source order, or authorize a
+  result-bearing run.
+- Added `protocols/kjva_hakkaac_apocrypha_marker_coverage.toml`,
+  `scripts/analyze_kjva_hakkaac_apocrypha_marker_coverage.py`, and
+  `scripts/check_kjva_hakkaac_apocrypha_marker_coverage_doc.py`.

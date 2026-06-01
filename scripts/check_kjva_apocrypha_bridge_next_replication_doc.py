@@ -21,6 +21,8 @@ REQUIRED_PHRASES = (
     "No reuse of the completed 7-term prospective lane as a fresh discovery.",
     "No claim wording from the single observed `tobit` bridge row.",
     "No significance wording from raw bridge counts alone.",
+    "exact marker-count agreement for all 14 tracked Apocrypha/deuterocanon books",
+    "5720 source markers, 5720 local markers, 173 chapter rows, and 0 chapter drift rows",
 )
 REQUIRED_LINKS = (
     "terms/kjv_apocrypha_bridge_prospective_terms.csv",
@@ -37,6 +39,7 @@ REQUIRED_LINKS = (
     "docs/KJVA_GUTENBERG_SOURCE_LOCK_DECISION_PACKET.md",
     "docs/KJVA_GUTENBERG_SOURCE_LOCK_BLOCKER_PACKET.md",
     "docs/KJVA_HAKKAAC_APOCRYPHA_BOUNDARY_CANDIDATE.md",
+    "docs/KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md",
     "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
     "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
