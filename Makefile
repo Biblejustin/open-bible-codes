@@ -21,7 +21,7 @@ COHORT_CLUSTER_WINDOW_WORDS ?= 50
 COHORT_CLUSTER_MIN_DISTINCT ?= 2
 COHORT_CLUSTER_CORPUS_CONFIGS ?= --corpus-config MT_WLC=configs/example_oshb_wlc.toml --corpus-config UXLC=configs/example_uxlc.toml --corpus-config EBIBLE_WLC=configs/example_ebible_hebwlc.toml --corpus-config MAM=configs/example_mam.toml --corpus-config UHB=configs/example_uhb.toml --corpus-config LXX=configs/example_ebible_grclxx.toml --corpus-config KJV=configs/example_ebible_engkjv.toml --corpus-config KJVA=configs/example_ebible_engkjv_apocrypha.toml --corpus-config TR_NT=configs/example_ebible_grctr.toml --corpus-config SBLGNT=configs/example_sblgnt.toml --corpus-config BYZ_NT=configs/example_ebible_grcmt.toml --corpus-config TCG_NT=configs/example_ebible_grctcgnt.toml --corpus-config HEB_PBY_AHAD_HAAM=configs/nonbible_hebrew_pby_ahad_haam.toml --corpus-config HEB_PBY_BIALIK=configs/nonbible_hebrew_pby_bialik.toml --corpus-config HEB_PBY_BRENNER=configs/nonbible_hebrew_pby_brenner.toml --corpus-config ENG_PG_SHAKESPEARE=configs/nonbible_english_pg_shakespeare.toml
 
-.PHONY: demo indexes test lint fast-validate release-ready public-release-check reader-doc-checks kjva-source-doc-checks local-data-doc-check protocol-files corpus-configs term-files script-tests check-script-tests check-script-wiring study-mapping-schemas public-reader-package-check expanded-strata-tooling-check expanded-strata-postprocess real-report public-reader-package report-db dynamic-full-span-hit-findings notable-passage-gaps thematic-chapter-absence match-strata-index boundary-alignment chapter-position-bias direction-asymmetry canonical-first-summary cross-skip-summary review-flag-summary hebrew-atbash-audit hebrew-albam-audit word-edge-pattern-audit word-skip-term-audit matrix-cluster-candidates matrix-cluster-control-summary cipher-layered-plain-hits cipher-layered-pairs cohort-cluster-density crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-broad-screening-findings crd-center-word-findings crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-self-surface-queue crd-self-surface-center-word crd-self-surface-center-word-density crd-self-surface-center-word-queue crd-self-surface-center-word-packet crd-self-surface-center-word-presence crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density crd-concept-surface-center-word-queue crd-concept-surface-center-word-packet crd-concept-surface-center-word-presence
+.PHONY: demo indexes test lint fast-validate release-ready public-release-check reader-doc-checks wrr-doc-checks kjva-source-doc-checks local-data-doc-check protocol-files corpus-configs term-files script-tests check-script-tests check-script-wiring study-mapping-schemas public-reader-package-check expanded-strata-tooling-check expanded-strata-postprocess real-report public-reader-package report-db dynamic-full-span-hit-findings notable-passage-gaps thematic-chapter-absence match-strata-index boundary-alignment chapter-position-bias direction-asymmetry canonical-first-summary cross-skip-summary review-flag-summary hebrew-atbash-audit hebrew-albam-audit word-edge-pattern-audit word-skip-term-audit matrix-cluster-candidates matrix-cluster-control-summary cipher-layered-plain-hits cipher-layered-pairs cohort-cluster-density crd-review-scaffold crd-review-scaffold-self crd-review-apply crd-review-check crd-check crd-deterministic crd-llm crd-parallel crd-broad-screening-findings crd-center-word-findings crd-self-surface-prepare crd-self-surface-run crd-self-surface-report crd-self-surface-queue crd-self-surface-center-word crd-self-surface-center-word-density crd-self-surface-center-word-queue crd-self-surface-center-word-packet crd-self-surface-center-word-presence crd-concept-surface-prepare crd-concept-surface-run crd-concept-surface-report crd-concept-surface-queue crd-concept-surface-center-word crd-concept-surface-center-word-density crd-concept-surface-center-word-queue crd-concept-surface-center-word-packet crd-concept-surface-center-word-presence
 
 demo:
 	python3 -m els.demo
@@ -41,6 +41,7 @@ fast-validate: test indexes
 	python3 -m scripts.check_public_release_hygiene --allow-dirty
 	python3 -m scripts.check_expanded_strata_tooling
 	$(MAKE) reader-doc-checks
+	$(MAKE) wrr-doc-checks
 	$(MAKE) kjva-source-doc-checks
 	python3 -m scripts.check_public_claim_language
 	$(MAKE) protocol-files
@@ -60,6 +61,7 @@ public-release-check:
 	python3 -m scripts.check_expanded_strata_tooling
 	python3 -m scripts.check_doc_command_references
 	$(MAKE) reader-doc-checks
+	$(MAKE) wrr-doc-checks
 	$(MAKE) kjva-source-doc-checks
 	python3 -m scripts.check_public_claim_language
 	$(MAKE) protocol-files
@@ -90,6 +92,51 @@ reader-doc-checks:
 	python3 -m scripts.check_wrr_no_input_handoff_status_doc
 	python3 -m scripts.check_cities_no_input_handoff_status_doc
 	python3 -m scripts.check_kjva_no_input_handoff_status_doc
+
+wrr-doc-checks:
+	python3 -m scripts.check_wrr_adjacent_source_audit_docs
+	python3 -m scripts.check_wrr_claim_blocker_packet_doc
+	python3 -m scripts.check_wrr_claim_readiness
+	python3 -m scripts.check_wrr_claim_readiness_doc
+	python3 -m scripts.check_wrr_cross_pair_grid_doc
+	python3 -m scripts.check_wrr_defined_diagnostic_docs
+	python3 -m scripts.check_wrr_direct_all_lanes_doc
+	python3 -m scripts.check_wrr_dw_formula_sensitivity_doc
+	python3 -m scripts.check_wrr_exact_gap_priority_packet_doc
+	python3 -m scripts.check_wrr_exact_reproduction_gap_dashboard_doc
+	python3 -m scripts.check_wrr_lock_options_doc
+	python3 -m scripts.check_wrr_locked_method_report_doc
+	python3 -m scripts.check_wrr_manual_decision_record_worksheet_doc
+	python3 -m scripts.check_wrr_manual_decision_records
+	python3 -m scripts.check_wrr_manual_decision_register_doc
+	python3 -m scripts.check_wrr_method_lane_wide_skip_probe_doc
+	python3 -m scripts.check_wrr_method_pair_universe_evidence_packet_doc
+	python3 -m scripts.check_wrr_method_status_doc
+	python3 -m scripts.check_wrr_no_input_handoff_status_doc
+	python3 -m scripts.check_wrr_post_lock_reporting_boundary_doc
+	python3 -m scripts.check_wrr_public_handoff_docs
+	python3 -m scripts.check_wrr_remaining_lane_evidence_packets_doc
+	python3 -m scripts.check_wrr_remaining_lane_review_checklist_doc
+	python3 -m scripts.check_wrr_residual_reconciliation_action_plan_doc
+	python3 -m scripts.check_wrr_residual_term_reconciliation_queue_doc
+	python3 -m scripts.check_wrr_source_audit_doc
+	python3 -m scripts.check_wrr_source_policy_evidence_packet_doc
+	python3 -m scripts.check_wrr_source_policy_review_checklist_doc
+	python3 -m scripts.check_wrr_source_policy_scenarios_doc
+	python3 -m scripts.check_wrr_source_recovery_probe_doc
+	python3 -m scripts.check_wrr_source_review_queue_doc
+	python3 -m scripts.check_wrr_source_row_coverage_packet_doc
+	python3 -m scripts.check_wrr_source_row_crop_contact_sheet_doc
+	python3 -m scripts.check_wrr_source_row_crop_packet_doc
+	python3 -m scripts.check_wrr_source_row_crop_review_html_doc
+	python3 -m scripts.check_wrr_source_row_ocr_word_packet_doc
+	python3 -m scripts.check_wrr_source_row_review_bundle_doc
+	python3 -m scripts.check_wrr_source_transcription_evidence_packet_doc
+	python3 -m scripts.check_wrr_source_transcription_row_review_checklist_doc
+	python3 -m scripts.check_wrr_source_visual_review_notes_doc
+	python3 -m scripts.check_wrr_support_docs_local_lock
+	python3 -m scripts.check_wrr_variant_gap_docs
+	python3 -m scripts.check_wrr_wayback_source_recovery_probe_doc
 
 kjva-source-doc-checks:
 	python3 -m scripts.check_kjva_current_source_lock_sidecar_doc

@@ -3134,6 +3134,19 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - This is a documentation/validation guard only. It does not change report
   conclusions, source policy, imported texts, ELS searches, or result status.
 
+## WRR Doc Direct Gate
+
+- Added `make wrr-doc-checks` for the WRR method, source-policy,
+  source-recovery, source-row, manual-decision, variant-gap, and local-lock
+  support documentation guards.
+- Wired the shared target into `make fast-validate` and
+  `make public-release-check`, so WRR support docs are checked before both
+  dirty-safe handoffs and clean releases.
+- Updated README validation guidance and Makefile guard tests to keep the
+  shared target visible.
+- This is a documentation/validation guard only. It does not change report
+  conclusions, source policy, imported texts, ELS searches, or result status.
+
 ## Clean-Lock Results Summary Guard
 
 - Added a dedicated guard for `docs/CLEAN_LOCK_RESULTS_SUMMARY.md` so the

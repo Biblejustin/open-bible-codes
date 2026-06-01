@@ -93,8 +93,9 @@ expanded-strata operator tooling, checks public claim language, and verifies
 the general-reader findings overview, real-report run documentation,
 consolidated findings, claim catalog, final-report assembly docs, final-report
 highlights, strongest-candidate packet, prospective workflow docs,
-public/no-input handoff docs, KJVA source-policy docs, protocol TOML files,
-corpus config schemas, term-file schema/normalization, all-script exact-test
+public/no-input handoff docs, WRR method/source/support docs,
+KJVA source-policy docs, protocol TOML files, corpus config schemas,
+term-file schema/normalization, all-script exact-test
 coverage, check-script wiring coverage, the study-mapping guard suite, a
 temporary public-reader package build, and local data doc references against
 the current ignored source caches.
@@ -117,6 +118,16 @@ make reader-doc-checks
 
 This runs the reader-facing documentation guards shared by `make
 fast-validate` and `make public-release-check`.
+
+WRR method/source/support checks only:
+
+```bash
+make wrr-doc-checks
+```
+
+This runs the WRR method, source-policy, source-recovery, source-row,
+manual-decision, variant-gap, and local-lock support documentation guards
+shared by `make fast-validate` and `make public-release-check`.
 
 KJVA source-policy checks only:
 
