@@ -12,6 +12,7 @@ REQUIRED_PHRASES_BY_DOC = {
     Path("README.md"): (
         "KJVA/apocrypha source-readiness is tracked separately",
         "9 handoff rows and 8 manual-input-needed rows",
+        "4 candidate-source audit rows with 0 result-ready candidate pages",
         "new independent KJVA result output blocked",
     ),
     Path("docs/REAL_REPORT_RUN.md"): (
@@ -20,6 +21,8 @@ REQUIRED_PHRASES_BY_DOC = {
     ),
     Path("docs/FINAL_REPORT.md"): (
         "The KJVA no-input handoff keeps that boundary in one place.",
+        "4 candidate-source audit rows, 0 verse-import-ready candidate pages, 0",
+        "result-ready candidate pages",
         "result allowed 0",
         "It is a source-readiness work map, not a new KJVA result.",
     ),
@@ -32,6 +35,8 @@ REQUIRED_PHRASES_BY_DOC = {
     Path("protocols/README.md"): (
         "KJVA no-input handoff at 9 handoff rows",
         "8 manual-input-needed rows",
+        "4 candidate-source audit rows",
+        "0 result-ready candidate pages",
         "result allowed 0",
     ),
     Path("reports/real_report_run/summary.md"): (

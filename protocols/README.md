@@ -37,7 +37,8 @@ KJVA apocrypha prospective boundary and next-replication planning, English
 source-basis, and English seed survivor-gate metadata, keeps the KJVA
 source-candidate status rollup at 0 ready independent replication sources,
 keeps the KJVA no-input handoff at 9 handoff rows, 8 manual-input-needed rows,
-and result allowed 0,
+4 candidate-source audit rows, 0 result-ready candidate pages, and result
+allowed 0,
 keeps the CrossWire, Gutenberg, Wikisource, and Open-Bibles source-candidate
 audits metadata-only, keeps the Gutenberg and Wikisource book-coverage probes
 source-coverage only,

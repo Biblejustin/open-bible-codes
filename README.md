@@ -154,7 +154,8 @@ handoff is tracked in `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`.
 KJVA/apocrypha source-readiness is tracked separately in
 `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`; it keeps the current eBible KJVA
 baseline as rerun-only, records 9 handoff rows and 8 manual-input-needed rows,
-and keeps new independent KJVA result output blocked.
+reads 4 candidate-source audit rows with 0 result-ready candidate pages, and
+keeps new independent KJVA result output blocked.
 
 Parallel batch-count benchmark:
 

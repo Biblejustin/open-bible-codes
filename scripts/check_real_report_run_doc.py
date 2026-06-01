@@ -87,6 +87,7 @@ REQUIRED_PHRASES = (
     "docs/KJVA_NEXT_RESULT_GATE.md",
     "KJVA no-input handoff status",
     "docs/KJVA_NO_INPUT_HANDOFF_STATUS.md",
+    "4 candidate-source audit rows, 0 result-ready candidate pages",
     "no-new-KJVA-result boundary",
 )
 

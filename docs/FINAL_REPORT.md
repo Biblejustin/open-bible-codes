@@ -297,8 +297,9 @@ The KJVA no-input handoff keeps that boundary in one place. It records 9
 handoff rows, 8 manual-input-needed rows, 11 next-result gates, 7
 source-policy blocker rows, the `SIR 44:23` Gutenberg gap, 0/15 Gutenberg
 Prayer of Manasseh markers, 5719/5720 Hakkaac exact normalized verse matches,
-and result allowed 0. It is a source-readiness work map, not a new KJVA
-result.
+4 candidate-source audit rows, 0 verse-import-ready candidate pages, 0
+result-ready candidate pages, and result allowed 0. It is a source-readiness
+work map, not a new KJVA result.
 
 Source artifacts:
 

@@ -322,7 +322,8 @@ It requires:
 - KJVA no-input handoff status consolidates 9 handoff rows, 8
   manual-input-needed rows, 11 next-result gates, 7 source-policy blocker
   rows, the `SIR 44:23` Gutenberg gap, 0/15 Gutenberg Prayer of Manasseh
-  markers, 5719/5720 Hakkaac exact normalized verse matches, and the
+  markers, 5719/5720 Hakkaac exact normalized verse matches, 4
+  candidate-source audit rows, 0 result-ready candidate pages, and the
   no-new-KJVA-result boundary;
 - KJVA Wikisource candidate source audit stays metadata-only, with no Bible
   text retained, no corpus import ready, and no result-bearing output;

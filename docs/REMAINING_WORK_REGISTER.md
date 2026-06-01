@@ -2850,3 +2850,16 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `reports/real_report_run/summary.md` KJVA handoff table, with guard checks in
   `scripts/check_kjva_no_input_handoff_status_doc.py` and
   `scripts/check_kjva_public_handoff_docs.py`.
+
+## KJVA Candidate-Source Public Handoff Sync
+
+- Surfaced the same KJVA candidate-source handoff counts in the public-facing
+  reader path: `README.md`, `docs/FINAL_REPORT.md`, `docs/REAL_REPORT_RUN.md`,
+  and `protocols/README.md`.
+- Current public wording now keeps this boundary visible outside the generated
+  handoff report: 4 candidate-source audit rows, 0 verse-import-ready
+  candidate pages, 0 result-ready candidate pages, and no new KJVA result
+  allowed.
+- Extended `scripts/check_kjva_public_handoff_docs.py` and
+  `scripts/check_real_report_run_doc.py` so the reader-facing docs cannot drop
+  those candidate-source counts while still claiming the handoff is current.
