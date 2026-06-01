@@ -2974,5 +2974,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   separately.
 - Tightened the package-input guard so `START_HERE` must contain packaged
   reader links and the README must retain a non-empty `Reader path:` section.
+- Extended the same packaged-reader-link guard to the final report's `Reader
+  Path` section and the real-report run's `Reader role` paragraph, while still
+  leaving their long support-doc inventories outside the public package.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.

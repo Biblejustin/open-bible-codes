@@ -34,6 +34,17 @@ def _default_doc_text(path: Path) -> str:
             "1. `docs/PROJECT_FINDINGS_OVERVIEW.md` for the whole-project findings summary.\n\n"
             "no current row should be presented as a public claim\n"
         )
+    if path == Path("docs/FINAL_REPORT.md"):
+        return (
+            "# Final Report\n\n"
+            "## Reader Path\n\n"
+            "Read `docs/START_HERE.md`, then `docs/PROJECT_FINDINGS_OVERVIEW.md`.\n"
+        )
+    if path == Path("docs/REAL_REPORT_RUN.md"):
+        return (
+            "# Real Report Run\n\n"
+            "Reader role: use `docs/START_HERE.md` and `docs/FINAL_REPORT.md`.\n"
+        )
     return f"# {path.name}\n\nbody\n"
 
 
@@ -118,6 +129,26 @@ def test_reader_package_includes_readme_reader_path_references() -> None:
     package_paths = set(package.DEFAULT_DOC_PATHS) | set(package.DEFAULT_REPORT_PATHS)
     text = Path("README.md").read_text(encoding="utf-8")
     section = package.extract_marked_section(text, "Reader path:")
+    references = sorted(set(package.PACKAGED_READER_LINK_RE.findall(section)))
+    assert references
+    for reference in references:
+        assert Path(reference) in package_paths
+
+
+def test_reader_package_includes_final_report_reader_path_references() -> None:
+    package_paths = set(package.DEFAULT_DOC_PATHS) | set(package.DEFAULT_REPORT_PATHS)
+    text = Path("docs/FINAL_REPORT.md").read_text(encoding="utf-8")
+    section = package.extract_marked_section(text, "## Reader Path")
+    references = sorted(set(package.PACKAGED_READER_LINK_RE.findall(section)))
+    assert references
+    for reference in references:
+        assert Path(reference) in package_paths
+
+
+def test_reader_package_includes_real_report_reader_role_references() -> None:
+    package_paths = set(package.DEFAULT_DOC_PATHS) | set(package.DEFAULT_REPORT_PATHS)
+    text = Path("docs/REAL_REPORT_RUN.md").read_text(encoding="utf-8")
+    section = package.extract_marked_section(text, "Reader role:")
     references = sorted(set(package.PACKAGED_READER_LINK_RE.findall(section)))
     assert references
     for reference in references:

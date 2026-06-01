@@ -62,6 +62,8 @@ PACKAGE_START_PATHS = (
 READER_LINK_SOURCE_PATHS = (Path("docs/START_HERE.md"),)
 READER_LINK_SECTION_MARKERS = {
     Path("README.md"): "Reader path:",
+    Path("docs/FINAL_REPORT.md"): "## Reader Path",
+    Path("docs/REAL_REPORT_RUN.md"): "Reader role:",
 }
 PACKAGED_READER_LINK_RE = re.compile(r"`((?:docs|reports)/[^`]+\.md)`")
 
