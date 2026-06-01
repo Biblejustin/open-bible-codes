@@ -3126,8 +3126,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Added `make study-support-checks` for centered-occurrence, critical-omission
   follow-up, English corpus policy, English seed-survivor, Greek second-cohort,
   hypothesis/source audit, Israeli Prime Ministers detail recovery, KJVA
-  prospective boundary, manual-review, prospective-lane, research
-  missing-model, and source-basis guards.
+  prospective boundary, manual-review, preregistration placeholder,
+  prospective-lane, research missing-model, and source-basis guards.
 - Wired the shared target into `make fast-validate` and
   `make public-release-check`, so non-lane support docs and planning guards are
   checked before both dirty-safe handoffs and clean releases.
@@ -3140,9 +3140,11 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 
 - Added a Makefile coverage test requiring every default-safe
   `scripts/check_*.py` module to be reachable through a Make validation target.
-- The only current exceptions are `check_preregistration_placeholders` and
-  `check_study_lock_manifest`, because both require explicit file/manifest
-  arguments and are validated through their contextual preflight/doc paths.
+- The preregistration placeholder checker is now called through
+  `make study-support-checks` against all concrete preregistration docs.
+- The only current exception is `check_study_lock_manifest`, because historical
+  lock manifests require explicit manifest paths/settings and many old
+  fingerprints intentionally fail after later documentation/tooling edits.
 - This is a validation guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 
