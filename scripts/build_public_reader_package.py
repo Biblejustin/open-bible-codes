@@ -301,7 +301,7 @@ def write_manifest(out_dir: Path, copied: list[CopiedFile]) -> None:
         "git_head": git_head(),
         "package_boundary": "whitelisted docs and formal report summary only; no raw source texts",
         "reader_path_guard": (
-            "project findings overview and README/START_HERE reader links validated before packaging"
+            "project findings overview and configured reader-link sources validated before packaging"
         ),
         "package_start_paths": [path.as_posix() for path in PACKAGE_START_PATHS],
         "reader_link_sources": {

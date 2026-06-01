@@ -2980,5 +2980,7 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Added public-reader package manifest metadata for package start paths and
   reader-link source sections, so the generated package records what link
   guard surface was checked.
+- Updated the manifest's reader-path guard description to match the current
+  configured reader-link source set.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
