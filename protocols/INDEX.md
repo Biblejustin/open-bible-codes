@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 194
+Protocols indexed: 195
 
 ## Analysis
 
@@ -162,7 +162,7 @@ Protocols indexed: 194
 | oet_english_controls | Open English Translation OET-LV/OET-RV control-corpus screening for generated English t... | 1 | terms/english_search_terms.csv | reports/oet_english_controls | `oet_english_controls.toml` |
 | openbible_english_controls | Open.Bible English NT control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/openbible_english_controls | `openbible_english_controls.toml` |
 | otb_english_controls | Open Translation Bible English UK control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/otb_english_controls | `otb_english_controls.toml` |
-| real_report_run | Formal report assembly run over locked STEP_TAHOT, Greek exact-center, doxa follow-ups,... | 72 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports, reports/all_codes_compound_extension_confirmatory, reports/all_codes_compound_... | `real_report_run.toml` |
+| real_report_run | Formal report assembly run over locked STEP_TAHOT, Greek exact-center, doxa follow-ups,... | 73 | terms/bible_and_science_codes_terms.csv, terms/bible_code_digest_claim_terms.csv, terms... | reports, reports/all_codes_compound_extension_confirmatory, reports/all_codes_compound_... | `real_report_run.toml` |
 | sblgnt_source_only_exact_center | Post-discovery 1000/1000 controls for SBLGNT source-only exact-center extension rows. | 2 |  | reports/sblgnt_source_only_exact_center | `sblgnt_source_only_exact_center.toml` |
 | step_tahot_control_policy_hits | Audit STEP_TAHOT-only control rows against TAHOT source-type policy. | 2 |  | reports/step_tahot_control_policy_hits, reports/step_tahot_control_version_presence | `step_tahot_control_policy_hits.toml` |
 | step_tahot_control_version_presence | Capped exact ELS hit-pattern presence for Hebrew null/frequency controls across MT-fami... | 1 | terms/frequency_anchors.csv, terms/null_controls.csv | reports/step_tahot_control_version_presence | `step_tahot_control_version_presence.toml` |
@@ -222,6 +222,7 @@ Protocols indexed: 194
 | wrr_corrected_distance_split_2 | Two-shard WRR corrected-distance diagnostic run and merge; local/Windows split compatible. | 4 |  | reports/wrr_1994 | `wrr_corrected_distance_split_2.toml` |
 | wrr_cross_pair_grid | Build the WRR2 appellation/date cross-pair grid and run cap-250 plus cap-1000 corrected... | 16 |  | reports/wrr_1994 | `wrr_cross_pair_grid.toml` |
 | wrr_method_lane_wide_skip_probe | Probe OCR-matched WRR method-lane terms for ordinary Genesis ELS hits beyond the select... | 1 |  | reports/wrr_1994 | `wrr_method_lane_wide_skip_probe.toml` |
+| wrr_no_input_handoff_status | Write the consolidated WRR no-input handoff status without selecting corrections or pro... | 1 |  | reports/wrr_1994 | `wrr_no_input_handoff_status.toml` |
 | wrr_source_import | Download external WRR audit files and convert WRR2 into repo term rows. | 3 |  | reports/wrr_1994 | `wrr_source_import.toml` |
 | wrr_source_recovery_probe | Live-refresh selected Torah-code research source labels into an isolated recovery-probe... | 2 |  | reports/wrr_source_recovery_probe | `wrr_source_recovery_probe.toml` |
 | wrr_wayback_source_recovery_probe | Probe Wayback snapshots for missing Torah-code research source pages into an isolated r... | 1 |  | reports/wrr_wayback_source_recovery_probe | `wrr_wayback_source_recovery_probe.toml` |

@@ -149,7 +149,8 @@ WRR-style reproduction requirements are tracked in
 `docs/WRR_METHODOLOGY_GAPS.md`, and the selected local lock summary in
 `docs/WRR_LOCKED_METHOD_REPORT.md`. The exact-published reproduction gap and
 recommended review order are tracked in
-`docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`.
+`docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`; the consolidated no-input
+handoff is tracked in `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`.
 
 Parallel batch-count benchmark:
 
@@ -811,6 +812,12 @@ WRR method-lane wide-skip probe:
 It checks those 11 OCR-matched method-lane terms through skip 5000; current
 output finds 0 wider-skip ordinary Genesis hits, so the lane is not explained
 by a small cap extension.
+WRR no-input handoff status:
+`docs/WRR_NO_INPUT_HANDOFF_STATUS.md`.
+It consolidates 9 handoff rows, 8 manual-input-needed rows, the 163 vs 72
+defined-distance gap, 37 manual-decision rows, and the no-new-result boundary
+without choosing source corrections, pair exclusions, replacement spellings, or
+method changes.
 WRR claim-blocker packet:
 `docs/WRR_CLAIM_BLOCKER_PACKET.md`.
 It mirrors the residual no-input handoff: top term targets,

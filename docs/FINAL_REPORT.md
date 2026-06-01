@@ -462,6 +462,11 @@ Genesis ELS probe through skip 5000. That does not settle the exact-published
 WRR gap, but it does rule out the simple explanation that these method-lane
 rows were only just beyond the selected skip cap.
 
+The no-input handoff now has one guarded status packet. It records 9 handoff
+rows, 8 manual-input-needed rows, the 163 vs 72 defined-distance gap, 37
+manual-decision rows, and a no-new-result boundary. It is a work map, not a new
+WRR result.
+
 The newer single-term Zacut diagnostics narrow the source-policy issue without
 settling it: `ZKWTA`, `ZKWTW`, `M$HZKWTA`, and `M$HZKWTW` each individually
 leave 163 >=5 pairs with gap 0 if excluded. That is diagnostic count evidence,
@@ -531,6 +536,7 @@ Source artifacts:
 - `docs/WRR_REMAINING_LANE_REVIEW_CHECKLIST.md`
 - `docs/WRR_MANUAL_DECISION_REGISTER.md`
 - `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md`
+- `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`
 - `docs/WRR_SOURCE_VISUAL_REVIEW_NOTES.md`
 - `docs/WRR_SOURCE_POLICY_SCENARIOS.md`
 - `docs/WRR_DW_FORMULA_SENSITIVITY.md`

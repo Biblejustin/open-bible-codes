@@ -115,6 +115,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertTrue(steps_by_id["real_report_summary"]["always_run"])
         self.assertIn("wrr_audit_counts", steps_by_id)
         self.assertIn("wrr_method_lane_wide_skip_probe", steps_by_id)
+        self.assertIn("wrr_no_input_handoff_status", steps_by_id)
         self.assertIn("wrr_cross_pair_grid", steps_by_id)
         self.assertIn(
             "scripts/analyze_wrr_source_policy_scenarios.py",
@@ -135,6 +136,26 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn(
             "scripts/check_project_findings_overview_doc.py",
             steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/build_wrr_no_input_handoff_status.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_wrr_no_input_handoff_status_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "protocols/wrr_no_input_handoff_status.toml",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "docs/WRR_NO_INPUT_HANDOFF_STATUS.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "reports/wrr_1994/wrr_no_input_handoff_status_summary.csv",
+            steps_by_id["wrr_no_input_handoff_status"]["outputs"],
         )
         self.assertIn("els/project_index.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("README.md", steps_by_id["preflight"]["inputs"])
@@ -3189,6 +3210,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn("wrr_manual_decision_record_worksheet_doc_failures", payload)
             self.assertIn("wrr_manual_decision_record_failures", payload)
             self.assertIn("wrr_method_lane_wide_skip_probe_doc_failures", payload)
+            self.assertIn("wrr_no_input_handoff_status_doc_failures", payload)
             self.assertIn("wrr_lock_options_doc_failures", payload)
             self.assertIn("wrr_method_status_doc_failures", payload)
             self.assertIn("stale_generated_indexes", payload)
@@ -4898,6 +4920,30 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "WRR method-lane wide-skip probe failures: "
                 "docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md missing boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_wrr_no_input_handoff_status_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_wrr_no_input_handoff_status_doc,
+                "validate_no_input_handoff_status_doc",
+                return_value=[
+                    "docs/WRR_NO_INPUT_HANDOFF_STATUS.md missing boundary"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["wrr_no_input_handoff_status_doc_failures"],
+                ["docs/WRR_NO_INPUT_HANDOFF_STATUS.md missing boundary"],
+            )
+            self.assertIn(
+                "WRR no-input handoff status failures: "
+                "docs/WRR_NO_INPUT_HANDOFF_STATUS.md missing boundary",
                 payload["failures"],
             )
 

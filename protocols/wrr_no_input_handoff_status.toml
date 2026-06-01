@@ -1,0 +1,28 @@
+name = "wrr_no_input_handoff_status"
+description = "Write the consolidated WRR no-input handoff status without selecting corrections or producing new results."
+manifest_out = "reports/wrr_1994/wrr_no_input_handoff_status_protocol.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "wrr_no_input_handoff_status"
+description = "Gather current WRR claim-readiness, exact-gap, residual-lane, manual-decision, and method-lane status into one guarded handoff."
+argv = ["-m", "scripts.build_wrr_no_input_handoff_status"]
+inputs = [
+  "scripts/build_wrr_no_input_handoff_status.py",
+  "reports/wrr_1994/wrr_claim_readiness.csv",
+  "reports/wrr_1994/wrr_claim_blocker_packet.csv",
+  "reports/wrr_1994/wrr_exact_gap_priority_packet_summary.csv",
+  "reports/wrr_1994/wrr_residual_reconciliation_action_summary.csv",
+  "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv",
+  "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
+  "reports/wrr_1994/wrr_manual_decision_register_summary.csv",
+  "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
+  "reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_no_input_handoff_status.csv",
+  "reports/wrr_1994/wrr_no_input_handoff_status_summary.csv",
+  "docs/WRR_NO_INPUT_HANDOFF_STATUS.md",
+  "reports/wrr_1994/wrr_no_input_handoff_status.manifest.json",
+]

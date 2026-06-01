@@ -633,6 +633,10 @@ lock options plus the claim-blocker packet, including visual triage notes. It
 also runs the method-lane wide-skip probe: the 11 OCR-matched method-lane terms
 have 0 ordinary Genesis hits through skip 5000, so that lane is not explained
 by a small cap extension.
+The consolidated no-input handoff is in
+`docs/WRR_NO_INPUT_HANDOFF_STATUS.md`; it records the current 9 handoff rows,
+8 manual-input-needed rows, 163 vs 72 defined-distance gap, and no-new-result
+boundary.
 It also writes `docs/WRR_SOURCE_ROW_CROP_REVIEW_HTML.md`, an ignored local
 HTML review aid that displays the 22 generated source-row crop images only,
 without OCR body text, source-script text, row transcription, source

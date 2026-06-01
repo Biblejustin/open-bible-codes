@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 422
+Documents indexed: 423
 
 ## Controls
 
@@ -112,6 +112,7 @@ Documents indexed: 422
 | WRR Method-Lane Wide-Skip Probe | `WRR_METHOD_LANE_WIDE_SKIP_PROBE.md` |
 | WRR Method/Pair-Universe Evidence Packet | `WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md` |
 | WRR Method Status | `WRR_METHOD_STATUS.md` |
+| WRR No-Input Handoff Status | `WRR_NO_INPUT_HANDOFF_STATUS.md` |
 | WRR Post-Lock Reporting Boundary | `WRR_POST_LOCK_REPORTING_BOUNDARY.md` |
 | WRR Remaining-Lane Evidence Packets | `WRR_REMAINING_LANE_EVIDENCE_PACKETS.md` |
 | WRR Remaining-Lane Review Checklist | `WRR_REMAINING_LANE_REVIEW_CHECKLIST.md` |

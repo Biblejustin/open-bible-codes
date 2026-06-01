@@ -284,6 +284,7 @@ inputs = [
   "docs/WRR_MANUAL_DECISION_RECORD_WORKSHEET.md",
   "docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md",
   "docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md",
+  "docs/WRR_NO_INPUT_HANDOFF_STATUS.md",
   "docs/WRR_SOURCE_POLICY_SCENARIOS.md",
   "docs/WRR_DW_FORMULA_SENSITIVITY.md",
   "docs/CRD_FRAMEWORK.md",
@@ -732,6 +733,8 @@ inputs = [
   "scripts/check_wrr_method_pair_universe_evidence_packet_doc.py",
   "scripts/analyze_wrr_method_lane_wide_skip.py",
   "scripts/check_wrr_method_lane_wide_skip_probe_doc.py",
+  "scripts/build_wrr_no_input_handoff_status.py",
+  "scripts/check_wrr_no_input_handoff_status_doc.py",
   "scripts/check_wrr_source_policy_scenarios_doc.py",
   "scripts/analyze_wrr_dw_formula_sensitivity.py",
   "scripts/check_wrr_dw_formula_sensitivity_doc.py",
@@ -850,6 +853,7 @@ inputs = [
   "protocols/wrr_source_recovery_probe.toml",
   "protocols/wrr_wayback_source_recovery_probe.toml",
   "protocols/wrr_method_lane_wide_skip_probe.toml",
+  "protocols/wrr_no_input_handoff_status.toml",
   "protocols/cities_pdf_recovery_probe.toml",
   "protocols/cities_recovered_pdf_text_audit.toml",
   "protocols/cities_source_review_queue.toml",
@@ -1365,6 +1369,31 @@ outputs = [
   "reports/wrr_1994/wrr_exact_gap_priority_packet_summary.csv",
   "docs/WRR_EXACT_GAP_PRIORITY_PACKET.md",
   "reports/wrr_1994/wrr_exact_gap_priority_packet.manifest.json",
+]
+
+[[steps]]
+id = "wrr_no_input_handoff_status"
+description = "Refresh the consolidated WRR no-input handoff after WRR gap and method diagnostics."
+argv = ["-m", "scripts.run_protocol", "protocols/wrr_no_input_handoff_status.toml", "--resume"]
+inputs = [
+  "protocols/wrr_no_input_handoff_status.toml",
+  "scripts/build_wrr_no_input_handoff_status.py",
+  "reports/wrr_1994/wrr_claim_readiness.csv",
+  "reports/wrr_1994/wrr_claim_blocker_packet.csv",
+  "reports/wrr_1994/wrr_exact_gap_priority_packet_summary.csv",
+  "reports/wrr_1994/wrr_residual_reconciliation_action_summary.csv",
+  "reports/wrr_1994/wrr_source_transcription_evidence_row_summary.csv",
+  "reports/wrr_1994/wrr_remaining_lane_evidence_summary.csv",
+  "reports/wrr_1994/wrr_manual_decision_register_summary.csv",
+  "reports/wrr_1994/wrr_method_pair_universe_evidence_summary.csv",
+  "reports/wrr_1994/wrr_method_lane_wide_skip_probe_summary.csv",
+]
+outputs = [
+  "reports/wrr_1994/wrr_no_input_handoff_status_protocol.manifest.json",
+  "reports/wrr_1994/wrr_no_input_handoff_status.csv",
+  "reports/wrr_1994/wrr_no_input_handoff_status_summary.csv",
+  "docs/WRR_NO_INPUT_HANDOFF_STATUS.md",
+  "reports/wrr_1994/wrr_no_input_handoff_status.manifest.json",
 ]
 
 [[steps]]

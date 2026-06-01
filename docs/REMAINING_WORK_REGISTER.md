@@ -1766,8 +1766,11 @@ doc, final report files, consolidated findings, claim catalog, start-here doc,
 outline, remaining-work register, and protocol README against stale WRR blocker
 or method-lane wide-skip wording. It is wired into report preflight and treats
 public handoff drift as a formal preflight failure.
-The next WRR work is therefore source/term/pair-rule reconciliation plus method
-and pair-universe decisions before any exact published reproduction language.
+`docs/WRR_NO_INPUT_HANDOFF_STATUS.md` now consolidates that WRR state into 9
+handoff rows, 8 manual-input-needed rows, the 163 vs 72 defined-distance gap,
+37 manual-decision rows, and a no-new-result boundary. The next WRR work is
+therefore source/term/pair-rule reconciliation plus method and pair-universe
+decisions before any exact published reproduction language.
 
 ### 2. Source-Basis Audit Queue
 
@@ -2756,3 +2759,26 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/build_kjva_next_result_gate.py`, and
   `scripts/check_kjva_next_result_gate_doc.py`, and wired the gate into
   `scripts/preflight_real_report_run.py` plus `protocols/real_report_run.toml`.
+
+## WRR No-Input Handoff Status
+
+- Added `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` as a consolidated non-result
+  handoff for current WRR no-input work.
+- Current status: 9 handoff rows, 9 handoff-ready rows, 8
+  manual-input-needed rows, 4/4 local claim-readiness rows ready, 0
+  claim-blocker rows, 163 source-cited defined distances, 72 current defined
+  distances, and 91 remaining gap.
+- Current review load: 4 residual lanes, 58 action terms, 59 residual pairs,
+  40 frontier pairs, 37 manual-decision rows, 22 source-transcription row
+  clusters, 3 page-image near-match terms, and 11 method/pair-universe terms.
+- Current result boundary: new WRR result allowed 0, exact published
+  reproduction ready 0, and claim boundary
+  `local_locked_method_ready_exact_published_open`.
+- This handoff does not create a new WRR result, reproduce published WRR,
+  select source corrections, select pair exclusions, lock replacement
+  spellings, or change method rules.
+- Added `protocols/wrr_no_input_handoff_status.toml`,
+  `scripts/build_wrr_no_input_handoff_status.py`, and
+  `scripts/check_wrr_no_input_handoff_status_doc.py`, and wired the handoff
+  into `scripts/preflight_real_report_run.py` plus
+  `protocols/real_report_run.toml`.

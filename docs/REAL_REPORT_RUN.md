@@ -95,6 +95,7 @@ This assembly run includes:
   `docs/WRR_MANUAL_DECISION_REGISTER.md`,
   `docs/WRR_MANUAL_DECISION_RECORD_WORKSHEET.md`,
   `docs/WRR_METHOD_PAIR_UNIVERSE_EVIDENCE_PACKET.md`,
+  `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`,
   `docs/WRR_DW_FORMULA_SENSITIVITY.md`, `docs/WRR_CLAIM_READINESS.md`, and
   `docs/WRR_CLAIM_BLOCKER_PACKET.md`,
   `docs/WRR_LOCKED_METHOD_REPORT.md`,
@@ -392,6 +393,9 @@ It requires:
 - WRR manual decision-record worksheet lists the exact rank/lane/target fields
   plus current record status, selected action, and evidence prompt for all 37
   lock rows;
+- WRR no-input handoff status consolidates 9 handoff rows, 8
+  manual-input-needed rows, the 163 vs 72 defined-distance gap, 37
+  manual-decision rows, and the no-new-result boundary;
 - checked-in `docs/INDEX.md` and `protocols/INDEX.md` freshness;
 - existing generated inputs needed by the final gates.
 
@@ -519,7 +523,9 @@ The report-run summary should currently say:
   OCR-matched method-lane terms with zero current appellation hits;
   `docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md` shows that the same 11 terms still
   have 0 ordinary Genesis hits through skip 5000, so the method lane is not a
-  near-cap miss.
+  near-cap miss; `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` rolls those current
+  blockers into one no-input status packet with 9 handoff rows and no new WRR
+  result allowed.
 - `υιοσ` (huios; English: son) and `αιμα` (haima; English: blood) remain weaker hidden-path candidates because their exact
   patterns are missing from one or more compared Greek NT sources.
 - no row is claim-grade yet.
