@@ -25,6 +25,7 @@ from scripts import (
     check_claim_catalog_doc,
     check_cities_claim_catalog_boundary,
     check_cities_extractable_text_review_doc,
+    check_cities_no_input_handoff_status_doc,
     check_cities_public_handoff_docs,
     check_crd_relevance_dictionary,
     check_cities_pdf_recovery_probe_doc,
@@ -236,6 +237,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_centered_occurrence_index_doc.py",
     "scripts/check_claim_catalog_doc.py",
     "scripts/check_cities_claim_catalog_boundary.py",
+    "scripts/build_cities_no_input_handoff_status.py",
+    "scripts/check_cities_no_input_handoff_status_doc.py",
     "scripts/check_real_report_run_doc.py",
     "scripts/check_critical_omission_followup_docs.py",
     "scripts/check_strongest_candidate_deep_dive_doc.py",
@@ -316,6 +319,7 @@ DEFAULT_REQUIRED_PATHS = [
     "protocols/cities_source_page_line_crop_priority_review_worksheet.toml",
     "protocols/cities_source_page_line_crop_review_worksheet.toml",
     "protocols/cities_extractable_text_review.toml",
+    "protocols/cities_no_input_handoff_status.toml",
     "data/study/mappings/cities_source_row_lock_decisions.csv",
     "data/study/mappings/cities_source_transcription_decisions.csv",
     "protocols/centered_relevance_density.toml",
@@ -411,6 +415,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_REVIEW_WORKSHEET.md",
     "docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_WORKSHEET.md",
     "docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md",
+    "docs/CITIES_NO_INPUT_HANDOFF_STATUS.md",
     "docs/EVENT_OBJECT_EXPERIMENT_SOURCE_AUDIT.md",
     "docs/UNDER_CONSTRUCTION_EXPERIMENT_SOURCE_AUDIT.md",
     "docs/HYPOTHESIS_TESTING_SOURCE_AUDIT.md",
@@ -1001,6 +1006,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_cities_source_page_line_crop_review_worksheet_doc.py",
     "scripts/build_cities_extractable_text_review.py",
     "scripts/check_cities_extractable_text_review_doc.py",
+    "scripts/build_cities_no_input_handoff_status.py",
+    "scripts/check_cities_no_input_handoff_status_doc.py",
     "scripts/check_hypothesis_testing_source_audit_doc.py",
     "scripts/check_israeli_prime_ministers_detail_recovery_probe_doc.py",
     "scripts/check_research_missing_model_pages_audit_doc.py",
@@ -2537,6 +2544,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(cities_extractable_text_review_doc_failures)
         )
 
+    cities_no_input_handoff_status_doc_failures = (
+        check_cities_no_input_handoff_status_doc.validate_cities_no_input_handoff_doc(
+            check_cities_no_input_handoff_status_doc.DEFAULT_DOC
+        )
+    )
+    if cities_no_input_handoff_status_doc_failures:
+        failures.append(
+            "Cities no-input handoff status doc failures: "
+            + "; ".join(cities_no_input_handoff_status_doc_failures)
+        )
+
     hypothesis_testing_source_audit_doc_failures = (
         check_hypothesis_testing_source_audit_doc.validate_hypothesis_testing_source_audit_doc(
             check_hypothesis_testing_source_audit_doc.DEFAULT_DOC
@@ -2899,6 +2917,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "cities_extractable_text_review_doc_failures": (
             cities_extractable_text_review_doc_failures
+        ),
+        "cities_no_input_handoff_status_doc_failures": (
+            cities_no_input_handoff_status_doc_failures
         ),
         "hypothesis_testing_source_audit_doc_failures": hypothesis_testing_source_audit_doc_failures,
         "israeli_prime_ministers_detail_recovery_doc_failures": (

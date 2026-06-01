@@ -1,0 +1,29 @@
+name = "cities_no_input_handoff_status"
+description = "Write the consolidated Cities no-input handoff status without importing source rows or producing results."
+manifest_out = "reports/cities_no_input_handoff_status/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "cities_no_input_handoff_status"
+description = "Gather current Cities source-row locks, transcription worksheet, OCR review aids, and line-crop review status into one guarded handoff."
+argv = ["-m", "scripts.build_cities_no_input_handoff_status"]
+inputs = [
+  "scripts/build_cities_no_input_handoff_status.py",
+  "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue_summary.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_row_lock_evidence_summary.csv",
+  "data/study/mappings/cities_source_row_lock_decisions.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_transcription_review_worksheet.csv",
+  "data/study/mappings/cities_source_transcription_decisions.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_review_bundle_summary.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_ocr_review_packet_summary.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet_summary.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_priority_contact_sheet_summary.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_priority_review_worksheet_summary.csv",
+]
+outputs = [
+  "reports/cities_no_input_handoff_status/status.csv",
+  "reports/cities_no_input_handoff_status/summary.csv",
+  "docs/CITIES_NO_INPUT_HANDOFF_STATUS.md",
+  "reports/cities_no_input_handoff_status/manifest.json",
+]

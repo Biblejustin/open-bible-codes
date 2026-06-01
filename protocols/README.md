@@ -323,6 +323,9 @@ imported, and no city-name normalization, ELS searches, compactness runs, or
 p-levels. Current decision-record paths:
 `data/study/mappings/cities_source_row_lock_decisions.csv` and
 `data/study/mappings/cities_source_transcription_decisions.csv`.
+Consolidated no-input handoff: `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`
+keeps 8 handoff rows, 6 manual-input-needed rows, 14 transcription review
+rows, 203 priority line-crop review rows, and no Cities result allowed.
 
 Cities source-transcription review worksheet:
 

@@ -2876,3 +2876,19 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/check_consolidated_findings_doc.py` so those broader summary docs
   cannot describe the KJVA bridge lane without the current source-readiness
   blocker.
+
+## Cities No-Input Handoff Status
+
+- Added `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md` as the consolidated no-input
+  packet for the Cities/Aumann/Simon-McKay source-row lane.
+- Current Cities no-input handoff summary: 8 handoff rows, 6
+  manual-input-needed rows, 14 transcription review rows, 203 priority
+  line-crop review rows, and no Cities result allowed.
+- The packet keeps the existing source-row lock handoff boundary visible: 14
+  source-row lock candidate pages, 14 populated lock rows, 14 pending
+  transcription-review rows, no source rows imported, and no city-name
+  normalization, ELS searches, compactness runs, or p-levels.
+- Added `scripts/build_cities_no_input_handoff_status.py`,
+  `scripts/check_cities_no_input_handoff_status_doc.py`, and
+  `protocols/cities_no_input_handoff_status.toml`; wired the checker into
+  preflight and the protocol into `protocols/real_report_run.toml`.

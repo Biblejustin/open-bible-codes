@@ -50,6 +50,8 @@ inputs = [
   "scripts/check_claim_catalog_doc.py",
   "scripts/check_cities_claim_catalog_boundary.py",
   "scripts/check_cities_public_handoff_docs.py",
+  "scripts/build_cities_no_input_handoff_status.py",
+  "scripts/check_cities_no_input_handoff_status_doc.py",
   "scripts/analyze_kjva_hakkaac_apocrypha_boundary_candidate.py",
   "scripts/check_kjva_hakkaac_apocrypha_boundary_candidate_doc.py",
   "scripts/analyze_kjva_hakkaac_apocrypha_marker_coverage.py",
@@ -75,6 +77,7 @@ inputs = [
   "docs/START_HERE.md",
   "docs/PROJECT_FINDINGS_OVERVIEW.md",
   "docs/REAL_REPORT_RUN.md",
+  "docs/CITIES_NO_INPUT_HANDOFF_STATUS.md",
   "docs/REMAINING_WORK_REGISTER.md",
   "protocols/README.md",
   "protocols/real_report_run.toml",
@@ -146,6 +149,7 @@ inputs = [
   "protocols/cities_source_page_line_crop_priority_review_worksheet.toml",
   "protocols/cities_source_page_line_crop_review_worksheet.toml",
   "protocols/cities_extractable_text_review.toml",
+  "protocols/cities_no_input_handoff_status.toml",
   "data/study/mappings/cities_source_row_lock_decisions.csv",
   "data/study/mappings/cities_source_transcription_decisions.csv",
   "protocols/centered_relevance_density.toml",
@@ -833,6 +837,8 @@ inputs = [
   "scripts/check_cities_source_page_line_crop_review_worksheet_doc.py",
   "scripts/build_cities_extractable_text_review.py",
   "scripts/check_cities_extractable_text_review_doc.py",
+  "scripts/build_cities_no_input_handoff_status.py",
+  "scripts/check_cities_no_input_handoff_status_doc.py",
   "scripts/check_hypothesis_testing_source_audit_doc.py",
   "scripts/check_israeli_prime_ministers_detail_recovery_probe_doc.py",
   "scripts/check_research_missing_model_pages_audit_doc.py",
@@ -891,6 +897,7 @@ inputs = [
   "protocols/cities_source_page_line_crop_priority_review_worksheet.toml",
   "protocols/cities_source_page_line_crop_review_worksheet.toml",
   "protocols/cities_extractable_text_review.toml",
+  "protocols/cities_no_input_handoff_status.toml",
   "terms/relevance_dictionary.toml",
   "prompts/crd_classifier_v1/system.md",
   "prompts/crd_classifier_v1/user_template.md",
@@ -2383,6 +2390,32 @@ outputs = [
 ]
 
 [[steps]]
+id = "cities_no_input_handoff_status"
+description = "Consolidate Cities no-input source-review blockers without importing source rows or producing a result."
+argv = ["-m", "scripts.run_protocol", "protocols/cities_no_input_handoff_status.toml", "--resume"]
+inputs = [
+  "protocols/cities_no_input_handoff_status.toml",
+  "scripts/build_cities_no_input_handoff_status.py",
+  "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue_summary.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_row_lock_evidence_summary.csv",
+  "data/study/mappings/cities_source_row_lock_decisions.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_transcription_review_worksheet.csv",
+  "data/study/mappings/cities_source_transcription_decisions.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_review_bundle_summary.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_ocr_review_packet_summary.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet_summary.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_priority_contact_sheet_summary.csv",
+  "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_priority_review_worksheet_summary.csv",
+]
+outputs = [
+  "reports/cities_no_input_handoff_status/protocol_run.manifest.json",
+  "reports/cities_no_input_handoff_status/status.csv",
+  "reports/cities_no_input_handoff_status/summary.csv",
+  "docs/CITIES_NO_INPUT_HANDOFF_STATUS.md",
+  "reports/cities_no_input_handoff_status/manifest.json",
+]
+
+[[steps]]
 id = "real_report_summary"
 description = "Build one compact formal report-run summary from locked outputs."
 argv = ["-m", "scripts.build_real_report_run_summary"]
@@ -2492,6 +2525,8 @@ inputs = [
   "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_review_worksheet.csv",
   "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_review_worksheet.manifest.json",
   "data/study/mappings/cities_source_transcription_decisions.csv",
+  "reports/cities_no_input_handoff_status/summary.csv",
+  "reports/cities_no_input_handoff_status/manifest.json",
   "reports/hebrew_modern_geopolitical_controlled_review/controlled.manifest.json",
   "reports/hebrew_modern_geopolitical_prospective/protocol_run.manifest.json",
   "reports/hebrew_modern_geopolitical_prospective/controlled_report.manifest.json",

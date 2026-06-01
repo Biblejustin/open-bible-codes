@@ -848,6 +848,9 @@ visual triage; no source rows imported, and no city-name normalization, ELS
 searches, compactness runs, or p-levels.
 This is source-review organization only; it does not create a Cities
 result-bearing corpus, compactness test, or public claim.
+`docs/CITIES_NO_INPUT_HANDOFF_STATUS.md` consolidates that status into 8
+handoff rows, 6 manual-input-needed rows, 14 transcription review rows, 203
+priority line-crop review rows, and no Cities result allowed.
 
 ## Best Next Work
 

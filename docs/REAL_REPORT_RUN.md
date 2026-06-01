@@ -123,6 +123,7 @@ This assembly run includes:
   `docs/CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_REVIEW_HTML.md`,
   `docs/CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_REVIEW_WORKSHEET.md`,
   `docs/CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_WORKSHEET.md`,
+  `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`,
   `data/study/mappings/cities_source_row_lock_decisions.csv`, and
   `data/study/mappings/cities_source_transcription_decisions.csv`. Cities
   source-row lock handoff: 14 source-row lock candidate pages, 14 populated
@@ -137,6 +138,10 @@ This assembly run includes:
   worksheet, and a 203-row line-crop review worksheet; no
   source rows imported, and no
   city-name normalization, ELS searches, compactness runs, or p-levels.
+  Cities no-input handoff status: `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`
+  consolidates 8 handoff rows, 6 manual-input-needed rows, 14 transcription
+  review rows, 203 priority line-crop review rows, and the no-source-import /
+  no-Cities-result boundary, with no Cities result allowed.
 - broader search/current findings writeup:
   `docs/BROADER_SEARCH_FINDINGS.md`
 - broad Hebrew modern/geopolitical version-distribution run:
@@ -393,6 +398,9 @@ It requires:
   candidate pages, 14 populated lock rows, 14 pending transcription-review
   rows, no source rows imported, and no city-name normalization, ELS searches,
   compactness runs, or p-levels;
+- Cities no-input handoff status keeps 8 handoff rows, 6 manual-input-needed
+  rows, 14 transcription review rows, 203 priority line-crop review rows, and
+  the no-source-import/no-Cities-result boundary in one guarded packet;
 - WRR manual decision register consolidates 37 manual-decision inventory rows,
   representing 58 action terms, 59 residual pair links, and 40
   minimum-frontier pair links without selecting corrections or exclusions;

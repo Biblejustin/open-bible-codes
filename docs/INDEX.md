@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 424
+Documents indexed: 425
 
 ## Controls
 
@@ -236,6 +236,7 @@ Documents indexed: 424
 | Centered Occurrence Index | `CENTERED_OCCURRENCE_INDEX.md` |
 | Chapter Position Bias | `CHAPTER_POSITION_BIAS.md` |
 | Cities Extractable Text Review | `CITIES_EXTRACTABLE_TEXT_REVIEW.md` |
+| Cities No-Input Handoff Status | `CITIES_NO_INPUT_HANDOFF_STATUS.md` |
 | Cities PDF Recovery Probe | `CITIES_PDF_RECOVERY_PROBE.md` |
 | Cities Recovered PDF Text Audit | `CITIES_RECOVERED_PDF_TEXT_AUDIT.md` |
 | Cities Source Chain Audit | `CITIES_SOURCE_CHAIN_AUDIT.md` |

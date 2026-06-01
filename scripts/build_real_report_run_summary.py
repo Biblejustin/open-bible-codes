@@ -151,6 +151,8 @@ CITIES_SOURCE_PAGE_LINE_CROP_PRIORITY_REVIEW_WORKSHEET_SUMMARY = Path(
 CITIES_SOURCE_PAGE_LINE_CROP_REVIEW_WORKSHEET = Path(
     "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_review_worksheet.csv"
 )
+CITIES_NO_INPUT_HANDOFF_SUMMARY = Path("reports/cities_no_input_handoff_status/summary.csv")
+CITIES_NO_INPUT_HANDOFF_MANIFEST = Path("reports/cities_no_input_handoff_status/manifest.json")
 HEBREW_THEOLOGY_ALL_CODES_TRIAGE_MANIFEST = Path(
     "reports/hebrew_theology_all_codes/triage.manifest.json"
 )
@@ -2322,6 +2324,8 @@ def read_rows(path: Path) -> list[dict[str, str]]:
 def cities_source_row_lock_section() -> list[str]:
     queue_summary = metric_dict(read_rows(CITIES_SOURCE_ROW_LOCK_QUEUE_SUMMARY))
     evidence_summary = metric_dict(read_rows(CITIES_SOURCE_ROW_LOCK_EVIDENCE_SUMMARY))
+    no_input_summary_rows = read_rows(CITIES_NO_INPUT_HANDOFF_SUMMARY)
+    no_input_summary = no_input_summary_rows[0] if no_input_summary_rows else {}
     ocr_summary = metric_dict(read_rows(CITIES_SOURCE_PAGE_OCR_REVIEW_PACKET_SUMMARY))
     ocr_html_summary = metric_dict(read_rows(CITIES_SOURCE_PAGE_OCR_REVIEW_HTML_SUMMARY))
     line_crop_summary = metric_dict(read_rows(CITIES_SOURCE_PAGE_LINE_CROP_PACKET_SUMMARY))
@@ -2407,6 +2411,9 @@ def cities_source_row_lock_section() -> list[str]:
         f"| Local line crop priority HTML image rows | {line_crop_priority_html_summary.get('html_priority_image_rows', '0')} |",
         f"| Local line crop priority worksheet rows | {line_crop_priority_review_summary.get('priority_review_rows', '0')} |",
         f"| Local line crop worksheet rows | {len(line_crop_worksheet_rows)} |",
+        f"| No-input handoff rows | {no_input_summary.get('status_rows', '0')} |",
+        f"| No-input manual-input-needed rows | {no_input_summary.get('manual_input_needed_rows', '0')} |",
+        f"| No-input result allowed | {int(bool_from_csv(no_input_summary.get('result_allowed')))} |",
         f"| Source-row imports | {evidence_summary.get('source_row_imports', '0')} |",
         f"| ELS runs | {evidence_summary.get('els_runs', '0')} |",
         f"| Compactness runs | {evidence_summary.get('compactness_runs', '0')} |",
@@ -2418,11 +2425,22 @@ def cities_source_row_lock_section() -> list[str]:
         "does not match the 14-row evidence packet or that contains source-script",
         "text, unsupported status/action values, missing evidence, or non-ISO lock",
         "dates.",
+        "The consolidated no-input packet is tracked in",
+        "`docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`; it keeps the current",
+        f"{no_input_summary.get('status_rows', '0')} handoff rows,",
+        f"{no_input_summary.get('manual_input_needed_rows', '0')} manual-input-needed rows,",
+        f"{no_input_summary.get('transcription_review_rows', '0')} transcription review rows,",
+        f"{no_input_summary.get('priority_review_rows', '0')} priority line-crop review rows,",
+        "and no-source-import/no-Cities-result boundary in one file.",
     ]
 
 
 def metric_dict(rows: list[dict[str, str]]) -> dict[str, str]:
     return {row.get("metric", ""): row.get("value", "") for row in rows}
+
+
+def bool_from_csv(value: object) -> bool:
+    return str(value).strip().lower() in {"1", "true", "yes"}
 
 
 def all_codes_triage_section(

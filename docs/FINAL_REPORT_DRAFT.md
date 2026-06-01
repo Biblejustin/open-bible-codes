@@ -375,8 +375,12 @@ The handoff is source-review only and is tracked in
 `docs/CITIES_SOURCE_TRANSCRIPTION_REVIEW_WORKSHEET.md`,
 `docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md`,
 `docs/CITIES_SOURCE_PAGE_LINE_CROP_TRIAGE.md`,
+`docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`,
 `data/study/mappings/cities_source_row_lock_decisions.csv`, and
 `data/study/mappings/cities_source_transcription_decisions.csv`.
+The consolidated Cities no-input handoff keeps 8 handoff rows, 6
+manual-input-needed rows, 14 transcription review rows, 203 priority
+line-crop review rows, and no Cities result allowed.
 
 ## Negative And Weak Results
 

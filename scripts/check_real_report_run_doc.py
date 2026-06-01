@@ -26,6 +26,8 @@ EXPECTED_GENERATED_OUTPUTS = (
 EXPECTED_PREFLIGHT_INPUTS = (
     "scripts/preflight_real_report_run.py",
     "scripts/check_real_report_run_doc.py",
+    "scripts/build_cities_no_input_handoff_status.py",
+    "scripts/check_cities_no_input_handoff_status_doc.py",
     "docs/REAL_REPORT_RUN.md",
     "protocols/real_report_run.toml",
     "Makefile",
@@ -38,6 +40,8 @@ EXPECTED_SUMMARY_INPUTS = (
     "reports/wrr_1994/wrr_no_input_handoff_status_summary.csv",
     "reports/wrr_1994/wrr_no_input_handoff_status.manifest.json",
     "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue_summary.csv",
+    "reports/cities_no_input_handoff_status/summary.csv",
+    "reports/cities_no_input_handoff_status/manifest.json",
     "reports/kjva_no_input_handoff_status/summary.csv",
     "reports/kjva_no_input_handoff_status/manifest.json",
     "reports/final_report_highlights/highlights.csv",
@@ -51,6 +55,27 @@ EXPECTED_KJVA_HANDOFF_PREREQ_STEPS = (
     "kjva_open_bibles_candidate_source_audit",
     "kjva_wikisource_candidate_source_audit",
     "kjva_wikisource_book_coverage_probe",
+)
+EXPECTED_CITIES_HANDOFF_INPUTS = (
+    "protocols/cities_no_input_handoff_status.toml",
+    "scripts/build_cities_no_input_handoff_status.py",
+    "reports/cities_pdf_recovery_probe/cities_source_row_lock_queue_summary.csv",
+    "reports/cities_pdf_recovery_probe/cities_source_row_lock_evidence_summary.csv",
+    "data/study/mappings/cities_source_row_lock_decisions.csv",
+    "reports/cities_pdf_recovery_probe/cities_source_transcription_review_worksheet.csv",
+    "data/study/mappings/cities_source_transcription_decisions.csv",
+    "reports/cities_pdf_recovery_probe/cities_source_page_review_bundle_summary.csv",
+    "reports/cities_pdf_recovery_probe/cities_source_page_ocr_review_packet_summary.csv",
+    "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_packet_summary.csv",
+    "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_priority_contact_sheet_summary.csv",
+    "reports/cities_pdf_recovery_probe/cities_source_page_line_crop_priority_review_worksheet_summary.csv",
+)
+EXPECTED_CITIES_HANDOFF_OUTPUTS = (
+    "reports/cities_no_input_handoff_status/protocol_run.manifest.json",
+    "reports/cities_no_input_handoff_status/status.csv",
+    "reports/cities_no_input_handoff_status/summary.csv",
+    "docs/CITIES_NO_INPUT_HANDOFF_STATUS.md",
+    "reports/cities_no_input_handoff_status/manifest.json",
 )
 
 REQUIRED_PHRASES = (
@@ -76,6 +101,10 @@ REQUIRED_PHRASES = (
     "Cities source-row lock evidence packet checks local recovered PDF and page-image artifact paths before any lock row can pass preflight",
     "populated Cities source-row lock decision records must name the exact decision id in their evidence citation or summary",
     "Cities source-row lock status",
+    "Cities no-input handoff status",
+    "docs/CITIES_NO_INPUT_HANDOFF_STATUS.md",
+    "8 handoff rows",
+    "6 manual-input-needed rows",
     "Cities source-row lock decision records stay aligned to the 14-row evidence packet before any populated source-row lock can pass preflight",
     "study-mapping CSV schemas retain exact columns, required locked values, ISO `locked_at` dates, supported language markers, tracked term IDs",
     "KJVA Gutenberg plus Hakkaac split-source role sidecar writes the missing role/order boundary as planning-only evidence",
@@ -158,6 +187,9 @@ def validate_protocol(path: Path) -> list[str]:
     if data.get("progress_interval_seconds") != 15:
         failures.append(f"{path} progress_interval_seconds drifted")
     failures.extend(validate_preflight_step(path, steps.get("preflight")))
+    failures.extend(
+        validate_cities_handoff_step(path, steps.get("cities_no_input_handoff_status"))
+    )
     failures.extend(validate_summary_step(path, steps.get("real_report_summary")))
     failures.extend(
         validate_step_order(
@@ -165,6 +197,14 @@ def validate_protocol(path: Path) -> list[str]:
             ordered_step_ids,
             step_id="kjva_no_input_handoff_status",
             must_follow=EXPECTED_KJVA_HANDOFF_PREREQ_STEPS,
+        )
+    )
+    failures.extend(
+        validate_step_order(
+            path,
+            ordered_step_ids,
+            step_id="real_report_summary",
+            must_follow=("cities_no_input_handoff_status",),
         )
     )
     return failures
@@ -228,6 +268,29 @@ def validate_summary_step(path: Path, step: Any) -> list[str]:
             f"{path} real_report_summary inputs missing: "
             + ", ".join(missing_inputs)
         )
+    return failures
+
+
+def validate_cities_handoff_step(path: Path, step: Any) -> list[str]:
+    if not isinstance(step, dict):
+        return [f"{path} missing cities_no_input_handoff_status step"]
+    failures: list[str] = []
+    if step.get("argv") != [
+        "-m",
+        "scripts.run_protocol",
+        "protocols/cities_no_input_handoff_status.toml",
+        "--resume",
+    ]:
+        failures.append(f"{path} cities_no_input_handoff_status argv drifted")
+    inputs = set(step.get("inputs", []))
+    missing_inputs = sorted(set(EXPECTED_CITIES_HANDOFF_INPUTS) - inputs)
+    if missing_inputs:
+        failures.append(
+            f"{path} cities_no_input_handoff_status inputs missing: "
+            + ", ".join(missing_inputs)
+        )
+    if step.get("outputs") != list(EXPECTED_CITIES_HANDOFF_OUTPUTS):
+        failures.append(f"{path} cities_no_input_handoff_status outputs drifted")
     return failures
 
 
