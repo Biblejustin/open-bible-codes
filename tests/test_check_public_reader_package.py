@@ -166,19 +166,21 @@ def test_detects_missing_required_manifest_source(tmp_path, monkeypatch) -> None
     )
 
 
-def test_detects_missing_required_packaged_phrase(tmp_path, monkeypatch) -> None:
+def test_detects_missing_required_packaged_phrase_for_each_guarded_doc(
+    tmp_path,
+    monkeypatch,
+) -> None:
     out_dir = _build_package(tmp_path, monkeypatch)
-    claim_catalog = out_dir / "docs/CLAIM_CATALOG.md"
-    claim_catalog.write_text("# stale\n", encoding="utf-8")
+    for relative_path, required_phrases in check.REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH.items():
+        package_path = out_dir / relative_path
+        original = package_path.read_text(encoding="utf-8")
+        package_path.write_text("# stale\n", encoding="utf-8")
 
-    failures = check.validate_public_reader_package(out_dir)
+        failures = check.validate_public_reader_package(out_dir)
 
-    assert any(
-        "docs/CLAIM_CATALOG.md missing packaged phrase: "
-        "the consolidated no-input handoff keeps 8 handoff rows"
-        in failure
-        for failure in failures
-    )
+        for phrase in required_phrases:
+            assert f"{package_path} missing packaged phrase: {phrase}" in failures
+        package_path.write_text(original, encoding="utf-8")
 
 
 def test_detects_missing_packaged_file(tmp_path, monkeypatch) -> None:
