@@ -12,7 +12,9 @@ REQUIRED_PHRASES_BY_DOC = {
     Path("README.md"): (
         "KJVA/apocrypha source-readiness is tracked separately",
         "9 handoff rows and 8 manual-input-needed rows",
-        "4 candidate-source audit rows with 0 result-ready candidate pages",
+        "4 candidate-source audit rows with 0 verse-import-ready candidate pages",
+        "0 result-ready candidate pages",
+        "result allowed 0",
         "new independent KJVA result output blocked",
     ),
     Path("docs/REAL_REPORT_RUN.md"): (
@@ -51,6 +53,7 @@ REQUIRED_PHRASES_BY_DOC = {
 FORBIDDEN_PHRASES_BY_DOC = {
     Path("README.md"): (
         "new independent KJVA result output allowed",
+        "4 candidate-source audit rows with 0 result-ready candidate pages",
     ),
     Path("docs/REAL_REPORT_RUN.md"): (
         "KJVA source-lock ready at 1",
