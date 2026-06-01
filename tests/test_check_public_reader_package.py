@@ -42,6 +42,10 @@ def _default_doc_text(path: Path) -> str:
             "# Final Report\n\n"
             "## Reader Path\n\n"
             "Read `docs/START_HERE.md`, then `docs/PROJECT_FINDINGS_OVERVIEW.md`.\n"
+            "Use `docs/REMAINING_WORK_REGISTER.md`, "
+            "`docs/WRR_NO_INPUT_HANDOFF_STATUS.md`, "
+            "`docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`, and "
+            "`docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`.\n"
         )
     if path == Path("docs/REAL_REPORT_RUN.md"):
         return (

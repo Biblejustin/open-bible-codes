@@ -22,6 +22,12 @@ REQUIRED_GENERATED_FILES = (
 REAL_REPORT_SUMMARY_SOURCE = Path("reports/real_report_run/summary.md")
 REAL_REPORT_MANIFEST_SOURCE = Path("reports/real_report_run/manifest.json")
 REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
+    Path("docs/FINAL_REPORT.md"): (
+        "`docs/REMAINING_WORK_REGISTER.md`",
+        "`docs/WRR_NO_INPUT_HANDOFF_STATUS.md`",
+        "`docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`",
+        "`docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`",
+    ),
     Path("docs/CLAIM_CATALOG.md"): (
         "the consolidated no-input handoff keeps 8 handoff rows, 6 manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages, 41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority line-crop review rows, and no Cities result allowed.",
     ),
