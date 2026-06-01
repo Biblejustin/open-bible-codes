@@ -180,6 +180,8 @@ This assembly run includes:
   `docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md`
 - KJVA next-result gate:
   `docs/KJVA_NEXT_RESULT_GATE.md`
+- KJVA no-input handoff status:
+  `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`
 - KJVA Wikisource candidate source-status audit:
   `docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md`
 - KJVA Wikisource book-coverage probe:
@@ -317,6 +319,11 @@ It requires:
   primary candidate stream, Hakkaac as marker/collation witness-only, current
   eBible as rerun-only, 7 role rows, 6 unresolved blocker rows, source-lock
   ready at 0, and result-ready at 0;
+- KJVA no-input handoff status consolidates 9 handoff rows, 8
+  manual-input-needed rows, 11 next-result gates, 7 source-policy blocker
+  rows, the `SIR 44:23` Gutenberg gap, 0/15 Gutenberg Prayer of Manasseh
+  markers, 5719/5720 Hakkaac exact normalized verse matches, and the
+  no-new-KJVA-result boundary;
 - KJVA Wikisource candidate source audit stays metadata-only, with no Bible
   text retained, no corpus import ready, and no result-bearing output;
 - KJVA Wikisource book-coverage probe stays metadata-only, with 36 existing

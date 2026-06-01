@@ -293,11 +293,19 @@ and 3 terms stood above every shuffled sample.
 This raises follow-up priority, but it remains post-screen rather than
 public-claim evidence.
 
+The KJVA no-input handoff keeps that boundary in one place. It records 9
+handoff rows, 8 manual-input-needed rows, 11 next-result gates, 7
+source-policy blocker rows, the `SIR 44:23` Gutenberg gap, 0/15 Gutenberg
+Prayer of Manasseh markers, 5719/5720 Hakkaac exact normalized verse matches,
+and result allowed 0. It is a source-readiness work map, not a new KJVA
+result.
+
 Source artifacts:
 
 - `docs/KJV_APOCRYPHA_BRIDGE_TERM_REVIEW.md`
 - `docs/KJV_APOCRYPHA_BRIDGE_TERM_SHUFFLED_CONTROLS_1000.md`
 - `docs/KJVA_APOCRYPHA_BRIDGE_CONFIRMATORY_CONTROLS_5000.md`
+- `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`
 
 ## Negative And Weak Results
 

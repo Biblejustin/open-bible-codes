@@ -2782,3 +2782,26 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/check_wrr_no_input_handoff_status_doc.py`, and wired the handoff
   into `scripts/preflight_real_report_run.py` plus
   `protocols/real_report_run.toml`.
+
+## KJVA No-Input Handoff Status
+
+- Added `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md` as a consolidated non-result
+  handoff for current KJVA/apocrypha source-readiness work.
+- Current status: 9 handoff rows, 9 handoff-ready rows, 8
+  manual-input-needed rows, 11 next-result gates, 1 rerun-only ready row, 10
+  blocked gate rows, 7 source-policy blocker rows, and result allowed 0.
+- Current source boundary: current eBible KJVA remains rerun-only; no
+  independent KJVA source is source-locked for result-bearing use.
+- Current blockers: 0 source-use ready pages, `SIR 44:23` Gutenberg Sirach
+  marker gap, 0/15 Gutenberg Prayer of Manasseh markers, 5719/5720 Hakkaac
+  exact normalized verse matches, 1 Hakkaac length-drift verse, 7 split-source
+  role rows, 6 split-source blocker rows, fresh terms ready 0, leakage audit
+  ready 0, fixed controls ready 0, and study-lock ready 0.
+- This handoff does not approve source use, import Bible text, source-lock a
+  candidate, choose corrections, create terms, lock controls, write a study
+  lock, or create a KJVA result.
+- Added `protocols/kjva_no_input_handoff_status.toml`,
+  `scripts/build_kjva_no_input_handoff_status.py`, and
+  `scripts/check_kjva_no_input_handoff_status_doc.py`, and wired the handoff
+  into `scripts/preflight_real_report_run.py` plus
+  `protocols/real_report_run.toml`.

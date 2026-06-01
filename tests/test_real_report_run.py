@@ -272,6 +272,14 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/build_kjva_no_input_handoff_status.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_kjva_no_input_handoff_status_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "scripts/build_kjva_gutenberg_source_lock_blocker_packet.py",
             steps_by_id["preflight"]["inputs"],
         )
@@ -348,6 +356,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "docs/KJVA_NO_INPUT_HANDOFF_STATUS.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "docs/KJVA_CURRENT_SOURCE_LOCK_SIDECAR.md",
             steps_by_id["preflight"]["inputs"],
         )
@@ -420,6 +432,10 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "protocols/kjva_no_input_handoff_status.toml",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "protocols/kjva_current_source_lock_sidecar.toml",
             steps_by_id["preflight"]["inputs"],
         )
@@ -480,6 +496,14 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "reports/kjva_no_input_handoff_status/summary.csv",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "reports/kjva_no_input_handoff_status/manifest.json",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "reports/kjva_current_source_lock_sidecar/summary.csv",
             steps_by_id["preflight"]["inputs"],
         )
@@ -500,6 +524,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("kjva_gutenberg_hakkaac_split_source_role_sidecar", steps_by_id)
         self.assertIn("kjva_source_policy_blocker_packet", steps_by_id)
         self.assertIn("kjva_next_result_gate", steps_by_id)
+        self.assertIn("kjva_no_input_handoff_status", steps_by_id)
         self.assertIn("kjva_current_source_lock_sidecar", steps_by_id)
         self.assertIn("kjva_wikisource_candidate_source_audit", steps_by_id)
         self.assertIn("kjva_wikisource_book_coverage_probe", steps_by_id)
@@ -2679,6 +2704,14 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "scripts/build_kjva_no_input_handoff_status.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "scripts/check_kjva_no_input_handoff_status_doc.py",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "scripts/build_kjva_current_source_lock_sidecar.py",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -2947,6 +2980,14 @@ class RealReportRunTests(unittest.TestCase):
             preflight.DEFAULT_REQUIRED_PATHS,
         )
         self.assertIn(
+            "reports/kjva_no_input_handoff_status/summary.csv",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
+            "reports/kjva_no_input_handoff_status/manifest.json",
+            preflight.DEFAULT_REQUIRED_PATHS,
+        )
+        self.assertIn(
             "reports/kjva_current_source_lock_sidecar/summary.csv",
             preflight.DEFAULT_REQUIRED_PATHS,
         )
@@ -3154,6 +3195,10 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "kjva_next_result_gate_doc_failures",
+                payload,
+            )
+            self.assertIn(
+                "kjva_no_input_handoff_status_doc_failures",
                 payload,
             )
             self.assertIn(
@@ -3548,6 +3593,27 @@ inputs = ["docs/A.md", "docs/C.md"]
             )
             self.assertIn(
                 "KJVA next-result gate failures: missing next-result gate boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_kjva_no_input_handoff_status_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_kjva_no_input_handoff_status_doc,
+                "validate_kjva_no_input_handoff_status_doc",
+                return_value=["missing KJVA no-input handoff boundary"],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["kjva_no_input_handoff_status_doc_failures"],
+                ["missing KJVA no-input handoff boundary"],
+            )
+            self.assertIn(
+                "KJVA no-input handoff status failures: missing KJVA no-input handoff boundary",
                 payload["failures"],
             )
 

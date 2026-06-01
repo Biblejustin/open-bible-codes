@@ -151,6 +151,10 @@ WRR-style reproduction requirements are tracked in
 recommended review order are tracked in
 `docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`; the consolidated no-input
 handoff is tracked in `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`.
+KJVA/apocrypha source-readiness is tracked separately in
+`docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`; it keeps the current eBible KJVA
+baseline as rerun-only, records 9 handoff rows and 8 manual-input-needed rows,
+and keeps new independent KJVA result output blocked.
 
 Parallel batch-count benchmark:
 

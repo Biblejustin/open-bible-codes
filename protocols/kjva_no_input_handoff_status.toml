@@ -1,0 +1,29 @@
+name = "kjva_no_input_handoff_status"
+description = "Write the consolidated KJVA no-input handoff status without approving source use or producing new results."
+manifest_out = "reports/kjva_no_input_handoff_status/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "kjva_no_input_handoff_status"
+description = "Gather current KJVA next-result, source-policy, source-candidate, collation, and completed-lane status into one guarded handoff."
+argv = ["-m", "scripts.build_kjva_no_input_handoff_status"]
+inputs = [
+  "scripts/build_kjva_no_input_handoff_status.py",
+  "reports/kjva_next_result_gate/summary.csv",
+  "reports/kjva_next_result_gate/gates.csv",
+  "reports/kjva_source_policy_blocker_packet/summary.csv",
+  "reports/kjva_source_policy_blocker_packet/blockers.csv",
+  "reports/kjva_current_source_lock_sidecar/summary.csv",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/summary.csv",
+  "reports/kjva_hakkaac_apocrypha_collation/summary.csv",
+  "reports/kjva_gutenberg_hakkaac_split_source_role_sidecar/summary.csv",
+  "reports/kjv_apocrypha_bridge_prospective/term_summary.csv",
+  "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/term_summary.csv",
+]
+outputs = [
+  "reports/kjva_no_input_handoff_status/status.csv",
+  "reports/kjva_no_input_handoff_status/summary.csv",
+  "docs/KJVA_NO_INPUT_HANDOFF_STATUS.md",
+  "reports/kjva_no_input_handoff_status/manifest.json",
+]

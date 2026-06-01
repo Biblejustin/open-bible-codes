@@ -64,6 +64,8 @@ inputs = [
   "scripts/check_kjva_source_policy_blocker_packet_doc.py",
   "scripts/build_kjva_next_result_gate.py",
   "scripts/check_kjva_next_result_gate_doc.py",
+  "scripts/build_kjva_no_input_handoff_status.py",
+  "scripts/check_kjva_no_input_handoff_status_doc.py",
   "scripts/check_real_report_run_doc.py",
   "scripts/check_strongest_candidate_deep_dive_doc.py",
   "els/project_index.py",
@@ -460,6 +462,7 @@ inputs = [
   "docs/KJVA_GUTENBERG_HAKKAAC_SPLIT_SOURCE_ROLE_SIDECAR.md",
   "docs/KJVA_SOURCE_POLICY_BLOCKER_PACKET.md",
   "docs/KJVA_NEXT_RESULT_GATE.md",
+  "docs/KJVA_NO_INPUT_HANDOFF_STATUS.md",
   "docs/KJVA_WIKISOURCE_BOOK_COVERAGE_PROBE.md",
   "docs/KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md",
   "docs/KJVA_WIKISOURCE_CANDIDATE_SOURCE_AUDIT.md",
@@ -524,6 +527,9 @@ inputs = [
   "reports/kjva_next_result_gate/gates.csv",
   "reports/kjva_next_result_gate/summary.csv",
   "reports/kjva_next_result_gate/manifest.json",
+  "reports/kjva_no_input_handoff_status/status.csv",
+  "reports/kjva_no_input_handoff_status/summary.csv",
+  "reports/kjva_no_input_handoff_status/manifest.json",
   "reports/kjva_open_bibles_candidate_source/source_status.csv",
   "reports/kjva_open_bibles_candidate_source/summary.csv",
   "reports/kjva_open_bibles_candidate_source/anchors.csv",
@@ -607,6 +613,7 @@ inputs = [
   "protocols/kjva_gutenberg_hakkaac_split_source_role_sidecar.toml",
   "protocols/kjva_source_policy_blocker_packet.toml",
   "protocols/kjva_next_result_gate.toml",
+  "protocols/kjva_no_input_handoff_status.toml",
   "protocols/kjva_open_bibles_candidate_source_audit.toml",
   "protocols/kjva_wikisource_candidate_source_audit.toml",
   "protocols/external_claim_source_counts.toml",
@@ -2116,6 +2123,32 @@ outputs = [
   "reports/kjva_next_result_gate/summary.csv",
   "docs/KJVA_NEXT_RESULT_GATE.md",
   "reports/kjva_next_result_gate/manifest.json",
+]
+
+[[steps]]
+id = "kjva_no_input_handoff_status"
+description = "Consolidate KJVA no-input source/result blockers without approving source use or producing a new result."
+argv = ["-m", "scripts.run_protocol", "protocols/kjva_no_input_handoff_status.toml", "--resume"]
+inputs = [
+  "protocols/kjva_no_input_handoff_status.toml",
+  "scripts/build_kjva_no_input_handoff_status.py",
+  "reports/kjva_next_result_gate/summary.csv",
+  "reports/kjva_next_result_gate/gates.csv",
+  "reports/kjva_source_policy_blocker_packet/summary.csv",
+  "reports/kjva_source_policy_blocker_packet/blockers.csv",
+  "reports/kjva_current_source_lock_sidecar/summary.csv",
+  "reports/kjva_gutenberg_source_lock_blocker_packet/summary.csv",
+  "reports/kjva_hakkaac_apocrypha_collation/summary.csv",
+  "reports/kjva_gutenberg_hakkaac_split_source_role_sidecar/summary.csv",
+  "reports/kjv_apocrypha_bridge_prospective/term_summary.csv",
+  "reports/kjv_apocrypha_bridge_prospective_nonbible_controls/term_summary.csv",
+]
+outputs = [
+  "reports/kjva_no_input_handoff_status/protocol_run.manifest.json",
+  "reports/kjva_no_input_handoff_status/status.csv",
+  "reports/kjva_no_input_handoff_status/summary.csv",
+  "docs/KJVA_NO_INPUT_HANDOFF_STATUS.md",
+  "reports/kjva_no_input_handoff_status/manifest.json",
 ]
 
 [[steps]]

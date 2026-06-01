@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 423
+Documents indexed: 424
 
 ## Controls
 
@@ -375,6 +375,7 @@ Documents indexed: 423
 | KJVA Hakkaac Apocrypha Marker Coverage | `KJVA_HAKKAAC_APOCRYPHA_MARKER_COVERAGE.md` |
 | KJVA Hakkaac Source-Lock Decision Packet | `KJVA_HAKKAAC_SOURCE_LOCK_DECISION_PACKET.md` |
 | KJVA Next Result Gate | `KJVA_NEXT_RESULT_GATE.md` |
+| KJVA No-Input Handoff Status | `KJVA_NO_INPUT_HANDOFF_STATUS.md` |
 | KJVA Open-Bibles Candidate Source Audit | `KJVA_OPEN_BIBLES_CANDIDATE_SOURCE_AUDIT.md` |
 | KJVA Source Candidate Status | `KJVA_SOURCE_CANDIDATE_STATUS.md` |
 | KJVA Source Policy Blocker Packet | `KJVA_SOURCE_POLICY_BLOCKER_PACKET.md` |
