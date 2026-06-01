@@ -26,6 +26,9 @@ def _default_doc_text(path: Path) -> str:
             + "\n".join(
                 f"- {phrase}" for phrase in overview_check.READER_PATH_REQUIREMENTS[path]
             )
+            + "\nreads 4 candidate-source audit rows with 0 verse-import-ready "
+            "candidate pages and 0 result-ready candidate pages, records result "
+            "allowed 0\n"
             + "\n"
         )
     if path == overview_check.DEFAULT_START_HERE:
