@@ -1,6 +1,6 @@
 # Cities Unreadable PDF OCR Review Packet
 
-Status: OCR review packet only. This renders local page images and OCR text sidecars for the seven recovered unreadable Cities PDFs, then records only paths/counts/status in tracked files.
+Status: OCR review packet only. This renders local page images and OCR text sidecars for 11 recovered unreadable Cities PDF rows, then records only paths/counts/status in tracked files.
 It does not track OCR text, repair text, import source rows, normalize city names, run ELS searches, compute compactness, or verify p-levels.
 
 Reproduce:
@@ -11,16 +11,16 @@ python3 -m scripts.build_cities_unreadable_pdf_ocr_review_packet --review report
 
 ## Summary
 
-- PDF rows: 7.
-- Page rows: 41.
-- Pages with OCR text: 39.
+- PDF rows: 11.
+- Page rows: 61.
+- Pages with OCR text: 59.
 - Pages without OCR text: 2.
-- OCR text signal chars: 54324.
-- OCR words: 15019.
-- OCR lines: 1563.
-- Image sidecars: 41.
-- OCR text sidecars: 41.
-- Page OCR text detected rows: 39.
+- OCR text signal chars: 70207.
+- OCR words: 19434.
+- OCR lines: 2322.
+- Image sidecars: 61.
+- OCR text sidecars: 61.
+- Page OCR text detected rows: 59.
 - Page OCR empty rows: 2.
 - OCR error rows: 0.
 - Boundary: OCR review packet only; OCR text sidecars and page images are ignored local review aids; no OCR text in tracked files, no repaired text, no source-row import, no city normalization, no ELS, no compactness, no p-level
@@ -46,6 +46,26 @@ python3 -m scripts.build_cities_unreadable_pdf_ocr_review_packet --review report
 | cities_pdf_dp365a_p5_11 | 5 | 901 | 377 | 55 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_p5_11_p005.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_p5_11_p005.txt) | review OCR text sidecar against page image before any source-row use |
 | cities_pdf_dp365a_p5_11 | 6 | 372 | 137 | 24 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_p5_11_p006.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_p5_11_p006.txt) | review OCR text sidecar against page image before any source-row use |
 | cities_pdf_dp365a_p5_11 | 7 | 535 | 177 | 19 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_p5_11_p007.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_p5_11_p007.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp364_short | 1 | 440 | 90 | 14 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp364_short_p001.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp364_short_p001.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp364_short | 2 | 518 | 105 | 12 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp364_short_p002.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp364_short_p002.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp364_short | 3 | 2023 | 413 | 38 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp364_short_p003.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp364_short_p003.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp364_short | 4 | 1689 | 375 | 30 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp364_short_p004.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp364_short_p004.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp364_short | 5 | 1910 | 411 | 34 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp364_short_p005.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp364_short_p005.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp364_short | 6 | 461 | 113 | 24 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp364_short_p006.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp364_short_p006.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp365a_appendix_2 | 1 | 791 | 231 | 35 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_2_p001.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_2_p001.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp365a_appendix_2 | 2 | 668 | 217 | 45 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_2_p002.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_2_p002.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp365a_appendix_2 | 3 | 657 | 233 | 44 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_2_p003.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_2_p003.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp365a_appendix_2 | 4 | 695 | 228 | 45 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_2_p004.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_2_p004.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp365a_appendix_2 | 5 | 636 | 215 | 38 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_2_p005.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_2_p005.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp365a_appendix_2 | 6 | 632 | 218 | 42 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_2_p006.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_2_p006.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp365a_appendix_2 | 7 | 528 | 183 | 38 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_2_p007.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_2_p007.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp365a_appendix_2 | 8 | 569 | 194 | 43 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_2_p008.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_2_p008.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp365a_appendix_2 | 9 | 546 | 181 | 37 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_2_p009.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_2_p009.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp365a_appendix_2 | 10 | 682 | 237 | 48 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_2_p010.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_2_p010.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp365a_appendix_4 | 1 | 934 | 304 | 41 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_4_p001.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_4_p001.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp365a_appendix_4 | 2 | 496 | 181 | 43 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_4_p002.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_4_p002.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp365a_appendix_5 | 1 | 555 | 146 | 56 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_5_p001.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_5_p001.txt) | review OCR text sidecar against page image before any source-row use |
+| cities_pdf_dp365a_appendix_5 | 2 | 453 | 140 | 52 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_5_p002.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_5_p002.txt) | review OCR text sidecar against page image before any source-row use |
 | cities_pdf_dp365a_appendix_6 | 1 | 942 | 309 | 41 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_6_p001.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_6_p001.txt) | review OCR text sidecar against page image before any source-row use |
 | cities_pdf_dp365a_appendix_6 | 2 | 341 | 102 | 10 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_6_p002.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_6_p002.txt) | review OCR text sidecar against page image before any source-row use |
 | cities_pdf_dp365a_appendix_7 | 1 | 288 | 109 | 35 | page_ocr_text_detected | [image](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/page_images/cities_pdf_dp365a_appendix_7_p001.png) | [ocr text](../reports/cities_pdf_recovery_probe/unreadable_pdf_ocr_review/ocr_text/cities_pdf_dp365a_appendix_7_p001.txt) | review OCR text sidecar against page image before any source-row use |
@@ -77,7 +97,3 @@ python3 -m scripts.build_cities_unreadable_pdf_ocr_review_packet --review report
 - OCR text must be checked against page images before any source-row use.
 - This packet does not decide source admissibility or create city-name rows.
 - Any later transcription decisions need separate citable decision records.
-
-Follow-up checklist: `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md`
-groups these page sidecars into review order and creates ignored local contact
-sheets.

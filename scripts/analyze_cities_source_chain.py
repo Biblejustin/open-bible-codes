@@ -381,7 +381,7 @@ def write_markdown(
             "",
             "The isolated recovery probe in `docs/CITIES_PDF_RECOVERY_PROBE.md` checks the",
             "35 linked Cities/Aumann/Simon-McKay PDF URLs against the live site and exact-URL",
-            "Wayback snapshots. It currently recovers 12 archived PDFs and leaves 23 PDF",
+            "Wayback snapshots. It currently recovers 17 archived PDFs and leaves 18 PDF",
             "links unrecovered; those recovered files are still source-shape inputs only.",
             "The follow-up text audit in `docs/CITIES_RECOVERED_PDF_TEXT_AUDIT.md`",
             "separates the recovered PDFs into extractable, zero-text, and garbled/non-Latin",

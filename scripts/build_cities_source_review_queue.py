@@ -225,6 +225,11 @@ def write_markdown(
     rows: list[dict[str, object]],
     summary: list[dict[str, str]],
 ) -> None:
+    summary_by_lane = {row["lane"]: row for row in summary}
+    unreadable_rows = sum(
+        int(summary_by_lane.get(lane, {}).get("rows", "0"))
+        for lane in ("ocr_image_only_pdf", "encoding_or_ocr_candidate")
+    )
     lines = [
         "# Cities Source Review Queue",
         "",
@@ -299,10 +304,10 @@ def write_markdown(
             "source-row import.",
             "",
             "The unreadable-PDF review in `docs/CITIES_UNREADABLE_PDF_REVIEW.md` separates",
-            "the seven recovered but unreadable PDFs into OCR/image-only and",
+            f"the {unreadable_rows} recovered but unreadable PDF rows into OCR/image-only and",
             "encoding-or-OCR routes without running OCR or repairing text.",
             "The OCR feasibility probe in `docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md`",
-            "records OCR count/status metrics for those same seven rows without tracking",
+            "records OCR count/status metrics for those same rows without tracking",
             "OCR text.",
             "The OCR review packet in `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md`",
             "adds ignored local page-image and OCR-text sidecars and tracks only",
@@ -310,7 +315,7 @@ def write_markdown(
             "The OCR review checklist in `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md`",
             "orders those sidecars for page-image comparison and contact-sheet review.",
             "The OCR page review in `docs/CITIES_UNREADABLE_PDF_OCR_PAGE_REVIEW.md`",
-            "records visual page-role decisions for all 41 OCR-packet pages while keeping",
+            "records visual page-role decisions for reviewed OCR-packet pages while keeping",
             "source-row imports at zero.",
             "The source-row lock queue in `docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md`",
             "then filters those reviewed page roles to 14 table/list/exception-note",

@@ -202,7 +202,7 @@ python3 -m scripts.run_protocol protocols/cities_pdf_recovery_probe.toml --resum
 
 This live/archive probe checks the 35 PDF links found on the Cities, Aumann,
 and Simon-McKay source pages in an isolated ignored output directory. It
-currently recovers 12 archived PDFs and leaves 23 links unrecovered. It does
+currently recovers 17 archived PDFs and leaves 18 links unrecovered. It does
 not overwrite the cached `reports/wrr_1994/` bundle, perform OCR, normalize
 city names, or run ELS results. Tracked probe:
 `docs/CITIES_PDF_RECOVERY_PROBE.md`.
@@ -213,7 +213,7 @@ Cities recovered-PDF text audit:
 python3 -m scripts.run_protocol protocols/cities_recovered_pdf_text_audit.toml --resume
 ```
 
-This classifies the 12 recovered Cities/Aumann/Gans PDFs by extractable text
+This classifies the 17 recovered Cities/Aumann/Gans PDFs by extractable text
 shape and checks five title/protocol anchors. It does not run OCR, normalize
 city names, run ELS results, compute compactness, or verify p-levels. Tracked
 audit: `docs/CITIES_RECOVERED_PDF_TEXT_AUDIT.md`.
@@ -224,7 +224,7 @@ Cities source-review queue:
 python3 -m scripts.run_protocol protocols/cities_source_review_queue.toml --resume
 ```
 
-This joins the 35-row recovery probe and 12-row recovered-PDF text audit into
+This joins the 35-row recovery probe and 17-row recovered-PDF text audit into
 next-action lanes: extractable-text review, OCR/image-only review,
 encoding-or-OCR candidate, and missing-PDF recovery. It does not decide source
 admissibility or run result-bearing work. Tracked queue:
@@ -236,7 +236,7 @@ Cities unreadable-PDF review:
 python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_review.toml --resume
 ```
 
-This classifies the seven recovered but unreadable Cities PDFs into
+This classifies the 12 recovered but unreadable Cities PDF rows into
 OCR/image-only and encoding-or-OCR planning routes. It does not run OCR, repair
 text, import source rows, normalize city names, or run result-bearing work.
 Tracked review: `docs/CITIES_UNREADABLE_PDF_REVIEW.md`.
@@ -247,7 +247,7 @@ Cities unreadable-PDF OCR feasibility:
 python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_ocr_feasibility.toml --resume
 ```
 
-This runs local English OCR against the seven recovered unreadable PDFs and
+This runs local English OCR against the 12 recovered unreadable Cities PDF rows and
 records counts/status only. It does not track OCR text, repair text, import
 source rows, normalize city names, or run result-bearing work. Tracked review:
 `docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md`.
@@ -258,7 +258,7 @@ Cities unreadable-PDF OCR review packet:
 python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_ocr_review_packet.toml --resume
 ```
 
-This renders ignored local page-image and OCR-text sidecars for the same 41
+This renders ignored local page-image and OCR-text sidecars for 61 packet
 pages and records paths/counts/status only. It does not track OCR text, repair
 text, import source rows, normalize city names, or run result-bearing work.
 Tracked review: `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md`.
@@ -280,7 +280,7 @@ Cities unreadable-PDF OCR page review:
 python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_ocr_page_review.toml --resume
 ```
 
-This records visual page-role decisions for all 41 OCR packet pages. It does
+This records visual page-role decisions for the 41 currently reviewed OCR packet pages. It does
 not track OCR body text, repair text, import source rows, normalize city names,
 or run result-bearing work. Tracked review:
 `docs/CITIES_UNREADABLE_PDF_OCR_PAGE_REVIEW.md`.

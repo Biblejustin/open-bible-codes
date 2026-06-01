@@ -7,12 +7,12 @@ compute compactness, or verify p-levels.
 
 ## Summary
 
-- Unreadable rows reviewed: 7.
-- OCR/image-only rows: 4.
+- Unreadable rows reviewed: 12.
+- OCR/image-only rows: 9.
 - Encoding-or-OCR candidate rows: 3.
-- Aumann committee rows: 6.
+- Aumann committee rows: 11.
 - Other-family rows: 1.
-- Pages needing review: 41.
+- Pages needing review: 61.
 - Garbled text chars: 5364.
 
 ## Rows
@@ -22,6 +22,11 @@ compute compactness, or verify p-levels.
 | cities_pdf_dp365a_p12_17 | aumann_committee | `encoding_or_ocr_candidate` | extractable_but_garbled_or_nonlatin | 6 | 1991 | aumann_committee_recovered_segment | alternate_extraction_or_ocr_fallback | try alternate extraction; if still garbled, run OCR before source-role classification | [url](https://www.torah-code.org/experiments/dp365A_p12-17.pdf) |
 | cities_pdf_dp365a_p1_4 | aumann_committee | `encoding_or_ocr_candidate` | extractable_but_garbled_or_nonlatin | 4 | 460 | aumann_committee_recovered_segment | alternate_extraction_or_ocr_fallback | try alternate extraction; if still garbled, run OCR before source-role classification | [url](https://www.torah-code.org/experiments/dp365A_p1-4.pdf) |
 | cities_pdf_dp365a_p5_11 | aumann_committee | `encoding_or_ocr_candidate` | extractable_but_garbled_or_nonlatin | 7 | 2913 | aumann_committee_recovered_segment | alternate_extraction_or_ocr_fallback | try alternate extraction; if still garbled, run OCR before source-role classification | [url](https://www.torah-code.org/experiments/dp365A_p5-11.pdf) |
+| cities_pdf_dp364_short | aumann_committee | `ocr_image_only_pdf` | zero_extractable_text | 6 | 0 | unclassified_unreadable_pdf | page_image_or_ocr_review | inspect page images and run OCR before source-role classification | [url](https://www.torah-code.org/experiments/dp364_short.pdf) |
+| cities_pdf_dp365a_appendix_2 | aumann_committee | `ocr_image_only_pdf` | zero_extractable_text | 10 | 0 | aumann_committee_recovered_segment | page_image_or_ocr_review | inspect page images and run OCR before source-role classification | [url](https://www.torah-code.org/experiments/dp365A_appendix_2.pdf) |
+| cities_pdf_dp365a_appendix_3 | aumann_committee | `ocr_image_only_pdf` | zero_extractable_text |  | 0 | aumann_committee_recovered_segment | page_image_or_ocr_review | inspect page images and run OCR before source-role classification | [url](https://www.torah-code.org/experiments/dp365A_appendix_3.pdf) |
+| cities_pdf_dp365a_appendix_4 | aumann_committee | `ocr_image_only_pdf` | zero_extractable_text | 2 | 0 | aumann_committee_recovered_segment | page_image_or_ocr_review | inspect page images and run OCR before source-role classification | [url](https://www.torah-code.org/experiments/dp365A_appendix_4.pdf) |
+| cities_pdf_dp365a_appendix_5 | aumann_committee | `ocr_image_only_pdf` | zero_extractable_text | 2 | 0 | aumann_committee_recovered_segment | page_image_or_ocr_review | inspect page images and run OCR before source-role classification | [url](https://www.torah-code.org/experiments/dp365A_appendix_5.pdf) |
 | cities_pdf_dp365a_appendix_6 | aumann_committee | `ocr_image_only_pdf` | zero_extractable_text | 2 | 0 | aumann_committee_recovered_segment | page_image_or_ocr_review | inspect page images and run OCR before source-role classification | [url](https://www.torah-code.org/experiments/dp365A_appendix_6.pdf) |
 | cities_pdf_dp365a_appendix_7 | aumann_committee | `ocr_image_only_pdf` | zero_extractable_text | 5 | 0 | aumann_committee_recovered_segment | page_image_or_ocr_review | inspect page images and run OCR before source-role classification | [url](https://www.torah-code.org/experiments/dp365A_appendix_7.pdf) |
 | cities_pdf_dp365a_part_2_p105_111 | aumann_committee | `ocr_image_only_pdf` | zero_extractable_text | 7 | 0 | aumann_committee_recovered_segment | page_image_or_ocr_review | inspect page images and run OCR before source-role classification | [url](https://www.torah-code.org/experiments/dp365A_part_2_p105-111.pdf) |
@@ -29,17 +34,8 @@ compute compactness, or verify p-levels.
 
 ## Use Boundary
 
-This review is planning metadata for the seven recovered but unreadable
-Cities PDFs. It does not repair the PDFs, create OCR text, decide source
+This review is planning metadata for 12 recovered but unreadable
+Cities PDF rows. It does not repair the PDFs, create OCR text, decide source
 admissibility, create city-name rows, or make a result-bearing claim.
 Any later OCR output must be reviewed and locked before source-row
 normalization or ELS work.
-
-Follow-up feasibility probe: `docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md`
-records that local English OCR produced text signals for all seven rows
-without committing OCR text or repairing source rows.
-Follow-up review packet: `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md`
-creates ignored local page-image and OCR-text sidecars for those 41 pages
-and tracks only paths/counts/status.
-Follow-up checklist: `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md`
-groups the sidecars into review order and creates ignored local contact sheets.

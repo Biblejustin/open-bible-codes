@@ -12,9 +12,9 @@ p-levels.
 | Lane | Rows | Families | Source pages | Next action |
 | --- | ---: | --- | --- | --- |
 | `review_extractable_text` | 5 | aumann_committee:3; gans_communities:2 | torah_code_experiment_cities_aumann:3; torah_code_experiment_cities_gans:2 | review extracted text headings and table scope before any city-row normalization |
-| `ocr_image_only_pdf` | 4 | aumann_committee:3; other:1 | torah_code_experiment_cities_aumann:4 | OCR or page-image review needed before source rows can be inspected |
+| `ocr_image_only_pdf` | 9 | aumann_committee:8; other:1 | torah_code_experiment_cities_aumann:9 | OCR or page-image review needed before source rows can be inspected |
 | `encoding_or_ocr_candidate` | 3 | aumann_committee:3 | torah_code_experiment_cities_aumann:3 | try alternate extraction or OCR; current text stream is not source-ready |
-| `recover_missing_pdf` | 23 | aumann_committee:20; simon_mckay:3 | torah_code_experiment_cities;torah_code_experiment_cities_aumann:1; torah_code_experiment_cities_aumann:19; torah_code_experiment_cities_simon_mckay:3 | manual live/archive recovery needed before text or source-row review |
+| `recover_missing_pdf` | 18 | aumann_committee:15; simon_mckay:3 | torah_code_experiment_cities;torah_code_experiment_cities_aumann:1; torah_code_experiment_cities_aumann:14; torah_code_experiment_cities_simon_mckay:3 | manual live/archive recovery needed before text or source-row review |
 
 ## Queue
 
@@ -25,6 +25,11 @@ p-levels.
 | 1 | `review_extractable_text` | cities_pdf_dp_365_4 | aumann_committee | extractable_text | 2 | 5456 | source review still needed | [url](https://www.torah-code.org/experiments/dp_365_4.pdf) |
 | 1 | `review_extractable_text` | cities_pdf_communities_data | gans_communities | extractable_text | 8 | 18135 | source review still needed | [url](https://www.torah-code.org/papers/communities_data.pdf) |
 | 1 | `review_extractable_text` | cities_pdf_gans | gans_communities | extractable_text | 5 | 19499 | source review still needed | [url](https://www.torah-code.org/papers/gans.pdf) |
+| 2 | `ocr_image_only_pdf` | cities_pdf_dp364_short | aumann_committee | zero_extractable_text | 6 | 0 | no extractable text from recovered PDF | [url](https://www.torah-code.org/experiments/dp364_short.pdf) |
+| 2 | `ocr_image_only_pdf` | cities_pdf_dp365a_appendix_2 | aumann_committee | zero_extractable_text | 10 | 0 | no extractable text from recovered PDF | [url](https://www.torah-code.org/experiments/dp365A_appendix_2.pdf) |
+| 2 | `ocr_image_only_pdf` | cities_pdf_dp365a_appendix_3 | aumann_committee | zero_extractable_text |  | 0 | no extractable text from recovered PDF | [url](https://www.torah-code.org/experiments/dp365A_appendix_3.pdf) |
+| 2 | `ocr_image_only_pdf` | cities_pdf_dp365a_appendix_4 | aumann_committee | zero_extractable_text | 2 | 0 | no extractable text from recovered PDF | [url](https://www.torah-code.org/experiments/dp365A_appendix_4.pdf) |
+| 2 | `ocr_image_only_pdf` | cities_pdf_dp365a_appendix_5 | aumann_committee | zero_extractable_text | 2 | 0 | no extractable text from recovered PDF | [url](https://www.torah-code.org/experiments/dp365A_appendix_5.pdf) |
 | 2 | `ocr_image_only_pdf` | cities_pdf_dp365a_appendix_6 | aumann_committee | zero_extractable_text | 2 | 0 | no extractable text from recovered PDF | [url](https://www.torah-code.org/experiments/dp365A_appendix_6.pdf) |
 | 2 | `ocr_image_only_pdf` | cities_pdf_dp365a_appendix_7 | aumann_committee | zero_extractable_text | 5 | 0 | no extractable text from recovered PDF | [url](https://www.torah-code.org/experiments/dp365A_appendix_7.pdf) |
 | 2 | `ocr_image_only_pdf` | cities_pdf_dp365a_part_2_p105_111 | aumann_committee | zero_extractable_text | 7 | 0 | no extractable text from recovered PDF | [url](https://www.torah-code.org/experiments/dp365A_part_2_p105-111.pdf) |
@@ -36,12 +41,7 @@ p-levels.
 | 4 | `recover_missing_pdf` | cities_pdf_dp364_appendix_3 | aumann_committee | not_audited |  |  | no usable PDF recovered | [url](https://www.torah-code.org/experiments/dp364_appendix_3.pdf) |
 | 4 | `recover_missing_pdf` | cities_pdf_dp364_appendix_4 | aumann_committee | not_audited |  |  | no usable PDF recovered | [url](https://www.torah-code.org/experiments/dp364_appendix_4.pdf) |
 | 4 | `recover_missing_pdf` | cities_pdf_dp364_appendix_5 | aumann_committee | not_audited |  |  | no usable PDF recovered | [url](https://www.torah-code.org/experiments/dp364_appendix_5.pdf) |
-| 4 | `recover_missing_pdf` | cities_pdf_dp364_short | aumann_committee | not_audited |  |  | no usable PDF recovered | [url](https://www.torah-code.org/experiments/dp364_short.pdf) |
 | 4 | `recover_missing_pdf` | cities_pdf_dp365a_appendix_1 | aumann_committee | not_audited |  |  | no usable PDF recovered | [url](https://www.torah-code.org/experiments/dp365A_appendix_1.pdf) |
-| 4 | `recover_missing_pdf` | cities_pdf_dp365a_appendix_2 | aumann_committee | not_audited |  |  | no usable PDF recovered | [url](https://www.torah-code.org/experiments/dp365A_appendix_2.pdf) |
-| 4 | `recover_missing_pdf` | cities_pdf_dp365a_appendix_3 | aumann_committee | not_audited |  |  | no usable PDF recovered | [url](https://www.torah-code.org/experiments/dp365A_appendix_3.pdf) |
-| 4 | `recover_missing_pdf` | cities_pdf_dp365a_appendix_4 | aumann_committee | not_audited |  |  | no usable PDF recovered | [url](https://www.torah-code.org/experiments/dp365A_appendix_4.pdf) |
-| 4 | `recover_missing_pdf` | cities_pdf_dp365a_appendix_5 | aumann_committee | not_audited |  |  | no usable PDF recovered | [url](https://www.torah-code.org/experiments/dp365A_appendix_5.pdf) |
 | 4 | `recover_missing_pdf` | cities_pdf_dp365a_p17_24 | aumann_committee | not_audited |  |  | no usable PDF recovered | [url](https://www.torah-code.org/experiments/dp365A_p17-24.pdf) |
 | 4 | `recover_missing_pdf` | cities_pdf_dp365a_part_2_p111_130 | aumann_committee | not_audited |  |  | no usable PDF recovered | [url](https://www.torah-code.org/experiments/dp365A_part_2_p111-130.pdf) |
 | 4 | `recover_missing_pdf` | cities_pdf_dp365a_part_2_p131_139 | aumann_committee | not_audited |  |  | no usable PDF recovered | [url](https://www.torah-code.org/experiments/dp365A_part_2_p131-139.pdf) |
@@ -71,10 +71,10 @@ existing source-shape coverage only: 66 records and 210 community rows, with no
 source-row import.
 
 The unreadable-PDF review in `docs/CITIES_UNREADABLE_PDF_REVIEW.md` separates
-the seven recovered but unreadable PDFs into OCR/image-only and
+the 12 recovered but unreadable PDF rows into OCR/image-only and
 encoding-or-OCR routes without running OCR or repairing text.
 The OCR feasibility probe in `docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md`
-records OCR count/status metrics for those same seven rows without tracking
+records OCR count/status metrics for those same rows without tracking
 OCR text.
 The OCR review packet in `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md`
 adds ignored local page-image and OCR-text sidecars and tracks only
@@ -82,7 +82,7 @@ paths/counts/status before any source-row use.
 The OCR review checklist in `docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md`
 orders those sidecars for page-image comparison and contact-sheet review.
 The OCR page review in `docs/CITIES_UNREADABLE_PDF_OCR_PAGE_REVIEW.md`
-records visual page-role decisions for all 41 OCR-packet pages while keeping
+records visual page-role decisions for reviewed OCR-packet pages while keeping
 source-row imports at zero.
 The source-row lock queue in `docs/CITIES_SOURCE_ROW_LOCK_QUEUE.md`
 then filters those reviewed page roles to 14 table/list/exception-note

@@ -33,7 +33,7 @@ REQUIRED_PHRASES = (
     "does not create city-name rows",
     "does not make any result-bearing claim",
     "CITIES_UNREADABLE_PDF_OCR_PAGE_REVIEW.md",
-    "records visual page-role decisions for all 41 OCR-packet pages",
+    "records visual page-role decisions for reviewed OCR-packet pages",
     "source-row imports at zero",
     "CITIES_SOURCE_ROW_LOCK_QUEUE.md",
     "14 table/list/exception-note",

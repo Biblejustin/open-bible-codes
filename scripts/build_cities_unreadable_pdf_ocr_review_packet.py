@@ -322,7 +322,7 @@ def write_markdown(
     lines = [
         "# Cities Unreadable PDF OCR Review Packet",
         "",
-        "Status: OCR review packet only. This renders local page images and OCR text sidecars for the seven recovered unreadable Cities PDFs, then records only paths/counts/status in tracked files.",
+        f"Status: OCR review packet only. This renders local page images and OCR text sidecars for {summary['pdf_rows']} recovered unreadable Cities PDF rows, then records only paths/counts/status in tracked files.",
         "It does not track OCR text, repair text, import source rows, normalize city names, run ELS searches, compute compactness, or verify p-levels.",
         "",
         "Reproduce:",

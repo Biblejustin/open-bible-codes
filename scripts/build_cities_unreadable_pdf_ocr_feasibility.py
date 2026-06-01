@@ -306,8 +306,8 @@ def write_markdown(
     lines = [
         "# Cities Unreadable PDF OCR Feasibility",
         "",
-        "Status: OCR feasibility only. This runs local OCR against the seven",
-        "recovered unreadable Cities PDFs and records only counts/status. It does",
+        f"Status: OCR feasibility only. This runs local OCR against {values['rows_reviewed']}",
+        "recovered unreadable Cities PDF rows and records only counts/status. It does",
         "not store OCR text in tracked files, repair text, import source rows,",
         "normalize city names, run ELS searches, compute compactness, or verify",
         "p-levels.",

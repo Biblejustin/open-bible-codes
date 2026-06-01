@@ -44,7 +44,7 @@ are recovered and checksummed.
 
 The isolated recovery probe in `docs/CITIES_PDF_RECOVERY_PROBE.md` checks the
 35 linked Cities/Aumann/Simon-McKay PDF URLs against the live site and exact-URL
-Wayback snapshots. It currently recovers 12 archived PDFs and leaves 23 PDF
+Wayback snapshots. It currently recovers 17 archived PDFs and leaves 18 PDF
 links unrecovered; those recovered files are still source-shape inputs only.
 The follow-up text audit in `docs/CITIES_RECOVERED_PDF_TEXT_AUDIT.md`
 separates the recovered PDFs into extractable, zero-text, and garbled/non-Latin
@@ -53,15 +53,6 @@ buckets without OCR or result-bearing ELS work.
 PDF rows into source-review action lanes for planning only.
 `docs/CITIES_EXTRACTABLE_TEXT_REVIEW.md` further separates readable PDFs
 by source-review role without importing city rows.
-`docs/CITIES_UNREADABLE_PDF_REVIEW.md` separately routes the recovered
-unreadable PDFs into OCR/image-only and encoding-or-OCR planning lanes without
-running OCR.
-`docs/CITIES_UNREADABLE_PDF_OCR_FEASIBILITY.md` records OCR count/status
-feasibility for those lanes without tracking OCR text.
-`docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_PACKET.md` then builds ignored local
-page-image and OCR-text sidecars while tracking only paths/counts/status.
-`docs/CITIES_UNREADABLE_PDF_OCR_REVIEW_CHECKLIST.md` groups those sidecars into
-review order and contact sheets without source-row decisions.
 
 No city-name rows are normalized, no ELS search is run, and no p-level is
 verified here.

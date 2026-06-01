@@ -229,30 +229,30 @@ and no city-name normalization, ELS searches, compactness runs, or p-levels.
 The Cities source-transcription decision-record file is now preflight-guarded
 as schema-only until readable transcription decisions are deliberately locked.
 The Cities PDF recovery probe now checks the 35 linked Cities/Aumann/Simon-McKay
-PDF URLs in an isolated ignored bundle and records 12 usable archived PDFs plus
-23 unrecovered links; the follow-up recovered-PDF text audit classifies those 12
-PDFs into 5 extractable rows, 4 zero-text rows, and 3 garbled/non-Latin rows.
+PDF URLs in an isolated ignored bundle and records 17 usable archived PDFs plus
+18 unrecovered links; the follow-up recovered-PDF text audit classifies those 17
+PDFs into 5 extractable rows, 9 zero-text rows, and 3 garbled/non-Latin rows.
 The Cities source-review queue now turns all 35 PDF rows into next-action lanes:
-5 extractable-text review rows, 4 OCR/image-only rows, 3 encoding-or-OCR rows,
-and 23 missing-PDF recovery rows. The extractable-text role review separates the
+5 extractable-text review rows, 9 OCR/image-only rows, 3 encoding-or-OCR rows,
+and 18 missing-PDF recovery rows. The extractable-text role review separates the
 five readable PDFs into 1 data-bearing candidate, 1 method-context candidate,
 and 3 commentary/critique rows; the data-bearing candidate is already covered
 by the Gans communities source-shape audit with 66 source records and 210
 community rows, without source-row import or result-bearing work. The
-unreadable-PDF review now routes the remaining 7 recovered unreadable PDFs into
-4 OCR/image-only rows and 3 encoding-or-OCR candidates, covering 41 pages
+unreadable-PDF review now routes the remaining 12 recovered unreadable PDF rows into
+9 OCR/image-only rows and 3 encoding-or-OCR candidates, covering 61 pages
 without running OCR; the unreadable-review checker locks those rows, route
 metadata, summary metrics, and manifest boundaries back to builder output. The
-OCR feasibility probe then attempts those 41 pages with local English OCR and
-records text signal in all 7 rows and 39 pages, without storing OCR text in
+OCR feasibility probe then attempts those 61 pages with local English OCR and
+records text signal in 11 rows and 59 pages, without storing OCR text in
 tracked files; the OCR-feasibility checker locks the row schema, OCR parameters,
 recomputed summary totals, and manifest metadata. The OCR review packet records
-41 page rows with local sidecar paths and counts; the packet checker locks the
+61 page rows with local sidecar paths and counts; the packet checker locks the
 schema, sidecar path scope, recomputed summary totals, and manifest metadata.
-The OCR review checklist groups the 7 PDFs into local contact-sheet review
+The OCR review checklist groups the 11 packet PDFs into local contact-sheet review
 rows; the checklist checker locks contact-sheet path scope, recomputed summary
 totals, and manifest contact-summary metadata. The page-image review labels all
-41 pages; the page-review checker locks builder-derived decision rows, summary
+41 currently reviewed pages; the page-review checker locks builder-derived decision rows, summary
 rows, manifest inputs, and no-source-row-use boundaries. The source-row lock
 queue isolates 14 candidate pages across three labels, the worksheet assigns 14
 lock decision ids, and the evidence packet joins those ids to PDF metadata,
@@ -302,8 +302,8 @@ Current result:
 
 - PDF URLs probed: 35.
 - Live PDF rows: 0.
-- Usable archived PDF rows: 12.
-- Unrecovered PDF rows: 23.
+- Usable archived PDF rows: 17.
+- Unrecovered PDF rows: 18.
 - Boundary: recovered PDF bytes are source-shape inputs only; no OCR,
   city-name normalization, ELS search, compactness calculation, or p-level
   verification is performed.
@@ -342,9 +342,9 @@ Current result:
 
 - Rows queued: 35.
 - Extractable-text review rows: 5.
-- OCR/image-only rows: 4.
+- OCR/image-only rows: 9.
 - Encoding-or-OCR candidate rows: 3.
-- Missing-PDF recovery rows: 23.
+- Missing-PDF recovery rows: 18.
 - Boundary: this is planning metadata only; it does not decide source
   admissibility, create city-name rows, run ELS searches, compute compactness, or
   verify p-levels.
@@ -380,12 +380,12 @@ python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_review.toml --re
 
 Current result:
 
-- Unreadable rows reviewed: 7.
-- OCR/image-only rows: 4.
+- Unreadable rows reviewed: 12.
+- OCR/image-only rows: 9.
 - Encoding-or-OCR candidate rows: 3.
-- Aumann committee rows: 6.
+- Aumann committee rows: 11.
 - Other-family rows: 1.
-- Pages needing review: 41.
+- Pages needing review: 61.
 - Boundary: this does not run OCR, repair text, import source rows, normalize
   city names, run ELS searches, compute compactness, or verify p-levels.
 - Guard: `scripts/check_cities_unreadable_pdf_review_doc.py` now compares the
@@ -402,12 +402,12 @@ python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_ocr_feasibility.
 
 Current result:
 
-- Rows reviewed: 7.
-- Rows with OCR text: 7.
-- Pages attempted: 41.
-- Pages with OCR text: 39.
-- OCR text signal chars: 54324.
-- OCR text detected rows: 7.
+- Rows reviewed: 12.
+- Rows with OCR text: 11.
+- Pages attempted: 61.
+- Pages with OCR text: 59.
+- OCR text signal chars: 70207.
+- OCR text detected rows: 11.
 - Boundary: this does not store OCR text in tracked files, repair text, import
   source rows, normalize city names, run ELS searches, compute compactness, or
   verify p-levels.
@@ -425,13 +425,13 @@ python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_ocr_review_packe
 
 Current result:
 
-- PDF rows: 7.
-- Page rows: 41.
-- Pages with OCR text: 39.
+- PDF rows: 11.
+- Page rows: 61.
+- Pages with OCR text: 59.
 - Pages without OCR text: 2.
-- OCR text signal chars: 54324.
-- OCR words: 15019.
-- OCR lines: 1563.
+- OCR text signal chars: 70207.
+- OCR words: 19434.
+- OCR lines: 2322.
 - Boundary: this tracks paths/counts/status only. OCR text sidecars and page
   images are ignored local review aids; this does not repair text, import
   source rows, normalize city names, run ELS searches, compute compactness, or
@@ -450,15 +450,15 @@ python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_ocr_review_check
 
 Current result:
 
-- Checklist rows: 7.
-- PDF rows: 7.
-- Pages total: 41.
-- Pages with OCR text: 39.
+- Checklist rows: 11.
+- PDF rows: 11.
+- Pages total: 61.
+- Pages with OCR text: 59.
 - Pages without OCR text: 2.
-- OCR text signal chars: 54324.
-- OCR words: 15019.
-- OCR lines: 1563.
-- Label contact sheets: 7.
+- OCR text signal chars: 70207.
+- OCR words: 19434.
+- OCR lines: 2322.
+- Label contact sheets: 11.
 - Boundary: this creates ignored local contact sheets and review-order rows
   only. It does not track OCR text, repair text, import source rows, normalize
   city names, run ELS searches, compute compactness, or verify p-levels.

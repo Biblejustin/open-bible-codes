@@ -112,7 +112,7 @@ exact published WRR reproduction remains caveated.
   `https://web.archive.org/web/20150728045254id_/http://www.torah-code.org:80/research/research_3c.shtml`
 - Wayback-recovered Cities/Aumann/Simon-McKay PDF links:
   `docs/CITIES_PDF_RECOVERY_PROBE.md` records 35 linked PDF URLs probed, 0
-  live PDF rows, 12 usable archived PDF rows, and 23 unrecovered PDF rows.
+  live PDF rows, 17 usable archived PDF rows, and 18 unrecovered PDF rows.
 - WRR/Nations discussion page citing 163 famous-rabbi second-list distances:
   `https://www.math.utoronto.ca/drorbn/Codes/Nations/main_gir.html`
 - WRR/Nations discussion page in modified Michigan-Claremont notation:
@@ -412,14 +412,14 @@ without OCR, city normalization, ELS searches, compactness calculations, or
 p-level verification.
 `scripts/build_cities_source_review_queue.py` merges those rows with the
 unrecovered-link probe into source-review lanes for planning only.
-`scripts/build_cities_unreadable_pdf_review.py` routes the seven recovered
-unreadable PDFs into OCR/image-only and encoding-or-OCR planning lanes without
+`scripts/build_cities_unreadable_pdf_review.py` routes the 12 recovered
+unreadable PDF rows into OCR/image-only and encoding-or-OCR planning lanes without
 running OCR or repairing text.
 `scripts/build_cities_unreadable_pdf_ocr_feasibility.py` then probes local OCR
-feasibility for those seven rows and records count/status metrics only, with no
+feasibility for those rows and records count/status metrics only, with no
 tracked OCR text.
 `scripts/build_cities_unreadable_pdf_ocr_review_packet.py` creates ignored
-local page-image and OCR-text sidecars for those 41 pages and records only
+local page-image and OCR-text sidecars for 61 packet pages and records only
 paths/counts/status before any source-row use.
 `scripts/build_cities_unreadable_pdf_ocr_review_checklist.py` groups those
 sidecars into no-input review order and creates ignored local contact sheets.
