@@ -150,6 +150,7 @@ def validate_reader_package_inputs(
         )
     failures.extend(validate_doc_source_paths(doc_paths))
     failures.extend(validate_unique_package_sources([*doc_paths, *report_set]))
+    failures.extend(validate_package_start_paths(doc_set | report_set))
     failures.extend(validate_packaged_reader_links(doc_set | report_set))
     if failures:
         raise ValueError(
@@ -172,6 +173,14 @@ def validate_unique_package_sources(paths: list[Path]) -> list[str]:
         if path in seen:
             failures.append(f"duplicate package source: {path}")
         seen.add(path)
+    return failures
+
+
+def validate_package_start_paths(package_paths: set[Path]) -> list[str]:
+    failures: list[str] = []
+    for path in PACKAGE_START_PATHS:
+        if path not in package_paths:
+            failures.append(f"package start path missing from inputs: {path}")
     return failures
 
 
@@ -269,7 +278,7 @@ def write_package_readme(out_dir: Path, copied: list[CopiedFile]) -> None:
         "# Public Reader Package",
         "",
         "Status: generated package over whitelisted docs and formal report summary.",
-        "Reader-path guard: project findings overview and configured reader-link sources validated before packaging.",
+        "Reader-path guard: project findings overview, package start paths, and configured reader-link sources validated before packaging.",
         "It contains no raw Bible source files and no local database artifacts.",
         "",
         "Start with:",
@@ -331,7 +340,7 @@ def write_manifest(out_dir: Path, copied: list[CopiedFile]) -> None:
         "git_head": git_head(),
         "package_boundary": "whitelisted docs and formal report summary only; no raw source texts",
         "reader_path_guard": (
-            "project findings overview and configured reader-link sources validated before packaging"
+            "project findings overview, package start paths, and configured reader-link sources validated before packaging"
         ),
         "package_start_paths": [path.as_posix() for path in PACKAGE_START_PATHS],
         "reader_link_sources": {

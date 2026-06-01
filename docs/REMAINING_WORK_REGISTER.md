@@ -2992,5 +2992,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   entries.
 - Tightened `--extra-doc` validation so extra document inputs must be Markdown
   docs; JSON remains limited to the formal report outputs.
+- Tightened the package start-list guard so every generated start-list path
+  must be present in the actual package input set after optional report files
+  are filtered, preventing a package README from pointing at a missing formal
+  report summary.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.

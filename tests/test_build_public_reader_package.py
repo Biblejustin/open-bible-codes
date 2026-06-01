@@ -92,7 +92,9 @@ def test_builds_reader_package_from_whitelisted_docs(tmp_path, monkeypatch) -> N
     package_readme = Path("reports/public_reader_package/README.md").read_text(
         encoding="utf-8"
     )
-    assert "Reader-path guard: project findings overview" in package_readme
+    assert "Reader-path guard: project findings overview, package start paths" in (
+        package_readme
+    )
     for index, path in enumerate(package.PACKAGE_START_PATHS, start=1):
         assert f"{index}. `{path.as_posix()}`" in package_readme
 
@@ -169,6 +171,8 @@ def test_refuses_stale_project_findings_overview(tmp_path, monkeypatch) -> None:
     monkeypatch.chdir(tmp_path)
     for path in package.DEFAULT_DOC_PATHS:
         _write(path, _default_doc_text(path))
+    for path in package.DEFAULT_REPORT_PATHS:
+        _write(path, "# report\n\nbody\n" if path.suffix == ".md" else "{}\n")
     _write(overview_check.DEFAULT_DOC, "# Broken Overview\n\nbody\n")
 
     with pytest.raises(ValueError) as excinfo:
@@ -176,6 +180,20 @@ def test_refuses_stale_project_findings_overview(tmp_path, monkeypatch) -> None:
 
     assert "reader package input validation failed" in str(excinfo.value)
     assert "missing heading: ## Short Answer" in str(excinfo.value)
+
+
+def test_refuses_missing_start_path_after_report_filtering(tmp_path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    for path in package.DEFAULT_DOC_PATHS:
+        _write(path, _default_doc_text(path))
+
+    with pytest.raises(ValueError) as excinfo:
+        package.build_public_reader_package(out_dir=Path("reports/public_reader_package"))
+
+    assert "reader package input validation failed" in str(excinfo.value)
+    assert (
+        "package start path missing from inputs: reports/real_report_run/summary.md"
+    ) in str(excinfo.value)
 
 
 def test_refuses_duplicate_package_sources(tmp_path, monkeypatch) -> None:
