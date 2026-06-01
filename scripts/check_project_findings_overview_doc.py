@@ -34,6 +34,9 @@ REQUIRED_PHRASES = (
     "does not treat a hit count by itself as strong evidence",
     "These are not final conclusions",
     "source comparison, not for making a stronger meaning claim",
+    "4 candidate-source audit rows",
+    "0 candidate pages ready to import verses",
+    "0 candidate pages ready for a result",
     "exact published reproduction remains unfinished",
     "no current row should be treated as settled public evidence",
 )

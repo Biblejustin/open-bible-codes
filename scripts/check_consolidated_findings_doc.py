@@ -24,6 +24,10 @@ NO_RAW_COUNT_PHRASE = (
     "Avoid more raw count expansion unless the claim standard is fixed in advance"
 )
 CURRENT_STATUS_PHRASE = "Current next target status"
+KJVA_SOURCE_HANDOFF_PHRASE = (
+    "4 candidate-source audit rows, 0 candidate verse-import-ready pages, "
+    "0 candidate result-ready pages, and result allowed 0"
+)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -72,6 +76,7 @@ def validate_consolidated_findings_doc(doc: Path, profiles_path: Path) -> list[s
         FRESH_TARGET_PHRASE,
         NO_RERUN_PHRASE,
         NO_RAW_COUNT_PHRASE,
+        KJVA_SOURCE_HANDOFF_PHRASE,
     ):
         if not contains_phrase(normalized_text, phrase):
             failures.append(f"{doc} missing guard phrase: {phrase}")

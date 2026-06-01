@@ -2863,3 +2863,16 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Extended `scripts/check_kjva_public_handoff_docs.py` and
   `scripts/check_real_report_run_doc.py` so the reader-facing docs cannot drop
   those candidate-source counts while still claiming the handoff is current.
+
+## KJVA Candidate-Source Findings Overview Sync
+
+- Added the same source-readiness boundary to the general-reader findings
+  overview and consolidated findings: the KJVA bridge rows remain interesting
+  review material, but no new KJVA result run is ready.
+- Current reader-facing summary now says the handoff has 4 candidate-source
+  audit rows, 0 candidate verse-import-ready pages, 0 candidate result-ready
+  pages, and result allowed 0.
+- Extended `scripts/check_project_findings_overview_doc.py` and
+  `scripts/check_consolidated_findings_doc.py` so those broader summary docs
+  cannot describe the KJVA bridge lane without the current source-readiness
+  blocker.

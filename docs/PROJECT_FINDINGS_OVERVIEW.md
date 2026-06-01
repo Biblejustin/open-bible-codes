@@ -73,7 +73,10 @@ This is another strong review item.
 
 The KJV with Apocrypha work found bridge patterns that stood above several
 comparison checks. This area deserves more review, but it came from earlier
-screening, so the wording should stay careful.
+screening, so the wording should stay careful. The current source-readiness
+handoff also says no new KJV with Apocrypha result should be run yet: it has 4
+candidate-source audit rows, but 0 candidate pages ready to import verses and
+0 candidate pages ready for a result.
 
 Greek words such as lawlessness, Isaac, and wonder also produced rows worth a
 closer look. They are not settled findings.

@@ -77,7 +77,10 @@ bucket beyond hidden-path-only. A 1000-sample term-level shuffled control found
 The locked 5000-sample post-screen confirmatory follow-up over those 15 terms
 found all 15 with Benjamini-Hochberg `q_ge <= 0.01`, and 3 terms stood above
 every shuffled sample.
-Neither result is public-claim evidence.
+Neither result is public-claim evidence. The current KJVA source-readiness
+handoff keeps the follow-up blocked at 4 candidate-source audit rows, 0
+candidate verse-import-ready pages, 0 candidate result-ready pages, and result
+allowed 0.
 
 Clean-lock follow-up lanes added after earlier evidence rows were excluded did
 not produce claim-ready material. Hebrew concordance words produced 87
