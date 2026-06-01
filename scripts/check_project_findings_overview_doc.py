@@ -69,6 +69,9 @@ READER_PATH_REQUIREMENTS = {
     ),
     DEFAULT_START_HERE: (
         "1. `docs/PROJECT_FINDINGS_OVERVIEW.md` for the whole-project findings summary.",
+        "8. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status.",
+        "9. `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md` for KJVA source-lock status.",
+        "10. `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md` for Cities source-chain status.",
         "no current row should be presented as a public claim",
     ),
 }

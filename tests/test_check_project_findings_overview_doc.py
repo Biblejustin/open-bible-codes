@@ -85,7 +85,37 @@ def test_missing_start_here_reader_path_fails(tmp_path: Path) -> None:
     assert failures == [
         f"{start_here} missing phrase: "
         "1. `docs/PROJECT_FINDINGS_OVERVIEW.md` for the whole-project findings summary.",
+        f"{start_here} missing phrase: "
+        "8. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status.",
+        f"{start_here} missing phrase: "
+        "9. `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md` for KJVA source-lock status.",
+        f"{start_here} missing phrase: "
+        "10. `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md` for Cities source-chain status.",
         f"{start_here} missing phrase: no current row should be presented as a public claim",
+    ]
+
+
+def test_missing_start_here_handoff_link_fails(tmp_path: Path) -> None:
+    readme = tmp_path / "README.md"
+    start_here = tmp_path / "START_HERE.md"
+    readme.write_text(valid_readme_text(), encoding="utf-8")
+    start_here.write_text(
+        valid_start_here_text().replace(
+            "8. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status.",
+            "8. `docs/MISSING.md` for exact WRR source/method status.",
+        ),
+        encoding="utf-8",
+    )
+
+    failures = check.validate_project_findings_overview(
+        check.DEFAULT_DOC,
+        readme,
+        start_here,
+    )
+
+    assert failures == [
+        f"{start_here} missing phrase: "
+        "8. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status."
     ]
 
 

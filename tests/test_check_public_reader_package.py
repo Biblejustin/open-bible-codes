@@ -29,8 +29,8 @@ def _default_doc_text(path: Path) -> str:
     if path == overview_check.DEFAULT_START_HERE:
         return (
             "# Start Here\n\n"
-            "1. `docs/PROJECT_FINDINGS_OVERVIEW.md` for the whole-project findings summary.\n\n"
-            "no current row should be presented as a public claim\n"
+            + "\n".join(overview_check.READER_PATH_REQUIREMENTS[path])
+            + "\n"
         )
     if path == Path("docs/FINAL_REPORT.md"):
         return (

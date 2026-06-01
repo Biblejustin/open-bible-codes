@@ -20,6 +20,9 @@ Read the project in this order:
 5. `docs/CONSOLIDATED_FINDINGS.md` for the broader evidence read.
 6. `docs/REAL_REPORT_RUN.md` for what the formal report assembly checks.
 7. `docs/REMAINING_WORK_REGISTER.md` for unresolved work.
+8. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status.
+9. `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md` for KJVA source-lock status.
+10. `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md` for Cities source-chain status.
 
 ## Current Read
 
