@@ -100,6 +100,15 @@ REQUIRED_PHRASES_BY_DOC = {
         "data/study/mappings/cities_source_transcription_decisions.csv",
         "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
     ),
+    Path("reports/real_report_run/summary.md"): (
+        "## Cities Source-Row Lock Status",
+        "| Queue rows | 14 |",
+        "| Populated decision records | 14 |",
+        "| Source-row imports | 0 |",
+        "| ELS runs | 0 |",
+        "| Compactness runs | 0 |",
+        "Current read: Cities source-row pages remain a source-review lane only.",
+    ),
 }
 
 FORBIDDEN_PHRASES_BY_DOC = {
@@ -133,6 +142,12 @@ FORBIDDEN_PHRASES_BY_DOC = {
     ),
     Path("protocols/README.md"): (
         "Cities city-name rows are imported",
+        "Cities ELS run is ready",
+    ),
+    Path("reports/real_report_run/summary.md"): (
+        "| Source-row imports | 1 |",
+        "| ELS runs | 1 |",
+        "| Compactness runs | 1 |",
         "Cities ELS run is ready",
     ),
 }
