@@ -2892,3 +2892,19 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/check_cities_no_input_handoff_status_doc.py`, and
   `protocols/cities_no_input_handoff_status.toml`; wired the checker into
   preflight and the protocol into `protocols/real_report_run.toml`.
+
+## Cities Findings Overview Sync
+
+- Surfaced the Cities/Aumann/Simon-McKay source-row boundary in the
+  general-reader findings overview so the whole-project summary no longer
+  makes readers discover the Cities blocker only through the handoff packet.
+- Current overview wording now keeps the same no-result boundary visible: 14
+  source-row lock candidate pages, 14 populated source-row lock rows, 8
+  handoff rows, 6 manual-input-needed rows, 203 priority line-crop review
+  rows, and no Cities result allowed.
+- The overview also states that the Cities lane has not produced source rows,
+  city-name normalization, ELS searches, compactness runs, or p-levels.
+- Extended `scripts/check_project_findings_overview_doc.py` so the
+  general-reader overview cannot keep a Cities section while dropping the
+  current source-row blocker counts and no-result boundary.
+- Commit: `a25e313`.
