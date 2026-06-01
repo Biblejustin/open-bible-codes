@@ -42,6 +42,8 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
         "`docs/WRR_NO_INPUT_HANDOFF_STATUS.md`",
         "`docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`",
         "`docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`",
+        "812 unique term-center presence rows.",
+        "809 Bible presence rows and 3 control presence rows.",
     ),
     Path("docs/REAL_REPORT_RUN.md"): (
         "Git remotes pointing at `Biblejustin/open-bible-codes`;",
@@ -58,6 +60,8 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
     Path("docs/CONSOLIDATED_FINDINGS.md"): (
         "Neither result is public-claim evidence.",
         "4 candidate-source audit rows, 0 candidate verse-import-ready pages, 0 candidate result-ready pages, and result allowed 0.",
+        "812 unique term-center presence rows.",
+        "839 Bible occurrence rows and 84 control occurrence rows.",
         "83 selected follow-up rows from English screening, Greek screening, Hebrew screening, and Hebrew theology queues",
         "46 deduped compound-extension rows with 250/250 row-local paired controls",
     ),
@@ -133,6 +137,10 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
         "Exact published WRR reproduction | forbidden | 72 of 163 defined; gap 91",
         "Claim boundary: KJVA no-input handoff only; no new result.",
         "Current read: Cities source-row pages remain a source-review lane only.",
+        "Presence rows | 812",
+        "Bible presence rows | 809",
+        "Control presence rows | 3",
+        "Raw occurrence rows | 923",
         "Skip 2..100 count hits | 58,715,011",
         "Hidden-path rows retained | 8,443,775",
         "Triage queue rows | 926",
@@ -519,6 +527,18 @@ def validate_packaged_real_report_manifest(
                 "related_center_word_review": 15,
                 "span_context_review": 24,
                 "strongest_manual_review": 11,
+            },
+            "centered_occurrence_presence_rows": 812,
+            "centered_occurrence_occurrence_rows": 923,
+            "centered_occurrence_bible_presence_rows": 809,
+            "centered_occurrence_control_presence_rows": 3,
+            "centered_occurrence_type_counts": {
+                "centered_self_exact_word": 526,
+                "centered_self_surface_form": 4,
+                "relevant_center_same_concept": 3,
+                "relevant_center_same_category": 13,
+                "center_verse_relevant": 70,
+                "span_relevant": 196,
             },
         }
         for key, expected_value in checks.items():

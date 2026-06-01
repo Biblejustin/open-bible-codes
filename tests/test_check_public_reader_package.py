@@ -46,6 +46,8 @@ def _default_doc_text(path: Path) -> str:
             "`docs/WRR_NO_INPUT_HANDOFF_STATUS.md`, "
             "`docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`, and "
             "`docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`.\n"
+            + "\n".join(check.REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH[path])
+            + "\n"
         )
     if path == Path("docs/REAL_REPORT_RUN.md"):
         return (
@@ -166,6 +168,18 @@ def _default_report_text(path: Path) -> str:
                     "related_center_word_review": 15,
                     "span_context_review": 24,
                     "strongest_manual_review": 11,
+                },
+                "centered_occurrence_presence_rows": 812,
+                "centered_occurrence_occurrence_rows": 923,
+                "centered_occurrence_bible_presence_rows": 809,
+                "centered_occurrence_control_presence_rows": 3,
+                "centered_occurrence_type_counts": {
+                    "centered_self_exact_word": 526,
+                    "centered_self_surface_form": 4,
+                    "relevant_center_same_concept": 3,
+                    "relevant_center_same_category": 13,
+                    "center_verse_relevant": 70,
+                    "span_relevant": 196,
                 },
             },
             indent=2,
@@ -412,6 +426,26 @@ def test_detects_packaged_real_report_manifest_all_codes_drift(
 
     assert (
         f"{manifest_path} all_codes_followup_letter_path_mismatches drifted: 1 != 0"
+    ) in failures
+
+
+def test_detects_packaged_real_report_manifest_centered_occurrence_drift(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    manifest_path = out_dir / "reports/real_report_run/manifest.json"
+    report_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    report_manifest["centered_occurrence_presence_rows"] = 811
+    manifest_path.write_text(
+        json.dumps(report_manifest, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert (
+        f"{manifest_path} centered_occurrence_presence_rows drifted: 811 != 812"
     ) in failures
 
 
