@@ -62,7 +62,7 @@ all-script exact-test and check-script wiring release guards, plus a
 metadata-only CrossWire KJVA source-candidate audit, Project Gutenberg
 split-source metadata audit, Project Gutenberg heading-level coverage probe,
 source-status rollup refresh, and public-reader package handoff export
-guarding, and Start Here reader-link package guarding.
+guarding, and Start Here/README reader-link package guarding.
 The WRR method-lane wide-skip probe is now guarded, included in the real-report
 run, carried into the exact-gap/blocker packets, and mirrored in public
 reader-facing WRR wording.
@@ -2954,12 +2954,15 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   project-findings overview, final report, or real-report docs must be present
   in the public-reader package whitelist.
 
-## Public Reader Package Start Here Link Guard
+## Public Reader Package Reader-Link Guard
 
 - Added a package-input guard for `docs/START_HERE.md` so every backticked
   `docs/*.md` or `reports/*.md` reader-path link in that guide must be present
   in the public-reader package whitelist before packaging.
+- Added the same package-input guard to the README's top `Reader path:` section
+  without requiring every support-link elsewhere in the README to be packaged.
 - Added focused package tests for the current `START_HERE` reader links and
-  for a failure case where `START_HERE` points to an unpackaged document.
+  README reader-path links, plus failure cases where either points to an
+  unpackaged document.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.

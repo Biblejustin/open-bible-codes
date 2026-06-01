@@ -103,6 +103,16 @@ def test_reader_package_includes_start_here_references() -> None:
         assert Path(reference) in package_paths
 
 
+def test_reader_package_includes_readme_reader_path_references() -> None:
+    package_paths = set(package.DEFAULT_DOC_PATHS) | set(package.DEFAULT_REPORT_PATHS)
+    text = Path("README.md").read_text(encoding="utf-8")
+    section = package.extract_marked_section(text, "Reader path:")
+    references = sorted(set(package.PACKAGED_READER_LINK_RE.findall(section)))
+    assert references
+    for reference in references:
+        assert Path(reference) in package_paths
+
+
 def test_refuses_stale_project_findings_overview(tmp_path, monkeypatch) -> None:
     monkeypatch.chdir(tmp_path)
     for path in package.DEFAULT_DOC_PATHS:
@@ -136,6 +146,33 @@ def test_refuses_unpackaged_start_here_reference(tmp_path, monkeypatch) -> None:
     assert "reader package input validation failed" in str(excinfo.value)
     assert (
         "docs/START_HERE.md references docs/NOT_IN_PACKAGE.md "
+        "but package does not include it"
+    ) in str(excinfo.value)
+
+
+def test_refuses_unpackaged_readme_reader_path_reference(tmp_path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    for path in package.DEFAULT_DOC_PATHS:
+        _write(path, _default_doc_text(path))
+    for path in package.DEFAULT_REPORT_PATHS:
+        _write(path, "# report\n\nbody\n" if path.suffix == ".md" else "{}\n")
+    _write(
+        overview_check.DEFAULT_README,
+        "# README\n\n"
+        "whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`\n\n"
+        "Reader path:\n\n"
+        "- start here: `docs/START_HERE.md`\n"
+        "- missing doc: `docs/NOT_IN_PACKAGE.md`\n\n"
+        "Repository navigation:\n\n"
+        "- documentation index: `docs/INDEX.md`\n",
+    )
+
+    with pytest.raises(ValueError) as excinfo:
+        package.build_public_reader_package(out_dir=Path("reports/public_reader_package"))
+
+    assert "reader package input validation failed" in str(excinfo.value)
+    assert (
+        "README.md reader path references docs/NOT_IN_PACKAGE.md "
         "but package does not include it"
     ) in str(excinfo.value)
 

@@ -45,6 +45,9 @@ DEFAULT_REPORT_PATHS = (
     Path("reports/real_report_run/protocol_run.manifest.json"),
 )
 READER_LINK_SOURCE_PATHS = (Path("docs/START_HERE.md"),)
+READER_LINK_SECTION_MARKERS = {
+    Path("README.md"): "Reader path:",
+}
 PACKAGED_READER_LINK_RE = re.compile(r"`((?:docs|reports)/[^`]+\.md)`")
 
 
@@ -150,7 +153,35 @@ def validate_packaged_reader_links(package_paths: set[Path]) -> list[str]:
                 failures.append(
                     f"{source} references {reference} but package does not include it"
                 )
+    for source, marker in READER_LINK_SECTION_MARKERS.items():
+        if source not in package_paths:
+            continue
+        if not source.exists():
+            failures.append(f"{source} is missing")
+            continue
+        section = extract_marked_section(source.read_text(encoding="utf-8"), marker)
+        references = sorted(set(PACKAGED_READER_LINK_RE.findall(section)))
+        for reference in references:
+            if Path(reference) not in package_paths:
+                failures.append(
+                    f"{source} reader path references {reference} "
+                    "but package does not include it"
+                )
     return failures
+
+
+def extract_marked_section(text: str, marker: str) -> str:
+    _, found, remainder = text.partition(marker)
+    if not found:
+        return ""
+    section_lines: list[str] = []
+    for line in remainder.splitlines():
+        if not line.strip():
+            if section_lines:
+                break
+            continue
+        section_lines.append(line)
+    return "\n".join(section_lines)
 
 
 def copy_checked_file(source: Path, destination: Path) -> CopiedFile:
