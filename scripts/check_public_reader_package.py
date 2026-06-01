@@ -21,6 +21,10 @@ REQUIRED_GENERATED_FILES = (
 )
 REAL_REPORT_SUMMARY_SOURCE = Path("reports/real_report_run/summary.md")
 REAL_REPORT_MANIFEST_SOURCE = Path("reports/real_report_run/manifest.json")
+REAL_REPORT_PREFLIGHT_SOURCE = Path("reports/real_report_run/preflight.json")
+REAL_REPORT_PROTOCOL_MANIFEST_SOURCE = Path(
+    "reports/real_report_run/protocol_run.manifest.json"
+)
 REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
     Path("docs/START_HERE.md"): (
         "8. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status.",
@@ -186,6 +190,8 @@ def validate_public_reader_package(
     failures.extend(validate_required_packaged_phrases(package_dir))
     failures.extend(validate_packaged_real_report_summary(manifest, package_dir))
     failures.extend(validate_packaged_real_report_manifest(manifest, package_dir))
+    failures.extend(validate_packaged_real_report_preflight(manifest, package_dir))
+    failures.extend(validate_packaged_real_report_protocol_manifest(manifest, package_dir))
     failures.extend(validate_generated_package_readme(manifest, package_dir))
     failures.extend(validate_generated_reader_package(manifest, package_dir))
     failures.extend(validate_no_unmanifested_files(manifest, package_dir))
@@ -434,6 +440,115 @@ def validate_packaged_real_report_manifest(
             ]
         return []
     return []
+
+
+def validate_packaged_real_report_preflight(
+    manifest: dict[str, Any],
+    package_dir: Path,
+) -> list[str]:
+    path = packaged_path_for_source(manifest, package_dir, REAL_REPORT_PREFLIGHT_SOURCE)
+    if path is None:
+        return []
+    data = read_packaged_json(path)
+    if isinstance(data, str):
+        return [data]
+    failures: list[str] = []
+    checks: dict[str, Any] = {
+        "status": "passed",
+        "allow_dirty": False,
+        "git_status_lines": [],
+        "risky_tracked_paths": [],
+    }
+    for key, expected in checks.items():
+        if data.get(key) != expected:
+            failures.append(f"{path} {key} drifted: {data.get(key)} != {expected}")
+    remotes = data.get("git_remotes")
+    if not isinstance(remotes, list) or not any(
+        "github.com/Biblejustin/open-bible-codes" in str(remote)
+        for remote in remotes
+    ):
+        failures.append(f"{path} missing Biblejustin remote")
+    git_head = manifest.get("git_head")
+    if isinstance(git_head, str) and git_head:
+        expected = git_head[:7]
+        if data.get("git_commit") != expected:
+            failures.append(
+                f"{path} git_commit drifted: {data.get('git_commit')} != {expected}"
+            )
+    return failures
+
+
+def validate_packaged_real_report_protocol_manifest(
+    manifest: dict[str, Any],
+    package_dir: Path,
+) -> list[str]:
+    path = packaged_path_for_source(
+        manifest,
+        package_dir,
+        REAL_REPORT_PROTOCOL_MANIFEST_SOURCE,
+    )
+    if path is None:
+        return []
+    data = read_packaged_json(path)
+    if isinstance(data, str):
+        return [data]
+    failures: list[str] = []
+    checks: dict[str, Any] = {
+        "tool": "run_protocol",
+        "protocol": "real_report_run",
+        "status": "success",
+        "dry_run": False,
+    }
+    for key, expected in checks.items():
+        if data.get(key) != expected:
+            failures.append(f"{path} {key} drifted: {data.get(key)} != {expected}")
+    steps = data.get("steps")
+    if not isinstance(steps, list) or not steps:
+        failures.append(f"{path} has no protocol steps")
+        return failures
+    preflight = next(
+        (step for step in steps if isinstance(step, dict) and step.get("id") == "preflight"),
+        None,
+    )
+    if not isinstance(preflight, dict):
+        failures.append(f"{path} missing preflight step")
+    elif preflight.get("return_code") != 0 or preflight.get("skipped") is not False:
+        failures.append(f"{path} preflight step did not run cleanly")
+    return failures
+
+
+def packaged_path_for_source(
+    manifest: dict[str, Any],
+    package_dir: Path,
+    source: Path,
+) -> Path | None:
+    files = manifest.get("files")
+    if not isinstance(files, list):
+        return None
+    for item in files:
+        if not isinstance(item, dict) or item.get("source") != source.as_posix():
+            continue
+        package_path_text = item.get("package_path")
+        if not isinstance(package_path_text, str):
+            return None
+        package_path = Path(package_path_text)
+        if package_path.is_absolute() or ".." in package_path.parts:
+            return None
+        path = package_dir / package_path
+        if not path.exists() or path.is_symlink() or not path.is_file():
+            return None
+        return path
+    return None
+
+
+def read_packaged_json(path: Path) -> dict[str, Any] | str:
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        return f"{path} is invalid JSON: {exc}"
+    if not isinstance(data, dict):
+        return f"{path} JSON root must be an object"
+    return data
 
 
 def validate_generated_package_readme(

@@ -70,6 +70,37 @@ def _default_report_text(path: Path) -> str:
             + "\n\n".join(check.REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH[path])
             + "\n"
         )
+    if path == Path("reports/real_report_run/preflight.json"):
+        return json.dumps(
+            {
+                "status": "passed",
+                "allow_dirty": False,
+                "git_status_lines": [],
+                "risky_tracked_paths": [],
+                "git_remotes": [
+                    "origin\thttps://github.com/Biblejustin/open-bible-codes.git (fetch)"
+                ],
+                "git_commit": check.builder.git_head()[:7],
+            },
+            indent=2,
+        ) + "\n"
+    if path == Path("reports/real_report_run/protocol_run.manifest.json"):
+        return json.dumps(
+            {
+                "tool": "run_protocol",
+                "protocol": "real_report_run",
+                "status": "success",
+                "dry_run": False,
+                "steps": [
+                    {
+                        "id": "preflight",
+                        "return_code": 0,
+                        "skipped": False,
+                    }
+                ],
+            },
+            indent=2,
+        ) + "\n"
     if path.suffix == ".md":
         return "# report\n\nbody\n"
     return "{}\n"
@@ -167,6 +198,38 @@ def test_detects_packaged_real_report_manifest_commit_drift(
         f"{out_dir}/reports/real_report_run/manifest.json commit stamp drifted: "
         "None != abcdef0"
     ) in failures
+
+
+def test_detects_packaged_real_report_preflight_status_drift(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    preflight_path = out_dir / "reports/real_report_run/preflight.json"
+    preflight = json.loads(preflight_path.read_text(encoding="utf-8"))
+    preflight["status"] = "failed"
+    preflight_path.write_text(json.dumps(preflight, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert (
+        f"{preflight_path} status drifted: failed != passed"
+    ) in failures
+
+
+def test_detects_packaged_real_report_protocol_manifest_drift(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    protocol_path = out_dir / "reports/real_report_run/protocol_run.manifest.json"
+    protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
+    protocol["steps"][0]["skipped"] = True
+    protocol_path.write_text(json.dumps(protocol, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert f"{protocol_path} preflight step did not run cleanly" in failures
 
 
 def test_detects_missing_required_manifest_source(tmp_path, monkeypatch) -> None:
