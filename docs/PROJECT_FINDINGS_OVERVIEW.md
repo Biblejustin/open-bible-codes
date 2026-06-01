@@ -147,6 +147,9 @@ The project found 14 source-row lock candidate pages and recorded 14 populated
 source-row lock rows. Those are page-level locks only. They do not import city
 names or run a Cities result.
 
+In plain words, those are pages that may contain the city-name source list, not
+a verified city-name list ready for searching.
+
 The current Cities no-input handoff has 8 handoff rows, 6
 manual-input-needed rows, 14 transcription review rows, 203 priority line-crop
 review rows, and no Cities result allowed.

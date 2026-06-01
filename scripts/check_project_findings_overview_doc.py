@@ -41,6 +41,7 @@ REQUIRED_PHRASES = (
     "exact published reproduction remains unfinished",
     "14 source-row lock candidate pages",
     "14 populated source-row lock rows",
+    "pages that may contain the city-name source list, not a verified city-name list ready for searching",
     "8 handoff rows",
     "6 manual-input-needed rows",
     "203 priority line-crop review rows",

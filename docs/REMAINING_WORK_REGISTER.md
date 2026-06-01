@@ -2906,7 +2906,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   city-name normalization, ELS searches, compactness runs, or p-levels.
 - Extended `scripts/check_project_findings_overview_doc.py` so the
   general-reader overview cannot keep a Cities section while dropping the
-  current source-row blocker counts and no-result boundary.
+  current source-row blocker counts, plain-language page-vs-list explanation,
+  and no-result boundary.
 - Commit: `a25e313`.
 
 ## Public Reader Package Cities Handoff Sync
