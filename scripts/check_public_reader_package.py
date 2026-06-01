@@ -22,6 +22,17 @@ REQUIRED_GENERATED_FILES = (
 REAL_REPORT_SUMMARY_SOURCE = Path("reports/real_report_run/summary.md")
 REAL_REPORT_MANIFEST_SOURCE = Path("reports/real_report_run/manifest.json")
 REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
+    Path("docs/START_HERE.md"): (
+        "8. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status.",
+        "9. `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md` for KJVA source-lock status.",
+        "10. `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md` for Cities source-chain status.",
+    ),
+    Path("docs/PROJECT_FINDINGS_OVERVIEW.md"): (
+        "`docs/REMAINING_WORK_REGISTER.md`",
+        "`docs/WRR_NO_INPUT_HANDOFF_STATUS.md`",
+        "`docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`",
+        "`docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`",
+    ),
     Path("docs/FINAL_REPORT.md"): (
         "`docs/REMAINING_WORK_REGISTER.md`",
         "`docs/WRR_NO_INPUT_HANDOFF_STATUS.md`",
