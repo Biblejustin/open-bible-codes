@@ -29,6 +29,9 @@ REQUIRED_PHRASES_BY_DOC = {
         "WRR method-lane wide-skip probe:",
         "It checks those 11 OCR-matched method-lane terms through skip 5000",
         "0 wider-skip ordinary Genesis hits",
+        "WRR no-input handoff status:",
+        "9 handoff rows, 8 manual-input-needed rows",
+        "no-new-result boundary",
     ),
     Path("docs/REAL_REPORT_RUN.md"): (
         "WRR claim-readiness doc records selected local-lock readiness",
@@ -43,6 +46,8 @@ REQUIRED_PHRASES_BY_DOC = {
         "locks them as 26 `no_source_change` rows and 11 `method_lock` rows",
         "docs/WRR_METHOD_LANE_WIDE_SKIP_PROBE.md",
         "0 ordinary Genesis hits through skip 5000",
+        "WRR no-input handoff status consolidates 9 handoff rows",
+        "no new WRR result allowed",
     ),
     Path("docs/FINAL_REPORT.md"): (
         "Exact published reproduction remains caveated by the 163-distance gap, not by pending source-edit choices",
@@ -57,6 +62,8 @@ REQUIRED_PHRASES_BY_DOC = {
         "The 11 OCR-matched method-lane terms remain zero-hit",
         "through skip 5000",
         "not settle the exact-published WRR gap",
+        "The no-input handoff now has one guarded status packet",
+        "It is a work map, not a new WRR result.",
     ),
     Path("docs/FINAL_REPORT_DRAFT.md"): (
         "The residual handoff is packetized without selecting corrections",
@@ -113,6 +120,8 @@ REQUIRED_PHRASES_BY_DOC = {
         "The WRR method-lane wide-skip probe is now guarded",
         "0 total hits through skip 5000",
         "not explained by a small skip-cap extension",
+        "WRR_NO_INPUT_HANDOFF_STATUS.md` now consolidates",
+        "new WRR result allowed 0",
     ),
     Path("protocols/README.md"): (
         "WRR source audit:",
@@ -124,6 +133,8 @@ REQUIRED_PHRASES_BY_DOC = {
         "999,999 date-label permutation diagnostic",
         "method-lane wide-skip probe",
         "0 ordinary Genesis hits through skip 5000",
+        "The consolidated no-input handoff is in",
+        "no-new-result boundary",
         "It is locked local evidence, not an exact WRR reproduction.",
     ),
 }
