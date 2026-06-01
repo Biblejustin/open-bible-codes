@@ -211,6 +211,23 @@ def test_detects_default_doc_without_packaged_phrase_guard(
     ) in failures
 
 
+def test_detects_packaged_phrase_guard_path_not_in_manifest(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    guarded = dict(check.REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH)
+    guarded[Path("docs/MISSING_FROM_PACKAGE.md")] = ("required phrase",)
+    monkeypatch.setattr(check, "REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH", guarded)
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert (
+        "required packaged phrase guard path not in manifest: "
+        "docs/MISSING_FROM_PACKAGE.md"
+    ) in failures
+
+
 def test_detects_missing_packaged_file(tmp_path, monkeypatch) -> None:
     out_dir = _build_package(tmp_path, monkeypatch)
     (out_dir / "docs/START_HERE.md").unlink()

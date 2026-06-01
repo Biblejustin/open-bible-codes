@@ -175,12 +175,33 @@ def validate_public_reader_package(
     failures.extend(validate_manifest_metadata(manifest, package_dir))
     failures.extend(validate_manifest_files(manifest, package_dir))
     failures.extend(validate_required_packaged_phrase_guard_coverage())
+    failures.extend(validate_required_packaged_phrase_guard_targets(manifest))
     failures.extend(validate_required_packaged_phrases(package_dir))
     failures.extend(validate_packaged_real_report_summary(manifest, package_dir))
     failures.extend(validate_packaged_real_report_manifest(manifest, package_dir))
     failures.extend(validate_generated_package_readme(manifest, package_dir))
     failures.extend(validate_generated_reader_package(manifest, package_dir))
     failures.extend(validate_no_unmanifested_files(manifest, package_dir))
+    return failures
+
+
+def validate_required_packaged_phrase_guard_targets(
+    manifest: dict[str, Any],
+) -> list[str]:
+    files = manifest.get("files")
+    if not isinstance(files, list):
+        return []
+    package_paths = {
+        str(item.get("package_path", ""))
+        for item in files
+        if isinstance(item, dict)
+    }
+    failures: list[str] = []
+    for path in REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH:
+        if path.as_posix() not in package_paths:
+            failures.append(
+                f"required packaged phrase guard path not in manifest: {path}"
+            )
     return failures
 
 
