@@ -265,6 +265,8 @@ def copy_checked_file(source: Path, destination: Path) -> CopiedFile:
     validate_package_source_path(source)
     if not source.exists():
         raise FileNotFoundError(f"missing package source: {source}")
+    if source.is_symlink():
+        raise ValueError(f"refusing symlink package source: {source}")
     if is_forbidden_source(source):
         raise ValueError(f"refusing to package raw/source data path: {source}")
     destination.parent.mkdir(parents=True, exist_ok=True)

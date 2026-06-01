@@ -441,3 +441,18 @@ def test_refuses_unsupported_package_source_suffix(tmp_path, monkeypatch) -> Non
         )
 
     assert "refusing unsupported package source suffix" in str(excinfo.value)
+
+
+def test_refuses_symlink_package_source_paths(tmp_path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    _write(Path("outside.md"), "# Outside\n")
+    Path("docs").mkdir(parents=True, exist_ok=True)
+    Path("docs/link.md").symlink_to(Path("../outside.md"))
+
+    with pytest.raises(ValueError) as excinfo:
+        package.copy_checked_file(
+            Path("docs/link.md"),
+            Path("reports/public_reader_package/docs/link.md"),
+        )
+
+    assert "refusing symlink package source: docs/link.md" in str(excinfo.value)

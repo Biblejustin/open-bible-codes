@@ -3001,5 +3001,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Added reader-doc location validation for public-reader doc inputs, so
   `--extra-doc` is limited to `README.md` or tracked `docs/*.md` reader
   documents instead of arbitrary tracked Markdown support files.
+- Added symlink rejection for public-reader package sources, so a tracked or
+  extra Markdown path cannot package bytes from an out-of-tree target through a
+  symbolic link.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.

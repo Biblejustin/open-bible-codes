@@ -114,7 +114,8 @@ This writes `reports/public_reader_package/README.md`,
 the formal report summary. It validates the general-reader findings overview and
 reader-path links, confirms every generated start-list entry is actually in the
 package, and rejects untracked or non-reader extra Markdown docs before
-packaging. It does not include raw Bible source files.
+packaging. It also refuses symlinked package sources. It does not include raw
+Bible source files.
 
 Optional local data doc check, after bootstrapping ignored source caches:
 
