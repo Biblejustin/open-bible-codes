@@ -134,6 +134,8 @@ REQUIRED_PHRASES_BY_DOC = {
         "docs/CITIES_NO_INPUT_HANDOFF_STATUS.md",
         "8 handoff rows",
         "6 manual-input-needed rows",
+        "41 reviewed OCR packet pages out of 61 packet pages",
+        "20 packet pages unreviewed",
         "no Cities result allowed",
     ),
     Path("reports/real_report_run/summary.md"): (

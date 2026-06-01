@@ -280,9 +280,10 @@ Cities unreadable-PDF OCR page review:
 python3 -m scripts.run_protocol protocols/cities_unreadable_pdf_ocr_page_review.toml --resume
 ```
 
-This records visual page-role decisions for the 41 currently reviewed OCR packet pages. It does
-not track OCR body text, repair text, import source rows, normalize city names,
-or run result-bearing work. Tracked review:
+This records visual page-role decisions for 41 reviewed OCR packet pages out
+of 61 packet pages, leaving 20 packet pages unreviewed. It does not track OCR
+body text, repair text, import source rows, normalize city names, or run
+result-bearing work. Tracked review:
 `docs/CITIES_UNREADABLE_PDF_OCR_PAGE_REVIEW.md`.
 
 Cities source-row lock queue:
