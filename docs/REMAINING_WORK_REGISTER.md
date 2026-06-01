@@ -2894,7 +2894,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Added `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md` as the consolidated no-input
   packet for the Cities/Aumann/Simon-McKay source-row lane.
 - Current Cities no-input handoff summary: 8 handoff rows, 6
-  manual-input-needed rows, 14 transcription review rows, 203 priority
+  manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages,
+  41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority
   line-crop review rows, and no Cities result allowed.
 - The packet keeps the existing source-row lock handoff boundary visible: 14
   source-row lock candidate pages, 14 populated lock rows, 14 pending
