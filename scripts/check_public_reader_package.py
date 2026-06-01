@@ -49,6 +49,11 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
         "Neither result is public-claim evidence.",
         "4 candidate-source audit rows, 0 candidate verse-import-ready pages, 0 candidate result-ready pages, and result allowed 0.",
     ),
+    Path("docs/STRONGEST_CANDIDATE_DEEP_DIVE.md"): (
+        "This page does not make any row a public claim.",
+        "main caution: these are review candidates, not settled findings",
+        "Post-screen confirmatory: 15/15 terms at q <= 0.01, 3 above every shuffled sample. Prospective lock: 1 bridge row, 0/7 terms at q <= 0.05.",
+    ),
     Path("docs/REMAINING_WORK_REGISTER.md"): (
         "Current overview wording now keeps the same no-result boundary visible: 14 source-row lock candidate pages, 14 populated source-row lock rows, 8 handoff rows, 6 manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages, 41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority line-crop review rows, and no Cities result allowed.",
     ),
