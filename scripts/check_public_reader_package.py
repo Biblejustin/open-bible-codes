@@ -28,6 +28,27 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
     Path("docs/REMAINING_WORK_REGISTER.md"): (
         "Current overview wording now keeps the same no-result boundary visible: 14 source-row lock candidate pages, 14 populated source-row lock rows, 8 handoff rows, 6 manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages, 41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority line-crop review rows, and no Cities result allowed.",
     ),
+    Path("docs/WRR_NO_INPUT_HANDOFF_STATUS.md"): (
+        "Manual-input-needed rows: 8.",
+        "Source-cited defined distances: 163.",
+        "Current defined distances: 72.",
+        "Manual decision rows: 37.",
+        "New WRR result allowed: 0.",
+    ),
+    Path("docs/KJVA_NO_INPUT_HANDOFF_STATUS.md"): (
+        "Candidate source audits: 4.",
+        "Candidate result-ready pages: 0.",
+        "Source-lock ready: 0.",
+        "Result allowed: 0.",
+        "Claim status: `kjva_no_input_handoff_blocks_new_result`.",
+    ),
+    Path("docs/CITIES_NO_INPUT_HANDOFF_STATUS.md"): (
+        "OCR packet pages: 61.",
+        "Reviewed OCR packet pages: 41.",
+        "Unreviewed OCR packet pages: 20.",
+        "Line crop rows: 203.",
+        "Result allowed: 0.",
+    ),
 }
 
 
