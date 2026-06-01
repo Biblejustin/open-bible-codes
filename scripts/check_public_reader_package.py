@@ -409,8 +409,6 @@ def validate_packaged_real_report_manifest(
     package_dir: Path,
 ) -> list[str]:
     git_head = manifest.get("git_head")
-    if not isinstance(git_head, str) or not git_head:
-        return []
     files = manifest.get("files")
     if not isinstance(files, list):
         return []
@@ -428,17 +426,38 @@ def validate_packaged_real_report_manifest(
         path = package_dir / package_path
         if not path.exists() or path.is_symlink() or not path.is_file():
             return []
-        expected = git_head[:7]
         try:
             report_manifest = json.loads(path.read_text(encoding="utf-8"))
         except json.JSONDecodeError as exc:
             return [f"{path} is invalid JSON: {exc}"]
-        if report_manifest.get("commit") != expected:
-            return [
-                f"{path} commit stamp drifted: "
-                f"{report_manifest.get('commit')} != {expected}"
-            ]
-        return []
+        failures: list[str] = []
+        if isinstance(git_head, str) and git_head:
+            expected = git_head[:7]
+            if report_manifest.get("commit") != expected:
+                failures.append(
+                    f"{path} commit stamp drifted: "
+                    f"{report_manifest.get('commit')} != {expected}"
+                )
+        checks: dict[str, Any] = {
+            "tool": "build_real_report_run_summary",
+            "wrr_no_input_handoff_status_rows": 9,
+            "wrr_no_input_handoff_manual_input_needed_rows": 8,
+            "wrr_no_input_handoff_new_result_allowed": "0",
+            "wrr_no_input_handoff_exact_reproduction_ready": "0",
+            "wrr_no_input_handoff_claim_status": "local_locked_method_ready_exact_published_open",
+            "kjva_no_input_handoff_status_rows": 9,
+            "kjva_no_input_handoff_manual_input_needed_rows": 8,
+            "kjva_no_input_handoff_source_policy_blocker_rows": 7,
+            "kjva_no_input_handoff_result_allowed": "0",
+            "kjva_no_input_handoff_claim_status": "kjva_no_input_handoff_blocks_new_result",
+        }
+        for key, expected_value in checks.items():
+            if report_manifest.get(key) != expected_value:
+                failures.append(
+                    f"{path} {key} drifted: "
+                    f"{report_manifest.get(key)} != {expected_value}"
+                )
+        return failures
     return []
 
 

@@ -84,6 +84,28 @@ def _default_report_text(path: Path) -> str:
             },
             indent=2,
         ) + "\n"
+    if path == Path("reports/real_report_run/manifest.json"):
+        return json.dumps(
+            {
+                "tool": "build_real_report_run_summary",
+                "commit": check.builder.git_head()[:7],
+                "wrr_no_input_handoff_status_rows": 9,
+                "wrr_no_input_handoff_manual_input_needed_rows": 8,
+                "wrr_no_input_handoff_new_result_allowed": "0",
+                "wrr_no_input_handoff_exact_reproduction_ready": "0",
+                "wrr_no_input_handoff_claim_status": (
+                    "local_locked_method_ready_exact_published_open"
+                ),
+                "kjva_no_input_handoff_status_rows": 9,
+                "kjva_no_input_handoff_manual_input_needed_rows": 8,
+                "kjva_no_input_handoff_source_policy_blocker_rows": 7,
+                "kjva_no_input_handoff_result_allowed": "0",
+                "kjva_no_input_handoff_claim_status": (
+                    "kjva_no_input_handoff_blocks_new_result"
+                ),
+            },
+            indent=2,
+        ) + "\n"
     if path == Path("reports/real_report_run/protocol_run.manifest.json"):
         return json.dumps(
             {
@@ -196,7 +218,27 @@ def test_detects_packaged_real_report_manifest_commit_drift(
 
     assert (
         f"{out_dir}/reports/real_report_run/manifest.json commit stamp drifted: "
-        "None != abcdef0"
+        " != abcdef0"
+    ) in failures
+
+
+def test_detects_packaged_real_report_manifest_result_boundary_drift(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    manifest_path = out_dir / "reports/real_report_run/manifest.json"
+    report_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    report_manifest["kjva_no_input_handoff_result_allowed"] = "1"
+    manifest_path.write_text(
+        json.dumps(report_manifest, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert (
+        f"{manifest_path} kjva_no_input_handoff_result_allowed drifted: 1 != 0"
     ) in failures
 
 
