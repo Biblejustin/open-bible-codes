@@ -2913,9 +2913,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   makes readers discover the Cities blocker only through the handoff packet.
 - Current overview wording now keeps the same no-result boundary visible: 14
   source-row lock candidate pages, 14 populated source-row lock rows, 8
-  handoff rows, 6 manual-input-needed rows, 61 OCR packet pages, 41 reviewed
-  OCR packet pages, 20 unreviewed OCR packet pages, 203 priority line-crop
-  review rows, and no Cities result allowed.
+  handoff rows, 6 manual-input-needed rows, 14 transcription review rows, 61
+  OCR packet pages, 41 reviewed OCR packet pages, 20 unreviewed OCR packet
+  pages, 203 priority line-crop review rows, and no Cities result allowed.
 - The overview also states that the Cities lane has not produced source rows,
   city-name normalization, ELS searches, compactness runs, or p-levels.
 - Extended `scripts/check_project_findings_overview_doc.py` so the

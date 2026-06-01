@@ -50,6 +50,24 @@ def test_stale_handoff_summary_without_ocr_counts_fails(tmp_path: Path) -> None:
     ]
 
 
+def test_remaining_work_overview_sync_count_cluster_fails(tmp_path: Path) -> None:
+    required = (
+        "Current overview wording now keeps the same no-result boundary visible: "
+        "14 source-row lock candidate pages, 14 populated source-row lock rows, "
+        "8 handoff rows, 6 manual-input-needed rows, 14 transcription review "
+        "rows, 61 OCR packet pages, 41 reviewed OCR packet pages, "
+        "20 unreviewed OCR packet pages, 203 priority line-crop review rows, "
+        "and no Cities result allowed."
+    )
+    write_valid_docs(tmp_path, omit={Path("docs/REMAINING_WORK_REGISTER.md"): required})
+
+    failures = check.validate_public_handoff_docs(tmp_path)
+
+    assert failures == [
+        f"docs/REMAINING_WORK_REGISTER.md missing phrase: {required}"
+    ]
+
+
 def test_generated_summary_source_import_stale_phrase_fails(tmp_path: Path) -> None:
     stale = "| Source-row imports | 1 |"
     write_valid_docs(tmp_path)

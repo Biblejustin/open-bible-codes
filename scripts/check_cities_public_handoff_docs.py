@@ -139,6 +139,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "Cities no-input handoff",
         "8 handoff rows",
         "6 manual-input-needed rows",
+        "Current overview wording now keeps the same no-result boundary visible: 14 source-row lock candidate pages, 14 populated source-row lock rows, 8 handoff rows, 6 manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages, 41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority line-crop review rows, and no Cities result allowed.",
         "61 packet pages, 41 reviewed packet pages, and 20 unreviewed packet pages",
         "61 OCR packet pages",
         "41 reviewed OCR packet pages",
