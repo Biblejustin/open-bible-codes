@@ -2805,3 +2805,29 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `scripts/check_kjva_no_input_handoff_status_doc.py`, and wired the handoff
   into `scripts/preflight_real_report_run.py` plus
   `protocols/real_report_run.toml`.
+
+## Generated Real-Report Handoff Guarding
+
+- The generated real-report summary now surfaces both consolidated no-input
+  packets from their CSV/manifest outputs: WRR from
+  `reports/wrr_1994/wrr_no_input_handoff_status_summary.csv` and
+  `reports/wrr_1994/wrr_no_input_handoff_status.manifest.json`, and KJVA from
+  `reports/kjva_no_input_handoff_status/summary.csv` and
+  `reports/kjva_no_input_handoff_status/manifest.json`.
+- Current generated WRR handoff read: 9 handoff rows, 8
+  manual-input-needed rows, 163 source-cited defined distances, 72 current
+  defined distances, 91 remaining gap, new WRR result allowed 0, and exact
+  reproduction ready 0.
+- Current generated KJVA handoff read: 9 handoff rows, 8
+  manual-input-needed rows, 11 next-result gates, 10 blocked gate rows, 7
+  source-policy blocker rows, source-lock ready 0, and result allowed 0.
+- Public handoff drift guards now also check `reports/real_report_run/summary.md`
+  for WRR, KJVA, and Cities boundary language: no new WRR result, no exact
+  published WRR reproduction, no new KJVA result, no KJVA source lock, no
+  Cities source-row imports, no Cities ELS run, and no Cities compactness run.
+- Added or updated `scripts/check_real_report_run_doc.py`,
+  `scripts/check_wrr_public_handoff_docs.py`,
+  `scripts/check_kjva_public_handoff_docs.py`, and
+  `scripts/check_cities_public_handoff_docs.py`, plus their focused tests.
+- Commits: `82a6f78`, `c6d4809`, `7a9da6e`, `a061abd`, `45d4eba`, and
+  `16f020c`.
