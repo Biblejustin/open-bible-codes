@@ -89,7 +89,9 @@ def valid_row() -> dict[str, str]:
             "decision records have 14 populated lock rows and the transcription "
             "worksheet has 14 pending review rows with no source rows imported; "
             "OCR page review has 61 packet pages with 41 reviewed and "
-            "20 unreviewed"
+            "20 unreviewed; consolidated no-input handoff has 8 handoff rows "
+            "plus 6 manual-input-needed rows plus 14 transcription review rows "
+            "plus 203 priority line-crop review rows plus no Cities result allowed"
         ),
         "evidence": "docs/CITIES_SOURCE_ROW_LOCK_EVIDENCE_PACKET.md",
         "notes": (
@@ -134,9 +136,13 @@ def write_doc(path: Path, *, omit: str = "") -> None:
         "data/study/mappings/cities_source_row_lock_decisions.csv",
         "data/study/mappings/cities_source_transcription_decisions.csv",
         "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
+        "8 handoff rows",
+        "6 manual-input-needed rows",
+        "14 transcription review rows",
         "61 OCR packet pages",
         "41 reviewed OCR packet pages",
         "20 unreviewed OCR packet pages",
+        "203 priority line-crop review rows",
     ]
     path.write_text(
         "\n".join(phrase for phrase in phrases if phrase != omit),
