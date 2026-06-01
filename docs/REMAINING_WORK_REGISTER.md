@@ -3034,6 +3034,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened the verifier so the packaged real-report summary's visible
   `Commit:` line must match the package manifest HEAD, catching a package built
   around a stale formal summary.
+- Tightened the verifier so the packaged real-report JSON manifest's `commit`
+  field must match the package manifest HEAD, catching stale machine-readable
+  formal-run metadata too.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 

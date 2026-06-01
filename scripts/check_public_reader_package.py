@@ -20,6 +20,7 @@ REQUIRED_GENERATED_FILES = (
     Path("reader_package.md"),
 )
 REAL_REPORT_SUMMARY_SOURCE = Path("reports/real_report_run/summary.md")
+REAL_REPORT_MANIFEST_SOURCE = Path("reports/real_report_run/manifest.json")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -73,6 +74,7 @@ def validate_public_reader_package(
     failures.extend(validate_manifest_metadata(manifest, package_dir))
     failures.extend(validate_manifest_files(manifest, package_dir))
     failures.extend(validate_packaged_real_report_summary(manifest, package_dir))
+    failures.extend(validate_packaged_real_report_manifest(manifest, package_dir))
     failures.extend(validate_generated_package_readme(manifest, package_dir))
     failures.extend(validate_generated_reader_package(manifest, package_dir))
     failures.extend(validate_no_unmanifested_files(manifest, package_dir))
@@ -233,6 +235,44 @@ def validate_packaged_real_report_summary(
         expected = f"Commit: `{git_head[:7]}`"
         if expected not in path.read_text(encoding="utf-8"):
             return [f"{path} commit stamp drifted: expected {expected}"]
+        return []
+    return []
+
+
+def validate_packaged_real_report_manifest(
+    manifest: dict[str, Any],
+    package_dir: Path,
+) -> list[str]:
+    git_head = manifest.get("git_head")
+    if not isinstance(git_head, str) or not git_head:
+        return []
+    files = manifest.get("files")
+    if not isinstance(files, list):
+        return []
+    for item in files:
+        if not isinstance(item, dict):
+            continue
+        if item.get("source") != REAL_REPORT_MANIFEST_SOURCE.as_posix():
+            continue
+        package_path_text = item.get("package_path")
+        if not isinstance(package_path_text, str):
+            return []
+        package_path = Path(package_path_text)
+        if package_path.is_absolute() or ".." in package_path.parts:
+            return []
+        path = package_dir / package_path
+        if not path.exists() or path.is_symlink() or not path.is_file():
+            return []
+        expected = git_head[:7]
+        try:
+            report_manifest = json.loads(path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            return [f"{path} is invalid JSON: {exc}"]
+        if report_manifest.get("commit") != expected:
+            return [
+                f"{path} commit stamp drifted: "
+                f"{report_manifest.get('commit')} != {expected}"
+            ]
         return []
     return []
 
