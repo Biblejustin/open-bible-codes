@@ -3040,6 +3040,18 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 
+## Real-Report Doc Direct Gate
+
+- Wired `scripts/check_real_report_run_doc.py` directly into `make
+  fast-validate` and `make public-release-check`, instead of relying only on
+  the formal real-report preflight path to catch real-report documentation
+  drift.
+- Updated README validation descriptions and Makefile guard tests so the
+  direct real-report documentation gate remains visible in both dirty-safe and
+  clean release checks.
+- This is a documentation guard only. It does not change report conclusions,
+  source policy, imported texts, ELS searches, or result status.
+
 ## Clean-Lock Results Summary Guard
 
 - Added a dedicated guard for `docs/CLEAN_LOCK_RESULTS_SUMMARY.md` so the

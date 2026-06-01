@@ -72,10 +72,11 @@ tracked report/database/raw-source artifacts, scans tracked files for the
 forbidden GitHub account text, checks high-confidence secret-token patterns,
 validates documented script/source-path references, and rejects unsupported
 public claim language. It also guards the general-reader findings overview and
-configured reader-link sources, validates protocol TOML files, corpus config
-schemas, term-file schema/normalization, all-script exact-test coverage,
-check-script wiring coverage, the study-mapping guard suite, and a temporary
-public-reader package build from the whitelisted docs.
+real-report run documentation, validates configured reader-link sources,
+validates protocol TOML files, corpus config schemas, term-file
+schema/normalization, all-script exact-test coverage, check-script wiring
+coverage, the study-mapping guard suite, and a temporary public-reader package
+build from the whitelisted docs.
 
 Current fast validation before a handoff:
 
@@ -86,11 +87,11 @@ make fast-validate
 This runs the unit suite, regenerates documentation/protocol indexes, checks
 diff whitespace, runs dirty-tree-safe release hygiene, validates
 expanded-strata operator tooling, checks public claim language, and verifies
-the general-reader findings overview, protocol TOML files, corpus config
-schemas, term-file schema/normalization, all-script exact-test coverage,
-check-script wiring coverage, the study-mapping guard suite, a temporary
-public-reader package build, and local data doc references against the current
-ignored source caches.
+the general-reader findings overview, real-report run documentation, protocol
+TOML files, corpus config schemas, term-file schema/normalization, all-script
+exact-test coverage, check-script wiring coverage, the study-mapping guard suite,
+a temporary public-reader package build, and local data doc references against
+the current ignored source caches.
 
 Full clean-tree pre-push validation after committing:
 
