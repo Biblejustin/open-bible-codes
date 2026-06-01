@@ -456,3 +456,30 @@ def test_refuses_symlink_package_source_paths(tmp_path, monkeypatch) -> None:
         )
 
     assert "refusing symlink package source: docs/link.md" in str(excinfo.value)
+
+
+def test_refuses_non_file_package_source_paths(tmp_path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    Path("docs/fake.md").mkdir(parents=True, exist_ok=True)
+
+    with pytest.raises(ValueError) as excinfo:
+        package.copy_checked_file(
+            Path("docs/fake.md"),
+            Path("reports/public_reader_package/docs/fake.md"),
+        )
+
+    assert "refusing non-file package source: docs/fake.md" in str(excinfo.value)
+
+
+def test_refuses_symlink_package_destination_paths(tmp_path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    _write(Path("docs/source.md"), "# Source\n")
+    _write(Path("outside.md"), "# Outside\n")
+    destination = Path("reports/public_reader_package/docs/source.md")
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.symlink_to(Path("../../../outside.md"))
+
+    with pytest.raises(ValueError) as excinfo:
+        package.copy_checked_file(Path("docs/source.md"), destination)
+
+    assert "refusing symlink package destination:" in str(excinfo.value)

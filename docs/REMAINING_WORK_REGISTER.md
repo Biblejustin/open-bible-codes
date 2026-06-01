@@ -3004,6 +3004,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Added symlink rejection for public-reader package sources, so a tracked or
   extra Markdown path cannot package bytes from an out-of-tree target through a
   symbolic link.
+- Added regular-file and destination-symlink guards for public-reader package
+  copying, so package inputs cannot be directories and `--no-clean` output
+  trees cannot write through an existing symbolic-link destination.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 

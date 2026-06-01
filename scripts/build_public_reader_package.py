@@ -267,9 +267,13 @@ def copy_checked_file(source: Path, destination: Path) -> CopiedFile:
         raise FileNotFoundError(f"missing package source: {source}")
     if source.is_symlink():
         raise ValueError(f"refusing symlink package source: {source}")
+    if not source.is_file():
+        raise ValueError(f"refusing non-file package source: {source}")
     if is_forbidden_source(source):
         raise ValueError(f"refusing to package raw/source data path: {source}")
     destination.parent.mkdir(parents=True, exist_ok=True)
+    if destination.is_symlink():
+        raise ValueError(f"refusing symlink package destination: {destination}")
     shutil.copyfile(source, destination)
     data = destination.read_bytes()
     return CopiedFile(
