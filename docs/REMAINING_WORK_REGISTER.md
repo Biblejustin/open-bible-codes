@@ -2945,6 +2945,7 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   More" list and guarded those references in
   `scripts/check_project_findings_overview_doc.py`.
 - Extended `tests/test_build_public_reader_package.py` so package tests fail
-  if either consolidated handoff drops out of the exported reader package.
+  if either consolidated handoff drops out of the exported reader package or
+  the package README start list.
 - This is a reader-export fix only. It does not change WRR, KJVA, or Cities
   result status.
