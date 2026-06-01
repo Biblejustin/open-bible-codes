@@ -148,12 +148,21 @@ def validate_reader_package_inputs(
         failures.extend(
             check_project_findings_overview_doc.validate_project_findings_overview()
         )
+    failures.extend(validate_doc_source_paths(doc_paths))
     failures.extend(validate_unique_package_sources([*doc_paths, *report_set]))
     failures.extend(validate_packaged_reader_links(doc_set | report_set))
     if failures:
         raise ValueError(
             "reader package input validation failed: " + "; ".join(failures)
         )
+
+
+def validate_doc_source_paths(paths: list[Path]) -> list[str]:
+    failures: list[str] = []
+    for path in paths:
+        if path.suffix.lower() != ".md":
+            failures.append(f"doc package source must be markdown: {path}")
+    return failures
 
 
 def validate_unique_package_sources(paths: list[Path]) -> list[str]:

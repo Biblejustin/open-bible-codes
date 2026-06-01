@@ -2990,5 +2990,7 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Added duplicate-source guarding so `--extra-doc` cannot repeat an already
   whitelisted package source and produce duplicated manifest/reader-package
   entries.
+- Tightened `--extra-doc` validation so extra document inputs must be Markdown
+  docs; JSON remains limited to the formal report outputs.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.

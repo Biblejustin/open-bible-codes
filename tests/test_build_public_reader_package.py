@@ -195,6 +195,24 @@ def test_refuses_duplicate_package_sources(tmp_path, monkeypatch) -> None:
     assert "duplicate package source: docs/START_HERE.md" in str(excinfo.value)
 
 
+def test_refuses_json_extra_doc_sources(tmp_path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    for path in package.DEFAULT_DOC_PATHS:
+        _write(path, _default_doc_text(path))
+    for path in package.DEFAULT_REPORT_PATHS:
+        _write(path, "# report\n\nbody\n" if path.suffix == ".md" else "{}\n")
+    _write(Path("docs/extra.json"), "{}\n")
+
+    with pytest.raises(ValueError) as excinfo:
+        package.build_public_reader_package(
+            out_dir=Path("reports/public_reader_package"),
+            extra_docs=[Path("docs/extra.json")],
+        )
+
+    assert "reader package input validation failed" in str(excinfo.value)
+    assert "doc package source must be markdown: docs/extra.json" in str(excinfo.value)
+
+
 def test_refuses_unpackaged_start_here_reference(tmp_path, monkeypatch) -> None:
     monkeypatch.chdir(tmp_path)
     for path in package.DEFAULT_DOC_PATHS:
