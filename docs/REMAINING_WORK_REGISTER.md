@@ -3026,6 +3026,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened the verifier so required default package sources must remain in the
   manifest, preventing a package from omitting a whitelisted reader document
   while otherwise keeping generated docs internally consistent.
+- Tightened the verifier so manifest package paths must match the package
+  builder's source-to-output mapping, including the repository README override
+  to `docs/REPOSITORY_README.md`.
 - This is a reader-export guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 

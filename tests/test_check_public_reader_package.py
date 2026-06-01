@@ -123,7 +123,26 @@ def test_detects_unsafe_manifest_package_path(tmp_path, monkeypatch) -> None:
 
     failures = check.validate_public_reader_package(out_dir)
 
-    assert any("unsafe manifest package path: ../outside.md" in failure for failure in failures)
+    assert any(
+        "unsafe manifest package path: ../outside.md" in failure
+        for failure in failures
+    )
+
+
+def test_detects_manifest_package_mapping_drift(tmp_path, monkeypatch) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    manifest_path = out_dir / "package_manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["files"][0]["package_path"] = "README.md"
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert any(
+        "manifest package path does not match source mapping: "
+        "README.md -> README.md (expected docs/REPOSITORY_README.md)" in failure
+        for failure in failures
+    )
 
 
 def test_detects_unmanifested_extra_file(tmp_path, monkeypatch) -> None:

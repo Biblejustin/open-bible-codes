@@ -140,6 +140,7 @@ def validate_manifest_files(
         if package_path.is_absolute() or ".." in package_path.parts:
             failures.append(f"unsafe manifest package path: {package_path_text}")
             continue
+        failures.extend(validate_manifest_package_mapping(source, package_path_text))
         path = package_dir / package_path
         failures.extend(validate_packaged_file(path, item))
     source_set = {str(item.get("source", "")) for item in files if isinstance(item, dict)}
@@ -156,6 +157,22 @@ def required_manifest_sources() -> list[str]:
     paths = [*builder.DEFAULT_DOC_PATHS]
     paths.extend(path for path in builder.DEFAULT_REPORT_PATHS if path.exists())
     return sorted(path.as_posix() for path in paths)
+
+
+def validate_manifest_package_mapping(
+    source: str,
+    package_path_text: str,
+) -> list[str]:
+    source_path = Path(source)
+    if source_path.is_absolute() or ".." in source_path.parts:
+        return []
+    expected = builder.SOURCE_PACKAGE_PATH_OVERRIDES.get(source_path, source_path)
+    if package_path_text != expected.as_posix():
+        return [
+            "manifest package path does not match source mapping: "
+            f"{source} -> {package_path_text} (expected {expected.as_posix()})"
+        ]
+    return []
 
 
 def validate_no_unmanifested_files(
