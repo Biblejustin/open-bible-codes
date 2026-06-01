@@ -74,9 +74,9 @@ validates documented script/source-path references, and rejects unsupported
 public claim language. It also guards the general-reader findings overview,
 real-report run documentation, consolidated findings, claim catalog,
 final-report assembly docs, final-report highlights, strongest-candidate
-packet, prospective workflow docs, and public/no-input handoff docs, validates
-configured reader-link sources, validates protocol TOML files, corpus config
-schemas, term-file
+packet, prospective workflow docs, public/no-input handoff docs, and KJVA
+source-policy docs; validates configured reader-link sources, validates
+protocol TOML files, corpus config schemas, term-file
 schema/normalization, all-script exact-test coverage, check-script wiring
 coverage, the study-mapping guard suite, and a temporary public-reader package
 build from the whitelisted docs.
@@ -92,12 +92,12 @@ diff whitespace, runs dirty-tree-safe release hygiene, validates
 expanded-strata operator tooling, checks public claim language, and verifies
 the general-reader findings overview, real-report run documentation,
 consolidated findings, claim catalog, final-report assembly docs, final-report
-highlights, strongest-candidate packet, prospective workflow docs, protocol
-and public/no-input handoff docs, protocol TOML files, corpus config schemas,
-term-file schema/normalization, all-script exact-test coverage, check-script
-wiring coverage, the study-mapping guard suite, a temporary public-reader
-package build, and local data doc references against the current ignored source
-caches.
+highlights, strongest-candidate packet, prospective workflow docs,
+public/no-input handoff docs, KJVA source-policy docs, protocol TOML files,
+corpus config schemas, term-file schema/normalization, all-script exact-test
+coverage, check-script wiring coverage, the study-mapping guard suite, a
+temporary public-reader package build, and local data doc references against
+the current ignored source caches.
 
 Full clean-tree pre-push validation after committing:
 
@@ -117,6 +117,15 @@ make reader-doc-checks
 
 This runs the reader-facing documentation guards shared by `make
 fast-validate` and `make public-release-check`.
+
+KJVA source-policy checks only:
+
+```bash
+make kjva-source-doc-checks
+```
+
+This runs the KJVA source-candidate and source-policy documentation guards
+shared by `make fast-validate` and `make public-release-check`.
 
 Build ignored public reader package after `make real-report`:
 

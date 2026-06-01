@@ -46,7 +46,8 @@ candidate deep-dive freshness guarding, claim-catalog summary guarding,
 real-report run doc guarding, final-report assembly direct gating,
 top-reader summary doc direct gating, prospective workflow direct gating,
 public/no-input handoff doc direct gating, imported preflight check-script
-input guarding, reader-doc check target consolidation,
+input guarding, reader-doc check target consolidation, KJVA source-doc direct
+gating,
 research missing model pages audit doc guarding, WRR-adjacent source audit
 family doc guarding, real-report source-audit preflight documentation,
 critical-omission follow-up doc guarding, KJVA apocrypha prospective boundary
@@ -3119,6 +3120,19 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - This is a Makefile/validation maintenance change only. It does not change
   report conclusions, source policy, imported texts, ELS searches, or result
   status.
+
+## KJVA Source-Doc Direct Gate
+
+- Added `make kjva-source-doc-checks` for the KJVA source-candidate,
+  source-lock, source-policy, Hakkaac/Gutenberg/Wikisource/Open-Bibles, and
+  next-replication documentation guards.
+- Wired the shared target into `make fast-validate` and
+  `make public-release-check`, so KJVA source-policy support docs are checked
+  before both dirty-safe handoffs and clean releases.
+- Updated README validation guidance and Makefile guard tests to keep the
+  shared target visible.
+- This is a documentation/validation guard only. It does not change report
+  conclusions, source policy, imported texts, ELS searches, or result status.
 
 ## Clean-Lock Results Summary Guard
 

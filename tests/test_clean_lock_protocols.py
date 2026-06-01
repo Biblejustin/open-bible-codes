@@ -363,6 +363,8 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "scripts.check_expanded_strata_tooling" in makefile
     assert "$(MAKE) reader-doc-checks" in makefile
     assert "reader-doc-checks:" in makefile
+    assert "$(MAKE) kjva-source-doc-checks" in makefile
+    assert "kjva-source-doc-checks:" in makefile
     assert "scripts.check_project_findings_overview_doc" in makefile
     assert "scripts.check_real_report_run_doc" in makefile
     assert "scripts.check_consolidated_findings_doc" in makefile
@@ -380,6 +382,10 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "scripts.check_wrr_no_input_handoff_status_doc" in makefile
     assert "scripts.check_cities_no_input_handoff_status_doc" in makefile
     assert "scripts.check_kjva_no_input_handoff_status_doc" in makefile
+    assert "scripts.check_kjva_current_source_lock_sidecar_doc" in makefile
+    assert "scripts.check_kjva_gutenberg_source_lock_blocker_packet_doc" in makefile
+    assert "scripts.check_kjva_source_candidate_status_doc" in makefile
+    assert "scripts.check_kjva_apocrypha_bridge_next_replication_doc" in makefile
     assert "scripts.check_public_claim_language" in makefile
     assert "$(MAKE) protocol-files" in makefile
     assert "$(MAKE) corpus-configs" in makefile
@@ -392,6 +398,7 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "$(MAKE) local-data-doc-check" in makefile
     assert "make fast-validate" in readme
     assert "make reader-doc-checks" in readme
+    assert "make kjva-source-doc-checks" in readme
     assert "expanded-strata operator tooling" in readme
     assert "general-reader findings overview" in readme
     assert "real-report run documentation" in readme
@@ -402,6 +409,7 @@ def test_fast_validate_make_target_tracks_current_handoff_checks() -> None:
     assert "strongest-candidate packet" in normalized_readme
     assert "prospective workflow docs" in normalized_readme
     assert "public/no-input handoff docs" in normalized_readme
+    assert "KJVA source-policy docs" in readme
     assert "checks public claim language" in readme
     assert "protocol TOML files" in readme
     assert "corpus config schemas" in normalized_readme
@@ -459,6 +467,8 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "scripts.check_doc_command_references" in makefile
     assert "$(MAKE) reader-doc-checks" in makefile
     assert "reader-doc-checks:" in makefile
+    assert "$(MAKE) kjva-source-doc-checks" in makefile
+    assert "kjva-source-doc-checks:" in makefile
     assert "scripts.check_project_findings_overview_doc" in makefile
     assert "scripts.check_real_report_run_doc" in makefile
     assert "scripts.check_consolidated_findings_doc" in makefile
@@ -476,6 +486,10 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "scripts.check_wrr_no_input_handoff_status_doc" in makefile
     assert "scripts.check_cities_no_input_handoff_status_doc" in makefile
     assert "scripts.check_kjva_no_input_handoff_status_doc" in makefile
+    assert "scripts.check_kjva_current_source_lock_sidecar_doc" in makefile
+    assert "scripts.check_kjva_gutenberg_source_lock_blocker_packet_doc" in makefile
+    assert "scripts.check_kjva_source_candidate_status_doc" in makefile
+    assert "scripts.check_kjva_apocrypha_bridge_next_replication_doc" in makefile
     assert "$(MAKE) protocol-files" in makefile
     assert "$(MAKE) corpus-configs" in makefile
     assert "$(MAKE) term-files" in makefile
@@ -483,6 +497,7 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "$(MAKE) public-reader-package-check" in makefile
     assert "make release-ready" in readme
     assert "make reader-doc-checks" in readme
+    assert "make kjva-source-doc-checks" in readme
     assert "validates documented script/source-path references" in normalized_readme
     assert "guards the general-reader findings overview" in normalized_readme
     assert "real-report run documentation" in normalized_readme
@@ -493,6 +508,7 @@ def test_release_ready_make_target_wraps_handoff_and_release_checks() -> None:
     assert "strongest-candidate packet" in normalized_readme
     assert "prospective workflow docs" in normalized_readme
     assert "public/no-input handoff docs" in normalized_readme
+    assert "KJVA source-policy docs" in readme
     assert "validates protocol TOML files" in normalized_readme
     assert "corpus config schemas" in normalized_readme
     assert "term-file schema/normalization" in normalized_readme
