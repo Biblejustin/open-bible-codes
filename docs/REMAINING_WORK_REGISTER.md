@@ -61,7 +61,8 @@ packet, plus source-row crop packet, contact-sheet image, OCR word packet, and
 all-script exact-test and check-script wiring release guards, plus a
 metadata-only CrossWire KJVA source-candidate audit, Project Gutenberg
 split-source metadata audit, Project Gutenberg heading-level coverage probe,
-and source-status rollup refresh.
+source-status rollup refresh, and public-reader package handoff export
+guarding.
 The WRR method-lane wide-skip probe is now guarded, included in the real-report
 run, carried into the exact-gap/blocker packets, and mirrored in public
 reader-facing WRR wording.
