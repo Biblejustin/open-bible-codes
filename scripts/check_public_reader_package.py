@@ -70,7 +70,7 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
         "actual omitted blocks do not break more TR ELS hits than matched random verse blocks",
     ),
     Path("docs/CLAIM_CATALOG.md"): (
-        "the consolidated no-input handoff keeps 8 handoff rows, 6 manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages, 41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority line-crop review rows, and no Cities result allowed.",
+        "the Cities no-input handoff keeps 8 handoff rows, 6 manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages, 41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority line-crop review rows, and no Cities result allowed.",
         "Apocrypha bridge-completion study | `mixed` | 2",
         "KJVA bridge rows stand above same-length controls at total and term-review layers plus 250-sample total shuffled controls",
         "locked 5000-sample post-screen controls kept all 15 at q <= 0.01 with 3 above every shuffled sample.",

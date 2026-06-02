@@ -89,7 +89,7 @@ def valid_row() -> dict[str, str]:
             "decision records have 14 populated lock rows and the transcription "
             "worksheet has 14 pending review rows with no source rows imported; "
             "OCR page review has 61 packet pages with 41 reviewed and "
-            "20 unreviewed; consolidated no-input handoff has 8 handoff rows "
+            "20 unreviewed; Cities no-input handoff has 8 handoff rows "
             "plus 6 manual-input-needed rows plus 14 transcription review rows "
             "plus 203 priority line-crop review rows plus no Cities result allowed"
         ),
@@ -136,6 +136,7 @@ def write_doc(path: Path, *, omit: str = "") -> None:
         "data/study/mappings/cities_source_row_lock_decisions.csv",
         "data/study/mappings/cities_source_transcription_decisions.csv",
         "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
+        "the Cities no-input handoff keeps",
         "8 handoff rows",
         "6 manual-input-needed rows",
         "14 transcription review rows",
