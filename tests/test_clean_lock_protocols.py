@@ -598,7 +598,7 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
 
     assert "Latest validation snapshot after the release-ready make target" in text
     assert "2591 tests" in normalized_text
-    assert "2 skipped, and 29329 subtests" in normalized_text
+    assert "2 skipped, and 29330 subtests" in normalized_text
     assert "make release-ready" in text
     assert "committed tree" in text
     assert "make fast-validate" in text
@@ -669,6 +669,8 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     assert "KJVA apocrypha prospective-boundary profile JSON validator" in normalized_text
     assert "STEP_TAHOT manifest cache JSON validation" in normalized_text
     assert "STEP_TAHOT manifest timestamp cache" in normalized_text
+    assert "KJVA apocrypha bridge review manifest cache JSON validation" in normalized_text
+    assert "KJVA apocrypha bridge review manifest cache" in normalized_text
     assert "WRR documentation gate" in normalized_text
     assert "Cities documentation gate" in normalized_text
     assert "KJVA documentation gate" in normalized_text

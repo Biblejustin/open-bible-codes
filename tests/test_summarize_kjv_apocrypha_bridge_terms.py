@@ -132,6 +132,28 @@ class KJVAapocryphaBridgeTermReviewTests(unittest.TestCase):
                 self.assertEqual(second_payload, first_payload)
                 self.assertEqual(out.stat().st_mtime_ns, first_mtime_ns)
 
+        with self.subTest("manifest_non_object_cache"):
+            with tempfile.TemporaryDirectory() as tmp:
+                out = Path(tmp) / "manifest.json"
+                out.write_text("[]", encoding="utf-8")
+                args = argparse.Namespace(
+                    candidates=Path("candidates.csv"),
+                    context=Path("context.csv"),
+                    controls=Path("controls.csv"),
+                    shuffled_summary=Path("shuffled.csv"),
+                    term_shuffled_summary=Path("term_shuffled.csv"),
+                    out=Path("out.csv"),
+                    markdown_out=Path("out.md"),
+                    manifest_out=out,
+                )
+                rows = [{"observed_gt_all_controls": "True"}]
+
+                write_manifest(out, rows, {}, {}, args, time.perf_counter())
+
+                payload = json.loads(out.read_text(encoding="utf-8"))
+                self.assertEqual(payload["tool"], "summarize_kjv_apocrypha_bridge_terms")
+                self.assertEqual(payload["term_rows"], 1)
+
 
 def candidate(
     term: str,

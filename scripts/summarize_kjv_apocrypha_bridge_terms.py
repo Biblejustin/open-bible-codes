@@ -355,6 +355,8 @@ def stable_manifest_metadata(path: Path, semantic_payload: dict[str, object], st
             existing = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             existing = {}
+        if not isinstance(existing, dict):
+            existing = {}
         existing_semantic = {key: existing.get(key) for key in semantic_payload}
         if (
             existing_semantic == semantic_payload
