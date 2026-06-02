@@ -597,7 +597,7 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     normalized_text = " ".join(text.split())
 
     assert "Latest validation snapshot after the release-ready make target" in text
-    assert "2571 tests" in normalized_text
+    assert "2573 tests" in normalized_text
     assert "2 skipped, and 29329 subtests" in normalized_text
     assert "make release-ready" in text
     assert "committed tree" in text
@@ -642,9 +642,12 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     assert "Cities doc JSON readers" in normalized_text
     assert "KJVA doc manifest JSON validation" in normalized_text
     assert "KJVA doc manifest validators" in normalized_text
+    assert "general doc JSON reader validation" in normalized_text
+    assert "remaining general doc JSON readers" in normalized_text
     assert "WRR documentation gate" in normalized_text
     assert "Cities documentation gate" in normalized_text
     assert "KJVA documentation gate" in normalized_text
+    assert "documentation gates" in normalized_text
     assert "cache-clean" in normalized_text
     assert "scripts.check_expanded_strata_tooling" in text
     assert "scripts.check_public_claim_language" in text

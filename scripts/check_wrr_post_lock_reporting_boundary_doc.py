@@ -116,7 +116,12 @@ def validate_manifest(
 ) -> list[str]:
     if not path.exists():
         return [f"{path} is missing"]
-    data = json.loads(path.read_text(encoding="utf-8"))
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        return [f"{path} is invalid JSON: {exc}"]
+    if not isinstance(data, dict):
+        return [f"{path} JSON root must be an object"]
     failures: list[str] = []
     expected_inputs = {
         "claim_readiness": str(builder.DEFAULT_CLAIM_READINESS),

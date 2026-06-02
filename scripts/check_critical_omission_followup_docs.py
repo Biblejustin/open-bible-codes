@@ -704,9 +704,13 @@ def read_json_object(root: Path, relative: Path, failures: list[str]) -> dict[st
     if not path.exists():
         failures.append(f"{relative} is missing")
         return None
-    data = json.loads(path.read_text(encoding="utf-8"))
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        failures.append(f"{relative} is invalid JSON: {exc}")
+        return None
     if not isinstance(data, dict):
-        failures.append(f"{relative} is not a JSON object")
+        failures.append(f"{relative} JSON root must be an object")
         return None
     return data
 
