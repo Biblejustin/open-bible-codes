@@ -17,6 +17,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 from els.protocol_runner import atomic_write_text
+from scripts.json_utils import read_json_object
 
 
 @dataclass(frozen=True)
@@ -112,7 +113,7 @@ def run_once(
     status = "missing_manifest"
     step_seconds: dict[str, float] = {}
     if manifest_path.exists():
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest = read_json_object(manifest_path)
         status = str(manifest.get("status", "unknown"))
         step_seconds = {
             str(step["id"]): float(step.get("duration_seconds", 0.0))

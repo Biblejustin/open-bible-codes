@@ -19,6 +19,7 @@ from els import __version__
 from els.statistics import estimated_search_space, hits_per_million
 from els.term_display import display_term
 from scripts.analyze_broad_search import find_run_manifest, read_count_rows
+from scripts.json_utils import read_json_object
 
 
 COUNTS_DIR = Path("reports/windows_cpu/broad_2_500")
@@ -463,7 +464,7 @@ def write_manifest(
 
 
 def read_json(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
+    return read_json_object(path)
 
 
 def git_commit() -> str:

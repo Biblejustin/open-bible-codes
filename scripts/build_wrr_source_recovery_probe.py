@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from els import __version__
+from scripts.json_utils import read_json_object
 
 
 DEFAULT_MANIFEST = Path("reports/wrr_source_recovery_probe/sources.manifest.json")
@@ -136,7 +137,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def read_json(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
+    return read_json_object(path)
 
 
 def analyze_download(download: dict[str, Any]) -> dict[str, object]:

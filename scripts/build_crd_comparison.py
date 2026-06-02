@@ -13,6 +13,7 @@ from typing import Any
 
 from els.report_db import fetch_dicts, quote_identifier, report_table_name_for_path, sanitize_table_name, verify_table_current
 from els.term_display import KNOWN_TERMS, contains_greek, contains_hebrew, display_term, normalized_script_key
+from scripts.json_utils import read_json_object
 
 
 DEFAULT_OUT_DIR = Path("reports/crd")
@@ -505,7 +506,7 @@ def write_markdown(
     relevance_scope: list[dict[str, Any]],
     manifest_path: Path,
 ) -> None:
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
+    manifest = read_json_object(manifest_path) if manifest_path.exists() else {}
     zero_secular_rows = sum(1 for row in bible_control if float_value(str(row.get("secular_max_density", ""))) == 0)
     lines = [
         "# CRD Report",

@@ -13,6 +13,7 @@ from typing import Any
 
 from els import __version__
 from els.term_display import contains_greek, contains_hebrew, display_term
+from scripts.json_utils import read_json_object
 
 
 TERMS_IN = Path("terms/greek_surface_prospective_terms.csv")
@@ -319,7 +320,7 @@ def read_rows(path: Path) -> list[dict[str, str]]:
 
 
 def read_json(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
+    return read_json_object(path)
 
 
 if __name__ == "__main__":

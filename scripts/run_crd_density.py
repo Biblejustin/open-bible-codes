@@ -31,6 +31,7 @@ from scripts.classify_centered_relevance import (
     sha256_file,
     verify_hash,
 )
+from scripts.json_utils import read_json_object
 
 
 DENSITY_FIELDNAMES = [
@@ -272,7 +273,7 @@ def reusable_completed_manifest(
 ) -> dict[str, Any] | None:
     if not manifest_path.exists():
         return None
-    prior = json.loads(manifest_path.read_text(encoding="utf-8"))
+    prior = read_json_object(manifest_path)
     if prior.get("status") != "completed":
         return None
     prereg_hash = str(protocol.get("preregistration_sha256", ""))

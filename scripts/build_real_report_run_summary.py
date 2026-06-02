@@ -16,6 +16,7 @@ from typing import Any
 from els import __version__
 from els.term_display import display_term
 from scripts.download_wrr_sources import REQUIRED_MANIFEST_LABELS as WRR_REQUIRED_SOURCE_LABELS
+from scripts.json_utils import read_json_object
 
 
 STEP_TAHOT_MANIFEST = Path("reports/step_tahot_final_gate/manifest.json")
@@ -2364,7 +2365,7 @@ def write_manifest(
 
 
 def read_json(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
+    return read_json_object(path)
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:

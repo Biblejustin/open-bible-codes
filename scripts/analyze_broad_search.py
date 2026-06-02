@@ -12,6 +12,7 @@ from pathlib import Path
 
 from els import __version__
 from els.term_display import display_term
+from scripts.json_utils import read_json_object
 
 
 COUNTS_DIR = Path("reports/broad_search")
@@ -540,7 +541,7 @@ def read_label(row: dict[str, str]) -> str:
 def read_manifest(path: Path) -> dict[str, object]:
     if not path.exists():
         return {}
-    return json.loads(path.read_text(encoding="utf-8"))
+    return read_json_object(path)
 
 
 def find_run_manifest(counts_dir: Path) -> Path:

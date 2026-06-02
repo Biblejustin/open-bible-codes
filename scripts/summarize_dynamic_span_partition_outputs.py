@@ -16,6 +16,7 @@ from typing import Any, Iterable
 from els import __version__
 from els.term_display import contains_greek, contains_hebrew, display_term
 from scripts.export_dynamic_span_hits import ROOT
+from scripts.json_utils import read_json_object
 from scripts.plan_dynamic_span_partitions import DEFAULT_OUT as DEFAULT_PLAN
 
 
@@ -297,7 +298,7 @@ def summarize_partition_output(
 
 
 def summarize_partition_manifest(plan_row: dict[str, str], out: Path) -> dict[str, str]:
-    manifest = json.loads(partition_manifest_path(plan_row).read_text(encoding="utf-8"))
+    manifest = read_json_object(partition_manifest_path(plan_row))
     exported_hits = int(manifest.get("exported_hits") or 0)
     estimated = int(plan_row["estimated_partition_hits"])
     return {

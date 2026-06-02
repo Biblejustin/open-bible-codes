@@ -4,11 +4,12 @@
 from __future__ import annotations
 
 import argparse
-import json
 import re
 import shlex
 from pathlib import Path
 from typing import Any
+
+from scripts.json_utils import read_json_object
 
 
 TEMPLATE = Path("docs/PROSPECTIVE_STUDY_PREREGISTRATION_TEMPLATE.md")
@@ -165,7 +166,7 @@ def scaffold_values(args: argparse.Namespace) -> dict[str, str]:
 
 
 def load_profiles(path: Path = PROFILES) -> list[dict[str, Any]]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload = read_json_object(path)
     profiles = payload.get("profiles", [])
     if not isinstance(profiles, list):
         raise ValueError(f"profiles must be a list: {path}")

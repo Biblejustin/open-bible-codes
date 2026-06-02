@@ -15,6 +15,7 @@ from typing import Any
 
 from els import __version__
 from els.normalization import normalize_english
+from scripts.json_utils import read_json_object
 
 
 DEFAULT_KJVA_CSV = Path("data/processed/ebible/eng-kjv.csv")
@@ -80,7 +81,7 @@ SUMMARY_FIELDNAMES = [
 def main(argv: list[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(argv)
-    source_manifest = json.loads(args.kjva_manifest.read_text(encoding="utf-8"))
+    source_manifest = read_json_object(args.kjva_manifest)
     verse_rows = read_csv_dicts(args.kjva_csv)
     book_rows = build_book_shape(verse_rows)
     summary = build_summary(args.kjva_csv, source_manifest, book_rows)

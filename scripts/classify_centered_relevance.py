@@ -18,6 +18,7 @@ from string import Formatter
 from typing import Any, Protocol
 
 from els.normalization import normalize_text
+from scripts.json_utils import read_json_object
 
 
 RELEVANCE_TYPES = {
@@ -385,7 +386,7 @@ class LLMClassifier(Classifier):
         input_hash = normalized_hash(prompt_payload)
         cache_path = self.cache_path(input_hash)
         if cache_path.exists():
-            cached = json.loads(cache_path.read_text(encoding="utf-8"))
+            cached = read_json_object(cache_path)
             cached_audit = dict(cached.get("audit_payload", {}))
             cached_audit["cache_hit"] = True
             cached_audit["timestamp"] = datetime.now(UTC).isoformat()

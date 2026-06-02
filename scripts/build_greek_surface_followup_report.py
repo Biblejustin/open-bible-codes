@@ -15,6 +15,7 @@ from typing import Any
 from els import __version__
 from els.statistics import numeric_value
 from els.term_display import display_term
+from scripts.json_utils import read_json_object
 
 
 SELECTED_IN = Path("reports/greek_expanded_surface_triage/selected_patterns.csv")
@@ -309,7 +310,7 @@ def read_rows(path: Path) -> list[dict[str, str]]:
 
 
 def read_json(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
+    return read_json_object(path)
 
 
 def git_commit() -> str:

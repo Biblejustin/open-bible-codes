@@ -14,6 +14,7 @@ from typing import Any
 
 from els import __version__
 from els.term_display import display_term
+from scripts.json_utils import read_json_object
 
 
 DEFAULT_DIR = Path("reports/dynamic_skip_focus/exact_center_extensions")
@@ -52,7 +53,7 @@ def build_parser() -> argparse.ArgumentParser:
 def load_report_data(input_dir: Path) -> dict[str, Any]:
     manifests = []
     for path in sorted(input_dir.glob("extensions_*.manifest.json")):
-        manifest = json.loads(path.read_text(encoding="utf-8"))
+        manifest = read_json_object(path)
         manifest["corpus_label"] = corpus_label_from_manifest_path(path)
         manifests.append(manifest)
     summary_rows = read_many(sorted(input_dir.glob("summary_*.csv")))

@@ -12,6 +12,7 @@ from math import isfinite
 from pathlib import Path
 
 from els.term_display import display_term
+from scripts.json_utils import read_json_object
 
 
 TERM_FILES_DIR = Path("terms")
@@ -82,7 +83,7 @@ def main() -> int:
 
 def read_summary(paths: RunPaths) -> dict[str, object]:
     out = paths.out_dir
-    manifest = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+    manifest = read_json_object(out / "manifest.json")
     density_rows = read_csv(out / "density_matrix.csv")
     comparison_rows = read_csv(out / "bible_vs_control_summary.csv")
     scope_rows = read_csv(out / "relevance_scope_summary.csv")
