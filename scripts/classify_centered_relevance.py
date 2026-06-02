@@ -98,7 +98,12 @@ def load_relevance_dictionary(path: str | Path) -> dict[str, RelevanceEntry]:
     except tomllib.TOMLDecodeError as exc:
         raise CRDConfigurationError(f"dictionary invalid TOML: {exc}") from exc
     entries: dict[str, RelevanceEntry] = {}
-    for raw in data.get("entries", []):
+    raw_entries = data.get("entries", [])
+    if not isinstance(raw_entries, list):
+        raise CRDConfigurationError("relevance dictionary entries must be a list")
+    for index, raw in enumerate(raw_entries, start=1):
+        if not isinstance(raw, dict):
+            raise CRDConfigurationError(f"relevance dictionary entry {index} must be a table")
         entry = parse_relevance_entry(raw)
         if entry.term_id in entries:
             raise CRDConfigurationError(f"duplicate relevance dictionary term_id: {entry.term_id}")

@@ -8,6 +8,7 @@ from scripts.classify_centered_relevance import (
     CRDConfigurationError,
     DeterministicClassifier,
     LLMClassifier,
+    load_relevance_dictionary,
     parse_relevance_entry,
     sha256_file,
 )
@@ -268,6 +269,25 @@ class DeterministicClassifierTests(unittest.TestCase):
     def test_missing_required_dictionary_fields_raise(self) -> None:
         with self.assertRaises(CRDConfigurationError):
             parse_relevance_entry({"term_id": "bad"})
+
+    def test_dictionary_entries_must_be_list(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            dictionary = Path(tmp) / "dictionary.toml"
+            dictionary.write_text('entries = "bad"\n', encoding="utf-8")
+
+            with self.assertRaisesRegex(CRDConfigurationError, "entries must be a list"):
+                load_relevance_dictionary(dictionary)
+
+    def test_dictionary_entry_must_be_table(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            dictionary = Path(tmp) / "dictionary.toml"
+            dictionary.write_text('entries = ["bad"]\n', encoding="utf-8")
+
+            with self.assertRaisesRegex(
+                CRDConfigurationError,
+                "relevance dictionary entry 1 must be a table",
+            ):
+                load_relevance_dictionary(dictionary)
 
 
 class LLMClassifierTests(unittest.TestCase):
