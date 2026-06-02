@@ -188,6 +188,8 @@ def validate_manifest(path: Path, *, doc: Path) -> list[str]:
         payload = json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
         return [f"{path} is invalid JSON: {exc}"]
+    if not isinstance(payload, dict):
+        return [f"{path} JSON root must be an object"]
     failures: list[str] = []
     if payload.get("claim_boundary") != "checksum sidecar only; no ELS result":
         failures.append(f"{path} claim_boundary drifted")
