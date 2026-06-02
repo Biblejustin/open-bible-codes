@@ -2002,9 +2002,10 @@ Latest validation snapshot after the release-ready make target, refreshed after
 the public-reader package protocol guard, real-report protocol duplicate-step
 guard, public-reader real-report protocol source validation, and real-report
 preflight TOML validation, CRD density protocol TOML validation, and CRD
-self-surface base-protocol TOML validation:
+self-surface base-protocol TOML validation, plus WRR text-source config
+source-shape validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2541
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2544
   tests, 2 skipped, and 29329 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3123,6 +3124,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened the CRD self-surface run generator so invalid base-protocol TOML is
   reported with an explicit source-path validation message instead of a raw
   parser exception.
+- Tightened the WRR text-source audit source-path reader so invalid TOML,
+  malformed `sources` metadata, and missing source paths produce explicit
+  validation messages before fingerprinting.
 - This is a documentation guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 

@@ -85,10 +85,20 @@ def audit_text_source(config: Path) -> dict[str, object]:
 
 
 def source_paths(config: Path) -> tuple[Path, ...]:
-    data = tomllib.loads(config.read_text(encoding="utf-8"))
+    try:
+        data = tomllib.loads(config.read_text(encoding="utf-8"))
+    except tomllib.TOMLDecodeError as exc:
+        raise ValueError(f"{config}: invalid TOML: {exc}") from exc
+    sources = data.get("sources", [])
+    if not isinstance(sources, list):
+        raise ValueError(f"{config}: sources must be a list")
     base = config.parent
     paths = []
-    for source in data.get("sources", []):
+    for index, source in enumerate(sources, start=1):
+        if not isinstance(source, dict):
+            raise ValueError(f"{config}: source {index} must be a table")
+        if not isinstance(source.get("path"), str) or not source["path"].strip():
+            raise ValueError(f"{config}: source {index} missing path")
         raw_path = Path(source["path"]).expanduser()
         paths.append((raw_path if raw_path.is_absolute() else base / raw_path).resolve())
     return tuple(paths)

@@ -3,10 +3,39 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.analyze_wrr_text_source import audit_text_source, fingerprint_source, sha256_bytes
+from scripts.analyze_wrr_text_source import (
+    audit_text_source,
+    fingerprint_source,
+    sha256_bytes,
+    source_paths,
+)
 
 
 class WrrTextSourceTests(unittest.TestCase):
+    def test_source_paths_reports_invalid_toml(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            config = Path(tmp) / "config.toml"
+            config.write_text("[broken\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "invalid TOML"):
+                source_paths(config)
+
+    def test_source_paths_requires_sources_list(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            config = Path(tmp) / "config.toml"
+            config.write_text('sources = "bad"\n', encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "sources must be a list"):
+                source_paths(config)
+
+    def test_source_paths_requires_source_tables_with_paths(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            config = Path(tmp) / "config.toml"
+            config.write_text("[[sources]]\nname = 'missing'\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "source 1 missing path"):
+                source_paths(config)
+
     def test_fingerprint_source_hashes_raw_and_decompressed_gzip(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "source.gz"
