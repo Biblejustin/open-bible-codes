@@ -449,10 +449,9 @@ def validate_public_reader_package(
     if not manifest_path.exists() or not manifest_path.is_file():
         return failures
 
-    try:
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as exc:
-        failures.append(f"{manifest_path} is invalid JSON: {exc}")
+    manifest = read_packaged_json(manifest_path)
+    if isinstance(manifest, str):
+        failures.append(manifest)
         return failures
 
     failures.extend(validate_manifest_metadata(manifest, package_dir))
@@ -698,10 +697,9 @@ def validate_packaged_real_report_manifest(
         path = package_dir / package_path
         if not path.exists() or path.is_symlink() or not path.is_file():
             return []
-        try:
-            report_manifest = json.loads(path.read_text(encoding="utf-8"))
-        except json.JSONDecodeError as exc:
-            return [f"{path} is invalid JSON: {exc}"]
+        report_manifest = read_packaged_json(path)
+        if isinstance(report_manifest, str):
+            return [report_manifest]
         failures: list[str] = []
         if isinstance(git_head, str) and git_head:
             expected = git_head[:7]
@@ -924,7 +922,7 @@ def packaged_path_for_source(
 def read_packaged_json(path: Path) -> dict[str, Any] | str:
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as exc:
+    except (OSError, json.JSONDecodeError) as exc:
         return f"{path} is invalid JSON: {exc}"
     if not isinstance(data, dict):
         return f"{path} JSON root must be an object"

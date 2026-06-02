@@ -180,6 +180,16 @@ def test_detects_manifest_file_count_drift(tmp_path, monkeypatch) -> None:
     assert any("file_count drifted" in failure for failure in failures)
 
 
+def test_detects_non_object_package_manifest(tmp_path, monkeypatch) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    manifest_path = out_dir / "package_manifest.json"
+    manifest_path.write_text("[]\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert failures == [f"{manifest_path} JSON root must be an object"]
+
+
 def test_detects_manifest_git_head_drift(tmp_path, monkeypatch) -> None:
     out_dir = _build_package(tmp_path, monkeypatch)
     manifest_path = out_dir / "package_manifest.json"
@@ -233,6 +243,19 @@ def test_detects_packaged_real_report_manifest_commit_drift(
         f"{out_dir}/reports/real_report_run/manifest.json commit stamp drifted: "
         " != abcdef0"
     ) in failures
+
+
+def test_detects_non_object_packaged_real_report_manifest(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    manifest_path = out_dir / "reports/real_report_run/manifest.json"
+    manifest_path.write_text("[]\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert f"{manifest_path} JSON root must be an object" in failures
 
 
 def test_detects_packaged_real_report_manifest_result_boundary_drift(
