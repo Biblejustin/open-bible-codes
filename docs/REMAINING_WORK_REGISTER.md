@@ -2003,9 +2003,10 @@ the public-reader package protocol guard, real-report protocol duplicate-step
 guard, public-reader real-report protocol source validation, and real-report
 preflight TOML validation, CRD density protocol TOML validation, and CRD
 self-surface base-protocol TOML validation, plus WRR text-source config
-source-shape validation and apocrypha coverage config validation:
+source-shape validation, apocrypha coverage config validation, and CRD lock
+preflight TOML validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2548
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2551
   tests, 2 skipped, and 29329 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3130,6 +3131,10 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened the apocrypha coverage audit config reader so invalid TOML,
   missing language metadata, malformed `sources` metadata, and missing CSV
   source paths produce explicit validation messages before source scanning.
+- Tightened the CRD relevance-dictionary lock preflight so an invalid
+  `protocols/centered_relevance_density.toml` file reports an explicit
+  source-path TOML failure instead of falling through the broad exception
+  handler.
 - This is a documentation guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 

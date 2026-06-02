@@ -3103,6 +3103,9 @@ def check_crd_relevance_dictionary_lock(
 ) -> list[str]:
     try:
         protocol = tomllib.loads(protocol_path.read_text(encoding="utf-8"))
+    except tomllib.TOMLDecodeError as exc:
+        return [f"{protocol_path}: invalid TOML: {exc}"]
+    try:
         term_file = protocol.get("term_file")
         dictionary = protocol.get("relevance_dictionary")
         expected_sha256 = protocol.get("relevance_dictionary_sha256")
