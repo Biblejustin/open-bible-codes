@@ -130,6 +130,21 @@ class WrrManualDecisionRegisterDocTests(unittest.TestCase):
 
             self.assertTrue(any("rows drifted" in failure for failure in failures))
 
+    def test_validate_doc_rejects_invalid_manifest_json(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest = Path(tmp) / "manifest.json"
+            manifest.write_text("{", encoding="utf-8")
+
+            failures = check.validate_manual_decision_register_doc(
+                check.DEFAULT_DOC,
+                register=None,
+                summary=None,
+                manifest=manifest,
+            )
+
+            self.assertEqual(len(failures), 1)
+            self.assertTrue(failures[0].startswith(f"{manifest} is invalid JSON:"))
+
 
 def _required_doc(root: Path) -> Path:
     path = root / "register.md"
