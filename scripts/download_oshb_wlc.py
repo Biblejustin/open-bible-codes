@@ -14,8 +14,7 @@ OUT_DIR = Path("data/raw/oshb/wlc")
 
 def main() -> int:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    with urllib.request.urlopen(API_URL) as response:
-        files = json.loads(response.read().decode("utf-8"))
+    files = load_api_listing()
     for item in files:
         if item.get("type") != "file" or not item.get("name", "").endswith(".xml"):
             continue
@@ -24,6 +23,19 @@ def main() -> int:
             out_path.write_bytes(response.read())
         print(out_path)
     return 0
+
+
+def load_api_listing() -> list[dict[str, object]]:
+    with urllib.request.urlopen(API_URL) as response:
+        payload = json.loads(response.read().decode("utf-8"))
+    if not isinstance(payload, list):
+        raise SystemExit("OSHB WLC GitHub API listing JSON root must be a list")
+    files: list[dict[str, object]] = []
+    for index, item in enumerate(payload):
+        if not isinstance(item, dict):
+            raise SystemExit(f"OSHB WLC GitHub API listing item {index} must be an object")
+        files.append(item)
+    return files
 
 
 if __name__ == "__main__":

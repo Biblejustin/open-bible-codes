@@ -1,5 +1,7 @@
 import json
 
+import pytest
+
 from scripts import download_sblgnt as downloader
 
 
@@ -37,3 +39,13 @@ def test_download_sblgnt_keeps_txt_files(tmp_path, monkeypatch) -> None:
     assert (tmp_path / "Matthew.txt").read_bytes() == b"text"
     assert not (tmp_path / "README.md").exists()
 
+
+def test_download_sblgnt_rejects_non_list_api_root(tmp_path, monkeypatch) -> None:
+    def fake_urlopen(_url: str) -> _Response:
+        return _Response(json.dumps({"message": "rate limited"}).encode("utf-8"))
+
+    monkeypatch.setattr(downloader, "OUT_DIR", tmp_path)
+    monkeypatch.setattr(downloader.urllib.request, "urlopen", fake_urlopen)
+
+    with pytest.raises(SystemExit, match="SBLGNT GitHub API listing JSON root must be a list"):
+        downloader.main()
