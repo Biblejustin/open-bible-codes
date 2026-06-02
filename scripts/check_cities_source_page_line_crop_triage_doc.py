@@ -269,9 +269,14 @@ def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]] | str:
 
 def read_json(path: Path) -> dict[str, Any] | str:
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except OSError as exc:
         return f"{path} could not be read as JSON: {exc}"
+    except json.JSONDecodeError as exc:
+        return f"{path} is invalid JSON: {exc}"
+    if not isinstance(data, dict):
+        return f"{path} JSON root must be an object"
+    return data
 
 
 if __name__ == "__main__":

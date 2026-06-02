@@ -255,12 +255,14 @@ def validate_summary_csv(
 
 def validate_manifest(
     manifest_json: Path,
-    manifest: dict[str, Any],
+    manifest: dict[str, Any] | str,
     rows: list[dict[str, str]],
     expected_summary_rows: list[dict[str, str]],
     contact_summary: dict[str, object],
     packet_csv: Path,
 ) -> list[str]:
+    if isinstance(manifest, str):
+        return [manifest]
     expected = {
         "tool": "build_cities_unreadable_pdf_ocr_review_checklist.py",
         "inputs": {"packet": str(packet_csv)},
@@ -314,10 +316,15 @@ def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
         return list(reader.fieldnames or []), list(reader)
 
 
-def read_json(path: Path) -> dict[str, Any]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
+def read_json(path: Path) -> dict[str, Any] | str:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except OSError as exc:
+        return f"{path} could not be read as JSON: {exc}"
+    except json.JSONDecodeError as exc:
+        return f"{path} is invalid JSON: {exc}"
     if not isinstance(payload, dict):
-        return {}
+        return f"{path} JSON root must be an object"
     return payload
 
 
