@@ -3228,3 +3228,16 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   language.
 - This is a documentation guard only. It does not change source policy,
   imported texts, ELS searches, report conclusions, or result status.
+
+## Public-Reader Package Protocol Guard
+
+- Added public-reader package guards for the real-report manifest metrics,
+  including Greek surface, length-4, WRR, matrix/strata, centered-occurrence,
+  KJVA bridge, and `step_tahot` summary fields.
+- The package checker now rejects new unguarded real-report manifest keys,
+  missing real-report protocol steps, and stale protocol step ids no longer
+  present in `protocols/real_report_run.toml`.
+- The generated public-reader package is now checked against the current
+  real-report protocol step list before release or handoff.
+- This is a packaging/validation guard only. It does not change source policy,
+  imported texts, ELS searches, report conclusions, or result status.
