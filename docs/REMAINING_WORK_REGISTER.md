@@ -2002,7 +2002,7 @@ Latest validation snapshot after the release-ready make target, refreshed after
 the public-reader package protocol guard and real-report protocol duplicate-step
 guard:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2518
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2519
   tests, 2 skipped, and 29325 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3089,6 +3089,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened the direct real-report documentation gate so duplicate
   `real_report_run` protocol step ids fail explicitly, instead of allowing a
   repeated TOML step block to collapse inside the structural lookup.
+- Added a direct protocol-runner regression test for duplicate step ids, so the
+  shared protocol loader guard remains covered outside the real-report wrapper.
 - This is a documentation guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 

@@ -60,6 +60,29 @@ class ProtocolRunnerTests(unittest.TestCase):
         self.assertEqual(protocol["name"], "sample")
         self.assertEqual(protocol["steps"][0]["id"], "one")
 
+    def test_load_protocol_rejects_duplicate_step_ids(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "protocol.toml"
+            path.write_text(
+                "\n".join(
+                    [
+                        'name = "sample"',
+                        "",
+                        "[[steps]]",
+                        'id = "one"',
+                        'argv = ["-c", "print(1)"]',
+                        "",
+                        "[[steps]]",
+                        'id = "one"',
+                        'argv = ["-c", "print(2)"]',
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            with self.assertRaisesRegex(ValueError, "duplicate step id: one"):
+                load_protocol(path)
+
     def test_load_protocol_validates_boolean_step_flags(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
