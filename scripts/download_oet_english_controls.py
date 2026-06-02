@@ -326,7 +326,10 @@ def fetch_commit_sha(ref: str) -> str:
 def fetch_json(url: str) -> Any:
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/vnd.github+json"})
     with urllib.request.urlopen(request, timeout=120) as response:
-        return json.loads(response.read().decode("utf-8"))
+        try:
+            return json.loads(response.read().decode("utf-8"))
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"OET GitHub API response is invalid JSON: {exc}") from exc
 
 
 def selected_usfm_entries(tree_payload: dict[str, Any], prefix: str) -> list[dict[str, Any]]:

@@ -91,6 +91,23 @@ class OetEnglishControlTests(unittest.TestCase):
             ):
                 oet.fetch_commit_sha("main")
 
+    def test_fetch_json_rejects_invalid_json_response(self) -> None:
+        class FakeResponse:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return False
+
+            def read(self) -> bytes:
+                return b"not json"
+
+        with patch.object(oet.urllib.request, "urlopen", return_value=FakeResponse()):
+            with self.assertRaisesRegex(
+                ValueError, "OET GitHub API response is invalid JSON"
+            ):
+                oet.fetch_json("https://example.test/api")
+
 
 def read_rows(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8", newline="") as handle:

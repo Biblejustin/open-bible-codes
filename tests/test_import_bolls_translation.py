@@ -174,6 +174,13 @@ class BollsTranslationImportTests(unittest.TestCase):
                 with self.assertRaisesRegex(SystemExit, "translation rows JSON root must be a list"):
                     load_translation_rows(source)
 
+            with self.subTest("translation_rows_zip_invalid_json"):
+                zip_source = base / "sample.zip"
+                with zipfile.ZipFile(zip_source, "w") as archive:
+                    archive.writestr("sample.json", "not json")
+                with self.assertRaisesRegex(SystemExit, "translation rows JSON is invalid"):
+                    load_translation_rows(zip_source)
+
             with self.subTest("book_metadata"):
                 books.write_text(json.dumps([]), encoding="utf-8")
                 with self.assertRaisesRegex(SystemExit, "JSON root must be an object"):

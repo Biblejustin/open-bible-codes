@@ -1,6 +1,7 @@
 import csv
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from scripts.download_otb_english_controls import (
     canonical_book_name,
@@ -81,6 +82,44 @@ class OtbEnglishControlTests(unittest.TestCase):
 
         with self.assertRaisesRegex(ValueError, "OTB chapter verses must be a list"):
             parse_otb_chapter_json(raw, path="chapter.json")
+
+    def test_fetch_json_rejects_invalid_json_response(self) -> None:
+        class FakeResponse:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return False
+
+            def read(self) -> bytes:
+                return b"not json"
+
+        from scripts import download_otb_english_controls as otb
+
+        with patch.object(otb.urllib.request, "urlopen", return_value=FakeResponse()):
+            with self.assertRaisesRegex(
+                ValueError, "OTB GitHub API response is invalid JSON"
+            ):
+                otb.fetch_json("https://example.test/api")
+
+    def test_fetch_raw_json_rejects_invalid_json_response(self) -> None:
+        class FakeResponse:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return False
+
+            def read(self) -> bytes:
+                return b"not json"
+
+        from scripts import download_otb_english_controls as otb
+
+        with patch.object(otb.urllib.request, "urlopen", return_value=FakeResponse()):
+            with self.assertRaisesRegex(
+                ValueError, "OTB raw JSON response is invalid JSON"
+            ):
+                otb.fetch_raw_json("https://example.test/raw.json")
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:

@@ -2020,11 +2020,12 @@ profile JSON validation, STEP_TAHOT manifest cache JSON validation, and KJVA
 apocrypha bridge review manifest cache JSON validation, plus Bolls importer
 JSON root validation, public-source downloader API JSON validation, and
 Wayback CDX API JSON validation, plus Wayback recovery JSON decode
-validation, OET/OTB English-control API JSON validation, CRD LLM API response
-JSON validation, and source-review HTML manifest JSON validation:
+validation, OET/OTB English-control API JSON validation, Bolls importer JSON
+decode validation, CRD LLM API response JSON validation, and source-review
+HTML manifest JSON validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2615
-  tests, 2 skipped, and 29333 subtests.
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2618
+  tests, 2 skipped, and 29334 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
 - Locked post-discovery reruns for
@@ -3217,6 +3218,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   roots fall back to fresh timing metadata instead of crashing summary writes.
 - Tightened the Bolls importer JSON readers so malformed translation,
   book-metadata, and language-metadata roots fail with explicit shape messages.
+- Tightened the Bolls ZIP translation JSON reader so malformed JSON members
+  fail with an explicit importer message instead of a raw decode traceback.
 - Tightened the SBLGNT, MorphGNT, and OSHB/WLC public-source downloaders so
   GitHub API listing roots and rows are shape-checked before file filtering.
 - Tightened the WRR Wayback and Cities PDF recovery CDX readers so Wayback CDX
@@ -3224,7 +3227,7 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   rows are interpreted.
 - Tightened the OET and OTB English-control importers so GitHub tree/commit
   responses and OTB chapter JSON roots are shape-checked before source rows are
-  interpreted.
+  interpreted, and so malformed API/raw JSON responses raise named errors.
 - Tightened the CRD OpenAI-compatible LLM client so API response roots, choices,
   messages, and message content are shape-checked before classification output
   is interpreted.

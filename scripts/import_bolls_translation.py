@@ -349,7 +349,10 @@ def load_translation_rows(path: Path) -> list[dict[str, Any]]:
             if len(json_names) != 1:
                 raise SystemExit(f"{path}: expected one JSON member, found {len(json_names)}")
             with archive.open(json_names[0]) as handle:
-                payload = json.loads(handle.read().decode("utf-8-sig"))
+                try:
+                    payload = json.loads(handle.read().decode("utf-8-sig"))
+                except json.JSONDecodeError as exc:
+                    raise SystemExit(f"{path}: translation rows JSON is invalid: {exc}") from exc
                 return validate_object_list(payload, path, "translation rows")
     with path.open("r", encoding="utf-8-sig") as handle:
         payload = json.load(handle)
