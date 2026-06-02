@@ -115,6 +115,7 @@ from scripts import (
     check_strongest_candidate_deep_dive_doc,
     check_term_files,
     check_study_mapping_term_ids,
+    check_study_lock_manifest_drift_audit_doc,
     check_study_lock_manifests_doc,
     check_wrr_claim_blocker_packet_doc,
     check_wrr_claim_readiness_doc,
@@ -236,6 +237,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/analyze_kjva_wikisource_candidate_source.py",
     "scripts/check_kjva_wikisource_candidate_source_audit_doc.py",
     "scripts/check_prospective_lane_status_doc.py",
+    "scripts/audit_study_lock_manifest_drift.py",
+    "scripts/check_study_lock_manifest_drift_audit_doc.py",
     "scripts/check_final_report_assembly_docs.py",
     "scripts/check_final_report_highlights_doc.py",
     "scripts/check_project_findings_overview_doc.py",
@@ -254,6 +257,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/PROJECT_FINDINGS_OVERVIEW.md",
     "docs/REAL_REPORT_RUN.md",
     "docs/NO_INPUT_BLOCKER_SUMMARY.md",
+    "docs/STUDY_LOCK_MANIFEST_DRIFT_AUDIT.md",
     "docs/REMAINING_WORK_REGISTER.md",
     "protocols/README.md",
     "protocols/real_report_run.toml",
@@ -1181,6 +1185,20 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "study-lock manifests doc failures: "
             + "; ".join(study_lock_manifests_doc_failures)
+        )
+
+    study_lock_manifest_drift_audit_doc_failures = (
+        check_study_lock_manifest_drift_audit_doc.validate_doc(
+            check_study_lock_manifest_drift_audit_doc.DEFAULT_MARKDOWN,
+            check_study_lock_manifest_drift_audit_doc.DEFAULT_OUT,
+            check_study_lock_manifest_drift_audit_doc.DEFAULT_SUMMARY,
+            check_study_lock_manifest_drift_audit_doc.DEFAULT_MANIFEST,
+        )
+    )
+    if study_lock_manifest_drift_audit_doc_failures:
+        failures.append(
+            "study-lock manifest drift audit doc failures: "
+            + "; ".join(study_lock_manifest_drift_audit_doc_failures)
         )
 
     greek_second_cohort_readiness_doc_failures = (
@@ -2650,6 +2668,9 @@ def main(argv: list[str] | None = None) -> int:
         "prospective_readiness_doc_failures": prospective_readiness_doc_failures,
         "prospective_next_lock_doc_failures": prospective_next_lock_doc_failures,
         "study_lock_manifests_doc_failures": study_lock_manifests_doc_failures,
+        "study_lock_manifest_drift_audit_doc_failures": (
+            study_lock_manifest_drift_audit_doc_failures
+        ),
         "greek_second_cohort_readiness_doc_failures": (
             greek_second_cohort_readiness_doc_failures
         ),

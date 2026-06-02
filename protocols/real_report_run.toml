@@ -44,6 +44,8 @@ inputs = [
   "scripts/analyze_kjva_wikisource_candidate_source.py",
   "scripts/check_kjva_wikisource_candidate_source_audit_doc.py",
   "scripts/check_prospective_lane_status_doc.py",
+  "scripts/audit_study_lock_manifest_drift.py",
+  "scripts/check_study_lock_manifest_drift_audit_doc.py",
   "scripts/check_final_report_assembly_docs.py",
   "scripts/check_final_report_highlights_doc.py",
   "scripts/check_project_findings_overview_doc.py",
@@ -82,6 +84,7 @@ inputs = [
   "docs/REAL_REPORT_RUN.md",
   "docs/CITIES_NO_INPUT_HANDOFF_STATUS.md",
   "docs/NO_INPUT_BLOCKER_SUMMARY.md",
+  "docs/STUDY_LOCK_MANIFEST_DRIFT_AUDIT.md",
   "docs/REMAINING_WORK_REGISTER.md",
   "protocols/README.md",
   "protocols/real_report_run.toml",
@@ -1714,6 +1717,22 @@ outputs = [
   "reports/match_strata_index/strata_summary.csv",
   "docs/MATCH_STRATA_INDEX.md",
   "reports/match_strata_index/manifest.json",
+]
+
+[[steps]]
+id = "study_lock_manifest_drift_audit"
+description = "Refresh historical study-lock manifest drift audit without approving prospective locks."
+argv = ["-m", "scripts.audit_study_lock_manifest_drift"]
+inputs = [
+  "scripts/audit_study_lock_manifest_drift.py",
+  "scripts/check_study_lock_manifest.py",
+  "reports/study_locks",
+]
+outputs = [
+  "reports/study_lock_manifest_drift_audit/manifest_drift_audit.csv",
+  "reports/study_lock_manifest_drift_audit/summary.csv",
+  "docs/STUDY_LOCK_MANIFEST_DRIFT_AUDIT.md",
+  "reports/study_lock_manifest_drift_audit/manifest.json",
 ]
 
 [[steps]]
