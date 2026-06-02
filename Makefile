@@ -97,6 +97,7 @@ reader-doc-checks:
 	python3 -m scripts.check_wrr_no_input_handoff_status_doc
 	python3 -m scripts.check_cities_no_input_handoff_status_doc
 	python3 -m scripts.check_kjva_no_input_handoff_status_doc
+	python3 -m scripts.check_no_input_blocker_summary_doc
 
 study-support-checks:
 	python3 -m scripts.check_centered_occurrence_index_doc

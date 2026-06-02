@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 426
+Documents indexed: 427
 
 ## Controls
 
@@ -397,6 +397,7 @@ Documents indexed: 426
 | Morphology Counts Study | `MORPHOLOGY_COUNTS_STUDY.md` |
 | MT-LXX Reciprocal Presence | `MT_LXX_RECIPROCAL_PRESENCE.md` |
 | Notable Passage Gaps | `NOTABLE_PASSAGE_GAPS.md` |
+| No-Input Blocker Summary | `NO_INPUT_BLOCKER_SUMMARY.md` |
 | Pair Baselines | `PAIR_BASELINES.md` |
 | Pair Compactness | `PAIR_COMPACTNESS.md` |
 | Partition Worker Workflow | `PARTITION_WORKER_WORKFLOW.md` |

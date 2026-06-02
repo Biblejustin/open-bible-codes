@@ -2022,9 +2022,10 @@ JSON root validation, public-source downloader API JSON validation, and
 Wayback CDX API JSON validation, plus Wayback recovery JSON decode
 validation, OET/OTB English-control API JSON validation, Bolls importer JSON
 decode validation, dynamic-span display-gloss stability, CRD LLM API response
-JSON validation, and source-review HTML manifest JSON validation:
+JSON validation, source-review HTML manifest JSON validation, and
+consolidated no-input blocker summary guarding:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2619
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2623
   tests, 2 skipped, and 29334 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
