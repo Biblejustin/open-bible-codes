@@ -2001,7 +2001,7 @@ supposed to fail if tracked files are dirty.
 Latest validation snapshot after the release-ready make target, refreshed after
 the public-reader package protocol guard:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2516
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2517
   tests, 2 skipped, and 29325 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3242,8 +3242,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   including Greek surface, length-4, WRR, matrix/strata, centered-occurrence,
   KJVA bridge, and `step_tahot` summary fields.
 - The package checker now rejects new unguarded real-report manifest keys,
-  missing real-report protocol steps, and stale protocol step ids no longer
-  present in `protocols/real_report_run.toml`.
+  missing real-report protocol steps, duplicate real-report protocol step ids,
+  and stale protocol step ids no longer present in
+  `protocols/real_report_run.toml`.
 - The generated public-reader package is now checked against the current
   real-report protocol step list before release or handoff.
 - This is a packaging/validation guard only. It does not change source policy,
