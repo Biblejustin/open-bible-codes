@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import sys
+import tomllib
 from pathlib import Path
 from typing import Any
 
@@ -25,6 +26,7 @@ REAL_REPORT_PREFLIGHT_SOURCE = Path("reports/real_report_run/preflight.json")
 REAL_REPORT_PROTOCOL_MANIFEST_SOURCE = Path(
     "reports/real_report_run/protocol_run.manifest.json"
 )
+REAL_REPORT_PROTOCOL_SOURCE = Path("protocols/real_report_run.toml")
 REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
     Path("docs/START_HERE.md"): (
         "8. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status.",
@@ -375,6 +377,25 @@ ALLOWED_REAL_REPORT_MANIFEST_METADATA_FIELDS = {
     "inputs",
     "outputs",
 }
+
+
+def _load_real_report_protocol_step_ids() -> list[str]:
+    if not REAL_REPORT_PROTOCOL_SOURCE.exists():
+        return []
+    data = tomllib.loads(REAL_REPORT_PROTOCOL_SOURCE.read_text(encoding="utf-8"))
+    steps = data.get("steps", [])
+    if not isinstance(steps, list):
+        return []
+    return [
+        str(step.get("id", ""))
+        for step in steps
+        if isinstance(step, dict) and step.get("id")
+    ]
+
+
+REQUIRED_REAL_REPORT_PROTOCOL_STEP_IDS = tuple(
+    step_id for step_id in _load_real_report_protocol_step_ids()
+)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -760,6 +781,14 @@ def validate_packaged_real_report_protocol_manifest(
     if not isinstance(steps, list) or not steps:
         failures.append(f"{path} has no protocol steps")
         return failures
+    step_ids = {
+        str(step.get("id", ""))
+        for step in steps
+        if isinstance(step, dict) and step.get("id")
+    }
+    for step_id in REQUIRED_REAL_REPORT_PROTOCOL_STEP_IDS:
+        if step_id not in step_ids:
+            failures.append(f"{path} missing protocol step: {step_id}")
     preflight = protocol_step(steps, "preflight")
     if not isinstance(preflight, dict):
         failures.append(f"{path} missing preflight step")

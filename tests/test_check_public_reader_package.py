@@ -96,68 +96,43 @@ def _default_report_text(path: Path) -> str:
             indent=2,
         ) + "\n"
     if path == Path("reports/real_report_run/protocol_run.manifest.json"):
+        steps = [
+            {
+                "id": step_id,
+                "return_code": 0,
+                "skipped": step_id not in {"preflight", "real_report_summary"},
+            }
+            for step_id in check.REQUIRED_REAL_REPORT_PROTOCOL_STEP_IDS
+        ]
+        for step in steps:
+            if step["id"] != "real_report_summary":
+                continue
+            step["inputs"] = [
+                "reports/wrr_1994/wrr_no_input_handoff_status_summary.csv",
+                "reports/wrr_1994/wrr_no_input_handoff_status.manifest.json",
+                "reports/cities_no_input_handoff_status/summary.csv",
+                "reports/cities_no_input_handoff_status/manifest.json",
+                "reports/kjva_no_input_handoff_status/summary.csv",
+                "reports/kjva_no_input_handoff_status/manifest.json",
+                "reports/external_claim_source_counts/summary.csv",
+                "reports/external_claim_source_counts/summary.manifest.json",
+                "reports/external_claim_source_all_codes/surface_all_codes_summary.csv",
+                "reports/external_claim_source_all_codes/summary.manifest.json",
+                "reports/external_claim_source_all_codes/triage_queue.csv",
+                "reports/external_claim_source_all_codes/triage.manifest.json",
+                "reports/external_claim_source_all_codes/findings.manifest.json",
+            ]
+            step["outputs"] = [
+                "reports/real_report_run/summary.md",
+                "reports/real_report_run/manifest.json",
+            ]
         return json.dumps(
             {
                 "tool": "run_protocol",
                 "protocol": "real_report_run",
                 "status": "success",
                 "dry_run": False,
-                "steps": [
-                    {
-                        "id": "preflight",
-                        "return_code": 0,
-                        "skipped": False,
-                    },
-                    {
-                        "id": "cities_no_input_handoff_status",
-                        "return_code": 0,
-                        "skipped": True,
-                    },
-                    {
-                        "id": "wrr_no_input_handoff_status",
-                        "return_code": 0,
-                        "skipped": False,
-                    },
-                    {
-                        "id": "kjva_no_input_handoff_status",
-                        "return_code": 0,
-                        "skipped": True,
-                    },
-                    {
-                        "id": "external_claim_source_counts",
-                        "return_code": 0,
-                        "skipped": True,
-                    },
-                    {
-                        "id": "external_claim_source_all_codes_collection",
-                        "return_code": 0,
-                        "skipped": True,
-                    },
-                    {
-                        "id": "real_report_summary",
-                        "return_code": 0,
-                        "skipped": False,
-                        "inputs": [
-                            "reports/wrr_1994/wrr_no_input_handoff_status_summary.csv",
-                            "reports/wrr_1994/wrr_no_input_handoff_status.manifest.json",
-                            "reports/cities_no_input_handoff_status/summary.csv",
-                            "reports/cities_no_input_handoff_status/manifest.json",
-                            "reports/kjva_no_input_handoff_status/summary.csv",
-                            "reports/kjva_no_input_handoff_status/manifest.json",
-                            "reports/external_claim_source_counts/summary.csv",
-                            "reports/external_claim_source_counts/summary.manifest.json",
-                            "reports/external_claim_source_all_codes/surface_all_codes_summary.csv",
-                            "reports/external_claim_source_all_codes/summary.manifest.json",
-                            "reports/external_claim_source_all_codes/triage_queue.csv",
-                            "reports/external_claim_source_all_codes/triage.manifest.json",
-                            "reports/external_claim_source_all_codes/findings.manifest.json",
-                        ],
-                        "outputs": [
-                            "reports/real_report_run/summary.md",
-                            "reports/real_report_run/manifest.json",
-                        ],
-                    }
-                ],
+                "steps": steps,
             },
             indent=2,
         ) + "\n"
@@ -512,6 +487,24 @@ def test_detects_packaged_real_report_protocol_manifest_drift(
     failures = check.validate_public_reader_package(out_dir)
 
     assert f"{protocol_path} preflight step did not run cleanly" in failures
+
+
+def test_detects_packaged_real_report_protocol_missing_current_step(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    protocol_path = out_dir / "reports/real_report_run/protocol_run.manifest.json"
+    protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
+    missing_step = "greek_surface_length4_followup"
+    protocol["steps"] = [
+        step for step in protocol["steps"] if step["id"] != missing_step
+    ]
+    protocol_path.write_text(json.dumps(protocol, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert f"{protocol_path} missing protocol step: {missing_step}" in failures
 
 
 def test_detects_packaged_real_report_protocol_manifest_summary_input_drift(
