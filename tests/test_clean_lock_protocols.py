@@ -597,7 +597,7 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     normalized_text = " ".join(text.split())
 
     assert "Latest validation snapshot after the release-ready make target" in text
-    assert "2565 tests" in normalized_text
+    assert "2567 tests" in normalized_text
     assert "2 skipped, and 29329 subtests" in normalized_text
     assert "make release-ready" in text
     assert "committed tree" in text
@@ -636,6 +636,8 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     assert "WRR source row coverage-packet manifest JSON validation" in normalized_text
     assert "WRR source-policy evidence-packet manifest JSON validation" in normalized_text
     assert "WRR claim-readiness/method-status/lock-options manifest JSON validation" in normalized_text
+    assert "remaining WRR doc JSON reader validation" in normalized_text
+    assert "all remaining WRR doc JSON readers" in normalized_text
     assert "WRR documentation gate" in normalized_text
     assert "cache-clean" in normalized_text
     assert "scripts.check_expanded_strata_tooling" in text
