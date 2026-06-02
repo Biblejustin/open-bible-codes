@@ -22,6 +22,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "data/study/mappings/cities_source_transcription_decisions.csv",
         "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",
         "docs/CITIES_NO_INPUT_HANDOFF_STATUS.md",
+        "The Cities no-input handoff keeps",
         "8 handoff rows",
         "6 manual-input-needed rows",
         "61 OCR packet pages",
