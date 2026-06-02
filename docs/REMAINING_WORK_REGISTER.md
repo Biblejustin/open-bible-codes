@@ -2014,10 +2014,11 @@ KJVA doc manifest JSON validation, general doc JSON reader validation, and
 Cities no-input handoff manifest JSON validation, study-lock manifest JSON
 validation, shared script JSON object-reader validation, protocol/cache JSON
 root validation, report-index cache validation, and public-reader manifest
-root validation, prospective lane-status profile JSON validation, and
-study-lock drift manifest JSON validation:
+root validation, prospective lane-status profile JSON validation, study-lock
+drift manifest JSON validation, and KJVA apocrypha prospective-boundary
+profile JSON validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2589
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2590
   tests, 2 skipped, and 29329 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3202,6 +3203,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened the study-lock manifest-drift audit doc checker so non-object
   manifest JSON roots report explicit failures instead of crashing the drift
   audit gate.
+- Tightened the KJVA apocrypha prospective-boundary profile JSON validator so
+  non-object profile files report explicit failures instead of crashing the
+  boundary gate.
 - This is a documentation/validation guard only. It does not change report
   conclusions, source policy, imported texts, ELS searches, or result status.
 

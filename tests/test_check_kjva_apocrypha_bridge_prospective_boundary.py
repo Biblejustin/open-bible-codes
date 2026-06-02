@@ -61,6 +61,16 @@ def test_ready_for_preflight_profile_fails() -> None:
         assert any("ready_for_preflight lane" in failure for failure in failures)
 
 
+def test_non_object_profiles_json_fails() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        paths = copy_current_inputs(Path(tmp))
+        paths["profiles"].write_text("[]", encoding="utf-8")
+
+        failures = validate(paths)
+
+        assert any("profiles.json JSON root must be an object" in failure for failure in failures)
+
+
 def test_doc_phrase_drift_fails() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         paths = copy_current_inputs(Path(tmp))

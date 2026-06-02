@@ -375,6 +375,9 @@ def validate_profiles(path: Path) -> list[str]:
     except json.JSONDecodeError as exc:
         return [f"{path} is invalid JSON: {exc}"]
 
+    if not isinstance(payload, dict):
+        return [f"{path} JSON root must be an object"]
+
     profiles = payload.get("profiles")
     if not isinstance(profiles, list):
         return [f"{path} missing profiles list"]
