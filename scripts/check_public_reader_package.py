@@ -786,9 +786,12 @@ def validate_packaged_real_report_protocol_manifest(
         for step in steps
         if isinstance(step, dict) and step.get("id")
     }
+    required_step_ids = set(REQUIRED_REAL_REPORT_PROTOCOL_STEP_IDS)
     for step_id in REQUIRED_REAL_REPORT_PROTOCOL_STEP_IDS:
         if step_id not in step_ids:
             failures.append(f"{path} missing protocol step: {step_id}")
+    for step_id in sorted(step_ids - required_step_ids):
+        failures.append(f"{path} has unexpected protocol step: {step_id}")
     preflight = protocol_step(steps, "preflight")
     if not isinstance(preflight, dict):
         failures.append(f"{path} missing preflight step")
