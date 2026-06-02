@@ -2,12 +2,14 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from scripts.classify_centered_relevance import (
     CRDBudgetExceeded,
     CRDConfigurationError,
     DeterministicClassifier,
     LLMClassifier,
+    OpenAICompatibleClient,
     load_relevance_dictionary,
     parse_relevance_entry,
     sha256_file,
@@ -31,6 +33,20 @@ class MockLLMClient:
             "raw_response": self.raw_response,
             "model_version": "mock-v1",
         }
+
+
+class MockHTTPResponse:
+    def __init__(self, payload: object):
+        self.body = json.dumps(payload).encode("utf-8")
+
+    def __enter__(self) -> "MockHTTPResponse":
+        return self
+
+    def __exit__(self, *_args: object) -> None:
+        return None
+
+    def read(self) -> bytes:
+        return self.body
 
 
 class DeterministicClassifierTests(unittest.TestCase):
@@ -370,6 +386,29 @@ class LLMClassifierTests(unittest.TestCase):
             with self.assertRaises(CRDBudgetExceeded):
                 classifier.classify(llm_hit_row(), {"term": "ace", "language": "english"})
 
+    def test_openai_client_rejects_non_object_response_root(self) -> None:
+        with patch.dict("os.environ", {"OPENAI_API_KEY": "test"}, clear=False):
+            with patch(
+                "scripts.classify_centered_relevance.urllib.request.urlopen",
+                return_value=MockHTTPResponse(["bad"]),
+            ):
+                with self.assertRaisesRegex(
+                    RuntimeError, "LLM API response JSON root must be an object"
+                ):
+                    OpenAICompatibleClient().classify(**openai_request_kwargs())
+
+    def test_openai_client_rejects_malformed_choices(self) -> None:
+        with patch.dict("os.environ", {"OPENAI_API_KEY": "test"}, clear=False):
+            with patch(
+                "scripts.classify_centered_relevance.urllib.request.urlopen",
+                return_value=MockHTTPResponse({"choices": {"bad": True}}),
+            ):
+                with self.assertRaisesRegex(
+                    RuntimeError,
+                    "LLM API response choices must be a non-empty object list",
+                ):
+                    OpenAICompatibleClient().classify(**openai_request_kwargs())
+
 
 def entry(
     *,
@@ -434,6 +473,17 @@ def build_llm_classifier(
         ),
         mock,
     )
+
+
+def openai_request_kwargs() -> dict[str, object]:
+    return {
+        "provider": "openai",
+        "model_id": "mock-model",
+        "system_prompt": "Return JSON.",
+        "user_prompt": "Classify.",
+        "temperature": 0,
+        "max_tokens": 100,
+    }
 
 
 def llm_hit_row() -> dict[str, str]:

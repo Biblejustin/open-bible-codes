@@ -328,9 +328,26 @@ class OpenAICompatibleClient:
                 data = json.loads(response.read().decode("utf-8"))
         except urllib.error.URLError as exc:
             raise RuntimeError(f"LLM API call failed: {exc}") from exc
-        choice = data.get("choices", [{}])[0]
-        content = choice.get("message", {}).get("content", "")
-        return {"raw_response": content, "model_version": data.get("model", model_id), "response_json": data}
+        if not isinstance(data, dict):
+            raise RuntimeError("LLM API response JSON root must be an object")
+        choices = data.get("choices")
+        if (
+            not isinstance(choices, list)
+            or not choices
+            or not isinstance(choices[0], dict)
+        ):
+            raise RuntimeError("LLM API response choices must be a non-empty object list")
+        message = choices[0].get("message")
+        if not isinstance(message, dict):
+            raise RuntimeError("LLM API response choice message must be an object")
+        content = message.get("content", "")
+        if not isinstance(content, str):
+            raise RuntimeError("LLM API response message content must be a string")
+        return {
+            "raw_response": content,
+            "model_version": str(data.get("model", model_id)),
+            "response_json": data,
+        }
 
 
 class LLMClassifier(Classifier):
