@@ -74,6 +74,7 @@ from scripts import (
     check_expanded_strata_tooling,
     check_final_report_assembly_docs,
     check_final_report_highlights_doc,
+    check_fresh_prospective_study_intake_doc,
     check_greek_surface_second_cohort_readiness_doc,
     check_hypothesis_testing_source_audit_doc,
     check_israeli_prime_ministers_detail_recovery_probe_doc,
@@ -193,6 +194,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_compound_extension_claim_standard_doc.py",
     "scripts/check_doc_command_references.py",
     "scripts/check_english_seed_survivor_gate.py",
+    "scripts/check_fresh_prospective_study_intake_doc.py",
     "scripts/check_consolidated_findings_doc.py",
     "scripts/check_kjva_apocrypha_bridge_next_replication_doc.py",
     "scripts/check_kjva_apocrypha_bridge_prospective_boundary.py",
@@ -484,6 +486,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/CRD_CENTER_WORD_VERSION_PRESENCE_FINDINGS.md",
     "docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md",
     "docs/COMPOUND_EXTENSION_PROSPECTIVE_CLAIM_STANDARD.md",
+    "docs/FRESH_PROSPECTIVE_STUDY_INTAKE.md",
     "docs/GREEK_SURFACE_SECOND_COHORT_READINESS.md",
     "docs/STUDY_LOCK_MANIFESTS.md",
     "docs/EXPANDED_STRATA_TOOLING.md",
@@ -1269,6 +1272,17 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "compound-extension claim-standard doc failures: "
             + "; ".join(compound_extension_claim_standard_doc_failures)
+        )
+
+    fresh_prospective_study_intake_doc_failures = (
+        check_fresh_prospective_study_intake_doc.validate_fresh_prospective_study_intake_doc(
+            root / check_fresh_prospective_study_intake_doc.DEFAULT_DOC
+        )
+    )
+    if fresh_prospective_study_intake_doc_failures:
+        failures.append(
+            "fresh prospective-study intake doc failures: "
+            + "; ".join(fresh_prospective_study_intake_doc_failures)
         )
 
     project_findings_overview_doc_failures = (
@@ -2773,6 +2787,9 @@ def main(argv: list[str] | None = None) -> int:
         "expanded_strata_tooling_failures": expanded_strata_tooling_failures,
         "clean_lock_results_summary_doc_failures": (
             clean_lock_results_summary_doc_failures
+        ),
+        "fresh_prospective_study_intake_doc_failures": (
+            fresh_prospective_study_intake_doc_failures
         ),
         "public_claim_language_failures": public_claim_language_failures,
         "doc_command_reference_failures": doc_command_reference_failures,

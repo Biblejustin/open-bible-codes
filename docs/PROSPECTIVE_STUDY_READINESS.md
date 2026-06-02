@@ -6,6 +6,8 @@ The current next-phase lock is tracked in
 `docs/PROSPECTIVE_STUDY_NEXT_LOCK.md`. That document freezes the report
 presentation layer, post-discovery controlled review candidates, and the next
 eligible fresh prospective lane.
+New study ideas should first pass the intake gate in
+`docs/FRESH_PROSPECTIVE_STUDY_INTAKE.md`.
 
 Use this matrix to decide which next result-producing study to lock. Every lane
 below must be converted into a study-specific preregistration document, lock
@@ -73,6 +75,7 @@ in `docs/PROSPECTIVE_LANE_STATUS.md`. Use:
 
 ```bash
 python3 -m scripts.check_prospective_study_lanes
+python3 -m scripts.check_fresh_prospective_study_intake_doc
 python3 -m scripts.scaffold_prospective_study --list-profiles
 python3 -m scripts.scaffold_prospective_study --profile PROFILE_ID --print-command
 python3 -m scripts.build_prospective_lane_status

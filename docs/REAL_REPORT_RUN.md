@@ -578,3 +578,5 @@ For Greek exact-center surface rows, the stricter prospective standard is
 tracked in `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`.
 For compound-extension rows, the stricter prospective standard is tracked in
 `docs/COMPOUND_EXTENSION_PROSPECTIVE_CLAIM_STANDARD.md`.
+For any new term/source target set, the intake gate is tracked in
+`docs/FRESH_PROSPECTIVE_STUDY_INTAKE.md`.

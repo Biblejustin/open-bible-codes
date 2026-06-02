@@ -102,6 +102,8 @@ REQUIRED_PHRASES = (
     "critical-omission follow-up docs keep Setup, Method, Results, and Cautions sections plus current headline counts visible",
     "docs/COMPOUND_EXTENSION_PROSPECTIVE_CLAIM_STANDARD.md",
     "For compound-extension rows, the stricter prospective standard is tracked",
+    "docs/FRESH_PROSPECTIVE_STUDY_INTAKE.md",
+    "For any new term/source target set, the intake gate is tracked",
     "Cities source-row lock evidence packet checks local recovered PDF and page-image artifact paths before any lock row can pass preflight",
     "populated Cities source-row lock decision records must name the exact decision id in their evidence citation or summary",
     "Cities source-row lock status",

@@ -891,6 +891,10 @@ no remaining `ready_for_preflight` lane, matching
 Any further result-producing work needs a genuinely new term/source target set
 and a fresh lock before running. Avoid more raw count expansion unless the
 claim standard is fixed in advance.
+The fresh-study intake gate is tracked in
+`docs/FRESH_PROSPECTIVE_STUDY_INTAKE.md`; it defines the source, term,
+prior-evidence, control, lock, and preflight package required before any new
+result-bearing run.
 
 That post-discovery follow-up design is now frozen in
 `docs/DOXA_FOLLOWUP_PREREGISTRATION.md`. The first locked follow-up run is

@@ -105,6 +105,7 @@ study-support-checks:
 	python3 -m scripts.check_critical_omission_followup_docs
 	python3 -m scripts.check_english_corpus_policy_docs
 	python3 -m scripts.check_english_seed_survivor_gate
+	python3 -m scripts.check_fresh_prospective_study_intake_doc
 	python3 -m scripts.check_greek_surface_second_cohort_readiness_doc
 	python3 -m scripts.check_hypothesis_testing_source_audit_doc
 	python3 -m scripts.check_israeli_prime_ministers_detail_recovery_probe_doc

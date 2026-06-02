@@ -1655,6 +1655,7 @@ def write_summary(
             "- `docs/WRR_DW_FORMULA_SENSITIVITY.md`",
             "- `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`",
             "- `docs/COMPOUND_EXTENSION_PROSPECTIVE_CLAIM_STANDARD.md`",
+            "- `docs/FRESH_PROSPECTIVE_STUDY_INTAKE.md`",
             "- `docs/STUDY_LOCK_MANIFESTS.md`",
             "- `docs/PROSPECTIVE_STUDY_PREREGISTRATION_TEMPLATE.md`",
             "- `docs/PROSPECTIVE_TERM_AUDITS.md`",

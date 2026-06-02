@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 428
+Documents indexed: 429
 
 ## Controls
 
@@ -325,6 +325,7 @@ Documents indexed: 428
 | Final Report Highlights | `FINAL_REPORT_HIGHLIGHTS.md` |
 | Final Report Outline | `FINAL_REPORT_OUTLINE.md` |
 | Frequency Anchors | `FREQUENCY_ANCHORS.md` |
+| Fresh Prospective Study Intake | `FRESH_PROSPECTIVE_STUDY_INTAKE.md` |
 | Gans Communities Source Audit | `GANS_COMMUNITIES_SOURCE_AUDIT.md` |
 | Greek Exact-Center Final Gate | `GREEK_EXACT_CENTER_FINAL_GATE.md` |
 | Greek Three-Source Synthetic Extension Baselines | `GREEK_EXACT_CENTER_THREE_SOURCE_SYNTHETIC_BASELINES.md` |

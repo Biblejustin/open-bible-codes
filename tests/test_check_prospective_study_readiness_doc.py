@@ -27,6 +27,7 @@ def test_no_ready_doc_fails_when_profile_is_ready(tmp_path: Path) -> None:
             (
                 "`configs/prospective_study_lanes.json`",
                 "`docs/PROSPECTIVE_LANE_STATUS.md`",
+                "`docs/FRESH_PROSPECTIVE_STUDY_INTAKE.md`",
                 check.NO_CLAIM_RERUN_PHRASE,
                 check.NO_READY_PHRASE,
                 check.FRESH_TARGET_PHRASE,
@@ -56,6 +57,7 @@ def test_blocked_profile_requires_lane_id(tmp_path: Path) -> None:
             (
                 f"`{profiles.as_posix()}`",
                 "`docs/PROSPECTIVE_LANE_STATUS.md`",
+                "`docs/FRESH_PROSPECTIVE_STUDY_INTAKE.md`",
                 check.NO_CLAIM_RERUN_PHRASE,
                 check.NO_READY_PHRASE,
                 check.FRESH_TARGET_PHRASE,
@@ -82,6 +84,7 @@ def test_status_snapshot_must_match_profiles(tmp_path: Path) -> None:
             (
                 f"`{profiles.as_posix()}`",
                 "`docs/PROSPECTIVE_LANE_STATUS.md`",
+                "`docs/FRESH_PROSPECTIVE_STUDY_INTAKE.md`",
                 check.NO_CLAIM_RERUN_PHRASE,
                 check.NO_READY_PHRASE,
                 check.FRESH_TARGET_PHRASE,

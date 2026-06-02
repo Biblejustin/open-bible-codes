@@ -19,6 +19,7 @@ FRESH_TARGET_PHRASE = "fresh term/source target set"
 NO_BLOCKED_PHRASE = "all tracked profiles are completed, negative/weak, or context-cautioned"
 NO_CLAIM_RERUN_PHRASE = "Do not rerun a completed profile as a claim lane"
 LANE_STATUS_DOC = Path("docs/PROSPECTIVE_LANE_STATUS.md")
+INTAKE_DOC = Path("docs/FRESH_PROSPECTIVE_STUDY_INTAKE.md")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -58,6 +59,8 @@ def validate_readiness_doc(doc: Path, profiles_path: Path) -> list[str]:
         failures.append(f"{doc} missing profile link: {profile_display}")
     if f"`{LANE_STATUS_DOC.as_posix()}`" not in text:
         failures.append(f"{doc} missing lane-status link: {LANE_STATUS_DOC}")
+    if f"`{INTAKE_DOC.as_posix()}`" not in text:
+        failures.append(f"{doc} missing intake link: {INTAKE_DOC}")
     if not contains_phrase(normalized_text, NO_CLAIM_RERUN_PHRASE):
         failures.append(f"{doc} missing no-claim-rerun guard")
     for phrase in status_count_phrases(profiles):
