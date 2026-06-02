@@ -21,6 +21,7 @@ from urllib.request import Request, urlopen
 
 from els import __version__
 from scripts.build_wrr_wayback_source_recovery_probe import (
+    cdx_rows_from_payload,
     closest_snapshot,
     markdown_cell,
     markdown_link,
@@ -362,21 +363,7 @@ def fetch_url_with_timeout(url: str) -> FetchResult:
 
 def cdx_snapshots_with_timeout(url: str) -> list[dict[str, str]]:
     payload = fetch_json_with_timeout(wayback_cdx_url(url))
-    if not isinstance(payload, list) or len(payload) <= 1:
-        return []
-    header = [str(value) for value in payload[0]]
-    rows: list[dict[str, str]] = []
-    for raw_row in payload[1:]:
-        if not isinstance(raw_row, list):
-            continue
-        row = {
-            header[index]: str(value)
-            for index, value in enumerate(raw_row)
-            if index < len(header)
-        }
-        if row.get("timestamp") and row.get("original"):
-            rows.append(row)
-    return rows
+    return cdx_rows_from_payload(payload, source="Cities Wayback CDX API")
 
 
 def fetch_json_with_timeout(url: str):

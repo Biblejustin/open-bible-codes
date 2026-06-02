@@ -141,6 +141,17 @@ class CitiesPdfRecoveryProbeTests(unittest.TestCase):
             manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
             self.assertEqual(manifest["rows"], 2)
 
+    def test_cdx_snapshots_rejects_non_list_api_root(self) -> None:
+        with patch.object(
+            probe,
+            "fetch_json_with_timeout",
+            return_value={"message": "rate limited"},
+        ):
+            with self.assertRaisesRegex(
+                ValueError, "Cities Wayback CDX API JSON root must be a list"
+            ):
+                probe.cdx_snapshots_with_timeout("https://example.test/source.pdf")
+
 
 if __name__ == "__main__":
     unittest.main()

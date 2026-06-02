@@ -198,6 +198,18 @@ class WrrWaybackSourceRecoveryProbeTests(unittest.TestCase):
         self.assertEqual(row["cdx_status"], "cdx_checked")
         self.assertEqual(row["cdx_candidate_count"], 1)
 
+    def test_cdx_payload_rejects_non_list_root(self) -> None:
+        with self.assertRaisesRegex(
+            ValueError, "Wayback CDX API JSON root must be a list"
+        ):
+            probe.cdx_rows_from_payload({"message": "rate limited"})
+
+    def test_cdx_payload_rejects_non_list_header(self) -> None:
+        with self.assertRaisesRegex(
+            ValueError, "Wayback CDX API header row must be a list"
+        ):
+            probe.cdx_rows_from_payload([{"timestamp": "bad"}])
+
 
 if __name__ == "__main__":
     unittest.main()

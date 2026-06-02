@@ -2018,9 +2018,10 @@ root validation, prospective lane-status profile JSON validation, study-lock
 drift manifest JSON validation, and KJVA apocrypha prospective-boundary
 profile JSON validation, STEP_TAHOT manifest cache JSON validation, and KJVA
 apocrypha bridge review manifest cache JSON validation, plus Bolls importer
-JSON root validation and public-source downloader API JSON validation:
+JSON root validation, public-source downloader API JSON validation, and
+Wayback CDX API JSON validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2595
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2598
   tests, 2 skipped, and 29333 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3216,6 +3217,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   book-metadata, and language-metadata roots fail with explicit shape messages.
 - Tightened the SBLGNT, MorphGNT, and OSHB/WLC public-source downloaders so
   GitHub API listing roots and rows are shape-checked before file filtering.
+- Tightened the WRR Wayback and Cities PDF recovery CDX readers so Wayback CDX
+  API roots and header rows are shape-checked before archived-source fallback
+  rows are interpreted.
 - This is a documentation/validation guard only. It does not change report
   conclusions, source policy, imported texts, ELS searches, or result status.
 

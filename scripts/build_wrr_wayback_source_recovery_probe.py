@@ -467,9 +467,22 @@ def closest_snapshot(payload: Any) -> dict[str, Any]:
 
 def cdx_snapshots(url: str) -> list[dict[str, str]]:
     payload = fetch_json(wayback_cdx_url(url))
-    if not isinstance(payload, list) or len(payload) <= 1:
+    return cdx_rows_from_payload(payload)
+
+
+def cdx_rows_from_payload(
+    payload: Any, *, source: str = "Wayback CDX API"
+) -> list[dict[str, str]]:
+    if not isinstance(payload, list):
+        raise ValueError(f"{source} JSON root must be a list")
+    if not payload:
         return []
-    header = [str(value) for value in payload[0]]
+    raw_header = payload[0]
+    if not isinstance(raw_header, list):
+        raise ValueError(f"{source} header row must be a list")
+    if len(payload) <= 1:
+        return []
+    header = [str(value) for value in raw_header]
     rows: list[dict[str, str]] = []
     for raw_row in payload[1:]:
         if not isinstance(raw_row, list):
