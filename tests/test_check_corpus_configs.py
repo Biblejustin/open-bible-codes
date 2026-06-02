@@ -64,5 +64,49 @@ def test_empty_non_template_config_fails(tmp_path: Path) -> None:
     ]
 
 
+def test_invalid_toml_reports_failure(tmp_path: Path) -> None:
+    configs = tmp_path / "configs"
+    configs.mkdir()
+    path = configs / "demo.toml"
+    write_config(path, "[[sources]\n")
+
+    failures = check.validate_corpus_configs(configs)
+
+    assert any(failure.startswith(f"{path} invalid TOML:") for failure in failures)
+
+
+def test_missing_sources_fails(tmp_path: Path) -> None:
+    configs = tmp_path / "configs"
+    configs.mkdir()
+    write_config(
+        configs / "demo.toml",
+        """
+name = "Demo"
+language = "english"
+""".lstrip(),
+    )
+
+    assert check.validate_corpus_configs(configs) == [
+        f"{configs / 'demo.toml'} has no sources"
+    ]
+
+
+def test_source_entry_must_be_table(tmp_path: Path) -> None:
+    configs = tmp_path / "configs"
+    configs.mkdir()
+    write_config(
+        configs / "demo.toml",
+        """
+name = "Demo"
+language = "english"
+sources = ["bad"]
+""".lstrip(),
+    )
+
+    assert check.validate_corpus_configs(configs) == [
+        f"{configs / 'demo.toml'}:source 1 is not a table"
+    ]
+
+
 def write_config(path: Path, text: str) -> None:
     path.write_text(text, encoding="utf-8")
