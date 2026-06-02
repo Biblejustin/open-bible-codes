@@ -2002,8 +2002,8 @@ Latest validation snapshot after the release-ready make target, refreshed after
 the public-reader package protocol guard and real-report protocol duplicate-step
 guard:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2534
-  tests, 2 skipped, and 29325 subtests.
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2535
+  tests, 2 skipped, and 29329 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
 - Locked post-discovery reruns for
@@ -3107,6 +3107,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   the same structured configuration failure for classifier callers.
 - Tightened CRD relevance dictionary entry-shape validation so malformed
   `entries` metadata fails before parser internals see it.
+- Tightened CRD relevance list-field validation so string metadata cannot be
+  silently interpreted as character sequences.
 - This is a documentation guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 

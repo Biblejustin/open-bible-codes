@@ -270,6 +270,27 @@ class DeterministicClassifierTests(unittest.TestCase):
         with self.assertRaises(CRDConfigurationError):
             parse_relevance_entry({"term_id": "bad"})
 
+    def test_dictionary_list_fields_must_be_lists(self) -> None:
+        base = {
+            "term_id": "bad",
+            "surface_keywords": [],
+            "concept_codes": [],
+            "verse_refs": [],
+            "book_scope": [],
+            "provenance": {
+                "author": "test",
+                "lock_date": "2026-01-01",
+                "reviewer": "test",
+                "notes": "test",
+            },
+        }
+        for field in ("surface_keywords", "concept_codes", "verse_refs", "book_scope"):
+            with self.subTest(field=field):
+                row = dict(base)
+                row[field] = "bad"
+                with self.assertRaisesRegex(CRDConfigurationError, f"{field} must be a list"):
+                    parse_relevance_entry(row)
+
     def test_dictionary_entries_must_be_list(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             dictionary = Path(tmp) / "dictionary.toml"

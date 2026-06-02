@@ -122,6 +122,9 @@ def parse_relevance_entry(raw: dict[str, Any]) -> RelevanceEntry:
     for field in ("author", "lock_date", "reviewer", "notes"):
         if field not in provenance or str(provenance.get(field, "")).strip() == "":
             raise CRDConfigurationError(f"relevance entry provenance missing {field}")
+    for field in ("surface_keywords", "concept_codes", "verse_refs", "book_scope"):
+        if field in raw and not isinstance(raw[field], list):
+            raise CRDConfigurationError(f"relevance entry {field} must be a list")
     return RelevanceEntry(
         term_id=str(raw["term_id"]),
         surface_keywords=tuple(str(value) for value in raw["surface_keywords"]),
