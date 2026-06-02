@@ -597,7 +597,7 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     normalized_text = " ".join(text.split())
 
     assert "Latest validation snapshot after the release-ready make target" in text
-    assert "2587 tests" in normalized_text
+    assert "2588 tests" in normalized_text
     assert "2 skipped, and 29329 subtests" in normalized_text
     assert "make release-ready" in text
     assert "committed tree" in text
@@ -661,6 +661,8 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     assert "public-reader manifest root validation" in normalized_text
     assert "public-reader package manifest checks" in normalized_text
     assert "packaged real-report manifests" in normalized_text
+    assert "prospective lane-status profile JSON validation" in normalized_text
+    assert "prospective lane-status profile JSON" in normalized_text
     assert "WRR documentation gate" in normalized_text
     assert "Cities documentation gate" in normalized_text
     assert "KJVA documentation gate" in normalized_text

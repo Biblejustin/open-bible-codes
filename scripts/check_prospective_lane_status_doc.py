@@ -129,6 +129,8 @@ def validate_default_profiles_json(
         payload = json.loads(profiles_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         return [f"could not read profile JSON {profiles_path}: {exc}"]
+    if not isinstance(payload, dict):
+        return [f"{profiles_path} JSON root must be an object"]
     if not isinstance(payload.get("profiles"), list):
         failures.append(f"{profiles_path} profiles missing or not a list")
     observed_rows = tuple(

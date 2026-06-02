@@ -96,6 +96,15 @@ def test_default_profile_lock_rejects_status_drift(tmp_path: Path) -> None:
     assert any("status counts drifted" in failure for failure in failures)
 
 
+def test_default_profile_lock_rejects_non_object_json(tmp_path: Path) -> None:
+    path = tmp_path / "profiles.json"
+    path.write_text("[]\n", encoding="utf-8")
+
+    failures = check.validate_default_profiles_json(path, [])
+
+    assert failures == [f"{path} JSON root must be an object"]
+
+
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
     missing = tmp_path / "missing.md"
 
