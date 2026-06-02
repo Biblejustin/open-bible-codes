@@ -85,6 +85,35 @@ class StepTahotDownloadTests(unittest.TestCase):
             self.assertIn("Do not treat as a pure Leningrad ketiv stream", manifest["text_policy"])
             self.assertEqual(manifest_path.stat().st_mtime_ns, manifest_mtime_ns)
 
+    def test_non_object_existing_manifest_does_not_crash(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            raw_path = Path(tmp) / download_step_tahot.SOURCE_FILES[0]
+            raw_path.write_text("raw", encoding="utf-8")
+            csv_path = Path(tmp) / "tahot.csv"
+            csv_path.write_text("ref,book,chapter,verse,text\n", encoding="utf-8")
+            manifest_path = Path(tmp) / "manifest.json"
+            manifest_path.write_text("[]", encoding="utf-8")
+            verses = [
+                download_step_tahot.TahotVerse(
+                    book="Gen",
+                    chapter="1",
+                    verse="1",
+                    words=["בְּ/רֵאשִׁ֖ית"],
+                    source_types=["L"],
+                )
+            ]
+
+            download_step_tahot.write_manifest(
+                manifest_path,
+                raw_files=[raw_path],
+                csv_path=csv_path,
+                verses=verses,
+            )
+
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            self.assertEqual(manifest["source_id"], download_step_tahot.SOURCE_ID)
+            self.assertEqual(manifest["verse_count"], 1)
+
     def test_write_csv_does_not_rewrite_unchanged_content(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             csv_path = Path(tmp) / "tahot.csv"

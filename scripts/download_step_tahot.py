@@ -319,6 +319,8 @@ def stable_downloaded_at(
             existing = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             existing = {}
+        if not isinstance(existing, dict):
+            existing = {}
         if (
             existing.get("raw_files") == raw_file_entries
             and existing.get("csv_sha256") == csv_sha256

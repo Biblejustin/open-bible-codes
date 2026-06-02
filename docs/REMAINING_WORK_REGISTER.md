@@ -2016,9 +2016,9 @@ validation, shared script JSON object-reader validation, protocol/cache JSON
 root validation, report-index cache validation, and public-reader manifest
 root validation, prospective lane-status profile JSON validation, study-lock
 drift manifest JSON validation, and KJVA apocrypha prospective-boundary
-profile JSON validation:
+profile JSON validation, plus STEP_TAHOT manifest cache JSON validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2590
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2591
   tests, 2 skipped, and 29329 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3206,6 +3206,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened the KJVA apocrypha prospective-boundary profile JSON validator so
   non-object profile files report explicit failures instead of crashing the
   boundary gate.
+- Tightened the STEP_TAHOT manifest timestamp cache so non-object JSON roots
+  fall back to a fresh timestamp instead of crashing manifest rewrite.
 - This is a documentation/validation guard only. It does not change report
   conclusions, source policy, imported texts, ELS searches, or result status.
 
