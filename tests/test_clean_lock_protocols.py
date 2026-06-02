@@ -597,7 +597,7 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     normalized_text = " ".join(text.split())
 
     assert "Latest validation snapshot after the release-ready make target" in text
-    assert "2583 tests" in normalized_text
+    assert "2585 tests" in normalized_text
     assert "2 skipped, and 29329 subtests" in normalized_text
     assert "make release-ready" in text
     assert "committed tree" in text
@@ -655,6 +655,9 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     assert "protocol-runner stamp checks" in normalized_text
     assert "prospective preflight audit summaries" in normalized_text
     assert "dynamic-span summary/archive caches" in normalized_text
+    assert "report-index cache validation" in normalized_text
+    assert "report-index row-count cache parsing" in normalized_text
+    assert "invalid JSON report files" in normalized_text
     assert "WRR documentation gate" in normalized_text
     assert "Cities documentation gate" in normalized_text
     assert "KJVA documentation gate" in normalized_text

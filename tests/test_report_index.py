@@ -84,6 +84,34 @@ class ReportIndexTests(unittest.TestCase):
         self.assertEqual(csv_entry.rows, 2)
         self.assertEqual(csv_entry.sample_rows[0]["term"], "θεος")
 
+    def test_scan_reports_ignores_malformed_row_count_cache_entries(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            csv_path = root / "a.csv"
+            cache_path = root / "cache.json"
+            csv_path.write_text("term,count\nθεος,7\n", encoding="utf-8")
+            cache_path.write_text(
+                json.dumps({"a.csv": {"size": "bad", "mtime_ns": 0, "rows": 99}}),
+                encoding="utf-8",
+            )
+
+            entries = scan_reports(root, cache_path=cache_path)
+
+        csv_entry = next(entry for entry in entries if entry.path == "a.csv")
+        self.assertEqual(csv_entry.rows, 1)
+
+    def test_scan_reports_records_invalid_json_without_crashing(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            bad_json = root / "bad.json"
+            bad_json.write_text("{broken\n", encoding="utf-8")
+
+            entries = scan_reports(root)
+
+        json_entry = next(entry for entry in entries if entry.path == "bad.json")
+        self.assertEqual(json_entry.kind, "json")
+        self.assertIn("Expecting property name", json_entry.error)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -2012,10 +2012,10 @@ WRR claim-readiness/method-status/lock-options manifest JSON validation, plus
 remaining WRR doc JSON reader validation, Cities doc JSON reader validation,
 KJVA doc manifest JSON validation, general doc JSON reader validation, and
 Cities no-input handoff manifest JSON validation, study-lock manifest JSON
-validation, shared script JSON object-reader validation, and protocol/cache
-JSON root validation:
+validation, shared script JSON object-reader validation, protocol/cache JSON
+root validation, and report-index cache validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2583
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2585
   tests, 2 skipped, and 29329 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3188,6 +3188,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened protocol-runner stamp checks, prospective preflight audit summaries,
   and dynamic-span summary/archive caches so non-object JSON roots are ignored
   or reported instead of crashing resume, preflight, and cache paths.
+- Tightened report-index row-count cache parsing so malformed cache entries are
+  skipped and invalid JSON report files are indexed as error rows instead of
+  stopping the index build.
 - This is a documentation/validation guard only. It does not change report
   conclusions, source policy, imported texts, ELS searches, or result status.
 

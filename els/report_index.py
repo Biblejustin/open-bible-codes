@@ -231,15 +231,19 @@ def _read_row_count_cache(path: Path) -> dict[str, dict[str, int]]:
         return {}
     if not isinstance(data, dict):
         return {}
-    return {
-        str(key): {
-            "size": int(value.get("size", 0)),
-            "mtime_ns": int(value.get("mtime_ns", 0)),
-            "rows": int(value.get("rows", 0)),
-        }
-        for key, value in data.items()
-        if isinstance(value, dict)
-    }
+    cache: dict[str, dict[str, int]] = {}
+    for key, value in data.items():
+        if not isinstance(value, dict):
+            continue
+        try:
+            cache[str(key)] = {
+                "size": int(value.get("size", 0)),
+                "mtime_ns": int(value.get("mtime_ns", 0)),
+                "rows": int(value.get("rows", 0)),
+            }
+        except (TypeError, ValueError):
+            continue
+    return cache
 
 
 def _write_row_count_cache(path: Path, cache: dict[str, dict[str, int]]) -> None:
