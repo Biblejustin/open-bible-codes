@@ -597,13 +597,14 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     normalized_text = " ".join(text.split())
 
     assert "Latest validation snapshot after the release-ready make target" in text
-    assert "2517 tests" in normalized_text
+    assert "2518 tests" in normalized_text
     assert "2 skipped, and 29325 subtests" in normalized_text
     assert "make release-ready" in text
     assert "committed tree" in text
     assert "make fast-validate" in text
     assert "public-reader package protocol guard" in normalized_text
     assert "duplicate real-report protocol step ids" in normalized_text
+    assert "real-report protocol duplicate-step guard" in normalized_text
     assert "cache-clean" in normalized_text
     assert "scripts.check_expanded_strata_tooling" in text
     assert "scripts.check_public_claim_language" in text

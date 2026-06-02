@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import sys
 import tomllib
 from pathlib import Path
@@ -181,6 +182,13 @@ def validate_protocol(path: Path) -> list[str]:
         str(step.get("id", "")) for step in step_rows if step.get("id")
     ]
     failures: list[str] = []
+    duplicate_step_ids = sorted(
+        step_id
+        for step_id, count in Counter(ordered_step_ids).items()
+        if count > 1
+    )
+    for step_id in duplicate_step_ids:
+        failures.append(f"{path} duplicate step id: {step_id}")
     if data.get("name") != "real_report_run":
         failures.append(f"{path} name drifted")
     if data.get("manifest_out") != "reports/real_report_run/protocol_run.manifest.json":

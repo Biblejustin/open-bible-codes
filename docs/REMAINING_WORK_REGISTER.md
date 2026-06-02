@@ -1999,9 +1999,10 @@ Run `make release-ready` from a committed tree; the final public-release gate is
 supposed to fail if tracked files are dirty.
 
 Latest validation snapshot after the release-ready make target, refreshed after
-the public-reader package protocol guard:
+the public-reader package protocol guard and real-report protocol duplicate-step
+guard:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2517
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2518
   tests, 2 skipped, and 29325 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3085,6 +3086,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Updated README validation descriptions and Makefile guard tests so the
   direct real-report documentation gate remains visible in both dirty-safe and
   clean release checks.
+- Tightened the direct real-report documentation gate so duplicate
+  `real_report_run` protocol step ids fail explicitly, instead of allowing a
+  repeated TOML step block to collapse inside the structural lookup.
 - This is a documentation guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 

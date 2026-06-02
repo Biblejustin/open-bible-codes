@@ -110,6 +110,18 @@ def test_protocol_kjva_handoff_order_drift_fails(tmp_path: Path) -> None:
     )
 
 
+def test_protocol_duplicate_step_id_fails(tmp_path: Path) -> None:
+    doc, protocol, makefile = copy_current_inputs(tmp_path)
+    protocol.write_text(
+        duplicate_step_block(protocol.read_text(encoding="utf-8"), step_id="preflight"),
+        encoding="utf-8",
+    )
+
+    failures = check.validate_real_report_run_doc(doc, protocol, makefile)
+
+    assert f"{protocol} duplicate step id: preflight" in failures
+
+
 def test_make_target_drift_fails(tmp_path: Path) -> None:
     doc, protocol, makefile = copy_current_inputs(tmp_path)
     makefile.write_text(
@@ -148,3 +160,14 @@ def move_step_before(text: str, *, step_id: str, before_step_id: str) -> str:
     without_block = text[:start] + text[next_start:]
     insert_at = without_block.index(before_marker)
     return without_block[:insert_at] + block + without_block[insert_at:]
+
+
+def duplicate_step_block(text: str, *, step_id: str) -> str:
+    marker = f'[[steps]]\nid = "{step_id}"'
+    start = text.index(marker)
+    try:
+        next_start = text.index("\n[[steps]]", start + len(marker)) + 1
+    except ValueError:
+        next_start = len(text)
+    block = text[start:next_start]
+    return text[:next_start] + block + text[next_start:]
