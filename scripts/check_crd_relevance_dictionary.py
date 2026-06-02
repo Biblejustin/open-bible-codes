@@ -52,7 +52,10 @@ def check_dictionary(
     require_reviewed: bool = False,
     expected_sha256: str | None = None,
 ) -> dict[str, Any]:
-    raw = tomllib.loads(dictionary.read_text(encoding="utf-8"))
+    try:
+        raw = tomllib.loads(dictionary.read_text(encoding="utf-8"))
+    except tomllib.TOMLDecodeError as exc:
+        raise CRDConfigurationError(f"dictionary invalid TOML: {exc}") from exc
     metadata = raw.get("metadata", {})
     if not isinstance(metadata, dict):
         raise CRDConfigurationError("dictionary metadata block is required")

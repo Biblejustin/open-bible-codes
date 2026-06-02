@@ -48,6 +48,25 @@ def test_main_reports_hash_mismatch(tmp_path: Path, capsys) -> None:
     assert "dictionary sha256 mismatch" in stderr
 
 
+def test_main_reports_invalid_toml(tmp_path: Path, capsys) -> None:
+    terms = write_terms(tmp_path)
+    dictionary = tmp_path / "dictionary.toml"
+    dictionary.write_text("[[entries]\n", encoding="utf-8")
+
+    code = check.main(
+        [
+            "--dictionary",
+            str(dictionary),
+            "--term-file",
+            str(terms),
+        ]
+    )
+
+    stderr = capsys.readouterr().err
+    assert code == 1
+    assert "dictionary invalid TOML:" in stderr
+
+
 def write_terms(root: Path) -> Path:
     terms = root / "terms.csv"
     terms.write_text(
