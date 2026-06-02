@@ -517,6 +517,8 @@ def _allows_fallback_gloss(row: dict[str, str]) -> bool:
         return False
     if "_lc" in term_id or term_id.startswith(("nonsense_", "scrambled_")):
         return False
+    if len(row.get("concept", "").strip()) > 40:
+        return False
     return True
 
 

@@ -233,7 +233,7 @@ It is a triage aid, not a claim-grade filter.
 | 5 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 62 | 311 | Prov 24:29 | `כאשר` (kshr) | paired_uncorrected_p_le_0.05 |
 | 6 | all_source | `timothy_h` `טימותי` (tymwty; English: Timothy) | Timothy | -66 | 331 | Jer 46:28 | `יעקב` (Yaakov; English: Jacob) | paired_uncorrected_p_le_0.05 |
 | 7 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -69 | 346 | Ps 99:6 | `אליהוה` (lyhwh) | paired_uncorrected_p_le_0.05 |
-| 8 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -73 | 366 | Num 11:16 | `מועד` (mwd; English: 1) appointed place, appointed time, meeting) | paired_uncorrected_p_le_0.05 |
+| 8 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -73 | 366 | Num 11:16 | `מועד` (mwd) | paired_uncorrected_p_le_0.05 |
 | 9 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 78 | 391 | 2Kgs 17:39 | `אמאתיהוה` (mtyhwh) | paired_uncorrected_p_le_0.05 |
 | 10 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 82 | 411 | Ezek 20:13 | `חללו` (chllw) | paired_uncorrected_p_le_0.05 |
 | 11 | all_source | `2027_additive_h` `תתתתתכז` (tttttkz; English: Gregorian 2027 additive) | Gregorian 2027 additive | 86 | 517 | Deut 11:16 | `יפתה` (yifteh; English: will be enticed) | paired_uncorrected_p_le_0.05 |
@@ -259,7 +259,7 @@ It is a triage aid, not a claim-grade filter.
 | 6 | all_source | `empty_tomb_h` `קברריק` (qbrryq; English: Empty Tomb) | Empty Tomb | 8 | 41 | Ezek 5:2 | `בתוכ` (betokh; English: in the midst) | paired_uncorrected_p_le_0.05 |
 | 7 | all_source | `timothy_h` `טימותי` (tymwty; English: Timothy) | Timothy | -8 | 41 | Ps 37:14 | `ודרכו` (wdrkw) | paired_uncorrected_p_le_0.05 |
 | 8 | all_source | `yeshu_declared_perfect_h` `הצהרישומושלמ` (htshryshwmwshlm; English: Jesus Declared Perfect) | Jesus Declared Perfect | 9 | 100 | Gen 22:8 | `לעלה` (le-olah; English: for a burnt offering) | paired_uncorrected_p_le_0.05 |
-| 9 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 10 | 51 | Ezek 23:11 | `אהליבה` (hlybh; English: Aholibah = "woman of the tent" or "the tent is in her") | paired_uncorrected_p_le_0.05 |
+| 9 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 10 | 51 | Ezek 23:11 | `אהליבה` (hlybh) | paired_uncorrected_p_le_0.05 |
 | 10 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | -11 | 56 | Num 29:26 | `ארבעה` (arbaah; English: four) | paired_uncorrected_p_le_0.05 |
 | 11 | all_source | `second_death_h` `מותשני` (mwtshny; English: Second Death) | Second Death | 11 | 56 | Prov 22:18 | `כינעימ` (kynym) | paired_uncorrected_p_le_0.05 |
 | 12 | all_source | `day_of_lord_h` `יומיהוה` (yom YHWH; English: Day Of The Lord) | Day Of The Lord | 12 | 73 | Ezek 29:9 | `וידעו` (wydw) | paired_uncorrected_p_le_0.05 |

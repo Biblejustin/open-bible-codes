@@ -136,6 +136,9 @@ class DynamicSpanHitSummaryTests(unittest.TestCase):
             "`λογος` (logos; English: Word)=2; and=1",
         )
 
+    def test_display_top_center_words_omits_long_csv_glosses(self) -> None:
+        self.assertEqual(display_top_center_words("αυτοσ=2"), "`αυτοσ` (autos)=2")
+
     def test_display_term_cell_keeps_script_term_with_id(self) -> None:
         row = count_row("TR_NT", "dyn_sample_g", 1)
         row["concept"] = "Word"

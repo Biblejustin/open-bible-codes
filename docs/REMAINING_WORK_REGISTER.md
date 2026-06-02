@@ -2021,10 +2021,10 @@ apocrypha bridge review manifest cache JSON validation, plus Bolls importer
 JSON root validation, public-source downloader API JSON validation, and
 Wayback CDX API JSON validation, plus Wayback recovery JSON decode
 validation, OET/OTB English-control API JSON validation, Bolls importer JSON
-decode validation, CRD LLM API response JSON validation, and source-review
-HTML manifest JSON validation:
+decode validation, dynamic-span display-gloss stability, CRD LLM API response
+JSON validation, and source-review HTML manifest JSON validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2618
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2619
   tests, 2 skipped, and 29334 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3220,6 +3220,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   book-metadata, and language-metadata roots fail with explicit shape messages.
 - Tightened the Bolls ZIP translation JSON reader so malformed JSON members
   fail with an explicit importer message instead of a raw decode traceback.
+- Tightened reader-facing term display so generated top-center-word summaries
+  do not pull long CSV definition notes into compact report tables.
 - Tightened the SBLGNT, MorphGNT, and OSHB/WLC public-source downloaders so
   GitHub API listing roots and rows are shape-checked before file filtering.
 - Tightened the WRR Wayback and Cities PDF recovery CDX readers so Wayback CDX
