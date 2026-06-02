@@ -48,6 +48,16 @@ def test_stale_manifest_fails(tmp_path: Path) -> None:
     assert any("manifest.json rows drifted" in failure for failure in failures)
 
 
+def test_invalid_manifest_json_fails(tmp_path: Path) -> None:
+    args = make_args(tmp_path)
+    args.manifest_out.write_text("{", encoding="utf-8")
+
+    failures = check.validate_centered_occurrence_index_doc(args)
+
+    assert len(failures) == 1
+    assert failures[0].startswith(f"{args.manifest_out} is invalid JSON:")
+
+
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
     args = make_args(tmp_path, markdown_exists=False)
 
