@@ -90,7 +90,10 @@ def validate_doc(
         if path and f"`{path}`" not in text:
             failures.append(f"{doc} missing manifest row: {path}")
 
-    failures.extend(validate_manifest(manifest, manifest_path, rows_path, summary_path, doc))
+    if not isinstance(manifest, dict):
+        failures.append(f"{manifest_path} JSON root must be an object")
+    else:
+        failures.extend(validate_manifest(manifest, manifest_path, rows_path, summary_path, doc))
     return failures
 
 

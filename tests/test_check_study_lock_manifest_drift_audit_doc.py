@@ -4,7 +4,7 @@ import csv
 import json
 from pathlib import Path
 
-from scripts.audit_study_lock_manifest_drift import FIELDNAMES, SUMMARY_FIELDNAMES
+from scripts.audit_study_lock_manifest_drift import AUDIT_STATUSES, FIELDNAMES, SUMMARY_FIELDNAMES
 from scripts.check_study_lock_manifest_drift_audit_doc import validate_doc
 
 
@@ -81,6 +81,34 @@ def test_validate_doc_accepts_synced_artifacts(tmp_path: Path) -> None:
     )
 
     assert validate_doc(doc, rows_path, summary_path, manifest_path) == []
+
+
+def test_validate_doc_rejects_non_object_manifest(tmp_path: Path) -> None:
+    rows_path = tmp_path / "rows.csv"
+    summary_path = tmp_path / "summary.csv"
+    doc = tmp_path / "doc.md"
+    manifest_path = tmp_path / "manifest.json"
+    _write_csv(rows_path, FIELDNAMES, [])
+    summary_rows = [{"metric": "total_manifests", "value": "0"}]
+    summary_rows.extend({"metric": status, "value": "0"} for status in AUDIT_STATUSES)
+    _write_csv(summary_path, SUMMARY_FIELDNAMES, summary_rows)
+    doc.write_text(
+        "\n".join(
+            [
+                "Status: historical audit, not a prospective approval.",
+                "A drifted historical manifest is not a failed result.",
+                "Use `scripts.check_study_lock_manifest` for one fresh, study-specific",
+                "- total_manifests: 0",
+                *[f"- {status}: 0" for status in AUDIT_STATUSES],
+            ]
+        ),
+        encoding="utf-8",
+    )
+    manifest_path.write_text("[]\n", encoding="utf-8")
+
+    failures = validate_doc(doc, rows_path, summary_path, manifest_path)
+
+    assert f"{manifest_path} JSON root must be an object" in failures
 
 
 def test_validate_doc_rejects_summary_drift(tmp_path: Path) -> None:
