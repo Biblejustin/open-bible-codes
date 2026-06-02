@@ -3002,10 +3002,16 @@ def find_preflight_protocol_input_failures(root: Path) -> list[str]:
     if not protocol_path.exists():
         return []
 
-    protocol = tomllib.loads(protocol_path.read_text(encoding="utf-8"))
+    try:
+        protocol = tomllib.loads(protocol_path.read_text(encoding="utf-8"))
+    except tomllib.TOMLDecodeError as exc:
+        return [f"protocols/real_report_run.toml is invalid TOML: {exc}"]
+    steps_data = protocol.get("steps", [])
+    if not isinstance(steps_data, list):
+        return ["protocols/real_report_run.toml steps must be a list"]
     steps = {
         step.get("id"): step
-        for step in protocol.get("steps", [])
+        for step in steps_data
         if isinstance(step, dict)
     }
     preflight_step = steps.get("preflight")
