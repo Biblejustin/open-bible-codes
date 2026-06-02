@@ -237,6 +237,9 @@ def clean_term_audit_failures(paths: list[Path]) -> list[str]:
         except (OSError, json.JSONDecodeError) as exc:
             failures.append(f"could not read audit summary {path}: {exc}")
             continue
+        if not isinstance(payload, dict):
+            failures.append(f"{path} JSON root must be an object")
+            continue
         if payload.get("status") != "passed":
             failures.append(
                 f"{path} status={payload.get('status', '')} match_rows={payload.get('match_rows', '')}"

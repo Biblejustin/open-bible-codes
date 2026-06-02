@@ -454,6 +454,8 @@ def step_outputs_current(
         stamp = json.loads(stamp_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return False
+    if not isinstance(stamp, dict):
+        return False
     if stamp.get("version") != STEP_STAMP_VERSION:
         return False
     if stamp.get("command") != command:

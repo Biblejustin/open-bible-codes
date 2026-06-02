@@ -9,6 +9,7 @@ from pathlib import Path
 from scripts.compress_dynamic_span_partition_outputs import compress_rows
 from scripts.summarize_dynamic_span_partition_outputs import (
     build_term_summary,
+    archived_partition_output_path,
     cached_plan_rows,
     completed_plan_rows,
     display_center_word,
@@ -320,6 +321,28 @@ class DynamicSpanPartitionOutputSummaryTests(unittest.TestCase):
             loaded = load_summary_cache(cache_path)
 
         self.assertEqual(loaded, cache)
+
+    def test_summary_cache_ignores_non_object_json(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cache_path = Path(tmp) / "cache.json"
+            cache_path.write_text("[]\n", encoding="utf-8")
+
+            loaded = load_summary_cache(cache_path)
+
+        self.assertEqual(loaded, {})
+
+    def test_archive_marker_ignores_non_object_json(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            out = tmp_path / "partition.csv"
+            manifest = tmp_path / "partition.manifest.json"
+            row = plan_row(out, manifest)
+            marker = out.with_suffix(out.suffix + ".gz.archived.json")
+            marker.write_text("[]\n", encoding="utf-8")
+
+            archived = archived_partition_output_path(row)
+
+        self.assertIsNone(archived)
 
 
 def plan_row(out: Path, manifest: Path) -> dict[str, str]:

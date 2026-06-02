@@ -10,6 +10,7 @@ from els.protocol_runner import (
     normalize_python_argv,
     progress_interval_seconds,
     run_protocol,
+    step_outputs_current,
     step_outputs_exist,
 )
 
@@ -263,6 +264,18 @@ class ProtocolRunnerTests(unittest.TestCase):
         self.assertFalse(third_run["steps"][0]["skipped"])
         self.assertEqual(final_counter, "2")
         self.assertEqual(final_output, "complete")
+
+    def test_step_outputs_current_ignores_non_object_stamp(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            output = root / "out.txt"
+            stamp_dir = root / ".stamps"
+            stamp_dir.mkdir()
+            output.write_text("complete", encoding="utf-8")
+            (stamp_dir / "one.json").write_text("[]\n", encoding="utf-8")
+            step = {"id": "one", "outputs": [str(output)]}
+
+            self.assertFalse(step_outputs_current(step, ["-c", "print(1)"], stamp_dir))
 
     def test_run_protocol_resume_reruns_when_input_changes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

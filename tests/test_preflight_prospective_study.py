@@ -192,6 +192,8 @@ def test_clean_term_audit_failures_require_passed_status(tmp_path) -> None:
     missing = tmp_path / "missing.json"
     matched = tmp_path / "matched.json"
     passed = tmp_path / "passed.json"
+    non_object = tmp_path / "non_object.json"
+    non_object.write_text("[]\n", encoding="utf-8")
     matched.write_text(
         json.dumps({"status": "matched", "match_rows": 2}),
         encoding="utf-8",
@@ -201,9 +203,10 @@ def test_clean_term_audit_failures_require_passed_status(tmp_path) -> None:
         encoding="utf-8",
     )
 
-    failures = preflight.clean_term_audit_failures([missing, matched, passed])
+    failures = preflight.clean_term_audit_failures([missing, matched, non_object, passed])
 
     assert failures == [
         f"missing audit summary: {missing}",
         f"{matched} status=matched match_rows=2",
+        f"{non_object} JSON root must be an object",
     ]

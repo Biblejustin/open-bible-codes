@@ -652,7 +652,9 @@ def load_summary_cache(path: Path) -> dict[str, dict[str, Any]]:
         return {}
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError:
+    except (OSError, json.JSONDecodeError):
+        return {}
+    if not isinstance(payload, dict):
         return {}
     if payload.get("cache_version") != CACHE_VERSION:
         return {}
@@ -734,7 +736,9 @@ def archived_partition_output_path(row: dict[str, str]) -> Path | None:
         return None
     try:
         payload = json.loads(marker.read_text(encoding="utf-8"))
-    except json.JSONDecodeError:
+    except (OSError, json.JSONDecodeError):
+        return None
+    if not isinstance(payload, dict):
         return None
     archive_path = payload.get("archive_path")
     if not isinstance(archive_path, str) or not archive_path:
