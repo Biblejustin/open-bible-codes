@@ -781,12 +781,19 @@ def validate_packaged_real_report_protocol_manifest(
     if not isinstance(steps, list) or not steps:
         failures.append(f"{path} has no protocol steps")
         return failures
-    step_ids = {
+    step_id_list = [
         str(step.get("id", ""))
         for step in steps
         if isinstance(step, dict) and step.get("id")
-    }
+    ]
+    step_ids = set(step_id_list)
     required_step_ids = set(REQUIRED_REAL_REPORT_PROTOCOL_STEP_IDS)
+    for step_id in sorted(
+        step_id
+        for step_id in step_ids
+        if step_id_list.count(step_id) > 1
+    ):
+        failures.append(f"{path} has duplicate protocol step: {step_id}")
     for step_id in REQUIRED_REAL_REPORT_PROTOCOL_STEP_IDS:
         if step_id not in step_ids:
             failures.append(f"{path} missing protocol step: {step_id}")

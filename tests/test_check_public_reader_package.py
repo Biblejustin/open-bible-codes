@@ -525,6 +525,21 @@ def test_detects_packaged_real_report_protocol_unexpected_step(
     )
 
 
+def test_detects_packaged_real_report_protocol_duplicate_step(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    protocol_path = out_dir / "reports/real_report_run/protocol_run.manifest.json"
+    protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
+    protocol["steps"].append(dict(protocol["steps"][0]))
+    protocol_path.write_text(json.dumps(protocol, indent=2) + "\n", encoding="utf-8")
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert f"{protocol_path} has duplicate protocol step: preflight" in failures
+
+
 def test_detects_packaged_real_report_protocol_manifest_summary_input_drift(
     tmp_path,
     monkeypatch,
