@@ -116,6 +116,7 @@ class RealReportRunTests(unittest.TestCase):
         self.assertIn("wrr_audit_counts", steps_by_id)
         self.assertIn("wrr_method_lane_wide_skip_probe", steps_by_id)
         self.assertIn("wrr_no_input_handoff_status", steps_by_id)
+        self.assertIn("no_input_blocker_summary", steps_by_id)
         self.assertIn("wrr_cross_pair_grid", steps_by_id)
         self.assertIn(
             "scripts/analyze_wrr_source_policy_scenarios.py",
@@ -146,6 +147,14 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "scripts/build_no_input_blocker_summary.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
+            "scripts/check_no_input_blocker_summary_doc.py",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "protocols/wrr_no_input_handoff_status.toml",
             steps_by_id["preflight"]["inputs"],
         )
@@ -154,8 +163,16 @@ class RealReportRunTests(unittest.TestCase):
             steps_by_id["preflight"]["inputs"],
         )
         self.assertIn(
+            "docs/NO_INPUT_BLOCKER_SUMMARY.md",
+            steps_by_id["preflight"]["inputs"],
+        )
+        self.assertIn(
             "reports/wrr_1994/wrr_no_input_handoff_status_summary.csv",
             steps_by_id["wrr_no_input_handoff_status"]["outputs"],
+        )
+        self.assertIn(
+            "reports/no_input_blocker_summary/summary.csv",
+            steps_by_id["no_input_blocker_summary"]["outputs"],
         )
         self.assertIn("els/project_index.py", steps_by_id["preflight"]["inputs"])
         self.assertIn("README.md", steps_by_id["preflight"]["inputs"])
@@ -3284,6 +3301,7 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn("wrr_manual_decision_record_failures", payload)
             self.assertIn("wrr_method_lane_wide_skip_probe_doc_failures", payload)
             self.assertIn("wrr_no_input_handoff_status_doc_failures", payload)
+            self.assertIn("no_input_blocker_summary_doc_failures", payload)
             self.assertIn("wrr_lock_options_doc_failures", payload)
             self.assertIn("wrr_method_status_doc_failures", payload)
             self.assertIn("stale_generated_indexes", payload)
@@ -5059,6 +5077,30 @@ inputs = ["docs/A.md", "docs/C.md"]
             self.assertIn(
                 "WRR no-input handoff status failures: "
                 "docs/WRR_NO_INPUT_HANDOFF_STATUS.md missing boundary",
+                payload["failures"],
+            )
+
+    def test_preflight_fails_on_no_input_blocker_summary_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "preflight.json"
+            with patch.object(
+                preflight.check_no_input_blocker_summary_doc,
+                "validate_no_input_blocker_summary_doc",
+                return_value=[
+                    "docs/NO_INPUT_BLOCKER_SUMMARY.md missing result boundary"
+                ],
+            ):
+                code = preflight.main(["--allow-dirty", "--out", str(out)])
+
+            self.assertEqual(code, 1)
+            payload = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["no_input_blocker_summary_doc_failures"],
+                ["docs/NO_INPUT_BLOCKER_SUMMARY.md missing result boundary"],
+            )
+            self.assertIn(
+                "no-input blocker summary doc failures: "
+                "docs/NO_INPUT_BLOCKER_SUMMARY.md missing result boundary",
                 payload["failures"],
             )
 

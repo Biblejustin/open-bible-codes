@@ -69,6 +69,8 @@ inputs = [
   "scripts/check_kjva_next_result_gate_doc.py",
   "scripts/build_kjva_no_input_handoff_status.py",
   "scripts/check_kjva_no_input_handoff_status_doc.py",
+  "scripts/build_no_input_blocker_summary.py",
+  "scripts/check_no_input_blocker_summary_doc.py",
   "scripts/check_kjva_public_handoff_docs.py",
   "scripts/check_real_report_run_doc.py",
   "scripts/check_strongest_candidate_deep_dive_doc.py",
@@ -79,6 +81,7 @@ inputs = [
   "docs/PROJECT_FINDINGS_OVERVIEW.md",
   "docs/REAL_REPORT_RUN.md",
   "docs/CITIES_NO_INPUT_HANDOFF_STATUS.md",
+  "docs/NO_INPUT_BLOCKER_SUMMARY.md",
   "docs/REMAINING_WORK_REGISTER.md",
   "protocols/README.md",
   "protocols/real_report_run.toml",
@@ -2414,6 +2417,26 @@ outputs = [
   "reports/cities_no_input_handoff_status/summary.csv",
   "docs/CITIES_NO_INPUT_HANDOFF_STATUS.md",
   "reports/cities_no_input_handoff_status/manifest.json",
+]
+
+[[steps]]
+id = "no_input_blocker_summary"
+description = "Consolidate WRR, Cities, and KJVA no-input blockers without producing results."
+argv = ["-m", "scripts.build_no_input_blocker_summary"]
+inputs = [
+  "scripts/build_no_input_blocker_summary.py",
+  "reports/wrr_1994/wrr_no_input_handoff_status.csv",
+  "reports/wrr_1994/wrr_no_input_handoff_status_summary.csv",
+  "reports/cities_no_input_handoff_status/status.csv",
+  "reports/cities_no_input_handoff_status/summary.csv",
+  "reports/kjva_no_input_handoff_status/status.csv",
+  "reports/kjva_no_input_handoff_status/summary.csv",
+]
+outputs = [
+  "reports/no_input_blocker_summary/status.csv",
+  "reports/no_input_blocker_summary/summary.csv",
+  "docs/NO_INPUT_BLOCKER_SUMMARY.md",
+  "reports/no_input_blocker_summary/manifest.json",
 ]
 
 [[steps]]

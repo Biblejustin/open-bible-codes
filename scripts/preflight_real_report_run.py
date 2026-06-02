@@ -100,6 +100,7 @@ from scripts import (
     check_kjva_wikisource_book_coverage_probe_doc,
     check_kjva_wikisource_candidate_source_audit_doc,
     check_manual_review_queue,
+    check_no_input_blocker_summary_doc,
     check_preregistration_placeholders,
     check_protocol_files,
     check_project_findings_overview_doc,
@@ -218,6 +219,8 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_kjva_next_result_gate_doc.py",
     "scripts/build_kjva_no_input_handoff_status.py",
     "scripts/check_kjva_no_input_handoff_status_doc.py",
+    "scripts/build_no_input_blocker_summary.py",
+    "scripts/check_no_input_blocker_summary_doc.py",
     "scripts/check_kjva_public_handoff_docs.py",
     "scripts/analyze_kjva_gutenberg_source_lock_prep.py",
     "scripts/build_kjva_gutenberg_source_lock_blocker_packet.py",
@@ -250,6 +253,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/START_HERE.md",
     "docs/PROJECT_FINDINGS_OVERVIEW.md",
     "docs/REAL_REPORT_RUN.md",
+    "docs/NO_INPUT_BLOCKER_SUMMARY.md",
     "docs/REMAINING_WORK_REGISTER.md",
     "protocols/README.md",
     "protocols/real_report_run.toml",
@@ -2568,6 +2572,17 @@ def main(argv: list[str] | None = None) -> int:
             + "; ".join(cities_no_input_handoff_status_doc_failures)
         )
 
+    no_input_blocker_summary_doc_failures = (
+        check_no_input_blocker_summary_doc.validate_no_input_blocker_summary_doc(
+            check_no_input_blocker_summary_doc.DEFAULT_DOC
+        )
+    )
+    if no_input_blocker_summary_doc_failures:
+        failures.append(
+            "no-input blocker summary doc failures: "
+            + "; ".join(no_input_blocker_summary_doc_failures)
+        )
+
     hypothesis_testing_source_audit_doc_failures = (
         check_hypothesis_testing_source_audit_doc.validate_hypothesis_testing_source_audit_doc(
             check_hypothesis_testing_source_audit_doc.DEFAULT_DOC
@@ -2936,6 +2951,9 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "cities_no_input_handoff_status_doc_failures": (
             cities_no_input_handoff_status_doc_failures
+        ),
+        "no_input_blocker_summary_doc_failures": (
+            no_input_blocker_summary_doc_failures
         ),
         "hypothesis_testing_source_audit_doc_failures": hypothesis_testing_source_audit_doc_failures,
         "israeli_prime_ministers_detail_recovery_doc_failures": (
