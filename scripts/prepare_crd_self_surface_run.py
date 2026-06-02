@@ -221,7 +221,10 @@ def write_protocol(
     seed_mode: str,
 ) -> None:
     base_text = base_protocol.read_text(encoding="utf-8")
-    base = tomllib.loads(base_text)
+    try:
+        base = tomllib.loads(base_text)
+    except tomllib.TOMLDecodeError as exc:
+        raise ValueError(f"{base_protocol}: invalid TOML: {exc}") from exc
     corpus_blocks = extract_corpus_blocks(base_text)
     path.write_text(
         f"""name = "centered_relevance_density_{seed_mode}_surface"

@@ -41,6 +41,31 @@ class PrepareCRDSelfSurfaceRunTests(unittest.TestCase):
             self.assertEqual(protocol["relevance_dictionary_sha256"], sha256_file(dictionary))
             self.assertIn("ace", queue_text)
 
+    def test_prepare_reports_invalid_base_protocol_toml(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            terms_dir = root / "terms"
+            terms_dir.mkdir()
+            (terms_dir / "demo.csv").write_text(
+                "term_id,concept,category,language,term,notes\n"
+                "term,Term,example,english,ace,test\n",
+                encoding="utf-8",
+            )
+            base_protocol = root / "base.toml"
+            base_protocol.write_text("[broken\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "invalid TOML"):
+                prepare_main(
+                    [
+                        "--terms-dir",
+                        str(terms_dir),
+                        "--base-protocol",
+                        str(base_protocol),
+                        "--out-dir",
+                        str(root / "reports" / "crd_self_surface"),
+                    ]
+                )
+
 
 def base_protocol_text(root: Path) -> str:
     return "\n".join(
