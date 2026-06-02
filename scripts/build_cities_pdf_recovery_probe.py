@@ -368,7 +368,10 @@ def cdx_snapshots_with_timeout(url: str) -> list[dict[str, str]]:
 
 def fetch_json_with_timeout(url: str):
     raw = fetch_bytes_with_timeout(url)
-    return json.loads(raw.decode("utf-8", errors="replace"))
+    try:
+        return json.loads(raw.decode("utf-8", errors="replace"))
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"Cities Wayback JSON response is invalid JSON: {exc}") from exc
 
 
 def fetch_bytes_with_timeout(url: str) -> bytes:

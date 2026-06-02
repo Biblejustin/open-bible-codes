@@ -18,6 +18,25 @@ SPAM_HTML = """<html><head>
 
 
 class WrrWaybackSourceRecoveryProbeTests(unittest.TestCase):
+    def test_fetch_json_rejects_invalid_json_response(self) -> None:
+        class FakeResponse:
+            status = 200
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return False
+
+            def read(self) -> bytes:
+                return b"not json"
+
+        with patch.object(probe, "urlopen", return_value=FakeResponse()):
+            with self.assertRaisesRegex(
+                ValueError, "Wayback JSON response is invalid JSON"
+            ):
+                probe.fetch_json("https://example.test/cdx")
+
     def test_wayback_raw_snapshot_url_uses_id_replay(self) -> None:
         raw = probe.wayback_raw_snapshot_url(
             "http://web.archive.org/web/20160615070555/"

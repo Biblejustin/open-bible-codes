@@ -2019,11 +2019,11 @@ drift manifest JSON validation, and KJVA apocrypha prospective-boundary
 profile JSON validation, STEP_TAHOT manifest cache JSON validation, and KJVA
 apocrypha bridge review manifest cache JSON validation, plus Bolls importer
 JSON root validation, public-source downloader API JSON validation, and
-Wayback CDX API JSON validation, plus OET/OTB English-control API JSON
-validation, CRD LLM API response JSON validation, and source-review HTML
-manifest JSON validation:
+Wayback CDX API JSON validation, plus Wayback recovery JSON decode
+validation, OET/OTB English-control API JSON validation, CRD LLM API response
+JSON validation, and source-review HTML manifest JSON validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2613
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2615
   tests, 2 skipped, and 29333 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3231,6 +3231,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened Cities and WRR source-review HTML/packet doc manifest readers so
   non-object manifest JSON roots report validation failures instead of crashing
   document gates.
+- Tightened Cities and WRR Wayback recovery JSON decoders so malformed API JSON
+  raises named validation errors instead of raw decode tracebacks.
 - This is a documentation/validation guard only. It does not change report
   conclusions, source policy, imported texts, ELS searches, or result status.
 

@@ -524,7 +524,10 @@ def wayback_raw_snapshot_url(snapshot_url: str) -> str:
 def fetch_json(url: str) -> Any:
     request = Request(url, headers={"User-Agent": "Mozilla/5.0 EDLS source audit"})
     with urlopen(request, timeout=30) as response:
-        return json.loads(response.read().decode("utf-8", errors="replace"))
+        try:
+            return json.loads(response.read().decode("utf-8", errors="replace"))
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"Wayback JSON response is invalid JSON: {exc}") from exc
 
 
 def fetch_bytes(url: str) -> bytes:

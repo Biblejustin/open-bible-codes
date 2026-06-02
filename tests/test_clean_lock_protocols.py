@@ -597,7 +597,7 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     normalized_text = " ".join(text.split())
 
     assert "Latest validation snapshot after the release-ready make target" in text
-    assert "2613 tests" in normalized_text
+    assert "2615 tests" in normalized_text
     assert "2 skipped, and 29333 subtests" in normalized_text
     assert "make release-ready" in text
     assert "committed tree" in text
@@ -677,6 +677,8 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     assert "SBLGNT, MorphGNT, and OSHB/WLC public-source downloaders" in normalized_text
     assert "Wayback CDX API JSON validation" in normalized_text
     assert "Wayback CDX API roots and header rows" in normalized_text
+    assert "Wayback recovery JSON decode validation" in normalized_text
+    assert "Wayback recovery JSON decoders" in normalized_text
     assert "OET/OTB English-control API JSON validation" in normalized_text
     assert "OET and OTB English-control importers" in normalized_text
     assert "CRD LLM API response JSON validation" in normalized_text

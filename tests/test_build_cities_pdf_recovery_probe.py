@@ -152,6 +152,13 @@ class CitiesPdfRecoveryProbeTests(unittest.TestCase):
             ):
                 probe.cdx_snapshots_with_timeout("https://example.test/source.pdf")
 
+    def test_fetch_json_rejects_invalid_json_response(self) -> None:
+        with patch.object(probe, "fetch_bytes_with_timeout", return_value=b"not json"):
+            with self.assertRaisesRegex(
+                ValueError, "Cities Wayback JSON response is invalid JSON"
+            ):
+                probe.fetch_json_with_timeout("https://example.test/cdx")
+
 
 if __name__ == "__main__":
     unittest.main()
