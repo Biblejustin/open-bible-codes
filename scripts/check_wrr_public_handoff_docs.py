@@ -133,8 +133,10 @@ REQUIRED_PHRASES_BY_DOC = {
         "999,999 date-label permutation diagnostic",
         "method-lane wide-skip probe",
         "0 ordinary Genesis hits through skip 5000",
-        "The consolidated no-input handoff is in",
+        "The WRR no-input handoff is in",
         "no-new-result boundary",
+        "The whole-project consolidated no-input blocker map is in",
+        "`docs/NO_INPUT_BLOCKER_SUMMARY.md`",
         "It is locked local evidence, not an exact WRR reproduction.",
     ),
     Path("reports/real_report_run/summary.md"): (

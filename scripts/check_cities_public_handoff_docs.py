@@ -16,6 +16,8 @@ REQUIRED_PHRASES_BY_DOC = {
         "no source rows imported",
         "14 pending transcription-review rows",
         "no city-name normalization, ELS searches, compactness runs, or p-levels",
+        "whole-project consolidated no-input blocker map",
+        "`docs/NO_INPUT_BLOCKER_SUMMARY.md`",
         "data/study/mappings/cities_source_row_lock_decisions.csv",
         "data/study/mappings/cities_source_transcription_decisions.csv",
         "docs/CITIES_SOURCE_PAGE_REVIEW_BUNDLE.md",

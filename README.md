@@ -218,8 +218,10 @@ WRR-style reproduction requirements are tracked in
 `docs/WRR_METHODOLOGY_GAPS.md`, and the selected local lock summary in
 `docs/WRR_LOCKED_METHOD_REPORT.md`. The exact-published reproduction gap and
 recommended review order are tracked in
-`docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`; the consolidated no-input
-handoff is tracked in `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`.
+`docs/WRR_EXACT_REPRODUCTION_GAP_DASHBOARD.md`; the WRR no-input handoff is
+tracked in `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`. The whole-project
+consolidated no-input blocker map is tracked in
+`docs/NO_INPUT_BLOCKER_SUMMARY.md`.
 KJVA/apocrypha source-readiness is tracked separately in
 `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`; it keeps the current eBible KJVA
 baseline as rerun-only, records 9 handoff rows and 8 manual-input-needed rows,

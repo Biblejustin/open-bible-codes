@@ -40,6 +40,8 @@ REQUIRED_PHRASES_BY_DOC = {
         "4 candidate-source audit rows",
         "0 result-ready candidate pages",
         "result allowed 0",
+        "whole-project consolidated no-input blocker map",
+        "`docs/NO_INPUT_BLOCKER_SUMMARY.md`",
     ),
     Path("reports/real_report_run/summary.md"): (
         "## KJVA No-Input Handoff Status",
