@@ -140,7 +140,10 @@ def validate_meaningful_constants(path: Path) -> list[str]:
 def validate_gematria_schemes(path: Path) -> list[str]:
     if not path.exists():
         return [f"{path} is missing"]
-    data = tomllib.loads(path.read_text(encoding="utf-8"))
+    try:
+        data = tomllib.loads(path.read_text(encoding="utf-8"))
+    except tomllib.TOMLDecodeError as error:
+        return [f"{path} is invalid TOML: {error}"]
     schemes = data.get("schemes", [])
     failures: list[str] = []
     scheme_ids = {clean(scheme.get("scheme_id")) for scheme in schemes}

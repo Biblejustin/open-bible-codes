@@ -2002,7 +2002,7 @@ Latest validation snapshot after the release-ready make target, refreshed after
 the public-reader package protocol guard and real-report protocol duplicate-step
 guard:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2524
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2525
   tests, 2 skipped, and 29325 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3095,6 +3095,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   errors stay surfaced through the release-gate protocol-file check.
 - Added term metadata guard tests for required constant values, duplicate
   constant values, required gematria schemes, and bad gematria scheme metadata.
+- Tightened the term-file checker so invalid `gematria_schemes.toml` reports a
+  structured failure instead of escaping as a raw TOML parser exception.
 - This is a documentation guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 

@@ -137,6 +137,23 @@ def test_bad_gematria_scheme_metadata_fails(tmp_path: Path) -> None:
     assert f"{scheme_path}:scheme 1 status not implemented: hebrew_standard" in failures
 
 
+def test_invalid_gematria_scheme_toml_reports_failure(tmp_path: Path) -> None:
+    terms = make_terms_dir(tmp_path)
+    write_term_csv(
+        terms / "demo.csv",
+        [{"term_id": "demo_h", "language": "hebrew", "term": "אור"}],
+    )
+    scheme_path = terms / "gematria_schemes.toml"
+    scheme_path.write_text("[[schemes]\n", encoding="utf-8")
+
+    failures = check.validate_term_files(terms)
+
+    assert any(
+        failure.startswith(f"{scheme_path} is invalid TOML:")
+        for failure in failures
+    )
+
+
 def make_terms_dir(tmp_path: Path) -> Path:
     terms = tmp_path / "terms"
     terms.mkdir()
