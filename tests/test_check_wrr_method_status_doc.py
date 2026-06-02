@@ -101,6 +101,36 @@ def test_validate_method_status_rejects_manifest_drift(tmp_path: Path) -> None:
     assert any("rows drifted" in failure for failure in failures)
 
 
+def test_validate_method_status_rejects_invalid_manifest_json(tmp_path: Path) -> None:
+    doc = tmp_path / "WRR_METHOD_STATUS.md"
+    doc.write_text("\n".join(check.REQUIRED_PHRASES), encoding="utf-8")
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text("{", encoding="utf-8")
+
+    failures = check.validate_method_status_doc(
+        doc,
+        status=_status_csv(tmp_path),
+        manifest=manifest,
+    )
+
+    assert any("is invalid JSON" in failure for failure in failures)
+
+
+def test_validate_method_status_rejects_manifest_json_array(tmp_path: Path) -> None:
+    doc = tmp_path / "WRR_METHOD_STATUS.md"
+    doc.write_text("\n".join(check.REQUIRED_PHRASES), encoding="utf-8")
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text("[]", encoding="utf-8")
+
+    failures = check.validate_method_status_doc(
+        doc,
+        status=_status_csv(tmp_path),
+        manifest=manifest,
+    )
+
+    assert any("JSON root must be an object" in failure for failure in failures)
+
+
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:
     missing = tmp_path / "missing.md"
 
