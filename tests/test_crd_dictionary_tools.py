@@ -3,7 +3,11 @@ import unittest
 from pathlib import Path
 
 from scripts.check_crd_relevance_dictionary import check_dictionary
-from scripts.classify_centered_relevance import CRDConfigurationError, sha256_file
+from scripts.classify_centered_relevance import (
+    CRDConfigurationError,
+    load_relevance_dictionary,
+    sha256_file,
+)
 from scripts.apply_crd_relevance_review import main as apply_main
 from scripts.scaffold_crd_relevance_dictionary import main as scaffold_main
 
@@ -130,6 +134,14 @@ class CRDDictionaryToolTests(unittest.TestCase):
 
         self.assertEqual(report["entries"], 1)
         self.assertEqual(report["missing_entries"], 0)
+
+    def test_load_relevance_dictionary_reports_invalid_toml(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            dictionary = Path(tmp) / "dictionary.toml"
+            dictionary.write_text("[[entries]\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(CRDConfigurationError, "dictionary invalid TOML:"):
+                load_relevance_dictionary(dictionary)
 
     def test_apply_review_queue_writes_reviewed_dictionary(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -93,7 +93,10 @@ def normalized_hash(payload: dict[str, Any]) -> str:
 
 
 def load_relevance_dictionary(path: str | Path) -> dict[str, RelevanceEntry]:
-    data = tomllib.loads(Path(path).read_text(encoding="utf-8"))
+    try:
+        data = tomllib.loads(Path(path).read_text(encoding="utf-8"))
+    except tomllib.TOMLDecodeError as exc:
+        raise CRDConfigurationError(f"dictionary invalid TOML: {exc}") from exc
     entries: dict[str, RelevanceEntry] = {}
     for raw in data.get("entries", []):
         entry = parse_relevance_entry(raw)

@@ -2002,7 +2002,7 @@ Latest validation snapshot after the release-ready make target, refreshed after
 the public-reader package protocol guard and real-report protocol duplicate-step
 guard:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2531
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2532
   tests, 2 skipped, and 29325 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3103,6 +3103,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   and non-table source entries.
 - Tightened the CRD relevance-dictionary checker so invalid TOML reports a
   structured configuration failure through the CLI.
+- Tightened the shared CRD relevance loader so invalid dictionary TOML reports
+  the same structured configuration failure for classifier callers.
 - This is a documentation guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 
