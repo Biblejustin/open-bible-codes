@@ -82,6 +82,7 @@ EXPECTED_CITIES_HANDOFF_OUTPUTS = (
 REQUIRED_PHRASES = (
     RUN_COMMAND,
     "make real-report",
+    "use `docs/NO_INPUT_BLOCKER_SUMMARY.md` for the consolidated no-input blocker map",
     "`reports/real_report_run/preflight.json`",
     "`reports/real_report_run/summary.md`",
     "`reports/INDEX.md`",
@@ -119,6 +120,7 @@ REQUIRED_PHRASES = (
     "KJVA next-result gate",
     "docs/KJVA_NEXT_RESULT_GATE.md",
     "KJVA no-input handoff status",
+    "docs/NO_INPUT_BLOCKER_SUMMARY.md",
     "docs/KJVA_NO_INPUT_HANDOFF_STATUS.md",
     "4 candidate-source audit rows, 0 result-ready candidate pages",
     "no-new-KJVA-result boundary",

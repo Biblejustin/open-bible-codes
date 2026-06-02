@@ -9,7 +9,8 @@ one local run summary.
 Reader role: use this file to see what the report assembly is allowed to touch
 and which guardrails must pass before the reader-facing report is considered
 current. Use `docs/START_HERE.md` and `docs/FINAL_REPORT.md` for narrative
-reading; use this file for reproducibility and preflight scope.
+reading; use `docs/NO_INPUT_BLOCKER_SUMMARY.md` for the consolidated no-input
+blocker map; use this file for reproducibility and preflight scope.
 
 ## Command
 

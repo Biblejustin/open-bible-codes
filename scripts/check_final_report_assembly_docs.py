@@ -16,6 +16,7 @@ REQUIRED_PHRASES_BY_DOC = {
         "`protocols/real_report_run.toml`",
         "no current result should be presented as a public claim",
         "`docs/REMAINING_WORK_REGISTER.md`",
+        "`docs/NO_INPUT_BLOCKER_SUMMARY.md`",
         "`docs/WRR_NO_INPUT_HANDOFF_STATUS.md`",
         "`docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`",
         "`docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`",

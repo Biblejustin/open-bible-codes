@@ -47,6 +47,7 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
     ),
     Path("docs/FINAL_REPORT.md"): (
         "`docs/REMAINING_WORK_REGISTER.md`",
+        "`docs/NO_INPUT_BLOCKER_SUMMARY.md`",
         "`docs/WRR_NO_INPUT_HANDOFF_STATUS.md`",
         "`docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`",
         "`docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`",
@@ -60,6 +61,7 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
     ),
     Path("docs/REAL_REPORT_RUN.md"): (
         "Git remotes pointing at `Biblejustin/open-bible-codes`;",
+        "use `docs/NO_INPUT_BLOCKER_SUMMARY.md` for the consolidated no-input blocker map;",
         "WRR no-input handoff status consolidates 9 handoff rows, 8 manual-input-needed rows, the 163 vs 72 defined-distance gap, 37 manual-decision rows, and the no-new-result boundary;",
         "KJVA no-input handoff status consolidates 9 handoff rows, 8 manual-input-needed rows, 11 next-result gates, 7 source-policy blocker rows, the `SIR 44:23` Gutenberg gap, 0/15 Gutenberg Prayer of Manasseh markers, 5719/5720 Hakkaac exact normalized verse matches, 4 candidate-source audit rows, 0 result-ready candidate pages, and the no-new-KJVA-result boundary;",
         "Cities source-row lock handoff stays source-review only: 14 source-row lock candidate pages, 14 populated lock rows, 14 pending transcription-review rows, no source rows imported, and no city-name normalization, ELS searches, compactness runs, or p-levels;",

@@ -18,8 +18,8 @@ read, and `docs/REAL_REPORT_RUN.md` for the formal assembly and preflight
 rules.
 
 For unresolved work and no-input handoff status, use
-`docs/REMAINING_WORK_REGISTER.md`, `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`,
-`docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`, and
+`docs/REMAINING_WORK_REGISTER.md`, `docs/NO_INPUT_BLOCKER_SUMMARY.md`,
+`docs/WRR_NO_INPUT_HANDOFF_STATUS.md`, `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`, and
 `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`.
 
 This report uses conservative language. Occurrence means a hidden path exists
