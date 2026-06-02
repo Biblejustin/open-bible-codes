@@ -320,6 +320,27 @@ def test_detects_packaged_real_report_manifest_external_claim_drift(
     ) in failures
 
 
+def test_detects_packaged_real_report_manifest_step_tahot_drift(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    manifest_path = out_dir / "reports/real_report_run/manifest.json"
+    report_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    report_manifest["step_tahot"]["real_counts"]["source_only"] = 464
+    manifest_path.write_text(
+        json.dumps(report_manifest, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert any(
+        failure.startswith(f"{manifest_path} step_tahot drifted:")
+        for failure in failures
+    )
+
+
 def test_detects_packaged_real_report_manifest_all_codes_drift(
     tmp_path,
     monkeypatch,

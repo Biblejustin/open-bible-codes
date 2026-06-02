@@ -165,6 +165,38 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
 
 REQUIRED_REAL_REPORT_MANIFEST_FIELDS: dict[str, Any] = {
     "tool": "build_real_report_run_summary",
+    "step_tahot": {
+        "real_counts": {
+            "pattern_rows": 18855,
+            "with_source": 14701,
+            "source_only": 465,
+            "source_only_rate": 0.024661893396976928,
+        },
+        "control_counts": {
+            "pattern_rows": 1005,
+            "with_source": 749,
+            "source_only": 24,
+            "source_only_rate": 0.023880597014925373,
+        },
+        "real_policy_counts": {
+            "policy_rows": 465,
+            "policy_touch": 97,
+            "l_only": 368,
+            "q_rows": 77,
+            "r_rows": 2,
+            "x_rows": 18,
+            "policy_touch_rate": 0.2086021505376344,
+        },
+        "control_policy_counts": {
+            "policy_rows": 24,
+            "policy_touch": 3,
+            "l_only": 21,
+            "q_rows": 3,
+            "r_rows": 0,
+            "x_rows": 0,
+            "policy_touch_rate": 0.125,
+        },
+    },
     "greek_gate_rows": 4,
     "greek_pattern_rows": 4,
     "doxa_rows": 4,
