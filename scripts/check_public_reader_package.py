@@ -53,6 +53,7 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
         "`docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`",
         "812 unique term-center presence rows.",
         "809 Bible presence rows and 3 control presence rows.",
+        "The Cities no-input handoff keeps 8 handoff rows, 6 manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages, 41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority line-crop review rows, and no Cities result allowed.",
         "The bridge pass found 350 boundary-spanning rows.",
         "expanded 250-sample shuffled-insertion control produced 149 to 236 bridge rows",
         "with no shuffled sample at or above the observed 350 (`p_ge=0.003984`).",
