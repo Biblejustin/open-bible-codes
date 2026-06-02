@@ -340,6 +340,26 @@ def test_detects_packaged_real_report_manifest_all_codes_drift(
     ) in failures
 
 
+def test_detects_packaged_real_report_manifest_greek_surface_drift(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    out_dir = _build_package(tmp_path, monkeypatch)
+    manifest_path = out_dir / "reports/real_report_run/manifest.json"
+    report_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    report_manifest["surface_queue_pattern_rows"] = 160
+    manifest_path.write_text(
+        json.dumps(report_manifest, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    failures = check.validate_public_reader_package(out_dir)
+
+    assert (
+        f"{manifest_path} surface_queue_pattern_rows drifted: 160 != 161"
+    ) in failures
+
+
 def test_detects_packaged_real_report_manifest_centered_occurrence_drift(
     tmp_path,
     monkeypatch,
