@@ -576,3 +576,5 @@ A claim-grade report needs a narrower predeclared study:
 
 For Greek exact-center surface rows, the stricter prospective standard is
 tracked in `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`.
+For compound-extension rows, the stricter prospective standard is tracked in
+`docs/COMPOUND_EXTENSION_PROSPECTIVE_CLAIM_STANDARD.md`.

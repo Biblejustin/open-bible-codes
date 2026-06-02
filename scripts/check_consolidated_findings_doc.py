@@ -17,11 +17,17 @@ DEFAULT_PROFILES = Path("configs/prospective_study_lanes.json")
 READINESS_DOC = Path("docs/PROSPECTIVE_STUDY_READINESS.md")
 LANE_STATUS_DOC = Path("docs/PROSPECTIVE_LANE_STATUS.md")
 CLAIM_STANDARD_DOC = Path("docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md")
+COMPOUND_EXTENSION_STANDARD_DOC = Path(
+    "docs/COMPOUND_EXTENSION_PROSPECTIVE_CLAIM_STANDARD.md"
+)
 NO_READY_PHRASE = "no remaining `ready_for_preflight` lane"
 FRESH_TARGET_PHRASE = "genuinely new term/source target set"
 NO_RERUN_PHRASE = "Completed lanes should not be rerun as claim-oriented studies"
 NO_RAW_COUNT_PHRASE = (
     "Avoid more raw count expansion unless the claim standard is fixed in advance"
+)
+COMPOUND_EXTENSION_STANDARD_PHRASE = (
+    "The compound-extension prospective claim standard is tracked"
 )
 CURRENT_STATUS_PHRASE = "Current next target status"
 KJVA_SOURCE_HANDOFF_PHRASE = (
@@ -66,6 +72,7 @@ def validate_consolidated_findings_doc(doc: Path, profiles_path: Path) -> list[s
         READINESS_DOC.as_posix(),
         LANE_STATUS_DOC.as_posix(),
         CLAIM_STANDARD_DOC.as_posix(),
+        COMPOUND_EXTENSION_STANDARD_DOC.as_posix(),
     )
     for link in required_links:
         if f"`{link}`" not in text:
@@ -76,6 +83,7 @@ def validate_consolidated_findings_doc(doc: Path, profiles_path: Path) -> list[s
         FRESH_TARGET_PHRASE,
         NO_RERUN_PHRASE,
         NO_RAW_COUNT_PHRASE,
+        COMPOUND_EXTENSION_STANDARD_PHRASE,
         KJVA_SOURCE_HANDOFF_PHRASE,
     ):
         if not contains_phrase(normalized_text, phrase):

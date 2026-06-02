@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 427
+Documents indexed: 428
 
 ## Controls
 
@@ -272,6 +272,7 @@ Documents indexed: 427
 | Cohort Cluster Density Audit | `COHORT_CLUSTER_DENSITY_AUDIT.md` |
 | Co-linear ELS Source Audit | `COLINEAR_ELS_SOURCE_AUDIT.md` |
 | Common Bible Codes / ELS Test | `COMMON_EDLS_TEST.md` |
+| Compound Extension Prospective Claim Standard | `COMPOUND_EXTENSION_PROSPECTIVE_CLAIM_STANDARD.md` |
 | Cosmic Codes Source Audit | `COSMIC_CODES_AUDIT.md` |
 | Centered-Relevance Density Framework | `CRD_FRAMEWORK.md` |
 | CRD Review Workflow | `CRD_REVIEW_WORKFLOW.md` |

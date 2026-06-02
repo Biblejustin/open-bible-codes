@@ -38,11 +38,13 @@ def test_ready_profile_rejects_no_ready_boundary(tmp_path: Path) -> None:
                 "`docs/PROSPECTIVE_STUDY_READINESS.md`",
                 "`docs/PROSPECTIVE_LANE_STATUS.md`",
                 "`docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`",
+                "`docs/COMPOUND_EXTENSION_PROSPECTIVE_CLAIM_STANDARD.md`",
                 check.CURRENT_STATUS_PHRASE,
                 check.NO_READY_PHRASE,
                 check.FRESH_TARGET_PHRASE,
                 check.NO_RERUN_PHRASE,
                 check.NO_RAW_COUNT_PHRASE,
+                check.COMPOUND_EXTENSION_STANDARD_PHRASE,
                 *check.status_count_phrases(profile_rows),
             )
         ),
@@ -73,6 +75,10 @@ def test_missing_required_links_fail(tmp_path: Path) -> None:
 
     assert any("missing link: configs/prospective_study_lanes.json" in f for f in failures)
     assert any("missing link: docs/PROSPECTIVE_LANE_STATUS.md" in f for f in failures)
+    assert any(
+        "missing link: docs/COMPOUND_EXTENSION_PROSPECTIVE_CLAIM_STANDARD.md" in f
+        for f in failures
+    )
 
 
 def test_main_reports_failure(tmp_path: Path, capsys) -> None:

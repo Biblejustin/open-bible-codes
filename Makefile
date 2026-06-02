@@ -101,6 +101,7 @@ reader-doc-checks:
 
 study-support-checks:
 	python3 -m scripts.check_centered_occurrence_index_doc
+	python3 -m scripts.check_compound_extension_claim_standard_doc
 	python3 -m scripts.check_critical_omission_followup_docs
 	python3 -m scripts.check_english_corpus_policy_docs
 	python3 -m scripts.check_english_seed_survivor_gate

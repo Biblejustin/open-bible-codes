@@ -879,6 +879,11 @@ materially new hypothesis or term source:
 The Greek surface public-claim standard is now written in
 `docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md`. Use it before launching a
 new result-producing surface study.
+The compound-extension prospective claim standard is tracked in
+`docs/COMPOUND_EXTENSION_PROSPECTIVE_CLAIM_STANDARD.md`; it keeps the current
+all-codes extension rows and the `יום יהוה` (yom YHWH; English: day of YHWH)
+follow-up as prior evidence unless a new term file, source-family rule,
+extension rule, controls, and protocol are locked before search.
 
 Current next target status: `docs/PROSPECTIVE_STUDY_READINESS.md` now reports
 no remaining `ready_for_preflight` lane, matching
@@ -1020,6 +1025,15 @@ English: Isaac), and `τερασ` (teras; English: wonder) rows are prior eviden
 not new prospective discoveries. A future surface study must commit the term
 file, protocol, source configs, control design, and correction rule before any
 new result-producing run.
+
+The compound-extension prospective claim standard is tracked in
+`docs/COMPOUND_EXTENSION_PROSPECTIVE_CLAIM_STANDARD.md`. It states that the
+current all-codes extension queue, 250/250 compound-extension controls, and the
+selected `יום יהוה` (yom YHWH; English: day of YHWH) ->
+`היומיהוה` (hayom YHWH; English: the day of YHWH) confirmatory follow-up are
+prior evidence, not new prospective discoveries. A future compound-extension
+study must commit the term file, source-family rule, extension rule, controls,
+and correction rule before any new result-producing run.
 
 The first locked Greek surface prospective cohort is tracked in
 `docs/GREEK_SURFACE_PROSPECTIVE_PREREGISTRATION.md` and summarized in

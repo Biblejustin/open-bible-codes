@@ -61,6 +61,7 @@ from scripts import (
     check_cities_unreadable_pdf_ocr_review_packet_doc,
     check_cities_unreadable_pdf_review_doc,
     check_clean_lock_results_summary_doc,
+    check_compound_extension_claim_standard_doc,
     check_consolidated_findings_doc,
     check_corpus_configs,
     check_check_script_tests,
@@ -189,6 +190,7 @@ DEFAULT_REQUIRED_PATHS = [
     "scripts/check_public_release_hygiene.py",
     "scripts/check_public_claim_language.py",
     "scripts/check_clean_lock_results_summary_doc.py",
+    "scripts/check_compound_extension_claim_standard_doc.py",
     "scripts/check_doc_command_references.py",
     "scripts/check_english_seed_survivor_gate.py",
     "scripts/check_consolidated_findings_doc.py",
@@ -481,6 +483,7 @@ DEFAULT_REQUIRED_PATHS = [
     "docs/CRD_CENTER_WORD_SELF_VS_CONCEPT_FINDINGS.md",
     "docs/CRD_CENTER_WORD_VERSION_PRESENCE_FINDINGS.md",
     "docs/GREEK_SURFACE_PROSPECTIVE_CLAIM_STANDARD.md",
+    "docs/COMPOUND_EXTENSION_PROSPECTIVE_CLAIM_STANDARD.md",
     "docs/GREEK_SURFACE_SECOND_COHORT_READINESS.md",
     "docs/STUDY_LOCK_MANIFESTS.md",
     "docs/EXPANDED_STRATA_TOOLING.md",
@@ -1255,6 +1258,17 @@ def main(argv: list[str] | None = None) -> int:
         failures.append(
             "clean-lock results summary doc failures: "
             + "; ".join(clean_lock_results_summary_doc_failures)
+        )
+
+    compound_extension_claim_standard_doc_failures = (
+        check_compound_extension_claim_standard_doc.validate_compound_extension_claim_standard_doc(
+            root / check_compound_extension_claim_standard_doc.DEFAULT_DOC
+        )
+    )
+    if compound_extension_claim_standard_doc_failures:
+        failures.append(
+            "compound-extension claim-standard doc failures: "
+            + "; ".join(compound_extension_claim_standard_doc_failures)
         )
 
     project_findings_overview_doc_failures = (
