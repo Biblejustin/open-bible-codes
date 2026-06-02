@@ -135,6 +135,38 @@ class WrrSourcePolicyEvidencePacketDocTests(unittest.TestCase):
                 any("source_context_rows drifted" in failure for failure in failures)
             )
 
+    def test_validate_packet_doc_rejects_invalid_manifest_json(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest = Path(tmp) / "manifest.json"
+            manifest.write_text("{", encoding="utf-8")
+
+            failures = check.validate_source_policy_evidence_packet_doc(
+                check.DEFAULT_DOC,
+                packet=None,
+                context=None,
+                summary=None,
+                manifest=manifest,
+            )
+
+            self.assertTrue(any("is invalid JSON" in failure for failure in failures))
+
+    def test_validate_packet_doc_rejects_manifest_json_array(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest = Path(tmp) / "manifest.json"
+            manifest.write_text("[]", encoding="utf-8")
+
+            failures = check.validate_source_policy_evidence_packet_doc(
+                check.DEFAULT_DOC,
+                packet=None,
+                context=None,
+                summary=None,
+                manifest=manifest,
+            )
+
+            self.assertTrue(
+                any("JSON root must be an object" in failure for failure in failures)
+            )
+
 
 def _required_doc(root: Path) -> Path:
     path = root / "packet.md"
