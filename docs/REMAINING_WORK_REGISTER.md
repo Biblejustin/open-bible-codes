@@ -2010,9 +2010,10 @@ manifest JSON validation and WRR source row coverage-packet manifest JSON
 validation, WRR source-policy evidence-packet manifest JSON validation, and
 WRR claim-readiness/method-status/lock-options manifest JSON validation, plus
 remaining WRR doc JSON reader validation, Cities doc JSON reader validation,
-KJVA doc manifest JSON validation, and general doc JSON reader validation:
+KJVA doc manifest JSON validation, general doc JSON reader validation, and
+Cities no-input handoff manifest JSON validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2573
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2575
   tests, 2 skipped, and 29329 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3172,6 +3173,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened the remaining general doc JSON readers and manifest helpers so
   malformed JSON and non-object JSON roots report explicit failures instead of
   escaping from the documentation gates.
+- Tightened the Cities no-input handoff manifest check so malformed JSON and
+  non-object JSON roots report explicit failures instead of escaping from the
+  Cities no-input handoff documentation gate.
 - This is a documentation guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 

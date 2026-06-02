@@ -161,7 +161,14 @@ def validate_cities_no_input_handoff_doc(
         failures.append(
             f"{status_path} manual rows drifted: expected {summary.get('manual_input_needed_rows')}, got {len(manual_input_rows)}"
         )
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        failures.append(f"{manifest_path} is invalid JSON: {exc}")
+        return failures
+    if not isinstance(manifest, dict):
+        failures.append(f"{manifest_path} JSON root must be an object")
+        return failures
     if manifest.get("tool") != "scripts.build_cities_no_input_handoff_status":
         failures.append(f"{manifest_path} tool drifted")
     if manifest.get("summary", {}).get("claim_status") != expected_summary["claim_status"]:

@@ -88,6 +88,45 @@ def test_checker_rejects_summary_drift(tmp_path: Path) -> None:
     assert any("result_allowed drifted" in failure for failure in failures)
 
 
+def test_checker_rejects_invalid_manifest_json(tmp_path: Path) -> None:
+    doc, status, summary_csv, manifest = _write_valid_doc_status_summary(tmp_path)
+    manifest.write_text("{", encoding="utf-8")
+
+    failures = check.validate_cities_no_input_handoff_doc(
+        doc,
+        status_path=status,
+        summary_path=summary_csv,
+        manifest_path=manifest,
+    )
+
+    assert any("is invalid JSON" in failure for failure in failures)
+
+
+def test_checker_rejects_non_object_manifest_json(tmp_path: Path) -> None:
+    doc, status, summary_csv, manifest = _write_valid_doc_status_summary(tmp_path)
+    manifest.write_text("[]", encoding="utf-8")
+
+    failures = check.validate_cities_no_input_handoff_doc(
+        doc,
+        status_path=status,
+        summary_path=summary_csv,
+        manifest_path=manifest,
+    )
+
+    assert any("JSON root must be an object" in failure for failure in failures)
+
+
+def _write_valid_doc_status_summary(tmp_path: Path) -> tuple[Path, Path, Path, Path]:
+    doc = tmp_path / "CITIES_NO_INPUT_HANDOFF_STATUS.md"
+    status = tmp_path / "status.csv"
+    summary_csv = tmp_path / "summary.csv"
+    manifest = tmp_path / "manifest.json"
+    builder.write_markdown(doc, _summary(), _rows())
+    _write_csv(status, builder.STATUS_FIELDNAMES, _rows())
+    _write_csv(summary_csv, builder.SUMMARY_FIELDNAMES, [_summary()])
+    return doc, status, summary_csv, manifest
+
+
 def _summary() -> dict[str, object]:
     return {
         "status_rows": 8,
