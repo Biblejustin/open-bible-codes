@@ -103,13 +103,12 @@ def parse_label_config(value: str) -> tuple[str, Path]:
 
 def audit_config(label: str, config_path: Path) -> tuple[list[dict[str, object]], dict[str, object]]:
     config_path = config_path.expanduser()
-    with config_path.open("rb") as handle:
-        config = tomllib.load(handle)
-    language = str(config["language"])
+    config = load_audit_config(config_path)
+    language = config["language"]
     keep_finals = bool(config.get("keep_hebrew_final_forms", False))
     book_counts: Counter[str] = Counter()
     letter_counts: Counter[str] = Counter()
-    for source in config.get("sources", []):
+    for source in config["sources"]:
         if source.get("format") != "csv":
             continue
         path = (config_path.parent / source["path"]).resolve()
@@ -147,6 +146,30 @@ def audit_config(label: str, config_path: Path) -> tuple[list[dict[str, object]]
         "present_letters": sum(letter_counts[book] for book in DEUTEROCANON_BOOKS),
     }
     return rows, total
+
+
+def load_audit_config(config_path: Path) -> dict[str, Any]:
+    try:
+        with config_path.open("rb") as handle:
+            config = tomllib.load(handle)
+    except tomllib.TOMLDecodeError as exc:
+        raise ValueError(f"{config_path}: invalid TOML: {exc}") from exc
+
+    language = config.get("language")
+    if not isinstance(language, str) or not language.strip():
+        raise ValueError(f"{config_path}: language must be a non-empty string")
+    sources = config.get("sources", [])
+    if not isinstance(sources, list):
+        raise ValueError(f"{config_path}: sources must be a list")
+    for index, source in enumerate(sources, start=1):
+        if not isinstance(source, dict):
+            raise ValueError(f"{config_path}: source #{index} must be a table")
+        if source.get("format") != "csv":
+            continue
+        source_path = source.get("path")
+        if not isinstance(source_path, str) or not source_path.strip():
+            raise ValueError(f"{config_path}: source #{index} path must be a non-empty string")
+    return config
 
 
 def write_csv(path: Path, rows: list[dict[str, object]]) -> None:

@@ -8,6 +8,79 @@ from scripts.audit_apocrypha_coverage import audit_config, main
 
 
 class ApocryphaCoverageTests(unittest.TestCase):
+    def test_audit_config_reports_invalid_toml(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            config = root / "corpus.toml"
+            config.write_text("name = [", encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "invalid TOML"):
+                audit_config("DEMO", config)
+
+    def test_audit_config_requires_language(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            config = root / "corpus.toml"
+            config.write_text('name = "demo"\n', encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "language must be a non-empty string"):
+                audit_config("DEMO", config)
+
+    def test_audit_config_requires_sources_list(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            config = root / "corpus.toml"
+            config.write_text(
+                textwrap.dedent(
+                    """
+                    name = "demo"
+                    language = "greek"
+                    sources = "data.csv"
+                    """
+                ).strip()
+                + "\n",
+                encoding="utf-8",
+            )
+
+            with self.assertRaisesRegex(ValueError, "sources must be a list"):
+                audit_config("DEMO", config)
+
+    def test_audit_config_requires_source_tables_with_paths(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            missing_table = root / "missing_table.toml"
+            missing_table.write_text(
+                textwrap.dedent(
+                    """
+                    name = "demo"
+                    language = "greek"
+                    sources = ["data.csv"]
+                    """
+                ).strip()
+                + "\n",
+                encoding="utf-8",
+            )
+            missing_path = root / "missing_path.toml"
+            missing_path.write_text(
+                textwrap.dedent(
+                    """
+                    name = "demo"
+                    language = "greek"
+
+                    [[sources]]
+                    name = "demo"
+                    format = "csv"
+                    """
+                ).strip()
+                + "\n",
+                encoding="utf-8",
+            )
+
+            with self.assertRaisesRegex(ValueError, "source #1 must be a table"):
+                audit_config("DEMO", missing_table)
+            with self.assertRaisesRegex(ValueError, "source #1 path must be a non-empty string"):
+                audit_config("DEMO", missing_path)
+
     def test_audit_config_counts_deuterocanon_books(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

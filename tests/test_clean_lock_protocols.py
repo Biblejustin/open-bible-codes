@@ -597,7 +597,7 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     normalized_text = " ".join(text.split())
 
     assert "Latest validation snapshot after the release-ready make target" in text
-    assert "2544 tests" in normalized_text
+    assert "2548 tests" in normalized_text
     assert "2 skipped, and 29329 subtests" in normalized_text
     assert "make release-ready" in text
     assert "committed tree" in text
@@ -625,6 +625,8 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     assert "explicit source-path validation message" in normalized_text
     assert "WRR text-source config source-shape validation" in normalized_text
     assert "missing source paths produce explicit validation messages" in normalized_text
+    assert "apocrypha coverage config validation" in normalized_text
+    assert "missing CSV source paths produce explicit validation messages" in normalized_text
     assert "cache-clean" in normalized_text
     assert "scripts.check_expanded_strata_tooling" in text
     assert "scripts.check_public_claim_language" in text

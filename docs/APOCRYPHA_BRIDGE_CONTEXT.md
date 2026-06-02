@@ -80,7 +80,7 @@ python3 -m scripts.analyze_apocrypha_bridge_context --corpus-label LXX --config 
 | 46 | `hidden_path_only` | `υιοσ` (huios; English: son) | 165 | `canonical_to_apocrypha` | MAL 4:6 | `δουλου` (doulou; English: servant) | MAL 4:3;MAL 4:4;MAL 4:5;MAL 4:6;TOB 1:1;TOB 1:2 |
 | 47 | `hidden_path_only` | `αιμα` (haima; English: blood) | -168 | `apocrypha_to_canonical` | MAL 4:5 | `ανθρωπου` (anthropou; English: man/human) | MAL 4:2;MAL 4:3;MAL 4:4;MAL 4:5;MAL 4:6;TOB 1:1;TOB 1:2 |
 | 48 | `hidden_path_only` | `οργη` (orge; English: Wrath) | 175 | `canonical_to_apocrypha` | MAL 4:6 | `του` (tou; English: of the) | MAL 4:3;MAL 4:4;MAL 4:5;MAL 4:6;TOB 1:1;TOB 1:2 |
-| 49 | `hidden_path_only` | `ακρισ` (akris; English: Locust) | 176 | `canonical_to_apocrypha` | MAL 4:4 | `πριν` (prin; English: before) | MAL 4:1;MAL 4:2;MAL 4:3;MAL 4:4;MAL 4:5;MAL 4:6;TOB 1:1;TOB 1:2 |
+| 49 | `hidden_path_only` | `ακρισ` (akris) | 176 | `canonical_to_apocrypha` | MAL 4:4 | `πριν` (prin; English: before) | MAL 4:1;MAL 4:2;MAL 4:3;MAL 4:4;MAL 4:5;MAL 4:6;TOB 1:1;TOB 1:2 |
 | 50 | `hidden_path_only` | `αδησ` (ades; English: Hades) | 177 | `canonical_to_apocrypha` | MAL 4:6 | `προσταγματα` (prostagmata; English: commandments) | MAL 4:4;MAL 4:5;MAL 4:6;TOB 1:1;TOB 1:2 |
 | 51 | `hidden_path_only` | `θεοσ` (theos; English: God) | 184 | `canonical_to_apocrypha` | TOB 1:2 | `τωβιτ` (tobit; English: Tobit) | MAL 4:6;TOB 1:1;TOB 1:2;TOB 1:3;TOB 1:4 |
 | 52 | `hidden_path_only` | `αιμα` (haima; English: blood) | 190 | `canonical_to_apocrypha` | MAL 4:5 | `καρδιαν` (kardian; English: heart) | MAL 4:2;MAL 4:3;MAL 4:4;MAL 4:5;MAL 4:6;TOB 1:1;TOB 1:2 |
@@ -91,7 +91,7 @@ python3 -m scripts.analyze_apocrypha_bridge_context --corpus-label LXX --config 
 | 57 | `hidden_path_only` | `υιοσ` (huios; English: son) | 212 | `canonical_to_apocrypha` | TOB 1:2 | `υπερανω` (uperano; English: above) | MAL 4:5;MAL 4:6;TOB 1:1;TOB 1:2;TOB 1:3;TOB 1:4 |
 | 58 | `hidden_path_only` | `υιοσ` (huios; English: son) | -213 | `apocrypha_to_canonical` | MAL 4:6 | `παντα` (panta; English: all) | MAL 4:3;MAL 4:4;MAL 4:5;MAL 4:6;TOB 1:1;TOB 1:2;TOB 1:3 |
 | 59 | `hidden_path_only` | `ελκη` (elke; English: boils/sores) | 215 | `canonical_to_apocrypha` | TOB 1:1 | `γαβαηλ` (gabael; English: Gabael) | MAL 4:4;MAL 4:5;MAL 4:6;TOB 1:1;TOB 1:2;TOB 1:3 |
-| 60 | `hidden_path_only` | `τιτοσ` (titos; English: Titus) | 225 | `canonical_to_apocrypha` | MAL 4:3 | `καταπατησετε` (katapatesete; English: you will trample) | MAL 3:18;MAL 4:1;MAL 4:2;MAL 4:3;MAL 4:4;MAL 4:5;MAL 4:6;TOB 1:1 |
+| 60 | `hidden_path_only` | `τιτοσ` (titos) | 225 | `canonical_to_apocrypha` | MAL 4:3 | `καταπατησετε` (katapatesete; English: you will trample) | MAL 3:18;MAL 4:1;MAL 4:2;MAL 4:3;MAL 4:4;MAL 4:5;MAL 4:6;TOB 1:1 |
 | 61 | `hidden_path_only` | `λεων` (leon; English: Lion) | 232 | `canonical_to_apocrypha` | TOB 1:3 | `και` (kai; English: and) | MAL 4:6;TOB 1:1;TOB 1:2;TOB 1:3;TOB 1:4 |
 | 62 | `hidden_path_only` | `λεων` (leon; English: Lion) | 248 | `canonical_to_apocrypha` | TOB 1:2 | `δικαιοσυνησ` (dikaiosunes; English: righteousness) | MAL 4:5;MAL 4:6;TOB 1:1;TOB 1:2;TOB 1:3;TOB 1:4 |
 

@@ -51,8 +51,8 @@ python3 -m scripts.analyze_apocrypha_bridge_controls --canonical-label LXX --can
 | `HERODOTUS` | `ελαμ` (Elam; English: Elam) | 2 | 0 | 2 | 0 |
 | `HERODOTUS` | `ισαακ` (Isaak; English: Isaac) | 2 | 1 | 1 | 0 |
 | `HERODOTUS` | `οργη` (orge; English: Wrath) | 2 | 1 | 1 | 0 |
-| `HERODOTUS` | `σαρρα` (sarra; English: Sarah) | 2 | 1 | 1 | 0 |
-| `HERODOTUS` | `τυροσ` (turos; English: Tyre) | 2 | 1 | 1 | 0 |
+| `HERODOTUS` | `σαρρα` (sarra) | 2 | 1 | 1 | 0 |
+| `HERODOTUS` | `τυροσ` (turos) | 2 | 1 | 1 | 0 |
 | `ILIAD` | `χαραν` (charan; English: Haran) | 2 | 1 | 1 | 0 |
 | `ODYSSEY` | `αδαμ` (adam; English: Adam) | 2 | 0 | 2 | 0 |
 | `ODYSSEY` | `αμην` (amen; English: Amen) | 2 | 1 | 1 | 0 |
@@ -62,11 +62,11 @@ python3 -m scripts.analyze_apocrypha_bridge_controls --canonical-label LXX --can
 | `HERODOTUS` | `βασαν` (basan; English: Bashan) | 1 | 1 | 0 | 0 |
 | `HERODOTUS` | `δαυιδ` (dauid; English: David) | 1 | 0 | 1 | 0 |
 | `HERODOTUS` | `ελκη` (elke; English: boils/sores) | 1 | 0 | 1 | 0 |
-| `HERODOTUS` | `ηλιασ` (elias; English: Elijah) | 1 | 1 | 0 | 0 |
+| `HERODOTUS` | `ηλιασ` (elias) | 1 | 1 | 0 | 0 |
 | `HERODOTUS` | `καροσ` (karos; English: Carus) | 1 | 0 | 1 | 0 |
-| `HERODOTUS` | `κερασ` (keras; English: Horn) | 1 | 0 | 1 | 0 |
+| `HERODOTUS` | `κερασ` (keras) | 1 | 0 | 1 | 0 |
 | `HERODOTUS` | `μαρια` (Maria; English: Mary) | 1 | 0 | 1 | 0 |
-| `HERODOTUS` | `νικαω` (nikao; English: Overcome) | 1 | 0 | 1 | 0 |
+| `HERODOTUS` | `νικαω` (nikao) | 1 | 0 | 1 | 0 |
 | `HERODOTUS` | `νομοσ` (nomos; English: law) | 1 | 1 | 0 | 0 |
 | `HERODOTUS` | `ρωμη` (rome; English: Rome) | 1 | 0 | 1 | 0 |
 

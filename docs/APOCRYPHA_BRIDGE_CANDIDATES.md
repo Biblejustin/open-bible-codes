@@ -54,7 +54,7 @@ python3 -m scripts.analyze_apocrypha_bridge_candidates --corpus-label LXX --conf
 | 21 | `canonical_to_apocrypha` | `υιοσ` (huios; English: son) | 165 | MAL 4:3 | MAL 4:6 | TOB 1:2 | TOB | `CCAA` |
 | 22 | `apocrypha_to_canonical` | `αιμα` (haima; English: blood) | -168 | TOB 1:2 | MAL 4:5 | MAL 4:2 | TOB | `ACCC` |
 | 23 | `canonical_to_apocrypha` | `οργη` (orge; English: Wrath) | 175 | MAL 4:3 | MAL 4:6 | TOB 1:2 | TOB | `CCAA` |
-| 24 | `canonical_to_apocrypha` | `ακρισ` (akris; English: Locust) | 176 | MAL 4:1 | MAL 4:4 | TOB 1:2 | TOB | `CCCCA` |
+| 24 | `canonical_to_apocrypha` | `ακρισ` (akris) | 176 | MAL 4:1 | MAL 4:4 | TOB 1:2 | TOB | `CCCCA` |
 | 25 | `apocrypha_to_canonical` | `σιων` (Sion; English: Zion) | -176 | TOB 1:4 | TOB 1:2 | MAL 4:6 | TOB | `AAAC` |
 | 26 | `canonical_to_apocrypha` | `αδησ` (ades; English: Hades) | 177 | MAL 4:4 | MAL 4:6 | TOB 1:2 | TOB | `CCAA` |
 | 27 | `canonical_to_apocrypha` | `θεοσ` (theos; English: God) | 184 | MAL 4:6 | TOB 1:2 | TOB 1:4 | TOB | `CAAA` |
