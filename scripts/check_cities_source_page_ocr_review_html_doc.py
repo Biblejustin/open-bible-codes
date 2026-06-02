@@ -5,12 +5,12 @@ from __future__ import annotations
 
 import argparse
 import csv
-import json
 import sys
 from pathlib import Path
 from typing import Any
 
 from scripts import build_cities_source_page_ocr_review_html as builder
+from scripts.json_utils import read_json_object
 
 
 DEFAULT_DOC = builder.DEFAULT_MD
@@ -156,7 +156,11 @@ def validate_manifest(path: Path) -> list[str]:
         return [f"{path} is missing"]
     raw_text = path.read_text(encoding="utf-8")
     failures = validate_no_source_text({path: raw_text})
-    data = json.loads(raw_text)
+    try:
+        data = read_json_object(path)
+    except ValueError as exc:
+        failures.append(str(exc))
+        return failures
     expected: dict[str, Any] = {
         "tool": "build_cities_source_page_ocr_review_html.py",
         "inputs": {"packet": str(DEFAULT_PACKET)},

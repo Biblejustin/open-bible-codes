@@ -69,6 +69,22 @@ class CitiesSourcePageLineCropBandReviewHtmlDocTests(unittest.TestCase):
 
             self.assertTrue(any("rows drifted" in failure for failure in failures))
 
+    def test_rejects_non_object_manifest_json(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            doc, html, summary, manifest = copy_current_outputs(root)
+            manifest.write_text("[]\n", encoding="utf-8")
+
+            failures = check.validate_cities_source_page_line_crop_band_review_html_doc(
+                doc,
+                html_path=html,
+                summary=summary,
+                manifest=manifest,
+                band_contact=check.DEFAULT_BAND_CONTACT,
+            )
+
+            self.assertTrue(any("JSON root must be an object" in failure for failure in failures))
+
 
 def copy_current_outputs(root: Path) -> tuple[Path, Path, Path, Path]:
     doc = root / "band_review_html.md"

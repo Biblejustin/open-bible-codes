@@ -2020,9 +2020,10 @@ profile JSON validation, STEP_TAHOT manifest cache JSON validation, and KJVA
 apocrypha bridge review manifest cache JSON validation, plus Bolls importer
 JSON root validation, public-source downloader API JSON validation, and
 Wayback CDX API JSON validation, plus OET/OTB English-control API JSON
-validation and CRD LLM API response JSON validation:
+validation, CRD LLM API response JSON validation, and source-review HTML
+manifest JSON validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2605
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2613
   tests, 2 skipped, and 29333 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3227,6 +3228,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened the CRD OpenAI-compatible LLM client so API response roots, choices,
   messages, and message content are shape-checked before classification output
   is interpreted.
+- Tightened Cities and WRR source-review HTML/packet doc manifest readers so
+  non-object manifest JSON roots report validation failures instead of crashing
+  document gates.
 - This is a documentation/validation guard only. It does not change report
   conclusions, source policy, imported texts, ELS searches, or result status.
 

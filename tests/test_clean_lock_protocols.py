@@ -597,7 +597,7 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     normalized_text = " ".join(text.split())
 
     assert "Latest validation snapshot after the release-ready make target" in text
-    assert "2605 tests" in normalized_text
+    assert "2613 tests" in normalized_text
     assert "2 skipped, and 29333 subtests" in normalized_text
     assert "make release-ready" in text
     assert "committed tree" in text
@@ -681,6 +681,8 @@ def test_remaining_work_register_tracks_latest_validation_snapshot() -> None:
     assert "OET and OTB English-control importers" in normalized_text
     assert "CRD LLM API response JSON validation" in normalized_text
     assert "CRD OpenAI-compatible LLM client" in normalized_text
+    assert "source-review HTML manifest JSON validation" in normalized_text
+    assert "source-review HTML/packet doc manifest readers" in normalized_text
     assert "WRR documentation gate" in normalized_text
     assert "Cities documentation gate" in normalized_text
     assert "KJVA documentation gate" in normalized_text

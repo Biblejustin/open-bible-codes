@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import csv
-import json
 import sys
 from pathlib import Path
 from typing import Any
@@ -17,6 +16,7 @@ from scripts.check_cities_source_page_line_crop_review_html_doc import (
     normalize_space,
 )
 from scripts.check_wrr_source_row_crop_contact_sheet_doc import EXPECTED_ROW_ORDER
+from scripts.json_utils import read_json_object
 
 
 DEFAULT_DOC = builder.DEFAULT_MD
@@ -159,7 +159,11 @@ def validate_manifest(
         return [f"{path} is missing"]
     raw_text = path.read_text(encoding="utf-8")
     failures = validate_no_source_text({path: raw_text})
-    data = json.loads(raw_text)
+    try:
+        data = read_json_object(path)
+    except ValueError as exc:
+        failures.append(str(exc))
+        return failures
     expected_summary = {row["metric"]: row["value"] for row in expected_summary_rows(crop_data)}
     expected: dict[str, Any] = {
         "tool": "build_wrr_source_row_crop_review_html.py",
