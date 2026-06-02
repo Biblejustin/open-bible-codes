@@ -13,7 +13,11 @@ from els.protocol_runner import path_fingerprint
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    manifest = read_manifest(args.manifest)
+    try:
+        manifest = read_manifest(args.manifest)
+    except (OSError, ValueError) as exc:
+        print(f"lock manifest failure: {exc}")
+        return 1
     failures = validate_manifest(
         manifest,
         required_settings=args.required_setting,
@@ -42,7 +46,13 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def read_manifest(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"{path} is invalid JSON: {exc}") from exc
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path} JSON root must be an object")
+    return payload
 
 
 def validate_manifest(

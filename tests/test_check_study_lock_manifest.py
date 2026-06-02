@@ -1,3 +1,5 @@
+import pytest
+
 from scripts import check_study_lock_manifest as check
 from els.protocol_runner import path_fingerprint
 
@@ -21,6 +23,22 @@ def test_validate_manifest_accepts_locked_clean_manifest() -> None:
     )
 
     assert failures == []
+
+
+def test_read_manifest_rejects_invalid_json(tmp_path) -> None:
+    path = tmp_path / "lock.manifest.json"
+    path.write_text("{", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="is invalid JSON"):
+        check.read_manifest(path)
+
+
+def test_read_manifest_rejects_non_object_json(tmp_path) -> None:
+    path = tmp_path / "lock.manifest.json"
+    path.write_text("[]", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="JSON root must be an object"):
+        check.read_manifest(path)
 
 
 def test_validate_manifest_rejects_dirty_manifest_by_default() -> None:

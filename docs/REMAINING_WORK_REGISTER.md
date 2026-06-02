@@ -2011,9 +2011,10 @@ validation, WRR source-policy evidence-packet manifest JSON validation, and
 WRR claim-readiness/method-status/lock-options manifest JSON validation, plus
 remaining WRR doc JSON reader validation, Cities doc JSON reader validation,
 KJVA doc manifest JSON validation, general doc JSON reader validation, and
-Cities no-input handoff manifest JSON validation:
+Cities no-input handoff manifest JSON validation, plus study-lock manifest
+JSON validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2575
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2577
   tests, 2 skipped, and 29329 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3176,8 +3177,11 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened the Cities no-input handoff manifest check so malformed JSON and
   non-object JSON roots report explicit failures instead of escaping from the
   Cities no-input handoff documentation gate.
-- This is a documentation guard only. It does not change report conclusions,
-  source policy, imported texts, ELS searches, or result status.
+- Tightened the study-lock manifest reader so malformed JSON and non-object
+  JSON roots report explicit failures through the study-lock checker,
+  prospective preflight, and historical manifest-drift audit.
+- This is a documentation/validation guard only. It does not change report
+  conclusions, source policy, imported texts, ELS searches, or result status.
 
 ## Final-Report Assembly Direct Gate
 

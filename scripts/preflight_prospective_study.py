@@ -94,7 +94,7 @@ def main(argv: list[str] | None = None) -> int:
                 allow_dirty=args.allow_dirty,
                 verify_paths=not args.no_verify_paths,
             )
-        except (OSError, json.JSONDecodeError) as exc:
+        except (OSError, ValueError) as exc:
             manifest_failures.append(f"manifest could not be read: {exc}")
     failures.extend(f"lock manifest: {failure}" for failure in manifest_failures)
 

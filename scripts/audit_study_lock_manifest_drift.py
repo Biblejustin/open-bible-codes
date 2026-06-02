@@ -75,7 +75,7 @@ def audit_manifest_dir(manifest_dir: Path) -> list[dict[str, str]]:
     for path in sorted(manifest_dir.glob("*.manifest.json")):
         try:
             payload = read_manifest(path)
-        except (OSError, json.JSONDecodeError) as exc:
+        except (OSError, ValueError) as exc:
             rows.append(error_row(path, f"could not read manifest: {exc}"))
             continue
         if payload.get("tool") != LOCK_TOOL:
