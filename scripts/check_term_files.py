@@ -146,13 +146,23 @@ def validate_gematria_schemes(path: Path) -> list[str]:
         return [f"{path} is invalid TOML: {error}"]
     schemes = data.get("schemes", [])
     failures: list[str] = []
-    scheme_ids = {clean(scheme.get("scheme_id")) for scheme in schemes}
+    if not isinstance(schemes, list):
+        return [f"{path} schemes must be a list"]
+
+    scheme_tables = []
+    for index, scheme in enumerate(schemes, start=1):
+        if not isinstance(scheme, dict):
+            failures.append(f"{path}:scheme {index} must be a table")
+            continue
+        scheme_tables.append((index, scheme))
+
+    scheme_ids = {clean(scheme.get("scheme_id")) for _index, scheme in scheme_tables}
     missing_schemes = REQUIRED_GEMATRIA_SCHEMES - scheme_ids
     if missing_schemes:
         failures.append(
             f"{path} missing required schemes: {', '.join(sorted(missing_schemes))}"
         )
-    for index, scheme in enumerate(schemes, start=1):
+    for index, scheme in scheme_tables:
         scheme_id = clean(scheme.get("scheme_id"))
         language = clean(scheme.get("language"))
         implementation = clean(scheme.get("implementation"))
