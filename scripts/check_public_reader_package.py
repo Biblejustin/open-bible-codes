@@ -367,6 +367,14 @@ REQUIRED_REAL_REPORT_MANIFEST_FIELDS: dict[str, Any] = {
     "kjva_apocrypha_bridge_prospective_nonbible_controls": 3,
     "kjva_apocrypha_bridge_prospective_nonbible_controls_ge_observed": 1,
 }
+ALLOWED_REAL_REPORT_MANIFEST_METADATA_FIELDS = {
+    "commit",
+    "duration_seconds",
+    "edls_version",
+    "generated_at",
+    "inputs",
+    "outputs",
+}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -678,6 +686,12 @@ def validate_packaged_real_report_manifest(
                     f"{path} {key} drifted: "
                     f"{report_manifest.get(key)} != {expected_value}"
                 )
+        allowed_keys = (
+            set(REQUIRED_REAL_REPORT_MANIFEST_FIELDS)
+            | ALLOWED_REAL_REPORT_MANIFEST_METADATA_FIELDS
+        )
+        for key in sorted(set(report_manifest) - allowed_keys):
+            failures.append(f"{path} has unguarded real-report manifest key: {key}")
         return failures
     return []
 
