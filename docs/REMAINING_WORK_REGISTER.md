@@ -1999,11 +1999,18 @@ Run `make release-ready` from a committed tree; the final public-release gate is
 supposed to fail if tracked files are dirty.
 
 Latest validation snapshot after the release-ready make target, refreshed after
-the all-script exact-test guard:
+the public-reader package protocol guard:
 
-- Current `make fast-validate` passed, including `python3 -m pytest -q`: 2284
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2516
   tests, 2 skipped, and 29325 subtests.
-- `make public-release-check` passed after the all-script exact-test guard.
+- `make public-release-check` passed after the public-reader package protocol
+  guard.
+- Locked post-discovery reruns for
+  `protocols/doxa_four_source_confirmatory_followup.toml`,
+  `protocols/all_codes_compound_extension_confirmatory.toml`, and
+  `protocols/kjv_apocrypha_bridge_confirmatory_controls_5000.toml` were
+  cache-clean. They remain review/cautionary lanes, not new result-producing
+  work.
 - `python3 -m scripts.run_protocol protocols/real_report_run.toml --resume`
   passed clean from the committed tree after the all-script exact-test guard.
 - `cities_source_row_lock_001` through `cities_source_row_lock_014` are now
