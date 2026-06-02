@@ -85,6 +85,34 @@ def test_manifest_drift_fails(tmp_path: Path) -> None:
     assert any("rows drifted" in failure for failure in failures)
 
 
+def test_invalid_manifest_json_fails(tmp_path: Path) -> None:
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text("{", encoding="utf-8")
+
+    failures = check.validate_source_row_crop_packet_doc(
+        check.DEFAULT_DOC,
+        packet=None,
+        summary=None,
+        manifest=manifest,
+    )
+
+    assert any("is invalid JSON" in failure for failure in failures)
+
+
+def test_manifest_json_root_must_be_object(tmp_path: Path) -> None:
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text("[]", encoding="utf-8")
+
+    failures = check.validate_source_row_crop_packet_doc(
+        check.DEFAULT_DOC,
+        packet=None,
+        summary=None,
+        manifest=manifest,
+    )
+
+    assert any("JSON root must be an object" in failure for failure in failures)
+
+
 def _required_doc(root: Path) -> Path:
     doc = root / "packet.md"
     doc.write_text("\n".join(check.REQUIRED_PHRASES), encoding="utf-8")

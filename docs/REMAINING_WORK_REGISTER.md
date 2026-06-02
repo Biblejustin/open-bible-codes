@@ -2005,9 +2005,10 @@ preflight TOML validation, CRD density protocol TOML validation, and CRD
 self-surface base-protocol TOML validation, plus WRR text-source config
 source-shape validation, apocrypha coverage config validation, and CRD lock
 preflight TOML validation, centered-occurrence manifest JSON validation, and
-WRR manual-decision manifest JSON validation:
+WRR manual-decision manifest JSON validation, plus WRR source row crop-packet
+manifest JSON validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2553
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2555
   tests, 2 skipped, and 29329 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3142,6 +3143,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened the WRR manual decision-register document checker so a malformed
   manifest reports an explicit invalid-JSON failure instead of escaping from
   the WRR documentation gate.
+- Tightened the WRR source row crop-packet document checker so malformed
+  manifest JSON and non-object JSON roots report explicit manifest failures
+  instead of escaping from the WRR documentation gate.
 - This is a documentation guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 
