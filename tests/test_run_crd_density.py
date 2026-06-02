@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 
 from els.corpus import Corpus, VerseSpan
-from scripts.classify_centered_relevance import sha256_file
+from scripts.classify_centered_relevance import CRDConfigurationError, sha256_file
 from scripts.build_crd_comparison import build_crd_comparison
 from scripts.run_crd_density import (
     CLASSIFIED_HIT_FIELDNAMES,
@@ -18,6 +18,14 @@ from tests.test_classify_centered_relevance import MockLLMClient
 
 
 class CRDDensityRunnerTests(unittest.TestCase):
+    def test_invalid_protocol_toml_reports_configuration_error(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            protocol = Path(tmp) / "protocol.toml"
+            protocol.write_text("[broken\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(CRDConfigurationError, "invalid TOML"):
+                run_crd_density(protocol)
+
     def test_deterministic_mode_computes_density(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = build_synthetic_run(Path(tmp), "deterministic")

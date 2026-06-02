@@ -154,7 +154,10 @@ def run_crd_density(
 ) -> dict[str, Any]:
     started = time.perf_counter()
     protocol_path = Path(protocol_path)
-    protocol = tomllib.loads(protocol_path.read_text(encoding="utf-8"))
+    try:
+        protocol = tomllib.loads(protocol_path.read_text(encoding="utf-8"))
+    except tomllib.TOMLDecodeError as exc:
+        raise CRDConfigurationError(f"{protocol_path}: invalid TOML: {exc}") from exc
     mode = classifier_mode_override or str(protocol.get("classifier_mode", "deterministic"))
     outputs = output_paths(Path(str(protocol.get("output_dir", "reports/crd"))))
     outputs.output_dir.mkdir(parents=True, exist_ok=True)

@@ -2001,9 +2001,9 @@ supposed to fail if tracked files are dirty.
 Latest validation snapshot after the release-ready make target, refreshed after
 the public-reader package protocol guard, real-report protocol duplicate-step
 guard, public-reader real-report protocol source validation, and real-report
-preflight TOML validation:
+preflight TOML validation, plus CRD density protocol TOML validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2539
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2540
   tests, 2 skipped, and 29329 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3116,6 +3116,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened real-report preflight protocol input validation so invalid TOML or
   malformed `steps` metadata reports explicit preflight failures instead of
   escaping as raw parser/type errors.
+- Tightened the CRD density runner so invalid protocol TOML reports through the
+  existing `CRDConfigurationError` path instead of escaping as a raw parser
+  exception.
 - This is a documentation guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 
