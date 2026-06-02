@@ -29,12 +29,14 @@ REAL_REPORT_PROTOCOL_MANIFEST_SOURCE = Path(
 REAL_REPORT_PROTOCOL_SOURCE = Path("protocols/real_report_run.toml")
 REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
     Path("docs/START_HERE.md"): (
-        "8. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status.",
-        "9. `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md` for KJVA source-lock status.",
-        "10. `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md` for Cities source-chain status.",
+        "8. `docs/NO_INPUT_BLOCKER_SUMMARY.md` for the current no-input blocker map.",
+        "9. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status.",
+        "10. `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md` for KJVA source-lock status.",
+        "11. `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md` for Cities source-chain status.",
     ),
     Path("docs/PROJECT_FINDINGS_OVERVIEW.md"): (
         "`docs/REMAINING_WORK_REGISTER.md`",
+        "`docs/NO_INPUT_BLOCKER_SUMMARY.md`",
         "`docs/WRR_NO_INPUT_HANDOFF_STATUS.md`",
         "`docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`",
         "`docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`",
@@ -89,6 +91,13 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
     ),
     Path("docs/REMAINING_WORK_REGISTER.md"): (
         "Current overview wording now keeps the same no-result boundary visible: 14 source-row lock candidate pages, 14 populated source-row lock rows, 8 handoff rows, 6 manual-input-needed rows, 14 transcription review rows, 61 OCR packet pages, 41 reviewed OCR packet pages, 20 unreviewed OCR packet pages, 203 priority line-crop review rows, and no Cities result allowed.",
+    ),
+    Path("docs/NO_INPUT_BLOCKER_SUMMARY.md"): (
+        "Status: consolidated blocker map.",
+        "Total manual-input-needed rows: 22.",
+        "Result-allowed lanes: 0.",
+        "Blocked result lanes: 3.",
+        "`no_result_bearing_work_without_manual_or_citable_input`",
     ),
     Path("docs/REPOSITORY_README.md"): (
         "reads 4 candidate-source audit rows with 0 verse-import-ready candidate pages and 0 result-ready candidate pages, records result allowed 0",

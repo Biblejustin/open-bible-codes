@@ -59,6 +59,7 @@ REQUIRED_REFERENCES = (
     "docs/CLAIM_CATALOG.md",
     "docs/CONSOLIDATED_FINDINGS.md",
     "docs/REMAINING_WORK_REGISTER.md",
+    "docs/NO_INPUT_BLOCKER_SUMMARY.md",
     "docs/WRR_NO_INPUT_HANDOFF_STATUS.md",
     "docs/KJVA_NO_INPUT_HANDOFF_STATUS.md",
     "docs/CITIES_NO_INPUT_HANDOFF_STATUS.md",
@@ -67,15 +68,17 @@ REQUIRED_REFERENCES = (
 READER_PATH_REQUIREMENTS = {
     DEFAULT_README: (
         "whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`",
+        "consolidated no-input blockers: `docs/NO_INPUT_BLOCKER_SUMMARY.md`",
         "WRR no-input handoff status: `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`",
         "KJVA no-input handoff status: `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`",
         "Cities no-input handoff status: `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md`",
     ),
     DEFAULT_START_HERE: (
         "1. `docs/PROJECT_FINDINGS_OVERVIEW.md` for the whole-project findings summary.",
-        "8. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status.",
-        "9. `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md` for KJVA source-lock status.",
-        "10. `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md` for Cities source-chain status.",
+        "8. `docs/NO_INPUT_BLOCKER_SUMMARY.md` for the current no-input blocker map.",
+        "9. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status.",
+        "10. `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md` for KJVA source-lock status.",
+        "11. `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md` for Cities source-chain status.",
         "no current row should be presented as a public claim",
     ),
 }

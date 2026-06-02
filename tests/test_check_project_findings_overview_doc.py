@@ -68,6 +68,8 @@ def test_missing_readme_reader_path_fails(tmp_path: Path) -> None:
         f"{readme} missing phrase: "
         "whole-project findings overview: `docs/PROJECT_FINDINGS_OVERVIEW.md`",
         f"{readme} missing phrase: "
+        "consolidated no-input blockers: `docs/NO_INPUT_BLOCKER_SUMMARY.md`",
+        f"{readme} missing phrase: "
         "WRR no-input handoff status: `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`",
         f"{readme} missing phrase: "
         "KJVA no-input handoff status: `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md`",
@@ -116,11 +118,13 @@ def test_missing_start_here_reader_path_fails(tmp_path: Path) -> None:
         f"{start_here} missing phrase: "
         "1. `docs/PROJECT_FINDINGS_OVERVIEW.md` for the whole-project findings summary.",
         f"{start_here} missing phrase: "
-        "8. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status.",
+        "8. `docs/NO_INPUT_BLOCKER_SUMMARY.md` for the current no-input blocker map.",
         f"{start_here} missing phrase: "
-        "9. `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md` for KJVA source-lock status.",
+        "9. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status.",
         f"{start_here} missing phrase: "
-        "10. `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md` for Cities source-chain status.",
+        "10. `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md` for KJVA source-lock status.",
+        f"{start_here} missing phrase: "
+        "11. `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md` for Cities source-chain status.",
         f"{start_here} missing phrase: no current row should be presented as a public claim",
     ]
 
@@ -131,8 +135,8 @@ def test_missing_start_here_handoff_link_fails(tmp_path: Path) -> None:
     readme.write_text(valid_readme_text(), encoding="utf-8")
     start_here.write_text(
         valid_start_here_text().replace(
-            "8. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status.",
-            "8. `docs/MISSING.md` for exact WRR source/method status.",
+            "9. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status.",
+            "9. `docs/MISSING.md` for exact WRR source/method status.",
         ),
         encoding="utf-8",
     )
@@ -145,7 +149,7 @@ def test_missing_start_here_handoff_link_fails(tmp_path: Path) -> None:
 
     assert failures == [
         f"{start_here} missing phrase: "
-        "8. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status."
+        "9. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status."
     ]
 
 
