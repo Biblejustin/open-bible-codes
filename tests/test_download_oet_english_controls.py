@@ -1,7 +1,9 @@
 import csv
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
+from scripts import download_oet_english_controls as oet
 from scripts.download_oet_english_controls import (
     canonical_book_from_path,
     parse_oet_usfm,
@@ -67,6 +69,27 @@ class OetEnglishControlTests(unittest.TestCase):
         self.assertEqual([verse.ref for verse in verses], ["GEN 1:1", "GEN 1:2"])
         self.assertEqual(verses[0].text, "In the beginning .")
         self.assertEqual(verses[1].text, "And YHWH spoke.")
+
+    def test_fetch_repo_tree_rejects_non_object_response(self) -> None:
+        with patch.object(oet, "fetch_json", return_value=["bad"]):
+            with self.assertRaisesRegex(
+                SystemExit, "OET repository tree response must be an object"
+            ):
+                oet.fetch_repo_tree("main")
+
+    def test_fetch_repo_tree_rejects_malformed_tree_entries(self) -> None:
+        with patch.object(oet, "fetch_json", return_value={"tree": ["bad"]}):
+            with self.assertRaisesRegex(
+                SystemExit, "OET repository tree response entry 0 must be an object"
+            ):
+                oet.fetch_repo_tree("main")
+
+    def test_fetch_commit_sha_rejects_non_object_response(self) -> None:
+        with patch.object(oet, "fetch_json", return_value=["bad"]):
+            with self.assertRaisesRegex(
+                SystemExit, "OET commit response must be an object"
+            ):
+                oet.fetch_commit_sha("main")
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:

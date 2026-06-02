@@ -2019,9 +2019,10 @@ drift manifest JSON validation, and KJVA apocrypha prospective-boundary
 profile JSON validation, STEP_TAHOT manifest cache JSON validation, and KJVA
 apocrypha bridge review manifest cache JSON validation, plus Bolls importer
 JSON root validation, public-source downloader API JSON validation, and
-Wayback CDX API JSON validation:
+Wayback CDX API JSON validation, plus OET/OTB English-control API JSON
+validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2598
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2603
   tests, 2 skipped, and 29333 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3220,6 +3221,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
 - Tightened the WRR Wayback and Cities PDF recovery CDX readers so Wayback CDX
   API roots and header rows are shape-checked before archived-source fallback
   rows are interpreted.
+- Tightened the OET and OTB English-control importers so GitHub tree/commit
+  responses and OTB chapter JSON roots are shape-checked before source rows are
+  interpreted.
 - This is a documentation/validation guard only. It does not change report
   conclusions, source policy, imported texts, ELS searches, or result status.
 

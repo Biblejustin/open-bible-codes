@@ -70,6 +70,18 @@ class OtbEnglishControlTests(unittest.TestCase):
     def test_clean_verse_text_skips_markdown_separator(self) -> None:
         self.assertEqual(clean_verse_text(["> Alpha", "---", "Beta"]), "Alpha Beta")
 
+    def test_parse_otb_chapter_json_rejects_non_object_root(self) -> None:
+        with self.assertRaisesRegex(
+            ValueError, "OTB chapter JSON root must be an object"
+        ):
+            parse_otb_chapter_json("[]", path="chapter.json")
+
+    def test_parse_otb_chapter_json_rejects_non_list_verses(self) -> None:
+        raw = '{"book": "Genesis", "chapter": 1, "verses": {"verse": 1}}'
+
+        with self.assertRaisesRegex(ValueError, "OTB chapter verses must be a list"):
+            parse_otb_chapter_json(raw, path="chapter.json")
+
 
 def read_rows(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8", newline="") as handle:

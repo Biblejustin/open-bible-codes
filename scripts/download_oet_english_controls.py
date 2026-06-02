@@ -301,6 +301,16 @@ def download_row(
 
 def fetch_repo_tree(ref: str) -> dict[str, Any]:
     payload = fetch_json(f"https://api.github.com/repos/{REPO}/git/trees/{ref}?recursive=1")
+    if not isinstance(payload, dict):
+        raise SystemExit("OET repository tree response must be an object")
+    tree = payload.get("tree")
+    if not isinstance(tree, list):
+        raise SystemExit("OET repository tree response tree must be a list")
+    for index, entry in enumerate(tree):
+        if not isinstance(entry, dict):
+            raise SystemExit(
+                f"OET repository tree response entry {index} must be an object"
+            )
     if payload.get("truncated"):
         raise SystemExit("OET repository tree response was truncated")
     return payload
@@ -308,10 +318,12 @@ def fetch_repo_tree(ref: str) -> dict[str, Any]:
 
 def fetch_commit_sha(ref: str) -> str:
     payload = fetch_json(f"https://api.github.com/repos/{REPO}/commits/{ref}")
+    if not isinstance(payload, dict):
+        raise SystemExit("OET commit response must be an object")
     return str(payload.get("sha", ref))
 
 
-def fetch_json(url: str) -> dict[str, Any]:
+def fetch_json(url: str) -> Any:
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/vnd.github+json"})
     with urllib.request.urlopen(request, timeout=120) as response:
         return json.loads(response.read().decode("utf-8"))

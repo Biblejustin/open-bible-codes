@@ -286,6 +286,8 @@ def relative_source_path(source_path: str, prefix: str) -> Path:
 
 def parse_otb_chapter_json(text: str, *, path: str = "") -> list[UsfmVerse]:
     payload = json.loads(text)
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path}: OTB chapter JSON root must be an object")
     book_name = str(payload.get("book", "")).strip()
     chapter = str(payload.get("chapter", "")).strip()
     book = canonical_book_name(book_name or book_name_from_path(path))
@@ -293,7 +295,10 @@ def parse_otb_chapter_json(text: str, *, path: str = "") -> list[UsfmVerse]:
         raise ValueError(f"{path}: missing book or chapter")
 
     verses: list[UsfmVerse] = []
-    for item in payload.get("verses", []):
+    raw_verses = payload.get("verses", [])
+    if not isinstance(raw_verses, list):
+        raise ValueError(f"{path}: OTB chapter verses must be a list")
+    for item in raw_verses:
         if not isinstance(item, dict) or "verse" not in item:
             continue
         verse = str(item.get("verse", "")).strip()
