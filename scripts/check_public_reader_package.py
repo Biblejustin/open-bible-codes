@@ -379,23 +379,32 @@ ALLOWED_REAL_REPORT_MANIFEST_METADATA_FIELDS = {
 }
 
 
-def _load_real_report_protocol_step_ids() -> list[str]:
-    if not REAL_REPORT_PROTOCOL_SOURCE.exists():
-        return []
-    data = tomllib.loads(REAL_REPORT_PROTOCOL_SOURCE.read_text(encoding="utf-8"))
+def _load_real_report_protocol_requirements(
+    path: Path = REAL_REPORT_PROTOCOL_SOURCE,
+) -> tuple[tuple[str, ...], tuple[str, ...]]:
+    if not path.exists():
+        return (), (f"{path} is missing",)
+    try:
+        data = tomllib.loads(path.read_text(encoding="utf-8"))
+    except tomllib.TOMLDecodeError as exc:
+        return (), (f"{path} is invalid TOML: {exc}",)
     steps = data.get("steps", [])
     if not isinstance(steps, list):
-        return []
-    return [
+        return (), (f"{path} steps must be a list",)
+    step_ids = tuple(
         str(step.get("id", ""))
         for step in steps
         if isinstance(step, dict) and step.get("id")
-    ]
+    )
+    if not step_ids:
+        return (), (f"{path} has no step ids",)
+    return step_ids, ()
 
 
-REQUIRED_REAL_REPORT_PROTOCOL_STEP_IDS = tuple(
-    step_id for step_id in _load_real_report_protocol_step_ids()
-)
+(
+    REQUIRED_REAL_REPORT_PROTOCOL_STEP_IDS,
+    REAL_REPORT_PROTOCOL_SOURCE_FAILURES,
+) = _load_real_report_protocol_requirements()
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -757,17 +766,18 @@ def validate_packaged_real_report_protocol_manifest(
     manifest: dict[str, Any],
     package_dir: Path,
 ) -> list[str]:
+    failures = list(REAL_REPORT_PROTOCOL_SOURCE_FAILURES)
     path = packaged_path_for_source(
         manifest,
         package_dir,
         REAL_REPORT_PROTOCOL_MANIFEST_SOURCE,
     )
     if path is None:
-        return []
+        return failures
     data = read_packaged_json(path)
     if isinstance(data, str):
-        return [data]
-    failures: list[str] = []
+        failures.append(data)
+        return failures
     checks: dict[str, Any] = {
         "tool": "run_protocol",
         "protocol": "real_report_run",

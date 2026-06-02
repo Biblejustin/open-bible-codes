@@ -540,6 +540,28 @@ def test_detects_packaged_real_report_protocol_duplicate_step(
     assert f"{protocol_path} has duplicate protocol step: preflight" in failures
 
 
+def test_reports_invalid_real_report_protocol_source_toml(tmp_path) -> None:
+    protocol_path = tmp_path / "real_report_run.toml"
+    _write(protocol_path, "[[steps]\nid = 'ok'\n[[steps]\n")
+
+    step_ids, failures = check._load_real_report_protocol_requirements(protocol_path)
+
+    assert step_ids == ()
+    assert len(failures) == 1
+    assert str(protocol_path) in failures[0]
+    assert "invalid TOML" in failures[0]
+
+
+def test_reports_malformed_real_report_protocol_source_steps(tmp_path) -> None:
+    protocol_path = tmp_path / "real_report_run.toml"
+    _write(protocol_path, 'steps = "not-a-list"\n')
+
+    step_ids, failures = check._load_real_report_protocol_requirements(protocol_path)
+
+    assert step_ids == ()
+    assert failures == (f"{protocol_path} steps must be a list",)
+
+
 def test_detects_packaged_real_report_protocol_manifest_summary_input_drift(
     tmp_path,
     monkeypatch,

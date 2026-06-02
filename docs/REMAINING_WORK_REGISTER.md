@@ -1999,10 +1999,10 @@ Run `make release-ready` from a committed tree; the final public-release gate is
 supposed to fail if tracked files are dirty.
 
 Latest validation snapshot after the release-ready make target, refreshed after
-the public-reader package protocol guard and real-report protocol duplicate-step
-guard:
+the public-reader package protocol guard, real-report protocol duplicate-step
+guard, and public-reader real-report protocol source validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2535
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2537
   tests, 2 skipped, and 29329 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
@@ -3109,6 +3109,9 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   `entries` metadata fails before parser internals see it.
 - Tightened CRD relevance list-field validation so string metadata cannot be
   silently interpreted as character sequences.
+- Tightened the public-reader package checker so malformed current
+  `protocols/real_report_run.toml` metadata is reported as a source validation
+  failure instead of crashing or silently dropping required-step expectations.
 - This is a documentation guard only. It does not change report conclusions,
   source policy, imported texts, ELS searches, or result status.
 
