@@ -349,29 +349,55 @@ def load_translation_rows(path: Path) -> list[dict[str, Any]]:
             if len(json_names) != 1:
                 raise SystemExit(f"{path}: expected one JSON member, found {len(json_names)}")
             with archive.open(json_names[0]) as handle:
-                return json.loads(handle.read().decode("utf-8-sig"))
+                payload = json.loads(handle.read().decode("utf-8-sig"))
+                return validate_object_list(payload, path, "translation rows")
     with path.open("r", encoding="utf-8-sig") as handle:
-        return json.load(handle)
+        payload = json.load(handle)
+    return validate_object_list(payload, path, "translation rows")
 
 
 def load_books_metadata(path: Path, slug: str) -> list[dict[str, Any]]:
     with path.open("r", encoding="utf-8") as handle:
         all_books = json.load(handle)
+    if not isinstance(all_books, dict):
+        raise SystemExit(f"{path}: JSON root must be an object")
     if slug not in all_books:
         raise SystemExit(f"{path}: no book metadata for {slug}")
-    return all_books[slug]
+    return validate_object_list(all_books[slug], path, f"book metadata for {slug}")
 
 
 def load_language_metadata(path: Path, slug: str) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as handle:
         languages = json.load(handle)
-    for language in languages:
+    if not isinstance(languages, list):
+        raise SystemExit(f"{path}: JSON root must be a list")
+    for index, language in enumerate(languages):
+        if not isinstance(language, dict):
+            raise SystemExit(f"{path}: language row {index} must be an object")
         if language.get("language") != "English":
             continue
-        for translation in language.get("translations", []):
+        translations = language.get("translations", [])
+        if not isinstance(translations, list):
+            raise SystemExit(f"{path}: language row {index} translations must be a list")
+        for translation_index, translation in enumerate(translations):
+            if not isinstance(translation, dict):
+                raise SystemExit(
+                    f"{path}: language row {index} translation row {translation_index} must be an object"
+                )
             if translation.get("short_name") == slug:
                 return dict(translation)
     return {}
+
+
+def validate_object_list(payload: Any, path: Path, label: str) -> list[dict[str, Any]]:
+    if not isinstance(payload, list):
+        raise SystemExit(f"{path}: {label} JSON root must be a list")
+    rows: list[dict[str, Any]] = []
+    for index, row in enumerate(payload):
+        if not isinstance(row, dict):
+            raise SystemExit(f"{path}: {label} row {index} must be an object")
+        rows.append(row)
+    return rows
 
 
 def build_book_maps(

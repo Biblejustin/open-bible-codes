@@ -2017,10 +2017,11 @@ root validation, report-index cache validation, and public-reader manifest
 root validation, prospective lane-status profile JSON validation, study-lock
 drift manifest JSON validation, and KJVA apocrypha prospective-boundary
 profile JSON validation, STEP_TAHOT manifest cache JSON validation, and KJVA
-apocrypha bridge review manifest cache JSON validation:
+apocrypha bridge review manifest cache JSON validation, plus Bolls importer
+JSON root validation:
 
-- Current `make release-ready` passed, including `python3 -m pytest -q`: 2591
-  tests, 2 skipped, and 29330 subtests.
+- Current `make release-ready` passed, including `python3 -m pytest -q`: 2592
+  tests, 2 skipped, and 29333 subtests.
 - `make public-release-check` passed after the public-reader package protocol
   guard.
 - Locked post-discovery reruns for
@@ -3211,6 +3212,8 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   fall back to a fresh timestamp instead of crashing manifest rewrite.
 - Tightened the KJVA apocrypha bridge review manifest cache so non-object JSON
   roots fall back to fresh timing metadata instead of crashing summary writes.
+- Tightened the Bolls importer JSON readers so malformed translation,
+  book-metadata, and language-metadata roots fail with explicit shape messages.
 - This is a documentation/validation guard only. It does not change report
   conclusions, source policy, imported texts, ELS searches, or result status.
 

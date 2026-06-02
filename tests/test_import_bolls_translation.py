@@ -8,6 +8,9 @@ from scripts.import_bolls_translation import (
     build_book_maps,
     clean_html_text,
     import_translation,
+    load_books_metadata,
+    load_language_metadata,
+    load_translation_rows,
     main,
 )
 
@@ -158,6 +161,28 @@ class BollsTranslationImportTests(unittest.TestCase):
             self.assertEqual(exit_code, 0)
             self.assertIn("GEN 1:1", out.read_text(encoding="utf-8"))
             self.assertTrue(manifest.exists())
+
+    def test_malformed_json_roots_fail_with_clear_messages(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            source = base / "sample.json"
+            books = base / "books.json"
+            languages = base / "languages.json"
+
+            with self.subTest("translation_rows"):
+                source.write_text(json.dumps({"rows": []}), encoding="utf-8")
+                with self.assertRaisesRegex(SystemExit, "translation rows JSON root must be a list"):
+                    load_translation_rows(source)
+
+            with self.subTest("book_metadata"):
+                books.write_text(json.dumps([]), encoding="utf-8")
+                with self.assertRaisesRegex(SystemExit, "JSON root must be an object"):
+                    load_books_metadata(books, "TEST")
+
+            with self.subTest("language_metadata"):
+                languages.write_text(json.dumps({"languages": []}), encoding="utf-8")
+                with self.assertRaisesRegex(SystemExit, "JSON root must be a list"):
+                    load_language_metadata(languages, "TEST")
 
 
 if __name__ == "__main__":
