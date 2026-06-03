@@ -27,6 +27,19 @@ GENERATED_TREES: tuple[Path, ...] = (
 )
 
 
+def corpus_data_available() -> bool:
+    """True if downloaded corpora appear to be present locally.
+
+    Used to auto-skip ``requires_corpus``-marked tests that soft-fail on missing
+    generated artifacts (they catch the missing file and assert on a count, so
+    the FileNotFoundError hook never sees a raise)."""
+    processed = REPO_ROOT / "data" / "processed"
+    raw = REPO_ROOT / "data" / "raw"
+    return (processed.is_dir() and any(processed.iterdir())) or (
+        raw.is_dir() and any(raw.iterdir())
+    )
+
+
 def _candidate_path(exc: BaseException) -> str | None:
     """Best-effort path string the exception is complaining about."""
     filename = getattr(exc, "filename", None)

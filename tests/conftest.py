@@ -27,7 +27,22 @@ from __future__ import annotations
 
 import pytest
 
-from tests._skip_helpers import is_missing_generated_artifact
+from tests._skip_helpers import corpus_data_available, is_missing_generated_artifact
+
+
+def pytest_collection_modifyitems(config, items):
+    """Auto-skip ``requires_corpus`` tests when no local corpora are present.
+
+    The FileNotFoundError hook below covers tests that *raise* on missing data.
+    Some tests instead catch the missing file and assert on a failure count
+    (e.g. report-preflight checks), so they need an explicit mark plus this
+    data-presence guard."""
+    if corpus_data_available():
+        return
+    skip = pytest.mark.skip(reason="requires local corpora (data/ not populated)")
+    for item in items:
+        if "requires_corpus" in item.keywords:
+            item.add_marker(skip)
 
 
 @pytest.hookimpl(hookwrapper=True)

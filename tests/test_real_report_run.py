@@ -5,6 +5,13 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+import pytest
+
+# Report-preflight checks read generated reports/ artifacts and assert on a
+# failure count rather than raising, so the FileNotFoundError skip hook cannot
+# catch them. Mark the module so it auto-skips when corpora/reports are absent.
+pytestmark = pytest.mark.requires_corpus
+
 from els.protocol_runner import load_protocol
 from scripts import build_real_report_run_summary as summary
 from scripts import preflight_real_report_run as preflight
