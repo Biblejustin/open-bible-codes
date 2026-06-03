@@ -161,3 +161,13 @@ Main outputs:
 
 - `reports/english_version_control_triage/triage.md`
 - `reports/english_version_control_triage/context_review.md`
+
+To check whether reviewed English rows are caused by KJV references missing
+from a compared modern version, run:
+
+```bash
+python3 -m scripts.run_protocol protocols/english_missing_verse_attribution.toml --resume
+```
+
+See `docs/ENGLISH_MISSING_VERSE_ATTRIBUTION.md` for the current read. The
+current context-review rows were not attributed to missing-verse gaps.

@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 429
+Documents indexed: 430
 
 ## Controls
 
@@ -307,6 +307,7 @@ Documents indexed: 429
 | Strong Manageable Full-Span Hit Export | `DYNAMIC_SKIP_STRONG_MANAGEABLE_FULL_SPAN_HIT_EXPORT.md` |
 | ELS Extensions | `ELS_EXTENSIONS.md` |
 | English KJV Search | `ENGLISH_KJV_SEARCH.md` |
+| English Missing-Verse Attribution | `ENGLISH_MISSING_VERSE_ATTRIBUTION.md` |
 | English KJV Screening All-Codes Collection | `ENGLISH_SCREENING_ALL_CODES_COLLECTION.md` |
 | English KJV Screening All-Codes Triage | `ENGLISH_SCREENING_ALL_CODES_TRIAGE.md` |
 | English Seed Survivor Audit | `ENGLISH_SEED_SURVIVOR_AUDIT.md` |

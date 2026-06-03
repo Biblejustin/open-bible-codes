@@ -1,0 +1,36 @@
+name = "english_missing_verse_attribution"
+description = "Attribute current English version-control seed hits to KJV-missing verse gaps."
+manifest_out = "reports/english_missing_verse_attribution/protocol_run.manifest.json"
+max_parallel = 1
+progress_interval_seconds = 15
+
+[[steps]]
+id = "english_missing_verse_attribution"
+description = "Splice KJV-missing refs into available BibleGateway-overlap English versions and test seed-hit skip preservation."
+argv = [
+  "-m", "scripts.analyze_english_missing_verse_attribution",
+  "--baseline-config", "configs/example_ebible_engkjv.toml",
+  "--versions", "configs/biblegateway_english_versions.csv",
+  "--terms", "reports/english_version_control_triage/context_seed_terms.csv",
+  "--context-hits", "reports/english_version_control_triage/context_hits.csv",
+  "--out-dir", "reports/english_missing_verse_attribution",
+]
+inputs = [
+  "configs/example_ebible_engkjv.toml",
+  "configs/biblegateway_english_versions.csv",
+  "reports/english_version_control_triage/context_seed_terms.csv",
+  "reports/english_version_control_triage/context_hits.csv",
+  "scripts/analyze_english_missing_verse_attribution.py",
+  "scripts/run_biblegateway_english_versions.py",
+  "els/corpus.py",
+  "els/critical.py",
+  "els/search.py",
+]
+outputs = [
+  "reports/english_missing_verse_attribution/summary.csv",
+  "reports/english_missing_verse_attribution/missing_refs.csv",
+  "reports/english_missing_verse_attribution/missing_verse_attributed_hits.csv",
+  "reports/english_missing_verse_attribution/context_hit_attribution.csv",
+  "reports/english_missing_verse_attribution/summary.md",
+  "reports/english_missing_verse_attribution/manifest.json",
+]

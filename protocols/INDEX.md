@@ -1,7 +1,7 @@
 # Protocol Index
 
 Protocols root: `protocols`
-Protocols indexed: 197
+Protocols indexed: 198
 
 ## Analysis
 
@@ -132,6 +132,7 @@ Protocols indexed: 197
 | byz_source_only_exact_center | Post-discovery 1000/1000 controls for BYZ_NT source-only exact-center extension row. | 2 |  | reports/byz_source_only_exact_center | `byz_source_only_exact_center.toml` |
 | door43_english_controls | Open Door43 English ULT/UST control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/door43_english_controls | `door43_english_controls.toml` |
 | ebible_english_controls | Open and CC eBible English control-corpus screening for generated English terms. | 1 | terms/english_search_terms.csv | reports/ebible_english_controls | `ebible_english_controls.toml` |
+| english_missing_verse_attribution | Attribute current English version-control seed hits to KJV-missing verse gaps. | 1 |  | reports/english_missing_verse_attribution | `english_missing_verse_attribution.toml` |
 | english_seed_paired_controls_1000 | Conditional 1000-sample term-shuffle and corpus-random paired controls for English seed... | 2 |  | reports/english_seed_paired_controls_1000, reports/english_seed_survivor_targets | `english_seed_paired_controls_1000.toml` |
 | english_seed_survivor_audit | Conditional letter-path and metadata audit for English seed rows surviving count-contro... | 1 |  | reports/english_seed_survivor_audit | `english_seed_survivor_audit.toml` |
 | english_seed_term_shuffle_1000 | Conditional 1000-sample same-letter term-shuffle controls for English seed rows survivi... | 1 | terms/english_seed_followup_survivors.csv | reports/english_seed_term_shuffle_1000 | `english_seed_term_shuffle_1000.toml` |

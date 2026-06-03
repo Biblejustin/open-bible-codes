@@ -122,6 +122,13 @@ The Gospel-name omission check found 50 Greek Textus Receptus paths that broke
 because they used letters inside omitted verse blocks. That is useful for
 source comparison, not for making a stronger meaning claim.
 
+The English KJV-vs-modern-version check also found real verse-reference gaps.
+Some are familiar New Testament places where many modern versions do not print
+the KJV verse as a normal verse, such as Acts 8:37 or John 5:4. But the current
+two reviewed English rows were not caused by those missing-verse gaps. Their
+differences point instead to translation wording, word order, or ordinary
+background.
+
 ## WRR Famous-Rabbis Study
 
 WRR is the famous-rabbis Bible-code study.
