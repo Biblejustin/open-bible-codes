@@ -18,4 +18,5 @@ open-bible-codes = "els.cli:main"
 testpaths = ["tests"]
 markers = [
   "integration: slower real-corpus smoke tests",
+  "requires_corpus: needs local corpora in data/ or generated reports/",
 ]

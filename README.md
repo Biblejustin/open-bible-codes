@@ -1446,6 +1446,28 @@ Recommended:
 
 See `data/README.md`.
 
+## Running tests
+
+The fast unit suite needs no downloaded data and should pass on a fresh clone:
+
+```bash
+python3 -m pytest -m "not integration"
+```
+
+Many tests load real corpora from `data/` or read generated outputs from
+`reports/`. Both trees are gitignored, so on a fresh checkout those tests are
+**skipped automatically** (the `tests/conftest.py` hook converts a missing
+`data/`/`reports/` artifact into a skip; real failures still fail loudly). To
+run them, bootstrap the corpora first, then run the full suite:
+
+```bash
+python3 -m scripts.bootstrap_public_sources
+python3 -m pytest
+```
+
+Tag new data-dependent tests with `@pytest.mark.integration` (slow real-corpus
+smoke tests) or `@pytest.mark.requires_corpus` so they can be deselected.
+
 ## Notes
 
 ELS search is easy to cherry-pick. Treat results as descriptive until tested against fixed terms, fixed text, fixed skip bounds, and a documented null model.
