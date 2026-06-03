@@ -12,6 +12,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from els import __version__
+from els.books import canonical_book_code as _canonical_book
 from els.corpus import Corpus, VerseSpan, load_corpus, splice_verses_into_corpus
 from els.critical import (
     BrokenHit,
@@ -38,6 +39,10 @@ DEFAULT_OUT_DIR = Path("reports/english_missing_verse_attribution")
 MIN_SKIP = 2
 MAX_SKIP = 100
 MIN_TERM_LENGTH = 3
+# Labeling set for categorizing reference gaps (ref_gap_category). This is a
+# broader, code-form (e.g. 'JHN 8:6') list and is intentionally NOT the same as
+# protocols/treat_as_deleted/critical_consensus.csv, which is a narrower,
+# name-form study override. Keep the two separate; they serve different roles.
 KNOWN_NT_DISPUTED_REFS = {
     "MAT 12:47",
     "MAT 17:21",
@@ -327,7 +332,6 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Also rescan every seed term in every version. Slow; default only attributes existing context rows.",
     )
-    parser.add_argument("--require-all", action="store_true")
     return parser
 
 
@@ -417,78 +421,6 @@ def verse_key_from_parts(book: str, chapter: str, verse: str, ref: str) -> tuple
         return (_canonical_book(ref_parts[0]), chapter_part, verse_part)
     return (_canonical_book(book or ref), chapter, verse)
 
-
-def _canonical_book(book: str) -> str:
-    return {
-        "Genesis": "GEN",
-        "Exodus": "EXO",
-        "Leviticus": "LEV",
-        "Numbers": "NUM",
-        "Deuteronomy": "DEU",
-        "Joshua": "JOS",
-        "Judges": "JDG",
-        "Ruth": "RUT",
-        "1 Samuel": "1SA",
-        "2 Samuel": "2SA",
-        "1 Kings": "1KI",
-        "2 Kings": "2KI",
-        "1 Chronicles": "1CH",
-        "2 Chronicles": "2CH",
-        "Ezra": "EZR",
-        "Nehemiah": "NEH",
-        "Esther": "EST",
-        "Job": "JOB",
-        "Psalms": "PSA",
-        "Psalm": "PSA",
-        "Proverbs": "PRO",
-        "Ecclesiastes": "ECC",
-        "Song of Solomon": "SNG",
-        "Song of Songs": "SNG",
-        "Isaiah": "ISA",
-        "Jeremiah": "JER",
-        "Lamentations": "LAM",
-        "Ezekiel": "EZK",
-        "Daniel": "DAN",
-        "Hosea": "HOS",
-        "Joel": "JOL",
-        "Amos": "AMO",
-        "Obadiah": "OBA",
-        "Jonah": "JON",
-        "Micah": "MIC",
-        "Nahum": "NAM",
-        "Habakkuk": "HAB",
-        "Zephaniah": "ZEP",
-        "Haggai": "HAG",
-        "Zechariah": "ZEC",
-        "Malachi": "MAL",
-        "Matthew": "MAT",
-        "Mark": "MRK",
-        "Luke": "LUK",
-        "John": "JHN",
-        "Acts": "ACT",
-        "Romans": "ROM",
-        "1 Corinthians": "1CO",
-        "2 Corinthians": "2CO",
-        "Galatians": "GAL",
-        "Ephesians": "EPH",
-        "Philippians": "PHP",
-        "Colossians": "COL",
-        "1 Thessalonians": "1TH",
-        "2 Thessalonians": "2TH",
-        "1 Timothy": "1TI",
-        "2 Timothy": "2TI",
-        "Titus": "TIT",
-        "Philemon": "PHM",
-        "Hebrews": "HEB",
-        "James": "JAS",
-        "1 Peter": "1PE",
-        "2 Peter": "2PE",
-        "1 John": "1JN",
-        "2 John": "2JN",
-        "3 John": "3JN",
-        "Jude": "JUD",
-        "Revelation": "REV",
-    }.get(book, book)
 
 
 def missing_baseline_verses(
