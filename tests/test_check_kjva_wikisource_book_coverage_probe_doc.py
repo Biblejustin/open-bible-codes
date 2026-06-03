@@ -1,3 +1,8 @@
+import pytest
+
+# Reads generated reports/; auto-skips when corpora/reports are absent.
+pytestmark = pytest.mark.requires_corpus
+
 import csv
 import tempfile
 from pathlib import Path

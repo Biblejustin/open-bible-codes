@@ -1,3 +1,8 @@
+import pytest
+
+# Reads generated reports/; auto-skips when corpora/reports are absent.
+pytestmark = pytest.mark.requires_corpus
+
 from pathlib import Path
 
 from scripts.check_doc_command_references import validate_doc_command_references

@@ -1,3 +1,8 @@
+import pytest
+
+# Reads generated reports/; auto-skips when corpora/reports are absent.
+pytestmark = pytest.mark.requires_corpus
+
 from pathlib import Path
 
 from scripts import check_wrr_public_handoff_docs as check

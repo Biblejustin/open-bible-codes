@@ -1,3 +1,8 @@
+import pytest
+
+# Reads generated reports/; auto-skips when corpora/reports are absent.
+pytestmark = pytest.mark.requires_corpus
+
 from pathlib import Path
 
 from scripts import check_kjva_open_bibles_candidate_source_audit_doc as check
