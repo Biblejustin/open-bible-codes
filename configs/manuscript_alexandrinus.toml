@@ -1,0 +1,9 @@
+name = "Codex Alexandrinus (02)"
+language = "greek"
+
+# CNTR MES transcription (CC BY-SA 4.0, Alan Bunning). First-hand reading.
+[[sources]]
+name = "Alexandrinus_02"
+format = "cntr_mes"
+path = "../data/raw/cntr/class 1/02.txt"
+hand = "first"

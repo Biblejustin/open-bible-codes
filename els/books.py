@@ -95,6 +95,18 @@ def canonical_book_code(book: str) -> str:
     return ENGLISH_NAME_TO_CODE.get(book, book)
 
 
+# CNTR / MES manuscript transcriptions reference books by number (40 = Matthew,
+# ... 66 = Revelation). Map to the 3-letter USFM codes the eBible Greek configs
+# use (MAT, MRK, ...), so manuscript corpora are ref-comparable with TR/BYZ/TCG.
+CNTR_BOOK_CODES: dict[int, str] = {
+    40: "MAT", 41: "MRK", 42: "LUK", 43: "JHN", 44: "ACT", 45: "ROM",
+    46: "1CO", 47: "2CO", 48: "GAL", 49: "EPH", 50: "PHP", 51: "COL",
+    52: "1TH", 53: "2TH", 54: "1TI", 55: "2TI", 56: "TIT", 57: "PHM",
+    58: "HEB", 59: "JAS", 60: "1PE", 61: "2PE", 62: "1JN", 63: "2JN",
+    64: "3JN", 65: "JUD", 66: "REV",
+}
+
+
 NT_BOOK_ORDER = {
     "Matt": 1,
     "Mark": 2,

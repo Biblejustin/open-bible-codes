@@ -20,6 +20,7 @@ SUPPORTED_SOURCE_FORMATS = {
     "oshb_wlc_dir",
     "sblgnt_text_dir",
     "mam_html_dir",
+    "cntr_mes",
 }
 CSV_REQUIRED_FIELDS = {
     "name",

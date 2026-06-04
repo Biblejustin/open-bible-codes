@@ -9,6 +9,7 @@ import html.parser
 import json
 import os
 import pickle
+import re
 import tomllib
 import xml.etree.ElementTree as ET
 from array import array
@@ -424,7 +425,81 @@ def _read_source(base_dir: Path, source_config: dict[str, Any]) -> Iterable[dict
     if source_format == "mam_html_dir":
         yield from _read_mam_html_dir(path, source_name, source_config)
         return
+    if source_format == "cntr_mes":
+        yield from _read_cntr_mes(path, source_name, source_config)
+        return
     raise ValueError(f"unsupported source format: {source_format}")
+
+
+# Resolve one MES scribal-correction unit to a single reading.
+# Grammar: (x{original} )?{base}( [a-c]{corrector})*
+#   hand="first"  -> the original-scribe reading (x-group if present, else base)
+#   hand="edited" -> the editor's base reading
+# Corrector layers (a/b/c) are dropped; the marker chars are non-Greek and would
+# be stripped by normalization anyway, but the brace contents must be chosen here
+# or both readings' letters would survive and double the text.
+_MES_CORRECTION = re.compile(
+    r"(?:x\{([^{}]*)\}\s+)?\{([^{}]*)\}(?:\s+[a-c]\{[^{}]*\})*"
+)
+_MES_MISSING = re.compile(r".\^")
+
+
+def _resolve_mes_corrections(body: str, hand: str) -> str:
+    def pick(match: re.Match[str]) -> str:
+        original, base = match.group(1), match.group(2)
+        if hand == "edited":
+            return base
+        return original if original is not None else base
+
+    return _MES_CORRECTION.sub(pick, body)
+
+
+def _read_cntr_mes(
+    path: Path,
+    source_name: str,
+    source_config: dict[str, Any],
+) -> Iterable[dict[str, str]]:
+    """Read a CNTR Manuscript Encoding Specification (MES) transcription.
+
+    Each line is ``BBCCCVVV <body>``. A body of ``-`` marks the verse absent
+    (skipped). Scribal corrections are resolved per ``hand`` ("first" original
+    scribe, default; or "edited"). Remaining MES markup (line/page/column breaks,
+    lacuna and damage markers, nomina-sacra ``=`` and numeric ``$`` flags,
+    supplied ``~``, alternate-verse ``⋄``) is non-Greek and is stripped by the
+    normalizer, so the abbreviated forms physically written are preserved as-is.
+
+    Options (source_config):
+      hand:        "first" (default) | "edited"
+      extant_only: drop editorially-supplied missing letters (``^``); default
+                   False, which keeps the reconstructed reading (dropping them
+                   fragments words).
+    """
+    from .books import CNTR_BOOK_CODES
+
+    encoding = source_config.get("encoding", "utf-8")
+    hand = str(source_config.get("hand", "first"))
+    extant_only = bool(source_config.get("extant_only", False))
+    book_label = source_config.get("book", "")
+
+    for raw_line in _read_text(path, encoding).splitlines():
+        if len(raw_line) < 9 or not raw_line[:8].isdigit():
+            continue
+        code, body = raw_line[:8], raw_line[9:].strip()
+        if not body or body.startswith("-"):
+            continue  # verse absent or empty
+        book_num, chapter, verse = int(code[:2]), str(int(code[2:5])), str(int(code[5:8]))
+        book = book_label or CNTR_BOOK_CODES.get(book_num, code[:2])
+        text = _resolve_mes_corrections(body, hand)
+        if extant_only:
+            text = _MES_MISSING.sub("", text)
+        yield {
+            "source": source_name,
+            "ref": f"{book} {chapter}:{verse}",
+            "book": book,
+            "chapter": chapter,
+            "verse": verse,
+            "text": text,
+        }
 
 
 def _read_csv(
