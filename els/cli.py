@@ -46,6 +46,13 @@ from .surface import (
     normalize_verses,
     surface_context_for_hit_indexed,
 )
+from .io import (
+    open_dict_reader,
+    open_dict_writer,
+    write_control_stats,
+    write_dict_rows,
+    write_run_manifest,
+)
 
 
 FIELDNAMES = [
@@ -2552,57 +2559,6 @@ def write_hits(hits, output_path: str | None) -> None:
 def write_batch_rows(rows: list[dict[str, object]], output_path: str | Path) -> None:
     with open_dict_writer(output_path, BATCH_FIELDNAMES) as writer:
         writer.writerows(rows)
-
-
-def write_dict_rows(
-    rows: list[dict[str, object]],
-    output_path: str,
-    fieldnames: list[str] | None = None,
-) -> None:
-    path = Path(output_path).expanduser()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    if fieldnames is None:
-        fieldnames = list(rows[0].keys()) if rows else []
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
-
-
-@contextmanager
-def open_dict_reader(input_path: str | Path):
-    path = Path(input_path).expanduser()
-    with path.open("r", encoding="utf-8", newline="") as handle:
-        yield csv.DictReader(handle)
-
-
-@contextmanager
-def open_dict_writer(output_path: str | Path, fieldnames: list[str]):
-    path = Path(output_path).expanduser()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
-        writer.writeheader()
-        yield writer
-
-
-def write_control_stats(rows: list[dict[str, object]], output_path: str | None) -> None:
-    payload = json.dumps(rows, ensure_ascii=False, indent=2)
-    if output_path:
-        path = Path(output_path).expanduser()
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(payload + "\n", encoding="utf-8")
-        return
-    print(payload, file=sys.stderr)
-
-
-def write_run_manifest(payload: dict[str, object], output_path: str) -> None:
-    path = Path(output_path).expanduser()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
 
 
 if __name__ == "__main__":
