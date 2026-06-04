@@ -119,6 +119,37 @@ carry. For this pool the framing is not "codes lost in the modern critical
 text" but "codes that depend on verses absent from essentially every other
 edition." Only 25 of 558 remain a genuine TR-specific residual.
 
+## Window Sensitivity
+
+The proximity test has one free parameter, `--window-verses`. The headline
+recovery is robust to it; the shared-omission floor does not depend on it:
+
+| window | BYZ preserved | omitted_in_byz_and_tcg | TCG only | residual |
+| ---: | ---: | ---: | ---: | ---: |
+| 0 | 237 | 192 | 86 | 43 |
+| 1 | 259 | 192 | 82 | 25 |
+| 2 | 260 | 192 | 81 | 25 |
+| 3 | 264 | 192 | 77 | 25 |
+| 5 | 274 | 192 | 68 | 24 |
+
+BYZ preservation is 259-264 across windows 1-3 (and already 237 at window 0,
+versus the strict 163), so the recovery is not a window artifact. The 192
+omitted floor is identical at every window, as it must be. `window=2` is not
+cherry-picked.
+
+## The 25-Hit Residual
+
+The 25 `tr_specific_within_window` hits are TR codes broken by an SBL omission
+where BYZ_NT and TCG_NT *retain* the verse but the exact ELS does not reproduce
+at that skip. They are all short terms (normalized length 3-6) at moderate-to-
+wide skips (|skip| 20-49, median 38) -- e.g. `ναος`, `αιμα`, `νωε`, `ιραν` --
+spanning verses such as Luke 23:17 and Matthew 23:14 whose surrounding wording
+differs between editions. This is squarely the high-coincidence regime the
+project flags elsewhere: short terms at wide skips. Whether any of the 25 is
+non-coincidental is a matched-control question (length- and skip-matched random
+terms), not something the cross-tradition screen settles. Treat the 25 as a
+review queue, not a result.
+
 ## Cautions
 
 - Raw break counts are not significance tests.
