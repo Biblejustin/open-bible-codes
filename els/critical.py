@@ -485,3 +485,54 @@ def common_suffix_len(left: str, right: str) -> int:
             break
         count += 1
     return count
+
+
+def verse_span_preserved(
+    other: Corpus,
+    other_ref_to_index: dict[str, int],
+    start_ref: str,
+    end_ref: str,
+    query: str,
+    skip: int,
+    *,
+    window_verses: int = 2,
+) -> bool:
+    """True if ``query`` occurs at ``skip`` within +/-``window_verses`` of the
+    ``[start_ref, end_ref]`` verse span in ``other``.
+
+    The strict equivalent-offset test (see the cross-tradition analysis) maps a
+    TR hit's letter offsets verse-locally into ``other`` and requires an exact
+    match. That fails whenever upstream word-length deltas (movable nu, article
+    presence, verb-ending variants) shift every offset, even when the same ELS
+    is physically present. This proximity test decouples preservation from
+    exact per-letter offset equivalence by scanning a small verse window.
+
+    Both refs must resolve in ``other``; the versification case (a ref present
+    under a shifted number) is a separate Stage-2 concern. Returns False on a
+    missing ref, empty query, or zero skip.
+
+    Invariant: any hit the strict test classes ``preserved_equivalent_offsets``
+    is also preserved here -- the strict match position lies inside the span,
+    hence inside the window. The window only ever adds matches.
+    """
+    if not query or skip == 0:
+        return False
+    if start_ref not in other_ref_to_index or end_ref not in other_ref_to_index:
+        return False
+    i_start = other_ref_to_index[start_ref]
+    i_end = other_ref_to_index[end_ref]
+    last = len(other.verses) - 1
+    lo_idx = max(0, min(i_start, i_end) - window_verses)
+    hi_idx = min(last, max(i_start, i_end) + window_verses)
+    lo = other.verses[lo_idx].norm_start
+    hi = other.verses[hi_idx].norm_end
+    text = other.text
+    text_len = len(text)
+    length = len(query)
+    for anchor in range(lo, hi + 1):
+        positions = [anchor + index * skip for index in range(length)]
+        if any(pos < lo or pos > hi or pos < 0 or pos >= text_len for pos in positions):
+            continue
+        if all(text[pos] == query[index] for index, pos in enumerate(positions)):
+            return True
+    return False

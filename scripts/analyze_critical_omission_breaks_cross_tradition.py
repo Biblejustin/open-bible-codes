@@ -10,6 +10,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from els.corpus import Corpus, load_corpus
+from els.critical import verse_span_preserved
 from scripts.analyze_critical_omission_breaks import TR_CONFIG
 
 
@@ -28,6 +29,12 @@ def main() -> int:
     parser.add_argument("--tcg-config", type=Path, default=TCG_CONFIG)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--manifest-out", type=Path, default=DEFAULT_MANIFEST)
+    parser.add_argument(
+        "--window-verses",
+        type=int,
+        default=2,
+        help="Verse window for the proximity preservation test (Stage 1).",
+    )
     args = parser.parse_args()
 
     tr = load_corpus(args.tr_config)
@@ -36,18 +43,26 @@ def main() -> int:
     tr_by_ref = {verse.ref: verse for verse in tr.verses}
     byz_by_ref = {verse.ref: verse for verse in byz.verses}
     tcg_by_ref = {verse.ref: verse for verse in tcg.verses}
+    byz_ref_to_index = {verse.ref: index for index, verse in enumerate(byz.verses)}
+    tcg_ref_to_index = {verse.ref: index for index, verse in enumerate(tcg.verses)}
 
     rows = []
     with args.examples.open("r", encoding="utf-8", newline="") as handle:
         for row in csv.DictReader(handle):
             byz_status = equivalent_status(row, tr, tr_by_ref, byz, byz_by_ref)
             tcg_status = equivalent_status(row, tr, tr_by_ref, tcg, tcg_by_ref)
+            byz_prox = proximity_status(row, tr_by_ref, byz, byz_ref_to_index, args.window_verses)
+            tcg_prox = proximity_status(row, tr_by_ref, tcg, tcg_ref_to_index, args.window_verses)
             out = dict(row)
             out["tr_hits"] = 1
             out["sbl_status"] = row.get("break_type", "")
             out["byz_status"] = byz_status
             out["tcg_status"] = tcg_status
             out["cross_tradition_class"] = classify_cross(byz_status, tcg_status)
+            out["window_verses"] = args.window_verses
+            out["byz_proximity_status"] = byz_prox
+            out["tcg_proximity_status"] = tcg_prox
+            out["cross_tradition_class_proximity"] = classify_cross_proximity(byz_prox, tcg_prox)
             rows.append(out)
 
     write_rows(args.out, rows)
@@ -60,6 +75,7 @@ def main() -> int:
                 "tr_config": str(args.tr_config.resolve()),
                 "byz_config": str(args.byz_config.resolve()),
                 "tcg_config": str(args.tcg_config.resolve()),
+                "window_verses": args.window_verses,
                 "rows": len(rows),
             },
             ensure_ascii=False,
@@ -105,6 +121,39 @@ def classify_cross(byz_status: str, tcg_status: str) -> str:
     if tcg:
         return "preserved_by_tcg"
     return "tr_specific_under_equivalent_offsets"
+
+
+def proximity_status(row, tr_by_ref, other: Corpus, other_ref_to_index, window: int) -> str:
+    """Stage-1 preservation: same query+skip within +/-window verses of the
+    hit's span, tolerating upstream word-length deltas the strict test rejects."""
+    start_ref = row["start_ref"]
+    end_ref = row["end_ref"]
+    if start_ref not in tr_by_ref or end_ref not in tr_by_ref:
+        return "tr_ref_missing"
+    if start_ref not in other_ref_to_index or end_ref not in other_ref_to_index:
+        return "ref_missing"
+    preserved = verse_span_preserved(
+        other,
+        other_ref_to_index,
+        start_ref,
+        end_ref,
+        row["normalized_term"],
+        int(row["skip"]),
+        window_verses=window,
+    )
+    return "preserved_within_verse_span" if preserved else "not_preserved_within_window"
+
+
+def classify_cross_proximity(byz_status: str, tcg_status: str) -> str:
+    byz = byz_status == "preserved_within_verse_span"
+    tcg = tcg_status == "preserved_within_verse_span"
+    if byz and tcg:
+        return "preserved_by_byz_and_tcg"
+    if byz:
+        return "preserved_by_byz"
+    if tcg:
+        return "preserved_by_tcg"
+    return "tr_specific_within_window"
 
 
 def write_rows(path: Path, rows: list[dict[str, object]]) -> None:

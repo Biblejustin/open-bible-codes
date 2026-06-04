@@ -46,6 +46,34 @@ Comparison status counts:
 - TCG_NT coordinate mismatch: 36.
 - TCG_NT not preserved equivalent offsets: 10.
 
+## Stage 1 Proximity (added)
+
+The strict equivalent-offset test maps each TR hit's letter offsets verse-locally
+into the comparison corpus and requires an exact match. It miscounts when
+upstream word-length deltas (movable nu, article presence, verb-ending variants)
+shift every offset even though the same ELS is physically present at the same
+skip. For BYZ_NT that conservative mapping put 150 hits in `coordinate_mismatch`
+that may in fact be preserved.
+
+The script now also emits a proximity classification that tolerates those
+deltas: `byz_proximity_status`, `tcg_proximity_status`,
+`cross_tradition_class_proximity`, and `window_verses`. A hit is
+`preserved_within_verse_span` when the same query occurs at the same skip within
+`--window-verses` (default 2) of the hit's verse span in the comparison corpus.
+The mechanic is `els.critical.verse_span_preserved`, unit-tested on toy corpora;
+the proximity test is a strict superset of the equivalent-offset test (any
+`preserved_equivalent_offsets` hit is also `preserved_within_verse_span`).
+
+The strict columns and counts above are unchanged. The proximity columns and
+their aggregate counts populate when the analysis is rerun:
+
+```bash
+python3 -m scripts.analyze_critical_omission_breaks_cross_tradition --window-verses 2
+```
+
+This is Stage 1 (word-length-delta tolerance). Versification cases (a ref
+present under a shifted number, the `ref_missing` pool) are a separate Stage 2.
+
 ## Cautions
 
 - Raw break counts are not significance tests.
