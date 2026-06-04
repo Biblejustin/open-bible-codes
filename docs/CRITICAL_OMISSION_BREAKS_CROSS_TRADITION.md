@@ -73,28 +73,51 @@ python3 -m scripts.analyze_critical_omission_breaks_cross_tradition --window-ver
 Proximity status counts (window 2):
 
 - BYZ_NT preserved within verse span: 260.
-- BYZ_NT ref missing: 192.
+- BYZ_NT omitted in comparison tradition: 192.
 - BYZ_NT not preserved within window: 106.
 - TCG_NT preserved within verse span: 341.
-- TCG_NT ref missing: 192.
+- TCG_NT omitted in comparison tradition: 192.
 - TCG_NT not preserved within window: 25.
 
 Proximity cross-tradition classes:
 
 - `preserved_by_byz_and_tcg`: 260.
+- `omitted_in_byz_and_tcg`: 192.
 - `preserved_by_tcg`: 81.
-- `tr_specific_within_window`: 217.
+- `tr_specific_within_window`: 25.
 
 Read: tolerating word-length deltas recovers 97 BYZ and 21 TCG hits the strict
-test mislabelled. BYZ_NT preservation rises from 163 to 260, so a majority of
-the "broken" TR hits demonstrably exist at the same skip in the Byzantine and/or
-critical tradition. The "codes lost in the modern text" framing weakens further:
-for most of these hits the change is SBL-specific spacing plus text-critical
-word-form editing, not genuine loss. The remaining hard floor is the 192
-`ref_missing` (versification) hits, which Stage 1 does not touch.
+test mislabelled. BYZ_NT preservation rises from 163 to 260. Of the 558 broken
+hits, 260 (47%) sit at the same skip in both the Byzantine and critical
+traditions, 81 (15%) in the critical text only, and just 25 (4%) are genuinely
+TR-specific yet unexplained.
 
-This is Stage 1 (word-length-delta tolerance). Versification cases (a ref
-present under a shifted number, the `ref_missing` pool) are a separate Stage 2.
+## Shared-Omission Floor (Stage 2 result)
+
+The 192 hits that do not resolve in BYZ_NT or TCG_NT are **not** a versification
+artifact. They trace to seven verses the Byzantine Majority text and the
+critical text both omit, with the verse number simply skipped (Acts 8 runs
+...36, 38, ...), not renumbered:
+
+- Romans 16:25, 16:26, 16:27 (the doxology, absent from BYZ Romans 16 which ends
+  at v24).
+- Acts 8:37, Acts 15:34, Acts 24:7.
+- Luke 17:36.
+
+A versification remap would be wrong here: there is no renumbered verse to map
+to, so mapping a hit's letters onto a neighbour would fabricate preservation.
+The honest classification is `omitted_in_comparison_tradition` (the
+`byz_omitted_refs` / `tcg_omitted_refs` columns name the verse), aggregated as
+`omitted_in_byz_and_tcg`. `els.critical.ref_absence_kind` distinguishes an
+omitted verse (book+chapter present, verse number absent) from a chapter that is
+genuinely absent; it is unit-tested on toy corpora.
+
+The finding: these 192 hits depend on verses nearly unique to the TR/Erasmian
+tradition -- verses that entered TR through a few late manuscripts and
+back-translation from the Latin, and that TR's own Byzantine family does not
+carry. For this pool the framing is not "codes lost in the modern critical
+text" but "codes that depend on verses absent from essentially every other
+edition." Only 25 of 558 remain a genuine TR-specific residual.
 
 ## Cautions
 

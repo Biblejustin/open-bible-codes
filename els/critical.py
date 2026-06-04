@@ -536,3 +536,39 @@ def verse_span_preserved(
         if all(text[pos] == query[index] for index, pos in enumerate(positions)):
             return True
     return False
+
+
+def ref_absence_kind(
+    ref: str,
+    present_refs,
+    present_book_chapters: set[tuple[str, str]],
+) -> str:
+    """Classify why ``ref`` is absent from a comparison corpus.
+
+    Returns one of:
+
+    - ``present`` -- the ref is in the corpus.
+    - ``omitted_verse`` -- the ref's book+chapter exist in the corpus but the
+      verse number does not. The tradition skips this verse number (e.g. Acts 8
+      running ...36, 38, ...), which is a *shared omission*, not a versification
+      renumbering. A TR ELS hit whose endpoint is such a verse genuinely cannot
+      be reconstructed in the corpus; the omitted letters are not there.
+    - ``chapter_absent`` -- the book+chapter is not in the corpus at all.
+    - ``unparseable`` -- the ref is not of the form ``Book C:V``.
+
+    ``present_book_chapters`` is a set of ``(book, chapter)`` pairs the corpus
+    contains, where ``book`` matches the leading token(s) of the ref.
+    """
+    if ref in present_refs:
+        return "present"
+    if " " not in ref:
+        return "unparseable"
+    head, tail = ref.rsplit(" ", 1)
+    if ":" not in tail:
+        return "unparseable"
+    chapter, verse = tail.split(":", 1)
+    if not chapter.isdigit() or not verse.isdigit():
+        return "unparseable"
+    if (head, chapter) in present_book_chapters:
+        return "omitted_verse"
+    return "chapter_absent"

@@ -10,7 +10,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from els.corpus import Corpus, load_corpus
-from els.critical import verse_span_preserved
+from els.critical import ref_absence_kind, verse_span_preserved
 from scripts.analyze_critical_omission_breaks import TR_CONFIG
 
 
@@ -45,14 +45,20 @@ def main() -> int:
     tcg_by_ref = {verse.ref: verse for verse in tcg.verses}
     byz_ref_to_index = {verse.ref: index for index, verse in enumerate(byz.verses)}
     tcg_ref_to_index = {verse.ref: index for index, verse in enumerate(tcg.verses)}
+    byz_book_chapters = {(verse.book, verse.chapter) for verse in byz.verses}
+    tcg_book_chapters = {(verse.book, verse.chapter) for verse in tcg.verses}
 
     rows = []
     with args.examples.open("r", encoding="utf-8", newline="") as handle:
         for row in csv.DictReader(handle):
             byz_status = equivalent_status(row, tr, tr_by_ref, byz, byz_by_ref)
             tcg_status = equivalent_status(row, tr, tr_by_ref, tcg, tcg_by_ref)
-            byz_prox = proximity_status(row, tr_by_ref, byz, byz_ref_to_index, args.window_verses)
-            tcg_prox = proximity_status(row, tr_by_ref, tcg, tcg_ref_to_index, args.window_verses)
+            byz_prox, byz_omitted = proximity_status(
+                row, tr_by_ref, byz, byz_ref_to_index, byz_book_chapters, args.window_verses
+            )
+            tcg_prox, tcg_omitted = proximity_status(
+                row, tr_by_ref, tcg, tcg_ref_to_index, tcg_book_chapters, args.window_verses
+            )
             out = dict(row)
             out["tr_hits"] = 1
             out["sbl_status"] = row.get("break_type", "")
@@ -62,6 +68,8 @@ def main() -> int:
             out["window_verses"] = args.window_verses
             out["byz_proximity_status"] = byz_prox
             out["tcg_proximity_status"] = tcg_prox
+            out["byz_omitted_refs"] = byz_omitted
+            out["tcg_omitted_refs"] = tcg_omitted
             out["cross_tradition_class_proximity"] = classify_cross_proximity(byz_prox, tcg_prox)
             rows.append(out)
 
@@ -123,15 +131,36 @@ def classify_cross(byz_status: str, tcg_status: str) -> str:
     return "tr_specific_under_equivalent_offsets"
 
 
-def proximity_status(row, tr_by_ref, other: Corpus, other_ref_to_index, window: int) -> str:
-    """Stage-1 preservation: same query+skip within +/-window verses of the
-    hit's span, tolerating upstream word-length deltas the strict test rejects."""
+def proximity_status(
+    row, tr_by_ref, other: Corpus, other_ref_to_index, other_book_chapters, window: int
+) -> tuple[str, str]:
+    """Stage-1 preservation plus shared-omission classification.
+
+    Returns ``(status, omitted_refs)`` where ``omitted_refs`` names the hit's
+    endpoint verses that the comparison tradition omits (``;``-joined, empty
+    otherwise). Status values:
+
+    - ``tr_ref_missing`` -- endpoint absent from TR itself (data issue).
+    - ``omitted_in_comparison_tradition`` -- an endpoint verse is absent because
+      the comparison tradition omits it (skipped verse number). The hit cannot
+      be preserved there; the letters are genuinely gone. This is a *shared*
+      omission, not a versification renumbering.
+    - ``ref_missing`` -- an endpoint is absent for another reason (chapter/book
+      absent), so the comparison is undefined.
+    - ``preserved_within_verse_span`` / ``not_preserved_within_window`` -- both
+      endpoints resolve; the proximity scan did or did not find the ELS.
+    """
     start_ref = row["start_ref"]
     end_ref = row["end_ref"]
     if start_ref not in tr_by_ref or end_ref not in tr_by_ref:
-        return "tr_ref_missing"
-    if start_ref not in other_ref_to_index or end_ref not in other_ref_to_index:
-        return "ref_missing"
+        return "tr_ref_missing", ""
+    missing = [ref for ref in (start_ref, end_ref) if ref not in other_ref_to_index]
+    if missing:
+        kinds = {ref: ref_absence_kind(ref, other_ref_to_index, other_book_chapters) for ref in missing}
+        omitted = [ref for ref, kind in kinds.items() if kind == "omitted_verse"]
+        if omitted and all(kind == "omitted_verse" for kind in kinds.values()):
+            return "omitted_in_comparison_tradition", ";".join(omitted)
+        return "ref_missing", ";".join(omitted)
     preserved = verse_span_preserved(
         other,
         other_ref_to_index,
@@ -141,7 +170,8 @@ def proximity_status(row, tr_by_ref, other: Corpus, other_ref_to_index, window: 
         int(row["skip"]),
         window_verses=window,
     )
-    return "preserved_within_verse_span" if preserved else "not_preserved_within_window"
+    status = "preserved_within_verse_span" if preserved else "not_preserved_within_window"
+    return status, ""
 
 
 def classify_cross_proximity(byz_status: str, tcg_status: str) -> str:
@@ -153,6 +183,11 @@ def classify_cross_proximity(byz_status: str, tcg_status: str) -> str:
         return "preserved_by_byz"
     if tcg:
         return "preserved_by_tcg"
+    omit = "omitted_in_comparison_tradition"
+    if byz_status == omit and tcg_status == omit:
+        return "omitted_in_byz_and_tcg"
+    if byz_status == omit or tcg_status == omit:
+        return "omitted_in_one_tradition"
     return "tr_specific_within_window"
 
 
