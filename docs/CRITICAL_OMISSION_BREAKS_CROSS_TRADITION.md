@@ -145,10 +145,20 @@ at that skip. They are all short terms (normalized length 3-6) at moderate-to-
 wide skips (|skip| 20-49, median 38) -- e.g. `ναος`, `αιμα`, `νωε`, `ιραν` --
 spanning verses such as Luke 23:17 and Matthew 23:14 whose surrounding wording
 differs between editions. This is squarely the high-coincidence regime the
-project flags elsewhere: short terms at wide skips. Whether any of the 25 is
-non-coincidental is a matched-control question (length- and skip-matched random
-terms), not something the cross-tradition screen settles. Treat the 25 as a
-review queue, not a result.
+project flags elsewhere: short terms at wide skips.
+
+A base-rate estimate (via `els.statistics.estimated_search_space` times each
+term's letter-frequency product in BYZ_NT) makes the point concrete: every
+residual term is expected to occur in BYZ_NT *by chance* across skips 2-50 from
+dozens to tens of thousands of times -- `ευα` (Eve) ~43,000, `νωε` (Noah)
+~17,500, `ναος` (temple) ~4,600, and even the 6-letter `σενααρ` ~18. A string
+that the text produces thousands of times by chance is not meaningfully
+"absent" from a tradition because one windowed instance fails to reproduce.
+
+So the cross-tradition screen surfaces no credible TR-specific code: the 25 are
+chance-dominated short strings. A length- and skip-matched shuffled-term control
+would formalize this, but the base rates already show the expected outcome.
+Treat the 25 as a review queue, not a result.
 
 ## Cautions
 
