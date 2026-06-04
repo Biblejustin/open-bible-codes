@@ -86,6 +86,10 @@ from .rows import (
     write_batch_rows,
     write_hits,
 )
+from .commands.extensions import cmd_extensions
+from .commands.matrix import cmd_matrix
+from .commands.skip_plan import cmd_skip_plan
+from .commands.stats import cmd_stats
 
 
 STRONG_EXTENSION_TYPES = {
@@ -437,12 +441,6 @@ def add_dynamic_max_skip_args(parser: argparse.ArgumentParser) -> None:
     )
 
 
-def cmd_stats(args: argparse.Namespace) -> int:
-    corpus = load_corpus(args.config)
-    print(corpus.summary_json())
-    return 0
-
-
 def cmd_search(args: argparse.Namespace) -> int:
     terms = collect_terms(args.term, args.terms_file)
     if not terms:
@@ -517,181 +515,6 @@ def cmd_search(args: argparse.Namespace) -> int:
         )
     if args.shuffles:
         write_control_stats(control_rows, args.stats_out)
-    return 0
-
-
-def cmd_extensions(args: argparse.Namespace) -> int:
-    corpus = load_corpus(args.config)
-    lexicon = build_extension_lexicon(corpus, max_phrase_words=args.phrase_words)
-    corpus_label = args.corpus_label or corpus.name
-    input_hit_count = 0
-    hit_count = 0
-    skipped_hit_count = 0
-    extension_count = 0
-
-    with open_dict_reader(args.hits) as rows, open_dict_writer(
-        args.out,
-        EXTENSION_FIELDNAMES,
-    ) as writer:
-        for row in rows:
-            input_hit_count += 1
-            row_corpus = row.get("corpus", "")
-            if row_corpus:
-                if not args.corpus_label:
-                    raise SystemExit(
-                        "hits file has corpus labels; pass --corpus-label to select one"
-                    )
-                if row_corpus != args.corpus_label:
-                    skipped_hit_count += 1
-                    continue
-            hit = hit_from_row(row)
-            hit = hit_with_corpus_center(corpus, hit)
-            hit_count += 1
-            for extension in extensions_for_hit(
-                corpus,
-                hit,
-                lexicon,
-                max_before=args.max_before,
-                max_after=args.max_after,
-                include_both_sided=args.include_both_sided,
-                max_extensions=args.max_extensions_per_hit,
-            ):
-                writer.writerow(extension_row(corpus_label, hit, extension))
-                extension_count += 1
-
-    if args.manifest_out:
-        write_run_manifest(
-            {
-                "tool": "edls",
-                "version": __version__,
-                "created_utc": datetime.now(UTC).isoformat(),
-                "config": str(Path(args.config).expanduser().resolve()),
-                "hits": str(Path(args.hits).expanduser().resolve()),
-                "corpus": corpus.summary(),
-                "max_before": args.max_before,
-                "max_after": args.max_after,
-                "phrase_words": args.phrase_words,
-                "include_both_sided": args.include_both_sided,
-                "max_extensions_per_hit": args.max_extensions_per_hit,
-                "lexicon_entries": len(lexicon.entries),
-                "input_hit_count": input_hit_count,
-                "skipped_hit_count": skipped_hit_count,
-                "hit_count": hit_count,
-                "extension_count": extension_count,
-            },
-            args.manifest_out,
-        )
-    return 0
-
-
-def cmd_matrix(args: argparse.Namespace) -> int:
-    corpus = load_corpus(args.config)
-    corpus_label = args.corpus_label or corpus.name
-    input_hit_count = 0
-    skipped_hit_count = 0
-    hit_count = 0
-    letter_count = 0
-    summary_rows: list[dict[str, object]] = []
-
-    with open_dict_reader(args.hits) as rows, open_dict_writer(
-        args.out,
-        MATRIX_LETTER_FIELDNAMES,
-    ) as writer:
-        for row in rows:
-            input_hit_count += 1
-            row_corpus = row.get("corpus", "")
-            if row_corpus:
-                if not args.corpus_label:
-                    raise SystemExit(
-                        "hits file has corpus labels; pass --corpus-label to select one"
-                    )
-                if row_corpus != args.corpus_label:
-                    skipped_hit_count += 1
-                    continue
-            hit = hit_with_corpus_center(corpus, hit_from_row(row))
-            hit_count += 1
-            hit_index = hit_count
-            letters = matrix_letters(
-                corpus,
-                hit,
-                hit_index=hit_index,
-                row_width=args.row_width,
-            )
-            width = args.row_width or abs(hit.skip)
-            for letter in letters:
-                writer.writerow(matrix_letter_row(corpus_label, hit, letter, width))
-            letter_count += len(letters)
-            summary_rows.append(
-                matrix_summary_row(
-                    corpus_label,
-                    hit,
-                    matrix_summary(hit, letters, row_width=args.row_width),
-                )
-            )
-
-    if args.summary_out:
-        write_dict_rows(summary_rows, args.summary_out, MATRIX_SUMMARY_FIELDNAMES)
-    if args.manifest_out:
-        write_run_manifest(
-            {
-                "tool": "edls",
-                "version": __version__,
-                "created_utc": datetime.now(UTC).isoformat(),
-                "config": str(Path(args.config).expanduser().resolve()),
-                "hits": str(Path(args.hits).expanduser().resolve()),
-                "corpus": corpus.summary(),
-                "corpus_label": corpus_label,
-                "row_width": args.row_width,
-                "input_hit_count": input_hit_count,
-                "skipped_hit_count": skipped_hit_count,
-                "hit_count": hit_count,
-                "letter_count": letter_count,
-            },
-            args.manifest_out,
-        )
-    return 0
-
-
-def cmd_skip_plan(args: argparse.Namespace) -> int:
-    terms = collect_terms(args.term, args.terms_file)
-    if not terms:
-        raise SystemExit("provide --term or --terms-file")
-
-    corpus = load_corpus(args.config)
-    rows: list[dict[str, object]] = []
-    for term in terms:
-        normalized = normalize_for_corpus(corpus, term)
-        plan = plan_skip_cap(
-            corpus.text,
-            term,
-            normalized,
-            min_skip=args.min_skip,
-            max_skip_limit=args.max_skip_limit,
-            direction=args.direction,
-            target_expected_hits=args.target_expected_hits,
-        )
-        rows.append(skip_plan_row(plan))
-
-    write_dict_rows(rows, args.out, SKIP_PLAN_FIELDNAMES)
-    if args.manifest_out:
-        write_run_manifest(
-            {
-                "tool": "edls",
-                "version": __version__,
-                "mode": "skip-plan",
-                "created_utc": datetime.now(UTC).isoformat(),
-                "config": str(Path(args.config).expanduser().resolve()),
-                "corpus": corpus.summary(),
-                "terms": terms,
-                "min_skip": args.min_skip,
-                "max_skip_limit": args.max_skip_limit,
-                "direction": args.direction,
-                "target_expected_hits": args.target_expected_hits,
-                "rows": len(rows),
-                "model": "independent letters from corpus frequency",
-            },
-            args.manifest_out,
-        )
     return 0
 
 
