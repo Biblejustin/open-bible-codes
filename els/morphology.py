@@ -10,40 +10,12 @@ from pathlib import Path
 from .corpus import OT_BOOK_ORDER
 from .normalization import normalize_greek, normalize_hebrew
 from .word_counts import DEFAULT_MULTIPLES, multiples_for_count
+from .books import MORPHGNT_BOOKS
 
 
 OSIS_NS = "{http://www.bibletechnologies.net/2003/OSIS/namespace}"
 CONTENT_POS = {"noun", "verb", "adjective"}
 
-MORPHGNT_BOOKS = {
-    "01": "Matt",
-    "02": "Mark",
-    "03": "Luke",
-    "04": "John",
-    "05": "Acts",
-    "06": "Rom",
-    "07": "1Cor",
-    "08": "2Cor",
-    "09": "Gal",
-    "10": "Eph",
-    "11": "Phil",
-    "12": "Col",
-    "13": "1Thess",
-    "14": "2Thess",
-    "15": "1Tim",
-    "16": "2Tim",
-    "17": "Titus",
-    "18": "Phlm",
-    "19": "Heb",
-    "20": "Jas",
-    "21": "1Pet",
-    "22": "2Pet",
-    "23": "1John",
-    "24": "2John",
-    "25": "3John",
-    "26": "Jude",
-    "27": "Rev",
-}
 
 GREEK_POS = {
     "N-": "noun",

@@ -1,11 +1,11 @@
 """Cross-map consistency guards for the book tables.
 
-These lock invariants across the four book maps that currently live in separate
-modules (els.corpus, els.critical, els.morphology, els.books). They are pure
-data checks -- no corpora needed -- and they guard the duplicate-order class of
-bug (an earlier OT_BOOK_ORDER had `Ruth` twice) plus cross-map reference drift.
-When the maps are eventually consolidated into els.books, these keep the move
-honest.
+These lock invariants across the four book maps. All four now live in els.books
+and are re-exported from els.corpus / els.critical / els.morphology for
+backward compatibility; this suite imports them through those re-exports so it
+also verifies the re-exports stay wired. They are pure data checks -- no corpora
+needed -- and they guard the duplicate-order class of bug (an earlier
+OT_BOOK_ORDER had `Ruth` twice) plus cross-map reference drift.
 """
 
 from __future__ import annotations

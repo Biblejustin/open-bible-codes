@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any
 
 from .normalization import normalize_text
+from .books import NT_BOOK_ORDER, OT_BOOK_ORDER
 
 
 CORPUS_CACHE_VERSION = 3
@@ -717,78 +718,6 @@ def split_mam_verse_id(value: str) -> tuple[str, str]:
 def normalize_html_text(value: str) -> str:
     return " ".join(value.replace("\xa0", " ").split())
 
-
-NT_BOOK_ORDER = {
-    "Matt": 1,
-    "Mark": 2,
-    "Luke": 3,
-    "John": 4,
-    "Acts": 5,
-    "Rom": 6,
-    "1Cor": 7,
-    "2Cor": 8,
-    "Gal": 9,
-    "Eph": 10,
-    "Phil": 11,
-    "Col": 12,
-    "1Thess": 13,
-    "2Thess": 14,
-    "1Tim": 15,
-    "2Tim": 16,
-    "Titus": 17,
-    "Phlm": 18,
-    "Heb": 19,
-    "Jas": 20,
-    "1Pet": 21,
-    "2Pet": 22,
-    "1John": 23,
-    "2John": 24,
-    "3John": 25,
-    "Jude": 26,
-    "Rev": 27,
-}
-
-OT_BOOK_ORDER = {
-    "Gen": 1,
-    "Exod": 2,
-    "Lev": 3,
-    "Num": 4,
-    "Deut": 5,
-    "Josh": 6,
-    "Judg": 7,
-    "1Sam": 8,
-    "2Sam": 9,
-    "1Kgs": 10,
-    "2Kgs": 11,
-    "Isa": 12,
-    "Jer": 13,
-    "Ezek": 14,
-    "Hos": 15,
-    "Joel": 16,
-    "Amos": 17,
-    "Obad": 18,
-    "Jonah": 19,
-    "Mic": 20,
-    "Nah": 21,
-    "Hab": 22,
-    "Zeph": 23,
-    "Hag": 24,
-    "Zech": 25,
-    "Mal": 26,
-    "Ps": 27,
-    "Prov": 28,
-    "Job": 29,
-    "Song": 30,
-    "Ruth": 31,
-    "Lam": 32,
-    "Eccl": 33,
-    "Esth": 34,
-    "Dan": 35,
-    "Ezra": 36,
-    "Neh": 37,
-    "1Chr": 38,
-    "2Chr": 39,
-}
 
 UXLC_BOOK_ORDER = {
     "Genesis": 1,
