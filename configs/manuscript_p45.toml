@@ -1,0 +1,9 @@
+name = "Papyrus 45 (P45)"
+language = "greek"
+
+# CNTR MES transcription (CC BY-SA 4.0, Alan Bunning). First-hand reading.
+[[sources]]
+name = "P45"
+format = "cntr_mes"
+path = "../data/raw/cntr/class 1/P45.txt"
+hand = "first"
