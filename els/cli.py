@@ -3,39 +3,24 @@
 from __future__ import annotations
 
 import argparse
-import json
 import os
 import sys
-import time
-from bisect import bisect_left
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
-from heapq import nlargest, nsmallest
 from pathlib import Path
 
 from . import __version__
 from .corpus import load_corpus
-from .extensions import (
-    build_extension_lexicon,
-    extensions_for_hit,
-)
-from .gematria import hebrew_year_additive, hebrew_year_compact, hebrew_year_remainder
-from .matrix import matrix_letters, matrix_summary
-from .pairing import cylindrical_hit_distance, hit_center, pair_metrics, span_gap
 from .search import (
     ELSHit,
     build_hit,
-    count_els_terms_by_lanes,
     find_els,
     iter_els_query_matches_by_lanes,
     iter_forward_matches_in_lanes,
     make_lanes,
-    normalize_for_corpus,
     process_context,
 )
-from .skip_plan import max_skip_for_mode, plan_skip_cap
-from .stats import shuffled_letter_controls
 from .surface import (
     SurfaceTerm,
     build_surface_context_index,
@@ -43,48 +28,22 @@ from .surface import (
     surface_context_for_hit_indexed,
 )
 from .io import (
-    open_dict_reader,
     open_dict_writer,
-    write_control_stats,
     write_dict_rows,
     write_run_manifest,
 )
 from .term_io import (
     accepted_term_languages,
     build_surface_terms,
-    collect_terms,
-    is_safe_report_label,
     parse_corpus_args,
-    read_term_rows,
     read_term_rows_many,
 )
 from .rows import (
-    BATCH_FIELDNAMES,
-    EXTENSION_FIELDNAMES,
-    EXTENSION_SUMMARY_FIELDNAMES,
-    EXTENSION_TOP_FIELDNAMES,
     FIELDNAMES,
-    MATRIX_LETTER_FIELDNAMES,
-    MATRIX_SUMMARY_FIELDNAMES,
-    PAIR_FIELDNAMES,
-    SKIP_PLAN_FIELDNAMES,
     SURFACE_CONTEXT_FIELDNAMES,
-    add_extension_summary_group,
-    extension_rank_key,
-    extension_row,
-    extension_score,
-    extension_summary_rows,
     hit_from_row,
     hit_with_corpus_center,
-    int_or_empty,
-    int_or_zero,
-    matrix_letter_row,
-    matrix_summary_row,
-    open_hits_writer,
-    skip_plan_row,
     surface_context_row,
-    write_batch_rows,
-    write_hits,
 )
 from .commands.batch import cmd_batch, cmd_batch_many
 from .commands.extension_summary import cmd_extension_summary
@@ -95,7 +54,7 @@ from .commands.pairs import cmd_pairs
 from .commands.search import cmd_search
 from .commands.skip_plan import cmd_skip_plan
 from .commands.stats import cmd_stats
-from .maxskip import effective_max_skip_for_normalized, effective_max_skip_for_query
+from .maxskip import effective_max_skip_for_normalized
 
 
 MAX_SKIP_MODES = ("fixed", "full-span", "letters-per-term")
