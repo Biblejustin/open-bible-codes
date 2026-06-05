@@ -106,9 +106,12 @@ If the Septuagint and the Masoretic Text disagree, a pre-Christian Hebrew copy i
 the tiebreaker. At seven famous divergence verses the Scrolls **side with the
 Septuagint six times and with the Masoretic Text once.** The one Masoretic case is
 Isaiah 7:14, where the Hebrew is in fact shared (1QIsaa reads the same consonants,
-almah) and "virgin" is the Septuagint's rendering, not a different Hebrew. Two of
-the cases were confirmed directly against 1QIsaa in a licensed resource; the rest
-are documented from published scholarship. (`analyze_dss_witness_cases`)
+almah) and "virgin" is the Septuagint's rendering, not a different Hebrew. Four of
+the seven are now confirmed directly against the scrolls in licensed resources:
+Isaiah 7:14 and 53:11 against 1QIsaa, and Deuteronomy 32:8 and Psalm 22:16 in The
+Dead Sea Scrolls Bible (Abegg, Flint, Ulrich), which read "the children of God"
+and "they have pierced my hands and my feet." The remaining three are documented
+from published scholarship. (`analyze_dss_witness_cases`)
 
 The picture is consistent with theme 2: the Septuagint was not inventing readings
 but translating an ancient Hebrew that the Masoretic tradition later diverged from.
@@ -118,7 +121,7 @@ A high view of inspiration does not require a flat view of textual history.
 
 The claim (Ivan Panin, relayed by Chuck Missler) is that sevenfold counts of
 words, letters, and grammatical classes run through Scripture so densely as to
-prove inspiration. We tested it against the corpora and against Panin's own
+establish inspiration. We tested it against the corpora and against Panin's own
 primary source.
 
 **Genesis 1:1 is robust.** Its seven structural features (7 words, 28 letters, the
@@ -138,6 +141,20 @@ text the 58 surface forms of Matthew 1:1-11 collapse to **exactly his 49 lemmas*
 Hezekiah, Judah, Josiah, Uzziah, Manasseh, Solomon). A general lemmatization rule
 reproduces the 49 with no hand-tuning. The TR and Byzantine give 50, so the count
 is precise but text-specific. Panin counted accurately. (`analyze_panin_claims`)
+
+**And under published morphology, his whole feature set reproduces.** Using
+MorphGNT (the SBLGNT tagged with lemma and part of speech), every one of Panin's
+Matthew 1:1-11 features comes out exactly: 49 vocabulary words, 28 vowel-initial
+and 21 consonant-initial, 266 letters with 140 vowels and 126 consonants, 35
+recurring and 14 once, 7 in more than one form and 42 in one, 42 nouns and 7 not,
+and 28 male ancestors (he even excludes Zerah, named in the line but not of it).
+The lone seam is proper versus common nouns, 36 to 6 against his 35 to 7, which is
+only whether Christos is a name or a title. His other passage vocabularies land
+within one (Matthew 1:18-25 is 77 exactly, Matthew 2 is 161 exactly). So the
+surface-form mismatch found earlier was a lemmatization artifact, not his error;
+he counted with great care. One figure is text-bound, though: the genealogy's
+vocabulary gematria is 42,364 on his Westcott-Hort text, a multiple of seven, but
+42,452 on the SBLGNT, which is not. (`analyze_panin_morphology`)
 
 **There is no global excess of sevens.** On a fixed, pre-registered panel of
 fourteen numeric features applied to every verse, the mean number of heptadic hits
@@ -160,10 +177,10 @@ making 1 John 5 total 1,981 letters, a multiple of seven. The Long Ending's own
 the form the Byzantine manuscripts carry is 166 words, which is not.
 (`analyze_panin_passages`)
 
-**Verdict.** The individual counts are genuine and often exact. They prove design
-only if you grant Panin his text, his counting unit, and his freedom to choose
-which of an inexhaustible set of features to report. Withhold any one and the
-sevens fall to chance. Numerics cannot adjudicate which reading is original; that
+**Verdict.** The individual counts are genuine and often exact. They establish
+design only if you grant Panin his text, his counting unit, and his freedom to
+choose which of an inexhaustible set of features to report. Withhold any one and
+the sevens fall to chance. Numerics cannot adjudicate which reading is original; that
 question belongs to manuscripts, versions, and the fathers.
 
 ---
@@ -180,8 +197,8 @@ reward precision over slogans, and they undercut the proofs on both wings.
   the Greek, and the Dead Sea Scrolls show the Greek was translating a real ancient
   Hebrew. The textual history is plural, and a high view of inspiration is better
   served by that history as it is than by flattening it.
-- Against the numeric proof of inspiration: there is no excess of sevens, and the
-  one place the counts are marshaled to settle a textual question, they invert.
+- Against the numeric argument for inspiration: there is no excess of sevens, and
+  the one place the counts are marshaled to settle a textual question, they invert.
 
 Inspiration, on this evidence, is carried by what the text says, not by a hidden
 arithmetic and not by a single privileged edition.
@@ -213,6 +230,7 @@ python3 -m scripts.analyze_dss_witness_cases
 python3 -m scripts.analyze_heptadic_counts
 python3 -m scripts.analyze_panin_claims
 python3 -m scripts.analyze_panin_passages
+python3 -m scripts.analyze_panin_morphology
 ```
 
 Outputs land under `reports/<tool>/` as `manifest.json` plus CSVs. A focused
