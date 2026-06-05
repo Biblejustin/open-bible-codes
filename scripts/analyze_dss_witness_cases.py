@@ -43,6 +43,7 @@ CASES = [
         "dss_reading": "ha-almah (same consonants as MT)",
         "dss_sides_with": "MT",
         "key_word": "almah",
+        "confirmed_via": "1QIsaa via a licensed Logos resource",
         "note": ("1QIsaa reads the same Hebrew word as the MT (almah, young woman); "
                  "the 'virgin' is the LXX's rendering, not a different Hebrew. "
                  "Confirmed against 1QIsaa."),
@@ -54,6 +55,7 @@ CASES = [
         "dss_reading": "adds 'light' (or) after 'he shall see'",
         "dss_sides_with": "LXX",
         "key_word": "or (light)",
+        "confirmed_via": "1QIsaa via a licensed Logos resource",
         "note": ("The Scrolls and the LXX (phos) have the Servant 'see light'; the "
                  "MT lacks the word. Confirmed against 1QIsaa (reads 'or')."),
     },
@@ -64,8 +66,10 @@ CASES = [
         "dss_reading": "bene elohim (sons of God), with LXX",
         "dss_sides_with": "LXX",
         "key_word": "bene elohim",
+        "confirmed_via": "The Dead Sea Scrolls Bible (Abegg, Flint, Ulrich), licensed",
         "note": ("4QDeutj reads 'sons of God' with the LXX (angeloi/huioi theou) "
-                 "against the MT's 'sons of Israel'. Documented standard reading."),
+                 "against the MT's 'sons of Israel'. Confirmed: the Dead Sea Scrolls "
+                 "Bible renders Deuteronomy 32:8 'the children of God'."),
     },
     {
         "label": "Deuteronomy 32:43 angels worship him",
@@ -84,9 +88,11 @@ CASES = [
         "dss_reading": "kaaru (they dug/pierced), closer to LXX",
         "dss_sides_with": "LXX",
         "key_word": "kaaru",
+        "confirmed_via": "The Dead Sea Scrolls Bible (Abegg, Flint, Ulrich), licensed",
         "note": ("The Nahal Hever Psalms scroll reads a verb form (kaaru) closer to "
                  "the LXX 'they pierced' than the MT's kaari ('like a lion'). "
-                 "Documented standard reading."),
+                 "Confirmed: the Dead Sea Scrolls Bible renders Psalm 22:16 "
+                 "'they have pierced my hands and my feet'."),
     },
     {
         "label": "Jeremiah shorter text",
@@ -144,8 +150,9 @@ def main() -> int:
             "mt_text_found": bool(lookup(wlc, case["mt"])),
             "lxx_text_found": bool(lookup(lxx, case["lxx"])),
             "nt_text_found": bool(lookup(nt, case["nt"])) if case["nt"] else "",
-            "verification": ("confirmed against 1QIsaa via licensed resource"
-                             if case["label"].startswith("Isaiah")
+            "confirmed_via": case.get("confirmed_via", ""),
+            "verification": (f"confirmed via {case['confirmed_via']}"
+                             if case.get("confirmed_via")
                              else "documented (standard scholarship)"),
             "note": case["note"],
         })
@@ -159,16 +166,24 @@ def main() -> int:
         "created_utc": datetime.now(UTC).isoformat(),
         "live_corpora": {"MT": "OSHB WLC", "LXX": "eBible Greek LXX", "NT": "SBLGNT"},
         "dss_column": ("documented factual readings (which tradition each scroll "
-                       "backs), cited to published scholarship; Isaiah 7:14 confirmed "
-                       "against 1QIsaa via a licensed resource. The copyrighted DSS "
-                       "editions are not reproduced."),
+                       "backs), cited to published scholarship. Four cases are "
+                       "confirmed directly against the scrolls via licensed Logos "
+                       "resources: Isaiah 7:14 and 53:11 against 1QIsaa, and "
+                       "Deuteronomy 32:8 and Psalm 22:16 in The Dead Sea Scrolls Bible "
+                       "(Abegg, Flint, Ulrich). The copyrighted DSS editions are not "
+                       "reproduced; only the factual reading is recorded."),
         "cases": len(rows),
+        "scroll_confirmed": sum(1 for r in rows if r["confirmed_via"]),
         "dss_sides_with": dict(sides),
         "reading": ("At these divergence points the Scrolls side with the LXX "
                     f"{sides.get('LXX', 0)} of {len(rows)} times and with the MT "
                     f"{sides.get('MT', 0)} time. The LXX was translating an ancient "
                     "Hebrew the MT later diverged from, except at Isaiah 7:14 where "
-                    "the Hebrew is shared and the LXX renders almah as 'virgin'."),
+                    "the Hebrew is shared and the LXX renders almah as 'virgin'. "
+                    f"{sum(1 for r in rows if r['confirmed_via'])} of {len(rows)} are "
+                    "now confirmed directly against the scrolls in licensed resources "
+                    "(Deuteronomy 32:8 reads 'the children of God', Psalm 22:16 'they "
+                    "have pierced'); the rest are documented from published scholarship."),
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     confirmed = sum(1 for r in rows if r["verification"].startswith("confirmed"))
