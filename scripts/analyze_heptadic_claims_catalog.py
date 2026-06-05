@@ -69,6 +69,26 @@ DOCUMENTED = [
     {"name": "Zechariah 4: the lampstand of seven lamps", "lang": "heb", "book": "Zech",
      "spans": [(4, range(1, 15))], "lemmas": SEVEN,
      "note": "seven lamps, seven pipes, the seven eyes of the LORD"},
+    {"name": "Genesis 4: sevenfold vengeance for Cain, seventy-sevenfold for Lamech",
+     "lang": "heb", "book": "Gen", "spans": [(4, range(1, 27))], "lemmas": SEVEN,
+     "note": "'sevenfold' (4:15) and 'seventy-sevenfold' (4:24)"},
+    {"name": "Genesis 7-8: the sevens of the flood", "lang": "heb", "book": "Gen",
+     "spans": [(7, range(1, 25)), (8, range(1, 23))], "lemmas": SEVEN,
+     "note": "clean animals taken by sevens, seven days of waiting, the seventh month"},
+    {"name": "Leviticus 23: the feast calendar", "lang": "heb", "book": "Lev",
+     "spans": [(23, range(1, 45))], "lemmas": SEVEN,
+     "note": "seven annual feasts, the seven-day festivals, seven weeks to Pentecost, "
+             "the feasts of the seventh month"},
+    {"name": "Leviticus 25: the sabbatical year and the jubilee (seven sevens)",
+     "lang": "heb", "book": "Lev", "spans": [(25, range(1, 56))], "lemmas": SEVEN,
+     "note": "every seventh year a sabbath for the land; after seven sevens of years, "
+             "the jubilee"},
+    {"name": "2 Kings 5: Naaman dips seven times in the Jordan", "lang": "heb",
+     "book": "2Kgs", "spans": [(5, range(1, 28))], "lemmas": SEVEN,
+     "note": "Elisha's command (5:10) and Naaman's obedience (5:14)"},
+    {"name": "Matthew 18:22: forgive seventy times seven", "lang": "grk", "book": "Matt",
+     "spans": [(18, [21, 22])], "lemmas": {"ἑβδομηκοντάκις"},
+     "note": "'not seven times, but seventy times seven', the measure of forgiveness"},
 ]
 
 # John's seven "I am" sayings: the predicated metaphors. A curated list (the raw
@@ -118,6 +138,11 @@ def main() -> int:
                        "supporting_count": len(JOHN_I_AM),
                        "note": f"the predicated metaphors at {', '.join(r for r, _ in JOHN_I_AM)}; "
                                f"total ego-eimi in John is {ego_eimi_total(grows)}"})
+    documented.append({"name": "Matthew 6:9-13: the seven petitions of the Lord's Prayer",
+                       "supporting_count": 7,
+                       "note": "hallowed be your name, your kingdom come, your will be done, "
+                               "daily bread, forgive our debts, lead us not into temptation, "
+                               "deliver us from evil"})
 
     confirmed = sum(1 for r in counted if r["confirmed"])
 
@@ -139,9 +164,11 @@ def main() -> int:
             "sevenfold 'and it was good', the seven-day creation account names God "
             "(Elohim) 35 times (5x7), Jericho's account carries 14 sevens (2x7), "
             "Matthew gives seven woes, and Revelation seven beatitudes. The documented "
-            "structures (Daniel's seventy sevens, Isaiah's sevenfold Spirit, Matthew's "
-            "three fourteens, Zechariah's lampstand, John's seven 'I am' sayings) are "
-            "real divisions of the text the authors signal. These hold because the "
+            "structures, from the flood's sevens and the feast calendar and the jubilee "
+            "of seven sevens to Daniel's seventy weeks, Isaiah's sevenfold Spirit, "
+            "Matthew's three fourteens, John's seven 'I am' sayings, and the seven "
+            "petitions of the Lord's Prayer, are real divisions of the text the authors "
+            "signal. These hold because the "
             "seven is in the words, on the surface, where the number carries the "
             "theology of completeness. That is the difference from the hidden "
             "letter-count claims, which sit at chance: Scripture's genuine sevens were "
