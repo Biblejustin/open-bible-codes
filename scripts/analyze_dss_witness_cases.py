@@ -78,8 +78,10 @@ CASES = [
         "dss_reading": "longer Song of Moses, with LXX (worship him, all gods/angels)",
         "dss_sides_with": "LXX",
         "key_word": "longer reading",
+        "confirmed_via": "The Dead Sea Scrolls Bible (Abegg, Flint, Ulrich), licensed",
         "note": ("4QDeutq carries the longer reading the LXX has and the MT dropped; "
-                 "Hebrews 1:6 quotes the longer form. Documented standard reading."),
+                 "Hebrews 1:6 quotes the longer form. Confirmed: the Dead Sea Scrolls "
+                 "Bible reads 'and bow down to him all you gods' at Deuteronomy 32:43."),
     },
     {
         "label": "Psalm 22:16 pierced",
@@ -101,8 +103,10 @@ CASES = [
         "dss_reading": "shorter Hebrew Jeremiah, with the shorter LXX",
         "dss_sides_with": "LXX",
         "key_word": "shorter edition",
+        "confirmed_via": "The Dead Sea Scrolls Bible (Abegg, Flint, Ulrich), licensed",
         "note": ("4QJerb attests the short Hebrew Jeremiah behind the LXX, against "
-                 "the longer MT edition. Documented standard reading."),
+                 "the longer MT edition. Confirmed: the Dead Sea Scrolls Bible runs "
+                 "the scroll from Jeremiah 10:4 to 10:9, lacking the MT's verses 5-8."),
     },
     {
         "label": "1 Samuel 1-2 fuller text",
@@ -111,8 +115,10 @@ CASES = [
         "dss_reading": "fuller Hebrew, repeatedly with the LXX",
         "dss_sides_with": "LXX",
         "key_word": "LXX-aligned",
+        "confirmed_via": "The Dead Sea Scrolls Bible (Abegg, Flint, Ulrich), licensed",
         "note": ("4QSama agrees with the LXX against the MT at many points in "
-                 "Samuel. Documented standard reading."),
+                 "Samuel. Confirmed: the Dead Sea Scrolls Bible reads 'a three-year-old "
+                 "bull' at 1 Samuel 1:24, with the LXX (the MT reads 'three bulls')."),
     },
 ]
 
@@ -165,13 +171,13 @@ def main() -> int:
         "tool": "dss_witness_cases",
         "created_utc": datetime.now(UTC).isoformat(),
         "live_corpora": {"MT": "OSHB WLC", "LXX": "eBible Greek LXX", "NT": "SBLGNT"},
-        "dss_column": ("documented factual readings (which tradition each scroll "
-                       "backs), cited to published scholarship. Four cases are "
-                       "confirmed directly against the scrolls via licensed Logos "
-                       "resources: Isaiah 7:14 and 53:11 against 1QIsaa, and "
-                       "Deuteronomy 32:8 and Psalm 22:16 in The Dead Sea Scrolls Bible "
-                       "(Abegg, Flint, Ulrich). The copyrighted DSS editions are not "
-                       "reproduced; only the factual reading is recorded."),
+        "dss_column": ("factual readings (which tradition each scroll backs). All "
+                       "seven cases are confirmed directly against the scrolls via "
+                       "licensed Logos resources: Isaiah 7:14 and 53:11 against 1QIsaa, "
+                       "and Deuteronomy 32:8, Deuteronomy 32:43, Psalm 22:16, Jeremiah "
+                       "10, and 1 Samuel 1:24 in The Dead Sea Scrolls Bible (Abegg, "
+                       "Flint, Ulrich). The copyrighted editions are not reproduced; "
+                       "only the factual reading is recorded."),
         "cases": len(rows),
         "scroll_confirmed": sum(1 for r in rows if r["confirmed_via"]),
         "dss_sides_with": dict(sides),
@@ -180,10 +186,12 @@ def main() -> int:
                     f"{sides.get('MT', 0)} time. The LXX was translating an ancient "
                     "Hebrew the MT later diverged from, except at Isaiah 7:14 where "
                     "the Hebrew is shared and the LXX renders almah as 'virgin'. "
-                    f"{sum(1 for r in rows if r['confirmed_via'])} of {len(rows)} are "
-                    "now confirmed directly against the scrolls in licensed resources "
-                    "(Deuteronomy 32:8 reads 'the children of God', Psalm 22:16 'they "
-                    "have pierced'); the rest are documented from published scholarship."),
+                    f"All {len(rows)} are now confirmed directly against the scrolls in "
+                    "licensed resources: 1QIsaa for the two Isaiah cases, and The Dead "
+                    "Sea Scrolls Bible for the rest ('the children of God' at "
+                    "Deuteronomy 32:8, 'bow down to him all you gods' at 32:43, 'they "
+                    "have pierced' at Psalm 22:16, the shorter text at Jeremiah 10, and "
+                    "'a three-year-old bull' at 1 Samuel 1:24)."),
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     confirmed = sum(1 for r in rows if r["verification"].startswith("confirmed"))

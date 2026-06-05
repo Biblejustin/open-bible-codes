@@ -106,12 +106,14 @@ If the Septuagint and the Masoretic Text disagree, a pre-Christian Hebrew copy i
 the tiebreaker. At seven famous divergence verses the Scrolls **side with the
 Septuagint six times and with the Masoretic Text once.** The one Masoretic case is
 Isaiah 7:14, where the Hebrew is in fact shared (1QIsaa reads the same consonants,
-almah) and "virgin" is the Septuagint's rendering, not a different Hebrew. Four of
-the seven are now confirmed directly against the scrolls in licensed resources:
-Isaiah 7:14 and 53:11 against 1QIsaa, and Deuteronomy 32:8 and Psalm 22:16 in The
-Dead Sea Scrolls Bible (Abegg, Flint, Ulrich), which read "the children of God"
-and "they have pierced my hands and my feet." The remaining three are documented
-from published scholarship. (`analyze_dss_witness_cases`)
+almah) and "virgin" is the Septuagint's rendering, not a different Hebrew. All
+seven are now confirmed directly against the scrolls in licensed resources: Isaiah
+7:14 and 53:11 against 1QIsaa, and the rest in The Dead Sea Scrolls Bible (Abegg,
+Flint, Ulrich), which reads "the children of God" at Deuteronomy 32:8, "bow down
+to him all you gods" at 32:43 (the line Hebrews 1:6 quotes), "they have pierced my
+hands and my feet" at Psalm 22:16, the shorter text lacking the MT's verses at
+Jeremiah 10, and "a three-year-old bull" at 1 Samuel 1:24.
+(`analyze_dss_witness_cases`)
 
 The picture is consistent with theme 2: the Septuagint was not inventing readings
 but translating an ancient Hebrew that the Masoretic tradition later diverged from.
