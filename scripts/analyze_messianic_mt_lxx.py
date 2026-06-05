@@ -42,22 +42,30 @@ LXX_CONFIG = Path("configs/example_ebible_grclxx.toml")
 NT_CONFIG = Path("configs/example_sblgnt.toml")
 OUT_DIR = Path("reports/messianic_mt_lxx")
 
-# name, mt(book,ch,vs), lxx(book,ch,vs), nt(book,ch,vs), the issue, greek key stem
+# name, mt(book,ch,vs), lxx(book,ch,vs), nt(book,ch,vs), the issue,
+# lxx_key (LXX-distinctive Greek the NT may share), mt_key (the Hebrew-side Greek
+# the NT may share instead). The NT's choice between them marks which reading it
+# treats as the inspired one at that point.
 LOCI = [
     ("Isaiah 7:14 the virgin", ("Isa", "7", "14"), ("ISA", "7", "14"), ("Matt", "1", "23"),
-     "Hebrew almah (young woman) vs LXX parthenos (virgin)", "παρθεν"),
+     "Hebrew almah (young woman) vs LXX parthenos (virgin)", "παρθεν", ""),
     ("Psalm 40:6 a body prepared", ("Ps", "40", "7"), ("PSA", "39", "7"), ("Heb", "10", "5"),
-     "Hebrew 'ears you opened' vs LXX 'a body you prepared for me'", "σωμα"),
+     "Hebrew 'ears you opened' vs LXX 'a body you prepared for me'", "σωμα", ""),
     ("Deut 32:43 angels worship him", ("Deut", "32", "43"), ("DEU", "32", "43"), ("Heb", "1", "6"),
-     "LXX (and Qumran) 'let all God's angels worship him,' absent from MT", "προσκυν"),
+     "LXX (and Qumran) 'let all God's angels worship him,' absent from MT", "προσκυν", ""),
     ("Amos 9:12 the rest of men", ("Amos", "9", "12"), ("AMO", "9", "12"), ("Acts", "15", "17"),
-     "Hebrew 'remnant of Edom' vs LXX 'that the rest of men may seek the Lord'", "εκζητη"),
+     "Hebrew 'remnant of Edom' vs LXX 'that the rest of men may seek the Lord'", "εκζητη", ""),
     ("Isaiah 53:7 led as a sheep", ("Isa", "53", "7"), ("ISA", "53", "7"), ("Acts", "8", "32"),
-     "the Ethiopian eunuch reads the LXX of the Suffering Servant", "σφαγη"),
+     "the Ethiopian eunuch reads the LXX of the Suffering Servant", "σφαγη", ""),
     ("Psalm 110:1 the LORD to my Lord", ("Ps", "110", "1"), ("PSA", "109", "1"), ("Matt", "22", "44"),
-     "Jesus' own argument from the Messiah being David's Lord", "κυρι"),
+     "Jesus' own argument from the Messiah being David's Lord", "κυρι", ""),
     ("Micah 5:2 Bethlehem", ("Mic", "5", "1"), ("MIC", "5", "1"), ("Matt", "2", "6"),
-     "the birthplace of the ruler", "βηθλε"),
+     "the birthplace of the ruler", "βηθλε", ""),
+    # counter-cases: where the NT follows the Hebrew against the Greek
+    ("Hosea 11:1 my son", ("Hos", "11", "1"), ("HOS", "11", "1"), ("Matt", "2", "15"),
+     "Hebrew 'my son' (singular) vs LXX 'his children'; Matthew has 'my son'", "τεκν", "υιον"),
+    ("Zech 12:10 whom they pierced", ("Zech", "12", "10"), ("ZEC", "12", "10"), ("John", "19", "37"),
+     "Hebrew 'pierced' vs LXX 'mocked/danced'; John has 'pierced'", "κατωρχ", "εξεκεντ"),
 ]
 
 
@@ -86,6 +94,18 @@ def has_stem(text: str, stem: str) -> bool:
     return any(t.startswith(stem) for t in greek_tokens(text))
 
 
+def nt_alignment(nt_text: str, lxx_key: str, mt_key: str) -> str:
+    """Which reading the NT carries at a divergence: the LXX-distinctive word or
+    the Hebrew-side word. The NT's choice is the inspired reading at that point."""
+    has_lxx = bool(lxx_key) and has_stem(nt_text, lxx_key)
+    has_mt = bool(mt_key) and has_stem(nt_text, mt_key)
+    if has_lxx and not has_mt:
+        return "follows_LXX"
+    if has_mt and not has_lxx:
+        return "follows_MT"
+    return "ambiguous"
+
+
 def main() -> int:
     wlc = verse_map(load_corpus(WLC_CONFIG))
     lxx = verse_map(load_corpus(LXX_CONFIG))
@@ -93,7 +113,7 @@ def main() -> int:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     rows = []
-    for name, mt_ref, lxx_ref, nt_ref, issue, key in LOCI:
+    for name, mt_ref, lxx_ref, nt_ref, issue, lxx_key, mt_key in LOCI:
         mt_text = lookup(wlc, mt_ref)
         lxx_text = lookup(lxx, lxx_ref)
         nt_text = lookup(nt, nt_ref)
@@ -102,12 +122,15 @@ def main() -> int:
             "mt_ref": " ".join(mt_ref), "lxx_ref": " ".join(lxx_ref), "nt_ref": " ".join(nt_ref),
             "mt_hebrew": mt_text, "lxx_greek": lxx_text, "nt_greek": nt_text,
             "nt_to_lxx_overlap": greek_overlap(nt_text, lxx_text) if (nt_text and lxx_text) else "",
-            "greek_key_in_lxx": has_stem(lxx_text, key),
-            "greek_key_in_nt": has_stem(nt_text, key),
+            "nt_follows": nt_alignment(nt_text, lxx_key, mt_key),
+            "lxx_key_in_nt": bool(lxx_key) and has_stem(nt_text, lxx_key),
+            "mt_key_in_nt": bool(mt_key) and has_stem(nt_text, mt_key),
             "all_three_found": bool(mt_text and lxx_text and nt_text),
         })
 
     found = sum(r["all_three_found"] for r in rows)
+    follows_lxx = sum(r["nt_follows"] == "follows_LXX" for r in rows)
+    follows_mt = sum(r["nt_follows"] == "follows_MT" for r in rows)
     overlaps = [r["nt_to_lxx_overlap"] for r in rows if isinstance(r["nt_to_lxx_overlap"], float)]
     mean_overlap = round(sum(overlaps) / len(overlaps), 4) if overlaps else 0.0
 
@@ -119,18 +142,20 @@ def main() -> int:
         "created_utc": datetime.now(UTC).isoformat(),
         "sources": {"MT": "OSHB WLC", "LXX": "eBible Greek LXX", "NT": "SBLGNT"},
         "loci": len(rows), "loci_all_three_found": found,
+        "nt_follows_lxx": follows_lxx, "nt_follows_mt": follows_mt,
         "mean_nt_to_lxx_overlap": mean_overlap,
-        "reading": ("High nt_to_lxx_overlap means the NT quotation tracks the Greek "
-                    "Septuagint. Where the LXX and the Hebrew differ (virgin/young "
-                    "woman, body/ears, angels-worship), the NT follows the LXX."),
+        "reading": ("nt_follows records which reading the NT carries at each "
+                    "divergence. It mostly follows the Greek Septuagint (virgin, "
+                    "body, angels-worship), and at Hosea 11:1 and Zechariah 12:10 it "
+                    "follows the Hebrew. The inspired NT is the arbiter; its reading "
+                    "is the inspired one at each point."),
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     print(f"messianic loci: {len(rows)}  all-three-found: {found}  "
-          f"mean NT-to-LXX overlap: {mean_overlap}")
-    print(f"\n{'locus':30s} {'NT~LXX':>7} {'keyLXX':>7} {'keyNT':>6}")
+          f"NT follows LXX: {follows_lxx}  NT follows MT/Hebrew: {follows_mt}")
+    print(f"\n{'locus':30s} {'NT~LXX':>7}  NT follows")
     for r in rows:
-        print(f"{r['locus']:30s} {str(r['nt_to_lxx_overlap']):>7} "
-              f"{str(r['greek_key_in_lxx'])[0]:>7} {str(r['greek_key_in_nt'])[0]:>6}")
+        print(f"{r['locus']:30s} {str(r['nt_to_lxx_overlap']):>7}  {r['nt_follows']}")
     print("\nIsaiah 7:14 side by side:")
     iso = rows[0]
     print(f"  MT : {iso['mt_hebrew']}")

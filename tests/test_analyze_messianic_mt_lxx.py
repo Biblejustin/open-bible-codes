@@ -7,7 +7,17 @@ from scripts.analyze_messianic_mt_lxx import (
     greek_tokens,
     has_stem,
     lookup,
+    nt_alignment,
 )
+
+
+def test_nt_alignment_follows_lxx_or_mt() -> None:
+    # NT carries the LXX-distinctive word (virgin), no Hebrew-side key
+    assert nt_alignment("ἰδοὺ ἡ παρθένος", "παρθεν", "") == "follows_LXX"
+    # NT carries the Hebrew-side word (son), not the LXX word (children)
+    assert nt_alignment("ἐκάλεσα τὸν υἱόν μου", "τεκν", "υιον") == "follows_MT"
+    # NT carries neither distinctive key
+    assert nt_alignment("καὶ εἶπεν αὐτοῖς", "παρθεν", "υιον") == "ambiguous"
 
 
 def test_greek_tokens_normalizes() -> None:
