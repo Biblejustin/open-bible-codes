@@ -191,6 +191,14 @@ stars, lampstands, seals, trumpets, bowls, plagues, thunders, horns, and heads.
 That is authorial design on the surface, where seven carries the theology of
 completeness and consummation. (`analyze_heptadic_structure`)
 
+The named structural claims check out the same way, by counting the right word in
+the right passage: the sevenfold "and it was good" in Genesis 1, the thirty-five
+Elohims of the seven-day creation account (5x7), Jericho's fourteen sevens (2x7),
+the seven woes of Matthew 23, and the seven beatitudes of Revelation, five of five
+exact, with Daniel's seventy weeks, Isaiah's sevenfold Spirit, Matthew's three
+fourteens, and John's seven "I am" sayings recorded alongside.
+(`analyze_heptadic_claims_catalog`)
+
 **Verdict.** The individual counts are genuine and often exact. They establish
 design only if you grant Panin his text, his counting unit, and his freedom to
 choose which of an inexhaustible set of features to report. Withhold any one and
@@ -250,6 +258,7 @@ python3 -m scripts.analyze_panin_claims
 python3 -m scripts.analyze_panin_passages
 python3 -m scripts.analyze_panin_morphology
 python3 -m scripts.analyze_heptadic_structure   # the seven the authors wrote (real, surface)
+python3 -m scripts.analyze_heptadic_claims_catalog   # named structural heptads, checked
 ```
 
 Outputs land under `reports/<tool>/` as `manifest.json` plus CSVs. A focused
