@@ -1,7 +1,7 @@
 # Documentation Index
 
 Docs root: `docs`
-Documents indexed: 430
+Documents indexed: 431
 
 ## Controls
 
@@ -87,6 +87,7 @@ Documents indexed: 430
 | Open Bible Codes Findings Overview | `PROJECT_FINDINGS_OVERVIEW.md` |
 | Public Baseline Findings | `PUBLIC_BASELINE_FINDINGS.md` |
 | Targeted Terms Report | `TARGETED_TERMS_FINDINGS.md` |
+| Textual Witness and Heptadic Structure: What the Data Show | `TEXTUAL_WITNESS_AND_HEPTADIC_FINDINGS.md` |
 | Windows CPU Broad Skip 2..500 Bible-Control Findings | `WINDOWS_CPU_BROAD_2_500_FINDINGS.md` |
 
 ## Methodology
