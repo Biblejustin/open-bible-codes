@@ -179,11 +179,25 @@ making 1 John 5 total 1,981 letters, a multiple of seven. The Long Ending's own
 the form the Byzantine manuscripts carry is 166 words, which is not.
 (`analyze_panin_passages`)
 
+**But the heptadic structure that is real is the one the authors wrote.** There is
+a genuine sevenfold design in Scripture, and it is not hidden. The Greek
+word-family for seven occurs 108 times in the New Testament, and 60 of them, more
+than half, are in Revelation, ten times the rate of any other book. The Hebrew
+family occurs 610 times, concentrated in the Torah, the literature of creation,
+sabbath, the feasts, the sabbatical year, and the jubilee (Leviticus, Numbers, and
+Genesis the densest of the large books). And Revelation names its architecture out
+loud: 18 distinct "seven" things across 51 mentions, seven churches, spirits,
+stars, lampstands, seals, trumpets, bowls, plagues, thunders, horns, and heads.
+That is authorial design on the surface, where seven carries the theology of
+completeness and consummation. (`analyze_heptadic_structure`)
+
 **Verdict.** The individual counts are genuine and often exact. They establish
 design only if you grant Panin his text, his counting unit, and his freedom to
 choose which of an inexhaustible set of features to report. Withhold any one and
 the sevens fall to chance. Numerics cannot adjudicate which reading is original; that
-question belongs to manuscripts, versions, and the fathers.
+question belongs to manuscripts, versions, and the fathers. Scripture is heptadic,
+but the way the authors made it so, by saying seven, not by encoding it beneath the
+words.
 
 ---
 
@@ -201,6 +215,8 @@ reward precision over slogans, and they undercut the proofs on both wings.
   served by that history as it is than by flattening it.
 - Against the numeric argument for inspiration: there is no excess of sevens, and
   the one place the counts are marshaled to settle a textual question, they invert.
+  The genuine sevenfold design is the overt one the authors wrote, dense in the
+  Torah and in Revelation, not a hidden arithmetic.
 
 Inspiration, on this evidence, is carried by what the text says, not by a hidden
 arithmetic and not by a single privileged edition.
@@ -233,6 +249,7 @@ python3 -m scripts.analyze_heptadic_counts
 python3 -m scripts.analyze_panin_claims
 python3 -m scripts.analyze_panin_passages
 python3 -m scripts.analyze_panin_morphology
+python3 -m scripts.analyze_heptadic_structure   # the seven the authors wrote (real, surface)
 ```
 
 Outputs land under `reports/<tool>/` as `manifest.json` plus CSVs. A focused
