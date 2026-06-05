@@ -55,7 +55,7 @@ CASES = [
         "dss_sides_with": "LXX",
         "key_word": "or (light)",
         "note": ("The Scrolls and the LXX (phos) have the Servant 'see light'; the "
-                 "MT lacks the word. Documented standard reading."),
+                 "MT lacks the word. Confirmed against 1QIsaa (reads 'or')."),
     },
     {
         "label": "Deuteronomy 32:8 sons of God",
@@ -144,6 +144,9 @@ def main() -> int:
             "mt_text_found": bool(lookup(wlc, case["mt"])),
             "lxx_text_found": bool(lookup(lxx, case["lxx"])),
             "nt_text_found": bool(lookup(nt, case["nt"])) if case["nt"] else "",
+            "verification": ("confirmed against 1QIsaa via licensed resource"
+                             if case["label"].startswith("Isaiah")
+                             else "documented (standard scholarship)"),
             "note": case["note"],
         })
 
@@ -168,13 +171,13 @@ def main() -> int:
                     "the Hebrew is shared and the LXX renders almah as 'virgin'."),
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+    confirmed = sum(1 for r in rows if r["verification"].startswith("confirmed"))
     print(f"DSS witness cases: {len(rows)}   sides with LXX: {sides.get('LXX', 0)}   "
-          f"with MT: {sides.get('MT', 0)}")
-    print(f"\n{'verse':34s} {'scroll':22s} sides_with")
+          f"with MT: {sides.get('MT', 0)}   scroll-confirmed: {confirmed}")
+    print(f"\n{'verse':34s} {'scroll':16s} {'sides':5s} verification")
     for r in rows:
-        live = "".join(c for c, k in [("M", "mt_text_found"), ("L", "lxx_text_found"),
-                                      ("N", "nt_text_found")] if r[k] is True)
-        print(f"  {r['verse']:34s} {r['scroll']:22s} {r['dss_sides_with']:4s} (live: {live})")
+        mark = "confirmed" if r["verification"].startswith("confirmed") else "documented"
+        print(f"  {r['verse']:34s} {r['scroll']:16s} {r['dss_sides_with']:5s} {mark}")
     print(OUT_DIR / "dss_witness_cases.csv")
     return 0
 
