@@ -167,6 +167,17 @@ verses, about one in eight.** Its features are also correlated, which is how a
 showcase reaches "seven features" from two or three independent facts.
 (`analyze_panin_claims`)
 
+**Parts of speech are at chance too.** Counting nouns, verbs, and adjectives per
+chapter (where a unit holds enough words to test), the fraction whose count is a
+multiple of seven runs 0.119 to 0.149 across both Testaments, straddling the
+chance rate of 0.143 for every part of speech. So Panin's "42 nouns" in Matthew
+1:1-11 is a selected passage, not a feature of the grammar. And the famous
+enumerated lists confirm the deeper point: their counts are 5, 6, 7, 9, 10, and
+12, not a uniform seven (the fruit of the Spirit is nine, the gifts nine and seven
+and five, the commandments ten, the tribes and apostles twelve). Biblical number
+symbolism is real but plural, each number carrying its own sense.
+(`analyze_pos_heptads`)
+
 **The structure is not load-bearing.** Panin used the numerics to defend disputed
 passages. A direct removal test refutes that use. Removing the Long Ending makes
 Mark 16 total 133 words, a multiple of seven (with it, 299, not); the whole book
@@ -259,6 +270,7 @@ python3 -m scripts.analyze_panin_passages
 python3 -m scripts.analyze_panin_morphology
 python3 -m scripts.analyze_heptadic_structure   # the seven the authors wrote (real, surface)
 python3 -m scripts.analyze_heptadic_claims_catalog   # named structural heptads, checked
+python3 -m scripts.analyze_pos_heptads          # do parts of speech come in sevens? (no)
 ```
 
 Outputs land under `reports/<tool>/` as `manifest.json` plus CSVs. A focused
