@@ -28,6 +28,7 @@ from difflib import SequenceMatcher
 from pathlib import Path
 
 from els.corpus import load_corpus
+from els.textstats import verse_map
 from els.normalization import normalize_greek
 
 LXX_CONFIG = Path("configs/example_ebible_grclxx.toml")
@@ -77,13 +78,6 @@ QUOTATIONS = [
     ("1Pet 2:22 <- Isa 53:9", ("1Pet", "2", "22"), ("ISA", "53", "9")),
     ("1Pet 5:5 <- Prov 3:34", ("1Pet", "5", "5"), ("PRO", "3", "34")),
 ]
-
-
-def verse_map(corpus) -> dict[tuple[str, str, str], str]:
-    out = {}
-    for v in corpus.verses:
-        out[(str(v.book).upper(), str(v.chapter), str(v.verse))] = v.raw_text
-    return out
 
 
 def lookup(vmap: dict, ref: tuple[str, str, str]) -> str:

@@ -32,7 +32,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from els.morphology import read_morphgnt_tokens, read_oshb_tokens
-from scripts.analyze_heptadic_counts import is_heptad
+from els.textstats import is_heptad
 
 MORPHGNT_DIR = Path("data/raw/morphgnt/sblgnt")
 OSHB_DIR = Path("data/raw/oshb/wlc")
@@ -82,7 +82,7 @@ def unit_pos_counts(rows, level: str) -> dict[tuple, Counter]:
     return out
 
 
-def heptad_rate(unit_counts: dict[tuple, Counter], pos: str) -> float:
+def pos_heptad_rate(unit_counts: dict[tuple, Counter], pos: str) -> float:
     """Fraction of units whose count of `pos` is a nonzero multiple of seven."""
     if not unit_counts:
         return 0.0
@@ -103,7 +103,7 @@ def corpus_rows(rows, label: str) -> list[dict]:
         for lvl, uc in levels.items():
             row[f"{lvl}_units"] = len(uc)
             row[f"{lvl}_mean"] = mean_count(uc, pos)
-            row[f"{lvl}_heptad_rate"] = heptad_rate(uc, pos)
+            row[f"{lvl}_heptad_rate"] = pos_heptad_rate(uc, pos)
         out.append(row)
     return out
 

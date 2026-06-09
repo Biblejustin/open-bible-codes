@@ -2,11 +2,18 @@
 
 from __future__ import annotations
 
+from els.textstats import HEBREW_SEVEN_STRONGS
 from scripts.analyze_heptadic_structure import (
+    HEBREW_SEVEN,
     book_counts,
     density_rows,
     seven_collocations,
 )
+
+
+def test_hebrew_seven_glosses_match_the_shared_strongs_set() -> None:
+    # the gloss dict keys must stay bound to the canonical Strong's set
+    assert set(HEBREW_SEVEN) == set(HEBREW_SEVEN_STRONGS)
 
 
 def test_book_counts_tallies_seven_and_words() -> None:

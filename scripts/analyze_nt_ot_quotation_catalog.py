@@ -31,6 +31,7 @@ from difflib import SequenceMatcher
 from pathlib import Path
 
 from els.corpus import load_corpus
+from els.textstats import verse_map
 from els.normalization import normalize_greek
 
 LXX_CONFIG = Path("configs/example_ebible_grclxx.toml")
@@ -325,13 +326,6 @@ Rev 1:7 | Zec 12:10
 Rev 2:27 | Psa 2:9
 Rev 4:8 | Isa 6:3
 """
-
-
-def verse_map(corpus) -> dict[tuple[str, str, str], str]:
-    out = {}
-    for v in corpus.verses:
-        out[(str(v.book).upper(), str(v.chapter), str(v.verse))] = v.raw_text
-    return out
 
 
 def greek_tokens(text: str) -> list[str]:

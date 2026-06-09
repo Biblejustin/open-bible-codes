@@ -20,60 +20,29 @@ Outputs under reports/heptadic_counts/.
 from __future__ import annotations
 
 import csv
-import glob
 import json
 from datetime import UTC, datetime
 from pathlib import Path
 
+from els.cntr import load_edition
 from els.corpus import load_corpus
-from els.normalization import normalize_greek
+from els.textstats import (
+    GREEK_VOWELS,
+    greek_letter_counts,
+    greek_tokens,
+    hebrew_letters,
+    is_heptad,
+    verse_map,
+)
 
 WLC_CONFIG = Path("configs/example_oshb_wlc.toml")
 WLC2_CONFIG = Path("configs/example_ebible_hebwlc.toml")
 NT_CONFIG = Path("configs/example_sblgnt.toml")
-CNTR_ROOT = Path("data/raw/cntr")
 OUT_DIR = Path("reports/heptadic_counts")
 
-GREEK_VOWELS = set("αεηιουω")
-
-
-def verse_map(corpus) -> dict[tuple[str, str, str], str]:
-    out = {}
-    for v in corpus.verses:
-        out[(str(v.book).upper(), str(v.chapter), str(v.verse))] = v.raw_text
-    return out
-
-
-def load_edition(siglum: str) -> dict[str, str]:
-    """Load a CNTR full-text edition (KJTR/RP/WH/SR) as code -> verse text."""
-    for path in glob.glob(f"{CNTR_ROOT}/**/{siglum}.txt", recursive=True):
-        out: dict[str, str] = {}
-        with open(path, encoding="utf-8") as handle:
-            for line in handle:
-                if len(line) >= 8 and line[:8].isdigit():
-                    out[line[:8]] = line[9:].rstrip("\n")
-        return out
-    return {}
-
-
-def hebrew_letters(text: str) -> str:
-    """Consonantal Hebrew letters only (strip vowel points, cantillation, markers)."""
-    return "".join(c for c in text if "א" <= c <= "ת")
-
-
-def greek_tokens(text: str) -> list[str]:
-    return [w for tok in text.replace("¶", " ").split() if (w := normalize_greek(tok))]
-
-
-def greek_letter_counts(tokens: list[str]) -> tuple[int, int, int]:
-    """(letters, vowels, consonants) over normalized Greek tokens."""
-    letters = sum(len(t) for t in tokens)
-    vowels = sum(1 for t in tokens for c in t if c in GREEK_VOWELS)
-    return letters, vowels, letters - vowels
-
-
-def is_heptad(n: int) -> bool:
-    return n != 0 and n % 7 == 0
+# The shared helpers (verse_map, hebrew_letters, greek_tokens, is_heptad, and
+# the CNTR load_edition) live in els.textstats and els.cntr; they are imported
+# above so this module's public names are unchanged for its dependents.
 
 
 def heptad_rate(counts: list[tuple[int, int]]) -> dict[str, float]:

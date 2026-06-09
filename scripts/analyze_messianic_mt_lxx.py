@@ -35,6 +35,7 @@ from difflib import SequenceMatcher
 from pathlib import Path
 
 from els.corpus import load_corpus
+from els.textstats import verse_map
 from els.normalization import normalize_greek
 
 WLC_CONFIG = Path("configs/example_oshb_wlc.toml")
@@ -67,13 +68,6 @@ LOCI = [
     ("Zech 12:10 whom they pierced", ("Zech", "12", "10"), ("ZEC", "12", "10"), ("John", "19", "37"),
      "Hebrew 'pierced' vs LXX 'mocked/danced'; John has 'pierced'", "κατωρχ", "εξεκεντ"),
 ]
-
-
-def verse_map(corpus) -> dict[tuple[str, str, str], str]:
-    out = {}
-    for v in corpus.verses:
-        out[(str(v.book).upper(), str(v.chapter), str(v.verse))] = v.raw_text
-    return out
 
 
 def lookup(vmap: dict, ref: tuple[str, str, str]) -> str:

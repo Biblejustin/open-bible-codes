@@ -34,7 +34,8 @@ import json
 from datetime import UTC, datetime
 from pathlib import Path
 
-from scripts.analyze_heptadic_counts import greek_tokens, is_heptad, load_edition
+from els.cntr import load_edition
+from els.textstats import greek_tokens, is_heptad
 
 OUT_DIR = Path("reports/panin_passages")
 

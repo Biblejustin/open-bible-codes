@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from scripts.analyze_pos_heptads import heptad_rate, mean_count, unit_pos_counts
+from scripts.analyze_pos_heptads import mean_count, pos_heptad_rate, unit_pos_counts
 
 ROWS = [
     ("Matt", "1", "1", "noun"), ("Matt", "1", "1", "verb"),
@@ -22,13 +22,13 @@ def test_unit_pos_counts_groups_by_level() -> None:
     assert books[("Matt",)]["noun"] == 3 and books[("Matt",)]["verb"] == 2
 
 
-def test_heptad_rate_counts_nonzero_multiples_of_seven() -> None:
+def test_pos_heptad_rate_counts_nonzero_multiples_of_seven() -> None:
     # two units, one with 7 nouns (heptad), one with 3 (not)
     units = {("a",): {"noun": 7}, ("b",): {"noun": 3}}
-    assert heptad_rate(units, "noun") == 0.5
+    assert pos_heptad_rate(units, "noun") == 0.5
     # zero never counts as a heptad
-    assert heptad_rate({("a",): {"noun": 0}}, "noun") == 0.0
-    assert heptad_rate({}, "noun") == 0.0
+    assert pos_heptad_rate({("a",): {"noun": 0}}, "noun") == 0.0
+    assert pos_heptad_rate({}, "noun") == 0.0
 
 
 def test_mean_count() -> None:

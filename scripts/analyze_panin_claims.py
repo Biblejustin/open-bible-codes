@@ -47,13 +47,16 @@ from collections import Counter
 from datetime import UTC, datetime
 from pathlib import Path
 
+from els.cntr import load_edition
 from els.corpus import load_corpus
-from scripts.analyze_heptadic_counts import (
+from els.textstats import (
     GREEK_VOWELS,
+    GRK_ISOPSEPHY,
+    HEB_GEMATRIA,
+    gematria,
     greek_tokens,
     hebrew_letters,
     is_heptad,
-    load_edition,
     verse_map,
 )
 
@@ -61,19 +64,8 @@ WLC_CONFIG = Path("configs/example_oshb_wlc.toml")
 NT_CONFIG = Path("configs/example_sblgnt.toml")
 OUT_DIR = Path("reports/panin_claims")
 
-# Standard Hebrew gematria (mispar hechrachi); final forms take their base value.
-HEB_GEMATRIA = {
-    "א": 1, "ב": 2, "ג": 3, "ד": 4, "ה": 5, "ו": 6, "ז": 7, "ח": 8, "ט": 9,
-    "י": 10, "כ": 20, "ך": 20, "ל": 30, "מ": 40, "ם": 40, "נ": 50, "ן": 50,
-    "ס": 60, "ע": 70, "פ": 80, "ף": 80, "צ": 90, "ץ": 90, "ק": 100, "ר": 200,
-    "ש": 300, "ת": 400,
-}
-# Greek isopsephy; final sigma is folded to sigma by normalize_greek already.
-GRK_ISOPSEPHY = {
-    "α": 1, "β": 2, "γ": 3, "δ": 4, "ε": 5, "ζ": 7, "η": 8, "θ": 9,
-    "ι": 10, "κ": 20, "λ": 30, "μ": 40, "ν": 50, "ξ": 60, "ο": 70, "π": 80,
-    "ρ": 100, "σ": 200, "τ": 300, "υ": 400, "φ": 500, "χ": 600, "ψ": 700, "ω": 800,
-}
+# Gematria tables (HEB_GEMATRIA, GRK_ISOPSEPHY) and gematria() come from
+# els.textstats, imported above.
 # The Greek article in all normalized forms (final sigma folded). Panin counts the
 # article as one dictionary word, not as its several inflected forms.
 GREEK_ARTICLE = {"ο", "η", "το", "τον", "την", "του", "τησ", "τω", "τη",
@@ -86,10 +78,6 @@ PANIN_MATTHEW = {
     "letters": 266, "vowels": 140, "consonants": 126,
     "occurs_more_than_once": 35, "occurs_once": 14,
 }
-
-
-def gematria(letters: str, table: dict[str, int]) -> int:
-    return sum(table.get(c, 0) for c in letters)
 
 
 def lemma_count(forms: set[str]) -> int:

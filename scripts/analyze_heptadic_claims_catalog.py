@@ -24,13 +24,14 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from els.morphology import read_morphgnt_tokens, read_oshb_tokens
+from els.textstats import HEBREW_SEVEN_STRONGS
 
 MORPHGNT_DIR = Path("data/raw/morphgnt/sblgnt")
 OSHB_DIR = Path("data/raw/oshb/wlc")
 OUT_DIR = Path("reports/heptadic_claims_catalog")
 
-# Hebrew number-seven family (seven, seventh, seventy, week, sevenfold), by Strong's.
-SEVEN = {"7651", "7637", "7657", "7620", "7659", "7658"}
+# Hebrew number-seven family, the shared Strong's set from els.textstats.
+SEVEN = HEBREW_SEVEN_STRONGS
 
 # COUNTED claims: count a lexeme in a passage and compare to the claimed value.
 # lang 'heb' uses OSHB Strong's lemmas; 'grk' uses MorphGNT lemmas. A passage is a

@@ -40,8 +40,7 @@ from pathlib import Path
 
 from els.morphology import read_morphgnt_tokens
 from els.normalization import normalize_greek
-from scripts.analyze_heptadic_counts import GREEK_VOWELS, is_heptad
-from scripts.analyze_panin_claims import GRK_ISOPSEPHY, gematria
+from els.textstats import GREEK_VOWELS, GRK_ISOPSEPHY, gematria, is_heptad
 
 MORPHGNT_DIR = Path("data/raw/morphgnt/sblgnt")
 OUT_DIR = Path("reports/panin_morphology")

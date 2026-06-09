@@ -26,6 +26,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from els.corpus import load_corpus
+from els.textstats import verse_map
 
 WLC_CONFIG = Path("configs/example_oshb_wlc.toml")
 LXX_CONFIG = Path("configs/example_ebible_grclxx.toml")
@@ -121,13 +122,6 @@ CASES = [
                  "bull' at 1 Samuel 1:24, with the LXX (the MT reads 'three bulls')."),
     },
 ]
-
-
-def verse_map(corpus) -> dict[tuple[str, str, str], str]:
-    out = {}
-    for v in corpus.verses:
-        out[(str(v.book).upper(), str(v.chapter), str(v.verse))] = v.raw_text
-    return out
 
 
 def lookup(vmap: dict, ref) -> str:
