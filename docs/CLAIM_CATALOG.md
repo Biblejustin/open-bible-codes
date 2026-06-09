@@ -60,6 +60,7 @@ How to read this page:
 | Bible-codes.org pictogram/source families | `under_specified` | 5 | Source audit and term list exist; useful for KJV matrix demos, pictogram clusters, prediction claims, and source-defined authenticity criteria. |
 | Public media-style Hebrew claims | `under_specified` | 3 | Terms exist, but claim geometry has not been locked. |
 | Critical omissions / word multiples | `partially_reproducible` | 2 | Critical-omission followups now share one break engine and include null, reverse, cross-tradition, length-stratified, and disputed-passage override reports. Current omission null read is cautionary: 558 observed broken TR hits versus null median 657, with `p_ge=0.9910`; actual omitted blocks do not break more TR ELS hits than matched random verse blocks. Word-multiple artifacts remain initial screening work. |
+| Heptadic numerics / sevenfold structure families | `mixed` | 4 | Panin's Matthew 1:1-11 counts reproduce exactly under MorphGNT lemma and part-of-speech tags but are text-bound and feature-selected; whole-canon word, letter, and part-of-speech counts land on multiples of seven at the chance rate; removing disputed passages improves the sevens rather than breaking them; the named structural sevens confirm five of five by lexeme count. |
 
 ## Use
 
@@ -95,6 +96,8 @@ CRI critique guardrails are tracked in `docs/CRI_ELS_CRITIQUE_AUDIT.md`.
 TheWordNotes ELS source leads are tracked in
 `docs/THEWORDNOTES_ELS_AUDIT.md`.
 Cosmic Codes source leads are tracked in `docs/COSMIC_CODES_AUDIT.md`.
+Heptadic numerics and sevenfold-structure findings are consolidated in
+`docs/TEXTUAL_WITNESS_AND_HEPTADIC_FINDINGS.md`.
 Mark Tabata Isaiah 53 source leads are tracked in
 `docs/MARK_TABATA_ISAIAH53_AUDIT.md`.
 Felcjo Ringo algorithm/control notes are tracked in

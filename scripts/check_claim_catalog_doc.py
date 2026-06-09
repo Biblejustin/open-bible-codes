@@ -172,6 +172,15 @@ EXPECTED_CURRENT_ENTRY_GROUPS = [
             "word_multiples_omissions",
         ],
     ),
+    (
+        "Heptadic numerics / sevenfold structure families",
+        [
+            "panin_matthew_genealogy_counts",
+            "heptadic_hidden_excess",
+            "heptadic_structural_sevens",
+            "heptadic_disputed_passage_defense",
+        ],
+    ),
 ]
 
 

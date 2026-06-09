@@ -24,6 +24,8 @@ Read the project in this order:
 9. `docs/WRR_NO_INPUT_HANDOFF_STATUS.md` for exact WRR source/method status.
 10. `docs/KJVA_NO_INPUT_HANDOFF_STATUS.md` for KJVA source-lock status.
 11. `docs/CITIES_NO_INPUT_HANDOFF_STATUS.md` for Cities source-chain status.
+12. `docs/TEXTUAL_WITNESS_AND_HEPTADIC_FINDINGS.md` for the Bible-witness and
+    sevenfold-structure findings.
 
 ## Current Read
 

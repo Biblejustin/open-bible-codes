@@ -50,6 +50,7 @@ Reader path:
 - compact highlights: `docs/FINAL_REPORT_HIGHLIGHTS.md`
 - claim status table: `docs/CLAIM_CATALOG.md`
 - broader findings read: `docs/CONSOLIDATED_FINDINGS.md`
+- Bible-witness and sevenfold-structure findings: `docs/TEXTUAL_WITNESS_AND_HEPTADIC_FINDINGS.md`
 - strongest candidate packet: `docs/STRONGEST_CANDIDATE_DEEP_DIVE.md`
 - formal assembly/check plan: `docs/REAL_REPORT_RUN.md`
 - remaining work: `docs/REMAINING_WORK_REGISTER.md`

@@ -3403,3 +3403,20 @@ Wayback CDX fallback probing, and live WRR source-recovery parity with the
   real-report protocol step list before release or handoff.
 - This is a packaging/validation guard only. It does not change source policy,
   imported texts, ELS searches, report conclusions, or result status.
+
+## Textual Witness And Heptadic Findings Integration
+
+- Added the Bible-witness and heptadic findings to the reader path: the README,
+  `docs/START_HERE.md`, and `docs/PROJECT_FINDINGS_OVERVIEW.md` now reference
+  `docs/TEXTUAL_WITNESS_AND_HEPTADIC_FINDINGS.md`.
+- Registered four heptadic-numerics rows in `claims/claim_catalog.csv`
+  (Panin genealogy counts, hidden-excess base rate, named structural sevens,
+  disputed-passage removal test) with a locked Current Entries group in the
+  claim-catalog doc guard.
+- Remaining tail: the interpretive sevenfold groupings (John's discourses,
+  Revelation's personages, the seven Just One titles) are documented rather
+  than counted because they are divisions of the text rather than lexeme
+  counts; the minor narrative sevens are covered in aggregate by the
+  seven-word-family sweep rather than as named catalog entries.
+- This is a documentation/catalog integration only. It does not change source
+  policy, imported texts, ELS searches, report conclusions, or result status.

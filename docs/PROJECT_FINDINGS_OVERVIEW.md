@@ -129,6 +129,30 @@ two reviewed English rows were not caused by those missing-verse gaps. Their
 differences point instead to translation wording, word order, or ordinary
 background.
 
+## Bible Witness And Sevenfold Structure
+
+A separate line of work tested famous open-text claims rather than hidden
+letter paths.
+
+The first part compared Bible witnesses at well-known dispute points. New
+Testament quotations track the Greek Septuagint far more often than the later
+Hebrew text, and at seven famous divergence verses the Dead Sea Scrolls side
+with the Septuagint six times. The wording differences between the Received
+Text and the critical text grow over time, and the verses the shorter text
+lacks carry fewer divine names than the verses both texts share.
+
+The second part counted the famous sevenfold patterns. The sevens the authors
+wrote in the open are real and confirm exactly: the sevenfold "it was good" of
+Genesis 1, the thirty-five uses of God in the creation account, Jericho's
+sevens, the seven woes, and the seven beatitudes of Revelation. The hidden
+kind does not hold: across every verse, word counts, letter counts, and
+part-of-speech counts land on multiples of seven at the ordinary chance rate,
+and removing disputed passages improves the sevens rather than breaking them.
+Panin's famous genealogy counts reproduce exactly under modern morphology, but
+they depend on his chosen text and his chosen features.
+
+The full write-up is `docs/TEXTUAL_WITNESS_AND_HEPTADIC_FINDINGS.md`.
+
 ## WRR Famous-Rabbis Study
 
 WRR is the famous-rabbis Bible-code study.
@@ -204,6 +228,7 @@ For the fuller project story, read:
 - `docs/FINAL_REPORT_HIGHLIGHTS.md`
 - `docs/CLAIM_CATALOG.md`
 - `docs/CONSOLIDATED_FINDINGS.md`
+- `docs/TEXTUAL_WITNESS_AND_HEPTADIC_FINDINGS.md`
 - `docs/REMAINING_WORK_REGISTER.md`
 - `docs/NO_INPUT_BLOCKER_SUMMARY.md`
 - `docs/WRR_NO_INPUT_HANDOFF_STATUS.md`
