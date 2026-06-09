@@ -87,6 +87,14 @@ REQUIRED_PACKAGED_PHRASES_BY_PACKAGE_PATH = {
         "The KJVA term-level bridge review found 48 of 81 bridge terms above all three",
         "15 terms with Benjamini-Hochberg `q_ge <= 0.05`.",
     ),
+    Path("docs/TEXTUAL_WITNESS_AND_HEPTADIC_FINDINGS.md"): (
+        "Panin counted accurately.",
+        "There is no global excess of sevens.",
+        "matched or beaten by 2,936 Hebrew",
+        "Numerics cannot adjudicate which reading is original",
+        "Scripture is heptadic, but the way the authors made it so, by saying seven, "
+        "not by encoding it beneath the words.",
+    ),
     Path("docs/STRONGEST_CANDIDATE_DEEP_DIVE.md"): (
         "This page does not make any row a public claim.",
         "main caution: these are review candidates, not settled findings",

@@ -23,7 +23,8 @@ def term_ids(path: Path) -> set[str]:
 class TermListTests(unittest.TestCase):
     def test_term_lists_have_required_fields_and_unique_ids(self) -> None:
         for path in term_list_paths():
-            with self.subTest(path=path):
+            # str() so the subtest report serializes under pytest-xdist workers
+            with self.subTest(path=str(path)):
                 with path.open("r", encoding="utf-8", newline="") as handle:
                     reader = csv.DictReader(handle)
                     rows = list(reader)
@@ -49,7 +50,8 @@ class TermListTests(unittest.TestCase):
         for path in term_list_paths():
             with path.open("r", encoding="utf-8", newline="") as handle:
                 for row in csv.DictReader(handle):
-                    with self.subTest(path=path, term_id=row["term_id"]):
+                    # str() so the subtest report serializes under xdist workers
+                    with self.subTest(path=str(path), term_id=row["term_id"]):
                         self.assertIn(
                             row["language"],
                             {"hebrew", "greek", "michigan", "english"},

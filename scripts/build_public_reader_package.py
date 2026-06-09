@@ -25,6 +25,7 @@ DEFAULT_DOC_PATHS = (
     Path("docs/FINAL_REPORT_HIGHLIGHTS.md"),
     Path("docs/CLAIM_CATALOG.md"),
     Path("docs/CONSOLIDATED_FINDINGS.md"),
+    Path("docs/TEXTUAL_WITNESS_AND_HEPTADIC_FINDINGS.md"),
     Path("docs/STRONGEST_CANDIDATE_DEEP_DIVE.md"),
     Path("docs/REAL_REPORT_RUN.md"),
     Path("docs/REMAINING_WORK_REGISTER.md"),

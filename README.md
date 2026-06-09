@@ -90,6 +90,7 @@ Day-to-day validation while developing:
 
 ```bash
 make cert       # full unit suite; exit status propagates (background-safe)
+make cert-fast  # same suite in parallel (pytest-xdist), about five times faster
 make docs-gate  # seconds-fast guard for docs-only changes
 ```
 
