@@ -85,6 +85,17 @@ schema/normalization, all-script exact-test coverage, check-script wiring
 coverage, the study-mapping guard suite, and a temporary public-reader package
 build from the whitelisted docs.
 
+Day-to-day validation while developing:
+
+```bash
+make cert       # full unit suite; exit status propagates (background-safe)
+make docs-gate  # seconds-fast guard for docs-only changes
+```
+
+`make docs-gate` checks public claim language, runs the reader-doc guards, and
+regenerates the documentation/protocol indexes. Docs-only commits can rely on
+it; code commits still need `make cert`.
+
 Current fast validation before a handoff:
 
 ```bash
