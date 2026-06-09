@@ -7,8 +7,8 @@ dependencies = []
 
 [project.optional-dependencies]
 analytics = ["duckdb>=1.0"]
-test = ["pytest>=7", "pytest-xdist>=3"]
-dev = ["duckdb>=1.0", "pytest>=7", "pytest-xdist>=3"]
+test = ["pytest>=7", "pytest-xdist>=3", "pytest-cov>=5"]
+dev = ["duckdb>=1.0", "pytest>=7", "pytest-xdist>=3", "pytest-cov>=5"]
 
 [project.scripts]
 edls = "els.cli:main"
